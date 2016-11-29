@@ -89,6 +89,7 @@
         </if>
         AND "ShikibetsuTaisho"."seinengappiYMD"<![CDATA[<=]]>#{処理年度_minus18_0102}
         AND "ShikibetsuTaisho"."juminShubetsuCode" IN('1','2','3','4')
+        AND "ShikibetsuTaisho"."currentFlag" = TRUE
 	GROUP BY
         "ShikibetsuTaisho"."shikibetsuCode",
         "ShikibetsuTaisho"."juminShubetsuCode",
@@ -162,6 +163,7 @@
         AND "DbV1001HihokenshaDaicho"."shikibetsuCode"="FindShikibetsuTaisho"."shikibetsuCode"
         WHERE
         ("FindShikibetsuTaisho"."juminJotaiCode"='2' OR "FindShikibetsuTaisho"."juminJotaiCode"='3')
+        AND "FindShikibetsuTaisho"."currentFlag" = TRUE
         GROUP BY
         "FindShikibetsuTaisho"."shikibetsuCode",
         "FindShikibetsuTaisho"."juminShubetsuCode",
@@ -272,9 +274,9 @@
      FROM rgdb."DbV1001HihokenshaDaicho"
      WHERE
      "hihokennshaKubunCode"='1'
-     AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{処理年度_0401}
-     AND ("shikakuSoshitsuYMD"='' OR #{処理年度_0401}<![CDATA[<=]]>"shikakuSoshitsuYMD")
-     AND substring("ichigoShikakuShutokuYMD",0,6)<![CDATA[<>]]>substring("shikakuSoshitsuYMD",0,6)
+     AND "ichigoShikakuShutokuYMD"<![CDATA[<=]]>#{システム日付}
+     AND ("shikakuSoshitsuYMD"='' OR "shikakuSoshitsuYMD" IS NULL OR #{処理年度_0401}<![CDATA[<=]]>"shikakuSoshitsuYMD")
+     AND SUBSTRING("ichigoShikakuShutokuYMD", 1, 6)<![CDATA[<>]]>SUBSTRING(COALESCE("shikakuSoshitsuYMD",'00000000'), 1, 6)
      AND "logicalDeletedFlag" IS FALSE
      UNION ALL
      SELECT
@@ -308,6 +310,7 @@
         ,'','','','','','','','','','','','','','','','','', '{  }' ) AS "ShikibetsuTaisho"
         WHERE
         "ShikibetsuTaisho"."juminJotaiCode"='1'
+        AND "ShikibetsuTaisho"."currentFlag" = TRUE
         AND "ShikibetsuTaisho"."seinengappiYMD"<![CDATA[<]]>#{処理年度_minus64_0401}) AS MIX 
         ORDER BY MIX."shikibetsuCode"
     </select>
@@ -494,7 +497,8 @@
         B."juminShubetsuCode",
         B."torokuTodokedeYMD",
         B."seibetsuCode",
-        B."tenshutsuKakuteiZenkokuJushoCode"
+        B."tenshutsuKakuteiZenkokuJushoCode",
+        A."shotokuNendo"
         FROM 
         <if test="出力対象 == 2">
         "TmpSetaiShotoku1" AS A
@@ -541,7 +545,7 @@
         C."meisho",
         C."seinengappiYMD",
         CASE WHEN master."kouhoshakubun"='1' THEN master."torokuIdoYMD"
-        WHEN master."kouhoshakubun"='2' THEN C."shojoIdoYMD"
+        WHEN master."kouhoshakubun"='2' THEN D."shojoIdoYMD"
         ELSE ''
         END AS "idoYMD",
         master."kouhoshakubun",
@@ -560,11 +564,7 @@
         master."hihokennshaKubunCode",
         master."juminShubetsuCode",
         master."torokuTodokedeYMD",
-        master."seibetsuCode",
-        CASE WHEN master."kouhoshakubun"='1' THEN master."tenyuzenzenkokuJushoCode"
-        WHEN master."kouhoshakubun"='2' THEN master."tenshutsuKakuteiZenkokuJushoCode"
-        ELSE ''
-        END AS "shichosonCode"
+        master."seibetsuCode"
         FROM master
         INNER JOIN 
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
@@ -576,6 +576,22 @@
                         master
                    )) AS C
         ON master."shikibetsuCode"=C."shikibetsuCode"
+        INNER JOIN 
+        rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
+        ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
+        ,'','','','','','','','','','','','','','','','','', (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                   )) AS D
+        ON master."shikibetsuCode"=D."shikibetsuCode"
+        WHERE
+        NOT (EXISTS
+            (SELECT 'X'
+                FROM rgdb."DbV2502KaigoShotoku"
+                WHERE "DbV2502KaigoShotoku"."shotokuNendo" = master."shotokuNendo"
+                AND "DbV2502KaigoShotoku"."shikibetsuCode" = master."shikibetsuCode"))
         ORDER BY "soufusenzenkokuJushoCode" ASC, 
                  master."setaiCode" ASC, 
                  master."kouhoshakubun" ASC, 
@@ -589,7 +605,6 @@
         <result property="genLasdecCode" column="genLasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="soufusenzenkokuJushoCode" column="soufusenzenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="zenkokuJushoCode" column="zenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
         <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -629,7 +644,7 @@
             resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity" fetchSize="500">
         SELECT TEMP.*
         FROM "ShotokuShoukaiDataTemp" AS TEMP
-        ${出力順},"kouhoshakubun"
+        ${出力順}
     </select>
     
     <resultMap id="ResultMap_ShotokuShoukaiDataTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.shotokushokaihyo.ShotokuShoukaiDataTempEntity" autoMapping="true">
@@ -894,7 +909,7 @@
          TEMP."fukaKijunYMD",
          #{処理年度} AS 所得年度,
          CASE WHEN (TEMP."fukaKijunYMD"<![CDATA[<=]]>TEMP."jushochitokureiTekiyoYMD"
-         AND (TEMP."jushochitokureiKaijoYMD"='' OR TEMP."fukaKijunYMD"<![CDATA[<=]]>TEMP."jushochitokureiKaijoYMD"))
+         AND (TEMP."jushochitokureiKaijoYMD"='' OR TEMP."jushochitokureiKaijoYMD" IS NULL OR TEMP."fukaKijunYMD"<![CDATA[<=]]>TEMP."jushochitokureiKaijoYMD"))
          THEN '1'
          ELSE TEMP."jushochiTokureiFlag"
          END AS 住所地特例該当

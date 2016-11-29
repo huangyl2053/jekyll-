@@ -156,12 +156,12 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.cover_kaisanMeisaishoNofuZumiGaku
                     = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む(), 0);
             source.cover_keisanMeisaishoKongoNofuGaku
-                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
+                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
         } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
             source.cover_kaisanMeisaishoNofuZumiGaku
                     = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額(), 0);
             source.cover_keisanMeisaishoKongoNofuGaku
-                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
+                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
         }
         source.cover_yen1 = EN;
         source.cover_yen2 = EN;
@@ -278,6 +278,21 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.cover_ryoshushoZuiji1 = 納入通知書期情報.get随時表記();
             source.cover_nofushoZuiji1 = 納入通知書期情報.get随時表記();
             source.cover_nofuzumishoZuiji1 = 納入通知書期情報.get随時表記();
+            source.cover_ryoshushoJusho1 = 納付書共通.get住所();
+            if (納付書共通.get通知書番号() != null) {
+                source.cover_nofuzumishoTsuchishoNo1 = 納付書共通.get通知書番号().value();
+                source.cover_ryoshushoTsuchishoNo1 = 納付書共通.get通知書番号().value();
+                source.cover_nofushoTsuchishoNo1 = 納付書共通.get通知書番号().value();
+            }
+            source.cover_ryoshushoKatagaki1 = 納付書共通.get方書();
+            if (納付書共通.get世帯コード() != null) {
+                source.cover_nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().value();
+            }
+            source.cover_ryoshushoHihokenshaName1 = 納付書共通.get納付者氏名();
+            source.cover_nofushoHihokenshaName1 = 納付書共通.get納付者氏名();
+            source.cover_nofuzumishoJusho1 = 納付書共通.get住所();
+            source.cover_nofuzumishoKatagaki1 = 納付書共通.get方書();
+            source.cover_nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
         } else {
             source.cover_nofuzumishoTitleNendoBun1 = HOSHI9;
             source.cover_nofuzumishoTitleKi1 = HOSHI2;
@@ -302,21 +317,6 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
             source.cover_nofushoNofuIn1 = HOSHI2;
             source.cover_nofuzumishoNofuIn1 = HOSHI2;
         }
-        source.cover_ryoshushoJusho1 = 納付書共通.get住所();
-        if (納付書共通.get通知書番号() != null) {
-            source.cover_nofuzumishoTsuchishoNo1 = 納付書共通.get通知書番号().value();
-            source.cover_ryoshushoTsuchishoNo1 = 納付書共通.get通知書番号().value();
-            source.cover_nofushoTsuchishoNo1 = 納付書共通.get通知書番号().value();
-        }
-        source.cover_ryoshushoKatagaki1 = 納付書共通.get方書();
-        if (納付書共通.get世帯コード() != null) {
-            source.cover_nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().value();
-        }
-        source.cover_ryoshushoHihokenshaName1 = 納付書共通.get納付者氏名();
-        source.cover_nofushoHihokenshaName1 = 納付書共通.get納付者氏名();
-        source.cover_nofuzumishoJusho1 = 納付書共通.get住所();
-        source.cover_nofuzumishoKatagaki1 = 納付書共通.get方書();
-        source.cover_nofuzumishoHihokenshaName1 = 納付書共通.get納付者氏名();
         source.cover_nofuzumishoshichosonName1 = 納付書共通.get納付書市町村名();
         source.cover_pagerenban4 = isバッチ ? new RString(本算定納入通知書情報.get連番()).concat(new RString("-4")) : new RString("1-4");
     }
@@ -380,8 +380,6 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiEditor implements IHokenryoNo
                 source.cover_shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
                 source.cover_shimeiText = sofubutsuAtesakiSource.shimeiText;
                 source.cover_yubinNo = sofubutsuAtesakiSource.yubinNo;
-                // TODO 世帯主名 setainusimei 共通部品から設定する
-                // TODO 様方 samaKata 共通部品から設定する
             }
         }
     }

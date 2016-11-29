@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBCN130001;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeisho;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanJikoFutanGakuShomeishoMeisai;
@@ -26,10 +27,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.Formatted;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -43,13 +45,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class JikofutangakuShomeishoTorokuHandler {
 
     private final JikofutangakuShomeishoTorokuDiv div;
-    private static final int 平成26年度 = 2014;
     private static final int SIZE = 6;
     private static final RString STATUS_新規 = new RString("新規");
     private static final RString STATUS_修正 = new RString("修正");
     private static final RString 年号_平 = new RString("平");
     private static final RString 平成 = new RString("4");
-
+    private static final RString 月日 = new RString("年8月1日");
     private static final RString 一月 = new RString("101");
     private static final RString 二月 = new RString("102");
     private static final RString 三月 = new RString("103");
@@ -62,6 +63,13 @@ public class JikofutangakuShomeishoTorokuHandler {
     private static final RString 十月 = new RString("010");
     private static final RString 十一月 = new RString("011");
     private static final RString 十二月 = new RString("012");
+
+    private final Integer 日付_八月 = 8;
+    private final Integer 日付_七月 = 7;
+
+    private final RString 開始月日 = new RString("0801");
+
+    private final Integer 年度_26 = 2014;
 
     private static final int 桁数_4 = 4;
 
@@ -83,33 +91,58 @@ public class JikofutangakuShomeishoTorokuHandler {
     public void onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         div.getCcdAtenaInfo().initialize(識別コード);
         div.getCcdShikakuInfo().initialize(被保険者番号);
-
-        int nowDate = RDate.getNowDate().getYearValue();
-
-        List<KeyValueDataSource> keyList = new ArrayList<>();
-        for (int i = nowDate; 平成26年度 <= i; i--) {
-            KeyValueDataSource key = new KeyValueDataSource();
-            RString year = new RYear(i).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString();
-            key.setKey(year.replace(年号_平.toString(), 平成.toString()));
-            key.setValue(year);
-            keyList.add(key);
+        RDate システム日付 = RDate.getNowDate();
+        int システム日付_年 = システム日付.getYearValue();
+        int システム日付_月 = システム日付.getMonthValue();
+        List<KeyValueDataSource> keyValueList = new LinkedList<>();
+        for (int i = システム日付_年; 年度_26 <= i; i--) {
+            if ((システム日付_月 <= 日付_七月 && i - 2 <= 年度_26)
+                    || (システム日付_月 >= 日付_八月 && i - 1 <= 年度_26)) {
+                KeyValueDataSource dateKey_2014以下 = new KeyValueDataSource();
+                RString 日付 = new RString(年度_26.toString()).concat(開始月日);
+                Formatted formattedDate = new RDate(日付.toString()).wareki()
+                        .eraType(EraType.NUMBER).firstYear(FirstYear.ICHI_NEN).fillType(FillType.ZERO).width(Width.HALF);
+                if (isContained(keyValueList, formattedDate.getYear())) {
+                    continue;
+                }
+                dateKey_2014以下.setKey(formattedDate.getYear());
+                dateKey_2014以下.setValue(formattedDate.getYear().replace(new RString("4"), 年号_平));
+                keyValueList.add(dateKey_2014以下);
+            } else if ((システム日付_月 >= 日付_八月 && i - 1 > 年度_26) || (システム日付_月 <= 日付_七月 && i - 1 > 年度_26)) {
+                KeyValueDataSource dateKey_2014以上 = new KeyValueDataSource();
+                int 年度 = i - 1;
+                RString 日付 = new RString(String.valueOf(年度)).concat(開始月日);
+                Formatted formattedDate = new RDate(日付.toString()).wareki()
+                        .eraType(EraType.NUMBER).firstYear(FirstYear.ICHI_NEN).fillType(FillType.ZERO).width(Width.HALF);
+                if (isContained(keyValueList, formattedDate.getYear())) {
+                    continue;
+                }
+                dateKey_2014以上.setKey(formattedDate.getYear());
+                dateKey_2014以上.setValue(formattedDate.getYear().replace(new RString("4"), 年号_平));
+                keyValueList.add(dateKey_2014以上);
+            }
         }
-
-        div.getDdlShinkiTaishoNendo().setDataSource(keyList);
+        div.getDdlShinkiTaishoNendo().setDataSource(keyValueList);
 
         RDate 基準日 = RDate.getNowDate();
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告);
         div.getTxtShinkiTuikaShokisaiHokenshaNo().setValue(保険者番号);
         div.getTxtShinkiShikyuShinseishoSeiriNo().setValue(RString.EMPTY);
 
-        div.getDdlKoshinTaishoNendo().setDataSource(keyList);
-        div.getTxtKoshinShikyuShinseishoSeiriNo().setValue(RString.EMPTY);
+        div.getDdlKoshinTaishoNendo().setDataSource(keyValueList);
 
-        RString key = 基準日.getYear().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN)
-                .fillType(FillType.ZERO).toDateString().replace(年号_平.toString(), 平成.toString());
-        div.getDdlShinkiTaishoNendo().setSelectedKey(key);
-        div.getDdlKoshinTaishoNendo().setSelectedKey(key);
+        div.getTxtKoshinShikyuShinseishoSeiriNo().setValue(RString.EMPTY);
+        div.getDdlShinkiTaishoNendo().setSelectedKey(keyValueList.get(0).getKey());
+        div.getDdlKoshinTaishoNendo().setSelectedKey(keyValueList.get(0).getKey());
+    }
+
+    private boolean isContained(List<KeyValueDataSource> keyValueList, RString year) {
+        for (KeyValueDataSource list : keyValueList) {
+            if (list.getKey().equals(year)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -235,7 +268,8 @@ public class JikofutangakuShomeishoTorokuHandler {
     }
 
     private boolean is負担額変更1(boolean is変更, JikofutangakuShomeishoTorokuBusiness business) {
-        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = business.get事業高額合算自己負担額証明書明細情報();
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = getJibunnoMeisaiList(business.get事業高額合算自己負担額証明書情報(),
+                business.get事業高額合算自己負担額証明書明細情報());
 
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : 明細List) {
             if (八月.equals(meisai.get対象月())) {
@@ -628,7 +662,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         JikofutangakuShomeishoTorokuParameter parameter = new JikofutangakuShomeishoTorokuParameter();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("年8月1日"));
+        対象年度.append(月日);
         parameter.set対象年度(new RDate(対象年度.toString()).getYear().toDateString());
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         parameter.set支給申請書整理番号(支給申請書整理番号);
@@ -652,7 +686,7 @@ public class JikofutangakuShomeishoTorokuHandler {
 
         dgShomeishoRireki_Row row = div.getDgShomeishoRireki().getActiveRow();
         RStringBuilder 対象年度 = new RStringBuilder(row.getTaishoNendo());
-        対象年度.append(new RString("年8月1日"));
+        対象年度.append(月日);
         parameter.set対象年度(new RDate(対象年度.toString()).getYear().toDateString());
         parameter.set支給申請書整理番号(row.getShikyuShinseishoSeiriNo());
         parameter.set被保険者番号(被保険者番号.value());
@@ -689,9 +723,9 @@ public class JikofutangakuShomeishoTorokuHandler {
             row.setTennyumaeShokisaiHokensha(転入前証記載保険者.toRString());
             row.setRirekiNo(new RString(String.valueOf(shomeisho.get履歴番号())));
             RStringBuilder 被保険者期間 = new RStringBuilder();
-            被保険者期間.append(shomeisho.get被保険者期間開始年月日().toString());
+            被保険者期間.append(shomeisho.get被保険者期間開始年月日().wareki().toDateString());
             被保険者期間.append(new RString("～"));
-            被保険者期間.append(shomeisho.get被保険者期間終了年月日().toString());
+            被保険者期間.append(shomeisho.get被保険者期間終了年月日().wareki().toDateString());
             row.setHihokenshaKikan(被保険者期間.toRString());
             TextBoxFlexibleDate uketsukeDate = new TextBoxFlexibleDate();
             uketsukeDate.setValue(shomeisho.get受付年月日());
@@ -704,6 +738,8 @@ public class JikofutangakuShomeishoTorokuHandler {
 
     /**
      * 証明書登録が読取専用に設定します。
+     *
+     * @param 読取専用 boolean
      */
     public void set証明書登録To読取専用(boolean 読取専用) {
         div.getTxtTorokuTaishoNendo().setReadOnly(読取専用);
@@ -764,7 +800,7 @@ public class JikofutangakuShomeishoTorokuHandler {
     public JigyoKogakuGassanJikoFutanGakuShomeisho get事業高額合算自己負担額証明書(HihokenshaNo 被保険者番号, Decimal 履歴番号) {
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("年8月1日"));
+        対象年度.append(月日);
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -808,7 +844,7 @@ public class JikofutangakuShomeishoTorokuHandler {
             JigyoKogakuGassanJikoFutanGakuShomeisho 更新前データ) {
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("年8月1日"));
+        対象年度.append(月日);
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -877,7 +913,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("年8月1日"));
+        対象年度.append(月日);
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -958,7 +994,7 @@ public class JikofutangakuShomeishoTorokuHandler {
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = new ArrayList<>();
         RString txtTorokuTaishoNendo = div.getTxtTorokuTaishoNendo().getValue();
         RStringBuilder 対象年度 = new RStringBuilder(txtTorokuTaishoNendo.substring(0, 桁数_4));
-        対象年度.append(new RString("年8月1日"));
+        対象年度.append(月日);
         RString 支給申請書整理番号 = div.getTxtTorokuShikyuShinseishoSeiriNo().getValue();
         RString 証記載保険者番号 = div.getTxtTorokuShokisaiHokenshaNo().getValue();
         RString 転入前保険者番号 = div.getCcdTennyumaeHokensha().getHokenjaNo();
@@ -1141,7 +1177,8 @@ public class JikofutangakuShomeishoTorokuHandler {
         div.getTxtRenrakusakiJusho().setValue(shomeisho.get支給額計算結果連絡先住所());
         div.getTxtRenrakusakiMei1().setValue(shomeisho.get支給額計算結果連絡先名称1());
         div.getTxtRenrakusakiMei2().setValue(shomeisho.get支給額計算結果連絡先名称2());
-        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = business.get事業高額合算自己負担額証明書明細情報();
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> 明細List = getJibunnoMeisaiList(shomeisho,
+                business.get事業高額合算自己負担額証明書明細情報());
 
         for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : 明細List) {
             if (八月.equals(meisai.get対象月())) {
@@ -1198,13 +1235,29 @@ public class JikofutangakuShomeishoTorokuHandler {
         div.getTxtUchiFutangakuGokei().setValue(shomeisho.get合計_70_74自己負担額_内訳());
     }
 
+    private List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> getJibunnoMeisaiList(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> jibunnoMeisaiList = new ArrayList<>();
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
+            if (shomeisho.get被保険者番号().equals(meisai.get被保険者番号())
+                    && shomeisho.get対象年度().equals(meisai.get対象年度())
+                    && shomeisho.get証記載保険者番号().equals(meisai.get証記載保険者番号())
+                    && shomeisho.get支給申請書整理番号().equals(meisai.get支給申請書整理番号())
+                    && shomeisho.get転入前保険者番号().equals(meisai.get転入前保険者番号())
+                    && shomeisho.get履歴番号() == meisai.get履歴番号()) {
+                jibunnoMeisaiList.add(meisai);
+            }
+        }
+        return jibunnoMeisaiList;
+    }
+
     /**
      * 証明書登録画面への値の設定（新規追加時）です。
      *
      */
     public void set登録情報() {
         RStringBuilder 対象年度SB = new RStringBuilder(div.getDdlShinkiTaishoNendo().getSelectedValue());
-        対象年度SB.append(new RString("年8月1日"));
+        対象年度SB.append(月日);
         RString 対象年度 = new RDate(対象年度SB.toString())
                 .wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)

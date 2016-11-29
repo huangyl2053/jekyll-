@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.shinnendokanrijohosakusei.Shi
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.shinnendokanrijohosakusei.IShinNendoKanriJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.shinnendokanrijohosakuseifinder.ShinNendoKanriJohoSakuseiFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -55,11 +55,9 @@ public class ShinNendoKanriJohoSakuseiManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを
-     * 返します。
+     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンスを 返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinNendoKanriJohoSakuseiManager}のインスタンス
      */
     public static ShinNendoKanriJohoSakuseiManager createInstance() {
         return InstanceProvider.create(ShinNendoKanriJohoSakuseiManager.class);
@@ -152,6 +150,9 @@ public class ShinNendoKanriJohoSakuseiManager {
     }
 
     private RDate 日付取得(RDate 日付) {
+        if (RDate.MAX.isBeforeOrEquals(日付)) {
+            return RDate.MAX;
+        }
         IBusinessDayDealable businessDay = BusinessDayFactory.createInstance(HolidayCategoryFactory.createJpHoliday(),
                 BusinessDayIncludesHoliday.休日を含む, BusinessDayConvention.休みの直前);
         if (businessDay.isOpen(日付)) {

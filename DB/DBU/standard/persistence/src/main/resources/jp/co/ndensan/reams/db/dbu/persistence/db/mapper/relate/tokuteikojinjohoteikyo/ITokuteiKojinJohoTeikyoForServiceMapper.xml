@@ -24,6 +24,10 @@
             ("DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NULL 
             OR  ("DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD" IS NOT NULL 
                 AND #{基準日} <![CDATA[<=]]> "DbT7301TokuteiKojinJohoHanKanri"."hanEdYMD"))
+        ORDER BY
+            "DbT7301TokuteiKojinJohoHanKanri"."tokuteiKojinJohoMeiCode",
+            "DbT7301TokuteiKojinJohoHanKanri"."dataSetNo",
+            "DbT7301TokuteiKojinJohoHanKanri"."hanNo" DESC
     </select>
     
     <select id="get初回提供済である直近の版番号"
@@ -45,6 +49,10 @@
                                          AND  "dataSetNo" = #{データセット番号}
                                          AND  "shokaiTeikyoKubun" = #{初回提供済み}) AS dbT7301
                         WHERE "DbT7301TokuteiKojinJohoHanKanri"."hanStYMD" <![CDATA[<]]> dbT7301."hanStYMD")
+           ORDER BY
+            "DbT7301TokuteiKojinJohoHanKanri"."tokuteiKojinJohoMeiCode",
+            "DbT7301TokuteiKojinJohoHanKanri"."dataSetNo",
+            "DbT7301TokuteiKojinJohoHanKanri"."hanNo" DESC
     </select>
     
     <select id="get直近の版番号"
@@ -65,6 +73,10 @@
                                          AND  "dataSetNo" = #{データセット番号}
                                          AND  "shokaiTeikyoKubun" = #{初回提供済み}) AS dbT7301
                         WHERE "DbT7301TokuteiKojinJohoHanKanri"."hanStYMD" <![CDATA[<]]> dbT7301."hanStYMD")
+              ORDER BY
+            "DbT7301TokuteiKojinJohoHanKanri"."tokuteiKojinJohoMeiCode",
+            "DbT7301TokuteiKojinJohoHanKanri"."dataSetNo",
+            "DbT7301TokuteiKojinJohoHanKanri"."hanNo" DESC
     </select>
     
     <select id="get特定個人情報項目版管理"

@@ -112,7 +112,8 @@ public class DBC190030ProcessParameter implements IBatchProcessParameter {
                 文書番号,
                 帳票出力順ID,
                 市町村コード,
-                市町村名);
+                市町村名,
+                被保険者番号 != null && !被保険者番号.isEmpty());
     }
 
     /**
@@ -136,7 +137,8 @@ public class DBC190030ProcessParameter implements IBatchProcessParameter {
                 文書番号,
                 帳票出力順ID,
                 市町村コード,
-                市町村名);
+                市町村名,
+                被保険者番号 != null && !被保険者番号.isEmpty());
         param.set出力順(出力順);
         return param;
     }

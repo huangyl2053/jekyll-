@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urc.business.core.noki.nokikanri.Noki;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -150,6 +150,13 @@ public class HonsanteiFukaKeisanTotalHandler {
         } else {
             dgHonsanteiShoriKakuninList = set処理状態詳細(遷移元区分, shoriDateKanriList);
         }
+        if (定数_0.equals(遷移元区分)) {
+            set課税確定(dgHonsanteiShoriKakuninList);
+        }
+        div.getShoriJokyo().getHonsanteiShoriKakunin().getDgHonsanteiShoriKakunin().setDataSource(dgHonsanteiShoriKakuninList);
+    }
+
+    private void set課税確定(List<dgHonsanteiShoriKakunin_Row> dgHonsanteiShoriKakuninList) {
         dgHonsanteiShoriKakunin_Row row = new dgHonsanteiShoriKakunin_Row();
         row.setTxtShoriMei(課税確定);
         row.setTxtJokyo(ハイフン);
@@ -159,10 +166,9 @@ public class HonsanteiFukaKeisanTotalHandler {
         } else {
             row.setTxtShoriNichiji(確定日時.getDate().wareki().toDateString()
                     .concat(RString.HALF_SPACE).concat(確定日時
-                            .getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+                    .getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
         }
         dgHonsanteiShoriKakuninList.add(row);
-        div.getShoriJokyo().getHonsanteiShoriKakunin().getDgHonsanteiShoriKakunin().setDataSource(dgHonsanteiShoriKakuninList);
     }
 
     private List<dgHonsanteiShoriKakunin_Row> set処理状態詳細(RString 遷移元区分, List<ShoriDateKanri> shoriDateKanriList) {

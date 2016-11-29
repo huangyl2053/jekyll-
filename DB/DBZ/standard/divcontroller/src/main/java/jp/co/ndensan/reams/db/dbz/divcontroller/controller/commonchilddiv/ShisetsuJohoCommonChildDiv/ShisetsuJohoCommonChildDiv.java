@@ -107,6 +107,9 @@ public class ShisetsuJohoCommonChildDiv {
         if (mode.getJigyoshaName() != null) {
             requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
         }
+        if (mode.getServiceShuruiCode() != null) {
+            requestDiv.setHdnServiceShuruiCode(mode.getServiceShuruiCode().value());
+        }
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -125,6 +128,7 @@ public class ShisetsuJohoCommonChildDiv {
 
             requestDiv.getTxtNyuryokuShisetsuMeisho().clearValue();
         }
+        requestDiv.setHdnServiceShuruiCode(RString.EMPTY);
 
         return ResponseData.of(requestDiv).respond();
     }

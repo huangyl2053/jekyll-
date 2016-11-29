@@ -75,21 +75,23 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             reportSource.choteiJiyu4 = 編集後本算定通知書共通情報.get調定事由４();
         }
 
-        reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
+        reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(nullToZero(更正後.get減免額()), 0);
         reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
-        reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
-        reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
-        reportSource.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
+        reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(nullToZero(更正後.get確定保険料_年額()), 0);
+        reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(nullToZero(更正後.get保険料率()), 0);
+        reportSource.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(nullToZero(更正後.get減免前保険料_年額()), 0);
 
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
-        reportSource.hyojicode1 = 表示コード.get表示コード１();
-        reportSource.hyojicode2 = 表示コード.get表示コード２();
-        reportSource.hyojicode3 = 表示コード.get表示コード３();
-        reportSource.hyojicodeName1 = 表示コード.get表示コード名１();
-        reportSource.hyojicodeName2 = 表示コード.get表示コード名２();
-        reportSource.hyojicodeName3 = 表示コード.get表示コード名３();
-
-        reportSource.kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get今後納付すべき額(), 0);
+        if (表示コード != null) {
+            reportSource.hyojicode1 = 表示コード.get表示コード１();
+            reportSource.hyojicode2 = 表示コード.get表示コード２();
+            reportSource.hyojicode3 = 表示コード.get表示コード３();
+            reportSource.hyojicodeName1 = 表示コード.get表示コード名１();
+            reportSource.hyojicodeName2 = 表示コード.get表示コード名２();
+            reportSource.hyojicodeName3 = 表示コード.get表示コード名３();
+        }
+        reportSource.kongoNofuSubekiGaku = DecimalFormatter
+                .toコンマ区切りRString(nullToZero(編集後本算定通知書共通情報.get今後納付すべき額_収入元に()), 0);
         reportSource.korekaraChoshuho = 更正後.get徴収方法();
         reportSource.korekaraTokuchoGimusha = 更正後.get特別徴収義務者();
         reportSource.korekaraTokuchoTaishoNenkin = 更正後.get特別徴収対象年金();
@@ -113,31 +115,66 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         reportSource.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
         reportSource.tsukisuAto = 更正後.get月数_ケ月();
 
-        reportSource.zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get増減額(), 0);
+        reportSource.zogenGaku = DecimalFormatter.toコンマ区切りRString(nullToZero(編集後本算定通知書共通情報.get増減額()), 0);
 
         if (更正前 != null) {
-            reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額() == null ? Decimal.ZERO : 更正前.get減免額(), 0);
-            reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(
-                    更正前.get確定保険料_年額() == null ? Decimal.ZERO : 更正前.get確定保険料_年額(), 0);
-            reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(
-                    更正前.get保険料率() == null ? Decimal.ZERO : 更正前.get保険料率(), 0);
-            reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(
-                    更正前.get減免前保険料_年額() == null ? Decimal.ZERO : 更正前.get減免前保険料_年額(), 0);
             reportSource.koremadeChoshuho = 更正前.get徴収方法();
             reportSource.koremadeTokuchoGimusha = 更正前.get特別徴収義務者();
             reportSource.koremadeTokuchoTaishoNenkin = 更正前.get特別徴収対象年金();
-            reportSource.shotokuKbnMae = 更正前.get保険料段階();
-            reportSource.shutokuYmdMae = 更正前.get期間_自();
-            reportSource.soshitsuYmdMae = 更正前.get期間_至();
-            reportSource.tsukisuMae = 更正前.get月数_ケ月();
+            if (item.get本算定決定通知書情報().isHas更正前()) {
+                reportSource.shotokuKbnMae = 更正前.get保険料段階();
+                reportSource.shutokuYmdMae = 更正前.get期間_自();
+                reportSource.soshitsuYmdMae = 更正前.get期間_至();
+                reportSource.tsukisuMae = 更正前.get月数_ケ月();
+                reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(nullToZero(更正前.get減免額()), 0);
+                reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(
+                        nullToZero(更正前.get確定保険料_年額()), 0);
+                reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(
+                        nullToZero(更正前.get保険料率()), 0);
+                reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(
+                        nullToZero(更正前.get減免前保険料_年額()), 0);
+                reportSource.kotekiNenkinShunyuGakuMae = edit金額(更正前.get公的年金収入額());
+                reportSource.gokeiShotokuKingakuMae = edit金額(更正前.get合計所得金額());
+                reportSource.seikatsuHogoFujoShuruiMae = 更正前.get生活保護扶助種類();
+                reportSource.honninKazeiKubunMae = 更正前.get市町村民税課税区分_本人();
+                reportSource.setaiKazeiKubunMae = 更正前.get市町村民税課税区分_世帯();
+                reportSource.roreiHaishiYmdMae = 更正前.get老齢廃止日();
+                reportSource.roreiKaishiYmdMae = 更正前.get老齢開始日();
+                reportSource.seihoHaishiYmdMae = 更正前.get生保廃止日();
+                reportSource.seihoKaishiYmdMae = 更正前.get生保開始日();
+            }
         }
+        reportSource.kotekiNenkinShunyuGakuAto = edit金額(更正後.get公的年金収入額());
+        reportSource.gokeiShotokuKingakuAto = edit金額(更正後.get合計所得金額());
+        reportSource.seikatsuHogoFujoShuruiAto = 更正後.get生活保護扶助種類();
+        reportSource.honninKazeiKubunAto = 更正後.get市町村民税課税区分_本人();
+        reportSource.setaiKazeiKubunAto = 更正後.get市町村民税課税区分_世帯();
+        reportSource.roreiHaishiYmdAto = 更正後.get老齢廃止日();
+        reportSource.roreiKaishiYmdAto = 更正後.get老齢開始日();
+        reportSource.seihoHaishiYmdAto = 更正後.get生保廃止日();
+        reportSource.seihoKaishiYmdAto = 更正後.get生保開始日();
+        reportSource.nofuzumiGakuMiToraiKi = edit金額(編集後本算定通知書共通情報.get未到来期の納付済額());
+        reportSource.nofuzumiGakuToraiKi = edit金額(編集後本算定通知書共通情報.get納付済額_未到来期含まない());
+        reportSource.tokuchoNofuzumiGaku = edit金額(編集後本算定通知書共通情報.get特徴納付済額_未到来期含む());
+        reportSource.fuchoNofuzumiGaku = edit金額(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む());
+        reportSource.tokuchoNofuzumiGakuToraiKi = edit金額(編集後本算定通知書共通情報.get特徴納付済額_未到来期含まない());
+        reportSource.fuchoNofuzumiGakuToraiKi = edit金額(編集後本算定通知書共通情報.get普徴納付済額_未到来期含まない());
+        reportSource.nofuzumiGakuSanshutsuYmd = 編集後本算定通知書共通情報.get納付済額算出年月日();
+        reportSource.tokuchoSudeniNofuSubekiGaku = edit金額(編集後本算定通知書共通情報.get特徴既に納付すべき額());
+        reportSource.fuchoSudeniNofuSubekiGaku = edit金額(編集後本算定通知書共通情報.get普徴既に納付すべき額());
+        reportSource.sudeniNofuSubekiGaku = edit金額(編集後本算定通知書共通情報.get既に納付すべき額());
+        reportSource.tokuchoKongoNofuSubekiGakuShunyu = edit金額(編集後本算定通知書共通情報.get特徴今後納付すべき額_収入元に());
+        reportSource.tokuchoKongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get特徴今後納付すべき額_調定元に());
+        reportSource.fuchoKongoNofuSubekiGakuShunyu = edit金額(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に());
+        reportSource.fuchoKongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());
+        reportSource.kongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get今後納付すべき額_調定元に());
         return reportSource;
     }
 
     private void edit更正内容(KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource reportSource,
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
 
-        Decimal 増減額 = 編集後本算定通知書共通情報.get増減額();
+        Decimal 増減額 = nullToZero(編集後本算定通知書共通情報.get増減額());
         if (Decimal.ZERO.compareTo(増減額) < 0) {
             reportSource.koseiNaiyo = 更正内容;
             reportSource.kakuteiHokenryoGaku = DecimalFormatter.toコンマ区切りRString(増減額, 0);
@@ -160,7 +197,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
 
             for (UniversalPhase 更正前 : 更正前普徴期別金額リスト) {
                 for (UniversalPhase 更正後 : 更正後普徴期別金額リスト) {
-                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                    if (更正前.get期() == 更正後.get期() && !nullToZero(更正前.get金額()).equals(nullToZero(更正後.get金額()))) {
                         is変更 = true;
                     }
                 }
@@ -172,7 +209,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             for (CharacteristicsPhase 更正前 : 更正前特徴期別金額リスト) {
                 for (CharacteristicsPhase 更正後 : 更正後特徴期別金額リスト) {
 
-                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                    if (更正前.get期() == 更正後.get期() && !nullToZero(更正前.get金額()).equals(nullToZero(更正後.get金額()))) {
                         is変更 = true;
                     }
                 }
@@ -248,4 +285,17 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         }
         return RString.EMPTY;
     }
+
+    private Decimal nullToZero(Decimal decimal) {
+        return decimal == null ? Decimal.ZERO : decimal;
+    }
+
+    private RString edit金額(Decimal 金額) {
+        if (金額 == null || Decimal.ZERO.compareTo(金額) == 0) {
+            return RString.HALF_SPACE;
+        } else {
+            return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        }
+    }
+
 }

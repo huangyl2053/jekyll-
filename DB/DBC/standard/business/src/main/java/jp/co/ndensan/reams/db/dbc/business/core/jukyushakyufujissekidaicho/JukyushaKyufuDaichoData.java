@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jukyushakyufujissekidaicho;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushajyufujissekidaicho.JukyushaKyufuJissekidaichoData;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekidaicho.KeikakuHiEntity;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,11 +32,12 @@ public final class JukyushaKyufuDaichoData {
     private static final int INDEX_5 = 5;
     private static final int INDEX_4 = 4;
     private static final int INDEX_3 = 3;
-    private static final RString 頁数_1 = new RString("1");
     private static final RString SPACE_23 = new RString("　　　　　　　　　　　　　　　　　　　　　　　");
     private static final RString SPACE_4 = new RString("　　　　");
+    private static final RString SPACE_7 = new RString("　　　　　　　");
     private static final RString SPACE_8 = new RString("　　　　　　　　");
     private static final RString SPACE_12 = new RString("　　　　　　　　　　　　");
+    private static final RString SPACE_10 = new RString("　　　　　　　　　　");
     private static final RString SPACE_5 = new RString("　　　　　");
     private static final RString SPACE_6 = new RString("　　　　　　");
     private static final RString SPACE_回 = new RString("回　　　");
@@ -118,13 +121,8 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set決定後_負担額_保険(個人用.get決定後_負担額_保険());
         帳票データ.set決定前_施設療養費請求額_保険(個人用.get決定前_施設療養費請求額_保険());
         帳票データ.set決定後_施設療養費請求額_保険(個人用.get決定後_施設療養費請求額_保険());
-        // TODO 基本ヘッダー1は帳票にありません
-        // 帳票データ.set基本ヘッダー1(個人用.get基本ヘッダー１());
-        // 帳票データ.set基本ヘッダー2(個人用.get基本ヘッダー２());
         帳票データ.set決定前_特別療養費請求額_保険(個人用.get決定前_特別療養費請求額_保険());
         帳票データ.set決定後_特別療養費請求額_保険(個人用.get決定後_特別療養費請求額_保険());
-        // 帳票データ.set基本ヘッダー3(個人用.get基本ヘッダー3());
-        // 帳票データ.set基本ヘッダー４(個人用.get基本ヘッダー４());
         帳票データ.set決定前_特定入所者介護費等請求額_保険(個人用.get決定前_特定入所者介護費等請求額_保険());
         帳票データ.set決定後_特定入所者介護費等請求額_保険(個人用.get決定後_特定入所者介護費等請求額_保険());
         帳票データ.set公費負担者_公費1(個人用.get公費負担者_公費１());
@@ -487,36 +485,44 @@ public final class JukyushaKyufuDaichoData {
      * 計画費明細を設定します。
      *
      * @param 計画費List 計画費List
-     * @param list特定データ list特定データ
      * @param 個人用帳票データ 個人用帳票データ
      * @return 個人用帳票データ
      */
     public static List<KojinyoTyohyoDataKomoku> set計画費明細(List<KeikakuHiEntity> 計画費List,
-            List<KojinyoTyohyoDataKomoku> list特定データ,
             KojinyoTyohyoDataKomoku 個人用帳票データ) {
+        List<KojinyoTyohyoDataKomoku> list特定データ = new ArrayList<>();
         for (int i = 0; i < 計画費List.size(); i++) {
             KeikakuHiEntity 計画費 = 計画費List.get(i);
             個人用帳票データ.setヘッダー1(計画費.get略称());
             個人用帳票データ.setヘッダー2(new RString("指定／基準事業所区分     単位数単価          届出年月日       担当介護支援専門員番号"));
+            RString サービス名称 = RString.EMPTY;
+            if (!RString.isNullOrEmpty(計画費.getサービス名称())) {
+                サービス名称 = 計画費.getサービス名称();
+            }
             if ((i % INDEX_5) == 0) {
-                // TODO 明細2の設定を不明です。
-                個人用帳票データ.set明細2(頁数_1);
+                個人用帳票データ.set明細2(計画費.get事業所番号().concat(SPACE_10).concat(decToRString(計画費.get単位数単価()))
+                        .concat(dateFromat_生年月日(計画費.get居宅サービス計画作成依頼届出年月日())).concat(SPACE_7)
+                        .concat(計画費.get担当介護支援専門員番号()));
                 個人用帳票データ.set明細4(new RString("明細行番号　　　　　　決定前　　単位数　　　　回数　"
                         + "　　　回数　　　　ｻｰﾋﾞｽ単位数合計　　　　請求金額"));
                 個人用帳票データ.set明細5(new RString("サービスコード　　決定後　　単位数　　　　"
                         + "回数　　　　ｻｰﾋﾞｽ単位数　　　　ｻｰﾋﾞｽ単位数合計　　　　請求金額"));
                 個人用帳票データ.set明細6(new RString("サービス名称　　　　　　　　　　　　　　　　　　　　"
-                        + "摘要　　　　　　　　　　　　　　　　　　再審査回数　　"
-                        + "過誤回数　　審査年月"));
+                        + "摘要　　　　　　　　　　　　　　　　　　再審査回数　　" + "過誤回数　　審査年月"));
                 個人用帳票データ.set明細7(計画費.get明細行番号().concat(SPACE_23)
-                        .concat(kingakuFormat(計画費.get単位数単価().intValue())).concat(SPACE_4)
+                        .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
                         .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                // TODO 明細8の設定を不明です。
+                個人用帳票データ.set明細8(計画費.get明細行番号().concat(SPACE_23)
+                        .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
+                        .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
+                        .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
+                        .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
+                        .concat(kingakuFormat(計画費.get請求金額().intValue())));
                 個人用帳票データ.set明細8(RString.EMPTY);
-                個人用帳票データ.set明細9(計画費.getサービス名称().concat("　　")
+                個人用帳票データ.set明細9(サービス名称.concat("　　")
                         .concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
                         .concat(new RString(計画費.get過誤回数())).concat(SPACE_回)
@@ -532,9 +538,13 @@ public final class JukyushaKyufuDaichoData {
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                // TODO 明細8の設定を不明です。
-                個人用帳票データ.set明細11(RString.EMPTY);
-                個人用帳票データ.set明細12(計画費.getサービス名称().concat("　　")
+                個人用帳票データ.set明細11(計画費.get明細行番号().concat(SPACE_23)
+                        .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
+                        .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
+                        .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
+                        .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
+                        .concat(kingakuFormat(計画費.get請求金額().intValue())));
+                個人用帳票データ.set明細12(サービス名称.concat("　　")
                         .concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
                         .concat(new RString(計画費.get過誤回数())).concat(SPACE_回)
@@ -550,8 +560,12 @@ public final class JukyushaKyufuDaichoData {
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                // TODO 明細8の設定を不明です。
-                個人用帳票データ.set明細14(RString.EMPTY);
+                個人用帳票データ.set明細14(計画費.get明細行番号().concat(SPACE_23)
+                        .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
+                        .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
+                        .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
+                        .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
+                        .concat(kingakuFormat(計画費.get請求金額().intValue())));
                 個人用帳票データ.set明細15(計画費.getサービス名称().concat("　　")
                         .concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
@@ -568,8 +582,12 @@ public final class JukyushaKyufuDaichoData {
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                // TODO 明細8の設定を不明です。
-                個人用帳票データ.set明細14(RString.EMPTY);
+                個人用帳票データ.set明細14(計画費.get明細行番号().concat(SPACE_23)
+                        .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
+                        .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
+                        .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
+                        .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
+                        .concat(kingakuFormat(計画費.get請求金額().intValue())));
                 個人用帳票データ.set明細15(計画費.getサービス名称().concat("　　")
                         .concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
@@ -586,10 +604,13 @@ public final class JukyushaKyufuDaichoData {
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                // TODO 明細8の設定を不明です。
-                個人用帳票データ.set明細17(RString.EMPTY);
-                個人用帳票データ.set明細18(計画費.getサービス名称().concat("　　")
-                        .concat(計画費.get摘要()).concat(SPACE_8)
+                個人用帳票データ.set明細17(計画費.get明細行番号().concat(SPACE_23)
+                        .concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
+                        .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
+                        .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
+                        .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
+                        .concat(kingakuFormat(計画費.get請求金額().intValue())));
+                個人用帳票データ.set明細18(計画費.getサービス名称().concat("　　").concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
                         .concat(new RString(計画費.get過誤回数())).concat(SPACE_回)
                         .concat(dateFormat年月(計画費.get審査年月())));
@@ -604,10 +625,12 @@ public final class JukyushaKyufuDaichoData {
                         .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
                         .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
                         .concat(kingakuFormat(計画費.get請求金額().intValue())));
-                // TODO 明細8の設定を不明です。
-                個人用帳票データ.set明細20(RString.EMPTY);
-                個人用帳票データ.set明細21(計画費.getサービス名称().concat("　　")
-                        .concat(計画費.get摘要()).concat(SPACE_8)
+                個人用帳票データ.set明細20(計画費.get明細行番号().concat(SPACE_23).concat(kingakuFormat(計画費.get単位数().intValue())).concat(SPACE_4)
+                        .concat(new RString(計画費.get回数())).concat("回").concat(SPACE_8)
+                        .concat(kingakuFormat(計画費.getサービス単位数().intValue())).concat(SPACE_12)
+                        .concat(kingakuFormat(計画費.getサービス単位数合計().intValue())).concat(SPACE_5)
+                        .concat(kingakuFormat(計画費.get請求金額().intValue())));
+                個人用帳票データ.set明細21(計画費.getサービス名称().concat("　　").concat(計画費.get摘要()).concat(SPACE_8)
                         .concat(new RString(計画費.get再審査回数())).concat("回").concat(SPACE_6)
                         .concat(new RString(計画費.get過誤回数())).concat(SPACE_回)
                         .concat(dateFormat年月(計画費.get審査年月())));
@@ -641,6 +664,14 @@ public final class JukyushaKyufuDaichoData {
                 separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
+    private static RString dateFromat_生年月日(FlexibleDate 生年月日) {
+        if (生年月日 == null) {
+            return RString.EMPTY;
+        }
+        return 生年月日.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+    }
+
     private static RString kingakuFormat(int date) {
         return DecimalFormatter.toコンマ区切りRString(new Decimal(date), 0);
     }
@@ -669,7 +700,7 @@ public final class JukyushaKyufuDaichoData {
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0013"), new RString("shichousonCode"), new RString("市町村コード")),
+        市町村コード(new RString("0016"), new RString("shichousonCode"), new RString("市町村コード")),
         /**
          * 被保険者番号
          */

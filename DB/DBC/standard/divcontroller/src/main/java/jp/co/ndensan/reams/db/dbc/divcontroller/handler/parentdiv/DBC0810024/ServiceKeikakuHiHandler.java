@@ -247,7 +247,7 @@ public class ServiceKeikakuHiHandler {
         div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().setValue(entity200604.getEntity().get担当介護支援専門員番号());
         div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setValue(entity200604.getEntity().get摘要());
         FlexibleYearMonth 審査年月 = entity200604.getEntity().get審査年月();
-        if (審査年月 != null && !RString.EMPTY.equals(審査年月)) {
+        if (審査年月 != null && !FlexibleYearMonth.EMPTY.equals(審査年月)) {
             div.getPanelServiceKeikakuhiDown().getTxtShinsaYmdown().setValue(new RDate(審査年月.toString()));
         }
         RString 支給区分コード = entity200604.getEntity().get支給区分コード();

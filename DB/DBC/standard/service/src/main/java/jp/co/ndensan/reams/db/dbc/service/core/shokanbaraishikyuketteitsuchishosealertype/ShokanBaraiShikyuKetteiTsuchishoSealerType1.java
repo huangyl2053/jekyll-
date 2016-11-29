@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
@@ -167,9 +168,23 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
             sealer = create帳票ソースデータ(sealer, count, ninshoshaSource, shiharai, batchPram, 文書番号, 通知文,
                     情報文, タイトル, 送付物宛先ソースデータ, pageCount, 種類);
-            count++;
+            boolean 金融機関未登録フラグ = false;
+            if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())
+                    && (null == shiharai.get金融機関コード() || shiharai.get金融機関コード().isEmpty())) {
+                金融機関未登録フラグ = true;
+            }
+            if (!RString.isNullOrEmpty(shiharai.get支給不支給決定区分())
+                    && ShikyuFushikyuKubun.支給.getコード().equals(shiharai.get支給不支給決定区分())
+                    && ShikakuKubun._２号.getコード().equals(shiharai.get被保険者区分コード())) {
+                金融機関未登録フラグ = false;
+            }
+            if (!金融機関未登録フラグ) {
+                count++;
+                hiHokenshaNo = shiharai.get被保険者番号().value();
+            } else {
+                帳票ソースデータ.remove(sealer);
+            }
             
-            hiHokenshaNo = shiharai.get被保険者番号().value();
         }
         List<RString> 帳票名 = new ArrayList<>();
         帳票名.add(ReportIdDBC.DBC100004.getReportName());
@@ -256,13 +271,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setShikyuGaku(nullToZero(business.get支給額()));
         ketteiTsuchiShoSealer.setShiharaiGaku(business.get本人支払額() == null
                     ? RString.EMPTY : new RString(business.get本人支払額().toString()));
-        RString 種別タイトル = get種別タイトル(business);
-        RString 増減の理由タイトル;
-        if (ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
-            増減の理由タイトル = 増減の理由タイトル_不支給の理由;
-        } else {
-            増減の理由タイトル = 増減の理由タイトル_増減の理由;
-        }
+        
+        
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         RString タイトル1 = RString.EMPTY;
         RString タイトル2 = RString.EMPTY;
@@ -303,8 +313,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setTitle2_4(タイトル2_4);
         ketteiTsuchiShoSealer.setBunshoNo(文書番号);
         ketteiTsuchiShoSealer.setHihokenshaName(business.get被保険者氏名());
-        RString 被保険者番号 = business.get被保険者番号().value();
-        ketteiTsuchiShoSealer.setHihokenshaNo(被保険者番号);
+        
         ketteiTsuchiShoSealer.setUketsukeYMD(business.get受付年月日() == null ? RString.EMPTY : business.get受付年月日().wareki().eraType(
                 EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                         Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -337,7 +346,22 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 ketteiTsuchiShoSealer.setKaraFugo(KARA);
             }
         }
+         
+        setItem(ketteiTsuchiShoSealer, count, business, batchPram, 通知文, 情報文, 帳票制御汎用Manager);
         
+        
+        return setKetteiTsuchiShoSealer(ketteiTsuchiShoSealer, ninshoshaSource, business, atesaki);
+    }
+
+    private void setItem(ShokanKetteiTsuchiShoSealer ketteiTsuchiShoSealer, int count,
+            ShokanKetteiTsuchiShoShiharai business, ShokanKetteiTsuchiShoSealerBatchParameter batchPram,
+            RString 通知文, RString 情報文, ChohyoSeigyoHanyoManager 帳票制御汎用Manager) {
+        RString 増減の理由タイトル;
+        if (ShikyuFushikyuKubun.不支給.getコード().equals(business.get支給不支給決定区分())) {
+            増減の理由タイトル = 増減の理由タイトル_不支給の理由;
+        } else {
+            増減の理由タイトル = 増減の理由タイトル_増減の理由;
+        }
         if (ShiharaiHohoKubun.口座払.getコード().equals(business.get支払方法区分コード())
                 && ShikyuFushikyuKubun.支給.getコード().equals(business.get支給不支給決定区分())
                 && business.get口座() != null 
@@ -364,7 +388,10 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 ? RString.EMPTY : batchPram.getHurikomiYMD().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
-        
+       
+        RString 被保険者番号 = business.get被保険者番号().value();
+        ketteiTsuchiShoSealer.setHihokenshaNo(被保険者番号);
+        RString 種別タイトル = get種別タイトル(business);
         ketteiTsuchiShoSealer.set整理番号(business.get整理番号());
         ketteiTsuchiShoSealer.set決定通知書番号(business.get決定通知No());
         ketteiTsuchiShoSealer.setTsuban(RString.EMPTY);
@@ -390,9 +417,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         ketteiTsuchiShoSealer.setHihokenshaNo8(temp_被保険者番号.substring(SEVEN, EIGHT));
         ketteiTsuchiShoSealer.setHihokenshaNo9(temp_被保険者番号.substring(EIGHT, NINE));
         ketteiTsuchiShoSealer.setHihokenshaNo10(temp_被保険者番号.substring(NINE));
-        return setKetteiTsuchiShoSealer(ketteiTsuchiShoSealer, ninshoshaSource, business, atesaki);
+        
     }
-
     private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
         MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
         return maskedKozaCreator.createマスク編集済口座(new Koza(koza));

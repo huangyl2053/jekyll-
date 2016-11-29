@@ -15,31 +15,28 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 public class JikoFutangakushomeishoFrom2009Builder implements IJikoFutangakushomeishoFrom2009Builder {
 
-   private final JikoFutangakushomeishoFrom2009HeaderEditor headerEditor;
+    private final JikoFutangakushomeishoFrom2009HeaderEditor headerEditor;
     private final JikoFutangakushomeishoFrom2009BodyEditor bodyEditor;
-    private final jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.CompSofubutsuAtesakiEditor atesakiEditor;
-    private final jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.CompNinshoshaEditor compNinshoshaEditor;
-    private final jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.CompKaigoToiawasesakiEditor toiawasesakiEditor;
+    private final CompSofubutsuAtesakiEditor atesakiEditor;
+    private final CompNinshoshaEditor compNinshoshaEditor;
 
     /**
      * インスタンスを生成するメソッド。
      *
-     * @param headerEditor {@link JikoFutangakushomeishoHeaderEditor}
-     * @param bodyEditor {@link JikoFutangakushomeishoBodyEditor}
+     * @param headerEditor {@link JikoFutangakushomeishoFrom2009HeaderEditor}
+     * @param bodyEditor {@link JikoFutangakushomeishoFrom2009BodyEditor}
      * @param atesakiEditor {@link CompSofubutsuAtesakiEditor}
      * @param compNinshoshaEditor {@link CompNinshoshaEditor}
-     * @param toiawasesakiEditor {@link CompKaigoToiawasesakiEditor}
      */
     public JikoFutangakushomeishoFrom2009Builder(JikoFutangakushomeishoFrom2009HeaderEditor headerEditor,
             JikoFutangakushomeishoFrom2009BodyEditor bodyEditor,
-            jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.CompSofubutsuAtesakiEditor atesakiEditor,
-            jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.CompNinshoshaEditor compNinshoshaEditor,
-            jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.CompKaigoToiawasesakiEditor toiawasesakiEditor) {
+            CompSofubutsuAtesakiEditor atesakiEditor,
+            CompNinshoshaEditor compNinshoshaEditor
+    ) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
         this.atesakiEditor = atesakiEditor;
         this.compNinshoshaEditor = compNinshoshaEditor;
-        this.toiawasesakiEditor = toiawasesakiEditor;
     }
 
     /**
@@ -54,7 +51,6 @@ public class JikoFutangakushomeishoFrom2009Builder implements IJikoFutangakushom
                 .join(bodyEditor)
                 .join(atesakiEditor)
                 .join(compNinshoshaEditor)
-                .join(toiawasesakiEditor)
                 .buildSource();
     }
 

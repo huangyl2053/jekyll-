@@ -185,6 +185,30 @@ public final class ReportUtil {
             int patternNo,
             int sentenceNo,
             FlexibleDate kijunDate) {
+        ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
+        return get通知文(subGyomuCode, reportId, kamokuCode, patternNo, sentenceNo, kijunDate, textHenkanRule);
+    }
+
+    /**
+     * 基準日により、通知文を取得します。
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票ID
+     * @param kamokuCode 科目コード
+     * @param patternNo パターン番号
+     * @param sentenceNo 項目番号
+     * @param kijunDate 基準年月日
+     * @param henkanRule ルール
+     * @return 通知文
+     */
+    public static RString get通知文(
+            SubGyomuCode subGyomuCode,
+            ReportId reportId,
+            KamokuCode kamokuCode,
+            int patternNo,
+            int sentenceNo,
+            FlexibleDate kijunDate,
+            ITextHenkanRule henkanRule) {
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = TsuchishoTeikeibunManager.createInstance();
         List<TsuchishoTeikeibun> tsuchishoTeikeibunList = tsuchishoTeikeibunManager.get通知書定型文(subGyomuCode, reportId,
                 kamokuCode, patternNo, kijunDate);
@@ -194,11 +218,10 @@ public final class ReportUtil {
                 info = tsuchishoTeikeibun;
             }
         }
-        ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(subGyomuCode, reportId);
         if (info == null) {
-            return textHenkanRule.editText(RString.EMPTY);
+            return henkanRule.editText(RString.EMPTY);
         }
-        return textHenkanRule.editText(info.get文章());
+        return henkanRule.editText(info.get文章());
     }
 
     /**

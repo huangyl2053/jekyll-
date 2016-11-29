@@ -81,11 +81,10 @@ public enum KubunShikyuGendogakuSpec implements IPredicate<KubunShikyuGendogakuD
             RDate startDate = div.getServiceShuruiShousai().getTxtTeikyoKaishiYM().getValue();
             RString serviceCode = div.getServiceShuruiShousai().getTxtServiceCode().getValue();
             for (dgServiceShurui_Row item : dataSource) {
-                if (item.getDefaultDataName1().equals(serviceCode) && (item.getDefaultDataName3() == null
-                        || item.getDefaultDataName3().isEmpty())) {
-                    if (startDate.isBeforeOrEquals(new RDate(item.getDefaultDataName2().toString()))) {
-                        return false;
-                    }
+                if ((item.getDefaultDataName1().equals(serviceCode)
+                        && (item.getDefaultDataName3() == null || item.getDefaultDataName3().isEmpty()))
+                        && startDate.isBeforeOrEquals(new RDate(item.getDefaultDataName2().toString()))) {
+                    return false;
                 }
             }
             return Boolean.TRUE;

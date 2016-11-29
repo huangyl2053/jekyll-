@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShiharaiYoteiBi
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShoHihokenshabunOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShoShiharaiYoteiBiYijiAriOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoIkkatsuDBUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess;
@@ -21,9 +22,11 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.ShokanbaraiSash
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010.UpdHakkoutaisyouFlgProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC030010.DBC030010_ShokanShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanKetteiTsuchiShokanShinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishokanshinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -31,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,9 +49,10 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final String MEISAI_TEMP_INSERT = "shokanKetteiTsuchiShoMeisaiTempInsertProcess";
     private static final String TEMP_UPDATE_SERVICE = "ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess";
     private static final String TEMP_UPDATE_YOSHIKI = "ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess";
+    private static final String TEMP_INSERT_LTIRAN = "ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess";
     private static final String DB_UPDATE = "shokanKetteiTsuchiShoIkkatsuDBUpdateProcess";
     private static final String DB_UPDATE2 = "ShokanKetteiTsuchiShokanShinseiDBUpdateProcess";
-
+    
     private static final String DBC100002 = "shiharaiYoteiBiYijiNashiOutputProcess";
     private static final String DBC100003 = "shoShiharaiYoteiBiYijiAriOutputProcess";
     private static final String DBC100004 = "shokanKetteiTsuchiShoSealerOutputProcess";
@@ -66,7 +71,7 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
     private static final RString 更新する = new RString("2");
     private static final RString フラグ_FALSE = new RString("false");
     private static final RString フラグ_TRUE = new RString("true");
-    private static final RString 発行有無_発行しない = new RString("0");
+    private static final RString 管理しない = new RString("0");
     private static Long jobId = Long.MIN_VALUE;
 
     @Override
@@ -97,44 +102,55 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
         executeStep(MEISAI_TEMP_INSERT);
         executeStep(TEMP_UPDATE_YOSHIKI);
         executeStep(TEMP_UPDATE_SERVICE);
+        
+        executeStep(TEMP_INSERT_LTIRAN);
         if (フラグ_FALSE.equals(getParameter().getテスト出力フラグ())) {
             executeStep(DB_UPDATE);
         }
         if (更新する.equals(getParameter().get窓口払い一括更新区分())) {
             executeStep(DB_UPDATE2);
         }
-        
-        if (用紙タイプ_A4.equals(用紙タイプ)) {
-            if (支払予定日印字有無_印字しない.equals(支払予定日印字有無)) {
+
+        RString 受領委任払い管理_管理制御 = DbBusinessConfig.get(ConfigNameDBC.受領委任払い管理_管理制御, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (管理しない.equals(受領委任払い管理_管理制御)) {
+            if (用紙タイプ_A4.equals(用紙タイプ) && 支払予定日印字有無_印字しない.equals(支払予定日印字有無)) {
                 executeStep(DBC100002);
-            } else if (支払予定日印字有無_印字する.equals(支払予定日印字有無)) {
+            } else if (用紙タイプ_A4.equals(用紙タイプ) && 支払予定日印字有無_印字する.equals(支払予定日印字有無)) {
                 executeStep(DBC100003);
             }
-        } 
-        if (フラグ_FALSE.equals(getParameter().get受領委任者向け決定通知書フラグ())
-                && 用紙タイプ_諏訪広域版.equals(用紙タイプ)) {
-            executeStep(DBC100006);
+            if (用紙タイプ_シーラ.equals(用紙タイプ)) {
+                executeStep(DBC100004);
+            }
+            if (用紙タイプ_諏訪広域版.equals(用紙タイプ)) {
+                executeStep(DBC100006);
+            }
+        } else {
+            if (フラグ_TRUE.equals(getParameter().get利用者向け決定通知書フラグ())) {
+                executeStep(DBC100005);
+            }
+            if (フラグ_TRUE.equals(getParameter().get受領委任者向け決定通知書フラグ())
+                    && 用紙タイプ_A4.equals(用紙タイプ) 
+                    && 支払予定日印字有無_印字しない.equals(支払予定日印字有無)) {
+                executeStep(DBC100002);
+            } else if (フラグ_TRUE.equals(getParameter().get受領委任者向け決定通知書フラグ())
+                    && 用紙タイプ_A4.equals(用紙タイプ) 
+                    && 支払予定日印字有無_印字する.equals(支払予定日印字有無)) {
+                executeStep(DBC100003);
+            }
         }
-
-        if (用紙タイプ_シーラ.equals(用紙タイプ)) {
-            executeStep(DBC100004);
-        }
-
-        if (フラグ_TRUE.equals(getParameter().get利用者向け決定通知書フラグ())) {
-            executeStep(DBC100005);
-        }
+        
         executeStep(DBC200023);
         executeStep(DBC200024);
     }
-
+    
     @Step(TEMP_INSERT)
     IBatchFlowCommand shokanKetteiTsuchiShoTempInsertProcess() {
         return loopBatch(ShokanKetteiTsuchiShoTempInsertProcess.class)
                 .arguments(ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter.createProcessParam(getParameter()))
                 .define();
     }
-    
-     @Step(UPD_HAKKOUTAISYOUFLG)
+
+    @Step(UPD_HAKKOUTAISYOUFLG)
     IBatchFlowCommand updHakkoutaisyouFlgProcess() {
         return simpleBatch(UpdHakkoutaisyouFlgProcess.class)
                 .define();
@@ -147,12 +163,19 @@ public class DBC030010_ShokanShikyuKetteiTsuchisho extends BatchFlowBase<DBC0300
 
     @Step(TEMP_UPDATE_YOSHIKI)
     IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess() {
-        return loopBatch(ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess.class).define();
+        return simpleBatch(ShokanKetteiTsuchiShoMeisaiTempYoshikiUpdateProcess.class).define();
     }
 
     @Step(TEMP_UPDATE_SERVICE)
     IBatchFlowCommand shokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess() {
-        return loopBatch(ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess.class).define();
+        return simpleBatch(ShokanKetteiTsuchiShoMeisaiTempServiceUpdateProcess.class).define();
+    }
+
+    @Step(TEMP_INSERT_LTIRAN)
+    IBatchFlowCommand shokanKetteiTsuchiShoMeisaiItiranTempInsertProcess() {
+        return loopBatch(ShokanKetteiTsuchiShoMeisaiItiranTempInsertProcess.class)
+                .arguments(ShokanKetteiTsuchiShoIkkatsuSakuseiProcessParameter.createProcessParam(getParameter()))
+                .define();
     }
 
     @Step(DB_UPDATE)

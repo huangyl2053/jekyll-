@@ -58,7 +58,11 @@ public class ServiceCodeBetsuRiyoJokyoEditor implements
         source.hokenshaNo1 = entity.get保険者番号().value();
         source.hokenshaName1 = entity.get保険者名();
 
-        source.List1_1 = 明細リスト.get種類コード();
+        if (明細リスト.get種類コード() != null) {
+            source.List1_1 = 明細リスト.get種類コード();
+        } else {
+            source.List1_1 = RString.EMPTY;
+        }
         source.List1_2 = 明細リスト.get項目コード();
         source.List1_3 = 明細リスト.getサービス略称_上();
 

@@ -84,13 +84,12 @@ public class KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationHandler {
 
     private void 居宅適用開始日終了日不整合チェックValidate(ValidationMessageControlPairs validPairs) {
         if (null != div.getTxtKeikakuTekiyoEndYMD().getValue()
-                && null != div.getTxtKeikakuTekiyoStartYMD().getValue()) {
-            if (0 < div.getTxtKeikakuTekiyoStartYMD().getValue().compareTo(
-                    div.getTxtKeikakuTekiyoEndYMD().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(
-                                DbcErrorMessages.居宅適用開始日終了日不整合)));
-            }
+                && null != div.getTxtKeikakuTekiyoStartYMD().getValue()
+                && 0 < div.getTxtKeikakuTekiyoStartYMD().getValue().compareTo(
+                        div.getTxtKeikakuTekiyoEndYMD().getValue())) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new KyotakuSabisuKeikakuIraiTodokedeJohoTorokuValidationMessages(
+                            DbcErrorMessages.居宅適用開始日終了日不整合)));
         }
     }
 

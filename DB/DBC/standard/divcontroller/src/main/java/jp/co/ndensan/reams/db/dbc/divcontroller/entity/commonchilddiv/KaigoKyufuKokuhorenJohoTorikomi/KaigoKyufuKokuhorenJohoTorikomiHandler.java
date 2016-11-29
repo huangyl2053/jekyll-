@@ -66,6 +66,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
         } else {
             div.getTxtSaishoriKubun().setValue(RString.EMPTY);
         }
+        div.getTxtShoriTaisho().setDisplayNone(true);
     }
 
     /**
@@ -89,8 +90,10 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
         } else {
             div.getTxtShoriTaisho().setDisplayNone(true);
         }
+        RString 再処理区分 = SaiShoriKubun.toValue(parmater.get再処理区分()).get名称();
         div.getTxtShoriTaisho().setValue(処理対象);
         div.getHdnShoriKubun().setValue(処理区分);
+        div.getTxtSaishoriKubun().setValue(再処理区分);
         div.getShutsuRyokujun().getCcdChohyoShutsuryokujun().load(サブ業務コード, 帳票ID);
     }
 

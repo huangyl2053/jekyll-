@@ -67,7 +67,6 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
             + "IKogakugassanShikyushinseishoOutMapper.get送付ファイル作成データ");
     private static final RString 支払方法区分_2 = new RString("2");
     private static final RString カンマ = new RString(",");
-    private static final RString 変換区分_1 = new RString("1");
     private static final RString ファイル名_前 = new RString("10_371");
     private static final RString ファイル_TYPE = new RString(".csv");
     private static final RString 囲みの文字 = new RString("\"");

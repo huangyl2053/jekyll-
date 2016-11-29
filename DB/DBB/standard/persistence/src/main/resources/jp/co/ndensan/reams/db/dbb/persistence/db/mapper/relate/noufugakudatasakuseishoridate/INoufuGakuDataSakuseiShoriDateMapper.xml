@@ -10,75 +10,75 @@
         <include refid="selectDbT7022ShoriDateKanriEntity" />
     </select>
     <sql id="selectDbT7022ShoriDateKanriEntity" >
-        SELECT 
-            executionDateMaster2."shichosonCode",
-            executionDateMaster2."shoriEdaban",
-            executionDateMaster2."kijunYMD",
-            executionDateMaster2."kijunTimestamp"
+        SELECT
+        executionDateMaster2."shichosonCode",
+        executionDateMaster2."shoriEdaban",
+        executionDateMaster2."kijunYMD",
+        executionDateMaster2."kijunTimestamp"
         FROM (
-            SELECT
-                 executionDateMaster1."subGyomuCode",
-                 executionDateMaster1."shichosonCode",
-                 executionDateMaster1."shoriName",
-                 executionDateMaster1."shoriEdaban",
-                 executionDateMaster1."nendo",
-                 executionDateMaster1."nendoNaiRenban",
-                 executionDateMaster1."kijunYMD",
-                 executionDateMaster1."kijunTimestamp",
-                 executionDateMaster1."taishoKaishiYMD",
-                 executionDateMaster1."taishoShuryoYMD",
-                 executionDateMaster1."taishoKaishiTimestamp",
-                 executionDateMaster1."taishoShuryoTimestamp",
-                 row_number() OVER (
-                   PARTITION BY executionDateMaster1."shichosonCode"
-                   ORDER BY executionDateMaster1."kijunYMD" DESC, executionDateMaster1."kijunTimestamp" DESC
-                ) AS rrkno
-            FROM (
-                SELECT
-                    "subGyomuCode",
-                    "shichosonCode",
-                    "shoriName",
-                    "shoriEdaban",
-                    "nendo",
-                    "nendoNaiRenban",
-                    "kijunYMD",
-                    "kijunTimestamp",
-                    "taishoKaishiYMD",
-                    "taishoShuryoYMD",
-                    "taishoKaishiTimestamp",
-                    "taishoShuryoTimestamp"
-                FROM
-                    rgdb."DbT7022ShoriDateKanri"
-                WHERE 
-                    rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
-                AND rgdb."DbT7022ShoriDateKanri"."shichosonCode" IN 
-                <foreach  
-                    collection="市町村コードList"  
-                    item="item"
-                    open="("  
-                    separator=","  
-                    close=")">  
-                     #{item}  
-                 </foreach>
-                AND rgdb."DbT7022ShoriDateKanri"."shoriName" = '納付額データ作成'
-                AND rgdb."DbT7022ShoriDateKanri"."shoriEdaban" IN 
-                 <foreach  
-                    collection="処理枝番List"  
-                    item="item"
-                    open="("  
-                    separator=","  
-                    close=")">  
-                     #{item}  
-                 </foreach>
-            ) executionDateMaster1
+        SELECT
+        executionDateMaster1."subGyomuCode",
+        executionDateMaster1."shichosonCode",
+        executionDateMaster1."shoriName",
+        executionDateMaster1."shoriEdaban",
+        executionDateMaster1."nendo",
+        executionDateMaster1."nendoNaiRenban",
+        executionDateMaster1."kijunYMD",
+        executionDateMaster1."kijunTimestamp",
+        executionDateMaster1."taishoKaishiYMD",
+        executionDateMaster1."taishoShuryoYMD",
+        executionDateMaster1."taishoKaishiTimestamp",
+        executionDateMaster1."taishoShuryoTimestamp",
+        row_number() OVER (
+        PARTITION BY executionDateMaster1."shichosonCode"
+        ORDER BY executionDateMaster1."kijunYMD" DESC, executionDateMaster1."kijunTimestamp" DESC
+        ) AS rrkno
+        FROM (
+        SELECT
+        "subGyomuCode",
+        "shichosonCode",
+        "shoriName",
+        "shoriEdaban",
+        "nendo",
+        "nendoNaiRenban",
+        "kijunYMD",
+        "kijunTimestamp",
+        "taishoKaishiYMD",
+        "taishoShuryoYMD",
+        "taishoKaishiTimestamp",
+        "taishoShuryoTimestamp"
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
+        AND rgdb."DbT7022ShoriDateKanri"."shichosonCode" IN
+        <foreach
+            collection="市町村コードList"
+            item="item"
+            open="("
+            separator=","
+            close=")">
+            #{item}
+        </foreach>
+        AND rgdb."DbT7022ShoriDateKanri"."shoriName" = '納付額データ作成'
+        AND rgdb."DbT7022ShoriDateKanri"."shoriEdaban" IN
+        <foreach
+            collection="処理枝番List"
+            item="item"
+            open="("
+            separator=","
+            close=")">
+            #{item}
+        </foreach>
+        ) executionDateMaster1
         ) executionDateMaster2
         WHERE executionDateMaster2.rrkno = 1
     </sql>
     <resultMap id="resultMap_DbT7022ShoriDateKanriEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
+               type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity">
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="shoriEdaban" column="shoriEdaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kijunTimestamp" column="kijunTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
-    </resultMap> 
+    </resultMap>
 </mapper>

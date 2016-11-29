@@ -161,12 +161,13 @@ public class KougakuGassanShikyuKetteiTsuchisho {
                 entity.setTitle232(RString.EMPTY);
             }
         }
+        ShikibetsuCode shikibetsuCode = hihokenshaTaishoPSMFuka == null ? null : hihokenshaTaishoPSMFuka.getShikibetsuCode();
         entity.set文書番号(文書番号);
         entity.set発行日(発行日);
         entity.set被保険者番号(被保険者番号);
-        setKoza(entity, 口座ID, 識別コード);
+        setKoza(entity, 口座ID, shikibetsuCode);
         set通知文(entity);
-        set送付物宛先(entity, 識別コード, 発行日);
+        set送付物宛先(entity, shikibetsuCode, 発行日);
         target.set事業分高額合算支給決定通知書(entity);
         target.setデータ有無(データ有無);
         return target;

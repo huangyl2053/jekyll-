@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -107,7 +106,7 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     @TempTableColumnOrder(26)
     private YubinNo yubinNo;
     @TempTableColumnOrder(27)
-    private AtenaJusho jusho;
+    private RString jusho;
     @TempTableColumnOrder(28)
     private LasdecCode shichosonCode;
     @TempTableColumnOrder(29)

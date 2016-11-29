@@ -67,16 +67,18 @@ public class SogojigyohiSaishinsaKetteitsuchishoHeaderEditor
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.kokuhorenName = 帳票出力対象データ.get国保連合会名();
         source.shinsakaiName = 帳票出力対象データ.get審査委員会名();
-        source.kohiFutanshaNo = 帳票出力対象データ.get公費負担者番号().value();
+        if (帳票出力対象データ.get公費負担者番号() != null) {
+            source.kohiFutanshaNo = 帳票出力対象データ.get公費負担者番号().value();
+        } else {
+            source.kohiFutanshaNo = RString.EMPTY;
+        }
         source.kohiFutanshaName = 帳票出力対象データ.get公費負担者名();
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
         source.shutsuryokujun4 = get並び順(KEY_並び順の５件目);
         source.shutsuryokujun5 = get並び順(KEY_並び順の６件目);
-
         return source;
-
     }
 
     private RString get並び順(RString 並び順Key) {

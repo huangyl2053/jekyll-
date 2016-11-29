@@ -134,6 +134,16 @@ public class KarisanteiIdoKekkaIchiranSource implements IReportSource {
     public RString listLower_16;
     @ReportItem(name = "listChoteijiyu4_1", length = 10, order = 61)
     public RString listChoteijiyu4_1;
+    @ReportItem(name = "choikiCode", length = 10, order = 62)
+    public RString choikiCode;
+    @ReportItem(name = "seinengappiYMD", length = 10, order = 63)
+    public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", length = 10, order = 64)
+    public RString seibetsuCode;
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 65)
+    public RString hihokenshaNo;
+    @ReportItem(name = "kanaMeisho", length = 10, order = 66)
+    public RString kanaMeisho;
 
     /**
      * KarisanteiIdoKekkaIchiranSourceのenum
@@ -183,7 +193,12 @@ public class KarisanteiIdoKekkaIchiranSource implements IReportSource {
         listCenter_14,
         listCenter_15,
         listCenter_16,
-        listChoteijiyu3_1
+        listChoteijiyu3_1,
+        choikiCode,
+        seinengappiYMD,
+        seibetsuCode,
+        hihokenshaNo,
+        kanaMeisho
 
     }
 // </editor-fold>

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB015001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB051001.PrtMeisaiIchiranProcessPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranProperty;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -105,6 +107,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
     private Association 地方公共団体;
     private List<RString> 出力項目リスト;
     private List<RString> 改頁項目リスト;
+    private List<RString> breakKeys;
     @BatchWriter
     private BatchReportWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> batchReportWriter;
     private ReportSourceWriter<TokubetsuChoshuIraikingakuMeisaiIchiranSource> reportSourceWriter;
@@ -115,6 +118,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
         出力項目リスト = new ArrayList();
         改頁項目リスト = new ArrayList();
+        breakKeys = new ArrayList();
         manager = KariSanteiIdoFukaBatch.createInstance();
         if (processParameter.get出力帳票Entity() != null
                 && !RString.isNullOrEmpty(processParameter.get出力帳票Entity().get出力順ID())) {
@@ -132,7 +136,12 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        if (改頁項目リスト.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value()).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200023.getReportId().value())
+                    .addBreak(new PrtMeisaiIchiranProcessPageBreak(breakKeys)).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -163,7 +172,8 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
         builder.set住民種別(住民種別List);
         builder.set住民状態(住民状態List);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        KariSanteiIdoFukaPsmParameter parameter = new KariSanteiIdoFukaPsmParameter(出力順, searchKey);
+        KariSanteiIdoFukaPsmParameter parameter
+                = KariSanteiIdoFukaPsmParameter.createSelectByKeyParam(出力順, new UaFt200FindShikibetsuTaishoParam(searchKey));
         return new BatchDbReader(MAPPERPATH, parameter);
     }
 
@@ -198,14 +208,15 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
-        spoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+
         List<RString> 出力条件リスト = new ArrayList<>();
         if (processParameter.get出力帳票Entity() != null
                 && !RString.isNullOrEmpty(processParameter.get出力帳票Entity().get出力順ID())) {
             出力条件リスト = get出力条件リスト(processParameter.get出力帳票Entity().get出力順ID());
         }
         loadバッチ出力条件リスト(出力条件リスト, new RString(reportSourceWriter.pageCount().value()));
+        eucCsvWriter.close();
+        spoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
     }
 
     private List<RString> get出力条件リスト(RString 出力順Id) {
@@ -335,6 +346,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
                 出力項目リスト.add(setSortItem.get項目名());
                 if (setSortItem.is改頁項目()) {
                     改頁項目リスト.add(setSortItem.get項目名());
+                    breakKeys.add(setSortItem.get項目ID());
                 }
             }
             i = i + INT_1;

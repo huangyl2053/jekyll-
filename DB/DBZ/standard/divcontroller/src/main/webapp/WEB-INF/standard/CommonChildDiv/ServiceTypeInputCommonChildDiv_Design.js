@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_txtServiceType = function () {
+                return "onBlur_txtServiceType";
+            };
             return Events;
         })();
         ServiceTypeInputCommonChildDiv.Events = Events;

@@ -116,6 +116,7 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
             executeStep(テーブルの削除);
+
             executeStep(賦課計算_特別徴収停止);
             executeStep(賦課の情報登録フロー);
             executeStep(一時テーブルの削除);
@@ -137,8 +138,6 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
         if (RSTONE.equals(依頼金計算処理区分)) {
             executeStep(依頼金額計算_8月特徴開始);
             executeStep(賦課の情報登録フロー);
-            executeStep(一時テーブルの削除);
-            executeStep(テーブルの削除);
         }
         executeStep(計算後情報作成);
         for (TyouhyouEntity result : getParameter().get出力帳票一覧List()) {
@@ -418,9 +417,11 @@ public class DBB015001_KarisanteiIdoFuka extends BatchFlowBase<DBB015001_Karisan
         RDate 年月日2 = new RDate(getParameter().get抽出終了日時().substring(0, INT_EIGHT).toString());
         RTime 時刻2 = new RTime(getParameter().get抽出終了日時().substring(INT_EIGHT));
         parameter.set抽出終了日時(RDateTime.of(年月日2.toDateString(), 時刻2.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
-        RDate 年月日3 = new RDate(getParameter().get普徴仮算定賦課処理日時().substring(0, INT_NINE).toString());
-        RTime 時刻3 = new RTime(getParameter().get普徴仮算定賦課処理日時().substring(INT_TEN));
-        parameter.set普徴仮算定賦課処理日時(RDateTime.of(年月日3.toDateString(), 時刻3.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+        if (getParameter().get普徴仮算定賦課処理日時() != null) {
+            RDate 年月日3 = new RDate(getParameter().get普徴仮算定賦課処理日時().substring(0, INT_NINE).toString());
+            RTime 時刻3 = new RTime(getParameter().get普徴仮算定賦課処理日時().substring(INT_TEN));
+            parameter.set普徴仮算定賦課処理日時(RDateTime.of(年月日3.toDateString(), 時刻3.toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+        }
         parameter.set依頼金額計算区分(getParameter().get特徴捕捉対象者の依頼金額計算区分());
     }
 }

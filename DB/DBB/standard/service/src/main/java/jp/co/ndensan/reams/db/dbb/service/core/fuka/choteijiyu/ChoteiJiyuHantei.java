@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.ChoteiJiyuParame
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.choteijiyu.FukaJohoList;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJohoBuilder;
-import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ShokkenKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -73,14 +73,12 @@ public class ChoteiJiyuHantei {
                 } else if (param.get現年度() == null && param.get過年度() == null && 更正後賦課の情報.get過年度() == null) {
                     set新規(調定事由, 更正後賦課の情報.get現年度());
                 }
-            } else {
-                if (param.get現年度() == null && param.get過年度() == null && 更正後賦課の情報.get過年度() != null) {
-                    set新規(調定事由, 更正後賦課の情報.get過年度());
-                } else if (param.get現年度() == null && param.get過年度() != null && 更正後賦課の情報.get過年度() != null) {
-                    is徴収方法更正あり = false;
-                    set更正_異動(調定事由, param.get過年度(), 更正後賦課の情報.get過年度(), param.get更正後徴収方法(),
-                            is徴収方法更正あり);
-                }
+            } else if (param.get現年度() == null && param.get過年度() == null && 更正後賦課の情報.get過年度() != null) {
+                set新規(調定事由, 更正後賦課の情報.get過年度());
+            } else if (param.get現年度() == null && param.get過年度() != null && 更正後賦課の情報.get過年度() != null) {
+                is徴収方法更正あり = false;
+                set更正_異動(調定事由, param.get過年度(), 更正後賦課の情報.get過年度(), param.get更正後徴収方法(),
+                        is徴収方法更正あり);
             }
             if (更正後賦課の情報.get現年度() != null) {
                 更正後賦課の情報.set現年度(set現年度調定事由(調定事由, param.get現年度(), 更正後賦課の情報.get現年度()));
@@ -246,12 +244,13 @@ public class ChoteiJiyuHantei {
     }
 
     private boolean is金額変更(Decimal 更正前金額, Decimal 更正後金額) {
-        if (更正後金額 != null && !更正後金額.equals(更正前金額)) {
-            return true;
-        } else if (更正後金額 == null && 更正前金額 != null) {
-            return true;
+        if (更正前金額 == null) {
+            更正前金額 = Decimal.ZERO;
         }
-        return false;
+        if (更正後金額 == null) {
+            更正後金額 = Decimal.ZERO;
+        }
+        return 更正後金額.compareTo(更正前金額) != 0;
     }
 
     private boolean is特徴期の金額減少あり(FukaJoho 更正前, FukaJoho 更正後) {

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -104,11 +104,11 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
                 save仮算定データ(賦課情報, 月期対応取得_普徴);
             } else {
                 save特徴期別(賦課情報);
-                save普徴期別金額By最後の期(賦課情報, 月期対応取得_普徴.getLast().get期AsInt());
+                save普徴期別金額By最後の期(賦課情報, 月期対応取得_普徴.getLast().get期AsInt(), false);
             }
         } else {
             int 最後の期_過年度 = new KanendoKiUtil(賦課情報.getFukaNendo()).get期月リスト().getLast().get期AsInt();
-            save普徴期別金額By最後の期(賦課情報, 最後の期_過年度);
+            save普徴期別金額By最後の期(賦課情報, 最後の期_過年度, true);
         }
     }
 
@@ -125,14 +125,22 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         }
     }
 
-    private void save普徴期別金額By最後の期(DbT2002FukaJohoTempTableEntity 賦課情報, int 最後の期) {
+    private void save普徴期別金額By最後の期(DbT2002FukaJohoTempTableEntity 賦課情報, int 最後の期, boolean is過年度) {
         for (RString 期別 : 全て期) {
             int 期 = Integer.parseInt(期別.toString());
             if (期 <= 最後の期) {
                 Decimal 期別金額 = get期別金額By期(賦課情報, 期別);
-                if (期別金額 != null) {
-                    saveTemp(賦課情報, 科目_普通徴収, 期, 賦課納期取得.get普徴納期(期).get納期限(), 期別金額);
-                }
+                saveTempBy過年度Flg(賦課情報, 期, 期別金額, is過年度);
+            }
+        }
+    }
+
+    private void saveTempBy過年度Flg(DbT2002FukaJohoTempTableEntity 賦課情報, int 期, Decimal 期別金額, boolean is過年度) {
+        if (期別金額 != null) {
+            if (is過年度) {
+                saveTemp(賦課情報, 科目_普通徴収, 期, 賦課納期取得.get過年度納期(期).get納期限(), 期別金額);
+            } else {
+                saveTemp(賦課情報, 科目_普通徴収, 期, 賦課納期取得.get普徴納期(期).get納期限(), 期別金額);
             }
         }
     }
@@ -217,6 +225,9 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         entity.setRirekiNo(0L);
         entity.setShunoId(収納ID);
         entity.setKaikeiNendo(new RYear(賦課情報.getChoteiNendo().toString()));
+        entity.setShoriNendo(RDate.getNowDate().getYear());
+        entity.setShoriNo(0);
+        entity.setKoseiKaisu(0);
         if (0 == 賦課情報.getRirekiNo()) {
             entity.setChoteiJiyuCode(当初処理);
         } else if (0 < 賦課情報.getRirekiNo()) {
@@ -229,6 +240,7 @@ public class FukaJohoHenshuProcess extends BatchProcessBase<DbT2002FukaJohoTempT
         entity.setChoteigaku(調定額);
         entity.setShohizei(Decimal.ZERO);
         entity.setNokigenYMD(納期限);
+        entity.setHoteiNokigenToYMD(RDate.getNowDate());
         entity.setFukaShoriJokyo(false);
         return entity;
     }

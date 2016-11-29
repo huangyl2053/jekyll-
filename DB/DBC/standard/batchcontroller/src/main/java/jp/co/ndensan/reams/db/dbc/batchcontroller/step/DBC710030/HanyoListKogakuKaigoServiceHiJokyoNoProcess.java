@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
@@ -136,6 +138,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     private static final RString データ読み込みID2 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllModeデータ");
     private RString preBreakKey;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private HanyoListKogakuKaigoProcessParameter parameter;
     private HanyoListKogakuKaigoEucCsvNoEntityEditor dataNoCreate;
     private HanyouRisutoSyuturyokuEntity preEntity;
@@ -168,6 +171,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
             並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
                     parameter.getShutsuryokuju()
             );
+            帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票ID);
             if (null == 並び順) {
                 throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                         .replace(実行不可MESSAGE.toString()).toString());
@@ -185,6 +189,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
             並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
                     parameter.getShutsuryokuju()
             );
+            帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票ID);
             if (null == 並び順) {
                 throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                         .replace(実行不可MESSAGE.toString()).toString());
@@ -280,7 +285,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
                     preEntity.get口座情報().getKinyuKikanEntity().add(kinyuKikanEntity);
                 }
             }
-            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番, 構成市町村Map));
+            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番, 構成市町村Map, 帳票制御共通情報));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
             lstKinyuKikanEntity.clear();
@@ -311,7 +316,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
             }
         }
         if (preEntity != null) {
-            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番, 構成市町村Map));
+            eucNoCsvWriter.writeLine(dataNoCreate.edit(preEntity, parameter, 連番, 構成市町村Map, 帳票制御共通情報));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
         }

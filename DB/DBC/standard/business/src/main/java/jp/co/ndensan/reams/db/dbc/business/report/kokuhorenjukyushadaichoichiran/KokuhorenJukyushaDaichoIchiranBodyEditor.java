@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -75,6 +76,8 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         }
         if (null != 対象データ.get登録被保険者番号()) {
             source.listList1_4 = 対象データ.get登録被保険者番号().getColumnValue();
+        } else {
+            source.listList1_4 = RString.EMPTY;
         }
         source.listList1_5 = 対象データ.get宛名カナ名称();
         source.listList1_6 = 対象データ.get行政区コード();
@@ -185,7 +188,20 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         }
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 ReportKomokuEditorUtil.get非空文字列(source.listList1_4));
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(JukyushaKoshinkekkaIchiranSource source) {
+        if (source.listList2_4 == null) {
+            source.listList2_4 = RString.EMPTY;
+        }
+        if (source.listList1_6 == null) {
+            source.listList1_6 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = LasdecCode.EMPTY;
+        }
     }
 
     private void 名称項目編集(JukyushaKoshinkekkaIchiranSource source) {
@@ -239,6 +255,19 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         }
     }
 
+    private RString doパターン4(RString 年月日) {
+        if (null == 年月日) {
+            return RString.EMPTY;
+        }
+        if (FlexibleDate.canConvert(年月日)) {
+            if (new FlexibleDate(年月日).isWareki()) {
+                return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
+                        .fillType(FillType.BLANK).toDateString();
+            }
+        }
+        return 年月日;
+    }
+
     private RString doパターン4(FlexibleDate 年月日) {
         if (null == 年月日) {
             return RString.EMPTY;
@@ -247,11 +276,14 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
                 .fillType(FillType.BLANK).toDateString();
     }
 
-    private RString doカンマ編集(Decimal number) {
+    private RString doカンマ編集(RString number) {
         if (null == number) {
             return RString.EMPTY;
         }
-        return DecimalFormatter.toコンマ区切りRString(number, 0);
+        if (Decimal.canConvert(number)) {
+            return DecimalFormatter.toコンマ区切りRString(new Decimal(number.toString()), 0);
+        }
+        return number;
     }
 
     private RString getNotNull(RString str) {

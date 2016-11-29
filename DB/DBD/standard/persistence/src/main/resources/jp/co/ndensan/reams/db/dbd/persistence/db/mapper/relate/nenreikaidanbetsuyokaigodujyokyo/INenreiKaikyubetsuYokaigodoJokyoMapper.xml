@@ -4,8 +4,8 @@
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.nenreikaidanbetsuyokaigodujyokyo.INenreiKaikyubetsuYokaigodoJokyoMapper">
-    
-    
+
+
     <select id="get人数" fetchSize="500" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd583001.ToukeiNinzuEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoMybatisParameter">
         (<include refid="select40歳To44歳人数の場合" />)
@@ -59,7 +59,7 @@
         (<include refid="select100歳以上人数の場合" />)
         UNION
         (<include refid="select100歳以上旧措置人数の場合" />)
-        
+
         UNION
         (<include refid="select40歳To44歳男の人数の場合" />)
         UNION
@@ -112,677 +112,677 @@
         (<include refid="select100歳以上男の人数の場合" />)
         UNION
         (<include refid="select100歳以上女の人数の場合" />)
-        
+
         ORDER BY 取得条件
     </select>
-    
+
     <sql id="select40歳To44歳人数の場合">
         SELECT
-            '01' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '40' <include refid="条件2" /> '44'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '01' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '40' <include refid="条件2" /> '44'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select40歳To44歳旧措置人数の場合">
         SELECT
-            '02' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '40' <include refid="条件2" /> '44'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '02' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '40' <include refid="条件2" /> '44'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select45歳To49歳人数の場合">
         SELECT
-            '03' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '45' <include refid="条件2" /> '49'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '03' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '45' <include refid="条件2" /> '49'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select45歳To49歳旧措置人数の場合">
         SELECT
-            '04' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '45' <include refid="条件2" /> '49'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '04' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '45' <include refid="条件2" /> '49'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select50歳To54歳人数の場合">
         SELECT
-            '05' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '50' <include refid="条件2" /> '54'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '05' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '50' <include refid="条件2" /> '54'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select50歳To54歳旧措置人数の場合">
         SELECT
-            '06' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '50' <include refid="条件2" /> '54'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '06' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '50' <include refid="条件2" /> '54'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select55歳To59歳人数の場合">
         SELECT
-            '07' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '55' <include refid="条件2" /> '59'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '07' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '55' <include refid="条件2" /> '59'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select55歳To59歳旧措置人数の場合">
         SELECT
-            '08' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '55' <include refid="条件2" /> '59'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '08' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '55' <include refid="条件2" /> '59'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select60歳To64歳人数の場合">
         SELECT
-            '09' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '60' <include refid="条件2" /> '64'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '09' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '60' <include refid="条件2" /> '64'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select60歳To64歳旧措置人数の場合">
         SELECT
-            '10' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '60' <include refid="条件2" /> '64'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '10' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '60' <include refid="条件2" /> '64'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select65歳To69歳人数の場合">
         SELECT
-            '11' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '65' <include refid="条件2" /> '69'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '11' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '65' <include refid="条件2" /> '69'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select65歳To69歳旧措置人数の場合">
         SELECT
-            '12' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '65' <include refid="条件2" /> '69'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '12' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '65' <include refid="条件2" /> '69'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select70歳To74歳人数の場合">
         SELECT
-            '13' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '70' <include refid="条件2" /> '74'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '13' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '70' <include refid="条件2" /> '74'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select70歳To74歳旧措置人数の場合">
         SELECT
-            '14' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '70' <include refid="条件2" /> '74'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '14' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '70' <include refid="条件2" /> '74'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select75歳To79歳人数の場合">
         SELECT
-            '15' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '75' <include refid="条件2" /> '79'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '15' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '75' <include refid="条件2" /> '79'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select75歳To79歳旧措置人数の場合">
         SELECT
-            '16' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '75' <include refid="条件2" /> '79'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '16' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '75' <include refid="条件2" /> '79'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select80歳To84歳人数の場合">
         SELECT
-            '17' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '80' <include refid="条件2" /> '84'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '17' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '80' <include refid="条件2" /> '84'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select80歳To84歳旧措置人数の場合">
         SELECT
-            '18' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '80' <include refid="条件2" /> '84'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '18' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '80' <include refid="条件2" /> '84'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select85歳To89歳人数の場合">
         SELECT
-            '19' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '85' <include refid="条件2" /> '89'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '19' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '85' <include refid="条件2" /> '89'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select85歳To89歳旧措置人数の場合">
         SELECT
-            '20' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '85' <include refid="条件2" /> '89'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '20' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '85' <include refid="条件2" /> '89'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select90歳To94歳人数の場合">
         SELECT
-            '21' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '90' <include refid="条件2" /> '94'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '21' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '90' <include refid="条件2" /> '94'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select90歳To94歳旧措置人数の場合">
         SELECT
-            '22' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '90' <include refid="条件2" /> '94'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '22' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '90' <include refid="条件2" /> '94'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select95歳To99歳人数の場合">
         SELECT
-            '23' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '95' <include refid="条件2" /> '99'
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '23' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '95' <include refid="条件2" /> '99'
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select95歳To99歳旧措置人数の場合">
         SELECT
-            '24' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '95' <include refid="条件2" /> '99'
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '24' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '95' <include refid="条件2" /> '99'
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select100歳以上人数の場合">
         SELECT
-            '25' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '100' <![CDATA[<=]]> T4101."age"
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '25' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '100' <![CDATA[<=]]> T4101."age"
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select100歳以上旧措置人数の場合">
         SELECT
-            '26' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '100' <![CDATA[<=]]> T4101."age"
-           <include refid="条件3-1" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '26' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '100' <![CDATA[<=]]> T4101."age"
+        <include refid="条件3-1" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
-    
-    
-    
-    
+
+
+
+
     <sql id="select40歳To44歳男の人数の場合">
         SELECT
-            '31' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '40' <include refid="条件2" /> '44'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '31' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '40' <include refid="条件2" /> '44'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select40歳To44歳女の人数の場合">
         SELECT
-            '32' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '40' <include refid="条件2" /> '44'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '32' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '40' <include refid="条件2" /> '44'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select45歳To49歳男の人数の場合">
         SELECT
-            '33' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '45' <include refid="条件2" /> '49'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '33' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '45' <include refid="条件2" /> '49'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select45歳To49歳女の人数の場合">
         SELECT
-            '34' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '45' <include refid="条件2" /> '49'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '34' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '45' <include refid="条件2" /> '49'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select50歳To54歳男の人数の場合">
         SELECT
-            '35' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '50' <include refid="条件2" /> '54'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '35' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '50' <include refid="条件2" /> '54'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select50歳To54歳女の人数の場合">
         SELECT
-            '36' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '50' <include refid="条件2" /> '54'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '36' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '50' <include refid="条件2" /> '54'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select55歳To59歳男の人数の場合">
         SELECT
-            '37' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '55' <include refid="条件2" /> '59'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '37' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '55' <include refid="条件2" /> '59'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select55歳To59歳女の人数の場合">
         SELECT
-            '38' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '55' <include refid="条件2" /> '59'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '38' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '55' <include refid="条件2" /> '59'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select60歳To64歳男の人数の場合">
         SELECT
-            '39' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '60' <include refid="条件2" /> '64'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '39' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '60' <include refid="条件2" /> '64'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select60歳To64歳女の人数の場合">
         SELECT
-            '40' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-2" />
-           AND '60' <include refid="条件2" /> '64'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '40' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-2" />
+        AND '60' <include refid="条件2" /> '64'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
-    
+
     <sql id="select65歳To69歳男の人数の場合">
         SELECT
-            '41' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '65' <include refid="条件2" /> '69'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '41' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '65' <include refid="条件2" /> '69'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select65歳To69歳女の人数の場合">
         SELECT
-            '42' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '65' <include refid="条件2" /> '69'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '42' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '65' <include refid="条件2" /> '69'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select70歳To74歳男の人数の場合">
         SELECT
-            '43' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '70' <include refid="条件2" /> '74'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '43' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '70' <include refid="条件2" /> '74'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select70歳To74歳女の人数の場合">
         SELECT
-            '44' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '70' <include refid="条件2" /> '74'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '44' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '70' <include refid="条件2" /> '74'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select75歳To79歳男の人数の場合">
         SELECT
-            '45' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '75' <include refid="条件2" /> '79'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '45' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '75' <include refid="条件2" /> '79'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select75歳To79歳女の人数の場合">
         SELECT
-            '46' AS 男女取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '75' <include refid="条件2" /> '79'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '46' AS 男女取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '75' <include refid="条件2" /> '79'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select80歳To84歳男の人数の場合">
         SELECT
-            '47' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '80' <include refid="条件2" /> '84'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '47' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '80' <include refid="条件2" /> '84'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select80歳To84歳女の人数の場合">
         SELECT
-            '48' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '80' <include refid="条件2" /> '84'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '48' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '80' <include refid="条件2" /> '84'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select85歳To89歳男の人数の場合">
         SELECT
-            '49' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '85' <include refid="条件2" /> '89'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '49' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '85' <include refid="条件2" /> '89'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select85歳To89歳女の人数の場合">
         SELECT
-            '50' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '85' <include refid="条件2" /> '89'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '50' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '85' <include refid="条件2" /> '89'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select90歳To94歳男の人数の場合">
         SELECT
-            '51' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '90' <include refid="条件2" /> '94'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '51' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '90' <include refid="条件2" /> '94'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select90歳To94歳女の人数の場合">
         SELECT
-            '52' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '90' <include refid="条件2" /> '94'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '52' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '90' <include refid="条件2" /> '94'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select95歳To99歳男の人数の場合">
         SELECT
-            '53' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '95' <include refid="条件2" /> '99'
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '53' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '95' <include refid="条件2" /> '99'
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select95歳To99歳女の人数の場合">
         SELECT
-            '54' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '95' <include refid="条件2" /> '99'
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '54' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '95' <include refid="条件2" /> '99'
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select100歳以上男の人数の場合">
         SELECT
-            '55' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '100' <![CDATA[<=]]> T4101."age"
-           <include refid="条件3-2" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '55' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '100' <![CDATA[<=]]> T4101."age"
+        <include refid="条件3-2" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
     <sql id="select100歳以上女の人数の場合">
         SELECT
-            '56' AS 取得条件,
-           <include refid="selectSql1" />
-           <include refid="条件1-1" />
-           AND '100' <![CDATA[<=]]> T4101."age"
-           <include refid="条件3-3" />
-           <include refid="条件4" />
-           <include refid="条件5" />
-           <include refid="条件6" />
-           <include refid="selectSql2" />
+        '56' AS 取得条件,
+        <include refid="selectSql1" />
+        <include refid="条件1-1" />
+        AND '100' <![CDATA[<=]]> T4101."age"
+        <include refid="条件3-3" />
+        <include refid="条件4" />
+        <include refid="条件5" />
+        <include refid="条件6" />
+        <include refid="selectSql2" />
     </sql>
-    
-    
+
+
     <sql id = "selectSql1">
-            SUM(A."自立") AS "自立人数",
-            SUM(A."経過介護") AS "経過介護人数",
-            SUM(A."要支援1") AS "要支援1人数",
-            SUM(A."要支援2") AS "要支援2人数",
-            SUM(A."要介護1") AS "要介護1人数",
-            SUM(A."要介護2") AS "要介護2人数",
-            SUM(A."要介護3") AS "要介護3人数",
-            SUM(A."要介護4") AS "要介護4人数",
-            SUM(A."要介護5") AS "要介護5人数",
-            SUM(A."自立")+SUM(A."経過介護")+SUM(A."要支援1")+SUM(A."要支援2")+SUM(A."要介護1")+SUM(A."要介護2")+SUM(A."要介護3")+SUM(A."要介護4")+SUM(A."要介護5") AS "合計"
+        SUM(A."自立") AS "自立人数",
+        SUM(A."経過介護") AS "経過介護人数",
+        SUM(A."要支援1") AS "要支援1人数",
+        SUM(A."要支援2") AS "要支援2人数",
+        SUM(A."要介護1") AS "要介護1人数",
+        SUM(A."要介護2") AS "要介護2人数",
+        SUM(A."要介護3") AS "要介護3人数",
+        SUM(A."要介護4") AS "要介護4人数",
+        SUM(A."要介護5") AS "要介護5人数",
+        SUM(A."自立")+SUM(A."経過介護")+SUM(A."要支援1")+SUM(A."要支援2")+SUM(A."要介護1")+SUM(A."要介護2")+SUM(A."要介護3")+SUM(A."要介護4")+SUM(A."要介護5") AS "合計"
         FROM(
-            SELECT
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '01' THEN COUNT(0) ELSE 0 END AS "自立",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '11' THEN COUNT(0) ELSE 0 END AS "経過介護",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '12' THEN COUNT(0) ELSE 0 END AS "要支援1",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '13' THEN COUNT(0) ELSE 0 END AS "要支援2",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '21' THEN COUNT(0) ELSE 0 END AS "要介護1",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '22' THEN COUNT(0) ELSE 0 END AS "要介護2",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '23' THEN COUNT(0) ELSE 0 END AS "要介護3",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '24' THEN COUNT(0) ELSE 0 END AS "要介護4",
-                CASE V4001."yokaigoJotaiKubunCode" WHEN '25' THEN COUNT(0) ELSE 0 END AS "要介護5"
-            FROM
-                rgdb."DbV4001JukyushaDaicho" AS V4001
-            INNER JOIN
-                rgdb."DbT4101NinteiShinseiJoho" AS T4101
-            ON 
-                V4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
-            AND 
-                (T4101."shoriJotaiKubun" = '1' OR T4101."shoriJotaiKubun" = '3')
-            AND 
-                T4101."logicalDeletedFlag" = FALSE
-            INNER JOIN
-                rgdb."DbV1001HihokenshaDaicho" AS V1001
-            ON 
-                V1001."hihokenshaNo" = V4001."hihokenshaNo"
-            INNER JOIN
-                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS B
-            ON 
-                V4001."shikibetsuCode" = B."shikibetsuCode"
-            WHERE
-                V4001."yokaigoJotaiKubunCode" IN('01','11','12','13','21','22','23','24','25')
+        SELECT
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '01' THEN COUNT(0) ELSE 0 END AS "自立",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '11' THEN COUNT(0) ELSE 0 END AS "経過介護",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '12' THEN COUNT(0) ELSE 0 END AS "要支援1",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '13' THEN COUNT(0) ELSE 0 END AS "要支援2",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '21' THEN COUNT(0) ELSE 0 END AS "要介護1",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '22' THEN COUNT(0) ELSE 0 END AS "要介護2",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '23' THEN COUNT(0) ELSE 0 END AS "要介護3",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '24' THEN COUNT(0) ELSE 0 END AS "要介護4",
+        CASE V4001."yokaigoJotaiKubunCode" WHEN '25' THEN COUNT(0) ELSE 0 END AS "要介護5"
+        FROM
+        rgdb."DbV4001JukyushaDaicho" AS V4001
+        INNER JOIN
+        rgdb."DbT4101NinteiShinseiJoho" AS T4101
+        ON
+        V4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
+        AND
+        (T4101."shoriJotaiKubun" = '1' OR T4101."shoriJotaiKubun" = '3')
+        AND
+        T4101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS V1001
+        ON
+        V1001."hihokenshaNo" = V4001."hihokenshaNo"
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS B
+        ON
+        V4001."shikibetsuCode" = B."shikibetsuCode"
+        WHERE
+        V4001."yokaigoJotaiKubunCode" IN('01','11','12','13','21','22','23','24','25')
     </sql>
     <sql id="selectSql2">
-            GROUP BY
-                    V4001."yokaigoJotaiKubunCode"
-                )AS A
+        GROUP BY
+        V4001."yokaigoJotaiKubunCode"
+        )AS A
     </sql>
-    
+
     <sql id="条件1-1">
         AND T4101."hihokenshaKubunCode" = '1'
     </sql>
@@ -805,16 +805,16 @@
     <sql id="条件4">
         <if test = "has基準日">
             AND ((V4001."yokaigoJotaiKubunCode" = '01' AND V4001."ninteiYMD" <![CDATA[<=]]> #{基準日})
-                OR (V4001."yokaigoJotaiKubunCode" IN('11','12','13','21','22','23','24','25')
-                    AND V4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準日}
-                    AND #{基準日} <![CDATA[<=]]> V4001."ninteiYukoKikanShuryoYMD"))
+            OR (V4001."yokaigoJotaiKubunCode" IN('11','12','13','21','22','23','24','25')
+            AND V4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準日}
+            AND #{基準日} <![CDATA[<=]]> V4001."ninteiYukoKikanShuryoYMD"))
         </if>
         <if test = "has基準年月">
-            AND ((V4001."yokaigoJotaiKubunCode" = '01' AND SUBSTRING(V4001."ninteiYMD",0,6) <![CDATA[<=]]> #{基準年月})
-                OR (V4001."yokaigoJotaiKubunCode" IN('11','12','13','21','22','23','24','25')
-                    AND SUBSTRING(V4001."ninteiYukoKikanKaishiYMD",0,6) <![CDATA[<=]]> #{基準年月}
-                    AND #{基準年月} <![CDATA[<=]]> SUBSTRING(V4001."ninteiYukoKikanShuryoYMD",0,6)
-                    AND SUBSTRING(V4001."ninteiYMD",0,6) <![CDATA[<=]]> #{基準年月}))
+            AND ((V4001."yokaigoJotaiKubunCode" = '01' AND SUBSTRING(V4001."ninteiYMD",1,6) <![CDATA[<=]]> #{基準年月})
+            OR (V4001."yokaigoJotaiKubunCode" IN('11','12','13','21','22','23','24','25')
+            AND SUBSTRING(V4001."ninteiYukoKikanKaishiYMD",1,6) <![CDATA[<=]]> #{基準年月}
+            AND #{基準年月} <![CDATA[<=]]> SUBSTRING(V4001."ninteiYukoKikanShuryoYMD",1,6)
+            AND SUBSTRING(V4001."ninteiYMD",1,6) <![CDATA[<=]]> #{基準年月}))
         </if>
     </sql>
     <sql id="条件5">
@@ -848,11 +848,11 @@
             </if>
         </if>
     </sql>
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 </mapper>

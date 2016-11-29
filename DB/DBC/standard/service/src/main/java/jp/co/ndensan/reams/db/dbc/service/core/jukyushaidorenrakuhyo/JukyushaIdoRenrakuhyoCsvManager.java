@@ -47,6 +47,7 @@ public class JukyushaIdoRenrakuhyoCsvManager {
     private static final RString 受給者異動情報 = new RString("531");
     private static final RString 改行 = new RString("0x0D0A");
     private static final int INDEX_TWO = 2;
+    private static final RString COPY = new RString("copy");
     private CsvWriter csvWriter;
     private RString filePath;
     private int 総出力件数;
@@ -66,9 +67,10 @@ public class JukyushaIdoRenrakuhyoCsvManager {
      *
      * @param entityList List<JukyushaIdoRenrakuhyoCsvEntity>
      * @param 処理対象年月 RYearMonth
+     * @param 文字コード Encode
      * @return JukyushaIdoRenrakuhyoEntity
      */
-    public JukyushaIdoRenrakuhyoEntity csvの出力(List<JukyushaIdoRenrakuhyoCsvEntity> entityList, RYearMonth 処理対象年月) {
+    public JukyushaIdoRenrakuhyoEntity csvの出力(List<JukyushaIdoRenrakuhyoCsvEntity> entityList, RYearMonth 処理対象年月, Encode 文字コード) {
         JukyushaIdoRenrakuhyoEntity resultEntity = new JukyushaIdoRenrakuhyoEntity();
         RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
@@ -79,7 +81,12 @@ public class JukyushaIdoRenrakuhyoCsvManager {
         RString 出力ファイル名 = 出力ファイル名1.concat(出力CSV);
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         filePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        csvWriter = new CsvWriter.InstanceBuilder(filePath)
+        if (Encode.UTF_8.equals(文字コード)) {
+            入力ファイルパス = Path.combinePath(spoolWorkPath, COPY.concat(出力ファイル名));
+        } else {
+            入力ファイルパス = filePath;
+        }
+        csvWriter = new CsvWriter.InstanceBuilder(入力ファイルパス)
                 .setDelimiter(カンマ)
                 .setEnclosure(ダブルクォート)
                 .setEncode(Encode.SJIS)
@@ -92,7 +99,6 @@ public class JukyushaIdoRenrakuhyoCsvManager {
         csvWriter.writeLine(editorEndRecord());
         csvWriter.close();
         総出力件数 = entityList.size() + INDEX_TWO;
-        入力ファイルパス = filePath;
         resultEntity.set出力ファイルパス(filePath);
         resultEntity.set入力ファイルパス(入力ファイルパス);
         resultEntity.set総出力件数(総出力件数);

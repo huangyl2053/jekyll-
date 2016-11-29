@@ -48,6 +48,8 @@ class KarisanteiHenjunkaHenkoTsuchishoB5YokoEditor implements IKarisanteiHenjunk
         source.tsuchishoNo = item.getTsuchishoNo();
         source.setaiCode = item.getSetaiCode();
         source.kongoNofuSubekiGaku = item.getKongoNofuSubekiGaku();
+        source.kongoNofuSubekigakuChotei = item.getKongoNofuSubekigakuChotei();
+        source.nofuSubekiGaku = item.getNofuSubekiGaku();
         source.mitoraikiNofuzumiGaku = item.getMitoraikiNofuzumiGaku();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.shikibetsuCode = item.getShikibetsuCode();

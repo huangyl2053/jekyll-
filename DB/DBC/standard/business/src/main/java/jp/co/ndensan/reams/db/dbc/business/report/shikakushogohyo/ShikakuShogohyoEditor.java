@@ -41,6 +41,7 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
     private static final RString 件 = new RString("件");
     private static final RString 期間 = new RString("～");
     private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final RString 無し = new RString("1");
     private static final int NUM_2 = 2;
     private static final int NUM_100 = 100;
     private final boolean flag;
@@ -86,17 +87,21 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
             if (target.get資格照合表一時().getShinsaYM() != null) {
                 source.shinsaYM = パターン56(target.get資格照合表一時().getShinsaYM());
             }
-            source.hokenshaNo = target.get資格照合表一時().getHokenshaNo().getColumnValue();
+            source.hokenshaNo = target.get資格照合表一時().getHokenshaNo() == null ? RString.EMPTY
+                    : target.get資格照合表一時().getHokenshaNo().getColumnValue();
             source.hokenshaName = target.get資格照合表一時().getHokenshaName();
             source.listUpper_1 = new RString(連番);
 
             if (target.get資格照合表一時().getServiceTeikyoYM() != null) {
                 source.listUpper_4 = パターン54(target.get資格照合表一時().getServiceTeikyoYM());
             }
-            source.listUpper_5 = target.get資格照合表一時().getServiceShuruiCode().getColumnValue();
+            source.listUpper_5 = target.get資格照合表一時().getServiceShuruiCode() == null ? RString.EMPTY
+                    : target.get資格照合表一時().getServiceShuruiCode().getColumnValue();
             source.listUpper_6 = target.get資格照合表一時().getShubetsu();
             source.listUpper_7 = target.get資格照合表一時().getJigyoshoNo().getColumnValue();
-            if (target.get資格照合表一時().getServiceTeikyoYM() != null && target.get資格照合表一時().getYokaigoKubunCode() != null) {
+            if (target.get資格照合表一時().getServiceTeikyoYM() != null
+                    && target.get資格照合表一時().getYokaigoKubunCode() != null
+                    && !target.get資格照合表一時().getYokaigoKubunCode().isEmpty()) {
                 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(target.get資格照合表一時().getServiceTeikyoYM(),
                         target.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
                 source.listUpper_8 = 要介護状態区分.getName();
@@ -111,22 +116,13 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
             if (target.get資格照合表一時().getShikyuGendoGaku() != null) {
                 source.listUpper_12 = decimal_to_string(target.get資格照合表一時().getShikyuGendoGaku());
             }
-            source.listUpper_13 = target.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue();
+            source.listUpper_13 = target.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode() == null ? RString.EMPTY
+                    : target.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue();
 
             source.listLower_2 = target.get資格照合表一時().getServiceShuruiMei();
             source.listLower_3 = target.get資格照合表一時().getJigyoshoMei();
+            editパターン4(source);
 
-            if (target.get資格照合表一時().getKyusochiTokureiCode() != null) {
-                source.listLower_4 = KyuSochiNyushoshaTokureiCode.toValue(target.get資格照合表一時().getKyusochiTokureiCode()).get名称();
-            }
-            if (target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD() != null) {
-                source.listLower_5 = パターン4(target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD());
-            }
-
-            if (target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD() != null) {
-                source.listLower_7 = パターン4(target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD());
-            }
-            source.listLower_8 = target.get資格照合表一時().getShienJigyoshoNo().getColumnValue();
         }
         editor集計(source);
         if (target.get被保険者一時() != null) {
@@ -143,6 +139,26 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
 
         return source;
 
+    }
+
+    private void editパターン4(ShikakuShogohyoSource source) {
+        if (!RString.isNullOrEmpty(target.get資格照合表一時().getKyusochiTokureiCode())) {
+
+            if (無し.equals(target.get資格照合表一時().getKyusochiTokureiCode())) {
+                source.listLower_4 = KyuSochiNyushoshaTokureiCode.無し.get名称();
+            } else {
+                source.listLower_4 = KyuSochiNyushoshaTokureiCode.有り.get名称();
+            }
+        }
+        if (target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD() != null) {
+            source.listLower_5 = パターン4(target.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD());
+        }
+
+        if (target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD() != null) {
+            source.listLower_7 = パターン4(target.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD());
+        }
+        source.listLower_8 = target.get資格照合表一時().getShienJigyoshoNo() == null ? RString.EMPTY
+                : target.get資格照合表一時().getShienJigyoshoNo().getColumnValue();
     }
 
     private ShikakuShogohyoSource editor集計(ShikakuShogohyoSource source) {

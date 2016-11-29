@@ -7,19 +7,16 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TsuchishoSakuseiKobetsu のクラスファイル
- *
- * @reamsid_L DBB-0740-010 wangkanglei
+ * TsuchishoSakuseiKobetsu のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class TsuchishoSakuseiKobetsuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -222,7 +219,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishKetteiTsuchiKobetsu(CheckBoxList chkPublishKetteiTsuchiKobetsu) {
+    public void  setChkPublishKetteiTsuchiKobetsu(CheckBoxList chkPublishKetteiTsuchiKobetsu) {
         this.getWrapKetteiTsuchiKobetsu().setChkPublishKetteiTsuchiKobetsu(chkPublishKetteiTsuchiKobetsu);
     }
 
@@ -232,7 +229,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblKetteiTsuchiKobetsu(Label lblKetteiTsuchiKobetsu) {
+    public void  setLblKetteiTsuchiKobetsu(Label lblKetteiTsuchiKobetsu) {
         this.getWrapKetteiTsuchiKobetsu().setLblKetteiTsuchiKobetsu(lblKetteiTsuchiKobetsu);
     }
 
@@ -242,7 +239,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setKetteiTsuchiKobetsu(KetteiTsuchiKobetsuDiv KetteiTsuchiKobetsu) {
+    public void  setKetteiTsuchiKobetsu(KetteiTsuchiKobetsuDiv KetteiTsuchiKobetsu) {
         this.getWrapKetteiTsuchiKobetsu().setKetteiTsuchiKobetsu(KetteiTsuchiKobetsu);
     }
 
@@ -252,7 +249,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishHenkoTsuchiKobetsu(CheckBoxList chkPublishHenkoTsuchiKobetsu) {
+    public void  setChkPublishHenkoTsuchiKobetsu(CheckBoxList chkPublishHenkoTsuchiKobetsu) {
         this.getWrapHenkoTsuchiKobetsu().setChkPublishHenkoTsuchiKobetsu(chkPublishHenkoTsuchiKobetsu);
     }
 
@@ -262,7 +259,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblHenkoTsuchiKobetsu(Label lblHenkoTsuchiKobetsu) {
+    public void  setLblHenkoTsuchiKobetsu(Label lblHenkoTsuchiKobetsu) {
         this.getWrapHenkoTsuchiKobetsu().setLblHenkoTsuchiKobetsu(lblHenkoTsuchiKobetsu);
     }
 
@@ -272,7 +269,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setHenkoTsuchiKobetsu(HenkoTsuchiKobetsuDiv HenkoTsuchiKobetsu) {
+    public void  setHenkoTsuchiKobetsu(HenkoTsuchiKobetsuDiv HenkoTsuchiKobetsu) {
         this.getWrapHenkoTsuchiKobetsu().setHenkoTsuchiKobetsu(HenkoTsuchiKobetsu);
     }
 
@@ -282,7 +279,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishNotsuKobetsu(CheckBoxList chkPublishNotsuKobetsu) {
+    public void  setChkPublishNotsuKobetsu(CheckBoxList chkPublishNotsuKobetsu) {
         this.getWrapNotsuKobetsu().setChkPublishNotsuKobetsu(chkPublishNotsuKobetsu);
     }
 
@@ -292,7 +289,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblNotsuKobetsu(Label lblNotsuKobetsu) {
+    public void  setLblNotsuKobetsu(Label lblNotsuKobetsu) {
         this.getWrapNotsuKobetsu().setLblNotsuKobetsu(lblNotsuKobetsu);
     }
 
@@ -302,7 +299,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setNotsuKobetsu(NotsuKobetsuDiv NotsuKobetsu) {
+    public void  setNotsuKobetsu(NotsuKobetsuDiv NotsuKobetsu) {
         this.getWrapNotsuKobetsu().setNotsuKobetsu(NotsuKobetsu);
     }
 
@@ -312,7 +309,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishYufuriKobetsu(CheckBoxList chkPublishYufuriKobetsu) {
+    public void  setChkPublishYufuriKobetsu(CheckBoxList chkPublishYufuriKobetsu) {
         this.getWrapYufuriKobetsu().setChkPublishYufuriKobetsu(chkPublishYufuriKobetsu);
     }
 
@@ -322,7 +319,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblYufuriKobetsu(Label lblYufuriKobetsu) {
+    public void  setLblYufuriKobetsu(Label lblYufuriKobetsu) {
         this.getWrapYufuriKobetsu().setLblYufuriKobetsu(lblYufuriKobetsu);
     }
 
@@ -332,7 +329,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setYufuriKobetsu(YufuriKobetsuDiv YufuriKobetsu) {
+    public void  setYufuriKobetsu(YufuriKobetsuDiv YufuriKobetsu) {
         this.getWrapYufuriKobetsu().setYufuriKobetsu(YufuriKobetsu);
     }
 
@@ -342,7 +339,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishTokuKaishiTsuchiKobetsu(CheckBoxList chkPublishTokuKaishiTsuchiKobetsu) {
+    public void  setChkPublishTokuKaishiTsuchiKobetsu(CheckBoxList chkPublishTokuKaishiTsuchiKobetsu) {
         this.getWrapTokuKaishiTsuchiKobetsu().setChkPublishTokuKaishiTsuchiKobetsu(chkPublishTokuKaishiTsuchiKobetsu);
     }
 
@@ -352,7 +349,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblTokuKaishiTsuchiKobetsu(Label lblTokuKaishiTsuchiKobetsu) {
+    public void  setLblTokuKaishiTsuchiKobetsu(Label lblTokuKaishiTsuchiKobetsu) {
         this.getWrapTokuKaishiTsuchiKobetsu().setLblTokuKaishiTsuchiKobetsu(lblTokuKaishiTsuchiKobetsu);
     }
 
@@ -362,7 +359,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTokuKaishiTsuchiKobetsu(TokuKaishiTsuchiKobetsuDiv TokuKaishiTsuchiKobetsu) {
+    public void  setTokuKaishiTsuchiKobetsu(TokuKaishiTsuchiKobetsuDiv TokuKaishiTsuchiKobetsu) {
         this.getWrapTokuKaishiTsuchiKobetsu().setTokuKaishiTsuchiKobetsu(TokuKaishiTsuchiKobetsu);
     }
 
@@ -372,7 +369,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishGemmenTsuchiKobetsu(CheckBoxList chkPublishGemmenTsuchiKobetsu) {
+    public void  setChkPublishGemmenTsuchiKobetsu(CheckBoxList chkPublishGemmenTsuchiKobetsu) {
         this.getWrapGemmenTsuchiKobetsu().setChkPublishGemmenTsuchiKobetsu(chkPublishGemmenTsuchiKobetsu);
     }
 
@@ -382,7 +379,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblGemmenTsuchiKobetsu(Label lblGemmenTsuchiKobetsu) {
+    public void  setLblGemmenTsuchiKobetsu(Label lblGemmenTsuchiKobetsu) {
         this.getWrapGemmenTsuchiKobetsu().setLblGemmenTsuchiKobetsu(lblGemmenTsuchiKobetsu);
     }
 
@@ -392,7 +389,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setGemmenTsuchiKobetsu(GemmenTsuchiKobetsuDiv GemmenTsuchiKobetsu) {
+    public void  setGemmenTsuchiKobetsu(GemmenTsuchiKobetsuDiv GemmenTsuchiKobetsu) {
         this.getWrapGemmenTsuchiKobetsu().setGemmenTsuchiKobetsu(GemmenTsuchiKobetsu);
     }
 
@@ -402,7 +399,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishChoshuYuyoTsuchiKobetsu(CheckBoxList chkPublishChoshuYuyoTsuchiKobetsu) {
+    public void  setChkPublishChoshuYuyoTsuchiKobetsu(CheckBoxList chkPublishChoshuYuyoTsuchiKobetsu) {
         this.getWrapChoshuYuyoTsuchiKobetsu().setChkPublishChoshuYuyoTsuchiKobetsu(chkPublishChoshuYuyoTsuchiKobetsu);
     }
 
@@ -412,7 +409,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblChoshuYuyoTsuchiKobetsu(Label lblChoshuYuyoTsuchiKobetsu) {
+    public void  setLblChoshuYuyoTsuchiKobetsu(Label lblChoshuYuyoTsuchiKobetsu) {
         this.getWrapChoshuYuyoTsuchiKobetsu().setLblChoshuYuyoTsuchiKobetsu(lblChoshuYuyoTsuchiKobetsu);
     }
 
@@ -422,7 +419,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChoshuYuyoTsuchiKobetsu(ChoshuYuyoTsuchiKobetsuDiv ChoshuYuyoTsuchiKobetsu) {
+    public void  setChoshuYuyoTsuchiKobetsu(ChoshuYuyoTsuchiKobetsuDiv ChoshuYuyoTsuchiKobetsu) {
         this.getWrapChoshuYuyoTsuchiKobetsu().setChoshuYuyoTsuchiKobetsu(ChoshuYuyoTsuchiKobetsu);
     }
 
@@ -432,7 +429,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkPublishFukadaichoKobetsu(CheckBoxList chkPublishFukadaichoKobetsu) {
+    public void  setChkPublishFukadaichoKobetsu(CheckBoxList chkPublishFukadaichoKobetsu) {
         this.getWrapFukadaichoKobetsu().setChkPublishFukadaichoKobetsu(chkPublishFukadaichoKobetsu);
     }
 
@@ -442,7 +439,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblFukadaichoKobetsu(Label lblFukadaichoKobetsu) {
+    public void  setLblFukadaichoKobetsu(Label lblFukadaichoKobetsu) {
         this.getWrapFukadaichoKobetsu().setLblFukadaichoKobetsu(lblFukadaichoKobetsu);
     }
 
@@ -452,7 +449,7 @@ public class TsuchishoSakuseiKobetsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setFukadaichoKobetsu(FukadaichoKobetsuDiv FukadaichoKobetsu) {
+    public void  setFukadaichoKobetsu(FukadaichoKobetsuDiv FukadaichoKobetsu) {
         this.getWrapFukadaichoKobetsu().setFukadaichoKobetsu(FukadaichoKobetsu);
     }
 

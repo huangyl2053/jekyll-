@@ -26,6 +26,9 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
 
     private final ShikyugakuKeisanKekkaTorokuDiv div;
 
+    private static final RString 連絡票整理番号 = new RString("連絡票整理番号");
+    private static final RString 桁数_17 = new RString("17");
+
     /**
      * コンストラクタです。
      *
@@ -101,8 +104,6 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
 
     private ValidationDictionary create内訳を確定するDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号桁数が不正, div.getTxtJikoFutanSeiriNom())
-                .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号が不正, div.getTxtJikoFutanSeiriNom())
                 .add(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号既に存在, div.getTxtJikoFutanSeiriNom())
                 .build();
     }
@@ -148,10 +149,6 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
         if (div.getTxtHiHokenshaShoNo().isRequired() && RString.isNullOrEmpty(div.getTxtHiHokenshaShoNo().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "被保険者(証)番号"), div.getTxtHiHokenshaShoNo()));
-        }
-        if (div.getTxtKokuhoHihokenshaShoKigo().isRequired() && RString.isNullOrEmpty(div.getTxtKokuhoHihokenshaShoKigo().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "被保険者記号"), div.getTxtKokuhoHihokenshaShoKigo()));
         }
 
         return validationMessages;
@@ -203,10 +200,6 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "郵便番号"), div.getTxtToiawasesakiYobinNo()));
         }
-        if (div.getTxtToiawasesakiMeisho2().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiMeisho2().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
-                    UrErrorMessages.必須, "名称２"), div.getTxtToiawasesakiMeisho2()));
-        }
         if (div.getTxtToiawasesakiTelNo().isRequired() && RString.isNullOrEmpty(div.getTxtToiawasesakiTelNo().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "電話番号"), div.getTxtToiawasesakiTelNo()));
@@ -215,6 +208,18 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new ShikyugakuKeisanKekkaTorokuValidationHandler.RRVMessages(
                     UrErrorMessages.必須, "住所"), div.getTxtToiawasesakiJusho()));
         }
+    }
+
+    /**
+     * 桁数が不正。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 桁数が不正() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new RRVMessages(UrErrorMessages.桁数が不正, 連絡票整理番号.toString(), 桁数_17.toString()),
+                div.getTxtShikyuShinseishoSeiriNoInput()));
+        return validPairs;
     }
 
     private static final class RRVMessages implements IValidationMessage {

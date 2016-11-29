@@ -3,6 +3,14 @@
 <!-- @reamsid_L DBB-1840-040 xuzhao -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosoufujohosakuseibatch.ITokuChoSoufuJohoSakuseiBatchMapper">
 
+<delete id="年金特徴回付情報削除" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.DeleteTokuchoKaifuJohoMyBatisParameter">
+    DELETE FROM
+    rgdb."UeT0511NenkinTokuchoKaifuJoho" AS T
+    WHERE
+    T."gyomuCode" = 'DB' AND
+    T."shoriTaishoYM" = #{処理対象年月}
+</delete>
+    
 <sql id="特徴依頼のデータ抽出">
     SELECT
     <include refid="allColumns_UeT0511NenkinTokuchoKaifuJoho" />
@@ -47,6 +55,8 @@
     LEFT JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
         ON 調定共通_介護継承."choteiId" = 介護期別."choteiId"
     ORDER BY
+        特徴依頼Temp."基礎年金番号",
+        特徴依頼Temp."年金コード",
         賦課Newest."choteiNendo",
         賦課Newest."fukaNendo",
         賦課Newest."tsuchishoNo"
@@ -113,7 +123,7 @@
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
         ON "Nokumi"."CaT0714shikibetsuCode" = 特徴依頼追加Temp."shikibetsuCode"
         LEFT JOIN
-            rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
+            rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
         ON substring(構成市町村マスタ."shichosonCode",1,5)  = 特徴依頼追加Temp."koseiCityCode"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
@@ -156,7 +166,7 @@
     FROM
         master
     LEFT JOIN
-            rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
+            rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
         ON substring(構成市町村マスタ."shichosonCode",1,5) = master."構成市町村コード"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
@@ -764,7 +774,7 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         master.*,
         構成市町村マスタ."shichosonMeisho" AS 市町村名称
     FROM master
-    LEFT JOIN rgdb."DbT5051KoseiShichosonMaster" AS 構成市町村マスタ
+    LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
         ON substring(構成市町村マスタ."shichosonCode",1,5) = master."構成市町村コード"
         AND 構成市町村マスタ."gappeiKyuShichosonKubun" = '0'
         AND 構成市町村マスタ."gappeiKyuShichosonHyojiUmu" = '0'
@@ -783,6 +793,20 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         AND "nendo" = #{賦課年度}
         AND "nendoNaiRenban" = #{年度内連番}
 </update>
+
+<select id="get基準日時"
+    parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosoufujohosakuseibatch.UpdateTableMyBatisParameter"
+    resultType="jp.co.ndensan.reams.uz.uza.biz.YMDHMS" fetchSize="1">
+    SELECT
+        処理日付管理マスタ."kijunTimestamp" 
+    FROM
+        rgdb."DbT7022ShoriDateKanri" AS 処理日付管理マスタ
+    WHERE
+        "subGyomuCode" = 'DBB'
+        AND "shoriName" = #{処理名}
+        AND "nendo" = #{賦課年度}
+        AND "nendoNaiRenban" = #{年度内連番}
+</select>
 
 <sql id="処理対象期間取得">
     WITH master AS (

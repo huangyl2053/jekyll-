@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class ServiceJigyoshaInputGuide implements Serializable {
+
     private static final long serialVersionUID = -6323018880264468128L;
 
     private final ServiceJigyoshaInputGuideRelateEntity entity;
@@ -149,5 +150,14 @@ public class ServiceJigyoshaInputGuide implements Serializable {
      */
     public TelNo get電話番号() {
         return entity.getTelNo();
+    }
+
+    /**
+     * サービス種類コードを取得します。
+     *
+     * @return サービス種類コード
+     */
+    public RString getサービス種類コード() {
+        return entity.getServiceShuruiCode();
     }
 }

@@ -75,7 +75,7 @@ public class ShokujiHiyoPanelHandler {
     public dgdShokuji_Row selectRow() {
         return div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getDataSource().get(Integer.parseInt(
-                                div.getRowId().toString()));
+                        div.getRowId().toString()));
     }
 
     /**
@@ -206,7 +206,7 @@ public class ShokujiHiyoPanelHandler {
         }
         if (div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue() != null
                 && !row.getDefaultDataName4().equals(new RString(
-                                div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue().toString()))) {
+                        div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue().toString()))) {
             return true;
         } else if (div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().getValue() == null
                 && row.getDefaultDataName4() != null) {
@@ -669,92 +669,90 @@ public class ShokujiHiyoPanelHandler {
         JigyoshaNo 事業者番号 = paramter.get事業者番号();
         RString 様式番号 = paramter.get様式番号();
         RString 明細番号 = paramter.get明細番号();
+        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
+            if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
+                ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
+                shokanShokujiHiyo = build食事費用登録1(shokanShokujiHiyo);
+                shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
+            } else {
+                shokanShokujiHiyoList = new ArrayList<>();
+                ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用登録1(paramter);
+                shokanShokujiHiyoList.add(shokanShokujiHiyo);
+            }
 
-        if (削除.equals(処理モード)) {
-            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
-                    被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        } else {
-            if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
-                if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
-                    ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
-                    shokanShokujiHiyo = build食事費用登録1(shokanShokujiHiyo);
-                    shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
+        } else if (!サービス提供年月.isEmpty() && 平成１５年３月.isBefore(サービス提供年月)
+                && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
+            int max連番 = 0;
+            Map<RString, ShokanMeisai> map = new HashMap<>();
+            for (ShokanMeisai shokanMeisai : shokanMeisaiList) {
+                map.put(shokanMeisai.get連番(), shokanMeisai);
+                if (max連番 < Integer.valueOf(shokanMeisai.get連番().toString())) {
+                    max連番 = Integer.valueOf(shokanMeisai.get連番().toString());
+                }
+            }
+
+            for (dgdShokuji_Row dgd : div.getPanelShokuji().getPanelShoikujiList().
+                    getDgdShokuji().getDataSource()) {
+                if (RowState.Modified.equals(dgd.getRowState())) {
+                    ShokanMeisai entityModified = map.get(dgd.getDefaultDataName6());
+                    meisaiListForUpd.add(editEntityModified(entityModified, dgd));
+                } else if (RowState.Deleted.equals(dgd.getRowState())) {
+                    ShokanMeisai entityDeleted = map.get(dgd.getDefaultDataName6());
+                    entityDeleted = entityDeleted.deleted();
+                    meisaiListForUpd.add(entityDeleted);
+                } else if (RowState.Added.equals(dgd.getRowState())) {
+                    max連番 = max連番 + 1;
+                    ShokanMeisai entityAdded = new ShokanMeisai(
+                            被保険者番号,
+                            サービス提供年月,
+                            整理番号,
+                            事業者番号,
+                            様式番号,
+                            明細番号,
+                            new RString(String.format(フォーマット.toString(), max連番))).createBuilderForEdit().build();
+                    entityAdded = buildShokanMeisai(entityAdded, dgd);
+                    meisaiListForUpd.add(entityAdded);
                 } else {
-                    shokanShokujiHiyoList = new ArrayList<>();
-                    ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用登録1(paramter);
-                    shokanShokujiHiyoList.add(shokanShokujiHiyo);
+                    ShokanMeisai entityUnchanged = map.get(dgd.getDefaultDataName6());
+                    meisaiListForUpd.add(entityUnchanged);
                 }
+            }
+            if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
+                ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
+                shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
+                shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
+            } else {
+                shokanShokujiHiyoList = new ArrayList<>();
+                ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
+                shokanShokujiHiyoList.add(shokanShokujiHiyo);
+            }
 
-            } else if (!サービス提供年月.isEmpty() && 平成１５年３月.isBefore(サービス提供年月)
-                    && サービス提供年月.isBeforeOrEquals(平成17年９月)) {
-                int max連番 = 0;
-                Map<RString, ShokanMeisai> map = new HashMap<>();
-                for (ShokanMeisai shokanMeisai : shokanMeisaiList) {
-                    map.put(shokanMeisai.get連番(), shokanMeisai);
-                    if (max連番 < Integer.valueOf(shokanMeisai.get連番().toString())) {
-                        max連番 = Integer.valueOf(shokanMeisai.get連番().toString());
-                    }
-                }
-
-                for (dgdShokuji_Row dgd : div.getPanelShokuji().getPanelShoikujiList().
-                        getDgdShokuji().getDataSource()) {
-                    if (RowState.Modified.equals(dgd.getRowState())) {
-                        ShokanMeisai entityModified = map.get(dgd.getDefaultDataName6());
-                        if (checkIsRealModified(entityModified, dgd)) {
-                            entityModified = entityModified.createBuilderForEdit().build();
-                            entityModified = clearShokanMeisai(entityModified);
-                            entityModified = buildShokanMeisai(entityModified, dgd);
-                            entityModified.modified();
-                        }
-                        meisaiListForUpd.add(entityModified);
-                    } else if (RowState.Deleted.equals(dgd.getRowState())) {
-                        ShokanMeisai entityDeleted = map.get(dgd.getDefaultDataName6());
-                        entityDeleted = entityDeleted.deleted();
-                        meisaiListForUpd.add(entityDeleted);
-                    } else if (RowState.Added.equals(dgd.getRowState())) {
-                        max連番 = max連番 + 1;
-                        ShokanMeisai entityAdded = new ShokanMeisai(
-                                被保険者番号,
-                                サービス提供年月,
-                                整理番号,
-                                事業者番号,
-                                様式番号,
-                                明細番号,
-                                new RString(String.format(フォーマット.toString(), max連番))).createBuilderForEdit().build();
-                        entityAdded = buildShokanMeisai(entityAdded, dgd);
-                        meisaiListForUpd.add(entityAdded);
-                    } else {
-                        ShokanMeisai entityUnchanged = map.get(dgd.getDefaultDataName6());
-                        meisaiListForUpd.add(entityUnchanged);
-                    }
-                }
-                if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
-                    ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
-                    shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
-                    shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
-                } else {
-                    shokanShokujiHiyoList = new ArrayList<>();
-                    ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
-                    shokanShokujiHiyoList.add(shokanShokujiHiyo);
-                }
-
-            } else if (!サービス提供年月.isEmpty() && 平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
-                if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
-                    ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
-                    shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
-                    shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
-                } else {
-                    shokanShokujiHiyoList = new ArrayList<>();
-                    ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
-                    shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
-                    shokanShokujiHiyoList.add(shokanShokujiHiyo);
-                }
+        } else if (!サービス提供年月.isEmpty() && 平成17年１０月.isBeforeOrEquals(サービス提供年月)) {
+            if (shokanShokujiHiyoList != null && !shokanShokujiHiyoList.isEmpty()) {
+                ShokanShokujiHiyo shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
+                shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
+                shokanShokujiHiyoList.set(0, shokanShokujiHiyo);
+            } else {
+                shokanShokujiHiyoList = new ArrayList<>();
+                ShokanShokujiHiyo shokanShokujiHiyo = build_new_食事費用合計設定(paramter);
+                shokanShokujiHiyo = build食事費用合計設定(shokanShokujiHiyo);
+                shokanShokujiHiyoList.add(shokanShokujiHiyo);
             }
         }
         ShokujiHiyoUpdateData 更新用データ = new ShokujiHiyoUpdateData();
         更新用データ.set償還払請求明細データ(toShokanMeisaiResultList(meisaiListForUpd));
         更新用データ.set償還払請求食事費用データ(shokanShokujiHiyoList);
         return 更新用データ;
+    }
+
+    private ShokanMeisai editEntityModified(ShokanMeisai entityModified, dgdShokuji_Row dgd) {
+        if (checkIsRealModified(entityModified, dgd)) {
+            entityModified = entityModified.createBuilderForEdit().build();
+            entityModified = clearShokanMeisai(entityModified);
+            entityModified = buildShokanMeisai(entityModified, dgd);
+            return entityModified.modified();
+        }
+        return entityModified;
     }
 
     /**
@@ -863,38 +861,38 @@ public class ShokujiHiyoPanelHandler {
                 様式番号,
                 明細番号,
                 連番).createBuilderForEdit().set基本提供日数(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtKihonNissu().getValue().toString()))
+                div.getPanelShokuji().getPanelDetail1()
+                .getTxtKihonNissu().getValue().toString()))
                 .set基本提供単価(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtKihonTanka().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtKihonTanka().getValue().toString()))
                 .set基本提供金額(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtKihonKingaku().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtKihonKingaku().getValue().toString()))
                 .set特別提供日数(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtTokubetuSyokuNissu().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtTokubetuSyokuNissu().getValue().toString()))
                 .set特別提供単価(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtTokubetuSyokuTanka().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtTokubetuSyokuTanka().getValue().toString()))
                 .set特別提供金額(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtTokubetuSyokuKinngaku().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtTokubetuSyokuKinngaku().getValue().toString()))
                 .set食事提供延べ日数(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtShokujiTeikyoTotalNissu().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtShokujiTeikyoTotalNissu().getValue().toString()))
                 .set食事提供費合計(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtShokujiTeikyohiTotal().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtShokujiTeikyohiTotal().getValue().toString()))
                 .set標準負担額_日額(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtnichigakuHyojunFutangaku().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtnichigakuHyojunFutangaku().getValue().toString()))
                 .set標準負担額_月額(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtgetsugakuHyojunFutangaku().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtgetsugakuHyojunFutangaku().getValue().toString()))
                 .set食事提供費請求額(Integer.parseInt(
-                                div.getPanelShokuji().getPanelDetail1()
-                                .getTxtshokujiTeikyohiSeikyugaku().getValue().toString()))
+                        div.getPanelShokuji().getPanelDetail1()
+                        .getTxtshokujiTeikyohiSeikyugaku().getValue().toString()))
                 .build();
         return shokanShokujiHiyo;
     }
@@ -990,8 +988,8 @@ public class ShokujiHiyoPanelHandler {
                 様式番号,
                 明細番号,
                 連番).createBuilderForEdit().set食事提供延べ日数(div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyouHisu().getValue() != null
-                        ? div.getPanelShokuji().getPanelDetailGokei()
-                        .getTxtTeikyouHisu().getValue().intValue() : 0)
+                ? div.getPanelShokuji().getPanelDetailGokei()
+                .getTxtTeikyouHisu().getValue().intValue() : 0)
                 .set標準負担額_日額(div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku().getValue() != null
                         ? div.getPanelShokuji().getPanelDetailGokei()
                         .getTxtHigaku().getValue().intValue() : 0)

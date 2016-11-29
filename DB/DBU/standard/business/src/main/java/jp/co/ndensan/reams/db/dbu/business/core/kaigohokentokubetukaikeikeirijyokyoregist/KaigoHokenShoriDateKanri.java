@@ -200,7 +200,6 @@ public class KaigoHokenShoriDateKanri implements Serializable {
 
     private static final class _SerializationProxy implements Serializable {
 
-        // TODO serialVersionUIDを生成してください
         private static final long serialVersionUID = 1;
         private final KaigoHokenShoriDateKanriEntity entity;
 

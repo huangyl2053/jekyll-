@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -60,8 +60,6 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     public KariNonyuTsuchishoHakkoIchiranSource edit(KariNonyuTsuchishoHakkoIchiranSource source) {
         source.hokenshaNo = association.get地方公共団体コード().value();
         source.hokenshaName = association.get市町村名();
-        source.hokenshaNo = association.get地方公共団体コード().value();
-        source.hokenshaName = association.get市町村名();
         出力帳票entities(source);
         final EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = entity.get編集後仮算定通知書共通情報();
         if (!isNull(編集後仮算定通知書共通情報)) {
@@ -98,30 +96,6 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
                         : 編集後仮算定通知書共通情報.get前年度情報().get前年度保険料段階();
                 set編集後口座(編集後仮算定通知書共通情報, source);
             }
-        } else {
-            source.hdrTytle1 = RString.EMPTY;
-            source.hdrTytle2 = RString.EMPTY;
-            source.hdrTytle3 = RString.EMPTY;
-            source.listUpper_1 = new RString(連番.toString());
-            source.listUpper_2 = RString.EMPTY;
-            source.listUpper_3 = RString.EMPTY;
-            source.listUpper_4 = RString.EMPTY;
-            source.listUpper_5 = RString.EMPTY;
-            source.listUpper_6 = RString.EMPTY;
-            source.listUpper_7 = RString.EMPTY;
-            source.listUpper_8 = RString.EMPTY;
-            source.listUpper_9 = RString.EMPTY;
-            source.listUpper_10 = RString.EMPTY;
-            source.listUpper_11 = RString.EMPTY;
-            source.listUpper_12 = RString.EMPTY;
-            source.listUpper_13 = RString.EMPTY;
-            source.listLower_1 = RString.EMPTY;
-            source.listLower_2 = RString.EMPTY;
-            source.listLower_3 = RString.EMPTY;
-            source.listLower_4 = RString.EMPTY;
-            source.listLower_5 = RString.EMPTY;
-            source.listLower_6 = RString.EMPTY;
-            source.listLower_7 = RString.EMPTY;
         }
         return source;
     }
@@ -194,7 +168,7 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
     private void 当期編集(List<UniversalPhase> 普徴期別金額リスト, KariNonyuTsuchishoHakkoIchiranSource source) {
         for (UniversalPhase 普徴期別金額 : 普徴期別金額リスト) {
             if (出力期 == 普徴期別金額.get期()) {
-                source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(普徴期別金額.get金額(), 0);
+                source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(nullToDemical(普徴期別金額.get金額()), 0);
                 break;
             }
         }
@@ -261,5 +235,12 @@ class KariNonyuTsuchishoHakkoIchiranBodyEditor implements IKariNonyuTsuchishoHak
 
     private boolean isNull(Object object) {
         return object == null;
+    }
+
+    private Decimal nullToDemical(Decimal 項目) {
+        if (項目 == null) {
+            return Decimal.ZERO;
+        }
+        return 項目;
     }
 }

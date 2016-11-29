@@ -88,121 +88,121 @@
             resultMap="resultMap_JissekiDataIchijiSakuseiJohoEntity"
             fetchSize="500">
         WITH master AS(
-                SELECT
-                    被保険者台帳."hihokenshaNo"AS 被保険者台帳管理_被保険者番号,
-                    被保険者台帳."idoYMD"AS 被保険者台帳管理_異動日,
-                    被保険者台帳."edaNo"AS 被保険者台帳管理_枝番,
-                    被保険者台帳."idoJiyuCode"AS 被保険者台帳管理_異動事由コード,
-                    被保険者台帳."shichosonCode"AS 被保険者台帳管理_市町村コード,
-                    被保険者台帳."shikibetsuCode"AS 被保険者台帳管理_識別コード,
-                    被保険者台帳."shikakuShutokuJiyuCode"AS 被保険者台帳管理_資格取得事由コード,
-                    被保険者台帳."shikakuShutokuYMD"AS 被保険者台帳管理_資格取得年月日,
-                    被保険者台帳."shikakuShutokuTodokedeYMD"AS 被保険者台帳管理_資格取得届出年月日,
-                    被保険者台帳."ichigoShikakuShutokuYMD"AS 被保険者台帳管理_第1号資格取得年月日,
-                    被保険者台帳."hihokennshaKubunCode"AS 被保険者台帳管理_被保険者区分コード,
-                    被保険者台帳."shikakuSoshitsuJiyuCode"AS 被保険者台帳管理_資格喪失事由コード,
-                    被保険者台帳."shikakuSoshitsuYMD"AS 被保険者台帳管理_資格喪失年月日,
-                    被保険者台帳."shikakuSoshitsuTodokedeYMD"AS 被保険者台帳管理_資格喪失届出年月日,
-                    被保険者台帳."shikakuHenkoJiyuCode"AS 被保険者台帳管理_資格変更事由コード,
-                    被保険者台帳."shikakuHenkoYMD"AS 被保険者台帳管理_資格変更年月日,
-                    被保険者台帳."shikakuHenkoTodokedeYMD"AS 被保険者台帳管理_資格変更届出年月日,
-                    被保険者台帳."jushochitokureiTekiyoJiyuCode"AS 被保険者台帳管理_住所地特例適用事由コード,
-                    被保険者台帳."jushochitokureiTekiyoYMD"AS 被保険者台帳管理_適用年月日,
-                    被保険者台帳."jushochitokureiTekiyoTodokedeYMD"AS 被保険者台帳管理_適用届出年月日,
-                    被保険者台帳."jushochitokureiKaijoJiyuCode"AS 被保険者台帳管理_住所地特例解除事由コード,
-                    被保険者台帳."jushochitokureiKaijoYMD"AS 被保険者台帳管理_解除年月日,
-                    被保険者台帳."jushochitokureiKaijoTodokedeYMD"AS 被保険者台帳管理_解除届出年月日,
-                    被保険者台帳."jushochiTokureiFlag"AS 被保険者台帳管理_住所地特例フラグ,
-                    被保険者台帳."koikinaiJushochiTokureiFlag"AS 被保険者台帳管理_広域内住所地特例フラグ,
-                    被保険者台帳."koikinaiTokureiSochimotoShichosonCode"AS 被保険者台帳管理_広住特措置元市町村コード,
-                    被保険者台帳."kyuShichosonCode"AS 被保険者台帳管理_旧市町村コード,
-                    被保険者台帳."logicalDeletedFlag"AS 被保険者台帳管理_論理削除フラグ,
-                    非課税年金情報."insertDantaiCd"AS 団体市町村コード,
-                    非課税年金情報."insertTimestamp"AS 行挿入日時,
-                    非課税年金情報."insertReamsLoginId"AS 行挿入ログインid,
-                    非課税年金情報."insertContextId"AS 接続コンテキスト,
-                    非課税年金情報."isDeleted"AS 論理削除行,
-                    非課税年金情報."updateCount"AS 回数,
-                    非課税年金情報."lastUpdateTimestamp"AS 最終更新日時,
-                    非課税年金情報."lastUpdateReamsLoginId"AS 最終ログインid,
-                    非課税年金情報."nendo"AS 年度,
-                    非課税年金情報."shorikubun"AS 処理区分,
-                    非課税年金情報."taishom"AS 対象月,
-                    非課税年金情報."kisonenkinno"AS 基礎年金番号,
-                    非課税年金情報."genkisonenkinno"AS 現基礎年金番号,
-                    非課税年金情報."nenkincode"AS 年金コード,
-                    非課税年金情報."hihokenshano"AS 被保険者番号,
-                    非課税年金情報."torokukubun"AS 登録区分,
-                    非課税年金情報."dtrecordkubun"AS DTレコード区分,
-                    非課税年金情報."dtcitycode"AS DT市町村コード,
-                    非課税年金情報."dtnenkinhokenshacode"AS DT年金保険者コード,
-                    非課税年金情報."dttsuchinaiyocode"AS DT通知内容コード,
-                    非課税年金情報."dtyobi1"AS DT予備１,
-                    非課税年金情報."dtseidocode"AS DT制度コード,
-                    非課税年金情報."dtsakuseiymd"AS DT作成年月日,
-                    非課税年金情報."dtkisonenkinno"AS DT基礎年金番号,
-                    非課税年金情報."dtnenkincode"AS DT年金コード,
-                    非課税年金情報."dtyobi2"AS DT予備２,
-                    非課税年金情報."dtbirthday"AS DT生年月日,
-                    非課税年金情報."dtseibetsu"AS DT性別,
-                    非課税年金情報."dtkanashimei"AS DTカナ氏名,
-                    非課税年金情報."dtshiftcode1"AS DTシフトコード１,
-                    非課税年金情報."dtkanjishimei"AS DT漢字氏名,
-                    非課税年金情報."dtshiftcode2"AS DTシフトコード２,
-                    非課税年金情報."dtyubinno"AS DT郵便番号,
-                    非課税年金情報."dtkanajusho"AS DTカナ住所,
-                    非課税年金情報."dtshiftcode3"AS DTシフトコード３,
-                    非課税年金情報."dtkanjijusho"AS DT漢字住所,
-                    非課税年金情報."dtshiftcode4"AS DTシフトコード４,
-                    非課税年金情報."dttaishoy"AS DT対象年,
-                    非課税年金情報."dtteiseihyoji"AS DT訂正表示,
-                    非課税年金情報."dtkakushukubun"AS DT各種区分,
-                    非課税年金情報."dtshorikekka"AS DT処理結果,
-                    非課税年金情報."dtyobi3"AS DT予備３,
-                    非課税年金情報."dtyobi4"AS DT予備４,
-                    非課税年金情報."dtkingaku1"AS DT金額１,
-                    非課税年金情報."dtkingakuyobi1"AS DT金額予備１,
-                    非課税年金情報."dtkingakuyobi2"AS DT金額予備２,
-                    非課税年金情報."dtyobi5"AS DT予備５,
-                    非課税年金情報."dtkyosainenkinshoshokigono"AS DT共済年金証書記号番号
-                FROM
-                    rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
-                LEFT JOIN
-                (SELECT
-                    *
-                    FROM (
-                            SELECT
-                            非課税年金対象者.*
-                            ,row_number() OVER (
-                            PARTITION BY(
-                            "dtnenkinhokenshacode",
-                            SUBSTRING("dtnenkincode",0,3),
-                            "dtkisonenkinno")
-                            ORDER BY
-                            "dttaishoy" DESC, "dtsakuseiymd" DESC, "dtnenkincode" DESC
-                            ) AS 履歴番号
-                    FROM
-                        rgdb."DbT4037HikazeNenkinTaishosha" AS 非課税年金対象者
-                    WHERE
-                        "hihokenshano" != ''
-                    ) AS 最大履歴
-                    WHERE
-                        最大履歴.履歴番号 = 1
-                ) AS 非課税年金情報
-                ON 被保険者台帳."hihokenshaNo" = 非課税年金情報."hihokenshano"
-                )
-                SELECT 
-                    master.*,
-                    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-                FROM master
-                LEFT OUTER JOIN
-                      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
-                       (
-                            SELECT ARRAY_AGG(CAST ("被保険者台帳管理_識別コード" AS TEXT))
-                            FROM master
-                       )
-                      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
-                      AS "ShikibetsuTaisho"
-                      ON 被保険者台帳管理_識別コード = "ShikibetsuTaisho"."shikibetsuCode"
+        SELECT
+        被保険者台帳."hihokenshaNo"AS 被保険者台帳管理_被保険者番号,
+        被保険者台帳."idoYMD"AS 被保険者台帳管理_異動日,
+        被保険者台帳."edaNo"AS 被保険者台帳管理_枝番,
+        被保険者台帳."idoJiyuCode"AS 被保険者台帳管理_異動事由コード,
+        被保険者台帳."shichosonCode"AS 被保険者台帳管理_市町村コード,
+        被保険者台帳."shikibetsuCode"AS 被保険者台帳管理_識別コード,
+        被保険者台帳."shikakuShutokuJiyuCode"AS 被保険者台帳管理_資格取得事由コード,
+        被保険者台帳."shikakuShutokuYMD"AS 被保険者台帳管理_資格取得年月日,
+        被保険者台帳."shikakuShutokuTodokedeYMD"AS 被保険者台帳管理_資格取得届出年月日,
+        被保険者台帳."ichigoShikakuShutokuYMD"AS 被保険者台帳管理_第1号資格取得年月日,
+        被保険者台帳."hihokennshaKubunCode"AS 被保険者台帳管理_被保険者区分コード,
+        被保険者台帳."shikakuSoshitsuJiyuCode"AS 被保険者台帳管理_資格喪失事由コード,
+        被保険者台帳."shikakuSoshitsuYMD"AS 被保険者台帳管理_資格喪失年月日,
+        被保険者台帳."shikakuSoshitsuTodokedeYMD"AS 被保険者台帳管理_資格喪失届出年月日,
+        被保険者台帳."shikakuHenkoJiyuCode"AS 被保険者台帳管理_資格変更事由コード,
+        被保険者台帳."shikakuHenkoYMD"AS 被保険者台帳管理_資格変更年月日,
+        被保険者台帳."shikakuHenkoTodokedeYMD"AS 被保険者台帳管理_資格変更届出年月日,
+        被保険者台帳."jushochitokureiTekiyoJiyuCode"AS 被保険者台帳管理_住所地特例適用事由コード,
+        被保険者台帳."jushochitokureiTekiyoYMD"AS 被保険者台帳管理_適用年月日,
+        被保険者台帳."jushochitokureiTekiyoTodokedeYMD"AS 被保険者台帳管理_適用届出年月日,
+        被保険者台帳."jushochitokureiKaijoJiyuCode"AS 被保険者台帳管理_住所地特例解除事由コード,
+        被保険者台帳."jushochitokureiKaijoYMD"AS 被保険者台帳管理_解除年月日,
+        被保険者台帳."jushochitokureiKaijoTodokedeYMD"AS 被保険者台帳管理_解除届出年月日,
+        被保険者台帳."jushochiTokureiFlag"AS 被保険者台帳管理_住所地特例フラグ,
+        被保険者台帳."koikinaiJushochiTokureiFlag"AS 被保険者台帳管理_広域内住所地特例フラグ,
+        被保険者台帳."koikinaiTokureiSochimotoShichosonCode"AS 被保険者台帳管理_広住特措置元市町村コード,
+        被保険者台帳."kyuShichosonCode"AS 被保険者台帳管理_旧市町村コード,
+        被保険者台帳."logicalDeletedFlag"AS 被保険者台帳管理_論理削除フラグ,
+        非課税年金情報."insertDantaiCd"AS 団体市町村コード,
+        非課税年金情報."insertTimestamp"AS 行挿入日時,
+        非課税年金情報."insertReamsLoginId"AS 行挿入ログインid,
+        非課税年金情報."insertContextId"AS 接続コンテキスト,
+        非課税年金情報."isDeleted"AS 論理削除行,
+        非課税年金情報."updateCount"AS 回数,
+        非課税年金情報."lastUpdateTimestamp"AS 最終更新日時,
+        非課税年金情報."lastUpdateReamsLoginId"AS 最終ログインid,
+        非課税年金情報."nendo"AS 年度,
+        非課税年金情報."shorikubun"AS 処理区分,
+        非課税年金情報."taishom"AS 対象月,
+        非課税年金情報."kisonenkinno"AS 基礎年金番号,
+        非課税年金情報."genkisonenkinno"AS 現基礎年金番号,
+        非課税年金情報."nenkincode"AS 年金コード,
+        非課税年金情報."hihokenshano"AS 被保険者番号,
+        非課税年金情報."torokukubun"AS 登録区分,
+        非課税年金情報."dtrecordkubun"AS DTレコード区分,
+        非課税年金情報."dtcitycode"AS DT市町村コード,
+        非課税年金情報."dtnenkinhokenshacode"AS DT年金保険者コード,
+        非課税年金情報."dttsuchinaiyocode"AS DT通知内容コード,
+        非課税年金情報."dtyobi1"AS DT予備１,
+        非課税年金情報."dtseidocode"AS DT制度コード,
+        非課税年金情報."dtsakuseiymd"AS DT作成年月日,
+        非課税年金情報."dtkisonenkinno"AS DT基礎年金番号,
+        非課税年金情報."dtnenkincode"AS DT年金コード,
+        非課税年金情報."dtyobi2"AS DT予備２,
+        非課税年金情報."dtbirthday"AS DT生年月日,
+        非課税年金情報."dtseibetsu"AS DT性別,
+        非課税年金情報."dtkanashimei"AS DTカナ氏名,
+        非課税年金情報."dtshiftcode1"AS DTシフトコード１,
+        非課税年金情報."dtkanjishimei"AS DT漢字氏名,
+        非課税年金情報."dtshiftcode2"AS DTシフトコード２,
+        非課税年金情報."dtyubinno"AS DT郵便番号,
+        非課税年金情報."dtkanajusho"AS DTカナ住所,
+        非課税年金情報."dtshiftcode3"AS DTシフトコード３,
+        非課税年金情報."dtkanjijusho"AS DT漢字住所,
+        非課税年金情報."dtshiftcode4"AS DTシフトコード４,
+        非課税年金情報."dttaishoy"AS DT対象年,
+        非課税年金情報."dtteiseihyoji"AS DT訂正表示,
+        非課税年金情報."dtkakushukubun"AS DT各種区分,
+        非課税年金情報."dtshorikekka"AS DT処理結果,
+        非課税年金情報."dtyobi3"AS DT予備３,
+        非課税年金情報."dtyobi4"AS DT予備４,
+        非課税年金情報."dtkingaku1"AS DT金額１,
+        非課税年金情報."dtkingakuyobi1"AS DT金額予備１,
+        非課税年金情報."dtkingakuyobi2"AS DT金額予備２,
+        非課税年金情報."dtyobi5"AS DT予備５,
+        非課税年金情報."dtkyosainenkinshoshokigono"AS DT共済年金証書記号番号
+        FROM
+        rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳
+        LEFT JOIN
+        (SELECT
+        *
+        FROM (
+        SELECT
+        非課税年金対象者.*
+        ,row_number() OVER (
+        PARTITION BY(
+        "dtnenkinhokenshacode",
+        SUBSTRING("dtnenkincode",1,3),
+        "dtkisonenkinno")
+        ORDER BY
+        "dttaishoy" DESC, "dtsakuseiymd" DESC, "dtnenkincode" DESC
+        ) AS 履歴番号
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha" AS 非課税年金対象者
+        WHERE
+        "hihokenshano" != ''
+        ) AS 最大履歴
+        WHERE
+        最大履歴.履歴番号 = 1
+        ) AS 非課税年金情報
+        ON 被保険者台帳."hihokenshaNo" = 非課税年金情報."hihokenshano"
+        )
+        SELECT
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM master
+        LEFT OUTER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+        (
+        SELECT ARRAY_AGG(CAST ("被保険者台帳管理_識別コード" AS TEXT))
+        FROM master
+        )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS "ShikibetsuTaisho"
+        ON 被保険者台帳管理_識別コード = "ShikibetsuTaisho"."shikibetsuCode"
     </select>
 </mapper>

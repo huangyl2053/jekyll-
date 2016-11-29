@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC3510011;
 
-import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.hokenshajohosoufu.HokenshaJoHoData;
@@ -15,15 +15,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3510011.DBC3
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3510011.DBC3510011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC3510011.dgSofuDataIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3510011.DBC3510011MainHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC3510011.DBC3510011MainValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.hokenshajohosoufu.HokenshaJoHoFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileDescriptor;
@@ -32,11 +31,14 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 保険者情報送付のコントローラクラスです。
@@ -79,6 +81,20 @@ public class DBC3510011Main {
     }
 
     /**
+     * 「ダウンロード」ボタンを押した後、入力チェックを行う。
+     *
+     * @param div DBC3510011MainDiv
+     * @return ResponseData
+     */
+    public ResponseData<DBC3510011MainDiv> onClick_check(DBC3510011MainDiv div) {
+        ValidationMessageControlPairs pairsCheck = getValidationHandler(div).validateCheck();
+        if (pairsCheck.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairsCheck).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「ダウンロード」ボタンを押します。
      *
      * @param div 画面情報
@@ -88,25 +104,26 @@ public class DBC3510011Main {
     public IDownLoadServletResponse onClick_BtnDownload(DBC3510011MainDiv div,
             IDownLoadServletResponse response) {
         RString schemaName = div.getDgSofuDataIchiran().getClickedItem().getFileName();
-        RString schemaID = div.getDgSofuDataIchiran().getClickedItem().getFileId();
+
+        Timestamp tp = Timestamp.valueOf(div.getDgSofuDataIchiran().getClickedItem().getFileId().replace("T", " ").toString());
+        RDateTime schemaID = RDateTime.parse(tp);
         HokenshaJoHoData entity = HokenshaJoHoFindler.createInstance()
-                .get共有ファイルエントリ情報(HokenshaJoHoParamter.createParam(schemaName, schemaID));
+                .get共有ファイルエントリ情報(HokenshaJoHoParamter.createParam(schemaName, new RString(schemaID.toString())));
         ReadOnlySharedFileEntryDescriptor deleteEntity = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(schemaName),
                 entity.getFileID());
+
+        RString tmpPath = Directory.createTmpDirectory();
+        FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
+        ReadOnlySharedFileEntryDescriptor entitydesc = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(schemaName),
+                schemaID);
+        FilesystemPath 保存先フォルダのパス = SharedFile.copyToLocal(entitydesc, filesystemPath);
         SharedFile.deleteEntry(deleteEntity);
         SharedFileDescriptor des = new ReadOnlySharedFileDescriptor(new FilesystemName(entity.getFileName()));
         des = SharedFile.defineSharedFile(des, 世代管理する, SharedFile.GROUP_ALL, null, false, null);
-        RString filePath = Path.getRootPath(RString.EMPTY).concat("/home/D209007/shared/sharedFiles/DB/")
-                .concat(entity.getFileName()).concat("/").concat(schemaID.replace(":", "."));
-        File file = new File(filePath.toString());
-        if (file.listFiles() == null || file.listFiles().length == 0) {
-            throw new ApplicationException(DbzErrorMessages.ダウンロード失敗.getMessage().evaluate());
-        }
-        RString fileName = new RString(file.listFiles()[0].getName());
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(des, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry,
-                fileName), response);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(des, 保存先フォルダのパス, opts);
+
+        return SharedFileDirectAccessDownload.directAccessDownload(entry, schemaName, response);
     }
 
     /**
@@ -135,6 +152,8 @@ public class DBC3510011Main {
         }
         if (処理フラグ_済) {
             div.getHokenshaSofuList().getDgSofuJohoIchiran().getActiveRow().setJotai(処理状態);
+            div.getHokenshaSofuList().getDgSofuJohoIchiran().getActiveRow().setSelectButtonState(DataGridButtonState.Disabled);
+            div.getHokenshaSofuList().getDgSofuJohoIchiran().getActiveRow().setSelectable(false);
         }
         return ResponseData.of(div).setState(DBC3510011StateName.初期表示);
     }
@@ -188,5 +207,9 @@ public class DBC3510011Main {
 
     private DBC3510011MainHandler getHandler(DBC3510011MainDiv div) {
         return new DBC3510011MainHandler(div);
+    }
+
+    private DBC3510011MainValidationHandler getValidationHandler(DBC3510011MainDiv div) {
+        return new DBC3510011MainValidationHandler(div);
     }
 }

@@ -81,7 +81,6 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     @BatchWriter
     private BatchReportWriter<KoikinaiTenkyoKekkaIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<KoikinaiTenkyoKekkaIchiranhyoReportSource> reportSourceWriter;
-    @BatchWriter
     private CsvWriter<HiroshimaDomainEucCsvEntity> eucCsvWriter;
     private HiroshimaDomainProcessParameter processParameter;
     private List<KoikinaiTenkyoEntity> list;
@@ -192,6 +191,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         report.writeBy(reportSourceWriter);
         List<KoikinaiTenkyoCSVDataEntity> 広域内転居結果CSV = get広域内転居結果CSV(list);
         get広域内転居結果のCSV出力(広域内転居結果CSV);
+        eucCsvWriter.close();
         manager.spool(eucFilePath);
 
     }
@@ -265,7 +265,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
                 ));
             }
         }
-        eucCsvWriter.close();
+
     }
 
     /**
@@ -301,7 +301,6 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     }
 
     private RString 印刷日時表示作成() {
-        RString 印刷日時 = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         RDateTime now = RDateTime.now();
         builder.append(now.getDate().wareki()
@@ -312,8 +311,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
                 .toDateString());
         builder.append(RString.HALF_SPACE);
         builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        印刷日時 = builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
-        return 印刷日時;
+        return builder.append(RString.FULL_SPACE).append(STRING_SAKUSEI).toRString();
     }
 
 }

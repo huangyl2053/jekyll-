@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKo
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo.FukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
@@ -70,8 +69,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV2001ChoshuHohoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
@@ -80,16 +81,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogofujoshurui.SeikatsuHogoFujoShurui;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.kyokaisogaitosha.kyokaisogaitosha.KyokaisoGaitosha;
-import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.GyomuConfigJohoClass;
 import jp.co.ndensan.reams.dz.dzx.business.core.tokuchokarisanteikiwari.TokuchoKarisanteiKiwari;
@@ -1024,12 +1022,6 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         }
         賦課根拠.setGokeiShotoku(前年度合計所得金額);
         賦課根拠.setKotekiNenkinShunyu(前年度公的年金収入額);
-        List<KazeiKubunHonninKubun> setaiinKazeiKubunList = new ArrayList();
-        KazeiKubunHonninKubun kazeiKubunHonninKubun = new KazeiKubunHonninKubun();
-        kazeiKubunHonninKubun.set本人区分(HonninKubun.本人);
-        kazeiKubunHonninKubun.set課税区分(KazeiKubun.toValue(課税区分));
-        setaiinKazeiKubunList.add(kazeiKubunHonninKubun);
-        賦課根拠.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         HokenryoDankaiHanteiParameter parameter = new HokenryoDankaiHanteiParameter();
         parameter.setFukaNendo(調定年度);
         parameter.setFukaKonkyo(賦課根拠);
@@ -1172,6 +1164,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             for (KeisanjohoAtenaKozaKouseizengoEntity 更正前後Entity : 更正前後EntityList) {
                 eucCsvWriter.writeLine(setCSVEntity(更正前後Entity, 調定日時, 賦課年度, 月List));
             }
+            eucCsvWriter.close();
         }
 
         List<RString> 出力条件リスト = new ArrayList<>();
@@ -1209,6 +1202,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      * バッチ出力条件リストの出力メソッドです。
      *
      * @param 出力条件リスト List<RString>
+     * @param 出力ページ数 RString
      */
     public void loadバッチ出力条件リスト(List<RString> 出力条件リスト, RString 出力ページ数) {
 
@@ -1725,7 +1719,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         RString 最大年度内連番;
         DbT7022ShoriDateKanriEntity dbT7022Entity = new DbT7022ShoriDateKanriEntity();
         DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番BY調定年度(調定年度, 処理枝番);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select最大年度内連番BY調定年度(調定年度, 処理枝番, ShoriName.仮算定異動賦課.get名称());
         if (entity != null) {
             最大年度内連番 = new RString(String.valueOf(Integer.parseInt(entity.getNendoNaiRenban().toString()) + 1))
                     .padZeroToLeft(NUM_4);
@@ -1770,7 +1764,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
      */
     public void 八月特徴開始(FlexibleYear 調定年度, YMDHMS 基準日時) {
         DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
-        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select処理日付管理マスタ_八月特徴開始情報抽出(調定年度);
+        DbT7022ShoriDateKanriEntity entity = 処理日付管理Dac.select処理日付管理マスタ_八月特徴開始情報抽出(調定年度, ShoriName.依頼金額計算.get名称());
         if (entity != null) {
             entity.setKijunTimestamp(基準日時);
             entity.setState(EntityDataState.Modified);

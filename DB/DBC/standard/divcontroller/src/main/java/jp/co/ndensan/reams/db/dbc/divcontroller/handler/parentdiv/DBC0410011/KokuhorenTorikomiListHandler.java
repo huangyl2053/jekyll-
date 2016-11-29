@@ -110,7 +110,9 @@ public class KokuhorenTorikomiListHandler {
         row.setBatchID(model.getバッチID());
         row.setKokanShikibetsuNo(model.get交換識別番号());
         row.getShoriYM().setValue(new RDate(処理年月.getYearValue(), 処理年月.getMonthValue()));
-        if (row.getTorikomiFlag().equals(RString.HALF_SPACE) && row.getTxtTogetsuJotai().equals(処理前)) {
+        if (row.getTorikomiFlag().equals(RString.HALF_SPACE)
+                && (ShoriJotaiKubun.処理前.getコード().equals(model.get当月処理状態())
+                || ShoriJotaiKubun.再処理前.getコード().equals(model.get当月処理状態()))) {
             row.setSelectButtonState(DataGridButtonState.Enabled);
         } else {
             row.setSelectButtonState(DataGridButtonState.Disabled);
@@ -127,20 +129,16 @@ public class KokuhorenTorikomiListHandler {
     }
 
     private RString get処理状態(RString 処理状態区分) {
-
         if (処理状態区分 == null) {
             return RString.EMPTY;
         }
-
-        switch (処理状態区分.toString()) {
-            case "1":
-                return 処理状態区分_フォーク;
-            case "3":
-                return 処理状態区分_丸い;
-            case "9":
-                return 処理状態区分_横線;
-            default:
-                return RString.EMPTY;
+        if (ShoriJotaiKubun.再処理前.getコード().equals(処理状態区分) || ShoriJotaiKubun.処理前.getコード().equals(処理状態区分)) {
+            return 処理状態区分_フォーク;
+        } else if (ShoriJotaiKubun.終了.getコード().equals(処理状態区分)) {
+            return 処理状態区分_丸い;
+        } else if (ShoriJotaiKubun.処理なし.getコード().equals(処理状態区分)) {
+            return 処理状態区分_横線;
         }
+        return RString.EMPTY;
     }
 }

@@ -128,7 +128,11 @@ public class KogakuServicehiSofuIchiranEditor implements
         source.listUpper_6 = doカンマ編集(entity.get高額介護_本人支払額());
         source.listLower_8 = doカンマ編集(entity.get高額介護_支給金額());
 
-        if (entity.get高額介護_不支給理由().length() <= INDEX_20) {
+        if (entity.get高額介護_不支給理由() == null) {
+            source.listUpper_7 = RString.EMPTY;
+            source.listCenter_3 = RString.EMPTY;
+            source.listLower_9 = RString.EMPTY;
+        } else if (entity.get高額介護_不支給理由().length() <= INDEX_20) {
             source.listUpper_7 = entity.get高額介護_不支給理由();
         } else if (entity.get高額介護_不支給理由().length() <= INDEX_40) {
             source.listUpper_7 = entity.get高額介護_不支給理由().substring(INDEX_0, INDEX_20);
@@ -146,19 +150,40 @@ public class KogakuServicehiSofuIchiranEditor implements
 
         if (entity.get被保険者_氏名50音カナ() != null) {
             source.shimei50onKana = entity.get被保険者_氏名50音カナ();
-        } else {
-            source.shimei50onKana = RString.EMPTY;
         }
         if (entity.get被保険者_市町村コード() != null) {
             source.shichosonCode = entity.get被保険者_市町村コード().value();
-        } else {
-            source.shichosonCode = RString.EMPTY;
         }
+        setPageBreakEmpty(source);
 
         source.shikibetsuCode = entity.get被保険者_識別コード().value();
 
         return source;
 
+    }
+
+    private void setPageBreakEmpty(KogakuServicehiSofuIchiranSource source) {
+        if (null == source.hokenshaNo) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (null == source.listUpper_3) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (null == source.listUpper_2) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (null == source.listLower_2) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (null == source.shimei50onKana) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (null == source.shichosonCode) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (null == source.listCenter_2) {
+            source.listCenter_2 = RString.EMPTY;
+        }
     }
 
     private RString getSakuseiYmhm(RDateTime datetime) {

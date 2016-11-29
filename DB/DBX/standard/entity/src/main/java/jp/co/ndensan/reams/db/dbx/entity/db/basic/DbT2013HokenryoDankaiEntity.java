@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import java.util.Objects;
@@ -18,8 +13,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 保険料段階テーブルのエンティティクラスです。
- *
- * @reamsid_L DBB-9999-022 xuxin
  */
 public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013HokenryoDankaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">

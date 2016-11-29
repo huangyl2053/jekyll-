@@ -82,7 +82,8 @@ public class KagoKetteiHokenshaInCsvFileRead {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KagoKetteiHokenshaInCsvFileRead}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KagoKetteiHokenshaInCsvFileRead}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KagoKetteiHokenshaInCsvFileRead}のインスタンス
      */
     public static KagoKetteiHokenshaInCsvFileRead createInstance() {
         return InstanceProvider.create(KagoKetteiHokenshaInCsvFileRead.class);
@@ -167,7 +168,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
                         && !listDataEntity.get(j).getHeadCsvEntity().getShoKisaiHokenshaNo().isEmpty()
                         && listDataEntity.get(j).getHeadCsvEntity().getShoKisaiHokenshaNo().length() >= INDEX_3) {
                     shukeiTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(listDataEntity.get(j).getHeadCsvEntity()
-                            .getShoKisaiHokenshaNo().substring(2)));
+                            .getShoKisaiHokenshaNo()));
                 }
                 shukeiTempentity.set証記載保険者名(listDataEntity.get(j).getHeadCsvEntity().getHihokenshaName());
                 if (listDataEntity.get(j).getHeadCsvEntity().getSakuseiYMD() != null
@@ -299,7 +300,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
         if (dataEntity.getHeadCsvEntity().getShoKisaiHokenshaNo() != null
                 && !dataEntity.getHeadCsvEntity().getShoKisaiHokenshaNo().isEmpty()
                 && dataEntity.getHeadCsvEntity().getShoKisaiHokenshaNo().length() >= INDEX_3) {
-            hihokenshaTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(dataEntity.getHeadCsvEntity().getShoKisaiHokenshaNo().substring(2)));
+            hihokenshaTempentity.set証記載保険者番号(new ShoKisaiHokenshaNo(dataEntity.getHeadCsvEntity().getShoKisaiHokenshaNo()));
         }
         if (meisaiCsvEntity.getOrgHihokenshaNo() != null && !meisaiCsvEntity.getOrgHihokenshaNo().isEmpty()) {
             hihokenshaTempentity.set被保険者番号(new HihokenshaNo(meisaiCsvEntity.getOrgHihokenshaNo()));
@@ -370,7 +371,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
                     List<RString> data = csvReader.readLine();
                     if (data != null && !data.isEmpty()) {
                         if (エンドレコード種別.equals(data.get(INDEX_0))) {
-                            continue;
+                            break;
                         }
                         if (レコード種別.equals(data.get(INDEX_0))) {
                             controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);

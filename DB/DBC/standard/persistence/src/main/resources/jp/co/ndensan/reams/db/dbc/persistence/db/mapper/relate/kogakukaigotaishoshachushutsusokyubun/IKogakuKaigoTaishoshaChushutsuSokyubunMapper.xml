@@ -2,8 +2,8 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-5750-050 houtianpeng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper">
-    
-     <resultMap id="ResultMap_UaFt001FindIdo" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.UaFt001FindEntity" autoMapping="true">
+
+    <resultMap id="ResultMap_UaFt001FindIdo" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.UaFt001FindEntity" autoMapping="true">
         <id property="shikibetsuCode"                           column="shikibetsuTaishoIdo_shikibetsuCode"                       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="torokuNo"                                 column="shikibetsuTaishoIdo_torokuNo" />
         <id property="idoShoriTimestamp"                        column="shikibetsuTaishoIdo_idoShoriTimestamp"                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -172,101 +172,101 @@
         <result property="kanaTsushoName"                       column="shikibetsuTaishoIdo_kanaTsushoName"                       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="idoId"                                column="shikibetsuTaishoIdo_idoId" />
     </resultMap>
-    
+
     <select resultOrdered="true" id="get宛名データ抽出" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter"
             resultMap="ResultMap_UaFt001FindIdo" fetchSize="1000">
         SELECT
-          <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.allColumns_ShikibetsuTaishoIdo"/>
+        <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.allColumns_ShikibetsuTaishoIdo"/>
         FROM
-          <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.tableName_ParamClassShikibetsuTaishoIdo"/> AS 
-          <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/> 
-        INNER JOIN 
-            rgdb."DbT1001HihokenshaDaicho" AS 台帳 
-        ON    
-            台帳."shikibetsuCode" =<include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/>."shikibetsuCode" 
-        AND 台帳."logicalDeletedFlag" = FALSE 
+        <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.tableName_ParamClassShikibetsuTaishoIdo"/> AS
+        <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/>
+        INNER JOIN
+        rgdb."DbT1001HihokenshaDaicho" AS 台帳
+        ON
+        台帳."shikibetsuCode" =<include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/>."shikibetsuCode"
+        AND 台帳."logicalDeletedFlag" = FALSE
         ORDER BY
-          <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/>."shikibetsuCode" ASC,
-          <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/>."idoShoriTimestamp" DESC						
+        <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/>."shikibetsuCode" ASC,
+        <include refid = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.as_ShikibetsuTaishoIdo"/>."idoShoriTimestamp" DESC
     </select>
-    
+
     <resultMap id="ResultMap_被保険者番号付加" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.HihokenshaNoFukaEntity" autoMapping="true">
-       <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/> 
-       <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/> 
-       <result property="世帯コード" column="世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="賦課年度" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/> 
-       <result property="年月" column="年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/> 
-       <result property="年月日" column="年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/> 
-       <result property="抽出_マスタ1" column="抽出_マスタ1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ2" column="抽出_マスタ2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ3" column="抽出_マスタ3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ4" column="抽出_マスタ4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ5" column="抽出_マスタ5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ6" column="抽出_マスタ6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ7" column="抽出_マスタ7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ8" column="抽出_マスタ8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ9" column="抽出_マスタ9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_マスタ10" column="抽出_マスタ10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由1" column="抽出_事由1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由2" column="抽出_事由2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由3" column="抽出_事由3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由4" column="抽出_事由4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由5" column="抽出_事由5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由6" column="抽出_事由6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由7" column="抽出_事由7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由8" column="抽出_事由8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由9" column="抽出_事由9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_事由10" column="抽出_事由10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-       <result property="抽出_識別コード1" column="抽出_識別コード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード2" column="抽出_識別コード2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード3" column="抽出_識別コード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード4" column="抽出_識別コード4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード5" column="抽出_識別コード5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード6" column="抽出_識別コード6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード7" column="抽出_識別コード7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード8" column="抽出_識別コード8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード9" column="抽出_識別コード9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-       <result property="抽出_識別コード10" column="抽出_識別コード10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
-       <result property="被保険者台帳_被保険者番号" column="被保険者台帳_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/> 
-</resultMap>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="世帯コード" column="世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="賦課年度" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="年月" column="年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="年月日" column="年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="抽出_マスタ1" column="抽出_マスタ1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ2" column="抽出_マスタ2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ3" column="抽出_マスタ3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ4" column="抽出_マスタ4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ5" column="抽出_マスタ5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ6" column="抽出_マスタ6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ7" column="抽出_マスタ7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ8" column="抽出_マスタ8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ9" column="抽出_マスタ9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_マスタ10" column="抽出_マスタ10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由1" column="抽出_事由1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由2" column="抽出_事由2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由3" column="抽出_事由3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由4" column="抽出_事由4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由5" column="抽出_事由5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由6" column="抽出_事由6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由7" column="抽出_事由7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由8" column="抽出_事由8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由9" column="抽出_事由9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_事由10" column="抽出_事由10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード1" column="抽出_識別コード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード2" column="抽出_識別コード2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード3" column="抽出_識別コード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード4" column="抽出_識別コード4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード5" column="抽出_識別コード5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード6" column="抽出_識別コード6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード7" column="抽出_識別コード7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード8" column="抽出_識別コード8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード9" column="抽出_識別コード9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="抽出_識別コード10" column="抽出_識別コード10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者台帳_被保険者番号" column="被保険者台帳_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
     <select resultOrdered="true" id="get被保険者番号付加"  resultMap="ResultMap_被保険者番号付加" fetchSize="1000">
         SELECT
-            台帳."hihokenshaNo" AS "被保険者台帳_被保険者番号",
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" /> 
+        台帳."hihokenshaNo" AS "被保険者台帳_被保険者番号",
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />
         FROM
-            "Tempkeisantaisyo" as 一時
+        "Tempkeisantaisyo" as 一時
         LEFT JOIN
-            rgdb."DbV1001HihokenshaDaicho" AS 台帳
+        rgdb."DbV1001HihokenshaDaicho" AS 台帳
         ON
-            一時."shikibetsuCode" = 台帳."shikibetsuCode"
+        一時."shikibetsuCode" = 台帳."shikibetsuCode"
         AND
-            台帳."logicalDeletedFlag" = FALSE
+        台帳."logicalDeletedFlag" = FALSE
     </select>
-    
+
     <select resultOrdered="true" id="get処理区分1"  resultMap="ResultMap_被保険者番号付加" fetchSize="1000">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />  
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />
         FROM
-            "Tempkeisantaisyo" as 一時
-       ORDER BY
-            "識別コード"ASC,
-            "年月" ASC,
-            "年月日" ASC
+        "Tempkeisantaisyo" as 一時
+        ORDER BY
+        "識別コード"ASC,
+        "年月" ASC,
+        "年月日" ASC
     </select>
-    
+
     <select resultOrdered="true" id="get処理区分2"  resultMap="ResultMap_被保険者番号付加" fetchSize="1000">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />  
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />
         FROM
-            "Tempkeisantaisyo" as 一時
-       ORDER BY
-            被保険者番号 ASC,
-            年月 ASC,
-            年月日 ASC,
-            識別コード
+        "Tempkeisantaisyo" as 一時
+        ORDER BY
+        被保険者番号 ASC,
+        年月 ASC,
+        年月日 ASC,
+        識別コード
     </select>
     <sql id="get一時">
-         一時."shikibetsuCode" as "識別コード"
+        一時."shikibetsuCode" as "識別コード"
         , 一時."hihokenshaNo" as "被保険者番号"
         , 一時."shotsicode" as "世帯コード"
         , 一時."nendo" as "賦課年度"
@@ -301,7 +301,7 @@
         , 一時."chusyutsushikibetsu7" as "抽出_識別コード7"
         , 一時."chusyutsushikibetsu8" as "抽出_識別コード8"
         , 一時."chusyutsushikibetsu9" as "抽出_識別コード9"
-        , 一時."chusyutsushikibetsu10" as "抽出_識別コード10" 
+        , 一時."chusyutsushikibetsu10" as "抽出_識別コード10"
     </sql>
     <resultMap id="ResultMap_資格異動データ抽出" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.ShiKaKuiDoDeTaEntity" autoMapping="true">
         <result property="識別コード"   column="識別コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
@@ -313,124 +313,124 @@
         <result property="抽出_マスタ"   column="抽出_マスタ"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="抽出_事由"   column="抽出_事由"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="抽出_識別コード"   column="抽出_識別コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-    </resultMap> 
+    </resultMap>
     <select resultOrdered="true" id="get資格異動データ抽出" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter"
-           resultMap="ResultMap_資格異動データ抽出" fetchSize="1000">
-        WITH 台帳 AS ( 
-          SELECT
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" /> 
-          FROM
-            rgdb."DbT1001HihokenshaDaicho"
-          WHERE
-            #{抽出期間開始日時} <![CDATA[<=]]> "lastUpdateTimestamp" 
-            AND "lastUpdateTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
-            AND "shikakuShutokuJiyuCode" = '02' 
-            AND "logicalDeletedFlag" = FALSE
-        ) 
+            resultMap="ResultMap_資格異動データ抽出" fetchSize="1000">
+        WITH 台帳 AS (
         SELECT
-              処理対象."識別コード",
-              処理対象."被保険者番号",
-              処理対象."世帯コード",
-              処理対象."賦課年度",
-              処理対象."年月",
-              処理対象."年月日",
-              処理対象."抽出_マスタ",
-              処理対象."抽出_事由",
-              処理対象."抽出_識別コード"   
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
         FROM
-          ( 
-            SELECT
-              直近台帳."dbT1001HihokenshaDaicho_shikibetsuCode" AS 識別コード
-              , ' ' AS 被保険者番号
-              , ' ' AS 世帯コード
-              , ' ' AS 賦課年度
-              , ' ' AS 年月
-              , 直近台帳."dbT1001HihokenshaDaicho_shikakuShutokuYMD" AS 年月日
-              , '10' AS 抽出_マスタ
-              , ' ' AS 抽出_事由
-              , 直近台帳."dbT1001HihokenshaDaicho_shikibetsuCode" AS 抽出_識別コード 
-            FROM
-              ( 
-                SELECT
-                  * 
-                FROM
-                  台帳 AS mst 
-                WHERE
-                  NOT EXISTS ( 
-                    SELECT
-                      'X' 
-                    FROM
-                      台帳 AS slv 
-                    WHERE
-                      mst."dbT1001HihokenshaDaicho_idoYMD" || "dbT1001HihokenshaDaicho_edaNo" <![CDATA[<]]> slv."dbT1001HihokenshaDaicho_idoYMD" || "dbT1001HihokenshaDaicho_edaNo"
-                  )
-              ) 直近台帳 
-            UNION 
-            select
-              老齢福祉年金受給者."識別コード",
-              老齢福祉年金受給者."被保険者番号",
-              老齢福祉年金受給者."世帯コード",
-              老齢福祉年金受給者."賦課年度",
-              老齢福祉年金受給者."年月",
-              老齢福祉年金受給者."年月日",
-              老齢福祉年金受給者."抽出_マスタ",
-              老齢福祉年金受給者."抽出_事由",
-              老齢福祉年金受給者."抽出_識別コード"  
-            from
-              ( 
-                SELECT
-                  DbT7006."shikibetsuCode" AS 識別コード
-                  , ' ' AS 被保険者番号
-                  , ' ' AS 世帯コード
-                  , ' ' AS 賦課年度
-                  , ' ' AS 年月
-                  , DbT7006."jukyuKaishiYMD" AS 年月日
-                  , '21' AS 抽出_マスタ
-                  , ' ' AS 抽出_事由
-                  , DbT7006."shikibetsuCode" AS 抽出_識別コード 
-                FROM
-                  rgdb."DbT7006RoreiFukushiNenkinJukyusha" DbT7006 
-                WHERE
-                  #{抽出期間開始日時} <![CDATA[<=]]> DbT7006."lastUpdateTimestamp" 
-                  AND DbT7006."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
-              ) AS 老齢福祉年金受給者 
-            UNION 
-            SELECT
-              生活保護受給者."識別コード",
-              生活保護受給者."被保険者番号",
-              生活保護受給者."世帯コード",
-              生活保護受給者."賦課年度",
-              生活保護受給者."年月",
-              生活保護受給者."年月日",
-              生活保護受給者."抽出_マスタ",
-              生活保護受給者."抽出_事由",
-              生活保護受給者."抽出_識別コード"  
-            FROM
-              ( 
-                SELECT
-                  UrT0508."shikibetsuCode" AS 識別コード
-                  , ' ' AS 被保険者番号
-                  , ' ' AS 世帯コード
-                  , ' ' AS 賦課年度
-                  , ' ' AS 年月
-                  , UrT0508."jukyuKaishiYMD" AS 年月日
-                  , '22' AS 抽出_マスタ
-                  , ' ' AS 抽出_事由
-                  , UrT0508."shikibetsuCode" AS 抽出_識別コード 
-                FROM 
-                  rgur."UrT0508SeikatsuHogoJukyusha" UrT0508 
-                WHERE
-                  #{抽出期間開始日時} <![CDATA[<=]]> UrT0508."lastUpdateTimestamp" 
-                  AND UrT0508."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出期間終了日時} 
-                  AND UrT0508."gyomuCode" = #{介護保険}
-              ) AS 生活保護受給者
-          ) AS 処理対象
-            INNER JOIN rgua.${宛名識別対象PSM} AS  宛名
-            ON 宛名."shikibetsuCode" = 処理対象.識別コード
-            ORDER BY 処理対象.識別コード ASC,
-                     処理対象.年月日 ASC
+        rgdb."DbT1001HihokenshaDaicho"
+        WHERE
+        #{抽出期間開始日時} <![CDATA[<=]]> "lastUpdateTimestamp"
+        AND "lastUpdateTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
+        AND "shikakuShutokuJiyuCode" = '02'
+        AND "logicalDeletedFlag" = FALSE
+        )
+        SELECT
+        処理対象."識別コード",
+        処理対象."被保険者番号",
+        処理対象."世帯コード",
+        処理対象."賦課年度",
+        処理対象."年月",
+        処理対象."年月日",
+        処理対象."抽出_マスタ",
+        処理対象."抽出_事由",
+        処理対象."抽出_識別コード"
+        FROM
+        (
+        SELECT
+        直近台帳."dbT1001HihokenshaDaicho_shikibetsuCode" AS 識別コード
+        , ' ' AS 被保険者番号
+        , ' ' AS 世帯コード
+        , ' ' AS 賦課年度
+        , ' ' AS 年月
+        , 直近台帳."dbT1001HihokenshaDaicho_shikakuShutokuYMD" AS 年月日
+        , '10' AS 抽出_マスタ
+        , ' ' AS 抽出_事由
+        , 直近台帳."dbT1001HihokenshaDaicho_shikibetsuCode" AS 抽出_識別コード
+        FROM
+        (
+        SELECT
+        *
+        FROM
+        台帳 AS mst
+        WHERE
+        NOT EXISTS (
+        SELECT
+        'X'
+        FROM
+        台帳 AS slv
+        WHERE
+        mst."dbT1001HihokenshaDaicho_idoYMD" || "dbT1001HihokenshaDaicho_edaNo" <![CDATA[<]]> slv."dbT1001HihokenshaDaicho_idoYMD" || "dbT1001HihokenshaDaicho_edaNo"
+        )
+        ) 直近台帳
+        UNION
+        select
+        老齢福祉年金受給者."識別コード",
+        老齢福祉年金受給者."被保険者番号",
+        老齢福祉年金受給者."世帯コード",
+        老齢福祉年金受給者."賦課年度",
+        老齢福祉年金受給者."年月",
+        老齢福祉年金受給者."年月日",
+        老齢福祉年金受給者."抽出_マスタ",
+        老齢福祉年金受給者."抽出_事由",
+        老齢福祉年金受給者."抽出_識別コード"
+        from
+        (
+        SELECT
+        DbT7006."shikibetsuCode" AS 識別コード
+        , ' ' AS 被保険者番号
+        , ' ' AS 世帯コード
+        , ' ' AS 賦課年度
+        , ' ' AS 年月
+        , DbT7006."jukyuKaishiYMD" AS 年月日
+        , '21' AS 抽出_マスタ
+        , ' ' AS 抽出_事由
+        , DbT7006."shikibetsuCode" AS 抽出_識別コード
+        FROM
+        rgdb."DbT7006RoreiFukushiNenkinJukyusha" DbT7006
+        WHERE
+        #{抽出期間開始日時} <![CDATA[<=]]> DbT7006."lastUpdateTimestamp"
+        AND DbT7006."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
+        ) AS 老齢福祉年金受給者
+        UNION
+        SELECT
+        生活保護受給者."識別コード",
+        生活保護受給者."被保険者番号",
+        生活保護受給者."世帯コード",
+        生活保護受給者."賦課年度",
+        生活保護受給者."年月",
+        生活保護受給者."年月日",
+        生活保護受給者."抽出_マスタ",
+        生活保護受給者."抽出_事由",
+        生活保護受給者."抽出_識別コード"
+        FROM
+        (
+        SELECT
+        UrT0508."shikibetsuCode" AS 識別コード
+        , ' ' AS 被保険者番号
+        , ' ' AS 世帯コード
+        , ' ' AS 賦課年度
+        , ' ' AS 年月
+        , UrT0508."jukyuKaishiYMD" AS 年月日
+        , '22' AS 抽出_マスタ
+        , ' ' AS 抽出_事由
+        , UrT0508."shikibetsuCode" AS 抽出_識別コード
+        FROM
+        rgur."UrT0508SeikatsuHogoJukyusha" UrT0508
+        WHERE
+        #{抽出期間開始日時} <![CDATA[<=]]> UrT0508."lastUpdateTimestamp"
+        AND UrT0508."lastUpdateTimestamp" <![CDATA[<=]]> #{抽出期間終了日時}
+        AND UrT0508."gyomuCode" = #{介護保険}
+        ) AS 生活保護受給者
+        ) AS 処理対象
+        INNER JOIN rgua.${宛名識別対象PSM} AS  宛名
+        ON 宛名."shikibetsuCode" = 処理対象.識別コード
+        ORDER BY 処理対象.識別コード ASC,
+        処理対象.年月日 ASC
     </select>
-     <resultMap id="resultMap_shiKaKuiDoDeTaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.ShiKaKuiDoDeTaEntity" autoMapping="true">
+    <resultMap id="resultMap_shiKaKuiDoDeTaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.ShiKaKuiDoDeTaEntity" autoMapping="true">
         <result property="被保険者年月識別区分事業所" column="被保険者年月識別区分事業所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="識別コード" column="shikibetsucode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="被保険者番号" column="hihokenshano" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -532,7 +532,7 @@
         <result property="前公費３サービス単位数" column="maeKohi3ServiceTanisu" />
         <result property="前公費３請求額" column="maeKohi3Seikyugaku" />
         <result property="前公費３本人負担額" column="maeKohi3RiyoshaFutangaku" />
-        <result property="前公費３緊急時施設療養費請求額" column="maeKohi3KinkyuShisetsuRyoyoSeikyugaku" /> 
+        <result property="前公費３緊急時施設療養費請求額" column="maeKohi3KinkyuShisetsuRyoyoSeikyugaku" />
         <result property="前公費３特定診療費請求額" column="maeKohi3TokuteiShinryohiSeikyugaku" />
         <result property="前公費３特定入所者介護サービス費等請求額" column="maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
         <result property="後保険サービス単位数" column="atoHokenServiceTanisu" />
@@ -554,7 +554,7 @@
         <result property="後公費２特定診療費請求額" column="atoKohi2TokuteiShinryohiSeikyugaku" />
         <result property="後公費２特定入所者介護サービス費等請求額" column="atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" />
         <result property="後公費３サービス単位数" column="atoKohi3ServiceTanisu" />
-        <result property="後公費３請求額" column="atoKohi3Seikyugaku" /> 
+        <result property="後公費３請求額" column="atoKohi3Seikyugaku" />
         <result property="後公費３利用者負担額"     column="atoKohi3RiyoshaFutangaku" />
         <result property="後公費３緊急時施設療養費請求額" column="atoKohi3KinkyuShisetsuRyoyoSeikyugaku" />
         <result property="後公費３特定診療費請求額" column="atoKohi3TokuteiShinryohiSeikyugaku" />
@@ -564,230 +564,230 @@
         <result property="整理番号" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="送付年月" column="sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="取込年月" column="torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="独自作成区分" column="dokujiSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="独自作成区分" column="dokujiSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="保険者保有給付実績情報削除済フラグ" column="hokenshaHoyuKyufujissekiJohoSakujoFlag"/>
     </resultMap>
-    
-     <!--給付実績基本データ抽出検索する。--> 
-    <select resultOrdered="true" id="get給付実績基本TBLデータ" 
-         resultMap="resultMap_shiKaKuiDoDeTaEntity"
-        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" 
-         fetchSize="500">
-       SELECT
-           一時."shikibetsuCode" 
-           , 一時."hihokenshaNo" 
-           , 一時."shotsicode"
-           , 一時."nendo" 
-           , 一時."nengetsu"
-           , 一時."nengetsuymd" 
-           , 一時."chusyutsumaster1" 
-           , 一時."chusyutsumaster2" 
-           , 一時."chusyutsumaster3" 
-           , 一時."chusyutsumaster4"
-           , 一時."chusyutsumaster5" 
-           , 一時."chusyutsumaster6" 
-           , 一時."chusyutsumaster7" 
-           , 一時."chusyutsumaster8" 
-           , 一時."chusyutsumaster9" 
-           , 一時."chusyutsumaster10" 
-           , 一時."chusyutsujiyu1"  
-           , 一時."chusyutsujiyu2" 
-           , 一時."chusyutsujiyu3" 
-           , 一時."chusyutsujiyu4" 
-           , 一時."chusyutsujiyu5" 
-           , 一時."chusyutsujiyu6" 
-           , 一時."chusyutsujiyu7" 
-           , 一時."chusyutsujiyu8" 
-           , 一時."chusyutsujiyu9" 
-           , 一時."chusyutsujiyu10"  
-           , 一時."chusyutsushikibetsu1" 
-           , 一時."chusyutsushikibetsu2" 
-           , 一時."chusyutsushikibetsu3" 
-           , 一時."chusyutsushikibetsu4" 
-           , 一時."chusyutsushikibetsu5" 
-           , 一時."chusyutsushikibetsu6" 
-           , 一時."chusyutsushikibetsu7"
-           , 一時."chusyutsushikibetsu8"
-           , 一時."chusyutsushikibetsu9" 
-           , 一時."chusyutsushikibetsu10" 
-           , 基本."dbT3017_kokanShikibetsuNo"
-           , 基本."dbT3017_inputShikibetsuNo"
-           , 基本."dbT3017_recodeShubetsuCode"
-           , 基本."dbT3017_kyufuSakuseiKubunCode"
-           , 基本."dbT3017_shokisaiHokenshaNo"
-           , 基本."dbT3017_hiHokenshaNo" AS "hiHokenshaNoKihon"
-           , 基本."dbT3017_serviceTeikyoYM"
-           , 基本."dbT3017_kyufuJissekiKubunCode"
-           , 基本."dbT3017_jigyoshoNo"
-           , 基本."dbT3017_toshiNo"
-           , 基本."dbT3017_kohi1FutanshaNo"
-           , 基本."dbT3017_kohi1JukyushaNo"
-           , 基本."dbT3017_kohi2FutanshaNo"
-           , 基本."dbT3017_kohi2JukyushaNo"
-           , 基本."dbT3017_kohi3FutanshaNo"
-           , 基本."dbT3017_umareYMD"
-           , 基本."dbT3017_seibetsuCode"
-           , 基本."dbT3017_yoKaigoJotaiKubunCode"
-           , 基本."dbT3017_kyuSochiNyushoshaTokureiCode"
-           , 基本."dbT3017_ninteiYukoKaishiYMD"
-           , 基本."dbT3017_ninteiYukoShuryoYMD"
-           , 基本."dbT3017_rojinHokenShichosonNo"
-           , 基本."dbT3017_rojinhokenJukyushaNo"
-           , 基本."dbT3017_kokiHokenshaNo"
-           , 基本."dbT3017_kokiHiHokenshaNo"
-           , 基本."dbT3017_kokuhoHokenshaNo"
-           , 基本."dbT3017_kokuhoKojinNo"
-           , 基本."dbT3017_kokuhoHiHokenshashoNo"
-           , 基本."dbT3017_kyotakuServiceSakuseiKubunCode"
-           , 基本."dbT3017_kyotakuKaigoShienJigyoshoNo"
-           , 基本."dbT3017_kaishiYMD"
-           , 基本."dbT3017_chushiYMD"
-           , 基本."dbT3017_chushiRiyuNyushomaeJyokyoCode"
-           , 基本."dbT3017_nyushoYMD"
-           , 基本."dbT3017_taishoYMD"
-           , 基本."dbT3017_nyushoJitsunissu"
-           , 基本."dbT3017_gaihakuNissu"
-           , 基本."dbT3017_taishogoJotaiCode"
-           , 基本."dbT3017_hokenKyufuritsu"
-           , 基本."dbT3017_kohi1Kyufuritsu"
-           , 基本."dbT3017_kohi2Kyufuritsu"
-           , 基本."dbT3017_kohi3Kyufuritsu"
-           , 基本."dbT3017_maeHokenServiceTanisu"
-           , 基本."dbT3017_maeHokenSeikyugaku"
-           , 基本."dbT3017_maeHokenRiyoshaFutangaku"
-           , 基本."dbT3017_maeHokenKinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_maeHokenTokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_maeKohi1ServiceTanisu"
-           , 基本."dbT3017_maeKohi1Seikyugaku"
-           , 基本."dbT3017_maeKohi1RiyoshaFutangaku"
-           , 基本."dbT3017_maeKohi1KinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_maeKohi1TokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_maeKohi2ServiceTanisu"
-           , 基本."dbT3017_maeKohi2Seikyugaku"
-           , 基本."dbT3017_maeKohi2RiyoshaFutangaku"
-           , 基本."dbT3017_maeKohi2KinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_maeKohi2TokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_maeKohi3ServiceTanisu"
-           , 基本."dbT3017_maeKohi3Seikyugaku"
-           , 基本."dbT3017_maeKohi3RiyoshaFutangaku"
-           , 基本."dbT3017_maeKohi3KinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_maeKohi3TokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_atoHokenServiceTanisu"
-           , 基本."dbT3017_atoHokenSeikyugaku"
-           , 基本."dbT3017_atoHokenRiyoshaFutangaku"
-           , 基本."dbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_atoHokenTokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_atoKohi1ServiceTanisu"
-           , 基本."dbT3017_atoKohi1Seikyugaku"
-           , 基本."dbT3017_atoKohi1RiyoshaFutangaku"
-           , 基本."dbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_atoKohi1TokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_atoKohi2ServiceTanisu"
-           , 基本."dbT3017_atoKohi2Seikyugaku"
-           , 基本."dbT3017_atoKohi2RiyoshaFutangaku"
-           , 基本."dbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_atoKohi2TokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_atoKohi3ServiceTanisu"
-           , 基本."dbT3017_atoKohi3Seikyugaku"
-           , 基本."dbT3017_atoKohi3RiyoshaFutangaku"
-           , 基本."dbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku"
-           , 基本."dbT3017_atoKohi3TokuteiShinryohiSeikyugaku"
-           , 基本."dbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku"
-           , 基本."dbT3017_keikaiKubunCode"
-           , 基本."dbT3017_shinsaYM"  
-           , 基本."dbT3017_seiriNo"
-           , 基本."dbT3017_sofuYM"
-           , 基本."dbT3017_torikomiYM"
-           , 基本."dbT3017_dokujiSakuseiKubun"
-           , 基本."dbT3017_hokenshaHoyuKyufujissekiJohoSakujoFlag"
-           , 基本."dbT3017_hiHokenshaNo"||
-             基本."dbT3017_serviceTeikyoYM" ||
-             基本."dbT3017_inputShikibetsuNo" ||
-             基本."dbT3017_kyufuJissekiKubunCode" ||
-             基本."dbT3017_jigyoshoNo" AS 被保険者年月識別区分事業所
-       FROM
-           "Tempkeisantaisyo" AS 一時 
-       LEFT JOIN ( 
-           SELECT
-               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" /> 
-           FROM
-               rgdb."DbT3017KyufujissekiKihon"
-           WHERE
-               ("shinsaYM" <![CDATA[<>]]> '' or "shinsaYM" is not null)
-               AND "shinsaYM" <![CDATA[<=]]> #{処理年月} 
-               AND #{開始年月} <![CDATA[<=]]> "serviceTeikyoYM" 
-               AND "serviceTeikyoYM" <![CDATA[<=]]> #{終了年月}
-               AND substring("inputShikibetsuNo", 0, 3) NOT IN ( 
-               '812'
-               , '21B'
-               , '21C'
-               , '21D'
-               , '341'
-               , '71P'
-               , '816'
-               , '71R'
-               , '817'
-               )
-          ) AS "基本" 
+
+    <!--給付実績基本データ抽出検索する。-->
+    <select resultOrdered="true" id="get給付実績基本TBLデータ"
+            resultMap="resultMap_shiKaKuiDoDeTaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter"
+            fetchSize="500">
+        SELECT
+        一時."shikibetsuCode"
+        , 一時."hihokenshaNo"
+        , 一時."shotsicode"
+        , 一時."nendo"
+        , 一時."nengetsu"
+        , 一時."nengetsuymd"
+        , 一時."chusyutsumaster1"
+        , 一時."chusyutsumaster2"
+        , 一時."chusyutsumaster3"
+        , 一時."chusyutsumaster4"
+        , 一時."chusyutsumaster5"
+        , 一時."chusyutsumaster6"
+        , 一時."chusyutsumaster7"
+        , 一時."chusyutsumaster8"
+        , 一時."chusyutsumaster9"
+        , 一時."chusyutsumaster10"
+        , 一時."chusyutsujiyu1"
+        , 一時."chusyutsujiyu2"
+        , 一時."chusyutsujiyu3"
+        , 一時."chusyutsujiyu4"
+        , 一時."chusyutsujiyu5"
+        , 一時."chusyutsujiyu6"
+        , 一時."chusyutsujiyu7"
+        , 一時."chusyutsujiyu8"
+        , 一時."chusyutsujiyu9"
+        , 一時."chusyutsujiyu10"
+        , 一時."chusyutsushikibetsu1"
+        , 一時."chusyutsushikibetsu2"
+        , 一時."chusyutsushikibetsu3"
+        , 一時."chusyutsushikibetsu4"
+        , 一時."chusyutsushikibetsu5"
+        , 一時."chusyutsushikibetsu6"
+        , 一時."chusyutsushikibetsu7"
+        , 一時."chusyutsushikibetsu8"
+        , 一時."chusyutsushikibetsu9"
+        , 一時."chusyutsushikibetsu10"
+        , 基本."dbT3017_kokanShikibetsuNo"
+        , 基本."dbT3017_inputShikibetsuNo"
+        , 基本."dbT3017_recodeShubetsuCode"
+        , 基本."dbT3017_kyufuSakuseiKubunCode"
+        , 基本."dbT3017_shokisaiHokenshaNo"
+        , 基本."dbT3017_hiHokenshaNo" AS "hiHokenshaNoKihon"
+        , 基本."dbT3017_serviceTeikyoYM"
+        , 基本."dbT3017_kyufuJissekiKubunCode"
+        , 基本."dbT3017_jigyoshoNo"
+        , 基本."dbT3017_toshiNo"
+        , 基本."dbT3017_kohi1FutanshaNo"
+        , 基本."dbT3017_kohi1JukyushaNo"
+        , 基本."dbT3017_kohi2FutanshaNo"
+        , 基本."dbT3017_kohi2JukyushaNo"
+        , 基本."dbT3017_kohi3FutanshaNo"
+        , 基本."dbT3017_umareYMD"
+        , 基本."dbT3017_seibetsuCode"
+        , 基本."dbT3017_yoKaigoJotaiKubunCode"
+        , 基本."dbT3017_kyuSochiNyushoshaTokureiCode"
+        , 基本."dbT3017_ninteiYukoKaishiYMD"
+        , 基本."dbT3017_ninteiYukoShuryoYMD"
+        , 基本."dbT3017_rojinHokenShichosonNo"
+        , 基本."dbT3017_rojinhokenJukyushaNo"
+        , 基本."dbT3017_kokiHokenshaNo"
+        , 基本."dbT3017_kokiHiHokenshaNo"
+        , 基本."dbT3017_kokuhoHokenshaNo"
+        , 基本."dbT3017_kokuhoKojinNo"
+        , 基本."dbT3017_kokuhoHiHokenshashoNo"
+        , 基本."dbT3017_kyotakuServiceSakuseiKubunCode"
+        , 基本."dbT3017_kyotakuKaigoShienJigyoshoNo"
+        , 基本."dbT3017_kaishiYMD"
+        , 基本."dbT3017_chushiYMD"
+        , 基本."dbT3017_chushiRiyuNyushomaeJyokyoCode"
+        , 基本."dbT3017_nyushoYMD"
+        , 基本."dbT3017_taishoYMD"
+        , 基本."dbT3017_nyushoJitsunissu"
+        , 基本."dbT3017_gaihakuNissu"
+        , 基本."dbT3017_taishogoJotaiCode"
+        , 基本."dbT3017_hokenKyufuritsu"
+        , 基本."dbT3017_kohi1Kyufuritsu"
+        , 基本."dbT3017_kohi2Kyufuritsu"
+        , 基本."dbT3017_kohi3Kyufuritsu"
+        , 基本."dbT3017_maeHokenServiceTanisu"
+        , 基本."dbT3017_maeHokenSeikyugaku"
+        , 基本."dbT3017_maeHokenRiyoshaFutangaku"
+        , 基本."dbT3017_maeHokenKinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_maeHokenTokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_maeKohi1ServiceTanisu"
+        , 基本."dbT3017_maeKohi1Seikyugaku"
+        , 基本."dbT3017_maeKohi1RiyoshaFutangaku"
+        , 基本."dbT3017_maeKohi1KinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_maeKohi1TokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_maeKohi2ServiceTanisu"
+        , 基本."dbT3017_maeKohi2Seikyugaku"
+        , 基本."dbT3017_maeKohi2RiyoshaFutangaku"
+        , 基本."dbT3017_maeKohi2KinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_maeKohi2TokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_maeKohi3ServiceTanisu"
+        , 基本."dbT3017_maeKohi3Seikyugaku"
+        , 基本."dbT3017_maeKohi3RiyoshaFutangaku"
+        , 基本."dbT3017_maeKohi3KinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_maeKohi3TokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_atoHokenServiceTanisu"
+        , 基本."dbT3017_atoHokenSeikyugaku"
+        , 基本."dbT3017_atoHokenRiyoshaFutangaku"
+        , 基本."dbT3017_atoHokenKinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_atoHokenTokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_atoKohi1ServiceTanisu"
+        , 基本."dbT3017_atoKohi1Seikyugaku"
+        , 基本."dbT3017_atoKohi1RiyoshaFutangaku"
+        , 基本."dbT3017_atoKohi1KinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_atoKohi1TokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_atoKohi2ServiceTanisu"
+        , 基本."dbT3017_atoKohi2Seikyugaku"
+        , 基本."dbT3017_atoKohi2RiyoshaFutangaku"
+        , 基本."dbT3017_atoKohi2KinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_atoKohi2TokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_atoKohi3ServiceTanisu"
+        , 基本."dbT3017_atoKohi3Seikyugaku"
+        , 基本."dbT3017_atoKohi3RiyoshaFutangaku"
+        , 基本."dbT3017_atoKohi3KinkyuShisetsuRyoyoSeikyugaku"
+        , 基本."dbT3017_atoKohi3TokuteiShinryohiSeikyugaku"
+        , 基本."dbT3017_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku"
+        , 基本."dbT3017_keikaiKubunCode"
+        , 基本."dbT3017_shinsaYM"
+        , 基本."dbT3017_seiriNo"
+        , 基本."dbT3017_sofuYM"
+        , 基本."dbT3017_torikomiYM"
+        , 基本."dbT3017_dokujiSakuseiKubun"
+        , 基本."dbT3017_hokenshaHoyuKyufujissekiJohoSakujoFlag"
+        , 基本."dbT3017_hiHokenshaNo"||
+        基本."dbT3017_serviceTeikyoYM" ||
+        基本."dbT3017_inputShikibetsuNo" ||
+        基本."dbT3017_kyufuJissekiKubunCode" ||
+        基本."dbT3017_jigyoshoNo" AS 被保険者年月識別区分事業所
+        FROM
+        "Tempkeisantaisyo" AS 一時
+        LEFT JOIN (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
+        FROM
+        rgdb."DbT3017KyufujissekiKihon"
+        WHERE
+        ("shinsaYM" <![CDATA[<>]]> '' or "shinsaYM" is not null)
+        AND "shinsaYM" <![CDATA[<=]]> #{処理年月}
+        AND #{開始年月} <![CDATA[<=]]> "serviceTeikyoYM"
+        AND "serviceTeikyoYM" <![CDATA[<=]]> #{終了年月}
+        AND substring("inputShikibetsuNo", 0, 3) NOT IN (
+        '812'
+        , '21B'
+        , '21C'
+        , '21D'
+        , '341'
+        , '71P'
+        , '816'
+        , '71R'
+        , '817'
+        )
+        ) AS "基本"
         ON 一時."hihokenshaNo" = 基本."dbT3017_hiHokenshaNo"
-    AND 一時."nengetsu" =  基本."dbT3017_serviceTeikyoYM"
-    ORDER BY 一時."hihokenshaNo" ASC
-    , 一時."nengetsu" ASC
-    , 基本."dbT3017_inputShikibetsuNo" ASC
-    , 基本."dbT3017_kyufuJissekiKubunCode" ASC
-    , 基本."dbT3017_jigyoshoNo" ASC
-    , 基本."dbT3017_shinsaYM" DESC
-    , 基本."dbT3017_kyufuSakuseiKubunCode" ASC
+        AND 一時."nengetsu" =  基本."dbT3017_serviceTeikyoYM"
+        ORDER BY 一時."hihokenshaNo" ASC
+        , 一時."nengetsu" ASC
+        , 基本."dbT3017_inputShikibetsuNo" ASC
+        , 基本."dbT3017_kyufuJissekiKubunCode" ASC
+        , 基本."dbT3017_jigyoshoNo" ASC
+        , 基本."dbT3017_shinsaYM" DESC
+        , 基本."dbT3017_kyufuSakuseiKubunCode" ASC
     </select>
-    
+
     <select resultOrdered="true" id="get世帯情報取得"  resultMap="ResultMap_被保険者番号付加" fetchSize="1000">
         SELECT
-             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukaigotaishoshachushutsusokyubun.IKogakuKaigoTaishoshaChushutsuSokyubunMapper.get一時" />
         FROM
-             "Tempkeisantaisyo" as 一時 
+        "Tempkeisantaisyo" as 一時
         WHERE
-           "shotsicode" is null or "shotsicode" = ''
+        "shotsicode" is null or "shotsicode" = ''
     </select>
     <select resultOrdered="true" id="get過去分実績基本抽出1"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.ResultMap_DbT2008ShotokuKanriEntity"
-        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
         SELECT
-             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.allColumns_DbT2008ShotokuKanri" />
-         FROM
-           rgdb."DbT2008ShotokuKanri"
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.allColumns_DbT2008ShotokuKanri" />
+        FROM
+        rgdb."DbT2008ShotokuKanri"
         WHERE
-           "DbT2008ShotokuKanri"."isDeleted" = false
-           AND #{抽出期間開始日時} <![CDATA[<=]]> "DbT2008ShotokuKanri"."shoriTimeStamp"
-           AND   "DbT2008ShotokuKanri"."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間終了日時}
+        "DbT2008ShotokuKanri"."isDeleted" = false
+        AND #{抽出期間開始日時} <![CDATA[<=]]> "DbT2008ShotokuKanri"."shoriTimeStamp"
+        AND   "DbT2008ShotokuKanri"."shoriTimeStamp" <![CDATA[<=]]> #{抽出期間終了日時}
         ORDER BY
-            "DbT2008ShotokuKanri"."shikibetsuCode" ASC, "DbT2008ShotokuKanri"."shotokuNendo" ASC
+        "DbT2008ShotokuKanri"."shikibetsuCode" ASC, "DbT2008ShotokuKanri"."shotokuNendo" ASC
     </select>
-    <select resultOrdered="true" id="get処理日付管理マスタ更新" 
-        resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
-        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
+    <select resultOrdered="true" id="get処理日付管理マスタ更新"
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE
-            "DbT7022ShoriDateKanri"."subGyomuCode" ='DBC'
-            AND "DbT7022ShoriDateKanri"."shichosonCode" = #{地方公共団体コード}
-            AND "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
-            AND "DbT7022ShoriDateKanri"."shoriEdaban" =  '0000'
-            AND "DbT7022ShoriDateKanri".nendo = '0000'
-            AND "DbT7022ShoriDateKanri"."nendoNaiRenban" = '0001'
+        "DbT7022ShoriDateKanri"."subGyomuCode" ='DBC'
+        AND "DbT7022ShoriDateKanri"."shichosonCode" = #{地方公共団体コード}
+        AND "DbT7022ShoriDateKanri"."shoriName" = #{処理名}
+        AND "DbT7022ShoriDateKanri"."shoriEdaban" =  '0000'
+        AND "DbT7022ShoriDateKanri".nendo = '0000'
+        AND "DbT7022ShoriDateKanri"."nendoNaiRenban" = '0001'
     </select>
     <delete id="delete計算対象ファイル">
-         DELETE
-            FROM  "Tempkeisantaisyo"
+        DELETE
+        FROM  "Tempkeisantaisyo"
     </delete>
-     <resultMap id="ResultMap_対象者一覧表発行処理" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.TaishoushaitiranhyouhakkouShorientity" autoMapping="true">
+    <resultMap id="ResultMap_対象者一覧表発行処理" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigotaishoshachushutsusokyubun.TaishoushaitiranhyouhakkouShorientity" autoMapping="true">
         <result property="被保険者番号"   column="被保険者番号"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="識別コード"   column="識別コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="サービス提供年月"   column="サービス提供年月"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -808,41 +808,55 @@
         <result property="行政区コード"   column="行政区コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="行政区"   column="行政区"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="措置元市町村コード"   column="措置元市町村コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-
-    </resultMap> 
+        <result property="異動事由コード"   column="異動事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得事由コード"   column="資格取得事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失事由コード"   column="資格喪失事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格変更事由コード"   column="資格変更事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例適用事由コード"   column="住所地特例適用事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例解除事由コード"   column="住所地特例解除事由コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード"   column="市町村コード"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支給予定額"   column="支給予定額"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
     <select resultOrdered="true" id="get対象者一覧表発行処理"  resultMap="ResultMap_対象者一覧表発行処理"
-        parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigotaishoshachushutsusokyubun.KogakukaigotaishoshachushutsusokyubunParameter" fetchSize="500">
         SELECT
-            A."hiHokenshaNo" AS "被保険者番号",
-            A."shotokuHantei_shikibetsuCode" AS "識別コード",
-            A."serviceTeikyoYM" AS "サービス提供年月",
-            A."shokisaiHokenshaNo" AS "証記載保険者番号",
-            A."hokenRiyoshaFutangaku" AS "利用者負担額",
-            PSM."setaiCode" AS "世帯コード",
-            A."shotokuHantei_shichosonCode" AS "市町村コード",
-            A."beikoKojinshotokuKubun" AS "備考欄個人所得区分",
-            PSM."meisho" AS "被保険者名",
-            C."yokaigoJotaiKubunCode" AS "要介護認定状態区分コード",
-            C."kyuSochishaFlag" AS "旧措置者フラグ",
-            C."ninteiYukoKikanKaishiYMD" AS "認定有効期間開始年月日",
-            C."ninteiYukoKikanShuryoYMD" AS "認定有効期間終了年月日",
-            PSM."kanaMeisho" AS "カナ名称",
-            PSM."yubinNo" AS "郵便番号",
-            PSM."choikiCode" AS "町域コード",
-            PSM."jusho"||PSM."banchi"||PSM."katagaki" AS "住所番地方書",
-            PSM."gyoseikuCode" AS "行政区コード",
-            PSM."gyoseikuName" AS "行政区",
-            D."shichosonCode"||D."koikinaiTokureiSochimotoShichosonCode" AS "措置元市町村コード"
+        A."hiHokenshaNo" AS "被保険者番号",
+        A."shotokuHantei_shikibetsuCode" AS "識別コード",
+        A."serviceTeikyoYM" AS "サービス提供年月",
+        A."shokisaiHokenshaNo" AS "証記載保険者番号",
+        A."hokenRiyoshaFutangaku" AS "利用者負担額",
+        A."sikyugaku"  AS "支給予定額",
+        A."setaiCode" AS "世帯コード",
+        A."shotokuHantei_shichosonCode" AS "市町村コード",
+        A."beikoKojinshotokuKubun" AS "備考欄個人所得区分",
+        PSM."meisho" AS "被保険者名",
+        C."yokaigoJotaiKubunCode" AS "要介護認定状態区分コード",
+        C."kyuSochishaFlag" AS "旧措置者フラグ",
+        C."ninteiYukoKikanKaishiYMD" AS "認定有効期間開始年月日",
+        C."ninteiYukoKikanShuryoYMD" AS "認定有効期間終了年月日",
+        PSM."kanaMeisho" AS "カナ名称",
+        PSM."yubinNo" AS "郵便番号",
+        PSM."choikiCode" AS "町域コード",
+        PSM."jusho"||PSM."banchi"||PSM."katagaki" AS "住所番地方書",
+        PSM."gyoseikuCode" AS "行政区コード",
+        PSM."gyoseikuName" AS "行政区",
+        D."shichosonCode"||D."koikinaiTokureiSochimotoShichosonCode" AS "措置元市町村コード",
+        D."idoJiyuCode" AS "異動事由コード",
+        D."shikakuShutokuJiyuCode" as "資格取得事由コード",
+        D."shikakuSoshitsuJiyuCode" AS "資格喪失事由コード",
+        D."shikakuHenkoJiyuCode" AS "資格変更事由コード",
+        D."jushochitokureiTekiyoJiyuCode" as "住所地特例適用事由コード",
+        D."jushochitokureiKaijoJiyuCode" AS "住所地特例解除事由コード"
         FROM
-           "TempKyufujissekiTyukann8"  AS A
-         INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
-           ON C."hihokenshaNo" = A."hiHokenshaNo"
-         INNER JOIN  rgdb."DbV1001HihokenshaDaicho" AS D
-           ON D."hihokenshaNo" =  A."hiHokenshaNo"
-         LEFT OUTER JOIN rgua.${宛名識別対象PSM} AS  PSM
-         ON PSM."shikibetsuCode" = A."shotokuHantei_shikibetsuCode"
+        rgdb."TempKyufujissekiTyukann9"  AS A
+        INNER JOIN rgdb."DbT4001JukyushaDaicho" AS C
+        ON C."hihokenshaNo" = A."hiHokenshaNo"
+        INNER JOIN  rgdb."DbV1001HihokenshaDaicho" AS D
+        ON D."hihokenshaNo" =  A."hiHokenshaNo"
+        LEFT OUTER JOIN rgua.${宛名識別対象PSM} AS  PSM
+        ON PSM."shikibetsuCode" = A."shotokuHantei_shikibetsuCode"
         WHERE
-           C."yukoMukoKubun" = '1'
-         AND C."chokkinFlag" =TRUE
+        C."yukoMukoKubun" = '1'
+        AND C."chokkinFlag" =TRUE
     </select>
 </mapper>

@@ -63,8 +63,7 @@ public class JikofutangakuShomeishoTorokuManager {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}により生成された{@link JikofutangakuShomeishoTorokuManager}
+     * @return {@link InstanceProvider#create}により生成された{@link JikofutangakuShomeishoTorokuManager}
      */
     public static JikofutangakuShomeishoTorokuManager createInstance() {
         return InstanceProvider.create(JikofutangakuShomeishoTorokuManager.class);
@@ -117,10 +116,11 @@ public class JikofutangakuShomeishoTorokuManager {
             meisaiEntity.setRirekiNo(履歴番号);
             dbT3181Dac.save(meisaiEntity);
         }
-        dbT3180Dac.save(updShomeisho.modifiedModel().toEntity());
-        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : updMeisaiList) {
-            dbT3181Dac.save(meisai.modifiedModel().toEntity());
-        }
+//        dbT3180Dac.save(updShomeisho.modifiedModel().toEntity());
+//        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : updMeisaiList) {
+//            dbT3181Dac.save(meisai.modifiedModel().toEntity());
+//        }
+        delete事業高額合算自己負担額証明書and明細(updShomeisho, updMeisaiList);
     }
 
     /**
@@ -222,8 +222,10 @@ public class JikofutangakuShomeishoTorokuManager {
                 .get事業高額合算支給申請書情報(parameter);
 
         List<JikofutangakuShomeishoTorokuBusiness> list = new ArrayList<>();
-        JikofutangakuShomeishoTorokuBusiness business = new JikofutangakuShomeishoTorokuBusiness(torokuEntity);
-        list.add(business);
+        if (torokuEntity != null) {
+            JikofutangakuShomeishoTorokuBusiness business = new JikofutangakuShomeishoTorokuBusiness(torokuEntity);
+            list.add(business);
+        }
         return SearchResult.of(list, 0, false);
     }
 

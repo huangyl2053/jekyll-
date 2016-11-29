@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC030010;
 
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanShinseiUpdataParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanKetteiTsuchiShokanShinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.shokanketteitsuchishokanshinsei.ShokanKetteiTsuchiShokanShinseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;

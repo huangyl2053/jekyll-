@@ -14,8 +14,8 @@
     </resultMap>
 
     <select id="getDBT51001の場合のデータ" fetchSize="500" resultOrdered="true"
-        resultMap="ResultMap_JissiJyokyo"
-        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter">
+            resultMap="ResultMap_JissiJyokyo"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter">
         <include refid="申請受付件数新規のデータ取得" />
         UNION
         <include refid="申請受付件数要支援のデータ取得" />
@@ -46,76 +46,76 @@
         UNION
         <include refid="調査依頼件数更新のデータ取得" />
         UNION
-        <include refid="調査依頼件数区分変更のデータ取得" /> 
+        <include refid="調査依頼件数区分変更のデータ取得" />
         UNION
         <include refid="調査予定件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="調査予定件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="調査予定件数更新のデータ取得" />
-         UNION
+        UNION
         <include refid="調査予定件数区分変更のデータ取得" />
-         UNION
+        UNION
         <include refid="調査実施件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="調査実施件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="調査実施件数更新のデータ取得" />
-         UNION
+        UNION
         <include refid="調査実施件数区分変更のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書依頼件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書依頼件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書依頼件数更新のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書依頼件数区分変更のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ予定件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ予定件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ予定件数更新のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ予定件数区分変更のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ件数更新のデータ取得" />
-         UNION
+        UNION
         <include refid="意見書取寄せ件数区分変更のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会依頼件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会依頼件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会依頼件数更新のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会依頼件数区分変更のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会回答予定件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会回答予定件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会回答予定件数更新のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会回答予定件数区分変更のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会回答件数新規のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会回答件数要支援のデータ取得" />
-         UNION
+        UNION
         <include refid="審査会回答件数更新のデータ取得" />
-         UNION
-        <include refid="審査会回答件数区分変更のデータ取得" />       
+        UNION
+        <include refid="審査会回答件数区分変更のデータ取得" />
         ORDER BY  市町村コード,取得条件
     </select>
     <select id="get帳票DBD300004の場合のデータ" fetchSize="500" resultOrdered="true"
-        resultMap="ResultMap_JissiJyokyo"
-        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter">
+            resultMap="ResultMap_JissiJyokyo"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd581001.YokaigoJissiJyokyohyoHakkouMybatisParameter">
         <include refid="認定件数旧措置のデータ取得" />
         UNION
         <include refid="認定件数新規のデータ取得" />
@@ -193,7 +193,7 @@
         <include refid="要介護度2区分変更のデータ取得" />
         UNION
         <include refid="要介護度2区分変更旧措置のデータ取得" />
-        UNION        
+        UNION
         <include refid="要介護度2転入のデータ取得" />
         UNION
         <include refid="要介護度2転入旧措置のデータ取得" />
@@ -420,13 +420,13 @@
 
     <sql id="申請受付件数新規のデータ取得" >
         SELECT
-            '0101' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."jukyuShinseiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0101' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."jukyuShinseiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -435,13 +435,13 @@
     </sql>
     <sql id="申請受付件数要支援のデータ取得" >
         SELECT
-            '0102' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."jukyuShinseiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0102' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."jukyuShinseiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -450,13 +450,13 @@
     </sql>
     <sql id="申請受付件数更新のデータ取得" >
         SELECT
-            '0103' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."jukyuShinseiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0103' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."jukyuShinseiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -465,13 +465,13 @@
     </sql>
     <sql id="申請受付件数区分変更のデータ取得" >
         SELECT
-            '0104' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."jukyuShinseiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0104' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."jukyuShinseiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請受付件数の場合" />
         <include refid="条件A" />
@@ -480,13 +480,13 @@
     </sql>
     <sql id="申請取下げ件数新規のデータ取得" >
         SELECT
-            '0201' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0201' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -495,13 +495,13 @@
     </sql>
     <sql id="申請取下げ件数要支援のデータ取得" >
         SELECT
-            '0202' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0202' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -510,13 +510,13 @@
     </sql>
     <sql id="申請取下げ件数更新のデータ取得" >
         SELECT
-            '0203' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0203' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
@@ -525,28 +525,28 @@
     </sql>
     <sql id="申請取下げ件数区分変更のデータ取得" >
         SELECT
-            '0204' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0204' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件B" />
         <include refid="区分変更のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="申請却下件数新規のデータ取得" >
         SELECT
-            '0301' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,         
-            COUNT(*) AS 数量
+        '0301' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -555,28 +555,28 @@
     </sql>
     <sql id="申請却下件数要支援のデータ取得" >
         SELECT
-            '0302' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0302' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
         <include refid="要支援のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="申請却下件数更新のデータ取得" >
         SELECT
-            '0303' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0303' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
@@ -585,28 +585,28 @@
     </sql>
     <sql id="申請却下件数区分変更のデータ取得" >
         SELECT
-            '0304' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0304' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件C" />
         <include refid="区分変更のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="調査依頼件数新規のデータ取得" >
         SELECT
-            '0401' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaIraiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0401' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaIraiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -615,13 +615,13 @@
     </sql>
     <sql id="調査依頼件数要支援のデータ取得" >
         SELECT
-            '0402'AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaIraiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0402'AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaIraiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -630,13 +630,13 @@
     </sql>
     <sql id="調査依頼件数更新のデータ取得" >
         SELECT
-            '0403' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaIraiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0403' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaIraiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
@@ -645,29 +645,29 @@
     </sql>
     <sql id="調査依頼件数区分変更のデータ取得" >
         SELECT
-            '0404' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaIraiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0404' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaIraiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査依頼件数の場合" />
         <include refid="条件A" />
         <include refid="区分変更のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
 
     <sql id="調査予定件数新規のデータ取得">
-        SELECT            
-            '0501' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0501' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -676,28 +676,28 @@
     </sql>
     <sql id="調査予定件数要支援のデータ取得">
         SELECT
-            '0502' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaYoteiYM" AS 年月,
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        '0502' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
         <include refid="要支援のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="調査予定件数更新のデータ取得">
-        SELECT            
-            '0503' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaYoteiYM" AS 年月,    
-            COUNT(*) AS 数量 
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0503' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
@@ -705,29 +705,29 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="調査予定件数区分変更のデータ取得">
-        SELECT            
-            '0504' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaYoteiYM" AS 年月,    
-            COUNT(*) AS 数量       
-        FROM       
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0504' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査予定件数の場合" />
         <include refid="条件A" />
         <include refid="区分変更のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="調査実施件数新規のデータ取得">
-        SELECT           
-            '0601' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaJisshiYM" AS 年月,     
-            COUNT(*) AS 数量      
-        FROM           
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0601' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaJisshiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -735,14 +735,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="調査実施件数要支援のデータ取得">
-        SELECT           
-            '0602' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaJisshiYM" AS 年月,     
-            COUNT(*) AS 数量      
-        FROM             
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0602' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaJisshiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -750,14 +750,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="調査実施件数更新のデータ取得">
-        SELECT            
-            '0603' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaJisshiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0603' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaJisshiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -765,14 +765,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="調査実施件数区分変更のデータ取得">
-        SELECT            
-            '0604' AS 取得条件,  
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteichosaJisshiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0604' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteichosaJisshiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="調査実施件数の場合" />
         <include refid="条件A" />
@@ -780,14 +780,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書依頼件数新規のデータ取得">
-        SELECT           
-            '0701' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYM" AS 年月,             
-            COUNT(*) AS 数量       
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0701' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -795,14 +795,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書依頼件数要支援のデータ取得">
-        SELECT            
-            '0702' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYM" AS 年月,             
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0702' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -810,14 +810,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書依頼件数更新のデータ取得">
-        SELECT            
-            '0703' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0703' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -825,14 +825,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書依頼件数区分変更のデータ取得">
-        SELECT            
-            '0704' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0704' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書依頼件数の場合" />
         <include refid="条件A" />
@@ -840,14 +840,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書取寄せ予定件数新規のデータ取得">
-        SELECT            
-            '0801' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0801' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -855,29 +855,29 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書取寄せ予定件数要支援のデータ取得">
-        SELECT            
-            '0802' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0802' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
         <include refid="要支援のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="意見書取寄せ予定件数更新のデータ取得">
-        SELECT            
-            '0803' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0803' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -885,14 +885,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書取寄せ予定件数区分変更のデータ取得">
-        SELECT            
-            '0804' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoSakuseiIraiYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0804' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoSakuseiIraiYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ予定件数の場合" />
         <include refid="条件A" />
@@ -900,14 +900,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書取寄せ件数新規のデータ取得">
-        SELECT            
-            '0901' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoJuryoYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0901' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoJuryoYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -915,29 +915,29 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書取寄せ件数要支援のデータ取得">
-        SELECT            
-            '0902' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoJuryoYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0902' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoJuryoYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
         <include refid="要支援のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="意見書取寄せ件数更新のデータ取得">
-        SELECT            
-            '0903' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoJuryoYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0903' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoJuryoYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -945,14 +945,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="意見書取寄せ件数区分変更のデータ取得">
-        SELECT            
-            '0904' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ikenshoJuryoYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '0904' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ikenshoJuryoYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="意見書取寄せ件数の場合" />
         <include refid="条件A" />
@@ -960,14 +960,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会依頼件数新規のデータ取得">
-        SELECT            
-            '1001' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiIraiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1001' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -975,29 +975,29 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会依頼件数要支援のデータ取得">
-        SELECT            
-            '1002' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiIraiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1002' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
         <include refid="要支援のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="審査会依頼件数更新のデータ取得">
-        SELECT            
-            '1003' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiIraiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1003' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1005,14 +1005,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会依頼件数区分変更のデータ取得">
-        SELECT            
-            '1004' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiIraiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1004' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiIraiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会依頼件数の場合" />
         <include refid="条件A" />
@@ -1020,14 +1020,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会回答予定件数新規のデータ取得">
-        SELECT            
-            '1101' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1101' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiShinsakaiWariateYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1035,29 +1035,29 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会回答予定件数要支援のデータ取得">
-        SELECT            
-            '1102' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1102' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiShinsakaiWariateYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
         <include refid="要支援のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="審査会回答予定件数更新のデータ取得">
-        SELECT            
-            '1103' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1103' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiShinsakaiWariateYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1065,14 +1065,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会回答予定件数区分変更のデータ取得">
-        SELECT            
-            '1104' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiShinsakaiWariateYoteiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1104' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiShinsakaiWariateYoteiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答予定件数の場合" />
         <include refid="条件A" />
@@ -1080,14 +1080,14 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会回答件数新規のデータ取得">
-        SELECT            
-            '1201' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiShiryoSakuseiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1201' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiShiryoSakuseiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1095,29 +1095,29 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会回答件数要支援のデータ取得">
-        SELECT            
-            '1202' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiShiryoSakuseiYM" AS 年月,             
-            COUNT(*) AS 数量       
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1202' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiShiryoSakuseiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
         <include refid="要支援のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="審査会回答件数更新のデータ取得">
-        SELECT            
-            '1203' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiShiryoSakuseiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1203' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiShiryoSakuseiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
@@ -1125,75 +1125,75 @@
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
     <sql id="審査会回答件数区分変更のデータ取得">
-        SELECT            
-            '1204' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."shinsakaiShiryoSakuseiYM" AS 年月,              
-            COUNT(*) AS 数量        
-        FROM              
-            "jukyushaDaichoTempEntity"  AS A
+        SELECT
+        '1204' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."shinsakaiShiryoSakuseiYM" AS 年月,
+        COUNT(*) AS 数量
+        FROM
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="審査会回答件数の場合" />
         <include refid="条件A" />
         <include refid="区分変更のデータ取得" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql>  
-    
+    </sql>
+
     <sql id="認定件数旧措置のデータ取得">
         SELECT
-            '0101' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0101' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="認定件数新規のデータ取得">
         SELECT
-            '0102' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0102' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="認定件数新規旧措置のデータ取得">
         SELECT
-            '0103' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0103' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="認定件数新規要支援のデータ取得">
         SELECT
-            '0104' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0104' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1202,13 +1202,13 @@
     </sql>
     <sql id="認定件数新規要支援旧措置のデータ取得">
         SELECT
-            '0105' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0105' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1217,13 +1217,13 @@
     </sql>
     <sql id="認定件数更新のデータ取得">
         SELECT
-            '0106' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0106' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1232,13 +1232,13 @@
     </sql>
     <sql id="認定件数更新旧措置のデータ取得">
         SELECT
-            '0107' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0107' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1247,13 +1247,13 @@
     </sql>
     <sql id="認定件数区分変更のデータ取得">
         SELECT
-            '0108' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0108' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1262,13 +1262,13 @@
     </sql>
     <sql id="認定件数区分変更旧措置のデータ取得">
         SELECT
-            '0109' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0109' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1277,13 +1277,13 @@
     </sql>
     <sql id="認定件数転入のデータ取得">
         SELECT
-            '0110' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0110' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1292,13 +1292,13 @@
     </sql>
     <sql id="認定件数転入旧措置のデータ取得">
         SELECT
-            '0111' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0111' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1307,13 +1307,13 @@
     </sql>
     <sql id="認定件数職権他のデータ取得">
         SELECT
-            '0112' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0112' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1322,13 +1322,13 @@
     </sql>
     <sql id="認定件数職権他旧措置のデータ取得">
         SELECT
-            '0113' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0113' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A        
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1337,13 +1337,13 @@
     </sql>
     <sql id="認定件数資格喪失のデータ取得">
         SELECT
-            '0114' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0114' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1352,13 +1352,13 @@
     </sql>
     <sql id="認定件数資格喪失旧措置のデータ取得">
         SELECT
-            '0115' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0115' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="申請取下げ件数、申請却下件数、認定件数の場合" />
         <include refid="条件D" />
@@ -1367,58 +1367,58 @@
     </sql>
     <sql id="要介護度1旧措置のデータ取得">
         SELECT
-            '0201' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0201' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度1新規のデータ取得">
         SELECT
-            '0202' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0202' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度1新規旧措置のデータ取得">
         SELECT
-            '0203' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0203' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度1新規要支援のデータ取得">
         SELECT
-            '0204' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0204' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1427,13 +1427,13 @@
     </sql>
     <sql id="要介護度1新規要支援旧措置のデータ取得">
         SELECT
-            '0205' AS 取得条件, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0205' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1442,13 +1442,13 @@
     </sql>
     <sql id="要介護度1更新のデータ取得">
         SELECT
-            '0206' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0206' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1457,13 +1457,13 @@
     </sql>
     <sql id="要介護度1更新旧措置のデータ取得">
         SELECT
-            '0207' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0207' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1472,13 +1472,13 @@
     </sql>
     <sql id="要介護度1区分変更のデータ取得">
         SELECT
-            '0208' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0208' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1487,13 +1487,13 @@
     </sql>
     <sql id="要介護度1区分変更旧措置のデータ取得">
         SELECT
-            '0209' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0209' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1502,13 +1502,13 @@
     </sql>
     <sql id="要介護度1転入のデータ取得">
         SELECT
-            '0210' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0210' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1517,13 +1517,13 @@
     </sql>
     <sql id="要介護度1転入旧措置のデータ取得">
         SELECT
-            '0211' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0211' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1532,13 +1532,13 @@
     </sql>
     <sql id="要介護度1職権他のデータ取得">
         SELECT
-            '0212' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0212' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1547,13 +1547,13 @@
     </sql>
     <sql id="要介護度1職権他旧措置のデータ取得">
         SELECT
-            '0213' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0213' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1562,13 +1562,13 @@
     </sql>
     <sql id="要介護度1資格喪失のデータ取得">
         SELECT
-            '0214' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0214' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1577,13 +1577,13 @@
     </sql>
     <sql id="要介護度1資格喪失旧措置のデータ取得">
         SELECT
-            '0215' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0215' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度1の場合" />
         <include refid="条件E" />
@@ -1592,58 +1592,58 @@
     </sql>
     <sql id="要介護度2旧措置のデータ取得">
         SELECT
-            '0301' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0301' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度2新規のデータ取得">
         SELECT
-            '0302' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0302' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度2新規旧措置のデータ取得">
         SELECT
-            '0303' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0303' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度2新規要支援のデータ取得">
         SELECT
-            '0304' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0304' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1652,13 +1652,13 @@
     </sql>
     <sql id="要介護度2新規要支援旧措置のデータ取得">
         SELECT
-            '0305' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0305' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1667,13 +1667,13 @@
     </sql>
     <sql id="要介護度2更新のデータ取得">
         SELECT
-            '0306' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0306' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1682,13 +1682,13 @@
     </sql>
     <sql id="要介護度2更新旧措置のデータ取得">
         SELECT
-            '0307' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0307' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1697,13 +1697,13 @@
     </sql>
     <sql id="要介護度2区分変更のデータ取得">
         SELECT
-            '0308' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0308' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1712,13 +1712,13 @@
     </sql>
     <sql id="要介護度2区分変更旧措置のデータ取得">
         SELECT
-            '0309' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0309' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1727,13 +1727,13 @@
     </sql>
     <sql id="要介護度2転入のデータ取得">
         SELECT
-            '0310' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0310' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1742,13 +1742,13 @@
     </sql>
     <sql id="要介護度2転入旧措置のデータ取得">
         SELECT
-            '0311' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0311' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1757,13 +1757,13 @@
     </sql>
     <sql id="要介護度2職権他のデータ取得">
         SELECT
-            '0312' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0312' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1772,13 +1772,13 @@
     </sql>
     <sql id="要介護度2職権他旧措置のデータ取得">
         SELECT
-            '0313' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0313' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1787,13 +1787,13 @@
     </sql>
     <sql id="要介護度2資格喪失のデータ取得">
         SELECT
-            '0314' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0314' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1802,13 +1802,13 @@
     </sql>
     <sql id="要介護度2資格喪失旧措置のデータ取得">
         SELECT
-            '0315' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0315' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度2の場合" />
         <include refid="条件E" />
@@ -1817,58 +1817,58 @@
     </sql>
     <sql id="要介護度3旧措置のデータ取得">
         SELECT
-            '0401' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0401' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度3新規のデータ取得">
         SELECT
-            '0402' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0402' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度3新規旧措置のデータ取得">
         SELECT
-            '0403' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0403' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度3新規要支援のデータ取得">
         SELECT
-            '0404' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0404' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1877,13 +1877,13 @@
     </sql>
     <sql id="要介護度3新規要支援旧措置のデータ取得">
         SELECT
-            '0405' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0405' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1892,13 +1892,13 @@
     </sql>
     <sql id="要介護度3更新のデータ取得">
         SELECT
-            '0406' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0406' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1907,13 +1907,13 @@
     </sql>
     <sql id="要介護度3更新旧措置のデータ取得">
         SELECT
-            '0407' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0407' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1922,13 +1922,13 @@
     </sql>
     <sql id="要介護度3区分変更のデータ取得">
         SELECT
-            '0408' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0408' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1937,13 +1937,13 @@
     </sql>
     <sql id="要介護度3区分変更旧措置のデータ取得">
         SELECT
-            '0409' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0409' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1952,13 +1952,13 @@
     </sql>
     <sql id="要介護度3転入のデータ取得">
         SELECT
-            '0410' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0410' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1967,13 +1967,13 @@
     </sql>
     <sql id="要介護度3転入旧措置のデータ取得">
         SELECT
-            '0411' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0411' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1982,13 +1982,13 @@
     </sql>
     <sql id="要介護度3職権他のデータ取得">
         SELECT
-            '0412' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0412' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -1997,13 +1997,13 @@
     </sql>
     <sql id="要介護度3職権他旧措置のデータ取得">
         SELECT
-            '0413' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0413' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2012,13 +2012,13 @@
     </sql>
     <sql id="要介護度3資格喪失のデータ取得">
         SELECT
-            '0414' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0414' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2027,13 +2027,13 @@
     </sql>
     <sql id="要介護度3資格喪失旧措置のデータ取得">
         SELECT
-            '0415' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0415' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度3の場合" />
         <include refid="条件E" />
@@ -2042,58 +2042,58 @@
     </sql>
     <sql id="要介護度4旧措置のデータ取得">
         SELECT
-            '0501' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0501' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度4新規のデータ取得">
         SELECT
-            '0502' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0502' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度4新規旧措置のデータ取得">
         SELECT
-            '0503' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0503' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度4新規要支援のデータ取得">
         SELECT
-            '0504' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0504' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2102,13 +2102,13 @@
     </sql>
     <sql id="要介護度4新規要支援旧措置のデータ取得">
         SELECT
-            '0505' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0505' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2117,13 +2117,13 @@
     </sql>
     <sql id="要介護度4更新のデータ取得">
         SELECT
-            '0506' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0506' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2132,13 +2132,13 @@
     </sql>
     <sql id="要介護度4更新旧措置のデータ取得">
         SELECT
-            '0507' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0507' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2147,13 +2147,13 @@
     </sql>
     <sql id="要介護度4区分変更のデータ取得">
         SELECT
-            '0508' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0508' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2162,13 +2162,13 @@
     </sql>
     <sql id="要介護度4区分変更旧措置のデータ取得">
         SELECT
-            '0509' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0509' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2177,13 +2177,13 @@
     </sql>
     <sql id="要介護度4転入のデータ取得">
         SELECT
-            '0510' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0510' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2192,13 +2192,13 @@
     </sql>
     <sql id="要介護度4転入旧措置のデータ取得">
         SELECT
-            '0511' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0511' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2207,13 +2207,13 @@
     </sql>
     <sql id="要介護度4職権他のデータ取得">
         SELECT
-            '0512' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0512' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2222,13 +2222,13 @@
     </sql>
     <sql id="要介護度4職権他旧措置のデータ取得">
         SELECT
-            '0513' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0513' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2237,13 +2237,13 @@
     </sql>
     <sql id="要介護度4資格喪失のデータ取得">
         SELECT
-            '0514' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0514' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2252,13 +2252,13 @@
     </sql>
     <sql id="要介護度4資格喪失旧措置のデータ取得">
         SELECT
-            '0515' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0515' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度4の場合" />
         <include refid="条件E" />
@@ -2267,58 +2267,58 @@
     </sql>
     <sql id="要介護度5旧措置のデータ取得">
         SELECT
-            '0601' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0601' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度5新規のデータ取得">
         SELECT
-            '0602' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0602' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度5新規旧措置のデータ取得">
         SELECT
-            '0603' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0603' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要介護度5新規要支援のデータ取得">
         SELECT
-            '0604' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0604' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2327,13 +2327,13 @@
     </sql>
     <sql id="要介護度5新規要支援旧措置のデータ取得">
         SELECT
-            '0605' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0605' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2342,13 +2342,13 @@
     </sql>
     <sql id="要介護度5更新のデータ取得">
         SELECT
-            '0606' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0606' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2357,13 +2357,13 @@
     </sql>
     <sql id="要介護度5更新旧措置のデータ取得">
         SELECT
-            '0607' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0607' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2372,13 +2372,13 @@
     </sql>
     <sql id="要介護度5区分変更のデータ取得">
         SELECT
-            '0608' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0608' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2387,13 +2387,13 @@
     </sql>
     <sql id="要介護度5区分変更旧措置のデータ取得">
         SELECT
-            '0609' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0609' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2402,13 +2402,13 @@
     </sql>
     <sql id="要介護度5転入のデータ取得">
         SELECT
-            '0610' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0610' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2417,13 +2417,13 @@
     </sql>
     <sql id="要介護度5転入旧措置のデータ取得">
         SELECT
-            '0611' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0611' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2432,13 +2432,13 @@
     </sql>
     <sql id="要介護度5職権他のデータ取得">
         SELECT
-            '0612' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0612' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2447,13 +2447,13 @@
     </sql>
     <sql id="要介護度5職権他旧措置のデータ取得">
         SELECT
-            '0613' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0613' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2462,13 +2462,13 @@
     </sql>
     <sql id="要介護度5資格喪失のデータ取得">
         SELECT
-            '0614' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0614' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2477,13 +2477,13 @@
     </sql>
     <sql id="要介護度5資格喪失旧措置のデータ取得">
         SELECT
-            '0615' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0615' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要介護度5の場合" />
         <include refid="条件E" />
@@ -2492,58 +2492,58 @@
     </sql>
     <sql id="要支援1旧措置のデータ取得">
         SELECT
-            '0701' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0701' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援1新規のデータ取得">
         SELECT
-            '0702' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0702' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援1新規旧措置のデータ取得">
         SELECT
-            '0703' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0703' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援1新規要支援のデータ取得">
         SELECT
-            '0704' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0704' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2552,13 +2552,13 @@
     </sql>
     <sql id="要支援1新規要支援旧措置のデータ取得">
         SELECT
-            '0705' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0705' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2567,13 +2567,13 @@
     </sql>
     <sql id="要支援1更新のデータ取得">
         SELECT
-            '0706' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0706' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2582,13 +2582,13 @@
     </sql>
     <sql id="要支援1更新旧措置のデータ取得">
         SELECT
-            '0707' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0707' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2597,13 +2597,13 @@
     </sql>
     <sql id="要支援1区分変更のデータ取得">
         SELECT
-            '0708' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0708' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2612,13 +2612,13 @@
     </sql>
     <sql id="要支援1区分変更旧措置のデータ取得">
         SELECT
-            '0709' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0709' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2627,13 +2627,13 @@
     </sql>
     <sql id="要支援1転入のデータ取得">
         SELECT
-            '0710'AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0710'AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2642,13 +2642,13 @@
     </sql>
     <sql id="要支援1転入旧措置のデータ取得">
         SELECT
-            '0711' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0711' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2657,13 +2657,13 @@
     </sql>
     <sql id="要支援1職権他のデータ取得">
         SELECT
-            '0712' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0712' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2672,13 +2672,13 @@
     </sql>
     <sql id="要支援1職権他旧措置のデータ取得">
         SELECT
-            '0713' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0713' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2687,13 +2687,13 @@
     </sql>
     <sql id="要支援1資格喪失のデータ取得">
         SELECT
-            '0714' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0714' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2702,13 +2702,13 @@
     </sql>
     <sql id="要支援1資格喪失旧措置のデータ取得">
         SELECT
-            '0715' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0715' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援1の場合" />
         <include refid="条件E" />
@@ -2717,58 +2717,58 @@
     </sql>
     <sql id="要支援2旧措置のデータ取得">
         SELECT
-            '0801' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0801' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援2新規のデータ取得">
         SELECT
-            '0802' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0802' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援2新規旧措置のデータ取得">
         SELECT
-            '0803' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0803' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援2新規要支援のデータ取得">
         SELECT
-            '0804' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0804' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2777,13 +2777,13 @@
     </sql>
     <sql id="要支援2新規要支援旧措置のデータ取得">
         SELECT
-            '0805' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0805' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2792,13 +2792,13 @@
     </sql>
     <sql id="要支援2更新のデータ取得">
         SELECT
-            '0806' AS 取得条件,
-            A."ninteiYM" AS 年月, 
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            COUNT(*) AS 数量
+        '0806' AS 取得条件,
+        A."ninteiYM" AS 年月,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2807,13 +2807,13 @@
     </sql>
     <sql id="要支援2更新旧措置のデータ取得">
         SELECT
-            '0807' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0807' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2822,13 +2822,13 @@
     </sql>
     <sql id="要支援2区分変更のデータ取得">
         SELECT
-            '0808' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0808' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2837,13 +2837,13 @@
     </sql>
     <sql id="要支援2区分変更旧措置のデータ取得">
         SELECT
-            '0809' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0809' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2852,13 +2852,13 @@
     </sql>
     <sql id="要支援2転入のデータ取得">
         SELECT
-            '0810' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0810' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2867,13 +2867,13 @@
     </sql>
     <sql id="要支援2転入旧措置のデータ取得">
         SELECT
-            '0811' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0811' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2882,13 +2882,13 @@
     </sql>
     <sql id="要支援2職権他のデータ取得">
         SELECT
-            '0812' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0812' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2897,13 +2897,13 @@
     </sql>
     <sql id="要支援2職権他旧措置のデータ取得">
         SELECT
-            '0813' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0813' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2912,13 +2912,13 @@
     </sql>
     <sql id="要支援2資格喪失のデータ取得">
         SELECT
-            '0814' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0814' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2927,13 +2927,13 @@
     </sql>
     <sql id="要支援2資格喪失旧措置のデータ取得">
         SELECT
-            '0815' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0815' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援2の場合" />
         <include refid="条件E" />
@@ -2942,58 +2942,58 @@
     </sql>
     <sql id="要支援旧措置のデータ取得">
         SELECT
-            '0901' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0901' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援新規のデータ取得">
         SELECT
-            '0902' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0902' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援新規旧措置のデータ取得">
         SELECT
-            '0903' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0903' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="要支援新規要支援のデータ取得">
         SELECT
-            '0904' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0904' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3002,13 +3002,13 @@
     </sql>
     <sql id="要支援新規要支援旧措置のデータ取得">
         SELECT
-            '0905' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0905' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3017,13 +3017,13 @@
     </sql>
     <sql id="要支援更新のデータ取得">
         SELECT
-            '0906' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0906' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3032,13 +3032,13 @@
     </sql>
     <sql id="要支援更新旧措置のデータ取得">
         SELECT
-            '0907' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0907' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3047,13 +3047,13 @@
     </sql>
     <sql id="要支援区分変更のデータ取得">
         SELECT
-            '0908' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0908' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3062,13 +3062,13 @@
     </sql>
     <sql id="要支援区分変更旧措置のデータ取得">
         SELECT
-            '0909' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0909' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3077,13 +3077,13 @@
     </sql>
     <sql id="要支援転入のデータ取得">
         SELECT
-            '0910' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0910' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3092,13 +3092,13 @@
     </sql>
     <sql id="要支援転入旧措置のデータ取得">
         SELECT
-            '0911' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0911' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3107,13 +3107,13 @@
     </sql>
     <sql id="要支援職権他のデータ取得">
         SELECT
-            '0912' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0912' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3122,13 +3122,13 @@
     </sql>
     <sql id="要支援職権他旧措置のデータ取得">
         SELECT
-            '0913' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0913' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3137,13 +3137,13 @@
     </sql>
     <sql id="要支援資格喪失のデータ取得">
         SELECT
-            '0914' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0914' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3152,13 +3152,13 @@
     </sql>
     <sql id="要支援資格喪失旧措置のデータ取得">
         SELECT
-            '0915' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '0915' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="要支援の場合" />
         <include refid="条件E" />
@@ -3167,58 +3167,58 @@
     </sql>
     <sql id="自立旧措置のデータ取得">
         SELECT
-            '1001' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1001' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
         <include refid="旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="自立新規のデータ取得">
         SELECT
-            '1002' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1002' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
         <include refid="新規のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="自立新規旧措置のデータ取得">
         SELECT
-            '1003' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1003' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
         <include refid="新規旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
-    </sql> 
+    </sql>
     <sql id="自立新規要支援のデータ取得">
         SELECT
-            '1004' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1004' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3227,13 +3227,13 @@
     </sql>
     <sql id="自立新規要支援旧措置のデータ取得">
         SELECT
-            '1005' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1005' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3242,13 +3242,13 @@
     </sql>
     <sql id="自立更新のデータ取得">
         SELECT
-            '1006' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1006' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3257,13 +3257,13 @@
     </sql>
     <sql id="自立更新旧措置のデータ取得">
         SELECT
-            '1007' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1007' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3272,13 +3272,13 @@
     </sql>
     <sql id="自立区分変更のデータ取得">
         SELECT
-            '1008' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1008' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3287,13 +3287,13 @@
     </sql>
     <sql id="自立区分変更旧措置のデータ取得">
         SELECT
-            '1009' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1009' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3302,13 +3302,13 @@
     </sql>
     <sql id="自立転入のデータ取得">
         SELECT
-            '1010' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1010' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3317,13 +3317,13 @@
     </sql>
     <sql id="自立転入旧措置のデータ取得">
         SELECT
-            '1011' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1011' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3332,13 +3332,13 @@
     </sql>
     <sql id="自立職権他のデータ取得" >
         SELECT
-            '1012' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1012' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3347,13 +3347,13 @@
     </sql>
     <sql id="自立職権他旧措置のデータ取得">
         SELECT
-            '1013' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1013' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3362,13 +3362,13 @@
     </sql>
     <sql id="自立資格喪失のデータ取得">
         SELECT
-            '1014' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1014' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
@@ -3377,20 +3377,20 @@
     </sql>
     <sql id="自立資格喪失旧措置のデータ取得">
         SELECT
-            '1015' AS 取得条件,
-            A."shichosonCode" AS 市町村コード,
-            A."shichosonMeisho" AS 市町村名,
-            A."ninteiYM" AS 年月,  
-            COUNT(*) AS 数量
+        '1015' AS 取得条件,
+        A."shichosonCode" AS 市町村コード,
+        A."shichosonMeisho" AS 市町村名,
+        A."ninteiYM" AS 年月,
+        COUNT(*) AS 数量
         FROM
-              "jukyushaDaichoTempEntity"  AS A 
+        "jukyushaDaichoTempEntity"  AS A
         WHERE
         <include refid="自立の場合" />
         <include refid="条件F" />
         <include refid="資格喪失旧措置のデータ取得2" />
         GROUP BY  市町村コード, 市町村名, 年月
     </sql>
-    
+
     <sql id="申請受付件数の場合">
         #{対象年月日From} <![CDATA[<=]]> A."jukyuShinseiYMD"
         AND A."jukyuShinseiYMD" <![CDATA[<=]]> #{対象年月日To}
@@ -3480,56 +3480,56 @@
         #{対象年月日From} <![CDATA[<=]]> A."ikenshoSakuseiIraiYoteiYMD"
         AND A."ikenshoSakuseiIraiYoteiYMD" <![CDATA[<=]]> #{対象年月日To}
     </sql>
-    
+
     <sql id="条件A">
         AND (A."dataKubun" = '00'
-            OR  A."dataKubun" IN ('31','32','33','34','35','36','37','39')
-            OR  A."dataKubun" IN ('41','42','43','44','45','49'))
-            AND A."jukyuShinseiJiyu" != '7'
+        OR  A."dataKubun" IN ('31','32','33','34','35','36','37','39')
+        OR  A."dataKubun" IN ('41','42','43','44','45','49'))
+        AND A."jukyuShinseiJiyu" != '7'
     </sql>
     <sql id="条件B">
         AND (A."dataKubun" IN ('41','42','43','44','45','49')
-            AND A."jukyuShinseiJiyu" != '7'
+        AND A."jukyuShinseiJiyu" != '7'
         )
     </sql>
     <sql id="条件C">
         AND (A."dataKubun" IN ('31','32','33','34','35','36','37','39')
-            AND A."jukyuShinseiJiyu" != '7'
+        AND A."jukyuShinseiJiyu" != '7'
         )
     </sql>
     <sql id="条件D">
         AND (A."dataKubun" = '00'
-            OR  A."dataKubun" IN ('21','22','23','24','25','29'))
-            AND(A."yukoMukoKubun"='1' 
-            OR (A."yukoMukoKubun"='2'
-            AND A."yokaigoJotaiKubunCode"='01'
-            AND A."shikakuSoshitsuYMD" IS NULL))
+        OR  A."dataKubun" IN ('21','22','23','24','25','29'))
+        AND(A."yukoMukoKubun"='1'
+        OR (A."yukoMukoKubun"='2'
+        AND A."yokaigoJotaiKubunCode"='01'
+        AND A."shikakuSoshitsuYMD" IS NULL))
     </sql>
     <sql id="条件E">
         AND (A."dataKubun" = '00'
-            OR  A."dataKubun" IN ('11','12','13','14','15','19')
-            OR  A."dataKubun" IN ('21','22','23','24','25','29'))
-            AND A."yukoMukoKubun"='1' 
+        OR  A."dataKubun" IN ('11','12','13','14','15','19')
+        OR  A."dataKubun" IN ('21','22','23','24','25','29'))
+        AND A."yukoMukoKubun"='1'
     </sql>
     <sql id="条件F">
         AND (A."dataKubun" = '00'
-            OR  A."dataKubun" IN ('11','12','13','14','15','19')
-            OR  A."dataKubun" IN ('21','22','23','24','25','29'))
-            AND A."shikakuSoshitsuYMD" IS NULL
+        OR  A."dataKubun" IN ('11','12','13','14','15','19')
+        OR  A."dataKubun" IN ('21','22','23','24','25','29'))
+        AND A."shikakuSoshitsuYMD" IS NULL
     </sql>
     <sql id="新規のデータ取得">
-         AND((A."jukyuShinseiJiyu"='1'
-         OR A."jukyuShinseiJiyu"='3')
-         OR (A."jukyuShinseiJiyu"='4'
-         AND A."yoshienshaNinteiShinseiFlag"=TRUE)
-         OR  (A."jukyuShinseiJiyu"='6'))
+        AND((A."jukyuShinseiJiyu"='1'
+        OR A."jukyuShinseiJiyu"='3')
+        OR (A."jukyuShinseiJiyu"='4'
+        AND A."yoshienshaNinteiShinseiFlag"=TRUE)
+        OR  (A."jukyuShinseiJiyu"='6'))
     </sql>
     <sql id="要支援のデータ取得">
         AND A."jukyuShinseiJiyu"='4'
         AND A."yoshienshaNinteiShinseiFlag"=TRUE
     </sql>
     <sql id="更新のデータ取得">
-         AND A."jukyuShinseiJiyu"='2'
+        AND A."jukyuShinseiJiyu"='2'
     </sql>
     <sql id="区分変更のデータ取得">
         AND A."jukyuShinseiJiyu"='4'
@@ -3567,7 +3567,7 @@
     </sql>
     <sql id="更新旧措置のデータ取得2">
         AND A."jukyuShinseiJiyu"='2'
-        AND A."kyuSochishaFlag" = TRUE    
+        AND A."kyuSochishaFlag" = TRUE
     </sql>
     <sql id="区分変更のデータ取得2">
         AND A."jukyuShinseiJiyu"='4'
@@ -3600,11 +3600,11 @@
     </sql>
     <sql id="資格喪失のデータ取得2">
         AND (A."shikakuSoshitsuYMD" IS NOT NULL
-        AND SUBSTRING(A."shikakuSoshitsuYMD",0,6) = SUBSTRING(A."ninteiYMD",0,6))
+        AND SUBSTRING(A."shikakuSoshitsuYMD",1,6) = SUBSTRING(A."ninteiYMD",1,6))
     </sql>
     <sql id="資格喪失旧措置のデータ取得2">
         AND (A."shikakuSoshitsuYMD" IS NOT NULL
-        AND SUBSTRING(A."shikakuSoshitsuYMD",0,6) = SUBSTRING(A."ninteiYMD",0,6))
+        AND SUBSTRING(A."shikakuSoshitsuYMD",1,6) = SUBSTRING(A."ninteiYMD",1,6))
         AND A."kyuSochishaFlag" = TRUE
-    </sql>    
+    </sql>
 </mapper>

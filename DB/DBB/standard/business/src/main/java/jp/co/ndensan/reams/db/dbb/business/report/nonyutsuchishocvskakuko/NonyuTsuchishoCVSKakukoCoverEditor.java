@@ -184,8 +184,8 @@ public class NonyuTsuchishoCVSKakukoCoverEditor implements INonyuTsuchishoCVSKak
             if (item.get編集後本算定通知書共通情報().get未到来期の納付済額() != null) {
                 source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get未到来期の納付済額().toString());
             }
-            if (item.get編集後本算定通知書共通情報().get今後納付すべき額() != null) {
-                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額().toString());
+            if (item.get編集後本算定通知書共通情報().get今後納付すべき額_収入元に() != null) {
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get今後納付すべき額_収入元に().toString());
             }
             this.更正後情報相関設定(source);
 

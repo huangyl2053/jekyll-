@@ -5,25 +5,26 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2700011;
 
-import java.io.File;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC170020.DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2700011.TorikomiFuairuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2700011.TorikomiFuairuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2700011.TorikomiFuairuValidationHandler;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -35,7 +36,20 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class TorikomiFuairu {
 
     private final RString 共有ファイル名 = new RString("KM999999_COMMON.csv");
+    private static final RString 西暦 = new RString("yyyyMMddHHmmss");
+    private static final RString 実行ボタンNAME = new RString("Execute");
     private static final int NO_300 = 300;
+
+    /**
+     * 初期化処理
+     *
+     * @param div TorikomiFuairuDiv
+     * @return ResponseData
+     */
+    public ResponseData<TorikomiFuairuDiv> onLoad(TorikomiFuairuDiv div) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタンNAME, true);
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 「アップロード」ボタンの処理です。
@@ -45,39 +59,40 @@ public class TorikomiFuairu {
      * @return ResponseData
      */
     @SuppressWarnings("checkstyle:illegaltoken")
-    public ResponseData<TorikomiFuairuDiv> onClick_btnAppurodo(TorikomiFuairuDiv div, FileData... files) {
+    public ResponseData<TorikomiFuairuDiv> onClick_btnAppurodo(TorikomiFuairuDiv div, FileData[] files) {
+        FileData sharedfile = files[0];
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         getValidationHandler(div).validateForアップロードファイル未指定(pairs);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        RString filename = RString.EMPTY;
-        RString filePath = RString.EMPTY;
-        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(共有ファイル名);
-        for (FileData sharedfile : files) {
-            File inFile = new File(sharedfile.getFilePath().toString());
-            RString localFilePath = new RString(inFile.getPath());
-            FilesystemPath path = new FilesystemPath(localFilePath);
-            FilesystemName filesystemName = new FilesystemName(共有ファイル名);
-            SharedFileDescriptor sfd = SharedFile.defineSharedFile(filesystemName);
-            CopyToSharedFileOpts opts = new CopyToSharedFileOpts();
-            for (UzT0885SharedFileEntryEntity sharedFile : sharedFiles) {
-                SharedFileEntryDescriptor sfed = new ReadOnlySharedFileEntryDescriptor(filesystemName, sharedFile.getSharedFileId());
-                SharedFile.deleteEntry(sfed);
-                jp.co.ndensan.reams.uz.uza.io.File.deleteIfExists(SharedFile.getDirectAccessPath(sfed));
-            }
 
-            SharedFile.copyToSharedFile(sfd, path, opts);
-            filename = new RString(inFile.getName());
-            filePath = sharedfile.getFilePath();
-        }
-        int size = getHandler(div).upload(filePath, filename);
+        int size = getHandler().upload(sharedfile.getFilePath(), sharedfile.getFileName());
         div.getHdNumber().setValue(new RString(size % NO_300));
         getValidationHandler(div).validateForアップロードファイル項目数(pairs);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        div.getTxtFuairuRekodoSu().setValue(new Decimal(size / NO_300));
+        div.getTxtKoshinNichiji().setValue(RDateTime.now().format西暦(西暦.toString()));
+        div.getTxtFuairuName().setValue(sharedfile.getFileName());
+        div.getTxtFuairuRekodoSu().setValue(new Decimal(size));
+        List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(共有ファイル名);
+        if (sharedFiles != null && !sharedFiles.isEmpty()) {
+            for (UzT0885SharedFileEntryEntity entity : sharedFiles) {
+                SharedFileEntryDescriptor desc = SharedFileEntryDescriptor.fromEntity(entity);
+                SharedFile.deleteEntry(desc);
+            }
+        }
+
+        sharedfile.setFileName(共有ファイル名);
+        FilesystemName fileName = FilesystemName.fromString(sharedfile.getFileName());
+        FilesystemPath filePath = FilesystemPath.fromString(sharedfile.getFilePath());
+        SharedFileDescriptor sharedFileDescriptor = new SharedFileDescriptor(GyomuCode.DB介護保険, fileName).createEntry();
+        sharedFileDescriptor = SharedFile.defineSharedFile(sharedFileDescriptor);
+        CopyToSharedFileOpts copyToSharedFile = new CopyToSharedFileOpts();
+        SharedFile.copyToSharedFile(sharedFileDescriptor, filePath, copyToSharedFile);
+
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタンNAME, false);
         return ResponseData.of(div).respond();
     }
 
@@ -107,15 +122,15 @@ public class TorikomiFuairu {
      * @return ResponseData<DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter>
      */
     public ResponseData<DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter> onClick_btnRegister(TorikomiFuairuDiv div) {
-        return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+        return ResponseData.of(getHandler().setBatchParameter()).respond();
     }
 
     private TorikomiFuairuValidationHandler getValidationHandler(TorikomiFuairuDiv div) {
         return new TorikomiFuairuValidationHandler(div);
     }
 
-    private TorikomiFuairuHandler getHandler(TorikomiFuairuDiv div) {
-        return new TorikomiFuairuHandler(div);
+    private TorikomiFuairuHandler getHandler() {
+        return new TorikomiFuairuHandler();
     }
 
     private boolean isExists(List<UzT0885SharedFileEntryEntity> sharedFiles) {

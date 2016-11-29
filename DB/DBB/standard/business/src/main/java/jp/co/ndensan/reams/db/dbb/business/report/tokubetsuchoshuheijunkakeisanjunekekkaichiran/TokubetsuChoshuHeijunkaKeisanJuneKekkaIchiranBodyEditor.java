@@ -69,7 +69,29 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         if (特徴平準化結果対象外一覧表 != null) {
             対象外項目編集(特徴平準化結果対象外一覧表, source, 帳票制御共通, association);
         }
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listLower_1 == null) {
+            source.listLower_1 = RString.EMPTY;
+        }
+        if (source.listLower_3 == null) {
+            source.listLower_3 = RString.EMPTY;
+        }
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
     }
 
     private void 対象者項目編集(TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者,
@@ -247,22 +269,22 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
 
     private void 特徴期期別金額設定(TokuchoHeijyunkaTaishogaiEntity item, TokuChoHeijunkaKeisanJuneKekkaIchiranSource source) {
         if (item.get特徴期期別金額01() != null) {
-            source.listLower_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
+            source.listUpper_6 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額01(), 0);
         }
         if (item.get特徴期期別金額02() != null) {
-            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額02(), 0);
+            source.listUpper_7 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額02(), 0);
         }
         if (item.get特徴期期別金額03() != null) {
-            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額03(), 0);
+            source.listUpper_8 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額03(), 0);
         }
         if (item.get特徴期期別金額04() != null) {
-            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額04(), 0);
+            source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額04(), 0);
         }
         if (item.get特徴期期別金額05() != null) {
-            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額05(), 0);
+            source.listUpper_10 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額05(), 0);
         }
         if (item.get特徴期期別金額06() != null) {
-            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
+            source.listUpper_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
         }
     }
 }

@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 帳票DBC100002_償還払い支給（不支給）決定通知書を出力します。
+ * 高額サービス費支給（不支給）決定通知書作成を出力します。
  *
- * @reamsid_L DBC-2000-020 hanxu
+ * @reamsid_L DBC-2000-030 hanxu
  */
 public class ReportOutputJokenhyoProcessCore {
 

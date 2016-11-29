@@ -80,7 +80,8 @@ public class KogakuGassanJikoFutanGakuUpdateProcess extends BatchProcessBase<Kog
         if (STRINGTWO.equals(entity.get中間DBEntity().getMadoguchi_TaishoshaHanteiCode())) {
             return new FlexibleDate(processParameter.get開始年月日());
         } else {
-            return new FlexibleDate(entity.get中間DBEntity().getShikaraiKaishiYMD().toString());
+            return entity.get中間DBEntity().getShikaraiKaishiYMD() == null ? null
+                    : new FlexibleDate(entity.get中間DBEntity().getShikaraiKaishiYMD().toString());
         }
     }
 
@@ -88,7 +89,8 @@ public class KogakuGassanJikoFutanGakuUpdateProcess extends BatchProcessBase<Kog
         if (STRINGTWO.equals(entity.get中間DBEntity().getMadoguchi_TaishoshaHanteiCode())) {
             return new FlexibleDate(processParameter.get終了年月日());
         } else {
-            return new FlexibleDate(entity.get中間DBEntity().getShiharaiShuryoYMD().toString());
+            return entity.get中間DBEntity().getShiharaiShuryoYMD() == null ? null
+                    : new FlexibleDate(entity.get中間DBEntity().getShiharaiShuryoYMD().toString());
         }
     }
 

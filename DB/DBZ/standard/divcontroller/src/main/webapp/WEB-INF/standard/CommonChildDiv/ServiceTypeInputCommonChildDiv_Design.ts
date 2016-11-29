@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onBlur_txtServiceType(): string {
+                return "onBlur_txtServiceType";
+            }
+
         }
 
         export class Controls {

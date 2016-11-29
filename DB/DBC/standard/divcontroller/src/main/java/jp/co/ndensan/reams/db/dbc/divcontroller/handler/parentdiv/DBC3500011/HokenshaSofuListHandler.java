@@ -81,6 +81,7 @@ public class HokenshaSofuListHandler {
     private static final RString データ種別221 = new RString("221");
     private static final RString データ種別222 = new RString("222");
     private static final RString データ種別331 = new RString("331");
+    private static final RString データ種別332 = new RString("332");
     private static final RString データ種別351 = new RString("351");
     private static final RString データ種別533 = new RString("533");
     private static final RString データ種別534 = new RString("534");
@@ -99,6 +100,7 @@ public class HokenshaSofuListHandler {
     private static final RString データ種別178 = new RString("178");
     private static final RString データ種別386 = new RString("386");
     private static final RString データ種別38B = new RString("38B");
+    private static final RString データ種別38G = new RString("38G");
     private static final RString データ種別38H = new RString("38H");
     private static final RString データ種別38J = new RString("38J");
     private static final RString データ種別38P = new RString("38P");
@@ -198,6 +200,9 @@ public class HokenshaSofuListHandler {
                 .hasHeader(false).setNewLine(NewLine.CRLF).build()) {
             List<RString> コントロールレコード = csvReader.readLine();
             RString データ種別 = コントロールレコード.get(四);
+            if (データ種別38G.equals(データ種別)) {
+                データ種別 = データ種別38B;
+            }
             ConfigKeysKokuhorenTorikomi 国保連取込情報名称 = ConfigKeysKokuhorenTorikomi.toValue(データ種別);
             hokenshaSofuListEntity = new HokenshaSofuResult();
             if (!コントロールレコード.isEmpty()) {
@@ -211,6 +216,8 @@ public class HokenshaSofuListHandler {
                 hokenshaSofuListEntity.setH一覧表示順(一覧表示順);
             }
             csvReader.close();
+        } catch (Exception ex) {
+            throw new ApplicationException(ex.getMessage());
         }
         return hokenshaSofuListEntity;
     }
@@ -309,7 +316,7 @@ public class HokenshaSofuListHandler {
                 || データ種別.equals(データ種別121) || データ種別.equals(データ種別122) || データ種別.equals(データ種別123)
                 || データ種別.equals(データ種別152) || データ種別.equals(データ種別153) || データ種別.equals(データ種別162)
                 || データ種別.equals(データ種別163) || データ種別.equals(データ種別631) || データ種別.equals(データ種別632)
-                || データ種別.equals(データ種別641) || データ種別.equals(データ種別642)) {
+                || データ種別.equals(データ種別641) || データ種別.equals(データ種別642) || データ種別.equals(データ種別332)) {
             保険者番号 = データレコード.get(四);
         }
         return 保険者番号;
@@ -372,8 +379,6 @@ public class HokenshaSofuListHandler {
         return null;
     }
 
-
-
     /**
      * 審査年月チェックのメソッドです。
      *
@@ -416,8 +421,6 @@ public class HokenshaSofuListHandler {
         }
         return null;
     }
-
-
 
     /**
      * 判断１のメソッドです。

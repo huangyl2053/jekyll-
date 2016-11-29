@@ -233,6 +233,15 @@ public class JigyoKogakuShikyuHanteiKekka
     }
 
     /**
+     * 決定通知リアル発行区分を返します。
+     *
+     * @return 決定通知リアル発行区分
+     */
+    public RString get決定通知リアル発行区分() {
+        return entity.getKetteiTsuchiHakkoKubun();
+    }
+
+    /**
      * {@link DbT3111JigyoKogakuShikyuHanteiKekkaEntity}のクローンを返します。
      *
      * @return {@link DbT3111JigyoKogakuShikyuHanteiKekkaEntity}のクローン
@@ -253,8 +262,7 @@ public class JigyoKogakuShikyuHanteiKekka
     }
 
     /**
-     * 保持する事業高額介護サービス費支給判定結果を削除対象とします。<br/>
-     * {@link DbT3111JigyoKogakuShikyuHanteiKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する事業高額介護サービス費支給判定結果を削除対象とします。<br/> {@link DbT3111JigyoKogakuShikyuHanteiKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JigyoKogakuShikyuHanteiKekka}
      */

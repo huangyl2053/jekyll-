@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBU-4880-100 dingyi -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo.ITokuteiKojinJohoHensyuMapper">
+
+    <select id="get中間DB提供基本情報"
+            resultOrdered="true"
+            resultType="jp.co.ndensan.reams.db.dbu.entity.db.relate.tokuteikojinjohoteikyo.TeikyoKihonJohoNNTempEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoHensyuMybatisParamater"
+            fetchSize="500">
+         SELECT
+            "hihokenshaNo",
+            "dataSetKey",
+            "teikyoKubun",
+            "shikibetsuCode",
+            "kojinNo",
+            "tokuteiKojinJohoMeiCode",
+            "hanNo",
+            "teikyoNaiyo01",
+            "misetteiJiyu01",
+            "teikyoNaiyo02",
+            "misetteiJiyu02",
+            "teikyoNaiyo03",
+            "misetteiJiyu03",
+            "teikyoNaiyo04",
+            "misetteiJiyu04",
+            "teikyoNaiyo05",
+            "misetteiJiyu05",
+            "teikyoNaiyo06",
+            "misetteiJiyu06",
+            "teikyoNaiyo07",
+            "misetteiJiyu07",
+            "teikyoNaiyo08",
+            "misetteiJiyu08",
+            "teikyoNaiyo09",
+            "misetteiJiyu09",
+            "teikyoNaiyo10",
+            "misetteiJiyu10",
+            "kokaiYMD"
+        FROM
+            ${中間DBのテーブル名} AS 提供候補
+        WHERE
+            提供候補."teikyoKubun" = #{提供区分}
+        AND
+            提供候補."tokuteiKojinJohoMeiCode" = #{特定個人情報名コード}
+    </select>
+
+</mapper>

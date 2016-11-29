@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kogakushikyufushikyuketteitsuchihakko;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KogakuShikyuFushikyuKetteiTsuchiHakkoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakushikyufushikyuketteitsuchihakkoichiran.KogakuShikyuFushikyuKetteiTsuchiHakkoSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,30 +19,28 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KogakuShikyuFushikyuKetteiTsuchiHakkoReport
         extends Report<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> {
 
-    private final KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity;
-    private final int 連番;
-    private final boolean flag;
+    private final List<KogakuShikyuFushikyuKetteiTsuchiHakkoEntity> itemList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param entity KogakuShikyuFushikyuKetteiTsuchiHakkoEntity
-     * @param 連番 int
-     * @param flag boolean
+     * @param itemList List<KogakuShikyuFushikyuKetteiTsuchiHakkoEntity>
      */
-    public KogakuShikyuFushikyuKetteiTsuchiHakkoReport(KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity, int 連番, boolean flag) {
-        this.entity = entity;
-        this.連番 = 連番;
-        this.flag = flag;
+    public KogakuShikyuFushikyuKetteiTsuchiHakkoReport(List<KogakuShikyuFushikyuKetteiTsuchiHakkoEntity> itemList) {
+        this.itemList = itemList;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> writer) {
 
-        IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor headerEditor = new KogakuShikyuFushikyuKetteiTsuchiHakkoHeaderEditor(entity);
-        IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor bodyEditor = new KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor(entity, 連番, flag);
-        IKogakuShikyuFushikyuKetteiTsuchiHakkoBuilder builder = new KogakuShikyuFushikyuKetteiTsuchiHakkoBuilder(headerEditor, bodyEditor);
-        writer.writeLine(builder);
+        for (KogakuShikyuFushikyuKetteiTsuchiHakkoEntity item : itemList) {
+            IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor headerEditor
+                    = new KogakuShikyuFushikyuKetteiTsuchiHakkoHeaderEditor(item);
+            IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor bodyEditor
+                    = new KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor(item);
+            IKogakuShikyuFushikyuKetteiTsuchiHakkoBuilder builder = new KogakuShikyuFushikyuKetteiTsuchiHakkoBuilder(headerEditor, bodyEditor);
+            writer.writeLine(builder);
+        }
     }
 
 }

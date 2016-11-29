@@ -238,6 +238,17 @@ public class KogakuShikyuHanteiKekkaBuilder {
     }
 
     /**
+     * 決定通知リアル発行区分を設定します。
+     *
+     * @param 決定通知リアル発行区分 決定通知リアル発行区分
+     * @return {@link KogakuShikyuHanteiKekkaBuilder}
+     */
+    public KogakuShikyuHanteiKekkaBuilder set決定通知リアル発行区分(RString 決定通知リアル発行区分) {
+        entity.setKetteiTsuchiHakkoKubun(決定通知リアル発行区分);
+        return this;
+    }
+
+    /**
      * {@link KogakuShikyuHanteiKekka}のインスタンスを生成します。
      *
      * @return {@link KogakuShikyuHanteiKekka}のインスタンス

@@ -97,6 +97,11 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
         } else if (更新結果確認画面.equals(flag)) {
             set更新結果確認画面(source);
         }
+        editData(source);
+        return source;
+    }
+
+    private void editData(FutanWariaiShoSource source) {
         if (保険者コード取得 != null && 保険者コード取得.getColumnValue().length() >= INDEX_ONE) {
             source.hokenshaCode1 = 保険者コード取得.getColumnValue().substring(INDEX_ZERO, INDEX_ONE);
         }
@@ -132,7 +137,6 @@ public class FutanWariaiShoEditor implements IFutanWariaiShoEditor {
             source.shikibetsuCode = ShikibetsuCode.EMPTY;
         }
         source.拡張情報 = new ExpandedInformation(CODE, NAME, source.hihokenshaNo);
-        return source;
     }
 
     private void set照会画面(FutanWariaiShoSource source) {

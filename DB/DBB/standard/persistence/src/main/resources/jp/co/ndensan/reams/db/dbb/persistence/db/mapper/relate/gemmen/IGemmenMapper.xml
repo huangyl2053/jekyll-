@@ -30,14 +30,21 @@
             AND "DbT2004Gemmen"."rirekiNo" = "DbT2002Fuka"."rirekiNo"   
         WHERE
             "DbT2002Fuka"."choteiNendo" = #{choteiNendo} AND 
-            "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
+            "DbT2002Fuka"."fukaNendo" = #{fukaNendo} AND
+            0 <![CDATA[<]]> "DbT2002Fuka"."gemmenMaeHokenryo"
         )
         SELECT
             master.*,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
             master
-            LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            <if test="has抽出条件">
+                INNER JOIN
+            </if>
+            <if test="!has抽出条件">
+                LEFT JOIN
+            </if>
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
                      (
                         SELECT 
                             ARRAY_AGG(CAST (master."dbT2002Fuka_shikibetsuCode" AS TEXT))

@@ -34,36 +34,34 @@ public class JikoFutangakushomeishoFrom2009Report extends Report<JikoFutangakush
     @Override
     public void writeBy(ReportSourceWriter<JikoFutangakushomeishoFrom2009ReportSource> reportSourceWriter) {
         List<KogakuGassanMeisai> 明細List = data.get高額合算データ().get明細List();
+        if (明細List != null) {
+            for (KogakuGassanMeisai kogakuGassanMeisai : 明細List) {
+                JikoFutangakushomeishoFrom2009BodyEditor bodyEditor = new JikoFutangakushomeishoFrom2009BodyEditor(kogakuGassanMeisai.get自己負担額(),
+                        kogakuGassanMeisai.get単70_74自己負担額_内数(),
+                        kogakuGassanMeisai.get摘要());
 
-        for (KogakuGassanMeisai kogakuGassanMeisai : 明細List) {
-            JikoFutangakushomeishoFrom2009BodyEditor bodyEditor = new JikoFutangakushomeishoFrom2009BodyEditor(kogakuGassanMeisai.get自己負担額(),
-                    kogakuGassanMeisai.get単70_74自己負担額_内数(),
-                    kogakuGassanMeisai.get摘要());
-
-            JikoFutangakushomeishoFrom2009HeaderEditor headerEditor = new JikoFutangakushomeishoFrom2009HeaderEditor(data);
-            CompSofubutsuAtesakiEditor atesakiEditor = new CompSofubutsuAtesakiEditor(data.get宛先情報());
-            CompNinshoshaEditor compNinshoshaEditor = new CompNinshoshaEditor(data.get認証者情報());
-            CompKaigoToiawasesakiEditor toiawasesakiEditor = new CompKaigoToiawasesakiEditor(data.get問合せ先情報());
-            IJikoFutangakushomeishoFrom2009Builder builder = new JikoFutangakushomeishoFrom2009Builder(headerEditor,
-                    bodyEditor,
-                    atesakiEditor,
-                    compNinshoshaEditor,
-                    toiawasesakiEditor);
-            reportSourceWriter.writeLine(builder);
+                JikoFutangakushomeishoFrom2009HeaderEditor headerEditor = new JikoFutangakushomeishoFrom2009HeaderEditor(data);
+                CompSofubutsuAtesakiEditor atesakiEditor = new CompSofubutsuAtesakiEditor(data.get宛先情報());
+                CompNinshoshaEditor compNinshoshaEditor = new CompNinshoshaEditor(data.get認証者情報());
+                IJikoFutangakushomeishoFrom2009Builder builder = new JikoFutangakushomeishoFrom2009Builder(headerEditor,
+                        bodyEditor,
+                        atesakiEditor,
+                        compNinshoshaEditor
+                );
+                reportSourceWriter.writeLine(builder);
+            }
         }
-
         JikoFutangakushomeishoFrom2009BodyEditor bodyEditor = new JikoFutangakushomeishoFrom2009BodyEditor(data.get高額合算データ().get合計_自己負担額(),
                 data.get高額合算データ().get合計_70_74自己負担額_内訳(),
                 RString.EMPTY);
         JikoFutangakushomeishoFrom2009HeaderEditor headerEditor = new JikoFutangakushomeishoFrom2009HeaderEditor(data);
         CompSofubutsuAtesakiEditor atesakiEditor = new CompSofubutsuAtesakiEditor(data.get宛先情報());
         CompNinshoshaEditor compNinshoshaEditor = new CompNinshoshaEditor(data.get認証者情報());
-        CompKaigoToiawasesakiEditor toiawasesakiEditor = new CompKaigoToiawasesakiEditor(data.get問合せ先情報());
         IJikoFutangakushomeishoFrom2009Builder builder = new JikoFutangakushomeishoFrom2009Builder(headerEditor,
                 bodyEditor,
                 atesakiEditor,
-                compNinshoshaEditor,
-                toiawasesakiEditor);
+                compNinshoshaEditor
+        );
         reportSourceWriter.writeLine(builder);
     }
 }

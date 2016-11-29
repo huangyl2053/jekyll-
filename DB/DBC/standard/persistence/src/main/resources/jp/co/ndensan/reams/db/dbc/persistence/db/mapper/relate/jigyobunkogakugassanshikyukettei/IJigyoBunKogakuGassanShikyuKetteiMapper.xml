@@ -192,7 +192,7 @@
         ON
         抽出対象."hihokenshaNo" = 被保険者台帳管理."hihokenshaNo"
         LEFT JOIN
-            rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
+            rgdb."DbV4001JukyushaDaicho" AS 受給者台帳
         ON  抽出対象."hihokenshaNo" = 受給者台帳."hihokenshaNo"
         WHERE
         1=1

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
@@ -129,7 +130,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         for (ShokanKetteiTsuchiShoShiharai shiharai : shiharaiList) {
             ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
             RString kyufuShu = 種類Map.get(getJufukuKey(shiharai)) == null ? RString.EMPTY : 種類Map.get(getJufukuKey(shiharai));
-            
+
             item.setBunshoNo(batchPram.get文書番号());
             if (kyufuShu.length() <= 文字数_38) {
                 item.setKyufuShu1(kyufuShu);
@@ -144,9 +145,21 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
             Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(shiharai.get市町村コード(), FlexibleDate.getNowDate());
             EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(shiharai.get宛先情報(), 地方公共団体, 帳票制御共通情報);
             SofubutsuAtesakiSource 送付物宛先ソースデータ = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
-            
+
             item = create帳票ソースデータ(item, ninshoshaSource, shiharai, batchPram, 送付物宛先ソースデータ);
-            帳票ソースデータ.add(item);
+            boolean 金融機関未登録フラグ = false;
+            if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())
+                    && (null == shiharai.get金融機関コード() || shiharai.get金融機関コード().isEmpty())) {
+                金融機関未登録フラグ = true;
+            }
+            if (!RString.isNullOrEmpty(shiharai.get支給不支給決定区分())
+                    && ShikyuFushikyuKubun.支給.getコード().equals(shiharai.get支給不支給決定区分())
+                    && ShikakuKubun._２号.getコード().equals(shiharai.get被保険者区分コード())) {
+                金融機関未登録フラグ = false;
+            }
+            if (!金融機関未登録フラグ) {
+                帳票ソースデータ.add(item);
+            }
         }
         return 帳票ソースデータ;
     }
@@ -201,7 +214,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         if (ShiharaiHohoKubun.窓口払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(RString.EMPTY);
             item.setTorikeshi2(記号_星);
-            
+
         } else if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())) {
             item.setTorikeshi1(記号_星);
             item.setTorikeshi2(RString.EMPTY);
@@ -215,9 +228,10 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         item.setTorikeshiShiharaibasho(RString.EMPTY);
         item.setTorikeshiShiharaikikan(RString.EMPTY);
         setItem(item, ninshoshaSource, shiharai, batchPram, atesaki);
-        
+
         return item;
     }
+
     private void setItem(ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item,
             NinshoshaSource ninshoshaSource, ShokanKetteiTsuchiShoShiharai shiharai,
             ShokanKetteiTsuchiShoSealerBatchParameter batchPram, SofubutsuAtesakiSource atesaki) {
@@ -244,13 +258,13 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
                 item.setKaraFugo(KARA);
             }
         }
-        
+
         if (ShiharaiHohoKubun.口座払.getコード().equals(shiharai.get支払方法区分コード())
                 && ShikyuFushikyuKubun.支給.getコード().equals(shiharai.get支給不支給決定区分())
-                && shiharai.get口座() != null 
+                && shiharai.get口座() != null
                 && shiharai.get口座().getUaT0310KozaEntity().getKozaId() != 0L) {
             IKoza 口座情報 = do口座マスク編集(shiharai.get口座());
-            
+
             item.setBankName(口座情報.get金融機関().get金融機関名称());
             item.setKouzaShu(口座情報.get店番());
             if (!ゆうちょ銀行.equals(口座情報.get金融機関コード())) {
@@ -259,9 +273,9 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
             } else if (印字する.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_ゆうちょ銀行店名表示))) {
                 item.setBranchBankName(口座情報.get支店().get支店名称());
             }
-            
+
             item.setKouzaNo(口座情報.get口座番号());
-            
+
             if (カナ氏名.equals(get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_口座名義人カナ優先区分))) {
                 item.setKouzaMeigi(口座情報.get口座名義人().value());
             } else {
@@ -270,7 +284,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
             item.setSihaYoYmd(batchPram.getHurikomiYMD() == null
                     ? RString.EMPTY : batchPram.getHurikomiYMD().wareki().eraType(
                             EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                            Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+                    Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         item.setSeirino(shiharai.get整理番号());
         item.setTsuchino(shiharai.get決定通知No());
@@ -318,9 +332,9 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         item.setRiyuTitle(増減の理由タイトル);
         item.setShumokuTitle(種別タイトル);
         item.setBangoTitle(番号タイトル_口座番号);
-    
+
     }
-    
+
     private IKoza do口座マスク編集(TokuteiKozaRelateEntity koza) {
         MaskedKozaCreator maskedKozaCreator = MaskedKozaCreator.createInstance(SubGyomuCode.DBC介護給付);
         return maskedKozaCreator.createマスク編集済口座(new Koza(koza));
@@ -431,7 +445,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         RTime 支払窓口終了期間 = new RTime(time);
         return setDataTimeFomart2(支払窓口終了期間);
     }
-    
+
     private RString setDataTimeFomart2(RTime 支払窓口終了期間) {
         if (null == 支払窓口終了期間) {
             return RString.EMPTY;
@@ -452,23 +466,23 @@ public class ShokanBaraiShikyuKetteiTsuchishoJuryoIninshaMuke {
         }
         return 支払窓口終了期間Builder.toRString();
     }
-    
+
     private RString setFlexibleDateYMD(FlexibleDate 年月日) {
         if (null == 年月日 || 年月日.isEmpty()) {
             return RString.EMPTY;
         }
         RString str年月日 = 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                                Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 曜日 = new RString(年月日.getDayOfWeek().getInFullParentheses());
         return str年月日.concat(曜日);
     }
-    
+
     private RString setDateYMD(RDate 年月日) {
         if (null == 年月日) {
             return RString.EMPTY;
         }
         RString str年月日 = 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                                Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 曜日 = new RString(年月日.getDayOfWeek().getInFullParentheses());
         return str年月日.concat(曜日);
     }

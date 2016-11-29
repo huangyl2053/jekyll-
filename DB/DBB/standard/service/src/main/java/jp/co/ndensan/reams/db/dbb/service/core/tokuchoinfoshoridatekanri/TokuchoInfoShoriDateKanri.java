@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoinfoshoridate.Tok
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoinfofdownloadinfo.TokuchoInfoDTAEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoinfoshoridate.ITokuchoInfoShoriDateMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;

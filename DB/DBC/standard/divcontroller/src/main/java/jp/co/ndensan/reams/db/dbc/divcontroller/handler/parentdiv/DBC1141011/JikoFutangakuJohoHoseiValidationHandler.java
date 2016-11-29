@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1141011;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1141011.JikoFutangakuJohoHoseiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -14,7 +16,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -86,7 +87,7 @@ public class JikoFutangakuJohoHoseiValidationHandler {
                 .add(IdocheckMessages.終了時間の分_誤り, div.getTxtshuryoJikanMM())
                 .add(IdocheckMessages.開始日_誤り, div.getTxtKaishiYMD())
                 .add(IdocheckMessages.終了日_誤り, div.getTxtShuryoYMD())
-                .add(IdocheckMessages.必須設定項目_出力順, div.getJikoFutangakuHoseiPrint())
+                .add(IdocheckMessages.必須設定項目_出力順)
                 .build();
     }
 
@@ -95,13 +96,9 @@ public class JikoFutangakuJohoHoseiValidationHandler {
         確認情報受取年月_誤り {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
+                        List<KokuhorenInterfaceKanri> list = ViewStateHolder.get(ViewStateKeys.自己負担額確認情報, List.class);
+                        return list != null && !list.isEmpty();
 
-                        return new RDate(div.getTxtKakuninJouhouUketoriYM().getValue().toString()).getYearMonth()
-                        .toString().compareTo(ViewStateHolder.get(ViewStateKeys.最新の処理年月, FlexibleYearMonth.class)
-                                .toString()) <= 0
-                        && 0 <= new RDate(div.getTxtKakuninJouhouUketoriYM().getValue().toString()).getYearMonth().
-                        toString().compareTo(ViewStateHolder.get(ViewStateKeys.最古の処理年月, FlexibleYearMonth.class)
-                                .toString());
                     }
                 },
         開始時間の時間_誤り {
@@ -152,12 +149,8 @@ public class JikoFutangakuJohoHoseiValidationHandler {
         必須設定項目_出力順 {
                     @Override
                     public boolean apply(JikoFutangakuJohoHoseiDiv div) {
-                        if (div.getJikoFutangakuHoseiPrint().isIsPublish()) {
-                            return div.getCcdChohyoShutsuryokujun().get出力順ID() != null
-                            && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
-                        } else {
-                            return true;
-                        }
+                        return div.getCcdChohyoShutsuryokujun().get出力順ID() != null
+                        && div.getCcdChohyoShutsuryokujun().get出力順ID() != 0;
                     }
                 };
     }

@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7080001
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710080.DBC710080_HanyoListKyufuKanriHyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7080001.HanyoListParamKyoufuKannrihyouValidationHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 汎用リスト出力(給付管理票)
@@ -26,6 +28,20 @@ public class HanyoListParamKyoufuKannrihyou {
      */
     public ResponseData<HanyoListParamKyoufuKannrihyouDiv> onload(HanyoListParamKyoufuKannrihyouDiv div) {
         getHandler(div).initialize();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 条件保存チェックです。
+     *
+     * @param div HanyoListParamKyoufuKannrihyouDiv
+     * @return ResponseData<HanyoListParamDiv>
+     */
+    public ResponseData<HanyoListParamKyoufuKannrihyouDiv> onBefore_batchParameterSave(HanyoListParamKyoufuKannrihyouDiv div) {
+        ValidationMessageControlPairs validPairs = new HanyoListParamKyoufuKannrihyouValidationHandler(div).条件保存チェック();
+        if (validPairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

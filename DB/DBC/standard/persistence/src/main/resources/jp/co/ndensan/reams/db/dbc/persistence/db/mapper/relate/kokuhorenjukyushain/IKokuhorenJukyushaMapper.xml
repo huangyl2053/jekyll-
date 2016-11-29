@@ -15,61 +15,61 @@
         <result property="交換情報識別番号" column="DbWT5332_kokanJohoShikibetsuNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="異動年月日" column="DbWT5332_idoYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="異動区分コード" column="DbWT5332_idoKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="訂正年月日" column="DbWT5332_teiseiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="訂正年月日" column="DbWT5332_teiseiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="訂正区分コード" column="DbWT5332_teiseiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="異動事由区分" column="DbWT5332_idoJiyuKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="生年月日" column="DbWT5332_seinengappiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="生年月日" column="DbWT5332_seinengappiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="性別コード" column="DbWT5332_seibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="資格取得年月日" column="DbWT5332_shikakuShutokuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="資格喪失年月日" column="DbWT5332_shikakuSoshitsuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得年月日" column="DbWT5332_shikakuShutokuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失年月日" column="DbWT5332_shikakuSoshitsuYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="老人保健市町村番号" column="DbWT5332_rojinHokenShichosonNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="老人保健受給者番号" column="DbWT5332_rojinHokenJukyushaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="広域連合政令市保険者番号" column="DbWT5332_koikiRengoHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="申請種別コード" column="DbWT5332_shinseiShubetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="変更申請中区分コード" column="DbWT5332_henkoShinseichuKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="申請年月日" column="DbWT5332_shinseiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="申請年月日" column="DbWT5332_shinseiYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="みなし要介護区分コード" column="DbWT5332_minashiYokaigoKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="要介護状態区分コード" column="DbWT5332_yokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定有効期間開始年月日" column="DbWT5332_ninteiYukokikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定有効期間終了年月日" column="DbWT5332_ninteiYukokikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="DbWT5332_ninteiYukokikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="DbWT5332_ninteiYukokikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="居宅サービス計画作成区分コード" column="DbWT5332_kyotakuServiceKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="居宅介護支援事業所番号" column="DbWT5332_kyotakuKaigoShienJigyoshoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="居宅サービス計画適用開始年月日" column="DbWT5332_kyotakuServiceTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="居宅サービス計画適用終了年月日" column="DbWT5332_kyotakuServiceTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="訪問通所支給限度基準額" column="DbWT5332_homonShikyugendoKijungaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="訪問通所上限管理適用期間開始年月日" column="DbWT5332_homonJogenKanriTekiyoKikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="訪問通所上限管理適用期間終了年月日" column="DbWT5332_homonJogenKanriTekiyoKikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="短期入所支給限度基準額" column="DbWT5332_tankiShikyugendoKijungaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="短期入所上限管理適用期間開始年月日" column="DbWT5332_tankiJogenKanriTekiyoKikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="短期入所上限管理適用期間終了年月日" column="DbWT5332_tankiJogenKanriTekiyoKikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="居宅サービス計画適用開始年月日" column="DbWT5332_kyotakuServiceTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居宅サービス計画適用終了年月日" column="DbWT5332_kyotakuServiceTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問通所支給限度基準額" column="DbWT5332_homonShikyugendoKijungaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問通所上限管理適用期間開始年月日" column="DbWT5332_homonJogenKanriTekiyoKikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問通所上限管理適用期間終了年月日" column="DbWT5332_homonJogenKanriTekiyoKikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="短期入所支給限度基準額" column="DbWT5332_tankiShikyugendoKijungaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="短期入所上限管理適用期間開始年月日" column="DbWT5332_tankiJogenKanriTekiyoKikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="短期入所上限管理適用期間終了年月日" column="DbWT5332_tankiJogenKanriTekiyoKikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="公費負担上限額減額の有無" column="DbWT5332_kohiFutanJogengakuGengakuUmu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="償還払化開始年月日" column="DbWT5332_shokanHaraikaFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="償還払化終了年月日" column="DbWT5332_shokanHaraikaToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="給付率引下げ開始年月日" column="DbWT5332_kyufuritsuHikisageFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="給付率引下げ終了年月日" column="DbWT5332_kyufuritsuHikisageToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="償還払化開始年月日" column="DbWT5332_shokanHaraikaFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="償還払化終了年月日" column="DbWT5332_shokanHaraikaToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率引下げ開始年月日" column="DbWT5332_kyufuritsuHikisageFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="給付率引下げ終了年月日" column="DbWT5332_kyufuritsuHikisageToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="減免申請中区分コード" column="DbWT5332_genmenShinseichuKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用者負担区分コード" column="DbWT5332_riyoshaFutanKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="給付率" column="DbWT5332_kyufuRitsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="利用者負担適用開始年月日" column="DbWT5332_riyoshaFutanTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="利用者負担適用終了年月日" column="DbWT5332_riyoshaFutanTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="給付率" column="DbWT5332_kyufuRitsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担適用開始年月日" column="DbWT5332_riyoshaFutanTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用者負担適用終了年月日" column="DbWT5332_riyoshaFutanTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="標準負担区分コード" column="DbWT5332_hyojunFutanKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="負担額" column="DbWT5332_futanGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="負担額適用開始年月日" column="DbWT5332_futanGakuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="負担額適用終了年月日" column="DbWT5332_futanGakuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="負担額" column="DbWT5332_futanGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="負担額適用開始年月日" column="DbWT5332_futanGakuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="負担額適用終了年月日" column="DbWT5332_futanGakuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="特定入所者認定申請中区分コード" column="DbWT5332_tokuteiNyushoshaNinteiShinseichuKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="特定入所者介護サービス区分コード" column="DbWT5332_tokuteiNyushoshaKaigoServiceKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="課税層の特例減額措置対象区分" column="DbWT5332_kazeisoNoTokureiGengakuSochiTaishoKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="特定入所者食費負担限度額" column="DbWT5332_tokuteiNyushoshaShokuhiFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="居住費ユニット型個室負担限度額" column="DbWT5332_kyojuhiUnitKoshitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="居住費ユニット型準個室負担限度額" column="DbWT5332_kyojuhiUnitJunkoshitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="居住費従来型個室特養等負担限度額" column="DbWT5332_kyojuhiTokuyotoFutanGenndoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="居住費従来型個室老健療養等負担限度額" column="DbWT5332_kyojuhiRokenRyoyotoFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="居住費多床室負担限度額" column="DbWT5332_kyojuhiTashoShitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="負担限度額適用開始年月日" column="DbWT5332_futanGendoGakuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="負担限度額適用終了年月日" column="DbWT5332_futanGendoGakuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="軽減率" column="DbWT5332_keigenRitsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="軽減率適用開始年月日" column="DbWT5332_keigenRitsuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="軽減率適用終了年月日" column="DbWT5332_keigenRitsuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="特定入所者食費負担限度額" column="DbWT5332_tokuteiNyushoshaShokuhiFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費ユニット型個室負担限度額" column="DbWT5332_kyojuhiUnitKoshitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費ユニット型準個室負担限度額" column="DbWT5332_kyojuhiUnitJunkoshitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費従来型個室特養等負担限度額" column="DbWT5332_kyojuhiTokuyotoFutanGenndoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費従来型個室老健療養等負担限度額" column="DbWT5332_kyojuhiRokenRyoyotoFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費多床室負担限度額" column="DbWT5332_kyojuhiTashoShitsuFutanGendoGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="負担限度額適用開始年月日" column="DbWT5332_futanGendoGakuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="負担限度額適用終了年月日" column="DbWT5332_futanGendoGakuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="軽減率" column="DbWT5332_keigenRitsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="軽減率適用開始年月日" column="DbWT5332_keigenRitsuTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="軽減率適用終了年月日" column="DbWT5332_keigenRitsuTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="小規模居宅サービス利用有無" column="DbWT5332_shokiboKyotakuServiceRiyoUmu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="保険者番号後期" column="DbWT5332_kokiHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者番号後期" column="DbWT5332_kokiHihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -77,23 +77,23 @@
         <result property="被保険者証番号国保" column="DbWT5332_kokuhoHihokenshashoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="宛名番号" column="DbWT5332_atenaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="二次予防事業区分コード" column="DbWT5332_nijiyoboJigyoKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="二次予防事業有効期間開始年月日" column="DbWT5332_nijiyoboJigyoYukokikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="二次予防事業有効期間終了年月日" column="DbWT5332_nijiyoboJigyoYukokikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="二次予防事業有効期間開始年月日" column="DbWT5332_nijiyoboJigyoYukokikanFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二次予防事業有効期間終了年月日" column="DbWT5332_nijiyoboJigyoYukokikanToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="住所地特例対象者区分コード" column="DbWT5332_jushochiTokureiTaishoshaKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="施設所在保険者番号" column="DbWT5332_shisetsuShozaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="住所地特例適用開始年月日" column="DbWT5332_jushochiTokureiTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="住所地特例適用終了年月日" column="DbWT5332_jushochiTokureiTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="居住費新１負担限度額" column="DbWT5332_kyojuhi1FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="居住費新２負担限度額" column="DbWT5332_kyojuhi2FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="居住費新３負担限度額" column="DbWT5332_kyojuhi3FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="二割負担適用開始年月日" column="DbWT5332_niwariFutanTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="二割負担終了開始年月日" column="DbWT5332_niwariFutanTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="住所地特例適用開始年月日" column="DbWT5332_jushochiTokureiTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所地特例適用終了年月日" column="DbWT5332_jushochiTokureiTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費新１負担限度額" column="DbWT5332_kyojuhi1FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費新２負担限度額" column="DbWT5332_kyojuhi2FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住費新３負担限度額" column="DbWT5332_kyojuhi3FutanGendogaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二割負担適用開始年月日" column="DbWT5332_niwariFutanTekiyoFromYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二割負担終了開始年月日" column="DbWT5332_niwariFutanTekiyoToYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="有料老人ホーム等同意書の有無" column="DbWT5332_yuryoRojinHomeDoishoUmu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="突合結果区分" column="DbWT5332_tsugoKekkaKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="突合情報区分" column="DbWT5332_tsugoJohoKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="保険者番号" column="DbWT5332_hokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="保険者名" column="DbWT5332_hokenshaName"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="取込年月" column="DbWT5332_torikomiYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取込年月" column="DbWT5332_torikomiYM"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="DbWT0001_shoHokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="被保険者番号" column="DbWT0001_orgHihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="サービス提供年月末日" column="DbWT0001_serviceTeikyoYmd"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

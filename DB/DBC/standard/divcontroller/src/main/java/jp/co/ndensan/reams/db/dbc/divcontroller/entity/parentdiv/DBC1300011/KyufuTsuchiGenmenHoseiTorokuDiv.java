@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,12 +40,12 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     private KyufuTsuchiGenmenHoseiTorokuListDiv KyufuTsuchiGenmenHoseiTorokuList;
     @JsonProperty("KyufuTsuchiGenmenHoseiTorokuDetail")
     private KyufuTsuchiGenmenHoseiTorokuDetailDiv KyufuTsuchiGenmenHoseiTorokuDetail;
-    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKaigoKihon")
-    private KaigoShikakuKihonDiv KyufuTsuchiGenmenHoseiTorokuKaigoKihon;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKihon")
     private KaigoAtenaInfoDiv KyufuTsuchiGenmenHoseiTorokuKihon;
+    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKaigoKihon")
+    private KaigoShikakuKihonDiv KyufuTsuchiGenmenHoseiTorokuKaigoKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -108,15 +108,6 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     /*
-     * getKyufuTsuchiGenmenHoseiTorokuKaigoKihon
-     * @return KyufuTsuchiGenmenHoseiTorokuKaigoKihon
-     */
-    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKaigoKihon")
-    public IKaigoShikakuKihonDiv getKyufuTsuchiGenmenHoseiTorokuKaigoKihon() {
-        return KyufuTsuchiGenmenHoseiTorokuKaigoKihon;
-    }
-
-    /*
      * getccdKanryoMessage
      * @return ccdKanryoMessage
      */
@@ -132,6 +123,15 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKihon")
     public IKaigoAtenaInfoDiv getKyufuTsuchiGenmenHoseiTorokuKihon() {
         return KyufuTsuchiGenmenHoseiTorokuKihon;
+    }
+
+    /*
+     * getKyufuTsuchiGenmenHoseiTorokuKaigoKihon
+     * @return KyufuTsuchiGenmenHoseiTorokuKaigoKihon
+     */
+    @JsonProperty("KyufuTsuchiGenmenHoseiTorokuKaigoKihon")
+    public IKaigoShikakuKihonDiv getKyufuTsuchiGenmenHoseiTorokuKaigoKihon() {
+        return KyufuTsuchiGenmenHoseiTorokuKaigoKihon;
     }
 
     /*
@@ -268,16 +268,6 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getButtonYes() {
-        return this.getKyufuTsuchiGenmenHoseiTorokuDetail().getButtonYes();
-    }
-
-    @JsonIgnore
-    public void  setButtonYes(Button ButtonYes) {
-        this.getKyufuTsuchiGenmenHoseiTorokuDetail().setButtonYes(ButtonYes);
-    }
-
-    @JsonIgnore
     public Button getButtonBack() {
         return this.getKyufuTsuchiGenmenHoseiTorokuDetail().getButtonBack();
     }
@@ -288,8 +278,18 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList();
+    public Button getButtonYes() {
+        return this.getKyufuTsuchiGenmenHoseiTorokuDetail().getButtonYes();
+    }
+
+    @JsonIgnore
+    public void  setButtonYes(Button ButtonYes) {
+        this.getKyufuTsuchiGenmenHoseiTorokuDetail().setButtonYes(ButtonYes);
+    }
+
+    @JsonIgnore
+    public IServiceTypeInputCommonChildDiv getCcdServiceTypeInput() {
+        return this.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput();
     }
 
     @JsonIgnore
@@ -298,8 +298,8 @@ public class KyufuTsuchiGenmenHoseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public IServiceTypeInputCommonChildDiv getCcdServiceTypeInput() {
-        return this.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdServiceTypeInput();
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList();
     }
 
     // </editor-fold>

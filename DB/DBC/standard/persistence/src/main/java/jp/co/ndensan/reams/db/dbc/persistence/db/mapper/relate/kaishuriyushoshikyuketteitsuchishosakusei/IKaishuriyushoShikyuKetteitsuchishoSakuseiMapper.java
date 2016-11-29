@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaishuriyushoshi
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc100020.KaishuriyushoShikyuKetteitsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaishuriyushoshikyuketteitsuchisho.KaishuriyushoShikyuKetteitsuchishoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 住宅改修理由書作成手数料請求取得のMapperクラスです。

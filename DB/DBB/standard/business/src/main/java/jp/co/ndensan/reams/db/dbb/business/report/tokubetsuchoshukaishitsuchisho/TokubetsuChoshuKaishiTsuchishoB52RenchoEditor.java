@@ -29,12 +29,12 @@ public class TokubetsuChoshuKaishiTsuchishoB52RenchoEditor implements ITokubetsu
     private final RString 宛名連番;
     private final NinshoshaSource sourceBuilder;
 
-    private static final RString 特徴期別金額1期 = new RString("1期");
-    private static final RString 特徴期別金額2期 = new RString("2期");
-    private static final RString 特徴期別金額3期 = new RString("3期");
-    private static final RString 特徴期別金額4期 = new RString("4期");
-    private static final RString 特徴期別金額5期 = new RString("5期");
-    private static final RString 特徴期別金額6期 = new RString("6期");
+    private static final RString 特徴期別金額1期 = new RString("1");
+    private static final RString 特徴期別金額2期 = new RString("2");
+    private static final RString 特徴期別金額3期 = new RString("3");
+    private static final RString 特徴期別金額4期 = new RString("4");
+    private static final RString 特徴期別金額5期 = new RString("5");
+    private static final RString 特徴期別金額6期 = new RString("6");
     private static final RString TOKEN = new RString("～");
 
     /**

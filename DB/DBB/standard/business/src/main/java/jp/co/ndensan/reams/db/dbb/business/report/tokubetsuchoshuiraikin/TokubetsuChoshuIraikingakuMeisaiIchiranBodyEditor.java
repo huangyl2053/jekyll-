@@ -132,6 +132,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
         }
         source.listCenter_7 = RString.EMPTY;
         source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listLower_1);
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -147,6 +148,28 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuIraikingakuMeisaiIchiranSource source) {
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.listLower_1 == null) {
+            source.listLower_1 = RString.EMPTY;
+        }
+
     }
 
 }

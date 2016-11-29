@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC5110011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5110011.RiyojokyoTokeihyoValidationHandler;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150020.DBC150020_NenreikaikyuRiyojokyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5110011.RiyojokyoTokeihyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5110011.RiyojokyoTokeihyoHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5110011.RiyojokyoTokeihyoValidationHandler;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -28,6 +29,29 @@ public class RiyojokyoTokeihyo {
     public ResponseData<RiyojokyoTokeihyoDiv> onLoad(RiyojokyoTokeihyoDiv div) {
         getHandler(div).onLoad();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * コバッチパラメータ復元ボタンの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<RiyojokyoTokeihyoDiv>
+     */
+    public ResponseData<RiyojokyoTokeihyoDiv> onClick_btnParameterRestore(RiyojokyoTokeihyoDiv div) {
+        getHandler(div).onClick_btnKogakuParamRestore();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * バッチパラメータ保存ボタンの処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<BatchParameterMap>
+     */
+    public ResponseData<BatchParameterMap> onClick_btnParameterSave(RiyojokyoTokeihyoDiv div) {
+        ResponseData<BatchParameterMap> responseData = new ResponseData<>();
+        responseData.data = new BatchParameterMap(getHandler(div).setBatchParameter());
+        return responseData;
     }
 
     /**

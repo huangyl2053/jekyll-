@@ -51,7 +51,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
     private ValidationDictionary create明細計算Dictionary() {
         return new ValidationDictionaryBuilder()
 //                .add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
-                .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
+//                .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.単位必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtTani())
                 .add(ServiceRiyohyoInfoDivValidationMessage.回数必須項目, div.getServiceRiyohyoBeppyoMeisai().getTxtKaisu()).build();
     }
@@ -148,6 +148,22 @@ public class ServiceRiyohyoInfoDivValidationHandler {
                 .add(ServiceRiyohyoInfoDivValidationMessage.給付率入力値が不正,
                         div.getServiceRiyohyoBeppyoGokei().getTxtKyufuritsu()).build();
     }
+    
+    /**
+     * サービスコード必須のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validateサービスコード必須() {
+        IValidationMessages message = new ServiceRiyohyoInfoDivValidator(div).validateサービスコード必須();
+        return createvalidateサービスコード必須Dictionary().check(message);
+    }
+
+    private ValidationDictionary createvalidateサービスコード必須Dictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
+                .add(ServiceRiyohyoInfoDivValidationMessage.サービスコード必須項目).build();
+    }
 
     /**
      * サービス種類必須のチェックです。
@@ -161,6 +177,7 @@ public class ServiceRiyohyoInfoDivValidationHandler {
 
     private ValidationDictionary createvalidateサービス種類必須Dictionary() {
         return new ValidationDictionaryBuilder()
+                .add(ServiceRiyohyoInfoDivValidationMessage.事業者必須項目)
                 .add(ServiceRiyohyoInfoDivValidationMessage.サービス種類コード必須項目).build();
     }
     /**

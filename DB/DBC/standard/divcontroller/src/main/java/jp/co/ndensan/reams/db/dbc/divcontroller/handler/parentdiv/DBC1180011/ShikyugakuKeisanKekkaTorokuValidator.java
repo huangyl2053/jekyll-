@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1180011;
 
+import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC8130011.JikoFutangakuHosei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1180011.ShikyugakuKeisanKekkaTorokuDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -92,10 +93,6 @@ public class ShikyugakuKeisanKekkaTorokuValidator {
     public IValidationMessages validate内訳を確定する() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
-                .ifNot(ShikyugakuKeisanKekkaTorokuSpec.自己負担額証明書整理番号桁数不正のチェック)
-                .thenAdd(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号桁数が不正)
-                .ifNot(ShikyugakuKeisanKekkaTorokuSpec.自己負担額証明書整理番号入力値が不正チェック)
-                .thenAdd(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号が不正)
                 .ifNot(ShikyugakuKeisanKekkaTorokuSpec.既に存在のチェック)
                 .thenAdd(ShikyugakuKeisanKekkaTorokuMessage.自己負担額証明書整理番号既に存在)
                 .messages());

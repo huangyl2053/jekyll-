@@ -175,7 +175,7 @@ public class DBC050010_FurikomimeisaiFurikomiDataParameter extends BatchParamete
      * @return 振込データ作成パラメター
      */
     public FurikomiDataProcessParameter toFurikomiDataProcessParameter(FurikomiGyomunaiKubun 振込業務内区分) {
-        return new FurikomiDataProcessParameter(振込指定年月日, 振込業務内区分);
+        return new FurikomiDataProcessParameter(振込指定年月日, 振込業務内区分, 委託者コード);
     }
 
     /**

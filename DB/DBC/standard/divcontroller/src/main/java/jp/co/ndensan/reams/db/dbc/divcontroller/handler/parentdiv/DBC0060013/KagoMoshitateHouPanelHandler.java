@@ -11,11 +11,14 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoshokai.KyufuKanrihy
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.ServiceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060013.KagoMoshitateHouPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060013.dgServive_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 画面設計_DBC0060013_訪問通所サービスの給付管理照会のハンドラクラスです。
@@ -44,10 +47,10 @@ public class KagoMoshitateHouPanelHandler {
     public void initialize(KyufuKanrihyoShokaiDataModel shokaiBusiness, List<KyufuKanrihyoShokaiDataModel> kksbsList) {
         // サービス基本情報エリア
         if (shokaiBusiness.get給付管理票作成年月日() != null) {
-            div.getService().getTxt1().setValue(new RString(shokaiBusiness.get給付管理票作成年月日().toString()));
+            div.getService().getTxt1().setValue(shokaiBusiness.get給付管理票作成年月日().wareki().toDateString());
         }
         if (shokaiBusiness.get給付管理票情報作成区分コード() != null) {
-            div.getService().getTxt2().setValue(shokaiBusiness.get給付管理票情報作成区分コード());
+            div.getService().getTxt2().setValue(KyufukanrihyoSakuseiKubun.toValue(shokaiBusiness.get給付管理票情報作成区分コード()).get名称());
         }
         div.getService().getTxt4().setValue(JukyushaIF_KeikakuSakuseiKubunCode.
                 toValue(shokaiBusiness.get居宅サービス計画作成区分コード()).get名称());
@@ -72,9 +75,9 @@ public class KagoMoshitateHouPanelHandler {
         if (shokaiBusiness.get委託先の担当介護支援専門員番号() != null) {
             div.getService().getTxt17().setValue(shokaiBusiness.get委託先の担当介護支援専門員番号());
         }
-        div.getService().getTxt12().setValue(new RString(shokaiBusiness.get指定サービス分小計()));
-        div.getService().getTxt15().setValue(new RString(shokaiBusiness.get基準該当サービス分小計()));
-        div.getService().getTxt18().setValue(new RString(shokaiBusiness.get給付計画合計単位数_日数()));
+        div.getService().getTxt12().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(shokaiBusiness.get指定サービス分小計()), 0));
+        div.getService().getTxt15().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(shokaiBusiness.get基準該当サービス分小計()), 0));
+        div.getService().getTxt18().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(shokaiBusiness.get給付計画合計単位数_日数()), 0));
     }
 
     /**
@@ -103,7 +106,7 @@ public class KagoMoshitateHouPanelHandler {
                 if (jigyoshaInput.getサービス種類コード() != null && (!jigyoshaInput.getサービス種類コード().isEmpty())) {
                     servive_Row.setDefaultDataName4(ServiceCategoryShurui.toValue(jigyoshaInput.getサービス種類コード().value()).get名称());
                 }
-                servive_Row.setDefaultDataName5(new RString(jigyoshaInput.get給付計画合計単位数_日数()));
+                servive_Row.setDefaultDataName5(DecimalFormatter.toコンマ区切りRString(new Decimal(jigyoshaInput.get給付計画単位数_日数()), 0));
                 serviceRowList.add(servive_Row);
             }
         }

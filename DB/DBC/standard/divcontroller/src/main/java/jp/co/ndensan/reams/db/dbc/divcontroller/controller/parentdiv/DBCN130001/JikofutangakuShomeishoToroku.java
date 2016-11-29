@@ -52,11 +52,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class JikofutangakuShomeishoToroku {
 
     private static final RString 排他キー = new RString("DBCHihokenshaNo");
-    private static final RString BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN = new RString("btnBackSearchResult_SearchGamen");
+    private static final RString 戻る結果一覧へ = new RString("btnBackSearchResult_SearchGamen");
     private static final RString BUTTON_SAVE = new RString("btnUpdate");
     private static final RString STATUS_新規 = new RString("新規");
+    private static final RString STATUS_保存 = new RString("保存");
     private static final RString STATUS_照会 = new RString("照会");
     private static final RString STATUS_修正 = new RString("修正");
+    private static final RString STATUS_更新 = new RString("更新");
     private static final RString STATUS_削除 = new RString("削除");
 
     /**
@@ -75,7 +77,7 @@ public class JikofutangakuShomeishoToroku {
             throw new PessimisticLockingException();
         }
         div.setDisabled(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNBACKSEARCHRESULT_SEARCHGAMEN, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(戻る結果一覧へ, false);
         getHandler(div).onLoad(被保険者番号, 識別コード);
         AccessLogger.log(AccessLogType.照会, toPersonalData(被保険者番号, 識別コード));
         return ResponseData.of(div).respond();
@@ -154,6 +156,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_照会);
@@ -175,6 +179,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty() && list.get(0) != null) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(false);
         div.getTxtTorokuTaishoNendo().setReadOnly(true);
@@ -195,10 +201,13 @@ public class JikofutangakuShomeishoToroku {
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onStateTransition(JikofutangakuShomeishoTorokuDiv div) {
         if (div.getExecutionStatus().equals(STATUS_修正)) {
-            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_修正.toString());
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_更新.toString());
         }
         if (div.getExecutionStatus().equals(STATUS_削除)) {
             CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_削除.toString());
+        }
+        if (div.getExecutionStatus().equals(STATUS_新規)) {
+            CommonButtonHolder.setTextByCommonButtonFieldName(BUTTON_SAVE, STATUS_保存.toString());
         }
         return ResponseData.of(div).respond();
     }
@@ -218,6 +227,8 @@ public class JikofutangakuShomeishoToroku {
         if (!list.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.事業高額合算自己負担額証明書情報, list.get(0));
             getHandler(div).set登録情報(list);
+            getHandler(div).うち70_74歳に係る負担額合計の計算();
+            getHandler(div).自己負担額合計の計算();
         }
         getHandler(div).set証明書登録To読取専用(true);
         div.setExecutionStatus(STATUS_削除);
@@ -296,7 +307,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku8(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -307,7 +318,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutanga9(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -318,7 +329,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku10(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -329,7 +340,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku11(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -340,7 +351,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku12(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -351,7 +362,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku1(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -362,7 +373,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku2(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -373,7 +384,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku3(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -384,7 +395,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku4(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -395,7 +406,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku5(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -406,7 +417,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku6(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -417,7 +428,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtJikofutangaku7(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).自己負担額合計の計算();
+//        getHandler(div).自己負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -428,7 +439,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku8(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -439,7 +450,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku9(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -450,7 +461,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku10(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -461,7 +472,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku11(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -472,7 +483,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku12(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -483,7 +494,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku1(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -494,7 +505,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku2(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -505,7 +516,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku3(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -516,7 +527,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku4(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -527,7 +538,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku5(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -538,7 +549,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku6(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -549,7 +560,7 @@ public class JikofutangakuShomeishoToroku {
      * @return ResponseData<JikofutangakuShomeishoTorokuDiv>
      */
     public ResponseData<JikofutangakuShomeishoTorokuDiv> onBlur_txtUchiFutangaku7(JikofutangakuShomeishoTorokuDiv div) {
-        getHandler(div).うち70_74歳に係る負担額合計の計算();
+//        getHandler(div).うち70_74歳に係る負担額合計の計算();
         return ResponseData.of(div).respond();
     }
 
@@ -687,46 +698,46 @@ public class JikofutangakuShomeishoToroku {
             }
             if (div.getExecutionStatus().equals(STATUS_修正)) {
                 QuestionMessage message = new QuestionMessage(DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
-                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_修正.toString()).evaluate());
+                        DbcQuestionMessages.確認メッセージ.getMessage().replace(STATUS_更新.toString()).evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            JikofutangakuShomeishoTorokuBusiness business
-                    = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
-            if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
-                ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
-                if (validPairs.iterator().hasNext()) {
-                    return ResponseData.of(div).addValidationMessages(validPairs).respond();
-                }
-            }
-            RStringBuilder 完了メッセージ = new RStringBuilder("対象者の自己負担額証明書情報の、");
-            if (STATUS_新規.equals(div.getExecutionStatus())) {
-                insert(div);
-                完了メッセージ.append(new RString("新規追加"));
-            } else if (STATUS_修正.equals(div.getExecutionStatus())) {
-                update(div, business);
-                完了メッセージ.append(STATUS_修正);
-            } else if (STATUS_削除.equals(div.getExecutionStatus())) {
-                delete(business);
-                完了メッセージ.append(STATUS_削除);
-            }
-            完了メッセージ.append(new RString("が完了しました。"));
-            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-            RStringBuilder messageTaisho1 = new RStringBuilder(被保険者番号.value());
-            messageTaisho1.append(new RString("："));
-            messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
-            RStringBuilder messageTaisho2 = new RStringBuilder();
-            messageTaisho2.append(new RString("支給申請書整理番号："));
-            messageTaisho2.append(div.getTxtTorokuShikyuShinseishoSeiriNo().getValue());
-
-            div.getCcdKanryoMessage().setMessage(
-                    完了メッセージ.toRString(), RString.EMPTY,
-                    messageTaisho1.toRString(), messageTaisho2.toRString(), true);
-            return ResponseData.of(div).setState(DBCN130001StateName.処理完了);
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).respond();
+        JikofutangakuShomeishoTorokuBusiness business
+                    = ViewStateHolder.get(ViewStateKeys.事業高額合算自己負担額証明書情報, JikofutangakuShomeishoTorokuBusiness.class);
+        if (STATUS_新規.equals(div.getExecutionStatus()) || STATUS_修正.equals(div.getExecutionStatus())) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).更新処理チェック(getHandler(div).is修正_証明書登録画面変更(business));
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        RStringBuilder 完了メッセージ = new RStringBuilder("対象者の自己負担額証明書情報の、");
+        if (STATUS_新規.equals(div.getExecutionStatus())) {
+            insert(div);
+            完了メッセージ.append(new RString("新規追加"));
+        } else if (STATUS_修正.equals(div.getExecutionStatus())) {
+            update(div, business);
+            完了メッセージ.append(STATUS_修正);
+        } else if (STATUS_削除.equals(div.getExecutionStatus())) {
+            delete(business);
+            完了メッセージ.append(STATUS_削除);
+        }
+        完了メッセージ.append(new RString("が完了しました。"));
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        RStringBuilder messageTaisho1 = new RStringBuilder(被保険者番号.value());
+        messageTaisho1.append(new RString("："));
+        messageTaisho1.append(div.getCcdAtenaInfo().get氏名漢字());
+        RStringBuilder messageTaisho2 = new RStringBuilder();
+        messageTaisho2.append(new RString("支給申請書整理番号："));
+        messageTaisho2.append(div.getTxtTorokuShikyuShinseishoSeiriNo().getValue());
+
+        div.getCcdKanryoMessage().setMessage(
+                完了メッセージ.toRString(), RString.EMPTY,
+                messageTaisho1.toRString(), messageTaisho2.toRString(), true);
+        return ResponseData.of(div).setState(DBCN130001StateName.処理完了);        
     }
 
     private void insert(JikofutangakuShomeishoTorokuDiv div) {
@@ -749,7 +760,8 @@ public class JikofutangakuShomeishoToroku {
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
-        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = getJibunnoMeisaiList(shomeisho, 
+                business.get事業高額合算自己負担額証明書明細情報());
         if (shomeisho.get転入前保険者番号().value().equals(div.getCcdTennyumaeHokensha().getHokenjaNo())) {
 
             Decimal 履歴番号 = manager.get事業高額合算自己負担額証明書最新履歴番号(getHandler(div).getParameterFor登録(被保険者番号));
@@ -767,16 +779,32 @@ public class JikofutangakuShomeishoToroku {
             manager.save事業高額合算自己負担額証明書and明細(
                     getHandler(div).get事業高額合算自己負担額証明書(被保険者番号, Decimal.ZERO),
                     getHandler(div).get事業高額合算自己負担額証明書明細(被保険者番号, Decimal.ZERO),
-                    getHandler(div).get更新用事業高額合算自己負担額証明書1(被保険者番号, shomeisho),
-                    getHandler(div).get更新用事業高額合算自己負担額証明書明細1(被保険者番号, meisaiList));
+                    shomeisho,
+                    meisaiList);
         }
+    }
+    
+    private List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> getJibunnoMeisaiList(JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho,
+            List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList) {
+        List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> jibunnoMeisaiList = new ArrayList<>();
+        for (JigyoKogakuGassanJikoFutanGakuShomeishoMeisai meisai : meisaiList) {
+            if (shomeisho.get被保険者番号().equals(meisai.get被保険者番号())
+                    && shomeisho.get対象年度().equals(meisai.get対象年度())
+                    && shomeisho.get証記載保険者番号().equals(meisai.get証記載保険者番号())
+                    && shomeisho.get支給申請書整理番号().equals(meisai.get支給申請書整理番号())
+                    && shomeisho.get転入前保険者番号().equals(meisai.get転入前保険者番号())
+                    && shomeisho.get履歴番号() == meisai.get履歴番号()) {
+                jibunnoMeisaiList.add(meisai);
+            }
+        }
+        return jibunnoMeisaiList;
     }
 
     private void delete(JikofutangakuShomeishoTorokuBusiness business) {
         JikofutangakuShomeishoTorokuManager manager = JikofutangakuShomeishoTorokuManager.createInstance();
         JigyoKogakuGassanJikoFutanGakuShomeisho shomeisho = business.get事業高額合算自己負担額証明書情報();
         List<JigyoKogakuGassanJikoFutanGakuShomeishoMeisai> meisaiList = business.get事業高額合算自己負担額証明書明細情報();
-        manager.delete事業高額合算自己負担額証明書and明細(shomeisho, meisaiList);
+        manager.delete事業高額合算自己負担額証明書and明細(shomeisho, getJibunnoMeisaiList(shomeisho, meisaiList));
     }
 
     private PersonalData toPersonalData(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {

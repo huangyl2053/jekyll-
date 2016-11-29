@@ -29,7 +29,7 @@ public enum ReportIdDBC {
      * DBC701003_HanyoListKogakuKaigoServiceHiJokyo
      *
      */
-    DBC701003(new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo"), new RString("")),
+    DBC701003(new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo"), new RString("汎用リスト　高額介護サービス費CSV")),
     /**
      * 受給者給付実績台帳作成
      *
@@ -765,7 +765,15 @@ public enum ReportIdDBC {
     /**
      * 帳票設計_DBC100075_基準収入額適用申請書(年次)の帳票ＩＤです。
      */
-    DBC100075(new ReportId("DBC100075_KijunShunyugakuTekiyoShinseishoNenji"), new RString("基準収入額適用申請書(年次)"));
+    DBC100075(new ReportId("DBC100075_KijunShunyugakuTekiyoShinseishoNenji"), new RString("基準収入額適用申請書(年次)")),
+    /**
+     * 汎用リスト 居宅サービス計画の帳票ＩＤです。
+     */
+    DBC701001(new ReportId("DBC701001_HanyoListKyotakuServiceKeikaku"), new RString("")),
+    /**
+     * 汎用リスト　償還払い状況の帳票ＩＤです。
+     */
+    DBC701002(new ReportId("DBC701002_HanyoListShokanbaraiJokyo"), new RString(""));
 
     private final ReportId reportId;
 

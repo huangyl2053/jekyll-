@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchoseidokanifsakusei.TokuchoSeidokanIFSakuseiDBUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosoufujohosakusei.TokuChoSoufuJohoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbb.service.tokuchosoufujohosakuseibatch.TokuChoSoufuJohoSakuseiBatch;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,12 +38,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSakuseiEntity> {
 
     private static final RString T_対象者情報追加TMP = new RString("KaigohokenNenkinTokuchoTaishoshaJohoTemp");
-    private static final int NUM2 = 2;
-    private static final int NUM4 = 4;
     private static final int NUM6 = 6;
-    private static final int NUM8 = 8;
-    private static final int NUM10 = 10;
-    private static final int NUM12 = 12;
+    private final RString 月2 = new RString("02");
+    private final RString 月4 = new RString("04");
+    private final RString 月6 = new RString("06");
+    private final RString 月8 = new RString("08");
+    private final RString 月10 = new RString("10");
+    private final RString 月12 = new RString("12");
+    private final RString 月4開始_待機 = new RString("04");
+    private static final RString RS30 = new RString("30");
+    private static final RString RS00 = new RString("00");
+    private static final RString SELECT = new RString("select");
+    private static final RString SELECTFEB = new RString("selectFeb");
+    private static final RString SELECTAPR = new RString("selectApr");
+    private static final RString SELECTJUN = new RString("selectJun");
+    private static final RString SELECTAUG = new RString("selectAug");
+    private static final RString SELECTOCT = new RString("selectOct");
+    private static final RString SELECTDEC = new RString("selectDec");
+    private static final RString 特徴制度間IF全件作成 = new RString("DBBMN84002");
+    private static final RString 特徴制度間IF作成 = new RString("DBBMN84001");
+    private boolean 月4開始_待機FLG = false;
     private static final RString ORIGINSQLPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "tokuchosoufujohosakusei.ITokuChoSoufuJohoSakuseiMapper.");
     private static final RString SQLPATH101202 = new RString("selectUe10122T0511NenkinTokuchoKaifuJohotemp");
@@ -48,7 +65,6 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
     private static final RString SQLPATH08 = new RString("select8UeT0511NenkinTokuchoKaifuJohotemp");
     private TokuchoSeidokanIFSakuseiDBUpdateProcessParameter parameter;
     private RDateTime システム日時;
-    private int 特徴開始月数;
     private RString path;
     private boolean existingFlag;
     private TokuChoSoufuJohoSakuseiBatch sakuseiBatch;
@@ -60,21 +76,29 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
     private YMDHMS 基準日時;
     private RString 特徴開始月_6月捕捉;
     private RString 特徴開始月_8月捕捉;
+    private TokuchoSeidokanIFSakuseiMyBatisParameter param;
     @BatchWriter
     private IBatchTableWriter<UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550Entity> 対象者情報追加Temp;
 
     @Override
     protected void initialize() {
+        param = new TokuchoSeidokanIFSakuseiMyBatisParameter(parameter.get処理年度());
+        RString 特徴開始月数 = DateConverter.formatMonthFull(parameter.get特別徴収開始年月().getMonthValue());
+        setMyBatisParameter(特徴開始月数);
+        if (月4開始_待機.equals(DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_6月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))
+                || 月4開始_待機.equals(
+                        DbBusinessConfig.get(ConfigNameDBB.特別徴収_特徴開始月_8月捕捉, RDate.getNowDate(), SubGyomuCode.DBB介護賦課))) {
+            月4開始_待機FLG = true;
+        }
         resultEntities = new ArrayList();
         シーケンスMap = new HashMap<>();
         existingFlag = false;
         sakuseiBatch = TokuChoSoufuJohoSakuseiBatch.createInstance();
-        特徴開始月数 = parameter.get特別徴収開始年月().getMonthValue();
-        if (特徴開始月数 == NUM2 || 特徴開始月数 == NUM10 || 特徴開始月数 == NUM12) {
+        if (月2.equals(特徴開始月数) || 月10.equals(特徴開始月数) || 月12.equals(特徴開始月数)) {
             path = ORIGINSQLPATH.concat(SQLPATH101202);
-        } else if (特徴開始月数 == NUM4 || 特徴開始月数 == NUM6) {
+        } else if (月4.equals(特徴開始月数) || 月6.equals(特徴開始月数)) {
             path = ORIGINSQLPATH.concat(SQLPATH0406);
-        } else if (特徴開始月数 == NUM8) {
+        } else if (月8.equals(特徴開始月数)) {
             path = ORIGINSQLPATH.concat(SQLPATH08);
         }
     }
@@ -98,7 +122,8 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(path);
+        param.set四月待機フラグ(月4開始_待機FLG);
+        return new BatchDbReader(path, param);
     }
 
     @Override
@@ -110,7 +135,7 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
         }
         beforeKey = sakuseiBatch.getKeyOfTokuChoSoufuJohoSakuseiEntity(getBefore());
         nowKey = sakuseiBatch.getKeyOfTokuChoSoufuJohoSakuseiEntity(entity);
-        if (resultEntities.size() < NUM6 && beforeKey.equals(nowKey)) {
+        if (resultEntities.size() < NUM6 && null != beforeKey && null != nowKey && beforeKey.equals(nowKey)) {
             resultEntities.add(entity);
             return;
         }
@@ -131,5 +156,60 @@ public class InsTsuikaTempProcess extends BatchKeyBreakBase<TokuChoSoufuJohoSaku
         }
         対象者情報追加Temp.insert(sakuseiBatch.setTuikaData(parameter.get特別徴収開始年月(),
                 システム日時, 連番, 基準日時, 特徴開始月_6月捕捉, 特徴開始月_8月捕捉, resultEntities, シーケンスMap));
+    }
+
+    private void setMyBatisParameter(RString 特徴開始月数) {
+        int 特徴開始年数 = parameter.get特別徴収開始年月().getYearValue();
+        FlexibleYear 入力処理年度 = null;
+        RString 通知内容コード = null;
+        RString 捕捉月 = RString.EMPTY;
+        RString 遷移元メニュー = parameter.get遷移元メニュー();
+        if (月8.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTAUG);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS30;
+            捕捉月 = 月2;
+        } else if (月10.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTOCT);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS00;
+            捕捉月 = 月4;
+        } else if (月12.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTDEC);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数));
+            通知内容コード = RS30;
+            捕捉月 = 月6;
+        } else if (月2.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTFEB);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月8;
+        } else if (月4.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTAPR);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月10;
+        } else if (月6.equals(特徴開始月数)) {
+            if (特徴制度間IF全件作成.equals(遷移元メニュー)) {
+                param.setSelectSQL(SELECTJUN);
+            }
+            入力処理年度 = new FlexibleYear(DateConverter.formatYearFull(特徴開始年数 - 1));
+            通知内容コード = RS30;
+            捕捉月 = 月12;
+        }
+        if (特徴制度間IF作成.equals(遷移元メニュー)) {
+            param = new TokuchoSeidokanIFSakuseiMyBatisParameter(入力処理年度, 通知内容コード, 捕捉月);
+            param.setSelectSQL(SELECT);
+        }
     }
 }

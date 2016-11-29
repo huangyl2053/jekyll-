@@ -108,7 +108,7 @@ public class KaigoHihokenshaInfoPanelHandler {
             dgSetaiIchiran_Row row = new dgSetaiIchiran_Row();
             row.getTxtShikibetsuCode().setValue(result.get識別コード() == null ? RString.EMPTY
                     : result.get識別コード().getColumnValue());
-            row.getTxtShimei().setValue(result.get氏名() == null ? RString.EMPTY
+            row.setTxtShimei(result.get氏名() == null ? RString.EMPTY
                     : result.get氏名().getColumnValue());
             row.getTxtUmareYND().setValue(result.get生年月日() == null ? null
                     : new RDate(result.get生年月日().toString()));
@@ -163,7 +163,7 @@ public class KaigoHihokenshaInfoPanelHandler {
                     : result.get識別コード().getColumnValue());
             row.getTxtSetaiCode().setValue(result.get世帯コード() == null ? RString.EMPTY
                     : result.get世帯コード().getColumnValue());
-            row.getTxtShimei().setValue(result.get氏名() == null ? RString.EMPTY
+            row.setTxtShimei(result.get氏名() == null ? RString.EMPTY
                     : result.get氏名().getColumnValue());
             row.getTxtUmareYMD().setValue(result.get生年月日() == null ? null
                     : new RDate(result.get生年月日().toString()));
@@ -200,7 +200,7 @@ public class KaigoHihokenshaInfoPanelHandler {
         div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().setDomain(row.getTxtShikibetsuCode() == null ? null
                 : new ShikibetsuCode(row.getTxtShikibetsuCode().getValue()));
         div.getRentaiNofuGimushaInfo().getTxtShimei().setValue(row.getTxtShimei() == null ? RString.EMPTY
-                : row.getTxtShimei().getValue());
+                : row.getTxtShimei());
         div.getRentaiNofuGimushaInfo().getTxtUmareYMD().setValue(row.getTxtUmareYND() == null ? null
                 : row.getTxtUmareYND().getValue());
         div.getRentaiNofuGimushaInfo().getTxtSeibetsu().setValue(row.getTxtSeibetsu() == null ? RString.EMPTY
@@ -230,7 +230,7 @@ public class KaigoHihokenshaInfoPanelHandler {
         div.getRentaiNofuGimushaInfo().getTxtSetaiCode().setDomain(row.getTxtSetaiCode() == null ? null
                 : new SetaiCode(row.getTxtSetaiCode().getValue()));
         div.getRentaiNofuGimushaInfo().getTxtShimei().setValue(row.getTxtShimei() == null ? RString.EMPTY
-                : row.getTxtShimei().getValue());
+                : row.getTxtShimei());
         div.getRentaiNofuGimushaInfo().getTxtUmareYMD().setValue(row.getTxtUmareYMD() == null ? null
                 : row.getTxtUmareYMD().getValue());
         div.getRentaiNofuGimushaInfo().getTxtSeibetsu().setValue(row.getTxtSeibetsu() == null ? RString.EMPTY
@@ -250,6 +250,11 @@ public class KaigoHihokenshaInfoPanelHandler {
      * @param 宛名情報 IShikibetsuTaisho
      */
     public void setRentaiNofuGimushaInfo(IShikibetsuTaisho 宛名情報) {
+        RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
+        if (履歴番号 == null || 履歴番号.isEmpty()) {
+            div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().setValue(RDate.getNowDate());
+            div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().setValue(null);
+        }
         div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().setDomain(宛名情報.get識別コード() == null ? null
                 : 宛名情報.get識別コード());
         div.getRentaiNofuGimushaInfo().getTxtSetaiCode().setDomain(宛名情報.get世帯コード() == null ? null
@@ -262,13 +267,15 @@ public class KaigoHihokenshaInfoPanelHandler {
                 : new RDate(seinengappiYMD.toString()));
         div.getRentaiNofuGimushaInfo().getTxtSeibetsu().setValue(宛名情報.toEntity().getSeibetsuCode() == null ? RString.EMPTY
                 : Seibetsu.toValue(宛名情報.toEntity().getSeibetsuCode()).get名称());
-        div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(宛名情報.toEntity().getJuminJotaiCode() == null ? RString.EMPTY
-                : JuminShubetsu.toValue(宛名情報.toEntity().getJuminJotaiCode()).toRString());
+        if (宛名情報.toEntity().getJuminJotaiCode() == null || ONE.equals(宛名情報.toEntity().getJuminJotaiCode())) {
+            div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(RString.EMPTY);
+        } else {
+            div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(JuminShubetsu.toValue(宛名情報.toEntity().getJuminJotaiCode()).toRString());
+        }
         div.getRentaiNofuGimushaInfo().getTxtZokuGara().setValue(宛名情報.toEntity().getTsuzukigara() == null ? RString.EMPTY
                 : 宛名情報.toEntity().getTsuzukigara());
         div.getRentaiNofuGimushaInfo().getTxtJusho().setDomain(宛名情報.toEntity().getJusho() == null ? null
                 : 宛名情報.toEntity().getJusho());
-        div.getRentaiNofuGimushaInfo().getTxtRirekiNo().setValue(ONE);
     }
 
     /**
@@ -282,7 +289,7 @@ public class KaigoHihokenshaInfoPanelHandler {
             dgSetaiIchiran_Row row = new dgSetaiIchiran_Row();
             row.getTxtShikibetsuCode().setValue(result.get識別コード() == null ? RString.EMPTY
                     : result.get識別コード().getColumnValue());
-            row.getTxtShimei().setValue(result.get氏名() == null ? RString.EMPTY
+            row.setTxtShimei(result.get氏名() == null ? RString.EMPTY
                     : result.get氏名().getColumnValue());
             row.getTxtUmareYND().setValue(result.get生年月日() == null ? null
                     : new RDate(result.get生年月日().toString()));

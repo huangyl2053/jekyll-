@@ -71,10 +71,12 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
 
     @Override
     protected void process(ShoriKekkaKakuninListTempTableEntity t) {
-        count++;
         ShoriKekkaKakuninListCsvEntity eucCsvEntity = new ShoriKekkaKakuninListCsvEntity();
-        edit処理結果確認リスト情報(eucCsvEntity, t, count);
-        eucCsvWriter.writeLine(eucCsvEntity);
+        if (t.getHiHokenshaNo() != null && !t.getHiHokenshaNo().isEmpty()) {
+            count++;
+            edit処理結果確認リスト情報(eucCsvEntity, t, count);
+            eucCsvWriter.writeLine(eucCsvEntity);
+        }
     }
 
     @Override

@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.fukakonkyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyusha;
+import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -25,4 +27,6 @@ public class FukaKonkyoParameter {
     private List<SeikatsuHogoJukyusha> 生保の情報リスト;
     private List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト;
     private List<SetaiinShotoku> 世帯員所得情報List;
+    private KazeiKubun 前年度課税区分;
+    private SetaiKazeiKubun 前年度世帯課税区分;
 }

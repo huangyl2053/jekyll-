@@ -58,6 +58,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoBodyEditor implements ISogoji
             source.gokeiKaigoKyufugaku = doカンマ編集(帳票出力対象データ.get審査決定請求合計().get合計_介護給付費_総合事業費());
             source.gokeiRiyoshaFutangaku = doカンマ編集(帳票出力対象データ.get審査決定請求合計().get合計_利用者負担額());
         }
+        setPageBreakEmpty(source);
         return source;
     }
 
@@ -80,5 +81,11 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoBodyEditor implements ISogoji
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private void setPageBreakEmpty(SogojigyohiShinsaKetteiSeikyumeisaihyoSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
     }
 }

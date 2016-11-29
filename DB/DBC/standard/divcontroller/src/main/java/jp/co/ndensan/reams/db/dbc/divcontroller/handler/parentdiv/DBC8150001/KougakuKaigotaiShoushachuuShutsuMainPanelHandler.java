@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8150001;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC815001.DBC815001_KogakuKaigoTaishoshaChushutsuSokyubunParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8150001.KougakuKaigotaiShoushachuuShutsuMainPanelDiv;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -28,6 +28,7 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
 
     private static final RString 帳票コード = new RString("DBC200100_KogakuServicehiTaishoshaIchiranSokyubun");
     private static final int 年前_5 = 5;
+    private static final int FIVE = 5;
     private final KougakuKaigotaiShoushachuuShutsuMainPanelDiv div;
 
     /**
@@ -250,6 +251,9 @@ public class KougakuKaigotaiShoushachuuShutsuMainPanelHandler {
     }
 
     private RDateTime get抽出期間日時(RString 日, RString 時) {
+        if (時.length() == FIVE) {
+            return RDateTime.of(日, new RString("0").concat(時));
+        }
         return RDateTime.of(日, 時);
     }
 }

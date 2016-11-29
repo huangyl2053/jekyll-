@@ -10,9 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000012.IdoRiyoshaFutanwariaiHanteiDiv;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -137,9 +137,9 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
             div.setErrorFlag(DataPassingConverter.serialize(ERRORFLAG_ERROR));
             return;
         }
-        RDateTime 年次処理実施日時 = 年次処理実施日時ShoriDateKanri.get基準日時().getRDateTime();
-        div.getTxtNenjiShoriDate().setValue(年次処理実施日時.getDate());
-        div.getTxtNenjiShoriTime().setValue(年次処理実施日時.getTime());
+        RDateTime 年次処理日時 = 年次処理実施日時ShoriDateKanri.get基準日時().getRDateTime();
+        div.getTxtNenjiShoriDate().setValue(年次処理日時.getDate());
+        div.getTxtNenjiShoriTime().setValue(年次処理日時.getTime());
         ShoriDateKanri 異動分処理実施日時ShoriDateKanri = MANAGER
                 .get異動の実施日時(new FlexibleYear(div.getDdlNendo().getSelectedKey()));
         if (異動分処理実施日時ShoriDateKanri != null) {
@@ -194,10 +194,8 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
             throw new ApplicationException(DbzErrorMessages.期間が不正_過去日付不可.getMessage()
                     .replace(今回開始日時.toString(), 年次処理実施日時.toString()));
         }
-        if (今回_終了年月日 != null && 今回_終了時分秒 != null) {
-            if (今回開始時間.isAfter(今回終了時間)) {
-                throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
-            }
+        if (今回_終了年月日 != null && 今回_終了時分秒 != null && 今回開始時間.isAfter(今回終了時間)) {
+            throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
         }
         if (画面起動時_今回終了時間.isBefore(今回終了時間)) {
             throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()

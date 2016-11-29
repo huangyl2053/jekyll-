@@ -38,9 +38,11 @@ public class InsNendoNaiYuSikakushaTmpProcess extends BatchProcessBase<NendoNaiy
     private ShotokuShokaihyoHakkoProcessParameter processParameter;
     private ShotokuNendoParameter myBatisParameter;
     private ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+    private NendoNaiyuSikakuMonoTempEntity 年度内有資格者Entity;
 
     @Override
     protected void createWriter() {
+        年度内有資格者Entity = null;
         年度内有資格者writer = new BatchEntityCreatedTempTableWriter(年度内有資格者TEMP, NendoNaiyuSikakuMonoTempEntity.class);
     }
 
@@ -52,11 +54,27 @@ public class InsNendoNaiYuSikakushaTmpProcess extends BatchProcessBase<NendoNaiy
 
     @Override
     protected void process(NendoNaiyuSikakuMonoTempEntity t) {
-        if (識別コード.equals(t.getShikibetsuCode())) {
+        if (null == 年度内有資格者Entity) {
+            年度内有資格者Entity = t;
             識別コード = t.getShikibetsuCode();
+        } else if (識別コード.equals(t.getShikibetsuCode())) {
+            if (t.getHihokenshaNo() == null || t.getHihokenshaNo().isEmpty()) {
+                年度内有資格者writer.insert(年度内有資格者Entity);
+            } else {
+                年度内有資格者writer.insert(t);
+            }
+            年度内有資格者Entity = null;
         } else {
-            年度内有資格者writer.insert(t);
+            年度内有資格者writer.insert(年度内有資格者Entity);
             識別コード = t.getShikibetsuCode();
+            年度内有資格者Entity = t;
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+        if (null != 年度内有資格者Entity) {
+            年度内有資格者writer.insert(年度内有資格者Entity);
         }
     }
 

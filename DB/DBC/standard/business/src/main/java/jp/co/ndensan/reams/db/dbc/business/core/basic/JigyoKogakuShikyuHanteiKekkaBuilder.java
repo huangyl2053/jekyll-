@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -242,6 +242,17 @@ public class JigyoKogakuShikyuHanteiKekkaBuilder {
     public JigyoKogakuShikyuHanteiKekkaBuilder set振込明細書作成年月日(FlexibleDate 振込明細書作成年月日) {
         requireNonNull(振込明細書作成年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("振込明細書作成年月日"));
         entity.setFurikomiMeisaishoSakuseiYMD(振込明細書作成年月日);
+        return this;
+    }
+
+    /**
+     * 決定通知リアル発行区分設定します。
+     *
+     * @param 決定通知リアル発行区分 決定通知リアル発行区分
+     * @return {@link JigyoKogakuShikyuHanteiKekkaBuilder}
+     */
+    public JigyoKogakuShikyuHanteiKekkaBuilder set決定通知リアル発行区分(RString 決定通知リアル発行区分) {
+        entity.setKetteiTsuchiHakkoKubun(決定通知リアル発行区分);
         return this;
     }
 

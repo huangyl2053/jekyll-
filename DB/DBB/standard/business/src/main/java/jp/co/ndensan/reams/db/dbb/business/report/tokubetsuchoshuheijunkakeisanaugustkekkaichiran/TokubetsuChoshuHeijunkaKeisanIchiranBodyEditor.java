@@ -88,7 +88,29 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (特徴平準化結果対象外一覧表 != null) {
             対象外項目編集(特徴平準化結果対象外一覧表, source, 帳票制御共通, association);
         }
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuHeijunkaKeisanIchiranSource source) {
+        if (source.listUpper_3 == null) {
+            source.listUpper_3 = RString.EMPTY;
+        }
+        if (source.listLower_2 == null) {
+            source.listLower_2 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listLower_1 == null) {
+            source.listLower_1 = RString.EMPTY;
+        }
+        if (source.listLower_3 == null) {
+            source.listLower_3 = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
     }
 
     private void 対象者項目編集(
@@ -179,9 +201,17 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
                     UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                     new Code(仮徴収年金コード.substring(NUM_0, NUM_3)), FlexibleDate.getNowDate());
         }
-
+        set賦課市町村コード(source, item);
         set変更後特徴額と普通仮徴収額(item, source);
 
+    }
+
+    private void set賦課市町村コード(TokubetsuChoshuHeijunkaKeisanIchiranSource source, TokuchoHeijyunkaTaishoshaEntity item) {
+        if (item.get賦課市町村コード() != null) {
+            source.shichosonCode = item.get賦課市町村コード().value();
+        } else {
+            source.shichosonCode = RString.EMPTY;
+        }
     }
 
     private void set変更前特徴額(TokubetsuChoshuHeijunkaKeisanIchiranSource source, TokuchoHeijyunkaTaishoshaEntity item) {
@@ -201,14 +231,14 @@ public class TokubetsuChoshuHeijunkaKeisanIchiranBodyEditor implements ITokubets
         if (!ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法4月())
                 && !ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月())
                 && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法6月())
-                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法4月()))) {
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法6月()))) {
 
             source.listCenter_4 = 編集コード_6月特徴開始者;
         }
         if (!ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法6月())
                 && !ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法6月())
-                && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法8月()))
-                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法8月())) {
+                && (ChoshuHoho.特別徴収_厚生労働省.getコード().equals(item.get徴収方法8月())
+                || ChoshuHoho.特別徴収_地共済.getコード().equals(item.get徴収方法8月()))) {
             source.listCenter_4 = 編集コード_8月特徴開始者;
         }
     }

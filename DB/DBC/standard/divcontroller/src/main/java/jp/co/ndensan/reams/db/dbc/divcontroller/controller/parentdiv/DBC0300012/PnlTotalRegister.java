@@ -85,18 +85,12 @@ public class PnlTotalRegister {
             ViewStateHolder.put(ViewStateKeys.契約事業者番号, 契約事業者番号);
             return ResponseData.of(div).setState(saved);
         }
-        boolean changeFlg = false;
-        if (!ResponseHolder.isReRequest()) {
-            changeFlg = handler.has画面変更有無(処理モード, data);
-        }
+        boolean changeFlg = handler.has画面変更有無(処理モード, data);
         if (!changeFlg) {
-            if (!ResponseHolder.isReRequest()) {
-                InformationMessage message = new InformationMessage(
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            return ResponseData.of(div).respond();
+            InformationMessage message = new InformationMessage(
+                    DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
+                    DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         } else {
             int result = handler.save画面データ(処理モード, data);
             handler.set保存完了(処理モード, result);

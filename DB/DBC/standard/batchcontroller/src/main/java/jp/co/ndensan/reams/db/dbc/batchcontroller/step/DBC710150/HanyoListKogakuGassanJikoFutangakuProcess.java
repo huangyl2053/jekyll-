@@ -20,17 +20,22 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_HoseizumiJikofutangakuSofuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_SofuTaishogaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListKogakuGassanJikoFutangakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -108,34 +113,6 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     private static final ReportId EUC_ID = new ReportId("DBC701015");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final RString 直近異動事由コード00 = new RString("00");
-    private static final RString 直近異動事由コード01 = new RString("01");
-    private static final RString 直近異動事由コード02 = new RString("02");
-    private static final RString 直近異動事由コード03 = new RString("03");
-    private static final RString 直近異動事由コード04 = new RString("04");
-    private static final RString 直近異動事由コード05 = new RString("05");
-    private static final RString 直近異動事由コード06 = new RString("06");
-    private static final RString 直近異動事由コード07 = new RString("07");
-    private static final RString 直近異動事由コード08 = new RString("08");
-    private static final RString 直近異動事由コード09 = new RString("09");
-    private static final RString 直近異動事由コード10 = new RString("10");
-    private static final RString 直近異動事由コード11 = new RString("11");
-    private static final RString 直近異動事由コード12 = new RString("12");
-    private static final RString 直近異動事由コード20 = new RString("20");
-    private static final RString 直近異動事由コード名称00 = new RString("");
-    private static final RString 直近異動事由コード名称01 = new RString("認定　　　　　");
-    private static final RString 直近異動事由コード名称02 = new RString("変更申請認定　");
-    private static final RString 直近異動事由コード名称03 = new RString("変更申請却下　");
-    private static final RString 直近異動事由コード名称04 = new RString("サ変更申請認定");
-    private static final RString 直近異動事由コード名称05 = new RString("サ変更申請却下");
-    private static final RString 直近異動事由コード名称06 = new RString("削除　　　　　");
-    private static final RString 直近異動事由コード名称07 = new RString("修正　　　　　");
-    private static final RString 直近異動事由コード名称08 = new RString("受給申請却下　");
-    private static final RString 直近異動事由コード名称09 = new RString("削除回復　　　");
-    private static final RString 直近異動事由コード名称10 = new RString("職権記載　　　");
-    private static final RString 直近異動事由コード名称11 = new RString("職権修正　　　");
-    private static final RString 直近異動事由コード名称12 = new RString("職権取消　　　");
-    private static final RString 直近異動事由コード名称20 = new RString("履歴修正　　　");
     private static final RString 受給申請事由_初回申請 = new RString("初回申請　　");
     private static final RString 受給申請事由_再申請内 = new RString("再申請内　　");
     private static final RString 受給申請事由_再申請外 = new RString("再申請外　　");
@@ -184,10 +161,10 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map;
     private FileSpoolManager manager;
     private Association 地方公共団体;
-    private FlexibleDate システム日付;
     private Decimal 連番;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @BatchWriter
     private CsvWriter<HanyoListKogakuGassanJikoFutangakuCsvEntity> eucCsvWriter;
@@ -196,7 +173,6 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     protected IBatchReader createReader() {
         連番 = Decimal.ONE;
         出力有無 = CSV出力有無_なし;
-        システム日付 = FlexibleDate.getNowDate();
         parameter.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
         parameter.set出力項目(get出力順());
@@ -221,6 +197,8 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     @Override
     protected void beforeExecute() {
 
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701015.getReportId());
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         構成市町村Map = new HashMap<>();
@@ -286,9 +264,8 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
             AtenaMeisho 世帯主名 = 宛名.get世帯主名();
             csvEntity.set世帯主名(世帯主名 != null
                     ? 世帯主名.getColumnValue() : RString.EMPTY);
-            ZenkokuJushoCode 住所コード = 宛名.get住所().get全国住所コード();
-            csvEntity.set住所コード(住所コード != null
-                    ? 住所コード.getColumnValue() : RString.EMPTY);
+            csvEntity.set住所コード(宛名.get住所().get町域コード() != null
+                    ? 宛名.get住所().get町域コード().value() : RString.EMPTY);
             YubinNo 郵便番号 = 宛名.get住所().get郵便番号();
             csvEntity.set郵便番号(郵便番号 != null
                     ? 郵便番号.getEditedYubinNo() : RString.EMPTY);
@@ -301,10 +278,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
             Banchi 番地 = 宛名.get住所().get番地();
             Katagaki 方書 = 宛名.get住所().get方書();
             RString 住所 = 宛名.get住所().get住所();
-            if (番地 != null && 方書 != null && 住所 != null) {
-                csvEntity.set住所と番地と方書(住所.concat(番地.getBanchi().getColumnValue())
-                        .concat(RString.FULL_SPACE).concat(方書.getColumnValue()));
-            }
+            csvEntity.set住所と番地と方書(JushoHenshu.editJusho(帳票制御共通, 宛名, 地方公共団体));
             csvEntity.set住所(住所 != null
                     ? 住所 : RString.EMPTY);
             csvEntity.set番地(番地 != null
@@ -441,8 +415,8 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         csvEntity.set住所地特例状態(entity.is住所地特例フラグ() ? 住特_表示 : RString.EMPTY);
         csvEntity.set受給申請事由(get受給申請事由(entity));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日()));
-        if (entity.get要介護認定状態区分コード() != null) {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.get要介護認定状態区分コード()).getName());
+        if (!RString.isNullOrEmpty(entity.get要介護認定状態区分コード())) {
+            csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get要介護認定状態区分コード()).get名称());
         }
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始年月日()));
         csvEntity.set受給認定終了日(dataToRString(entity.get認定有効期間終了年月日()));
@@ -454,7 +428,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         }
         csvEntity.set受給みなし更新認定(get受給みなし更新認定(entity.getみなし要介護区分コード()));
         if (entity.get直近異動事由コード() != null) {
-            csvEntity.set受給直近事由(get受給直近事由(entity.get直近異動事由コード()));
+            csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get直近異動事由コード()).get名称());
         }
         csvEntity.set対象年度(entity.get対象年度());
         csvEntity.set保険者番号(entity.get保険者番号());
@@ -463,16 +437,16 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         if (entity.get所得区分() != null) {
             csvEntity.set所得区分(KaigoGassan_ShotokuKbn.toValue(entity.get所得区分()).get名称());
         }
-        if (entity.get所得区分_70歳以上() != null) {
+        if (!RString.isNullOrEmpty(entity.get所得区分_70歳以上())) {
             csvEntity.set所得区分_70歳以上(
                     KaigoGassan_Over70_ShotokuKbn.toValue(entity.get所得区分_70歳以上()).get名称());
         }
 
         csvEntity.set自己負担額証明書整理番号(entity.get自己負担額証明書整理番号());
-        if (entity.get異動区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get異動区分())) {
             csvEntity.set異動区分(KaigoGassan_Idokubun.toValue(entity.get異動区分()).get名称());
         }
-        if (entity.get補正済自己負担額送付区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get補正済自己負担額送付区分())) {
             csvEntity.set補正済自己負担額送付区分(
                     Kaigogassan_HoseizumiJikofutangakuSofuKubun.toValue(entity.get補正済自己負担額送付区分()).get名称());
         }
@@ -601,13 +575,13 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         if (entity.get高額合算自己負担額_補正済_合計_70_74高額支給額() != null) {
             csvEntity.set補合計_高額支給額(DecimalFormatter.toコンマ区切りRString(entity.get高額合算自己負担額_補正済_合計_70_74高額支給額(), 0));
         }
-        if (entity.get高額合算自己負担額_データ作成区分() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算自己負担額_データ作成区分())) {
             csvEntity.setデータ作成区分(Kaigogassan_DataSakuseiKubun.toValue(entity.get高額合算自己負担額_データ作成区分()).get名称());
         }
         csvEntity.set自己負担額確認情報受取年月(monthToRString(entity.get高額合算自己負担額_自己負担額確認情報受取年月()));
         csvEntity.set補正済自己負担額情報送付年月(monthToRString(entity.get高額合算自己負担額_補正済自己負担額情報送付年月()));
         csvEntity.set自己負担額証明書情報受取年月(monthToRString(entity.get高額合算自己負担額_自己負担額証明書情報受取年月()));
-        if (entity.get高額合算自己負担額_送付対象外フラグ() != null) {
+        if (!RString.isNullOrEmpty(entity.get高額合算自己負担額_送付対象外フラグ())) {
             csvEntity.set送付対象外フラグ(Kaigogassan_SofuTaishogaiKubun.toValue(entity.get高額合算自己負担額_送付対象外フラグ()).get名称());
         }
         csvEntity.set自己負担額計算年月日(dataToRString(entity.get高額合算自己負担額_自己負担額計算年月日()));
@@ -625,43 +599,14 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
 
     private RString get受給みなし更新認定(RString みなし要介護区分コード) {
         RString 受給みなし更新認定 = RString.EMPTY;
-        if (!MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
             受給みなし更新認定 = みなし_表示;
         }
         return 受給みなし更新認定;
-    }
-
-    private RString get受給直近事由(RString 直近異動事由コード) {
-        if (直近異動事由コード00.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称00;
-        } else if (直近異動事由コード01.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称01;
-        } else if (直近異動事由コード02.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称02;
-        } else if (直近異動事由コード03.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称03;
-        } else if (直近異動事由コード04.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称04;
-        } else if (直近異動事由コード05.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称05;
-        } else if (直近異動事由コード06.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称06;
-        } else if (直近異動事由コード07.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称07;
-        } else if (直近異動事由コード08.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称08;
-        } else if (直近異動事由コード09.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称09;
-        } else if (直近異動事由コード10.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称10;
-        } else if (直近異動事由コード11.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称11;
-        } else if (直近異動事由コード12.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称12;
-        } else if (直近異動事由コード20.equals(直近異動事由コード)) {
-            return 直近異動事由コード名称20;
-        }
-        return RString.EMPTY;
     }
 
     private RString get受給申請事由(HanyoListKogakuGassanJikoFutangakuEntity entity) {
@@ -832,11 +777,9 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
             if (parameter.is送付対象外()) {
                 builder.append(左記号).append(送付対象外データを含める).append(右記号);
             }
-        } else {
-            if (parameter.is送付対象外()) {
-                flag = true;
-                builder.append(すべて).append(左記号).append(送付対象外データを含める).append(右記号);
-            }
+        } else if (parameter.is送付対象外()) {
+            flag = true;
+            builder.append(すべて).append(左記号).append(送付対象外データを含める).append(右記号);
         }
         if (flag) {
             return builder;

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.GemmenGen
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Nov 19 13:20:53 CST 2016 
+ * Wed Nov 23 18:01:29 CST 2016 
  */
 
 

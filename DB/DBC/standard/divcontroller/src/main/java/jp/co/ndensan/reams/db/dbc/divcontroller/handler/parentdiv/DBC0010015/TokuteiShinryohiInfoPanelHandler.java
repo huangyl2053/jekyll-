@@ -5,24 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010015;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.TokuteiShinryohiMainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.dgTokuteiShinryohiFromH1504_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010015.dgTokuteiShinryohiToH1503_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -47,8 +39,6 @@ public class TokuteiShinryohiInfoPanelHandler {
     private static final RString ZERO = new RString("0");
     private static final int INT_ZERO = 0;
     private static final int INT_SEX = 6;
-    private final RString 前月 = new RString("前月");
-    private final RString 前事業者 = new RString("前事業者");
 
     /**
      * コンストラクタです。
@@ -66,50 +56,18 @@ public class TokuteiShinryohiInfoPanelHandler {
      * *
      * 画面初期化のメソッドです
      *
-     * @param 給付実績情報照会情報 給付実績情報照会情報
      * @param サービス提供年月 サービス提供年月
      * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
      * @param 給付実績特定診療費等 給付実績特定診療費等
      */
-    public void onLoad(KyufuJissekiPrmBusiness 給付実績情報照会情報, FlexibleYearMonth サービス提供年月,
-            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
-            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
+    public void onLoad(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
+            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等, FlexibleYearMonth サービス提供年月) {
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
-            filt特別療養費リスト(給付実績特定診療費_特別療養費等);
-            this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, サービス提供年月);
-        } else {
-            filt特定診療費リスト(給付実績特定診療費等);
-            set特定診療費前月と次月(給付実績特定診療費等, サービス提供年月);
-        }
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト = 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
-        setJigyoshaBtn(事業者番号リスト);
-    }
-
-    private void filt特別療養費リスト(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等) {
-        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-        RString サービス提供年月 = to日期変換(div.getCcdKyufuJissekiHeader().getサービス提供年月());
-        for (KyufujissekiTokuteiSinryoTokubetsuRyoyo 特別療養費 : 給付実績特定診療費_特別療養費等) {
-            if (事業者番号.equals(to事業所番号(特別療養費.get事業所番号()))
-                    && 整理番号.equals(特別療養費.get整理番号())
-                    && 様式番号.equals(to識別番号変換(特別療養費.get入力識別番号()))
-                    && サービス提供年月.equals(to日期変換(特別療養費.getサービス提供年月()))) {
+            for (KyufujissekiTokuteiSinryoTokubetsuRyoyo 特別療養費 : 給付実績特定診療費_特別療養費等) {
                 set給付実績特定診療費_特別療養費等(特別療養費);
             }
-        }
-    }
-
-    private void filt特定診療費リスト(List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
-        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-        RString サービス提供年月 = to日期変換(div.getCcdKyufuJissekiHeader().getサービス提供年月());
-        for (KyufujissekiTokuteiSinryohi 特定診療費 : 給付実績特定診療費等) {
-            if (事業者番号.equals(to事業所番号(特定診療費.get事業所番号()))
-                    && 整理番号.equals(特定診療費.get整理番号())
-                    && 様式番号.equals(to識別番号変換(特定診療費.get入力識別番号()))
-                    && サービス提供年月.equals(to日期変換(特定診療費.getサービス提供年月()))) {
+        } else {
+            for (KyufujissekiTokuteiSinryohi 特定診療費 : 給付実績特定診療費等) {
                 set給付実績特定診療費等(特定診療費);
             }
         }
@@ -405,7 +363,7 @@ public class TokuteiShinryohiInfoPanelHandler {
         } else {
             div.getBtnKihon().setDisabled(false);
         }
-        if (ZERO.equals(識別番号管理データ.get明細設定区分())) {
+        if (ZERO.equals(識別番号管理データ.get明細設定区分()) && ZERO.equals(識別番号管理データ.get集計設定区分())) {
             div.getBtnMeisaiShukei().setDisabled(true);
         } else {
             div.getBtnMeisaiShukei().setDisabled(false);
@@ -435,11 +393,7 @@ public class TokuteiShinryohiInfoPanelHandler {
         } else {
             div.getBtnTokuteiNyushosha().setDisabled(false);
         }
-        if (ZERO.equals(識別番号管理データ.get高額介護サービス費設定区分())) {
-            div.getBtnKogakuKaigoService().setDisabled(true);
-        } else {
-            div.getBtnKogakuKaigoService().setDisabled(false);
-        }
+        div.getBtnKogakuKaigoService().setDisabled(true);
         if (ZERO.equals(識別番号管理データ.get居宅計画費設定区分())) {
             div.getBtnKyotakuServiceKeikaku().setDisabled(true);
         } else {
@@ -462,281 +416,10 @@ public class TokuteiShinryohiInfoPanelHandler {
         }
     }
 
-    /**
-     * change事業者です
-     *
-     * @param 事業者 事業者
-     * @param 給付実績情報照会情報 給付実績情報照会情報
-     * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
-     * @param 給付実績特定診療費等 給付実績特定診療費等
-     */
-    public void change事業者(RString 事業者, KyufuJissekiPrmBusiness 給付実績情報照会情報,
-            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
-            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
-        RString サービス提供年月 = to日期変換(div.getCcdKyufuJissekiHeader().getサービス提供年月());
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト = 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
-        if (事業者番号リスト.isEmpty()) {
-            return;
-        }
-        int index = get事業者番号index(事業者番号リスト);
-        int i;
-        if (前事業者.equals(事業者)) {
-            i = -1;
-        } else {
-            i = 1;
-        }
-        if (index + i < 事業者番号リスト.size() && -1 < index + i) {
-            div.getCcdKyufuJissekiHeader().set事業者名称(事業者番号リスト.get(index + i).get事業者名称());
-            div.getCcdKyufuJissekiHeader().set実績区分(事業者番号リスト.get(index + i).get給付実績区分コード());
-            div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
-            div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
-            div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-            div.getCcdKyufuJissekiHeader().set事業者番号(to事業所番号(事業者番号リスト.get(index + i).get事業所番号()));
-            this.onLoad(給付実績情報照会情報, new FlexibleYearMonth(サービス提供年月),
-                    給付実績特定診療費_特別療養費等, 給付実績特定診療費等);
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
-            if (0 < index + i) {
-                div.getBtnMaeJigyosha().setDisabled(false);
-            }
-            if (index + i + 1 < 事業者番号リスト.size()) {
-                div.getBtnAtoJigyosha().setDisabled(false);
-            }
-        }
-    }
-
-    /**
-     * 事業者button
-     *
-     * @param 事業者番号リスト 事業者番号リスト
-     */
-    public void setJigyoshaBtn(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
-        div.getBtnMaeJigyosha().setDisabled(true);
-        div.getBtnAtoJigyosha().setDisabled(true);
-        if (!事業者番号リスト.isEmpty()) {
-            int index = get事業者番号index(事業者番号リスト);
-            if (0 < index) {
-                div.getBtnMaeJigyosha().setDisabled(false);
-            }
-            if (index + 1 < 事業者番号リスト.size()) {
-                div.getBtnAtoJigyosha().setDisabled(false);
-            }
-        }
-    }
-
-    private int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
-        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        RString サービス提供年月 = to日期変換(div.getCcdKyufuJissekiHeader().getサービス提供年月());
-        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        for (int index = 0; index < 事業者番号リスト.size(); index++) {
-            KyufuJissekiHedajyoho2 給付実績ヘッダ情報2 = 事業者番号リスト.get(index);
-            if (事業者番号.equals(to事業所番号(給付実績ヘッダ情報2.get事業所番号()))
-                    && 整理番号.equals(給付実績ヘッダ情報2.get整理番号())
-                    && 様式番号.equals(給付実績ヘッダ情報2.get識別番号())
-                    && サービス提供年月.equals(to日期変換(給付実績ヘッダ情報2.getサービス提供年月()))
-                    && 実績区分コード.equals(給付実績ヘッダ情報2.get給付実績区分コード())) {
-                return index;
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * change年月です。
-     *
-     * @param data RString
-     * @param 給付実績情報照会情報 給付実績情報照会情報
-     * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
-     * @param 給付実績特定診療費等 給付実績特定診療費等
-     * @param 整理番号 整理番号
-     * @param 被保険者番号 被保険者番号
-     * @param 識別番号 識別番号
-     * @param サービス提供年月 サービス提供年月
-     */
-    public void change年月(RString data, KyufuJissekiPrmBusiness 給付実績情報照会情報,
-            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
-            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等,
-            RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号,
-            FlexibleYearMonth サービス提供年月) {
-        List<FlexibleYearMonth> サービス提供年月リスト;
-        if (提供年月.isBeforeOrEquals(サービス提供年月)) {
-            サービス提供年月リスト = this.get特別療養費サービス提供年月リスト(給付実績特定診療費_特別療養費等);
-        } else {
-            サービス提供年月リスト = this.get特定診療費サービス提供年月リスト(給付実績特定診療費等);
-        }
-        FlexibleYearMonth 今提供年月;
-        if (前月.equals(data)) {
-            今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-        } else {
-            今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-        }
-        if (!今提供年月.isEmpty()) {
-            div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-            if (提供年月.isBeforeOrEquals(今提供年月)) {
-                filt特別療養費リスト(給付実績特定診療費_特別療養費等);
-                this.set特別療養費前月と次月(給付実績特定診療費_特別療養費等, 今提供年月);
-            } else {
-                filt特定診療費リスト(給付実績特定診療費等);
-                set特定診療費前月と次月(給付実績特定診療費等, 今提供年月);
-            }
-        }
-
-    }
-
-    /**
-     * 今提供年月を取得。
-     *
-     * @param data RString
-     * @param サービス提供年月 FlexibleYearMonth
-     * @param 給付実績特定診療費_特別療養費等 給付実績特定診療費_特別療養費等
-     * @param 給付実績特定診療費等 給付実績特定診療費等
-     * @return 今提供年月
-     */
-    public FlexibleYearMonth get今提供年月(RString data,
-            FlexibleYearMonth サービス提供年月,
-            List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 給付実績特定診療費_特別療養費等,
-            List<KyufujissekiTokuteiSinryohi> 給付実績特定診療費等) {
-        List<FlexibleYearMonth> サービス提供年月リスト;
-        if (提供年月.isBeforeOrEquals(サービス提供年月)) {
-            サービス提供年月リスト = get特別療養費サービス提供年月リスト(給付実績特定診療費_特別療養費等);
-        } else {
-            サービス提供年月リスト = get特定診療費サービス提供年月リスト(給付実績特定診療費等);
-        }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
-            if (前月.equals(data)) {
-                今提供年月 = get前月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-            } else {
-                今提供年月 = get次月サービス提供年月(サービス提供年月リスト, サービス提供年月);
-            }
-        }
-        return 今提供年月;
-    }
-
-    private void set特別療養費前月と次月(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 特別療養費リスト, FlexibleYearMonth サービス提供年月) {
-        List<FlexibleYearMonth> サービス提供年月リスト = get特別療養費サービス提供年月リスト(特別療養費リスト);
-        div.getBtnZengetsu().setDisabled(true);
-        div.getBtnJigetsu().setDisabled(true);
-        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
-            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-            if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-                div.getBtnZengetsu().setDisabled(false);
-            }
-            if (!サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-                div.getBtnJigetsu().setDisabled(false);
-            }
-        }
-    }
-
-    private List<FlexibleYearMonth> get特別療養費サービス提供年月リスト(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 特別療養費リスト) {
-        List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
-        for (KyufujissekiTokuteiSinryoTokubetsuRyoyo 特別療養費 : 特別療養費リスト) {
-            if (!サービス提供年月リスト.contains(特別療養費.getサービス提供年月())) {
-                サービス提供年月リスト.add(特別療養費.getサービス提供年月());
-            }
-        }
-        return サービス提供年月リスト;
-    }
-
-    private List<FlexibleYearMonth> get特定診療費サービス提供年月リスト(List<KyufujissekiTokuteiSinryohi> 特定診療費リスト) {
-        List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
-        for (KyufujissekiTokuteiSinryohi 特定診療費 : 特定診療費リスト) {
-            if (!サービス提供年月リスト.contains(特定診療費.getサービス提供年月())) {
-                サービス提供年月リスト.add(特定診療費.getサービス提供年月());
-            }
-        }
-        return サービス提供年月リスト;
-    }
-
-    private void set特定診療費前月と次月(List<KyufujissekiTokuteiSinryohi> 特定診療費リスト, FlexibleYearMonth サービス提供年月) {
-        List<FlexibleYearMonth> サービス提供年月リスト = get特定診療費サービス提供年月リスト(特定診療費リスト);
-        div.getBtnZengetsu().setDisabled(true);
-        div.getBtnJigetsu().setDisabled(true);
-        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
-            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-            if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-                div.getBtnZengetsu().setDisabled(false);
-            }
-            if (!サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-                div.getBtnJigetsu().setDisabled(false);
-            }
-        }
-    }
-
     private RString to日期(FlexibleYearMonth 審査年月) {
         if (審査年月 != null && !審査年月.isEmpty()) {
             return 審査年月.wareki().toDateString();
         }
         return RString.EMPTY;
-    }
-
-    private RString to日期変換(RDate 年月) {
-        if (年月 != null) {
-            return 年月.getYearMonth().toDateString();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString to識別番号変換(NyuryokuShikibetsuNo 識別番号) {
-        if (!識別番号.isEmpty()) {
-            return 識別番号.value();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString to日期変換(FlexibleYearMonth 年月) {
-        if (年月 != null) {
-            return 年月.toDateString();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString to事業所番号(JigyoshaNo 事業所番号) {
-        if (事業所番号 != null) {
-            return 事業所番号.value();
-        }
-        return RString.EMPTY;
-    }
-
-    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
-
-        private static final long serialVersionUID = -6334376245444905844L;
-
-        @Override
-        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
-            return o2.compareTo(o1);
-        }
-
-    }
-
-    private static class DateComparatorServiceYM implements Comparator<FlexibleYearMonth>, Serializable {
-
-        @Override
-        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
-            return o1.compareTo(o2);
-        }
-    }
-
-    private FlexibleYearMonth get前月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト,
-            FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
-            if (サービス年月.isBefore(サービス提供年月)) {
-                return サービス年月;
-            }
-        }
-        return FlexibleYearMonth.EMPTY;
-    }
-
-    private FlexibleYearMonth get次月サービス提供年月(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceYM());
-        for (FlexibleYearMonth サービス年月 : サービス提供年月リスト) {
-            if (サービス提供年月.isBefore(サービス年月)) {
-                return サービス年月;
-            }
-        }
-        return FlexibleYearMonth.EMPTY;
     }
 }

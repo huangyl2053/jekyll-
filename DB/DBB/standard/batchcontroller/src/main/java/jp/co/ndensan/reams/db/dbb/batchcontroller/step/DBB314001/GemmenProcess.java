@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmenfukajoho.FukaJohoTe
 import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb314001.GemmenProcessParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenEntity;
@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -74,7 +75,7 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 賦課の情報一時tableWriter;
     @BatchWriter
-    private BatchPermanentTableWriter<DbV2004GemmenEntity> 介護賦課減免tableWriter;
+    private BatchPermanentTableWriter<DbT2004GemmenEntity> 介護賦課減免tableWriter;
     private CsvWriter<GemmenCsvEntity> csvWriter;
 
     @Override
@@ -96,7 +97,7 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
     protected void createWriter() {
         賦課の情報一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(賦課の情報一時_TABLE_NAME, DbT2002FukaJohoTempTableEntity.class);
-        介護賦課減免tableWriter = new BatchPermanentTableWriter<>(DbV2004GemmenEntity.class);
+        介護賦課減免tableWriter = new BatchPermanentTableWriter<>(DbT2004GemmenEntity.class);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -281,13 +282,13 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
         return tempEntity;
     }
 
-    private DbV2004GemmenEntity 介護賦課減免編集(DbT2002FukaJohoTempTableEntity 賦課の情報一時処理後Data) {
-        DbV2004GemmenEntity 減免Entity = new DbV2004GemmenEntity();
+    private DbT2004GemmenEntity 介護賦課減免編集(DbT2002FukaJohoTempTableEntity 賦課の情報一時処理後Data) {
+        DbT2004GemmenEntity 減免Entity = new DbT2004GemmenEntity();
         if (賦課の情報一時処理後Data != null) {
             減免Entity.setChoteiNendo(賦課の情報一時処理後Data.getChoteiNendo());
             減免Entity.setFukaNendo(賦課の情報一時処理後Data.getFukaNendo());
             減免Entity.setTsuchishoNo(賦課の情報一時処理後Data.getTsuchishoNo());
-            減免Entity.setRirekiNo(賦課の情報一時処理後Data.getRirekiNo());
+            減免Entity.setRirekiNo(new Decimal(賦課の情報一時処理後Data.getRirekiNo()));
             if (processParameter != null) {
                 減免Entity.setShinseiYMD(processParameter.getShinseiYMD());
                 減免Entity.setKetteiYMD(processParameter.getKetteiYMD());
@@ -298,9 +299,9 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
             if (processParameter != null) {
                 減免Entity.setShinseiJiyu(processParameter.getShinseiJiyu());
                 減免Entity.setGemmenJiyuCode(processParameter.getGemmenJiyuCode());
+                減免Entity.setGemmenJiyu(processParameter.getGemmenJiyu());
             }
-            減免Entity.setGemmenJiyu(RString.EMPTY);
-            減免Entity.setGemmenTorikeshiJiyuCode(null);
+            減免Entity.setGemmenTorikeshiJiyuCode(Code.EMPTY);
             減免Entity.setGemmenTorikeshiJiyu(RString.EMPTY);
             減免Entity.setShinseiGemmenGaku(賦課の情報一時処理後Data.getGemmenGaku());
             減免Entity.setKetteiGemmenGaku(賦課の情報一時処理後Data.getGemmenGaku());

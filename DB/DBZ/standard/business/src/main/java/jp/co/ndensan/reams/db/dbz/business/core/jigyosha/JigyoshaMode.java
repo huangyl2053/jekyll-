@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.jigyosha;
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,6 +27,7 @@ public class JigyoshaMode implements Serializable {
     private AtenaMeisho jigyoshaName;
     private RString jigyoshaShubetsu;
     private RString yukoKaishiYMD;
+    private ServiceShuruiCode serviceShuruiCode;
     private List<GunshiCodeJigyoshaInputGuide> gunshiCodeJigyoshaInputGuide;
     private RString サービス種類抽出区分;
     private List<RString> サービス種類;

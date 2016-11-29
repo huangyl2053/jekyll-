@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護予防・日常生活支援総合事業費公費受給者別一覧表情報取込の一覧表用entity。
@@ -33,16 +32,16 @@ public class SogojigyohiKohiJukyushaEntity {
     private RString サービスコード;
     private RString サービス種類名;
     private RString サービス項目名;
-    private Decimal 日数回数;
-    private Decimal 公費対象単位数;
-    private Decimal 公費負担金額;
-    private Decimal 公費分本人負担額;
+    private RString 日数回数;
+    private RString 公費対象単位数;
+    private RString 公費負担金額;
+    private RString 公費分本人負担額;
     private HihokenshaNo 登録被保険者番号;
     private RString 宛名名称;
     private ShoKisaiHokenshaNo 証記載保険者番号;
-    private Decimal 公費対象単位数集計;
-    private Decimal 公費負担金額集計;
-    private Decimal 公費分本人負担額集計;
+    private RString 公費対象単位数集計;
+    private RString 公費負担金額集計;
+    private RString 公費分本人負担額集計;
     private ShikibetsuCode 識別コード;
     private HihokenshaNo 被保険者番号;
     private RString 郵便番号;

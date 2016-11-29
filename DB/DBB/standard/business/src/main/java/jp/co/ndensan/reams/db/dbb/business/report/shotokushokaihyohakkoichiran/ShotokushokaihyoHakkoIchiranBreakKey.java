@@ -40,23 +40,23 @@ public class ShotokushokaihyoHakkoIchiranBreakKey extends PageBreaker<Shotokusho
             ReportLineRecord<ShotokushokaihyoHakkoIchiranSource> nextSource) {
         boolean flag = false;
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.町域コード.get項目ID())
-                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+                && isBreak(currentSource.getSource().choikiCode, nextSource.getSource().choikiCode)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.行政区コード.get項目ID())
-                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+                && isBreak(currentSource.getSource().gyoseikuCode, nextSource.getSource().gyoseikuCode)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.世帯コード.get項目ID())
-                && !currentSource.getSource().listUpper_1.equals(nextSource.getSource().listUpper_1)) {
+                && isBreak(currentSource.getSource().listUpper_1, nextSource.getSource().listUpper_1)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.識別コード.get項目ID())
-                && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
+                && isBreak(currentSource.getSource().listLower_1, nextSource.getSource().listLower_1)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.氏名５０音カナ.get項目ID())
-                && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
+                && isBreak(currentSource.getSource().listLower_2, nextSource.getSource().listLower_2)) {
             flag = true;
         }
         flag = setflag(currentSource, nextSource, flag);
@@ -66,19 +66,19 @@ public class ShotokushokaihyoHakkoIchiranBreakKey extends PageBreaker<Shotokusho
     private boolean setflag(ReportLineRecord<ShotokushokaihyoHakkoIchiranSource> currentSource,
             ReportLineRecord<ShotokushokaihyoHakkoIchiranSource> nextSource, boolean flag) {
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.生年月日.get項目ID())
-                && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
+                && isBreak(currentSource.getSource().listUpper_4, nextSource.getSource().listUpper_4)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.市町村コード.get項目ID())
-                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+                && isBreak(currentSource.getSource().shichosonCode, nextSource.getSource().shichosonCode)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.異動年月日.get項目ID())
-                && !currentSource.getSource().idoYMD.equals(nextSource.getSource().idoYMD)) {
+                && isBreak(currentSource.getSource().idoYMD, nextSource.getSource().idoYMD)) {
             flag = true;
         }
         if (this.breakKeysList.contains(ShotokushokaihyoHakkoIchiranOutPutOrder.前住所コード.get項目ID())
-                && !currentSource.getSource().zenjushoCode.equals(nextSource.getSource().zenjushoCode)) {
+                && isBreak(currentSource.getSource().zenjushoCode, nextSource.getSource().zenjushoCode)) {
             flag = true;
         }
         if (!currentSource.getSource().kouhoshakubun.equals(nextSource.getSource().kouhoshakubun)) {
@@ -87,4 +87,9 @@ public class ShotokushokaihyoHakkoIchiranBreakKey extends PageBreaker<Shotokusho
         return flag;
     }
 
+    private boolean isBreak(RString current, RString next) {
+        return !((RString.isNullOrEmpty(current) && RString.isNullOrEmpty(next))
+                || (!RString.isNullOrEmpty(current) && current.equals(next))
+                || (!RString.isNullOrEmpty(next) && next.equals(current)));
+    }
 }

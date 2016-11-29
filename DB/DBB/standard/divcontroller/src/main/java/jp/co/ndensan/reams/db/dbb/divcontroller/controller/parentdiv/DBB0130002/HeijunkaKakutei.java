@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.DBB0
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.HeijunkaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0130002.HeijunkaKakuteiHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;

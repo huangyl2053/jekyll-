@@ -1,0 +1,12 @@
+﻿subGyomuCode,UDD055SubGyomuCode,SubGyomuCode,,,,,サブ業務コード,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shoriName,varchar,RString,,,,,処理名,A
+shoriEdaban,varchar,RString,,,,,処理枝番,A
+nendo,UDD012YSeireki,FlexibleYear,,,,,年度,A
+nendoNaiRenban,varchar,RString,,,,,年度内連番,A
+kijunYMD,UDD015YMD,FlexibleDate,,,,,基準年月日,A
+kijunTimestamp,UDD018YMDHMS,YMDHMS,,,,,基準日時,A
+taishoKaishiYMD,UDD015YMD,FlexibleDate,,,,,対象開始年月日,A
+taishoShuryoYMD,UDD015YMD,FlexibleDate,,,,,対象終了年月日,A
+taishoKaishiTimestamp,UDD018YMDHMS,YMDHMS,,,,,対象開始日時,A
+taishoShuryoTimestamp,UDD018YMDHMS,YMDHMS,,,,,対象終了日時,A

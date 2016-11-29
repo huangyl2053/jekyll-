@@ -4,6 +4,48 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsaketteihokenshainmasutatoroku.ISaishinsaKetteiHokenshaInMasutaTorokuMapper">
 
+     
+     <!--再審査決定集計TBLの全データ--> 
+    <select resultOrdered="true" id="getDbT3063SaishinsaKetteiShukei"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3063SaishinsaKetteiShukeiMapper.ResultMap_DbT3063SaishinsaKetteiShukeiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saishinsaketteidbtoroku.SaishinsaKetteiDBTorokuMyBatisParameter" fetchSize="500">
+        SELECT
+        DbT3063SaishinsaKetteiShukei.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3063SaishinsaKetteiShukeiMapper.noDeleted_DbT3063SaishinsaKetteiShukei" />) As DbT3063SaishinsaKetteiShukei
+        <where>           
+        <if test = "処理年月 !=null"> 
+        AND 
+        DbT3063SaishinsaKetteiShukei."dbT3063SaishinsaKetteiShukei_torikomiYM"= #{処理年月}
+         </if>
+         <if test = "保険者区分 !=null"> 
+        AND 
+         DbT3063SaishinsaKetteiShukei."dbT3063SaishinsaKetteiShukei_hokenshaKubun"= #{保険者区分}
+         </if>
+        </where>
+    </select>
+    
+    <!--再審査決定明細TBLの全データ--> 
+    <select resultOrdered="true" id="getDbT3064SaishinsaKetteiMeisai"
+            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3064SaishinsaKetteiMeisaiMapper.ResultMap_DbT3064SaishinsaKetteiMeisaiEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saishinsaketteidbtoroku.SaishinsaKetteiDBTorokuMyBatisParameter" fetchSize="500">
+        SELECT
+        DbT3064SaishinsaKetteiMeisai.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3064SaishinsaKetteiMeisaiMapper.noDeleted_DbT3064SaishinsaKetteiMeisai" />) As DbT3064SaishinsaKetteiMeisai
+       <where>        
+        <if test = "処理年月 !=null"> 
+        AND 
+        DbT3064SaishinsaKetteiMeisai."dbT3064SaishinsaKetteiMeisai_torikomiYM" = #{処理年月}
+         </if>
+         <if test = "保険者区分 !=null"> 
+        AND 
+        DbT3064SaishinsaKetteiMeisai."dbT3064SaishinsaKetteiMeisai_hokenshaKubun" = #{保険者区分}
+         </if>
+      </where>
+    </select>
+    
+    
     <!--再審査決定明細一時TBLの全データ--> 
     <select resultOrdered="true" id="getSaiShinsaKetteiMeisaiTempTBLData"
             resultMap="resultMap_SaiShinsaKetteiMeisaiTempEntity" fetchSize="500">

@@ -31,7 +31,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼なし）通知書 HokenryoNonyuTsuchishoBookFuriKaeNashiEditor
+ * 保険料納入通知書（本算定過年度）【ブックタイプ】（口振依頼なし）通知書
+ * HokenryoNonyuTsuchishoBookFuriKaeNashiEditor
  *
  * @reamsid_L DBB-9110-160 wangjie2
  */
@@ -146,12 +147,12 @@ public class KanendoNonyuTsuchishoBookFuriKaeNashiEditor implements IKanendoNony
             source.cover_kaisanMeisaishoNofuZumiGaku
                     = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴納付済額_未到来期含む(), 0);
             source.cover_keisanMeisaishoKongoNofuGaku
-                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
+                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
         } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
             source.cover_kaisanMeisaishoNofuZumiGaku
                     = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴既に納付すべき額(), 0);
             source.cover_keisanMeisaishoKongoNofuGaku
-                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_収入元に(), 0);
+                    = decimalFormatter_toコンマ区切りRString(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に(), 0);
         }
         source.cover_yen1 = 円;
         source.cover_yen2 = 円;
@@ -376,8 +377,6 @@ public class KanendoNonyuTsuchishoBookFuriKaeNashiEditor implements IKanendoNony
                 source.cover_shimeiSmall2 = sofubutsuAtesakiSource.shimeiSmall2;
                 source.cover_shimeiText = sofubutsuAtesakiSource.shimeiText;
                 source.cover_yubinNo = sofubutsuAtesakiSource.yubinNo;
-                // TODO 世帯主名 setainusimei 共通部品から設定する
-                // TODO 様方 samaKata 共通部品から設定する
             }
         }
     }
