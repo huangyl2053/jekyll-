@@ -46,9 +46,9 @@ public class ShinsakaiJohoKojinHandler {
      *
      */
     public void initialize() {
-        KaisaiKekkaAndBashoJoho kaisai = new KaisaiKekkaAndBashoJoho(ShinsakaiJohoKojinFinder.createInstance().onLoad1(get申請書管理番号()));
+        KaisaiKekkaAndBashoJoho kaisai = new KaisaiKekkaAndBashoJoho(ShinsakaiJohoKojinFinder.createInstance().onLoad1(get申請書管理番号(), get審査会開催番号()));
         div.getTxtShinsakaiNo().setValue(kaisai.get介護認定審査会開催番号());
-        div.getTxtGogitaiNo().setValue(new RString(String.valueOf(kaisai.get合議体番号())));
+        div.getTxtGogitaiName().setValue(kaisai.get合議体名称());
         div.getTxtShinsakaijoMeisho().setValue(kaisai.get介護認定審査会開催場所名称());
         if (kaisai.get介護認定審査会開催地区コード() != null && !kaisai.get介護認定審査会開催地区コード().isEmpty()) {
             div.getTxtShinsakaijoChikuCode().setValue(new RString(kaisai.get介護認定審査会開催地区コード().toString()));
@@ -75,7 +75,11 @@ public class ShinsakaiJohoKojinHandler {
     }
 
     private ShinseishoKanriNo get申請書管理番号() {
-        return new ShinseishoKanriNo(div.getHdnShinseishoKanriNo());
+            return new ShinseishoKanriNo(div.getHdnShinseishoKanriNo());
+    }
+    
+     private RString get審査会開催番号() {
+            return div.getHdnShinsakaiKaisaiNo();
     }
 
     private List<dgShinsakaiIin_Row> get審査会委員一覧データグリッド(KaisaiKekkaAndBashoJoho 開催情報) {

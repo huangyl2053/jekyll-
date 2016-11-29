@@ -247,10 +247,10 @@
 
                     var gridSetting = this.controls.dgShinsakaiIchiran().gridSetting;
                     this.controls.dgShinsakaiIchiran().width = 1085;
-
+                    
                     gridSetting.isShowFilter = false;
-                    gridSetting.isMultiSelectable = true;
-                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isMultiSelectable = false;
+                    gridSetting.isShowSelectButtonColumn = true;
 
                     gridSetting.columns[0].visible = false;
                     gridSetting.columns[1].visible = false;

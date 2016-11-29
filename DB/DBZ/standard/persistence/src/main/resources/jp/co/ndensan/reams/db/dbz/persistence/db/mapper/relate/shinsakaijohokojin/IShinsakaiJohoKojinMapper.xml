@@ -11,6 +11,7 @@ and open the template in the editor.
     <resultMap id = "KaisaiKekkaAndBashoJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity">
         <result property="介護認定審査会開催番号" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合議体番号" column="gogitaiNo" />
+        <result property="合議体名称" column="gogitaiMei" />
         <result property="介護認定審査会開催年月日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="介護認定審査会開始時刻" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会終了時刻" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -20,7 +21,6 @@ and open the template in the editor.
     </resultMap>
 
     <select resultOrdered="true" id="getKaisaikekkaandbashojoho"
-            parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"
             resultMap="KaisaiKekkaAndBashoJohoEntity">
         SELECT
             A."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo,
@@ -30,20 +30,30 @@ and open the template in the editor.
             A."shinsakaiShuryoTime" AS shinsakaiShuryoTime,
             A."shoyoJikanGokei" AS shoyoJikanGokei,
             C."shinsakaiKaisaiBashoName" AS shinsakaiKaisaiBashoName,
-            C."shinsakaiKaisaiChikuCode" AS shinsakaiKaisaiChikuCode
+            C."shinsakaiKaisaiChikuCode" AS shinsakaiKaisaiChikuCode,
+            D."gogitaiMei" AS gogitaiMei
         FROM
             rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS A
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS C
             ON A."shinsakaiKaisaiBashoCode" = C."shinsakaiKaisaiBashoCode"
-        WHERE
-            A."shinsakaiKaisaiNo" = (
-                SELECT
-                    B."shinsakaiKaisaiNo"
-                FROM
-                    rgdb."DbT5502ShinsakaiWariateJoho" AS B
-                WHERE
-                    B."shinseishoKanriNo" = #{申請書管理番号}
+        INNER JOIN rgdb."DbT5591GogitaiJoho" AS D
+            ON D."gogitaiNo" = A."gogitaiNo"
+        WHERE 1=1
+        <if test="null!=審査会開催番号 and 審査会開催番号.length()>0">
+            AND A."shinsakaiKaisaiNo" = #{審査会開催番号}
+        </if>
+        <if test="null==審査会開催番号 or 1>審査会開催番号.length()">
+            AND A."shinsakaiKaisaiNo" = (
+                    SELECT
+                        B."shinsakaiKaisaiNo"
+                    FROM
+                        rgdb."DbT5502ShinsakaiWariateJoho" AS B
+                    WHERE
+                        B."shinseishoKanriNo" = #{申請書管理番号}
+                    ORDER BY B."shinsakaiWariateYMD" DESC
+                    LIMIT(1)
             )
+        </if>    
     </select>
 
     <resultMap id = "WariateIinAndIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">

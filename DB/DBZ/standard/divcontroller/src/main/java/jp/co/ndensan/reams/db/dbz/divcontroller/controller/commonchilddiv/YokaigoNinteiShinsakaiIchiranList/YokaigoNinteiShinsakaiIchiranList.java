@@ -76,6 +76,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
         }
         if (モード_判定結果.equals(モード)) {
             表示条件 = div.getRadHyojiJokenShinsakaiKanryo().getSelectedValue();
+            
         }
         List<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
                 createInstance().get審査会一覧(表示期間From, 表示期間To, モード, 表示条件, div.getTxtSaidaiHyojiKensu().getValue(), ダミー審査会).records();
@@ -84,6 +85,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         getHandler(div).set審査会委員一覧(審査会一覧);
+        
         return ResponseData.of(div).respond();
     }
 
