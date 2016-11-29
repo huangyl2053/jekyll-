@@ -25,8 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -93,15 +91,12 @@ public class HanyoListCsvNoRenbanDataCreate {
      *
      * @param entity HanyoListShokanbaraiJokyoEntity
      * @param parameter HanyoListShokanbaraiJokyoProcessParameter
-     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
+     * @param 住所番地方書 RString
      * @return HanyoListShokanbaraiJokyoNoRenbanCSVEntity
      */
     public HanyoListShokanbaraiJokyoNoRenbanCSVEntity createCsvData(HanyoListShokanbaraiJokyoEntity entity,
-            HanyoListShokanbaraiJokyoProcessParameter parameter, ChohyoSeigyoKyotsu 帳票制御共通情報) {
+            HanyoListShokanbaraiJokyoProcessParameter parameter, RString 住所番地方書) {
         HanyoListShokanbaraiJokyoNoRenbanCSVEntity csvEntity = new HanyoListShokanbaraiJokyoNoRenbanCSVEntity();
-        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
-        RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
         set宛名(entity, csvEntity, parameter, 住所番地方書);
         set宛先(entity, csvEntity);
         set被保険者台帳管理(entity, csvEntity, parameter);

@@ -17,8 +17,11 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoNoRenbanCS
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvNoRenbanDataCreate;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -170,8 +173,10 @@ public class HanyoListShokanbaraiJokyoNoRenbanProcess extends BatchProcessBase<H
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 帳票制御共通情報));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
+        RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 住所番地方書));
         personalDataList.add(toPersonalData(entity));
         preEntity = entity;
     }

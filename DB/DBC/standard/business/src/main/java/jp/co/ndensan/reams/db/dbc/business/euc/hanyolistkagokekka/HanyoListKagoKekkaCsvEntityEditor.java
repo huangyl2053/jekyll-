@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagokekka;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKekka_HokenshaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoKekkaProcessParameter;
@@ -165,9 +167,10 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     /**
      * CSVレコードを取得します。
      *
+     * @param 住所番地方書 RString
      * @return {@link HanyoListKagoKekkaCsvEntity}
      */
-    public HanyoListKagoKekkaCsvEntity edit() {
+    public HanyoListKagoKekkaCsvEntity edit(RString 住所番地方書) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         HanyoListKagoKekkaCsvEntity csvEntity = new HanyoListKagoKekkaCsvEntity();
         csvEntity.set連番(new RString(連番));
@@ -181,13 +184,12 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         csvEntity.set続柄コード(kojin.get続柄コードリスト().toTsuzukigaraCode().getColumnValue());
         csvEntity.set世帯コード(kojin.get世帯コード().getColumnValue());
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
-        csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
+        csvEntity.set住所コード(kojin.get住所().get町域コード().value());
         csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-        if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                    .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
+        if (住所番地方書 != null) {
+            csvEntity.set住所番地方書(住所番地方書);
         } else {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue()));
+            csvEntity.set住所番地方書(RString.EMPTY);
         }
         csvEntity.set住所(kojin.get住所().get住所());
         csvEntity.set番地(kojin.get住所().get番地().getBanchi().getColumnValue());
@@ -325,10 +327,8 @@ public class HanyoListKagoKekkaCsvEntityEditor {
             } else {
                 csvEntity.set受給旧措置(RString.EMPTY);
             }
-            if (entity.get受給者台帳().getMinashiCode() != null && (MinashiCode.みなし認定_旧措置入所者
-                    .getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())
-                    || MinashiCode.やむを得ない事由.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue()))) {
-                csvEntity.set受給みなし更新認定(定数_みなし);
+            if (entity.get受給者台帳().getMinashiCode() != null && !entity.get受給者台帳().getMinashiCode().isEmpty()) {
+                csvEntity.set受給みなし更新認定(get受給みなし更新認定(entity.get受給者台帳().getMinashiCode().value()));
             } else {
                 csvEntity.set受給みなし更新認定(RString.EMPTY);
             }
@@ -341,9 +341,10 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     /**
      * CSVレコードを取得します。
      *
+     * @param 住所番地方書 RString
      * @return {@link HanyoListKagoKekkaNoRebanCsvEntity}
      */
-    public HanyoListKagoKekkaNoRebanCsvEntity noRenbanEdit() {
+    public HanyoListKagoKekkaNoRebanCsvEntity noRenbanEdit(RString 住所番地方書) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         HanyoListKagoKekkaNoRebanCsvEntity csvEntity = new HanyoListKagoKekkaNoRebanCsvEntity();
         csvEntity.set識別コード(kojin.get識別コード().getColumnValue());
@@ -356,13 +357,12 @@ public class HanyoListKagoKekkaCsvEntityEditor {
         csvEntity.set続柄コード(kojin.get続柄コードリスト().toTsuzukigaraCode().getColumnValue());
         csvEntity.set世帯コード(kojin.get世帯コード().getColumnValue());
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
-        csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
+        csvEntity.set住所コード(kojin.get住所().get町域コード().value());
         csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-        if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                    .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
+        if (住所番地方書 != null) {
+            csvEntity.set住所番地方書(住所番地方書);
         } else {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue()));
+            csvEntity.set住所番地方書(RString.EMPTY);
         }
         csvEntity.set住所(kojin.get住所().get住所());
         csvEntity.set番地(kojin.get住所().get番地().getBanchi().getColumnValue());
@@ -501,10 +501,8 @@ public class HanyoListKagoKekkaCsvEntityEditor {
             } else {
                 csvEntity.set受給旧措置(RString.EMPTY);
             }
-            if (entity.get受給者台帳().getMinashiCode() != null && (MinashiCode.みなし認定_旧措置入所者
-                    .getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue())
-                    || MinashiCode.やむを得ない事由.getコード().equals(entity.get受給者台帳().getMinashiCode().getColumnValue()))) {
-                csvEntity.set受給みなし更新認定(定数_みなし);
+            if (entity.get受給者台帳().getMinashiCode() != null && !entity.get受給者台帳().getMinashiCode().isEmpty()) {
+                csvEntity.set受給みなし更新認定(get受給みなし更新認定(entity.get受給者台帳().getMinashiCode().value()));
             } else {
                 csvEntity.set受給みなし更新認定(RString.EMPTY);
             }
@@ -512,6 +510,18 @@ public class HanyoListKagoKekkaCsvEntityEditor {
                 csvEntity.set受給直近事由(ChokkinIdoJiyuCode.toValue(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()).get名称());
             }
         }
+    }
+
+    private RString get受給みなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
+        }
+        if (みなし要介護区分コード != null && minashiCodeList.contains(みなし要介護区分コード)) {
+            受給みなし更新認定 = MinashiCode.toValue(みなし要介護区分コード).get名称();
+        }
+        return 受給みなし更新認定;
     }
 
     private RString format日付項目(FlexibleDate date) {

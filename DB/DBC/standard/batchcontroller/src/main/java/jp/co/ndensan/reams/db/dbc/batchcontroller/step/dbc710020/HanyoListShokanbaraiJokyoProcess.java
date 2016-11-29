@@ -17,8 +17,11 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvDataCreate;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -173,20 +176,24 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-
-        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 帳票制御共通情報));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(preEntity.get市町村コード());
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(preEntity.get宛名Entity());
+        RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
+        eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 住所番地方書));
         連番 = 連番.add(Decimal.ONE);
         personalDataList.add(toPersonalData(preEntity));
     }
 
     @Override
     protected void afterExecute() {
-
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(preEntity.get市町村コード());
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(preEntity.get宛名Entity());
+        RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
         if (preEntity == null && parameter.is項目名付加()) {
             eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoCSVEntity());
         }
         if (preEntity != null) {
-            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 帳票制御共通情報));
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番, 住所番地方書));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
         }
