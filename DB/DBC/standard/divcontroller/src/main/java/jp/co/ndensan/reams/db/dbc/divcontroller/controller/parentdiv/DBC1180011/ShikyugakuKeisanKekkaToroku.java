@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -95,13 +96,6 @@ public class ShikyugakuKeisanKekkaToroku {
                 被保険者番号.getColumnValue())) && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcInformationMessages.被保険者でないデータ.getMessage()).respond();
         }
-        div.setReadOnly(true);
-        RString 前排他キー = 排他情報.concat(対象者.get被保険者番号().getColumnValue());
-        LockingKey key = new LockingKey(前排他キー);
-        if (!RealInitialLocker.tryGetLock(key)) {
-            throw new PessimisticLockingException();
-        }
-        div.setReadOnly(false);
         アクセスログを出力_照会(対象者);
         handler.initialize(対象者);
         FlexibleYear 検索年度開始 = div.getTxtKensakuTaishoNendo().getFromValue() == null ? null
@@ -116,6 +110,16 @@ public class ShikyugakuKeisanKekkaToroku {
         if (!ResponseHolder.isReRequest() && resultList.isEmpty()) {
             return ResponseData.of(div).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
         }
+        div.setReadOnly(true);
+        RString 前排他キー = 排他情報.concat(対象者.get被保険者番号().getColumnValue());
+        LockingKey key = new LockingKey(前排他キー);
+        if (!RealInitialLocker.tryGetLock(key)) {
+            throw new PessimisticLockingException();
+        }
+        div.setReadOnly(false);
+        KogakuGassanShikyuGakuKeisanKekkaHosei 支給額計算結果情報 = new KogakuGassanShikyuGakuKeisanKekkaHosei();
+        支給額計算結果情報.set高額合算支給額計算結果データ(resultList);
+        ViewStateHolder.put(ViewStateKeys.支給額計算結果情報, 支給額計算結果情報);
         return ResponseData.of(div).respond();
     }
 
@@ -561,13 +565,35 @@ public class ShikyugakuKeisanKekkaToroku {
         ShikyugakuKeisanKekkaTorokuHandler handler = getHandler(div);
         支給額計算結果明細 = handler.支給額計算結果明細編集(支給額計算結果明細, 対象者);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
+
+        List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getDataSource();
+        Decimal 以上負担額合計 = Decimal.ZERO;
+        Decimal 負担額合計 = Decimal.ZERO;
+        Decimal 以上負担額 = div.getTxtOver70Futangaku().getValue() == null ? Decimal.ZERO : div.getTxtOver70Futangaku().getValue();
+        Decimal 負担額 = div.getTxtFutangaku().getValue() == null ? Decimal.ZERO : div.getTxtFutangaku().getValue();
+        for (dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row : rowList) {
+            if (!RowState.Deleted.equals(row.getRowState())) {
+                以上負担額合計 = 以上負担額合計.add(row.getTxtOver70Futangaku().getValue() == null
+                        ? Decimal.ZERO : new Decimal(row.getTxtOver70Futangaku().getValue().toString()));
+                負担額合計 = 負担額合計.add(row.getTxtFutangaku().getValue() == null
+                        ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().getValue().toString()));
+            }
+        }
+        if (!追加.equals(状態)) {
+            dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row clickedRow = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem();
+            以上負担額合計 = 以上負担額合計.subtract(clickedRow.getTxtOver70Futangaku().getValue() == null
+                    ? Decimal.ZERO : new Decimal(clickedRow.getTxtOver70Futangaku().getValue().toString()));
+            負担額合計 = 負担額合計.subtract(clickedRow.getTxtFutangaku().getValue() == null
+                    ? Decimal.ZERO : new Decimal(clickedRow.getTxtFutangaku().getValue().toString()));
+        }
+        以上負担額合計 = 以上負担額合計.add(以上負担額);
+        負担額合計 = 負担額合計.add(負担額);
+
         if (削除.equals(状態)) {
             支給額計算結果 = 支給額計算結果.createBuilderForEdit().delete高額合算支給額計算結果明細(支給額計算結果明細).build();
-        } else if (追加.equals(状態)) {
-            KogakuGassanShikyuShinseiTorokuManager manager = KogakuGassanShikyuShinseiTorokuManager.createInstance();
-            支給額計算結果 = manager.get高額合算支給額計算結果追加情報(支給額計算結果明細, 支給額計算結果);
         } else {
-            支給額計算結果 = 支給額計算結果.createBuilderForEdit().set高額合算支給額計算結果明細(支給額計算結果明細).build();
+            KogakuGassanShikyuShinseiTorokuManager manager = KogakuGassanShikyuShinseiTorokuManager.createInstance();
+            支給額計算結果 = manager.get高額合算支給額計算結果追加情報(支給額計算結果明細, 支給額計算結果, 以上負担額合計, 負担額合計);
         }
         handler.支給額結果明細グリッド(支給額計算結果.get高額合算支給額計算結果list());
         handler.onClick_btnUchiwakeIchiramModoru();
@@ -575,6 +601,11 @@ public class ShikyugakuKeisanKekkaToroku {
         ViewStateHolder.put(ViewStateKeys.支給額計算結果, 支給額計算結果);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(計算結果を保存する, false);
         return ResponseData.of(div).respond();
+    }
+
+    private void set合計(List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList, Decimal 以上負担額合計,
+            Decimal 負担額合計, RString 状態, ShikyugakuKeisanKekkaTorokuDiv div) {
+        
     }
 
     /**
