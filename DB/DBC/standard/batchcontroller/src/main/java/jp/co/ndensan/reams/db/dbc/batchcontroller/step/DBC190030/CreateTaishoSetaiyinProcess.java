@@ -340,7 +340,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     @Override
     protected void afterExecute() {
-        getアクセスログ();
         if (ShinseishoTorokuChushutsuJoken.白紙印刷.getコード().equals(this.parameter.get抽出条件())) {
             dBC100063ReportWriter0 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100063.getReportId().value()).create();
             dBC100063SourceWriter0 = new ReportSourceWriter<>(dBC100063ReportWriter0);
