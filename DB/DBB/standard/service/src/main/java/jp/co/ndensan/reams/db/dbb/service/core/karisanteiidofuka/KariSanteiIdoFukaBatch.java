@@ -181,6 +181,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString 定数_出力順 = new RString("出力順");
     private static final RString 定数_開始日時 = new RString("仮算定異動賦課抽出開始日時");
     private static final RString 定数_終了日時 = new RString("仮算定異動賦課抽出終了日時");
+    private static final RString 普徴仮算定異動方法 = new RString("普徴仮算定異動方法");
+    private static final RString 普徴仮算定異動方法_1 = new RString("4月喪失のみ0円にする");
+    private static final RString 普徴仮算定異動方法_2 = new RString("喪失月以降0円にする");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
@@ -1912,6 +1915,16 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
                 .concat(format時間(抽出終了日時.getTime()))
                 .concat(RString.FULL_SPACE).concat(未満));
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(普徴仮算定異動方法).concat(FORMAT_RIGHT);
+        RString 普徴仮異動方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動方法,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        if (RSTRING_1.equals(普徴仮異動方法)) {
+            rstbuilder.append(普徴仮算定異動方法_1);
+        } else if (RSTRING_2.equals(普徴仮異動方法)) {
+            rstbuilder.append(普徴仮算定異動方法_2);
+        }
         出力条件リスト.add(rstbuilder.toRString());
         rstbuilder = new RStringBuilder();
         rstbuilder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
