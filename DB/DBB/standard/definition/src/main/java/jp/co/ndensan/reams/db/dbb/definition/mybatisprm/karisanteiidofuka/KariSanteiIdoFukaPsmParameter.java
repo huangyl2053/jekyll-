@@ -21,8 +21,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KariSanteiIdoFukaPsmParameter implements IMyBatisParameter {
 
-    private RString 出力順;
-    private UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
+    private final RString 出力順;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      * コンストラクタです
