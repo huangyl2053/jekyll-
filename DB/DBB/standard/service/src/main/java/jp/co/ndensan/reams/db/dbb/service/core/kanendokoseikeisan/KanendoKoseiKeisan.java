@@ -425,17 +425,17 @@ public class KanendoKoseiKeisan {
     private FukaJohoBuilder get賦課の情報(FukaJoho 賦課の情報, YMDHMS 算定日時, List<Decimal> 普徴期別額List,
             List<Decimal> 特徴期別額List, FlexibleYear 調定年度, boolean is初期化期別情報) {
         FukaJoho fuka = 賦課の情報クローン(賦課の情報, 調定年度, is初期化期別情報);
-        return fuka.createBuilderForEdit().set特徴期別金額01(特徴期別額List.get(0))
-                .set特徴期別金額02(特徴期別額List.get(INT_1)).set特徴期別金額03(特徴期別額List.get(INT_2))
-                .set特徴期別金額04(特徴期別額List.get(INT_3)).set特徴期別金額05(特徴期別額List.get(INT_4))
-                .set特徴期別金額06(特徴期別額List.get(INT_5)).set普徴期別金額01(普徴期別額List.get(0))
-                .set普徴期別金額02(普徴期別額List.get(INT_1)).set普徴期別金額03(普徴期別額List.get(INT_2))
-                .set普徴期別金額04(普徴期別額List.get(INT_3)).set普徴期別金額05(普徴期別額List.get(INT_4))
-                .set普徴期別金額06(普徴期別額List.get(INT_5)).set普徴期別金額07(普徴期別額List.get(INT_6))
-                .set普徴期別金額08(普徴期別額List.get(INT_7)).set普徴期別金額09(普徴期別額List.get(INT_8))
-                .set普徴期別金額10(普徴期別額List.get(INT_9)).set普徴期別金額11(普徴期別額List.get(INT_10))
-                .set普徴期別金額12(普徴期別額List.get(INT_11)).set普徴期別金額13(普徴期別額List.get(INT_12))
-                .set普徴期別金額14(普徴期別額List.get(INT_13)).set調定日時(算定日時);
+        return fuka.createBuilderForEdit().set特徴期別金額01(特徴期別額List.get(0).roundUpTo(0))
+                .set特徴期別金額02(特徴期別額List.get(INT_1).roundUpTo(0)).set特徴期別金額03(特徴期別額List.get(INT_2).roundUpTo(0))
+                .set特徴期別金額04(特徴期別額List.get(INT_3).roundUpTo(0)).set特徴期別金額05(特徴期別額List.get(INT_4).roundUpTo(0))
+                .set特徴期別金額06(特徴期別額List.get(INT_5).roundUpTo(0)).set普徴期別金額01(普徴期別額List.get(0).roundUpTo(0))
+                .set普徴期別金額02(普徴期別額List.get(INT_1).roundUpTo(0)).set普徴期別金額03(普徴期別額List.get(INT_2).roundUpTo(0))
+                .set普徴期別金額04(普徴期別額List.get(INT_3).roundUpTo(0)).set普徴期別金額05(普徴期別額List.get(INT_4).roundUpTo(0))
+                .set普徴期別金額06(普徴期別額List.get(INT_5).roundUpTo(0)).set普徴期別金額07(普徴期別額List.get(INT_6).roundUpTo(0))
+                .set普徴期別金額08(普徴期別額List.get(INT_7).roundUpTo(0)).set普徴期別金額09(普徴期別額List.get(INT_8).roundUpTo(0))
+                .set普徴期別金額10(普徴期別額List.get(INT_9).roundUpTo(0)).set普徴期別金額11(普徴期別額List.get(INT_10).roundUpTo(0))
+                .set普徴期別金額12(普徴期別額List.get(INT_11).roundUpTo(0)).set普徴期別金額13(普徴期別額List.get(INT_12).roundUpTo(0))
+                .set普徴期別金額14(普徴期別額List.get(INT_13).roundUpTo(0)).set調定日時(算定日時);
     }
 
     private FukaJoho 賦課の情報クローン(FukaJoho 賦課の情報, FlexibleYear 調定年度, boolean is初期化期別情報) {
