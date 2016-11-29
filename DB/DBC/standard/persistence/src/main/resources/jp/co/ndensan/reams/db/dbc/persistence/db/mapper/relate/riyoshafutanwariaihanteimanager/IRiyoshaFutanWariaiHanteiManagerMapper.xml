@@ -30,5 +30,6 @@
         WHERE
         B."shikibetsuCode" = #{識別コード}
         AND  B."shotokuNendo" = #{所得年度}
+        ORDER BY B."shotokuNendo" DESC
     </select>
 </mapper>
