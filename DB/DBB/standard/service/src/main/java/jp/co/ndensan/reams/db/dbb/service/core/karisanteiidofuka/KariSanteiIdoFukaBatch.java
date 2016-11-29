@@ -160,7 +160,7 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_3 = new RString("3");
     private static final RString RSTRING_4 = new RString("04");
-    private static final RString RSTRING_6 = new RString("06");
+    private static final RString RSTRING_6 = new RString("08");
     private static final RString RSTRING_11 = new RString("11");
     private static final RString RSTRING_12 = new RString("12");
     private static final RString RSTRING_100 = new RString("100");

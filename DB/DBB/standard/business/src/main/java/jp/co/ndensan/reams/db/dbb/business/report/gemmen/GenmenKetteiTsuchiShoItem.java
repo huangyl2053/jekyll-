@@ -98,6 +98,4 @@ public class GenmenKetteiTsuchiShoItem {
     private RString 様分1;
     private RString 様分氏名Small1;
     private RString カスタマバーコード;
-    // TODO (QA655)世帯主名 将来に追加する
-    // TODO (QA655)様方 将来に追加する
 }
