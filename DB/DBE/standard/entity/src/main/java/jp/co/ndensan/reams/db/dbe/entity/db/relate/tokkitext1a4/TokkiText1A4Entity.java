@@ -37,6 +37,8 @@ public class TokkiText1A4Entity {
     private RString 審査日_年;
     private RString 審査日_月;
     private RString 審査日_日;
+    private RString 概況調査特記事項;
+    private RString 概況調査特記事項イメージ;
     private List<TokkiTextEntity> 特記事項リスト;
     private List<TokkiTextEntity> 特記事項番号リスト;
     private RString 特記事項イメージ;

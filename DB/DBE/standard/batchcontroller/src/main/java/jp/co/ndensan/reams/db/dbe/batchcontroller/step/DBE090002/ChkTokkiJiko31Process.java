@@ -72,6 +72,8 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     private ReportSourceWriter<TokkiText1ReportSource> reportSourceWriter;
     private static final RString FILENAME_BAK = new RString("C4101_BAK.png");
     private static final RString FILENAME = new RString("C4101.png");
+    private static final RString C0007_FILENAME_BAK = new RString("C0007_BAK.png");
+    private static final RString C0007_FILENAME = new RString("C0007.png");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
     private static final RString フラグ = new RString("1");
@@ -252,11 +254,12 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
 
     private TokkiText1A4Entity setBodyItem(YokaigoninteiEntity entity) {
         TokkiText1A4Entity ninteiEntity = new TokkiText1A4Entity();
-        if (processPrm.getRadTokkiJikoMasking().equals(マスキングあり)) {
+        if (!processPrm.getRadTokkiJikoMasking().equals(マスキングあり)) {
             ninteiEntity.set保険者番号(entity.get保険者番号());
             ninteiEntity.set被保険者番号(entity.get被保険者番号());
             ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
         }
+        ninteiEntity.set概況調査特記事項(entity.get概況調査特記事項());
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         ninteiEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
@@ -299,11 +302,12 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         List<TokkiTextEntity> 特記事項List = new ArrayList<>();
         List<TokkiTextEntity> 特記事項番号リスト = new ArrayList<>();
         List<TokkiTextEntity> イメージリスト = new ArrayList<>();
+        RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
+        ninteiEntity.set概況調査特記事項イメージ(共有ファイルを引き出す_C0007(イメージID));
         for (int i = 0; i < entity.size(); i++) {
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
                     && 全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
-                RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
                 ninteiEntity.set特記事項イメージ(共有ファイルを引き出す(イメージID));
             }
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
@@ -978,6 +982,18 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
                 imagePath = getFilePath(イメージID, FILENAME);
             } else {
                 imagePath = getFilePathBak(イメージID, FILENAME_BAK);
+            }
+        }
+        return imagePath;
+    }
+
+    private RString 共有ファイルを引き出す_C0007(RDateTime イメージID) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
+                imagePath = getFilePath(イメージID, C0007_FILENAME);
+            } else {
+                imagePath = getFilePathBak(イメージID, C0007_FILENAME_BAK);
             }
         }
         return imagePath;

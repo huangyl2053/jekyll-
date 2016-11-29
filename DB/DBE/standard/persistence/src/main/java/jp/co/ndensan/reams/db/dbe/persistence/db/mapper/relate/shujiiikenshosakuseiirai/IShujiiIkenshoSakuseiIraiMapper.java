@@ -27,6 +27,14 @@ public interface IShujiiIkenshoSakuseiIraiMapper {
      * @return 主治医意見書作成依頼RelateEntity
      */
     List<ShujiiikenshosakuseiiraiRelateEntity> get申請者情報(ShujiiIkenshoSakuseiIraiParameter param);
+    
+    /**
+     * 指定条件による申請者情報の該当件数を返します。
+     *
+     * @param parameter パラメータ
+     * @return 申請者情報の件数
+     */
+    int countShinSeiShaJoho(ShujiiIkenshoSakuseiIraiParameter parameter);
 
     /**
      * 主治医意見書作成依頼情報を取得します。

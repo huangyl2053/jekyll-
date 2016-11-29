@@ -61,6 +61,15 @@ public class KaisaiKekkaAndBashoJoho {
     public int get合議体番号() {
         return entity.get合議体番号();
     }
+    
+     /**
+     * 合議体名称を返します。
+     *
+     * @return 合議体名称
+     */
+    public RString get合議体名称() {
+        return entity.get合議体名称();
+    }
 
     /**
      * 介護認定審査会開催年月日を返します。

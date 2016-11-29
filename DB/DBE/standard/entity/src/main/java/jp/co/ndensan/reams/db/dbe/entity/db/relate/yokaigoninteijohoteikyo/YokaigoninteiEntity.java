@@ -57,6 +57,7 @@ public class YokaigoninteiEntity {
     private FlexibleDate 実施年月日;
     private RString 実施場所コード;
     private RString 実施場所名称;
+    private RString 概況調査特記事項;
     private RString 調査員氏名;
     private RString 事業者名称;
     private FlexibleDate 作成年月日;

@@ -161,11 +161,12 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
 
     private TokkiText1A4Entity setBodyItem(YokaigoninteiEntity entity) {
         TokkiText1A4Entity ninteiEntity = new TokkiText1A4Entity();
-        if (processPrm.getRadTokkiJikoMasking().equals(マスキングあり)) {
+        if (!processPrm.getRadTokkiJikoMasking().equals(マスキングあり)) {
             ninteiEntity.set保険者番号(entity.get保険者番号());
             ninteiEntity.set被保険者番号(entity.get被保険者番号());
             ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
         }
+        ninteiEntity.set概況調査特記事項(entity.get概況調査特記事項());
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         ninteiEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());

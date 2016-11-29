@@ -41,8 +41,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShinsakaiNo"));
             }
 
-            public txtGogitaiNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtGogitaiNo"));
+            public txtGogitaiName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtGogitaiName"));
             }
 
             public txtShinsakaijoMeisho(): UZA.TextBox {

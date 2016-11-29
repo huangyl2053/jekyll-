@@ -71,11 +71,12 @@ public class ShinsakaiJohoKojinFinder {
      * 開催結果情報と開催場所情報を取得します。
      *
      * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 介護認定審査会開催番号 RString
      * @return KaisaiKekkaAndBashoJohoEntity
      */
-    public KaisaiKekkaAndBashoJohoEntity onLoad1(ShinseishoKanriNo 申請書管理番号) {
+    public KaisaiKekkaAndBashoJohoEntity onLoad1(ShinseishoKanriNo 申請書管理番号, RString 介護認定審査会開催番号) {
         IShinsakaiJohoKojinMapper mapper = mapperProvider.create(IShinsakaiJohoKojinMapper.class);
-        KaisaiKekkaAndBashoJohoEntity entity = mapper.getKaisaikekkaandbashojoho(申請書管理番号);
+        KaisaiKekkaAndBashoJohoEntity entity = mapper.getKaisaikekkaandbashojoho(申請書管理番号, 介護認定審査会開催番号);
         if (entity == null) {
             entity = new KaisaiKekkaAndBashoJohoEntity();
         }
