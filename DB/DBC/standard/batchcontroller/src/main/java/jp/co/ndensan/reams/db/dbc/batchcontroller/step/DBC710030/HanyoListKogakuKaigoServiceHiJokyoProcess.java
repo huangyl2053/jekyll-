@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
@@ -143,6 +145,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private List<PersonalData> personalDataList;
     private FileSpoolManager manager;
     private Association 地方公共団体;
+    private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private Decimal 連番;
     private List<KinyuKikanEntity> lstKinyuKikanEntity;
     private FlexibleDate システム日付;
@@ -165,6 +168,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
             日本語ファイル名 = 高額介護サービス費状況CSV;
             英数字ファイル名 = 英数字ファイル名_高額介護サービス費状況CSV;
             帳票ID = ReportIdDBC.DBC701003.getReportId();
+            帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票ID);
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
                     parameter.getShutsuryokuju()
@@ -182,6 +186,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
             英数字ファイル名 = 英数字ファイル名_事業高額サービス費状況CSV;
             this.modoFlag = false;
             帳票ID = ReportIdDBC.DBC701019.getReportId();
+            帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票ID);
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             並び順 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID,
                     parameter.getShutsuryokuju()
@@ -280,7 +285,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
                     preEntity.get口座情報().getKinyuKikanEntity().add(kinyuKikanEntity);
                 }
             }
-            eucCsvWriter.writeLine(dataCreate.edit(preEntity, parameter, 連番, 構成市町村Map));
+            eucCsvWriter.writeLine(dataCreate.edit(preEntity, parameter, 連番, 構成市町村Map, 帳票制御共通情報));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
             lstKinyuKikanEntity.clear();
@@ -311,7 +316,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
             }
         }
         if (preEntity != null) {
-            eucCsvWriter.writeLine(dataCreate.edit(preEntity, parameter, 連番, 構成市町村Map));
+            eucCsvWriter.writeLine(dataCreate.edit(preEntity, parameter, 連番, 構成市町村Map, 帳票制御共通情報));
             連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(preEntity));
         }
