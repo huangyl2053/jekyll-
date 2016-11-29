@@ -15,6 +15,10 @@
     </properties>
     <dependencies>
 		<!-- DBE -->
+                <dependency>
+                    <groupId>${project.groupId}</groupId>
+                    <artifactId>DbeDefinition</artifactId>
+                </dependency>
 		<!-- DBX -->
 		<!-- DBZ -->
 		<!-- 公開系 -->
