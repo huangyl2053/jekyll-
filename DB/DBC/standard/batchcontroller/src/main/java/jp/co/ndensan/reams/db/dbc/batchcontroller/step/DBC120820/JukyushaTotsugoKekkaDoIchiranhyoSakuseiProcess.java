@@ -391,17 +391,16 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
     }
 
     private static RString date_to_string(RString 年月日) {
-        年月日 = 年月日.trim();
-        if (null == 年月日 || RString.EMPTY.equals(年月日)) {
+        if (null == 年月日 || RString.EMPTY.equals(年月日.trim())) {
             return RString.EMPTY;
         }
-        if (FlexibleDate.canConvert(年月日)) {
-            if (new FlexibleDate(年月日).isWareki()) {
-                return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+        if (FlexibleDate.canConvert(年月日.trim())) {
+            if (new FlexibleDate(年月日.trim()).isWareki()) {
+                return new FlexibleDate(年月日.trim()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString();
             }
         }
-        return 年月日;
+        return 年月日.trim();
     }
 
     private static RString decimal_to_string(RString number) {
@@ -430,49 +429,49 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get突合結果(JukyushaKekkaIchiranCSVEntity output, RString 突合結果区分) {
         output.set突合結果(突合結果区分);
-        if (!RString.isNullOrEmpty(突合結果区分)) {
+        if (!isNullOrEmpty(突合結果区分)) {
             output.set突合結果名称(JukyushaIF_TsugoKekkaKubun.toValue(突合結果区分).get名称());
         }
     }
 
     private void get突合情報(JukyushaKekkaIchiranCSVEntity output, RString 突合情報区分) {
         output.set突合情報(突合情報区分);
-        if (!RString.isNullOrEmpty(突合情報区分)) {
+        if (!isNullOrEmpty(突合情報区分)) {
             output.set突合情報名称(JukyushaIF_TsugoJohoKubun.toValue(突合情報区分).get名称());
         }
     }
 
     private void get異動区分(JukyushaKekkaIchiranCSVEntity output, RString 異動区分) {
         output.set異動区分(異動区分);
-        if (!RString.isNullOrEmpty(異動区分)) {
+        if (!isNullOrEmpty(異動区分)) {
             output.set異動区分名称(JukyushaIF_IdoKubunCode.toValue(異動区分).get名称());
         }
     }
 
     private void get異動事由(JukyushaKekkaIchiranCSVEntity output, RString 異動事由) {
         output.set異動事由(異動事由);
-        if (!RString.isNullOrEmpty(異動事由)) {
+        if (!isNullOrEmpty(異動事由)) {
             output.set異動事由名称(JukyushaIF_JukyushaIdoJiyu.toValue(異動事由).get名称());
         }
     }
 
     private void getみなし区分(JukyushaKekkaIchiranCSVEntity output, RString みなし区分) {
         output.setみなし区分(みなし区分);
-        if (!RString.isNullOrEmpty(みなし区分)) {
+        if (!isNullOrEmpty(みなし区分)) {
             output.setみなし区分名称(MinashiCode.toValue(みなし区分).get名称());
         }
     }
 
     private void get性別(JukyushaKekkaIchiranCSVEntity output, RString 性別) {
         output.set性別(性別);
-        if (!RString.isNullOrEmpty(性別)) {
+        if (!isNullOrEmpty(性別)) {
             output.set性別名称(Seibetsu.toValue(性別).get名称());
         }
     }
 
     private void get要介護区分(JukyushaKekkaIchiranCSVEntity output, FlexibleDate サービス提供年月末日, RString 要介護区分) {
         output.set要介護区分(要介護区分);
-        if (!RString.isNullOrEmpty(要介護区分)) {
+        if (!isNullOrEmpty(要介護区分)) {
             output.set要介護区分名称(YokaigoJotaiKubunSupport.toValue(
                     サービス提供年月末日.getYearMonth(), 要介護区分).getName());
         }
@@ -480,14 +479,14 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get申請種別(JukyushaKekkaIchiranCSVEntity output, RString 申請種別) {
         output.set申請種別(申請種別);
-        if (!RString.isNullOrEmpty(申請種別)) {
+        if (!isNullOrEmpty(申請種別)) {
             output.set申請種別名称(JukyushaIF_ShinseiShubetsuCode.toValue(申請種別).get名称());
         }
     }
 
     private void get変更申請区分(JukyushaKekkaIchiranCSVEntity output, RString 変更申請区分) {
         output.set変更申請区分(変更申請区分);
-        if (!RString.isNullOrEmpty(変更申請区分)) {
+        if (!isNullOrEmpty(変更申請区分)) {
             output.set変更申請区分名称(JukyushaIF_HenkoShinseichuKubunCode.toValue(
                     変更申請区分).get名称());
         }
@@ -495,7 +494,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get計画作成区分(JukyushaKekkaIchiranCSVEntity output, RString 計画作成区分) {
         output.set計画作成区分(計画作成区分);
-        if (!RString.isNullOrEmpty(計画作成区分)) {
+        if (!isNullOrEmpty(計画作成区分)) {
             output.set計画作成区分名称(JukyushaIF_KeikakuSakuseiKubunCode.toValue(
                     計画作成区分).get名称());
         }
@@ -503,28 +502,28 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get標準負担区分(JukyushaKekkaIchiranCSVEntity output, RString 標準負担区分) {
         output.set標準負担区分(標準負担区分);
-        if (!RString.isNullOrEmpty(標準負担区分)) {
+        if (!isNullOrEmpty(標準負担区分)) {
             output.set標準負担区分名称(JukyushaIF_HyojunFutanKubunCode.toValue(標準負担区分).get名称());
         }
     }
 
     private void get減免中区分(JukyushaKekkaIchiranCSVEntity output, RString 減免中区分) {
         output.set減免中区分(減免中区分);
-        if (!RString.isNullOrEmpty(減免中区分)) {
+        if (!isNullOrEmpty(減免中区分)) {
             output.set減免中区分名称(JukyushaIF_GemmenShinseichuKubunCode.toValue(減免中区分).get名称());
         }
     }
 
     private void get利用者負担区分(JukyushaKekkaIchiranCSVEntity output, RString 利用者負担区分) {
         output.set利用者負担区分(利用者負担区分);
-        if (!RString.isNullOrEmpty(利用者負担区分)) {
+        if (!isNullOrEmpty(利用者負担区分)) {
             output.set利用者負担区分名称(JukyushaIF_RiyoshaFutanKubunCode.toValue(利用者負担区分).get名称());
         }
     }
 
     private void get公費負担上限額減額(JukyushaKekkaIchiranCSVEntity output, RString 公費負担上限額減額) {
         output.set公費負担上限額減額(公費負担上限額減額);
-        if (!RString.isNullOrEmpty(公費負担上限額減額)) {
+        if (!isNullOrEmpty(公費負担上限額減額)) {
             output.set公費負担上限額減額名称(JukyushaIF_kohiFutanJogengakuGengakuUmu.toValue(
                     公費負担上限額減額).get名称());
         }
@@ -532,7 +531,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get住所地特例区分(JukyushaKekkaIchiranCSVEntity output, RString 住所地特例区分) {
         output.set住所地特例区分(住所地特例区分);
-        if (!RString.isNullOrEmpty(住所地特例区分)) {
+        if (!isNullOrEmpty(住所地特例区分)) {
             output.set住所地特例区分名称(JukyushaIF_JutokuJigyoKubunCode.toValue(
                     住所地特例区分).get名称());
         }
@@ -540,7 +539,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get小規模居宅サービス利用の有無(JukyushaKekkaIchiranCSVEntity output, RString 小規模居宅サービス利用の有無) {
         output.set小規模居宅サービス利用の有無(小規模居宅サービス利用の有無);
-        if (!RString.isNullOrEmpty(小規模居宅サービス利用の有無)) {
+        if (!isNullOrEmpty(小規模居宅サービス利用の有無)) {
             output.set小規模居宅サービス利用の有無名称(JukyushaIF_ShokiboKyotakuServiceRIyoCode.toValue(
                     小規模居宅サービス利用の有無).get名称());
         }
@@ -548,7 +547,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get二次予防事業区分(JukyushaKekkaIchiranCSVEntity output, RString 二次予防事業区分) {
         output.set二次予防事業区分(二次予防事業区分);
-        if (!RString.isNullOrEmpty(二次予防事業区分)) {
+        if (!isNullOrEmpty(二次予防事業区分)) {
             output.set二次予防事業区分名称(JukyushaIF_NijiyoboJigyoKubunCode.toValue(
                     二次予防事業区分).get名称());
         }
@@ -556,7 +555,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get特定入所者認定申請中区分(JukyushaKekkaIchiranCSVEntity output, RString 特定入所者認定申請中区分) {
         output.set特定入所者認定申請中区分(特定入所者認定申請中区分);
-        if (!RString.isNullOrEmpty(特定入所者認定申請中区分)) {
+        if (!isNullOrEmpty(特定入所者認定申請中区分)) {
             output.set特定入所者認定申請中区分名称(JukyushaIF_NinteiShinseichuKubunCode.toValue(
                     特定入所者認定申請中区分).get名称());
         }
@@ -564,7 +563,7 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get特定入所者介護サービス区分(JukyushaKekkaIchiranCSVEntity output, RString 特定入所者介護サービス区分) {
         output.set特定入所者介護サービス区分(特定入所者介護サービス区分);
-        if (!RString.isNullOrEmpty(特定入所者介護サービス区分)) {
+        if (!isNullOrEmpty(特定入所者介護サービス区分)) {
             output.set特定入所者介護サービス区分名称(JukyushaIF_ServiceKubunCode.toValue(
                     特定入所者介護サービス区分).get名称());
         }
@@ -572,9 +571,13 @@ public class JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess extends BatchKeyBrea
 
     private void get課税層の特例減額措置対象(JukyushaKekkaIchiranCSVEntity output, RString 課税層の特例減額措置対象) {
         output.set課税層の特例減額措置対象(課税層の特例減額措置対象);
-        if (!RString.isNullOrEmpty(課税層の特例減額措置対象)) {
+        if (!isNullOrEmpty(課税層の特例減額措置対象)) {
             output.set課税層の特例減額措置対象名称(JukyushaIF_TokureiGengakuSochiTaisho.toValue(
                     課税層の特例減額措置対象).get名称());
         }
+    }
+
+    private boolean isNullOrEmpty(RString コード) {
+        return コード == null || RString.EMPTY.equals(コード.trim());
     }
 }
