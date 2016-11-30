@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.service.report.kanendoidoukekkaichiran;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranReport;
@@ -114,8 +112,7 @@ public class KanendoIdouKekkaIchiranPrintService {
                     }
                     i = i + 1;
                 }
-            }
-            doSort(更正前後EntityList);
+            }            
             DbT7065ChohyoSeigyoKyotsuDac 帳票制御共通Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
             DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類ID);
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(entity);
@@ -134,24 +131,6 @@ public class KanendoIdouKekkaIchiranPrintService {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
-    }
-
-    private void doSort(List<KeisangojohoAtenaKozaKouseizengoEntity> list) {
-        Collections.sort(list, new Comparator<KeisangojohoAtenaKozaKouseizengoEntity>() {
-            @Override
-            public int compare(KeisangojohoAtenaKozaKouseizengoEntity o1, KeisangojohoAtenaKozaKouseizengoEntity o2) {
-                if (null != o2.get計算後情報_宛名_口座_更正前Entity() && null != o1.get計算後情報_宛名_口座_更正前Entity()) {
-                    int flag = o2.get計算後情報_宛名_口座_更正前Entity().get通知書番号()
-                            .compareTo(o1.get計算後情報_宛名_口座_更正前Entity().get通知書番号());
-                    if (INDEX_0 == flag) {
-                        flag = o2.get計算後情報_宛名_口座_更正前Entity().get賦課年度()
-                                .compareTo(o1.get計算後情報_宛名_口座_更正前Entity().get賦課年度());
-                    }
-                    return flag;
-                }
-                return INDEX_0;
-            }
-        });
     }
 
 }
