@@ -381,13 +381,18 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
                     = new KogakuKetteiTsuchiShoSealer2Report(getタイトル(一時Entity), reportEntity4, ninshoshaSource4, parameter.get文書番号(), 連番);
             report4.writeBy(reportSourceWriter4);
         }
-        RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報, 導入団体情報);
+        RString 住所 = get編集住所(entity, 帳票制御共通情報);
         KogakuShikyuFushikyuKetteiTsuchiHakkoEntity fushikyuReportEntity = getFushikyuReportEntity(entity, 宛名情報, 住所);
 
         itemList.add(fushikyuReportEntity);
         personalDataList.add(toPersonalData(entity));
     }
 
+    private RString get編集住所(KogakuServiceReportEntity entity, ChohyoSeigyoKyotsu 帳票制御共通情報) {
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(AtesakiFactory.createInstance(entity.get宛先()), 地方公共団体, 帳票制御共通情報);
+        return 編集後宛先.get編集後住所();
+    }
     private PersonalData toPersonalData(KogakuServiceReportEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"),
                 new RString("被保険者番号"), new RString(entity.get一時Entity().getHihokenshaNo().toString()));
