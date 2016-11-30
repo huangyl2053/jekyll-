@@ -111,9 +111,9 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
 
-        reportSource.shutokuYmdAto = new FlexibleDate(更正後.get期間_自_西暦()).wareki().fillType(FillType.BLANK).toDateString();
+        reportSource.shutokuYmdAto = new FlexibleDate(更正後.get期間_自_西暦()).wareki().toDateString();
 
-        reportSource.soshitsuYmdAto = new FlexibleDate(更正後.get期間_至_西暦()).wareki().fillType(FillType.BLANK).toDateString();
+        reportSource.soshitsuYmdAto = new FlexibleDate(更正後.get期間_至_西暦()).wareki().toDateString();
 
         set転入者通知文(reportSource, 編集後本算定通知書共通情報);
         set通知文1と通知区分(reportSource, 編集後本算定通知書共通情報);
@@ -129,8 +129,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor implements IKaigo
             reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
             reportSource.hokenSanshutsuMae = edit金額(更正前.get減免前保険料_年額());
             reportSource.shotokuKbnMae = 更正前.get保険料段階();
-            reportSource.shutokuYmdMae = new FlexibleDate(更正前.get期間_自_西暦()).wareki().fillType(FillType.BLANK).toDateString();
-            reportSource.soshitsuYmdMae = new FlexibleDate(更正前.get期間_至_西暦()).wareki().fillType(FillType.BLANK).toDateString();
+            reportSource.shutokuYmdMae = new FlexibleDate(更正前.get期間_自_西暦()).wareki().toDateString();
+            reportSource.soshitsuYmdMae = new FlexibleDate(更正前.get期間_至_西暦()).wareki().toDateString();
             reportSource.tsukisuMae = 更正前.get月数_ケ月();
             reportSource.honninKazeiKubunMae = 更正前.get市町村民税課税区分_本人();
             reportSource.setaiKazeiKubunMae = 更正前.get市町村民税課税区分_世帯();
