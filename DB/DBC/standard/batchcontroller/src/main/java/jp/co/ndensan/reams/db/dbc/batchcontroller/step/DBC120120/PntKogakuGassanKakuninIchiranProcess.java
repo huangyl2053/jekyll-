@@ -180,7 +180,7 @@ public class PntKogakuGassanKakuninIchiranProcess extends BatchKeyBreakBase<Koga
         if (RString.isNullOrEmpty(processPrm.get出力順ID())) {
             出力順情報 = null;
         } else {
-            出力順情報 = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200038.getReportId(),
+            出力順情報 = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200037.getReportId(),
                     Long.parseLong(processPrm.get出力順ID().toString()));
         }
         if (出力順情報 == null) {
