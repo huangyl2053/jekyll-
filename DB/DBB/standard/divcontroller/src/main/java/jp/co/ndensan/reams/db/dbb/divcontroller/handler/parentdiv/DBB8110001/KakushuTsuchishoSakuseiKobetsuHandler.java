@@ -899,6 +899,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                 .getLblZengoFuchoAtoKei().setText(Decimal.ZERO.equals(更正後合計) && !flag ? RString.EMPTY
                         : DecimalFormatter.toコンマ区切りRString(更正後合計, 0));
+        if (!flag) {
+            return;
+        }
         set納期限(更正後情報, 期_1月, 期_2月, 期_3月, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
                 期_9月, 期_10月, 期_11月, 期_12月, 期_13月, 期_14月);
     }
