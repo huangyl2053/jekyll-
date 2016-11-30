@@ -245,12 +245,12 @@ public class tabMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBox getTxtKokuhoHihokenshaShoKigo() {
+    public TextBoxCode getTxtKokuhoHihokenshaShoKigo() {
         return this.getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().getTxtKokuhoHihokenshaShoKigo();
     }
 
     @JsonIgnore
-    public void  setTxtKokuhoHihokenshaShoKigo(TextBox txtKokuhoHihokenshaShoKigo) {
+    public void  setTxtKokuhoHihokenshaShoKigo(TextBoxCode txtKokuhoHihokenshaShoKigo) {
         this.getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtKokuhoHihokenshaShoKigo(txtKokuhoHihokenshaShoKigo);
     }
 
@@ -265,22 +265,22 @@ public class tabMeisaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBox getTxtHiHokenshaShoNo() {
+    public TextBoxCode getTxtHiHokenshaShoNo() {
         return this.getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().getTxtHiHokenshaShoNo();
     }
 
     @JsonIgnore
-    public void  setTxtHiHokenshaShoNo(TextBox txtHiHokenshaShoNo) {
+    public void  setTxtHiHokenshaShoNo(TextBoxCode txtHiHokenshaShoNo) {
         this.getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtHiHokenshaShoNo(txtHiHokenshaShoNo);
     }
 
     @JsonIgnore
-    public TextBox getTxtJikoFutanSeiriNom() {
+    public TextBoxCode getTxtJikoFutanSeiriNom() {
         return this.getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().getTxtJikoFutanSeiriNom();
     }
 
     @JsonIgnore
-    public void  setTxtJikoFutanSeiriNom(TextBox txtJikoFutanSeiriNom) {
+    public void  setTxtJikoFutanSeiriNom(TextBoxCode txtJikoFutanSeiriNom) {
         this.getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtJikoFutanSeiriNom(txtJikoFutanSeiriNom);
     }
 
