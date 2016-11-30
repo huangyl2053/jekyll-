@@ -291,7 +291,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             throw new ApplicationException(UrErrorMessages.既に存在.getMessage().replace(同一被保険者のデータ.toString()));
         }
         RString 前排他キー = 排他情報.concat(被保険者番号.getColumnValue());
-        排他制御(前排他キー);
+        排他制御(前排他キー, div);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString メニューID = controlData.getMenuID();
         KogakuGassanShinseishoRelate 高額合算申請書Relate;
@@ -800,14 +800,16 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         List<dgShinseiIchiran_Row> rowList = div.getDgShinseiIchiran().getDataSource();
         if (rowList != null && !rowList.isEmpty()) {
             for (dgShinseiIchiran_Row row : rowList) {
-                排他制御(排他情報.concat(row.getTxtHihokenshaNo()));
+                排他制御(排他情報.concat(row.getTxtHihokenshaNo()), div);
             }
         }
     }
 
-    private void 排他制御(RString 前排他キー) throws PessimisticLockingException {
+    private void 排他制御(RString 前排他キー, KogakuGassanShikyuShinseiTorokuAllPanelDiv div) throws PessimisticLockingException {
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
+            getHandler(div).照会状態を初期化設定();
+            div.getTxtKaigoShikyuShinseishoSeiriBango3().clearValue();
             throw new PessimisticLockingException();
         }
     }
