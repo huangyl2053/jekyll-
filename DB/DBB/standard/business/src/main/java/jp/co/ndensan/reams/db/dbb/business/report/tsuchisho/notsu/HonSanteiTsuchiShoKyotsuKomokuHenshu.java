@@ -767,7 +767,8 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString());
-        更正前.set期間_自_西暦(期間_自.wareki().fillType(FillType.BLANK).toDateString());
+        更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
         if (月割終了年月2 != null && !月割終了年月2.isEmpty()) {
             期間_至 = getFlexibleDate至(月割終了年月2);
         } else if (月割終了年月1 != null && !月割終了年月1.isEmpty()) {
