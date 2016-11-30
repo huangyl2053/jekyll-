@@ -185,7 +185,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
 
             for (UniversalPhase 更正前 : 更正前普徴期別金額リスト) {
                 for (UniversalPhase 更正後 : 更正後普徴期別金額リスト) {
-                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                    if (更正前.get期() == 更正後.get期() && !nullToZero(更正前.get金額()).equals(nullToZero(更正後.get金額()))) {
                         is変更 = true;
                     }
                 }
@@ -197,13 +197,17 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
             for (CharacteristicsPhase 更正前 : 更正前特徴期別金額リスト) {
                 for (CharacteristicsPhase 更正後 : 更正後特徴期別金額リスト) {
 
-                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                    if (更正前.get期() == 更正後.get期() && !nullToZero(更正前.get金額()).equals(nullToZero(更正後.get金額()))) {
                         is変更 = true;
                     }
                 }
             }
         }
         return is変更;
+    }
+
+    private Decimal nullToZero(Decimal decimal) {
+        return decimal == null ? Decimal.ZERO : decimal;
     }
 
     private void set通知文と通知区分(KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReportSource reportSource,
