@@ -62,18 +62,7 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
     }
 
     private boolean is歳出還付(FukaJohoTorokuRelateEntity entity) {
-        return entity.getFuKibetsuGaku01() == null
-                && entity.getFuKibetsuGaku02() == null
-                && entity.getFuKibetsuGaku03() == null
-                && entity.getFuKibetsuGaku04() == null
-                && entity.getFuKibetsuGaku05() == null
-                && entity.getFuKibetsuGaku06() == null
-                && entity.getFuKibetsuGaku07() == null
-                && entity.getFuKibetsuGaku08() == null
-                && entity.getFuKibetsuGaku09() == null
-                && entity.getFuKibetsuGaku10() == null
-                && entity.getFuKibetsuGaku11() == null
-                && entity.getFuKibetsuGaku12() == null
+        return getRturn(entity)
                 || Decimal.ZERO.compareTo(entity.getFuKibetsuGaku01()) == 0
                 && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku02()) == 0
                 && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku03()) == 0
@@ -86,6 +75,21 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
                 && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku10()) == 0
                 && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku11()) == 0
                 && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku12()) == 0;
+    }
+
+    private static boolean getRturn(FukaJohoTorokuRelateEntity entity) {
+        return entity.getFuKibetsuGaku01() == null
+                && entity.getFuKibetsuGaku02() == null
+                && entity.getFuKibetsuGaku03() == null
+                && entity.getFuKibetsuGaku04() == null
+                && entity.getFuKibetsuGaku05() == null
+                && entity.getFuKibetsuGaku06() == null
+                && entity.getFuKibetsuGaku07() == null
+                && entity.getFuKibetsuGaku08() == null
+                && entity.getFuKibetsuGaku09() == null
+                && entity.getFuKibetsuGaku10() == null
+                && entity.getFuKibetsuGaku11() == null
+                && entity.getFuKibetsuGaku12() == null;
     }
 
     private RString get徴収方法(FukaJohoTorokuRelateEntity entity) {
