@@ -69,6 +69,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -890,7 +891,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             if (is最新 && result != null && result.get調定年度().isBefore(joho.get調定年度())) {
                 result = joho;
             }
-            if (!is最新 && joho.get賦課年度().isBefore(joho.get調定年度())) {
+            if (!is最新 && joho.get賦課年度().getYearValue() == joho.get調定年度().getYearValue()) {
                 return joho;
             }
         }
@@ -1613,10 +1614,14 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
 
     private RString get調定事由(KeisangojohoAtenaKozaEntity entity) {
         RStringBuilder 調定事由builder = new RStringBuilder();
-        RString 調定事由1 = entity.get調定事由1();
-        RString 調定事由2 = entity.get調定事由2();
-        RString 調定事由3 = entity.get調定事由3();
-        RString 調定事由4 = entity.get調定事由4();
+        RString 調定事由1 = RString.isNullOrEmpty(entity.get調定事由1())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(entity.get調定事由1()).get名称();
+        RString 調定事由2 = RString.isNullOrEmpty(entity.get調定事由2())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(entity.get調定事由2()).get名称();
+        RString 調定事由3 = RString.isNullOrEmpty(entity.get調定事由3())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(entity.get調定事由3()).get名称();
+        RString 調定事由4 = RString.isNullOrEmpty(entity.get調定事由4())
+                ? RString.EMPTY : ChoteiJiyuCode.toValue(entity.get調定事由4()).get名称();
         調定事由builder.append(調定事由1 == null ? 空 : 調定事由1);
         調定事由builder.append(調定事由2 == null || 調定事由2.isEmpty() ? 空 : RString.HALF_SPACE.concat(調定事由2));
         調定事由builder.append(調定事由3 == null || 調定事由3.isEmpty() ? 空 : RString.HALF_SPACE.concat(調定事由3));

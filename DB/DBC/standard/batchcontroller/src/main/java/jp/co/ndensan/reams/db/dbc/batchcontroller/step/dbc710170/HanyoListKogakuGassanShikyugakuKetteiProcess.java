@@ -609,8 +609,9 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         }
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
-        if (受給者台帳.getYokaigoJotaiKubunCode() != null && !受給者台帳.getYokaigoJotaiKubunCode().isEmpty()) {
-            output.set受給要介護度(YokaigoJotaiKubun.toValue(受給者台帳.getYokaigoJotaiKubunCode().value()).get名称());
+        Code yokaigoJotaiKubunCode = 受給者台帳.getYokaigoJotaiKubunCode();
+        if (yokaigoJotaiKubunCode != null && !yokaigoJotaiKubunCode.isEmpty()) {
+            output.set受給要介護度(YokaigoJotaiKubun.toValue(yokaigoJotaiKubunCode.value()).get名称());
         } else {
             output.set受給要介護度(RString.EMPTY);
         }
@@ -620,7 +621,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         if (受給者台帳.getKyuSochishaFlag()) {
             output.set受給旧措置(文字_旧措置者);
         }
-        RString みなし要介護区分コード = getColumnValue(受給者台帳.getShiteiServiceShurui01());
+        RString みなし要介護区分コード = getColumnValue(受給者台帳.getMinashiCode());
         if (!RString.isNullOrEmpty(みなし要介護区分コード)) {
             output.set受給みなし更新認定(get受給みなし更新認定(みなし要介護区分コード));
         }

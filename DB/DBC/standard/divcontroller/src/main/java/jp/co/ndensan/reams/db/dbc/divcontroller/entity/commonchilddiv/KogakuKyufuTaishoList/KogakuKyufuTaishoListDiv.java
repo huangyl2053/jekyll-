@@ -452,16 +452,6 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     }
 
     @JsonIgnore
-    public Button getBtnTorikeshi() {
-        return this.getMeisaiGokeiHenshuPanel().getBtnTorikeshi();
-    }
-
-    @JsonIgnore
-    public void  setBtnTorikeshi(Button btnTorikeshi) {
-        this.getMeisaiGokeiHenshuPanel().setBtnTorikeshi(btnTorikeshi);
-    }
-
-    @JsonIgnore
     public Button getBtnkakutei() {
         return this.getMeisaiGokeiHenshuPanel().getBtnkakutei();
     }
@@ -469,6 +459,16 @@ public class KogakuKyufuTaishoListDiv extends Panel implements IKogakuKyufuTaish
     @JsonIgnore
     public void  setBtnkakutei(Button btnkakutei) {
         this.getMeisaiGokeiHenshuPanel().setBtnkakutei(btnkakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnTorikeshi() {
+        return this.getMeisaiGokeiHenshuPanel().getBtnTorikeshi();
+    }
+
+    @JsonIgnore
+    public void  setBtnTorikeshi(Button btnTorikeshi) {
+        this.getMeisaiGokeiHenshuPanel().setBtnTorikeshi(btnTorikeshi);
     }
 
     // </editor-fold>

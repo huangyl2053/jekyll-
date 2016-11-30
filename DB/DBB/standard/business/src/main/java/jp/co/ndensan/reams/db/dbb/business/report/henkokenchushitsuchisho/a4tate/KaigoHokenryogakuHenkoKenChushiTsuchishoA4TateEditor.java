@@ -94,7 +94,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         reportSource.kozaMeigi = 口座情報.get口座名義人優先();
         reportSource.kozaNo = 口座情報.get口座番号Or通帳記号番号();
         reportSource.kozaShurui = 口座情報.get口座種別略称();
-        reportSource.kongoNofusubekiGaku = decimalToRString(編集後本算定通知書共通情報.get今後納付すべき額_調定元に());
+        reportSource.kongoNofusubekiGaku = decimalToRString(編集後本算定通知書共通情報.get今後納付すべき額_収入元に());
         reportSource.nofuzumiGaku = decimalToRString(編集後本算定通知書共通情報.get納付済額_未到来期含む());
         reportSource.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();

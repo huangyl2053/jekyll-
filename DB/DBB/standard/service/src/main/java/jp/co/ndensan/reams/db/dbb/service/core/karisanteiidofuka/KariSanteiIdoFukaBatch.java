@@ -181,6 +181,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
     private static final RString 定数_出力順 = new RString("出力順");
     private static final RString 定数_開始日時 = new RString("仮算定異動賦課抽出開始日時");
     private static final RString 定数_終了日時 = new RString("仮算定異動賦課抽出終了日時");
+    private static final RString 普徴仮算定異動方法 = new RString("普徴仮算定異動方法");
+    private static final RString 普徴仮算定異動方法_1 = new RString("4月喪失のみ0円にする");
+    private static final RString 普徴仮算定異動方法_2 = new RString("喪失月以降0円にする");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
@@ -851,7 +854,17 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             ChoshuHoho 徴収方法情報 = new ChoshuHoho(特徴仮算定Entity.get徴収方法Entity());
             FukaJoho 編集後賦課の情報;
             boolean 賦課Flag = false;
-            if (特徴仮算定Entity.get賦課情報Entity() == null) {
+            if (特徴仮算定Entity.get賦課情報Entity() != null && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity() != null
+                    && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity().getTsuchishoNo() != null) {
+                FukaJoho 更正後賦課の情報 = new FukaJoho(特徴仮算定Entity.get賦課情報Entity());
+                編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_1, 調定日時, 特徴仮算定Entity, 更正後賦課の情報, 調定年度,
+                        資格情報, 徴収方法情報, 生保の情報のリスト,
+                        老齢の情報のリスト,
+                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO,
+                        特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
+                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
+                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
+            } else {
                 FukaJoho 新しい賦課の情報 = new FukaJoho(調定年度, 調定年度, TsuchishoNo.EMPTY, NUM_0);
                 編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_0, 調定日時, 特徴仮算定Entity, 新しい賦課の情報, 調定年度,
                         資格情報, 徴収方法情報, 生保の情報のリスト,
@@ -862,15 +875,6 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                         特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
                 枝番号 = 枝番号.add(Decimal.ONE);
                 賦課Flag = true;
-            } else {
-                FukaJoho 更正後賦課の情報 = new FukaJoho(特徴仮算定Entity.get賦課情報Entity());
-                編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_1, 調定日時, 特徴仮算定Entity, 更正後賦課の情報, 調定年度,
-                        資格情報, 徴収方法情報, 生保の情報のリスト,
-                        老齢の情報のリスト,
-                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO,
-                        特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
-                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
-                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
             }
             RString 特別徴収_年額基準年度_8月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始,
                     new RDate(調定年度.minusYear(NUM_1).toString()), SubGyomuCode.DBB介護賦課);
@@ -1912,6 +1916,16 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString())
                 .concat(format時間(抽出終了日時.getTime()))
                 .concat(RString.FULL_SPACE).concat(未満));
+        出力条件リスト.add(rstbuilder.toRString());
+        rstbuilder = new RStringBuilder();
+        rstbuilder.append(FORMAT_LEFT.concat(普徴仮算定異動方法).concat(FORMAT_RIGHT));
+        RString 普徴仮異動方法 = DbBusinessConfig.get(ConfigNameDBB.普通徴収_仮算定異動方法,
+                RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        if (RSTRING_1.equals(普徴仮異動方法)) {
+            rstbuilder.append(普徴仮算定異動方法_1);
+        } else if (RSTRING_2.equals(普徴仮異動方法)) {
+            rstbuilder.append(普徴仮算定異動方法_2);
+        }
         出力条件リスト.add(rstbuilder.toRString());
         rstbuilder = new RStringBuilder();
         rstbuilder.append(FORMAT_LEFT.concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));

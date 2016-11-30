@@ -65,10 +65,10 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     private RadioButton rdbRiyoshafutanDai2dankai;
     @JsonProperty("rdbGekihenkanwaKubun")
     private RadioButton rdbGekihenkanwaKubun;
-    @JsonProperty("btnTorikeshi")
-    private Button btnTorikeshi;
     @JsonProperty("btnkakutei")
     private Button btnkakutei;
+    @JsonProperty("btnTorikeshi")
+    private Button btnTorikeshi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -473,24 +473,6 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     }
 
     /*
-     * getbtnTorikeshi
-     * @return btnTorikeshi
-     */
-    @JsonProperty("btnTorikeshi")
-    public Button getBtnTorikeshi() {
-        return btnTorikeshi;
-    }
-
-    /*
-     * setbtnTorikeshi
-     * @param btnTorikeshi btnTorikeshi
-     */
-    @JsonProperty("btnTorikeshi")
-    public void setBtnTorikeshi(Button btnTorikeshi) {
-        this.btnTorikeshi = btnTorikeshi;
-    }
-
-    /*
      * getbtnkakutei
      * @return btnkakutei
      */
@@ -506,6 +488,24 @@ public class MeisaiGokeiHenshuPanelDiv extends Panel {
     @JsonProperty("btnkakutei")
     public void setBtnkakutei(Button btnkakutei) {
         this.btnkakutei = btnkakutei;
+    }
+
+    /*
+     * getbtnTorikeshi
+     * @return btnTorikeshi
+     */
+    @JsonProperty("btnTorikeshi")
+    public Button getBtnTorikeshi() {
+        return btnTorikeshi;
+    }
+
+    /*
+     * setbtnTorikeshi
+     * @param btnTorikeshi btnTorikeshi
+     */
+    @JsonProperty("btnTorikeshi")
+    public void setBtnTorikeshi(Button btnTorikeshi) {
+        this.btnTorikeshi = btnTorikeshi;
     }
 
     // </editor-fold>

@@ -321,7 +321,8 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set更正前特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正前() == null
                 || RString.isNullOrEmpty(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()) ? RString.EMPTY
                 : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                        new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
+                        new Code(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()
+                                .substringReturnAsPossible(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収義務者コード(new NenkinCode((仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null) ? Code.EMPTY
                         : 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value()));
@@ -435,7 +436,8 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set更正後特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正後() == null
                 || 仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード() == null ? RString.EMPTY
                         : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                                new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード().substring(0, INDEX_3)), FlexibleDate.getNowDate()));
+                                new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード()
+                                        .substringReturnAsPossible(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収義務者コード((仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null) ? RString.EMPTY
                         : 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().toRString());
@@ -454,26 +456,46 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
                 .add(nullToZero(賦課情報_更正後.get特徴期別金額02())).add(nullToZero(賦課情報_更正後.get特徴期別金額03())));
         if (new TsuchishoNo("0000000000705601").equals(賦課情報_更正後.get通知書番号())) {
             new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("0000000000705601："));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額01：").concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額01()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額02：").concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額02()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額03：").concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額03()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額04：").concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額04()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額05：").concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額05()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額06：").concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額06()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額01：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額01()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額02：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額02()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額03：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額03()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額04：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額04()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額05：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額05()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額06：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額06()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額07：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額07()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額08：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額08()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額09：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額09()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額10：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額10()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額11：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額11()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額12：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額12()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額13：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額13()).toString())));
-            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額14：").concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額14()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額01：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額01()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額02：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額02()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額03：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額03()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額04：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額04()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額05：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額05()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("特徴期別金額06：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get特徴期別金額06()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額01：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額01()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額02：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額02()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額03：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額03()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額04：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額04()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額05：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額05()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額06：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額06()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額07：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額07()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額08：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額08()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額09：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額09()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額10：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額10()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額11：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額11()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額12：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額12()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額13：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額13()).toString())));
+            new JournalWriter().writeInfoJournal(RDateTime.now(), new RString("普徴期別金額14：")
+                    .concat(new RString(nullToZero(賦課情報_更正後.get普徴期別金額14()).toString())));
         }
         更正後.set更正後普徴第１期金額(nullToZero(賦課情報_更正後.get特徴期別金額01()));
         更正後.set更正後普徴第２期金額(nullToZero(賦課情報_更正後.get特徴期別金額02()));

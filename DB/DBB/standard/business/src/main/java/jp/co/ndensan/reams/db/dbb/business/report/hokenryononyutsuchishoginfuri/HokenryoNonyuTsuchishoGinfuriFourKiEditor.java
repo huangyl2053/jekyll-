@@ -333,6 +333,13 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.nofushoRyoshuHizukein3 = 納入通知書期情報印字位置3.get納付書領収印欄();
             source.nofushoZuiji3 = 納入通知書期情報印字位置3.get随時表記();
         }
+        editDBBCompNofushoItem_納入通知書期情報2(source, 納入通知書期情報印字位置1, 納入通知書期情報印字位置2, 納付書共通);
+    }
+
+    private void editDBBCompNofushoItem_納入通知書期情報2(HokenryoNonyuTsuchishoGinfuriFourKiSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報印字位置1,
+            NonyuTsuchiShoKiJoho 納入通知書期情報印字位置2,
+            NofuShoKyotsu 納付書共通) {
         if (null == 納入通知書期情報印字位置2) {
             source.nofushoKanendo2 = 星_6;
             source.nofushoKanendobun2 = 星_9;

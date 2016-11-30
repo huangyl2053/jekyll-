@@ -115,7 +115,7 @@ public class DBC2000022PanelAll {
                     && RSTTWO.equals(判定結果.get判定区分())) {
                 return ResponseData.of(div).addMessage(DbcInformationMessages.負担割合証発行不要.getMessage()).respond();
             }
-            if (MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType()) {
+            if (RString.isNullOrEmpty(ResponseHolder.getMessageCode()) || MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType()) {
                 前排他キーの設定(div);
                 return ResponseData.of(div).setState(DBC2000022StateName.新規);
             } else {

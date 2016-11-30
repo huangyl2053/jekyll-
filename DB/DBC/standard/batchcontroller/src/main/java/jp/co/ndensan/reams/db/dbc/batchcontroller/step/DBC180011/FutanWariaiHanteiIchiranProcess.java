@@ -125,7 +125,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value())
                 .addBreak(new FutanWariaiHanteiIchiranPageBreak(rStringList)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         this.tempResultListDbWriter = new BatchEntityCreatedTempTableWriter(処理結果確認リストTEMP, DbWT1801ShoriKekkaKakuninListEntity.class);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         Encode 文字コード;
@@ -152,7 +152,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        AccessLogUUID accessLogUUIDKodomo = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID accessLogUUIDKodomo = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, accessLogUUIDKodomo);
         if (flag) {
             DbWT1801ShoriKekkaKakuninListEntity resultListEntity = new DbWT1801ShoriKekkaKakuninListEntity();
@@ -204,7 +204,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         if (dateTime != null) {
             wareki = dateTime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO)
                     .getYear().concat(年).concat(dateTime.getDate().wareki().separator(Separator.JAPANESE)
-                            .fillType(FillType.ZERO).getMonthDay())
+                    .fillType(FillType.ZERO).getMonthDay())
                     .concat(RString.FULL_SPACE)
                     .concat(new RString(new Decimal(dateTime.getHour()).toString(HALFMONTH.toString()))).concat(時)
                     .concat(new RString(new Decimal(dateTime.getMinute()).toString(HALFMONTH.toString()))).concat(分)

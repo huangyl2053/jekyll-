@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -1933,7 +1932,7 @@ public class JukyushaKyufuDaichoEdit {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        return new RDate(date.toString()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
+        return new FlexibleDate(date.toString()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 

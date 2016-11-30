@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -79,7 +80,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
                 FukaDaichoItem item2 = new FukaDaichoItem();
                 setHonSanteifukaUchiwakeIchiKoseiMae(item2, entity);
                 setHonSanteifukaUchiwakeNiKoseiMaeNengakuHokenryo(item2, entity);
-                if (has普通徴収情報(entity)) {
+                if (has普通徴収情報(entity) && GennenKanen.過年度 != entity.get年度区分()) {
                     setFutsuChoshuKoseiMae(item2, entity);
                 }
                 setHonninKoseiMae(item2, entity);

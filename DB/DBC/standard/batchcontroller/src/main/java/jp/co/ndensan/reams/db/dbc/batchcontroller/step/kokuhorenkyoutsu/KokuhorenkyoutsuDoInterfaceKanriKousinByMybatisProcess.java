@@ -38,7 +38,7 @@ public class KokuhorenkyoutsuDoInterfaceKanriKousinByMybatisProcess extends Batc
             + "relate.jukyushakoshinkekka.IJukyushaKoshinKekkaMapper.getDbT3104KokuhorenInterfaceKanri");
 
     @BatchWriter
-    private BatchPermanentTableWriter dbT3104KokuhorenInterfaceKanriWriter;
+    private BatchPermanentTableWriter dbT3104KokuhorenWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -47,7 +47,7 @@ public class KokuhorenkyoutsuDoInterfaceKanriKousinByMybatisProcess extends Batc
 
     @Override
     protected void createWriter() {
-        dbT3104KokuhorenInterfaceKanriWriter = new BatchPermanentTableWriter(DbT3104KokuhorenInterfaceKanriEntity.class);
+        dbT3104KokuhorenWriter = new BatchPermanentTableWriter(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class KokuhorenkyoutsuDoInterfaceKanriKousinByMybatisProcess extends Batc
         entity.setCtrlRecordKensu(parameter.getレコード件数合計());
         entity.setCtrlShoriYM(parameter.get処理対象年月());
 
-        dbT3104KokuhorenInterfaceKanriWriter.update(entity);
+        dbT3104KokuhorenWriter.update(entity);
     }
 
     private RString getFileName(List<RString> エントリ情報List, int 定数) {

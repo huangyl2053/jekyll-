@@ -127,7 +127,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 徴収猶予通知書帳票_略称 = new RString("徴収猶予通知書帳票略称");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
     private static final RString 有 = new RString("1");
-    private static final RString 無 = new RString("0");
     private static final Code 業務固有 = new Code("0003");
 
     /**
@@ -266,14 +265,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .setSelectedKey(new RString(更正前調定日時List.get(0).toString()));
             FukaJoho 更正後賦課の情報 = 賦課の情報List.get(0);
             FukaJoho 更正前賦課の情報 = 賦課の情報List.get(1);
-            HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
             set更正後賦課根拠(更正後賦課の情報);
-            div.setHdnKouseizenFlag(無);
-            if (!更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度())
-                    || (更正前賦課の情報.get賦課年度().equals(更正前賦課の情報.get調定年度()) && honsanteiIkoHantei.is本算定後(更正前賦課の情報))) {
-                set更正前賦課根拠(更正前賦課の情報);
-                div.setHdnKouseizenFlag(有);
-            }
+            set更正前賦課根拠(更正前賦課の情報);
+            div.setHdnKouseizenFlag(有);
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
                 set特別徴収(更正前賦課の情報, 更正後賦課の情報);
@@ -821,6 +815,25 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                     .getLblZengoFuchoAto7().setText(DecimalFormatter.toコンマ区切りRString(更正後期別金額, 0));
             更正後合計 = 更正後合計.add(更正後期別金額);
         }
+        set更正後合計_2(更正後期別金額, 更正後情報, flag, 更正後合計, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
+                期_9月, 期_10月, 期_11月, 期_12月, 期_1月, 期_2月, 期_3月, 期_13月, 期_14月);
+    }
+
+    private void set更正後合計_2(Decimal 更正後期別金額, FukaJoho 更正後情報, boolean flag, Decimal 更正後合計,
+            RString 期_4月,
+            RString 期_5月,
+            RString 期_6月,
+            RString 期_7月,
+            RString 期_8月,
+            RString 期_9月,
+            RString 期_10月,
+            RString 期_11月,
+            RString 期_12月,
+            RString 期_1月,
+            RString 期_2月,
+            RString 期_3月,
+            RString 期_13月,
+            RString 期_14月) {
         更正後期別金額 = get普徴期別金額(期_11月, 更正後情報);
         if (更正後期別金額 != null && has徴収更正後データ(更正後期別金額,
                 div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
@@ -1523,6 +1536,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 set普通徴収(null, 更正後Info, util.get期月リスト());
             } else {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set特別徴収(null, 更正後Info);
                 set普通徴収(null, 更正後Info, kanendoKi.get期月リスト());
             }
             set歳出還付額(更正後Info);
@@ -1558,6 +1572,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
                 set普通徴収(更正前Info, 更正後Info, util.get期月リスト());
             } else {
                 KanendoKiUtil kanendoKi = new KanendoKiUtil();
+                set特別徴収(null, 更正後Info);
                 set普通徴収(更正前Info, 更正後Info, kanendoKi.get期月リスト());
             }
             set歳出還付額(更正後Info);
