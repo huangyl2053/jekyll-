@@ -9,13 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.KyufujissekiTempTblEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.ShukeinaiyouEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekidatatemptbl.SyorikekkatempTblEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hekinriyogakutokehyo.IHekinRiyoGakuTokehyoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
-import static jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai.住民;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -29,12 +24,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HekinRiyoGakuTokehyo {
 
     private final MapperProvider mapperProvider;
-    private static final RString エラー内容1 = new RString("不整合データ：３９歳以下の被保険者です。");
-    private static final RString エラー内容2 = new RString("不整合データ：６５歳以上の被保険者です。");
-    private static final RString 備考 = new RString("所得段階が取得できません。その他に集計されます。");
-    private static final RString 集計処理 = new RString("集計処理");
-    private static final int 年齢_39 = 39;
-    private static final int 年齢_65 = 65;
     private static final int 計算用十 = 10;
     private static final int 定数9 = 9;
     private static final RString 要介護状態区分コード11 = new RString("11");
@@ -144,45 +133,8 @@ public class HekinRiyoGakuTokehyo {
     private List<List<ShukeinaiyouEntity>> edit対象レコード(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList,
             KyufujissekiTempTblEntity レコード, IHekinRiyoGakuTokehyoMapper mapper, int 人数) {
         Decimal 費用金額 = get費用金額(レコード);
-        get対象レコード年齢の処理(shukeinaiyouEntityList, レコード, 人数, 費用金額, mapper);
         get所得段階判定(shukeinaiyouEntityList, レコード, 人数, 費用金額);
         return shukeinaiyouEntityList;
-    }
-
-    private void get対象レコード年齢の処理(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList, KyufujissekiTempTblEntity レコード,
-            int 人数, Decimal 費用金額, IHekinRiyoGakuTokehyoMapper mapper) {
-        AgeCalculator agecounter = new AgeCalculator(DateOfBirthFactory.createInstance(レコード.getUmareYMD()), 住民, FlexibleDate.MAX);
-        RString 年齢 = agecounter.get年齢();
-        int age = Integer.valueOf(年齢.toString());
-        if (年齢_39 > age || (age == 年齢_39 && レコード.getServiceTeikyoYM().toString().equals(レコード.getUmareYMD().toString()))) {
-            SyorikekkatempTblEntity entity = new SyorikekkatempTblEntity();
-            entity.setErrorkubun(集計処理);
-            entity.setHiHokenshaNo(レコード.getHiHokenshaNo());
-            entity.setKi1(レコード.getServiceTeikyoYM());
-            entity.setKi2(レコード.getUmareYMD());
-            entity.setKi3(RString.EMPTY);
-            entity.setKi4(RString.EMPTY);
-            entity.setKi5(RString.EMPTY);
-            entity.setErrornaiyo(エラー内容1);
-            entity.setBiko(備考);
-            mapper.insert処理結果リスト一時TBL(entity);
-        } else if (age >= 年齢_65) {
-            SyorikekkatempTblEntity entity = new SyorikekkatempTblEntity();
-            entity.setErrorkubun(集計処理);
-            entity.setHiHokenshaNo(レコード.getHiHokenshaNo());
-            entity.setKi1(レコード.getServiceTeikyoYM());
-            entity.setKi2(レコード.getUmareYMD());
-            entity.setKi3(RString.EMPTY);
-            entity.setKi4(RString.EMPTY);
-            entity.setKi5(RString.EMPTY);
-            entity.setErrornaiyo(エラー内容2);
-            entity.setBiko(備考);
-            mapper.insert処理結果リスト一時TBL(entity);
-        } else {
-            updatecreatentitylist(shukeinaiyouEntityList, レコード,
-                    人数,
-                    費用金額, 所得段階_号, レコード.getYoKaigoJotaiKubunCode());
-        }
     }
 
     private void get所得段階判定(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList, KyufujissekiTempTblEntity レコード,
@@ -219,12 +171,21 @@ public class HekinRiyoGakuTokehyo {
             updatecreatentitylist(shukeinaiyouEntityList, レコード,
                     人数,
                     費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
+        } else if (所得段階_号.equals(shotoku)) {
+            updatecreatentitylist(shukeinaiyouEntityList,
+                    レコード,
+                    人数,
+                    費用総額,
+                    所得段階_号,
+                    レコード.getYoKaigoJotaiKubunCode());
+            updatecreatentitylist(shukeinaiyouEntityList, レコード,
+                    人数,
+                    費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
         }
 
     }
 
     private Decimal get費用金額(KyufujissekiTempTblEntity レコード) {
-
         RString サービス種類コード = レコード.getServiceSyuruiCode();
         RString 保険請求額 = レコード.getHokenSeikyuKingaku();
         RString 保険者利用負担額 = レコード.getHokenRiyoshaFutangaku();
