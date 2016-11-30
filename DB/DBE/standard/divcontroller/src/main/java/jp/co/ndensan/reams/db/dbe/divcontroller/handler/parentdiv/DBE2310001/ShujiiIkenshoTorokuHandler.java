@@ -123,6 +123,9 @@ public class ShujiiIkenshoTorokuHandler {
      */
     public void setSonotaDisable(boolean sonotaFlag) {
         div.getTxtSonotaNyuryoku().setDisabled(sonotaFlag);
+        if(sonotaFlag){
+            div.getTxtSonotaNyuryoku().clearValue();
+        }
     }
 
     private void setShujiiJohoDisable(boolean flag) {

@@ -19,23 +19,23 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnTokkiJikoGuide")
-    private ButtonDialog btnTokkiJikoGuide;
-    @JsonProperty("btnSeikatsuKinoServiceGuide")
-    private ButtonDialog btnSeikatsuKinoServiceGuide;
-    @JsonProperty("btnShinshinJotaiGuide")
-    private ButtonDialog btnShinshinJotaiGuide;
-    @JsonProperty("btnTokubetsuIryoGuide")
-    private ButtonDialog btnTokubetsuIryoGuide;
     @JsonProperty("btnShobyoGuide")
     private ButtonDialog btnShobyoGuide;
+    @JsonProperty("btnTokubetsuIryoGuide")
+    private ButtonDialog btnTokubetsuIryoGuide;
+    @JsonProperty("btnShinshinJotaiGuide")
+    private ButtonDialog btnShinshinJotaiGuide;
+    @JsonProperty("btnSeikatsuKinoServiceGuide")
+    private ButtonDialog btnSeikatsuKinoServiceGuide;
+    @JsonProperty("btnTokkiJikoGuide")
+    private ButtonDialog btnTokkiJikoGuide;
     @JsonProperty("IkenshoKihonJoho")
     private IkenshoKihonJohoDiv IkenshoKihonJoho;
     @JsonProperty("IkenshoMemo")
@@ -50,57 +50,21 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnTokkiJikoGuide
-     * @return btnTokkiJikoGuide
+     * getbtnShobyoGuide
+     * @return btnShobyoGuide
      */
-    @JsonProperty("btnTokkiJikoGuide")
-    public ButtonDialog getBtnTokkiJikoGuide() {
-        return btnTokkiJikoGuide;
+    @JsonProperty("btnShobyoGuide")
+    public ButtonDialog getBtnShobyoGuide() {
+        return btnShobyoGuide;
     }
 
     /*
-     * setbtnTokkiJikoGuide
-     * @param btnTokkiJikoGuide btnTokkiJikoGuide
+     * setbtnShobyoGuide
+     * @param btnShobyoGuide btnShobyoGuide
      */
-    @JsonProperty("btnTokkiJikoGuide")
-    public void setBtnTokkiJikoGuide(ButtonDialog btnTokkiJikoGuide) {
-        this.btnTokkiJikoGuide = btnTokkiJikoGuide;
-    }
-
-    /*
-     * getbtnSeikatsuKinoServiceGuide
-     * @return btnSeikatsuKinoServiceGuide
-     */
-    @JsonProperty("btnSeikatsuKinoServiceGuide")
-    public ButtonDialog getBtnSeikatsuKinoServiceGuide() {
-        return btnSeikatsuKinoServiceGuide;
-    }
-
-    /*
-     * setbtnSeikatsuKinoServiceGuide
-     * @param btnSeikatsuKinoServiceGuide btnSeikatsuKinoServiceGuide
-     */
-    @JsonProperty("btnSeikatsuKinoServiceGuide")
-    public void setBtnSeikatsuKinoServiceGuide(ButtonDialog btnSeikatsuKinoServiceGuide) {
-        this.btnSeikatsuKinoServiceGuide = btnSeikatsuKinoServiceGuide;
-    }
-
-    /*
-     * getbtnShinshinJotaiGuide
-     * @return btnShinshinJotaiGuide
-     */
-    @JsonProperty("btnShinshinJotaiGuide")
-    public ButtonDialog getBtnShinshinJotaiGuide() {
-        return btnShinshinJotaiGuide;
-    }
-
-    /*
-     * setbtnShinshinJotaiGuide
-     * @param btnShinshinJotaiGuide btnShinshinJotaiGuide
-     */
-    @JsonProperty("btnShinshinJotaiGuide")
-    public void setBtnShinshinJotaiGuide(ButtonDialog btnShinshinJotaiGuide) {
-        this.btnShinshinJotaiGuide = btnShinshinJotaiGuide;
+    @JsonProperty("btnShobyoGuide")
+    public void setBtnShobyoGuide(ButtonDialog btnShobyoGuide) {
+        this.btnShobyoGuide = btnShobyoGuide;
     }
 
     /*
@@ -122,21 +86,57 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     }
 
     /*
-     * getbtnShobyoGuide
-     * @return btnShobyoGuide
+     * getbtnShinshinJotaiGuide
+     * @return btnShinshinJotaiGuide
      */
-    @JsonProperty("btnShobyoGuide")
-    public ButtonDialog getBtnShobyoGuide() {
-        return btnShobyoGuide;
+    @JsonProperty("btnShinshinJotaiGuide")
+    public ButtonDialog getBtnShinshinJotaiGuide() {
+        return btnShinshinJotaiGuide;
     }
 
     /*
-     * setbtnShobyoGuide
-     * @param btnShobyoGuide btnShobyoGuide
+     * setbtnShinshinJotaiGuide
+     * @param btnShinshinJotaiGuide btnShinshinJotaiGuide
      */
-    @JsonProperty("btnShobyoGuide")
-    public void setBtnShobyoGuide(ButtonDialog btnShobyoGuide) {
-        this.btnShobyoGuide = btnShobyoGuide;
+    @JsonProperty("btnShinshinJotaiGuide")
+    public void setBtnShinshinJotaiGuide(ButtonDialog btnShinshinJotaiGuide) {
+        this.btnShinshinJotaiGuide = btnShinshinJotaiGuide;
+    }
+
+    /*
+     * getbtnSeikatsuKinoServiceGuide
+     * @return btnSeikatsuKinoServiceGuide
+     */
+    @JsonProperty("btnSeikatsuKinoServiceGuide")
+    public ButtonDialog getBtnSeikatsuKinoServiceGuide() {
+        return btnSeikatsuKinoServiceGuide;
+    }
+
+    /*
+     * setbtnSeikatsuKinoServiceGuide
+     * @param btnSeikatsuKinoServiceGuide btnSeikatsuKinoServiceGuide
+     */
+    @JsonProperty("btnSeikatsuKinoServiceGuide")
+    public void setBtnSeikatsuKinoServiceGuide(ButtonDialog btnSeikatsuKinoServiceGuide) {
+        this.btnSeikatsuKinoServiceGuide = btnSeikatsuKinoServiceGuide;
+    }
+
+    /*
+     * getbtnTokkiJikoGuide
+     * @return btnTokkiJikoGuide
+     */
+    @JsonProperty("btnTokkiJikoGuide")
+    public ButtonDialog getBtnTokkiJikoGuide() {
+        return btnTokkiJikoGuide;
+    }
+
+    /*
+     * setbtnTokkiJikoGuide
+     * @param btnTokkiJikoGuide btnTokkiJikoGuide
+     */
+    @JsonProperty("btnTokkiJikoGuide")
+    public void setBtnTokkiJikoGuide(ButtonDialog btnTokkiJikoGuide) {
+        this.btnTokkiJikoGuide = btnTokkiJikoGuide;
     }
 
     /*
