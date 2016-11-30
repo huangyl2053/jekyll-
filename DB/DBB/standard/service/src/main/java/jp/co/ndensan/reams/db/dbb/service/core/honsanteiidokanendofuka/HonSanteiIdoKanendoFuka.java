@@ -1353,13 +1353,6 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         }
     }
 
-    private Decimal get減免前介護保険料_年額(FukaJoho 賦課情報) {
-        if (賦課情報 == null) {
-            return null;
-        }
-        return 賦課情報.get減免前介護保険料_年額();
-    }
-
     private FukaJoho get賦課情報_過年度(List<FukaJoho> 賦課情報リスト) {
         if (賦課情報リスト == null) {
             return null;
