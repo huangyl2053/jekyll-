@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.hanyolistkokuhorenjukyusha;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyodoshoriyojukyushajoho.HizukeChushutsuKubun;
@@ -31,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -72,6 +72,7 @@ public class HanyoListKokuhorenJukyushaResult {
     private static final RString 通常認定 = new RString("1");
     private static final RString 旧措置入所者 = new RString("2");
     private static final RString やむを得ない理由 = new RString("3");
+    private static final RString みなし = new RString("みなし");
     private final HanyoListKokuhorenJukyushaProcessParameter processParameter;
     private final List<PersonalData> personalDataList;
 
@@ -174,7 +175,9 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set申請種別(set申請種別(entity.get申請種別コード()));
         eucEntity.set変更申請中区分(set変更申請中区分(entity.get変更申請中区分コード()));
         eucEntity.set申請日(set日付編集(entity.get申請年月日()));
-        eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        if (!RString.isNullOrEmpty(entity.getみなし要介護状態区分コード())) {
+            eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        }
         eucEntity.set要介護状態度(set要介護状態(entity.get要介護状態区分コード()));
         eucEntity.set認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -457,7 +460,9 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set申請種別(set申請種別(entity.get申請種別コード()));
         eucEntity.set変更申請中区分(set変更申請中区分(entity.get変更申請中区分コード()));
         eucEntity.set申請日(set日付編集(entity.get申請年月日()));
-        eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        if (!RString.isNullOrEmpty(entity.getみなし要介護状態区分コード())) {
+            eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        }
         eucEntity.set要介護状態度(set要介護状態(entity.get要介護状態区分コード()));
         eucEntity.set認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -779,18 +784,16 @@ public class HanyoListKokuhorenJukyushaResult {
         return YokaigoJotaiKubun.toValue(要介護状態区分コード).get名称();
     }
 
-    private RString setみなし更新認定(RString みなし更新認定コード) {
-        if (RString.isNullOrEmpty(みなし更新認定コード)) {
-            return RString.EMPTY;
+    private RString setみなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
         }
-        Map<RString, RString> minashikoshin = new HashMap<>();
-        minashikoshin.put(通常認定, new RString("通常認定"));
-        minashikoshin.put(旧措置入所者, new RString("旧措置入所者"));
-        minashikoshin.put(やむを得ない理由, new RString("やむを得ない理由"));
-        if (minashikoshin.containsKey(みなし更新認定コード)) {
-            return minashikoshin.get(みなし更新認定コード);
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+            受給みなし更新認定 = みなし;
         }
-        return RString.EMPTY;
+        return 受給みなし更新認定;
     }
 
     private RString set変更申請中区分(RString 変更申請中区分コード) {
