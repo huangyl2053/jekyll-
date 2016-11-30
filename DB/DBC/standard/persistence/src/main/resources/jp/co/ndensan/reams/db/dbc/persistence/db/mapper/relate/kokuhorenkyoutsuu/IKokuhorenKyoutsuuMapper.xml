@@ -296,7 +296,7 @@
         <include refid="allColumns_UaFt200FindShikibetsuTaishoEntity"/>
         FROM "DbWT0001Hihokensha" as TEMP
         left join "rgdb"."DbV1001HihokenshaDaicho" as DAICHO
-        ON TEMP."henkanHihokenshaNo" = DAICHO."hihokenshaNo"
+        ON TRIM(TEMP."henkanHihokenshaNo") = DAICHO."hihokenshaNo"
         left join rgua."UaFt200FindShikibetsuTaisho"('','',TRUE,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,false,false,true,true,true,true,
         true,'','','','','','','','',true,'','',true,false,true,'','','','','','','','','','','','','','','','','','', 

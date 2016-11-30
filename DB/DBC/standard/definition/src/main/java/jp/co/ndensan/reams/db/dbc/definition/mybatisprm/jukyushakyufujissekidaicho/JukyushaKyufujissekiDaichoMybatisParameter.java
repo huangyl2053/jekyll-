@@ -259,6 +259,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
      * @param 給付率区分flag2 給付率区分flag2
      * @param 給付率区分flag3 給付率区分flag3
      * @param 給付率flag 給付率flag
+     * @param 自立flag boolean
      */
     protected JukyushaKyufujissekiDaichoMybatisParameter(RString 対象年月,
             RString 年月範囲_開始,

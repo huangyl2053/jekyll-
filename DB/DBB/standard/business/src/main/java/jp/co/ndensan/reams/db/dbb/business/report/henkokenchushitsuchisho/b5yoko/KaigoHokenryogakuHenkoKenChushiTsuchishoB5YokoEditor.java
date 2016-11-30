@@ -19,10 +19,8 @@ import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -109,8 +107,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         reportSource.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
-        reportSource.shutokuYmdAto = editDate(更正後.get期間_自());
-        reportSource.soshitsuYmdAto = editDate(更正後.get期間_至());
+        reportSource.shutokuYmdAto = 更正後.get期間_自();
+        reportSource.soshitsuYmdAto = 更正後.get期間_至();
 
         set調定年度_タイトル_通知文1(reportSource, item.get本算定決定通知書情報());
         set通知文2と通知区分(reportSource, 編集後本算定通知書共通情報);
@@ -125,8 +123,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
             reportSource.koremadeTokuchoTaishoNenkin = 更正前.get特別徴収対象年金();
             if (item.get本算定決定通知書情報().isHas更正前()) {
                 reportSource.shotokuKbnMae = 更正前.get保険料段階();
-                reportSource.shutokuYmdMae = editDate(更正前.get期間_自());
-                reportSource.soshitsuYmdMae = editDate(更正前.get期間_至());
+                reportSource.shutokuYmdMae = 更正前.get期間_自();
+                reportSource.soshitsuYmdMae = 更正前.get期間_至();
                 reportSource.tsukisuMae = 更正前.get月数_ケ月();
                 reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(nullToZero(更正前.get減免額()), 0);
                 reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(
@@ -171,14 +169,6 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
         reportSource.fuchoKongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get普徴今後納付すべき額_調定元に());
         reportSource.kongoNofuSubekiGakuChotei = edit金額(編集後本算定通知書共通情報.get今後納付すべき額_調定元に());
         return reportSource;
-    }
-
-    private RString editDate(RString date) {
-        if (RString.isNullOrEmpty(date)) {
-            return RString.EMPTY;
-        }
-        return new RDate(date.toString()).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private void edit更正内容(KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource reportSource,

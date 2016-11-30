@@ -76,6 +76,8 @@ public class ShikyugakuKeisanKekkaTorokuValidator {
     public IValidationMessages validate計算結果を追加する() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div)
+                .ifNot(ShikyugakuKeisanKekkaTorokuSpec.連絡票整理番号チェック)
+                .thenAdd(ShikyugakuKeisanKekkaTorokuMessage.連絡票整理番号必須項目)
                 .ifNot(ShikyugakuKeisanKekkaTorokuSpec.重複チェック)
                 .thenAdd(ShikyugakuKeisanKekkaTorokuMessage.連絡票整理番号既に存在)
                 .ifNot(ShikyugakuKeisanKekkaTorokuSpec.年度チェック)
