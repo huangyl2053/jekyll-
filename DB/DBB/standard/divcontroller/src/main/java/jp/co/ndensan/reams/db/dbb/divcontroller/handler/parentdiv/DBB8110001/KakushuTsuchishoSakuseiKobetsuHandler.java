@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.Kaku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoaderFinder;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -1481,10 +1480,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         clear更正前賦課根拠();
         clear更正前_特徴();
         clear更正前_普徴();
-        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        if (honsanteiIkoHantei.is本算定後(更正前Info) && 更正前Info.get賦課年度().equals(更正前Info.get調定年度())) {
-            set更正前賦課根拠(更正前Info);
-        }
+        set更正前賦課根拠(更正前Info);
         FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
         FlexibleYear 調定年度 = 更正後Info.get調定年度();
         if (!賦課年度.isBefore(調定年度)) {
