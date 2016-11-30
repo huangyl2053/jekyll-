@@ -97,7 +97,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
         HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty property
                 = new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty();
         return new Printer<NonyuTsuchIchiranSource>().spool(property,
-                new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport(本算定通知書情報 ,編集後本算定通知書共通情報, 調定年度, 出力期,
+                new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport(本算定通知書情報, 編集後本算定通知書共通情報, 調定年度, 出力期,
                         作成日時, 地方公共団体コード, 市町村名, 納入対象賦課年度List, 並び順の１件目, 並び順の２件目,
                         並び順の３件目, 並び順の４件目, 並び順の５件目));
     }

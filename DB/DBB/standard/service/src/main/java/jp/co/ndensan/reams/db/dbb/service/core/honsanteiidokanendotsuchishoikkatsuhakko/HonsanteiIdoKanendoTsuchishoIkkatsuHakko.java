@@ -641,7 +641,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             賦課年度List.add(item.toDateString());
         }
         publish納入通知書発行一覧表(帳票作成日時.getRDateTime(), 調定年度, 賦課年度リスト, 出力期, 編集後本算定通知書共通情報List, 納入_EUC_ENTITY_ID, 納入_EUCファイル名);
-        new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService().print(本算定通知書情報List ,編集後本算定通知書共通情報List,
+        new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService().print(本算定通知書情報List, 編集後本算定通知書共通情報List,
                 調定年度.toDateString(), 出力期, 帳票作成日時, 出力順ID, 賦課年度List);
         RString 出力ページ数 = get出力ページ数(sourceDataCollection);
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, 納入_EUCファイル名, 帳票名);
