@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 保険料納入通知書（本算定）【コンビニ期毎タイプ】のEditorです。
@@ -177,11 +175,11 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
 
             NofugakuSanshutsuHoho 納付額算出方法 = item.get本算定納入通知書制御情報().get納入通知書制御情報().get納付額算出方法();
             if (NofugakuSanshutsuHoho.収入額をもとに算出.equals(納付額算出方法)) {
-                source.keisanMeisaishoNofuZumiGaku = getコンマ区切りRString(item.get編集後本算定通知書共通情報().get普徴納付済額_未到来期含む());
-                source.keisanMeisaishoKongoNofuSubekiGaku = getコンマ区切りRString(item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_収入元に());
+                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴納付済額_未到来期含む().toString());
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_収入元に().toString());
             } else if (NofugakuSanshutsuHoho.調定額をもとに算出.equals(納付額算出方法)) {
-                source.keisanMeisaishoNofuZumiGaku = getコンマ区切りRString(item.get編集後本算定通知書共通情報().get普徴既に納付すべき額());
-                source.keisanMeisaishoKongoNofuSubekiGaku = getコンマ区切りRString(item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_調定元に());
+                source.keisanMeisaishoNofuZumiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴既に納付すべき額().toString());
+                source.keisanMeisaishoKongoNofuSubekiGaku = new RString(item.get編集後本算定通知書共通情報().get普徴今後納付すべき額_調定元に().toString());
             }
 
             this.更正後情報相関設定(source);
@@ -200,10 +198,6 @@ public class NonyuTsuchishoCVSKigotoEditor implements INonyuTsuchishoCVSKigotoEd
         source.keisanMeisaishoKomokuTitle2 = TSUGIKI_IKOU;
 
         return source;
-    }
-
-    private RString getコンマ区切りRString(Decimal コンマ区切り対象) {
-        return null == コンマ区切り対象 ? null : DecimalFormatter.toコンマ区切りRString(コンマ区切り対象, 0);
     }
 
     private void edit納付書(NonyuTsuchishoCVSKigotoSource source) {

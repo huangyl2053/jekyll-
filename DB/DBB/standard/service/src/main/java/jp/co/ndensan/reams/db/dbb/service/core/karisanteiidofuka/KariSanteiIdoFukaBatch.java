@@ -846,7 +846,6 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
         if (特徴仮算定List == null || 特徴仮算定List.isEmpty()) {
             return;
         }
-        Decimal 枝番号 = Decimal.ONE;
         for (TokutyouKariSannteiRelateEntity 特徴仮算定Entity : 特徴仮算定List) {
             List<SeikatsuHogoJukyusha> 生保の情報のリスト = get生保の情報のリスト_8月特徴開始(特徴仮算定Entity);
             List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト = get老齢の情報のリスト_8月特徴開始(特徴仮算定Entity);
@@ -870,10 +869,9 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                         資格情報, 徴収方法情報, 生保の情報のリスト,
                         老齢の情報のリスト,
                         特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(),
-                        枝番号, 特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
+                        Decimal.ONE, 特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
                         特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
                         特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
-                枝番号 = 枝番号.add(Decimal.ONE);
                 賦課Flag = true;
             }
             RString 特別徴収_年額基準年度_8月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始,

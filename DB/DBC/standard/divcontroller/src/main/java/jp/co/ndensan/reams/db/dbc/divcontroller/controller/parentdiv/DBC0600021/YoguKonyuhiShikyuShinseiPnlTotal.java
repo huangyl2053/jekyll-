@@ -137,6 +137,10 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
                     getServiceShuruiCode(被保険者番号, new FlexibleYearMonth(div.
                                     getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().
                                     getValue().getYearMonth().toString()));
+            ValidationMessageControlPairs validPairs = getHandler(div).提供購入年月チェック(サービス種類);
+            if (validPairs.existsError()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
             RString 証明書コード = RString.EMPTY;
             if (NUM41.equals(サービス種類.value())) {
                 証明書コード = 証明書コード1;
@@ -373,9 +377,11 @@ public class YoguKonyuhiShikyuShinseiPnlTotal {
             div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().
                     setSelectedKey(dataSourceList.get(0).getKey());
         }
-        ValidationMessageControlPairs validPairs = getHandler(div).提供購入年月チェック(サービス種類);
-        if (validPairs.existsError()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            ValidationMessageControlPairs validPairs = getHandler(div).提供購入年月チェック(サービス種類);
+            if (validPairs.existsError()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
 
         RString 証明書 = div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().getValue();

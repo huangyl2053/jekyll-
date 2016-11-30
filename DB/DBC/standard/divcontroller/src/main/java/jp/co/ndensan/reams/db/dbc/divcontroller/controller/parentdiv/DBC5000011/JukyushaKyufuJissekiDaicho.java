@@ -339,7 +339,9 @@ public class JukyushaKyufuJissekiDaicho {
                 && div.getTxtRangeYM().getToValue().getMonthValue() - div.getTxtRangeYM().getFromValue().getMonthValue() >= 0) {
             message.add(getValidation(div).check年月範囲不正());
         }
-        if (div.getTxtRangeHihokenshaNoFrom().getValue().compareTo(div.getTxtRangeHihokenshaNoTo().getValue()) > 0) {
+        if (!RString.isNullOrEmpty(div.getTxtRangeHihokenshaNoFrom().getValue())
+                && !RString.isNullOrEmpty(div.getTxtRangeHihokenshaNoTo().getValue())
+                && div.getTxtRangeHihokenshaNoFrom().getValue().compareTo(div.getTxtRangeHihokenshaNoTo().getValue()) > 0) {
             message.add(getValidation(div).check大小関係不正(new RString("被保険者番号")));
         }
         if (div.getTxtRojinhokenShikuchosonNoRangeFrom().getValue().compareTo(div.getTxtRojinhokenShikuchosonNoRangeTo().getValue()) > 0) {

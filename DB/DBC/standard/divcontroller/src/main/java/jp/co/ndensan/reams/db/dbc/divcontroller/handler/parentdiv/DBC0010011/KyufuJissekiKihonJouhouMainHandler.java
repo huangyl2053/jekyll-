@@ -297,15 +297,11 @@ public class KyufuJissekiKihonJouhouMainHandler {
         div.getTxtKyufuJissekiKihonKeikokuKubun().setValue(get警告区分(給付実績基本情報.get警告区分コード()));
         div.getTxtKyufuJissekiKihonKyusochiNyushoshaTokurei().setValue(
                 get旧措置入所者特例(給付実績基本情報.get旧措置入所者特例コード()));
-        if (INT_ZERO != 給付実績基本情報.get後_保険_サービス単位数()) {
-            div.getTxtServiceTankasu().setValue(new Decimal(給付実績基本情報.get後_保険_サービス単位数()));
-        }
-        if (給付実績基本情報.get後_保険_請求額() != null && INT_ZERO != 給付実績基本情報.get後_保険_請求額().intValue()) {
+        div.getTxtServiceTankasu().setValue(new Decimal(給付実績基本情報.get後_保険_サービス単位数()));
+        if (給付実績基本情報.get後_保険_請求額() != null) {
             div.getTxtHokenryoSeikyuGaku().setValue(給付実績基本情報.get後_保険_請求額());
         }
-        if (INT_ZERO != 給付実績基本情報.get後_保険_利用者負担額()) {
-            div.getTxtRiyoshaFutanGaku().setValue(new Decimal(給付実績基本情報.get後_保険_利用者負担額()));
-        }
+        div.getTxtRiyoshaFutanGaku().setValue(new Decimal(給付実績基本情報.get後_保険_利用者負担額()));
         set被保険者エリア(給付実績基本情報);
         set後期高齢と国保エリア(給付実績基本情報, 給付実績基本情報.getサービス提供年月());
         set居宅サービス計画エリア(給付実績基本情報);

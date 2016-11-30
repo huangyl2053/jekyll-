@@ -195,12 +195,13 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
             source.listLower_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
         }
-        
-        IKojin kojin = 本算定通知書情報.get賦課の情報_更正後().get宛名();
-        if (null != kojin) {
-            source.listLower_3 = JushoHenshu.editJusho(本算定通知書情報.get帳票制御共通(), kojin, 地方公共団体);
-        }
-                    
+        if (本算定通知書情報.get賦課の情報_更正後() != null 
+                && 本算定通知書情報.get賦課の情報_更正後().get宛名() != null) {
+            IKojin kojin = 本算定通知書情報.get賦課の情報_更正後().get宛名();
+            if (null != kojin) {
+                source.listLower_3 = JushoHenshu.editJusho(本算定通知書情報.get帳票制御共通(), kojin, 地方公共団体);
+            }
+        }            
         if (編集後本算定通知書共通情報.get更正後() != null) {
             source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get保険料段階();
             if (編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {

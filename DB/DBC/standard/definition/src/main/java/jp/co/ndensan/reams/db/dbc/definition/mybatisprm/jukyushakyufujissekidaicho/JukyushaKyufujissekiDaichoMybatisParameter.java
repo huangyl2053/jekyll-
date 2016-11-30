@@ -93,6 +93,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
     private final boolean 要支援2flag;
     private final boolean 経過的要介護flag;
     private final boolean 事業対象者flag;
+    private final boolean 自立flag;
     private final boolean 訪問通所他flag;
     private final boolean 短期入所生活介護flag;
     private final boolean 短期入所療養介護_老健施設flag;
@@ -334,6 +335,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             boolean 要支援2flag,
             boolean 経過的要介護flag,
             boolean 事業対象者flag,
+            boolean 自立flag,
             boolean 訪問通所他flag,
             boolean 短期入所生活介護flag,
             boolean 短期入所療養介護_老健施設flag,
@@ -452,6 +454,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
         this.要支援2flag = 要支援2flag;
         this.経過的要介護flag = 経過的要介護flag;
         this.事業対象者flag = 事業対象者flag;
+        this.自立flag = 自立flag;
         this.訪問通所他flag = 訪問通所他flag;
         this.短期入所生活介護flag = 短期入所生活介護flag;
         this.短期入所療養介護_老健施設flag = 短期入所療養介護_老健施設flag;
@@ -731,6 +734,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 new RString("1").equals(要支援2),
                 new RString("1").equals(経過的要介護),
                 new RString("1").equals(事業対象者),
+                new RString("1").equals(自立),
                 new RString("1").equals(訪問通所他),
                 new RString("1").equals(短期入所生活介護),
                 new RString("1").equals(短期入所療養介護_老健施設),

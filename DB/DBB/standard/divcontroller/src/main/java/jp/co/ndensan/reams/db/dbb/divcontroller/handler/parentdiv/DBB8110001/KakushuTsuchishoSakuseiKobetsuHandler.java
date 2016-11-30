@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.Kaku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.FukaNokiResearcher;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.HonsanteiIkoHantei;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.NonyuTsuchiShoSeigyoJohoLoaderFinder;
 import jp.co.ndensan.reams.db.dbb.service.report.kakushutsuchishosakusei.KakushuTsuchishoSakusei;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -900,6 +899,9 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         div.getFukaShokaiGrandsonTsuchisho().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku()
                 .getLblZengoFuchoAtoKei().setText(Decimal.ZERO.equals(更正後合計) && !flag ? RString.EMPTY
                         : DecimalFormatter.toコンマ区切りRString(更正後合計, 0));
+        if (!flag) {
+            return;
+        }
         set納期限(更正後情報, 期_1月, 期_2月, 期_3月, 期_4月, 期_5月, 期_6月, 期_7月, 期_8月,
                 期_9月, 期_10月, 期_11月, 期_12月, 期_13月, 期_14月);
     }
@@ -1481,10 +1483,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
         clear更正前賦課根拠();
         clear更正前_特徴();
         clear更正前_普徴();
-        HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-        if (honsanteiIkoHantei.is本算定後(更正前Info) && 更正前Info.get賦課年度().equals(更正前Info.get調定年度())) {
-            set更正前賦課根拠(更正前Info);
-        }
+        set更正前賦課根拠(更正前Info);
         FlexibleYear 賦課年度 = 更正後Info.get賦課年度();
         FlexibleYear 調定年度 = 更正後Info.get調定年度();
         if (!賦課年度.isBefore(調定年度)) {

@@ -92,14 +92,14 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         if (!div.getDgKyufuJissekiMeisai().isDisplayNone() && !明細情報リスト.isEmpty()) {
             setDataGrid明細情報(明細情報リスト);
         } else {
-            List<dgKyufuJissekiMeisai_Row> rowList = new ArrayList<>();
-            div.getDgKyufuJissekiMeisai().setDataSource(rowList);
+            div.getDgKyufuJissekiMeisai().setDisplayNone(true);
+            div.getLblMeisaijoho().setDisplayNone(true);
         }
         if (!div.getDgKyufuJissekiMeisaiJustoku().isDisplayNone() && !明細情報特例リスト.isEmpty()) {
             setDataGrid明細情報特例(明細情報特例リスト, 保険者情報);
         } else {
-            List<dgKyufuJissekiMeisaiJustoku_Row> rowList = new ArrayList<>();
-            div.getDgKyufuJissekiMeisaiJustoku().setDataSource(rowList);
+            div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(true);
+            div.getLblMeisaiJohoJushochitokurei().setDisplayNone(true);
         }
     }
 
@@ -162,20 +162,25 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
                 || KyufuJissekiYoshikiKubun._21D1_住宅改修費.equals(基準様式番号)
                 || KyufuJissekiYoshikiKubun._21D2_予防住宅改修費.equals(基準様式番号)) {
             div.getDgKyufuJissekiMeisai().setDisplayNone(true);
+            div.getLblMeisaijoho().setDisplayNone(true);
         } else if (平成27年4月.isBeforeOrEquals(サービス提供年月)) {
             if (KyufuJissekiYoshikiKubun._7131_様式第二.equals(基準様式番号)
                     || KyufuJissekiYoshikiKubun._2131_様式第二.equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisai().setDisplayNone(false);
+                div.getLblMeisaijoho().setDisplayNone(false);
             }
             if (KyufuJissekiYoshikiKubun._7132_様式第二の二.equals(基準様式番号)
                     || KyufuJissekiYoshikiKubun._2132_様式第二の二.equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisai().setDisplayNone(false);
+                div.getLblMeisaijoho().setDisplayNone(false);
             }
         } else if (KyufuJissekiYoshikiKubun._71R1_様式第二の三.equals(基準様式番号)
                 || KyufuJissekiYoshikiKubun._8171_様式第七の三.equals(基準様式番号)) {
             div.getDgKyufuJissekiMeisai().setDisplayNone(false);
+            div.getLblMeisaijoho().setDisplayNone(false);
         } else {
             div.getDgKyufuJissekiMeisai().setDisplayNone(true);
+            div.getLblMeisaijoho().setDisplayNone(true);
         }
     }
 
@@ -188,16 +193,20 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             if (KyufuJissekiYoshikiKubun._7131_様式第二.equals(基準様式番号)
                     || KyufuJissekiYoshikiKubun._2131_様式第二.equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(false);
+                div.getLblMeisaiJohoJushochitokurei().setDisplayNone(false);
             }
             if (KyufuJissekiYoshikiKubun._7132_様式第二の二.equals(基準様式番号)
                     || KyufuJissekiYoshikiKubun._2132_様式第二の二.equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(false);
+                div.getLblMeisaiJohoJushochitokurei().setDisplayNone(false);
             }
         } else if (KyufuJissekiYoshikiKubun._71R1_様式第二の三.equals(基準様式番号)
                 || KyufuJissekiYoshikiKubun._8171_様式第七の三.equals(基準様式番号)) {
             div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(false);
+            div.getLblMeisaiJohoJushochitokurei().setDisplayNone(false);
         } else {
             div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(true);
+            div.getLblMeisaiJohoJushochitokurei().setDisplayNone(true);
         }
     }
 

@@ -19,8 +19,10 @@ import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -99,8 +101,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         reportSource.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
-        reportSource.shutokuYmdAto = 更正後.get期間_自();
-        reportSource.soshitsuYmdAto = 更正後.get期間_至();
+        reportSource.shutokuYmdAto = editDate(更正後.get期間_自());
+        reportSource.soshitsuYmdAto = editDate(更正後.get期間_至());
 
         set調定年度_タイトル_通知文1(reportSource, item.get本算定決定通知書情報());
         set通知文と通知区分(reportSource, 編集後本算定通知書共通情報);
@@ -118,8 +120,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
             reportSource.hokenRitsuMae = decimalToRString(更正前.get保険料率());
             reportSource.hokenSanshutsuMae = decimalToRString(更正前.get減免前保険料_年額());
             reportSource.shotokuKbnMae = 更正前.get保険料段階();
-            reportSource.shutokuYmdMae = 更正前.get期間_自();
-            reportSource.soshitsuYmdMae = 更正前.get期間_至();
+            reportSource.shutokuYmdMae = editDate(更正前.get期間_自());
+            reportSource.soshitsuYmdMae = editDate(更正前.get期間_至());
             reportSource.tsukisuMae = 更正前.get月数_ケ月();
             reportSource.honninKazeiKubunMae = 更正前.get市町村民税課税区分_本人();
             reportSource.setaiKazeiKubunMae = 更正前.get市町村民税課税区分_世帯();
@@ -159,6 +161,14 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         return reportSource;
     }
 
+    private RString editDate(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        return new RDate(date.toString()).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
     private void edit更正内容(KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReportSource reportSource,
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
 
@@ -185,7 +195,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
 
             for (UniversalPhase 更正前 : 更正前普徴期別金額リスト) {
                 for (UniversalPhase 更正後 : 更正後普徴期別金額リスト) {
-                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                    if (更正前.get期() == 更正後.get期() && !nullToZero(更正前.get金額()).equals(nullToZero(更正後.get金額()))) {
                         is変更 = true;
                     }
                 }
@@ -197,13 +207,17 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
             for (CharacteristicsPhase 更正前 : 更正前特徴期別金額リスト) {
                 for (CharacteristicsPhase 更正後 : 更正後特徴期別金額リスト) {
 
-                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                    if (更正前.get期() == 更正後.get期() && !nullToZero(更正前.get金額()).equals(nullToZero(更正後.get金額()))) {
                         is変更 = true;
                     }
                 }
             }
         }
         return is変更;
+    }
+
+    private Decimal nullToZero(Decimal decimal) {
+        return decimal == null ? Decimal.ZERO : decimal;
     }
 
     private void set通知文と通知区分(KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReportSource reportSource,

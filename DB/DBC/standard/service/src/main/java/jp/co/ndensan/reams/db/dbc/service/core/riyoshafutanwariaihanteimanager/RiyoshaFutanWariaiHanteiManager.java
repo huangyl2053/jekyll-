@@ -539,15 +539,10 @@ public class RiyoshaFutanWariaiHanteiManager {
         Decimal その他の合計所得金額 = Decimal.ZERO;
         if (介護所得情報list != null && !介護所得情報list.isEmpty()) {
             for (DbV2512KaigoShotokuNewestEntity 介護所得情報 : 介護所得情報list) {
-                Decimal gokeiShotokuGaku = 介護所得情報.getGokeiShotokuGaku();
-                Decimal nenkiniShotokuGaku = 介護所得情報.getNenkiniShotokuGaku();
-                if (isその他の合計所得金額(介護所得情報.getNenkiniShotokuGaku(), 介護所得情報.getGokeiShotokuGaku())
-                        && gokeiShotokuGaku != null && nenkiniShotokuGaku != null) {
-                    その他の合計所得金額 = その他の合計所得金額.add(gokeiShotokuGaku.
-                            subtract(nenkiniShotokuGaku));
-                }
+                その他の合計所得金額 = その他の合計所得金額.add(getその他の合計所得金額(
+                        介護所得情報.getNenkiniShunyuGaku(), 介護所得情報.getGokeiShotokuGaku()));
                 if (介護所得情報.getNenkiniShotokuGaku() != null) {
-                    年金収入合計 = 年金収入合計.add(介護所得情報.getNenkiniShotokuGaku());
+                    年金収入合計 = 年金収入合計.add(介護所得情報.getNenkiniShunyuGaku());
                 }
             }
             利用者負担割合明細Temp.setSonotanoGoukeiShotokuKingakuGoukei(その他の合計所得金額);
@@ -567,11 +562,21 @@ public class RiyoshaFutanWariaiHanteiManager {
         }
     }
 
-    private Boolean isその他の合計所得金額(Decimal nenkiniShotokuGaku, Decimal gokeiShotokuGaku) {
-        if (nenkiniShotokuGaku == null || gokeiShotokuGaku == null) {
-            return false;
+    private Decimal getその他の合計所得金額(Decimal nenkiniShotokuGaku, Decimal gokeiShotokuGaku) {
+        if (nenkiniShotokuGaku == null && gokeiShotokuGaku == null) {
+            return Decimal.ZERO;
+        } else if (gokeiShotokuGaku == null && nenkiniShotokuGaku != null) {
+            return Decimal.ZERO;
+        } else if (gokeiShotokuGaku != null && nenkiniShotokuGaku == null) {
+            return gokeiShotokuGaku;
+        } else if (nenkiniShotokuGaku != null && gokeiShotokuGaku != null) {
+            Decimal ret = gokeiShotokuGaku.subtract(nenkiniShotokuGaku);
+            if (ret.compareTo(Decimal.ZERO) < 0) {
+                return Decimal.ZERO;
+            }
+            return ret;
         }
-        return nenkiniShotokuGaku.compareTo(gokeiShotokuGaku) < 0;
+        return Decimal.ZERO;
     }
 
     private void get生活保護該当情報Temp(

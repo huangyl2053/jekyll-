@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyushinseitoroku.ShinseishoJohoResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.ShinseishoJohoSearchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.KogakuGassanShikyuShinseiTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.dgTorokuSearchResult_Row;
@@ -288,8 +289,8 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
             if (shoJohoResult.get高額合算申請書().get支給申請書整理番号() != null) {
                 row.setTxtShikyuShinseishoNo(shoJohoResult.get高額合算申請書().get支給申請書整理番号());
             }
-            if (shoJohoResult.get高額合算申請書().get支給申請区分() != null) {
-                row.setTxtShinseiKubun(shoJohoResult.get高額合算申請書().get支給申請区分());
+            if (!RString.isNullOrEmpty(shoJohoResult.get高額合算申請書().get支給申請区分())) {
+                row.setTxtShinseiKubun(KaigoGassan_ShinseiKbn.toValue(shoJohoResult.get高額合算申請書().get支給申請区分()).get名称());
             }
             if (shoJohoResult.get高額合算申請書().get支給申請書情報送付年月() != null) {
                 row.getTxtSoshin().setValue(new FlexibleDate(shoJohoResult.get高額合算申請書().get支給申請書情報送付年月().toDateString()));
