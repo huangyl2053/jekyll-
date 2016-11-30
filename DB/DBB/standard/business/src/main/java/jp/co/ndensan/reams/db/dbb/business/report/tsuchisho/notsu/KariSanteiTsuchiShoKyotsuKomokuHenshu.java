@@ -66,9 +66,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final int 期_13 = 13;
     private static final int 期_14 = 14;
     private static final int INDEX_3 = 3;
-    private static final int MONTHVALUE_3 = 3;
-    private static final int MONTHVALUE_4 = 4;
-    private static final int DAYVALUE = 31;
     private static final RString 普徴メソッド_収入 = new RString("get普徴収入額");
     private static final RString 特徴メソッド_収入 = new RString("get特徴収入額");
     private static final RString 普徴メソッド_賦課 = new RString("get普徴期別金額");
