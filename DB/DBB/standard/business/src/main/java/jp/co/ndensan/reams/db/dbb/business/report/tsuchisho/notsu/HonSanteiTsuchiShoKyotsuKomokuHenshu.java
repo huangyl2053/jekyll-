@@ -563,7 +563,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         boolean flag = false;
         for (CharacteristicsPhase 期別金額 : 特徴期別金額リスト) {
-            if (null != 期別金額.get金額()) {
+            if (null != 期別金額.get金額() && Decimal.ZERO.compareTo(期別金額.get金額()) < 0) {
                 flag = true;
             }
         }
@@ -577,7 +577,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         }
         boolean flag = false;
         for (UniversalPhase 期別金額 : 普徴期別金額リスト) {
-            if (null != 期別金額.get金額()) {
+            if (null != 期別金額.get金額() && Decimal.ZERO.compareTo(期別金額.get金額()) < 0) {
                 flag = true;
             }
         }
