@@ -56,6 +56,7 @@
         FROM
         rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" b
         WHERE
+        事業高額介護サービス費支給判定結果."isDeleted" = FALSE AND
         事業高額介護サービス費支給判定結果."hihokenshaNo" = b."hihokenshaNo" AND
         事業高額介護サービス費支給判定結果."serviceTeikyoYM" = b."serviceTeikyoYM" AND
         事業高額介護サービス費支給判定結果."rirekiNo" = b."rirekiNo" AND
@@ -91,12 +92,19 @@
         (
         SELECT *
         FROM rgdb."DbT4001JukyushaDaicho" t4001
-        WHERE t4001."yukoMukoKubun" = '1'
-        AND t4001."logicalDeletedFlag" = false
+        WHERE t4001."logicalDeletedFlag" = false
         ) AS SUB受給者台帳
         ON 支給申請."hihokenshaNo" = SUB受給者台帳."hihokenshaNo"
+        AND
+        (SUB受給者台帳."yukoMukoKubun" = '1'
         AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanKaishiYMD",1,8) <![CDATA[<=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
         AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanShuryoYMD",1,8) <![CDATA[>=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd'), 'yyyymmdd')
+        )
+        OR
+        (SUB受給者台帳."yukoMukoKubun" = '2'
+        AND SUBSTRING(SUB受給者台帳."ninteiYukoKikanKaishiYMD",1,8) <![CDATA[<=]]> to_char(to_date(支給申請."serviceTeikyoYM" || '01','yyyymmdd') + INTERVAL '1 month' - INTERVAL '1 day' , 'yyyymmdd')
+        AND SUB受給者台帳."yokaigoJotaiKubunCode" = '01'
+        )
         WHERE 1 = 1
         <if test="抽出モード == 1">
             AND 支給申請."uketsukeYMD" <![CDATA[>=]]> #{抽出条件日付From}
