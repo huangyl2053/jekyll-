@@ -153,20 +153,6 @@ public class ShikyugakuKeisanKekkaToroku {
     }
 
     /**
-     * onBlur_txtShikyuShinseishoSeiriNoInput。
-     *
-     * @param div ShikyugakuKeisanKekkaTorokuDiv
-     * @return ResponseData
-     */
-    public ResponseData<ShikyugakuKeisanKekkaTorokuDiv> onBlur_txtShikyuShinseishoSeiriNoInput(ShikyugakuKeisanKekkaTorokuDiv div) {
-        if (div.getTxtShikyuShinseishoSeiriNoInput().getValue() == null
-                || div.getTxtShikyuShinseishoSeiriNoInput().getValue().length() < INT_17) {
-            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).桁数が不正()).respond();
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 画面状態状態遷移時画面共通ボタンを設定のイベントです。
      *
      * @param div ShikyugakuKeisanKekkaTorokuDiv
@@ -586,13 +572,14 @@ public class ShikyugakuKeisanKekkaToroku {
             負担額合計 = 負担額合計.subtract(clickedRow.getTxtFutangaku().getValue() == null
                     ? Decimal.ZERO : new Decimal(clickedRow.getTxtFutangaku().getValue().toString()));
         }
-        以上負担額合計 = 以上負担額合計.add(以上負担額);
-        負担額合計 = 負担額合計.add(負担額);
 
+        KogakuGassanShikyuShinseiTorokuManager manager = KogakuGassanShikyuShinseiTorokuManager.createInstance();
         if (削除.equals(状態)) {
             支給額計算結果 = 支給額計算結果.createBuilderForEdit().delete高額合算支給額計算結果明細(支給額計算結果明細).build();
+            支給額計算結果 = manager.get高額合算支給額計算結果削除情報(支給額計算結果, 以上負担額合計, 負担額合計);
         } else {
-            KogakuGassanShikyuShinseiTorokuManager manager = KogakuGassanShikyuShinseiTorokuManager.createInstance();
+            以上負担額合計 = 以上負担額合計.add(以上負担額);
+            負担額合計 = 負担額合計.add(負担額);
             支給額計算結果 = manager.get高額合算支給額計算結果追加情報(支給額計算結果明細, 支給額計算結果, 以上負担額合計, 負担額合計);
         }
         handler.支給額結果明細グリッド(支給額計算結果.get高額合算支給額計算結果list());
@@ -682,7 +669,7 @@ public class ShikyugakuKeisanKekkaToroku {
         }
         ValidationMessageControlPairs pairs = validationhandler.validate支給額計算結果入力チェック();
         if (pairs.iterator().hasNext()) {
-            div.getTabMeisai().setSelectedItem(div.getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake());
+            setTab(div);
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果状態, RString.class);
@@ -695,6 +682,7 @@ public class ShikyugakuKeisanKekkaToroku {
         if (追加.equals(状態) || 修正.equals(状態)) {
             ValidationMessageControlPairs 保存Pairs = validationhandler.validate計算結果を保存する();
             if (保存Pairs.iterator().hasNext()) {
+                div.getTabMeisai().setSelectedItem(div.getTabShikyugakuKeisanKekkaTorokuShikyuGaku());
                 return ResponseData.of(div).addValidationMessages(保存Pairs).respond();
             }
         }
@@ -725,6 +713,15 @@ public class ShikyugakuKeisanKekkaToroku {
             return ResponseData.of(div).setState(DBC1180011StateName.処理完了);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setTab(ShikyugakuKeisanKekkaTorokuDiv div) {
+        if ((div.getTxtTaishoKeisanKikan().isToRequired() && div.getTxtTaishoKeisanKikan().getToValue() == null)
+                || (div.getTxtHonninShikyugaku().isRequired() && div.getTxtHonninShikyugaku().getValue() == null)) {
+            div.getTabMeisai().setSelectedItem(div.getTabShikyugakuKeisanKekkaTorokuShikyuGaku());
+        } else {
+            div.getTabMeisai().setSelectedItem(div.getTabShikyugakuKeisanKekkaTorokuRenrakuhyo());
+        }
     }
 
     private void do計算結果保存(RString 状態, KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果,
