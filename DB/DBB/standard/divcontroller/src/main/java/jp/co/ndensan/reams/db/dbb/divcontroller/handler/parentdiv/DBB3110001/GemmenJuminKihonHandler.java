@@ -1541,13 +1541,13 @@ public class GemmenJuminKihonHandler {
             is減免決定通知書checked = false;
         }
         RDate 発行日_減免 = 発行パネル.getPritPublish1().getComdiv1().getIssueDate();
-        FlexibleDate 減免_発行日 = 発行日_減免 == null ? FlexibleDate.EMPTY : new FlexibleDate(発行日_減免.toString());
+        FlexibleDate 減免_発行日 = 発行日_減免 == null ? FlexibleDate.getNowDate() : new FlexibleDate(発行日_減免.toString());
         RDate 発行日_変更兼特徴中止 = 発行パネル.getPritPublish2().getComdiv2().getIssueDate();
-        FlexibleDate 変更兼特徴中止_発行日 = 発行日_変更兼特徴中止 == null ? FlexibleDate.EMPTY : new FlexibleDate(発行日_変更兼特徴中止.toString());
+        FlexibleDate 変更兼特徴中止_発行日 = 発行日_変更兼特徴中止 == null ? FlexibleDate.getNowDate() : new FlexibleDate(発行日_変更兼特徴中止.toString());
         RDate 発行日_納入 = 発行パネル.getPritPublish3().getComdiv3().getIssueDate();
-        FlexibleDate 納入_発行日 = 発行日_納入 == null ? FlexibleDate.EMPTY : new FlexibleDate(発行日_納入.toString());
+        FlexibleDate 納入_発行日 = 発行日_納入 == null ? FlexibleDate.getNowDate() : new FlexibleDate(発行日_納入.toString());
         RDate 送付日_納入 = 発行パネル.getPritPublish3().getComdiv3().getSendDate();
-        FlexibleDate 納入_送付日 = 送付日_納入 == null ? FlexibleDate.EMPTY : new FlexibleDate(送付日_納入.toString());
+        FlexibleDate 納入_送付日 = 送付日_納入 == null ? FlexibleDate.getNowDate() : new FlexibleDate(送付日_納入.toString());
         RString 減免_文書番号 = 発行パネル.getPritPublish1().getBunshoBango1().get文書番号();
 
         boolean is変更通知書兼特徴checked = 発行パネル.getPritPublish2().isIsPublish() && 発行パネル.getPritPublish2().isVisible();
