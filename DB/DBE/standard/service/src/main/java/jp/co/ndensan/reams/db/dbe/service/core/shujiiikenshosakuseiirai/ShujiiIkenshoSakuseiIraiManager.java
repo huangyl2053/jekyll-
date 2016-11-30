@@ -73,7 +73,9 @@ public class ShujiiIkenshoSakuseiIraiManager {
         for (ShujiiikenshosakuseiiraiRelateEntity entity : entityList) {
             businessList.add(new Shujiiikenshosakuseiirai(entity));
         }
-        return SearchResult.of(businessList, businessList.size(), true);
+        
+        int totalcount = mapper.countShinSeiShaJoho(param);
+        return SearchResult.of(businessList, totalcount, param.getLimitCount() < totalcount);
     }
 
     /**

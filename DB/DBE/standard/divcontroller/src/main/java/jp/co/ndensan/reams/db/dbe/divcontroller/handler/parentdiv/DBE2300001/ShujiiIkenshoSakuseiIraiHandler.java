@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 主治医意見書作成依頼のHandlerクラスです。
@@ -84,7 +85,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
      *
      * @param 申請者情報一覧 申請者情報一覧
      */
-    public void init(List<Shujiiikenshosakuseiirai> 申請者情報一覧) {
+    public void init(SearchResult<Shujiiikenshosakuseiirai> 申請者情報一覧) {
         set申請者一覧(申請者情報一覧);
         if (主治医意見書作成期限設定方法_2.equals(
                 DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
@@ -96,9 +97,9 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         }
     }
 
-    private void set申請者一覧(List<Shujiiikenshosakuseiirai> 申請者情報一覧) {
+    private void set申請者一覧(SearchResult<Shujiiikenshosakuseiirai> 申請者情報一覧) {
         List<dgShinseishaIchiran_Row> 申請者一覧 = new ArrayList<>();
-        for (Shujiiikenshosakuseiirai 申請者 : 申請者情報一覧) {
+        for (Shujiiikenshosakuseiirai 申請者 : 申請者情報一覧.records()) {
             dgShinseishaIchiran_Row row = new dgShinseishaIchiran_Row();
             row.setHihokenshaNo(申請者.get被保険者番号());
             if (申請者.getTemp_被保険者氏名() != null) {
@@ -172,8 +173,14 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         }
         div.getShinseishaIchiran().setIsOpen(true);
         div.getDgShinseishaIchiran().setDataSource(申請者一覧);
+        div.getDgShinseishaIchiran().getGridSetting().setLimitRowCount(get最大表示件数());
+        div.getDgShinseishaIchiran().getGridSetting().setSelectedRowCount(申請者情報一覧.totalCount());
     }
 
+    private int get最大表示件数() {
+        return Integer.parseInt(div.getKensakuOption().getTxtMaxDisp().getValue().toString());
+    }
+    
     /**
      * 「依頼する」ボタン押下、指定主治医値をセットします。
      */

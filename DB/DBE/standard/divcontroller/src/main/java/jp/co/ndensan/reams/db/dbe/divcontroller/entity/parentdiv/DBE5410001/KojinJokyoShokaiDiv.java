@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -71,6 +71,8 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hdnNinteiChosaTokkijikoNo;
     @JsonProperty("hdnGaikyoChosaTextImageKubun")
     private RString hdnGaikyoChosaTextImageKubun;
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    private RString hdnShinsakaiKaisaiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -481,6 +483,24 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("hdnGaikyoChosaTextImageKubun")
     public void setHdnGaikyoChosaTextImageKubun(RString hdnGaikyoChosaTextImageKubun) {
         this.hdnGaikyoChosaTextImageKubun = hdnGaikyoChosaTextImageKubun;
+    }
+
+    /*
+     * gethdnShinsakaiKaisaiNo
+     * @return hdnShinsakaiKaisaiNo
+     */
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    public RString getHdnShinsakaiKaisaiNo() {
+        return hdnShinsakaiKaisaiNo;
+    }
+
+    /*
+     * sethdnShinsakaiKaisaiNo
+     * @param hdnShinsakaiKaisaiNo hdnShinsakaiKaisaiNo
+     */
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    public void setHdnShinsakaiKaisaiNo(RString hdnShinsakaiKaisaiNo) {
+        this.hdnShinsakaiKaisaiNo = hdnShinsakaiKaisaiNo;
     }
 
     /*

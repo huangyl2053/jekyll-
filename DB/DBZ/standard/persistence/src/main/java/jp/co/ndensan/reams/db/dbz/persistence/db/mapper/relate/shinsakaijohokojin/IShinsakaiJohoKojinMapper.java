@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 審査会情報照会(個人)のMapperクラスです。
@@ -22,9 +24,10 @@ public interface IShinsakaiJohoKojinMapper {
      * 開催結果情報と開催場所情報を取得します。
      *
      * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 審査会開催番号 RString
      * @return KaisaiKekkaAndBashoJohoEntity
      */
-    KaisaiKekkaAndBashoJohoEntity getKaisaikekkaandbashojoho(ShinseishoKanriNo 申請書管理番号);
+    KaisaiKekkaAndBashoJohoEntity getKaisaikekkaandbashojoho(@Param("申請書管理番号")ShinseishoKanriNo 申請書管理番号, @Param("審査会開催番号")RString 審査会開催番号);
 
     /**
      * 審査会委員情報を取得します。

@@ -88,7 +88,7 @@ public class ShokanKetteiTsuchiShoMeisaiTempTableEntity
     private RString kinyuKikanMeisi;
     private RString kinyuKikanShitenMeisi;
     private RString yoshikiMeisho;
-    private int kozaId;
+    private int kingaku_kozaId;
     // 前回支払金額
     private Decimal zenkaiShiharaiKingaku;
     // 通知書発行対象フラグ

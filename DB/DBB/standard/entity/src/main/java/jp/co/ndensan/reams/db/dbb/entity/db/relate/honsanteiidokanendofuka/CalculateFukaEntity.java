@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -40,5 +40,5 @@ public class CalculateFukaEntity implements IDbAccessable {
     private List<SeikatsuHogoJukyushaRelateEntity> 生保の情報;
     private List<DbT7006RoreiFukushiNenkinJukyushaEntity> 老齢の情報;
     private List<KyokaisoGaitoshaEntity> 境界層の情報;
-    private List<KozaRelateEntity> 口座;
+    private TokuteiKozaRelateEntity 口座;
 }

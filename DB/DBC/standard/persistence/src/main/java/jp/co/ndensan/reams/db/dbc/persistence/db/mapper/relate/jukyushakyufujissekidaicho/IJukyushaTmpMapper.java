@@ -126,4 +126,12 @@ public interface IJukyushaTmpMapper {
      * @return 帳票データ
      */
     List<JukyushaKyufuJissekidaichoData> get帳票データ(JukyushaKyufujissekiDaichoSyutuMybatisParameter param);
+
+    /**
+     * 帳票データの件数を取得します。
+     *
+     * @param param param
+     * @return 帳票データ
+     */
+    int get帳票データCount(JukyushaKyufujissekiDaichoSyutuMybatisParameter param);
 }

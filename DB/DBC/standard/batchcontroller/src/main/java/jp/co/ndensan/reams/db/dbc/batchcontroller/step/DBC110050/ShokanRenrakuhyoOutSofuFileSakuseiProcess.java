@@ -239,8 +239,8 @@ public class ShokanRenrakuhyoOutSofuFileSakuseiProcess extends BatchProcessBase<
     }
 
     private void addEntityWriter(DbWT2112ShokanMeisaiTempEntity entity, boolean lastFlag) {
-        if (is償還明細キー(beforeEntity)) {
-            addMeisaiEntityWriter(beforeEntity, lastFlag);
+        if (is償還明細キー(entity)) {
+            addMeisaiEntityWriter(entity, lastFlag);
         }
     }
 

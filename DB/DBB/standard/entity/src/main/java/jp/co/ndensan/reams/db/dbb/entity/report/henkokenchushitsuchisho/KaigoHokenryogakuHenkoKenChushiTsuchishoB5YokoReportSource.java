@@ -271,5 +271,72 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource implemen
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportItem(name = "honninKazeiKubunMae", order = 128)
+    public RString honninKazeiKubunMae;
+    @ReportItem(name = "setaiKazeiKubunMae", order = 129)
+    public RString setaiKazeiKubunMae;
+    @ReportItem(name = "gokeiShotokuKingakuMae", order = 130)
+    public RString gokeiShotokuKingakuMae;
+    @ReportItem(name = "kotekiNenkinShunyuGakuMae", order = 131)
+    public RString kotekiNenkinShunyuGakuMae;
+    @ReportItem(name = "seikatsuHogoFujoShuruiMae", order = 132)
+    public RString seikatsuHogoFujoShuruiMae;
+    @ReportItem(name = "seihoKaishiYmdMae", order = 133)
+    public RString seihoKaishiYmdMae;
+    @ReportItem(name = "seihoHaishiYmdMae", order = 134)
+    public RString seihoHaishiYmdMae;
+    @ReportItem(name = "roreiKaishiYmdMae", order = 135)
+    public RString roreiKaishiYmdMae;
+    @ReportItem(name = "roreiHaishiYmdMae", order = 136)
+    public RString roreiHaishiYmdMae;
+    @ReportItem(name = "honninKazeiKubunAto", order = 137)
+    public RString honninKazeiKubunAto;
+    @ReportItem(name = "setaiKazeiKubunAto", order = 138)
+    public RString setaiKazeiKubunAto;
+    @ReportItem(name = "gokeiShotokuKingakuAto", order = 139)
+    public RString gokeiShotokuKingakuAto;
+    @ReportItem(name = "kotekiNenkinShunyuGakuAto", order = 140)
+    public RString kotekiNenkinShunyuGakuAto;
+    @ReportItem(name = "seikatsuHogoFujoShuruiAto", order = 141)
+    public RString seikatsuHogoFujoShuruiAto;
+    @ReportItem(name = "seihoKaishiYmdAto", order = 142)
+    public RString seihoKaishiYmdAto;
+    @ReportItem(name = "seihoHaishiYmdAto", order = 143)
+    public RString seihoHaishiYmdAto;
+    @ReportItem(name = "roreiKaishiYmdAto", order = 144)
+    public RString roreiKaishiYmdAto;
+    @ReportItem(name = "roreiHaishiYmdAto", order = 145)
+    public RString roreiHaishiYmdAto;
+    @ReportItem(name = "nofuzumiGakuToraiKi", order = 146)
+    public RString nofuzumiGakuToraiKi;
+    @ReportItem(name = "nofuzumiGakuMiToraiKi", order = 147)
+    public RString nofuzumiGakuMiToraiKi;
+    @ReportItem(name = "fuchoNofuzumiGaku", order = 148)
+    public RString fuchoNofuzumiGaku;
+    @ReportItem(name = "tokuchoNofuzumiGaku", order = 149)
+    public RString tokuchoNofuzumiGaku;
+    @ReportItem(name = "fuchoNofuzumiGakuToraiKi", order = 150)
+    public RString fuchoNofuzumiGakuToraiKi;
+    @ReportItem(name = "tokuchoNofuzumiGakuToraiKi", order = 151)
+    public RString tokuchoNofuzumiGakuToraiKi;
+    @ReportItem(name = "nofuzumiGakuSanshutsuYmd", order = 152)
+    public RString nofuzumiGakuSanshutsuYmd;
+    @ReportItem(name = "sudeniNofuSubekiGaku", order = 153)
+    public RString sudeniNofuSubekiGaku;
+    @ReportItem(name = "fuchoSudeniNofuSubekiGaku", order = 154)
+    public RString fuchoSudeniNofuSubekiGaku;
+    @ReportItem(name = "tokuchoSudeniNofuSubekiGaku", order = 155)
+    public RString tokuchoSudeniNofuSubekiGaku;
+    @ReportItem(name = "fuchoKongoNofuSubekiGakuChotei", order = 156)
+    public RString fuchoKongoNofuSubekiGakuChotei;
+    @ReportItem(name = "fuchoKongoNofuSubekiGakuShunyu", order = 157)
+    public RString fuchoKongoNofuSubekiGakuShunyu;
+    @ReportItem(name = "tokuchoKongoNofuSubekiGakuChotei", order = 158)
+    public RString tokuchoKongoNofuSubekiGakuChotei;
+    @ReportItem(name = "tokuchoKongoNofuSubekiGakuShunyu", order = 159)
+    public RString tokuchoKongoNofuSubekiGakuShunyu;
+    @ReportItem(name = "kongoNofuSubekiGakuChotei", order = 160)
+    public RString kongoNofuSubekiGakuChotei;
+
 // </editor-fold>
 }

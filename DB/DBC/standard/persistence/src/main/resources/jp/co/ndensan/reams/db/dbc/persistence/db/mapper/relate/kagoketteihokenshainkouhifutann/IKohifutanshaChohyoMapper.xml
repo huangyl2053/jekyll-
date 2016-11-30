@@ -71,6 +71,11 @@
         DbWT3060."tokuteiNyushoshaServicehiTanisu" AS dbWT3060_tokuteiNyushoshaServicehiTanisu,
         DbWT3060."tokuteiNyushoshaServicehiFutangaku" AS dbWT3060_tokuteiNyushoshaServicehiFutangaku,
         DbWT0001."shikibetsuCode" AS dbWT0001_shikibetsuCode,
+        DbWT0001."yubinNo",
+        DbWT0001."choikiCode",
+        DbWT0001."gyoseikuCode",
+        DbWT0001."shimei50onKana",
+        DbWT0001."shichosonCode",
         DbWT3061."kohiShokisaiHokenshaNo" AS dbWT3061_kohiShokisaiHokenshaNo
     </sql>
 

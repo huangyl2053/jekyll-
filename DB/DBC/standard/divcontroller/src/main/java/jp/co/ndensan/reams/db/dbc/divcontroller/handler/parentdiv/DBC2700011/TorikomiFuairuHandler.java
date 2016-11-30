@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2700011;
 import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC170020.DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2700011.TorikomiFuairuDiv;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -16,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,18 +24,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class TorikomiFuairuHandler {
 
-    private final TorikomiFuairuDiv div;
     private final RString 共有ファイル名 = new RString("KM999999_COMMON.csv");
     private static final RString HOSHI = new RString("*");
-    private static final RString 西暦 = new RString("yyyyMMddHHmmss");
 
     /**
      * コンストラクタです。
      *
-     * @param div TorikomiFuairuDiv
      */
-    public TorikomiFuairuHandler(TorikomiFuairuDiv div) {
-        this.div = div;
+    public TorikomiFuairuHandler() {
     }
 
     /**
@@ -61,8 +55,6 @@ public class TorikomiFuairuHandler {
                 size = size + 項目数.size();
             }
         }
-        div.getTxtKoshinNichiji().setValue(RDateTime.now().format西暦(西暦.toString()));
-        div.getTxtFuairuName().setValue(fileName);
         return size;
 
     }

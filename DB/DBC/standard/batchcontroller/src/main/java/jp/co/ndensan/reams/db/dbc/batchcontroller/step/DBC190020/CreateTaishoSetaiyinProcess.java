@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyooshirasetsu
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseisho.KijunShunyugakuTekiyoShinseishoSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseishohakkoichiran.KijunShunyugakuTekiyoShinseishoHakkoIchiranSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -110,7 +111,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_30 = 30;
-    private static final int INT_50 = 50;
     private static final int INT_80 = 80;
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
@@ -167,8 +167,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
 
     private BatchReportWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> dBC200088ReportWriter;
     private ReportSourceWriter<KijunShunyugakuTekiyoShinseishoHakkoIchiranSource> dBC200088SourceWriter;
-
     private CsvWriter eucCsvWriter;
+    private int maxLenth;
 
     @Override
     protected void initialize() {
@@ -220,9 +220,8 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
         認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), this.parameter.get作成日());
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
-
         通知文64 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100064.getReportId(), KamokuCode.EMPTY, INT_1).get(INT_1);
-
+        maxLenth = KijunShunyugakuTekiyoShinseishoSource.JUSHO1_MAXLENGTH;
     }
 
     @Override
@@ -276,7 +275,6 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             if (INT_80 < 文字列長 && RSTRING_1.equals(entity.get対象世帯員().getShuturyokuUmu())) {
                 文字切れflag = true;
             }
-
         }
 
         if (RSTRING_1.equals(entity.get対象世帯員().getShuturyokuUmu())) {
@@ -493,11 +491,9 @@ public class CreateTaishoSetaiyinProcess extends BatchProcessBase<CreateTaishoSe
             kijunEntity1.set被保険者氏名１(taiEntity.get対象世帯員().getHihokenshaName());
             kijunEntity1.set被保険者生年月日１(taiEntity.get対象世帯員().getSeinengappiYMD());
             kijunEntity1.set被保険者性別１(taiEntity.get対象世帯員().getSex());
-            IJusho 宛名住所 = 宛名.get住所();
-            RString 住所 = 宛名住所.get住所()
-                    .concat(getColumnValue(宛名住所.get方書())).concat(getColumnValue(宛名住所.get番地().getBanchi()));
-            kijunEntity1.set住所１(住所.substringReturnAsPossible(INT_0, INT_50));
-            kijunEntity1.set住所２(住所.substringReturnAsPossible(INT_50));
+            RString 住所 = JushoHenshu.editJusho(帳票制御共通, 宛名, 地方公共団体);
+            kijunEntity1.set住所１(住所.substringReturnAsPossible(INT_0, maxLenth));
+            kijunEntity1.set住所２(住所.substringReturnAsPossible(maxLenth));
             kijunEntity1.set連絡先(taiEntity.get対象世帯員().getRennrakusaki());
             kijunEntity1.set通知文１(通知文64);
             RString 年度 = parameter.get処理年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).fillType(FillType.BLANK).toDateString();

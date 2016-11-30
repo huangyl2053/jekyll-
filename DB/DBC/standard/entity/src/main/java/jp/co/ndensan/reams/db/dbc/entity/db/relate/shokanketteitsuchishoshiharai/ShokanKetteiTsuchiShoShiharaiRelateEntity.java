@@ -45,6 +45,7 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private Decimal shiharaiKingakuUchiwakeRiyoshabun;
     private Decimal shiharaiKingaku;
     private RString ryakusho;
+    // 金額
     private int kingaku;
     private RString tuika;
     private RString serviceNameRyaku;
@@ -80,10 +81,8 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private RString sashitomeHiHokenshaNo;
     private RString sashitomeKojoNo;
     private TokuteiKozaRelateEntity 口座;
-    // 支給金額
-    private int kaishuKingaku;
     // 支給金額集計
-    private int kaishuKingakuTtl;
+    private Decimal kaishuKingakuTtl;
     // 差額金額集計
     private Decimal sagakuKingakuTtl;
     // 様式金額集計
@@ -96,4 +95,7 @@ public class ShokanKetteiTsuchiShoShiharaiRelateEntity {
     private RString syurui1;
     // 種類２
     private RString syurui2;
+
+    // 通知書発行対象フラグ
+    private boolean hakkoutaisyouFlg;
 }

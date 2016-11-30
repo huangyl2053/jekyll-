@@ -59,7 +59,7 @@
         T."fukaNendo",
         T."tsuchishoNo"
         ) AS FukaT
-        ON  
+        ON
         FukaT."choteiNendo" = A."choteiNendo"
         AND FukaT."fukaNendo" = A."fukaNendo"
         AND FukaT."tsuchishoNo" = A."tsuchishoNo"
@@ -100,7 +100,7 @@
 
     <!-- データを期別情報一時テーブルに登録します。 -->
     <insert id="insertTmpKibetsu" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.KibetsuEntity">
-        INSERT INTO 
+        INSERT INTO
         "TmpKibetsu"
         VALUES
         (#{choteiNendo},
@@ -149,12 +149,12 @@
         A."rirekiNo",
         A."hihokenshaNo",
         (CASE WHEN
-        A."hokenryoDankai2" is not null 
+        A."hokenryoDankai2" is not null
         AND A."hokenryoDankai2" <![CDATA[<>]]> ''
-        THEN 
+        THEN
         A."hokenryoDankai2"
         ELSE
-        A."hokenryoDankai1" 
+        A."hokenryoDankai1"
         END
         ) AS "dankai",
         A."choteiNichiji",
@@ -213,12 +213,12 @@
         A."rirekiNo",
         A."hihokenshaNo",
         (CASE WHEN
-        A."hokenryoDankai2" is not null 
+        A."hokenryoDankai2" is not null
         AND A."hokenryoDankai2" <![CDATA[<>]]> ''
-        THEN 
+        THEN
         A."hokenryoDankai2"
         ELSE
-        A."hokenryoDankai1" 
+        A."hokenryoDankai1"
         END
         ) AS "dankai",
         A."choteiNichiji",
@@ -255,7 +255,7 @@
         T."fukaNendo",
         T."tsuchishoNo"
         ) AS FukaT
-        ON  
+        ON
         FukaT."choteiNendo" = A."choteiNendo"
         AND FukaT."fukaNendo" = A."fukaNendo"
         AND FukaT."tsuchishoNo" = A."tsuchishoNo"
@@ -267,10 +267,10 @@
     </select>
 
     <!-- 処理日付管理マスタに基準日時を取得します。 -->
-    <select id="select処理日付" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
+    <select id="select処理日付" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choteibo.ChoteiboShoriHizukeMyBatisParameter" fetchSize="500" resultOrdered="true">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
         WHERE
@@ -278,10 +278,10 @@
         AND "DbT7022ShoriDateKanri"."shoriName" = #{shoriName}
         AND "DbT7022ShoriDateKanri"."nendo" = #{nendo}
         ORDER BY
-        "DbT7022ShoriDateKanri"."nendoNaiRenban" DESC 
+        "DbT7022ShoriDateKanri"."nendoNaiRenban" DESC
         LIMIT 1
     </select>
-    
+
     <!--段階情報一時テーブルを作成します -->
     <insert id="createTmpDankai">
         CREATE TEMP TABLE "TmpDankai"
@@ -304,7 +304,7 @@
 
     <!-- データを段階情報一時テーブルに登録します。 -->
     <insert id="insertTmpDankai" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DanKaiEntity">
-        INSERT INTO 
+        INSERT INTO
         "TmpDankai"
         VALUES
         (#{choteiNendo},
@@ -353,10 +353,10 @@
         AND A."fukaNendo" = #{fukaNendo}
         AND A."karisanFlag" = #{karisanFlag}
         <if test="dogetsuFlag==1">
-        AND A."dogetsusueChoteigaku" > 0
+            AND A."dogetsusueChoteigaku" > 0
         </if>
         <if test="dogetsuFlag==0">
-        AND A."zengetsusueChoteigaku" > 0
+            AND A."zengetsusueChoteigaku" > 0
         </if>
         GROUP BY
         A."choteiNendo",
@@ -392,7 +392,7 @@
 
     <!-- データを段階小計一時テーブルに登録します。 -->
     <insert id="insertTmpDankaiShokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiShokeiEntity">
-        INSERT INTO 
+        INSERT INTO
         "TmpDankaiShokei"
         VALUES
         (#{choteiNendo},
@@ -512,14 +512,14 @@
     <!-- 減部分の計算 -->
     <!-- 該当段階の前月末と当月末の間に調定額の異動の判断 -->
     <select resultOrdered="true" id="select減の調定額の小計" resultMap="resultMap_DankaiShokeiEntity_Gen" parameterType="java.util.Map" fetchSize="500">
-        SELECT 
-            "choteiNendo", 
-            "fukaNendo", 
-            "dankai",
-            "choshuHouhou", 
-            "karisanFlag",
-            COUNT(DISTINCT "hihokenshaNo") AS "genKensu",
-            SUM("zengetsusueChoteigaku") AS "genChoteigakuCount"
+        SELECT
+        "choteiNendo",
+        "fukaNendo",
+        "dankai",
+        "choshuHouhou",
+        "karisanFlag",
+        COUNT(DISTINCT "hihokenshaNo") AS "genKensu",
+        SUM("zengetsusueChoteigaku") AS "genChoteigakuCount"
         FROM "TmpDankai"
         WHERE "choteiNendo" = #{choteiNendo}
         AND   "fukaNendo" = #{fukaNendo}
@@ -648,7 +648,7 @@
 
     <!-- データを期別小計一時テーブルに登録します。 -->
     <insert id="insertTmpKibetsuShokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.KibetsuShokeiEntity">
-        INSERT INTO 
+        INSERT INTO
         "TmpKibetsuShokei"
         VALUES
         (#{choteiNendo},
@@ -767,7 +767,7 @@
 
     <!-- データを期別合計一時テーブルに登録します。 -->
     <insert id="insertTmpKibetsuGokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.KibetsuGokeiEntity">
-        INSERT INTO 
+        INSERT INTO
         "TmpKibetsuGokei"
         VALUES
         (#{choteiNendo},
@@ -806,7 +806,7 @@
 
     <!-- データを段階合計一時テーブルに登録します。 -->
     <insert id="insertTmpDankaiGokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.DankaiGokeiEntity">
-        INSERT INTO 
+        INSERT INTO
         "TmpDankaiGokei"
         VALUES
         (#{choteiNendo},
@@ -839,23 +839,23 @@
     <!-- 段階合計情報を取得します。-->
     <select resultOrdered="true" id="select段階合計From段階小計一時テーブル" resultMap="resultMap_DankaiGokeiEntity_1" parameterType="java.util.Map" fetchSize="500">
         SELECT
-            A."choteiNendo",
-            A."fukaNendo",
-            A."choshuHouhou",
-            SUM(A."fueKensu") AS "fueZennbuKennsuuGokei",
-            SUM(A."fueChoteigakuCount") AS "fueZennbuChoteigakuGokei",
-            SUM(A."genKensu") AS "genZennbuKennsuuGokei",
-            SUM(A."genChoteigakuCount") AS "genZennbuChoteigakuGokei"
+        A."choteiNendo",
+        A."fukaNendo",
+        A."choshuHouhou",
+        SUM(A."fueKensu") AS "fueZennbuKennsuuGokei",
+        SUM(A."fueChoteigakuCount") AS "fueZennbuChoteigakuGokei",
+        SUM(A."genKensu") AS "genZennbuKennsuuGokei",
+        SUM(A."genChoteigakuCount") AS "genZennbuChoteigakuGokei"
         FROM
-            "TmpDankaiShokei" AS A
+        "TmpDankaiShokei" AS A
         WHERE
-            A."choteiNendo" = #{choteiNendo}
+        A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
         AND A."dogetsuFlag" = 1
         GROUP BY
-            A."choteiNendo",
-            A."fukaNendo",
-            A."choshuHouhou"
+        A."choteiNendo",
+        A."fukaNendo",
+        A."choshuHouhou"
     </select>
 
     <!-- 段階合計一時テーブルに増の調定額の合計の更新します。 -->
@@ -885,8 +885,8 @@
     <select resultOrdered="true" id="select減免の件数と減免額" resultMap="resultMap_GenmenEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT "choteiNendo", "fukaNendo", COUNT("tsuchishoNo") AS "genmenCount", SUM("gemmenGaku") AS "genmenChoteigaku"
         FROM rgdb."DbT2002Fuka" a
-        WHERE "rirekiNo" = 
-            (SELECT MAX("rirekiNo") FROM rgdb."DbT2002Fuka" b WHERE a."choteiNendo" = b."choteiNendo" AND a."fukaNendo" = b."fukaNendo" AND a."tsuchishoNo" = b."tsuchishoNo")
+        WHERE "rirekiNo" =
+        (SELECT MAX("rirekiNo") FROM rgdb."DbT2002Fuka" b WHERE a."choteiNendo" = b."choteiNendo" AND a."fukaNendo" = b."fukaNendo" AND a."tsuchishoNo" = b."tsuchishoNo")
         AND "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
         AND "gemmenGaku" > 0
@@ -1058,7 +1058,7 @@
 
     <!-- データを合計部分一時テーブルに登録します。 -->
     <insert id="insertTmpGokeiBubun" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo.GokeiBubunEntity">
-        INSERT INTO 
+        INSERT INTO
         "TmpGokeiBubun"
         VALUES
         (#{choshuHouhou},
@@ -1292,7 +1292,7 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND (A."fukaNendo" = #{danNendo}
-        OR 
+        OR
         (A."fukaNendo" = #{zenNendo})
         OR
         (A."fukaNendo" = #{zenzenNendo})
@@ -1353,7 +1353,7 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND (A."fukaNendo" = #{danNendo}
-        OR 
+        OR
         (A."fukaNendo" = #{zenNendo})
         OR
         (A."fukaNendo" = #{zenzenNendo})
@@ -1504,11 +1504,11 @@
     <!-- 期別合計情報を取得します。-->
     <select resultOrdered="true" id="select期別合計情報" resultMap="resultMap_KibetsuGokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-            A.*
+        A.*
         FROM
-            "TmpKibetsuGokei" AS A
+        "TmpKibetsuGokei" AS A
         WHERE
-            A."choteiNendo" = #{choteiNendo}
+        A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
     </select>
 
@@ -1533,11 +1533,11 @@
     <!-- 段階合計情報を取得します。-->
     <select resultOrdered="true" id="select段階合計情報" resultMap="resultMap_DankaiGokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
-            A.*
+        A.*
         FROM
-            "TmpDankaiGokei" AS A
+        "TmpDankaiGokei" AS A
         WHERE
-            A."choteiNendo" = #{choteiNendo}
+        A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
     </select>
 
@@ -1605,7 +1605,7 @@
     <select resultOrdered="true" id="selectAll合計部分総計情報" resultMap="resultMap_GokeiBubunSoukeiEntity" fetchSize="500">
         SELECT "TmpGokeiBubunSoukei".* FROM "TmpGokeiBubunSoukei"
     </select>
-    
+
     <!-- 期別情報一時テーブルを削除します。-->
     <delete id="dropTmpKibetsu">
         DROP TABLE "TmpKibetsu"

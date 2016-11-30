@@ -136,7 +136,23 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranBodyEditor implements IKyu
             source.gokeiKensu = doカンマ編集(合計件数).concat(件数);
         }
 
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(KyufuSaishinsaMoshitateshojohoSofuIchiranSource source) {
+        if (source.shoKisaiHokenshaNo == null) {
+            source.shoKisaiHokenshaNo = RString.EMPTY;
+        }
+        if (source.listUpper_4 == null) {
+            source.listUpper_4 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listUpper_6 == null) {
+            source.listUpper_6 = RString.EMPTY;
+        }
     }
 
     private RString get年月日(FlexibleDate date) {

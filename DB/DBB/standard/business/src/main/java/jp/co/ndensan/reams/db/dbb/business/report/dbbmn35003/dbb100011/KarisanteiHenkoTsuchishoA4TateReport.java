@@ -46,6 +46,8 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
     private static final int NUM12 = 12;
     private static final int NUM16 = 16;
     private static final RString 年度 = new RString("年度");
+    private static final RString 特別徴収 = new RString("特別徴収");
+    private static final RString 普通徴収 = new RString("普通徴収");
     private static final RString 介護保険料仮徴収額変更通知書 = new RString("介護保険料仮徴収額変更通知書");
 
     /**
@@ -92,13 +94,13 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         List<UniversalSignDeliveryInformation> 普徴納期情報リスト = 編集後仮算定通知書共通情報.get普徴納期情報リスト();
 
         int 行 = 1;
-        if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty()) {
+        if (特徴納期情報リスト != null && !特徴納期情報リスト.isEmpty() && !is普徴のみ(編集後仮算定通知書共通情報)) {
             行 = 特徴納期情報リスト.size();
         }
         if (行 > NUM3) {
             行 = NUM3;
         }
-        if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行) {
+        if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行 && !is特徴のみ(編集後仮算定通知書共通情報)) {
             行 = 普徴納期情報リスト.size();
         }
         if (行 < NUM4) {
@@ -161,16 +163,25 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
             item.setZogenGaku(zogenGaku);
         }
 
-        item.setKoseigoHokenryoGaku(更正後.get更正後介護保険料仮徴収額合計() != null ? new RString(更正後.get更正後介護保険料仮徴収額合計().toString()) : RString.EMPTY);
+        item.setKoseigoHokenryoGaku(更正後.get更正後介護保険料仮徴収額合計() != null
+                ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後介護保険料仮徴収額合計(), 0) : RString.EMPTY);
 
         if (編集後仮算定通知書共通情報.get納付済額_未到来期含む() != null) {
             RString nofuzumiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get納付済額_未到来期含む(), 0);
             item.setNofuzumiGaku(nofuzumiGaku);
         }
 
-        if (編集後仮算定通知書共通情報.get今後納付すべき額() != null) {
-            RString kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額(), 0);
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_収入元に() != null) {
+            RString kongoNofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額_収入元に(), 0);
             item.setKongoNofuSubekiGaku(kongoNofuSubekiGaku);
+        }
+        if (編集後仮算定通知書共通情報.get今後納付すべき額_調定元に() != null) {
+            RString kongoNofuSubakiGakuChotei = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get今後納付すべき額_調定元に(), 0);
+            item.setKongoNofuSubakiGakuChotei(kongoNofuSubakiGakuChotei);
+        }
+        if (編集後仮算定通知書共通情報.get既に納付すべき額() != null) {
+            RString nofuSubekiGaku = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報.get既に納付すべき額(), 0);
+            item.setNofuSubekiGaku(nofuSubekiGaku);
         }
 
         item.setKorekaraChoshuho(更正後.get更正後徴収方法());
@@ -192,6 +203,22 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         setCompKaigoToiawasesaki(item);
     }
 
+    private boolean is普徴のみ(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
+        RString 徴収方法 = 編集後仮算定通知書共通情報.get更正後().get更正後徴収方法();
+        if (RString.isNullOrEmpty(徴収方法)) {
+            return false;
+        }
+        return !徴収方法.contains(特別徴収);
+    }
+
+    private boolean is特徴のみ(EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報) {
+        RString 徴収方法 = 編集後仮算定通知書共通情報.get更正後().get更正後徴収方法();
+        if (RString.isNullOrEmpty(徴収方法)) {
+            return false;
+        }
+        return !徴収方法.contains(普通徴収);
+    }
+
     private void setListKibetsu(int 行, KarisanteiHenkoTsuchishoA4TateItem item, List<Kitsuki> 特徴納期情報リスト,
             List<UniversalSignDeliveryInformation> 普徴納期情報リスト, EditedKariSanteiTsuchiShoKyotsu 通知書共通情報) {
 
@@ -203,33 +230,35 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
         if (更正後 == null) {
             更正後 = new EditedKariSanteiTsuchiShoKyotsuAfterCorrection();
         }
-
-        if (行 <= 2 && 特徴納期情報リスト != null && 特徴納期情報リスト.size() > 行) {
-            Kitsuki kitsuki = 特徴納期情報リスト.get(行);
-            item.setListKibetsu_6(kitsuki.get期());
-            item.setListKibetsu_7(kitsuki.get月().getコード());
-        } else {
-            item.setListKibetsu_6(RString.EMPTY);
-            item.setListKibetsu_7(RString.EMPTY);
+        if (!is普徴のみ(通知書共通情報)) {
+            if (行 <= 2 && 特徴納期情報リスト != null && 特徴納期情報リスト.size() > 行) {
+                Kitsuki kitsuki = 特徴納期情報リスト.get(行);
+                item.setListKibetsu_6(kitsuki.get期());
+                item.setListKibetsu_7(kitsuki.get月().getコード());
+            } else {
+                item.setListKibetsu_6(RString.EMPTY);
+                item.setListKibetsu_7(RString.EMPTY);
+            }
+            if (行 == 0) {
+                item.setListKibetsu_8(更正前.get更正前特徴期別金額01() != null
+                        ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額01(), 0) : RString.EMPTY);
+                item.setListKibetsu_9(更正後.get更正後特徴期別金額01() != null
+                        ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額01(), 0) : RString.EMPTY);
+            } else if (行 == 1) {
+                item.setListKibetsu_8(更正前.get更正前特徴期別金額02() != null
+                        ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額02(), 0) : RString.EMPTY);
+                item.setListKibetsu_9(更正後.get更正後特徴期別金額02() != null
+                        ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額02(), 0) : RString.EMPTY);
+            } else if (行 == 2) {
+                item.setListKibetsu_8(更正前.get更正前特徴期別金額03() != null
+                        ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額03(), 0) : RString.EMPTY);
+                item.setListKibetsu_9(更正後.get更正後特徴期別金額03() != null
+                        ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額03(), 0) : RString.EMPTY);
+            }
         }
-        if (行 == 0) {
-            item.setListKibetsu_8(更正前.get更正前特徴期別金額01() != null
-                    ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額01(), 0) : RString.EMPTY);
-            item.setListKibetsu_9(更正後.get更正後特徴期別金額01() != null
-                    ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額01(), 0) : RString.EMPTY);
-        } else if (行 == 1) {
-            item.setListKibetsu_8(更正前.get更正前特徴期別金額02() != null
-                    ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額02(), 0) : RString.EMPTY);
-            item.setListKibetsu_9(更正後.get更正後特徴期別金額02() != null
-                    ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額02(), 0) : RString.EMPTY);
-        } else if (行 == 2) {
-            item.setListKibetsu_8(更正前.get更正前特徴期別金額03() != null
-                    ? DecimalFormatter.toコンマ区切りRString(更正前.get更正前特徴期別金額03(), 0) : RString.EMPTY);
-            item.setListKibetsu_9(更正後.get更正後特徴期別金額03() != null
-                    ? DecimalFormatter.toコンマ区切りRString(更正後.get更正後特徴期別金額03(), 0) : RString.EMPTY);
+        if (!is特徴のみ(通知書共通情報)) {
+            set普徴(行, item, 普徴納期情報リスト, 更正前, 更正後);
         }
-
-        set普徴(行, item, 普徴納期情報リスト, 更正前, 更正後);
     }
 
     private void set普徴(int 行, KarisanteiHenkoTsuchishoA4TateItem item, List<UniversalSignDeliveryInformation> 普徴納期情報リスト,

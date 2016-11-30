@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.TorigaDataTempEntit
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdRiyoshaFutangengakuTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.UpdShiharaihohoHenkoTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

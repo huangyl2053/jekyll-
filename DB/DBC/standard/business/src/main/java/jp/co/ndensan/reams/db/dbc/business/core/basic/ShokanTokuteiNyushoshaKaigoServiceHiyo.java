@@ -24,7 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-9999-012 panhe
  */
-public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo>
+public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<
+        ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo>
         implements Serializable {
 
     private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity;

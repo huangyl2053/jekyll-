@@ -3,18 +3,18 @@
 <!-- @reamsid_L DBB-5722-030 xuhao -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.nendokirikae.INendoKirikaeMapper">
-    <select resultOrdered="true" id="select処理日付管理マスタ" 
+    <select resultOrdered="true" id="select処理日付管理マスタ"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nendokirikae.NendoKirikaeMybatisParameter"
-            resultMap = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" fetchSize="500">
+            resultMap = "jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE rgdb."DbT7022ShoriDateKanri"."nendo" = #{調定年度}
         AND   rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBB'
     </select>
-  
-    <select resultOrdered="true" id="select徴収方法Newest" 
+
+    <select resultOrdered="true" id="select徴収方法Newest"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nendokirikae.NendoKirikaeMybatisParameter"
             resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity" fetchSize="500">
         SELECT
@@ -25,8 +25,8 @@
         ON rgdb."DbV2001ChoshuHoho"."hihokenshaNo" = rgdb."DbV1001HihokenshaDaicho"."hihokenshaNo"
         WHERE rgdb."DbV2001ChoshuHoho"."fukaNendo" = #{調定年度}
     </select>
-    
-    <select resultOrdered="true" id="select業務コンフィグ" 
+
+    <select resultOrdered="true" id="select業務コンフィグ"
             resultMap="ResultMap_UzT0002CustomConfigEntity" fetchSize="500">
         SELECT *
         FROM
@@ -41,7 +41,7 @@
         <id property="lasdecCode" column="lasdecCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="optionKeyword" column="optionKeyword" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="effectiveDate" column="effectiveDate" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
-        <result property="insertDantaiCd" column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
+        <result property="insertDantaiCd" column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertReamsLoginId" column="insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertContextId" column="insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
         <result property="isDeleted" column="isDeleted" />
@@ -52,12 +52,12 @@
         <result property="changeLog" column="changeLog" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seq" column="seq" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BigSerialTypeHandler"/>
     </resultMap>
-    
-    <select resultOrdered="true" id="select処理日付管理マスタ更新" 
+
+    <select resultOrdered="true" id="select処理日付管理マスタ更新"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.nendokirikae.NendoKirikaeMybatisParameter"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" fetchSize="500">
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity" fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE rgdb."DbT7022ShoriDateKanri"."shoriName" = '年度切替'

@@ -406,6 +406,18 @@ public class ShokanServicePlan200904
     }
 
     /**
+     * 保持する償還払請求サービス計画200904をUnchanged対象とします。<br/>
+     * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であればUnchanged状態にします。
+     *
+     * @return 対象処理実施後の{@link ShokanServicePlan200904}
+     */
+    public ShokanServicePlan200904 noChanged() {
+        DbT3047ShokanServicePlan200904Entity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Unchanged);
+        return new ShokanServicePlan200904(modifiedEntity, id);
+    }
+
+    /**
      * 保持する償還払請求サービス計画200904を登録対象とします。<br/>
      * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
      *

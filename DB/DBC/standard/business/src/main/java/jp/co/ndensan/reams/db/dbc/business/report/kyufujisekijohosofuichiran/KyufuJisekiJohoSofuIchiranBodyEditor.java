@@ -142,9 +142,49 @@ public class KyufuJisekiJohoSofuIchiranBodyEditor implements IKyufuJisekiJohoSof
         if (被保険者一時.getShichosonCode() != null) {
             source.shichosonCode = 被保険者一時.getShichosonCode().value();
         }
+        setPageBreakEmpty(source);
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
                 ReportKomokuEditorUtil.get非空文字列(source.listUpper_5));
         return source;
+    }
+
+    private void setPageBreakEmpty(KyufuJisekiJohoSofuIchiranSource source) {
+        if (source.hokenshaNo == null) {
+            source.hokenshaNo = RString.EMPTY;
+        }
+        if (source.yubinNo == null) {
+            source.yubinNo = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.shimei50onKana == null) {
+            source.shimei50onKana = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.listUpper_5 == null) {
+            source.listUpper_5 = RString.EMPTY;
+        }
+        if (source.listUpper_7 == null) {
+            source.listUpper_7 = RString.EMPTY;
+        }
+        if (source.listUpper_9 == null) {
+            source.listUpper_9 = RString.EMPTY;
+        }
+        if (source.listUpper_2 == null) {
+            source.listUpper_2 = RString.EMPTY;
+        }
+        if (source.listUpper_10 == null) {
+            source.listUpper_10 = RString.EMPTY;
+        }
+        if (source.listUpper_8 == null) {
+            source.listUpper_8 = RString.EMPTY;
+        }
     }
 
     private void set入力識別名称と明細(

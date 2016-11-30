@@ -29,6 +29,8 @@ public class NenkinTokuchoIchiranCsvEditor {
     private static final RString HYPEN = new RString("-");
     private static final int INT_0 = 0;
     private static final int INT_3 = 3;
+    private static final RString 男 = new RString("1");
+    private static final RString 女 = new RString("2");
 
     /**
      * CSVレコードを取得します。
@@ -48,6 +50,10 @@ public class NenkinTokuchoIchiranCsvEditor {
         entity.set年金コード(tempEntity.getNenkinCode());
         entity.set年金名称(get年金名称(tempEntity.getNenkinCode()));
         entity.set生年月日(getDate32(tempEntity.getSeiNengappi()));
+        if (tempEntity.getSeibetsu() != null && !tempEntity.getSeibetsu().equals(男)
+                && !tempEntity.getSeibetsu().equals(女)) {
+            tempEntity.setSeibetsu(null);
+        }
         entity.set性別(Gender.toValue(tempEntity.getSeibetsu()).getCommonName());
         entity.setカナ氏名(tempEntity.getShimeiKana());
         entity.set漢字氏名(tempEntity.getShimeiKanji());

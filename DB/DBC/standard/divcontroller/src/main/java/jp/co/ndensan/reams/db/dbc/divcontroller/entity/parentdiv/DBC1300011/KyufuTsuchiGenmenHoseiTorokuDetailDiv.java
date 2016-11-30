@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyufuTsuchiGenmenHoseiTorokuDetailDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,16 +36,16 @@ public class KyufuTsuchiGenmenHoseiTorokuDetailDiv extends Panel {
     private TextBoxNum TextBoxNumHiyouGoukei;
     @JsonProperty("HorizontalLineSita")
     private HorizontalLine HorizontalLineSita;
-    @JsonProperty("ButtonYes")
-    private Button ButtonYes;
     @JsonProperty("ButtonBack")
     private Button ButtonBack;
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
-    @JsonProperty("ccdJigyoshaInput")
-    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaInput;
+    @JsonProperty("ButtonYes")
+    private Button ButtonYes;
     @JsonProperty("ccdServiceTypeInput")
     private ServiceTypeInputCommonChildDivDiv ccdServiceTypeInput;
+    @JsonProperty("ccdJigyoshaInput")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaInput;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("state")
     private RString state;
     @JsonProperty("hiddenInputDiv")
@@ -130,24 +130,6 @@ public class KyufuTsuchiGenmenHoseiTorokuDetailDiv extends Panel {
     }
 
     /*
-     * getButtonYes
-     * @return ButtonYes
-     */
-    @JsonProperty("ButtonYes")
-    public Button getButtonYes() {
-        return ButtonYes;
-    }
-
-    /*
-     * setButtonYes
-     * @param ButtonYes ButtonYes
-     */
-    @JsonProperty("ButtonYes")
-    public void setButtonYes(Button ButtonYes) {
-        this.ButtonYes = ButtonYes;
-    }
-
-    /*
      * getButtonBack
      * @return ButtonBack
      */
@@ -166,12 +148,30 @@ public class KyufuTsuchiGenmenHoseiTorokuDetailDiv extends Panel {
     }
 
     /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
+     * getButtonYes
+     * @return ButtonYes
      */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
+    @JsonProperty("ButtonYes")
+    public Button getButtonYes() {
+        return ButtonYes;
+    }
+
+    /*
+     * setButtonYes
+     * @param ButtonYes ButtonYes
+     */
+    @JsonProperty("ButtonYes")
+    public void setButtonYes(Button ButtonYes) {
+        this.ButtonYes = ButtonYes;
+    }
+
+    /*
+     * getccdServiceTypeInput
+     * @return ccdServiceTypeInput
+     */
+    @JsonProperty("ccdServiceTypeInput")
+    public IServiceTypeInputCommonChildDiv getCcdServiceTypeInput() {
+        return ccdServiceTypeInput;
     }
 
     /*
@@ -184,12 +184,12 @@ public class KyufuTsuchiGenmenHoseiTorokuDetailDiv extends Panel {
     }
 
     /*
-     * getccdServiceTypeInput
-     * @return ccdServiceTypeInput
+     * getccdHokenshaList
+     * @return ccdHokenshaList
      */
-    @JsonProperty("ccdServiceTypeInput")
-    public IServiceTypeInputCommonChildDiv getCcdServiceTypeInput() {
-        return ccdServiceTypeInput;
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     /*

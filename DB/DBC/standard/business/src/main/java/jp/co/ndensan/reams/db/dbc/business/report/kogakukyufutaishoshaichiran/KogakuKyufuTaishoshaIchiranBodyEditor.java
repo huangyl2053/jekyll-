@@ -58,8 +58,9 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
         source.listUpper_2 = RString.EMPTY;
         source.listUpper_3 = RString.EMPTY;
         source.listLower_1 = RString.EMPTY;
+        source.listUpper_1 = RString.EMPTY;
         if (!集計Flag) {
-            source.listUpper_1 = 対象者.getNo();
+            source.listUpper_1 = getNotNull(対象者.getNo());
             source.listUpper_4 = getColumnValue(対象者.get事業所番号());
             source.listUpper_5 = getColumnValue(対象者.getサービス種類コード());
             source.listUpper_6 = doカンマ編集(対象者.getサービス費用合計額());
@@ -93,6 +94,7 @@ public class KogakuKyufuTaishoshaIchiranBodyEditor implements IKogakuKyufuTaisho
         source.choikiCode = getNotNull(被保険者一時.get町域コード());
         source.gyoseikuCode = getNotNull(被保険者一時.get行政区コード());
         source.shimei50onKana = getNotNull(被保険者一時.get氏名50音カナ());
+        source.shichosonCode = getColumnValue(被保険者一時.get市町村コード());
         source.拡張情報 = new ExpandedInformation(DATA_3, 被保険者番号, source.listUpper_2);
         return source;
     }

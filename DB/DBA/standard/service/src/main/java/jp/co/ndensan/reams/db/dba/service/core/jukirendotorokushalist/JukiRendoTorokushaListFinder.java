@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dba.service.core.jukirendotorokushalist;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jukinentotoroku.DbT7022ShoriDateKanriBusiness;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.DBA140010.DBA140010_JukiRendoTorokushaListParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -55,8 +55,7 @@ public class JukiRendoTorokushaListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link JukiRendoTorokushaListFinder}のインスタンス
      */
     public static JukiRendoTorokushaListFinder createInstance() {
         return InstanceProvider.create(JukiRendoTorokushaListFinder.class);
@@ -69,7 +68,7 @@ public class JukiRendoTorokushaListFinder {
      */
     @Transaction
     public DbT7022ShoriDateKanriBusiness getKaishiShuryobi() {
-        DbT7022ShoriDateKanriEntity entity = dac.selectKaishiShuryoYMD(SubGyomuCode.DBA介護資格, 処理名);
+        DbT7022ShoriDateKanriEntity entity = dac.select処理日付管理BYサブ業務コードAND処理名(SubGyomuCode.DBA介護資格, 処理名);
         if (entity == null) {
             return null;
         }

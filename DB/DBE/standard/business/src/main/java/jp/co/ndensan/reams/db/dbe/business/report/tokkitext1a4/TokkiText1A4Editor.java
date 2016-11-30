@@ -81,6 +81,8 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         source.shinsaMM = entity.get審査日_月();
         source.shinsaDD = entity.get審査日_日();
         source.tokkiImg = entity.get特記事項イメージ();
+        source.gaikyotokkiText = entity.get概況調査特記事項();
+        source.gaikyotokkiImg = entity.get概況調査特記事項イメージ();
         if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
             RStringBuilder builder = new RStringBuilder();
             for (TokkiTextEntity tokkiTextEntity : entity.get特記事項リスト()) {

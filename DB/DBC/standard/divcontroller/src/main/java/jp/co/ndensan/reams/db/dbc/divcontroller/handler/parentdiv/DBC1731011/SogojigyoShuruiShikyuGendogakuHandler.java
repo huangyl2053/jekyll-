@@ -88,6 +88,7 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
         div.getDgShikyuGendogaku().setDataSource(dataSource);
         clear詳細内容();
         set詳細入力不可();
+        set入力前状態();
     }
 
     /**
@@ -208,9 +209,16 @@ public class SogojigyoShuruiShikyuGendogakuHandler {
         clear詳細内容();
         set詳細入力不可();
         div.getBtnTsuika().setDisabled(false);
+        boolean firstFlag = true;
         for (dgShikyuGendogaku_Row row : div.getDgShikyuGendogaku().getDataSource()) {
-            row.setModifyButtonState(DataGridButtonState.Enabled);
-            row.setDeleteButtonState(DataGridButtonState.Enabled);
+            if (firstFlag) {
+                row.setModifyButtonState(DataGridButtonState.Enabled);
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
+                firstFlag = false;
+            } else {
+                row.setModifyButtonState(DataGridButtonState.Disabled);
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+            }
         }
     }
 

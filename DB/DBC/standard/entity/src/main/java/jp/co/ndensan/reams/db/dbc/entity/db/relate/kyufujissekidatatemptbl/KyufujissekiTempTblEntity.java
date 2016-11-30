@@ -59,8 +59,5 @@ public class KyufujissekiTempTblEntity extends DbTableEntityBase<KyufujissekiTem
     @TempTableColumnOrder(16)
     private RString hokenryoDankai1;
     @TempTableColumnOrder(17)
-    private RString fukaNendo;
-    @TempTableColumnOrder(18)
-    private RString rank_num;
-
+    private RString taishofukaNendo;
 }

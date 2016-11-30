@@ -72,8 +72,10 @@ public class UpdKyufuJissekiChukanJigyoKogakuTmpProcess5_3 extends BatchProcessB
 
     @Override
     protected void afterExecute() {
-        beforeEntity.setKogakuKaigoServicehi(高額介護サービス費);
-        mapper.update給付実績中間事業高額一時(beforeEntity);
+        if (beforeEntity != null) {
+            beforeEntity.setKogakuKaigoServicehi(高額介護サービス費);
+            mapper.update給付実績中間事業高額一時(beforeEntity);
+        }
     }
 
     private RString getキー(TempKyufujissekiTyukannJigyoEntity entity) {

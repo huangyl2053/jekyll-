@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc020080;
 
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc020080.DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * バッチ設計_DBCMNN1001_事業高額合算・事業分自己負担額計算（括）のマッパインタフェースクラスです。
@@ -18,9 +18,9 @@ public interface IJigyobunKogakuGassanJikofutangakuKeisanMapper {
     /**
      * get処理日付管理のメソッドです。
      *
-     * @param parameter DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter
+     * @param parameter DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter
      * @return <@link DbT7022ShoriDateKanriEntity>
      */
-    public DbT7022ShoriDateKanriEntity select処理日付管理(DBC020080_JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter parameter);
+    DbT7022ShoriDateKanriEntity select処理日付管理(DBC020080JigyobunKogakuGassanJikofutangakuKeisanMybatisParameter parameter);
 
 }

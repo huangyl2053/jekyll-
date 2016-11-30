@@ -11,13 +11,11 @@
         "UeT0511NenkinTokuchoKaifuJoho"
     </sql>
 
-    <select resultOrdered="true" id="select" 
-            resultMap="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    <sql id="select">
         SELECT
-        <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        *
         FROM
-        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         <where>
             "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
@@ -33,14 +31,12 @@
                 </otherwise>
             </choose>
         </where>
-    </select>
-    <select resultOrdered="true" id="selectApr" 
-            resultMap="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    </sql>
+    <sql id="selectApr">
         SELECT
-        <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        *
         FROM
-        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         <where>
             "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
@@ -65,14 +61,12 @@
             AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
-    </select>
-    <select resultOrdered="true" id="selectJun" 
-            resultMap="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    </sql>
+    <sql id="selectJun">
         SELECT
-        <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        *
         FROM
-        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         <where>
             "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
@@ -102,14 +96,12 @@
             AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
-    </select>
-    <select resultOrdered="true" id="selectAug" 
-            resultMap="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    </sql>
+    <sql id="selectAug">
         SELECT
-        <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        *
         FROM
-        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         <where>
             "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND((
@@ -148,28 +140,24 @@
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriKyoNendo}
             ))
         </where>
-    </select>
-    <select resultOrdered="true" id="selectOct" 
-            resultMap="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    </sql>
+    <sql id="selectOct">
         SELECT
-        <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        *
         FROM
-        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         <where>
             "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
                 AND   "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" = '00'
                 AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
         </where>
-    </select>
-    <select resultOrdered="true" id="selectDec" 
-            resultMap="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    </sql>
+    <sql id="selectDec">
         SELECT
-        <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        *
         FROM
-        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         <where>
             "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
@@ -183,14 +171,12 @@
             AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
-    </select>
-    <select resultOrdered="true" id="selectFeb" 
-            resultMap="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchotaishoshaichiransakusei.TokuchoSeidokanIFSakuseiMyBatisParameter" fetchSize="500">
+    </sql>
+    <sql id="selectFeb">
         SELECT
-        <include refid="jp.co.ndensan.reams.ue.uex.persistence.db.mapper.basic.IUeT0511NenkinTokuchoKaifuJohoMapper.allColumns_UeT0511NenkinTokuchoKaifuJoho" />
+        *
         FROM
-        <include refid="table_UeT0511NenkinTokuchoKaifuJoho" /> AS <include refid="as_UeT0511NenkinTokuchoKaifuJoho" />
+        rgdb."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
         <where>
             "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
             AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" = #{shoriNendo}
@@ -210,5 +196,5 @@
             AND "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki" = '04'
             ))
         </where>
-    </select>    
+    </sql>    
 </mapper>

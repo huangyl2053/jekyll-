@@ -372,8 +372,8 @@ public class KoseiTaishoKyuhuzissekiItiranhyoShuturyokuProcess extends BatchKeyB
             合計CSVEntity.set自己負担額差額(entity.get自己負担額差額());
             合計CSVEntity.set高額サービス費用額(entity.get高額サービス費用額());
         } else {
-            合計CSVEntity.set自己負担額差額(合計CSVEntity.get自己負担額差額().add(entity.get自己負担額差額()));
-            合計CSVEntity.set高額サービス費用額(合計CSVEntity.get高額サービス費用額().add(entity.get高額サービス費用額()));
+            合計CSVEntity.set自己負担額差額(set合計金額(合計CSVEntity.get自己負担額差額(), entity.get自己負担額差額()));
+            合計CSVEntity.set高額サービス費用額(set合計金額(合計CSVEntity.get高額サービス費用額(), entity.get高額サービス費用額()));
         }
     }
 

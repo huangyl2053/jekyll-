@@ -192,14 +192,14 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
             納入通知書制御情報.set差額令書発行指示(差額令書発行指示設定値);
         }
         if (当初出力_中期開始期.equals(項目名)) {
-            納入通知書制御情報.set当初出力_中期開始期((null == 設定値 || RString.EMPTY.equals(設定値))
+            納入通知書制御情報.set当初出力_中期開始期(RString.isNullOrEmpty(設定値)
                     ? 0 : Integer.parseInt(設定値.toString()));
-            納入通知書制御情報.setExists中期開始期(!(null == 設定値 || RString.EMPTY.equals(設定値)));
+            納入通知書制御情報.setExists中期開始期(!RString.isNullOrEmpty(設定値));
         }
         if (当初出力_後期開始期.equals(項目名)) {
-            納入通知書制御情報.set当初出力_後期開始期((null == 設定値 || RString.EMPTY.equals(設定値))
+            納入通知書制御情報.set当初出力_後期開始期(RString.isNullOrEmpty(設定値)
                     ? 0 : Integer.parseInt(設定値.toString()));
-            納入通知書制御情報.setExists後期開始期(!(null == 設定値 || RString.EMPTY.equals(設定値)));
+            納入通知書制御情報.setExists後期開始期(!RString.isNullOrEmpty(設定値));
         }
         if (当初出力_出力方法.equals(項目名)) {
             ToshoShutsuryokuHoho 当初出力_出力方法設定値 = RSTRING_0.equals(設定値)

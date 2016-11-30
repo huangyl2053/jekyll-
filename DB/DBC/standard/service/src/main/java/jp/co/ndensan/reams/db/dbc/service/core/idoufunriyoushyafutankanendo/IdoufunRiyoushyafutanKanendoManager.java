@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.service.core.idoufunriyoushyafutankanendo;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoufunriyoushyafutankanendo.IIdoufunRiyoushyafutanKanendoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

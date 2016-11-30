@@ -44,7 +44,7 @@ public class ShikakuKikan {
             throw new IllegalArgumentException(UrErrorMessages.期間が不正.toString());
         }
         ShikakuKikanJoho 資格期間 = new ShikakuKikanJoho();
-        if (資格喪失日 != null && 資格取得日.getMonthValue() == 資格喪失日.getMonthValue()) {
+        if (資格喪失日 != null && !資格喪失日.isEmpty() && 資格取得日.getMonthValue() == 資格喪失日.getMonthValue()) {
             set資格期間(資格期間);
         } else {
             set資格期間開始日(資格取得日, 賦課年度初日, 資格期間);

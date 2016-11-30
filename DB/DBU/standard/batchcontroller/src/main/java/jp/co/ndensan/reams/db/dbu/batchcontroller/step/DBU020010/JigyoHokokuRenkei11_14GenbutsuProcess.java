@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei11or14Record4EucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiFooterEucCsvEntity;
 import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkeiHeadEucCsvEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -1070,19 +1068,5 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
         }
         FlexibleDate flexibleDate = new FlexibleDate(年月日);
         return flexibleDate.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-    }
-
-    private RString get旧保険者番号(HokenshaNo date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.value();
-    }
-
-    private RString get証記載保険者番号(ShoKisaiHokenshaNo date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.value();
     }
 }

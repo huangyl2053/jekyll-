@@ -227,6 +227,13 @@
         A.電話番号,
         A.郵便番号,
         A.住所,
+        A."サービス種類コード",
+        A."事業者郵便番号",
+        A."事業者住所",
+        A."事業者電話番号",
+        A."管理者名",
+        A."事業者変更年月日",
+        A."事業者変更事由",
         A.居宅総合事業区分 
         FROM(
         SELECT
@@ -248,7 +255,14 @@
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaTelNo"      AS 電話番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaYubinNo"      AS 郵便番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaJusho"      AS 住所
-        , '' AS 居宅総合事業区分 
+        , "DbT3006KyotakuKeikakuJigyoshaSakusei"."serviceShuruiCode" AS "サービス種類コード"
+        , jgs."yubinNo" AS "事業者郵便番号"
+        , jgs."jigyoshaAddress" AS "事業者住所"
+        , jgs."telNo" AS "事業者電話番号"
+        , jgs."atesakininName" AS "管理者名"
+        , "DbT3006KyotakuKeikakuJigyoshaSakusei"."jigyoshaHenkoYMD" AS "事業者変更年月日"
+        , "DbT3006KyotakuKeikakuJigyoshaSakusei"."jigyoshaHenkoJiyu" AS "事業者変更事由"
+        , '' AS 居宅総合事業区分  
         , row_number() OVER (PARTITION BY         
         rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo",   
         rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"
@@ -263,13 +277,25 @@
         AND rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM"     = rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"
         AND rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."rirekiNo"     = rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo"  
         INNER JOIN          
-        rgdb."DbT7060KaigoJigyosha" AS jgs         
-        ON         
-        jgs."jigyoshaNo"     = rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."keikakuJigyoshaNo"  
-        INNER JOIN          
+        rgdb."DbT7060KaigoJigyosha" AS jgs
+        ON  jgs."jigyoshaNo"     = rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."keikakuJigyoshaNo"  
+        AND jgs."yukoKaishiYMD" <![CDATA[<=]]> ("DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM" || '01')
+        AND (
+             TO_CHAR(TO_DATE("DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM", 'YYYYMM') + INTERVAL '1 month' - INTERVAL '1 day', 'YYYYMMDD')
+              <![CDATA[ <=]]> jgs."yukoShuryoYMD"
+             OR jgs."yukoShuryoYMD" IS NULL
+             OR jgs."yukoShuryoYMD" = ''
+          )
+        LEFT OUTER JOIN
         rgdb."DbT7060KaigoJigyosha" AS itkjgs         
-        ON         
-        itkjgs."jigyoshaNo"     = rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."itakusakiJigyoshaNo"  
+        ON  itkjgs."jigyoshaNo"     = rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."itakusakiJigyoshaNo"
+        AND itkjgs."yukoKaishiYMD" <![CDATA[<=]]> ("DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM" || '01')
+        AND (
+             TO_CHAR(TO_DATE("DbT3006KyotakuKeikakuJigyoshaSakusei"."taishoYM", 'YYYYMM') + INTERVAL '1 month' - INTERVAL '1 day', 'YYYYMMDD')
+              <![CDATA[ <=]]> itkjgs."yukoShuryoYMD"
+             OR itkjgs."yukoShuryoYMD" IS NULL
+             OR itkjgs."yukoShuryoYMD" = ''
+          )  
         WHERE          
         rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo" = #{被保険者番号}
         UNION          
@@ -292,6 +318,13 @@
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaTelNo"      AS 電話番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaYubinNo"      AS 郵便番号
         , rgdb."DbT3005KyotakuKeikakuTodokede"."todokedeshaJusho"      AS 住所
+        , '' AS "サービス種類コード"
+        , '' AS "事業者郵便番号"
+        , '' AS "事業者住所"
+        , '' AS "事業者電話番号"
+        , '' AS "管理者名"
+        , '' AS "事業者変更年月日"
+        , '' AS "事業者変更事由"
         , rgdb."DbT3007KyotakuKeikakuJikoSakusei"."kyotaku_SogoJigyoKubun" AS 居宅総合事業区分  
         , row_number() OVER (PARTITION BY         
         rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo",        
@@ -302,7 +335,7 @@
         rgdb."DbT3005KyotakuKeikakuTodokede"         
         INNER JOIN          
         rgdb."DbT3007KyotakuKeikakuJikoSakusei"         
-        ON         
+        ON
         rgdb."DbT3007KyotakuKeikakuJikoSakusei"."hihokenshaNo" = rgdb."DbT3005KyotakuKeikakuTodokede"."hihokenshaNo"  
         AND rgdb."DbT3007KyotakuKeikakuJikoSakusei"."taishoYM"  = rgdb."DbT3005KyotakuKeikakuTodokede"."taishoYM"  
         AND rgdb."DbT3007KyotakuKeikakuJikoSakusei"."rirekiNo"  = rgdb."DbT3005KyotakuKeikakuTodokede"."rirekiNo"  
@@ -316,7 +349,7 @@
     </select>
     <resultMap id="resultMap_KyotakuServiceRirekiIchiranEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujikosakusei.KyotakuServiceRirekiIchiranEntity">
-        <result property="対象年月" column="対象年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property = "対象年月" column="対象年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="作成区分コード" column="作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
         <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="事業者名" column="事業者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -328,8 +361,20 @@
         <result property="更新日" column="更新日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="最大履歴番号" column="最大履歴番号"/>
         <result property="届出区分" column="届出区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="氏名"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="カナ" column="カナ"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="関係区分" column="関係区分"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="電話番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス種類コード" column="サービス種類コード"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="事業者郵便番号" column="事業者郵便番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="事業者住所" column="事業者住所"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="事業者電話番号" column="事業者電話番号"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="管理者名" column="管理者名"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="事業者変更年月日" column="事業者変更年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="事業者変更事由" column="事業者変更事由"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="居宅総合事業区分" column="居宅総合事業区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-
     </resultMap>
     
     <select id="get対象情報一覧"

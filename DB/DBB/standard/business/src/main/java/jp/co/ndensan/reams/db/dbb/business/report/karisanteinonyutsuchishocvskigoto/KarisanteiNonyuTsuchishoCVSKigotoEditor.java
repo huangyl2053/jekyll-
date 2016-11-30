@@ -86,13 +86,11 @@ public class KarisanteiNonyuTsuchishoCVSKigotoEditor implements IKarisanteiNonyu
             source.gimushaShimei = 納付書共通.get被代納人氏名();
         }
         source.kibetsu = 納入通知書期情報.get期表記();
-        //TODO 納入通知書期情報.納付額表記 空白
         source.gokeigaku = 納入通知書期情報.get納付額表記();
         source.shunoKikanBango = 納入通知書期情報.get収納機関番号表示用();
         source.nofuBango = 納入通知書期情報.get納付番号();
         source.kakuninBango = 納入通知書期情報.get確認番号();
         source.nofuKubun = 納入通知書期情報.get納付区分();
-        //TODO 本状の納期限 納期限
         source.nokigenTitle = new RString("本状の納期限");
         source.ocrId = 納入通知書期情報.getOcrid();
         source.nokigenYmd = 納入通知書期情報.get納期限表記();

@@ -95,6 +95,7 @@ public class JukyushaIdoRenrakuhyoHenkoMainPanelHandler {
      * タイトルを戻る
      *
      * @param menuID メニューID
+     * @return RString
      */
     public RString getTitle(RString menuID) {
         if (受給者異動_訂正連絡票発行.equals(menuID)) {

@@ -57,8 +57,6 @@
             (SELECT * FROM rgdb."DbV2512KaigoShotokuNewest" WHERE "shotokuNendo"=#{対象年度}) AS "DbV2512KaigoShotokuNewest"
         ON 
             "DbT1001HihokenshaDaicho"."shikibetsuCode"= "DbV2512KaigoShotokuNewest"."shikibetsuCode"
-        ORDER BY 
-            "DbT4001JukyushaDaicho"."hihokenshaNo"
         )
         SELECT 
             master.*,
@@ -78,7 +76,8 @@
             ) AS "ShikibetsuTaisho"
         ON
             "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"     
-   
+        ORDER BY 
+            "dbT4001JukyushaDaicho_hihokenshaNo"    
     </sql>
     
     <select resultOrdered="true" id="select総合事業対象者異動"
@@ -135,8 +134,6 @@
             (SELECT * FROM rgdb."DbV2512KaigoShotokuNewest" WHERE "shotokuNendo"=#{対象年度}) AS "DbV2512KaigoShotokuNewest"
          ON 
             "DbT1001HihokenshaDaicho"."shikibetsuCode"= "DbV2512KaigoShotokuNewest"."shikibetsuCode"
-         ORDER BY 
-            "DbT4001JukyushaDaicho"."hihokenshaNo"
          )
         SELECT 
             master.*,
@@ -156,6 +153,8 @@
             ) AS "ShikibetsuTaisho"
         ON
             "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"   
+        ORDER BY 
+            "dbT4001JukyushaDaicho_hihokenshaNo"       
     </sql>
     
     
@@ -209,8 +208,6 @@
             (SELECT * FROM rgdb."DbV2512KaigoShotokuNewest" WHERE "shotokuNendo"=#{対象年度}) AS "DbV2512KaigoShotokuNewest"
          ON 
             "DbT1001HihokenshaDaicho"."shikibetsuCode"= "DbV2512KaigoShotokuNewest"."shikibetsuCode"
-         ORDER BY 
-            "DbT4001JukyushaDaicho"."hihokenshaNo"
          )
         SELECT 
             master.*,
@@ -230,6 +227,8 @@
             ) AS "ShikibetsuTaisho"
         ON
             "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"    
+        ORDER BY 
+            "dbT4001JukyushaDaicho_hihokenshaNo"       
     </sql>
     
     
@@ -285,8 +284,6 @@
             ) AS "DbT3105SogoJigyoTaishosha"
          ON   
             "DbT1001HihokenshaDaicho"."hihokenshaNo" =  "DbT3105SogoJigyoTaishosha"."hihokenshaNo"
-         ORDER BY 
-            "DbT4001JukyushaDaicho"."hihokenshaNo"
         )
         SELECT 
             master.*,
@@ -306,6 +303,8 @@
             ) AS "ShikibetsuTaisho"
         ON
             "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"   
+        ORDER BY 
+            "dbT4001JukyushaDaicho_hihokenshaNo"       
     </sql>
     
      <select resultOrdered="true" id="select宛名識別対象異動"
@@ -422,8 +421,6 @@
             (SELECT * FROM rgdb."DbV2512KaigoShotokuNewest" WHERE "shotokuNendo"=#{対象年度}) AS "DbV2512KaigoShotokuNewest"
          ON 
             "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode"= "DbV2512KaigoShotokuNewest"."shikibetsuCode"
-         ORDER BY 
-            "DbT4001JukyushaDaicho"."hihokenshaNo"
         )
         SELECT 
             master.*,
@@ -443,6 +440,8 @@
             ) AS "ShikibetsuTaisho"
         ON
             "master"."dbT1001HihokenshaDaicho_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"               
+        ORDER BY 
+            "dbT4001JukyushaDaicho_hihokenshaNo"       
     </sql>
     
     <resultMap id="resultMap_IdoData" autoMapping="true"

@@ -140,7 +140,19 @@ public enum KogakuGassanShikyuShinseiTorokuValidationMessage implements IValidat
     /**
      * 医療支給申請書整理番号入力桁不足
      */
-    医療支給申請書整理番号入力桁不足(UrErrorMessages.入力値が不正_追加メッセージあり, "入力桁不足");
+    医療支給申請書整理番号入力桁不足(UrErrorMessages.入力値が不正_追加メッセージあり, "入力桁不足"),
+    /**
+     * 所得区分必須項目
+     */
+    所得区分必須項目(UrErrorMessages.必須項目),
+    /**
+     * 加入期間必須項目
+     */
+    加入期間必須項目(UrErrorMessages.必須項目),
+    /**
+     * 備考文字種
+     */
+    備考文字種(UrErrorMessages.使用不可文字);
 
     private final Message message;
 
@@ -156,5 +168,9 @@ public enum KogakuGassanShikyuShinseiTorokuValidationMessage implements IValidat
 
     private KogakuGassanShikyuShinseiTorokuValidationMessage(IMessageGettable message, String... replacements) {
         this.message = message.getMessage().replace(replacements);
+    }
+
+    private KogakuGassanShikyuShinseiTorokuValidationMessage(IMessageGettable message) {
+        this.message = message.getMessage();
     }
 }

@@ -53,6 +53,9 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranPageBreak extends PageBreaker<
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.識別コード.getフォームフィールド名())
                 && !currentSource.getSource().shikibetsuCode.equals(nextSource.getSource().shikibetsuCode)) {
             flag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.氏名５０音カナ.getフォームフィールド名())
+                && !currentSource.getSource().kanaMeisho.equals(nextSource.getSource().kanaMeisho)) {
+            flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.生年月日.getフォームフィールド名())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
             flag = true;
@@ -69,13 +72,19 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranPageBreak extends PageBreaker<
             ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> nextSource) {
         boolean breakFlag = false;
         if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.市町村コード.getフォームフィールド名())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             breakFlag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.通知書番号.getフォームフィールド名())
                 && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
             breakFlag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.被保険者番号.getフォームフィールド名())
                 && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
+            breakFlag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.徴収方法.getフォームフィールド名())
+                && !currentSource.getSource().choshuHoho.equals(nextSource.getSource().choshuHoho)) {
+            breakFlag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.特徴開始月.getフォームフィールド名())
+                && !currentSource.getSource().tokuchoKaisiTuki.equals(nextSource.getSource().tokuchoKaisiTuki)) {
             breakFlag = true;
         }
         return breakFlag;

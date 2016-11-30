@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011003;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoKarisanteiPageBreak;
+import jp.co.ndensan.reams.db.dbb.business.report.karisantei.KarisanteigakuTsuchishoPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5RenchoReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariB5Report;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateReport;
@@ -227,7 +227,7 @@ public class PrintTsuchishoProcess extends BatchProcessBase<TsuchishoDataTempEnt
     protected void createWriter() {
         initialize特徴開始通知書();
         通知書発行後異動者tableWriter = new BatchPermanentTableWriter(DbT2017TsuchishoHakkogoIdoshaEntity.class);
-        PageBreaker<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> breaker = new TokuchoKaishiTsuchishoKarisanteiPageBreak(breakKeyList);
+        PageBreaker<TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource> breaker = new KarisanteigakuTsuchishoPageBreak(breakKeyList);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200001.getReportId().value())
                 .addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);

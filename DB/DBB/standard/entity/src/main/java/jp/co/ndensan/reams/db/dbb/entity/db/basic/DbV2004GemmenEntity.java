@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV2004Gemmen");
 
@@ -49,7 +50,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,7 +59,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -67,7 +68,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -76,17 +77,16 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -95,7 +95,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * choteiNendoのgetメソッドです。
-     * 
+     *
      * @return choteiNendo
      */
     @CheckForNull
@@ -105,7 +105,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * choteiNendoのsetメソッドです。
-     * 
+     *
      * @param choteiNendo choteiNendo
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -114,7 +114,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * fukaNendoのgetメソッドです。
-     * 
+     *
      * @return fukaNendo
      */
     @CheckForNull
@@ -124,7 +124,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * fukaNendoのsetメソッドです。
-     * 
+     *
      * @param fukaNendo fukaNendo
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -133,7 +133,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * tsuchishoNoのgetメソッドです。
-     * 
+     *
      * @return tsuchishoNo
      */
     @CheckForNull
@@ -143,7 +143,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * tsuchishoNoのsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo tsuchishoNo
      */
     public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
@@ -152,7 +152,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -162,7 +162,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -171,7 +171,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * shinseiYMDのgetメソッドです。
-     * 
+     *
      * @return shinseiYMD
      */
     @CheckForNull
@@ -181,7 +181,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * shinseiYMDのsetメソッドです。
-     * 
+     *
      * @param shinseiYMD shinseiYMD
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -190,7 +190,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * ketteiYMDのgetメソッドです。
-     * 
+     *
      * @return ketteiYMD
      */
     @CheckForNull
@@ -200,7 +200,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * ketteiYMDのsetメソッドです。
-     * 
+     *
      * @param ketteiYMD ketteiYMD
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -209,7 +209,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * torikeshiYMDのgetメソッドです。
-     * 
+     *
      * @return torikeshiYMD
      */
     @CheckForNull
@@ -219,7 +219,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * torikeshiYMDのsetメソッドです。
-     * 
+     *
      * @param torikeshiYMD torikeshiYMD
      */
     public void setTorikeshiYMD(FlexibleDate torikeshiYMD) {
@@ -228,7 +228,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * jotaiKubunのgetメソッドです。
-     * 
+     *
      * @return jotaiKubun
      */
     @CheckForNull
@@ -238,7 +238,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * jotaiKubunのsetメソッドです。
-     * 
+     *
      * @param jotaiKubun jotaiKubun
      */
     public void setJotaiKubun(RString jotaiKubun) {
@@ -247,7 +247,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * sakuseiKubunのgetメソッドです。
-     * 
+     *
      * @return sakuseiKubun
      */
     @CheckForNull
@@ -257,7 +257,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * sakuseiKubunのsetメソッドです。
-     * 
+     *
      * @param sakuseiKubun sakuseiKubun
      */
     public void setSakuseiKubun(RString sakuseiKubun) {
@@ -266,7 +266,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * shinseiJiyuのgetメソッドです。
-     * 
+     *
      * @return shinseiJiyu
      */
     @CheckForNull
@@ -276,7 +276,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * shinseiJiyuのsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu shinseiJiyu
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -285,7 +285,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return gemmenJiyuCode
      */
     @CheckForNull
@@ -295,7 +295,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param gemmenJiyuCode gemmenJiyuCode
      */
     public void setGemmenJiyuCode(Code gemmenJiyuCode) {
@@ -304,7 +304,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenJiyuのgetメソッドです。
-     * 
+     *
      * @return gemmenJiyu
      */
     @CheckForNull
@@ -314,7 +314,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenJiyuのsetメソッドです。
-     * 
+     *
      * @param gemmenJiyu gemmenJiyu
      */
     public void setGemmenJiyu(RString gemmenJiyu) {
@@ -323,7 +323,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenTorikeshiJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return gemmenTorikeshiJiyuCode
      */
     @CheckForNull
@@ -333,7 +333,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenTorikeshiJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param gemmenTorikeshiJiyuCode gemmenTorikeshiJiyuCode
      */
     public void setGemmenTorikeshiJiyuCode(Code gemmenTorikeshiJiyuCode) {
@@ -342,7 +342,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenTorikeshiJiyuのgetメソッドです。
-     * 
+     *
      * @return gemmenTorikeshiJiyu
      */
     @CheckForNull
@@ -352,7 +352,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * gemmenTorikeshiJiyuのsetメソッドです。
-     * 
+     *
      * @param gemmenTorikeshiJiyu gemmenTorikeshiJiyu
      */
     public void setGemmenTorikeshiJiyu(RString gemmenTorikeshiJiyu) {
@@ -361,7 +361,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * shinseiGemmenGakuのgetメソッドです。
-     * 
+     *
      * @return shinseiGemmenGaku
      */
     @CheckForNull
@@ -371,7 +371,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * shinseiGemmenGakuのsetメソッドです。
-     * 
+     *
      * @param shinseiGemmenGaku shinseiGemmenGaku
      */
     public void setShinseiGemmenGaku(Decimal shinseiGemmenGaku) {
@@ -380,7 +380,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * ketteiGemmenGakuのgetメソッドです。
-     * 
+     *
      * @return ketteiGemmenGaku
      */
     @CheckForNull
@@ -390,7 +390,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * ketteiGemmenGakuのsetメソッドです。
-     * 
+     *
      * @param ketteiGemmenGaku ketteiGemmenGaku
      */
     public void setKetteiGemmenGaku(Decimal ketteiGemmenGaku) {
@@ -399,7 +399,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * torikeshiGemmenGakuのgetメソッドです。
-     * 
+     *
      * @return torikeshiGemmenGaku
      */
     @CheckForNull
@@ -409,7 +409,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * torikeshiGemmenGakuのsetメソッドです。
-     * 
+     *
      * @param torikeshiGemmenGaku torikeshiGemmenGaku
      */
     public void setTorikeshiGemmenGaku(Decimal torikeshiGemmenGaku) {
@@ -418,9 +418,9 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * このエンティティの主キーが他の{@literal DbV2004GemmenEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV2004GemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -457,6 +457,7 @@ public class DbV2004GemmenEntity extends DbTableEntityBase<DbV2004GemmenEntity> 
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

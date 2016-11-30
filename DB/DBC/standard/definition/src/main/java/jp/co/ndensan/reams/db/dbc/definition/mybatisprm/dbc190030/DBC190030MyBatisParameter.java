@@ -40,6 +40,7 @@ public class DBC190030MyBatisParameter implements IMyBatisParameter {
     private LasdecCode 市町村コード;
     private RString 市町村名;
     private RString 出力順;
+    private boolean 被保険者番号flag;
 
     /**
      * DBC180020ProcessParameterのコンストラクタです。
@@ -66,6 +67,7 @@ public class DBC190030MyBatisParameter implements IMyBatisParameter {
      * @param 帳票出力順ID Long
      * @param 市町村コード LasdecCode
      * @param 市町村名 RString
+     * @param 被保険者番号flag boolean
      */
     public DBC190030MyBatisParameter(RString 抽出条件,
             RString 抽出対象,
@@ -81,7 +83,8 @@ public class DBC190030MyBatisParameter implements IMyBatisParameter {
             RString 文書番号,
             Long 帳票出力順ID,
             LasdecCode 市町村コード,
-            RString 市町村名) {
+            RString 市町村名,
+            boolean 被保険者番号flag) {
         this.抽出条件 = 抽出条件;
         this.抽出対象 = 抽出対象;
         this.処理年度 = 処理年度;
@@ -97,6 +100,7 @@ public class DBC190030MyBatisParameter implements IMyBatisParameter {
         this.帳票出力順ID = 帳票出力順ID;
         this.市町村コード = 市町村コード;
         this.市町村名 = 市町村名;
+        this.被保険者番号flag = 被保険者番号flag;
     }
 
 }

@@ -361,7 +361,7 @@
         抽出対象  AS  抽出対象
         INNER JOIN
         rgdb."DbT3001JukyushaIdoRenrakuhyo"  AS  受給者異動送付
-        ON  受給者異動送付."sofuYM"  =  抽出対象.送付年月
+        ON  受給者異動送付."idoYMD"  =  抽出対象.異動年月日
         AND  受給者異動送付."hiHokenshaNo"  =  抽出対象.被保険者番号
         AND  受給者異動送付."rirekiNo"  =  抽出対象.履歴番号
         INNER JOIN

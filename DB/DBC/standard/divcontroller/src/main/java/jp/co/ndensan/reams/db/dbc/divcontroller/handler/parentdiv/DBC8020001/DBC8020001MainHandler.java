@@ -177,10 +177,10 @@ public class DBC8020001MainHandler {
         div.getRadSiharaihohou().setDataSource(list6);
 
         if (null != dbc) {
-            if (null != dbc.getEntity().getTaishoKaishiYMD()) {
+            if (null != dbc.getEntity().getTaishoKaishiYMD() && !dbc.getEntity().getTaishoKaishiYMD().isEmpty()) {
                 div.getTxtZenkaiTaishoYmdRange().setFromValue(new RDate(dbc.getEntity().getTaishoKaishiYMD().toString()));
             }
-            if (null != dbc.getEntity().getTaishoShuryoYMD()) {
+            if (null != dbc.getEntity().getTaishoShuryoYMD() && !dbc.getEntity().getTaishoShuryoYMD().isEmpty()) {
                 div.getTxtZenkaiTaishoYmdRange().setToValue(new RDate(dbc.getEntity().getTaishoShuryoYMD().toString()));
             }
         }

@@ -283,10 +283,7 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
                     }
                     meisaiTempentity.set履歴番号(履歴番号);
                     meisaiTempentity.set連番(連番);
-                    if (listMeisaiCsvEntity.get(j).get事業所番号() != null
-                            && !listMeisaiCsvEntity.get(j).get事業所番号().isEmpty()) {
-                        meisaiTempentity.set事業所番号(new JigyoshaNo(listMeisaiCsvEntity.get(j).get事業所番号()));
-                    }
+                    meisaiTempentity.set事業所番号(new JigyoshaNo(listMeisaiCsvEntity.get(j).get事業所番号()));
                     if (listMeisaiCsvEntity.get(j).get事業所名() != null
                             && !listMeisaiCsvEntity.get(j).get事業所名().isEmpty()) {
                         meisaiTempentity.set事業所名(listMeisaiCsvEntity.get(j).get事業所名());
@@ -440,7 +437,7 @@ public class SaishinsaKetteiHokenshaInCsvFileRead {
                     List<RString> data = csvReader.readLine();
                     if (data != null && !data.isEmpty()) {
                         if (エンドレコード種別.equals(data.get(INDEX_0))) {
-                            continue;
+                            break;
                         }
                         if (レコード種別.equals(data.get(INDEX_0))) {
                             controlCsvEntity = ListToObjectMappingHelper.toObject(KagoKetteiHokenshaInControlCsvEntity.class, data);

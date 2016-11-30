@@ -512,7 +512,7 @@
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
-        INNER JOIN 
+        LEFT JOIN 
         rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
         ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
         AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -1065,7 +1065,7 @@
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON koza."uaT0310Koza_shikibetsuCode" = 計算後情報."shikibetsuCode"
-        INNER JOIN 
+        LEFT JOIN 
         rgdb."UeT0511NenkinTokuchoKaifuJoho" as 年金特徴回付情報
         ON 計算後情報."honNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
         AND 計算後情報."honNenkinCode" = 年金特徴回付情報."nenkinCode"
@@ -1139,6 +1139,7 @@
     <resultMap id="resultMap_KaigoFukaZenengoTemp" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokaritsuchishoikkatsuhakko.KaigoFukaZenedoTempEntity" autoMapping="true">
         <id column="ueT0511after_shoriTaishoYM"/>
         <id column="ueT0511after_renban"/>
+        <id column="dbT2002Fuka_tsuchishoNo"/>
         <association property="介護賦課前年度" resultMap="resultMap_FukaInfo"/>
         <association property="異動賦課情報一時テーブル" resultMap="resultMap_異動賦課情報一時テーブル"/>
     </resultMap>

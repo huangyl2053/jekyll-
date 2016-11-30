@@ -114,7 +114,7 @@ public class CrtIchiranhyoProcess extends BatchKeyBreakBase<TokuchoKariKeisangoF
         前年度保険料 = Decimal.ZERO;
         並び順List = new ArrayList<>();
         改頁List = new ArrayList<>();
-        連番 = INT_1;
+        連番 = INT_0;
         連番_CSV = INT_1;
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -165,6 +165,7 @@ public class CrtIchiranhyoProcess extends BatchKeyBreakBase<TokuchoKariKeisangoF
 
     @Override
     protected void usualProcess(TokuchoKariKeisangoFukaEntity entity) {
+        連番 = 連番 + 1;
         set住所編集(entity);
         TokubetsuChoshuKarisanteiKekkaIchiranReport 一覧表report = new TokubetsuChoshuKarisanteiKekkaIchiranReport(市町村コード, 市町村名称,
                 entity, processParameter.get調定年度(), processParameter.get調定日時(), 並び順List, 改頁List, 住所編集, 前年度保険料, 連番);
@@ -188,8 +189,10 @@ public class CrtIchiranhyoProcess extends BatchKeyBreakBase<TokuchoKariKeisangoF
         ChohyoSeigyoKyotsu 帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, 帳票分類Id);
         住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報,
                 AssociationFinderFactory.createInstance().getAssociation());
-        HokenryoDankai 保険料段階 = new HokenryoDankaiSettings().getCurrent保険料段階List().getBy段階区分(entity.get前年度保険料段階());
-        前年度保険料 = 保険料段階.get保険料率();
+        if (entity.get前年度保険料段階() != null && !entity.get前年度保険料段階().isEmpty()) {
+            HokenryoDankai 保険料段階 = new HokenryoDankaiSettings().getCurrent保険料段階List().getBy段階区分(entity.get前年度保険料段階());
+            前年度保険料 = 保険料段階.get保険料率();
+        }
     }
 
     private void get並び順List(IOutputOrder 並び順) {
@@ -241,10 +244,15 @@ public class CrtIchiranhyoProcess extends BatchKeyBreakBase<TokuchoKariKeisangoF
         Decimal 特徴期期別金額03 = entity.get特徴期期別金額03();
         bodyList.add(get開始月(特別徴収停止事由コード, 特徴期期別金額01, 特徴期期別金額02, 特徴期期別金額03));
         RString 前年度保険料段階_CSV = entity.get前年度保険料段階();
-        HokenryoDankaiList 保険料段階リスト = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
-        bodyList.add(保険料段階リスト.getBy段階区分(前年度保険料段階_CSV).get表記());
-        RString 前年度保険料_CSV = DecimalFormatter.toコンマ区切りRString(保険料段階リスト.getBy段階区分(前年度保険料段階_CSV).get保険料率(), INT_0);
-        bodyList.add(前年度保険料_CSV);
+        if (前年度保険料段階_CSV != null && !前年度保険料段階_CSV.isEmpty()) {
+            HokenryoDankaiList 保険料段階リスト = HokenryoDankaiSettings.createInstance().getCurrent保険料段階List();
+            bodyList.add(保険料段階リスト.getBy段階区分(前年度保険料段階_CSV).get表記());
+            RString 前年度保険料_CSV = DecimalFormatter.toコンマ区切りRString(保険料段階リスト.getBy段階区分(前年度保険料段階_CSV).get保険料率(), INT_0);
+            bodyList.add(前年度保険料_CSV);
+        } else {
+            bodyList.add(RString.EMPTY);
+            bodyList.add(RString.EMPTY);
+        }
         bodyList.add(get通知書番号(entity.get通知書番号()));
         bodyList.add(get世帯コード(entity.get世帯コード()));
         bodyList.add(get漢字氏名(entity.get宛名().getKanjiShimei()));

@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -38,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
@@ -113,11 +116,12 @@ public class HanyoListFukaDaichoCsvEditor {
      * @param 保険料段階リスト HokenryoDankaiList
      * @param 構成市町村マスタlist List<KoseiShichosonMaster>
      * @param バッチ処理日 RDate
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @return HanyoListFukaDaichoCsvEntity
      */
     public HanyoListFukaDaichoCsvEntity editor(HanyoListFukaDaichoEntity entity,
             HanyoListFukaDaichoProcessParameter parameter, Decimal 連番, HokenryoDankaiList 保険料段階リスト,
-            List<KoseiShichosonMaster> 構成市町村マスタlist, FlexibleDate バッチ処理日) {
+            List<KoseiShichosonMaster> 構成市町村マスタlist, FlexibleDate バッチ処理日, ChohyoSeigyoKyotsu 帳票制御共通) {
         賦課台帳 = entity;
         被保険者台帳管理 = entity.get被保険者台帳管理Newest();
         介護賦課 = entity.get介護賦課();
@@ -127,7 +131,7 @@ public class HanyoListFukaDaichoCsvEditor {
         HanyoListFukaDaichoCsvEntity csvEntity = new HanyoListFukaDaichoCsvEntity();
         csvEntity.set連番(numToRString(連番));
         edit宛名(csvEntity, entity);
-        edit地区(csvEntity, entity);
+        edit地区(csvEntity, entity, 帳票制御共通);
         edit前住所(csvEntity, entity);
         edit宛先(csvEntity, entity);
         edit資格(csvEntity, entity);
@@ -241,8 +245,7 @@ public class HanyoListFukaDaichoCsvEditor {
     private void 受給者台帳Newestの設定(HanyoListFukaDaichoCsvEntity csvEntity) {
         if (賦課台帳.get受給者台帳Newest() != null) {
             if (賦課台帳.get受給者台帳Newest().getYokaigoJotaiKubunCode() != null) {
-                csvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
-                        賦課台帳.get受給者台帳Newest().getYokaigoJotaiKubunCode().value()).getName());
+                csvEntity.set要介護度(YokaigoJotaiKubun.toValue(賦課台帳.get受給者台帳Newest().getYokaigoJotaiKubunCode().value()).getName());
             }
             if (賦課台帳.get受給者台帳Newest().getNinteiYukoKikanKaishiYMD() != null) {
                 csvEntity.set認定開始日(dataToRString(賦課台帳.get受給者台帳Newest().getNinteiYukoKikanKaishiYMD()));
@@ -448,14 +451,15 @@ public class HanyoListFukaDaichoCsvEditor {
     }
 
     private void edit宛名(HanyoListFukaDaichoCsvEntity csvEntity, HanyoListFukaDaichoEntity entity) {
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         ShikibetsuCode shikibetsuCode = entity.get宛名().getShikibetsuCode();
         if (shikibetsuCode != null) {
             csvEntity.set識別コード(shikibetsuCode.getColumnValue());
         } else {
             csvEntity.set識別コード(RString.EMPTY);
         }
-        csvEntity.set住民種別(isNull(entity.get宛名().getJuminShubetsuCode()) ? RString.EMPTY : entity.get宛名()
-                .getJuminShubetsuCode());
+        RString 住民種別 = 宛名.get住民状態().住民状態略称();
+        csvEntity.set住民種別(isNull(住民種別) ? RString.EMPTY : 住民種別);
         AtenaMeisho atenaMeisho = entity.get宛名().getKanjiShimei();
         if (atenaMeisho != null) {
             csvEntity.set氏名(atenaMeisho.getColumnValue());
@@ -469,12 +473,11 @@ public class HanyoListFukaDaichoCsvEditor {
             csvEntity.set氏名カナ(RString.EMPTY);
         }
         csvEntity.set生年月日(dataToRString(entity.get宛名().getSeinengappiYMD()));
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         AgeCalculator ageCalculator = new AgeCalculator(宛名.get生年月日(), 宛名.get住民状態(),
                 宛名.get消除異動年月日());
         csvEntity.set年齢(ageCalculator.get年齢());
         if (宛名.get性別() != null) {
-            csvEntity.set性別(宛名.get性別().getCode());
+            csvEntity.set性別(宛名.get性別().getName().getShortJapanese());
         }
         TsuzukigaraCode tsuzukigaraCode = entity.get宛名().getTsuzukigaraCode();
         if (tsuzukigaraCode != null) {
@@ -494,9 +497,9 @@ public class HanyoListFukaDaichoCsvEditor {
         } else {
             csvEntity.set世帯主名(RString.EMPTY);
         }
-        ZenkokuJushoCode zenkokuJushoCode = entity.get宛名().getZenkokuJushoCode();
-        if (zenkokuJushoCode != null) {
-            csvEntity.set住所コード(zenkokuJushoCode.getColumnValue());
+        ChoikiCode 住所コード = 宛名.get住所().get町域コード();
+        if (住所コード != null) {
+            csvEntity.set住所コード(住所コード.getColumnValue());
         } else {
             csvEntity.set住所コード(RString.EMPTY);
         }
@@ -509,28 +512,15 @@ public class HanyoListFukaDaichoCsvEditor {
     }
 
     private void edit地区(HanyoListFukaDaichoCsvEntity csvEntity,
-            HanyoListFukaDaichoEntity entity) {
-        StringBuilder stringBuilder = new StringBuilder();
+            HanyoListFukaDaichoEntity entity, ChohyoSeigyoKyotsu 帳票制御共通) {
+        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(entity.get被保険者台帳管理Newest().getShichosonCode(),
+                FlexibleDate.getNowDate());
+        RString 住所番地方書 = JushoHenshu.editJusho(帳票制御共通, 宛名, 地方公共団体);
+        csvEntity.set住所と番地と方書(住所番地方書);
         AtenaJusho atenaJusho = entity.get宛名().getJusho();
-        if (atenaJusho != null) {
-            stringBuilder.append(atenaJusho.toString());
-        }
         AtenaBanchi atenaBanchi = entity.get宛名().getBanchi();
-        if (atenaBanchi != null) {
-            stringBuilder.append(atenaBanchi.toString());
-        }
-        if (0 < stringBuilder.length()) {
-            stringBuilder.append(RString.FULL_SPACE);
-        }
         Katagaki katagaki = entity.get宛名().getKatagaki();
-        if (katagaki != null) {
-            stringBuilder.append(katagaki.toString());
-        }
-        if (0 < stringBuilder.length()) {
-            csvEntity.set住所と番地と方書(new RString(stringBuilder.toString()));
-        } else {
-            csvEntity.set住所と番地と方書(RString.EMPTY);
-        }
         if (atenaJusho != null) {
             csvEntity.set住所(atenaJusho.getColumnValue());
         } else {
@@ -554,7 +544,6 @@ public class HanyoListFukaDaichoCsvEditor {
         }
         csvEntity.set行政区名(isNull(entity.get宛名().getGyoseikuName())
                 ? RString.EMPTY : entity.get宛名().getGyoseikuName());
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         RString 地区1 = RString.EMPTY;
         RString 地区2 = RString.EMPTY;
         RString 地区3 = RString.EMPTY;

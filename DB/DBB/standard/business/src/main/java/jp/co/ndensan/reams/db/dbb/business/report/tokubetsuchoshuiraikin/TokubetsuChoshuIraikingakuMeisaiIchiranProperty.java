@@ -5,22 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuiraikin;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource;
-import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraikin.TokubetsuChoshuIraikingakuMeisaiIchiranSource.ReportSourceFields;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog.SimplePageBreaker;
-import jp.co.ndensan.reams.uz.uza.report.Breakers;
-import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
-import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
-import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 帳票設計_DBBRP44002_特別徴収依頼金額明細一覧表のプロパティです。
@@ -28,113 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  * @reamsid_L DBB-0880-080 zhangrui
  *
  */
-public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
-        extends ReportPropertyBase<TokubetsuChoshuIraikingakuMeisaiIchiranSource> {
-
-    private final List<RString> pageBreakKeys;
-    private static final int INDEX_0 = 0;
-    private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
-    private static final RString FORMAT = new RString("\"");
-
-    /**
-     * コンストラクタです。
-     *
-     * @param outputOrder IOutputOrder
-     */
-    public TokubetsuChoshuIraikingakuMeisaiIchiranProperty(IOutputOrder outputOrder) {
-        super(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200023.getReportId());
-
-        pageBreakKeys = new ArrayList<>();
-
-        RString 改頁１ = RString.EMPTY;
-        RString 改頁２ = RString.EMPTY;
-        RString 改頁３ = RString.EMPTY;
-        RString 改頁４ = RString.EMPTY;
-        RString 改頁５ = RString.EMPTY;
-
-        if (outputOrder != null) {
-            List<ISetSortItem> list = outputOrder.get設定項目リスト();
-            if (list == null) {
-                list = new ArrayList<>();
-            }
-
-            if (INDEX_0 < list.size() && list.get(INDEX_0).is改頁項目()) {
-                改頁１ = to帳票物理名(list.get(0).get項目ID());
-            }
-            if (INDEX_1 < list.size() && list.get(INDEX_1).is改頁項目()) {
-                改頁２ = to帳票物理名(list.get(INDEX_1).get項目ID());
-            }
-            if (INDEX_2 < list.size() && list.get(INDEX_2).is改頁項目()) {
-                改頁３ = to帳票物理名(list.get(INDEX_2).get項目ID());
-            }
-            if (INDEX_3 < list.size() && list.get(INDEX_3).is改頁項目()) {
-                改頁４ = to帳票物理名(list.get(INDEX_3).get項目ID());
-            }
-            if (INDEX_4 < list.size() && list.get(INDEX_4).is改頁項目()) {
-                改頁５ = to帳票物理名(list.get(INDEX_4).get項目ID());
-            }
-        }
-
-        if (!改頁１.isEmpty()) {
-            pageBreakKeys.add(改頁１);
-        }
-        if (!改頁２.isEmpty()) {
-            pageBreakKeys.add(改頁２);
-        }
-        if (!改頁３.isEmpty()) {
-            pageBreakKeys.add(改頁３);
-        }
-        if (!改頁４.isEmpty()) {
-            pageBreakKeys.add(改頁４);
-        }
-        if (!改頁５.isEmpty()) {
-            pageBreakKeys.add(改頁５);
-        }
-    }
-
-    @Override
-    public Breakers<TokubetsuChoshuIraikingakuMeisaiIchiranSource> defineBreakers(
-            Breakers<TokubetsuChoshuIraikingakuMeisaiIchiranSource> breakers,
-            BreakerCatalog<TokubetsuChoshuIraikingakuMeisaiIchiranSource> catalog) {
-        return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-
-
-
-
-            pageBreakKeys) {
-            @Override
-            public ReportLineRecord<TokubetsuChoshuIraikingakuMeisaiIchiranSource> occuredBreak(
-                    ReportLineRecord<TokubetsuChoshuIraikingakuMeisaiIchiranSource> currentRecord,
-                    ReportLineRecord<TokubetsuChoshuIraikingakuMeisaiIchiranSource> nextRecord,
-                    ReportDynamicChart dynamicChart) {
-                if (nextRecord == ReportLineRecord.LAST_RECORD) {
-                    return currentRecord;
-                }
-                return currentRecord;
-            }
-        }).fixed();
-    }
-
-    private RString to帳票物理名(RString 項目ID) {
-
-        RString 帳票物理名 = RString.EMPTY;
-
-        if (BreakerFieldsEnum.住民コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listUpper_6.name());
-        } else if (BreakerFieldsEnum.市町村コード.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.hokenshaNo.name());
-        } else if (BreakerFieldsEnum.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString(ReportSourceFields.listLower_1.name());
-        }
-
-        return 帳票物理名;
-    }
+public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty {
 
     /**
      * 帳票設計_DBBRP44002_特別徴収依頼金額明細一覧表 出力順設定可能項目です。
@@ -142,20 +22,29 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranProperty
     public enum BreakerFieldsEnum implements IReportItems {
 
         /**
-         * 住民コード
+         * 町域コード
          */
-        住民コード(new RString("0009"), new RString("住民コード"),
-                FORMAT.concat(new RString("ShikibetsuTaisho_zenkokuJushoCode")).concat(FORMAT)),
+        町域コード(new RString("0002"), new RString("町域コード"), new RString("\"ShikibetsuTaisho\".\"choikiCode\"")),
+        /**
+         * 行政区コード
+         */
+        行政区コード(new RString("0004"), new RString("行政区コード"), new RString("\"ShikibetsuTaisho\".\"gyoseikuCode\"")),
+        /**
+         * 世帯コード
+         */
+        世帯コード(new RString("0008"), new RString("世帯コード"), new RString("\"ShikibetsuTaisho\".\"setaiCode\"")),
+        /**
+         * 識別コード
+         */
+        識別コード(new RString("0009"), new RString("識別コード"), new RString("\"ShikibetsuTaisho\".\"shikibetsuCode\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0021"), new RString("市町村コード"),
-                FORMAT.concat(new RString("ShikibetsuTaisho_genLasdecCode")).concat(FORMAT)),
+        市町村コード(new RString("0016"), new RString("市町村コード"), new RString("master.\"dbT2002Fuka_fukaShichosonCode\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0031"), new RString("被保険者番号"),
-                FORMAT.concat(new RString("dbT2002Fuka_hihokenshaNo")).concat(FORMAT));
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("master.\"dbT2002Fuka_hihokenshaNo\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

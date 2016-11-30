@@ -28,4 +28,5 @@ public class KaisaiKekkaAndBashoJohoEntity implements IDbAccessable {
     private int 所要時間合計;
     private RString 介護認定審査会開催場所名称;
     private Code 介護認定審査会開催地区コード;
+    private RString 合議体名称;
 }

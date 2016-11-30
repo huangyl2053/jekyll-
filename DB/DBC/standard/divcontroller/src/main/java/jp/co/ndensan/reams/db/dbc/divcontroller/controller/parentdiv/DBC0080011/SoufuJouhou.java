@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.soufujouhou.SoufuJouhouBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.soufujouhou.SoufuJouhouParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0080011.DBC0080011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0080011.SoufuJouhouDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0080011.dgSofuIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0080011.SoufuJouhouHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0080011.SoufuJouhouValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.soufujouhou.SoufuJouhouFinder;
@@ -53,6 +54,7 @@ public class SoufuJouhou {
                 .createInstance().getLoginInfo().getUserId());
         List<KoikiZenShichosonJoho> 構成市町村 = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
         getHandler(div).onLoad(市町村情報, 市町村識別ID, 構成市町村);
+        div.getSofuIchiran().setDisplayNone(true);
         return ResponseData.of(div).setState(DBC0080011StateName.初期表示);
     }
 
@@ -70,7 +72,10 @@ public class SoufuJouhou {
         RString 送付年月 = div.getTxtSofuYM().getValue().getYearMonth().toDateString();
         List<SoufuJouhouBusiness> 再審査申立書情報Business = get申立書情報(div, 送付年月, true);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).再審査申立書情報(再審査申立書情報Business);
-        if (validPairs1.iterator().hasNext()) {
+        div.getSofuIchiran().setDisplayNone(false);
+        List<dgSofuIchiran_Row> dataSource = new ArrayList<>();
+        div.getSofuIchiran().getDgSofuIchiran().setDataSource(dataSource);
+        if (validPairs1.iterator().hasNext()) {            
             return ResponseData.of(div).addValidationMessages(validPairs1).respond();
         }
         getHandler(div).onClick_btnSofuzumi(再審査申立書情報Business);
@@ -86,7 +91,10 @@ public class SoufuJouhou {
     public ResponseData<SoufuJouhouDiv> onClick_btnMisofu(SoufuJouhouDiv div) {
         List<SoufuJouhouBusiness> 再審査申立書情報Business = get申立書情報(div, RString.EMPTY, false);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).再審査申立書情報(再審査申立書情報Business);
-        if (validPairs1.iterator().hasNext()) {
+        div.getSofuIchiran().setDisplayNone(false);
+        List<dgSofuIchiran_Row> dataSource = new ArrayList<>();
+        div.getSofuIchiran().getDgSofuIchiran().setDataSource(dataSource);
+        if (validPairs1.iterator().hasNext()) {            
             return ResponseData.of(div).addValidationMessages(validPairs1).respond();
         }
         getHandler(div).onClick_btnSofuzumi(再審査申立書情報Business);

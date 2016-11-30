@@ -26,7 +26,7 @@ public enum ShotokuJohoIchiranOrder implements IReportItems {
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"DbT1001HihokenshaDaicho\".\"hihokenshaNo\""));
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"dbT1001HihokenshaDaicho_hihokenshaNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

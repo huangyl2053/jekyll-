@@ -12,15 +12,18 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.RentaiGimushaIdentifier;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.DBB6110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001.KaigoHihokenshaInfoPanelDiv;
+import jp.co.ndensan.reams.db.dbb.service.core.kaigohihokenshainfo.KaigoHihokenshaInfoPanelManger;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * {@link KaigoHihokenshaInfoDiv}の仕様クラスです。 <br> {@link KaigoHihokenshaInfoDiv}における画面としての仕様を定義しています。
@@ -86,11 +89,16 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
     前履歴より前の期間指定 {
                 @Override
                 public boolean apply(KaigoHihokenshaInfoPanelDiv div) {
+                    if (DBB6110001StateName.連帯納付義務者削除.getName().equals(ResponseHolder.getState())) {
+                        return true;
+                    }
                     return SpecHelper.is前履歴より前の期間指定(div);
                 }
             };
 
     private static class SpecHelper {
+
+        private static final RString ZERO = new RString("0");
 
         /**
          * 連帯納付義務者が選択されていない場合です。
@@ -108,7 +116,7 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
          */
         public static boolean is初期状態からの変更有無(KaigoHihokenshaInfoPanelDiv div) {
             FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-            RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+            RentaiGimushaHolder 初期holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報初期, RentaiGimushaHolder.class);
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
             if (履歴番号.isNull() || 履歴番号.isEmpty()) {
@@ -116,10 +124,10 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             }
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
-            RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
+            RentaiGimusha result = 初期holder.getKogakuGassanJikoFutanGaku(identifier);
             RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
             RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
-            if (終了年月日 != null) {
+            if (終了年月日 != null && result != null) {
                 return !(開始年月日.equals(new RDate(result.get開始年月日().toString()))
                         && 終了年月日.equals(new RDate(result.get終了年月日().toString())));
             }
@@ -158,28 +166,69 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
-            if (履歴番号.isNull() || 履歴番号.isEmpty()) {
-                return true;
-            }
             RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+            KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
             List<RentaiGimusha> list = holder.getRentaiGimushaList();
+            if (履歴番号.isEmpty()) {
+                Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+                if (最新履歴番号 == null && (list == null || list.isEmpty())) {
+                    履歴番号 = ZERO;
+                } else {
+                    int 番号 = list.get(0).get履歴番号().intValue();
+                    for (RentaiGimusha rentai : list) {
+                        int 新番号 = rentai.get履歴番号().intValue();
+                        番号 = max番号(番号, 新番号);
+                    }
+                    履歴番号 = new RString(番号 + 1);
+                }
+            }
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
-            if (list != null) {
-                RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
-                RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
-                for (RentaiGimusha result : list) {
-                    if (result.equals(curResult)) {
-                        return true;
+            RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
+            RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
+            FlexibleDate foreMaxDate = null;
+            FlexibleDate nextMinDate = null;
+            int 履歴番号Num = Integer.parseInt(履歴番号.toString());
+            int notDeletedCount = 0;
+            if (list != null && !list.isEmpty()) {
+                for (int i = 0; i < 履歴番号Num; i++) {
+                    if (!list.get(i).isDeleted()) {
+                        foreMaxDate = list.get(i).get終了年月日();
                     }
-                    return !(開始年月日.isBeforeOrEquals(new RDate(result.get開始年月日().toString()))
-                            && 終了年月日.isAfterOrEquals(new RDate(result.get開始年月日().toString())))
-                            || !(開始年月日.isBeforeOrEquals(new RDate(result.get終了年月日().toString()))
-                            && 終了年月日.isAfterOrEquals(new RDate(result.get終了年月日().toString())));
+                }
+                for (int i = 履歴番号Num; i < list.size(); i++) {
+                    if (!list.get(i).isDeleted() && !list.get(i).equals(curResult)) {
+                        nextMinDate = list.get(i).get開始年月日();
+                        break;
+                    }
+                }
+                for (int i = 0; i < list.size(); i++) {
+                    if (!list.get(i).isDeleted()) {
+                        notDeletedCount++;
+                    }
                 }
             }
+            if (notDeletedCount == 0) {
+                return true;
+            }
+            if (is不合法年月日(foreMaxDate, 開始年月日, nextMinDate, 終了年月日)) {
+                return false;
+            }
             return true;
+        }
+
+        private static boolean is不合法年月日(FlexibleDate foreMaxDate, RDate 開始年月日, FlexibleDate nextMinDate, RDate 終了年月日) {
+            return (foreMaxDate != null && foreMaxDate.equals(FlexibleDate.MAX))
+                    || ((foreMaxDate != null && 開始年月日.isBeforeOrEquals(new RDate(foreMaxDate.toString())))
+                    || (nextMinDate != null && 終了年月日.isAfterOrEquals(new RDate(nextMinDate.toString()))));
+        }
+
+        private static int max番号(int 番号, int 新番号) {
+            if (新番号 > 番号) {
+                番号 = 新番号;
+            }
+            return 番号;
         }
 
         /**
@@ -191,25 +240,56 @@ public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPan
             FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
             RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
-            if (履歴番号.isNull() || 履歴番号.isEmpty()) {
-                return true;
-            }
             RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
+            KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
             List<RentaiGimusha> list = holder.getRentaiGimushaList();
+            if (履歴番号.isEmpty()) {
+                Decimal 最新履歴番号 = manager.get最新履歴番号(被保険者番号);
+                if (最新履歴番号 == null && (list == null || list.isEmpty())) {
+                    履歴番号 = ZERO;
+                } else {
+                    int 番号 = list.get(0).get履歴番号().intValue();
+                    for (RentaiGimusha rentai : list) {
+                        int 新番号 = rentai.get履歴番号().intValue();
+                        番号 = max番号(番号, 新番号);
+                    }
+                    履歴番号 = new RString(番号 + 1);
+                }
+            }
             RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
                     被保険者番号, new Decimal(履歴番号.toString()));
+            int cur履歴 = 履歴番号.toInt();
             RentaiGimusha curResult = holder.getKogakuGassanJikoFutanGaku(identifier);
-            if (list != null) {
-                RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
+            if (list != null && !list.isEmpty()) {
+                FlexibleDate minDate = null;
                 for (RentaiGimusha result : list) {
-                    if (result.equals(curResult)) {
-                        return true;
+                    if (!result.isDeleted() && curResult == null) {
+                        minDate = result.get開始年月日();
+                    } else if (!result.isDeleted() && curResult != null
+                            && cur履歴 > result.get履歴番号().intValue()) {
+                        minDate = result.get開始年月日();
                     }
-                    return !開始年月日.isBefore(new RDate(result.get開始年月日().toString()));
+                }
+                if (minDate != null) {
+                    return is前履歴より前の期間(div, list, curResult, minDate);
                 }
             }
             return true;
         }
 
+        private static boolean is前履歴より前の期間(KaigoHihokenshaInfoPanelDiv div, List<RentaiGimusha> list,
+                RentaiGimusha curResult, FlexibleDate minDate) {
+            RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
+            for (RentaiGimusha result : list) {
+                if (list.get(0).equals(curResult)) {
+                    return true;
+                }
+                if (result.equals(curResult) || result.isDeleted()) {
+                    continue;
+                }
+                return !(開始年月日.isBefore(new RDate(minDate.toString())));
+            }
+            return true;
+        }
     }
 }

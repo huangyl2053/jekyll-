@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgSh
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;

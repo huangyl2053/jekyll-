@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU080010;
 import jp.co.ndensan.reams.db.dbu.definition.core.bangoseido.ShinkiIdoKubun;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoMybatisParamater;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.tokuteikojinjohoteikyo.TokuteiKojinJohoTeikyoProcessParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;

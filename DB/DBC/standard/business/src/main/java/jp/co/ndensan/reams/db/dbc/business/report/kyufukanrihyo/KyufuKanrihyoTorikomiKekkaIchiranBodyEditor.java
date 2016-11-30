@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufukanrihyo;
 
+import jp.co.ndensan.reams.db.dbc.business.report.util.ReportKomokuEditorUtil;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT1121KyufuKanrihyoTempEntity;
@@ -155,6 +156,11 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
         if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(被保険者.get識別コード());
         }
+        source.yubinNo = ReportKomokuEditorUtil.get非空文字列(被保険者.get郵便番号());
+        source.choikiCode = ReportKomokuEditorUtil.get非空文字列(被保険者.get町域コード());
+        source.gyoseikuCode = ReportKomokuEditorUtil.get非空文字列(被保険者.get行政区コード());
+        source.shimei50onKana = ReportKomokuEditorUtil.get非空文字列(被保険者.get氏名50音カナ());
+        source.shichosonCode = getColumnValue(被保険者.get市町村コード());
         source.拡張情報 = new ExpandedInformation(CODE, NAME, source.listCenter_4);
     }
 

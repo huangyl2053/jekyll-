@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.dbc040010;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +33,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040010.RiyoshaFutangakuEnt
 import jp.co.ndensan.reams.db.dbc.entity.report.gassanjikofutangakukeisankekkaichiran.GassanJikofutangakuKeisanKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -78,11 +77,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class DBC040010DataUtil {
 
     private static final int ERRORLISTINDEX = -1;
+    private static final int NUM_1 = 1;
+
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final int NUM_8 = 8;
+
     private static final int NUM_70 = 70;
     private static final int NUM_75 = 75;
     private static final int INDEX_0 = 0;
@@ -708,19 +710,19 @@ public class DBC040010DataUtil {
         IDateOfBirth dob = DateOfBirthFactory.createInstance(getFlexibleDate(umareYMD));
         AgeCalculator ageCalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
         FlexibleDate age = ageCalculator.get年齢到達日(NUM_70);
-        Calendar 前到達70翌月;
-        前到達70翌月 = getRealDateCalendar(age);
-        前到達70翌月.set(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH) + 1, 1);
-        return new FlexibleDate(前到達70翌月.get(Calendar.YEAR), 前到達70翌月.get(Calendar.MONTH), 1).getYearMonth();
+        RDate 前到達70翌月 = getRealDate(age);
+        if (前到達70翌月 != null) {
+            return new FlexibleDate(前到達70翌月.plusMonth(NUM_1).toDateString()).getYearMonth();
+        }
+
+        return null;
     }
 
-    private Calendar getRealDateCalendar(FlexibleDate date) {
+    private RDate getRealDate(FlexibleDate date) {
         if (date == null || date.isEmpty()) {
             return null;
         }
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(date.getYearValue(), date.getMonthValue(), date.getDayValue());
-        return calendar;
+        return new RDate(date.getYearValue(), date.getMonthValue(), date.getDayValue());
     }
 
     private FlexibleDate getFlexibleDate(RString date) {

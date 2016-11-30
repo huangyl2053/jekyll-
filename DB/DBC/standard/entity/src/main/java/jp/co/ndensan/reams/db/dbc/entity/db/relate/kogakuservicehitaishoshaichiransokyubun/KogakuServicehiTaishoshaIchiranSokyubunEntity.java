@@ -44,4 +44,11 @@ public class KogakuServicehiTaishoshaIchiranSokyubunEntity {
     private Decimal 支給_予定_金額;
     private RString 備考;
     private RString マスタの状況;
+    private RString 郵便番号;
+    private RString 町域コード;
+    private RString 行政区コード;
+    private RString カナ名称;
+    private RString 証記載保険者番号;
+    private RString 要介護認定状態区分コード;
+    private RString 保険者名;
 }

@@ -19,7 +19,6 @@ public class JikoFutangakushomeishoBuilder implements IJikoFutangakushomeishoBui
     private final JikoFutangakushomeishoBodyEditor bodyEditor;
     private final CompSofubutsuAtesakiEditor atesakiEditor;
     private final CompNinshoshaEditor compNinshoshaEditor;
-    private final CompKaigoToiawasesakiEditor toiawasesakiEditor;
 
     /**
      * インスタンスを生成するメソッド。
@@ -28,18 +27,15 @@ public class JikoFutangakushomeishoBuilder implements IJikoFutangakushomeishoBui
      * @param bodyEditor {@link JikoFutangakushomeishoBodyEditor}
      * @param atesakiEditor {@link CompSofubutsuAtesakiEditor}
      * @param compNinshoshaEditor {@link CompNinshoshaEditor}
-     * @param toiawasesakiEditor {@link CompKaigoToiawasesakiEditor}
      */
     public JikoFutangakushomeishoBuilder(JikoFutangakushomeishoHeaderEditor headerEditor,
             JikoFutangakushomeishoBodyEditor bodyEditor,
             CompSofubutsuAtesakiEditor atesakiEditor,
-            CompNinshoshaEditor compNinshoshaEditor,
-            CompKaigoToiawasesakiEditor toiawasesakiEditor) {
+            CompNinshoshaEditor compNinshoshaEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
         this.atesakiEditor = atesakiEditor;
         this.compNinshoshaEditor = compNinshoshaEditor;
-        this.toiawasesakiEditor = toiawasesakiEditor;
     }
 
     /**
@@ -54,7 +50,6 @@ public class JikoFutangakushomeishoBuilder implements IJikoFutangakushomeishoBui
                 .join(bodyEditor)
                 .join(atesakiEditor)
                 .join(compNinshoshaEditor)
-                .join(toiawasesakiEditor)
                 .buildSource();
     }
 }

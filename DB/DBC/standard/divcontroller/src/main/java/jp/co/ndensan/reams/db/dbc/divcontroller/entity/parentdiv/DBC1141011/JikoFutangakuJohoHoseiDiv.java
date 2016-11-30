@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1141011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.IPrintContentsSettingDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JikoFutangakuJohoHoseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +28,8 @@ public class JikoFutangakuJohoHoseiDiv extends Panel {
     private JikoFutangakuHoseiSearchDiv JikoFutangakuHoseiSearch;
     @JsonProperty("JikoFutangakuHoseiMadoguchi")
     private JikoFutangakuHoseiMadoguchiDiv JikoFutangakuHoseiMadoguchi;
-    @JsonProperty("JikoFutangakuHoseiPrint")
-    private JikoFutangakuHoseiPrintDiv JikoFutangakuHoseiPrint;
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,21 +74,12 @@ public class JikoFutangakuJohoHoseiDiv extends Panel {
     }
 
     /*
-     * getJikoFutangakuHoseiPrint
-     * @return JikoFutangakuHoseiPrint
+     * getccdChohyoShutsuryokujun
+     * @return ccdChohyoShutsuryokujun
      */
-    @JsonProperty("JikoFutangakuHoseiPrint")
-    public JikoFutangakuHoseiPrintDiv getJikoFutangakuHoseiPrint() {
-        return JikoFutangakuHoseiPrint;
-    }
-
-    /*
-     * setJikoFutangakuHoseiPrint
-     * @param JikoFutangakuHoseiPrint JikoFutangakuHoseiPrint
-     */
-    @JsonProperty("JikoFutangakuHoseiPrint")
-    public void setJikoFutangakuHoseiPrint(JikoFutangakuHoseiPrintDiv JikoFutangakuHoseiPrint) {
-        this.JikoFutangakuHoseiPrint = JikoFutangakuHoseiPrint;
+    @JsonProperty("ccdChohyoShutsuryokujun")
+    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
+        return ccdChohyoShutsuryokujun;
     }
 
     /*
@@ -202,16 +193,6 @@ public class JikoFutangakuJohoHoseiDiv extends Panel {
     @JsonIgnore
     public void  setLblMadoguchiBaraiJoho(Label lblMadoguchiBaraiJoho) {
         this.getJikoFutangakuHoseiMadoguchi().setLblMadoguchiBaraiJoho(lblMadoguchiBaraiJoho);
-    }
-
-    @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return this.getJikoFutangakuHoseiPrint().getCcdChohyoShutsuryokujun();
-    }
-
-    @JsonIgnore
-    public IPrintContentsSettingDiv getJikoFutangakuHoseiPrintSetting() {
-        return this.getJikoFutangakuHoseiPrint().getJikoFutangakuHoseiPrintSetting();
     }
 
     // </editor-fold>

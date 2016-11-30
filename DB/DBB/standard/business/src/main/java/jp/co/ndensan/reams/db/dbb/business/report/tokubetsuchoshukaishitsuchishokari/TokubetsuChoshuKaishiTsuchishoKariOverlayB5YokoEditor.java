@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -150,15 +151,11 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoEditor implements
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後() != null) {
             source.tokuchoGimushaName2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収義務者();
             source.tokuchoTaishoNenkinName2 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特別徴収対象年金();
-            if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01() != null
-                    && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02() != null
-                    && 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03() != null) {
-                source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(
-                        仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01()
-                        .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02())
-                        .add(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03()),
-                        0);
-            }
+            source.hokenryoGokei = DecimalFormatter.toコンマ区切りRString(
+                    nullToDemical(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額01())
+                    .add(nullToDemical(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額02()))
+                    .add(nullToDemical(仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get更正後().get更正後特徴期別金額03())),
+                    0);
         }
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度() != null) {
             source.nendo3 = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get調定年度().wareki().eraType(EraType.KANJI)
@@ -251,5 +248,12 @@ public class TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoEditor implements
             }
         }
         source.hokenshaName = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get保険者名();
+    }
+
+    private Decimal nullToDemical(Decimal 項目) {
+        if (項目 == null) {
+            return Decimal.ZERO;
+        }
+        return 項目;
     }
 }

@@ -11,10 +11,15 @@
         <id property="受給者台帳Entity.rirekiNo" column="dbT4001JukyushaDaicho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="受給者台帳Entity.edaban" column="dbT4001JukyushaDaicho_edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="受給者台帳Entity.jukyuShinseiJiyu" column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <id property="要介護認定申請情報Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="振込明細一時Entity.dataKubun" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="振込明細一時Entity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="振込明細一時Entity.serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="振込明細一時Entity.seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="振込明細一時Entity.rirekiNo" column="rirekiNo" />
+        <id property="振込明細一時Entity.shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="認定申請区分申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association property="振込明細一時Entity" resultMap="resultMap_FurikomiDetailTempTableEntity"/>
-        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
     </resultMap>
     <resultMap id="resultMap_FurikomiDetailTempTableEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity" autoMapping="true">
        <result property="dataKubun" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -43,7 +48,7 @@
         <result property="gyoseikuCode" column="gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
         <result property="gyoseikuMei" column="gyoseikuMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kozaDataFlag" column="kozaDataFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="kozaShikibetsuCode" column="kozaShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
@@ -85,7 +90,7 @@
                 )
     SELECT
         mst.*,
-        要介護認定申請情報TBL.*
+        要介護認定申請情報TBL."ninteiShinseiShinseijiKubunCode" as "ninteiShinseiShinseijiKubunCode"
     FROM 受給者 AS mst
     LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報TBL
          ON mst."dbT4001JukyushaDaicho_shinseishoKanriNo" = 要介護認定申請情報TBL."shinseishoKanriNo"

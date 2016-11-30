@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,8 +33,8 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
      */
     @JsonProperty("txtShinsakaiNo")
     private TextBox txtShinsakaiNo;
-    @JsonProperty("txtGogitaiNo")
-    private TextBox txtGogitaiNo;
+    @JsonProperty("txtGogitaiName")
+    private TextBox txtGogitaiName;
     @JsonProperty("txtShinsakaijoMeisho")
     private TextBox txtShinsakaijoMeisho;
     @JsonProperty("txtShinsakaijoChikuCode")
@@ -55,6 +55,8 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     private Button btnModoru;
     @JsonProperty("hdnShinseishoKanriNo")
     private RString hdnShinseishoKanriNo;
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    private RString hdnShinsakaiKaisaiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -81,21 +83,21 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     }
 
     /*
-     * gettxtGogitaiNo
-     * @return txtGogitaiNo
+     * gettxtGogitaiName
+     * @return txtGogitaiName
      */
-    @JsonProperty("txtGogitaiNo")
-    public TextBox getTxtGogitaiNo() {
-        return txtGogitaiNo;
+    @JsonProperty("txtGogitaiName")
+    public TextBox getTxtGogitaiName() {
+        return txtGogitaiName;
     }
 
     /*
-     * settxtGogitaiNo
-     * @param txtGogitaiNo txtGogitaiNo
+     * settxtGogitaiName
+     * @param txtGogitaiName txtGogitaiName
      */
-    @JsonProperty("txtGogitaiNo")
-    public void setTxtGogitaiNo(TextBox txtGogitaiNo) {
-        this.txtGogitaiNo = txtGogitaiNo;
+    @JsonProperty("txtGogitaiName")
+    public void setTxtGogitaiName(TextBox txtGogitaiName) {
+        this.txtGogitaiName = txtGogitaiName;
     }
 
     /*
@@ -276,6 +278,24 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     @JsonProperty("hdnShinseishoKanriNo")
     public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
         this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
+    }
+
+    /*
+     * gethdnShinsakaiKaisaiNo
+     * @return hdnShinsakaiKaisaiNo
+     */
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    public RString getHdnShinsakaiKaisaiNo() {
+        return hdnShinsakaiKaisaiNo;
+    }
+
+    /*
+     * sethdnShinsakaiKaisaiNo
+     * @param hdnShinsakaiKaisaiNo hdnShinsakaiKaisaiNo
+     */
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    public void setHdnShinsakaiKaisaiNo(RString hdnShinsakaiKaisaiNo) {
+        this.hdnShinsakaiKaisaiNo = hdnShinsakaiKaisaiNo;
     }
 
     /*

@@ -58,8 +58,8 @@ public class IkenshoirairirekiIchiranReport extends Report<IkenshoirairirekiIchi
     @Override
     public void writeBy(ReportSourceWriter<IkenshoirairirekiIchiranReportSource> reportSourceWriter) {
         if (business == null) {
-            for (IkenshoirairirekiIchiran business : businessList) {
-                IkenshoirairirekiIchiranEditor editor = new IkenshoirairirekiIchiranEditor(business);
+            for (IkenshoirairirekiIchiran entity : businessList) {
+                IkenshoirairirekiIchiranEditor editor = new IkenshoirairirekiIchiranEditor(entity);
                 IkenshoirairirekiIchiranBuilder builder = new IkenshoirairirekiIchiranBuilder(editor);
                 reportSourceWriter.writeLine(builder);
             }

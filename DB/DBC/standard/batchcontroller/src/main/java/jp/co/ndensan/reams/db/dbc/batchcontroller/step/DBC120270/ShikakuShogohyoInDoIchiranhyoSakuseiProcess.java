@@ -85,6 +85,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
     private static final int NUM_100 = 100;
     private static final int NUM_2 = 2;
     private static final int NUM_1 = 1;
+    private static final RString 無し = new RString("1");
     private static IYokaigoJotaiKubun 要介護状態区分;
     private final Set<RString> 識別コードset = new HashSet<>();
     private ShikakuShogohyoInDoIchiranhyoSakuseiProcessParameter parameter;
@@ -300,14 +301,18 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
         csvEntity1 = new ShikakuShogohyoInCsvEntitySingle();
     }
 
-    private void edit明細項目1(ShikakuShogohyoInEntity entity) {
-        csvEntity.set連番(new RString(連番));
+    private void edit被保険者(ShikakuShogohyoInEntity entity) {
         if (entity.get被保険者一時() != null) {
             csvEntity.set被保険者氏名(entity.get被保険者一時().get宛名名称());
             csvEntity.set被保険者番号(entity.get被保険者一時().get登録被保険者番号().getColumnValue());
             csvEntity.set証記載保険者番号(entity.get被保険者一時().get証記載保険者番号().getColumnValue());
-
         }
+    }
+
+    private void edit明細項目1(ShikakuShogohyoInEntity entity) {
+        csvEntity.set連番(new RString(連番));
+        edit被保険者(entity);
+
         if (entity.get資格照合表一時() != null) {
             editor編集(entity, csvEntity);
             if (entity.get資格照合表一時().getServiceTanisu() != null) {
@@ -317,33 +322,41 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
                 csvEntity.setサービス提供年月(パターン54(entity.get資格照合表一時().getServiceTeikyoYM()));
             }
             csvEntity.setサービス日数_回数(new RString(entity.get資格照合表一時().getServiceNissuKaisu()));
+            if (entity.get資格照合表一時().getServiceShuruiCode() != null) {
+                csvEntity.setサービス種類コード(entity.get資格照合表一時().getServiceShuruiCode().getColumnValue());
+            }
 
-            csvEntity.setサービス種類コード(entity.get資格照合表一時().getServiceShuruiCode().getColumnValue());
             csvEntity.setサービス種類名(entity.get資格照合表一時().getServiceShuruiMei());
             csvEntity.set事業者名(entity.get資格照合表一時().getJigyoshoMei());
-            csvEntity.set事業者番号(entity.get資格照合表一時().getJigyoshoNo().getColumnValue());
+            if (entity.get資格照合表一時().getJigyoshoNo() != null) {
+                csvEntity.set事業者番号(entity.get資格照合表一時().getJigyoshoNo().getColumnValue());
+            }
+
             if (entity.get資格照合表一時().getHokenKyufuRitsu().getColumnValue() != null) {
                 csvEntity.set保険給付率(decimal_to_string(entity.get資格照合表一時().getHokenKyufuRitsu().getColumnValue()));
             }
             csvEntity.set保険者名(entity.get資格照合表一時().getHokenshaName());
-            csvEntity.set保険者番号(entity.get資格照合表一時().getHokenshaNo().getColumnValue());
-            csvEntity.set居宅サービス計画作成区分コード(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue());
-            if (entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue() != null) {
+            if (entity.get資格照合表一時().getHokenshaNo() != null) {
+                csvEntity.set保険者番号(entity.get資格照合表一時().getHokenshaNo().getColumnValue());
+            }
+
+            if (entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode() != null
+                    && !entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue().isEmpty()) {
+                csvEntity.set居宅サービス計画作成区分コード(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue());
                 csvEntity.set居宅サービス計画作成区分(JukyushaIF_KeikakuSakuseiKubunCode.
                         toValue(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue()).get名称());
             }
-            csvEntity.set支援事業者番号(entity.get資格照合表一時().getShienJigyoshoNo().getColumnValue());
-            csvEntity.set旧措置入所者特例コード(entity.get資格照合表一時().getKyusochiTokureiCode());
-            if (entity.get資格照合表一時().getKyusochiTokureiCode() != null) {
-                csvEntity.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.
-                        toValue(entity.get資格照合表一時().getKyusochiTokureiCode()).get名称());
+
+            if (entity.get資格照合表一時().getShienJigyoshoNo() != null) {
+                csvEntity.set支援事業者番号(entity.get資格照合表一時().getShienJigyoshoNo().getColumnValue());
             }
+            set旧措置入所者特例(entity);
             if (entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku() != null) {
                 csvEntity.set特定入所者介護サービス費等(decimal_to_string(entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku()));
             }
             csvEntity.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
             if (entity.get資格照合表一時().getServiceTeikyoYM() != null
-                    && entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue() != null) {
+                    && entity.get資格照合表一時().getYokaigoKubunCode() != null) {
                 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(entity.get資格照合表一時().getServiceTeikyoYM(),
                         entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
                 csvEntity.set要介護度(要介護状態区分.getName());
@@ -353,33 +366,70 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             }
             csvEntity.set認定有効期間_終了(パターン4(entity.get資格照合表一時().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set認定有効期間_開始(パターン4(entity.get資格照合表一時().getNinteiYukoKikanKaishiYMD()));
-            if (entity.get資格照合表一時().getShubetsu() != null) {
+            if (!RString.isNullOrEmpty(entity.get資格照合表一時().getShubetsu())) {
                 csvEntity.set警告種別(ShikakuShogohyoKeikokuShubetsu.toValue(entity.get資格照合表一時().getShubetsu()).get名称());
             }
             csvEntity.set限度額適用期間_終了(パターン4(entity.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD()));
             csvEntity.set限度額適用期間_開始(パターン4(entity.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD()));
-            if (entity.get資格照合表一時().getShokujiFutanGaku() != null) {
-                csvEntity.set食事標準負担額(decimal_to_string(entity.get資格照合表一時().getShokujiFutanGaku()));
-            }
-            if (entity.get資格照合表一時().getNichiGakuShokujiFutanGaku() != null) {
-                csvEntity.set食事標準負担額_日額(decimal_to_string(entity.get資格照合表一時().getNichiGakuShokujiFutanGaku()));
-            }
-            if (entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku() != null) {
-                csvEntity.set食事標準負担額_月額(decimal_to_string(entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku()));
-            }
-            if (entity.get資格照合表一時().getShokuhiFutanGendoGaku() != null) {
-                csvEntity.set食費負担限度額(decimal_to_string(entity.get資格照合表一時().getShokuhiFutanGendoGaku()));
-            }
+            edit明細項目1食費(entity);
         }
 
     }
 
-    private void edit明細項目2(ShikakuShogohyoInEntity entity) {
-        csvEntity1.set連番(new RString(連番));
+    private void set旧措置入所者特例(ShikakuShogohyoInEntity entity) {
+        if (!RString.isNullOrEmpty(entity.get資格照合表一時().getKyusochiTokureiCode())) {
+            if (無し.equals(entity.get資格照合表一時().getKyusochiTokureiCode())) {
+                csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.無し.getコード());
+                csvEntity.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.無し.get名称());
+            } else {
+                csvEntity.set旧措置入所者特例コード(KyuSochiNyushoshaTokureiCode.有り.getコード());
+                csvEntity.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.有り.get名称());
+            }
+        }
+    }
+
+    private void edit明細項目1食費(ShikakuShogohyoInEntity entity) {
+        if (entity.get資格照合表一時().getShokujiFutanGaku() != null) {
+            csvEntity.set食事標準負担額(decimal_to_string(entity.get資格照合表一時().getShokujiFutanGaku()));
+        }
+        if (entity.get資格照合表一時().getNichiGakuShokujiFutanGaku() != null) {
+            csvEntity.set食事標準負担額_日額(decimal_to_string(entity.get資格照合表一時().getNichiGakuShokujiFutanGaku()));
+        }
+        if (entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku() != null) {
+            csvEntity.set食事標準負担額_月額(decimal_to_string(entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku()));
+        }
+        if (entity.get資格照合表一時().getShokuhiFutanGendoGaku() != null) {
+            csvEntity.set食費負担限度額(decimal_to_string(entity.get資格照合表一時().getShokuhiFutanGendoGaku()));
+        }
+    }
+
+    private void edit明細項目2被保険者(ShikakuShogohyoInEntity entity) {
         if (entity.get被保険者一時() != null) {
             csvEntity1.set被保険者氏名(entity.get被保険者一時().get宛名名称());
             csvEntity1.set被保険者番号(entity.get被保険者一時().get登録被保険者番号().getColumnValue());
         }
+    }
+
+    private void editサービス種類(ShikakuShogohyoInEntity entity) {
+
+        if (entity.get資格照合表一時().getServiceShuruiCode() != null) {
+            csvEntity1.setサービス種類コード(entity.get資格照合表一時().getServiceShuruiCode().getColumnValue());
+
+        }
+        csvEntity1.setサービス種類名(entity.get資格照合表一時().getServiceShuruiMei());
+    }
+
+    private void edit事業者(ShikakuShogohyoInEntity entity) {
+        csvEntity1.set事業者名(entity.get資格照合表一時().getJigyoshoMei());
+        if (entity.get資格照合表一時().getJigyoshoNo() != null) {
+            csvEntity1.set事業者番号(entity.get資格照合表一時().getJigyoshoNo().getColumnValue());
+
+        }
+    }
+
+    private void edit明細項目2(ShikakuShogohyoInEntity entity) {
+        csvEntity1.set連番(new RString(連番));
+        edit明細項目2被保険者(entity);
         if (entity.get資格照合表一時() != null) {
             editor編集1(entity, csvEntity1);
             if (entity.get資格照合表一時().getServiceTanisu() != null) {
@@ -389,35 +439,36 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
                 csvEntity1.setサービス提供年月(パターン54(entity.get資格照合表一時().getServiceTeikyoYM()));
             }
             csvEntity1.setサービス日数_回数(new RString(entity.get資格照合表一時().getServiceNissuKaisu()));
-
-            csvEntity1.setサービス種類コード(entity.get資格照合表一時().getServiceShuruiCode().getColumnValue());
-            csvEntity1.setサービス種類名(entity.get資格照合表一時().getServiceShuruiMei());
-            csvEntity1.set事業者名(entity.get資格照合表一時().getJigyoshoMei());
-            csvEntity1.set事業者番号(entity.get資格照合表一時().getJigyoshoNo().getColumnValue());
+            editサービス種類(entity);
+            edit事業者(entity);
             if (entity.get資格照合表一時().getHokenKyufuRitsu().getColumnValue() != null) {
                 csvEntity1.set保険給付率(decimal_to_string(entity.get資格照合表一時().getHokenKyufuRitsu().getColumnValue()));
             }
             csvEntity1.set保険者名(entity.get資格照合表一時().getHokenshaName());
-            csvEntity1.set保険者番号(entity.get資格照合表一時().getHokenshaNo().getColumnValue());
 
-            csvEntity1.set居宅サービス計画作成区分コード(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue());
-
-            if (entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue() != null) {
+            if (entity.get資格照合表一時().getHokenshaNo() != null) {
+                csvEntity1.set保険者番号(entity.get資格照合表一時().getHokenshaNo().getColumnValue());
+            }
+            if (entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode() != null
+                    && !entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getKey().isEmpty()) {
+                csvEntity1.set居宅サービス計画作成区分コード(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue());
                 csvEntity1.set居宅サービス計画作成区分(JukyushaIF_KeikakuSakuseiKubunCode.
                         toValue(entity.get資格照合表一時().getKyotakuServicePlanSakuseiKubunCode().getColumnValue()).get名称());
             }
-            csvEntity1.set支援事業者番号(entity.get資格照合表一時().getShienJigyoshoNo().getColumnValue());
-            csvEntity1.set旧措置入所者特例コード(entity.get資格照合表一時().getKyusochiTokureiCode());
-            if (entity.get資格照合表一時().getKyusochiTokureiCode() != null) {
-                csvEntity1.set旧措置入所者特例有無(KyuSochiNyushoshaTokureiCode.
-                        toValue(entity.get資格照合表一時().getKyusochiTokureiCode()).get名称());
+
+            if (entity.get資格照合表一時().getShienJigyoshoNo() != null) {
+                csvEntity1.set支援事業者番号(entity.get資格照合表一時().getShienJigyoshoNo().getColumnValue());
+
             }
+            set旧措置入所者特例(entity);
             if (entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku() != null) {
                 csvEntity1.set特定入所者介護サービス費等(decimal_to_string(entity.get資格照合表一時().getTokuteiNyushoshaKaigoServiceGaku()));
             }
-            csvEntity1.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+            if (entity.get資格照合表一時().getYokaigoKubunCode() != null) {
+                csvEntity1.set要介護区分コード(entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
+            }
             if (entity.get資格照合表一時().getServiceTeikyoYM() != null
-                    && entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue() != null) {
+                    && entity.get資格照合表一時().getYokaigoKubunCode() != null) {
                 要介護状態区分 = YokaigoJotaiKubunSupport.toValue(entity.get資格照合表一時().getServiceTeikyoYM(),
                         entity.get資格照合表一時().getYokaigoKubunCode().getColumnValue());
                 csvEntity1.set要介護度(要介護状態区分.getName());
@@ -427,25 +478,29 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             }
             csvEntity1.set認定有効期間_終了(パターン4(entity.get資格照合表一時().getNinteiYukoKikanShuryoYMD()));
             csvEntity1.set認定有効期間_開始(パターン4(entity.get資格照合表一時().getNinteiYukoKikanKaishiYMD()));
-            if (entity.get資格照合表一時().getShubetsu() != null) {
+            if (!RString.isNullOrEmpty(entity.get資格照合表一時().getShubetsu())) {
                 csvEntity1.set警告種別(ShikakuShogohyoKeikokuShubetsu.toValue(entity.get資格照合表一時().getShubetsu()).get名称());
             }
             csvEntity1.set限度額適用期間_終了(パターン4(entity.get資格照合表一時().getGendoGakuTekiyoKikanShuryoYMD()));
             csvEntity1.set限度額適用期間_開始(パターン4(entity.get資格照合表一時().getGendoGakuTekiyoKikanKaishiYMD()));
-            if (entity.get資格照合表一時().getShokujiFutanGaku() != null) {
-                csvEntity1.set食事標準負担額(decimal_to_string(entity.get資格照合表一時().getShokujiFutanGaku()));
-            }
-            if (entity.get資格照合表一時().getNichiGakuShokujiFutanGaku() != null) {
-                csvEntity1.set食事標準負担額_日額(decimal_to_string(entity.get資格照合表一時().getNichiGakuShokujiFutanGaku()));
-            }
-            if (entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku() != null) {
-                csvEntity1.set食事標準負担額_月額(decimal_to_string(entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku()));
-            }
-            if (entity.get資格照合表一時().getShokuhiFutanGendoGaku() != null) {
-                csvEntity1.set食費負担限度額(decimal_to_string(entity.get資格照合表一時().getShokuhiFutanGendoGaku()));
-            }
+            edit食事(entity);
         }
 
+    }
+
+    private void edit食事(ShikakuShogohyoInEntity entity) {
+        if (entity.get資格照合表一時().getShokujiFutanGaku() != null) {
+            csvEntity1.set食事標準負担額(decimal_to_string(entity.get資格照合表一時().getShokujiFutanGaku()));
+        }
+        if (entity.get資格照合表一時().getNichiGakuShokujiFutanGaku() != null) {
+            csvEntity1.set食事標準負担額_日額(decimal_to_string(entity.get資格照合表一時().getNichiGakuShokujiFutanGaku()));
+        }
+        if (entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku() != null) {
+            csvEntity1.set食事標準負担額_月額(decimal_to_string(entity.get資格照合表一時().getGetsuGakuShokujiFutanGaku()));
+        }
+        if (entity.get資格照合表一時().getShokuhiFutanGendoGaku() != null) {
+            csvEntity1.set食費負担限度額(decimal_to_string(entity.get資格照合表一時().getShokuhiFutanGendoGaku()));
+        }
     }
 
     private void editor編集(ShikakuShogohyoInEntity entity, ShikakuShogohyoInCsvEntity csvEntity) {

@@ -7,7 +7,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper">
 
     <select resultOrdered="true" id="selectバッチ内で抽出条件"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity"
             fetchSize="500">
         SELECT *
         FROM rgdb."DbT7022ShoriDateKanri"

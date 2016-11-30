@@ -87,7 +87,7 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
                 if (null == newKoumokuGoukey) {
                     newKoumokuGoukey = koumokuGoukeyList.get(i);
                 } else {
-                    newKoumokuGoukey = 不明_合計(newKoumokuGoukey, koumokuGoukey);    
+                    newKoumokuGoukey = 不明_合計(newKoumokuGoukey, koumokuGoukey);
                 }
             } else {
                 newKoumokuGoukeyList.add(koumokuGoukey);
@@ -100,8 +100,8 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
         TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(newKoumokuGoukeyList));
         report.writeBy(reportSourceWriter);
     }
-    
-    private KoumokuGoukey 不明_合計(KoumokuGoukey newKoumokuGoukey, KoumokuGoukey koumokuGoukey){
+
+    private KoumokuGoukey 不明_合計(KoumokuGoukey newKoumokuGoukey, KoumokuGoukey koumokuGoukey) {
         newKoumokuGoukey.setYoGetuNinsuuGoukeyi(
                 getDecimal(newKoumokuGoukey.getYoGetuNinsuuGoukeyi(), koumokuGoukey.getYoGetuNinsuuGoukeyi()));
         newKoumokuGoukey.setGoGetuNinsuuGoukeyi(
@@ -172,8 +172,8 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
                 getDecimal(newKoumokuGoukey.get総金額合計(), koumokuGoukey.get総金額合計()));
         return newKoumokuGoukey;
     }
-    
-    private Decimal getDecimal(Decimal decimal1, Decimal decimal2){
+
+    private Decimal getDecimal(Decimal decimal1, Decimal decimal2) {
         if (null == decimal1) {
             decimal1 = Decimal.ZERO;
         }

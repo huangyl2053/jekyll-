@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.service.core.jigyogasanjigyobunmeisaishosakus
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc8020001.DBC8020001;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.FurikomiGyomunaiKubun;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.furikomiitakushakosei.FurikomiItakushaKoseiMapperParameter;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.kozafurikomi.furikomigroup.FurikomiGroupItakushaRelateEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.furikomi.FurikomiGroupItakushaItakushaKoseiFinder;

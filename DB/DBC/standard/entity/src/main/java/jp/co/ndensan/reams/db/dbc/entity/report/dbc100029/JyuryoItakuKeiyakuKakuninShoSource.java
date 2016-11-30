@@ -134,6 +134,15 @@ public class JyuryoItakuKeiyakuKakuninShoSource implements IReportSource {
     public RString tsuchibun2;
     @ReportItem(name = "pagecnt", length = 5, order = 61)
     public RString pagecnt;
+
+    @ReportItem(name = "契約申請年月日", length = 5, order = 62)
+    public RString 契約申請年月日;
+    @ReportItem(name = "契約事業者番号", length = 5, order = 63)
+    public RString 契約事業者番号;
+    @ReportItem(name = "受領委任契約番号", length = 5, order = 64)
+    public RString 受領委任契約番号;
+    @ReportItem(name = "承認期間_開始", length = 5, order = 65)
+    public RString 承認期間_開始;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

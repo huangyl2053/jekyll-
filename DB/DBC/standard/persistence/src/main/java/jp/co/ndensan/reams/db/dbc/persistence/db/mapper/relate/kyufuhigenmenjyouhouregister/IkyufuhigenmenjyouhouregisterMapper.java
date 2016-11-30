@@ -43,4 +43,12 @@ public interface IkyufuhigenmenjyouhouregisterMapper {
      */
     KyufuJissekiJyouhouEntity checkKyufuJissekiJyouhou(GenmenJyouhouParameter 検索条件);
 
+    /**
+     * 検索条件より、適当な条件を連結して、事業者指定サービスの件数。
+     *
+     * @param 検索条件 検索条件
+     * @return KyufuJissekiJyouhouEntity
+     */
+    int checkKaigoJigyoshaShiteiService(GenmenJyouhouParameter 検索条件);
+
 }

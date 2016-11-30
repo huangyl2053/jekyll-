@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
@@ -159,6 +160,11 @@ public class NofugakuIchiranShinkokuyoEditor implements
         ChoikiCode 町域コード = 宛名Entity.getChoikiCode();
         if (町域コード != null) {
             source.list4_1 = 町域コード.value();
+            source.choikiCode = 町域コード.value();
+        }
+        AtenaKanaMeisho 氏名５０音カナ = 宛名Entity.getKanaMeisho();
+        if (氏名５０音カナ != null) {
+            source.kanaMeisho = 氏名５０音カナ.value();
         }
 
         GyoseikuCode 行政区コード = 宛名Entity.getGyoseikuCode();
@@ -209,6 +215,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
         source.list12_15 = RString.EMPTY;
 
         source.list13_15 = RString.EMPTY;
+        setPageBreakEmpty(source);
         return source;
 
     }
@@ -368,4 +375,38 @@ public class NofugakuIchiranShinkokuyoEditor implements
         source.list13_12 = doカンマ編集(納付額情報.get普徴収入額08(), NUM_6);
         source.list13_13 = doカンマ編集(納付額情報.get普徴収入額09(), NUM_6);
     }
+
+    private void setPageBreakEmpty(NofugakuIchiranSource source) {
+        if (source.list5_1 == null) {
+            source.list5_1 = RString.EMPTY;
+        }
+        if (source.list3_1 == null) {
+            source.list3_1 = RString.EMPTY;
+        }
+        if (source.list2_1 == null) {
+            source.list2_1 = RString.EMPTY;
+        }
+        if (source.list6_3 == null) {
+            source.list6_3 = RString.EMPTY;
+        }
+        if (source.list6_2 == null) {
+            source.list6_2 = RString.EMPTY;
+        }
+        if (source.cityCd == null) {
+            source.cityCd = RString.EMPTY;
+        }
+        if (source.list1_1 == null) {
+            source.list1_1 = RString.EMPTY;
+        }
+        if (source.list6_4 == null) {
+            source.list6_4 = RString.EMPTY;
+        }
+        if (source.choikiCode == null) {
+            source.choikiCode = RString.EMPTY;
+        }
+        if (source.kanaMeisho == null) {
+            source.kanaMeisho = RString.EMPTY;
+        }
+    }
+
 }

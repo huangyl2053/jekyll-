@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150040.HeikinRiyoGakuT
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150040.HeikinriyogakuTokeihyoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150040.KyufujissekiTempTblUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC150040.SyorikekkaCyouHyouProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040.DBC150040_HeikinriyogakuTokeihyoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150040.DBC150040_HeikinriyogakuTokeihyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-3490-030 yaoyahui
  */
-public class DBC150040_HeikinriyogakuTokeihyo extends BatchFlowBase<DBC150040_HeikinriyogakuTokeihyoBatchParameter> {
+public class DBC150040_HeikinriyogakuTokeihyo extends BatchFlowBase<DBC150040_HeikinriyogakuTokeihyoParameter> {
 
     private static final String 平均利用額統計表一時TBL作成 = "HeikinriyogakuTokeihyoProcess";
     private static final String 給付実績データ一時TBL更新 = "KyufujissekiTempTblUpdateProcess";

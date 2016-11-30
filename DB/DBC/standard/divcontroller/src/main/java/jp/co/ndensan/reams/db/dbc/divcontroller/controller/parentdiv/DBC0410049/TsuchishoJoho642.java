@@ -56,7 +56,7 @@ public class TsuchishoJoho642 {
      * @return ResponseData
      */
     public ResponseData<DBC120910_SogojigyohiKohiJukyushaInParameter> onClick_btnExcute(TsuchishoJoho642Div div) {
-        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120180_SogojigyohiKagoKetteiIn");
+        FlowParameters fp = FlowParameters.of(new RString("ExecutionBatchId"), "DBC120910_SogojigyohiKohiJukyushaIn");
         FlowParameterAccessor.merge(fp);
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();

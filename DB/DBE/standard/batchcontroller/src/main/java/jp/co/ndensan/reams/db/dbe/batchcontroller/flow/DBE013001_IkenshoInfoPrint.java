@@ -35,15 +35,20 @@ public class DBE013001_IkenshoInfoPrint extends BatchFlowBase<DBE013001_IkenshoI
     protected void defineFlow() {
         if (getParameter().is主治医意見書依頼未処理者一覧表フラグ()) {
             executeStep(SHUJIIIKENSHOMIIRAI_PROCESS);
-        } else if (getParameter().is主治医意見書作成依頼変更者一覧表フラグ()) {
+        } 
+        if (getParameter().is主治医意見書作成依頼変更者一覧表フラグ()) {
             executeStep(SHIJIIIKENSHOIRAIHENKO_ROCESS);
-        } else if (getParameter().is主治医意見書未提出者一覧フラグ()) {
+        } 
+        if (getParameter().is主治医意見書未提出者一覧フラグ()) {
             executeStep(SHUJIIIKENSHOMITEISHU_PROCESS);
-        } else if (getParameter().is主治医意見書依頼済み一覧表フラグ()) {
+        } 
+        if (getParameter().is主治医意見書依頼済み一覧表フラグ()) {
             executeStep(SHUJIIIKENSHOIRAISUMI_PROCESS);
-        } else if (getParameter().is主治医意見書５項目確認一覧表フラグ()) {
+        } 
+        if (getParameter().is主治医意見書５項目確認一覧表フラグ()) {
             executeStep(SHUJIIIKENSHO5KOMOKU_PROCESS);
-        } else if (getParameter().is主治医意見書作成料請求一覧表フラグ()) {
+        } 
+        if (getParameter().is主治医意見書作成料請求一覧表フラグ()) {
             executeStep(SHUJIIIKENSHOSEIKYUIC_PROCESS);
         }
     }

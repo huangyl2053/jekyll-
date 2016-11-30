@@ -27,10 +27,13 @@ import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikett
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.dgSyokanbaraikete_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820015.ShokanbarayiKeteiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei.SyokanbaraihiShikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.InsupdShokanManager;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteFath;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekkaBuilder;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -40,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 償還払い費支給申請決定_償還払決定情報
@@ -127,7 +131,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         for (dgSyokanbaraikete_Row row : rowList) {
             JigyoshaNo 事業者番号 = new JigyoshaNo(row.getJigyoshaNo());
             RString 様式番号 = row.getYoshikiNo();
-            int 件数 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShikibetsuNoKanri(被保険者番号,
+            int 件数 = SyokanbaraihiShikyuShinseiKetteFath.createInstance().getShikibetsuNoKanri(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, チェック区分);
             if (件数 != 0) {
                 flag = false;
@@ -187,7 +191,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      */
     private Boolean equal償還払決定一覧(List<dgSyokanbaraikete_Row> rowList, Map<RString, Decimal> 償還払決定一覧) {
         for (int i = 0; i < rowList.size(); i++) {
-            if (償還払決定一覧 != null && 償還払決定一覧.get(rowList.get(i).getNo()) != rowList.get(i).getSagakuKingaku().getValue()) {
+            if (償還払決定一覧 != null && !償還払決定一覧.get(rowList.get(i).getNo()).equals(rowList.get(i).getSagakuKingaku().getValue())) {
                 return true;
             }
         }
@@ -202,9 +206,6 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalZogenriyu(RString zogenriyu, KetteJoho 決定情報) {
-        if (決定情報 == null && zogenriyu == null) {
-            return false;
-        }
         if (決定情報 == null && zogenriyu != null && zogenriyu.isEmpty()) {
             return false;
         }
@@ -214,12 +215,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (決定情報 != null && zogenriyu != null && zogenriyu.isEmpty() && 決定情報.getZougenRiyu() != null && 決定情報.getZougenRiyu().isEmpty()) {
             return false;
         }
-        if (決定情報 != null && zogenriyu != null) {
-            if (!zogenriyu.isEmpty() && zogenriyu.equals(決定情報.getZougenRiyu())) {
-                return false;
-            }
+        if (決定情報 != null && zogenriyu != null
+                && !zogenriyu.isEmpty() && zogenriyu.equals(決定情報.getZougenRiyu())) {
+            return false;
         }
-        return true;
+        return 決定情報 != null || zogenriyu != null;
     }
 
     /**
@@ -237,12 +237,11 @@ public class ShokanbarayiKeteiInfoPanelHandler {
         if (決定情報 != null && fuSyikyuriyu1 != null && fuSyikyuriyu1.isEmpty() && 決定情報.getHushikyuRiyu() == null) {
             return false;
         }
-        if (決定情報 != null && fuSyikyuriyu1 != null) {
-            if (!fuSyikyuriyu1.isEmpty() && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
-                return false;
-            }
+        if (決定情報 != null && fuSyikyuriyu1 != null
+                && !fuSyikyuriyu1.isEmpty() && fuSyikyuriyu1.equals(決定情報.getHushikyuRiyu())) {
+            return false;
         }
-        return true;
+        return 決定情報 != null || fuSyikyuriyu1 != null;
     }
 
     /**
@@ -253,18 +252,17 @@ public class ShokanbarayiKeteiInfoPanelHandler {
      * @return Boolean
      */
     private Boolean equalfushikyuriyu2(RString fushikyuriyu2, KetteJoho 決定情報) {
-        if (決定情報 != null && fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報 != null && 決定情報.getZougenRiyu().isEmpty()) {
+        if (決定情報 != null && fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報.getKounyuKaishuRireki().isEmpty()) {
             return false;
         }
-        if (決定情報 != null && fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報 == null) {
+        if (fushikyuriyu2 != null && fushikyuriyu2.isEmpty() && 決定情報 == null) {
             return false;
         }
-        if (決定情報 != null && fushikyuriyu2 != null) {
-            if (!fushikyuriyu2.isEmpty() && fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
-                return false;
-            }
+        if (決定情報 != null && fushikyuriyu2 != null
+                && !fushikyuriyu2.isEmpty() && fushikyuriyu2.equals(決定情報.getKounyuKaishuRireki())) {
+            return false;
         }
-        return true;
+        return 決定情報 != null || fushikyuriyu2 != null;
     }
 
     /**
@@ -337,23 +335,21 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * 登録Save
      *
-     * @param DB情報 DbJohoViewState
+     * @param db情報 DbJohoViewState
      * @param 修正前支給区分 RString
      * @param 決定日 FlexibleDate
      * @param paramter ShoukanharaihishinseikensakuParameter
      * @param 画面モード RString
      * @param 識別コード ShikibetsuCode
      */
-    public void 登録Save(DbJohoViewState DB情報, RString 修正前支給区分, FlexibleDate 決定日,
+    public void 登録Save(DbJohoViewState db情報, RString 修正前支給区分, FlexibleDate 決定日,
             ShoukanharaihishinseikensakuParameter paramter, RString 画面モード, ShikibetsuCode 識別コード) {
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
         FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
         InsupdShokanManager manager = InsupdShokanManager.createInstance();
-        if (DB情報.get償還払支給判定結果() != null) {
-            manager.update償還払支給判定結果(DB情報.get償還払支給判定結果());
+        if (db情報.get償還払支給判定結果() != null) {
+            manager.update償還払支給判定結果(db情報.get償還払支給判定結果());
         }
-        manager.update証明書(DB情報, サービス年月);
+        manager.update証明書(db情報, サービス年月);
     }
 
 //    /**
@@ -510,7 +506,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      * 申請書入力済区分の取得です。
      *
-     * @param 申請書入力済フラグ
+     * @param 申請書入力済フラグ RString
      * @return 申請書入力済区分
      */
     public RString get申請書入力済区分(RString 申請書入力済フラグ) {
@@ -521,10 +517,10 @@ public class ShokanbarayiKeteiInfoPanelHandler {
     /**
      *
      * @param 戻る情報 保存処理戻るの情報
-     * @param dbJoho DB情報
+     * @param dbJoho db情報
      * @return 更新DB情報
      */
-    public DbJohoViewState DB情報保存(ModoruEntity 戻る情報, DbJohoViewState dbJoho) {
+    public DbJohoViewState db情報保存(ModoruEntity 戻る情報, DbJohoViewState dbJoho) {
         if (戻る情報.get償還払支給判定結果() != null) {
             更新償還払支給判定結果データ(戻る情報, dbJoho);
         }
@@ -547,6 +543,20 @@ public class ShokanbarayiKeteiInfoPanelHandler {
             更新償還払請求特定入所者介護サービス費用データ(戻る情報, dbJoho);
         }
         return dbJoho;
+    }
+
+    /**
+     * 支給申請有無のチェック処理です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return 判断結果
+     */
+    public boolean check支給申請(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, RString 整理番号) {
+        List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
+                .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
+        return !支給申請一覧情報リスト.isEmpty();
     }
 
     private void 更新償還払支給判定結果データ(ModoruEntity 戻る情報, DbJohoViewState dbJoho) {
@@ -597,8 +607,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                shukeiJoho.added();
-                dbJoho.get償還払請求集計データList().add(new ShokanShukeiResult(shukeiJoho, RString.EMPTY));
+                dbJoho.get償還払請求集計データList().add(new ShokanShukeiResult(shukeiJoho.added(), RString.EMPTY));
             }
         }
     }
@@ -629,8 +638,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                service200904Joho.added();
-                dbJoho.get償還払請求サービス計画200904データResultList().add(new ShokanServicePlan200904Result(service200904Joho,
+                dbJoho.get償還払請求サービス計画200904データResultList().add(new ShokanServicePlan200904Result(service200904Joho.added(),
                         RString.EMPTY));
             }
         }
@@ -661,8 +669,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                service200604Joho.added();
-                dbJoho.get償還払請求サービス計画200604データResultList().add(new ShokanServicePlan200604Result(service200604Joho,
+                dbJoho.get償還払請求サービス計画200604データResultList().add(new ShokanServicePlan200604Result(service200604Joho.added(),
                         RString.EMPTY));
             }
         }
@@ -693,8 +700,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                service200004Joho.added();
-                dbJoho.get償還払請求サービス計画200004データResultList().add(new ShokanServicePlan200004Result(service200004Joho,
+                dbJoho.get償還払請求サービス計画200004データResultList().add(new ShokanServicePlan200004Result(service200004Joho.added(),
                         RString.EMPTY));
             }
         }
@@ -717,8 +723,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                shokujiHiyo.added();
-                dbJoho.get償還払請求食事費用データList().add(shokujiHiyo);
+                dbJoho.get償還払請求食事費用データList().add(shokujiHiyo.added());
             }
         }
     }
@@ -740,8 +745,7 @@ public class ShokanbarayiKeteiInfoPanelHandler {
                 }
             }
             if (index == 0) {
-                serviceHiyo.added();
-                dbJoho.get償還払請求特定入所者介護サービス費用データList().add(serviceHiyo);
+                dbJoho.get償還払請求特定入所者介護サービス費用データList().add(serviceHiyo.added());
             }
         }
     }

@@ -119,4 +119,7 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoItem {
     private RString telNo;
     private RString yubinBango;
 
+    private RString kongoNofuSubekigakuChotei;
+    private RString nofuSubekiGaku;
+
 }

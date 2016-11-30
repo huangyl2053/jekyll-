@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.entity.csv.sogojigyohikohijukyusha;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,13 +44,13 @@ public class SogojigyohiKohiJukyushaCsvFileMeisaEntity {
     @CsvField(order = 110, name = "サービス項目名")
     private RString サービス項目名;
     @CsvField(order = 120, name = "日数回数")
-    private Decimal 日数回数;
+    private RString 日数回数;
     @CsvField(order = 130, name = "公費対象単位数")
-    private Decimal 公費対象単位数;
+    private RString 公費対象単位数;
     @CsvField(order = 140, name = "公費負担金額")
-    private Decimal 公費負担金額;
+    private RString 公費負担金額;
     @CsvField(order = 150, name = "公費分本人負担額")
-    private Decimal 公費分本人負担額;
+    private RString 公費分本人負担額;
     @CsvField(order = 160, name = "証記載保険者番号")
     private RString 証記載保険者番号;
     @CsvField(order = 170, name = "保険者名")

@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBCN130001;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -11,12 +12,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShomeishoKisaiJoho のクラスファイル 
- * 
+ * ShomeishoKisaiJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShomeishoKisaiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,8 +27,6 @@ public class ShomeishoKisaiJohoDiv extends Panel {
      */
     @JsonProperty("txtJikofutangakuShomeishoSeiriNo")
     private TextBox txtJikofutangakuShomeishoSeiriNo;
-    @JsonProperty("lblTennyumae")
-    private Label lblTennyumae;
     @JsonProperty("txtTaishoKikan")
     private TextBoxDateRange txtTaishoKikan;
     @JsonProperty("txtHihokenshaKikan")
@@ -42,7 +42,7 @@ public class ShomeishoKisaiJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * gettxtJikofutangakuShomeishoSeiriNo
      * @return txtJikofutangakuShomeishoSeiriNo
      */
@@ -58,24 +58,6 @@ public class ShomeishoKisaiJohoDiv extends Panel {
     @JsonProperty("txtJikofutangakuShomeishoSeiriNo")
     public void setTxtJikofutangakuShomeishoSeiriNo(TextBox txtJikofutangakuShomeishoSeiriNo) {
         this.txtJikofutangakuShomeishoSeiriNo = txtJikofutangakuShomeishoSeiriNo;
-    }
-
-    /*
-     * getlblTennyumae
-     * @return lblTennyumae
-     */
-    @JsonProperty("lblTennyumae")
-    public Label getLblTennyumae() {
-        return lblTennyumae;
-    }
-
-    /*
-     * setlblTennyumae
-     * @param lblTennyumae lblTennyumae
-     */
-    @JsonProperty("lblTennyumae")
-    public void setLblTennyumae(Label lblTennyumae) {
-        this.lblTennyumae = lblTennyumae;
     }
 
     /*

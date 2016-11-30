@@ -52,6 +52,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
     private static final RString 区切り文字 = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
+    private boolean is最後レコード取り込み = false;
     /**
      * returnEnyity
      */
@@ -106,7 +107,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<
     @Override
     protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
-            if (レコード種別_3.equals(data.get(INDEX_0))) {
+            if (レコード種別_3.equals(data.get(INDEX_0)) || is最後レコード取り込み) {
+                is最後レコード取り込み = true;
                 return;
             }
             if (レコード種別.equals(data.get(INDEX_0))) {

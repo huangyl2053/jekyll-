@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5720001.Jyuk
 import jp.co.ndensan.reams.db.dbd.service.core.jyukyushadaichoidodhecklist.JyukyushaDaichoIdoCheckListManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

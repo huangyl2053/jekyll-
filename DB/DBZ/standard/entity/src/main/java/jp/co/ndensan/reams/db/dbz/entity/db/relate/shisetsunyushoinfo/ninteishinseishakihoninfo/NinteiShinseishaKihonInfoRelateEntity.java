@@ -39,5 +39,6 @@ public class NinteiShinseishaKihonInfoRelateEntity {
     private TelNo telNo;
     private AtenaJusho jusho;
     private RString shichosonMeisho;
+    private RString shinsakaiKaisaiNo;
 
 }

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -112,10 +113,14 @@ public class ShokanKetteiTsuchiShoShiharai {
      * @return 郵便番号
      */
     public RString get郵便番号() {
-        if (null == entity.get宛先Entity() || entity.get宛先Entity().getYubinNo() == null) {
+        if (null == entity.get宛先Entity()) {
             return RString.EMPTY;
         }
-        return new RString(entity.get宛先Entity().getYubinNo().toString());
+        YubinNo 郵便番号 = entity.get宛先Entity().getYubinNo();
+        if (null != 郵便番号) {
+            return new RString(郵便番号.toString());
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -488,7 +493,45 @@ public class ShokanKetteiTsuchiShoShiharai {
         return entity.getSagakuKingakuGokei();
     }
     
+    /**
+     * 口座を取得します。
+     * @return 口座
+     */
     public TokuteiKozaRelateEntity get口座() {
         return entity.get口座();
+    }
+    
+    /**
+     * 通知書発行対象フラグを取得します。
+     * @return  通知書発行対象フラグ
+     */
+    public boolean is通知書発行対象フラグ() {
+        return entity.isHakkoutaisyouFlg();
+    }
+        
+    /**
+     * 様式金額集計を取得します。
+     *
+     * @return 支給額
+     */
+    public Decimal get様式金額集計() {
+        return entity.getYousikiKingakuTtl();
+    }
+    
+     /**
+     * 種類1を取得します。
+     *
+     * @return 種類1
+     */
+    public RString get種類1() {
+        return entity.getSyurui1();
+    }
+    /**
+     * 種類2を取得します。
+     *
+     * @return 種類2
+     */
+    public RString get種類2() {
+        return entity.getSyurui2();
     }
 }

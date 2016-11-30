@@ -19,11 +19,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKub
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotakuservicekeikaku.KyotakuservicekeikakuSakuseikubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuShutokuJiyuHihokensha;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakuSositsuJiyuHihokensha;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -61,19 +63,6 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
     private static final RString 定数_旧措置者 = new RString("旧措置者");
     private static final RString 定数_みなし = new RString("みなし");
     private static final RString SLASH = new RString("/");
-    private static final RString 追加_認定 = new RString("認定　　　　　");
-    private static final RString 要介護度変更申請認定 = new RString("変更申請認定　");
-    private static final RString 要介護度変更申請却下 = new RString("変更申請却下　");
-    private static final RString サービス種類変更申請認定 = new RString("サ変更申請認定");
-    private static final RString サービス種類変更申請却下 = new RString("サ変更申請却下");
-    private static final RString 削除 = new RString("削除　　　　　");
-    private static final RString 修正 = new RString("修正　　　　　");
-    private static final RString 受給申請却下 = new RString("受給申請却下　");
-    private static final RString 削除回復 = new RString("削除回復　　　");
-    private static final RString 職権記載 = new RString("職権記載　　　");
-    private static final RString 職権修正 = new RString("職権修正　　　");
-    private static final RString 職権取消 = new RString("職権取消　　　");
-    private static final RString 履歴修正 = new RString("履歴修正　　　");
     private static final RString HEADER_連番 = new RString("連番");
     private static final RString HEADER_識別コード = new RString("識別コード");
     private static final RString HEADER_住民種別 = new RString("住民種別");
@@ -198,83 +187,85 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
     /**
      * CSVレコードを取得します。
      *
+     * @param 帳票制御共通 帳票制御共通
      * @return {@link HanyoListKyufuKanriHyoCsvEntity}
      */
-    public HanyoListKyufuKanriHyoCsvEntity edit() {
+    public HanyoListKyufuKanriHyoCsvEntity edit(ChohyoSeigyoKyotsu 帳票制御共通) {
         HanyoListKyufuKanriHyoCsvEntity csvEntity = new HanyoListKyufuKanriHyoCsvEntity();
-        edit_part2(csvEntity);
-        csvEntity.set審査年月(format日付項目(entity.get給付管理票().getShinsaYM()));
-        csvEntity.setサービス年月(format日付項目(entity.get給付管理票().getServiceTeikyoYM()));
-        csvEntity.set明細行番号(entity.get給付管理票().getKyufuMeisaiLineNo());
-        JigyoshaNo kyotakushienJigyoshoNo = entity.get給付管理票().getKyotakushienJigyoshoNo();
+        edit_part2(csvEntity, 帳票制御共通);
+        edit_part3(csvEntity);
+        csvEntity.set審査年月(format日付項目(entity.getShinsaYM()));
+        csvEntity.setサービス年月(format日付項目(entity.getServiceTeikyoYM()));
+        csvEntity.set明細行番号(entity.getKyufuMeisaiLineNo());
+        JigyoshaNo kyotakushienJigyoshoNo = entity.getKyotakushienJigyoshoNo();
         if (kyotakushienJigyoshoNo != null) {
             csvEntity.set計画事業者番号(kyotakushienJigyoshoNo.getColumnValue());
         }
-        if (定数_2.equals(entity.get給付管理票().getKyotakuServicePlanSakuseiKubunCode())
+        if (定数_2.equals(entity.getKyotakuServicePlanSakuseiKubunCode())
                 || entity.get計画事業者() == null) {
             csvEntity.set計画事業者名(RString.EMPTY);
         } else {
             csvEntity.set計画事業者名(entity.get計画事業者().getJigyoshaName().getColumnValue());
         }
-        HokenshaNo hokenshaNo = entity.get給付管理票().getHokenshaNo();
+        HokenshaNo hokenshaNo = entity.getHokenshaNo();
         if (hokenshaNo != null) {
             csvEntity.set保険者番号(hokenshaNo.getColumnValue());
         }
-        csvEntity.set管理票作成日(format日付項目(entity.get給付管理票().getKyufuSakuseiYMD()));
-        if (!RString.isNullOrEmpty(entity.get給付管理票().getKyufuSakuseiKubunCode())) {
+        csvEntity.set管理票作成日(format日付項目(entity.getKyufuSakuseiYMD()));
+        if (!RString.isNullOrEmpty(entity.getKyufuSakuseiKubunCode())) {
             csvEntity.set管理票作成区分(KyufukanrihyoSakuseiKubun.toValue(
-                    entity.get給付管理票().getKyufuSakuseiKubunCode()).get名称());
+                    entity.getKyufuSakuseiKubunCode()).get名称());
         }
-        if (定数_1.equals(entity.get給付管理票().getKyufuShubetsuKubunCode())) {
+        if (定数_1.equals(entity.getKyufuShubetsuKubunCode())) {
             csvEntity.set管理票種別区分(定数_訪問通所);
-        } else if (定数_2.equals(entity.get給付管理票().getKyufuShubetsuKubunCode())) {
+        } else if (定数_2.equals(entity.getKyufuShubetsuKubunCode())) {
             csvEntity.set管理票種別区分(定数_短期入所);
-        } else if (定数_3.equals(entity.get給付管理票().getKyufuShubetsuKubunCode())) {
+        } else if (定数_3.equals(entity.getKyufuShubetsuKubunCode())) {
             csvEntity.set管理票種別区分(定数_居宅);
         } else {
             csvEntity.set管理票種別区分(RString.EMPTY);
         }
-        csvEntity.set管理票生年月日(format日付項目(entity.get給付管理票().getHiHokenshaUmareYMD()));
-        if (entity.get給付管理票().getSeibetsuCode() != null) {
-            csvEntity.set管理票性別(Seibetsu.toValue(entity.get給付管理票().getSeibetsuCode()).get名称());
+        csvEntity.set管理票生年月日(format日付項目(entity.getHiHokenshaUmareYMD()));
+        if (entity.getSeibetsuCode() != null) {
+            csvEntity.set管理票性別(Seibetsu.toValue(entity.getSeibetsuCode()).get名称());
         }
-        csvEntity.set管理票要介護度(entity.get給付管理票().getYoKaigoJotaiKubunCode());
-        csvEntity.set限度額適用開始(format日付項目(entity.get給付管理票().getGendogakuTekiyoKaishiYM()));
-        csvEntity.set限度額適用終了(format日付項目(entity.get給付管理票().getGendogakuTekiyoShuryoYM()));
-        csvEntity.set支給限度額(new RString(entity.get給付管理票().getKyotakuKaigoYoboShikyuGendogaku()));
-        if (entity.get給付管理票().getKyotakuServicePlanSakuseiKubunCode() != null) {
+        csvEntity.set管理票要介護度(entity.getYoKaigoJotaiKubunCode());
+        csvEntity.set限度額適用開始(format日付項目(entity.getGendogakuTekiyoKaishiYM()));
+        csvEntity.set限度額適用終了(format日付項目(entity.getGendogakuTekiyoShuryoYM()));
+        csvEntity.set支給限度額(new RString(entity.getKyotakuKaigoYoboShikyuGendogaku()));
+        if (entity.getKyotakuServicePlanSakuseiKubunCode() != null) {
             csvEntity.set計画作成区分(KyotakuservicekeikakuSakuseikubunCode.toValue(
-                    entity.get給付管理票().getKyotakuServicePlanSakuseiKubunCode()).get名称());
+                    entity.getKyotakuServicePlanSakuseiKubunCode()).get名称());
         }
-        JigyoshaNo serviceJigyoshoNo = entity.get給付管理票().getServiceJigyoshoNo();
+        JigyoshaNo serviceJigyoshoNo = entity.getServiceJigyoshoNo();
         if (serviceJigyoshoNo != null) {
             csvEntity.setサービス事業者番号(serviceJigyoshoNo.getColumnValue());
         }
         if (entity.getサービス事業者() != null) {
             csvEntity.setサービス事業者名(entity.getサービス事業者().getJigyoshaName().getColumnValue());
         }
-        if (!RString.isNullOrEmpty(entity.get給付管理票().getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode())) {
-            csvEntity.set事業者区分(JigyoshoKubun.toValue(
-                    entity.get給付管理票().getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()).get名称());
-        }
-        ServiceShuruiCode serviceShuruiCode = entity.get給付管理票().getServiceShuruiCode();
+//        if (!RString.isNullOrEmpty(entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode())) {
+//            csvEntity.set事業者区分(JigyoshoKubun.toValue(
+//                    entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()).get名称());
+//        }
+        ServiceShuruiCode serviceShuruiCode = entity.getServiceShuruiCode();
         if (serviceShuruiCode != null) {
             csvEntity.setサービス種類(serviceShuruiCode.getColumnValue());
         }
         if (entity.getサービス種類() != null) {
             csvEntity.setサービス種類名(entity.getサービス種類().getServiceShuruiMeisho());
         }
-        csvEntity.set給付計画単位日数(new RString(entity.get給付管理票().getKyufuKeikakuTanisuNissu()));
-        csvEntity.set前月まで計画日数(new RString(entity.get給付管理票().getKyufuKeikakuNissu()));
-        csvEntity.set指定サービス小計(new RString(entity.get給付管理票().getShiteiServiceSubTotal()));
-        csvEntity.set基準該当サービス小計(new RString(entity.get給付管理票().getKijyunGaitoServiceSubTotal()));
-        csvEntity.set合計単位日数(new RString(entity.get給付管理票().getKyufuKeikakuTotalTanisuNissu()));
-        csvEntity.set担当介護支援専門員番号(entity.get給付管理票().getTantoKaigoShienSemmoninNo());
-        JigyoshaNo kaigoShienJigyoshaNo = entity.get給付管理票().getKaigoShienJigyoshaNo();
+        csvEntity.set給付計画単位日数(new RString(entity.getKyufuKeikakuTanisuNissu()));
+        csvEntity.set前月まで計画日数(new RString(entity.getKyufuKeikakuNissu()));
+        csvEntity.set指定サービス小計(new RString(entity.getShiteiServiceSubTotal()));
+        csvEntity.set基準該当サービス小計(new RString(entity.getKijyunGaitoServiceSubTotal()));
+        csvEntity.set合計単位日数(new RString(entity.getKyufuKeikakuTotalTanisuNissu()));
+        csvEntity.set担当介護支援専門員番号(entity.getTantoKaigoShienSemmoninNo());
+        JigyoshaNo kaigoShienJigyoshaNo = entity.getKaigoShienJigyoshaNo();
         if (kaigoShienJigyoshaNo != null) {
             csvEntity.set委託先の居宅介護支援事業者番号(kaigoShienJigyoshaNo.getColumnValue());
         }
-        csvEntity.set委託先の担当介護支援専門員番号(entity.get給付管理票().getItakusakiTantoKaigoShienSemmoninNo());
+        csvEntity.set委託先の担当介護支援専門員番号(entity.getItakusakiTantoKaigoShienSemmoninNo());
         if (entity.get居宅支援事業者() != null) {
             csvEntity.set委託先の居宅介護支援事業者名(entity.get居宅支援事業者().getJigyoshaName().getColumnValue());
         }
@@ -282,7 +273,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
 
     }
 
-    private void edit_part2(HanyoListKyufuKanriHyoCsvEntity csvEntity) {
+    private void edit_part2(HanyoListKyufuKanriHyoCsvEntity csvEntity, ChohyoSeigyoKyotsu 帳票制御共通) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         if (param.is連番付加()) {
             csvEntity.set連番(new RString(連番));
@@ -297,14 +288,9 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         csvEntity.set続柄コード(kojin.get続柄コードリスト().toTsuzukigaraCode().getColumnValue());
         csvEntity.set世帯コード(kojin.get世帯コード().getColumnValue());
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
-        csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
+        csvEntity.set住所コード(kojin.get住所().get町域コード().getColumnValue());
         csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-        if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                    .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
-        } else {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue()));
-        }
+        csvEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 地方公共団体情報));
         csvEntity.set住所(kojin.get住所().get住所());
         csvEntity.set番地(kojin.get住所().get番地().getBanchi().getColumnValue());
         csvEntity.set方書(kojin.get住所().get方書().getColumnValue());
@@ -339,8 +325,13 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
 
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                    toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            if (entity.get受給者台帳() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(RString.EMPTY);
+            } else {
+                csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set受給認定日(format日付項目(entity.get受給者台帳().getNinteiYMD()));
@@ -358,6 +349,9 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
                 csvEntity.set受給直近事由(set異動事由文言(entity.get受給者台帳().getChokkinIdoJiyuCode().getColumnValue()));
             }
         }
+    }
+
+    private void edit_part3(HanyoListKyufuKanriHyoCsvEntity csvEntity) {
         csvEntity.set市町村コード(entity.get最新被保台帳().getShichosonCode().getColumnValue());
         if (構成市町村マスタ.containsKey(entity.get最新被保台帳().getShichosonCode())) {
             csvEntity.set市町村名(構成市町村マスタ.get(entity.get最新被保台帳().getShichosonCode()).get市町村名称());
@@ -397,83 +391,84 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
     /**
      * CSVレコードを取得します。
      *
+     * @param 帳票制御共通 帳票制御共通
      * @return {@link HanyoListKyufuKanriHyoCsvEntity}
      */
-    public HanyoListKyufuKanriHyoNoRenbanCsvEntity noRenbanEdit() {
+    public HanyoListKyufuKanriHyoNoRenbanCsvEntity noRenbanEdit(ChohyoSeigyoKyotsu 帳票制御共通) {
         HanyoListKyufuKanriHyoNoRenbanCsvEntity csvEntity = new HanyoListKyufuKanriHyoNoRenbanCsvEntity();
-        noRenbanEdit_part2(csvEntity);
-        csvEntity.set審査年月(format日付項目(entity.get給付管理票().getShinsaYM()));
-        csvEntity.setサービス年月(format日付項目(entity.get給付管理票().getServiceTeikyoYM()));
-        csvEntity.set明細行番号(entity.get給付管理票().getKyufuMeisaiLineNo());
-        JigyoshaNo kyotakushienJigyoshoNo = entity.get給付管理票().getKyotakushienJigyoshoNo();
+        noRenbanEdit_part2(csvEntity, 帳票制御共通);
+        csvEntity.set審査年月(format日付項目(entity.getShinsaYM()));
+        csvEntity.setサービス年月(format日付項目(entity.getServiceTeikyoYM()));
+        csvEntity.set明細行番号(entity.getKyufuMeisaiLineNo());
+        JigyoshaNo kyotakushienJigyoshoNo = entity.getKyotakushienJigyoshoNo();
         if (kyotakushienJigyoshoNo != null) {
             csvEntity.set計画事業者番号(kyotakushienJigyoshoNo.getColumnValue());
         }
-        if (定数_2.equals(entity.get給付管理票().getKyotakuServicePlanSakuseiKubunCode())
+        if (定数_2.equals(entity.getKyotakuServicePlanSakuseiKubunCode())
                 || entity.get計画事業者() == null) {
             csvEntity.set計画事業者名(RString.EMPTY);
         } else {
             csvEntity.set計画事業者名(entity.get計画事業者().getJigyoshaName().getColumnValue());
         }
-        HokenshaNo hokenshaNo = entity.get給付管理票().getHokenshaNo();
+        HokenshaNo hokenshaNo = entity.getHokenshaNo();
         if (hokenshaNo != null) {
             csvEntity.set保険者番号(hokenshaNo.getColumnValue());
         }
-        csvEntity.set管理票作成日(format日付項目(entity.get給付管理票().getKyufuSakuseiYMD()));
-        if (!RString.isNullOrEmpty(entity.get給付管理票().getKyufuSakuseiKubunCode())) {
+        csvEntity.set管理票作成日(format日付項目(entity.getKyufuSakuseiYMD()));
+        if (!RString.isNullOrEmpty(entity.getKyufuSakuseiKubunCode())) {
             csvEntity.set管理票作成区分(KyufukanrihyoSakuseiKubun.toValue(
-                    entity.get給付管理票().getKyufuSakuseiKubunCode()).get名称());
+                    entity.getKyufuSakuseiKubunCode()).get名称());
         }
-        if (定数_1.equals(entity.get給付管理票().getKyufuShubetsuKubunCode())) {
+        if (定数_1.equals(entity.getKyufuShubetsuKubunCode())) {
             csvEntity.set管理票種別区分(定数_訪問通所);
-        } else if (定数_2.equals(entity.get給付管理票().getKyufuShubetsuKubunCode())) {
+        } else if (定数_2.equals(entity.getKyufuShubetsuKubunCode())) {
             csvEntity.set管理票種別区分(定数_短期入所);
-        } else if (定数_3.equals(entity.get給付管理票().getKyufuShubetsuKubunCode())) {
+        } else if (定数_3.equals(entity.getKyufuShubetsuKubunCode())) {
             csvEntity.set管理票種別区分(定数_居宅);
         } else {
             csvEntity.set管理票種別区分(RString.EMPTY);
         }
-        csvEntity.set管理票生年月日(format日付項目(entity.get給付管理票().getHiHokenshaUmareYMD()));
-        if (entity.get給付管理票().getSeibetsuCode() != null) {
-            csvEntity.set管理票性別(Seibetsu.toValue(entity.get給付管理票().getSeibetsuCode()).get名称());
+        csvEntity.set管理票生年月日(format日付項目(entity.getHiHokenshaUmareYMD()));
+        if (entity.getSeibetsuCode() != null) {
+            csvEntity.set管理票性別(Seibetsu.toValue(entity.getSeibetsuCode()).get名称());
         }
-        csvEntity.set管理票要介護度(entity.get給付管理票().getYoKaigoJotaiKubunCode());
-        csvEntity.set限度額適用開始(format日付項目(entity.get給付管理票().getGendogakuTekiyoKaishiYM()));
-        csvEntity.set限度額適用終了(format日付項目(entity.get給付管理票().getGendogakuTekiyoShuryoYM()));
-        csvEntity.set支給限度額(new RString(entity.get給付管理票().getKyotakuKaigoYoboShikyuGendogaku()));
-        if (entity.get給付管理票().getKyotakuServicePlanSakuseiKubunCode() != null) {
+        csvEntity.set管理票要介護度(entity.getYoKaigoJotaiKubunCode());
+        csvEntity.set限度額適用開始(format日付項目(entity.getGendogakuTekiyoKaishiYM()));
+        csvEntity.set限度額適用終了(format日付項目(entity.getGendogakuTekiyoShuryoYM()));
+        csvEntity.set支給限度額(new RString(entity.getKyotakuKaigoYoboShikyuGendogaku()));
+        if (entity.getKyotakuServicePlanSakuseiKubunCode() != null) {
             csvEntity.set計画作成区分(KyotakuservicekeikakuSakuseikubunCode.toValue(
-                    entity.get給付管理票().getKyotakuServicePlanSakuseiKubunCode()).get名称());
+                    entity.getKyotakuServicePlanSakuseiKubunCode()).get名称());
         }
-        JigyoshaNo serviceJigyoshoNo = entity.get給付管理票().getServiceJigyoshoNo();
+        JigyoshaNo serviceJigyoshoNo = entity.getServiceJigyoshoNo();
         if (serviceJigyoshoNo != null) {
             csvEntity.setサービス事業者番号(serviceJigyoshoNo.getColumnValue());
         }
         if (entity.getサービス事業者() != null) {
             csvEntity.setサービス事業者名(entity.getサービス事業者().getJigyoshaName().getColumnValue());
         }
-        if (!RString.isNullOrEmpty(entity.get給付管理票().getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode())) {
+        if (!RString.isNullOrEmpty(entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode())) {
             csvEntity.set事業者区分(JigyoshoKubun.toValue(
-                    entity.get給付管理票().getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()).get名称());
+                    entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()).get名称());
         }
-        ServiceShuruiCode serviceShuruiCode = entity.get給付管理票().getServiceShuruiCode();
+        ServiceShuruiCode serviceShuruiCode = entity.getServiceShuruiCode();
         if (serviceShuruiCode != null) {
             csvEntity.setサービス種類(serviceShuruiCode.getColumnValue());
         }
         if (entity.getサービス種類() != null) {
             csvEntity.setサービス種類名(entity.getサービス種類().getServiceShuruiMeisho());
         }
-        csvEntity.set給付計画単位日数(new RString(entity.get給付管理票().getKyufuKeikakuTanisuNissu()));
-        csvEntity.set前月まで計画日数(new RString(entity.get給付管理票().getKyufuKeikakuNissu()));
-        csvEntity.set指定サービス小計(new RString(entity.get給付管理票().getShiteiServiceSubTotal()));
-        csvEntity.set基準該当サービス小計(new RString(entity.get給付管理票().getKijyunGaitoServiceSubTotal()));
-        csvEntity.set合計単位日数(new RString(entity.get給付管理票().getKyufuKeikakuTotalTanisuNissu()));
-        csvEntity.set担当介護支援専門員番号(entity.get給付管理票().getTantoKaigoShienSemmoninNo());
-        JigyoshaNo kaigoShienJigyoshaNo = entity.get給付管理票().getKaigoShienJigyoshaNo();
+        csvEntity.set給付計画単位日数(new RString(entity.getKyufuKeikakuTanisuNissu()));
+        csvEntity.set前月まで計画日数(new RString(entity.getKyufuKeikakuNissu()));
+        csvEntity.set指定サービス小計(new RString(entity.getShiteiServiceSubTotal()));
+        csvEntity.set基準該当サービス小計(new RString(entity.getKijyunGaitoServiceSubTotal()));
+        csvEntity.set合計単位日数(new RString(entity.getKyufuKeikakuTotalTanisuNissu()));
+        csvEntity.set担当介護支援専門員番号(entity.getTantoKaigoShienSemmoninNo());
+        JigyoshaNo kaigoShienJigyoshaNo = entity.getKaigoShienJigyoshaNo();
         if (kaigoShienJigyoshaNo != null) {
             csvEntity.set委託先の居宅介護支援事業者番号(kaigoShienJigyoshaNo.getColumnValue());
         }
-        csvEntity.set委託先の担当介護支援専門員番号(entity.get給付管理票().getItakusakiTantoKaigoShienSemmoninNo());
+        csvEntity.set委託先の担当介護支援専門員番号(entity.getItakusakiTantoKaigoShienSemmoninNo());
         if (entity.get居宅支援事業者() != null) {
             csvEntity.set委託先の居宅介護支援事業者名(entity.get居宅支援事業者().getJigyoshaName().getColumnValue());
         }
@@ -481,7 +476,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
 
     }
 
-    private void noRenbanEdit_part2(HanyoListKyufuKanriHyoNoRenbanCsvEntity csvEntity) {
+    private void noRenbanEdit_part2(HanyoListKyufuKanriHyoNoRenbanCsvEntity csvEntity, ChohyoSeigyoKyotsu 帳票制御共通) {
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         csvEntity.set識別コード(kojin.get識別コード().getColumnValue());
         csvEntity.set住民種別(kojin.get住民状態().住民状態略称());
@@ -493,14 +488,9 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         csvEntity.set続柄コード(kojin.get続柄コードリスト().toTsuzukigaraCode().getColumnValue());
         csvEntity.set世帯コード(kojin.get世帯コード().getColumnValue());
         csvEntity.set世帯主名(kojin.get世帯主名().getColumnValue());
-        csvEntity.set住所コード(kojin.get住所().get全国住所コード().getColumnValue());
+        csvEntity.set住所コード(kojin.get住所().get町域コード().getColumnValue());
         csvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-        if (kojin.get住所().get方書() != null && !kojin.get住所().get方書().isEmpty()) {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue())
-                    .concat(RString.FULL_SPACE).concat(kojin.get住所().get方書().getColumnValue()));
-        } else {
-            csvEntity.set住所番地方書(kojin.get住所().get住所().concat(kojin.get住所().get番地().getBanchi().getColumnValue()));
-        }
+        csvEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 地方公共団体情報));
         csvEntity.set住所(kojin.get住所().get住所());
         csvEntity.set番地(kojin.get住所().get番地().getBanchi().getColumnValue());
         csvEntity.set方書(kojin.get住所().get方書().getColumnValue());
@@ -535,8 +525,13 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
             csvEntity.set受給申請事由(get受給申請事由(entity.get受給者台帳().getJukyuShinseiJiyu().getColumnValue()));
 
             csvEntity.set受給申請日(format日付項目(entity.get受給者台帳().getJukyuShinseiYMD()));
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.
-                    toValue(システム日付, entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).getName());
+            if (entity.get受給者台帳() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode() == null
+                    || entity.get受給者台帳().getYokaigoJotaiKubunCode().isEmpty()) {
+                csvEntity.set受給要介護度(RString.EMPTY);
+            } else {
+                csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.get受給者台帳().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            }
             csvEntity.set受給認定開始日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanKaishiYMD()));
             csvEntity.set受給認定終了日(format日付項目(entity.get受給者台帳().getNinteiYukoKikanShuryoYMD()));
             csvEntity.set受給認定日(format日付項目(entity.get受給者台帳().getNinteiYMD()));
@@ -644,37 +639,7 @@ public class HanyoListKyufuKanriHyoCsvEntityEditor {
         if (RString.isNullOrEmpty(異動事由コード)) {
             return RString.EMPTY;
         }
-        RString 直近異動事由 = ChokkinIdoJiyuCode.toValue(異動事由コード).get名称();
-        if (ChokkinIdoJiyuCode.未登録.get名称().equals(直近異動事由)) {
-            return RString.EMPTY;
-        } else if (ChokkinIdoJiyuCode.追加_認定.get名称().equals(直近異動事由)) {
-            return 追加_認定;
-        } else if (ChokkinIdoJiyuCode.要介護度変更申請認定.get名称().equals(直近異動事由)) {
-            return 要介護度変更申請認定;
-        } else if (ChokkinIdoJiyuCode.要介護度変更申請却下.get名称().equals(直近異動事由)) {
-            return 要介護度変更申請却下;
-        } else if (ChokkinIdoJiyuCode.サービス種類変更申請認定.get名称().equals(直近異動事由)) {
-            return サービス種類変更申請認定;
-        } else if (ChokkinIdoJiyuCode.サービス種類変更申請却下.get名称().equals(直近異動事由)) {
-            return サービス種類変更申請却下;
-        } else if (ChokkinIdoJiyuCode.削除.get名称().equals(直近異動事由)) {
-            return 削除;
-        } else if (ChokkinIdoJiyuCode.修正.get名称().equals(直近異動事由)) {
-            return 修正;
-        } else if (ChokkinIdoJiyuCode.受給申請却下.get名称().equals(直近異動事由)) {
-            return 受給申請却下;
-        } else if (ChokkinIdoJiyuCode.削除回復.get名称().equals(直近異動事由)) {
-            return 削除回復;
-        } else if (ChokkinIdoJiyuCode.職権記載.get名称().equals(直近異動事由)) {
-            return 職権記載;
-        } else if (ChokkinIdoJiyuCode.職権修正.get名称().equals(直近異動事由)) {
-            return 職権修正;
-        } else if (ChokkinIdoJiyuCode.職権取消.get名称().equals(直近異動事由)) {
-            return 職権取消;
-        } else if (ChokkinIdoJiyuCode.履歴修正.get名称().equals(直近異動事由)) {
-            return 履歴修正;
-        }
-        return RString.EMPTY;
+        return ChokkinIdoJiyuCode.toValue(異動事由コード).get名称();
     }
 
     /**

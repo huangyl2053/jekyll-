@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiP
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -148,6 +149,7 @@ public class ShokanbaraiSashitomeTaishoshaIchiranOutputProcess extends BatchKeyB
         宛先builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
         宛先builder.set基準日(batchPram.getHakkoYMD());
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+        宛先builder.set代納人利用区分(DainoRiyoKubun.利用しない);
         ShikibetsuTaishoPSMSearchKeyBuilder key2 = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key2.build();
         ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
@@ -231,7 +233,7 @@ public class ShokanbaraiSashitomeTaishoshaIchiranOutputProcess extends BatchKeyB
         ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo ichiranhyo = new ShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyo();
         List<ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranItem> itemList
                 = ichiranhyo.
-                getShokanharaiShikyuFushikyuKeteiTsuchiIchiranhyoData(帳票データリスト, batchPram, 並び順List, 改頁List, 種類Map, 帳票制御共通情報);
+                shokanbaraiSashitomeTaishoshaIchiranReportData(帳票データリスト, batchPram, 並び順List, 改頁List, 種類Map, 帳票制御共通情報);
 
         ShokanbaraiSashitomeTaishoshaIchiranReport report = ShokanbaraiSashitomeTaishoshaIchiranReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);

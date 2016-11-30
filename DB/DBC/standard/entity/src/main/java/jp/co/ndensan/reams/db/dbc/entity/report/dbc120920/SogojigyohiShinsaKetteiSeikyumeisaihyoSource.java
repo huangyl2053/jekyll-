@@ -84,6 +84,7 @@ public class SogojigyohiShinsaKetteiSeikyumeisaihyoSource implements IReportSour
     public RString gokeiRiyoshaFutangaku;
     @ReportItem(name = "gokeiKohiFutangaku", length = 15, order = 36)
     public RString gokeiKohiFutangaku;
+    @ReportItem(name = "serviceShuruiCode", length = 10, order = 37)
     public RString serviceShuruiCode;
 
 // </editor-fold>

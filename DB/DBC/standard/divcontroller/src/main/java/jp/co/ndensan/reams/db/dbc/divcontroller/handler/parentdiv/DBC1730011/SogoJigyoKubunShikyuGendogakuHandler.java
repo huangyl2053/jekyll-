@@ -82,6 +82,7 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
         div.getDgShikyuGendogaku().setDataSource(dataSource);
         clear詳細内容();
         set詳細入力不可();
+        set入力前状態();
     }
 
     /**
@@ -179,9 +180,16 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
         clear詳細内容();
         set詳細入力不可();
         div.getBtnTsuika().setDisabled(false);
+        boolean firstFlag = true;
         for (dgShikyuGendogaku_Row row : div.getDgShikyuGendogaku().getDataSource()) {
-            row.setModifyButtonState(DataGridButtonState.Enabled);
-            row.setDeleteButtonState(DataGridButtonState.Enabled);
+            if (firstFlag) {
+                row.setModifyButtonState(DataGridButtonState.Enabled);
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
+                firstFlag = false;
+            } else {
+                row.setModifyButtonState(DataGridButtonState.Disabled);
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+            }
         }
     }
 
@@ -196,12 +204,22 @@ public class SogoJigyoKubunShikyuGendogakuHandler {
             SogoJigyoKubunShikyuGendoGakuManager manager) {
 
         if (登録.equals(保存モード)) {
-            SogoJigyoKubunEntity entityFirst = 総合事業区分情報.get(0);
-            SogoJigyoKubunEntity entityLast = 総合事業区分情報.get(総合事業区分情報.size() - 1);
             FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(div.getTxtTekiyoKaishiYM().getDomain().toDateString());
             SogoJigyoKubunShikyuGendoGaku 要支援1Entity = new SogoJigyoKubunShikyuGendoGaku(要支援1, 適用開始年月, 履歴番号);
             SogoJigyoKubunShikyuGendoGaku 要支援2Entity = new SogoJigyoKubunShikyuGendoGaku(要支援2, 適用開始年月, 履歴番号);
             SogoJigyoKubunShikyuGendoGaku 二次予防Entity = new SogoJigyoKubunShikyuGendoGaku(二次予防, 適用開始年月, 履歴番号);
+            if (総合事業区分情報 == null || 総合事業区分情報.isEmpty()) {
+                要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue()).build();
+                要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue()).build();
+                二次予防Entity = 二次予防Entity.createBuilderForEdit().set支給限度単位数(div.getTxtNijiYobo().getValue()).build();
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援1Entity.added());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(要支援2Entity.added());
+                manager.save介護予防_日常生活支援総合事業区分支給限度額(二次予防Entity.added());
+                return;
+            }
+
+            SogoJigyoKubunEntity entityFirst = 総合事業区分情報.get(0);
+            SogoJigyoKubunEntity entityLast = 総合事業区分情報.get(総合事業区分情報.size() - 1);
             if (!適用開始年月.isBeforeOrEquals(entityFirst.get要支援1().get適用開始年月())) {
                 要支援1Entity = 要支援1Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien1().getValue()).build();
                 要支援2Entity = 要支援2Entity.createBuilderForEdit().set支給限度単位数(div.getTxtYoShien2().getValue()).build();

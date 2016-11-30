@@ -35,8 +35,8 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtShinsakaiNo"));
             };
 
-            Controls.prototype.txtGogitaiNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtGogitaiNo"));
+            Controls.prototype.txtGogitaiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtGogitaiName"));
             };
 
             Controls.prototype.txtShinsakaijoMeisho = function () {

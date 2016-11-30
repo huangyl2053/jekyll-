@@ -32,6 +32,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     private static final RString 日本人 = new RString("1");
     private static final RString 住登外日本人 = new RString("3");
     private static final RString 年度 = new RString("年度");
+    private static final RString 作成 = new RString("　作成");
     private static final RString 男性 = new RString("1");
     private static final RString 女性 = new RString("2");
     private static final int NUM_0 = 0;
@@ -111,7 +112,53 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
         set郵便番号(source);
         set住所(source);
         set改ページデータ(source);
+        setPageBreakEmpty(source);
         return source;
+    }
+
+    private void setPageBreakEmpty(TokubetsuChoshuDoteiIchiranSource source) {
+        if (source.chokiCode == null) {
+            source.chokiCode = RString.EMPTY;
+        }
+        if (source.gyoseikuCode == null) {
+            source.gyoseikuCode = RString.EMPTY;
+        }
+        if (source.chiku1 == null) {
+            source.chiku1 = RString.EMPTY;
+        }
+        if (source.chiku2 == null) {
+            source.chiku2 = RString.EMPTY;
+        }
+        if (source.chiku3 == null) {
+            source.chiku3 = RString.EMPTY;
+        }
+        if (source.setaiCode == null) {
+            source.setaiCode = RString.EMPTY;
+        }
+        if (source.shikibetsuCode == null) {
+            source.shikibetsuCode = ShikibetsuCode.EMPTY;
+        }
+        if (source.kanaShimei == null) {
+            source.kanaShimei = RString.EMPTY;
+        }
+        if (source.seinengappiYMD == null) {
+            source.seinengappiYMD = RString.EMPTY;
+        }
+        if (source.seibetsuCode == null) {
+            source.seibetsuCode = RString.EMPTY;
+        }
+        if (source.shichosonCode == null) {
+            source.shichosonCode = RString.EMPTY;
+        }
+        if (source.hihokenshaNo == null) {
+            source.hihokenshaNo = RString.EMPTY;
+        }
+        if (source.nenkinCode == null) {
+            source.nenkinCode = RString.EMPTY;
+        }
+        if (source.kisoNenkinNo == null) {
+            source.kisoNenkinNo = RString.EMPTY;
+        }
     }
 
     private void set改ページデータ(TokubetsuChoshuDoteiIchiranSource source) {
@@ -141,7 +188,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     }
 
     private void set作成日時(TokubetsuChoshuDoteiIchiranSource source) {
-        source.printTimeStamp = DateConverter.getSakuseiYMD();
+        source.printTimeStamp = DateConverter.getSakuseiYMD().concat(作成);
     }
 
     private void set導入団体コード(TokubetsuChoshuDoteiIchiranSource source) {

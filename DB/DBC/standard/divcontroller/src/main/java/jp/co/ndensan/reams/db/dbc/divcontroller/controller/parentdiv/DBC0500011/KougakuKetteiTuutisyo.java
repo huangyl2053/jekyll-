@@ -6,16 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0500011;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.DBC0500011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.KougakuKetteiTuutisyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0500011.KougakuKetteiTuutisyoHandler;
+import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishotan.KogakuServicehiKetteiTsuchishoTan;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.JukyushaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -58,10 +64,21 @@ public class KougakuKetteiTuutisyo {
      * @return ResponseData<KougakuKetteiTuutisyoDiv>
      */
     public ResponseData<KougakuKetteiTuutisyoDiv> onLoad(KougakuKetteiTuutisyoDiv div) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (key.get被保険者番号().isEmpty()) {
+        if (!ResponseHolder.isReRequest()
+                && (key == null || key.get被保険者番号() == null || key.get被保険者番号().isEmpty())) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_NAME, true);
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrErrorMessages.該当データなし.getMessage()).respond();
+        }
+        HihokenshaNo 被保険者番号 = key.get被保険者番号();
+        List<JukyushaDaicho> 受給者台帳 = new JukyushaDaichoManager().get受給者台帳情報(被保険者番号);
+        List<SogoJigyoTaishosha> 総合事業対象者 = new SogoJigyoTaishoshaManager().get総合事業対象者(被保険者番号);
+        if (受給者台帳.isEmpty() || 総合事業対象者.isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_NAME, true);
+            return ResponseData.of(div).addMessage(DbdErrorMessages.受給共通_受給者_事業対象者登録なし.getMessage()).respond();
         }
         KougakuKetteiTuutisyoManager manager = KougakuKetteiTuutisyoManager.createInstance();
         List<FlexibleYearMonth> サービス提供年月リスト = manager.getサービス提供年月(key.get被保険者番号());

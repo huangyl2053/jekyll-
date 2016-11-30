@@ -76,7 +76,15 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3054KogakuKyufuTaishoshaMeisaiEntity
      */
     public void save高額介護サービス費給付対象者明細(DbT3054KogakuKyufuTaishoshaMeisaiEntity entity) {
-        this.dbt3054Dac.save(entity);
+        DbT3054KogakuKyufuTaishoshaMeisaiEntity dbt3054Entity = dbt3054Dac.selectByKey(
+                entity.getHihokenshaNo(),
+                entity.getServiceTeikyoYM(),
+                entity.getJigyoshaNo(),
+                entity.getServiceShuruiCode(),
+                entity.getRirekiNo());
+        if (null == dbt3054Entity) {
+            this.dbt3054Dac.save(entity);
+        }
     }
 
     /**
@@ -121,7 +129,15 @@ public class KogakuKaigoServicehiKyufugakuSanshutsuManager {
      * @param entity DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity
      */
     public void save事業高額介護サービス費給付対象者明細(DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity) {
-        this.dbt3108Dac.save(entity);
+        DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity dbt3108Entity = dbt3108Dac.selectByKey(
+                entity.getHihokenshaNo(),
+                entity.getServiceTeikyoYM(),
+                entity.getJigyoshaNo(),
+                entity.getServiceShuruiCode(),
+                entity.getRirekiNo());
+        if (null == dbt3108Entity) {
+            this.dbt3108Dac.save(entity);
+        }
     }
 
     /**

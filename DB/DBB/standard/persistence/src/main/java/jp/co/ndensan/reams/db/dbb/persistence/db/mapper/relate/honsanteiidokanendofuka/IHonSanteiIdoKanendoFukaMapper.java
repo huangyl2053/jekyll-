@@ -151,6 +151,14 @@ public interface IHonSanteiIdoKanendoFukaMapper {
     void insertDbT2002FukaJohoTemp(DbT2002FukaJohoTempTableEntity entity);
 
     /**
+     * 宛名識別対象異動分取得PSMから異動データを取得します。
+     *
+     * @param param パラメータ
+     * @return 被保険者本人異動情報
+     */
+    List<ShotokuIdoTmpEntity> select住基異動(KanendoFukaParameter param);
+
+    /**
      * 被保険者本人異動を取得します。
      *
      * @param param パラメータ

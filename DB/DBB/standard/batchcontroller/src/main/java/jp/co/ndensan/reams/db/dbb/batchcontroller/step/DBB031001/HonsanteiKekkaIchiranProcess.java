@@ -53,14 +53,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -92,13 +90,14 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKeisangojohoEntity> {
 
-    private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
-            + ".honnsanteifuka.IHonnSanteiFukaMapper.select本算定計算後賦課情報");
+    private static final RString SELECTPATH_HAS = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
+            + ".honnsanteifuka.IHonnSanteiFukaMapper.select本算定計算後賦課情報has徴収方法");
+    private static final RString SELECTPATH_HASNOT = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
+            + ".honnsanteifuka.IHonnSanteiFukaMapper.select本算定計算後賦課情報hasnot徴収方法");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBB200009");
     private static final RString 本算定_EUCファイル名 = new RString("HonsanteiKekkaIcihiranData.csv");
     private static final RString カンマ = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final ReportId 帳票ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
     private static final RString 区分_管内 = new RString("1");
     private static final RString 区分_管外 = new RString("2");
     private static final RString HYPHEN = new RString("-");
@@ -130,10 +129,8 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
     private static final int NUM_10 = 10;
     private static final int NUM_11 = 11;
     private static final int NUM_12 = 12;
-    @BatchWriter
     private BatchReportWriter<HonsanteiKekkaIcihiranReportSource> reportWriter;
     private ReportSourceWriter<HonsanteiKekkaIcihiranReportSource> sourceWriter;
-    @BatchWriter
     private CsvWriter<HonnSanteiFukaCSVEntity> eucCsvWriter;
     private HonsanteiFukaProcessParameter processParameter;
     private HonsenteiKeisangojohoParameter myBatisParameter;
@@ -176,12 +173,12 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         if (RString.isNullOrEmpty(processParameter.get出力帳票().get出力順ID())) {
             return;
         } else {
-            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票ID,
+            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(),
                     Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
+            if (出力順情報 == null) {
+                return;
+            }
             出力順 = MyBatisOrderByClauseCreator.create(HonsanteiKekkaIcihiranOutPutOrder.class, 出力順情報);
-        }
-        if (出力順情報 == null) {
-            return;
         }
         出力順項目リスト = new ArrayList<>();
         改頁項目リスト = new ArrayList();
@@ -197,7 +194,10 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECTPATH, myBatisParameter);
+        if (processParameter.isContains徴収方法()) {
+            return new BatchDbReader(SELECTPATH_HAS, myBatisParameter);
+        }
+        return new BatchDbReader(SELECTPATH_HASNOT, myBatisParameter);
     }
 
     @Override
@@ -206,10 +206,15 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
 
     @Override
     protected void createWriter() {
-        PageBreaker<HonsanteiKekkaIcihiranReportSource> breakPage
-                = new HonsanteiKekkaIcihiranPageBreak(pageBreakKeys);
-        reportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB200009.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
+        if (pageBreakKeys == null) {
+            reportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBB.DBB200009.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
+        } else {
+            PageBreaker<HonsanteiKekkaIcihiranReportSource> breakPage
+                    = new HonsanteiKekkaIcihiranPageBreak(pageBreakKeys);
+            reportWriter = BatchReportFactory.createBatchReportWriter(
+                    ReportIdDBB.DBB200009.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
+        }
         sourceWriter = new ReportSourceWriter<>(reportWriter);
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
@@ -240,6 +245,8 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
+        reportWriter.close();
+        manager.spool(eucFilePath);
         List<RString> 出力条件リスト = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定数_調定年度).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE)
@@ -264,7 +271,6 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         出力条件リスト.add(builder.toRString());
         int 出力ページ数 = sourceWriter.pageCount().value();
         loadバッチ出力条件リスト(出力条件リスト, 出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
-        manager.spool(eucFilePath);
     }
 
     private void loadバッチ出力条件リスト(List<RString> 出力条件リスト, int 出力ページ数,
@@ -409,6 +415,7 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         atenaKozaEntity.set普徴収入額12(keisangoJoho.get普徴収入額12());
         atenaKozaEntity.set普徴収入額13(keisangoJoho.get普徴収入額13());
         atenaKozaEntity.set普徴収入額14(keisangoJoho.get普徴収入額14());
+        atenaKozaEntity.set徴収方法(entity.get徴収方法());
         atenaKozaEntity.set宛名Entity(entity.get宛名());
         atenaKozaEntity.set口座Entity(entity.get特定口座());
         return atenaKozaEntity;

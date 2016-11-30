@@ -109,7 +109,7 @@ public class ShujiiIkenshoMiIraiEditor implements IShujiiIkenshoMiIraiEditor {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
-        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 }

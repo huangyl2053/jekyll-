@@ -36,8 +36,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanriBuilder;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanriBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;

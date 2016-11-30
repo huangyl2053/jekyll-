@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.kyufutsuchigenmenhosei;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufutsuchigenmenhosei.KyufuTsuchiGenmenHoseiMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -23,7 +22,9 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
 
     private FlexibleYearMonth サービス開始年月;
     private FlexibleYearMonth サービス終了年月;
-    private List<RString> 市町村コードList;
+    private RString 市町村コード;
+    private RString 証記載保険者番号;
+    private RString 市町村名称;
     private long 帳票出力順ID;
 
     /**
@@ -31,15 +32,19 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
      *
      * @param サービス開始年月 FlexibleYearMonth
      * @param サービス終了年月 FlexibleYearMonth
-     * @param 市町村コードList List<HokenshaNo>
+     * @param 市町村コード RString
+     * @param 証記載保険者番号 RString
+     * @param 市町村名称 RString
      * @param 帳票出力順ID long
      */
     public KyufuTsuchiGenmenHoseiProcessParameter(
             FlexibleYearMonth サービス開始年月, FlexibleYearMonth サービス終了年月,
-            List<RString> 市町村コードList, long 帳票出力順ID) {
+            RString 市町村コード, RString 証記載保険者番号, RString 市町村名称, long 帳票出力順ID) {
         this.サービス開始年月 = サービス開始年月;
         this.サービス終了年月 = サービス終了年月;
-        this.市町村コードList = 市町村コードList;
+        this.市町村コード = 市町村コード;
+        this.証記載保険者番号 = 証記載保険者番号;
+        this.市町村名称 = 市町村名称;
         this.帳票出力順ID = 帳票出力順ID;
     }
 
@@ -47,10 +52,10 @@ public class KyufuTsuchiGenmenHoseiProcessParameter implements IBatchProcessPara
      * プロセスパラメータを作成します。
      *
      * @param 出力順 出力順
+     * @param is広域保険者 is広域保険者
      * @return プロセスパラメータ
      */
-    public KyufuTsuchiGenmenHoseiMapperParameter toMapperParameter(RString 出力順) {
-        return new KyufuTsuchiGenmenHoseiMapperParameter(サービス開始年月, サービス終了年月, 市町村コードList, 出力順);
+    public KyufuTsuchiGenmenHoseiMapperParameter toMapperParameter(RString 出力順, boolean is広域保険者) {
+        return new KyufuTsuchiGenmenHoseiMapperParameter(サービス開始年月, サービス終了年月, 証記載保険者番号, 出力順, is広域保険者);
     }
-
 }

@@ -122,7 +122,8 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(所得照会候補者TEMPテーブルに登録)
     protected IBatchFlowCommand insJuminJohoTmpProcess() {
-        if (processParameter.get処理年度() == null || processParameter.get出力対象() == null) {
+        if (processParameter.get処理年度() == null || processParameter.get処理年度().isEmpty()
+                || RString.isNullOrEmpty(processParameter.get出力対象())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り
                     .getMessage().evaluate());
         }
@@ -136,7 +137,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(対象外の住民情報を更新)
     protected IBatchFlowCommand delTaisyogaiJuminJohoTmpProcess() {
-        if (processParameter.get処理年度() == null) {
+        if (processParameter.get処理年度() == null || processParameter.get処理年度().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り
                     .getMessage().evaluate());
         }
@@ -196,7 +197,7 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(受給者TEMPテーブルに登録)
     protected IBatchFlowCommand insJyukyushaTmpProcess() {
-        if (processParameter.get処理年度() == null) {
+        if (processParameter.get処理年度() == null || processParameter.get処理年度().isEmpty()) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り
                     .getMessage().evaluate());
         }
@@ -242,8 +243,9 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(所得照会票データTEMPテーブルに登録)
     protected IBatchFlowCommand insShotokushokaihyoTmpProcess() {
-        if (processParameter.get処理年度() == null || processParameter.get出力対象() == null
-                || processParameter.get導入形態コード() == null) {
+        if ((processParameter.get処理年度() == null || processParameter.get処理年度().isEmpty())
+                || RString.isNullOrEmpty(processParameter.get出力対象())
+                || RString.isNullOrEmpty(processParameter.get導入形態コード())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り
                     .getMessage().evaluate());
         }
@@ -267,7 +269,8 @@ public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_Sho
      */
     @Step(所得照会票発行履歴介護所得管理マスタに登録)
     protected IBatchFlowCommand insHakouRirekiAndKanriMstProcess() {
-        if (processParameter.get処理年度() == null || processParameter.get照会年月日() == null) {
+        if ((processParameter.get処理年度() == null || processParameter.get処理年度().isEmpty())
+                || (processParameter.get照会年月日() == null || processParameter.get照会年月日().isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り
                     .getMessage().evaluate());
         }

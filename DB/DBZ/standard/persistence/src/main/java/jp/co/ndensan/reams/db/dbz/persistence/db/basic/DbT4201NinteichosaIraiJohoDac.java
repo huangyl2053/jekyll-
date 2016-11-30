@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJoho.ninteichosaIraiRirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJoho.shinseishoKanriNo;
@@ -29,6 +30,28 @@ public class DbT4201NinteichosaIraiJohoDac implements ISaveable<DbT4201Ninteicho
     private SqlSession session;
 
     /**
+     * 認定調査依頼情報のモバイルデータ出力済フラグを出力済みで更新する。
+     *
+     * @param entity DbT4201NinteichosaIraiJohoEntity
+     */
+    @Transaction
+    public void updateDbt4201johon(DbT4201NinteichosaIraiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        accessor.update(entity);
+    }
+
+    /**
+     * 要介護認定申請情報のモバイルデータ出力済フラグを出力済みで更新する。
+     *
+     * @param entity DbT4101NinteiShinseiJohoEntity
+     */
+    @Transaction
+    public void updateDbt4101johon(DbT4101NinteiShinseiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        accessor.update(entity);
+    }
+
+    /**
      * 主キーで認定調査依頼情報を取得します。
      *
      * @param 申請書管理番号 申請書管理番号
@@ -48,8 +71,8 @@ public class DbT4201NinteichosaIraiJohoDac implements ISaveable<DbT4201Ninteicho
         return accessor.select().
                 table(DbT4201NinteichosaIraiJoho.class).
                 where(and(
-                                eq(shinseishoKanriNo, 申請書管理番号),
-                                eq(ninteichosaIraiRirekiNo, 認定調査依頼履歴番号))).
+                        eq(shinseishoKanriNo, 申請書管理番号),
+                        eq(ninteichosaIraiRirekiNo, 認定調査依頼履歴番号))).
                 toObject(DbT4201NinteichosaIraiJohoEntity.class);
     }
 

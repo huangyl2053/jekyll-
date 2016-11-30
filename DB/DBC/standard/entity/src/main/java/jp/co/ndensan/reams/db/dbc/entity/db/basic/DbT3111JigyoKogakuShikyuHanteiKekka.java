@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     /**
      * insertDantaiCd
      */
@@ -106,7 +107,11 @@ public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
     /**
      * 振込明細書作成年月日
      */
-    furikomiMeisaishoSakuseiYMD(2147483647, 0);
+    furikomiMeisaishoSakuseiYMD(2147483647, 0),
+    /**
+     * 決定通知リアル発行区分
+     */
+    ketteiTsuchiHakkoKubun(1, 0);
 
     private final int maxLength;
     private final int scale;
@@ -118,7 +123,7 @@ public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -127,7 +132,7 @@ public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

@@ -58,7 +58,7 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
         List<SharedFileEntryDescriptor> sharedFileEntryDescriptorList = new ArrayList<>();
         sharedFileEntryDescriptorList.addAll(fileEntryList);
         shoriYMDHM = RDateTime.now();
-        if (!sharedFileEntryDescriptorList.isEmpty() && sharedFileEntryDescriptorList.size() > 0) {
+        if (!sharedFileEntryDescriptorList.isEmpty()) {
             for (int i = 0; i < sharedFileEntryDescriptorList.size(); i++) {
                 getFilePath(sharedFileEntryDescriptorList.get(i));
                 executeStep(取り込みファイルデータを一時テーブルに登録);
