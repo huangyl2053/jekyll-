@@ -63,22 +63,11 @@ public class ChoteiJiyuHantei {
         List<FukaJohoList> 更正後賦課リスト = param.get更正後賦課リスト();
         for (FukaJohoList 更正後賦課の情報 : 更正後賦課リスト) {
             List<RString> 調定事由 = new ArrayList<>();
-            boolean is徴収方法更正あり;
+            boolean is徴収方法更正あり = false;
             if (更正後賦課の情報.get現年度() != null) {
-                if (param.get現年度() != null && (param.get過年度() == null
-                        || (param.get過年度() != null && 更正後賦課の情報.get過年度() != null))) {
-                    is徴収方法更正あり = true;
-                    set更正_異動(調定事由, param.get現年度(), 更正後賦課の情報.get現年度(), param.get更正後徴収方法(),
-                            is徴収方法更正あり);
-                } else if (param.get現年度() == null && param.get過年度() == null && 更正後賦課の情報.get過年度() == null) {
-                    set新規(調定事由, 更正後賦課の情報.get現年度());
-                }
-            } else if (param.get現年度() == null && param.get過年度() == null && 更正後賦課の情報.get過年度() != null) {
-                set新規(調定事由, 更正後賦課の情報.get過年度());
-            } else if (param.get現年度() == null && param.get過年度() != null && 更正後賦課の情報.get過年度() != null) {
-                is徴収方法更正あり = false;
-                set更正_異動(調定事由, param.get過年度(), 更正後賦課の情報.get過年度(), param.get更正後徴収方法(),
-                        is徴収方法更正あり);
+                更正後現年度あり(調定事由, param, 更正後賦課の情報, is徴収方法更正あり);
+            } else {
+                更正後現年度なし(調定事由, param, 更正後賦課の情報, is徴収方法更正あり);
             }
             if (更正後賦課の情報.get現年度() != null) {
                 更正後賦課の情報.set現年度(set現年度調定事由(調定事由, param.get現年度(), 更正後賦課の情報.get現年度()));
@@ -89,6 +78,36 @@ public class ChoteiJiyuHantei {
             更正後賦課.add(更正後賦課の情報);
         }
         return 更正後賦課;
+    }
+
+    private void 更正後現年度あり(List<RString> 調定事由, ChoteiJiyuParameter param, FukaJohoList 更正後賦課の情報,
+            boolean is徴収方法更正あり) {
+        if (param.get現年度() != null && param.get過年度() == null && 更正後賦課の情報.get過年度() == null) {
+            is徴収方法更正あり = true;
+            set更正_異動(調定事由, param.get現年度(), 更正後賦課の情報.get現年度(), param.get更正後徴収方法(),
+                    is徴収方法更正あり);
+        } else if (param.get現年度() != null && param.get過年度() == null && 更正後賦課の情報.get過年度() != null) {
+            is徴収方法更正あり = true;
+            set更正_異動(調定事由, param.get現年度(), 更正後賦課の情報.get過年度(), param.get更正後徴収方法(),
+                    is徴収方法更正あり);
+        } else if (param.get現年度() != null && param.get過年度() != null && 更正後賦課の情報.get過年度() != null) {
+            is徴収方法更正あり = true;
+            set更正_異動(調定事由, param.get過年度(), 更正後賦課の情報.get過年度(), param.get更正後徴収方法(),
+                    is徴収方法更正あり);
+        } else if (param.get現年度() == null && param.get過年度() == null && 更正後賦課の情報.get過年度() == null) {
+            set新規(調定事由, 更正後賦課の情報.get現年度());
+        }
+    }
+
+    private void 更正後現年度なし(List<RString> 調定事由, ChoteiJiyuParameter param, FukaJohoList 更正後賦課の情報,
+            boolean is徴収方法更正あり) {
+        if (param.get過年度() == null && 更正後賦課の情報.get過年度() != null) {
+            set新規(調定事由, 更正後賦課の情報.get過年度());
+        } else if (param.get過年度() != null && 更正後賦課の情報.get過年度() != null) {
+            is徴収方法更正あり = false;
+            set更正_異動(調定事由, param.get過年度(), 更正後賦課の情報.get過年度(), param.get更正後徴収方法(),
+                    is徴収方法更正あり);
+        }
     }
 
     private void set更正_異動(List<RString> 調定事由, FukaJoho 更正前, FukaJoho 更正後, ChoshuHoho 徴収方法_更正後,
