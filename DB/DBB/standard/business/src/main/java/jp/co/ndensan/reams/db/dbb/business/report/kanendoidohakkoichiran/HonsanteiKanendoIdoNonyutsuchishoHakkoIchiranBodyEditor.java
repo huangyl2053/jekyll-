@@ -104,7 +104,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
                     new Code(共通情報.get更正後().get生活保護扶助種類().toString())).getコード名称();
         }
         source.listUpper_14 = 生活保護扶助名称;
-        setListLowers(source, 共通情報 ,item);
+        setListLowers(source, 共通情報, item);
         return source;
     }
 

@@ -37,8 +37,10 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -151,21 +153,31 @@ public class JikoFutangakuShomeisho {
      * @return ResponseData
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onClickBeforeCheck(JikoFutangakuShomeishoDiv div) {
-        boolean flag = false;
         if (メニューID_DBCMN63001.equals(メニューID)) {
-            flag = false;
             KogakuGassanShinseisho 再計算区分 = getHandler(div).get再計算区分(getKey().get被保険者番号());
-            if (再計算区分 != null && 再計算区分_1.equals(再計算区分.get再計算区分()) && !ResponseHolder.isReRequest()) {
-                flag = true;
-                return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算申請書情報の再計算前.getMessage()).respond();
+            if (再計算区分 != null && 再計算区分_1.equals(再計算区分.get再計算区分())
+                    && !new RString(DbcWarningMessages.高額合算申請書情報の再計算前.getMessage().getCode()).equals(
+                            ResponseHolder.getMessageCode())) {
+                WarningMessage message = new WarningMessage(
+                        DbcWarningMessages.高額合算申請書情報の再計算前.getMessage().getCode(),
+                        DbcWarningMessages.高額合算申請書情報の再計算前.getMessage().evaluate(),
+                        ButtonSelectPattern.OKCancel);
+                return ResponseData.of(div).addMessage(message).respond();
             }
         }
         FlexibleDate 前回発行日 = div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().getValue();
         if (!前回発行日.isEmpty()
-                && ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbcWarningMessages.発行済み負担額証明書.getMessage()).respond();
+                && !new RString(DbcWarningMessages.発行済み負担額証明書.getMessage().getCode()).equals(
+                        ResponseHolder.getMessageCode())) {
+            WarningMessage message = new WarningMessage(
+                    DbcWarningMessages.発行済み負担額証明書.getMessage().getCode(),
+                    DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
+            return ResponseData.of(div).addMessage(message).respond();
         }
-        if (!flag) {
+        if (!ResponseHolder.isReRequest()
+                && !new RString(UrQuestionMessages.確認_汎用.getMessage().
+                        getCode()).equals(ResponseHolder.getMessageCode())) {
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.確認_汎用.getMessage().getCode(),
                     UrQuestionMessages.確認_汎用.getMessage().replace("自己負担額証明書を発行して").evaluate());
