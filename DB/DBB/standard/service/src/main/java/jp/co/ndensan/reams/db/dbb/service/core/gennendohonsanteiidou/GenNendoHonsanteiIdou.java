@@ -1262,8 +1262,7 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         Kitsuki 過年度更正月 = 更正月判定.find過年度更正月(処理日付);
         RString 現在過年期 = new RString(過年度更正月.get期AsInt());
         kiwariKeisanInput.set現在過年期(現在過年期);
-        ITsukiShorkiKubun 現在過年期区分 = 過年度更正月.get月処理区分();
-        kiwariKeisanInput.set現在過年期区分(現在過年期区分.get区分());
+        kiwariKeisanInput.set現在過年期区分(定数_0);
         GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
         RString 現年定例納期数 = DbBusinessConfig.get(ConfigNameDBB.普徴期情報_定例納期数, 処理日付, SubGyomuCode.DBB介護賦課);
         業務コンフィグ情報.set現年定例納期数(Integer.parseInt(現年定例納期数.toString()));
@@ -1556,9 +1555,13 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         KitsukiList 期月情報 = 月期対応取得_特徴.get期月リスト();
         List<Kitsuki> 期月リスト = 期月情報.toList();
         for (Kitsuki 期月 : 期月リスト) {
-            特徴月テーブル.add(期月.get月AsInt());
+            特徴月テーブル.add(期月.get期AsInt());
         }
-        return 特徴月テーブル;
+        List<Integer> 特徴月クラス = new ArrayList<>();
+        for (int i = 特徴月テーブル.size(); i > 0; i--) {
+            特徴月クラス.add(特徴月テーブル.get(i - INT_1));
+        }
+        return 特徴月クラス;
     }
 
     private List<FuchoTsukiClass> get普徴月クラスリスト(FlexibleYear 調定年度) {
@@ -1574,9 +1577,17 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 期月リスト = 期月リスト_普徴.toList();
         for (Kitsuki 期月 : 期月リスト) {
-            普徴月テーブル.add(期月.get月AsInt());
+            if (期月.get月処理区分().is本算定期()) {
+                普徴月テーブル.add(期月.get期AsInt());
+            } else {
+                普徴月テーブル.add(0);
+            }
         }
-        fuchoTsukiClass.set普徴月テーブル(普徴月テーブル);
+        List<Integer> 普徴月クラス = new ArrayList<>();
+        for (int i = 普徴月テーブル.size(); i > 0; i--) {
+            普徴月クラス.add(普徴月テーブル.get(i - INT_1));
+        }
+        fuchoTsukiClass.set普徴月テーブル(普徴月クラス);
         return fuchoTsukiClass;
     }
 
