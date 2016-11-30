@@ -1583,7 +1583,7 @@ public class YoguKonyuhiShikyuShinseiPnlTotalHandler {
      * 修正モード
      */
     public void set修正モード() {
-        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(true);
+        div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtTeikyoYM().setDisabled(false);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDdlShityoson().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getTxtSyomeisyo().setDisabled(true);
         div.getYoguKonyuhiShikyuShinseiContentsPanel().getDgSeikyuDetail().
