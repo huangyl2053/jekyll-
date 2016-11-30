@@ -1561,10 +1561,7 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             FukaJoho 更正前Info = map.get(更正前日時);
             clear更正前賦課根拠();
             clear更正後賦課根拠();
-            HonsanteiIkoHantei honsanteiIkoHantei = HonsanteiIkoHantei.createInstance();
-            if (honsanteiIkoHantei.is本算定後(更正前Info) && 更正前Info.get賦課年度().equals(更正前Info.get調定年度())) {
-                set更正前賦課根拠(更正前Info);
-            }
+            set更正前賦課根拠(更正前Info);
             set更正後賦課根拠(更正後Info);
             if (!賦課年度.isBefore(調定年度)) {
                 FuchoKiUtil util = new FuchoKiUtil();
