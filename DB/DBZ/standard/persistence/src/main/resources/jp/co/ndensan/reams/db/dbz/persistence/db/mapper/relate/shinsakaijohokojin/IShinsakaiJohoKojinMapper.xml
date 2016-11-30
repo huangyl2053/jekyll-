@@ -11,7 +11,7 @@ and open the template in the editor.
     <resultMap id = "KaisaiKekkaAndBashoJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity">
         <result property="介護認定審査会開催番号" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合議体番号" column="gogitaiNo" />
-        <result property="合議体名称" column="gogitaiMei" />
+        <result property="合議体名称" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会開催年月日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="介護認定審査会開始時刻" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会終了時刻" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
