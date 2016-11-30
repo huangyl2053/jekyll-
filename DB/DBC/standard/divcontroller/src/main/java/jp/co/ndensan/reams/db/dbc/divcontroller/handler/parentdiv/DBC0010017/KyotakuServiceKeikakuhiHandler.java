@@ -56,14 +56,16 @@ public class KyotakuServiceKeikakuhiHandler {
                 to2013rowList.add(get2013データ(居宅サービス計画費));
                 to2013rowList.add(get2013後のデータ(居宅サービス計画費));
             }
-            div.getDgServiceKeikakuhiToH2103().setDisplayNone(true);
+            div.getDgServiceKeikakuhiFromH2104().setDisplayNone(true);
+            div.getLblTitle1().setDisplayNone(true);
         } else {
             for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 特定入所者介護サービス費用list) {
 
                 from2014rowList.add(get2014データ(居宅サービス計画費));
                 from2014rowList.add(get2014後のデータ(居宅サービス計画費));
             }
-            div.getDgServiceKeikakuhiFromH2104().setDisplayNone(true);
+            div.getDgServiceKeikakuhiToH2103().setDisplayNone(true);
+            div.getLblTitle2().setDisplayNone(true);
         }
         div.getDgServiceKeikakuhiFromH2104().setDataSource(from2014rowList);
         div.getDgServiceKeikakuhiToH2103().setDataSource(to2013rowList);
