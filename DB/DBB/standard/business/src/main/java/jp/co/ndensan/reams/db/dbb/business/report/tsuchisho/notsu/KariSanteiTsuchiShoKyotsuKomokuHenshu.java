@@ -369,8 +369,8 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
 
     private FlexibleDate get期間_自(FukaJoho 賦課情報) {
         FlexibleYearMonth 月割開始年月 = 賦課情報.get月割開始年月1();
-        if (null != 月割開始年月 && !月割開始年月.isEmpty()     {
-            return new FlexibleDate(月割開始年月.toDateString().concate(new RString("01")));
+        if (null != 月割開始年月 && !月割開始年月.isEmpty()) {
+            return new FlexibleDate(月割開始年月.toDateString().concat(new RString("01")));
         }
         return FlexibleDate.EMPTY;
     }
@@ -379,9 +379,9 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         FlexibleYearMonth 月割終了年月1 = 賦課情報.get月割終了年月1();
         FlexibleYearMonth 月割終了年月2 = 賦課情報.get月割終了年月2();
         if (null != 月割終了年月2 && !月割終了年月2.isEmpty()) {
-            return new FlexibleDate(月割終了年月2.toDateString().concate(new RString(月割終了年月2.getLastDay())));
+            return new FlexibleDate(月割終了年月2.toDateString().concat(new RString(月割終了年月2.getLastDay())));
         } else if (null != 月割終了年月1 && !月割終了年月1.isEmpty()) {
-            return new FlexibleDate(月割終了年月1.toDateString().concate(new RString(月割終了年月1.getLastDay())));
+            return new FlexibleDate(月割終了年月1.toDateString().concat(new RString(月割終了年月1.getLastDay())));
         }
         return FlexibleDate.EMPTY;
     }
