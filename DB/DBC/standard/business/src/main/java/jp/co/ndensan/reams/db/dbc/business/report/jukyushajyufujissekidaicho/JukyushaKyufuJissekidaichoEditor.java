@@ -179,16 +179,16 @@ public class JukyushaKyufuJissekidaichoEditor implements IJukyushaKyufuJissekida
         source.maeSerTani2 = data.get決定前_サービス単位数2();
         source.maeK1KaiNichi2 = data.get決定前_日の回数2_公費1対象();
         source.maeK1SerTani2 = data.get決定前_サービス単位数2_公費1対象();
-        source.maeK2KaiNichi2 = data.get決定前_日の回数2_公費2対象();
-        source.maeK2SerTani2 = data.get決定前_サービス単位数2_公費2対象();
-        source.maeK3KaiNichi2 = data.get決定前_日の回数2_公費3対象();
-        source.maeK3SerTani2 = data.get決定前_サービス単位数2_公費3対象();
         editSource1(source);
         editSource2(source);
         return source;
     }
 
     private void editSource1(JukyushaKyufuJissekidaichoReportSource source) {
+        source.maeK2KaiNichi2 = data.get決定前_日の回数2_公費2対象();
+        source.maeK2SerTani2 = data.get決定前_サービス単位数2_公費2対象();
+        source.maeK3KaiNichi2 = data.get決定前_日の回数2_公費3対象();
+        source.maeK3SerTani2 = data.get決定前_サービス単位数2_公費3対象();
         source.serviceCd2 = data.getサービスコードﾞ2_d();
         source.serviceMei2 = data.getサービス内容2_d();
         source.tekiyo2 = data.get摘要2();

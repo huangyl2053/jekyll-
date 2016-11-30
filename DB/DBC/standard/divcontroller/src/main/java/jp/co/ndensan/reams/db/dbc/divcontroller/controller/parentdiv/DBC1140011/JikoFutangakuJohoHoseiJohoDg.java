@@ -74,7 +74,6 @@ public class JikoFutangakuJohoHoseiJohoDg {
     private static final RString 平成２０年度 = new RString("平成２０年度");
     private static final RString 平成２０年度以外 = new RString("平成２０年度以外");
     private static final int NENDO2008 = 2008;
-    private static final RString 登録 = new RString("登録");
     private static final RString 完了メッセージ = new RString("自己負担額情報の更新が完了しました。");
 
     /**
@@ -181,6 +180,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
                     DbcWarningMessages.高額合算補正関連２.getMessage()).respond();
         }
         if (!RString.isNullOrEmpty(row.getTxtSofuNengetsu())
+                && !ResponseHolder.isReRequest()
                 && !(new RString(DbcWarningMessages.高額合算補正関連１
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 || new RString(
@@ -189,15 +189,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連３.getMessage()).respond();
         }
-        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())
-                && (new RString(DbcWarningMessages.高額合算補正関連１
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(
-                        DbcWarningMessages.高額合算補正関連２
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(
-                        DbcWarningMessages.高額合算補正関連３
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
             return ResponseData.of(div).respond();
         }
         KogakuGassanJikoFutanGakuHolder 高額合算情報 = ViewStateHolder.get(
@@ -454,7 +446,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
                 名称_被保険者番号, 対象者.get被保険者番号().getColumnValue());
         PersonalData personalData = PersonalData.of(対象者.get識別コード(), expandedInfo);
         AccessLogger.log(AccessLogType.更新, personalData);
-        if (登録メッセージ判定(登録flg)) {
+        if (登録flg) {
 
             handler.initializeDisplay(対象者);
             onClick_chkRirekiHyouji(div);
@@ -499,16 +491,6 @@ public class JikoFutangakuJohoHoseiJohoDg {
             JikoFutangakuJohoHoseiJohoDgDiv div) {
         return ResponseData.of(div).forwardWithEventName(
                 DBC1140011TransitionEventName.完了).respond();
-    }
-
-    private boolean 登録メッセージ判定(boolean 登録flg) {
-        return 登録flg && (!ResponseHolder.isReRequest()
-                || new RString(DbcWarningMessages.自己負担被保険者期間外
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(DbcWarningMessages.対象年対象計算期間終了不整合
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(DbcWarningMessages.自己負担未確定
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()));
     }
 
     private boolean 自己負担未確定メッセージ判定(KogakuGassanJikofutangakuHosei 自己負担額保持) {

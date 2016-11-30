@@ -84,7 +84,7 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateReport
                     Tsuki 普徴月Enum = 普徴月リスト.get(i - 1);
                     RString 普徴月 = get普徴月コード(普徴月Enum);
                     if (!(!is現年度 && this.get普徴期別金額(普徴期, 更正後_普徴期別金額リスト).equals(Decimal.ZERO))
-                            && 普徴月Enum != Tsuki.翌年度4月 && 普徴月Enum != Tsuki.翌年度5月) {
+                            && 普徴月Enum != Tsuki.翌年度4月 && 普徴月Enum != Tsuki.翌年度5月 && 普徴期.equals(new RString(i))) {
                         kibetsuBusiness.setListKibetsu_1(format月と期(普徴期));
                         kibetsuBusiness.setListKibetsu_2(format月と期(普徴月));
                         kibetsuBusiness.setListKibetsu_3(get納期限(普徴期, 普徴納期情報リスト));
@@ -97,7 +97,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateReport
                     flag = false;
                     RString 特徴期 = 特徴期リスト.get(i - 1);
                     RString 特徴月 = 特徴月リス.get(i - 1).getコード();
-                    if (!(!is現年度 && this.get特徴期別金額(特徴期, 更正後_特徴期別金額リスト).equals(Decimal.ZERO))) {
+                    if (!(!is現年度 && this.get特徴期別金額(特徴期, 更正後_特徴期別金額リスト).equals(Decimal.ZERO))
+                            && 特徴期.equals(new RString(i))) {
                         kibetsuBusiness.setListKibetsu_6(format月と期(特徴期));
                         kibetsuBusiness.setListKibetsu_7(format月と期(特徴月));
                         set特徴期別金額(kibetsuBusiness, 特徴期, 更正前_特徴期別金額リスト, 更正後_特徴期別金額リスト, is現年度);

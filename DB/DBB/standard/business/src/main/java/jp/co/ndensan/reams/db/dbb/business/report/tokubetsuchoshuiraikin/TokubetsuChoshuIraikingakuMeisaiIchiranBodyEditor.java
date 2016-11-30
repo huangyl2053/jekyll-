@@ -46,6 +46,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
     private static final RString 特徴開始月4 = new RString("4月");
     private static final RString 特徴開始月8 = new RString("8月");
     private static final Code DATA_3 = new Code("0003");
+    private static final int INDEX_3 = 3;
     private static final RString 被保険者番号 = new RString("被保険者番号");
 
     /**
@@ -83,7 +84,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             }
             source.listCenter_4 = doカンマ編集(賦課の情報一時Entity.getTkKibetsuGaku03());
             source.listLower_1 = getColumnValue(賦課の情報一時Entity.getHihokenshaNo());
-            source.listLower_2 = getColumnValue(賦課の情報一時Entity.getSetaiCode());
+            source.listLower_2 = getColumnValue(宛名.get世帯コード());
         }
         if (宛名 != null) {
             source.listUpper_3 = getColumnValue(宛名.get行政区画().getGyoseiku().getコード());
@@ -107,14 +108,16 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
                 source.listLower_4 = 徴収方法.get本徴収_基礎年金番号();
                 source.listLower_6 = 徴収方法.get本徴収_年金コード() != null
                         ? CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(徴収方法.get本徴収_年金コード()))
+                                UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                                new Code(徴収方法.get本徴収_年金コード().substringReturnAsPossible(0, INDEX_3)))
                         : RString.EMPTY;
             } else {
                 source.listUpper_4 = 徴収方法.get仮徴収_年金コード();
                 source.listLower_4 = 徴収方法.get仮徴収_基礎年金番号();
                 source.listLower_6 = 徴収方法.get仮徴収_年金コード() != null
                         ? CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(), new Code(徴収方法.get仮徴収_年金コード()))
+                                UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                                new Code(徴収方法.get仮徴収_年金コード().substringReturnAsPossible(0, INDEX_3)))
                         : RString.EMPTY;
             }
         }

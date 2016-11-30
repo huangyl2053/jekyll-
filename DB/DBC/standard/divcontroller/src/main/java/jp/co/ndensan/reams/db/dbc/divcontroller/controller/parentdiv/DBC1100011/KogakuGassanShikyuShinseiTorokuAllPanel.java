@@ -291,7 +291,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             throw new ApplicationException(UrErrorMessages.既に存在.getMessage().replace(同一被保険者のデータ.toString()));
         }
         RString 前排他キー = 排他情報.concat(被保険者番号.getColumnValue());
-        排他制御(前排他キー);
+        排他制御(前排他キー, div);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString メニューID = controlData.getMenuID();
         KogakuGassanShinseishoRelate 高額合算申請書Relate;
@@ -395,11 +395,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoHoji 高額合算申請書保持New = handler.高額合算申請書編集(
                 高額合算申請書, 高額合算申請書保持, 削除, 引き継ぎデータ, 被保険者番号);
         handler.申請情報グリッドへ反映(高額合算申請書保持New, false);
-        ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 削除);
-        handler.onClick_dgShinseiJohoSelect(高額合算申請書, 高額合算申請書保持.get申請状況());
-        div.getBtnKakuteiShintei().setDisplayNone(true);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持New);
-        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -548,48 +545,36 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         if (照会.equals(高額合算申請書状態)) {
             return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
         }
-        if (!削除.equals(高額合算申請書状態)
-                && !DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
+            if (追加.equals(高額合算申請書状態)) {
+                RString 被保険者番号 = ViewStateHolder.get(
+                        ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue();
+                排他解除(排他情報.concat(被保険者番号));
+            } else if (修正.equals(高額合算申請書状態)) {
+                RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.高額合算申請書,
+                        KogakuGassanShinseishoRelate.class).get被保険者番号().getColumnValue();
+                排他解除(排他情報.concat(被保険者番号));
             }
-            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-                return giveUp(div, 高額合算申請書状態);
+            handler.onClick_btnShinseiJohoModoru();
+            IUrControlData controlData = UrControlDataFactory.createInstance();
+            RString メニューID = controlData.getMenuID();
+            if (申請登録状態(メニューID)) {
+                div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
+                div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
+                div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
+                return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
             } else {
-                return ResponseData.of(div).respond();
+                div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(true);
+                div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(true);
+                div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(true);
+                return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
             }
-
-        } else {
-            return giveUp(div, 高額合算申請書状態);
         }
-
-    }
-
-    private ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> giveUp(KogakuGassanShikyuShinseiTorokuAllPanelDiv div, RString 高額合算申請書状態) {
-        KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        if (追加.equals(高額合算申請書状態)) {
-            RString 被保険者番号 = ViewStateHolder.get(
-                    ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号().getColumnValue();
-            排他解除(排他情報.concat(被保険者番号));
-        } else if (修正.equals(高額合算申請書状態)) {
-            RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.高額合算申請書,
-                    KogakuGassanShinseishoRelate.class).get被保険者番号().getColumnValue();
-            排他解除(排他情報.concat(被保険者番号));
-        }
-        handler.onClick_btnShinseiJohoModoru();
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString メニューID = controlData.getMenuID();
-        if (申請登録状態(メニューID)) {
-            div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
-            div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
-            div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
-            return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
-        } else {
-            div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(true);
-            div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(true);
-            div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(true);
-            return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
-        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -600,21 +585,16 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_btnNaiyoKakutei(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-        RString 高額合算申請書状態 = ViewStateHolder.get(ViewStateKeys.高額合算申請書状態, RString.class);
-        if (!削除.equals(高額合算申請書状態)
-                && !DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())) {
-
-            KogakuGassanShikyuShinseiTorokuValidationHandler validationHandler = getValidationhandler(div);
-            ValidationMessageControlPairs 入力内容確定Pairs = validationHandler.validate入力内容を確定する();
-            if (入力内容確定Pairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(入力内容確定Pairs).respond();
-            }
+        KogakuGassanShikyuShinseiTorokuValidationHandler validationHandler = getValidationhandler(div);
+        ValidationMessageControlPairs 入力内容確定Pairs = validationHandler.validate入力内容を確定する();
+        if (入力内容確定Pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(入力内容確定Pairs).respond();
         }
-
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
         KogakuGassanShinseishoRelate 高額合算申請書 = ViewStateHolder.get(ViewStateKeys.高額合算申請書, KogakuGassanShinseishoRelate.class);
         KogakuGassanShinseishoHoji 高額合算申請書保持
                 = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
+        RString 高額合算申請書状態 = ViewStateHolder.get(ViewStateKeys.高額合算申請書状態, RString.class);
         KogakuGassanShinseishoDataResult 引き継ぎデータ
                 = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         KogakuGassanShinseishoHoji 高額合算申請書保持New = handler.高額合算申請書編集(
@@ -800,14 +780,16 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         List<dgShinseiIchiran_Row> rowList = div.getDgShinseiIchiran().getDataSource();
         if (rowList != null && !rowList.isEmpty()) {
             for (dgShinseiIchiran_Row row : rowList) {
-                排他制御(排他情報.concat(row.getTxtHihokenshaNo()));
+                排他制御(排他情報.concat(row.getTxtHihokenshaNo()), div);
             }
         }
     }
 
-    private void 排他制御(RString 前排他キー) throws PessimisticLockingException {
+    private void 排他制御(RString 前排他キー, KogakuGassanShikyuShinseiTorokuAllPanelDiv div) throws PessimisticLockingException {
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
+            getHandler(div).照会状態を初期化設定();
+            div.getTxtKaigoShikyuShinseishoSeiriBango3().clearValue();
             throw new PessimisticLockingException();
         }
     }

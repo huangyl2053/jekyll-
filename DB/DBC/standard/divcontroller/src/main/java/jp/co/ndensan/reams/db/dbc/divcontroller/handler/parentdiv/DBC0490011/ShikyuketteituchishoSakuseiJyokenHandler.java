@@ -121,7 +121,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
                 div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(new RDate(前回対象日.get対象終了年月日().toString()));
             }
 
-            RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象開始年月日().toString()).plusDay(INT_1);
+            RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象終了年月日().toString()).plusDay(INT_1);
 
             if (KEY0.equals(選択Key)) {
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().

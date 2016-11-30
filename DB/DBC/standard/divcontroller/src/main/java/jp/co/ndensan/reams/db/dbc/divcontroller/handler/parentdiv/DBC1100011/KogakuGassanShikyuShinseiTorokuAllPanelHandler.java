@@ -120,6 +120,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DATE_0801 = new RString("0801");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
     private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
+    private static final RString 番号零 = new RString("00");
+    private static final RString 番号零６ = new RString("000000");
 
     /**
      * コンストラクタです。
@@ -372,7 +374,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
         RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
         set加入期間(資格取得年月日, 資格喪失年月日);
-        div.getTxtShikakuSoshitsuYMD().setValue(資格喪失年月日);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
     }
@@ -840,18 +841,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 新規状態を初期化設定(RString メニューID) {
-        div.getBtnAddShinsei().setDisplayNone(false);
+        div.getBtnAddShinsei().setVisible(true);
         div.getDdlShokisaiHokenshaNo().setReadOnly(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnAddKanyuRireki().setDisplayNone(false);
-        div.getBtnKakuteiKanyuRireki().setDisplayNone(false);
+        div.getBtnAddKanyuRireki().setVisible(true);
+        div.getBtnKakuteiKanyuRireki().setVisible(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnKakuteiShintei().setDisplayNone(false);
+        div.getBtnKakuteiShintei().setVisible(true);
         div.getDdlShinseiTaishoNendo().setReadOnly(false);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
@@ -903,18 +904,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getTxtDaihyoshaYubinNo().setDisabled(false);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請情報を保存する, false);
         }
-        div.getBtnAddShinsei().setDisplayNone(false);
+        div.getBtnAddShinsei().setVisible(true);
         div.getDdlShokisaiHokenshaNo().setReadOnly(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnAddKanyuRireki().setDisplayNone(false);
-        div.getBtnKakuteiKanyuRireki().setDisplayNone(false);
+        div.getBtnAddKanyuRireki().setVisible(true);
+        div.getBtnKakuteiKanyuRireki().setVisible(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnKakuteiShintei().setDisplayNone(false);
+        div.getBtnKakuteiShintei().setVisible(true);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
         if (メニューID.equals(DBCMN61010) || DBCMN61012.equals(メニューID)) {
@@ -926,40 +927,40 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
      * 照会状態を初期化設定
      */
     public void 照会状態を初期化設定() {
-        div.getBtnAddShinsei().setDisplayNone(true);
+        div.getBtnAddShinsei().setVisible(false);
         div.getDdlShokisaiHokenshaNo().setReadOnly(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(false);
-        div.getBtnAddKanyuRireki().setDisplayNone(true);
-        div.getBtnKakuteiKanyuRireki().setDisplayNone(true);
+        div.getBtnAddKanyuRireki().setVisible(false);
+        div.getBtnKakuteiKanyuRireki().setVisible(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(false);
-        div.getBtnKakuteiShintei().setDisplayNone(true);
+        div.getBtnKakuteiShintei().setVisible(false);
         申請情報パネル制御(true);
         申請登録パネル制御(true);
     }
 
     private void 申請状態判定(RString 申請状態) {
         if (RSTRING_1.equals(申請状態) || RSTRING_2.equals(申請状態)) {
-            div.getBtnAddShinsei().setDisplayNone(false);
+            div.getBtnAddShinsei().setVisible(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-            div.getBtnAddKanyuRireki().setDisplayNone(false);
+            div.getBtnAddKanyuRireki().setVisible(true);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
         } else if (RSTRING_3.equals(申請状態)) {
-            div.getBtnAddShinsei().setDisplayNone(true);
+            div.getBtnAddShinsei().setVisible(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-            div.getBtnAddKanyuRireki().setDisplayNone(true);
+            div.getBtnAddKanyuRireki().setVisible(false);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(false);
@@ -1232,10 +1233,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 div.getTxtIryoShikyuShinseishoSeiriBango3().clearValue();
                 div.getTxtIryoShikyuShinseishoSeiriBango4().clearValue();
             } else {
-                div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_0, INT_3));
-                div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(国保支給申請書整理番号.substring(INT_3, INT_5));
-                div.getTxtIryoShikyuShinseishoSeiriBango3().setValue(国保支給申請書整理番号.substring(INT_5, INT_11));
-                div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号.substring(INT_11));
+                set国保支給申請書整理番号(国保支給申請書整理番号);
             }
         }
         if (RString.isNullOrEmpty(高額合算申請書.get支給申請形態())) {
@@ -1273,6 +1271,22 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getTxtDaihyoshaYubinNo().clearValue();
         } else {
             div.getTxtDaihyoshaYubinNo().setValue(高額合算申請書.get申請代表者郵便番号());
+        }
+    }
+
+    private void set国保支給申請書整理番号(RString 国保支給申請書整理番号) {
+        div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_0, INT_3));
+        RString 国保支給申請書整理番号2 = 国保支給申請書整理番号.substring(INT_3, INT_5);
+        if (!番号零.equals(国保支給申請書整理番号2)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(国保支給申請書整理番号2);
+        }
+        RString 国保支給申請書整理番号3 = 国保支給申請書整理番号.substring(INT_5, INT_11);
+        if (!番号零６.equals(国保支給申請書整理番号3)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango3().setValue(国保支給申請書整理番号3);
+        }
+        RString 国保支給申請書整理番号4 = 国保支給申請書整理番号.substring(INT_11);
+        if (!番号零６.equals(国保支給申請書整理番号4)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号4);
         }
     }
 
