@@ -111,7 +111,11 @@ public class SyujiyikenshosakuseyiraihakouReport extends Report<IkenshoSakuseiIr
     }
 
     private RString setBreakKey(SyujiyikenshosakuseyiraihakouBodyItem item) {
-        return new RStringBuilder().append(item.getListHakkoIchiranhyo_1_1()).
-                append(item.getListHakkoIchiranhyo_1_2()).append(item.getListHakkoIchiranhyo_1_3()).toRString();
+        if (item != null) {
+            return new RStringBuilder().append(item.getListHakkoIchiranhyo_1_1()).
+                    append(item.getListHakkoIchiranhyo_1_2()).append(item.getListHakkoIchiranhyo_1_3()).toRString();
+        } else {
+            return RString.EMPTY;
+        }
     }
 }
