@@ -58,6 +58,7 @@ public class HokenryoNonyuTsuchishoGinfuriFiveKiEditor implements IHokenryoNonyu
     private final RString 左括弧 = new RString("(");
     private final RString 右括弧 = new RString(")");
     private final RString 次期以降 = new RString("次期以降");
+    private final RString 波線 = new RString("～");
 
     /**
      * インスタンスを生成します。
@@ -716,7 +717,7 @@ public class HokenryoNonyuTsuchishoGinfuriFiveKiEditor implements IHokenryoNonyu
             source.hokenryoGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get確定保険料_年額());
             source.santeiKisoCalHokenryoGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get確定保険料_年額());
             source.santeiKisoKikanKaishi = 更正後.get期間_自();
-            source.santeiKisoKikanshoryo = 更正後.get期間_至();
+            source.santeiKisoKikanshoryo = 波線.concat(更正後.get期間_至());
             if (更正後.get月数_ケ月() != null) {
                 source.santeiKisoNokisu = 半角to全角(更正後.get月数_ケ月());
             }
