@@ -435,7 +435,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiNofushoEditor implements IHok
     }
 
     private NonyuTsuchiShoKiJoho get納入通知書期情報By印字位置(int 印字位置) {
-        if (納入通知書期情報リスト.size() >= 印字位置 - INT_1) {
+        if (納入通知書期情報リスト != null && 納入通知書期情報リスト.size() >= 印字位置 - INT_1) {
             return 納入通知書期情報リスト.get(印字位置 - INT_2);
         }
         return null;
