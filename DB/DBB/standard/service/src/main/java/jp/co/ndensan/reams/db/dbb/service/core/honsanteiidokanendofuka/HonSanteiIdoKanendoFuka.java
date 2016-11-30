@@ -1316,6 +1316,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         FukaJoho 更正後_過年度 = get賦課情報_過年度(賦課情報リスト_結果);
         if (更正後_減免前介護保険料.compareTo(更正前_減免前介護保険料) < 0) {
             更正後賦課.set過年度(更正後_過年度);
+        } else {
+            parameter.set過年度(null);
         }
         更正後賦課List.add(更正後賦課);
         parameter.set更正後賦課リスト(更正後賦課List);
