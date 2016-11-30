@@ -1298,12 +1298,25 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         if (賦課の情報_当初.get賦課の情報() != null && (!賦課の情報_当初.get賦課の情報().isEmpty())) {
             set賦課の情報_当初(parameter, 賦課の情報_当初, 賦課情報リスト_結果);
         }
+
+        List<FukaJoho> 賦課の情報_更正前List = new ArrayList<>();
+        for (FukaJohoRelateEntity entity : 賦課の情報_当初.get賦課の情報()) {
+            賦課の情報_更正前List.add(new FukaJoho(entity));
+        }
+        FukaJoho 更正前_現年度 = get賦課情報_現年度(賦課の情報_更正前List);
+        Decimal 更正前_減免前介護保険料 = null == 更正前_現年度.get減免前介護保険料_年額()
+                ? Decimal.ZERO : 更正前_現年度.get減免前介護保険料_年額();
         FukaJohoList 更正後賦課 = new FukaJohoList();
         List<FukaJohoList> 更正後賦課List = new ArrayList<>();
         FukaJoho 更正後_現年度 = get賦課情報_現年度(賦課情報リスト_結果);
+
+        Decimal 更正後_減免前介護保険料 = null == 更正後_現年度.get減免前介護保険料_年額()
+                ? Decimal.ZERO : 更正後_現年度.get減免前介護保険料_年額();
         更正後賦課.set現年度(更正後_現年度);
         FukaJoho 更正後_過年度 = get賦課情報_過年度(賦課情報リスト_結果);
-        更正後賦課.set過年度(更正後_過年度);
+        if (更正後_減免前介護保険料.compareTo(更正前_減免前介護保険料) < 0) {
+            更正後賦課.set過年度(更正後_過年度);
+        }
         更正後賦課List.add(更正後賦課);
         parameter.set更正後賦課リスト(更正後賦課List);
         parameter.set更正前徴収方法(徴収方法情報);
