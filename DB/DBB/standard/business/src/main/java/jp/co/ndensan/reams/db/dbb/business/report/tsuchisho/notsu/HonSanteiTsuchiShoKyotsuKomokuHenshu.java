@@ -80,6 +80,9 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final int SIZE_3 = 3;
     private static final int SIZE_6 = 6;
     private static final int SIZE_14 = 14;
+    private static final int 三月 = 3;
+    private static final int 四月 = 4;
+    private static final int 三十一日 = 31;
 
     /**
      * 本算定通知書共通情報を作成する。
@@ -751,33 +754,39 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         FlexibleYearMonth 月割開始年月1 = 更正前_賦課情報.get月割開始年月1();
         FlexibleYearMonth 月割終了年月2 = 更正前_賦課情報.get月割終了年月2();
         FlexibleYearMonth 月割終了年月1 = 更正前_賦課情報.get月割終了年月1();
-        FlexibleDate 期間_自 = FlexibleDate.EMPTY;
-        FlexibleDate 期間_至 = null;
+        FlexibleDate 期間_自;
+        FlexibleDate 期間_至;
         if (月割開始年月1 != null && !月割開始年月1.isEmpty()) {
             期間_自 = getFlexibleDate自(月割開始年月1);
-            更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString());
-            更正前.set期間_自_西暦(期間_自.wareki().fillType(FillType.BLANK).toDateString());
+        } else if (更正前_賦課情報.get資格取得日() != null && !更正前_賦課情報.get資格取得日().isEmpty()
+                && new FlexibleDate(更正前_賦課情報.get賦課年度().getYearValue(), 四月, 1).isBefore(更正前_賦課情報.get資格取得日())) {
+            期間_自 = getFlexibleDate自(更正前_賦課情報.get資格取得日().getYearMonth());
+        } else {
+            期間_自 = new FlexibleDate(更正前_賦課情報.get賦課年度().getYearValue(), 四月, 1);
         }
-        if (月割終了年月1 != null && !月割終了年月1.isEmpty()) {
-            期間_至 = getFlexibleDate至(月割終了年月1);
-        }
+        更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
         if (月割終了年月2 != null && !月割終了年月2.isEmpty()) {
             期間_至 = getFlexibleDate至(月割終了年月2);
+        } else if (月割終了年月1 != null && !月割終了年月1.isEmpty()) {
+            期間_至 = getFlexibleDate至(月割終了年月1);
+        } else if (更正前_賦課情報.get資格喪失日() != null && !更正前_賦課情報.get資格喪失日().isEmpty()
+                && 更正前_賦課情報.get資格喪失日().isBefore(new FlexibleDate(更正前_賦課情報.get賦課年度().plusYear(1).getYearValue(), 三月, 三十一日))) {
+            期間_至 = getFlexibleDate至(更正前_賦課情報.get資格喪失日().getYearMonth());
+        } else {
+            期間_至 = new FlexibleDate(更正前_賦課情報.get賦課年度().plusYear(1).getYearValue(), 三月, 三十一日);
         }
-        if (期間_至 != null) {
-            更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString());
-            更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
-                    fillType(FillType.BLANK).toDateString());
-        }
-        if (期間_至 != null && !期間_自.isEmpty()) {
-            int 月数 = 期間_至.plusDay(1).getBetweenMonths(期間_自);
-            更正前.set月数(月数);
-            更正前.set月数_ケ月(get月数_ケ月(月数));
-        }
+        更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).
+                fillType(FillType.BLANK).toDateString());
+        更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
+                fillType(FillType.BLANK).toDateString());
+        int 月数 = 期間_至.plusDay(1).getBetweenMonths(期間_自);
+        更正前.set月数(月数);
+        更正前.set月数_ケ月(get月数_ケ月(月数));
     }
 
     private List<CharacteristicsPhase> get特徴期別金額リスト(FukaJoho 賦課情報) {

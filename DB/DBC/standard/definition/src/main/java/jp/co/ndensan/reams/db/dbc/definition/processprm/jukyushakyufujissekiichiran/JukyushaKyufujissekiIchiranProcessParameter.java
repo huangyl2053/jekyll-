@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakyufujissekiichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -81,6 +82,7 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
     private RString 給付率;
     private long 出力順ID;
     private RString psmShikibetsuTaisho;
+    private List 給付実績区分List;
 
     /**
      * コンストラクタ
@@ -530,6 +532,6 @@ public class JukyushaKyufujissekiIchiranProcessParameter implements IBatchProces
                 給付率区分,
                 給付率,
                 出力順,
-                psmShikibetsuTaisho);
+                psmShikibetsuTaisho, 給付実績区分List);
     }
 }

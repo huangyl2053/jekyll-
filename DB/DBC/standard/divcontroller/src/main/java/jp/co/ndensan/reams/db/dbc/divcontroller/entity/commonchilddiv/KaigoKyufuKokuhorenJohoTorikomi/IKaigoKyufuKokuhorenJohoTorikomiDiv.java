@@ -74,4 +74,18 @@ public interface IKaigoKyufuKokuhorenJohoTorikomiDiv extends ICommonChildDivBase
      * @return RString
      */
     public RString get処理区分();
+
+    /**
+     * 出力順を入力かどうかのチェック。
+     *
+     * @return is出力順Selected
+     */
+    boolean is出力順Selected();
+
+    /**
+     * 出力順Divを取る。
+     *
+     * @return 出力順Div
+     */
+    ShutsuRyokujunDiv get出力順Div();
 }

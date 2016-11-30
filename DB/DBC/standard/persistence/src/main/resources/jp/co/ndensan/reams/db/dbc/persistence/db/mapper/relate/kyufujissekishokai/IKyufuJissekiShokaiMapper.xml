@@ -482,16 +482,16 @@ ORDER BY
         AND "DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
         AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
          OR  "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = '')
-        WHERE 
-            #{サービス提供年月} = "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
+        WHERE
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" = #{入力識別番号} 
         AND
             "DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo" = #{被保険者番号}
         AND
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" = #{通し番号}
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" = #{サービス提供年月}
         AND
             "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo" = #{事業所番号}
         AND
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" = #{入力識別番号}
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" = #{通し番号}
         ORDER BY
             "DbT3026KyufujissekiFukushiYoguHanbaihi"."meisaiNo"
     </select>

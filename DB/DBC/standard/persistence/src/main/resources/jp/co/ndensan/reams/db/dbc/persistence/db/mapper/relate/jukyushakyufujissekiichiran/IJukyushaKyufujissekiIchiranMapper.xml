@@ -188,24 +188,21 @@ LEFT JOIN
                 AND 
                 DbT3017."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
             </if>
-            <if test="給付実績区分flag">
+            <if test="給付実績区分 != null and  給付実績区分.toString() == '1'.toString()">
                 AND
                 DbT3017."kyufuJissekiKubunCode" = '1'
             </if>
-            <if test="!給付実績区分flag">
+             <if test="給付実績区分 != null and  給付実績区分.toString() == '2'.toString()">
                 AND
                 DbT3017."kyufuJissekiKubunCode" = '2'
             </if>
-            AND DbT3017."yoKaigoJotaiKubunCode" IN ('21') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('22') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('23') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('24') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('25') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('12') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('13') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('06') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('11') 
-                OR DbT3017."yoKaigoJotaiKubunCode" IN ('01')
+            <if test="給付実績区分List!=null and 給付実績区分List.size()!=0">
+            AND  (  
+                <foreach item="item" index="index" collection="給付実績区分List"  separator="OR" >
+                    #{item}=DbT3017."yoKaigoJotaiKubunCode"
+                </foreach>
+                )
+            </if>
             <if test="訪問通所他flag">
                 AND
                 DbT3017."inputShikibetsuNo" IN ('7131','2131')
@@ -322,19 +319,19 @@ LEFT JOIN
                 AND
                 DbT3017."inputShikibetsuNo" IN ('8171')
             </if>
-            <if test="旧措置特定有無flag">
+            <if test="旧措置特定有無 != null and 旧措置特定有無.toString() == '2'.toString()">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '0'
             </if>
-            <if test="!旧措置特定有無flag">
+            <if test="旧措置特定有無 != null and 旧措置特定有無.toString() == '3'.toString()">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '1'
             </if>
-            <if test="老人保健市町村番号有無flag">
+            <if test="老人保健市町村番号有無 != null and 老人保健市町村番号有無.toString() == '2'.toString()">
                 AND
                 DbT3017."rojinHokenShichosonNo" = ''
             </if>
-            <if test="!老人保健市町村番号有無flag">
+            <if test="老人保健市町村番号有無 != null and 老人保健市町村番号有無.toString() == '3'.toString()">
                 AND
                 DbT3017."rojinHokenShichosonNo" <![CDATA[<>]]> ''
                 AND
@@ -342,11 +339,11 @@ LEFT JOIN
                 AND
                 DbT3017."rojinHokenShichosonNo" <![CDATA[<=]]> #{老人保健市町村番号有_終了}
             </if>
-            <if test="老人保健受給者番号有無flag">
+            <if test="老人保健受給者番号有無  != null and 老人保健受給者番号有無.toString() == '2'.toString()">
                 AND
                 DbT3017."rojinhokenJukyushaNo" = ''
             </if>
-            <if test="!老人保健受給者番号有無flag">
+            <if test="老人保健受給者番号有無  != null and 老人保健受給者番号有無.toString() == '3'.toString()">
                 AND
                 DbT3017."rojinhokenJukyushaNo" <![CDATA[<>]]> ''
                 AND
@@ -478,11 +475,11 @@ LEFT JOIN
                 AND 
                 T1."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
             </if>
-            <if test="給付実績区分flag">
+            <if test="給付実績区分 != null and  給付実績区分.toString() == '1'.toString()">
                 AND
                 T1."kyufuJissekiKubunCode" = '1'
             </if>
-            <if test="!給付実績区分flag">
+            <if test="給付実績区分 != null and  給付実績区分.toString() == '2'.toString()">
                 AND
                 T1."kyufuJissekiKubunCode" = '2'
             </if>

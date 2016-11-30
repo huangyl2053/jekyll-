@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyufuKokuhorenJohoTorikomi;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
@@ -61,7 +61,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getlblChushutsuJoken
      * @return lblChushutsuJoken
      */
@@ -359,5 +359,15 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     @Override
     public RString get処理区分() {
         return this.getHdnShoriKubun().getValue();
+    }
+
+    @Override
+    public boolean is出力順Selected() {
+        return this.getCcdChohyoShutsuryokujun().isSelected();
+    }
+
+    @Override
+    public ShutsuRyokujunDiv get出力順Div() {
+        return this.ShutsuRyokujun;
     }
 }

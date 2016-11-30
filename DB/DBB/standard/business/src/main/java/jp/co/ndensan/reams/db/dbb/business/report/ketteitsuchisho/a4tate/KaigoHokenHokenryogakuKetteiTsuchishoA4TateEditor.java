@@ -104,9 +104,9 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateEditor implements IKaigo
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
 
-        reportSource.shutokuYmdAto = 更正後.get期間_自_西暦();
+        reportSource.shutokuYmdAto = 更正後.get期間_自();
 
-        reportSource.soshitsuYmdAto = 更正後.get期間_至_西暦();
+        reportSource.soshitsuYmdAto = 更正後.get期間_至();
 
         set転入者通知文(reportSource, 編集後本算定通知書共通情報);
         set通知文1と通知区分(reportSource, 編集後本算定通知書共通情報);
@@ -124,9 +124,9 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoA4TateEditor implements IKaigo
             reportSource.hokenRitsuMae = edit金額(更正前.get保険料率());
             reportSource.hokenSanshutsuMae = edit金額(更正前.get減免前保険料_年額());
             reportSource.shotokuKbnMae = 更正前.get保険料段階();
-            reportSource.shutokuYmdMae = 更正前.get期間_自_西暦();
+            reportSource.shutokuYmdMae = 更正前.get期間_自();
             reportSource.tsukisuMae = 更正前.get月数_ケ月();
-            reportSource.soshitsuYmdMae = 更正前.get期間_至_西暦();
+            reportSource.soshitsuYmdMae = 更正前.get期間_至();
             reportSource.honninKazeiKubunMae = 更正前.get市町村民税課税区分_本人();
             reportSource.setaiKazeiKubunMae = 更正前.get市町村民税課税区分_世帯();
             reportSource.gokeiShotokuKingakuMae = edit金額(更正前.get合計所得金額());

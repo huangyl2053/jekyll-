@@ -31,13 +31,13 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeDetailDiv extends Panel {
     @JsonProperty("lin3")
     private HorizontalLine lin3;
     @JsonProperty("txtKokuhoHihokenshaShoKigo")
-    private TextBox txtKokuhoHihokenshaShoKigo;
+    private TextBoxCode txtKokuhoHihokenshaShoKigo;
     @JsonProperty("txtTaishoshaShimei")
     private TextBox txtTaishoshaShimei;
     @JsonProperty("txtHiHokenshaShoNo")
-    private TextBox txtHiHokenshaShoNo;
+    private TextBoxCode txtHiHokenshaShoNo;
     @JsonProperty("txtJikoFutanSeiriNom")
-    private TextBox txtJikoFutanSeiriNom;
+    private TextBoxCode txtJikoFutanSeiriNom;
     @JsonProperty("lin4")
     private HorizontalLine lin4;
     @JsonProperty("txtOver70Futangaku")
@@ -152,7 +152,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeDetailDiv extends Panel {
      * @return txtKokuhoHihokenshaShoKigo
      */
     @JsonProperty("txtKokuhoHihokenshaShoKigo")
-    public TextBox getTxtKokuhoHihokenshaShoKigo() {
+    public TextBoxCode getTxtKokuhoHihokenshaShoKigo() {
         return txtKokuhoHihokenshaShoKigo;
     }
 
@@ -161,7 +161,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeDetailDiv extends Panel {
      * @param txtKokuhoHihokenshaShoKigo txtKokuhoHihokenshaShoKigo
      */
     @JsonProperty("txtKokuhoHihokenshaShoKigo")
-    public void setTxtKokuhoHihokenshaShoKigo(TextBox txtKokuhoHihokenshaShoKigo) {
+    public void setTxtKokuhoHihokenshaShoKigo(TextBoxCode txtKokuhoHihokenshaShoKigo) {
         this.txtKokuhoHihokenshaShoKigo = txtKokuhoHihokenshaShoKigo;
     }
 
@@ -188,7 +188,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeDetailDiv extends Panel {
      * @return txtHiHokenshaShoNo
      */
     @JsonProperty("txtHiHokenshaShoNo")
-    public TextBox getTxtHiHokenshaShoNo() {
+    public TextBoxCode getTxtHiHokenshaShoNo() {
         return txtHiHokenshaShoNo;
     }
 
@@ -197,7 +197,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeDetailDiv extends Panel {
      * @param txtHiHokenshaShoNo txtHiHokenshaShoNo
      */
     @JsonProperty("txtHiHokenshaShoNo")
-    public void setTxtHiHokenshaShoNo(TextBox txtHiHokenshaShoNo) {
+    public void setTxtHiHokenshaShoNo(TextBoxCode txtHiHokenshaShoNo) {
         this.txtHiHokenshaShoNo = txtHiHokenshaShoNo;
     }
 
@@ -206,7 +206,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeDetailDiv extends Panel {
      * @return txtJikoFutanSeiriNom
      */
     @JsonProperty("txtJikoFutanSeiriNom")
-    public TextBox getTxtJikoFutanSeiriNom() {
+    public TextBoxCode getTxtJikoFutanSeiriNom() {
         return txtJikoFutanSeiriNom;
     }
 
@@ -215,7 +215,7 @@ public class ShikyugakuKeisanKekkaTorokuUchiwakeDetailDiv extends Panel {
      * @param txtJikoFutanSeiriNom txtJikoFutanSeiriNom
      */
     @JsonProperty("txtJikoFutanSeiriNom")
-    public void setTxtJikoFutanSeiriNom(TextBox txtJikoFutanSeiriNom) {
+    public void setTxtJikoFutanSeiriNom(TextBoxCode txtJikoFutanSeiriNom) {
         this.txtJikoFutanSeiriNom = txtJikoFutanSeiriNom;
     }
 

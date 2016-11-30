@@ -817,8 +817,8 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
 
         List<FukaJoho> 賦課の情報_設定後List = new ArrayList<>();
         賦課の情報_設定後List.add(賦課の情報_設定後);
-        FukaJohoToChoshuHoho 調定計算 = caluculateChotei(賦課の情報_設定後List, new ChoshuHoho(賦課計算の情報.get徴収方法の情報()),
-                param.get調定年度(), param.get調定日時());
+        FukaJohoToChoshuHoho 調定計算 = caluculateChotei(賦課の情報_設定後List, 賦課計算の情報,
+                new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), param.get調定年度(), param.get調定日時());
         FukaJoho 賦課情報 = get賦課情報(調定計算.get賦課情報(), true);
         if (賦課情報 != null) {
             賦課の情報_設定後 = 賦課情報;
@@ -853,7 +853,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
         FukaJoho 現年分の賦課 = get賦課情報(賦課の情報_更正前List, false);
         if ((現年分の賦課 != null && isDecimal変更(現年分の賦課.get減免前介護保険料_年額(), 年額保険料))
                 || !RString.isNullOrEmpty(賦課計算の情報.get徴収方法の情報().getTokuchoTeishiJiyuCode())) {
-            FukaJohoToChoshuHoho 調定計算 = caluculateChotei(賦課の情報_更正後List,
+            FukaJohoToChoshuHoho 調定計算 = caluculateChotei(賦課の情報_更正後List, 賦課計算の情報,
                     new ChoshuHoho(賦課計算の情報.get徴収方法の情報()), param.get調定年度(), param.get調定日時());
             賦課の情報_更正後List = 調定計算.get賦課情報();
         }
@@ -1281,67 +1281,76 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
      * 調定計算と調定事由メソッドです
      *
      * @param 賦課の情報リスト List<FukaJoho>
+     * @param 賦課の情報_当初 CalculateFukaEntity
      * @param 徴収方法情報 ChoshuHoho
      * @param 調定年度 FlexibleYear
      * @param 調定日時 YMDHMS
      * @return FukaJohoToChoshuHoho 更正後の賦課の情報と徴収方法の情報
      */
-    public FukaJohoToChoshuHoho caluculateChotei(List<FukaJoho> 賦課の情報リスト,
+    public FukaJohoToChoshuHoho caluculateChotei(List<FukaJoho> 賦課の情報リスト, CalculateFukaEntity 賦課の情報_当初,
             ChoshuHoho 徴収方法情報, FlexibleYear 調定年度, YMDHMS 調定日時) {
         KanendoKoseiKeisan kanendoKoseiKeisan = KanendoKoseiKeisan.createInstance();
         KoseigoFukaResult 調定計算Result = kanendoKoseiKeisan.getKoseigoFuka(賦課の情報リスト,
                 徴収方法情報, 調定年度, 調定日時);
         List<FukaJoho> 賦課情報リスト_結果 = 調定計算Result.get賦課の情報リスト();
 
-        FukaJoho 入力_現年度 = get賦課情報_現年度(賦課の情報リスト);
-        FukaJoho 更正後_現年度 = get賦課情報_現年度(賦課情報リスト_結果);
-        Decimal 更正後_年額 = get減免前介護保険料_年額(更正後_現年度);
-        Decimal 更正前_年額 = get減免前介護保険料_年額(入力_現年度);
         ChoteiJiyuParameter parameter = new ChoteiJiyuParameter();
-        FukaJohoList 更正後賦課 = new FukaJohoList();
-        List<FukaJohoList> 更正後賦課List = new ArrayList<>();
-        更正後賦課.set現年度(更正後_現年度);
-        parameter.set更正前徴収方法(徴収方法情報);
-        parameter.set更正後徴収方法(調定計算Result.getChoshuHoho());
-        parameter.set現年度(入力_現年度);
-        FukaJoho 更正後_過年度 = get賦課情報_過年度(賦課情報リスト_結果);
-        更正後賦課.set過年度(更正後_過年度);
-        更正後賦課List.add(更正後賦課);
-        parameter.set更正後賦課リスト(更正後賦課List);
-        FukaJoho 更正前_過年度 = null;
-        if (更正後_過年度 != null && 賦課の情報リスト != null && !賦課の情報リスト.isEmpty()) {
-            for (FukaJoho 賦課情報 : 賦課の情報リスト) {
-                if (更正後_過年度.get調定年度().equals(賦課情報.get調定年度())) {
-                    更正前_過年度 = 賦課情報;
-                }
-            }
-        }
-        if ((更正後_年額 == null && 更正前_年額 != null && Decimal.ZERO.compareTo(更正前_年額) < ゼロ_定値)
-                || (更正前_年額 != null && 更正後_年額 != null && 更正後_年額.compareTo(更正前_年額) < ゼロ_定値)) {
-            parameter.set過年度(更正前_過年度);
+        if (賦課の情報_当初.get賦課の情報() != null && (!賦課の情報_当初.get賦課の情報().isEmpty())) {
+            set賦課の情報_当初(parameter, 賦課の情報_当初, 賦課情報リスト_結果);
         }
 
-        List<FukaJohoList> 調定事由 = ChoteiJiyuHantei.createInstance().set調定事由(parameter);
+        List<FukaJoho> 賦課の情報_更正前List = new ArrayList<>();
+        for (FukaJohoRelateEntity entity : 賦課の情報_当初.get賦課の情報()) {
+            賦課の情報_更正前List.add(new FukaJoho(entity));
+        }
+        FukaJoho 更正前_現年度 = get賦課情報_現年度(賦課の情報_更正前List);
+        Decimal 更正前_減免前介護保険料 = null == 更正前_現年度.get減免前介護保険料_年額()
+                ? Decimal.ZERO : 更正前_現年度.get減免前介護保険料_年額();
+        FukaJohoList 更正後賦課 = new FukaJohoList();
+        List<FukaJohoList> 更正後賦課List = new ArrayList<>();
+        FukaJoho 更正後_現年度 = get賦課情報_現年度(賦課情報リスト_結果);
+
+        Decimal 更正後_減免前介護保険料 = null == 更正後_現年度.get減免前介護保険料_年額()
+                ? Decimal.ZERO : 更正後_現年度.get減免前介護保険料_年額();
+        更正後賦課.set現年度(更正後_現年度);
+        FukaJoho 更正後_過年度 = get賦課情報_過年度(賦課情報リスト_結果);
+        if (更正後_減免前介護保険料.compareTo(更正前_減免前介護保険料) < 0) {
+            更正後賦課.set過年度(更正後_過年度);
+        }
+        更正後賦課List.add(更正後賦課);
+        parameter.set更正後賦課リスト(更正後賦課List);
+        parameter.set更正前徴収方法(徴収方法情報);
+        parameter.set更正後徴収方法(調定計算Result.getChoshuHoho());
+        FukaJohoList 調定事由 = ChoteiJiyuHantei.createInstance().set調定事由(parameter).get(0);
         FukaJohoToChoshuHoho 更正result = new FukaJohoToChoshuHoho();
         更正result.set徴収方法の情報(調定計算Result.getChoshuHoho());
         List<FukaJoho> 賦課情報 = new ArrayList<>();
-        for (FukaJohoList entity : 調定事由) {
-            if (entity.get現年度() != null) {
-                賦課情報.add(entity.get現年度());
-            }
-            if (entity.get過年度() != null) {
-                賦課情報.add(entity.get過年度());
-            }
+        if (調定事由.get現年度() != null) {
+            賦課情報.add(調定事由.get現年度());
+        }
+        if (調定事由.get過年度() != null) {
+            賦課情報.add(調定事由.get過年度());
         }
         更正result.set賦課情報(賦課情報);
         return 更正result;
     }
 
-    private Decimal get減免前介護保険料_年額(FukaJoho 賦課情報) {
-        if (賦課情報 == null) {
-            return null;
+    private void set賦課の情報_当初(ChoteiJiyuParameter parameter, CalculateFukaEntity 賦課の情報_当初,
+            List<FukaJoho> 賦課情報リスト_結果) {
+        List<FukaJoho> 賦課の情報_更正前List = new ArrayList<>();
+        for (FukaJohoRelateEntity entity : 賦課の情報_当初.get賦課の情報()) {
+            賦課の情報_更正前List.add(new FukaJoho(entity));
         }
-        return 賦課情報.get減免前介護保険料_年額();
+        parameter.set現年度(get賦課情報_現年度(賦課の情報_更正前List));
+        FukaJoho 更正後_過年度 = get賦課情報_過年度(賦課情報リスト_結果);
+        if (null != 更正後_過年度 && null != 更正後_過年度.get調定年度()) {
+            for (FukaJoho 賦課の情報_更正前 : 賦課の情報_更正前List) {
+                if (更正後_過年度.get調定年度().getYearValue() == 賦課の情報_更正前.get調定年度().getYearValue()
+                        && 賦課の情報_更正前.get賦課年度().isBefore(賦課の情報_更正前.get調定年度())) {
+                    parameter.set過年度(賦課の情報_更正前);
+                }
+            }
+        }
     }
 
     private FukaJoho get賦課情報_過年度(List<FukaJoho> 賦課情報リスト) {

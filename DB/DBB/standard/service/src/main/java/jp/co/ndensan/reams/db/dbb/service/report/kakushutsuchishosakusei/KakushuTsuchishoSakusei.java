@@ -449,7 +449,7 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         }
         KakushuTsuchishoCommonInfo 通知書共通情報 = search通知書共通情報(parameter);
         if (通知書共通情報 == null || 通知書共通情報.get賦課の情報_更正後() == null) {
-//            return sourceDataCollection;
+            return sourceDataCollection;
         }
         List<ReportSourceDataCollection> reportSourceDataCollection = new ArrayList<>();
         List<RString> 発行する帳票List = parameter.get発行する帳票List();

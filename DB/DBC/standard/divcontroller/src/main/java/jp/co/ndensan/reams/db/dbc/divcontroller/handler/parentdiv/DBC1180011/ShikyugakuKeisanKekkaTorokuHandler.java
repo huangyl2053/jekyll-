@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 高額合算支給額計算結果登録のHandlerです。
@@ -50,6 +51,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
+    private static final int INT_5 = 5;
     private static final int INT_8 = 8;
     private static final int INT_11 = 11;
     private static final int 年度_2008 = 2008;
@@ -71,6 +73,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private static final RString 新規 = new RString("新規");
     private static final RString KEY_0 = new RString("key0");
     private static final RString 按分率 = new RString("99999999/99999999");
+    private static final RString 按分率区切 = new RString("99,999,999/99,999,999");
     private static final RString スラッシュ = new RString("/");
     private static final RString 横線 = new RString("-");
 
@@ -169,10 +172,17 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
      * @param meisaiList List<KogakuGassanShikyugakuKeisanKekkaMeisai>
      */
     public void 支給額結果明細グリッド(List<KogakuGassanShikyugakuKeisanKekkaMeisai> meisaiList) {
+        Decimal 以上負担額合計 = Decimal.ZERO;
+        Decimal 負担額合計 = Decimal.ZERO;
         if (meisaiList == null) {
             div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().setDataSource(Collections.EMPTY_LIST);
             return;
         }
+        for (KogakuGassanShikyugakuKeisanKekkaMeisai item : meisaiList) {
+            以上負担額合計 = 以上負担額合計.add(emptyToZero(item.get70歳以上負担額()));
+            負担額合計 = 負担額合計.add(emptyToZero(item.get負担額()));
+        }
+
         List<dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row> rowList = new ArrayList();
         for (KogakuGassanShikyugakuKeisanKekkaMeisai item : meisaiList) {
             dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row = new dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row();
@@ -195,11 +205,11 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             row.setTxtKokuhoHihokenshaShoKigo(item.get国保被保険者証記号());
             row.setTxtHiHokenshaShoNo(item.get被保険者_証番号());
             row.getTxtOver70Futangaku().setValue(item.get70歳以上負担額() == null ? Decimal.ZERO : new Decimal(item.get70歳以上負担額().toString()));
-            row.setTxtOver70AmbunRitsu(item.get70歳以上按分率());
+            row.setTxtOver70AmbunRitsu(get以上負担額分率(emptyToZero(item.get70歳以上負担額()), 以上負担額合計));
             row.getTxtOver70Shikyugaku().setValue(item.get70歳以上支給額() == null ? Decimal.ZERO : new Decimal(item.get70歳以上支給額().toString()));
             row.getTxtUnder70Futangaku().setValue(item.get70歳未満負担額() == null ? Decimal.ZERO : new Decimal(item.get70歳未満負担額().toString()));
             row.getTxtFutangaku().setValue(item.get負担額() == null ? Decimal.ZERO : new Decimal(item.get負担額().toString()));
-            row.setTxtAmbunRitsu(item.get按分率());
+            row.setTxtAmbunRitsu(get以上負担額分率(emptyToZero(item.get負担額()), 負担額合計));
             row.getTxtUnder70Shikyugaku().setValue(item.get70歳未満支給額() == null ? Decimal.ZERO : new Decimal(item.get70歳未満支給額().toString()));
             row.getTxtShikyugaku().setValue(item.get支給額() == null ? Decimal.ZERO : new Decimal(item.get支給額().toString()));
             row.setTxtHihokenshaNo(item.get被保険者番号().getColumnValue());
@@ -210,6 +220,26 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
             rowList.add(row);
         }
         div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().setDataSource(rowList);
+    }
+
+    private RString get以上負担額分率(Decimal 以上負担額, Decimal 以上負担額合計) {
+        if (!Decimal.ZERO.equals(以上負担額) && Decimal.ZERO.equals(以上負担額合計)) {
+            return DecimalFormatter.toコンマ区切りRString(以上負担額, 0)
+                    .concat(スラッシュ)
+                    .concat(DecimalFormatter.toコンマ区切りRString(以上負担額, 0));
+        } else if (Decimal.ZERO.equals(以上負担額) && !Decimal.ZERO.equals(以上負担額合計)) {
+            return 按分率区切;
+        } else if (Decimal.ZERO.equals(以上負担額) && Decimal.ZERO.equals(以上負担額合計)) {
+            return 按分率区切;
+        } else {
+            return DecimalFormatter.toコンマ区切りRString(以上負担額, 0)
+                    .concat(スラッシュ)
+                    .concat(DecimalFormatter.toコンマ区切りRString(以上負担額合計, 0));
+        }
+    }
+
+    private Decimal emptyToZero(RString obj) {
+        return obj != null && !obj.isEmpty() ? new Decimal(obj.toString()) : Decimal.ZERO;
     }
 
     /**
@@ -606,7 +636,7 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
     private void 連絡票整理番号項目をセット() {
         RString 連絡票整理番号 = div.getTxtShikyuShinseishoSeiriNoInput().getValue();
         div.getTxtTaishoNendo().setValue(new RDate(連絡票整理番号.substring(INT_0, INT_3).toString()));
-        div.getTxtShoKisaiHokenshaNoa().setValue(連絡票整理番号.substring(INT_3, INT_11));
+        div.getTxtShoKisaiHokenshaNoa().setValue(連絡票整理番号.substring(INT_5, INT_11));
         div.getTxtShikyuShinseishoSeiriNo().setValue(連絡票整理番号);
         if (div.getTxtTaishoNendo().getValue().getYearValue() == 年度_2008) {
             div.getTxtOver70Biko().setVisible(true);
@@ -870,8 +900,8 @@ public class ShikyugakuKeisanKekkaTorokuHandler {
                         ? Decimal.ZERO : new Decimal(row.getTxtFutangaku().getValue().toString()));
             }
         }
-        if (!追加.equals(状態)) {
-            dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row clickedRow = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem();
+        dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row clickedRow = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem();
+        if (!追加.equals(状態) && null != clickedRow) {
             以上負担額合計 = 以上負担額合計.subtract(clickedRow.getTxtOver70Futangaku().getValue() == null
                     ? Decimal.ZERO : new Decimal(clickedRow.getTxtOver70Futangaku().getValue().toString()));
             負担額合計 = 負担額合計.subtract(clickedRow.getTxtFutangaku().getValue() == null

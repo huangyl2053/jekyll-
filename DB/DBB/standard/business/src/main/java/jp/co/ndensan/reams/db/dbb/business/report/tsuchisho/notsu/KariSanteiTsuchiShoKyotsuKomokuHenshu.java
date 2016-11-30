@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,9 +66,6 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     private static final int 期_13 = 13;
     private static final int 期_14 = 14;
     private static final int INDEX_3 = 3;
-    private static final int MONTHVALUE_3 = 3;
-    private static final int MONTHVALUE_4 = 4;
-    private static final int DAYVALUE = 31;
     private static final RString 普徴メソッド_収入 = new RString("get普徴収入額");
     private static final RString 特徴メソッド_収入 = new RString("get特徴収入額");
     private static final RString 普徴メソッド_賦課 = new RString("get普徴期別金額");
@@ -110,7 +108,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         Decimal 特徴既に納付すべき額 = 仮算定通知書情報.get賦課の情報_更正後() == null ? Decimal.ZERO
                 : get納付額By賦課情報(特徴メソッド_賦課, 仮算定通知書情報.get賦課の情報_更正後().get賦課情報(),
                         1, new TokuchoKiUtil().get期月リスト().get月の期(Tsuki.toValue(
-                                        new RString(RDate.getNowDate().getMonthValue()).padZeroToLeft(2))).get期AsInt());
+                                new RString(RDate.getNowDate().getMonthValue()).padZeroToLeft(2))).get期AsInt());
         Decimal 更正後特徴期別金額合計 = 仮算定通知書情報.get賦課の情報_更正後() == null ? Decimal.ZERO
                 : get納付額By賦課情報(特徴メソッド_賦課, 仮算定通知書情報.get賦課の情報_更正後().get賦課情報(), 1, 期_6);
         Decimal 更正後普徴期別金額合計 = 仮算定通知書情報.get賦課の情報_更正後() == null ? Decimal.ZERO
@@ -311,8 +309,8 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正前.set更正前普徴期別金額リスト(get普徴期別金額リストBy賦課情報(仮算定通知書情報.get普徴納期情報リスト(), 賦課情報_更正前));
         更正前.set更正前特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                        仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
+                        : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                                仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正前() == null
                 || RString.isNullOrEmpty(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()) ? RString.EMPTY
                 : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
@@ -320,7 +318,7 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
                                 .substringReturnAsPossible(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正前.set更正前特別徴収義務者コード(new NenkinCode((仮算定通知書情報.get対象者_追加含む_情報_更正前() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード() == null) ? Code.EMPTY
-                : 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value()));
+                        : 仮算定通知書情報.get対象者_追加含む_情報_更正前().getDT特別徴収義務者コード().value()));
         更正前.set更正前特別徴収対象年金コード(new TokubetsuChoshuGimushaCode(
                 仮算定通知書情報.get徴収方法情報_更正前() == null || RString.isNullOrEmpty(仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード())
                 ? RString.EMPTY : 仮算定通知書情報.get徴収方法情報_更正前().get仮徴収_年金コード()));
@@ -367,23 +365,22 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
     }
 
     private FlexibleDate get期間_自(FukaJoho 賦課情報) {
-        FlexibleDate 資格取得日 = 賦課情報.get資格取得日();
-        FlexibleDate 賦課 = new FlexibleDate(賦課情報.get賦課年度().getYearValue(), MONTHVALUE_4, 1);
-        if (null != 資格取得日 && !資格取得日.isEmpty()
-                && 賦課.isBefore(資格取得日)) {
-            return new FlexibleDate(資格取得日.getYearValue(), 資格取得日.getMonthValue(), 1);
+        FlexibleYearMonth 月割開始年月 = 賦課情報.get月割開始年月1();
+        if (null != 月割開始年月 && !月割開始年月.isEmpty()) {
+            return new FlexibleDate(月割開始年月.toDateString().concat(new RString("01")));
         }
-        return 賦課;
+        return FlexibleDate.EMPTY;
     }
 
     private FlexibleDate get期間_至(FukaJoho 賦課情報) {
-        FlexibleDate 資格喪失日 = 賦課情報.get資格喪失日();
-        FlexibleDate 賦課 = new FlexibleDate(賦課情報.get賦課年度().getYearValue() + 1, MONTHVALUE_3, DAYVALUE);
-        if (null != 資格喪失日 && !資格喪失日.isEmpty()
-                && 資格喪失日.isBefore(賦課)) {
-            return new FlexibleDate(資格喪失日.getYearValue(), 資格喪失日.getMonthValue(), 資格喪失日.getLastDay());
+        FlexibleYearMonth 月割終了年月1 = 賦課情報.get月割終了年月1();
+        FlexibleYearMonth 月割終了年月2 = 賦課情報.get月割終了年月2();
+        if (null != 月割終了年月2 && !月割終了年月2.isEmpty()) {
+            return new FlexibleDate(月割終了年月2.toDateString().concat(new RString(月割終了年月2.getLastDay())));
+        } else if (null != 月割終了年月1 && !月割終了年月1.isEmpty()) {
+            return new FlexibleDate(月割終了年月1.toDateString().concat(new RString(月割終了年月1.getLastDay())));
         }
-        return 賦課;
+        return FlexibleDate.EMPTY;
     }
 
     private RString get保険料率(FukaJoho 賦課情報) {
@@ -426,16 +423,16 @@ public class KariSanteiTsuchiShoKyotsuKomokuHenshu {
         更正後.set更正後普徴期別金額リスト(get普徴期別金額リストBy賦課情報(仮算定通知書情報.get普徴納期情報リスト(), 賦課情報_更正後));
         更正後.set更正後特別徴収義務者(仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                        仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
+                        : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                                仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().value(), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収対象年金(仮算定通知書情報.get徴収方法情報_更正後() == null
                 || 仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード() == null ? RString.EMPTY
-                : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
-                        new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード()
-                                .substringReturnAsPossible(0, INDEX_3)), FlexibleDate.getNowDate()));
+                        : CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開, UEXCodeShubetsu.年金コード.getCodeShubetsu(),
+                                new Code(仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード()
+                                        .substringReturnAsPossible(0, INDEX_3)), FlexibleDate.getNowDate()));
         更正後.set更正後特別徴収義務者コード((仮算定通知書情報.get対象者_追加含む_情報_更正後() == null
                 || 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード() == null) ? RString.EMPTY
-                : 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().toRString());
+                        : 仮算定通知書情報.get対象者_追加含む_情報_更正後().getDT特別徴収義務者コード().toRString());
         更正後.set更正後特別徴収対象年金コード(仮算定通知書情報.get徴収方法情報_更正後() == null ? RString.EMPTY
                 : 仮算定通知書情報.get徴収方法情報_更正後().get仮徴収_年金コード());
         更正後.set更正後徴収方法(get徴収方法(更正後普徴期別金額合計, 更正後特徴期別金額合計));
