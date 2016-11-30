@@ -253,18 +253,17 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
     }
 
     private RString 金額(Decimal 金額) {
-        if (Decimal.ZERO.equals(金額)) {
-            return DecimalFormatter.toコンマ区切りRString(金額, 0);
-        } else {
-            return RString.HALF_SPACE;
+        if (金額 == null) {
+            return RString.EMPTY;
         }
+        return DecimalFormatter.toコンマ区切りRString(金額, 0);
     }
 
     private RString format金額(Decimal 金額) {
         if (金額 != null) {
             return DecimalFormatter.toコンマ区切りRString(金額, 0);
         } else {
-            return RString.HALF_SPACE;
+            return new RString(Decimal.ZERO.toString());
         }
     }
 }

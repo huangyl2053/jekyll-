@@ -115,7 +115,7 @@ public class RiyoJokyoIchiranEditor implements IRiyoJokyoIchiranEditor {
         } else {
             source.list1Upper_2 = entity.get帳票出力対象データリスト().getShimeiKana();
         }
-        source.list1Upper_3 = RiyojokyoTokeihyo_DataKubun.toValue(entity.get帳票出力対象データリスト().getDataKubun()).get名称();
+        source.list1Upper_3 = RiyojokyoTokeihyo_DataKubun.toValue(entity.get帳票出力対象データリスト().getDataKubun()).get略称();
         if (区分_2.equals(entity.get帳票出力対象データリスト().getRiyoJissekiFlag())) {
             source.list1Upper_4 = RiyojokyoTokeihyo_RiyoJissekiKubun.toValue(entity.get帳票出力対象データリスト().getRiyoJissekiFlag()).get名称();
         } else {
