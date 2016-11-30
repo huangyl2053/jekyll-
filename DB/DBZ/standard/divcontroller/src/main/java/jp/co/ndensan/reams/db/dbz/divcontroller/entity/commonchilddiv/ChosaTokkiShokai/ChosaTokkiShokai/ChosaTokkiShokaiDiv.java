@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokk
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -43,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBE-3000-200 liangbc
  */
 public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -881,6 +880,26 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
+    public Label getLblImgGenpon() {
+        return this.getImgPanel1().getLblImgGenpon();
+    }
+
+    @JsonIgnore
+    public void  setLblImgGenpon(Label lblImgGenpon) {
+        this.getImgPanel1().setLblImgGenpon(lblImgGenpon);
+    }
+
+    @JsonIgnore
+    public Label getLblImgMask() {
+        return this.getImgPanel1().getLblImgMask();
+    }
+
+    @JsonIgnore
+    public void  setLblImgMask(Label lblImgMask) {
+        this.getImgPanel1().setLblImgMask(lblImgMask);
+    }
+
+    @JsonIgnore
     public TextBox getTxtTokkijikoNo11() {
         return this.getImgPanel1().getTxtTokkijikoNo11();
     }
@@ -888,56 +907,6 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     @JsonIgnore
     public void  setTxtTokkijikoNo11(TextBox txtTokkijikoNo11) {
         this.getImgPanel1().setTxtTokkijikoNo11(txtTokkijikoNo11);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTokkijikoNo16() {
-        return this.getImgPanel1().getTxtTokkijikoNo16();
-    }
-
-    @JsonIgnore
-    public void  setTxtTokkijikoNo16(TextBox txtTokkijikoNo16) {
-        this.getImgPanel1().setTxtTokkijikoNo16(txtTokkijikoNo16);
-    }
-
-    @JsonIgnore
-    public Label getLbl16() {
-        return this.getImgPanel1().getLbl16();
-    }
-
-    @JsonIgnore
-    public void  setLbl16(Label lbl16) {
-        this.getImgPanel1().setLbl16(lbl16);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtRemban16() {
-        return this.getImgPanel1().getTxtRemban16();
-    }
-
-    @JsonIgnore
-    public void  setTxtRemban16(TextBoxNum txtRemban16) {
-        this.getImgPanel1().setTxtRemban16(txtRemban16);
-    }
-
-    @JsonIgnore
-    public genpoPanel6Div getGenpoPanel6() {
-        return this.getImgPanel1().getGenpoPanel6();
-    }
-
-    @JsonIgnore
-    public void  setGenpoPanel6(genpoPanel6Div genpoPanel6) {
-        this.getImgPanel1().setGenpoPanel6(genpoPanel6);
-    }
-
-    @JsonIgnore
-    public StaticImage getImgGenpo6() {
-        return this.getImgPanel1().getGenpoPanel6().getImgGenpo6();
-    }
-
-    @JsonIgnore
-    public void  setImgGenpo6(StaticImage imgGenpo6) {
-        this.getImgPanel1().getGenpoPanel6().setImgGenpo6(imgGenpo6);
     }
 
     @JsonIgnore
@@ -1281,6 +1250,56 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
+    public TextBox getTxtTokkijikoNo16() {
+        return this.getImgPanel1().getTxtTokkijikoNo16();
+    }
+
+    @JsonIgnore
+    public void  setTxtTokkijikoNo16(TextBox txtTokkijikoNo16) {
+        this.getImgPanel1().setTxtTokkijikoNo16(txtTokkijikoNo16);
+    }
+
+    @JsonIgnore
+    public Label getLbl16() {
+        return this.getImgPanel1().getLbl16();
+    }
+
+    @JsonIgnore
+    public void  setLbl16(Label lbl16) {
+        this.getImgPanel1().setLbl16(lbl16);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRemban16() {
+        return this.getImgPanel1().getTxtRemban16();
+    }
+
+    @JsonIgnore
+    public void  setTxtRemban16(TextBoxNum txtRemban16) {
+        this.getImgPanel1().setTxtRemban16(txtRemban16);
+    }
+
+    @JsonIgnore
+    public genpoPanel6Div getGenpoPanel6() {
+        return this.getImgPanel1().getGenpoPanel6();
+    }
+
+    @JsonIgnore
+    public void  setGenpoPanel6(genpoPanel6Div genpoPanel6) {
+        this.getImgPanel1().setGenpoPanel6(genpoPanel6);
+    }
+
+    @JsonIgnore
+    public StaticImage getImgGenpo6() {
+        return this.getImgPanel1().getGenpoPanel6().getImgGenpo6();
+    }
+
+    @JsonIgnore
+    public void  setImgGenpo6(StaticImage imgGenpo6) {
+        this.getImgPanel1().getGenpoPanel6().setImgGenpo6(imgGenpo6);
+    }
+
+    @JsonIgnore
     public maskPanel6Div getMaskPanel6() {
         return this.getImgPanel1().getMaskPanel6();
     }
@@ -1578,6 +1597,16 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     @JsonIgnore
     public void  setImgMasking10(StaticImage imgMasking10) {
         this.getImgPanel1().getMaskPanel10().setImgMasking10(imgMasking10);
+    }
+
+    @JsonIgnore
+    public Label getLblImg() {
+        return this.getImgPanel2().getLblImg();
+    }
+
+    @JsonIgnore
+    public void  setLblImg(Label lblImg) {
+        this.getImgPanel2().setLblImg(lblImg);
     }
 
     @JsonIgnore
@@ -2301,7 +2330,6 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
      */
     @JsonIgnore
     public void initializa(ArrayList<NinteichosahyoTokkijiko> 認定調査特記事項List, RString 認定調査特記事項番号) {
-        clearValue();
         NinteiChosaTokkiJikou 認定調査特記事項マッピング
                 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項番号);
 
@@ -2316,7 +2344,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         if (イメージ情報.getイメージ共有ファイルID() != null) {
             FilesystemName sharedFileName = finder.selectSharedFileNameByKey(new ShinseishoKanriNo(shinseishoKanriNo));
             downLoadFilePath = getDownLoadFilePath(イメージ情報.getイメージ共有ファイルID(), sharedFileName);
-            
+
             path原本 = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
                     NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(),
                     1, true)));
@@ -2326,419 +2354,341 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         }
 
         if (File.exists(pathマスク) || File.exists(path原本)) {
-            setGamenDisplay(false);
-            for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
-                initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番());
+            this.textPanel.setDisplayNone(true);
+            //TODO
+            // システム稼働日と申請日の処理未実装
+            boolean displayFlg = false; 
+            if (displayFlg) {
+                for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
+                    initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), new RString("1"));
+                }
+            } else {
+                for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
+                    initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), new RString("2"));
+                }
             }
         } else {
-            setGamenDisplay(true);
+            this.textPanel.setDisplayNone(false);
+            this.imgPanel1.setDisplayNone(true);
+            this.imgPanel2.setDisplayNone(true);
             for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
                 initializaテキストエリア(認定調査特記事項マッピング, 認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番());
             }
         }
     }
-
-    private void clearValue() {
-//        this.txtTokkijikoNo1.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo2.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo3.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo4.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo5.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo6.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo7.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo8.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo9.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo10.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo11.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo12.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo13.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo14.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo15.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo16.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo17.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo18.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo19.setValue(RString.EMPTY);
-//        this.txtTokkijikoNo20.setValue(RString.EMPTY);
-//        
-//        this.txtRemban1.clearValue();
-//        this.txtRemban2.clearValue();
-//        this.txtRemban3.clearValue();
-//        this.txtRemban4.clearValue();
-//        this.txtRemban5.clearValue();
-//        this.txtRemban6.clearValue();
-//        this.txtRemban7.clearValue();
-//        this.txtRemban8.clearValue();
-//        this.txtRemban9.clearValue();
-//        this.txtRemban10.clearValue();
-//        this.txtRemban11.clearValue();
-//        this.txtRemban12.clearValue();
-//        this.txtRemban13.clearValue();
-//        this.txtRemban14.clearValue();
-//        this.txtRemban15.clearValue();
-//        this.txtRemban16.clearValue();
-//        this.txtRemban17.clearValue();
-//        this.txtRemban18.clearValue();
-//        this.txtRemban19.clearValue();
-//        this.txtRemban20.clearValue();
-//        
-//        this.txtTextGenpo1.setValue(RString.EMPTY);
-//        this.txtTextGenpo2.setValue(RString.EMPTY);
-//        this.txtTextGenpo3.setValue(RString.EMPTY);
-//        this.txtTextGenpo4.setValue(RString.EMPTY);
-//        this.txtTextGenpo5.setValue(RString.EMPTY);
-//        this.txtTextGenpo6.setValue(RString.EMPTY);
-//        this.txtTextGenpo7.setValue(RString.EMPTY);
-//        this.txtTextGenpo8.setValue(RString.EMPTY);
-//        this.txtTextGenpo9.setValue(RString.EMPTY);
-//        this.txtTextGenpo10.setValue(RString.EMPTY);
-//        this.txtTextMask1.setValue(RString.EMPTY);
-//        this.txtTextMask2.setValue(RString.EMPTY);
-//        this.txtTextMask3.setValue(RString.EMPTY);
-//        this.txtTextMask4.setValue(RString.EMPTY);
-//        this.txtTextMask5.setValue(RString.EMPTY);
-//        this.txtTextMask6.setValue(RString.EMPTY);
-//        this.txtTextMask7.setValue(RString.EMPTY);
-//        this.txtTextMask8.setValue(RString.EMPTY);
-//        this.txtTextMask9.setValue(RString.EMPTY);
-//        this.txtTextMask10.setValue(RString.EMPTY);
-//        
-//        this.imgGenpo1.setSrc(RString.EMPTY);
-//        this.imgGenpo2.setSrc(RString.EMPTY);
-//        this.imgGenpo3.setSrc(RString.EMPTY);
-//        this.imgGenpo4.setSrc(RString.EMPTY);
-//        this.imgGenpo5.setSrc(RString.EMPTY);
-//        this.imgGenpo6.setSrc(RString.EMPTY);
-//        this.imgGenpo7.setSrc(RString.EMPTY);
-//        this.imgGenpo8.setSrc(RString.EMPTY);
-//        this.imgGenpo9.setSrc(RString.EMPTY);
-//        this.imgGenpo10.setSrc(RString.EMPTY);
-//        this.imgMasking1.setSrc(RString.EMPTY);
-//        this.imgMasking2.setSrc(RString.EMPTY);
-//        this.imgMasking3.setSrc(RString.EMPTY);
-//        this.imgMasking4.setSrc(RString.EMPTY);
-//        this.imgMasking5.setSrc(RString.EMPTY);
-//        this.imgMasking6.setSrc(RString.EMPTY);
-//        this.imgMasking7.setSrc(RString.EMPTY);
-//        this.imgMasking8.setSrc(RString.EMPTY);
-//        this.imgMasking9.setSrc(RString.EMPTY);
-//        this.imgMasking10.setSrc(RString.EMPTY);
-    }
-    
-    private void setGamenDisplay(boolean isテキスト) {
-//        this.txtTokkijikoNo1.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo2.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo3.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo4.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo5.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo6.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo7.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo8.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo9.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo10.setDisplayNone(!isテキスト);
-//        this.txtTokkijikoNo11.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo12.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo13.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo14.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo15.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo16.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo17.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo18.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo19.setDisplayNone(isテキスト);
-//        this.txtTokkijikoNo20.setDisplayNone(isテキスト);
-//        
-//        this.lbl1.setDisplayNone(!isテキスト);
-//        this.lbl2.setDisplayNone(!isテキスト);
-//        this.lbl3.setDisplayNone(!isテキスト);
-//        this.lbl4.setDisplayNone(!isテキスト);
-//        this.lbl5.setDisplayNone(!isテキスト);
-//        this.lbl6.setDisplayNone(!isテキスト);
-//        this.lbl7.setDisplayNone(!isテキスト);
-//        this.lbl8.setDisplayNone(!isテキスト);
-//        this.lbl9.setDisplayNone(!isテキスト);
-//        this.lbl10.setDisplayNone(!isテキスト);
-//        this.lbl11.setDisplayNone(isテキスト);
-//        this.lbl12.setDisplayNone(isテキスト);
-//        this.lbl13.setDisplayNone(isテキスト);
-//        this.lbl14.setDisplayNone(isテキスト);
-//        this.lbl15.setDisplayNone(isテキスト);
-//        this.lbl16.setDisplayNone(isテキスト);
-//        this.lbl17.setDisplayNone(isテキスト);
-//        this.lbl18.setDisplayNone(isテキスト);
-//        this.lbl19.setDisplayNone(isテキスト);
-//        this.lbl20.setDisplayNone(isテキスト);
-//        
-//        this.txtRemban1.setDisplayNone(!isテキスト);
-//        this.txtRemban2.setDisplayNone(!isテキスト);
-//        this.txtRemban3.setDisplayNone(!isテキスト);
-//        this.txtRemban4.setDisplayNone(!isテキスト);
-//        this.txtRemban5.setDisplayNone(!isテキスト);
-//        this.txtRemban6.setDisplayNone(!isテキスト);
-//        this.txtRemban7.setDisplayNone(!isテキスト);
-//        this.txtRemban8.setDisplayNone(!isテキスト);
-//        this.txtRemban9.setDisplayNone(!isテキスト);
-//        this.txtRemban10.setDisplayNone(!isテキスト);
-//        this.txtRemban11.setDisplayNone(isテキスト);
-//        this.txtRemban12.setDisplayNone(isテキスト);
-//        this.txtRemban13.setDisplayNone(isテキスト);
-//        this.txtRemban14.setDisplayNone(isテキスト);
-//        this.txtRemban15.setDisplayNone(isテキスト);
-//        this.txtRemban16.setDisplayNone(isテキスト);
-//        this.txtRemban17.setDisplayNone(isテキスト);
-//        this.txtRemban18.setDisplayNone(isテキスト);
-//        this.txtRemban19.setDisplayNone(isテキスト);
-//        this.txtRemban20.setDisplayNone(isテキスト);
-//        
-//        this.txtTextGenpo1.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo2.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo3.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo4.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo5.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo6.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo7.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo8.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo9.setDisplayNone(!isテキスト);
-//        this.txtTextGenpo10.setDisplayNone(!isテキスト);
-//        this.txtTextMask1.setDisplayNone(!isテキスト);
-//        this.txtTextMask2.setDisplayNone(!isテキスト);
-//        this.txtTextMask3.setDisplayNone(!isテキスト);
-//        this.txtTextMask4.setDisplayNone(!isテキスト);
-//        this.txtTextMask5.setDisplayNone(!isテキスト);
-//        this.txtTextMask6.setDisplayNone(!isテキスト);
-//        this.txtTextMask7.setDisplayNone(!isテキスト);
-//        this.txtTextMask8.setDisplayNone(!isテキスト);
-//        this.txtTextMask9.setDisplayNone(!isテキスト);
-//        this.txtTextMask10.setDisplayNone(!isテキスト);
-//        
-//        this.imgGenpo1.setDisplayNone(isテキスト);
-//        this.imgGenpo2.setDisplayNone(isテキスト);
-//        this.imgGenpo3.setDisplayNone(isテキスト);
-//        this.imgGenpo4.setDisplayNone(isテキスト);
-//        this.imgGenpo5.setDisplayNone(isテキスト);
-//        this.imgGenpo6.setDisplayNone(isテキスト);
-//        this.imgGenpo7.setDisplayNone(isテキスト);
-//        this.imgGenpo8.setDisplayNone(isテキスト);
-//        this.imgGenpo9.setDisplayNone(isテキスト);
-//        this.imgGenpo10.setDisplayNone(isテキスト);
-//        this.imgMasking1.setDisplayNone(isテキスト);
-//        this.imgMasking2.setDisplayNone(isテキスト);
-//        this.imgMasking3.setDisplayNone(isテキスト);
-//        this.imgMasking4.setDisplayNone(isテキスト);
-//        this.imgMasking5.setDisplayNone(isテキスト);
-//        this.imgMasking6.setDisplayNone(isテキスト);
-//        this.imgMasking7.setDisplayNone(isテキスト);
-//        this.imgMasking8.setDisplayNone(isテキスト);
-//        this.imgMasking9.setDisplayNone(isテキスト);
-//        this.imgMasking10.setDisplayNone(isテキスト); 
-    }
     
     @JsonIgnore
     private void initializaテキストエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, NinteichosahyoTokkijiko 認定調査特記事項, int remban) {
-        
-//        switch (remban) {
-//            case 1:
-//                this.txtTokkijikoNo1.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban1.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo1.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask1.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 2:
-//                this.txtTokkijikoNo2.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban2.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo2.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask2.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 3:
-//                this.txtTokkijikoNo3.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban3.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo3.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask3.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 4:
-//                this.txtTokkijikoNo4.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban4.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo4.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask4.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 5:
-//                this.txtTokkijikoNo5.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban5.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo5.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask5.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 6:
-//                this.txtTokkijikoNo6.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban6.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo6.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask6.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 7:
-//                this.txtTokkijikoNo7.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban7.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo7.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask7.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 8:
-//                this.txtTokkijikoNo8.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban8.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo8.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask8.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 9:
-//                this.txtTokkijikoNo9.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban9.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo9.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask9.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//            case 10:
-//                this.txtTokkijikoNo10.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban10.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
-//                    this.txtTextGenpo10.setValue(認定調査特記事項.get特記事項());
-//                } else {
-//                    this.txtTextMask10.setValue(認定調査特記事項.get特記事項());
-//                }
-//                break;
-//        }
+        switch (remban) {
+            case 1:
+                this.textPanel.getTxtTokkijikoNo1().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban1().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo1().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask1().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 2:
+                this.textPanel.getTxtTokkijikoNo2().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban2().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo2().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask2().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 3:
+                this.textPanel.getTxtTokkijikoNo3().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban3().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo3().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask3().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 4:
+                this.textPanel.getTxtTokkijikoNo4().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban4().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo4().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask4().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 5:
+                this.textPanel.getTxtTokkijikoNo5().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban5().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo5().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask5().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 6:
+                this.textPanel.getTxtTokkijikoNo6().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban6().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo6().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask6().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 7:
+                this.textPanel.getTxtTokkijikoNo7().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban7().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo7().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask7().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 8:
+                this.textPanel.getTxtTokkijikoNo8().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban8().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo8().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask8().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 9:
+                this.textPanel.getTxtTokkijikoNo9().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban9().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo9().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask9().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+            case 10:
+                this.textPanel.getTxtTokkijikoNo10().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                this.textPanel.getTxtRemban10().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                if (GenponMaskKubun.原本.getコード().equals(認定調査特記事項.get原本マスク区分().getColumnValue())) {
+                    this.textPanel.getTxtTextGenpo10().setValue(認定調査特記事項.get特記事項());
+                } else {
+                    this.textPanel.getTxtTextMask10().setValue(認定調査特記事項.get特記事項());
+                }
+                break;
+        }
     }
 
     @JsonIgnore
-    private void initializaイメージエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング,  NinteichosahyoTokkijiko 認定調査特記事項, int remban) {
+    private void initializaイメージエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング,  NinteichosahyoTokkijiko 認定調査特記事項, int remban, RString 区分) {
         RString path原本 = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
                 NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(),
                 remban, true)));
         RString pathマスク = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
                 NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(),
                 remban, false)));
-
-//        switch (remban) {
-//            case 1:
-//                this.txtTokkijikoNo11.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban11.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo1.setSrc(pathマスク);
-//                    this.imgMasking1.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo1.setSrc(path原本);
-//                }
-//                break;
-//            case 2:
-//                this.txtTokkijikoNo12.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban12.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo2.setSrc(pathマスク);
-//                    this.imgMasking2.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo2.setSrc(path原本);
-//                }
-//                break;
-//            case 3:
-//                this.txtTokkijikoNo13.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban13.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo3.setSrc(pathマスク);
-//                    this.imgMasking3.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo3.setSrc(path原本);
-//                }
-//                break;
-//            case 4:
-//                this.txtTokkijikoNo14.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban14.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo4.setSrc(pathマスク);
-//                    this.imgMasking4.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo4.setSrc(path原本);
-//                }
-//                break;
-//            case 5:
-//                this.txtTokkijikoNo15.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban15.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo5.setSrc(pathマスク);
-//                    this.imgMasking5.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo5.setSrc(path原本);
-//                }
-//                break;
-//            case 6:
-//                this.txtTokkijikoNo16.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban16.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo6.setSrc(pathマスク);
-//                    this.imgMasking6.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo6.setSrc(path原本);
-//                }
-//                break;
-//            case 7:
-//                this.txtTokkijikoNo17.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban17.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo7.setSrc(pathマスク);
-//                    this.imgMasking7.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo7.setSrc(path原本);
-//                }
-//                break;
-//            case 8:
-//                this.txtTokkijikoNo18.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban18.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo8.setSrc(pathマスク);
-//                    this.imgMasking8.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo8.setSrc(path原本);
-//                }
-//                break;
-//            case 9:
-//                this.txtTokkijikoNo19.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban19.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo9.setSrc(pathマスク);
-//                    this.imgMasking9.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo9.setSrc(path原本);
-//                }
-//                break;
-//            case 10:
-//                this.txtTokkijikoNo20.setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-//                this.txtRemban20.setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
-//                if (File.exists(pathマスク)) {
-//                    this.imgGenpo10.setSrc(pathマスク);
-//                    this.imgMasking10.setSrc(path原本);
-//                } else {
-//                    this.imgGenpo10.setSrc(path原本);
-//                }
-//                break;
-//        }
+        
+        if (区分.equals(new RString("1"))) {
+            switch (remban) {
+                case 1:
+                    this.imgPanel1.getTxtTokkijikoNo11().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban11().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo1().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking1().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo1().setSrc(path原本);
+                    }
+                    break;
+                case 2:
+                    this.imgPanel1.getTxtTokkijikoNo12().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban12().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo2().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking2().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo2().setSrc(path原本);
+                    }
+                    break;
+                case 3:
+                    this.imgPanel1.getTxtTokkijikoNo13().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban13().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo3().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking3().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo3().setSrc(path原本);
+                    }
+                    break;
+                case 4:
+                    this.imgPanel1.getTxtTokkijikoNo14().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban14().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo4().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking4().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo4().setSrc(path原本);
+                    }
+                    break;
+                case 5:
+                    this.imgPanel1.getTxtTokkijikoNo15().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban15().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo5().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking5().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo5().setSrc(path原本);
+                    }
+                    break;
+                case 6:
+                    this.imgPanel1.getTxtTokkijikoNo16().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban16().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo6().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking6().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo6().setSrc(path原本);
+                    }
+                    break;
+                case 7:
+                    this.imgPanel1.getTxtTokkijikoNo17().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban17().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo7().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking7().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo7().setSrc(path原本);
+                    }
+                    break;
+                case 8:
+                    this.imgPanel1.getTxtTokkijikoNo18().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban18().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo8().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking8().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo8().setSrc(path原本);
+                    }
+                    break;
+                case 9:
+                    this.imgPanel1.getTxtTokkijikoNo19().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban19().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo9().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking9().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo9().setSrc(path原本);
+                    }
+                    break;
+                case 10:
+                    this.imgPanel1.getTxtTokkijikoNo20().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel1.getTxtRemban20().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel1.getImgGenpo10().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking10().setSrc(path原本);
+                    } else {
+                        this.imgPanel1.getImgGenpo10().setSrc(path原本);
+                    }
+                    break;
+            }
+        } else {
+            switch (remban) {
+                case 1:
+                    this.imgPanel2.getTxtTokkijikoNo21().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban21().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo11().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking11().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo11().setSrc(path原本);
+                    }
+                    break;
+                case 2:
+                    this.imgPanel2.getTxtTokkijikoNo22().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban22().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo12().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking12().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo12().setSrc(path原本);
+                    }
+                    break;
+                case 3:
+                    this.imgPanel2.getTxtTokkijikoNo23().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban23().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo13().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking13().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo13().setSrc(path原本);
+                    }
+                    break;
+                case 4:
+                    this.imgPanel2.getTxtTokkijikoNo24().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban24().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo14().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking14().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo14().setSrc(path原本);
+                    }
+                    break;
+                case 5:
+                    this.imgPanel2.getTxtTokkijikoNo25().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban25().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo15().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking15().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo15().setSrc(path原本);
+                    }
+                    break;
+                case 6:
+                    this.imgPanel2.getTxtTokkijikoNo26().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban26().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo16().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking16().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo16().setSrc(path原本);
+                    }
+                    break;
+                case 7:
+                    this.imgPanel2.getTxtTokkijikoNo27().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban27().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo17().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking17().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo17().setSrc(path原本);
+                    }
+                    break;
+                case 8:
+                    this.imgPanel2.getTxtTokkijikoNo28().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban28().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo18().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking18().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo18().setSrc(path原本);
+                    }
+                    break;
+                case 9:
+                    this.imgPanel2.getTxtTokkijikoNo29().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban29().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo19().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking19().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo19().setSrc(path原本);
+                    }
+                    break;
+                case 10:
+                    this.imgPanel2.getTxtTokkijikoNo30().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
+                    this.imgPanel2.getTxtRemban30().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+                    if (File.exists(pathマスク)) {
+                        this.imgPanel2.getImgGenpo20().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking20().setSrc(path原本);
+                    } else {
+                        this.imgPanel2.getImgGenpo20().setSrc(path原本);
+                    }
+                    break;
+            }
+        }
     }
 
     private RString getImageSrc(RString path) {

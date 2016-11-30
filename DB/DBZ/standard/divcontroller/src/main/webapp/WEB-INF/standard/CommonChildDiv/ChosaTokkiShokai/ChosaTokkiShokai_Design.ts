@@ -261,28 +261,16 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("imgPanel1"));
             }
 
+            public lblImgGenpon(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblImgGenpon"));
+            }
+
+            public lblImgMask(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblImgMask"));
+            }
+
             public txtTokkijikoNo11(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo11"));
-            }
-
-            public txtTokkijikoNo16(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
-            }
-
-            public lbl16(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lbl16"));
-            }
-
-            public txtRemban16(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtRemban16"));
-            }
-
-            public genpoPanel6(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("genpoPanel6"));
-            }
-
-            public imgGenpo6(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
             }
 
             public lbl11(): UZA.Label {
@@ -421,6 +409,26 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking5"));
             }
 
+            public txtTokkijikoNo16(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
+            }
+
+            public lbl16(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lbl16"));
+            }
+
+            public txtRemban16(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban16"));
+            }
+
+            public genpoPanel6(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("genpoPanel6"));
+            }
+
+            public imgGenpo6(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
+            }
+
             public maskPanel6(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("maskPanel6"));
             }
@@ -543,6 +551,10 @@ module DBZ {
 
             public imgPanel2(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("imgPanel2"));
+            }
+
+            public lblImg(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblImg"));
             }
 
             public txtTokkijikoNo21(): UZA.TextBox {

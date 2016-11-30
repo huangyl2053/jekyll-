@@ -15,23 +15,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class imgPanel1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lblImgGenpon")
+    private Label lblImgGenpon;
+    @JsonProperty("lblImgMask")
+    private Label lblImgMask;
     @JsonProperty("txtTokkijikoNo11")
     private TextBox txtTokkijikoNo11;
-    @JsonProperty("txtTokkijikoNo16")
-    private TextBox txtTokkijikoNo16;
-    @JsonProperty("lbl16")
-    private Label lbl16;
-    @JsonProperty("txtRemban16")
-    private TextBoxNum txtRemban16;
-    @JsonProperty("genpoPanel6")
-    private genpoPanel6Div genpoPanel6;
     @JsonProperty("lbl11")
     private Label lbl11;
     @JsonProperty("txtRemban11")
@@ -80,6 +76,14 @@ public class imgPanel1Div extends Panel {
     private genpoPanel5Div genpoPanel5;
     @JsonProperty("maskPanel5")
     private maskPanel5Div maskPanel5;
+    @JsonProperty("txtTokkijikoNo16")
+    private TextBox txtTokkijikoNo16;
+    @JsonProperty("lbl16")
+    private Label lbl16;
+    @JsonProperty("txtRemban16")
+    private TextBoxNum txtRemban16;
+    @JsonProperty("genpoPanel6")
+    private genpoPanel6Div genpoPanel6;
     @JsonProperty("maskPanel6")
     private maskPanel6Div maskPanel6;
     @JsonProperty("txtTokkijikoNo17")
@@ -130,6 +134,42 @@ public class imgPanel1Div extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
+     * getlblImgGenpon
+     * @return lblImgGenpon
+     */
+    @JsonProperty("lblImgGenpon")
+    public Label getLblImgGenpon() {
+        return lblImgGenpon;
+    }
+
+    /*
+     * setlblImgGenpon
+     * @param lblImgGenpon lblImgGenpon
+     */
+    @JsonProperty("lblImgGenpon")
+    public void setLblImgGenpon(Label lblImgGenpon) {
+        this.lblImgGenpon = lblImgGenpon;
+    }
+
+    /*
+     * getlblImgMask
+     * @return lblImgMask
+     */
+    @JsonProperty("lblImgMask")
+    public Label getLblImgMask() {
+        return lblImgMask;
+    }
+
+    /*
+     * setlblImgMask
+     * @param lblImgMask lblImgMask
+     */
+    @JsonProperty("lblImgMask")
+    public void setLblImgMask(Label lblImgMask) {
+        this.lblImgMask = lblImgMask;
+    }
+
+    /*
      * gettxtTokkijikoNo11
      * @return txtTokkijikoNo11
      */
@@ -145,78 +185,6 @@ public class imgPanel1Div extends Panel {
     @JsonProperty("txtTokkijikoNo11")
     public void setTxtTokkijikoNo11(TextBox txtTokkijikoNo11) {
         this.txtTokkijikoNo11 = txtTokkijikoNo11;
-    }
-
-    /*
-     * gettxtTokkijikoNo16
-     * @return txtTokkijikoNo16
-     */
-    @JsonProperty("txtTokkijikoNo16")
-    public TextBox getTxtTokkijikoNo16() {
-        return txtTokkijikoNo16;
-    }
-
-    /*
-     * settxtTokkijikoNo16
-     * @param txtTokkijikoNo16 txtTokkijikoNo16
-     */
-    @JsonProperty("txtTokkijikoNo16")
-    public void setTxtTokkijikoNo16(TextBox txtTokkijikoNo16) {
-        this.txtTokkijikoNo16 = txtTokkijikoNo16;
-    }
-
-    /*
-     * getlbl16
-     * @return lbl16
-     */
-    @JsonProperty("lbl16")
-    public Label getLbl16() {
-        return lbl16;
-    }
-
-    /*
-     * setlbl16
-     * @param lbl16 lbl16
-     */
-    @JsonProperty("lbl16")
-    public void setLbl16(Label lbl16) {
-        this.lbl16 = lbl16;
-    }
-
-    /*
-     * gettxtRemban16
-     * @return txtRemban16
-     */
-    @JsonProperty("txtRemban16")
-    public TextBoxNum getTxtRemban16() {
-        return txtRemban16;
-    }
-
-    /*
-     * settxtRemban16
-     * @param txtRemban16 txtRemban16
-     */
-    @JsonProperty("txtRemban16")
-    public void setTxtRemban16(TextBoxNum txtRemban16) {
-        this.txtRemban16 = txtRemban16;
-    }
-
-    /*
-     * getgenpoPanel6
-     * @return genpoPanel6
-     */
-    @JsonProperty("genpoPanel6")
-    public genpoPanel6Div getGenpoPanel6() {
-        return genpoPanel6;
-    }
-
-    /*
-     * setgenpoPanel6
-     * @param genpoPanel6 genpoPanel6
-     */
-    @JsonProperty("genpoPanel6")
-    public void setGenpoPanel6(genpoPanel6Div genpoPanel6) {
-        this.genpoPanel6 = genpoPanel6;
     }
 
     /*
@@ -652,6 +620,78 @@ public class imgPanel1Div extends Panel {
     }
 
     /*
+     * gettxtTokkijikoNo16
+     * @return txtTokkijikoNo16
+     */
+    @JsonProperty("txtTokkijikoNo16")
+    public TextBox getTxtTokkijikoNo16() {
+        return txtTokkijikoNo16;
+    }
+
+    /*
+     * settxtTokkijikoNo16
+     * @param txtTokkijikoNo16 txtTokkijikoNo16
+     */
+    @JsonProperty("txtTokkijikoNo16")
+    public void setTxtTokkijikoNo16(TextBox txtTokkijikoNo16) {
+        this.txtTokkijikoNo16 = txtTokkijikoNo16;
+    }
+
+    /*
+     * getlbl16
+     * @return lbl16
+     */
+    @JsonProperty("lbl16")
+    public Label getLbl16() {
+        return lbl16;
+    }
+
+    /*
+     * setlbl16
+     * @param lbl16 lbl16
+     */
+    @JsonProperty("lbl16")
+    public void setLbl16(Label lbl16) {
+        this.lbl16 = lbl16;
+    }
+
+    /*
+     * gettxtRemban16
+     * @return txtRemban16
+     */
+    @JsonProperty("txtRemban16")
+    public TextBoxNum getTxtRemban16() {
+        return txtRemban16;
+    }
+
+    /*
+     * settxtRemban16
+     * @param txtRemban16 txtRemban16
+     */
+    @JsonProperty("txtRemban16")
+    public void setTxtRemban16(TextBoxNum txtRemban16) {
+        this.txtRemban16 = txtRemban16;
+    }
+
+    /*
+     * getgenpoPanel6
+     * @return genpoPanel6
+     */
+    @JsonProperty("genpoPanel6")
+    public genpoPanel6Div getGenpoPanel6() {
+        return genpoPanel6;
+    }
+
+    /*
+     * setgenpoPanel6
+     * @param genpoPanel6 genpoPanel6
+     */
+    @JsonProperty("genpoPanel6")
+    public void setGenpoPanel6(genpoPanel6Div genpoPanel6) {
+        this.genpoPanel6 = genpoPanel6;
+    }
+
+    /*
      * getmaskPanel6
      * @return maskPanel6
      */
@@ -1033,16 +1073,6 @@ public class imgPanel1Div extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public StaticImage getImgGenpo6() {
-        return this.getGenpoPanel6().getImgGenpo6();
-    }
-
-    @JsonIgnore
-    public void  setImgGenpo6(StaticImage imgGenpo6) {
-        this.getGenpoPanel6().setImgGenpo6(imgGenpo6);
-    }
-
-    @JsonIgnore
     public StaticImage getImgGenpo1() {
         return this.getGenpoPanel1().getImgGenpo1();
     }
@@ -1140,6 +1170,16 @@ public class imgPanel1Div extends Panel {
     @JsonIgnore
     public void  setImgMasking5(StaticImage imgMasking5) {
         this.getMaskPanel5().setImgMasking5(imgMasking5);
+    }
+
+    @JsonIgnore
+    public StaticImage getImgGenpo6() {
+        return this.getGenpoPanel6().getImgGenpo6();
+    }
+
+    @JsonIgnore
+    public void  setImgGenpo6(StaticImage imgGenpo6) {
+        this.getGenpoPanel6().setImgGenpo6(imgGenpo6);
     }
 
     @JsonIgnore
