@@ -31,17 +31,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-3070-030 dangjingjing
  */
 public class SelectKyuhuZissekiKihonJoukenChushutuProcess extends BatchProcessBase<JukyushaKyufujissekiIchiranRelateEntity> {
-    
+
     private static final RString 受給者給付実績 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.jukyushakyufujissekiichiran.IJukyushaKyufujissekiIchiranMapper.get受給者給付実績");
     private JukyushaKyufujissekiIchiranProcessParameter processParamter;
     private static final RString 実績一覧表 = new RString("JukyusyaKyufuJiqsekiIchiranhyouTable");
-    private static final RString ゼロ = new RString("0");
     private static final RString いち = new RString("1");
-    
+
     @BatchWriter
     BatchEntityCreatedTempTableWriter 一時実績一覧表;
-    
+
     @Override
     protected IBatchReader createReader() {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
@@ -49,7 +48,7 @@ public class SelectKyuhuZissekiKihonJoukenChushutuProcess extends BatchProcessBa
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         processParamter.setPsmShikibetsuTaisho(new RString(uaFt200Psm.getParameterMap().
                 get("psmShikibetsuTaisho").toString()));
-        
+
         List 給付実績区分List = new ArrayList<>();
         if (processParamter.get要介護1().equals(いち)) {
             給付実績区分List.add(new RString("21"));
@@ -84,13 +83,13 @@ public class SelectKyuhuZissekiKihonJoukenChushutuProcess extends BatchProcessBa
         processParamter.set給付実績区分List(給付実績区分List);
         return new BatchDbReader(受給者給付実績, processParamter.toJukyushaKyufujissekiIchiranMybatisParameter(RString.EMPTY));
     }
-    
+
     @Override
     protected void createWriter() {
         一時実績一覧表 = new BatchEntityCreatedTempTableWriter(実績一覧表,
                 JukyushaKyufujissekiIchiranTableEntity.class);
     }
-    
+
     @Override
     protected void process(JukyushaKyufujissekiIchiranRelateEntity entity) {
         if (entity.getYoKaigoJotaiKubunCode() != null && !entity.getYoKaigoJotaiKubunCode().isEmpty()) {
