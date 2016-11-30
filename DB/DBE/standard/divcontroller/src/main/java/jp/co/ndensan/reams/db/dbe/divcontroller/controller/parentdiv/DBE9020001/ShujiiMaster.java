@@ -288,7 +288,7 @@ public class ShujiiMaster {
     public IDownLoadServletResponse onClick_btnOutputCsv(ShujiiMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<ShujiiMasterCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
             for (dgShujiiIchiran_Row row : dataList) {
@@ -377,6 +377,7 @@ public class ShujiiMaster {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(イベント状態, shujiiJohoCount);
 
         if (validPairs.iterator().hasNext()) {
+            div.getShujiiIchiran().setDisabled(false);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         Models<ShujiiJohoIdentifier, ShujiiJoho> models = ViewStateHolder.get(ViewStateKeys.主治医マスタ検索結果, Models.class);
