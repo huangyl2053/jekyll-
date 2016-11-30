@@ -84,7 +84,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
             }
             source.listCenter_4 = doカンマ編集(賦課の情報一時Entity.getTkKibetsuGaku03());
             source.listLower_1 = getColumnValue(賦課の情報一時Entity.getHihokenshaNo());
-            source.listLower_2 = getColumnValue(賦課の情報一時Entity.getSetaiCode());
+            source.listLower_2 = getColumnValue(宛名.get世帯コード());
         }
         if (宛名 != null) {
             source.listUpper_3 = getColumnValue(宛名.get行政区画().getGyoseiku().getコード());

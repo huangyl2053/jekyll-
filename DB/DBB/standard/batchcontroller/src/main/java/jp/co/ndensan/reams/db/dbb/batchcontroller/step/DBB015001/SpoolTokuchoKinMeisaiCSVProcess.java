@@ -285,7 +285,7 @@ public class SpoolTokuchoKinMeisaiCSVProcess extends BatchProcessBase<FukaJohoPs
         csvEntity.set通知書番号(getColumnValue(賦課の情報一時Entity.getTsuchishoNo()));
         csvEntity.set被保険者番号(getColumnValue(賦課の情報一時Entity.getHihokenshaNo()));
         csvEntity.set識別コード(getColumnValue(賦課の情報一時Entity.getShikibetsuCode()));
-        csvEntity.set世帯コード(getColumnValue(賦課の情報一時Entity.getSetaiCode()));
+        csvEntity.set世帯コード(getColumnValue(宛名PSM.getSetaiCode()));
         if (宛名PSM != null) {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(宛名PSM);
             RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名, 地方公共団体);
