@@ -61,7 +61,6 @@ public class GemmenJuminKihon {
     private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
     private static final RString 入力状況_決定済訂正 = new RString("決定済_訂正");
     private static final RString 入力状況_決定済取消 = new RString("決定済_取消");
-    private boolean clickFlg;
 
     /**
      * 画面の初期化メソッドです。
@@ -71,6 +70,7 @@ public class GemmenJuminKihon {
      */
     public ResponseData<GemmenJuminKihonDiv> onLoad(GemmenJuminKihonDiv div) {
         GemmenJuminKihonHandler handler = getHandler(div);
+        ViewStateHolder.put(ViewStateKeys.押下フラグ, false);
         FukaTaishoshaKey 賦課対象者 = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         ShikibetsuCode 識別コード = 賦課対象者.get識別コード();
         HihokenshaNo 被保険者番号 = 賦課対象者.get被保険者番号();
@@ -183,7 +183,7 @@ public class GemmenJuminKihon {
      * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnCalculate(GemmenJuminKihonDiv div) {
-        clickFlg = true;
+        ViewStateHolder.put(ViewStateKeys.押下フラグ, true);
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
         GemmenJuminKihonValidationHandler validationHandler = new GemmenJuminKihonValidationHandler(div);
         ValidationMessageControlPairs pairs = validationHandler.減免額の整合性チェック２(年度分賦課減免リスト.get最新減免の情報());
@@ -205,6 +205,7 @@ public class GemmenJuminKihon {
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnUpt(GemmenJuminKihonDiv div) {
 
+        boolean clickFlg = ViewStateHolder.get(ViewStateKeys.押下フラグ, Boolean.class);
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
         GemmenJuminKihonHandler handler = getHandler(div);
         GemmenJoho 最新減免の情報 = 年度分賦課減免リスト.get最新減免の情報();
@@ -267,7 +268,7 @@ public class GemmenJuminKihon {
             } else {
                 ViewStateHolder.put(ViewStateKeys.実行フラグ, 処理_取消);
             }
-            clickFlg = false;
+            ViewStateHolder.put(ViewStateKeys.押下フラグ, false);
             return ResponseData.of(div).setState(DBB3110001StateName.更新結果確認);
         }
         return createResponse(div);
