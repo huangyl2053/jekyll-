@@ -64,7 +64,7 @@
         "db2002Fuka"."tkSaishutsuKampuGaku" ,
         "db2002Fuka"."fuSaishutsuKampuGaku"
     </sql>
-    
+
     <resultMap id="ResultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
         <result property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -124,7 +124,7 @@
         <result property="tkSaishutsuKampuGaku" column="tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuSaishutsuKampuGaku" column="fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <resultMap id="resultMap_getKeisangoJohoSakusei" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity" autoMapping="true">
         <id column="keisanTyukanTemp_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="keisanTyukanTemp_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -139,243 +139,243 @@
         <association property="介護徴収方法Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
         <association property="収入情報取得PSMEntity" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
     </resultMap>
-    
+
     <select resultOrdered="true" id="get全賦課最新情報2" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="allColumns_FukaJoho"/>
+        <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbV2002Fuka" AS "db2002Fuka"
+        rgdb."DbV2002Fuka" AS "db2002Fuka"
         WHERE
-            "db2002Fuka"."choteiNendo"= #{choteiNendo} 
+        "db2002Fuka"."choteiNendo"= #{choteiNendo}
         AND "db2002Fuka"."fukaNendo" = #{fukaNendo}
         ORDER BY
-            "db2002Fuka"."choteiNendo",
-            "db2002Fuka"."fukaNendo",
-            "db2002Fuka"."tsuchishoNo"
+        "db2002Fuka"."choteiNendo",
+        "db2002Fuka"."fukaNendo",
+        "db2002Fuka"."tsuchishoNo"
     </select>
 
     <select resultOrdered="true" id="get期別金額" resultMap="resultMap_getKeisangoJohoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
-            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
-            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
         FROM
-            "KeisanTyukanTemp" AS "KeisanTyukanTemp"
-        INNER JOIN 
-            rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu" 
-        ON 
-            "DbT2003Kibetsu"."choteiNendo" = "KeisanTyukanTemp"."choteiNendo"
+        "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+        LEFT JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        ON
+        "DbT2003Kibetsu"."choteiNendo" = "KeisanTyukanTemp"."choteiNendo"
         AND "DbT2003Kibetsu"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
         AND "DbT2003Kibetsu"."tsuchishoNo" = "KeisanTyukanTemp"."tsuchishoNo"
         AND "DbT2003Kibetsu"."rirekiNo" = "KeisanTyukanTemp"."fukaRirekiNo"
-        INNER JOIN 
-            rgdb."DbT2001ChoshuHoho" AS "DbT2001ChoshuHoho" 
-        ON 
-            "DbT2001ChoshuHoho"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
+        INNER JOIN
+        rgdb."DbT2001ChoshuHoho" AS "DbT2001ChoshuHoho"
+        ON
+        "DbT2001ChoshuHoho"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "KeisanTyukanTemp"."hihokenshaNo"
         AND "DbT2001ChoshuHoho"."rirekiNo" = "KeisanTyukanTemp"."choshuHohoRirekiNo"
-        INNER JOIN 
-            rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu" 
+        INNER JOIN
+        rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON 
-            "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
+        "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         WHERE
-            "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
+        "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
         ORDER BY
-            "KeisanTyukanTemp"."choteiNendo",
-            "KeisanTyukanTemp"."fukaNendo",
-            "KeisanTyukanTemp"."tsuchishoNo",
-            "KeisanTyukanTemp"."fukaRirekiNo",
-            "DbT2003Kibetsu"."choshuHouhou",
-            "DbT2003Kibetsu"."ki"
-            
+        "KeisanTyukanTemp"."choteiNendo",
+        "KeisanTyukanTemp"."fukaNendo",
+        "KeisanTyukanTemp"."tsuchishoNo",
+        "KeisanTyukanTemp"."fukaRirekiNo",
+        "DbT2003Kibetsu"."choshuHouhou",
+        "DbT2003Kibetsu"."ki"
+
     </select>
-    
+
     <select resultOrdered="true" id="get収入情報" resultMap="resultMap_getKeisangoJohoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
-            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-            <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.psm.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>
         FROM
-            "KeisanTyukanTemp" AS "KeisanTyukanTemp"
-        INNER JOIN 
-            rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu" 
-        ON 
-            "DbT2003Kibetsu"."choteiNendo" = "KeisanTyukanTemp"."choteiNendo"
+        "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        ON
+        "DbT2003Kibetsu"."choteiNendo" = "KeisanTyukanTemp"."choteiNendo"
         AND "DbT2003Kibetsu"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
         AND "DbT2003Kibetsu"."tsuchishoNo" = "KeisanTyukanTemp"."tsuchishoNo"
         AND "DbT2003Kibetsu"."rirekiNo" = "KeisanTyukanTemp"."fukaRirekiNo"
-        INNER JOIN 
-            rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu" 
-        ON 
-            "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
-        LEFT JOIN
-            rgca.${psmTotalShunyu} AS "TotalShunyu"
+        INNER JOIN
+        rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON
-            "UrT0705ChoteiKyotsu"."shunoId" = "TotalShunyu"."UrT0700shunoId"
+        "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
+        LEFT JOIN
+        rgca.${psmTotalShunyu} AS "TotalShunyu"
+        ON
+        "UrT0705ChoteiKyotsu"."shunoId" = "TotalShunyu"."UrT0700shunoId"
         WHERE
-            "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
+        "KeisanTyukanTemp"."fukaNendo" = #{fukaNendo}
         ORDER BY
-            "KeisanTyukanTemp"."choteiNendo",
-            "KeisanTyukanTemp"."fukaNendo",
-            "KeisanTyukanTemp"."tsuchishoNo",
-            "KeisanTyukanTemp"."fukaRirekiNo",
-            "DbT2003Kibetsu"."choshuHouhou",
-            "DbT2003Kibetsu"."ki"
-            
+        "KeisanTyukanTemp"."choteiNendo",
+        "KeisanTyukanTemp"."fukaNendo",
+        "KeisanTyukanTemp"."tsuchishoNo",
+        "KeisanTyukanTemp"."fukaRirekiNo",
+        "DbT2003Kibetsu"."choshuHouhou",
+        "DbT2003Kibetsu"."ki"
+
     </select>
-    
+
     <select resultOrdered="true" id="get更新前賦課情報" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="allColumns_FukaJoho"/>
+        <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbT2002Fuka" AS "db2002Fuka"
-        INNER JOIN 
-            "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+        rgdb."DbT2002Fuka" AS "db2002Fuka"
+        INNER JOIN
+        "KeisanTyukanTemp" AS "KeisanTyukanTemp"
         ON
-            "db2002Fuka"."choteiNendo" = "KeisanTyukanTemp"."choteiNendo"
+        "db2002Fuka"."choteiNendo" = "KeisanTyukanTemp"."choteiNendo"
         AND "db2002Fuka"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
         AND "db2002Fuka"."tsuchishoNo" = "KeisanTyukanTemp"."tsuchishoNo"
         AND "db2002Fuka"."rirekiNo" = "KeisanTyukanTemp"."fukaRirekiNo" <![CDATA[-]]> 1
         WHERE
-            "db2002Fuka"."choteiNendo"= #{choteiNendo} 
+        "db2002Fuka"."choteiNendo"= #{choteiNendo}
         AND "db2002Fuka"."fukaNendo" = #{fukaNendo}
     </select>
-    
+
     <select resultOrdered="true" id="get計算中間Temp更新後情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"
             fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
         FROM
-            "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+        "KeisanTyukanTemp" AS "KeisanTyukanTemp"
         WHERE
-            "KeisanTyukanTemp"."koseiZengoKubun" = '2'
+        "KeisanTyukanTemp"."koseiZengoKubun" = '2'
         ORDER BY
-            "KeisanTyukanTemp"."choteiNendo",
-            "KeisanTyukanTemp"."fukaNendo",
-            "KeisanTyukanTemp"."tsuchishoNo",
-            "KeisanTyukanTemp"."fukaRirekiNo"
+        "KeisanTyukanTemp"."choteiNendo",
+        "KeisanTyukanTemp"."fukaNendo",
+        "KeisanTyukanTemp"."tsuchishoNo",
+        "KeisanTyukanTemp"."fukaRirekiNo"
     </select>
-    
+
     <select resultOrdered="true" id="get計算中間Temp更新前情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.ResultMap_KeisanTyukanTempEntity"
             fetchSize="500">
         SELECT
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisanTyukanTempMapper.allColumns_KeisanTyukanTemp"/>
         FROM
-            "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+        "KeisanTyukanTemp" AS "KeisanTyukanTemp"
         ORDER BY
-            "KeisanTyukanTemp"."choteiNendo",
-            "KeisanTyukanTemp"."fukaNendo",
-            "KeisanTyukanTemp"."tsuchishoNo",
-            "KeisanTyukanTemp"."fukaRirekiNo"
+        "KeisanTyukanTemp"."choteiNendo",
+        "KeisanTyukanTemp"."fukaNendo",
+        "KeisanTyukanTemp"."tsuchishoNo",
+        "KeisanTyukanTemp"."fukaRirekiNo"
     </select>
-    
+
     <select resultOrdered="true" id="get全賦課最新情報3" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="allColumns_FukaJoho"/>
+        <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbV2002Fuka" AS "db2002Fuka"
-        WHERE 
-            "fukaNendo"=#{fukaNendo}
+        rgdb."DbV2002Fuka" AS "db2002Fuka"
+        WHERE
+        "fukaNendo"=#{fukaNendo}
         AND "db2002Fuka"."choteiNendo"||"db2002Fuka"."tsuchishoNo" IN
-          (SELECT MAX("choteiNendo")||"tsuchishoNo"
-           FROM rgdb."DbV2002Fuka"  
-           WHERE 
-               "choteiNichiji"=#{choteiNichiji}
-           AND "fukaNendo"=#{fukaNendo}
-           GROUP BY 
-                "tsuchishoNo")
+        (SELECT MAX("choteiNendo")||"tsuchishoNo"
+        FROM rgdb."DbV2002Fuka"
+        WHERE
+        "choteiNichiji"=#{choteiNichiji}
+        AND "fukaNendo"=#{fukaNendo}
+        GROUP BY
+        "tsuchishoNo")
     </select>
-    
+
     <select resultOrdered="true" id="get全賦課最新情報4" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="allColumns_FukaJoho"/>
+        <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbV2002Fuka" AS "db2002Fuka"
+        rgdb."DbV2002Fuka" AS "db2002Fuka"
         WHERE
-            "db2002Fuka"."choteiNendo"= #{choteiNendo} 
+        "db2002Fuka"."choteiNendo"= #{choteiNendo}
         AND "db2002Fuka"."fukaNendo" = #{fukaNendo}
         AND NOT EXISTS(
-            SELECT
-                "rirekiNo"
-            FROM
-                rgdb."DbT2018RealHakkoRireki"
-            WHERE
-                "choteiNendo"= "db2002Fuka"."choteiNendo"
-            AND "fukaNendo" = "db2002Fuka"."fukaNendo"
-            AND "tsuchishoPrintTimeStamp" <![CDATA[>=]]> "db2002Fuka"."choteiNichiji"
-            AND "tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
-            AND "chohyoBunruiID" = #{chohyoBunruiID})
+        SELECT
+        "rirekiNo"
+        FROM
+        rgdb."DbT2018RealHakkoRireki"
+        WHERE
+        "choteiNendo"= "db2002Fuka"."choteiNendo"
+        AND "fukaNendo" = "db2002Fuka"."fukaNendo"
+        AND "tsuchishoPrintTimeStamp" <![CDATA[>=]]> "db2002Fuka"."choteiNichiji"
+        AND "tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
+        AND "chohyoBunruiID" = #{chohyoBunruiID})
         ORDER BY
-            "db2002Fuka"."choteiNendo",
-            "db2002Fuka"."fukaNendo",
-            "db2002Fuka"."tsuchishoNo"
+        "db2002Fuka"."choteiNendo",
+        "db2002Fuka"."fukaNendo",
+        "db2002Fuka"."tsuchishoNo"
     </select>
-    
+
     <select resultOrdered="true" id="get全賦課最新情報5" resultMap="ResultMap_FukaEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
         SELECT
-            <include refid="allColumns_FukaJoho"/>
+        <include refid="allColumns_FukaJoho"/>
         FROM
-            rgdb."DbV2002Fuka" AS "db2002Fuka"
+        rgdb."DbV2002Fuka" AS "db2002Fuka"
         WHERE
-            "db2002Fuka"."fukaNendo" = #{fukaNendo}
-            AND "db2002Fuka"."choteiNendo" || "db2002Fuka"."tsuchishoNo" IN ( 
-              SELECT
-                MAX("choteiNendo") || "tsuchishoNo" 
-              FROM
-                rgdb."DbT2002Fuka" 
-              WHERE
-                "choteiNichiji" = #{choteiNichiji}
-                AND "fukaNendo" = #{fukaNendo}
-              GROUP BY
-                "tsuchishoNo"
-            ) 
-            AND NOT ( 
-              EXISTS ( 
-                SELECT
-                  'X' 
-                FROM
-                  rgdb."DbT2018RealHakkoRireki" AS C 
-                WHERE
-                  C."tsuchishoPrintTimeStamp" <![CDATA[>=]]> #{choteiNichiji} 
-                  AND C."tsuchishoNo" = "db2002Fuka"."tsuchishoNo" 
-                  AND C."choteiNendo" = "db2002Fuka"."choteiNendo" 
-                  AND C."fukaNendo" = "db2002Fuka"."fukaNendo" 
-                  AND C."chohyoBunruiID" = 'DBB100045_HokenryoNonyuTsuchishoDaihyo'
-              )
-            ) 
+        "db2002Fuka"."fukaNendo" = #{fukaNendo}
+        AND "db2002Fuka"."choteiNendo" || "db2002Fuka"."tsuchishoNo" IN (
+        SELECT
+        MAX("choteiNendo") || "tsuchishoNo"
+        FROM
+        rgdb."DbT2002Fuka"
+        WHERE
+        "choteiNichiji" = #{choteiNichiji}
+        AND "fukaNendo" = #{fukaNendo}
+        GROUP BY
+        "tsuchishoNo"
+        )
+        AND NOT (
+        EXISTS (
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT2018RealHakkoRireki" AS C
+        WHERE
+        C."tsuchishoPrintTimeStamp" <![CDATA[>=]]> #{choteiNichiji}
+        AND C."tsuchishoNo" = "db2002Fuka"."tsuchishoNo"
+        AND C."choteiNendo" = "db2002Fuka"."choteiNendo"
+        AND C."fukaNendo" = "db2002Fuka"."fukaNendo"
+        AND C."chohyoBunruiID" = 'DBB100045_HokenryoNonyuTsuchishoDaihyo'
+        )
+        )
     </select>
-    
-   <select resultOrdered="true" id="get計算中間Temp更新前情報処理３" resultMap="ResultMap_FukaEntity" 
+
+    <select resultOrdered="true" id="get計算中間Temp更新前情報処理３" resultMap="ResultMap_FukaEntity"
            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.keisangojoho.KeisangoJohoSakuseiMybitisParamter" fetchSize="500">
-       SELECT 
-            <include refid="allColumns_FukaJoho"/>
-       FROM(
-            SELECT
-                <include refid="allColumns_FukaJoho"/>,
-                row_number() OVER (
-                       PARTITION BY "db2002Fuka"."tsuchishoNo"
-                       ORDER BY "db2002Fuka"."choteiNendo" DESC, "db2002Fuka"."rirekiNo" DESC
-                    ) AS rrkno
-            FROM
-                rgdb."DbT2002Fuka" AS "db2002Fuka"
-            INNER JOIN 
-                "KeisanTyukanTemp" AS "KeisanTyukanTemp"
-            ON
-                "db2002Fuka"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
-            AND "db2002Fuka"."tsuchishoNo" = "KeisanTyukanTemp"."tsuchishoNo"
-            WHERE    
-                "db2002Fuka"."fukaNendo" = #{fukaNendo}
-            ) AS "db2002Fuka"
-        WHERE 
-            "db2002Fuka".rrkno = 2
-    </select> 
-    
+        SELECT
+        <include refid="allColumns_FukaJoho"/>
+        FROM(
+        SELECT
+        <include refid="allColumns_FukaJoho"/>,
+        row_number() OVER (
+        PARTITION BY "db2002Fuka"."tsuchishoNo"
+        ORDER BY "db2002Fuka"."choteiNendo" DESC, "db2002Fuka"."rirekiNo" DESC
+        ) AS rrkno
+        FROM
+        rgdb."DbT2002Fuka" AS "db2002Fuka"
+        INNER JOIN
+        "KeisanTyukanTemp" AS "KeisanTyukanTemp"
+        ON
+        "db2002Fuka"."fukaNendo" = "KeisanTyukanTemp"."fukaNendo"
+        AND "db2002Fuka"."tsuchishoNo" = "KeisanTyukanTemp"."tsuchishoNo"
+        WHERE
+        "db2002Fuka"."fukaNendo" = #{fukaNendo}
+        ) AS "db2002Fuka"
+        WHERE
+        "db2002Fuka".rrkno = 2
+    </select>
+
 </mapper>
