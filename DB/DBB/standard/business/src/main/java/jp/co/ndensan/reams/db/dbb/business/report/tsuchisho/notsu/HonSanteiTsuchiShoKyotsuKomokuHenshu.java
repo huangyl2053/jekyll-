@@ -764,8 +764,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         } else {
             期間_自 = new FlexibleDate(更正前_賦課情報.get賦課年度().getYearValue(), 四月, 1);
         }
-        更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD).
+        更正前.set期間_自(期間_自.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString());
         更正前.set期間_自_西暦(期間_自.seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
@@ -779,8 +778,7 @@ public class HonSanteiTsuchiShoKyotsuKomokuHenshu {
         } else {
             期間_至 = new FlexibleDate(更正前_賦課情報.get賦課年度().plusYear(1).getYearValue(), 三月, 三十一日);
         }
-        更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD).
+        更正前.set期間_至(期間_至.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 fillType(FillType.BLANK).toDateString());
         更正前.set期間_至_西暦(期間_至.seireki().separator(Separator.SLASH).
                 fillType(FillType.BLANK).toDateString());
