@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiM
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.KyufuJissekiSyokaiMeisaiSyukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010012.KyufuJissekiSyokaiMeisaiSyukeiHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekisyokaimeisaisyukei.KyufuJissekiSyokaiMeisaiSyukeiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,8 +46,7 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
         List<KyufujissekiMeisaiBusiness> 明細データ = 給付実績情報照会情報.getCsData_B();
         List<KyufujissekiMeisaiJushochiTokureiBusiness> 住所地特例データ = 給付実績情報照会情報.getCsData_N();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        handler.onLoad(集計データ, 明細データ, 住所地特例データ, para.getサービス提供年月(), 様式番号,
-                KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
+        handler.onLoad(集計データ, 明細データ, 住所地特例データ, para.getサービス提供年月(), 様式番号);
         ShikibetsuNoKanri 識別番号管理データ = ViewStateHolder.get(ViewStateKeys.識別番号管理, ShikibetsuNoKanri.class);
         handler.setButton(識別番号管理データ);
         return ResponseData.of(div).respond();
