@@ -101,10 +101,11 @@ public class JikoFutangakushomeishoHandler {
         div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().setValue(システム日付);
         if (メニューID_DBCMN63001.equals(メニューID)) {
             div.getJikoFutanShomeishoSakusei().setTitle(自己負担額証明書作成);
+            div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(帳票DBC100050);
         } else if (メニューID_DBCMNN2001.equals(メニューID)) {
             div.getJikoFutanShomeishoSakusei().setTitle(事業分_自己負担額証明書作成);
+            div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(帳票DBC100076);
         }
-        div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(new ReportId(new RString("DBC100050_JikoFutangakushomeisho")));
     }
 
     /**
@@ -243,15 +244,13 @@ public class JikoFutangakushomeishoHandler {
     /**
      * get高額合算データ
      *
-     * @param is帳票設計DBC100050 boolean
-     * @param is帳票設計DBC100051 boolean
      * @param 識別コード ShikibetsuCode
      * @param 年度毎キー Map
      * @param 被保険者番号 HihokenshaNo
      * @param メニューID メニューID
      * @return JikoFutangakushomeishoData
      */
-    public JikoFutangakushomeishoData get高額合算データ(boolean is帳票設計DBC100050, boolean is帳票設計DBC100051, ShikibetsuCode 識別コード, Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー,
+    public JikoFutangakushomeishoData get高額合算データ(ShikibetsuCode 識別コード, Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー,
             HihokenshaNo 被保険者番号, RString メニューID) {
         JikoFutangakushomeishoParameter parameter = new JikoFutangakushomeishoParameter();
         parameter.set被保険者番号(被保険者番号.value());
@@ -262,7 +261,6 @@ public class JikoFutangakushomeishoHandler {
             if (支給申請書整理番号.equals(kogakuGassanNendoKey.get支給申請書整理番号())) {
                 parameter.set保険者番号(kogakuGassanNendoKey.get保険者番号().value());
                 parameter.set履歴番号(kogakuGassanNendoKey.get履歴番号());
-
             }
         }
         parameter.set対象年度(対象年度);
@@ -273,7 +271,7 @@ public class JikoFutangakushomeishoHandler {
         KogakuGassanData kogakuGassanData = 高額合算申請書.get高額合算情報(parameter);
         高額合算データ.set高額合算データ(kogakuGassanData);
         高額合算データ.set文書番号(高額合算申請書.get文書番号(メニューID));
-        高額合算データ.set宛先情報(高額合算申請書.get宛先帳票部品());
+        高額合算データ.set宛先情報(高額合算申請書.get宛先帳票部品(識別コード));
         ReportId 帳票ID = ReportId.EMPTY;
         if (メニューID_DBCMN63001.equals(メニューID)) {
             帳票ID = 帳票DBC100050;
