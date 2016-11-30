@@ -113,6 +113,7 @@ public class ShujiiIkenshoSeikyuIchiranEditor implements IShujiiIkenshoSeikyuIch
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
-        return date.wareki().eraType(EraType.KANJI_RYAKU).toDateString();
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 }

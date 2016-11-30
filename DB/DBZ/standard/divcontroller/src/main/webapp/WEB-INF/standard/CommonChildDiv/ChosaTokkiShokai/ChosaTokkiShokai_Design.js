@@ -255,28 +255,16 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("imgPanel1"));
             };
 
+            Controls.prototype.lblImgGenpon = function () {
+                return new UZA.Label(this.convFiledName("lblImgGenpon"));
+            };
+
+            Controls.prototype.lblImgMask = function () {
+                return new UZA.Label(this.convFiledName("lblImgMask"));
+            };
+
             Controls.prototype.txtTokkijikoNo11 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo11"));
-            };
-
-            Controls.prototype.txtTokkijikoNo16 = function () {
-                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
-            };
-
-            Controls.prototype.lbl16 = function () {
-                return new UZA.Label(this.convFiledName("lbl16"));
-            };
-
-            Controls.prototype.txtRemban16 = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtRemban16"));
-            };
-
-            Controls.prototype.genpoPanel6 = function () {
-                return new UZA.Panel(this.convFiledName("genpoPanel6"));
-            };
-
-            Controls.prototype.imgGenpo6 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
             };
 
             Controls.prototype.lbl11 = function () {
@@ -415,6 +403,26 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking5"));
             };
 
+            Controls.prototype.txtTokkijikoNo16 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
+            };
+
+            Controls.prototype.lbl16 = function () {
+                return new UZA.Label(this.convFiledName("lbl16"));
+            };
+
+            Controls.prototype.txtRemban16 = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban16"));
+            };
+
+            Controls.prototype.genpoPanel6 = function () {
+                return new UZA.Panel(this.convFiledName("genpoPanel6"));
+            };
+
+            Controls.prototype.imgGenpo6 = function () {
+                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
+            };
+
             Controls.prototype.maskPanel6 = function () {
                 return new UZA.Panel(this.convFiledName("maskPanel6"));
             };
@@ -537,6 +545,10 @@ var DBZ;
 
             Controls.prototype.imgPanel2 = function () {
                 return new UZA.Panel(this.convFiledName("imgPanel2"));
+            };
+
+            Controls.prototype.lblImg = function () {
+                return new UZA.Label(this.convFiledName("lblImg"));
             };
 
             Controls.prototype.txtTokkijikoNo21 = function () {

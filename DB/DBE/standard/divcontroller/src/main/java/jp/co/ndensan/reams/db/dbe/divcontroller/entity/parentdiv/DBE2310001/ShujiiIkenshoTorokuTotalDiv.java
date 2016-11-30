@@ -7,10 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -22,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuTotalDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -160,33 +158,13 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ButtonDialog getBtnTokkiJikoGuide() {
-        return this.getShujiiIkenshoToroku().getBtnTokkiJikoGuide();
+    public ButtonDialog getBtnShobyoGuide() {
+        return this.getShujiiIkenshoToroku().getBtnShobyoGuide();
     }
 
     @JsonIgnore
-    public void  setBtnTokkiJikoGuide(ButtonDialog btnTokkiJikoGuide) {
-        this.getShujiiIkenshoToroku().setBtnTokkiJikoGuide(btnTokkiJikoGuide);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnSeikatsuKinoServiceGuide() {
-        return this.getShujiiIkenshoToroku().getBtnSeikatsuKinoServiceGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnSeikatsuKinoServiceGuide(ButtonDialog btnSeikatsuKinoServiceGuide) {
-        this.getShujiiIkenshoToroku().setBtnSeikatsuKinoServiceGuide(btnSeikatsuKinoServiceGuide);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnShinshinJotaiGuide() {
-        return this.getShujiiIkenshoToroku().getBtnShinshinJotaiGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnShinshinJotaiGuide(ButtonDialog btnShinshinJotaiGuide) {
-        this.getShujiiIkenshoToroku().setBtnShinshinJotaiGuide(btnShinshinJotaiGuide);
+    public void  setBtnShobyoGuide(ButtonDialog btnShobyoGuide) {
+        this.getShujiiIkenshoToroku().setBtnShobyoGuide(btnShobyoGuide);
     }
 
     @JsonIgnore
@@ -200,13 +178,33 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnShobyoGuide() {
-        return this.getShujiiIkenshoToroku().getBtnShobyoGuide();
+    public ButtonDialog getBtnShinshinJotaiGuide() {
+        return this.getShujiiIkenshoToroku().getBtnShinshinJotaiGuide();
     }
 
     @JsonIgnore
-    public void  setBtnShobyoGuide(ButtonDialog btnShobyoGuide) {
-        this.getShujiiIkenshoToroku().setBtnShobyoGuide(btnShobyoGuide);
+    public void  setBtnShinshinJotaiGuide(ButtonDialog btnShinshinJotaiGuide) {
+        this.getShujiiIkenshoToroku().setBtnShinshinJotaiGuide(btnShinshinJotaiGuide);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnSeikatsuKinoServiceGuide() {
+        return this.getShujiiIkenshoToroku().getBtnSeikatsuKinoServiceGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnSeikatsuKinoServiceGuide(ButtonDialog btnSeikatsuKinoServiceGuide) {
+        this.getShujiiIkenshoToroku().setBtnSeikatsuKinoServiceGuide(btnSeikatsuKinoServiceGuide);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTokkiJikoGuide() {
+        return this.getShujiiIkenshoToroku().getBtnTokkiJikoGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnTokkiJikoGuide(ButtonDialog btnTokkiJikoGuide) {
+        this.getShujiiIkenshoToroku().setBtnTokkiJikoGuide(btnTokkiJikoGuide);
     }
 
     @JsonIgnore
@@ -405,7 +403,7 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+    public IKanryoMessageDiv getCcdKaigoKanryoMessage() {
         return this.getKaigoKanryoMsg().getCcdKaigoKanryoMessage();
     }
 

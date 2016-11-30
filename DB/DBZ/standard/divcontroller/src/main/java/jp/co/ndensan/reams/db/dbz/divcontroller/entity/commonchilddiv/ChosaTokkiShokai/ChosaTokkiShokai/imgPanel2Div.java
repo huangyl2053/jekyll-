@@ -15,13 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class imgPanel2Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lblImg")
+    private Label lblImg;
     @JsonProperty("txtTokkijikoNo21")
     private TextBox txtTokkijikoNo21;
     @JsonProperty("lbl21")
@@ -129,6 +131,24 @@ public class imgPanel2Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlblImg
+     * @return lblImg
+     */
+    @JsonProperty("lblImg")
+    public Label getLblImg() {
+        return lblImg;
+    }
+
+    /*
+     * setlblImg
+     * @param lblImg lblImg
+     */
+    @JsonProperty("lblImg")
+    public void setLblImg(Label lblImg) {
+        this.lblImg = lblImg;
+    }
+
     /*
      * gettxtTokkijikoNo21
      * @return txtTokkijikoNo21

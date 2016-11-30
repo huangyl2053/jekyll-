@@ -346,6 +346,8 @@ public class ShujiiIkenshoTorokuTotal {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
+        div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                replace("主治医意見書登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
     }
 
