@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran;
 
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.UniversalPhase;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -26,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements IHonsanteiKanendoIdoNonyutsuchishoHakkoIchiranEditor {
 
+    private final HonSanteiTsuchiShoKyotsu 本算定通知書情報;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 出力期;
     private final int 連番;
@@ -47,6 +51,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
      * @param inputEntity HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity
      */
     public HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor(HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity inputEntity) {
+        this.本算定通知書情報 = inputEntity.get本算定通知書情報();
         this.編集後本算定通知書共通情報 = inputEntity.get編集後本算定通知書共通情報();
         this.出力期 = inputEntity.get出力期();
         this.連番 = inputEntity.get連番();
@@ -54,6 +59,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
 
     @Override
     public NonyuTsuchIchiranSource edit(NonyuTsuchIchiranSource source) {
+        HonSanteiTsuchiShoKyotsu item = 本算定通知書情報;
         EditedHonSanteiTsuchiShoKyotsu 共通情報 = 編集後本算定通知書共通情報;
         source.listUpper_1 = new RString(Integer.valueOf(連番).toString());
         if (共通情報.get通知書番号() != null) {
@@ -98,7 +104,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
                     new Code(共通情報.get更正後().get生活保護扶助種類().toString())).getコード名称();
         }
         source.listUpper_14 = 生活保護扶助名称;
-        setListLowers(source, 共通情報);
+        setListLowers(source, 共通情報 ,item);
         return source;
     }
 
@@ -120,15 +126,20 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements 
         }
     }
 
-    private void setListLowers(NonyuTsuchIchiranSource source, EditedHonSanteiTsuchiShoKyotsu 共通情報) {
+    private void setListLowers(NonyuTsuchIchiranSource source, EditedHonSanteiTsuchiShoKyotsu 共通情報,
+            HonSanteiTsuchiShoKyotsu item) {
         if (共通情報.get編集後宛先() != null) {
             source.listLower_1 = new RString(共通情報.get編集後宛先().get本人名称().getName().toString());
         }
         if (共通情報.get編集後宛先() != null) {
             source.listLower_2 = 共通情報.get編集後宛先().get郵便番号();
         }
-        if (共通情報.get編集後宛先() != null) {
-            source.listLower_3 = 共通情報.get編集後宛先().get町域();
+        if (本算定通知書情報.get賦課の情報_更正後() != null 
+                && 本算定通知書情報.get賦課の情報_更正後().get宛名() != null) {
+            IKojin kojin = 本算定通知書情報.get賦課の情報_更正後().get宛名();
+            if (null != kojin) {
+                source.listLower_3 = JushoHenshu.editJusho(本算定通知書情報.get帳票制御共通(), kojin, item.get地方公共団体());
+            }
         }
         if (共通情報.get更正後() != null
                 && 共通情報.get更正後().get保険料段階() != null) {

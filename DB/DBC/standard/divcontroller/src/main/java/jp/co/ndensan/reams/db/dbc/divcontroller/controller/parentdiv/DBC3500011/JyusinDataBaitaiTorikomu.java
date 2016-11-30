@@ -37,6 +37,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -239,16 +242,23 @@ public class JyusinDataBaitaiTorikomu {
         switch (審査年月チェック.toString()) {
             case "国保連先月処理なし取込漏れ確認":
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連先月処理なし取込漏れ確認.getMessage()
-                        .replace(処理年月の前月.toString())).respond();
+                        .replace(get和暦年月(処理年月の前月).toString())).respond();
             case "国保連取込漏れ確認":
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込漏れ確認.getMessage()
-                        .replace(審査年月の翌月.toString(), 審査年月.toString())).respond();
+                        .replace(get和暦年月(審査年月の翌月).toString(), get和暦年月(審査年月).toString())).respond();
             case "国保連取込順序逆転確認":
                 return ResponseData.of(div).addMessage(DbcQuestionMessages.国保連取込順序逆転確認.getMessage()
-                        .replace(審査年月の翌月.toString(), 審査年月.toString())).respond();
+                        .replace(get和暦年月(審査年月の翌月).toString(), get和暦年月(審査年月).toString())).respond();
             default:
                 return ResponseData.of(div).respond();
         }
+    }
+
+    private RString get和暦年月(FlexibleYearMonth 年月) {
+        if (null == 年月 || FlexibleYearMonth.EMPTY.equals(年月)) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.ZERO).toDateString();
     }
 
     private void upload共有ファイル情報(RString fileName, FileData file) {

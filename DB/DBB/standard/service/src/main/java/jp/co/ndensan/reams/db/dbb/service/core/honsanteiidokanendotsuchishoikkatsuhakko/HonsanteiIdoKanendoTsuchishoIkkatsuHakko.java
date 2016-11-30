@@ -594,6 +594,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
         List<HonsanteiTsuchishoTempResult> tmpResultList = get賦課情報(entityList, 口座振替分出力様式);
         NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory = InstanceProvider.create(NonyuTsuchiShoJohoFactory.class);
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        List<HonSanteiTsuchiShoKyotsu> 本算定通知書情報List = new ArrayList<>();
         List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報List = new ArrayList<>();
         SourceDataCollection sourceDataCollection;
         try (ReportManager reportManager = new ReportManager()) {
@@ -624,6 +625,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
                         ? tmpResult.get宛先情報().get宛先名称() : null;
                 HonSanteiNonyuTsuchiShoJoho 編集後本算定通知書共通情報
                         = nonyuTsuchiShoJohoFactory.create本算定納入通知書情報(本算定通知書情報, 本算定納入通知書制御情報, 出力期リスト, 代納人氏名, false);
+                本算定通知書情報List.add(本算定通知書情報);
                 編集後本算定共通情報List.add(編集後本算定通知書共通情報);
                 編集後本算定通知書共通情報List.add(編集後本算定通知書共通情報.get編集後本算定通知書共通情報());
             }
@@ -639,7 +641,7 @@ public class HonsanteiIdoKanendoTsuchishoIkkatsuHakko extends HonsanteiIdoKanend
             賦課年度List.add(item.toDateString());
         }
         publish納入通知書発行一覧表(帳票作成日時.getRDateTime(), 調定年度, 賦課年度リスト, 出力期, 編集後本算定通知書共通情報List, 納入_EUC_ENTITY_ID, 納入_EUCファイル名);
-        new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService().print(編集後本算定通知書共通情報List,
+        new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService().print(本算定通知書情報List ,編集後本算定通知書共通情報List,
                 調定年度.toDateString(), 出力期, 帳票作成日時, 出力順ID, 賦課年度List);
         RString 出力ページ数 = get出力ページ数(sourceDataCollection);
         loadバッチ出力条件リスト(出力条件リスト, 帳票ID, 出力ページ数, CSV出力有無_あり, 納入_EUCファイル名, 帳票名);

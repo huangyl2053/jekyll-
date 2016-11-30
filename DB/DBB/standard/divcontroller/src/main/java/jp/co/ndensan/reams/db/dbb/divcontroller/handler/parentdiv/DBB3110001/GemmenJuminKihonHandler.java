@@ -287,8 +287,9 @@ public class GemmenJuminKihonHandler {
         IFukaRirekiAllDiv 全賦課履歴 = div.getGemmenFukaRirekiAll().getCcdFukaRirekiAll();
         TsuchishoNo 通知書番号 = 全賦課履歴.getClicked通知書番号();
         FlexibleYear 賦課年度 = 全賦課履歴.getClicked賦課年度();
+        FlexibleYear 調定年度 = 全賦課履歴.getClicked調定年度();
         NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                .getJokyo(賦課年度, 賦課年度, 通知書番号, 被保険者番号);
+                .getJokyo(調定年度, 賦課年度, 通知書番号, 被保険者番号);
         return 減免リスト;
     }
 

@@ -28,7 +28,7 @@
      "layoutName": "DBC2000021",
      "layoutTitle": "利用者負担割合即時更正　負担割合・新規",
      "eventName": "判定実行",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC2000022",

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbc.service.report.ijikofutangakushomeishoservice.
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -55,9 +57,8 @@ public class JikoFutangakuShomeisho {
     private static final RString 再計算区分_1 = new RString("1");
     private static final RString メニューID_DBCMN63001 = new RString("DBCMN63001");
     private static final RString 発行 = new RString("btnPublish");
+    private static final RString 検索結果一覧に戻る = new RString("btnBack");
     private final RString メニューID = ResponseHolder.getMenuID();
-    private boolean is帳票設計DBC100051 = false;
-    private boolean is帳票設計DBC100050 = false;
 
     /**
      * 自己負担額証明書作成画面 初期化を処理します。
@@ -112,6 +113,7 @@ public class JikoFutangakuShomeisho {
         div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().setDisabled(true);
         div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(検索結果一覧に戻る, false);
     }
 
     /**
@@ -149,16 +151,25 @@ public class JikoFutangakuShomeisho {
      * @return ResponseData
      */
     public ResponseData<JikoFutangakuShomeishoDiv> onClickBeforeCheck(JikoFutangakuShomeishoDiv div) {
+        boolean flag = false;
         if (メニューID_DBCMN63001.equals(メニューID)) {
+            flag = false;
             KogakuGassanShinseisho 再計算区分 = getHandler(div).get再計算区分(getKey().get被保険者番号());
             if (再計算区分 != null && 再計算区分_1.equals(再計算区分.get再計算区分()) && !ResponseHolder.isReRequest()) {
+                flag = true;
                 return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算申請書情報の再計算前.getMessage()).respond();
             }
         }
         FlexibleDate 前回発行日 = div.getJikoFutanShomeishoSakuseiPrint().getTxtZenkaiHakkoDate().getValue();
         if (!前回発行日.isEmpty()
-                && !ResponseHolder.isReRequest()) {
+                && ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbcWarningMessages.発行済み負担額証明書.getMessage()).respond();
+        }
+        if (!flag) {
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().replace("自己負担額証明書を発行して").evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -172,8 +183,7 @@ public class JikoFutangakuShomeisho {
     public ResponseData<SourceDataCollection> onClick_HakkouBtn(JikoFutangakuShomeishoDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
-            is帳票設計DBC100050 = true;
-            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(is帳票設計DBC100050, is帳票設計DBC100051, getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
+            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
             AccessLogger.log(AccessLogType.照会, toPersonalData(getKey().get被保険者番号().getColumnValue()));
             printData(data, reportManager);
             JikoFutangakushomeishoManager.createInstance().upDate高額合算情報更新(getParameter(div),
@@ -211,8 +221,7 @@ public class JikoFutangakuShomeisho {
     public ResponseData<SourceDataCollection> onClick_youHakkouBtn(JikoFutangakuShomeishoDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
-            is帳票設計DBC100051 = true;
-            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(is帳票設計DBC100050, is帳票設計DBC100051, getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
+            JikoFutangakushomeishoData data = getHandler(div).get高額合算データ(getKey().get識別コード(), getKey高額合算キークラス().get年度毎キー(), getKey().get被保険者番号(), メニューID);
             AccessLogger.log(AccessLogType.照会, toPersonalData(getKey().get被保険者番号().getColumnValue()));
             printyouData(data, div, reportManager);
             JikoFutangakushomeishoManager.createInstance().upDate高額合算情報更新(getParameter(div),
