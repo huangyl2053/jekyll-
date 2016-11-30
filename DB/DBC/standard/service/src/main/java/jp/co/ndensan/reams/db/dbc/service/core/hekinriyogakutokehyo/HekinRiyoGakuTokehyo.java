@@ -112,7 +112,7 @@ public class HekinRiyoGakuTokehyo {
                 } else {
                     人数 = 1;
                 }
-                edit対象レコード(shukeinaiyouEntityList, レコード, mapper, 人数);
+                edit対象レコード(shukeinaiyouEntityList, レコード, 人数);
                 if (!サービス分類.equals(entityList.get(i).getServiceBunrui())) {
                     updateDB出力出力用一時TBL(shukeinaiyouEntityList, mapper);
                     shukeinaiyouEntityList = createntitylist();
@@ -131,7 +131,7 @@ public class HekinRiyoGakuTokehyo {
     }
 
     private List<List<ShukeinaiyouEntity>> edit対象レコード(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList,
-            KyufujissekiTempTblEntity レコード, IHekinRiyoGakuTokehyoMapper mapper, int 人数) {
+            KyufujissekiTempTblEntity レコード, int 人数) {
         Decimal 費用金額 = get費用金額(レコード);
         get所得段階判定(shukeinaiyouEntityList, レコード, 人数, 費用金額);
         return shukeinaiyouEntityList;
@@ -140,38 +140,7 @@ public class HekinRiyoGakuTokehyo {
     private void get所得段階判定(List<List<ShukeinaiyouEntity>> shukeinaiyouEntityList, KyufujissekiTempTblEntity レコード,
             int 人数, Decimal 費用総額) {
         RString shotoku = レコード.getShotoku();
-        if (RString.isNullOrEmpty(shotoku)) {
-            updatecreatentitylist(shukeinaiyouEntityList,
-                    レコード,
-                    人数,
-                    費用総額,
-                    所得段階_その他,
-                    レコード.getYoKaigoJotaiKubunCode()
-            );
-            updatecreatentitylist(shukeinaiyouEntityList, レコード,
-                    人数,
-                    費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
-        } else if (計算用十 < Integer.valueOf(shotoku.toString())) {
-            updatecreatentitylist(shukeinaiyouEntityList,
-                    レコード,
-                    人数,
-                    費用総額,
-                    所得段階_10以上,
-                    レコード.getYoKaigoJotaiKubunCode());
-            updatecreatentitylist(shukeinaiyouEntityList, レコード,
-                    人数,
-                    費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
-        } else if (Integer.valueOf(shotoku.toString()) <= 定数9 && 1 <= Integer.valueOf(shotoku.toString())) {
-            updatecreatentitylist(shukeinaiyouEntityList,
-                    レコード,
-                    人数,
-                    費用総額,
-                    new RString(Integer.valueOf(shotoku.toString())),
-                    レコード.getYoKaigoJotaiKubunCode());
-            updatecreatentitylist(shukeinaiyouEntityList, レコード,
-                    人数,
-                    費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
-        } else if (所得段階_号.equals(shotoku)) {
+        if (所得段階_号.equals(shotoku)) {
             updatecreatentitylist(shukeinaiyouEntityList,
                     レコード,
                     人数,
@@ -181,8 +150,40 @@ public class HekinRiyoGakuTokehyo {
             updatecreatentitylist(shukeinaiyouEntityList, レコード,
                     人数,
                     費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
+        } else {
+            if (RString.isNullOrEmpty(shotoku)) {
+                updatecreatentitylist(shukeinaiyouEntityList,
+                        レコード,
+                        人数,
+                        費用総額,
+                        所得段階_その他,
+                        レコード.getYoKaigoJotaiKubunCode()
+                );
+                updatecreatentitylist(shukeinaiyouEntityList, レコード,
+                        人数,
+                        費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
+            } else if (計算用十 < Integer.valueOf(shotoku.toString())) {
+                updatecreatentitylist(shukeinaiyouEntityList,
+                        レコード,
+                        人数,
+                        費用総額,
+                        所得段階_10以上,
+                        レコード.getYoKaigoJotaiKubunCode());
+                updatecreatentitylist(shukeinaiyouEntityList, レコード,
+                        人数,
+                        費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
+            } else if (Integer.valueOf(shotoku.toString()) <= 定数9 && 1 <= Integer.valueOf(shotoku.toString())) {
+                updatecreatentitylist(shukeinaiyouEntityList,
+                        レコード,
+                        人数,
+                        費用総額,
+                        new RString(Integer.valueOf(shotoku.toString())),
+                        レコード.getYoKaigoJotaiKubunCode());
+                updatecreatentitylist(shukeinaiyouEntityList, レコード,
+                        人数,
+                        費用総額, 所得段階_合計, レコード.getYoKaigoJotaiKubunCode());
+            }
         }
-
     }
 
     private Decimal get費用金額(KyufujissekiTempTblEntity レコード) {
