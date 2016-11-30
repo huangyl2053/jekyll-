@@ -282,7 +282,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
     private void set編集後個人(TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSource source,
             EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報entity) {
         if (編集後仮算定通知書共通情報entity.get編集後個人() != null) {
-            source.listUpper_5 = 編集後仮算定通知書共通情報entity.get編集後個人().get生年月日();
+            source.listUpper_5 = 編集後仮算定通知書共通情報entity.get編集後個人().get生年月日1();
             source.listUpper_6 = 編集後仮算定通知書共通情報entity.get編集後個人().get性別();
             if (編集後仮算定通知書共通情報entity.get編集後個人().get世帯主名() != null) {
                 source.listUpper_7 = 編集後仮算定通知書共通情報entity.get編集後個人().get世帯主名().value();
