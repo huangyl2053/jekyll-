@@ -854,7 +854,8 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             ChoshuHoho 徴収方法情報 = new ChoshuHoho(特徴仮算定Entity.get徴収方法Entity());
             FukaJoho 編集後賦課の情報;
             boolean 賦課Flag = false;
-            if (特徴仮算定Entity.get賦課情報Entity() == null) {
+            if (特徴仮算定Entity.get賦課情報Entity() == null && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity() == null
+                    && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity().getTsuchishoNo() == null) {
                 FukaJoho 新しい賦課の情報 = new FukaJoho(調定年度, 調定年度, TsuchishoNo.EMPTY, NUM_0);
                 編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_0, 調定日時, 特徴仮算定Entity, 新しい賦課の情報, 調定年度,
                         資格情報, 徴収方法情報, 生保の情報のリスト,
