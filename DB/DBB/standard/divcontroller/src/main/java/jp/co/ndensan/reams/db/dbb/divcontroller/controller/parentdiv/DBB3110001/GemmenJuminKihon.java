@@ -61,7 +61,7 @@ public class GemmenJuminKihon {
     private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
     private static final RString 入力状況_決定済訂正 = new RString("決定済_訂正");
     private static final RString 入力状況_決定済取消 = new RString("決定済_取消");
-    private static boolean clickFlg = false;
+    private boolean clickFlg;
 
     /**
      * 画面の初期化メソッドです。
