@@ -891,7 +891,7 @@ public class HonSanteiIdoKanendoFuka extends HonSanteiIdoKanendoFukaFath {
             if (is最新 && result != null && result.get調定年度().isBefore(joho.get調定年度())) {
                 result = joho;
             }
-            if (!is最新 && joho.get賦課年度().isBefore(joho.get調定年度())) {
+            if (!is最新 && joho.get賦課年度().getYearValue() == joho.get調定年度().getYearValue()) {
                 return joho;
             }
         }
