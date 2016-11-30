@@ -113,16 +113,6 @@ public class HekinRiyoGakuTokehyoResult {
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final RString 保険料算定段階_01 = new RString("01");
-    private static final RString 保険料算定段階_02 = new RString("02");
-    private static final RString 保険料算定段階_03 = new RString("03");
-    private static final RString 保険料算定段階_04 = new RString("04");
-    private static final RString 保険料算定段階_05 = new RString("05");
-    private static final RString 保険料算定段階_06 = new RString("06");
-    private static final RString 保険料算定段階_07 = new RString("07");
-    private static final RString 保険料算定段階_08 = new RString("08");
-    private static final RString 保険料算定段階_09 = new RString("09");
-    private static final RString 保険料算定段階_10 = new RString("10～");
 
     /**
      * set給付実績データ一時TBL
@@ -142,7 +132,6 @@ public class HekinRiyoGakuTokehyoResult {
         一時Entity.setServiceKomokuCode(entity.getServiceKomokuCode());
         一時Entity.setServiceSyuruiCode(entity.getServiceSyuruiCode());
         一時Entity.setServiceTeikyoYM(entity.getServiceTeikyoYM());
-        一時Entity.setShotoku(entity.getShotoku());
         一時Entity.setUmareYMD(entity.getUmareYMD());
         一時Entity.setYoKaigoJotaiKubunCode(entity.getYoKaigoJotaiKubunCode());
         if (!RString.isNullOrEmpty(entity.getServiceSyuruiCode())) {
@@ -360,29 +349,7 @@ public class HekinRiyoGakuTokehyoResult {
                 一時Entity.setServiceshurui(serviceshuruiList.get(i));
                 一時Entity.setShukeinaiyou(shukeinaiyouList.get(j));
                 一時Entity.setShotoku(shotokuList.get(n));
-                if (サービス分類_1.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_01);
-                } else if (サービス分類_2.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_02);
-                } else if (サービス分類_3.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_03);
-                } else if (サービス分類_4.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_04);
-                } else if (サービス分類_5.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_05);
-                } else if (サービス分類_6.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_06);
-                } else if (サービス分類_7.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_07);
-                } else if (サービス分類_8.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_08);
-                } else if (サービス分類_9.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_09);
-                } else if (所得段階_10以上.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(保険料算定段階_10);
-                } else if (所得段階_その他.equals(shotokuList.get(n))) {
-                    一時Entity.setHokenseiteitoku(RString.EMPTY);
-                }
+                一時Entity.setHokenseiteitoku(RString.EMPTY);
                 一時Entity.setYoshien1(Decimal.ZERO);
                 一時Entity.setYoshien2(Decimal.ZERO);
                 一時Entity.setKeikanoyokaigo(Decimal.ZERO);
