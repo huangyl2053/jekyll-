@@ -108,7 +108,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
                 source.listLower_4 = 徴収方法.get本徴収_基礎年金番号();
                 source.listLower_6 = 徴収方法.get本徴収_年金コード() != null
                         ? CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                                UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                                 new Code(徴収方法.get本徴収_年金コード().substringReturnAsPossible(0, INDEX_3)))
                         : RString.EMPTY;
             } else {
@@ -116,7 +116,7 @@ public class TokubetsuChoshuIraikingakuMeisaiIchiranBodyEditor
                 source.listLower_4 = 徴収方法.get仮徴収_基礎年金番号();
                 source.listLower_6 = 徴収方法.get仮徴収_年金コード() != null
                         ? CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                                UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                                UEXCodeShubetsu.年金コード.getCodeShubetsu(),
                                 new Code(徴収方法.get仮徴収_年金コード().substringReturnAsPossible(0, INDEX_3)))
                         : RString.EMPTY;
             }
