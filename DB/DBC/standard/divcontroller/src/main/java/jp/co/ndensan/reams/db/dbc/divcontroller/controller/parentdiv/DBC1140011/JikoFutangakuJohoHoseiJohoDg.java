@@ -181,6 +181,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
                     DbcWarningMessages.高額合算補正関連２.getMessage()).respond();
         }
         if (!RString.isNullOrEmpty(row.getTxtSofuNengetsu())
+                && !ResponseHolder.isReRequest()
                 && !(new RString(DbcWarningMessages.高額合算補正関連１
                         .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 || new RString(
@@ -189,15 +190,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
             return ResponseData.of(div).addMessage(
                     DbcWarningMessages.高額合算補正関連３.getMessage()).respond();
         }
-        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())
-                && (new RString(DbcWarningMessages.高額合算補正関連１
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(
-                        DbcWarningMessages.高額合算補正関連２
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(
-                        DbcWarningMessages.高額合算補正関連３
-                        .getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+        if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
             return ResponseData.of(div).respond();
         }
         KogakuGassanJikoFutanGakuHolder 高額合算情報 = ViewStateHolder.get(
