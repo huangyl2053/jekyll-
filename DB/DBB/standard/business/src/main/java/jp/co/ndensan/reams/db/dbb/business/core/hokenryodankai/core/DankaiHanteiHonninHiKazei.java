@@ -27,7 +27,7 @@ class DankaiHanteiHonninHiKazei implements IHanteiHoho {
             }
             return false;
         } else {
-            return KazeiKubun.非課税 == hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoKazeiKubun();
+            return KazeiKubun.非課税.equals(hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoKazeiKubun());
         }
     }
 

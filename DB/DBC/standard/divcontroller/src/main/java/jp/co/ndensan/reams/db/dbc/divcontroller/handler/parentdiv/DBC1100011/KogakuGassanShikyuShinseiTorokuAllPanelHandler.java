@@ -841,18 +841,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 新規状態を初期化設定(RString メニューID) {
-        div.getBtnAddShinsei().setDisplayNone(false);
+        div.getBtnAddShinsei().setVisible(true);
         div.getDdlShokisaiHokenshaNo().setReadOnly(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnAddKanyuRireki().setDisplayNone(false);
-        div.getBtnKakuteiKanyuRireki().setDisplayNone(false);
+        div.getBtnAddKanyuRireki().setVisible(true);
+        div.getBtnKakuteiKanyuRireki().setVisible(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnKakuteiShintei().setDisplayNone(false);
+        div.getBtnKakuteiShintei().setVisible(true);
         div.getDdlShinseiTaishoNendo().setReadOnly(false);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
@@ -904,18 +904,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getTxtDaihyoshaYubinNo().setDisabled(false);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(申請情報を保存する, false);
         }
-        div.getBtnAddShinsei().setDisplayNone(false);
+        div.getBtnAddShinsei().setVisible(true);
         div.getDdlShokisaiHokenshaNo().setReadOnly(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnAddKanyuRireki().setDisplayNone(false);
-        div.getBtnKakuteiKanyuRireki().setDisplayNone(false);
+        div.getBtnAddKanyuRireki().setVisible(true);
+        div.getBtnKakuteiKanyuRireki().setVisible(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
-        div.getBtnKakuteiShintei().setDisplayNone(false);
+        div.getBtnKakuteiShintei().setVisible(true);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
         if (メニューID.equals(DBCMN61010) || DBCMN61012.equals(メニューID)) {
@@ -927,40 +927,40 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
      * 照会状態を初期化設定
      */
     public void 照会状態を初期化設定() {
-        div.getBtnAddShinsei().setDisplayNone(true);
+        div.getBtnAddShinsei().setVisible(false);
         div.getDdlShokisaiHokenshaNo().setReadOnly(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(false);
-        div.getBtnAddKanyuRireki().setDisplayNone(true);
-        div.getBtnKakuteiKanyuRireki().setDisplayNone(true);
+        div.getBtnAddKanyuRireki().setVisible(false);
+        div.getBtnKakuteiKanyuRireki().setVisible(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(false);
-        div.getBtnKakuteiShintei().setDisplayNone(true);
+        div.getBtnKakuteiShintei().setVisible(false);
         申請情報パネル制御(true);
         申請登録パネル制御(true);
     }
 
     private void 申請状態判定(RString 申請状態) {
         if (RSTRING_1.equals(申請状態) || RSTRING_2.equals(申請状態)) {
-            div.getBtnAddShinsei().setDisplayNone(false);
+            div.getBtnAddShinsei().setVisible(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-            div.getBtnAddKanyuRireki().setDisplayNone(false);
+            div.getBtnAddKanyuRireki().setVisible(true);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
         } else if (RSTRING_3.equals(申請状態)) {
-            div.getBtnAddShinsei().setDisplayNone(true);
+            div.getBtnAddShinsei().setVisible(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowSelectButtonColumn(true);
             div.getDgShinseiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgShinseiIchiran().getGridSetting().setIsShowRowState(true);
-            div.getBtnAddKanyuRireki().setDisplayNone(true);
+            div.getBtnAddKanyuRireki().setVisible(false);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(false);

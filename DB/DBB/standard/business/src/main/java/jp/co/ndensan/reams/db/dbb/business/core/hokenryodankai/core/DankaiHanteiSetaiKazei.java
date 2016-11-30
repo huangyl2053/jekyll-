@@ -18,7 +18,7 @@ class DankaiHanteiSetaiKazei implements IHanteiHoho {
 
     @Override
     public boolean matches(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        if (null == hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoKazeiKubun()) {
+        if (null == hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoSetaiKazeiKubun()) {
             boolean flag = false;
             for (KazeiKubunHonninKubun kazeiKubunHonninKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
                 if (!KazeiKubun.非課税.getコード().equals(kazeiKubunHonninKubun.get課税区分().getコード())) {

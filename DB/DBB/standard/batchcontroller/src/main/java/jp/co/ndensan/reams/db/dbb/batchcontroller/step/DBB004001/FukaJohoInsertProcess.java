@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 賦課の情報登録Processクラスです。
@@ -50,13 +51,41 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
     protected void process(FukaJohoTorokuRelateEntity entity) {
         insert介護賦課(entity);
         insert介護期別(entity);
-
     }
 
     private void insert介護期別(FukaJohoTorokuRelateEntity entity) {
-        DbT2003KibetsuEntity db2003entity = new FukaJohoInsertResult().getDbT2003Entity(entity);
-        db2003entity.setChoshuHouhou(get徴収方法(entity));
-        dbT2003Writer.insert(db2003entity);
+        if (!is歳出還付(entity)) {
+            DbT2003KibetsuEntity db2003entity = new FukaJohoInsertResult().getDbT2003Entity(entity);
+            db2003entity.setChoshuHouhou(get徴収方法(entity));
+            dbT2003Writer.insert(db2003entity);
+        }
+    }
+
+    private boolean is歳出還付(FukaJohoTorokuRelateEntity entity) {
+        return entity.getFuKibetsuGaku01() == null
+                && entity.getFuKibetsuGaku02() == null
+                && entity.getFuKibetsuGaku03() == null
+                && entity.getFuKibetsuGaku04() == null
+                && entity.getFuKibetsuGaku05() == null
+                && entity.getFuKibetsuGaku06() == null
+                && entity.getFuKibetsuGaku07() == null
+                && entity.getFuKibetsuGaku08() == null
+                && entity.getFuKibetsuGaku09() == null
+                && entity.getFuKibetsuGaku10() == null
+                && entity.getFuKibetsuGaku11() == null
+                && entity.getFuKibetsuGaku12() == null
+                || Decimal.ZERO.compareTo(entity.getFuKibetsuGaku01()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku02()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku03()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku04()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku05()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku06()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku07()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku08()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku09()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku10()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku11()) == 0
+                && Decimal.ZERO.compareTo(entity.getFuKibetsuGaku12()) == 0;
     }
 
     private RString get徴収方法(FukaJohoTorokuRelateEntity entity) {

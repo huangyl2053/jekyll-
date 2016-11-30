@@ -83,8 +83,7 @@ public class GemmenJuminKihonValidationHandler {
     }
 
     /**
-     * 「保存する」ボタン押下場合 減免額 ≠ （普通徴収減免前　合計　－　普通徴収減免後　合計）+ （特別徴収減免前　合計　－　特別徴収減免後
-     * 合計）の場合、エラーとする。
+     * 「保存する」ボタン押下場合 減免額 ≠ （普通徴収減免前　合計　－　普通徴収減免後　合計）+ （特別徴収減免前　合計　－　特別徴収減免後 合計）の場合、エラーとする。
      *
      * @return バリデーション突合結果
      */
@@ -155,11 +154,12 @@ public class GemmenJuminKihonValidationHandler {
      * 「保存する」ボタン押下場合 減免額が入力されている and 「計算する」ボタンが押下されていない場合、エラーとする。
      *
      * @param 最新減免の情報 GemmenJoho
+     * @param clickFlg clickFlg
      *
      * @return バリデーション突合結果
      */
-    public ValidationMessageControlPairs 計算処理の未実行チェック(GemmenJoho 最新減免の情報) {
-        IValidationMessages messages = new ControlValidator(div).validate計算処理の未実行(最新減免の情報);
+    public ValidationMessageControlPairs 計算処理の未実行チェック(GemmenJoho 最新減免の情報, boolean clickFlg) {
+        IValidationMessages messages = new ControlValidator(div).validate計算処理の未実行(最新減免の情報, clickFlg);
         return createDictionary計算処理の未実行チェック().check(messages);
     }
 
@@ -303,9 +303,9 @@ public class GemmenJuminKihonValidationHandler {
          *
          * @return バリデーション突合結果
          */
-        public IValidationMessages validate計算処理の未実行(GemmenJoho 最新減免の情報) {
+        public IValidationMessages validate計算処理の未実行(GemmenJoho 最新減免の情報, boolean clickFlg) {
             Decimal 減免額 = div.getGemmenMain().getKiwarigaku().getTxtGemmengaku().getValue();
-            boolean flag = 減免額 != null && !減免額.equals(最新減免の情報.get減免額());
+            boolean flag = 減免額 != null && !減免額.equals(最新減免の情報.get減免額()) && !clickFlg;
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(flag ? GemmenJuminKihonSpec.賦課情報の存在チェック : GemmenJuminKihonSpec.計算処理の未実行チェック)
