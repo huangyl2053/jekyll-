@@ -405,7 +405,7 @@ public class HokenshaSofuListHandler {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return RString.EMPTY;
             }
-            if (審査年月の翌月.isBefore(審査年月)
+            if ((FlexibleYearMonth.EMPTY.equals(審査年月) || 審査年月の翌月.isBefore(審査年月))
                     && !(new RString(DbcQuestionMessages.国保連取込漏れ確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
                 return new RString("国保連取込漏れ確認");
             }
@@ -414,7 +414,7 @@ public class HokenshaSofuListHandler {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return RString.EMPTY;
             }
-            if (審査年月.isBefore(審査年月の翌月)
+            if ((!FlexibleYearMonth.EMPTY.equals(審査年月) && 審査年月.isBefore(審査年月の翌月))
                     && !(new RString(DbcQuestionMessages.国保連取込順序逆転確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
                 return new RString("国保連取込順序逆転確認");
             }
@@ -439,7 +439,13 @@ public class HokenshaSofuListHandler {
             } else if (新規1.equals(給付実績情報作成区分コード)) {
                 myBatisParameter.set同月過誤取下分フラグ(false);
             }
-            審査年月 = new FlexibleYearMonth(データレコード.get(八十九));
+            if (八十九 < データレコード.size()) {
+                try {
+                    審査年月 = new FlexibleYearMonth(データレコード.get(八十九));
+                } catch (Exception e) {
+                    return FlexibleYearMonth.EMPTY;
+                }
+            }
         }
         return 審査年月;
     }
