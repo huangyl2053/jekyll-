@@ -442,12 +442,12 @@ public class ShikyugakuKeisanKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtKokuhoHihokenshaShoKigo() {
+    public TextBoxCode getTxtKokuhoHihokenshaShoKigo() {
         return this.getShikyugakuKeisanKekkaTorokuDetailPanel().getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().getTxtKokuhoHihokenshaShoKigo();
     }
 
     @JsonIgnore
-    public void  setTxtKokuhoHihokenshaShoKigo(TextBox txtKokuhoHihokenshaShoKigo) {
+    public void  setTxtKokuhoHihokenshaShoKigo(TextBoxCode txtKokuhoHihokenshaShoKigo) {
         this.getShikyugakuKeisanKekkaTorokuDetailPanel().getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtKokuhoHihokenshaShoKigo(txtKokuhoHihokenshaShoKigo);
     }
 
@@ -462,22 +462,22 @@ public class ShikyugakuKeisanKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtHiHokenshaShoNo() {
+    public TextBoxCode getTxtHiHokenshaShoNo() {
         return this.getShikyugakuKeisanKekkaTorokuDetailPanel().getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().getTxtHiHokenshaShoNo();
     }
 
     @JsonIgnore
-    public void  setTxtHiHokenshaShoNo(TextBox txtHiHokenshaShoNo) {
+    public void  setTxtHiHokenshaShoNo(TextBoxCode txtHiHokenshaShoNo) {
         this.getShikyugakuKeisanKekkaTorokuDetailPanel().getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtHiHokenshaShoNo(txtHiHokenshaShoNo);
     }
 
     @JsonIgnore
-    public TextBox getTxtJikoFutanSeiriNom() {
+    public TextBoxCode getTxtJikoFutanSeiriNom() {
         return this.getShikyugakuKeisanKekkaTorokuDetailPanel().getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().getTxtJikoFutanSeiriNom();
     }
 
     @JsonIgnore
-    public void  setTxtJikoFutanSeiriNom(TextBox txtJikoFutanSeiriNom) {
+    public void  setTxtJikoFutanSeiriNom(TextBoxCode txtJikoFutanSeiriNom) {
         this.getShikyugakuKeisanKekkaTorokuDetailPanel().getTabMeisai().getTabShikyugakuKeisanKekkaTorokuUchiwake().getShikyugakuKeisanKekkaTorokuUchiwakeDetail().setTxtJikoFutanSeiriNom(txtJikoFutanSeiriNom);
     }
 

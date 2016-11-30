@@ -163,6 +163,32 @@ public class KogakuGassanShikyuShinseiTorokuManager {
         return 支給額計算結果;
     }
 
+    /**
+     * get高額合算支給額計算結果削除情報。
+     *
+     * @param 支給額計算結果 KogakuGassanShikyuGakuKeisanKekkaRelate
+     * @param 以上負担額合計 Decimal
+     * @param 負担額合計 Decimal
+     *
+     * @return 高額合算支給額計算結果削除情報
+     */
+    public KogakuGassanShikyuGakuKeisanKekkaRelate get高額合算支給額計算結果削除情報(KogakuGassanShikyuGakuKeisanKekkaRelate 支給額計算結果,
+            Decimal 以上負担額合計, Decimal 負担額合計) {
+        List<DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity> 高額合算支給額計算結果明細リスト = new ArrayList();
+        for (KogakuGassanShikyugakuKeisanKekkaMeisai 高額合算支給額計算結果 : 支給額計算結果.get高額合算支給額計算結果list()) {
+            Decimal 以上負担額 = emptyToZero(高額合算支給額計算結果.get70歳以上負担額());
+            Decimal 負担額 = emptyToZero(高額合算支給額計算結果.get負担額());
+            高額合算支給額計算結果 = 高額合算支給額計算結果.createBuilderForEdit().set70歳以上按分率(get以上負担額分率(以上負担額, 以上負担額合計))
+                    .set按分率(get以上負担額分率(負担額, 負担額合計)).build();
+            高額合算支給額計算結果明細リスト.add(高額合算支給額計算結果.toEntity());
+        }
+        KogakuGassanShikyuGakuKeisanKekkaRelateEntity entity = new KogakuGassanShikyuGakuKeisanKekkaRelateEntity();
+        entity.set高額合算支給額計算結果(支給額計算結果.toEntity());
+        entity.set高額合算支給額計算結果明細リスト(高額合算支給額計算結果明細リスト);
+        支給額計算結果 = new KogakuGassanShikyuGakuKeisanKekkaRelate(entity);
+        return 支給額計算結果;
+    }
+
     private Decimal emptyToZero(RString obj) {
         return obj != null && !obj.isEmpty() ? new Decimal(obj.toString()) : Decimal.ZERO;
     }

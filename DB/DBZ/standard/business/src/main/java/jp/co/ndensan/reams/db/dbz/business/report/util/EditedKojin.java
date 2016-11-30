@@ -86,6 +86,19 @@ public class EditedKojin {
      *
      * @return 生年月日
      */
+    public RString get生年月日1() {
+        if (個人.is日本人()) {
+            return 個人.get生年月日().toFlexibleDate().wareki().toDateString();
+        } else {
+            return 個人.get生年月日().toFlexibleDate().seireki().toDateString();
+        }
+    }
+
+    /**
+     * 生年月日を返します。
+     *
+     * @return 生年月日
+     */
     public FlexibleDate get生年月日_A4() {
         return 個人.get生年月日().toFlexibleDate();
     }
