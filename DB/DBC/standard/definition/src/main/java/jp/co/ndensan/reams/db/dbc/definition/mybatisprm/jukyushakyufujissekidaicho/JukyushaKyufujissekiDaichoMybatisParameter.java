@@ -575,89 +575,29 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
      * @return JukyushaKyufujissekiDaichoMybatisParameter
      */
     public static JukyushaKyufujissekiDaichoMybatisParameter createParam(
-            RString 対象年月,
-            RString 年月範囲_開始,
-            RString 年月範囲_終了,
-            RString 被保険者番号_開始,
-            RString 被保険者番号_終了,
-            RString 給付実績区分,
-            RString すべて選択,
-            RString 要介護1,
-            RString 要介護2,
-            RString 要介護3,
-            RString 要介護4,
-            RString 要介護5,
-            RString 要支援1,
-            RString 要支援2,
-            RString 事業対象者,
-            RString 経過的要介護,
-            RString 自立,
-            RString 訪問通所他,
-            RString 短期入所生活介護,
-            RString 短期入所療養介護_老健施設,
-            RString 短期入所療養介護_医療施設,
-            RString 認知症対応型共同生活,
-            RString 特定施設入居者生活介護,
-            RString 認知症対応型共同生活_短期,
-            RString 特定施設入居生活介護_短期,
-            RString 居宅介護支援,
-            RString 介護老人福祉施設サービス,
-            RString 介護老人保健施設サービス,
-            RString 介護療養型医療施設サービス,
-            RString 特定福祉用具販売費,
-            RString 住宅改修費,
-            RString 高額介護サービス費,
-            RString 予防訪問通所他,
-            RString 予防短期入所生活介護,
-            RString 予防短期入所療養介護_老健施設,
-            RString 予防短期入所療養介護_医療施設,
-            RString 予防認知症対応型共同生活,
-            RString 予防特定施設入居者生活介護,
-            RString 予防認知症対応型共同生活_短期,
-            RString 予防支援,
-            RString 予防特定福祉用具販売費,
-            RString 予防住宅改修費,
-            RString 介護予防_生活支援_経過,
-            RString 経過措置ケアマネジメント,
-            RString 介護予防_生活支援総合事業,
-            RString 総合事業ケアマネジメント,
-            RString 旧措置特定有無,
-            RString 老人保健市町村番号有無,
-            RString 老人保健市町村番号有_開始,
-            RString 老人保健市町村番号有_終了,
-            RString 老人保健受給者番号有無,
-            RString 老人保健受給者番号有_開始,
-            RString 老人保健受給者番号有_終了,
-            RString 公費負担者番号,
-            RString 公費受給者番号,
-            RString 事業者番号_開始,
-            RString 事業者番号_終了,
-            RString 計画作成事業者番号,
-            RString 給付率区分,
-            RString 給付率,
-            long 出力順ID,
-            RString psmShikibetsuTaisho) {
-        boolean 旧措置特定有無flag = false;
-        boolean 旧措置特定有無flag1 = false;
-        if (new RString("2").equals(旧措置特定有無)) {
-            旧措置特定有無flag = true;
-        } else if (new RString("3").equals(旧措置特定有無)) {
-            旧措置特定有無flag1 = true;
-        }
-        boolean 老人保健市町村番号有無flag = false;
-        boolean 老人保健市町村番号有無flag1 = false;
-        if (new RString("2").equals(老人保健市町村番号有無)) {
-            老人保健市町村番号有無flag = true;
-        } else if (new RString("3").equals(老人保健市町村番号有無)) {
-            老人保健市町村番号有無flag1 = true;
-        }
-        boolean 老人保健受給者番号有無flag = false;
-        boolean 老人保健受給者番号有無flag1 = false;
-        if (new RString("2").equals(老人保健受給者番号有無)) {
-            老人保健受給者番号有無flag = true;
-        } else if (new RString("3").equals(老人保健受給者番号有無)) {
-            老人保健受給者番号有無flag1 = true;
-        }
+            RString 対象年月, RString 年月範囲_開始, RString 年月範囲_終了, RString 被保険者番号_開始, RString 被保険者番号_終了,
+            RString 給付実績区分, RString すべて選択, RString 要介護1, RString 要介護2, RString 要介護3, RString 要介護4,
+            RString 要介護5, RString 要支援1, RString 要支援2, RString 事業対象者, RString 経過的要介護, RString 自立,
+            RString 訪問通所他, RString 短期入所生活介護, RString 短期入所療養介護_老健施設, RString 短期入所療養介護_医療施設,
+            RString 認知症対応型共同生活, RString 特定施設入居者生活介護, RString 認知症対応型共同生活_短期,
+            RString 特定施設入居生活介護_短期, RString 居宅介護支援, RString 介護老人福祉施設サービス,
+            RString 介護老人保健施設サービス, RString 介護療養型医療施設サービス, RString 特定福祉用具販売費,
+            RString 住宅改修費, RString 高額介護サービス費, RString 予防訪問通所他, RString 予防短期入所生活介護,
+            RString 予防短期入所療養介護_老健施設, RString 予防短期入所療養介護_医療施設, RString 予防認知症対応型共同生活,
+            RString 予防特定施設入居者生活介護, RString 予防認知症対応型共同生活_短期, RString 予防支援,
+            RString 予防特定福祉用具販売費, RString 予防住宅改修費, RString 介護予防_生活支援_経過,
+            RString 経過措置ケアマネジメント, RString 介護予防_生活支援総合事業, RString 総合事業ケアマネジメント,
+            RString 旧措置特定有無, RString 老人保健市町村番号有無, RString 老人保健市町村番号有_開始,
+            RString 老人保健市町村番号有_終了, RString 老人保健受給者番号有無, RString 老人保健受給者番号有_開始,
+            RString 老人保健受給者番号有_終了, RString 公費負担者番号, RString 公費受給者番号,
+            RString 事業者番号_開始, RString 事業者番号_終了, RString 計画作成事業者番号,
+            RString 給付率区分, RString 給付率, long 出力順ID, RString psmShikibetsuTaisho) {
+        boolean 旧措置特定有無flag = new RString("2").equals(旧措置特定有無);
+        boolean 旧措置特定有無flag1 = new RString("3").equals(旧措置特定有無);
+        boolean 老人保健市町村番号有無flag = new RString("2").equals(老人保健市町村番号有無);
+        boolean 老人保健市町村番号有無flag1 = new RString("3").equals(老人保健市町村番号有無);
+        boolean 老人保健受給者番号有無flag = new RString("2").equals(老人保健受給者番号有無);
+        boolean 老人保健受給者番号有無flag1 = new RString("3").equals(老人保健受給者番号有無);
         boolean すべてflag = true;
         if (new RString("1").equals(要介護1)
                 || new RString("1").equals(要介護2)
