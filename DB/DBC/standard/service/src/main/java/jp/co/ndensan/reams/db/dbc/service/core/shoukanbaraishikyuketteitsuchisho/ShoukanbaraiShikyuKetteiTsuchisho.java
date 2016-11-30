@@ -241,7 +241,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                 }
                 for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                     if (entity7130.getServiceShuruiCd().equals(entity3053.getServiceShuruiCode())) {
-                        給付の種類 = edit給付の種類(entity7130.getServiceShuruiRyakusho(), 給付の種類);
+                        給付の種類 = edit給付の種類(entity7130.getServiceShuruiMeisho(), 給付の種類);
                         償還集計データ件数 = edit償還集計データ(給付の種類, 給付の種類Total, 償還集計データ件数);
                         給付の種類Total = 給付の種類;
                     }
@@ -255,7 +255,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         if (!dbt3043entitys.isEmpty()) {
             for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                 if (entity7130.getServiceShuruiCd().equals(固定)) {
-                    給付の種類 = edit給付種類(entity7130.getServiceShuruiRyakusho(), 給付の種類);
+                    給付の種類 = edit給付種類(entity7130.getServiceShuruiMeisho(), 給付の種類);
                 }
             }
         }
@@ -263,7 +263,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             for (DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity3050 : dbt3050entitys) {
                 for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                     if (entity7130.getServiceShuruiCd().equals(entity3050.getServiceShuruiCode())) {
-                        給付の種類 = edit給付種類(entity7130.getServiceShuruiRyakusho(), 給付の種類);
+                        給付の種類 = edit給付種類(entity7130.getServiceShuruiMeisho(), 給付の種類);
                     }
                 }
             }
@@ -411,7 +411,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         entity.set被保険者番号10(temp_被保険者番号.substring(NUM_9));
         entity.setUketsukeYMD(shoukanbaraiShikyuEntity.get償還払支給申請().getUketsukeYMD());
         entity.setKetteiYMD(shoukanbaraiShikyuEntity.get償還払支給判定結果().getKetteiYMD());
-        entity.setShiharaiKingakuRiyoshabun(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShiharaiKingakuUchiwakeRiyoshabun());
+        entity.setShiharaiKingakuRiyoshabun(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiKingakuTotal());
         entity.setServiceTeikyoYM(shoukanbaraiShikyuEntity.get償還払支給判定結果().getServiceTeikyoYM());
         KyufuSHurui kyufuSHurui = getKyufuSHurui(被保険者番号, 整理番号, サービス提供年月, 差額支給対象者区分);
         entity.set給付の種類1(kyufuSHurui.get給付の種類1());
@@ -740,7 +740,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
 
     private RString editServiceCode(DbT7130KaigoServiceShuruiEntity entity7130, ServiceCode serviceCode, RString 給付の種類) {
         if (entity7130.getServiceShuruiCd().value().equals(serviceCode.value().substring(NUM_0, NUM_2))) {
-            給付の種類 = edit給付の種類Total(entity7130.getServiceShuruiRyakusho(), 給付の種類);
+            給付の種類 = edit給付の種類Total(entity7130.getServiceShuruiMeisho(), 給付の種類);
         }
         return 給付の種類;
     }
