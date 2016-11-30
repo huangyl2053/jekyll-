@@ -854,8 +854,17 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             ChoshuHoho 徴収方法情報 = new ChoshuHoho(特徴仮算定Entity.get徴収方法Entity());
             FukaJoho 編集後賦課の情報;
             boolean 賦課Flag = false;
-            if (特徴仮算定Entity.get賦課情報Entity() == null && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity() == null
-                    && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity().getTsuchishoNo() == null) {
+            if (特徴仮算定Entity.get賦課情報Entity() != null && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity() != null
+                    && 特徴仮算定Entity.get賦課情報Entity().get介護賦課Entity().getTsuchishoNo() != null) {
+                FukaJoho 更正後賦課の情報 = new FukaJoho(特徴仮算定Entity.get賦課情報Entity());
+                編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_1, 調定日時, 特徴仮算定Entity, 更正後賦課の情報, 調定年度,
+                        資格情報, 徴収方法情報, 生保の情報のリスト,
+                        老齢の情報のリスト,
+                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO,
+                        特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
+                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
+                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
+            } else {
                 FukaJoho 新しい賦課の情報 = new FukaJoho(調定年度, 調定年度, TsuchishoNo.EMPTY, NUM_0);
                 編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_0, 調定日時, 特徴仮算定Entity, 新しい賦課の情報, 調定年度,
                         資格情報, 徴収方法情報, 生保の情報のリスト,
@@ -866,15 +875,6 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                         特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
                 枝番号 = 枝番号.add(Decimal.ONE);
                 賦課Flag = true;
-            } else {
-                FukaJoho 更正後賦課の情報 = new FukaJoho(特徴仮算定Entity.get賦課情報Entity());
-                編集後賦課の情報 = editFukaJokyoKyotsu(RSTRING_1, 調定日時, 特徴仮算定Entity, 更正後賦課の情報, 調定年度,
-                        資格情報, 徴収方法情報, 生保の情報のリスト,
-                        老齢の情報のリスト,
-                        特徴仮算定Entity.get前年度合計所得金額(), 特徴仮算定Entity.get前年度公的年金収入額(), Decimal.ZERO,
-                        特徴仮算定Entity.get生保開始日(), 特徴仮算定Entity.get生保廃止日(),
-                        特徴仮算定Entity.get老年開始日(), 特徴仮算定Entity.get老年廃止日(),
-                        特徴仮算定Entity.get課税区分(), 特徴仮算定Entity.get世帯課税区分());
             }
             RString 特別徴収_年額基準年度_8月開始 = DbBusinessConfig.get(ConfigNameDBB.特別徴収_年額基準年度_8月開始,
                     new RDate(調定年度.minusYear(NUM_1).toString()), SubGyomuCode.DBB介護賦課);

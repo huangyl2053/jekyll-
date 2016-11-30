@@ -61,6 +61,7 @@ public class GemmenJuminKihon {
     private static final RString 入力状況_申請中取消 = new RString("申請中_取消");
     private static final RString 入力状況_決定済訂正 = new RString("決定済_訂正");
     private static final RString 入力状況_決定済取消 = new RString("決定済_取消");
+    private static boolean clickFlg = false;
 
     /**
      * 画面の初期化メソッドです。
@@ -91,7 +92,7 @@ public class GemmenJuminKihon {
             case イチ_定値:
                 Fuka 賦課基本 = handler.get賦課基本();
                 NendobunFukaGemmenListResult 減免リスト = KaigoHokenryoGemmen.createInstance()
-                        .getJokyo(賦課基本.get賦課年度(), 賦課基本.get賦課年度(),
+                        .getJokyo(賦課基本.get調定年度(), 賦課基本.get賦課年度(),
                                 div.getCcdKaigoFukaKihon().get通知書番号(), div.getCcdKaigoFukaKihon().get被保番号());
                 load(減免リスト, div);
                 handler.set全賦課履歴情報Visible(false);
@@ -182,6 +183,7 @@ public class GemmenJuminKihon {
      * @return 介護保険料減免画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnCalculate(GemmenJuminKihonDiv div) {
+        clickFlg = true;
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
         GemmenJuminKihonValidationHandler validationHandler = new GemmenJuminKihonValidationHandler(div);
         ValidationMessageControlPairs pairs = validationHandler.減免額の整合性チェック２(年度分賦課減免リスト.get最新減免の情報());
@@ -202,6 +204,7 @@ public class GemmenJuminKihon {
      * @return 更新結果確認画面
      */
     public ResponseData<GemmenJuminKihonDiv> onClick_btnUpt(GemmenJuminKihonDiv div) {
+
         NendobunFukaGemmenList 年度分賦課減免リスト = ViewStateHolder.get(ViewStateKeys.年度分賦課減免リスト, NendobunFukaGemmenList.class);
         GemmenJuminKihonHandler handler = getHandler(div);
         GemmenJoho 最新減免の情報 = 年度分賦課減免リスト.get最新減免の情報();
@@ -212,7 +215,8 @@ public class GemmenJuminKihon {
             pairs.add(validationHandler.減免額の必須入力チェック());
         }
         pairs.add(validationHandler.減免額の必須入力チェック1());
-        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報));
+        pairs.add(validationHandler.計算処理の未実行チェック(最新減免の情報, clickFlg));
+
         pairs.add(validationHandler.決定日の必須入力チェック２());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -263,6 +267,7 @@ public class GemmenJuminKihon {
             } else {
                 ViewStateHolder.put(ViewStateKeys.実行フラグ, 処理_取消);
             }
+            clickFlg = false;
             return ResponseData.of(div).setState(DBB3110001StateName.更新結果確認);
         }
         return createResponse(div);
