@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikohijukyusha.DbWT6
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikohijukyusha.DbWT6412KohiJukyushabetsuShukeiTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -39,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2800-010 duanzhanli
  */
-public class KohiJukyushaInReadCsvFileProcess extends BatchProcessBase<RString> {
+public class KohiJukyushaInReadCsvFileProcess extends BatchProcessBase<List<RString>> {
 
     /**
      * returnEntity
@@ -69,9 +71,9 @@ public class KohiJukyushaInReadCsvFileProcess extends BatchProcessBase<RString> 
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private final RString レコード種別_コントロール = new RString("1");
     private final RString レコード種別_エンド = new RString("3");
-    private final RString 帳票レコード種別_ヘッダー = new RString("\"H1\"");
-    private final RString 帳票レコード種別_明細 = new RString("\"D1\"");
-    private final RString 帳票レコード種別_トレーラ = new RString("\"T1\"");
+    private final RString 帳票レコード種別_ヘッダー = new RString("H1");
+    private final RString 帳票レコード種別_明細 = new RString("D1");
+    private final RString 帳票レコード種別_トレーラ = new RString("T1");
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
@@ -111,12 +113,12 @@ public class KohiJukyushaInReadCsvFileProcess extends BatchProcessBase<RString> 
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.getファイルパース(), Encode.SJIS);
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(parameter.getファイルパース())
+                .setDelimiter(カンマ).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(カンマ.toString());
+    protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
             if (レコード種別_エンド.equals(data.get(INDEX_0))) {
                 return;
