@@ -319,19 +319,19 @@ LEFT JOIN
                 AND
                 DbT3017."inputShikibetsuNo" IN ('8171')
             </if>
-            <if test="旧措置特定有無flag">
+            <if test="旧措置特定有無 != null and 旧措置特定有無.toString() == '2'.toString()">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '0'
             </if>
-            <if test="!旧措置特定有無flag">
+            <if test="旧措置特定有無 != null and 旧措置特定有無.toString() == '3'.toString()">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '1'
             </if>
-            <if test="老人保健市町村番号有無flag">
+            <if test="老人保健市町村番号有無 != null and 老人保健市町村番号有無.toString() == '2'.toString()">
                 AND
                 DbT3017."rojinHokenShichosonNo" = ''
             </if>
-            <if test="!老人保健市町村番号有無flag">
+            <if test="老人保健市町村番号有無 != null and 老人保健市町村番号有無.toString() == '3'.toString()">
                 AND
                 DbT3017."rojinHokenShichosonNo" <![CDATA[<>]]> ''
                 AND
@@ -339,11 +339,11 @@ LEFT JOIN
                 AND
                 DbT3017."rojinHokenShichosonNo" <![CDATA[<=]]> #{老人保健市町村番号有_終了}
             </if>
-            <if test="老人保健受給者番号有無flag">
+            <if test="老人保健受給者番号有無  != null and 老人保健受給者番号有無.toString() == '2'.toString()">
                 AND
                 DbT3017."rojinhokenJukyushaNo" = ''
             </if>
-            <if test="!老人保健受給者番号有無flag">
+            <if test="老人保健受給者番号有無  != null and 老人保健受給者番号有無.toString() == '3'.toString()">
                 AND
                 DbT3017."rojinhokenJukyushaNo" <![CDATA[<>]]> ''
                 AND
