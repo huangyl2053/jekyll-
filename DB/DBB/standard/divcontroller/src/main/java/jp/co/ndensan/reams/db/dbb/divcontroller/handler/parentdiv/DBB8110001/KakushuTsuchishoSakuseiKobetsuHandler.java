@@ -127,7 +127,6 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
     private static final RString 徴収猶予通知書帳票_略称 = new RString("徴収猶予通知書帳票略称");
     private static final RString 業務固有の識別情報名称 = new RString("業務固有の識別情報");
     private static final RString 有 = new RString("1");
-    private static final RString 無 = new RString("0");
     private static final Code 業務固有 = new Code("0003");
 
     /**
