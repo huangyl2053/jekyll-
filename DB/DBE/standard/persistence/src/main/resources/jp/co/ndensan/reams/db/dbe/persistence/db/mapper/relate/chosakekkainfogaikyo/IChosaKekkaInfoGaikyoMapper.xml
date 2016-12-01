@@ -14,6 +14,7 @@
         <result property="riyoShisetsuJusho" column="DbT5202_riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="riyoShisetsuTelNo" column="DbT5202_riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="koroshoIfShikibetsuCode" column="DbT5202_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="gaikyoChosaTextImageKubun" column="DbT5202_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="remban" column="DbT5209_remban" />
         <result property="serviceJokyoKinyu" column="DbT5209_serviceJokyoKinyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jutakuKaishu" column="DbT5206_jutakuKaishu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -36,6 +37,7 @@
         ,DbT5202."riyoShisetsuJusho" as "DbT5202_riyoShisetsuJusho"
         ,DbT5202."riyoShisetsuTelNo" as "DbT5202_riyoShisetsuTelNo"
         ,DbT5202."koroshoIfShikibetsuCode" as "DbT5202_koroshoIfShikibetsuCode"
+        ,DbT5202."gaikyoChosaTextImageKubun" as "DbT5202_gaikyoChosaTextImageKubun"
         ,DbT5209."remban" as "DbT5209_remban"
         ,DbT5209."serviceJokyoKinyu" as "DbT5209_serviceJokyoKinyu"
         ,DbT5206."jutakuKaishu" as "DbT5206_jutakuKaishu"
@@ -54,19 +56,15 @@
         DbT5209."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
         AND 
         DbT5209."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
-        INNER JOIN 
+        LEFT JOIN 
         rgdb."DbT5206GaikyoTokki" as DbT5206
         ON DbT5206."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
         AND 
         DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
-        AND 
-        DbT5206."gaikyoTokkiTextImageKubun" = #{gaikyoTokkiTextImageKubun} 
         WHERE
             DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
             AND 
             DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
-            AND 
-            DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
     </select>
     
     <resultMap id="resultMap_RembanServiceJokyoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.RembanServiceJokyoRelateEntity" autoMapping="true">

@@ -9,6 +9,10 @@ module DBE {
 
         export class Events {
 
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
+
         }
 
         export class Controls {

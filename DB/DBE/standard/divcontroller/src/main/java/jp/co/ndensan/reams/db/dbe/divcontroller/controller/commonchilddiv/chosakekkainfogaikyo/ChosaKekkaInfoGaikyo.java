@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.chosakekkainfogaikyo;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
@@ -13,14 +14,11 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.Cho
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo.ChosaKekkaInfoGaikyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo.ChosaKekkaInfoGaikyoHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -30,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ChosaKekkaInfoGaikyo {
 
-    private static final RString FILENAME_G0001 = new RString("G0001.png");
+    private static final RString 出力する = new RString("1");
 
     /**
      * 認定調査結果情報照会_概況調査_一覧情報。
@@ -46,20 +44,78 @@ public class ChosaKekkaInfoGaikyo {
         } else {
             return createResponse(div);
         }
-        RString 概況調査テキスト_イメージ区分 = div.getGaikyoChosaTextImageKubun();
-        RString 概況特記テキスト_イメージ区分 = div.getGaikyoTokkiTextImageKubun();
+        if (出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            div.getGaikyoChosaTokkiPanel().setDisplayNone(true);
+            div.getGaikyoTokkiPanel().setDisplayNone(false);
+        } else {
+            div.getGaikyoChosaTokkiPanel().setDisplayNone(false);
+            div.getGaikyoTokkiPanel().setDisplayNone(true);
+        }
+        RString 概況調査テキスト_イメージ区分 = RString.EMPTY;
+        RString 概況特記テキスト_イメージ区分 = RString.EMPTY;
         ChosaKekkaInfoGaikyoParameter gaikyoParameter = ChosaKekkaInfoGaikyoParameter.
                 createGamenParam(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキスト_イメージ区分, 概況特記テキスト_イメージ区分);
         List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList
                 = ChosaKekkaInfoGaikyoFinder.createInstance().getChosaKekkaInfoGaikyo(gaikyoParameter).records();
+
+        List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況ListCopy = new ArrayList<>(chosaKekkaInfoGaikyoList);
+        chosaKekkaInfoGaikyoList = get認定調査結果概況一覧(認定調査結果概況ListCopy);
+        if (chosaKekkaInfoGaikyoList == null || chosaKekkaInfoGaikyoList.isEmpty()) {
+            概況調査テキスト_イメージ区分 = TokkijikoTextImageKubun.テキスト.getコード();
+            概況特記テキスト_イメージ区分 = TokkijikoTextImageKubun.テキスト.getコード();
+        } else {
+            概況調査テキスト_イメージ区分 = chosaKekkaInfoGaikyoList.get(0).get概況調査テキストイメージ区分();
+            概況特記テキスト_イメージ区分 = chosaKekkaInfoGaikyoList.get(0).get概況調査テキストイメージ区分();
+        }
+        div.setHdnTextImageKubun(概況調査テキスト_イメージ区分);
+        gaikyoParameter = ChosaKekkaInfoGaikyoParameter.createGamenParam(
+                申請書管理番号, 認定調査依頼履歴番号, 概況調査テキスト_イメージ区分, 概況特記テキスト_イメージ区分);
         List<RembanServiceJokyoBusiness> serviceJokyos
                 = ChosaKekkaInfoGaikyoFinder.createInstance().getRembanServiceJokyo(gaikyoParameter).records();
         List<NinteichosahyoShisetsuRiyo> shisetsuRiyos
                 = ChosaKekkaInfoGaikyoFinder.createInstance().get5210NinteichosahyoShisetsu(gaikyoParameter).records();
-        Image image = ChosaKekkaInfoGaikyoFinder.createInstance().get5115Image(gaikyoParameter);
-        RString path = 共有ファイルを引き出す(image);
-        getHandler(div).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos, path);
+        getHandler(div).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos, gaikyoParameter);
         return createResponse(div);
+    }
+
+    private List<ChosaKekkaInfoGaikyoBusiness> get認定調査結果概況一覧(List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況List) {
+        RString 概況調査テキストイメージ区分 = RString.EMPTY;
+        int テキストイメージ区分レコードカウント = 0;
+        for (ChosaKekkaInfoGaikyoBusiness 認定調査結果概況Entity : 認定調査結果概況List) {
+            if (RString.isNullOrEmpty(概況調査テキストイメージ区分)) {
+                概況調査テキストイメージ区分 = 認定調査結果概況Entity.get概況調査テキストイメージ区分();
+                テキストイメージ区分レコードカウント++;
+            }
+            if (!概況調査テキストイメージ区分.equals(認定調査結果概況Entity.get概況調査テキストイメージ区分())) {
+                テキストイメージ区分レコードカウント++;
+                break;
+            }
+        }
+        if (テキストイメージ区分レコードカウント > 1) {
+            List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況ListCopy = new ArrayList<>(認定調査結果概況List);
+            認定調査結果概況List = remove認定調査結果概況一覧(認定調査結果概況ListCopy);
+        }
+        return 認定調査結果概況List;
+    }
+
+    private List<ChosaKekkaInfoGaikyoBusiness> remove認定調査結果概況一覧(List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況List) {
+        List<ChosaKekkaInfoGaikyoBusiness> イメージのみ認定調査結果概況List = new ArrayList<>();
+        for (ChosaKekkaInfoGaikyoBusiness 認定調査結果概況Entity : 認定調査結果概況List) {
+            if (TokkijikoTextImageKubun.イメージ.getコード().equals(認定調査結果概況Entity.get概況調査テキストイメージ区分())) {
+                イメージのみ認定調査結果概況List.add(認定調査結果概況Entity);
+            }
+        }
+        return イメージのみ認定調査結果概況List;
+    }
+
+    /**
+     * マスキングボタンを押下します。
+     *
+     * @param div 画面情報
+     * @return 認定調査結果情報照会Div
+     */
+    public ResponseData<ChosaKekkaInfoGaikyoDiv> onBeforeOpenDialog_btnMaskingGaikyoChosa(ChosaKekkaInfoGaikyoDiv div) {
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -70,23 +126,6 @@ public class ChosaKekkaInfoGaikyo {
      */
     public ResponseData<ChosaKekkaInfoGaikyoDiv> onClick_Moderu(ChosaKekkaInfoGaikyoDiv div) {
         return ResponseData.of(div).respond();
-    }
-
-    private RString 共有ファイルを引き出す(Image イメージ情報) {
-        RString imagePath = RString.EMPTY;
-        if (イメージ情報 != null) {
-            imagePath = getFilePath(イメージ情報.getイメージ共有ファイルID(), FILENAME_G0001);
-        }
-        return imagePath;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 
     private ChosaKekkaInfoGaikyoHandler getHandler(ChosaKekkaInfoGaikyoDiv div) {

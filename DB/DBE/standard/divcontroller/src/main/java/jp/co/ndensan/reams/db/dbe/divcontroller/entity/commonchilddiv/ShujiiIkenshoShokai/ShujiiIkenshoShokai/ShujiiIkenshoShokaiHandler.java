@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
@@ -23,12 +24,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
@@ -37,12 +40,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiIkenshoShokaiHandler {
 
     private final ShujiiIkenshoShokaiDiv div;
-    private ShinseishoKanriNo 申請書管理番号;
-    private int 主治医意見書作成依頼履歴番号;
-    private final RString ファイル名_主治医意見書_表 = new RString("E0001");
-    private final RString ファイル名_主治医意見書_表BAK = new RString("E0001_BAK");
-    private final RString ファイル名_主治医意見書_裏 = new RString("E0002");
-    private final RString ファイル名_主治医意見書_裏BAK = new RString("E0002_BAK");
+    private final RString ファイル名_主治医意見書_表 = new RString("E0001.png");
+    private final RString ファイル名_主治医意見書_表BAK = new RString("E0001_BAK.png");
+    private final RString ファイル名_主治医意見書_裏 = new RString("E0002.png");
+    private final RString ファイル名_主治医意見書_裏BAK = new RString("E0002_BAK.png");
 
     /**
      * コンストラクタです。
@@ -56,31 +57,35 @@ public class ShujiiIkenshoShokaiHandler {
     /**
      * 主治医意見書照会画面の項目を設定します。
      *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
      */
-    public void initialize() {
+    public void onLoad(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号) {
         申請書管理番号 = new ShinseishoKanriNo(div.getHiddenShinseishoKanriNo());
-        主治医意見書作成依頼履歴番号 = div.getHiddenIkenshoIraiRirekiNo().toInt();
+        主治医意見書作成依頼履歴番号 = Integer.parseInt(div.getHiddenIkenshoIraiRirekiNo().toString());
 
         ShujiiIkenshoIkenItemManager manager = new ShujiiIkenshoIkenItemManager();
-        List<DbT5304ShujiiIkenshoIkenItemEntity> entityList = manager.select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号);
+//        List<DbT5304ShujiiIkenshoIkenItemEntity> entityList = manager.select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号);
+        List<DbT5304ShujiiIkenshoIkenItemEntity> entityList = new ArrayList<>();
         RString 厚労省IF識別コード = RString.EMPTY;
         if (entityList != null && !entityList.isEmpty()) {
             厚労省IF識別コード = entityList.get(0).getKoroshoIfShikibetsuCode().value();
         }
-        if (厚労省IF識別コード == KoroshoInterfaceShikibetsuCode.V99A.getCode()) {
+        if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_99A(entityList);
-        } else if (厚労省IF識別コード == KoroshoInterfaceShikibetsuCode.V02A.getCode()) {
+        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_02A(entityList);
-        } else if (厚労省IF識別コード == KoroshoInterfaceShikibetsuCode.V06A.getCode()) {
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)){
             set必須５項目_06A(entityList);
-        } else if (厚労省IF識別コード == KoroshoInterfaceShikibetsuCode.V09A.getCode()) {
+        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_09A(entityList);
-        } else if (厚労省IF識別コード == KoroshoInterfaceShikibetsuCode.V09B.getCode()) {
+        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)){
             set必須５項目_09B(entityList);
         }
 
-        YokaigoninteiimagekanriFinder finder = YokaigoninteiimagekanriFinder.createInstance();
-        ImagekanriJoho イメージ情報 = finder.getImageJoho(申請書管理番号.value());
+        
+        ImageManager imageManager = InstanceProvider.create(ImageManager.class);
+        Image イメージ情報 = imageManager.getイメージ情報(申請書管理番号);
         List<RString> イメージ元本パスリスト = get原本FilePathList(イメージ情報);
         List<RString> イメージマスクパスリスト = getマスクFilePathList(イメージ情報);
         List<RString> 原本タイトルリスト = getTitleList(イメージ元本パスリスト);
@@ -173,7 +178,7 @@ public class ShujiiIkenshoShokaiHandler {
         }
     }
 
-    private List<RString> get原本FilePathList(ImagekanriJoho イメージ情報) {
+    private List<RString> get原本FilePathList(Image イメージ情報) {
         List<RString> イメージファイルパス = new ArrayList<>();
 
         RString イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
@@ -191,7 +196,7 @@ public class ShujiiIkenshoShokaiHandler {
         return イメージファイルパス;
     }
 
-    private List<RString> getマスクFilePathList(ImagekanriJoho イメージ情報) {
+    private List<RString> getマスクFilePathList(Image イメージ情報) {
         List<RString> イメージファイルパス = new ArrayList<>();
 
         RString イメージパス_原本表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
@@ -211,7 +216,7 @@ public class ShujiiIkenshoShokaiHandler {
         return イメージファイルパス;
     }
 
-    private RString getFilePath(ImagekanriJoho イメージ情報, RString ファイル) {
+    private RString getFilePath(Image イメージ情報, RString ファイル) {
         RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"), new RString("db#dbe"),
                 new RString("WEB-INF"), new RString("image"));
         ReadOnlySharedFileEntryDescriptor descriptor

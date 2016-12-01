@@ -41,24 +41,32 @@ module DBE {
                 return new UZA.TextBoxDate(this.convFiledName("txtNinteichosaJisshiYMD"));
             }
 
+            public lblJisshiBasho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblJisshiBasho"));
+            }
+
             public txtChosaJisshiBashoMeisho(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoMeisho"));
             }
 
-            public TokkiPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TokkiPanel"));
+            public JisshiBashoMeishoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JisshiBashoMeishoPanel"));
             }
 
-            public txtTokki(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokki"));
+            public imgChosaJisshiBashoMeisho(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
             }
 
-            public ServiceJokyoPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ServiceJokyoPanel"));
+            public GaikyoChosaTokkiPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("GaikyoChosaTokkiPanel"));
             }
 
-            public dgServiceJokyo(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgServiceJokyo"));
+            public txtGaikyoChosaTokki(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtGaikyoChosaTokki"));
+            }
+
+            public imgGaikyoChosaTokki(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgGaikyoChosaTokki"));
             }
 
             public radServiceKubun(): UZA.RadioButton {
@@ -69,12 +77,84 @@ module DBE {
                 return new UZA.RadioButton(this.convFiledName("rdoJutakuKaishu"));
             }
 
-            public KubetsuKyufuPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("KubetsuKyufuPanel"));
+            public ServiceJokyoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ServiceJokyoPanel"));
             }
 
-            public txtkubetsuKyufu(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtkubetsuKyufu"));
+            public dgServiceJokyo(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgServiceJokyo"));
+            }
+
+            public ShisetsuRiyoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShisetsuRiyoPanel"));
+            }
+
+            public lblShisetsuShurui(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblShisetsuShurui"));
+            }
+
+            public txtRiyoShisetsuShurui(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtRiyoShisetsuShurui"));
+            }
+
+            public lblShisetsuShimei(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblShisetsuShimei"));
+            }
+
+            public lblTelNo(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTelNo"));
+            }
+
+            public txtRiyoShisetsuMeisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtRiyoShisetsuMeisho"));
+            }
+
+            public txtTelNo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTelNo"));
+            }
+
+            public ShisetsuMeishoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShisetsuMeishoPanel"));
+            }
+
+            public imgRiyoShisetsuMeisho(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgRiyoShisetsuMeisho"));
+            }
+
+            public TelNoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TelNoPanel"));
+            }
+
+            public imgTelNo(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgTelNo"));
+            }
+
+            public lblRiyoShisetsuJusho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblRiyoShisetsuJusho"));
+            }
+
+            public txtRiyoShisetsuJusho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtRiyoShisetsuJusho"));
+            }
+
+            public ShisetsuJushoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShisetsuJushoPanel"));
+            }
+
+            public imgRiyoShisetsuJusho(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgRiyoShisetsuJusho"));
+            }
+
+            public TokubetsuKyufuPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TokubetsuKyufuPanel"));
+            }
+
+            public txtTokubetsuKyufu(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokubetsuKyufu"));
+            }
+
+            public imgTokubetsuKyufu(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgTokubetsuKyufu"));
             }
 
             public ZaitakuServicePanel(): UZA.Panel {
@@ -85,28 +165,12 @@ module DBE {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtZaitakuService"));
             }
 
-            public RiyoShisetsuPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("RiyoShisetsuPanel"));
+            public imgZaitakuService(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgZaitakuService"));
             }
 
-            public dgRiyoShisetsu(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgRiyoShisetsu"));
-            }
-
-            public txtRiyoShisetsuShimei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRiyoShisetsuShimei"));
-            }
-
-            public txtRiyoShisetsuJusho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRiyoShisetsuJusho"));
-            }
-
-            public txtTelNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtTelNo"));
-            }
-
-            public GaikyoTokkiTextPanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("GaikyoTokkiTextPanel"));
+            public GaikyoTokkiPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("GaikyoTokkiPanel"));
             }
 
             public lblJutakuKaishu(): UZA.Label {
@@ -121,24 +185,24 @@ module DBE {
                 return new UZA.HorizontalLine(this.convFiledName("line1"));
             }
 
-            public lblTokuBetsuKyufuService(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTokuBetsuKyufuService"));
+            public lblGaikyoTokkiTokubetsuKyufu(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblGaikyoTokkiTokubetsuKyufu"));
             }
 
-            public txtTokuBetsuKyufuService(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokuBetsuKyufuService"));
+            public txtGaikyoTokkiTokubetsuKyufu(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtGaikyoTokkiTokubetsuKyufu"));
             }
 
             public line2(): UZA.HorizontalLine {
                 return new UZA.HorizontalLine(this.convFiledName("line2"));
             }
 
-            public lblTokkiZaitakuService(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTokkiZaitakuService"));
+            public lblZaitakuService(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblZaitakuService"));
             }
 
-            public txtTokkiZaitakuService(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkiZaitakuService"));
+            public txtGaikyoTokkiZaitakuService(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtGaikyoTokkiZaitakuService"));
             }
 
             public line3(): UZA.HorizontalLine {
@@ -189,12 +253,8 @@ module DBE {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtKikaiKiki"));
             }
 
-            public GaikyoTokkiImagePanel(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("GaikyoTokkiImagePanel"));
-            }
-
-            public gaikyoChosaImage(): UZA.DynamicImage {
-                return new UZA.DynamicImage(this.convFiledName("gaikyoChosaImage"));
+            public imgGaikyoTokki(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgGaikyoTokki"));
             }
 
             public btnBack(): UZA.Button {

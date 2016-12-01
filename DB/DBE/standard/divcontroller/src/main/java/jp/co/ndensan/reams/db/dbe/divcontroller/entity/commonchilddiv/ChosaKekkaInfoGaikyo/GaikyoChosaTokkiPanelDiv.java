@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ZaitakuServicePanel のクラスファイル 
+ * GaikyoChosaTokkiPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ZaitakuServicePanelDiv extends Panel {
+public class GaikyoChosaTokkiPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -21,10 +21,10 @@ public class ZaitakuServicePanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtZaitakuService")
-    private TextBoxMultiLine txtZaitakuService;
-    @JsonProperty("imgZaitakuService")
-    private DynamicImage imgZaitakuService;
+    @JsonProperty("txtGaikyoChosaTokki")
+    private TextBoxMultiLine txtGaikyoChosaTokki;
+    @JsonProperty("imgGaikyoChosaTokki")
+    private DynamicImage imgGaikyoChosaTokki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +33,39 @@ public class ZaitakuServicePanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtZaitakuService
-     * @return txtZaitakuService
+     * gettxtGaikyoChosaTokki
+     * @return txtGaikyoChosaTokki
      */
-    @JsonProperty("txtZaitakuService")
-    public TextBoxMultiLine getTxtZaitakuService() {
-        return txtZaitakuService;
+    @JsonProperty("txtGaikyoChosaTokki")
+    public TextBoxMultiLine getTxtGaikyoChosaTokki() {
+        return txtGaikyoChosaTokki;
     }
 
     /*
-     * settxtZaitakuService
-     * @param txtZaitakuService txtZaitakuService
+     * settxtGaikyoChosaTokki
+     * @param txtGaikyoChosaTokki txtGaikyoChosaTokki
      */
-    @JsonProperty("txtZaitakuService")
-    public void setTxtZaitakuService(TextBoxMultiLine txtZaitakuService) {
-        this.txtZaitakuService = txtZaitakuService;
+    @JsonProperty("txtGaikyoChosaTokki")
+    public void setTxtGaikyoChosaTokki(TextBoxMultiLine txtGaikyoChosaTokki) {
+        this.txtGaikyoChosaTokki = txtGaikyoChosaTokki;
     }
 
     /*
-     * getimgZaitakuService
-     * @return imgZaitakuService
+     * getimgGaikyoChosaTokki
+     * @return imgGaikyoChosaTokki
      */
-    @JsonProperty("imgZaitakuService")
-    public DynamicImage getImgZaitakuService() {
-        return imgZaitakuService;
+    @JsonProperty("imgGaikyoChosaTokki")
+    public DynamicImage getImgGaikyoChosaTokki() {
+        return imgGaikyoChosaTokki;
     }
 
     /*
-     * setimgZaitakuService
-     * @param imgZaitakuService imgZaitakuService
+     * setimgGaikyoChosaTokki
+     * @param imgGaikyoChosaTokki imgGaikyoChosaTokki
      */
-    @JsonProperty("imgZaitakuService")
-    public void setImgZaitakuService(DynamicImage imgZaitakuService) {
-        this.imgZaitakuService = imgZaitakuService;
+    @JsonProperty("imgGaikyoChosaTokki")
+    public void setImgGaikyoChosaTokki(DynamicImage imgGaikyoChosaTokki) {
+        this.imgGaikyoChosaTokki = imgGaikyoChosaTokki;
     }
 
     // </editor-fold>

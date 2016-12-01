@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ServiceJokyoPanel のクラスファイル 
+ * TokubetsuKyufuPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ServiceJokyoPanelDiv extends Panel {
+public class TokubetsuKyufuPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
@@ -21,8 +21,10 @@ public class ServiceJokyoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgServiceJokyo")
-    private DataGrid<dgServiceJokyo_Row> dgServiceJokyo;
+    @JsonProperty("txtTokubetsuKyufu")
+    private TextBoxMultiLine txtTokubetsuKyufu;
+    @JsonProperty("imgTokubetsuKyufu")
+    private DynamicImage imgTokubetsuKyufu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +33,39 @@ public class ServiceJokyoPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgServiceJokyo
-     * @return dgServiceJokyo
+     * gettxtTokubetsuKyufu
+     * @return txtTokubetsuKyufu
      */
-    @JsonProperty("dgServiceJokyo")
-    public DataGrid<dgServiceJokyo_Row> getDgServiceJokyo() {
-        return dgServiceJokyo;
+    @JsonProperty("txtTokubetsuKyufu")
+    public TextBoxMultiLine getTxtTokubetsuKyufu() {
+        return txtTokubetsuKyufu;
     }
 
     /*
-     * setdgServiceJokyo
-     * @param dgServiceJokyo dgServiceJokyo
+     * settxtTokubetsuKyufu
+     * @param txtTokubetsuKyufu txtTokubetsuKyufu
      */
-    @JsonProperty("dgServiceJokyo")
-    public void setDgServiceJokyo(DataGrid<dgServiceJokyo_Row> dgServiceJokyo) {
-        this.dgServiceJokyo = dgServiceJokyo;
+    @JsonProperty("txtTokubetsuKyufu")
+    public void setTxtTokubetsuKyufu(TextBoxMultiLine txtTokubetsuKyufu) {
+        this.txtTokubetsuKyufu = txtTokubetsuKyufu;
+    }
+
+    /*
+     * getimgTokubetsuKyufu
+     * @return imgTokubetsuKyufu
+     */
+    @JsonProperty("imgTokubetsuKyufu")
+    public DynamicImage getImgTokubetsuKyufu() {
+        return imgTokubetsuKyufu;
+    }
+
+    /*
+     * setimgTokubetsuKyufu
+     * @param imgTokubetsuKyufu imgTokubetsuKyufu
+     */
+    @JsonProperty("imgTokubetsuKyufu")
+    public void setImgTokubetsuKyufu(DynamicImage imgTokubetsuKyufu) {
+        this.imgTokubetsuKyufu = imgTokubetsuKyufu;
     }
 
     // </editor-fold>

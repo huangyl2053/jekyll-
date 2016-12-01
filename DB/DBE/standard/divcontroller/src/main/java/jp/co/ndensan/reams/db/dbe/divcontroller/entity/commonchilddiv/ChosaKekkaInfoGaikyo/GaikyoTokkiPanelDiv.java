@@ -9,12 +9,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * GaikyoTokkiTextPanel のクラスファイル 
+ * GaikyoTokkiPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class GaikyoTokkiTextPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+public class GaikyoTokkiPanelDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,16 +27,16 @@ public class GaikyoTokkiTextPanelDiv extends Panel {
     private TextBoxMultiLine txtJutakuKaishu;
     @JsonProperty("line1")
     private HorizontalLine line1;
-    @JsonProperty("lblTokuBetsuKyufuService")
-    private Label lblTokuBetsuKyufuService;
-    @JsonProperty("txtTokuBetsuKyufuService")
-    private TextBoxMultiLine txtTokuBetsuKyufuService;
+    @JsonProperty("lblGaikyoTokkiTokubetsuKyufu")
+    private Label lblGaikyoTokkiTokubetsuKyufu;
+    @JsonProperty("txtGaikyoTokkiTokubetsuKyufu")
+    private TextBoxMultiLine txtGaikyoTokkiTokubetsuKyufu;
     @JsonProperty("line2")
     private HorizontalLine line2;
-    @JsonProperty("lblTokkiZaitakuService")
-    private Label lblTokkiZaitakuService;
-    @JsonProperty("txtTokkiZaitakuService")
-    private TextBoxMultiLine txtTokkiZaitakuService;
+    @JsonProperty("lblZaitakuService")
+    private Label lblZaitakuService;
+    @JsonProperty("txtGaikyoTokkiZaitakuService")
+    private TextBoxMultiLine txtGaikyoTokkiZaitakuService;
     @JsonProperty("line3")
     private HorizontalLine line3;
     @JsonProperty("lblShuso")
@@ -61,6 +61,8 @@ public class GaikyoTokkiTextPanelDiv extends Panel {
     private Label lblKikaiKiki;
     @JsonProperty("txtKikaiKiki")
     private TextBoxMultiLine txtKikaiKiki;
+    @JsonProperty("imgGaikyoTokki")
+    private DynamicImage imgGaikyoTokki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -123,39 +125,39 @@ public class GaikyoTokkiTextPanelDiv extends Panel {
     }
 
     /*
-     * getlblTokuBetsuKyufuService
-     * @return lblTokuBetsuKyufuService
+     * getlblGaikyoTokkiTokubetsuKyufu
+     * @return lblGaikyoTokkiTokubetsuKyufu
      */
-    @JsonProperty("lblTokuBetsuKyufuService")
-    public Label getLblTokuBetsuKyufuService() {
-        return lblTokuBetsuKyufuService;
+    @JsonProperty("lblGaikyoTokkiTokubetsuKyufu")
+    public Label getLblGaikyoTokkiTokubetsuKyufu() {
+        return lblGaikyoTokkiTokubetsuKyufu;
     }
 
     /*
-     * setlblTokuBetsuKyufuService
-     * @param lblTokuBetsuKyufuService lblTokuBetsuKyufuService
+     * setlblGaikyoTokkiTokubetsuKyufu
+     * @param lblGaikyoTokkiTokubetsuKyufu lblGaikyoTokkiTokubetsuKyufu
      */
-    @JsonProperty("lblTokuBetsuKyufuService")
-    public void setLblTokuBetsuKyufuService(Label lblTokuBetsuKyufuService) {
-        this.lblTokuBetsuKyufuService = lblTokuBetsuKyufuService;
+    @JsonProperty("lblGaikyoTokkiTokubetsuKyufu")
+    public void setLblGaikyoTokkiTokubetsuKyufu(Label lblGaikyoTokkiTokubetsuKyufu) {
+        this.lblGaikyoTokkiTokubetsuKyufu = lblGaikyoTokkiTokubetsuKyufu;
     }
 
     /*
-     * gettxtTokuBetsuKyufuService
-     * @return txtTokuBetsuKyufuService
+     * gettxtGaikyoTokkiTokubetsuKyufu
+     * @return txtGaikyoTokkiTokubetsuKyufu
      */
-    @JsonProperty("txtTokuBetsuKyufuService")
-    public TextBoxMultiLine getTxtTokuBetsuKyufuService() {
-        return txtTokuBetsuKyufuService;
+    @JsonProperty("txtGaikyoTokkiTokubetsuKyufu")
+    public TextBoxMultiLine getTxtGaikyoTokkiTokubetsuKyufu() {
+        return txtGaikyoTokkiTokubetsuKyufu;
     }
 
     /*
-     * settxtTokuBetsuKyufuService
-     * @param txtTokuBetsuKyufuService txtTokuBetsuKyufuService
+     * settxtGaikyoTokkiTokubetsuKyufu
+     * @param txtGaikyoTokkiTokubetsuKyufu txtGaikyoTokkiTokubetsuKyufu
      */
-    @JsonProperty("txtTokuBetsuKyufuService")
-    public void setTxtTokuBetsuKyufuService(TextBoxMultiLine txtTokuBetsuKyufuService) {
-        this.txtTokuBetsuKyufuService = txtTokuBetsuKyufuService;
+    @JsonProperty("txtGaikyoTokkiTokubetsuKyufu")
+    public void setTxtGaikyoTokkiTokubetsuKyufu(TextBoxMultiLine txtGaikyoTokkiTokubetsuKyufu) {
+        this.txtGaikyoTokkiTokubetsuKyufu = txtGaikyoTokkiTokubetsuKyufu;
     }
 
     /*
@@ -177,39 +179,39 @@ public class GaikyoTokkiTextPanelDiv extends Panel {
     }
 
     /*
-     * getlblTokkiZaitakuService
-     * @return lblTokkiZaitakuService
+     * getlblZaitakuService
+     * @return lblZaitakuService
      */
-    @JsonProperty("lblTokkiZaitakuService")
-    public Label getLblTokkiZaitakuService() {
-        return lblTokkiZaitakuService;
+    @JsonProperty("lblZaitakuService")
+    public Label getLblZaitakuService() {
+        return lblZaitakuService;
     }
 
     /*
-     * setlblTokkiZaitakuService
-     * @param lblTokkiZaitakuService lblTokkiZaitakuService
+     * setlblZaitakuService
+     * @param lblZaitakuService lblZaitakuService
      */
-    @JsonProperty("lblTokkiZaitakuService")
-    public void setLblTokkiZaitakuService(Label lblTokkiZaitakuService) {
-        this.lblTokkiZaitakuService = lblTokkiZaitakuService;
+    @JsonProperty("lblZaitakuService")
+    public void setLblZaitakuService(Label lblZaitakuService) {
+        this.lblZaitakuService = lblZaitakuService;
     }
 
     /*
-     * gettxtTokkiZaitakuService
-     * @return txtTokkiZaitakuService
+     * gettxtGaikyoTokkiZaitakuService
+     * @return txtGaikyoTokkiZaitakuService
      */
-    @JsonProperty("txtTokkiZaitakuService")
-    public TextBoxMultiLine getTxtTokkiZaitakuService() {
-        return txtTokkiZaitakuService;
+    @JsonProperty("txtGaikyoTokkiZaitakuService")
+    public TextBoxMultiLine getTxtGaikyoTokkiZaitakuService() {
+        return txtGaikyoTokkiZaitakuService;
     }
 
     /*
-     * settxtTokkiZaitakuService
-     * @param txtTokkiZaitakuService txtTokkiZaitakuService
+     * settxtGaikyoTokkiZaitakuService
+     * @param txtGaikyoTokkiZaitakuService txtGaikyoTokkiZaitakuService
      */
-    @JsonProperty("txtTokkiZaitakuService")
-    public void setTxtTokkiZaitakuService(TextBoxMultiLine txtTokkiZaitakuService) {
-        this.txtTokkiZaitakuService = txtTokkiZaitakuService;
+    @JsonProperty("txtGaikyoTokkiZaitakuService")
+    public void setTxtGaikyoTokkiZaitakuService(TextBoxMultiLine txtGaikyoTokkiZaitakuService) {
+        this.txtGaikyoTokkiZaitakuService = txtGaikyoTokkiZaitakuService;
     }
 
     /*
@@ -426,6 +428,24 @@ public class GaikyoTokkiTextPanelDiv extends Panel {
     @JsonProperty("txtKikaiKiki")
     public void setTxtKikaiKiki(TextBoxMultiLine txtKikaiKiki) {
         this.txtKikaiKiki = txtKikaiKiki;
+    }
+
+    /*
+     * getimgGaikyoTokki
+     * @return imgGaikyoTokki
+     */
+    @JsonProperty("imgGaikyoTokki")
+    public DynamicImage getImgGaikyoTokki() {
+        return imgGaikyoTokki;
+    }
+
+    /*
+     * setimgGaikyoTokki
+     * @param imgGaikyoTokki imgGaikyoTokki
+     */
+    @JsonProperty("imgGaikyoTokki")
+    public void setImgGaikyoTokki(DynamicImage imgGaikyoTokki) {
+        this.imgGaikyoTokki = imgGaikyoTokki;
     }
 
     // </editor-fold>
