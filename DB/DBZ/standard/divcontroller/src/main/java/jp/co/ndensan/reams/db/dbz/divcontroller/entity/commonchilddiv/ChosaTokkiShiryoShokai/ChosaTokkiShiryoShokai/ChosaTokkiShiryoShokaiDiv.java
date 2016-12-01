@@ -10,14 +10,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import java.util.List;
 
 /**
- * ChosaTokkiShiryoShokai のクラスファイル 
- * 
+ * ChosaTokkiShiryoShokai のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiryoShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,12 +32,12 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     private genpoTabContainerDiv genpoTabContainer;
     @JsonProperty("maskTabContainer")
     private maskTabContainerDiv maskTabContainer;
-    @JsonProperty("imgGenpoPathList")
-    private RString imgGenpoPathList;
+    @JsonProperty("imgGenponPathList")
+    private RString imgGenponPathList;
     @JsonProperty("imgMaskPathList")
     private RString imgMaskPathList;
-    @JsonProperty("genpoTitleList")
-    private RString genpoTitleList;
+    @JsonProperty("genponTitleList")
+    private RString genponTitleList;
     @JsonProperty("maskTitleList")
     private RString maskTitleList;
 
@@ -100,21 +102,21 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     /*
-     * getimgGenpoPathList
-     * @return imgGenpoPathList
+     * getimgGenponPathList
+     * @return imgGenponPathList
      */
-    @JsonProperty("imgGenpoPathList")
-    public RString getImgGenpoPathList() {
-        return imgGenpoPathList;
+    @JsonProperty("imgGenponPathList")
+    public RString getImgGenponPathList() {
+        return imgGenponPathList;
     }
 
     /*
-     * setimgGenpoPathList
-     * @param imgGenpoPathList imgGenpoPathList
+     * setimgGenponPathList
+     * @param imgGenponPathList imgGenponPathList
      */
-    @JsonProperty("imgGenpoPathList")
-    public void setImgGenpoPathList(RString imgGenpoPathList) {
-        this.imgGenpoPathList = imgGenpoPathList;
+    @JsonProperty("imgGenponPathList")
+    public void setImgGenponPathList(RString imgGenponPathList) {
+        this.imgGenponPathList = imgGenponPathList;
     }
 
     /*
@@ -136,21 +138,21 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     /*
-     * getgenpoTitleList
-     * @return genpoTitleList
+     * getgenponTitleList
+     * @return genponTitleList
      */
-    @JsonProperty("genpoTitleList")
-    public RString getGenpoTitleList() {
-        return genpoTitleList;
+    @JsonProperty("genponTitleList")
+    public RString getGenponTitleList() {
+        return genponTitleList;
     }
 
     /*
-     * setgenpoTitleList
-     * @param genpoTitleList genpoTitleList
+     * setgenponTitleList
+     * @param genponTitleList genponTitleList
      */
-    @JsonProperty("genpoTitleList")
-    public void setGenpoTitleList(RString genpoTitleList) {
-        this.genpoTitleList = genpoTitleList;
+    @JsonProperty("genponTitleList")
+    public void setGenponTitleList(RString genponTitleList) {
+        this.genponTitleList = genponTitleList;
     }
 
     /*
@@ -180,7 +182,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel1(genpoTabPanel1Div genpoTabPanel1) {
+    public void setGenpoTabPanel1(genpoTabPanel1Div genpoTabPanel1) {
         this.getGenpoTabContainer().setGenpoTabPanel1(genpoTabPanel1);
     }
 
@@ -190,7 +192,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo1(StaticImage imgGenpo1) {
+    public void setImgGenpo1(StaticImage imgGenpo1) {
         this.getGenpoTabContainer().getGenpoTabPanel1().setImgGenpo1(imgGenpo1);
     }
 
@@ -200,7 +202,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel2(genpoTabPanel2Div genpoTabPanel2) {
+    public void setGenpoTabPanel2(genpoTabPanel2Div genpoTabPanel2) {
         this.getGenpoTabContainer().setGenpoTabPanel2(genpoTabPanel2);
     }
 
@@ -210,7 +212,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo2(StaticImage imgGenpo2) {
+    public void setImgGenpo2(StaticImage imgGenpo2) {
         this.getGenpoTabContainer().getGenpoTabPanel2().setImgGenpo2(imgGenpo2);
     }
 
@@ -220,7 +222,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel3(genpoTabPanel3Div genpoTabPanel3) {
+    public void setGenpoTabPanel3(genpoTabPanel3Div genpoTabPanel3) {
         this.getGenpoTabContainer().setGenpoTabPanel3(genpoTabPanel3);
     }
 
@@ -230,7 +232,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo3(StaticImage imgGenpo3) {
+    public void setImgGenpo3(StaticImage imgGenpo3) {
         this.getGenpoTabContainer().getGenpoTabPanel3().setImgGenpo3(imgGenpo3);
     }
 
@@ -240,7 +242,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel4(genpoTabPanel4Div genpoTabPanel4) {
+    public void setGenpoTabPanel4(genpoTabPanel4Div genpoTabPanel4) {
         this.getGenpoTabContainer().setGenpoTabPanel4(genpoTabPanel4);
     }
 
@@ -250,7 +252,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo4(StaticImage imgGenpo4) {
+    public void setImgGenpo4(StaticImage imgGenpo4) {
         this.getGenpoTabContainer().getGenpoTabPanel4().setImgGenpo4(imgGenpo4);
     }
 
@@ -260,7 +262,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel5(genpoTabPanel5Div genpoTabPanel5) {
+    public void setGenpoTabPanel5(genpoTabPanel5Div genpoTabPanel5) {
         this.getGenpoTabContainer().setGenpoTabPanel5(genpoTabPanel5);
     }
 
@@ -270,7 +272,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo5(StaticImage imgGenpo5) {
+    public void setImgGenpo5(StaticImage imgGenpo5) {
         this.getGenpoTabContainer().getGenpoTabPanel5().setImgGenpo5(imgGenpo5);
     }
 
@@ -280,7 +282,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel6(genpoTabPanel6Div genpoTabPanel6) {
+    public void setGenpoTabPanel6(genpoTabPanel6Div genpoTabPanel6) {
         this.getGenpoTabContainer().setGenpoTabPanel6(genpoTabPanel6);
     }
 
@@ -290,7 +292,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo6(StaticImage imgGenpo6) {
+    public void setImgGenpo6(StaticImage imgGenpo6) {
         this.getGenpoTabContainer().getGenpoTabPanel6().setImgGenpo6(imgGenpo6);
     }
 
@@ -300,7 +302,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel7(genpoTabPanel7Div genpoTabPanel7) {
+    public void setGenpoTabPanel7(genpoTabPanel7Div genpoTabPanel7) {
         this.getGenpoTabContainer().setGenpoTabPanel7(genpoTabPanel7);
     }
 
@@ -310,7 +312,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo7(StaticImage imgGenpo7) {
+    public void setImgGenpo7(StaticImage imgGenpo7) {
         this.getGenpoTabContainer().getGenpoTabPanel7().setImgGenpo7(imgGenpo7);
     }
 
@@ -320,7 +322,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setGenpoTabPanel8(genpoTabPanel8Div genpoTabPanel8) {
+    public void setGenpoTabPanel8(genpoTabPanel8Div genpoTabPanel8) {
         this.getGenpoTabContainer().setGenpoTabPanel8(genpoTabPanel8);
     }
 
@@ -330,7 +332,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgGenpo8(StaticImage imgGenpo8) {
+    public void setImgGenpo8(StaticImage imgGenpo8) {
         this.getGenpoTabContainer().getGenpoTabPanel8().setImgGenpo8(imgGenpo8);
     }
 
@@ -340,7 +342,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel1(maskTabPanel1Div maskTabPanel1) {
+    public void setMaskTabPanel1(maskTabPanel1Div maskTabPanel1) {
         this.getMaskTabContainer().setMaskTabPanel1(maskTabPanel1);
     }
 
@@ -350,7 +352,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask1(StaticImage imgMask1) {
+    public void setImgMask1(StaticImage imgMask1) {
         this.getMaskTabContainer().getMaskTabPanel1().setImgMask1(imgMask1);
     }
 
@@ -360,7 +362,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel2(maskTabPanel2Div maskTabPanel2) {
+    public void setMaskTabPanel2(maskTabPanel2Div maskTabPanel2) {
         this.getMaskTabContainer().setMaskTabPanel2(maskTabPanel2);
     }
 
@@ -370,7 +372,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask2(StaticImage imgMask2) {
+    public void setImgMask2(StaticImage imgMask2) {
         this.getMaskTabContainer().getMaskTabPanel2().setImgMask2(imgMask2);
     }
 
@@ -380,7 +382,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel3(maskTabPanel3Div maskTabPanel3) {
+    public void setMaskTabPanel3(maskTabPanel3Div maskTabPanel3) {
         this.getMaskTabContainer().setMaskTabPanel3(maskTabPanel3);
     }
 
@@ -390,7 +392,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask3(StaticImage imgMask3) {
+    public void setImgMask3(StaticImage imgMask3) {
         this.getMaskTabContainer().getMaskTabPanel3().setImgMask3(imgMask3);
     }
 
@@ -400,7 +402,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel4(maskTabPanel4Div maskTabPanel4) {
+    public void setMaskTabPanel4(maskTabPanel4Div maskTabPanel4) {
         this.getMaskTabContainer().setMaskTabPanel4(maskTabPanel4);
     }
 
@@ -410,7 +412,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask4(StaticImage imgMask4) {
+    public void setImgMask4(StaticImage imgMask4) {
         this.getMaskTabContainer().getMaskTabPanel4().setImgMask4(imgMask4);
     }
 
@@ -420,7 +422,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel5(maskTabPanel5Div maskTabPanel5) {
+    public void setMaskTabPanel5(maskTabPanel5Div maskTabPanel5) {
         this.getMaskTabContainer().setMaskTabPanel5(maskTabPanel5);
     }
 
@@ -430,7 +432,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask5(StaticImage imgMask5) {
+    public void setImgMask5(StaticImage imgMask5) {
         this.getMaskTabContainer().getMaskTabPanel5().setImgMask5(imgMask5);
     }
 
@@ -440,7 +442,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel6(maskTabPanel6Div maskTabPanel6) {
+    public void setMaskTabPanel6(maskTabPanel6Div maskTabPanel6) {
         this.getMaskTabContainer().setMaskTabPanel6(maskTabPanel6);
     }
 
@@ -450,7 +452,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask6(StaticImage imgMask6) {
+    public void setImgMask6(StaticImage imgMask6) {
         this.getMaskTabContainer().getMaskTabPanel6().setImgMask6(imgMask6);
     }
 
@@ -460,7 +462,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel7(maskTabPanel7Div maskTabPanel7) {
+    public void setMaskTabPanel7(maskTabPanel7Div maskTabPanel7) {
         this.getMaskTabContainer().setMaskTabPanel7(maskTabPanel7);
     }
 
@@ -470,7 +472,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask7(StaticImage imgMask7) {
+    public void setImgMask7(StaticImage imgMask7) {
         this.getMaskTabContainer().getMaskTabPanel7().setImgMask7(imgMask7);
     }
 
@@ -480,7 +482,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setMaskTabPanel8(maskTabPanel8Div maskTabPanel8) {
+    public void setMaskTabPanel8(maskTabPanel8Div maskTabPanel8) {
         this.getMaskTabContainer().setMaskTabPanel8(maskTabPanel8);
     }
 
@@ -490,10 +492,160 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void  setImgMask8(StaticImage imgMask8) {
+    public void setImgMask8(StaticImage imgMask8) {
         this.getMaskTabContainer().getMaskTabPanel8().setImgMask8(imgMask8);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 画面初期化
+     *
+     * @param imgGneponPathList
+     * @param imgMaskPathList
+     * @param genponTitleList
+     * @param maskTitleList
+     */
+    @Override
+    public void initialize(List<RString> imgGneponPathList, List<RString> imgMaskPathList,
+            List<RString> genponTitleList, List<RString> maskTitleList) {
+        // 引数保存例
+        // パスのリスト:imgPath1,imgPath12,RString.Empty,imgPath14...(イメージがない場合、RString.Emptyを設定する)
+        // タイトルリストのItem数はパスリストのItem数と一致してください。
+
+        if (!imgGneponPathList.isEmpty()) {
+            if (imgGneponPathList.size() >= 1) {
+                getGenpoTabContainer().getGenpoTabPanel1().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel1().setTitle(genponTitleList.get(0));
+                getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setSrc(imgGneponPathList.get(0));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(0))) {
+                    getGenpoTabContainer().getGenpoTabPanel1().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 2) {
+                getGenpoTabContainer().getGenpoTabPanel2().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel2().setTitle(genponTitleList.get(1));
+                getGenpoTabContainer().getGenpoTabPanel2().getImgGenpo2().setSrc(imgGneponPathList.get(1));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(1))) {
+                    getGenpoTabContainer().getGenpoTabPanel2().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 3) {
+                getGenpoTabContainer().getGenpoTabPanel3().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel3().setTitle(genponTitleList.get(2));
+                getGenpoTabContainer().getGenpoTabPanel3().getImgGenpo3().setSrc(imgGneponPathList.get(2));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(2))) {
+                    getGenpoTabContainer().getGenpoTabPanel3().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 4) {
+                getGenpoTabContainer().getGenpoTabPanel4().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel4().setTitle(genponTitleList.get(3));
+                getGenpoTabContainer().getGenpoTabPanel4().getImgGenpo4().setSrc(imgGneponPathList.get(3));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(3))) {
+                    getGenpoTabContainer().getGenpoTabPanel4().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 5) {
+                getGenpoTabContainer().getGenpoTabPanel5().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel5().setTitle(genponTitleList.get(4));
+                getGenpoTabContainer().getGenpoTabPanel5().getImgGenpo5().setSrc(imgGneponPathList.get(4));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(4))) {
+                    getGenpoTabContainer().getGenpoTabPanel5().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 6) {
+                getGenpoTabContainer().getGenpoTabPanel6().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel6().setTitle(genponTitleList.get(5));
+                getGenpoTabContainer().getGenpoTabPanel6().getImgGenpo6().setSrc(imgGneponPathList.get(5));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(5))) {
+                    getGenpoTabContainer().getGenpoTabPanel6().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 7) {
+                getGenpoTabContainer().getGenpoTabPanel7().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel7().setTitle(genponTitleList.get(6));
+                getGenpoTabContainer().getGenpoTabPanel7().getImgGenpo7().setSrc(imgGneponPathList.get(6));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(6))) {
+                    getGenpoTabContainer().getGenpoTabPanel7().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 8) {
+                getGenpoTabContainer().getGenpoTabPanel8().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel8().setTitle(genponTitleList.get(7));
+                getGenpoTabContainer().getGenpoTabPanel8().getImgGenpo8().setSrc(imgGneponPathList.get(7));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(7))) {
+                    getGenpoTabContainer().getGenpoTabPanel8().setDisabled(true);
+                }
+            }
+        }
+
+        if (!imgMaskPathList.isEmpty()) {
+            if (imgMaskPathList.size() >= 1) {
+                getMaskTabContainer().getMaskTabPanel1().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel1().setTitle(maskTitleList.get(0));
+                if (!RString.isNullOrEmpty(imgMaskPathList.get(0))) {
+                    getMaskTabContainer().getMaskTabPanel1().getImgMask1().setSrc(imgMaskPathList.get(0));
+                } else {
+                    getMaskTabContainer().getMaskTabPanel1().setDisabled(true);
+                }
+            }
+            if (imgMaskPathList.size() >= 2) {
+                getMaskTabContainer().getMaskTabPanel2().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel2().setTitle(maskTitleList.get(1));
+                getMaskTabContainer().getMaskTabPanel2().getImgMask2().setSrc(imgMaskPathList.get(1));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(1))) {
+                    getMaskTabContainer().getMaskTabPanel2().setDisabled(true);
+                }
+            }
+            if (imgMaskPathList.size() >= 3) {
+                getMaskTabContainer().getMaskTabPanel3().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel3().setTitle(maskTitleList.get(2));
+                getMaskTabContainer().getMaskTabPanel3().getImgMask3().setSrc(imgMaskPathList.get(2));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(2))) {
+                    getMaskTabContainer().getMaskTabPanel3().setDisabled(true);
+                }
+            }
+            if (imgMaskPathList.size() >= 4) {
+                getMaskTabContainer().getMaskTabPanel4().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel4().setTitle(maskTitleList.get(3));
+                getMaskTabContainer().getMaskTabPanel4().getImgMask4().setSrc(imgMaskPathList.get(3));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(3))) {
+                    getMaskTabContainer().getMaskTabPanel4().setDisabled(true);
+                }
+            }
+            if (imgMaskPathList.size() >= 5) {
+                getMaskTabContainer().getMaskTabPanel5().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel5().setTitle(maskTitleList.get(4));
+                getMaskTabContainer().getMaskTabPanel5().getImgMask5().setSrc(imgMaskPathList.get(4));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(4))) {
+                    getMaskTabContainer().getMaskTabPanel5().setDisabled(true);
+                }
+            }
+            if (imgMaskPathList.size() >= 6) {
+                getMaskTabContainer().getMaskTabPanel6().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel6().setTitle(maskTitleList.get(5));
+                getMaskTabContainer().getMaskTabPanel6().getImgMask6().setSrc(imgMaskPathList.get(5));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(5))) {
+                    getMaskTabContainer().getMaskTabPanel6().setDisabled(true);
+                }
+            }
+            if (imgMaskPathList.size() >= 7) {
+                getMaskTabContainer().getMaskTabPanel7().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel7().setTitle(maskTitleList.get(6));
+                getMaskTabContainer().getMaskTabPanel7().getImgMask7().setSrc(imgMaskPathList.get(6));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(6))) {
+                    getMaskTabContainer().getMaskTabPanel7().setDisabled(true);
+                }
+            }
+            if (imgMaskPathList.size() >= 8) {
+                getMaskTabContainer().getMaskTabPanel8().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel8().setTitle(maskTitleList.get(7));
+                getMaskTabContainer().getMaskTabPanel8().getImgMask8().setSrc(imgMaskPathList.get(7));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(7))) {
+                    getMaskTabContainer().getMaskTabPanel8().setDisabled(true);
+                }
+            }
+        }
+    }
 }
