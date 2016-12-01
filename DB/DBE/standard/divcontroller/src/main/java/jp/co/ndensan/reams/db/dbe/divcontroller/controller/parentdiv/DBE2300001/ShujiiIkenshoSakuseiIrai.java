@@ -299,6 +299,7 @@ public class ShujiiIkenshoSakuseiIrai {
             printData(div, reportManager);
             createHandler(div).init(manager.get申請者情報(param));
             response.data = reportManager.publish();
+            reportManager.close();
         }
         return response;
     }
@@ -1040,9 +1041,8 @@ public class ShujiiIkenshoSakuseiIrai {
                 if (!ResponseHolder.isReRequest()) {
                     return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("申請日より過去の日付けが設定されていますが")).respond();
                 }
-                if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).
-                        equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-                } else {
+                if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) 
+                        && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
                     div.getTxtjyushinymd().clearValue();
                 }
             }
