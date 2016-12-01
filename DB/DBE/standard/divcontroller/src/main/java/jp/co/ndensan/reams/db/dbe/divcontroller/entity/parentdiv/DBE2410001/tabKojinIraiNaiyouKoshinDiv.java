@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tabKojinIraiNaiyouKoshinDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -755,12 +755,12 @@ public class tabKojinIraiNaiyouKoshinDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtYubinGango() {
+    public TextBoxYubinNo getTxtYubinGango() {
         return this.getTblIkensho().getKonkaiShujiiIraiJoho().getTxtYubinGango();
     }
 
     @JsonIgnore
-    public void  setTxtYubinGango(TextBoxNum txtYubinGango) {
+    public void  setTxtYubinGango(TextBoxYubinNo txtYubinGango) {
         this.getTblIkensho().getKonkaiShujiiIraiJoho().setTxtYubinGango(txtYubinGango);
     }
 
@@ -925,12 +925,12 @@ public class tabKojinIraiNaiyouKoshinDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtYubinGangoZen() {
+    public TextBoxYubinNo getTxtYubinGangoZen() {
         return this.getTblIkensho().getZenkaiShujiiIraiJoho().getTxtYubinGangoZen();
     }
 
     @JsonIgnore
-    public void  setTxtYubinGangoZen(TextBoxNum txtYubinGangoZen) {
+    public void  setTxtYubinGangoZen(TextBoxYubinNo txtYubinGangoZen) {
         this.getTblIkensho().getZenkaiShujiiIraiJoho().setTxtYubinGangoZen(txtYubinGangoZen);
     }
 

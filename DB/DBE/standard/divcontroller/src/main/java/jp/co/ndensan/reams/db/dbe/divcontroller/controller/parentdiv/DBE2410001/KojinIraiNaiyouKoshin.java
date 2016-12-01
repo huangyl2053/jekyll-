@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2410001;
 
 import jp.co.ndensan.reams.db.dbe.business.core.kojinirainaiyoukoshin.KojinIraiNaiyouBusiness;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.DBE2410001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.DBE2410001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.KojinIraiNaiyouKoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410001.KojinIraiNaiyouKoshinHandler;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.kojinirainaiyoukoshin.KojinIraiNa
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -36,7 +38,13 @@ public class KojinIraiNaiyouKoshin {
         KojinIraiNaiyouBusiness 前回主治医情報 = KojinIraiNaiyouKoshinFinder.createInstance().getZennkaiSyuji(申請書管理番号);
         getHandler(div).onLoad(申請書管理番号, 今回調査情報, 今回主治医情報, 前回調査情報, 前回主治医情報);
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
-        return ResponseData.of(div).respond();
+        
+        RString モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+        if(モード != null && モード.equals(new RString("1件"))){
+            return ResponseData.of(div).setState(DBE2410001StateName.初期表示_一件);
+        }else{
+            return ResponseData.of(div).respond();
+        }
     }
 
     private KojinIraiNaiyouKoshinHandler getHandler(KojinIraiNaiyouKoshinDiv div) {
