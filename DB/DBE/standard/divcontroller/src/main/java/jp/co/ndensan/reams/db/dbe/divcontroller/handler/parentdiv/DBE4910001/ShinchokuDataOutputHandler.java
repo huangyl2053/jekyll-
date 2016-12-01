@@ -16,6 +16,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -76,8 +80,8 @@ public class ShinchokuDataOutputHandler {
      */
     public void btnJokenClear() {
         div.getRadKubun().setSelectedKey(結果情報);
-        div.getTxtChuishutsuRange().clearFromValue();
-        div.getTxtChuishutsuRange().clearToValue();
+        div.getTxtChuishutsuRange().setFromValue(new RDate(RDate.getNowDate().toString()));
+        div.getTxtChuishutsuRange().setToValue(new RDate(RDate.getNowDate().toString()));
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtHihokenshaCode().clearValue();
         div.getTxtMaxKensu().clearValue();
@@ -102,10 +106,12 @@ public class ShinchokuDataOutputHandler {
                 row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
             }
             row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード()).get名称());
-            row.setShiseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード()).get名称());
+            if (!RString.isNullOrEmpty(business.get認定申請区分法令コード())) {
+                row.setShiseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード()).get名称());
+            }
             if (!RString.isNullOrEmpty(business.get厚労省IF識別コード())
                     && !RString.isNullOrEmpty(business.get二次判定要介護状態区分コード())) {
-                row.setHanteiKekka(get一次判定結果の名称を取得する(new Code(business.get厚労省IF識別コード().toString()),
+                row.setHanteiKekka(get要介護状態区分名称取得(new Code(business.get厚労省IF識別コード().toString()),
                         new Code(business.get二次判定要介護状態区分コード().toString())));
             }
             if (!RString.isNullOrEmpty(business.get認定調査依頼年月日())) {
@@ -215,6 +221,20 @@ public class ShinchokuDataOutputHandler {
         } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
                 || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
             return IchijiHanteiKekkaCode09.toValue(一次判定結果コード.getKey()).get名称();
+        }
+        return RString.EMPTY;
+    }
+    
+    private RString get要介護状態区分名称取得(Code 厚労省IF識別コード, Code 要介護状態区分コード) {
+        if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
+            return YokaigoJotaiKubun99.toValue(要介護状態区分コード.getKey()).get名称();
+        } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
+            return YokaigoJotaiKubun02.toValue(要介護状態区分コード.getKey()).get名称();
+        } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
+            return YokaigoJotaiKubun06.toValue(要介護状態区分コード.getKey()).get名称();
+        } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
+                || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
+            return YokaigoJotaiKubun09.toValue(要介護状態区分コード.getKey()).get名称();
         }
         return RString.EMPTY;
     }
