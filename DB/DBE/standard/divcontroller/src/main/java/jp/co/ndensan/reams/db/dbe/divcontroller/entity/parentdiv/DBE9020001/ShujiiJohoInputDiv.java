@@ -29,6 +29,8 @@ public class ShujiiJohoInputDiv extends Panel {
     private ButtonDialog btnToSearchShichoson;
     @JsonProperty("txtShichosonmei")
     private TextBox txtShichosonmei;
+    @JsonProperty("txtShichosonShokibetsuID")
+    private TextBox txtShichosonShokibetsuID;
     @JsonProperty("txtShujiiIryoKikanCode")
     private TextBoxCode txtShujiiIryoKikanCode;
     @JsonProperty("btnToSearchIryoKikan")
@@ -124,6 +126,24 @@ public class ShujiiJohoInputDiv extends Panel {
     @JsonProperty("txtShichosonmei")
     public void setTxtShichosonmei(TextBox txtShichosonmei) {
         this.txtShichosonmei = txtShichosonmei;
+    }
+
+    /*
+     * gettxtShichosonShokibetsuID
+     * @return txtShichosonShokibetsuID
+     */
+    @JsonProperty("txtShichosonShokibetsuID")
+    public TextBox getTxtShichosonShokibetsuID() {
+        return txtShichosonShokibetsuID;
+    }
+
+    /*
+     * settxtShichosonShokibetsuID
+     * @param txtShichosonShokibetsuID txtShichosonShokibetsuID
+     */
+    @JsonProperty("txtShichosonShokibetsuID")
+    public void setTxtShichosonShokibetsuID(TextBox txtShichosonShokibetsuID) {
+        this.txtShichosonShokibetsuID = txtShichosonShokibetsuID;
     }
 
     /*

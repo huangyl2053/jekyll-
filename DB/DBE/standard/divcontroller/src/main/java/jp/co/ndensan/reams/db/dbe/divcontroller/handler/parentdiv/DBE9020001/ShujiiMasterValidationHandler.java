@@ -136,8 +136,8 @@ public class ShujiiMasterValidationHandler {
         }
         return validPairs;
     }
-    
-     /**
+
+    /**
      * 検索ボタンを押下するとき、検索結果がゼロ件の場合チェックを行う。
      *
      * @return バリデーション結果

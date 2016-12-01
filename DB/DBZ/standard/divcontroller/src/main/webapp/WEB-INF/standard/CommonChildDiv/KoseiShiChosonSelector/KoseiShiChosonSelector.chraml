@@ -5,7 +5,8 @@
      
        
    
-           <script class="RamlConvert" type="text/javascript">
+           
+     <script class="RamlConvert" type="text/javascript">
 var DBZ= DBZ? DBZ: {};
 DBZ['KOSEISHICHOSONSELECTOR'] = {};
 DBZ['KOSEISHICHOSONSELECTOR'].KoseiShiChosonSelectorRequest = function(parentFieldName){ 
