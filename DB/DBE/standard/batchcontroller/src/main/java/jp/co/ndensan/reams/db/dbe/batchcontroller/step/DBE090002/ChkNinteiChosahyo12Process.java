@@ -105,12 +105,20 @@ public class ChkNinteiChosahyo12Process extends BatchProcessBase<YokaigoninteiEn
     private static final RString 判定結果コード99 = new RString("99");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
-    private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
-    private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
-    private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書チェックフラグ】");
-    private static final RString その他資料チェックフラグ = new RString("【その他資料チェックフラグ】");
-    private static final RString 一次判定結果チェックフラグ = new RString("【一次判定結果チェックフラグ】");
+    private static final RString 認定調査票チェックフラグ = new RString("【認定調査票】");
+    private static final RString 特記事項チェックフラグ = new RString("【特記事項】");
+    private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書】");
+    private static final RString その他資料チェックフラグ = new RString("【その他資料】");
+    private static final RString 一次判定結果チェックフラグ = new RString("【一次判定結果】");
+    private static final RString 帳票発行有り = new RString("1");
+    private static final RString 帳票発行無し = new RString("0");
+    private static final RString 出力する = new RString("出力する");
+    private static final RString 出力しない = new RString("出力しない");
     private static final RString 総合事業開始区分 = new RString("【総合事業開始区分】");
+    private static final RString 総合事業開始区分_未実施 = new RString("1");
+    private static final RString 総合事業開始区分_実施済 = new RString("2");
+    private static final RString 総合事業未実施 = new RString("総合事業未実施");
+    private static final RString 総合事業実施済 = new RString("総合事業実施済");
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
     private static final RString イメージID01 = new RString("C0001.png");
@@ -742,27 +750,27 @@ public class ChkNinteiChosahyo12Process extends BatchProcessBase<YokaigoninteiEn
         List<RString> 出力条件 = new ArrayList();
         RStringBuilder builder = new RStringBuilder();
         builder.append(認定調査票チェックフラグ);
-        builder.append(processPrm.getChkNinteiChosahyo());
+        builder.append(get帳票発行有無(processPrm.getChkNinteiChosahyo()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(特記事項チェックフラグ);
-        builder.append(processPrm.getChkTokkiJiko());
+        builder.append(get帳票発行有無(processPrm.getChkTokkiJiko()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(主治医意見書チェックフラグ);
-        builder.append(processPrm.getChkShujiiIkensho());
+        builder.append(get帳票発行有無(processPrm.getChkShujiiIkensho()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(その他資料チェックフラグ);
-        builder.append(processPrm.getChkSonotaShiryo());
+        builder.append(get帳票発行有無(processPrm.getChkSonotaShiryo()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(一次判定結果チェックフラグ);
-        builder.append(processPrm.getChkIchijiHanteiKekka());
+        builder.append(get帳票発行有無(processPrm.getChkIchijiHanteiKekka()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(総合事業開始区分);
-        builder.append(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        builder.append(get総合事業開始区分名称(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
         出力条件.add(builder.toRString());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ
@@ -777,5 +785,23 @@ public class ChkNinteiChosahyo12Process extends BatchProcessBase<YokaigoninteiEn
                         CSVファイル名,
                         出力条件);
         OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
+    }
+
+    private RString get帳票発行有無(RString 帳票発行フラグ) {
+        if (帳票発行フラグ.equals(帳票発行有り)) {
+            return 出力する;
+        } else if (帳票発行フラグ.equals(帳票発行無し)) {
+            return 出力しない;
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get総合事業開始区分名称(RString 総合事業開始区分) {
+        if (総合事業開始区分.equals(総合事業開始区分_未実施)) {
+            return 総合事業未実施;
+        } else if (総合事業開始区分.equals(総合事業開始区分_実施済)) {
+            return 総合事業実施済;
+        }
+        return RString.EMPTY;
     }
 }

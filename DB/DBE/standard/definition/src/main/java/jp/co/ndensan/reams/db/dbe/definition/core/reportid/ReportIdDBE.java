@@ -394,19 +394,19 @@ public enum ReportIdDBE {
     /**
      * 特記事項（すべて連結）の帳票ＩＤです。
      */
-    DBE517131(new ReportId("DBE517131_TokkiText1A4"), new RString("事務局用特記事項")),
+    DBE517131(new ReportId("DBE517131_TokkiText1A4All"), new RString("事務局用特記事項")),
     /**
      * 特記事項（１つずつ）の帳票ＩＤです。
      */
-    DBE517132(new ReportId("DBE517132_TokkiText1A4"), new RString("事務局用特記事項")),
+    DBE517132(new ReportId("DBE517132_TokkiText1A4Separate"), new RString("事務局用特記事項")),
     /**
      * 特記事項（全イメージ）の帳票ＩＤです。
      */
-    DBE517133(new ReportId("DBE517133_TokkiImage1A4"), new RString("事務局用特記事項")),
+    DBE517133(new ReportId("DBE517133_TokkiImage1A4All"), new RString("事務局用特記事項")),
     /**
      * 特記事項（短冊）の帳票ＩＤです。
      */
-    DBE517134(new ReportId("DBE517134_TokkiImage1A4"), new RString("事務局用特記事項")),
+    DBE517134(new ReportId("DBE517134_TokkiImage1A4Separate"), new RString("事務局用特記事項")),
     /**
      * 特記事項の帳票ＩＤです。
      */
