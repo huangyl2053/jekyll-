@@ -450,7 +450,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         output.set連番(DecimalFormatter.toRString(連番, 定値INT_0));
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
         if (kojin != null) {
-            set宛名1(kojin, output);
+            set宛名1(kojin, output, entity);
             set宛名2(kojin, output);
         }
         set最新被保台帳(entity, output);
@@ -465,7 +465,8 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     }
 
     private void set宛名1(IKojin kojin,
-            HanyoListKogakuGassanShikyugakuKetteiCSVEntity output) {
+            HanyoListKogakuGassanShikyugakuKetteiCSVEntity output,
+            HanyoListKogakuGassanShikyugakuKetteiEntity entity) {
         output.set識別コード(getColumnValue(kojin.get識別コード()));
         if (kojin.get住民状態() != null) {
             output.set住民種別(kojin.get住民状態().住民状態略称());
@@ -499,7 +500,8 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
             }
             output.set方書(getColumnValue(kojin.get住所().get方書()));
         }
-        output.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 地方公共団体));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get最新被保台帳().getShichosonCode());
+        output.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, kojin, 導入団体情報));
         if (kojin.get行政区画() != null) {
             if (kojin.get行政区画().getGyoseiku() != null) {
                 output.set行政区コード(getColumnValue(kojin.get行政区画().getGyoseiku().getコード()));
@@ -607,8 +609,9 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         }
         output.set受給申請事由(get受給申請事由(受給者台帳));
         output.set受給申請日(get日付項目(受給者台帳.getJukyuShinseiYMD()));
-        if (受給者台帳.getYokaigoJotaiKubunCode() != null && !受給者台帳.getYokaigoJotaiKubunCode().isEmpty()) {
-            output.set受給要介護度(YokaigoJotaiKubun.toValue(受給者台帳.getYokaigoJotaiKubunCode().value()).get名称());
+        Code yokaigoJotaiKubunCode = 受給者台帳.getYokaigoJotaiKubunCode();
+        if (yokaigoJotaiKubunCode != null && !yokaigoJotaiKubunCode.isEmpty()) {
+            output.set受給要介護度(YokaigoJotaiKubun.toValue(yokaigoJotaiKubunCode.value()).get名称());
         } else {
             output.set受給要介護度(RString.EMPTY);
         }
@@ -618,7 +621,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         if (受給者台帳.getKyuSochishaFlag()) {
             output.set受給旧措置(文字_旧措置者);
         }
-        RString みなし要介護区分コード = getColumnValue(受給者台帳.getShiteiServiceShurui01());
+        RString みなし要介護区分コード = getColumnValue(受給者台帳.getMinashiCode());
         if (!RString.isNullOrEmpty(みなし要介護区分コード)) {
             output.set受給みなし更新認定(get受給みなし更新認定(みなし要介護区分コード));
         }

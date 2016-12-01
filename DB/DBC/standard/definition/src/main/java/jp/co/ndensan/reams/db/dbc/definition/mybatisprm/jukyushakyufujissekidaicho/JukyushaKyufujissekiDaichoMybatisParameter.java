@@ -83,6 +83,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
     private final boolean 対象年月flag;
     private final boolean 給付実績区分flag;
     private final boolean 給付実績区分flag1;
+    private final boolean 被保険者番号flag;
     private final boolean すべて選択flag;
     private final boolean 要介護1flag;
     private final boolean 要介護2flag;
@@ -93,6 +94,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
     private final boolean 要支援2flag;
     private final boolean 経過的要介護flag;
     private final boolean 事業対象者flag;
+    private final boolean 自立flag;
     private final boolean 訪問通所他flag;
     private final boolean 短期入所生活介護flag;
     private final boolean 短期入所療養介護_老健施設flag;
@@ -136,6 +138,8 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
     private final boolean 給付率区分flag2;
     private final boolean 給付率区分flag3;
     private final boolean 給付率flag;
+    private static final RString 被保険者番号_MIN = new RString("0000000000");
+    private static final RString 被保険者番号_MAX = new RString("9999999999");
 
     /**
      * コンストラクタ
@@ -215,6 +219,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
      * @param 要支援2flag 要支援2flag
      * @param 経過的要介護flag 経過的要介護flag
      * @param 事業対象者flag 事業対象者flag
+     * @param 自立flag 自立flag
      * @param 訪問通所他flag 訪問通所他flag
      * @param 短期入所生活介護flag 短期入所生活介護flag
      * @param 短期入所療養介護_老健施設flag 短期入所療養介護_老健施設flag
@@ -258,6 +263,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
      * @param 給付率区分flag2 給付率区分flag2
      * @param 給付率区分flag3 給付率区分flag3
      * @param 給付率flag 給付率flag
+     * @param 被保険者番号flag 被保険者番号flag
      */
     protected JukyushaKyufujissekiDaichoMybatisParameter(RString 対象年月,
             RString 年月範囲_開始,
@@ -334,6 +340,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             boolean 要支援2flag,
             boolean 経過的要介護flag,
             boolean 事業対象者flag,
+            boolean 自立flag,
             boolean 訪問通所他flag,
             boolean 短期入所生活介護flag,
             boolean 短期入所療養介護_老健施設flag,
@@ -376,7 +383,8 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
             boolean 給付率区分flag1,
             boolean 給付率区分flag2,
             boolean 給付率区分flag3,
-            boolean 給付率flag) {
+            boolean 給付率flag,
+            boolean 被保険者番号flag) {
         this.対象年月 = 対象年月;
         this.年月範囲_開始 = 年月範囲_開始;
         this.年月範囲_終了 = 年月範囲_終了;
@@ -452,6 +460,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
         this.要支援2flag = 要支援2flag;
         this.経過的要介護flag = 経過的要介護flag;
         this.事業対象者flag = 事業対象者flag;
+        this.自立flag = 自立flag;
         this.訪問通所他flag = 訪問通所他flag;
         this.短期入所生活介護flag = 短期入所生活介護flag;
         this.短期入所療養介護_老健施設flag = 短期入所療養介護_老健施設flag;
@@ -495,6 +504,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
         this.給付率区分flag2 = 給付率区分flag2;
         this.給付率区分flag3 = 給付率区分flag3;
         this.給付率flag = 給付率flag;
+        this.被保険者番号flag = 被保険者番号flag;
     }
 
     /**
@@ -565,89 +575,29 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
      * @return JukyushaKyufujissekiDaichoMybatisParameter
      */
     public static JukyushaKyufujissekiDaichoMybatisParameter createParam(
-            RString 対象年月,
-            RString 年月範囲_開始,
-            RString 年月範囲_終了,
-            RString 被保険者番号_開始,
-            RString 被保険者番号_終了,
-            RString 給付実績区分,
-            RString すべて選択,
-            RString 要介護1,
-            RString 要介護2,
-            RString 要介護3,
-            RString 要介護4,
-            RString 要介護5,
-            RString 要支援1,
-            RString 要支援2,
-            RString 事業対象者,
-            RString 経過的要介護,
-            RString 自立,
-            RString 訪問通所他,
-            RString 短期入所生活介護,
-            RString 短期入所療養介護_老健施設,
-            RString 短期入所療養介護_医療施設,
-            RString 認知症対応型共同生活,
-            RString 特定施設入居者生活介護,
-            RString 認知症対応型共同生活_短期,
-            RString 特定施設入居生活介護_短期,
-            RString 居宅介護支援,
-            RString 介護老人福祉施設サービス,
-            RString 介護老人保健施設サービス,
-            RString 介護療養型医療施設サービス,
-            RString 特定福祉用具販売費,
-            RString 住宅改修費,
-            RString 高額介護サービス費,
-            RString 予防訪問通所他,
-            RString 予防短期入所生活介護,
-            RString 予防短期入所療養介護_老健施設,
-            RString 予防短期入所療養介護_医療施設,
-            RString 予防認知症対応型共同生活,
-            RString 予防特定施設入居者生活介護,
-            RString 予防認知症対応型共同生活_短期,
-            RString 予防支援,
-            RString 予防特定福祉用具販売費,
-            RString 予防住宅改修費,
-            RString 介護予防_生活支援_経過,
-            RString 経過措置ケアマネジメント,
-            RString 介護予防_生活支援総合事業,
-            RString 総合事業ケアマネジメント,
-            RString 旧措置特定有無,
-            RString 老人保健市町村番号有無,
-            RString 老人保健市町村番号有_開始,
-            RString 老人保健市町村番号有_終了,
-            RString 老人保健受給者番号有無,
-            RString 老人保健受給者番号有_開始,
-            RString 老人保健受給者番号有_終了,
-            RString 公費負担者番号,
-            RString 公費受給者番号,
-            RString 事業者番号_開始,
-            RString 事業者番号_終了,
-            RString 計画作成事業者番号,
-            RString 給付率区分,
-            RString 給付率,
-            long 出力順ID,
-            RString psmShikibetsuTaisho) {
-        boolean 旧措置特定有無flag = false;
-        boolean 旧措置特定有無flag1 = false;
-        if (new RString("2").equals(旧措置特定有無)) {
-            旧措置特定有無flag = true;
-        } else if (new RString("3").equals(旧措置特定有無)) {
-            旧措置特定有無flag1 = true;
-        }
-        boolean 老人保健市町村番号有無flag = false;
-        boolean 老人保健市町村番号有無flag1 = false;
-        if (new RString("2").equals(老人保健市町村番号有無)) {
-            老人保健市町村番号有無flag = true;
-        } else if (new RString("3").equals(老人保健市町村番号有無)) {
-            老人保健市町村番号有無flag1 = true;
-        }
-        boolean 老人保健受給者番号有無flag = false;
-        boolean 老人保健受給者番号有無flag1 = false;
-        if (new RString("2").equals(老人保健受給者番号有無)) {
-            老人保健受給者番号有無flag = true;
-        } else if (new RString("3").equals(老人保健受給者番号有無)) {
-            老人保健受給者番号有無flag1 = true;
-        }
+            RString 対象年月, RString 年月範囲_開始, RString 年月範囲_終了, RString 被保険者番号_開始, RString 被保険者番号_終了,
+            RString 給付実績区分, RString すべて選択, RString 要介護1, RString 要介護2, RString 要介護3, RString 要介護4,
+            RString 要介護5, RString 要支援1, RString 要支援2, RString 事業対象者, RString 経過的要介護, RString 自立,
+            RString 訪問通所他, RString 短期入所生活介護, RString 短期入所療養介護_老健施設, RString 短期入所療養介護_医療施設,
+            RString 認知症対応型共同生活, RString 特定施設入居者生活介護, RString 認知症対応型共同生活_短期,
+            RString 特定施設入居生活介護_短期, RString 居宅介護支援, RString 介護老人福祉施設サービス,
+            RString 介護老人保健施設サービス, RString 介護療養型医療施設サービス, RString 特定福祉用具販売費,
+            RString 住宅改修費, RString 高額介護サービス費, RString 予防訪問通所他, RString 予防短期入所生活介護,
+            RString 予防短期入所療養介護_老健施設, RString 予防短期入所療養介護_医療施設, RString 予防認知症対応型共同生活,
+            RString 予防特定施設入居者生活介護, RString 予防認知症対応型共同生活_短期, RString 予防支援,
+            RString 予防特定福祉用具販売費, RString 予防住宅改修費, RString 介護予防_生活支援_経過,
+            RString 経過措置ケアマネジメント, RString 介護予防_生活支援総合事業, RString 総合事業ケアマネジメント,
+            RString 旧措置特定有無, RString 老人保健市町村番号有無, RString 老人保健市町村番号有_開始,
+            RString 老人保健市町村番号有_終了, RString 老人保健受給者番号有無, RString 老人保健受給者番号有_開始,
+            RString 老人保健受給者番号有_終了, RString 公費負担者番号, RString 公費受給者番号,
+            RString 事業者番号_開始, RString 事業者番号_終了, RString 計画作成事業者番号,
+            RString 給付率区分, RString 給付率, long 出力順ID, RString psmShikibetsuTaisho) {
+        boolean 旧措置特定有無flag = new RString("2").equals(旧措置特定有無);
+        boolean 旧措置特定有無flag1 = new RString("3").equals(旧措置特定有無);
+        boolean 老人保健市町村番号有無flag = new RString("2").equals(老人保健市町村番号有無);
+        boolean 老人保健市町村番号有無flag1 = new RString("3").equals(老人保健市町村番号有無);
+        boolean 老人保健受給者番号有無flag = new RString("2").equals(老人保健受給者番号有無);
+        boolean 老人保健受給者番号有無flag1 = new RString("3").equals(老人保健受給者番号有無);
         boolean すべてflag = true;
         if (new RString("1").equals(要介護1)
                 || new RString("1").equals(要介護2)
@@ -657,7 +607,8 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 || new RString("1").equals(要支援1)
                 || new RString("1").equals(要支援2)
                 || new RString("1").equals(経過的要介護)
-                || new RString("1").equals(事業対象者)) {
+                || new RString("1").equals(事業対象者)
+                || new RString("1").equals(自立)) {
             すべてflag = false;
         }
         return new JukyushaKyufujissekiDaichoMybatisParameter(対象年月, 年月範囲_開始, 年月範囲_終了, 被保険者番号_開始, 被保険者番号_終了,
@@ -731,6 +682,7 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 new RString("1").equals(要支援2),
                 new RString("1").equals(経過的要介護),
                 new RString("1").equals(事業対象者),
+                new RString("1").equals(自立),
                 new RString("1").equals(訪問通所他),
                 new RString("1").equals(短期入所生活介護),
                 new RString("1").equals(短期入所療養介護_老健施設),
@@ -773,6 +725,11 @@ public class JukyushaKyufujissekiDaichoMybatisParameter implements IMyBatisParam
                 new RString("1").equals(給付率区分),
                 new RString("2").equals(給付率区分),
                 new RString("3").equals(給付率区分),
-                !RString.isNullOrEmpty(給付率));
+                !RString.isNullOrEmpty(給付率),
+                !RString.isNullOrEmpty(被保険者番号_開始)
+                && !RString.isNullOrEmpty(被保険者番号_終了)
+                && !被保険者番号_開始.equals(被保険者番号_MIN)
+                && !被保険者番号_終了.equals(被保険者番号_MAX)
+        );
     }
 }

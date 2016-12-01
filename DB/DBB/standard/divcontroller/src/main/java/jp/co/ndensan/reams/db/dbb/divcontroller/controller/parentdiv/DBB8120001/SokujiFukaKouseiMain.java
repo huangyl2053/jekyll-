@@ -1189,6 +1189,11 @@ public class SokujiFukaKouseiMain {
                 更正後.get過年度3().createBuilderForEdit().set普徴歳出還付額(普徴歳出還付額);
             }
         }
+        return set画面入力項目を反映_2(更正後, 賦課年度, 調定年度, 最新賦課の情報, is差異がある, is過年度を反映, 特徴歳出還付額, 普徴歳出還付額);
+    }
+
+    private Boolean set画面入力項目を反映_2(NendobunFukaList 更正後, FlexibleYear 賦課年度, FlexibleYear 調定年度,
+            FukaJoho 最新賦課の情報, Boolean is差異がある, boolean is過年度を反映, Decimal 特徴歳出還付額, Decimal 普徴歳出還付額) {
         if (!is過年度を反映 && 更正後.get過年度2() != null) {
             if (調定年度.equals(賦課年度.plusYear(NUM_2))) {
                 is過年度を反映 = Boolean.TRUE;

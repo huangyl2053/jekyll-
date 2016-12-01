@@ -213,7 +213,7 @@ public class NonyuTsuchIchiranEditor implements INonyuTsuchIchiranEditor {
             source.listLower_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
         }
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
-            source.listLower_3 = 編集後本算定通知書共通情報.get編集後宛先().get町域();
+            source.listLower_3 = 編集後本算定通知書共通情報.get編集後宛先().get編集後住所();
         }
         if (編集後本算定通知書共通情報.get更正後() != null
                 && 編集後本算定通知書共通情報.get更正後().get保険料段階() != null) {

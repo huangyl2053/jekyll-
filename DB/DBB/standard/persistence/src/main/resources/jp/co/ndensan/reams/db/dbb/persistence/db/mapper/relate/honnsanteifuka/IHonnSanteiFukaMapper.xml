@@ -788,13 +788,13 @@
         AND "HonSanJonTyuShutuTemp"."fukaNendo" = "DbT2001ChoshuHoho"."fukaNendo"
         LEFT JOIN
         rgdb."DbV2002Fuka" AS "DbT2002Fuka"
-        LEFT JOIN
+        INNER JOIN
         rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
         ON  "DbT2002Fuka"."fukaNendo" = "DbT2003Kibetsu"."fukaNendo"
         AND "DbT2002Fuka"."choteiNendo" = "DbT2003Kibetsu"."choteiNendo"
         AND "DbT2002Fuka"."tsuchishoNo" = "DbT2003Kibetsu"."tsuchishoNo"
         AND "DbT2002Fuka"."rirekiNo" = "DbT2003Kibetsu"."rirekiNo"
-        LEFT JOIN
+        INNER JOIN
         rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
         ON "DbT2003Kibetsu"."choteiId" = "UrT0705ChoteiKyotsu"."choteiId"
         ON "HonSanJonTyuShutuTemp"."fukaNendo" = "DbT2002Fuka"."fukaNendo"

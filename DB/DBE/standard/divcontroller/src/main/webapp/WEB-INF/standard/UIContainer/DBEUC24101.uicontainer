@@ -118,7 +118,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",
      "toLayoutTitle": "要介護認定申請検索",
-     "toState": "個人依頼内容更新"
+     "toState": "検索結果一覧"
     },
     {
      "id": "10",
@@ -139,6 +139,20 @@
      "eventName": "完了処理",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "12",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2410001",
+     "layoutTitle": "個人依頼内容更新（認定調査票・主治医意見書編集）",
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "要介護認定申請検索",
+     "toState": "条件指定"
     }
    ]
   }

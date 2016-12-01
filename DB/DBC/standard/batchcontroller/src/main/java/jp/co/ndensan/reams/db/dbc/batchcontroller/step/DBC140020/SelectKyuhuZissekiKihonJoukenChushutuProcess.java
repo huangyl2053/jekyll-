@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC140020;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jukyushakyufujissekiichiran.JukyushaKyufujissekiIchiranRelateEntity;
@@ -34,6 +36,7 @@ public class SelectKyuhuZissekiKihonJoukenChushutuProcess extends BatchProcessBa
             + "relate.jukyushakyufujissekiichiran.IJukyushaKyufujissekiIchiranMapper.get受給者給付実績");
     private JukyushaKyufujissekiIchiranProcessParameter processParamter;
     private static final RString 実績一覧表 = new RString("JukyusyaKyufuJiqsekiIchiranhyouTable");
+    private static final RString いち = new RString("1");
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 一時実績一覧表;
@@ -45,6 +48,39 @@ public class SelectKyuhuZissekiKihonJoukenChushutuProcess extends BatchProcessBa
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         processParamter.setPsmShikibetsuTaisho(new RString(uaFt200Psm.getParameterMap().
                 get("psmShikibetsuTaisho").toString()));
+
+        List 給付実績区分List = new ArrayList<>();
+        if (processParamter.get要介護1().equals(いち)) {
+            給付実績区分List.add(new RString("21"));
+        }
+        if (processParamter.get要介護2().equals(いち)) {
+            給付実績区分List.add(new RString("22"));
+        }
+        if (processParamter.get要介護3().equals(いち)) {
+            給付実績区分List.add(new RString("23"));
+        }
+        if (processParamter.get要介護4().equals(いち)) {
+            給付実績区分List.add(new RString("24"));
+        }
+        if (processParamter.get要介護5().equals(いち)) {
+            給付実績区分List.add(new RString("25"));
+        }
+        if (processParamter.get要支援1().equals(いち)) {
+            給付実績区分List.add(new RString("12"));
+        }
+        if (processParamter.get要支援2().equals(いち)) {
+            給付実績区分List.add(new RString("13"));
+        }
+        if (processParamter.get事業対象者().equals(いち)) {
+            給付実績区分List.add(new RString("06"));
+        }
+        if (processParamter.get経過的要介護().equals(いち)) {
+            給付実績区分List.add(new RString("11"));
+        }
+        if (processParamter.get経過的要介護().equals(いち)) {
+            給付実績区分List.add(new RString("01"));
+        }
+        processParamter.set給付実績区分List(給付実績区分List);
         return new BatchDbReader(受給者給付実績, processParamter.toJukyushaKyufujissekiIchiranMybatisParameter(RString.EMPTY));
     }
 

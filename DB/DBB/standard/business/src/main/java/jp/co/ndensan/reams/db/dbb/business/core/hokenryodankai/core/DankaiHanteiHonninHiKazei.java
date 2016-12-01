@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDan
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 
 /**
  * 段階判定_本人非課税というクラスです。
@@ -28,7 +27,7 @@ class DankaiHanteiHonninHiKazei implements IHanteiHoho {
             }
             return false;
         } else {
-            return SetaiKazeiKubun.非課税 == hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoSetaiKazeiKubun();
+            return KazeiKubun.非課税.equals(hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoKazeiKubun());
         }
     }
 

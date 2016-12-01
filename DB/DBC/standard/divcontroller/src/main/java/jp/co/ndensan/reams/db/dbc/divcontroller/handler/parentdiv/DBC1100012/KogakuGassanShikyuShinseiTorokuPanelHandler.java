@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyushinseitoroku.ShinseishoJohoResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.ShinseishoJohoSearchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.KogakuGassanShikyuShinseiTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.dgTorokuSearchResult_Row;
@@ -41,7 +42,6 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
     private static final int 六 = 6;
     private static final int 平成二十年度 = 2007;
     private static final RString 九十九 = new RString("99");
-    private static final int 十七 = 17;
     private static final RString ゼロ = new RString("00");
     private static final int ゼロ一 = 0;
     private static final RString キー = new RString("key0");
@@ -68,6 +68,7 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         Map<RString, List<KoikiZenShichosonJoho>> map = KogakuGassanShikyuShinseiToroku.createInstance().getHokensyaBango();
         List<KeyValueDataSource> seishoSeiriBangoList = new ArrayList<>();
         List<KeyValueDataSource> shiChoSonList = new ArrayList<>();
+        seishoSeiriBangoList.add(new KeyValueDataSource(キー, RString.EMPTY));
         RString モード = RString.EMPTY;
         if (map != null && map.containsKey(単一市町村モード) && map.get(単一市町村モード) != null && !map.get(単一市町村モード).isEmpty()) {
             RString 市町村識別ID = map.get(単一市町村モード).get(0).get市町村識別ID();
@@ -79,7 +80,6 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
             div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDataSource(seishoSeiriBangoList);
             div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setDataSource(seishoSeiriBangoList);
         } else if (map != null && map.containsKey(広域市町村モード) && map.get(広域市町村モード) != null && !map.get(広域市町村モード).isEmpty()) {
-            seishoSeiriBangoList.add(new KeyValueDataSource(キー, RString.EMPTY));
             shiChoSonList.add(new KeyValueDataSource(キー, RString.EMPTY));
             List<RString> keyList = new ArrayList();
             List<RString> keyList2 = new ArrayList();
@@ -232,28 +232,30 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         RString 介護支給申請書整理番号2 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().getValue();
         RString 介護支給申請書整理番号3 = div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().getSelectedValue();
         RString 介護支給申請書整理番号4 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().getValue();
-        if (介護支給申請書整理番号4.length() < 六) {
-            介護支給申請書整理番号4.padZeroToLeft(六 - 介護支給申請書整理番号4.length());
+        int length2 = 介護支給申請書整理番号4.length();
+        if (!RString.isNullOrEmpty(介護支給申請書整理番号4) && length2 < 六) {
+            介護支給申請書整理番号4.padZeroToLeft(六 - length2);
         }
         RString 介護支給申請書整理番号list
                 = 介護支給申請書整理番号1.insert(介護支給申請書整理番号1.length() - 1, 介護支給申請書整理番号2.toString());
         介護支給申請書整理番号list = 介護支給申請書整理番号list.insert(介護支給申請書整理番号list.length() - 1, 介護支給申請書整理番号3.toString());
         介護支給申請書整理番号list = 介護支給申請書整理番号list.insert(介護支給申請書整理番号list.length() - 1, 介護支給申請書整理番号4.toString());
-        if (介護支給申請書整理番号list.length() != 十七) {
+        if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkKaigoShikyuShinseishoSeiriBango().isAllSelected()) {
             介護支給申請書整理番号list = null;
         }
         RString 医療支給申請書整理番号1 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango1().getValue();
         RString 医療支給申請書整理番号2 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().getValue();
         RString 医療支給申請書整理番号3 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().getValue();
         RString 医療支給申請書整理番号4 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().getValue();
-        if (医療支給申請書整理番号4.length() < 六) {
-            医療支給申請書整理番号4.padZeroToLeft(六 - 医療支給申請書整理番号4.length());
+        int length = 医療支給申請書整理番号4.length();
+        if (!RString.isNullOrEmpty(医療支給申請書整理番号4) && length < 六) {
+            医療支給申請書整理番号4 = 医療支給申請書整理番号4.padZeroToLeft(六 - length);
         }
         RString 医療支給申請書整理番号list
                 = 医療支給申請書整理番号1.insert(医療支給申請書整理番号1.length() - 1, 医療支給申請書整理番号2.toString());
         医療支給申請書整理番号list = 医療支給申請書整理番号list.insert(医療支給申請書整理番号list.length() - 1, 医療支給申請書整理番号3.toString());
         医療支給申請書整理番号list = 医療支給申請書整理番号list.insert(医療支給申請書整理番号list.length() - 1, 医療支給申請書整理番号4.toString());
-        if (医療支給申請書整理番号list.length() != 十七) {
+        if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango().isAllSelected()) {
             医療支給申請書整理番号list = null;
         }
         boolean 申請基本情報検索有無 = !div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().getSelectedKey().isEmpty();
@@ -287,8 +289,8 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
             if (shoJohoResult.get高額合算申請書().get支給申請書整理番号() != null) {
                 row.setTxtShikyuShinseishoNo(shoJohoResult.get高額合算申請書().get支給申請書整理番号());
             }
-            if (shoJohoResult.get高額合算申請書().get支給申請区分() != null) {
-                row.setTxtShinseiKubun(shoJohoResult.get高額合算申請書().get支給申請区分());
+            if (!RString.isNullOrEmpty(shoJohoResult.get高額合算申請書().get支給申請区分())) {
+                row.setTxtShinseiKubun(KaigoGassan_ShinseiKbn.toValue(shoJohoResult.get高額合算申請書().get支給申請区分()).get名称());
             }
             if (shoJohoResult.get高額合算申請書().get支給申請書情報送付年月() != null) {
                 row.getTxtSoshin().setValue(new FlexibleDate(shoJohoResult.get高額合算申請書().get支給申請書情報送付年月().toDateString()));
@@ -325,15 +327,14 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
     private void 状態1(RString モード) {
         final Integer eight = 8;
         final Integer seven = 7;
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDisabled(true);
         if (モード.equals(単一市町村モード)) {
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setVisible(false);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setSelectedIndex(ゼロ一);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDisabled(true);
+            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setDisplayNone(true);
+
         } else if (モード.equals(広域市町村モード)) {
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setVisible(true);
+            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setDisplayNone(false);
             div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShiChoSon().setSelectedIndex(ゼロ一);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setSelectedIndex(ゼロ一);
-            div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().setDisabled(false);
+
         }
         div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlShinseiTaisyoNendo().setDisabled(false);
         RDate システム日付 = RDate.getNowDate();
@@ -366,27 +367,30 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().setValue(九十九);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango().setSelectedItemsByKey(Collections.EMPTY_LIST);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango1().setDisabled(true);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().setValue(ゼロ);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().clearSelectedItem();
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().setSelectedKey(キー);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiDaihyoshaShimei().clearValue();
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiDaihyoshaShimei().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihobango().clearValue();
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihobango().setDisabled(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihobango().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihokensyaShimei().clearValue();
         div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihokensyaShimei().setDisabled(true);
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setSelectedItemsByKey(Collections.EMPTY_LIST);
-        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setDisabled(false);
+
         List<RString> list = new ArrayList<>();
         list.add(キー);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setSelectedItemsByKey(list);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().setDisabled(false);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi2().setDisabled(true);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi2().setSelectedItemsByKey(list);
         div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbHihokensyaJohoKensaku().setDisabled(false);

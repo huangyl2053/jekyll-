@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA3030011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.IryoHokenJoho;
 import jp.co.ndensan.reams.db.dba.business.core.iryohokenkanyujokyo.IryohokenKanyuJokyoBusiness;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA3030011.IryohokenKanyuJokyoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuteisei.IryoHokenJoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -45,7 +45,7 @@ public class IryohokenKanyuJokyoHandler {
     public IryohokenKanyuJokyoBusiness onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(被保険者番号);
-        div.getIryoHokenIchiran().getCcdIryoHokenRireki().initialize(状態_登録, 識別コード.value(), 被保険者番号); //TODO 動作確認
+        div.getIryoHokenIchiran().getCcdIryoHokenRireki().initialize(状態_登録, 識別コード.value(), 被保険者番号);
         IryohokenKanyuJokyoBusiness joho = new IryohokenKanyuJokyoBusiness();
         joho.setIryoHokenJohoList(get初期化時の医療保険情報());
         return joho;

@@ -70,7 +70,7 @@ public class JyutakuKayisyuHiHandler {
         if (ZERO.equals(識別番号管理.get特定入所者設定区分())) {
             div.getBtnTokuteiNyushosha().setDisabled(true);
         }
-        if (ZERO.equals(識別番号管理.get特定診療費設定区分())) {
+        if (ZERO.equals(識別番号管理.get特定診療費設定区分()) && ZERO.equals(識別番号管理.get特定診療特別療養設定区分())) {
             div.getBtnTokuteiShinryo().setDisabled(true);
         }
         if (ZERO.equals(識別番号管理.get居宅計画費設定区分())) {

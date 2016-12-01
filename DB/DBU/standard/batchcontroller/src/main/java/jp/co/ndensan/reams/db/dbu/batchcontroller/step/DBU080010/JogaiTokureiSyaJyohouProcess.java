@@ -36,6 +36,10 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.tokuteikojinjohoteikyo."
             + "IJogaiTokureiSyaJyohouMapper.get当初_版改定_異動分データ");
     private static final int 翌日 = 1;
+    private static final int INT_ZERO = 0;
+    private static final int 年 = 2000;
+    private static final int 月 = 4;
+    private static final int 日 = 1;
     private static final RString 該当項目 = new RString("NotAcceptable");
     private static final RString 保有 = new RString("NotCovered");
     private JogaiTokureiSyaJyohouProcessParameter processParameter;
@@ -47,6 +51,9 @@ public class JogaiTokureiSyaJyohouProcess extends BatchProcessBase<JogaiTokureiS
     protected void initialize() {
         RString 新規異動区分 = processParameter.get新規異動区分();
         RDateTime 対象開始日時 = processParameter.get対象開始日時();
+        if (対象開始日時 == null) {
+            対象開始日時 = RDateTime.of(年, 月, 日, INT_ZERO, INT_ZERO);
+        }
         FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
         FlexibleDate 事業所抽出開始年月日 = FlexibleDate.EMPTY;
         FlexibleDate 事業所抽出終了年月日 = FlexibleDate.EMPTY;

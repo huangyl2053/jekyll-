@@ -87,6 +87,7 @@ public class ShikyugakuKeisanKekkaTorokuValidationHandler {
 
     private ValidationDictionary create計算結果を追加するDictionary() {
         return new ValidationDictionaryBuilder()
+                .add(ShikyugakuKeisanKekkaTorokuMessage.連絡票整理番号必須項目, div.getDdlOver70ShotokuKubun())
                 .add(ShikyugakuKeisanKekkaTorokuMessage.連絡票整理番号既に存在, div.getTxtShikyuShinseishoSeiriNoInput())
                 .add(ShikyugakuKeisanKekkaTorokuMessage.連絡票整理番号年度が不正, div.getTxtShikyuShinseishoSeiriNoInput())
                 .build();

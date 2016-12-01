@@ -578,7 +578,10 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
     }
 
     private void set地区区分(RStringBuilder builder, List<RString> 出力条件) {
-        RString 地区区分コード = processParameter.get宛名抽出条件().getChiku_Kubun().getコード();
+        RString 地区区分コード = RString.EMPTY;
+        if (processParameter.get宛名抽出条件() != null && processParameter.get宛名抽出条件().getChiku_Kubun() != null) {
+            地区区分コード = processParameter.get宛名抽出条件().getChiku_Kubun().getコード();
+        }
         if (processParameter.get宛名抽出条件() != null
                 && processParameter.get宛名抽出条件().getChiku_Kubun() != null
                 && !Chiku.全て.getコード().equals(地区区分コード)) {
@@ -628,7 +631,8 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
     }
 
     private void set年齢層抽出方法(RStringBuilder builder, List<RString> 出力条件) {
-        if (年齢PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
+        if (processParameter.get宛名抽出条件() != null && processParameter.get宛名抽出条件().getAgeSelectKijun() != null
+                && 年齢PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(年齢SHOW);
             if (processParameter.get宛名抽出条件().getNenreiRange() != null) {
                 set年齢(builder);
@@ -646,7 +650,8 @@ public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaD
                 builder.append(RString.FULL_SPACE).append(右記号);
             }
             出力条件.add(builder.toRString());
-        } else if (生年月日PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
+        } else if (processParameter.get宛名抽出条件() != null && processParameter.get宛名抽出条件().getAgeSelectKijun() != null
+                && 生年月日PARAMETER.equals(processParameter.get宛名抽出条件().getAgeSelectKijun().get名称())) {
             builder.append(生年月日SHOW);
             if (processParameter.get宛名抽出条件().getSeinengappiRange() != null) {
                 set生年月日(builder);

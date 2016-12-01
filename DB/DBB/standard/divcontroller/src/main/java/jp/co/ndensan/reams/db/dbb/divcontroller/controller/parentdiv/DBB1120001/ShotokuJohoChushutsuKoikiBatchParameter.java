@@ -62,7 +62,6 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     private static final RString 広域保険者でないため = new RString("広域保険者でないため");
     private static final RString 当初所得引出 = new RString("当初所得引出");
     private static final RString 所得引出 = new RString("所得引出");
-    private static final RString SRC = new RString("/home/D209007/sharedFiles/DEE01F001");
 
     /**
      * 画面初期化のonLoadメソッドです。

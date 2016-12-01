@@ -200,6 +200,11 @@ public class ShinseiKensaku {
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
         } else if (MENUID_DBEMN43001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            if(event == Events.検索結果1件){
+                ViewStateHolder.put(ViewStateKeys.モード, new RString("1件"));
+            }else{
+                ViewStateHolder.remove(ViewStateKeys.モード);
+            }
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.個人依頼内容更新へ).respond();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));

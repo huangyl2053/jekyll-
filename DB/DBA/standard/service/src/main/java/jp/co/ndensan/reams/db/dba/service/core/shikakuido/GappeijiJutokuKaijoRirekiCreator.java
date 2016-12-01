@@ -197,7 +197,6 @@ public class GappeijiJutokuKaijoRirekiCreator {
     public int saveHihokenshaHenkoFromList(List<HihokenshaDaicho> 被保険者台帳のList) {
         int 登録件数 = 0;
         HihokenshaShikakuShutokuManager manager = HihokenshaShikakuShutokuManager.createInstance();
-        //TODO １．１　前排他処理 画面初期表示時に前排他制御処理が実施される。
         if (被保険者台帳のList != null && !被保険者台帳のList.isEmpty()) {
             for (HihokenshaDaicho hihokenshaDaicho : 被保険者台帳のList) {
                 RString edaNo = manager.getSaidaiEdaban(hihokenshaDaicho.get被保険者番号(), hihokenshaDaicho.get異動日());

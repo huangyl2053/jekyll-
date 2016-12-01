@@ -48,6 +48,7 @@ public class CreateRiyojokyoIchiranHyoProcessParameter implements IBatchProcessP
     private RString 連番付加;
     private RString 日付スラッシュ編集;
     private RString 出力順ID;
+    private int 更新データ件数;
 
     /**
      * コンストラクタです。
@@ -79,6 +80,7 @@ public class CreateRiyojokyoIchiranHyoProcessParameter implements IBatchProcessP
      * @param 連番付加 連番付加
      * @param 日付スラッシュ編集 日付スラッシュ編集
      * @param 出力順ID 出力順ID
+     * @param 更新データ件数 更新データ件数
      */
     public CreateRiyojokyoIchiranHyoProcessParameter(RString 対象年月, RString 開始年月, RString 終了年月,
             RString 被保険者番号, RString 事業者番号, RString 利用実績区分, RString 居宅利用率指定, RString 開始居宅利用率,
@@ -86,7 +88,7 @@ public class CreateRiyojokyoIchiranHyoProcessParameter implements IBatchProcessP
             RString 地区指定, Map<RString, RString> 選択地区リスト, RString 市町村コード, RString 市町村名称,
             RString 旧市町村コード, RString 旧市町村名称, RString 導入形態コード, RString 統計表出力区分,
             RString 明細リスト出力区分, RString 明細CSV出力区分, RString 明細合計出力区分, RString 項目名付加,
-            RString 連番付加, RString 日付スラッシュ編集, RString 出力順ID) {
+            RString 連番付加, RString 日付スラッシュ編集, RString 出力順ID, int 更新データ件数) {
 
         this.対象年月 = 対象年月;
         this.開始年月 = 開始年月;
@@ -115,5 +117,6 @@ public class CreateRiyojokyoIchiranHyoProcessParameter implements IBatchProcessP
         this.連番付加 = 連番付加;
         this.日付スラッシュ編集 = 日付スラッシュ編集;
         this.出力順ID = 出力順ID;
+        this.更新データ件数 = 更新データ件数;
     }
 }

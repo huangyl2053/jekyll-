@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -30,8 +33,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
@@ -114,6 +121,9 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
 
     @Override
     protected void usualProcess(FutangakuTashoshaEntity entity) {
+        if (isSameAsBefore(entity)) {
+            return;
+        }
         GassanJikofutangakuHoseiIchiranParameter param = new GassanJikofutangakuHoseiIchiranParameter();
         param.set作成日時(processParameter.getHandleTimestamp());
         param.set出力順1(出力順1);
@@ -163,6 +173,7 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
     @Override
     protected void afterExecute() {
         batchReportWriter.close();
+        eucFileOutputJohoFactory();
     }
 
     private void set出力順() {
@@ -204,4 +215,36 @@ public class GetGassanJikofutangakuHoseiIchiranProcess extends BatchKeyBreakBase
         }
     }
 
+    private boolean isSameAsBefore(FutangakuTashoshaEntity current) {
+        FutangakuTashoshaEntity before = getBefore();
+        return before != null && before.getHihokenshaNo().equals(current.getHihokenshaNo())
+                && before.getTaishoNendo().equals(current.getTaishoNendo())
+                && before.getHokenshaNo().equals(current.getHokenshaNo())
+                && before.getShikyuShinseishoSeiriNo().equals(current.getShikyuShinseishoSeiriNo())
+                && before.getRirekiNo2() == current.getRirekiNo2();
+    }
+
+    private void eucFileOutputJohoFactory() {
+        List<RString> 出力条件 = new ArrayList<>();
+        if (processParameter.getKakunin_UketoriYM() != null && !processParameter.getKakunin_UketoriYM().isEmpty()) {
+            出力条件.add(new RString("抽出条件")
+                    .concat(RString.FULL_SPACE)
+                    .concat(processParameter.getKakunin_UketoriYM().wareki()
+                            .eraType(EraType.KANJI_RYAKU)
+                            .firstYear(FirstYear.ICHI_NEN)
+                            .separator(Separator.PERIOD)
+                            .fillType(FillType.BLANK).toDateString()));
+        }
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                ReportIdDBC.DBC200031.getReportId().getColumnValue(),
+                市町村コード,
+                市町村名称,
+                new RString(JobContextHolder.getJobId()),
+                ReportIdDBC.DBC200031.getReportName(),
+                new RString(reportSourceWriter.pageCount().value()),
+                new RString("なし"),
+                RString.EMPTY,
+                出力条件);
+        OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
+    }
 }

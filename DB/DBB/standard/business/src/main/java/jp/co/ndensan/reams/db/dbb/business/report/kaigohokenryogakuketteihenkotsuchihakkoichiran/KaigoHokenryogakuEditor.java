@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenryogakuketteihenkotsuchihakkoichiran.KaigoHokenryogakuSource;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -193,9 +195,13 @@ public class KaigoHokenryogakuEditor implements IKaigoHokenryogakuEditor {
         if (編集後本算定通知書共通情報.get編集後宛先() != null) {
             source.listLower_2 = 編集後本算定通知書共通情報.get編集後宛先().get郵便番号();
         }
-        if (編集後本算定通知書共通情報.get編集後宛先() != null) {
-            source.listLower_3 = 編集後本算定通知書共通情報.get編集後宛先().get町域();
-        }
+        if (本算定通知書情報.get賦課の情報_更正後() != null 
+                && 本算定通知書情報.get賦課の情報_更正後().get宛名() != null) {
+            IKojin kojin = 本算定通知書情報.get賦課の情報_更正後().get宛名();
+            if (null != kojin) {
+                source.listLower_3 = JushoHenshu.editJusho(本算定通知書情報.get帳票制御共通(), kojin, 地方公共団体);
+            }
+        }            
         if (編集後本算定通知書共通情報.get更正後() != null) {
             source.listLower_4 = 編集後本算定通知書共通情報.get更正後().get保険料段階();
             if (編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {

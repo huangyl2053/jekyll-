@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran.HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.nonyutsuchishohonsanteihakkoichiran.NonyuTsuchIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -47,6 +48,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
     /**
      * 保険料納入通知書（本算定現年度異動）発行一覧表 printメソッド
      *
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsuのList
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsuのList
      * @param 調定年度 RString
      * @param 出力期 RString
@@ -55,7 +57,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
      * @param 納入対象賦課年度List List<RString>
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    public SourceDataCollection print(List<HonSanteiTsuchiShoKyotsu> 本算定通知書情報, List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             RString 調定年度, RString 出力期, YMDHMS 調定日時, RString 出力順ID, List<RString> 納入対象賦課年度List) {
         RString 年月日 = 調定日時.getRDateTime().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -95,7 +97,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranPrintService {
         HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty property
                 = new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranProperty();
         return new Printer<NonyuTsuchIchiranSource>().spool(property,
-                new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport(編集後本算定通知書共通情報, 調定年度, 出力期,
+                new HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranReport(本算定通知書情報, 編集後本算定通知書共通情報, 調定年度, 出力期,
                         作成日時, 地方公共団体コード, 市町村名, 納入対象賦課年度List, 並び順の１件目, 並び順の２件目,
                         並び順の３件目, 並び順の４件目, 並び順の５件目));
     }

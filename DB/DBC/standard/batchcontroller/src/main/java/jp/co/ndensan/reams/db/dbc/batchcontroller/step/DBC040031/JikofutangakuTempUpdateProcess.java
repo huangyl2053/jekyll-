@@ -72,6 +72,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
     private static final RString 翌年5月 = new RString("105");
     private static final RString 翌年6月 = new RString("106");
     private static final RString 翌年7月 = new RString("107");
+    private static final int 翌年 = 100;
     private static final RString 合計 = new RString("合計");
     private static final RString STRING_ONE = new RString("1");
     private static final RString STRING_TWO = new RString("2");
@@ -200,7 +201,7 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
                 高額支給額.put(翌年6月, 翌年06月高額支給額);
                 高額支給額.put(翌年7月, 翌年07月高額支給額);
                 高額支給額.put(合計, 高額支給額合計);
-                update中間DB(entity);
+                update中間DB(getBefore());
                 initialize月高額支給額();
                 当年04月高額支給額 = edit高額支給額(entity, 当年4月, 当年04月高額支給額);
                 当年05月高額支給額 = edit高額支給額(entity, 当年5月, 当年05月高額支給額);
@@ -625,8 +626,12 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
 
     private Decimal edit高額支給額(KogakugassanJikofutangakuInfoHoseiSubEntity entity, RString 月, Decimal 高額支給額) {
         Decimal 合計支給額 = Decimal.ZERO;
-        if (Integer.parseInt(月.toString()) == entity.getサービス提供年月().getMonthValue()) {
-            if (RString.isNullOrEmpty(entity.get審査支払区分())) {
+        int 月No = Integer.parseInt(月.toString());
+        if (((entity.get中間DB対象年度().getYearValue() == entity.getサービス提供年月().getYearValue())
+                && 月No == entity.getサービス提供年月().getMonthValue())
+                || ((entity.get中間DB対象年度().getYearValue() + 1 == entity.getサービス提供年月().getYearValue())
+                && (月No > 翌年 && 月No % 翌年 == entity.getサービス提供年月().getMonthValue()))) {
+            if (entity.get審査支払区分() == null && entity.get合計高額支給額() != null) {
                 合計支給額 = 高額支給額.add(entity.get合計高額支給額());
                 一覧表用区分 = STRING_ONE;
             } else if ((STRING_ONE.equals(entity.get審査支払区分()) && RString.isNullOrEmpty(entity.get決定支給区分コード())
@@ -636,6 +641,8 @@ public class JikofutangakuTempUpdateProcess extends BatchKeyBreakBase<Kogakugass
             } else if (STRING_ONE.equals(entity.get審査支払区分()) && STRING_ONE.equals(entity.get決定支給区分コード())) {
                 合計支給額 = 高額支給額.add(entity.get決定高額支給額());
             }
+        } else {
+            合計支給額 = 高額支給額;
         }
         被保険者番号Map.put(月, entity.get被保険者番号());
         return 合計支給額;

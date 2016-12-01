@@ -73,7 +73,6 @@ public class KokuhoShikakuInfo
         this.id = id;
     }
 
-    //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 履歴番号を返します。
      *
@@ -194,7 +193,8 @@ public class KokuhoShikakuInfo
     }
 
     /**
-     * 国保資格詳細情報を削除対象とします。<br/> {@link DbT7123KokuhoShikakuInfoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 国保資格詳細情報を削除対象とします。<br/>
+     * {@link DbT7123KokuhoShikakuInfoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KokuhoShikakuInfo}
      */
@@ -204,7 +204,6 @@ public class KokuhoShikakuInfo
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KokuhoShikakuInfo(deletedEntity, id);
@@ -251,5 +250,4 @@ public class KokuhoShikakuInfo
     public KokuhoShikakuInfoBuilder createBuilderForEdit() {
         return new KokuhoShikakuInfoBuilder(entity, id);
     }
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

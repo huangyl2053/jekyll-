@@ -93,7 +93,7 @@ public class KyotakuServiceRiyohyoMainHandler {
         }
         div.getDgKyotakuServiceRirekiIchiran().setDataSource(rowList);
     }
-    
+
     private RString get居宅_総合事業区分(RString 居宅_総合事業区分コード) {
         RString 居宅_総合事業区分 = RString.EMPTY;
         switch (居宅_総合事業区分コード.toString()) {
@@ -103,10 +103,10 @@ public class KyotakuServiceRiyohyoMainHandler {
             case "2":
                 居宅_総合事業区分 = 総合事業費計画;
                 break;
-            default :
+            default:
                 break;
         }
-                
+
         return 居宅_総合事業区分;
     }
 
@@ -150,6 +150,11 @@ public class KyotakuServiceRiyohyoMainHandler {
             div.getTxtTekiyoKikan().clearToValue();
         } else {
             div.getTxtTekiyoKikan().setToValue(new RDate(row.getTekiyoShuryoYMD().getValue().toString()));
+        }
+        if (RString.isNullOrEmpty(row.getKyotakuJigyo())) {
+            div.getJikoSakuseiTodokedeInfo().getTextKeikaku().clearValue();
+        } else {
+            div.getJikoSakuseiTodokedeInfo().getTextKeikaku().setValue(row.getKyotakuJigyo());
         }
         set届出者情報(居宅給付計画届出);
     }

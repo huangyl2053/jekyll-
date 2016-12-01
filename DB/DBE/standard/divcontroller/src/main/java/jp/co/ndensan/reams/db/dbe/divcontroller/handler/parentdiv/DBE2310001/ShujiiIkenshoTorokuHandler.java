@@ -114,6 +114,11 @@ public class ShujiiIkenshoTorokuHandler {
     public void setChosaTishoJohoDisable(boolean takaFlag) {
         div.getChkTakaJushinSelect().setDisabled(takaFlag);
         div.getChkSonota().setDisabled(takaFlag);
+        div.getTxtSonotaNyuryoku().setDisabled(takaFlag);
+        List<RString> selKeysList = new ArrayList<>();
+        div.getChkTakaJushinSelect().setSelectedItemsByKey(selKeysList);
+        div.getChkSonota().setSelectedItemsByKey(selKeysList);
+        div.getTxtSonotaNyuryoku().clearValue();
     }
 
     /**

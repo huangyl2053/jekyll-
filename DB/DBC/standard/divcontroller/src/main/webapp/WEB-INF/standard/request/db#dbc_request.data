@@ -1313,6 +1313,7 @@ dbc/db/dbc/KyufuTaishoshaScheduleSetteiPanel/onLoad
 dbc/db/dbc/KyufuTaishoshaScheduleSetteiPanelHandler/to起動中チェック
 dbc/db/dbc/KyufuTsuchiGenmenHosei/onClick_BtnPulish
 dbc/db/dbc/KyufuTsuchiGenmenHosei/onLoad
+dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onChange_nyuryokuShisetsuKodo
 dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onClick_ButtonBack
 dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onClick_ButtonDelete
 dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onClick_ButtonHozon
@@ -1324,6 +1325,7 @@ dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onClick_ButtonTuika
 dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onClick_btnResearch
 dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onClick_btnSearchResult
 dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onLoad
+dbc/db/dbc/KyufuTsuchiGenmenHoseiToroku/onOkClose_btnSenTaKu
 dbc/db/dbc/KyufuTsuchiSakuseiIkatu/onActive
 dbc/db/dbc/KyufuTsuchiSakuseiIkatu/onBlur_txtHihoNo
 dbc/db/dbc/KyufuTsuchiSakuseiIkatu/onClick_btnHihokenshaSearch
@@ -1690,7 +1692,6 @@ dbc/db/dbc/ShikyuShinseiDetail/onClick_btnUpdate
 dbc/db/dbc/ShikyuShinseiDetail/onLoad
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtOver70Futangaku
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtOver70Shikyugaku
-dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtShikyuShinseishoSeiriNoInput
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtUnder70Futangaku
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onBlur_txtUnder70Shikyugaku
 dbc/db/dbc/ShikyugakuKeisanKekkaToroku/onChange_tab

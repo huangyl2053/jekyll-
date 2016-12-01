@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -813,25 +812,25 @@ public class JukyushaKyufuDaichoEdit {
                     個人用帳票データ.set決定前_単位数3(明細.get単位数());
                     個人用帳票データ.set決定後_単位数3(明細.get後単位数());
                     個人用帳票データ.set単位数識別3(明細.get単位数識別());
-                    個人用帳票データ.set決定前_日の回数3(明細.get日数回数());
-                    個人用帳票データ.set決定後_日の回数3(明細.get後日数回数());
+                    個人用帳票データ.set決定前_日の回数3(integerTOInt(明細.get日数回数()));
+                    個人用帳票データ.set決定後_日の回数3(integerTOInt(明細.get後日数回数()));
                     個人用帳票データ.set決定前_サービス単位数3(明細.getサービス単位数());
                     個人用帳票データ.set決定後_サービス単位数3(明細.get後サービス単位数());
-                    個人用帳票データ.set決定前_日の回数3_公費１対象(明細.get公費１対象日数回数());
-                    個人用帳票データ.set決定後_日の回数3_公費１対象(明細.get後公費１対象日数回数());
+                    個人用帳票データ.set決定前_日の回数3_公費１対象(integerTOInt(明細.get公費１対象日数回数()));
+                    個人用帳票データ.set決定後_日の回数3_公費１対象(integerTOInt(明細.get後公費１対象日数回数()));
                     個人用帳票データ.set決定前_サービス単位数3_公費１対象(明細.get公費１対象サービス点数());
                     個人用帳票データ.set決定後_サービス単位数3_公費１対象(明細.get後公費１対象サービス点数());
-                    個人用帳票データ.set決定前_１日の回数3_公費２対象(明細.get公費２対象日数回数());
-                    個人用帳票データ.set決定後_１日の回数3_公費２対象(明細.get後公費２対象日数回数());
+                    個人用帳票データ.set決定前_１日の回数3_公費２対象(integerTOInt(明細.get公費２対象日数回数()));
+                    個人用帳票データ.set決定後_１日の回数3_公費２対象(integerTOInt(明細.get後公費２対象日数回数()));
                     個人用帳票データ.set決定前_サービス単位数3_公費２対象(明細.get公費２対象サービス点数());
                     個人用帳票データ.set決定後_サービス単位数3_公費２対象(明細.get後公費２対象サービス点数());
-                    個人用帳票データ.set決定前_日の回数3_公費３対象(明細.get公費３対象日数回数());
-                    個人用帳票データ.set決定後_日の回数3_公費３対象(明細.get後公費３対象日数回数());
+                    個人用帳票データ.set決定前_日の回数3_公費３対象(integerTOInt(明細.get公費３対象日数回数()));
+                    個人用帳票データ.set決定後_日の回数3_公費３対象(integerTOInt(明細.get後公費３対象日数回数()));
                     個人用帳票データ.set決定前_サービス単位数3_公費３対象(明細.get公費３対象サービス点数());
                     個人用帳票データ.set決定後_サービス単位数3_公費３対象(明細.get後公費３対象サービス点数());
                     個人用帳票データ.set摘要3(明細.get摘要());
-                    個人用帳票データ.set再審査回数3(明細.get再審査回数());
-                    個人用帳票データ.set過誤回数3(明細.get過誤回数());
+                    個人用帳票データ.set再審査回数3(integerTOInt(明細.get再審査回数()));
+                    個人用帳票データ.set過誤回数3(integerTOInt(明細.get過誤回数()));
                     個人用帳票データ.set審査年月3(明細.get審査年月());
                     list明細データ.add(個人用帳票データ);
                 }
@@ -851,25 +850,25 @@ public class JukyushaKyufuDaichoEdit {
             個人用帳票データ.set決定前_単位数1(明細.get単位数());
             個人用帳票データ.set決定後_単位数1(明細.get後単位数());
             個人用帳票データ.set単位数識別1(明細.get単位数識別());
-            個人用帳票データ.set決定前_日の回数1(明細.get日数回数());
-            個人用帳票データ.set決定後_日の回数1(明細.get後日数回数());
+            個人用帳票データ.set決定前_日の回数1(null == 明細.get日数回数() ? 0 : 明細.get日数回数());
+            個人用帳票データ.set決定後_日の回数1(null == 明細.get後日数回数() ? 0 : 明細.get後日数回数());
             個人用帳票データ.set決定前_サービス単位数1(明細.getサービス単位数());
             個人用帳票データ.set決定後_サービス単位数1(明細.get後サービス単位数());
-            個人用帳票データ.set決定前_日の回数1_公費１対象(明細.get公費１対象日数回数());
-            個人用帳票データ.set決定後_日の回数1_公費１対象(明細.get後公費１対象日数回数());
+            個人用帳票データ.set決定前_日の回数1_公費１対象(null == 明細.get公費１対象日数回数() ? 0 : 明細.get公費１対象日数回数());
+            個人用帳票データ.set決定後_日の回数1_公費１対象(null == 明細.get後公費１対象日数回数() ? 0 : 明細.get後公費１対象日数回数());
             個人用帳票データ.set決定前_サービス単位数1_公費１対象(明細.get公費１対象サービス点数());
             個人用帳票データ.set決定後_サービス単位数1_公費１対象(明細.get後公費１対象サービス点数());
-            個人用帳票データ.set決定前_１日の回数1_公費２対象(明細.get公費２対象日数回数());
-            個人用帳票データ.set決定後_１日の回数1_公費２対象(明細.get後公費２対象日数回数());
+            個人用帳票データ.set決定前_１日の回数1_公費２対象(null == 明細.get公費２対象日数回数() ? 0 : 明細.get公費２対象日数回数());
+            個人用帳票データ.set決定後_１日の回数1_公費２対象(null == 明細.get後公費２対象日数回数() ? 0 : 明細.get後公費２対象日数回数());
             個人用帳票データ.set決定前_サービス単位数1_公費２対象(明細.get公費２対象サービス点数());
             個人用帳票データ.set決定後_サービス単位数1_公費２対象(明細.get後公費２対象サービス点数());
-            個人用帳票データ.set決定前_日の回数1_公費３対象(明細.get公費３対象日数回数());
-            個人用帳票データ.set決定後_日の回数1_公費３対象(明細.get後公費３対象日数回数());
+            個人用帳票データ.set決定前_日の回数1_公費３対象(null == 明細.get公費３対象日数回数() ? 0 : 明細.get公費３対象日数回数());
+            個人用帳票データ.set決定後_日の回数1_公費３対象(null == 明細.get後公費３対象日数回数() ? 0 : 明細.get後公費３対象日数回数());
             個人用帳票データ.set決定前_サービス単位数1_公費３対象(明細.get公費３対象サービス点数());
             個人用帳票データ.set決定後_サービス単位数1_公費３対象(明細.get後公費３対象サービス点数());
             個人用帳票データ.set摘要1(明細.get摘要());
-            個人用帳票データ.set再審査回数1(明細.get再審査回数());
-            個人用帳票データ.set過誤回数1(明細.get過誤回数());
+            個人用帳票データ.set再審査回数1(null == 明細.get再審査回数() ? 0 : 明細.get再審査回数());
+            個人用帳票データ.set過誤回数1(null == 明細.get過誤回数() ? 0 : 明細.get過誤回数());
             個人用帳票データ.set審査年月1(明細.get審査年月());
             if (i == list明細.size() - 1) {
                 list明細データ.add(個人用帳票データ);
@@ -881,8 +880,8 @@ public class JukyushaKyufuDaichoEdit {
             個人用帳票データ.set決定前_単位数2(明細.get単位数());
             個人用帳票データ.set決定後_単位数2(明細.get後単位数());
             個人用帳票データ.set単位数識別2(明細.get単位数識別());
-            個人用帳票データ.set決定前_日の回数2(明細.get日数回数());
-            個人用帳票データ.set決定後_日の回数2(明細.get後日数回数());
+            個人用帳票データ.set決定前_日の回数2(integerTOInt(明細.get日数回数()));
+            個人用帳票データ.set決定後_日の回数2(integerTOInt(明細.get後日数回数()));
             個人用帳票データ.set決定前_サービス単位数2(明細.getサービス単位数());
             個人用帳票データ.set決定後_サービス単位数2(明細.get後サービス単位数());
             個人用帳票データ.set決定前_日の回数2_公費１対象(integerTOInt(明細.get公費１対象日数回数()));
@@ -937,14 +936,14 @@ public class JukyushaKyufuDaichoEdit {
                     個人用帳票データ.set決定前_費用単価3(特定.get費用単価());
                     個人用帳票データ.set決定後_費用単価3(特定.get後費用単価());
                     個人用帳票データ.set負担限度額3(特定.get負担限度額());
-                    個人用帳票データ.set決定前_日数3(特定.get日数());
-                    個人用帳票データ.set決定後_日数3(特定.get後日数());
-                    個人用帳票データ.set決定前_公費１日数3(特定.get公費１日数());
-                    個人用帳票データ.set決定後_公費１日数3(特定.get後公費１日数());
-                    個人用帳票データ.set決定前_公費２日数3(特定.get公費２日数());
-                    個人用帳票データ.set決定後_公費２日数3(特定.get後公費２日数());
-                    個人用帳票データ.set決定前_公費３日数3(特定.get公費３日数());
-                    個人用帳票データ.set決定後_公費３日数3(特定.get後公費３日数());
+                    個人用帳票データ.set決定前_日数3(integerTOInt(特定.get日数()));
+                    個人用帳票データ.set決定後_日数3(integerTOInt(特定.get後日数()));
+                    個人用帳票データ.set決定前_公費１日数3(integerTOInt(特定.get公費１日数()));
+                    個人用帳票データ.set決定後_公費１日数3(integerTOInt(特定.get後公費１日数()));
+                    個人用帳票データ.set決定前_公費２日数3(integerTOInt(特定.get公費２日数()));
+                    個人用帳票データ.set決定後_公費２日数3(integerTOInt(特定.get後公費２日数()));
+                    個人用帳票データ.set決定前_公費３日数3(integerTOInt(特定.get公費３日数()));
+                    個人用帳票データ.set決定後_公費３日数3(integerTOInt(特定.get後公費３日数()));
                     個人用帳票データ.set決定前_費用額3(特定.get費用額());
                     個人用帳票データ.set決定後_費用額3(特定.get後費用額());
                     個人用帳票データ.set決定前_保険分請求額3(特定.get保険分請求額());
@@ -980,14 +979,14 @@ public class JukyushaKyufuDaichoEdit {
             個人用帳票データ.set決定前_費用単価1(特定.get費用単価());
             個人用帳票データ.set決定後_費用単価1(特定.get後費用単価());
             個人用帳票データ.set負担限度額1(特定.get負担限度額());
-            個人用帳票データ.set決定前_日数1(特定.get日数());
-            個人用帳票データ.set決定後_日数1(特定.get後日数());
-            個人用帳票データ.set決定前_公費１日数1(特定.get公費１日数());
-            個人用帳票データ.set決定後_公費１日数1(特定.get後公費１日数());
-            個人用帳票データ.set決定前_公費２日数1(特定.get公費２日数());
-            個人用帳票データ.set決定後_公費２日数1(特定.get後公費２日数());
-            個人用帳票データ.set決定前_公費３日数1(特定.get公費３日数());
-            個人用帳票データ.set決定後_公費３日数1(特定.get後公費３日数());
+            個人用帳票データ.set決定前_日数1(integerTOInt(特定.get日数()));
+            個人用帳票データ.set決定後_日数1(integerTOInt(特定.get後日数()));
+            個人用帳票データ.set決定前_公費１日数1(integerTOInt(特定.get公費１日数()));
+            個人用帳票データ.set決定後_公費１日数1(integerTOInt(特定.get後公費１日数()));
+            個人用帳票データ.set決定前_公費２日数1(integerTOInt(特定.get公費２日数()));
+            個人用帳票データ.set決定後_公費２日数1(integerTOInt(特定.get後公費２日数()));
+            個人用帳票データ.set決定前_公費３日数1(integerTOInt(特定.get公費３日数()));
+            個人用帳票データ.set決定後_公費３日数1(integerTOInt(特定.get後公費３日数()));
             個人用帳票データ.set決定前_費用額1(特定.get費用額());
             個人用帳票データ.set決定後_費用額1(特定.get後費用額());
             個人用帳票データ.set決定前_保険分請求額1(特定.get保険分請求額());
@@ -1014,14 +1013,14 @@ public class JukyushaKyufuDaichoEdit {
             個人用帳票データ.set決定前_費用単価2(特定.get費用単価());
             個人用帳票データ.set決定後_費用単価2(特定.get後費用単価());
             個人用帳票データ.set負担限度額2(特定.get負担限度額());
-            個人用帳票データ.set決定前_日数2(特定.get日数());
-            個人用帳票データ.set決定後_日数2(特定.get後日数());
-            個人用帳票データ.set決定前_公費１日数2(特定.get公費１日数());
-            個人用帳票データ.set決定後_公費１日数2(特定.get後公費１日数());
-            個人用帳票データ.set決定前_公費２日数2(特定.get公費２日数());
-            個人用帳票データ.set決定後_公費２日数2(特定.get後公費２日数());
-            個人用帳票データ.set決定前_公費３日数2(特定.get公費３日数());
-            個人用帳票データ.set決定後_公費３日数2(特定.get後公費３日数());
+            個人用帳票データ.set決定前_日数2(integerTOInt(特定.get日数()));
+            個人用帳票データ.set決定後_日数2(integerTOInt(特定.get後日数()));
+            個人用帳票データ.set決定前_公費１日数2(integerTOInt(特定.get公費１日数()));
+            個人用帳票データ.set決定後_公費１日数2(integerTOInt(特定.get後公費１日数()));
+            個人用帳票データ.set決定前_公費２日数2(integerTOInt(特定.get公費２日数()));
+            個人用帳票データ.set決定後_公費２日数2(integerTOInt(特定.get後公費２日数()));
+            個人用帳票データ.set決定前_公費３日数2(integerTOInt(特定.get公費３日数()));
+            個人用帳票データ.set決定後_公費３日数2(integerTOInt(特定.get後公費３日数()));
             個人用帳票データ.set決定前_費用額2(特定.get費用額());
             個人用帳票データ.set決定後_費用額2(特定.get後費用額());
             個人用帳票データ.set決定前_保険分請求額2(特定.get保険分請求額());
@@ -1353,7 +1352,10 @@ public class JukyushaKyufuDaichoEdit {
                         .concat(dateFormat年月日(住宅改修.get住宅改修着工年月日()))
                         .concat(SPACE_12).concat(kingakuFormat(住宅改修.get改修金額().intValue()))
                         .concat(SPACE_2).concat(dateFormat年月(住宅改修.get審査年月())));
-                個人用帳票データ.set明細3(ServiceCategoryShurui.toValue(住宅改修.getサービスコード()).get名称());
+                if (!RString.isNullOrEmpty(住宅改修.getサービスコード()) && 住宅改修.getサービスコード().length() >= LIST_SIZE_2) {
+                    RString サービスコード = 住宅改修.getサービスコード().substring(0, LIST_SIZE_2);
+                    個人用帳票データ.set明細3(ServiceCategoryShurui.toValue(サービスコード).get名称());
+                }
                 個人用帳票データ.set適用1(住宅改修.get住宅改修事業者名());
                 if (住宅改修.get住宅改修事業者名().length() > INDEX_64) {
                     個人用帳票データ.set適用2(住宅改修.get住宅改修事業者名().substring(0, INDEX_64));
@@ -1930,7 +1932,7 @@ public class JukyushaKyufuDaichoEdit {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
-        return new RDate(date.toString()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
+        return new FlexibleDate(date.toString()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 

@@ -429,7 +429,7 @@ public final class JukyushaKyufuDaichoData {
         帳票データ.set出来高医療費負担額_公費3(decToRString(個人用.get集計_出来高医療費負担額_公費３()));
         帳票データ.set再審査回数(new RString(個人用.get集計_再審査回数()));
         帳票データ.set過誤回数(new RString(個人用.get集計_過誤回数()));
-        帳票データ.set審査年月(dateFormat年月(個人用.get集計_審査年月()));
+        帳票データ.set審査年月_B(dateFormat年月(個人用.get集計_審査年月()));
         帳票データ.setヘッダー1(個人用.getヘッダー1());
         帳票データ.setヘッダー2(個人用.getヘッダー2());
         帳票データ.setヘッダー3(個人用.getヘッダー3());

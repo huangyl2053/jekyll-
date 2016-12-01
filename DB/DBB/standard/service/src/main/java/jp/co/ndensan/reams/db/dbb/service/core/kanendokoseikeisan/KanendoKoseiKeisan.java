@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.service.core.kanendokoseikeisan;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.chotei.ChoteiJiyu;
 import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.choteikyotsu.ChoteiKyotsu;
@@ -98,6 +100,7 @@ public class KanendoKoseiKeisan {
     private static final RString 重複させる_14期 = new RString("14");
     private static final RString 特別徴収_厚生労働省 = new RString("1");
     private static final RString 特別徴収_地共済 = new RString("2");
+    private static final Long 履歴番号_0 = Long.parseLong("0");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -475,7 +478,7 @@ public class KanendoKoseiKeisan {
                 調定共通 = 調定共通.createBuilderForEdit()
                         .set収納ID(0L)
                         .set会計年度(new RYear(調定年度.getYearValue()))
-                        .set履歴番号(INT_0)
+                        .set履歴番号(履歴番号_0)
                         .set調定事由コード(ChoteiJiyu.更正その他.getCode().getColumnValue())
                         .set調定年月日(賦課の情報.get調定日時().getDate())
                         .set調定額(Decimal.ZERO)
@@ -507,7 +510,7 @@ public class KanendoKoseiKeisan {
                 調定共通 = 調定共通.createBuilderForEdit()
                         .set収納ID(0L)
                         .set会計年度(new RYear(調定年度.getYearValue()))
-                        .set履歴番号(INT_0)
+                        .set履歴番号(履歴番号_0)
                         .set調定事由コード(ChoteiJiyu.更正その他.getCode().getColumnValue())
                         .set調定年月日(賦課の情報.get調定日時().getDate())
                         .set調定額(Decimal.ZERO)
@@ -833,8 +836,17 @@ public class KanendoKoseiKeisan {
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil(調定年度.minusYear(idx));
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 期月リスト = 期月リスト_普徴.toList();
+        Collections.sort(期月リスト, new Comparator<Kitsuki>() {
+            @Override
+            public int compare(Kitsuki o1, Kitsuki o2) {
+                if (重複させない.equals(o1.get期())) {
+                    return 1;
+                }
+                return o1.get期().compareTo(o2.get期());
+            }
+        });
         for (Kitsuki 期月 : 期月リスト) {
-            普徴月テーブル.add(期月.get月AsInt());
+            普徴月テーブル.add(Integer.parseInt(期月.get期().toString()));
         }
 
         fuchoTsukiClass.set普徴月テーブル(普徴月テーブル);
@@ -863,44 +875,26 @@ public class KanendoKoseiKeisan {
             賦課情報年度分 = true;
             今回保険料 = 賦課の情報6.get確定介護保険料_年額();
             前回保険料 = 普徴期別金額合計(賦課の情報6).add(特徴期別金額合計(賦課の情報6));
-            期割前_普徴期別金額合計 = 期割前_普徴期別金額合計.add(普徴期別金額合計(賦課の情報6));
-            期割前_特徴期別金額合計 = 期割前_特徴期別金額合計.add(特徴期別金額合計(賦課の情報6));
         }
-        if (賦課の情報5 != null) {
-            if (!賦課情報年度分) {
-                賦課情報年度分 = true;
-                今回保険料 = 賦課の情報5.get確定介護保険料_年額();
-                前回保険料 = 普徴期別金額合計(賦課の情報5).add(特徴期別金額合計(賦課の情報5));
-            }
-            期割前_普徴期別金額合計 = 期割前_普徴期別金額合計.add(普徴期別金額合計(賦課の情報5));
-            期割前_特徴期別金額合計 = 期割前_特徴期別金額合計.add(特徴期別金額合計(賦課の情報5));
+        if (賦課の情報5 != null && !賦課情報年度分) {
+            賦課情報年度分 = true;
+            今回保険料 = 賦課の情報5.get確定介護保険料_年額();
+            前回保険料 = 普徴期別金額合計(賦課の情報5).add(特徴期別金額合計(賦課の情報5));
         }
-        if (賦課の情報4 != null) {
-            if (!賦課情報年度分) {
-                賦課情報年度分 = true;
-                今回保険料 = 賦課の情報4.get確定介護保険料_年額();
-                前回保険料 = 普徴期別金額合計(賦課の情報4).add(特徴期別金額合計(賦課の情報4));
-            }
-            期割前_普徴期別金額合計 = 期割前_普徴期別金額合計.add(普徴期別金額合計(賦課の情報4));
-            期割前_特徴期別金額合計 = 期割前_特徴期別金額合計.add(特徴期別金額合計(賦課の情報4));
+        if (賦課の情報4 != null && !賦課情報年度分) {
+            賦課情報年度分 = true;
+            今回保険料 = 賦課の情報4.get確定介護保険料_年額();
+            前回保険料 = 普徴期別金額合計(賦課の情報4).add(特徴期別金額合計(賦課の情報4));
         }
-        if (賦課の情報3 != null) {
-            if (!賦課情報年度分) {
-                賦課情報年度分 = true;
-                今回保険料 = 賦課の情報3.get確定介護保険料_年額();
-                前回保険料 = 普徴期別金額合計(賦課の情報3).add(特徴期別金額合計(賦課の情報3));
-            }
-            期割前_普徴期別金額合計 = 期割前_普徴期別金額合計.add(普徴期別金額合計(賦課の情報3));
-            期割前_特徴期別金額合計 = 期割前_特徴期別金額合計.add(特徴期別金額合計(賦課の情報3));
+        if (賦課の情報3 != null && !賦課情報年度分) {
+            賦課情報年度分 = true;
+            今回保険料 = 賦課の情報3.get確定介護保険料_年額();
+            前回保険料 = 普徴期別金額合計(賦課の情報3).add(特徴期別金額合計(賦課の情報3));
         }
-        if (賦課の情報2 != null) {
-            if (!賦課情報年度分) {
-                賦課情報年度分 = true;
-                今回保険料 = 賦課の情報2.get確定介護保険料_年額();
-                前回保険料 = 普徴期別金額合計(賦課の情報2).add(特徴期別金額合計(賦課の情報2));
-            }
-            期割前_普徴期別金額合計 = 期割前_普徴期別金額合計.add(普徴期別金額合計(賦課の情報2));
-            期割前_特徴期別金額合計 = 期割前_特徴期別金額合計.add(特徴期別金額合計(賦課の情報2));
+        if (賦課の情報2 != null && !賦課情報年度分) {
+            賦課情報年度分 = true;
+            今回保険料 = 賦課の情報2.get確定介護保険料_年額();
+            前回保険料 = 普徴期別金額合計(賦課の情報2).add(特徴期別金額合計(賦課の情報2));
         }
         if (賦課の情報1 != null) {
             if (!賦課情報年度分) {

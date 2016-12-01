@@ -10,15 +10,15 @@
         <result property="証記載保険者番号" column="DbT3017_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hiHokenshaNo" column="DbT3017_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceTeikyoYM" column="DbT3017_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="事業所番号" column="DbT3017_jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="給付実績区分コード" column="DbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshoNo" column="DbT3017_jigyoshoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuJissekiKubunCode" column="DbT3017_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費1_負担者番号" column="DbT3017_kohi1FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費1_受給者番号" column="DbT3017_kohi1JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費2_負担者番号" column="DbT3017_kohi2FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費2_受給者番号" column="DbT3017_kohi2JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="公費3_負担者番号" column="DbT3017_kohi3FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="公費3_受給者番号" column="DbT3017_kohi3JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="要介護状態区分コード" column="DbT3017_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoKaigoJotaiKubunCode" column="DbT3017_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="後_保険_サービス単位数" column="DbT3017_atoHokenServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_保険_請求額" column="DbT3017_atoHokenSeikyugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="後_保険_利用者負担額" column="DbT3017_atoHokenRiyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -188,53 +188,20 @@ LEFT JOIN
                 AND 
                 DbT3017."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
             </if>
-            <if test="給付実績区分flag">
+            <if test="給付実績区分 != null and  給付実績区分.toString() == '1'.toString()">
                 AND
                 DbT3017."kyufuJissekiKubunCode" = '1'
             </if>
-            <if test="!給付実績区分flag">
+             <if test="給付実績区分 != null and  給付実績区分.toString() == '2'.toString()">
                 AND
                 DbT3017."kyufuJissekiKubunCode" = '2'
             </if>
-            <if test="要介護1flag">
-               AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('21')
-            </if>
-            <if test="要介護2flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('22')
-            </if>
-            <if test="要介護3flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('23')
-            </if>
-            <if test="要介護4flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('24')
-            </if>
-            <if test="要介護5flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('25')
-            </if>
-            <if test="要支援1flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('12')
-            </if>
-            <if test="要支援2flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('13')
-            </if>
-            <if test="事業対象者flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('06')
-            </if>
-            <if test="経過的要介護flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('11')
-            </if>
-            <if test="自立flag">
-                AND
-               DbT3017."yoKaigoJotaiKubunCode" IN ('01')
+            <if test="給付実績区分List!=null and 給付実績区分List.size()!=0">
+            AND  (  
+                <foreach item="item" index="index" collection="給付実績区分List"  separator="OR" >
+                    #{item}=DbT3017."yoKaigoJotaiKubunCode"
+                </foreach>
+                )
             </if>
             <if test="訪問通所他flag">
                 AND
@@ -352,19 +319,19 @@ LEFT JOIN
                 AND
                 DbT3017."inputShikibetsuNo" IN ('8171')
             </if>
-            <if test="旧措置特定有無flag">
+            <if test="旧措置特定有無 != null and 旧措置特定有無.toString() == '2'.toString()">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '0'
             </if>
-            <if test="!旧措置特定有無flag">
+            <if test="旧措置特定有無 != null and 旧措置特定有無.toString() == '3'.toString()">
                 AND
                 DbT3017."kyuSochiNyushoshaTokureiCode" = '1'
             </if>
-            <if test="老人保健市町村番号有無flag">
+            <if test="老人保健市町村番号有無 != null and 老人保健市町村番号有無.toString() == '2'.toString()">
                 AND
                 DbT3017."rojinHokenShichosonNo" = ''
             </if>
-            <if test="!老人保健市町村番号有無flag">
+            <if test="老人保健市町村番号有無 != null and 老人保健市町村番号有無.toString() == '3'.toString()">
                 AND
                 DbT3017."rojinHokenShichosonNo" <![CDATA[<>]]> ''
                 AND
@@ -372,11 +339,11 @@ LEFT JOIN
                 AND
                 DbT3017."rojinHokenShichosonNo" <![CDATA[<=]]> #{老人保健市町村番号有_終了}
             </if>
-            <if test="老人保健受給者番号有無flag">
+            <if test="老人保健受給者番号有無  != null and 老人保健受給者番号有無.toString() == '2'.toString()">
                 AND
                 DbT3017."rojinhokenJukyushaNo" = ''
             </if>
-            <if test="!老人保健受給者番号有無flag">
+            <if test="老人保健受給者番号有無  != null and 老人保健受給者番号有無.toString() == '3'.toString()">
                 AND
                 DbT3017."rojinhokenJukyushaNo" <![CDATA[<>]]> ''
                 AND
@@ -508,11 +475,11 @@ LEFT JOIN
                 AND 
                 T1."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
             </if>
-            <if test="給付実績区分flag">
+            <if test="給付実績区分 != null and  給付実績区分.toString() == '1'.toString()">
                 AND
                 T1."kyufuJissekiKubunCode" = '1'
             </if>
-            <if test="!給付実績区分flag">
+            <if test="給付実績区分 != null and  給付実績区分.toString() == '2'.toString()">
                 AND
                 T1."kyufuJissekiKubunCode" = '2'
             </if>

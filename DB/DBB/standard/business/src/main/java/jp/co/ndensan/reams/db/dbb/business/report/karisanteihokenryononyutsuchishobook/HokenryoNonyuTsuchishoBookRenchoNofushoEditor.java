@@ -121,6 +121,11 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IKarisante
                 source.nofuzumishoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
             }
         }
+        edit印字位置2_2(source, 納入通知書期情報, is納入通知書期情報がある);
+    }
+
+    private void edit印字位置2_2(KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofuzumishoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofuzumishoNofuIn1 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
         source.nofuzumishoKozaCom1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
@@ -257,6 +262,11 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IKarisante
                 source.nofuzumishoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
             }
         }
+        edit印字位置4_2(source, 納入通知書期情報, is納入通知書期情報がある);
+    }
+
+    private void edit印字位置4_2(KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofuzumishoNokigen3 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofuzumishoNofuIn3 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
         source.nofuzumishoKozaCom3 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
@@ -321,6 +331,12 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IKarisante
                 source.nofuzumishoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
             }
         }
+        edit印字位置5_2(source, 納入通知書期情報, is納入通知書期情報がある);
+
+    }
+
+    private void edit印字位置5_2(KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofuzumishoNokigen4 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofuzumishoNofuIn4 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
         source.nofuzumishoKozaCom4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;

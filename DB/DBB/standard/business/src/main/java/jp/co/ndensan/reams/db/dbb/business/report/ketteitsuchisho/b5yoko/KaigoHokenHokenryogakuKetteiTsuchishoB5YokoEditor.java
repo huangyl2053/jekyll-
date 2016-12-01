@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 /**
  *
  * 介護保険料額決定通知書のB5横タイプのEditorです。
+ * KaigoHokenHokenryogakuKetteiTsuchishoB5YokoEditor
  *
  * @reamsid_L DBB-9080-010 sunhaidi
  */

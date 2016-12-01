@@ -52,14 +52,14 @@ public class KogakuGassanJikofutangakuShomeishoInCsvEntity {
     private RString 七十歳以上の者に係る所得区分;
     @CsvField(order = 160, name = "自己負担額証明書整理番号")
     private RString 自己負担額証明書整理番号;
-    @CsvField(order = 170, name = "突合用後期高齢者医療被保険者番号")
-    private RString 突合用後期高齢者医療被保険者番号;
-    @CsvField(order = 180, name = "突合用国民健康保険保険者番号")
-    private RString 突合用国民健康保険保険者番号;
-    @CsvField(order = 190, name = "突合用国民健康保険被保険者証番号")
-    private RString 突合用国民健康保険被保険者証番号;
-    @CsvField(order = 200, name = "突合用後期高齢者医療保険者番号")
+    @CsvField(order = 170, name = "突合用後期高齢者医療保険者番号")
     private RString 突合用後期高齢者医療保険者番号;
+    @CsvField(order = 180, name = "突合用後期高齢者医療被保険者番号")
+    private RString 突合用後期高齢者医療被保険者番号;
+    @CsvField(order = 190, name = "突合用国民健康保険保険者番号")
+    private RString 突合用国民健康保険保険者番号;
+    @CsvField(order = 200, name = "突合用国民健康保険被保険者証番号")
+    private RString 突合用国民健康保険被保険者証番号;
     @CsvField(order = 210, name = "突合用国保被保険者個人番号")
     private RString 突合用国保被保険者個人番号;
     @CsvField(order = 220, name = "異動区分")

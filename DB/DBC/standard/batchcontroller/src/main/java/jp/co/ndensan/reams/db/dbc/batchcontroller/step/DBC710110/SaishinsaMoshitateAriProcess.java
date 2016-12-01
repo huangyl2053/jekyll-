@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbc.entity.euc.saishinsamoshitate.HanyoListSaishin
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -82,6 +84,7 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
     private boolean flag;
     @BatchWriter
     private CsvWriter<HanyoListSaishinsaMoshitateAriEUCEntity> eucCsvWriter;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
 
     @Override
     protected void initialize() {
@@ -94,6 +97,8 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
         }
         personalDataList = new ArrayList<>();
         出力順Entity = get出力順項目();
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701011.getReportId());
     }
 
     @Override
@@ -128,7 +133,9 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
     @Override
     protected void process(SaishinsaMoshitateRelateEntity entity) {
         flag = true;
-        eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity(entity, 連番++, processParameter, 市町村名MasterMap, association));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
+        eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity(entity, 連番++, processParameter,
+                市町村名MasterMap, 帳票制御共通, association, 導入団体情報));
         if (!RString.isNullOrEmpty(nullToEmpty(entity.get被保険者番号()))) {
             personalDataList.add(toPersonalData(entity));
         }

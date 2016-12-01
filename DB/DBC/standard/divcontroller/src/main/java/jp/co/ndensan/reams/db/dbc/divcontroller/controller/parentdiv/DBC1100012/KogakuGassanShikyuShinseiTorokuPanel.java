@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1100012
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoDataResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyushinseishoTorokugamenTitle;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.DBC1100012TransitionEventName;
@@ -39,8 +40,6 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
 
     private Integer 申請状態;
     private Integer 申請状況;
-    private static final RString 一 = new RString("1");
-    private static final RString 二 = new RString("2");
     private static final int ぜろ = 0;
     private static final int WK申請状況_１ = 1;
     private static final int 十一 = 11;
@@ -241,9 +240,9 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
             return ResponseData.of(div).respond();
         }
         if ((div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
-                .getClickedItem().getTxtShinseiKubun().equals(一)
+                .getClickedItem().getTxtShinseiKubun().equals(KaigoGassan_ShinseiKbn.変更.get名称())
                 || div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
-                .getClickedItem().getTxtShinseiKubun().equals(二))
+                .getClickedItem().getTxtShinseiKubun().equals(KaigoGassan_ShinseiKbn.新規.get名称()))
                 && div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtSoshin().getValue() != null
                 && !div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()

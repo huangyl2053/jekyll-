@@ -35,9 +35,9 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IEucFileOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
@@ -46,7 +46,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -107,8 +106,6 @@ public class TokuchoHeijunkaKakuteiBatch {
     private static final RString バッチパラメータ名_調定年度 = new RString("【調定年度】");
     private static final RString バッチパラメータ名_調定日時 = new RString("【調定日時】");
     private static final RString 日本語ファイル名 = new RString("介護保険特徴仮算定平準化確定一覧表_作成日時.csv");
-    private static final RString CSV出力有無 = new RString("");
-    private static final ReportId EUC_ID = new ReportId("DBB012002");
 
     private EucCsvWriter<TokubetsuChoshuHeijunkaKakuteiCSVEntity> eucCsvWriter;
 
@@ -891,17 +888,16 @@ public class TokuchoHeijunkaKakuteiBatch {
         builder.append(帳票作成時);
         出力条件.add(builder.toRString());
 
-        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                EUC_ID.value(),
+        EucFileOutputJokenhyoItem eucFileOutputJokenhyoItem = new EucFileOutputJokenhyoItem(
+                日本語ファイル名,
                 導入団体コード,
                 市町村名,
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                日本語ファイル名,
-                出力件数,
-                CSV出力有無,
                 英数字ファイル名,
+                EUC_ENTITY_ID.toRString(),
+                出力件数,
                 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
+        IEucFileOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(eucFileOutputJokenhyoItem);
         printer.print();
     }
 

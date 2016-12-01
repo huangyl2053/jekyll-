@@ -191,7 +191,9 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
 
     private boolean is期別金額変更(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
         boolean is変更 = false;
-        if (編集後本算定通知書共通情報.get更正前() != null) {
+        if (編集後本算定通知書共通情報.get更正前() != null && 編集後本算定通知書共通情報.get更正後() != null
+                && 編集後本算定通知書共通情報.get更正前().get普徴期別金額リスト() != null
+                && 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト() != null) {
             List<UniversalPhase> 更正前普徴期別金額リスト = 編集後本算定通知書共通情報.get更正前().get普徴期別金額リスト();
             List<UniversalPhase> 更正後普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
 
@@ -202,7 +204,10 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoEditor implements IKa
                     }
                 }
             }
-
+        }
+        if (編集後本算定通知書共通情報.get更正前() != null && 編集後本算定通知書共通情報.get更正後() != null
+                && 編集後本算定通知書共通情報.get更正前().get特徴期別金額リスト() != null
+                && 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト() != null) {
             List<CharacteristicsPhase> 更正前特徴期別金額リスト = 編集後本算定通知書共通情報.get更正前().get特徴期別金額リスト();
             List<CharacteristicsPhase> 更正後特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
 

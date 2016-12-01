@@ -75,9 +75,7 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtShujii().setValue(今回主治医情報.get主治医氏名());
             div.getTxtIryoKikanCode().setValue(今回主治医情報.get主治医医療機関コード());
             div.getTxtIryoKikan().setValue(今回主治医情報.get医療機関名称());
-            if (今回主治医情報.get郵便番号() != null) {
-                div.getTxtYubinGango().setValue(new Decimal(今回主治医情報.get郵便番号().value().toString()));
-            }
+            div.getTxtYubinGango().setValue(今回主治医情報.get郵便番号());
             div.getTxtJusho().setDomain(new AtenaJusho(今回主治医情報.get住所()));
             div.getTxtDenwaBangoIkensho().setDomain(今回主治医情報.get電話番号());
             div.getTxtFaxIkensho().setDomain(今回主治医情報.get番号());
@@ -101,9 +99,7 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtShujiiZen().setValue(前回主治医情報.get主治医氏名());
             div.getTxtIryoKikanCodeZen().setValue(前回主治医情報.get主治医医療機関コード());
             div.getTxtIryoKikanZen().setValue(前回主治医情報.get医療機関名称());
-            if (前回主治医情報.get郵便番号() != null) {
-                div.getTxtYubinGangoZen().setValue(new Decimal(前回主治医情報.get郵便番号().value().toString()));
-            }
+            div.getTxtYubinGangoZen().setValue(前回主治医情報.get郵便番号());
             div.getTxtJushoZen().setDomain(new AtenaJusho(前回主治医情報.get住所()));
             div.getTxtDenwaBangoIkenshoZen().setDomain(前回主治医情報.get電話番号());
             div.getTxtFaxIkenshoZen().setDomain(前回主治医情報.get番号());

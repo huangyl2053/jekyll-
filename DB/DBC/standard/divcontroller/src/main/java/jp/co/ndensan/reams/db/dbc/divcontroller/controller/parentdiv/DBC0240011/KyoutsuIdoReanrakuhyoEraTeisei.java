@@ -65,9 +65,6 @@ public class KyoutsuIdoReanrakuhyoEraTeisei {
                         FilesystemPath.fromString(Path.getTmpDirectoryPath()),
                         entity.getSharedFileId()).toRString(), LOCAL_FILE_NAME).toString());
                 if (file.exists()) {
-// TODO QA104461により、エラー訂正処理全体の設計の見直しが必要なので、履歴訂正リスト（CSV）ファイルへの削除処理は行わずが実装できません。
-//                    KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei.createInstance()
-//                            .deleteRirekiTeiseiJoho(file, HihokenshaNo.EMPTY, FlexibleDate.MAX);
                     list = KyodoshoriyoJukyushaIdoRenrakuhyoErrorTeisei.createInstance().getRirekiTeiseiJoho(file);
                 }
             }
@@ -99,8 +96,6 @@ public class KyoutsuIdoReanrakuhyoEraTeisei {
      * @return ResponseData<KyoutsuIdoReanrakuhyoEraTeiseiDiv>
      */
     public ResponseData<KyoutsuIdoReanrakuhyoEraTeiseiDiv> onSelectByModifyButton(KyoutsuIdoReanrakuhyoEraTeiseiDiv div) {
-        // TODO QA104461により、エラー訂正処理全体の設計の見直しが必要なので実装できません。
-//        ViewStateHolder.put(ViewStateKeys.一覧検索キー, getHandler(div).get一覧検索キー());
         return ResponseData.of(div).forwardWithEventName(DBC0240011TransitionEventName.修正).respond();
     }
 

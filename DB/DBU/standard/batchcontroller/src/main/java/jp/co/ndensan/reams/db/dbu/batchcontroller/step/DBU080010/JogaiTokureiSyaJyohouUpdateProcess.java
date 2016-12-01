@@ -115,5 +115,4 @@ public class JogaiTokureiSyaJyohouUpdateProcess extends BatchProcessBase<Teyikyo
             dbT7301EntityWriter.update(entity);
         }
     }
-    // TODO 凌護行 「特定個人情報提供の準備」の処理方法が不明です、2016/10/20
 }
