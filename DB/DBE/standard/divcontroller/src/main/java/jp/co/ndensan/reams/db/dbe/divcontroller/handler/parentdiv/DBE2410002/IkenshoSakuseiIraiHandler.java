@@ -423,7 +423,7 @@ public class IkenshoSakuseiIraiHandler {
         if (意見書作成依頼書情報.get医療機関住所() != null) {
             医療機関住所 = 意見書作成依頼書情報.get医療機関住所().value();
         }
-        item.setYubinNo(医療機関郵便番号);
+        item.setYubinNo1(医療機関郵便番号);
         item.setJushoText(医療機関住所);
         item.setKikanNameText(意見書作成依頼書情報.get医療機関名称());
         item.setShimeiText(意見書作成依頼書情報.get主治医氏名());
@@ -482,7 +482,7 @@ public class IkenshoSakuseiIraiHandler {
             }
         }
         if (意見書作成依頼書情報.get郵便番号() != null) {
-            item.setYubinNo1(getEditedYubinNo(意見書作成依頼書情報.get郵便番号().value()));
+            item.setYubinNo(getEditedYubinNo(意見書作成依頼書情報.get郵便番号().value()));
         }
         if (意見書作成依頼書情報.get住所() != null) {
             item.setJusho(意見書作成依頼書情報.get住所().value());
