@@ -71,7 +71,7 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
 
         source.listList1_1 = doパターン4(対象データ.get訂正年月日());
         source.listList1_2 = doパターン4(対象データ.get異動年月日());
-        if (!RString.isNullOrEmpty(対象データ.get異動区分コード())) {
+        if (!isNullOrEmpty(対象データ.get異動区分コード())) {
             source.listList1_3 = JukyushaIF_IdoKubunCode.toValue(対象データ.get異動区分コード()).get名称();
         }
         if (null != 対象データ.get登録被保険者番号()) {
@@ -85,28 +85,28 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         source.listList1_8 = doパターン4(対象データ.get生年月日());
         source.listList1_9 = doパターン4(対象データ.get資格取得年月日());
         source.listList2_1 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(対象データ.get異動事由区分())) {
+        if (!isNullOrEmpty(対象データ.get異動事由区分())) {
             source.listList2_2 = JukyushaIF_JukyushaIdoJiyu.toValue(対象データ.get異動事由区分()).get名称();
         }
         source.listList2_3 = 対象データ.get宛名名称();
         source.listList2_4 = 対象データ.get町域コード();
         source.listList2_5 = this.編集住所;
-        if (!RString.isNullOrEmpty(対象データ.get性別コード())) {
+        if (!isNullOrEmpty(対象データ.get性別コード())) {
             source.listList2_6 = 対象データ.get性別コード().concat(コロン)
                     .concat(Seibetsu.toValue(対象データ.get性別コード()).name());
         }
         source.listList2_7 = doパターン4(対象データ.get資格喪失年月日());
-        if (!RString.isNullOrEmpty(対象データ.getみなし要介護区分コード())) {
+        if (!isNullOrEmpty(対象データ.getみなし要介護区分コード())) {
             source.listList3_1 = 対象データ.getみなし要介護区分コード().concat(コロン)
                     .concat(MinashiCode.toValue(対象データ.getみなし要介護区分コード()).get名称());
         }
         source.listList3_2 = doパターン4(対象データ.get認定有効期間開始年月日());
-        if (!RString.isNullOrEmpty(対象データ.get申請種別コード())) {
+        if (!isNullOrEmpty(対象データ.get申請種別コード())) {
             source.listList3_3 = 対象データ.get申請種別コード().concat(コロン)
                     .concat(JukyushaIF_ShinseiShubetsuCode.toValue(対象データ.get申請種別コード()).name());
         }
         source.listList3_4 = doパターン4(対象データ.get申請年月日());
-        if (!RString.isNullOrEmpty(対象データ.get居宅サービス計画作成区分コード())) {
+        if (!isNullOrEmpty(対象データ.get居宅サービス計画作成区分コード())) {
             source.listList3_5 = 対象データ.get居宅サービス計画作成区分コード().concat(コロン)
                     .concat(JukyushaIF_KeikakuSakuseiKubunCode.toValue(対象データ
                                     .get居宅サービス計画作成区分コード()).name());
@@ -116,16 +116,16 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         source.listList3_8 = doパターン4(対象データ.get訪問通所上限管理適用期間開始年月日());
         source.listList3_9 = doカンマ編集(対象データ.get短期入所支給限度基準額());
         source.listList3_10 = doパターン4(対象データ.get短期入所上限管理適用期間開始年月日());
-        if (!RString.isNullOrEmpty(対象データ.get標準負担区分コード())) {
+        if (!isNullOrEmpty(対象データ.get標準負担区分コード())) {
             source.listList3_11 = 対象データ.get標準負担区分コード().concat(コロン)
                     .concat(JukyushaIF_HyojunFutanKubunCode.toValue(対象データ.get標準負担区分コード()).name());
         }
         source.listList3_12 = doパターン4(対象データ.get負担額適用開始年月日());
-        if (!RString.isNullOrEmpty(対象データ.get減免申請中区分コード())) {
+        if (!isNullOrEmpty(対象データ.get減免申請中区分コード())) {
             source.listList3_13 = 対象データ.get減免申請中区分コード().concat(コロン)
                     .concat(JukyushaIF_GemmenShinseichuKubunCode.toValue(対象データ.get減免申請中区分コード()).name());
         }
-        if (null != 対象データ.getサービス提供年月末日() && !RString.isNullOrEmpty(対象データ.get要介護状態区分コード())) {
+        if (!isNullOrEmpty(対象データ.get要介護状態区分コード())) {
             IYokaigoJotaiKubun support = YokaigoJotaiKubunSupport.toValue(対象データ
                     .getサービス提供年月末日().getYearMonth(), 対象データ.get要介護状態区分コード());
             source.listList4_1 = support.getName();
@@ -183,7 +183,7 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         source.gyoseikuCode = getNotNull(対象データ.get行政区コード());
         source.shimei50onKana = getNotNull(対象データ.get氏名50音カナ());
         source.shichosonCode = 対象データ.get市町村コード();
-        if (!RString.isNullOrEmpty(対象データ.get識別コード())) {
+        if (!isNullOrEmpty(対象データ.get識別コード())) {
             source.shikibetuCode = new ShikibetsuCode(対象データ.get識別コード());
         }
         source.拡張情報 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
@@ -205,65 +205,64 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
     }
 
     private void 名称項目編集(JukyushaKoshinkekkaIchiranSource source) {
-        if (!RString.isNullOrEmpty(対象データ.get変更申請中区分コード())) {
+        if (!isNullOrEmpty(対象データ.get変更申請中区分コード())) {
             source.listList4_3 = 対象データ.get変更申請中区分コード().concat(コロン)
                     .concat(JukyushaIF_HenkoShinseichuKubunCode.toValue(対象データ
                                     .get変更申請中区分コード()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get利用者負担区分コード())) {
+        if (!isNullOrEmpty(対象データ.get利用者負担区分コード())) {
             source.listList5_1 = 対象データ.get利用者負担区分コード().concat(コロン)
                     .concat(JukyushaIF_RiyoshaFutanKubunCode.toValue(対象データ
                                     .get利用者負担区分コード()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get公費負担上限額減額の有無())) {
+        if (!isNullOrEmpty(対象データ.get公費負担上限額減額の有無())) {
             source.listList5_3 = 対象データ.get公費負担上限額減額の有無().concat(コロン)
                     .concat(JukyushaIF_kohiFutanJogengakuGengakuUmu.toValue(対象データ
                                     .get公費負担上限額減額の有無()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get住所地特例対象者区分コード())) {
+        if (!isNullOrEmpty(対象データ.get住所地特例対象者区分コード())) {
             source.listList5_6 = 対象データ.get住所地特例対象者区分コード().concat(コロン)
                     .concat(JukyushaIF_JutokuJigyoKubunCode.toValue(対象データ.get住所地特例対象者区分コード()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get小規模居宅サービス利用有無())) {
+        if (!isNullOrEmpty(対象データ.get小規模居宅サービス利用有無())) {
             source.listList5_9 = 対象データ.get小規模居宅サービス利用有無().concat(コロン)
                     .concat(JukyushaIF_ShokiboKyotakuServiceRIyoCode.toValue(対象データ
                                     .get小規模居宅サービス利用有無()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get二次予防事業区分コード())) {
+        if (!isNullOrEmpty(対象データ.get二次予防事業区分コード())) {
             source.listList6_10 = 対象データ.get二次予防事業区分コード().concat(コロン)
                     .concat(JukyushaIF_NijiyoboJigyoKubunCode
                             .toValue(対象データ.get二次予防事業区分コード()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get二次予防事業区分コード())) {
+        if (!isNullOrEmpty(対象データ.get二次予防事業区分コード())) {
             source.listList6_10 = 対象データ.get二次予防事業区分コード().concat(コロン)
                     .concat(JukyushaIF_NijiyoboJigyoKubunCode
                             .toValue(対象データ.get二次予防事業区分コード()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get特定入所者認定申請中区分コード())) {
+        if (!isNullOrEmpty(対象データ.get特定入所者認定申請中区分コード())) {
             source.listList7_1 = 対象データ.get特定入所者認定申請中区分コード().concat(コロン)
                     .concat(JukyushaIF_NinteiShinseichuKubunCode
                             .toValue(対象データ.get特定入所者認定申請中区分コード()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get課税層の特例減額措置対象区分())) {
+        if (!isNullOrEmpty(対象データ.get課税層の特例減額措置対象区分())) {
             source.listList7_2 = 対象データ.get課税層の特例減額措置対象区分().concat(コロン)
                     .concat(JukyushaIF_TokureiGengakuSochiTaisho.toValue(対象データ
                                     .get課税層の特例減額措置対象区分()).name());
         }
-        if (!RString.isNullOrEmpty(対象データ.get特定入所者介護サービス区分コード())) {
+        if (!isNullOrEmpty(対象データ.get特定入所者介護サービス区分コード())) {
             source.listList8_1 = 対象データ.get特定入所者介護サービス区分コード().concat(コロン)
                     .concat(JukyushaIF_ServiceKubunCode.toValue(対象データ.get特定入所者介護サービス区分コード()).name());
         }
     }
 
     private RString doパターン4(RString 年月日) {
-        if (null == 年月日) {
+        年月日 = 年月日.trim();
+        if (null == 年月日 || RString.EMPTY.equals(年月日)) {
             return RString.EMPTY;
         }
-        if (FlexibleDate.canConvert(年月日)) {
-            if (new FlexibleDate(年月日).isWareki()) {
-                return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
-                        .fillType(FillType.BLANK).toDateString();
-            }
+        if (FlexibleDate.canConvert(年月日) && new FlexibleDate(年月日).isWareki()) {
+            return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
+                    .fillType(FillType.BLANK).toDateString();
         }
         return 年月日;
     }
@@ -293,4 +292,7 @@ public class KokuhorenJukyushaDaichoIchiranBodyEditor
         return str;
     }
 
+    private boolean isNullOrEmpty(RString コード) {
+        return コード == null || RString.EMPTY.equals(コード.trim());
+    }
 }

@@ -604,6 +604,12 @@
                   AND
                      DbT3017."kyufuJissekiKubunCode" = #{給付実績区分}
               </if>
+              <if test="被保険者番号flag">
+                  AND
+                     DbT3017."hiHokenshaNo" <![CDATA[>=]]> #{被保険者番号_開始}
+                  AND
+                     DbT3017."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
+              </if>
               <if test="!すべて選択flag">
               AND (
               </if>
@@ -641,6 +647,10 @@
               </if>
               <if test="事業対象者flag">
                      DbT3017."yoKaigoJotaiKubunCode" IN ('06')
+                  OR
+              </if>
+              <if test="自立flag">
+                     DbT3017."yoKaigoJotaiKubunCode" IN ('01')
                   OR
               </if>
               <if test="!すべて選択flag">
@@ -1948,6 +1958,12 @@
         <if test="給付実績区分flag1">
             AND
                DbT3028."kyufuJissekiKubunCode" = #{給付実績区分}
+        </if>
+        <if test="被保険者番号flag">
+            AND
+               DbT3028."hiHokenshaNo" <![CDATA[>=]]> #{被保険者番号_開始}
+            AND
+               DbT3028."hiHokenshaNo" <![CDATA[<=]]> #{被保険者番号_終了}
         </if>
         AND (
               <if test="訪問通所他flag">

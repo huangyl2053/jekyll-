@@ -86,7 +86,7 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
         source.listUpper_3 = entity.get帳票用データ().get被保険者entity().getHihokenshaNo().value();
         source.expandedInformation = new ExpandedInformation(new Code("0003"), 被保険者番号,
                 source.listUpper_3);
-        source.listLower_1 = entity.get帳票用データ().get被保険者entity().getMeisho();
+        source.listLower_1 = entity.get帳票用データ().get被保険者entity().getOrgHihokenshaShimei();
         source.listUpper_4 = 計算結果entity.getShikyuShinseishoSeiriNo();
 
         source.listLower_2 = 計算結果entity.getJikoFutanSeiriNo();

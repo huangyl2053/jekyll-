@@ -99,7 +99,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariSealerEditor implements
 
     private void editorSource(TokubetsuChoshuKaishiTsuchishoKariSealerSource source) {
         if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人() != null) {
-            source.birthYMD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日For帳票();
+            source.birthYMD = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get生年月日();
             source.hihokenshaJusho = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後宛先().get編集後住所();
             if (仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書() != null) {
                 source.hihokenshaKatagaki = 仮算定特徴開始通知書情報.get編集後仮算定通知書共通情報().get編集後個人().get方書().value();

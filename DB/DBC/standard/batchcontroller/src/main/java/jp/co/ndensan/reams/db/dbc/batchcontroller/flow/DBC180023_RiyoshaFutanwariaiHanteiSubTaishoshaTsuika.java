@@ -42,7 +42,6 @@ public class DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuika
     private static final RString 管理識別区分 = new RString("3");
     private static final String 世帯員情報作成 = "setainJohoSakuseiProcess";
     private static final String 世帯員利用者負担割合本人追加 = "setainTuikaProcess";
-    private DBC180020ProcessParameter processPrm;
     private int kijunbiSize;
     private DBC180020ProcessParameter loopProcessPrm;
     private RiyoshaFutanWariaiHanteiUtil util;
@@ -60,7 +59,6 @@ public class DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuika
         getParameter().set対象終了日(service.getTaishoShuryobi(nendo));
         List<RString> hanteiKijunbi = getParameter().getHanteiKijunbi();
         kijunbiSize = hanteiKijunbi == null ? 0 : hanteiKijunbi.size();
-        processPrm = util.toProcessParameter(getParameter().toDBC180022_RiyoshaFutanwariaiHanteiSubParameter());
     }
 
     @Override
@@ -103,7 +101,7 @@ public class DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuika
 
     @Step(世帯員把握FLOW)
     IBatchFlowCommand setaiShotokuKazeiHanteiFlow() {
-        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBB介護賦課,
+        return otherBatchFlow(世帯員把握BATCHID, SubGyomuCode.DBZ介護共通,
                 new DBB002001_SetaiinHaakuParameter(管理識別区分)).define();
     }
 

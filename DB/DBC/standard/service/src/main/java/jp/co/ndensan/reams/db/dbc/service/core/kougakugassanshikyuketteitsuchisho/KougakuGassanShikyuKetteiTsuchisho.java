@@ -215,7 +215,7 @@ public class KougakuGassanShikyuKetteiTsuchisho {
         if (chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 通知文情報帳票ID).is口座マスク有無()) {
             口座 = iKozaManager.getマスク済口座(builder.build()).isEmpty() ? null : iKozaManager.getマスク済口座(builder.build()).get(0);
         } else {
-            口座 = iKozaManager.get口座(builder.build()).isEmpty() ? null : iKozaManager.get口座(builder.build()).get(0);
+            口座 = iKozaManager.get口座(口座ID, FlexibleDate.getNowDate());
         }
         entity.set口座情報(口座);
     }

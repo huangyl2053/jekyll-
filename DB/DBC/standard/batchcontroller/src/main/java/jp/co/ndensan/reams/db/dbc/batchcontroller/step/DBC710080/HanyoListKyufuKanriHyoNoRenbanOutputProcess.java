@@ -159,10 +159,11 @@ public class HanyoListKyufuKanriHyoNoRenbanOutputProcess extends BatchProcessBas
 
     @Override
     protected void process(HanyoListKyufuKanriHyoEntity entity) {
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get受給者台帳().getShichosonCode());
         連番++;
         csv出力Flag = 定数_あり;
         HanyoListKyufuKanriHyoCsvEntityEditor editor = new HanyoListKyufuKanriHyoCsvEntityEditor(entity, parameter,
-                地方公共団体情報, 構成市町村マスタ, parameter.getシステム日付(), 連番);
+                導入団体情報, 構成市町村マスタ, parameter.getシステム日付(), 連番);
         csvWriter.writeLine(editor.noRenbanEdit(帳票制御共通));
         ExpandedInformation expandedInformation = new ExpandedInformation(
                 CODE_0003, DATANAME_被保険者番号, entity.getHiHokenshaNo().getColumnValue());

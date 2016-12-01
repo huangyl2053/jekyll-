@@ -44,7 +44,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private final KyufuJissekiKihonJouhouMainDiv div;
     private static final int INT_ZERO = 0;
     private static final int INT_ITI = 1;
-    private static final RString 無し = new RString("1");
     private static final RString 設定不可 = new RString("0");
     private static final RString 総合事業 = new RString("5");
     private static final FlexibleYearMonth 平成２０年４月 = new FlexibleYearMonth("200804");
@@ -74,6 +73,11 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
         div.getCcdKyufuJissekiHeader().set被保情報2(実績基本集計データ);
         KyufujissekiKihon 給付実績基本 = 実績基本集計データ.get給付実績基本データ();
+        if (実績基本集計データ.get事業者名称2() != null) {
+            div.getTxtKyufuJissekiKihonJigyoshoName().setValue(実績基本集計データ.get事業者名称2().getColumnValue());
+        } else {
+            div.getTxtKyufuJissekiKihonJigyoshoName().clearValue();
+        }
         set申請内容エリア(給付実績基本);
         set合計内容エリア(給付実績基本);
         set表示制御(給付実績基本.getサービス提供年月(), 給付実績基本.get入力識別番号());
@@ -224,7 +228,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
         if (設定不可.equals(識別番号管理データ.get特定入所者設定区分())) {
             div.getBtnTokuteiNyushosha().setDisabled(true);
         }
-        if (設定不可.equals(識別番号管理データ.get特定診療費設定区分())) {
+        if (設定不可.equals(識別番号管理データ.get特定診療費設定区分()) && 設定不可.equals(識別番号管理データ.get特定診療特別療養設定区分())) {
             div.getBtnTokuteiShinryo().setDisabled(true);
         }
         if (設定不可.equals(識別番号管理データ.get居宅計画費設定区分())) {
@@ -293,15 +297,11 @@ public class KyufuJissekiKihonJouhouMainHandler {
         div.getTxtKyufuJissekiKihonKeikokuKubun().setValue(get警告区分(給付実績基本情報.get警告区分コード()));
         div.getTxtKyufuJissekiKihonKyusochiNyushoshaTokurei().setValue(
                 get旧措置入所者特例(給付実績基本情報.get旧措置入所者特例コード()));
-        if (INT_ZERO != 給付実績基本情報.get後_保険_サービス単位数()) {
-            div.getTxtServiceTankasu().setValue(new Decimal(給付実績基本情報.get後_保険_サービス単位数()));
-        }
-        if (給付実績基本情報.get後_保険_請求額() != null && INT_ZERO != 給付実績基本情報.get後_保険_請求額().intValue()) {
+        div.getTxtServiceTankasu().setValue(new Decimal(給付実績基本情報.get後_保険_サービス単位数()));
+        if (給付実績基本情報.get後_保険_請求額() != null) {
             div.getTxtHokenryoSeikyuGaku().setValue(給付実績基本情報.get後_保険_請求額());
         }
-        if (INT_ZERO != 給付実績基本情報.get後_保険_利用者負担額()) {
-            div.getTxtRiyoshaFutanGaku().setValue(new Decimal(給付実績基本情報.get後_保険_利用者負担額()));
-        }
+        div.getTxtRiyoshaFutanGaku().setValue(new Decimal(給付実績基本情報.get後_保険_利用者負担額()));
         set被保険者エリア(給付実績基本情報);
         set後期高齢と国保エリア(給付実績基本情報, 給付実績基本情報.getサービス提供年月());
         set居宅サービス計画エリア(給付実績基本情報);
@@ -454,11 +454,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
 
     private RString get旧措置入所者特例(RString 旧措置入所者特例コード) {
         if (!RString.isNullOrEmpty(旧措置入所者特例コード)) {
-            if (無し.equals(旧措置入所者特例コード)) {
-                return KyuSochiNyushoshaTokureiCode.無し.get名称();
-            } else {
-                return KyuSochiNyushoshaTokureiCode.有り.get名称();
-            }
+            return KyuSochiNyushoshaTokureiCode.toValue(旧措置入所者特例コード).get名称();
         }
 
         return RString.EMPTY;

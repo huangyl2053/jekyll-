@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBB-0700-010 xuhao
  */
 public enum TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder implements IReportItems {
-    // TODO QA1879
+
     /**
      * 郵便番号
      */

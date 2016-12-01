@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -79,11 +80,16 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
                 FukaDaichoItem item2 = new FukaDaichoItem();
                 setHonSanteifukaUchiwakeIchiKoseiMae(item2, entity);
                 setHonSanteifukaUchiwakeNiKoseiMaeNengakuHokenryo(item2, entity);
-                setFutsuChoshuKoseiMae(item2, entity);
+                if (has普通徴収情報(entity) && GennenKanen.過年度 != entity.get年度区分()) {
+                    setFutsuChoshuKoseiMae(item2, entity);
+                }
                 setHonninKoseiMae(item2, entity);
-                setTokubetsuChoshuKoseiMae(item2, entity);
+                if (has特別徴収情報(entity)) {
+                    setTokubetsuChoshuKoseiMae(item2, entity);
+                }
                 setTokubetsuChoshuKi(item2, entity);
                 setTokubetsuChoshuTsuki(item2, entity);
+
                 setFutsuChoshuKi(item2, entity);
                 setFutsuChoshuTsuki(item2, entity);
                 setFutsuChoshuZuiji(item2, entity);
@@ -91,15 +97,23 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
                 FukaDaichoItem item3 = new FukaDaichoItem();
                 setHonSanteifukaUchiwakeIchiKoseiAto(item3, entity);
                 setHonSanteifukaUchiwakeNiKoseiMaeShotokuDankai(item3, entity);
-                setFutsuChoshuKoseiAto(item3, entity);
+                if (has普通徴収情報(entity)) {
+                    setFutsuChoshuKoseiAto(item3, entity);
+                }
                 setHonninKoseiAto(item3, entity);
-                setTokubetsuChoshuKoseiAto(item3, entity);
+                if (has特別徴収情報(entity)) {
+                    setTokubetsuChoshuKoseiAto(item3, entity);
+                }
 
                 FukaDaichoItem item4 = new FukaDaichoItem();
                 setHonSanteifukaUchiwakeIchiZogenKingaku(item4, entity);
                 setHonSanteifukaUchiwakeNiKoseiAtoNengakuHokenryo(item4, entity);
-                setFutsuChoshuZogenKingaku(item4, entity);
-                setTokubetsuChoshuZogenKingaku(item4, entity);
+                if (has普通徴収情報(entity)) {
+                    setFutsuChoshuZogenKingaku(item4, entity);
+                }
+                if (has特別徴収情報(entity)) {
+                    setTokubetsuChoshuZogenKingaku(item4, entity);
+                }
 
                 set世帯員情報リストPart1(item2, entity, INDEX0);
                 set世帯員情報リストPart2(item2, entity, INDEX4);
@@ -144,6 +158,28 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
             }
         }
         return targets;
+    }
+
+    private boolean has普通徴収情報(EditedHonSanteiFukaDaichoJoho entity) {
+        RString 更正前確定年額保険料 = RString.EMPTY;
+        RString 更正後確定年額保険料 = RString.EMPTY;
+        if (entity.get普通徴収更正前() != null) {
+            更正前確定年額保険料 = entity.get普通徴収更正前().get普徴確定年額保険料();
+            更正後確定年額保険料 = entity.get普通徴収更正後().get普徴確定年額保険料();
+        }
+        return !((RString.isNullOrEmpty(更正前確定年額保険料) || 更正前確定年額保険料.equals(new RString("0")))
+                && (RString.isNullOrEmpty(更正後確定年額保険料) || 更正後確定年額保険料.equals(new RString("0"))));
+    }
+
+    private boolean has特別徴収情報(EditedHonSanteiFukaDaichoJoho entity) {
+        RString 更正前確定年額保険料 = RString.EMPTY;
+        RString 更正後確定年額保険料 = RString.EMPTY;
+        if (entity.get特別徴収更正前() != null) {
+            更正前確定年額保険料 = entity.get特別徴収更正前().get特徴確定年額保険料();
+            更正後確定年額保険料 = entity.get特別徴収更正後().get特徴確定年額保険料();
+        }
+        return !((RString.isNullOrEmpty(更正前確定年額保険料) || 更正前確定年額保険料.equals(new RString("0")))
+                && (RString.isNullOrEmpty(更正後確定年額保険料) || 更正後確定年額保険料.equals(new RString("0"))));
     }
 
     /**

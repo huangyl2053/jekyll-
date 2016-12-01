@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -114,7 +115,8 @@ public class DBC2000022PanelAll {
                     && RSTTWO.equals(判定結果.get判定区分())) {
                 return ResponseData.of(div).addMessage(DbcInformationMessages.負担割合証発行不要.getMessage()).respond();
             }
-            if (MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType()) {
+            if (RString.isNullOrEmpty(ResponseHolder.getMessageCode()) || MessageDialogSelectedResult.Yes == ResponseHolder.getButtonType()) {
+                前排他キーの設定(div);
                 return ResponseData.of(div).setState(DBC2000022StateName.新規);
             } else {
                 return ResponseData.of(div).respond();
@@ -122,6 +124,7 @@ public class DBC2000022PanelAll {
         }
         if (DBC2000022StateName.修正.getName().equals(処理モード)) {
             FutanWariaiSokujiKouseiResult 利用者負担割合情報 = getHandler(div).shuseiInitialize(資格対象者);
+            前排他キーの設定(div);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, new RiyoshaFutanWariai(利用者負担割合情報.toEntity()));
             ViewStateHolder.put(ViewStateKeys.利用者負担割合明細,
                     new FutanWariaiSokujiKouseiHolder(利用者負担割合情報.get利用者負担割合明細list()));
@@ -129,6 +132,7 @@ public class DBC2000022PanelAll {
         }
         if (DBC2000022StateName.照会.getName().equals(処理モード)) {
             FutanWariaiSokujiKouseiResult 利用者負担割合情報 = getHandler(div).shokaiInitialize(資格対象者);
+            前排他キーの設定(div);
             ViewStateHolder.put(ViewStateKeys.利用者負担割合, new RiyoshaFutanWariai(利用者負担割合情報.toEntity()));
             ViewStateHolder.put(ViewStateKeys.利用者負担割合明細,
                     new FutanWariaiSokujiKouseiHolder(利用者負担割合情報.get利用者負担割合明細list()));
@@ -633,5 +637,15 @@ public class DBC2000022PanelAll {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         LockingKey 排他キー = new LockingKey(前排他キー.concat(資格対象者.get被保険者番号().getColumnValue()));
         RealInitialLocker.release(排他キー);
+    }
+
+    private void 前排他キーの設定(DBC2000022PanelAllDiv div) {
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        LockingKey key = new LockingKey(前排他キー.concat(資格対象者.get被保険者番号().getColumnValue()));
+        if (!RealInitialLocker.tryGetLock(key)) {
+            throw new PessimisticLockingException();
+        } else {
+            div.setDisabled(false);
+        }
     }
 }

@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 事業報告統計データを管理するクラスです。
  *
- * @reamsid_L DBU-1100-030 wangkanglei
+ * @reamsid_L DBU-9999-022 wangkanglei
  */
 public class JigyoHokokuTokeiData
         extends ModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable {
@@ -130,7 +130,6 @@ public class JigyoHokokuTokeiData
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 報告年を返します。
      *
@@ -326,7 +325,6 @@ public class JigyoHokokuTokeiData
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new JigyoHokokuTokeiData(deletedEntity, id);
@@ -349,7 +347,6 @@ public class JigyoHokokuTokeiData
 
     private static final class _SerializationProxy implements Serializable {
 
-        // TODO serialVersionUIDを生成してください
         private static final long serialVersionUID = 1;
         private final DbT7021JigyoHokokuTokeiDataEntity entity;
         private final JigyoHokokuTokeiDataIdentifier id;
@@ -373,6 +370,4 @@ public class JigyoHokokuTokeiData
     public JigyoHokokuTokeiDataBuilder createBuilderForEdit() {
         return new JigyoHokokuTokeiDataBuilder(entity, id);
     }
-
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

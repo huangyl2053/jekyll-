@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -15,7 +15,8 @@ public enum DBC1170011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     処理完了("処理完了"),
-    検索に戻る("検索に戻る");
+    検索に戻る("検索に戻る"),
+    検索結果一覧に戻る("検索結果一覧に戻る");
 
     private final RString name;
 

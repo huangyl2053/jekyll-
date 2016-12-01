@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.basic.KogakuGassanShikyuGakuKeisa
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -140,6 +139,15 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
                 public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
                     return SpecHelper.is内訳入力途中のチェック(div);
                 }
+            },
+    /**
+     * 連絡票整理番号チェック。
+     */
+    連絡票整理番号チェック {
+                @Override
+                public boolean apply(ShikyugakuKeisanKekkaTorokuDiv div) {
+                    return SpecHelper.is連絡票整理番号チェック(div);
+                }
             };
 
     /**
@@ -155,11 +163,11 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         private static final RString DATE_0401 = new RString("0401");
         private static final RString DATE_0731 = new RString("0731");
         private static final RString DATE_0801 = new RString("0801");
-        private static final RString 追加 = new RString("追加");
         private static final RString 照会 = new RString("照会");
+        private static final RString 削除 = new RString("削除");
+        private static final RString 追加 = new RString("追加");
 
         public static boolean is重複チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
-            TaishoshaKey 対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             RString 支給申請書整理番号 = div.getTxtShikyuShinseishoSeiriNoInput().getValue();
             KogakuGassanShikyuGakuKeisanKekkaManager manager = new KogakuGassanShikyuGakuKeisanKekkaManager();
             List<KogakuGassanShikyuGakuKeisanKekka> resultList
@@ -208,6 +216,10 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             return div.getTxtSanteiKijunGaku().getValue() != null && !Decimal.ZERO.equals(div.getTxtSanteiKijunGaku().getValue());
         }
 
+        public static boolean is連絡票整理番号チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+            return div.getTxtShikyuShinseishoSeiriNoInput().getValue() != null && !div.getTxtShikyuShinseishoSeiriNoInput().getValue().isEmpty();
+        }
+
         public static boolean is対象計算期間終了年月日チェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             RDate 対象計算期間終了年月日 = div.getTxtTaishoKeisanKikan().getToValue();
             return 対象計算期間終了年月日.compareTo(RDate.getNowDate()) <= 0;
@@ -252,6 +264,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
         }
 
         public static boolean is既に存在のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
+            RString 状態 = ViewStateHolder.get(ViewStateKeys.支給額計算結果明細状態, RString.class);
             RString 証明書整理番号 = div.getTxtJikoFutanSeiriNom().getText();
             if (RString.isNullOrEmpty(証明書整理番号)) {
                 return true;
@@ -261,13 +274,14 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
             if (rowList == null || rowList.isEmpty()) {
                 return true;
             }
-            if (div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem() != null) {
+            if (!追加.equals(状態)
+                    && div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem() != null) {
                 RString 選択行証明書整理番号 = div.getDgKogakuGassanShikyugakuKeisanKekkaMeisai().getClickedItem().getTxtJikoFutanSeiriNo();
                 if (証明書整理番号.equals(選択行証明書整理番号)) {
                     return true;
                 }
             }
-            
+
             for (dgKogakuGassanShikyugakuKeisanKekkaMeisai_Row row : rowList) {
                 if (証明書整理番号.equals(row.getTxtJikoFutanSeiriNo())) {
                     return false;
@@ -278,6 +292,7 @@ public enum ShikyugakuKeisanKekkaTorokuSpec implements IPredicate<ShikyugakuKeis
 
         public static boolean is内訳入力途中のチェック(ShikyugakuKeisanKekkaTorokuDiv div) {
             return 照会.equals(div.getTxtStatusFlg().getValue())
+                    || 削除.equals(div.getTxtStatusFlg().getValue())
                     || div.getShikyugakuKeisanKekkaTorokuDetailPanel().isReadOnly()
                     || div.getShikyugakuKeisanKekkaTorokuUchiwakeDetail().isDisplayNone();
         }

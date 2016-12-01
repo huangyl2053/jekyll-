@@ -65,6 +65,7 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiReport extends NonyuTsuchisho
     public void writeBy(ReportSourceWriter<HokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource> writer) {
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
         if (null == 納入通知書期情報リスト || is全部の納付額が0(納入通知書期情報リスト)) {
+            edit納付書(null, INT1, writer);
             return;
         }
 
@@ -83,7 +84,6 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiReport extends NonyuTsuchisho
 
     private void edit前中後期(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト,
             ReportSourceWriter<HokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource> writer) {
-
         if (HenshuHaniKubun.Detailのみ.equals(本算定納入通知書情報.get編集範囲区分())) {
             edit納付書(納入通知書期情報リスト, 1, writer);
             return;
@@ -201,9 +201,9 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiReport extends NonyuTsuchisho
 
     private void edit納付書(List<NonyuTsuchiShoKiJoho> 納入通知書期情報リストEdit, int ページ,
             ReportSourceWriter<HokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource> writer) {
-        if (納入通知書期情報リストEdit.isEmpty()) {
-            return;
-        }
+//        if (納入通知書期情報リストEdit.isEmpty()) {
+//            return;
+//        }
         IHokenryoNonyuTsuchishoBookFuriKaeNashiEditor editor
                 = new HokenryoNonyuTsuchishoBookFuriKaeNashiNofushoEditor(
                         本算定納入通知書情報, 納入通知書期情報リストEdit, ページ);
@@ -227,6 +227,9 @@ public class HokenryoNonyuTsuchishoBookFuriKaeNashiReport extends NonyuTsuchisho
     @Override
     public List<NonyuTsuchisho<HokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource>> devidedByPage() {
         List<NonyuTsuchisho<HokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource>> nonyuTsuchishoList = new ArrayList<>();
+        if (本算定納入通知書情報.get納入通知書期情報リスト() == null) {
+            return nonyuTsuchishoList;
+        }
         List<NonyuTsuchiShoKiJoho> 納入通知書期情報リスト = 本算定納入通知書情報.get納入通知書期情報リスト();
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報Cover = getNew本算定納入通知書情報(HenshuHaniKubun.Coverのみ, 納入通知書期情報リスト, true);
         HokenryoNonyuTsuchishoBookFuriKaeNashiReport reportCover

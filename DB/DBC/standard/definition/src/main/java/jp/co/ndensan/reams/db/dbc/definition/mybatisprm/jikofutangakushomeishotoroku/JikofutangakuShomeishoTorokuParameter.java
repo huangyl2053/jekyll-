@@ -24,4 +24,5 @@ public class JikofutangakuShomeishoTorokuParameter {
     private RString 転入前保険者番号;
     private int 履歴番号;
     private boolean use支給申請書整理番号;
+    private RString システム日付;
 }

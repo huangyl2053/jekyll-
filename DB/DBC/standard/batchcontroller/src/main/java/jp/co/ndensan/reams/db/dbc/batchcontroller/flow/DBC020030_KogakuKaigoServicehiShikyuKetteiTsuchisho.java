@@ -38,7 +38,7 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     private static final int INDEX_6 = 6;
     private static final RString 決定日一括更新区分_2 = new RString("2");
     private static final RString 更新する = new RString("2");
-    private static long jobId;
+    private long jobId;
 
     @Override
     protected void defineFlow() {
@@ -85,7 +85,7 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     protected IBatchFlowCommand updateKogakuShikyuHanteiKekkaProcess() {
         return loopBatch(UpdateKogakuShikyuHanteiKekkaProcess.class).arguments(creatParameter()).define();
     }
-    
+
     /**
      * 高額介護サービス費支給申請の設定メソッドです
      *

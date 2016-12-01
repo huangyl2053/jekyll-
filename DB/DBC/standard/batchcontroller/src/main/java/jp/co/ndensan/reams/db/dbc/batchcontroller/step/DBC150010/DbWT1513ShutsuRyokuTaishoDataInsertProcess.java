@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -40,13 +41,27 @@ public class DbWT1513ShutsuRyokuTaishoDataInsertProcess extends BatchProcessBase
     @BatchWriter
     BatchEntityCreatedTempTableWriter 利用状況統計表一時TBL;
     private RiyojokyoTokeihyoMeisaiListProcessParameter parameter;
-    private boolean isデータ有無;
     RiyoJokyoTokeihyoMeisaiListSakuseiService service;
+    private int count = 0;
+    private OutputParameter<Integer> outputCount;
+
+    /**
+     * データ検索検索件数を返却
+     */
+    public static final RString PARAMETER_OUT_COUNT;
+
+    static {
+        PARAMETER_OUT_COUNT = new RString("outputCount");
+    }
+
+    @Override
+    protected void initialize() {
+        outputCount = new OutputParameter<>();
+    }
 
     @Override
     protected IBatchReader createReader() {
         service = RiyoJokyoTokeihyoMeisaiListSakuseiService.createInstance();
-        isデータ有無 = false;
         利用状況統計表一時TBL = new BatchEntityCreatedTempTableWriter(TABLE_利用状況統計表一時,
                 DbWT1513RiyoJokyoTokeihyoEntity.class);
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toCreateRiyojokyoMybatisParameter());
@@ -54,14 +69,15 @@ public class DbWT1513ShutsuRyokuTaishoDataInsertProcess extends BatchProcessBase
 
     @Override
     protected void process(DbWT1513RiyoJokyoTokeihyoEntity entity) {
-        isデータ有無 = true;
+        count++;
         entity.setMeisaiOutFlag(TRUE);
         利用状況統計表一時TBL.update(entity);
     }
 
     @Override
     protected void afterExecute() {
-        if (!isデータ有無) {
+        outputCount.setValue(count);
+        if (0 == count) {
             Association association = AssociationFinderFactory.createInstance().getAssociation();
             List<RString> outputJokenhyoList = service.getOutputJokenhyoParam(parameter);
             RStringBuilder builder = new RStringBuilder();

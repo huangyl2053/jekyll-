@@ -228,8 +228,6 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (!RString.isNullOrEmpty(source.fuchoKi3)) {
                 source.list4_9 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額03()), 0);
-            } else {
-                source.list4_9 = 定値_0;
             }
         }
         return source;
@@ -246,26 +244,18 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (!RString.isNullOrEmpty(source.fuchoKi11)) {
                 source.list4_17 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額11()), 0);
-            } else {
-                source.list4_17 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi12)) {
                 source.list4_18 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額12()), 0);
-            } else {
-                source.list4_18 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi13)) {
                 source.list4_19 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額13()), 0);
-            } else {
-                source.list4_19 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi14)) {
                 source.list4_20 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額14()), 0);
-            } else {
-                source.list4_20 = 定値_0;
             }
             Decimal 本算定特徴期合計 = nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額01())
                     .add(nullTOZero(計算後情報_宛名_口座_更正前Entity.get特徴期別金額02()))
@@ -332,20 +322,14 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (!RString.isNullOrEmpty(source.fuchoKi1)) {
                 source.list5_7 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額01()), 0);
-            } else {
-                source.list5_7 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi2)) {
                 source.list5_8 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額02()), 0);
-            } else {
-                source.list5_8 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi3)) {
                 source.list5_9 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額03()), 0);
-            } else {
-                source.list5_9 = 定値_0;
             }
         }
         return source;
@@ -362,27 +346,19 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (!RString.isNullOrEmpty(source.fuchoKi11)) {
                 source.list5_17 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額11()), 0);
-            } else {
-                source.list5_17 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi12)) {
                 source.list5_18 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額12()), 0);
-            } else {
-                source.list5_18 = 定値_0;
             }
 
             if (!RString.isNullOrEmpty(source.fuchoKi13)) {
                 source.list5_19 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額13()), 0);
-            } else {
-                source.list5_19 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi14)) {
                 source.list5_20 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額14()), 0);
-            } else {
-                source.list5_20 = 定値_0;
             }
             Decimal 本算定後特徴期合計 = nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額01())
                     .add(nullTOZero(計算後情報_宛名_口座_更正後Entity.get特徴期別金額02()))
@@ -441,44 +417,30 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (!RString.isNullOrEmpty(source.fuchoKi4)) {
                 source.list4_10 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額04()), 0);
-            } else {
-                source.list4_10 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi5)) {
                 source.list4_11 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額05()), 0);
-            } else {
-                source.list4_11 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi6)) {
                 source.list4_12 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額06()), 0);
-            } else {
-                source.list4_12 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi7)) {
                 source.list4_13 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額07()), 0);
-            } else {
-                source.list4_13 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi8)) {
                 source.list4_14 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額08()), 0);
-            } else {
-                source.list4_14 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi9)) {
                 source.list4_15 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額09()), 0);
-            } else {
-                source.list4_15 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi10)) {
                 source.list4_16 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正前Entity.get普徴期別金額10()), 0);
-            } else {
-                source.list4_16 = 定値_0;
             }
         }
         return source;
@@ -495,44 +457,30 @@ public class GenNendoHonsanteiIdouBodyEditor implements IGenNendoHonsanteiIdouEd
             if (!RString.isNullOrEmpty(source.fuchoKi4)) {
                 source.list5_10 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額04()), 0);
-            } else {
-                source.list5_10 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi5)) {
                 source.list5_11 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額05()), 0);
-            } else {
-                source.list5_11 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi6)) {
                 source.list5_12 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額06()), 0);
-            } else {
-                source.list5_12 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi7)) {
                 source.list5_13 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額07()), 0);
-            } else {
-                source.list5_13 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi8)) {
                 source.list5_14 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額08()), 0);
-            } else {
-                source.list5_14 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi9)) {
                 source.list5_15 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額09()), 0);
-            } else {
-                source.list5_15 = 定値_0;
             }
             if (!RString.isNullOrEmpty(source.fuchoKi10)) {
                 source.list5_16 = DecimalFormatter
                         .toコンマ区切りRString(nullTOZero(計算後情報_宛名_口座_更正後Entity.get普徴期別金額10()), 0);
-            } else {
-                source.list5_16 = 定値_0;
             }
         }
         return source;

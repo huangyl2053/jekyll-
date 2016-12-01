@@ -334,12 +334,12 @@ public class HokenryoNonyuTsuchishoBookNofushoNashiEditor implements IKarisantei
         source.nofushoKozaCom4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji4 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
         source.nofuzumishoTitleNendoBun4 = RString.EMPTY;
-        source.nofuzumishoTitleKi4 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         edit印字位置5_1(source, 納入通知書期情報, is納入通知書期情報がある);
     }
 
     private void edit印字位置5_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource source,
             NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
+        source.nofuzumishoTitleKi4 = is納入通知書期情報がある ? 納入通知書期情報.get期表記() : new RString("**");
         source.nofozumishoTitleNendo4 = is納入通知書期情報がある ? 納付書共通.get調定年度表記() : 星5;
         source.nofuzumishoTitleTsuki4 = is納入通知書期情報がある ? 納入通知書期情報.get月表記() : new RString("**");
         source.nofuzumishoOCR14 = is納入通知書期情報がある

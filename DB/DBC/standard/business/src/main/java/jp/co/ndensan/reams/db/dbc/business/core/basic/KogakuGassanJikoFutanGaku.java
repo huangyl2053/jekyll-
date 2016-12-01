@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 高額合算自己負担額を管理するクラスです。
  *
- * @reamsid_L DBC-4800-010 huzongcheng
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
 public class KogakuGassanJikoFutanGaku
         extends ModelBase<KogakuGassanJikoFutanGakuIdentifier, DbT3070KogakuGassanJikoFutanGakuEntity, KogakuGassanJikoFutanGaku>
@@ -635,7 +635,8 @@ public class KogakuGassanJikoFutanGaku
     }
 
     /**
-     * 保持する高額合算自己負担額を削除対象とします。<br/> {@link DbT3070KogakuGassanJikoFutanGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する高額合算自己負担額を削除対象とします。<br/>
+     * {@link DbT3070KogakuGassanJikoFutanGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KogakuGassanJikoFutanGaku}
      */
@@ -658,7 +659,6 @@ public class KogakuGassanJikoFutanGaku
     public KogakuGassanJikoFutanGaku modified() {
         DbT3070KogakuGassanJikoFutanGakuEntity modifiedEntity = this.toEntity();
         modifiedEntity.setState(EntityDataState.Modified);
-        //TODO メッセージの検討
         return new KogakuGassanJikoFutanGaku(modifiedEntity, id);
     }
 

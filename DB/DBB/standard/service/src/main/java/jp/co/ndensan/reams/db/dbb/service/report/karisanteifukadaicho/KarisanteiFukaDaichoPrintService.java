@@ -148,12 +148,12 @@ public class KarisanteiFukaDaichoPrintService {
                 item4.setPageNoAll(new RString(pageAll.toString()));
                 if (entity.get世帯員情報リスト() != null && !(entity.get世帯員情報リスト().isEmpty())) {
                     set世帯員情報リストPart1(item1, entity, NUM0);
-                    set世帯員情報リストPart2(item1, entity, NUM1);
-                    set世帯員情報リストPart1(item2, entity, NUM2);
-                    set世帯員情報リストPart2(item2, entity, NUM3);
-                    set世帯員情報リストPart1(item3, entity, NUM4);
-                    set世帯員情報リストPart2(item3, entity, NUM5);
-                    set世帯員情報リストPart1(item4, entity, NUM6);
+                    set世帯員情報リストPart2(item1, entity, NUM4);
+                    set世帯員情報リストPart1(item2, entity, NUM1);
+                    set世帯員情報リストPart2(item2, entity, NUM5);
+                    set世帯員情報リストPart1(item3, entity, NUM2);
+                    set世帯員情報リストPart2(item3, entity, NUM6);
+                    set世帯員情報リストPart1(item4, entity, NUM3);
                     set世帯員情報リストPart2(item4, entity, NUM7);
                 }
                 targets.add(item1);

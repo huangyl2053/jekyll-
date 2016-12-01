@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410032
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120110.DBC120110_KogakuGassanJikofutangakuKakuninInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410032.TsuchishoJoho37JDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0410032.TsuchishoJoho37JValidationHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
@@ -42,6 +44,21 @@ public class TsuchishoJoho37J {
         KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
                 KokuhorenDataTorikomiViewStateClass.class);
         div.getCcdKokurenJohoTorikomi().initialize(SubGyomuCode.DBC介護給付, code.get帳票分類ID(), parmater);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 実行パタンクリックする前のチェック。
+     *
+     * @param div TsuchishoJoho37JDiv
+     * @return ResponseData
+     */
+    public ResponseData<TsuchishoJoho37JDiv> onClick_BeforeCheck(TsuchishoJoho37JDiv div) {
+        TsuchishoJoho37JValidationHandler handler = new TsuchishoJoho37JValidationHandler(div);
+        ValidationMessageControlPairs pairs = handler.validateCheck出力順();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

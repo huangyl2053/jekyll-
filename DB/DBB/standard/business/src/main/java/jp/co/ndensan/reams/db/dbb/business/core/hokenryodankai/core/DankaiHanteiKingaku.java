@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDan
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.KazeiKubunHonninKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -54,7 +53,7 @@ class DankaiHanteiKingaku implements IHanteiHoho {
 
             return false;
         }
-        return SetaiKazeiKubun.非課税 == hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoSetaiKazeiKubun();
+        return !KazeiKubun.非課税.getコード().equals(hokenryoDankaiHanteiParameter.getFukaKonkyo().getZennendoKazeiKubun().getコード());
     }
 
     private Decimal nullToZero(Decimal decimal) {

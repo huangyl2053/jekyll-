@@ -758,7 +758,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
         List<NokiJoho> 特徴納期情報リスト = new ArrayList<>();
         for (int i = 1; i <= INDEX_6; i++) {
             Kitsuki 期月 = new TokuchoKiUtil().get期月リスト().get期の最初月(i);
-            noki = 賦課納期取得.get普徴納期(期月.get期AsInt());
+            noki = 賦課納期取得.get特徴納期(期月.get期AsInt());
             nokiJoho = new NokiJoho();
             nokiJoho.set期月(期月);
             nokiJoho.set納期(noki);

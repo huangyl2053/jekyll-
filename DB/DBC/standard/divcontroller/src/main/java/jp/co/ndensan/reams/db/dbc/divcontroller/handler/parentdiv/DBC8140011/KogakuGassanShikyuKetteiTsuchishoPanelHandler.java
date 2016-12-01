@@ -511,6 +511,11 @@ public class KogakuGassanShikyuKetteiTsuchishoPanelHandler {
         div.getTxtHakkouYMD().setDisabled(true);
         div.getTxtShiharaiYoteiYMD().setDisabled(true);
         div.getCcdBunshoNO().setDisabled(true);
+        List<KeyValueDataSource> emptyList = new ArrayList<>();
+        emptyList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        div.getDdlTaishoNendo().setDataSource(emptyList);
+        div.getDdlRearakuhyoSeiriNO().setDataSource(emptyList);
+        div.getDdlRirekiNO().setDataSource(emptyList);
         div.getDdlTaishoNendo().setSelectedIndex(0);
         div.getDdlRearakuhyoSeiriNO().setSelectedIndex(0);
         div.getDdlRirekiNO().setSelectedIndex(0);

@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -136,16 +134,13 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
      * @param 連番 Decimal
      * <p>
      * @param 構成市町村Map Map<LasdecCode, KoseiShichosonMaster>
-     * @param 帳票制御共通情報 ChohyoSeigyoKyotsu
+     * @param 住所 RString
      * @return HanyouRisutoSyuturyokuEucCsvEntity
      */
     public HanyouRisutoSyuturyokuEucCsvEntity edit(HanyouRisutoSyuturyokuEntity entity,
             HanyoListKogakuKaigoProcessParameter parameter,
             Decimal 連番,
-            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map, ChohyoSeigyoKyotsu 帳票制御共通情報) {
-        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
-        IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
-        RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名, 導入団体情報);
+            Map<LasdecCode, KoseiShichosonMaster> 構成市町村Map, RString 住所) {
         HanyouRisutoSyuturyokuEucCsvEntity csvEntity = new HanyouRisutoSyuturyokuEucCsvEntity();
         csvEntity.set住所と番地と方書(住所);
         csvEntity.set連番(numToRString(連番));
@@ -416,7 +411,6 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
         csvEntity.set消除届出日(消除届出日 != null
                 ? new RString(消除届出日.toString())
                 : RString.EMPTY);
-        //  TODO 宛名・本人・は不明です
         csvEntity.set転出入理由(RString.EMPTY);
         YubinNo 前住所郵便番号 = entity.get宛名().getTennyumaeYubinNo();
         csvEntity.set前住所郵便番号(前住所郵便番号 != null
@@ -710,8 +704,8 @@ public class HanyoListKogakuKaigoEucCsvEntityEditor {
     private RString convertDayOfWeek(FlexibleDate targetDate) {
         return targetDate != null
                 && targetDate.isValid()
-                        ? new RString(targetDate.getDayOfWeek().toString())
-                        : RString.EMPTY;
+                ? new RString(targetDate.getDayOfWeek().toString())
+                : RString.EMPTY;
     }
 
     private void set給付対象者合計(HanyouRisutoSyuturyokuEntity entity,

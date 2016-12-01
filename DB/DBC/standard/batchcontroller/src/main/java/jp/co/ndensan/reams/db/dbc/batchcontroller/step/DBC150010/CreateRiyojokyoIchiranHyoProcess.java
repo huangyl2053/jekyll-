@@ -220,6 +220,9 @@ public class CreateRiyojokyoIchiranHyoProcess extends BatchKeyBreakBase<DbWT1513
             AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, id);
         }
+        if (0 == parameter.get更新データ件数()) {
+            return;
+        }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         List<RString> outputJokenhyoList = service.getOutputJokenhyoParam(parameter);
         RStringBuilder builder = new RStringBuilder();

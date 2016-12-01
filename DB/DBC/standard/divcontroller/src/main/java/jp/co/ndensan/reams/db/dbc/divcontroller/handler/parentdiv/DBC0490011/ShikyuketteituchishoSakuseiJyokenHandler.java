@@ -114,10 +114,14 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
         div.getChushutsuJoken().getTxtZenkaiTaishobi().clearFromValue();
         div.getChushutsuJoken().getTxtZenkaiTaishobi().clearToValue();
         if (前回対象日 != null) {
-            div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(new RDate(前回対象日.get対象開始年月日().toString()));
-            div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(new RDate(前回対象日.get対象終了年月日().toString()));
+            if (前回対象日.get対象開始年月日() != null && !前回対象日.get対象開始年月日().isEmpty()) {
+                div.getChushutsuJoken().getTxtZenkaiTaishobi().setFromValue(new RDate(前回対象日.get対象開始年月日().toString()));
+            }
+            if (前回対象日.get対象終了年月日() != null && !前回対象日.get対象終了年月日().isEmpty()) {
+                div.getChushutsuJoken().getTxtZenkaiTaishobi().setToValue(new RDate(前回対象日.get対象終了年月日().toString()));
+            }
 
-            RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象開始年月日().toString()).plusDay(INT_1);
+            RDate 前回対象日Toの次日 = new RDate(前回対象日.get対象終了年月日().toString()).plusDay(INT_1);
 
             if (KEY0.equals(選択Key)) {
                 div.getChushutsuJoken().getChushutsubiNyuryokuEria().

@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
@@ -12,11 +13,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshika
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * JikoFutanShomeishoSakusei のクラスファイル 
- * 
+ * JikoFutanShomeishoSakusei のクラスファイル
+ *
  * @author 自動生成
  */
 public class JikoFutanShomeishoSakuseiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]

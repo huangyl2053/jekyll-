@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoShutsuryokujunEnum;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFrom2009Report;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFromData;
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040040.JikofutanShomeishoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomeishoEntity;
@@ -73,7 +74,6 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
     private static final RString 定数_10 = new RString("10");
     private static final RString 定数_ORDERBY = new RString("order by");
     private static final ReportId 帳票分類ID = new ReportId("DBC100050_JikoFutangakushomeisho");
-    private static final RString 項目名 = new RString("帳票タイトル");
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
@@ -120,7 +120,7 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
         }
 
         帳票タイトル = ChohyoSeigyoHanyoManager.createInstance().get帳票制御汎用(SubGyomuCode.DBC介護給付,
-                帳票分類ID, 項目名).get設定値();
+                帳票分類ID, ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称()).get設定値();
 
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票分類ID, KamokuCode.EMPTY, NUM_1);
         if (0 < 通知文.size()) {

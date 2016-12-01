@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 受給者情報突合結果情報取込・ファイル読込を実行する。
@@ -293,14 +292,6 @@ public class JukyushaTotsugoKekkaReadCsvFileProcess extends BatchProcessBase<Lis
             return FlexibleDate.EMPTY;
         } else {
             return date;
-        }
-    }
-
-    private Decimal set数値(Decimal decimal) {
-        if (decimal == null) {
-            return Decimal.ZERO;
-        } else {
-            return decimal;
         }
     }
 }

@@ -69,8 +69,10 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService {
             ReportSourceWriter<KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             if (entities != null && !entities.isEmpty()) {
                 ReportId 帳票分類ID = entities.get(0).get本算定決定通知書情報().get帳票分類ID();
-                FlexibleDate 発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
-
+                FlexibleDate 発行日 = FlexibleDate.EMPTY;
+                if (entities.get(0).get本算定決定通知書情報().get発行日() != null) {
+                    発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
+                }
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
                         property.reportId(),
                         発行日,
@@ -120,8 +122,10 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoPrintService {
             ReportSourceWriter<KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             if (entities != null && !entities.isEmpty()) {
                 ReportId 帳票分類ID = entities.get(0).get本算定決定通知書情報().get帳票分類ID();
-                FlexibleDate 発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
-
+                FlexibleDate 発行日 = FlexibleDate.EMPTY;
+                if (entities.get(0).get本算定決定通知書情報().get発行日() != null) {
+                    発行日 = new FlexibleDate(entities.get(0).get本算定決定通知書情報().get発行日().toDateString());
+                }
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
                         property.reportId(),
                         発行日,
