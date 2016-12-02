@@ -68,8 +68,6 @@ public enum HanyoListKogakuGassanShikyugakuKetteiOutPutOrder implements IReportI
             new RString("dbT3074KogakuGassanShikyuFushikyuKettei_shiharaiHohoKubun\"")),
     /**
      * 通知書作成日
-     *
-     * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
      */
     通知書作成日(new RString("0410"), new RString(""), new RString("tsuchishoSakuseiYMD\"")),
     /**

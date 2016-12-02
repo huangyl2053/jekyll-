@@ -552,9 +552,9 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                 サービスの状況_06A.add(GaikyoChosahyouServiceJyouk06A.認知症対応型共同生活介護.get連番());
                 サービスの状況List.set(i, joho.modifiedModel());
             }
-            if (GaikyoChosahyouServiceJyouk06A.特定施設入所者生活介護.get連番().equals(new RString(joho.get連番()))) {
+            if (GaikyoChosahyouServiceJyouk06A.特定施設入居者生活介護.get連番().equals(new RString(joho.get連番()))) {
                 joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get特定施設入所者生活介護の日数())).build();
-                サービスの状況_06A.add(GaikyoChosahyouServiceJyouk06A.特定施設入所者生活介護.get連番());
+                サービスの状況_06A.add(GaikyoChosahyouServiceJyouk06A.特定施設入居者生活介護.get連番());
                 サービスの状況List.set(i, joho.modifiedModel());
             }
             if (GaikyoChosahyouServiceJyouk06A.福祉用具購入.get連番().equals(new RString(joho.get連番()))) {
@@ -685,10 +685,10 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
             joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
-        if (!サービスの状況_06A.contains(GaikyoChosahyouServiceJyouk09A.特定施設入所者生活介護.get連番())) {
+        if (!サービスの状況_06A.contains(GaikyoChosahyouServiceJyouk09A.特定施設入居者生活介護.get連番())) {
             NinteichosahyoServiceJokyo joho = new NinteichosahyoServiceJokyo(new ShinseishoKanriNo(
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
-                    getサービスの状況を変換(GaikyoChosahyouServiceJyouk09A.特定施設入所者生活介護.get連番()));
+                    getサービスの状況を変換(GaikyoChosahyouServiceJyouk09A.特定施設入居者生活介護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get特定施設入所者生活介護の日数())).build();
             joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
@@ -802,9 +802,9 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                 サービスの状況_09A.add(GaikyoChosahyouServiceJyouk09A.認知症対応型共同生活介護.get連番());
                 サービスの状況List.set(i, joho.modifiedModel());
             }
-            if (GaikyoChosahyouServiceJyouk09A.特定施設入所者生活介護.get連番().equals(new RString(joho.get連番()))) {
+            if (GaikyoChosahyouServiceJyouk09A.特定施設入居者生活介護.get連番().equals(new RString(joho.get連番()))) {
                 joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get特定施設入所者生活介護の日数())).build();
-                サービスの状況_09A.add(GaikyoChosahyouServiceJyouk09A.特定施設入所者生活介護.get連番());
+                サービスの状況_09A.add(GaikyoChosahyouServiceJyouk09A.特定施設入居者生活介護.get連番());
                 サービスの状況List.set(i, joho.modifiedModel());
             }
             if (GaikyoChosahyouServiceJyouk09A.福祉用具購入.get連番().equals(new RString(joho.get連番()))) {
@@ -935,10 +935,10 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
             joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
-        if (!サービスの状況_09A.contains(GaikyoChosahyouServiceJyouk09A.特定施設入所者生活介護.get連番())) {
+        if (!サービスの状況_09A.contains(GaikyoChosahyouServiceJyouk09A.特定施設入居者生活介護.get連番())) {
             NinteichosahyoServiceJokyo joho = new NinteichosahyoServiceJokyo(new ShinseishoKanriNo(
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
-                    getサービスの状況を変換(GaikyoChosahyouServiceJyouk09A.特定施設入所者生活介護.get連番()));
+                    getサービスの状況を変換(GaikyoChosahyouServiceJyouk09A.特定施設入居者生活介護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get特定施設入所者生活介護の日数())).build();
             joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
@@ -1052,9 +1052,9 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
                 サービスの状況_09B.add(GaikyoChosahyouServiceJyouk09B.認知症対応型共同生活介護.get連番());
                 サービスの状況List.set(i, joho.modifiedModel());
             }
-            if (GaikyoChosahyouServiceJyouk09B.特定施設入所者生活介護.get連番().equals(new RString(joho.get連番()))) {
+            if (GaikyoChosahyouServiceJyouk09B.特定施設入居者生活介護.get連番().equals(new RString(joho.get連番()))) {
                 joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get特定施設入所者生活介護の日数())).build();
-                サービスの状況_09B.add(GaikyoChosahyouServiceJyouk09B.特定施設入所者生活介護.get連番());
+                サービスの状況_09B.add(GaikyoChosahyouServiceJyouk09B.特定施設入居者生活介護.get連番());
                 サービスの状況List.set(i, joho.modifiedModel());
             }
             if (GaikyoChosahyouServiceJyouk09B.福祉用具購入.get連番().equals(new RString(joho.get連番()))) {
@@ -1194,10 +1194,10 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
             joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);
         }
-        if (!サービスの状況_09B.contains(GaikyoChosahyouServiceJyouk09B.特定施設入所者生活介護.get連番())) {
+        if (!サービスの状況_09B.contains(GaikyoChosahyouServiceJyouk09B.特定施設入居者生活介護.get連番())) {
             NinteichosahyoServiceJokyo joho = new NinteichosahyoServiceJokyo(new ShinseishoKanriNo(
                     data.get申請書管理番号()), data.get認定調査依頼履歴番号(),
-                    getサービスの状況を変換(GaikyoChosahyouServiceJyouk09B.特定施設入所者生活介護.get連番()));
+                    getサービスの状況を変換(GaikyoChosahyouServiceJyouk09B.特定施設入居者生活介護.get連番()));
             joho = joho.createBuilderForEdit().setサービスの状況(getサービスの状況を変換(data.get特定施設入所者生活介護の日数())).build();
             joho = joho.createBuilderForEdit().set厚労省IF識別コード(new Code(data.get厚労省IF識別コード())).build();
             サービスの状況List.add(joho);

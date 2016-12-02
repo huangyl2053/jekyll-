@@ -73,13 +73,6 @@ public class ShujiiMasterHandler {
      */
     public void load() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-    }
-
-    /**
-     * 検索条件入力項目をクリアします。
-     */
-    public void clearKensakuJoken() {
-        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtSearchShujiiIryokikanCodeFrom().clearValue();
         div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
         div.getTxtSearchShujiiIryokikanMeisho().clearValue();
@@ -94,7 +87,7 @@ public class ShujiiMasterHandler {
         div.getDdlKikanKanaMeisho().setSelectedKey(KEY_0);
         div.getDdlShujiiMeisho().setSelectedKey(KEY_0);
         div.getDdlShujiiKanaMeisho().setSelectedKey(KEY_0);
-         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
                 SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値")).toString()));
     }
 

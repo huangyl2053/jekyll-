@@ -618,7 +618,6 @@
         AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3112KogakuShikyuShinsaKettei"."rirekiNo"
     </sql>
     <sql id="newest_DbT4001JukyushaDaicho">
-        <!--TODO QA.1188 管理タイプと管理区分はありません-->
         SELECT 
         newest.* 
         FROM 

@@ -1868,12 +1868,16 @@ public class KakushuTsuchishoSakusei extends KakushuTsuchishoSakuseiFath {
         NenkinTokuchoKaifuJohoManager nenkinTokuchoKaifuJohoManager = InstanceProvider.create(NenkinTokuchoKaifuJohoManager.class);
         if (本算定区分) {
             return nenkinTokuchoKaifuJohoManager.get年金特徴対象者情報(GyomuCode.DB介護保険,
-                    賦課の情報.get賦課年度(), 更正前後entity.get介護徴収方法().getHonNenkinNo(),
-                    更正前後entity.get介護徴収方法().getHonNenkinCode(), 更正前後entity.get介護徴収方法().getHonHosokuM());
+                    賦課の情報.get賦課年度(),
+                    更正前後entity.get介護徴収方法().getHonNenkinNo() == null ? RString.EMPTY : 更正前後entity.get介護徴収方法().getHonNenkinNo(),
+                    更正前後entity.get介護徴収方法().getHonNenkinCode() == null ? RString.EMPTY : 更正前後entity.get介護徴収方法().getHonNenkinCode(),
+                    更正前後entity.get介護徴収方法().getHonHosokuM() == null ? RString.EMPTY : 更正前後entity.get介護徴収方法().getHonHosokuM());
         }
         return nenkinTokuchoKaifuJohoManager.get年金特徴対象者情報(GyomuCode.DB介護保険,
-                賦課の情報.get賦課年度().minusYear(定値_番号1), 更正前後entity.get介護徴収方法().getKariNenkinNo(),
-                更正前後entity.get介護徴収方法().getKariNenkinCode(), 更正前後entity.get介護徴収方法().getKariHosokuM());
+                賦課の情報.get賦課年度().minusYear(定値_番号1),
+                更正前後entity.get介護徴収方法().getKariNenkinNo() == null ? RString.EMPTY : 更正前後entity.get介護徴収方法().getKariNenkinNo(),
+                更正前後entity.get介護徴収方法().getKariNenkinCode() == null ? RString.EMPTY : 更正前後entity.get介護徴収方法().getKariNenkinCode(),
+                更正前後entity.get介護徴収方法().getKariHosokuM() == null ? RString.EMPTY : 更正前後entity.get介護徴収方法().getKariHosokuM());
     }
 
     private FukaAtena get賦課の情報_宛名(KakushuTsuchishoEntity 更正前後entity) {

@@ -115,7 +115,7 @@ public class ShinsakaiIinWaritsukeHandler {
                 koseiIchiranGridList.add(koseiIchiran_Row);
             }
         }
-        div.getDgShinsakaiIinIchiran().setDataSource(set重複調整(ichiranGridList));
+        div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
         div.getDgShinsakaiIinKoseiIchiran().setDataSource(koseiIchiranGridList);
     }
 
@@ -140,22 +140,7 @@ public class ShinsakaiIinWaritsukeHandler {
                 set一覧DataGrid(ichiranGridList, business);
             }
         }
-        div.getDgShinsakaiIinIchiran().setDataSource(set重複調整(ichiranGridList));
-    }
-
-    private List<dgShinsakaiIinIchiran_Row> set重複調整(List<dgShinsakaiIinIchiran_Row> ichiranGridList) {
-        List<dgShinsakaiIinIchiran_Row> list = new ArrayList();
-        if (ichiranGridList != null && !ichiranGridList.isEmpty()) {
-            list.add(ichiranGridList.get(0));
-            for (dgShinsakaiIinIchiran_Row ichiran : ichiranGridList) {
-                for (int i = 0; i < list.size(); i++) {
-                    if (!list.get(i).getShinsakaiIinCode().equals(ichiran.getShinsakaiIinCode())) {
-                        list.add(ichiran);
-                    }
-                }
-            }
-        }
-        return list;
+        div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
     }
 
     /**

@@ -92,7 +92,6 @@ public class ShujiiMaster {
      */
     public ResponseData<ShujiiMasterDiv> onLoad(ShujiiMasterDiv div) {
         getHandler(div).load();
-        getHandler(div).clearKensakuJoken();
 
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
 
@@ -115,7 +114,7 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnClearKensakuJoken(ShujiiMasterDiv div) {
-        getHandler(div).clearKensakuJoken();
+        getHandler(div).load();
         return ResponseData.of(div).respond();
     }
 
@@ -158,7 +157,7 @@ public class ShujiiMaster {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getShujiiSearch().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9020001StateName.検索);
             }
@@ -166,11 +165,9 @@ public class ShujiiMaster {
             div.getShujiiSearch().setDisplayNone(false);
             div.getShujiiSearch().setDisabled(false);
             getHandler(div).load();
-            getHandler(div).clearKensakuJoken();
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
         getHandler(div).load();
-        getHandler(div).clearKensakuJoken();
         return ResponseData.of(div).respond();
     }
 
@@ -184,9 +181,9 @@ public class ShujiiMaster {
         RString 主治医医療機関コードTo = RString.EMPTY;
 
         if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isNullOrEmpty()
-            && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isNullOrEmpty()) {
+                && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isNullOrEmpty()) {
             if (Long.valueOf(div.getTxtSearchShujiiIryokikanCodeFrom().getValue().toString())
-                > Long.valueOf(div.getTxtSearchShujiiIryokikanCodeTo().getValue().toString())) {
+                    > Long.valueOf(div.getTxtSearchShujiiIryokikanCodeTo().getValue().toString())) {
                 主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
                 主治医医療機関コードTo = div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
             } else {
@@ -202,9 +199,9 @@ public class ShujiiMaster {
         RString 主治医コードTo = RString.EMPTY;
 
         if (!div.getTxtSearchShujiiCodeFrom().getValue().isNullOrEmpty()
-            && !div.getTxtSearchShujiiCodeTo().getValue().isNullOrEmpty()) {
+                && !div.getTxtSearchShujiiCodeTo().getValue().isNullOrEmpty()) {
             if (Long.valueOf(div.getTxtSearchShujiiCodeFrom().getValue().toString())
-                > Long.valueOf(div.getTxtSearchShujiiCodeTo().getValue().toString())) {
+                    > Long.valueOf(div.getTxtSearchShujiiCodeTo().getValue().toString())) {
                 主治医コードFrom = div.getTxtSearchShujiiCodeTo().getValue();
                 主治医コードTo = div.getTxtSearchShujiiCodeFrom().getValue();
             } else {
@@ -288,7 +285,7 @@ public class ShujiiMaster {
     public IDownLoadServletResponse onClick_btnOutputCsv(ShujiiMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<ShujiiMasterCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
             for (dgShujiiIchiran_Row row : dataList) {
@@ -334,7 +331,7 @@ public class ShujiiMaster {
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
 
         if ((状態_追加.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())
-            || (状態_修正.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())) {
+                || (状態_修正.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -342,11 +339,11 @@ public class ShujiiMaster {
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 responseWithSettingState(div, 主治医医療機関コード);
             } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                       && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
             }
         }
@@ -377,6 +374,7 @@ public class ShujiiMaster {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(イベント状態, shujiiJohoCount);
 
         if (validPairs.iterator().hasNext()) {
+            div.getShujiiIchiran().setDisabled(false);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         Models<ShujiiJohoIdentifier, ShujiiJoho> models = ViewStateHolder.get(ViewStateKeys.主治医マスタ検索結果, Models.class);
@@ -633,7 +631,7 @@ public class ShujiiMaster {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             validPairs = validateForDelete(div);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -720,7 +718,7 @@ public class ShujiiMaster {
         }
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBE9020001TransitionEventName.医療機関登録へ戻る).respond();
         }
 

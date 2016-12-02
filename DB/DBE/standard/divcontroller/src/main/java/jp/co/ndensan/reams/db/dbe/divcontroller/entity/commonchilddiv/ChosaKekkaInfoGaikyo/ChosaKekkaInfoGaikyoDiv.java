@@ -4,27 +4,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekk
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 
 /**
- * ChosaKekkaInfoGaikyo のクラスファイル
- *
+ * ChosaKekkaInfoGaikyo のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGaikyoDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,42 +30,44 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
      */
     @JsonProperty("txtNinteichosaJisshiYMD")
     private TextBoxDate txtNinteichosaJisshiYMD;
+    @JsonProperty("lblJisshiBasho")
+    private Label lblJisshiBasho;
     @JsonProperty("txtChosaJisshiBashoMeisho")
     private TextBox txtChosaJisshiBashoMeisho;
-    @JsonProperty("TokkiPanel")
-    private TokkiPanelDiv TokkiPanel;
-    @JsonProperty("ServiceJokyoPanel")
-    private ServiceJokyoPanelDiv ServiceJokyoPanel;
+    @JsonProperty("JisshiBashoMeishoPanel")
+    private JisshiBashoMeishoPanelDiv JisshiBashoMeishoPanel;
+    @JsonProperty("GaikyoChosaTokkiPanel")
+    private GaikyoChosaTokkiPanelDiv GaikyoChosaTokkiPanel;
     @JsonProperty("radServiceKubun")
     private RadioButton radServiceKubun;
     @JsonProperty("rdoJutakuKaishu")
     private RadioButton rdoJutakuKaishu;
-    @JsonProperty("KubetsuKyufuPanel")
-    private KubetsuKyufuPanelDiv KubetsuKyufuPanel;
+    @JsonProperty("ServiceJokyoPanel")
+    private ServiceJokyoPanelDiv ServiceJokyoPanel;
+    @JsonProperty("ShisetsuRiyoPanel")
+    private ShisetsuRiyoPanelDiv ShisetsuRiyoPanel;
+    @JsonProperty("TokubetsuKyufuPanel")
+    private TokubetsuKyufuPanelDiv TokubetsuKyufuPanel;
     @JsonProperty("ZaitakuServicePanel")
     private ZaitakuServicePanelDiv ZaitakuServicePanel;
-    @JsonProperty("RiyoShisetsuPanel")
-    private RiyoShisetsuPanelDiv RiyoShisetsuPanel;
-    @JsonProperty("txtRiyoShisetsuShimei")
-    private TextBox txtRiyoShisetsuShimei;
-    @JsonProperty("txtRiyoShisetsuJusho")
-    private TextBox txtRiyoShisetsuJusho;
-    @JsonProperty("txtTelNo")
-    private TextBox txtTelNo;
-    @JsonProperty("GaikyoTokkiTextPanel")
-    private GaikyoTokkiTextPanelDiv GaikyoTokkiTextPanel;
-    @JsonProperty("GaikyoTokkiImagePanel")
-    private GaikyoTokkiImagePanelDiv GaikyoTokkiImagePanel;
+    @JsonProperty("GaikyoTokkiPanel")
+    private GaikyoTokkiPanelDiv GaikyoTokkiPanel;
     @JsonProperty("btnBack")
     private Button btnBack;
     @JsonProperty("shinseishoKanriNo")
     private RString shinseishoKanriNo;
     @JsonProperty("ninteichosaRirekiNo")
     private RString ninteichosaRirekiNo;
-    @JsonProperty("gaikyoChosaTextImageKubun")
-    private RString gaikyoChosaTextImageKubun;
-    @JsonProperty("gaikyoTokkiTextImageKubun")
-    private RString gaikyoTokkiTextImageKubun;
+    @JsonProperty("genponText")
+    private RString genponText;
+    @JsonProperty("maskText")
+    private RString maskText;
+    @JsonProperty("genponImage")
+    private RString genponImage;
+    @JsonProperty("maskImage")
+    private RString maskImage;
+    @JsonProperty("hdnTextImageKubun")
+    private RString hdnTextImageKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -95,6 +94,24 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
+     * getlblJisshiBasho
+     * @return lblJisshiBasho
+     */
+    @JsonProperty("lblJisshiBasho")
+    public Label getLblJisshiBasho() {
+        return lblJisshiBasho;
+    }
+
+    /*
+     * setlblJisshiBasho
+     * @param lblJisshiBasho lblJisshiBasho
+     */
+    @JsonProperty("lblJisshiBasho")
+    public void setLblJisshiBasho(Label lblJisshiBasho) {
+        this.lblJisshiBasho = lblJisshiBasho;
+    }
+
+    /*
      * gettxtChosaJisshiBashoMeisho
      * @return txtChosaJisshiBashoMeisho
      */
@@ -113,39 +130,39 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
-     * getTokkiPanel
-     * @return TokkiPanel
+     * getJisshiBashoMeishoPanel
+     * @return JisshiBashoMeishoPanel
      */
-    @JsonProperty("TokkiPanel")
-    public TokkiPanelDiv getTokkiPanel() {
-        return TokkiPanel;
+    @JsonProperty("JisshiBashoMeishoPanel")
+    public JisshiBashoMeishoPanelDiv getJisshiBashoMeishoPanel() {
+        return JisshiBashoMeishoPanel;
     }
 
     /*
-     * setTokkiPanel
-     * @param TokkiPanel TokkiPanel
+     * setJisshiBashoMeishoPanel
+     * @param JisshiBashoMeishoPanel JisshiBashoMeishoPanel
      */
-    @JsonProperty("TokkiPanel")
-    public void setTokkiPanel(TokkiPanelDiv TokkiPanel) {
-        this.TokkiPanel = TokkiPanel;
+    @JsonProperty("JisshiBashoMeishoPanel")
+    public void setJisshiBashoMeishoPanel(JisshiBashoMeishoPanelDiv JisshiBashoMeishoPanel) {
+        this.JisshiBashoMeishoPanel = JisshiBashoMeishoPanel;
     }
 
     /*
-     * getServiceJokyoPanel
-     * @return ServiceJokyoPanel
+     * getGaikyoChosaTokkiPanel
+     * @return GaikyoChosaTokkiPanel
      */
-    @JsonProperty("ServiceJokyoPanel")
-    public ServiceJokyoPanelDiv getServiceJokyoPanel() {
-        return ServiceJokyoPanel;
+    @JsonProperty("GaikyoChosaTokkiPanel")
+    public GaikyoChosaTokkiPanelDiv getGaikyoChosaTokkiPanel() {
+        return GaikyoChosaTokkiPanel;
     }
 
     /*
-     * setServiceJokyoPanel
-     * @param ServiceJokyoPanel ServiceJokyoPanel
+     * setGaikyoChosaTokkiPanel
+     * @param GaikyoChosaTokkiPanel GaikyoChosaTokkiPanel
      */
-    @JsonProperty("ServiceJokyoPanel")
-    public void setServiceJokyoPanel(ServiceJokyoPanelDiv ServiceJokyoPanel) {
-        this.ServiceJokyoPanel = ServiceJokyoPanel;
+    @JsonProperty("GaikyoChosaTokkiPanel")
+    public void setGaikyoChosaTokkiPanel(GaikyoChosaTokkiPanelDiv GaikyoChosaTokkiPanel) {
+        this.GaikyoChosaTokkiPanel = GaikyoChosaTokkiPanel;
     }
 
     /*
@@ -185,21 +202,57 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
-     * getKubetsuKyufuPanel
-     * @return KubetsuKyufuPanel
+     * getServiceJokyoPanel
+     * @return ServiceJokyoPanel
      */
-    @JsonProperty("KubetsuKyufuPanel")
-    public KubetsuKyufuPanelDiv getKubetsuKyufuPanel() {
-        return KubetsuKyufuPanel;
+    @JsonProperty("ServiceJokyoPanel")
+    public ServiceJokyoPanelDiv getServiceJokyoPanel() {
+        return ServiceJokyoPanel;
     }
 
     /*
-     * setKubetsuKyufuPanel
-     * @param KubetsuKyufuPanel KubetsuKyufuPanel
+     * setServiceJokyoPanel
+     * @param ServiceJokyoPanel ServiceJokyoPanel
      */
-    @JsonProperty("KubetsuKyufuPanel")
-    public void setKubetsuKyufuPanel(KubetsuKyufuPanelDiv KubetsuKyufuPanel) {
-        this.KubetsuKyufuPanel = KubetsuKyufuPanel;
+    @JsonProperty("ServiceJokyoPanel")
+    public void setServiceJokyoPanel(ServiceJokyoPanelDiv ServiceJokyoPanel) {
+        this.ServiceJokyoPanel = ServiceJokyoPanel;
+    }
+
+    /*
+     * getShisetsuRiyoPanel
+     * @return ShisetsuRiyoPanel
+     */
+    @JsonProperty("ShisetsuRiyoPanel")
+    public ShisetsuRiyoPanelDiv getShisetsuRiyoPanel() {
+        return ShisetsuRiyoPanel;
+    }
+
+    /*
+     * setShisetsuRiyoPanel
+     * @param ShisetsuRiyoPanel ShisetsuRiyoPanel
+     */
+    @JsonProperty("ShisetsuRiyoPanel")
+    public void setShisetsuRiyoPanel(ShisetsuRiyoPanelDiv ShisetsuRiyoPanel) {
+        this.ShisetsuRiyoPanel = ShisetsuRiyoPanel;
+    }
+
+    /*
+     * getTokubetsuKyufuPanel
+     * @return TokubetsuKyufuPanel
+     */
+    @JsonProperty("TokubetsuKyufuPanel")
+    public TokubetsuKyufuPanelDiv getTokubetsuKyufuPanel() {
+        return TokubetsuKyufuPanel;
+    }
+
+    /*
+     * setTokubetsuKyufuPanel
+     * @param TokubetsuKyufuPanel TokubetsuKyufuPanel
+     */
+    @JsonProperty("TokubetsuKyufuPanel")
+    public void setTokubetsuKyufuPanel(TokubetsuKyufuPanelDiv TokubetsuKyufuPanel) {
+        this.TokubetsuKyufuPanel = TokubetsuKyufuPanel;
     }
 
     /*
@@ -221,111 +274,21 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
-     * getRiyoShisetsuPanel
-     * @return RiyoShisetsuPanel
+     * getGaikyoTokkiPanel
+     * @return GaikyoTokkiPanel
      */
-    @JsonProperty("RiyoShisetsuPanel")
-    public RiyoShisetsuPanelDiv getRiyoShisetsuPanel() {
-        return RiyoShisetsuPanel;
+    @JsonProperty("GaikyoTokkiPanel")
+    public GaikyoTokkiPanelDiv getGaikyoTokkiPanel() {
+        return GaikyoTokkiPanel;
     }
 
     /*
-     * setRiyoShisetsuPanel
-     * @param RiyoShisetsuPanel RiyoShisetsuPanel
+     * setGaikyoTokkiPanel
+     * @param GaikyoTokkiPanel GaikyoTokkiPanel
      */
-    @JsonProperty("RiyoShisetsuPanel")
-    public void setRiyoShisetsuPanel(RiyoShisetsuPanelDiv RiyoShisetsuPanel) {
-        this.RiyoShisetsuPanel = RiyoShisetsuPanel;
-    }
-
-    /*
-     * gettxtRiyoShisetsuShimei
-     * @return txtRiyoShisetsuShimei
-     */
-    @JsonProperty("txtRiyoShisetsuShimei")
-    public TextBox getTxtRiyoShisetsuShimei() {
-        return txtRiyoShisetsuShimei;
-    }
-
-    /*
-     * settxtRiyoShisetsuShimei
-     * @param txtRiyoShisetsuShimei txtRiyoShisetsuShimei
-     */
-    @JsonProperty("txtRiyoShisetsuShimei")
-    public void setTxtRiyoShisetsuShimei(TextBox txtRiyoShisetsuShimei) {
-        this.txtRiyoShisetsuShimei = txtRiyoShisetsuShimei;
-    }
-
-    /*
-     * gettxtRiyoShisetsuJusho
-     * @return txtRiyoShisetsuJusho
-     */
-    @JsonProperty("txtRiyoShisetsuJusho")
-    public TextBox getTxtRiyoShisetsuJusho() {
-        return txtRiyoShisetsuJusho;
-    }
-
-    /*
-     * settxtRiyoShisetsuJusho
-     * @param txtRiyoShisetsuJusho txtRiyoShisetsuJusho
-     */
-    @JsonProperty("txtRiyoShisetsuJusho")
-    public void setTxtRiyoShisetsuJusho(TextBox txtRiyoShisetsuJusho) {
-        this.txtRiyoShisetsuJusho = txtRiyoShisetsuJusho;
-    }
-
-    /*
-     * gettxtTelNo
-     * @return txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public TextBox getTxtTelNo() {
-        return txtTelNo;
-    }
-
-    /*
-     * settxtTelNo
-     * @param txtTelNo txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public void setTxtTelNo(TextBox txtTelNo) {
-        this.txtTelNo = txtTelNo;
-    }
-
-    /*
-     * getGaikyoTokkiTextPanel
-     * @return GaikyoTokkiTextPanel
-     */
-    @JsonProperty("GaikyoTokkiTextPanel")
-    public GaikyoTokkiTextPanelDiv getGaikyoTokkiTextPanel() {
-        return GaikyoTokkiTextPanel;
-    }
-
-    /*
-     * setGaikyoTokkiTextPanel
-     * @param GaikyoTokkiTextPanel GaikyoTokkiTextPanel
-     */
-    @JsonProperty("GaikyoTokkiTextPanel")
-    public void setGaikyoTokkiTextPanel(GaikyoTokkiTextPanelDiv GaikyoTokkiTextPanel) {
-        this.GaikyoTokkiTextPanel = GaikyoTokkiTextPanel;
-    }
-
-    /*
-     * getGaikyoTokkiImagePanel
-     * @return GaikyoTokkiImagePanel
-     */
-    @JsonProperty("GaikyoTokkiImagePanel")
-    public GaikyoTokkiImagePanelDiv getGaikyoTokkiImagePanel() {
-        return GaikyoTokkiImagePanel;
-    }
-
-    /*
-     * setGaikyoTokkiImagePanel
-     * @param GaikyoTokkiImagePanel GaikyoTokkiImagePanel
-     */
-    @JsonProperty("GaikyoTokkiImagePanel")
-    public void setGaikyoTokkiImagePanel(GaikyoTokkiImagePanelDiv GaikyoTokkiImagePanel) {
-        this.GaikyoTokkiImagePanel = GaikyoTokkiImagePanel;
+    @JsonProperty("GaikyoTokkiPanel")
+    public void setGaikyoTokkiPanel(GaikyoTokkiPanelDiv GaikyoTokkiPanel) {
+        this.GaikyoTokkiPanel = GaikyoTokkiPanel;
     }
 
     /*
@@ -383,46 +346,253 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
-     * getgaikyoChosaTextImageKubun
-     * @return gaikyoChosaTextImageKubun
+     * getgenponText
+     * @return genponText
      */
-    @JsonProperty("gaikyoChosaTextImageKubun")
-    public RString getGaikyoChosaTextImageKubun() {
-        return gaikyoChosaTextImageKubun;
+    @JsonProperty("genponText")
+    public RString getGenponText() {
+        return genponText;
     }
 
     /*
-     * setgaikyoChosaTextImageKubun
-     * @param gaikyoChosaTextImageKubun gaikyoChosaTextImageKubun
+     * setgenponText
+     * @param genponText genponText
      */
-    @JsonProperty("gaikyoChosaTextImageKubun")
-    public void setGaikyoChosaTextImageKubun(RString gaikyoChosaTextImageKubun) {
-        this.gaikyoChosaTextImageKubun = gaikyoChosaTextImageKubun;
+    @JsonProperty("genponText")
+    public void setGenponText(RString genponText) {
+        this.genponText = genponText;
     }
 
     /*
-     * getgaikyoTokkiTextImageKubun
-     * @return gaikyoTokkiTextImageKubun
+     * getmaskText
+     * @return maskText
      */
-    @JsonProperty("gaikyoTokkiTextImageKubun")
-    public RString getGaikyoTokkiTextImageKubun() {
-        return gaikyoTokkiTextImageKubun;
+    @JsonProperty("maskText")
+    public RString getMaskText() {
+        return maskText;
     }
 
     /*
-     * setgaikyoTokkiTextImageKubun
-     * @param gaikyoTokkiTextImageKubun gaikyoTokkiTextImageKubun
+     * setmaskText
+     * @param maskText maskText
      */
-    @JsonProperty("gaikyoTokkiTextImageKubun")
-    public void setGaikyoTokkiTextImageKubun(RString gaikyoTokkiTextImageKubun) {
-        this.gaikyoTokkiTextImageKubun = gaikyoTokkiTextImageKubun;
+    @JsonProperty("maskText")
+    public void setMaskText(RString maskText) {
+        this.maskText = maskText;
+    }
+
+    /*
+     * getgenponImage
+     * @return genponImage
+     */
+    @JsonProperty("genponImage")
+    public RString getGenponImage() {
+        return genponImage;
+    }
+
+    /*
+     * setgenponImage
+     * @param genponImage genponImage
+     */
+    @JsonProperty("genponImage")
+    public void setGenponImage(RString genponImage) {
+        this.genponImage = genponImage;
+    }
+
+    /*
+     * getmaskImage
+     * @return maskImage
+     */
+    @JsonProperty("maskImage")
+    public RString getMaskImage() {
+        return maskImage;
+    }
+
+    /*
+     * setmaskImage
+     * @param maskImage maskImage
+     */
+    @JsonProperty("maskImage")
+    public void setMaskImage(RString maskImage) {
+        this.maskImage = maskImage;
+    }
+
+    /*
+     * gethdnTextImageKubun
+     * @return hdnTextImageKubun
+     */
+    @JsonProperty("hdnTextImageKubun")
+    public RString getHdnTextImageKubun() {
+        return hdnTextImageKubun;
+    }
+
+    /*
+     * sethdnTextImageKubun
+     * @param hdnTextImageKubun hdnTextImageKubun
+     */
+    @JsonProperty("hdnTextImageKubun")
+    public void setHdnTextImageKubun(RString hdnTextImageKubun) {
+        this.hdnTextImageKubun = hdnTextImageKubun;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DynamicImage getImgChosaJisshiBashoMeisho() {
+        return this.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho();
+    }
+
+    @JsonIgnore
+    public void  setImgChosaJisshiBashoMeisho(DynamicImage imgChosaJisshiBashoMeisho) {
+        this.getJisshiBashoMeishoPanel().setImgChosaJisshiBashoMeisho(imgChosaJisshiBashoMeisho);
+    }
+
+    @JsonIgnore
+    public Label getLblShisetsuShurui() {
+        return this.getShisetsuRiyoPanel().getLblShisetsuShurui();
+    }
+
+    @JsonIgnore
+    public void  setLblShisetsuShurui(Label lblShisetsuShurui) {
+        this.getShisetsuRiyoPanel().setLblShisetsuShurui(lblShisetsuShurui);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtRiyoShisetsuShurui() {
+        return this.getShisetsuRiyoPanel().getTxtRiyoShisetsuShurui();
+    }
+
+    @JsonIgnore
+    public void  setTxtRiyoShisetsuShurui(TextBox txtRiyoShisetsuShurui) {
+        this.getShisetsuRiyoPanel().setTxtRiyoShisetsuShurui(txtRiyoShisetsuShurui);
+    }
+
+    @JsonIgnore
+    public Label getLblShisetsuShimei() {
+        return this.getShisetsuRiyoPanel().getLblShisetsuShimei();
+    }
+
+    @JsonIgnore
+    public void  setLblShisetsuShimei(Label lblShisetsuShimei) {
+        this.getShisetsuRiyoPanel().setLblShisetsuShimei(lblShisetsuShimei);
+    }
+
+    @JsonIgnore
+    public Label getLblTelNo() {
+        return this.getShisetsuRiyoPanel().getLblTelNo();
+    }
+
+    @JsonIgnore
+    public void  setLblTelNo(Label lblTelNo) {
+        this.getShisetsuRiyoPanel().setLblTelNo(lblTelNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtRiyoShisetsuMeisho() {
+        return this.getShisetsuRiyoPanel().getTxtRiyoShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtRiyoShisetsuMeisho(TextBox txtRiyoShisetsuMeisho) {
+        this.getShisetsuRiyoPanel().setTxtRiyoShisetsuMeisho(txtRiyoShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTelNo() {
+        return this.getShisetsuRiyoPanel().getTxtTelNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtTelNo(TextBox txtTelNo) {
+        this.getShisetsuRiyoPanel().setTxtTelNo(txtTelNo);
+    }
+
+    @JsonIgnore
+    public ShisetsuMeishoPanelDiv getShisetsuMeishoPanel() {
+        return this.getShisetsuRiyoPanel().getShisetsuMeishoPanel();
+    }
+
+    @JsonIgnore
+    public void  setShisetsuMeishoPanel(ShisetsuMeishoPanelDiv ShisetsuMeishoPanel) {
+        this.getShisetsuRiyoPanel().setShisetsuMeishoPanel(ShisetsuMeishoPanel);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgRiyoShisetsuMeisho() {
+        return this.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getImgRiyoShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setImgRiyoShisetsuMeisho(DynamicImage imgRiyoShisetsuMeisho) {
+        this.getShisetsuRiyoPanel().getShisetsuMeishoPanel().setImgRiyoShisetsuMeisho(imgRiyoShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public TelNoPanelDiv getTelNoPanel() {
+        return this.getShisetsuRiyoPanel().getTelNoPanel();
+    }
+
+    @JsonIgnore
+    public void  setTelNoPanel(TelNoPanelDiv TelNoPanel) {
+        this.getShisetsuRiyoPanel().setTelNoPanel(TelNoPanel);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTelNo() {
+        return this.getShisetsuRiyoPanel().getTelNoPanel().getImgTelNo();
+    }
+
+    @JsonIgnore
+    public void  setImgTelNo(DynamicImage imgTelNo) {
+        this.getShisetsuRiyoPanel().getTelNoPanel().setImgTelNo(imgTelNo);
+    }
+
+    @JsonIgnore
+    public Label getLblRiyoShisetsuJusho() {
+        return this.getShisetsuRiyoPanel().getLblRiyoShisetsuJusho();
+    }
+
+    @JsonIgnore
+    public void  setLblRiyoShisetsuJusho(Label lblRiyoShisetsuJusho) {
+        this.getShisetsuRiyoPanel().setLblRiyoShisetsuJusho(lblRiyoShisetsuJusho);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtRiyoShisetsuJusho() {
+        return this.getShisetsuRiyoPanel().getTxtRiyoShisetsuJusho();
+    }
+
+    @JsonIgnore
+    public void  setTxtRiyoShisetsuJusho(TextBox txtRiyoShisetsuJusho) {
+        this.getShisetsuRiyoPanel().setTxtRiyoShisetsuJusho(txtRiyoShisetsuJusho);
+    }
+
+    @JsonIgnore
+    public ShisetsuJushoPanelDiv getShisetsuJushoPanel() {
+        return this.getShisetsuRiyoPanel().getShisetsuJushoPanel();
+    }
+
+    @JsonIgnore
+    public void  setShisetsuJushoPanel(ShisetsuJushoPanelDiv ShisetsuJushoPanel) {
+        this.getShisetsuRiyoPanel().setShisetsuJushoPanel(ShisetsuJushoPanel);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgRiyoShisetsuJusho() {
+        return this.getShisetsuRiyoPanel().getShisetsuJushoPanel().getImgRiyoShisetsuJusho();
+    }
+
+    @JsonIgnore
+    public void  setImgRiyoShisetsuJusho(DynamicImage imgRiyoShisetsuJusho) {
+        this.getShisetsuRiyoPanel().getShisetsuJushoPanel().setImgRiyoShisetsuJusho(imgRiyoShisetsuJusho);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void onLoad(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList, List<RembanServiceJokyoBusiness> serviceJokyos,
-            List<NinteichosahyoShisetsuRiyo> shisetsuRiyos, RString path) {
-        new ChosaKekkaInfoGaikyoHandler(this).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos, path);
+            List<NinteichosahyoShisetsuRiyo> shisetsuRiyos, ChosaKekkaInfoGaikyoParameter gaikyoParameter) {
+        new ChosaKekkaInfoGaikyoHandler(this).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos, gaikyoParameter);
     }
 }

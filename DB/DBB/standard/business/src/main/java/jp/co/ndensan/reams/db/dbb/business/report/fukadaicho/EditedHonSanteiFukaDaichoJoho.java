@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -92,5 +93,5 @@ public class EditedHonSanteiFukaDaichoJoho {
     private RString 世帯コード;
     private RString タイトル;
     private RString 通知書NO;
-
+    private GennenKanen 年度区分;
 }

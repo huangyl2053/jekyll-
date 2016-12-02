@@ -4,7 +4,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040031.IKogakugassanJikofutangakuInfoHoseiSubMapper">
     <select id="get高額支給額集計データ" resultMap="高額支給額集計データResultMap" resultOrdered="true" fetchSize="500">
-       SELECT
+        SELECT
             高額介護サービス費支給申請."hihokenshaNo" as "dbT3035_hihokenshaNo",
             高額介護サービス費支給申請."serviceTeikyoYM" as "dbT3035_serviceTeikyoYM",
             高額介護サービス費支給申請."shoKisaiHokenshaNo" as "dbT3035_shoKisaiHokenshaNo",
@@ -18,35 +18,59 @@
             <include refid="allColumns_KogakugassanJikofutangakuInfoHoseiTemp" />,
             "KogakugassanJikofutangakuInfoHoseiTemp"."hokenshaNo" as "hokenshaNo",
             "KogakugassanJikofutangakuInfoHoseiTemp"."taishoNendo" as "taishoNendo"
-       FROM  
-            rgdb."DbT3056KogakuShikyuShinsei" AS 高額介護サービス費支給申請,
-            rgdb."DbT3057KogakuShikyuHanteiKekka" AS 高額介護サービス費支給判定結果,
-            rgdb."DbT3058KogakuShikyuShinsaKettei" AS 高額介護サービス費支給審査決定,
-            rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS 高額介護サービス費給付対象者合計,
+        FROM  
             "KogakugassanJikofutangakuInfoHoseiTemp" AS "KogakugassanJikofutangakuInfoHoseiTemp"
-       WHERE 
-                高額介護サービス費支給申請."hihokenshaNo"  = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
+        JOIN
+            rgdb."DbT3056KogakuShikyuShinsei" AS 高額介護サービス費支給申請
+        ON
+            高額介護サービス費支給申請."hihokenshaNo"  = "KogakugassanJikofutangakuInfoHoseiTemp"."hihokenshaNo"
             AND SUBSTRING("KogakugassanJikofutangakuInfoHoseiTemp"."taishoKeisanKaishiYMD",1,6) <![CDATA[<=]]> 高額介護サービス費支給申請."serviceTeikyoYM"
             AND 高額介護サービス費支給申請."serviceTeikyoYM" <![CDATA[<=]]> SUBSTRING("KogakugassanJikofutangakuInfoHoseiTemp"."taishoKeisanShuryoYMD",1,6)
             AND 高額介護サービス費支給申請."isDeleted" = false
-            AND 高額介護サービス費支給判定結果."hihokenshaNo" = 高額介護サービス費支給申請."hihokenshaNo"
+        JOIN (
+            SELECT
+                *
+            FROM
+                rgdb."DbT3057KogakuShikyuHanteiKekka" AS 判定結果a
+            WHERE
+                判定結果a."isDeleted" = false
+                AND NOT EXISTS (
+                    SELECT
+                        1
+                    FROM
+                        rgdb."DbT3057KogakuShikyuHanteiKekka" AS 判定結果b
+                    WHERE
+                        判定結果b."isDeleted" = false
+                        AND 判定結果a."hihokenshaNo" = 判定結果b."hihokenshaNo"
+                        AND 判定結果a."serviceTeikyoYM" = 判定結果b."serviceTeikyoYM"
+                        AND 判定結果a."rirekiNo" = 判定結果b."rirekiNo"
+                        AND 判定結果a."rirekiEdaNo" <![CDATA[<]]> 判定結果b."rirekiEdaNo"
+                )
+        ) AS 高額介護サービス費支給判定結果
+        ON
+            高額介護サービス費支給判定結果."hihokenshaNo" = 高額介護サービス費支給申請."hihokenshaNo"
             AND 高額介護サービス費支給判定結果."serviceTeikyoYM" = 高額介護サービス費支給申請."serviceTeikyoYM"
             AND 高額介護サービス費支給判定結果."shoKisaiHokenshaNo" = 高額介護サービス費支給申請."shoKisaiHokenshaNo"
             AND 高額介護サービス費支給判定結果."rirekiNo" = 高額介護サービス費支給申請."rirekiNo"
-            AND 高額介護サービス費支給判定結果."isDeleted" = false
-            AND 高額介護サービス費支給審査決定."hihokenshaNo" = 高額介護サービス費支給申請."hihokenshaNo"
+        LEFT JOIN
+            rgdb."DbT3058KogakuShikyuShinsaKettei" AS 高額介護サービス費支給審査決定
+        ON
+            高額介護サービス費支給審査決定."hihokenshaNo" = 高額介護サービス費支給申請."hihokenshaNo"
             AND 高額介護サービス費支給審査決定."serviceTeikyoYM" = 高額介護サービス費支給申請."serviceTeikyoYM"
             AND 高額介護サービス費支給審査決定."shoKisaiHokenshaNo" = 高額介護サービス費支給申請."shoKisaiHokenshaNo"
             AND 高額介護サービス費支給審査決定."rirekiNo" = 高額介護サービス費支給申請."rirekiNo"
             AND 高額介護サービス費支給審査決定."isDeleted" = false
-            AND 高額介護サービス費給付対象者合計."hihokenshaNo" = 高額介護サービス費支給申請."hihokenshaNo"
+        JOIN
+            rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS 高額介護サービス費給付対象者合計
+        ON
+            高額介護サービス費給付対象者合計."hihokenshaNo" = 高額介護サービス費支給申請."hihokenshaNo"
             AND 高額介護サービス費給付対象者合計."serviceTeikyoYM" = 高額介護サービス費支給申請."serviceTeikyoYM"
             AND 高額介護サービス費給付対象者合計."rirekiNo" = 高額介護サービス費支給申請."rirekiNo"
             AND 高額介護サービス費給付対象者合計."isDeleted" = false
-       ORDER BY
-            高額介護サービス費支給申請."hihokenshaNo",
-            高額介護サービス費支給申請."serviceTeikyoYM",
-            高額介護サービス費支給申請."rirekiNo"
+        ORDER BY
+             高額介護サービス費支給申請."hihokenshaNo",
+             高額介護サービス費支給申請."serviceTeikyoYM",
+             高額介護サービス費支給申請."rirekiNo"
     </select>
      <select id="get中間DBデータ" resultMap="resultMap_KogakugassanJikofutangakuInfoHoseiTempEntity" resultOrdered="true" fetchSize="500">
           SELECT

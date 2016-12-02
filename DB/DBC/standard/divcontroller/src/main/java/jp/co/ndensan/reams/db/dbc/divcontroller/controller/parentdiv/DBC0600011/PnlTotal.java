@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -55,8 +54,6 @@ public class PnlTotal {
         div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(被保険者番号);
         RString 要介護状態区分名称 = div.getKaigoCommonPanel().getCcdShikakuKihon().get要介護状態区分名称() == null
                 ? RString.EMPTY : div.getKaigoCommonPanel().getCcdShikakuKihon().get要介護状態区分名称();
-        RDate 認定開始年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定開始年月日();
-        RDate 認定終了年月日 = div.getKaigoCommonPanel().getCcdShikakuKihon().get認定終了年月日();
         if (RString.isNullOrEmpty(要介護状態区分名称)) {
             div.getYoguKonyuhiShikyuShinseiList().getBtnAddShikyuShinsei().setDisabled(true);
         }

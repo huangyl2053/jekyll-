@@ -60,4 +60,5 @@ public class YokaigoNinteiShinchokuJohoShokaiRelateEntity {
     private RString gogitaiMei;
     private RString nijiHanYokaigoJotaiKubunCode;
     private RString shinseishoKanriNo;
+    private int ninteichosaIraiRirekiNo;
 }

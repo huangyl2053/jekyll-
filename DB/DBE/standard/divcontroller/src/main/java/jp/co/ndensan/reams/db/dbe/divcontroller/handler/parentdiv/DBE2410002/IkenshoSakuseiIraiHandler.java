@@ -423,7 +423,7 @@ public class IkenshoSakuseiIraiHandler {
         if (意見書作成依頼書情報.get医療機関住所() != null) {
             医療機関住所 = 意見書作成依頼書情報.get医療機関住所().value();
         }
-        item.setYubinNo(医療機関郵便番号);
+        item.setYubinNo1(医療機関郵便番号);
         item.setJushoText(医療機関住所);
         item.setKikanNameText(意見書作成依頼書情報.get医療機関名称());
         item.setShimeiText(意見書作成依頼書情報.get主治医氏名());
@@ -482,7 +482,7 @@ public class IkenshoSakuseiIraiHandler {
             }
         }
         if (意見書作成依頼書情報.get郵便番号() != null) {
-            item.setYubinNo1(getEditedYubinNo(意見書作成依頼書情報.get郵便番号().value()));
+            item.setYubinNo(getEditedYubinNo(意見書作成依頼書情報.get郵便番号().value()));
         }
         if (意見書作成依頼書情報.get住所() != null) {
             item.setJusho(意見書作成依頼書情報.get住所().value());
@@ -557,8 +557,8 @@ public class IkenshoSakuseiIraiHandler {
 
         RString 受診場所 = div.getTxtJyushinbasho().getValue();
         RString customerBarCode = RString.EMPTY;
-        if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
-            customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
+        if (!RString.isNullOrEmpty(business.get郵便番号()) && !RString.isNullOrEmpty(business.get住所())) {
+            customerBarCode = ReportUtil.getCustomerBarCode(business.get郵便番号(), business.get住所());
         }
         Map<Integer, RString> 通知文
                 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
@@ -573,8 +573,8 @@ public class IkenshoSakuseiIraiHandler {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                RString.isNullOrEmpty(business.get医療機関郵便番号()) ? RString.EMPTY : new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo(),
-                business.get医療機関住所(),
+                RString.isNullOrEmpty(business.get郵便番号()) ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
+                business.get住所(),
                 business.get被保険者氏名(),
                 get名称付与(ConfigNameDBE.介護保険診断命令書_宛先敬称),
                 customerBarCode,

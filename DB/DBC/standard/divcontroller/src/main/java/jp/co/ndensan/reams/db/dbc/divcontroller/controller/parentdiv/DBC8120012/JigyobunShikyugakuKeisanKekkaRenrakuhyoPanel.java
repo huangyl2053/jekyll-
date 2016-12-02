@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -125,7 +126,9 @@ public class JigyobunShikyugakuKeisanKekkaRenrakuhyoPanel {
                     UrQuestionMessages.確認_汎用.getMessage().replace(この連絡票は既に印刷されていますが.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).cancelPublish().respond();
+        }
         return ResponseData.of(div).respond();
     }
 

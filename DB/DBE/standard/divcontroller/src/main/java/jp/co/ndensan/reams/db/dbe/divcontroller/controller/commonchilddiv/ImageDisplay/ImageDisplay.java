@@ -133,9 +133,7 @@ public class ImageDisplay {
      */
     public ResponseData<ImageDisplayDiv> onClick_btnBack(ImageDisplayDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().replace("よろしいですか").evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("親画面へ戻ります。")).respond();
         }
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {

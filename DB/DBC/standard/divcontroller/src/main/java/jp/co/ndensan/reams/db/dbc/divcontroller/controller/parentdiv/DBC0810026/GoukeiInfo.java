@@ -67,18 +67,18 @@ public class GoukeiInfo {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
         ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        
+
         if (!(shokanKihon == null)) {
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance().
                     getSeikyuShokujiHiyoTanjyunSearch(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            ShokanTokuteiNyushoshaKaigoServiceHiyo shokanTokuteiNyushoshaKaigoServiceHiyo = ShokanbaraiJyokyoShokai.createInstance().
+            ShokanTokuteiNyushoshaKaigoServiceHiyo shokanToServiceHiyo = ShokanbaraiJyokyoShokai.createInstance().
                     getTokuteyiNyushosyaKaigoserviceHiyoWithMaxRenban(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList, サービス年月, shokanTokuteiNyushoshaKaigoServiceHiyo);
+            getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList, サービス年月, shokanToServiceHiyo);
         }
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
-        
+
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
         return ResponseData.of(div).respond();
     }

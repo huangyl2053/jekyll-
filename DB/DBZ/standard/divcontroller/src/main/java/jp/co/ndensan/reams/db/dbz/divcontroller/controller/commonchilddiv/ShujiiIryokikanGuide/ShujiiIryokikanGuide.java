@@ -84,11 +84,6 @@ public class ShujiiIryokikanGuide {
                         true,
                         new RString(""),
                         new RString(""),
-                        //                        div.getTxtShuijiiCodeFrom().getValue(),
-                        //                        div.getTxtShujiiCodeTo().getValue(),
-                        //                        状況フラグ_有効.equals(div.getRadShujiiJokyo().getSelectedValue()),
-                        //                        div.getTxtShujiiShimei().getValue(),
-                        //                        div.getTxtShujiiKanaShimei().getValue(),
                         div.getTxtMaxKensu().getValue().intValue())).records();
         getHandler(div).setDataGrid(list);
         return ResponseData.of(div).respond();

@@ -11,6 +11,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiText1A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiTextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext1a4.TokkiText1ReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -40,6 +44,7 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
     private static final int 連番_13 = 13;
     private static final int 連番_14 = 14;
     private static final int フォームインデックス_判定用 = 30;
+    private static final int フォームインデックス_全イメージ判定用 = 1;
     private static final int 連番_計算用 = 15;
 
     /**
@@ -80,21 +85,14 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
         source.shinsaYY = !RString.isNullOrEmpty(entity.get審査日_年()) ? entity.get審査日_年().substring(2) : RString.EMPTY;
         source.shinsaMM = entity.get審査日_月();
         source.shinsaDD = entity.get審査日_日();
-        source.tokkiImg = entity.get特記事項イメージ();
+        setレイアウトインデックス(source);
+        if (entity.get特記事項全イメージリスト() != null && !entity.get特記事項全イメージリスト().isEmpty()) {
+            source.tokkiImg = getイメージ03(entity.get特記事項全イメージリスト(), count);
+        }
         source.gaikyotokkiText = entity.get概況調査特記事項();
         source.gaikyotokkiImg = entity.get概況調査特記事項イメージ();
         if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
-            RStringBuilder builder = new RStringBuilder();
-            for (TokkiTextEntity tokkiTextEntity : entity.get特記事項リスト()) {
-                builder.append(tokkiTextEntity.get特記事項番号());
-                builder.append("-");
-                builder.append(tokkiTextEntity.get特記事項連番());
-                builder.append(tokkiTextEntity.get特記事項名称());
-                builder.append("　　");
-                builder.append(tokkiTextEntity.get特記事項());
-                builder.append(System.lineSeparator());
-            }
-            source.tokkiText = builder.toRString();
+            set特記事項リスト(source);
         }
         if (entity.get特記事項イメージリスト() != null && !entity.get特記事項イメージリスト().isEmpty()) {
             source.listChosa_1 = getイメージ01();
@@ -139,12 +137,46 @@ public class TokkiText1A4Editor implements ITokkiText1A4Editor {
             特記事項.add(特記事項builder.toRString());
         }
         set特記事項リスト(特記事項, source);
-        if (count < フォームインデックス_判定用) {
+        return source;
+    }
+
+    private void setレイアウトインデックス(TokkiText1ReportSource source) {
+        if (entity.get特記事項全イメージリスト() != null && !entity.get特記事項全イメージリスト().isEmpty()) {
+            if (count < フォームインデックス_全イメージ判定用) {
+                source.layoutBreakItem = 1;
+            } else {
+                source.layoutBreakItem = 2;
+            }
+        } else {
+            if (count < フォームインデックス_判定用) {
+                source.layoutBreakItem = 1;
+            } else {
+                source.layoutBreakItem = 2;
+            }
+        }
+    }
+
+    private void set特記事項リスト(TokkiText1ReportSource source) throws NumberFormatException {
+        RStringBuilder builder = new RStringBuilder();
+        int 最大表示行数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+        int listIndex = count == 0 ? count : count * 最大表示行数;
+        int maxIndex = entity.get特記事項リスト().size() <= listIndex + 最大表示行数 ? entity.get特記事項リスト().size() - 1 : listIndex + 最大表示行数;
+        for (int index = listIndex; index < maxIndex; index++) {
+            builder.append(entity.get特記事項リスト().get(index).get特記事項番号());
+            builder.append("-");
+            builder.append(entity.get特記事項リスト().get(index).get特記事項連番());
+            builder.append(entity.get特記事項リスト().get(index).get特記事項名称());
+            builder.append("　　");
+            builder.append(entity.get特記事項リスト().get(index).get特記事項());
+            builder.append(System.lineSeparator());
+        }
+        source.recordCount = count;
+        if (count == 0) {
             source.layoutBreakItem = 1;
         } else {
             source.layoutBreakItem = 2;
         }
-        return source;
+        source.tokkiText = builder.toRString();
     }
 
     private void set特記事項リスト(List<RString> 特記事項, TokkiText1ReportSource source) {

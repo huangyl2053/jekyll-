@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgTo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgtorikomidataichiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -94,7 +95,7 @@ public class RenkeiDataTorikomiHandler {
      * @param path path
      */
     public void onLoad(boolean 法改正前Flag, RString path) {
-        div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().loadHokenshaList();
+        div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().loadHokenshaList(GyomuBunrui.介護認定);
         if (法改正前Flag) {
             div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正前);
         } else {

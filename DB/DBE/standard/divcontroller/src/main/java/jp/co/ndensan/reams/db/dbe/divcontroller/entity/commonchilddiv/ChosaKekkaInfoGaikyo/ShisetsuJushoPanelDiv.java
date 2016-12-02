@@ -9,20 +9,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KubetsuKyufuPanel のクラスファイル 
+ * ShisetsuJushoPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KubetsuKyufuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+public class ShisetsuJushoPanelDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtkubetsuKyufu")
-    private TextBoxMultiLine txtkubetsuKyufu;
+    @JsonProperty("imgRiyoShisetsuJusho")
+    private DynamicImage imgRiyoShisetsuJusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class KubetsuKyufuPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtkubetsuKyufu
-     * @return txtkubetsuKyufu
+     * getimgRiyoShisetsuJusho
+     * @return imgRiyoShisetsuJusho
      */
-    @JsonProperty("txtkubetsuKyufu")
-    public TextBoxMultiLine getTxtkubetsuKyufu() {
-        return txtkubetsuKyufu;
+    @JsonProperty("imgRiyoShisetsuJusho")
+    public DynamicImage getImgRiyoShisetsuJusho() {
+        return imgRiyoShisetsuJusho;
     }
 
     /*
-     * settxtkubetsuKyufu
-     * @param txtkubetsuKyufu txtkubetsuKyufu
+     * setimgRiyoShisetsuJusho
+     * @param imgRiyoShisetsuJusho imgRiyoShisetsuJusho
      */
-    @JsonProperty("txtkubetsuKyufu")
-    public void setTxtkubetsuKyufu(TextBoxMultiLine txtkubetsuKyufu) {
-        this.txtkubetsuKyufu = txtkubetsuKyufu;
+    @JsonProperty("imgRiyoShisetsuJusho")
+    public void setImgRiyoShisetsuJusho(DynamicImage imgRiyoShisetsuJusho) {
+        this.imgRiyoShisetsuJusho = imgRiyoShisetsuJusho;
     }
 
     // </editor-fold>

@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -82,7 +84,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
                     Tsuki 普徴月Enum = 普徴月リスト.get(i - 1);
                     RString 普徴月 = get普徴月コード(普徴月Enum);
                     if (!(!is現年度 && this.get普徴期別金額(普徴期, 更正後_普徴期別金額リスト).equals(Decimal.ZERO))
-                            && 普徴月Enum != Tsuki.翌年度4月 && 普徴月Enum != Tsuki.翌年度5月) {
+                            && 普徴月Enum != Tsuki.翌年度4月 && 普徴月Enum != Tsuki.翌年度5月 && 普徴期.equals(new RString(i))) {
                         kibetsuBusiness.setListKibetsu_1(format月と期(普徴期));
                         kibetsuBusiness.setListKibetsu_2(format月と期(普徴月));
                         kibetsuBusiness.setListKibetsu_3(get納期限(普徴期, 普徴納期情報リスト));
@@ -95,7 +97,8 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
                     flag = false;
                     RString 特徴期 = 特徴期リスト.get(i - 1);
                     RString 特徴月 = 特徴月リス.get(i - 1).getコード();
-                    if (!(!is現年度 && this.get特徴期別金額(特徴期, 更正後_特徴期別金額リスト).equals(Decimal.ZERO))) {
+                    if (!(!is現年度 && this.get特徴期別金額(特徴期, 更正後_特徴期別金額リスト).equals(Decimal.ZERO))
+                            && 特徴期.equals(new RString(i))) {
                         kibetsuBusiness.setListKibetsu_6(format月と期(特徴期));
                         kibetsuBusiness.setListKibetsu_7(format月と期(特徴月));
                         set特徴期別金額(kibetsuBusiness, 特徴期, 更正前_特徴期別金額リスト, 更正後_特徴期別金額リスト, is現年度);
@@ -213,7 +216,7 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateReport
         RString 納期限 = RString.EMPTY;
         for (AfterEditInformation afterEditInformation : 普徴納期情報リスト) {
             if (期.equals(afterEditInformation.get期())) {
-                納期限 = afterEditInformation.get納期限();
+                納期限 = DateConverter.getWarekiYMD(new RDate(afterEditInformation.get納期限_西暦().toString()));
                 break;
             }
         }

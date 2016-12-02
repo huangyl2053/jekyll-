@@ -9,20 +9,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TokkiPanel のクラスファイル 
+ * TelNoPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class TokkiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+public class TelNoPanelDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtTokki")
-    private TextBoxMultiLine txtTokki;
+    @JsonProperty("imgTelNo")
+    private DynamicImage imgTelNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class TokkiPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtTokki
-     * @return txtTokki
+     * getimgTelNo
+     * @return imgTelNo
      */
-    @JsonProperty("txtTokki")
-    public TextBoxMultiLine getTxtTokki() {
-        return txtTokki;
+    @JsonProperty("imgTelNo")
+    public DynamicImage getImgTelNo() {
+        return imgTelNo;
     }
 
     /*
-     * settxtTokki
-     * @param txtTokki txtTokki
+     * setimgTelNo
+     * @param imgTelNo imgTelNo
      */
-    @JsonProperty("txtTokki")
-    public void setTxtTokki(TextBoxMultiLine txtTokki) {
-        this.txtTokki = txtTokki;
+    @JsonProperty("imgTelNo")
+    public void setImgTelNo(DynamicImage imgTelNo) {
+        this.imgTelNo = imgTelNo;
     }
 
     // </editor-fold>

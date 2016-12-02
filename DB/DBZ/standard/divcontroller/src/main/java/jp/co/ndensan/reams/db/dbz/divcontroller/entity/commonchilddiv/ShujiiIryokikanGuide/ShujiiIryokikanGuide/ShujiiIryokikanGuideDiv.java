@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIryokikanGuideDiv extends Panel implements IShujiiIryokikanGuideDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

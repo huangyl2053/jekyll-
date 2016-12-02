@@ -81,6 +81,41 @@
             AND DbT3180."dbT3180_tennyumaeHokenshaNo" = #{転入前保険者番号}
             AND DbT3180."dbT3180_rirekiNo" = ${履歴番号}
     </select>
+    
+    <select id="judge受給者or総合次号対象者"
+            resultMap="ResultMap_CheckResultEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter" fetchSize="500" resultOrdered="true">
+            SELECT
+               EXISTS (
+                  SELECT   *
+                  FROM
+                   rgdb."DbT4001JukyushaDaicho" dbT4001
+                  WHERE
+                   dbT4001."hihokenshaNo" = #{被保険者番号}
+                   AND dbT4001."logicalDeletedFlag" = false
+                   AND dbT4001."yukoMukoKubun" = '1'
+                   AND dbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{システム日付}
+                   AND dbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[>=]]> #{システム日付}
+                 ) as is受給者,
+               EXISTS (
+                  SELECT   *
+                  FROM
+                   rgdb."DbT3105SogoJigyoTaishosha" dbT3105
+                  WHERE
+                   dbT3105."hihokenshaNo" = #{被保険者番号}
+                   AND dbT3105."tekiyoKaishiYMD" <![CDATA[<=]]> #{システム日付}
+                   AND(dbT3105."tekiyoShuryoYMD" <![CDATA[>=]]> #{システム日付}
+                       OR dbT3105."tekiyoShuryoYMD" = ''
+                       OR dbT3105."tekiyoShuryoYMD" IS NULL
+                   )
+                ) is総合事業対象者
+     </select>
+        
+    <resultMap id="ResultMap_CheckResultEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jikofutangakushomeishotoroku.CheckResultEntity" autoMapping="true">
+       <result property="is受給者" column="is受給者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+       <result property="is総合事業対象者" column="is総合事業対象者" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+    </resultMap>
+              
      <select id="get事業高額合算自己負担額証明書Count"
             resultType="int"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeishotoroku.JikofutangakuShomeishoTorokuParameter" fetchSize="500" resultOrdered="true">

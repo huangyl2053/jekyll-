@@ -6,17 +6,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.koseishic
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * KoseiShiChosonSelector のクラスファイル 
  * 
- * @reamsid_L DBE-3000-060 dongyabin
+ * @author 自動生成
  */
 public class KoseiShiChosonSelectorDiv extends Panel implements IKoseiShiChosonSelectorDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -54,7 +54,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNaEditor implements IKogaku
     private static final RString 不支給の理由 = new RString("不支給の理由");
     private static final RString 支給 = new RString("1");
     private static final RString 不支給 = new RString("2");
-    private static final RString 窓口払い = new RString("1");
     private static final RString 半角アスタリスク = new RString("************");
     private static final RString 半角アスタリスク2 = new RString("**************");
     private static final RString 口座種別 = new RString("口座種別");

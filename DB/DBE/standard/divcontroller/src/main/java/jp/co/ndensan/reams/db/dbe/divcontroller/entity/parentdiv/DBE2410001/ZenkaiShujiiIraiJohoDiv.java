@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ZenkaiShujiiIraiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -45,7 +45,7 @@ public class ZenkaiShujiiIraiJohoDiv extends Panel {
     @JsonProperty("txtIryoKikanZen")
     private TextBox txtIryoKikanZen;
     @JsonProperty("txtYubinGangoZen")
-    private TextBoxNum txtYubinGangoZen;
+    private TextBoxYubinNo txtYubinGangoZen;
     @JsonProperty("txtJushoZen")
     private TextBoxJusho txtJushoZen;
     @JsonProperty("txtDenwaBangoIkenshoZen")
@@ -264,7 +264,7 @@ public class ZenkaiShujiiIraiJohoDiv extends Panel {
      * @return txtYubinGangoZen
      */
     @JsonProperty("txtYubinGangoZen")
-    public TextBoxNum getTxtYubinGangoZen() {
+    public TextBoxYubinNo getTxtYubinGangoZen() {
         return txtYubinGangoZen;
     }
 
@@ -273,7 +273,7 @@ public class ZenkaiShujiiIraiJohoDiv extends Panel {
      * @param txtYubinGangoZen txtYubinGangoZen
      */
     @JsonProperty("txtYubinGangoZen")
-    public void setTxtYubinGangoZen(TextBoxNum txtYubinGangoZen) {
+    public void setTxtYubinGangoZen(TextBoxYubinNo txtYubinGangoZen) {
         this.txtYubinGangoZen = txtYubinGangoZen;
     }
 

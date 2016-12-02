@@ -421,11 +421,15 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
         processParameter.set中間DBテーブル名(提供基本情報中間テーブル名);
         processParameter.set新規異動区分(parameter.get新規異動区分());
         processParameter.set版番号(版番号);
+        RDate 対象終了日時 = システム日付;
+        if (parameter.get対象終了日時() != null) {
+            対象終了日時 = parameter.get対象終了日時().getDate();
+        }
         switch (processName) {
             case 住所地特例者情報:
                 processParameter.set特定個人情報名コード(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
                 processParameter.setデータセット番号(DataSetNo._0102住所地特例情報.getコード());
-                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                processParameter.set基準日(new FlexibleDate(対象終了日時.toDateString()));
                 break;
             case 負担割合:
                 processParameter.set特定個人情報名コード(特定個人情報名コード);
@@ -435,12 +439,12 @@ public class DBU080010_TokuteiKojinJohoTeikyo extends BatchFlowBase<DBU080010_To
             case 給付情報:
                 processParameter.set特定個人情報名コード(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
                 processParameter.setデータセット番号(DataSetNo._0300給付情報.getコード());
-                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                processParameter.set基準日(new FlexibleDate(対象終了日時.toDateString()));
                 break;
             case 総合事業情報:
                 processParameter.set特定個人情報名コード(TokuteiKojinJohomeiCode.特定個人情報版管理番号04.getコード());
                 processParameter.setデータセット番号(DataSetNo._0400総合事業.getコード());
-                processParameter.set基準日(new FlexibleDate(parameter.get対象終了日時().getDate().toDateString()));
+                processParameter.set基準日(new FlexibleDate(対象終了日時.toDateString()));
                 break;
             case 被保険者:
                 processParameter.set特定個人情報名コード(特定個人情報名コード);

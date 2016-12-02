@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -36,6 +35,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -62,6 +63,7 @@ public class ShinseiKensaku {
 //>>>>>>> origin/sync
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
     private static final RString 完了メッセージ = new RString("要介護認定・要支援認定等申請者一覧表の発行処理が完了しました。");
+    private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
 
     /**
      * 画面初期化処理です。
@@ -156,15 +158,18 @@ public class ShinseiKensaku {
 
         RString 申請書管理番号 = row.getShinseishoKanriNo();
         int 認定調査履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
+        RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
         if (MENUID_DBEMN21003.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
+            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
@@ -177,7 +182,6 @@ public class ShinseiKensaku {
         }
 
         if (MENUID_DBEMN42002.equals(menuID)) {
-            RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
@@ -200,6 +204,11 @@ public class ShinseiKensaku {
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
         } else if (MENUID_DBEMN43001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            if (event == Events.検索結果1件) {
+                ViewStateHolder.put(ViewStateKeys.モード, new RString("1件"));
+            } else {
+                ViewStateHolder.remove(ViewStateKeys.モード);
+            }
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.個人依頼内容更新へ).respond();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
@@ -242,6 +251,12 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_printAfter(ShinseiKensakuDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
+        if (MENUID_DBEMN24001.equals(menuID)) {
+            FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_KANRYO);
+            FlowParameterAccessor.merge(fp);
+            div.setWfParameter(WORKFLOW_KEY_KANRYO);
+        }
         div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE0100001StateName.完了);
     }
@@ -286,7 +301,7 @@ public class ShinseiKensaku {
     private ShinseiKensakuHandler getHandler(ShinseiKensakuDiv div) {
         return new ShinseiKensakuHandler(div);
     }
-    
+
     private static class ShinseiKensakuErrorMessage implements IMessageGettable, IValidationMessage {
 
         private final Message message;

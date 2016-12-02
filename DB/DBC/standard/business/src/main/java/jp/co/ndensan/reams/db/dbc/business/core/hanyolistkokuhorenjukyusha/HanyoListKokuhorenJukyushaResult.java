@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.core.hanyolistkokuhorenjukyusha;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyodoshoriyojukyushajoho.HizukeChushutsuKubun;
@@ -27,8 +26,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkokuhorenjukyusha.Ha
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaAriEUCEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaNashiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -70,6 +72,7 @@ public class HanyoListKokuhorenJukyushaResult {
     private static final RString 通常認定 = new RString("1");
     private static final RString 旧措置入所者 = new RString("2");
     private static final RString やむを得ない理由 = new RString("3");
+    private static final RString みなし = new RString("みなし");
     private final HanyoListKokuhorenJukyushaProcessParameter processParameter;
     private final List<PersonalData> personalDataList;
 
@@ -88,12 +91,17 @@ public class HanyoListKokuhorenJukyushaResult {
      *
      * @param entity HanyoListKokuhorenJukyushaRelateEntity
      * @param 市町村名MasterMap 市町村名MasterMap
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param asociation Asociation
+     * @param 導入団体情報 Association
      * @param 連番 連番
      * @return HanyoListKokuhorenJukyushaAriEUCEntity
      */
     public HanyoListKokuhorenJukyushaAriEUCEntity set連番ありEUCEntity(HanyoListKokuhorenJukyushaRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association asociation, int 連番) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association asociation,
+            Association 導入団体情報, int 連番
+    ) {
         HanyoListKokuhorenJukyushaAriEUCEntity eucEntity = new HanyoListKokuhorenJukyushaAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -102,7 +110,7 @@ public class HanyoListKokuhorenJukyushaResult {
             personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
             eucEntity.set連番(new RString(連番));
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -111,10 +119,9 @@ public class HanyoListKokuhorenJukyushaResult {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所番地方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
+            eucEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -168,7 +175,9 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set申請種別(set申請種別(entity.get申請種別コード()));
         eucEntity.set変更申請中区分(set変更申請中区分(entity.get変更申請中区分コード()));
         eucEntity.set申請日(set日付編集(entity.get申請年月日()));
-        eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        if (!RString.isNullOrEmpty(entity.getみなし要介護状態区分コード())) {
+            eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        }
         eucEntity.set要介護状態度(set要介護状態(entity.get要介護状態区分コード()));
         eucEntity.set認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -371,11 +380,14 @@ public class HanyoListKokuhorenJukyushaResult {
      *
      * @param entity entity
      * @param 市町村名MasterMap 市町村名MasterMap
+     * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param asociation Association
+     * @param 導入団体情報 Association
      * @return HanyoListKokuhorenJukyushaReibanNashiEUCEntity
      */
     public HanyoListKokuhorenJukyushaNashiEUCEntity set連番なしEUCEntity(HanyoListKokuhorenJukyushaRelateEntity entity,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association asociation) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
+            ChohyoSeigyoKyotsu 帳票制御共通, Association asociation, Association 導入団体情報) {
         HanyoListKokuhorenJukyushaNashiEUCEntity eucEntity = new HanyoListKokuhorenJukyushaNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -383,7 +395,7 @@ public class HanyoListKokuhorenJukyushaResult {
             IKojin iKojin = iShikibetsuTaisho.to個人();
             personalDataList.add(toPersonalData(entity.get被保険者番号(), iKojin.get識別コード()));
             eucEntity.set識別コード(iKojin.get識別コード());
-            eucEntity.set住民種別(iKojin.get住民状態());
+            eucEntity.set住民種別(iKojin.get住民状態().住民状態略称());
             eucEntity.set氏名(iKojin.get名称().getName());
             eucEntity.set氏名カナ(iKojin.get名称().getKana());
             eucEntity.set生年月日(set日付編集(iKojin.get生年月日().toFlexibleDate()));
@@ -392,10 +404,9 @@ public class HanyoListKokuhorenJukyushaResult {
             eucEntity.set続柄コード(iKojin.get続柄コードリスト().toTsuzukigaraCode());
             eucEntity.set世帯コード(iKojin.get世帯コード());
             eucEntity.set世帯主名(iKojin.get世帯主名());
-            eucEntity.set住所コード(iKojin.get住所().get全国住所コード());
+            eucEntity.set住所コード(iKojin.get住所().get町域コード().value());
             eucEntity.set郵便番号(iKojin.get住所().get郵便番号().getEditedYubinNo());
-            eucEntity.set住所番地方書(get住所_番地_方書(iKojin.get住所().get住所(),
-                    get番地(iKojin.get住所().get番地()), get方書(iKojin.get住所().get方書())));
+            eucEntity.set住所番地方書(JushoHenshu.editJusho(帳票制御共通, iKojin, 導入団体情報));
             eucEntity.set住所(iKojin.get住所().get住所());
             eucEntity.set番地(get番地(iKojin.get住所().get番地()));
             eucEntity.set方書(get方書(iKojin.get住所().get方書()));
@@ -449,7 +460,9 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set申請種別(set申請種別(entity.get申請種別コード()));
         eucEntity.set変更申請中区分(set変更申請中区分(entity.get変更申請中区分コード()));
         eucEntity.set申請日(set日付編集(entity.get申請年月日()));
-        eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        if (!RString.isNullOrEmpty(entity.getみなし要介護状態区分コード())) {
+            eucEntity.setみなし更新認定(setみなし更新認定(entity.getみなし要介護状態区分コード()));
+        }
         eucEntity.set要介護状態度(set要介護状態(entity.get要介護状態区分コード()));
         eucEntity.set認定開始日(set日付編集(entity.get認定有効期間開始年月日()));
         eucEntity.set認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
@@ -771,18 +784,16 @@ public class HanyoListKokuhorenJukyushaResult {
         return YokaigoJotaiKubun.toValue(要介護状態区分コード).get名称();
     }
 
-    private RString setみなし更新認定(RString みなし更新認定コード) {
-        if (RString.isNullOrEmpty(みなし更新認定コード)) {
-            return RString.EMPTY;
+    private RString setみなし更新認定(RString みなし要介護区分コード) {
+        RString 受給みなし更新認定 = RString.EMPTY;
+        List minashiCodeList = new ArrayList();
+        for (MinashiCode minashiCode : MinashiCode.values()) {
+            minashiCodeList.add(minashiCode.getコード());
         }
-        Map<RString, RString> minashikoshin = new HashMap<>();
-        minashikoshin.put(通常認定, new RString("通常認定"));
-        minashikoshin.put(旧措置入所者, new RString("旧措置入所者"));
-        minashikoshin.put(やむを得ない理由, new RString("やむを得ない理由"));
-        if (minashikoshin.containsKey(みなし更新認定コード)) {
-            return minashikoshin.get(みなし更新認定コード);
+        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+            受給みなし更新認定 = みなし;
         }
-        return RString.EMPTY;
+        return 受給みなし更新認定;
     }
 
     private RString set変更申請中区分(RString 変更申請中区分コード) {
@@ -847,16 +858,19 @@ public class HanyoListKokuhorenJukyushaResult {
     private RString set日付編集(RString value) {
         RString 日付 = RString.EMPTY;
         if (processParameter.is日付編集() && !RString.isNullOrEmpty(value)) {
-            日付 = value;
-            if (value.length() == LENGTH) {
-                if (FlexibleYearMonth.canConvert(value)) {
-                    日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-                }
-            } else {
-                if (FlexibleDate.canConvert(value)) {
-                    日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-                }
+            日付 = set日付編集(日付, value);
+        }
+        return 日付;
+    }
+
+    private RString set日付編集(RString 日付, RString value) {
+        日付 = value;
+        if (value.length() == LENGTH) {
+            if (FlexibleYearMonth.canConvert(value)) {
+                日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
             }
+        } else if (FlexibleDate.canConvert(value)) {
+            日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
         return 日付;
     }
@@ -915,7 +929,6 @@ public class HanyoListKokuhorenJukyushaResult {
     /**
      * 出力条件を作成するメッソドです。
      *
-     * @param 市町村名 市町村名
      * @return List<RString>
      */
     public List<RString> set出力条件() {

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.kanendoidohakkoichiran;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity {
 
+    private final HonSanteiTsuchiShoKyotsu 本算定通知書情報;
     private final EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報;
     private final RString 調定年度;
     private final RString 出力期;
@@ -37,6 +39,7 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity {
     /**
      * コンストラクタです。
      *
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
      * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsuのListです
      * @param 調定年度 RString
      * @param 出力期 RString
@@ -52,11 +55,13 @@ public class HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity {
      * @param 並び順の５件目 RString
      */
     public HonsanteiKanendoIdoNonyutsuchishoHakkoIchiranInputEntity(
+            HonSanteiTsuchiShoKyotsu 本算定通知書情報,
             EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             RString 調定年度, RString 出力期, RString 帳票作成日時,
             RString 地方公共団体コード, RString 市町村名, int 連番, List<RString> 納入対象賦課年度List,
             RString 並び順の１件目, RString 並び順の２件目,
             RString 並び順の３件目, RString 並び順の４件目, RString 並び順の５件目) {
+        this.本算定通知書情報 = 本算定通知書情報;
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.調定年度 = 調定年度;
         this.出力期 = 出力期;

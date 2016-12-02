@@ -90,7 +90,7 @@ public class ServiceCodeBetsuRiyoJokyoEditor implements
         source.List2_11 = doカンマ編集(明細リスト.get単位数合計値());
 
         source.title = entity.getタイトル();
-
+        source.breakKey = 明細リスト.get種類コード();
         return source;
 
     }

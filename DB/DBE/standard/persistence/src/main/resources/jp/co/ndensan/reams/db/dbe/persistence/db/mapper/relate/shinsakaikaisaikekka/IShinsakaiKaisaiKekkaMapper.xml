@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaikekka.IShinsakaiKaisaiKekkaMapper">
     <select resultOrdered="true" id="getヘッドエリア内容検索" resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
-        SELECT
+        SELECT DISTINCT
         '第' || DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
         ,DbT5591GogitaiJoho."gogitaiNo" AS "gogitaiNo"
         ,DbT5591GogitaiJoho."gogitaiMei" AS "gogitaiMei"
@@ -51,7 +51,7 @@
 
     <select resultOrdered="true" id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"   fetchSize="500">
-        SELECT
+        SELECT DISTINCT
         DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" AS "shinsakaiIinCode"
         ,DbT5594ShinsakaiIinJoho."shinsakaiIinShimei" AS "shinsakaiIinShimei"
         ,DbT5594ShinsakaiIinJoho."seibetsu" AS "seibetsu"

@@ -99,6 +99,15 @@ public class ChosaKekkaInfoGaikyoBusiness {
     public Code get厚労省IF識別コード() {
         return choentity.getKoroshoIfShikibetsuCode();
     }
+    
+    /**
+     * 概況調査テキストイメージ区分を返します。
+     *
+     * @return 概況調査テキストイメージ区分
+     */
+    public RString get概況調査テキストイメージ区分() {
+        return choentity.getGaikyoChosaTextImageKubun();
+    }
 
     /**
      * 記入項目連番を返します。

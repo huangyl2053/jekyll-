@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KogakuGassanShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanjigyobunketteitsuchisho.KougakugassanShikyuketteiTsuuchishoOutputEntity;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8140011.DBC8140011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8140011.DBC8140011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8140011.KogakuGassanShikyuKetteiTsuchishoPanelDiv;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -45,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KogakuGassanShikyuKetteiTsuchishoPanel {
 
     private static final RString RSTRING_1 = new RString("1");
+    private static final RString 事業分高額合算支給決定通知書を発行 = new RString("事業分高額合算支給決定通知書を発行");
 
     /**
      * 画面初期化のメソッドです。
@@ -83,14 +86,16 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
         }
         List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List = getHandler(div).
                 get事業高額合算支給不支給決定List(被保険者番号);
-        if (事業高額合算支給不支給決定List.isEmpty()) {
+        List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List1 = getHandler(div).
+                set事業高額合算支給不支給決定List(事業高額合算支給不支給決定List);
+        if (事業高額合算支給不支給決定List1.isEmpty()) {
             getHandler(div).状態2();
             ValidationMessageControlPairs validPairs = getValidationHandler().高額合算支給不支給マスタデータなしチェック();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
         }
-        initialize(div, 事業高額合算支給不支給決定List);
+        initialize(div, 事業高額合算支給不支給決定List1);
         return ResponseData.of(div).respond();
 
     }
@@ -194,10 +199,19 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
     public ResponseData<KogakuGassanShikyuKetteiTsuchishoPanelDiv> onClick_validate(KogakuGassanShikyuKetteiTsuchishoPanelDiv div) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(
+                    DbcQuestionMessages.確認メッセージ.getMessage().getCode(),
+                    DbcQuestionMessages.確認メッセージ.getMessage().replace(事業分高額合算支給決定通知書を発行.toString()).evaluate(),
+                    ButtonSelectPattern.OKCancel);
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+
         JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定 = ViewStateHolder.
                 get(ViewStateKeys.事業高額合算支給不支給決定, JigyoKogakuGassanShikyuFushikyuKettei.class);
         RString 支払予定日印字有無 = ViewStateHolder.get(ViewStateKeys.支払予定日印字有無, RString.class);
-        if (getHandler(div).入力チェック(支払予定日印字有無)) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && getHandler(div).入力チェック(支払予定日印字有無)) {
             ValidationMessageControlPairs pairs = getValidationHandler().未入力チェック();
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -206,18 +220,21 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
         KougakugassanShikyuketteiTsuuchishoOutputEntity outputEntity = getHandler(div).editKougakugassanShikyuketteiTsuuchisho(
                 事業高額合算支給不支給決定, 識別コード, 被保険者番号, 支払予定日印字有無);
         RString データ有無 = outputEntity.getデータ有無();
-        if (RSTRING_1.equals(データ有無)) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && RSTRING_1.equals(データ有無)) {
             ValidationMessageControlPairs pairs = getValidationHandler().高額合算支給情報存在エラーチェック();
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
-        if (div.getTxtZenkaiHakkoYMD().getValue() != null) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && div.getTxtZenkaiHakkoYMD().getValue() != null) {
             ValidationMessageControlPairs pairs = getValidationHandler().高額合算支給決定通知書発行済チェック();
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
+
         return ResponseData.of(div).respond();
     }
 
@@ -258,19 +275,18 @@ public class KogakuGassanShikyuKetteiTsuchishoPanel {
 
     private void initialize(KogakuGassanShikyuKetteiTsuchishoPanelDiv div,
             List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List) {
-        List<JigyoKogakuGassanShikyuFushikyuKettei> 事業高額合算支給不支給決定List1 = getHandler(div).
-                set事業高額合算支給不支給決定List(事業高額合算支給不支給決定List);
-        ViewStateHolder.put(ViewStateKeys.事業高額合算支給不支給決定List, (Serializable) 事業高額合算支給不支給決定List1);
-        Map<FlexibleYear, Set<RString>> 対象年度_連絡票整理番号 = getHandler(div).put対象年度_連絡票整理番号(事業高額合算支給不支給決定List1);
+
+        ViewStateHolder.put(ViewStateKeys.事業高額合算支給不支給決定List, (Serializable) 事業高額合算支給不支給決定List);
+        Map<FlexibleYear, Set<RString>> 対象年度_連絡票整理番号 = getHandler(div).put対象年度_連絡票整理番号(事業高額合算支給不支給決定List);
         ViewStateHolder.put(ViewStateKeys.対象年度_連絡票整理番号Map, (Serializable) 対象年度_連絡票整理番号);
-        Map<RString, Set<RString>> 連絡票整理番号_履歴番号 = getHandler(div).put連絡票整理番号_履歴番号(事業高額合算支給不支給決定List1);
+        Map<RString, Set<RString>> 連絡票整理番号_履歴番号 = getHandler(div).put連絡票整理番号_履歴番号(事業高額合算支給不支給決定List);
         ViewStateHolder.put(ViewStateKeys.連絡票整理番号_履歴番号Map, (Serializable) 連絡票整理番号_履歴番号);
         ViewStateHolder.put(ViewStateKeys.支払予定日印字有無, getHandler(div).set支払予定日印字有無());
         getHandler(div).set対象年度(対象年度_連絡票整理番号);
         getHandler(div).set連絡票整理番号(対象年度_連絡票整理番号);
         getHandler(div).set履歴番号(連絡票整理番号_履歴番号);
         JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算支給不支給決定 = getHandler(div)
-                .get事業高額合算支給不支給決定(事業高額合算支給不支給決定List1);
+                .get事業高額合算支給不支給決定(事業高額合算支給不支給決定List);
         ViewStateHolder.put(ViewStateKeys.事業高額合算支給不支給決定, 事業高額合算支給不支給決定);
         getHandler(div).set前回発行日(事業高額合算支給不支給決定);
     }

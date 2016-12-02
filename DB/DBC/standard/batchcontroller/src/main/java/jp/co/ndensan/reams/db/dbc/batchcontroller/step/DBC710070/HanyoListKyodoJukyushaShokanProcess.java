@@ -164,7 +164,8 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
     protected void process(KyodoJukyushaShokanEntity entity) {
         連番++;
         csv出力Flag = あり;
-        csvListWriter.writeLine(editor.setBodyList(entity, processParameter, 地方公共団体情報, 構成市町村マスタ, 連番, 帳票制御共通));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get被保険者台帳管理().getShichosonCode());
+        csvListWriter.writeLine(editor.setBodyList(entity, processParameter, 導入団体情報, 構成市町村マスタ, 連番, 帳票制御共通));
         ExpandedInformation expandedInformation = new ExpandedInformation(
                 CODE_0003, DATANAME_被保険者番号, entity.get共同処理用受給者異動償還送付().getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));

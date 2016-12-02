@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Shinsaka
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoHokenshaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -115,6 +116,8 @@ public class NinteiShinseiToroku {
      */
     public ResponseData<NinteiShinseiTorokuDiv> onLoad(NinteiShinseiTorokuDiv div) {
         RString menuID = ResponseHolder.getMenuID();
+        ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnKojinMemo().setDisabled(Boolean.TRUE);
+        ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnSetaiMemo().setDisabled(Boolean.TRUE);
         ShichosonSecurityJoho shichosonSecurity = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         RString 介護導入形態 = RString.EMPTY;
         if (shichosonSecurity.get導入形態コード().value().equals(new RString("211"))) {

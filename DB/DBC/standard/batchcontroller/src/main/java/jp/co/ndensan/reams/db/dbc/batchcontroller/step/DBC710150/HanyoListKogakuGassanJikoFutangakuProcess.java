@@ -269,16 +269,18 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
             YubinNo 郵便番号 = 宛名.get住所().get郵便番号();
             csvEntity.set郵便番号(郵便番号 != null
                     ? 郵便番号.getEditedYubinNo() : RString.EMPTY);
-            set宛名本人(宛名, csvEntity);
+            set宛名本人(宛名, csvEntity, entity);
         }
     }
 
-    private void set宛名本人(IKojin 宛名, HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity) {
+    private void set宛名本人(IKojin 宛名, HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity,
+            HanyoListKogakuGassanJikoFutangakuEntity entity) {
         if (宛名.get住所() != null) {
             Banchi 番地 = 宛名.get住所().get番地();
             Katagaki 方書 = 宛名.get住所().get方書();
             RString 住所 = 宛名.get住所().get住所();
-            csvEntity.set住所と番地と方書(JushoHenshu.editJusho(帳票制御共通, 宛名, 地方公共団体));
+            Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get市町村コード());
+            csvEntity.set住所と番地と方書(JushoHenshu.editJusho(帳票制御共通, 宛名, 導入団体情報));
             csvEntity.set住所(住所 != null
                     ? 住所 : RString.EMPTY);
             csvEntity.set番地(番地 != null

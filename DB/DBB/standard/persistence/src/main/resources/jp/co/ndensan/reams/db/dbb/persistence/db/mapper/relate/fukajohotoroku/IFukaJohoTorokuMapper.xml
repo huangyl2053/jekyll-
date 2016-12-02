@@ -257,21 +257,6 @@
         choteiIdToroku."choteiNendo" = dbT2002."choteiNendo"
         AND choteiIdToroku."kazeiNendo" = dbT2002."fukaNendo"
         AND choteiIdToroku."tsuchishoNo" = (CAST(dbT2002."tsuchishoNo" AS numeric))
-        WHERE
-        (dbT2002."choteiNendo" = dbT2002."fukaNendo")
-        OR (dbT2002."fukaNendo" <![CDATA[<]]> dbT2002."choteiNendo"
-        AND (0 <![CDATA[<]]> dbT2002."fuKibetsuGaku01"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku02"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku03"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku04"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku05"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku06"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku07"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku08"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku09"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku10"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku11"
-        OR 0 <![CDATA[<]]> dbT2002."fuKibetsuGaku12"))
         ORDER BY
         dbT2002."choteiNendo",
         dbT2002."fukaNendo",

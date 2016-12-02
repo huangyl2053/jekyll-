@@ -23,10 +23,12 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -2344,8 +2346,11 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo));
         if (イメージ情報 != null && イメージ情報.getイメージ共有ファイルID() != null) {
             FilesystemName sharedFileName = finder.selectSharedFileNameByKey(new ShinseishoKanriNo(shinseishoKanriNo));
-            downLoadFilePath = getDownLoadFilePath(イメージ情報.getイメージ共有ファイルID(), sharedFileName);
-
+            try {
+                downLoadFilePath = getDownLoadFilePath(イメージ情報.getイメージ共有ファイルID(), sharedFileName);
+            } catch (SystemException e) {
+                throw new ApplicationException(e.getMessage());
+            }
             path原本 = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
                     NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(),
                     1, true)));
@@ -2707,12 +2712,30 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private RString getDownLoadFilePath(RDateTime sharedFileId, FilesystemName sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"), new RString("db#dbz"),
-                new RString("WEB-INF"), new RString("image"));
+//        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"), new RString("db#dbz"),
+//                new RString("WEB-INF"), new RString("image"));
+//        RString tmpPath = Directory.createTmpDirectory();
+//        FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
+//        ReadOnlySharedFileEntryDescriptor descriptor
+//                = new ReadOnlySharedFileEntryDescriptor(sharedFileName, sharedFileId);
+//        return SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
+        RString tmpPath = Directory.createTmpDirectory();
+        FilesystemPath filesystemPath = new FilesystemPath(tmpPath);
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(sharedFileName, sharedFileId);
-        return SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
-    }
+        FilesystemPath 保存先フォルダのパス = SharedFile.copyToLocal(descriptor, filesystemPath);
+        RString fileName = (Directory.getFiles(保存先フォルダのパス.toRString(), descriptor.getSharedFileName().toRString(),
+                false).length > 0 ? Directory.getFiles(保存先フォルダのパス.toRString(), descriptor.getSharedFileName().toRString(),
+                        false)[0] : RString.EMPTY);
+        java.io.File file = new java.io.File(fileName.toString());
+        if (file.isDirectory()) {
+            fileName = (Directory.getFiles(fileName, descriptor.getSharedFileName().toRString(),
+                    false).length > 0 ? Directory.getFiles(fileName, descriptor.getSharedFileName().toRString(),
+                            false)[0] : RString.EMPTY);
+        }
+        RString filePath = Path.combinePath(保存先フォルダのパス.toRString(), fileName);
+        return filePath;
+        }
 
     /**
      * 認定調査特記事項照会用なViewStateKey

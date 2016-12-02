@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushakyufujissekiichiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -27,7 +28,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
     private final RString 被保険者番号_終了;
     private final boolean 被保険者番号flag;
     private final RString 給付実績区分;
-    private final boolean 給付実績区分flag;
     private final RString すべて選択;
     private final RString 要介護1;
     private final boolean 要介護1flag;
@@ -134,6 +134,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
     private final boolean 給付率flag;
     private final RString 出力順;
     private final RString psmShikibetsuTaisho;
+    private final List 給付実績区分List;
 
     /**
      * コンストラクタです
@@ -147,7 +148,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 被保険者番号_終了 被保険者番号_終了
      * @param 被保険者番号flag 被保険者番号flag
      * @param 給付実績区分 給付実績区分
-     * @param 給付実績区分flag 給付実績区分flag
      * @param すべて選択 すべて選択
      * @param 要介護1 要介護1
      * @param 要介護1flag 要介護1flag
@@ -254,6 +254,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 給付率flag 給付率flag
      * @param 出力順 出力順
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param 給付実績区分List 給付実績区分List
      */
     protected JukyushaKyufujissekiIchiranMybatisParameter(boolean flag,
             RString 対象年月,
@@ -264,7 +265,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 被保険者番号_終了,
             boolean 被保険者番号flag,
             RString 給付実績区分,
-            boolean 給付実績区分flag,
             RString すべて選択,
             RString 要介護1,
             boolean 要介護1flag,
@@ -370,7 +370,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 給付率,
             boolean 給付率flag,
             RString 出力順,
-            RString psmShikibetsuTaisho) {
+            RString psmShikibetsuTaisho,
+            List 給付実績区分List) {
         this.flag = flag;
         this.対象年月 = 対象年月;
         this.対象年月flag = 対象年月flag;
@@ -380,7 +381,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
         this.被保険者番号_終了 = 被保険者番号_終了;
         this.被保険者番号flag = 被保険者番号flag;
         this.給付実績区分 = 給付実績区分;
-        this.給付実績区分flag = 給付実績区分flag;
         this.すべて選択 = すべて選択;
         this.要介護1 = 要介護1;
         this.要介護1flag = 要介護1flag;
@@ -487,6 +487,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
         this.給付率flag = 給付率flag;
         this.出力順 = 出力順;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.給付実績区分List = 給付実績区分List;
     }
 
     /**
@@ -554,6 +555,7 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
      * @param 給付率 給付率
      * @param 出力順 出力順
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param 給付実績区分List 給付実績区分List
      * @return JukyushaKyufujissekiIchiranMybatisParameter
      */
     public static JukyushaKyufujissekiIchiranMybatisParameter createSelectByKeyParam(
@@ -618,7 +620,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
             RString 給付率区分,
             RString 給付率,
             RString 出力順,
-            RString psmShikibetsuTaisho
+            RString psmShikibetsuTaisho,
+            List 給付実績区分List
     ) {
         boolean flag = false;
         if (new RString("1").equals(訪問通所他) && new RString("1").equals(短期入所生活介護)) {
@@ -652,7 +655,6 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
                 被保険者番号_終了,
                 !new RString("0000000000").equals(被保険者番号_開始) && !new RString("9999999999").equals(被保険者番号_終了),
                 給付実績区分,
-                new RString("1").equals(給付実績区分),
                 すべて選択,
                 要介護1,
                 new RString("1").equals(要介護1),
@@ -758,7 +760,8 @@ public class JukyushaKyufujissekiIchiranMybatisParameter implements IMyBatisPara
                 給付率,
                 RString.isNullOrEmpty(給付率),
                 出力順,
-                psmShikibetsuTaisho
+                psmShikibetsuTaisho,
+                給付実績区分List
         );
     }
 }

@@ -9,25 +9,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
  * YokaigoNinteiJohoTeikyo のクラスファイル
  *
- * @reamsid_L DBE-0230-010 zhangzhiming
+ * @author 自動生成
  */
 public class YokaigoNinteiJohoTeikyoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -64,6 +57,8 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     private NinteiKekkaShosaiDiv NinteiKekkaShosai;
     @JsonProperty("HakkoChohyo")
     private HakkoChohyoDiv HakkoChohyo;
+    @JsonProperty("wfParameter")
+    private RString wfParameter;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -342,6 +337,24 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     }
 
     /*
+     * getwfParameter
+     * @return wfParameter
+     */
+    @JsonProperty("wfParameter")
+    public RString getWfParameter() {
+        return wfParameter;
+    }
+
+    /*
+     * setwfParameter
+     * @param wfParameter wfParameter
+     */
+    @JsonProperty("wfParameter")
+    public void setWfParameter(RString wfParameter) {
+        this.wfParameter = wfParameter;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -505,16 +518,6 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShinsakaiYoteibi() {
-        return this.getNinteiKekkaShosai().getShinsakai().getTxtShinsakaiYoteibi();
-    }
-
-    @JsonIgnore
-    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
-        this.getNinteiKekkaShosai().getShinsakai().setTxtShinsakaiYoteibi(txtShinsakaiYoteibi);
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtShinsakaiKaisaibi() {
         return this.getNinteiKekkaShosai().getShinsakai().getTxtShinsakaiKaisaibi();
     }
@@ -522,6 +525,16 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     @JsonIgnore
     public void setTxtShinsakaiKaisaibi(TextBoxDate txtShinsakaiKaisaibi) {
         this.getNinteiKekkaShosai().getShinsakai().setTxtShinsakaiKaisaibi(txtShinsakaiKaisaibi);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShinsakaiYoteibi() {
+        return this.getNinteiKekkaShosai().getShinsakai().getTxtShinsakaiYoteibi();
+    }
+
+    @JsonIgnore
+    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
+        this.getNinteiKekkaShosai().getShinsakai().setTxtShinsakaiYoteibi(txtShinsakaiYoteibi);
     }
 
     @JsonIgnore

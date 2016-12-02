@@ -70,19 +70,28 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     @BatchWriter
     private BatchReportWriter<TokkiText1ReportSource> batchWrite;
     private ReportSourceWriter<TokkiText1ReportSource> reportSourceWriter;
-    private static final RString FILENAME_BAK = new RString("C4101_BAK.png");
-    private static final RString FILENAME = new RString("C4101.png");
+    private static final RString FILENAME = new RString("C410");
+    private static final RString BAK = new RString("_BAK");
     private static final RString C0007_FILENAME_BAK = new RString("C0007_BAK.png");
     private static final RString C0007_FILENAME = new RString("C0007.png");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
     private static final RString フラグ = new RString("1");
-    private static final RString 認定調査票チェックフラグ = new RString("【認定調査票チェックフラグ】");
-    private static final RString 特記事項チェックフラグ = new RString("【特記事項チェックフラグ】");
-    private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書チェックフラグ】");
-    private static final RString その他資料チェックフラグ = new RString("【その他資料チェックフラグ】");
-    private static final RString 一次判定結果チェックフラグ = new RString("【一次判定結果チェックフラグ】");
+    private static final int 最大ページ = 6;
+    private static final RString 認定調査票チェックフラグ = new RString("【認定調査票】");
+    private static final RString 特記事項チェックフラグ = new RString("【特記事項】");
+    private static final RString 主治医意見書チェックフラグ = new RString("【主治医意見書】");
+    private static final RString その他資料チェックフラグ = new RString("【その他資料】");
+    private static final RString 一次判定結果チェックフラグ = new RString("【一次判定結果】");
+    private static final RString 帳票発行有り = new RString("1");
+    private static final RString 帳票発行無し = new RString("0");
+    private static final RString 出力する = new RString("出力する");
+    private static final RString 出力しない = new RString("出力しない");
     private static final RString 総合事業開始区分 = new RString("【総合事業開始区分】");
+    private static final RString 総合事業開始区分_未実施 = new RString("1");
+    private static final RString 総合事業開始区分_実施済 = new RString("2");
+    private static final RString 総合事業未実施 = new RString("総合事業未実施");
+    private static final RString 総合事業実施済 = new RString("総合事業実施済");
     private static final RString 全イメージ = new RString("2");
     private static final RString 短冊 = new RString("3");
     private static final RString 特記事項番号_101 = new RString("101");
@@ -196,21 +205,22 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         } else {
             reportId = ReportIdDBE.DBE517134.getReportId().value();
         }
-        batchWrite = BatchReportFactory.createBatchReportWriter(reportId).addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
-
-            TokkiText1ReportSource.LAYOUTBREAKITEM) {
-            @Override
-            public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
-                    ReportLineRecord<TokkiText1ReportSource> currentRecord, ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
-                int layout = currentRecord.getSource().layoutBreakItem;
-                currentRecord.setFormGroupIndex(layout);
-                if (nextRecord != null && nextRecord.getSource() != null) {
-                    layout = nextRecord.getSource().layoutBreakItem;
-                    nextRecord.setFormGroupIndex(layout);
-                }
-                return currentRecord;
-            }
-        }).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(reportId)
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
+                                TokkiText1ReportSource.LAYOUTBREAKITEM,TokkiText1ReportSource.TOKKIIMG) {
+                                    @Override
+                                    public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
+                                            ReportLineRecord<TokkiText1ReportSource> currentRecord,
+                                            ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                                                int layout = currentRecord.getSource().layoutBreakItem;
+                                                currentRecord.setFormGroupIndex(layout);
+                                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                                    layout = nextRecord.getSource().layoutBreakItem;
+                                                    nextRecord.setFormGroupIndex(layout);
+                                                }
+                                                return currentRecord;
+                                            }
+                                }).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
@@ -302,31 +312,43 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         List<TokkiTextEntity> 特記事項List = new ArrayList<>();
         List<TokkiTextEntity> 特記事項番号リスト = new ArrayList<>();
         List<TokkiTextEntity> イメージリスト = new ArrayList<>();
+        List<TokkiTextEntity> 全イメージリスト = new ArrayList<>();
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
         ninteiEntity.set概況調査特記事項イメージ(共有ファイルを引き出す_C0007(イメージID));
-        for (int i = 0; i < entity.size(); i++) {
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
-                    && 全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
-                                    SubGyomuCode.DBE認定支援))) {
-                ninteiEntity.set特記事項イメージ(共有ファイルを引き出す(イメージID));
+        if (全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            for (int i = 1; i <= 最大ページ; i++) {
+                set特記事項全イメージパス(entity, i, 全イメージリスト);
             }
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())
-                    && 短冊.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(),
-                                    SubGyomuCode.DBE認定支援))) {
-                TokkiTextEntity tokki = new TokkiTextEntity();
-                tokki.set特記事項(entity.get(i).get特記事項());
-                tokki.set特記事項番号(entity.get(i).get特記事項番号());
-                tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
-                tokki.set特記事項連番(entity.get(i).get特記事項連番());
-                tokki.set特記事項イメージ(get共有ファイルを引き出す(entity.get(i).getイメージID(),
-                        entity.get(i).get特記事項番号(), entity.get(i).get特記事項連番(), ninteiEntity));
-                イメージリスト.add(tokki);
+        } else if (短冊.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            for (int i = 0; i < entity.size(); i++) {
+                if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())) {
+                    TokkiTextEntity tokki = new TokkiTextEntity();
+                    tokki.set特記事項(entity.get(i).get特記事項());
+                    tokki.set特記事項番号(entity.get(i).get特記事項番号());
+                    tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
+                    tokki.set特記事項連番(entity.get(i).get特記事項連番());
+                    tokki.set特記事項イメージ(get共有ファイルを引き出す(entity.get(i).getイメージID(),
+                            entity.get(i).get特記事項番号(), entity.get(i).get特記事項連番(), ninteiEntity));
+                    イメージリスト.add(tokki);
+                }
             }
         }
         ninteiEntity.set特記事項リスト(特記事項List);
         ninteiEntity.set特記事項番号リスト(特記事項番号リスト);
         ninteiEntity.set特記事項イメージリスト(イメージリスト);
+        ninteiEntity.set特記事項全イメージリスト(全イメージリスト);
         return ninteiEntity;
+    }
+
+    private void set特記事項全イメージパス(List<NinteichosaRelateEntity> entity, int i, List<TokkiTextEntity> 全イメージリスト) {
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())) {
+            TokkiTextEntity tokki = new TokkiTextEntity();
+            RString イメージパス = 共有ファイルを引き出す(entity.get(i).getイメージID(), i);
+            if (!RString.isNullOrEmpty(イメージパス)) {
+                tokki.set特記事項イメージ(共有ファイルを引き出す(entity.get(i).getイメージID(), i));
+                全イメージリスト.add(tokki);
+            }
+        }
     }
 
     private RString get共有ファイルを引き出す(RDateTime イメージID, RString 特記事項番号, RString 特記事項連番, TokkiText1A4Entity ninteiEntity) {
@@ -975,13 +997,21 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID) {
+    private RString 共有ファイルを引き出す(RDateTime イメージID, int i) {
         RString imagePath = RString.EMPTY;
         if (イメージID != null) {
+            RStringBuilder imageFileName = new RStringBuilder();
             if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
-                imagePath = getFilePath(イメージID, FILENAME);
+                imageFileName.append(FILENAME);
+                imageFileName.append(i);
+                imageFileName.append(拡張子_PNG);
+                imagePath = getFilePath(イメージID, imageFileName.toRString());
             } else {
-                imagePath = getFilePathBak(イメージID, FILENAME_BAK);
+                imageFileName.append(FILENAME);
+                imageFileName.append(i);
+                imageFileName.append(BAK);
+                imageFileName.append(拡張子_PNG);
+                imagePath = getFilePathBak(イメージID, imageFileName.toRString());
             }
         }
         return imagePath;
@@ -1034,27 +1064,27 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         List<RString> 出力条件 = new ArrayList();
         RStringBuilder builder = new RStringBuilder();
         builder.append(認定調査票チェックフラグ);
-        builder.append(processPrm.getChkNinteiChosahyo());
+        builder.append(get帳票発行有無(processPrm.getChkNinteiChosahyo()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(特記事項チェックフラグ);
-        builder.append(processPrm.getChkTokkiJiko());
+        builder.append(get帳票発行有無(processPrm.getChkTokkiJiko()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(主治医意見書チェックフラグ);
-        builder.append(processPrm.getChkShujiiIkensho());
+        builder.append(get帳票発行有無(processPrm.getChkShujiiIkensho()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(その他資料チェックフラグ);
-        builder.append(processPrm.getChkSonotaShiryo());
+        builder.append(get帳票発行有無(processPrm.getChkSonotaShiryo()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(一次判定結果チェックフラグ);
-        builder.append(processPrm.getChkIchijiHanteiKekka());
+        builder.append(get帳票発行有無(processPrm.getChkIchijiHanteiKekka()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(総合事業開始区分);
-        builder.append(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        builder.append(get総合事業開始区分名称(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
         出力条件.add(builder.toRString());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ
@@ -1069,5 +1099,23 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
                         CSVファイル名,
                         出力条件);
         OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
+    }
+
+    private RString get帳票発行有無(RString 帳票発行フラグ) {
+        if (帳票発行フラグ.equals(帳票発行有り)) {
+            return 出力する;
+        } else if (帳票発行フラグ.equals(帳票発行無し)) {
+            return 出力しない;
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get総合事業開始区分名称(RString 総合事業開始区分) {
+        if (総合事業開始区分.equals(総合事業開始区分_未実施)) {
+            return 総合事業未実施;
+        } else if (総合事業開始区分.equals(総合事業開始区分_実施済)) {
+            return 総合事業実施済;
+        }
+        return RString.EMPTY;
     }
 }

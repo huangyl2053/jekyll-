@@ -25,6 +25,7 @@ public class ShikyuketteituchishoSakuseiJyokenValidationHandler {
 
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
+    private static final RString KEY2 = new RString("key2");
 
     /**
      * 初期化
@@ -43,12 +44,31 @@ public class ShikyuketteituchishoSakuseiJyokenValidationHandler {
     public ValidationMessageControlPairs get入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(div.getCcdShiharaiHoho().getCheckMessage());
+
+        RString 選択Key = div.getChushutsuJoken().getRadHizukeSentaku().getSelectedKey();
+        if (KEY0.equals(選択Key) && (div.getTxtUketukebi().getToValue() == null
+                || RString.isNullOrEmpty(div.getTxtUketukebi().getToValue().toDateString()))) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, "受付日終了日"), div.getTxtUketukebi()));
+        }
+        if (KEY1.equals(選択Key) && (div.getTxtKetteibi().getToValue() == null
+                || RString.isNullOrEmpty(div.getTxtKetteibi().getToValue().toDateString()))) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, "決定日終了日"), div.getTxtKetteibi()));
+        }
+        if (KEY2.equals(選択Key) && (div.getTxtKetteishaUketukeNengetsu().getValue() == null
+                || RString.isNullOrEmpty(div.getTxtKetteishaUketukeNengetsu().getValue().toDateString()))) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                    UrErrorMessages.必須, "決定受付年月日"), div.getTxtKetteishaUketukeNengetsu()));
+        }
+
         if (KEY1.equals(div.getShikyuKetteiTsuchisho().getRadKetteibiIkkatsuKoshinKubun().getSelectedKey())
                 && RString.isNullOrEmpty(div.getShikyuKetteiTsuchisho().getTxtketteibi2().getText())) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.未入力, "決定日"),
                     div.getShikyuKetteiTsuchisho().getTxtketteibi2()));
         }
+
         if (div.getCcdShutsuryokujun().get出力順ID() == null) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.出力順序を指定)));
         }

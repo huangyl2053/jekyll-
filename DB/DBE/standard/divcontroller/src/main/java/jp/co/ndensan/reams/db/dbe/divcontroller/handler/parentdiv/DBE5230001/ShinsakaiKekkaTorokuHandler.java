@@ -569,6 +569,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getTxtShinsakaiIken().setReadOnly(false);
             div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setReadOnly(false);
             div.getKobetsuHyojiArea().getBtnIchigoHantei().setDisabled(false);
+            div.getKobetsuHyojiArea().getBtnIchijiHanteiTeikeibunGuide().setDisabled(false);
         } else {
             div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setReadOnly(true);
             div.getKobetsuHyojiArea().getDdlJotaiZo().setReadOnly(true);
@@ -582,6 +583,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getTxtShinsakaiIken().setReadOnly(true);
             div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setReadOnly(true);
             div.getKobetsuHyojiArea().getBtnIchigoHantei().setDisabled(true);
+            div.getKobetsuHyojiArea().getBtnIchijiHanteiTeikeibunGuide().setDisabled(true);
         }
     }
 

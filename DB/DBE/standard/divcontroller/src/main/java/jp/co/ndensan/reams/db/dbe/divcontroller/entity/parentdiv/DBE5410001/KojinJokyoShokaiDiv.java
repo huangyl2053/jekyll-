@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,18 +29,20 @@ public class KojinJokyoShokaiDiv extends Panel {
     private Space spSpace1;
     @JsonProperty("btnRenrakusaki")
     private ButtonDialog btnRenrakusaki;
-    @JsonProperty("btnShichosonRenrakuJiko")
-    private ButtonDialog btnShichosonRenrakuJiko;
-    @JsonProperty("btnShinsakaiJoho")
-    private ButtonDialog btnShinsakaiJoho;
-    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
-    private ButtonDialog btnShujiiIkenshoSakuseiIraiShokai;
     @JsonProperty("btnNinteiChosaIraiShokai")
     private ButtonDialog btnNinteiChosaIraiShokai;
-    @JsonProperty("btnChosaKekkaInfoKihon")
-    private ButtonDialog btnChosaKekkaInfoKihon;
     @JsonProperty("btnChosaKekkaInfoGaikyo")
     private ButtonDialog btnChosaKekkaInfoGaikyo;
+    @JsonProperty("btnChosaKekkaInfoKihon")
+    private ButtonDialog btnChosaKekkaInfoKihon;
+    @JsonProperty("btnShichosonRenrakuJiko")
+    private ButtonDialog btnShichosonRenrakuJiko;
+    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
+    private ButtonDialog btnShujiiIkenshoSakuseiIraiShokai;
+    @JsonProperty("btnShujiiIkenshoShokai")
+    private ButtonDialog btnShujiiIkenshoShokai;
+    @JsonProperty("btnShinsakaiJoho")
+    private ButtonDialog btnShinsakaiJoho;
     @JsonProperty("tblKanryoJisseki")
     private tblKanryoJissekiDiv tblKanryoJisseki;
     @JsonProperty("KojinShinchokuShosai")
@@ -73,6 +75,8 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hdnGaikyoChosaTextImageKubun;
     @JsonProperty("hdnShinsakaiKaisaiNo")
     private RString hdnShinsakaiKaisaiNo;
+    @JsonProperty("hdnIkenshoIraiRirekiNo")
+    private RString hdnIkenshoIraiRirekiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -117,60 +121,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     /*
-     * getbtnShichosonRenrakuJiko
-     * @return btnShichosonRenrakuJiko
-     */
-    @JsonProperty("btnShichosonRenrakuJiko")
-    public ButtonDialog getBtnShichosonRenrakuJiko() {
-        return btnShichosonRenrakuJiko;
-    }
-
-    /*
-     * setbtnShichosonRenrakuJiko
-     * @param btnShichosonRenrakuJiko btnShichosonRenrakuJiko
-     */
-    @JsonProperty("btnShichosonRenrakuJiko")
-    public void setBtnShichosonRenrakuJiko(ButtonDialog btnShichosonRenrakuJiko) {
-        this.btnShichosonRenrakuJiko = btnShichosonRenrakuJiko;
-    }
-
-    /*
-     * getbtnShinsakaiJoho
-     * @return btnShinsakaiJoho
-     */
-    @JsonProperty("btnShinsakaiJoho")
-    public ButtonDialog getBtnShinsakaiJoho() {
-        return btnShinsakaiJoho;
-    }
-
-    /*
-     * setbtnShinsakaiJoho
-     * @param btnShinsakaiJoho btnShinsakaiJoho
-     */
-    @JsonProperty("btnShinsakaiJoho")
-    public void setBtnShinsakaiJoho(ButtonDialog btnShinsakaiJoho) {
-        this.btnShinsakaiJoho = btnShinsakaiJoho;
-    }
-
-    /*
-     * getbtnShujiiIkenshoSakuseiIraiShokai
-     * @return btnShujiiIkenshoSakuseiIraiShokai
-     */
-    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
-    public ButtonDialog getBtnShujiiIkenshoSakuseiIraiShokai() {
-        return btnShujiiIkenshoSakuseiIraiShokai;
-    }
-
-    /*
-     * setbtnShujiiIkenshoSakuseiIraiShokai
-     * @param btnShujiiIkenshoSakuseiIraiShokai btnShujiiIkenshoSakuseiIraiShokai
-     */
-    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
-    public void setBtnShujiiIkenshoSakuseiIraiShokai(ButtonDialog btnShujiiIkenshoSakuseiIraiShokai) {
-        this.btnShujiiIkenshoSakuseiIraiShokai = btnShujiiIkenshoSakuseiIraiShokai;
-    }
-
-    /*
      * getbtnNinteiChosaIraiShokai
      * @return btnNinteiChosaIraiShokai
      */
@@ -186,6 +136,24 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("btnNinteiChosaIraiShokai")
     public void setBtnNinteiChosaIraiShokai(ButtonDialog btnNinteiChosaIraiShokai) {
         this.btnNinteiChosaIraiShokai = btnNinteiChosaIraiShokai;
+    }
+
+    /*
+     * getbtnChosaKekkaInfoGaikyo
+     * @return btnChosaKekkaInfoGaikyo
+     */
+    @JsonProperty("btnChosaKekkaInfoGaikyo")
+    public ButtonDialog getBtnChosaKekkaInfoGaikyo() {
+        return btnChosaKekkaInfoGaikyo;
+    }
+
+    /*
+     * setbtnChosaKekkaInfoGaikyo
+     * @param btnChosaKekkaInfoGaikyo btnChosaKekkaInfoGaikyo
+     */
+    @JsonProperty("btnChosaKekkaInfoGaikyo")
+    public void setBtnChosaKekkaInfoGaikyo(ButtonDialog btnChosaKekkaInfoGaikyo) {
+        this.btnChosaKekkaInfoGaikyo = btnChosaKekkaInfoGaikyo;
     }
 
     /*
@@ -207,21 +175,75 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     /*
-     * getbtnChosaKekkaInfoGaikyo
-     * @return btnChosaKekkaInfoGaikyo
+     * getbtnShichosonRenrakuJiko
+     * @return btnShichosonRenrakuJiko
      */
-    @JsonProperty("btnChosaKekkaInfoGaikyo")
-    public ButtonDialog getBtnChosaKekkaInfoGaikyo() {
-        return btnChosaKekkaInfoGaikyo;
+    @JsonProperty("btnShichosonRenrakuJiko")
+    public ButtonDialog getBtnShichosonRenrakuJiko() {
+        return btnShichosonRenrakuJiko;
     }
 
     /*
-     * setbtnChosaKekkaInfoGaikyo
-     * @param btnChosaKekkaInfoGaikyo btnChosaKekkaInfoGaikyo
+     * setbtnShichosonRenrakuJiko
+     * @param btnShichosonRenrakuJiko btnShichosonRenrakuJiko
      */
-    @JsonProperty("btnChosaKekkaInfoGaikyo")
-    public void setBtnChosaKekkaInfoGaikyo(ButtonDialog btnChosaKekkaInfoGaikyo) {
-        this.btnChosaKekkaInfoGaikyo = btnChosaKekkaInfoGaikyo;
+    @JsonProperty("btnShichosonRenrakuJiko")
+    public void setBtnShichosonRenrakuJiko(ButtonDialog btnShichosonRenrakuJiko) {
+        this.btnShichosonRenrakuJiko = btnShichosonRenrakuJiko;
+    }
+
+    /*
+     * getbtnShujiiIkenshoSakuseiIraiShokai
+     * @return btnShujiiIkenshoSakuseiIraiShokai
+     */
+    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
+    public ButtonDialog getBtnShujiiIkenshoSakuseiIraiShokai() {
+        return btnShujiiIkenshoSakuseiIraiShokai;
+    }
+
+    /*
+     * setbtnShujiiIkenshoSakuseiIraiShokai
+     * @param btnShujiiIkenshoSakuseiIraiShokai btnShujiiIkenshoSakuseiIraiShokai
+     */
+    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
+    public void setBtnShujiiIkenshoSakuseiIraiShokai(ButtonDialog btnShujiiIkenshoSakuseiIraiShokai) {
+        this.btnShujiiIkenshoSakuseiIraiShokai = btnShujiiIkenshoSakuseiIraiShokai;
+    }
+
+    /*
+     * getbtnShujiiIkenshoShokai
+     * @return btnShujiiIkenshoShokai
+     */
+    @JsonProperty("btnShujiiIkenshoShokai")
+    public ButtonDialog getBtnShujiiIkenshoShokai() {
+        return btnShujiiIkenshoShokai;
+    }
+
+    /*
+     * setbtnShujiiIkenshoShokai
+     * @param btnShujiiIkenshoShokai btnShujiiIkenshoShokai
+     */
+    @JsonProperty("btnShujiiIkenshoShokai")
+    public void setBtnShujiiIkenshoShokai(ButtonDialog btnShujiiIkenshoShokai) {
+        this.btnShujiiIkenshoShokai = btnShujiiIkenshoShokai;
+    }
+
+    /*
+     * getbtnShinsakaiJoho
+     * @return btnShinsakaiJoho
+     */
+    @JsonProperty("btnShinsakaiJoho")
+    public ButtonDialog getBtnShinsakaiJoho() {
+        return btnShinsakaiJoho;
+    }
+
+    /*
+     * setbtnShinsakaiJoho
+     * @param btnShinsakaiJoho btnShinsakaiJoho
+     */
+    @JsonProperty("btnShinsakaiJoho")
+    public void setBtnShinsakaiJoho(ButtonDialog btnShinsakaiJoho) {
+        this.btnShinsakaiJoho = btnShinsakaiJoho;
     }
 
     /*
@@ -501,6 +523,24 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("hdnShinsakaiKaisaiNo")
     public void setHdnShinsakaiKaisaiNo(RString hdnShinsakaiKaisaiNo) {
         this.hdnShinsakaiKaisaiNo = hdnShinsakaiKaisaiNo;
+    }
+
+    /*
+     * gethdnIkenshoIraiRirekiNo
+     * @return hdnIkenshoIraiRirekiNo
+     */
+    @JsonProperty("hdnIkenshoIraiRirekiNo")
+    public RString getHdnIkenshoIraiRirekiNo() {
+        return hdnIkenshoIraiRirekiNo;
+    }
+
+    /*
+     * sethdnIkenshoIraiRirekiNo
+     * @param hdnIkenshoIraiRirekiNo hdnIkenshoIraiRirekiNo
+     */
+    @JsonProperty("hdnIkenshoIraiRirekiNo")
+    public void setHdnIkenshoIraiRirekiNo(RString hdnIkenshoIraiRirekiNo) {
+        this.hdnIkenshoIraiRirekiNo = hdnIkenshoIraiRirekiNo;
     }
 
     /*

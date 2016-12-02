@@ -120,6 +120,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString DATE_0801 = new RString("0801");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
     private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
+    private static final RString 番号零 = new RString("00");
+    private static final RString 番号零６ = new RString("000000");
 
     /**
      * コンストラクタです。
@@ -160,7 +162,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             新規状態を初期化設定(メニューID);
             ドロップダウンリスト項目セット();
         } else if (申請状態WK == INT_2 || 申請状態WK == INT_3 || 申請状態WK == INT_0) {
-            div.getTxtShikyuShinseiKubun().clearValue();
+            if (申請状態WK == INT_2) {
+                div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.変更.get名称());
+            }
+            if (申請状態WK == INT_3) {
+                div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.取り下げ.get名称());
+            }
             変更状態を初期化設定(メニューID);
             if (照会モード != null) {
                 照会WK = true;
@@ -185,6 +192,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 div.getTabShinseiTorokuPanel2().setVisible(true);
                 div.getTabShinseiTorokuPanel3().setVisible(true);
                 div.getTabShinseiTorokuPanel4().setVisible(true);
+            }
+            if (訂正WK) {
+                div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.
+                        toValue(高額合算申請書保持.get高額合算申請書().get(0).get支給申請区分()).get名称());
             }
         }
         return 高額合算申請書保持;
@@ -305,7 +316,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getDdlShikyuShinseiKeitai().setDisabled(true);
             div.getChkKofuShinseiUmu().setDisabled(true);
         } else {
-            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
             div.getDdlShikyuShinseiKeitai().setDisabled(false);
             div.getChkKofuShinseiUmu().setDisabled(false);
         }
@@ -364,7 +374,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
         RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
         set加入期間(資格取得年月日, 資格喪失年月日);
-        div.getTxtShikakuSoshitsuYMD().setValue(資格喪失年月日);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
     }
@@ -849,6 +858,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         申請登録パネル制御(false);
         if (DBCMN61009.equals(メニューID)) {
             set介護資格情報初期化();
+            div.getTxtShikakuSoshitsuYMD().clearValue();
         }
     }
 
@@ -913,7 +923,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         }
     }
 
-    private void 照会状態を初期化設定() {
+    /**
+     * 照会状態を初期化設定
+     */
+    public void 照会状態を初期化設定() {
         div.getBtnAddShinsei().setVisible(false);
         div.getDdlShokisaiHokenshaNo().setReadOnly(true);
         div.getDgShinseiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
@@ -1179,7 +1192,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private void 申請情報データで設定(KogakuGassanShinseishoRelate 高額合算申請書) {
         RowState state = div.getDgShinseiIchiran().getClickedItem() == null
                 ? null : div.getDgShinseiIchiran().getClickedItem().getRowState();
-        if (RowState.Added.equals(state)) {
+        if (RowState.Added == state) {
             RDate nowDate = RDate.getNowDate();
             RString 保険者番号 = DbBusinessConfig.get(
                     ConfigNameDBU.保険者情報_保険者番号, nowDate, SubGyomuCode.DBU介護統計報告);
@@ -1220,17 +1233,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 div.getTxtIryoShikyuShinseishoSeiriBango3().clearValue();
                 div.getTxtIryoShikyuShinseishoSeiriBango4().clearValue();
             } else {
-                div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_0, INT_3));
-                div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(国保支給申請書整理番号.substring(INT_3, INT_5));
-                div.getTxtIryoShikyuShinseishoSeiriBango3().setValue(国保支給申請書整理番号.substring(INT_5, INT_11));
-                div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号.substring(INT_11));
+                set国保支給申請書整理番号(国保支給申請書整理番号);
             }
-        }
-        if (RString.isNullOrEmpty(高額合算申請書.get支給申請区分())) {
-            div.getTxtShikyuShinseiKubun().clearValue();
-        } else {
-            div.getTxtShikyuShinseiKubun().setValue(
-                    KaigoGassan_ShinseiKbn.toValue(高額合算申請書.get支給申請区分()).get名称());
         }
         if (RString.isNullOrEmpty(高額合算申請書.get支給申請形態())) {
             div.getDdlShikyuShinseiKeitai().setSelectedIndex(INT_0);
@@ -1267,6 +1271,22 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getTxtDaihyoshaYubinNo().clearValue();
         } else {
             div.getTxtDaihyoshaYubinNo().setValue(高額合算申請書.get申請代表者郵便番号());
+        }
+    }
+
+    private void set国保支給申請書整理番号(RString 国保支給申請書整理番号) {
+        div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_0, INT_3));
+        RString 国保支給申請書整理番号2 = 国保支給申請書整理番号.substring(INT_3, INT_5);
+        if (!番号零.equals(国保支給申請書整理番号2)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(国保支給申請書整理番号2);
+        }
+        RString 国保支給申請書整理番号3 = 国保支給申請書整理番号.substring(INT_5, INT_11);
+        if (!番号零６.equals(国保支給申請書整理番号3)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango3().setValue(国保支給申請書整理番号3);
+        }
+        RString 国保支給申請書整理番号4 = 国保支給申請書整理番号.substring(INT_11);
+        if (!番号零６.equals(国保支給申請書整理番号4)) {
+            div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号4);
         }
     }
 

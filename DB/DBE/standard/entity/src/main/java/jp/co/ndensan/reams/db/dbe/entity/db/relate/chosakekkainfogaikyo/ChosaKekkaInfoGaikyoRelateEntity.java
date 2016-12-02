@@ -29,6 +29,7 @@ public class ChosaKekkaInfoGaikyoRelateEntity {
     private RString riyoShisetsuJusho;
     private RString riyoShisetsuTelNo;
     private Code koroshoIfShikibetsuCode;
+    private RString gaikyoChosaTextImageKubun;
     private int remban;
     private RString serviceJokyoKinyu;
     private RString jutakuKaishu;

@@ -168,7 +168,8 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     protected void process(HanyoListKyodoJukyushaKogakuEntity entity) {
         連番++;
         csv出力Flag = 定数_あり;
-        csvListWriter.writeLine(edit.setBodyList(entity, parameter, 構成市町村マスタ, 地方公共団体情報, 連番, 帳票制御共通));
+        Association 導入団体情報 = AssociationFinderFactory.createInstance().getAssociation(entity.get被保険者台帳管理().getShichosonCode());
+        csvListWriter.writeLine(edit.setBodyList(entity, parameter, 構成市町村マスタ, 導入団体情報, 連番, 帳票制御共通));
         ExpandedInformation expandedInformation = new ExpandedInformation(
                 CODE_0003, DATANAME_被保険者番号, entity.get受給者異動高額().getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));

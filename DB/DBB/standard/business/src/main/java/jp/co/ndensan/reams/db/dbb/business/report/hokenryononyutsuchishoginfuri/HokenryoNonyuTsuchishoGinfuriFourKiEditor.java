@@ -57,6 +57,7 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
     private final RString 左括弧 = new RString("(");
     private final RString 右括弧 = new RString(")");
     private final RString 次期以降 = new RString("次期以降");
+    private final RString 波線 = new RString("～");
 
     /**
      * インスタンスを生成します。
@@ -185,14 +186,6 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
         source.nofushoNendo3 = RString.EMPTY;
         source.nofushoNendo2 = RString.EMPTY;
         source.nofushoNendo1 = RString.EMPTY;
-        source.nofushoSofusakiName4 = 納付書共通.get納付者氏名();
-        source.nofushoSofusakiName3 = 納付書共通.get納付者氏名();
-        source.nofushoSofusakiName2 = 納付書共通.get納付者氏名();
-        source.nofushoSofusakiName1 = 納付書共通.get納付者氏名();
-        source.nofushoHonninName4 = 納付書共通.get被代納人氏名();
-        source.nofushoHonninName3 = 納付書共通.get被代納人氏名();
-        source.nofushoHonninName2 = 納付書共通.get被代納人氏名();
-        source.nofushoHonninName1 = 納付書共通.get被代納人氏名();
         if (納付書共通.get被代納人氏名() != null && !納付書共通.get被代納人氏名().isEmpty()) {
             source.nofushoKakko14 = 左括弧;
             source.nofushoKakko13 = 左括弧;
@@ -216,18 +209,6 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
         source.nofushoKakko23 = RString.EMPTY;
         source.nofushoKakko22 = RString.EMPTY;
         source.nofushoKakko21 = RString.EMPTY;
-        if (納付書共通.get通知書番号() != null) {
-            source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
-            source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
-        }
-        if (納付書共通.get世帯コード() != null) {
-            source.nofushoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
-            source.nofushoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
-            source.nofushoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
-            source.nofushoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
-        }
         HyojiCodes 表示コード = 納付書共通.get表示コード();
         if (表示コード != null) {
             source.nofushohyojicodeName14 = 表示コード.get表示コード名１();
@@ -285,6 +266,14 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.nofushoRyoshuHizukein4 = RString.EMPTY;
             source.nofushoZuiji4 = RString.EMPTY;
         } else {
+            source.nofushoHonninName4 = 納付書共通.get被代納人氏名();
+            source.nofushoSofusakiName4 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofushoTsuchishoNo4 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofushoSetaiCode4 = 納付書共通.get世帯コード().getColumnValue();
+            }
             if (納付書共通.get調定年度表記() != null) {
                 source.nofushoKanendo4 = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
             }
@@ -318,6 +307,14 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.nofushoRyoshuHizukein3 = RString.EMPTY;
             source.nofushoZuiji3 = RString.EMPTY;
         } else {
+            source.nofushoHonninName3 = 納付書共通.get被代納人氏名();
+            source.nofushoSofusakiName3 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofushoTsuchishoNo3 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofushoSetaiCode3 = 納付書共通.get世帯コード().getColumnValue();
+            }
             if (納付書共通.get調定年度表記() != null) {
                 source.nofushoKanendo3 = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
             }
@@ -336,6 +333,13 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.nofushoRyoshuHizukein3 = 納入通知書期情報印字位置3.get納付書領収印欄();
             source.nofushoZuiji3 = 納入通知書期情報印字位置3.get随時表記();
         }
+        editDBBCompNofushoItem_納入通知書期情報2(source, 納入通知書期情報印字位置1, 納入通知書期情報印字位置2, 納付書共通);
+    }
+
+    private void editDBBCompNofushoItem_納入通知書期情報2(HokenryoNonyuTsuchishoGinfuriFourKiSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報印字位置1,
+            NonyuTsuchiShoKiJoho 納入通知書期情報印字位置2,
+            NofuShoKyotsu 納付書共通) {
         if (null == 納入通知書期情報印字位置2) {
             source.nofushoKanendo2 = 星_6;
             source.nofushoKanendobun2 = 星_9;
@@ -351,6 +355,14 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.nofushoRyoshuHizukein2 = RString.EMPTY;
             source.nofushoZuiji2 = RString.EMPTY;
         } else {
+            source.nofushoHonninName2 = 納付書共通.get被代納人氏名();
+            source.nofushoSofusakiName2 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofushoSetaiCode2 = 納付書共通.get世帯コード().getColumnValue();
+            }
             if (納付書共通.get調定年度表記() != null) {
                 source.nofushoKanendo2 = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
             }
@@ -384,6 +396,14 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.nofushoRyoshuHizukein1 = RString.EMPTY;
             source.nofushoZuiji1 = RString.EMPTY;
         } else {
+            source.nofushoHonninName1 = 納付書共通.get被代納人氏名();
+            source.nofushoSofusakiName1 = 納付書共通.get納付者氏名();
+            if (納付書共通.get通知書番号() != null) {
+                source.nofushoTsuchishoNo1 = 納付書共通.get通知書番号().getColumnValue();
+            }
+            if (納付書共通.get世帯コード() != null) {
+                source.nofushoSetaiCode1 = 納付書共通.get世帯コード().getColumnValue();
+            }
             if (納付書共通.get調定年度表記() != null) {
                 source.nofushoKanendo1 = RStringUtil.convert半角to全角(納付書共通.get調定年度表記());
             }
@@ -601,7 +621,7 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
             source.hokenryoGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get確定保険料_年額());
             source.santeiKisoCalHokenryoGaku = NotsuReportEditorUtil.get共通ポリシー金額1(更正後.get確定保険料_年額());
             source.santeiKisoKikanKaishi = 更正後.get期間_自();
-            source.santeiKisoKiaknShuryo = 更正後.get期間_至();
+            source.santeiKisoKiaknShuryo = 波線.concat(更正後.get期間_至());
             if (更正後.get月数_ケ月() != null) {
                 source.santeiKisoNokisu = 半角to全角(更正後.get月数_ケ月());
             }

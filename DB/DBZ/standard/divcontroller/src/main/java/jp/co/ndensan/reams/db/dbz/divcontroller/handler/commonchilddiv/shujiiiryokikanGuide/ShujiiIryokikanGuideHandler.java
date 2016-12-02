@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
@@ -125,7 +126,20 @@ public class ShujiiIryokikanGuideHandler {
         div.getTxtIryoKikanName().clearValue();
         div.getTxtIryoKikanKanaMeisho().clearValue();
         div.getTxtMaxKensu().clearValue();
-        intialize();
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        if (dataPassModel != null) {
+            div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
+            if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
+                div.getHokenshaList().setSelectedShichosonIfExist(市町村コード);
+            } else {
+                div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+            }
+        }
+        div.getRadIryoKikanJokyo().setSelectedKey(new RString("key0"));
     }
 
     private RString nullToEmpty(RString obj) {

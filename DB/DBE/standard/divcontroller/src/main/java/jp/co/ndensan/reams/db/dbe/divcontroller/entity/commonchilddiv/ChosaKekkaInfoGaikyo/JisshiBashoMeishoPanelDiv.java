@@ -9,20 +9,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * GaikyoTokkiImagePanel のクラスファイル 
+ * JisshiBashoMeishoPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class GaikyoTokkiImagePanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+public class JisshiBashoMeishoPanelDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("gaikyoChosaImage")
-    private DynamicImage gaikyoChosaImage;
+    @JsonProperty("imgChosaJisshiBashoMeisho")
+    private DynamicImage imgChosaJisshiBashoMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class GaikyoTokkiImagePanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getgaikyoChosaImage
-     * @return gaikyoChosaImage
+     * getimgChosaJisshiBashoMeisho
+     * @return imgChosaJisshiBashoMeisho
      */
-    @JsonProperty("gaikyoChosaImage")
-    public DynamicImage getGaikyoChosaImage() {
-        return gaikyoChosaImage;
+    @JsonProperty("imgChosaJisshiBashoMeisho")
+    public DynamicImage getImgChosaJisshiBashoMeisho() {
+        return imgChosaJisshiBashoMeisho;
     }
 
     /*
-     * setgaikyoChosaImage
-     * @param gaikyoChosaImage gaikyoChosaImage
+     * setimgChosaJisshiBashoMeisho
+     * @param imgChosaJisshiBashoMeisho imgChosaJisshiBashoMeisho
      */
-    @JsonProperty("gaikyoChosaImage")
-    public void setGaikyoChosaImage(DynamicImage gaikyoChosaImage) {
-        this.gaikyoChosaImage = gaikyoChosaImage;
+    @JsonProperty("imgChosaJisshiBashoMeisho")
+    public void setImgChosaJisshiBashoMeisho(DynamicImage imgChosaJisshiBashoMeisho) {
+        this.imgChosaJisshiBashoMeisho = imgChosaJisshiBashoMeisho;
     }
 
     // </editor-fold>

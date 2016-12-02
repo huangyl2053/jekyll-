@@ -31,7 +31,7 @@ public enum KijunShunyugakuTekiyoShinseishoHakkoIchiranOutPutOrder implements IR
     /**
      * 世帯コード
      */
-    世帯コード("0008", "世帯コード", "\"ShikibetsuTaisho\".\"setaiCode\""),
+    世帯コード("0008", "世帯コード", "T2.\"shotaiCode\""),
     /**
      * 市町村コード
      */

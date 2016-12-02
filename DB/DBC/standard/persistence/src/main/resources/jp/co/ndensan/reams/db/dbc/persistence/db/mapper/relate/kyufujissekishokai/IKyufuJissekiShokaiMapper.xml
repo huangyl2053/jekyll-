@@ -471,7 +471,7 @@ ORDER BY
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiKensakuDataMapperParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3026KyufujissekiFukushiYoguHanbaihiMapper.allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi" />
-            , "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" AS "serviceShuruiRyakusho" 
+            , "DbT7130KaigoServiceShurui"."serviceShuruiMeisho" AS "serviceShuruiRyakusho" 
         FROM
             rgdb."DbT3026KyufujissekiFukushiYoguHanbaihi" AS "DbT3026KyufujissekiFukushiYoguHanbaihi"
         LEFT JOIN
@@ -482,16 +482,16 @@ ORDER BY
         AND "DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
         AND ("DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM"
          OR  "DbT7130KaigoServiceShurui"."teikyoshuryoYM" = '')
-        WHERE 
-            #{サービス提供年月} = "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM"
+        WHERE
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" = #{入力識別番号} 
         AND
             "DbT3026KyufujissekiFukushiYoguHanbaihi"."hiHokenshaNo" = #{被保険者番号}
         AND
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" = #{通し番号}
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceTeikyoYM" = #{サービス提供年月}
         AND
             "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo" = #{事業所番号}
         AND
-            "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" = #{入力識別番号}
+            "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" = #{通し番号}
         ORDER BY
             "DbT3026KyufujissekiFukushiYoguHanbaihi"."meisaiNo"
     </select>
@@ -501,7 +501,7 @@ ORDER BY
         
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3027KyufujissekiJutakuKaishuhiMapper.allColumns_DbT3027KyufujissekiJutakuKaishuhi" />
-            , "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" AS "serviceShuruiRyakusho" 
+            , "DbT7130KaigoServiceShurui"."serviceShuruiMeisho" AS "serviceShuruiRyakusho" 
         FROM
             rgdb."DbT3027KyufujissekiJutakuKaishuhi" AS "DbT3027KyufujissekiJutakuKaishuhi"
         LEFT JOIN
@@ -608,7 +608,7 @@ ORDER BY
             
             SELECT
               <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" />
-              , "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" AS "serviceShuruiRyakusho" 
+              , "DbT7130KaigoServiceShurui"."serviceShuruiMeisho" AS "serviceShuruiRyakusho" 
             FROM
               rgdb."DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku" AS "DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku"
             LEFT JOIN

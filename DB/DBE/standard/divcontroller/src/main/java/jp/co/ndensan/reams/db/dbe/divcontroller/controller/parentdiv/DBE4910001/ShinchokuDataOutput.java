@@ -14,9 +14,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.ShinchokuDataOutputHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.ShinchokuDataOutputValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定進捗情報データ出力の処理です。
@@ -46,6 +50,21 @@ public class ShinchokuDataOutput {
     public ResponseData<ShinchokuDataOutputDiv> onLoad(ShinchokuDataOutputDiv div) {
         getHandler(div).onLoad();
         return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
+    }
+    
+    /**
+     * 画面アクティブ時処理です。
+     * 
+     * @param div 要介護認定進捗情報データ出力div
+     * @return ResponseData<HomonChosaItakuNyuryokuDiv>
+     */
+    public ResponseData<ShinchokuDataOutputDiv> onActive(ShinchokuDataOutputDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            div.getTxtHihokenshaCode().setValue(被保険者番号.getColumnValue());
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**

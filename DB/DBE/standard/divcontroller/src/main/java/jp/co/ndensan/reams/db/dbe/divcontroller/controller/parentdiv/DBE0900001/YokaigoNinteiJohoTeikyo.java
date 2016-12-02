@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 要介護認定情報提供Divを制御クラスです。
@@ -32,6 +34,7 @@ public class YokaigoNinteiJohoTeikyo {
     private final RString キー = new RString("key0");
     private final RString する = new RString("1");
     private final RString ない = new RString("0");
+    private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
 
     /**
      * 要介護認定情報提供の初期処理を表示します。
@@ -134,6 +137,9 @@ public class YokaigoNinteiJohoTeikyo {
             }
 
         }
+        FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_BATCH);
+        FlowParameterAccessor.merge(fp);
+        div.setWfParameter(WORKFLOW_KEY_BATCH);
         return ResponseData.of(div).respond();
     }
 

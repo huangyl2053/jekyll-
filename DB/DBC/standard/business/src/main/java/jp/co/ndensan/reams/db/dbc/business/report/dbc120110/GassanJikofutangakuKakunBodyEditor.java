@@ -33,6 +33,7 @@ public class GassanJikofutangakuKakunBodyEditor implements IGassanJikofutangakuK
     private final RString line = new RString(" ～ ");
     private final RString nendo = new RString("年度");
     private static final RString 被保険者番号 = new RString("被保険者番号");
+    private static final int INT_4 = 4;
 
     /**
      * コンストラクタです
@@ -54,7 +55,8 @@ public class GassanJikofutangakuKakunBodyEditor implements IGassanJikofutangakuK
         source.list_3 = 帳票出力対象データ.get被保険者氏名();
         source.list_4 = 帳票出力対象データ.get支給申請書整理番号();
         source.list_5 = doパターン307(帳票出力対象データ.get対象年度());
-        source.list_6 = new RString(帳票出力対象データ.get履歴番号());
+        RString 履歴番号 = new RString(帳票出力対象データ.get履歴番号()).padZeroToLeft(INT_4);
+        source.list_6 = 履歴番号;
         source.list_7 = doパターン4(帳票出力対象データ.get申請年月日());
         source.list_8 = get異動区分(帳票出力対象データ.get異動区分コード());
         source.list_9 = get期間(帳票出力対象データ.get介護加入期間_開始(), 帳票出力対象データ.get介護加入期間_終了());

@@ -40,6 +40,10 @@ public enum ShikyugakuKeisanKekkaTorokuMessage implements IValidationMessage {
      */
     以上の者に係る所得区分必須項目(UrErrorMessages.必須項目_追加メッセージあり, "70歳以上の者に係る所得区分"),
     /**
+     * 連絡票整理番号必須項目
+     */
+    連絡票整理番号必須項目(UrErrorMessages.必須項目_追加メッセージあり, "連絡票整理番号"),
+    /**
      * 介護等合算算定基準額必須項目
      */
     介護等合算算定基準額必須項目(UrErrorMessages.必須項目_追加メッセージあり, "介護等合算算定基準額"),

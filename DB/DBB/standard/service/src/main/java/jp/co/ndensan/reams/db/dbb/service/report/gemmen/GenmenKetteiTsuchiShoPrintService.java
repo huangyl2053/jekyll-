@@ -334,7 +334,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 更正前後期割額.set特徴期別金額更正前(RString.EMPTY);
             }
             Decimal 特徴期別金額更正後 = set特徴期別金額更正後(期月特徴.get期(), 減免決定通知書情報);
-            if (特徴期別金額更正後 != null) {
+            if (特徴期別金額更正後 != null && has更正後(特徴期別金額更正前, 特徴期別金額更正後)) {
                 更正前後期割額.set特徴期別金額更正後(DecimalFormatter
                         .toコンマ区切りRString(特徴期別金額更正後, 0));
             } else {
@@ -361,7 +361,7 @@ public class GenmenKetteiTsuchiShoPrintService {
                 更正前後期割額.set普徴期別金額更正前(RString.EMPTY);
             }
             Decimal 普徴期別金額更正後 = set普徴期別金額更正後(期月普徴.get期(), 減免決定通知書情報);
-            if (普徴期別金額更正後 != null) {
+            if (普徴期別金額更正後 != null && has更正後(普徴期別金額更正前, 普徴期別金額更正後)) {
                 更正前後期割額.set普徴期別金額更正後(DecimalFormatter
                         .toコンマ区切りRString(普徴期別金額更正後, 0));
             } else {
@@ -375,6 +375,13 @@ public class GenmenKetteiTsuchiShoPrintService {
             更正前後期割額.set普徴期別金額更正後(RString.EMPTY);
         }
         return 更正前後期割額;
+    }
+
+    private boolean has更正後(Decimal 期別金額更正前, Decimal 期別金額更正後) {
+        if (!Decimal.ZERO.equals(期別金額更正後)) {
+            return true;
+        }
+        return null != 期別金額更正前;
     }
 
     private RString format月と期(RString value) {

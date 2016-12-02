@@ -15,14 +15,19 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanData;
 import jp.co.ndensan.reams.db.dbc.business.kogakugassan.KogakuGassanNendoKey;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoData;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeishofrom2009.JikoFutangakushomeishoFromData;
+import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiJokyoKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jikofutangakushomeisho.JikoFutangakushomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1170011.JikoFutangakuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.jikofutangakushomeisho.JikoFutangakushomeishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -45,6 +50,11 @@ public class JikoFutangakushomeishoHandler {
     private static final RString メニューID_DBCMNN2001 = new RString("DBCMNN2001");
     private static final RString 自己負担額証明書作成 = new RString("自己負担額証明書作成");
     private static final RString 事業分_自己負担額証明書作成 = new RString("事業分・自己負担額証明書作成");
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
     private static final int 月_8 = 8;
     private static final int 月_12 = 12;
     private static final int 月_1 = 1;
@@ -56,7 +66,8 @@ public class JikoFutangakushomeishoHandler {
     private Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー = new HashMap<>();
     private FlexibleYear 対象年度 = FlexibleYear.EMPTY;
     private List<KogakuGassanNendoKey> kogakuGassanNendoKeyList;
-    private static final ReportId 帳票分類ID = new ReportId("DBC100050_JikoFutangakushomeisho");
+    private static final ReportId 帳票DBC100050 = new ReportId("DBC100050_JikoFutangakushomeisho");
+    private static final ReportId 帳票DBC100076 = new ReportId("DBC100076_JikoFutangakushomeishoJigyobun");
 
     /**
      * コンストラクタです。
@@ -90,10 +101,11 @@ public class JikoFutangakushomeishoHandler {
         div.getJikoFutanShomeishoSakuseiPrint().getTxtHakkoDate().setValue(システム日付);
         if (メニューID_DBCMN63001.equals(メニューID)) {
             div.getJikoFutanShomeishoSakusei().setTitle(自己負担額証明書作成);
+            div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(帳票DBC100050);
         } else if (メニューID_DBCMNN2001.equals(メニューID)) {
             div.getJikoFutanShomeishoSakusei().setTitle(事業分_自己負担額証明書作成);
+            div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(帳票DBC100076);
         }
-        div.getJikoFutanShomeishoSakuseiPrint().getCcdBunshoNo().initialize(new ReportId(new RString("DBC100050_JikoFutangakushomeisho")));
     }
 
     /**
@@ -232,15 +244,13 @@ public class JikoFutangakushomeishoHandler {
     /**
      * get高額合算データ
      *
-     * @param is帳票設計DBC100050 boolean
-     * @param is帳票設計DBC100051 boolean
      * @param 識別コード ShikibetsuCode
      * @param 年度毎キー Map
      * @param 被保険者番号 HihokenshaNo
      * @param メニューID メニューID
      * @return JikoFutangakushomeishoData
      */
-    public JikoFutangakushomeishoData get高額合算データ(boolean is帳票設計DBC100050, boolean is帳票設計DBC100051, ShikibetsuCode 識別コード, Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー,
+    public JikoFutangakushomeishoData get高額合算データ(ShikibetsuCode 識別コード, Map<FlexibleYear, List<KogakuGassanNendoKey>> 年度毎キー,
             HihokenshaNo 被保険者番号, RString メニューID) {
         JikoFutangakushomeishoParameter parameter = new JikoFutangakushomeishoParameter();
         parameter.set被保険者番号(被保険者番号.value());
@@ -251,7 +261,6 @@ public class JikoFutangakushomeishoHandler {
             if (支給申請書整理番号.equals(kogakuGassanNendoKey.get支給申請書整理番号())) {
                 parameter.set保険者番号(kogakuGassanNendoKey.get保険者番号().value());
                 parameter.set履歴番号(kogakuGassanNendoKey.get履歴番号());
-
             }
         }
         parameter.set対象年度(対象年度);
@@ -261,11 +270,32 @@ public class JikoFutangakushomeishoHandler {
         JikoFutangakushomeishoData 高額合算データ = new JikoFutangakushomeishoData();
         KogakuGassanData kogakuGassanData = 高額合算申請書.get高額合算情報(parameter);
         高額合算データ.set高額合算データ(kogakuGassanData);
-        // TODO 一時コメント 高額合算データ.set問合せ先情報(高額合算申請書.get問合せ先(帳票分類ID));
-
         高額合算データ.set文書番号(高額合算申請書.get文書番号(メニューID));
-        高額合算データ.setタイトル(高額合算申請書.getタイトル(メニューID));
-        高額合算データ.set宛先情報(高額合算申請書.get宛先帳票部品());
+        高額合算データ.set宛先情報(高額合算申請書.get宛先帳票部品(識別コード));
+        ReportId 帳票ID = ReportId.EMPTY;
+        if (メニューID_DBCMN63001.equals(メニューID)) {
+            帳票ID = 帳票DBC100050;
+        } else if (メニューID_DBCMNN2001.equals(メニューID)) {
+            帳票ID = 帳票DBC100076;
+        }
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, 帳票ID, KamokuCode.EMPTY, NUM_1);
+        if (0 < 通知文.size()) {
+            高額合算データ.set通知文1(通知文.get(NUM_1));
+        }
+        if (1 < 通知文.size()) {
+            高額合算データ.set保険者情報(通知文.get(NUM_2));
+        }
+        if (NUM_2 < 通知文.size()) {
+            高額合算データ.set通知文2(通知文.get(NUM_3));
+        }
+        if (NUM_3 < 通知文.size()) {
+            高額合算データ.set備考(通知文.get(NUM_4));
+        }
+        if (NUM_4 < 通知文.size()) {
+            高額合算データ.set問合せ先情報(通知文.get(NUM_5));
+        }
+        高額合算データ.setタイトル(ChohyoSeigyoHanyoManager.createInstance().get帳票制御汎用(SubGyomuCode.DBC介護給付,
+                帳票ID, ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称()).get設定値());
         return 高額合算データ;
 
     }

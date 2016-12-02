@@ -36,12 +36,14 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
@@ -318,7 +320,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         if (entity.get口座() != null && entity.get口座().getUaT0310KozaEntity().getKozaId() != 0L) {
             口座情報 = do口座マスク編集(entity.get口座());
         }
-        RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報, 導入団体情報);
+        RString 住所 = get編集住所(entity, 帳票制御共通情報);
         KogakuKetteiTsuchiShoEntity reportEntity = getReportEntity(entity.get一時Entity(), 宛名情報, 口座情報);
         if (帳票タイプ_1.equals(帳票タイプ)) {
             JigyoKogakuKetteiTsuchishoYijiNashiReport report1 = new JigyoKogakuKetteiTsuchishoYijiNashiReport(getタイトル(entity.get一時Entity()),
@@ -333,6 +335,11 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         itemList.add(fushikyuReportEntity);
         personalDataList.add(toPersonalData(entity));
 
+    }
+    private RString get編集住所(KogakuServiceReportEntity entity, ChohyoSeigyoKyotsu 帳票制御共通情報) {
+        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(AtesakiFactory.createInstance(entity.get宛先()), 地方公共団体, 帳票制御共通情報);
+        return 編集後宛先.get編集後住所();
     }
 
     private PersonalData toPersonalData(KogakuServiceReportEntity entity) {

@@ -84,7 +84,9 @@ public class KyuuhuZissekiKougakuListCreateProcess extends BatchProcessBase<Kyuu
         基本entity.set入力識別番号(入力識別番号);
         基本entity.set被保険者番号(entity.getDbt3028_hiHokenshaNo());
         基本entity.setサービス提供年月(サービス提供年月);
-        基本entity.set給付実績区分コード(KyufuJissekiKubun.toValue(entity.getDbt3028_kyufuJissekiKubunCode()).get名称());
+        if (!RString.isNullOrEmpty(entity.getDbt3028_kyufuJissekiKubunCode())) {
+            基本entity.set給付実績区分コード(KyufuJissekiKubun.toValue(entity.getDbt3028_kyufuJissekiKubunCode()).get名称());
+        }
         基本entity.set通し番号(entity.getDbt3028_toshiNo());
         基本entity.set生年月日(entity.getPsm_tmp2_seinengappiYMD());
         基本entity.set性別コード(entity.getPsm_tmp2_seibetsuCode());

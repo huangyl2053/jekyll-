@@ -158,6 +158,20 @@ public class KojinJokyoShokai {
     }
     
     /**
+     * 意見書照会ボタン処理です。
+     *
+     * @param div 要介護認定個人状況照会div
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+    public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoShokai(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 主治医意見書作成依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class);
+        div.setHdnShinseishoKanriNo(申請書管理番号);
+        div.setHdnIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
      * 個人進捗状況表を発行する処理です。
      *
      * @param div 要介護認定個人状況照会div

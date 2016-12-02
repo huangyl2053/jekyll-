@@ -14,9 +14,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
-import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiKoshinNintei;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
@@ -71,7 +70,6 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
     private static final RString 表示名称_介護予防支援事業者作成 = new RString("介護予防支援事業者作成");
     private static final RString 旧措置者 = new RString("旧措置者");
     private static final RString みなし = new RString("みなし");
-    private static final RString ONE = new RString("t");
 
     /**
      * コンストラクタです。
@@ -585,16 +583,10 @@ public class HanyoListKyotakuServiceKeikakuNoRenbanCsvEntityEditor {
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : JukyuShinseiJiyu.toValue(entity.getDbV4001受給申請事由().value()).get名称());
         csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));
-        KoroshoInterfaceShikibetsuCode kifsc = KoroshoInterfaceShikibetsuCode.toValueOrDefault(entity.getDbT4101厚労省IF識別コード(), null);
-        if (entity.getDbV4001要介護認定状態区分コード() == null
-                || entity.getDbV4001要介護認定状態区分コード().isEmpty()
-                || kifsc == null) {
-            csvEntity.set受給要介護度(RString.EMPTY);
+        if (entity.getDbV4001要介護認定状態区分コード() != null && !entity.getDbV4001要介護認定状態区分コード().isEmpty()) {
+            csvEntity.set受給要介護度(YokaigoJotaiKubun.toValue(entity.getDbV4001要介護認定状態区分コード().value()).get名称());
         } else {
-            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(
-                    kifsc,
-                    entity.getDbV4001要介護認定状態区分コード().value()).getName()
-            );
+            csvEntity.set受給要介護度(RString.EMPTY);
         }
         csvEntity.set受給認定開始日(dataToRString(entity.getDbV4001認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日(), parameter));
