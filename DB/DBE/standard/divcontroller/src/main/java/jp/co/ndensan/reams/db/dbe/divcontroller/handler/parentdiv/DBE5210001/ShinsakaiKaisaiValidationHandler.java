@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -108,6 +109,43 @@ public class ShinsakaiKaisaiValidationHandler {
             }
         }
     }
+    
+    /**
+     *
+     * 必須項目チェックをチェックします。
+     *
+     * @param validationMessages バリデーションメッセージ
+     */
+    public void 必須項目Check(ValidationMessageControlPairs validationMessages) {
+        RString 開催日 = div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getText();
+        if (RString.isNullOrEmpty(開催日)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.必須項目)));
+        } else if (!RDate.canConvert(開催日)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "開催日")));
+        }
+        RString 開催開始時間 = div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getText();
+        if (RString.isNullOrEmpty(開催開始時間)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.必須項目)));
+        }
+        RString 開催終了時間 = div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getText();
+        if (RString.isNullOrEmpty(開催終了時間)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.必須項目)));
+        }
+        RString 所要時間 = div.getShinsakaiKaisaiInfo().getTxtShoyoTime().getText();
+        if (RString.isNullOrEmpty(所要時間)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.必須項目)));
+        }
+        RString 実施人数 = div.getShinsakaiKaisaiInfo().getTxtJissiSu().getText();
+        if (RString.isNullOrEmpty(実施人数)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.必須項目)));
+        }
+        RString 開催会場 = div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().getSelectedValue();
+        if (RString.isNullOrEmpty(開催会場)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.必須項目)));
+        }
+
+    }
+
 
     /**
      *
