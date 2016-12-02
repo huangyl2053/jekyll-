@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * NinteiKekkaShosai のクラスファイル
  *
- * @reamsid_L DBE-0230-010 zhangzhiming
+ * @author 自動生成
  */
 public class NinteiKekkaShosaiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -249,16 +249,6 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShinsakaiYoteibi() {
-        return this.getShinsakai().getTxtShinsakaiYoteibi();
-    }
-
-    @JsonIgnore
-    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
-        this.getShinsakai().setTxtShinsakaiYoteibi(txtShinsakaiYoteibi);
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtShinsakaiKaisaibi() {
         return this.getShinsakai().getTxtShinsakaiKaisaibi();
     }
@@ -266,6 +256,16 @@ public class NinteiKekkaShosaiDiv extends Panel {
     @JsonIgnore
     public void setTxtShinsakaiKaisaibi(TextBoxDate txtShinsakaiKaisaibi) {
         this.getShinsakai().setTxtShinsakaiKaisaibi(txtShinsakaiKaisaibi);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShinsakaiYoteibi() {
+        return this.getShinsakai().getTxtShinsakaiYoteibi();
+    }
+
+    @JsonIgnore
+    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
+        this.getShinsakai().setTxtShinsakaiYoteibi(txtShinsakaiYoteibi);
     }
 
     // </editor-fold>

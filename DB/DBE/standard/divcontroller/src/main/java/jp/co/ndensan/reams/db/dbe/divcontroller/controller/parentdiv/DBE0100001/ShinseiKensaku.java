@@ -202,9 +202,9 @@ public class ShinseiKensaku {
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
         } else if (MENUID_DBEMN43001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
-            if(event == Events.検索結果1件){
+            if (event == Events.検索結果1件) {
                 ViewStateHolder.put(ViewStateKeys.モード, new RString("1件"));
-            }else{
+            } else {
                 ViewStateHolder.remove(ViewStateKeys.モード);
             }
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.個人依頼内容更新へ).respond();
@@ -249,6 +249,12 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_printAfter(ShinseiKensakuDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
+        if (MENUID_DBEMN24001.equals(menuID)) {
+            FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_KANRYO);
+            FlowParameterAccessor.merge(fp);
+            div.setWfParameter(WORKFLOW_KEY_KANRYO);
+        }
         div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE0100001StateName.完了);
     }
@@ -293,7 +299,7 @@ public class ShinseiKensaku {
     private ShinseiKensakuHandler getHandler(ShinseiKensakuDiv div) {
         return new ShinseiKensakuHandler(div);
     }
-    
+
     private static class ShinseiKensakuErrorMessage implements IMessageGettable, IValidationMessage {
 
         private final Message message;
