@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.shujiiikenshoshokai;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokai.ShujiiIkenshoShokaiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokai.ShujiiIkenshoShokaiHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokaiHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 

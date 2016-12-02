@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokai;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
-import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
@@ -63,10 +61,9 @@ public class ShujiiIkenshoShokaiHandler {
     public void onLoad(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号) {
         申請書管理番号 = new ShinseishoKanriNo(div.getHiddenShinseishoKanriNo());
         主治医意見書作成依頼履歴番号 = Integer.parseInt(div.getHiddenIkenshoIraiRirekiNo().toString());
+//        主治医意見書作成依頼履歴番号 = 4;
 
-        ShujiiIkenshoIkenItemManager manager = new ShujiiIkenshoIkenItemManager();
-//        List<DbT5304ShujiiIkenshoIkenItemEntity> entityList = manager.select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号);
-        List<DbT5304ShujiiIkenshoIkenItemEntity> entityList = new ArrayList<>();
+        List<ShujiiIkenshoIkenItemEntity> entityList = ShujiiIkenshoIkenItemManager.createInstance().select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号);
         RString 厚労省IF識別コード = RString.EMPTY;
         if (entityList != null && !entityList.isEmpty()) {
             厚労省IF識別コード = entityList.get(0).getKoroshoIfShikibetsuCode().value();
@@ -75,31 +72,31 @@ public class ShujiiIkenshoShokaiHandler {
             set必須５項目_99A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_02A(entityList);
-        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)){
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_06A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_09A(entityList);
-        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)){
+        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_09B(entityList);
         }
 
-        
         ImageManager imageManager = InstanceProvider.create(ImageManager.class);
         Image イメージ情報 = imageManager.getイメージ情報(申請書管理番号);
-        List<RString> イメージ元本パスリスト = get原本FilePathList(イメージ情報);
-        List<RString> イメージマスクパスリスト = getマスクFilePathList(イメージ情報);
-        List<RString> 原本タイトルリスト = getTitleList(イメージ元本パスリスト);
-        List<RString> マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
-
-//        div.getCcdChosaTokkiShiryoShokai().setImgGenpoPathList(イメージ元本パスリスト);
-//        div.getCcdChosaTokkiShiryoShokai().setImgMaskPathList();
-//        div.getCcdChosaTokkiShiryoShokai().setGenpoTitleList();
-//        div.getCcdChosaTokkiShiryoShokai().setMaskTitleList();
+        List<RString> イメージ元本パスリスト = new ArrayList<>();
+        List<RString> イメージマスクパスリスト = new ArrayList<>();
+        List<RString> 原本タイトルリスト = new ArrayList<>();
+        List<RString> マスクタイトルリスト = new ArrayList<>();
+        if (イメージ情報 != null) {
+            イメージ元本パスリスト = get原本FilePathList(イメージ情報);
+            イメージマスクパスリスト = getマスクFilePathList(イメージ情報);
+            原本タイトルリスト = getTitleList(イメージ元本パスリスト);
+            マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
+        }
         div.getCcdChosaTokkiShiryoShokai().initialize(イメージ元本パスリスト, イメージマスクパスリスト, 原本タイトルリスト, マスクタイトルリスト);
     }
 
-    private void set必須５項目_99A(List<DbT5304ShujiiIkenshoIkenItemEntity> entityList) {
-        for (DbT5304ShujiiIkenshoIkenItemEntity entity : entityList) {
+    private void set必須５項目_99A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+        for (ShujiiIkenshoIkenItemEntity entity : entityList) {
             if (entity.getRemban() == IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().toInt()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
             } else if (entity.getRemban() == IkenshoKomokuMapping99A.短期記憶.getコード().toInt()) {
@@ -114,8 +111,8 @@ public class ShujiiIkenshoShokaiHandler {
         }
     }
 
-    private void set必須５項目_02A(List<DbT5304ShujiiIkenshoIkenItemEntity> entityList) {
-        for (DbT5304ShujiiIkenshoIkenItemEntity entity : entityList) {
+    private void set必須５項目_02A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+        for (ShujiiIkenshoIkenItemEntity entity : entityList) {
             if (entity.getRemban() == IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().toInt()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
             } else if (entity.getRemban() == IkenshoKomokuMapping02A.短期記憶.getコード().toInt()) {
@@ -130,8 +127,8 @@ public class ShujiiIkenshoShokaiHandler {
         }
     }
 
-    private void set必須５項目_06A(List<DbT5304ShujiiIkenshoIkenItemEntity> entityList) {
-        for (DbT5304ShujiiIkenshoIkenItemEntity entity : entityList) {
+    private void set必須５項目_06A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+        for (ShujiiIkenshoIkenItemEntity entity : entityList) {
             if (entity.getRemban() == IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().toInt()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
             } else if (entity.getRemban() == IkenshoKomokuMapping06A.短期記憶.getコード().toInt()) {
@@ -146,8 +143,8 @@ public class ShujiiIkenshoShokaiHandler {
         }
     }
 
-    private void set必須５項目_09A(List<DbT5304ShujiiIkenshoIkenItemEntity> entityList) {
-        for (DbT5304ShujiiIkenshoIkenItemEntity entity : entityList) {
+    private void set必須５項目_09A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+        for (ShujiiIkenshoIkenItemEntity entity : entityList) {
             if (entity.getRemban() == IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().toInt()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
             } else if (entity.getRemban() == IkenshoKomokuMapping09A.短期記憶.getコード().toInt()) {
@@ -162,8 +159,8 @@ public class ShujiiIkenshoShokaiHandler {
         }
     }
 
-    private void set必須５項目_09B(List<DbT5304ShujiiIkenshoIkenItemEntity> entityList) {
-        for (DbT5304ShujiiIkenshoIkenItemEntity entity : entityList) {
+    private void set必須５項目_09B(List<ShujiiIkenshoIkenItemEntity> entityList) {
+        for (ShujiiIkenshoIkenItemEntity entity : entityList) {
             if (entity.getRemban() == IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().toInt()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
             } else if (entity.getRemban() == IkenshoKomokuMapping09B.短期記憶.getコード().toInt()) {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshoitem.IShujiiIkenshoItemMapper">
+
+    <!--
+     <sql id="allColumns_ShujiiIkenshoIkenItemEntity">
+         "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" as "dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo",
+         "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" as "dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo",
+         "DbT5304ShujiiIkenshoIkenItem"."remban" as "dbT5304ShujiiIkenshoIkenItem_remban",
+         "DbT5304ShujiiIkenshoIkenItem"."koroshoIfShikibetsuCode" as "dbT5304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode",
+         "DbT5304ShujiiIkenshoIkenItem"."ikenItem" as "dbT5304ShujiiIkenshoIkenItem_ikenItem"
+     </sql>
+    -->
+    <!--テーブルDbT5304ShujiiIkenshoIkenItemの項目をDbT5304ShujiiIkenshoIkenItemEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_ShujiiIkenshoIkenItemEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ikenshoIraiRirekiNo" column="dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo" />
+        <id property="remban" column="dbT5304ShujiiIkenshoIkenItem_remban" />
+        <result property="koroshoIfShikibetsuCode" column="dbT5304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ikenItem" column="dbT5304ShujiiIkenshoIkenItem_ikenItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select id="select主治医意見書" resultMap="ResultMap_ShujiiIkenshoIkenItemEntity" fetchSize="500" resultOrdered="true">
+        SELECT
+        "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" as "dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo",
+        "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" as "dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo",
+        "DbT5304ShujiiIkenshoIkenItem"."remban" as "dbT5304ShujiiIkenshoIkenItem_remban",
+        "DbT5304ShujiiIkenshoIkenItem"."koroshoIfShikibetsuCode" as "dbT5304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode",
+        "DbT5304ShujiiIkenshoIkenItem"."ikenItem" as "dbT5304ShujiiIkenshoIkenItem_ikenItem"
+        FROM
+        rgdb."DbT5304ShujiiIkenshoIkenItem" as "DbT5304ShujiiIkenshoIkenItem"
+        WHERE "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" = #{申請書管理番号}
+        AND "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" =  #{依頼履歴番号}
+</select>
+
+</mapper>
