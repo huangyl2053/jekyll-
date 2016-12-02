@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.Ichi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.dgIchijiHanteiTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 画面設計_DBE3010001_一次判定処理クラスです。
@@ -44,6 +46,37 @@ public class IchijiHanteiHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
+
+    private enum IchijiHanteiMenuId {
+
+        一次判定処理("DBEMN51001");
+        private final RString menuId;
+
+        private IchijiHanteiMenuId(String menuId) {
+            this.menuId = new RString(menuId);
+        }
+
+        /**
+         * メニューIDを示す文字列を返します。
+         *
+         * @return メニューID
+         */
+        public RString value() {
+            return menuId;
+        }
+
+        /**
+         * メニューIDを表す文字列を受け取り、合致する列挙値を返します。
+         */
+        public static IchijiHanteiMenuId toValue(RString menuId) {
+            for (IchijiHanteiMenuId id : values()) {
+                if (id.value().equals(menuId)) {
+                    return id;
+                }
+            }
+            throw new IllegalArgumentException("処理対象のMenuIdではありません。");
+        }
+    }
 
     /**
      * コンストラクタです。
@@ -176,10 +209,13 @@ public class IchijiHanteiHandler {
             row.setShinseiKbnShin(NinteiShinseiShinseijiKubunCode.
                     toValue(business.get認定申請区分_申請時コード().value()).get名称());
             row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
-            row.setIchijiHanteiKekka(一次判定結果の名称を取得する(new Code(business.
+
+            //グリッドにコードも持たせておく様にする。
+            row.setIchijiHanteiKekka(get一次判定結果名称(new Code(business.
                     get厚労省IF識別コード()), business.get要介護認定一次判定結果コード()));
-            row.setIchijiHanteiKekkaNinchishoKasanCode(一次判定結果の名称を取得する(new Code(business.
+            row.setIchijiHanteiKekkaNinchishoKasanCode(get一次判定結果名称(new Code(business.
                     get厚労省IF識別コード()), business.get要介護認定一次判定結果コード_認知症加算()));
+
             row.setKeikokuCode(business.get要介護認定一次判定警告コード());
             row.getChosaJissibi().setValue(business.get認定調査実施年月日());
             row.getIkenshoJuryobi().setValue(business.get主治医意見書受領年月日());
@@ -211,9 +247,22 @@ public class IchijiHanteiHandler {
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
             personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     business.get申請書管理番号().value()));
+
+            setDisplayNoneOfIchijiHanteiDialigButton(row);
             rowList.add(row);
         }
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().setDataSource(rowList);
+    }
+
+    private void setDisplayNoneOfIchijiHanteiDialigButton(dgIchijiHanteiTaishoshaIchiran_Row row) {
+        RString menuIdStr = ResponseHolder.getMenuID();
+        IchijiHanteiMenuId menuId = IchijiHanteiMenuId.toValue(menuIdStr);
+        switch (menuId) {
+            case 一次判定処理:
+                row.getBtnSyokai().setDisplayNone(true);
+                row.getBtnSentaku().setDisplayNone(false);
+                break;
+        }
     }
 
     /**
@@ -269,17 +318,17 @@ public class IchijiHanteiHandler {
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getDataSource().set(index, row);
     }
 
-    private RString 一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {
+    private RString get一次判定結果名称(Code 厚労省IF識別コード, Code 一次判定結果コード) {
 
-        if (一次判定結果コード != null && !一次判定結果コード.isEmpty()) {
-            if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
+        if (厚労省IF識別コード != null && 一次判定結果コード != null && !一次判定結果コード.isEmpty()) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
                 return IchijiHanteiKekkaCode99.toValue(一次判定結果コード.getKey()).get名称();
-            } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
                 return IchijiHanteiKekkaCode02.toValue(一次判定結果コード.getKey()).get名称();
-            } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
                 return IchijiHanteiKekkaCode06.toValue(一次判定結果コード.getKey()).get名称();
-            } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
-                    || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
                 return IchijiHanteiKekkaCode09.toValue(一次判定結果コード.getKey()).get名称();
             }
         }

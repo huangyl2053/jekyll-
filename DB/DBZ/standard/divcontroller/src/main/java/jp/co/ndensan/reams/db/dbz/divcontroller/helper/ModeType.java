@@ -41,7 +41,23 @@ public enum ModeType {
      *
      * @return モード
      */
-    public RString toValue() {
+    public RString getValue() {
         return mode;
+    }
+
+    /**
+     * 引数から受け取った値に合致するModeTypeを返します。
+     *
+     * @param str ModeTypeに対応する文字列
+     * @return 対応するModeType
+     * @throws IllegalArgumentException 対応するModeTypeが存在しない場合
+     */
+    public static ModeType toValue(RString str) throws IllegalArgumentException {
+        for (ModeType type : values()) {
+            if (type.getValue().equals(str)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException(str + "はModeTypeに変換できません。");
     }
 }

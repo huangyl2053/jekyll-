@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKijunJikanDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -492,7 +492,7 @@ public class tblKijunJikanDiv extends TablePanel {
  * @author 自動生成
  */
 class celShokujiHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblShokuji")
     private Label lblShokuji;
 
@@ -522,7 +522,7 @@ class celShokujiHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celHaisetsuHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblHaisetsu")
     private Label lblHaisetsu;
 
@@ -552,7 +552,7 @@ class celHaisetsuHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celIdoHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblIdo")
     private Label lblIdo;
 
@@ -582,7 +582,7 @@ class celIdoHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celSeiketsuHojiHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblSeiketsuhoji")
     private Label lblSeiketsuhoji;
 
@@ -612,7 +612,7 @@ class celSeiketsuHojiHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celKansetsuCareHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblKansetsuCare")
     private Label lblKansetsuCare;
 
@@ -642,7 +642,7 @@ class celKansetsuCareHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celBpsdKanrenHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblBpsdKanren")
     private Label lblBpsdKanren;
 
@@ -672,7 +672,7 @@ class celBpsdKanrenHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celKinoKunrenHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblKinoKunren")
     private Label lblKinoKunren;
 
@@ -702,7 +702,7 @@ class celKinoKunrenHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celIryoKanrenHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblIryoKanren")
     private Label lblIryoKanren;
 
@@ -732,7 +732,7 @@ class celIryoKanrenHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celNinchishoKasanHeaderAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("lblNinchishoKasan")
     private Label lblNinchishoKasan;
 
@@ -762,7 +762,7 @@ class celNinchishoKasanHeaderAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celShokujiAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtShokuji")
     private TextBoxNum txtShokuji;
 
@@ -792,7 +792,7 @@ class celShokujiAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celHaisetsuAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtHaisetsu")
     private TextBoxNum txtHaisetsu;
 
@@ -822,7 +822,7 @@ class celHaisetsuAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celIdoAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtIdo")
     private TextBoxNum txtIdo;
 
@@ -852,7 +852,7 @@ class celIdoAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celSeiketsuHojiAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtSeiketsuHoji")
     private TextBoxNum txtSeiketsuHoji;
 
@@ -882,7 +882,7 @@ class celSeiketsuHojiAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celKansetsuCareAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtKansetsuCare")
     private TextBoxNum txtKansetsuCare;
 
@@ -912,7 +912,7 @@ class celKansetsuCareAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celBpsdKanrenAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtBpsdKanren")
     private TextBoxNum txtBpsdKanren;
 
@@ -942,7 +942,7 @@ class celBpsdKanrenAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celKinoKunrenAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtKinoKunren")
     private TextBoxNum txtKinoKunren;
 
@@ -972,7 +972,7 @@ class celKinoKunrenAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celIryoKanrenAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtIryoKanren")
     private TextBoxNum txtIryoKanren;
 
@@ -1002,7 +1002,7 @@ class celIryoKanrenAttblKijunJikan extends TableCell {
  * @author 自動生成
  */
 class celNinchishoKasanAttblKijunJikan extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     @JsonProperty("txtNinchishoKasan")
     private TextBoxNum txtNinchishoKasan;
 

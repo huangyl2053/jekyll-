@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -26,13 +27,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekkaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("btnIchijiHantei")
+    private Button btnIchijiHantei;
+    @JsonProperty("btnAfterIchijiHantei")
+    private Button btnAfterIchijiHantei;
     @JsonProperty("txtIchijiHanteibi")
     private TextBoxFlexibleDate txtIchijiHanteibi;
     @JsonProperty("txtIchijiHanteiKekka")
@@ -63,10 +68,20 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private Label lblIchijiHanteiKeikokuCode;
     @JsonProperty("dgIchijiHanteiKeikokuCode")
     private DataGrid<dgIchijiHanteiKeikokuCode_Row> dgIchijiHanteiKeikokuCode;
-    @JsonProperty("btnModoru")
-    private Button btnModoru;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
+    @JsonProperty("btnModoru")
+    private Button btnModoru;
+    @JsonProperty("hanteiArgument")
+    private RString hanteiArgument;
+    @JsonProperty("hanteiResult")
+    private RString hanteiResult;
+    @JsonProperty("shinseishoKanriNo")
+    private RString shinseishoKanriNo;
+    @JsonProperty("modeType")
+    private RString modeType;
+    @JsonProperty("ichijiHanteiKekka")
+    private RString ichijiHanteiKekka;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,6 +89,42 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getbtnIchijiHantei
+     * @return btnIchijiHantei
+     */
+    @JsonProperty("btnIchijiHantei")
+    public Button getBtnIchijiHantei() {
+        return btnIchijiHantei;
+    }
+
+    /*
+     * setbtnIchijiHantei
+     * @param btnIchijiHantei btnIchijiHantei
+     */
+    @JsonProperty("btnIchijiHantei")
+    public void setBtnIchijiHantei(Button btnIchijiHantei) {
+        this.btnIchijiHantei = btnIchijiHantei;
+    }
+
+    /*
+     * getbtnAfterIchijiHantei
+     * @return btnAfterIchijiHantei
+     */
+    @JsonProperty("btnAfterIchijiHantei")
+    public Button getBtnAfterIchijiHantei() {
+        return btnAfterIchijiHantei;
+    }
+
+    /*
+     * setbtnAfterIchijiHantei
+     * @param btnAfterIchijiHantei btnAfterIchijiHantei
+     */
+    @JsonProperty("btnAfterIchijiHantei")
+    public void setBtnAfterIchijiHantei(Button btnAfterIchijiHantei) {
+        this.btnAfterIchijiHantei = btnAfterIchijiHantei;
+    }
+
     /*
      * gettxtIchijiHanteibi
      * @return txtIchijiHanteibi
@@ -345,6 +396,24 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     /*
+     * getbtnKakutei
+     * @return btnKakutei
+     */
+    @JsonProperty("btnKakutei")
+    public Button getBtnKakutei() {
+        return btnKakutei;
+    }
+
+    /*
+     * setbtnKakutei
+     * @param btnKakutei btnKakutei
+     */
+    @JsonProperty("btnKakutei")
+    public void setBtnKakutei(Button btnKakutei) {
+        this.btnKakutei = btnKakutei;
+    }
+
+    /*
      * getbtnModoru
      * @return btnModoru
      */
@@ -363,21 +432,93 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     /*
-     * getbtnKakutei
-     * @return btnKakutei
+     * gethanteiArgument
+     * @return hanteiArgument
      */
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
+    @JsonProperty("hanteiArgument")
+    public RString getHanteiArgument() {
+        return hanteiArgument;
     }
 
     /*
-     * setbtnKakutei
-     * @param btnKakutei btnKakutei
+     * sethanteiArgument
+     * @param hanteiArgument hanteiArgument
      */
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei = btnKakutei;
+    @JsonProperty("hanteiArgument")
+    public void setHanteiArgument(RString hanteiArgument) {
+        this.hanteiArgument = hanteiArgument;
+    }
+
+    /*
+     * gethanteiResult
+     * @return hanteiResult
+     */
+    @JsonProperty("hanteiResult")
+    public RString getHanteiResult() {
+        return hanteiResult;
+    }
+
+    /*
+     * sethanteiResult
+     * @param hanteiResult hanteiResult
+     */
+    @JsonProperty("hanteiResult")
+    public void setHanteiResult(RString hanteiResult) {
+        this.hanteiResult = hanteiResult;
+    }
+
+    /*
+     * getshinseishoKanriNo
+     * @return shinseishoKanriNo
+     */
+    @JsonProperty("shinseishoKanriNo")
+    public RString getShinseishoKanriNo() {
+        return shinseishoKanriNo;
+    }
+
+    /*
+     * setshinseishoKanriNo
+     * @param shinseishoKanriNo shinseishoKanriNo
+     */
+    @JsonProperty("shinseishoKanriNo")
+    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+        this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    /*
+     * getmodeType
+     * @return modeType
+     */
+    @JsonProperty("modeType")
+    public RString getModeType() {
+        return modeType;
+    }
+
+    /*
+     * setmodeType
+     * @param modeType modeType
+     */
+    @JsonProperty("modeType")
+    public void setModeType(RString modeType) {
+        this.modeType = modeType;
+    }
+
+    /*
+     * getichijiHanteiKekka
+     * @return ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public RString getIchijiHanteiKekka() {
+        return ichijiHanteiKekka;
+    }
+
+    /*
+     * setichijiHanteiKekka
+     * @param ichijiHanteiKekka ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public void setIchijiHanteiKekka(RString ichijiHanteiKekka) {
+        this.ichijiHanteiKekka = ichijiHanteiKekka;
     }
 
     /*

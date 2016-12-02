@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum DbeInformationMessages implements IMessageGettable {
 
     割付申請者人数が最大割付可能人数を超過(1, "割付申請者人数が最大割付可能人数を超えています。"),
-    審査会自動割付できない申請者(2, "審査会自動割付できない申請者がいます。");
+    審査会自動割付できない申請者(2, "審査会自動割付できない申請者がいます。"),
+    一次判定処理完了(3, "一次判定処理を完了しました。");
 
     private final Message message;
 

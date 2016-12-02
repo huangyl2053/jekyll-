@@ -14,15 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class torikomiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("UploadPanel")
-    private UploadPanel UploadPanel;
+    @JsonProperty("uplHanteiKekka")
+    private UploadPanel uplHanteiKekka;
     @JsonProperty("uploadButton")
     private Button uploadButton;
 
@@ -33,21 +33,21 @@ public class torikomiPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getUploadPanel
-     * @return UploadPanel
+     * getuplHanteiKekka
+     * @return uplHanteiKekka
      */
-    @JsonProperty("UploadPanel")
-    public UploadPanel getUploadPanel() {
-        return UploadPanel;
+    @JsonProperty("uplHanteiKekka")
+    public UploadPanel getUplHanteiKekka() {
+        return uplHanteiKekka;
     }
 
     /*
-     * setUploadPanel
-     * @param UploadPanel UploadPanel
+     * setuplHanteiKekka
+     * @param uplHanteiKekka uplHanteiKekka
      */
-    @JsonProperty("UploadPanel")
-    public void setUploadPanel(UploadPanel UploadPanel) {
-        this.UploadPanel = UploadPanel;
+    @JsonProperty("uplHanteiKekka")
+    public void setUplHanteiKekka(UploadPanel uplHanteiKekka) {
+        this.uplHanteiKekka = uplHanteiKekka;
     }
 
     /*
