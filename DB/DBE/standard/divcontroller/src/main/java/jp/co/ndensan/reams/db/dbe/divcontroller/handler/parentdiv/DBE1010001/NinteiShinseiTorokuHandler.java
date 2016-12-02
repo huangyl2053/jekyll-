@@ -180,8 +180,10 @@ public class NinteiShinseiTorokuHandler {
 
     private void setCommonDiv(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {
         div.getCcdKaigoNinteiShinseiKihon().initialize();
-        div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
-                result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
+        if (result.get申請日() != null) {
+            div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
+                    result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
+        }
         div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiJokyo(result.get申請状況());
         div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
         if (result.get申請種別() != null) {
