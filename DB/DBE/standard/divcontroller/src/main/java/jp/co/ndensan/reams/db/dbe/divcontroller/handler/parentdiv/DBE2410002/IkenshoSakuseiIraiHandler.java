@@ -557,8 +557,8 @@ public class IkenshoSakuseiIraiHandler {
 
         RString 受診場所 = div.getTxtJyushinbasho().getValue();
         RString customerBarCode = RString.EMPTY;
-        if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
-            customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
+        if (!RString.isNullOrEmpty(business.get郵便番号()) && !RString.isNullOrEmpty(business.get住所())) {
+            customerBarCode = ReportUtil.getCustomerBarCode(business.get郵便番号(), business.get住所());
         }
         Map<Integer, RString> 通知文
                 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
