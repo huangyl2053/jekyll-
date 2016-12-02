@@ -133,10 +133,14 @@ public class ChosaKekkaInfoKihonHandler {
                 dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
             if (B_09.equals(chosaItem.get厚労省IF識別コード().value())) {
-                dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get表示番号());
-                dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get名称());
-                setパターン5(dgJigyoshaItiran, chosaItem);
-                認定調査特記事項番号List.add(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get特記事項番号());
+                for (NinteichosaKomokuMapping09B value : NinteichosaKomokuMapping09B.values()) {
+                    if (new RString(chosaItem.get連番()).equals(value.getコード())) {
+                        dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get表示番号());
+                        dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get名称());
+                        setパターン5(dgJigyoshaItiran, chosaItem);
+                        認定調査特記事項番号List.add(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get特記事項番号());
+                    }
+                }
                 dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
             NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);

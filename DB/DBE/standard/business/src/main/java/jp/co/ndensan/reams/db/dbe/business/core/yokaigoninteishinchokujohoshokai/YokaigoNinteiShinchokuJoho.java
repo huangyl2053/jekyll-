@@ -381,12 +381,21 @@ public class YokaigoNinteiShinchokuJoho implements Serializable {
     }
 
     /**
-     * 二次判定要介護状態区分コードを取得します。
+     * 申請書管理番号を取得します。
      *
-     * @return 二次判定要介護状態区分コード
+     * @return 申請書管理番号
      */
     public RString get申請書管理番号() {
         return entity.getShinseishoKanriNo();
+    }
+    
+    /**
+     * 認定調査依頼履歴番号を取得します。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int get認定調査依頼履歴番号() {
+        return entity.getNinteichosaIraiRirekiNo() ;
     }
 
 }

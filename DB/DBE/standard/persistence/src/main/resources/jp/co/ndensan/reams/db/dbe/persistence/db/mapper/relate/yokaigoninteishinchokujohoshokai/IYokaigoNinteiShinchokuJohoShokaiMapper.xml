@@ -40,7 +40,7 @@
         <result property="gogitaiMei" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nijiHanYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-
+        <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
 
     <select resultOrdered="true" id="get申請者一覧内容"
@@ -108,7 +108,8 @@
         DbT5101."seibetsu",
         DbT5101."seinengappiYMD",
         DbT5101."age",
-        DbT5101."shinseishoKanriNo"
+        DbT5101."shinseishoKanriNo",
+        DbT5201."ninteichosaIraiRirekiNo"
     </sql>
 
     <sql id="tablesWithParameter">

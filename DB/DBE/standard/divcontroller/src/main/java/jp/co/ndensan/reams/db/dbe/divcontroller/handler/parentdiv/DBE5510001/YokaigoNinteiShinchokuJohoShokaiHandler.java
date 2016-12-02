@@ -269,6 +269,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         }
         setRow_bak(joho, row);
         row.setShinseishoKanriNo(nullToEmpty(joho.get申請書管理番号()));
+        row.setNinteichosaIraiRirekiNo(new RString(joho.get認定調査依頼履歴番号())); 
         return row;
     }
 
