@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisaiMode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -72,6 +74,7 @@ public class ShinsakaiKekkaToroku {
     private static final RString 更新申請 = new RString("更新申請");
     private static final RString 新規申請 = new RString("新規申請");
     private static final RString 区分変更申請 = new RString("区分変更申請");
+    private static final RString CHEAK_1 = new RString("1");
     private static final int 更新申請可能日数 = 61;
 
     private final ShinsakaiKekkaTorokuManager manager;
@@ -93,7 +96,26 @@ public class ShinsakaiKekkaToroku {
         if (!前排他キーのセット(SHINSEISHOKANRINO)) {
             throw new PessimisticLockingException();
         }
+        ShinsakaiKaisaiMode 選択審査会一覧 = ViewStateHolder.get(ViewStateKeys.選択審査会一覧, ShinsakaiKaisaiMode.class);
+
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+
+        div.getTxtShinsakaiName().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get編集合議体名称());
+        div.getTxtGogitaiNo().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get合議体名称());
+        div.getTxtShinsaTaishosha().setValue(new RString(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会割当済み人数().toString()));
+        div.getTxtShinsakaiKaijo().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開催場所名称());
+
+        div.getTxtChiku().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開催場所名称());
+
+        div.getTxtTaishoNinzu().setValue(new RString(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会実施人数().toString()));
+        div.getTxtKaisaiNichiji().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開催予定年月日());
+        div.getTxtKaisaiTimeRange().setFromValue(new RTime(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開始予定時刻()));
+        div.getTxtKaisaiTimeRange().setToValue(new RTime(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会終了予定時刻()));
+//        if (選択審査会一覧.get審査会一覧Grid().get(0).get種類().equals(CHEAK_1)) {
+//            div.getChkShinsakaiShurui().setSelectedItemsByKey(true);
+//        }
+        div.getTxtStutas().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会進捗状況());
+
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();
         List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList = manager.get審査会委員一覧検索(開催番号).records();
         getHandler(div).onLoad(headList, iChiRanList);
