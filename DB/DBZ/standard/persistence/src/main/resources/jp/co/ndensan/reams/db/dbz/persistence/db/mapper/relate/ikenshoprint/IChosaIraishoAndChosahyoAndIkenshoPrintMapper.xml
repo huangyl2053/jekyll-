@@ -66,9 +66,9 @@
         <result property="ikenshoSakuseiKaisuKubun" column="ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zaitakuShisetsuKubun" column="zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select resultOrdered="true" id="select認定調査依頼情報" resultMap="resultMap_select認定調査依頼情報" 
+    <select resultOrdered="true" id="select認定調査依頼情報" resultMap="resultMap_select認定調査依頼情報"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
-          SELECT 
+          SELECT
                   A."hihokenshaNo"
                  ,A."hihokenshaName"
                  ,A."seibetsu"
@@ -81,37 +81,37 @@
                  ,D."chosainShimei"
             FROM
                  rgdb."DbT5101NinteiShinseiJoho" AS A
-                 INNER JOIN 
+                 INNER JOIN
                  rgdb."DbT7051KoseiShichosonMaster" AS A1
                  ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                 LEFT JOIN 
+                 LEFT JOIN
                  rgdb."DbT5201NinteichosaIraiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                  AND B."logicalDeletedFlag" = FALSE
                  AND NOT EXISTS (
-                        SELECT 'X' 
+                        SELECT 'X'
                          FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
-                         WHERE 
+                         WHERE
                               B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                               AND B1."logicalDeletedFlag" = FALSE
                               AND B."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
 
                  )
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5910NinteichosaItakusakiJoho" AS C
                   ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
                   AND C."shichosonCode" = A1."shichosonCode"
                   AND C."jokyoFlag" = TRUE
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5913ChosainJoho" AS D
                   ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
-                  AND B."ninteiChosainCode"  = D."ninteiChosainCode" 
+                  AND B."ninteiChosainCode"  = D."ninteiChosainCode"
                   AND D."shichosonCode" = A1."shichosonCode"
                   AND D."jokyoFlag" = TRUE
             WHERE
-                 A."shinseishoKanriNo" IN 
+                 A."shinseishoKanriNo" IN
                  <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
-                     #{code} 
+                     #{code}
                  </foreach>
                  <if test="uses証記載保険者番号">
                      AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
@@ -119,50 +119,50 @@
              AND A."logicalDeletedFlag" = FALSE
             ORDER BY A."shinseishoKanriNo"
     </select>
-     <select resultOrdered="true" id="select更新用認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity" 
+     <select resultOrdered="true" id="select更新用認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
-           SELECT 
+           SELECT
                 <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
             FROM
                 rgdb."DbT5201NinteichosaIraiJoho"
                 INNER JOIN
                 (
-                 SELECT 
+                 SELECT
                       A."shinseishoKanriNo"
                      ,B."ninteichosaIraiRirekiNo"
                 FROM
                      rgdb."DbT5101NinteiShinseiJoho" AS A
-                     INNER JOIN 
+                     INNER JOIN
                      rgdb."DbT7051KoseiShichosonMaster" AS A1
                      ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                     LEFT JOIN 
+                     LEFT JOIN
                      rgdb."DbT5201NinteichosaIraiJoho" AS B
                      ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                      AND B."logicalDeletedFlag" = FALSE
                      AND NOT EXISTS (
-                            SELECT 'X' 
+                            SELECT 'X'
                              FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
-                             WHERE 
+                             WHERE
                                   B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                                   AND B1."logicalDeletedFlag" = FALSE
                                   AND B."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
 
                      )
-                     LEFT JOIN 
+                     LEFT JOIN
                       rgdb."DbT5910NinteichosaItakusakiJoho" AS C
                       ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
                       AND C."shichosonCode" = A1."shichosonCode"
                       AND C."jokyoFlag" = TRUE
-                     LEFT JOIN 
+                     LEFT JOIN
                       rgdb."DbT5913ChosainJoho" AS D
                       ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
-                      AND B."ninteiChosainCode"  = D."ninteiChosainCode" 
+                      AND B."ninteiChosainCode"  = D."ninteiChosainCode"
                       AND D."shichosonCode" = A1."shichosonCode"
                       AND D."jokyoFlag" = TRUE
                 WHERE
-                     A."shinseishoKanriNo" IN 
+                     A."shinseishoKanriNo" IN
                      <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
-                         #{code} 
+                         #{code}
                      </foreach>
                      <if test="uses証記載保険者番号">
                          AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
@@ -175,7 +175,7 @@
     </select>
     <select resultOrdered="true" id="select主治医意見書依頼情報" resultMap="resultMap_select認定調査依頼情報"
               parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-         SELECT 
+         SELECT
                 A."hihokenshaNo"
                ,A."hihokenshaName"
                ,A."seibetsu"
@@ -188,37 +188,37 @@
                ,D."shujiiName"
          FROM
               rgdb."DbT5101NinteiShinseiJoho" AS A
-              INNER JOIN 
+              INNER JOIN
               rgdb."DbT7051KoseiShichosonMaster" AS A1
               ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-              LEFT JOIN 
+              LEFT JOIN
               rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
               ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
               AND B."logicalDeletedFlag" = FALSE
               AND NOT EXISTS (
-                     SELECT 'X' 
+                     SELECT 'X'
                       FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
-                      WHERE 
+                      WHERE
                            B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                            AND B1."logicalDeletedFlag" = FALSE
                            AND B."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
 
               )
-              LEFT JOIN 
+              LEFT JOIN
                rgdb."DbT5911ShujiiIryoKikanJoho" AS C
                ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
                AND C."shichosonCode" = A1."shichosonCode"
                AND C."jokyoFlag" = TRUE
-              LEFT JOIN 
+              LEFT JOIN
                rgdb."DbT5912ShujiiJoho" AS D
                ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
-               AND B."shujiiCode"  = D."shujiiCode" 
+               AND B."shujiiCode"  = D."shujiiCode"
                AND D."shichosonCode" = A1."shichosonCode"
                AND D."jokyoFlag" = TRUE
          WHERE
-              A."shinseishoKanriNo" IN 
+              A."shinseishoKanriNo" IN
               <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
-                     #{code} 
+                     #{code}
               </foreach>
               <if test="uses証記載保険者番号">
                      AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
@@ -228,48 +228,48 @@
     </select>
      <select resultOrdered="true" id="select更新用主治医意見書依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
               parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-         SELECT 
+         SELECT
                <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
          FROM
                rgdb."DbT5301ShujiiIkenshoIraiJoho"
-               INNER JOIN 
+               INNER JOIN
               (
-                 SELECT 
+                 SELECT
                          A."shinseishoKanriNo"
                         ,B."ikenshoIraiRirekiNo"
                   FROM
                        rgdb."DbT5101NinteiShinseiJoho" AS A
-                       INNER JOIN 
+                       INNER JOIN
                        rgdb."DbT7051KoseiShichosonMaster" AS A1
                        ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                       LEFT JOIN 
+                       LEFT JOIN
                        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
                        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                        AND B."logicalDeletedFlag" = FALSE
                        AND NOT EXISTS (
-                              SELECT 'X' 
+                              SELECT 'X'
                                FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
-                               WHERE 
+                               WHERE
                                     B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                                     AND B1."logicalDeletedFlag" = FALSE
                                     AND B."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
 
                        )
-                       LEFT JOIN 
+                       LEFT JOIN
                         rgdb."DbT5911ShujiiIryoKikanJoho" AS C
                         ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
                         AND C."shichosonCode" = A1."shichosonCode"
                         AND C."jokyoFlag" = TRUE
-                       LEFT JOIN 
+                       LEFT JOIN
                         rgdb."DbT5912ShujiiJoho" AS D
                         ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
-                        AND B."shujiiCode"  = D."shujiiCode" 
+                        AND B."shujiiCode"  = D."shujiiCode"
                         AND D."shichosonCode" = A1."shichosonCode"
                         AND D."jokyoFlag" = TRUE
                   WHERE
-                       A."shinseishoKanriNo" IN 
+                       A."shinseishoKanriNo" IN
                        <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
-                              #{code} 
+                              #{code}
                        </foreach>
                        <if test="uses証記載保険者番号">
                               AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
@@ -277,12 +277,12 @@
                    AND A."logicalDeletedFlag" = FALSE
                   ORDER BY A."shinseishoKanriNo"
                ) temp
-               ON "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = temp."shinseishoKanriNo" 
-               AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = temp."ikenshoIraiRirekiNo" 
+               ON "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = temp."shinseishoKanriNo"
+               AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = temp."ikenshoIraiRirekiNo"
     </select>
      <select resultOrdered="true" id="select認定調査依頼書" resultMap="resultMap_select認定調査依頼情報"
               parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
-             SELECT 
+             SELECT
                  DISTINCT
                   A."hihokenshaNo"
                  ,A."hihokenshaKana"
@@ -306,31 +306,31 @@
                  ,D."chosainShimei"
             FROM
                  rgdb."DbT5101NinteiShinseiJoho" AS A
-                 INNER JOIN 
+                 INNER JOIN
                  rgdb."DbT7051KoseiShichosonMaster" AS A1
                  ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                 LEFT JOIN 
+                 LEFT JOIN
                  rgdb."DbT5201NinteichosaIraiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                  AND B."logicalDeletedFlag" = FALSE
                  AND NOT EXISTS (
-                        SELECT 'X' 
+                        SELECT 'X'
                          FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
-                         WHERE 
+                         WHERE
                               B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                               AND B1."logicalDeletedFlag" = FALSE
                               AND B."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
 
                  )
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5910NinteichosaItakusakiJoho" AS C
                   ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
                   AND C."shichosonCode" = A1."shichosonCode"
                   AND C."jokyoFlag" = TRUE
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5913ChosainJoho" AS D
                   ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
-                  AND B."ninteiChosainCode"  = D."ninteiChosainCode" 
+                  AND B."ninteiChosainCode"  = D."ninteiChosainCode"
                   AND D."shichosonCode" = A1."shichosonCode"
                   AND D."jokyoFlag" = TRUE
             WHERE
@@ -339,7 +339,7 @@
      </select>
     <select resultOrdered="true" id="select認定調査依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
-           SELECT 
+           SELECT
                   A."hihokenshaNo"
                  ,A."ninteiShinseiYMD"
                  ,A."hihokenshaKana"
@@ -359,45 +359,45 @@
                  ,D."chosainShimei"
             FROM
                  rgdb."DbT5101NinteiShinseiJoho" AS A
-                 INNER JOIN 
+                 INNER JOIN
                  rgdb."DbT7051KoseiShichosonMaster" AS A1
                  ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                 LEFT JOIN 
+                 LEFT JOIN
                  rgdb."DbT5201NinteichosaIraiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                  AND B."logicalDeletedFlag" = FALSE
                  AND NOT EXISTS (
-                        SELECT 'X' 
+                        SELECT 'X'
                          FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
-                         WHERE 
+                         WHERE
                               B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                               AND B1."logicalDeletedFlag" = FALSE
                               AND B."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
 
                  )
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5910NinteichosaItakusakiJoho" AS C
                   ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
                   AND C."shichosonCode" = A1."shichosonCode"
                   AND C."jokyoFlag" = TRUE
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5913ChosainJoho" AS D
                   ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
-                  AND B."ninteiChosainCode"  = D."ninteiChosainCode" 
+                  AND B."ninteiChosainCode"  = D."ninteiChosainCode"
                   AND D."shichosonCode" = A1."shichosonCode"
                   AND D."jokyoFlag" = TRUE
             WHERE
-                  A."shinseishoKanriNo" IN 
+                  A."shinseishoKanriNo" IN
                   <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
-                       #{code} 
+                       #{code}
                   </foreach>
              AND A."logicalDeletedFlag" = FALSE
-           ORDER BY 
+           ORDER BY
                   A."shinseishoKanriNo"
       </select>
       <select resultOrdered="true" id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
               parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-            SELECT 
+            SELECT
                   DISTINCT
                   A."shinseishoKanriNo"
                  ,A."shoKisaiHokenshaNo"
@@ -425,40 +425,40 @@
                  ,E."renrakusakiTuzukigara"
             FROM
                  rgdb."DbT5101NinteiShinseiJoho" AS A
-                 INNER JOIN 
+                 INNER JOIN
                  rgdb."DbT7051KoseiShichosonMaster" AS A1
                  ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                 LEFT JOIN 
+                 LEFT JOIN
                  rgdb."DbT5201NinteichosaIraiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                  AND B."logicalDeletedFlag" = FALSE
                  AND NOT EXISTS (
-                        SELECT 'X' 
+                        SELECT 'X'
                          FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
-                         WHERE 
+                         WHERE
                               B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                               AND B1."logicalDeletedFlag" = FALSE
                               AND B."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
 
                  )
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5910NinteichosaItakusakiJoho" AS C
                   ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
                   AND C."shichosonCode" = A1."shichosonCode"
                   AND C."jokyoFlag" = TRUE
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5913ChosainJoho" AS D
                   ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
-                  AND B."ninteiChosainCode"  = D."ninteiChosainCode" 
+                  AND B."ninteiChosainCode"  = D."ninteiChosainCode"
                   AND D."shichosonCode" = A1."shichosonCode"
                   AND D."jokyoFlag" = TRUE
-                 LEFT JOIN 
+                 LEFT JOIN
                   rgdb."DbT5150RenrakusakiJoho" AS E
                   ON A."shinseishoKanriNo" = E."shinseishoKanriNo"
                   AND NOT EXISTS (
-                        SELECT 'X' 
+                        SELECT 'X'
                          FROM rgdb."DbT5150RenrakusakiJoho" AS E1
-                         WHERE 
+                         WHERE
                               E."shinseishoKanriNo" = E1."shinseishoKanriNo"
                               AND E."renban" <![CDATA[<]]> E1."renban"
 
@@ -468,10 +468,10 @@
              AND A."logicalDeletedFlag" = FALSE
 
       </select>
-      
+
        <select resultOrdered="true" id="select認定調査票差異チェック票" resultMap="resultMap_select認定調査依頼情報"
               parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-            SELECT 
+            SELECT
                   DISTINCT
                   A."hihokenshaNo"
                  ,A."hihokenshaName"
@@ -487,37 +487,37 @@
                  ,F."researchItem"
             FROM
                  rgdb."DbT5101NinteiShinseiJoho" AS A
-                 LEFT JOIN 
+                 LEFT JOIN
                  rgdb."DbT5121ShinseiRirekiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-                 INNER JOIN 
+                 INNER JOIN
                   rgdb."DbT5203NinteichosahyoKihonChosa" AS C
                   ON B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
                   AND NOT EXISTS (
-                        SELECT 'X' 
+                        SELECT 'X'
                          FROM rgdb."DbT5203NinteichosahyoKihonChosa" AS C1
-                         WHERE 
+                         WHERE
                               C."shinseishoKanriNo" = C1."shinseishoKanriNo"
                               AND C."ninteichosaRirekiNo" <![CDATA[<]]>  C1."ninteichosaRirekiNo"
 
                  )
-                 AND C."koroshoIfShikibetsuCode" = 
-                  (SELECT "koroshoIfShikibetsuCode" 
-                           FROM rgdb."DbT5101NinteiShinseiJoho" 
+                 AND C."koroshoIfShikibetsuCode" =
+                  (SELECT "koroshoIfShikibetsuCode"
+                           FROM rgdb."DbT5101NinteiShinseiJoho"
                          WHERE "shinseishoKanriNo" = B."zenkaiShinseishoKanriNo")
-                 INNER JOIN 
+                 INNER JOIN
                   rgdb."DbT5116IchijiHanteiKekkaJoho" AS D
                   ON C."shinseishoKanriNo" = D."shinseishoKanriNo"
-                 INNER JOIN 
+                 INNER JOIN
                   rgdb."DbT5102NinteiKekkaJoho" AS E
                   ON C."shinseishoKanriNo" = E."shinseishoKanriNo"
-                 INNER JOIN 
+                 INNER JOIN
                   rgdb."DbT5211NinteichosahyoChosaItem" AS F
                   ON C."shinseishoKanriNo" = F."shinseishoKanriNo"
                   AND  NOT EXISTS (
-                        SELECT 'X' 
+                        SELECT 'X'
                          FROM rgdb."DbT5211NinteichosahyoChosaItem" AS F1
-                         WHERE 
+                         WHERE
                               F."shinseishoKanriNo" = F1."shinseishoKanriNo"
                               AND F."remban" = F1."remban"
                               AND F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"
@@ -528,10 +528,10 @@
                  A."shinseishoKanriNo" = #{申請書管理番号}
              AND A."logicalDeletedFlag" = FALSE
        </select>
-       
+
       <select resultOrdered="true" id="select意見書作成依頼書" resultMap="resultMap_select認定調査依頼情報"
                 parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-           SELECT 
+           SELECT
                 DISTINCT
                 A."shoKisaiHokenshaNo"
                ,A."hihokenshaNo"
@@ -553,42 +553,42 @@
                ,D."shujiiName"
          FROM
               rgdb."DbT5101NinteiShinseiJoho" AS A
-              INNER JOIN 
+              INNER JOIN
               rgdb."DbT7051KoseiShichosonMaster" AS A1
               ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-              LEFT JOIN 
+              LEFT JOIN
               rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
               ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
               AND B."logicalDeletedFlag" = FALSE
               AND NOT EXISTS (
-                     SELECT 'X' 
+                     SELECT 'X'
                       FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
-                      WHERE 
+                      WHERE
                            B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                            AND B1."logicalDeletedFlag" = FALSE
                            AND B."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
 
               )
-              LEFT JOIN 
+              LEFT JOIN
                rgdb."DbT5911ShujiiIryoKikanJoho" AS C
                ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
                AND C."shichosonCode" = A1."shichosonCode"
                AND C."jokyoFlag" = TRUE
-              LEFT JOIN 
+              LEFT JOIN
                rgdb."DbT5912ShujiiJoho" AS D
                ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
-               AND B."shujiiCode"  = D."shujiiCode" 
+               AND B."shujiiCode"  = D."shujiiCode"
                AND D."shichosonCode" = A1."shichosonCode"
                AND D."jokyoFlag" = TRUE
          WHERE
               A."shinseishoKanriNo" = #{申請書管理番号}
           AND A."logicalDeletedFlag" = FALSE
-        
+
         </select>
-        
+
          <select resultOrdered="true" id="select意見書作成依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
                  parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-                SELECT 
+                SELECT
                     A."hihokenshaNo"
                    ,A."hihokenshaKana"
                    ,A."hihokenshaName"
@@ -606,46 +606,46 @@
                    ,D."shujiiName"
              FROM
                   rgdb."DbT5101NinteiShinseiJoho" AS A
-                  INNER JOIN 
+                  INNER JOIN
                   rgdb."DbT7051KoseiShichosonMaster" AS A1
                   ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                  LEFT JOIN 
+                  LEFT JOIN
                   rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
                   ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                   AND B."logicalDeletedFlag" = FALSE
                   AND NOT EXISTS (
-                         SELECT 'X' 
+                         SELECT 'X'
                           FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
-                          WHERE 
+                          WHERE
                                B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                                AND B1."logicalDeletedFlag" = FALSE
                                AND B."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
 
                   )
-                  LEFT JOIN 
+                  LEFT JOIN
                    rgdb."DbT5911ShujiiIryoKikanJoho" AS C
                    ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
                    AND C."shichosonCode" = A1."shichosonCode"
                    AND C."jokyoFlag" = TRUE
-                  LEFT JOIN 
+                  LEFT JOIN
                    rgdb."DbT5912ShujiiJoho" AS D
                    ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
-                   AND B."shujiiCode"  = D."shujiiCode" 
+                   AND B."shujiiCode"  = D."shujiiCode"
                    AND D."shichosonCode" = A1."shichosonCode"
                    AND D."jokyoFlag" = TRUE
              WHERE
                   A."shinseishoKanriNo" IN
                   <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
-                       #{code} 
+                       #{code}
                   </foreach>
               AND A."logicalDeletedFlag" = FALSE
               ORDER BY A."shinseishoKanriNo"
-         
+
          </select>
-         
+
         <select resultOrdered="true" id="select主治医意見書記入用紙" resultMap="resultMap_select認定調査依頼情報"
                    parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-                    SELECT 
+                    SELECT
                       DISTINCT
                       A."shinseishoKanriNo"
                      ,A."shoKisaiHokenshaNo"
@@ -669,28 +669,28 @@
                      ,D."shujiiName"
                FROM
                     rgdb."DbT5101NinteiShinseiJoho" AS A
-                    INNER JOIN 
+                    INNER JOIN
                     rgdb."DbT7051KoseiShichosonMaster" AS B
                     ON A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
-                    LEFT JOIN 
+                    LEFT JOIN
                      rgdb."DbT5911ShujiiIryoKikanJoho" AS C
                      ON C."shujiiIryokikanCode" = A."shujiiIryokikanCode"
                      AND C."shichosonCode" = B."shichosonCode"
                      AND C."jokyoFlag" = TRUE
-                    LEFT JOIN 
+                    LEFT JOIN
                      rgdb."DbT5912ShujiiJoho" AS D
                      ON A."shujiiIryokikanCode" = D."shujiiIryokikanCode"
-                     AND A."shujiiCode"  = D."shujiiCode" 
+                     AND A."shujiiCode"  = D."shujiiCode"
                      AND D."shichosonCode" = B."shichosonCode"
                      AND D."jokyoFlag" = TRUE
                WHERE
                     A."shinseishoKanriNo" = #{申請書管理番号}
                 AND A."logicalDeletedFlag" = FALSE
          </select>
-         
+
             <select resultOrdered="true" id="select主治医意見書作成料請求書" resultMap="resultMap_select認定調査依頼情報"
                    parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-               SELECT 
+               SELECT
                     DISTINCT
                     A."shinseishoKanriNo"
                    ,A."hihokenshaNo"
@@ -708,27 +708,27 @@
                    ,E."daihyoshaName"
              FROM
                   rgdb."DbT5101NinteiShinseiJoho" AS A
-                  INNER JOIN 
+                  INNER JOIN
                   rgdb."DbT5105NinteiKanryoJoho" AS B
                   ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                   AND B."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                   AND B."ninteiShinsakaiWariateKanryoYMD" IS NULL
                   AND B."ninteiShinsakaiKanryoYMD" IS NULL
                   AND B."centerSoshinYMD" IS NULL
-                  LEFT JOIN 
+                  LEFT JOIN
                    rgdb."DbT7051KoseiShichosonMaster" AS C
                    ON A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
-                  LEFT JOIN 
+                  LEFT JOIN
                    rgdb."DbT5302ShujiiIkenshoJoho" AS D
                    ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
                    AND NOT EXISTS (
-                              SELECT 'X' FROM 
+                              SELECT 'X' FROM
                                  rgdb."DbT5302ShujiiIkenshoJoho" AS D1
                                  WHERE D."shinseishoKanriNo" = D1."shinseishoKanriNo"
                                  AND D."ikenshoIraiRirekiNo" <![CDATA[<]]> D1."ikenshoIraiRirekiNo"
 
                    )
-                  LEFT JOIN 
+                  LEFT JOIN
                    rgdb."DbT5911ShujiiIryoKikanJoho" AS E
                    ON E."shujiiIryokikanCode" = A."shujiiIryokikanCode"
                    AND E."shichosonCode" = C."shichosonCode"
@@ -737,14 +737,16 @@
                   A."shinseishoKanriNo" = #{申請書管理番号}
               AND A."logicalDeletedFlag" = FALSE
          </select>
-         
+
           <select resultOrdered="true" id="select介護保険診断命令書" resultMap="resultMap_select認定調査依頼情報"
                   parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
-                SELECT 
+                SELECT
                        DISTINCT
                         A."hihokenshaNo"
                        ,A."hihokenshaName"
                        ,A."shinseishoKanriNo"
+                       ,A."yubinNo"
+                       ,A."jusho"
                        ,C."yubinNo" AS "iryoKikanYubinNo"
                        ,C."jusho" AS "iryoKikanJusho"
                        ,C."telNo" AS "iryoKikanTelNo"
@@ -753,31 +755,31 @@
                        ,D."shujiiName"
                  FROM
                       rgdb."DbT5101NinteiShinseiJoho" AS A
-                      INNER JOIN 
+                      INNER JOIN
                       rgdb."DbT7051KoseiShichosonMaster" AS A1
                       ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
-                      LEFT JOIN 
+                      LEFT JOIN
                       rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
                       ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
                       AND B."logicalDeletedFlag" = FALSE
                       AND NOT EXISTS (
-                             SELECT 'X' 
+                             SELECT 'X'
                               FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
-                              WHERE 
+                              WHERE
                                    B."shinseishoKanriNo" = B1."shinseishoKanriNo"
                                    AND B1."logicalDeletedFlag" = FALSE
                                    AND B."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
 
                       )
-                      LEFT JOIN 
+                      LEFT JOIN
                        rgdb."DbT5911ShujiiIryoKikanJoho" AS C
                        ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
                        AND C."shichosonCode" = A1."shichosonCode"
                        AND C."jokyoFlag" = TRUE
-                      LEFT JOIN 
+                      LEFT JOIN
                        rgdb."DbT5912ShujiiJoho" AS D
                        ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
-                       AND B."shujiiCode"  = D."shujiiCode" 
+                       AND B."shujiiCode"  = D."shujiiCode"
                        AND D."shichosonCode" = A1."shichosonCode"
                        AND D."jokyoFlag" = TRUE
                  WHERE
