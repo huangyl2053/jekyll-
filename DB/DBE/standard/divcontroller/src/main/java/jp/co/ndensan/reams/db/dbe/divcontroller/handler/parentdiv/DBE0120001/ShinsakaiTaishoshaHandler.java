@@ -81,11 +81,11 @@ public class ShinsakaiTaishoshaHandler {
                         FlexibleDate.getNowDate()));
             }
             div.getTxtKaisaiDate().setValue(予定情報.getShinsakaiKaisaiYoteiYMD());
-            if (!RString.isNullOrEmpty(予定情報.getShinsakaiKaishiTime())) {
-                div.getTxtYoteiKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
-            }
             if (!RString.isNullOrEmpty(予定情報.getShinsakaiKaishiYoteiTime())) {
-                div.getTxtYoteiShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiYoteiTime().insert(2, ":")));
+                div.getTxtYoteiKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiYoteiTime().insert(2, ":")));
+            }
+            if (!RString.isNullOrEmpty(予定情報.getShinsakaiShuryoYoteiTime())) {
+                div.getTxtYoteiShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiShuryoYoteiTime().insert(2, ":")));
             }
             if (予定情報.isGogitaiSeishinkaSonzaiFlag()) {
                 List<RString> key = new ArrayList<>();
@@ -103,8 +103,8 @@ public class ShinsakaiTaishoshaHandler {
             if (!RString.isNullOrEmpty(予定情報.getShinsakaiKaishiTime())) {
                 div.getTxtKaishiTime().setValue(RTime.parse(予定情報.getShinsakaiKaishiTime().insert(2, ":")));
             }
-            if (!RString.isNullOrEmpty(予定情報.getShinsakaiShuryoYoteiTime())) {
-                div.getTxtShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiShuryoYoteiTime().insert(2, ":")));
+            if (!RString.isNullOrEmpty(予定情報.getShinsakaiShuryoTime())) {
+                div.getTxtShuryoTime().setValue(RTime.parse(予定情報.getShinsakaiShuryoTime().insert(2, ":")));
             }
             div.getTxtShoyoTime().setValue(new Decimal(予定情報.getShoyoJikanGokei()));
             div.getTxtJissiNinzu().setValue(new Decimal(予定情報.getShinsakaiJisshiNinzu()));
@@ -147,17 +147,17 @@ public class ShinsakaiTaishoshaHandler {
             } catch (IllegalArgumentException | NullPointerException e) {
                 row.setKonkaiNijiHantei(RString.EMPTY);
             }
-            if (shinsakaiTai.getNinchishoNichijoSeikatsuJiritsudoCode() != null) {
+            if (shinsakaiTai.ninchishoNichijoSeikatsuJiritsudoCode() != null) {
                 try {
-                    row.setChosahyoNetakirido(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                            shinsakaiTai.getNinchishoNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
+                    
+                    row.setChosahyoNinchido(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                            shinsakaiTai.ninchishoNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
                 } catch (IllegalArgumentException | NullPointerException e) {
-                    row.setChosahyoNetakirido(RString.EMPTY);
+                    row.setChosahyoNinchido(RString.EMPTY);
                 }
             }
-            row.setChosahyoNinchido(shinsakaiTai.getJigyoshaMeisho());
-            row.setChosaKikan(shinsakaiTai.getChosainShimei());
-            row.setChosain(new RString(Integer.toString(shinsakaiTai.getSaiChosaIraiKaisu())));
+            row.setChosaKikan(shinsakaiTai.getJigyoshaMeisho());
+            row.setChosain(shinsakaiTai.getChosainShimei());
             row.getSaiChosaIraiKaisu().setValue(new Decimal(shinsakaiTai.getSaiChosaIraiKaisu()));
             row.setIryoKikan(shinsakaiTai.getIryoKikanMeisho());
             row.setShujii(shinsakaiTai.getShujiiName());
