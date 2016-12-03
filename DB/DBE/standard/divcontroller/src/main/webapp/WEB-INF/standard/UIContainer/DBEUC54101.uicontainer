@@ -95,6 +95,16 @@
      "toLayoutName": "DBE5410001",
      "toLayoutTitle": "要介護認定個人状況照会",
      "toState": "default"
+    },
+    {
+     "id": "8",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0100001",
+     "layoutTitle": "要介護認定申請検索",
+     "eventName": "完了処理",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }
