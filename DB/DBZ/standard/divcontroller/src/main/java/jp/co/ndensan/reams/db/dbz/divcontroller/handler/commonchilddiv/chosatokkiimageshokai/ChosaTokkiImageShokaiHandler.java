@@ -33,44 +33,46 @@ public class ChosaTokkiImageShokaiHandler {
     private enum TokkiJikoNo {
 
         /**
-         * 特記資料1, コード: "T0001", ファイル名称: "C4101.png"。
+         * 特記資料1, コード: "T0001", ファイル名称: "C4101.png", ファイルbak名称: "C4101_BAK.png"。
          */
-        特記資料1(new RString("T0001"), new RString("C4101.png")),
+        特記資料1(new RString("T0001"), new RString("C4101.png"), new RString("C4101_BAK.png")),
         /**
-         * 特記資料2, コード: "T0002", ファイル名称: "C4102.png"。
+         * 特記資料2, コード: "T0002", ファイル名称: "C4102.png", ファイルbak名称: "C4102_BAK.png"。
          */
-        特記資料2(new RString("T0002"), new RString("C4102.png")),
+        特記資料2(new RString("T0002"), new RString("C4102.png"), new RString("C4102_BAK.png")),
         /**
-         * 特記資料3, コード: "T0003", ファイル名称: "C4103.png"。
+         * 特記資料3, コード: "T0003", ファイル名称: "C4103.png", ファイルbak名称: "C4103_BAK.png"。
          */
-        特記資料3(new RString("T0003"), new RString("C4103.png")),
+        特記資料3(new RString("T0003"), new RString("C4103.png"), new RString("C4103_BAK.png")),
         /**
-         * 特記資料4, コード: "T0004", ファイル名称: "C4104.png"。
+         * 特記資料4, コード: "T0004", ファイル名称: "C4104.png", ファイルbak名称: "C4104_BAK.png"。
          */
-        特記資料4(new RString("T0004"), new RString("C4104.png")),
+        特記資料4(new RString("T0004"), new RString("C4104.png"), new RString("C4104_BAK.png")),
         /**
-         * 特記資料5, コード: "T0005", ファイル名称: "C4105.png"。
+         * 特記資料5, コード: "T0005", ファイル名称: "C4105.png", ファイルbak名称: "C4105_BAK.png"。
          */
-        特記資料5(new RString("T0005"), new RString("C4105.png")),
+        特記資料5(new RString("T0005"), new RString("C4105.png"), new RString("C4105_BAK.png")),
         /**
-         * 特記資料6, コード: "T0006", ファイル名称: "C4106.png"。
+         * 特記資料6, コード: "T0006", ファイル名称: "C4106.png", ファイルbak名称: "C4106_BAK.png"。
          */
-        特記資料6(new RString("T0006"), new RString("C4106.png")),
+        特記資料6(new RString("T0006"), new RString("C4106.png"), new RString("C4106_BAK.png")),
         /**
-         * 特記資料7, コード: "T0007", ファイル名称: "C4107.png"。
+         * 特記資料7, コード: "T0007", ファイル名称: "C4107.png", ファイルbak名称: "C4107_BAK.png"。
          */
-        特記資料7(new RString("T0007"), new RString("C4107.png")),
+        特記資料7(new RString("T0007"), new RString("C4107.png"), new RString("C4107_BAK.png")),
         /**
-         * 特記資料8, コード: "T0008", ファイル名称: "C4108.png"。
+         * 特記資料8, コード: "T0008", ファイル名称: "C4108.png", ファイルbak名称: "C4108_BAK.png"。
          */
-        特記資料8(new RString("T0008"), new RString("C4108.png"));
+        特記資料8(new RString("T0008"), new RString("C4108.png"), new RString("C4108_BAK.png"));
 
         private final RString code;
         private final RString fileName;
+        private final RString fileNameBAK;
 
-        private TokkiJikoNo(RString code, RString fileName) {
+        private TokkiJikoNo(RString code, RString fileName, RString fileNameBAK) {
             this.code = code;
             this.fileName = fileName;
+            this.fileNameBAK = fileNameBAK;
         }
 
         /**
@@ -83,16 +85,26 @@ public class ChosaTokkiImageShokaiHandler {
         }
 
         /**
-         * コードを返します。
+         * ファイル名称を返します。
          *
          * @return コード
          */
         public RString getfileName() {
             return this.fileName;
         }
+
+        /**
+         * ファイルbak名称を返します。
+         *
+         * @return コード
+         */
+        public RString getfileNameBAK() {
+            return this.fileNameBAK;
+        }
     }
 
     private final ChosaTokkiImageShokaiDiv div;
+    private static final RString Title特記資料 = new RString("特記資料");
     private static final RString IMAGEFILENAME_特記資料1 = new RString("C4101.png");
     private static final RString IMAGEFILENAME_特記資料2 = new RString("C4102.png");
     private static final RString IMAGEFILENAME_特記資料3 = new RString("C4103.png");
@@ -132,23 +144,41 @@ public class ChosaTokkiImageShokaiHandler {
         NinteichosahyoTokkijikoManager tokkiManager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         List<NinteichosahyoTokkijiko> 認定調査特記事項EntityList = tokkiManager.get調査特記事項(申請書管理番号, 認定調査依頼履歴番号, 特記事項番号リスト);
 
+        RString 前回認定調査特記事項番号 = RString.EMPTY;
+        int 前回認定調査特記事項連番 = 0;
+        RString path原本 = RString.EMPTY;
+        RString pathマスク = RString.EMPTY;
         List<RString> imgGenponPathList = new ArrayList<>();
         List<RString> imgMaskPathList = new ArrayList<>();
-        List<RString> isMaskTokkiNoList = new ArrayList<>();
 
         for (NinteichosahyoTokkijiko 認定調査特記事項Entity : 認定調査特記事項EntityList) {
-            if (GenponMaskKubun.原本.getコード().equals(new RString(認定調査特記事項Entity.get原本マスク区分().toString()))) {
-                imgGenponPathList = createImagePathList(イメージ情報, 認定調査特記事項Entity);
+            if (!RString.isNullOrEmpty(前回認定調査特記事項番号)
+                    && (!前回認定調査特記事項番号.equals(認定調査特記事項Entity.get認定調査特記事項番号())
+                    || 前回認定調査特記事項連番 != 認定調査特記事項Entity.get認定調査特記事項連番())) {
+                imgGenponPathList.add(path原本);
+                imgMaskPathList.add(pathマスク);
+                path原本 = RString.EMPTY;
+                pathマスク = RString.EMPTY;
+            }
+
+            if (GenponMaskKubun.マスク.getコード().equals(認定調査特記事項Entity.get原本マスク区分().value())) {
+                pathマスク = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), false);
+                if (!RString.isNullOrEmpty(path原本)) {
+                    path原本 = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), true);
+                }
             } else {
-                imgMaskPathList = createImagePathList(イメージ情報, 認定調査特記事項Entity);
-                isMaskTokkiNoList.add(認定調査特記事項Entity.get認定調査特記事項番号());
+                if (RString.isNullOrEmpty(pathマスク)) {
+                    path原本 = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), false);
+                } else {
+                    path原本 = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), true);
+                }
             }
+
+            前回認定調査特記事項番号 = 認定調査特記事項Entity.get認定調査特記事項番号();
+            前回認定調査特記事項連番 = 認定調査特記事項Entity.get認定調査特記事項連番();
         }
-        for (RString maskTokkiNo : isMaskTokkiNoList) {
-            for (RString imgGenponPath : imgGenponPathList) {
-                replaceFileName(maskTokkiNo, imgGenponPath);
-            }
-        }
+        imgGenponPathList.add(path原本);
+        imgMaskPathList.add(pathマスク);
         
         List<RString> tabTitleGenponList = getTitleList(imgGenponPathList);
         List<RString> tabTitleMaskList = getTitleList(imgMaskPathList);
@@ -156,48 +186,9 @@ public class ChosaTokkiImageShokaiHandler {
         div.getCcdChosaTokkiShiryoShokai().initialize(imgGenponPathList, imgMaskPathList, tabTitleGenponList, tabTitleMaskList);
     }
 
-    private void replaceFileName(RString マスク特記事項番号, RString imgGenponPath) {
-        if (TokkiJikoNo.特記資料1.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料1, IMAGEFILENAME_特記資料1_原本);
-        } else if (TokkiJikoNo.特記資料2.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料2, IMAGEFILENAME_特記資料2_原本);
-        } else if (TokkiJikoNo.特記資料3.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料3, IMAGEFILENAME_特記資料3_原本);
-        } else if (TokkiJikoNo.特記資料4.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料4, IMAGEFILENAME_特記資料4_原本);
-        } else if (TokkiJikoNo.特記資料5.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料5, IMAGEFILENAME_特記資料5_原本);
-        } else if (TokkiJikoNo.特記資料6.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料6, IMAGEFILENAME_特記資料6_原本);
-        } else if (TokkiJikoNo.特記資料7.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料7, IMAGEFILENAME_特記資料7_原本);
-        } else if (TokkiJikoNo.特記資料8.getCode().equals(マスク特記事項番号)) {
-            imgGenponPath.replace(IMAGEFILENAME_特記資料8, IMAGEFILENAME_特記資料8_原本);
-        }
-    }
-
-    private List<RString> createImagePathList(Image イメージ情報, NinteichosahyoTokkijiko 認定調査特記事項) {
-        List<RString> imagePathList = new ArrayList<>();
-        RString imagePath = RString.EMPTY;
-        if (TokkiJikoNo.特記資料1.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料1);
-        } else if (TokkiJikoNo.特記資料2.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料2);
-        } else if (TokkiJikoNo.特記資料3.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料3);
-        } else if (TokkiJikoNo.特記資料4.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料4);
-        } else if (TokkiJikoNo.特記資料5.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料5);
-        } else if (TokkiJikoNo.特記資料6.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料6);
-        } else if (TokkiJikoNo.特記資料7.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料7);
-        } else if (TokkiJikoNo.特記資料8.getCode().equals(認定調査特記事項.get認定調査特記事項番号())) {
-            imagePath = 共有ファイルを引き出す(イメージ情報, IMAGEFILENAME_特記資料8);
-        }
-        imagePathList.add(imagePath);
-        return imagePathList;
+    private RString getImagePath(Image イメージ情報, RString 特記事項番号, boolean isExistマスク) {
+        TokkiJikoNo 特記事項 = TokkiJikoNo.valueOf(特記事項番号.toString());
+        return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(特記事項.getfileName(), isExistマスク));
     }
 
     private RString 共有ファイルを引き出す(Image イメージ情報, RString ファイル名) {
@@ -213,11 +204,11 @@ public class ChosaTokkiImageShokaiHandler {
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
         RString filePath = SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
-        return getImageSrc(Path.combinePath(filePath, replaceShareFileName(sharedFileName, true)));
+        return getImageSrc(Path.combinePath(filePath, sharedFileName));
     }
 
-    private RString replaceShareFileName(RString sharedFileName, boolean isイメージ原本) {
-        if (!isイメージ原本) {
+    private RString replaceShareFileName(RString sharedFileName, boolean isExistマスク) {
+        if (isExistマスク) {
             return sharedFileName.replace(".png", "_BAK.png");
         }
         return sharedFileName;
@@ -230,7 +221,7 @@ public class ChosaTokkiImageShokaiHandler {
     private List<RString> getTitleList(List<RString> 表示イメージ) {
         List<RString> titleList = new ArrayList<>();
         for (int index = 1; index <= 表示イメージ.size(); index++) {
-            titleList.add(new RString(index).concat("枚目"));
+            titleList.add(Title特記資料.concat(new RString(index)).concat("枚目"));
         }
         return titleList;
     }

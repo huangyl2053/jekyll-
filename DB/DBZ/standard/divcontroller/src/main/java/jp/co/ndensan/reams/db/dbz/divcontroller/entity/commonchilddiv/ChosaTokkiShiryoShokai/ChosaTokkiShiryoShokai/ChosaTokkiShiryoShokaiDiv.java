@@ -18,8 +18,7 @@ import java.util.List;
  * @author 自動生成
  */
 public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiryoShokaiDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -182,7 +181,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel1(genpoTabPanel1Div genpoTabPanel1) {
+    public void  setGenpoTabPanel1(genpoTabPanel1Div genpoTabPanel1) {
         this.getGenpoTabContainer().setGenpoTabPanel1(genpoTabPanel1);
     }
 
@@ -192,7 +191,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo1(StaticImage imgGenpo1) {
+    public void  setImgGenpo1(StaticImage imgGenpo1) {
         this.getGenpoTabContainer().getGenpoTabPanel1().setImgGenpo1(imgGenpo1);
     }
 
@@ -202,7 +201,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel2(genpoTabPanel2Div genpoTabPanel2) {
+    public void  setGenpoTabPanel2(genpoTabPanel2Div genpoTabPanel2) {
         this.getGenpoTabContainer().setGenpoTabPanel2(genpoTabPanel2);
     }
 
@@ -212,7 +211,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo2(StaticImage imgGenpo2) {
+    public void  setImgGenpo2(StaticImage imgGenpo2) {
         this.getGenpoTabContainer().getGenpoTabPanel2().setImgGenpo2(imgGenpo2);
     }
 
@@ -222,7 +221,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel3(genpoTabPanel3Div genpoTabPanel3) {
+    public void  setGenpoTabPanel3(genpoTabPanel3Div genpoTabPanel3) {
         this.getGenpoTabContainer().setGenpoTabPanel3(genpoTabPanel3);
     }
 
@@ -232,7 +231,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo3(StaticImage imgGenpo3) {
+    public void  setImgGenpo3(StaticImage imgGenpo3) {
         this.getGenpoTabContainer().getGenpoTabPanel3().setImgGenpo3(imgGenpo3);
     }
 
@@ -242,7 +241,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel4(genpoTabPanel4Div genpoTabPanel4) {
+    public void  setGenpoTabPanel4(genpoTabPanel4Div genpoTabPanel4) {
         this.getGenpoTabContainer().setGenpoTabPanel4(genpoTabPanel4);
     }
 
@@ -252,7 +251,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo4(StaticImage imgGenpo4) {
+    public void  setImgGenpo4(StaticImage imgGenpo4) {
         this.getGenpoTabContainer().getGenpoTabPanel4().setImgGenpo4(imgGenpo4);
     }
 
@@ -262,7 +261,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel5(genpoTabPanel5Div genpoTabPanel5) {
+    public void  setGenpoTabPanel5(genpoTabPanel5Div genpoTabPanel5) {
         this.getGenpoTabContainer().setGenpoTabPanel5(genpoTabPanel5);
     }
 
@@ -272,7 +271,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo5(StaticImage imgGenpo5) {
+    public void  setImgGenpo5(StaticImage imgGenpo5) {
         this.getGenpoTabContainer().getGenpoTabPanel5().setImgGenpo5(imgGenpo5);
     }
 
@@ -282,7 +281,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel6(genpoTabPanel6Div genpoTabPanel6) {
+    public void  setGenpoTabPanel6(genpoTabPanel6Div genpoTabPanel6) {
         this.getGenpoTabContainer().setGenpoTabPanel6(genpoTabPanel6);
     }
 
@@ -292,7 +291,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo6(StaticImage imgGenpo6) {
+    public void  setImgGenpo6(StaticImage imgGenpo6) {
         this.getGenpoTabContainer().getGenpoTabPanel6().setImgGenpo6(imgGenpo6);
     }
 
@@ -302,7 +301,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel7(genpoTabPanel7Div genpoTabPanel7) {
+    public void  setGenpoTabPanel7(genpoTabPanel7Div genpoTabPanel7) {
         this.getGenpoTabContainer().setGenpoTabPanel7(genpoTabPanel7);
     }
 
@@ -312,7 +311,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo7(StaticImage imgGenpo7) {
+    public void  setImgGenpo7(StaticImage imgGenpo7) {
         this.getGenpoTabContainer().getGenpoTabPanel7().setImgGenpo7(imgGenpo7);
     }
 
@@ -322,7 +321,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setGenpoTabPanel8(genpoTabPanel8Div genpoTabPanel8) {
+    public void  setGenpoTabPanel8(genpoTabPanel8Div genpoTabPanel8) {
         this.getGenpoTabContainer().setGenpoTabPanel8(genpoTabPanel8);
     }
 
@@ -332,7 +331,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgGenpo8(StaticImage imgGenpo8) {
+    public void  setImgGenpo8(StaticImage imgGenpo8) {
         this.getGenpoTabContainer().getGenpoTabPanel8().setImgGenpo8(imgGenpo8);
     }
 
@@ -342,7 +341,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel1(maskTabPanel1Div maskTabPanel1) {
+    public void  setMaskTabPanel1(maskTabPanel1Div maskTabPanel1) {
         this.getMaskTabContainer().setMaskTabPanel1(maskTabPanel1);
     }
 
@@ -352,7 +351,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask1(StaticImage imgMask1) {
+    public void  setImgMask1(StaticImage imgMask1) {
         this.getMaskTabContainer().getMaskTabPanel1().setImgMask1(imgMask1);
     }
 
@@ -362,7 +361,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel2(maskTabPanel2Div maskTabPanel2) {
+    public void  setMaskTabPanel2(maskTabPanel2Div maskTabPanel2) {
         this.getMaskTabContainer().setMaskTabPanel2(maskTabPanel2);
     }
 
@@ -372,7 +371,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask2(StaticImage imgMask2) {
+    public void  setImgMask2(StaticImage imgMask2) {
         this.getMaskTabContainer().getMaskTabPanel2().setImgMask2(imgMask2);
     }
 
@@ -382,7 +381,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel3(maskTabPanel3Div maskTabPanel3) {
+    public void  setMaskTabPanel3(maskTabPanel3Div maskTabPanel3) {
         this.getMaskTabContainer().setMaskTabPanel3(maskTabPanel3);
     }
 
@@ -392,7 +391,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask3(StaticImage imgMask3) {
+    public void  setImgMask3(StaticImage imgMask3) {
         this.getMaskTabContainer().getMaskTabPanel3().setImgMask3(imgMask3);
     }
 
@@ -402,7 +401,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel4(maskTabPanel4Div maskTabPanel4) {
+    public void  setMaskTabPanel4(maskTabPanel4Div maskTabPanel4) {
         this.getMaskTabContainer().setMaskTabPanel4(maskTabPanel4);
     }
 
@@ -412,7 +411,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask4(StaticImage imgMask4) {
+    public void  setImgMask4(StaticImage imgMask4) {
         this.getMaskTabContainer().getMaskTabPanel4().setImgMask4(imgMask4);
     }
 
@@ -422,7 +421,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel5(maskTabPanel5Div maskTabPanel5) {
+    public void  setMaskTabPanel5(maskTabPanel5Div maskTabPanel5) {
         this.getMaskTabContainer().setMaskTabPanel5(maskTabPanel5);
     }
 
@@ -432,7 +431,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask5(StaticImage imgMask5) {
+    public void  setImgMask5(StaticImage imgMask5) {
         this.getMaskTabContainer().getMaskTabPanel5().setImgMask5(imgMask5);
     }
 
@@ -442,7 +441,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel6(maskTabPanel6Div maskTabPanel6) {
+    public void  setMaskTabPanel6(maskTabPanel6Div maskTabPanel6) {
         this.getMaskTabContainer().setMaskTabPanel6(maskTabPanel6);
     }
 
@@ -452,7 +451,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask6(StaticImage imgMask6) {
+    public void  setImgMask6(StaticImage imgMask6) {
         this.getMaskTabContainer().getMaskTabPanel6().setImgMask6(imgMask6);
     }
 
@@ -462,7 +461,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel7(maskTabPanel7Div maskTabPanel7) {
+    public void  setMaskTabPanel7(maskTabPanel7Div maskTabPanel7) {
         this.getMaskTabContainer().setMaskTabPanel7(maskTabPanel7);
     }
 
@@ -472,7 +471,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask7(StaticImage imgMask7) {
+    public void  setImgMask7(StaticImage imgMask7) {
         this.getMaskTabContainer().getMaskTabPanel7().setImgMask7(imgMask7);
     }
 
@@ -482,7 +481,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setMaskTabPanel8(maskTabPanel8Div maskTabPanel8) {
+    public void  setMaskTabPanel8(maskTabPanel8Div maskTabPanel8) {
         this.getMaskTabContainer().setMaskTabPanel8(maskTabPanel8);
     }
 
@@ -492,12 +491,14 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
-    public void setImgMask8(StaticImage imgMask8) {
+    public void  setImgMask8(StaticImage imgMask8) {
         this.getMaskTabContainer().getMaskTabPanel8().setImgMask8(imgMask8);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private static final RString SELECT原本 = new RString("key0");
+
     /**
      * 画面初期化
      *
@@ -512,7 +513,9 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
         // 引数保存例
         // パスのリスト:imgPath1,imgPath12,RString.Empty,imgPath14...(イメージがない場合、RString.Emptyを設定する)
         // タイトルリストのItem数はパスリストのItem数と一致してください。
-
+        this.radGenpoMask.setSelectedKey(SELECT原本);
+        this.maskTabContainer.setDisplayNone(true);
+        
         if (!imgGneponPathList.isEmpty()) {
             if (imgGneponPathList.size() >= 1) {
                 getGenpoTabContainer().getGenpoTabPanel1().setVisible(true);
