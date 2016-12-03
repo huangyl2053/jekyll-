@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -56,14 +57,14 @@ public class NinteiChosaJokyoDataPass implements Serializable {
     private Code 要介護認定一次判定結果コード;
     private FlexibleDate 要介護認定一次判定年月日;
     private Code 要介護認定一次判定結果コード_認知症加算;
-    private FlexibleDate 介護認定審査会資料作成年月日;
-    private FlexibleDate 認定審査会予定年月日;
-    private FlexibleDate 二次判定年月日;
+    private RDate 介護認定審査会資料作成年月日;
+    private RDate 認定審査会予定年月日;
+    private RDate 二次判定年月日;
     private Code 二次判定要介護状態区分コード;
     private int 二次判定認定有効期間;
     private FlexibleDate 二次判定認定有効開始年月日;
     private FlexibleDate 二次判定認定有効終了年月日;
-    private FlexibleDate 延期通知発行年月日;
+    private RDate 延期通知発行年月日;
     private int 延期通知発行回数;
     private ShinseishoKanriNo 申請書管理番号;
     private LasdecCode 市町村コード;

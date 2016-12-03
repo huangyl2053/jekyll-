@@ -28,4 +28,7 @@ public class IKijuntsukiShichosonjohoRelateEntity {
     private RString chosainKanaShimei;
     private boolean jokyoFlag2;
     private RString shichosonCode;
+    private RString 郵便番号;
+    private RString 住所;
+    private RString 電話番号;
 }

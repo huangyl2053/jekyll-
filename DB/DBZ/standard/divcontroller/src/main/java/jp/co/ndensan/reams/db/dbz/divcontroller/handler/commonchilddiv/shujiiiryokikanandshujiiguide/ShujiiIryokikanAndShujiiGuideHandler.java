@@ -86,6 +86,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
                 if (!business.is主治医医療機関情報_状況フラグ() || !business.is主治医情報_状況フラグ()) {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
                 }
+                kensakuKekkaIchiran_Row.setIryoKikanYubinBango(business.get主治医医療機関情報_郵便番号());               
                 kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
             }
         }
@@ -120,6 +121,10 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
             newDataPassModel.set主治医コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiCode().getValue());
             newDataPassModel.set主治医氏名(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiShimei());
         }
+        newDataPassModel.set郵便番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanYubinBango());
+        newDataPassModel.set住所(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanjusho());
+        newDataPassModel.set電話番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikantelNo());
+        
         div.setHdnDataPass(DataPassingConverter.serialize(newDataPassModel));
     }
 

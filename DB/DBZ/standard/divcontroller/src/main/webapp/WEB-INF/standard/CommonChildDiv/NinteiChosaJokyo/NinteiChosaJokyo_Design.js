@@ -272,15 +272,15 @@ var DBZ;
             };
 
             Controls.prototype.txtShinsakaiShiryoSakuseiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsakaiShiryoSakuseiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtShinsakaiShiryoSakuseiDate"));
             };
 
             Controls.prototype.txtShinsakaiKaisaiYoteiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsakaiKaisaiYoteiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtShinsakaiKaisaiYoteiDate"));
             };
 
             Controls.prototype.txtNijiHanteiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNijiHanteiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtNijiHanteiDate"));
             };
 
             Controls.prototype.ddlNijiHanteiKekka = function () {
@@ -304,7 +304,7 @@ var DBZ;
             };
 
             Controls.prototype.txtEnkiTsuchiHakkoDay = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtEnkiTsuchiHakkoDay"));
+                return new UZA.TextBoxDate(this.convFiledName("txtEnkiTsuchiHakkoDay"));
             };
 
             Controls.prototype.txtEnkiTsuchiHakkoCount = function () {

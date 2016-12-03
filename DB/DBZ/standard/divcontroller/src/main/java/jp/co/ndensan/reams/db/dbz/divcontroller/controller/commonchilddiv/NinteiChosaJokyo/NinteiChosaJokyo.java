@@ -16,7 +16,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChos
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosajokyo.NinteiChosaJokyoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -211,6 +214,21 @@ public class NinteiChosaJokyo {
         div.getTxtNinteiChosaItakusakiName().setValue(modle.get委託先名());
         div.getTxtNinteiChosainCode().setValue(modle.get調査員コード());
         div.getTxtNinteiChosainName().setValue(modle.get調査員名());
+        if (modle.get郵便番号() == null) {
+            div.getTxtNinteiChosaYubinNo().setValue(YubinNo.EMPTY);
+        } else {
+            div.getTxtNinteiChosaYubinNo().setValue(new YubinNo(modle.get郵便番号()));
+        }
+        if (modle.get住所() == null) {
+            div.getTxtNinteiChosaJusho().setDomain(AtenaJusho.EMPTY);
+        } else {
+            div.getTxtNinteiChosaJusho().setDomain(new AtenaJusho(modle.get住所()));
+        }
+        if (modle.get電話番号() == null) {
+            div.getTxtNinteiChosaTelNo().setDomain(TelNo.EMPTY);
+        } else {
+            div.getTxtNinteiChosaTelNo().setDomain(new TelNo(modle.get電話番号()));
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -245,6 +263,21 @@ public class NinteiChosaJokyo {
                 KijuntsukiShichosonjohoiDataPassModel.class);
         div.getTxtNinteiChosaItakusakiCode().setValue(modle.get委託先コード());
         div.getTxtNinteiChosaItakusakiName().setValue(modle.get委託先名());
+        if (modle.get郵便番号() == null) {
+            div.getTxtNinteiChosaYubinNo().setValue(YubinNo.EMPTY);
+        } else {
+            div.getTxtNinteiChosaYubinNo().setValue(new YubinNo(modle.get郵便番号()));
+        }
+        if (modle.get住所() == null) {
+            div.getTxtNinteiChosaJusho().setDomain(AtenaJusho.EMPTY);
+        } else {
+            div.getTxtNinteiChosaJusho().setDomain(new AtenaJusho(modle.get住所()));
+        }
+        if (modle.get電話番号() == null) {
+            div.getTxtNinteiChosaTelNo().setDomain(TelNo.EMPTY);
+        } else {
+            div.getTxtNinteiChosaTelNo().setDomain(new TelNo(modle.get電話番号()));
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -299,6 +332,21 @@ public class NinteiChosaJokyo {
         div.getTxtShujiiName().setValue(modle.get主治医氏名());
         div.getTxtShujiiIryoKikanCode().setValue(modle.get主治医医療機関コード());
         div.getTxtShujiiIryoKikanName().setValue(modle.get主治医医療機関名称());
+        if (modle.get郵便番号() == null) {
+            div.getTxtShujiiIryoKikanYubinNo().setValue(YubinNo.EMPTY);
+        } else {
+            div.getTxtShujiiIryoKikanYubinNo().setValue(new YubinNo(modle.get郵便番号()));
+        }
+        if (modle.get住所() == null) {
+            div.getTxtShujiiIryoKikanJusho().setDomain(AtenaJusho.EMPTY);
+        } else {
+            div.getTxtShujiiIryoKikanJusho().setDomain(new AtenaJusho(modle.get住所()));
+        }
+        if (modle.get電話番号() == null) {
+            div.getTxtShujiiIryoKikanTelNo().setDomain(TelNo.EMPTY);
+        } else {
+            div.getTxtShujiiIryoKikanTelNo().setDomain(new TelNo(modle.get電話番号()));
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -313,6 +361,21 @@ public class NinteiChosaJokyo {
                 ShujiiIryokikanandshujiiDataPassModel.class);
         div.getTxtShujiiIryoKikanCode().setValue(modle.get主治医医療機関コード());
         div.getTxtShujiiIryoKikanName().setValue(modle.get主治医医療機関名称());
+        if (modle.get郵便番号() == null) {
+            div.getTxtShujiiIryoKikanYubinNo().setValue(YubinNo.EMPTY);
+        } else {
+            div.getTxtShujiiIryoKikanYubinNo().setValue(new YubinNo(modle.get郵便番号()));
+        }
+        if (modle.get住所() == null) {
+            div.getTxtShujiiIryoKikanJusho().setDomain(AtenaJusho.EMPTY);
+        } else {
+            div.getTxtShujiiIryoKikanJusho().setDomain(new AtenaJusho(modle.get住所()));
+        }
+        if (modle.get電話番号() == null) {
+            div.getTxtShujiiIryoKikanTelNo().setDomain(TelNo.EMPTY);
+        } else {
+            div.getTxtShujiiIryoKikanTelNo().setDomain(new TelNo(modle.get電話番号()));
+        }
         return ResponseData.of(div).respond();
     }
 

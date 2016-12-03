@@ -50,7 +50,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         if (dataPassModel != null) {
             div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
             div.getTxtChosainCodeFrom().setValue(dataPassModel.get調査員コード());
-            }
+        }
         List<KeyValueDataSource> ddlShoriKubun = new ArrayList<>();
         ddlShoriKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaItakuKubunCode code : ChosaItakuKubunCode.values()) {
@@ -111,6 +111,9 @@ public class ChosaItakusakiAndChosainGuideHandler {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
                     div.getDgKensakuKekkaIchiran().setReadOnly(true);
                 }
+                kensakuKekkaIchiran_Row.setYubiBango(business.get郵便番号());
+                kensakuKekkaIchiran_Row.setJyuSho(business.get住所());
+                kensakuKekkaIchiran_Row.setTelCode(business.get電話番号());
                 kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
             }
             div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
@@ -133,6 +136,9 @@ public class ChosaItakusakiAndChosainGuideHandler {
             if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                 dataPassModel.set市町村コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShichosonCode());
             }
+            dataPassModel.set郵便番号(div.getDgKensakuKekkaIchiran().getClickedItem().getYubiBango());
+            dataPassModel.set住所(div.getDgKensakuKekkaIchiran().getClickedItem().getJyuSho());
+            dataPassModel.set電話番号(div.getDgKensakuKekkaIchiran().getClickedItem().getTelCode());
             if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
                 dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
                 dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());

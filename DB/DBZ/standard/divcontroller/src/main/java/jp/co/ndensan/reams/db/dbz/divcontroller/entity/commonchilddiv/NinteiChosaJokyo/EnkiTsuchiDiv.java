@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class EnkiTsuchiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,7 +22,7 @@ public class EnkiTsuchiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtEnkiTsuchiHakkoDay")
-    private TextBoxFlexibleDate txtEnkiTsuchiHakkoDay;
+    private TextBoxDate txtEnkiTsuchiHakkoDay;
     @JsonProperty("txtEnkiTsuchiHakkoCount")
     private TextBoxNum txtEnkiTsuchiHakkoCount;
 
@@ -37,7 +37,7 @@ public class EnkiTsuchiDiv extends Panel {
      * @return txtEnkiTsuchiHakkoDay
      */
     @JsonProperty("txtEnkiTsuchiHakkoDay")
-    public TextBoxFlexibleDate getTxtEnkiTsuchiHakkoDay() {
+    public TextBoxDate getTxtEnkiTsuchiHakkoDay() {
         return txtEnkiTsuchiHakkoDay;
     }
 
@@ -46,7 +46,7 @@ public class EnkiTsuchiDiv extends Panel {
      * @param txtEnkiTsuchiHakkoDay txtEnkiTsuchiHakkoDay
      */
     @JsonProperty("txtEnkiTsuchiHakkoDay")
-    public void setTxtEnkiTsuchiHakkoDay(TextBoxFlexibleDate txtEnkiTsuchiHakkoDay) {
+    public void setTxtEnkiTsuchiHakkoDay(TextBoxDate txtEnkiTsuchiHakkoDay) {
         this.txtEnkiTsuchiHakkoDay = txtEnkiTsuchiHakkoDay;
     }
 
