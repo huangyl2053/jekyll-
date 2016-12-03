@@ -130,9 +130,6 @@ public class ShinseiKensaku {
         div.getBtnModoru().setDisabled(false);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
-        if (MENUID_DBEMN21001.equals(menuID)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
-        }
         if (searchResult.records().size() == 1) {
             div.getBtnClear().setDisabled(false);
             div.getTxtMaxDisp().setDisabled(false);
