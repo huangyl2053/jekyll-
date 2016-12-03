@@ -140,15 +140,15 @@ var DBZ;
             };
 
             Controls.prototype.txtNinteiChosaIraiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaIraiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaIraiDate"));
             };
 
             Controls.prototype.txtNinteiChosaJisshiYoteiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaJisshiYoteiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJisshiYoteiDate"));
             };
 
             Controls.prototype.txtNinteiChosaJisshiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaJisshiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJisshiDate"));
             };
 
             Controls.prototype.ddlNinteiChosaItakusakiKubun = function () {
@@ -236,15 +236,15 @@ var DBZ;
             };
 
             Controls.prototype.txtShujiiIryoKikanIraiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanIraiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanIraiDate"));
             };
 
             Controls.prototype.txtShujiiIryoKikanNyushuYoteiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanNyushuYoteiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanNyushuYoteiDate"));
             };
 
             Controls.prototype.txtShujiiIryoKikanNyushuDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanNyushuDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanNyushuDate"));
             };
 
             Controls.prototype.chkShujiiKubun = function () {
@@ -260,7 +260,7 @@ var DBZ;
             };
 
             Controls.prototype.txtIchijiHanteiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIchijiHanteiDate"));
+                return new UZA.TextBoxDate(this.convFiledName("txtIchijiHanteiDate"));
             };
 
             Controls.prototype.ddlNinchishoKasangoYokaigodo = function () {

@@ -43,11 +43,11 @@ public class NinteiChosaDiv extends Panel {
     @JsonProperty("txtNinteiChosaTelNo")
     private TextBoxTelNo txtNinteiChosaTelNo;
     @JsonProperty("txtNinteiChosaIraiDate")
-    private TextBoxFlexibleDate txtNinteiChosaIraiDate;
+    private TextBoxDate txtNinteiChosaIraiDate;
     @JsonProperty("txtNinteiChosaJisshiYoteiDate")
-    private TextBoxFlexibleDate txtNinteiChosaJisshiYoteiDate;
+    private TextBoxDate txtNinteiChosaJisshiYoteiDate;
     @JsonProperty("txtNinteiChosaJisshiDate")
-    private TextBoxFlexibleDate txtNinteiChosaJisshiDate;
+    private TextBoxDate txtNinteiChosaJisshiDate;
     @JsonProperty("ddlNinteiChosaItakusakiKubun")
     private DropDownList ddlNinteiChosaItakusakiKubun;
 
@@ -242,7 +242,7 @@ public class NinteiChosaDiv extends Panel {
      * @return txtNinteiChosaIraiDate
      */
     @JsonProperty("txtNinteiChosaIraiDate")
-    public TextBoxFlexibleDate getTxtNinteiChosaIraiDate() {
+    public TextBoxDate getTxtNinteiChosaIraiDate() {
         return txtNinteiChosaIraiDate;
     }
 
@@ -251,7 +251,7 @@ public class NinteiChosaDiv extends Panel {
      * @param txtNinteiChosaIraiDate txtNinteiChosaIraiDate
      */
     @JsonProperty("txtNinteiChosaIraiDate")
-    public void setTxtNinteiChosaIraiDate(TextBoxFlexibleDate txtNinteiChosaIraiDate) {
+    public void setTxtNinteiChosaIraiDate(TextBoxDate txtNinteiChosaIraiDate) {
         this.txtNinteiChosaIraiDate = txtNinteiChosaIraiDate;
     }
 
@@ -260,7 +260,7 @@ public class NinteiChosaDiv extends Panel {
      * @return txtNinteiChosaJisshiYoteiDate
      */
     @JsonProperty("txtNinteiChosaJisshiYoteiDate")
-    public TextBoxFlexibleDate getTxtNinteiChosaJisshiYoteiDate() {
+    public TextBoxDate getTxtNinteiChosaJisshiYoteiDate() {
         return txtNinteiChosaJisshiYoteiDate;
     }
 
@@ -269,7 +269,7 @@ public class NinteiChosaDiv extends Panel {
      * @param txtNinteiChosaJisshiYoteiDate txtNinteiChosaJisshiYoteiDate
      */
     @JsonProperty("txtNinteiChosaJisshiYoteiDate")
-    public void setTxtNinteiChosaJisshiYoteiDate(TextBoxFlexibleDate txtNinteiChosaJisshiYoteiDate) {
+    public void setTxtNinteiChosaJisshiYoteiDate(TextBoxDate txtNinteiChosaJisshiYoteiDate) {
         this.txtNinteiChosaJisshiYoteiDate = txtNinteiChosaJisshiYoteiDate;
     }
 
@@ -278,7 +278,7 @@ public class NinteiChosaDiv extends Panel {
      * @return txtNinteiChosaJisshiDate
      */
     @JsonProperty("txtNinteiChosaJisshiDate")
-    public TextBoxFlexibleDate getTxtNinteiChosaJisshiDate() {
+    public TextBoxDate getTxtNinteiChosaJisshiDate() {
         return txtNinteiChosaJisshiDate;
     }
 
@@ -287,7 +287,7 @@ public class NinteiChosaDiv extends Panel {
      * @param txtNinteiChosaJisshiDate txtNinteiChosaJisshiDate
      */
     @JsonProperty("txtNinteiChosaJisshiDate")
-    public void setTxtNinteiChosaJisshiDate(TextBoxFlexibleDate txtNinteiChosaJisshiDate) {
+    public void setTxtNinteiChosaJisshiDate(TextBoxDate txtNinteiChosaJisshiDate) {
         this.txtNinteiChosaJisshiDate = txtNinteiChosaJisshiDate;
     }
 

@@ -24,7 +24,7 @@ public class IchijiHanteiDiv extends Panel {
     @JsonProperty("ddlYokaigodo")
     private DropDownList ddlYokaigodo;
     @JsonProperty("txtIchijiHanteiDate")
-    private TextBoxFlexibleDate txtIchijiHanteiDate;
+    private TextBoxDate txtIchijiHanteiDate;
     @JsonProperty("ddlNinchishoKasangoYokaigodo")
     private DropDownList ddlNinchishoKasangoYokaigodo;
 
@@ -57,7 +57,7 @@ public class IchijiHanteiDiv extends Panel {
      * @return txtIchijiHanteiDate
      */
     @JsonProperty("txtIchijiHanteiDate")
-    public TextBoxFlexibleDate getTxtIchijiHanteiDate() {
+    public TextBoxDate getTxtIchijiHanteiDate() {
         return txtIchijiHanteiDate;
     }
 
@@ -66,7 +66,7 @@ public class IchijiHanteiDiv extends Panel {
      * @param txtIchijiHanteiDate txtIchijiHanteiDate
      */
     @JsonProperty("txtIchijiHanteiDate")
-    public void setTxtIchijiHanteiDate(TextBoxFlexibleDate txtIchijiHanteiDate) {
+    public void setTxtIchijiHanteiDate(TextBoxDate txtIchijiHanteiDate) {
         this.txtIchijiHanteiDate = txtIchijiHanteiDate;
     }
 

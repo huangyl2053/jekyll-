@@ -504,32 +504,32 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiChosaIraiDate() {
+    public TextBoxDate getTxtNinteiChosaIraiDate() {
         return this.getNinteiChosa().getTxtNinteiChosaIraiDate();
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaIraiDate(TextBoxFlexibleDate txtNinteiChosaIraiDate) {
+    public void setTxtNinteiChosaIraiDate(TextBoxDate txtNinteiChosaIraiDate) {
         this.getNinteiChosa().setTxtNinteiChosaIraiDate(txtNinteiChosaIraiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiChosaJisshiYoteiDate() {
+    public TextBoxDate getTxtNinteiChosaJisshiYoteiDate() {
         return this.getNinteiChosa().getTxtNinteiChosaJisshiYoteiDate();
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaJisshiYoteiDate(TextBoxFlexibleDate txtNinteiChosaJisshiYoteiDate) {
+    public void setTxtNinteiChosaJisshiYoteiDate(TextBoxDate txtNinteiChosaJisshiYoteiDate) {
         this.getNinteiChosa().setTxtNinteiChosaJisshiYoteiDate(txtNinteiChosaJisshiYoteiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiChosaJisshiDate() {
+    public TextBoxDate getTxtNinteiChosaJisshiDate() {
         return this.getNinteiChosa().getTxtNinteiChosaJisshiDate();
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaJisshiDate(TextBoxFlexibleDate txtNinteiChosaJisshiDate) {
+    public void setTxtNinteiChosaJisshiDate(TextBoxDate txtNinteiChosaJisshiDate) {
         this.getNinteiChosa().setTxtNinteiChosaJisshiDate(txtNinteiChosaJisshiDate);
     }
 
@@ -724,32 +724,32 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanIraiDate() {
+    public TextBoxDate getTxtShujiiIryoKikanIraiDate() {
         return this.getShujiiAndShujiIryoKikan().getTxtShujiiIryoKikanIraiDate();
     }
 
     @JsonIgnore
-    public void setTxtShujiiIryoKikanIraiDate(TextBoxFlexibleDate txtShujiiIryoKikanIraiDate) {
+    public void setTxtShujiiIryoKikanIraiDate(TextBoxDate txtShujiiIryoKikanIraiDate) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanIraiDate(txtShujiiIryoKikanIraiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanNyushuYoteiDate() {
+    public TextBoxDate getTxtShujiiIryoKikanNyushuYoteiDate() {
         return this.getShujiiAndShujiIryoKikan().getTxtShujiiIryoKikanNyushuYoteiDate();
     }
 
     @JsonIgnore
-    public void setTxtShujiiIryoKikanNyushuYoteiDate(TextBoxFlexibleDate txtShujiiIryoKikanNyushuYoteiDate) {
+    public void setTxtShujiiIryoKikanNyushuYoteiDate(TextBoxDate txtShujiiIryoKikanNyushuYoteiDate) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanNyushuYoteiDate(txtShujiiIryoKikanNyushuYoteiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanNyushuDate() {
+    public TextBoxDate getTxtShujiiIryoKikanNyushuDate() {
         return this.getShujiiAndShujiIryoKikan().getTxtShujiiIryoKikanNyushuDate();
     }
 
     @JsonIgnore
-    public void setTxtShujiiIryoKikanNyushuDate(TextBoxFlexibleDate txtShujiiIryoKikanNyushuDate) {
+    public void setTxtShujiiIryoKikanNyushuDate(TextBoxDate txtShujiiIryoKikanNyushuDate) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanNyushuDate(txtShujiiIryoKikanNyushuDate);
     }
 
@@ -774,12 +774,12 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtIchijiHanteiDate() {
+    public TextBoxDate getTxtIchijiHanteiDate() {
         return this.getIchijiHantei().getTxtIchijiHanteiDate();
     }
 
     @JsonIgnore
-    public void setTxtIchijiHanteiDate(TextBoxFlexibleDate txtIchijiHanteiDate) {
+    public void setTxtIchijiHanteiDate(TextBoxDate txtIchijiHanteiDate) {
         this.getIchijiHantei().setTxtIchijiHanteiDate(txtIchijiHanteiDate);
     }
 
