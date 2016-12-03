@@ -201,13 +201,13 @@ public class IkenshoSakuseiIraiHandler {
     }
 
     private FlexibleDate get主治医意見書作成期限年月日(FlexibleDate 認定申請年月日, IkenshoSakuseiIraiDiv div) {
-        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
+        RString コンフィグ_主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         FlexibleDate 提出期限 = FlexibleDate.EMPTY;
         RString key = div.getRadKigen().getSelectedKey();
         int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
-        if (主治医意見書作成期限設定方法_1.equals(認定調査期限設定方法)) {
+        if (主治医意見書作成期限設定方法_1.equals(コンフィグ_主治医意見書作成期限設定方法)) {
             if (SELECTED_KEY0.equals(key)) {
                 提出期限 = new FlexibleDate(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数).toDateString());
             } else if (SELECTED_KEY1.equals(key)) {
