@@ -111,23 +111,24 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
         } else {
             reportId = ReportIdDBE.DBE517132.getReportId().value();
         }
-        batchWrite = BatchReportFactory.createBatchReportWriter(reportId).addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
+        batchWrite = BatchReportFactory.createBatchReportWriter(reportId).addBreak(new BreakerCatalog<TokkiText1ReportSource>()
+                .simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
 
-
-
-            TokkiText1ReportSource.LAYOUTBREAKITEM) {
+                    TokkiText1ReportSource.LAYOUTBREAKITEM) {
             @Override
-            public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
-                    ReportLineRecord<TokkiText1ReportSource> currentRecord, ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
-                int layout = currentRecord.getSource().layoutBreakItem;
-                currentRecord.setFormGroupIndex(layout);
-                if (nextRecord != null && nextRecord.getSource() != null) {
-                    layout = nextRecord.getSource().layoutBreakItem;
-                    nextRecord.setFormGroupIndex(layout);
-                }
-                return currentRecord;
-            }
-        }).create();
+                    public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
+                            ReportLineRecord<TokkiText1ReportSource> currentRecord,
+                            ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layoutBreakItem;
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layoutBreakItem;
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                }).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 

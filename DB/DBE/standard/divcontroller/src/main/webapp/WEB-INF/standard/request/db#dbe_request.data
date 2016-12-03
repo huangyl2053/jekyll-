@@ -1,4 +1,5 @@
 
+dbe/db/dbe/ChosaKekkaInfoGaikyo/onBeforeOpenDialog_btnMaskingGaikyoChosa
 dbe/db/dbe/ChosaKekkaInfoGaikyo/onClick_Moderu
 dbe/db/dbe/ChosaKekkaInfoGaikyo/onLoad
 dbe/db/dbe/ChosaKekkaInfoKihon/onBeforeOpenDialog_btnTokkiJiko
@@ -308,11 +309,14 @@ dbe/db/dbe/KojinIraiNaiyouKoshin/btn_Back
 dbe/db/dbe/KojinIraiNaiyouKoshin/onLoad
 dbe/db/dbe/KojinJokyoShokai/onClick_btnBackIryokikanToComplet
 dbe/db/dbe/KojinJokyoShokai/onClick_btnBackIryokikanToComplete
+dbe/db/dbe/KojinJokyoShokai/onClick_btnChosaKekkaInfoGaikyo
+dbe/db/dbe/KojinJokyoShokai/onClick_btnChosaKekkaInfoKihon
 dbe/db/dbe/KojinJokyoShokai/onClick_btnNinteiChosaIraiShokai
 dbe/db/dbe/KojinJokyoShokai/onClick_btnRenrakusaki
 dbe/db/dbe/KojinJokyoShokai/onClick_btnShichosonRenrakuJiko
 dbe/db/dbe/KojinJokyoShokai/onClick_btnShinsakaiJoho
 dbe/db/dbe/KojinJokyoShokai/onClick_btnShujiiIkenshoSakuseiIraiShokai
+dbe/db/dbe/KojinJokyoShokai/onClick_btnShujiiIkenshoShokai
 dbe/db/dbe/KojinJokyoShokai/onClick_btnToShinchokuJyokyo
 dbe/db/dbe/KojinJokyoShokai/onClick_btnprint
 dbe/db/dbe/KojinJokyoShokai/onLoad
@@ -369,6 +373,7 @@ dbe/db/dbe/NinteiChosaHoshuShokai/onClick_btnModoru
 dbe/db/dbe/NinteiChosaHoshuShokai/onClick_btnPulish
 dbe/db/dbe/NinteiChosaHoshuShokai/onClick_btnShutsutyoku
 dbe/db/dbe/NinteiChosaHoshuShokai/onLoad
+dbe/db/dbe/NinteiChosaIrai/onBeforeClick_BtnPrint
 dbe/db/dbe/NinteiChosaIrai/onChange_ccdHokenshaList
 dbe/db/dbe/NinteiChosaIrai/onChange_radKigen
 dbe/db/dbe/NinteiChosaIrai/onClick_BtnPrint
@@ -379,6 +384,7 @@ dbe/db/dbe/NinteiChosaIrai/onClick_btnBackToChosainSentaku
 dbe/db/dbe/NinteiChosaIrai/onClick_btnBackToItakusakiSentaku
 dbe/db/dbe/NinteiChosaIrai/onClick_btnHozon
 dbe/db/dbe/NinteiChosaIrai/onClick_btnKaijo
+dbe/db/dbe/NinteiChosaIrai/onClick_btnNextChosaTaishoshaSelect
 dbe/db/dbe/NinteiChosaIrai/onClick_btnWaritsuke
 dbe/db/dbe/NinteiChosaIrai/onLoad
 dbe/db/dbe/NinteiChosaIrai/onSelect_dgChosaItakusakiIchiran
@@ -678,8 +684,6 @@ dbe/db/dbe/NinteishinsaKekkaOutput/onChange_radShutsuryokuKubun
 dbe/db/dbe/NinteishinsaKekkaOutput/onClick_btnDataSakusei
 dbe/db/dbe/NinteishinsaKekkaOutput/onClick_btnHyoji
 dbe/db/dbe/NinteishinsaKekkaOutput/onLoad
-dbe/db/dbe/Ninteishinseibi/btn_clear
-dbe/db/dbe/Ninteishinseibi/btn_kenSaKu
 dbe/db/dbe/Ninteishinseibi/btn_save
 dbe/db/dbe/Ninteishinseibi/btn_toRiKoMi
 dbe/db/dbe/Ninteishinseibi/onLoad
@@ -718,6 +722,7 @@ dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onChange_radDateRangeCriteriaTy
 dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onChange_radSearchType
 dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onLoad
 dbe/db/dbe/ShinchokuDataOutput/btn_check
+dbe/db/dbe/ShinchokuDataOutput/onActive
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnHihokensha
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnJokenClear
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnKensaku
@@ -962,6 +967,8 @@ dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onClik_Clear
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onClik_Search
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onClik_SelectBtn
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onLoad
+dbe/db/dbe/ShujiiIkenshoShokai/onClick_btnClose
+dbe/db/dbe/ShujiiIkenshoShokai/onLoad
 dbe/db/dbe/ShujiiIkenshoTokusokujoHakko/beforeHakkou
 dbe/db/dbe/ShujiiIkenshoTokusokujoHakko/hakkou
 dbe/db/dbe/ShujiiIkenshoTokusokujoHakko/onChange_ccdHokenshaList

@@ -4,12 +4,20 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnBack = function () {
-                return "onClick_btnBack";
+            Events.onClick_btnIchijiHantei = function () {
+                return "onClick_btnIchijiHantei";
+            };
+
+            Events.onClick_btnAfterIchijiHantei = function () {
+                return "onClick_btnAfterIchijiHantei";
             };
 
             Events.onClick_btnKakutei = function () {
                 return "onClick_btnKakutei";
+            };
+
+            Events.onClick_btnBack = function () {
+                return "onClick_btnBack";
             };
             return Events;
         })();
@@ -33,6 +41,14 @@ var DBE;
 
             Controls.prototype.IchijiHanteiKekkaJoho = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnIchijiHantei = function () {
+                return new UZA.Button(this.convFiledName("btnIchijiHantei"));
+            };
+
+            Controls.prototype.btnAfterIchijiHantei = function () {
+                return new UZA.Button(this.convFiledName("btnAfterIchijiHantei"));
             };
 
             Controls.prototype.txtIchijiHanteibi = function () {
@@ -351,12 +367,12 @@ var DBE;
                 return new UZA.DataGrid(this.convFiledName("dgIchijiHanteiKeikokuCode"));
             };
 
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            };
-
             Controls.prototype.btnKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
             };
             return Controls;
         })();

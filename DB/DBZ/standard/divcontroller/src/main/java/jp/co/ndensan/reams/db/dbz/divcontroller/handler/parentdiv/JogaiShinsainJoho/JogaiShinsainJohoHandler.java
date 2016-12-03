@@ -54,9 +54,11 @@ public class JogaiShinsainJohoHandler {
             div.getBtnShinkiTsuika().setDisabled(false);
         } else {
             div.getBtnShinkiTsuika().setDisabled(true);
-            div.getDgShinsakaiIinIchiran().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
+            if (div.getDgShinsakaiIinIchiran().getClickedItem() != null) {
+                div.getDgShinsakaiIinIchiran().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
+            }
         }
-        
+
         div.getTxtShinsakaiIinCode().setDisabled(true);
         div.getBtnShinsakaiIinGuide().setDisabled(true);
         div.getBtnToroku().setDisabled(true);

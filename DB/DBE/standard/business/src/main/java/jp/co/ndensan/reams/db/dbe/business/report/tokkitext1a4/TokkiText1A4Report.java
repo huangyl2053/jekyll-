@@ -10,6 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiText1A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiTextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext1a4.TokkiText1ReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -56,10 +60,11 @@ public class TokkiText1A4Report extends Report<TokkiText1ReportSource> {
             count = list.size();
         }
         if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
-            count = 1;
+            int 最大表示行数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+            count = entity.get特記事項リスト().size() / 最大表示行数 + 1;
         }
-        if (entity.get特記事項イメージ() != null && !entity.get特記事項イメージ().isEmpty()) {
-            count = 1;
+        if (entity.get特記事項全イメージリスト() != null && !entity.get特記事項全イメージリスト().isEmpty()) {
+            count = entity.get特記事項全イメージリスト().size();
         }
         for (int index = 0; index < count; index++) {
             ITokkiText1A4Editor editor = new TokkiText1A4Editor(entity, list, index);

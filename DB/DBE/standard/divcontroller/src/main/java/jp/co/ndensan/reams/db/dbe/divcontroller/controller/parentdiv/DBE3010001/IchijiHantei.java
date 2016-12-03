@@ -56,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 画面設計_DBE3010001_一次判定処理クラスです。
@@ -171,8 +172,11 @@ public class IchijiHantei {
 
         dgIchijiHanteiTaishoshaIchiran_Row row = div.getIchijiHanteiShoriTaishoshaIchiran()
                 .getDgIchijiHanteiTaishoshaIchiran().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        ViewStateHolder.put(ViewStateKeys.モード, ModeType.SHOKAI_MODE);
+
+        //viewStateではなく、dataPassingを使用するべき
+        div.setModeType(ModeType.SHOKAI_MODE.getValue());
+//        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+//        ViewStateHolder.put(ViewStateKeys.モード, ModeType.SHOKAI_MODE);
         return ResponseData.of(div).respond();
     }
 
@@ -188,8 +192,20 @@ public class IchijiHantei {
         div.setインデックス(new RString(String.valueOf(index)));
         dgIchijiHanteiTaishoshaIchiran_Row row = div.getIchijiHanteiShoriTaishoshaIchiran()
                 .getDgIchijiHanteiTaishoshaIchiran().getDataSource().get(index);
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        ViewStateHolder.put(ViewStateKeys.モード, ModeType.ADD_MODE);
+        ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(row.getShinseishoKanriNo());
+
+        //viewStateではなく、dataPassingを使用するべき
+        div.setModeType(ModeType.ADD_MODE.getValue());
+
+        if (!RString.isNullOrEmpty(div.getIchijiHanteiKekkaList())) {
+            Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models
+                    = DataPassingConverter.deserialize(div.getIchijiHanteiKekkaList(), Models.class);
+            IchijiHanteiKekkaJohoIdentifier identifier = new IchijiHanteiKekkaJohoIdentifier(shinseishoKanriNo);
+            IchijiHanteiKekkaJoho hanteiKekka = models.get(identifier);
+            RString hanteiKekkaStr = DataPassingConverter.serialize(hanteiKekka);
+            div.setIchijiHanteiKekka(hanteiKekkaStr);
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -204,8 +220,18 @@ public class IchijiHantei {
         int index = Integer.valueOf(div.getインデックス().toString());
         dgIchijiHanteiTaishoshaIchiran_Row row = div.getIchijiHanteiShoriTaishoshaIchiran()
                 .getDgIchijiHanteiTaishoshaIchiran().getDataSource().get(index);
-        IchijiHanteiKekkaJoho kaJoho = ViewStateHolder.get(ViewStateKeys.一次判定結果情報, IchijiHanteiKekkaJoho.class);
-        getHandler(div).対象者一覧更新の編集(row, index, kaJoho);
+
+        if (!RString.isNullOrEmpty(div.getIchijiHanteiKekka())) {
+            IchijiHanteiKekkaJoho kaJoho = DataPassingConverter.deserialize(div.getIchijiHanteiKekka(), IchijiHanteiKekkaJoho.class);
+            getHandler(div).対象者一覧更新の編集(row, index, kaJoho);
+
+            Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models = Models.create(new ArrayList<IchijiHanteiKekkaJoho>());
+            if (!RString.isNullOrEmpty(div.getIchijiHanteiKekkaList())) {
+                models = DataPassingConverter.deserialize(div.getIchijiHanteiKekkaList(), Models.class);
+            }
+            models.add(kaJoho);
+        }
+
         return ResponseData.of(div).respond();
     }
 

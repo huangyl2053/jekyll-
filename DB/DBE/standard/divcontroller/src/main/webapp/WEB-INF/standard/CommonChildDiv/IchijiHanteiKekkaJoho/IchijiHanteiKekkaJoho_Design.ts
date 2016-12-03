@@ -8,12 +8,20 @@ module DBE {
 
         export class Events {
 
-            public static onClick_btnBack(): string {
-                return "onClick_btnBack";
+            public static onClick_btnIchijiHantei(): string {
+                return "onClick_btnIchijiHantei";
+            }
+
+            public static onClick_btnAfterIchijiHantei(): string {
+                return "onClick_btnAfterIchijiHantei";
             }
 
             public static onClick_btnKakutei(): string {
                 return "onClick_btnKakutei";
+            }
+
+            public static onClick_btnBack(): string {
+                return "onClick_btnBack";
             }
 
         }
@@ -39,6 +47,14 @@ module DBE {
 
             public IchijiHanteiKekkaJoho(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public btnIchijiHantei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnIchijiHantei"));
+            }
+
+            public btnAfterIchijiHantei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAfterIchijiHantei"));
             }
 
             public txtIchijiHanteibi(): UZA.TextBoxFlexibleDate {
@@ -357,12 +373,12 @@ module DBE {
                 return new UZA.DataGrid(this.convFiledName("dgIchijiHanteiKeikokuCode"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            }
-
             public btnKakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
+            }
+
+            public btnModoru(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnModoru"));
             }
 
         }

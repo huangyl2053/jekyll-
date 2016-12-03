@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiHanteiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,12 @@ public class IchijiHanteiDiv extends Panel {
     private RString インデックス;
     @JsonProperty("ファイルID")
     private RString ファイルID;
+    @JsonProperty("modeType")
+    private RString modeType;
+    @JsonProperty("ichijiHanteiKekka")
+    private RString ichijiHanteiKekka;
+    @JsonProperty("ichijiHanteiKekkaList")
+    private RString ichijiHanteiKekkaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -131,16 +137,70 @@ public class IchijiHanteiDiv extends Panel {
     }
 
     /*
+     * getmodeType
+     * @return modeType
+     */
+    @JsonProperty("modeType")
+    public RString getModeType() {
+        return modeType;
+    }
+
+    /*
+     * setmodeType
+     * @param modeType modeType
+     */
+    @JsonProperty("modeType")
+    public void setModeType(RString modeType) {
+        this.modeType = modeType;
+    }
+
+    /*
+     * getichijiHanteiKekka
+     * @return ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public RString getIchijiHanteiKekka() {
+        return ichijiHanteiKekka;
+    }
+
+    /*
+     * setichijiHanteiKekka
+     * @param ichijiHanteiKekka ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public void setIchijiHanteiKekka(RString ichijiHanteiKekka) {
+        this.ichijiHanteiKekka = ichijiHanteiKekka;
+    }
+
+    /*
+     * getichijiHanteiKekkaList
+     * @return ichijiHanteiKekkaList
+     */
+    @JsonProperty("ichijiHanteiKekkaList")
+    public RString getIchijiHanteiKekkaList() {
+        return ichijiHanteiKekkaList;
+    }
+
+    /*
+     * setichijiHanteiKekkaList
+     * @param ichijiHanteiKekkaList ichijiHanteiKekkaList
+     */
+    @JsonProperty("ichijiHanteiKekkaList")
+    public void setIchijiHanteiKekkaList(RString ichijiHanteiKekkaList) {
+        this.ichijiHanteiKekkaList = ichijiHanteiKekkaList;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public UploadPanel getUploadPanel() {
-        return this.getTorikomiPanel().getUploadPanel();
+    public UploadPanel getUplHanteiKekka() {
+        return this.getTorikomiPanel().getUplHanteiKekka();
     }
 
     @JsonIgnore
-    public void  setUploadPanel(UploadPanel UploadPanel) {
-        this.getTorikomiPanel().setUploadPanel(UploadPanel);
+    public void  setUplHanteiKekka(UploadPanel uplHanteiKekka) {
+        this.getTorikomiPanel().setUplHanteiKekka(uplHanteiKekka);
     }
 
     @JsonIgnore

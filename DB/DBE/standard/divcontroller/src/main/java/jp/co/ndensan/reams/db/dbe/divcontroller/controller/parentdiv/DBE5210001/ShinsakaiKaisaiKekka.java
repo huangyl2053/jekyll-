@@ -157,6 +157,7 @@ public class ShinsakaiKaisaiKekka {
         handler.議長出席Check(validationMessages);
         handler.全員が遅刻Check(validationMessages);
         handler.全員が早退Check(validationMessages);
+        handler.必須項目Check(validationMessages);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }

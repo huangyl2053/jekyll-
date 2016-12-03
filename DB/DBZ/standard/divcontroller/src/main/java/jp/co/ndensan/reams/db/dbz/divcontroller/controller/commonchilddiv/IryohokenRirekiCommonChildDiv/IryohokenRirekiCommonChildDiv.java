@@ -140,8 +140,16 @@ public class IryohokenRirekiCommonChildDiv {
 
     private void ifelse(IryohokenRirekiCommonChildDivDiv requestDiv) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
-        RString 医療保険情報_識別コード = taishoshaKey.get識別コード().getColumnValue();
-        RString 医療保険情報_被保険者番号 = taishoshaKey.get被保険者番号().getColumnValue();
+        RString 医療保険情報_識別コード = RString.EMPTY;
+        RString 医療保険情報_被保険者番号 = RString.EMPTY;
+        if (taishoshaKey != null) {
+            if (taishoshaKey.get識別コード() != null) {
+                医療保険情報_識別コード = taishoshaKey.get識別コード().getColumnValue();
+            }
+            if (taishoshaKey.get被保険者番号() != null) {
+                医療保険情報_被保険者番号 = taishoshaKey.get被保険者番号().getColumnValue();
+            }
+        }
         List<dgIryohokenIchiran_Row> 医療保険情報RiReKiNoSortList = requestDiv.getDgIryohokenIchiran().getDataSource();
         Collections.sort(医療保険情報RiReKiNoSortList, new RiReKiNoComparator());
         Decimal riReKiNo = Decimal.ZERO;

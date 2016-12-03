@@ -131,9 +131,15 @@ public class TokkiText1ReportSource implements IReportSource {
 // </editor-fold>
     @ReportItem(name = "layoutBreakItem", length = 10, order = 999)
     public int layoutBreakItem;
+    @ReportItem(name = "recordCount", length = 10, order = 998)
+    public int recordCount;
     public static final RString LAYOUTBREAKITEM;
+    public static final RString TOKKIIMG;
+    public static final RString RECORDCOUNT;
 
     static {
         LAYOUTBREAKITEM = new RString("layoutBreakItem");
+        TOKKIIMG = new RString("tokkiImg");
+        RECORDCOUNT = new RString("recordCount");
     }
 }

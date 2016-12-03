@@ -43,6 +43,9 @@ public class NinteiShinseiRenrakusakiJoho {
         getHandler(div).onLoad();
         NinteiShinseiBusinessCollection deta = DataPassingConverter.deserialize(div.
                 getNinteiShinseiBusinessCollection(), NinteiShinseiBusinessCollection.class);
+        if (deta == null) {
+            return ResponseData.of(div).respond();
+        }
         if (!deta.getDbdBusiness().isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.連絡先情報, deta);
         }
