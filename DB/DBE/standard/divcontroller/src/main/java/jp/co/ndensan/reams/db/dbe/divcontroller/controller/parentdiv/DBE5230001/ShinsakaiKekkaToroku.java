@@ -96,24 +96,24 @@ public class ShinsakaiKekkaToroku {
         if (!前排他キーのセット(SHINSEISHOKANRINO)) {
             throw new PessimisticLockingException();
         }
-        ShinsakaiKaisaiMode 選択審査会一覧 = ViewStateHolder.get(ViewStateKeys.選択審査会一覧, ShinsakaiKaisaiMode.class);
 
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
 
+        ShinsakaiKaisaiMode 選択審査会一覧 = ViewStateHolder.get(ViewStateKeys.選択審査会一覧, ShinsakaiKaisaiMode.class);
         div.getTxtShinsakaiName().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get編集合議体名称());
         div.getTxtGogitaiNo().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get合議体名称());
         div.getTxtShinsaTaishosha().setValue(new RString(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会割当済み人数().toString()));
         div.getTxtShinsakaiKaijo().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開催場所名称());
-
         div.getTxtChiku().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開催場所名称());
-
-        div.getTxtTaishoNinzu().setValue(new RString(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会実施人数().toString()));
-        div.getTxtKaisaiNichiji().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開催予定年月日());
-        div.getTxtKaisaiTimeRange().setFromValue(new RTime(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開始予定時刻()));
-        div.getTxtKaisaiTimeRange().setToValue(new RTime(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会終了予定時刻()));
-//        if (選択審査会一覧.get審査会一覧Grid().get(0).get種類().equals(CHEAK_1)) {
-//            div.getChkShinsakaiShurui().setSelectedItemsByKey(true);
-//        }
+        if (選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会実施人数() != null) {
+            div.getTxtTaishoNinzu().setValue(new RString(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会実施人数().toString()));
+        }
+        div.getTxtKaisaiNichiji().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開催年月日());
+        div.getTxtKaisaiTimeRange().setFromValue(new RTime(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会開始時刻()));
+        div.getTxtKaisaiTimeRange().setToValue(new RTime(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会終了時刻()));
+        if (選択審査会一覧.get審査会一覧Grid().get(0).get種類().equals(CHEAK_1)) {
+            div.getChkShinsakaiShurui().setIsAllSelectable(true);
+        }
         div.getTxtStutas().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会進捗状況());
 
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();

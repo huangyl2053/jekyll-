@@ -193,7 +193,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
                             .set音声記録(row.getOnseiKiroku())
                             .setモバイルデータ出力年月日(row.getDataShutsuryoku().getValue())
                             .set資料作成済フラグ(is資料作成済区分(row))
-                            .set介護認定審査会進捗状況(get介護認定審査会進捗状況(row))
+                            .set介護認定審査会進捗状況(row.getShinchokuJokyo())
                             .setダミーフラグ(row.getDummyFlag()).build();
                     shinsakaiKaisaiList.add(shinsakaiKaisai);
                 }
