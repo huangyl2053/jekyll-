@@ -48,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -127,7 +126,7 @@ public class ShujiiMaster {
     public ResponseData<ShujiiMasterDiv> onClick_btnSearchShujii(ShujiiMasterDiv div) {
         searchChosainInfo(div);
         if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty()) {
-            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).validateBtnReSearchNoResult()).respond();
+            getValidationHandler(div).validateBtnReSearchNoResult();
         }
         return ResponseData.of(div).respond();
     }
@@ -283,6 +282,7 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(ShujiiMasterDiv div, IDownLoadServletResponse response) {
+        getValidationHandler(div).validateForOutputCsv();
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<ShujiiMasterCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
@@ -371,12 +371,7 @@ public class ShujiiMaster {
                 createParamForSelectShujiiJoho(new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue(),
                         div.getShujiiJohoInput().getTxtShujiiCode().getValue()));
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(イベント状態, shujiiJohoCount);
-
-        if (validPairs.iterator().hasNext()) {
-            div.getShujiiIchiran().setDisabled(false);
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
+        getValidationHandler(div).validateForKakutei(イベント状態, shujiiJohoCount);
         Models<ShujiiJohoIdentifier, ShujiiJoho> models = ViewStateHolder.get(ViewStateKeys.主治医マスタ検索結果, Models.class);
 
         if (状態_追加.equals(イベント状態)) {
@@ -620,10 +615,7 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnUpdate(ShujiiMasterDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
+        getValidationHandler(div).validateForUpdate();
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -632,10 +624,7 @@ public class ShujiiMaster {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            validPairs = validateForDelete(div);
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
+            validateForDelete(div);
             Models<ShujiiJohoIdentifier, ShujiiJoho> models = ViewStateHolder.get(
                     ViewStateKeys.主治医マスタ検索結果, Models.class);
             ShujiiJohoManager shujiiJohoManager = new ShujiiJohoManager();
@@ -653,7 +642,7 @@ public class ShujiiMaster {
         return ResponseData.of(div).respond();
     }
 
-    private ValidationMessageControlPairs validateForDelete(ShujiiMasterDiv div) {
+    private void validateForDelete(ShujiiMasterDiv div) {
         List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
         ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
         for (dgShujiiIchiran_Row row : dataList) {
@@ -662,12 +651,11 @@ public class ShujiiMaster {
                         new LasdecCode(row.getShichosonCode()),
                         row.getShujiiIryoKikanCode().getValue(),
                         row.getShujiiCode().getValue());
-                return getValidationHandler(div).validateForUpdate(
+                getValidationHandler(div).validateForUpdate(
                         shujiiMasterFinder.getNinteiShinseiJohoCount(parameter),
                         shujiiMasterFinder.getIkenshoIraiJohoCount(parameter));
             }
         }
-        return new ValidationMessageControlPairs();
     }
 
     /**
