@@ -112,7 +112,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.listkijunTime_6 = item.get要介護認定等基準時間_BPSD関連();
         source.listkijunTime_7 = item.get要介護認定等基準時間_機能訓練();
         source.listkijunTime_8 = item.get要介護認定等基準時間_医療関連();
-        source.listkijunTime_9 = item.get要介護認定等基準時間_認知症加算();
+        source.gurafuKijunTime = item.get要介護認定等基準時間イメージ();
         RString 警告コード = item.get警告コード();
         if (!RString.isNullOrEmpty(警告コード)) {
             RStringBuilder rstringBuilder = new RStringBuilder();

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chkichijihanteikekka.ChkIchijiHanteiKekkaBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.StackedBarChart;
 import jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyo.IchijihanteikekkahyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
@@ -74,6 +75,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -208,6 +210,8 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private static final int 連番82 = 82;
     private static final int 連番83 = 83;
     private static final int 連番84 = 84;
+    private static final int COUNT_15 = 15;
+    private static final int COUNT_20 = 20;
     List<RString> list;
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
     List<DbT5211NinteichosahyoChosaItemEntity> 調査項目;
@@ -707,21 +711,9 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
             return 精神機能(dbt5211Entity, 前回調査項目);
         }
         if (印刷しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
-            精神_行動障害4リスト.add(RString.EMPTY);
+            for (int count = 1; count <= COUNT_15; count++) {
+                精神_行動障害4リスト.add(RString.EMPTY);
+            }
         }
         if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
@@ -1382,26 +1374,9 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
             return 身体機能(調査項目, dbt5211Entity);
         }
         if (印刷しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
-            身体機能_起居動作4リスト.add(RString.EMPTY);
+            for (int count = 1; count <= COUNT_20; count++) {
+                身体機能_起居動作4リスト.add(RString.EMPTY);
+            }
         }
         if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             身体機能_起居動作4リスト.add(get名称01(dbt5211Entity, 0));
@@ -1634,6 +1609,15 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set状態像名称(RString.isNullOrEmpty(entity.get要介護状態像例コード()) ? RString.EMPTY
                 : YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード()).get名称());
         ichijiEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
+        RDateTime 日期 = RDate.getNowDateTime();
+        RString 文件名 = 日期.getDate().toDateString();
+        new StackedBarChart(getNumber(entity.get要介護認定等基準時間_食事()),
+                getNumber(entity.get要介護認定等基準時間_排泄()), getNumber(entity.get要介護認定等基準時間_移動()),
+                getNumber(entity.get要介護認定等基準時間_清潔保持()), getNumber(entity.get要介護認定等基準時間_間接ケア()),
+                getNumber(entity.get要介護認定等基準時間_BPSD関連()), getNumber(entity.get要介護認定等基準時間_機能訓練()),
+                getNumber(entity.get要介護認定等基準時間_医療関連()), getNumber(entity.get要介護認定等基準時間_認知症加算()),
+                文件名, new RString(batchWrite.getImageFolderPath().toString()));
+        ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
         ichijiEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
         ichijiEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
         ichijiEntity.set要介護認定等基準時間_移動(entity.get要介護認定等基準時間_移動());
@@ -1701,6 +1685,14 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         ichijiEntity.set審査日_日(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
+    }
+
+    private int getNumber(RString 各基準時間) {
+        if (!RString.isNullOrEmpty(各基準時間)) {
+            return Integer.parseInt(各基準時間.toString());
+        } else {
+            return 0;
+        }
     }
 
     private void setBodyItem02(IchijihanteikekkahyoEntity ichijiEntity, YokaigoninteiEntity entity) {
