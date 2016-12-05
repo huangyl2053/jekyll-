@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class maskPanel9Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class maskPanel9Div extends Panel {
      */
     @JsonProperty("imgMasking9")
     private StaticImage imgMasking9;
+    @JsonProperty("LabelNoImage9")
+    private Label LabelNoImage9;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class maskPanel9Div extends Panel {
     @JsonProperty("imgMasking9")
     public void setImgMasking9(StaticImage imgMasking9) {
         this.imgMasking9 = imgMasking9;
+    }
+
+    /*
+     * getLabelNoImage9
+     * @return LabelNoImage9
+     */
+    @JsonProperty("LabelNoImage9")
+    public Label getLabelNoImage9() {
+        return LabelNoImage9;
+    }
+
+    /*
+     * setLabelNoImage9
+     * @param LabelNoImage9 LabelNoImage9
+     */
+    @JsonProperty("LabelNoImage9")
+    public void setLabelNoImage9(Label LabelNoImage9) {
+        this.LabelNoImage9 = LabelNoImage9;
     }
 
     // </editor-fold>

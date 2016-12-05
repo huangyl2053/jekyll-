@@ -291,6 +291,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking1"));
             };
 
+            Controls.prototype.LabelNoImage1 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage1"));
+            };
+
             Controls.prototype.txtTokkijikoNo12 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo12"));
             };
@@ -317,6 +321,10 @@ var DBZ;
 
             Controls.prototype.imgMasking2 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking2"));
+            };
+
+            Controls.prototype.LabelNoImage2 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage2"));
             };
 
             Controls.prototype.txtTokkijikoNo13 = function () {
@@ -347,6 +355,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking3"));
             };
 
+            Controls.prototype.LabelNoImage3 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage3"));
+            };
+
             Controls.prototype.txtTokkijikoNo14 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo14"));
             };
@@ -373,6 +385,10 @@ var DBZ;
 
             Controls.prototype.imgMasking4 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking4"));
+            };
+
+            Controls.prototype.LabelNoImage4 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage4"));
             };
 
             Controls.prototype.txtTokkijikoNo15 = function () {
@@ -403,6 +419,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking5"));
             };
 
+            Controls.prototype.LabelNoImage5 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage5"));
+            };
+
             Controls.prototype.txtTokkijikoNo16 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
             };
@@ -429,6 +449,10 @@ var DBZ;
 
             Controls.prototype.imgMasking6 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking6"));
+            };
+
+            Controls.prototype.LabelNoImage6 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage6"));
             };
 
             Controls.prototype.txtTokkijikoNo17 = function () {
@@ -459,6 +483,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking7"));
             };
 
+            Controls.prototype.LabelNoImage7 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage7"));
+            };
+
             Controls.prototype.txtTokkijikoNo18 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo18"));
             };
@@ -485,6 +513,10 @@ var DBZ;
 
             Controls.prototype.imgMasking8 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking8"));
+            };
+
+            Controls.prototype.LabelNoImage8 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage8"));
             };
 
             Controls.prototype.txtTokkijikoNo19 = function () {
@@ -515,6 +547,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking9"));
             };
 
+            Controls.prototype.LabelNoImage9 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage9"));
+            };
+
             Controls.prototype.txtTokkijikoNo20 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo20"));
             };
@@ -541,6 +577,10 @@ var DBZ;
 
             Controls.prototype.imgMasking10 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking10"));
+            };
+
+            Controls.prototype.LabelNoImage10 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage10"));
             };
 
             Controls.prototype.imgPanel2 = function () {
@@ -579,6 +619,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking11"));
             };
 
+            Controls.prototype.LabelNoImage11 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage11"));
+            };
+
             Controls.prototype.txtTokkijikoNo22 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo22"));
             };
@@ -605,6 +649,10 @@ var DBZ;
 
             Controls.prototype.imgMasking12 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking12"));
+            };
+
+            Controls.prototype.LabelNoImage12 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage12"));
             };
 
             Controls.prototype.txtTokkijikoNo23 = function () {
@@ -635,6 +683,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking13"));
             };
 
+            Controls.prototype.LabelNoImage13 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage13"));
+            };
+
             Controls.prototype.txtTokkijikoNo24 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo24"));
             };
@@ -661,6 +713,10 @@ var DBZ;
 
             Controls.prototype.imgMasking14 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking14"));
+            };
+
+            Controls.prototype.LabelNoImage14 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage14"));
             };
 
             Controls.prototype.txtTokkijikoNo25 = function () {
@@ -691,6 +747,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking15"));
             };
 
+            Controls.prototype.LabelNoImage15 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage15"));
+            };
+
             Controls.prototype.txtTokkijikoNo26 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo26"));
             };
@@ -717,6 +777,10 @@ var DBZ;
 
             Controls.prototype.imgMasking16 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking16"));
+            };
+
+            Controls.prototype.LabelNoImage16 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage16"));
             };
 
             Controls.prototype.txtTokkijikoNo27 = function () {
@@ -747,6 +811,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking17"));
             };
 
+            Controls.prototype.LabelNoImage17 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage17"));
+            };
+
             Controls.prototype.txtTokkijikoNo28 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo28"));
             };
@@ -773,6 +841,10 @@ var DBZ;
 
             Controls.prototype.imgMasking18 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking18"));
+            };
+
+            Controls.prototype.LabelNoImage18 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage18"));
             };
 
             Controls.prototype.txtTokkijikoNo29 = function () {
@@ -803,6 +875,10 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgMasking19"));
             };
 
+            Controls.prototype.LabelNoImage19 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage19"));
+            };
+
             Controls.prototype.txtTokkijikoNo30 = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo30"));
             };
@@ -829,6 +905,10 @@ var DBZ;
 
             Controls.prototype.imgMasking20 = function () {
                 return new UZA.StaticImage(this.convFiledName("imgMasking20"));
+            };
+
+            Controls.prototype.LabelNoImage20 = function () {
+                return new UZA.Label(this.convFiledName("LabelNoImage20"));
             };
 
             Controls.prototype.btnReturn = function () {

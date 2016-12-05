@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  * @author 自動生成
  */
 public class maskTabContainerDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -203,6 +203,16 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage1() {
+        return this.getMaskTabPanel1().getLabelNoImage1();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage1(Label LabelNoImage1) {
+        this.getMaskTabPanel1().setLabelNoImage1(LabelNoImage1);
+    }
+
+    @JsonIgnore
     public StaticImage getImgMask2() {
         return this.getMaskTabPanel2().getImgMask2();
     }
@@ -210,6 +220,16 @@ public class maskTabContainerDiv extends TabContainer {
     @JsonIgnore
     public void  setImgMask2(StaticImage imgMask2) {
         this.getMaskTabPanel2().setImgMask2(imgMask2);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage2() {
+        return this.getMaskTabPanel2().getLabelNoImage2();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage2(Label LabelNoImage2) {
+        this.getMaskTabPanel2().setLabelNoImage2(LabelNoImage2);
     }
 
     @JsonIgnore
@@ -223,6 +243,16 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage3() {
+        return this.getMaskTabPanel3().getLabelNoImage3();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage3(Label LabelNoImage3) {
+        this.getMaskTabPanel3().setLabelNoImage3(LabelNoImage3);
+    }
+
+    @JsonIgnore
     public StaticImage getImgMask4() {
         return this.getMaskTabPanel4().getImgMask4();
     }
@@ -230,6 +260,16 @@ public class maskTabContainerDiv extends TabContainer {
     @JsonIgnore
     public void  setImgMask4(StaticImage imgMask4) {
         this.getMaskTabPanel4().setImgMask4(imgMask4);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage4() {
+        return this.getMaskTabPanel4().getLabelNoImage4();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage4(Label LabelNoImage4) {
+        this.getMaskTabPanel4().setLabelNoImage4(LabelNoImage4);
     }
 
     @JsonIgnore
@@ -243,6 +283,16 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage5() {
+        return this.getMaskTabPanel5().getLabelNoImage5();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage5(Label LabelNoImage5) {
+        this.getMaskTabPanel5().setLabelNoImage5(LabelNoImage5);
+    }
+
+    @JsonIgnore
     public StaticImage getImgMask6() {
         return this.getMaskTabPanel6().getImgMask6();
     }
@@ -250,6 +300,16 @@ public class maskTabContainerDiv extends TabContainer {
     @JsonIgnore
     public void  setImgMask6(StaticImage imgMask6) {
         this.getMaskTabPanel6().setImgMask6(imgMask6);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage6() {
+        return this.getMaskTabPanel6().getLabelNoImage6();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage6(Label LabelNoImage6) {
+        this.getMaskTabPanel6().setLabelNoImage6(LabelNoImage6);
     }
 
     @JsonIgnore
@@ -263,6 +323,16 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage7() {
+        return this.getMaskTabPanel7().getLabelNoImage7();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage7(Label LabelNoImage7) {
+        this.getMaskTabPanel7().setLabelNoImage7(LabelNoImage7);
+    }
+
+    @JsonIgnore
     public StaticImage getImgMask8() {
         return this.getMaskTabPanel8().getImgMask8();
     }
@@ -270,6 +340,16 @@ public class maskTabContainerDiv extends TabContainer {
     @JsonIgnore
     public void  setImgMask8(StaticImage imgMask8) {
         this.getMaskTabPanel8().setImgMask8(imgMask8);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage8() {
+        return this.getMaskTabPanel8().getLabelNoImage8();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage8(Label LabelNoImage8) {
+        this.getMaskTabPanel8().setLabelNoImage8(LabelNoImage8);
     }
 
     // </editor-fold>
