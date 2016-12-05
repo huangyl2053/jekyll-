@@ -55,20 +55,20 @@ public class ShinsakaiKaisaiKekkaHandler {
             div.setGogitaiNo(new RString(String.valueOf(business.get合議体番号())));
             div.getTxtGogitai().setValue(business.get合議体名称());
             div.getTxtYoteiTeiin().setValue(new Decimal(business.get予定人数()));
-            div.getTxtJissiSu().setValue(new Decimal(business.get実施人数()));
+            div.getShinsakaiKaisaiInfo().getTxtJissiSu().setValue(new Decimal(business.get実施人数()));
             div.getTxtYoteiKaijo().setValue(business.get介護認定審査会開催場所名称());
             div.getTxtKaisaiYoteibi().setValue(business.get開催予定日());
             div.getTxtYoteiStartTime().setValue(strToTime(business.get予定開始時間()));
             div.getTxtYoteiEndTime().setValue(strToTime(business.get予定終了時間()));
-            div.getTxtKaisaiBi().setValue(business.get開催日());
-            div.getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
-            div.getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
-            div.getTxtShoyoTime().setValue(new RString(String.valueOf(business.get所要時間())));
+            div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催日());
+            div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
+            div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
+            div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new RString(String.valueOf(business.get所要時間())));
             if (business.get開催会場() != null) {
-                div.getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+                div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
             }
         }
-        if (div.getTxtKaisaiBi().getValue() == null || div.getTxtKaisaiBi().getValue().isEmpty()) {
+        if (div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue() == null || div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue().isEmpty()) {
             div.setModel(new RString("新規モード"));
         } else {
             div.setModel(new RString("更新モード"));
@@ -115,10 +115,12 @@ public class ShinsakaiKaisaiKekkaHandler {
             row.getShukketsuKubun().setSelectedKey(new RString(String.valueOf(business.is委員出席())));
             row.getChikokuUmu().setDataSource(setIsChikokuUmu());
             row.getChikokuUmu().setSelectedKey(new RString(String.valueOf(business.is委員遅刻有無())));
-            row.setShussekiTime(strToTime(business.get委員出席時間()).toFormattedTimeString(DisplayTimeFormat.HH_mm));
+            row.getShussekiTime().setValue(strToTime(business.get委員出席時間()));
+            row.getShussekiTime().setDisabled(Boolean.TRUE);
             row.getSotaiUmu().setDataSource(setIssotaiUmu());
             row.getSotaiUmu().setSelectedKey(new RString(String.valueOf(business.is委員早退有無())));
-            row.setTaisekiTime(strToTime(business.get委員退席時間()).toFormattedTimeString(DisplayTimeFormat.HH_mm));
+            row.getTaisekiTime().setValue(strToTime(business.get委員退席時間()));
+            row.getTaisekiTime().setDisabled(Boolean.TRUE);
             dataGridList.add(row);
         }
         div.getDgShinsakaiIinIchiran().setDataSource(dataGridList);

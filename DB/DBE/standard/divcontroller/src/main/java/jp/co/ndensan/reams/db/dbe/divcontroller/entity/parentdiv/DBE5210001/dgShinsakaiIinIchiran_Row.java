@@ -3,21 +3,27 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Mar 28 09:45:44 JST 2016
+ * Mon Dec 05 18:55:12 JST 2016 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
+
 
 /**
- * dgShinsakaiIinIchiran_Row のクラスファイル
- *
+ * dgShinsakaiIinIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinsakaiIinIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
 
     private TextBoxNum number;
     private RString shinsakjaiIinCode;
@@ -29,9 +35,9 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
     private DropDownList shukketsuKubun;
     private RString shozokuKikan;
     private DropDownList chikokuUmu;
-    private RString shussekiTime;
+    private TextBoxTime shussekiTime;
     private DropDownList sotaiUmu;
-    private RString taisekiTime;
+    private TextBoxTime taisekiTime;
 
     public dgShinsakaiIinIchiran_Row() {
         super();
@@ -45,9 +51,9 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.shukketsuKubun = new DropDownList();
         this.shozokuKikan = RString.EMPTY;
         this.chikokuUmu = new DropDownList();
-        this.shussekiTime = RString.EMPTY;
+        this.shussekiTime = new TextBoxTime();
         this.sotaiUmu = new DropDownList();
-        this.taisekiTime = RString.EMPTY;
+        this.taisekiTime = new TextBoxTime();
         this.setOriginalData("number", number);
         this.setOriginalData("shinsakjaiIinCode", shinsakjaiIinCode);
         this.setOriginalData("shimei", shimei);
@@ -63,7 +69,7 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.setOriginalData("taisekiTime", taisekiTime);
     }
 
-    public dgShinsakaiIinIchiran_Row(TextBoxNum number, RString shinsakjaiIinCode, RString shimei, RString seibetsu, RString shikaku, RString gogitaichoKubun, DropDownList gichoKubun, DropDownList shukketsuKubun, RString shozokuKikan, DropDownList chikokuUmu, RString shussekiTime, DropDownList sotaiUmu, RString taisekiTime) {
+    public dgShinsakaiIinIchiran_Row(TextBoxNum number, RString shinsakjaiIinCode, RString shimei, RString seibetsu, RString shikaku, RString gogitaichoKubun, DropDownList gichoKubun, DropDownList shukketsuKubun, RString shozokuKikan, DropDownList chikokuUmu, TextBoxTime shussekiTime, DropDownList sotaiUmu, TextBoxTime taisekiTime) {
         super();
         this.setOriginalData("number", number);
         this.setOriginalData("shinsakjaiIinCode", shinsakjaiIinCode);
@@ -105,9 +111,9 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.shukketsuKubun = DropDownList.createInstance(gridSetting.getColumn("shukketsuKubun").getCellDetails());
         this.shozokuKikan = RString.EMPTY;
         this.chikokuUmu = DropDownList.createInstance(gridSetting.getColumn("chikokuUmu").getCellDetails());
-        this.shussekiTime = RString.EMPTY;
+        this.shussekiTime = new TextBoxTime();
         this.sotaiUmu = DropDownList.createInstance(gridSetting.getColumn("sotaiUmu").getCellDetails());
-        this.taisekiTime = RString.EMPTY;
+        this.taisekiTime = new TextBoxTime();
         this.setOriginalData("number", number);
         this.setOriginalData("shinsakjaiIinCode", shinsakjaiIinCode);
         this.setOriginalData("shimei", shimei);
@@ -163,7 +169,7 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         return chikokuUmu;
     }
 
-    public RString getShussekiTime() {
+    public TextBoxTime getShussekiTime() {
         return shussekiTime;
     }
 
@@ -171,7 +177,7 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         return sotaiUmu;
     }
 
-    public RString getTaisekiTime() {
+    public TextBoxTime getTaisekiTime() {
         return taisekiTime;
     }
 
@@ -225,7 +231,7 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.chikokuUmu = chikokuUmu;
     }
 
-    public void setShussekiTime(RString shussekiTime) {
+    public void setShussekiTime(TextBoxTime shussekiTime) {
         this.setOriginalData("shussekiTime", shussekiTime);
         this.shussekiTime = shussekiTime;
     }
@@ -235,7 +241,7 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.sotaiUmu = sotaiUmu;
     }
 
-    public void setTaisekiTime(RString taisekiTime) {
+    public void setTaisekiTime(TextBoxTime taisekiTime) {
         this.setOriginalData("taisekiTime", taisekiTime);
         this.taisekiTime = taisekiTime;
     }
