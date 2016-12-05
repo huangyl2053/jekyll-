@@ -4,8 +4,8 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnClose = function () {
-                return "onClick_btnClose";
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
             };
             return Events;
         })();
@@ -51,8 +51,8 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtShokujiKoi"));
             };
 
-            Controls.prototype.btnClose = function () {
-                return new UZA.Button(this.convFiledName("btnClose"));
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             };
             return Controls;
         })();
