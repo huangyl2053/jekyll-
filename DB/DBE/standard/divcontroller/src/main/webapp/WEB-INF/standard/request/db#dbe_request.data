@@ -191,6 +191,7 @@ dbe/db/dbe/IchijiHantei/koShiSyori
 dbe/db/dbe/IchijiHantei/onLoad
 dbe/db/dbe/IchijiHantei/onclick_BtnUpload
 dbe/db/dbe/IchijiHanteiKekkaInfo/onLoad
+dbe/db/dbe/IchijiHanteiKekkaJoho/btnAfterIchijiHantei
 dbe/db/dbe/IchijiHanteiKekkaJoho/onClick_btnBack
 dbe/db/dbe/IchijiHanteiKekkaJoho/onClick_btnKakutei
 dbe/db/dbe/IchijiHanteiKekkaJoho/onLoad

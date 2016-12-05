@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenR
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.dgIryohokenIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.pnlIryohokenJohoDiv;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.iryohokenRireki.IryohokenRirekiShubetsuCodeEntity;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.iryohokenRireki.IryohokenRirekiManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -26,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -40,6 +43,14 @@ public class IryohokenRirekiCommonChildDiv {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_選択 = new RString("選択");
+    private final IryohokenRirekiManager manager;
+
+    /**
+     * コンストラクタです。
+     */
+    public IryohokenRirekiCommonChildDiv() {
+        manager = IryohokenRirekiManager.createInstance();
+    }
 
     /**
      * 初期化します。 TODO n8178 城間篤人
@@ -56,6 +67,16 @@ public class IryohokenRirekiCommonChildDiv {
         if (!RString.isNullOrEmpty(医療保険情報_識別コード) && !RString.isNullOrEmpty(mode)) {
             createHandlerOf(requestDiv).initialize(mode, 医療保険情報_識別コード);
         }
+
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+
+        List<IryohokenRirekiShubetsuCodeEntity> entity = manager.getIryouHokenRirekiCode();
+        if (entity != null) {
+            for (IryohokenRirekiShubetsuCodeEntity codeEntity : entity) {
+                dataSource.add(new KeyValueDataSource(codeEntity.getCode(), codeEntity.getCodeName()));
+            }
+        }
+        requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(dataSource);
         requestDiv.setVisible(true);
         responseData.data = requestDiv;
         return responseData;

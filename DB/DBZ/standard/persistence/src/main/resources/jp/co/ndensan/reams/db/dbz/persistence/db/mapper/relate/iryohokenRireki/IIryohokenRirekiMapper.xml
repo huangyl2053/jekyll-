@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査情報取得のマッピング用XMLです。 -->
+
+<!-- @reamsid_L DBE-0200-020 zhangguopeng -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.iryohokenRireki.IIryohokenRirekiMapper">
+
+    <resultMap id="resultMap_IryohokenRirekiShubetsuCodeEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.iryohokenRireki.IryohokenRirekiShubetsuCodeEntity" autoMapping="true">
+        <result property="code" column="code" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="codeName" column="codeName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="select医療保険種別" resultMap="resultMap_IryohokenRirekiShubetsuCodeEntity" fetchSize="500">
+        SELECT 
+        code as code,
+        "codeMeisho" as codeName
+        FROM rgdb."UzT0007Code" 
+        WHERE "UzT0007Code"."subGyomuCode" ='DBA' 
+        AND "UzT0007Code"."codeShubetsu"='0001'
+    </select>
+</mapper>

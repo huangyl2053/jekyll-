@@ -225,6 +225,7 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         this.set被保険者番号(被保険者番号.getColumnValue());
         this.set市町村コード(市町村コード.getColumnValue());
+        
     }
 
     @Override

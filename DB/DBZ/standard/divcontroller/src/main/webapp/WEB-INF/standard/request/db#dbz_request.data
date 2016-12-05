@@ -44,8 +44,10 @@ dbz/db/dbz/ChosaJisshishaJoho/onClick_btnChosaItakusakiGuide
 dbz/db/dbz/ChosaJisshishaJoho/onClick_btnChosainGuide
 dbz/db/dbz/ChosaJisshishaJoho/onOKClose_btnChosaItakusakiGuide
 dbz/db/dbz/ChosaJisshishaJoho/onOKClose_btnChosainGuide
-dbz/db/dbz/ChosaTokkiShiryoShokai/initialize
+dbz/db/dbz/ChosaTokkiImageShokai/onClick_btnReturn
+dbz/db/dbz/ChosaTokkiImageShokai/onLoad
 dbz/db/dbz/ChosaTokkiShiryoShokai/onChange_radGenpoMask
+dbz/db/dbz/ChosaTokkiShiryoShokai/onLoad
 dbz/db/dbz/ChosaTokkiShokai/initialize
 dbz/db/dbz/ChosaTokkiShokai/onClick_btnReturn
 dbz/db/dbz/DataOutputInfomation/onClick_btnKakunin
