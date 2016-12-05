@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgSh
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -46,7 +45,7 @@ public class ShinsakaiKaisaiValidationHandler {
      * @param validationMessages バリデーションメッセージ
      */
     public void yoteiStartToKaisaiEndTimeCheck(ValidationMessageControlPairs validationMessages) {
-        if (div.getTxtKaisaiEndTime().getValue().isBefore(div.getTxtKaisaiStartTime().getValue())) {
+        if (div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().isBefore(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShinsakaiKaisaiMessages(UrErrorMessages.期間が不正_追加メッセージあり２, "開催開始時間", "開催終了時間")));
         }
@@ -62,9 +61,10 @@ public class ShinsakaiKaisaiValidationHandler {
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         if (!rowList.isEmpty()) {
             for (dgShinsakaiIinIchiran_Row row : rowList) {
-                if (RTime.parse(row.getShussekiTime()).isBefore(div.getTxtKaisaiStartTime().getValue())
-                        || div.getTxtKaisaiEndTime().getValue().isBefore(RTime.parse(row.getShussekiTime()))) {
+                if (row.getShussekiTime().getValue().isBefore(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())
+                        || div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().isBefore(row.getShussekiTime().getValue())) {
                     validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "出席時間")));
+                    row.getShussekiTime().setDisabled(Boolean.FALSE);
                 }
             }
         }
@@ -80,9 +80,10 @@ public class ShinsakaiKaisaiValidationHandler {
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         if (!rowList.isEmpty()) {
             for (dgShinsakaiIinIchiran_Row row : rowList) {
-                if (RTime.parse(row.getTaisekiTime()).isBefore(div.getTxtKaisaiStartTime().getValue())
-                        || div.getTxtKaisaiEndTime().getValue().isBefore(RTime.parse(row.getTaisekiTime()))) {
+                if (row.getTaisekiTime().getValue().isBefore(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())
+                        || div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().isBefore(row.getTaisekiTime().getValue())) {
                     validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "退席時間")));
+                    row.getTaisekiTime().setDisabled(Boolean.FALSE);
                 }
             }
         }
@@ -109,7 +110,7 @@ public class ShinsakaiKaisaiValidationHandler {
             }
         }
     }
-    
+
     /**
      *
      * 必須項目チェックをチェックします。
@@ -145,7 +146,6 @@ public class ShinsakaiKaisaiValidationHandler {
         }
 
     }
-
 
     /**
      *

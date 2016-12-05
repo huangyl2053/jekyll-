@@ -75,6 +75,7 @@ public class IchijihanteikekkahyoEntity {
     private RString 特定疾病名;
     private RString 状態像名称;
     private RString 要介護認定等基準時間;
+    private RString 要介護認定等基準時間イメージ;
     private RString 要介護認定等基準時間_食事;
     private RString 要介護認定等基準時間_排泄;
     private RString 要介護認定等基準時間_移動;

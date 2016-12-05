@@ -30,12 +30,12 @@ public class ShujiiIkenshoShokai {
     }
 
     /**
-     * 「閉じる」ボタン押下時の処理を表します。
+     * 「戻る」ボタン押下時の処理を表します。
      *
      * @param div 主治医意見書作成依頼情報Div
      * @return ResponseData
      */
-    public ResponseData<ShujiiIkenshoShokaiDiv> onClick_btnClose(ShujiiIkenshoShokaiDiv div) {
+    public ResponseData<ShujiiIkenshoShokaiDiv> onClick_btnReturn(ShujiiIkenshoShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
 

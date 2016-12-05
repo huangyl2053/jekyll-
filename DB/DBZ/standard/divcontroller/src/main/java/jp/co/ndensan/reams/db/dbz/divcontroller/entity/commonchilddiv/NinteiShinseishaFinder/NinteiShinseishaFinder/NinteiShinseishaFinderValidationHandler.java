@@ -86,9 +86,7 @@ public class NinteiShinseishaFinderValidationHandler {
                 && txtNinteiShinseiDateTo != null && !FlexibleDate.EMPTY.equals(txtNinteiShinseiDateTo)
                 && txtNinteiShinseiDateTo.isBefore(txtNinteiShinseiDateFrom)) {
             validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrWarningMessages.日付の前後関係逆転以降,
-                            txtNinteiShinseiDateFrom.toString(),
-                            txtNinteiShinseiDateTo.toString()),
+                    new IdocheckMessages(UrErrorMessages.終了日が開始日以前),
                     from, to));
         }
         return validPairs;

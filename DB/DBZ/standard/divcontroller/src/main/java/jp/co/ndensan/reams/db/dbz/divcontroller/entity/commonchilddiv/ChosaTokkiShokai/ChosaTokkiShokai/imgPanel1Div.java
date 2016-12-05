@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class imgPanel1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -1093,6 +1093,16 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage1() {
+        return this.getMaskPanel1().getLabelNoImage1();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage1(Label LabelNoImage1) {
+        this.getMaskPanel1().setLabelNoImage1(LabelNoImage1);
+    }
+
+    @JsonIgnore
     public StaticImage getImgGenpo2() {
         return this.getGenpoPanel2().getImgGenpo2();
     }
@@ -1110,6 +1120,16 @@ public class imgPanel1Div extends Panel {
     @JsonIgnore
     public void  setImgMasking2(StaticImage imgMasking2) {
         this.getMaskPanel2().setImgMasking2(imgMasking2);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage2() {
+        return this.getMaskPanel2().getLabelNoImage2();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage2(Label LabelNoImage2) {
+        this.getMaskPanel2().setLabelNoImage2(LabelNoImage2);
     }
 
     @JsonIgnore
@@ -1133,6 +1153,16 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage3() {
+        return this.getMaskPanel3().getLabelNoImage3();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage3(Label LabelNoImage3) {
+        this.getMaskPanel3().setLabelNoImage3(LabelNoImage3);
+    }
+
+    @JsonIgnore
     public StaticImage getImgGenpo4() {
         return this.getGenpoPanel4().getImgGenpo4();
     }
@@ -1150,6 +1180,16 @@ public class imgPanel1Div extends Panel {
     @JsonIgnore
     public void  setImgMasking4(StaticImage imgMasking4) {
         this.getMaskPanel4().setImgMasking4(imgMasking4);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage4() {
+        return this.getMaskPanel4().getLabelNoImage4();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage4(Label LabelNoImage4) {
+        this.getMaskPanel4().setLabelNoImage4(LabelNoImage4);
     }
 
     @JsonIgnore
@@ -1173,6 +1213,16 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage5() {
+        return this.getMaskPanel5().getLabelNoImage5();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage5(Label LabelNoImage5) {
+        this.getMaskPanel5().setLabelNoImage5(LabelNoImage5);
+    }
+
+    @JsonIgnore
     public StaticImage getImgGenpo6() {
         return this.getGenpoPanel6().getImgGenpo6();
     }
@@ -1190,6 +1240,16 @@ public class imgPanel1Div extends Panel {
     @JsonIgnore
     public void  setImgMasking6(StaticImage imgMasking6) {
         this.getMaskPanel6().setImgMasking6(imgMasking6);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage6() {
+        return this.getMaskPanel6().getLabelNoImage6();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage6(Label LabelNoImage6) {
+        this.getMaskPanel6().setLabelNoImage6(LabelNoImage6);
     }
 
     @JsonIgnore
@@ -1213,6 +1273,16 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage7() {
+        return this.getMaskPanel7().getLabelNoImage7();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage7(Label LabelNoImage7) {
+        this.getMaskPanel7().setLabelNoImage7(LabelNoImage7);
+    }
+
+    @JsonIgnore
     public StaticImage getImgGenpo8() {
         return this.getGenpoPanel8().getImgGenpo8();
     }
@@ -1230,6 +1300,16 @@ public class imgPanel1Div extends Panel {
     @JsonIgnore
     public void  setImgMasking8(StaticImage imgMasking8) {
         this.getMaskPanel8().setImgMasking8(imgMasking8);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage8() {
+        return this.getMaskPanel8().getLabelNoImage8();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage8(Label LabelNoImage8) {
+        this.getMaskPanel8().setLabelNoImage8(LabelNoImage8);
     }
 
     @JsonIgnore
@@ -1253,6 +1333,16 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
+    public Label getLabelNoImage9() {
+        return this.getMaskPanel9().getLabelNoImage9();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage9(Label LabelNoImage9) {
+        this.getMaskPanel9().setLabelNoImage9(LabelNoImage9);
+    }
+
+    @JsonIgnore
     public StaticImage getImgGenpo10() {
         return this.getGenpoPanel10().getImgGenpo10();
     }
@@ -1270,6 +1360,16 @@ public class imgPanel1Div extends Panel {
     @JsonIgnore
     public void  setImgMasking10(StaticImage imgMasking10) {
         this.getMaskPanel10().setImgMasking10(imgMasking10);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage10() {
+        return this.getMaskPanel10().getLabelNoImage10();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage10(Label LabelNoImage10) {
+        this.getMaskPanel10().setLabelNoImage10(LabelNoImage10);
     }
 
     // </editor-fold>

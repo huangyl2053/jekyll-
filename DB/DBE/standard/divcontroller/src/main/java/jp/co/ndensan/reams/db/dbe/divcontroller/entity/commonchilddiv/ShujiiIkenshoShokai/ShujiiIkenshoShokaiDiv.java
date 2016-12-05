@@ -36,8 +36,8 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
     private TextBox txtShokujiKoi;
     @JsonProperty("CcdChosaTokkiShiryoShokai")
     private ChosaTokkiShiryoShokaiDiv CcdChosaTokkiShiryoShokai;
-    @JsonProperty("btnClose")
-    private Button btnClose;
+    @JsonProperty("btnReturn")
+    private Button btnReturn;
     @JsonProperty("hiddenShinseishoKanriNo")
     private RString hiddenShinseishoKanriNo;
     @JsonProperty("hiddenIkenshoIraiRirekiNo")
@@ -149,21 +149,21 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
     }
 
     /*
-     * getbtnClose
-     * @return btnClose
+     * getbtnReturn
+     * @return btnReturn
      */
-    @JsonProperty("btnClose")
-    public Button getBtnClose() {
-        return btnClose;
+    @JsonProperty("btnReturn")
+    public Button getBtnReturn() {
+        return btnReturn;
     }
 
     /*
-     * setbtnClose
-     * @param btnClose btnClose
+     * setbtnReturn
+     * @param btnReturn btnReturn
      */
-    @JsonProperty("btnClose")
-    public void setBtnClose(Button btnClose) {
-        this.btnClose = btnClose;
+    @JsonProperty("btnReturn")
+    public void setBtnReturn(Button btnReturn) {
+        this.btnReturn = btnReturn;
     }
 
     /*

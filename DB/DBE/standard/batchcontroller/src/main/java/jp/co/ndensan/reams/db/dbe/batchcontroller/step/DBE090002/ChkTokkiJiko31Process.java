@@ -206,21 +206,21 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             reportId = ReportIdDBE.DBE517134.getReportId().value();
         }
         batchWrite = BatchReportFactory.createBatchReportWriter(reportId)
-                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
-                                TokkiText1ReportSource.LAYOUTBREAKITEM,TokkiText1ReportSource.TOKKIIMG) {
-                                    @Override
-                                    public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
-                                            ReportLineRecord<TokkiText1ReportSource> currentRecord,
-                                            ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
-                                                int layout = currentRecord.getSource().layoutBreakItem;
-                                                currentRecord.setFormGroupIndex(layout);
-                                                if (nextRecord != null && nextRecord.getSource() != null) {
-                                                    layout = nextRecord.getSource().layoutBreakItem;
-                                                    nextRecord.setFormGroupIndex(layout);
-                                                }
-                                                return currentRecord;
-                                            }
-                                }).create();
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(TokkiText1ReportSource.LAYOUTBREAKITEM,
+                        TokkiText1ReportSource.TOKKIIMG) {
+                    @Override
+                    public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
+                            ReportLineRecord<TokkiText1ReportSource> currentRecord,
+                            ReportLineRecord<TokkiText1ReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layoutBreakItem;
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layoutBreakItem;
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                }).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
@@ -358,7 +358,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
                 imagePath = getFilePath(イメージID, fileName);
             } else {
-                imagePath = getFilePathBak(イメージID, fileName.replace(".png", "_BAK.png"));
+                imagePath = getFilePathBak(イメージID, fileName.replace(拡張子_PNG.toString(), "_BAK.png"));
             }
         }
         return imagePath;
@@ -1046,13 +1046,13 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         ReadOnlySharedFileEntryDescriptor descriptor_BAK
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(拡張子_PNG.toString(), "_BAK.png")), sharedFileId);
         try {
             SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
         } catch (Exception e) {
             try {
                 SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(batchWrite.getImageFolderPath()));
-                return sharedFileName.replace(".png", "_BAK.png");
+                return sharedFileName.replace(拡張子_PNG.toString(), "_BAK.png");
             } catch (Exception ex) {
                 return RString.EMPTY;
             }

@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -177,16 +179,60 @@ public class ShujiiIkenshoShokaiHandler {
 
     private List<RString> get原本FilePathList(Image イメージ情報) {
         List<RString> イメージファイルパス = new ArrayList<>();
+        RString イメージパス_表 = RString.EMPTY;
+        RString イメージパス_裏 = RString.EMPTY;
 
-        RString イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
+        SearchSharedFileOpts 検索条件 = new SearchSharedFileOpts();
+        検索条件.sharedFilePat(ファイル名_主治医意見書_表BAK);
+        List<UzT0885SharedFileEntryEntity> ShareFileList = SharedFile.searchSharedFile(検索条件);
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
+                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
+                    イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
+                }
+            }
+        }
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            ShareFileList.clear();
+        }
         if (RString.isNullOrEmpty(イメージパス_表)) {
-            イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
+            検索条件.sharedFilePat(ファイル名_主治医意見書_表);
+            ShareFileList = SharedFile.searchSharedFile(検索条件);
+            if (ShareFileList != null && !ShareFileList.isEmpty()) {
+                for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
+                    if (ShareFile.getSharedFileId().equals(イメージ情報.getイメージ共有ファイルID())) {
+                        イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
+                    }
+                }
+            }
+        }
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            ShareFileList.clear();
         }
         イメージファイルパス.add(イメージパス_表);
 
-        RString イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏BAK);
-        if (RString.isNullOrEmpty(イメージパス_裏)) {
-            イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
+        検索条件.sharedFilePat(ファイル名_主治医意見書_裏BAK);
+        ShareFileList = SharedFile.searchSharedFile(検索条件);
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
+                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
+                    イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏BAK);
+                }
+            }
+        }        
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            ShareFileList.clear();
+        }
+        if (RString.isNullOrEmpty(イメージパス_裏)){
+            検索条件.sharedFilePat(ファイル名_主治医意見書_裏);
+            ShareFileList = SharedFile.searchSharedFile(検索条件);
+            if (ShareFileList != null && !ShareFileList.isEmpty()) {
+                for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
+                    if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
+                        イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
+                    }
+                }
+            }
         }
         イメージファイルパス.add(イメージパス_裏);
 
@@ -195,22 +241,54 @@ public class ShujiiIkenshoShokaiHandler {
 
     private List<RString> getマスクFilePathList(Image イメージ情報) {
         List<RString> イメージファイルパス = new ArrayList<>();
-
-        RString イメージパス_原本表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
         RString イメージパス_表 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(イメージパス_原本表)) {
-            イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
+        RString イメージパス_裏 = RString.EMPTY;
+
+        SearchSharedFileOpts 検索条件 = new SearchSharedFileOpts();
+        検索条件.sharedFilePat(ファイル名_主治医意見書_表BAK);
+        List<UzT0885SharedFileEntryEntity> ShareFileList = SharedFile.searchSharedFile(検索条件);
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
+                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
+                    イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
+                }
+            }
+        }
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            ShareFileList.clear();
         }
         イメージファイルパス.add(イメージパス_表);
 
-        RString イメージパス_原本裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏BAK);
-        RString イメージパス_裏 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(イメージパス_原本裏)) {
-            イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
+        検索条件.sharedFilePat(ファイル名_主治医意見書_裏BAK);
+        ShareFileList = SharedFile.searchSharedFile(検索条件);
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
+                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
+                    イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
+                }
+            }
         }
         イメージファイルパス.add(イメージパス_裏);
 
         return イメージファイルパス;
+
+//        List<RString> イメージファイルパス = new ArrayList<>();
+//
+//        RString イメージパス_原本表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
+//        RString イメージパス_表 = RString.EMPTY;
+//        if (!RString.isNullOrEmpty(イメージパス_原本表)) {
+//            イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
+//        }
+//        イメージファイルパス.add(イメージパス_表);
+//
+//        RString イメージパス_原本裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏BAK);
+//        RString イメージパス_裏 = RString.EMPTY;
+//        if (!RString.isNullOrEmpty(イメージパス_原本裏)) {
+//            イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
+//        }
+//        イメージファイルパス.add(イメージパス_裏);
+//
+//        return イメージファイルパス;
     }
 
     private RString getFilePath(Image イメージ情報, RString ファイル) {

@@ -75,7 +75,7 @@ public class IchijiHanteiValidatisonHandler {
         if (!ファイル名.equals(取込ファイル名)) {
             validPairs.add(new ValidationMessageControlPair(
                     new CheckMessages(UrErrorMessages.未指定,
-                            取込ファイル名.concat("ファイル").toString()), div.getUploadPanel()));
+                            取込ファイル名.concat("ファイル").toString()), div.getUplHanteiKekka()));
         }
         return validPairs;
     }

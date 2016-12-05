@@ -76,7 +76,7 @@ public class ShinsakaiKaisaiKekka {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         RealInitialLocker.lock(前排他ロックキー);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
-        div.getDdlKaisaiBasho().setDataSource(service.get開催会場());
+        div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setDataSource(service.get開催会場());
         getHandler(div).onLoad(saiYoteiJoho);
         getHandler(div).setDisabled();
         List<ShinsakaiWariateIinJohoBusiness> list = service.get審査会委員一覧検索(開催番号).records();
@@ -240,12 +240,12 @@ public class ShinsakaiKaisaiKekka {
     private ShinsakaiKaisaiKekkaJoho2 set介護認定審査会開催結果情報(ShinsakaiKaisaiKekkaDiv div,
             ShinsakaiKaisaiKekkaJoho2Builder kaisaiKekkaJohoBuilder) {
         kaisaiKekkaJohoBuilder.set合議体番号(Integer.parseInt(div.getGogitaiNo().toString()));
-        kaisaiKekkaJohoBuilder.set介護認定審査会開催年月日(div.getTxtKaisaiBi().getValue());
-        kaisaiKekkaJohoBuilder.set介護認定審査会開始時刻(timeToStr(div.getTxtKaisaiStartTime().getValue()));
-        kaisaiKekkaJohoBuilder.set介護認定審査会終了時刻(timeToStr(div.getTxtKaisaiEndTime().getValue()));
-        kaisaiKekkaJohoBuilder.set介護認定審査会開催場所コード(div.getDdlKaisaiBasho().getSelectedKey());
-        kaisaiKekkaJohoBuilder.set所要時間合計(Integer.valueOf(String.valueOf(div.getTxtShoyoTime().getValue())));
-        kaisaiKekkaJohoBuilder.set介護認定審査会実施人数(div.getTxtJissiSu().getValue().intValue());
+        kaisaiKekkaJohoBuilder.set介護認定審査会開催年月日(div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue());
+        kaisaiKekkaJohoBuilder.set介護認定審査会開始時刻(timeToStr(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue()));
+        kaisaiKekkaJohoBuilder.set介護認定審査会終了時刻(timeToStr(div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue()));
+        kaisaiKekkaJohoBuilder.set介護認定審査会開催場所コード(div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().getSelectedKey());
+        kaisaiKekkaJohoBuilder.set所要時間合計(Integer.valueOf(String.valueOf(div.getShinsakaiKaisaiInfo().getTxtShoyoTime().getValue())));
+        kaisaiKekkaJohoBuilder.set介護認定審査会実施人数(div.getShinsakaiKaisaiInfo().getTxtJissiSu().getValue().intValue());
 
         return kaisaiKekkaJohoBuilder.build();
     }
@@ -258,11 +258,11 @@ public class ShinsakaiKaisaiKekka {
                     new ShinsakaiWariateIinJoho2Identifier(開催番号, row.getShinsakjaiIinCode()));
             ShinsakaiWariateIinJoho2Builder shinsakaiWariateIinJohoBuilder = shinsakaiWariateIinJoho.createBuilderForEdit();
             shinsakaiWariateIinJohoBuilder.set介護認定審査会議長区分コード(new Code(row.getGichoKubun().getSelectedKey()));
-            shinsakaiWariateIinJohoBuilder.set介護認定審査会開催年月日(div.getTxtKaisaiBi().getValue());
+            shinsakaiWariateIinJohoBuilder.set介護認定審査会開催年月日(div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue());
             shinsakaiWariateIinJohoBuilder.set委員出席(Boolean.valueOf(row.getShukketsuKubun().getSelectedKey().toString()));
-            shinsakaiWariateIinJohoBuilder.set委員出席時間(row.getShussekiTime().replace(":", ""));
+            shinsakaiWariateIinJohoBuilder.set委員出席時間(row.getShussekiTime().getText().substring(0, 4).replace(":", ""));
             shinsakaiWariateIinJohoBuilder.set委員早退有無(Boolean.valueOf(row.getSotaiUmu().getSelectedKey().toString()));
-            shinsakaiWariateIinJohoBuilder.set委員退席時間(row.getTaisekiTime().replace(":", ""));
+            shinsakaiWariateIinJohoBuilder.set委員退席時間(row.getTaisekiTime().getText().substring(0, 4).replace(":", ""));
             shinsakaiWariateIinJohoBuilder.set委員遅刻有無(Boolean.valueOf(row.getChikokuUmu().getSelectedKey().toString()));
             ShinsakaiKaisaiYoteiJoho2Builder kaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
             kaisaiYoteiJohoBuilder.setShinsakaiWariateIinJoho2(shinsakaiWariateIinJohoBuilder.build().modifiedModel());

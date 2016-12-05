@@ -560,8 +560,8 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setReadOnly(false);
             div.getKobetsuHyojiArea().getDdlJotaiZo().setReadOnly(false);
             div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(false);
-            div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(false);
-            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(false);
+            div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(true);
+            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(true);
             div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setReadOnly(false);
             div.getKobetsuHyojiArea().getBtnShinsakaiMemoTeikeibunGuide().setDisabled(false);
             div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setReadOnly(false);

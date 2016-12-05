@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class maskTabPanel6Div extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class maskTabPanel6Div extends TabPanel {
      */
     @JsonProperty("imgMask6")
     private StaticImage imgMask6;
+    @JsonProperty("LabelNoImage6")
+    private Label LabelNoImage6;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class maskTabPanel6Div extends TabPanel {
     @JsonProperty("imgMask6")
     public void setImgMask6(StaticImage imgMask6) {
         this.imgMask6 = imgMask6;
+    }
+
+    /*
+     * getLabelNoImage6
+     * @return LabelNoImage6
+     */
+    @JsonProperty("LabelNoImage6")
+    public Label getLabelNoImage6() {
+        return LabelNoImage6;
+    }
+
+    /*
+     * setLabelNoImage6
+     * @param LabelNoImage6 LabelNoImage6
+     */
+    @JsonProperty("LabelNoImage6")
+    public void setLabelNoImage6(Label LabelNoImage6) {
+        this.LabelNoImage6 = LabelNoImage6;
     }
 
     // </editor-fold>

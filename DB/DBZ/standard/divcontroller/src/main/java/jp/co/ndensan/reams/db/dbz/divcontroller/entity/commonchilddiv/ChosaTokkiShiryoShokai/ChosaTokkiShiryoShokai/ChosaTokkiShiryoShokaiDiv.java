@@ -18,7 +18,7 @@ import java.util.List;
  * @author 自動生成
  */
 public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiryoShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -356,6 +356,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
+    public Label getLabelNoImage1() {
+        return this.getMaskTabContainer().getMaskTabPanel1().getLabelNoImage1();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage1(Label LabelNoImage1) {
+        this.getMaskTabContainer().getMaskTabPanel1().setLabelNoImage1(LabelNoImage1);
+    }
+
+    @JsonIgnore
     public maskTabPanel2Div getMaskTabPanel2() {
         return this.getMaskTabContainer().getMaskTabPanel2();
     }
@@ -373,6 +383,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     @JsonIgnore
     public void  setImgMask2(StaticImage imgMask2) {
         this.getMaskTabContainer().getMaskTabPanel2().setImgMask2(imgMask2);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage2() {
+        return this.getMaskTabContainer().getMaskTabPanel2().getLabelNoImage2();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage2(Label LabelNoImage2) {
+        this.getMaskTabContainer().getMaskTabPanel2().setLabelNoImage2(LabelNoImage2);
     }
 
     @JsonIgnore
@@ -396,6 +416,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
+    public Label getLabelNoImage3() {
+        return this.getMaskTabContainer().getMaskTabPanel3().getLabelNoImage3();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage3(Label LabelNoImage3) {
+        this.getMaskTabContainer().getMaskTabPanel3().setLabelNoImage3(LabelNoImage3);
+    }
+
+    @JsonIgnore
     public maskTabPanel4Div getMaskTabPanel4() {
         return this.getMaskTabContainer().getMaskTabPanel4();
     }
@@ -413,6 +443,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     @JsonIgnore
     public void  setImgMask4(StaticImage imgMask4) {
         this.getMaskTabContainer().getMaskTabPanel4().setImgMask4(imgMask4);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage4() {
+        return this.getMaskTabContainer().getMaskTabPanel4().getLabelNoImage4();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage4(Label LabelNoImage4) {
+        this.getMaskTabContainer().getMaskTabPanel4().setLabelNoImage4(LabelNoImage4);
     }
 
     @JsonIgnore
@@ -436,6 +476,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
+    public Label getLabelNoImage5() {
+        return this.getMaskTabContainer().getMaskTabPanel5().getLabelNoImage5();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage5(Label LabelNoImage5) {
+        this.getMaskTabContainer().getMaskTabPanel5().setLabelNoImage5(LabelNoImage5);
+    }
+
+    @JsonIgnore
     public maskTabPanel6Div getMaskTabPanel6() {
         return this.getMaskTabContainer().getMaskTabPanel6();
     }
@@ -453,6 +503,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     @JsonIgnore
     public void  setImgMask6(StaticImage imgMask6) {
         this.getMaskTabContainer().getMaskTabPanel6().setImgMask6(imgMask6);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage6() {
+        return this.getMaskTabContainer().getMaskTabPanel6().getLabelNoImage6();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage6(Label LabelNoImage6) {
+        this.getMaskTabContainer().getMaskTabPanel6().setLabelNoImage6(LabelNoImage6);
     }
 
     @JsonIgnore
@@ -476,6 +536,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     }
 
     @JsonIgnore
+    public Label getLabelNoImage7() {
+        return this.getMaskTabContainer().getMaskTabPanel7().getLabelNoImage7();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage7(Label LabelNoImage7) {
+        this.getMaskTabContainer().getMaskTabPanel7().setLabelNoImage7(LabelNoImage7);
+    }
+
+    @JsonIgnore
     public maskTabPanel8Div getMaskTabPanel8() {
         return this.getMaskTabContainer().getMaskTabPanel8();
     }
@@ -493,6 +563,16 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
     @JsonIgnore
     public void  setImgMask8(StaticImage imgMask8) {
         this.getMaskTabContainer().getMaskTabPanel8().setImgMask8(imgMask8);
+    }
+
+    @JsonIgnore
+    public Label getLabelNoImage8() {
+        return this.getMaskTabContainer().getMaskTabPanel8().getLabelNoImage8();
+    }
+
+    @JsonIgnore
+    public void  setLabelNoImage8(Label LabelNoImage8) {
+        this.getMaskTabContainer().getMaskTabPanel8().setLabelNoImage8(LabelNoImage8);
     }
 
     // </editor-fold>
@@ -515,7 +595,7 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
         // タイトルリストのItem数はパスリストのItem数と一致してください。
         this.radGenpoMask.setSelectedKey(SELECT原本);
         this.maskTabContainer.setDisplayNone(true);
-        
+
         if (!imgGneponPathList.isEmpty()) {
             if (imgGneponPathList.size() >= 1) {
                 getGenpoTabContainer().getGenpoTabPanel1().setVisible(true);
@@ -590,7 +670,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 if (!RString.isNullOrEmpty(imgMaskPathList.get(0))) {
                     getMaskTabContainer().getMaskTabPanel1().getImgMask1().setSrc(imgMaskPathList.get(0));
                 } else {
-                    getMaskTabContainer().getMaskTabPanel1().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel1().getImgMask1().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel1().getLabelNoImage1().setDisplayNone(false);
                 }
             }
             if (imgMaskPathList.size() >= 2) {
@@ -598,7 +679,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 getMaskTabContainer().getMaskTabPanel2().setTitle(maskTitleList.get(1));
                 getMaskTabContainer().getMaskTabPanel2().getImgMask2().setSrc(imgMaskPathList.get(1));
                 if (RString.isNullOrEmpty(imgMaskPathList.get(1))) {
-                    getMaskTabContainer().getMaskTabPanel2().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel2().getImgMask2().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel2().getLabelNoImage2().setDisplayNone(false);
                 }
             }
             if (imgMaskPathList.size() >= 3) {
@@ -606,7 +688,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 getMaskTabContainer().getMaskTabPanel3().setTitle(maskTitleList.get(2));
                 getMaskTabContainer().getMaskTabPanel3().getImgMask3().setSrc(imgMaskPathList.get(2));
                 if (RString.isNullOrEmpty(imgMaskPathList.get(2))) {
-                    getMaskTabContainer().getMaskTabPanel3().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel3().getImgMask3().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel3().getLabelNoImage3().setDisplayNone(false);
                 }
             }
             if (imgMaskPathList.size() >= 4) {
@@ -614,7 +697,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 getMaskTabContainer().getMaskTabPanel4().setTitle(maskTitleList.get(3));
                 getMaskTabContainer().getMaskTabPanel4().getImgMask4().setSrc(imgMaskPathList.get(3));
                 if (RString.isNullOrEmpty(imgMaskPathList.get(3))) {
-                    getMaskTabContainer().getMaskTabPanel4().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel4().getImgMask4().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel4().getLabelNoImage4().setDisplayNone(false);
                 }
             }
             if (imgMaskPathList.size() >= 5) {
@@ -622,7 +706,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 getMaskTabContainer().getMaskTabPanel5().setTitle(maskTitleList.get(4));
                 getMaskTabContainer().getMaskTabPanel5().getImgMask5().setSrc(imgMaskPathList.get(4));
                 if (RString.isNullOrEmpty(imgMaskPathList.get(4))) {
-                    getMaskTabContainer().getMaskTabPanel5().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel5().getImgMask5().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel5().getLabelNoImage5().setDisplayNone(false);
                 }
             }
             if (imgMaskPathList.size() >= 6) {
@@ -630,7 +715,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 getMaskTabContainer().getMaskTabPanel6().setTitle(maskTitleList.get(5));
                 getMaskTabContainer().getMaskTabPanel6().getImgMask6().setSrc(imgMaskPathList.get(5));
                 if (RString.isNullOrEmpty(imgMaskPathList.get(5))) {
-                    getMaskTabContainer().getMaskTabPanel6().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel6().getImgMask6().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel6().getLabelNoImage6().setDisplayNone(false);
                 }
             }
             if (imgMaskPathList.size() >= 7) {
@@ -638,7 +724,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 getMaskTabContainer().getMaskTabPanel7().setTitle(maskTitleList.get(6));
                 getMaskTabContainer().getMaskTabPanel7().getImgMask7().setSrc(imgMaskPathList.get(6));
                 if (RString.isNullOrEmpty(imgMaskPathList.get(6))) {
-                    getMaskTabContainer().getMaskTabPanel7().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel7().getImgMask7().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel7().getLabelNoImage7().setDisplayNone(false);
                 }
             }
             if (imgMaskPathList.size() >= 8) {
@@ -646,7 +733,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 getMaskTabContainer().getMaskTabPanel8().setTitle(maskTitleList.get(7));
                 getMaskTabContainer().getMaskTabPanel8().getImgMask8().setSrc(imgMaskPathList.get(7));
                 if (RString.isNullOrEmpty(imgMaskPathList.get(7))) {
-                    getMaskTabContainer().getMaskTabPanel8().setDisabled(true);
+                    getMaskTabContainer().getMaskTabPanel8().getImgMask8().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel8().getLabelNoImage8().setDisplayNone(false);
                 }
             }
         }

@@ -9,8 +9,8 @@ module DBE {
 
         export class Events {
 
-            public static onClick_btnClose(): string {
-                return "onClick_btnClose";
+            public static onClick_btnReturn(): string {
+                return "onClick_btnReturn";
             }
 
         }
@@ -62,8 +62,8 @@ module DBE {
             //    return new DBZ.ChosaTokkiShiryoShokai.ModeController(this.convFiledName("CcdChosaTokkiShiryoShokai"));
             //}
 
-            public btnClose(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnClose"));
+            public btnReturn(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             }
 
         }

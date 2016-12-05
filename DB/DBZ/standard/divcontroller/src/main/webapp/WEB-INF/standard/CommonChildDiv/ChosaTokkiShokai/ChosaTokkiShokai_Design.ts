@@ -297,6 +297,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking1"));
             }
 
+            public LabelNoImage1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage1"));
+            }
+
             public txtTokkijikoNo12(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo12"));
             }
@@ -323,6 +327,10 @@ module DBZ {
 
             public imgMasking2(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking2"));
+            }
+
+            public LabelNoImage2(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage2"));
             }
 
             public txtTokkijikoNo13(): UZA.TextBox {
@@ -353,6 +361,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking3"));
             }
 
+            public LabelNoImage3(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage3"));
+            }
+
             public txtTokkijikoNo14(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo14"));
             }
@@ -379,6 +391,10 @@ module DBZ {
 
             public imgMasking4(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking4"));
+            }
+
+            public LabelNoImage4(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage4"));
             }
 
             public txtTokkijikoNo15(): UZA.TextBox {
@@ -409,6 +425,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking5"));
             }
 
+            public LabelNoImage5(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage5"));
+            }
+
             public txtTokkijikoNo16(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo16"));
             }
@@ -435,6 +455,10 @@ module DBZ {
 
             public imgMasking6(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking6"));
+            }
+
+            public LabelNoImage6(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage6"));
             }
 
             public txtTokkijikoNo17(): UZA.TextBox {
@@ -465,6 +489,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking7"));
             }
 
+            public LabelNoImage7(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage7"));
+            }
+
             public txtTokkijikoNo18(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo18"));
             }
@@ -491,6 +519,10 @@ module DBZ {
 
             public imgMasking8(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking8"));
+            }
+
+            public LabelNoImage8(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage8"));
             }
 
             public txtTokkijikoNo19(): UZA.TextBox {
@@ -521,6 +553,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking9"));
             }
 
+            public LabelNoImage9(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage9"));
+            }
+
             public txtTokkijikoNo20(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo20"));
             }
@@ -547,6 +583,10 @@ module DBZ {
 
             public imgMasking10(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking10"));
+            }
+
+            public LabelNoImage10(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage10"));
             }
 
             public imgPanel2(): UZA.Panel {
@@ -585,6 +625,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking11"));
             }
 
+            public LabelNoImage11(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage11"));
+            }
+
             public txtTokkijikoNo22(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo22"));
             }
@@ -611,6 +655,10 @@ module DBZ {
 
             public imgMasking12(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking12"));
+            }
+
+            public LabelNoImage12(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage12"));
             }
 
             public txtTokkijikoNo23(): UZA.TextBox {
@@ -641,6 +689,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking13"));
             }
 
+            public LabelNoImage13(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage13"));
+            }
+
             public txtTokkijikoNo24(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo24"));
             }
@@ -667,6 +719,10 @@ module DBZ {
 
             public imgMasking14(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking14"));
+            }
+
+            public LabelNoImage14(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage14"));
             }
 
             public txtTokkijikoNo25(): UZA.TextBox {
@@ -697,6 +753,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking15"));
             }
 
+            public LabelNoImage15(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage15"));
+            }
+
             public txtTokkijikoNo26(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo26"));
             }
@@ -723,6 +783,10 @@ module DBZ {
 
             public imgMasking16(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking16"));
+            }
+
+            public LabelNoImage16(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage16"));
             }
 
             public txtTokkijikoNo27(): UZA.TextBox {
@@ -753,6 +817,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking17"));
             }
 
+            public LabelNoImage17(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage17"));
+            }
+
             public txtTokkijikoNo28(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo28"));
             }
@@ -779,6 +847,10 @@ module DBZ {
 
             public imgMasking18(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking18"));
+            }
+
+            public LabelNoImage18(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage18"));
             }
 
             public txtTokkijikoNo29(): UZA.TextBox {
@@ -809,6 +881,10 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgMasking19"));
             }
 
+            public LabelNoImage19(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage19"));
+            }
+
             public txtTokkijikoNo30(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkijikoNo30"));
             }
@@ -835,6 +911,10 @@ module DBZ {
 
             public imgMasking20(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgMasking20"));
+            }
+
+            public LabelNoImage20(): UZA.Label {
+                return new UZA.Label(this.convFiledName("LabelNoImage20"));
             }
 
             public btnReturn(): UZA.Button {
