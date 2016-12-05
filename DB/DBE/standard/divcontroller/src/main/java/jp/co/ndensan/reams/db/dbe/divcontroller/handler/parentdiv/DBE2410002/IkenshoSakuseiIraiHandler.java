@@ -307,12 +307,12 @@ public class IkenshoSakuseiIraiHandler {
         item.setBirthDD(birth.wareki().fillType(FillType.BLANK).getDay());
         RString ninteiShinseiDay = new FlexibleDate(business.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
-        item.setShinseiYY2(ninteiShinseiDay.substring(2, 数字_3));
-        item.setShinseiMM1(ninteiShinseiDay.substring(数字_4, 数字_5));
-        item.setShinseiMM2(ninteiShinseiDay.substring(数字_5, 数字_6));
-        item.setShinseiDD1(ninteiShinseiDay.substring(数字_7, 数字_8));
-        item.setShinseiDD2(ninteiShinseiDay.substring(数字_8));
+        item.setShinseiYY1(ninteiShinseiDay.length() < 数字_2 ? RString.EMPTY : ninteiShinseiDay.substring(1, 2));
+        item.setShinseiYY2(ninteiShinseiDay.length() < 数字_3 ? RString.EMPTY : ninteiShinseiDay.substring(2, 数字_3));
+        item.setShinseiMM1(ninteiShinseiDay.length() < 数字_5 ? RString.EMPTY : ninteiShinseiDay.substring(数字_4, 数字_5));
+        item.setShinseiMM2(ninteiShinseiDay.length() < 数字_6 ? RString.EMPTY : ninteiShinseiDay.substring(数字_5, 数字_6));
+        item.setShinseiDD1(ninteiShinseiDay.length() < 数字_8 ? RString.EMPTY : ninteiShinseiDay.substring(数字_7, 数字_8));
+        item.setShinseiDD2(ninteiShinseiDay.length() <= 数字_8 ? RString.EMPTY : ninteiShinseiDay.substring(数字_8));
         item.setSeibetsuMan(Seibetsu.男.getコード().equals(business.get性別()) ? RString.EMPTY : 星);
         item.setSeibetsuWoman(Seibetsu.女.getコード().equals(business.get性別()) ? RString.EMPTY : 星);
         item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 星);

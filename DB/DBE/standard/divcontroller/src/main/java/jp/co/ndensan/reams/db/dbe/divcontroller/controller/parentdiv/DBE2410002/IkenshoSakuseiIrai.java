@@ -180,15 +180,19 @@ public class IkenshoSakuseiIrai {
      */
     public ResponseData<SourceDataCollection> onClick_btnHakkou(IkenshoSakuseiIraiDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
+        update主治医意見書作成依頼情報(div);
+        NinteiShinseiJoho 要介護認定申請情報 = IkenshoSakuseiIraiManager.createInstance().get要介護認定申請情報(
+                ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value());
+        NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit();
+        builder.set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode());
+        builder.set主治医コード(div.getCcdShujiiInput().getShujiiCode());
+        builder.set指定医フラグ(div.getCcdShujiiInput().hasShiteii());
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, builder.build());
         try (ReportManager reportManager = new ReportManager()) {
             AccessLogger.log(AccessLogType.照会, toPersonalData());
             printData(div, reportManager);
             response.data = reportManager.publish();
         }
-        update主治医意見書作成依頼情報(div);
-        NinteiShinseiJoho 要介護認定申請情報 = IkenshoSakuseiIraiManager.createInstance().get要介護認定申請情報(
-                ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value());
-        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
         return response;
     }
 
@@ -245,18 +249,22 @@ public class IkenshoSakuseiIrai {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            NinteiShinseiJoho 要介護認定申請情報 = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
-            NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit();
-            builder.set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode());
-            builder.set主治医コード(div.getCcdShujiiInput().getShujiiCode());
-            builder.set指定医フラグ(div.getCcdShujiiInput().hasShiteii());
-            builder.setShujiiIkenshoIraiJoho(createHandler(div)
-                    .create主治医意見書作成依頼(要介護認定申請情報, ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value()));
-            IkenshoSakuseiIraiManager.createInstance().save(builder.build().modifiedModel());
+            保存処理(div);
             onLoad(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void 保存処理(IkenshoSakuseiIraiDiv div) {
+        NinteiShinseiJoho 要介護認定申請情報 = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
+        NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit();
+        builder.set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode());
+        builder.set主治医コード(div.getCcdShujiiInput().getShujiiCode());
+        builder.set指定医フラグ(div.getCcdShujiiInput().hasShiteii());
+        builder.setShujiiIkenshoIraiJoho(createHandler(div)
+                .create主治医意見書作成依頼(要介護認定申請情報, ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value()));
+        IkenshoSakuseiIraiManager.createInstance().save(builder.build().modifiedModel());
     }
 
     private IkenshoSakuseiIraiHandler createHandler(IkenshoSakuseiIraiDiv div) {
@@ -274,19 +282,26 @@ public class IkenshoSakuseiIrai {
     }
 
     private void update主治医意見書作成依頼情報(IkenshoSakuseiIraiDiv div) {
-        ShujiiIkenshoIraiJohoBuilder builder = null;
+        ShujiiIkenshoIraiJohoBuilder 主治医意見書依頼情報builder = null;
         NinteiShinseiJoho 要介護認定申請情報 = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
         ShujiiIkenshoIraiJoho ikenshoIraiJoho = 要介護認定申請情報.getshujiiIkenshoIraiJohoList().get(数字_0);
         if (div.getChkIrai().getSelectedKeys().contains(SELECTED_KEY0) || div.getChkIrai().getSelectedKeys().contains(SELECTED_KEY1)) {
-            builder = ikenshoIraiJoho.createBuilderForEdit();
-            builder.set依頼書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
+            主治医意見書依頼情報builder = ikenshoIraiJoho.createBuilderForEdit();
+            主治医意見書依頼情報builder.set依頼書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0) || div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY1)) {
-            builder = ikenshoIraiJoho.createBuilderForEdit();
-            builder.set意見書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
+            主治医意見書依頼情報builder = ikenshoIraiJoho.createBuilderForEdit();
+            主治医意見書依頼情報builder.set意見書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
+            主治医意見書依頼情報builder.set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode());
+            主治医意見書依頼情報builder.set主治医コード(div.getCcdShujiiInput().getShujiiCode());
         }
-        if (builder != null) {
-            IkenshoSakuseiIraiManager.createInstance().save主治医意見書作成依頼情報(builder.build().modifiedModel());
+        if (主治医意見書依頼情報builder != null) {
+            NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit();
+            builder.set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode());
+            builder.set主治医コード(div.getCcdShujiiInput().getShujiiCode());
+            builder.set指定医フラグ(div.getCcdShujiiInput().hasShiteii());
+            builder.setShujiiIkenshoIraiJoho(主治医意見書依頼情報builder.build());
+            IkenshoSakuseiIraiManager.createInstance().save(builder.build().modifiedModel());
         }
     }
 
