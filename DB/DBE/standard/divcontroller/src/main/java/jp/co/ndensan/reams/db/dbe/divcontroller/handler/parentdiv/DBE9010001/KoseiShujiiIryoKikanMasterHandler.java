@@ -169,7 +169,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
     /**
      * 主治医医療機関情報を設定します。
      *
-     * @param eventJotai 状態
+     * @param eventJotai RString
+     * @param 状態 boolean
      */
     public void setShujiiIryoKikanJohoToIchiran(RString eventJotai, boolean 状態) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();

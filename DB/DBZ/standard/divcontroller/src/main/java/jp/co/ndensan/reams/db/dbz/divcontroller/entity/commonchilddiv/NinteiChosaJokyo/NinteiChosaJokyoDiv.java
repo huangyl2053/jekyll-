@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
     /*
      * [ private の作成 ]
@@ -376,7 +378,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -391,11 +393,11 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
     }
 
-    public void setMode_DisplayType( DisplayType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
+    public void setMode_DisplayType(DisplayType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
     }
 
     /*
@@ -407,7 +409,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosainCode(TextBoxCode txtNinteiChosainCode) {
+    public void setTxtNinteiChosainCode(TextBoxCode txtNinteiChosainCode) {
         this.getNinteiChosa().setTxtNinteiChosainCode(txtNinteiChosainCode);
     }
 
@@ -417,7 +419,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnChosainGuide(ButtonDialog btnChosainGuide) {
+    public void setBtnChosainGuide(ButtonDialog btnChosainGuide) {
         this.getNinteiChosa().setBtnChosainGuide(btnChosainGuide);
     }
 
@@ -427,7 +429,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
+    public void setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
         this.getNinteiChosa().setTxtNinteiChosainName(txtNinteiChosainName);
     }
 
@@ -437,7 +439,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiCode(TextBoxCode txtNinteiChosaItakusakiCode) {
+    public void setTxtNinteiChosaItakusakiCode(TextBoxCode txtNinteiChosaItakusakiCode) {
         this.getNinteiChosa().setTxtNinteiChosaItakusakiCode(txtNinteiChosaItakusakiCode);
     }
 
@@ -447,7 +449,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
+    public void setBtnItakusakiGuide(ButtonDialog btnItakusakiGuide) {
         this.getNinteiChosa().setBtnItakusakiGuide(btnItakusakiGuide);
     }
 
@@ -457,7 +459,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
+    public void setTxtNinteiChosaItakusakiName(TextBox txtNinteiChosaItakusakiName) {
         this.getNinteiChosa().setTxtNinteiChosaItakusakiName(txtNinteiChosaItakusakiName);
     }
 
@@ -467,7 +469,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnChosainJohoClear(Button btnChosainJohoClear) {
+    public void setBtnChosainJohoClear(Button btnChosainJohoClear) {
         this.getNinteiChosa().setBtnChosainJohoClear(btnChosainJohoClear);
     }
 
@@ -477,7 +479,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaYubinNo(TextBoxYubinNo txtNinteiChosaYubinNo) {
+    public void setTxtNinteiChosaYubinNo(TextBoxYubinNo txtNinteiChosaYubinNo) {
         this.getNinteiChosa().setTxtNinteiChosaYubinNo(txtNinteiChosaYubinNo);
     }
 
@@ -487,7 +489,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaJusho(TextBoxJusho txtNinteiChosaJusho) {
+    public void setTxtNinteiChosaJusho(TextBoxJusho txtNinteiChosaJusho) {
         this.getNinteiChosa().setTxtNinteiChosaJusho(txtNinteiChosaJusho);
     }
 
@@ -497,37 +499,37 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaTelNo(TextBoxTelNo txtNinteiChosaTelNo) {
+    public void setTxtNinteiChosaTelNo(TextBoxTelNo txtNinteiChosaTelNo) {
         this.getNinteiChosa().setTxtNinteiChosaTelNo(txtNinteiChosaTelNo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiChosaIraiDate() {
+    public TextBoxDate getTxtNinteiChosaIraiDate() {
         return this.getNinteiChosa().getTxtNinteiChosaIraiDate();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaIraiDate(TextBoxFlexibleDate txtNinteiChosaIraiDate) {
+    public void setTxtNinteiChosaIraiDate(TextBoxDate txtNinteiChosaIraiDate) {
         this.getNinteiChosa().setTxtNinteiChosaIraiDate(txtNinteiChosaIraiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiChosaJisshiYoteiDate() {
+    public TextBoxDate getTxtNinteiChosaJisshiYoteiDate() {
         return this.getNinteiChosa().getTxtNinteiChosaJisshiYoteiDate();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaJisshiYoteiDate(TextBoxFlexibleDate txtNinteiChosaJisshiYoteiDate) {
+    public void setTxtNinteiChosaJisshiYoteiDate(TextBoxDate txtNinteiChosaJisshiYoteiDate) {
         this.getNinteiChosa().setTxtNinteiChosaJisshiYoteiDate(txtNinteiChosaJisshiYoteiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiChosaJisshiDate() {
+    public TextBoxDate getTxtNinteiChosaJisshiDate() {
         return this.getNinteiChosa().getTxtNinteiChosaJisshiDate();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaJisshiDate(TextBoxFlexibleDate txtNinteiChosaJisshiDate) {
+    public void setTxtNinteiChosaJisshiDate(TextBoxDate txtNinteiChosaJisshiDate) {
         this.getNinteiChosa().setTxtNinteiChosaJisshiDate(txtNinteiChosaJisshiDate);
     }
 
@@ -537,7 +539,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setDdlNinteiChosaItakusakiKubun(DropDownList ddlNinteiChosaItakusakiKubun) {
+    public void setDdlNinteiChosaItakusakiKubun(DropDownList ddlNinteiChosaItakusakiKubun) {
         this.getNinteiChosa().setDdlNinteiChosaItakusakiKubun(ddlNinteiChosaItakusakiKubun);
     }
 
@@ -547,7 +549,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtChosasakiName(TextBox txtChosasakiName) {
+    public void setTxtChosasakiName(TextBox txtChosasakiName) {
         this.getHomonChosasaki().setTxtChosasakiName(txtChosasakiName);
     }
 
@@ -557,7 +559,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnZenKaiFukusha(Button btnZenKaiFukusha) {
+    public void setBtnZenKaiFukusha(Button btnZenKaiFukusha) {
         this.getHomonChosasaki().setBtnZenKaiFukusha(btnZenKaiFukusha);
     }
 
@@ -567,7 +569,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnHonninJushoFukusha(Button btnHonninJushoFukusha) {
+    public void setBtnHonninJushoFukusha(Button btnHonninJushoFukusha) {
         this.getHomonChosasaki().setBtnHonninJushoFukusha(btnHonninJushoFukusha);
     }
 
@@ -577,7 +579,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnNyushoShisetsuFukusha(Button btnNyushoShisetsuFukusha) {
+    public void setBtnNyushoShisetsuFukusha(Button btnNyushoShisetsuFukusha) {
         this.getHomonChosasaki().setBtnNyushoShisetsuFukusha(btnNyushoShisetsuFukusha);
     }
 
@@ -587,7 +589,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnHomonChosaClear(Button btnHomonChosaClear) {
+    public void setBtnHomonChosaClear(Button btnHomonChosaClear) {
         this.getHomonChosasaki().setBtnHomonChosaClear(btnHomonChosaClear);
     }
 
@@ -597,7 +599,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtChosasakiYubinNo(TextBoxYubinNo txtChosasakiYubinNo) {
+    public void setTxtChosasakiYubinNo(TextBoxYubinNo txtChosasakiYubinNo) {
         this.getHomonChosasaki().setTxtChosasakiYubinNo(txtChosasakiYubinNo);
     }
 
@@ -607,7 +609,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtChosasakiJusho(TextBoxJusho txtChosasakiJusho) {
+    public void setTxtChosasakiJusho(TextBoxJusho txtChosasakiJusho) {
         this.getHomonChosasaki().setTxtChosasakiJusho(txtChosasakiJusho);
     }
 
@@ -617,7 +619,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtChosasakiTelNo(TextBoxTelNo txtChosasakiTelNo) {
+    public void setTxtChosasakiTelNo(TextBoxTelNo txtChosasakiTelNo) {
         this.getHomonChosasaki().setTxtChosasakiTelNo(txtChosasakiTelNo);
     }
 
@@ -627,7 +629,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiCode(TextBoxCode txtShujiiCode) {
+    public void setTxtShujiiCode(TextBoxCode txtShujiiCode) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiCode(txtShujiiCode);
     }
 
@@ -637,7 +639,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnShujiiGuide(ButtonDialog btnShujiiGuide) {
+    public void setBtnShujiiGuide(ButtonDialog btnShujiiGuide) {
         this.getShujiiAndShujiIryoKikan().setBtnShujiiGuide(btnShujiiGuide);
     }
 
@@ -647,7 +649,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiName(TextBox txtShujiiName) {
+    public void setTxtShujiiName(TextBox txtShujiiName) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiName(txtShujiiName);
     }
 
@@ -657,7 +659,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+    public void setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanCode(txtShujiiIryoKikanCode);
     }
 
@@ -667,7 +669,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnIryoKikanGuide(ButtonDialog btnIryoKikanGuide) {
+    public void setBtnIryoKikanGuide(ButtonDialog btnIryoKikanGuide) {
         this.getShujiiAndShujiIryoKikan().setBtnIryoKikanGuide(btnIryoKikanGuide);
     }
 
@@ -677,7 +679,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanName(TextBox txtShujiiIryoKikanName) {
+    public void setTxtShujiiIryoKikanName(TextBox txtShujiiIryoKikanName) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanName(txtShujiiIryoKikanName);
     }
 
@@ -687,7 +689,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setBtnShujiiJohoClear(Button btnShujiiJohoClear) {
+    public void setBtnShujiiJohoClear(Button btnShujiiJohoClear) {
         this.getShujiiAndShujiIryoKikan().setBtnShujiiJohoClear(btnShujiiJohoClear);
     }
 
@@ -697,7 +699,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanYubinNo(TextBoxYubinNo txtShujiiIryoKikanYubinNo) {
+    public void setTxtShujiiIryoKikanYubinNo(TextBoxYubinNo txtShujiiIryoKikanYubinNo) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanYubinNo(txtShujiiIryoKikanYubinNo);
     }
 
@@ -707,7 +709,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanJusho(TextBoxJusho txtShujiiIryoKikanJusho) {
+    public void setTxtShujiiIryoKikanJusho(TextBoxJusho txtShujiiIryoKikanJusho) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanJusho(txtShujiiIryoKikanJusho);
     }
 
@@ -717,37 +719,37 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanTelNo(TextBoxTelNo txtShujiiIryoKikanTelNo) {
+    public void setTxtShujiiIryoKikanTelNo(TextBoxTelNo txtShujiiIryoKikanTelNo) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanTelNo(txtShujiiIryoKikanTelNo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanIraiDate() {
+    public TextBoxDate getTxtShujiiIryoKikanIraiDate() {
         return this.getShujiiAndShujiIryoKikan().getTxtShujiiIryoKikanIraiDate();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanIraiDate(TextBoxFlexibleDate txtShujiiIryoKikanIraiDate) {
+    public void setTxtShujiiIryoKikanIraiDate(TextBoxDate txtShujiiIryoKikanIraiDate) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanIraiDate(txtShujiiIryoKikanIraiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanNyushuYoteiDate() {
+    public TextBoxDate getTxtShujiiIryoKikanNyushuYoteiDate() {
         return this.getShujiiAndShujiIryoKikan().getTxtShujiiIryoKikanNyushuYoteiDate();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanNyushuYoteiDate(TextBoxFlexibleDate txtShujiiIryoKikanNyushuYoteiDate) {
+    public void setTxtShujiiIryoKikanNyushuYoteiDate(TextBoxDate txtShujiiIryoKikanNyushuYoteiDate) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanNyushuYoteiDate(txtShujiiIryoKikanNyushuYoteiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanNyushuDate() {
+    public TextBoxDate getTxtShujiiIryoKikanNyushuDate() {
         return this.getShujiiAndShujiIryoKikan().getTxtShujiiIryoKikanNyushuDate();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanNyushuDate(TextBoxFlexibleDate txtShujiiIryoKikanNyushuDate) {
+    public void setTxtShujiiIryoKikanNyushuDate(TextBoxDate txtShujiiIryoKikanNyushuDate) {
         this.getShujiiAndShujiIryoKikan().setTxtShujiiIryoKikanNyushuDate(txtShujiiIryoKikanNyushuDate);
     }
 
@@ -757,7 +759,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setChkShujiiKubun(CheckBoxList chkShujiiKubun) {
+    public void setChkShujiiKubun(CheckBoxList chkShujiiKubun) {
         this.getShujiiAndShujiIryoKikan().setChkShujiiKubun(chkShujiiKubun);
     }
 
@@ -767,17 +769,17 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setDdlYokaigodo(DropDownList ddlYokaigodo) {
+    public void setDdlYokaigodo(DropDownList ddlYokaigodo) {
         this.getIchijiHantei().setDdlYokaigodo(ddlYokaigodo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtIchijiHanteiDate() {
+    public TextBoxDate getTxtIchijiHanteiDate() {
         return this.getIchijiHantei().getTxtIchijiHanteiDate();
     }
 
     @JsonIgnore
-    public void  setTxtIchijiHanteiDate(TextBoxFlexibleDate txtIchijiHanteiDate) {
+    public void setTxtIchijiHanteiDate(TextBoxDate txtIchijiHanteiDate) {
         this.getIchijiHantei().setTxtIchijiHanteiDate(txtIchijiHanteiDate);
     }
 
@@ -787,37 +789,37 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setDdlNinchishoKasangoYokaigodo(DropDownList ddlNinchishoKasangoYokaigodo) {
+    public void setDdlNinchishoKasangoYokaigodo(DropDownList ddlNinchishoKasangoYokaigodo) {
         this.getIchijiHantei().setDdlNinchishoKasangoYokaigodo(ddlNinchishoKasangoYokaigodo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShinsakaiShiryoSakuseiDate() {
+    public TextBoxDate getTxtShinsakaiShiryoSakuseiDate() {
         return this.getKaigoNinteiShinsakai().getTxtShinsakaiShiryoSakuseiDate();
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiShiryoSakuseiDate(TextBoxFlexibleDate txtShinsakaiShiryoSakuseiDate) {
+    public void setTxtShinsakaiShiryoSakuseiDate(TextBoxDate txtShinsakaiShiryoSakuseiDate) {
         this.getKaigoNinteiShinsakai().setTxtShinsakaiShiryoSakuseiDate(txtShinsakaiShiryoSakuseiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShinsakaiKaisaiYoteiDate() {
+    public TextBoxDate getTxtShinsakaiKaisaiYoteiDate() {
         return this.getKaigoNinteiShinsakai().getTxtShinsakaiKaisaiYoteiDate();
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiKaisaiYoteiDate(TextBoxFlexibleDate txtShinsakaiKaisaiYoteiDate) {
+    public void setTxtShinsakaiKaisaiYoteiDate(TextBoxDate txtShinsakaiKaisaiYoteiDate) {
         this.getKaigoNinteiShinsakai().setTxtShinsakaiKaisaiYoteiDate(txtShinsakaiKaisaiYoteiDate);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNijiHanteiDate() {
+    public TextBoxDate getTxtNijiHanteiDate() {
         return this.getKaigoNinteiShinsakai().getTxtNijiHanteiDate();
     }
 
     @JsonIgnore
-    public void  setTxtNijiHanteiDate(TextBoxFlexibleDate txtNijiHanteiDate) {
+    public void setTxtNijiHanteiDate(TextBoxDate txtNijiHanteiDate) {
         this.getKaigoNinteiShinsakai().setTxtNijiHanteiDate(txtNijiHanteiDate);
     }
 
@@ -827,7 +829,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setDdlNijiHanteiKekka(DropDownList ddlNijiHanteiKekka) {
+    public void setDdlNijiHanteiKekka(DropDownList ddlNijiHanteiKekka) {
         this.getKaigoNinteiShinsakai().setDdlNijiHanteiKekka(ddlNijiHanteiKekka);
     }
 
@@ -837,7 +839,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNijiHanteiYukoKikan(TextBox txtNijiHanteiYukoKikan) {
+    public void setTxtNijiHanteiYukoKikan(TextBox txtNijiHanteiYukoKikan) {
         this.getKaigoNinteiShinsakai().setTxtNijiHanteiYukoKikan(txtNijiHanteiYukoKikan);
     }
 
@@ -847,7 +849,7 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoKikanFrom(TextBoxFlexibleDate txtNinteiYukoKikanFrom) {
+    public void setTxtNinteiYukoKikanFrom(TextBoxFlexibleDate txtNinteiYukoKikanFrom) {
         this.getKaigoNinteiShinsakai().setTxtNinteiYukoKikanFrom(txtNinteiYukoKikanFrom);
     }
 
@@ -857,17 +859,17 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoKikanTo(TextBoxFlexibleDate txtNinteiYukoKikanTo) {
+    public void setTxtNinteiYukoKikanTo(TextBoxFlexibleDate txtNinteiYukoKikanTo) {
         this.getKaigoNinteiShinsakai().setTxtNinteiYukoKikanTo(txtNinteiYukoKikanTo);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtEnkiTsuchiHakkoDay() {
+    public TextBoxDate getTxtEnkiTsuchiHakkoDay() {
         return this.getEnkiTsuchi().getTxtEnkiTsuchiHakkoDay();
     }
 
     @JsonIgnore
-    public void  setTxtEnkiTsuchiHakkoDay(TextBoxFlexibleDate txtEnkiTsuchiHakkoDay) {
+    public void setTxtEnkiTsuchiHakkoDay(TextBoxDate txtEnkiTsuchiHakkoDay) {
         this.getEnkiTsuchi().setTxtEnkiTsuchiHakkoDay(txtEnkiTsuchiHakkoDay);
     }
 
@@ -877,11 +879,10 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public void  setTxtEnkiTsuchiHakkoCount(TextBoxNum txtEnkiTsuchiHakkoCount) {
+    public void setTxtEnkiTsuchiHakkoCount(TextBoxNum txtEnkiTsuchiHakkoCount) {
         this.getEnkiTsuchi().setTxtEnkiTsuchiHakkoCount(txtEnkiTsuchiHakkoCount);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

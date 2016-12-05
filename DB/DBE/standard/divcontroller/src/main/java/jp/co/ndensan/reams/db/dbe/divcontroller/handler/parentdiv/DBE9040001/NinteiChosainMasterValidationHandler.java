@@ -8,14 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9040001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.NinteiChosainMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9040001.dgChosainIchiran_Row;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import static jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定調査員マスタ画面のバリデーションハンドラークラスです。
@@ -40,22 +38,17 @@ public class NinteiChosainMasterValidationHandler {
     /**
      * ＣＳＶを出力するボタンを押下するとき、バリデーションチェックを行う。
      *
-     * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForOutputCsv() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
+    public void validateForOutputCsv() {
         List<dgChosainIchiran_Row> ichiranList = div.getChosainIchiran().getDgChosainIchiran().getDataSource();
         if (ichiranList.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.対象データなし)));
+            throw new ApplicationException(InfoMesssages.該当データなし.getMessage());
         }
         for (dgChosainIchiran_Row row : ichiranList) {
             if (!RString.EMPTY.equals(row.getJotai())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbzErrorMessages.編集後更新指示)));
-                break;
+                throw new ApplicationException(InfoMesssages.編集後更新指示.getMessage());
             }
         }
-        return validPairs;
     }
 
     /**
@@ -63,51 +56,38 @@ public class NinteiChosainMasterValidationHandler {
      *
      * @param 状態 状態
      * @param count 調査員情報件数
-     * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForKakutei(RString 状態, int count) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
+    public void validateForKakutei(RString 状態, int count) {
         if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
             if (状態_修正.equals(状態) && !isUpdate()) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
+                throw new ApplicationException(InfoMesssages.編集なしで更新不可.getMessage());
             }
             if (!RString.isNullOrEmpty(div.getChosainJohoInput().getCcdChiku().getCode().value())
                     && RString.isNullOrEmpty(div.getChosainJohoInput().getCcdChiku().getCodeMeisho())) {
-                validPairs.add(new ValidationMessageControlPair(
-                        new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "地区コード")));
+                throw new ApplicationException(InfoMesssages.地区コードが存在しない.getMessage());
             }
         }
         if (状態_追加.equals(状態)) {
             if (!RString.isNullOrEmpty(div.getChosainJohoInput().getTxtShichoson().getValue())
                     && RString.isNullOrEmpty(div.getChosainJohoInput().getTxtShichosonmei().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード"),
-                        div.getChosainJohoInput().getTxtShichoson()));
+                throw new ApplicationException(InfoMesssages.市町村コードが存在しない.getMessage());
             }
             if (!RString.isNullOrEmpty(div.getChosainJohoInput().getTxtChosaItakusaki().getValue())
                     && RString.isNullOrEmpty(div.getChosainJohoInput().getTxtChosaItakusakiMeisho().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
-                        "調査委託先コード"), div.getChosainJohoInput().getTxtChosaItakusaki()));
+                throw new ApplicationException(InfoMesssages.調査委託先コードが存在しない.getMessage());
             }
-            RString chosainCode = div.getChosainJohoInput().getTxtChosainCode().getValue();
             if (0 < count) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        UrErrorMessages.既に登録済, String.valueOf(chosainCode)),
-                        div.getChosainJohoInput().getTxtChosainCode()));
+                throw new ApplicationException(InfoMesssages.調査員コードは既に登録済.getMessage());
+
             }
         }
-        return validPairs;
     }
 
     /**
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
      *
-     * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
+    public void validateForUpdate() {
         List<dgChosainIchiran_Row> ichiranList = div.getChosainIchiran().getDgChosainIchiran().getDataSource();
         boolean notUpdate = true;
         for (dgChosainIchiran_Row row : ichiranList) {
@@ -117,23 +97,16 @@ public class NinteiChosainMasterValidationHandler {
             }
         }
         if (notUpdate) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.編集なしで更新不可),
-                    div.getChosainIchiran().getDgChosainIchiran()));
+            throw new ApplicationException(InfoMesssages.編集なしで更新不可.getMessage());
         }
-
-        return validPairs;
     }
 
     /**
      * 検索ボタンを押下するとき、検索結果がゼロ件の場合チェックを行う。
      *
-     * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateBtnReSearchNoResult() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし)));
-        return validPairs;
+    public void validateBtnReSearchNoResult() {
+        throw new ApplicationException(InfoMesssages.該当データなし.getMessage());
     }
 
     /**
@@ -141,18 +114,14 @@ public class NinteiChosainMasterValidationHandler {
      *
      * @param ninteiShinseiJohoCount 要介護認定申請情報件数
      * @param ninteichosaIraiJohoCount 認定調査依頼情報件数
-     * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate(int ninteiShinseiJohoCount, int ninteichosaIraiJohoCount) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+    public void validateForUpdate(int ninteiShinseiJohoCount, int ninteichosaIraiJohoCount) {
         if (0 < ninteiShinseiJohoCount) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止)));
+            throw new ApplicationException(InfoMesssages.排他_他のユーザが更新済で更新処理を中止.getMessage());
         }
         if (0 < ninteichosaIraiJohoCount) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.排他_他のユーザが更新済で更新処理を中止)));
+            throw new ApplicationException(InfoMesssages.排他_他のユーザが更新済で更新処理を中止.getMessage());
         }
-        return validPairs;
     }
 
     /**
@@ -168,17 +137,29 @@ public class NinteiChosainMasterValidationHandler {
         return false;
     }
 
-    private static class IdocheckMessages implements IValidationMessage {
+    private enum InfoMesssages implements IMessageGettable {
 
-        private final Message message;
+        該当データなし(1, "該当データが存在しません。"),
+        編集後更新指示(2, "編集されています。更新処理を行ってください。"),
+        地区コードが存在しない(3, "地区コードに該当するデータが存在しません。"),
+        市町村コードが存在しない(4, "市町村コードに該当するデータが存在しません。"),
+        調査委託先コードが存在しない(5, "調査委託先コードに該当するデータが存在しません。"),
+        編集なしで更新不可(6, "編集されていないため、更新できません。"),
+        調査員コードは既に登録済(7, "調査員コードは既に登録されているため使用できません。"),
+        排他_他のユーザが更新済で更新処理を中止(8, "他の端末で対象のデータが変更されているため、更新処理を中止します。");
 
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
+        private final int no;
+        private final RString message;
+
+        private InfoMesssages(int no, String message) {
+            this.no = no;
+            this.message = new RString(message);
         }
 
         @Override
         public Message getMessage() {
-            return message;
+            return new InformationMessage(toCode("I", no), message.toString());
         }
     }
+
 }

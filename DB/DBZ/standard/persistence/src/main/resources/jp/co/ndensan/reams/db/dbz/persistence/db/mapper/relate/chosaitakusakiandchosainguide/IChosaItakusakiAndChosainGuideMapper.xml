@@ -14,6 +14,9 @@
         <result property="chosainKanaShimei" column="DbT4913_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag2" column="DbT4913_jokyoFlag" />
         <result property="shichosonCode" column="DbT4910_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="DbT4910_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="DbT4910_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="DbT4910_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="getKijuntsukiShichosonjoho" resultMap="resultMap_getKijuntsukiShichosonjoho" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter" fetchSize="500">
         SELECT
@@ -26,8 +29,10 @@
         DbT4913."chosainShimei" as "DbT4913_chosainShimei",
         DbT4913."chosainKanaShimei" as "DbT4913_chosainKanaShimei",
         DbT4913."jokyoFlag" as "DbT4913_jokyoFlag",
-        DbT4910."shichosonCode" as "DbT4910_shichosonCode"
-        
+        DbT4910."shichosonCode" as "DbT4910_shichosonCode",
+        DbT4910."yubinNo" as "DbT4910_yubinNo",
+        DbT4910.jusho as "DbT4910_jusho" ,
+        DbT4910."telNo" as "DbT4910_telNo"         
         FROM
         rgdb."DbT4910NinteichosaItakusakiJoho" as DbT4910
         LEFT JOIN
@@ -37,74 +42,74 @@
         AND
         DbT4910."shichosonCode" = DbT4913."shichosonCode"
         <where>
-          <if test="市町村コードフラグ">
-           AND DbT4913."shichosonCode" =#{市町村コード} 
-        </if>
-        <if test="認定調査委託先コードFROMフラグ">
-            AND
-            DbT4910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
-        </if>
-        <if test="認定調査委託先コードToフラグ">
-            AND
-            DbT4910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo}
-        </if>
-        <if test="認定調査状況フラグ">
-            AND
-            DbT4910."jokyoFlag" = TRUE
-        </if>
-        <if test="認定調査状況無効フラグ">
-            AND
-            DbT4910."jokyoFlag" = FALSE
-        </if>
-        <if test="認定調査委託先名称フラグ">
-            AND
-            DbT4910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'
-        </if>
-        <if test="認定調査委託先カナフラグ">
-            AND
-            DbT4910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'
-        </if>
-        <if test="認定調査区分フラグ">
-            AND
-            DbT4910."chosaItakuKubun" =#{認定調査区分}
-        </if>
-        <if test="地区コードフラグ"  >
-            AND
-            DbT4910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
-        </if>
-        <if test="認定調査員コードFROMフラグ">
-            AND
-            DbT4913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
-        </if>
-        <if test="認定調査員コードToフラグ">
-            AND
-            DbT4913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
-        </if>
-        <if test="調査員状況フラグ">
-            AND
-            DbT4913."jokyoFlag" = TRUE
-        </if>
-        <if test="調査員状況無効フラグ">
-            AND
-            DbT4913."jokyoFlag" = FALSE
-        </if>
-        <if test="調査員名称フラグ">
-            AND
-            DbT4913."chosainShimei" LIKE '%'||#{調査員名称}||'%'
-        </if>
-        <if test="認定調査員コードFROMフラグ">
-            AND
-            DbT4913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
-        </if>
-        <if test="認定調査員コードToフラグ">
-            AND
-            DbT4913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
-        </if>
-        <if test="調査員カナフラグ">
-            AND
-            DbT4913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
-        </if>   
-       </where>
+            <if test="市町村コードフラグ">
+                AND DbT4913."shichosonCode" =#{市町村コード} 
+            </if>
+            <if test="認定調査委託先コードFROMフラグ">
+                AND
+                DbT4910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
+            </if>
+            <if test="認定調査委託先コードToフラグ">
+                AND
+                DbT4910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo}
+            </if>
+            <if test="認定調査状況フラグ">
+                AND
+                DbT4910."jokyoFlag" = TRUE
+            </if>
+            <if test="認定調査状況無効フラグ">
+                AND
+                DbT4910."jokyoFlag" = FALSE
+            </if>
+            <if test="認定調査委託先名称フラグ">
+                AND
+                DbT4910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'
+            </if>
+            <if test="認定調査委託先カナフラグ">
+                AND
+                DbT4910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'
+            </if>
+            <if test="認定調査区分フラグ">
+                AND
+                DbT4910."chosaItakuKubun" =#{認定調査区分}
+            </if>
+            <if test="地区コードフラグ"  >
+                AND
+                DbT4910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
+            </if>
+            <if test="認定調査員コードFROMフラグ">
+                AND
+                DbT4913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
+            </if>
+            <if test="認定調査員コードToフラグ">
+                AND
+                DbT4913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
+            </if>
+            <if test="調査員状況フラグ">
+                AND
+                DbT4913."jokyoFlag" = TRUE
+            </if>
+            <if test="調査員状況無効フラグ">
+                AND
+                DbT4913."jokyoFlag" = FALSE
+            </if>
+            <if test="調査員名称フラグ">
+                AND
+                DbT4913."chosainShimei" LIKE '%'||#{調査員名称}||'%'
+            </if>
+            <if test="認定調査員コードFROMフラグ">
+                AND
+                DbT4913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
+            </if>
+            <if test="認定調査員コードToフラグ">
+                AND
+                DbT4913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
+            </if>
+            <if test="調査員カナフラグ">
+                AND
+                DbT4913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
+            </if>   
+        </where>
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
@@ -121,7 +126,10 @@
         DbT5913."chosainShimei" as "DbT4913_chosainShimei",
         DbT5913."chosainKanaShimei" as "DbT4913_chosainKanaShimei",
         DbT5913."jokyoFlag" as "DbT4913_jokyoFlag",
-        DbT5910."shichosonCode" as "DbT4910_shichosonCode"
+        DbT5910."shichosonCode" as "DbT4910_shichosonCode",
+        DbT5910."yubinNo" as "DbT4910_yubinNo",
+        DbT5910.jusho as "DbT4910_jusho" ,
+        DbT5910."telNo" as "DbT4910_telNo"     
         FROM
         rgdb."DbT5910NinteichosaItakusakiJoho" as DbT5910
         LEFT JOIN
@@ -131,65 +139,65 @@
         AND
         DbT5910."shichosonCode" = DbT5913."shichosonCode"
         <where>
-         <if test="市町村コードフラグ">
-           AND  DbT5913."shichosonCode" =#{市町村コード}
-        </if>
-        <if test="認定調査委託先コードFROMフラグ">
-            AND
-            DbT5910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
-        </if>
-        <if test="認定調査委託先コードToフラグ">
-            AND
-            DbT5910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo}
-        </if>
-        <if test="認定調査状況フラグ">
-            AND
-            DbT5910."jokyoFlag" = TRUE
-        </if>
-        <if test="認定調査状況無効フラグ">
-            AND
-            DbT5910."jokyoFlag" = FALSE
-        </if>
-        <if test="認定調査委託先名称フラグ">
-            AND
-            DbT5910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'
-        </if>
-        <if test="認定調査委託先カナフラグ">
-            AND
-            DbT5910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'
-        </if>
-        <if test="認定調査区分フラグ">
-            AND
-            DbT5910."chosaItakuKubun" = #{認定調査区分}
-        </if>
-        <if test="地区コードフラグ">
-            AND
-            DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
-        </if>  
-        <if test="認定調査員コードFROMフラグ">
-            AND
-            DbT5913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
-        </if>
-        <if test="認定調査員コードToフラグ">
-            AND
-            DbT5913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
-        </if>
-        <if test="調査員状況フラグ">
-            AND
-            DbT5913."jokyoFlag" = TRUE
-        </if>
-        <if test="調査員状況無効フラグ">
-            AND
-            DbT5913."jokyoFlag" = FALSE
-        </if>
-        <if test="調査員名称フラグ">
-            AND
-            DbT5913."chosainShimei" LIKE '%'||#{調査員名称}||'%'
-        </if>
-        <if test="調査員カナフラグ">
-            AND
-            DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
-        </if>   
+            <if test="市町村コードフラグ">
+                AND  DbT5913."shichosonCode" =#{市町村コード}
+            </if>
+            <if test="認定調査委託先コードFROMフラグ">
+                AND
+                DbT5910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
+            </if>
+            <if test="認定調査委託先コードToフラグ">
+                AND
+                DbT5910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo}
+            </if>
+            <if test="認定調査状況フラグ">
+                AND
+                DbT5910."jokyoFlag" = TRUE
+            </if>
+            <if test="認定調査状況無効フラグ">
+                AND
+                DbT5910."jokyoFlag" = FALSE
+            </if>
+            <if test="認定調査委託先名称フラグ">
+                AND
+                DbT5910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'
+            </if>
+            <if test="認定調査委託先カナフラグ">
+                AND
+                DbT5910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'
+            </if>
+            <if test="認定調査区分フラグ">
+                AND
+                DbT5910."chosaItakuKubun" = #{認定調査区分}
+            </if>
+            <if test="地区コードフラグ">
+                AND
+                DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
+            </if>  
+            <if test="認定調査員コードFROMフラグ">
+                AND
+                DbT5913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
+            </if>
+            <if test="認定調査員コードToフラグ">
+                AND
+                DbT5913."ninteiChosainCode" <![CDATA[<=]]> #{認定調査員コードTo}
+            </if>
+            <if test="調査員状況フラグ">
+                AND
+                DbT5913."jokyoFlag" = TRUE
+            </if>
+            <if test="調査員状況無効フラグ">
+                AND
+                DbT5913."jokyoFlag" = FALSE
+            </if>
+            <if test="調査員名称フラグ">
+                AND
+                DbT5913."chosainShimei" LIKE '%'||#{調査員名称}||'%'
+            </if>
+            <if test="調査員カナフラグ">
+                AND
+                DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
+            </if>   
         </where>
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
@@ -207,41 +215,41 @@
         FROM
         rgdb."DbT5910NinteichosaItakusakiJoho" as DbT5910
         <where>
-         <if test="市町村コードフラグ">
-           AND  DbT5910."shichosonCode" =#{市町村コード}
-        </if>
-        <if test="認定調査委託先コードFROMフラグ">
-            AND
-            DbT5910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
-        </if>
-        <if test="認定調査委託先コードToフラグ">
-            AND
-            DbT5910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo}
-        </if>
-        <if test="認定調査状況フラグ">
-            AND
-            DbT5910."jokyoFlag" = TRUE
-        </if>
-        <if test="認定調査状況無効フラグ">
-            AND
-            DbT5910."jokyoFlag" = FALSE
-        </if>
-        <if test="認定調査委託先名称フラグ">
-            AND
-            DbT5910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'
-        </if>
-        <if test="認定調査委託先カナフラグ">
-            AND
-            DbT5910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'
-        </if>
-        <if test="認定調査区分フラグ">
-            AND
-            DbT5910."chosaItakuKubun" = #{認定調査区分}
-        </if>
-        <if test="地区コードフラグ">
-            AND
-            DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
-        </if>    
+            <if test="市町村コードフラグ">
+                AND  DbT5910."shichosonCode" =#{市町村コード}
+            </if>
+            <if test="認定調査委託先コードFROMフラグ">
+                AND
+                DbT5910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
+            </if>
+            <if test="認定調査委託先コードToフラグ">
+                AND
+                DbT5910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo}
+            </if>
+            <if test="認定調査状況フラグ">
+                AND
+                DbT5910."jokyoFlag" = TRUE
+            </if>
+            <if test="認定調査状況無効フラグ">
+                AND
+                DbT5910."jokyoFlag" = FALSE
+            </if>
+            <if test="認定調査委託先名称フラグ">
+                AND
+                DbT5910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'
+            </if>
+            <if test="認定調査委託先カナフラグ">
+                AND
+                DbT5910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'
+            </if>
+            <if test="認定調査区分フラグ">
+                AND
+                DbT5910."chosaItakuKubun" = #{認定調査区分}
+            </if>
+            <if test="地区コードフラグ">
+                AND
+                DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
+            </if>    
         </where>
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}

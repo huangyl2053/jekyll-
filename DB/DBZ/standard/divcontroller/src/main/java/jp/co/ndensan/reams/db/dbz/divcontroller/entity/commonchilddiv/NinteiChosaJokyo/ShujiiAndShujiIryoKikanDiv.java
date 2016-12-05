@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiAndShujiIryoKikanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -43,11 +43,11 @@ public class ShujiiAndShujiIryoKikanDiv extends Panel {
     @JsonProperty("txtShujiiIryoKikanTelNo")
     private TextBoxTelNo txtShujiiIryoKikanTelNo;
     @JsonProperty("txtShujiiIryoKikanIraiDate")
-    private TextBoxFlexibleDate txtShujiiIryoKikanIraiDate;
+    private TextBoxDate txtShujiiIryoKikanIraiDate;
     @JsonProperty("txtShujiiIryoKikanNyushuYoteiDate")
-    private TextBoxFlexibleDate txtShujiiIryoKikanNyushuYoteiDate;
+    private TextBoxDate txtShujiiIryoKikanNyushuYoteiDate;
     @JsonProperty("txtShujiiIryoKikanNyushuDate")
-    private TextBoxFlexibleDate txtShujiiIryoKikanNyushuDate;
+    private TextBoxDate txtShujiiIryoKikanNyushuDate;
     @JsonProperty("chkShujiiKubun")
     private CheckBoxList chkShujiiKubun;
 
@@ -242,7 +242,7 @@ public class ShujiiAndShujiIryoKikanDiv extends Panel {
      * @return txtShujiiIryoKikanIraiDate
      */
     @JsonProperty("txtShujiiIryoKikanIraiDate")
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanIraiDate() {
+    public TextBoxDate getTxtShujiiIryoKikanIraiDate() {
         return txtShujiiIryoKikanIraiDate;
     }
 
@@ -251,7 +251,7 @@ public class ShujiiAndShujiIryoKikanDiv extends Panel {
      * @param txtShujiiIryoKikanIraiDate txtShujiiIryoKikanIraiDate
      */
     @JsonProperty("txtShujiiIryoKikanIraiDate")
-    public void setTxtShujiiIryoKikanIraiDate(TextBoxFlexibleDate txtShujiiIryoKikanIraiDate) {
+    public void setTxtShujiiIryoKikanIraiDate(TextBoxDate txtShujiiIryoKikanIraiDate) {
         this.txtShujiiIryoKikanIraiDate = txtShujiiIryoKikanIraiDate;
     }
 
@@ -260,7 +260,7 @@ public class ShujiiAndShujiIryoKikanDiv extends Panel {
      * @return txtShujiiIryoKikanNyushuYoteiDate
      */
     @JsonProperty("txtShujiiIryoKikanNyushuYoteiDate")
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanNyushuYoteiDate() {
+    public TextBoxDate getTxtShujiiIryoKikanNyushuYoteiDate() {
         return txtShujiiIryoKikanNyushuYoteiDate;
     }
 
@@ -269,7 +269,7 @@ public class ShujiiAndShujiIryoKikanDiv extends Panel {
      * @param txtShujiiIryoKikanNyushuYoteiDate txtShujiiIryoKikanNyushuYoteiDate
      */
     @JsonProperty("txtShujiiIryoKikanNyushuYoteiDate")
-    public void setTxtShujiiIryoKikanNyushuYoteiDate(TextBoxFlexibleDate txtShujiiIryoKikanNyushuYoteiDate) {
+    public void setTxtShujiiIryoKikanNyushuYoteiDate(TextBoxDate txtShujiiIryoKikanNyushuYoteiDate) {
         this.txtShujiiIryoKikanNyushuYoteiDate = txtShujiiIryoKikanNyushuYoteiDate;
     }
 
@@ -278,7 +278,7 @@ public class ShujiiAndShujiIryoKikanDiv extends Panel {
      * @return txtShujiiIryoKikanNyushuDate
      */
     @JsonProperty("txtShujiiIryoKikanNyushuDate")
-    public TextBoxFlexibleDate getTxtShujiiIryoKikanNyushuDate() {
+    public TextBoxDate getTxtShujiiIryoKikanNyushuDate() {
         return txtShujiiIryoKikanNyushuDate;
     }
 
@@ -287,7 +287,7 @@ public class ShujiiAndShujiIryoKikanDiv extends Panel {
      * @param txtShujiiIryoKikanNyushuDate txtShujiiIryoKikanNyushuDate
      */
     @JsonProperty("txtShujiiIryoKikanNyushuDate")
-    public void setTxtShujiiIryoKikanNyushuDate(TextBoxFlexibleDate txtShujiiIryoKikanNyushuDate) {
+    public void setTxtShujiiIryoKikanNyushuDate(TextBoxDate txtShujiiIryoKikanNyushuDate) {
         this.txtShujiiIryoKikanNyushuDate = txtShujiiIryoKikanNyushuDate;
     }
 

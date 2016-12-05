@@ -24,4 +24,7 @@ public class KijuntsukiShichosonjohoiDataPassModel implements Serializable {
     private RString 市町村コード;
     private RString サブ業務コード;
     private RString 対象モード;
+    private RString 郵便番号;
+    private RString 住所;
+    private RString 電話番号;
 }

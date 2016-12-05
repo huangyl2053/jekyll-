@@ -20,22 +20,6 @@ public class ChosaTokkiShiryoShokai {
     private static final RString SELECTED_KEY0 = new RString("key0");
 
     /**
-     * 画面初期化
-     *
-     * @param div ChosaTokkiShiryoShokaiDiv
-     * @return ResponseData<ChosaTokkiShiryoShokaiDiv>
-     */
-    public ResponseData<ChosaTokkiShiryoShokaiDiv> onLoad(ChosaTokkiShiryoShokaiDiv div) {
-        ArrayList<RString> imgGneponPathList = DataPassingConverter.deserialize(div.getImgGenponPathList(), ArrayList.class);
-        ArrayList<RString> imgMaskPathList = DataPassingConverter.deserialize(div.getImgMaskPathList(), ArrayList.class);
-        ArrayList<RString> genponTitleList = DataPassingConverter.deserialize(div.getGenponTitleList(), ArrayList.class);
-        ArrayList<RString> maskTitleList = DataPassingConverter.deserialize(div.getMaskTitleList(), ArrayList.class);
-
-        div.initialize(imgGneponPathList, imgMaskPathList, genponTitleList, maskTitleList);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 区分を切り替え
      *
      * @param div ChosaTokkiShiryoShokaiDiv

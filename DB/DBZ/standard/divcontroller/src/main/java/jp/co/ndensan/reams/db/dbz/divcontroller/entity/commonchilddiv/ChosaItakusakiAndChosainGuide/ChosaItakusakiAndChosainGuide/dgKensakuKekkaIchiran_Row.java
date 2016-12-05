@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItak
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Oct 21 18:18:07 CST 2016 
+ * Sat Dec 03 11:32:41 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKensakuKekkaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
 
     private TextBoxCode itakusakicode;
     private RString itakusakiMeisho;
@@ -32,6 +32,9 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     private RString chosainKanaShimei;
     private RString chosainHJokyo;
     private RString shichosonCode;
+    private RString yubiBango;
+    private RString jyuSho;
+    private RString telCode;
 
     public dgKensakuKekkaIchiran_Row() {
         super();
@@ -45,6 +48,9 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.chosainKanaShimei = RString.EMPTY;
         this.chosainHJokyo = RString.EMPTY;
         this.shichosonCode = RString.EMPTY;
+        this.yubiBango = RString.EMPTY;
+        this.jyuSho = RString.EMPTY;
+        this.telCode = RString.EMPTY;
         this.setOriginalData("itakusakicode", itakusakicode);
         this.setOriginalData("itakusakiMeisho", itakusakiMeisho);
         this.setOriginalData("itakusakiKanaMeisho", itakusakiKanaMeisho);
@@ -55,9 +61,12 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("chosainKanaShimei", chosainKanaShimei);
         this.setOriginalData("chosainHJokyo", chosainHJokyo);
         this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("yubiBango", yubiBango);
+        this.setOriginalData("jyuSho", jyuSho);
+        this.setOriginalData("telCode", telCode);
     }
 
-    public dgKensakuKekkaIchiran_Row(TextBoxCode itakusakicode, RString itakusakiMeisho, RString itakusakiKanaMeisho, RString itakusakiKubun, RString itakusakiJokyo, RString chosainCode, RString chosainShimei, RString chosainKanaShimei, RString chosainHJokyo, RString shichosonCode) {
+    public dgKensakuKekkaIchiran_Row(TextBoxCode itakusakicode, RString itakusakiMeisho, RString itakusakiKanaMeisho, RString itakusakiKubun, RString itakusakiJokyo, RString chosainCode, RString chosainShimei, RString chosainKanaShimei, RString chosainHJokyo, RString shichosonCode, RString yubiBango, RString jyuSho, RString telCode) {
         super();
         this.setOriginalData("itakusakicode", itakusakicode);
         this.setOriginalData("itakusakiMeisho", itakusakiMeisho);
@@ -69,6 +78,9 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("chosainKanaShimei", chosainKanaShimei);
         this.setOriginalData("chosainHJokyo", chosainHJokyo);
         this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("yubiBango", yubiBango);
+        this.setOriginalData("jyuSho", jyuSho);
+        this.setOriginalData("telCode", telCode);
         this.itakusakicode = itakusakicode;
         this.itakusakiMeisho = itakusakiMeisho;
         this.itakusakiKanaMeisho = itakusakiKanaMeisho;
@@ -79,6 +91,9 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.chosainKanaShimei = chosainKanaShimei;
         this.chosainHJokyo = chosainHJokyo;
         this.shichosonCode = shichosonCode;
+        this.yubiBango = yubiBango;
+        this.jyuSho = jyuSho;
+        this.telCode = telCode;
     }
 
     public TextBoxCode getItakusakicode() {
@@ -119,6 +134,18 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
 
     public RString getShichosonCode() {
         return shichosonCode;
+    }
+
+    public RString getYubiBango() {
+        return yubiBango;
+    }
+
+    public RString getJyuSho() {
+        return jyuSho;
+    }
+
+    public RString getTelCode() {
+        return telCode;
     }
 
     public void setItakusakicode(TextBoxCode itakusakicode) {
@@ -169,6 +196,21 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     public void setShichosonCode(RString shichosonCode) {
         this.setOriginalData("shichosonCode", shichosonCode);
         this.shichosonCode = shichosonCode;
+    }
+
+    public void setYubiBango(RString yubiBango) {
+        this.setOriginalData("yubiBango", yubiBango);
+        this.yubiBango = yubiBango;
+    }
+
+    public void setJyuSho(RString jyuSho) {
+        this.setOriginalData("jyuSho", jyuSho);
+        this.jyuSho = jyuSho;
+    }
+
+    public void setTelCode(RString telCode) {
+        this.setOriginalData("telCode", telCode);
+        this.telCode = telCode;
     }
 
     // </editor-fold>

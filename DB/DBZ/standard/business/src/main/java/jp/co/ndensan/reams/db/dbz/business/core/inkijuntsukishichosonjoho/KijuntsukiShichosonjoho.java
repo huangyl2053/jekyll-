@@ -114,4 +114,31 @@ public class KijuntsukiShichosonjoho {
     public RString get市町村コード() {
         return entity.getShichosonCode();
     }
+    
+     /**
+     * 郵便番号を取得します。
+     *
+     * @return 郵便番号
+     */
+    public RString get郵便番号() {
+        return entity.get郵便番号();
+    }
+    
+     /**
+     * 住所を取得します。
+     *
+     * @return 住所
+     */
+    public RString get住所() {
+        return entity.get住所();
+    }
+    
+     /**
+     * 電話番号を取得します。
+     *
+     * @return 電話番号
+     */
+    public RString get電話番号() {
+        return entity.get電話番号();
+    }
 }

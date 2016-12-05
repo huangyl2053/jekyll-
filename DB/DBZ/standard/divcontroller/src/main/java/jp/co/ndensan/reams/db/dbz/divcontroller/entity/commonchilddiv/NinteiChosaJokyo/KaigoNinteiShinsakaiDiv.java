@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoNinteiShinsakaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,11 +22,11 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtShinsakaiShiryoSakuseiDate")
-    private TextBoxFlexibleDate txtShinsakaiShiryoSakuseiDate;
+    private TextBoxDate txtShinsakaiShiryoSakuseiDate;
     @JsonProperty("txtShinsakaiKaisaiYoteiDate")
-    private TextBoxFlexibleDate txtShinsakaiKaisaiYoteiDate;
+    private TextBoxDate txtShinsakaiKaisaiYoteiDate;
     @JsonProperty("txtNijiHanteiDate")
-    private TextBoxFlexibleDate txtNijiHanteiDate;
+    private TextBoxDate txtNijiHanteiDate;
     @JsonProperty("ddlNijiHanteiKekka")
     private DropDownList ddlNijiHanteiKekka;
     @JsonProperty("txtNijiHanteiYukoKikan")
@@ -47,7 +47,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @return txtShinsakaiShiryoSakuseiDate
      */
     @JsonProperty("txtShinsakaiShiryoSakuseiDate")
-    public TextBoxFlexibleDate getTxtShinsakaiShiryoSakuseiDate() {
+    public TextBoxDate getTxtShinsakaiShiryoSakuseiDate() {
         return txtShinsakaiShiryoSakuseiDate;
     }
 
@@ -56,7 +56,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @param txtShinsakaiShiryoSakuseiDate txtShinsakaiShiryoSakuseiDate
      */
     @JsonProperty("txtShinsakaiShiryoSakuseiDate")
-    public void setTxtShinsakaiShiryoSakuseiDate(TextBoxFlexibleDate txtShinsakaiShiryoSakuseiDate) {
+    public void setTxtShinsakaiShiryoSakuseiDate(TextBoxDate txtShinsakaiShiryoSakuseiDate) {
         this.txtShinsakaiShiryoSakuseiDate = txtShinsakaiShiryoSakuseiDate;
     }
 
@@ -65,7 +65,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @return txtShinsakaiKaisaiYoteiDate
      */
     @JsonProperty("txtShinsakaiKaisaiYoteiDate")
-    public TextBoxFlexibleDate getTxtShinsakaiKaisaiYoteiDate() {
+    public TextBoxDate getTxtShinsakaiKaisaiYoteiDate() {
         return txtShinsakaiKaisaiYoteiDate;
     }
 
@@ -74,7 +74,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @param txtShinsakaiKaisaiYoteiDate txtShinsakaiKaisaiYoteiDate
      */
     @JsonProperty("txtShinsakaiKaisaiYoteiDate")
-    public void setTxtShinsakaiKaisaiYoteiDate(TextBoxFlexibleDate txtShinsakaiKaisaiYoteiDate) {
+    public void setTxtShinsakaiKaisaiYoteiDate(TextBoxDate txtShinsakaiKaisaiYoteiDate) {
         this.txtShinsakaiKaisaiYoteiDate = txtShinsakaiKaisaiYoteiDate;
     }
 
@@ -83,7 +83,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @return txtNijiHanteiDate
      */
     @JsonProperty("txtNijiHanteiDate")
-    public TextBoxFlexibleDate getTxtNijiHanteiDate() {
+    public TextBoxDate getTxtNijiHanteiDate() {
         return txtNijiHanteiDate;
     }
 
@@ -92,7 +92,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @param txtNijiHanteiDate txtNijiHanteiDate
      */
     @JsonProperty("txtNijiHanteiDate")
-    public void setTxtNijiHanteiDate(TextBoxFlexibleDate txtNijiHanteiDate) {
+    public void setTxtNijiHanteiDate(TextBoxDate txtNijiHanteiDate) {
         this.txtNijiHanteiDate = txtNijiHanteiDate;
     }
 

@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.io.ByteReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -52,6 +53,7 @@ public class ShinsakaiKaisaiKekka {
     private final ShinsakaiKaisaiYoteiJohoManager manager;
     private final ShinsakaiOnseiJohoManager onseiJohoManager;
     private final LockingKey 前排他ロックキー;
+    private static final RString BUTTON_UPDATE = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -78,7 +80,12 @@ public class ShinsakaiKaisaiKekka {
         getHandler(div).onLoad(saiYoteiJoho);
         getHandler(div).setDisabled();
         List<ShinsakaiWariateIinJohoBusiness> list = service.get審査会委員一覧検索(開催番号).records();
-        getHandler(div).initialize(list);
+        if (list.isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_UPDATE, Boolean.TRUE);
+        } else {
+            getHandler(div).initialize(list);
+        }
+
         List<ShinsakaiKaisaiYoteiJoho2> yoteiJohoList = service.get審査会委員(開催番号).records();
         Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, shinsakaiKaisaiYoteiJoho);
@@ -158,8 +165,10 @@ public class ShinsakaiKaisaiKekka {
         handler.全員が遅刻Check(validationMessages);
         handler.全員が早退Check(validationMessages);
         handler.必須項目Check(validationMessages);
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        if (!ResponseHolder.isReRequest()) {
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();

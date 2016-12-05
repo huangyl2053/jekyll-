@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiHanteiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class IchijiHanteiDiv extends Panel {
     @JsonProperty("ddlYokaigodo")
     private DropDownList ddlYokaigodo;
     @JsonProperty("txtIchijiHanteiDate")
-    private TextBoxFlexibleDate txtIchijiHanteiDate;
+    private TextBoxDate txtIchijiHanteiDate;
     @JsonProperty("ddlNinchishoKasangoYokaigodo")
     private DropDownList ddlNinchishoKasangoYokaigodo;
 
@@ -57,7 +57,7 @@ public class IchijiHanteiDiv extends Panel {
      * @return txtIchijiHanteiDate
      */
     @JsonProperty("txtIchijiHanteiDate")
-    public TextBoxFlexibleDate getTxtIchijiHanteiDate() {
+    public TextBoxDate getTxtIchijiHanteiDate() {
         return txtIchijiHanteiDate;
     }
 
@@ -66,7 +66,7 @@ public class IchijiHanteiDiv extends Panel {
      * @param txtIchijiHanteiDate txtIchijiHanteiDate
      */
     @JsonProperty("txtIchijiHanteiDate")
-    public void setTxtIchijiHanteiDate(TextBoxFlexibleDate txtIchijiHanteiDate) {
+    public void setTxtIchijiHanteiDate(TextBoxDate txtIchijiHanteiDate) {
         this.txtIchijiHanteiDate = txtIchijiHanteiDate;
     }
 

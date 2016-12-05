@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIry
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Oct 21 19:21:20 CST 2016 
+ * Sat Dec 03 14:55:27 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKensakuKekkaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
 
     private TextBoxCode iryoKikancode;
     private RString iryoKikanMeisho;
@@ -32,6 +32,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     private RString shujiiShimei;
     private RString shujiiKanaMeisho;
     private RString shujiiJoukyo;
+    private RString iryoKikanYubinBango;
 
     public dgKensakuKekkaIchiran_Row() {
         super();
@@ -45,6 +46,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.shujiiShimei = RString.EMPTY;
         this.shujiiKanaMeisho = RString.EMPTY;
         this.shujiiJoukyo = RString.EMPTY;
+        this.iryoKikanYubinBango = RString.EMPTY;
         this.setOriginalData("iryoKikancode", iryoKikancode);
         this.setOriginalData("iryoKikanMeisho", iryoKikanMeisho);
         this.setOriginalData("iryoKikanKanaMeisho", iryoKikanKanaMeisho);
@@ -55,9 +57,10 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("shujiiShimei", shujiiShimei);
         this.setOriginalData("shujiiKanaMeisho", shujiiKanaMeisho);
         this.setOriginalData("shujiiJoukyo", shujiiJoukyo);
+        this.setOriginalData("iryoKikanYubinBango", iryoKikanYubinBango);
     }
 
-    public dgKensakuKekkaIchiran_Row(TextBoxCode iryoKikancode, RString iryoKikanMeisho, RString iryoKikanKanaMeisho, RString iryoKikanjusho, RString iryoKikantelNo, RString iryoKikanJokyo, TextBoxCode shujiiCode, RString shujiiShimei, RString shujiiKanaMeisho, RString shujiiJoukyo) {
+    public dgKensakuKekkaIchiran_Row(TextBoxCode iryoKikancode, RString iryoKikanMeisho, RString iryoKikanKanaMeisho, RString iryoKikanjusho, RString iryoKikantelNo, RString iryoKikanJokyo, TextBoxCode shujiiCode, RString shujiiShimei, RString shujiiKanaMeisho, RString shujiiJoukyo, RString iryoKikanYubinBango) {
         super();
         this.setOriginalData("iryoKikancode", iryoKikancode);
         this.setOriginalData("iryoKikanMeisho", iryoKikanMeisho);
@@ -69,6 +72,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("shujiiShimei", shujiiShimei);
         this.setOriginalData("shujiiKanaMeisho", shujiiKanaMeisho);
         this.setOriginalData("shujiiJoukyo", shujiiJoukyo);
+        this.setOriginalData("iryoKikanYubinBango", iryoKikanYubinBango);
         this.iryoKikancode = iryoKikancode;
         this.iryoKikanMeisho = iryoKikanMeisho;
         this.iryoKikanKanaMeisho = iryoKikanKanaMeisho;
@@ -79,6 +83,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.shujiiShimei = shujiiShimei;
         this.shujiiKanaMeisho = shujiiKanaMeisho;
         this.shujiiJoukyo = shujiiJoukyo;
+        this.iryoKikanYubinBango = iryoKikanYubinBango;
     }
 
     public TextBoxCode getIryoKikancode() {
@@ -119,6 +124,10 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
 
     public RString getShujiiJoukyo() {
         return shujiiJoukyo;
+    }
+
+    public RString getIryoKikanYubinBango() {
+        return iryoKikanYubinBango;
     }
 
     public void setIryoKikancode(TextBoxCode iryoKikancode) {
@@ -169,6 +178,11 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     public void setShujiiJoukyo(RString shujiiJoukyo) {
         this.setOriginalData("shujiiJoukyo", shujiiJoukyo);
         this.shujiiJoukyo = shujiiJoukyo;
+    }
+
+    public void setIryoKikanYubinBango(RString iryoKikanYubinBango) {
+        this.setOriginalData("iryoKikanYubinBango", iryoKikanYubinBango);
+        this.iryoKikanYubinBango = iryoKikanYubinBango;
     }
 
     // </editor-fold>
