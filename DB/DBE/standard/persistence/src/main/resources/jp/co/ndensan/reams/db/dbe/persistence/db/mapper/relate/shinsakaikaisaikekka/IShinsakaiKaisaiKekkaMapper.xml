@@ -72,6 +72,8 @@
         INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" DbT5593GogitaiWariateIinJoho
         ON DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
         AND DbT5593GogitaiWariateIinJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
+        AND DbT5593GogitaiWariateIinJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+        AND DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DbT5593GogitaiWariateIinJoho."gogitaiYukoKikanShuryoYMD"
         WHERE
         TRIM(DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo") =TRIM(#{開催番号})
         ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" desc , DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" asc
