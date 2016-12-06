@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteichosaItakusakiCsvEntity {
 
-    @CsvField(order = 10, name = "証記載保険者番号")
-    private final RString shoKisaiHokenshaNo;
+    @CsvField(order = 10, name = "保険者")
+    private final RString hokensha;
     @CsvField(order = 20, name = "その他機関コード")
     private final RString sonotaKikanCode;
     @CsvField(order = 30, name = "機関名称")
@@ -47,7 +47,7 @@ public class NinteichosaItakusakiCsvEntity {
     /**
      * コンストラクタです。
      *
-     * @param shoKisaiHokenshaNo
+     * @param hokensha
      * @param sonotaKikanCode
      * @param kikanMeisho
      * @param kikanMeishoKana
@@ -62,7 +62,7 @@ public class NinteichosaItakusakiCsvEntity {
      * @param haishiFlag
      */
     public NinteichosaItakusakiCsvEntity(
-            RString shoKisaiHokenshaNo,
+            RString hokensha,
             RString sonotaKikanCode,
             RString kikanMeisho,
             RString kikanMeishoKana,
@@ -75,7 +75,7 @@ public class NinteichosaItakusakiCsvEntity {
             RString waritsukeChiku,
             RString kikanKubun,
             RString haishiFlag) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.hokensha = hokensha;
         this.sonotaKikanCode = sonotaKikanCode;
         this.kikanMeisho = kikanMeisho;
         this.kikanMeishoKana = kikanMeishoKana;

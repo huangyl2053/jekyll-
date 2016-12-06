@@ -12,6 +12,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterSearchParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaimaster.INinteichosaMasterMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
@@ -61,18 +62,15 @@ public class NinteichosaMasterFinder {
      * @return ShujiiMaster その他機関情報 nullが返る可能性があります。
      */
     @Transaction
-    public SearchResult<SonotaKikanJoho> getSonotaKikanichiranList(NinteichosaMasterMapperParameter その他機関情報検索条件) {
+    public SearchResult<SonotaKikanJohoEntity> getSonotaKikanichiranList(NinteichosaMasterMapperParameter その他機関情報検索条件) {
         requireNonNull(その他機関情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("その他機関情報検索条件"));
         INinteichosaMasterMapper mapper = mapperProvider.create(INinteichosaMasterMapper.class);
-        List<DbT5914SonotaKikanJohoEntity> kikanJohoEntityList = mapper.selectSonotaKikanichiranList(その他機関情報検索条件);
+        List<SonotaKikanJohoEntity> kikanJohoEntityList = mapper.selectSonotaKikanichiranList(その他機関情報検索条件);
         if (kikanJohoEntityList.isEmpty()) {
-            return SearchResult.of(Collections.<SonotaKikanJoho>emptyList(), 0, false);
+            return SearchResult.of(Collections.<SonotaKikanJohoEntity>emptyList(), 0, false);
         }
-        List<SonotaKikanJoho> その他機関情報List = new ArrayList<>();
-        for (DbT5914SonotaKikanJohoEntity entity : kikanJohoEntityList) {
-            その他機関情報List.add(new SonotaKikanJoho(entity));
-        }
-        return SearchResult.of(その他機関情報List, 0, false);
+        
+        return SearchResult.of(kikanJohoEntityList, 0, false);
     }
 
     /**

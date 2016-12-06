@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.ChosaitakusakiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.NinteichosaItakusakiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.dgSonotaKikanIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -144,24 +145,25 @@ public class NinteichosaItakusakiMainHandler {
      *
      * @param sonotaKikanJohoList その他機関一覧List
      */
-    public void setSonotaKikanichiran(List<SonotaKikanJoho> sonotaKikanJohoList) {
+    public void setSonotaKikanichiran(List<SonotaKikanJohoEntity> sonotaKikanJohoList) {
         List<dgSonotaKikanIchiran_Row> dataGridList = new ArrayList<>();
-        for (SonotaKikanJoho sonotaKikanJoho : sonotaKikanJohoList) {
+        for (SonotaKikanJohoEntity sonotaKikanJohoEntity : sonotaKikanJohoList) {
             dataGridList.add(createDgSonotaKikanichiranRow(
                     RString.EMPTY,
-                    sonotaKikanJoho.get証記載保険者番号(),
-                    sonotaKikanJoho.getその他機関コード(),
-                    sonotaKikanJoho.get機関名称(),
-                    sonotaKikanJoho.get機関名称カナ(),
-                    sonotaKikanJoho.get郵便番号(),
-                    sonotaKikanJoho.get住所(),
-                    sonotaKikanJoho.get住所カナ(),
-                    sonotaKikanJoho.get電話番号(),
-                    sonotaKikanJoho.get調査委託区分(),
-                    sonotaKikanJoho.get割付定員(),
-                    sonotaKikanJoho.get割付地区(),
-                    sonotaKikanJoho.get機関の区分(),
-                    sonotaKikanJoho.is廃止フラグ()
+                    sonotaKikanJohoEntity.getHokensha(),
+                    sonotaKikanJohoEntity.getShoKisaiHokenshaNo(),
+                    sonotaKikanJohoEntity.getSonotaKikanCode(),
+                    sonotaKikanJohoEntity.getKikanMeisho(),
+                    sonotaKikanJohoEntity.getKikanMeishoKana(),
+                    sonotaKikanJohoEntity.getYubinNo(),
+                    sonotaKikanJohoEntity.getJusho(),
+                    sonotaKikanJohoEntity.getJushoKana(),
+                    sonotaKikanJohoEntity.getTelNo(),
+                    sonotaKikanJohoEntity.getChosaItakuKubun(),
+                    sonotaKikanJohoEntity.getWaritsukeTeiin(),
+                    sonotaKikanJohoEntity.getWaritsukeChiku(),
+                    sonotaKikanJohoEntity.getKikanKubun(),
+                    sonotaKikanJohoEntity.isHaishiFlag()
             ));
         }
         div.getSonotaKikanichiran().getDgSonotaKikanIchiran().setDataSource(dataGridList);
@@ -169,7 +171,8 @@ public class NinteichosaItakusakiMainHandler {
 
     private dgSonotaKikanIchiran_Row createDgSonotaKikanichiranRow(
             RString jotai,
-            ShoKisaiHokenshaNo hokensha,
+            RString hokensha,
+            ShoKisaiHokenshaNo hokenshaNo,
             RString sonotaKikanCode,
             RString kikanMeisho,
             RString kikanKana,
@@ -185,8 +188,9 @@ public class NinteichosaItakusakiMainHandler {
     ) {
         dgSonotaKikanIchiran_Row row = new dgSonotaKikanIchiran_Row();
         row.setJotai(nullToEmpty(jotai));
-        if (hokensha != null) {
-            row.setHokensha(hokensha.value());
+        row.setHokensha(nullToEmpty(hokensha));
+        if (hokenshaNo != null) {
+            row.setHokenshaCode(hokenshaNo.value());
         }
         row.setSonotaKikanCode(sonotaKikanCode);
         row.setKikanMeisho(nullToEmpty(kikanMeisho));
@@ -225,7 +229,7 @@ public class NinteichosaItakusakiMainHandler {
      * @param row その他機関詳細情報
      */
     public void setChosaitakusakiJohoInput(dgSonotaKikanIchiran_Row row) {
-        div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().intialize(new HokenjaNo(row.getHokensha()));
+        div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().intialize(new HokenjaNo(row.getHokenshaCode()));
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().setValue(row.getSonotaKikanCode());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanname().setValue(row.getKikanMeisho());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanKananame().setValue(row.getKikanKana());
@@ -308,7 +312,8 @@ public class NinteichosaItakusakiMainHandler {
         if (!状態_追加.equals(eventJotai)) {
             row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
         }
-        row.setHokensha(nullToEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()));
+        row.setHokensha(nullToEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaName()));
+        row.setHokenshaCode(nullToEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()));
         row.setSonotaKikanCode(div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue());
         row.setKikanMeisho(nullToEmpty(div.getChosaitakusakiJohoInput().getTxtSonotaKikanname().getValue()));
         row.setKikanKana(nullToEmpty(div.getChosaitakusakiJohoInput().getTxtSonotaKikanKananame().getValue()));

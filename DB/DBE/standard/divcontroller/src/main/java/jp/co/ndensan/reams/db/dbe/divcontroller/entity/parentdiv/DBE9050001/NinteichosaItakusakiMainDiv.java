@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaItakusakiMainDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -199,16 +199,6 @@ public class NinteichosaItakusakiMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlitakukubun() {
-        return this.getChosainSearch().getDdlitakukubun();
-    }
-
-    @JsonIgnore
-    public void  setDdlitakukubun(DropDownList ddlitakukubun) {
-        this.getChosainSearch().setDdlitakukubun(ddlitakukubun);
-    }
-
-    @JsonIgnore
     public DropDownList getDdlkikankubun() {
         return this.getChosainSearch().getDdlkikankubun();
     }
@@ -216,6 +206,16 @@ public class NinteichosaItakusakiMainDiv extends Panel {
     @JsonIgnore
     public void  setDdlkikankubun(DropDownList ddlkikankubun) {
         this.getChosainSearch().setDdlkikankubun(ddlkikankubun);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlitakukubun() {
+        return this.getChosainSearch().getDdlitakukubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlitakukubun(DropDownList ddlitakukubun) {
+        this.getChosainSearch().setDdlitakukubun(ddlitakukubun);
     }
 
     @JsonIgnore

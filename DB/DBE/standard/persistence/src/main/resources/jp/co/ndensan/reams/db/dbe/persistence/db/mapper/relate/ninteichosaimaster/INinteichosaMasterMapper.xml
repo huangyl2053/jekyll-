@@ -5,26 +5,28 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaimaster.INinteichosaMasterMapper">
-    <resultMap id="resultMap_SonotaKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity" autoMapping="true">
+    <resultMap id="resultMap_SonotaKikanJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoEntity" autoMapping="true">
         <id property="shoKisaiHokenshaNo" column="dbT5914SonotaKi_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <id property="sonotaKikanCode" column="dbT5914SonotaKi_sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <id property="kikanMeisho" column="dbT5914SonotaKi_kikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kikanMeishoKana" column="dbT5914SonotaKi_kikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="yubinNo" column="dbT5914SonotaKi_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="yubinNo" column="dbT5914SonotaKi_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="jusho" column="dbT5914SonotaKi_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jushoKana" column="dbT5914SonotaKi_jushoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="telNo" column="dbT5914SonotaKi_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
-        <result property="chosaItakuKubun" column="dbT5914SonotaKi_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="waritsukeTeiin" column="dbT5914SonotaKi_waritsukeTeiin" />
-        <result property="waritsukeChiku" column="dbT5914SonotaKi_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
-        <result property="kikanKubun" column="dbT5914SonotaKi_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="haishiFlag" column="dbT5914SonotaKi_haishiFlag"/>
+        <result property="chosaItakuKubun" column="dbT5914SonotaKi_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="waritsukeTeiin" column="dbT5914SonotaKi_waritsukeTeiin"/>
+        <result property="waritsukeChiku" column="dbT5914SonotaKi_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="kikanKubun" column="dbT5914SonotaKi_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="haishiFlag" column="dbT5914SonotaKi_haishiFlag" />
+        <result property="hokensha" column="urT0507_hokenjaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <select resultOrdered="true" id="selectSonotaKikanichiranList"
             resultMap="resultMap_SonotaKikanJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterMapperParameter" fetchSize="500">
-             SELECT	
+             SELECT
+                UrT0507."hokenjaName" AS "urT0507_hokenjaName",	
                 dbT5914SonotaKi."shoKisaiHokenshaNo" AS "dbT5914SonotaKi_shoKisaiHokenshaNo",
                 dbT5914SonotaKi."sonotaKikanCode" AS "dbT5914SonotaKi_sonotaKikanCode",
                 dbT5914SonotaKi."kikanMeisho" AS "dbT5914SonotaKi_kikanMeisho",
@@ -38,8 +40,12 @@
                 dbT5914SonotaKi."waritsukeChiku" AS "dbT5914SonotaKi_waritsukeChiku",
                 dbT5914SonotaKi."kikanKubun" AS "dbT5914SonotaKi_kikanKubun",
                 dbT5914SonotaKi."haishiFlag" AS "dbT5914SonotaKi_haishiFlag"
+             
             FROM	
-                rgdb."DbT5914SonotaKikanJoho" AS dbT5914SonotaKi	
+                rgdb."DbT5914SonotaKikanJoho" AS dbT5914SonotaKi
+            LEFT JOIN rgur."UrT0507Hokenja" UrT0507
+            ON UrT0507."hokenjaNo" = dbT5914SonotaKi."shoKisaiHokenshaNo"
+            AND UrT0507."hokenjaShubetsu" ='08'
          <where>
             <if test="廃止フラグ">
                 AND

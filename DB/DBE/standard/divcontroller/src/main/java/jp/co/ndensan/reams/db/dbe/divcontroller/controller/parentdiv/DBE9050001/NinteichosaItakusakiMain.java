@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.dgSonotaKikanIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9050001.NinteichosaItakusakiMainHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9050001.NinteichosaMainValidationHandler;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.SonotaKikanJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteichosaitakusakimaster.NinteichosaMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -122,7 +123,7 @@ public class NinteichosaItakusakiMain {
                 div.getChosainSearch().getDdlitakukubun().getSelectedKey(),
                 div.getChosainSearch().getDdlkikankubun().getSelectedKey(),
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue());
-        List<SonotaKikanJoho> sonotaKikanJohoList = NinteichosaMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
+        List<SonotaKikanJohoEntity> sonotaKikanJohoList = NinteichosaMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
         if (sonotaKikanJohoList.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(new ArrayList<SonotaKikanJoho>()));
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());

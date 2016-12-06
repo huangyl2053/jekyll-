@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaimast
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterSearchParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 
 /**
@@ -23,7 +24,7 @@ public interface INinteichosaMasterMapper {
      * @param 検索条件 その他機関情報検索条件
      * @return DbT5914SonotaKikanJohoEntity 検索結果の{@link DbT5914SonotaKikanJohoEntity}
      */
-    List<DbT5914SonotaKikanJohoEntity> selectSonotaKikanichiranList(NinteichosaMasterMapperParameter 検索条件);
+    List<SonotaKikanJohoEntity> selectSonotaKikanichiranList(NinteichosaMasterMapperParameter 検索条件);
 
     /**
      * 検索条件より、適当な条件を連結して、その他機関情報を検索する。
