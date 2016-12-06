@@ -49,7 +49,7 @@ public class IkenshoShujiiIchiranHandler {
         div.getRadJyokyo().setSelectedKey(ShujiiHateiJokyo.有効のみ.getコード());
         div.getDdlOutputSort().setSelectedKey(ShujiiOutputSort.医療機関コード主治医コード.getコード());
         div.getDdlNextpage().setSelectedKey(ShujiiOutputPage.医療機関コード.getコード());
-        div.getDdlNextpage().setReadOnly(false);
+        div.getDdlNextpage().setDisabled(false);
     }
 
     /**
@@ -61,9 +61,10 @@ public class IkenshoShujiiIchiranHandler {
 
         if (ShujiiOutputSort.医療機関コード主治医コード.getコード().equals(outputSort)
                 || ShujiiOutputSort.医療機関コード主治医名称.getコード().equals(outputSort)) {
-            div.getDdlNextpage().setReadOnly(false);
+            div.getDdlNextpage().setDisabled(false);
+            div.getDdlNextpage().setSelectedKey(ShujiiOutputPage.医療機関コード.getコード());
         } else {
-            div.getDdlNextpage().setReadOnly(true);
+            div.getDdlNextpage().setDisabled(true);
             div.getDdlNextpage().setSelectedKey(ShujiiOutputPage.なし.getコード());
         }
     }

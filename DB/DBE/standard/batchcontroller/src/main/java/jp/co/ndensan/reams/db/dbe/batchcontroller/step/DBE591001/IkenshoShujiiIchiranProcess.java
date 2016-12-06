@@ -101,9 +101,11 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void keyBreakProcess(IkenshoShujiiIchiranRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(headItem, current);
-            report.writeBy(reportSourceWriter);
+        if (!RString.isNullOrEmpty(ShujiiOutputPage1.toValue(processParameter.getNextpage()).get名称())) {
+            if (hasBrek(getBefore(), current)) {
+                IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(headItem, current);
+                report.writeBy(reportSourceWriter);
+            }
         }
     }
 

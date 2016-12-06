@@ -78,7 +78,7 @@ public class NinteichosaItakusakiMasterHandler {
     private static final RString 四マスタ優先表示市町村識別ID
             = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
-    
+
     /**
      * コンストラクタです。
      *
@@ -138,13 +138,13 @@ public class NinteichosaItakusakiMasterHandler {
      * @return List<KoseiShichosonMaster>
      */
     public List<KoseiShichosonMaster> searchShujii() {
-        
+
         RString 調査委託先コードFrom = RString.EMPTY;
         RString 調査委託先コードTo = RString.EMPTY;
-        
-        if (!div.getTxtSearchChosaItakusakiCodeFrom().getValue().isNullOrEmpty() 
+
+        if (!div.getTxtSearchChosaItakusakiCodeFrom().getValue().isNullOrEmpty()
                 && !div.getTxtSearchChosaItakusakiCodeTo().getValue().isNullOrEmpty()) {
-            if (Long.valueOf(div.getTxtSearchChosaItakusakiCodeFrom().getValue().toString()) 
+            if (Long.valueOf(div.getTxtSearchChosaItakusakiCodeFrom().getValue().toString())
                     > Long.valueOf(div.getTxtSearchChosaItakusakiCodeTo().getValue().toString())) {
                 調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeTo().getValue();
                 調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
@@ -156,7 +156,7 @@ public class NinteichosaItakusakiMasterHandler {
             調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
             調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeTo().getValue();
         }
-        
+
         NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件 = NinteichosaItakusakiKensakuParameter.createParam(
                 状況フラグ有効.equals(div.getChosainSearch().getRadSearchChosainJokyo().getSelectedValue()),
                 div.getChosainSearch().getCcdHokenshaList().getSelectedItem() == null
@@ -308,6 +308,7 @@ public class NinteichosaItakusakiMasterHandler {
     /**
      * 入力明細エリアの入力内容を調査委託先一覧に反映させる。
      *
+     * @param 処理状態 boolean
      */
     public void onClick_btnKakutei(boolean 処理状態) {
         RString 状態 = RString.EMPTY;
@@ -318,16 +319,7 @@ public class NinteichosaItakusakiMasterHandler {
         if (追加状態コード.equals(div.get状態())) {
             状態 = 追加状態コード;
         } else if (修正状態コード.equals(div.get状態())) {
-            if (処理状態) {
-                if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
-                    状態 = 追加状態コード;
-                } else {
-                    状態 = 修正状態コード;
-                }
-            } else {
-                状態 = RString.EMPTY;
-                ViewStateHolder.put(ViewStateKeys.状態, true);
-            }
+            状態 = change状態(状態, 処理状態, selectID);
         } else if (削除状態コード.equals(div.get状態())) {
             if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
                 div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().remove(selectID);
@@ -371,6 +363,20 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
             }
         }
+    }
+
+    private RString change状態(RString 状態, boolean 処理状態, int selectID) {
+        if (処理状態) {
+            if (div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().get(selectID).getJotai().equals(追加状態コード)) {
+                状態 = 追加状態コード;
+            } else {
+                状態 = 修正状態コード;
+            }
+        } else {
+            状態 = RString.EMPTY;
+            ViewStateHolder.put(ViewStateKeys.状態, true);
+        }
+        return 状態;
     }
 
     /**
@@ -417,7 +423,7 @@ public class NinteichosaItakusakiMasterHandler {
         int 件数 = chosainJohoManager.countByKey(市町村コード, 認定調査委託先コード);
         return 件数 <= 0;
     }
-  
+
     private void set明細照会状態() {
         div.set状態(その他状態コード);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
