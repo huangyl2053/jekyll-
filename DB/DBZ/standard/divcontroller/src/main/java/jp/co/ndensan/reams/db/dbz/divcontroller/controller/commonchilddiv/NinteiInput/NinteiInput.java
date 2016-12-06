@@ -82,7 +82,7 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS6));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS6).minusDay(1));
         return ResponseData.of(div).respond();
     }
 
@@ -97,7 +97,7 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS12));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS12).minusDay(1));
         return ResponseData.of(div).respond();
     }
 
@@ -112,7 +112,7 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS18));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS18).minusDay(1));
         return ResponseData.of(div).respond();
     }
 
@@ -127,7 +127,7 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS24));
+        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS24).minusDay(1));
         return ResponseData.of(div).respond();
     }
 
