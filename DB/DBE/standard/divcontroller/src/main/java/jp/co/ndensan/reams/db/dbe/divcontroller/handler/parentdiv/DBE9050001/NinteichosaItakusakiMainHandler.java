@@ -234,7 +234,11 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanname().setValue(row.getKikanMeisho());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanKananame().setValue(row.getKikanKana());
         if (row.getYubinNo() != null) {
-            div.getChosaitakusakiJohoInput().getTxtYubinNo().setValue(new YubinNo(row.getYubinNo()));
+            if (row.getYubinNo().length() == 4 && row.getYubinNo().contains("-")) {
+                div.getChosaitakusakiJohoInput().getTxtYubinNo().setValue(new YubinNo(row.getYubinNo().remove(3)));
+            } else {
+                div.getChosaitakusakiJohoInput().getTxtYubinNo().setValue(new YubinNo(row.getYubinNo()));
+            }
         }
         if (row.getJusho() != null) {
             div.getChosaitakusakiJohoInput().getTxtJusho().setDomain(new AtenaJusho(row.getJusho()));

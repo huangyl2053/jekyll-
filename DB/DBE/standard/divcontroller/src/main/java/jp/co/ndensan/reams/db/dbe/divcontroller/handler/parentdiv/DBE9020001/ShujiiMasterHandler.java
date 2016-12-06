@@ -185,6 +185,7 @@ public class ShujiiMasterHandler {
         div.getShujiiJohoInput().getRadShiteiiFlag().setSelectedKey(
                 表示値_可能.equals(row.getShiteii()) ? 指定医_可能 : 指定医_不可);
         div.getShujiiJohoInput().getTxtShinryokaMei().setValue(nullToEmpty(row.getShinryoka()));
+        
         div.getShujiiJohoInput().getTxtYubinNo().setValue(new YubinNo(editYubinNo(row.getYubinNo())));
         div.getShujiiJohoInput().getTxtJusho().setDomain(new AtenaJusho(row.getJusho()));
         div.getShujiiJohoInput().getTxtTelNo().setDomain(new TelNo(row.getTelNo()));
@@ -260,6 +261,9 @@ public class ShujiiMasterHandler {
 
     private RString editYubinNo(RString yubinNo) {
         RStringBuilder yubinNoSb = new RStringBuilder();
+        if (yubinNo.length() == INDEX_4) {
+            yubinNo = yubinNo.remove(INDEX_3);
+        } 
         if (yubinNo.contains(ハイフン)) {
             yubinNoSb.append(yubinNo.substring(0, INDEX_4));
             yubinNoSb.append(yubinNo.substring(INDEX_4));
