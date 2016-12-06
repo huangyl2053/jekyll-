@@ -117,9 +117,11 @@ public class IkenshoSakuseiIraiManager {
     public boolean save(NinteiShinseiJoho 要介護認定申請情報) {
         DbT5301ShujiiIkenshoIraiJohoEntity 主治医意見書作成依頼情報
                 = 要介護認定申請情報.getshujiiIkenshoIraiJohoList().get(ZERO).toEntity();
-        if (主治医意見書作成依頼情報.getState() != EntityDataState.Modified) {
+        if (主治医意見書作成依頼情報.hasChanged()) {
             主治医意見書作成依頼情報.setState(EntityDataState.Added);
-            主治医意見書作成依頼情報Dac.save(主治医意見書作成依頼情報);
+            return 1 == 主治医意見書作成依頼情報Dac.save(主治医意見書作成依頼情報);
+        }
+        if (要介護認定申請情報.hasChanged()) {
             DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
             entity.setState(EntityDataState.Modified);
             return 1 == 要介護認定申請情報Dac.save(entity);
