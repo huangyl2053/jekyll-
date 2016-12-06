@@ -52,8 +52,8 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     private ZaitakuServicePanelDiv ZaitakuServicePanel;
     @JsonProperty("GaikyoTokkiPanel")
     private GaikyoTokkiPanelDiv GaikyoTokkiPanel;
-    @JsonProperty("btnBack")
-    private Button btnBack;
+    @JsonProperty("btnReturn")
+    private Button btnReturn;
     @JsonProperty("shinseishoKanriNo")
     private RString shinseishoKanriNo;
     @JsonProperty("ninteichosaRirekiNo")
@@ -292,21 +292,21 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
-     * getbtnBack
-     * @return btnBack
+     * getbtnReturn
+     * @return btnReturn
      */
-    @JsonProperty("btnBack")
-    public Button getBtnBack() {
-        return btnBack;
+    @JsonProperty("btnReturn")
+    public Button getBtnReturn() {
+        return btnReturn;
     }
 
     /*
-     * setbtnBack
-     * @param btnBack btnBack
+     * setbtnReturn
+     * @param btnReturn btnReturn
      */
-    @JsonProperty("btnBack")
-    public void setBtnBack(Button btnBack) {
-        this.btnBack = btnBack;
+    @JsonProperty("btnReturn")
+    public void setBtnReturn(Button btnReturn) {
+        this.btnReturn = btnReturn;
     }
 
     /*

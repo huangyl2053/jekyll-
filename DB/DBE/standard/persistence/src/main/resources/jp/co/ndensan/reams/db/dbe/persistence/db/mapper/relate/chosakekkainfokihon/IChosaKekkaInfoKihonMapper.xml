@@ -8,6 +8,7 @@
     <resultMap id="resultMap_ChosaKekkaInfoKihonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfokihon.ChosaKekkaInfoKihonRelateEntity" autoMapping="true">
         <result property="ninteichosaJisshiYMD" column="DbT5202_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="chosaJisshiBashoMeisho" column="DbT5202_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gaikyoChosaTextImageKubun" column="DbT5202_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="DbT5203_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="shogaiNichijoSeikatsuJiritsudoCode" column="DbT5203_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="koroshoIfShikibetsuCode" column="DbT5203_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
@@ -18,6 +19,7 @@
         SELECT 
         DbT5202."ninteichosaJisshiYMD" as "DbT5202_ninteichosaJisshiYMD"
         ,DbT5202."chosaJisshiBashoMeisho" as "DbT5202_chosaJisshiBashoMeisho"
+        ,DbT5202."gaikyoChosaTextImageKubun" as "DbT5202_gaikyoChosaTextImageKubun"
         ,DbT5203."ninchishoNichijoSeikatsuJiritsudoCode" as "DbT5203_ninchishoNichijoSeikatsuJiritsudoCode"
         ,DbT5203."shogaiNichijoSeikatsuJiritsudoCode" as "DbT5203_shogaiNichijoSeikatsuJiritsudoCode"
         ,DbT5203."koroshoIfShikibetsuCode" as "DbT5203_koroshoIfShikibetsuCode"
@@ -46,24 +48,19 @@
     <select resultOrdered="true" id="getChosaKekkaInfoKihonList2"
                 resultMap="resultMap_TokiJikouRelateEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.ChosaKekkaInfoKihonParameter" fetchSize="500">
-         SELECT 
-        DbT5202."shinseishoKanriNo"
-        ,DbT5202."ninteichosaRirekiNo"
-        ,DbT5211."remban" as "DbT5211_remban"
-        ,DbT5211."researchItem" as "DbT5211_researchItem"
-        ,DbT5211."koroshoIfShikibetsuCode" as "DbT5211_koroshoIfShikibetsuCode"
-        FROM
-        rgdb."DbT5211NinteichosahyoChosaItem" as DbT5211
-        INNER JOIN 
-        rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
-        ON DbT5211."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
-        AND 
-        DbT5211."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
-        AND 
-        DbT5211."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
-        WHERE
-            DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
-            AND 
-            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+        SELECT DISTINCT
+          DbT5202."shinseishoKanriNo"
+          ,DbT5202."ninteichosaRirekiNo"
+          ,DbT5211."remban" as "DbT5211_remban"
+          ,DbT5211."researchItem" as "DbT5211_researchItem"
+          ,DbT5211."koroshoIfShikibetsuCode" as "DbT5211_koroshoIfShikibetsuCode"
+        FROM rgdb."DbT5211NinteichosahyoChosaItem" as DbT5211
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
+          ON DbT5211."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+          AND DbT5211."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+          AND DbT5211."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        WHERE DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
+        AND DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+        ORDER BY DbT5211."remban"
     </select>
 </mapper>

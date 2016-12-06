@@ -86,7 +86,7 @@ public class ChosaKekkaInfoGaikyoHandler {
      */
     public void onLoad(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList, List<RembanServiceJokyoBusiness> serviceJokyos,
             List<NinteichosahyoShisetsuRiyo> shisetsuRiyos, ChosaKekkaInfoGaikyoParameter gaikyoParameter) {
-        gaikyoDiv.getBtnBack().setDisabled(false);
+        gaikyoDiv.getBtnReturn().setDisabled(false);
         setDisabledコントロール();
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(gaikyoDiv.getHdnTextImageKubun())) {
             setDisplayNoneイメージコントロール();

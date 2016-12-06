@@ -8,8 +8,8 @@ module DBE {
 
         export class Events {
 
-            public static onClick_Moderu(): string {
-                return "onClick_Moderu";
+            public static onClick_btnReturn(): string {
+                return "onClick_btnReturn";
             }
 
         }
@@ -257,8 +257,8 @@ module DBE {
                 return new UZA.DynamicImage(this.convFiledName("imgGaikyoTokki"));
             }
 
-            public btnBack(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBack"));
+            public btnReturn(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             }
 
         }

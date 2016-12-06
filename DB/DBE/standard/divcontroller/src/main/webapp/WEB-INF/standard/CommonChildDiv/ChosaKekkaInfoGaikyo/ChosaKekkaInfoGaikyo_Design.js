@@ -4,8 +4,8 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_Moderu = function () {
-                return "onClick_Moderu";
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
             };
             return Events;
         })();
@@ -251,8 +251,8 @@ var DBE;
                 return new UZA.DynamicImage(this.convFiledName("imgGaikyoTokki"));
             };
 
-            Controls.prototype.btnBack = function () {
-                return new UZA.Button(this.convFiledName("btnBack"));
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             };
             return Controls;
         })();

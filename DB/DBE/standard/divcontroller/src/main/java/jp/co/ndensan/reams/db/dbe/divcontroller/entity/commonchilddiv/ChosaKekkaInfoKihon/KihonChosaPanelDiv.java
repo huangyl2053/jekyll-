@@ -25,6 +25,8 @@ public class KihonChosaPanelDiv extends Panel {
     private DataGrid<dgKihonChosa_Row> dgKihonChosa;
     @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
     private TextBoxCode txtNinchishoNichijoSeikatsuJiritsudoCode;
+    @JsonProperty("btnChosaTokkiImageShokai")
+    private ButtonDialog btnChosaTokkiImageShokai;
     @JsonProperty("txtShogaiNichijoSeikatsuJiritsudoCode")
     private TextBoxCode txtShogaiNichijoSeikatsuJiritsudoCode;
 
@@ -68,6 +70,24 @@ public class KihonChosaPanelDiv extends Panel {
     @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
     public void setTxtNinchishoNichijoSeikatsuJiritsudoCode(TextBoxCode txtNinchishoNichijoSeikatsuJiritsudoCode) {
         this.txtNinchishoNichijoSeikatsuJiritsudoCode = txtNinchishoNichijoSeikatsuJiritsudoCode;
+    }
+
+    /*
+     * getbtnChosaTokkiImageShokai
+     * @return btnChosaTokkiImageShokai
+     */
+    @JsonProperty("btnChosaTokkiImageShokai")
+    public ButtonDialog getBtnChosaTokkiImageShokai() {
+        return btnChosaTokkiImageShokai;
+    }
+
+    /*
+     * setbtnChosaTokkiImageShokai
+     * @param btnChosaTokkiImageShokai btnChosaTokkiImageShokai
+     */
+    @JsonProperty("btnChosaTokkiImageShokai")
+    public void setBtnChosaTokkiImageShokai(ButtonDialog btnChosaTokkiImageShokai) {
+        this.btnChosaTokkiImageShokai = btnChosaTokkiImageShokai;
     }
 
     /*

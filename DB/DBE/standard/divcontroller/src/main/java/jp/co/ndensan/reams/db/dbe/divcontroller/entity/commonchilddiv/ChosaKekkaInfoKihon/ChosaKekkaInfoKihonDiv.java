@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekk
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -24,18 +25,22 @@ public class ChosaKekkaInfoKihonDiv extends Panel implements IChosaKekkaInfoKiho
      */
     @JsonProperty("txtNinteichosaJisshiYMD")
     private TextBoxDate txtNinteichosaJisshiYMD;
+    @JsonProperty("lblJisshiBasho")
+    private Label lblJisshiBasho;
     @JsonProperty("txtChosaJisshiBashoMeisho")
     private TextBox txtChosaJisshiBashoMeisho;
+    @JsonProperty("JisshiBashoMeishoPanel")
+    private JisshiBashoMeishoPanelDiv JisshiBashoMeishoPanel;
     @JsonProperty("KihonChosaPanel")
     private KihonChosaPanelDiv KihonChosaPanel;
-    @JsonProperty("Button1")
-    private Button Button1;
+    @JsonProperty("btnReturn")
+    private Button btnReturn;
     @JsonProperty("shinseishoKanriNo")
     private RString shinseishoKanriNo;
     @JsonProperty("ninteichosaRirekiNo")
     private RString ninteichosaRirekiNo;
-    @JsonProperty("ninteichosaTokkijikoNo")
-    private RString ninteichosaTokkijikoNo;
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    private RString ninteichosaTokkijikoNoList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,6 +67,24 @@ public class ChosaKekkaInfoKihonDiv extends Panel implements IChosaKekkaInfoKiho
     }
 
     /*
+     * getlblJisshiBasho
+     * @return lblJisshiBasho
+     */
+    @JsonProperty("lblJisshiBasho")
+    public Label getLblJisshiBasho() {
+        return lblJisshiBasho;
+    }
+
+    /*
+     * setlblJisshiBasho
+     * @param lblJisshiBasho lblJisshiBasho
+     */
+    @JsonProperty("lblJisshiBasho")
+    public void setLblJisshiBasho(Label lblJisshiBasho) {
+        this.lblJisshiBasho = lblJisshiBasho;
+    }
+
+    /*
      * gettxtChosaJisshiBashoMeisho
      * @return txtChosaJisshiBashoMeisho
      */
@@ -77,6 +100,24 @@ public class ChosaKekkaInfoKihonDiv extends Panel implements IChosaKekkaInfoKiho
     @JsonProperty("txtChosaJisshiBashoMeisho")
     public void setTxtChosaJisshiBashoMeisho(TextBox txtChosaJisshiBashoMeisho) {
         this.txtChosaJisshiBashoMeisho = txtChosaJisshiBashoMeisho;
+    }
+
+    /*
+     * getJisshiBashoMeishoPanel
+     * @return JisshiBashoMeishoPanel
+     */
+    @JsonProperty("JisshiBashoMeishoPanel")
+    public JisshiBashoMeishoPanelDiv getJisshiBashoMeishoPanel() {
+        return JisshiBashoMeishoPanel;
+    }
+
+    /*
+     * setJisshiBashoMeishoPanel
+     * @param JisshiBashoMeishoPanel JisshiBashoMeishoPanel
+     */
+    @JsonProperty("JisshiBashoMeishoPanel")
+    public void setJisshiBashoMeishoPanel(JisshiBashoMeishoPanelDiv JisshiBashoMeishoPanel) {
+        this.JisshiBashoMeishoPanel = JisshiBashoMeishoPanel;
     }
 
     /*
@@ -98,21 +139,21 @@ public class ChosaKekkaInfoKihonDiv extends Panel implements IChosaKekkaInfoKiho
     }
 
     /*
-     * getButton1
-     * @return Button1
+     * getbtnReturn
+     * @return btnReturn
      */
-    @JsonProperty("Button1")
-    public Button getButton1() {
-        return Button1;
+    @JsonProperty("btnReturn")
+    public Button getBtnReturn() {
+        return btnReturn;
     }
 
     /*
-     * setButton1
-     * @param Button1 Button1
+     * setbtnReturn
+     * @param btnReturn btnReturn
      */
-    @JsonProperty("Button1")
-    public void setButton1(Button Button1) {
-        this.Button1 = Button1;
+    @JsonProperty("btnReturn")
+    public void setBtnReturn(Button btnReturn) {
+        this.btnReturn = btnReturn;
     }
 
     /*
@@ -152,21 +193,34 @@ public class ChosaKekkaInfoKihonDiv extends Panel implements IChosaKekkaInfoKiho
     }
 
     /*
-     * getninteichosaTokkijikoNo
-     * @return ninteichosaTokkijikoNo
+     * getninteichosaTokkijikoNoList
+     * @return ninteichosaTokkijikoNoList
      */
-    @JsonProperty("ninteichosaTokkijikoNo")
-    public RString getNinteichosaTokkijikoNo() {
-        return ninteichosaTokkijikoNo;
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public RString getNinteichosaTokkijikoNoList() {
+        return ninteichosaTokkijikoNoList;
     }
 
     /*
-     * setninteichosaTokkijikoNo
-     * @param ninteichosaTokkijikoNo ninteichosaTokkijikoNo
+     * setninteichosaTokkijikoNoList
+     * @param ninteichosaTokkijikoNoList ninteichosaTokkijikoNoList
      */
-    @JsonProperty("ninteichosaTokkijikoNo")
-    public void setNinteichosaTokkijikoNo(RString ninteichosaTokkijikoNo) {
-        this.ninteichosaTokkijikoNo = ninteichosaTokkijikoNo;
+    @JsonProperty("ninteichosaTokkijikoNoList")
+    public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
+        this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DynamicImage getImgChosaJisshiBashoMeisho() {
+        return this.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho();
+    }
+
+    @JsonIgnore
+    public void  setImgChosaJisshiBashoMeisho(DynamicImage imgChosaJisshiBashoMeisho) {
+        this.getJisshiBashoMeishoPanel().setImgChosaJisshiBashoMeisho(imgChosaJisshiBashoMeisho);
     }
 
     // </editor-fold>

@@ -45,6 +45,15 @@ public class ChosaKekkaInfoKihonBusiness {
     public RString get認定調査実施場所名称() {
         return kihonRelateEntity.getChosaJisshiBashoMeisho();
     }
+    
+    /**
+     * 認定調査テキストイメージ区分を返します。
+     *
+     * @return 概況調査テキストイメージ区分
+     */
+    public RString get概況調査テキストイメージ区分() {
+        return kihonRelateEntity.getGaikyoChosaTextImageKubun();
+    }
 
     /**
      * 認定調査・認知症高齢者の日常生活自立度コードを返します。

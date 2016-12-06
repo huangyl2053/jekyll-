@@ -124,7 +124,7 @@ public class ChosaKekkaInfoGaikyo {
      * @param div 画面情報
      * @return 認定調査結果情報照会Div
      */
-    public ResponseData<ChosaKekkaInfoGaikyoDiv> onClick_Moderu(ChosaKekkaInfoGaikyoDiv div) {
+    public ResponseData<ChosaKekkaInfoGaikyoDiv> onClick_btnReturn(ChosaKekkaInfoGaikyoDiv div) {
         return ResponseData.of(div).respond();
     }
 

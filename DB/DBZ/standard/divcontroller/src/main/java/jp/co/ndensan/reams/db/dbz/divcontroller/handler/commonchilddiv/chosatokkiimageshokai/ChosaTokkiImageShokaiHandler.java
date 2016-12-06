@@ -30,60 +30,47 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ChosaTokkiImageShokaiHandler {
 
-    private enum TokkiJikoNo {
+    private enum TokkiJikoFileName {
 
         /**
-         * 特記資料1, コード: "T0001", ファイル名称: "C4101.png", ファイルbak名称: "C4101_BAK.png"。
+         * 特記資料1, ファイル名称: "C4101.png"。
          */
-        特記資料1(new RString("T0001"), new RString("C4101.png"), new RString("C4101_BAK.png")),
+        特記資料1(new RString("C4101.png")),
         /**
-         * 特記資料2, コード: "T0002", ファイル名称: "C4102.png", ファイルbak名称: "C4102_BAK.png"。
+         * 特記資料2, ファイル名称: "C4102.png"。
          */
-        特記資料2(new RString("T0002"), new RString("C4102.png"), new RString("C4102_BAK.png")),
+        特記資料2(new RString("C4102.png")),
         /**
-         * 特記資料3, コード: "T0003", ファイル名称: "C4103.png", ファイルbak名称: "C4103_BAK.png"。
+         * 特記資料3, ファイル名称: "C4103.png"。
          */
-        特記資料3(new RString("T0003"), new RString("C4103.png"), new RString("C4103_BAK.png")),
+        特記資料3(new RString("C4103.png")),
         /**
-         * 特記資料4, コード: "T0004", ファイル名称: "C4104.png", ファイルbak名称: "C4104_BAK.png"。
+         * 特記資料4, ファイル名称: "C4104.png"。
          */
-        特記資料4(new RString("T0004"), new RString("C4104.png"), new RString("C4104_BAK.png")),
+        特記資料4(new RString("C4104.png")),
         /**
-         * 特記資料5, コード: "T0005", ファイル名称: "C4105.png", ファイルbak名称: "C4105_BAK.png"。
+         * 特記資料5, ファイル名称: "C4105.png"。
          */
-        特記資料5(new RString("T0005"), new RString("C4105.png"), new RString("C4105_BAK.png")),
+        特記資料5(new RString("C4105.png")),
         /**
-         * 特記資料6, コード: "T0006", ファイル名称: "C4106.png", ファイルbak名称: "C4106_BAK.png"。
+         * 特記資料6, ファイル名称: "C4106.png"。
          */
-        特記資料6(new RString("T0006"), new RString("C4106.png"), new RString("C4106_BAK.png")),
+        特記資料6(new RString("C4106.png")),
         /**
-         * 特記資料7, コード: "T0007", ファイル名称: "C4107.png", ファイルbak名称: "C4107_BAK.png"。
+         * 特記資料7, ファイル名称: "C4107.png"。
          */
-        特記資料7(new RString("T0007"), new RString("C4107.png"), new RString("C4107_BAK.png")),
+        特記資料7(new RString("C4107.png")),
         /**
-         * 特記資料8, コード: "T0008", ファイル名称: "C4108.png", ファイルbak名称: "C4108_BAK.png"。
+         * 特記資料8, ファイル名称: "C4108.png"。
          */
-        特記資料8(new RString("T0008"), new RString("C4108.png"), new RString("C4108_BAK.png"));
+        特記資料8(new RString("C4108.png"));
 
-        private final RString code;
         private final RString fileName;
-        private final RString fileNameBAK;
 
-        private TokkiJikoNo(RString code, RString fileName, RString fileNameBAK) {
-            this.code = code;
+        private TokkiJikoFileName(RString fileName) {
             this.fileName = fileName;
-            this.fileNameBAK = fileNameBAK;
         }
-
-        /**
-         * コードを返します。
-         *
-         * @return コード
-         */
-        public RString getCode() {
-            return this.code;
-        }
-
+        
         /**
          * ファイル名称を返します。
          *
@@ -92,35 +79,18 @@ public class ChosaTokkiImageShokaiHandler {
         public RString getfileName() {
             return this.fileName;
         }
-
-        /**
-         * ファイルbak名称を返します。
-         *
-         * @return コード
-         */
-        public RString getfileNameBAK() {
-            return this.fileNameBAK;
-        }
     }
 
     private final ChosaTokkiImageShokaiDiv div;
     private static final RString Title特記資料 = new RString("特記資料");
-    private static final RString IMAGEFILENAME_特記資料1 = new RString("C4101.png");
-    private static final RString IMAGEFILENAME_特記資料2 = new RString("C4102.png");
-    private static final RString IMAGEFILENAME_特記資料3 = new RString("C4103.png");
-    private static final RString IMAGEFILENAME_特記資料4 = new RString("C4104.png");
-    private static final RString IMAGEFILENAME_特記資料5 = new RString("C4105.png");
-    private static final RString IMAGEFILENAME_特記資料6 = new RString("C4106.png");
-    private static final RString IMAGEFILENAME_特記資料7 = new RString("C4107.png");
-    private static final RString IMAGEFILENAME_特記資料8 = new RString("C4108.png");
-    private static final RString IMAGEFILENAME_特記資料1_原本 = new RString("C4101_BAK.png");
-    private static final RString IMAGEFILENAME_特記資料2_原本 = new RString("C4102_BAK.png");
-    private static final RString IMAGEFILENAME_特記資料3_原本 = new RString("C4103_BAK.png");
-    private static final RString IMAGEFILENAME_特記資料4_原本 = new RString("C4104_BAK.png");
-    private static final RString IMAGEFILENAME_特記資料5_原本 = new RString("C4105_BAK.png");
-    private static final RString IMAGEFILENAME_特記資料6_原本 = new RString("C4106_BAK.png");
-    private static final RString IMAGEFILENAME_特記資料7_原本 = new RString("C4107_BAK.png");
-    private static final RString IMAGEFILENAME_特記資料8_原本 = new RString("C4108_BAK.png");
+    private static final RString 特記資料1 = new RString("T001");
+    private static final RString 特記資料2 = new RString("T002");
+    private static final RString 特記資料3 = new RString("T003");
+    private static final RString 特記資料4 = new RString("T004");
+    private static final RString 特記資料5 = new RString("T005");
+    private static final RString 特記資料6 = new RString("T006");
+    private static final RString 特記資料7 = new RString("T007");
+    private static final RString 特記資料8 = new RString("T008");
 
     /**
      * コンストラクタです。
@@ -179,7 +149,7 @@ public class ChosaTokkiImageShokaiHandler {
         }
         imgGenponPathList.add(path原本);
         imgMaskPathList.add(pathマスク);
-        
+
         List<RString> tabTitleGenponList = getTitleList(imgGenponPathList);
         List<RString> tabTitleMaskList = getTitleList(imgMaskPathList);
 
@@ -187,8 +157,24 @@ public class ChosaTokkiImageShokaiHandler {
     }
 
     private RString getImagePath(Image イメージ情報, RString 特記事項番号, boolean isExistマスク) {
-        TokkiJikoNo 特記事項 = TokkiJikoNo.valueOf(特記事項番号.toString());
-        return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(特記事項.getfileName(), isExistマスク));
+        if (特記資料1.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料1.getfileName(), isExistマスク));
+        } else if (特記資料2.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料2.getfileName(), isExistマスク));            
+        } else if (特記資料3.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料3.getfileName(), isExistマスク));            
+        } else if (特記資料4.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料4.getfileName(), isExistマスク));            
+        } else if (特記資料5.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料5.getfileName(), isExistマスク));            
+        } else if (特記資料6.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料6.getfileName(), isExistマスク));            
+        } else if (特記資料7.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料7.getfileName(), isExistマスク));            
+        } else if (特記資料8.equals(特記事項番号)) {
+            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料8.getfileName(), isExistマスク));            
+        }
+        return RString.EMPTY;
     }
 
     private RString 共有ファイルを引き出す(Image イメージ情報, RString ファイル名) {

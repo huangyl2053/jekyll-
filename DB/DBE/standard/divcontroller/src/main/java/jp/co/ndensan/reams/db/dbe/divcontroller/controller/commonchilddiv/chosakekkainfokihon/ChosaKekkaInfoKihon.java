@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.chosakekkainfokihon;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBusiness;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.Chos
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoKihon.ChosaKekkaInfoKihonDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoKihon.ChosaKekkaInfoKihonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfokihon.ChosaKekkaInfoKihonFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -36,23 +38,23 @@ public class ChosaKekkaInfoKihon {
         } else {
             return createResponse(div);
         }
-        ChosaKekkaInfoKihonParameter gaikyoParameter = ChosaKekkaInfoKihonParameter.
+        ChosaKekkaInfoKihonParameter kihonParameter = ChosaKekkaInfoKihonParameter.
                 createGamenParam(申請書管理番号, 認定調査依頼履歴番号);
         List<ChosaKekkaInfoKihonBusiness> infoKihonList
-                = ChosaKekkaInfoKihonFinder.createInstance().getChosaKekkaInfoKihon(gaikyoParameter).records();
+                = ChosaKekkaInfoKihonFinder.createInstance().getChosaKekkaInfoKihon(kihonParameter).records();
         List<TokiJikouBusiness> serviceJokyos
-                = ChosaKekkaInfoKihonFinder.createInstance().getTokiJikou(gaikyoParameter).records();
-        getHandler(div).onLoad(infoKihonList, serviceJokyos);
+                = ChosaKekkaInfoKihonFinder.createInstance().getTokiJikou(kihonParameter).records();
+        getHandler(div).onLoad(申請書管理番号, infoKihonList, serviceJokyos);
         return createResponse(div);
     }
-
+    
     /**
      * 戻るボタンを押下します。
      *
      * @param div 画面情報
      * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
      */
-    public ResponseData<ChosaKekkaInfoKihonDiv> onClick_Moderu(ChosaKekkaInfoKihonDiv div) {
+    public ResponseData<ChosaKekkaInfoKihonDiv> onClick_btnReturn(ChosaKekkaInfoKihonDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -63,6 +65,16 @@ public class ChosaKekkaInfoKihon {
      * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
      */
     public ResponseData<ChosaKekkaInfoKihonDiv> onBeforeOpenDialog_btnTokkiJiko(ChosaKekkaInfoKihonDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 特記事項ボタンを押下します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
+     */
+    public ResponseData<ChosaKekkaInfoKihonDiv> onBeforeOpenDialog_btnChosaTokkiImageShokai(ChosaKekkaInfoKihonDiv div) {
         return ResponseData.of(div).respond();
     }
 

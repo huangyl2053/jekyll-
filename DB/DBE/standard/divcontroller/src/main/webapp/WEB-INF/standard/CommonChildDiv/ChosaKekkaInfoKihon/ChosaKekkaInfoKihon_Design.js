@@ -4,8 +4,12 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_Moderu = function () {
-                return "onClick_Moderu";
+            Events.onBeforeOpenDialog_btnChosaTokkiImageShokai = function () {
+                return "onBeforeOpenDialog_btnChosaTokkiImageShokai";
+            };
+
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
             };
             return Events;
         })();
@@ -35,8 +39,20 @@ var DBE;
                 return new UZA.TextBoxDate(this.convFiledName("txtNinteichosaJisshiYMD"));
             };
 
+            Controls.prototype.lblJisshiBasho = function () {
+                return new UZA.Label(this.convFiledName("lblJisshiBasho"));
+            };
+
             Controls.prototype.txtChosaJisshiBashoMeisho = function () {
                 return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoMeisho"));
+            };
+
+            Controls.prototype.JisshiBashoMeishoPanel = function () {
+                return new UZA.Panel(this.convFiledName("JisshiBashoMeishoPanel"));
+            };
+
+            Controls.prototype.imgChosaJisshiBashoMeisho = function () {
+                return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
             };
 
             Controls.prototype.KihonChosaPanel = function () {
@@ -51,12 +67,16 @@ var DBE;
                 return new UZA.TextBoxCode(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
             };
 
+            Controls.prototype.btnChosaTokkiImageShokai = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnChosaTokkiImageShokai"));
+            };
+
             Controls.prototype.txtShogaiNichijoSeikatsuJiritsudoCode = function () {
                 return new UZA.TextBoxCode(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
             };
 
-            Controls.prototype.Button1 = function () {
-                return new UZA.Button(this.convFiledName("Button1"));
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             };
             return Controls;
         })();

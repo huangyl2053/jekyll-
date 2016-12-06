@@ -23,6 +23,7 @@ public class ChosaKekkaInfoKihonRelateEntity {
 
     private FlexibleDate ninteichosaJisshiYMD;
     private RString chosaJisshiBashoMeisho;
+    private RString gaikyoChosaTextImageKubun;
     private Code ninchishoNichijoSeikatsuJiritsudoCode;
     private Code shogaiNichijoSeikatsuJiritsudoCode;
     private Code koroshoIfShikibetsuCode;
