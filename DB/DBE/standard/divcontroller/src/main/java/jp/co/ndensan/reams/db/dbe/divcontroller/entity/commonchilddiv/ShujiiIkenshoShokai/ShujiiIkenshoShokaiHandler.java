@@ -63,7 +63,6 @@ public class ShujiiIkenshoShokaiHandler {
     public void onLoad(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号) {
         申請書管理番号 = new ShinseishoKanriNo(div.getHiddenShinseishoKanriNo());
         主治医意見書作成依頼履歴番号 = Integer.parseInt(div.getHiddenIkenshoIraiRirekiNo().toString());
-//        主治医意見書作成依頼履歴番号 = 4;
 
         List<ShujiiIkenshoIkenItemEntity> entityList = ShujiiIkenshoIkenItemManager.createInstance().select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号);
         RString 厚労省IF識別コード = RString.EMPTY;
@@ -99,15 +98,15 @@ public class ShujiiIkenshoShokaiHandler {
 
     private void set必須５項目_99A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (entity.getRemban() == IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().toInt()) {
+            if (Integer.parseInt(IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping99A.短期記憶.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping99A.認知能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping99A.伝達能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping99A.食事.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.食事.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -115,15 +114,15 @@ public class ShujiiIkenshoShokaiHandler {
 
     private void set必須５項目_02A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (entity.getRemban() == IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().toInt()) {
+            if (Integer.parseInt(IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping02A.短期記憶.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping02A.認知能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping02A.伝達能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping02A.食事.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.食事.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -131,15 +130,15 @@ public class ShujiiIkenshoShokaiHandler {
 
     private void set必須５項目_06A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (entity.getRemban() == IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().toInt()) {
+            if (Integer.parseInt(IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping06A.短期記憶.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping06A.認知能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping06A.伝達能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping06A.食事行為.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.食事行為.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -147,15 +146,15 @@ public class ShujiiIkenshoShokaiHandler {
 
     private void set必須５項目_09A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (entity.getRemban() == IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().toInt()) {
+            if (Integer.parseInt(IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09A.短期記憶.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09A.認知能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09A.伝達能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09A.食事行為.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.食事行為.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -163,15 +162,15 @@ public class ShujiiIkenshoShokaiHandler {
 
     private void set必須５項目_09B(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (entity.getRemban() == IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().toInt()) {
+            if (Integer.parseInt(IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09B.短期記憶.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09B.認知能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09B.伝達能力.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (entity.getRemban() == IkenshoKomokuMapping09B.食事行為.getコード().toInt()) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.食事行為.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -181,58 +180,26 @@ public class ShujiiIkenshoShokaiHandler {
         List<RString> イメージファイルパス = new ArrayList<>();
         RString イメージパス_表 = RString.EMPTY;
         RString イメージパス_裏 = RString.EMPTY;
-
-        SearchSharedFileOpts 検索条件 = new SearchSharedFileOpts();
-        検索条件.sharedFilePat(ファイル名_主治医意見書_表BAK);
-        List<UzT0885SharedFileEntryEntity> ShareFileList = SharedFile.searchSharedFile(検索条件);
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
-                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
-                    イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
-                }
-            }
-        }
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            ShareFileList.clear();
+        
+        if (isExist共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_表BAK)) {
+            イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
         }
         if (RString.isNullOrEmpty(イメージパス_表)) {
-            検索条件.sharedFilePat(ファイル名_主治医意見書_表);
-            ShareFileList = SharedFile.searchSharedFile(検索条件);
-            if (ShareFileList != null && !ShareFileList.isEmpty()) {
-                for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
-                    if (ShareFile.getSharedFileId().equals(イメージ情報.getイメージ共有ファイルID())) {
-                        イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
-                    }
-                }
+            if (isExist共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_表)) {
+                イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
             }
-        }
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            ShareFileList.clear();
+
         }
         イメージファイルパス.add(イメージパス_表);
-
-        検索条件.sharedFilePat(ファイル名_主治医意見書_裏BAK);
-        ShareFileList = SharedFile.searchSharedFile(検索条件);
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
-                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
-                    イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏BAK);
-                }
-            }
-        }        
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            ShareFileList.clear();
+        
+        if (isExist共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_裏BAK)) {
+            イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏BAK);
         }
-        if (RString.isNullOrEmpty(イメージパス_裏)){
-            検索条件.sharedFilePat(ファイル名_主治医意見書_裏);
-            ShareFileList = SharedFile.searchSharedFile(検索条件);
-            if (ShareFileList != null && !ShareFileList.isEmpty()) {
-                for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
-                    if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
-                        イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
-                    }
-                }
+        if (RString.isNullOrEmpty(イメージパス_裏)) {
+            if (isExist共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_裏)) {
+                イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
             }
+
         }
         イメージファイルパス.add(イメージパス_裏);
 
@@ -243,52 +210,33 @@ public class ShujiiIkenshoShokaiHandler {
         List<RString> イメージファイルパス = new ArrayList<>();
         RString イメージパス_表 = RString.EMPTY;
         RString イメージパス_裏 = RString.EMPTY;
-
-        SearchSharedFileOpts 検索条件 = new SearchSharedFileOpts();
-        検索条件.sharedFilePat(ファイル名_主治医意見書_表BAK);
-        List<UzT0885SharedFileEntryEntity> ShareFileList = SharedFile.searchSharedFile(検索条件);
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
-                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
-                    イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
-                }
-            }
-        }
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            ShareFileList.clear();
+        
+        if (isExist共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_表BAK)) {
+            イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
         }
         イメージファイルパス.add(イメージパス_表);
 
-        検索条件.sharedFilePat(ファイル名_主治医意見書_裏BAK);
-        ShareFileList = SharedFile.searchSharedFile(検索条件);
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
-                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
-                    イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
-                }
-            }
+        if (isExist共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_裏BAK)) {
+            イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
         }
         イメージファイルパス.add(イメージパス_裏);
 
         return イメージファイルパス;
+    }
 
-//        List<RString> イメージファイルパス = new ArrayList<>();
-//
-//        RString イメージパス_原本表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表BAK);
-//        RString イメージパス_表 = RString.EMPTY;
-//        if (!RString.isNullOrEmpty(イメージパス_原本表)) {
-//            イメージパス_表 = getFilePath(イメージ情報, ファイル名_主治医意見書_表);
-//        }
-//        イメージファイルパス.add(イメージパス_表);
-//
-//        RString イメージパス_原本裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏BAK);
-//        RString イメージパス_裏 = RString.EMPTY;
-//        if (!RString.isNullOrEmpty(イメージパス_原本裏)) {
-//            イメージパス_裏 = getFilePath(イメージ情報, ファイル名_主治医意見書_裏);
-//        }
-//        イメージファイルパス.add(イメージパス_裏);
-//
-//        return イメージファイルパス;
+    private boolean isExist共有ファイルEntity(Image イメージ情報, RString ファイル名) {
+        List<UzT0885SharedFileEntryEntity> ShareFileList;
+        SearchSharedFileOpts 検索条件 = new SearchSharedFileOpts();
+        検索条件.sharedFilePat(ファイル名);
+        ShareFileList = SharedFile.searchSharedFile(検索条件);
+        if (ShareFileList != null && !ShareFileList.isEmpty()) {
+            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
+                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private RString getFilePath(Image イメージ情報, RString ファイル) {

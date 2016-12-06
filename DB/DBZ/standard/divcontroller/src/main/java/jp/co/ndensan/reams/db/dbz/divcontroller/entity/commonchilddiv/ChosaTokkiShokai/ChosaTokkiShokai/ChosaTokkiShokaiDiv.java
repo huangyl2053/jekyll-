@@ -2771,13 +2771,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban11().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel1().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel1().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking1().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage1().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo11().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban11().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking1().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage1().setDisplayNone(true);
                         this.imgPanel1.getImgMasking1().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking1().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage1().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo1().setSrc(path原本);
                     break;
@@ -2787,13 +2788,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban12().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel2().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel2().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking2().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage2().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo12().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban12().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking2().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage2().setDisplayNone(true);
                         this.imgPanel1.getImgMasking2().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking2().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage2().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo2().setSrc(path原本);
                     break;
@@ -2803,13 +2805,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban13().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel3().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel3().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking3().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage3().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo13().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban13().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking3().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage3().setDisplayNone(true);
                         this.imgPanel1.getImgMasking3().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking3().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage3().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo3().setSrc(path原本);
                     break;
@@ -2819,13 +2822,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban14().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel4().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel4().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking4().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage4().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo14().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban14().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking4().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage4().setDisplayNone(true);
                         this.imgPanel1.getImgMasking4().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking4().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage4().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo4().setSrc(path原本);
                     break;
@@ -2835,13 +2839,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban15().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel5().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel5().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking5().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage5().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo15().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban15().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking5().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage5().setDisplayNone(true);
                         this.imgPanel1.getImgMasking5().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking5().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage5().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo5().setSrc(path原本);
                     break;
@@ -2851,13 +2856,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban16().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel6().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel6().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking6().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage6().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo16().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban16().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking6().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage6().setDisplayNone(true);
                         this.imgPanel1.getImgMasking6().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking6().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage6().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo6().setSrc(path原本);
                     break;
@@ -2867,13 +2873,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban17().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel7().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel7().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking7().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage7().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo17().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban17().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking7().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage7().setDisplayNone(true);
                         this.imgPanel1.getImgMasking7().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking7().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage7().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo7().setSrc(path原本);
                     break;
@@ -2883,13 +2890,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban18().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel8().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel8().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking8().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage8().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo18().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban18().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking8().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage8().setDisplayNone(true);
                         this.imgPanel1.getImgMasking8().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking8().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage8().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo8().setSrc(path原本);
                     break;
@@ -2899,13 +2907,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban19().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel9().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel9().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking9().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage9().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo19().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban19().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking9().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage9().setDisplayNone(true);
                         this.imgPanel1.getImgMasking9().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking9().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage9().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo9().setSrc(path原本);
                     break;
@@ -2915,13 +2924,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel1.getTxtRemban20().setDisplayNone(false);
                     this.imgPanel1.getGenpoPanel10().setDisplayNone(false);
                     this.imgPanel1.getMaskPanel10().setDisplayNone(false);
+                    this.imgPanel1.getImgMasking10().setDisplayNone(true);
+                    this.imgPanel1.getLabelNoImage10().setDisplayNone(false);
                     this.imgPanel1.getTxtTokkijikoNo20().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel1.getTxtRemban20().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel1.getImgMasking10().setDisplayNone(false);
+                        this.imgPanel1.getLabelNoImage10().setDisplayNone(true);
                         this.imgPanel1.getImgMasking10().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel1.getImgMasking10().setDisplayNone(true);
-                        this.imgPanel1.getLabelNoImage10().setDisplayNone(false);
                     }
                     this.imgPanel1.getImgGenpo10().setSrc(path原本);
                     break;
@@ -2934,13 +2944,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban21().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel11().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel11().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking11().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage11().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo21().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban21().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking11().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage11().setDisplayNone(true);
                         this.imgPanel2.getImgMasking11().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking11().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage11().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo11().setSrc(path原本);
                     break;
@@ -2950,13 +2961,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban22().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel12().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel12().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking12().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage12().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo22().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban22().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking12().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage12().setDisplayNone(true);
                         this.imgPanel2.getImgMasking12().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking12().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage12().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo12().setSrc(path原本);
                     break;
@@ -2966,13 +2978,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban23().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel13().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel13().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking13().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage13().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo23().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban23().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking13().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage13().setDisplayNone(true);
                         this.imgPanel2.getImgMasking13().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking13().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage13().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo13().setSrc(path原本);
                     break;
@@ -2982,13 +2995,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban24().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel14().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel14().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking14().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage14().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo24().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban24().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking14().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage14().setDisplayNone(true);
                         this.imgPanel2.getImgMasking14().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking14().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage14().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo14().setSrc(path原本);
                     break;
@@ -2998,13 +3012,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban25().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel15().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel15().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking15().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage15().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo25().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban25().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking15().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage15().setDisplayNone(true);
                         this.imgPanel2.getImgMasking15().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking15().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage15().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo15().setSrc(path原本);
                     break;
@@ -3014,13 +3029,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban26().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel16().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel16().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking16().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage16().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo26().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban26().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking16().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage16().setDisplayNone(true);
                         this.imgPanel2.getImgMasking16().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking16().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage16().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo16().setSrc(path原本);
                     break;
@@ -3030,13 +3046,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban27().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel17().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel17().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking17().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage17().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo27().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban27().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking17().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage17().setDisplayNone(true);
                         this.imgPanel2.getImgMasking17().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking17().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage17().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo17().setSrc(path原本);
                     break;
@@ -3046,13 +3063,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban28().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel18().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel18().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking18().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage18().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo28().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban28().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking18().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage18().setDisplayNone(true);
                         this.imgPanel2.getImgMasking18().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking18().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage18().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo18().setSrc(path原本);
                     break;
@@ -3062,13 +3080,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban29().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel19().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel19().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking19().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage19().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo29().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban29().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking19().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage19().setDisplayNone(true);
                         this.imgPanel2.getImgMasking19().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking19().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage19().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo19().setSrc(path原本);
                     break;
@@ -3078,13 +3097,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     this.imgPanel2.getTxtRemban30().setDisplayNone(false);
                     this.imgPanel2.getGenpoPanel20().setDisplayNone(false);
                     this.imgPanel2.getMaskPanel20().setDisplayNone(false);
+                    this.imgPanel2.getImgMasking20().setDisplayNone(true);
+                    this.imgPanel2.getLabelNoImage20().setDisplayNone(false);
                     this.imgPanel2.getTxtTokkijikoNo30().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
                     this.imgPanel2.getTxtRemban30().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
                     if (!RString.isNullOrEmpty(pathマスク)) {
+                        this.imgPanel2.getImgMasking20().setDisplayNone(false);
+                        this.imgPanel2.getLabelNoImage20().setDisplayNone(true);
                         this.imgPanel2.getImgMasking20().setSrc(pathマスク);
-                    } else {
-                        this.imgPanel2.getImgMasking20().setDisplayNone(true);
-                        this.imgPanel2.getLabelNoImage20().setDisplayNone(false);
                     }
                     this.imgPanel2.getImgGenpo20().setSrc(path原本);
                     break;
