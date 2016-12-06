@@ -47,7 +47,6 @@ dbz/db/dbz/ChosaJisshishaJoho/onOKClose_btnChosainGuide
 dbz/db/dbz/ChosaTokkiImageShokai/onClick_btnReturn
 dbz/db/dbz/ChosaTokkiImageShokai/onLoad
 dbz/db/dbz/ChosaTokkiShiryoShokai/onChange_radGenpoMask
-dbz/db/dbz/ChosaTokkiShiryoShokai/onLoad
 dbz/db/dbz/ChosaTokkiShokai/initialize
 dbz/db/dbz/ChosaTokkiShokai/onClick_btnReturn
 dbz/db/dbz/DataOutputInfomation/onClick_btnKakunin
@@ -137,6 +136,7 @@ dbz/db/dbz/KaigoNinteiShinseiKensaku/onLoad
 dbz/db/dbz/KaigoNinteiShinseiKensaku/onSelect_dgKensakuKekkaIchiran
 dbz/db/dbz/KaigoNinteiShinseiKihonJohoInput/onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun
 dbz/db/dbz/KaigoNinteiShinseiKihonJohoInput/onBeforeOpenDialog_btnServiceSakujoTeikeibun
+dbz/db/dbz/KaigoNinteiShinseiKihonJohoInput/onLoad
 dbz/db/dbz/KaigoNinteiShinseiKihonJohoInput/onOkClose_btnNinteiShinseiRiyuTeikeibun
 dbz/db/dbz/KaigoNinteiShinseiKihonJohoInput/onOkClose_btnServiceSakujoTeikeibun
 dbz/db/dbz/KaigoNinteiShinseiKihonJohoInputHandler/initialize
@@ -243,6 +243,7 @@ dbz/db/dbz/NinteiShinseiTodokedesha/lostFocus
 dbz/db/dbz/NinteiShinseiTodokedesha/onChangeChkKannaiKangai
 dbz/db/dbz/NinteiShinseiTodokedesha/onChangeDdlTodokedeDaikoKubun
 dbz/db/dbz/NinteiShinseiTodokedesha/onClickBtnZenkaiFukusha
+dbz/db/dbz/NinteiShinseiTodokedesha/onLoad
 dbz/db/dbz/NinteiShinseiTodokedesha/onOkClose
 dbz/db/dbz/NinteiShinseiTodokedesha/onOkClose_atenKensaku
 dbz/db/dbz/NinteiShinseiTodokedesha/onOkClose_seitai

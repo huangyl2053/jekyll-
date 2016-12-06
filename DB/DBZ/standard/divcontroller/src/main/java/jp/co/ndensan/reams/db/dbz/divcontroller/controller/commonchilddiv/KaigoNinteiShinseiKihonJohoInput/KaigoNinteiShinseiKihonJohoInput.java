@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.KaigoNinteiShinseiKihonJohoInput;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputHandler;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,6 +17,17 @@ public class KaigoNinteiShinseiKihonJohoInput {
 
     private static final RString サービス削除の旨 = new RString("1010");
     private static final RString 認定申請理由 = new RString("1001");
+
+    /**
+     * 画面項目の初期化を行します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KaigoNinteiShinseiKihonJohoInputDiv>
+     */
+    public ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> onLoad(KaigoNinteiShinseiKihonJohoInputDiv div) {
+        getHandler(div).initialize();
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * ダイアログ用引数を設定します。
@@ -79,5 +91,9 @@ public class KaigoNinteiShinseiKihonJohoInput {
 
         response.data = div;
         return response;
+    }
+
+    private KaigoNinteiShinseiKihonJohoInputHandler getHandler(KaigoNinteiShinseiKihonJohoInputDiv div) {
+        return new KaigoNinteiShinseiKihonJohoInputHandler(div);
     }
 }

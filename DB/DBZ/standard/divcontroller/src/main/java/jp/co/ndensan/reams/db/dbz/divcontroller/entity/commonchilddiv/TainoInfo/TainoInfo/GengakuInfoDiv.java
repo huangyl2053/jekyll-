@@ -526,7 +526,7 @@ public class GengakuInfoDiv extends Panel implements IGengakuInfoDiv {
     }
 
     @JsonIgnore
-    public TainocolorMitoraiDiv getTainocolorMitorai() {
+    public jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TainoInfo.TainoInfo.TainocolorMitoraiDiv getTainocolorMitorai() {
         return this.getTainoGengakuShosaiInfo().getTblComment().getTainocolorMitorai();
     }
 

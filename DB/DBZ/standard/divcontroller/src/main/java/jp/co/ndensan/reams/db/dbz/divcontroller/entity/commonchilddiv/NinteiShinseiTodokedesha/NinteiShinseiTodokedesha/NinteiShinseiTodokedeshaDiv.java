@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishi
  * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinseiTodokedeshaDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

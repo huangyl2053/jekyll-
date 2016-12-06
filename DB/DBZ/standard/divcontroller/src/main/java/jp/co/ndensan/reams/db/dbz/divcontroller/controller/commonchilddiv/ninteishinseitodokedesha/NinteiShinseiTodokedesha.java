@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ninteishinseitodokedesha;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -13,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.dbt4120shinseitodokedejoho.DbT41
 import jp.co.ndensan.reams.db.dbz.business.core.dbt4121shinseirirekijoho.DbT4121ShinseiRirekiJohoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.shisetujyoho.KaigoJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteishinseitodokedesha.NinteiShinseiTodokedeshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
@@ -30,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 介護認定申請届出者のDivControllerです。
@@ -40,6 +44,35 @@ public class NinteiShinseiTodokedesha {
 
     private static final RString 管内 = new RString("key0");
     private static final RString 管外 = new RString("key1");
+
+    /**
+     * 画面項目の初期化を行します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<NinteiShinseiTodokedeshaDiv>
+     */
+    public ResponseData<NinteiShinseiTodokedeshaDiv> onLoad(NinteiShinseiTodokedeshaDiv div) {
+        div.getTxtHonninKankeisei().clearValue();
+        div.getTxtJigyoshaCode().clearValue();
+        div.getTxtJigyoshaName().clearValue();
+        div.getTxtKanaShimei().clearValue();
+        div.getTxtShimei().clearValue();
+        div.getTxtTelNo().clearDomain();
+        div.getTxtYubinNo().clearValue();
+        div.getCcdChoikiInput().clear();
+        div.getCcdZenkokuJushoInput().clear();
+        List<RString> codeList = new ArrayList<>();
+        for (ShinseiTodokedeDaikoKubunCode code : ShinseiTodokedeDaikoKubunCode.values()) {
+            codeList.add(code.getCode());
+        }
+        div.getDdlTodokledeDaikoKubun().setDataSource(setDataSource(codeList, true));
+        List<RString> shinseiKankeishaCodeList = new ArrayList<>();
+        for (JigyoshaKubun code : JigyoshaKubun.values()) {
+            shinseiKankeishaCodeList.add(code.getCode());
+        }
+        div.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 認定区分radがonChangeです。
@@ -220,4 +253,25 @@ public class NinteiShinseiTodokedesha {
         div.getTxtJigyoshaCode().setReadOnly(true);
         div.getDdlShinseiKankeisha().setReadOnly(true);
     }
+
+    private List<KeyValueDataSource> setDataSource(List<RString> codeList, boolean kubun) {
+        Collections.sort(codeList);
+        List<KeyValueDataSource> dataSourceList = new ArrayList<>();
+        KeyValueDataSource data = new KeyValueDataSource();
+        data.setKey(RString.EMPTY);
+        data.setValue(RString.EMPTY);
+        dataSourceList.add(data);
+        for (RString code : codeList) {
+            KeyValueDataSource keyValue = new KeyValueDataSource();
+            keyValue.setKey(code);
+            if (kubun) {
+                keyValue.setValue(new RString(ShinseiTodokedeDaikoKubunCode.toValue(code).name()));
+            } else {
+                keyValue.setValue(new RString(JigyoshaKubun.toValue(code).name()));
+            }
+            dataSourceList.add(keyValue);
+        }
+        return dataSourceList;
+    }
+
 }

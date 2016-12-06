@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Tainoinfo.TainoInfo;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TainoInfo.TainoInfo;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
