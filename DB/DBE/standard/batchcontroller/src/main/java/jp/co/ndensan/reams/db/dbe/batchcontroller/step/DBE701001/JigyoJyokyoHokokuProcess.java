@@ -66,6 +66,7 @@ public class JigyoJyokyoHokokuProcess extends BatchKeyBreakBase<JigyoJyokyoHokok
     @Override
     protected void keyBreakProcess(JigyoJyokyoHokokuEntity jigyoJokyo) {
         if (hasBrek(getBefore(), jigyoJokyo)) {
+            new JigyoJyokyoHokokuEditor(null, jigyoJokyoHokoku).set総数();
             JigyoJokyoHokokuReport report = new JigyoJokyoHokokuReport(jigyoJokyoHokoku);
             report.writeBy(reportSourceWriter);
             set事業状況報告情報タイトル();

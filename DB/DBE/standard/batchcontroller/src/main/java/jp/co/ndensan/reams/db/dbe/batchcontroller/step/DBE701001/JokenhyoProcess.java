@@ -51,7 +51,7 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
     private final RString 使用しない = new RString("使用しない");
     private final RString 集計する = new RString("集計単位として使用する");
     private final RString 集計しない = new RString("集計単位として使用しない");
-    private final int 事業状況報告帳票数 = 2;
+    private final int 事業状況報告帳票数 = 1;
     private final int 実施状況統計帳票数 = 1;
     private final int 審査判定状況帳票数 = 1;
     private final int 審査会関連統計帳票数 = 5;
@@ -73,7 +73,7 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
     }
 
     private RString getPageCount() {
-        int i = 0;
+        int i = 1;
         if (paramter.isJigyoJyokyoHokoku()) {
             i += 事業状況報告帳票数;
         }
