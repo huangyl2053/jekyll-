@@ -39,8 +39,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog.SimpleLayoutBreaker;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 主治医意見書の作成クラスです。
@@ -95,7 +99,22 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
+                .addBreak(new BreakerCatalog<ShujiiikenshoReportSource>().new SimpleLayoutBreaker(
+                    ShujiiikenshoReportSource.LAYOUTBREAKITEM) {
+                    @Override
+                    public ReportLineRecord<ShujiiikenshoReportSource> occuredBreak(
+                            ReportLineRecord<ShujiiikenshoReportSource> currentRecord,
+                            ReportLineRecord<ShujiiikenshoReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layout;
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layout;
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                }).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 

@@ -20,14 +20,17 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class ShujiiikenshoEditor implements IShujiiikenshoEditor {
 
     private final ShujiiikenshoEntity item;
+    private final int layout;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link ShujiiikenshoEntity}
+     * @param layout layout
      */
-    protected ShujiiikenshoEditor(ShujiiikenshoEntity item) {
+    protected ShujiiikenshoEditor(ShujiiikenshoEntity item, int layout) {
         this.item = item;
+        this.layout = layout;
     }
 
     @Override
@@ -59,6 +62,7 @@ public class ShujiiikenshoEditor implements IShujiiikenshoEditor {
         source.imgIkensho2 = item.getイメージファイル2();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        source.layout = layout;
         return source;
     }
 }
