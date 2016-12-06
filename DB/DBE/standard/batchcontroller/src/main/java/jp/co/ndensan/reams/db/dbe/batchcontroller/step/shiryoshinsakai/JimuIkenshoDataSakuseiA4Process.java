@@ -29,6 +29,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -53,6 +58,10 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     private BatchReportWriter<Shujiiikensho1A4ReportSource> batchWriteA4;
     private ReportSourceWriter<Shujiiikensho1A4ReportSource> reportSourceWriterA4;
     private JimuShinsakaiWariateJohoBusiness business;
+    private static final RString ファイルID_E0001 = new RString("E0001.png");
+    private static final RString ファイルID_E0002 = new RString("E0002.png");
+    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
 
     @Override
     protected void initialize() {
@@ -71,6 +80,13 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
         entity.setJimukyoku(true);
         business = new JimuShinsakaiWariateJohoBusiness(entity);
+        if (entity.isJimukyoku()) {
+            business.setイメージファイル(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK));
+            business.setイメージファイル_BAK(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK));
+        } else {
+            business.setイメージファイル(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001));
+            business.setイメージファイル_BAK(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002));
+        }
         Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
     }
@@ -80,6 +96,7 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
         batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
                 .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
                 .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().new SimpleLayoutBreaker(
+
                     Shujiiikensho1A4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<Shujiiikensho1A4ReportSource> occuredBreak(
@@ -147,5 +164,25 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
         list.add(builder2.toRString());
         list.add(builder3.toRString());
         return list;
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, sharedFileName);
+        }
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA4.getImageFolderPath()));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+        return sharedFileName;
     }
 }

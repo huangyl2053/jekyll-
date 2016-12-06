@@ -6,13 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,11 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JimuShinsakaiWariateJohoBusiness {
 
     private static final int INDEX_5 = 5;
-    private static final RString ファイルID_E0001 = new RString("E0001.png");
-    private static final RString ファイルID_E0002 = new RString("E0002.png");
-    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
-    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private final ShinsakaiSiryoKyotsuEntity entity;
+    private RString fileName;
+    private RString fileName_BAK;
 
     /**
      * コンストラクタです。
@@ -134,11 +126,7 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 左の主治医意見書イメージ
      */
     public RString get左の主治医意見書イメージ() {
-        if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK);
-        } else {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
-        }
+        return fileName;
     }
 
     /**
@@ -147,11 +135,7 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 右の主治医意見書イメージ
      */
     public RString get右の主治医意見書イメージ() {
-        if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK);
-        } else {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
-        }
+        return fileName_BAK;
     }
 
     /**
@@ -160,11 +144,7 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 主治医意見書イメージ１
      */
     public RString get主治医意見書イメージ１() {
-        if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK);
-        } else {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001);
-        }
+        return fileName;
     }
 
     /**
@@ -173,31 +153,24 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 主治医意見書イメージ２
      */
     public RString get主治医意見書イメージ２() {
-        if (entity.isJimukyoku()) {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK);
-        } else {
-            return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002);
-        }
+        return fileName_BAK;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, sharedFileName);
-        }
-        return imagePath;
+    /**
+     * イメージファイルE0001を設定します。
+     *
+     * @param fileName イメージファイル名
+     */
+    public void setイメージファイル(RString fileName) {
+        this.fileName = fileName;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-        return Path.combinePath(imagePath, sharedFileName);
+    /**
+     * イメージファイルE0002を設定します。
+     *
+     * @param fileName_BAK イメージファイル名
+     */
+    public void setイメージファイル_BAK(RString fileName_BAK) {
+        this.fileName_BAK = fileName_BAK;
     }
 }
