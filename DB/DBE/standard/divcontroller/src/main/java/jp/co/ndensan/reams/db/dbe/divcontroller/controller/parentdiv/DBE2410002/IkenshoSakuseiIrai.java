@@ -348,14 +348,14 @@ public class IkenshoSakuseiIrai {
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                 = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号.value());
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY2)) {
-            if(!意見書Finder.get主治医意見書作成料請求書(parameter).records().isEmpty()){
+            if (!意見書Finder.get主治医意見書作成料請求書(parameter).records().isEmpty()) {
                 List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書List
                         = createHandler(div).create主治医意見書作成料請求書(意見書Finder.get主治医意見書作成料請求書(parameter).records().get(数字_0));
                 printService.print主治医意見書作成料請求書(主治医意見書作成料請求書List);
             }
         }
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY3)) {
-            if(!意見書Finder.get介護保険診断命令書(parameter).records().isEmpty()){
+            if (!意見書Finder.get介護保険診断命令書(parameter).records().isEmpty()) {
                 List<KaigohokenShindanMeireishoHeaderItem> 護保険診断命令書List
                         = createHandler(div).create介護保険診断命令書(意見書Finder.get介護保険診断命令書(parameter).records().get(数字_0));
                 printService.print介護保険診断命令書(護保険診断命令書List);
