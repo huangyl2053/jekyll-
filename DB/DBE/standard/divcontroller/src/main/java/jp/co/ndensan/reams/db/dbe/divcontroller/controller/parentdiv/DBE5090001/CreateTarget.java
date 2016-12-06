@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * センター送信データ出力のコントローラです。
@@ -238,8 +239,8 @@ public class CreateTarget {
         }
         CreateTargetMapperParameter param = CreateTargetMapperParameter.createParam(データ出力, 申請_開始日, 申請_終了日,
                 認定_開始日, 認定_終了日, Integer.parseInt(div.getTxtMaxKensu().getValue().toString()));
-        List<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param).records();
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).データチェック(business);
+        SearchResult<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).データチェック(business.records());
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

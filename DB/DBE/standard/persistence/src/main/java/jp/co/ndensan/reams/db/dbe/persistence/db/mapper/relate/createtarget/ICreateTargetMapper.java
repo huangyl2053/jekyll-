@@ -26,6 +26,14 @@ public interface ICreateTargetMapper {
     List<CreateTargetRelateEntity> getTaishouJouhou(CreateTargetMapperParameter param);
 
     /**
+     * 対象者一覧件数を検索します。
+     *
+     * @param param センター送信データ
+     * @return 対象者一覧の件数
+     */
+    int getTaishouKensu(CreateTargetMapperParameter param);
+
+    /**
      * CSVファイル出力用データの抽出します。
      *
      * @param param センター送信データ

@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * センター送信データ出力の抽象Handlerクラスです。
@@ -108,9 +109,9 @@ public class CreateTargetHandler {
      *
      * @param business 対象者一覧情報
      */
-    public void onClick_btnKensaku(List<CreateTargetBusiness> business) {
+    public void onClick_btnKensaku(SearchResult<CreateTargetBusiness> business) {
         List<dgCreateTargetSummary_Row> rowList = new ArrayList<>();
-        for (CreateTargetBusiness list : business) {
+        for (CreateTargetBusiness list : business.records()) {
             dgCreateTargetSummary_Row row = new dgCreateTargetSummary_Row();
             row.setHokenshano(list.get証記載保険者番号());
             row.setHokensha(list.get市町村名称());
@@ -147,6 +148,8 @@ public class CreateTargetHandler {
                     new RString("申請書管理番号"), list.get申請書管理番号()));
             AccessLogger.log(AccessLogType.照会, personalData);
         }
+        div.getDgCreateTargetSummary().getGridSetting().setLimitRowCount(Integer.parseInt(div.getTxtMaxKensu().getValue().toString()));
+        div.getDgCreateTargetSummary().getGridSetting().setSelectedRowCount(business.totalCount());
         div.getDgCreateTargetSummary().setDataSource(rowList);
     }
 

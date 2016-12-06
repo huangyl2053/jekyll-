@@ -82,10 +82,11 @@ public class CreateTargetManager {
         if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
         }
+        int totalcount = mapper.getTaishouKensu(param);
         for (CreateTargetRelateEntity entity : entityList) {
             resultList.add(new CreateTargetBusiness(entity));
         }
-        return SearchResult.of(resultList, 0, false);
+        return SearchResult.of(resultList, totalcount, param.get件数() < totalcount);
     }
 
     /**

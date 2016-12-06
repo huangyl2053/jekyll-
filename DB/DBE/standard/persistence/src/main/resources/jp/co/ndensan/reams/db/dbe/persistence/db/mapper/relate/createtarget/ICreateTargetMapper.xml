@@ -23,7 +23,48 @@
         <result property="認定有効開始年月日" column="dbt5102_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="認定有効終了年月日" column="dbt5102_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    
+    <select id="getTaishouKensu" resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter"
+            fetchSize="500">
+        SELECT
+            count(1)
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS dbt5101 
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051 
+              ON dbt5101."shoKisaiHokenshaNo" = dbt7051."shoKisaiHokenshaNo" 
+            INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbt5102 
+              ON dbt5101."shinseishoKanriNo" = dbt5102."shinseishoKanriNo" 
+            INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbt5105 
+              ON dbt5101."shinseishoKanriNo" = dbt5105."shinseishoKanriNo" 
+              AND dbt5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+              AND dbt5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
+              AND dbt5105."ninteichosaKanryoYMD" IS NOT NULL 
+              AND dbt5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL 
+              AND dbt5105."ikenshoTorokuKanryoYMD" IS NOT NULL 
+              AND dbt5105."ichijiHanteiKanryoYMD" IS NOT NULL 
+              AND dbt5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL 
+              AND dbt5105."ninteiShinsakaiKanryoYMD" IS NOT NULL 
+              AND dbt5105."maskingKanryoYMD" IS NOT NULL 
+            LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" AS dbt7211 
+              ON dbt5101."shinseishoKanriNo" = dbt7211."shinseishoKanriNo" 
+         WHERE
+            dbt5101."logicalDeletedFlag" = FALSE 
+            <if test="detaFlg">
+                AND dbt7211."centerSoshinChushutsuYMD" IS NULL
+            </if>
+            <if test="shinnseiKaishi">
+                AND #{申請日_開始} <![CDATA[<=]]> dbt5101."ninteiShinseiYMD"
+            </if>
+            <if test="shinnseiShuuryou">
+                AND dbt5101."ninteiShinseiYMD" <![CDATA[<=]]> #{申請日_終了}
+            </if>
+            <if test="ninnteiKaishi">
+                AND #{認定日_開始} <![CDATA[<=]]> dbt5102."nijiHanteiNinteiYukoKaishiYMD"
+            </if>
+            <if test="ninnteiShuuryou">
+                AND dbt5102."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{認定日_終了}
+            </if>
+    </select>
     <select resultOrdered="true" id="getTaishouJouhou" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter"
             resultMap="resultMap_CreateTargetRelateEntity" fetchSize="500">
