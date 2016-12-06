@@ -201,7 +201,7 @@ public enum ReportIdDBE {
      * 要介護認定・要支援認定等申請者一覧です。
      */
     DBE011001(
-            new ReportId("DBE011001_yokaigoyoshienshinseiichiran"), new RString("要介護認定・要支援認定等申請者一覧")),
+            new ReportId("DBE011001_yokaigoyoshienshinseiichiran"), new RString("要介護認定・要支援認定等申請者一覧表")),
     /**
      * 認定調査督促対象者一覧表です。
      */

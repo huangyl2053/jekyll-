@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuOptionDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class KensakuOptionDiv extends Panel {
     @JsonProperty("btnClear")
     private Button btnClear;
     @JsonProperty("txtMaxDisp")
-    private TextBox txtMaxDisp;
+    private TextBoxNum txtMaxDisp;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,7 +55,7 @@ public class KensakuOptionDiv extends Panel {
      * @return txtMaxDisp
      */
     @JsonProperty("txtMaxDisp")
-    public TextBox getTxtMaxDisp() {
+    public TextBoxNum getTxtMaxDisp() {
         return txtMaxDisp;
     }
 
@@ -64,7 +64,7 @@ public class KensakuOptionDiv extends Panel {
      * @param txtMaxDisp txtMaxDisp
      */
     @JsonProperty("txtMaxDisp")
-    public void setTxtMaxDisp(TextBox txtMaxDisp) {
+    public void setTxtMaxDisp(TextBoxNum txtMaxDisp) {
         this.txtMaxDisp = txtMaxDisp;
     }
 

@@ -58,9 +58,10 @@ public class ShinseiKensakuHandler {
      * 画面初期化処理です。
      */
     public void load() {
-
-        RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        div.getTxtMaxDisp().setValue(最大取得件数);
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        div.getTxtMaxDisp().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+        div.getTxtMaxDisp().setValue(new Decimal(検索制御_最大取得件数.toString()));
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
         div.getDgShinseiJoho().setDataSource(dataSource);
         div.getBtnModoru().setDisabled(true);
