@@ -75,7 +75,7 @@ public class JimuGaikyotokkiSonotaJohoDataSakuseiA4Process extends BatchKeyBreak
         if (shinsakaiOrder != entity.getShinsakaiOrder()) {
             存在ファイルindex = 0;
         }
-        business = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
+        business = new JimuSonotashiryoBusiness(entity, new ArrayList(), 存在ファイルindex);
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
         存在ファイルindex = business.get存在ファイルIndex();

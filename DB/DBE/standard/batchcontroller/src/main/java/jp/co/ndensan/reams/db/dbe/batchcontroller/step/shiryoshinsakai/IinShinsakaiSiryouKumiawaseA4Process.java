@@ -128,6 +128,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+
                     IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA4ReportSource> occuredBreak(
@@ -248,7 +249,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                 if (shinsakaiOrder != entity.getShinsakaiOrder()) {
                     存在ファイルindex = 0;
                 }
-                business = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
+                business = new JimuSonotashiryoBusiness(entity, new ArrayList(), 存在ファイルindex);
                 存在ファイルindex = business.get存在ファイルIndex();
                 shinsakaiOrder = entity.getShinsakaiOrder();
             }

@@ -95,7 +95,7 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
         if (shinsakaiOrder != entity.getShinsakaiOrder()) {
             存在ファイルindex = 0;
         }
-        その他資料 = new JimuSonotashiryoBusiness(entity, 存在ファイルindex);
+        その他資料 = new JimuSonotashiryoBusiness(entity, new ArrayList(), 存在ファイルindex);
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(その他資料);
         reportA3.writeBy(reportSourceWriterA3);
         存在ファイルindex = その他資料.get存在ファイルIndex();

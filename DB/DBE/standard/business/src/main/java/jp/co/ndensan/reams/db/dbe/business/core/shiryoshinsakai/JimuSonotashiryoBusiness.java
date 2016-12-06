@@ -5,16 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,27 +17,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JimuSonotashiryoBusiness {
 
-    private static final RString ファイル名_G0001 = new RString("G0001.png");
     private static final int INDEX_5 = 5;
-    private static final boolean あり = true;
-    private static final boolean 無し = false;
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
     private final int 存在ファイルindex;
+    private RString 事務局概況特記イメージパス;
 
     /**
      * コンストラクタです。
      *
      * @param entity ShinsakaiSiryoKyotsuEntity
+     * @param ファイル名List 存在ファイルindex
      * @param 存在ファイルindex int
      */
-    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity, int 存在ファイルindex) {
+    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity, List<RString> ファイル名List, int 存在ファイルindex) {
         this.entity = entity;
-        if (!entity.isJimukyoku()) {
-            this.ファイル名List = getその他資料マスキング後イメージファイル名();
-        } else {
-            this.ファイル名List = getその他資料原本イメージファイル名();
-        }
+        this.ファイル名List = ファイル名List;
         this.存在ファイルindex = 存在ファイルindex;
     }
 
@@ -127,9 +115,8 @@ public class JimuSonotashiryoBusiness {
      * @return 左のその他資料イメージ
      */
     public RString get左のその他資料イメージ(int index) {
-        List<RString> ファイルPathList = getその他資料();
-        if (ファイルPathList != null && index < ファイルPathList.size()) {
-            return ファイルPathList.get(index);
+        if (ファイル名List != null && index < ファイル名List.size()) {
+            return ファイル名List.get(index);
         }
         return RString.EMPTY;
     }
@@ -141,9 +128,8 @@ public class JimuSonotashiryoBusiness {
      * @return 右のその他資料イメージ
      */
     public RString get右のその他資料イメージ(int index) {
-        List<RString> ファイルPathList = getその他資料();
-        if (ファイルPathList != null && index < ファイルPathList.size()) {
-            return ファイルPathList.get(index);
+        if (ファイル名List != null && index < ファイル名List.size()) {
+            return ファイル名List.get(index);
         }
         return RString.EMPTY;
     }
@@ -154,41 +140,25 @@ public class JimuSonotashiryoBusiness {
      * @return 事務局概況特記イメージ
      */
     public RString get事務局概況特記イメージ() {
-        return 共有ファイルを引き出す(entity.getImageSharedFileId(), ファイル名_G0001);
+        return 事務局概況特記イメージパス;
     }
 
     /**
-     * その他資料を取得します。
+     * 事務局概況特記イメージを設定します。
      *
-     * @return その他資料
+     * @param イメージパス イメージパス
+     */
+    public void set事務局概況特記イメージ(RString イメージパス) {
+        this.事務局概況特記イメージパス = イメージパス;
+    }
+
+    /**
+     * その他資料イメージリストを取得します。
+     *
+     * @return その他資料イメージ
      */
     public List<RString> getその他資料() {
-        List<RString> ファイルPathList = new ArrayList<>();
-        if (entity.getImageSharedFileId() == null) {
-            return ファイルPathList;
-        }
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        boolean is存在;
-        int index = 0;
-        for (int i = 0; i < ファイル名List.size(); i++) {
-            RString ファイル名 = ファイル名List.get(i);
-            ReadOnlySharedFileEntryDescriptor descriptor
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), entity.getImageSharedFileId());
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-                is存在 = あり;
-            } catch (Exception e) {
-                is存在 = 無し;
-            }
-            if (is存在 && index < INDEX_5) {
-                ファイルPathList.add(Path.combinePath(imagePath, ファイル名));
-                index = i + 1;
-            }
-            if (INDEX_5 <= index) {
-                return ファイルPathList;
-            }
-        }
-        return ファイルPathList;
+        return ファイル名List;
     }
 
     /**
@@ -198,108 +168,5 @@ public class JimuSonotashiryoBusiness {
      */
     public int get存在ファイルIndex() {
         return 存在ファイルindex;
-    }
-
-    private List<RString> getその他資料マスキング後イメージファイル名() {
-        List<RString> ファイル名 = new ArrayList<>();
-        ファイル名.add(new RString("F1401A01.png"));
-        ファイル名.add(new RString("F1401A02.png"));
-        ファイル名.add(new RString("F1401A03.png"));
-        ファイル名.add(new RString("F1401A04.png"));
-        ファイル名.add(new RString("F1401A05.png"));
-        ファイル名.add(new RString("F1401A06.png"));
-        ファイル名.add(new RString("F1401B01.png"));
-        ファイル名.add(new RString("F1401B02.png"));
-        ファイル名.add(new RString("F1401B03.png"));
-        ファイル名.add(new RString("F1401B04.png"));
-        ファイル名.add(new RString("F1401B05.png"));
-        ファイル名.add(new RString("F1401B06.png"));
-        ファイル名.add(new RString("F1401C01.png"));
-        ファイル名.add(new RString("F1401C02.png"));
-        ファイル名.add(new RString("F1401C03.png"));
-        ファイル名.add(new RString("F1401C04.png"));
-        ファイル名.add(new RString("F1401C05.png"));
-        ファイル名.add(new RString("F1401C06.png"));
-        ファイル名.add(new RString("F1401D01.png"));
-        ファイル名.add(new RString("F1401D02.png"));
-        ファイル名.add(new RString("F1401D03.png"));
-        ファイル名.add(new RString("F1401D04.png"));
-        ファイル名.add(new RString("F1401D05.png"));
-        ファイル名.add(new RString("F1401D06.png"));
-        ファイル名.add(new RString("F1401E01.png"));
-        ファイル名.add(new RString("F1401E02.png"));
-        ファイル名.add(new RString("F1401E03.png"));
-        ファイル名.add(new RString("F1401E04.png"));
-        ファイル名.add(new RString("F1401E05.png"));
-        ファイル名.add(new RString("F1401E06.png"));
-        ファイル名.add(new RString("F1401F01.png"));
-        ファイル名.add(new RString("F1401F02.png"));
-        ファイル名.add(new RString("F1401F03.png"));
-        ファイル名.add(new RString("F1401F04.png"));
-        ファイル名.add(new RString("F1401F05.png"));
-        ファイル名.add(new RString("F1401F06.png"));
-        return ファイル名;
-    }
-
-    private List<RString> getその他資料原本イメージファイル名() {
-        List<RString> ファイル名 = new ArrayList<>();
-        ファイル名.add(new RString("F1401A01_BAK.png"));
-        ファイル名.add(new RString("F1401A02_BAK.png"));
-        ファイル名.add(new RString("F1401A03_BAK.png"));
-        ファイル名.add(new RString("F1401A04_BAK.png"));
-        ファイル名.add(new RString("F1401A05_BAK.png"));
-        ファイル名.add(new RString("F1401A06_BAK.png"));
-        ファイル名.add(new RString("F1401B01_BAK.png"));
-        ファイル名.add(new RString("F1401B02_BAK.png"));
-        ファイル名.add(new RString("F1401B03_BAK.png"));
-        ファイル名.add(new RString("F1401B04_BAK.png"));
-        ファイル名.add(new RString("F1401B05_BAK.png"));
-        ファイル名.add(new RString("F1401B06_BAK.png"));
-        ファイル名.add(new RString("F1401C01_BAK.png"));
-        ファイル名.add(new RString("F1401C02_BAK.png"));
-        ファイル名.add(new RString("F1401C03_BAK.png"));
-        ファイル名.add(new RString("F1401C04_BAK.png"));
-        ファイル名.add(new RString("F1401C05_BAK.png"));
-        ファイル名.add(new RString("F1401C06_BAK.png"));
-        ファイル名.add(new RString("F1401D01_BAK.png"));
-        ファイル名.add(new RString("F1401D02_BAK.png"));
-        ファイル名.add(new RString("F1401D03_BAK.png"));
-        ファイル名.add(new RString("F1401D04_BAK.png"));
-        ファイル名.add(new RString("F1401D05_BAK.png"));
-        ファイル名.add(new RString("F1401D06_BAK.png"));
-        ファイル名.add(new RString("F1401E01_BAK.png"));
-        ファイル名.add(new RString("F1401E02_BAK.png"));
-        ファイル名.add(new RString("F1401E03_BAK.png"));
-        ファイル名.add(new RString("F1401E04_BAK.png"));
-        ファイル名.add(new RString("F1401E05_BAK.png"));
-        ファイル名.add(new RString("F1401E06_BAK.png"));
-        ファイル名.add(new RString("F1401F01_BAK.png"));
-        ファイル名.add(new RString("F1401F02_BAK.png"));
-        ファイル名.add(new RString("F1401F03_BAK.png"));
-        ファイル名.add(new RString("F1401F04_BAK.png"));
-        ファイル名.add(new RString("F1401F05_BAK.png"));
-        ファイル名.add(new RString("F1401F06_BAK.png"));
-        return ファイル名;
-    }
-
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, sharedFileName);
-        }
-        return imagePath;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-        return Path.combinePath(imagePath, sharedFileName);
     }
 }
