@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class TainoSetsumeiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -163,7 +163,7 @@ public class TainoSetsumeiDiv extends TablePanel {
  * @author 自動生成
  */
 class celTainoSetsumei1AtTainoSetsumei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     @JsonProperty("TainocolorKanno")
     private TainocolorKannoDiv TainocolorKanno;
     @JsonProperty("TainocolorMino")
@@ -213,7 +213,7 @@ class celTainoSetsumei1AtTainoSetsumei extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumei2AtTainoSetsumei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     @JsonProperty("lblMassage1")
     private Label lblMassage1;
     @JsonProperty("lblMassage2")
@@ -263,7 +263,7 @@ class celTainoSetsumei2AtTainoSetsumei extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumei3AtTainoSetsumei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     @JsonProperty("TainocolorMitorai")
     private TainocolorMitoraiDiv TainocolorMitorai;
     @JsonProperty("TainocolorKano")
@@ -313,7 +313,7 @@ class celTainoSetsumei3AtTainoSetsumei extends TableCell {
  * @author 自動生成
  */
 class celTainoSetsumei4AtTainoSetsumei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     @JsonProperty("lblMassage3")
     private Label lblMassage3;
     @JsonProperty("lblMassage4")

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TainoInfo
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -36,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.GenGakuInfo.TainocolorMitoraiDiv;
 
 /**
  * GengakuInfo のクラスファイル

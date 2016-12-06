@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TainoInfo
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
@@ -38,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -51,8 +51,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
  * @author 自動生成
  */
 public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -594,7 +593,7 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     private static final RString 過年度分 = new RString("過年度分");
 
     @Override
-    public TainoHanteiResult initialize() {
+        public TainoHanteiResult initialize() {
         if (is管理区分と滞納判定区分と履歴番号ある()) {
             TainoHanteiResult 滞納判定結果 = TainoJokyoFinder.createInstance().find支払方法変更滞納(
                     new HihokenshaNo(hihokenshaNo), ShiharaiHenkoKanriKubun.toValue(kanriKubun), Integer.parseInt(rirekiNo.toString()),
