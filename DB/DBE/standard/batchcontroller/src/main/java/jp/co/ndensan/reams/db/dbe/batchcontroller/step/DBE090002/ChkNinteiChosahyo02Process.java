@@ -113,6 +113,8 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
     private static final RString 帳票発行無し = new RString("0");
     private static final RString 出力する = new RString("出力する");
     private static final RString 出力しない = new RString("出力しない");
+    private static final RString マスキング_あり = new RString("1");
+    private static final RString マスキング_調査員名 = new RString("2");
     private static final RString 総合事業開始区分 = new RString("【総合事業開始区分】");
     private static final RString 総合事業開始区分_未実施 = new RString("1");
     private static final RString 総合事業開始区分_実施済 = new RString("2");
@@ -407,9 +409,7 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
 
     private NinteiChosaJohohyoEntity setBodyItem(YokaigoninteiEntity entity) {
         NinteiChosaJohohyoEntity ninteiEntity = new NinteiChosaJohohyoEntity();
-        ninteiEntity.set保険者番号(entity.get保険者番号());
-        ninteiEntity.set被保険者番号(entity.get被保険者番号());
-        ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
+        setマスキング情報(ninteiEntity, entity);
         ninteiEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         ninteiEntity.set申請日_年(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
@@ -445,16 +445,46 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
         ninteiEntity.setタイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査情報票, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         ninteiEntity.set年齢(entity.get年齢());
         ninteiEntity.set性別(Seibetsu.toValue(entity.get性別()).get名称());
-        ninteiEntity.set郵便番号(RString.isNullOrEmpty(entity.get郵便番号()) ? RString.EMPTY : new YubinNo(entity.get郵便番号()).getEditedYubinNo());
-        ninteiEntity.set電話(entity.get電話());
-        ninteiEntity.set現住所(entity.get住所());
-        ninteiEntity.set家族連絡先郵便番号(RString.isNullOrEmpty(entity.get連絡先郵便番号()) ? RString.EMPTY : new YubinNo(entity.get連絡先郵便番号()).getEditedYubinNo());
-        ninteiEntity.set家族連絡先電話1(entity.get連絡先電話電話());
-        ninteiEntity.set家族連絡先電話2(entity.get連絡先携帯電話());
-        ninteiEntity.set家族連絡先住所(entity.get連絡先住所());
-        ninteiEntity.set家族連絡先名(entity.get連絡先氏名());
         setBodyItem01(ninteiEntity, entity);
         return ninteiEntity;
+    }
+
+    private void setマスキング情報(NinteiChosaJohohyoEntity ninteiEntity, YokaigoninteiEntity entity) throws NullPointerException, IllegalArgumentException {
+        if (マスキング_あり.equals(processPrm.getRadNinteiChosaMasking())) {
+            ninteiEntity.set保険者番号(RString.EMPTY);
+            ninteiEntity.set被保険者番号(RString.EMPTY);
+            ninteiEntity.set被保険者氏名(RString.EMPTY);
+            ninteiEntity.set郵便番号(RString.EMPTY);
+            ninteiEntity.set電話(RString.EMPTY);
+            ninteiEntity.set現住所(RString.EMPTY);
+            ninteiEntity.set家族連絡先郵便番号(RString.EMPTY);
+            ninteiEntity.set家族連絡先電話1(RString.EMPTY);
+            ninteiEntity.set家族連絡先電話2(RString.EMPTY);
+            ninteiEntity.set家族連絡先住所(RString.EMPTY);
+            ninteiEntity.set家族連絡先名(RString.EMPTY);
+            ninteiEntity.set記入者(RString.EMPTY);
+            ninteiEntity.set所属機関(RString.EMPTY);
+        } else {
+            ninteiEntity.set保険者番号(entity.get保険者番号());
+            ninteiEntity.set被保険者番号(entity.get被保険者番号());
+            ninteiEntity.set被保険者氏名(entity.get被保険者氏名());
+            ninteiEntity.set郵便番号(RString.isNullOrEmpty(entity.get郵便番号()) ? RString.EMPTY : new YubinNo(entity.get郵便番号()).getEditedYubinNo());
+            ninteiEntity.set電話(entity.get電話());
+            ninteiEntity.set現住所(entity.get住所());
+            ninteiEntity.set家族連絡先郵便番号(RString.isNullOrEmpty(entity.get連絡先郵便番号()) ? RString.EMPTY
+                    : new YubinNo(entity.get連絡先郵便番号()).getEditedYubinNo());
+            ninteiEntity.set家族連絡先電話1(entity.get連絡先電話電話());
+            ninteiEntity.set家族連絡先電話2(entity.get連絡先携帯電話());
+            ninteiEntity.set家族連絡先住所(entity.get連絡先住所());
+            ninteiEntity.set家族連絡先名(entity.get連絡先氏名());
+            if (マスキング_調査員名.equals(processPrm.getRadNinteiChosaMasking())) {
+                ninteiEntity.set記入者(RString.EMPTY);
+                ninteiEntity.set所属機関(RString.EMPTY);
+            } else {
+                ninteiEntity.set記入者(entity.get調査員氏名());
+                ninteiEntity.set所属機関(entity.get事業者名称());
+            }
+        }
     }
 
     private void setBodyItem01(NinteiChosaJohohyoEntity ninteiEntity, YokaigoninteiEntity entity) {
@@ -487,7 +517,6 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
         ninteiEntity.set調査実施日(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         ninteiEntity.set実施場所コード(entity.get実施場所コード());
-        ninteiEntity.set記入者(entity.get調査員氏名());
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         ninteiEntity.setサービス区分コード(entity.getサービス区分コード());
         List<DbT5209NinteichosahyoKinyuItemEntity> dbt5209Entity = mapper.get認定調査票記入項目(processPrm.toYokaigoBatchMybitisParamter());
@@ -517,7 +546,6 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
         }
         ninteiEntity.set施設利用(RString.isNullOrEmpty(entity.get施設利用()) ? RString.EMPTY
                 : GenzainoJokyoCode.toValue(entity.get施設利用()).get名称());
-        ninteiEntity.set所属機関(entity.get事業者名称());
         List<RString> 日常生活自立度リスト = new ArrayList<>();
         日常生活自立度リスト.add(RString.isNullOrEmpty(entity.get障害高齢者自立度()) ? RString.EMPTY
                 : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get障害高齢者自立度()).get名称());
