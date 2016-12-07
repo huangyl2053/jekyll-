@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -129,7 +128,7 @@ public class RenkeiDataTorikomi {
         }
         RStringBuilder buider = new RStringBuilder();
         for (FileData file : files) {
-            getHandler(div).upLoadFile(new FilesystemPath(file.getFilePath()), buider);
+            getHandler(div).upLoadFile(file, buider);
         }
         div.getUploadArea().getBtnDataTorikomi().setDisabled(false);
         return ResponseData.of(div).respond();
