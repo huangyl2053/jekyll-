@@ -34,19 +34,19 @@ public enum ReportIdDBE {
     /**
      * 事務局審査会資料組み合わせ一覧A4版の帳票ID。
      */
-    DBE517904(new ReportId("DBE517904_ShinsakaishiryoA4_jimu_text"), new RString("事務局審査会資料組み合わせ一覧A4版")),
+    DBE517904(new ReportId("DBE517904_ShinsakaishiryoA4_jimu_image_separate"), new RString("事務局審査会資料組み合わせ一覧A4版")),
     /**
      * 事務局審査会資料組み合わせ一覧A3版の帳票ID。
      */
-    DBE517903(new ReportId("DBE517903_ShinsakaishiryoA3_jimu_text"), new RString("事務局審査会資料組み合わせ一覧A3版")),
+    DBE517903(new ReportId("DBE517903_ShinsakaishiryoA4_jimu_image_all"), new RString("事務局審査会資料組み合わせ一覧A3版")),
     /**
      * 事務局審査会資料組み合わせ一覧A3版の帳票ID。
      */
-    DBE517902(new ReportId("DBE517902_ShinsakaishiryoA3_jimu_text"), new RString("事務局審査会資料組み合わせ一覧A3版")),
+    DBE517902(new ReportId("DBE517902_ShinsakaishiryoA4_jimu_text_separate"), new RString("事務局審査会資料組み合わせ一覧A3版")),
     /**
      * 事務局審査会資料組み合わせ一覧A4版の帳票ID。
      */
-    DBE517901(new ReportId("DBE517901_ShinsakaishiryoA4_jimu_text"), new RString("事務局審査会資料組み合わせ一覧A4版")),
+    DBE517901(new ReportId("DBE517901_ShinsakaishiryoA4_jimu_text_all"), new RString("事務局審査会資料組み合わせ一覧A4版")),
     /**
      * 特記事項（2枚目以降）A3版の帳票ID。
      */
