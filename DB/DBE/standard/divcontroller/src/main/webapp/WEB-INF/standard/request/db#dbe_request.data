@@ -1,9 +1,10 @@
 
 dbe/db/dbe/ChosaKekkaInfoGaikyo/onBeforeOpenDialog_btnMaskingGaikyoChosa
-dbe/db/dbe/ChosaKekkaInfoGaikyo/onClick_Moderu
+dbe/db/dbe/ChosaKekkaInfoGaikyo/onClick_btnReturn
 dbe/db/dbe/ChosaKekkaInfoGaikyo/onLoad
+dbe/db/dbe/ChosaKekkaInfoKihon/onBeforeOpenDialog_btnChosaTokkiImageShokai
 dbe/db/dbe/ChosaKekkaInfoKihon/onBeforeOpenDialog_btnTokkiJiko
-dbe/db/dbe/ChosaKekkaInfoKihon/onClick_Moderu
+dbe/db/dbe/ChosaKekkaInfoKihon/onClick_btnReturn
 dbe/db/dbe/ChosaKekkaInfoKihon/onLoad
 dbe/db/dbe/ChosaKekkaShosaiMain/dispChosaKekkaShosai
 dbe/db/dbe/ChosaKekkaShosaiMain/onClickChosaKekka
@@ -968,7 +969,7 @@ dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onClik_Clear
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onClik_Search
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onClik_SelectBtn
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onLoad
-dbe/db/dbe/ShujiiIkenshoShokai/onClick_btnClose
+dbe/db/dbe/ShujiiIkenshoShokai/onClick_btnReturn
 dbe/db/dbe/ShujiiIkenshoShokai/onLoad
 dbe/db/dbe/ShujiiIkenshoTokusokujoHakko/beforeHakkou
 dbe/db/dbe/ShujiiIkenshoTokusokujoHakko/hakkou
@@ -1065,6 +1066,8 @@ dbe/db/dbe/TokubetsuIryoIken/onLoad
 dbe/db/dbe/YokaigoNinteiJohoTeikyo/btnBatch_ReportPublish
 dbe/db/dbe/YokaigoNinteiJohoTeikyo/btn_BackSearchResult
 dbe/db/dbe/YokaigoNinteiJohoTeikyo/btn_Select
+dbe/db/dbe/YokaigoNinteiJohoTeikyo/chkIchijiHanteiKekka
+dbe/db/dbe/YokaigoNinteiJohoTeikyo/chkNinteiChosahyo
 dbe/db/dbe/YokaigoNinteiJohoTeikyo/chkShujiiIkensho
 dbe/db/dbe/YokaigoNinteiJohoTeikyo/chkSonotaShiryo
 dbe/db/dbe/YokaigoNinteiJohoTeikyo/chkTokkiJiko

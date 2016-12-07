@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HakkoChohyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class HakkoChohyoDiv extends Panel {
      */
     @JsonProperty("chkNinteiChosahyo")
     private CheckBoxList chkNinteiChosahyo;
+    @JsonProperty("radNinteiChosaMasking")
+    private RadioButton radNinteiChosaMasking;
     @JsonProperty("spSpace1")
     private Space spSpace1;
     @JsonProperty("chkTokkiJiko")
@@ -45,6 +47,8 @@ public class HakkoChohyoDiv extends Panel {
     private Space spSpace4;
     @JsonProperty("chkIchijiHanteiKekka")
     private CheckBoxList chkIchijiHanteiKekka;
+    @JsonProperty("radIchijiHanteiMasking")
+    private RadioButton radIchijiHanteiMasking;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,6 +72,24 @@ public class HakkoChohyoDiv extends Panel {
     @JsonProperty("chkNinteiChosahyo")
     public void setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
         this.chkNinteiChosahyo = chkNinteiChosahyo;
+    }
+
+    /*
+     * getradNinteiChosaMasking
+     * @return radNinteiChosaMasking
+     */
+    @JsonProperty("radNinteiChosaMasking")
+    public RadioButton getRadNinteiChosaMasking() {
+        return radNinteiChosaMasking;
+    }
+
+    /*
+     * setradNinteiChosaMasking
+     * @param radNinteiChosaMasking radNinteiChosaMasking
+     */
+    @JsonProperty("radNinteiChosaMasking")
+    public void setRadNinteiChosaMasking(RadioButton radNinteiChosaMasking) {
+        this.radNinteiChosaMasking = radNinteiChosaMasking;
     }
 
     /*
@@ -266,6 +288,24 @@ public class HakkoChohyoDiv extends Panel {
     @JsonProperty("chkIchijiHanteiKekka")
     public void setChkIchijiHanteiKekka(CheckBoxList chkIchijiHanteiKekka) {
         this.chkIchijiHanteiKekka = chkIchijiHanteiKekka;
+    }
+
+    /*
+     * getradIchijiHanteiMasking
+     * @return radIchijiHanteiMasking
+     */
+    @JsonProperty("radIchijiHanteiMasking")
+    public RadioButton getRadIchijiHanteiMasking() {
+        return radIchijiHanteiMasking;
+    }
+
+    /*
+     * setradIchijiHanteiMasking
+     * @param radIchijiHanteiMasking radIchijiHanteiMasking
+     */
+    @JsonProperty("radIchijiHanteiMasking")
+    public void setRadIchijiHanteiMasking(RadioButton radIchijiHanteiMasking) {
+        this.radIchijiHanteiMasking = radIchijiHanteiMasking;
     }
 
     // </editor-fold>
