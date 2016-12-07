@@ -74,46 +74,46 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
 
     private IinShinsakaishiryoA4ReportSource editSource(IinShinsakaishiryoA4ReportSource source) {
         if (item.is委員用()) {
-            source.two_hokenshaNo = RString.EMPTY;
-            source.two_hihokenshaNo = RString.EMPTY;
-            source.two_hihokenshaName = RString.EMPTY;
+            source.hokenshaNo = RString.EMPTY;
+            source.hihokenshaNo = RString.EMPTY;
+            source.hihokenshaName = RString.EMPTY;
         } else {
-            source.two_hokenshaNo = item.get保険者番号();
-            source.two_hihokenshaNo = item.get被保険者番号();
-            source.two_hihokenshaName = item.get名前();
+            source.hokenshaNo = item.get保険者番号();
+            source.hihokenshaNo = item.get被保険者番号();
+            source.hihokenshaName = item.get名前();
         }
-        source.two_shinseiGengo = get元号(item.get認定申請年月日());
-        source.two_shinseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()), RString.EMPTY)
+        source.shinseiGengo = get元号(item.get認定申請年月日());
+        source.shinseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()), RString.EMPTY)
                 .replace(new RString("年"), RString.EMPTY);
-        source.two_shinseiMM = new RString(item.get認定申請年月日().getMonthValue());
-        source.two_shinseiDD = new RString(item.get認定申請年月日().getDayValue());
+        source.shinseiMM = new RString(item.get認定申請年月日().getMonthValue());
+        source.shinseiDD = new RString(item.get認定申請年月日().getDayValue());
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        source.two_sakuseiGengo = get元号(システム日付);
-        source.two_sakuseiYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
+        source.sakuseiGengo = get元号(システム日付);
+        source.sakuseiYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
                 .replace(new RString("年"), RString.EMPTY);
-        source.two_sakuseiMM = new RString(システム日付.getMonthValue());
-        source.two_sakuseiDD = new RString(システム日付.getDayValue());
-        source.two_chosaGengo = get元号(item.get認定調査実施年月日());
-        source.two_chosaYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
+        source.sakuseiMM = new RString(システム日付.getMonthValue());
+        source.sakuseiDD = new RString(システム日付.getDayValue());
+        source.chosaGengo = get元号(item.get認定調査実施年月日());
+        source.chosaYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.two_chosaMM = new RString(item.get認定調査実施年月日().getMonthValue());
-        source.two_chosaDD = new RString(item.get認定調査実施年月日().getDayValue());
-        source.two_shinsaGengo = get元号(item.get介護認定審査会開催年月日());
-        source.two_shinsaYY = get年(item.get介護認定審査会開催年月日()).replace(get元号(item.get介護認定審査会開催年月日()),
+        source.chosaMM = new RString(item.get認定調査実施年月日().getMonthValue());
+        source.chosaDD = new RString(item.get認定調査実施年月日().getDayValue());
+        source.shinsaGengo = get元号(item.get介護認定審査会開催年月日());
+        source.shinsaYY = get年(item.get介護認定審査会開催年月日()).replace(get元号(item.get介護認定審査会開催年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.two_shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
-        source.two_shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
+        source.shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
+        source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
 
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get概況特記テキスト_イメージ区分())) {
-            source.two_gaikyotokkiText = item.get概況調査の特記事項テキスト();
+            source.gaikyotokkiText = item.get概況調査の特記事項テキスト();
         }
 
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get概況特記テキスト_イメージ区分())) {
-            source.two_gaikyotokkiImg = item.get概況調査の特記事項イメージ();
+            source.gaikyotokkiImg = item.get概況調査の特記事項イメージ();
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン()) && index < テキスト全面List.size()) {
-            source.two_tokkiText = テキスト全面List.get(index);
+            source.tokkiText = テキスト全面List.get(index);
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
@@ -122,7 +122,7 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン()) && index < イメージ全面List.size()) {
-            source.two_tokkiImg = イメージ全面List.get(index);
+            source.tokkiImg = イメージ全面List.get(index);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
@@ -136,35 +136,35 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
     private IinShinsakaishiryoA4ReportSource set特記事項テキスト(IinShinsakaishiryoA4ReportSource source) {
         for (int i = 0; i < 短冊情報リスト.size(); i++) {
             if (i == 0) {
-                source.two_tokkiText1 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText1 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 1) {
-                source.two_tokkiText2 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText2 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 2) {
-                source.two_tokkiText3 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText3 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_3) {
-                source.two_tokkiText4 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText4 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_4) {
-                source.two_tokkiText5 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText5 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_5) {
-                source.two_tokkiText6 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText6 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_6) {
-                source.two_tokkiText7 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText7 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_7) {
-                source.two_tokkiText8 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText8 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_8) {
-                source.two_tokkiText9 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText9 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_9) {
-                source.two_tokkiText10 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText10 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_10) {
-                source.two_tokkiText11 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText11 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_11) {
-                source.two_tokkiText12 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText12 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_12) {
-                source.two_tokkiText13 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText13 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_13) {
-                source.two_tokkiText14 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText14 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_14) {
-                source.two_tokkiText15 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiText15 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             }
         }
         return source;
@@ -173,35 +173,35 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
     private IinShinsakaishiryoA4ReportSource set特記事項イメージ(IinShinsakaishiryoA4ReportSource source) {
         for (int i = 0; i < 短冊情報リスト.size(); i++) {
             if (i == 0) {
-                source.two_tokkiImg1 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg1 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 1) {
-                source.two_tokkiImg2 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg2 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == 2) {
-                source.two_tokkiImg3 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg3 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_3) {
-                source.two_tokkiImg4 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg4 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_4) {
-                source.two_tokkiImg5 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg5 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_5) {
-                source.two_tokkiImg6 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg6 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_6) {
-                source.two_tokkiImg7 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg7 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_7) {
-                source.two_tokkiImg8 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg8 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_8) {
-                source.two_tokkiImg9 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg9 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_9) {
-                source.two_tokkiImg10 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg10 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_10) {
-                source.two_tokkiImg11 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg11 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_11) {
-                source.two_tokkiImg12 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg12 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_12) {
-                source.two_tokkiImg13 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg13 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_13) {
-                source.two_tokkiImg14 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg14 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             } else if (i == INT_14) {
-                source.two_tokkiImg15 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
+                source.tokkiImg15 = 短冊情報リスト.get(i).get特記事項テキスト_イメージ();
             }
         }
         return source;
@@ -209,14 +209,14 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
 
     private void editテキスト(IinShinsakaishiryoA4ReportSource source, List<RString> 特記事項List) {
         if (index < 特記事項List.size()) {
-            source.two_listChosa1_1 = 特記事項List.get(index);
+            source.listChosa1_1 = 特記事項List.get(index);
         }
 
     }
 
     private void editイメージ(IinShinsakaishiryoA4ReportSource source, List<RString> 特記事項List) {
         if (index < 特記事項List.size()) {
-            source.two_listChosa_1 = 特記事項List.get(index);
+            source.listChosa_1 = 特記事項List.get(index);
         }
     }
 

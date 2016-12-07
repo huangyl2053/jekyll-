@@ -44,27 +44,27 @@ public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3
     }
 
     private JimuShinsakaishiryoA3ReportSource editSource(JimuShinsakaishiryoA3ReportSource source) {
-        source.three_hokenshaNo = business.get保険者番号();
-        source.three_hihokenshaNo = business.get被保険者番号();
-        source.three_hihokenshaName = business.get名前();
-        source.three_shinseiGengo = get元号(business.get今回認定申請年月日());
-        source.three_shinseiYY = get年(business.get今回認定申請年月日());
-        source.three_shinseiMM = get月(business.get今回認定申請年月日());
-        source.three_shinseiDD = get日(business.get今回認定申請年月日());
-        source.three_sakuseiGengo = get元号(business.get審査会資料作成年月日());
-        source.three_sakuseiYY = get年(business.get審査会資料作成年月日());
-        source.three_sakuseiMM = get月(business.get審査会資料作成年月日());
-        source.three_sakuseiDD = get日(business.get審査会資料作成年月日());
-        source.three_chosaGengo = get元号(business.get今回認定調査実施年月日());
-        source.three_chosaYY = get年(business.get今回認定調査実施年月日());
-        source.three_chosaMM = get月(business.get今回認定調査実施年月日());
-        source.three_chosaDD = get日(business.get今回認定調査実施年月日());
-        source.three_shinsaGengo = get元号(business.get今回認定審査年月日());
-        source.three_shinsaYY = get年(business.get今回認定審査年月日());
-        source.three_shinsaMM = get月(business.get今回認定審査年月日());
-        source.three_shinsaDD = get日(business.get今回認定審査年月日());
-        source.three_imgIkensho1 = business.get左の主治医意見書イメージ();
-        source.three_imgIkensho2 = business.get右の主治医意見書イメージ();
+        source.hokenshaNo = business.get保険者番号();
+        source.hihokenshaNo = business.get被保険者番号();
+        source.hihokenshaName = business.get名前();
+        source.shinseiGengo = get元号(business.get今回認定申請年月日());
+        source.shinseiYY = get年(business.get今回認定申請年月日());
+        source.shinseiMM = get月(business.get今回認定申請年月日());
+        source.shinseiDD = get日(business.get今回認定申請年月日());
+        source.sakuseiGengo = get元号(business.get審査会資料作成年月日());
+        source.sakuseiYY = get年(business.get審査会資料作成年月日());
+        source.sakuseiMM = get月(business.get審査会資料作成年月日());
+        source.sakuseiDD = get日(business.get審査会資料作成年月日());
+        source.chosaGengo = get元号(business.get今回認定調査実施年月日());
+        source.chosaYY = get年(business.get今回認定調査実施年月日());
+        source.chosaMM = get月(business.get今回認定調査実施年月日());
+        source.chosaDD = get日(business.get今回認定調査実施年月日());
+        source.shinsaGengo = get元号(business.get今回認定審査年月日());
+        source.shinsaYY = get年(business.get今回認定審査年月日());
+        source.shinsaMM = get月(business.get今回認定審査年月日());
+        source.shinsaDD = get日(business.get今回認定審査年月日());
+        source.imgIkensho1 = business.get左の主治医意見書イメージ();
+        source.imgIkensho2 = business.get右の主治医意見書イメージ();
         if (ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
             source.layout = Layouts.任意;
         } else {

@@ -284,7 +284,8 @@ public class NinteichosaItakusakiMasterHandler {
         div.setHdnSelectID(new RString(String.valueOf(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedRowId())));
         setChosaitakusakiJohoInputDisabled(Boolean.TRUE);
         setChosaitakusakiJohoInput(div.getChosaitakusakichiran().getDgChosainIchiran().getClickedItem());
-        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(true);
+        div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(false);
+        div.getChosaitakusakiJohoInput().getBtnchosaininsert().setVisible(false);
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
     }
 

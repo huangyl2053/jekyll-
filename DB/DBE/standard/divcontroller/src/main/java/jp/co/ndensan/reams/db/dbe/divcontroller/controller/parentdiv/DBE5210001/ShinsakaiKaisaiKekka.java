@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
@@ -33,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.io.ByteReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -165,10 +168,27 @@ public class ShinsakaiKaisaiKekka {
         handler.全員が遅刻Check(validationMessages);
         handler.全員が早退Check(validationMessages);
         handler.必須項目Check(validationMessages);
+        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
+        handler.変更有無Check(validationMessages, getKekkaJoho(div, 開催番号));
         if (!ResponseHolder.isReRequest()) {
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+        }
+        if (is委員のみ(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.委員のみが指定されている.getMessage().getCode(),
+                        DbeQuestionMessages.委員のみが指定されている.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeQuestionMessages.委員のみが指定されている.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        if (new RString(DbeQuestionMessages.委員のみが指定されている.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
@@ -201,14 +221,14 @@ public class ShinsakaiKaisaiKekka {
     private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
         if (new RString("新規モード").equals(div.getModel())) {
-            setYoteiJoho(div, 開催番号);
+            manager.updateBy開催無(getYoteiJoho(div, 開催番号));
         }
         if (new RString("更新モード").equals(div.getModel())) {
-            setKekkaJoho(div, 開催番号);
+            manager.updateBy開催(getKekkaJoho(div, 開催番号));
         }
     }
 
-    private void setYoteiJoho(ShinsakaiKaisaiKekkaDiv div, RString 開催番号) {
+    private ShinsakaiKaisaiYoteiJoho2 getYoteiJoho(ShinsakaiKaisaiKekkaDiv div, RString 開催番号) {
         Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJoho2Identifier kaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJoho2Identifier(開催番号);
@@ -221,11 +241,11 @@ public class ShinsakaiKaisaiKekka {
         kaisaiYoteiJohoBuilder.set介護認定審査会進捗状況(new Code("3"));
         kaisaiYoteiJohoBuilder.setShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJoho);
         shinsakaiKaisaiYoteiJoho = kaisaiYoteiJohoBuilder.build();
-        shinsakaiKaisaiYoteiJoho = shinsakaiKaisaiYoteiJoho.modifiedModel();
-        manager.updateBy開催無(shinsakaiKaisaiYoteiJoho);
+        return shinsakaiKaisaiYoteiJoho.modifiedModel();
+
     }
 
-    private void setKekkaJoho(ShinsakaiKaisaiKekkaDiv div, RString 開催番号) {
+    private ShinsakaiKaisaiYoteiJoho2 getKekkaJoho(ShinsakaiKaisaiKekkaDiv div, RString 開催番号) {
         Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         ShinsakaiKaisaiYoteiJoho2 shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(new ShinsakaiKaisaiYoteiJoho2Identifier(開催番号));
@@ -234,7 +254,8 @@ public class ShinsakaiKaisaiKekka {
         shinsakaiKaisaiKekkaJoho = set介護認定審査会開催結果情報(div, shinsakaiKaisaiKekkaJoho.createBuilderForEdit()).modifiedModel();
         shinsakaiKaisaiYoteiJoho = set介護認定審査会割当委員情報(div, 開催番号, shinsakaiKaisaiYoteiJoho);
         shinsakaiKaisaiYoteiJoho.createBuilderForEdit().setShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJoho);
-        manager.updateBy開催(shinsakaiKaisaiYoteiJoho);
+        return shinsakaiKaisaiYoteiJoho;
+
     }
 
     private ShinsakaiKaisaiKekkaJoho2 set介護認定審査会開催結果情報(ShinsakaiKaisaiKekkaDiv div,
@@ -286,5 +307,17 @@ public class ShinsakaiKaisaiKekka {
         int hour = time.getHour();
         int min = time.getMinute();
         return new RString(String.valueOf(hour)).padZeroToLeft(2).concat(new RString(String.valueOf(min)).padZeroToLeft(2));
+    }
+
+    private boolean is委員のみ(ShinsakaiKaisaiKekkaDiv div) {
+        List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
+        if (!rowList.isEmpty()) {
+            for (dgShinsakaiIinIchiran_Row row : rowList) {
+                if (row.getGichoKubun().getSelectedKey().equals(KaigoninteiShinsakaiGichoKubunCode.議長.getコード())) {
+                    return Boolean.FALSE;
+                }
+            }
+        }
+        return Boolean.TRUE;
     }
 }

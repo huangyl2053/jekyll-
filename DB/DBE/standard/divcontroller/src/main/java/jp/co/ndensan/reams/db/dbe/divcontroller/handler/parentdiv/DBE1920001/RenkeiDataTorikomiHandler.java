@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 
 /**
  * 要介護認定申請連携データ取込のHandlerクラスです。
@@ -149,11 +150,12 @@ public class RenkeiDataTorikomiHandler {
     /**
      * 対象ファイルを共有フォルダに保存します。
      *
-     * @param path 格納パス
+     * @param file ファイルデータ
      * @param buider buider
      * @return SharedFileEntryDescriptor
      */
-    public SharedFileEntryDescriptor upLoadFile(FilesystemPath path, RStringBuilder buider) {
+    public SharedFileEntryDescriptor upLoadFile(FileData file, RStringBuilder buider) {
+        FilesystemPath path = new FilesystemPath(file.getFilePath());
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(共有ファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
@@ -161,6 +163,13 @@ public class RenkeiDataTorikomiHandler {
         div.setPath(entity.getDirectAccessPath());
         buider.append(new RString(entity.getSharedFileId().toString())).append(",");
         div.setHiddenFileId(buider.toRString());
+        List<dgTorikomiTaisho_Row> dataSource = div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource();
+        for (dgTorikomiTaisho_Row rowData : dataSource) {
+            if (rowData.getFileName().equals(file.getFileName())) {
+                getFileCount(path.toRString(), RString.EMPTY, rowData);
+                break;
+            }
+        }
         return entity;
     }
 
@@ -241,7 +250,7 @@ public class RenkeiDataTorikomiHandler {
                         }
                         rowData.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
                         list.add(rowData);
-                        PersonalData personalData = PersonalData.of(new ShikibetsuCode(rowData.getKoroshoifshikibetsucode()),
+                        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
                                 new ExpandedInformation(new Code("0001"),
                                         new RString("被保険者番号"), rowData.getHihono()));
                         AccessLogger.log(AccessLogType.照会, personalData);
@@ -280,7 +289,7 @@ public class RenkeiDataTorikomiHandler {
                         }
                         rowData.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(rowData);
-                        PersonalData personalData = PersonalData.of(new ShikibetsuCode(rowData.getKoroshoifshikibetsucode()),
+                        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
                                 new ExpandedInformation(new Code("0001"),
                                         new RString("被保険者番号"), rowData.getHihono()));
                         AccessLogger.log(AccessLogType.照会, personalData);
@@ -316,7 +325,7 @@ public class RenkeiDataTorikomiHandler {
                         }
                         row.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(row);
-                        PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getKoroshoifshikibetsucode()),
+                        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
                                 new ExpandedInformation(new Code("0001"),
                                         new RString("被保険者番号"), row.getHihono()));
                         AccessLogger.log(AccessLogType.照会, personalData);

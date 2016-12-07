@@ -104,7 +104,7 @@ public class JimuItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<Itizi
         item = new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況,
-                new RString(myBatisParameter.getGogitaiNo()));
+                new RString(myBatisParameter.getGogitaiNo()), batchWriteA4.getImageFolderPath());
         IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
         report.writeBy(reportSourceWriterA4);
     }

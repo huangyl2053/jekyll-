@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
@@ -26,6 +27,11 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class NijihanteiKekkaOutput {
+    
+    private final RString 判定結果ボタン = new RString("btnRenkeiDataOutput");
+    private final RString 判定結果ボタン２ = new RString("btnCheck1");
+    private final RString 連携ボタン = new RString("btnHanteikekkaOutput");
+    private final RString 連携ボタン２ = new RString("btnCheck2");
 
     /**
      * 判定結果情報出力(保険者)。<br/>
@@ -53,6 +59,13 @@ public class NijihanteiKekkaOutput {
 
         nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        nijiDiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource().clear();
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(判定結果ボタン, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(連携ボタン, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン２, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン２, true);
         return createResponseData(nijiDiv);
     }
 

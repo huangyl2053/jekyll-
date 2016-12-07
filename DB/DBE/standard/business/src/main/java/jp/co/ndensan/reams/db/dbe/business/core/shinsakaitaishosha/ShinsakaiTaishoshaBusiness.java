@@ -307,7 +307,7 @@ public class ShinsakaiTaishoshaBusiness {
      * @return 認知症高齢者の日常生活自立度コード
      */
     public Code ninchishoNichijoSeikatsuJiritsudoCode() {
-        return entity.getIchijiHanteiKekkaCode();
+        return entity.getNinchishoNichijoSeikatsuJiritsudoCode();
     }
 
     /**

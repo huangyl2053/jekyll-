@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.RStrings;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  * 判定結果情報出力（保険者）クラスパラメータクラス。
@@ -17,275 +18,310 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
+@lombok.Setter
 public final class HanteiKekkaJouhouShuturyokuParameter {
 
-    private final boolean 二次判定日Fromフラグ;
-    private final RString 二次判定日From;
-    private final boolean 二次判定日Toフラグ;
-    private final RString 二次判定日To;
-    private final boolean 未出力のみフラグ;
-    private final RString 未出力のみ;
-    private final boolean 出力済みフラグ;
-    private final RString 出力済み;
-    private final boolean 被保険者番号フラグ;
-    private final RString 被保険者番号;
-    private final boolean 保険者フラグ;
-    private final RString 保険者;
-    private final boolean 支所フラグ;
-    private final RString 支所;
-    private final boolean 被保険者氏名フラグ;
-    private final RString 被保険者氏名;
-    private final boolean 見做申請フラグ;
-    private final boolean 認定申請日Fromフラグ;
-    private final RString 認定申請日From;
-    private final boolean 認定申請日Toフラグ;
-    private final RString 認定申請日To;
-    private final boolean 生年月日Fromフラグ;
-    private final RString 生年月日From;
-    private final boolean 生年月日Toフラグ;
-    private final RString 生年月日To;
-    private final boolean 申請区分_申請時フラグ;
-    private final RString 申請区分_申請時;
-    private final boolean 性別区分フラグ;
-    private final List kaisaiNoList;
-    private final boolean usesSaidaiHyojiKensu;
-    private final Decimal saidaiHyojiKensu;
-    private final RString 一致;
-    private final boolean 前方一致フラグ;
-    private final boolean 完全一致フラグ;
-    private final boolean 部分一致フラグ;
-    private final boolean 後方一致フラグ;
+    // 未出力のみ
+    private RString misyutsuryokuNomi;
+    // 被保険者番号
+    private RString hihokenshaNo;
+    // 証記載保険者番号
+    private RString shoKisaiHokenshaNo;
+    // 支所コード
+    private RString shishoCode;
+    // 被保険者氏名（カナ検索でも用いる）
+    private RString hihokenshaName;
+    // 認定申請日FROM
+    private FlexibleDate ninteiShinseiYMDFrom;
+    // 認定申請日TO
+    private FlexibleDate ninteiShinseiYMDTo;
+    // 生年月日FROM
+    private FlexibleDate seinengappiYMDFrom;
+    // 生年月日TO
+    private FlexibleDate seinengappiYMDTo;
+    // 認定申請区分（申請時）コード
+    private RString ninteiShinseiShinseijiKubun;
+    // 性別
+    private RString seibetsu;
+    // 被保険者区分コー
+    private RString hihokenshaKubunCode;
+    // 処理状態区分
+    private RString shoriJotaiKubun;
+    // 認定申請区分（法令）コード
+    private RString ninteiShinseiHoreiKubunCode;
+    // 厚労省IF識別コード
+    private RString koroshoIfShikibetsuCode;
+    // 郵便番号
+    private RString yubinNo;
+    // 地区コード
+    private RString chikuCode;
+    // みなし２号等対象フラグ
+    private boolean minashiNigoEtcTaishoFlag;
+    // 施設入所の有無
+    private boolean shisetsuNyushoFlag;
+    // 認定調査委託先コード
+    private RString ninteiChosaItakusakiCode;
+    // 認定調査員コード
+    private RString ninteiChosainCode;
+    // 認定調査実施場所コード
+    private RString chosaJisshiBashoCode;
+    // 認定調査区分コード
+    private RString ninteiChosaKubunCode;
+    // 調査実施日FROM
+    private FlexibleDate ninteichosaJisshiYMDFrom;
+    // 調査実施日TO
+    private FlexibleDate ninteichosaJisshiYMDTo;
+    // 認定調査・障害高齢者の日常生活自立度コード
+    private RString nichijoSeikatsuJiritsudoCode;
+    // 認定調査・認知症高齢者の日常生活自立度コード
+    private RString nichijoSeikatsuJiritsudo;
+    // 主治医医療機関コード
+    private RString shujiiIryokikanCode;
+    // 主治医コード
+    private RString shujiiCode;
+    // 医師区分コード
+    private RString ishiKubunCode;
+    // 意見書受領日FROM
+    private FlexibleDate ikenshoJuryoYMDFrom;
+    // 意見書受領日TO
+    private FlexibleDate ikenshoJuryoYMDTo;
+    // 寝きたり度
+    private RString ikenItem13;
+    // 認知度
+    private RString ikenItem14;
+    // 一次判定日FROM
+    private FlexibleDate ichijiHanteiYMDFrom;
+    // 一次判定日TO
+    private FlexibleDate ichijiHanteiYMDTo;
+    // 要介護認定一次判定結果コード
+    private RString ichijiHanteiKekkaCode;
+    // 1.5次判定日FROM
+    private FlexibleDate ichiGojiHanteiYMDFrom;
+    // 1.5次判定日TO
+    private FlexibleDate ichiGojiHanteiYMDTo;
+    // 1.5次判定結果コード
+    private RString ichiGojiHanteiKekkaCode;
+    // 二次判定要介護状態区分コード
+    private RString nijiHanteiYokaigoJotaiKubun;
+    // 認定有効期間
+    private int nijiHanteiNinteiYukoKikan;
+    // 認定有効な申請時点
+    private RString yokaiYMD;
+    // 認定有効開始日FROM
+    private FlexibleDate ninteiYukoKaishiYMDFrom;
+    // 認定有効開始日TO
+    private FlexibleDate ninteiYukoKaishiYMDTo;
+    // 認定有効終了日FROM
+    private FlexibleDate ninteiYukoShuryoYMDFrom;
+    // 認定有効終了日TO
+    private FlexibleDate ninteiYukoShuryoYMDTo;
+    // 二次判定日FROM
+    private FlexibleDate nijiHanteiYMDFrom;
+    // 二次判定日TO
+    private FlexibleDate nijiHanteiYMDTo;
+    // 開催日FROM
+    private FlexibleDate shinsakaiKaisaiYMDFrom;
+    // 開催日TO
+    private FlexibleDate shinsakaiKaisaiYMDTo;
+    // 開催番号FROM
+    private RString shinsakaiKaisaiNoFrom;
+    // 開催番号TO
+    private RString shinsakaiKaisaiNoTo;
+    // 原因疾患に対応するコード
+    private RString geninShikkanCode;
+    // 申請経過日数FROM
+    private FlexibleDate shinseiKeikaDaysForm;
+    // 申請経過日数TO
+    private FlexibleDate shinseiKeikaDaysTo;
+
+    // 前回 認定調査委託先コード
+    private RString zenkaiNinteiChosaItakusaki;
+    // 前回 主治医医療機関コード
+    private RString zenkaiShujiiIryokikanCode;
+    // 前回 前回二次判定結果コード
+    private RString zenkaiJotaiKubunCode;
+    // 前回 前回認定有効期間
+    private int zenkaiYukoKikan;
+    // 前回 前回認定有効期間（開始）
+    private FlexibleDate zenkaiYukoKikanStartFrom;
+    // 前回 前回認定有効期間（開始）
+    private FlexibleDate zenkaiYukoKikanStartTo;
+
+    // 現在のフェーズDDL空白
+    private boolean isNowPhaseBlank;
+    // 申請受付
+    private boolean isNowPhaseShinseiUketsuke;
+    // 調査依頼
+    private boolean isNowPhaseChosaIrai;
+    // 意見書依頼
+    private boolean isNowPhaseIkenshoIrai;
+    // 調査入手
+    private boolean isNowPhaseChosaNyushu;
+    // 意見書入手
+    private boolean isNowPhaseIkenshoNyushu;
+    // 一次判定
+    private boolean isNowPhaseIchijiHantei;
+    // マスキング
+    private boolean isNowPhaseMasking;
+    // 審査会登録
+    private boolean isNowPhaseShinsakaiToroku;
+    // 二次判定
+    private boolean isNowPhaseNijiHantei;
+    // 月次処理
+    private boolean isNowPhaseGetsureiShori;
+
+    private boolean isShinseiUketsukeKanryo;
+    private boolean isShinseiUketsukeMiKanryo;
+    private boolean isChosaIraiKanryo;
+    private boolean isChosaIraiMiKanryo;
+    private boolean isIkenshoIraiKanryo;
+    private boolean isIkenshoIraiMiKanryo;
+    private boolean isChosaNyushuKanryo;
+    private boolean isChosaNyushuMiKanryo;
+    private boolean isIkenshoNyushuKanryo;
+    private boolean isIkenshoNyushuMiKanryo;
+    private boolean isIchijiHanteiKanryo;
+    private boolean isIchijiHanteiMiKanryo;
+    private boolean isMaskingKanryo;
+    private boolean isMaskingMiKanryo;
+    private boolean isShinsakaiTorokuKanryo;
+    private boolean isShinsakaiTorokuMiKanryo;
+    private boolean isNijiHanteiKanryo;
+    private boolean isNijiHanteiMiKanryo;
+    private boolean isGetsureiShoriKanryo;
+    private boolean isGetsureiShoriMiKanryo;
+
+    private boolean useMisyutsuryokuNomi;
+    private boolean useHihokenshaNo;
+    private boolean useShoKisaiHokenshaNo;
+    private boolean useShishoCode;
+    private boolean useHihokenshaName;
+    private boolean useHihokenshaKana;
+    private boolean is前方一致;
+    private boolean is後方一致;
+    private boolean is部分一致;
+    private boolean is完全一致;
+    private boolean useNinteiShinseiYMDFrom;
+    private boolean useNinteiShinseiYMDTo;
+    private boolean useSeinengappiYMDFrom;
+    private boolean useSeinengappiYMDTo;
+    private boolean useNinteiShinseiShinseijiKubun;
+    private boolean isMan;
+    private boolean isWoman;
+    private boolean useHihokenshaKubunCode;
+    private boolean useShoriJotaiKubun;
+    private boolean useNinteiShinseiHoreiKubunCode;
+    private boolean useKoroshoIfShikibetsuCode;
+    private boolean useYubinNo;
+    private boolean useChikuCode;
+    private boolean useNinteiChosaItakusakiCode;
+    private boolean useNinteiChosainCode;
+    private boolean useChosaJisshiBashoCode;
+    private boolean useNinteiChosaKubunCode;
+    private boolean useNinteichosaJisshiYMDFrom;
+    private boolean useNinteichosaJisshiYMDTo;
+    private boolean useNichijoSeikatsuJiritsudoCd;
+    private boolean useNichijoSeikatsuJiritsudo;
+    private boolean useShujiiIryokikanCode;
+    private boolean useShujiiCode;
+    private boolean useIshiKubunCode;
+    private boolean useIkenshoJuryoYMDFrom;
+    private boolean useIkenshoJuryoYMDTo;
+    private boolean useIkenItem13;
+    private boolean useIkenItem14;
+    private boolean useIchijiHanteiYMDFrom;
+    private boolean useIchijiHanteiYMDTo;
+    private boolean useIchijiHanteiKekkaCode;
+    private boolean useIchiGojiHanteiYMDFrom;
+    private boolean useIchiGojiHanteiYMDTo;
+    private boolean useIchiGojiHanteiKekkaCode;
+    private boolean useNijiHanteiYokaigoJotaiKubun;
+    private boolean useNijiHanteiNinteiYukoKikan;
+    private boolean useYokaiYMD;
+    private boolean useNinteiYukoKaishiYMDFrom;
+    private boolean useNinteiYukoKaishiYMDTo;
+    private boolean useNinteiYukoShuryoYMDFrom;
+    private boolean useNinteiYukoShuryoYMDTo;
+    private boolean useNijiHanteiYMDFrom;
+    private boolean useNijiHanteiYMDTo;
+    private boolean useShinsakaiKaisaiYMDFrom;
+    private boolean useShinsakaiKaisaiYMDTo;
+    private boolean useShinsakaiKaisaiNoFrom;
+    private boolean useShinsakaiKaisaiNoTo;
+    private boolean useGeninShikkanCode;
+    private boolean useShinseiKeikaDaysForm;
+    private boolean useShinseiKeikaDaysTo;
+    private boolean useZenkaiNinteiChosaItakusaki;
+    private boolean useZenkaiShujiiIryokikanCode;
+    private boolean useZenkaiJotaiKubunCode;
+    private boolean useZenkaiYukoKikan;
+    private boolean useZenkaiYukoKikanStartFrom;
+    private boolean useZenkaiYukoKikanStartTo;
+    private int limitCount;
+    private boolean useLimitCount;
+
+    // 画面詳細条件の認定調査の調査実施場所～調査実施日を入力する場合
+    private boolean useNinteichosahyoGaikyoChosa;
+    // 画面詳細条件の認定調査の寝きたり度～認知度を入力する場合
+    private boolean useNinteichosahyoKihonChosa;
+    // 画面詳細条件の主治医情報の主治医区分を入力する場合
+    private boolean useShujiiIkenshoIraiJoho;
+    // 画面詳細条件の主治医情報の意見書受領日を入力する場合
+    private boolean useShujiiIkenshoJoho;
+    // 画面詳細条件の主治医情報の寝きたり度～認知度を入力する場合
+    private boolean useShujiiIkenshoIkenItem;
+    // 画面詳細条件の一次判定を入力する場合
+    private boolean useIchijiHanteiKekkaJoho;
+    // 画面詳細条件の1.5次判定を入力する場合
+    private boolean useIchiGojiHanteiKekkaJoho;
+    // 画面詳細条件の介護認定審査会を入力する場合
+    private boolean useNinteiKekkaJoho;
+    // 画面詳細条件の介護認定審査会の開催日/開催番号を入力する場合
+    private boolean useShinsakaiKaisaiKekkaJoho;
+    // 画面詳細条件のその他情報の原因疾患を入力する場合
+    private boolean useGeninShikkan;
+    // 画面詳細条件の完了情報を入力する場合
+    private boolean useNinteiKanryoJoho;
     private final RString 通常 = ShoriJotaiKubun.通常.getコード();
     private final RString 延期 = ShoriJotaiKubun.延期.getコード();
 
-    private HanteiKekkaJouhouShuturyokuParameter(boolean 二次判定日Fromフラグ,
-            RString 二次判定日From,
-            boolean 二次判定日Toフラグ,
-            RString 二次判定日To,
-            boolean 未出力のみフラグ,
-            RString 未出力のみ,
-            boolean 出力済みフラグ,
-            RString 出力済み,
-            boolean 被保険者番号フラグ,
-            RString 被保険者番号,
-            boolean 保険者フラグ,
-            RString 保険者,
-            boolean 支所フラグ,
-            RString 支所,
-            boolean 被保険者氏名フラグ,
-            RString 被保険者氏名,
-            boolean 見做申請フラグ,
-            boolean 認定申請日Fromフラグ,
-            RString 認定申請日From,
-            boolean 認定申請日Toフラグ,
-            RString 認定申請日To,
-            boolean 生年月日Fromフラグ,
-            RString 生年月日From,
-            boolean 生年月日Toフラグ,
-            RString 生年月日To,
-            boolean 申請区分_申請時フラグ,
-            RString 申請区分_申請時,
-            boolean 性別区分フラグ,
-            List kaisaiNoList,
-            boolean usesSaidaiHyojiKensu,
-            Decimal saidaiHyojiKensu,
-            RString 一致,
-            boolean 前方一致フラグ,
-            boolean 完全一致フラグ,
-            boolean 部分一致フラグ,
-            boolean 後方一致フラグ) {
-        this.二次判定日Fromフラグ = 二次判定日Fromフラグ;
-        this.二次判定日From = 二次判定日From;
-        this.二次判定日Toフラグ = 二次判定日Toフラグ;
-        this.二次判定日To = 二次判定日To;
-        this.未出力のみフラグ = 未出力のみフラグ;
-        this.未出力のみ = 未出力のみ;
-        this.出力済みフラグ = 出力済みフラグ;
-        this.出力済み = 出力済み;
-        this.被保険者番号フラグ = 被保険者番号フラグ;
-        this.被保険者番号 = 被保険者番号;
-        this.保険者フラグ = 保険者フラグ;
-        this.保険者 = 保険者;
-        this.支所フラグ = 支所フラグ;
-        this.支所 = 支所;
-        this.被保険者氏名フラグ = 被保険者氏名フラグ;
-        this.被保険者氏名 = 被保険者氏名;
-        this.見做申請フラグ = 見做申請フラグ;
-        this.認定申請日Fromフラグ = 認定申請日Fromフラグ;
-        this.認定申請日From = 認定申請日From;
-        this.認定申請日Toフラグ = 認定申請日Toフラグ;
-        this.認定申請日To = 認定申請日To;
-        this.生年月日Fromフラグ = 生年月日Fromフラグ;
-        this.生年月日From = 生年月日From;
-        this.生年月日Toフラグ = 生年月日Toフラグ;
-        this.生年月日To = 生年月日To;
-        this.申請区分_申請時フラグ = 申請区分_申請時フラグ;
-        this.申請区分_申請時 = 申請区分_申請時;
-        this.性別区分フラグ = 性別区分フラグ;
-        this.kaisaiNoList = kaisaiNoList;
-        this.usesSaidaiHyojiKensu = usesSaidaiHyojiKensu;
-        this.saidaiHyojiKensu = saidaiHyojiKensu;
-        this.一致 = 一致;
-        this.前方一致フラグ = 前方一致フラグ;
-        this.完全一致フラグ = 完全一致フラグ;
-        this.部分一致フラグ = 部分一致フラグ;
-        this.後方一致フラグ = 後方一致フラグ;
+    /**
+     * 検索に用いる被保険者氏名を設定します。
+     * 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
+     * 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
+     *
+     * @param hihokenshaName 検索に用いる被保険者氏名
+     */
+    public void set被保険者名(RString hihokenshaName) {
+        if (RString.isNullOrEmpty(hihokenshaName)) {
+            this.hihokenshaName = RString.EMPTY;
+            this.useHihokenshaKana = false;
+            this.useHihokenshaName = false;
+            return;
+        }
+        RString converted = RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(
+                RStrings.removedSpaces(RStringUtil.removeSqlSpecialChars(hihokenshaName))
+        );
+        this.hihokenshaName = converted;
+        this.useHihokenshaKana = RStringUtil.is半角カナOnly(converted);
+        this.useHihokenshaName = !this.useHihokenshaKana;
     }
 
     /**
-     * コンストラクタ作成
+     * 被保険者名カナ検索の有無を返却します。
      *
-     * @param 二次判定日From RString
-     * @param 二次判定日To RString
-     * @param 未出力のみ RString
-     * @param 出力済み RString
-     * @param 被保険者番号 RString
-     * @param 保険者 RString
-     * @param 支所 RString
-     * @param 被保険者氏名 RString
-     * @param 見做申請フラグ boolean
-     * @param 認定申請日From RString
-     * @param 認定申請日To RString
-     * @param 生年月日From RString
-     * @param 生年月日To RString
-     * @param 申請区分_申請時 RString
-     * @param 性別区分フラグ boolean
-     * @param kaisaiNoList List
-     * @param 最大表示件数 Decimal
-     * @param 一致 一致
-     * @return HanteiKekkaJouhouShuturyokuParameter HanteiKekkaJouhouShuturyokuParameter
+     * @return 被保険者名カナ検索の有無
      */
-    public static HanteiKekkaJouhouShuturyokuParameter createParam(
-            RString 二次判定日From,
-            RString 二次判定日To,
-            RString 未出力のみ,
-            RString 出力済み,
-            RString 被保険者番号,
-            RString 保険者,
-            RString 支所,
-            RString 被保険者氏名,
-            boolean 見做申請フラグ,
-            RString 認定申請日From,
-            RString 認定申請日To,
-            RString 生年月日From,
-            RString 生年月日To,
-            RString 申請区分_申請時,
-            boolean 性別区分フラグ,
-            List kaisaiNoList,
-            Decimal 最大表示件数,
-            RString 一致) {
-
-        boolean 二次判定日Fromフラグ = false;
-        boolean 二次判定日Toフラグ = false;
-        boolean 未出力のみフラグ = false;
-        boolean 出力済みフラグ = false;
-        boolean 被保険者番号フラグ = false;
-        boolean 保険者フラグ = false;
-        boolean 支所フラグ = false;
-        boolean 被保険者氏名フラグ = false;
-        boolean 認定申請日Fromフラグ = false;
-        boolean 認定申請日Toフラグ = false;
-        boolean 生年月日Fromフラグ = false;
-        boolean 生年月日Toフラグ = false;
-        boolean 申請区分_申請時フラグ = false;
-        boolean usesSaidaiHyojiKensu = false;
-        if (!RString.isNullOrEmpty(二次判定日From)) {
-            二次判定日Fromフラグ = true;
-        }
-        if (!RString.isNullOrEmpty(二次判定日To)) {
-            二次判定日Toフラグ = true;
-        }
-
-        if (new RString("key0").equals(未出力のみ)) {
-            未出力のみフラグ = true;
-        }
-
-        if (new RString("key1").equals(出力済み)) {
-            出力済みフラグ = true;
-        }
-
-        if (!RString.isNullOrEmpty(被保険者番号)) {
-            被保険者番号フラグ = true;
-        }
-        if (!RString.isNullOrEmpty(保険者)) {
-            保険者フラグ = true;
-        }
-        if (!RString.isNullOrEmpty(支所)) {
-            支所フラグ = true;
-        }
-        if (!RString.isNullOrEmpty(認定申請日From)) {
-            認定申請日Fromフラグ = true;
-        }
-        if (!RString.isNullOrEmpty(認定申請日To)) {
-            認定申請日Toフラグ = true;
-        }
-        if (!RString.isNullOrEmpty(被保険者氏名)) {
-            被保険者氏名フラグ = true;
-        }
-        if (!RString.isNullOrEmpty(認定申請日From)) {
-            認定申請日Fromフラグ = true;
-        }
-        if (!RString.isNullOrEmpty(認定申請日To)) {
-            認定申請日Toフラグ = true;
-        }
-
-        if (!RString.isNullOrEmpty(生年月日From)) {
-            生年月日Fromフラグ = true;
-        }
-        if (!RString.isNullOrEmpty(生年月日To)) {
-            生年月日Toフラグ = true;
-        }
-
-        if (!RString.isNullOrEmpty(申請区分_申請時)) {
-            申請区分_申請時フラグ = true;
-        }
-
-        if (!kaisaiNoList.isEmpty()) {
-            性別区分フラグ = true;
-        }
-
-        if (!最大表示件数.equals(new Decimal(0))) {
-            usesSaidaiHyojiKensu = true;
-        }
-        return new HanteiKekkaJouhouShuturyokuParameter(二次判定日Fromフラグ,
-                二次判定日From,
-                二次判定日Toフラグ,
-                二次判定日To,
-                未出力のみフラグ,
-                未出力のみ,
-                出力済みフラグ,
-                出力済み,
-                被保険者番号フラグ,
-                被保険者番号,
-                保険者フラグ,
-                保険者,
-                支所フラグ,
-                支所,
-                被保険者氏名フラグ,
-                被保険者氏名,
-                見做申請フラグ,
-                認定申請日Fromフラグ,
-                認定申請日From,
-                認定申請日Toフラグ,
-                認定申請日To,
-                生年月日Fromフラグ,
-                生年月日From,
-                生年月日Toフラグ,
-                生年月日To,
-                申請区分_申請時フラグ,
-                申請区分_申請時,
-                性別区分フラグ,
-                kaisaiNoList,
-                usesSaidaiHyojiKensu,
-                最大表示件数,
-                一致,
-                itti(一致, new RString("key0")),
-                itti(一致, new RString("key1")),
-                itti(一致, new RString("key2")),
-                itti(一致, new RString("key3")));
+    boolean usesHihokenshaKana() {
+        return this.useHihokenshaKana;
     }
 
-    private static boolean itti(RString 一致, RString key) {
-        return 一致.equals(key);
+    /**
+     * 被保険者名漢字・平仮名検索の有無を返却します。
+     *
+     * @return 被保険者名漢字・平仮名検索の有無
+     */
+    boolean usesHihokenshaName() {
+        return this.useHihokenshaName;
     }
 }

@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
@@ -20,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護認定審査会開催結果登録の抽象ValidationHandlerクラスです。
@@ -145,6 +150,38 @@ public class ShinsakaiKaisaiValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.必須項目)));
         }
 
+    }
+
+    /**
+     *
+     * 変更有無チェックをチェックします。
+     *
+     * @param validationMessages バリデーションメッセージ
+     * @param 介護認定審査会開催予定情報 介護認定審査会開催予定情報
+     */
+    public void 変更有無Check(ValidationMessageControlPairs validationMessages, ShinsakaiKaisaiYoteiJoho2 介護認定審査会開催予定情報) {
+        if (new RString("新規モード").equals(div.getModel())) {
+            return;
+        }
+        for (ShinsakaiKaisaiKekkaJoho2 介護認定審査会開催結果情報 : 介護認定審査会開催予定情報.getShinsakaiKaisaiKekkaJohoList()) {
+            if (介護認定審査会開催結果情報.toEntity().hasChanged()) {
+                return;
+            }
+        }
+        for (ShinsakaiOnseiJoho2 介護認定審査会音声情報 : 介護認定審査会開催予定情報.getShinsakaiOnseiJohoList()) {
+            if (介護認定審査会音声情報.toEntity().hasChanged()) {
+                return;
+            }
+        }
+        for (ShinsakaiWariateIinJoho2 介護認定審査会割当委員情報 : 介護認定審査会開催予定情報.getShinsakaiWariateIinJoho2List()) {
+            if (介護認定審査会割当委員情報.toEntity().getState().equals(EntityDataState.Deleted)) {
+                return;
+            } else if (介護認定審査会割当委員情報.toEntity().hasChanged()) {
+                return;
+            }
+        }
+
+        validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.更新対象のデータがない)));
     }
 
     /**

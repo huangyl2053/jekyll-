@@ -316,7 +316,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
         ninteiEntity.set概況調査特記事項イメージ(共有ファイルを引き出す_C0007(イメージID));
         if (全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            for (int i = 1; i <= 最大ページ; i++) {
+            for (int i = 0; i < 最大ページ; i++) {
                 set特記事項全イメージパス(entity, i, 全イメージリスト);
             }
         } else if (短冊.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {

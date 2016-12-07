@@ -71,8 +71,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase {
 
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(IinShinsakaishiryoA3ReportSource.ReportSourceFields.six_tokkiText1.name()),
-            new RString(IinShinsakaishiryoA3ReportSource.ReportSourceFields.six_tokkiImg1.name())));
+            new RString(IinShinsakaishiryoA3ReportSource.ReportSourceFields.tokkiText1.name()),
+            new RString(IinShinsakaishiryoA3ReportSource.ReportSourceFields.tokkiImg1.name())));
     private static final RString 印字する = new RString("1");
     private static final RString 両面 = new RString("1");
     private static final int INT_4 = 4;
@@ -224,7 +224,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                 return new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                         調査票調査項目, 前回調査票調査項目, 主治医意見書,
                         前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
-                        get共通情報(共通情報, entity.getShinseishoKanriNo()), 主治医意見書, new RString(paramter.getGogitaiNo()), 特記情報);
+                        get共通情報(共通情報, entity.getShinseishoKanriNo()), 主治医意見書, new RString(paramter.getGogitaiNo()),
+                        特記情報, batchReportWriter.getImageFolderPath());
             }
         }
         return null;

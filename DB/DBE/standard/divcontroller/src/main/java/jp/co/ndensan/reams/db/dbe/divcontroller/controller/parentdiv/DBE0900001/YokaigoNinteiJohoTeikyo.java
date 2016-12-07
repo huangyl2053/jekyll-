@@ -32,8 +32,10 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class YokaigoNinteiJohoTeikyo {
 
     private final RString キー = new RString("key0");
+    private final RString キー1 = new RString("key1");
     private final RString する = new RString("1");
     private final RString ない = new RString("0");
+    private final RString 調査員名 = new RString("2");
     private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
 
     /**
@@ -57,6 +59,17 @@ public class YokaigoNinteiJohoTeikyo {
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_Select(YokaigoNinteiJohoTeikyoDiv div) {
         getHandler(div).btn_Select();
         return ResponseData.of(div).setState(DBE0900001StateName.一覧選択);
+    }
+
+    /**
+     * 認定調査票チェックボックス変更します。
+     *
+     * @param div YokaigoNinteiJohoTeikyoDiv
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoNinteiJohoTeikyoDiv> chkNinteiChosahyo(YokaigoNinteiJohoTeikyoDiv div) {
+        getHandler(div).chkNinteiChosahyo();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -89,6 +102,17 @@ public class YokaigoNinteiJohoTeikyo {
      */
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> chkSonotaShiryo(YokaigoNinteiJohoTeikyoDiv div) {
         getHandler(div).chkSonotaShiryo();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一次判定結果チェックボックス変更します。
+     *
+     * @param div YokaigoNinteiJohoTeikyoDiv
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoNinteiJohoTeikyoDiv> chkIchijiHanteiKekka(YokaigoNinteiJohoTeikyoDiv div) {
+        getHandler(div).chkIchijiHanteikekka();
         return ResponseData.of(div).respond();
     }
 
@@ -182,6 +206,13 @@ public class YokaigoNinteiJohoTeikyo {
         } else {
             parm.setRadTokkiJikoMasking(ない);
         }
+        if (キー.equals(div.getHakkoChohyo().getRadNinteiChosaMasking().getSelectedKey())) {
+            parm.setRadNinteiChosaMasking(する);
+        } else if (キー1.equals(div.getHakkoChohyo().getRadNinteiChosaMasking().getSelectedKey())) {
+            parm.setRadNinteiChosaMasking(調査員名);
+        } else {
+            parm.setRadNinteiChosaMasking(ない);
+        }
         if (キー.equals(div.getHakkoChohyo().getRadShujii().getSelectedKey())) {
             parm.setRadShujii(する);
         } else {
@@ -191,6 +222,13 @@ public class YokaigoNinteiJohoTeikyo {
             parm.setRadSohotaShiryoMasking(する);
         } else {
             parm.setRadSohotaShiryoMasking(ない);
+        }
+        if (キー.equals(div.getHakkoChohyo().getRadIchijiHanteiMasking().getSelectedKey())) {
+            parm.setRadIchijiHanteiMasking(する);
+        } else if (キー1.equals(div.getHakkoChohyo().getRadIchijiHanteiMasking().getSelectedKey())) {
+            parm.setRadIchijiHanteiMasking(調査員名);
+        } else {
+            parm.setRadIchijiHanteiMasking(ない);
         }
         return ResponseData.of(parm).respond();
     }

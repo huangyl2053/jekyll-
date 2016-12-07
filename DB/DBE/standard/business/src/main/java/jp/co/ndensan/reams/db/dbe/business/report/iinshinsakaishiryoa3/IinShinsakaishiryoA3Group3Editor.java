@@ -93,42 +93,42 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     }
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
-        source.six_hokenshaNo = RString.EMPTY;
-        source.six_hihokenshaNo = RString.EMPTY;
-        source.six_hihokenshaName = RString.EMPTY;
-        source.six_sakuseiGengo = get元号(item.get認定申請年月日());
-        source.six_sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
+        source.hokenshaNo = RString.EMPTY;
+        source.hihokenshaNo = RString.EMPTY;
+        source.hihokenshaName = RString.EMPTY;
+        source.sakuseiGengo = get元号(item.get認定申請年月日());
+        source.sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.six_sakuseiMM = new RString(item.get認定申請年月日().getMonthValue());
-        source.six_sakuseiDD = new RString(item.get認定申請年月日().getDayValue());
+        source.sakuseiMM = new RString(item.get認定申請年月日().getMonthValue());
+        source.sakuseiDD = new RString(item.get認定申請年月日().getDayValue());
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        source.six_chosaGengo = get元号(システム日付);
-        source.six_chosaYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
+        source.chosaGengo = get元号(システム日付);
+        source.chosaYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
                 .replace(new RString("年"), RString.EMPTY);
-        source.six_chosaMM = new RString(システム日付.getMonthValue());
-        source.six_chosaDD = new RString(システム日付.getDayValue());
-        source.six_shinseiGengo = get元号(item.get認定調査実施年月日());
-        source.six_shinseiYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
+        source.chosaMM = new RString(システム日付.getMonthValue());
+        source.chosaDD = new RString(システム日付.getDayValue());
+        source.shinseiGengo = get元号(item.get認定調査実施年月日());
+        source.shinseiYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.six_shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
-        source.six_shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
-        source.six_shinsaGengo = get元号(item.get介護認定審査会開催年月日());
-        source.six_shinsaYY = get年(item.get介護認定審査会開催年月日()).replace(get元号(item.get介護認定審査会開催年月日()),
+        source.shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
+        source.shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
+        source.shinsaGengo = get元号(item.get介護認定審査会開催年月日());
+        source.shinsaYY = get年(item.get介護認定審査会開催年月日()).replace(get元号(item.get介護認定審査会開催年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.six_shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
-        source.six_shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
+        source.shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
+        source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.six_tokkiText1 = get特記事項_tokkiText((page - 1) * 2 - 1);
-                source.six_tokkiText2 = get特記事項_tokkiText((page - 1) * 2);
+                source.tokkiText1 = get特記事項_tokkiText((page - 1) * 2 - 1);
+                source.tokkiText2 = get特記事項_tokkiText((page - 1) * 2);
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項テキスト連番_名称(source);
                 source = set特記事項テキスト(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.six_tokkiImg1 = get特記事項_tokkiImg((page - 1) * 2 - 1);
-                source.six_tokkiImg2 = get特記事項_tokkiImg((page - 1) * 2);
+                source.tokkiImg1 = get特記事項_tokkiImg((page - 1) * 2 - 1);
+                source.tokkiImg2 = get特記事項_tokkiImg((page - 1) * 2);
             } else if (短冊.equals(item.get特記パターン())) {
                 source = set特記事項イメージ連番_名称(source);
                 source = set特記事項イメージ(source);
@@ -166,55 +166,55 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private IinShinsakaishiryoA3ReportSource set特記事項テキスト(IinShinsakaishiryoA3ReportSource source) {
         for (int i = 0; i < item.get特記事項_listChosa1().size(); i++) {
             if (i == 0) {
-                source.six_tokkiText3 = get特記事項テキスト_イメージ(i);
+                source.tokkiText3 = get特記事項テキスト_イメージ(i);
             }
             if (i == 1) {
-                source.six_tokkiText4 = get特記事項テキスト_イメージ(i);
+                source.tokkiText4 = get特記事項テキスト_イメージ(i);
             }
             if (i == 2) {
-                source.six_tokkiText5 = get特記事項テキスト_イメージ(i);
+                source.tokkiText5 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_3) {
-                source.six_tokkiText6 = get特記事項テキスト_イメージ(i);
+                source.tokkiText6 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_4) {
-                source.six_tokkiText7 = get特記事項テキスト_イメージ(i);
+                source.tokkiText7 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_5) {
-                source.six_tokkiText8 = get特記事項テキスト_イメージ(i);
+                source.tokkiText8 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_6) {
-                source.six_tokkiText9 = get特記事項テキスト_イメージ(i);
+                source.tokkiText9 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_7) {
-                source.six_tokkiText10 = get特記事項テキスト_イメージ(i);
+                source.tokkiText10 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_8) {
-                source.six_tokkiText11 = get特記事項テキスト_イメージ(i);
+                source.tokkiText11 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_9) {
-                source.six_tokkiText12 = get特記事項テキスト_イメージ(i);
+                source.tokkiText12 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_10) {
-                source.six_tokkiText13 = get特記事項テキスト_イメージ(i);
+                source.tokkiText13 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_11) {
-                source.six_tokkiText14 = get特記事項テキスト_イメージ(i);
+                source.tokkiText14 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_12) {
-                source.six_tokkiText15 = get特記事項テキスト_イメージ(i);
+                source.tokkiText15 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_13) {
-                source.six_tokkiText16 = get特記事項テキスト_イメージ(i);
+                source.tokkiText16 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_14) {
-                source.six_tokkiText17 = get特記事項テキスト_イメージ(i);
+                source.tokkiText17 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_15) {
-                source.six_tokkiText18 = get特記事項テキスト_イメージ(i);
+                source.tokkiText18 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_16) {
-                source.six_tokkiText19 = get特記事項テキスト_イメージ(i);
+                source.tokkiText19 = get特記事項テキスト_イメージ(i);
             }
         }
         source = set特記事項テキスト2(source);
@@ -224,55 +224,55 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private IinShinsakaishiryoA3ReportSource set特記事項テキスト2(IinShinsakaishiryoA3ReportSource source) {
         for (int i = 0; i < item.get特記事項_listChosa1().size(); i++) {
             if (i == INT_17) {
-                source.six_tokkiText20 = get特記事項テキスト_イメージ(i);
+                source.tokkiText20 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_18) {
-                source.six_tokkiText21 = get特記事項テキスト_イメージ(i);
+                source.tokkiText21 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_19) {
-                source.six_tokkiText22 = get特記事項テキスト_イメージ(i);
+                source.tokkiText22 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_20) {
-                source.six_tokkiText23 = get特記事項テキスト_イメージ(i);
+                source.tokkiText23 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_21) {
-                source.six_tokkiText24 = get特記事項テキスト_イメージ(i);
+                source.tokkiText24 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_22) {
-                source.six_tokkiText25 = get特記事項テキスト_イメージ(i);
+                source.tokkiText25 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_23) {
-                source.six_tokkiText26 = get特記事項テキスト_イメージ(i);
+                source.tokkiText26 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_24) {
-                source.six_tokkiText27 = get特記事項テキスト_イメージ(i);
+                source.tokkiText27 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_25) {
-                source.six_tokkiText28 = get特記事項テキスト_イメージ(i);
+                source.tokkiText28 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_26) {
-                source.six_tokkiText29 = get特記事項テキスト_イメージ(i);
+                source.tokkiText29 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_27) {
-                source.six_tokkiText30 = get特記事項テキスト_イメージ(i);
+                source.tokkiText30 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_28) {
-                source.six_tokkiText31 = get特記事項テキスト_イメージ(i);
+                source.tokkiText31 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_29) {
-                source.six_tokkiText32 = get特記事項テキスト_イメージ(i);
+                source.tokkiText32 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_30) {
-                source.six_tokkiText33 = get特記事項テキスト_イメージ(i);
+                source.tokkiText33 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_31) {
-                source.six_tokkiText34 = get特記事項テキスト_イメージ(i);
+                source.tokkiText34 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_32) {
-                source.six_tokkiText35 = get特記事項テキスト_イメージ(i);
+                source.tokkiText35 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_33) {
-                source.six_tokkiText36 = get特記事項テキスト_イメージ(i);
+                source.tokkiText36 = get特記事項テキスト_イメージ(i);
             }
         }
         return source;
@@ -281,55 +281,55 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private IinShinsakaishiryoA3ReportSource set特記事項イメージ(IinShinsakaishiryoA3ReportSource source) {
         for (int i = 0; i < item.get特記事項_listChosa1().size(); i++) {
             if (i == 0) {
-                source.six_tokkiImg3 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg3 = get特記事項テキスト_イメージ(i);
             }
             if (i == 1) {
-                source.six_tokkiImg4 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg4 = get特記事項テキスト_イメージ(i);
             }
             if (i == 2) {
-                source.six_tokkiImg5 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg5 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_3) {
-                source.six_tokkiImg6 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg6 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_4) {
-                source.six_tokkiImg7 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg7 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_5) {
-                source.six_tokkiImg8 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg8 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_6) {
-                source.six_tokkiImg9 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg9 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_7) {
-                source.six_tokkiImg10 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg10 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_8) {
-                source.six_tokkiImg11 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg11 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_9) {
-                source.six_tokkiImg12 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg12 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_10) {
-                source.six_tokkiImg13 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg13 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_11) {
-                source.six_tokkiImg14 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg14 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_12) {
-                source.six_tokkiImg15 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg15 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_13) {
-                source.six_tokkiImg16 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg16 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_14) {
-                source.six_tokkiImg17 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg17 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_15) {
-                source.six_tokkiImg18 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg18 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_16) {
-                source.six_tokkiImg19 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg19 = get特記事項テキスト_イメージ(i);
             }
         }
         source = set特記事項イメージ2(source);
@@ -339,55 +339,55 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private IinShinsakaishiryoA3ReportSource set特記事項イメージ2(IinShinsakaishiryoA3ReportSource source) {
         for (int i = 0; i < item.get特記事項_listChosa1().size(); i++) {
             if (i == INT_17) {
-                source.six_tokkiImg20 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg20 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_18) {
-                source.six_tokkiImg21 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg21 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_19) {
-                source.six_tokkiImg22 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg22 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_20) {
-                source.six_tokkiImg23 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg23 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_21) {
-                source.six_tokkiImg24 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg24 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_22) {
-                source.six_tokkiImg25 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg25 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_23) {
-                source.six_tokkiImg26 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg26 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_24) {
-                source.six_tokkiImg27 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg27 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_25) {
-                source.six_tokkiImg28 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg28 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_26) {
-                source.six_tokkiImg29 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg29 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_27) {
-                source.six_tokkiImg30 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg30 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_28) {
-                source.six_tokkiImg31 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg31 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_29) {
-                source.six_tokkiImg32 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg32 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_30) {
-                source.six_tokkiImg33 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg33 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_31) {
-                source.six_tokkiImg34 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg34 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_32) {
-                source.six_tokkiImg35 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg35 = get特記事項テキスト_イメージ(i);
             }
             if (i == INT_33) {
-                source.six_tokkiImg36 = get特記事項テキスト_イメージ(i);
+                source.tokkiImg36 = get特記事項テキスト_イメージ(i);
             }
         }
         return source;
@@ -395,20 +395,20 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
 
     private IinShinsakaishiryoA3ReportSource set特記事項テキスト連番_名称(IinShinsakaishiryoA3ReportSource source) {
         if ((PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.six_listChosa2_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index);
+            source.listChosa2_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index);
         }
         if ((PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.six_listChosa3_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index);
+            source.listChosa3_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index);
         }
         return source;
     }
 
     private IinShinsakaishiryoA3ReportSource set特記事項イメージ連番_名称(IinShinsakaishiryoA3ReportSource source) {
         if ((PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.six_listChosa_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1COUNT + index);
+            source.listChosa_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1COUNT + index);
         }
         if ((PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.six_listChosa1_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1COUNT + index);
+            source.listChosa1_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1COUNT + index);
         }
         return source;
     }

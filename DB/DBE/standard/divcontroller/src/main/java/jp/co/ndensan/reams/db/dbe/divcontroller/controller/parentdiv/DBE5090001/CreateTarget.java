@@ -1116,7 +1116,7 @@ public class CreateTarget {
                 DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名,
                         RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 new RString("DBE561001"),
-                new RString(String.valueOf(1)),
+                new RString(String.valueOf(shiki.size())),
                 get出力条件(div, shiki));
         OutputJokenhyoFactory.createInstance(item).print();
     }
@@ -1126,6 +1126,7 @@ public class CreateTarget {
         List<RString> 出力条件List = new ArrayList<>();
         stringBuilder.append(申請書管理番号);
         stringBuilder.append(shinsei);
+        出力条件List.add(stringBuilder.toRString());
         stringBuilder = new RStringBuilder();
         stringBuilder.append(申請日_開始);
         stringBuilder.append(div.getTxtShinseiYMD().getFromValue());

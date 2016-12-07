@@ -260,13 +260,13 @@ public class NinteiChosaIraiShudou {
      */
     public ResponseData<SourceDataCollection> onClick_btnPrint(NinteiChosaIraiShudouDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
+        updateData(div);
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号.value()));
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
         }
-        updateData(div);
         List<NinteiShinseiJoho> 更新用認定調査依頼List = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
                 NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value())).records();
         ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
@@ -277,6 +277,9 @@ public class NinteiChosaIraiShudou {
         Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 認定調査依頼情報List = ViewStateHolder.get(ViewStateKeys.認定調査依頼情報, Models.class);
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         RString 認定調査依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class);
+        JigyoshaNo 認定調査委託先コード = new JigyoshaNo(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue());
+        RString 認定調査員コード = div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue();
+        FlexibleDate 認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
 
         NinteiShinseiJohoIdentifier ninteiShinseiJohoIdentifier = new NinteiShinseiJohoIdentifier(申請書管理番号);
         NinteiShinseiJoho 要介護認定申請情報 = 認定調査依頼情報List.get(ninteiShinseiJohoIdentifier);
@@ -301,6 +304,11 @@ public class NinteiChosaIraiShudou {
                 ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
                         .set調査票等出力年月日(発行日).build();
             }
+            ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
+                    .set認定調査委託先コード(認定調査委託先コード)
+                    .set認定調査員コード(認定調査員コード)
+                    .set認定調査依頼年月日(認定調査依頼年月日)
+                    .set認定調査期限年月日(get認定調査期限年月日(div, 認定調査依頼年月日)).build();
             NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho.modifiedModel());
         }
     }
