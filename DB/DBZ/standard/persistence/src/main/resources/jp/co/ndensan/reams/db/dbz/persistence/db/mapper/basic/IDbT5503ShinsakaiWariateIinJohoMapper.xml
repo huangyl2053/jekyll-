@@ -27,7 +27,7 @@
          "DbT5503ShinsakaiWariateIinJoho"."lastUpdateTimestamp" as "dbT5503ShinsakaiWariateIinJoho_lastUpdateTimestamp",
          "DbT5503ShinsakaiWariateIinJoho"."lastUpdateReamsLoginId" as "dbT5503ShinsakaiWariateIinJoho_lastUpdateReamsLoginId",
          "DbT5503ShinsakaiWariateIinJoho"."shinsakaiKaisaiYMD" as "dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiYMD",
-         "DbT5503ShinsakaiWariateIinJoho"."kaigoninteiShinsakaiGichoKubunCode" as "dbT5503ShinsakaiWariateIinJoho_kaigoninteiShinsakaiGichoKubunCode",
+         "DbT5503ShinsakaiWariateIinJoho"."kaigoninteiShinsakaiGichoKubunCode" as "dbT5503ShinsakaiWariateIinJoho_shinsakaiGichoKubunCode",
          "DbT5503ShinsakaiWariateIinJoho"."shussekiFlag" as "dbT5503ShinsakaiWariateIinJoho_shussekiFlag",
          "DbT5503ShinsakaiWariateIinJoho"."existChikokuFlag" as "dbT5503ShinsakaiWariateIinJoho_existChikokuFlag",
          "DbT5503ShinsakaiWariateIinJoho"."shussekiTime" as "dbT5503ShinsakaiWariateIinJoho_shussekiTime",
@@ -49,7 +49,7 @@
         <result property="lastUpdateTimestamp" column="dbT5503ShinsakaiWariateIinJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5503ShinsakaiWariateIinJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiKaisaiYMD" column="dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="kaigoninteiShinsakaiGichoKubunCode" column="dbT5503ShinsakaiWariateIinJoho_kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kaigoninteiShinsakaiGichoKubunCode" column="dbT5503ShinsakaiWariateIinJoho_shinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="shussekiFlag" column="dbT5503ShinsakaiWariateIinJoho_shussekiFlag" />
         <result property="existChikokuFlag" column="dbT5503ShinsakaiWariateIinJoho_existChikokuFlag" />
         <result property="shussekiTime" column="dbT5503ShinsakaiWariateIinJoho_shussekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
