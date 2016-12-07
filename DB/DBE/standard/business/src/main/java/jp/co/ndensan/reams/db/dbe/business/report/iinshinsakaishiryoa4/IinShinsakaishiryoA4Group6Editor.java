@@ -44,31 +44,31 @@ public class IinShinsakaishiryoA4Group6Editor implements IIinShinsakaishiryoA4Ed
     }
 
     private IinShinsakaishiryoA4ReportSource editSource(IinShinsakaishiryoA4ReportSource source) {
-        source.five_shinseiGengo = get元号(business.get今回認定申請年月日());
-        source.five_shinseiYY = get年(business.get今回認定申請年月日());
-        source.five_shinseiMM = get月(business.get今回認定申請年月日());
-        source.five_shinseiDD = get日(business.get今回認定申請年月日());
-        source.five_sakuseiGengo = get元号(business.get審査会資料作成年月日());
-        source.five_sakuseiYY = get年(business.get審査会資料作成年月日());
-        source.five_sakuseiMM = get月(business.get審査会資料作成年月日());
-        source.five_sakuseiDD = get日(business.get審査会資料作成年月日());
-        source.five_chosaGengo = get元号(business.get今回認定調査実施年月日());
-        source.five_chosaYY = get年(business.get今回認定調査実施年月日());
-        source.five_chosaMM = get月(business.get今回認定調査実施年月日());
-        source.five_chosaDD = get日(business.get今回認定調査実施年月日());
-        source.five_shinsaGengo = get元号(business.get今回認定審査年月日());
-        source.five_shinsaYY = get年(business.get今回認定審査年月日());
-        source.five_shinsaMM = get月(business.get今回認定審査年月日());
-        source.five_shinsaDD = get日(business.get今回認定審査年月日());
-        source.five_imgIkensho2 = business.get主治医意見書イメージ２();
+        source.shinseiGengo = get元号(business.get今回認定申請年月日());
+        source.shinseiYY = get年(business.get今回認定申請年月日());
+        source.shinseiMM = get月(business.get今回認定申請年月日());
+        source.shinseiDD = get日(business.get今回認定申請年月日());
+        source.sakuseiGengo = get元号(business.get審査会資料作成年月日());
+        source.sakuseiYY = get年(business.get審査会資料作成年月日());
+        source.sakuseiMM = get月(business.get審査会資料作成年月日());
+        source.sakuseiDD = get日(business.get審査会資料作成年月日());
+        source.chosaGengo = get元号(business.get今回認定調査実施年月日());
+        source.chosaYY = get年(business.get今回認定調査実施年月日());
+        source.chosaMM = get月(business.get今回認定調査実施年月日());
+        source.chosaDD = get日(business.get今回認定調査実施年月日());
+        source.shinsaGengo = get元号(business.get今回認定審査年月日());
+        source.shinsaYY = get年(business.get今回認定審査年月日());
+        source.shinsaMM = get月(business.get今回認定審査年月日());
+        source.shinsaDD = get日(business.get今回認定審査年月日());
+        source.imgIkensho2 = business.get主治医意見書イメージ２();
         if (business.is事務局()) {
-            source.five_hokenshaNo = business.get保険者番号();
-            source.five_hihokenshaNo = business.get被保険者番号();
-            source.five_hihokenshaName = business.get名前();
+            source.hokenshaNo = business.get保険者番号();
+            source.hihokenshaNo = business.get被保険者番号();
+            source.hihokenshaName = business.get名前();
         } else {
-            source.five_hokenshaNo = RString.EMPTY;
-            source.five_hihokenshaNo = RString.EMPTY;
-            source.five_hihokenshaName = RString.EMPTY;
+            source.hokenshaNo = RString.EMPTY;
+            source.hihokenshaNo = RString.EMPTY;
+            source.hihokenshaName = RString.EMPTY;
         }
         if (ReportIdDBE.DBE517905.getReportId().value().equals(reportId)) {
             source.layout = Layouts.六頁目;

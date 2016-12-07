@@ -45,29 +45,29 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
      */
     @Override
     public IinShinsakaishiryoA3ReportSource edit(IinShinsakaishiryoA3ReportSource source) {
-        source.seven_hokenshaNo = business.get保険者番号();
-        source.seven_hihokenshaNo = business.get被保険者番号();
-        source.seven_hihokenshaName = business.get名前();
-        source.seven_shinseiGengo = get元号(business.get認定申請年月日());
-        source.seven_shinseiYY = get年(business.get認定申請年月日());
-        source.seven_shinseiMM = new RString(business.get認定申請年月日().getMonthValue());
-        source.seven_shinseiDD = new RString(business.get認定申請年月日().getDayValue());
+        source.hokenshaNo = business.get保険者番号();
+        source.hihokenshaNo = business.get被保険者番号();
+        source.hihokenshaName = business.get名前();
+        source.shinseiGengo = get元号(business.get認定申請年月日());
+        source.shinseiYY = get年(business.get認定申請年月日());
+        source.shinseiMM = new RString(business.get認定申請年月日().getMonthValue());
+        source.shinseiDD = new RString(business.get認定申請年月日().getDayValue());
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        source.seven_sakuseiGengo = get元号(システム日付);
-        source.seven_sakuseiYY = get年(システム日付);
-        source.seven_sakuseiMM = new RString(システム日付.getMonthValue());
-        source.seven_sakuseiDD = new RString(システム日付.getDayValue());
-        source.seven_chosaGengo = get元号(business.get認定調査実施年月日());
-        source.seven_chosaYY = get年(business.get認定調査実施年月日());
-        source.seven_chosaMM = new RString(business.get認定調査実施年月日().getMonthValue());
-        source.seven_chosaDD = new RString(business.get認定調査実施年月日().getDayValue());
-        source.seven_shinsaGengo = get元号(business.get介護認定審査会開催年月日());
-        source.seven_shinsaYY = get年(business.get介護認定審査会開催年月日());
-        source.seven_shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
-        source.seven_shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
+        source.sakuseiGengo = get元号(システム日付);
+        source.sakuseiYY = get年(システム日付);
+        source.sakuseiMM = new RString(システム日付.getMonthValue());
+        source.sakuseiDD = new RString(システム日付.getDayValue());
+        source.chosaGengo = get元号(business.get認定調査実施年月日());
+        source.chosaYY = get年(business.get認定調査実施年月日());
+        source.chosaMM = new RString(business.get認定調査実施年月日().getMonthValue());
+        source.chosaDD = new RString(business.get認定調査実施年月日().getDayValue());
+        source.shinsaGengo = get元号(business.get介護認定審査会開催年月日());
+        source.shinsaYY = get年(business.get介護認定審査会開催年月日());
+        source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
+        source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
         if (index != 0) {
-            source.seven_imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
-            source.seven_imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
+            source.imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
+            source.imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
         }
         source.layout = Layouts.五頁目;
         return source;

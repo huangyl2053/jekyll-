@@ -97,6 +97,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
      * @param 主治医意見書項目 主治医意見書項目
      * @param 合議体番号 合議体番号
      * @param 特記情報 特記情報
+     * @param ファイルパス ファイルパス
      * @return 事務局一次判定結果票のEntity
      */
     public IchijihanteikekkahyoA3Entity set項目(ItiziHanteiEntity entity,
@@ -105,14 +106,14 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
             int データ件数, ShinsakaiSiryoKyotsuEntity 共通情報, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目, RString 合議体番号,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報) {
+            List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報, RString ファイルパス) {
         IchijihanteikekkahyoA3Entity 項目 = new IchijihanteikekkahyoA3Entity();
         SabisuJyoukyoA3 settei = new SabisuJyoukyoA3();
         Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
-        settei.set項目(項目, entity);
+        settei.set項目(項目, entity, ファイルパス);
         項目.set合議体番号(合議体番号);
         項目.set審査人数合計(new RString(データ件数));
-        settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 共通情報);
+        settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 共通情報, ファイルパス);
         RDate 日期 = RDate.getNowDate();
         boolean is前回結果 = false;
         if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, 日期, SubGyomuCode.DBE認定支援))) {

@@ -22,56 +22,56 @@ public class IinShinsakaishiryoA4ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     //DBE517011
-    @ReportItem(name = "one_shinsakaiNo", length = 4, order = 1)
-    public RString one_shinsakaiNo;
-    @ReportItem(name = "one_shinsakaiKaisaiYMD", length = 21, order = 2)
-    public RString one_shinsakaiKaisaiYMD;
-    @ReportItem(name = "one_ShinsainName1", length = 20, order = 3)
-    public RString one_shinsainName1;
-    @ReportItem(name = "one_ShinsainName2", length = 20, order = 4)
-    public RString one_shinsainName2;
-    @ReportItem(name = "one_gogitaiNo", length = 2, order = 5)
-    public RString one_gogitaiNo;
-    @ReportItem(name = "one_ShinsainName3", length = 20, order = 6)
-    public RString one_shinsainName3;
-    @ReportItem(name = "one_shinsaTaishoshaCount", length = 2, order = 7)
-    public RString one_shinsaTaishoshaCount;
-    @ReportItem(name = "one_ShinsainName4", length = 20, order = 8)
-    public RString one_shinsainName4;
-    @ReportItem(name = "one_ShinsainName5", length = 20, order = 9)
-    public RString one_shinsainName5;
-    @ReportItem(name = "one_ShinsainName6", length = 20, order = 10)
-    public RString one_shinsainName6;
-    @ReportItem(name = "one_ShinsainName7", length = 20, order = 11)
-    public RString one_shinsainName7;
-    @ReportItem(name = "one_ShinsainName8", length = 20, order = 12)
-    public RString one_shinsainName8;
-    @ReportItem(name = "one_listShinsei_1", length = 2, order = 13)
-    public RString one_listShinsei_1;
-    @ReportItem(name = "one_listShinsei_2", length = 6, order = 14)
-    public RString one_listShinsei_2;
-    @ReportItem(name = "one_listShinsei_3", length = 10, order = 15)
-    public RString one_listShinsei_3;
-    @ReportItem(name = "one_listShinsei_4", length = 30, order = 16)
-    public RString one_listShinsei_4;
-    @ReportItem(name = "one_listShinsei_5", length = 1, order = 17)
-    public RString one_listShinsei_5;
-    @ReportItem(name = "one_listShinsei_6", length = 3, order = 18)
-    public RString one_listShinsei_6;
-    @ReportItem(name = "one_listShinsei_7", length = 3, order = 19)
-    public RString one_listShinsei_7;
-    @ReportItem(name = "one_listShinsei_8", length = 4, order = 20)
-    public RString one_listShinsei_8;
-    @ReportItem(name = "one_listShinsei_9", length = 7, order = 21)
-    public RString one_listShinsei_9;
-    @ReportItem(name = "one_listShinsei_10", length = 1, order = 22)
-    public RString one_listShinsei_10;
-    @ReportItem(name = "one_listShinsei_11", length = 5, order = 23)
-    public RString one_listShinsei_11;
-    @ReportItem(name = "one_listShinsei_12", length = 3, order = 24)
-    public RString one_listShinsei_12;
-    @ReportItem(name = "one_listShinsei_13", length = 4, order = 25)
-    public RString one_listShinsei_13;
+    @ReportItem(name = "shinsakaiNo", length = 4, order = 1)
+    public RString shinsakaiNo;
+    @ReportItem(name = "shinsakaiKaisaiYMD", length = 21, order = 2)
+    public RString shinsakaiKaisaiYMD;
+    @ReportItem(name = "ShinsainName1", length = 20, order = 3)
+    public RString shinsainName1;
+    @ReportItem(name = "ShinsainName2", length = 20, order = 4)
+    public RString shinsainName2;
+    @ReportItem(name = "gogitaiNo", length = 2, order = 5)
+    public RString gogitaiNo;
+    @ReportItem(name = "ShinsainName3", length = 20, order = 6)
+    public RString shinsainName3;
+    @ReportItem(name = "shinsaTaishoshaCount", length = 2, order = 7)
+    public RString shinsaTaishoshaCount;
+    @ReportItem(name = "ShinsainName4", length = 20, order = 8)
+    public RString shinsainName4;
+    @ReportItem(name = "ShinsainName5", length = 20, order = 9)
+    public RString shinsainName5;
+    @ReportItem(name = "ShinsainName6", length = 20, order = 10)
+    public RString shinsainName6;
+    @ReportItem(name = "ShinsainName7", length = 20, order = 11)
+    public RString shinsainName7;
+    @ReportItem(name = "ShinsainName8", length = 20, order = 12)
+    public RString shinsainName8;
+    @ReportItem(name = "listShinsei_1", length = 2, order = 13)
+    public RString listShinsei_1;
+    @ReportItem(name = "listShinsei_2", length = 6, order = 14)
+    public RString listShinsei_2;
+    @ReportItem(name = "listShinsei_3", length = 10, order = 15)
+    public RString listShinsei_3;
+    @ReportItem(name = "listShinsei_4", length = 30, order = 16)
+    public RString listShinsei_4;
+    @ReportItem(name = "listShinsei_5", length = 1, order = 17)
+    public RString listShinsei_5;
+    @ReportItem(name = "listShinsei_6", length = 3, order = 18)
+    public RString listShinsei_6;
+    @ReportItem(name = "listShinsei_7", length = 3, order = 19)
+    public RString listShinsei_7;
+    @ReportItem(name = "listShinsei_8", length = 4, order = 20)
+    public RString listShinsei_8;
+    @ReportItem(name = "listShinsei_9", length = 7, order = 21)
+    public RString listShinsei_9;
+    @ReportItem(name = "listShinsei_10", length = 1, order = 22)
+    public RString listShinsei_10;
+    @ReportItem(name = "listShinsei_11", length = 5, order = 23)
+    public RString listShinsei_11;
+    @ReportItem(name = "listShinsei_12", length = 3, order = 24)
+    public RString listShinsei_12;
+    @ReportItem(name = "listShinsei_13", length = 4, order = 25)
+    public RString listShinsei_13;
 
     //DBE517038
     @ReportItem(name = "sakuseiGengo", length = 2, order = 26)
@@ -122,8 +122,6 @@ public class IinShinsakaishiryoA4ReportSource implements IReportSource {
     public RString zZenkaiNijiKaishiYMD;
     @ReportItem(name = "zZenkaiNijishuryoYMD", length = 9, order = 49)
     public RString zZenkaiNijishuryoYMD;
-    @ReportItem(name = "gogitaiNo", length = 6, order = 50)
-    public RString gogitaiNo;
     @ReportItem(name = "shinseiCount", length = 2, order = 51)
     public RString shinseiCount;
     @ReportItem(name = "zenkaiNijihanteikekka", length = 4, order = 52)
@@ -346,352 +344,102 @@ public class IinShinsakaishiryoA4ReportSource implements IReportSource {
     public RString sabisuKaisu21;
 
     //DBE517141
-    @ReportItem(name = "two_gaikyotokkiImg", order = 201)
-    public RString two_gaikyotokkiImg;
-    @ReportItem(name = "two_hihokenshaName", length = 30, order = 202)
-    public RString two_hihokenshaName;
-    @ReportItem(name = "two_hokenshaNo", length = 6, order = 203)
-    public RString two_hokenshaNo;
-    @ReportItem(name = "two_shinseiYY", length = 2, order = 204)
-    public RString two_shinseiYY;
-    @ReportItem(name = "two_shinseiMM", length = 2, order = 205)
-    public RString two_shinseiMM;
-    @ReportItem(name = "two_shinseiDD", length = 2, order = 206)
-    public RString two_shinseiDD;
-    @ReportItem(name = "two_sakuseiGengo", length = 2, order = 207)
-    public RString two_sakuseiGengo;
-    @ReportItem(name = "two_chosaGengo", length = 2, order = 208)
-    public RString two_chosaGengo;
-    @ReportItem(name = "two_sakuseiYY", length = 2, order = 209)
-    public RString two_sakuseiYY;
-    @ReportItem(name = "two_sakuseiMM", length = 2, order = 210)
-    public RString two_sakuseiMM;
-    @ReportItem(name = "two_sakuseiDD", length = 2, order = 211)
-    public RString two_sakuseiDD;
-    @ReportItem(name = "two_hihokenshaNo", length = 10, order = 212)
-    public RString two_hihokenshaNo;
-    @ReportItem(name = "two_shinseiGengo", length = 2, order = 213)
-    public RString two_shinseiGengo;
-    @ReportItem(name = "two_shinsaGengo", length = 2, order = 214)
-    public RString two_shinsaGengo;
-    @ReportItem(name = "two_shinsaYY", length = 2, order = 215)
-    public RString two_shinsaYY;
-    @ReportItem(name = "two_shinsaMM", length = 2, order = 216)
-    public RString two_shinsaMM;
-    @ReportItem(name = "two_shinsaDD", length = 2, order = 217)
-    public RString two_shinsaDD;
-    @ReportItem(name = "two_chosaYY", length = 2, order = 218)
-    public RString two_chosaYY;
-    @ReportItem(name = "two_chosaMM", length = 2, order = 219)
-    public RString two_chosaMM;
-    @ReportItem(name = "two_chosaDD", length = 2, order = 220)
-    public RString two_chosaDD;
-    @ReportItem(name = "two_gaikyotokkiText", order = 221)
-    public RString two_gaikyotokkiText;
+    @ReportItem(name = "gaikyotokkiImg", order = 201)
+    public RString gaikyotokkiImg;
+    @ReportItem(name = "hihokenshaName", length = 30, order = 202)
+    public RString hihokenshaName;
+    @ReportItem(name = "hokenshaNo", length = 6, order = 203)
+    public RString hokenshaNo;
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 212)
+    public RString hihokenshaNo;
+    @ReportItem(name = "gaikyotokkiText", order = 221)
+    public RString gaikyotokkiText;
 
     //DBE517131
-    @ReportItem(name = "two_tokkiImg1", order = 222)
-    public RString two_tokkiImg1;
-    @ReportItem(name = "two_listChosa_1", length = 4, order = 223)
-    public RString two_listChosa_1;
-    @ReportItem(name = "two_tokkiImg2", order = 224)
-    public RString two_tokkiImg2;
-    @ReportItem(name = "two_tokkiImg3", order = 225)
-    public RString two_tokkiImg3;
-    @ReportItem(name = "two_tokkiImg4", order = 226)
-    public RString two_tokkiImg4;
-    @ReportItem(name = "two_tokkiImg5", order = 227)
-    public RString two_tokkiImg5;
-    @ReportItem(name = "two_tokkiImg6", order = 228)
-    public RString two_tokkiImg6;
-    @ReportItem(name = "two_tokkiImg7", order = 229)
-    public RString two_tokkiImg7;
-    @ReportItem(name = "two_tokkiImg8", order = 230)
-    public RString two_tokkiImg8;
-    @ReportItem(name = "two_tokkiImg9", order = 231)
-    public RString two_tokkiImg9;
-    @ReportItem(name = "two_tokkiImg10", order = 232)
-    public RString two_tokkiImg10;
-    @ReportItem(name = "two_tokkiImg11", order = 233)
-    public RString two_tokkiImg11;
-    @ReportItem(name = "two_tokkiImg12", order = 234)
-    public RString two_tokkiImg12;
-    @ReportItem(name = "two_tokkiImg13", order = 235)
-    public RString two_tokkiImg13;
-    @ReportItem(name = "two_tokkiImg14", order = 236)
-    public RString two_tokkiImg14;
-    @ReportItem(name = "two_tokkiImg15", order = 237)
-    public RString two_tokkiImg15;
-    @ReportItem(name = "two_tokkiText1", order = 238)
-    public RString two_tokkiText1;
-    @ReportItem(name = "two_listChosa1_1", length = 4, order = 239)
-    public RString two_listChosa1_1;
-    @ReportItem(name = "two_tokkiText2", order = 240)
-    public RString two_tokkiText2;
-    @ReportItem(name = "two_tokkiText3", order = 241)
-    public RString two_tokkiText3;
-    @ReportItem(name = "two_tokkiText4", order = 242)
-    public RString two_tokkiText4;
-    @ReportItem(name = "two_tokkiText5", order = 243)
-    public RString two_tokkiText5;
-    @ReportItem(name = "two_tokkiText6", order = 244)
-    public RString two_tokkiText6;
-    @ReportItem(name = "two_tokkiText7", order = 245)
-    public RString two_tokkiText7;
-    @ReportItem(name = "two_tokkiText8", order = 246)
-    public RString two_tokkiText8;
-    @ReportItem(name = "two_tokkiText9", order = 247)
-    public RString two_tokkiText9;
-    @ReportItem(name = "two_tokkiText10", order = 248)
-    public RString two_tokkiText10;
-    @ReportItem(name = "two_tokkiText11", order = 249)
-    public RString two_tokkiText11;
-    @ReportItem(name = "two_tokkiText12", order = 250)
-    public RString two_tokkiText12;
-    @ReportItem(name = "two_tokkiText13", order = 251)
-    public RString two_tokkiText13;
-    @ReportItem(name = "two_tokkiText14", order = 252)
-    public RString two_tokkiText14;
-    @ReportItem(name = "two_tokkiText15", order = 253)
-    public RString two_tokkiText15;
-    @ReportItem(name = "two_tokkiImg", order = 254)
-    public RString two_tokkiImg;
-    @ReportItem(name = "two_tokkiText", order = 255)
-    public RString two_tokkiText;
+    @ReportItem(name = "tokkiImg1", order = 222)
+    public RString tokkiImg1;
+    @ReportItem(name = "listChosa_1", length = 4, order = 223)
+    public RString listChosa_1;
+    @ReportItem(name = "tokkiImg2", order = 224)
+    public RString tokkiImg2;
+    @ReportItem(name = "tokkiImg3", order = 225)
+    public RString tokkiImg3;
+    @ReportItem(name = "tokkiImg4", order = 226)
+    public RString tokkiImg4;
+    @ReportItem(name = "tokkiImg5", order = 227)
+    public RString tokkiImg5;
+    @ReportItem(name = "tokkiImg6", order = 228)
+    public RString tokkiImg6;
+    @ReportItem(name = "tokkiImg7", order = 229)
+    public RString tokkiImg7;
+    @ReportItem(name = "tokkiImg8", order = 230)
+    public RString tokkiImg8;
+    @ReportItem(name = "tokkiImg9", order = 231)
+    public RString tokkiImg9;
+    @ReportItem(name = "tokkiImg10", order = 232)
+    public RString tokkiImg10;
+    @ReportItem(name = "tokkiImg11", order = 233)
+    public RString tokkiImg11;
+    @ReportItem(name = "tokkiImg12", order = 234)
+    public RString tokkiImg12;
+    @ReportItem(name = "tokkiImg13", order = 235)
+    public RString tokkiImg13;
+    @ReportItem(name = "tokkiImg14", order = 236)
+    public RString tokkiImg14;
+    @ReportItem(name = "tokkiImg15", order = 237)
+    public RString tokkiImg15;
+    @ReportItem(name = "tokkiText1", order = 238)
+    public RString tokkiText1;
+    @ReportItem(name = "listChosa1_1", length = 4, order = 239)
+    public RString listChosa1_1;
+    @ReportItem(name = "tokkiText2", order = 240)
+    public RString tokkiText2;
+    @ReportItem(name = "tokkiText3", order = 241)
+    public RString tokkiText3;
+    @ReportItem(name = "tokkiText4", order = 242)
+    public RString tokkiText4;
+    @ReportItem(name = "tokkiText5", order = 243)
+    public RString tokkiText5;
+    @ReportItem(name = "tokkiText6", order = 244)
+    public RString tokkiText6;
+    @ReportItem(name = "tokkiText7", order = 245)
+    public RString tokkiText7;
+    @ReportItem(name = "tokkiText8", order = 246)
+    public RString tokkiText8;
+    @ReportItem(name = "tokkiText9", order = 247)
+    public RString tokkiText9;
+    @ReportItem(name = "tokkiText10", order = 248)
+    public RString tokkiText10;
+    @ReportItem(name = "tokkiText11", order = 249)
+    public RString tokkiText11;
+    @ReportItem(name = "tokkiText12", order = 250)
+    public RString tokkiText12;
+    @ReportItem(name = "tokkiText13", order = 251)
+    public RString tokkiText13;
+    @ReportItem(name = "tokkiText14", order = 252)
+    public RString tokkiText14;
+    @ReportItem(name = "tokkiText15", order = 253)
+    public RString tokkiText15;
+    @ReportItem(name = "tokkiImg", order = 254)
+    public RString tokkiImg;
+    @ReportItem(name = "tokkiText", order = 255)
+    public RString tokkiText;
 
     //DBE517134
-    @ReportItem(name = "three_tokkiImg1", order = 301)
-    public RString three_tokkiImg1;
-    @ReportItem(name = "three_listChosa_1", length = 4, order = 302)
-    public RString three_listChosa1;
-    @ReportItem(name = "three_tokkiImg2", order = 303)
-    public RString three_tokkiImg2;
-    @ReportItem(name = "three_tokkiImg3", order = 304)
-    public RString three_tokkiImg3;
-    @ReportItem(name = "three_tokkiImg4", order = 305)
-    public RString three_tokkiImg4;
-    @ReportItem(name = "three_tokkiImg5", order = 306)
-    public RString three_tokkiImg5;
-    @ReportItem(name = "three_tokkiImg6", order = 307)
-    public RString three_tokkiImg6;
-    @ReportItem(name = "three_tokkiImg7", order = 308)
-    public RString three_tokkiImg7;
-    @ReportItem(name = "three_tokkiImg8", order = 309)
-    public RString three_tokkiImg8;
-    @ReportItem(name = "three_tokkiImg9", order = 310)
-    public RString three_tokkiImg9;
-    @ReportItem(name = "three_tokkiImg10", order = 311)
-    public RString three_tokkiImg10;
-    @ReportItem(name = "three_tokkiImg11", order = 312)
-    public RString three_tokkiImg11;
-    @ReportItem(name = "three_tokkiImg12", order = 313)
-    public RString three_tokkiImg12;
-    @ReportItem(name = "three_tokkiImg13", order = 314)
-    public RString three_tokkiImg13;
-    @ReportItem(name = "three_tokkiImg14", order = 315)
-    public RString three_tokkiImg14;
-    @ReportItem(name = "three_tokkiImg15", order = 316)
-    public RString three_tokkiImg15;
-    @ReportItem(name = "three_tokkiText1", order = 317)
-    public RString three_tokkiText1;
-    @ReportItem(name = "three_listChosa1_1", length = 4, order = 318)
-    public RString three_listChosa1_1;
-    @ReportItem(name = "three_tokkiText2", order = 319)
-    public RString three_tokkiText2;
-    @ReportItem(name = "three_tokkiText3", order = 320)
-    public RString three_tokkiText3;
-    @ReportItem(name = "three_tokkiText4", order = 321)
-    public RString three_tokkiText4;
-    @ReportItem(name = "three_tokkiText5", order = 322)
-    public RString three_tokkiText5;
-    @ReportItem(name = "three_tokkiText6", order = 323)
-    public RString three_tokkiText6;
-    @ReportItem(name = "three_tokkiText7", order = 324)
-    public RString three_tokkiText7;
-    @ReportItem(name = "three_tokkiText8", order = 325)
-    public RString three_tokkiText8;
-    @ReportItem(name = "three_tokkiText9", order = 326)
-    public RString three_tokkiText9;
-    @ReportItem(name = "three_tokkiText10", order = 327)
-    public RString three_tokkiText10;
-    @ReportItem(name = "three_tokkiText11", order = 328)
-    public RString three_tokkiText11;
-    @ReportItem(name = "three_tokkiText12", order = 329)
-    public RString three_tokkiText12;
-    @ReportItem(name = "three_tokkiText13", order = 330)
-    public RString three_tokkiText13;
-    @ReportItem(name = "three_tokkiText14", order = 331)
-    public RString three_tokkiText14;
-    @ReportItem(name = "three_tokkiText15", order = 332)
-    public RString three_tokkiText15;
-    @ReportItem(name = "three_tokkiImg", order = 333)
-    public RString three_tokkiImg;
-    @ReportItem(name = "three_hihokenshaName", length = 30, order = 334)
-    public RString three_hihokenshaName;
-    @ReportItem(name = "three_hokenshaNo", length = 6, order = 335)
-    public RString three_hokenshaNo;
-    @ReportItem(name = "three_sakuseiGengo", length = 2, order = 336)
-    public RString three_sakuseiGengo;
-    @ReportItem(name = "three_sakuseiYY", length = 2, order = 337)
-    public RString three_sakuseiYY;
-    @ReportItem(name = "three_sakuseiMM", length = 2, order = 338)
-    public RString three_sakuseiMM;
-    @ReportItem(name = "three_sakuseiDD", length = 2, order = 339)
-    public RString three_sakuseiDD;
-    @ReportItem(name = "three_chosaGengo", length = 2, order = 340)
-    public RString three_chosaGengo;
-    @ReportItem(name = "three_chosaYY", length = 2, order = 341)
-    public RString three_chosaYY;
-    @ReportItem(name = "three_chosaMM", length = 2, order = 343)
-    public RString three_chosaMM;
-    @ReportItem(name = "three_chosaDD", length = 2, order = 344)
-    public RString three_chosaDD;
-    @ReportItem(name = "three_hihokenshaNo", length = 10, order = 345)
-    public RString three_hihokenshaNo;
-    @ReportItem(name = "three_shinseiGengo", length = 2, order = 346)
-    public RString three_shinseiGengo;
-    @ReportItem(name = "three_shinseiYY", length = 2, order = 347)
-    public RString three_shinseiYY;
-    @ReportItem(name = "three_shinseiMM", length = 2, order = 348)
-    public RString three_shinseiMM;
-    @ReportItem(name = "three_shinseiDD", length = 2, order = 349)
-    public RString three_shinseiDD;
-    @ReportItem(name = "three_shinsaGengo", length = 2, order = 350)
-    public RString three_shinsaGengo;
-    @ReportItem(name = "three_shinsaYY", length = 2, order = 351)
-    public RString three_shinsaYY;
-    @ReportItem(name = "three_shinsaMM", length = 2, order = 352)
-    public RString three_shinsaMM;
-    @ReportItem(name = "three_shinsaDD", length = 2, order = 353)
-    public RString three_shinsaDD;
-    @ReportItem(name = "three_tokkiText", order = 354)
-    public RString three_tokkiText;
+    @ReportItem(name = "listChosa_1", length = 4, order = 302)
+    public RString listChosa1;
 
     //DBE517151
-    @ReportItem(name = "four_hihokenshaName", length = 30, order = 401)
-    public RString four_hihokenshaName;
-    @ReportItem(name = "four_hokenshaNo", length = 6, order = 402)
-    public RString four_hokenshaNo;
-    @ReportItem(name = "four_shinseiGengo", length = 2, order = 403)
-    public RString four_shinseiGengo;
-    @ReportItem(name = "four_shinseiYY", length = 2, order = 404)
-    public RString four_shinseiYY;
-    @ReportItem(name = "four_shinseiMM", length = 2, order = 405)
-    public RString four_shinseiMM;
-    @ReportItem(name = "four_shinseiDD", length = 2, order = 406)
-    public RString four_shinseiDD;
-    @ReportItem(name = "four_sakuseiGengo", length = 2, order = 407)
-    public RString four_sakuseiGengo;
-    @ReportItem(name = "four_sakuseiYY", length = 2, order = 408)
-    public RString four_sakuseiYY;
-    @ReportItem(name = "four_sakuseiMM", length = 2, order = 409)
-    public RString four_sakuseiMM;
-    @ReportItem(name = "four_sakuseiDD", length = 2, order = 410)
-    public RString four_sakuseiDD;
-    @ReportItem(name = "four_hihokenshaNo", length = 10, order = 411)
-    public RString four_hihokenshaNo;
-    @ReportItem(name = "four_chosaGengo", length = 2, order = 412)
-    public RString four_chosaGengo;
-    @ReportItem(name = "four_chosaYY", length = 2, order = 413)
-    public RString four_chosaYY;
-    @ReportItem(name = "four_chosaMM", length = 2, order = 414)
-    public RString four_chosaMM;
-    @ReportItem(name = "four_chosaDD", length = 2, order = 415)
-    public RString four_chosaDD;
-    @ReportItem(name = "four_shinsaGengo", length = 2, order = 416)
-    public RString four_shinsaGengo;
-    @ReportItem(name = "four_shinsaYY", length = 2, order = 417)
-    public RString four_shinsaYY;
-    @ReportItem(name = "four_shinsaMM", length = 2, order = 418)
-    public RString four_shinsaMM;
-    @ReportItem(name = "four_shinsaDD", length = 2, order = 419)
-    public RString four_shinsaDD;
-    @ReportItem(name = "four_imgIkensho1", order = 420)
-    public RString four_imgIkensho1;
+    @ReportItem(name = "imgIkensho1", order = 420)
+    public RString imgIkensho1;
 
     //DBE517152
-    @ReportItem(name = "five_hihokenshaName", length = 30, order = 501)
-    public RString five_hihokenshaName;
-    @ReportItem(name = "five_hokenshaNo", length = 6, order = 502)
-    public RString five_hokenshaNo;
-    @ReportItem(name = "five_shinseiGengo", length = 2, order = 503)
-    public RString five_shinseiGengo;
-    @ReportItem(name = "five_shinseiYY", length = 2, order = 504)
-    public RString five_shinseiYY;
-    @ReportItem(name = "five_shinseiMM", length = 2, order = 505)
-    public RString five_shinseiMM;
-    @ReportItem(name = "five_shinseiDD", length = 2, order = 506)
-    public RString five_shinseiDD;
-    @ReportItem(name = "five_sakuseiGengo", length = 2, order = 507)
-    public RString five_sakuseiGengo;
-    @ReportItem(name = "five_sakuseiYY", length = 2, order = 508)
-    public RString five_sakuseiYY;
-    @ReportItem(name = "five_sakuseiMM", length = 2, order = 509)
-    public RString five_sakuseiMM;
-    @ReportItem(name = "five_sakuseiDD", length = 2, order = 510)
-    public RString five_sakuseiDD;
-    @ReportItem(name = "five_hihokenshaNo", length = 10, order = 511)
-    public RString five_hihokenshaNo;
-    @ReportItem(name = "five_chosaGengo", length = 2, order = 512)
-    public RString five_chosaGengo;
-    @ReportItem(name = "five_chosaYY", length = 2, order = 513)
-    public RString five_chosaYY;
-    @ReportItem(name = "five_chosaMM", length = 2, order = 514)
-    public RString five_chosaMM;
-    @ReportItem(name = "five_chosaDD", length = 2, order = 515)
-    public RString five_chosaDD;
-    @ReportItem(name = "five_shinsaGengo", length = 2, order = 516)
-    public RString five_shinsaGengo;
-    @ReportItem(name = "five_shinsaYY", length = 2, order = 517)
-    public RString five_shinsaYY;
-    @ReportItem(name = "five_shinsaMM", length = 2, order = 518)
-    public RString five_shinsaMM;
-    @ReportItem(name = "five_shinsaDD", length = 2, order = 519)
-    public RString five_shinsaDD;
-    @ReportItem(name = "five_imgIkensho2", order = 520)
-    public RString five_imgIkensho2;
+    @ReportItem(name = "imgIkensho2", order = 520)
+    public RString imgIkensho2;
 
     //DBE517016
-    @ReportItem(name = "six_hihokenshaName", length = 30, order = 601)
-    public RString six_hihokenshaName;
-    @ReportItem(name = "six_hokenshaNo", length = 6, order = 602)
-    public RString six_hokenshaNo;
-    @ReportItem(name = "six_shinseiGengo", length = 2, order = 603)
-    public RString six_shinseiGengo;
-    @ReportItem(name = "six_shinseiYY", length = 2, order = 604)
-    public RString six_shinseiYY;
-    @ReportItem(name = "six_shinseiMM", length = 2, order = 605)
-    public RString six_shinseiMM;
-    @ReportItem(name = "six_shinseiDD", length = 2, order = 606)
-    public RString six_shinseiDD;
-    @ReportItem(name = "six_sakuseiGengo", length = 2, order = 607)
-    public RString six_sakuseiGengo;
-    @ReportItem(name = "six_sakuseiYY", length = 2, order = 608)
-    public RString six_sakuseiYY;
-    @ReportItem(name = "six_sakuseiMM", length = 2, order = 609)
-    public RString six_sakuseiMM;
-    @ReportItem(name = "six_sakuseiDD", length = 2, order = 610)
-    public RString six_sakuseiDD;
-    @ReportItem(name = "six_hihokenshaNo", length = 10, order = 611)
-    public RString six_hihokenshaNo;
-    @ReportItem(name = "six_chosaGengo", length = 2, order = 612)
-    public RString six_chosaGengo;
-    @ReportItem(name = "six_chosaYY", length = 2, order = 613)
-    public RString six_chosaYY;
-    @ReportItem(name = "six_chosaMM", length = 2, order = 614)
-    public RString six_chosaMM;
-    @ReportItem(name = "six_chosaDD", length = 2, order = 615)
-    public RString six_chosaDD;
-    @ReportItem(name = "six_shinsaGengo", length = 2, order = 616)
-    public RString six_shinsaGengo;
-    @ReportItem(name = "six_shinsaYY", length = 2, order = 617)
-    public RString six_shinsaYY;
-    @ReportItem(name = "six_shinsaMM", length = 2, order = 618)
-    public RString six_shinsaMM;
-    @ReportItem(name = "six_shinsaDD", length = 2, order = 619)
-    public RString six_shinsaDD;
-    @ReportItem(name = "six_imgSonotashiryo", order = 620)
-    public RString six_imgSonotashiryo;
+    @ReportItem(name = "imgSonotashiryo", order = 620)
+    public RString imgSonotashiryo;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
@@ -716,9 +464,7 @@ public class IinShinsakaishiryoA4ReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        two_tokkiText,
-        two_tokkiImg,
-        three_tokkiText,
-        three_tokkiImg,
+        tokkiText,
+        tokkiImg
     }
 }

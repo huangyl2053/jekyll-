@@ -52,31 +52,31 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
     private JimuShinsakaishiryoA3ReportSource editItem(JimuShinsakaishiryoA3ReportSource source) {
 
         if (index < shinsakaishiryoList.size()) {
-            source.one_shinsakaiNo = get審査会番号(shinsakaishiryoList.get(index).get審査会番号());
-            source.one_shinsakaiKaisaiYMD = shinsakaishiryoList.get(index).get審査会開催年月日();
-            source.one_gogitaiNo = shinsakaishiryoList.get(index).get合議体番号();
-            source.one_shinsainName1 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList1();
-            source.one_shinsainName2 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList2();
-            source.one_shinsainName3 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList3();
-            source.one_shinsainName4 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList4();
-            source.one_shinsainName5 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList5();
-            source.one_shinsainName6 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList6();
-            source.one_shinsainName7 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList7();
-            source.one_shinsainName8 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList8();
-            source.one_shinsaTaishoshaCount = shinsakaishiryoList.get(index).get審査対象者数();
-            source.one_listShinsei1_1 = shinsakaishiryoList.get(index).get審査会審査順().padZeroToLeft(INT_2);
-            source.one_listShinsei1_2 = shinsakaishiryoList.get(index).get保険者();
-            source.one_listShinsei1_3 = shinsakaishiryoList.get(index).get被保険者();
-            source.one_listShinsei1_4 = shinsakaishiryoList.get(index).get氏名();
-            source.one_listShinsei1_5 = shinsakaishiryoList.get(index).get性別();
-            source.one_listShinsei1_6 = shinsakaishiryoList.get(index).get年齢();
-            source.one_listShinsei1_7 = shinsakaishiryoList.get(index).get前回二次();
-            source.one_listShinsei1_8 = shinsakaishiryoList.get(index).get前回期間();
-            source.one_listShinsei1_9 = shinsakaishiryoList.get(index).get一次判定();
-            source.one_listShinsei1_10 = RString.EMPTY;
-            source.one_listShinsei1_11 = RString.EMPTY;
-            source.one_listZenkaiｙukokikan1_1 = shinsakaishiryoList.get(index).get前回期間_下();
-            source.one_listYukokikan1_1 = RString.EMPTY;
+            source.shinsakaiNo = get審査会番号(shinsakaishiryoList.get(index).get審査会番号());
+            source.shinsakaiKaisaiYMD = shinsakaishiryoList.get(index).get審査会開催年月日();
+            source.gogitaiNo = shinsakaishiryoList.get(index).get合議体番号();
+            source.shinsainName1 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList1();
+            source.shinsainName2 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList2();
+            source.shinsainName3 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList3();
+            source.shinsainName4 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList4();
+            source.shinsainName5 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList5();
+            source.shinsainName6 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList6();
+            source.shinsainName7 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList7();
+            source.shinsainName8 = shinsakaishiryoList.get(index).getshinsakaiIinJohoList8();
+            source.shinsaTaishoshaCount = shinsakaishiryoList.get(index).get審査対象者数();
+            source.listShinsei1_1 = shinsakaishiryoList.get(index).get審査会審査順().padZeroToLeft(INT_2);
+            source.listShinsei1_2 = shinsakaishiryoList.get(index).get保険者();
+            source.listShinsei1_3 = shinsakaishiryoList.get(index).get被保険者();
+            source.listShinsei1_4 = shinsakaishiryoList.get(index).get氏名();
+            source.listShinsei1_5 = shinsakaishiryoList.get(index).get性別();
+            source.listShinsei1_6 = shinsakaishiryoList.get(index).get年齢();
+            source.listShinsei1_7 = shinsakaishiryoList.get(index).get前回二次();
+            source.listShinsei1_8 = shinsakaishiryoList.get(index).get前回期間();
+            source.listShinsei1_9 = shinsakaishiryoList.get(index).get一次判定();
+            source.listShinsei1_10 = RString.EMPTY;
+            source.listShinsei1_11 = RString.EMPTY;
+            source.listZenkaiｙukokikan1_1 = shinsakaishiryoList.get(index).get前回期間_下();
+            source.listYukokikan1_1 = RString.EMPTY;
             source.shikibetuCode = new ShikibetsuCode(shinsakaishiryoList.get(index).get識別コード());
             if (shinsakaishiryoList.get(index).is事務局() && shinsakaishiryoList.get(index).get申請書管理番号() != null
                     && !shinsakaishiryoList.get(index).get申請書管理番号().isEmpty()) {
@@ -85,19 +85,19 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
             }
         }
         if ((index + INT_25) < shinsakaishiryoList.size()) {
-            source.one_listShinsei2_1 = shinsakaishiryoList.get(index + INT_25).get審査会審査順().padZeroToLeft(INT_2);
-            source.one_listShinsei2_2 = shinsakaishiryoList.get(index + INT_25).get保険者();
-            source.one_listShinsei2_3 = shinsakaishiryoList.get(index + INT_25).get被保険者();
-            source.one_listShinsei2_4 = shinsakaishiryoList.get(index + INT_25).get氏名();
-            source.one_listShinsei2_5 = shinsakaishiryoList.get(index + INT_25).get性別();
-            source.one_listShinsei2_6 = shinsakaishiryoList.get(index + INT_25).get年齢();
-            source.one_listShinsei2_7 = shinsakaishiryoList.get(index + INT_25).get前回二次();
-            source.one_listShinsei2_8 = shinsakaishiryoList.get(index + INT_25).get前回期間();
-            source.one_listShinsei2_9 = shinsakaishiryoList.get(index + INT_25).get一次判定();
-            source.one_listShinsei2_10 = RString.EMPTY;
-            source.one_listShinsei2_11 = RString.EMPTY;
-            source.one_listZenkaiｙukokikan2_1 = shinsakaishiryoList.get(index + INT_25).get前回期間_下();
-            source.one_listYukokikan2_1 = RString.EMPTY;
+            source.listShinsei2_1 = shinsakaishiryoList.get(index + INT_25).get審査会審査順().padZeroToLeft(INT_2);
+            source.listShinsei2_2 = shinsakaishiryoList.get(index + INT_25).get保険者();
+            source.listShinsei2_3 = shinsakaishiryoList.get(index + INT_25).get被保険者();
+            source.listShinsei2_4 = shinsakaishiryoList.get(index + INT_25).get氏名();
+            source.listShinsei2_5 = shinsakaishiryoList.get(index + INT_25).get性別();
+            source.listShinsei2_6 = shinsakaishiryoList.get(index + INT_25).get年齢();
+            source.listShinsei2_7 = shinsakaishiryoList.get(index + INT_25).get前回二次();
+            source.listShinsei2_8 = shinsakaishiryoList.get(index + INT_25).get前回期間();
+            source.listShinsei2_9 = shinsakaishiryoList.get(index + INT_25).get一次判定();
+            source.listShinsei2_10 = RString.EMPTY;
+            source.listShinsei2_11 = RString.EMPTY;
+            source.listZenkaiｙukokikan2_1 = shinsakaishiryoList.get(index + INT_25).get前回期間_下();
+            source.listYukokikan2_1 = RString.EMPTY;
         }
         source.layout = Layouts.鑑;
         return source;

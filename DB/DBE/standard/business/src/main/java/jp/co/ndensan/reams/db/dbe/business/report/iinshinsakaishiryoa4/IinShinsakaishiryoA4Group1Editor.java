@@ -41,31 +41,31 @@ public class IinShinsakaishiryoA4Group1Editor implements IIinShinsakaishiryoA4Ed
     }
 
     private IinShinsakaishiryoA4ReportSource editItem(IinShinsakaishiryoA4ReportSource source) {
-        source.one_shinsakaiNo = get審査会番号(business.get審査会番号());
-        source.one_shinsakaiKaisaiYMD = business.get審査会開催年月日();
-        source.one_shinsainName1 = business.getshinsakaiIinJohoList1();
-        source.one_shinsainName2 = business.getshinsakaiIinJohoList2();
-        source.one_shinsainName3 = business.getshinsakaiIinJohoList3();
-        source.one_shinsainName4 = business.getshinsakaiIinJohoList4();
-        source.one_shinsainName5 = business.getshinsakaiIinJohoList5();
-        source.one_shinsainName6 = business.getshinsakaiIinJohoList6();
-        source.one_shinsainName7 = business.getshinsakaiIinJohoList7();
-        source.one_shinsainName8 = business.getshinsakaiIinJohoList8();
-        source.one_gogitaiNo = business.get合議体番号();
-        source.one_shinsaTaishoshaCount = business.get審査対象者数();
-        source.one_listShinsei_1 = business.get審査会審査順();
-        source.one_listShinsei_2 = business.get保険者();
-        source.one_listShinsei_3 = business.get被保険者();
-        source.one_listShinsei_4 = business.get氏名();
-        source.one_listShinsei_5 = business.get性別();
-        source.one_listShinsei_6 = business.get年齢();
-        source.one_listShinsei_7 = business.get前回二次();
-        source.one_listShinsei_8 = business.get前回期間();
-        source.one_listShinsei_9 = business.get一次判定();
-        source.one_listShinsei_10 = business.get警告();
-        source.one_listShinsei_11 = business.get基準時間();
-        source.one_listShinsei_12 = RString.EMPTY;
-        source.one_listShinsei_13 = RString.EMPTY;
+        source.shinsakaiNo = get審査会番号(business.get審査会番号());
+        source.shinsakaiKaisaiYMD = business.get審査会開催年月日();
+        source.shinsainName1 = business.getshinsakaiIinJohoList1();
+        source.shinsainName2 = business.getshinsakaiIinJohoList2();
+        source.shinsainName3 = business.getshinsakaiIinJohoList3();
+        source.shinsainName4 = business.getshinsakaiIinJohoList4();
+        source.shinsainName5 = business.getshinsakaiIinJohoList5();
+        source.shinsainName6 = business.getshinsakaiIinJohoList6();
+        source.shinsainName7 = business.getshinsakaiIinJohoList7();
+        source.shinsainName8 = business.getshinsakaiIinJohoList8();
+        source.gogitaiNo = business.get合議体番号();
+        source.shinsaTaishoshaCount = business.get審査対象者数();
+        source.listShinsei_1 = business.get審査会審査順();
+        source.listShinsei_2 = business.get保険者();
+        source.listShinsei_3 = business.get被保険者();
+        source.listShinsei_4 = business.get氏名();
+        source.listShinsei_5 = business.get性別();
+        source.listShinsei_6 = business.get年齢();
+        source.listShinsei_7 = business.get前回二次();
+        source.listShinsei_8 = business.get前回期間();
+        source.listShinsei_9 = business.get一次判定();
+        source.listShinsei_10 = business.get警告();
+        source.listShinsei_11 = business.get基準時間();
+        source.listShinsei_12 = RString.EMPTY;
+        source.listShinsei_13 = RString.EMPTY;
         source.layout = Layouts.鑑;
         return source;
     }

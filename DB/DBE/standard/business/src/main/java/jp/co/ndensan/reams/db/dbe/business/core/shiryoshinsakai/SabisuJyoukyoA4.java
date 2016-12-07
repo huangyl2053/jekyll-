@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -53,8 +52,9 @@ public class SabisuJyoukyoA4 {
      *
      * @param 項目 IchijihanteikekkahyoA4Entity
      * @param entity ItiziHanteiEntity
+     * @param ファイルパス ファイルパス
      */
-    public void set項目(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
+    public void set項目(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity, RString ファイルパス) {
         項目.set審査順(new RString(entity.getShinsakaiOrder()));
         項目.set年齢(new RString(entity.getAge()));
         項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
@@ -90,7 +90,7 @@ public class SabisuJyoukyoA4 {
                 entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(), entity.getKijunJikanKansetsuCare(),
                 entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
                 entity.getKijunJikanNinchishoKasan(), entity.getKijunJikan()));
-        set基準時間の積み上げグラフ(項目, entity);
+        set基準時間の積み上げグラフ(項目, entity, ファイルパス);
         項目.set要介護認定等基準時間_食事(new RString(entity.getKijunJikanShokuji()));
         項目.set要介護認定等基準時間_排泄(new RString(entity.getKijunJikanHaisetsu()));
         項目.set要介護認定等基準時間_移動(new RString(entity.getKijunJikanIdo()));
@@ -273,18 +273,17 @@ public class SabisuJyoukyoA4 {
         return RString.EMPTY;
     }
 
-    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
-        int 食事 = entity.getKijunJikanShokuji() + entity.getKijunJikanNinchishoKasan()
-                + entity.getKijunJikanKansetsuCare();
-        int 排泄 = entity.getKijunJikanHaisetsu() + entity.getKijunJikanBPSDKanren();
-        int 移動 = entity.getKijunJikanIdo() + entity.getKijunJikanKinoKunren();
-        int 清潔保持 = entity.getKijunJikanSeiketsuHoji() + entity.getKijunJikanIryoKanren();
+    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity, RString ファイルパス) {
         RDateTime 日期 = RDate.getNowDateTime();
         RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
                 .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
-        StackedBarChart stackedBarChart = new StackedBarChart(食事, 排泄, 移動, 清潔保持, 文件名);
+        StackedBarChart stackedBarChart = new StackedBarChart(entity.getKijunJikanShokuji(), entity.getKijunJikanHaisetsu(),
+                entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(),
+                entity.getKijunJikanKansetsuCare(), entity.getKijunJikanBPSDKanren(),
+                entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
+                entity.getKijunJikanNinchishoKasan(), 文件名, ファイルパス);
         stackedBarChart.getTitle();
-        RString 文件 = new RString(Path.getUserHomePath().toString() + "\\" + 文件名 + ".png");
+        RString 文件 = new RString(文件名 + ".png");
         項目.set基準時間の積み上げグラフ(文件);
     }
 

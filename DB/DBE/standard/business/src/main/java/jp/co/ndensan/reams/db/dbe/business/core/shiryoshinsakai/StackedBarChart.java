@@ -12,7 +12,6 @@ import java.awt.Stroke;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JPanel;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.jfree.chart.ChartColor;
 import org.jfree.chart.ChartFactory;
@@ -106,7 +105,8 @@ public class StackedBarChart extends ApplicationFrame {
         defaultcategorydataset.addValue(機能訓練, "Series 7", "");
         defaultcategorydataset.addValue(医療関連, "Series 8", "");
         defaultcategorydataset.addValue(認知症加算, "Series 9", "");
-        int other = BARCHART_MAX_WIDTH - (食事 + 排泄 + 移動 + 清潔保持 + 間接ケア + bpsd関連 + 機能訓練 + 医療関連 + 認知症加算);
+        int sum = 食事 + 排泄 + 移動 + 清潔保持 + 間接ケア + bpsd関連 + 機能訓練 + 医療関連 + 認知症加算;
+        int other = sum < BARCHART_MAX_WIDTH ? BARCHART_MAX_WIDTH - (sum) : 0;
         defaultcategorydataset.addValue(other, "Series 10", "");
         return defaultcategorydataset;
     }
@@ -140,9 +140,7 @@ public class StackedBarChart extends ApplicationFrame {
         rangeAxis.setAxisLineVisible(false);
         rangeAxis.setVisible(false);
         try {
-            ChartUtilities.saveChartAsPNG(
-                    new File((RString.isNullOrEmpty(ファイルパス) ? Path.getUserHomePath().toString() : ファイルパス) + "\\" + 文件名 + ".png"),
-                    jfreechart, INT_GOGO, INT_NIGO);
+            ChartUtilities.saveChartAsPNG(new File(ファイルパス + "\\" + 文件名 + ".png"), jfreechart, INT_GOGO, INT_NIGO);
         } catch (IOException e) {
             return null;
         }

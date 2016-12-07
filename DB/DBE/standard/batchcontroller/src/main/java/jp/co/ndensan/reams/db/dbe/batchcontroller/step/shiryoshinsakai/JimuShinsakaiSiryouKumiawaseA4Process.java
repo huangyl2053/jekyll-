@@ -71,10 +71,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase {
 
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.two_tokkiText.name()),
-            new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.two_tokkiImg.name()),
-            new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.three_tokkiText.name()),
-            new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.three_tokkiImg.name())));
+            new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.tokkiText.name()),
+            new RString(JimuShinsakaishiryoA4ReportSource.ReportSourceFields.tokkiImg.name())));
     private static final RString 印字する = new RString("1");
     private static final RString 両面 = new RString("1");
     private static final int INT_4 = 4;
@@ -220,7 +218,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 return new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項,
                         調査票調査項目, 前回調査票調査項目, 主治医意見書,
                         前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況,
-                        new RString(myBatisParameter.getGogitaiNo()));
+                        new RString(myBatisParameter.getGogitaiNo()), batchReportWriter.getImageFolderPath());
             }
         }
         return null;

@@ -1610,13 +1610,14 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 : YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード()).get名称());
         ichijiEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
         RDateTime 日期 = RDate.getNowDateTime();
-        RString 文件名 = 日期.getDate().toDateString();
+        RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
+                .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
         new StackedBarChart(getNumber(entity.get要介護認定等基準時間_食事()),
                 getNumber(entity.get要介護認定等基準時間_排泄()), getNumber(entity.get要介護認定等基準時間_移動()),
                 getNumber(entity.get要介護認定等基準時間_清潔保持()), getNumber(entity.get要介護認定等基準時間_間接ケア()),
                 getNumber(entity.get要介護認定等基準時間_BPSD関連()), getNumber(entity.get要介護認定等基準時間_機能訓練()),
                 getNumber(entity.get要介護認定等基準時間_医療関連()), getNumber(entity.get要介護認定等基準時間_認知症加算()),
-                文件名, new RString(batchWrite.getImageFolderPath().toString()));
+                文件名, batchWrite.getImageFolderPath());
         ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
         ichijiEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
         ichijiEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
@@ -1650,6 +1651,10 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症高齢者自立度()).get名称());
         ichijiEntity.set高齢者自立度リスト(高齢者自立度リスト);
         return ichijiEntity;
+    }
+
+    private RString get文件名(int 日期) {
+        return new RString(日期);
     }
 
     private void setBodyItem03(IchijihanteikekkahyoEntity ichijiEntity, YokaigoninteiEntity entity) {

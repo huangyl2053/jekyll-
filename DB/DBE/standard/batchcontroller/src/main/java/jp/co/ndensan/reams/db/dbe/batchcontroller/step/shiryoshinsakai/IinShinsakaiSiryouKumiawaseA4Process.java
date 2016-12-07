@@ -73,10 +73,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase {
 
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.two_tokkiText.name()),
-            new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.two_tokkiImg.name()),
-            new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.three_tokkiText.name()),
-            new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.three_tokkiImg.name())));
+            new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.tokkiText.name()),
+            new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.tokkiImg.name())));
     private static final RString 印字する = new RString("1");
     private static final RString 両面 = new RString("1");
     private static final int INT_4 = 4;
@@ -214,7 +212,8 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                 parameter.setShinseishoKanriZ(entity.getZShinseishoKanriNo());
                 List<DbT5211NinteichosahyoChosaItemEntity> 前回調査項目情報 = mapper.getZenkaiChosahyoChosaItem(parameter);
                 return new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項情報, 調査票調査項目情報, 前回調査項目情報, 主治医意見書項目情報,
-                        new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況, new RString(paramter.getGogitaiNo()));
+                        new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況,
+                        new RString(paramter.getGogitaiNo()), batchReportWriter.getImageFolderPath());
             }
         }
         return null;
