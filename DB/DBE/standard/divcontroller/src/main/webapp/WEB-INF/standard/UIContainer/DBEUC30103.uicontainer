@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBEUC30101",
+ "uiContainerName": "DBEUC30103",
  "displayWizard": false,
  "subGyomuCode": "DBE",
  "steps": [
   {
    "id": 1,
-   "name": "要介護認定一次判定",
+   "name": "一次判定IF取込",
    "transitionList": [
     {
      "id": "1",
@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE3010001",
      "toLayoutTitle": "要介護認定一次判定",
-     "toState": "初期表示"
+     "toState": "取込"
     },
     {
      "id": "2",

@@ -79,7 +79,7 @@ public class IchijiHanteiKekkaJoho {
      * @return ResponseData<IchijiHanteiKekkaJohoDiv>
      */
     public ResponseData<IchijiHanteiKekkaJohoDiv> onClick_btnBack(IchijiHanteiKekkaJohoDiv div) {
-        return ResponseData.of(div).dialogOKClose();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -108,9 +108,7 @@ public class IchijiHanteiKekkaJoho {
                     = DataPassingConverter.deserialize(div.getIchijiHanteiKekka(),
                             jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho.class);
 
-            ShinseishoKanriNo shinseishoKanriNo = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class
-            );
-            ModeType modeType = ViewStateHolder.get(ViewStateKeys.モード, ModeType.class);
+            ModeType modeType = getHandler(div).getモード();
 
             if (ModeType.SHOKAI_MODE.equals(modeType)) {
                 RString 一次判定結果 = div.getTxtIchijiHanteiKekka().getValue();
@@ -119,8 +117,7 @@ public class IchijiHanteiKekkaJoho {
                 set一次判定結果情報(hanteiKekka, div);
             }
 
-            return ResponseData.of(div)
-                    .dialogOKClose();
+            return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
     }
@@ -131,6 +128,7 @@ public class IchijiHanteiKekkaJoho {
                 = getHandler(div).呼び出し元画面への戻り値(hanteiKekka);
         if (result != null) {
             div.setIchijiHanteiKekka(DataPassingConverter.serialize(result));
+            //TODO n8178 城間 もともとのプログラムがViewStateをあてにしていた為、残している。通常はDataPassingから受け取るようにする方が良い。
             ViewStateHolder.put(ViewStateKeys.一次判定結果情報, result);
         }
 

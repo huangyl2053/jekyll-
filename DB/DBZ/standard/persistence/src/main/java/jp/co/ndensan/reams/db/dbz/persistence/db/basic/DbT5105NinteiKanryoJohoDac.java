@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -101,6 +102,24 @@ public class DbT5105NinteiKanryoJohoDac implements ISaveable<DbT5105NinteiKanryo
         return accessor.select().
                 table(DbT5105NinteiKanryoJoho.class).
                 toList(DbT5105NinteiKanryoJohoEntity.class);
+    }
+
+    /**
+     * 指定した申請書管理番号に合致するデータをすべて取得します。
+     *
+     * @param shinseishoKanriNoList 申請書管理番号List
+     * @return DbT5105NinteiKanryoJohoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5105NinteiKanryoJohoEntity> select申請書管理番号(List<ShinseishoKanriNo> shinseishoKanriNoList) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5105NinteiKanryoJoho.class)
+                .where(
+                        in(shinseishoKanriNo, shinseishoKanriNoList)
+                )
+                .toList(DbT5105NinteiKanryoJohoEntity.class);
     }
 
     /**

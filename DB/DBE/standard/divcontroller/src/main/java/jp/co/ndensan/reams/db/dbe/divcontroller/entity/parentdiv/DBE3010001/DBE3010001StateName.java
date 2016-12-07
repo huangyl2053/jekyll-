@@ -17,7 +17,10 @@ public enum DBE3010001StateName implements IStateEnumerations {
     NoChange(""),
     初期表示("初期表示"),
     対象者一覧("対象者一覧"),
-    一次判定対象者一覧("一次判定対象者一覧");
+    一次判定対象者一覧("一次判定対象者一覧"),
+    取込("取込"),
+    保存処理後("保存処理後"),
+    完了処理後("完了処理後");
 
     private final RString name;
 

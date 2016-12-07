@@ -108,14 +108,31 @@ public class IChiJiPanTeiSyoRiManager {
      * 認定調査票（概況調査）に登録する。
      *
      * @param 要介護認定一次判定結果情報 IchijiHanteiKekkaJoho
-     * @return 要介護認定一次判定結果情報のCOUNT
+     * @return 保存に成功した場合true
      */
     @Transaction
-    public boolean 要介護認定一次判定結果情報(IchijiHanteiKekkaJoho 要介護認定一次判定結果情報) {
+    public boolean save要介護認定一次判定結果情報(IchijiHanteiKekkaJoho 要介護認定一次判定結果情報) {
 
         if (!要介護認定一次判定結果情報.hasChanged()) {
             return false;
         }
         return 1 == dbT5116Dac.save(要介護認定一次判定結果情報.toEntity());
+    }
+
+    /**
+     * 認定調査票（概況調査）を一括で登録する。
+     *
+     * @param 要介護認定一次判定結果情報List IchijiHanteiKekkaJohoのリスト
+     * @return 保存したデータ数
+     */
+    @Transaction
+    public int save要介護認定一次判定結果情報List(List<IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報List) {
+        int saveNum = 0;
+        for (IchijiHanteiKekkaJoho joho : 要介護認定一次判定結果情報List) {
+            if (save要介護認定一次判定結果情報(joho)) {
+                saveNum++;
+            }
+        }
+        return saveNum;
     }
 }

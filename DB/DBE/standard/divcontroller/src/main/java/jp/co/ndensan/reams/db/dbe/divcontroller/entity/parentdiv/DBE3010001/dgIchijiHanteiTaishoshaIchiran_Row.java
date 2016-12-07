@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Dec 02 18:31:23 JST 2016 
+ * Mon Dec 05 13:58:53 JST 2016 
  */
 
 
@@ -33,6 +33,8 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
     private RString shinseiKbnShin;
     private TextBoxFlexibleDate ichijiHanteibi;
     private RString ichijiHanteiKekka;
+    private RString ichijiHanteiKekkaCode;
+    private RString ichijiHanteiKekkaNinchishoKasan;
     private RString ichijiHanteiKekkaNinchishoKasanCode;
     private RString keikokuCode;
     private TextBoxFlexibleDate chosaJissibi;
@@ -70,6 +72,8 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.shinseiKbnShin = RString.EMPTY;
         this.ichijiHanteibi = new TextBoxFlexibleDate();
         this.ichijiHanteiKekka = RString.EMPTY;
+        this.ichijiHanteiKekkaCode = RString.EMPTY;
+        this.ichijiHanteiKekkaNinchishoKasan = RString.EMPTY;
         this.ichijiHanteiKekkaNinchishoKasanCode = RString.EMPTY;
         this.keikokuCode = RString.EMPTY;
         this.chosaJissibi = new TextBoxFlexibleDate();
@@ -104,6 +108,8 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shinseiKbnShin", shinseiKbnShin);
         this.setOriginalData("ichijiHanteibi", ichijiHanteibi);
         this.setOriginalData("ichijiHanteiKekka", ichijiHanteiKekka);
+        this.setOriginalData("ichijiHanteiKekkaCode", ichijiHanteiKekkaCode);
+        this.setOriginalData("ichijiHanteiKekkaNinchishoKasan", ichijiHanteiKekkaNinchishoKasan);
         this.setOriginalData("ichijiHanteiKekkaNinchishoKasanCode", ichijiHanteiKekkaNinchishoKasanCode);
         this.setOriginalData("keikokuCode", keikokuCode);
         this.setOriginalData("chosaJissibi", chosaJissibi);
@@ -130,7 +136,7 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
     }
 
-    public dgIchijiHanteiTaishoshaIchiran_Row(ButtonDialog btnSyokai, ButtonDialog btnSentaku, RString columnState, RString hokensha, RString hihokenNo, RString hihokenshaName, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString ichijiHanteiKekkaNinchishoKasanCode, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString shinseishoKanriNo, RString kijunJikan, RString kijunJikanShokuji, RString kijunJikanHaisetsu, RString kijunJikanIdo, RString kijunJikanSeiketsuHoji, RString kijunJikanKansetsuCare, RString kijunJikanBPSDKanren, RString kijunJikanKinoKunren, RString kijunJikanIryoKanren, RString kijunJikanNinchishoKasan, RString chukanHyokaKomoku1gun, RString chukanHyokaKomoku2gun, RString chukanHyokaKomoku3gun, RString chukanHyokaKomoku4gun, RString chukanHyokaKomoku5gun, RString jotaiAnteiseiCode, RString ninchishoJiritsudoIIijoNoGaizensei, RString suiteiKyufuKubunCode, RString koroshoIfShikibetsuCode) {
+    public dgIchijiHanteiTaishoshaIchiran_Row(ButtonDialog btnSyokai, ButtonDialog btnSentaku, RString columnState, RString hokensha, RString hihokenNo, RString hihokenshaName, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString ichijiHanteiKekkaCode, RString ichijiHanteiKekkaNinchishoKasan, RString ichijiHanteiKekkaNinchishoKasanCode, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString shinseishoKanriNo, RString kijunJikan, RString kijunJikanShokuji, RString kijunJikanHaisetsu, RString kijunJikanIdo, RString kijunJikanSeiketsuHoji, RString kijunJikanKansetsuCare, RString kijunJikanBPSDKanren, RString kijunJikanKinoKunren, RString kijunJikanIryoKanren, RString kijunJikanNinchishoKasan, RString chukanHyokaKomoku1gun, RString chukanHyokaKomoku2gun, RString chukanHyokaKomoku3gun, RString chukanHyokaKomoku4gun, RString chukanHyokaKomoku5gun, RString jotaiAnteiseiCode, RString ninchishoJiritsudoIIijoNoGaizensei, RString suiteiKyufuKubunCode, RString koroshoIfShikibetsuCode) {
         super();
         this.setOriginalData("btnSyokai", btnSyokai);
         this.setOriginalData("btnSentaku", btnSentaku);
@@ -142,6 +148,8 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shinseiKbnShin", shinseiKbnShin);
         this.setOriginalData("ichijiHanteibi", ichijiHanteibi);
         this.setOriginalData("ichijiHanteiKekka", ichijiHanteiKekka);
+        this.setOriginalData("ichijiHanteiKekkaCode", ichijiHanteiKekkaCode);
+        this.setOriginalData("ichijiHanteiKekkaNinchishoKasan", ichijiHanteiKekkaNinchishoKasan);
         this.setOriginalData("ichijiHanteiKekkaNinchishoKasanCode", ichijiHanteiKekkaNinchishoKasanCode);
         this.setOriginalData("keikokuCode", keikokuCode);
         this.setOriginalData("chosaJissibi", chosaJissibi);
@@ -176,6 +184,8 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.shinseiKbnShin = shinseiKbnShin;
         this.ichijiHanteibi = ichijiHanteibi;
         this.ichijiHanteiKekka = ichijiHanteiKekka;
+        this.ichijiHanteiKekkaCode = ichijiHanteiKekkaCode;
+        this.ichijiHanteiKekkaNinchishoKasan = ichijiHanteiKekkaNinchishoKasan;
         this.ichijiHanteiKekkaNinchishoKasanCode = ichijiHanteiKekkaNinchishoKasanCode;
         this.keikokuCode = keikokuCode;
         this.chosaJissibi = chosaJissibi;
@@ -240,6 +250,14 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
 
     public RString getIchijiHanteiKekka() {
         return ichijiHanteiKekka;
+    }
+
+    public RString getIchijiHanteiKekkaCode() {
+        return ichijiHanteiKekkaCode;
+    }
+
+    public RString getIchijiHanteiKekkaNinchishoKasan() {
+        return ichijiHanteiKekkaNinchishoKasan;
     }
 
     public RString getIchijiHanteiKekkaNinchishoKasanCode() {
@@ -386,6 +404,16 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
     public void setIchijiHanteiKekka(RString ichijiHanteiKekka) {
         this.setOriginalData("ichijiHanteiKekka", ichijiHanteiKekka);
         this.ichijiHanteiKekka = ichijiHanteiKekka;
+    }
+
+    public void setIchijiHanteiKekkaCode(RString ichijiHanteiKekkaCode) {
+        this.setOriginalData("ichijiHanteiKekkaCode", ichijiHanteiKekkaCode);
+        this.ichijiHanteiKekkaCode = ichijiHanteiKekkaCode;
+    }
+
+    public void setIchijiHanteiKekkaNinchishoKasan(RString ichijiHanteiKekkaNinchishoKasan) {
+        this.setOriginalData("ichijiHanteiKekkaNinchishoKasan", ichijiHanteiKekkaNinchishoKasan);
+        this.ichijiHanteiKekkaNinchishoKasan = ichijiHanteiKekkaNinchishoKasan;
     }
 
     public void setIchijiHanteiKekkaNinchishoKasanCode(RString ichijiHanteiKekkaNinchishoKasanCode) {

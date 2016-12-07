@@ -10,7 +10,7 @@ DB-jp/
 
 # extension
 *.map
-*.dll
+#*.dll
 *.class
 *.swp
 *.orig

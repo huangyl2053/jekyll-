@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBEUC30101",
+ "uiContainerName": "DBEUC30102",
  "displayWizard": false,
  "subGyomuCode": "DBE",
  "steps": [
   {
    "id": 1,
-   "name": "要介護認定一次判定",
+   "name": "一次判定IF出力",
    "transitionList": [
     {
      "id": "1",

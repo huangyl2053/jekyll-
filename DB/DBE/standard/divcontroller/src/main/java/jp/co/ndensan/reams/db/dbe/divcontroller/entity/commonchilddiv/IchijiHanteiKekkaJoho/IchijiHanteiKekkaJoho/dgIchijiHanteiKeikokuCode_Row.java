@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 01 20:07:26 JST 2016 
+ * Wed Dec 07 11:44:57 JST 2016 
  */
 
 

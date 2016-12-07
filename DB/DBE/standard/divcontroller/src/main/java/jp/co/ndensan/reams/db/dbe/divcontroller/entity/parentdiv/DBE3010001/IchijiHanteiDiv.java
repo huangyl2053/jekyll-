@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -23,6 +25,8 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("IchijiHanteiKensakuJoken")
     private IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken;
     @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
@@ -46,6 +50,15 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
+    }
+
     /*
      * getIchijiHanteiKensakuJoken
      * @return IchijiHanteiKensakuJoken
