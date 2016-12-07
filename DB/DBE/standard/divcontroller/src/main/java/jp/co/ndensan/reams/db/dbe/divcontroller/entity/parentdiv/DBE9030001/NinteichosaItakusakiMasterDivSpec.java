@@ -7,9 +7,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9030001.NinteichosaItakusakiMasterHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  *
@@ -109,7 +117,38 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                     }
                     return true;
                 }
-            };
+            },
+    事業者番号存在チェック {
+        /**
+                 * 事業者番号存在チェックです。
+                 *
+                 * @param div ServiceCodeCommonChildDivDiv
+                 * @return true:事業者番号存在、false:事業者番号存在しない
+                 */
+                @Override
+                public boolean apply(NinteichosaItakusakiMasterDiv div) {
+                    SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
+                    JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(div.getChosaitakusakiJohoInput().getTxtjigyoshano().getText()),
+                            FlexibleDate.EMPTY,
+                            FlexibleDate.EMPTY,
+                            new AtenaMeisho(RString.EMPTY),
+                            new YubinNo(RString.EMPTY),
+                            RString.EMPTY,
+                            RString.EMPTY,
+                            RString.EMPTY,
+                            RString.EMPTY,
+                            RString.EMPTY,
+                            FlexibleDate.getNowDate(),
+                            RString.EMPTY,
+                            1));
+                    if (Jigyosha.totalCount() > 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+        
+    };
 
     private static NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
         return new NinteichosaItakusakiMasterHandler(div);

@@ -70,6 +70,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
@@ -88,6 +89,7 @@ public class NinteichosaItakusakiMaster {
     private static final RString 修正状態コード = new RString("修正");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
+    private static final RString 事業者番号存在チェックREPLACE = new RString("事業者番号");
     private static final RString その他状態コード = new RString("その他");
     private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
     private static final RString 構成市町村マスタ市町村コード重複種別
@@ -204,6 +206,28 @@ public class NinteichosaItakusakiMaster {
         getHandler(div).onSelectByDlbClick_dgChosainIchiran();
         return ResponseData.of(div).setState(DBE9030001StateName.詳細);
     }
+    
+    /**
+     * ＣＳＶを出力前のCheck
+     *
+     * @param div 画面情報
+     * @return ResponseData<NinteichosaItakusakiMasterDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onBeforeDownlaod_btnOutputCsv(NinteichosaItakusakiMasterDiv div) {
+        List<dgChosainIchiran_Row> list = div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource();
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (list.isEmpty()) {
+            pairs.add(new ValidationMessageControlPair(new DBE9030001ErrorMessage(UrErrorMessages.該当データなし)));
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        for (dgChosainIchiran_Row row: list) {
+            if (!RString.EMPTY.equals(row.getJotai())) {
+                pairs.add(new ValidationMessageControlPair(new DBE9030001ErrorMessage(DbzErrorMessages.編集後更新指示)));
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }            
+        }
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * ＣＳＶを出力する
@@ -215,14 +239,15 @@ public class NinteichosaItakusakiMaster {
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             int rowIndex = 0;
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
                 csvWriter.writeLine(converterDataSourceFromToCsvEntity(div, row, rowIndex));
                 rowIndex++;
             }
-        }
+            csvWriter.close();
+        } 
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
@@ -424,6 +449,8 @@ public class NinteichosaItakusakiMaster {
         DBE9030001ErrorMessage 編集なしで更新不可 = new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可);
         DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックREPLACE.toString());
+        DBE9030001ErrorMessage 入力値が不正_事業者番号存在チェック
+                = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 事業者番号存在チェックREPLACE.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
                 UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue() == null
                 ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
@@ -433,6 +460,11 @@ public class NinteichosaItakusakiMaster {
                 .thenAdd(入力値が不正_追加メッセージあり).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先コードの重複チェック)
                 .thenAdd(既に登録済).messages());
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.事業者番号存在チェック)
+                .thenAdd(入力値が不正_事業者番号存在チェック).messages());
+        
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                入力値が不正_事業者番号存在チェック, div.getChosaitakusakiJohoInput().getTxtjigyoshano()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 編集なしで更新不可, div.getChosaitakusakiJohoInput()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -651,7 +683,7 @@ public class NinteichosaItakusakiMaster {
     }
 
     private static class DBE9030001ErrorMessage implements IMessageGettable, IValidationMessage {
-
+        
         private final Message message;
 
         public DBE9030001ErrorMessage(IMessageGettable message, String... replacements) {
