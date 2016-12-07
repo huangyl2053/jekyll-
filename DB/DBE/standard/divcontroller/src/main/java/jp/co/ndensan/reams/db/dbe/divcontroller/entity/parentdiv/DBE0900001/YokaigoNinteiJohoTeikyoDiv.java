@@ -548,6 +548,16 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     }
 
     @JsonIgnore
+    public RadioButton getRadNinteiChosaMasking() {
+        return this.getHakkoChohyo().getRadNinteiChosaMasking();
+    }
+
+    @JsonIgnore
+    public void setRadNinteiChosaMasking(RadioButton radNinteiChosaMasking) {
+        this.getHakkoChohyo().setRadNinteiChosaMasking(radNinteiChosaMasking);
+    }
+
+    @JsonIgnore
     public Space getSpSpace1() {
         return this.getHakkoChohyo().getSpSpace1();
     }
@@ -655,6 +665,16 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     @JsonIgnore
     public void setChkIchijiHanteiKekka(CheckBoxList chkIchijiHanteiKekka) {
         this.getHakkoChohyo().setChkIchijiHanteiKekka(chkIchijiHanteiKekka);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadIchijiHanteiMasking() {
+        return this.getHakkoChohyo().getRadIchijiHanteiMasking();
+    }
+
+    @JsonIgnore
+    public void setRadIchijiHanteiMasking(RadioButton radIchijiHanteiMasking) {
+        this.getHakkoChohyo().setRadIchijiHanteiMasking(radIchijiHanteiMasking);
     }
 
     // </editor-fold>

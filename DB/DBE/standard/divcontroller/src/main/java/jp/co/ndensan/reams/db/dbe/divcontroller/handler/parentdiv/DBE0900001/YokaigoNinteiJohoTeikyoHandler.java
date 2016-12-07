@@ -42,7 +42,6 @@ public class YokaigoNinteiJohoTeikyoHandler {
     private final RString キー_0 = new RString("key0");
     private final RString キー_1 = new RString("key1");
     private final RString キー_2 = new RString("key2");
-    private final RString キー_3 = new RString("key3");
     private final RString 月 = new RString("ヶ月");
     private final RString 線 = new RString("～");
     private final RString 検索へ戻る = new RString("btnToSearch");
@@ -202,6 +201,19 @@ public class YokaigoNinteiJohoTeikyoHandler {
     }
 
     /**
+     * 認定調査票チェックボックス変更します。
+     *
+     */
+    public void chkNinteiChosahyo() {
+        if (div.getHakkoChohyo().getChkNinteiChosahyo().getSelectedItems().isEmpty()) {
+            div.getHakkoChohyo().getRadNinteiChosaMasking().setDisabled(true);
+            div.getHakkoChohyo().getRadNinteiChosaMasking().setSelectedKey(キー_2);
+        } else {
+            div.getHakkoChohyo().getRadNinteiChosaMasking().setDisabled(false);
+        }
+    }
+
+    /**
      * 特記事項チェックボックス変更します。
      *
      */
@@ -237,6 +249,19 @@ public class YokaigoNinteiJohoTeikyoHandler {
             div.getHakkoChohyo().getRadSohotaShiryoMasking().setSelectedKey(キー_0);
         } else {
             div.getHakkoChohyo().getRadSohotaShiryoMasking().setDisabled(false);
+        }
+    }
+
+    /**
+     * 一次判定結果チェックボックス変更します。
+     *
+     */
+    public void chkIchijiHanteikekka() {
+        if (div.getHakkoChohyo().getChkIchijiHanteiKekka().getSelectedItems().isEmpty()) {
+            div.getHakkoChohyo().getRadIchijiHanteiMasking().setDisabled(true);
+            div.getHakkoChohyo().getRadIchijiHanteiMasking().setSelectedKey(キー_2);
+        } else {
+            div.getHakkoChohyo().getRadIchijiHanteiMasking().setDisabled(false);
         }
     }
 

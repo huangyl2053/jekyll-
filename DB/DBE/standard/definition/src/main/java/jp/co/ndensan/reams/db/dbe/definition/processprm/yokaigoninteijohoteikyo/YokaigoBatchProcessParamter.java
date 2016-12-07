@@ -25,9 +25,11 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
     private final RString chkShujiiIkensho;
     private final RString chkSonotaShiryo;
     private final RString chkIchijiHanteiKekka;
+    private final RString radNinteiChosaMasking;
     private final RString radTokkiJikoMasking;
     private final RString radShujii;
     private final RString radSohotaShiryoMasking;
+    private final RString radIchijiHanteiMasking;
 
     /**
      * コンストラクタです。
@@ -38,22 +40,27 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
      * @param chkShujiiIkensho 主治医意見書チェックフラグ
      * @param chkSonotaShiryo その他資料チェックフラグ
      * @param chkIchijiHanteiKekka 一次判定結果チェックフラグ
+     * @param radNinteiChosaMasking マスキング(認定調査票)フラグ
      * @param radTokkiJikoMasking マスキング(特記事項)フラグ
      * @param radShujii マスキング(主治医意見書)フラグ
      * @param radSohotaShiryoMasking マスキング(その他資料)フラグ
+     * @param radIchijiHanteiMasking マスキング(一次判定結果)フラグ
      */
     public YokaigoBatchProcessParamter(RString 申請書管理番号, RString chkNinteiChosahyo,
             RString chkTokkiJiko, RString chkShujiiIkensho, RString chkSonotaShiryo,
-            RString chkIchijiHanteiKekka, RString radTokkiJikoMasking, RString radShujii, RString radSohotaShiryoMasking) {
+            RString chkIchijiHanteiKekka, RString radNinteiChosaMasking, RString radTokkiJikoMasking, RString radShujii,
+            RString radSohotaShiryoMasking, RString radIchijiHanteiMasking) {
         this.申請書管理番号 = 申請書管理番号;
         this.chkNinteiChosahyo = chkNinteiChosahyo;
         this.chkTokkiJiko = chkTokkiJiko;
         this.chkShujiiIkensho = chkShujiiIkensho;
         this.chkSonotaShiryo = chkSonotaShiryo;
         this.chkIchijiHanteiKekka = chkIchijiHanteiKekka;
+        this.radNinteiChosaMasking = radNinteiChosaMasking;
         this.radTokkiJikoMasking = radTokkiJikoMasking;
         this.radShujii = radShujii;
         this.radSohotaShiryoMasking = radSohotaShiryoMasking;
+        this.radIchijiHanteiMasking = radIchijiHanteiMasking;
     }
 
     /**

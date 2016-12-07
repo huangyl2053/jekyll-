@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import jp.co.ndensan.reams.db.dbe.business.core.chkichijihanteikekka.ChkIchijiHanteiKekkaBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.StackedBarChart;
 import jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyo.IchijihanteikekkahyoReport;
@@ -1612,6 +1613,8 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         RDateTime 日期 = RDate.getNowDateTime();
         RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
                 .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
+        Properties prop = System.getProperties();
+        prop.put("java.awt.headless", "true");
         new StackedBarChart(getNumber(entity.get要介護認定等基準時間_食事()),
                 getNumber(entity.get要介護認定等基準時間_排泄()), getNumber(entity.get要介護認定等基準時間_移動()),
                 getNumber(entity.get要介護認定等基準時間_清潔保持()), getNumber(entity.get要介護認定等基準時間_間接ケア()),
