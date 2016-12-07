@@ -76,6 +76,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.TextKind;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -180,6 +181,10 @@ public class NinteiShinseiToroku {
             }
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
+        
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
+        div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
         return ResponseData.of(div).respond();
     }
 
