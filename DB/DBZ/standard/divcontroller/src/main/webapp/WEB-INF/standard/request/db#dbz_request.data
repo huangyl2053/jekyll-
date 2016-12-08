@@ -422,6 +422,7 @@ dbz/db/dbz/TestHihokenshaShikakuHakkoPanel/onClick_btnLoad
 dbz/db/dbz/TestHihokenshaShikakuHakkoPanel/onLoad
 dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_BtnKensaku
 dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_CheckBox
+dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_btnClear
 dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_btnSelect
 dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onLoad
 dbz/db/dbz/YokaigodoGuide/onClick_btnModoru
