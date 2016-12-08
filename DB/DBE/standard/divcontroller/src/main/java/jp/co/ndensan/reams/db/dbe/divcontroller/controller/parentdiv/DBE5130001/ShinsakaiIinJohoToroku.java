@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -595,6 +596,8 @@ public class ShinsakaiIinJohoToroku {
         div.getBtnShinsakaiIinAdd().setDisabled(false);
         div.getBtnToroku().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
+        div.getBtnKozaJohoToroku().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         ViewStateHolder.put(ViewStateKeys.モード, RString.EMPTY);
     }
 

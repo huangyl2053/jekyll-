@@ -16,7 +16,7 @@ public enum ShujiiOutputPage1 {
     /**
      * コード:2 名称: 略称:定義なし
      */
-    なし("2", "");
+    なし("2", "なし");
 
     private final RString code;
     private final RString fullName;

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 介護認定審査会委員情報のハンドラークラスです。
@@ -66,6 +67,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         renrakusakiKinyuKikanDiv_init();
         div.getBtnToroku().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
+        div.getBtnKozaJohoToroku().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
     }
 
     /**
@@ -225,6 +228,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtFaxNo().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.getBtnDelete().setDisabled(false);
+        div.getBtnKozaJohoToroku().setDisabled(false);
     }
 
     /**
@@ -252,6 +256,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getBtnDelete().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.getBtnShinsakaiIinAdd().setDisabled(true);
+        div.getBtnKozaJohoToroku().setDisabled(false);
     }
 
     /**
