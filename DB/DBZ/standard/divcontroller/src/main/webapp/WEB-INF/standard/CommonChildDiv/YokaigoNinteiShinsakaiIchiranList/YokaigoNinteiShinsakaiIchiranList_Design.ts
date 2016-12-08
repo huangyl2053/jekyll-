@@ -12,6 +12,10 @@ module DBZ {
                 return "onClick_BtnKensaku";
             }
 
+            public static onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
+
             public static onClick_btnSelect(): string {
                 return "onClick_btnSelect";
             }
@@ -83,6 +87,10 @@ module DBZ {
 
             public btnKensaku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKensaku"));
+            }
+
+            public btnClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClear"));
             }
 
             public dgShinsakaiIchiran(): UZA.DataGrid {

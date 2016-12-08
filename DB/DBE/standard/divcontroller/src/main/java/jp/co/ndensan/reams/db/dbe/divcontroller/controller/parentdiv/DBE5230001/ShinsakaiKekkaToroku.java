@@ -116,6 +116,10 @@ public class ShinsakaiKekkaToroku {
         }
         div.getTxtStutas().setValue(選択審査会一覧.get審査会一覧Grid().get(0).get介護認定審査会進捗状況());
 
+        if (RString.isNullOrEmpty(div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().getValue())) {
+            div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(true);
+        }
+
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();
         List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList = manager.get審査会委員一覧検索(開催番号).records();
         getHandler(div).onLoad(headList, iChiRanList);
@@ -211,6 +215,10 @@ public class ShinsakaiKekkaToroku {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).対象者一覧件数チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        ValidationMessageControlPairs validPairs2 = getValidationHandler(div).認定期間チェック(validationMessages);
+        if (validPairs2.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs2).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
@@ -651,6 +659,28 @@ public class ShinsakaiKekkaToroku {
             }
         }
 
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「認定期間From」の選択変更。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onChange_NinteiKikanFrom(ShinsakaiKekkaTorokuDiv div) {
+        getHandler(div).setNinteiKikanOnFocus();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「認定期間To」の選択変更。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onChange_NinteiKikanTo(ShinsakaiKekkaTorokuDiv div) {
+        getHandler(div).setNinteiKikanOnFocus();
         return ResponseData.of(div).respond();
     }
 

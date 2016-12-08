@@ -21,7 +21,7 @@ public class KaigoKekkaTaishouIchiranReport extends Report<KekkatsuchiTaishoshaI
     private KaigoKekkaTaishouIchiranHeadItem headItem;
     private static final int GOKEIHANTEI = 50;
     private static final int ゼロ = 0;
-    private Integer index = 1;
+    private static Integer index = 1;
 
     /**
      * インスタンスを生成します。

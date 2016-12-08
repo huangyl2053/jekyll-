@@ -41,13 +41,13 @@ public class ShinsakaiKekkaTorokuHandler {
 
     private final ShinsakaiKekkaTorokuDiv div;
     private static final RString キー_0 = new RString("key0");
-    private static final RString 介護１ = new RString("介護１");
     private static final Decimal 月_6 = new Decimal("6");
     private static final Decimal 月_12 = new Decimal("12");
     private static final Decimal 月_24 = new Decimal("24");
     private static final RString 更新申請 = new RString("更新申請");
     private static final RString 新規申請 = new RString("新規申請");
-    private static final RString 区分変更申請有効期間 = new RString("区分変更申請有効期間");
+    private static final RString 区分変更申請 = new RString("区分変更申請");
+    private static final RString 認定期間月数 = new RString("01");
     private static final RString キー_12 = new RString("12");
     private static final RString キー_13 = new RString("13");
     private static final RString キー_21 = new RString("21");
@@ -308,6 +308,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getDdlJotaiZo().setRequired(false);
             div.getDdlJotaiZo().setDisabled(true);
         }
+        div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(false);
         div.getBtnNinteiChosaJokyoShokai().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.setHdnHasChanged(getSelectItem());
@@ -595,30 +596,85 @@ public class ShinsakaiKekkaTorokuHandler {
         TextBoxDate ninteiKikanFrom = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom();
         TextBoxDate ninteiKikanTo = div.getKobetsuHyojiArea().getTxtNinteiKikanTo();
         TextBox shinseiKubun = div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji();
+        FlexibleDate shinseiDay = div.getKobetsuHyojiArea().getTxtShinseiDay().getValue();
+        TextBoxFlexibleDate 前回有効期間終了日 = div.getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiYukoKikanShuryoDay();
+        TextBoxFlexibleDate 二次判定日 = div.getDgTaishoshaIchiran().getDataSource().get(0).getNijiHanteiDate();
+        RString 前回二次判定 = div.getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiNijiHantei();
+        RString 二次判定DDLの選択肢 = div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey();
         if (ninteiKikanFrom.getValue() == null && ninteiKikanTo.getValue() == null) {
             if (shinseiKubun != null) {
-                setShinseiKubun(shinseiKubun);
+                setShinseiKubun(shinseiKubun, shinseiDay);
             } else {
                 div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
             }
-            FlexibleDate shinseiDay = div.getKobetsuHyojiArea().getTxtShinseiDay().getValue();
-            if (shinseiDay != null && !shinseiDay.isEmpty()) {
+            if (shinseiDay != null && !shinseiDay.isEmpty() && shinseiKubun != null) {
                 div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setValue(new RDate(shinseiDay.toString()));
-                int ninteiKikanMonth = Integer.valueOf(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
-                div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(ninteiKikanMonth).toString()));
+                if (shinseiDay.toString().substring(6, 8).equals(認定期間月数)) {
+                    if (更新申請.equals(shinseiKubun.getValue())) {
+                        div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(前回有効期間終了日.getValue().plusDay(1).toString()));
+                    } else if (新規申請.equals(shinseiKubun.getValue())) {
+                        div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.toString()));
+                    } else if (区分変更申請.equals(shinseiKubun.getValue())) {
+                        if (!RString.isNullOrEmpty(前回二次判定) && 前回二次判定.compareTo(二次判定DDLの選択肢) > 1) {
+                            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.toString()));
+                        } else if (!RString.isNullOrEmpty(前回二次判定) && !二次判定日.getValue().isEmpty() && 前回二次判定.compareTo(二次判定DDLの選択肢) < 1) {
+                            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(二次判定日.getValue().toString()));
+                        } else if (!RString.isNullOrEmpty(前回二次判定) && 前回二次判定.compareTo(二次判定DDLの選択肢) == 0) {
+                            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(前回有効期間終了日.getValue().plusDay(1).toString()));
+                        } else {
+                            int ninteiKikanMonth = Integer.valueOf(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
+                            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(ninteiKikanMonth).toString()));
+                        }
+                    }
+                } else {
+                    int ninteiKikanMonth = Integer.valueOf(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
+                    div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(ninteiKikanMonth).toString()));
+                }
             }
         }
     }
 
-    private void setShinseiKubun(TextBox shinseiKubun) {
-        if (更新申請.equals(shinseiKubun.getValue())) {
-            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.更新申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        } else if (新規申請.equals(shinseiKubun.getValue())) {
-            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        } else if (区分変更申請有効期間.equals(shinseiKubun.getValue())) {
-            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.区分変更申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+    private void setShinseiKubun(TextBox shinseiKubun, FlexibleDate shinseiDay) {
+        if (!RString.isNullOrEmpty(new RString(shinseiDay.toString())) && shinseiDay.toString().substring(6, 8).equals(認定期間月数)) {
+            if (更新申請.equals(shinseiKubun.getValue())) {
+                RString updateShinsei = DbBusinessConfig.get(ConfigNameDBE.更新申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+                Integer updateShinseiSum = null;
+                if (!RString.isNullOrEmpty(updateShinsei)) {
+                    updateShinseiSum = Integer.parseInt(updateShinsei.toString()) + 1;
+                }
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString(updateShinseiSum));
+            } else if (新規申請.equals(shinseiKubun.getValue())) {
+                RString updateShinsei = DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+                Integer updateShinseiSum = null;
+                if (!RString.isNullOrEmpty(updateShinsei)) {
+                    updateShinseiSum = Integer.parseInt(updateShinsei.toString()) + 1;
+                }
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString(updateShinseiSum));
+            } else if (区分変更申請.equals(shinseiKubun.getValue())) {
+                RString updateShinsei = DbBusinessConfig.get(ConfigNameDBE.区分変更申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+                Integer updateShinseiSum = null;
+                if (!RString.isNullOrEmpty(updateShinsei)) {
+                    updateShinseiSum = Integer.parseInt(updateShinsei.toString()) + 1;
+                }
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString(updateShinseiSum));
+            } else {
+                RString updateShinsei = DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+                Integer updateShinseiSum = null;
+                if (!RString.isNullOrEmpty(updateShinsei)) {
+                    updateShinseiSum = Integer.parseInt(updateShinsei.toString()) + 1;
+                }
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString(updateShinseiSum));
+            }
         } else {
-            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            if (更新申請.equals(shinseiKubun.getValue())) {
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.更新申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            } else if (新規申請.equals(shinseiKubun.getValue())) {
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            } else if (区分変更申請.equals(shinseiKubun.getValue())) {
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.区分変更申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            } else {
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(DbBusinessConfig.get(ConfigNameDBE.新規申請有効期間, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            }
         }
     }
 
@@ -641,18 +697,39 @@ public class ShinsakaiKekkaTorokuHandler {
     }
 
     /**
+     * 「認定期間FROM」と「認定期間TO」の値変更の場合、審査会意見定型文を設定します。
+     *
+     */
+    public void setNinteiKikanOnFocus() {
+        RDate 認定期間From = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue();
+        RDate 認定期間To = div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue();
+        int 有効月数 = 0;
+        if (認定期間From != null && 認定期間To != null) {
+            if (認定期間From.toString().substring(6, 8).equals(認定期間月数)) {
+                有効月数 = 認定期間To.getBetweenMonths(認定期間From) + 1;
+            } else {
+                有効月数 = 認定期間To.getBetweenMonths(認定期間From);
+            }
+            if (有効月数 >= 0 && 有効月数 <= 25) {
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString(有効月数));
+            }
+        }
+    }
+
+    /**
      * 「有効月数」の値変更の場合、審査会意見定型文を設定します。
      *
      */
     public void setShinsakaiIken() {
+        setNinteiKikan();
         if (div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().isNullOrEmpty()) {
             div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(RString.EMPTY);
         } else {
             Decimal month = new Decimal(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
-            if ((月_6.compareTo(month) == 0 || 月_6.compareTo(month) == -1) && (月_12.compareTo(month) == 0 || 月_12.compareTo(month) == 1)) {
+            if (月_6.compareTo(month) == 0 || 月_12.compareTo(month) == 0) {
                 div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(
                         DbBusinessConfig.get(ConfigNameDBE.審査会意見12, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-            } else if ((月_12.compareTo(month) == 0 || 月_12.compareTo(month) == -1) && (月_24.compareTo(month) == 0 || 月_24.compareTo(month) == 1)) {
+            } else if (月_12.compareTo(month) == 0 || 月_24.compareTo(month) == 0) {
                 div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(
                         DbBusinessConfig.get(ConfigNameDBE.審査会意見24, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
             } else {

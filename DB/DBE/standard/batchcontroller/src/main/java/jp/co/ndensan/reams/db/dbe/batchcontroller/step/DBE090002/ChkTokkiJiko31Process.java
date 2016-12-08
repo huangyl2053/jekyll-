@@ -316,7 +316,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
         ninteiEntity.set概況調査特記事項イメージ(共有ファイルを引き出す_C0007(イメージID));
         if (全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            for (int i = 0; i < 最大ページ; i++) {
+            for (int i = 1; i <= 最大ページ; i++) {
                 set特記事項全イメージパス(entity, i, 全イメージリスト);
             }
         } else if (短冊.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
@@ -341,11 +341,11 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     }
 
     private void set特記事項全イメージパス(List<NinteichosaRelateEntity> entity, int i, List<TokkiTextEntity> 全イメージリスト) {
-        if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(i).get特記事項区分())) {
+        if (!entity.isEmpty() && TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(0).get特記事項区分())) {
             TokkiTextEntity tokki = new TokkiTextEntity();
-            RString イメージパス = 共有ファイルを引き出す(entity.get(i).getイメージID(), i);
+            RString イメージパス = 共有ファイルを引き出す(entity.get(0).getイメージID(), i);
             if (!RString.isNullOrEmpty(イメージパス)) {
-                tokki.set特記事項イメージ(共有ファイルを引き出す(entity.get(i).getイメージID(), i));
+                tokki.set特記事項イメージ(共有ファイルを引き出す(entity.get(0).getイメージID(), i));
                 全イメージリスト.add(tokki);
             }
         }

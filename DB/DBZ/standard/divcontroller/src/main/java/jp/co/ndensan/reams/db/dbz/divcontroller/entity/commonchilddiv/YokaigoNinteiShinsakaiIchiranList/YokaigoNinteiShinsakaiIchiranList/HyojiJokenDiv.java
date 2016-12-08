@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class HyojiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,6 +39,8 @@ public class HyojiJokenDiv extends Panel {
     private RadioButton radDammyShinsakai;
     @JsonProperty("btnKensaku")
     private Button btnKensaku;
+    @JsonProperty("btnClear")
+    private Button btnClear;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -206,6 +208,24 @@ public class HyojiJokenDiv extends Panel {
     @JsonProperty("btnKensaku")
     public void setBtnKensaku(Button btnKensaku) {
         this.btnKensaku = btnKensaku;
+    }
+
+    /*
+     * getbtnClear
+     * @return btnClear
+     */
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
+    }
+
+    /*
+     * setbtnClear
+     * @param btnClear btnClear
+     */
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear = btnClear;
     }
 
     // </editor-fold>

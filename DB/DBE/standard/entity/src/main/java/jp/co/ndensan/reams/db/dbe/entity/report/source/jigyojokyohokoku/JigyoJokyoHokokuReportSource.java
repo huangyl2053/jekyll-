@@ -34,6 +34,8 @@ public class JigyoJokyoHokokuReportSource implements IReportSource {
     public RString listJigyojokyoHokoku_8;
     @ReportItem(name = "listJigyojokyoHokoku_9", length = 5, order = 9)
     public RString listJigyojokyoHokoku_9;
+    @ReportItem(name = "listJigyojokyoHokoku_10", length = 5, order = 9)
+    public RString listJigyojokyoHokoku_10;
     @ReportItem(name = "title", length = 20, order = 10)
     public RString title;
     @ReportItem(name = "jigyoTaishoYM", length = 20, order = 11)

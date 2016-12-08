@@ -8,6 +8,10 @@ var DBZ;
                 return "onClick_BtnKensaku";
             };
 
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
             Events.onClick_btnSelect = function () {
                 return "onClick_btnSelect";
             };
@@ -77,6 +81,10 @@ var DBZ;
 
             Controls.prototype.btnKensaku = function () {
                 return new UZA.Button(this.convFiledName("btnKensaku"));
+            };
+
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
             };
 
             Controls.prototype.dgShinsakaiIchiran = function () {

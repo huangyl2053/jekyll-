@@ -147,19 +147,21 @@ public class NinteiShinseiToroku {
 
                 div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
                 getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
-
-                set連絡先(管理番号, div, false);
-
-                RirekiJohoResult comResult = manager.get共有子データ(被保険者番号);
-                div.setHdnKonkai(DataPassingConverter.serialize(comResult.get今回履歴情報()));
-                div.setHdnZenkai(DataPassingConverter.serialize(comResult.get前回履歴情報()));
-                div.setHdnDisplayModeKey(new RString("1"));
-                div.setHdnSubGyomuCd(SubGyomuCode.DBE認定支援.value());
-
-                div.setHdnJogaiMode(new RString("入力"));
-                setIconName(div, 管理番号);
-                div.setHdnShinseishoKanriNo(管理番号.value());
             }
+            set連絡先(管理番号, div, false);
+            RirekiJohoResult comResult = manager.get共有子データ(被保険者番号);
+            div.setHdnKonkai(DataPassingConverter.serialize(comResult.get今回履歴情報()));
+            div.setHdnZenkai(DataPassingConverter.serialize(comResult.get前回履歴情報()));
+            div.setHdnDisplayModeKey(new RString("1"));
+            div.setHdnSubGyomuCd(SubGyomuCode.DBE認定支援.value());
+
+            div.setHdnJogaiMode(new RString("入力"));
+            setIconName(div, 管理番号);
+            div.setHdnShinseishoKanriNo(管理番号.value());
+
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
+            div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
             return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
         }
         if (MENUID_DBEMN31003.equals(menuID)) {
@@ -179,9 +181,12 @@ public class NinteiShinseiToroku {
                     throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("宛名情報"));
                 }
             }
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
+            div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
-        
+
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
         div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);

@@ -293,8 +293,8 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlNijiHanteiKekka"));
             }
 
-            public txtNijiHanteiYukoKikan(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtNijiHanteiYukoKikan"));
+            public txtNijiHanteiYukoKikan(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("txtNijiHanteiYukoKikan"));
             }
 
             public txtNinteiYukoKikanFrom(): UZA.TextBoxFlexibleDate {
