@@ -95,6 +95,50 @@ var DBZ;
             Events.onChange_ddlNowPhase = function () {
                 return "onChange_ddlNowPhase";
             };
+
+            Events.onChange_chkShoriJotai = function () {
+                return "onChange_chkShoriJotai";
+            };
+
+            Events.onChange_chkIchijiHantei = function () {
+                return "onChange_chkIchijiHantei";
+            };
+
+            Events.onChange_chkShinseiUketsuke = function () {
+                return "onChange_chkShinseiUketsuke";
+            };
+
+            Events.onChange_chkMasking = function () {
+                return "onChange_chkMasking";
+            };
+
+            Events.onChange_chkChosaIrai = function () {
+                return "onChange_chkChosaIrai";
+            };
+
+            Events.onChange_chkShinsakaiToroku = function () {
+                return "onChange_chkShinsakaiToroku";
+            };
+
+            Events.onChange_chkIkenshoIrai = function () {
+                return "onChange_chkIkenshoIrai";
+            };
+
+            Events.onChange_chkNijiHantei = function () {
+                return "onChange_chkNijiHantei";
+            };
+
+            Events.onChange_chkChosaNyushu = function () {
+                return "onChange_chkChosaNyushu";
+            };
+
+            Events.onChange_chkIkenshoNyushu = function () {
+                return "onChange_chkIkenshoNyushu";
+            };
+
+            Events.onChange_chkGetsureiShori = function () {
+                return "onChange_chkGetsureiShori";
+            };
             return Events;
         })();
         NinteiShinseishaFinder.Events = Events;

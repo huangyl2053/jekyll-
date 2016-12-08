@@ -104,13 +104,12 @@ public class ShinseiKensakuHandler {
             parameter.setUseNijiHanteiNinteiYukoKikan(true);
             useNinteiKekkaJoho = true;
         }
-//TODO syncとマージ時、暫定対応（コメントアウト）
-//        RDate 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
-//        if (認定有効な申請時点 != null) {
-//            parameter.setYokaiYMD(認定有効な申請時点.toDateString());
-//            parameter.setUseYokaiYMD(true);
-//            useNinteiKekkaJoho = true;
-//        }
+        RDate 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
+        if (認定有効な申請時点 != null) {
+            parameter.setYokaiYMD(認定有効な申請時点.toDateString());
+            parameter.setUseYokaiYMD(true);
+            useNinteiKekkaJoho = true;
+        }
         FlexibleDate 認定有効開始日FROM = finderDiv.getTxtNinteiYukoKaishiDateFrom().getValue();
         if (認定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(認定有効開始日FROM)) {
             parameter.setNinteiYukoKaishiYMDFrom(認定有効開始日FROM);
@@ -625,28 +624,7 @@ public class ShinseiKensakuHandler {
     }
 
     private void editNowPhaseForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
-        RString 現在のフェーズ = finderDiv.getDdlNowPhase().getSelectedKey();
-        if (RString.isNullOrEmpty(現在のフェーズ)) {
-            parameter.setNowPhaseBlank(true);
-        } else if (KanryoInfoPhase.申請受付.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseShinseiUketsuke(true);
-        } else if (KanryoInfoPhase.調査依頼.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseChosaIrai(true);
-        } else if (KanryoInfoPhase.意見書依頼.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseIkenshoIrai(true);
-        } else if (KanryoInfoPhase.意見書入手.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseIkenshoNyushu(true);
-        } else if (KanryoInfoPhase.一次判定.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseIchijiHantei(true);
-        } else if (KanryoInfoPhase.マスキング.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseMasking(true);
-        } else if (KanryoInfoPhase.審査会登録.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseShinsakaiToroku(true);
-        } else if (KanryoInfoPhase.二次判定.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseNijiHantei(true);
-        } else if (KanryoInfoPhase.月例処理.getコード().equals(現在のフェーズ)) {
-            parameter.setNowPhaseGetsureiShori(true);
-        }
+        parameter.setNowPhaseBlank(true);
     }
 
     /**

@@ -102,6 +102,50 @@ module DBZ {
                 return "onChange_ddlNowPhase";
             }
 
+            public static onChange_chkShoriJotai(): string {
+                return "onChange_chkShoriJotai";
+            }
+
+            public static onChange_chkIchijiHantei(): string {
+                return "onChange_chkIchijiHantei";
+            }
+
+            public static onChange_chkShinseiUketsuke(): string {
+                return "onChange_chkShinseiUketsuke";
+            }
+
+            public static onChange_chkMasking(): string {
+                return "onChange_chkMasking";
+            }
+
+            public static onChange_chkChosaIrai(): string {
+                return "onChange_chkChosaIrai";
+            }
+
+            public static onChange_chkShinsakaiToroku(): string {
+                return "onChange_chkShinsakaiToroku";
+            }
+
+            public static onChange_chkIkenshoIrai(): string {
+                return "onChange_chkIkenshoIrai";
+            }
+
+            public static onChange_chkNijiHantei(): string {
+                return "onChange_chkNijiHantei";
+            }
+
+            public static onChange_chkChosaNyushu(): string {
+                return "onChange_chkChosaNyushu";
+            }
+
+            public static onChange_chkIkenshoNyushu(): string {
+                return "onChange_chkIkenshoNyushu";
+            }
+
+            public static onChange_chkGetsureiShori(): string {
+                return "onChange_chkGetsureiShori";
+            }
+
         }
 
         export class Controls {
