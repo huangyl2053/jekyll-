@@ -32,6 +32,8 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     private TextBoxDate txtNinteichosaJisshiYMD;
     @JsonProperty("lblJisshiBasho")
     private Label lblJisshiBasho;
+    @JsonProperty("txtChosaJisshiBashoCode")
+    private TextBox txtChosaJisshiBashoCode;
     @JsonProperty("txtChosaJisshiBashoMeisho")
     private TextBox txtChosaJisshiBashoMeisho;
     @JsonProperty("JisshiBashoMeishoPanel")
@@ -109,6 +111,24 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonProperty("lblJisshiBasho")
     public void setLblJisshiBasho(Label lblJisshiBasho) {
         this.lblJisshiBasho = lblJisshiBasho;
+    }
+
+    /*
+     * gettxtChosaJisshiBashoCode
+     * @return txtChosaJisshiBashoCode
+     */
+    @JsonProperty("txtChosaJisshiBashoCode")
+    public TextBox getTxtChosaJisshiBashoCode() {
+        return txtChosaJisshiBashoCode;
+    }
+
+    /*
+     * settxtChosaJisshiBashoCode
+     * @param txtChosaJisshiBashoCode txtChosaJisshiBashoCode
+     */
+    @JsonProperty("txtChosaJisshiBashoCode")
+    public void setTxtChosaJisshiBashoCode(TextBox txtChosaJisshiBashoCode) {
+        this.txtChosaJisshiBashoCode = txtChosaJisshiBashoCode;
     }
 
     /*

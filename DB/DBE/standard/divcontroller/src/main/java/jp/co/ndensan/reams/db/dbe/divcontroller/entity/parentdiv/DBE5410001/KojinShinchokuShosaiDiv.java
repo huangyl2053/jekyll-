@@ -37,12 +37,14 @@ public class KojinShinchokuShosaiDiv extends Panel {
     private TextBoxDate txtNinteiYukoKikanTo;
     @JsonProperty("txtNinteiKikanMonth")
     private TextBoxNum txtNinteiKikanMonth;
-    @JsonProperty("txtKaisaiDay")
-    private TextBoxDate txtKaisaiDay;
+    @JsonProperty("txtNijiHanteiYMD")
+    private TextBoxDate txtNijiHanteiYMD;
     @JsonProperty("txtTokuteiShippei")
     private TextBox txtTokuteiShippei;
     @JsonProperty("txtIchijiHantei")
     private TextBox txtIchijiHantei;
+    @JsonProperty("txtIchijiHanteiYMD")
+    private TextBoxDate txtIchijiHanteiYMD;
     @JsonProperty("txtJohoTeikyoDoi")
     private TextBox txtJohoTeikyoDoi;
     @JsonProperty("txtShoriKubun")
@@ -199,21 +201,21 @@ public class KojinShinchokuShosaiDiv extends Panel {
     }
 
     /*
-     * gettxtKaisaiDay
-     * @return txtKaisaiDay
+     * gettxtNijiHanteiYMD
+     * @return txtNijiHanteiYMD
      */
-    @JsonProperty("txtKaisaiDay")
-    public TextBoxDate getTxtKaisaiDay() {
-        return txtKaisaiDay;
+    @JsonProperty("txtNijiHanteiYMD")
+    public TextBoxDate getTxtNijiHanteiYMD() {
+        return txtNijiHanteiYMD;
     }
 
     /*
-     * settxtKaisaiDay
-     * @param txtKaisaiDay txtKaisaiDay
+     * settxtNijiHanteiYMD
+     * @param txtNijiHanteiYMD txtNijiHanteiYMD
      */
-    @JsonProperty("txtKaisaiDay")
-    public void setTxtKaisaiDay(TextBoxDate txtKaisaiDay) {
-        this.txtKaisaiDay = txtKaisaiDay;
+    @JsonProperty("txtNijiHanteiYMD")
+    public void setTxtNijiHanteiYMD(TextBoxDate txtNijiHanteiYMD) {
+        this.txtNijiHanteiYMD = txtNijiHanteiYMD;
     }
 
     /*
@@ -250,6 +252,24 @@ public class KojinShinchokuShosaiDiv extends Panel {
     @JsonProperty("txtIchijiHantei")
     public void setTxtIchijiHantei(TextBox txtIchijiHantei) {
         this.txtIchijiHantei = txtIchijiHantei;
+    }
+
+    /*
+     * gettxtIchijiHanteiYMD
+     * @return txtIchijiHanteiYMD
+     */
+    @JsonProperty("txtIchijiHanteiYMD")
+    public TextBoxDate getTxtIchijiHanteiYMD() {
+        return txtIchijiHanteiYMD;
+    }
+
+    /*
+     * settxtIchijiHanteiYMD
+     * @param txtIchijiHanteiYMD txtIchijiHanteiYMD
+     */
+    @JsonProperty("txtIchijiHanteiYMD")
+    public void setTxtIchijiHanteiYMD(TextBoxDate txtIchijiHanteiYMD) {
+        this.txtIchijiHanteiYMD = txtIchijiHanteiYMD;
     }
 
     /*

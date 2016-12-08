@@ -4,8 +4,8 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnModoru = function () {
-                return "onClick_btnModoru";
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
             };
             return Events;
         })();
@@ -35,8 +35,8 @@ var DBE;
                 return new UZA.DataGrid(this.convFiledName("dgIkenshoIraiIchiran"));
             };
 
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             };
             return Controls;
         })();

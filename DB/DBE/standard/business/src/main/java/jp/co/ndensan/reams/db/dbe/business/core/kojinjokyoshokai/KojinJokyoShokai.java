@@ -227,6 +227,15 @@ public class KojinJokyoShokai {
     public Code get二次判定要介護状態区分コード() {
         return entity.getNijiHanteiYokaigoJotaiKubunCode() == null ? Code.EMPTY : entity.getNijiHanteiYokaigoJotaiKubunCode();
     }
+    
+    /**
+     * 二次判定年月日を返します。
+     *
+     * @return 二次判定年月日
+     */
+    public FlexibleDate get二次判定年月日() {
+        return entity.getNijiHanteiYMD();
+    }
 
     /**
      * 二次判定結果の名称(要介護度)を返却します。
@@ -337,14 +346,14 @@ public class KojinJokyoShokai {
     public Code get要介護認定一次判定結果コード認知症加算() {
         return entity.getIchijiHanteiKekkaNinchishoKasanCode() == null ? Code.EMPTY : entity.getIchijiHanteiKekkaNinchishoKasanCode();
     }
-
+    
     /**
-     * 審査会開催年月日を返します。
+     * 一次判定年月日を返します。
      *
-     * @return 審査会開催年月日
+     * @return 二次判定年月日
      */
-    public FlexibleDate get審査会開催年月日() {
-        return entity.getShinsakaiKaisaiYMD();
+    public FlexibleDate get一次判定年月日() {
+        return entity.getIchijiHanteiYMD();
     }
 
     /**

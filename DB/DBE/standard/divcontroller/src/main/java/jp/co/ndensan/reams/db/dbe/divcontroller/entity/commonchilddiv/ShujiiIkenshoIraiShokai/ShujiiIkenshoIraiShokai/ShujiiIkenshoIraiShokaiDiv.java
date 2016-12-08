@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @reamsid_L DBE-0200-030 zhangzhiming
  */
 public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoIraiShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +28,8 @@ public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoI
      */
     @JsonProperty("dgIkenshoIraiIchiran")
     private DataGrid<dgIkenshoIraiIchiran_Row> dgIkenshoIraiIchiran;
-    @JsonProperty("btnModoru")
-    private Button btnModoru;
+    @JsonProperty("btnReturn")
+    private Button btnReturn;
     @JsonProperty("hihokenshano")
     private RString hihokenshano;
 
@@ -58,21 +58,21 @@ public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoI
     }
 
     /*
-     * getbtnModoru
-     * @return btnModoru
+     * getbtnReturn
+     * @return btnReturn
      */
-    @JsonProperty("btnModoru")
-    public Button getBtnModoru() {
-        return btnModoru;
+    @JsonProperty("btnReturn")
+    public Button getBtnReturn() {
+        return btnReturn;
     }
 
     /*
-     * setbtnModoru
-     * @param btnModoru btnModoru
+     * setbtnReturn
+     * @param btnReturn btnReturn
      */
-    @JsonProperty("btnModoru")
-    public void setBtnModoru(Button btnModoru) {
-        this.btnModoru = btnModoru;
+    @JsonProperty("btnReturn")
+    public void setBtnReturn(Button btnReturn) {
+        this.btnReturn = btnReturn;
     }
 
     /*

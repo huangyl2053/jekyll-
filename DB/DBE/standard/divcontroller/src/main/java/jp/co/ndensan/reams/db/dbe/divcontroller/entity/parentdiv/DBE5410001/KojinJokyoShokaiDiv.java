@@ -757,13 +757,13 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtKaisaiDay() {
-        return this.getKojinShinchokuShosai().getTxtKaisaiDay();
+    public TextBoxDate getTxtNijiHanteiYMD() {
+        return this.getKojinShinchokuShosai().getTxtNijiHanteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKaisaiDay(TextBoxDate txtKaisaiDay) {
-        this.getKojinShinchokuShosai().setTxtKaisaiDay(txtKaisaiDay);
+    public void  setTxtNijiHanteiYMD(TextBoxDate txtNijiHanteiYMD) {
+        this.getKojinShinchokuShosai().setTxtNijiHanteiYMD(txtNijiHanteiYMD);
     }
 
     @JsonIgnore
@@ -784,6 +784,16 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonIgnore
     public void  setTxtIchijiHantei(TextBox txtIchijiHantei) {
         this.getKojinShinchokuShosai().setTxtIchijiHantei(txtIchijiHantei);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtIchijiHanteiYMD() {
+        return this.getKojinShinchokuShosai().getTxtIchijiHanteiYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtIchijiHanteiYMD(TextBoxDate txtIchijiHanteiYMD) {
+        this.getKojinShinchokuShosai().setTxtIchijiHanteiYMD(txtIchijiHanteiYMD);
     }
 
     @JsonIgnore
