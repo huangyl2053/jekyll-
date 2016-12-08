@@ -4,12 +4,64 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBeforeOpenDialog_btnMahi = function () {
+                return "onBeforeOpenDialog_btnMahi";
+            };
+
             Events.onClick_chkMahiChange = function () {
                 return "onClick_chkMahiChange";
             };
 
+            Events.onBeforeOpenDialog_btnKoshuku = function () {
+                return "onBeforeOpenDialog_btnKoshuku";
+            };
+
             Events.onClick_chkKoshukuChange = function () {
                 return "onClick_chkKoshukuChange";
+            };
+
+            Events.onBeforeOpenDialog_btnNeKaeri = function () {
+                return "onBeforeOpenDialog_btnNeKaeri";
+            };
+
+            Events.onBeforeOpenDialog_btnOkiAgari = function () {
+                return "onBeforeOpenDialog_btnOkiAgari";
+            };
+
+            Events.onBeforeOpenDialog_btnZai = function () {
+                return "onBeforeOpenDialog_btnZai";
+            };
+
+            Events.onBeforeOpenDialog_btnRyoAshi = function () {
+                return "onBeforeOpenDialog_btnRyoAshi";
+            };
+
+            Events.onBeforeOpenDialog_btnBuko = function () {
+                return "onBeforeOpenDialog_btnBuko";
+            };
+
+            Events.onBeforeOpenDialog_btnTachiAgari = function () {
+                return "onBeforeOpenDialog_btnTachiAgari";
+            };
+
+            Events.onBeforeOpenDialog_btnKataAshi = function () {
+                return "onBeforeOpenDialog_btnKataAshi";
+            };
+
+            Events.onBeforeOpenDialog_btnSenshin = function () {
+                return "onBeforeOpenDialog_btnSenshin";
+            };
+
+            Events.onBeforeOpenDialog_btnTumeKiri = function () {
+                return "onBeforeOpenDialog_btnTumeKiri";
+            };
+
+            Events.onBeforeOpenDialog_btnShiryoku = function () {
+                return "onBeforeOpenDialog_btnShiryoku";
+            };
+
+            Events.onBeforeOpenDialog_btnChoryoku = function () {
+                return "onBeforeOpenDialog_btnChoryoku";
             };
 
             Events.onClick_btnConfirm = function () {

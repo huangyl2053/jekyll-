@@ -8,12 +8,64 @@ module DBZ {
 
         export class Events {
 
+            public static onBeforeOpenDialog_btnMahi(): string {
+                return "onBeforeOpenDialog_btnMahi";
+            }
+
             public static onClick_chkMahiChange(): string {
                 return "onClick_chkMahiChange";
             }
 
+            public static onBeforeOpenDialog_btnKoshuku(): string {
+                return "onBeforeOpenDialog_btnKoshuku";
+            }
+
             public static onClick_chkKoshukuChange(): string {
                 return "onClick_chkKoshukuChange";
+            }
+
+            public static onBeforeOpenDialog_btnNeKaeri(): string {
+                return "onBeforeOpenDialog_btnNeKaeri";
+            }
+
+            public static onBeforeOpenDialog_btnOkiAgari(): string {
+                return "onBeforeOpenDialog_btnOkiAgari";
+            }
+
+            public static onBeforeOpenDialog_btnZai(): string {
+                return "onBeforeOpenDialog_btnZai";
+            }
+
+            public static onBeforeOpenDialog_btnRyoAshi(): string {
+                return "onBeforeOpenDialog_btnRyoAshi";
+            }
+
+            public static onBeforeOpenDialog_btnBuko(): string {
+                return "onBeforeOpenDialog_btnBuko";
+            }
+
+            public static onBeforeOpenDialog_btnTachiAgari(): string {
+                return "onBeforeOpenDialog_btnTachiAgari";
+            }
+
+            public static onBeforeOpenDialog_btnKataAshi(): string {
+                return "onBeforeOpenDialog_btnKataAshi";
+            }
+
+            public static onBeforeOpenDialog_btnSenshin(): string {
+                return "onBeforeOpenDialog_btnSenshin";
+            }
+
+            public static onBeforeOpenDialog_btnTumeKiri(): string {
+                return "onBeforeOpenDialog_btnTumeKiri";
+            }
+
+            public static onBeforeOpenDialog_btnShiryoku(): string {
+                return "onBeforeOpenDialog_btnShiryoku";
+            }
+
+            public static onBeforeOpenDialog_btnChoryoku(): string {
+                return "onBeforeOpenDialog_btnChoryoku";
             }
 
             public static onClick_btnConfirm(): string {

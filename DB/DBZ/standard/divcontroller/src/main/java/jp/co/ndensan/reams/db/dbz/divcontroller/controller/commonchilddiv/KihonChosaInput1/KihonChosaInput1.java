@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.KihonChosaInput1Div;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput1.KihonChosaInput1.KihonChosaInputHandler1;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -123,5 +124,148 @@ public class KihonChosaInput1 {
         } else {
             ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("0"));
         }
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnMahi(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.麻痺等の有無.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnKoshuku(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.拘縮の有無.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnNeKaeri(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.寝返り.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnOkiAgari(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.起き上がり.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnZai(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.座位保持.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnRyoAshi(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.両足での立位保持.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnBuko(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.歩行.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnTachiAgari(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.立ち上がり.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnKataAshi(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.片足での立位.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnSenshin(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.洗身.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnTumeKiri(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.つめ切り.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnShiryoku(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.視力.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput1Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnChoryoku(KihonChosaInput1Div div) {
+        div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.聴力.get認定調査票_特記情報_認定調査特記事項番号());
+        return ResponseData.of(div).respond();
     }
 }

@@ -59,6 +59,8 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     private RString hiddenKihonChosaInput5Flag;
     @JsonProperty("hiddenKihonChosaInput7Flag")
     private RString hiddenKihonChosaInput7Flag;
+    @JsonProperty("ichijiHanteiKekkaJoho")
+    private RString ichijiHanteiKekkaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -319,6 +321,24 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     /*
+     * getichijiHanteiKekkaJoho
+     * @return ichijiHanteiKekkaJoho
+     */
+    @JsonProperty("ichijiHanteiKekkaJoho")
+    public RString getIchijiHanteiKekkaJoho() {
+        return ichijiHanteiKekkaJoho;
+    }
+
+    /*
+     * setichijiHanteiKekkaJoho
+     * @param ichijiHanteiKekkaJoho ichijiHanteiKekkaJoho
+     */
+    @JsonProperty("ichijiHanteiKekkaJoho")
+    public void setIchijiHanteiKekkaJoho(RString ichijiHanteiKekkaJoho) {
+        this.ichijiHanteiKekkaJoho = ichijiHanteiKekkaJoho;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -332,13 +352,13 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore

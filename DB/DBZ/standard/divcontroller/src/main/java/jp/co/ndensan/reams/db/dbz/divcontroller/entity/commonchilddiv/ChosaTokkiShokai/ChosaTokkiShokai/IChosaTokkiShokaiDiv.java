@@ -19,6 +19,7 @@ public interface IChosaTokkiShokaiDiv extends ICommonChildDivBaseProperties, IDi
      * @param 申請書管理番号 親画面から受け取った申請書管理番号
      * @param 認定調査依頼履歴番号 親画面から受け取った認定調査依頼履歴番号
      * @param 認定調査特記事項番号List 親画面から受け取った認定調査特記事項番号
+     * @return 初期化に成功したらtrue、失敗したらfalseを返す。
      */
-    public void onLoad(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, ArrayList<RString> 認定調査特記事項番号List);
+    public boolean onLoad(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, ArrayList<RString> 認定調査特記事項番号List);
 }
