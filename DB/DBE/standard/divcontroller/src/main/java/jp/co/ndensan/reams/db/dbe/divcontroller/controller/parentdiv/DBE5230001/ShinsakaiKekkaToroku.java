@@ -654,6 +654,28 @@ public class ShinsakaiKekkaToroku {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「認定期間From」の選択変更。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onChange_NinteiKikanFrom(ShinsakaiKekkaTorokuDiv div) {
+        getHandler(div).setNinteiKikanOnFocus();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「認定期間To」の選択変更。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onChange_NinteiKikanTo(ShinsakaiKekkaTorokuDiv div) {
+        getHandler(div).setNinteiKikanOnFocus();
+        return ResponseData.of(div).respond();
+    }
+
     private boolean 前排他キーのセット(RString 申請書管理番号) {
         LockingKey 排他キー = new LockingKey(申請書管理番号);
         return RealInitialLocker.tryGetLock(排他キー);
