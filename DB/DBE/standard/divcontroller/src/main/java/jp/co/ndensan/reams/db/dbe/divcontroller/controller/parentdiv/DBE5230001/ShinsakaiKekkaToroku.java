@@ -212,6 +212,10 @@ public class ShinsakaiKekkaToroku {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        ValidationMessageControlPairs validPairs2 = getValidationHandler(div).認定期間チェック(validationMessages);
+        if (validPairs2.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs2).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());

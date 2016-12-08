@@ -703,13 +703,15 @@ public class ShinsakaiKekkaTorokuHandler {
         RDate 認定期間From = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue();
         RDate 認定期間To = div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue();
         int 有効月数 = 0;
-        if (認定期間From.toString().substring(6, 8).equals(認定期間月数)) {
-            有効月数 = 認定期間To.getBetweenMonths(認定期間From) + 1;
-        } else {
-            有効月数 = 認定期間To.getBetweenMonths(認定期間From);
-        }
-        if (有効月数 >= 0 && 有効月数 <= 25) {
-            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString(有効月数));
+        if (認定期間From != null && 認定期間To != null) {
+            if (認定期間From.toString().substring(6, 8).equals(認定期間月数)) {
+                有効月数 = 認定期間To.getBetweenMonths(認定期間From) + 1;
+            } else {
+                有効月数 = 認定期間To.getBetweenMonths(認定期間From);
+            }
+            if (有効月数 >= 0 && 有効月数 <= 25) {
+                div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedValue(new RString(有効月数));
+            }
         }
     }
 
