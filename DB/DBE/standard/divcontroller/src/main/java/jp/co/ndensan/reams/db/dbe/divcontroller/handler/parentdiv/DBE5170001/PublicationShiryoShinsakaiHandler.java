@@ -47,6 +47,7 @@ public class PublicationShiryoShinsakaiHandler {
     private static final int INT_4 = 4;
     private static final int INT_0 = 0;
     private static final int INT_2 = 2;
+    private static final int INT_10 = 10;
 
     /**
      * コンストラクタです。
@@ -334,7 +335,7 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員用審査会開催通知書フラグ,
             RString 委員用予備判定記入表フラグ) {
         return new DBE517000_ShinsakaiShiryoParameter(
-                div.getTxtShinsakaiKaisaiNo().getValue(),
+                div.getTxtShinsakaiKaisaiNo().getValue().padZeroToLeft(INT_10),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
                 div.getTxtGogitaiNo() == null || RString.isNullOrEmpty(div.getTxtGogitaiNo().getValue())
