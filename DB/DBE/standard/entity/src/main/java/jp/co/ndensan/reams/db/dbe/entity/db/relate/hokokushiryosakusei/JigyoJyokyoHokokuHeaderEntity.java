@@ -50,6 +50,8 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     private LasdecCode shichosonCode;
     @TempTableColumnOrder(9)
     private RString shichosonMeisho;
+    @TempTableColumnOrder(10)
+    private boolean allshichoson;
 
     /**
      * 二次判定年月のgetメソッドです。
@@ -81,7 +83,8 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     /**
      * 二次判定要介護状態区分コードのsetメソッドです。
      *
-     * @param nijiHanteiYokaigoJotaiKubunCode the nijiHanteiYokaigoJotaiKubunCode to set
+     * @param nijiHanteiYokaigoJotaiKubunCode the
+     * nijiHanteiYokaigoJotaiKubunCode to set
      */
     public void setNijiHanteiYokaigoJotaiKubunCode(Code nijiHanteiYokaigoJotaiKubunCode) {
         this.nijiHanteiYokaigoJotaiKubunCode = nijiHanteiYokaigoJotaiKubunCode;
@@ -124,6 +127,24 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     }
 
     /**
+     * 年齢のgetメソッドです。
+     *
+     * @return the allshichoson
+     */
+    public boolean getAllShichoson() {
+        return allshichoson;
+    }
+
+    /**
+     * 年齢のgetメソッドです。
+     *
+     * @param allshichoson the allshichoson to set
+     */
+    public void setAllShichoson(boolean allshichoson) {
+        this.allshichoson = allshichoson;
+    }
+
+    /**
      * 証記載保険者番号のgetメソッドです。
      *
      * @return the shoKisaiHokenshaNo
@@ -153,7 +174,8 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     /**
      * 認定申請区分(申請時)コードのsetメソッドです。
      *
-     * @param ninteiShinseiShinseijiKubunCode the ninteiShinseiShinseijiKubunCode to set
+     * @param ninteiShinseiShinseijiKubunCode the
+     * ninteiShinseiShinseijiKubunCode to set
      */
     public void setNinteiShinseiShinseijiKubunCode(Code ninteiShinseiShinseijiKubunCode) {
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
@@ -229,6 +251,7 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
         this.setNinteiShinseiHoreiKubunCode(entity.getNinteiShinseiHoreiKubunCode());
         this.setShichosonCode(entity.getShichosonCode());
         this.setShichosonMeisho(entity.getShichosonMeisho());
+        this.setAllShichoson(entity.getAllShichoson());
     }
 
     /**

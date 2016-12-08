@@ -330,6 +330,12 @@
         </if>
         ,C."shichosonCode"
         ,C."shichosonMeisho"
+        <if test="isEmptyHokensyaNo">
+        ,TRUE AS "allshichoson"
+        </if>
+        <if test="!isEmptyHokensyaNo">
+        ,FALSE AS "allshichoson"
+        </if>
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
@@ -422,6 +428,7 @@
         ,A."nijiHanteiYokaigoJotaiKubunCode"
         ,A."hihokenshaKubunCode"
         ,COUNT(0) AS countHokensha
+        ,A."allshichoson"
         FROM "JigyoJyokyoHokokuTemp" A
         GROUP BY
         A."nijiHanteiYM"
@@ -430,6 +437,7 @@
         ,A."shoKisaiHokenshaNo"
         ,A."nijiHanteiYokaigoJotaiKubunCode"
         ,A."hihokenshaKubunCode"
+        ,A."allshichoson"
         ORDER BY
         A."nijiHanteiYM"
         ,A."shichosonCode"
