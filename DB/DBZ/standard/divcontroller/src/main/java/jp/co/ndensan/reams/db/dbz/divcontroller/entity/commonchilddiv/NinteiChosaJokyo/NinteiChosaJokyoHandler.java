@@ -163,7 +163,7 @@ public class NinteiChosaJokyoHandler {
         if (!div.getDdlNijiHanteiKekka().getDataSource().isEmpty() && div.getDdlNijiHanteiKekka().getDataSource() != null) {
             div.getDdlNijiHanteiKekka().setSelectedIndex(0);
         }
-        div.getTxtNijiHanteiYukoKikan().clearValue();
+//        div.getTxtNijiHanteiYukoKikan().clearValue();
         div.getTxtNinteiYukoKikanFrom().clearValue();
         div.getTxtNinteiYukoKikanTo().clearValue();
         div.getTxtEnkiTsuchiHakkoDay().clearValue();
@@ -231,7 +231,7 @@ public class NinteiChosaJokyoHandler {
         rsb.append(div.getTxtShinsakaiKaisaiYoteiDate().getValue() != null ? div.getTxtShinsakaiKaisaiYoteiDate().getValue() : RString.EMPTY);
         rsb.append(div.getTxtNijiHanteiDate().getValue() != null ? div.getTxtNijiHanteiDate().getValue() : RString.EMPTY);
         rsb.append(div.getDdlNijiHanteiKekka().getSelectedKey());
-        rsb.append(div.getTxtNijiHanteiYukoKikan().getValue() != null ? div.getTxtNijiHanteiYukoKikan().getValue() : RString.EMPTY);
+        rsb.append(div.getTxtNijiHanteiYukoKikan().getSelectedValue() != null ? div.getTxtNijiHanteiYukoKikan().getSelectedValue() : RString.EMPTY);
         rsb.append(div.getTxtNinteiYukoKikanFrom().getValue() != null ? div.getTxtNinteiYukoKikanFrom().getValue() : RString.EMPTY);
         rsb.append(div.getTxtNinteiYukoKikanTo().getValue() != null ? div.getTxtNinteiYukoKikanTo().getValue() : RString.EMPTY);
         rsb.append(div.getTxtEnkiTsuchiHakkoDay().getValue() != null ? div.getTxtEnkiTsuchiHakkoDay().getValue() : RString.EMPTY);
@@ -279,10 +279,10 @@ public class NinteiChosaJokyoHandler {
         konkaiDataPass.set認定審査会予定年月日(div.getTxtShinsakaiKaisaiYoteiDate().getValue());
         konkaiDataPass.set二次判定年月日(div.getTxtNijiHanteiDate().getValue());
         konkaiDataPass.set二次判定要介護状態区分コード(new Code(div.getDdlNijiHanteiKekka().getSelectedKey()));
-        if (div.getTxtNijiHanteiYukoKikan().getValue().isEmpty()) {
+        if (div.getTxtNijiHanteiYukoKikan().getSelectedValue().isEmpty()) {
             konkaiDataPass.set二次判定認定有効期間(0);
         } else {
-            konkaiDataPass.set二次判定認定有効期間(Integer.parseInt(div.getTxtNijiHanteiYukoKikan().getValue().toString()));
+            konkaiDataPass.set二次判定認定有効期間(Integer.parseInt(div.getTxtNijiHanteiYukoKikan().getSelectedValue().toString()));
         }
         konkaiDataPass.set二次判定認定有効開始年月日(div.getTxtNinteiYukoKikanFrom().getValue());
         konkaiDataPass.set二次判定認定有効終了年月日(div.getTxtNinteiYukoKikanTo().getValue());
@@ -387,7 +387,11 @@ public class NinteiChosaJokyoHandler {
                 && !konkaiDataPass.get二次判定要介護状態区分コード().isEmpty()) {
             div.getDdlNijiHanteiKekka().setSelectedKey(konkaiDataPass.get二次判定要介護状態区分コード().value());
         }
-        div.getTxtNijiHanteiYukoKikan().setValue(new RString(konkaiDataPass.get二次判定認定有効期間()));
+        if(konkaiDataPass.get二次判定認定有効期間()!=0){
+         div.getTxtNijiHanteiYukoKikan().setSelectedValue(new RString(konkaiDataPass.get二次判定認定有効期間()));
+        }else{
+        div.getTxtNijiHanteiYukoKikan().setSelectedValue(RString.EMPTY);
+        }    
         div.getTxtNinteiYukoKikanFrom().setValue(konkaiDataPass.get二次判定認定有効開始年月日());
         div.getTxtNinteiYukoKikanTo().setValue(konkaiDataPass.get二次判定認定有効終了年月日());
         div.getTxtEnkiTsuchiHakkoDay().setValue(konkaiDataPass.get延期通知発行年月日());

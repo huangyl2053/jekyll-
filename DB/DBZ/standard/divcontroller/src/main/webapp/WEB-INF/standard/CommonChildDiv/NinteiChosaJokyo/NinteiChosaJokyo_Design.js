@@ -288,7 +288,7 @@ var DBZ;
             };
 
             Controls.prototype.txtNijiHanteiYukoKikan = function () {
-                return new UZA.TextBox(this.convFiledName("txtNijiHanteiYukoKikan"));
+                return new UZA.DropDownList(this.convFiledName("txtNijiHanteiYukoKikan"));
             };
 
             Controls.prototype.txtNinteiYukoKikanFrom = function () {

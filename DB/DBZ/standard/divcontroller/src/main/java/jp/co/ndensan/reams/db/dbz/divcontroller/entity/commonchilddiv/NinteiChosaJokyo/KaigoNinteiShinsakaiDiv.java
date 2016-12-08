@@ -30,7 +30,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
     @JsonProperty("ddlNijiHanteiKekka")
     private DropDownList ddlNijiHanteiKekka;
     @JsonProperty("txtNijiHanteiYukoKikan")
-    private TextBox txtNijiHanteiYukoKikan;
+    private DropDownList txtNijiHanteiYukoKikan;
     @JsonProperty("txtNinteiYukoKikanFrom")
     private TextBoxFlexibleDate txtNinteiYukoKikanFrom;
     @JsonProperty("txtNinteiYukoKikanTo")
@@ -119,7 +119,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @return txtNijiHanteiYukoKikan
      */
     @JsonProperty("txtNijiHanteiYukoKikan")
-    public TextBox getTxtNijiHanteiYukoKikan() {
+    public DropDownList getTxtNijiHanteiYukoKikan() {
         return txtNijiHanteiYukoKikan;
     }
 
@@ -128,7 +128,7 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
      * @param txtNijiHanteiYukoKikan txtNijiHanteiYukoKikan
      */
     @JsonProperty("txtNijiHanteiYukoKikan")
-    public void setTxtNijiHanteiYukoKikan(TextBox txtNijiHanteiYukoKikan) {
+    public void setTxtNijiHanteiYukoKikan(DropDownList txtNijiHanteiYukoKikan) {
         this.txtNijiHanteiYukoKikan = txtNijiHanteiYukoKikan;
     }
 

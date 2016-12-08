@@ -834,12 +834,12 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public TextBox getTxtNijiHanteiYukoKikan() {
+    public DropDownList getTxtNijiHanteiYukoKikan() {
         return this.getKaigoNinteiShinsakai().getTxtNijiHanteiYukoKikan();
     }
 
     @JsonIgnore
-    public void setTxtNijiHanteiYukoKikan(TextBox txtNijiHanteiYukoKikan) {
+    public void  setTxtNijiHanteiYukoKikan(DropDownList txtNijiHanteiYukoKikan) {
         this.getKaigoNinteiShinsakai().setTxtNijiHanteiYukoKikan(txtNijiHanteiYukoKikan);
     }
 
