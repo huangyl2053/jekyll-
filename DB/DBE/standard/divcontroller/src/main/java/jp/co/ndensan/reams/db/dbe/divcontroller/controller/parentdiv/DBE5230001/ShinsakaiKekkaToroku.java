@@ -212,6 +212,10 @@ public class ShinsakaiKekkaToroku {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        ValidationMessageControlPairs validPairs2 = getValidationHandler(div).認定期間チェック(validationMessages);
+        if (validPairs2.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs2).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -651,6 +655,28 @@ public class ShinsakaiKekkaToroku {
             }
         }
 
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「認定期間From」の選択変更。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onChange_NinteiKikanFrom(ShinsakaiKekkaTorokuDiv div) {
+        getHandler(div).setNinteiKikanOnFocus();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「認定期間To」の選択変更。
+     *
+     * @param div 介護認定審査会審査結果登録Div
+     * @return responseData
+     */
+    public ResponseData onChange_NinteiKikanTo(ShinsakaiKekkaTorokuDiv div) {
+        getHandler(div).setNinteiKikanOnFocus();
         return ResponseData.of(div).respond();
     }
 

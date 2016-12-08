@@ -47,13 +47,13 @@ public class NinteiChosaJokyoHandler {
     public void setLoad() {
         NinteiChosaJokyoDataPass konkaiDataPass = DataPassingConverter.deserialize(div.getHdnSerializedBusiness_Konkai(),
                 NinteiChosaJokyoDataPass.class);
-        RString displayModeKey = div.getHdnDisplayModeKey();
-        if (new RString("1").equals(displayModeKey)) {
-            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.shokai);
-        }
-        if (new RString("2").equals(displayModeKey)) {
-            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.input);
-        }
+//        RString displayModeKey = div.getHdnDisplayModeKey();
+//        if (new RString("1").equals(displayModeKey)) {
+//            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.shokai);
+//        }
+//        if (new RString("2").equals(displayModeKey)) {
+//            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.input);
+//        }
         List<KeyValueDataSource> keyValueList = new ArrayList<>();
         for (ChosaItakuKubunCode chosaItaku : ChosaItakuKubunCode.values()) {
             keyValueList.add(new KeyValueDataSource(chosaItaku.getコード(), chosaItaku.get名称()));
@@ -90,10 +90,10 @@ public class NinteiChosaJokyoHandler {
                         break;
                     default:
                 }
-                div.getDdlYokaigodo().setDataSource(yokaigodoList);
-                div.getDdlNinchishoKasangoYokaigodo().setDataSource(yokaigodoList);
-                div.getDdlNijiHanteiKekka().setDataSource(yokaigodoList);
             }
+            div.getDdlYokaigodo().setDataSource(yokaigodoList);
+            div.getDdlNinchishoKasangoYokaigodo().setDataSource(yokaigodoList);
+            div.getDdlNijiHanteiKekka().setDataSource(yokaigodoList);
             set画面項目(konkaiDataPass);
             div.setHdnInput(get画面項目());
         }

@@ -126,6 +126,24 @@ public class ShinsakaiKekkaTorokuValidationHandler {
         return validPairs;
     }
 
+    /**
+     * 認定期間チェック
+     *
+     * @param validPairs ValidationMessageControlPairs
+     * @return ValidationMessageControlPairs ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 認定期間チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(
+                    UrErrorMessages.項目に対する制約, "認定期間・開始日", "（基準日)")));
+        }
+        if (div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(
+                    UrErrorMessages.項目に対する制約, "認定期間・終了日", "（月末日)")));
+        }
+        return validPairs;
+    }
+
     private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;

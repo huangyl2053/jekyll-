@@ -28,6 +28,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -48,6 +53,10 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private JimuShinsakaiWariateJohoBusiness 主治医意見書;
+    private static final RString ファイルID_E0001 = new RString("E0001.png");
+    private static final RString ファイルID_E0002 = new RString("E0002.png");
+    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
 
     @BatchWriter
     private BatchReportWriter<Shujiiikensho1A4ReportSource> batchWriteA4;
@@ -75,6 +84,13 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
         主治医意見書 = new JimuShinsakaiWariateJohoBusiness(entity);
+        if (entity.isJimukyoku()) {
+            主治医意見書.setイメージファイル(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK));
+            主治医意見書.setイメージファイル_BAK(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK));
+        } else {
+            主治医意見書.setイメージファイル(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001));
+            主治医意見書.setイメージファイル_BAK(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002));
+        }
         Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(主治医意見書);
         reportA4.writeBy(reportSourceWriterA4);
     }
@@ -136,5 +152,25 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
         条件.append(new RString("】"));
         条件.append(値);
         return 条件.toRString();
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, sharedFileName);
+        }
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA4.getImageFolderPath()));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+        return sharedFileName;
     }
 }
