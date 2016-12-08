@@ -34,6 +34,7 @@ public class JigyoJokyoHokoku {
     private RString 第1号被保険者_要介護3;
     private RString 第1号被保険者_要介護4;
     private RString 第1号被保険者_要介護5;
+    private RString 第1号被保険者_合計;
     private RString 歳以上75歳未満タイトル;
     private RString 歳以上75歳未満_非該当;
     private RString 歳以上75歳未満_支援1;
@@ -43,6 +44,7 @@ public class JigyoJokyoHokoku {
     private RString 歳以上75歳未満_要介護3;
     private RString 歳以上75歳未満_要介護4;
     private RString 歳以上75歳未満_要介護5;
+    private RString 歳以上75歳未満_合計;
     private RString 歳75以上タイトル;
     private RString 歳75以上_非該当;
     private RString 歳75以上_支援1;
@@ -52,6 +54,7 @@ public class JigyoJokyoHokoku {
     private RString 歳75以上_要介護3;
     private RString 歳75以上_要介護4;
     private RString 歳75以上_要介護5;
+    private RString 歳75以上_合計;
     private RString 第2号被保険者タイトル;
     private RString 第2号被保険者_非該当;
     private RString 第2号被保険者_支援1;
@@ -61,6 +64,7 @@ public class JigyoJokyoHokoku {
     private RString 第2号被保険者_要介護3;
     private RString 第2号被保険者_要介護4;
     private RString 第2号被保険者_要介護5;
+    private RString 第2号被保険者_合計;
     private RString 総数タイトル;
     private RString 総数_非該当;
     private RString 総数_支援1;
@@ -70,4 +74,5 @@ public class JigyoJokyoHokoku {
     private RString 総数_要介護3;
     private RString 総数_要介護4;
     private RString 総数_要介護5;
+    private RString 総数_合計;
 }

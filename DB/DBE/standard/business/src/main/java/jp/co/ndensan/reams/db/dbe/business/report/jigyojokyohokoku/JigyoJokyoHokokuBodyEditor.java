@@ -41,6 +41,7 @@ public class JigyoJokyoHokokuBodyEditor implements IJigyoJokyoHokokuBodyEditor {
         source.listJigyojokyoHokoku_7 = item.getListJigyojokyoHokoku7();
         source.listJigyojokyoHokoku_8 = item.getListJigyojokyoHokoku8();
         source.listJigyojokyoHokoku_9 = item.getListJigyojokyoHokoku9();
+        source.listJigyojokyoHokoku_10 = item.getListJigyojokyoHokoku10();
         return source;
     }
 }

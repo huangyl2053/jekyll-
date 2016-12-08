@@ -26,6 +26,7 @@ public class JigyoJokyoHokokuDataChange {
     private final RString listJigyojokyoHokoku7;
     private final RString listJigyojokyoHokoku8;
     private final RString listJigyojokyoHokoku9;
+    private final RString listJigyojokyoHokoku10;
 
     /**
      * コンストラクタです。
@@ -39,6 +40,7 @@ public class JigyoJokyoHokokuDataChange {
      * @param listJigyojokyoHokoku7 帳票一覧7行目
      * @param listJigyojokyoHokoku8 帳票一覧8行目
      * @param listJigyojokyoHokoku9 帳票一覧9行目
+     * @param listJigyojokyoHokoku10 帳票一覧10行目
      */
     public JigyoJokyoHokokuDataChange(RString listJigyojokyoHokoku1,
             RString listJigyojokyoHokoku2,
@@ -48,7 +50,8 @@ public class JigyoJokyoHokokuDataChange {
             RString listJigyojokyoHokoku6,
             RString listJigyojokyoHokoku7,
             RString listJigyojokyoHokoku8,
-            RString listJigyojokyoHokoku9) {
+            RString listJigyojokyoHokoku9,
+            RString listJigyojokyoHokoku10) {
         this.listJigyojokyoHokoku1 = listJigyojokyoHokoku1;
         this.listJigyojokyoHokoku2 = listJigyojokyoHokoku2;
         this.listJigyojokyoHokoku3 = listJigyojokyoHokoku3;
@@ -58,6 +61,7 @@ public class JigyoJokyoHokokuDataChange {
         this.listJigyojokyoHokoku7 = listJigyojokyoHokoku7;
         this.listJigyojokyoHokoku8 = listJigyojokyoHokoku8;
         this.listJigyojokyoHokoku9 = listJigyojokyoHokoku9;
+        this.listJigyojokyoHokoku10 = listJigyojokyoHokoku10;
 
     }
 
