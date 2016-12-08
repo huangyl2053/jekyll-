@@ -308,6 +308,7 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getDdlJotaiZo().setRequired(false);
             div.getDdlJotaiZo().setDisabled(true);
         }
+        div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(false);
         div.getBtnNinteiChosaJokyoShokai().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.setHdnHasChanged(getSelectItem());
