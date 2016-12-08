@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 介護認定審査会開催結果登録するクラスです。
@@ -116,11 +115,9 @@ public class ShinsakaiKaisaiKekkaHandler {
             row.getChikokuUmu().setDataSource(setIsChikokuUmu());
             row.getChikokuUmu().setSelectedKey(new RString(String.valueOf(business.is委員遅刻有無())));
             row.getShussekiTime().setValue(strToTime(business.get委員出席時間()));
-            row.getShussekiTime().setDisabled(Boolean.TRUE);
             row.getSotaiUmu().setDataSource(setIssotaiUmu());
             row.getSotaiUmu().setSelectedKey(new RString(String.valueOf(business.is委員早退有無())));
             row.getTaisekiTime().setValue(strToTime(business.get委員退席時間()));
-            row.getTaisekiTime().setDisabled(Boolean.TRUE);
             dataGridList.add(row);
         }
         div.getDgShinsakaiIinIchiran().setDataSource(dataGridList);

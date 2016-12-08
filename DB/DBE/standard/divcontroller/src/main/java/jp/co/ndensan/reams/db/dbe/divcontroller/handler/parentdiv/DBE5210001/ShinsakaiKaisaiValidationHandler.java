@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajo
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsChikokuUmu;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
@@ -66,11 +69,23 @@ public class ShinsakaiKaisaiValidationHandler {
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         if (!rowList.isEmpty()) {
             for (dgShinsakaiIinIchiran_Row row : rowList) {
+                if (row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称())) {
+                    continue;
+                }
+                if (row.getChikokuUmu().getSelectedValue().equals(IsChikokuUmu.遅刻.get名称()) && row.getShussekiTime().getValue().equals(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())) {
+                    validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "出席時間")));
+                }
+                if (!row.getChikokuUmu().getSelectedValue().equals(IsChikokuUmu.遅刻.get名称()) && !row.getShussekiTime().getValue().equals(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())) {
+                    validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "出席時間")));
+                }
                 if (row.getShussekiTime().getValue().isBefore(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())
                         || div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().isBefore(row.getShussekiTime().getValue())) {
                     validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "出席時間")));
-                    row.getShussekiTime().setDisabled(Boolean.FALSE);
                 }
+                if (row.getShussekiTime().getValue().isAfter(row.getTaisekiTime().getValue())) {
+                    validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "出席時間")));
+                }
+
             }
         }
     }
@@ -85,10 +100,21 @@ public class ShinsakaiKaisaiValidationHandler {
         List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
         if (!rowList.isEmpty()) {
             for (dgShinsakaiIinIchiran_Row row : rowList) {
+                if (row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称())) {
+                    continue;
+                }
+                if (row.getSotaiUmu().getSelectedValue().equals(IssotaiUmu.早退.get名称()) && div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().equals(row.getTaisekiTime().getValue())) {
+                    validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "退席時間")));
+                }
+                if (!row.getSotaiUmu().getSelectedValue().equals(IssotaiUmu.早退.get名称()) && !div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().equals(row.getTaisekiTime().getValue())) {
+                    validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "退席時間")));
+                }
                 if (row.getTaisekiTime().getValue().isBefore(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())
                         || div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().isBefore(row.getTaisekiTime().getValue())) {
                     validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "退席時間")));
-                    row.getTaisekiTime().setDisabled(Boolean.FALSE);
+                }
+                if (row.getShussekiTime().getValue().isAfter(row.getTaisekiTime().getValue())) {
+                    validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "退席時間")));
                 }
             }
         }
