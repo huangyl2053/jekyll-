@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitak
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv.ShoriType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -98,4 +99,29 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      * @param chosainRenrakuJiko 調査員への連絡事項
      */
     void setChosainRenrakuJiko(RString chosainRenrakuJiko);
+    
+    /*
+     * getBtnChosaItakusakiGuide
+     * @return ButtonDialog
+     */
+    ButtonDialog getBtnChosaItakusakiGuide();
+
+    /*
+     * setBtnChosaItakusakiGuide
+     * @param ButtonDialog btnChosaItakusakiGuide
+     */
+    void setBtnChosaItakusakiGuide(ButtonDialog btnChosaItakusakiGuide);
+    
+    /*
+     * getBtnChosainGuide
+     * @return ButtonDialog
+     */
+    public ButtonDialog getBtnChosainGuide();
+
+    /*
+     * setBtnChosainGuide
+     * @param ButtonDialog btnChosainGuide
+     */
+    public void setBtnChosainGuide(ButtonDialog btnChosainGuide);
+
 }

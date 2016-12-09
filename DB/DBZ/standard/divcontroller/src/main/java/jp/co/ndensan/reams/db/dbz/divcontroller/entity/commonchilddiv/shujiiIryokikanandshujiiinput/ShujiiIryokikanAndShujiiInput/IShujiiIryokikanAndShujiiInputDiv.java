@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryo
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -162,5 +163,29 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      * @return txtShujiiName TextBox
      */
     public TextBox getTxtShujiiName();
+
+    /*
+     * getBtnIryokikanGuide
+     * @return ButtonDialog
+     */
+    ButtonDialog getBtnIryokikanGuide();
+
+    /*
+     * setBtnIryokikanGuide
+     * @param ButtonDialog btnIryokikanGuide
+     */
+    void setBtnIryokikanGuide(ButtonDialog btnIryokikanGuide);
+    
+    /*
+     * getBtnShujiiGuide
+     * @return ButtonDialog
+     */
+    public ButtonDialog getBtnShujiiGuide();
+
+    /*
+     * setBtnShujiiGuide
+     * @param ButtonDialog btnShujiiGuide
+     */
+    public void setBtnShujiiGuide(ButtonDialog btnShujiiGuide);
 
 }

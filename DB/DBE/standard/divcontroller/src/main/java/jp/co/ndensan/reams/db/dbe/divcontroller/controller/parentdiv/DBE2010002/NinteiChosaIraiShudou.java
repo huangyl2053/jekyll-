@@ -111,6 +111,10 @@ public class NinteiChosaIraiShudou {
                 ViewStateHolder.put(ViewStateKeys.モード, 修正モード);
             }
         }
+        
+        div.getCcdItakusakiAndChosainInput().getBtnChosaItakusakiGuide().setDisabled(true);
+        div.getCcdItakusakiAndChosainInput().getBtnChosainGuide().setDisabled(true);
+        
         return ResponseData.of(div).respond();
     }
 
