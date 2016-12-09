@@ -86,9 +86,22 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
             onClick_btnKensaku(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
-        div.getBtnTsuika().setDisabled(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        if (is変更有無(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
+            div.getBtnTsuika().setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -339,5 +352,15 @@ public class NinteiShinsakaiKaisaibashoToroku {
 
     private NinteiShinsakaiKaisaibashoTorokuHandler getHandler(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         return new NinteiShinsakaiKaisaibashoTorokuHandler(div);
+    }
+
+    private boolean is変更有無(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
+        for (dgKaisaibashoIchiran_Row row : rowList) {
+            if (!RString.isNullOrEmpty(row.getJyotai())) {
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
     }
 }
