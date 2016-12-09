@@ -90,7 +90,7 @@ public class JigyoJyokyoHokokuProcess extends BatchKeyBreakBase<JigyoJyokyoHokok
 
     private boolean hasBrek(JigyoJyokyoHokokuEntity before, JigyoJyokyoHokokuEntity current) {
         return !((before.getNijiHanteiYM().equals(current.getNijiHanteiYM()))
-                && before.getShichosonCode().equals(current.getShichosonCode()) && !current.isAllshichoson());
+                && before.getShichosonCode().equals(current.getShichosonCode()));
     }
 
     private void set事業状況報告情報タイトル() {
