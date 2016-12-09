@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
@@ -41,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBE-3000-200 liangbc
  */
 public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
@@ -384,7 +386,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblTextGenpon(Label lblTextGenpon) {
+    public void setLblTextGenpon(Label lblTextGenpon) {
         this.getTextPanel().setLblTextGenpon(lblTextGenpon);
     }
 
@@ -394,7 +396,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblTextMask(Label lblTextMask) {
+    public void setLblTextMask(Label lblTextMask) {
         this.getTextPanel().setLblTextMask(lblTextMask);
     }
 
@@ -404,7 +406,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo1(TextBox txtTokkijikoNo1) {
+    public void setTxtTokkijikoNo1(TextBox txtTokkijikoNo1) {
         this.getTextPanel().setTxtTokkijikoNo1(txtTokkijikoNo1);
     }
 
@@ -414,7 +416,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl1(Label lbl1) {
+    public void setLbl1(Label lbl1) {
         this.getTextPanel().setLbl1(lbl1);
     }
 
@@ -424,7 +426,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban1(TextBoxNum txtRemban1) {
+    public void setTxtRemban1(TextBoxNum txtRemban1) {
         this.getTextPanel().setTxtRemban1(txtRemban1);
     }
 
@@ -434,7 +436,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo1(TextBoxMultiLine txtTextGenpo1) {
+    public void setTxtTextGenpo1(TextBoxMultiLine txtTextGenpo1) {
         this.getTextPanel().setTxtTextGenpo1(txtTextGenpo1);
     }
 
@@ -444,7 +446,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask1(TextBoxMultiLine txtTextMask1) {
+    public void setTxtTextMask1(TextBoxMultiLine txtTextMask1) {
         this.getTextPanel().setTxtTextMask1(txtTextMask1);
     }
 
@@ -454,7 +456,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo2(TextBox txtTokkijikoNo2) {
+    public void setTxtTokkijikoNo2(TextBox txtTokkijikoNo2) {
         this.getTextPanel().setTxtTokkijikoNo2(txtTokkijikoNo2);
     }
 
@@ -464,7 +466,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl2(Label lbl2) {
+    public void setLbl2(Label lbl2) {
         this.getTextPanel().setLbl2(lbl2);
     }
 
@@ -474,7 +476,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban2(TextBoxNum txtRemban2) {
+    public void setTxtRemban2(TextBoxNum txtRemban2) {
         this.getTextPanel().setTxtRemban2(txtRemban2);
     }
 
@@ -484,7 +486,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo2(TextBoxMultiLine txtTextGenpo2) {
+    public void setTxtTextGenpo2(TextBoxMultiLine txtTextGenpo2) {
         this.getTextPanel().setTxtTextGenpo2(txtTextGenpo2);
     }
 
@@ -494,7 +496,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask2(TextBoxMultiLine txtTextMask2) {
+    public void setTxtTextMask2(TextBoxMultiLine txtTextMask2) {
         this.getTextPanel().setTxtTextMask2(txtTextMask2);
     }
 
@@ -504,7 +506,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo3(TextBox txtTokkijikoNo3) {
+    public void setTxtTokkijikoNo3(TextBox txtTokkijikoNo3) {
         this.getTextPanel().setTxtTokkijikoNo3(txtTokkijikoNo3);
     }
 
@@ -514,7 +516,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl3(Label lbl3) {
+    public void setLbl3(Label lbl3) {
         this.getTextPanel().setLbl3(lbl3);
     }
 
@@ -524,7 +526,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban3(TextBoxNum txtRemban3) {
+    public void setTxtRemban3(TextBoxNum txtRemban3) {
         this.getTextPanel().setTxtRemban3(txtRemban3);
     }
 
@@ -534,7 +536,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo3(TextBoxMultiLine txtTextGenpo3) {
+    public void setTxtTextGenpo3(TextBoxMultiLine txtTextGenpo3) {
         this.getTextPanel().setTxtTextGenpo3(txtTextGenpo3);
     }
 
@@ -544,7 +546,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask3(TextBoxMultiLine txtTextMask3) {
+    public void setTxtTextMask3(TextBoxMultiLine txtTextMask3) {
         this.getTextPanel().setTxtTextMask3(txtTextMask3);
     }
 
@@ -554,7 +556,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo4(TextBox txtTokkijikoNo4) {
+    public void setTxtTokkijikoNo4(TextBox txtTokkijikoNo4) {
         this.getTextPanel().setTxtTokkijikoNo4(txtTokkijikoNo4);
     }
 
@@ -564,7 +566,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl4(Label lbl4) {
+    public void setLbl4(Label lbl4) {
         this.getTextPanel().setLbl4(lbl4);
     }
 
@@ -574,7 +576,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban4(TextBoxNum txtRemban4) {
+    public void setTxtRemban4(TextBoxNum txtRemban4) {
         this.getTextPanel().setTxtRemban4(txtRemban4);
     }
 
@@ -584,7 +586,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo4(TextBoxMultiLine txtTextGenpo4) {
+    public void setTxtTextGenpo4(TextBoxMultiLine txtTextGenpo4) {
         this.getTextPanel().setTxtTextGenpo4(txtTextGenpo4);
     }
 
@@ -594,7 +596,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask4(TextBoxMultiLine txtTextMask4) {
+    public void setTxtTextMask4(TextBoxMultiLine txtTextMask4) {
         this.getTextPanel().setTxtTextMask4(txtTextMask4);
     }
 
@@ -604,7 +606,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo5(TextBox txtTokkijikoNo5) {
+    public void setTxtTokkijikoNo5(TextBox txtTokkijikoNo5) {
         this.getTextPanel().setTxtTokkijikoNo5(txtTokkijikoNo5);
     }
 
@@ -614,7 +616,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl5(Label lbl5) {
+    public void setLbl5(Label lbl5) {
         this.getTextPanel().setLbl5(lbl5);
     }
 
@@ -624,7 +626,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban5(TextBoxNum txtRemban5) {
+    public void setTxtRemban5(TextBoxNum txtRemban5) {
         this.getTextPanel().setTxtRemban5(txtRemban5);
     }
 
@@ -634,7 +636,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo5(TextBoxMultiLine txtTextGenpo5) {
+    public void setTxtTextGenpo5(TextBoxMultiLine txtTextGenpo5) {
         this.getTextPanel().setTxtTextGenpo5(txtTextGenpo5);
     }
 
@@ -644,7 +646,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask5(TextBoxMultiLine txtTextMask5) {
+    public void setTxtTextMask5(TextBoxMultiLine txtTextMask5) {
         this.getTextPanel().setTxtTextMask5(txtTextMask5);
     }
 
@@ -654,7 +656,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo6(TextBox txtTokkijikoNo6) {
+    public void setTxtTokkijikoNo6(TextBox txtTokkijikoNo6) {
         this.getTextPanel().setTxtTokkijikoNo6(txtTokkijikoNo6);
     }
 
@@ -664,7 +666,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl6(Label lbl6) {
+    public void setLbl6(Label lbl6) {
         this.getTextPanel().setLbl6(lbl6);
     }
 
@@ -674,7 +676,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban6(TextBoxNum txtRemban6) {
+    public void setTxtRemban6(TextBoxNum txtRemban6) {
         this.getTextPanel().setTxtRemban6(txtRemban6);
     }
 
@@ -684,7 +686,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo6(TextBoxMultiLine txtTextGenpo6) {
+    public void setTxtTextGenpo6(TextBoxMultiLine txtTextGenpo6) {
         this.getTextPanel().setTxtTextGenpo6(txtTextGenpo6);
     }
 
@@ -694,7 +696,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask6(TextBoxMultiLine txtTextMask6) {
+    public void setTxtTextMask6(TextBoxMultiLine txtTextMask6) {
         this.getTextPanel().setTxtTextMask6(txtTextMask6);
     }
 
@@ -704,7 +706,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo7(TextBox txtTokkijikoNo7) {
+    public void setTxtTokkijikoNo7(TextBox txtTokkijikoNo7) {
         this.getTextPanel().setTxtTokkijikoNo7(txtTokkijikoNo7);
     }
 
@@ -714,7 +716,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl7(Label lbl7) {
+    public void setLbl7(Label lbl7) {
         this.getTextPanel().setLbl7(lbl7);
     }
 
@@ -724,7 +726,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban7(TextBoxNum txtRemban7) {
+    public void setTxtRemban7(TextBoxNum txtRemban7) {
         this.getTextPanel().setTxtRemban7(txtRemban7);
     }
 
@@ -734,7 +736,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo7(TextBoxMultiLine txtTextGenpo7) {
+    public void setTxtTextGenpo7(TextBoxMultiLine txtTextGenpo7) {
         this.getTextPanel().setTxtTextGenpo7(txtTextGenpo7);
     }
 
@@ -744,7 +746,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask7(TextBoxMultiLine txtTextMask7) {
+    public void setTxtTextMask7(TextBoxMultiLine txtTextMask7) {
         this.getTextPanel().setTxtTextMask7(txtTextMask7);
     }
 
@@ -754,7 +756,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo8(TextBox txtTokkijikoNo8) {
+    public void setTxtTokkijikoNo8(TextBox txtTokkijikoNo8) {
         this.getTextPanel().setTxtTokkijikoNo8(txtTokkijikoNo8);
     }
 
@@ -764,7 +766,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl8(Label lbl8) {
+    public void setLbl8(Label lbl8) {
         this.getTextPanel().setLbl8(lbl8);
     }
 
@@ -774,7 +776,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban8(TextBoxNum txtRemban8) {
+    public void setTxtRemban8(TextBoxNum txtRemban8) {
         this.getTextPanel().setTxtRemban8(txtRemban8);
     }
 
@@ -784,7 +786,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo8(TextBoxMultiLine txtTextGenpo8) {
+    public void setTxtTextGenpo8(TextBoxMultiLine txtTextGenpo8) {
         this.getTextPanel().setTxtTextGenpo8(txtTextGenpo8);
     }
 
@@ -794,7 +796,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask8(TextBoxMultiLine txtTextMask8) {
+    public void setTxtTextMask8(TextBoxMultiLine txtTextMask8) {
         this.getTextPanel().setTxtTextMask8(txtTextMask8);
     }
 
@@ -804,7 +806,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo9(TextBox txtTokkijikoNo9) {
+    public void setTxtTokkijikoNo9(TextBox txtTokkijikoNo9) {
         this.getTextPanel().setTxtTokkijikoNo9(txtTokkijikoNo9);
     }
 
@@ -814,7 +816,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl9(Label lbl9) {
+    public void setLbl9(Label lbl9) {
         this.getTextPanel().setLbl9(lbl9);
     }
 
@@ -824,7 +826,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban9(TextBoxNum txtRemban9) {
+    public void setTxtRemban9(TextBoxNum txtRemban9) {
         this.getTextPanel().setTxtRemban9(txtRemban9);
     }
 
@@ -834,7 +836,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo9(TextBoxMultiLine txtTextGenpo9) {
+    public void setTxtTextGenpo9(TextBoxMultiLine txtTextGenpo9) {
         this.getTextPanel().setTxtTextGenpo9(txtTextGenpo9);
     }
 
@@ -844,7 +846,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask9(TextBoxMultiLine txtTextMask9) {
+    public void setTxtTextMask9(TextBoxMultiLine txtTextMask9) {
         this.getTextPanel().setTxtTextMask9(txtTextMask9);
     }
 
@@ -854,7 +856,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo10(TextBox txtTokkijikoNo10) {
+    public void setTxtTokkijikoNo10(TextBox txtTokkijikoNo10) {
         this.getTextPanel().setTxtTokkijikoNo10(txtTokkijikoNo10);
     }
 
@@ -864,7 +866,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl10(Label lbl10) {
+    public void setLbl10(Label lbl10) {
         this.getTextPanel().setLbl10(lbl10);
     }
 
@@ -874,7 +876,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban10(TextBoxNum txtRemban10) {
+    public void setTxtRemban10(TextBoxNum txtRemban10) {
         this.getTextPanel().setTxtRemban10(txtRemban10);
     }
 
@@ -884,7 +886,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextGenpo10(TextBoxMultiLine txtTextGenpo10) {
+    public void setTxtTextGenpo10(TextBoxMultiLine txtTextGenpo10) {
         this.getTextPanel().setTxtTextGenpo10(txtTextGenpo10);
     }
 
@@ -894,7 +896,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTextMask10(TextBoxMultiLine txtTextMask10) {
+    public void setTxtTextMask10(TextBoxMultiLine txtTextMask10) {
         this.getTextPanel().setTxtTextMask10(txtTextMask10);
     }
 
@@ -904,7 +906,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblImgGenpon(Label lblImgGenpon) {
+    public void setLblImgGenpon(Label lblImgGenpon) {
         this.getImgPanel1().setLblImgGenpon(lblImgGenpon);
     }
 
@@ -914,7 +916,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblImgMask(Label lblImgMask) {
+    public void setLblImgMask(Label lblImgMask) {
         this.getImgPanel1().setLblImgMask(lblImgMask);
     }
 
@@ -924,7 +926,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo11(TextBox txtTokkijikoNo11) {
+    public void setTxtTokkijikoNo11(TextBox txtTokkijikoNo11) {
         this.getImgPanel1().setTxtTokkijikoNo11(txtTokkijikoNo11);
     }
 
@@ -934,7 +936,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl11(Label lbl11) {
+    public void setLbl11(Label lbl11) {
         this.getImgPanel1().setLbl11(lbl11);
     }
 
@@ -944,7 +946,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban11(TextBoxNum txtRemban11) {
+    public void setTxtRemban11(TextBoxNum txtRemban11) {
         this.getImgPanel1().setTxtRemban11(txtRemban11);
     }
 
@@ -954,7 +956,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel1(genpoPanel1Div genpoPanel1) {
+    public void setGenpoPanel1(genpoPanel1Div genpoPanel1) {
         this.getImgPanel1().setGenpoPanel1(genpoPanel1);
     }
 
@@ -964,7 +966,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo1(StaticImage imgGenpo1) {
+    public void setImgGenpo1(StaticImage imgGenpo1) {
         this.getImgPanel1().getGenpoPanel1().setImgGenpo1(imgGenpo1);
     }
 
@@ -974,7 +976,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel1(maskPanel1Div maskPanel1) {
+    public void setMaskPanel1(maskPanel1Div maskPanel1) {
         this.getImgPanel1().setMaskPanel1(maskPanel1);
     }
 
@@ -984,7 +986,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking1(StaticImage imgMasking1) {
+    public void setImgMasking1(StaticImage imgMasking1) {
         this.getImgPanel1().getMaskPanel1().setImgMasking1(imgMasking1);
     }
 
@@ -994,7 +996,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage1(Label LabelNoImage1) {
+    public void setLabelNoImage1(Label LabelNoImage1) {
         this.getImgPanel1().getMaskPanel1().setLabelNoImage1(LabelNoImage1);
     }
 
@@ -1004,7 +1006,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo12(TextBox txtTokkijikoNo12) {
+    public void setTxtTokkijikoNo12(TextBox txtTokkijikoNo12) {
         this.getImgPanel1().setTxtTokkijikoNo12(txtTokkijikoNo12);
     }
 
@@ -1014,7 +1016,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl12(Label lbl12) {
+    public void setLbl12(Label lbl12) {
         this.getImgPanel1().setLbl12(lbl12);
     }
 
@@ -1024,7 +1026,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban12(TextBoxNum txtRemban12) {
+    public void setTxtRemban12(TextBoxNum txtRemban12) {
         this.getImgPanel1().setTxtRemban12(txtRemban12);
     }
 
@@ -1034,7 +1036,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel2(genpoPanel2Div genpoPanel2) {
+    public void setGenpoPanel2(genpoPanel2Div genpoPanel2) {
         this.getImgPanel1().setGenpoPanel2(genpoPanel2);
     }
 
@@ -1044,7 +1046,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo2(StaticImage imgGenpo2) {
+    public void setImgGenpo2(StaticImage imgGenpo2) {
         this.getImgPanel1().getGenpoPanel2().setImgGenpo2(imgGenpo2);
     }
 
@@ -1054,7 +1056,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel2(maskPanel2Div maskPanel2) {
+    public void setMaskPanel2(maskPanel2Div maskPanel2) {
         this.getImgPanel1().setMaskPanel2(maskPanel2);
     }
 
@@ -1064,7 +1066,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking2(StaticImage imgMasking2) {
+    public void setImgMasking2(StaticImage imgMasking2) {
         this.getImgPanel1().getMaskPanel2().setImgMasking2(imgMasking2);
     }
 
@@ -1074,7 +1076,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage2(Label LabelNoImage2) {
+    public void setLabelNoImage2(Label LabelNoImage2) {
         this.getImgPanel1().getMaskPanel2().setLabelNoImage2(LabelNoImage2);
     }
 
@@ -1084,7 +1086,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo13(TextBox txtTokkijikoNo13) {
+    public void setTxtTokkijikoNo13(TextBox txtTokkijikoNo13) {
         this.getImgPanel1().setTxtTokkijikoNo13(txtTokkijikoNo13);
     }
 
@@ -1094,7 +1096,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl13(Label lbl13) {
+    public void setLbl13(Label lbl13) {
         this.getImgPanel1().setLbl13(lbl13);
     }
 
@@ -1104,7 +1106,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban13(TextBoxNum txtRemban13) {
+    public void setTxtRemban13(TextBoxNum txtRemban13) {
         this.getImgPanel1().setTxtRemban13(txtRemban13);
     }
 
@@ -1114,7 +1116,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel3(genpoPanel3Div genpoPanel3) {
+    public void setGenpoPanel3(genpoPanel3Div genpoPanel3) {
         this.getImgPanel1().setGenpoPanel3(genpoPanel3);
     }
 
@@ -1124,7 +1126,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo3(StaticImage imgGenpo3) {
+    public void setImgGenpo3(StaticImage imgGenpo3) {
         this.getImgPanel1().getGenpoPanel3().setImgGenpo3(imgGenpo3);
     }
 
@@ -1134,7 +1136,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel3(maskPanel3Div maskPanel3) {
+    public void setMaskPanel3(maskPanel3Div maskPanel3) {
         this.getImgPanel1().setMaskPanel3(maskPanel3);
     }
 
@@ -1144,7 +1146,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking3(StaticImage imgMasking3) {
+    public void setImgMasking3(StaticImage imgMasking3) {
         this.getImgPanel1().getMaskPanel3().setImgMasking3(imgMasking3);
     }
 
@@ -1154,7 +1156,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage3(Label LabelNoImage3) {
+    public void setLabelNoImage3(Label LabelNoImage3) {
         this.getImgPanel1().getMaskPanel3().setLabelNoImage3(LabelNoImage3);
     }
 
@@ -1164,7 +1166,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo14(TextBox txtTokkijikoNo14) {
+    public void setTxtTokkijikoNo14(TextBox txtTokkijikoNo14) {
         this.getImgPanel1().setTxtTokkijikoNo14(txtTokkijikoNo14);
     }
 
@@ -1174,7 +1176,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl14(Label lbl14) {
+    public void setLbl14(Label lbl14) {
         this.getImgPanel1().setLbl14(lbl14);
     }
 
@@ -1184,7 +1186,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban14(TextBoxNum txtRemban14) {
+    public void setTxtRemban14(TextBoxNum txtRemban14) {
         this.getImgPanel1().setTxtRemban14(txtRemban14);
     }
 
@@ -1194,7 +1196,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel4(genpoPanel4Div genpoPanel4) {
+    public void setGenpoPanel4(genpoPanel4Div genpoPanel4) {
         this.getImgPanel1().setGenpoPanel4(genpoPanel4);
     }
 
@@ -1204,7 +1206,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo4(StaticImage imgGenpo4) {
+    public void setImgGenpo4(StaticImage imgGenpo4) {
         this.getImgPanel1().getGenpoPanel4().setImgGenpo4(imgGenpo4);
     }
 
@@ -1214,7 +1216,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel4(maskPanel4Div maskPanel4) {
+    public void setMaskPanel4(maskPanel4Div maskPanel4) {
         this.getImgPanel1().setMaskPanel4(maskPanel4);
     }
 
@@ -1224,7 +1226,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking4(StaticImage imgMasking4) {
+    public void setImgMasking4(StaticImage imgMasking4) {
         this.getImgPanel1().getMaskPanel4().setImgMasking4(imgMasking4);
     }
 
@@ -1234,7 +1236,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage4(Label LabelNoImage4) {
+    public void setLabelNoImage4(Label LabelNoImage4) {
         this.getImgPanel1().getMaskPanel4().setLabelNoImage4(LabelNoImage4);
     }
 
@@ -1244,7 +1246,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo15(TextBox txtTokkijikoNo15) {
+    public void setTxtTokkijikoNo15(TextBox txtTokkijikoNo15) {
         this.getImgPanel1().setTxtTokkijikoNo15(txtTokkijikoNo15);
     }
 
@@ -1254,7 +1256,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl15(Label lbl15) {
+    public void setLbl15(Label lbl15) {
         this.getImgPanel1().setLbl15(lbl15);
     }
 
@@ -1264,7 +1266,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban15(TextBoxNum txtRemban15) {
+    public void setTxtRemban15(TextBoxNum txtRemban15) {
         this.getImgPanel1().setTxtRemban15(txtRemban15);
     }
 
@@ -1274,7 +1276,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel5(genpoPanel5Div genpoPanel5) {
+    public void setGenpoPanel5(genpoPanel5Div genpoPanel5) {
         this.getImgPanel1().setGenpoPanel5(genpoPanel5);
     }
 
@@ -1284,7 +1286,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo5(StaticImage imgGenpo5) {
+    public void setImgGenpo5(StaticImage imgGenpo5) {
         this.getImgPanel1().getGenpoPanel5().setImgGenpo5(imgGenpo5);
     }
 
@@ -1294,7 +1296,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel5(maskPanel5Div maskPanel5) {
+    public void setMaskPanel5(maskPanel5Div maskPanel5) {
         this.getImgPanel1().setMaskPanel5(maskPanel5);
     }
 
@@ -1304,7 +1306,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking5(StaticImage imgMasking5) {
+    public void setImgMasking5(StaticImage imgMasking5) {
         this.getImgPanel1().getMaskPanel5().setImgMasking5(imgMasking5);
     }
 
@@ -1314,7 +1316,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage5(Label LabelNoImage5) {
+    public void setLabelNoImage5(Label LabelNoImage5) {
         this.getImgPanel1().getMaskPanel5().setLabelNoImage5(LabelNoImage5);
     }
 
@@ -1324,7 +1326,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo16(TextBox txtTokkijikoNo16) {
+    public void setTxtTokkijikoNo16(TextBox txtTokkijikoNo16) {
         this.getImgPanel1().setTxtTokkijikoNo16(txtTokkijikoNo16);
     }
 
@@ -1334,7 +1336,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl16(Label lbl16) {
+    public void setLbl16(Label lbl16) {
         this.getImgPanel1().setLbl16(lbl16);
     }
 
@@ -1344,7 +1346,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban16(TextBoxNum txtRemban16) {
+    public void setTxtRemban16(TextBoxNum txtRemban16) {
         this.getImgPanel1().setTxtRemban16(txtRemban16);
     }
 
@@ -1354,7 +1356,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel6(genpoPanel6Div genpoPanel6) {
+    public void setGenpoPanel6(genpoPanel6Div genpoPanel6) {
         this.getImgPanel1().setGenpoPanel6(genpoPanel6);
     }
 
@@ -1364,7 +1366,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo6(StaticImage imgGenpo6) {
+    public void setImgGenpo6(StaticImage imgGenpo6) {
         this.getImgPanel1().getGenpoPanel6().setImgGenpo6(imgGenpo6);
     }
 
@@ -1374,7 +1376,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel6(maskPanel6Div maskPanel6) {
+    public void setMaskPanel6(maskPanel6Div maskPanel6) {
         this.getImgPanel1().setMaskPanel6(maskPanel6);
     }
 
@@ -1384,7 +1386,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking6(StaticImage imgMasking6) {
+    public void setImgMasking6(StaticImage imgMasking6) {
         this.getImgPanel1().getMaskPanel6().setImgMasking6(imgMasking6);
     }
 
@@ -1394,7 +1396,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage6(Label LabelNoImage6) {
+    public void setLabelNoImage6(Label LabelNoImage6) {
         this.getImgPanel1().getMaskPanel6().setLabelNoImage6(LabelNoImage6);
     }
 
@@ -1404,7 +1406,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo17(TextBox txtTokkijikoNo17) {
+    public void setTxtTokkijikoNo17(TextBox txtTokkijikoNo17) {
         this.getImgPanel1().setTxtTokkijikoNo17(txtTokkijikoNo17);
     }
 
@@ -1414,7 +1416,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl17(Label lbl17) {
+    public void setLbl17(Label lbl17) {
         this.getImgPanel1().setLbl17(lbl17);
     }
 
@@ -1424,7 +1426,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban17(TextBoxNum txtRemban17) {
+    public void setTxtRemban17(TextBoxNum txtRemban17) {
         this.getImgPanel1().setTxtRemban17(txtRemban17);
     }
 
@@ -1434,7 +1436,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel7(genpoPanel7Div genpoPanel7) {
+    public void setGenpoPanel7(genpoPanel7Div genpoPanel7) {
         this.getImgPanel1().setGenpoPanel7(genpoPanel7);
     }
 
@@ -1444,7 +1446,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo7(StaticImage imgGenpo7) {
+    public void setImgGenpo7(StaticImage imgGenpo7) {
         this.getImgPanel1().getGenpoPanel7().setImgGenpo7(imgGenpo7);
     }
 
@@ -1454,7 +1456,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel7(maskPanel7Div maskPanel7) {
+    public void setMaskPanel7(maskPanel7Div maskPanel7) {
         this.getImgPanel1().setMaskPanel7(maskPanel7);
     }
 
@@ -1464,7 +1466,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking7(StaticImage imgMasking7) {
+    public void setImgMasking7(StaticImage imgMasking7) {
         this.getImgPanel1().getMaskPanel7().setImgMasking7(imgMasking7);
     }
 
@@ -1474,7 +1476,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage7(Label LabelNoImage7) {
+    public void setLabelNoImage7(Label LabelNoImage7) {
         this.getImgPanel1().getMaskPanel7().setLabelNoImage7(LabelNoImage7);
     }
 
@@ -1484,7 +1486,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo18(TextBox txtTokkijikoNo18) {
+    public void setTxtTokkijikoNo18(TextBox txtTokkijikoNo18) {
         this.getImgPanel1().setTxtTokkijikoNo18(txtTokkijikoNo18);
     }
 
@@ -1494,7 +1496,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl18(Label lbl18) {
+    public void setLbl18(Label lbl18) {
         this.getImgPanel1().setLbl18(lbl18);
     }
 
@@ -1504,7 +1506,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban18(TextBoxNum txtRemban18) {
+    public void setTxtRemban18(TextBoxNum txtRemban18) {
         this.getImgPanel1().setTxtRemban18(txtRemban18);
     }
 
@@ -1514,7 +1516,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel8(genpoPanel8Div genpoPanel8) {
+    public void setGenpoPanel8(genpoPanel8Div genpoPanel8) {
         this.getImgPanel1().setGenpoPanel8(genpoPanel8);
     }
 
@@ -1524,7 +1526,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo8(StaticImage imgGenpo8) {
+    public void setImgGenpo8(StaticImage imgGenpo8) {
         this.getImgPanel1().getGenpoPanel8().setImgGenpo8(imgGenpo8);
     }
 
@@ -1534,7 +1536,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel8(maskPanel8Div maskPanel8) {
+    public void setMaskPanel8(maskPanel8Div maskPanel8) {
         this.getImgPanel1().setMaskPanel8(maskPanel8);
     }
 
@@ -1544,7 +1546,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking8(StaticImage imgMasking8) {
+    public void setImgMasking8(StaticImage imgMasking8) {
         this.getImgPanel1().getMaskPanel8().setImgMasking8(imgMasking8);
     }
 
@@ -1554,7 +1556,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage8(Label LabelNoImage8) {
+    public void setLabelNoImage8(Label LabelNoImage8) {
         this.getImgPanel1().getMaskPanel8().setLabelNoImage8(LabelNoImage8);
     }
 
@@ -1564,7 +1566,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo19(TextBox txtTokkijikoNo19) {
+    public void setTxtTokkijikoNo19(TextBox txtTokkijikoNo19) {
         this.getImgPanel1().setTxtTokkijikoNo19(txtTokkijikoNo19);
     }
 
@@ -1574,7 +1576,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl19(Label lbl19) {
+    public void setLbl19(Label lbl19) {
         this.getImgPanel1().setLbl19(lbl19);
     }
 
@@ -1584,7 +1586,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban19(TextBoxNum txtRemban19) {
+    public void setTxtRemban19(TextBoxNum txtRemban19) {
         this.getImgPanel1().setTxtRemban19(txtRemban19);
     }
 
@@ -1594,7 +1596,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel9(genpoPanel9Div genpoPanel9) {
+    public void setGenpoPanel9(genpoPanel9Div genpoPanel9) {
         this.getImgPanel1().setGenpoPanel9(genpoPanel9);
     }
 
@@ -1604,7 +1606,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo9(StaticImage imgGenpo9) {
+    public void setImgGenpo9(StaticImage imgGenpo9) {
         this.getImgPanel1().getGenpoPanel9().setImgGenpo9(imgGenpo9);
     }
 
@@ -1614,7 +1616,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel9(maskPanel9Div maskPanel9) {
+    public void setMaskPanel9(maskPanel9Div maskPanel9) {
         this.getImgPanel1().setMaskPanel9(maskPanel9);
     }
 
@@ -1624,7 +1626,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking9(StaticImage imgMasking9) {
+    public void setImgMasking9(StaticImage imgMasking9) {
         this.getImgPanel1().getMaskPanel9().setImgMasking9(imgMasking9);
     }
 
@@ -1634,7 +1636,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage9(Label LabelNoImage9) {
+    public void setLabelNoImage9(Label LabelNoImage9) {
         this.getImgPanel1().getMaskPanel9().setLabelNoImage9(LabelNoImage9);
     }
 
@@ -1644,7 +1646,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo20(TextBox txtTokkijikoNo20) {
+    public void setTxtTokkijikoNo20(TextBox txtTokkijikoNo20) {
         this.getImgPanel1().setTxtTokkijikoNo20(txtTokkijikoNo20);
     }
 
@@ -1654,7 +1656,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl20(Label lbl20) {
+    public void setLbl20(Label lbl20) {
         this.getImgPanel1().setLbl20(lbl20);
     }
 
@@ -1664,7 +1666,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban20(TextBoxNum txtRemban20) {
+    public void setTxtRemban20(TextBoxNum txtRemban20) {
         this.getImgPanel1().setTxtRemban20(txtRemban20);
     }
 
@@ -1674,7 +1676,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel10(genpoPanel10Div genpoPanel10) {
+    public void setGenpoPanel10(genpoPanel10Div genpoPanel10) {
         this.getImgPanel1().setGenpoPanel10(genpoPanel10);
     }
 
@@ -1684,7 +1686,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo10(StaticImage imgGenpo10) {
+    public void setImgGenpo10(StaticImage imgGenpo10) {
         this.getImgPanel1().getGenpoPanel10().setImgGenpo10(imgGenpo10);
     }
 
@@ -1694,7 +1696,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel10(maskPanel10Div maskPanel10) {
+    public void setMaskPanel10(maskPanel10Div maskPanel10) {
         this.getImgPanel1().setMaskPanel10(maskPanel10);
     }
 
@@ -1704,7 +1706,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking10(StaticImage imgMasking10) {
+    public void setImgMasking10(StaticImage imgMasking10) {
         this.getImgPanel1().getMaskPanel10().setImgMasking10(imgMasking10);
     }
 
@@ -1714,7 +1716,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage10(Label LabelNoImage10) {
+    public void setLabelNoImage10(Label LabelNoImage10) {
         this.getImgPanel1().getMaskPanel10().setLabelNoImage10(LabelNoImage10);
     }
 
@@ -1724,7 +1726,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLblImg(Label lblImg) {
+    public void setLblImg(Label lblImg) {
         this.getImgPanel2().setLblImg(lblImg);
     }
 
@@ -1734,7 +1736,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo21(TextBox txtTokkijikoNo21) {
+    public void setTxtTokkijikoNo21(TextBox txtTokkijikoNo21) {
         this.getImgPanel2().setTxtTokkijikoNo21(txtTokkijikoNo21);
     }
 
@@ -1744,7 +1746,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl21(Label lbl21) {
+    public void setLbl21(Label lbl21) {
         this.getImgPanel2().setLbl21(lbl21);
     }
 
@@ -1754,7 +1756,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban21(TextBoxNum txtRemban21) {
+    public void setTxtRemban21(TextBoxNum txtRemban21) {
         this.getImgPanel2().setTxtRemban21(txtRemban21);
     }
 
@@ -1764,7 +1766,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel11(genpoPanel11Div genpoPanel11) {
+    public void setGenpoPanel11(genpoPanel11Div genpoPanel11) {
         this.getImgPanel2().setGenpoPanel11(genpoPanel11);
     }
 
@@ -1774,7 +1776,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo11(StaticImage imgGenpo11) {
+    public void setImgGenpo11(StaticImage imgGenpo11) {
         this.getImgPanel2().getGenpoPanel11().setImgGenpo11(imgGenpo11);
     }
 
@@ -1784,7 +1786,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel11(maskPanel11Div maskPanel11) {
+    public void setMaskPanel11(maskPanel11Div maskPanel11) {
         this.getImgPanel2().setMaskPanel11(maskPanel11);
     }
 
@@ -1794,7 +1796,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking11(StaticImage imgMasking11) {
+    public void setImgMasking11(StaticImage imgMasking11) {
         this.getImgPanel2().getMaskPanel11().setImgMasking11(imgMasking11);
     }
 
@@ -1804,7 +1806,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage11(Label LabelNoImage11) {
+    public void setLabelNoImage11(Label LabelNoImage11) {
         this.getImgPanel2().getMaskPanel11().setLabelNoImage11(LabelNoImage11);
     }
 
@@ -1814,7 +1816,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo22(TextBox txtTokkijikoNo22) {
+    public void setTxtTokkijikoNo22(TextBox txtTokkijikoNo22) {
         this.getImgPanel2().setTxtTokkijikoNo22(txtTokkijikoNo22);
     }
 
@@ -1824,7 +1826,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl22(Label lbl22) {
+    public void setLbl22(Label lbl22) {
         this.getImgPanel2().setLbl22(lbl22);
     }
 
@@ -1834,7 +1836,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban22(TextBoxNum txtRemban22) {
+    public void setTxtRemban22(TextBoxNum txtRemban22) {
         this.getImgPanel2().setTxtRemban22(txtRemban22);
     }
 
@@ -1844,7 +1846,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel12(genpoPanel12Div genpoPanel12) {
+    public void setGenpoPanel12(genpoPanel12Div genpoPanel12) {
         this.getImgPanel2().setGenpoPanel12(genpoPanel12);
     }
 
@@ -1854,7 +1856,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo12(StaticImage imgGenpo12) {
+    public void setImgGenpo12(StaticImage imgGenpo12) {
         this.getImgPanel2().getGenpoPanel12().setImgGenpo12(imgGenpo12);
     }
 
@@ -1864,7 +1866,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel12(maskPanel12Div maskPanel12) {
+    public void setMaskPanel12(maskPanel12Div maskPanel12) {
         this.getImgPanel2().setMaskPanel12(maskPanel12);
     }
 
@@ -1874,7 +1876,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking12(StaticImage imgMasking12) {
+    public void setImgMasking12(StaticImage imgMasking12) {
         this.getImgPanel2().getMaskPanel12().setImgMasking12(imgMasking12);
     }
 
@@ -1884,7 +1886,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage12(Label LabelNoImage12) {
+    public void setLabelNoImage12(Label LabelNoImage12) {
         this.getImgPanel2().getMaskPanel12().setLabelNoImage12(LabelNoImage12);
     }
 
@@ -1894,7 +1896,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo23(TextBox txtTokkijikoNo23) {
+    public void setTxtTokkijikoNo23(TextBox txtTokkijikoNo23) {
         this.getImgPanel2().setTxtTokkijikoNo23(txtTokkijikoNo23);
     }
 
@@ -1904,7 +1906,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl23(Label lbl23) {
+    public void setLbl23(Label lbl23) {
         this.getImgPanel2().setLbl23(lbl23);
     }
 
@@ -1914,7 +1916,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban23(TextBoxNum txtRemban23) {
+    public void setTxtRemban23(TextBoxNum txtRemban23) {
         this.getImgPanel2().setTxtRemban23(txtRemban23);
     }
 
@@ -1924,7 +1926,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel13(genpoPanel13Div genpoPanel13) {
+    public void setGenpoPanel13(genpoPanel13Div genpoPanel13) {
         this.getImgPanel2().setGenpoPanel13(genpoPanel13);
     }
 
@@ -1934,7 +1936,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo13(StaticImage imgGenpo13) {
+    public void setImgGenpo13(StaticImage imgGenpo13) {
         this.getImgPanel2().getGenpoPanel13().setImgGenpo13(imgGenpo13);
     }
 
@@ -1944,7 +1946,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel13(maskPanel13Div maskPanel13) {
+    public void setMaskPanel13(maskPanel13Div maskPanel13) {
         this.getImgPanel2().setMaskPanel13(maskPanel13);
     }
 
@@ -1954,7 +1956,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking13(StaticImage imgMasking13) {
+    public void setImgMasking13(StaticImage imgMasking13) {
         this.getImgPanel2().getMaskPanel13().setImgMasking13(imgMasking13);
     }
 
@@ -1964,7 +1966,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage13(Label LabelNoImage13) {
+    public void setLabelNoImage13(Label LabelNoImage13) {
         this.getImgPanel2().getMaskPanel13().setLabelNoImage13(LabelNoImage13);
     }
 
@@ -1974,7 +1976,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo24(TextBox txtTokkijikoNo24) {
+    public void setTxtTokkijikoNo24(TextBox txtTokkijikoNo24) {
         this.getImgPanel2().setTxtTokkijikoNo24(txtTokkijikoNo24);
     }
 
@@ -1984,7 +1986,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl24(Label lbl24) {
+    public void setLbl24(Label lbl24) {
         this.getImgPanel2().setLbl24(lbl24);
     }
 
@@ -1994,7 +1996,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban24(TextBoxNum txtRemban24) {
+    public void setTxtRemban24(TextBoxNum txtRemban24) {
         this.getImgPanel2().setTxtRemban24(txtRemban24);
     }
 
@@ -2004,7 +2006,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel14(genpoPanel14Div genpoPanel14) {
+    public void setGenpoPanel14(genpoPanel14Div genpoPanel14) {
         this.getImgPanel2().setGenpoPanel14(genpoPanel14);
     }
 
@@ -2014,7 +2016,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo14(StaticImage imgGenpo14) {
+    public void setImgGenpo14(StaticImage imgGenpo14) {
         this.getImgPanel2().getGenpoPanel14().setImgGenpo14(imgGenpo14);
     }
 
@@ -2024,7 +2026,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel14(maskPanel14Div maskPanel14) {
+    public void setMaskPanel14(maskPanel14Div maskPanel14) {
         this.getImgPanel2().setMaskPanel14(maskPanel14);
     }
 
@@ -2034,7 +2036,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking14(StaticImage imgMasking14) {
+    public void setImgMasking14(StaticImage imgMasking14) {
         this.getImgPanel2().getMaskPanel14().setImgMasking14(imgMasking14);
     }
 
@@ -2044,7 +2046,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage14(Label LabelNoImage14) {
+    public void setLabelNoImage14(Label LabelNoImage14) {
         this.getImgPanel2().getMaskPanel14().setLabelNoImage14(LabelNoImage14);
     }
 
@@ -2054,7 +2056,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo25(TextBox txtTokkijikoNo25) {
+    public void setTxtTokkijikoNo25(TextBox txtTokkijikoNo25) {
         this.getImgPanel2().setTxtTokkijikoNo25(txtTokkijikoNo25);
     }
 
@@ -2064,7 +2066,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl25(Label lbl25) {
+    public void setLbl25(Label lbl25) {
         this.getImgPanel2().setLbl25(lbl25);
     }
 
@@ -2074,7 +2076,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban25(TextBoxNum txtRemban25) {
+    public void setTxtRemban25(TextBoxNum txtRemban25) {
         this.getImgPanel2().setTxtRemban25(txtRemban25);
     }
 
@@ -2084,7 +2086,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel15(genpoPanel15Div genpoPanel15) {
+    public void setGenpoPanel15(genpoPanel15Div genpoPanel15) {
         this.getImgPanel2().setGenpoPanel15(genpoPanel15);
     }
 
@@ -2094,7 +2096,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo15(StaticImage imgGenpo15) {
+    public void setImgGenpo15(StaticImage imgGenpo15) {
         this.getImgPanel2().getGenpoPanel15().setImgGenpo15(imgGenpo15);
     }
 
@@ -2104,7 +2106,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel15(maskPanel15Div maskPanel15) {
+    public void setMaskPanel15(maskPanel15Div maskPanel15) {
         this.getImgPanel2().setMaskPanel15(maskPanel15);
     }
 
@@ -2114,7 +2116,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking15(StaticImage imgMasking15) {
+    public void setImgMasking15(StaticImage imgMasking15) {
         this.getImgPanel2().getMaskPanel15().setImgMasking15(imgMasking15);
     }
 
@@ -2124,7 +2126,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage15(Label LabelNoImage15) {
+    public void setLabelNoImage15(Label LabelNoImage15) {
         this.getImgPanel2().getMaskPanel15().setLabelNoImage15(LabelNoImage15);
     }
 
@@ -2134,7 +2136,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo26(TextBox txtTokkijikoNo26) {
+    public void setTxtTokkijikoNo26(TextBox txtTokkijikoNo26) {
         this.getImgPanel2().setTxtTokkijikoNo26(txtTokkijikoNo26);
     }
 
@@ -2144,7 +2146,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl26(Label lbl26) {
+    public void setLbl26(Label lbl26) {
         this.getImgPanel2().setLbl26(lbl26);
     }
 
@@ -2154,7 +2156,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban26(TextBoxNum txtRemban26) {
+    public void setTxtRemban26(TextBoxNum txtRemban26) {
         this.getImgPanel2().setTxtRemban26(txtRemban26);
     }
 
@@ -2164,7 +2166,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel16(genpoPanel16Div genpoPanel16) {
+    public void setGenpoPanel16(genpoPanel16Div genpoPanel16) {
         this.getImgPanel2().setGenpoPanel16(genpoPanel16);
     }
 
@@ -2174,7 +2176,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo16(StaticImage imgGenpo16) {
+    public void setImgGenpo16(StaticImage imgGenpo16) {
         this.getImgPanel2().getGenpoPanel16().setImgGenpo16(imgGenpo16);
     }
 
@@ -2184,7 +2186,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel16(maskPanel16Div maskPanel16) {
+    public void setMaskPanel16(maskPanel16Div maskPanel16) {
         this.getImgPanel2().setMaskPanel16(maskPanel16);
     }
 
@@ -2194,7 +2196,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking16(StaticImage imgMasking16) {
+    public void setImgMasking16(StaticImage imgMasking16) {
         this.getImgPanel2().getMaskPanel16().setImgMasking16(imgMasking16);
     }
 
@@ -2204,7 +2206,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage16(Label LabelNoImage16) {
+    public void setLabelNoImage16(Label LabelNoImage16) {
         this.getImgPanel2().getMaskPanel16().setLabelNoImage16(LabelNoImage16);
     }
 
@@ -2214,7 +2216,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo27(TextBox txtTokkijikoNo27) {
+    public void setTxtTokkijikoNo27(TextBox txtTokkijikoNo27) {
         this.getImgPanel2().setTxtTokkijikoNo27(txtTokkijikoNo27);
     }
 
@@ -2224,7 +2226,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl27(Label lbl27) {
+    public void setLbl27(Label lbl27) {
         this.getImgPanel2().setLbl27(lbl27);
     }
 
@@ -2234,7 +2236,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban27(TextBoxNum txtRemban27) {
+    public void setTxtRemban27(TextBoxNum txtRemban27) {
         this.getImgPanel2().setTxtRemban27(txtRemban27);
     }
 
@@ -2244,7 +2246,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel17(genpoPanel17Div genpoPanel17) {
+    public void setGenpoPanel17(genpoPanel17Div genpoPanel17) {
         this.getImgPanel2().setGenpoPanel17(genpoPanel17);
     }
 
@@ -2254,7 +2256,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo17(StaticImage imgGenpo17) {
+    public void setImgGenpo17(StaticImage imgGenpo17) {
         this.getImgPanel2().getGenpoPanel17().setImgGenpo17(imgGenpo17);
     }
 
@@ -2264,7 +2266,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel17(maskPanel17Div maskPanel17) {
+    public void setMaskPanel17(maskPanel17Div maskPanel17) {
         this.getImgPanel2().setMaskPanel17(maskPanel17);
     }
 
@@ -2274,7 +2276,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking17(StaticImage imgMasking17) {
+    public void setImgMasking17(StaticImage imgMasking17) {
         this.getImgPanel2().getMaskPanel17().setImgMasking17(imgMasking17);
     }
 
@@ -2284,7 +2286,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage17(Label LabelNoImage17) {
+    public void setLabelNoImage17(Label LabelNoImage17) {
         this.getImgPanel2().getMaskPanel17().setLabelNoImage17(LabelNoImage17);
     }
 
@@ -2294,7 +2296,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo28(TextBox txtTokkijikoNo28) {
+    public void setTxtTokkijikoNo28(TextBox txtTokkijikoNo28) {
         this.getImgPanel2().setTxtTokkijikoNo28(txtTokkijikoNo28);
     }
 
@@ -2304,7 +2306,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl28(Label lbl28) {
+    public void setLbl28(Label lbl28) {
         this.getImgPanel2().setLbl28(lbl28);
     }
 
@@ -2314,7 +2316,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban28(TextBoxNum txtRemban28) {
+    public void setTxtRemban28(TextBoxNum txtRemban28) {
         this.getImgPanel2().setTxtRemban28(txtRemban28);
     }
 
@@ -2324,7 +2326,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel18(genpoPanel18Div genpoPanel18) {
+    public void setGenpoPanel18(genpoPanel18Div genpoPanel18) {
         this.getImgPanel2().setGenpoPanel18(genpoPanel18);
     }
 
@@ -2334,7 +2336,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo18(StaticImage imgGenpo18) {
+    public void setImgGenpo18(StaticImage imgGenpo18) {
         this.getImgPanel2().getGenpoPanel18().setImgGenpo18(imgGenpo18);
     }
 
@@ -2344,7 +2346,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel18(maskPanel18Div maskPanel18) {
+    public void setMaskPanel18(maskPanel18Div maskPanel18) {
         this.getImgPanel2().setMaskPanel18(maskPanel18);
     }
 
@@ -2354,7 +2356,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking18(StaticImage imgMasking18) {
+    public void setImgMasking18(StaticImage imgMasking18) {
         this.getImgPanel2().getMaskPanel18().setImgMasking18(imgMasking18);
     }
 
@@ -2364,7 +2366,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage18(Label LabelNoImage18) {
+    public void setLabelNoImage18(Label LabelNoImage18) {
         this.getImgPanel2().getMaskPanel18().setLabelNoImage18(LabelNoImage18);
     }
 
@@ -2374,7 +2376,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo29(TextBox txtTokkijikoNo29) {
+    public void setTxtTokkijikoNo29(TextBox txtTokkijikoNo29) {
         this.getImgPanel2().setTxtTokkijikoNo29(txtTokkijikoNo29);
     }
 
@@ -2384,7 +2386,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl29(Label lbl29) {
+    public void setLbl29(Label lbl29) {
         this.getImgPanel2().setLbl29(lbl29);
     }
 
@@ -2394,7 +2396,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban29(TextBoxNum txtRemban29) {
+    public void setTxtRemban29(TextBoxNum txtRemban29) {
         this.getImgPanel2().setTxtRemban29(txtRemban29);
     }
 
@@ -2404,7 +2406,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel19(genpoPanel19Div genpoPanel19) {
+    public void setGenpoPanel19(genpoPanel19Div genpoPanel19) {
         this.getImgPanel2().setGenpoPanel19(genpoPanel19);
     }
 
@@ -2414,7 +2416,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo19(StaticImage imgGenpo19) {
+    public void setImgGenpo19(StaticImage imgGenpo19) {
         this.getImgPanel2().getGenpoPanel19().setImgGenpo19(imgGenpo19);
     }
 
@@ -2424,7 +2426,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel19(maskPanel19Div maskPanel19) {
+    public void setMaskPanel19(maskPanel19Div maskPanel19) {
         this.getImgPanel2().setMaskPanel19(maskPanel19);
     }
 
@@ -2434,7 +2436,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking19(StaticImage imgMasking19) {
+    public void setImgMasking19(StaticImage imgMasking19) {
         this.getImgPanel2().getMaskPanel19().setImgMasking19(imgMasking19);
     }
 
@@ -2444,7 +2446,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage19(Label LabelNoImage19) {
+    public void setLabelNoImage19(Label LabelNoImage19) {
         this.getImgPanel2().getMaskPanel19().setLabelNoImage19(LabelNoImage19);
     }
 
@@ -2454,7 +2456,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTokkijikoNo30(TextBox txtTokkijikoNo30) {
+    public void setTxtTokkijikoNo30(TextBox txtTokkijikoNo30) {
         this.getImgPanel2().setTxtTokkijikoNo30(txtTokkijikoNo30);
     }
 
@@ -2464,7 +2466,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLbl30(Label lbl30) {
+    public void setLbl30(Label lbl30) {
         this.getImgPanel2().setLbl30(lbl30);
     }
 
@@ -2474,7 +2476,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setTxtRemban30(TextBoxNum txtRemban30) {
+    public void setTxtRemban30(TextBoxNum txtRemban30) {
         this.getImgPanel2().setTxtRemban30(txtRemban30);
     }
 
@@ -2484,7 +2486,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setGenpoPanel20(genpoPanel20Div genpoPanel20) {
+    public void setGenpoPanel20(genpoPanel20Div genpoPanel20) {
         this.getImgPanel2().setGenpoPanel20(genpoPanel20);
     }
 
@@ -2494,7 +2496,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgGenpo20(StaticImage imgGenpo20) {
+    public void setImgGenpo20(StaticImage imgGenpo20) {
         this.getImgPanel2().getGenpoPanel20().setImgGenpo20(imgGenpo20);
     }
 
@@ -2504,7 +2506,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setMaskPanel20(maskPanel20Div maskPanel20) {
+    public void setMaskPanel20(maskPanel20Div maskPanel20) {
         this.getImgPanel2().setMaskPanel20(maskPanel20);
     }
 
@@ -2514,7 +2516,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setImgMasking20(StaticImage imgMasking20) {
+    public void setImgMasking20(StaticImage imgMasking20) {
         this.getImgPanel2().getMaskPanel20().setImgMasking20(imgMasking20);
     }
 
@@ -2524,7 +2526,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void  setLabelNoImage20(Label LabelNoImage20) {
+    public void setLabelNoImage20(Label LabelNoImage20) {
         this.getImgPanel2().getMaskPanel20().setLabelNoImage20(LabelNoImage20);
     }
 
@@ -2567,7 +2569,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
      * @param 認定調査特記事項番号 RString
      */
     @JsonIgnore
-    public void initializa(ArrayList<NinteichosahyoTokkijiko> 認定調査特記事項List, RString 認定調査特記事項番号) {
+    public void initializa(List<NinteichosahyoTokkijiko> 認定調査特記事項List, RString 認定調査特記事項番号) {
         NinteiChosaTokkiJikou 認定調査特記事項マッピング
                 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項番号);
 
@@ -2577,8 +2579,8 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         this.imgPanel1.setDisplayNone(true);
         this.imgPanel2.setDisplayNone(true);
 
-        ArrayList<NinteichosahyoTokkijiko> 認定調査特記事項ListCopy = new ArrayList<>(認定調査特記事項List);
-        認定調査特記事項List = get認定調査特記事項一覧(認定調査特記事項ListCopy);
+        List<NinteichosahyoTokkijiko> 認定調査特記事項ListCopy = new ArrayList<>(認定調査特記事項List);
+        認定調査特記事項List = get出力対象特記事項List(認定調査特記事項ListCopy, 認定調査特記事項マッピング);
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(認定調査特記事項List.get(0).get特記事項テキスト_イメージ区分())) {
             ImageManager imageManager = InstanceProvider.create(ImageManager.class);
             Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo));
@@ -2604,24 +2606,47 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         }
     }
 
-    private ArrayList<NinteichosahyoTokkijiko> get認定調査特記事項一覧(ArrayList<NinteichosahyoTokkijiko> 認定調査特記事項List) {
-        RString 特記事項テキストイメージ区分 = RString.EMPTY;
-        int テキストイメージ区分レコードカウント = 0;
+    /**
+     * 画面に出力する対象の特記事項を取得する。出力する対象は以下の条件で決定する。
+     * <ul>
+     * <li>ダイアログ呼び出し元から与えられた特記事項番号に合致するもの</li>
+     * <li>イメージ区分 = 2のデータが存在する場合、イメージ区分 = 2 のデータのみ出力対象とする。</li>
+     * <li>イメージ区分 = 2のデータが存在しない場合、イメージ区分 = 1 のデータを出力対象とする。</li>
+     * </ul>
+     *
+     * @param 認定調査特記事項List 元になる特記事項List
+     * @return 出力対象の特記事項List
+     */
+    private List<NinteichosahyoTokkijiko> get出力対象特記事項List(List<NinteichosahyoTokkijiko> 認定調査特記事項List,
+            NinteiChosaTokkiJikou 特記事項) {
+
+        List<NinteichosahyoTokkijiko> 同一特記事項番号List = new ArrayList<>();
         for (NinteichosahyoTokkijiko 認定調査特記事項Entity : 認定調査特記事項List) {
-            if (RString.isNullOrEmpty(特記事項テキストイメージ区分)) {
-                特記事項テキストイメージ区分 = 認定調査特記事項Entity.get特記事項テキスト_イメージ区分();
-                テキストイメージ区分レコードカウント++;
+            NinteiChosaTokkiJikou nowTokkijiko
+                    = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項Entity.get認定調査特記事項番号());
+            if (特記事項.equals(nowTokkijiko)) {
+                同一特記事項番号List.add(認定調査特記事項Entity);
             }
-            if (!特記事項テキストイメージ区分.equals(認定調査特記事項Entity.get特記事項テキスト_イメージ区分())) {
-                テキストイメージ区分レコードカウント++;
+        }
+
+        TokkijikoTextImageKubun 出力対象イメージ区分 = TokkijikoTextImageKubun.テキスト;
+        for (NinteichosahyoTokkijiko 認定調査特記事項Entity : 同一特記事項番号List) {
+            TokkijikoTextImageKubun kubun = TokkijikoTextImageKubun.toValue(認定調査特記事項Entity.get特記事項テキスト_イメージ区分());
+            if (TokkijikoTextImageKubun.イメージ.equals(kubun)) {
+                出力対象イメージ区分 = TokkijikoTextImageKubun.イメージ;
                 break;
             }
         }
-        if (テキストイメージ区分レコードカウント > 1) {
-            ArrayList<NinteichosahyoTokkijiko> 認定調査特記事項ListCopy = new ArrayList<>(認定調査特記事項List);
-            認定調査特記事項List = remove認定調査特記事項一覧(認定調査特記事項ListCopy);
+
+        List<NinteichosahyoTokkijiko> 出力対象特記事項List = new ArrayList<>();
+        for (NinteichosahyoTokkijiko 認定調査特記事項Entity : 同一特記事項番号List) {
+            TokkijikoTextImageKubun kubun = TokkijikoTextImageKubun.toValue(認定調査特記事項Entity.get特記事項テキスト_イメージ区分());
+            if (出力対象イメージ区分.equals(kubun)) {
+                出力対象特記事項List.add(認定調査特記事項Entity);
+            }
         }
-        return 認定調査特記事項List;
+
+        return 出力対象特記事項List;
     }
 
     private ArrayList<NinteichosahyoTokkijiko> remove認定調査特記事項一覧(ArrayList<NinteichosahyoTokkijiko> 認定調査特記事項List) {
