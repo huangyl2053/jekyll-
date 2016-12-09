@@ -200,7 +200,7 @@ public class ShinsakaiKekkaToroku {
      * @param div 介護認定審査会審査結果登録Div
      * @return responseData
      */
-    public ResponseData onClick_btnBack(ShinsakaiKekkaTorokuDiv div) {
+    public ResponseData onClick_btnBack(ShinsakaiKekkaTorokuDiv div) {       
         return ResponseData.of(div).forwardWithEventName(DBE5230001TransitionEventName.一覧に戻る).respond();
     }
 
