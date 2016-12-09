@@ -34,17 +34,17 @@ public class JigyoJokyoHokokuReportSource implements IReportSource {
     public RString listJigyojokyoHokoku_8;
     @ReportItem(name = "listJigyojokyoHokoku_9", length = 5, order = 9)
     public RString listJigyojokyoHokoku_9;
-    @ReportItem(name = "listJigyojokyoHokoku_10", length = 5, order = 9)
+    @ReportItem(name = "listJigyojokyoHokoku_10", length = 5, order = 10)
     public RString listJigyojokyoHokoku_10;
-    @ReportItem(name = "title", length = 20, order = 10)
+    @ReportItem(name = "title", length = 20, order = 11)
     public RString title;
-    @ReportItem(name = "jigyoTaishoYM", length = 20, order = 11)
+    @ReportItem(name = "jigyoTaishoYM", length = 20, order = 12)
     public RString jigyoTaishoYM;
-    @ReportItem(name = "hokenshaNo", length = 6, order = 12)
+    @ReportItem(name = "hokenshaNo", length = 6, order = 13)
     public RString hokenshaNo;
-    @ReportItem(name = "hokenshaName", length = 20, order = 13)
+    @ReportItem(name = "hokenshaName", length = 20, order = 14)
     public RString hokenshaName;
-    @ReportItem(name = "printTimeStamp", length = 34, order = 14)
+    @ReportItem(name = "printTimeStamp", length = 34, order = 15)
     public RString printTimeStamp;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
