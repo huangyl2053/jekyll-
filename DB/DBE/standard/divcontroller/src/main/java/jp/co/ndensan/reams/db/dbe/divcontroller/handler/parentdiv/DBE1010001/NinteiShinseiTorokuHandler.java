@@ -192,7 +192,7 @@ public class NinteiShinseiTorokuHandler {
         if (result.get認定申請区分申請時コード() != null) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分申請時コード().value()));
         }
-        if (result.get認定申請区分法令コード() != null) {
+        if (result.get認定申請区分法令コード() != null && !result.get認定申請区分法令コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(result.get認定申請区分法令コード().value()));
         }
         div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(result.get支所コード()));
