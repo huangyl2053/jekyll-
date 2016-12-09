@@ -41,8 +41,6 @@ public class ChosaTokkiShokai {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getTextPanel().setDisplayNone(false);
-        div.getImgPanel1().setDisplayNone(false);
-        div.getImgPanel2().setDisplayNone(false);
         return ResponseData.of(div).respond();
     }
 
