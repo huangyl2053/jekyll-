@@ -431,7 +431,6 @@
         ,A."nijiHanteiYokaigoJotaiKubunCode"
         ,A."hihokenshaKubunCode"
         ,COUNT(0) AS countHokensha
-        ,A."allshichoson"
         FROM "JigyoJyokyoHokokuTemp" A
         GROUP BY
         A."nijiHanteiYM"
@@ -440,7 +439,6 @@
         ,A."shoKisaiHokenshaNo"
         ,A."nijiHanteiYokaigoJotaiKubunCode"
         ,A."hihokenshaKubunCode"
-        ,A."allshichoson"
         ORDER BY
         A."nijiHanteiYM"
         ,A."shichosonCode"
