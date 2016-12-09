@@ -147,6 +147,19 @@ public class ShinseiKensakuHandler {
             parameter.setUseNijiHanteiYMDTo(true);
             useNinteiKekkaJoho = true;
         }
+        RString 開催番号FROM = finderDiv.getTxtKaisaiNumberStart().getValue();
+        if (!RString.isNullOrEmpty(開催番号FROM)) {
+            parameter.setShinsakaiKaisaiNoFrom(開催番号FROM);
+            parameter.setUseShinsakaiKaisaiNoFrom(true);
+            useNinteiKekkaJoho = true;
+        }
+        RString 開催番号To = finderDiv.getTxtKaisaiNumberEnd().getValue();
+        if (!RString.isNullOrEmpty(開催番号To)) {
+            parameter.setShinsakaiKaisaiNoTo(開催番号To);
+            parameter.setUseShinsakaiKaisaiNoTo(true);
+            useNinteiKekkaJoho = true;
+        }
+        
         parameter.setUseNinteiKekkaJoho(useNinteiKekkaJoho);
         editKaisaiDateForParameter(finderDiv, parameter);
     }
@@ -163,18 +176,6 @@ public class ShinseiKensakuHandler {
         if (開催日To != null && !FlexibleDate.EMPTY.equals(開催日To)) {
             parameter.setShinsakaiKaisaiYMDTo(開催日To);
             parameter.setUseShinsakaiKaisaiYMDTo(true);
-            useShinsakaiKaisaiKekkaJoho = true;
-        }
-        RString 開催番号FROM = finderDiv.getTxtKaisaiNumberStart().getValue();
-        if (!RString.isNullOrEmpty(開催番号FROM)) {
-            parameter.setShinsakaiKaisaiNoFrom(開催番号FROM);
-            parameter.setUseShinsakaiKaisaiNoFrom(true);
-            useShinsakaiKaisaiKekkaJoho = true;
-        }
-        RString 開催番号To = finderDiv.getTxtKaisaiNumberEnd().getValue();
-        if (!RString.isNullOrEmpty(開催番号To)) {
-            parameter.setShinsakaiKaisaiNoTo(開催番号To);
-            parameter.setUseShinsakaiKaisaiNoTo(true);
             useShinsakaiKaisaiKekkaJoho = true;
         }
         parameter.setUseShinsakaiKaisaiKekkaJoho(useShinsakaiKaisaiKekkaJoho);

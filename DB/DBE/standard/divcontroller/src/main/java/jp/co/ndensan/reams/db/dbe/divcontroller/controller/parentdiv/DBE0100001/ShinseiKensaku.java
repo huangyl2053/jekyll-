@@ -255,8 +255,8 @@ public class ShinseiKensaku {
             FlowParameterAccessor.merge(fp);
             div.setWfParameter(WORKFLOW_KEY_KANRYO);
         }
-        div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
-        return ResponseData.of(div).setState(DBE0100001StateName.完了);
+        //div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
+        return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
     }
 
     /**
