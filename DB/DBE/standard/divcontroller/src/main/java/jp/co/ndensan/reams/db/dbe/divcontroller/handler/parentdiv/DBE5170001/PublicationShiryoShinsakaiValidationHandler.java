@@ -70,7 +70,7 @@ public class PublicationShiryoShinsakaiValidationHandler {
         部数未入力(UrErrorMessages.入力値が不正_追加メッセージあり, "部数"),
         印刷帳票未選択(UrErrorMessages.選択されていない, "選択条件"),
         印刷範囲指定未入力(UrErrorMessages.入力値が不正_追加メッセージあり, "印刷範囲指定"),
-        印刷範囲指定の前後順(UrErrorMessages.大小関係が不正);
+        印刷範囲指定の前後順(UrErrorMessages.大小関係が不正, "資料番号");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
