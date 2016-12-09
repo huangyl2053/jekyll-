@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplS
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplZaitakuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Handler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1ValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -90,6 +91,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査結果登録1のクラスです。
@@ -163,6 +165,7 @@ public class NinnteiChousaKekkaTouroku1 {
         ViewStateHolder.put(ViewStateKeys.認定調査回数, 認定調査情報.getTemp_認定調査回数());
 
         基本調査の初期化(div, is再調査の場合);
+        initialize一次判定(div, temp_申請書管理番号, 認定調査情報.getTemp_厚労省IF識別コード());
 
         if (is再調査の場合) {
             getHandler(div).住宅改修_既存初期化(temp_申請書管理番号, temp_認定調査履歴番号);
@@ -572,8 +575,14 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onOkClose_btnIchiHanteiJisshi(NinnteiChousaKekkaTouroku1Div div) {
-        IchijiHanteiKekkaJoho result = ViewStateHolder.get(ViewStateKeys.一次判定結果情報, IchijiHanteiKekkaJoho.class);
-        div.getTxtIchijiHanteiKekka().setValue(IchijiHanteiKekkaCode99.toValue(result.get要介護認定一次判定結果コード().getColumnValue()).get名称());
+        if (RString.isNullOrEmpty(div.getIchijiHanteiKekkaJoho())) {
+            return ResponseData.of(div).respond();
+        }
+        IchijiHanteiKekkaJoho result = DataPassingConverter.deserialize(div.getIchijiHanteiKekkaJoho(), IchijiHanteiKekkaJoho.class);
+
+        RString 厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
+        RString meisho = result.get一次判定結果名称(new Code(厚労省IF識別コード));
+        div.getTxtIchijiHanteiKekka().setValue(meisho);
         return ResponseData.of(div).respond();
     }
 
@@ -1060,6 +1069,19 @@ public class NinnteiChousaKekkaTouroku1 {
         ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, 第5群List);
         ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, 特別な医療List);
         ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, 自立度List);
+    }
+
+    private void initialize一次判定(NinnteiChousaKekkaTouroku1Div div, ShinseishoKanriNo shinseishoKanriNo,
+            RString 厚労省IF識別コードStr) {
+        IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = new IchijiHanteiKekkaJohoManager();
+        IchijiHanteiKekkaJoho result = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(shinseishoKanriNo);
+
+        if (result != null) {
+            Code 厚労省IF識別コード = 厚労省IF識別コードStr == null ? Code.EMPTY : new Code(厚労省IF識別コードStr);
+            div.setIchijiHanteiKekkaJoho(result == null ? RString.EMPTY : DataPassingConverter.serialize(result));
+            RString meisho = result.get一次判定結果名称(厚労省IF識別コード);
+            div.getTxtIchijiHanteiKekka().setValue(meisho);
+        }
     }
 
     private RString get変更前の現在のサービス区分(RString 現在の選択) {
