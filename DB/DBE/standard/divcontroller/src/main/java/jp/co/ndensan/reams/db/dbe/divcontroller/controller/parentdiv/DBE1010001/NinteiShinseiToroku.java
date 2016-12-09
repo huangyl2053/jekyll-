@@ -379,7 +379,9 @@ public class NinteiShinseiToroku {
             ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             del審査会委員除外情報(申請書管理番号, dataList);
             add審査会委員除外情報(申請書管理番号, dataList);
-            manager.save申請届出情報(get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY));
+            if (get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY) != null) {
+                manager.save申請届出情報(get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY));
+            }
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("審査依頼受付")).respond();
         }
     }
@@ -530,26 +532,32 @@ public class NinteiShinseiToroku {
         } else {
             todokedeJoho = ViewStateHolder.get(ViewStateKeys.要介護認定申請届出情報, ShinseitodokedeJoho.class);
         }
-        ShinseitodokedeJohoBuilder todokedeJohoBuilder = todokedeJoho.createBuilderForEdit();
-        NinteiShinseiTodokedeshaNaiyo todokedeshaNaiyo = div.getCcdShinseiTodokedesha().get一覧内容();
-        todokedeJohoBuilder.set申請届出代行区分コード(new Code(todokedeshaNaiyo.get届出代行区分()));
-        todokedeJohoBuilder.set申請届出者氏名(todokedeshaNaiyo.get氏名());
-        todokedeJohoBuilder.set申請届出者氏名カナ(todokedeshaNaiyo.getカナ氏名());
-        todokedeJohoBuilder.set申請届出者続柄コード(todokedeshaNaiyo.get本人との関係性());
-        if (!RString.isNullOrEmpty(todokedeshaNaiyo.get事業者コード())) {
-            todokedeJohoBuilder.set申請届出代行事業者番号(new JigyoshaNo(todokedeshaNaiyo.get事業者コード()));
+        if (todokedeJoho != null) {
+            ShinseitodokedeJohoBuilder todokedeJohoBuilder = todokedeJoho.createBuilderForEdit();
+            NinteiShinseiTodokedeshaNaiyo todokedeshaNaiyo = div.getCcdShinseiTodokedesha().get一覧内容();
+            todokedeJohoBuilder.set申請届出代行区分コード(new Code(todokedeshaNaiyo.get届出代行区分()));
+            todokedeJohoBuilder.set申請届出者氏名(todokedeshaNaiyo.get氏名());
+            todokedeJohoBuilder.set申請届出者氏名カナ(todokedeshaNaiyo.getカナ氏名());
+            todokedeJohoBuilder.set申請届出者続柄コード(todokedeshaNaiyo.get本人との関係性());
+            if (!RString.isNullOrEmpty(todokedeshaNaiyo.get事業者コード())) {
+                todokedeJohoBuilder.set申請届出代行事業者番号(new JigyoshaNo(todokedeshaNaiyo.get事業者コード()));
+            }
+            todokedeJohoBuilder.set事業者区分(todokedeshaNaiyo.get申請関係者());
+            if (new RString("key0").equals(todokedeshaNaiyo.get管内管外区分())) {
+                todokedeJohoBuilder.set申請届出者郵便番号(todokedeshaNaiyo.get郵便番号());
+                todokedeJohoBuilder.set申請届出者住所(todokedeshaNaiyo.get町域入力住所名称());
+            }
+            if (new RString("key1").equals(todokedeshaNaiyo.get管内管外区分())) {
+                todokedeJohoBuilder.set申請届出者郵便番号(new YubinNo(todokedeshaNaiyo.get全国郵便番号()));
+                todokedeJohoBuilder.set申請届出者住所(todokedeshaNaiyo.get全国住所名称());
+            }
+            todokedeJohoBuilder.set申請届出者電話番号(new TelNo(todokedeshaNaiyo.get電話番号()));
+            return todokedeJohoBuilder.build();
+        } else {
+
+            return null;
         }
-        todokedeJohoBuilder.set事業者区分(todokedeshaNaiyo.get申請関係者());
-        if (new RString("key0").equals(todokedeshaNaiyo.get管内管外区分())) {
-            todokedeJohoBuilder.set申請届出者郵便番号(todokedeshaNaiyo.get郵便番号());
-            todokedeJohoBuilder.set申請届出者住所(todokedeshaNaiyo.get町域入力住所名称());
-        }
-        if (new RString("key1").equals(todokedeshaNaiyo.get管内管外区分())) {
-            todokedeJohoBuilder.set申請届出者郵便番号(new YubinNo(todokedeshaNaiyo.get全国郵便番号()));
-            todokedeJohoBuilder.set申請届出者住所(todokedeshaNaiyo.get全国住所名称());
-        }
-        todokedeJohoBuilder.set申請届出者電話番号(new TelNo(todokedeshaNaiyo.get電話番号()));
-        return todokedeJohoBuilder.build();
+
     }
 
     private NinteiShinseiJoho get要介護認定申請情報(NinteiShinseiTorokuDiv div, ShinseishoKanriNo 申請書管理番号) {

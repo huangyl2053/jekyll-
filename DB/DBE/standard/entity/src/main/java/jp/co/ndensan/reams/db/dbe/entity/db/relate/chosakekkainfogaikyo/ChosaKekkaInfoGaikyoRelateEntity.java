@@ -22,6 +22,7 @@ import lombok.Setter;
 public class ChosaKekkaInfoGaikyoRelateEntity {
 
     private FlexibleDate ninteichosaJisshiYMD;
+    private Code chosaJisshiBashoCode;
     private RString chosaJisshiBashoMeisho;
     private RString tokki;
     private Code serviceKubunCode;

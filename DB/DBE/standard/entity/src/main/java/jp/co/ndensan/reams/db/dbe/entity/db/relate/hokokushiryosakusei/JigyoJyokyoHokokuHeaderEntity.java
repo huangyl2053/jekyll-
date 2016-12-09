@@ -81,7 +81,8 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     /**
      * 二次判定要介護状態区分コードのsetメソッドです。
      *
-     * @param nijiHanteiYokaigoJotaiKubunCode the nijiHanteiYokaigoJotaiKubunCode to set
+     * @param nijiHanteiYokaigoJotaiKubunCode the
+     * nijiHanteiYokaigoJotaiKubunCode to set
      */
     public void setNijiHanteiYokaigoJotaiKubunCode(Code nijiHanteiYokaigoJotaiKubunCode) {
         this.nijiHanteiYokaigoJotaiKubunCode = nijiHanteiYokaigoJotaiKubunCode;
@@ -153,7 +154,8 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     /**
      * 認定申請区分(申請時)コードのsetメソッドです。
      *
-     * @param ninteiShinseiShinseijiKubunCode the ninteiShinseiShinseijiKubunCode to set
+     * @param ninteiShinseiShinseijiKubunCode the
+     * ninteiShinseiShinseijiKubunCode to set
      */
     public void setNinteiShinseiShinseijiKubunCode(Code ninteiShinseiShinseijiKubunCode) {
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;

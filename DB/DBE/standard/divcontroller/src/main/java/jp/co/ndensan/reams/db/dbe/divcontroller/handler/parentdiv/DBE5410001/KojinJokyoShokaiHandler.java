@@ -175,6 +175,10 @@ public class KojinJokyoShokaiHandler {
             div.getTxtShinseiKubunHorei().setValue(RString.EMPTY);
         }
         set認定結果(kojinJokyoShokaiList);
+        if (kojinJokyoShokaiList.get(0).get二次判定年月日() != null && !kojinJokyoShokaiList.get(0).get二次判定年月日().isEmpty()) {
+            div.getTxtNijiHanteiYMD().setValue(new RDate(
+                    kojinJokyoShokaiList.get(0).get二次判定年月日().toString()));
+        }
         if (kojinJokyoShokaiList.get(0).get二次判定認定有効開始年月日() != null && !kojinJokyoShokaiList.get(0).get二次判定認定有効開始年月日().isEmpty()) {
             div.getTxtNinteiYukoKikanFrom().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get二次判定認定有効開始年月日().toString()));
@@ -195,9 +199,9 @@ public class KojinJokyoShokaiHandler {
         div.getTxtJohoTeikyoDoi().setValue(IsExistJohoTeikyoDoui.
                 toValue(kojinJokyoShokaiList.get(0).is情報提供への同意有無()).get名称());
         set一次判定結果(kojinJokyoShokaiList);
-        if (kojinJokyoShokaiList.get(0).get審査会開催年月日() != null && !kojinJokyoShokaiList.get(0).get審査会開催年月日().isEmpty()) {
-            div.getTxtKaisaiDay().setValue(new RDate(
-                    kojinJokyoShokaiList.get(0).get審査会開催年月日().toString()));
+        if (kojinJokyoShokaiList.get(0).get一次判定年月日() != null && !kojinJokyoShokaiList.get(0).get一次判定年月日().isEmpty()) {
+            div.getTxtIchijiHanteiYMD().setValue(new RDate(
+                    kojinJokyoShokaiList.get(0).get一次判定年月日().toString()));
         }
         if (kojinJokyoShokaiList.get(0).get処理状態区分() != null && !kojinJokyoShokaiList.get(0).get処理状態区分().isEmpty()) {
             div.getTxtShoriKubun().setValue(ShoriJotaiKubun.

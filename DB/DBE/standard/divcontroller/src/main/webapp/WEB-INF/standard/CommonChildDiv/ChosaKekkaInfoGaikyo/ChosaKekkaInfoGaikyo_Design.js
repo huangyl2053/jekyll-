@@ -39,6 +39,10 @@ var DBE;
                 return new UZA.Label(this.convFiledName("lblJisshiBasho"));
             };
 
+            Controls.prototype.txtChosaJisshiBashoCode = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoCode"));
+            };
+
             Controls.prototype.txtChosaJisshiBashoMeisho = function () {
                 return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoMeisho"));
             };

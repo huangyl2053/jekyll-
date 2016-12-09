@@ -45,6 +45,10 @@ module DBE {
                 return new UZA.Label(this.convFiledName("lblJisshiBasho"));
             }
 
+            public txtChosaJisshiBashoCode(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoCode"));
+            }
+
             public txtChosaJisshiBashoMeisho(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoMeisho"));
             }

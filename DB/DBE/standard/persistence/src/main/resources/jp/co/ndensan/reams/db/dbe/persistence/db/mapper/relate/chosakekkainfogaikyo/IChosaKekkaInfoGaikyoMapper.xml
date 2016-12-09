@@ -7,6 +7,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosakekkainfogaikyo.IChosaKekkaInfoGaikyoMapper">
     <resultMap id="resultMap_ChosaKekkaInfoGaikyoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoRelateEntity" autoMapping="true">
         <result property="ninteichosaJisshiYMD" column="DbT5202_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="chosaJisshiBashoCode" column="DbT5202_chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="chosaJisshiBashoMeisho" column="DbT5202_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="tokki" column="DbT5202_tokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceKubunCode" column="DbT5202_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
@@ -30,6 +31,7 @@
                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter" fetchSize="500">
         SELECT 
         DbT5202."ninteichosaJisshiYMD" as "DbT5202_ninteichosaJisshiYMD"
+        ,DbT5202."chosaJisshiBashoCode" as "DbT5202_chosaJisshiBashoCode"
         ,DbT5202."chosaJisshiBashoMeisho" as "DbT5202_chosaJisshiBashoMeisho"
         ,DbT5202."tokki" as "DbT5202_tokki"
         ,DbT5202."serviceKubunCode" as "DbT5202_serviceKubunCode"

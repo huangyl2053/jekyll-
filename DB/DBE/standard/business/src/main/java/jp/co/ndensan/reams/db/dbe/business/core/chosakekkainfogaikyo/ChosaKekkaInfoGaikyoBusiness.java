@@ -36,6 +36,15 @@ public class ChosaKekkaInfoGaikyoBusiness {
     public FlexibleDate get認定調査実施年月日() {
         return choentity.getNinteichosaJisshiYMD();
     }
+    
+    /**
+     * 認定調査実施場所コードを返します。
+     *
+     * @return 認定調査実施場所コード
+     */
+    public Code get認定調査実施場所コード() {
+        return choentity.getChosaJisshiBashoCode();
+    }
 
     /**
      * 認定調査実施場所名称を返します。

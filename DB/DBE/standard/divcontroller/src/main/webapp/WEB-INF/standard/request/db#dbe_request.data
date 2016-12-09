@@ -189,6 +189,7 @@ dbe/db/dbe/IchijiHantei/btn_save
 dbe/db/dbe/IchijiHantei/btn_syoKai
 dbe/db/dbe/IchijiHantei/btn_toRoKu
 dbe/db/dbe/IchijiHantei/koShiSyori
+dbe/db/dbe/IchijiHantei/onClick_btnResearch
 dbe/db/dbe/IchijiHantei/onLoad
 dbe/db/dbe/IchijiHantei/onclick_BtnUpload
 dbe/db/dbe/IchijiHanteiKekkaInfo/onLoad
@@ -643,6 +644,7 @@ dbe/db/dbe/NinteichosaItakusakiMain/onSelectByDeleteButton_dgSonotaKikanIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByDlbClick_dgSonotaKikanIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByModifyButton_dgSonotaKikanIchiran
 dbe/db/dbe/NinteichosaItakusakiMaster/onActive
+dbe/db/dbe/NinteichosaItakusakiMaster/onBeforeDownlaod_btnOutputCsv
 dbe/db/dbe/NinteichosaItakusakiMaster/onBeforeOpenDialog_btnKoza
 dbe/db/dbe/NinteichosaItakusakiMaster/onBeforeOpenDialog_btnToSearchjigyosha
 dbe/db/dbe/NinteichosaItakusakiMaster/onBlur_txtShichoson
@@ -837,7 +839,9 @@ dbe/db/dbe/ShinsakaiKekkaToroku/onBefore_btnMemoTeikeibunGuide
 dbe/db/dbe/ShinsakaiKekkaToroku/onBefore_btnNinteiChosaJokyoShokai
 dbe/db/dbe/ShinsakaiKekkaToroku/onChange_HanteiKekka
 dbe/db/dbe/ShinsakaiKekkaToroku/onChange_NijiHantei
+dbe/db/dbe/ShinsakaiKekkaToroku/onChange_NinteiKikanFrom
 dbe/db/dbe/ShinsakaiKekkaToroku/onChange_NinteiKikanMonth
+dbe/db/dbe/ShinsakaiKekkaToroku/onChange_NinteiKikanTo
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_KaKuTeiButton
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_Save
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_SelectButton

@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -335,6 +336,7 @@ public class ChosaKekkaInfoGaikyoHandler {
             ChosaKekkaInfoGaikyoParameter gaikyoParameter) {
         for (ChosaKekkaInfoGaikyoBusiness gaikyoBusiness : chosaKekkaInfoGaikyoList) {
             set認定調査実施日(gaikyoBusiness);
+            set認定調査実施場所コード(gaikyoBusiness);
             setサービス区分(gaikyoBusiness);
 
             if (TokkijikoTextImageKubun.テキスト.getコード().equals(gaikyoDiv.getHdnTextImageKubun())) {
@@ -357,6 +359,13 @@ public class ChosaKekkaInfoGaikyoHandler {
     private void set認定調査実施日(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness) {
         if (gaikyoBusiness.get認定調査実施年月日() != null) {
             gaikyoDiv.getTxtNinteichosaJisshiYMD().setValue(new RDate(gaikyoBusiness.get認定調査実施年月日().toString()));
+        }
+    }
+    
+    private void set認定調査実施場所コード(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness) {
+        if (gaikyoBusiness.get認定調査実施場所コード() != null) {
+            ChosaJisshiBashoCode 実施場所 = ChosaJisshiBashoCode.toValue(gaikyoBusiness.get認定調査実施場所コード().value());
+            gaikyoDiv.getTxtChosaJisshiBashoCode().setValue(実施場所.get名称());
         }
     }
 

@@ -1,8 +1,8 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../hokenshalist/HokenshaList.ts" />
-/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
+// <reference path="./../hokenshalist/HokenshaList.ts" />
+// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -102,6 +102,50 @@ module DBZ {
                 return "onChange_ddlNowPhase";
             }
 
+            public static onChange_chkShoriJotai(): string {
+                return "onChange_chkShoriJotai";
+            }
+
+            public static onChange_chkIchijiHantei(): string {
+                return "onChange_chkIchijiHantei";
+            }
+
+            public static onChange_chkShinseiUketsuke(): string {
+                return "onChange_chkShinseiUketsuke";
+            }
+
+            public static onChange_chkMasking(): string {
+                return "onChange_chkMasking";
+            }
+
+            public static onChange_chkChosaIrai(): string {
+                return "onChange_chkChosaIrai";
+            }
+
+            public static onChange_chkShinsakaiToroku(): string {
+                return "onChange_chkShinsakaiToroku";
+            }
+
+            public static onChange_chkIkenshoIrai(): string {
+                return "onChange_chkIkenshoIrai";
+            }
+
+            public static onChange_chkNijiHantei(): string {
+                return "onChange_chkNijiHantei";
+            }
+
+            public static onChange_chkChosaNyushu(): string {
+                return "onChange_chkChosaNyushu";
+            }
+
+            public static onChange_chkIkenshoNyushu(): string {
+                return "onChange_chkIkenshoNyushu";
+            }
+
+            public static onChange_chkGetsureiShori(): string {
+                return "onChange_chkGetsureiShori";
+            }
+
         }
 
         export class Controls {
@@ -131,9 +175,9 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            }
+            //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            //}
 
             public ddlShichosonCode(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
@@ -507,9 +551,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             }
 
-            public ccdGeninShikkan(): URZ.CodeInput.ModeController {
-                return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
-            }
+            //public ccdGeninShikkan(): URZ.CodeInput.ModeController {
+            //    return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
+            //}
 
             public txtShinseiKeikaNissu(): UZA.TextBoxNumRange {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));

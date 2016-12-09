@@ -207,7 +207,7 @@ public class ChosaTokkiImageShokaiHandler {
     private List<RString> getTitleList(List<RString> 表示イメージ) {
         List<RString> titleList = new ArrayList<>();
         for (int index = 1; index <= 表示イメージ.size(); index++) {
-            titleList.add(Title特記資料.concat(new RString(index)).concat("枚目"));
+            titleList.add(new RString(index).concat("枚目"));
         }
         return titleList;
     }

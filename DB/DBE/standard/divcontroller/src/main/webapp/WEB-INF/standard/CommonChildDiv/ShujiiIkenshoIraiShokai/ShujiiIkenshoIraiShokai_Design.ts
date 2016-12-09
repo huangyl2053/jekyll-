@@ -8,8 +8,8 @@ module DBE {
 
         export class Events {
 
-            public static onClick_btnModoru(): string {
-                return "onClick_btnModoru";
+            public static onClick_btnReturn(): string {
+                return "onClick_btnReturn";
             }
 
         }
@@ -41,8 +41,8 @@ module DBE {
                 return new UZA.DataGrid(this.convFiledName("dgIkenshoIraiIchiran"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            public btnReturn(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             }
 
         }

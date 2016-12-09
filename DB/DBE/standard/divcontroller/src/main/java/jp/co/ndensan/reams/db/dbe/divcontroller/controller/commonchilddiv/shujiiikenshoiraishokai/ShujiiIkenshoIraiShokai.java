@@ -33,7 +33,7 @@ public class ShujiiIkenshoIraiShokai {
      * @param div 主治医意見書作成依頼情報Div
      * @return ResponseData
      */
-    public ResponseData onClick_btnModoru(ShujiiIkenshoIraiShokaiDiv div) {
+    public ResponseData onClick_btnReturn(ShujiiIkenshoIraiShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
 
