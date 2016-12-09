@@ -82,28 +82,16 @@ public class IchijiHanteiKekkaJohoSearchManager {
         RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
 
         RStringBuilder builder = new RStringBuilder();
-        builder.append(testData(基本調査項目, 74));
+        builder.append(基本調査項目);
         builder.append(",");
-        builder.append(testData(主治医意見書項目, 4));
+        builder.append(主治医意見書項目);
         builder.append(",");
-        builder.append(testData(障害高齢者自立度, 1));
+        builder.append(障害高齢者自立度);
         builder.append(",");
-        builder.append(testData(認知症高齢者自立度, 1));
+        builder.append(認知症高齢者自立度);
         builder.append(",");
-        builder.append(testData(認知症高齢者自立度_主治医意見書, 1));
+        builder.append(認知症高齢者自立度_主治医意見書);
 
-        return builder.toRString();
-    }
-
-    //TODO n8178 城間 本来はデータが無い場合に代わりの値を詰めたりはしないはず。後でtestDataメソッドは削除する。
-    private RString testData(RString str, int num) {
-        if (str.length() == num) {
-            return str;
-        }
-        RStringBuilder builder = new RStringBuilder();
-        for (int i = 0; i < num; i++) {
-            builder.append("1");
-        }
         return builder.toRString();
     }
 
