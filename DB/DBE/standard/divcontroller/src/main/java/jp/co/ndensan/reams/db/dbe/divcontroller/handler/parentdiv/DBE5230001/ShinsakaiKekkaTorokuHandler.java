@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJot
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -57,6 +58,7 @@ public class ShinsakaiKekkaTorokuHandler {
     private static final RString キー_25 = new RString("25");
     private static final RString キー_01 = new RString("01");
     private static final RString 更新_FLAG = new RString("1");
+    private static final int INT1 = 1;
 
     /**
      * コンストラクタです。
@@ -561,8 +563,10 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setReadOnly(false);
             div.getKobetsuHyojiArea().getDdlJotaiZo().setReadOnly(false);
             div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(false);
-            div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(true);
-            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(true);
+//            div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(true);
+            div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(Boolean.FALSE);
+//            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(true);
+            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(Boolean.FALSE);
             div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setReadOnly(false);
             div.getKobetsuHyojiArea().getBtnShinsakaiMemoTeikeibunGuide().setDisabled(false);
             div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setReadOnly(false);
@@ -588,6 +592,12 @@ public class ShinsakaiKekkaTorokuHandler {
         }
     }
 
+    private TextBoxFlexibleDate toTextBoxFlexibleDate(FlexibleDate date) {
+        TextBoxFlexibleDate txtBox = new TextBoxFlexibleDate();
+        txtBox.setValue(date);
+        return txtBox;
+    }
+
     /**
      * 「二次判定」ドロップダウンリストの選択変更の場合、認定期間を設定します。
      *
@@ -597,9 +607,14 @@ public class ShinsakaiKekkaTorokuHandler {
         TextBoxDate ninteiKikanTo = div.getKobetsuHyojiArea().getTxtNinteiKikanTo();
         TextBox shinseiKubun = div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji();
         FlexibleDate shinseiDay = div.getKobetsuHyojiArea().getTxtShinseiDay().getValue();
-        TextBoxFlexibleDate 前回有効期間終了日 = div.getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiYukoKikanShuryoDay();
-        TextBoxFlexibleDate 二次判定日 = div.getDgTaishoshaIchiran().getDataSource().get(0).getNijiHanteiDate();
-        RString 前回二次判定 = div.getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiNijiHantei();
+        TextBoxFlexibleDate 前回有効期間終了日 = toTextBoxFlexibleDate(FlexibleDate.EMPTY);
+        TextBoxFlexibleDate 二次判定日 = toTextBoxFlexibleDate(FlexibleDate.EMPTY);
+        RString 前回二次判定 = RString.EMPTY;
+        if (div.getDgTaishoshaIchiran().getDataSource().size() > 0) {
+            前回有効期間終了日 = div.getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiYukoKikanShuryoDay();
+            二次判定日 = div.getDgTaishoshaIchiran().getDataSource().get(0).getNijiHanteiDate();
+            前回二次判定 = div.getDgTaishoshaIchiran().getDataSource().get(0).getZenkaiNijiHantei();
+        }
         RString 二次判定DDLの選択肢 = div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey();
         if (ninteiKikanFrom.getValue() == null && ninteiKikanTo.getValue() == null) {
             if (shinseiKubun != null) {
@@ -623,15 +638,22 @@ public class ShinsakaiKekkaTorokuHandler {
                             div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(前回有効期間終了日.getValue().plusDay(1).toString()));
                         } else {
                             int ninteiKikanMonth = Integer.valueOf(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
-                            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(ninteiKikanMonth).toString()));
+                            FlexibleYearMonth 基準年月 = shinseiDay.plusMonth(ninteiKikanMonth).getYearMonth();
+                            div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(get当月末日(基準年月).toString()));
                         }
                     }
                 } else {
+
                     int ninteiKikanMonth = Integer.valueOf(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
-                    div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(shinseiDay.plusMonth(ninteiKikanMonth).toString()));
+                    FlexibleYearMonth 基準年月 = shinseiDay.plusMonth(ninteiKikanMonth).getYearMonth();
+                    div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setValue(new RDate(get当月末日(基準年月).toString()));
                 }
             }
         }
+    }
+
+    private FlexibleDate get当月末日(FlexibleYearMonth 基準年月) {
+        return new FlexibleDate(基準年月.getYearValue(), 基準年月.getMonthValue(), INT1).plusMonth(INT1).minusDay(INT1);
     }
 
     private void setShinseiKubun(TextBox shinseiKubun, FlexibleDate shinseiDay) {
@@ -721,7 +743,7 @@ public class ShinsakaiKekkaTorokuHandler {
      *
      */
     public void setShinsakaiIken() {
-        setNinteiKikan();
+//        setNinteiKikan();
         if (div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().isNullOrEmpty()) {
             div.getKobetsuHyojiArea().getTxtShinsakaiIken().setValue(RString.EMPTY);
         } else {

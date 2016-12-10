@@ -216,6 +216,9 @@ public class ShinsakaiKekkaToroku {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        RDate 認定期間From = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue();
+        RDate 認定期間To = div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue();
+        
         ValidationMessageControlPairs validPairs2 = getValidationHandler(div).認定期間チェック(validationMessages);
         if (validPairs2.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs2).respond();
