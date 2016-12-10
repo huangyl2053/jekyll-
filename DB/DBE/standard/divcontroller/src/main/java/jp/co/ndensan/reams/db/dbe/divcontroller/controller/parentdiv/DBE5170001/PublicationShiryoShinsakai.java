@@ -54,7 +54,7 @@ public class PublicationShiryoShinsakai {
         }else{
             div.setHdnChkSubeteJimuFlag(new RString(Boolean.FALSE.toString()));
         }
-        if(div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)){
+        if(div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)){
             div.setHdnChkSubeteIinFlag(new RString(Boolean.TRUE.toString()));
         }else{
             div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
