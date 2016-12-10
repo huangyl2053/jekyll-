@@ -14,17 +14,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuOptionDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtMaximumDisplayNumber")
+    private TextBoxNum txtMaximumDisplayNumber;
     @JsonProperty("chkKensakuOption")
     private CheckBoxList chkKensakuOption;
-    @JsonProperty("txtMaximumDisplayNumber")
-    private TextBox txtMaximumDisplayNumber;
     @JsonProperty("btnConditionClear")
     private Button btnConditionClear;
     @JsonProperty("btnKensaku")
@@ -36,6 +36,24 @@ public class KensakuOptionDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtMaximumDisplayNumber
+     * @return txtMaximumDisplayNumber
+     */
+    @JsonProperty("txtMaximumDisplayNumber")
+    public TextBoxNum getTxtMaximumDisplayNumber() {
+        return txtMaximumDisplayNumber;
+    }
+
+    /*
+     * settxtMaximumDisplayNumber
+     * @param txtMaximumDisplayNumber txtMaximumDisplayNumber
+     */
+    @JsonProperty("txtMaximumDisplayNumber")
+    public void setTxtMaximumDisplayNumber(TextBoxNum txtMaximumDisplayNumber) {
+        this.txtMaximumDisplayNumber = txtMaximumDisplayNumber;
+    }
+
     /*
      * getchkKensakuOption
      * @return chkKensakuOption
@@ -52,24 +70,6 @@ public class KensakuOptionDiv extends Panel {
     @JsonProperty("chkKensakuOption")
     public void setChkKensakuOption(CheckBoxList chkKensakuOption) {
         this.chkKensakuOption = chkKensakuOption;
-    }
-
-    /*
-     * gettxtMaximumDisplayNumber
-     * @return txtMaximumDisplayNumber
-     */
-    @JsonProperty("txtMaximumDisplayNumber")
-    public TextBox getTxtMaximumDisplayNumber() {
-        return txtMaximumDisplayNumber;
-    }
-
-    /*
-     * settxtMaximumDisplayNumber
-     * @param txtMaximumDisplayNumber txtMaximumDisplayNumber
-     */
-    @JsonProperty("txtMaximumDisplayNumber")
-    public void setTxtMaximumDisplayNumber(TextBox txtMaximumDisplayNumber) {
-        this.txtMaximumDisplayNumber = txtMaximumDisplayNumber;
     }
 
     /*

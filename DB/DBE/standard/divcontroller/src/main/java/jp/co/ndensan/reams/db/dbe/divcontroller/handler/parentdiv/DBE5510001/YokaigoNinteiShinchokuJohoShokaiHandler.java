@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -44,6 +45,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     private static final List<RString> CHK_BOX_NASI = Collections.emptyList();
     private static final RString DATE_SOURCE_KEY0 = new RString("key0");
     private static final RString DATE_SOURCE_KEY1 = new RString("key1");
+    private static final RString BTNPRINT = new RString("btnPrint");
 
     private enum KensakuHoho {
 
@@ -82,6 +84,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getTxtShiteiHizukeRange().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, false);
         init最大表示件数();
         setDisable();
     }
@@ -90,8 +93,11 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * 最大表示件数を初期化します。業務コンフィグからデフォルト値を取得して設定します。
      */
     public void init最大表示件数() {
-        div.getTxtMaximumDisplayNumber().setValue(DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
-                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値")));
+        RString データ出力件数閾値 = DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
+                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値"));
+        if (Decimal.canConvert(データ出力件数閾値)) {
+            div.getTxtMaximumDisplayNumber().setValue(new Decimal(データ出力件数閾値.toString()));
+        }
     }
 
     /**
@@ -151,6 +157,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * @param searchResult 要介護認定進捗状況照会情報
      */
     public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> searchResult) {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, true);
         div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
         if (searchResult.records().isEmpty()) {
@@ -165,8 +172,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     }
 
     private int get最大取得件数() {
-        RString value = div.getTxtMaximumDisplayNumber().getValue();
-        return value == null || value.isEmpty() ? -1 : Integer.parseInt(value.toString());
+        int value = div.getTxtMaximumDisplayNumber().getValue().intValue();
+        return value;
     }
 
     /**

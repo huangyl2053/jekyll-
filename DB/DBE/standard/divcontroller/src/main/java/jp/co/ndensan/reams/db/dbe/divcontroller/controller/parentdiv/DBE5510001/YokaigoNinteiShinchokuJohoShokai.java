@@ -161,8 +161,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
                 div.getChkShinsakaiWaritsuke().getSelectedKeys(),
                 div.getChkShinsakaiJisshi().getSelectedKeys(),
                 div.getChkKensakuOption().getSelectedKeys(),
-                div.getTxtMaximumDisplayNumber().getValue().isEmpty() ? -1 : Integer.parseInt(div
-                        .getTxtMaximumDisplayNumber().getValue().toString()));
+                div.getTxtMaximumDisplayNumber().getValue() == null ? -1 : div.getTxtMaximumDisplayNumber().getValue().intValue());
     }
 
     private NiteiGyomuShinchokuJokyoIchiranhyoJoho ceratePrint(YokaigoNinteiShinchokuJohoShokaiDiv div) {

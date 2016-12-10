@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -386,6 +386,16 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaximumDisplayNumber() {
+        return this.getKensakuJoken().getKensakuOption().getTxtMaximumDisplayNumber();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaximumDisplayNumber(TextBoxNum txtMaximumDisplayNumber) {
+        this.getKensakuJoken().getKensakuOption().setTxtMaximumDisplayNumber(txtMaximumDisplayNumber);
+    }
+
+    @JsonIgnore
     public CheckBoxList getChkKensakuOption() {
         return this.getKensakuJoken().getKensakuOption().getChkKensakuOption();
     }
@@ -393,16 +403,6 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     @JsonIgnore
     public void  setChkKensakuOption(CheckBoxList chkKensakuOption) {
         this.getKensakuJoken().getKensakuOption().setChkKensakuOption(chkKensakuOption);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtMaximumDisplayNumber() {
-        return this.getKensakuJoken().getKensakuOption().getTxtMaximumDisplayNumber();
-    }
-
-    @JsonIgnore
-    public void  setTxtMaximumDisplayNumber(TextBox txtMaximumDisplayNumber) {
-        this.getKensakuJoken().getKensakuOption().setTxtMaximumDisplayNumber(txtMaximumDisplayNumber);
     }
 
     @JsonIgnore
