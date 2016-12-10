@@ -30,8 +30,10 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     private LatestPublicationDiv LatestPublication;
     @JsonProperty("PublishingCondition")
     private PublishingConditionDiv PublishingCondition;
-    @JsonProperty("hdnChkSubeteFlag")
-    private RString hdnChkSubeteFlag;
+    @JsonProperty("hdnChkSubeteJimuFlag")
+    private RString hdnChkSubeteJimuFlag;
+    @JsonProperty("hdnChkSubeteIinFlag")
+    private RString hdnChkSubeteIinFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,21 +96,39 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     }
 
     /*
-     * gethdnChkSubeteFlag
-     * @return hdnChkSubeteFlag
+     * gethdnChkSubeteJimuFlag
+     * @return hdnChkSubeteJimuFlag
      */
-    @JsonProperty("hdnChkSubeteFlag")
-    public RString getHdnChkSubeteFlag() {
-        return hdnChkSubeteFlag;
+    @JsonProperty("hdnChkSubeteJimuFlag")
+    public RString getHdnChkSubeteJimuFlag() {
+        return hdnChkSubeteJimuFlag;
     }
 
     /*
-     * sethdnChkSubeteFlag
-     * @param hdnChkSubeteFlag hdnChkSubeteFlag
+     * sethdnChkSubeteJimuFlag
+     * @param hdnChkSubeteJimuFlag hdnChkSubeteJimuFlag
      */
-    @JsonProperty("hdnChkSubeteFlag")
-    public void setHdnChkSubeteFlag(RString hdnChkSubeteFlag) {
-        this.hdnChkSubeteFlag = hdnChkSubeteFlag;
+    @JsonProperty("hdnChkSubeteJimuFlag")
+    public void setHdnChkSubeteJimuFlag(RString hdnChkSubeteJimuFlag) {
+        this.hdnChkSubeteJimuFlag = hdnChkSubeteJimuFlag;
+    }
+
+    /*
+     * gethdnChkSubeteIinFlag
+     * @return hdnChkSubeteIinFlag
+     */
+    @JsonProperty("hdnChkSubeteIinFlag")
+    public RString getHdnChkSubeteIinFlag() {
+        return hdnChkSubeteIinFlag;
+    }
+
+    /*
+     * sethdnChkSubeteIinFlag
+     * @param hdnChkSubeteIinFlag hdnChkSubeteIinFlag
+     */
+    @JsonProperty("hdnChkSubeteIinFlag")
+    public void setHdnChkSubeteIinFlag(RString hdnChkSubeteIinFlag) {
+        this.hdnChkSubeteIinFlag = hdnChkSubeteIinFlag;
     }
 
     /*

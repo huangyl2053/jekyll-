@@ -211,30 +211,30 @@ public class PublicationShiryoShinsakaiHandler {
 
         if (div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+                && Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())) {
             div.getChkPrintChoyoJimu().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(new ArrayList<RString>());
-            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+            div.setHdnChkSubeteJimuFlag(new RString(Boolean.FALSE.toString()));
         } else if (div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
-                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+                && !Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())) {
             div.getChkPrintChoyoJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料1);
             div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料2);
             div.getChkPrintChoyoJimu2().setSelectedItemsByKey(印刷帳票_事務局審査会資料3);
-            div.setHdnChkSubeteFlag(new RString(Boolean.TRUE.toString()));
+            div.setHdnChkSubeteJimuFlag(new RString(Boolean.TRUE.toString()));
         } else if (!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+                && !Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())) {
             div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料2);
         }else if(!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())){
+                && !Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())){
             div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(new ArrayList<RString>());
-        } else if (Boolean.valueOf(div.getHdnChkSubeteFlag().toString())
+        } else if (Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())
                 && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)) {
             div.getChkPrintChoyoJimu().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkPrintChoyoJimu2().setSelectedItemsByKey(new ArrayList<RString>());
-            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+            div.setHdnChkSubeteJimuFlag(new RString(Boolean.FALSE.toString()));
         }
     }
 
@@ -270,34 +270,34 @@ public class PublicationShiryoShinsakaiHandler {
             印刷帳票_委員審査会資料2.remove(印刷帳票_特記事項);
             印刷帳票_委員審査会資料2.remove(印刷帳票_一次判定結果票);
         }
-        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(印刷帳票_委員審査会資料2無効化);
+        div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(印刷帳票_委員審査会資料2無効化);
 
         if (div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && !div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+                && Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())) {
             div.getChkPrintChohyoIin().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(new ArrayList<RString>());
-            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+            div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
         } else if (div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
-                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+                && !Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())) {
             div.getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票_委員審査会資料1);
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料2);
             div.getChkPrintChohyoIin2().setSelectedItemsByKey(印刷帳票_委員審査会資料3);
-            div.setHdnChkSubeteFlag(new RString(Boolean.TRUE.toString()));
+            div.setHdnChkSubeteIinFlag(new RString(Boolean.TRUE.toString()));
         }else if(!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())){
+                && !Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())){
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料2);
         }else if (!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && !div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+                && !Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())) {
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(new ArrayList<RString>());
-        } else if (Boolean.valueOf(div.getHdnChkSubeteFlag().toString())
+        } else if (Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())
                 && !div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)) {
             div.getChkPrintChohyoIin().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkPrintChohyoIin2().setSelectedItemsByKey(new ArrayList<RString>());
-            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+            div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
         }
     }
 

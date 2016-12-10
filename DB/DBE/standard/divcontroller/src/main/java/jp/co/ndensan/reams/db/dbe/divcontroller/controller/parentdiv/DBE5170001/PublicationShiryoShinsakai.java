@@ -50,9 +50,14 @@ public class PublicationShiryoShinsakai {
         前排他キーのセット(builder.toRString());
         getHandler(div).onLoad(開催予定情報);
         if(div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)){
-            div.setHdnChkSubeteFlag(new RString(Boolean.TRUE.toString()));
+            div.setHdnChkSubeteJimuFlag(new RString(Boolean.TRUE.toString()));
         }else{
-            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+            div.setHdnChkSubeteJimuFlag(new RString(Boolean.FALSE.toString()));
+        }
+        if(div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)){
+            div.setHdnChkSubeteIinFlag(new RString(Boolean.TRUE.toString()));
+        }else{
+            div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
         }
         
         return ResponseData.of(div).respond();
