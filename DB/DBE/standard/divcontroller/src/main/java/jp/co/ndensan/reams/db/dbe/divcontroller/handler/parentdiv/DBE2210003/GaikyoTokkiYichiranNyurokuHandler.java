@@ -273,7 +273,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     public RString to認定調査特記事項番号_表示Form(TextBox 認定調査特記事項番号) {
         RStringBuilder 調査項目番号 = new RStringBuilder();
         調査項目番号.append(認定調査特記事項番号.getValue());
-        if (調査項目番号.length() == 0) {
+        if (調査項目番号.length() <= 1) {
             return 調査項目番号.toRString();
         }
         if (!調査項目番号.stringAt(INT1).equals(new RString("-"))) {
