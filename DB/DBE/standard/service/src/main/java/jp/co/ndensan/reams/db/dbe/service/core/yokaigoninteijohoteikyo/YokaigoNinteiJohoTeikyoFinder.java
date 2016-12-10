@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.Ninnt
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.AuthItem;
@@ -57,7 +58,8 @@ public class YokaigoNinteiJohoTeikyoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiJohoTeikyoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiJohoTeikyoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiJohoTeikyoFinder}のインスタンス
      */
     public static YokaigoNinteiJohoTeikyoFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiJohoTeikyoFinder.class);
@@ -112,5 +114,22 @@ public class YokaigoNinteiJohoTeikyoFinder {
             }
         }
         return SearchResult.of(resultList, 0, false);
+    }
+
+    /**
+     * 申請書管理番号を元に認定履歴情報を取得します。
+     *
+     * @param shinseishoKanriNo 申請書管理番号
+     * @return 認定履歴データ
+     */
+    @Transaction
+    public NinnteiRiriBusiness select認定履歴(ShinseishoKanriNo shinseishoKanriNo) {
+        IYokaigoNinteiJohoTeikyoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoTeikyoMapper.class);
+        NinnteiRiriRelateEntity entity = mapper.get認定履歴(shinseishoKanriNo);
+        if (entity == null) {
+            return null;
+        }
+
+        return new NinnteiRiriBusiness(entity);
     }
 }

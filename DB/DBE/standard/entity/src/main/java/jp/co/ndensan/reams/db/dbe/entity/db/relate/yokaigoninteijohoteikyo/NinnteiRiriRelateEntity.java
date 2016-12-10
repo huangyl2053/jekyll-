@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinnteiRiriRelateEntity {
+public class NinnteiRiriRelateEntity implements Serializable {
 
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiShinseiKubunCode;

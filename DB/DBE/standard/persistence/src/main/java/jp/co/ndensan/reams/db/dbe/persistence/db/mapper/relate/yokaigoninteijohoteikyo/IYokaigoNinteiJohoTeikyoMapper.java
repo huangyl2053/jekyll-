@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.Hihok
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinnteiRiriRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteichosaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
@@ -43,6 +44,14 @@ public interface IYokaigoNinteiJohoTeikyoMapper {
      * @return NinnteiRiriRelateEntityの{@code list}
      */
     List<NinnteiRiriRelateEntity> get認定履歴一覧(YokaigoNinteiJohoTeiParameter param);
+
+    /**
+     * 申請書管理番号を指定して、認定履歴の情報を1件取得する。
+     *
+     * @param shinseishoKanriNo 申請書管理番号
+     * @return NinnteiRiriRelateEntity
+     */
+    NinnteiRiriRelateEntity get認定履歴(ShinseishoKanriNo shinseishoKanriNo);
 
     /**
      * 検索条件より、要介護認定申請者情報を検索する。

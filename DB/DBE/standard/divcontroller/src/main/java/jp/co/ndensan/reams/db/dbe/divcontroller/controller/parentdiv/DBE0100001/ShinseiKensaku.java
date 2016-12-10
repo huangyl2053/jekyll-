@@ -175,6 +175,7 @@ public class ShinseiKensaku {
             RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
             RString 被保険者番号 = row.getHihokenshaNo();
             ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定情報提供へ).respond();
         }

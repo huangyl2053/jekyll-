@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinnteiRiriRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0230-010 zhangzhiming
  */
-public class NinnteiRiriBusiness {
+public class NinnteiRiriBusiness implements Serializable {
 
     private final NinnteiRiriRelateEntity entity;
 

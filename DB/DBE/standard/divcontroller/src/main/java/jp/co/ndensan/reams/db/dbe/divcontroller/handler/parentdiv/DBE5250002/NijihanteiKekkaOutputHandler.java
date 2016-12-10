@@ -304,12 +304,21 @@ public class NijihanteiKekkaOutputHandler {
             parameter.setChikuCode(地区コード);
             parameter.setUseChikuCode(true);
         }
-        RString 施設入所の有無 = finderDiv.getRadShisetsuNyusho().getSelectedKey();
-        if (KEY0.equals(施設入所の有無)) {
-            parameter.setShisetsuNyushoFlag(true);
-        }
-        if (KEY1.equals(施設入所の有無)) {
+
+        List<RString> 施設入所の有無List = finderDiv.getChkShisetsuNyusho().getSelectedKeys();
+        boolean isAllSelectableOrNoSelected = finderDiv.getChkShisetsuNyusho().isIsAllSelectable() || 施設入所の有無List.size() == 0;
+        if (!isAllSelectableOrNoSelected) {
+            RString 施設入所の有無 = 施設入所の有無List.get(0);
+            if (KEY0.equals(施設入所の有無)) {
+                parameter.setShisetsuNyushoFlag(true);
+            }
+            if (KEY1.equals(施設入所の有無)) {
+                parameter.setShisetsuNyushoFlag(false);
+            }
+            parameter.setIgnoreShisetsuNyusho(false);
+        } else {
             parameter.setShisetsuNyushoFlag(false);
+            parameter.setIgnoreShisetsuNyusho(true);
         }
 
         RString 認定調査委託先コード = finderDiv.getTxtNinteiChosaItakusakiName().getValue();

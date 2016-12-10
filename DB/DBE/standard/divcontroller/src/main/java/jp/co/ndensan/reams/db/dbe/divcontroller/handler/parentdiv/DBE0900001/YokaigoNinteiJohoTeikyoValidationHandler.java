@@ -42,16 +42,16 @@ public class YokaigoNinteiJohoTeikyoValidationHandler {
      */
     public ValidationMessageControlPairs validateCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        List<dgNinteiKekkaIchiran_Row> rowList = div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getDataSource();
-        if (rowList == null || rowList.isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiJohoTeikyoValidationHandler.RRVMessages(
-                    UrErrorMessages.該当データなし)));
-        }
-        if (div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems() == null
-                || div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiJohoTeikyoValidationHandler.RRVMessages(
-                    UrErrorMessages.対象行を選択)));
-        }
+//        List<dgNinteiKekkaIchiran_Row> rowList = div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getDataSource();
+//        if (rowList == null || rowList.isEmpty()) {
+//            validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiJohoTeikyoValidationHandler.RRVMessages(
+//                    UrErrorMessages.該当データなし)));
+//        }
+//        if (div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems() == null
+//                || div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems().isEmpty()) {
+//            validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiJohoTeikyoValidationHandler.RRVMessages(
+//                    UrErrorMessages.対象行を選択)));
+//        }
         getMessage(validationMessages);
         return validationMessages;
     }

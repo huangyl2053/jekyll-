@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseishaFinderDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -748,13 +748,13 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     @JsonIgnore
-    public RadioButton getRadShisetsuNyusho() {
-        return this.getShosaiJoken().getKihonJoho().getRadShisetsuNyusho();
+    public CheckBoxList getChkShisetsuNyusho() {
+        return this.getShosaiJoken().getKihonJoho().getChkShisetsuNyusho();
     }
 
     @JsonIgnore
-    public void  setRadShisetsuNyusho(RadioButton radShisetsuNyusho) {
-        this.getShosaiJoken().getKihonJoho().setRadShisetsuNyusho(radShisetsuNyusho);
+    public void  setChkShisetsuNyusho(CheckBoxList chkShisetsuNyusho) {
+        this.getShosaiJoken().getKihonJoho().setChkShisetsuNyusho(chkShisetsuNyusho);
     }
 
     @JsonIgnore

@@ -58,6 +58,7 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
     private final boolean isChikuCode;
     private final ChikuCode chikuCode;
     private final boolean isShisetsuNyushoFlag;
+    private final boolean ignoreShisetsuNyusho;
     private final boolean isJigyoshaMeisho;
     private final RString jigyoshaMeisho;
     private final boolean isChosainShimei;
@@ -196,6 +197,7 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
             boolean isChikuCode,
             ChikuCode chikuCode,
             boolean isShisetsuNyushoFlag,
+            boolean ignoreShisetsuNyusho,
             boolean isJigyoshaMeisho,
             RString jigyoshaMeisho,
             boolean isChosainShimei,
@@ -333,6 +335,7 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
         this.isChikuCode = isChikuCode;
         this.chikuCode = chikuCode;
         this.isShisetsuNyushoFlag = isShisetsuNyushoFlag;
+        this.ignoreShisetsuNyusho = ignoreShisetsuNyusho;
         this.isJigyoshaMeisho = isJigyoshaMeisho;
         this.jigyoshaMeisho = jigyoshaMeisho;
         this.isChosainShimei = isChosainShimei;
@@ -455,6 +458,7 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
      * @param yubinNo 郵便番号
      * @param chikuCode 地区コード
      * @param isShisetsuNyushoFlag 施設入所
+     * @param ignoreShisetsuNyusho 施設入所条件無視
      * @param jigyoshaMeisho 認定調査委託先名称
      * @param chosainShimei 認定調査員氏名
      * @param chosaJisshiBashoCode 調査実施場所
@@ -532,6 +536,7 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
             YubinNo yubinNo,
             ChikuCode chikuCode,
             boolean isShisetsuNyushoFlag,
+            boolean ignoreShisetsuNyusho,
             RString jigyoshaMeisho,
             RString chosainShimei,
             Code chosaJisshiBashoCode,
@@ -627,6 +632,7 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
                 !RString.isNullOrEmpty(chikuCode.value()),
                 chikuCode,
                 isShisetsuNyushoFlag,
+                ignoreShisetsuNyusho,
                 !RString.isNullOrEmpty(jigyoshaMeisho),
                 jigyoshaMeisho,
                 !RString.isNullOrEmpty(chosainShimei),
@@ -915,6 +921,15 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
      */
     public boolean isIsShisetsuNyushoFlag() {
         return isShisetsuNyushoFlag;
+    }
+
+    /**
+     * 施設入所条件を無視するかどうかを返します。
+     *
+     * @return 無視する場合はtruw
+     */
+    public boolean isIgnoreShisetsuNyusho() {
+        return ignoreShisetsuNyusho;
     }
 
     /**

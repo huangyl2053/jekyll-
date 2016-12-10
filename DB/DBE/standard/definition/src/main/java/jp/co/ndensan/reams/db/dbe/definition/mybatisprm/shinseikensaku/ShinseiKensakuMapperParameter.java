@@ -56,6 +56,8 @@ public class ShinseiKensakuMapperParameter {
     private boolean minashiNigoEtcTaishoFlag;
     // 施設入所の有無
     private boolean shisetsuNyushoFlag;
+    // 施設入所フラグを条件から無視するか否か
+    private boolean ignoreShisetsuNyusho;
     // 認定調査委託先コード
     private RString ninteiChosaItakusakiCode;
     // 認定調査員コード
@@ -279,8 +281,7 @@ public class ShinseiKensakuMapperParameter {
     private boolean useNinteiKanryoJoho;
 
     /**
-     * 検索に用いる被保険者氏名を設定します。
-     * 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
+     * 検索に用いる被保険者氏名を設定します。 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
      * 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
      *
      * @param hihokenshaName 検索に用いる被保険者氏名

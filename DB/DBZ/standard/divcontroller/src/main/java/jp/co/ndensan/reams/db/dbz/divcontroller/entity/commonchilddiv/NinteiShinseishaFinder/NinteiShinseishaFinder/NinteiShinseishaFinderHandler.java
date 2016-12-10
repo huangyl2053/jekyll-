@@ -125,7 +125,6 @@ public class NinteiShinseishaFinderHandler {
     /**
      * 指定の厚労省IF識別コードから、二次判定結果DDLを初期化します。
      *
-     * @param koroshoIFCode 厚労省IF識別コード
      */
     public void set二次判定結果DDL() {
         KoroshoIfShikibetsuCode koroshoIFCode = get厚労省IF識別コードOrNull();
@@ -306,7 +305,10 @@ public class NinteiShinseishaFinderHandler {
         div.getDdlKoroshoShikibetsuCode().setSelectedIndex(0);
         div.getDdlChiku().setSelectedIndex(0);
         div.getTxtYubinNo().clearValue();
-        div.getRadShisetsuNyusho().setSelectedKey(new RString("key1"));
+
+        List<RString> keyList = new ArrayList<>();
+        keyList.add(new RString("key1"));
+        div.getChkShisetsuNyusho().setSelectedItemsByKey(keyList);
 
     }
 

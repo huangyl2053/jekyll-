@@ -5,13 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0900001;
 
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinnteiRiriBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090002.DBE090002_NinteikekkaJohoteikyoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.DBE0900001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.dgNinteiKekkaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,8 +48,16 @@ public class YokaigoNinteiJohoTeikyo {
      */
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> onLoad(YokaigoNinteiJohoTeikyoDiv div) {
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
-        getHandler(div).onLoad(被保険者番号);
-        return ResponseData.of(div).setState(DBE0900001StateName.初期表示);
+        RString 申請書管理番号Str = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ShinseishoKanriNo 申請書管理番号 = RString.isNullOrEmpty(申請書管理番号Str)
+                ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(申請書管理番号Str);
+
+        NinnteiRiriBusiness business = YokaigoNinteiJohoTeikyoFinder.createInstance().select認定履歴(申請書管理番号);
+        ViewStateHolder.put(ViewStateKeys.認定申請情報, business);
+
+        //TODO n8178 本来なら受け取れなかった場合のチェック処理くらいは必要だけど、急ぎのため今は無視。
+        getHandler(div).onLoad(被保険者番号, business);
+        return ResponseData.of(div).setState(DBE0900001StateName.一覧選択);
     }
 
     /**
@@ -117,14 +127,14 @@ public class YokaigoNinteiJohoTeikyo {
     }
 
     /**
-     * 「一覧へ戻る」ボタン押下します。
+     * 「一覧へ戻る」ボタン押下します。 TODO n8178 城間 画面を破棄しながら検索画面に戻るように仕様を修正したため、この処理は削除される予定。
      *
      * @param div YokaigoNinteiJohoTeikyoDiv
      * @return ResponseData
      */
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_BackSearchResult(YokaigoNinteiJohoTeikyoDiv div) {
-        onLoad(div);
-        getHandler(div).btn_BackSearchResult();
+//        onLoad(div);
+//        getHandler(div).btn_BackSearchResult();
         return ResponseData.of(div).setState(DBE0900001StateName.初期表示);
     }
 
@@ -139,9 +149,15 @@ public class YokaigoNinteiJohoTeikyo {
         if (validationMessageControlPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
         }
-        dgNinteiKekkaIchiran_Row row = div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems().get(0);
         if (!ResponseHolder.isReRequest()) {
-            if (row.getNinteiShinsakaiKanryoYMD().getValue() == null) {
+            //dgNinteiKekkaIchiran_Row row = div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems().get(0);
+            //NinnteiRiriBusiness business = ViewStateHolder.get(ViewStateKeys.認定申請情報, NinnteiRiriBusiness.class);
+            RString 申請書管理番号Str = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+            ShinseishoKanriNo 申請書管理番号 = RString.isNullOrEmpty(申請書管理番号Str)
+                    ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(申請書管理番号Str);
+            NinnteiRiriBusiness business = YokaigoNinteiJohoTeikyoFinder.createInstance().select認定履歴(申請書管理番号);
+
+            if (business.get認定審査会完了年月日() == null || business.get認定審査会完了年月日().isEmpty()) {
                 QuestionMessage message = new QuestionMessage(DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().getCode(),
                         DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
@@ -150,7 +166,7 @@ public class YokaigoNinteiJohoTeikyo {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
             }
-            if (row.getJohoTeikyoShiryoShutsuryokuDay().getValue() != null) {
+            if (business.get出力年月日() != null || business.get出力年月日().isEmpty()) {
                 WarningMessage message = new WarningMessage(DbeWarningMessages.既に印刷済.getMessage().getCode(),
                         DbeWarningMessages.既に印刷済.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
@@ -175,7 +191,8 @@ public class YokaigoNinteiJohoTeikyo {
      */
     public ResponseData<DBE090002_NinteikekkaJohoteikyoParameter> getParameter(YokaigoNinteiJohoTeikyoDiv div) {
         DBE090002_NinteikekkaJohoteikyoParameter parm = new DBE090002_NinteikekkaJohoteikyoParameter();
-        parm.setShinseishoKanriNo(div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems().get(0).getShinseishoKanriNo());
+        RString 申請書管理番号Str = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        parm.setShinseishoKanriNo(申請書管理番号Str);
         if (div.getHakkoChohyo().getChkNinteiChosahyo().isAllSelected()) {
             parm.setChkNinteiChosahyo(する);
         } else {
@@ -236,4 +253,5 @@ public class YokaigoNinteiJohoTeikyo {
     private YokaigoNinteiJohoTeikyoHandler getHandler(YokaigoNinteiJohoTeikyoDiv div) {
         return new YokaigoNinteiJohoTeikyoHandler(div);
     }
+
 }

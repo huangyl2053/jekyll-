@@ -59,8 +59,9 @@ public class YokaigoNinteiJohoTeikyoHandler {
      * 画面情報を設定します。
      *
      * @param 被保険者番号 被保険者番号
+     * @param business 認定申請ビジネスクラス
      */
-    public void onLoad(RString 被保険者番号) {
+    public void onLoad(RString 被保険者番号, NinnteiRiriBusiness business) {
         div.getNinteiKekkaShosai().setIsOpen(false);
         div.getHakkoChohyo().setIsOpen(false);
         div.getNInteiRirekiInfo().setIsOpen(true);
@@ -82,60 +83,93 @@ public class YokaigoNinteiJohoTeikyoHandler {
             div.getTxtjusho().setValue(被保険者情報.get住所().getColumnValue());
             div.getTxtTelNo().setValue(被保険者情報.get電話番号().getColumnValue());
         }
-        List<NinnteiRiriBusiness> 認定履歴一覧 = YokaigoNinteiJohoTeikyoFinder.createInstance().select認定履歴一覧(被保険者番号).records();
-        List<dgNinteiKekkaIchiran_Row> ichiran_Row = new ArrayList<>();
-        if (認定履歴一覧 != null) {
-            for (NinnteiRiriBusiness business : 認定履歴一覧) {
-                dgNinteiKekkaIchiran_Row row = new dgNinteiKekkaIchiran_Row();
-                row.getNinteiShinseiDay().setValue(getNull(business.get認定申請日()));
-                row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
-                row.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
-                row.getShinseiTorisageDay().setValue(getNull(business.get取下年月日()));
-                row.getNinteiDay().setValue(getNull(business.get二次判定年月日()));
-                if (business.get二次判定区分コード() == null || business.get二次判定区分コード().isEmpty()
-                        || YokaigoJotaiKubun09.なし.getコード().equals(business.get二次判定区分コード().value())) {
-                    row.setYoKaigodo(RString.EMPTY);
-                } else {
-                    row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
-                }
-                RStringBuilder builder = new RStringBuilder();
-                builder.append(business.get二次判定認定有効期間());
-                builder.append(月);
-                row.setYukoKikan(builder.toRString());
-                RStringBuilder stringBuilder = new RStringBuilder();
-                if (business.get二次判定認定有効開始期間() != null) {
-                    stringBuilder.append(business.get二次判定認定有効開始期間().wareki().toDateString());
-                    stringBuilder.append(線);
-                }
-                if (business.get二次判定認定有効終了期間() != null) {
-                    stringBuilder.append(business.get二次判定認定有効終了期間().wareki().toDateString());
-                }
-                row.setYukoKikanStartEnd(stringBuilder.toRString());
-                row.getNinteiChosaJisshiDay().setValue(getNull(business.get認定調査実施年月日()));
-                row.getShujiiIkenshoJuryoDay().setValue(getNull(business.get主治医意見書受領年月日()));
-                row.getKaigoNinteiShinsakaiKaisaiDay().setValue(getNull(business.get審査会開催日()));
-                row.getJohoTeikyoShiryoShutsuryokuDay().setValue(getNull(business.get出力年月日()));
-                row.getNinteiShinsakaiKanryoYMD().setValue(getNull(business.get認定審査会完了年月日()));
-                row.getNinteichosaIraiYMD().setValue(getNull(business.get認定調査依頼年月日()));
-                row.getNinteichosaJuryoYMD().setValue(getNull(business.get認定調査受領年月日()));
-                row.setNinteiChosaItakusakiCode(business.get認定調査委託先コード());
-                row.setJigyoshaMeisho(business.get事業者名称());
-                row.setNinteiChosainCode(business.get認定調査員コード());
-                row.setChosainShimei(business.get調査員氏名());
-                row.getIkenshoSakuseiIraiYMD().setValue(getNull(business.get主治医意見書作成依頼年月日()));
-                row.setShujiiIryokikanCode(business.get主治医医療機関コード());
-                row.setIryoKikanMeisho(business.get医療機関名称());
-                row.setShujiiCode(business.get主治医コード());
-                row.setShujiiName(business.get主治医氏名());
-                row.getShinsakaiKaisaiYoteiYMD().setValue(getNull(business.get審査会開催予定日()));
-                row.setIkenshoDoiFlag(business.is意見書同意フラグ());
-                row.setJohoteikyoDoiFlag(business.is情報提供への同意有無());
-                row.setShinseishoKanriNo(business.get申請書管理番号());
-                row.setShichosonCode(business.get市町村コード());
-                ichiran_Row.add(row);
+
+        if (business != null) {
+
+            if (IsExistJohoTeikyoDoui.toValue(business.is情報提供への同意有無()).is同意する()) {
+                div.getNinteiKekkaShosai().getRadHihokenshaJohoTeikyoDoi().setSelectedKey(キー_0);
+            } else {
+                div.getNinteiKekkaShosai().getRadHihokenshaJohoTeikyoDoi().setSelectedKey(キー_1);
             }
+            if (IsIkenshoDoiUmu.toValue(business.is意見書同意フラグ()).isしないする()) {
+                div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().setSelectedKey(キー_0);
+            } else {
+                div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().setSelectedKey(キー_1);
+            }
+            div.getNinteiKekkaShosai().getTxtShinseibi().setValue(getNull(business.get認定申請日()));
+            div.getNinteiKekkaShosai().getTxtShinseiKubunShin().setValue(
+                    NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
+            div.getNinteiKekkaShosai().getTxtShinseiKubun().setValue(
+                    NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
+            div.getNinteiKekkaShosai().getTxtNinteiChosaIraibi().setValue(getNull(business.get認定調査依頼年月日()));
+            div.getNinteiKekkaShosai().getTxtNinteiChosaJisshibi().setValue(getNull(business.get認定調査実施年月日()));
+            div.getNinteiKekkaShosai().getTxtNinteiChosaJuryobi().setValue(getNull(business.get認定調査受領年月日()));
+            div.getCcdChosaItakusakiAndChosainInput().initialize(new RString(ChosaItakusakiAndChosainInputDiv.ShoriType.SimpleInputMode.toString()),
+                    business.get認定調査委託先コード(), business.get事業者名称(), business.get認定調査員コード(), business.get調査員氏名());
+            div.getCcdChosaItakusakiAndChosainInput().setHdnShichosonCode(business.get市町村コード());
+            div.getCcdChosaItakusakiAndChosainInput().setHdnShinseishoKanriNo(RString.EMPTY);
+            div.getNinteiKekkaShosai().getTxtIkenshoIraibi().setValue(getNull(business.get主治医意見書作成依頼年月日()));
+            div.getNinteiKekkaShosai().getTxtIkenshoJuryobi().setValue(getNull(business.get主治医意見書受領年月日()));
+            div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(business.get市町村コード()), ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY,
+                    business.get主治医医療機関コード(), business.get医療機関名称(), business.get主治医コード(), business.get主治医氏名());
+            div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(getNull(business.get審査会開催予定日()));
+            div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(getNull(business.get審査会開催日()));
         }
-        div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().setDataSource(ichiran_Row);
+
+//        List<NinnteiRiriBusiness> 認定履歴一覧 = YokaigoNinteiJohoTeikyoFinder.createInstance().select認定履歴一覧(被保険者番号).records();
+//        List<dgNinteiKekkaIchiran_Row> ichiran_Row = new ArrayList<>();
+//        if (認定履歴一覧 != null) {
+//            for (NinnteiRiriBusiness business : 認定履歴一覧) {
+//                dgNinteiKekkaIchiran_Row row = new dgNinteiKekkaIchiran_Row();
+//                row.getNinteiShinseiDay().setValue(getNull(business.get認定申請日()));
+//                row.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
+//                row.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
+//                row.getShinseiTorisageDay().setValue(getNull(business.get取下年月日()));
+//                row.getNinteiDay().setValue(getNull(business.get二次判定年月日()));
+//                if (business.get二次判定区分コード() == null || business.get二次判定区分コード().isEmpty()
+//                        || YokaigoJotaiKubun09.なし.getコード().equals(business.get二次判定区分コード().value())) {
+//                    row.setYoKaigodo(RString.EMPTY);
+//                } else {
+//                    row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
+//                }
+//                RStringBuilder builder = new RStringBuilder();
+//                builder.append(business.get二次判定認定有効期間());
+//                builder.append(月);
+//                row.setYukoKikan(builder.toRString());
+//                RStringBuilder stringBuilder = new RStringBuilder();
+//                if (business.get二次判定認定有効開始期間() != null) {
+//                    stringBuilder.append(business.get二次判定認定有効開始期間().wareki().toDateString());
+//                    stringBuilder.append(線);
+//                }
+//                if (business.get二次判定認定有効終了期間() != null) {
+//                    stringBuilder.append(business.get二次判定認定有効終了期間().wareki().toDateString());
+//                }
+//                row.setYukoKikanStartEnd(stringBuilder.toRString());
+//                row.getNinteiChosaJisshiDay().setValue(getNull(business.get認定調査実施年月日()));
+//                row.getShujiiIkenshoJuryoDay().setValue(getNull(business.get主治医意見書受領年月日()));
+//                row.getKaigoNinteiShinsakaiKaisaiDay().setValue(getNull(business.get審査会開催日()));
+//                row.getJohoTeikyoShiryoShutsuryokuDay().setValue(getNull(business.get出力年月日()));
+//                row.getNinteiShinsakaiKanryoYMD().setValue(getNull(business.get認定審査会完了年月日()));
+//                row.getNinteichosaIraiYMD().setValue(getNull(business.get認定調査依頼年月日()));
+//                row.getNinteichosaJuryoYMD().setValue(getNull(business.get認定調査受領年月日()));
+//                row.setNinteiChosaItakusakiCode(business.get認定調査委託先コード());
+//                row.setJigyoshaMeisho(business.get事業者名称());
+//                row.setNinteiChosainCode(business.get認定調査員コード());
+//                row.setChosainShimei(business.get調査員氏名());
+//                row.getIkenshoSakuseiIraiYMD().setValue(getNull(business.get主治医意見書作成依頼年月日()));
+//                row.setShujiiIryokikanCode(business.get主治医医療機関コード());
+//                row.setIryoKikanMeisho(business.get医療機関名称());
+//                row.setShujiiCode(business.get主治医コード());
+//                row.setShujiiName(business.get主治医氏名());
+//                row.getShinsakaiKaisaiYoteiYMD().setValue(getNull(business.get審査会開催予定日()));
+//                row.setIkenshoDoiFlag(business.is意見書同意フラグ());
+//                row.setJohoteikyoDoiFlag(business.is情報提供への同意有無());
+//                row.setShinseishoKanriNo(business.get申請書管理番号());
+//                row.setShichosonCode(business.get市町村コード());
+//                ichiran_Row.add(row);
+//            }
+//        }
+//        div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().setDataSource(ichiran_Row);
     }
 
     /**

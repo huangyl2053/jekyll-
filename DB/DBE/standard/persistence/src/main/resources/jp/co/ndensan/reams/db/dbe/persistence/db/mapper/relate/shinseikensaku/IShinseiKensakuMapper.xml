@@ -262,7 +262,10 @@
             <if test="useChikuCode">
                  AND DbT5101NinteiShinseiJoho."chikuCode" = #{chikuCode}
             </if>
-            AND DbT5101NinteiShinseiJoho."shisetsuNyushoFlag" = #{shisetsuNyushoFlag}
+
+            <if test="!ignoreShisetsuNyusho">
+                AND DbT5101NinteiShinseiJoho."shisetsuNyushoFlag" = #{shisetsuNyushoFlag}
+            </if>
 
             <if test="useNinteiChosaItakusakiCode">
                  AND DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}

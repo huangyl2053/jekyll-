@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class KihonJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,8 +35,8 @@ public class KihonJohoDiv extends Panel {
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("ddlChiku")
     private DropDownList ddlChiku;
-    @JsonProperty("radShisetsuNyusho")
-    private RadioButton radShisetsuNyusho;
+    @JsonProperty("chkShisetsuNyusho")
+    private CheckBoxList chkShisetsuNyusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -171,21 +171,21 @@ public class KihonJohoDiv extends Panel {
     }
 
     /*
-     * getradShisetsuNyusho
-     * @return radShisetsuNyusho
+     * getchkShisetsuNyusho
+     * @return chkShisetsuNyusho
      */
-    @JsonProperty("radShisetsuNyusho")
-    public RadioButton getRadShisetsuNyusho() {
-        return radShisetsuNyusho;
+    @JsonProperty("chkShisetsuNyusho")
+    public CheckBoxList getChkShisetsuNyusho() {
+        return chkShisetsuNyusho;
     }
 
     /*
-     * setradShisetsuNyusho
-     * @param radShisetsuNyusho radShisetsuNyusho
+     * setchkShisetsuNyusho
+     * @param chkShisetsuNyusho chkShisetsuNyusho
      */
-    @JsonProperty("radShisetsuNyusho")
-    public void setRadShisetsuNyusho(RadioButton radShisetsuNyusho) {
-        this.radShisetsuNyusho = radShisetsuNyusho;
+    @JsonProperty("chkShisetsuNyusho")
+    public void setChkShisetsuNyusho(CheckBoxList chkShisetsuNyusho) {
+        this.chkShisetsuNyusho = chkShisetsuNyusho;
     }
 
     // </editor-fold>

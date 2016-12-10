@@ -262,8 +262,9 @@ public class KaigoNinteiShinseiKensakuHandler {
                         new Code(finderDiv.getDdlShoriKubun().getSelectedKey()),
                         finderDiv.getTxtYubinNo().getValue(),
                         new ChikuCode(finderDiv.getDdlChiku().getSelectedKey()),
-                        施設入所_あり.equals(div.getCcdNinteiShinseishaFinder().
-                                getNinteiShinseishaFinderDiv().getRadShisetsuNyusho().getSelectedKey()),
+                        is入所施設あり(),
+                        //TODO n8178 城間　認定申請検索修正のために追加した条件が受給に絡むのか不明。必要であれば受給側のパラメータを修正して、以下のフラグを渡すこと
+                        //is入所施設条件無視(),
                         finderDiv.getTxtNinteiChosaItakusakiName().getValue(),
                         finderDiv.getTxtNinteiChosainName().getValue(),
                         new Code(finderDiv.getDdlChosaJisshiBasho().getSelectedKey()),
@@ -349,8 +350,8 @@ public class KaigoNinteiShinseiKensakuHandler {
                         new Code(finderDiv.getDdlShoriKubun().getSelectedKey()),
                         finderDiv.getTxtYubinNo().getValue(),
                         new ChikuCode(finderDiv.getDdlChiku().getSelectedKey()),
-                        施設入所_あり.equals(div.getCcdNinteiShinseishaFinder().
-                                getNinteiShinseishaFinderDiv().getRadShisetsuNyusho().getSelectedKey()),
+                        is入所施設あり(),
+                        is入所施設条件無視(),
                         finderDiv.getTxtNinteiChosaItakusakiName().getValue(),
                         finderDiv.getTxtNinteiChosainName().getValue(),
                         new Code(finderDiv.getDdlChosaJisshiBasho().getSelectedKey()),
@@ -448,5 +449,27 @@ public class KaigoNinteiShinseiKensakuHandler {
             }
         }
         return new Code(性別_女);
+    }
+
+    private boolean is入所施設あり() {
+        List<RString> 施設入所の有無List = div.getCcdNinteiShinseishaFinder().
+                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().getSelectedKeys();
+        boolean isAllSelectableOrNoSelected = div.getCcdNinteiShinseishaFinder().
+                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().isAllSelected() || 施設入所の有無List.isEmpty();
+        if (!isAllSelectableOrNoSelected) {
+            RString 施設入所の有無 = 施設入所の有無List.get(0);
+            if (施設入所_あり.equals(施設入所の有無)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean is入所施設条件無視() {
+        List<RString> 施設入所の有無List = div.getCcdNinteiShinseishaFinder().
+                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().getSelectedKeys();
+        boolean isAllSelectableOrNoSelected = div.getCcdNinteiShinseishaFinder().
+                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().isAllSelected() || 施設入所の有無List.isEmpty();
+        return isAllSelectableOrNoSelected;
     }
 }

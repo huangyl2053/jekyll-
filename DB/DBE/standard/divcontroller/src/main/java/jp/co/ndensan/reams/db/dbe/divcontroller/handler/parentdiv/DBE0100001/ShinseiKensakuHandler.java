@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
@@ -159,7 +158,7 @@ public class ShinseiKensakuHandler {
             parameter.setUseShinsakaiKaisaiNoTo(true);
             useNinteiKekkaJoho = true;
         }
-        
+
         parameter.setUseNinteiKekkaJoho(useNinteiKekkaJoho);
         editKaisaiDateForParameter(finderDiv, parameter);
     }
@@ -362,12 +361,20 @@ public class ShinseiKensakuHandler {
             parameter.setChikuCode(地区コード);
             parameter.setUseChikuCode(true);
         }
-        RString 施設入所の有無 = finderDiv.getRadShisetsuNyusho().getSelectedKey();
-        if (KEY0.equals(施設入所の有無)) {
-            parameter.setShisetsuNyushoFlag(true);
-        }
-        if (KEY1.equals(施設入所の有無)) {
+        List<RString> 施設入所の有無List = finderDiv.getChkShisetsuNyusho().getSelectedKeys();
+        boolean isAllSelectableOrNoSelected = finderDiv.getChkShisetsuNyusho().isAllSelected() || 施設入所の有無List.isEmpty();
+        if (!isAllSelectableOrNoSelected) {
+            RString 施設入所の有無 = 施設入所の有無List.get(0);
+            if (KEY0.equals(施設入所の有無)) {
+                parameter.setShisetsuNyushoFlag(true);
+            }
+            if (KEY1.equals(施設入所の有無)) {
+                parameter.setShisetsuNyushoFlag(false);
+            }
+            parameter.setIgnoreShisetsuNyusho(false);
+        } else {
             parameter.setShisetsuNyushoFlag(false);
+            parameter.setIgnoreShisetsuNyusho(true);
         }
 
         RString 認定調査委託先コード = finderDiv.getTxtNinteiChosaItakusakiName().getValue();
