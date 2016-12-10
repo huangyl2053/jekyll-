@@ -28,7 +28,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -196,10 +198,10 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
                     row.getHihokenshaSeibetsu(),
                     row.getHihokenshaNo(),
                     row.getNinteiChosaItakusaki(),
-                    row.getNinteiChosain(),
+                    row.getShujiiIryoKikan(),
                     row.getKaigoNinteiShinsakaiYoteiDay().getValue() == null ? RString.EMPTY : row.getKaigoNinteiShinsakaiYoteiDay().getValue().toDateString(),
                     row.getHihokenshaJusho(),
-                    row.getShujiiIryoKikan(),
+                    row.getNinteiChosain(),
                     row.getShujiiName());
             list.add(item);
         }
@@ -299,7 +301,9 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getHihokenshaBirthDay().setValue(flexibleDateToRDate(joho.get生年月日()));
         }
-        row.setHihokenshaNenrei(joho.get年齢() == 0 ? RString.EMPTY : new RString(String.valueOf(joho.get年齢())));
+        TextBoxNum 年齢 = new TextBoxNum();
+        年齢.setValue(joho.get年齢() == 0 ? Decimal.ZERO : Decimal.valueOf(joho.get年齢()));
+        row.setHihokenshaNenrei(年齢);
     }
 
     private RString flexibleDateToRString(FlexibleDate date) {

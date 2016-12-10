@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInpu
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -23,6 +24,7 @@ public class NinteiInput {
     private static final int MONTHPLUS12 = 12;
     private static final int MONTHPLUS18 = 18;
     private static final int MONTHPLUS24 = 24;
+    private static final int INT1 = 1;
 
     /**
      * 認定区分radがonChangeです。
@@ -62,7 +64,7 @@ public class NinteiInput {
             div.setHdnNinteiYmd(new RString(FlexibleDate.getNowDate().toString()));
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        
+
         if (RString.isNullOrEmpty(new RString(div.getTxtNinteiYMD().getValue().toString()))) {
             div.setHdnNinteiYmd(new RString(FlexibleDate.getNowDate().toString()));
         } else {
@@ -82,7 +84,8 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS6).minusDay(1));
+        FlexibleYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS6).getYearMonth();
+        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
         return ResponseData.of(div).respond();
     }
 
@@ -97,7 +100,8 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS12).minusDay(1));
+        FlexibleYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS12).getYearMonth();
+        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
         return ResponseData.of(div).respond();
     }
 
@@ -112,7 +116,8 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS18).minusDay(1));
+        FlexibleYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS18).getYearMonth();
+        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
         return ResponseData.of(div).respond();
     }
 
@@ -127,8 +132,13 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS24).minusDay(1));
+        FlexibleYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS24).getYearMonth();
+        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
         return ResponseData.of(div).respond();
+    }
+
+    private FlexibleDate get当月末日(FlexibleYearMonth 基準年月) {
+        return new FlexibleDate(基準年月.getYearValue(), 基準年月.getMonthValue(), INT1).plusMonth(INT1).minusDay(INT1);
     }
 
     /**
