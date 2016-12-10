@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE7010001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE7010001.HokokuShiryoSakuSeiParameterDiv;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -18,6 +19,9 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
 
     private static final RString KEY_対象年月 = new RString("0");
     private final HokokuShiryoSakuSeiParameterDiv div;
+    private static final RString SELECTKEY_KEY0 = new RString("key0");
+    private static final RString SELECTKEY_KEY1 = new RString("key1");
+    private static final RString SELECTKEY_KEY2 = new RString("key2");
 
     /**
      * コンストラクタです。
@@ -40,6 +44,7 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
         check_ChushutsuJoken(message);
         check_txtTaishoGappi(message);
         check_ChkCsvShutsuryoku(message);
+        check_ChkShukeiTani(message);
         return message;
     }
 
@@ -92,6 +97,24 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
         return validationMessages;
     }
 
+    private ValidationMessageControlPairs check_ChkShukeiTani(ValidationMessageControlPairs validationMessages) {
+        if (div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY1)
+                || div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY2)) {
+            if (div.getChkShukeiTani().getSelectedKeys().isEmpty()) {
+                validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.選択されていない_集計単位));
+            } else if (div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY0)
+                    && div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY1)) {
+                validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.選択過多_集計単位));
+            }
+        } else {
+            if (div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY0)
+                    && div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY1)) {
+                validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.選択過多_集計単位));
+            }
+        }
+        return validationMessages;
+    }
+
     private enum HokokuShiryoSakuSeiParameterValidationMessage implements IValidationMessage {
 
         必須項目_追加メッセージあり_対象年月(UrErrorMessages.必須項目_追加メッセージあり, "対象年月"),
@@ -100,7 +123,9 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
         選択されていない_抽出条件(UrErrorMessages.選択されていない, "抽出条件"),
         大小関係が不正(UrErrorMessages.大小関係が不正, "対象年月日"),
         必須項目_追加メッセージあり_出力ファイル(UrErrorMessages.必須項目_追加メッセージあり, "出力ファイル"),
-        指定ファイルが存在しない(UrErrorMessages.指定ファイルが存在しない, "出力ファイル名");
+        指定ファイルが存在しない(UrErrorMessages.指定ファイルが存在しない, "出力ファイル名"),
+        選択されていない_集計単位(UrErrorMessages.選択されていない, "集計単位"),
+        選択過多_集計単位(DbzErrorMessages.選択過多);
 
         private final Message message;
 

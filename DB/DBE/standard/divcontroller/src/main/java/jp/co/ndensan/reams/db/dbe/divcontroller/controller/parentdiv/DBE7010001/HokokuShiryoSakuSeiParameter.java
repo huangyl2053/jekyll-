@@ -64,6 +64,7 @@ public class HokokuShiryoSakuSeiParameter {
             div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
             div.getChkHihokenshaKubun().setDisabled(true);
             div.getDdlGogitaiBango().setDisabled(true);
+            div.getChkShukeiTani().setRequired(false);
         } else {
             div.getChkHihokenshaKubun().setDisabled(false);
             div.getDdlGogitaiBango().setDisabled(false);
@@ -72,9 +73,11 @@ public class HokokuShiryoSakuSeiParameter {
                 disabledItems.clear();
                 disabledItems.add(SELECTKEY_KEY0);
                 div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
+                div.getChkShukeiTani().setRequired(true);
             } else {
                 disabledItems.clear();
                 div.getChkShutsuryokuChohyo().setDisabledItemsByKey(disabledItems);
+                div.getChkShukeiTani().setRequired(false);
             }
         }
         if (div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY3)) {
