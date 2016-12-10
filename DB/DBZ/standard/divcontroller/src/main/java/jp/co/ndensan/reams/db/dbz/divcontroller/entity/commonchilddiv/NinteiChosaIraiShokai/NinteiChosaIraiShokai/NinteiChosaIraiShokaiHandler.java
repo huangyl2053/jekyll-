@@ -43,9 +43,8 @@ public class NinteiChosaIraiShokaiHandler {
      * 認定調査依頼照会の初期化処理ください。
      *
      * @param ninteiChosaList 認定調査情報
-     * @param 被保険者番号 被保険者番号
      */
-    public void onLoad(List<NinteiChosaIraiShokaiMaster> ninteiChosaList, HihokenshaNo 被保険者番号) {
+    public void onLoad(List<NinteiChosaIraiShokaiMaster> ninteiChosaList) {
 //        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         List<dgNinteiChosaIrai_Row> rowList = new ArrayList<>();
         int no = 1;

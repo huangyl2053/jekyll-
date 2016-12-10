@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Shins
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.ShinsakaiJohoKojinDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shinsakaijohokojin.ShinsakaiJohoKojinHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shinsakaijohokojin.ShinsakaiJohoKojinValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 共有子Div 「ShinsakaiJohoKojin」のイベントを定義したDivControllerです。
@@ -25,10 +23,6 @@ public class ShinsakaiJohoKojin {
      * @return ResponseData<ShinsakaiJohoKojinDiv>
      */
     public ResponseData<ShinsakaiJohoKojinDiv> onLoad(ShinsakaiJohoKojinDiv div) {
-        ValidationMessageControlPairs validationMessage = getValidationHandler(div).validateForAction();
-        if (validationMessage.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
-        }
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
@@ -45,9 +39,5 @@ public class ShinsakaiJohoKojin {
 
     private ShinsakaiJohoKojinHandler getHandler(ShinsakaiJohoKojinDiv div) {
         return new ShinsakaiJohoKojinHandler(div);
-    }
-
-    private ShinsakaiJohoKojinValidationHandler getValidationHandler(ShinsakaiJohoKojinDiv div) {
-        return new ShinsakaiJohoKojinValidationHandler(div);
     }
 }

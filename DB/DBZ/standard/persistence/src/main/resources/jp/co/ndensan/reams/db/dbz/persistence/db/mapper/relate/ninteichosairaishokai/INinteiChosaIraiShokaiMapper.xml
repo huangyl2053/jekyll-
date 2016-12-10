@@ -6,8 +6,6 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteichosairaishokai.INinteiChosaIraiShokaiMapper">
 
     <resultMap id="result_NinteiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosairaishokai.NinteiChosaIraiShokaiRelateEntity" autoMapping="true">
-        <result column="shinseishoKanriNo" property="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
-        <result column="shoKisaiHokenshaNo" property="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result column="ninteiShinseiYMD" property="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result column="ninteiShinseiShinseijiKubunCode" property="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result column="torisageYMD" property="torisageYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -24,8 +22,6 @@
     <select resultOrdered="true" id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
       SELECT
-           dbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
-           dbT5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
            dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
            dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",
            dbT5101."torisageYMD" AS "torisageYMD",
@@ -67,7 +63,7 @@
                AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
                AND dbT5913."shichosonCode" = dbT7051."shichosonCode"
       WHERE
-           dbT5101."hihokenshaNo" = #{hihokenshaNo}
+           dbT5101."shinseishoKanriNo" = #{shinseishoKanriNo}
            AND dbT5101."shoriJotaiKubun" IN (#{tujou}, #{enki})
            ORDER BY
                dbT5101."ninteiShinseiYMD" DESC
