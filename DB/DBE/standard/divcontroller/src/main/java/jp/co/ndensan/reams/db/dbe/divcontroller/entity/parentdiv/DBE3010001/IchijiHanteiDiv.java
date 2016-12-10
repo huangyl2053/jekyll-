@@ -25,14 +25,14 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("IchijiHanteiKensakuJoken")
     private IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken;
     @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
     private IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran;
     @JsonProperty("torikomiPanel")
     private torikomiPanelDiv torikomiPanel;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("インデックス")
     private RString インデックス;
     @JsonProperty("ファイルID")
@@ -41,8 +41,6 @@ public class IchijiHanteiDiv extends Panel {
     private RString modeType;
     @JsonProperty("ichijiHanteiKekka")
     private RString ichijiHanteiKekka;
-    @JsonProperty("ichijiHanteiKekkaList")
-    private RString ichijiHanteiKekkaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,15 +48,6 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
-    }
-
     /*
      * getIchijiHanteiKensakuJoken
      * @return IchijiHanteiKensakuJoken
@@ -111,6 +100,15 @@ public class IchijiHanteiDiv extends Panel {
     @JsonProperty("torikomiPanel")
     public void setTorikomiPanel(torikomiPanelDiv torikomiPanel) {
         this.torikomiPanel = torikomiPanel;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
@@ -183,24 +181,6 @@ public class IchijiHanteiDiv extends Panel {
     @JsonProperty("ichijiHanteiKekka")
     public void setIchijiHanteiKekka(RString ichijiHanteiKekka) {
         this.ichijiHanteiKekka = ichijiHanteiKekka;
-    }
-
-    /*
-     * getichijiHanteiKekkaList
-     * @return ichijiHanteiKekkaList
-     */
-    @JsonProperty("ichijiHanteiKekkaList")
-    public RString getIchijiHanteiKekkaList() {
-        return ichijiHanteiKekkaList;
-    }
-
-    /*
-     * setichijiHanteiKekkaList
-     * @param ichijiHanteiKekkaList ichijiHanteiKekkaList
-     */
-    @JsonProperty("ichijiHanteiKekkaList")
-    public void setIchijiHanteiKekkaList(RString ichijiHanteiKekkaList) {
-        this.ichijiHanteiKekkaList = ichijiHanteiKekkaList;
     }
 
     /*

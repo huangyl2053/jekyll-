@@ -27,8 +27,6 @@ public class IchijiHanteiKensakuJokenDiv extends Panel {
     private TextBoxNum txtMaxCount;
     @JsonProperty("btnKyufuJissekiSearchClear")
     private Button btnKyufuJissekiSearchClear;
-    @JsonProperty("btnTaishoshaSearch")
-    private Button btnTaishoshaSearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -88,24 +86,6 @@ public class IchijiHanteiKensakuJokenDiv extends Panel {
     @JsonProperty("btnKyufuJissekiSearchClear")
     public void setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
         this.btnKyufuJissekiSearchClear = btnKyufuJissekiSearchClear;
-    }
-
-    /*
-     * getbtnTaishoshaSearch
-     * @return btnTaishoshaSearch
-     */
-    @JsonProperty("btnTaishoshaSearch")
-    public Button getBtnTaishoshaSearch() {
-        return btnTaishoshaSearch;
-    }
-
-    /*
-     * setbtnTaishoshaSearch
-     * @param btnTaishoshaSearch btnTaishoshaSearch
-     */
-    @JsonProperty("btnTaishoshaSearch")
-    public void setBtnTaishoshaSearch(Button btnTaishoshaSearch) {
-        this.btnTaishoshaSearch = btnTaishoshaSearch;
     }
 
     // </editor-fold>
