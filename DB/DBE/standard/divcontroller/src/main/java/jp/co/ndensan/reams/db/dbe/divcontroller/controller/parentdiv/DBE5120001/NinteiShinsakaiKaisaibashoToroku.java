@@ -214,6 +214,10 @@ public class NinteiShinsakaiKaisaibashoToroku {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).set開催場所編集エリアを初期化処理();
             }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         } else {
             getHandler(div).set開催場所編集エリアを初期化処理();
         }
