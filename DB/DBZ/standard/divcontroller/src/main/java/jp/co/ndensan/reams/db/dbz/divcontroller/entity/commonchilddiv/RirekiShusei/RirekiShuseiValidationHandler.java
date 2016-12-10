@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.rirekishusei.RirekiShuseiDataPas
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -43,9 +44,9 @@ public class RirekiShuseiValidationHandler {
      */
     public ValidationMessageControlPairs validate認定情報() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate ninteiValue = div.getCcdNinteiJohoInput().getNaiyo().get認定年月日();
-        FlexibleDate fromValue = div.getCcdNinteiJohoInput().getNaiyo().get有効開始年月日();
-        FlexibleDate toValue = div.getCcdNinteiJohoInput().getNaiyo().get有効終了年月日();
+        RDate ninteiValue = div.getCcdNinteiJohoInput().getNaiyo().get認定年月日();
+        RDate fromValue = div.getCcdNinteiJohoInput().getNaiyo().get有効開始年月日();
+        RDate toValue = div.getCcdNinteiJohoInput().getNaiyo().get有効終了年月日();
         RString 要介護度 = div.getCcdNinteiJohoInput().getNaiyo().get要介護度コード();
         if (isNullOrEmpty(ninteiValue)) {
             validPairs.add(new ValidationMessageControlPair(
@@ -82,13 +83,13 @@ public class RirekiShuseiValidationHandler {
      */
     public ValidationMessageControlPairs validate認定期間が重複() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate konkaiFromValue = div.getCcdNinteiJohoInput().getNaiyo().get有効開始年月日();
-        FlexibleDate konkaiToValue = div.getCcdNinteiJohoInput().getNaiyo().get有効終了年月日();
+        RDate konkaiFromValue = div.getCcdNinteiJohoInput().getNaiyo().get有効開始年月日();
+        RDate konkaiToValue = div.getCcdNinteiJohoInput().getNaiyo().get有効終了年月日();
         FlexibleDate zenkaiToValue = div.getCcdZenkaiNinteiKekka().getTxtYukoKikanTo().getValue();
         RirekiShuseiDataPass jikai = DataPassingConverter.deserialize(div.getHdnJikaiJohoSerialized(),
                 RirekiShuseiDataPass.class);
 
-        if (!isNullOrEmpty(konkaiFromValue) && !isNullOrEmpty(zenkaiToValue) && konkaiFromValue.isBefore(zenkaiToValue)) {
+        if (!isNullOrEmpty(konkaiFromValue) && !isNullOrEmptyFlexibleDate(zenkaiToValue) && konkaiFromValue.isBefore(new RDate(zenkaiToValue.toString()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり１,
                             "前回の有効終了日", "今回の有効開始日")));
@@ -139,7 +140,11 @@ public class RirekiShuseiValidationHandler {
         return validPairs;
     }
 
-    private boolean isNullOrEmpty(FlexibleDate flexDate) {
+    private boolean isNullOrEmpty(RDate flexDate) {
+        return !(flexDate != null);
+    }
+
+    private boolean isNullOrEmptyFlexibleDate(FlexibleDate flexDate) {
         return !(flexDate != null && !flexDate.isEmpty());
     }
 

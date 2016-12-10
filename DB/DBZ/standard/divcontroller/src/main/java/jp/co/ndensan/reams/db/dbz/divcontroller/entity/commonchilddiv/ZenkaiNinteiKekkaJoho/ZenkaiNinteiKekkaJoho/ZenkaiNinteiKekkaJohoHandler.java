@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.zenkaininteikekkajoho.ZenkaiNinte
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -183,13 +184,13 @@ public class ZenkaiNinteiKekkaJohoHandler {
         NinteiInputDataPassModel passModel = new NinteiInputDataPassModel();
         passModel.set認定区分(get認定区分(result));
         passModel.setSubGyomuCode(SubGyomuCode.DBE認定支援.value());
-        passModel.set認定年月日(result.get認定申請年月日());
+        passModel.set認定年月日(new RDate(result.get認定申請年月日().toString()));
         passModel.set申請書管理番号(new ShinseishoKanriNo(zenkaiShinseishoKanriNo));
         passModel.set厚労省IFコード(result.get厚労省IF識別コード());
         passModel.set要介護度コード(result.get二次判定要介護状態区分コード());
         passModel.set要介護度名称(get要介護度(result));
-        passModel.set有効開始年月日(result.get二次判定認定有効開始年月日());
-        passModel.set有効終了年月日(result.get二次判定認定有効終了年月日());
+        passModel.set有効開始年月日(new RDate(result.get二次判定認定有効開始年月日().toString()));
+        passModel.set有効終了年月日(new RDate(result.get二次判定認定有効終了年月日().toString()));
         passModel.set審査会意見(result.get介護認定審査会意見());
         model.setRiyu(result.get直近異動事由コード());
         model.setTorisageDay(result.get取下年月日());

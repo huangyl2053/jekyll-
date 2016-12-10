@@ -26,7 +26,7 @@ public class NinteiJohoDiv extends Panel {
     @JsonProperty("chkMinashiKoshinNintei")
     private CheckBoxList chkMinashiKoshinNintei;
     @JsonProperty("txtNinteiYMD")
-    private TextBoxFlexibleDate txtNinteiYMD;
+    private TextBoxDate txtNinteiYMD;
     @JsonProperty("txtYokaigodoCode")
     private TextBoxCode txtYokaigodoCode;
     @JsonProperty("btnYokaigodoGuide")
@@ -34,9 +34,9 @@ public class NinteiJohoDiv extends Panel {
     @JsonProperty("txtYokaigodoName")
     private TextBox txtYokaigodoName;
     @JsonProperty("txtYukoKaishiYMD")
-    private TextBoxFlexibleDate txtYukoKaishiYMD;
+    private TextBoxDate txtYukoKaishiYMD;
     @JsonProperty("txtYukoShuryoYMD")
-    private TextBoxFlexibleDate txtYukoShuryoYMD;
+    private TextBoxDate txtYukoShuryoYMD;
     @JsonProperty("btnAfter6Month")
     private Button btnAfter6Month;
     @JsonProperty("btnAfter12Month")
@@ -93,7 +93,7 @@ public class NinteiJohoDiv extends Panel {
      * @return txtNinteiYMD
      */
     @JsonProperty("txtNinteiYMD")
-    public TextBoxFlexibleDate getTxtNinteiYMD() {
+    public TextBoxDate getTxtNinteiYMD() {
         return txtNinteiYMD;
     }
 
@@ -102,7 +102,7 @@ public class NinteiJohoDiv extends Panel {
      * @param txtNinteiYMD txtNinteiYMD
      */
     @JsonProperty("txtNinteiYMD")
-    public void setTxtNinteiYMD(TextBoxFlexibleDate txtNinteiYMD) {
+    public void setTxtNinteiYMD(TextBoxDate txtNinteiYMD) {
         this.txtNinteiYMD = txtNinteiYMD;
     }
 
@@ -165,7 +165,7 @@ public class NinteiJohoDiv extends Panel {
      * @return txtYukoKaishiYMD
      */
     @JsonProperty("txtYukoKaishiYMD")
-    public TextBoxFlexibleDate getTxtYukoKaishiYMD() {
+    public TextBoxDate getTxtYukoKaishiYMD() {
         return txtYukoKaishiYMD;
     }
 
@@ -174,7 +174,7 @@ public class NinteiJohoDiv extends Panel {
      * @param txtYukoKaishiYMD txtYukoKaishiYMD
      */
     @JsonProperty("txtYukoKaishiYMD")
-    public void setTxtYukoKaishiYMD(TextBoxFlexibleDate txtYukoKaishiYMD) {
+    public void setTxtYukoKaishiYMD(TextBoxDate txtYukoKaishiYMD) {
         this.txtYukoKaishiYMD = txtYukoKaishiYMD;
     }
 
@@ -183,7 +183,7 @@ public class NinteiJohoDiv extends Panel {
      * @return txtYukoShuryoYMD
      */
     @JsonProperty("txtYukoShuryoYMD")
-    public TextBoxFlexibleDate getTxtYukoShuryoYMD() {
+    public TextBoxDate getTxtYukoShuryoYMD() {
         return txtYukoShuryoYMD;
     }
 
@@ -192,7 +192,7 @@ public class NinteiJohoDiv extends Panel {
      * @param txtYukoShuryoYMD txtYukoShuryoYMD
      */
     @JsonProperty("txtYukoShuryoYMD")
-    public void setTxtYukoShuryoYMD(TextBoxFlexibleDate txtYukoShuryoYMD) {
+    public void setTxtYukoShuryoYMD(TextBoxDate txtYukoShuryoYMD) {
         this.txtYukoShuryoYMD = txtYukoShuryoYMD;
     }
 

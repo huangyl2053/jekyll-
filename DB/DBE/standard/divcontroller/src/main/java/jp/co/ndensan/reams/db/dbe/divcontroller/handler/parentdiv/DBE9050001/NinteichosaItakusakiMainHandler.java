@@ -49,6 +49,7 @@ public class NinteichosaItakusakiMainHandler {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
     private static final RString SELECTKEY_空白 = RString.EMPTY;
     private static final RString 調査委託区分_3 = new RString("3");
     private static final RString 調査委託区分_4 = new RString("4");
@@ -166,6 +167,12 @@ public class NinteichosaItakusakiMainHandler {
                     sonotaKikanJohoEntity.isHaishiFlag()
             ));
         }
+        if (dataGridList.isEmpty()) {
+            div.getSonotaKikanichiran().getBtnOutputCsv().setVisible(false);
+        } else {
+            div.getSonotaKikanichiran().getBtnOutputCsv().setVisible(true);
+        }
+        
         div.getSonotaKikanichiran().getDgSonotaKikanIchiran().setDataSource(dataGridList);
     }
 
@@ -234,8 +241,8 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanname().setValue(row.getKikanMeisho());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanKananame().setValue(row.getKikanKana());
         if (row.getYubinNo() != null) {
-            if (row.getYubinNo().length() == 4 && row.getYubinNo().contains("-")) {
-                div.getChosaitakusakiJohoInput().getTxtYubinNo().setValue(new YubinNo(row.getYubinNo().remove(3)));
+            if (row.getYubinNo().length() == INDEX_4 && row.getYubinNo().contains("-")) {
+                div.getChosaitakusakiJohoInput().getTxtYubinNo().setValue(new YubinNo(row.getYubinNo().remove(INDEX_3)));
             } else {
                 div.getChosaitakusakiJohoInput().getTxtYubinNo().setValue(new YubinNo(row.getYubinNo()));
             }

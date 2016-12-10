@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class NinteiChosaIraiShokaiParameter {
 
-    private final RString hihokenshaNo;
+    private final RString shinseishoKanriNo;
     private final RString tujou;
     private final RString enki;
 
-    private NinteiChosaIraiShokaiParameter(RString hihokenshaNo, RString tujou, RString enki) {
-        this.hihokenshaNo = hihokenshaNo;
+    private NinteiChosaIraiShokaiParameter(RString shinseishoKanriNo, RString tujou, RString enki) {
+        this.shinseishoKanriNo = shinseishoKanriNo;
         this.tujou = tujou;
         this.enki = enki;
     }
@@ -29,11 +29,11 @@ public final class NinteiChosaIraiShokaiParameter {
     /**
      * パラメータ設定です
      *
-     * @param hihokenshaNo 被保険者番号
+     * @param shinseishoKanriNo
      * @return NinteiChosaIraiShokaiParameter
      */
-    public static NinteiChosaIraiShokaiParameter createParam(RString hihokenshaNo) {
-        return new NinteiChosaIraiShokaiParameter(hihokenshaNo,
+    public static NinteiChosaIraiShokaiParameter createParam(RString shinseishoKanriNo) {
+        return new NinteiChosaIraiShokaiParameter(shinseishoKanriNo,
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード());
     }
@@ -44,7 +44,7 @@ public final class NinteiChosaIraiShokaiParameter {
      * @return 保険者番号
      */
     public RString getHihokenshaNo() {
-        return hihokenshaNo;
+        return shinseishoKanriNo;
     }
 
     /**

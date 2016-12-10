@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.chosakekkainfokihon;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBusiness;
@@ -13,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.Chos
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoKihon.ChosaKekkaInfoKihonDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoKihon.ChosaKekkaInfoKihonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfokihon.ChosaKekkaInfoKihonFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -47,7 +45,7 @@ public class ChosaKekkaInfoKihon {
         getHandler(div).onLoad(申請書管理番号, infoKihonList, serviceJokyos);
         return createResponse(div);
     }
-    
+
     /**
      * 戻るボタンを押下します。
      *
@@ -67,7 +65,7 @@ public class ChosaKekkaInfoKihon {
     public ResponseData<ChosaKekkaInfoKihonDiv> onBeforeOpenDialog_btnTokkiJiko(ChosaKekkaInfoKihonDiv div) {
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 特記事項ボタンを押下します。
      *

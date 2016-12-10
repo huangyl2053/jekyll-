@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshoiraishokai.
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoirai.ShujiiIkenshoIraiEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshoiraishokai.IShujiiIkenshoIraiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -57,14 +57,14 @@ public class ShujiiIkenshoIraiShokaiFinder {
     /**
      * 認定調査情報を返します。
      *
-     * @param 被保険者番号 被保険者番号
+     * @param 申請書管理番号 申請書管理番号
      * @return SearchResult<ShujiiIkenshoIraiBusiness> 認定調査情報
      */
     @Transaction
-    public SearchResult<ShujiiIkenshoIraiBusiness> getNinnteiChousa(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+    public SearchResult<ShujiiIkenshoIraiBusiness> getNinnteiChousa(RString 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         IShujiiIkenshoIraiMapper mapper = mapperProvider.create(IShujiiIkenshoIraiMapper.class);
-        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(ShujiiIkenshoMapperParameter.createParam(被保険者番号));
+        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(ShujiiIkenshoMapperParameter.createParam(申請書管理番号));
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<ShujiiIkenshoIraiBusiness>emptyList(), 0, false);
         }

@@ -41,15 +41,14 @@ public class NinteiInputValidationHandler {
      */
     public ValidationMessageControlPairs 有効開始日check() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
+        if (div.getTxtYukoKaishiYMD().getValue() == null) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効開始日, div.getTxtYukoKaishiYMD()));
             return validationMessage;
         }
-        
-        if (!div.getTxtYukoKaishiYMD().getValue().isValid()) {
-            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効開始日, div.getTxtYukoKaishiYMD()));
-        }
-        
+
+//        if (!div.getTxtYukoKaishiYMD().getValue().isValid()) {
+//            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効開始日, div.getTxtYukoKaishiYMD()));
+//        }
         return validationMessage;
     }
 
@@ -60,18 +59,17 @@ public class NinteiInputValidationHandler {
      */
     public ValidationMessageControlPairs 開始日check() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
+        if (div.getTxtYukoKaishiYMD().getValue() == null) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効開始日, div.getTxtYukoKaishiYMD()));
             return validationMessage;
         }
-           
-        if (!div.getTxtYukoKaishiYMD().getValue().isValid()) {
-            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効開始日, div.getTxtYukoKaishiYMD()));
-            return validationMessage;
-        }
 
+//        if (!div.getTxtYukoKaishiYMD().getValue().isValid()) {
+//            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効開始日, div.getTxtYukoKaishiYMD()));
+//            return validationMessage;
+//        }
         DbT7202KaigoNinteiHokaiseiKanriBusiness dbt7202 = NinteiInputFinder.createInstance().get最古法改正施行年月日();
-        if (dbt7202 != null && dbt7202.get法改正施行年月日() != null && div.getTxtYukoKaishiYMD().getValue().isBefore(dbt7202.get法改正施行年月日())) {
+        if (dbt7202 != null && dbt7202.get法改正施行年月日() != null && div.getTxtYukoKaishiYMD().getValue().isBefore(dbt7202.get法改正施行年月日().toRDate())) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation開始日と法施行の前後順,
                     div.getTxtYukoKaishiYMD()));
         }
@@ -85,30 +83,31 @@ public class NinteiInputValidationHandler {
      */
     public ValidationMessageControlPairs 終了日check() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (div.getTxtYukoShuryoYMD().getValue().isEmpty()) {
+        if (div.getTxtYukoShuryoYMD().getValue() == null) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation有効終了日, div.getTxtYukoShuryoYMD()));
             return validationMessage;
         }
-        
-        if (!div.getTxtYukoShuryoYMD().getValue().isValid()) {
-            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効終了日, div.getTxtYukoShuryoYMD()));
-            return validationMessage;
-        }
-        
+
+//        if (!div.getTxtYukoShuryoYMD().getValue().isValid()) {
+//            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な有効終了日, div.getTxtYukoShuryoYMD()));
+//            return validationMessage;
+//        }
         return validationMessage;
     }
-    
+
     /**
      * 認定年月日checkを行う。
      *
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
     public ValidationMessageControlPairs 認定年月日check() {
-        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();    
-        if (!div.getTxtYukoShuryoYMD().getValue().isEmpty() && !div.getTxtNinteiYMD().getValue().isValid()) {
+        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
+//        if (!div.getTxtYukoShuryoYMD().getValue().isEmpty() && !div.getTxtNinteiYMD().getValue().isValid()) {
+//            validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な認定年月日, div.getTxtNinteiYMD()));
+//        }
+        if (div.getTxtYukoShuryoYMD().getValue() != null) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation不正な認定年月日, div.getTxtNinteiYMD()));
         }
-        
         return validationMessage;
     }
 
@@ -119,7 +118,7 @@ public class NinteiInputValidationHandler {
      */
     public ValidationMessageControlPairs 開始終了日前後順check() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (!div.getTxtYukoKaishiYMD().getValue().isEmpty() && !div.getTxtYukoShuryoYMD().getValue().isEmpty()
+        if (div.getTxtYukoKaishiYMD().getValue() != null && div.getTxtYukoShuryoYMD().getValue() != null
                 && div.getTxtYukoShuryoYMD().getValue().isBefore(div.getTxtYukoKaishiYMD().getValue())) {
             validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation開始日と終了日の前後順,
                     div.getTxtYukoKaishiYMD(), div.getTxtYukoShuryoYMD()));

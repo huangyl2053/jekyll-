@@ -23,8 +23,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -257,11 +262,24 @@ public class NinteiShinseiTorokuHandler {
         if (result.get要介護認定状態区分コード() != null) {
             ninteiInput.set要介護度コード(result.get要介護認定状態区分コード().value());
         }
-        ninteiInput.set認定年月日(result.get認定年月日());
-        ninteiInput.set有効開始年月日(result.get認定有効期間開始年月日());
-        ninteiInput.set有効終了年月日(result.get認定有効期間終了年月日());
+        RDate 認定年月日 = flexibleDateToRDate(result.get認定年月日());
+        RDate 有効開始年月日 = flexibleDateToRDate(result.get認定有効期間開始年月日());
+        RDate 有効終了年月日 = flexibleDateToRDate(result.get認定有効期間終了年月日());
+        
+        ninteiInput.set認定年月日(認定年月日);
+        ninteiInput.set有効開始年月日(有効開始年月日);
+        ninteiInput.set有効終了年月日(有効終了年月日);
         ninteiInput.set審査会意見(result.get介護認定審査会意見());
         ninteiInput.set申請書管理番号(管理番号);
         div.getCcdNinteiInput().initialize(ninteiInput);
     }
+        private RDate flexibleDateToRDate(FlexibleDate date) {
+        if (date == null || FlexibleDate.EMPTY.equals(date)) {
+            return RDate.MIN;
+        }
+        return new RDate(date.wareki().eraType(EraType.ALPHABET)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString().toString());
+    }
+    
 }

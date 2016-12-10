@@ -43,10 +43,11 @@ public class KekkaShosaiJohoValidationHandler {
                 || div.getCcdNinteiInput().getNaiyo().get有効開始年月日().equals(FlexibleDate.EMPTY)) {
             validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation有効開始日,
                     div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD()));
-        } else if (!div.getCcdNinteiInput().getNaiyo().get有効開始年月日().isValid()) {
-            validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation不正な有効開始日,
-                    div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD()));
         }
+//        else if (!div.getCcdNinteiInput().getNaiyo().get有効開始年月日().isValid()) {
+//            validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation不正な有効開始日,
+//                    div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD()));
+//        }
         return validationMessage;
     }
 
@@ -58,16 +59,17 @@ public class KekkaShosaiJohoValidationHandler {
     public ValidationMessageControlPairs check有効終了日() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
         if (div.getCcdNinteiInput().getNaiyo().get有効終了年月日() == null
-                || div.getCcdNinteiInput().getNaiyo().get有効終了年月日().equals(FlexibleDate.EMPTY)) {
+                || div.getCcdNinteiInput().getNaiyo().get有効終了年月日() == null) {
             validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation有効終了日,
                     div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD()));
-        } else if (!div.getCcdNinteiInput().getNaiyo().get有効終了年月日().isValid()) {
-            validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation不正な有効終了日,
-                    div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD()));
         }
+//        else if (!div.getCcdNinteiInput().getNaiyo().get有効終了年月日().isValid()) {
+//            validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation不正な有効終了日,
+//                    div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD()));
+//        }
         return validationMessage;
     }
-    
+
     /**
      * 認定年月日checkを行う。
      *
@@ -76,13 +78,14 @@ public class KekkaShosaiJohoValidationHandler {
     public ValidationMessageControlPairs check認定年月日() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
         if (div.getCcdNinteiInput().getNaiyo().get認定年月日() == null
-                || div.getCcdNinteiInput().getNaiyo().get認定年月日().equals(FlexibleDate.EMPTY)) {
+                || div.getCcdNinteiInput().getNaiyo().get認定年月日() == null) {
             validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation認定年月日,
                     div.getCcdNinteiInput().getNinteiJoho().getTxtNinteiYMD()));
-        } else if (!div.getCcdNinteiInput().getNaiyo().get認定年月日().isValid()) {
-            validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation不正な認定年月日,
-                    div.getCcdNinteiInput().getNinteiJoho().getTxtNinteiYMD()));
         }
+//        else if (!div.getCcdNinteiInput().getNaiyo().get認定年月日().isValid()) {
+//            validationMessage.add(new ValidationMessageControlPair(KekkaShosaiJohoCheckMessages.validation不正な認定年月日,
+//                    div.getCcdNinteiInput().getNinteiJoho().getTxtNinteiYMD()));
+//        }
         return validationMessage;
     }
 
@@ -108,7 +111,7 @@ public class KekkaShosaiJohoValidationHandler {
         validation不正な有効開始日(UrErrorMessages.不正, "有効開始日"),
         validation不正な有効終了日(UrErrorMessages.不正, "有効終了日"),
         validation不正な認定年月日(UrErrorMessages.不正, "認定年月日");
-        
+
         private final Message message;
 
         private KekkaShosaiJohoCheckMessages(IMessageGettable message, String... replacements) {

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -29,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBE-0150-010 linghuhang
  */
 public class PublicationShiryoShinsakai {
+
+    private final RString 印刷帳票_すべて選択 = new RString("0");
 
     /**
      * 画面初期化処理です。
@@ -46,6 +49,17 @@ public class PublicationShiryoShinsakai {
                 .append(審査会一覧_開催番号);
         前排他キーのセット(builder.toRString());
         getHandler(div).onLoad(開催予定情報);
+        if(div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)){
+            div.setHdnChkSubeteJimuFlag(new RString(Boolean.TRUE.toString()));
+        }else{
+            div.setHdnChkSubeteJimuFlag(new RString(Boolean.FALSE.toString()));
+        }
+        if(div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)){
+            div.setHdnChkSubeteIinFlag(new RString(Boolean.TRUE.toString()));
+        }else{
+            div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
+        }
+        
         return ResponseData.of(div).respond();
     }
 
@@ -78,7 +92,9 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onClick_chkPrintChoyoJimu(PublicationShiryoShinsakaiDiv div) {
-        getHandler(div).onClick_chkPrintChoyoJimu();
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).onClick_chkPrintChoyoJimu();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -89,7 +105,9 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onClick_chkPrintChohyoIin(PublicationShiryoShinsakaiDiv div) {
-        getHandler(div).onClick_chkPrintChohyoIin();
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).onClick_chkPrintChohyoIin();
+        }
         return ResponseData.of(div).respond();
     }
 

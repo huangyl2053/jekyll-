@@ -72,7 +72,7 @@ var DBZ;
             };
 
             Controls.prototype.txtNinteiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYMD"));
             };
 
             Controls.prototype.txtYokaigodoCode = function () {
@@ -88,11 +88,11 @@ var DBZ;
             };
 
             Controls.prototype.txtYukoKaishiYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKaishiYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoKaishiYMD"));
             };
 
             Controls.prototype.txtYukoShuryoYMD = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoShuryoYMD"));
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoShuryoYMD"));
             };
 
             Controls.prototype.btnAfter6Month = function () {

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInp
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 07 10:47:38 JST 2016 
+ * Sat Dec 10 17:38:20 JST 2016 
  */
 
 
