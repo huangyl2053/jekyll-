@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoirai;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,8 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIkenshoIraiEntity {
 
-    private ShinseishoKanriNo shinseishoKanriNo;
-    private RString shoKisaiHokenshaNo;
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiCode;
     private FlexibleDate torisageYMD;

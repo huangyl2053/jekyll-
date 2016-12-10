@@ -92,6 +92,8 @@ public class ShujiiIkenshoShokaiHandler {
             イメージマスクパスリスト = getマスクFilePathList(イメージ情報);
             原本タイトルリスト = getTitleList(イメージ元本パスリスト);
             マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
+        } else {
+            div.getCcdChosaTokkiShiryoShokai().setDisplayNone(true);
         }
         div.getCcdChosaTokkiShiryoShokai().initialize(イメージ元本パスリスト, イメージマスクパスリスト, 原本タイトルリスト, マスクタイトルリスト);
     }

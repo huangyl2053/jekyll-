@@ -38,6 +38,8 @@ and open the template in the editor.
             ON A."shinsakaiKaisaiBashoCode" = C."shinsakaiKaisaiBashoCode"
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS D
             ON D."gogitaiNo" = A."gogitaiNo"
+            AND D."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  A."shinsakaiKaisaiYMD"
+            AND D."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  A."shinsakaiKaisaiYMD"
         WHERE 1=1
         <if test="null!=審査会開催番号 and 審査会開催番号.length()>0">
             AND A."shinsakaiKaisaiNo" = #{審査会開催番号}
@@ -53,7 +55,7 @@ and open the template in the editor.
                     ORDER BY B."shinsakaiWariateYMD" DESC
                     LIMIT(1)
             )
-        </if>    
+        </if>
     </select>
 
     <resultMap id = "WariateIinAndIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">
