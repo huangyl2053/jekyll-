@@ -41,6 +41,7 @@ public class PublicationShiryoShinsakaiHandler {
     private final RString 印刷帳票_主治医意見書 = new RString("4");
     private final RString 印刷帳票_その他資料 = new RString("5");
     private final RString 印刷帳票_概況特記 = new RString("2");
+    private final RString 印刷帳票_審査会開催通知書 = new RString("2");
     private final RString 印刷帳票_予備判定記入票 = new RString("3");
     private final RString 印刷帳票_概況特記一覧 = new RString("4");
     private final PublicationShiryoShinsakaiDiv div;
@@ -174,46 +175,130 @@ public class PublicationShiryoShinsakaiHandler {
      * 事務局用印刷帳票チェックボックスを変更する場合、表示項目を変更する。
      */
     public void onClick_chkPrintChoyoJimu() {
-        List<RString> 印刷帳票_事務局審査会資料 = new ArrayList<>();
-        if (!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)) {
-            印刷帳票_事務局審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_事務局審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_事務局審査会資料.add(印刷帳票_その他資料);
-            印刷帳票_事務局審査会資料.add(印刷帳票_特記事項_一次判定);
-            印刷帳票_事務局審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_事務局審査会資料.add(印刷帳票_一次判定結果票);
+        RString 作成条件 = div.getRadSakuseiJokenType().getSelectedKey();
+        List<RString> 印刷帳票_事務局審査会資料1 = new ArrayList<>();
+        List<RString> 印刷帳票_事務局審査会資料2 = new ArrayList<>();
+        List<RString> 印刷帳票_事務局審査会資料2無効化 = new ArrayList<>();
+        List<RString> 印刷帳票_事務局審査会資料3 = new ArrayList<>();
+        印刷帳票_事務局審査会資料1.add(印刷帳票_すべて選択);
+        印刷帳票_事務局審査会資料1.add(印刷帳票_審査会資料);
+        印刷帳票_事務局審査会資料2.add(印刷帳票_審査会対象者一覧);
+        印刷帳票_事務局審査会資料2.add(印刷帳票_主治医意見書);
+        印刷帳票_事務局審査会資料2.add(印刷帳票_その他資料);
+        印刷帳票_事務局審査会資料2.add(印刷帳票_特記事項_一次判定);
+        印刷帳票_事務局審査会資料2.add(印刷帳票_特記事項);
+        印刷帳票_事務局審査会資料2.add(印刷帳票_一次判定結果票);
+        印刷帳票_事務局審査会資料3.add(印刷帳票_概況特記);
+        印刷帳票_事務局審査会資料3.add(印刷帳票_予備判定記入票);
+        印刷帳票_事務局審査会資料3.add(印刷帳票_概況特記一覧);
+
+        if (作成条件_全件.equals(作成条件)) {
+            印刷帳票_事務局審査会資料3.remove(印刷帳票_概況特記);
         } else {
-            if (選択.equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
-                印刷帳票_事務局審査会資料.add(印刷帳票_特記事項_一次判定);
-            } else {
-                印刷帳票_事務局審査会資料.add(印刷帳票_特記事項);
-                印刷帳票_事務局審査会資料.add(印刷帳票_一次判定結果票);
-            }
+            印刷帳票_事務局審査会資料3.remove(印刷帳票_予備判定記入票);
         }
-        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(印刷帳票_事務局審査会資料);
+        
+        if (選択.equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
+            印刷帳票_事務局審査会資料2無効化.add(印刷帳票_特記事項_一次判定);
+            印刷帳票_事務局審査会資料2.remove(印刷帳票_特記事項_一次判定);
+        } else {
+            印刷帳票_事務局審査会資料2無効化.add(印刷帳票_特記事項);
+            印刷帳票_事務局審査会資料2無効化.add(印刷帳票_一次判定結果票);
+            印刷帳票_事務局審査会資料2.remove(印刷帳票_特記事項);
+            印刷帳票_事務局審査会資料2.remove(印刷帳票_一次判定結果票);
+        }
+        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(印刷帳票_事務局審査会資料2無効化);
+
+        if (div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
+                && Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+            div.getChkPrintChoyoJimu().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(new ArrayList<RString>());
+            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+        } else if (div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+            div.getChkPrintChoyoJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料1);
+            div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料2);
+            div.getChkPrintChoyoJimu2().setSelectedItemsByKey(印刷帳票_事務局審査会資料3);
+            div.setHdnChkSubeteFlag(new RString(Boolean.TRUE.toString()));
+        } else if (!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
+                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+            div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料2);
+        }else if(!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
+                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())){
+            div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(new ArrayList<RString>());
+        } else if (Boolean.valueOf(div.getHdnChkSubeteFlag().toString())
+                && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)) {
+            div.getChkPrintChoyoJimu().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkPrintChoyoJimu2().setSelectedItemsByKey(new ArrayList<RString>());
+            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+        }
     }
 
     /**
      * 審査会委員用印刷帳票チェックボックスを変更する場合、表示項目を変更する。
      */
     public void onClick_chkPrintChohyoIin() {
-        List<RString> 印刷帳票_委員審査会資料 = new ArrayList<>();
-        if (!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)) {
-            印刷帳票_委員審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_委員審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_委員審査会資料.add(印刷帳票_一次判定結果票);
-            印刷帳票_委員審査会資料.add(印刷帳票_特記事項_一次判定);
-            印刷帳票_委員審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_委員審査会資料.add(印刷帳票_その他資料);
-        } else {
-            if (選択.equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
-                印刷帳票_委員審査会資料.add(印刷帳票_特記事項_一次判定);
-            } else {
-                印刷帳票_委員審査会資料.add(印刷帳票_特記事項);
-                印刷帳票_委員審査会資料.add(印刷帳票_一次判定結果票);
-            }
+        RString 作成条件 = div.getRadSakuseiJokenType().getSelectedKey();
+        List<RString> 印刷帳票_委員審査会資料1 = new ArrayList<>();
+        List<RString> 印刷帳票_委員審査会資料2 = new ArrayList<>();
+        List<RString> 印刷帳票_委員審査会資料2無効化 = new ArrayList<>();
+        List<RString> 印刷帳票_委員審査会資料3 = new ArrayList<>();
+        印刷帳票_委員審査会資料1.add(印刷帳票_すべて選択);
+        印刷帳票_委員審査会資料1.add(印刷帳票_審査会資料);
+        印刷帳票_委員審査会資料2.add(印刷帳票_審査会対象者一覧);
+        印刷帳票_委員審査会資料2.add(印刷帳票_主治医意見書);
+        印刷帳票_委員審査会資料2.add(印刷帳票_その他資料);
+        印刷帳票_委員審査会資料2.add(印刷帳票_特記事項_一次判定);
+        印刷帳票_委員審査会資料2.add(印刷帳票_特記事項);
+        印刷帳票_委員審査会資料2.add(印刷帳票_一次判定結果票);
+        印刷帳票_委員審査会資料3.add(印刷帳票_審査会開催通知書);
+        印刷帳票_委員審査会資料3.add(印刷帳票_予備判定記入票);
+        
+        if (!作成条件_全件.equals(作成条件)) {
+            印刷帳票_委員審査会資料3.remove(印刷帳票_予備判定記入票);
         }
-        div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(印刷帳票_委員審査会資料);
+        if (選択.equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
+            印刷帳票_委員審査会資料2無効化.add(印刷帳票_特記事項_一次判定);
+            印刷帳票_委員審査会資料2.remove(印刷帳票_特記事項_一次判定);
+        } else {
+            印刷帳票_委員審査会資料2無効化.add(印刷帳票_特記事項);
+            印刷帳票_委員審査会資料2無効化.add(印刷帳票_一次判定結果票);
+            印刷帳票_委員審査会資料2.remove(印刷帳票_特記事項);
+            印刷帳票_委員審査会資料2.remove(印刷帳票_一次判定結果票);
+        }
+        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(印刷帳票_委員審査会資料2無効化);
+
+        if (div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && !div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
+                && Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+            div.getChkPrintChohyoIin().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(new ArrayList<RString>());
+            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+        } else if (div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+            div.getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票_委員審査会資料1);
+            div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料2);
+            div.getChkPrintChohyoIin2().setSelectedItemsByKey(印刷帳票_委員審査会資料3);
+            div.setHdnChkSubeteFlag(new RString(Boolean.TRUE.toString()));
+        }else if(!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
+                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())){
+            div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料2);
+        }else if (!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
+                && !div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
+                && !Boolean.valueOf(div.getHdnChkSubeteFlag().toString())) {
+            div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(new ArrayList<RString>());
+        } else if (Boolean.valueOf(div.getHdnChkSubeteFlag().toString())
+                && !div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)) {
+            div.getChkPrintChohyoIin().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkPrintChohyoIin2().setSelectedItemsByKey(new ArrayList<RString>());
+            div.setHdnChkSubeteFlag(new RString(Boolean.FALSE.toString()));
+        }
     }
 
     /**
