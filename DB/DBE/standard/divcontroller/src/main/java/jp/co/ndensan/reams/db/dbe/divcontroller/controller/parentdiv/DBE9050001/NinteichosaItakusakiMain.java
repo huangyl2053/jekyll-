@@ -106,7 +106,7 @@ public class NinteichosaItakusakiMain {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         searchChosainInfo(div);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9050001StateName.一覧);
     }
 
     private void searchChosainInfo(NinteichosaItakusakiMainDiv div) {
@@ -124,7 +124,14 @@ public class NinteichosaItakusakiMain {
                 div.getChosainSearch().getDdlkikankubun().getSelectedKey(),
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue());
         List<SonotaKikanJohoEntity> sonotaKikanJohoList = NinteichosaMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
-        if (sonotaKikanJohoList.isEmpty()) {
+        
+        boolean 検索条件初期値 = true;
+        if (parameter.isUser機関カナ名称() || parameter.isUser機関の区分() || parameter.isUser機関コードFrom() || parameter.isUser機関コードTo() 
+                || parameter.isUser機関名称() || parameter.isUser調査委託区分() || !parameter.is廃止フラグ()) {
+            検索条件初期値 = false;
+        }
+        
+        if (sonotaKikanJohoList.isEmpty() && !検索条件初期値) {
             ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(new ArrayList<SonotaKikanJoho>()));
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
