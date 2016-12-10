@@ -77,8 +77,8 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkMinashiKoshinNintei"));
             }
 
-            public txtNinteiYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYMD"));
+            public txtNinteiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYMD"));
             }
 
             public txtYokaigodoCode(): UZA.TextBoxCode {
@@ -93,12 +93,12 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtYokaigodoName"));
             }
 
-            public txtYukoKaishiYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKaishiYMD"));
+            public txtYukoKaishiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoKaishiYMD"));
             }
 
-            public txtYukoShuryoYMD(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoShuryoYMD"));
+            public txtYukoShuryoYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoShuryoYMD"));
             }
 
             public btnAfter6Month(): UZA.Button {

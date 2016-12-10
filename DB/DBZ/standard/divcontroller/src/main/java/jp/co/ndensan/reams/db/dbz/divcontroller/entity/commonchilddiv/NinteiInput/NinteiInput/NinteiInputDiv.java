@@ -289,12 +289,12 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiYMD() {
+    public TextBoxDate getTxtNinteiYMD() {
         return this.getNinteiJoho().getTxtNinteiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYMD(TextBoxFlexibleDate txtNinteiYMD) {
+    public void  setTxtNinteiYMD(TextBoxDate txtNinteiYMD) {
         this.getNinteiJoho().setTxtNinteiYMD(txtNinteiYMD);
     }
 
@@ -329,22 +329,22 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtYukoKaishiYMD() {
+    public TextBoxDate getTxtYukoKaishiYMD() {
         return this.getNinteiJoho().getTxtYukoKaishiYMD();
     }
 
     @JsonIgnore
-    public void  setTxtYukoKaishiYMD(TextBoxFlexibleDate txtYukoKaishiYMD) {
+    public void  setTxtYukoKaishiYMD(TextBoxDate txtYukoKaishiYMD) {
         this.getNinteiJoho().setTxtYukoKaishiYMD(txtYukoKaishiYMD);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtYukoShuryoYMD() {
+    public TextBoxDate getTxtYukoShuryoYMD() {
         return this.getNinteiJoho().getTxtYukoShuryoYMD();
     }
 
     @JsonIgnore
-    public void  setTxtYukoShuryoYMD(TextBoxFlexibleDate txtYukoShuryoYMD) {
+    public void  setTxtYukoShuryoYMD(TextBoxDate txtYukoShuryoYMD) {
         this.getNinteiJoho().setTxtYukoShuryoYMD(txtYukoShuryoYMD);
     }
 

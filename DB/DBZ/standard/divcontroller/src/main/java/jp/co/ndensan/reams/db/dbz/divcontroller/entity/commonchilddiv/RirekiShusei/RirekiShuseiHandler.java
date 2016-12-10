@@ -540,12 +540,19 @@ public class RirekiShuseiHandler {
         RirekiShuseiDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkaiJohoSerialized(),
                 RirekiShuseiDataPass.class);
         if (zenkai != null) {
-            div.getCcdZenkaiNinteiKekka().getTxtNinteiDay().setValue(ObjectUtil.defaultIfNull(zenkai.get認定年月日(), FlexibleDate.EMPTY));
+            div.getCcdZenkaiNinteiKekka().getTxtNinteiDay().setValue(rDateTOFlexDate(zenkai.get認定年月日()));
             div.getCcdZenkaiNinteiKekka().getTxtYokaigodo().setValue(
                     get要介護状態区分名称(zenkai.get厚労省IF識別コード().value(), zenkai.get要介護状態区分コード()));
-            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanFrom().setValue(ObjectUtil.defaultIfNull(zenkai.get認定有効開始年月日(), FlexibleDate.EMPTY));
-            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanTo().setValue(ObjectUtil.defaultIfNull(zenkai.get認定有効終了年月日(), FlexibleDate.EMPTY));
+            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanFrom().setValue(rDateTOFlexDate(zenkai.get認定有効開始年月日()));
+            div.getCcdZenkaiNinteiKekka().getTxtYukoKikanTo().setValue(rDateTOFlexDate(zenkai.get認定有効終了年月日()));
         }
+    }
+
+    private FlexibleDate rDateTOFlexDate(RDate fromDate) {
+        if (fromDate != null) {
+            return new FlexibleDate(fromDate.getYearValue(), fromDate.getMonthValue(), fromDate.getDayValue());
+        }
+        return FlexibleDate.EMPTY;
     }
 
     private void set認定情報(RirekiShuseiDataPass konkai) {
@@ -564,9 +571,9 @@ public class RirekiShuseiHandler {
             selKey.add(KEY_0);
             ninteiInput.setみなし更新認定(selKey);
         }
-        ninteiInput.set認定年月日(ObjectUtil.defaultIfNull(konkai.get認定年月日(), FlexibleDate.EMPTY));
-        ninteiInput.set有効開始年月日(ObjectUtil.defaultIfNull(konkai.get認定有効開始年月日(), FlexibleDate.EMPTY));
-        ninteiInput.set有効終了年月日(ObjectUtil.defaultIfNull(konkai.get認定有効終了年月日(), FlexibleDate.EMPTY));
+        ninteiInput.set認定年月日(konkai.get認定年月日());
+        ninteiInput.set有効開始年月日(konkai.get認定有効開始年月日());
+        ninteiInput.set有効終了年月日(konkai.get認定有効終了年月日());
         ninteiInput.set審査会意見(ObjectUtil.defaultIfNull(konkai.get介護認定審査会意見(), RString.EMPTY));
         ninteiInput.setサービス一覧リスト(getサービス種類リスト(konkai));
         ninteiInput.set申請書管理番号(konkai.get申請書管理番号());

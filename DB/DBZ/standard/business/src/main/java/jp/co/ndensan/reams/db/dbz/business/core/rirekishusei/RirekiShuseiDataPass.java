@@ -35,10 +35,10 @@ public class RirekiShuseiDataPass implements Serializable, Cloneable {
     private static final long serialVersionUID = 2502561546047444606L;
 
     private Code データ区分;
-    private FlexibleDate 認定年月日;
+    private RDate 認定年月日;
     private Code 要介護状態区分コード;
-    private FlexibleDate 認定有効開始年月日;
-    private FlexibleDate 認定有効終了年月日;
+    private RDate 認定有効開始年月日;
+    private RDate 認定有効終了年月日;
     private boolean 旧措置フラグ;
     private RString 介護認定審査会意見;
     private RString 要介護申請_要支援申請の区分;
