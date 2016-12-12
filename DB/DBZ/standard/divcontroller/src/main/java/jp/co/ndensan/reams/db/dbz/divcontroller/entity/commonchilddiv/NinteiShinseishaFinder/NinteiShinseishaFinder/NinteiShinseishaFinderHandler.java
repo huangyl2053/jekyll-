@@ -307,6 +307,7 @@ public class NinteiShinseishaFinderHandler {
         div.getTxtYubinNo().clearValue();
 
         List<RString> keyList = new ArrayList<>();
+        keyList.add(new RString("key0"));
         keyList.add(new RString("key1"));
         div.getChkShisetsuNyusho().setSelectedItemsByKey(keyList);
 

@@ -49,14 +49,14 @@ public class GogitaiJohoSakuseiValidationHandler {
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs gogitaiNoKetaiCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getTxtGogitaiNumber().getValue().length() != 2) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.桁数が不正));
-        }
-
-        return validationMessages;
-    }
+//    public ValidationMessageControlPairs gogitaiNoKetaiCheck() {
+//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+//        if (div.getTxtGogitaiNumber().getValue().length() != 2) {
+//            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.桁数が不正));
+//        }
+//
+//        return validationMessages;
+//    }
 
     /**
      *

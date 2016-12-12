@@ -3,16 +3,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Aug 04 10:39:21 JST 2016 
+ * Sat Dec 10 14:19:59 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgGogitaiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
 
     private RString jyotai;
-    private RString gogitaiNumber;
+    private TextBoxNum gogitaiNumber;
     private RString gogitaiName;
     private TextBoxDate yukoKaishiYMD;
     private TextBoxDate yukoShuryoYMD;
@@ -41,7 +41,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
     public dgGogitaiIchiran_Row() {
         super();
         this.jyotai = RString.EMPTY;
-        this.gogitaiNumber = RString.EMPTY;
+        this.gogitaiNumber = new TextBoxNum();
         this.gogitaiName = RString.EMPTY;
         this.yukoKaishiYMD = new TextBoxDate();
         this.yukoShuryoYMD = new TextBoxDate();
@@ -68,7 +68,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         this.setOriginalData("iinTeiin", iinTeiin);
     }
 
-    public dgGogitaiIchiran_Row(RString jyotai, RString gogitaiNumber, RString gogitaiName, TextBoxDate yukoKaishiYMD, TextBoxDate yukoShuryoYMD, TextBoxTime gogitaiKaishiYoteiTime, TextBoxTime gogitaiShuryoYoteiTime, RString kaisaiBashoCode, Boolean seishinkaiSonzai, Boolean gogitaiDummyFlag, TextBoxNum yoteiTeiin, TextBoxNum jidoWariateTeiin, TextBoxNum iinTeiin) {
+    public dgGogitaiIchiran_Row(RString jyotai, TextBoxNum gogitaiNumber, RString gogitaiName, TextBoxDate yukoKaishiYMD, TextBoxDate yukoShuryoYMD, TextBoxTime gogitaiKaishiYoteiTime, TextBoxTime gogitaiShuryoYoteiTime, RString kaisaiBashoCode, Boolean seishinkaiSonzai, Boolean gogitaiDummyFlag, TextBoxNum yoteiTeiin, TextBoxNum jidoWariateTeiin, TextBoxNum iinTeiin) {
         super();
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("gogitaiNumber", gogitaiNumber);
@@ -102,7 +102,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         return jyotai;
     }
 
-    public RString getGogitaiNumber() {
+    public TextBoxNum getGogitaiNumber() {
         return gogitaiNumber;
     }
 
@@ -155,7 +155,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         this.jyotai = jyotai;
     }
 
-    public void setGogitaiNumber(RString gogitaiNumber) {
+    public void setGogitaiNumber(TextBoxNum gogitaiNumber) {
         this.setOriginalData("gogitaiNumber", gogitaiNumber);
         this.gogitaiNumber = gogitaiNumber;
     }
