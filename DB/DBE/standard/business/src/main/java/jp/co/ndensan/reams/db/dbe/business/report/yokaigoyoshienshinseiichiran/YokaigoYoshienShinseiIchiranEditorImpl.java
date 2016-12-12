@@ -87,7 +87,7 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
         }
         Code shinseijiKubunCode = item.getNinteiShinseiShinseijiKubun();
         if (shinseijiKubunCode != null) {
-            reportSource.listShinseiIchiran_13 = NinteiShinseiShinseijiKubunCode.toValue(shinseijiKubunCode.value()).get名称();
+            reportSource.listShinseiIchiran_13 = NinteiShinseiShinseijiKubunCode.toValue(shinseijiKubunCode.value()).get略称();
         }
         reportSource.listShinseiIchiran_14 = item.getJigyoshaMeisho();
         reportSource.listShinseiIchiran_15 = item.getChosainShimei();
