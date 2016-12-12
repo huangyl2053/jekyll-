@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIkenshoIraiEntity {
 
+    private Code koroshoIfShikibetsuCode;
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiCode;
     private FlexibleDate torisageYMD;

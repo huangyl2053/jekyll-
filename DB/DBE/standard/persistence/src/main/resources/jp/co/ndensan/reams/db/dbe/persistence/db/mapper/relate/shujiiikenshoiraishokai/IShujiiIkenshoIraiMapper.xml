@@ -4,6 +4,7 @@
 <!-- @reamsid_L DBE-0200-030 zhangzhiming -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshoiraishokai.IShujiiIkenshoIraiMapper">
     <resultMap id="resultMap_ShujiiIkenshoIraiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoirai.ShujiiIkenshoIraiEntity" autoMapping="true">
+        <result property="koroshoIfShikibetsuCode" column="DbT5101_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteiShinseiYMD" column="DbT5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteiShinseiCode" column="DbT5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="torisageYMD" column="DbT5101_torisageYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -21,7 +22,8 @@
     <select resultOrdered="true" id="selectNinnteiChousa" resultMap="resultMap_ShujiiIkenshoIraiEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshoiraishokai.ShujiiIkenshoMapperParameter" fetchSize="500">
         SELECT
-        DbT5101Nintei."ninteiShinseiYMD" AS DbT5101_ninteiShinseiYMD
+        DbT5101Nintei."koroshoIfShikibetsuCode" AS DbT5101_koroshoIfShikibetsuCode
+        , DbT5101Nintei."ninteiShinseiYMD" AS DbT5101_ninteiShinseiYMD
         , DbT5101Nintei."ninteiShinseiShinseijiKubunCode" AS DbT5101_ninteiShinseiShinseijiKubunCode
         , DbT5101Nintei."torisageYMD" AS DbT5101_torisageYMD
         , DbT5102Nintei."nijiHanteiYMD" AS DbT5102_nijiHanteiYMD

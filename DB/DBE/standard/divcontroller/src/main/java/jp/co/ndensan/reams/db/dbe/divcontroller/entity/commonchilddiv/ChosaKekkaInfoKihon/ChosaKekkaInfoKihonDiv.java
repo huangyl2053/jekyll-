@@ -41,6 +41,10 @@ public class ChosaKekkaInfoKihonDiv extends Panel implements IChosaKekkaInfoKiho
     private RString ninteichosaRirekiNo;
     @JsonProperty("ninteichosaTokkijikoNoList")
     private RString ninteichosaTokkijikoNoList;
+    @JsonProperty("allNinteichosaTokkijikoNoList")
+    private RString allNinteichosaTokkijikoNoList;
+    @JsonProperty("koroshoIFShikibetsuCode")
+    private RString koroshoIFShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -208,6 +212,42 @@ public class ChosaKekkaInfoKihonDiv extends Panel implements IChosaKekkaInfoKiho
     @JsonProperty("ninteichosaTokkijikoNoList")
     public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
         this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * getallNinteichosaTokkijikoNoList
+     * @return allNinteichosaTokkijikoNoList
+     */
+    @JsonProperty("allNinteichosaTokkijikoNoList")
+    public RString getAllNinteichosaTokkijikoNoList() {
+        return allNinteichosaTokkijikoNoList;
+    }
+
+    /*
+     * setallNinteichosaTokkijikoNoList
+     * @param allNinteichosaTokkijikoNoList allNinteichosaTokkijikoNoList
+     */
+    @JsonProperty("allNinteichosaTokkijikoNoList")
+    public void setAllNinteichosaTokkijikoNoList(RString allNinteichosaTokkijikoNoList) {
+        this.allNinteichosaTokkijikoNoList = allNinteichosaTokkijikoNoList;
+    }
+
+    /*
+     * getkoroshoIFShikibetsuCode
+     * @return koroshoIFShikibetsuCode
+     */
+    @JsonProperty("koroshoIFShikibetsuCode")
+    public RString getKoroshoIFShikibetsuCode() {
+        return koroshoIFShikibetsuCode;
+    }
+
+    /*
+     * setkoroshoIFShikibetsuCode
+     * @param koroshoIFShikibetsuCode koroshoIFShikibetsuCode
+     */
+    @JsonProperty("koroshoIFShikibetsuCode")
+    public void setKoroshoIFShikibetsuCode(RString koroshoIFShikibetsuCode) {
+        this.koroshoIFShikibetsuCode = koroshoIFShikibetsuCode;
     }
 
     /*

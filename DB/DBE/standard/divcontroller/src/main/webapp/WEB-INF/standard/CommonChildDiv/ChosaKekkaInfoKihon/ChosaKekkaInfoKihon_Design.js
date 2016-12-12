@@ -4,8 +4,16 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onBeforeOpenDialog_btnShogaiKoreishaTokki = function () {
+                return "onBeforeOpenDialog_btnShogaiKoreishaTokki";
+            };
+
             Events.onBeforeOpenDialog_btnChosaTokkiImageShokai = function () {
                 return "onBeforeOpenDialog_btnChosaTokkiImageShokai";
+            };
+
+            Events.onBeforeOpenDialog_btnNinchiKoreishaTokki = function () {
+                return "onBeforeOpenDialog_btnNinchiKoreishaTokki";
             };
 
             Events.onClick_btnReturn = function () {
@@ -63,16 +71,24 @@ var DBE;
                 return new UZA.DataGrid(this.convFiledName("dgKihonChosa"));
             };
 
-            Controls.prototype.txtNinchishoNichijoSeikatsuJiritsudoCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
+            Controls.prototype.btnShogaiKoreishaTokki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnShogaiKoreishaTokki"));
+            };
+
+            Controls.prototype.txtShogaiNichijoSeikatsuJiritsudoCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
             };
 
             Controls.prototype.btnChosaTokkiImageShokai = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnChosaTokkiImageShokai"));
             };
 
-            Controls.prototype.txtShogaiNichijoSeikatsuJiritsudoCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
+            Controls.prototype.btnNinchiKoreishaTokki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnNinchiKoreishaTokki"));
+            };
+
+            Controls.prototype.txtNinchishoNichijoSeikatsuJiritsudoCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
             };
 
             Controls.prototype.btnReturn = function () {
