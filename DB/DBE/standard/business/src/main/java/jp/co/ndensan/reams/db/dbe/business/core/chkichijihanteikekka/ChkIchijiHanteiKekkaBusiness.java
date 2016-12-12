@@ -253,6 +253,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
     private static final int 連番63 = 63;
     private static final int 連番65 = 65;
     private static final int 連番68 = 68;
+    private static final int 連番69 = 69;
 
     private ChkIchijiHanteiKekkaBusiness() {
     }
@@ -600,18 +601,18 @@ public final class ChkIchijiHanteiKekkaBusiness {
         if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())
                     || 識別コード06A.equals(bodyItem.get厚労省IF識別コード())) {
-                主治医意見書項目4リスト.add(get意見書名称03(dbt5304Entity, 連番13));
-                主治医意見書項目4リスト.add(get意見書名称04(dbt5304Entity, 連番14));
-                主治医意見書項目4リスト.add(get意見書名称05(dbt5304Entity, 連番15));
-                主治医意見書項目4リスト.add(get意見書名称06(dbt5304Entity, 連番16));
-                主治医意見書項目4リスト.add(get意見書名称14(dbt5304Entity, 連番68));
-            }
-            if (識別コード02A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
                 主治医意見書項目4リスト.add(get意見書名称03(dbt5304Entity, 連番14));
                 主治医意見書項目4リスト.add(get意見書名称04(dbt5304Entity, 連番15));
                 主治医意見書項目4リスト.add(get意見書名称05(dbt5304Entity, 連番16));
                 主治医意見書項目4リスト.add(get意見書名称06(dbt5304Entity, 連番17));
-                主治医意見書項目4リスト.add(get意見書名称14(dbt5304Entity, 連番18));
+                主治医意見書項目4リスト.add(get意見書名称14(dbt5304Entity, 連番69));
+            }
+            if (識別コード02A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
+                主治医意見書項目4リスト.add(get意見書名称03(dbt5304Entity, 連番15));
+                主治医意見書項目4リスト.add(get意見書名称04(dbt5304Entity, 連番16));
+                主治医意見書項目4リスト.add(get意見書名称05(dbt5304Entity, 連番17));
+                主治医意見書項目4リスト.add(get意見書名称06(dbt5304Entity, 連番18));
+                主治医意見書項目4リスト.add(get意見書名称14(dbt5304Entity, 連番19));
             }
         }
         return 主治医意見書項目4リスト;
@@ -1361,18 +1362,18 @@ public final class ChkIchijiHanteiKekkaBusiness {
         List<RString> 主治医意見書項目4リスト = new ArrayList<>();
         if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())
                 || 識別コード06A.equals(bodyItem.get厚労省IF識別コード())) {
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番13).isEmpty() ? RString.EMPTY : get意見書名称03(dbt5304Entity, 連番13));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14).isEmpty() ? RString.EMPTY : get意見書名称04(dbt5304Entity, 連番14));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15).isEmpty() ? RString.EMPTY : get意見書名称05(dbt5304Entity, 連番15));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16).isEmpty() ? RString.EMPTY : get意見書名称06(dbt5304Entity, 連番16));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番68).isEmpty() ? RString.EMPTY : get意見書名称14(dbt5304Entity, 連番68));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14).isEmpty() ? RString.EMPTY : get意見書名称03(dbt5304Entity, 連番14));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15).isEmpty() ? RString.EMPTY : get意見書名称04(dbt5304Entity, 連番15));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16).isEmpty() ? RString.EMPTY : get意見書名称05(dbt5304Entity, 連番16));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17).isEmpty() ? RString.EMPTY : get意見書名称06(dbt5304Entity, 連番17));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番69).isEmpty() ? RString.EMPTY : get意見書名称14(dbt5304Entity, 連番69));
         }
         if (識別コード02A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14).isEmpty() ? RString.EMPTY : get意見書名称04(dbt5304Entity, 連番14));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15).isEmpty() ? RString.EMPTY : get意見書名称05(dbt5304Entity, 連番15));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16).isEmpty() ? RString.EMPTY : get意見書名称06(dbt5304Entity, 連番16));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17).isEmpty() ? RString.EMPTY : get意見書名称04(dbt5304Entity, 連番17));
-            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番18).isEmpty() ? RString.EMPTY : get意見書名称05(dbt5304Entity, 連番18));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15).isEmpty() ? RString.EMPTY : get意見書名称04(dbt5304Entity, 連番15));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16).isEmpty() ? RString.EMPTY : get意見書名称05(dbt5304Entity, 連番16));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17).isEmpty() ? RString.EMPTY : get意見書名称06(dbt5304Entity, 連番17));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番18).isEmpty() ? RString.EMPTY : get意見書名称04(dbt5304Entity, 連番18));
+            主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番19).isEmpty() ? RString.EMPTY : get意見書名称05(dbt5304Entity, 連番19));
         }
         return 主治医意見書項目4リスト;
     }
