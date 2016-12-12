@@ -30,6 +30,9 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
     private final boolean isNinteiChosainCode;
     private final boolean isShichoson;
 
+    //全市町村を選択したことを示す市町村コード
+    private static final RString ALL_SHICHOSON_KEY = new RString("000000");
+
     /**
      * コンストラクタです。
      *
@@ -82,7 +85,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
         if (!RString.isNullOrEmpty(認定調査委託先コード) && !RString.isNullOrEmpty(認定調査員コード)) {
             is認定調査員コード = true;
         }
-        if (RString.isNullOrEmpty(市町村コード)) {
+        if (RString.isNullOrEmpty(市町村コード) || ALL_SHICHOSON_KEY.equals(市町村コード)) {
             is全市町村 = true;
         }
         return new NinteiChosaDataOutputMybitisParameter(認定調査委託先コード,

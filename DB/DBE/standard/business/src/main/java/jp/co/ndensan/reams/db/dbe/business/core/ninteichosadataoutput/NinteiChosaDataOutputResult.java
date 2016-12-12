@@ -76,20 +76,48 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set調査委託先(entity.get事業者名称());
         eucCsvEntity.set認定調査員コード(entity.get認定調査員コード());
         eucCsvEntity.set調査員氏名(entity.get調査員氏名());
+
         eucCsvEntity.setイメージ区分コード(entity.getイメージ区分());
-        eucCsvEntity.setイメージ区分(TokkijikoTextImageKubun.toValue(entity.getイメージ区分()).get名称());
+        if (RString.isNullOrEmpty(entity.getイメージ区分())) {
+            eucCsvEntity.setイメージ区分(RString.EMPTY);
+        } else {
+            eucCsvEntity.setイメージ区分(TokkijikoTextImageKubun.toValue(entity.getイメージ区分()).get名称());
+        }
+
         eucCsvEntity.set認定調査依頼区分コード(entity.get認定調査依頼区分コード());
-        eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
+        if (RString.isNullOrEmpty(entity.get認定調査依頼区分コード())) {
+            eucCsvEntity.set認定調査依頼区分(RString.EMPTY);
+        } else {
+            eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
+        }
+
         eucCsvEntity.set認定調査回数(entity.get認定調査回数());
         eucCsvEntity.set認定調査実施年月日(setDateFormat(entity.get認定調査実施年月日()));
         eucCsvEntity.set認定調査受領年月日(setDateFormat(entity.get認定調査受領年月日()));
+
         eucCsvEntity.set認定調査区分コード(entity.get認定調査区分コード());
-        eucCsvEntity.set認定調査区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査区分コード()).get名称());
+        if (RString.isNullOrEmpty(entity.get認定調査区分コード())) {
+            eucCsvEntity.set認定調査区分(RString.EMPTY);
+        } else {
+            eucCsvEntity.set認定調査区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査区分コード()).get名称());
+        }
+
         eucCsvEntity.set認定調査実施場所コード(entity.get認定調査実施場所コード());
-        eucCsvEntity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(entity.get認定調査実施場所コード()).get名称());
+        if (RString.isNullOrEmpty(entity.get認定調査実施場所コード())) {
+            eucCsvEntity.set認定調査実施場所(RString.EMPTY);
+        } else {
+            eucCsvEntity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(entity.get認定調査実施場所コード()).get名称());
+        }
+
         eucCsvEntity.set認定調査実施場所名称(entity.get認定調査実施場所名称());
+
         eucCsvEntity.setサービス区分コード(entity.getサービス区分コード());
-        eucCsvEntity.setサービス区分(ServiceKubunCode.toValue(entity.getサービス区分コード()).get名称());
+        if (RString.isNullOrEmpty(entity.getサービス区分コード())) {
+            eucCsvEntity.setサービス区分(RString.EMPTY);
+        } else {
+            eucCsvEntity.setサービス区分(ServiceKubunCode.toValue(entity.getサービス区分コード()).get名称());
+        }
+
         eucCsvEntity.set利用施設名(entity.get利用施設名());
         eucCsvEntity.set利用施設住所(entity.get利用施設住所());
         eucCsvEntity.set利用施設電話番号(entity.get利用施設電話番号());
@@ -106,8 +134,14 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set機器_器械(entity.get機器_器械());
         eucCsvEntity.set認定調査特記事項番号(entity.get認定調査特記事項番号());
         eucCsvEntity.set認定調査特記事項連番(entity.get認定調査特記事項連番());
+
         eucCsvEntity.set原本マスク区分コード(entity.get原本マスク区分());
-        eucCsvEntity.set原本マスク区分(GenponMaskKubun.toValue(entity.get原本マスク区分()).get名称());
+        if (RString.isNullOrEmpty(entity.get原本マスク区分())) {
+            eucCsvEntity.set原本マスク区分(RString.EMPTY);
+        } else {
+            eucCsvEntity.set原本マスク区分(GenponMaskKubun.toValue(entity.get原本マスク区分()).get名称());
+        }
+
         eucCsvEntity.set特記事項(entity.get特記事項());
         eucCsvEntity.setサービスの状況連番(entity.get状況連番());
         eucCsvEntity.setサービスの状況(entity.get状況());
@@ -117,10 +151,21 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.setサービスの状況記入(entity.get状況記入());
         eucCsvEntity.set施設利用連番(entity.get施設利用連番());
         eucCsvEntity.set施設利用フラグ(entity.get施設利用フラグ());
+
         eucCsvEntity.set認知症日常生活自立度コード(entity.get認知症日常生活自立度コード());
-        eucCsvEntity.set認知症日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症日常生活自立度コード()).get名称());
+        if (RString.isNullOrEmpty(entity.get認知症日常生活自立度コード())) {
+            eucCsvEntity.set認知症日常生活自立度(RString.EMPTY);
+        } else {
+            eucCsvEntity.set認知症日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症日常生活自立度コード()).get名称());
+        }
+
         eucCsvEntity.set障害日常生活自立度コード(entity.get障害日常生活自立度コード());
-        eucCsvEntity.set障害日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get障害日常生活自立度コード()).get名称());
+        if (RString.isNullOrEmpty(entity.get障害日常生活自立度コード())) {
+            eucCsvEntity.set障害日常生活自立度(RString.EMPTY);
+        } else {
+            eucCsvEntity.set障害日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get障害日常生活自立度コード()).get名称());
+        }
+
         eucCsvEntity.set調査項目連番(entity.get調査項目連番());
         eucCsvEntity.set調査項目文言(set調査項目文言(entity.get厚労省IF識別コード(), entity.get調査項目連番()));
         eucCsvEntity.set内容(entity.get調査項目());
@@ -129,23 +174,24 @@ public class NinteiChosaDataOutputResult {
 
     private RString set調査項目文言(RString 厚労省IF識別コード, RString 連番) {
         RString 調査項目文言 = RString.EMPTY;
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping99A.toValue(連番).get名称();
-        }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping02A.toValue(連番).get名称();
-        }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping06A.toValue(連番).get名称();
-        }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping09A.toValue(連番).get名称();
-        }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
-            調査項目文言 = NinteichosaKomokuMapping09B.toValue(連番).get名称();
+        if (!RString.isNullOrEmpty(連番)) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
+                調査項目文言 = NinteichosaKomokuMapping99A.toValue(連番).get名称();
+            }
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
+                調査項目文言 = NinteichosaKomokuMapping02A.toValue(連番).get名称();
+            }
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
+                調査項目文言 = NinteichosaKomokuMapping06A.toValue(連番).get名称();
+            }
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
+                調査項目文言 = NinteichosaKomokuMapping09A.toValue(連番).get名称();
+            }
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
+                調査項目文言 = NinteichosaKomokuMapping09B.toValue(連番).get名称();
+            }
         }
         return 調査項目文言;
-
     }
 
     private RString setYobuinNoFormat(RString yobuinNo) {

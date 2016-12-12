@@ -44,7 +44,7 @@ public class NinteiChosaDataOutput {
 
         List<NinteiChosaDataOutputBusiness> businessList
                 = NinteiChosaDataOutputFinder.createInstance().getChosaChikuList(getHandler(div).setParameter()).records();
-        getHandler(div).set共通ボタン();
+        //getHandler(div).set共通ボタン();
         getHandler(div).get認定調査一覧(businessList);
         if (businessList.isEmpty()) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,7 +24,7 @@ public class NinteiChosaDataOutputRelateEntity {
     private boolean モバイルデータ出力済フラグ;
     private RString 被保険者番号;
     private RString 氏名;
-    private RString 認定申請年月日;
+    private FlexibleDate 認定申請年月日;
     private RString 認定申請区分_申請時_コード;
     private RString 性別;
     private RString 保険者;

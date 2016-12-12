@@ -52,7 +52,7 @@ public class NinteiChosaDataOutputHandler {
      * 認定調査データ出力（モバイル）の初期化です。
      */
     public void load() {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
+        //CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
         div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
         div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("InputMode"),
@@ -135,14 +135,14 @@ public class NinteiChosaDataOutputHandler {
             row.setHihokenshaNo(master.get被保険者番号());
             row.setHihokenshaName(master.get氏名());
             row.setSeibetsu(Seibetsu.toValue(master.get性別()).get名称());
-            row.setNinteiShinseiYMD(master.get認定申請年月日());
+            row.getNinteiShinseiYMD().setValue(master.get認定申請年月日());
             row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.toValue(master.get認定申請区分_申請時_コード()).get名称());
             row.setShinseishoKanriNo(master.get申請書管理番号());
             rowList.add(row);
             アクセスログ(master.get申請書管理番号());
         }
         if (共通ボタン活性フラグ) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
+            //CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
         }
         div.getNinteiIchiran().getDgNinteiChosaData().setDataSource(rowList);
     }

@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * NinteiChosaDataOutput のクラスファイル
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class NinteiChosaDataOutputDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -100,8 +100,13 @@ public class NinteiChosaDataOutputDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokensha() {
-        return this.getNinteiKensakuJyoken().getCcdHokensha();
+    public Button getBtnKyufuJissekiSearchClear() {
+        return this.getNinteiKensakuJyoken().getBtnKyufuJissekiSearchClear();
+    }
+
+    @JsonIgnore
+    public void setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
+        this.getNinteiKensakuJyoken().setBtnKyufuJissekiSearchClear(btnKyufuJissekiSearchClear);
     }
 
     @JsonIgnore
@@ -115,23 +120,8 @@ public class NinteiChosaDataOutputDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKyufuJissekiSearchClear() {
-        return this.getNinteiKensakuJyoken().getBtnKyufuJissekiSearchClear();
-    }
-
-    @JsonIgnore
-    public void setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
-        this.getNinteiKensakuJyoken().setBtnKyufuJissekiSearchClear(btnKyufuJissekiSearchClear);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getNinteiKensakuJyoken().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void setBtnKensaku(Button btnKensaku) {
-        this.getNinteiKensakuJyoken().setBtnKensaku(btnKensaku);
+    public IHokenshaListDiv getCcdHokensha() {
+        return this.getNinteiKensakuJyoken().getCcdHokensha();
     }
 
     @JsonIgnore

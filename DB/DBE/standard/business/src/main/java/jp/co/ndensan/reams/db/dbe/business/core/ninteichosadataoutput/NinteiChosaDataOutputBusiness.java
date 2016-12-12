@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -80,7 +81,7 @@ public class NinteiChosaDataOutputBusiness {
      *
      * @return 認定申請年月日
      */
-    public RString get認定申請年月日() {
+    public FlexibleDate get認定申請年月日() {
         return entity.get認定申請年月日();
     }
 
