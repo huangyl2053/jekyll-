@@ -73,7 +73,8 @@ public class YokaigoNinteiJohoTeikyoValidationHandler {
         if ((div.getHakkoChohyo().getChkNinteiChosahyo().isAllSelected() || div.getHakkoChohyo().getChkTokkiJiko().isAllSelected()
                 || div.getHakkoChohyo().getChkShujiiIkensho().isAllSelected() || div.getHakkoChohyo().getChkSonotaShiryo().isAllSelected()
                 || div.getHakkoChohyo().getChkIchijiHanteiKekka().isAllSelected())
-                && div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().getSelectedKey().equals(new RString("key1"))) {
+                && div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().getSelectedKey().equals(new RString("key1"))
+                && !div.getChkShujiiIkensho().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiJohoTeikyoValidationHandler.RRVMessages(
                     DbeErrorMessages.印刷不可, "主治医")));
         }
