@@ -57,6 +57,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJoh
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+
 /**
  * 合議体情報作成のコントローラです。
  *
@@ -79,7 +80,7 @@ public class GogitaiJohoSakusei {
     private FileSpoolManager fileSpoolManager;
     private final GogitaiJohoSakuseiFinder service;
     private final GogitaiJohoManager manager;
-    
+
     /**
      * コンストラクタです。
      *
@@ -130,7 +131,7 @@ public class GogitaiJohoSakusei {
         SearchResult<GogitaiJoho> resultList = service.getDateGridList(
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
                         FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY, 最大表示件数));
-        
+
         Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJoho = Models.create(resultList.records());
         ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJoho);
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
@@ -149,7 +150,7 @@ public class GogitaiJohoSakusei {
         getHandler(div).合議体詳細情報新規モード設定();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「CSV出力する」ボタンをクリックの場合、CSVファイルを出力します。
      *
@@ -166,13 +167,13 @@ public class GogitaiJohoSakusei {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-            && new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+                && new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             csvOutput(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("CSV出力")).respond();
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 合議体情報Gridの行クリックの場合、合議体情報編集エリアのデータを設定します。
      *
@@ -185,12 +186,12 @@ public class GogitaiJohoSakusei {
         if (!(JYOTAI_CODE_ADD.equals(jyotai) || JYOTAI_CODE_UPD.equals(jyotai))) {
             Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
             GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
-                            Integer.parseInt(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().toString()),
-                            new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
+                    div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
+                    new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
             GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
-            
+
             List<GogitaiWariateIinJoho> shinsainList = gogitaiJoho.getGogitaiWariateIinJohoList();
-            
+
             getHandler(div).合議体詳細情報データ設定(div.getDgGogitaiIchiran().getClickedItem(), shinsainList);
         }
         return ResponseData.of(div).respond();
@@ -206,12 +207,12 @@ public class GogitaiJohoSakusei {
 
         Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
         GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
-                        Integer.parseInt(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().toString()),
-                        new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
+                div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
+                new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
         GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
-            
+
         List<GogitaiWariateIinJoho> shinsainList = gogitaiJoho.getGogitaiWariateIinJohoList();
-            
+
         getHandler(div).合議体詳細情報データ設定(div.getDgGogitaiIchiran().getClickedItem(), shinsainList);
         getHandler(div).合議体詳細情報修正モード設定();
         if (JYOTAI_NAME_ADD.equals(div.getDgGogitaiIchiran().getClickedItem().getJyotai())) {
@@ -238,7 +239,7 @@ public class GogitaiJohoSakusei {
                 div.getDgGogitaiIchiran().getClickedItem().setJyotai(JYOTAI_NAME_DEL);
                 Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
                 GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
-                        Integer.parseInt(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().toString()),
+                        div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
                         new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
                 GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
                 gogitaiJoho = gogitaiJoho.deleted();
@@ -380,7 +381,7 @@ public class GogitaiJohoSakusei {
             ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
             getHandler(div).合議体詳細情報初期状態設定();
         }
-        
+
         return ResponseData.of(div).respond();
     }
 
@@ -396,7 +397,7 @@ public class GogitaiJohoSakusei {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
         if (JYOTAI_CODE_ADD.equals(jyotai)) {
-            validationMessages.add(getValidationHandler(div).gogitaiNoKetaiCheck());
+//            validationMessages.add(getValidationHandler(div).gogitaiNoKetaiCheck());
             validationMessages.add(getValidationHandler(div).gogitaiNoJuuhukuCheck());
         }
         validationMessages.add(getValidationHandler(div).gogitaichoPersonNumCheck());
@@ -410,7 +411,7 @@ public class GogitaiJohoSakusei {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        
+
         Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
 
         if (JYOTAI_CODE_ADD.equals(jyotai)) {
@@ -424,12 +425,12 @@ public class GogitaiJohoSakusei {
             GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
                     Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),
                     new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString()));
-    
+
             GogitaiJoho gogitaiJoho = getHandler(div).合議体情報編集(gogitaiJohoModel.get(identifier).modifiedModel());
             gogitaiJoho = gogitaiJoho.modifiedModel();
             gogitaiJohoModel.add(gogitaiJoho);
             getHandler(div).合議体情報一覧更新(JYOTAI_NAME_UPD);
-        } 
+        }
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJohoModel);
         getHandler(div).合議体詳細情報初期状態設定();
@@ -447,7 +448,7 @@ public class GogitaiJohoSakusei {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        
+
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -455,7 +456,7 @@ public class GogitaiJohoSakusei {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
             Iterator<GogitaiJoho> 合議体情報 = gogitaiJohoModel.iterator();
             while (合議体情報.hasNext()) {
@@ -556,14 +557,14 @@ public class GogitaiJohoSakusei {
 
     private void gogitaiNOExitCheck(int 合議体番号) {
         if (service.getGogitaiWariateIinJohoCount(合議体番号)
-            && service.getShinsakaiKaisaiYoteiJohoCount(合議体番号)) {
+                && service.getShinsakaiKaisaiYoteiJohoCount(合議体番号)) {
             throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
         }
     }
 
     private boolean 合議体詳細情報変更有無判定(GogitaiJohoSakuseiDiv div,
-                                Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel, 
-                                RString jyotai) {
+            Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel,
+            RString jyotai) {
         if (JYOTAI_CODE_ADD.equals(jyotai)) {
             return getHandler(div).新規モード合議体詳細情報変更有無判定();
         }
@@ -589,22 +590,22 @@ public class GogitaiJohoSakusei {
         RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
         RString eucFilePath = Path.combinePath(spoolWorkPath, OUTPUT_CSV_FILE_NAME);
 
-        try(CsvWriter<GogitaiJohoSakuseiCSVEntity> eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+        try (CsvWriter<GogitaiJohoSakuseiCSVEntity> eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 hasHeader(false).
                 canAppend(false).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
-                build()){
+                build()) {
             for (GogitaiJohoSakuseiCSVEntity result : resultList.records()) {
                 eucCsvWriter.writeLine(result);
             }
-         }
+        }
 
         fileSpoolManager.spool(eucFilePath);
     }
-    
+
     private static final class EdittingRow {
 
         private final dgGogitaiIchiran_Row row;
@@ -622,7 +623,7 @@ public class GogitaiJohoSakusei {
         for (int i = 0; i < size; i++) {
             dgGogitaiIchiran_Row row = dataSource.get(i);
             if (Objects.equals(gogitaiNo, row.getGogitaiNumber())
-                && Objects.equals(yukoKaishiDate, row.getYukoKaishiYMD().getValue())) {
+                    && Objects.equals(yukoKaishiDate, row.getYukoKaishiYMD().getValue())) {
                 return new EdittingRow(row, i);
             }
         }

@@ -97,7 +97,7 @@ public class GogitaiJohoSakuseiHandler {
         for (GogitaiJoho result : resultList) {
             dgGogitaiIchiran_Row row = new dgGogitaiIchiran_Row();
             row.setJyotai(RString.EMPTY);
-            row.setGogitaiNumber(new RString(String.valueOf(result.get合議体番号())));
+            row.getGogitaiNumber().setValue(new Decimal(result.get合議体番号()));
             row.setGogitaiName(result.get合議体名称());
             row.getYukoKaishiYMD().setValue(new RDate(result.get合議体有効期間開始年月日().wareki().toDateString().toString()));
             row.getYukoShuryoYMD().setValue(new RDate(result.get合議体有効期間終了年月日().wareki().toDateString().toString()));
@@ -123,7 +123,7 @@ public class GogitaiJohoSakuseiHandler {
      * @param resultList 割当審査員一覧
      */
     public void 合議体詳細情報データ設定(dgGogitaiIchiran_Row row, List<GogitaiWariateIinJoho> resultList) {
-        div.getTxtGogitaiNumber().setValue(row.getGogitaiNumber());
+        div.getTxtGogitaiNumber().setValue(row.getGogitaiNumber().getValue());
         div.getTxtGogitaiMeisho().setValue(row.getGogitaiName());
         div.getDdlkaisaibasho().setSelectedKey(KAISAI_BASHO_CODE_EMPTY);
         for (KeyValueDataSource keyValue : div.getDdlkaisaibasho().getDataSource()) {
@@ -204,11 +204,9 @@ public class GogitaiJohoSakuseiHandler {
     public void 合議体詳細情報新規モード設定() {
         合議体詳細情報項目状態設定(false);
         合議体詳細情報項目初期値設定();
-        div.getBtnTsuika().setDisabled(true);
-        div.getDgGogitaiIchiran().setReadOnly(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+        各ボタン活性設定(Boolean.TRUE);
     }
-    
+
     /**
      *
      * 修正モードの場合、合議体詳細情報の設定します。
@@ -218,10 +216,19 @@ public class GogitaiJohoSakuseiHandler {
         合議体詳細情報項目状態設定(false);
         div.getTxtGogitaiNumber().setDisabled(true);
         div.getTxtYukoKaishiYMD().setDisabled(true);
-        div.getBtnTsuika().setDisabled(true);
-        div.getDgGogitaiIchiran().setReadOnly(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, true);
+        各ボタン活性設定(Boolean.TRUE);
+
     }
+
+    private void 各ボタン活性設定(boolean flag) {
+        div.getBtnTsuika().setDisabled(flag);
+        div.getDgGogitaiIchiran().setReadOnly(flag);
+        div.getBtnCSVShutsuryoku().setDisabled(flag);
+        div.getUploadFileToroku().setDisabled(flag);
+        div.getKensakujyoken().setDisabled(flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, flag);
+    }
+  
     
     /**
      *
@@ -231,9 +238,7 @@ public class GogitaiJohoSakuseiHandler {
     public void 合議体詳細情報初期状態設定() {
         合議体詳細情報項目初期値設定();
         合議体詳細情報項目状態設定(true);
-        div.getBtnTsuika().setDisabled(false);
-        div.getDgGogitaiIchiran().setReadOnly(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, false);
+        各ボタン活性設定(Boolean.FALSE);
     }
    
     /**
@@ -243,7 +248,7 @@ public class GogitaiJohoSakuseiHandler {
      * @return true:変更有り false:変更無し
      */
     public boolean 新規モード合議体詳細情報変更有無判定() {
-        return !(div.getTxtGogitaiNumber().getValue().isEmpty()
+        return !(div.getTxtGogitaiNumber().getValue() == null
                && div.getTxtGogitaiMeisho().getValue().isEmpty()
                && div.getDdlkaisaibasho().getSelectedKey().equals(KAISAI_BASHO_CODE_EMPTY)
                && div.getTxtYukoShuryoYMD().getValue() == null
@@ -393,7 +398,7 @@ public class GogitaiJohoSakuseiHandler {
         if (!JYOTAI_NAME_ADD.equals(jyotai)) {
             row = div.getDgGogitaiIchiran().getActiveRow();
         }
-        row.setGogitaiNumber(div.getTxtGogitaiNumber().getValue());
+        row.getGogitaiNumber().setValue(div.getTxtGogitaiNumber().getValue());
         row.setGogitaiName(div.getTxtGogitaiMeisho().getValue());
         row.getGogitaiKaishiYoteiTime().setValue(div.getTxtKaishiYoteiTime().getValue());
         row.getGogitaiShuryoYoteiTime().setValue(div.getTxtShuryoYoteiTime().getValue());
