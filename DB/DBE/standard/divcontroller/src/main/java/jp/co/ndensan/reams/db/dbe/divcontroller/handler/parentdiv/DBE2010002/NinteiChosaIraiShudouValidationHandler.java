@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class NinteiChosaIraiShudouValidationHandler {
 
     private final NinteiChosaIraiShudouDiv div;
+    private static final RString 発行書類 = new RString("発行書類を");
 
     /**
      * コンストラクタです。
@@ -47,6 +48,29 @@ public class NinteiChosaIraiShudouValidationHandler {
             validPairs.add(new ValidationMessageControlPair(new CheckMessages(UrErrorMessages.必須, "調査員")));
         }
         return validPairs;
+    }
+
+    /**
+     * 印刷帳票が選択することのチェック。
+     *
+     * @return
+     */
+    public ValidationMessageControlPairs 印刷帳票チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getChkIrai().getSelectedKeys().isEmpty()
+                && div.getChkNinteichosaDesign().getSelectedKeys().isEmpty()
+                && div.getChkNinteichosaOcr().getSelectedKeys().isEmpty()
+                && div.getChkSaiCheck().getSelectedKeys().isEmpty()
+                && div.getChkTokkiJko().getSelectedKeys().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(new CheckMessages(
+                    UrErrorMessages.未指定, 発行書類.toString()),
+                    div.getChkIrai(),
+                    div.getChkNinteichosaDesign(),
+                    div.getChkNinteichosaOcr(),
+                    div.getChkSaiCheck(),
+                    div.getChkTokkiJko()));
+        }
+        return validationMessages;
     }
 
     private static class CheckMessages implements IValidationMessage {
