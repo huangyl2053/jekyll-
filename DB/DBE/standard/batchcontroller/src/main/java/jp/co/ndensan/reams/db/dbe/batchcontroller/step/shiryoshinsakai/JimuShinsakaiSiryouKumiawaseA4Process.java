@@ -92,10 +92,17 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private static final boolean あり = true;
     private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private boolean is審査会対象一覧印刷済み;
+    private static final RString 全イメージ = new RString("2");
+    private static final RString イメージ区分_テキスト = new RString("1");
 
     @BatchWriter
     private BatchReportWriter<JimuShinsakaishiryoA4ReportSource> batchReportWriter;
     private ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter;
+
+    static {
+        System.setProperty("java.awt.headless", "true");
+    }
 
     @Override
     protected void beforeExecute() {
@@ -115,6 +122,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         shinsakaiSiryoKyotsuEntityList = mapper.get共通情報(myBatisParameter);
         itiziHanteiEntityList = mapper.get事務局一次判定結果(myBatisParameter);
         get審査対象者一覧表情報();
+        is審査会対象一覧印刷済み = false;
     }
 
     @Override
@@ -165,8 +173,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                     get特記事項情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
                     getその他資料情報(shinseishoKanriNo),
-                    reportId);
+                    reportId, is審査会対象一覧印刷済み);
             report.writeBy(reportSourceWriter);
+            is審査会対象一覧印刷済み = true;
         }
         batchReportWriter.close();
     }
