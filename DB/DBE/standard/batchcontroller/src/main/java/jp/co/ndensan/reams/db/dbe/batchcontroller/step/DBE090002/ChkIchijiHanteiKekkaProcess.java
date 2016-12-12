@@ -471,11 +471,11 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         List<RString> 社会生活への適応4リスト = new ArrayList<>();
         if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番56).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番56));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番56).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番57));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番56).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番58));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番56).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番59));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番56).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番60));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番56).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番61));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番57).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番57));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番58).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番58));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番59).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番59));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番60).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番60));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番61).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番61));
         }
         if (識別コード06A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番34).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番34));
@@ -1568,14 +1568,14 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set合議体番号(entity.get合議体番号());
         ichijiEntity.set審査順(entity.get審査会審査順());
         ichijiEntity.set被保険者区分(RString.isNullOrEmpty(entity.get被保険者区分コード()) ? RString.EMPTY
-                : HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
+                : HihokenshaKubunCode.toValue(remove半角スペース(entity.get被保険者区分コード())).get名称());
         ichijiEntity.set申請区分(RString.isNullOrEmpty(entity.get申請区分_申()) ? RString.EMPTY
-                : NinteiShinseiShinseijiKubunCode.toValue(entity.get申請区分_申()).get名称());
+                : NinteiShinseiShinseijiKubunCode.toValue(remove半角スペース(entity.get申請区分_申())).get名称());
         ichijiEntity.set年齢(entity.get年齢());
         ichijiEntity.set性別(RString.isNullOrEmpty(entity.get性別()) ? RString.EMPTY
-                : Seibetsu.toValue(entity.get性別()).get名称());
+                : Seibetsu.toValue(remove半角スペース(entity.get性別())).get名称());
         ichijiEntity.set現在の状況(RString.isNullOrEmpty(entity.get施設利用()) ? RString.EMPTY
-                : GenzainoJokyoCode.toValue(entity.get施設利用()).get名称());
+                : GenzainoJokyoCode.toValue(remove半角スペース(entity.get施設利用())).get名称());
         ichijiEntity.set前々回認定有効期間(entity.get前々回認定有効期間());
         ichijiEntity.set前々回認定有効期間開始年月日(entity.get前々回認定有効期間_開始());
         ichijiEntity.set前々回認定有効期間終了年月日(entity.get前々回認定有効期間_終了());
@@ -1584,7 +1584,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set前回認定有効期間終了年月日(entity.get前回認定有効期間_終了());
         ichijiEntity.set前回認定日(entity.get前回二次判定年月日());
         ichijiEntity.set前回状態像(RString.isNullOrEmpty(entity.get前回状態像()) ? RString.EMPTY
-                : YokaigoJotaizoReiCode.toValue(entity.get前回状態像()).get名称());
+                : YokaigoJotaizoReiCode.toValue(remove半角スペース(entity.get前回状態像())).get名称());
         ichijiEntity.set管理番号(entity.get申請書管理番号());
         setマスキング情報(ichijiEntity, entity);
         ichijiEntity.set認定有効期間(entity.get認定有効期間());
@@ -1592,9 +1592,9 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 : new RString(entity.get認定有効期間開始年月日().toString()));
         ichijiEntity.set認定有効期間終了年月日(entity.get認定有効期間終了年月日() == null ? RString.EMPTY
                 : new RString(entity.get認定有効期間終了年月日().toString()));
-        ichijiEntity.set特定疾病名(RString.isNullOrEmpty(entity.get特定疾病()) ? RString.EMPTY : TokuteiShippei.toValue(entity.get特定疾病()).get名称());
+        ichijiEntity.set特定疾病名(RString.isNullOrEmpty(entity.get特定疾病()) ? RString.EMPTY : TokuteiShippei.toValue(remove半角スペース(entity.get特定疾病())).get名称());
         ichijiEntity.set状態像名称(RString.isNullOrEmpty(entity.get要介護状態像例コード()) ? RString.EMPTY
-                : YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード()).get名称());
+                : YokaigoJotaizoReiCode.toValue(remove半角スペース(entity.get要介護状態像例コード())).get名称());
         ichijiEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
         RDateTime 日期 = RDate.getNowDateTime();
         RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
@@ -1607,7 +1607,8 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
 //                getNumber(entity.get要介護認定等基準時間_BPSD関連()), getNumber(entity.get要介護認定等基準時間_機能訓練()),
 //                getNumber(entity.get要介護認定等基準時間_医療関連()), getNumber(entity.get要介護認定等基準時間_認知症加算()),
 //                文件名, batchWrite.getImageFolderPath());
-        ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
+//        ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
+        ichijiEntity.set要介護認定等基準時間イメージ(RString.EMPTY);
         ichijiEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
         ichijiEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
         ichijiEntity.set要介護認定等基準時間_移動(entity.get要介護認定等基準時間_移動());
@@ -1624,20 +1625,20 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set中間評価項目得点第4群(entity.get中間評価項目得点第4群());
         ichijiEntity.set中間評価項目得点第5群(entity.get中間評価項目得点第5群());
         ichijiEntity.set認定調査結果認知症高齢者自立度(RString.isNullOrEmpty(entity.get認知症高齢者自立度()) ? RString.EMPTY
-                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症高齢者自立度()).get名称());
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(remove半角スペース(entity.get認知症高齢者自立度())).get名称());
         ichijiEntity.set認知症自立度Ⅱ以上の蓋然性(entity.get蓋然性());
         ichijiEntity.set状態の安定性(RString.isNullOrEmpty(entity.get安定性()) ? RString.EMPTY
-                : JotaiAnteiseiCode.toValue(entity.get安定性()).get名称());
+                : JotaiAnteiseiCode.toValue(remove半角スペース(entity.get安定性())).get名称());
         ichijiEntity.set給付区分(RString.isNullOrEmpty(entity.get給付区分()) ? RString.EMPTY
-                : SuiteiKyufuKubunCode.toValue(entity.get給付区分()).get名称());
+                : SuiteiKyufuKubunCode.toValue(remove半角スペース(entity.get給付区分())).get名称());
         ichijiEntity.set現在のサービス利用状況名(RString.isNullOrEmpty(entity.getサービス区分コード()) ? RString.EMPTY
-                : ServiceKubunCode.toValue(entity.getサービス区分コード()).get名称());
+                : ServiceKubunCode.toValue(remove半角スペース(entity.getサービス区分コード())).get名称());
         ichijiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         List<RString> 高齢者自立度リスト = new ArrayList<>();
         高齢者自立度リスト.add(RString.isNullOrEmpty(entity.get障害高齢者自立度()) ? RString.EMPTY
-                : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get障害高齢者自立度()).get名称());
+                : ShogaiNichijoSeikatsuJiritsudoCode.toValue(remove半角スペース(entity.get障害高齢者自立度())).get名称());
         高齢者自立度リスト.add(RString.isNullOrEmpty(entity.get認知症高齢者自立度()) ? RString.EMPTY
-                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症高齢者自立度()).get名称());
+                : NinchishoNichijoSeikatsuJiritsudoCode.toValue(remove半角スペース(entity.get認知症高齢者自立度())).get名称());
         ichijiEntity.set高齢者自立度リスト(高齢者自立度リスト);
         return ichijiEntity;
     }
@@ -1654,8 +1655,9 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set認定調査員番号(マスキングあり ? RString.EMPTY : entity.get認定調査員コード());
         ichijiEntity.set認定調査員氏名(マスキングあり ? RString.EMPTY : マスキング_調査員名.equals(processPrm.getRadIchijiHanteiMasking())
                 ? RString.EMPTY : entity.get調査員氏名());
-        ichijiEntity.set認定調査員資格(マスキングあり ? RString.EMPTY : RString.isNullOrEmpty(entity.get調査員資格())
-                ? RString.EMPTY : Sikaku.toValue(entity.get調査員資格()).get名称());
+        ichijiEntity.set認定調査員資格(マスキングあり ? RString.EMPTY
+                : RString.isNullOrEmpty(entity.get調査員資格()) ? RString.EMPTY
+                : RString.isNullOrEmpty(remove半角スペース(entity.get調査員資格())) ? RString.EMPTY : Sikaku.toValue(entity.get調査員資格()).get名称());
         ichijiEntity.set医療機関番号(マスキングあり ? RString.EMPTY : entity.get主治医医療機関コード());
         ichijiEntity.set医療機関名称(マスキングあり ? RString.EMPTY : entity.get医療機関名称());
         ichijiEntity.set主治医番号(マスキングあり ? RString.EMPTY : entity.get主治医コード());
@@ -1664,6 +1666,13 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
 
     private RString get文件名(int 日期) {
         return new RString(日期);
+    }
+
+    private RString remove半角スペース(RString 調査員資格コード) {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(調査員資格コード);
+        builder.replace(" ", "");
+        return builder.toRString();
     }
 
     private void setBodyItem03(IchijihanteikekkahyoEntity ichijiEntity, YokaigoninteiEntity entity) {
@@ -1712,178 +1721,178 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private void setBodyItem02(IchijihanteikekkahyoEntity ichijiEntity, YokaigoninteiEntity entity) {
         if (判定結果コード09.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
             ichijiEntity.set前々回要介護度(RString.isNullOrEmpty(entity.get前々回要介護度()) ? RString.EMPTY
-                    : YokaigoJotaiKubun09.toValue(entity.get前々回要介護度()).get名称());
+                    : YokaigoJotaiKubun09.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun09.toValue(entity.get前回認定結果()).get名称());
+                    : YokaigoJotaiKubun09.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
             ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果()).get名称());
+                    : IchijiHanteiKekkaCode09.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun09.toValue(entity.get二次判定結果()).get名称());
+                    : YokaigoJotaiKubun09.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }
         if (判定結果コード06.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
             ichijiEntity.set前々回要介護度(RString.isNullOrEmpty(entity.get前々回要介護度()) ? RString.EMPTY
-                    : YokaigoJotaiKubun06.toValue(entity.get前々回要介護度()).get名称());
+                    : YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun06.toValue(entity.get前回認定結果()).get名称());
+                    : YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
             ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode06.toValue(entity.get一次判定結果()).get名称());
+                    : IchijiHanteiKekkaCode06.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun06.toValue(entity.get二次判定結果()).get名称());
+                    : YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }
     }
 
     private void setBodyItem04(IchijihanteikekkahyoEntity ichijiEntity, YokaigoninteiEntity entity) {
         if (判定結果コード02.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
             ichijiEntity.set前々回要介護度(RString.isNullOrEmpty(entity.get前々回要介護度()) ? RString.EMPTY
-                    : YokaigoJotaiKubun02.toValue(entity.get前々回要介護度()).get名称());
+                    : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun02.toValue(entity.get前回認定結果()).get名称());
+                    : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
             ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun02.toValue(entity.get一次判定結果()).get名称());
+                    : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun02.toValue(entity.get二次判定結果()).get名称());
+                    : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }
         if (判定結果コード99.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
             ichijiEntity.set前々回要介護度(RString.isNullOrEmpty(entity.get前々回要介護度()) ? RString.EMPTY
-                    : YokaigoJotaiKubun99.toValue(entity.get前々回要介護度()).get名称());
+                    : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun99.toValue(entity.get前回認定結果()).get名称());
+                    : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
             ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun99.toValue(entity.get一次判定結果()).get名称());
+                    : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun99.toValue(entity.get二次判定結果()).get名称());
+                    : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }
     }
 
     private RString get名称34(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser34.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser34.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称33(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser33.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser33.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称22(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser22.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser22.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称21(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser21.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser21.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称20(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser20.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser20.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称17(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser17.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser17.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称16(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser16.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser16.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称13(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser13.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser13.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称11(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser11.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser11.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称10(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser10.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser10.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称09(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser09.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser09.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称08(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser08.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser08.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称07(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser07.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser07.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称06(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser06.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser06.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称04(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser04.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser04.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称03(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser03.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser03.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称02(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser02.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser02.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称12(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser12.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser12.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get名称01(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
         if (連番 < dbt5211Entity.size() && !RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
-            return ChosaAnser01.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser01.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }

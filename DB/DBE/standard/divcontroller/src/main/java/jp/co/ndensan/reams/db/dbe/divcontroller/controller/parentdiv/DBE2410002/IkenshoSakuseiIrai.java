@@ -118,10 +118,9 @@ public class IkenshoSakuseiIrai {
             div.getTxtHakobi().setValue(RDate.getNowDate());
             div.getTxtKigenymd().setValue(RDate.getNowDate());
         }
-        
+
         div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
-        div.getCcdShujiiInput().getBtnShujiiGuide().setDisabled(true);
-        
+
         return ResponseData.of(div).respond();
     }
 

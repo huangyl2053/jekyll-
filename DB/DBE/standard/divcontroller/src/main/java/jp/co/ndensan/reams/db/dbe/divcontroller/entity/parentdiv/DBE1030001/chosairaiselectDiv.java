@@ -14,15 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class chosairaiselectDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ButtonDownLoad")
-    private ButtonDownLoad ButtonDownLoad;
+    @JsonProperty("Dataoutput")
+    private ButtonDownLoad Dataoutput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class chosairaiselectDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getButtonDownLoad
-     * @return ButtonDownLoad
+     * getDataoutput
+     * @return Dataoutput
      */
-    @JsonProperty("ButtonDownLoad")
-    public ButtonDownLoad getButtonDownLoad() {
-        return ButtonDownLoad;
+    @JsonProperty("Dataoutput")
+    public ButtonDownLoad getDataoutput() {
+        return Dataoutput;
     }
 
     /*
-     * setButtonDownLoad
-     * @param ButtonDownLoad ButtonDownLoad
+     * setDataoutput
+     * @param Dataoutput Dataoutput
      */
-    @JsonProperty("ButtonDownLoad")
-    public void setButtonDownLoad(ButtonDownLoad ButtonDownLoad) {
-        this.ButtonDownLoad = ButtonDownLoad;
+    @JsonProperty("Dataoutput")
+    public void setDataoutput(ButtonDownLoad Dataoutput) {
+        this.Dataoutput = Dataoutput;
     }
 
     // </editor-fold>

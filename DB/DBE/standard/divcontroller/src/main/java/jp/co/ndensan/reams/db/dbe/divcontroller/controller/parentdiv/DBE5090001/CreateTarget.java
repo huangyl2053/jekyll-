@@ -1124,10 +1124,6 @@ public class CreateTarget {
     private List<RString> get出力条件(CreateTargetDiv div, List<RString> shinsei) {
         RStringBuilder stringBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
-        stringBuilder.append(申請書管理番号);
-        stringBuilder.append(shinsei);
-        出力条件List.add(stringBuilder.toRString());
-        stringBuilder = new RStringBuilder();
         stringBuilder.append(申請日_開始);
         stringBuilder.append(div.getTxtShinseiYMD().getFromValue());
         出力条件List.add(stringBuilder.toRString());
@@ -1143,6 +1139,28 @@ public class CreateTarget {
         stringBuilder.append(認定日_終了);
         stringBuilder.append(div.getNinteiYMD().getToValue());
         出力条件List.add(stringBuilder.toRString());
+        int i = shinsei.size() / 9;
+        if (i == 0) {
+            stringBuilder = new RStringBuilder();
+            stringBuilder.append(申請書管理番号);
+            stringBuilder.append(shinsei);
+            出力条件List.add(stringBuilder.toRString());
+        } else {
+            for (int j = 0; j < i; j++) {
+                stringBuilder = new RStringBuilder();
+                if (j == 0) {
+                    stringBuilder.append(申請書管理番号);
+                }
+                stringBuilder.append(shinsei.subList(j * 9, (j + 1) * 9));
+                stringBuilder.append("\n");
+                出力条件List.add(stringBuilder.toRString());
+            }
+            if (shinsei.size() % 9 != 0) {
+                stringBuilder = new RStringBuilder();
+                stringBuilder.append(shinsei.subList(i * 9, i * 9 + (shinsei.size() % 9)));
+                出力条件List.add(stringBuilder.toRString());
+            }
+        }
         return 出力条件List;
     }
 

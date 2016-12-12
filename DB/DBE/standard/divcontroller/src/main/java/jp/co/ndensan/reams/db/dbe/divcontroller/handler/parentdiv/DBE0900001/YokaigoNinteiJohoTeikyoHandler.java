@@ -98,9 +98,10 @@ public class YokaigoNinteiJohoTeikyoHandler {
             }
             div.getNinteiKekkaShosai().getTxtShinseibi().setValue(getNull(business.get認定申請日()));
             div.getNinteiKekkaShosai().getTxtShinseiKubunShin().setValue(
-                    NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
+                    business.get申請区分_申請時().isEmpty() ? RString.EMPTY
+                    : NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
             div.getNinteiKekkaShosai().getTxtShinseiKubun().setValue(
-                    NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
+                    business.get申請区分_法令().isEmpty() ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
             div.getNinteiKekkaShosai().getTxtNinteiChosaIraibi().setValue(getNull(business.get認定調査依頼年月日()));
             div.getNinteiKekkaShosai().getTxtNinteiChosaJisshibi().setValue(getNull(business.get認定調査実施年月日()));
             div.getNinteiKekkaShosai().getTxtNinteiChosaJuryobi().setValue(getNull(business.get認定調査受領年月日()));

@@ -177,19 +177,7 @@ public class NinteiChosaIraiShudouHandler {
         div.getChkSaiCheck().setSelectedItemsByKey(selectedItemList);
     }
 
-    /**
-     * 印刷書類が選択する判断処理です。
-     *
-     * @return 判断結果(true:選択した、false:選択していない)
-     */
-    public boolean isSelected() {
-        return !(div.getChkIrai().getSelectedKeys().isEmpty()
-                && div.getChkNinteichosaDesign().getSelectedKeys().isEmpty()
-                && div.getChkNinteichosaOcr().getSelectedKeys().isEmpty()
-                && div.getChkSaiCheck().getSelectedKeys().isEmpty()
-                && div.getChkTokkiJko().getSelectedKeys().isEmpty());
-    }
-
+    
     /**
      * 提出期限のonChange処理です。
      */

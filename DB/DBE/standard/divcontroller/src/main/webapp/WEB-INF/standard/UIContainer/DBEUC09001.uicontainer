@@ -71,7 +71,7 @@
      "layoutName": "DBE0900001",
      "layoutTitle": "要介護認定情報提供",
      "eventName": "一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",

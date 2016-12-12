@@ -69,26 +69,26 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
         executeStep(厚労省IF識別コード);
         if (認定調査票_選択された.equals(getParameter().getChkNinteiChosahyo().toString())) {
             List<RString> noList = getResult(List.class, new RString(厚労省IF識別コード), KoroshoShikibetsuCodeProcess.OUT_DATA_LIST);
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(noList.get(0))
+            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(noList.get(0))
                     && 総合事業実施済.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
                 executeStep(認定調査票の作成02);
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(noList.get(0))
+            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(noList.get(0))
                     && 総合事業未実施.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(),
                                     SubGyomuCode.DBE認定支援))) {
                 executeStep(認定調査票の作成12);
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(noList.get(0))) {
+            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(noList.get(0))) {
                 executeStep(認定調査票の作成22);
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(noList.get(0))) {
+            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(noList.get(0))) {
                 executeStep(認定調査票の作成32);
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(noList.get(0))) {
+            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(noList.get(0))) {
                 executeStep(認定調査票の作成42);
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(noList.get(0))) {
+            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(noList.get(0))) {
                 executeStep(認定調査票の作成52);
             }
         }
