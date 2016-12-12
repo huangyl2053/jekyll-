@@ -95,6 +95,15 @@ public class KanryoShoriShinsaUketsuke {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -134,6 +143,11 @@ public class KanryoShoriShinsaUketsuke {
      * @return レスポンスデータ
      */
     public ResponseData<KanryoShoriShinsaUketsukeDiv> onClick_btnShinsakaiComplete(KanryoShoriShinsaUketsukeDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).審査受付を完了するボタンを押下チェック処理(validationMessages);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -141,12 +155,6 @@ public class KanryoShoriShinsaUketsuke {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).審査受付を完了するボタンを押下チェック処理(validationMessages);
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
-
             List<dgNinteiTaskList_Row> rowList = div.getCcdNinteiTaskList().getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
