@@ -60,7 +60,7 @@ public class JisshiJokyoTokeiEditor {
     }
 
     private void set申請受付(JisshiJokyoTokeiEntity entity) {
-        if (parameter.isHorei() && !parameter.isShinseiji()) {
+        if (parameter.isHorei()) {
             int 新規申請受付数法令 = 0;
             int 更新申請受付数法令 = 0;
             int 区分変更申請受付数法令 = 0;
@@ -74,7 +74,8 @@ public class JisshiJokyoTokeiEditor {
             jisshiJokyoTokei.set新規申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get新規申請_申請受付数()) + 新規申請受付数法令));
             jisshiJokyoTokei.set更新申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get更新申請_申請受付数()) + 更新申請受付数法令));
             jisshiJokyoTokei.set区分変更申請_申請受付数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_申請受付数()) + 区分変更申請受付数法令));
-        } else {
+        }
+        if (parameter.isShinseiji()) {
             int 新規申請受付数申請時 = 0;
             int 更新申請受付数申請時 = 0;
             int 区分変更申請受付数申請時 = 0;
@@ -92,7 +93,7 @@ public class JisshiJokyoTokeiEditor {
     }
 
     private void set調査実施(JisshiJokyoTokeiEntity entity) {
-        if (parameter.isHorei() && !parameter.isShinseiji()) {
+        if (parameter.isHorei()) {
             int 新規調査実施数法令 = 0;
             int 更新調査実施数法令 = 0;
             int 区分変更調査実施数法令 = 0;
@@ -106,7 +107,8 @@ public class JisshiJokyoTokeiEditor {
             jisshiJokyoTokei.set新規申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_調査実施数()) + 新規調査実施数法令));
             jisshiJokyoTokei.set更新申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_調査実施数()) + 更新調査実施数法令));
             jisshiJokyoTokei.set区分変更申請_調査実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_調査実施数()) + 区分変更調査実施数法令));
-        } else {
+        }
+        if (parameter.isShinseiji()) {
             int 新規調査実施数申請時 = 0;
             int 更新調査実施数申請時 = 0;
             int 区分変更調査実施数申請時 = 0;
@@ -124,7 +126,7 @@ public class JisshiJokyoTokeiEditor {
     }
 
     private void set審査会実施(JisshiJokyoTokeiEntity entity) {
-        if (parameter.isHorei() && !parameter.isShinseiji()) {
+        if (parameter.isHorei()) {
             int 新規審査会実施数法令 = 0;
             int 更新審査会実施数法令 = 0;
             int 区分変更審査会実施数法令 = 0;
@@ -138,7 +140,8 @@ public class JisshiJokyoTokeiEditor {
             jisshiJokyoTokei.set新規申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get新規申請_審査会実施数()) + 新規審査会実施数法令));
             jisshiJokyoTokei.set更新申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get更新申請_審査会実施数()) + 更新審査会実施数法令));
             jisshiJokyoTokei.set区分変更申請_審査会実施数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_審査会実施数()) + 区分変更審査会実施数法令));
-        } else {
+        }
+        if (parameter.isShinseiji()) {
             int 新規審査会実施数申請時 = 0;
             int 更新審査会実施数申請時 = 0;
             int 区分変更審査会実施数申請時 = 0;
@@ -156,7 +159,7 @@ public class JisshiJokyoTokeiEditor {
     }
 
     private void set認定結果(JisshiJokyoTokeiEntity entity) {
-        if (parameter.isHorei() && !parameter.isShinseiji()) {
+        if (parameter.isHorei()) {
             int 新規認定結果数法令 = 0;
             int 更新認定結果数法令 = 0;
             int 区分変更認定結果数法令 = 0;
@@ -172,7 +175,8 @@ public class JisshiJokyoTokeiEditor {
             jisshiJokyoTokei.set新規申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get新規申請_認定結果数()) + 新規認定結果数法令));
             jisshiJokyoTokei.set更新申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get更新申請_認定結果数()) + 更新認定結果数法令));
             jisshiJokyoTokei.set区分変更申請_認定結果数(toRString(toInt(jisshiJokyoTokei.get区分変更申請_認定結果数()) + 区分変更認定結果数法令));
-        } else {
+        }
+        if (parameter.isShinseiji()) {
             int 新規認定結果数申請時 = 0;
             int 更新認定結果数申請時 = 0;
             int 区分変更認定結果数申請時 = 0;
