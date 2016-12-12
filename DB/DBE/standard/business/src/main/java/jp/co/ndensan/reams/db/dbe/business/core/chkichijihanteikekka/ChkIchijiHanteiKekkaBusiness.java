@@ -1261,7 +1261,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5304Entity.get(連番).getIkenItem())) {
                 return RString.EMPTY;
             }
-            return IkenKomoku03.toValue(dbt5304Entity.get(連番).getIkenItem()).get名称();
+            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).getIkenItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1278,7 +1278,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5304Entity.get(連番).getIkenItem())) {
                 return RString.EMPTY;
             }
-            return IkenKomoku14.toValue(dbt5304Entity.get(連番).getIkenItem()).get名称();
+            return IkenKomoku14.toValue(remove半角スペース(dbt5304Entity.get(連番).getIkenItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1288,7 +1288,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5304Entity.get(連番).getIkenItem())) {
                 return RString.EMPTY;
             }
-            return IkenKomoku06.toValue(dbt5304Entity.get(連番).getIkenItem()).get名称();
+            return IkenKomoku06.toValue(remove半角スペース(dbt5304Entity.get(連番).getIkenItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1298,7 +1298,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5304Entity.get(連番).getIkenItem())) {
                 return RString.EMPTY;
             }
-            return IkenKomoku05.toValue(dbt5304Entity.get(連番).getIkenItem()).get名称();
+            return IkenKomoku05.toValue(remove半角スペース(dbt5304Entity.get(連番).getIkenItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1308,7 +1308,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5304Entity.get(連番).getIkenItem())) {
                 return RString.EMPTY;
             }
-            return IkenKomoku04.toValue(dbt5304Entity.get(連番).getIkenItem()).get名称();
+            return IkenKomoku04.toValue(remove半角スペース(dbt5304Entity.get(連番).getIkenItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1397,7 +1397,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser16.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser16.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1407,7 +1407,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser15.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser15.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1417,9 +1417,16 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser14.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser14.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
+    }
+
+    private static RString remove半角スペース(RString 編集前コード) {
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(編集前コード);
+        builder.replace(" ", "");
+        return builder.toRString();
     }
 
     private static RString get調査連番(List<DbT5211NinteichosahyoChosaItemEntity> 調査項目,
@@ -1538,7 +1545,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser04.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser04.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1548,7 +1555,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser03.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser03.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1558,7 +1565,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser02.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser02.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1568,7 +1575,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser01.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser01.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1578,7 +1585,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser22.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser22.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1588,7 +1595,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser21.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser21.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1598,7 +1605,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser09.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser09.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1608,7 +1615,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser08.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser08.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1618,7 +1625,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser07.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser07.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
@@ -1628,7 +1635,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             if (RString.isNullOrEmpty(dbt5211Entity.get(連番).getResearchItem())) {
                 return RString.EMPTY;
             }
-            return ChosaAnser06.toValue(dbt5211Entity.get(連番).getResearchItem()).get名称();
+            return ChosaAnser06.toValue(remove半角スペース(dbt5211Entity.get(連番).getResearchItem())).get名称();
         }
         return RString.EMPTY;
     }
