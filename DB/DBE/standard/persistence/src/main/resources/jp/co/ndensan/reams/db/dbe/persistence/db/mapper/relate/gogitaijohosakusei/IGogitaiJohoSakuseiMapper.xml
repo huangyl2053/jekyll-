@@ -168,7 +168,11 @@
         DbT5593GogitaiWariateIinJoho.*,
         DbT5594ShinsakaiIinJoho.*
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.noDeleted_DbT5591GogitaiJoho" />) AS DbT5591GogitaiJoho
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.noDeleted_DbT5591GogitaiJoho" /> 
+        ORDER BY
+        "dbT5591GogitaiJoho_gogitaiNo"
+         LIMIT 
+            #{最大表示件数}) AS DbT5591GogitaiJoho
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.noDeleted_DbT5592ShinsakaiKaisaiBashoJoho" />) AS DbT5592ShinsakaiKaisaiBashoJoho
         ON
@@ -193,8 +197,6 @@
             DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo",
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" DESC, 
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" ASC
-        LIMIT 
-            #{最大表示件数}
     </sql>
 
     <resultMap id="resultMap_GogitaiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity" autoMapping="true">

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GogitaiShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,7 +23,7 @@ public class GogitaiShosaiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtGogitaiNumber")
-    private TextBox txtGogitaiNumber;
+    private TextBoxNum txtGogitaiNumber;
     @JsonProperty("txtGogitaiMeisho")
     private TextBox txtGogitaiMeisho;
     @JsonProperty("txtYukoKaishiYMD")
@@ -76,7 +76,7 @@ public class GogitaiShosaiDiv extends Panel {
      * @return txtGogitaiNumber
      */
     @JsonProperty("txtGogitaiNumber")
-    public TextBox getTxtGogitaiNumber() {
+    public TextBoxNum getTxtGogitaiNumber() {
         return txtGogitaiNumber;
     }
 
@@ -85,7 +85,7 @@ public class GogitaiShosaiDiv extends Panel {
      * @param txtGogitaiNumber txtGogitaiNumber
      */
     @JsonProperty("txtGogitaiNumber")
-    public void setTxtGogitaiNumber(TextBox txtGogitaiNumber) {
+    public void setTxtGogitaiNumber(TextBoxNum txtGogitaiNumber) {
         this.txtGogitaiNumber = txtGogitaiNumber;
     }
 
