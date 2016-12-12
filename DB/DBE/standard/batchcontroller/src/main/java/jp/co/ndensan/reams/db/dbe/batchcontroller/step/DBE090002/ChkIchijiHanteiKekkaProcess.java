@@ -1607,7 +1607,8 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
 //                getNumber(entity.get要介護認定等基準時間_BPSD関連()), getNumber(entity.get要介護認定等基準時間_機能訓練()),
 //                getNumber(entity.get要介護認定等基準時間_医療関連()), getNumber(entity.get要介護認定等基準時間_認知症加算()),
 //                文件名, batchWrite.getImageFolderPath());
-        ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
+//        ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
+        ichijiEntity.set要介護認定等基準時間イメージ(RString.EMPTY);
         ichijiEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
         ichijiEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
         ichijiEntity.set要介護認定等基準時間_移動(entity.get要介護認定等基準時間_移動());
