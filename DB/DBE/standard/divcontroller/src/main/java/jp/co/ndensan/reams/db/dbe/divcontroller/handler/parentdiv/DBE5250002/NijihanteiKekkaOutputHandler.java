@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -85,8 +84,10 @@ public class NijihanteiKekkaOutputHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン２, true);
         nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
         nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
-        nijidiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(DbBusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        nijidiv.getKensakuJoken().getTxtHyojiDataLimit().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+        nijidiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(new Decimal(検索制御_最大取得件数.toString()));
         List<dgTaishoshaIchiran_Row> dgKoufuKaishuList = new ArrayList<>();
         nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgKoufuKaishuList);
         hokenjouhou();
@@ -155,8 +156,7 @@ public class NijihanteiKekkaOutputHandler {
      */
     private HanteiKekkaJouhouShuturyokuParameter createParameter() {
         HanteiKekkaJouhouShuturyokuParameter parameter = new HanteiKekkaJouhouShuturyokuParameter();
-        int 最大表示件数 = nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().isEmpty() ? 0
-                : new Decimal(nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().toString()).intValue();
+        int 最大表示件数 = Integer.parseInt(nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().toString());
         if (最大表示件数 != 0) {
             parameter.setUseLimitCount(true);
             parameter.setLimitCount(最大表示件数);
