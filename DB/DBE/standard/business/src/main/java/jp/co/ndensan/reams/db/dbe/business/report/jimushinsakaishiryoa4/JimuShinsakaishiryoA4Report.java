@@ -30,6 +30,7 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
     private static final int LENGTH_20 = 20;
     private static final int MAXCOUNT = 30;
     private static final RString テキスト全面イメージ = new RString("1");
+    private final boolean is審査会対象一覧印刷済み;
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
     private final IchijihanteikekkahyoA4Entity ichijihanteiEntity;
     private final TokkiText1A4Business tokkiTextBusiness;
@@ -46,25 +47,29 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
      * @param reportId 帳票ＩＤ
+     * @param is審査会対象一覧印刷済み is審査会対象一覧印刷済み
      */
     public JimuShinsakaishiryoA4Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA4Entity ichijihanteiEntity, TokkiText1A4Business tokkiTextBusiness,
             JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness,
-            RString reportId) {
+            RString reportId, boolean is審査会対象一覧印刷済み) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteiEntity = ichijihanteiEntity;
         this.tokkiTextBusiness = tokkiTextBusiness;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
         this.reportId = reportId;
+        this.is審査会対象一覧印刷済み = is審査会対象一覧印刷済み;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter) {
-        for (JimuShinsakaishiryoBusiness business : shinsakaishiryoList) {
-            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group1Editor(business);
-            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
-            reportSourceWriter.writeLine(builder);
+        if (!is審査会対象一覧印刷済み) {
+            for (JimuShinsakaishiryoBusiness business : shinsakaishiryoList) {
+                IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group1Editor(business);
+                IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
+                reportSourceWriter.writeLine(builder);
+            }
         }
         if (ichijihanteiEntity != null) {
             for (int i = 0; i < LENGTH_20; i++) {

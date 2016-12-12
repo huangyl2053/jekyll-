@@ -113,7 +113,7 @@ public class JimuShinsakaishiryoA4Group3Editor implements IJimuShinsakaishiryoA4
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
-            source.tokkiText = テキスト全面List.get(index);
+            source.tokkiText = テキスト全面List.isEmpty() ? RString.EMPTY : テキスト全面List.get(index);
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {
@@ -122,7 +122,7 @@ public class JimuShinsakaishiryoA4Group3Editor implements IJimuShinsakaishiryoA4
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
-            source.tokkiImg = イメージ全面List.get(index);
+            source.tokkiImg = イメージ全面List.isEmpty() ? RString.EMPTY : イメージ全面List.get(index);
         }
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 短冊.equals(item.get特記パターン())) {

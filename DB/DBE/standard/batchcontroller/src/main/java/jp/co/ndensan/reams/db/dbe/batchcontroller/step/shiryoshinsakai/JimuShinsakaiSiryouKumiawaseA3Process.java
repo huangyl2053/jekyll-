@@ -91,10 +91,15 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     private static final boolean あり = true;
     private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private boolean is審査会対象一覧印刷済み;
 
     @BatchWriter
     private BatchReportWriter<JimuShinsakaishiryoA3ReportSource> batchReportWriter;
     private ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter;
+
+    static {
+        System.setProperty("java.awt.headless", "true");
+    }
 
     @Override
     protected void beforeExecute() {
@@ -112,6 +117,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         データ件数 = mapper.get事務局一次判定件数(myBatisParameter);
         itiziHanteiEntityList = mapper.get事務局一次判定(myBatisParameter);
         get審査対象者一覧表情報();
+        is審査会対象一覧印刷済み = false;
     }
 
     @Override
@@ -159,8 +165,9 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
             JimuShinsakaishiryoA3Report report = new JimuShinsakaishiryoA3Report(businessList,
                     get一次判定結果票(shinseishoKanriNo), get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo), reportId);
+                    getその他資料情報(shinseishoKanriNo), reportId, is審査会対象一覧印刷済み);
             report.writeBy(reportSourceWriter);
+            is審査会対象一覧印刷済み = true;
         }
         batchReportWriter.close();
     }
