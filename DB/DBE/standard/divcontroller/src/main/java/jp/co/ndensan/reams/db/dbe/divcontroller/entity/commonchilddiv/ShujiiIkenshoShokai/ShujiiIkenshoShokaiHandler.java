@@ -5,7 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -32,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileGetterKey;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
@@ -105,11 +110,23 @@ public class ShujiiIkenshoShokaiHandler {
 
             イメージ元本パスリスト = get原本FilePathList(出力イメージフォルダパス, ローカルファイル名);
             イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス, ローカルファイル名);
+            List<RString> fileList = Arrays.asList(Directory.getFiles(イメージ元本パスリスト.get(0), new RString("*.png"), true));
+            RString imgBase64 = RString.EMPTY;
+            try {
+                imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージ元本パスリスト.get(0).toString(), fileList.get(0).toString())));
+            } catch (IOException ex) {
+            }
+            RString DATAURI_BMP = new RString("data:image/png;base64,");
+            div.getTxtTest3().setValue(DATAURI_BMP.concat(imgBase64));
+            イメージ元本パスリスト.add(DATAURI_BMP.concat(imgBase64));
+            イメージマスクパスリスト.add(RString.EMPTY);
             原本タイトルリスト = getTitleList(イメージ元本パスリスト);
             マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
         } else {
             div.getCcdChosaTokkiShiryoShokai().setDisplayNone(true);
         }
+        div.getTxtTest().setValue(イメージ元本パスリスト.get(0));
+        div.getTxtTest2().setValue(イメージ元本パスリスト.get(1));
         div.getCcdChosaTokkiShiryoShokai().initialize(イメージ元本パスリスト, イメージマスクパスリスト, 原本タイトルリスト, マスクタイトルリスト);
     }
 
