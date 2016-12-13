@@ -118,7 +118,7 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set一次判定非該当_軽度変更者数(なし);
         jotaikubumbetsuhantei.set一次判定非該当_重度変更者数(new RString(非該当計 - 非該当非該当被保険者数));
         jotaikubumbetsuhantei.set一次判定非該当_判定変更割合(非該当計 == 非該当非該当被保険者数
-                ? なし : new RString(String.valueOf((非該当計 - 非該当非該当被保険者数) / 非該当計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合2(非該当計, 非該当非該当被保険者数))));
     }
 
     private void set一次判定要支援1(List<SinsakaiHanteiJyokyoEntity> 審査判定状況) {
@@ -148,7 +148,7 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set一次判定要支援1_軽度変更者数(new RString(要支援1非該当被保険者数));
         jotaikubumbetsuhantei.set一次判定要支援1_重度変更者数(new RString(要支援1計 - 要支援1非該当被保険者数 - 要支援1要支援1被保険者数));
         jotaikubumbetsuhantei.set一次判定要支援1_判定変更割合(要支援1計 == 要支援1要支援1被保険者数
-                ? なし : new RString(String.valueOf((要支援1計 - 要支援1要支援1被保険者数) / 要支援1計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合2(要支援1計, 要支援1要支援1被保険者数))));
     }
 
     private void set一次判定要支援2(List<SinsakaiHanteiJyokyoEntity> 審査判定状況) {
@@ -179,7 +179,14 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set一次判定要支援2_重度変更者数(new RString(要支援2要介護2被保険者数
                 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数));
         jotaikubumbetsuhantei.set一次判定要支援2_判定変更割合(要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数 == 0
-                ? なし : new RString(String.valueOf((要支援2計 - 要支援2要支援2被保険者数 - 要支援2要介護1被保険者数) / 要支援2計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合1(要支援2計, 要支援2要支援2被保険者数, 要支援2要介護1被保険者数))));
+    }
+    
+    private double get割合1(int 合計, int 被保険者数1, int 被保険者数2) {
+        double d合計 = 合計;
+        double d被保険者数1 = 被保険者数1;
+        double d被保険者数2 = 被保険者数2;
+        return (d合計 - d被保険者数1 - d被保険者数2) / d合計 * 割合;
     }
 
     private void set一次判定要介護1(List<SinsakaiHanteiJyokyoEntity> 審査判定状況) {
@@ -210,7 +217,7 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set一次判定要介護1_重度変更者数(new RString(要介護1要介護2被保険者数
                 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数));
         jotaikubumbetsuhantei.set一次判定要介護1_判定変更割合(要介護1計 - 要介護1要支援2被保険者数 - 要介護1要介護1被保険者数 == 0
-                ? なし : new RString(String.valueOf((要介護1計 - 要介護1要支援2被保険者数 - 要介護1要介護1被保険者数) / 要介護1計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合1(要介護1計, 要介護1要介護1被保険者数, 要介護1要支援2被保険者数))));
     }
 
     private void set一次判定要介護2(List<SinsakaiHanteiJyokyoEntity> 審査判定状況) {
@@ -242,7 +249,7 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set一次判定要介護2_重度変更者数(new RString(要介護2要介護3被保険者数
                 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数));
         jotaikubumbetsuhantei.set一次判定要介護2_判定変更割合(要介護2計 == 要介護2要介護2被保険者数
-                ? なし : new RString(String.valueOf((要介護2計 - 要介護2要介護2被保険者数) / 要介護2計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合2(要介護2計, 要介護2要介護2被保険者数))));
     }
 
     private void set一次判定要介護3(List<SinsakaiHanteiJyokyoEntity> 審査判定状況) {
@@ -273,7 +280,7 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
                 + 要介護3要支援1被保険者数 + 要介護3要支援2被保険者数 + 要介護3要介護1被保険者数 + 要介護3要介護2被保険者数));
         jotaikubumbetsuhantei.set一次判定要介護3_重度変更者数(new RString(要介護3要介護4被保険者数 + 要介護3要介護5被保険者数));
         jotaikubumbetsuhantei.set一次判定要介護3_判定変更割合(要介護3計 == 要介護3要介護3被保険者数
-                ? なし : new RString(String.valueOf((要介護3計 - 要介護3要介護3被保険者数) / 要介護3計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合2(要介護3計, 要介護3要介護3被保険者数))));
     }
 
     private void set一次判定要介護4(List<SinsakaiHanteiJyokyoEntity> 審査判定状況) {
@@ -303,7 +310,7 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set一次判定要介護4_軽度変更者数(new RString(要介護4計 - 要介護4要介護4被保険者数 - 要介護4要介護5被保険者数));
         jotaikubumbetsuhantei.set一次判定要介護4_重度変更者数(new RString(要介護4要介護5被保険者数));
         jotaikubumbetsuhantei.set一次判定要介護4_判定変更割合(要介護4計 == 要介護4要介護4被保険者数
-                ? なし : new RString(String.valueOf((要介護4計 - 要介護4要介護4被保険者数) / 要介護4計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合2(要介護4計, 要介護4要介護4被保険者数))));
     }
 
     private void set一次判定要介護5(List<SinsakaiHanteiJyokyoEntity> 審査判定状況) {
@@ -333,7 +340,13 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set一次判定要介護5_軽度変更者数(new RString(要介護5計 - 要介護5要介護5被保険者数));
         jotaikubumbetsuhantei.set一次判定要介護5_重度変更者数(なし);
         jotaikubumbetsuhantei.set一次判定要介護5_判定変更割合(要介護5計 == 要介護5要介護5被保険者数
-                ? なし : new RString(String.valueOf((要介護5計 - 要介護5要介護5被保険者数) / 要介護5計 * 割合)));
+                ? なし : new RString(String.valueOf(get割合2(要介護5計, 要介護5要介護5被保険者数))));
+    }
+    
+    private double get割合2(int 合計, int 被保険者数) {
+        double d合計 = 合計;
+        double d被保険者数 = 被保険者数;
+        return (d合計 - d被保険者数) / d合計 * 割合;
     }
 
     private void set計() {
@@ -524,22 +537,14 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set割合タイトル(割合タイトル);
         int 計_計 = getIntValue(jotaikubumbetsuhantei.get計_計());
         if (0 != 計_計) {
-            jotaikubumbetsuhantei.set割合_二次判定非該当(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定非該当()) / 計_計 * 割合) + パーセント));
-            jotaikubumbetsuhantei.set割合_二次判定要支援1(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定要支援1()) / 計_計 * 割合) + パーセント));
-            jotaikubumbetsuhantei.set割合_二次判定要支援2(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定要支援2()) / 計_計 * 割合) + パーセント));
-            jotaikubumbetsuhantei.set割合_二次判定要介護1(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定要介護1()) / 計_計 * 割合) + パーセント));
-            jotaikubumbetsuhantei.set割合_二次判定要介護2(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定要介護2()) / 計_計 * 割合) + パーセント));
-            jotaikubumbetsuhantei.set割合_二次判定要介護3(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定要介護3()) / 計_計 * 割合) + パーセント));
-            jotaikubumbetsuhantei.set割合_二次判定要介護4(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定要介護4()) / 計_計 * 割合) + パーセント));
-            jotaikubumbetsuhantei.set割合_二次判定要介護5(new RString(String.valueOf(
-                    getIntValue(jotaikubumbetsuhantei.get計_二次判定要介護5()) / 計_計 * 割合) + パーセント));
+            jotaikubumbetsuhantei.set割合_二次判定非該当(get割合3(jotaikubumbetsuhantei.get計_二次判定非該当(), 計_計));
+            jotaikubumbetsuhantei.set割合_二次判定要支援1(get割合3(jotaikubumbetsuhantei.get計_二次判定要支援1(), 計_計));
+            jotaikubumbetsuhantei.set割合_二次判定要支援2(get割合3(jotaikubumbetsuhantei.get計_二次判定要支援2(), 計_計));
+            jotaikubumbetsuhantei.set割合_二次判定要介護1(get割合3(jotaikubumbetsuhantei.get計_二次判定要介護1(), 計_計));
+            jotaikubumbetsuhantei.set割合_二次判定要介護2(get割合3(jotaikubumbetsuhantei.get計_二次判定要介護2(), 計_計));
+            jotaikubumbetsuhantei.set割合_二次判定要介護3(get割合3(jotaikubumbetsuhantei.get計_二次判定要介護3(), 計_計));
+            jotaikubumbetsuhantei.set割合_二次判定要介護4(get割合3(jotaikubumbetsuhantei.get計_二次判定要介護4(), 計_計));
+            jotaikubumbetsuhantei.set割合_二次判定要介護5(get割合3(jotaikubumbetsuhantei.get計_二次判定要介護5(), 計_計));
         } else {
             jotaikubumbetsuhantei.set割合_二次判定非該当(なし);
             jotaikubumbetsuhantei.set割合_二次判定要支援1(なし);
@@ -556,6 +561,12 @@ public class SinsakaiHanteiJyokyoHeaderJotaikubunbetsuEditor {
         jotaikubumbetsuhantei.set割合_軽度変更者数(RString.EMPTY);
         jotaikubumbetsuhantei.set割合_重度変更者数(RString.EMPTY);
         jotaikubumbetsuhantei.set割合_判定変更割合(RString.EMPTY);
+    }
+    
+    private RString get割合3(RString 合計, int 合計合計) {
+        double d合計 = Integer.parseInt(合計.toString());
+        double d合計合計 = 合計合計;
+        return new RString(String.valueOf(d合計 / d合計合計 * 割合)).concat(パーセント); 
     }
 
     private void setHeader(SinsakaiHanteiJyokyoHeaderEntity current) {

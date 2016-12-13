@@ -142,7 +142,7 @@ public class JotaikubumbetsuhanteiReport extends Report<JotaikubumbetsuhanteiRep
                 data.get一次判定要介護3_二次判定要介護2(),
                 data.get一次判定要介護3_二次判定要介護3(),
                 data.get一次判定要介護3_二次判定要介護4(),
-                data.get一次判定要介護3_二次判定要介護4(),
+                data.get一次判定要介護3_二次判定要介護5(),
                 data.get一次判定要介護3_計(),
                 data.get一次判定要介護4_再調査二次保留分(),
                 data.get一次判定要介護4_判定変更者数(),
