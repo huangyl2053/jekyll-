@@ -884,7 +884,10 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         if (イメージID != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名), イメージID);
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+            try {
+                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+            } catch (Exception e) {
+            }
         }
     }
 

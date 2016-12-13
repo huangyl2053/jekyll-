@@ -1067,7 +1067,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             bodyItem.setサービス名称11(介護予防福祉用具貸与);
             bodyItem.setサービス名称12(特定介護予防福祉用具販売);
             bodyItem.setサービス名称13(住宅改修);
-            bodyItem.setサービス名称14(特定介護予防福祉用具販売);
+            bodyItem.setサービス名称14(認知症対応型通所介護);
             bodyItem.setサービス名称15(介護予防小規模多機能型居宅介護);
             bodyItem.setサービス名称16(介護予防認知症対応型共同生活介護);
             bodyItem.setサービス回数1(getサービス連番の状況(dbt5207Entity, 0).concat(回月));
@@ -1119,7 +1119,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             bodyItem.setサービス回数11(getサービス連番の状況(dbt5207Entity, 連番7).concat(品目));
             bodyItem.setサービス回数12(getサービス連番の状況(dbt5207Entity, 連番11).concat(品目_6月間));
             bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? new RString("1") : new RString("0"));
+                    ? IsJutakuKaishu.あり.get名称() : IsJutakuKaishu.なし.get名称());
             bodyItem.setサービス回数14(getサービス連番の状況(dbt5207Entity, 連番13).concat(日月));
             bodyItem.setサービス回数15(getサービス連番の状況(dbt5207Entity, 連番14).concat(日月));
             bodyItem.setサービス回数16(getサービス連番の状況(dbt5207Entity, 連番15).concat(日月));
@@ -1170,7 +1170,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             bodyItem.setサービス回数11(getサービス連番の状況(dbt5207Entity, 連番10).concat(品目));
             bodyItem.setサービス回数12(getサービス連番の状況(dbt5207Entity, 連番11).concat(品目_6月間));
             bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? new RString("1") : new RString("0"));
+                    ? IsJutakuKaishu.あり.get名称() : IsJutakuKaishu.なし.get名称());
             bodyItem.setサービス回数14(getサービス連番の状況(dbt5207Entity, 連番12).concat(日月));
             bodyItem.setサービス回数15(getサービス連番の状況(dbt5207Entity, 連番13).concat(日月));
             bodyItem.setサービス回数16(getサービス連番の状況(dbt5207Entity, 連番14).concat(日月));
@@ -1238,7 +1238,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             bodyItem.setサービス回数11(getサービス連番の状況(dbt5207Entity, 連番7).concat(品目));
             bodyItem.setサービス回数12(getサービス連番の状況(dbt5207Entity, 連番12).concat(品目_6月間));
             bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? new RString("1") : new RString("0"));
+                    ? IsJutakuKaishu.あり.get名称() : IsJutakuKaishu.なし.get名称());
             bodyItem.setサービス回数14(日月);
             bodyItem.setサービス回数15(日月);
             bodyItem.setサービス回数16(日月);
@@ -1252,10 +1252,14 @@ public final class ChkIchijiHanteiKekkaBusiness {
 
     private static RString getサービス連番の状況(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity, int 連番) {
         if (連番 < dbt5207Entity.size()) {
-            return new RString(dbt5207Entity.get(連番).getServiceJokyo());
+            RStringBuilder rsb = new RStringBuilder(dbt5207Entity.get(連番).getServiceJokyo());
+            rsb.insert(0, 現在のサービス利用状況_ブランク);
+            return rsb.substringEmptyOnError(rsb.length() - 現在のサービス利用状況_最大文字数);
         }
         return RString.EMPTY;
     }
+    private static final RString 現在のサービス利用状況_ブランク = new RString("          ");
+    private static final int 現在のサービス利用状況_最大文字数 = 11;
 
     private static RString get意見書名称03(List<DbT5304ShujiiIkenshoIkenItemEntity> dbt5304Entity, int 連番) {
         if (連番 < dbt5304Entity.size()) {

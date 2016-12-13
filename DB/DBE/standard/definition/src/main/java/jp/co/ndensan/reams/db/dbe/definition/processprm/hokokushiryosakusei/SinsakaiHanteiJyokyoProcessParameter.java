@@ -152,7 +152,8 @@ public class SinsakaiHanteiJyokyoProcessParameter implements IBatchProcessParame
                 taishoGeppiFrom,
                 taishoGeppiTo,
                 isShinseiji,
-                isHorei);
+                isHorei,
+                shichosonName);
     }
 
 }
