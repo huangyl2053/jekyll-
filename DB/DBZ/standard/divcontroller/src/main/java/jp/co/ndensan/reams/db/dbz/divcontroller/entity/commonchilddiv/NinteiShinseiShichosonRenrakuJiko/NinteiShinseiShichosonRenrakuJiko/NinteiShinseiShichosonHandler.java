@@ -52,6 +52,7 @@ public class NinteiShinseiShichosonHandler {
             div.getBtnModoru().setDisabled(false);
             div.getBtnToroku().setDisabled(true);
             div.getTxtRenrakujiko().setDisabled(true);
+            div.getBtnToroku().setDisplayNone(true);
         }
     }
 
