@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosairaishokai.NinteiChosaIraiShokaiMaster;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -55,11 +59,13 @@ public class NinteiChosaIraiShokaiHandler {
             row.setShinseiKubun(get申請区分(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue()));
             row.setShinseiTorikeshiDate(日期フォマト(entity.getTorisageYMD()));
             row.setNinteiDate(日期フォマト(entity.getNijiHanteiYMD()));
-            RString 要介護度 = get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue());
+            RString 要介護度 = get要介護度(entity.getKoroshoIfShikibetsuCode().value(),
+                    entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue());
             if (new RString("なし").equals(要介護度)) {
                 row.setYokaigodo(RString.EMPTY);
             } else {
-                row.setYokaigodo(get要介護度(entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
+                row.setYokaigodo(get要介護度(entity.getKoroshoIfShikibetsuCode().value(),
+                        entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
             }
             row.setYukoKikan(new RString(Integer.toString(entity.getNijiHanteiNinteiYukoKikan()) + "ヶ月"));
             row.setNinteichosaItakusakiCode(entity.getNinteiChosaItakusakiCode().getColumnValue());
@@ -99,22 +105,16 @@ public class NinteiChosaIraiShokaiHandler {
         return 申請区分;
     }
 
-    private RString get要介護度(RString 要介護度コード) {
-        RString 要介護度 = RString.EMPTY;
-        List<KeyValueDataSource> dataSource = new ArrayList();
-        for (YokaigoJotaiKubun09 seibetsu : YokaigoJotaiKubun09.values()) {
-            KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(seibetsu.getコード());
-            keyValue.setValue(seibetsu.get名称());
-            dataSource.add(keyValue);
+    private RString get要介護度(RString 厚労省IF識別コード, RString 要介護度コード) {
+        if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
+            return YokaigoJotaiKubun99.toValue(要介護度コード).get名称();
+        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
+            return YokaigoJotaiKubun02.toValue(要介護度コード).get名称();
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
+            return YokaigoJotaiKubun06.toValue(要介護度コード).get名称();
+        } else {
+            return YokaigoJotaiKubun09.toValue(要介護度コード).get名称();
         }
-
-        for (KeyValueDataSource 要介護度Enum : dataSource) {
-            if (要介護度コード.equals(要介護度Enum.getKey())) {
-                要介護度 = 要介護度Enum.getValue();
-            }
-        }
-        return 要介護度;
     }
 
     private RString get履歴区分(RString 履歴区分コード) {

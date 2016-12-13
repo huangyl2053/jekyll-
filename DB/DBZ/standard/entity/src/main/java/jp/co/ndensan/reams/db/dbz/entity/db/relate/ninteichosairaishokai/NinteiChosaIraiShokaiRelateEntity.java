@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiChosaIraiShokaiRelateEntity {
 
+    private Code koroshoIfShikibetsuCode;
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
     private FlexibleDate torisageYMD;
