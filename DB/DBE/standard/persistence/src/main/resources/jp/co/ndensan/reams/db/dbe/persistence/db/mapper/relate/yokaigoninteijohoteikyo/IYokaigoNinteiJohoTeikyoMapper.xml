@@ -681,7 +681,7 @@
             ,Zenku_DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD" AS 前々回認定有効期間_終了
             ,DbT5101NinteiShinseiJoho."chikuCode" AS 所属
             ,DbT7051KoseiShichosonMaster."shichosonMeisho" AS 市町村名
-            ,DbT5910NinteichosaItakusakiJoho."jigyoshaNo" AS 事業者番号
+            ,DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" AS 事業者番号
             ,DbT5913ChosainJoho."ninteiChosainCode" AS 認定調査員コード
             ,DbT5913ChosainJoho."chosainShikaku" AS 調査員資格
             ,DbT5116IchijiHanteiKekkaJoho."kijunJikan" AS 要介護認定等基準時間
