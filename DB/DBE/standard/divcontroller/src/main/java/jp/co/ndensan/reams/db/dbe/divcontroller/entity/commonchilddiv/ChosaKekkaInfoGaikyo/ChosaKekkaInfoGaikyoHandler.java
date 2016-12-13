@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
@@ -44,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -375,14 +379,13 @@ public class ChosaKekkaInfoGaikyoHandler {
                 RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
                 RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
                 RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
-                RString ローカルファイル名 = new RString("IMG");
                 RString 出力イメージフォルダパス = copySharedFiles(image, 共有ファイル名);
                 
-                setImage認定調査実施場所(出力イメージフォルダパス, ローカルファイル名);
-                setImage概況調査特記(出力イメージフォルダパス, ローカルファイル名);
-                setImageサービス(gaikyoBusiness, 出力イメージフォルダパス, ローカルファイル名);
-                setImage利用施設情報(出力イメージフォルダパス, ローカルファイル名);
-                setImage概況特記(出力イメージフォルダパス, ローカルファイル名);
+                setImage認定調査実施場所(出力イメージフォルダパス);
+                setImage概況調査特記(出力イメージフォルダパス);
+                setImageサービス(gaikyoBusiness, 出力イメージフォルダパス);
+                setImage利用施設情報(出力イメージフォルダパス);
+                setImage概況特記(出力イメージフォルダパス);
             }
         }
     }
@@ -490,62 +493,74 @@ public class ChosaKekkaInfoGaikyoHandler {
         gaikyoDiv.getGaikyoTokkiPanel().getTxtKikaiKiki().setValue(gaikyoBusiness.get概況特記事項_機器_器械());
     }
 
-    private void setImage認定調査実施場所(RString 出力イメージフォルダパス, RString ローカルファイル名) {
-        RString 実施場所ImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_認定調査実施場所);
-        gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(実施場所ImagePath);
+    private void setImage認定調査実施場所(RString 出力イメージフォルダパス) {
+        RString 実施場所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_認定調査実施場所);        
+        gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(sanitizePath(実施場所ImagePath, 出力イメージフォルダパス));
+    }
+    
+    private RString sanitizePath(RString imagePath, RString 出力イメージフォルダパス) {
+        RString DATAURI_BMP = new RString("data:image/png;base64,");
+        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(出力イメージフォルダパス, imagePath)) : RString.EMPTY;
+    }
+    
+    private RString base64encode(RString 出力イメージフォルダパス, RString イメージパス) {
+        RString imgBase64 = RString.EMPTY;
+        try {
+            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(Path.combinePath(出力イメージフォルダパス).toString(), イメージパス.toString())));
+        } catch (IOException ex) {
+        }
+        return imgBase64;
     }
 
-    private void setImage概況調査特記(RString 出力イメージフォルダパス, RString ローカルファイル名) {
+    private void setImage概況調査特記(RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            RString 概況調査特記ImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_概況調査特記);
-            gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(概況調査特記ImagePath);
+            RString 概況調査特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況調査特記);
+            gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(sanitizePath(概況調査特記ImagePath, 出力イメージフォルダパス));
         }
     }
 
-    private void setImageサービス(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness, RString 出力イメージフォルダパス, 
-            RString ローカルファイル名) {
+    private void setImageサービス(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness, RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             if (gaikyoBusiness.get記入項目連番() == 1) {
-                RString 市町村特別給付ImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_市町村特別給付);
-                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(市町村特別給付ImagePath);
+                RString 市町村特別給付ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_市町村特別給付);
+                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(sanitizePath(市町村特別給付ImagePath, 出力イメージフォルダパス));
             } else {
-                RString 在宅サービスImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_在宅サービス);
-                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(在宅サービスImagePath);
+                RString 在宅サービスImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_在宅サービス);
+                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(sanitizePath(在宅サービスImagePath, 出力イメージフォルダパス));
             }
         }
     }
 
-    private void setImage利用施設情報(RString 出力イメージフォルダパス, RString ローカルファイル名) {
-        RString 施設名称ImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_利用施設名);
-        RString 施設住所ImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_利用施設住所);
-        RString 電話番号ImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_電話番号);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuMeisho().setSrc(施設名称ImagePath);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuJusho().setSrc(施設住所ImagePath);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgTelNo().setSrc(電話番号ImagePath);
+    private void setImage利用施設情報(RString 出力イメージフォルダパス) {
+        RString 施設名称ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設名);
+        RString 施設住所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設住所);
+        RString 電話番号ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_電話番号);
+        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuMeisho().setSrc(sanitizePath(施設名称ImagePath, 出力イメージフォルダパス));
+        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuJusho().setSrc(sanitizePath(施設住所ImagePath, 出力イメージフォルダパス));
+        gaikyoDiv.getShisetsuRiyoPanel().getImgTelNo().setSrc(sanitizePath(電話番号ImagePath, 出力イメージフォルダパス));
     }
 
-    private void setImage概況特記(RString 出力イメージフォルダパス, RString ローカルファイル名) {
+    private void setImage概況特記(RString 出力イメージフォルダパス) {
         if (出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            RString 概況特記ImagePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, IMAGEFILENAME_概況特記);
-            gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(概況特記ImagePath);
+            RString 概況特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況特記);
+            gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(sanitizePath(概況特記ImagePath, 出力イメージフォルダパス));
         }
     }
 
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ファイル名);
         }
         return RString.EMPTY;
     }
 
     private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
-        RString 出力イメージフォルダパス = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"),
-                new RString("db#dbe"), new RString("WEB-INF"), new RString("image"));
+        RString 出力イメージフォルダパス = Directory.createTmpDirectory();
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                         イメージ情報.getイメージ共有ファイルID());
         deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
-        return SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).toRString();
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
     private void deleteIMGDirecotry(RString 出力イメージパス, RString ローカルファイル名) {

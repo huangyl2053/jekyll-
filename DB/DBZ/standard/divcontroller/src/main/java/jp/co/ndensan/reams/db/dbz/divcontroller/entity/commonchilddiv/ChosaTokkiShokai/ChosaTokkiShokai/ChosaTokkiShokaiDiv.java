@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokk
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -25,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -2590,7 +2594,6 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
             RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
             RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
             RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
-            RString ローカルファイル名 = new RString("IMG");
             RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
             //TODO
             // システム稼働日と申請日の処理未実装
@@ -2598,13 +2601,13 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
             if (displayFlg) {
                 this.imgPanel1.setDisplayNone(false);
                 for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
-                    initializaイメージエリア(出力イメージフォルダパス, ローカルファイル名, 認定調査特記事項マッピング,
+                    initializaイメージエリア(出力イメージフォルダパス, 認定調査特記事項マッピング,
                             認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), new RString("旧"));
                 }
             } else {
                 this.imgPanel2.setDisplayNone(false);
                 for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
-                    initializaイメージエリア(出力イメージフォルダパス, ローカルファイル名, 認定調査特記事項マッピング,
+                    initializaイメージエリア(出力イメージフォルダパス, 認定調査特記事項マッピング,
                             認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), new RString("新"));
                 }
             }
@@ -2814,17 +2817,31 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                 break;
         }
     }
+    
+    private RString sanitizePath(RString imagePath, RString 出力イメージフォルダパス) {
+        RString DATAURI_BMP = new RString("data:image/png;base64,");
+        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(出力イメージフォルダパス, imagePath)) : RString.EMPTY;
+    }
+
+    private RString base64encode(RString 出力イメージフォルダパス, RString イメージパス) {
+        RString imgBase64 = RString.EMPTY;
+        try {
+            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(Path.combinePath(出力イメージフォルダパス).toString(), イメージパス.toString())));
+        } catch (IOException ex) {
+        }
+        return imgBase64;
+    }
 
     @JsonIgnore
-    private void initializaイメージエリア(RString 出力イメージフォルダパス, RString ローカルファイル名, NinteiChosaTokkiJikou 認定調査特記事項マッピング,
+    private void initializaイメージエリア(RString 出力イメージフォルダパス, NinteiChosaTokkiJikou 認定調査特記事項マッピング,
             NinteichosahyoTokkijiko 認定調査特記事項, int remban, RString 認定調査票区分) {
-        downLoadFilePath = getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+        downLoadFilePath = getFilePath(出力イメージフォルダパス, replaceShareFileName(
                 NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(), remban, false));
         RString path原本 = downLoadFilePath;
         RString pathマスク = RString.EMPTY;
         if (GenponMaskKubun.マスク.getコード().equals(認定調査特記事項.get原本マスク区分().value())) {
             pathマスク = path原本;
-            path原本 = getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+            path原本 = getFilePath(出力イメージフォルダパス, replaceShareFileName(
                     NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(), remban, true));
         }
 
@@ -2843,9 +2860,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking1().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage1().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking1().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking1().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo1().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo1().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 2:
                     this.imgPanel1.getTxtTokkijikoNo12().setDisplayNone(false);
@@ -2860,9 +2877,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking2().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage2().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking2().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking2().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo2().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo2().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 3:
                     this.imgPanel1.getTxtTokkijikoNo13().setDisplayNone(false);
@@ -2877,9 +2894,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking3().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage3().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking3().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking3().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo3().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo3().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 4:
                     this.imgPanel1.getTxtTokkijikoNo14().setDisplayNone(false);
@@ -2894,9 +2911,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking4().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage4().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking4().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking4().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo4().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo4().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 5:
                     this.imgPanel1.getTxtTokkijikoNo15().setDisplayNone(false);
@@ -2911,9 +2928,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking5().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage5().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking5().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking5().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo5().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo5().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 6:
                     this.imgPanel1.getTxtTokkijikoNo16().setDisplayNone(false);
@@ -2928,9 +2945,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking6().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage6().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking6().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking6().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo6().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo6().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 7:
                     this.imgPanel1.getTxtTokkijikoNo17().setDisplayNone(false);
@@ -2945,9 +2962,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking7().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage7().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking7().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking7().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo7().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo7().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 8:
                     this.imgPanel1.getTxtTokkijikoNo18().setDisplayNone(false);
@@ -2962,9 +2979,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking8().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage8().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking8().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking8().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo8().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo8().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 9:
                     this.imgPanel1.getTxtTokkijikoNo19().setDisplayNone(false);
@@ -2979,9 +2996,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking9().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage9().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking9().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking9().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo9().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo9().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 10:
                     this.imgPanel1.getTxtTokkijikoNo20().setDisplayNone(false);
@@ -2996,9 +3013,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel1.getImgMasking10().setDisplayNone(false);
                         this.imgPanel1.getLabelNoImage10().setDisplayNone(true);
-                        this.imgPanel1.getImgMasking10().setSrc(pathマスク);
+                        this.imgPanel1.getImgMasking10().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel1.getImgGenpo10().setSrc(path原本);
+                    this.imgPanel1.getImgGenpo10().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
             }
         } else {
@@ -3016,9 +3033,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking11().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage11().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking11().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking11().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo11().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo11().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 2:
                     this.imgPanel2.getTxtTokkijikoNo22().setDisplayNone(false);
@@ -3033,9 +3050,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking12().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage12().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking12().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking12().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo12().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo12().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 3:
                     this.imgPanel2.getTxtTokkijikoNo23().setDisplayNone(false);
@@ -3050,9 +3067,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking13().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage13().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking13().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking13().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo13().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo13().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 4:
                     this.imgPanel2.getTxtTokkijikoNo24().setDisplayNone(false);
@@ -3067,9 +3084,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking14().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage14().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking14().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking14().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo14().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo14().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 5:
                     this.imgPanel2.getTxtTokkijikoNo25().setDisplayNone(false);
@@ -3084,9 +3101,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking15().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage15().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking15().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking15().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo15().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo15().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 6:
                     this.imgPanel2.getTxtTokkijikoNo26().setDisplayNone(false);
@@ -3101,9 +3118,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking16().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage16().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking16().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking16().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo16().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo16().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 7:
                     this.imgPanel2.getTxtTokkijikoNo27().setDisplayNone(false);
@@ -3118,9 +3135,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking17().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage17().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking17().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking17().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo17().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo17().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 8:
                     this.imgPanel2.getTxtTokkijikoNo28().setDisplayNone(false);
@@ -3135,9 +3152,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking18().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage18().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking18().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking18().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo18().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo18().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 9:
                     this.imgPanel2.getTxtTokkijikoNo29().setDisplayNone(false);
@@ -3152,9 +3169,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking19().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage19().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking19().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking19().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo19().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo19().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
                 case 10:
                     this.imgPanel2.getTxtTokkijikoNo30().setDisplayNone(false);
@@ -3169,29 +3186,28 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     if (!RString.isNullOrEmpty(pathマスク)) {
                         this.imgPanel2.getImgMasking20().setDisplayNone(false);
                         this.imgPanel2.getLabelNoImage20().setDisplayNone(true);
-                        this.imgPanel2.getImgMasking20().setSrc(pathマスク);
+                        this.imgPanel2.getImgMasking20().setSrc(sanitizePath(pathマスク, 出力イメージフォルダパス));
                     }
-                    this.imgPanel2.getImgGenpo20().setSrc(path原本);
+                    this.imgPanel2.getImgGenpo20().setSrc(sanitizePath(path原本, 出力イメージフォルダパス));
                     break;
             }
         }
     }
 
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ファイル名);
         }
         return RString.EMPTY;
     }
 
     private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
-        RString 出力イメージフォルダパス = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"),
-                new RString("db#dbe"), new RString("WEB-INF"), new RString("image"));
+        RString 出力イメージフォルダパス = Directory.createTmpDirectory();
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                         イメージ情報.getイメージ共有ファイルID());
         deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
-        return SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).toRString();
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
     private void deleteIMGDirecotry(RString 出力イメージパス, RString ローカルファイル名) {
