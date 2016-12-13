@@ -110,16 +110,16 @@ public class ShujiiIkenshoShokaiHandler {
 
             イメージ元本パスリスト = get原本FilePathList(出力イメージフォルダパス, ローカルファイル名);
             イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス, ローカルファイル名);
-            List<RString> fileList = Arrays.asList(Directory.getFiles(イメージ元本パスリスト.get(0), new RString("*.png"), true));
-            RString imgBase64 = RString.EMPTY;
-            try {
-                imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージ元本パスリスト.get(0).toString(), fileList.get(0).toString())));
-            } catch (IOException ex) {
-            }
-            RString DATAURI_BMP = new RString("data:image/png;base64,");
-            div.getTxtTest3().setValue(DATAURI_BMP.concat(imgBase64));
-            イメージ元本パスリスト.add(DATAURI_BMP.concat(imgBase64));
-            イメージマスクパスリスト.add(RString.EMPTY);
+//            List<RString> fileList = Arrays.asList(Directory.getFiles(イメージ元本パスリスト.get(0), new RString("*.png"), true));
+//            RString imgBase64 = RString.EMPTY;
+//            try {
+//                imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージ元本パスリスト.get(0).toString(), fileList.get(0).toString())));
+//            } catch (IOException ex) {
+//            }
+//            RString DATAURI_BMP = new RString("data:image/png;base64,");
+//            div.getTxtTest3().setValue(DATAURI_BMP.concat(imgBase64));
+//            イメージ元本パスリスト.add(DATAURI_BMP.concat(imgBase64));
+//            イメージマスクパスリスト.add(RString.EMPTY);
             原本タイトルリスト = getTitleList(イメージ元本パスリスト);
             マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
         } else {
