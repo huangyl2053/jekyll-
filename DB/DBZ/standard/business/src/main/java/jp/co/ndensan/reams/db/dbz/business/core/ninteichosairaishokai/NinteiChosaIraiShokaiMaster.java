@@ -32,6 +32,15 @@ public class NinteiChosaIraiShokaiMaster {
     }
 
     /**
+     * 厚労省IF識別コードを取得します。
+     *
+     * @return 厚労省IF識別コード
+     */
+    public Code getKoroshoIfShikibetsuCode() {
+        return entity.getKoroshoIfShikibetsuCode();
+    }
+    
+    /**
      * 認定申請日を取得します。
      *
      * @return 認定申請日

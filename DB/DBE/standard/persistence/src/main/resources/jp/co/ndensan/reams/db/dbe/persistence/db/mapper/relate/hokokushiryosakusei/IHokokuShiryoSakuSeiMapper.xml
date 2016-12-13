@@ -340,22 +340,19 @@
             ,A."ninteiShinseiHoreiKubunCode"
         </if>
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" B
+        INNER JOIN
+        (
+        select * from rgdb."DbT5102NinteiKekkaJoho"
+        UNION
+        select * from rgdb."DbT5129Tennyu"
+        ) B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" D
+        LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" C
         ON A."shoKisaiHokenshaNo" =  C."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
-        AND D."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND D."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND D."ninteichosaKanryoYMD" IS NOT NULL
-        AND D."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND D."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND D."maskingKanryoYMD" IS NOT NULL
-        AND D."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND D."ninteiShinsakaiKanryoYMD" IS NOT NULL
+        AND A."torisageKubunCode" IN ('1', '4')
         AND A."hihokenshaKubunCode" IN ('1', '2')
         AND B."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         <if test="!isEmptyHokensyaNo">
@@ -389,7 +386,7 @@
             </otherwise>
         </choose>
         <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3', '5')
         </if>
         <if test="isHorei">
             AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
@@ -399,6 +396,7 @@
         ,C."shichosonMeisho"
         ,A."shoKisaiHokenshaNo"
         ,A."hihokenshaKubunCode"
+        ,A."hihokenshaNo"
         ,A."age"
         ,B."nijiHanteiYokaigoJotaiKubunCode"
         ,B."nijiHanteiYMD"
@@ -430,6 +428,7 @@
         ,A."shoKisaiHokenshaNo"
         ,A."nijiHanteiYokaigoJotaiKubunCode"
         ,A."hihokenshaKubunCode"
+        ,A."hihokenshaNo"
         ,COUNT(0) AS countHokensha
         FROM "JigyoJyokyoHokokuTemp" A
         GROUP BY
@@ -439,6 +438,7 @@
         ,A."shoKisaiHokenshaNo"
         ,A."nijiHanteiYokaigoJotaiKubunCode"
         ,A."hihokenshaKubunCode"
+        ,A."hihokenshaNo"
         ORDER BY
         A."nijiHanteiYM"
         ,A."shichosonCode"

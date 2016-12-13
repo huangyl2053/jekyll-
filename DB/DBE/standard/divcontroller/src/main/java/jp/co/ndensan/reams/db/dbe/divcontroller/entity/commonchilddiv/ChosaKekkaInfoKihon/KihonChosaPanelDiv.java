@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KihonChosaPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,12 +23,16 @@ public class KihonChosaPanelDiv extends Panel {
      */
     @JsonProperty("dgKihonChosa")
     private DataGrid<dgKihonChosa_Row> dgKihonChosa;
-    @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
-    private TextBoxCode txtNinchishoNichijoSeikatsuJiritsudoCode;
-    @JsonProperty("btnChosaTokkiImageShokai")
-    private ButtonDialog btnChosaTokkiImageShokai;
+    @JsonProperty("btnShogaiKoreishaTokki")
+    private ButtonDialog btnShogaiKoreishaTokki;
     @JsonProperty("txtShogaiNichijoSeikatsuJiritsudoCode")
     private TextBoxCode txtShogaiNichijoSeikatsuJiritsudoCode;
+    @JsonProperty("btnChosaTokkiImageShokai")
+    private ButtonDialog btnChosaTokkiImageShokai;
+    @JsonProperty("btnNinchiKoreishaTokki")
+    private ButtonDialog btnNinchiKoreishaTokki;
+    @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
+    private TextBoxCode txtNinchishoNichijoSeikatsuJiritsudoCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,21 +59,39 @@ public class KihonChosaPanelDiv extends Panel {
     }
 
     /*
-     * gettxtNinchishoNichijoSeikatsuJiritsudoCode
-     * @return txtNinchishoNichijoSeikatsuJiritsudoCode
+     * getbtnShogaiKoreishaTokki
+     * @return btnShogaiKoreishaTokki
      */
-    @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
-    public TextBoxCode getTxtNinchishoNichijoSeikatsuJiritsudoCode() {
-        return txtNinchishoNichijoSeikatsuJiritsudoCode;
+    @JsonProperty("btnShogaiKoreishaTokki")
+    public ButtonDialog getBtnShogaiKoreishaTokki() {
+        return btnShogaiKoreishaTokki;
     }
 
     /*
-     * settxtNinchishoNichijoSeikatsuJiritsudoCode
-     * @param txtNinchishoNichijoSeikatsuJiritsudoCode txtNinchishoNichijoSeikatsuJiritsudoCode
+     * setbtnShogaiKoreishaTokki
+     * @param btnShogaiKoreishaTokki btnShogaiKoreishaTokki
      */
-    @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
-    public void setTxtNinchishoNichijoSeikatsuJiritsudoCode(TextBoxCode txtNinchishoNichijoSeikatsuJiritsudoCode) {
-        this.txtNinchishoNichijoSeikatsuJiritsudoCode = txtNinchishoNichijoSeikatsuJiritsudoCode;
+    @JsonProperty("btnShogaiKoreishaTokki")
+    public void setBtnShogaiKoreishaTokki(ButtonDialog btnShogaiKoreishaTokki) {
+        this.btnShogaiKoreishaTokki = btnShogaiKoreishaTokki;
+    }
+
+    /*
+     * gettxtShogaiNichijoSeikatsuJiritsudoCode
+     * @return txtShogaiNichijoSeikatsuJiritsudoCode
+     */
+    @JsonProperty("txtShogaiNichijoSeikatsuJiritsudoCode")
+    public TextBoxCode getTxtShogaiNichijoSeikatsuJiritsudoCode() {
+        return txtShogaiNichijoSeikatsuJiritsudoCode;
+    }
+
+    /*
+     * settxtShogaiNichijoSeikatsuJiritsudoCode
+     * @param txtShogaiNichijoSeikatsuJiritsudoCode txtShogaiNichijoSeikatsuJiritsudoCode
+     */
+    @JsonProperty("txtShogaiNichijoSeikatsuJiritsudoCode")
+    public void setTxtShogaiNichijoSeikatsuJiritsudoCode(TextBoxCode txtShogaiNichijoSeikatsuJiritsudoCode) {
+        this.txtShogaiNichijoSeikatsuJiritsudoCode = txtShogaiNichijoSeikatsuJiritsudoCode;
     }
 
     /*
@@ -91,21 +113,39 @@ public class KihonChosaPanelDiv extends Panel {
     }
 
     /*
-     * gettxtShogaiNichijoSeikatsuJiritsudoCode
-     * @return txtShogaiNichijoSeikatsuJiritsudoCode
+     * getbtnNinchiKoreishaTokki
+     * @return btnNinchiKoreishaTokki
      */
-    @JsonProperty("txtShogaiNichijoSeikatsuJiritsudoCode")
-    public TextBoxCode getTxtShogaiNichijoSeikatsuJiritsudoCode() {
-        return txtShogaiNichijoSeikatsuJiritsudoCode;
+    @JsonProperty("btnNinchiKoreishaTokki")
+    public ButtonDialog getBtnNinchiKoreishaTokki() {
+        return btnNinchiKoreishaTokki;
     }
 
     /*
-     * settxtShogaiNichijoSeikatsuJiritsudoCode
-     * @param txtShogaiNichijoSeikatsuJiritsudoCode txtShogaiNichijoSeikatsuJiritsudoCode
+     * setbtnNinchiKoreishaTokki
+     * @param btnNinchiKoreishaTokki btnNinchiKoreishaTokki
      */
-    @JsonProperty("txtShogaiNichijoSeikatsuJiritsudoCode")
-    public void setTxtShogaiNichijoSeikatsuJiritsudoCode(TextBoxCode txtShogaiNichijoSeikatsuJiritsudoCode) {
-        this.txtShogaiNichijoSeikatsuJiritsudoCode = txtShogaiNichijoSeikatsuJiritsudoCode;
+    @JsonProperty("btnNinchiKoreishaTokki")
+    public void setBtnNinchiKoreishaTokki(ButtonDialog btnNinchiKoreishaTokki) {
+        this.btnNinchiKoreishaTokki = btnNinchiKoreishaTokki;
+    }
+
+    /*
+     * gettxtNinchishoNichijoSeikatsuJiritsudoCode
+     * @return txtNinchishoNichijoSeikatsuJiritsudoCode
+     */
+    @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
+    public TextBoxCode getTxtNinchishoNichijoSeikatsuJiritsudoCode() {
+        return txtNinchishoNichijoSeikatsuJiritsudoCode;
+    }
+
+    /*
+     * settxtNinchishoNichijoSeikatsuJiritsudoCode
+     * @param txtNinchishoNichijoSeikatsuJiritsudoCode txtNinchishoNichijoSeikatsuJiritsudoCode
+     */
+    @JsonProperty("txtNinchishoNichijoSeikatsuJiritsudoCode")
+    public void setTxtNinchishoNichijoSeikatsuJiritsudoCode(TextBoxCode txtNinchishoNichijoSeikatsuJiritsudoCode) {
+        this.txtNinchishoNichijoSeikatsuJiritsudoCode = txtNinchishoNichijoSeikatsuJiritsudoCode;
     }
 
     // </editor-fold>

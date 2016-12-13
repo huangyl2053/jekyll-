@@ -154,7 +154,8 @@
         <result property="konnkai_12" column="DbT5302Shujii_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="zennkai_12" column="ShujiiIkenshoJoho1_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="zennnoma_12" column="ShujiiIkenshoJoho2_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-
+        <result property="ikenshoIraiRirekiNo" column="DbT5301Shujii_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaIraiRirekiNo" column="DbT5201Nintei_ninteichosaIraiRirekiNo" />
     </resultMap>
 
     <select resultOrdered="true" id="selectKojinJokyoShokai"
@@ -203,7 +204,9 @@
             DbT5910."jigyoshaMeisho" AS "DbT5910_jigyoshaMeisho",
             DbT5913."ninteiChosainCode" AS "DbT5913_ninteiChosainCode",
             DbT5913."chosainShimei" AS "DbT5913_chosainShimei",
-            DbT5101Nintei."shichosonRenrakuJiko" AS "DbT5101Nintei_shichosonRenrakuJiko"
+            DbT5101Nintei."shichosonRenrakuJiko" AS "DbT5101Nintei_shichosonRenrakuJiko",
+            DbT5301Shujii."ikenshoIraiRirekiNo" AS "DbT5301Shujii_ikenshoIraiRirekiNo",
+            DbT5201Nintei."ninteichosaIraiRirekiNo" AS "DbT5201Nintei_ninteichosaIraiRirekiNo"
         FROM
             rgdb."DbT5123NinteiKeikakuJoho" AS DbT5123Nintei
             INNER JOIN
@@ -249,6 +252,17 @@
                         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301Shu
                     WHERE
                         DbT5301Shu."shinseishoKanriNo" = #{shinseishoKanriNo}
+                )
+            LEFT JOIN
+                rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Nintei
+            ON  DbT5201Nintei."shinseishoKanriNo" = DbT5101Nintei."shinseishoKanriNo"
+            AND DbT5201Nintei."ninteichosaIraiRirekiNo" = (
+                    SELECT
+                        MAX(DbT5201."ninteichosaIraiRirekiNo")
+                    FROM
+                        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+                    WHERE
+                        DbT5201."shinseishoKanriNo" =  #{shinseishoKanriNo}
                 )
         WHERE
             DbT5123Nintei."shinseishoKanriNo" = #{shinseishoKanriNo}

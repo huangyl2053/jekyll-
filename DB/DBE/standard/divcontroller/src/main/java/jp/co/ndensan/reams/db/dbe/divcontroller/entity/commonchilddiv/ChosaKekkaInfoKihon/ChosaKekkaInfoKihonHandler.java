@@ -14,6 +14,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku02A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku06A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
@@ -239,32 +244,144 @@ public class ChosaKekkaInfoKihonHandler {
         kihonDiv.getTxtChosaJisshiBashoMeisho().setDisplayNone(true);
         kihonDiv.getLblJisshiBasho().setDisplayNone(true);
         kihonDiv.getJisshiBashoMeishoPanel().setDisplayNone(true);
-        kihonDiv.getKihonChosaPanel().getTxtNinchishoNichijoSeikatsuJiritsudoCode().setDisabled(true);
+        kihonDiv.getKihonChosaPanel().getBtnShogaiKoreishaTokki().setDisplayNone(true);
         kihonDiv.getKihonChosaPanel().getTxtShogaiNichijoSeikatsuJiritsudoCode().setDisabled(true);
+        kihonDiv.getKihonChosaPanel().getBtnNinchiKoreishaTokki().setDisplayNone(true);
+        kihonDiv.getKihonChosaPanel().getTxtNinchishoNichijoSeikatsuJiritsudoCode().setDisabled(true);
         kihonDiv.getBtnReturn().setDisabled(false);
         setDataSourcre1(申請書管理番号, chosaKekkaInfoGaikyoList);
         setDataSourcre2(serviceJokyos);
         setChosaTokkiImageShokai(serviceJokyos);
     }
 
+    public ArrayList<RString> getA4イメージ特記事項番号List() {
+        List<RString> ALLA4イメージ特記事項番号List = set認定調査A4イメージ特記事項番号List();
+        ArrayList<RString> hasA4イメージ特記事項List = DataPassingConverter.deserialize(
+                kihonDiv.getAllNinteichosaTokkijikoNoList(), ArrayList.class);
+        ArrayList<RString> A4イメージ特記事項番号List = new ArrayList<>();
+        for (RString 特記事項番号 : hasA4イメージ特記事項List) {
+            if (ALLA4イメージ特記事項番号List.contains(特記事項番号)) {
+                A4イメージ特記事項番号List.add(特記事項番号);
+            }
+        }
+        return A4イメージ特記事項番号List;
+    }
+
+    public ArrayList<RString> get障害高齢者自立度特記事項番号List() {
+        RString 厚労省IF識別コード = kihonDiv.getKoroshoIFShikibetsuCode();
+        ArrayList<RString> 障害高齢者自立度特記事項番号List = new ArrayList<>();
+        if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
+            障害高齢者自立度特記事項番号List.add(NinteichosaKomoku99A.障害高齢者の日常自立度_寝たきり度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
+            障害高齢者自立度特記事項番号List.add(NinteichosaKomoku02A.障害高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
+            障害高齢者自立度特記事項番号List.add(NinteichosaKomoku06A.障害高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
+            障害高齢者自立度特記事項番号List.add(NinteichosaKomoku09A.障害高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
+            障害高齢者自立度特記事項番号List.add(NinteichosaKomoku09B.障害高齢者自立度.get調査特記事項番序());
+        }
+        return 障害高齢者自立度特記事項番号List;
+    }
+
+    public ArrayList<RString> get認知症高齢者自立度特記事項番号List() {
+        RString 厚労省IF識別コード = kihonDiv.getKoroshoIFShikibetsuCode();
+        ArrayList<RString> 認知症高齢者自立度特記事項番号List = new ArrayList<>();
+        if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
+            認知症高齢者自立度特記事項番号List.add(NinteichosaKomoku99A.認知症高齢者の日常自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
+            認知症高齢者自立度特記事項番号List.add(NinteichosaKomoku02A.認知症高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
+            認知症高齢者自立度特記事項番号List.add(NinteichosaKomoku06A.認知症高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
+            認知症高齢者自立度特記事項番号List.add(NinteichosaKomoku09A.認知症高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
+            認知症高齢者自立度特記事項番号List.add(NinteichosaKomoku09B.認知症高齢者自立度.get調査特記事項番序());
+        }
+        return 認知症高齢者自立度特記事項番号List;
+    }
+
     private void setChosaTokkiImageShokai(List<TokiJikouBusiness> serviceJokyos) {
-        List<RString> 認定調査特記事項番号List = set認定調査特記事項番号List();
+        List<RString> 認定調査特記事項番号List = set認定調査A4イメージ特記事項番号List();
+        RString 厚労省IF識別コード;
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         if (serviceJokyos != null && !serviceJokyos.isEmpty()) {
+            厚労省IF識別コード = serviceJokyos.get(0).get厚労省IF識別コード().value();
+            kihonDiv.setKoroshoIFShikibetsuCode(厚労省IF識別コード);
+            set自立度特記事項番号List(認定調査特記事項番号List, 厚労省IF識別コード);
             ArrayList<NinteichosahyoTokkijiko> 認定調査特記事項情報List = manager.get調査特記事項(
                     serviceJokyos.get(0).get申請書管理番号(), serviceJokyos.get(0).get認定調査依頼履歴番号(), 認定調査特記事項番号List);
-            if (認定調査特記事項情報List != null && !認定調査特記事項情報List.isEmpty()) {
-                kihonDiv.getKihonChosaPanel().getBtnChosaTokkiImageShokai().setDisplayNone(false);
-                ArrayList<RString> 特記事項番号List = new ArrayList<>();
-                for (NinteichosahyoTokkijiko 特記事項情報 : 認定調査特記事項情報List) {
-                    特記事項番号List.add(特記事項情報.get認定調査特記事項番号());
+            ArrayList<RString> 特記事項番号List = new ArrayList<>();
+            for (NinteichosahyoTokkijiko 認定調査特記事項情報 : 認定調査特記事項情報List) {
+                if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
+                    if (NinteichosaKomoku99A.障害高齢者の日常自立度_寝たきり度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnShogaiKoreishaTokki().setDisplayNone(false);
+                    } else if (NinteichosaKomoku99A.認知症高齢者の日常自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnNinchiKoreishaTokki().setDisplayNone(false);
+                    } else {
+                        kihonDiv.getKihonChosaPanel().getBtnChosaTokkiImageShokai().setVisible(true);
+                    }
+                } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
+                    if (NinteichosaKomoku02A.障害高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnShogaiKoreishaTokki().setDisplayNone(false);
+                    } else if (NinteichosaKomoku02A.認知症高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnNinchiKoreishaTokki().setDisplayNone(false);
+                    } else {
+                        kihonDiv.getKihonChosaPanel().getBtnChosaTokkiImageShokai().setVisible(true);
+                    }
+                } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
+                    if (NinteichosaKomoku06A.障害高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnShogaiKoreishaTokki().setDisplayNone(false);
+                    } else if (NinteichosaKomoku06A.認知症高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnNinchiKoreishaTokki().setDisplayNone(false);
+                    } else {
+                        kihonDiv.getKihonChosaPanel().getBtnChosaTokkiImageShokai().setVisible(true);
+                    }
+                } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
+                    if (NinteichosaKomoku09A.障害高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnShogaiKoreishaTokki().setDisplayNone(false);
+                    } else if (NinteichosaKomoku09A.認知症高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnNinchiKoreishaTokki().setDisplayNone(false);
+                    } else {
+                        kihonDiv.getKihonChosaPanel().getBtnChosaTokkiImageShokai().setVisible(true);
+                    }
+                } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
+                    if (NinteichosaKomoku09B.障害高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnShogaiKoreishaTokki().setDisplayNone(false);
+                    } else if (NinteichosaKomoku09B.認知症高齢者自立度.get調査特記事項番序().equals(認定調査特記事項情報.get認定調査特記事項番号())) {
+                        kihonDiv.getKihonChosaPanel().getBtnNinchiKoreishaTokki().setDisplayNone(false);
+                    } else {
+                        kihonDiv.getKihonChosaPanel().getBtnChosaTokkiImageShokai().setVisible(true);
+                    }
                 }
-                kihonDiv.setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(特記事項番号List));
+                特記事項番号List.add(認定調査特記事項情報.get認定調査特記事項番号());
+            }
+            if (!特記事項番号List.isEmpty()) {
+                kihonDiv.setAllNinteichosaTokkijikoNoList(DataPassingConverter.serialize(特記事項番号List));
             }
         }
     }
 
-    private List<RString> set認定調査特記事項番号List() {
+    private void set自立度特記事項番号List(List<RString> 認定調査特記事項番号List, RString 厚労省IF識別コード) {
+        if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
+            認定調査特記事項番号List.add(NinteichosaKomoku99A.障害高齢者の日常自立度_寝たきり度.get調査特記事項番序());
+            認定調査特記事項番号List.add(NinteichosaKomoku99A.認知症高齢者の日常自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
+            認定調査特記事項番号List.add(NinteichosaKomoku02A.障害高齢者自立度.get調査特記事項番序());
+            認定調査特記事項番号List.add(NinteichosaKomoku02A.認知症高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
+            認定調査特記事項番号List.add(NinteichosaKomoku06A.障害高齢者自立度.get調査特記事項番序());
+            認定調査特記事項番号List.add(NinteichosaKomoku06A.認知症高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
+            認定調査特記事項番号List.add(NinteichosaKomoku09A.障害高齢者自立度.get調査特記事項番序());
+            認定調査特記事項番号List.add(NinteichosaKomoku09A.認知症高齢者自立度.get調査特記事項番序());
+        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
+            認定調査特記事項番号List.add(NinteichosaKomoku09B.障害高齢者自立度.get調査特記事項番序());
+            認定調査特記事項番号List.add(NinteichosaKomoku09B.認知症高齢者自立度.get調査特記事項番序());
+        }
+    }
+
+    private List<RString> set認定調査A4イメージ特記事項番号List() {
         List<RString> 認定調査特記事項番号List = new ArrayList<>();
         認定調査特記事項番号List.add(new RString("T001"));
         認定調査特記事項番号List.add(new RString("T002"));

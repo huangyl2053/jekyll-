@@ -222,6 +222,10 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     List<DbT5304ShujiiIkenshoIkenItemEntity> 前回意見書項目;
     List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity;
 
+    static {
+        System.setProperty("java.awt.headless", "true");
+    }
+
     @Override
     protected void initialize() {
         list = new ArrayList<>();
@@ -472,10 +476,10 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番56).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番56));
             社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番57).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番57));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番58).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番58));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番59).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番59));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番60).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番60));
-            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番61).isEmpty() ? RString.EMPTY : get名称12(dbt5211Entity, 連番61));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番58).isEmpty() ? RString.EMPTY : get名称17(dbt5211Entity, 連番58));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番59).isEmpty() ? RString.EMPTY : get名称16(dbt5211Entity, 連番59));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番60).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番60));
+            社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番61).isEmpty() ? RString.EMPTY : get名称10(dbt5211Entity, 連番61));
         }
         if (識別コード06A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応4リスト.add(機能差分結果(調査項目, dbt5211Entity, 連番34).isEmpty() ? RString.EMPTY : get名称22(dbt5211Entity, 連番34));
@@ -1599,8 +1603,6 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         RDateTime 日期 = RDate.getNowDateTime();
         RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
                 .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
-        //TODO n8178 城間 グラフ機能以外の箇所を動作確認するために一時的にコメントアウト。
-//        System.setProperty("java.awt.headless", "true");
 //        new StackedBarChart(getNumber(entity.get要介護認定等基準時間_食事()),
 //                getNumber(entity.get要介護認定等基準時間_排泄()), getNumber(entity.get要介護認定等基準時間_移動()),
 //                getNumber(entity.get要介護認定等基準時間_清潔保持()), getNumber(entity.get要介護認定等基準時間_間接ケア()),

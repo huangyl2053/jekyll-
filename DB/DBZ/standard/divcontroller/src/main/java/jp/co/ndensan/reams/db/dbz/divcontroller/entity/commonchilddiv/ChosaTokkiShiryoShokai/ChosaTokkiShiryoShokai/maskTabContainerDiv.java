@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  * @author 自動生成
  */
 public class maskTabContainerDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -193,12 +193,12 @@ public class maskTabContainerDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public StaticImage getImgMask1() {
+    public DynamicImage getImgMask1() {
         return this.getMaskTabPanel1().getImgMask1();
     }
 
     @JsonIgnore
-    public void  setImgMask1(StaticImage imgMask1) {
+    public void  setImgMask1(DynamicImage imgMask1) {
         this.getMaskTabPanel1().setImgMask1(imgMask1);
     }
 
@@ -213,12 +213,12 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgMask2() {
+    public DynamicImage getImgMask2() {
         return this.getMaskTabPanel2().getImgMask2();
     }
 
     @JsonIgnore
-    public void  setImgMask2(StaticImage imgMask2) {
+    public void  setImgMask2(DynamicImage imgMask2) {
         this.getMaskTabPanel2().setImgMask2(imgMask2);
     }
 

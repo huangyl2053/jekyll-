@@ -171,5 +171,7 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate konnkai_22;
     private FlexibleDate zennkai_22;
     private FlexibleDate zennnoma_22;
+    private RString ikenshoIraiRirekiNo;
+    private int ninteichosaIraiRirekiNo;
 
 }

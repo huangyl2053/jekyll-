@@ -233,7 +233,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
      */
     public ValidationMessageControlPairs 表示期間Fromと表示期間Toの前後順チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(YokaigoNinteiShinsakaiIchiranListMessage.終了日が開始日以前, div.getTxtHyojiKikanFrom(), div.getTxtHyojiKikanTo()));
+        validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiShinsakaiIchiranListMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
+                    div.getTxtHyojiKikanFrom().getText().toString(), div.getTxtHyojiKikanTo().getText().toString()), div.getTxtHyojiKikanFrom(), div.getTxtHyojiKikanTo()));
         return validationMessages;
     }
 
@@ -244,7 +245,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
      */
     public ValidationMessageControlPairs 該当データが存在のチェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(YokaigoNinteiShinsakaiIchiranListMessage.該当データが存在しません));
+        validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiShinsakaiIchiranListMessage(UrErrorMessages.該当データなし)));
         return validationMessages;
     }
 
@@ -256,10 +257,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         return RTime.of(0, 0, 0, 0);
     }
 
-    private enum YokaigoNinteiShinsakaiIchiranListMessage implements IValidationMessage {
-
-        該当データが存在しません(UrErrorMessages.該当データなし),
-        終了日が開始日以前(UrErrorMessages.終了日が開始日以前);
+    private static class YokaigoNinteiShinsakaiIchiranListMessage implements IValidationMessage {
 
         private final Message message;
 

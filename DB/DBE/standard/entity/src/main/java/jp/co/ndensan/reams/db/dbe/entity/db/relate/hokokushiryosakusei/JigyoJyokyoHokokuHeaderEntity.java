@@ -50,6 +50,8 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     private LasdecCode shichosonCode;
     @TempTableColumnOrder(9)
     private RString shichosonMeisho;
+    @TempTableColumnOrder(10)
+    private RString hihokenshaNo;
 
     /**
      * 二次判定年月のgetメソッドです。
@@ -214,6 +216,24 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     public void setNinteiShinseiHoreiKubunCode(Code ninteiShinseiHoreiKubunCode) {
         this.ninteiShinseiHoreiKubunCode = ninteiShinseiHoreiKubunCode;
     }
+    
+    /**
+     * 被保険者番号のgetメソッドです。
+     *
+     * @return the ninteiShinseiHoreiKubunCode
+     */
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /**
+     * 被保険者番号のsetメソッドです。
+     *
+     * @param hihokenshaNo the hihokenshaNo to set
+     */
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
 
     /**
      * {@inheritDoc}
@@ -231,6 +251,7 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
         this.setNinteiShinseiHoreiKubunCode(entity.getNinteiShinseiHoreiKubunCode());
         this.setShichosonCode(entity.getShichosonCode());
         this.setShichosonMeisho(entity.getShichosonMeisho());
+        this.setHihokenshaNo(entity.getHihokenshaNo());
     }
 
     /**
@@ -241,7 +262,7 @@ public class JigyoJyokyoHokokuHeaderEntity extends DbTableEntityBase<JigyoJyokyo
     @Override
     public RString getMd5() {
         return super.toMd5(nijiHanteiYM, nijiHanteiYokaigoJotaiKubunCode, hihokenshaKubunCode, age, shoKisaiHokenshaNo,
-                ninteiShinseiShinseijiKubunCode, ninteiShinseiHoreiKubunCode, shichosonCode, shichosonMeisho);
+                ninteiShinseiShinseijiKubunCode, ninteiShinseiHoreiKubunCode, shichosonCode, shichosonMeisho, hihokenshaNo);
     }
 // </editor-fold>
 }

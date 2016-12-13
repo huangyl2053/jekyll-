@@ -31,6 +31,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
     private static final int PAGECOUN = 15;
     private static final int MAXCOUNT = 30;
     private static final int PAGETWO_MAXCOUNT = 34;
+    private final boolean is審査会対象一覧印刷済み;
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
     private final IchijihanteikekkahyoA3Entity jimuTokkiTextA3Entity;
     private final JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho;
@@ -45,25 +46,23 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
      * @param reportId 帳票ＩＤ
+     * @param is審査会対象一覧印刷済み is審査会対象一覧印刷済み
      */
     public JimuShinsakaishiryoA3Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA3Entity jimuTokkiTextA3Entity, JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho,
-            JimuSonotashiryoBusiness sonotashiryoBusiness, RString reportId) {
+            JimuSonotashiryoBusiness sonotashiryoBusiness, RString reportId, boolean is審査会対象一覧印刷済み) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.jimuTokkiTextA3Entity = jimuTokkiTextA3Entity;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
         this.reportId = reportId;
+        this.is審査会対象一覧印刷済み = is審査会対象一覧印刷済み;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter) {
-        for (int i = 0; i < INT_25; i++) {
-            if (i < shinsakaishiryoList.size()) {
-                IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group1Editor(shinsakaishiryoList, i);
-                IJimuShinsakaishiryoA3Builder builder = new JimuShinsakaishiryoA3Builder(editor);
-                reportSourceWriter.writeLine(builder);
-            }
+        if (!is審査会対象一覧印刷済み) {
+            write審査対象者一覧(reportSourceWriter);
         }
         List<TokkiJikou> 短冊情報リスト = new ArrayList<>();
         List<RString> 短冊リスト = new ArrayList<>();
@@ -107,6 +106,16 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
                 IJimuShinsakaishiryoA3Editor editor2 = new JimuShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, 0);
                 IJimuShinsakaishiryoA3Builder builder2 = new JimuShinsakaishiryoA3Builder(editor2);
                 reportSourceWriter.writeLine(builder2);
+            }
+        }
+    }
+
+    private void write審査対象者一覧(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter) {
+        for (int i = 0; i < INT_25; i++) {
+            if (i < shinsakaishiryoList.size()) {
+                IJimuShinsakaishiryoA3Editor editor = new JimuShinsakaishiryoA3Group1Editor(shinsakaishiryoList, i);
+                IJimuShinsakaishiryoA3Builder builder = new JimuShinsakaishiryoA3Builder(editor);
+                reportSourceWriter.writeLine(builder);
             }
         }
     }

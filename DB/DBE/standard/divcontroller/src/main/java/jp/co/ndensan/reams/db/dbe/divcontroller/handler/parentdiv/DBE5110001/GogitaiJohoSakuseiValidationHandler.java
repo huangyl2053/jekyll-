@@ -73,7 +73,7 @@ public class GogitaiJohoSakuseiValidationHandler {
         }
         List<dgGogitaiIchiran_Row> rowList = div.getDgGogitaiIchiran().getDataSource();
         for (dgGogitaiIchiran_Row row : rowList) {
-            if (row.getGogitaiNumber().equals(div.getTxtGogitaiNumber().getValue())) {
+            if (row.getGogitaiNumber().getValue().equals(div.getTxtGogitaiNumber().getValue())) {
                 validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.既に登録済));
                 return validationMessages;
             }

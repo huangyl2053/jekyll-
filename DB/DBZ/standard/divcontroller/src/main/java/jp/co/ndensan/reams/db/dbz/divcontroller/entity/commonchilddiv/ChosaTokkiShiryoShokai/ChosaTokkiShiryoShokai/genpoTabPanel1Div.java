@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class genpoTabPanel1Div extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,7 +22,7 @@ public class genpoTabPanel1Div extends TabPanel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("imgGenpo1")
-    private StaticImage imgGenpo1;
+    private DynamicImage imgGenpo1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,7 +35,7 @@ public class genpoTabPanel1Div extends TabPanel {
      * @return imgGenpo1
      */
     @JsonProperty("imgGenpo1")
-    public StaticImage getImgGenpo1() {
+    public DynamicImage getImgGenpo1() {
         return imgGenpo1;
     }
 
@@ -44,7 +44,7 @@ public class genpoTabPanel1Div extends TabPanel {
      * @param imgGenpo1 imgGenpo1
      */
     @JsonProperty("imgGenpo1")
-    public void setImgGenpo1(StaticImage imgGenpo1) {
+    public void setImgGenpo1(DynamicImage imgGenpo1) {
         this.imgGenpo1 = imgGenpo1;
     }
 

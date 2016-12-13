@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,7 +32,7 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("radDataShutsuryokuUmu")
     private RadioButton radDataShutsuryokuUmu;
     @JsonProperty("txtHyojiDataLimit")
-    private TextBox txtHyojiDataLimit;
+    private TextBoxNum txtHyojiDataLimit;
     @JsonProperty("btnHyoji")
     private Button btnHyoji;
     @JsonProperty("btnClear")
@@ -123,7 +123,7 @@ public class KensakuJokenDiv extends Panel {
      * @return txtHyojiDataLimit
      */
     @JsonProperty("txtHyojiDataLimit")
-    public TextBox getTxtHyojiDataLimit() {
+    public TextBoxNum getTxtHyojiDataLimit() {
         return txtHyojiDataLimit;
     }
 
@@ -132,7 +132,7 @@ public class KensakuJokenDiv extends Panel {
      * @param txtHyojiDataLimit txtHyojiDataLimit
      */
     @JsonProperty("txtHyojiDataLimit")
-    public void setTxtHyojiDataLimit(TextBox txtHyojiDataLimit) {
+    public void setTxtHyojiDataLimit(TextBoxNum txtHyojiDataLimit) {
         this.txtHyojiDataLimit = txtHyojiDataLimit;
     }
 

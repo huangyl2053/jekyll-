@@ -157,10 +157,14 @@ public class ShinseiKensaku {
         RString 申請書管理番号 = row.getShinseishoKanriNo();
         int 認定調査履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
+        RString 被保険者番号 = row.getHihokenshaNo();
+        RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
@@ -168,12 +172,12 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
         if (MENUID_DBEMN24001.equals(menuID)) {
-            RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
-            RString 被保険者番号 = row.getHihokenshaNo();
             ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);

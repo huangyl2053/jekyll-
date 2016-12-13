@@ -18,47 +18,47 @@ public enum IchijiHanteiKekkaCode99 implements IIchijiHanteiKekkaCode {
     /**
      * コード:01 名称:非該 略称:無
      */
-    非該当("01", "非該"),
+    非該当("01", "非該当", "非該"),
     /**
      * コード:09 名称:み非 略称:無
      */
-    みなし非該当("09", "み非"),
+    みなし非該当("09", "みなし非該当", "み非"),
     /**
      * コード:11 名称:経介 略称:無
      */
-    経過的要介護("11", "経介"),
+    経過的要介護("11", "経過的要介護", "経介"),
     /**
      * コード:19 名称:み支 略称:無
      */
-    みなし要支援("19", "み支"),
+    みなし要支援("19", "みなし要支援", "み支"),
     /**
      * コード:21 名称:介1 略称:無
      */
-    要介護1("21", "介1"),
+    要介護1("21", "要介護１", "介1"),
     /**
      * コード:22 名称:介2 略称:無
      */
-    要介護2("22", "介2"),
+    要介護2("22", "要介護２", "介2"),
     /**
      * コード:23 名称:介3 略称:無
      */
-    要介護3("23", "介3"),
+    要介護3("23", "要介護３", "介3"),
     /**
      * コード:24 名称:介4 略称:無
      */
-    要介護4("24", "介4"),
+    要介護4("24", "要介護４", "介4"),
     /**
      * コード:25 名称:介5 略称:無
      */
-    要介護5("25", "介5");
+    要介護5("25", "要介護５", "介5");
 
     private final RString code;
     private final RString fullName;
     private final RString shortName;
 
-    private IchijiHanteiKekkaCode99(String code, String shortName) {
+    private IchijiHanteiKekkaCode99(String code, String fullname, String shortName) {
         this.code = new RString(code);
-        this.fullName = new RString(name());
+        this.fullName = new RString(fullname);
         this.shortName = new RString(shortName);
     }
 

@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -113,7 +114,9 @@ public class ShinsakaiTaishoshaHandler {
         List<dgTaishoshaIchiran_Row> listRow = new ArrayList();
         for (ShinsakaiTaishoshaBusiness shinsakaiTai : 一覧情報) {
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
-            row.setNo(new RString(String.valueOf(shinsakaiTai.getShinsakaiOrder())));
+            TextBoxNum no = new TextBoxNum();
+            no.setValue(Decimal.valueOf(shinsakaiTai.getShinsakaiOrder()));
+            row.setNo(no);
             row.setHokenshaNo(shinsakaiTai.getShoKisaiHokenshaNo());
             row.setHokenshaName(shinsakaiTai.getShichosonMeisho());
 

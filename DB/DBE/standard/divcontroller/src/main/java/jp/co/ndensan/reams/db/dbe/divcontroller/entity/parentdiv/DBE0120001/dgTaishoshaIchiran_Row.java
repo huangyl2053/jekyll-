@@ -3,16 +3,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 13 20:31:51 JST 2016 
+ * Mon Dec 12 11:07:36 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgTaishoshaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
 
     private Button shokai;
-    private RString no;
+    private TextBoxNum no;
     private RString hokenshaNo;
     private RString hokenshaName;
     private RString hihokenshaNumber;
@@ -49,7 +49,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public dgTaishoshaIchiran_Row() {
         super();
         this.shokai = new Button();
-        this.no = RString.EMPTY;
+        this.no = new TextBoxNum();
         this.hokenshaNo = RString.EMPTY;
         this.hokenshaName = RString.EMPTY;
         this.hihokenshaNumber = RString.EMPTY;
@@ -92,7 +92,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgTaishoshaIchiran_Row(Button shokai, RString no, RString hokenshaNo, RString hokenshaName, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, RString konkaiIchijiHantei, RString konkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString chosaKikan, RString chosain, TextBoxNum saiChosaIraiKaisu, RString iryoKikan, RString shujii, TextBoxNum saiSakuseiIraiKaisu, RString shinseishoKanriNo) {
+    public dgTaishoshaIchiran_Row(Button shokai, TextBoxNum no, RString hokenshaNo, RString hokenshaName, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, RString konkaiIchijiHantei, RString konkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString chosaKikan, RString chosain, TextBoxNum saiChosaIraiKaisu, RString iryoKikan, RString shujii, TextBoxNum saiSakuseiIraiKaisu, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("no", no);
@@ -142,7 +142,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         return shokai;
     }
 
-    public RString getNo() {
+    public TextBoxNum getNo() {
         return no;
     }
 
@@ -227,7 +227,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shokai = shokai;
     }
 
-    public void setNo(RString no) {
+    public void setNo(TextBoxNum no) {
         this.setOriginalData("no", no);
         this.no = no;
     }

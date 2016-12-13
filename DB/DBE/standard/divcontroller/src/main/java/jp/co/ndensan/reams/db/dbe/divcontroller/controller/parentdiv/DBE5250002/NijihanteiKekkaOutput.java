@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
@@ -56,9 +57,10 @@ public class NijihanteiKekkaOutput {
         nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
         nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
         nijiDiv.getKensakuJoken().getRadDataShutsuryokuUmu().setSelectedIndex(0);
-
-        nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(DbBusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+        nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(new Decimal(検索制御_最大取得件数.toString()));
         nijiDiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource().clear();
         CommonButtonHolder.setVisibleByCommonButtonFieldName(判定結果ボタン, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(連携ボタン, false);
@@ -76,6 +78,10 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_Btnkennsaku(NijihanteiKekkaOutputDiv nijiDiv) {
+        ValidationMessageControlPairs pairs = nijiDiv.getKensakuJoken().getCcdShinseishaFinder().validate();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(nijiDiv).addValidationMessages(pairs).respond();
+        }
         createHandlerOf(nijiDiv).kennsaku();
         return createResponseData(nijiDiv);
     }
@@ -111,12 +117,12 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_btnCheck(NijihanteiKekkaOutputDiv nijiDiv) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ValidationMessageControlPairs validPairs = getValidationHandler(nijiDiv).データ空チェック(validationMessages);
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs = getValidationHandler(nijiDiv).データ空チェック(validPairs);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(nijiDiv).addValidationMessages(validPairs).respond();
         }
-        validPairs = getValidationHandler(nijiDiv).未選択チェック(validationMessages);
+        validPairs = getValidationHandler(nijiDiv).未選択チェック(validPairs);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(nijiDiv).addValidationMessages(validPairs).respond();
         }

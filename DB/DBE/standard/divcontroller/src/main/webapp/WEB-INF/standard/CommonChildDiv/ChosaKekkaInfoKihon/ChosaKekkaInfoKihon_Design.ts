@@ -8,8 +8,16 @@ module DBE {
 
         export class Events {
 
+            public static onBeforeOpenDialog_btnShogaiKoreishaTokki(): string {
+                return "onBeforeOpenDialog_btnShogaiKoreishaTokki";
+            }
+
             public static onBeforeOpenDialog_btnChosaTokkiImageShokai(): string {
                 return "onBeforeOpenDialog_btnChosaTokkiImageShokai";
+            }
+
+            public static onBeforeOpenDialog_btnNinchiKoreishaTokki(): string {
+                return "onBeforeOpenDialog_btnNinchiKoreishaTokki";
             }
 
             public static onClick_btnReturn(): string {
@@ -69,16 +77,24 @@ module DBE {
                 return new UZA.DataGrid(this.convFiledName("dgKihonChosa"));
             }
 
-            public txtNinchishoNichijoSeikatsuJiritsudoCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
+            public btnShogaiKoreishaTokki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShogaiKoreishaTokki"));
+            }
+
+            public txtShogaiNichijoSeikatsuJiritsudoCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
             }
 
             public btnChosaTokkiImageShokai(): UZA.ButtonDialog {
                 return new UZA.ButtonDialog(this.convFiledName("btnChosaTokkiImageShokai"));
             }
 
-            public txtShogaiNichijoSeikatsuJiritsudoCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
+            public btnNinchiKoreishaTokki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnNinchiKoreishaTokki"));
+            }
+
+            public txtNinchishoNichijoSeikatsuJiritsudoCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
             }
 
             public btnReturn(): UZA.Button {

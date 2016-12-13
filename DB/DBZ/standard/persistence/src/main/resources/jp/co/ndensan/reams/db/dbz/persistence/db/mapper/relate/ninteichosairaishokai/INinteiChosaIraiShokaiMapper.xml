@@ -6,6 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteichosairaishokai.INinteiChosaIraiShokaiMapper">
 
     <resultMap id="result_NinteiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteichosairaishokai.NinteiChosaIraiShokaiRelateEntity" autoMapping="true">
+        <result column="koroshoIfShikibetsuCode" property="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result column="ninteiShinseiYMD" property="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result column="ninteiShinseiShinseijiKubunCode" property="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result column="torisageYMD" property="torisageYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -22,6 +23,7 @@
     <select resultOrdered="true" id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteichosairaishokai.NinteiChosaIraiShokaiParameter" fetchSize="500">
       SELECT
+           dbT5101."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode",
            dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
            dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",
            dbT5101."torisageYMD" AS "torisageYMD",

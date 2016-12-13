@@ -29,5 +29,6 @@ public class JigyoJyokyoHokokuEntity {
     private Code nijiHanteiYokaigoJotaiKubunCode;
     private RString hihokenshaKubunCode;
     private int countHokensha;
+    private RString hihokenshaNo;
 
 }

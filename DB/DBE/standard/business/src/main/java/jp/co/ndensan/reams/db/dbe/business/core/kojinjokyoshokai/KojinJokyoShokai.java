@@ -137,6 +137,25 @@ public class KojinJokyoShokai {
     public FlexibleDate get主治医意見書登録完了年月日() {
         return entity.getIkenshoTorokuKanryoYMD();
     }
+    
+    /**
+     * 主治医意見書作成依頼履歴番号を返します。
+     *
+     * @return 主治医意見書作成依頼履歴番号
+     */
+    public RString get主治医意見書作成依頼履歴番号() {
+        return entity.getIkenshoIraiRirekiNo();
+    }
+    
+    
+    /**
+     * 認定調査依頼履歴番号を返します。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int get認定調査依頼履歴番号() {
+        return entity.getNinteichosaIraiRirekiNo();
+    }
 
     /**
      * 要介護認定一次判定完了年月日を返します。

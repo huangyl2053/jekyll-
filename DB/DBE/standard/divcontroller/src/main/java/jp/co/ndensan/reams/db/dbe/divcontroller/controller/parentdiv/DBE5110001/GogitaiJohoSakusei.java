@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -252,16 +253,6 @@ public class GogitaiJohoSakusei {
     }
 
     /**
-     * 「審査会委員を選択する」ボタンをクリックの場合、認定審査会委員ガイドを表示します。
-     *
-     * @param div 合議体情報作成Div
-     * @return ResponseData<GogitaiJohoSakuseiDiv>
-     */
-    public ResponseData<GogitaiJohoSakuseiDiv> onBefore_btnShinsainSelect(GogitaiJohoSakuseiDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「割当審査会委員情報一覧」閉じるの場合、割当審査会委員情報一覧のデータを設定します。
      *
      * @param div 合議体情報作成Div
@@ -286,18 +277,10 @@ public class GogitaiJohoSakusei {
         if (!flag) {
             div.getDgShinsainList().getDataSource().add(
                     new dgShinsainList_Row(Boolean.FALSE, Boolean.FALSE, 介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
+        } else {
+                throw new ApplicationException(DbzErrorMessages.重複あり.getMessage().replace("審査会委員"));
         }
 
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「補欠審査会委員を選択する」ボタンをクリックの場合、認定審査会委員ガイドを表示します。
-     *
-     * @param div 合議体情報作成Div
-     * @return ResponseData<GogitaiJohoSakuseiDiv>
-     */
-    public ResponseData<GogitaiJohoSakuseiDiv> onBefore_btnSubShinsainSelect(GogitaiJohoSakuseiDiv div) {
         return ResponseData.of(div).respond();
     }
 
@@ -326,6 +309,8 @@ public class GogitaiJohoSakusei {
         if (!flag) {
             div.getDgHoketsuShinsainList().getDataSource().add(
                     new dgHoketsuShinsainList_Row(介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
+        } else {
+                 throw new ApplicationException(DbzErrorMessages.重複あり.getMessage().replace("審査会委員"));
         }
         return ResponseData.of(div).respond();
     }

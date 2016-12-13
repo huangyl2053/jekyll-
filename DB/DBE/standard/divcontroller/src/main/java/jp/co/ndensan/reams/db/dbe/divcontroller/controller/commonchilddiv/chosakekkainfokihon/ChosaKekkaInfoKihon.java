@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.chosakekkainfokihon;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBusiness;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekka
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfokihon.ChosaKekkaInfoKihonFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査結果情報照会_基本調査取得処理。
@@ -73,6 +75,29 @@ public class ChosaKekkaInfoKihon {
      * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
      */
     public ResponseData<ChosaKekkaInfoKihonDiv> onBeforeOpenDialog_btnChosaTokkiImageShokai(ChosaKekkaInfoKihonDiv div) {
+        div.setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(getHandler(div).getA4イメージ特記事項番号List()));
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 障害高齢者の特記事項ボタンを押下します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
+     */
+    public ResponseData<ChosaKekkaInfoKihonDiv> onBeforeOpenDialog_btnShogaiKoreishaTokki(ChosaKekkaInfoKihonDiv div) {
+        div.setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(getHandler(div).get障害高齢者自立度特記事項番号List()));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 認知症高齢者の特記事項ボタンを押下します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<ChosaKekkaInfoGaikyoDiv>
+     */
+    public ResponseData<ChosaKekkaInfoKihonDiv> onBeforeOpenDialog_btnNinchiKoreishaTokki(ChosaKekkaInfoKihonDiv div) {
+        div.setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(getHandler(div).get認知症高齢者自立度特記事項番号List()));
         return ResponseData.of(div).respond();
     }
 
