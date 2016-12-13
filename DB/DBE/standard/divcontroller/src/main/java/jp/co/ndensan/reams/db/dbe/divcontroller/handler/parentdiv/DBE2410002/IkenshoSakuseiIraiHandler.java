@@ -99,6 +99,7 @@ public class IkenshoSakuseiIraiHandler {
     private static final RString 連結 = new RString("～");
     private static final RString 初期連番 = new RString("*000001#");
     private static final RString CONFIGVALUE1 = new RString("1");
+    private static final RString 指定医 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -130,13 +131,19 @@ public class IkenshoSakuseiIraiHandler {
         if (主治医意見書作成依頼.get主治医意見書作成依頼年月日() != null && !主治医意見書作成依頼.get主治医意見書作成依頼年月日().isEmpty()) {
             div.getTxtSakuseiIraiD().setValue(new RDate(主治医意見書作成依頼.get主治医意見書作成依頼年月日().toString()));
         }
+
+        boolean is指定医 = false;
+        if (主治医意見書作成依頼.get医師区分コード() != null && 指定医.equals(主治医意見書作成依頼.get医師区分コード().value())) {
+            is指定医 = true;
+        }
+
         RString 意見書作成依頼書 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼書);
         RString 意見書作成依頼一覧表 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼一覧表);
         RString 主治医意見書作成依頼発行一覧表 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_依頼書発行履歴一覧表);
         RString 主治医意見書記入用紙 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙);
         RString 主治医意見書記入用紙OCR = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR);
-        RString 主治医意見書作成料請求書 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書作成料請求書);
-        RString 介護保険診断命令書 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_介護保険診断命令書);
+        RString 主治医意見書作成料請求書 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書作成料請求書);        
+        RString 介護保険診断命令書 = !is指定医 ? RString.EMPTY : getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_介護保険診断命令書);
         RString 介護保険指定医依頼兼主治医意見書提出意見書 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書);
         RString 主治医意見書依頼該当者履歴一覧 = getConfigValue(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書依頼該当者履歴一覧);
         RString 意見書用紙タイプ = getConfigValue(ConfigNameDBE.意見書用紙タイプ);
