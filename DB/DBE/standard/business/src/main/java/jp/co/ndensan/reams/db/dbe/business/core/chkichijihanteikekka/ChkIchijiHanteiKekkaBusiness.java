@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser21;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser22;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
@@ -53,7 +54,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
     private static final RString 介護給付 = new RString("介護給付サービス");
     private static final RString 回月 = new RString("回 /月");
     private static final RString 日月 = new RString("日 /月");
-    private static final RString 住宅改修 = new RString("住宅改修                                           ：");
+    private static final RString 住宅改修 = new RString("住宅改修                                    ：");
     private static final RString 訪問介護_ホームヘルプサービス = new RString("訪問介護（ホームヘルプサービス）            ：");
     private static final RString 訪問入浴介護 = new RString("訪問入浴介護                                ：");
     private static final RString 訪問看護 = new RString("訪問看護                                    ：");
@@ -1082,7 +1083,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
             bodyItem.setサービス回数11(getサービス連番の状況(dbt5207Entity, 連番10).concat(品目));
             bodyItem.setサービス回数12(getサービス連番の状況(dbt5207Entity, 連番11).concat(品目_6月間));
             bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? new RString("1") : new RString("0"));
+                    ? IsJutakuKaishu.あり.get名称() : IsJutakuKaishu.なし.get名称());
             bodyItem.setサービス回数14(getサービス連番の状況(dbt5207Entity, 連番13).concat(日月));
             bodyItem.setサービス回数15(getサービス連番の状況(dbt5207Entity, 連番14).concat(日月));
             bodyItem.setサービス回数16(getサービス連番の状況(dbt5207Entity, 連番15).concat(日月));
