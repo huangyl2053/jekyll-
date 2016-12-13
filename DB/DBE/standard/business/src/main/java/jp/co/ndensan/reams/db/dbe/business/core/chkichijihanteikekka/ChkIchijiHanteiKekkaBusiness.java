@@ -1252,8 +1252,8 @@ public final class ChkIchijiHanteiKekkaBusiness {
 
     private static RString 文字数揃え(RString target) {
         RStringBuilder rsb = new RStringBuilder(target);
-        for (int i = rsb.length(); i <= 現在のサービス利用状況_最大文字数; i++) {
-            rsb.insert(0, " ");
+        for (int i = rsb.length(); i < 現在のサービス利用状況_最大文字数; i++) {
+            rsb.insert(0, "　");
         }
         return rsb.toRString();
     }
