@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chkichijihanteikekka.ChkIchijiHanteiKekkaBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.StackedBarChart;
 import jp.co.ndensan.reams.db.dbe.business.report.ichijihanteikekkahyo.IchijihanteikekkahyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
@@ -71,13 +70,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.image.BarImageType;
+import jp.co.ndensan.reams.uz.uza.image.EachBarImage;
+import jp.co.ndensan.reams.uz.uza.image.StackBarImage;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 
@@ -214,6 +216,8 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private static final int 連番84 = 84;
     private static final int COUNT_15 = 15;
     private static final int COUNT_20 = 20;
+    private static final int IMAGE_WIDTH = 512;
+    private static final int IMAGE_HEIGHT = 40;
     List<RString> list;
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
     List<DbT5211NinteichosahyoChosaItemEntity> 調査項目;
@@ -1599,33 +1603,67 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set特定疾病名(RString.isNullOrEmpty(entity.get特定疾病()) ? RString.EMPTY : TokuteiShippei.toValue(remove半角スペース(entity.get特定疾病())).get名称());
         ichijiEntity.set状態像名称(RString.isNullOrEmpty(entity.get要介護状態像例コード()) ? RString.EMPTY
                 : YokaigoJotaizoReiCode.toValue(remove半角スペース(entity.get要介護状態像例コード())).get名称());
-        ichijiEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
-        RDateTime 日期 = RDate.getNowDateTime();
-        RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
-                .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
-//        new StackedBarChart(getNumber(entity.get要介護認定等基準時間_食事()),
-//                getNumber(entity.get要介護認定等基準時間_排泄()), getNumber(entity.get要介護認定等基準時間_移動()),
-//                getNumber(entity.get要介護認定等基準時間_清潔保持()), getNumber(entity.get要介護認定等基準時間_間接ケア()),
-//                getNumber(entity.get要介護認定等基準時間_BPSD関連()), getNumber(entity.get要介護認定等基準時間_機能訓練()),
-//                getNumber(entity.get要介護認定等基準時間_医療関連()), getNumber(entity.get要介護認定等基準時間_認知症加算()),
-//                文件名, batchWrite.getImageFolderPath());
-//        ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
-        ichijiEntity.set要介護認定等基準時間イメージ(RString.EMPTY);
-        ichijiEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
-        ichijiEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
-        ichijiEntity.set要介護認定等基準時間_移動(entity.get要介護認定等基準時間_移動());
-        ichijiEntity.set要介護認定等基準時間_清潔保持(entity.get要介護認定等基準時間_清潔保持());
-        ichijiEntity.set要介護認定等基準時間_間接(entity.get要介護認定等基準時間_間接ケア());
-        ichijiEntity.set要介護認定等基準時間_BPSD関連(entity.get要介護認定等基準時間_BPSD関連());
-        ichijiEntity.set要介護認定等基準時間_機能訓練(entity.get要介護認定等基準時間_機能訓練());
-        ichijiEntity.set要介護認定等基準時間_医療関連(entity.get要介護認定等基準時間_医療関連());
-        ichijiEntity.set要介護認定等基準時間_認知症加算(entity.get要介護認定等基準時間_認知症加算());
+        ichijiEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間().toString()).divide(10).toString()));
+        List<EachBarImage> imageList = new ArrayList();
+        if (0 < getNumber(entity.get要介護認定等基準時間_食事())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_食事()), BarImageType.PATTERN1));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_排泄())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_排泄()), BarImageType.PATTERN2));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_移動())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_移動()), BarImageType.PATTERN3));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_清潔保持())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_清潔保持()), BarImageType.PATTERN4));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_間接ケア())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_間接ケア()), BarImageType.PATTERN5));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_BPSD関連())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_BPSD関連()), BarImageType.PATTERN6));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_機能訓練())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_機能訓練()), BarImageType.PATTERN7));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_医療関連())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_医療関連()), BarImageType.PATTERN8));
+        }
+        if (0 < getNumber(entity.get要介護認定等基準時間_認知症加算())) {
+            imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_認知症加算()), BarImageType.PATTERN9));
+        }
+        RString path = new StackBarImage().createHorizontalBarImage(IMAGE_WIDTH, IMAGE_HEIGHT, imageList);
+        ichijiEntity.set要介護認定等基準時間イメージ(path);
+        ichijiEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_食事().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_排泄().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_移動(entity.get要介護認定等基準時間_移動() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_移動().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_清潔保持(entity.get要介護認定等基準時間_清潔保持() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_清潔保持().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_間接(entity.get要介護認定等基準時間_間接ケア() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_間接ケア().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_BPSD関連(entity.get要介護認定等基準時間_BPSD関連() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_BPSD関連().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_機能訓練(entity.get要介護認定等基準時間_機能訓練() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_機能訓練().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_医療関連(entity.get要介護認定等基準時間_医療関連() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_医療関連().toString()).divide(10).toString()));
+        ichijiEntity.set要介護認定等基準時間_認知症加算(entity.get要介護認定等基準時間_認知症加算() == null ? new RString("0")
+                : new RString(new Decimal(entity.get要介護認定等基準時間_認知症加算().toString()).divide(10).toString()));
         ichijiEntity.set警告コード(entity.get警告コード());
-        ichijiEntity.set中間評価項目得点第1群(entity.get中間評価項目得点第1群());
-        ichijiEntity.set中間評価項目得点第2群(entity.get中間評価項目得点第2群());
-        ichijiEntity.set中間評価項目得点第3群(entity.get中間評価項目得点第3群());
-        ichijiEntity.set中間評価項目得点第4群(entity.get中間評価項目得点第4群());
-        ichijiEntity.set中間評価項目得点第5群(entity.get中間評価項目得点第5群());
+        ichijiEntity.set中間評価項目得点第1群(entity.get中間評価項目得点第1群() == null ? new RString("0")
+                : new RString(new Decimal(entity.get中間評価項目得点第1群().toString()).divide(10).toString()));
+        ichijiEntity.set中間評価項目得点第2群(entity.get中間評価項目得点第2群() == null ? new RString("0")
+                : new RString(new Decimal(entity.get中間評価項目得点第2群().toString()).divide(10).toString()));
+        ichijiEntity.set中間評価項目得点第3群(entity.get中間評価項目得点第3群() == null ? new RString("0")
+                : new RString(new Decimal(entity.get中間評価項目得点第3群().toString()).divide(10).toString()));
+        ichijiEntity.set中間評価項目得点第4群(entity.get中間評価項目得点第4群() == null ? new RString("0")
+                : new RString(new Decimal(entity.get中間評価項目得点第4群().toString()).divide(10).toString()));
+        ichijiEntity.set中間評価項目得点第5群(entity.get中間評価項目得点第5群() == null ? new RString("0")
+                : new RString(new Decimal(entity.get中間評価項目得点第5群().toString()).divide(10).toString()));
         ichijiEntity.set認定調査結果認知症高齢者自立度(RString.isNullOrEmpty(entity.get認知症高齢者自立度()) ? RString.EMPTY
                 : NinchishoNichijoSeikatsuJiritsudoCode.toValue(remove半角スペース(entity.get認知症高齢者自立度())).get名称());
         ichijiEntity.set認知症自立度Ⅱ以上の蓋然性(entity.get蓋然性());
@@ -1648,7 +1686,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private void setマスキング情報(IchijihanteikekkahyoEntity ichijiEntity, YokaigoninteiEntity entity) {
         boolean マスキングあり = マスキング_あり.equals(processPrm.getRadIchijiHanteiMasking());
         ichijiEntity.set氏名(マスキングあり ? RString.EMPTY : entity.get被保険者氏名());
-        ichijiEntity.set被保険者番号(マスキングあり ? RString.EMPTY : entity.get被保険者氏名());
+        ichijiEntity.set被保険者番号(マスキングあり ? RString.EMPTY : entity.get被保険者番号());
         ichijiEntity.set保険者番号(マスキングあり ? RString.EMPTY : entity.get保険者番号());
         ichijiEntity.set所属(マスキングあり ? RString.EMPTY : entity.get所属());
         ichijiEntity.set市町村名(マスキングあり ? RString.EMPTY : entity.get市町村名());
@@ -1664,10 +1702,6 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set医療機関名称(マスキングあり ? RString.EMPTY : entity.get医療機関名称());
         ichijiEntity.set主治医番号(マスキングあり ? RString.EMPTY : entity.get主治医コード());
         ichijiEntity.set主治医氏名(マスキングあり ? RString.EMPTY : entity.get主治医氏名());
-    }
-
-    private RString get文件名(int 日期) {
-        return new RString(日期);
     }
 
     private RString remove半角スペース(RString 調査員資格コード) {
@@ -1714,7 +1748,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
 
     private int getNumber(RString 各基準時間) {
         if (!RString.isNullOrEmpty(各基準時間)) {
-            return Integer.parseInt(各基準時間.toString());
+            return Integer.parseInt(各基準時間.toString()) * 5 / 12;
         } else {
             return 0;
         }

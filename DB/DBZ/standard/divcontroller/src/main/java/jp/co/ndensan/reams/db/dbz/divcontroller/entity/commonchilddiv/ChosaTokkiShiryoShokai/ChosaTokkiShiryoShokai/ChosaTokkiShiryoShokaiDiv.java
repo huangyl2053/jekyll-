@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokk
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -606,8 +609,13 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                 if (imgGneponPathList.size() >= 1) {
                     getGenpoTabContainer().getGenpoTabPanel1().setVisible(true);
                     getGenpoTabContainer().getGenpoTabPanel1().setTitle(genponTitleList.get(0));
-                    byte[] fileContentBytes = Files.readAllBytes(Paths.get(imgGneponPathList.get(0).toString()));
-                    getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setImage(fileContentBytes);
+                    File file = new File(imgGneponPathList.get(0).toString());
+                    byte[] ninteiImage = new byte[(int) file.length()];
+                    try (FileInputStream fis = new FileInputStream(file);
+                            BufferedInputStream bis = new BufferedInputStream(fis)) {
+                        bis.read(ninteiImage);
+                    }
+                    getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setImage(ninteiImage);
                     if (RString.isNullOrEmpty(imgGneponPathList.get(0))) {
                         getGenpoTabContainer().getGenpoTabPanel1().setDisabled(true);
                     }
@@ -675,8 +683,13 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
                     getMaskTabContainer().getMaskTabPanel1().setVisible(true);
                     getMaskTabContainer().getMaskTabPanel1().setTitle(maskTitleList.get(0));
                     if (!RString.isNullOrEmpty(imgMaskPathList.get(0))) {
-                        byte[] fileContentBytes = Files.readAllBytes(Paths.get(imgGneponPathList.get(0).toString()));
-                        getMaskTabContainer().getMaskTabPanel1().getImgMask1().setImage(fileContentBytes);
+                        File file = new File(imgMaskPathList.get(0).toString());
+                        byte[] ninteiImage = new byte[(int) file.length()];
+                        try (FileInputStream fis = new FileInputStream(file);
+                                BufferedInputStream bis = new BufferedInputStream(fis)) {
+                            bis.read(ninteiImage);
+                        }
+                        getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setImage(ninteiImage);
                     } else {
                         getMaskTabContainer().getMaskTabPanel1().getImgMask1().setDisplayNone(true);
                         getMaskTabContainer().getMaskTabPanel1().getLabelNoImage1().setDisplayNone(false);
