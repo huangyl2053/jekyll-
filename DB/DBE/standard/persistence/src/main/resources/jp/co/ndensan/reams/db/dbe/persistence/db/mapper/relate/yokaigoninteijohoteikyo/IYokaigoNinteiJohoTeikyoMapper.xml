@@ -38,7 +38,7 @@
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS B
             ON A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
         WHERE
-            A."hihokenshaNo" = #{被保険者番号}
+            A."shinseishoKanriNo" = #{被保険者番号}
         ORDER BY
             A."ninteiShinseiYMD" DESC
             LIMIT(1)
@@ -681,7 +681,7 @@
             ,Zenku_DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD" AS 前々回認定有効期間_終了
             ,DbT5101NinteiShinseiJoho."chikuCode" AS 所属
             ,DbT7051KoseiShichosonMaster."shichosonMeisho" AS 市町村名
-            ,DbT5910NinteichosaItakusakiJoho."jigyoshaNo" AS 事業者番号
+            ,DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" AS 事業者番号
             ,DbT5913ChosainJoho."ninteiChosainCode" AS 認定調査員コード
             ,DbT5913ChosainJoho."chosainShikaku" AS 調査員資格
             ,DbT5116IchijiHanteiKekkaJoho."kijunJikan" AS 要介護認定等基準時間

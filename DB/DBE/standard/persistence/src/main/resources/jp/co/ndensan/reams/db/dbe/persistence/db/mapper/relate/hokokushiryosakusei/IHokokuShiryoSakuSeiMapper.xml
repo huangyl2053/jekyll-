@@ -512,7 +512,7 @@
         ) AS shinsakaiKaisaiNoCount
         <choose>
             <when test="!isEmptyHokensyaNo">
-                ,rshare."UDD023LasdecCode" #{hokensyaNo} AS "shichosonCode"
+                ,rgdb."DbUDD015ShoKisaiHokenshaNo" #{hokensyaNo} AS "shoKisaiHokenshaNo"
                 ,(
                 SELECT DbT7051."shichosonCode"
                 FROM rgdb."DbT7051KoseiShichosonMaster" DbT7051
