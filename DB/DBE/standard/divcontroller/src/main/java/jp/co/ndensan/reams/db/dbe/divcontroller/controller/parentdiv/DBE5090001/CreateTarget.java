@@ -249,6 +249,16 @@ public class CreateTarget {
     }
 
     /**
+     * 再検索するBTNをクリックした場合の処理です。前画面に戻ります。
+     *
+     * @param div CreateTargetDiv
+     * @return ResponseData<CreateTargetDiv>
+     */
+    public ResponseData<CreateTargetDiv> onClick_btnResearch(CreateTargetDiv div) {
+        return ResponseData.of(div).setState(DBE5090001StateName.初期状態);
+    }
+
+    /**
      * データ出力するボタンが押下された場合、ＣＳＶを出力します。
      *
      * @param div CreateTargetDiv
