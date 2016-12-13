@@ -105,8 +105,6 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
         batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
                 .addBreak(new BreakerCatalog<ShujiiikenshoReportSource>().new SimpleLayoutBreaker(
 
-
-
                     ShujiiikenshoReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<ShujiiikenshoReportSource> occuredBreak(
@@ -209,7 +207,10 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
         if (sharedFileId != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+            try {
+                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+            } catch (Exception e) {
+            }
         }
     }
 

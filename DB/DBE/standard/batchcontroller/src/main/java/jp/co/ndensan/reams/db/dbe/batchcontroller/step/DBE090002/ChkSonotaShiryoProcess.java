@@ -175,7 +175,10 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
         if (sharedFileId != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+            try {
+                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+            } catch (Exception e) {
+            }
         }
     }
 
