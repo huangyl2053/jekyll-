@@ -1603,8 +1603,6 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         RDateTime 日期 = RDate.getNowDateTime();
         RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
                 .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
-        //TODO n8178 城間 グラフ機能以外の箇所を動作確認するために一時的にコメントアウト。
-        System.setProperty("java.awt.headless", "true");
         new StackedBarChart(getNumber(entity.get要介護認定等基準時間_食事()),
                 getNumber(entity.get要介護認定等基準時間_排泄()), getNumber(entity.get要介護認定等基準時間_移動()),
                 getNumber(entity.get要介護認定等基準時間_清潔保持()), getNumber(entity.get要介護認定等基準時間_間接ケア()),
@@ -1612,7 +1610,6 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 getNumber(entity.get要介護認定等基準時間_医療関連()), getNumber(entity.get要介護認定等基準時間_認知症加算()),
                 文件名, batchWrite.getImageFolderPath());
         ichijiEntity.set要介護認定等基準時間イメージ(new RString(文件名 + ".png"));
-        ichijiEntity.set要介護認定等基準時間イメージ(RString.EMPTY);
         ichijiEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
         ichijiEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
         ichijiEntity.set要介護認定等基準時間_移動(entity.get要介護認定等基準時間_移動());
