@@ -90,7 +90,7 @@ public class ShinchokuDataOutput {
     }
 
     /**
-     * 画面入力項目をクリアする。
+     * 「検索」ボタン押下
      *
      * @param div 要介護認定進捗情報データ出力div
      * @return ResponseData<ShinchokuDataOutputDiv>
