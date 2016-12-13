@@ -174,6 +174,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             div.getDgNinteiChosa().setDataSource(rowList);
             setDisableToNinteiChosaChk();
+            RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                    div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+            if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
+                div.getRadTeishutsuKigen().setDisabled(true);
+            } else {
+                div.getRadTeishutsuKigen().setDisabled(false);
+            }
         } else {
             div.getNinteiChosa().setDisplayNone(true);
             div.getShujiiIkensho().setDisplayNone(false);
@@ -205,14 +213,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
             setDisableToShujiiIkenshoChk();
-        }
-        RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード());
-        if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
-            div.getRadTeishutsuKigen().setDisabled(true);
-        } else {
-            div.getRadTeishutsuKigen().setDisabled(false);
+            RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                    div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+            if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
+                div.getRadTeishutsuKigen().setDisabled(true);
+            } else {
+                div.getRadTeishutsuKigen().setDisabled(false);
+            }
         }
         div.setHiddenData(getInputData());
     }

@@ -175,6 +175,14 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onClick_btnIraiAuto(NinteichosaIraiDiv requestDiv) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnIraiAuto();
+        ValidationMessageControlPair 自動割付可能チェック = 自動割付可能チェック(requestDiv);
+        if (自動割付可能チェック != null) {
+            vallidation.add(自動割付可能チェック);
+        }
+        if (vallidation.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -183,14 +191,6 @@ public class NinteichosaIrai {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnIraiAuto();
-            ValidationMessageControlPair 自動割付可能チェック = 自動割付可能チェック(requestDiv);
-            if (自動割付可能チェック != null) {
-                vallidation.add(自動割付可能チェック);
-            }
-            if (vallidation.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-            }
             int 要割付人数 = 調査機関自動割付処理(requestDiv);
             if (要割付人数 > 0) {
                 return ResponseData.of(requestDiv).addMessage(new InformationMessage(
@@ -338,7 +338,11 @@ public class NinteichosaIrai {
      * @param requestDiv 完了処理・認定調査依頼Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnWaritukeShudo(NinteichosaIraiDiv requestDiv) {
+    public ResponseData onClick_btnWaritukeShudo(NinteichosaIraiDiv requestDiv) { 
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnWaritukeShudo();
+        if (vallidation.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -347,10 +351,6 @@ public class NinteichosaIrai {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnWaritukeShudo();
-            if (vallidation.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-            }
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
@@ -391,8 +391,7 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onOkClose_btnIraishoToOutput(NinteichosaIraiDiv requestDiv) {
-        getHandler(requestDiv).onLoad();
-        return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
@@ -402,6 +401,10 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onClick_btnChousaIraiKanryo(NinteichosaIraiDiv requestDiv) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChousaIraiKanryo();
+        if (vallidation.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -410,10 +413,6 @@ public class NinteichosaIrai {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChousaIraiKanryo();
-            if (vallidation.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-            }
             if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
                 requestDiv.setReadOnly(true);
                 throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
