@@ -54,7 +54,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -278,7 +278,7 @@ public class GogitaiJohoSakusei {
             div.getDgShinsainList().getDataSource().add(
                     new dgShinsainList_Row(Boolean.FALSE, Boolean.FALSE, 介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
         } else {
-                throw new ApplicationException(DbzErrorMessages.重複あり.getMessage().replace("審査会委員"));
+            throw new ApplicationException(UrErrorMessages.設定不可.getMessage().replace("指定した審査会委員は既に割当されているため"));
         }
 
         return ResponseData.of(div).respond();
@@ -310,7 +310,7 @@ public class GogitaiJohoSakusei {
             div.getDgHoketsuShinsainList().getDataSource().add(
                     new dgHoketsuShinsainList_Row(介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
         } else {
-                 throw new ApplicationException(DbzErrorMessages.重複あり.getMessage().replace("審査会委員"));
+            throw new ApplicationException(UrErrorMessages.設定不可.getMessage().replace("指定した審査会委員は既に割当されているため"));
         }
         return ResponseData.of(div).respond();
     }
@@ -382,7 +382,6 @@ public class GogitaiJohoSakusei {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
         if (JYOTAI_CODE_ADD.equals(jyotai)) {
-//            validationMessages.add(getValidationHandler(div).gogitaiNoKetaiCheck());
             validationMessages.add(getValidationHandler(div).gogitaiNoJuuhukuCheck());
         }
         validationMessages.add(getValidationHandler(div).gogitaichoPersonNumCheck());

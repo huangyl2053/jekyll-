@@ -45,21 +45,6 @@ public class GogitaiJohoSakuseiValidationHandler {
 
     /**
      *
-     * 合議体Noの桁数をチェックします。
-     *
-     * @return ValidationMessageControlPairs
-     */
-//    public ValidationMessageControlPairs gogitaiNoKetaiCheck() {
-//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-//        if (div.getTxtGogitaiNumber().getValue().length() != 2) {
-//            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.桁数が不正));
-//        }
-//
-//        return validationMessages;
-//    }
-
-    /**
-     *
      * 合議体Noの重複をチェックします。
      *
      * @return ValidationMessageControlPairs
@@ -265,7 +250,7 @@ public class GogitaiJohoSakuseiValidationHandler {
 
         return validPairs;
     }
-    
+
     private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;
@@ -279,7 +264,7 @@ public class GogitaiJohoSakuseiValidationHandler {
             return message;
         }
     }
-        
+
     private static enum GogitaiJohoSakuseiMessages implements IValidationMessage {
 
         桁数が不正(UrErrorMessages.桁数が不正, "合議体No", "2"),
