@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -19,9 +20,11 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -70,7 +73,7 @@ public class ChosaTokkiImageShokaiHandler {
         private TokkiJikoFileName(RString fileName) {
             this.fileName = fileName;
         }
-        
+
         /**
          * ファイル名称を返します。
          *
@@ -120,6 +123,14 @@ public class ChosaTokkiImageShokaiHandler {
         RString pathマスク = RString.EMPTY;
         List<RString> imgGenponPathList = new ArrayList<>();
         List<RString> imgMaskPathList = new ArrayList<>();
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
+        RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
+        RString ローカルファイル名 = new RString("IMG");
+        RString 出力イメージフォルダパス = RString.EMPTY;
+        if (イメージ情報 != null) {
+            出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
+        }
 
         for (NinteichosahyoTokkijiko 認定調査特記事項Entity : 認定調査特記事項EntityList) {
             if (!RString.isNullOrEmpty(前回認定調査特記事項番号)
@@ -132,15 +143,19 @@ public class ChosaTokkiImageShokaiHandler {
             }
 
             if (GenponMaskKubun.マスク.getコード().equals(認定調査特記事項Entity.get原本マスク区分().value())) {
-                pathマスク = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), false);
+                pathマスク = getImagePath(出力イメージフォルダパス, ローカルファイル名,
+                        認定調査特記事項Entity.get認定調査特記事項番号(), false);
                 if (!RString.isNullOrEmpty(path原本)) {
-                    path原本 = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), true);
+                    path原本 = getImagePath(出力イメージフォルダパス, ローカルファイル名,
+                            認定調査特記事項Entity.get認定調査特記事項番号(), true);
                 }
             } else {
                 if (RString.isNullOrEmpty(pathマスク)) {
-                    path原本 = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), false);
+                    path原本 = getImagePath(出力イメージフォルダパス, ローカルファイル名,
+                            認定調査特記事項Entity.get認定調査特記事項番号(), false);
                 } else {
-                    path原本 = getImagePath(イメージ情報, 認定調査特記事項Entity.get認定調査特記事項番号(), true);
+                    path原本 = getImagePath(出力イメージフォルダパス, ローカルファイル名,
+                            認定調査特記事項Entity.get認定調査特記事項番号(), true);
                 }
             }
 
@@ -156,25 +171,55 @@ public class ChosaTokkiImageShokaiHandler {
         div.getCcdChosaTokkiShiryoShokai().initialize(imgGenponPathList, imgMaskPathList, tabTitleGenponList, tabTitleMaskList);
     }
 
-    private RString getImagePath(Image イメージ情報, RString 特記事項番号, boolean isExistマスク) {
+    private RString getImagePath(RString 出力イメージフォルダパス, RString ローカルファイル名,
+            RString 特記事項番号, boolean isExistマスク) {
         if (特記資料1.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料1.getfileName(), isExistマスク));
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料1.getfileName(), isExistマスク));
         } else if (特記資料2.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料2.getfileName(), isExistマスク));            
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料2.getfileName(), isExistマスク));
         } else if (特記資料3.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料3.getfileName(), isExistマスク));            
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料3.getfileName(), isExistマスク));
         } else if (特記資料4.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料4.getfileName(), isExistマスク));            
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料4.getfileName(), isExistマスク));
         } else if (特記資料5.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料5.getfileName(), isExistマスク));            
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料5.getfileName(), isExistマスク));
         } else if (特記資料6.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料6.getfileName(), isExistマスク));            
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料6.getfileName(), isExistマスク));
         } else if (特記資料7.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料7.getfileName(), isExistマスク));            
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料7.getfileName(), isExistマスク));
         } else if (特記資料8.equals(特記事項番号)) {
-            return 共有ファイルを引き出す(イメージ情報, replaceShareFileName(TokkiJikoFileName.特記資料8.getfileName(), isExistマスク));            
+            return getFilePath(出力イメージフォルダパス, ローカルファイル名, replaceShareFileName(
+                    TokkiJikoFileName.特記資料8.getfileName(), isExistマスク));
         }
         return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
+        RString 出力イメージフォルダパス = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"),
+                new RString("db#dbe"), new RString("WEB-INF"), new RString("image"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                        イメージ情報.getイメージ共有ファイルID());
+        deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
+        return SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).toRString();
+    }
+
+    private void deleteIMGDirecotry(RString 出力イメージパス, RString ローカルファイル名) {
+        Directory.deleteIfExists(Path.combinePath(出力イメージパス, ローカルファイル名));
     }
 
     private RString 共有ファイルを引き出す(Image イメージ情報, RString ファイル名) {

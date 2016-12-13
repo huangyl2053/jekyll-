@@ -280,7 +280,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo1 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo1"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo1"));
             };
 
             Controls.prototype.maskPanel1 = function () {
@@ -288,7 +288,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking1 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking1"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking1"));
             };
 
             Controls.prototype.LabelNoImage1 = function () {
@@ -312,7 +312,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo2 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo2"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo2"));
             };
 
             Controls.prototype.maskPanel2 = function () {
@@ -320,7 +320,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking2 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking2"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking2"));
             };
 
             Controls.prototype.LabelNoImage2 = function () {
@@ -344,7 +344,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo3 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo3"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo3"));
             };
 
             Controls.prototype.maskPanel3 = function () {
@@ -352,7 +352,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking3 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking3"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking3"));
             };
 
             Controls.prototype.LabelNoImage3 = function () {
@@ -376,7 +376,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo4 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo4"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo4"));
             };
 
             Controls.prototype.maskPanel4 = function () {
@@ -384,7 +384,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking4 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking4"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking4"));
             };
 
             Controls.prototype.LabelNoImage4 = function () {
@@ -408,7 +408,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo5 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo5"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo5"));
             };
 
             Controls.prototype.maskPanel5 = function () {
@@ -416,7 +416,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking5 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking5"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking5"));
             };
 
             Controls.prototype.LabelNoImage5 = function () {
@@ -440,7 +440,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo6 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo6"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo6"));
             };
 
             Controls.prototype.maskPanel6 = function () {
@@ -448,7 +448,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking6 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking6"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking6"));
             };
 
             Controls.prototype.LabelNoImage6 = function () {
@@ -472,7 +472,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo7 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo7"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo7"));
             };
 
             Controls.prototype.maskPanel7 = function () {
@@ -480,7 +480,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking7 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking7"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking7"));
             };
 
             Controls.prototype.LabelNoImage7 = function () {
@@ -504,7 +504,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo8 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo8"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo8"));
             };
 
             Controls.prototype.maskPanel8 = function () {
@@ -512,7 +512,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking8 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking8"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking8"));
             };
 
             Controls.prototype.LabelNoImage8 = function () {
@@ -536,7 +536,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo9 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo9"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo9"));
             };
 
             Controls.prototype.maskPanel9 = function () {
@@ -544,7 +544,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking9 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking9"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking9"));
             };
 
             Controls.prototype.LabelNoImage9 = function () {
@@ -568,7 +568,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo10 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo10"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo10"));
             };
 
             Controls.prototype.maskPanel10 = function () {
@@ -576,7 +576,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking10 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking10"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking10"));
             };
 
             Controls.prototype.LabelNoImage10 = function () {
@@ -608,7 +608,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo11 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo11"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo11"));
             };
 
             Controls.prototype.maskPanel11 = function () {
@@ -616,7 +616,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking11 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking11"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking11"));
             };
 
             Controls.prototype.LabelNoImage11 = function () {
@@ -640,7 +640,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo12 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo12"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo12"));
             };
 
             Controls.prototype.maskPanel12 = function () {
@@ -648,7 +648,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking12 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking12"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking12"));
             };
 
             Controls.prototype.LabelNoImage12 = function () {
@@ -672,7 +672,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo13 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo13"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo13"));
             };
 
             Controls.prototype.maskPanel13 = function () {
@@ -680,7 +680,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking13 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking13"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking13"));
             };
 
             Controls.prototype.LabelNoImage13 = function () {
@@ -704,7 +704,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo14 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo14"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo14"));
             };
 
             Controls.prototype.maskPanel14 = function () {
@@ -712,7 +712,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking14 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking14"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking14"));
             };
 
             Controls.prototype.LabelNoImage14 = function () {
@@ -736,7 +736,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo15 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo15"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo15"));
             };
 
             Controls.prototype.maskPanel15 = function () {
@@ -744,7 +744,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking15 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking15"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking15"));
             };
 
             Controls.prototype.LabelNoImage15 = function () {
@@ -768,7 +768,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo16 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo16"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo16"));
             };
 
             Controls.prototype.maskPanel16 = function () {
@@ -776,7 +776,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking16 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking16"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking16"));
             };
 
             Controls.prototype.LabelNoImage16 = function () {
@@ -800,7 +800,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo17 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo17"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo17"));
             };
 
             Controls.prototype.maskPanel17 = function () {
@@ -808,7 +808,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking17 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking17"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking17"));
             };
 
             Controls.prototype.LabelNoImage17 = function () {
@@ -832,7 +832,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo18 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo18"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo18"));
             };
 
             Controls.prototype.maskPanel18 = function () {
@@ -840,7 +840,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking18 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking18"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking18"));
             };
 
             Controls.prototype.LabelNoImage18 = function () {
@@ -864,7 +864,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo19 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo19"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo19"));
             };
 
             Controls.prototype.maskPanel19 = function () {
@@ -872,7 +872,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking19 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking19"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking19"));
             };
 
             Controls.prototype.LabelNoImage19 = function () {
@@ -896,7 +896,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo20 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo20"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo20"));
             };
 
             Controls.prototype.maskPanel20 = function () {
@@ -904,7 +904,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMasking20 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMasking20"));
+                return new UZA.DynamicImage(this.convFiledName("imgMasking20"));
             };
 
             Controls.prototype.LabelNoImage20 = function () {

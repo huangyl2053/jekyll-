@@ -51,7 +51,7 @@
         ,DbT5206."kikaiKiki" as "DbT5206_kikaiKiki"
         FROM
         rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
-        INNER JOIN 
+        LEFT JOIN 
         rgdb."DbT5209NinteichosahyoKinyuItem" as DbT5209
         ON DbT5209."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
         AND 
@@ -66,7 +66,9 @@
         WHERE
             DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
             AND 
-            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
+            DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+        ORDER BY DbT5202."gaikyoChosaTextImageKubun" DESC
+        LIMIT (2)
     </select>
     
     <resultMap id="resultMap_RembanServiceJokyoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.RembanServiceJokyoRelateEntity" autoMapping="true">

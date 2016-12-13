@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class imgPanel1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -1073,22 +1073,22 @@ public class imgPanel1Div extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public StaticImage getImgGenpo1() {
+    public DynamicImage getImgGenpo1() {
         return this.getGenpoPanel1().getImgGenpo1();
     }
 
     @JsonIgnore
-    public void  setImgGenpo1(StaticImage imgGenpo1) {
+    public void  setImgGenpo1(DynamicImage imgGenpo1) {
         this.getGenpoPanel1().setImgGenpo1(imgGenpo1);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking1() {
+    public DynamicImage getImgMasking1() {
         return this.getMaskPanel1().getImgMasking1();
     }
 
     @JsonIgnore
-    public void  setImgMasking1(StaticImage imgMasking1) {
+    public void  setImgMasking1(DynamicImage imgMasking1) {
         this.getMaskPanel1().setImgMasking1(imgMasking1);
     }
 
@@ -1103,22 +1103,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo2() {
+    public DynamicImage getImgGenpo2() {
         return this.getGenpoPanel2().getImgGenpo2();
     }
 
     @JsonIgnore
-    public void  setImgGenpo2(StaticImage imgGenpo2) {
+    public void  setImgGenpo2(DynamicImage imgGenpo2) {
         this.getGenpoPanel2().setImgGenpo2(imgGenpo2);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking2() {
+    public DynamicImage getImgMasking2() {
         return this.getMaskPanel2().getImgMasking2();
     }
 
     @JsonIgnore
-    public void  setImgMasking2(StaticImage imgMasking2) {
+    public void  setImgMasking2(DynamicImage imgMasking2) {
         this.getMaskPanel2().setImgMasking2(imgMasking2);
     }
 
@@ -1133,22 +1133,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo3() {
+    public DynamicImage getImgGenpo3() {
         return this.getGenpoPanel3().getImgGenpo3();
     }
 
     @JsonIgnore
-    public void  setImgGenpo3(StaticImage imgGenpo3) {
+    public void  setImgGenpo3(DynamicImage imgGenpo3) {
         this.getGenpoPanel3().setImgGenpo3(imgGenpo3);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking3() {
+    public DynamicImage getImgMasking3() {
         return this.getMaskPanel3().getImgMasking3();
     }
 
     @JsonIgnore
-    public void  setImgMasking3(StaticImage imgMasking3) {
+    public void  setImgMasking3(DynamicImage imgMasking3) {
         this.getMaskPanel3().setImgMasking3(imgMasking3);
     }
 
@@ -1163,22 +1163,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo4() {
+    public DynamicImage getImgGenpo4() {
         return this.getGenpoPanel4().getImgGenpo4();
     }
 
     @JsonIgnore
-    public void  setImgGenpo4(StaticImage imgGenpo4) {
+    public void  setImgGenpo4(DynamicImage imgGenpo4) {
         this.getGenpoPanel4().setImgGenpo4(imgGenpo4);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking4() {
+    public DynamicImage getImgMasking4() {
         return this.getMaskPanel4().getImgMasking4();
     }
 
     @JsonIgnore
-    public void  setImgMasking4(StaticImage imgMasking4) {
+    public void  setImgMasking4(DynamicImage imgMasking4) {
         this.getMaskPanel4().setImgMasking4(imgMasking4);
     }
 
@@ -1193,22 +1193,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo5() {
+    public DynamicImage getImgGenpo5() {
         return this.getGenpoPanel5().getImgGenpo5();
     }
 
     @JsonIgnore
-    public void  setImgGenpo5(StaticImage imgGenpo5) {
+    public void  setImgGenpo5(DynamicImage imgGenpo5) {
         this.getGenpoPanel5().setImgGenpo5(imgGenpo5);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking5() {
+    public DynamicImage getImgMasking5() {
         return this.getMaskPanel5().getImgMasking5();
     }
 
     @JsonIgnore
-    public void  setImgMasking5(StaticImage imgMasking5) {
+    public void  setImgMasking5(DynamicImage imgMasking5) {
         this.getMaskPanel5().setImgMasking5(imgMasking5);
     }
 
@@ -1223,22 +1223,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo6() {
+    public DynamicImage getImgGenpo6() {
         return this.getGenpoPanel6().getImgGenpo6();
     }
 
     @JsonIgnore
-    public void  setImgGenpo6(StaticImage imgGenpo6) {
+    public void  setImgGenpo6(DynamicImage imgGenpo6) {
         this.getGenpoPanel6().setImgGenpo6(imgGenpo6);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking6() {
+    public DynamicImage getImgMasking6() {
         return this.getMaskPanel6().getImgMasking6();
     }
 
     @JsonIgnore
-    public void  setImgMasking6(StaticImage imgMasking6) {
+    public void  setImgMasking6(DynamicImage imgMasking6) {
         this.getMaskPanel6().setImgMasking6(imgMasking6);
     }
 
@@ -1253,22 +1253,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo7() {
+    public DynamicImage getImgGenpo7() {
         return this.getGenpoPanel7().getImgGenpo7();
     }
 
     @JsonIgnore
-    public void  setImgGenpo7(StaticImage imgGenpo7) {
+    public void  setImgGenpo7(DynamicImage imgGenpo7) {
         this.getGenpoPanel7().setImgGenpo7(imgGenpo7);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking7() {
+    public DynamicImage getImgMasking7() {
         return this.getMaskPanel7().getImgMasking7();
     }
 
     @JsonIgnore
-    public void  setImgMasking7(StaticImage imgMasking7) {
+    public void  setImgMasking7(DynamicImage imgMasking7) {
         this.getMaskPanel7().setImgMasking7(imgMasking7);
     }
 
@@ -1283,22 +1283,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo8() {
+    public DynamicImage getImgGenpo8() {
         return this.getGenpoPanel8().getImgGenpo8();
     }
 
     @JsonIgnore
-    public void  setImgGenpo8(StaticImage imgGenpo8) {
+    public void  setImgGenpo8(DynamicImage imgGenpo8) {
         this.getGenpoPanel8().setImgGenpo8(imgGenpo8);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking8() {
+    public DynamicImage getImgMasking8() {
         return this.getMaskPanel8().getImgMasking8();
     }
 
     @JsonIgnore
-    public void  setImgMasking8(StaticImage imgMasking8) {
+    public void  setImgMasking8(DynamicImage imgMasking8) {
         this.getMaskPanel8().setImgMasking8(imgMasking8);
     }
 
@@ -1313,22 +1313,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo9() {
+    public DynamicImage getImgGenpo9() {
         return this.getGenpoPanel9().getImgGenpo9();
     }
 
     @JsonIgnore
-    public void  setImgGenpo9(StaticImage imgGenpo9) {
+    public void  setImgGenpo9(DynamicImage imgGenpo9) {
         this.getGenpoPanel9().setImgGenpo9(imgGenpo9);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking9() {
+    public DynamicImage getImgMasking9() {
         return this.getMaskPanel9().getImgMasking9();
     }
 
     @JsonIgnore
-    public void  setImgMasking9(StaticImage imgMasking9) {
+    public void  setImgMasking9(DynamicImage imgMasking9) {
         this.getMaskPanel9().setImgMasking9(imgMasking9);
     }
 
@@ -1343,22 +1343,22 @@ public class imgPanel1Div extends Panel {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo10() {
+    public DynamicImage getImgGenpo10() {
         return this.getGenpoPanel10().getImgGenpo10();
     }
 
     @JsonIgnore
-    public void  setImgGenpo10(StaticImage imgGenpo10) {
+    public void  setImgGenpo10(DynamicImage imgGenpo10) {
         this.getGenpoPanel10().setImgGenpo10(imgGenpo10);
     }
 
     @JsonIgnore
-    public StaticImage getImgMasking10() {
+    public DynamicImage getImgMasking10() {
         return this.getMaskPanel10().getImgMasking10();
     }
 
     @JsonIgnore
-    public void  setImgMasking10(StaticImage imgMasking10) {
+    public void  setImgMasking10(DynamicImage imgMasking10) {
         this.getMaskPanel10().setImgMasking10(imgMasking10);
     }
 

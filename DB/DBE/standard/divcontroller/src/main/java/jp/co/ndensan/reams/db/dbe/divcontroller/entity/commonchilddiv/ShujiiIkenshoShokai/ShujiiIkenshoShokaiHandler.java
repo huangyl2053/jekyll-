@@ -48,8 +48,8 @@ public class ShujiiIkenshoShokaiHandler {
 
     private final ShujiiIkenshoShokaiDiv div;
     private final RString 共有エントリファイル名 = new RString("test.zip");
-    private final RString ファイル名_主治医意見書_表 = new RString("/E0001.png");
-    private final RString ファイル名_主治医意見書_表BAK = new RString("/E0001_BAK.png");
+    private final RString ファイル名_主治医意見書_表 = new RString("E0001.png");
+    private final RString ファイル名_主治医意見書_表BAK = new RString("E0001_BAK.png");
     private final RString ファイル名_主治医意見書_裏 = new RString("/E0002.png");
     private final RString ファイル名_主治医意見書_裏BAK = new RString("/E0002_BAK.png");
     private RString コピー先フォルダ;

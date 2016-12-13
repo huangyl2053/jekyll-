@@ -40,7 +40,6 @@ public class ChosaTokkiShokai {
         if (!success) {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
-        div.getTextPanel().setDisplayNone(false);
         return ResponseData.of(div).respond();
     }
 

@@ -604,163 +604,147 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
         this.radGenpoMask.setSelectedKey(SELECT原本);
         this.maskTabContainer.setDisplayNone(true);
 
-        try {
-            if (!imgGneponPathList.isEmpty()) {
-                if (imgGneponPathList.size() >= 1) {
-                    getGenpoTabContainer().getGenpoTabPanel1().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel1().setTitle(genponTitleList.get(0));
-                    File file = new File(imgGneponPathList.get(0).toString());
-                    byte[] ninteiImage = new byte[(int) file.length()];
-                    try (FileInputStream fis = new FileInputStream(file);
-                            BufferedInputStream bis = new BufferedInputStream(fis)) {
-                        bis.read(ninteiImage);
-                    }
-                    getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setImage(ninteiImage);
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(0))) {
-                        getGenpoTabContainer().getGenpoTabPanel1().setDisabled(true);
-                    }
-                }
-                if (imgGneponPathList.size() >= 2) {
-                    getGenpoTabContainer().getGenpoTabPanel2().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel2().setTitle(genponTitleList.get(1));
-                    getGenpoTabContainer().getGenpoTabPanel2().getImgGenpo2().setSrc(imgGneponPathList.get(1));
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(1))) {
-                        getGenpoTabContainer().getGenpoTabPanel2().setDisabled(true);
-                    }
-                }
-                if (imgGneponPathList.size() >= 3) {
-                    getGenpoTabContainer().getGenpoTabPanel3().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel3().setTitle(genponTitleList.get(2));
-                    getGenpoTabContainer().getGenpoTabPanel3().getImgGenpo3().setSrc(imgGneponPathList.get(2));
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(2))) {
-                        getGenpoTabContainer().getGenpoTabPanel3().setDisabled(true);
-                    }
-                }
-                if (imgGneponPathList.size() >= 4) {
-                    getGenpoTabContainer().getGenpoTabPanel4().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel4().setTitle(genponTitleList.get(3));
-                    getGenpoTabContainer().getGenpoTabPanel4().getImgGenpo4().setSrc(imgGneponPathList.get(3));
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(3))) {
-                        getGenpoTabContainer().getGenpoTabPanel4().setDisabled(true);
-                    }
-                }
-                if (imgGneponPathList.size() >= 5) {
-                    getGenpoTabContainer().getGenpoTabPanel5().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel5().setTitle(genponTitleList.get(4));
-                    getGenpoTabContainer().getGenpoTabPanel5().getImgGenpo5().setSrc(imgGneponPathList.get(4));
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(4))) {
-                        getGenpoTabContainer().getGenpoTabPanel5().setDisabled(true);
-                    }
-                }
-                if (imgGneponPathList.size() >= 6) {
-                    getGenpoTabContainer().getGenpoTabPanel6().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel6().setTitle(genponTitleList.get(5));
-                    getGenpoTabContainer().getGenpoTabPanel6().getImgGenpo6().setSrc(imgGneponPathList.get(5));
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(5))) {
-                        getGenpoTabContainer().getGenpoTabPanel6().setDisabled(true);
-                    }
-                }
-                if (imgGneponPathList.size() >= 7) {
-                    getGenpoTabContainer().getGenpoTabPanel7().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel7().setTitle(genponTitleList.get(6));
-                    getGenpoTabContainer().getGenpoTabPanel7().getImgGenpo7().setSrc(imgGneponPathList.get(6));
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(6))) {
-                        getGenpoTabContainer().getGenpoTabPanel7().setDisabled(true);
-                    }
-                }
-                if (imgGneponPathList.size() >= 8) {
-                    getGenpoTabContainer().getGenpoTabPanel8().setVisible(true);
-                    getGenpoTabContainer().getGenpoTabPanel8().setTitle(genponTitleList.get(7));
-                    getGenpoTabContainer().getGenpoTabPanel8().getImgGenpo8().setSrc(imgGneponPathList.get(7));
-                    if (RString.isNullOrEmpty(imgGneponPathList.get(7))) {
-                        getGenpoTabContainer().getGenpoTabPanel8().setDisabled(true);
-                    }
+        if (!imgGneponPathList.isEmpty()) {
+            if (imgGneponPathList.size() >= 1) {
+                getGenpoTabContainer().getGenpoTabPanel1().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel1().setTitle(genponTitleList.get(0));
+                getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setSrc(imgGneponPathList.get(0));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(0))) {
+                    getGenpoTabContainer().getGenpoTabPanel1().setDisabled(true);
                 }
             }
+            if (imgGneponPathList.size() >= 2) {
+                getGenpoTabContainer().getGenpoTabPanel2().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel2().setTitle(genponTitleList.get(1));
+                getGenpoTabContainer().getGenpoTabPanel2().getImgGenpo2().setSrc(imgGneponPathList.get(1));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(1))) {
+                    getGenpoTabContainer().getGenpoTabPanel2().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 3) {
+                getGenpoTabContainer().getGenpoTabPanel3().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel3().setTitle(genponTitleList.get(2));
+                getGenpoTabContainer().getGenpoTabPanel3().getImgGenpo3().setSrc(imgGneponPathList.get(2));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(2))) {
+                    getGenpoTabContainer().getGenpoTabPanel3().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 4) {
+                getGenpoTabContainer().getGenpoTabPanel4().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel4().setTitle(genponTitleList.get(3));
+                getGenpoTabContainer().getGenpoTabPanel4().getImgGenpo4().setSrc(imgGneponPathList.get(3));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(3))) {
+                    getGenpoTabContainer().getGenpoTabPanel4().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 5) {
+                getGenpoTabContainer().getGenpoTabPanel5().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel5().setTitle(genponTitleList.get(4));
+                getGenpoTabContainer().getGenpoTabPanel5().getImgGenpo5().setSrc(imgGneponPathList.get(4));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(4))) {
+                    getGenpoTabContainer().getGenpoTabPanel5().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 6) {
+                getGenpoTabContainer().getGenpoTabPanel6().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel6().setTitle(genponTitleList.get(5));
+                getGenpoTabContainer().getGenpoTabPanel6().getImgGenpo6().setSrc(imgGneponPathList.get(5));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(5))) {
+                    getGenpoTabContainer().getGenpoTabPanel6().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 7) {
+                getGenpoTabContainer().getGenpoTabPanel7().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel7().setTitle(genponTitleList.get(6));
+                getGenpoTabContainer().getGenpoTabPanel7().getImgGenpo7().setSrc(imgGneponPathList.get(6));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(6))) {
+                    getGenpoTabContainer().getGenpoTabPanel7().setDisabled(true);
+                }
+            }
+            if (imgGneponPathList.size() >= 8) {
+                getGenpoTabContainer().getGenpoTabPanel8().setVisible(true);
+                getGenpoTabContainer().getGenpoTabPanel8().setTitle(genponTitleList.get(7));
+                getGenpoTabContainer().getGenpoTabPanel8().getImgGenpo8().setSrc(imgGneponPathList.get(7));
+                if (RString.isNullOrEmpty(imgGneponPathList.get(7))) {
+                    getGenpoTabContainer().getGenpoTabPanel8().setDisabled(true);
+                }
+            }
+        }
 
-            if (!imgMaskPathList.isEmpty()) {
-                if (imgMaskPathList.size() >= 1) {
-                    getMaskTabContainer().getMaskTabPanel1().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel1().setTitle(maskTitleList.get(0));
-                    if (!RString.isNullOrEmpty(imgMaskPathList.get(0))) {
-                        File file = new File(imgMaskPathList.get(0).toString());
-                        byte[] ninteiImage = new byte[(int) file.length()];
-                        try (FileInputStream fis = new FileInputStream(file);
-                                BufferedInputStream bis = new BufferedInputStream(fis)) {
-                            bis.read(ninteiImage);
-                        }
-                        getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setImage(ninteiImage);
-                    } else {
-                        getMaskTabContainer().getMaskTabPanel1().getImgMask1().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel1().getLabelNoImage1().setDisplayNone(false);
-                    }
-                }
-                if (imgMaskPathList.size() >= 2) {
-                    getMaskTabContainer().getMaskTabPanel2().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel2().setTitle(maskTitleList.get(1));
-                    getMaskTabContainer().getMaskTabPanel2().getImgMask2().setSrc(imgMaskPathList.get(1));
-                    if (RString.isNullOrEmpty(imgMaskPathList.get(1))) {
-                        getMaskTabContainer().getMaskTabPanel2().getImgMask2().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel2().getLabelNoImage2().setDisplayNone(false);
-                    }
-                }
-                if (imgMaskPathList.size() >= 3) {
-                    getMaskTabContainer().getMaskTabPanel3().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel3().setTitle(maskTitleList.get(2));
-                    getMaskTabContainer().getMaskTabPanel3().getImgMask3().setSrc(imgMaskPathList.get(2));
-                    if (RString.isNullOrEmpty(imgMaskPathList.get(2))) {
-                        getMaskTabContainer().getMaskTabPanel3().getImgMask3().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel3().getLabelNoImage3().setDisplayNone(false);
-                    }
-                }
-                if (imgMaskPathList.size() >= 4) {
-                    getMaskTabContainer().getMaskTabPanel4().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel4().setTitle(maskTitleList.get(3));
-                    getMaskTabContainer().getMaskTabPanel4().getImgMask4().setSrc(imgMaskPathList.get(3));
-                    if (RString.isNullOrEmpty(imgMaskPathList.get(3))) {
-                        getMaskTabContainer().getMaskTabPanel4().getImgMask4().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel4().getLabelNoImage4().setDisplayNone(false);
-                    }
-                }
-                if (imgMaskPathList.size() >= 5) {
-                    getMaskTabContainer().getMaskTabPanel5().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel5().setTitle(maskTitleList.get(4));
-                    getMaskTabContainer().getMaskTabPanel5().getImgMask5().setSrc(imgMaskPathList.get(4));
-                    if (RString.isNullOrEmpty(imgMaskPathList.get(4))) {
-                        getMaskTabContainer().getMaskTabPanel5().getImgMask5().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel5().getLabelNoImage5().setDisplayNone(false);
-                    }
-                }
-                if (imgMaskPathList.size() >= 6) {
-                    getMaskTabContainer().getMaskTabPanel6().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel6().setTitle(maskTitleList.get(5));
-                    getMaskTabContainer().getMaskTabPanel6().getImgMask6().setSrc(imgMaskPathList.get(5));
-                    if (RString.isNullOrEmpty(imgMaskPathList.get(5))) {
-                        getMaskTabContainer().getMaskTabPanel6().getImgMask6().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel6().getLabelNoImage6().setDisplayNone(false);
-                    }
-                }
-                if (imgMaskPathList.size() >= 7) {
-                    getMaskTabContainer().getMaskTabPanel7().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel7().setTitle(maskTitleList.get(6));
-                    getMaskTabContainer().getMaskTabPanel7().getImgMask7().setSrc(imgMaskPathList.get(6));
-                    if (RString.isNullOrEmpty(imgMaskPathList.get(6))) {
-                        getMaskTabContainer().getMaskTabPanel7().getImgMask7().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel7().getLabelNoImage7().setDisplayNone(false);
-                    }
-                }
-                if (imgMaskPathList.size() >= 8) {
-                    getMaskTabContainer().getMaskTabPanel8().setVisible(true);
-                    getMaskTabContainer().getMaskTabPanel8().setTitle(maskTitleList.get(7));
-                    getMaskTabContainer().getMaskTabPanel8().getImgMask8().setSrc(imgMaskPathList.get(7));
-                    if (RString.isNullOrEmpty(imgMaskPathList.get(7))) {
-                        getMaskTabContainer().getMaskTabPanel8().getImgMask8().setDisplayNone(true);
-                        getMaskTabContainer().getMaskTabPanel8().getLabelNoImage8().setDisplayNone(false);
-                    }
+        if (!imgMaskPathList.isEmpty()) {
+            if (imgMaskPathList.size() >= 1) {
+                getMaskTabContainer().getMaskTabPanel1().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel1().setTitle(maskTitleList.get(0));
+                if (!RString.isNullOrEmpty(imgMaskPathList.get(0))) {
+                    getGenpoTabContainer().getGenpoTabPanel1().getImgGenpo1().setSrc(imgMaskPathList.get(0));
+                } else {
+                    getMaskTabContainer().getMaskTabPanel1().getImgMask1().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel1().getLabelNoImage1().setDisplayNone(false);
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            if (imgMaskPathList.size() >= 2) {
+                getMaskTabContainer().getMaskTabPanel2().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel2().setTitle(maskTitleList.get(1));
+                getMaskTabContainer().getMaskTabPanel2().getImgMask2().setSrc(imgMaskPathList.get(1));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(1))) {
+                    getMaskTabContainer().getMaskTabPanel2().getImgMask2().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel2().getLabelNoImage2().setDisplayNone(false);
+                }
+            }
+            if (imgMaskPathList.size() >= 3) {
+                getMaskTabContainer().getMaskTabPanel3().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel3().setTitle(maskTitleList.get(2));
+                getMaskTabContainer().getMaskTabPanel3().getImgMask3().setSrc(imgMaskPathList.get(2));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(2))) {
+                    getMaskTabContainer().getMaskTabPanel3().getImgMask3().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel3().getLabelNoImage3().setDisplayNone(false);
+                }
+            }
+            if (imgMaskPathList.size() >= 4) {
+                getMaskTabContainer().getMaskTabPanel4().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel4().setTitle(maskTitleList.get(3));
+                getMaskTabContainer().getMaskTabPanel4().getImgMask4().setSrc(imgMaskPathList.get(3));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(3))) {
+                    getMaskTabContainer().getMaskTabPanel4().getImgMask4().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel4().getLabelNoImage4().setDisplayNone(false);
+                }
+            }
+            if (imgMaskPathList.size() >= 5) {
+                getMaskTabContainer().getMaskTabPanel5().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel5().setTitle(maskTitleList.get(4));
+                getMaskTabContainer().getMaskTabPanel5().getImgMask5().setSrc(imgMaskPathList.get(4));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(4))) {
+                    getMaskTabContainer().getMaskTabPanel5().getImgMask5().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel5().getLabelNoImage5().setDisplayNone(false);
+                }
+            }
+            if (imgMaskPathList.size() >= 6) {
+                getMaskTabContainer().getMaskTabPanel6().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel6().setTitle(maskTitleList.get(5));
+                getMaskTabContainer().getMaskTabPanel6().getImgMask6().setSrc(imgMaskPathList.get(5));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(5))) {
+                    getMaskTabContainer().getMaskTabPanel6().getImgMask6().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel6().getLabelNoImage6().setDisplayNone(false);
+                }
+            }
+            if (imgMaskPathList.size() >= 7) {
+                getMaskTabContainer().getMaskTabPanel7().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel7().setTitle(maskTitleList.get(6));
+                getMaskTabContainer().getMaskTabPanel7().getImgMask7().setSrc(imgMaskPathList.get(6));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(6))) {
+                    getMaskTabContainer().getMaskTabPanel7().getImgMask7().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel7().getLabelNoImage7().setDisplayNone(false);
+                }
+            }
+            if (imgMaskPathList.size() >= 8) {
+                getMaskTabContainer().getMaskTabPanel8().setVisible(true);
+                getMaskTabContainer().getMaskTabPanel8().setTitle(maskTitleList.get(7));
+                getMaskTabContainer().getMaskTabPanel8().getImgMask8().setSrc(imgMaskPathList.get(7));
+                if (RString.isNullOrEmpty(imgMaskPathList.get(7))) {
+                    getMaskTabContainer().getMaskTabPanel8().getImgMask8().setDisplayNone(true);
+                    getMaskTabContainer().getMaskTabPanel8().getLabelNoImage8().setDisplayNone(false);
+                }
+            }
         }
     }
 }
