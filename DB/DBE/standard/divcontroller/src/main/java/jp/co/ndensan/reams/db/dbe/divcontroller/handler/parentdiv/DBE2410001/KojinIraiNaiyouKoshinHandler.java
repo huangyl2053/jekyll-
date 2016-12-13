@@ -32,6 +32,8 @@ public class KojinIraiNaiyouKoshinHandler {
     private final KojinIraiNaiyouKoshinDiv div;
     private static final RString キー_0 = new RString("key0");
     private static final RString キー_1 = new RString("key1");
+    private static final RString 半角スペース = new RString(" ");
+    private static final RString 半角スペースx2 = new RString("  ");
 
     /**
      * コンストラクタです。
@@ -118,11 +120,15 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtChosaJIsshiChikuZen().setValue(前回調査情報.get名称());
             div.getTxtChosaKikanCodeZen().setValue(前回調査情報.get認定調査委託先コード());
             div.getTxtChosaKikanZen().setValue(前回調査情報.get事業者名称());
-            div.getTxtChosaItakuKubunZen().setValue(RString.isNullOrEmpty(前回調査情報.get調査委託区分()) ? RString.EMPTY
+            div.getTxtChosaItakuKubunZen().setValue(
+                    RString.isNullOrEmpty(前回調査情報.get調査委託区分()) ||
+                    前回調査情報.get調査委託区分().equals(半角スペース) ? RString.EMPTY
                     : ChosaItakuKubunCode.toValue(前回調査情報.get調査委託区分()).get名称());
             div.getTxtChosainCodeZen().setValue(前回調査情報.get認定調査員コード());
             div.getTxtChosainZen().setValue(前回調査情報.get調査員氏名());
-            div.getTxtChosainShikakuZen().setValue(RString.isNullOrEmpty(前回調査情報.get調査員資格()) ? RString.EMPTY
+            div.getTxtChosainShikakuZen().setValue(
+                    RString.isNullOrEmpty(前回調査情報.get調査員資格()) ||
+                    前回調査情報.get調査員資格().equals(半角スペースx2) ? RString.EMPTY
                     : Sikaku.toValue(前回調査情報.get調査員資格()).get名称());
             div.getTxtDenwaBangoZen().setDomain(前回調査情報.get電話番号());
             div.getTxtFaxZen().setDomain(前回調査情報.get番号());
@@ -138,11 +144,15 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtChosaJIsshiChikuSaiZen().setValue(前回調査情報.get名称());
             div.getTxtChosaKikanCodeSaiZen().setValue(前回調査情報.get認定調査委託先コード());
             div.getTxtChosaKikanSaiZen().setValue(前回調査情報.get事業者名称());
-            div.getTxtChosaItakuKubunSaiZen().setValue(RString.isNullOrEmpty(前回調査情報.get調査委託区分()) ? RString.EMPTY
+            div.getTxtChosaItakuKubunSaiZen().setValue(
+                    RString.isNullOrEmpty(前回調査情報.get調査委託区分()) ||
+                    前回調査情報.get調査委託区分().equals(半角スペース) ? RString.EMPTY
                     : ChosaItakuKubunCode.toValue(前回調査情報.get調査委託区分()).get名称());
             div.getTxtChosainCodeSaiZen().setValue(前回調査情報.get認定調査員コード());
             div.getTxtChosainSaiZen().setValue(前回調査情報.get調査員氏名());
-            div.getTxtChosainShikakuSaiZen().setValue(RString.isNullOrEmpty(前回調査情報.get調査員資格()) ? RString.EMPTY
+            div.getTxtChosainShikakuSaiZen().setValue(
+                    RString.isNullOrEmpty(前回調査情報.get調査員資格()) ||
+                    前回調査情報.get調査員資格().equals(半角スペースx2) ? RString.EMPTY
                     : Sikaku.toValue(前回調査情報.get調査員資格()).get名称());
             div.getTxtDenwaBangoSaiZen().setDomain(前回調査情報.get電話番号());
             div.getTxtFaxSaiZen().setDomain(前回調査情報.get番号());
@@ -161,11 +171,15 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtChosaJIsshiChiku().setValue(今回調査情報.get名称());
             div.getTxtChosaKikanCode().setValue(今回調査情報.get認定調査委託先コード());
             div.getTxtChosaKikan().setValue(今回調査情報.get事業者名称());
-            div.getTxtChosaItakuKubun().setValue(RString.isNullOrEmpty(今回調査情報.get調査委託区分()) ? RString.EMPTY
+            div.getTxtChosaItakuKubun().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査委託区分())||
+                    今回調査情報.get調査委託区分().equals(半角スペース) ? RString.EMPTY
                     : ChosaItakuKubunCode.toValue(今回調査情報.get調査委託区分()).get名称());
             div.getTxtChosainCode().setValue(今回調査情報.get認定調査員コード());
             div.getTxtChosain().setValue(今回調査情報.get調査員氏名());
-            div.getTxtChosainShikaku().setValue(RString.isNullOrEmpty(今回調査情報.get調査員資格()) ? RString.EMPTY
+            div.getTxtChosainShikaku().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査員資格())||
+                    今回調査情報.get調査員資格().equals(半角スペースx2) ? RString.EMPTY
                     : Sikaku.toValue(今回調査情報.get調査員資格()).get名称());
             div.getTxtDenwaBango().setDomain(今回調査情報.get電話番号());
             div.getTxtFax().setDomain(今回調査情報.get番号());
@@ -181,11 +195,15 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtChosaJIsshiChikuSai().setValue(今回調査情報.get名称());
             div.getTxtChosaKikanCodeSai().setValue(今回調査情報.get認定調査委託先コード());
             div.getTxtChosaKikanSai().setValue(今回調査情報.get事業者名称());
-            div.getTxtChosaItakuKubunSai().setValue(RString.isNullOrEmpty(今回調査情報.get調査委託区分()) ? RString.EMPTY
+            div.getTxtChosaItakuKubunSai().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査委託区分()) || 
+                    今回調査情報.get調査委託区分().equals(半角スペース) ? RString.EMPTY
                     : ChosaItakuKubunCode.toValue(今回調査情報.get調査委託区分()).get名称());
             div.getTxtChosainCodeSai().setValue(今回調査情報.get認定調査員コード());
             div.getTxtChosainSai().setValue(今回調査情報.get調査員氏名());
-            div.getTxtChosainShikakuSai().setValue(RString.isNullOrEmpty(今回調査情報.get調査員資格()) ? RString.EMPTY
+            div.getTxtChosainShikakuSai().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査員資格()) ||
+                    今回調査情報.get調査員資格().equals(半角スペースx2) ? RString.EMPTY
                     : Sikaku.toValue(今回調査情報.get調査員資格()).get名称());
             div.getTxtDenwaBangoSai().setDomain(今回調査情報.get電話番号());
             div.getTxtFaxSai().setDomain(今回調査情報.get番号());
