@@ -519,7 +519,7 @@
                 WHERE "shoKisaiHokenshaNo" = #{hokensyaNo}
                 ) AS "shichosonCode"
                 ,(
-                DbT7051."shichosonMeisho"
+                SELECT DbT7051."shichosonMeisho"
                 FROM rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 WHERE "shoKisaiHokenshaNo" = #{hokensyaNo}
                 ) AS "shichosonMeisho"
