@@ -217,12 +217,12 @@ public class ShujiiIkenshoShokaiHandler {
         List<RString> イメージファイルパス = new ArrayList<>();
         RString イメージパス_表 = RString.EMPTY;
         RString イメージパス_裏 = RString.EMPTY;
-        if (RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_表BAK))) {
+        if (!RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_表BAK))) {
             イメージパス_表 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_表);
         }
         イメージファイルパス.add(イメージパス_表);
 
-        if (RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_裏BAK))) {
+        if (!RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_裏BAK))) {
             イメージパス_裏 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_裏);
         }
         イメージファイルパス.add(イメージパス_裏);

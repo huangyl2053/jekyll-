@@ -73,7 +73,7 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
     }
 
     private RString getPageCount() {
-        int i = 1;
+        int i = 0;
         if (paramter.isJigyoJyokyoHokoku()) {
             i += 事業状況報告帳票数;
         }
@@ -126,7 +126,7 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(GOGITAINO);
-        条件.append(paramter.isJigyoJyokyoHokoku() ? RString.EMPTY : new RString(paramter.getGogitaiNo()));
+        条件.append(get合議体名称(paramter));
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOTSUKIKUBUN);
@@ -164,5 +164,15 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
         条件.append(paramter.isHorei() ? 集計する : 集計しない);
         出力条件.add(条件.toRString());
         return 出力条件;
+    }
+    
+    private RString get合議体名称(SinsakaiHanteiJyokyoProcessParameter paramter) {
+        if (paramter.isEmptyGogitaiNo()) {
+            return new RString("全合議体");
+        }
+        if (paramter.getGogitaiNo() == -1) {
+            return new RString("全合議体");
+        }
+        return new RString(paramter.getGogitaiNo());
     }
 }

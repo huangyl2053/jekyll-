@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -170,6 +172,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 特記事項番号_702 = new RString("702");
     private static final RString コマ割り = new RString("1");
     private static final RString 拡張子_PNG = new RString(".png");
+    private static final RString SEPARATOR = new RString("/");
     List<NinteichosaRelateEntity> 特記事項リスト;
     List<NinteichosaRelateEntity> 特記事項区分;
 
@@ -209,7 +212,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         bodyItem.set特記事項リスト番号(set特記事項リスト1(特記事項区分));
         bodyItem.set特記事項リスト連番(set特記事項リスト2(特記事項区分));
         bodyItem.set特記事項リスト名称(set特記事項リスト3(特記事項区分));
-        bodyItem.set特記事項リストイメージ(set特記事項リスト4(特記事項区分));
+        bodyItem.set特記事項リストイメージ(set特記事項リスト4(特記事項区分, entity));
         NinteiChosaTokkiImageReport report = new NinteiChosaTokkiImageReport(bodyItem);
         report.writeBy(reportSourceWriter);
     }
@@ -219,13 +222,29 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         set出力条件表();
     }
 
-    private List<RString> set特記事項リスト4(List<NinteichosaRelateEntity> 特記事項区分) {
+    private List<RString> set特記事項リスト4(List<NinteichosaRelateEntity> 特記事項区分, YokaigoninteiEntity entity) {
         List<RString> 特記事項リスト4 = new ArrayList<>();
+        RString ローカルファイル名 = new RString("IMG");
+        RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
         for (int i = 0; i < 特記事項区分.size(); i++) {
-            特記事項リスト4.add(共有ファイルを引き出す(getイメージID(特記事項区分, i), get特記事項番号(特記事項区分, i),
-                    get特記事項連番(特記事項区分, i)));
+            共有ファイルを引き出す(getイメージID(特記事項区分, i), 共有ファイル名);
+            RString fileName = get共有ファイル(get特記事項番号(特記事項区分, i), get特記事項連番(特記事項区分, i));
+            if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+                if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
+                    特記事項リスト4.add(fileName);
+                } else {
+                    特記事項リスト4.add(fileName.replace(拡張子_PNG.toString(), "_BAK.png"));
+                }
+            }
         }
         return 特記事項リスト4;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString get共有ファイル(RString 特記事項番号, RString 特記事項連番) {
@@ -861,48 +880,12 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString 特記事項番号, RString 特記事項連番) {
-        RString imagePath = RString.EMPTY;
-        RString fileName = get共有ファイル(特記事項番号, 特記事項連番);
-        if (イメージID != null && !RString.isNullOrEmpty(fileName)) {
-            if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
-                imagePath = getFilePath(イメージID, fileName);
-            } else {
-                imagePath = getFilePathBak(イメージID, fileName.replace(拡張子_PNG.toString(), "_BAK.png"));
-            }
-        }
-        return imagePath;
-    }
-
-    private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
+    private void 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
+        if (イメージID != null) {
+            ReadOnlySharedFileEntryDescriptor descriptor
+                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名), イメージID);
             SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
-        } catch (Exception e) {
-            return RString.EMPTY;
         }
-        return sharedFileName;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        ReadOnlySharedFileEntryDescriptor descriptor_BAK
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(拡張子_PNG.toString(), "_BAK.png")), sharedFileId);
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
-        } catch (Exception e) {
-            try {
-                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(batchWrite.getImageFolderPath()));
-                return sharedFileName.replace(拡張子_PNG.toString(), "_BAK.png");
-            } catch (Exception ex) {
-                return RString.EMPTY;
-            }
-        }
-        return sharedFileName;
     }
 
     private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番) {

@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -76,6 +78,7 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
     private static final RString 総合事業開始区分_実施済 = new RString("2");
     private static final RString 総合事業未実施 = new RString("総合事業未実施");
     private static final RString 総合事業実施済 = new RString("総合事業実施済");
+    private static final RString SEPARATOR = new RString("/");
 
     @Override
     protected void initialize() {
@@ -146,51 +149,34 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
         sonoTashiryo.set審査日_日(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
-        sonoTashiryo.setその他資料イメージ(共有ファイルを引き出す(イメージID));
+        RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
+        sonoTashiryo.setその他資料イメージ(共有ファイルを引き出す(イメージID, 共有ファイル名));
         return sonoTashiryo;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
-                imagePath = getFilePath(イメージID, FILENAME);
-            } else {
-                imagePath = getFilePathBak(イメージID, FILENAME_BAK);
-            }
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
+        RString ローカルファイル名 = new RString("IMG");
+        getFilePath(イメージID, 共有ファイル名);
+        RString fileName = フラグ.equals(processPrm.getRadSohotaShiryoMasking()) ? FILENAME : FILENAME_BAK;
+        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+            return fileName;
         }
-        return imagePath;
+        return RString.EMPTY;
     }
 
-    private RString getFilePathBak(RDateTime sharedFileId, RString sharedFileName) {
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
-        } catch (Exception e) {
-            return RString.EMPTY;
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
         }
-        return sharedFileName;
+        return RString.EMPTY;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        ReadOnlySharedFileEntryDescriptor descriptor_BAK
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName.replace(".png", "_BAK.png")), sharedFileId);
-        try {
+    private void getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId != null) {
+            ReadOnlySharedFileEntryDescriptor descriptor
+                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
             SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
-        } catch (Exception e) {
-            try {
-                SharedFile.copyToLocal(descriptor_BAK, new FilesystemPath(batchWrite.getImageFolderPath()));
-                return sharedFileName.replace(".png", "_BAK.png");
-            } catch (Exception ex) {
-                return RString.EMPTY;
-            }
         }
-        return sharedFileName;
     }
 
     private void set出力条件表() {

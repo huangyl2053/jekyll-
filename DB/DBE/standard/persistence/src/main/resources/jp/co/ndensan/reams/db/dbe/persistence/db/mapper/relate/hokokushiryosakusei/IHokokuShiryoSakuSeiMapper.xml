@@ -510,6 +510,18 @@
         GROUP BY G."shinsakaiKaisaiNo"
         ) as shinsakaiKaisaiNo
         ) AS shinsakaiKaisaiNoCount
+        <choose>
+            <when test="!isEmptyHokensyaNo">
+                ,rshare."UDD023LasdecCode" #{hokensyaNo} AS "shichosonCode"
+                ,character varying(10) #{shichosonMeisho} AS "shichosonMeisho"
+                ,rgdb."DbUDD015ShoKisaiHokenshaNo" #{shoKisaiHokenshaNo} AS "shoKisaiHokenshaNo"
+            </when>
+            <otherwise>
+                ,rshare."UDD023LasdecCode" '000000' AS "shichosonCode"
+                ,character varying(10) '全市町村' AS "shichosonMeisho"
+                ,rgdb."DbUDD015ShoKisaiHokenshaNo" '000000' AS "shoKisaiHokenshaNo"
+            </otherwise>
+        </choose>
         FROM (
         SELECT
         MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin,
