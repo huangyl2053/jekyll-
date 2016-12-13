@@ -107,26 +107,26 @@ public class ShujiiIkenshoShokaiHandler {
             RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
             RString ローカルファイル名 = new RString("IMG");
             RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
+            div.getTxtTest().setValue(出力イメージフォルダパス);
 
             イメージ元本パスリスト = get原本FilePathList(出力イメージフォルダパス, ローカルファイル名);
             イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス, ローカルファイル名);
-//            List<RString> fileList = Arrays.asList(Directory.getFiles(イメージ元本パスリスト.get(0), new RString("*.png"), true));
-//            RString imgBase64 = RString.EMPTY;
-//            try {
-//                imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージ元本パスリスト.get(0).toString(), fileList.get(0).toString())));
-//            } catch (IOException ex) {
-//            }
-//            RString DATAURI_BMP = new RString("data:image/png;base64,");
-//            div.getTxtTest3().setValue(DATAURI_BMP.concat(imgBase64));
-//            イメージ元本パスリスト.add(DATAURI_BMP.concat(imgBase64));
-//            イメージマスクパスリスト.add(RString.EMPTY);
+            List<RString> fileList = Arrays.asList(Directory.getFiles(Path.combinePath(出力イメージフォルダパス, ローカルファイル名), new RString("*.png"), true));
+            RString imgBase64 = RString.EMPTY;
+            try {
+                imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(Path.combinePath(出力イメージフォルダパス, ローカルファイル名).toString(), fileList.get(0).toString())));
+            } catch (IOException ex) {
+            }
+            RString DATAURI_BMP = new RString("data:image/png;base64,");
+            div.getTxtTest3().setValue(DATAURI_BMP.concat(imgBase64));
+            イメージ元本パスリスト.add(DATAURI_BMP.concat(imgBase64));
+            イメージマスクパスリスト.add(RString.EMPTY);
             原本タイトルリスト = getTitleList(イメージ元本パスリスト);
             マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
         } else {
             div.getCcdChosaTokkiShiryoShokai().setDisplayNone(true);
         }
-        div.getTxtTest().setValue(イメージ元本パスリスト.get(0));
-        div.getTxtTest2().setValue(イメージ元本パスリスト.get(1));
+        
         div.getCcdChosaTokkiShiryoShokai().initialize(イメージ元本パスリスト, イメージマスクパスリスト, 原本タイトルリスト, マスクタイトルリスト);
     }
 
@@ -263,6 +263,7 @@ public class ShujiiIkenshoShokaiHandler {
     }
 
     private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
+        div.getTxtTest2().setValue(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名));
         if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名))) {
             return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名);
         }
