@@ -44,7 +44,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo1 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo1"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo1"));
             };
 
             Controls.prototype.genpoTabPanel2 = function () {
@@ -52,7 +52,7 @@ var DBZ;
             };
 
             Controls.prototype.imgGenpo2 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo2"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo2"));
             };
 
             Controls.prototype.genpoTabPanel3 = function () {
@@ -112,7 +112,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMask1 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMask1"));
+                return new UZA.DynamicImage(this.convFiledName("imgMask1"));
             };
 
             Controls.prototype.LabelNoImage1 = function () {
@@ -124,7 +124,7 @@ var DBZ;
             };
 
             Controls.prototype.imgMask2 = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMask2"));
+                return new UZA.DynamicImage(this.convFiledName("imgMask2"));
             };
 
             Controls.prototype.LabelNoImage2 = function () {

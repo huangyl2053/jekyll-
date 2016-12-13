@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  * @author 自動生成
  */
 public class genpoTabContainerDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -193,22 +193,22 @@ public class genpoTabContainerDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public StaticImage getImgGenpo1() {
+    public DynamicImage getImgGenpo1() {
         return this.getGenpoTabPanel1().getImgGenpo1();
     }
 
     @JsonIgnore
-    public void  setImgGenpo1(StaticImage imgGenpo1) {
+    public void  setImgGenpo1(DynamicImage imgGenpo1) {
         this.getGenpoTabPanel1().setImgGenpo1(imgGenpo1);
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo2() {
+    public DynamicImage getImgGenpo2() {
         return this.getGenpoTabPanel2().getImgGenpo2();
     }
 
     @JsonIgnore
-    public void  setImgGenpo2(StaticImage imgGenpo2) {
+    public void  setImgGenpo2(DynamicImage imgGenpo2) {
         this.getGenpoTabPanel2().setImgGenpo2(imgGenpo2);
     }
 

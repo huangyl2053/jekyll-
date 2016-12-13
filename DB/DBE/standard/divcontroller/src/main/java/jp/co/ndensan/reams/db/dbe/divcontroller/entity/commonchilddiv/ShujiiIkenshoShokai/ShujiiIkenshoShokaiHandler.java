@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkens
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.service.SharedFileEntryInfo;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -95,8 +97,14 @@ public class ShujiiIkenshoShokaiHandler {
         List<RString> 原本タイトルリスト = new ArrayList<>();
         List<RString> マスクタイトルリスト = new ArrayList<>();
         if (イメージ情報 != null) {
-            イメージ元本パスリスト = get原本FilePathList(イメージ情報);
-            イメージマスクパスリスト = getマスクFilePathList(イメージ情報);
+            RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+            RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+            RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
+            RString ローカルファイル名 = new RString("IMG");
+            RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
+
+            イメージ元本パスリスト = get原本FilePathList(出力イメージフォルダパス, ローカルファイル名);
+            イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス, ローカルファイル名);
             原本タイトルリスト = getTitleList(イメージ元本パスリスト);
             マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
         } else {
@@ -185,54 +193,37 @@ public class ShujiiIkenshoShokaiHandler {
         }
     }
 
-    private List<RString> get原本FilePathList(Image イメージ情報) {
+    private List<RString> get原本FilePathList(RString 出力イメージフォルダパス, RString ローカルファイル名) {
         List<RString> イメージファイルパス = new ArrayList<>();
-        RString イメージパス_表 = RString.EMPTY;
-        RString イメージパス_裏 = RString.EMPTY;
+        RString イメージパス_表;
+        RString イメージパス_裏;
 
-        UzT0885SharedFileEntryEntity ShareFile;
-        ShareFile = get共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_表BAK);
-        if (ShareFile != null) {
-            イメージパス_表 = getFilePath(イメージ情報, ShareFile.getSharedFileName(), ShareFile.getLocalFileName(),ファイル名_主治医意見書_表BAK);
-        }
+        イメージパス_表 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_表BAK);
         if (RString.isNullOrEmpty(イメージパス_表)) {
-            ShareFile = get共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_表);
-            if (ShareFile != null) {
-                イメージパス_表 = getFilePath(イメージ情報, ShareFile.getSharedFileName(), ShareFile.getLocalFileName(), ファイル名_主治医意見書_表);
-            }
+            イメージパス_表 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_表);
         }
         イメージファイルパス.add(イメージパス_表);
 
-        ShareFile = get共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_裏BAK);
-        if (ShareFile != null) {
-            イメージパス_裏 = getFilePath(イメージ情報, ShareFile.getSharedFileName(), ShareFile.getLocalFileName(), ファイル名_主治医意見書_裏BAK);
-        }
+        イメージパス_裏 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_裏BAK);
         if (RString.isNullOrEmpty(イメージパス_裏)) {
-            ShareFile = get共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_裏);
-            if (ShareFile != null) {
-                イメージパス_裏 = getFilePath(イメージ情報, ShareFile.getSharedFileName(), ShareFile.getLocalFileName(), ファイル名_主治医意見書_裏);
-            }
+            イメージパス_裏 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_裏);
         }
         イメージファイルパス.add(イメージパス_裏);
 
         return イメージファイルパス;
     }
 
-    private List<RString> getマスクFilePathList(Image イメージ情報) {
+    private List<RString> getマスクFilePathList(RString 出力イメージフォルダパス, RString ローカルファイル名) {
         List<RString> イメージファイルパス = new ArrayList<>();
         RString イメージパス_表 = RString.EMPTY;
         RString イメージパス_裏 = RString.EMPTY;
-        UzT0885SharedFileEntryEntity ShareFile;
-
-        ShareFile = get共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_表BAK);
-        if (ShareFile != null) {
-            イメージパス_表 = getFilePath(イメージ情報, ShareFile.getSharedFileName(), ShareFile.getLocalFileName(), ファイル名_主治医意見書_表);
+        if (RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_表BAK))) {
+            イメージパス_表 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_表);
         }
         イメージファイルパス.add(イメージパス_表);
 
-        ShareFile = get共有ファイルEntity(イメージ情報, ファイル名_主治医意見書_裏BAK);
-        if (ShareFile != null) {
-            イメージパス_裏 = getFilePath(イメージ情報, ShareFile.getSharedFileName(), ShareFile.getLocalFileName(), ファイル名_主治医意見書_裏);
+        if (RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_裏BAK))) {
+            イメージパス_裏 = getFilePath(出力イメージフォルダパス, ローカルファイル名, ファイル名_主治医意見書_裏);
         }
         イメージファイルパス.add(イメージパス_裏);
 
@@ -254,9 +245,11 @@ public class ShujiiIkenshoShokaiHandler {
         return null;
     }
 
-    private RString getFilePath(Image イメージ情報, RString 共有ファイル名, RString ローカルファイル名, RString ファイル名) {
-        RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
-        return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
@@ -268,7 +261,7 @@ public class ShujiiIkenshoShokaiHandler {
         deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
         return SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).toRString();
     }
-    
+
     private List<RString> getTitleList(List<RString> 表示イメージ) {
         List<RString> TitleList = new ArrayList<>();
         for (int index = 1; index <= 表示イメージ.size(); index++) {

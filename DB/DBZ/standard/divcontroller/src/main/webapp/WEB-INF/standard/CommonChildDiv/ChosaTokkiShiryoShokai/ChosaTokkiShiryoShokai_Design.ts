@@ -49,16 +49,16 @@ module DBZ {
                 return new UZA.TabPanel(this.convFiledName("genpoTabPanel1"));
             }
 
-            public imgGenpo1(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo1"));
+            public imgGenpo1(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo1"));
             }
 
             public genpoTabPanel2(): UZA.TabPanel {
                 return new UZA.TabPanel(this.convFiledName("genpoTabPanel2"));
             }
 
-            public imgGenpo2(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgGenpo2"));
+            public imgGenpo2(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgGenpo2"));
             }
 
             public genpoTabPanel3(): UZA.TabPanel {
@@ -117,8 +117,8 @@ module DBZ {
                 return new UZA.TabPanel(this.convFiledName("maskTabPanel1"));
             }
 
-            public imgMask1(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgMask1"));
+            public imgMask1(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgMask1"));
             }
 
             public LabelNoImage1(): UZA.Label {
@@ -129,8 +129,8 @@ module DBZ {
                 return new UZA.TabPanel(this.convFiledName("maskTabPanel2"));
             }
 
-            public imgMask2(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgMask2"));
+            public imgMask2(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgMask2"));
             }
 
             public LabelNoImage2(): UZA.Label {
