@@ -48,7 +48,7 @@ public class PublicationShiryoShinsakaiHandler {
     private static final int INT_4 = 4;
     private static final int INT_0 = 0;
     private static final int INT_2 = 2;
-    private static final int INT_10 = 10;
+    private static final int INT_8 = 8;
 
     /**
      * コンストラクタです。
@@ -197,7 +197,7 @@ public class PublicationShiryoShinsakaiHandler {
         } else {
             印刷帳票_事務局審査会資料3.remove(印刷帳票_予備判定記入票);
         }
-        
+
         if (選択.equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
             印刷帳票_事務局審査会資料2無効化.add(印刷帳票_特記事項_一次判定);
             印刷帳票_事務局審査会資料2.remove(印刷帳票_特記事項_一次判定);
@@ -225,9 +225,9 @@ public class PublicationShiryoShinsakaiHandler {
                 && div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
                 && !Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())) {
             div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料2);
-        }else if(!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
+        } else if (!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && !Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())){
+                && !Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())) {
             div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(new ArrayList<RString>());
         } else if (Boolean.valueOf(div.getHdnChkSubeteJimuFlag().toString())
                 && !div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)) {
@@ -257,7 +257,7 @@ public class PublicationShiryoShinsakaiHandler {
         印刷帳票_委員審査会資料2.add(印刷帳票_一次判定結果票);
         印刷帳票_委員審査会資料3.add(印刷帳票_審査会開催通知書);
         印刷帳票_委員審査会資料3.add(印刷帳票_予備判定記入票);
-        
+
         if (!作成条件_全件.equals(作成条件)) {
             印刷帳票_委員審査会資料3.remove(印刷帳票_予備判定記入票);
         }
@@ -284,11 +284,11 @@ public class PublicationShiryoShinsakaiHandler {
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料2);
             div.getChkPrintChohyoIin2().setSelectedItemsByKey(印刷帳票_委員審査会資料3);
             div.setHdnChkSubeteIinFlag(new RString(Boolean.TRUE.toString()));
-        }else if(!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
+        } else if (!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
-                && !Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())){
+                && !Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())) {
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料2);
-        }else if (!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
+        } else if (!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)
                 && !div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)
                 && !Boolean.valueOf(div.getHdnChkSubeteIinFlag().toString())) {
             div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(new ArrayList<RString>());
@@ -420,7 +420,7 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員用審査会開催通知書フラグ,
             RString 委員用予備判定記入表フラグ) {
         return new DBE517000_ShinsakaiShiryoParameter(
-                div.getTxtShinsakaiKaisaiNo().getValue().padZeroToLeft(INT_10),
+                div.getTxtShinsakaiKaisaiNo().getValue().padZeroToLeft(INT_8),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
                 div.getTxtGogitaiNo() == null || RString.isNullOrEmpty(div.getTxtGogitaiNo().getValue())
