@@ -38,7 +38,7 @@
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS B
             ON A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
         WHERE
-            A."hihokenshaNo" = #{被保険者番号}
+            A."shinseishoKanriNo" = #{被保険者番号}
         ORDER BY
             A."ninteiShinseiYMD" DESC
             LIMIT(1)
