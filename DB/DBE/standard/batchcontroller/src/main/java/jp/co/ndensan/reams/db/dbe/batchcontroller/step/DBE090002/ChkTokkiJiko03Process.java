@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokkiimage.Nin
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo.IYokaigoNinteiJohoTeikyoMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09A;
@@ -26,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -54,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 特記事項の作成クラスです。
@@ -176,6 +172,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 特記事項番号_702 = new RString("702");
     private static final RString コマ割り = new RString("1");
     private static final RString 拡張子_PNG = new RString(".png");
+    private static final RString SEPARATOR = new RString("/");
     List<NinteichosaRelateEntity> 特記事項リスト;
     List<NinteichosaRelateEntity> 特記事項区分;
 
@@ -232,7 +229,7 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         for (int i = 0; i < 特記事項区分.size(); i++) {
             共有ファイルを引き出す(getイメージID(特記事項区分, i), 共有ファイル名);
             RString fileName = get共有ファイル(get特記事項番号(特記事項区分, i), get特記事項連番(特記事項区分, i));
-            if (RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+            if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
                 if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
                     特記事項リスト4.add(fileName);
                 } else {
@@ -244,8 +241,8 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
     }
 
     private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, ファイル名);
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
     }
