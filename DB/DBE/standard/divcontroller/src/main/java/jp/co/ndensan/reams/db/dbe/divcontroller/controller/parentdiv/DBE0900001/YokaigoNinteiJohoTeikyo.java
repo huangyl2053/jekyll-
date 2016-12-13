@@ -56,7 +56,7 @@ public class YokaigoNinteiJohoTeikyo {
         ViewStateHolder.put(ViewStateKeys.認定申請情報, business);
 
         //TODO n8178 本来なら受け取れなかった場合のチェック処理くらいは必要だけど、急ぎのため今は無視。
-        getHandler(div).onLoad(被保険者番号, business);
+        getHandler(div).onLoad(申請書管理番号Str, business);
         return ResponseData.of(div).setState(DBE0900001StateName.一覧選択);
     }
 
