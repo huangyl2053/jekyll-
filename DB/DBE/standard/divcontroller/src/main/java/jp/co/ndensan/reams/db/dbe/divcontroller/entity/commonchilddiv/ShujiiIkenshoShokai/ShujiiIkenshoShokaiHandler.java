@@ -98,7 +98,7 @@ public class ShujiiIkenshoShokaiHandler {
         List<RString> マスクタイトルリスト = new ArrayList<>();
         if (イメージ情報 != null) {
             RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
-            RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+            RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
             RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
             RString ローカルファイル名 = new RString("IMG");
             RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
