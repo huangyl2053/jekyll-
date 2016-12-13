@@ -51,18 +51,20 @@ public class ShinchokuDataOutput {
         getHandler(div).onLoad();
         return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
     }
-    
+
     /**
      * 画面アクティブ時処理です。
-     * 
+     *
      * @param div 要介護認定進捗情報データ出力div
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onActive(ShinchokuDataOutputDiv div) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getTxtHihokenshaCode().setValue(被保険者番号.getColumnValue());
+        if (taishoshaKey != null) {
+            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+                div.getTxtHihokenshaCode().setValue(被保険者番号.getColumnValue());
+            }
         }
         return ResponseData.of(div).respond();
     }
