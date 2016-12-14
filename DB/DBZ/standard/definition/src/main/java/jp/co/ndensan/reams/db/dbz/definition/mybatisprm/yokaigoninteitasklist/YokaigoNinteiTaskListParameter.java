@@ -44,4 +44,20 @@ public final class YokaigoNinteiTaskListParameter {
                 延期,
                 状態区分);
     }
+
+    /**
+     * タスク一覧共有画面検索用パラメータを生成します。
+     *
+     * @param 通常 処理状態区分.通常
+     * @param 延期 処理状態区分.延期
+     * @return YokaigoNinteiTaskListParameter
+     */
+    public static YokaigoNinteiTaskListParameter createParameter(
+            RString 通常,
+            RString 延期) {
+        return new YokaigoNinteiTaskListParameter(
+                通常,
+                延期,
+                RString.EMPTY);
+    }
 }
