@@ -19,10 +19,12 @@ public final class YokaigoNinteiTaskListParameter {
 
     private final RString 通常;
     private final RString 延期;
+    private final RString 状態区分;
 
-    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期) {
+    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分) {
         this.通常 = 通常;
         this.延期 = 延期;
+        this.状態区分 = 状態区分;
     }
 
     /**
@@ -30,13 +32,16 @@ public final class YokaigoNinteiTaskListParameter {
      *
      * @param 通常 RString
      * @param 延期 RString
+     * @param 状態区分 RString
      * @return YokaigoNinteiTaskListParameter
      */
     public static YokaigoNinteiTaskListParameter createParameter(
             RString 通常,
-            RString 延期) {
+            RString 延期,
+            RString 状態区分) {
         return new YokaigoNinteiTaskListParameter(
                 通常,
-                延期);
+                延期,
+                状態区分);
     }
 }

@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshogetDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -97,8 +95,53 @@ public class IkenshogetDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdTaskList() {
-        return this.getIkenshogetichiran().getCcdTaskList();
+    public RadioButton getRadJyotaiKubun() {
+        return this.getIkenshogetichiran().getRadJyotaiKubun();
+    }
+
+    @JsonIgnore
+    public void  setRadJyotaiKubun(RadioButton radJyotaiKubun) {
+        this.getIkenshogetichiran().setRadJyotaiKubun(radJyotaiKubun);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtMisyori() {
+        return this.getIkenshogetichiran().getTxtMisyori();
+    }
+
+    @JsonIgnore
+    public void  setTxtMisyori(TextBox txtMisyori) {
+        this.getIkenshogetichiran().setTxtMisyori(txtMisyori);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKanryouKano() {
+        return this.getIkenshogetichiran().getTxtKanryouKano();
+    }
+
+    @JsonIgnore
+    public void  setTxtKanryouKano(TextBox txtKanryouKano) {
+        this.getIkenshogetichiran().setTxtKanryouKano(txtKanryouKano);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtGokei() {
+        return this.getIkenshogetichiran().getTxtGokei();
+    }
+
+    @JsonIgnore
+    public void  setTxtGokei(TextBox txtGokei) {
+        this.getIkenshogetichiran().setTxtGokei(txtGokei);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getIkenshogetichiran().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getIkenshogetichiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore
