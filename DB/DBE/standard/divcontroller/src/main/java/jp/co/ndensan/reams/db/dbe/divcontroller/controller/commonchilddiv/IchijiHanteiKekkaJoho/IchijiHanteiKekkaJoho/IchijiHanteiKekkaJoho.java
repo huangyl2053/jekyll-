@@ -56,6 +56,8 @@ public class IchijiHanteiKekkaJoho {
             throw new ApplicationException(UrErrorMessages.設定不可.getMessage().replace("申請書管理番号が受け取れなかった"));
         }
 
+        handler.initializeDdl();
+
         if (!RString.isNullOrEmpty(div.getIchijiHanteiKekka())) {
             jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho hanteiKekka
                     = DataPassingConverter.deserialize(div.getIchijiHanteiKekka(),
@@ -111,7 +113,7 @@ public class IchijiHanteiKekkaJoho {
             ModeType modeType = getHandler(div).getモード();
 
             if (ModeType.SHOKAI_MODE.equals(modeType)) {
-                RString 一次判定結果 = div.getTxtIchijiHanteiKekka().getValue();
+                RString 一次判定結果 = div.getDdlIchijiHanteiKekka().getSelectedValue();
                 ViewStateHolder.put(ViewStateKeys.一次判定結果, 一次判定結果);
             } else if (ModeType.ADD_MODE.equals(modeType)) {
                 set一次判定結果情報(hanteiKekka, div);

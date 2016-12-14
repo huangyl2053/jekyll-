@@ -32,14 +32,14 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class IchijiHanteizumIfOutputBusiness {
 
-    private int 項番 = 0;
+    private static int 項番 = 0;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
     private static final RString 厚労省IF識別コード = new RString("厚労省IF識別コード");
     private static final RString 厚労省IF識別コード_99A = new RString("99A");
     private static final RString 厚労省IF識別コード_02A = new RString("02A");
     private static final RString 厚労省IF識別コード_06A = new RString("06A");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
-    private final RString 要介護認定一次判定警告コード = new RString("０");
+    private static final RString 要介護認定一次判定警告コード = new RString("０");
 
     /**
      *
@@ -354,7 +354,7 @@ public class IchijiHanteizumIfOutputBusiness {
      * @param 出力件数 出力件数
      * @return RString
      */
-    public RString get出力件数(Decimal 出力件数) {
+    public static RString get出力件数(Decimal 出力件数) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
         return builder.toRString();
@@ -366,20 +366,28 @@ public class IchijiHanteizumIfOutputBusiness {
      * @param paramter ShinchokuDataOutputProcessParamter
      * @return List<RString> 出力条件List
      */
-    public List<RString> get出力条件(ItziHanteiShoriProcessParamter paramter) {
-        RStringBuilder jokenBuilder = new RStringBuilder();
+    public static List<RString> get出力条件(ItziHanteiShoriProcessParamter paramter) {
         List<RString> 出力条件List = new ArrayList<>();
-        jokenBuilder.append(new RString("【申請書管理番号リスト】"));
-        出力条件List.add(jokenBuilder.toRString());
-        jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("("));
-        List<RString> shinseishoKanriNoList = paramter.getShinseishoKanriNoList();
-        for (RString shinseishoKanriNo : shinseishoKanriNoList) {
-            jokenBuilder.append(shinseishoKanriNo);
-            jokenBuilder.append(new RString(","));
+        出力条件List.add(new RString("【出力対象データ】"));
+
+        List<RString> 証記載保険者List = paramter.getShokisaiHokenshaMeiList();
+        List<RString> 被保険者番号List = paramter.getHihokenshaNoList();
+        List<RString> 申請日List = paramter.getShinseibiList();
+
+        int max = 証記載保険者List.size();//落ちる！！？
+        for (int i = 0; i < max; i++) {
+            RStringBuilder jokenBuilder = new RStringBuilder();
+            jokenBuilder.append(new RString("証記載保険者："));
+            jokenBuilder.append(証記載保険者List.get(i));
+            jokenBuilder.append(new RString(", "));
+            jokenBuilder.append(new RString("被保険者番号："));
+            jokenBuilder.append(被保険者番号List.get(i));
+            jokenBuilder.append(new RString(", "));
+            jokenBuilder.append(new RString("申請日："));
+            jokenBuilder.append(申請日List.get(i));
+
+            出力条件List.add(jokenBuilder.toRString());
         }
-        jokenBuilder.append(new RString(")"));
-        出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
     }
 
@@ -389,7 +397,7 @@ public class IchijiHanteizumIfOutputBusiness {
      * @param entity entity
      * @return NinteiChosaDataOutputEucCsvEntity
      */
-    public IchijiHanteizumIfOutputEucCsvEntity setEucCsvEntity(IchijiHanteizumIfOutputRelateEntity entity) {
+    public static IchijiHanteizumIfOutputEucCsvEntity setEucCsvEntity(IchijiHanteizumIfOutputRelateEntity entity) {
         IchijiHanteizumIfOutputEucCsvEntity eucEntity = new IchijiHanteizumIfOutputEucCsvEntity();
         RString 連番号 = new RString(Integer.toString(++項番));
         eucEntity.setシーケンシャル番号(連番号);
@@ -496,7 +504,7 @@ public class IchijiHanteizumIfOutputBusiness {
 
     }
 
-    private void 認定申請区分(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void 認定申請区分(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode())
                 || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode())) {
             eucEntity.set前回の認定有効期間開始(nullToEmpty(entity.getZenkaiYukoKikanStart()));
@@ -553,7 +561,7 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private void 認定調査票時テーブル(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void 認定調査票時テーブル(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode()))
@@ -649,7 +657,7 @@ public class IchijiHanteizumIfOutputBusiness {
         set認定調査票(entity, eucEntity);
     }
 
-    private void set認定調査票(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void set認定調査票(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.getKoroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_02A.equals(entity.getKoroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_06A.equals(entity.getKoroshoIfShikibetsuCode())))) {
@@ -770,7 +778,7 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private void 前回認定調査票時テーブル(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void 前回認定調査票時テーブル(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.get前回koroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_99A.equals(entity.get前回koroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode()))
@@ -866,7 +874,7 @@ public class IchijiHanteizumIfOutputBusiness {
         set前回結果(entity, eucEntity);
     }
 
-    private void set前回結果(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void set前回結果(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         if (entity.get前回koroshoIfShikibetsuCode() != null
                 && (厚労省IF識別コード_02A.equals(entity.get前回koroshoIfShikibetsuCode())
                 || (厚労省IF識別コード_06A.equals(entity.get前回koroshoIfShikibetsuCode())))) {
@@ -986,7 +994,7 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private void 予防給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void 予防給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         eucEntity.set介護予防訪問介護ホームヘルプサービス(entity.getサービスremban1());
         eucEntity.set介護予防訪問入浴介護(entity.getサービスremban2());
         eucEntity.set介護予防訪問看護(entity.getサービスremban3());
@@ -1015,7 +1023,7 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private void 前回結果_予防給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void 前回結果_予防給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         eucEntity.set前回結果_介護予防訪問介護ホームヘルプサービス(entity.get前回サービスremban1());
         eucEntity.set前回結果_介護予防訪問入浴介護(entity.get前回サービスremban2());
         eucEntity.set前回結果_介護予防訪問看護(entity.get前回サービスremban3());
@@ -1045,7 +1053,7 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private void 介護給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void 介護給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         eucEntity.set訪問介護ホームヘルプサービス(nullToEmpty(entity.getサービスremban1()));
         eucEntity.set訪問入浴介護(nullToEmpty(entity.getサービスremban2()));
         eucEntity.set訪問看護(nullToEmpty(entity.getサービスremban3()));
@@ -1083,7 +1091,7 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private void 前回結果_介護給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
+    private static void 前回結果_介護給付サービス(IchijiHanteizumIfOutputRelateEntity entity, IchijiHanteizumIfOutputEucCsvEntity eucEntity) {
         eucEntity.set前回結果_訪問介護ホームヘルプサービス(nullToEmpty(entity.get前回サービスremban1()));
         eucEntity.set前回結果_訪問入浴介護(nullToEmpty(entity.get前回サービスremban2()));
         eucEntity.set前回結果_訪問看護(nullToEmpty(entity.get前回サービスremban3()));
@@ -1773,7 +1781,7 @@ public class IchijiHanteizumIfOutputBusiness {
         }
     }
 
-    private RString nullToEmpty(RString obj) {
+    private static RString nullToEmpty(RString obj) {
         if (obj == null) {
             return RString.EMPTY;
         }

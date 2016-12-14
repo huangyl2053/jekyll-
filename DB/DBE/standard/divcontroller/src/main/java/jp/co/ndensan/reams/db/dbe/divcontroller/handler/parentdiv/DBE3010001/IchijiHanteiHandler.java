@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -106,13 +107,34 @@ public class IchijiHanteiHandler {
     }
 
     /**
+     * 特定のメニューから遷移した場合のみ、タイトルを設定し直します。
+     *
+     * @param menuId
+     * @return タイトル名称
+     */
+    public RString getTitle(IchijiHanteiMenuId menuId) {
+        switch (menuId) {
+            case 一次判定処理:
+            case 一次判定インターフェース作成:
+            case 一次判定インターフェース取込:
+                return new RString(menuId.name());
+        }
+        return ResponseData.of(div).respond().getRootTitle();
+    }
+
+    /**
      * 条件をクリアする。
      *
      */
     public void clear() {
         div.getIchijiHanteiKensakuJoken().getTxtShinseiDateRange().clearFromValue();
         div.getIchijiHanteiKensakuJoken().getTxtShinseiDateRange().clearToValue();
-        div.getIchijiHanteiKensakuJoken().getTxtMaxCount().clearValue();
+        RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 最大上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setValue(new Decimal(最大表示件数.toString()));
+        div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setMaxValue(new Decimal(最大上限.toString()));
     }
 
     /**
@@ -126,12 +148,23 @@ public class IchijiHanteiHandler {
         ItziHanteiShoriBatchParamter parameter = new ItziHanteiShoriBatchParamter();
         List<dgIchijiHanteiTaishoshaIchiran_Row> rowList = div.getIchijiHanteiShoriTaishoshaIchiran().
                 getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
-        List<RString> shinseishoKanriNo = new ArrayList<>();
-        for (dgIchijiHanteiTaishoshaIchiran_Row row : rowList) {
 
-            shinseishoKanriNo.add(row.getShinseishoKanriNo());
+        List<RString> shinseishoKanriNoList = new ArrayList<>();
+        List<RString> hihoNoList = new ArrayList<>();
+        List<RString> shinseibiList = new ArrayList<>();
+        List<RString> shokisaiHokenshaList = new ArrayList<>();
+
+        for (dgIchijiHanteiTaishoshaIchiran_Row row : rowList) {
+            shinseishoKanriNoList.add(row.getShinseishoKanriNo());
+            hihoNoList.add(row.getHihokenNo());
+            shinseibiList.add(row.getShinseibi().getValue().wareki().toDateString());
+            shokisaiHokenshaList.add(row.getHokensha());
         }
-        parameter.setShinseishoKanriNoList(shinseishoKanriNo);
+
+        parameter.setShinseishoKanriNoList(shinseishoKanriNoList);
+        parameter.setHihokenshaNoList(hihoNoList);
+        parameter.setShokisaiHokenshaMeiList(shokisaiHokenshaList);
+        parameter.setShinseibiList(shinseibiList);
         parameter.setBattishuturyokukubun(バッチ出力区分);
         if (new RString("2").equals(バッチ出力区分)) {
 

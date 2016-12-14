@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class IChiJiPanTeiSyoRiParameter {
 
+    private static final RString 一次判定処理 = new RString("DBEMN51001");
+    private static final RString 完了処理_一次判定 = new RString("DBEMN11006");
+
     private final RString 通常;
     private final RString 延期;
     private final RString イメージ区分;
@@ -86,10 +89,10 @@ public final class IChiJiPanTeiSyoRiParameter {
                 認定申請年月日開始,
                 認定申請年月日終了,
                 最大表示件数,
-                new RString("DBEMN41001").equals(メニュー) && 認定申請年月日開始 != null && !認定申請年月日開始.isEmpty(),
-                new RString("DBEMN41001").equals(メニュー) && 認定申請年月日終了 != null && !認定申請年月日終了.isEmpty(),
-                new RString("DBEMN41001").equals(メニュー),
-                new RString("DBEMNA1006").equals(メニュー),
+                一次判定処理.equals(メニュー) && 認定申請年月日開始 != null && !認定申請年月日開始.isEmpty(),
+                一次判定処理.equals(メニュー) && 認定申請年月日終了 != null && !認定申請年月日終了.isEmpty(),
+                一次判定処理.equals(メニュー),
+                完了処理_一次判定.equals(メニュー),
                 申請書管理番号List);
     }
 }

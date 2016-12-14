@@ -24,6 +24,9 @@ import lombok.Setter;
 public class ItziHanteiShoriProcessParamter implements IBatchProcessParameter {
 
     private final List<RString> shinseishoKanriNoList;
+    private final List<RString> shokisaiHokenshaMeiList;
+    private final List<RString> hihokenshaNoList;
+    private final List<RString> shinseibiList;
     private final RString battishuturyokukubun;
     private RString イメージ区分;
     private final RDateTime fileId;
@@ -32,14 +35,23 @@ public class ItziHanteiShoriProcessParamter implements IBatchProcessParameter {
      * コンストラクタです。
      *
      * @param 申請書管理番号リスト List<RString>
+     * @param 証記載保険者名リスト List<RString>
+     * @param 被保険者番号リスト List<RString>
+     * @param 申請日リスト List<RString>
      * @param battishuturyokukubun RString
      * @param fileId RDateTime
      */
     public ItziHanteiShoriProcessParamter(
             List<RString> 申請書管理番号リスト,
+            List<RString> 証記載保険者名リスト,
+            List<RString> 被保険者番号リスト,
+            List<RString> 申請日リスト,
             RString battishuturyokukubun,
             RDateTime fileId) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
+        this.shokisaiHokenshaMeiList = 証記載保険者名リスト;
+        this.hihokenshaNoList = 被保険者番号リスト;
+        this.shinseibiList = 申請日リスト;
         this.battishuturyokukubun = battishuturyokukubun;
         this.fileId = fileId;
     }

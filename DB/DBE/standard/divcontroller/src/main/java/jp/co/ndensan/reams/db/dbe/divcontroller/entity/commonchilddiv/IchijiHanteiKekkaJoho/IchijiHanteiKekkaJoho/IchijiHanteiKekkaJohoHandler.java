@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
@@ -20,6 +19,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
@@ -30,8 +31,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 一次判定結果情報のハンドラークラスです。
@@ -41,8 +42,37 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class IchijiHanteiKekkaJohoHandler {
 
     private final IchijiHanteiKekkaJohoDiv div;
-    private static final RString 未 = new RString("未");
-    private static final RString 済 = new RString("済");
+
+    private enum MiSumiKubun {
+
+        未("0", "未"),
+        済("1", "済");
+
+        private final RString key;
+        private final RString value;
+
+        private MiSumiKubun(String key, String value) {
+            this.key = new RString(key);
+            this.value = new RString(value);
+        }
+
+        private RString getKey() {
+            return key;
+        }
+
+        private RString getValue() {
+            return value;
+        }
+
+        private static MiSumiKubun toValue(RString key) {
+            for (MiSumiKubun kubun : values()) {
+                if (kubun.getValue().equals(key)) {
+                    return kubun;
+                }
+            }
+            return MiSumiKubun.未;
+        }
+    }
 
     /**
      * コンストラクタです。
@@ -81,6 +111,52 @@ public class IchijiHanteiKekkaJohoHandler {
             modeType = ViewStateHolder.get(ViewStateKeys.モード, ModeType.class);
         }
         return modeType;
+    }
+
+    /**
+     * Ddlの選択項目を初期化します。
+     */
+    public void initializeDdl() {
+
+        List<KeyValueDataSource> hanteiKekkaSource = new ArrayList<>();
+        for (IchijiHanteiKekkaCode09 code : IchijiHanteiKekkaCode09.values()) {
+            hanteiKekkaSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
+        div.getDdlIchijiHanteiKekka().setDataSource(hanteiKekkaSource);
+        div.getDdlIchijiHanteiKekka().setSelectedIndex(0);
+
+        List<KeyValueDataSource> hanteiKekkaKasanSource = new ArrayList<>();
+        for (IchijiHanteiKekkaNinchishoKasanCode code : IchijiHanteiKekkaNinchishoKasanCode.values()) {
+            hanteiKekkaKasanSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
+        //TODO n8178 南京環境の認知症加算一次判定結果コードは2桁の文字列が設定されているためIchijiHanteiKekkaNinchishoKasanCodeに変換できない。
+        //IchijiHanteiKekkaNinchishoKasanCodeを使用するのが正しいのかも含めて、仕様を確認すること。
+        //div.getDdlIchijiHanteiKekkaNinchishoKasan().setDataSource(hanteiKekkaKasanSource);
+        div.getDdlIchijiHanteiKekkaNinchishoKasan().setDataSource(hanteiKekkaSource);
+        div.getDdlIchijiHanteiKekkaNinchishoKasan().setSelectedIndex(0);
+
+        List<KeyValueDataSource> miSumiSource = new ArrayList<>();
+        for (MiSumiKubun code : MiSumiKubun.values()) {
+            miSumiSource.add(new KeyValueDataSource(code.getKey(), code.getValue()));
+        }
+        div.getDdlJiritsudoChosa().setDataSource(miSumiSource);
+        div.getDdlJiritsudoChosa().setSelectedIndex(0);
+        div.getDdlJiritsudoIkensho().setDataSource(miSumiSource);
+        div.getDdlJiritsudoIkensho().setSelectedIndex(0);
+
+        List<KeyValueDataSource> anteiseiSource = new ArrayList<>();
+        for (JotaiAnteiseiCode code : JotaiAnteiseiCode.values()) {
+            anteiseiSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
+        div.getDdlJyotaiAnteisei().setDataSource(anteiseiSource);
+        div.getDdlJyotaiAnteisei().setSelectedIndex(0);
+
+        List<KeyValueDataSource> kyufuKubunSource = new ArrayList<>();
+        for (SuiteiKyufuKubunCode code : SuiteiKyufuKubunCode.values()) {
+            kyufuKubunSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
+        div.getDdlKyufuKbn().setDataSource(kyufuKubunSource);
+        div.getDdlKyufuKbn().setSelectedIndex(0);
     }
 
     /**
@@ -124,9 +200,16 @@ public class IchijiHanteiKekkaJohoHandler {
         Code ifShikibetsuCode = get厚労省IF識別コード(shinseishoKanriNo);
 
         div.getTxtIchijiHanteibi().setValue(hanteiKekka.get要介護認定一次判定年月日());
-        div.getTxtIchijiHanteiKekka().setValue(hanteiKekka.get一次判定結果名称(ifShikibetsuCode));
 
-        div.getTxtKijunJikan().setValue(new RString(String.valueOf(hanteiKekka.get要介護認定等基準時間())));
+        if (!isNullOrEmpty(hanteiKekka.get要介護認定一次判定結果コード())) {
+            div.getDdlIchijiHanteiKekka().setSelectedKey(hanteiKekka.get要介護認定一次判定結果コード().getColumnValue());
+        }
+        if (!isNullOrEmpty(hanteiKekka.get要介護認定一次判定結果コード_認知症加算())) {
+            div.getDdlIchijiHanteiKekkaNinchishoKasan().setSelectedKey(hanteiKekka
+                    .get要介護認定一次判定結果コード_認知症加算().getColumnValue());
+        }
+
+        div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()));
         div.getTxtShokuji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_食事()));
         div.getTxtHaisetsu().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_排泄()));
         div.getTxtIdo().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_移動()));
@@ -145,8 +228,10 @@ public class IchijiHanteiKekkaJohoHandler {
         div.getTxtDai6gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第6群()));
         div.getTxtDai7gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第7群()));
 
-        div.getTxtJiritsudoChosa().setValue(hasNot認定調査票(shinseishoKanriNo) ? 未 : 済);
-        div.getTxtJiritsudoIkensho().setValue(hasNot主治医意見書(shinseishoKanriNo) ? 未 : 済);
+        MiSumiKubun ninteiChosaMisumiKubun = hasNot認定調査票(shinseishoKanriNo) ? MiSumiKubun.未 : MiSumiKubun.済;
+        div.getDdlJiritsudoChosa().setSelectedKey(ninteiChosaMisumiKubun.getKey());
+        MiSumiKubun shujiiIkenshoMisumiKubun = hasNot主治医意見書(shinseishoKanriNo) ? MiSumiKubun.未 : MiSumiKubun.済;
+        div.getDdlJiritsudoIkensho().setSelectedKey(shujiiIkenshoMisumiKubun.getKey());
 
         if (hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().equals(new Decimal(-1))) {
             div.getTxtGaizensei().clearValue();
@@ -157,13 +242,13 @@ public class IchijiHanteiKekkaJohoHandler {
         Code jotaiAnteiseiCode = hanteiKekka.get要介護認定状態の安定性コード();
         RString jotaiAnteiseiCodeValue = jotaiAnteiseiCode == null ? RString.EMPTY : jotaiAnteiseiCode.value();
         if (!jotaiAnteiseiCodeValue.isEmpty()) {
-            div.getTxtJyotaiAnteisei().setValue(JotaiAnteiseiCode.toValue(jotaiAnteiseiCodeValue).get名称());
+            div.getDdlJyotaiAnteisei().setSelectedKey(JotaiAnteiseiCode.toValue(jotaiAnteiseiCodeValue).getコード());
         }
 
         Code suiteiKyufuKubunCode = hanteiKekka.get要介護認定状態の安定性コード();
         RString suiteiKyufuKubunCodeValue = suiteiKyufuKubunCode == null ? RString.EMPTY : suiteiKyufuKubunCode.value();
         if (!suiteiKyufuKubunCodeValue.isEmpty()) {
-            div.getTxtKyufuKbn().setValue(SuiteiKyufuKubunCode.toValue(suiteiKyufuKubunCodeValue).get名称());
+            div.getDdlKyufuKbn().setSelectedKey(SuiteiKyufuKubunCode.toValue(suiteiKyufuKubunCodeValue).getコード());
         }
 
         List<dgIchijiHanteiKeikokuCode_Row> rowList = new ArrayList<>();
@@ -187,6 +272,15 @@ public class IchijiHanteiKekkaJohoHandler {
             rowList.add(row);
         }
         div.getDgIchijiHanteiKeikokuCode().setDataSource(rowList);
+    }
+
+    private boolean isNullOrEmpty(Code code) {
+        if (code == null || code.isEmpty()) {
+            return true;
+        }
+        RString codeStr = code.getColumnValue();
+
+        return RString.isNullOrEmpty(codeStr);
     }
 
     private Code get厚労省IF識別コード(ShinseishoKanriNo shinseishoKanriNo) {
@@ -226,7 +320,8 @@ public class IchijiHanteiKekkaJohoHandler {
         div.getBtnKakutei().setDisplayNone(isReadOnly);
 
         div.getTxtIchijiHanteibi().setReadOnly(isReadOnly);
-        div.getTxtIchijiHanteiKekka().setReadOnly(isReadOnly);
+        div.getDdlIchijiHanteiKekka().setReadOnly(isReadOnly);
+        div.getDdlIchijiHanteiKekkaNinchishoKasan().setReadOnly(isReadOnly);
         div.getTxtKijunJikan().setReadOnly(isReadOnly);
         div.getTxtShokuji().setReadOnly(isReadOnly);
         div.getTxtHaisetsu().setReadOnly(isReadOnly);
@@ -244,11 +339,11 @@ public class IchijiHanteiKekkaJohoHandler {
         div.getTxtDai5gun().setReadOnly(isReadOnly);
         div.getTxtDai6gun().setReadOnly(isReadOnly);
         div.getTxtDai7gun().setReadOnly(isReadOnly);
-        div.getTxtJiritsudoChosa().setReadOnly(isReadOnly);
-        div.getTxtJiritsudoIkensho().setReadOnly(isReadOnly);
+        div.getDdlJiritsudoChosa().setReadOnly(isReadOnly);
+        div.getDdlJiritsudoIkensho().setReadOnly(isReadOnly);
         div.getTxtGaizensei().setReadOnly(isReadOnly);
-        div.getTxtJyotaiAnteisei().setReadOnly(isReadOnly);
-        div.getTxtKyufuKbn().setReadOnly(isReadOnly);
+        div.getDdlJyotaiAnteisei().setReadOnly(isReadOnly);
+        div.getDdlKyufuKbn().setReadOnly(isReadOnly);
         div.getDgIchijiHanteiKeikokuCode().setReadOnly(isReadOnly);
     }
 
@@ -265,22 +360,17 @@ public class IchijiHanteiKekkaJohoHandler {
      */
     public IchijiHanteiKekkaJoho 呼び出し元画面への戻り値(IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho) {
 
-        //TODO n8178 コメントアウト箇所は必要性の判断をしてから削除予定。親画面側の修正が完了するまでに確定する予定。
-//        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
-//        IchijiHanteiKekkaJohoSearchBusiness business = manager.getIchijiHanteiKekkaJoho(shinseishoKanriNo);
         boolean kariIchijiHanteiKubun = false;
-        if (RString.isNullOrEmpty(div.getTxtJiritsudoIkensho().getValue())) {
+        if (MiSumiKubun.未.equals(MiSumiKubun.toValue(div.getDdlJiritsudoIkensho().getSelectedKey()))) {
             kariIchijiHanteiKubun = true;
         }
         IchijiHanteiKekkaJohoBuilder builder = ichijiHanteiKekkaJoho.createBuilderForEdit();
         builder.set仮一次判定区分(kariIchijiHanteiKubun);
         builder.set要介護認定一次判定年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
-//            if (business.get一次判定結果() != null) {
-//                builder.set要介護認定一次判定結果コード(new Code(business.get一次判定結果()));
-//            }
-//            if (business.get認知症加算後の一次判定結果() != null) {
-//                builder.set要介護認定一次判定結果コード_認知症加算(new Code(business.get認知症加算後の一次判定結果()));
-//            }
+
+        builder.set要介護認定一次判定結果コード(new Code(div.getDdlIchijiHanteiKekka().getSelectedKey()));
+        builder.set要介護認定一次判定結果コード_認知症加算(new Code(div.getDdlIchijiHanteiKekkaNinchishoKasan().getSelectedKey()));
+
         builder.set要介護認定等基準時間(Integer.valueOf(div.getTxtKijunJikan().getValue().toString()));
         builder.set要介護認定等基準時間_食事(Integer.valueOf(div.getTxtShokuji().getValue().toString()));
         builder.set要介護認定等基準時間_排泄(Integer.valueOf(div.getTxtHaisetsu().getValue().toString()));
@@ -298,14 +388,11 @@ public class IchijiHanteiKekkaJohoHandler {
         builder.set中間評価項目得点第5群(Integer.valueOf(div.getTxtDai5gun().getValue().toString()));
         builder.set中間評価項目得点第6群(0);
         builder.set中間評価項目得点第7群(0);
-//            builder.set要介護認定一次判定警告コード(business.get一次判定警告コード());
-//            if (business.get状態の安定性() != null) {
-//                builder.set要介護認定状態の安定性コード(new Code(business.get状態の安定性()));
-//            }
-//            builder.set認知症自立度Ⅱ以上の蓋然性(new Decimal(div.getTxtGaizensei().getValue().toString()));
-//            if (business.get認知機能及び状態安定性から推定される給付区分() != null) {
-//                builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(business.get認知機能及び状態安定性から推定される給付区分()));
-//            }
+
+        builder.set要介護認定状態の安定性コード(new Code(div.getDdlJyotaiAnteisei().getSelectedKey()));
+        builder.set認知症自立度Ⅱ以上の蓋然性(div.getTxtGaizensei().getValue() == null ? Decimal.ZERO : div.getTxtGaizensei().getValue());
+        builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(div.getDdlKyufuKbn().getSelectedKey()));
+
         builder.set運動能力の低下していない認知症高齢者の指標コード(new Code("1"));
         builder.set日常生活自立度の組み合わせ_自立(0);
         builder.set日常生活自立度の組み合わせ_要支援(0);
