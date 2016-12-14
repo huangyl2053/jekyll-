@@ -68,14 +68,14 @@ public class YokaigoNinteiJohoTeikyoFinder {
     /**
      * 被保険者情報を取得します。
      *
-     * @param hihokenshaNo 被保険者番号
+     * @param shinseishoKanriNo 申請書管理番号
      * @return 被保険者情報
      */
     @Transaction
-    public HihokenshaJyuhouBusiness select被保険者情報(RString hihokenshaNo) {
+    public HihokenshaJyuhouBusiness select被保険者情報(RString shinseishoKanriNo) {
         IYokaigoNinteiJohoTeikyoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoTeikyoMapper.class);
         HihokenshaJyuhouRelateEntity entityList = mapper
-                .get被保険者情報(YokaigoNinteiJohoTeiParameter.createParameter(hihokenshaNo, RString.EMPTY, RString.EMPTY, false));
+                .get被保険者情報(YokaigoNinteiJohoTeiParameter.createParameter(shinseishoKanriNo, RString.EMPTY, RString.EMPTY, false));
         if (entityList == null) {
             return null;
         }

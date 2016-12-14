@@ -58,15 +58,15 @@ public class YokaigoNinteiJohoTeikyoHandler {
     /**
      * 画面情報を設定します。
      *
-     * @param 被保険者番号 被保険者番号
+     * @param 申請書管理番号 申請書管理番号
      * @param business 認定申請ビジネスクラス
      */
-    public void onLoad(RString 被保険者番号, NinnteiRiriBusiness business) {
+    public void onLoad(RString 申請書管理番号, NinnteiRiriBusiness business) {
         div.getNinteiKekkaShosai().setIsOpen(false);
         div.getHakkoChohyo().setIsOpen(false);
         div.getNInteiRirekiInfo().setIsOpen(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToSearch"), false);
-        HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(被保険者番号);
+        HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(申請書管理番号);
         if (被保険者情報 != null) {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());
             div.getTxtHihokenshaKubun().setValue(HihokenshaKubunCode.toValue(被保険者情報.get区分コード()).get名称());

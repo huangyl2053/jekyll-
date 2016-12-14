@@ -510,6 +510,26 @@
         GROUP BY G."shinsakaiKaisaiNo"
         ) as shinsakaiKaisaiNo
         ) AS shinsakaiKaisaiNoCount
+        <choose>
+            <when test="!isEmptyHokensyaNo">
+                ,rgdb."DbUDD015ShoKisaiHokenshaNo" #{hokensyaNo} AS "shoKisaiHokenshaNo"
+                ,(
+                SELECT DbT7051."shichosonCode"
+                FROM rgdb."DbT7051KoseiShichosonMaster" DbT7051
+                WHERE "shoKisaiHokenshaNo" = #{hokensyaNo}
+                ) AS "shichosonCode"
+                ,(
+                SELECT DbT7051."shichosonMeisho"
+                FROM rgdb."DbT7051KoseiShichosonMaster" DbT7051
+                WHERE "shoKisaiHokenshaNo" = #{hokensyaNo}
+                ) AS "shichosonMeisho"
+            </when>
+            <otherwise>
+                ,rshare."UDD023LasdecCode" '' AS "shichosonCode"
+                ,character varying(10) '全市町村' AS "shichosonMeisho"
+                ,rgdb."DbUDD015ShoKisaiHokenshaNo" '' AS "shoKisaiHokenshaNo"
+            </otherwise>
+        </choose>
         FROM (
         SELECT
         MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin,
@@ -2678,6 +2698,9 @@
         <result property="shinsakaiKaisaiYMDMin" column="shinsakaiKaisaiYMDMin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKaisaiYMDMax" column="shinsakaiKaisaiYMDMax" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKaisaiNoCount" column="shinsakaiKaisaiNoCount" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <resultMap id="hokokushiryosakusei_CsvKenHokokuShiryoSakuseiHeader"

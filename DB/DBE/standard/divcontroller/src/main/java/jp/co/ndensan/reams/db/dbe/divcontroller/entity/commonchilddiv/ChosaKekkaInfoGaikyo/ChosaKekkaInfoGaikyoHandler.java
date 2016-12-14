@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
@@ -31,6 +34,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.Cho
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
@@ -43,10 +47,13 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査結果情報照会_概況調査の取得するクラスです。
@@ -59,6 +66,8 @@ public class ChosaKekkaInfoGaikyoHandler {
     private static final RString 未実施 = new RString("1");
     private static final RString 出力する = new RString("1");
     private static final RString 実施済 = new RString("2");
+    private static final RString 予防給付サービス = new RString("介護予防");
+    private static final RString 介護給付サービス = new RString("介護");
     private static final RString IMAGEFILENAME_認定調査実施場所 = new RString("C0001.png");
     private static final RString IMAGEFILENAME_市町村特別給付 = new RString("C0002.png");
     private static final RString IMAGEFILENAME_在宅サービス = new RString("C0003.png");
@@ -175,17 +184,37 @@ public class ChosaKekkaInfoGaikyoHandler {
      */
     private List<dgServiceJokyo_Row> setサービス状況(List<RembanServiceJokyoBusiness> serviceJokyos) {
         List<dgServiceJokyo_Row> grdSinsaSeiList = new ArrayList<>();
+        RString 厚労省IF識別コード = RString.EMPTY;
         int count = 0;
-        if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-            count = 15;
+        if (serviceJokyos != null && !serviceJokyos.isEmpty()) {
+            厚労省IF識別コード = serviceJokyos.get(0).get厚労省IF識別コード().value();
         }
-        if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-            count = 20;
+        if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
+            count = GaikyoChosahyouServiceJyouk99A.values().length;
+        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
+            count = GaikyoChosahyouServiceJyouk02A.values().length;
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
+            if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
+                count = GaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(予防給付サービス);
+            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
+                count = GaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(介護給付サービス);
+            }
+        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
+            if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
+                count = GaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(予防給付サービス);
+            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
+                count = GaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(介護給付サービス);
+            }
+        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
+            if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
+                count = GaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(予防給付サービス);
+            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
+                count = GaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(介護給付サービス);
+            }
         }
-
         for (int i = 0; i < count; i++) {
             dgServiceJokyo_Row dgJigyoshaItiran = new dgServiceJokyo_Row();
-            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
                 dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
@@ -196,7 +225,7 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
-            if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+            if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
                 dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
@@ -207,7 +236,7 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
-            if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+            if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
                 dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
@@ -218,7 +247,7 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
-            if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+            if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
                 dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
@@ -229,7 +258,7 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
-            if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyos.get(i).get厚労省IF識別コード().value())) {
+            if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
                 dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
@@ -347,11 +376,16 @@ public class ChosaKekkaInfoGaikyoHandler {
                 setText概況特記(gaikyoBusiness);
             } else {
                 Image image = ChosaKekkaInfoGaikyoFinder.createInstance().get5115Image(gaikyoParameter);
-                setImage認定調査実施場所(image);
-                setImage概況調査特記(image);
-                setImageサービス(gaikyoBusiness, image);
-                setImage利用施設情報(image);
-                setImage概況特記(image);
+                RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+                RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
+                RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
+                RString 出力イメージフォルダパス = copySharedFiles(image, 共有ファイル名);
+                
+                setImage認定調査実施場所(出力イメージフォルダパス);
+                setImage概況調査特記(出力イメージフォルダパス);
+                setImageサービス(gaikyoBusiness, 出力イメージフォルダパス);
+                setImage利用施設情報(出力イメージフォルダパス);
+                setImage概況特記(出力イメージフォルダパス);
             }
         }
     }
@@ -361,7 +395,7 @@ public class ChosaKekkaInfoGaikyoHandler {
             gaikyoDiv.getTxtNinteichosaJisshiYMD().setValue(new RDate(gaikyoBusiness.get認定調査実施年月日().toString()));
         }
     }
-    
+
     private void set認定調査実施場所コード(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness) {
         if (gaikyoBusiness.get認定調査実施場所コード() != null) {
             ChosaJisshiBashoCode 実施場所 = ChosaJisshiBashoCode.toValue(gaikyoBusiness.get認定調査実施場所コード().value());
@@ -459,72 +493,77 @@ public class ChosaKekkaInfoGaikyoHandler {
         gaikyoDiv.getGaikyoTokkiPanel().getTxtKikaiKiki().setValue(gaikyoBusiness.get概況特記事項_機器_器械());
     }
 
-    private void setImage認定調査実施場所(Image image) {
-        RString 実施場所ImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_認定調査実施場所);
-        gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(実施場所ImagePath);
+    private void setImage認定調査実施場所(RString 出力イメージフォルダパス) {
+        RString 実施場所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_認定調査実施場所);        
+        gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(sanitizePath(実施場所ImagePath, 出力イメージフォルダパス));
+    }
+    
+    private RString sanitizePath(RString imagePath, RString 出力イメージフォルダパス) {
+        RString DATAURI_BMP = new RString("data:image/png;base64,");
+        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(出力イメージフォルダパス, imagePath)) : RString.EMPTY;
+    }
+    
+    private RString base64encode(RString 出力イメージフォルダパス, RString イメージパス) {
+        RString imgBase64 = RString.EMPTY;
+        try {
+            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(Path.combinePath(出力イメージフォルダパス).toString(), イメージパス.toString())));
+        } catch (IOException ex) {
+        }
+        return imgBase64;
     }
 
-    private void setImage概況調査特記(Image image) {
+    private void setImage概況調査特記(RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            RString 概況調査特記ImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_概況調査特記);
-            gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(概況調査特記ImagePath);
+            RString 概況調査特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況調査特記);
+            gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(sanitizePath(概況調査特記ImagePath, 出力イメージフォルダパス));
         }
     }
 
-    private void setImageサービス(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness, Image image) {
+    private void setImageサービス(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness, RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             if (gaikyoBusiness.get記入項目連番() == 1) {
-                RString 市町村特別給付ImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_市町村特別給付);
-                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(市町村特別給付ImagePath);
+                RString 市町村特別給付ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_市町村特別給付);
+                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(sanitizePath(市町村特別給付ImagePath, 出力イメージフォルダパス));
             } else {
-                RString 在宅サービスImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_在宅サービス);
-                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(在宅サービスImagePath);
+                RString 在宅サービスImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_在宅サービス);
+                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(sanitizePath(在宅サービスImagePath, 出力イメージフォルダパス));
             }
         }
     }
 
-    private void setImage利用施設情報(Image image) {
-        RString 施設名称ImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_利用施設名);
-        RString 施設住所ImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_利用施設住所);
-        RString 電話番号ImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_電話番号);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuMeisho().setSrc(施設名称ImagePath);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuJusho().setSrc(施設住所ImagePath);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgTelNo().setSrc(電話番号ImagePath);
+    private void setImage利用施設情報(RString 出力イメージフォルダパス) {
+        RString 施設名称ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設名);
+        RString 施設住所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設住所);
+        RString 電話番号ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_電話番号);
+        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuMeisho().setSrc(sanitizePath(施設名称ImagePath, 出力イメージフォルダパス));
+        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuJusho().setSrc(sanitizePath(施設住所ImagePath, 出力イメージフォルダパス));
+        gaikyoDiv.getShisetsuRiyoPanel().getImgTelNo().setSrc(sanitizePath(電話番号ImagePath, 出力イメージフォルダパス));
     }
 
-    private void setImage概況特記(Image image) {
+    private void setImage概況特記(RString 出力イメージフォルダパス) {
         if (出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            RString 概況特記ImagePath = 共有ファイルを引き出す(image, IMAGEFILENAME_概況特記);
-            gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(概況特記ImagePath);
+            RString 概況特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況特記);
+            gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(sanitizePath(概況特記ImagePath, 出力イメージフォルダパス));
         }
     }
 
-    private RString 共有ファイルを引き出す(Image イメージ情報, RString ファイル名) {
-        RString imagePath = RString.EMPTY;
-        if (イメージ情報 != null) {
-            imagePath = getFilePath(イメージ情報.getイメージ共有ファイルID(), ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ファイル名);
         }
-        return imagePath;
+        return RString.EMPTY;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+    private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
+        RString 出力イメージフォルダパス = Directory.createTmpDirectory();
         ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        RString FileaPath = SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
-        return getImageSrc(Path.combinePath(FileaPath, replaceShareFileName(sharedFileName, false)));
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
+                        イメージ情報.getイメージ共有ファイルID());
+        deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
-    private RString replaceShareFileName(RString sharedFileName, boolean isExistマスク) {
-        if (isExistマスク) {
-            return sharedFileName.replace(".png", "_BAK.png");
-        }
-        return sharedFileName;
+    private void deleteIMGDirecotry(RString 出力イメージパス, RString ローカルファイル名) {
+        Directory.deleteIfExists(Path.combinePath(出力イメージパス, ローカルファイル名));
     }
-
-    private RString getImageSrc(RString path) {
-        return Path.combinePath(new RString(File.separator + "db"), new RString("dbe"), path.substring(path.indexOf("image")));
-    }
-
 }

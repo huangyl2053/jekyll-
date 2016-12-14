@@ -56,9 +56,7 @@ public class NinteiShinsakaiIinGuideHandler {
         set性別();
         set審査会委員資格();
         div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        set医療機関();
-        set介護事業者();
-        setその他事業者();
+        画面表示制御();
     }
 
     /**
@@ -229,13 +227,30 @@ public class NinteiShinsakaiIinGuideHandler {
      *
      */
     public void set保険者選択() {
-        set医療機関();
-        set介護事業者();
-        setその他事業者();
+        画面表示制御();
         List<dgShinsakaiIinIchiran_Row> 検索一覧データ = new ArrayList<>();
         div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(検索一覧データ);
         div.getShinsakaiIinIchiran().setIsOpen(false);
         div.getBtnSaikensaku().setVisible(false);
+    }
+    
+    private void 画面表示制御() {
+        if (RString.isNullOrEmpty(div.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村名称())) {
+            div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setDisplayNone(Boolean.TRUE);
+            div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setDisplayNone(Boolean.TRUE);
+            div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setDisplayNone(Boolean.TRUE);
+            div.getKensakuJoken().getShosaiJoken().getLblShozoku().setDisplayNone(Boolean.TRUE);
+
+        } else {
+            div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setDisplayNone(Boolean.FALSE);
+            div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setDisplayNone(Boolean.FALSE);
+            div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setDisplayNone(Boolean.FALSE);
+            div.getKensakuJoken().getShosaiJoken().getLblShozoku().setDisplayNone(Boolean.FALSE);
+            set医療機関();
+            set介護事業者();
+            setその他事業者();
+        }
+
     }
     
     

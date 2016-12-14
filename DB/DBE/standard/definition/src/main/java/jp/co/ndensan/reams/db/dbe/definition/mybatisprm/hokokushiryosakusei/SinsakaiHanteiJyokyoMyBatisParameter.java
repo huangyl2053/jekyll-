@@ -36,6 +36,7 @@ public class SinsakaiHanteiJyokyoMyBatisParameter implements IMyBatisParameter {
     private LasdecCode shichosonCode;
     private boolean isShinseiji;
     private boolean isHorei;
+    private RString shichosonMeisho;
 
     /**
      * コンストラクタです。
@@ -55,6 +56,7 @@ public class SinsakaiHanteiJyokyoMyBatisParameter implements IMyBatisParameter {
      * @param taishoGeppiTo 対象月日終了
      * @param isShinseiji 申請区分(申請時)
      * @param isHorei 申請区分(法令)
+     * @param shichosonMeisho 保険者名称
      */
     public SinsakaiHanteiJyokyoMyBatisParameter(
             boolean isEmptyHokensyaNo,
@@ -71,7 +73,8 @@ public class SinsakaiHanteiJyokyoMyBatisParameter implements IMyBatisParameter {
             RString taishoGeppiFrom,
             RString taishoGeppiTo,
             boolean isShinseiji,
-            boolean isHorei) {
+            boolean isHorei,
+            RString shichosonMeisho) {
         this.isEmptyHokensyaNo = isEmptyHokensyaNo;
         this.hokensyaNo = hokensyaNo;
         this.hihokenshaKubun = hihokenshaKubun;
@@ -87,5 +90,6 @@ public class SinsakaiHanteiJyokyoMyBatisParameter implements IMyBatisParameter {
         this.taishoGeppiTo = taishoGeppiTo;
         this.isShinseiji = isShinseiji;
         this.isHorei = isHorei;
+        this.shichosonMeisho = shichosonMeisho;
     }
 }

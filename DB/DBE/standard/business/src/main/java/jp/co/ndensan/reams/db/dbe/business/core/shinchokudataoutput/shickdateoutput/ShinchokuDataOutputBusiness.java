@@ -38,6 +38,11 @@ public class ShinchokuDataOutputBusiness {
     private static final RString 厚労省IF識別コード_02A = new RString("02A");
     private static final RString 厚労省IF識別コード_06A = new RString("06A");
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
+    private static final RString 検索条件_進捗情報コード = new RString("0");
+    private static final RString 検索条件_結果情報コード = new RString("1");
+    private static final RString 検索条件_進捗情報 = new RString("進捗情報（0）");
+    private static final RString 検索条件_結果情報 = new RString("結果情報（1）");
+    private static final int 申請書管理番号_改行個数 = 10;
 
     /**
      *
@@ -440,23 +445,33 @@ public class ShinchokuDataOutputBusiness {
      * @return List<RString> 出力条件List
      */
     public List<RString> get出力条件(ShinchokuDataOutputProcessParamter paramter) {
-        RStringBuilder jokenBuilder = new RStringBuilder();
+        RStringBuilder jokenBuilder;
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("ファイル区分"));
-        jokenBuilder.append(paramter.getFayirukuben());
+        jokenBuilder.append(new RString("ファイル区分："));
+        if (paramter.getFayirukuben().equals(検索条件_進捗情報コード)) {
+            jokenBuilder.append(検索条件_進捗情報);
+        } else if (paramter.getFayirukuben().equals(検索条件_結果情報コード)) {
+            jokenBuilder.append(検索条件_結果情報);
+        }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【申請書管理番号リスト】"));
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("("));
         List<RString> shinseishoKanriNoList = paramter.getShinseishoKanriNoList();
+        int count = 0;
         for (RString shinseishoKanriNo : shinseishoKanriNoList) {
             jokenBuilder.append(shinseishoKanriNo);
             jokenBuilder.append(new RString(","));
+            count++;
+            if (申請書管理番号_改行個数 == count) {
+                出力条件List.add(jokenBuilder.toRString());
+                jokenBuilder = new RStringBuilder();
+                count = 0;
+            }
         }
-        jokenBuilder.append(new RString(")"));
+        jokenBuilder.delete(jokenBuilder.length() - 1, jokenBuilder.length());
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
     }

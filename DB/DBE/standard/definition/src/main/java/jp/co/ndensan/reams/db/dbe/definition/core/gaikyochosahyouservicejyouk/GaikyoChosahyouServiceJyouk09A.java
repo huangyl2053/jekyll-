@@ -186,4 +186,20 @@ public enum GaikyoChosahyouServiceJyouk09A {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("概況調査票サービスの状況09A"));
     }
+    
+    /**
+     * 指定した給付区分の概況調査票サービス状況09Aのレコード数を返します。
+     *
+     * @param kyufuKubun 給付区分
+     * @return {@kyufuKubun 給付区分} に対応する概況調査票サービス状況09Aのレコード数
+     */
+    public static int get給付サービスRecordSize(RString kyufuKubun) {
+        int size = 0;
+        for (GaikyoChosahyouServiceJyouk09A values : GaikyoChosahyouServiceJyouk09A.values()) {
+            if (values.get給付区分().equals(kyufuKubun)) {
+                size++;
+            }
+        }
+        return size;
+    }
 }

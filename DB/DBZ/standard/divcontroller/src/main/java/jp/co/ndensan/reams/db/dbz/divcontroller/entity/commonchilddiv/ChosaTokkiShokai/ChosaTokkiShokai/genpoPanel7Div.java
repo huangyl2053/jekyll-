@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class genpoPanel7Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,7 +22,7 @@ public class genpoPanel7Div extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("imgGenpo7")
-    private StaticImage imgGenpo7;
+    private DynamicImage imgGenpo7;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,7 +35,7 @@ public class genpoPanel7Div extends Panel {
      * @return imgGenpo7
      */
     @JsonProperty("imgGenpo7")
-    public StaticImage getImgGenpo7() {
+    public DynamicImage getImgGenpo7() {
         return imgGenpo7;
     }
 
@@ -44,7 +44,7 @@ public class genpoPanel7Div extends Panel {
      * @param imgGenpo7 imgGenpo7
      */
     @JsonProperty("imgGenpo7")
-    public void setImgGenpo7(StaticImage imgGenpo7) {
+    public void setImgGenpo7(DynamicImage imgGenpo7) {
         this.imgGenpo7 = imgGenpo7;
     }
 

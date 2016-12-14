@@ -57,9 +57,6 @@ public class ChosaKekkaInfoGaikyo {
                 createGamenParam(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキスト_イメージ区分, 概況特記テキスト_イメージ区分);
         List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList
                 = ChosaKekkaInfoGaikyoFinder.createInstance().getChosaKekkaInfoGaikyo(gaikyoParameter).records();
-
-        List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況ListCopy = new ArrayList<>(chosaKekkaInfoGaikyoList);
-        chosaKekkaInfoGaikyoList = get認定調査結果概況一覧(認定調査結果概況ListCopy);
         if (chosaKekkaInfoGaikyoList == null || chosaKekkaInfoGaikyoList.isEmpty()) {
             概況調査テキスト_イメージ区分 = TokkijikoTextImageKubun.テキスト.getコード();
             概況特記テキスト_イメージ区分 = TokkijikoTextImageKubun.テキスト.getコード();

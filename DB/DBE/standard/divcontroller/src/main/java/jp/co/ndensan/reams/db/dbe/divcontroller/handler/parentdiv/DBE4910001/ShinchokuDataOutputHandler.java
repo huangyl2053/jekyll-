@@ -84,7 +84,10 @@ public class ShinchokuDataOutputHandler {
         div.getTxtChuishutsuRange().setToValue(new RDate(RDate.getNowDate().toString()));
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtHihokenshaCode().clearValue();
-        div.getTxtMaxKensu().clearValue();
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**

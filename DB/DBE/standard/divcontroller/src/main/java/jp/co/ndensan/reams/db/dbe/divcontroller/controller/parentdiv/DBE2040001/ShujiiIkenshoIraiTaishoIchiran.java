@@ -200,8 +200,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return ShujiiIkenshoIraiTaishoIchiranDiv
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onOkClose_btnIraishoToOutput(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).initialize();
-        return ResponseData.of(div).setState(DBE2040001StateName.登録);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -301,7 +300,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     private RString getコード(RString 名称, int kubun) {
-        if (名称 == null || !名称.isEmpty()) {
+        if (名称 == null || 名称.isEmpty()) {
             return RString.EMPTY;
         }
         if (kubun == 1) {

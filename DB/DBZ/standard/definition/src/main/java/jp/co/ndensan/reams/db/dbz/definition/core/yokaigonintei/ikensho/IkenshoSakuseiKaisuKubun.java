@@ -65,4 +65,13 @@ public enum IkenshoSakuseiKaisuKubun {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("意見書作成回数区分"));
     }
+
+    public static IkenshoSakuseiKaisuKubun toCode(RString name) {
+        for (IkenshoSakuseiKaisuKubun kubunCode : IkenshoSakuseiKaisuKubun.values()) {
+            if (kubunCode.get名称().equals(name)) {
+                return kubunCode;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("意見書作成回数区分"));
+    }
 }

@@ -63,7 +63,7 @@
           ON T5913."shichosonCode" = T7051."shichosonCode" 
           AND T5913."ninteiChosaItakusakiCode" = T5201."ninteichosaItakusakiCode" 
           AND T5913."ninteiChosainCode" = T5201."ninteiChosainCode" 
-        INNER JOIN rgdb."UzT0007Code" AS UzT0007 
+        LEFT JOIN rgdb."UzT0007Code" AS UzT0007 
           ON UzT0007."schemaName" = 'rgdb' 
           AND UzT0007."subGyomuCode" = 'DBE' 
           AND UzT0007."codeShubetsu" = '5002' 

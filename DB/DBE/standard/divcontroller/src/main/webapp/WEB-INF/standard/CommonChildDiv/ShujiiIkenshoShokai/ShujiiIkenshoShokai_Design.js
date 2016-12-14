@@ -51,6 +51,18 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtShokujiKoi"));
             };
 
+            Controls.prototype.txtTest = function () {
+                return new UZA.TextBox(this.convFiledName("txtTest"));
+            };
+
+            Controls.prototype.txtTest2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTest2"));
+            };
+
+            Controls.prototype.txtTest3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtTest3"));
+            };
+
             Controls.prototype.btnReturn = function () {
                 return new UZA.Button(this.convFiledName("btnReturn"));
             };

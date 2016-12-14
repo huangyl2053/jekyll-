@@ -58,6 +58,18 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtShokujiKoi"));
             }
 
+            public txtTest(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTest"));
+            }
+
+            public txtTest2(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTest2"));
+            }
+
+            public txtTest3(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTest3"));
+            }
+
             //public CcdChosaTokkiShiryoShokai(): DBZ.ChosaTokkiShiryoShokai.ModeController {
             //    return new DBZ.ChosaTokkiShiryoShokai.ModeController(this.convFiledName("CcdChosaTokkiShiryoShokai"));
             //}

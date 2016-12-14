@@ -860,6 +860,7 @@
         DbT5301."ikenshoSakuseiIraiYMD",
         DbT5301."ikenshoIraiRirekiNo",
         DbT4302."ikenshoSakuseiKaisuKubun",
+        DbT4302."ikenshoKinyuYMD",
         DbT4302."ikenshoReadYMD",
         DbT5911."iryoKikanMeisho",
         DbT5912."shujiiName"
@@ -907,6 +908,12 @@
         AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
         AND DbT5105."ikenshoTorokuKanryoYMD" is NULL
+        <if test="状態区分 == 1" >
+            AND DbT4302."ikenshoReadYMD" is NULL
+        </if>
+        <if test="状態区分 == 2" >
+            AND DbT4302."ikenshoReadYMD" is NOT NULL
+        </if>
     ORDER BY  DbT5101."hihokenshaKana",
               DbT5101."ninteiShinseiYMD",
               DbT5101."shoKisaiHokenshaNo"

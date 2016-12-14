@@ -62,7 +62,7 @@ public class PrintValidationHandler {
                     && chkChosahyo.isEmpty()
                     && chkOcrChosahyo.isEmpty()
                     && chkChosahyo2.isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getChk()));
+                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getNinteiChosaPrint()));
             }
         } else {
             List<dgShujiiIkensho_Row> rowList = div.getDgShujiiIkensho().getSelectedItems();
@@ -75,7 +75,7 @@ public class PrintValidationHandler {
             if (chkInsatsuIkensho.isEmpty()
                     && chkIkenshoSakusei.isEmpty()
                     && chkIkenshoSakuseiryo.isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getChkInsatsuIkensho()));
+                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getShujiiIkenshoPrint()));
             }
 
             RString selectKey = div.getRadJyushinKikan().getSelectedKey();

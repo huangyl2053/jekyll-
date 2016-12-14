@@ -118,6 +118,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
             div.getRenrakusakiNyuryoku().setReadOnly(true);
             div.getBtnKakutei().setDisabled(true);
             div.getBtnModoru().setDisabled(false);
+            div.getBtnKakutei().setVisible(false);
+            div.getBtnToroku().setVisible(false);
         } else {
             div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.ShokaiMode);
         }

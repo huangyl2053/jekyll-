@@ -107,6 +107,29 @@ public enum NinteiShinseiShinseijiKubunCode {
         }
         return null;
     }
+    
+    /**
+     * 申請区分（申請時）名称と一致する内容の検索。
+     * 
+     * @param name 申請区分（申請時）名称
+     * @return {@name name} に対応する申請区分（申請時）コード
+     */
+    public static NinteiShinseiShinseijiKubunCode toName(String name) {
+        NinteiShinseiShinseijiKubunCode value = toNameOrNull(name);
+        if (value == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請区分（申請時）名称"));
+        }
+        return value;
+    }
+    
+    private static NinteiShinseiShinseijiKubunCode toNameOrNull(String name) {
+        for (NinteiShinseiShinseijiKubunCode kubunCode : NinteiShinseiShinseijiKubunCode.values()) {
+            if (kubunCode.fullName.equals(new RString(name))) {
+                return kubunCode;
+            }
+        }
+        return null;
+    }
 
     /**
      * 第1引数のコードから名称を取得して返却します。

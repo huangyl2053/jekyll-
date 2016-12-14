@@ -74,7 +74,6 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -109,7 +108,6 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final int 数字_8 = 8;
     private static final int 数字_9 = 9;
     private static final int 数字_10 = 10;
-    private static final RString 帳票発行 = new RString("btnHakkou");
     private static final RString 意見書作成料_種別 = new RString("✔");
     private static final RString 再依頼申請者削除 = new RString("再依頼申請者を削除します。");
     private static final RString 依頼書印刷処理 = new RString("依頼書印刷処理");
@@ -133,7 +131,6 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(帳票発行, false);
         LockingKey 排他キー
                 = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
         if (!RealInitialLocker.tryGetLock(排他キー)) {
@@ -191,12 +188,12 @@ public class ShujiiIkenshoSakuseiIrai {
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
         createHandler(div).init(manager.get申請者情報(param));
-        Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = Models.create(manager.get主治医意見書作成依頼情報(param).records());
-        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
-                = Models.create(manager.get要介護認定申請情報(param).records());
-        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
-        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
+//        Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
+//                = Models.create(manager.get主治医意見書作成依頼情報(param).records());
+//        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
+//                = Models.create(manager.get要介護認定申請情報(param).records());
+//        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
+//        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
         return ResponseData.of(div).respond();
     }
 

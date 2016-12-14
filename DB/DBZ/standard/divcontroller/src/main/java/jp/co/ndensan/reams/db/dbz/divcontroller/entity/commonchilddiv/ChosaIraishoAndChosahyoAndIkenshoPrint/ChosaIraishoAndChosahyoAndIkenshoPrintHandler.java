@@ -87,6 +87,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString 連結 = new RString("～");
     private static final RString 記号 = new RString("✔");
     private static final RString HOUSI = new RString("*");
+    private static final RString MARU = new RString("○");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
     private static final RString 文字列3 = new RString("3");
@@ -174,6 +175,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             div.getDgNinteiChosa().setDataSource(rowList);
             setDisableToNinteiChosaChk();
+            RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                    div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+            if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
+                div.getRadTeishutsuKigen().setDisabled(true);
+            } else {
+                div.getRadTeishutsuKigen().setDisabled(false);
+            }
         } else {
             div.getNinteiChosa().setDisplayNone(true);
             div.getShujiiIkensho().setDisplayNone(false);
@@ -205,14 +214,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
             setDisableToShujiiIkenshoChk();
-        }
-        RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード());
-        if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
-            div.getRadTeishutsuKigen().setDisabled(true);
-        } else {
-            div.getRadTeishutsuKigen().setDisabled(false);
+            RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                    div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+            if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
+                div.getRadTeishutsuKigen().setDisabled(true);
+            } else {
+                div.getRadTeishutsuKigen().setDisabled(false);
+            }
         }
         div.setHiddenData(getInputData());
     }
@@ -1007,9 +1016,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setHihokenshaNameKana(business.get被保険者氏名カナ());
                 if (Seibetsu.男.getコード().equals(business.get性別())) {
                     item.setSeibetsuWoman(HOUSI);
+                    item.setSeibetsuMan(MARU);
                 }
                 if (Seibetsu.女.getコード().equals(business.get性別())) {
                     item.setSeibetsuMan(HOUSI);
+                    item.setSeibetsuWoman(MARU);
                 }
                 item.setHihokenshaName(business.get被保険者氏名());
                 RString 生年月日 = business.get生年月日();
@@ -1511,12 +1522,16 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         if (年号.startsWith(元号_明治)) {
             item.setBirthGengoShowa(HOUSI);
             item.setBirthGengoTaisho(HOUSI);
+            item.setBirthGengoMeiji(MARU);
+                    
         } else if (年号.startsWith(元号_大正)) {
             item.setBirthGengoMeiji(HOUSI);
             item.setBirthGengoShowa(HOUSI);
+            item.setBirthGengoTaisho(MARU);
         } else if (年号.startsWith(元号_昭和)) {
             item.setBirthGengoMeiji(HOUSI);
             item.setBirthGengoTaisho(HOUSI);
+            item.setBirthGengoShowa(MARU);
         } else {
             item.setBirthGengoMeiji(HOUSI);
             item.setBirthGengoShowa(HOUSI);
