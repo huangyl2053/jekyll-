@@ -514,6 +514,8 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
      * @param isIkenshoTorokuKanryoYMD 主治医意見書登録完了年月日
      * @param isCenterSoshinYMD センター送信年月日
      * @param limitCount 検索件数
+     * @param isNinteiShinseiYMDSystemFrom is経過日数Form
+     * @param isNinteiShinseiYMDSystemTo is経過日数To
      * @return YouKaiGoNinTeiShinParameter
      */
     public static YouKaiGoNinTeiShinNiTeiParameter createParam_認定(
@@ -591,7 +593,9 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
             boolean isNinteichosaKanryoYMD,
             boolean isIkenshoTorokuKanryoYMD,
             boolean isCenterSoshinYMD,
-            int limitCount
+            int limitCount,
+            boolean isNinteiShinseiYMDSystemFrom,
+            boolean isNinteiShinseiYMDSystemTo
     ) {
         return new YouKaiGoNinTeiShinNiTeiParameter(
                 !RString.isNullOrEmpty(hihokenshaNo),
@@ -713,9 +717,9 @@ public final class YouKaiGoNinTeiShinNiTeiParameter {
                 zenkaiYukoKikanStartTo,
                 !RString.isNullOrEmpty(geninShikkanCode.value()),
                 geninShikkanCode,
-                !ninteiShinseiYMDSystemFrom.isEmpty(),
+                isNinteiShinseiYMDSystemFrom,
                 ninteiShinseiYMDSystemFrom,
-                !ninteiShinseiYMDSystemTo.isEmpty(),
+                isNinteiShinseiYMDSystemTo,
                 ninteiShinseiYMDSystemTo,
                 isKoShiTaiJyo,
                 ninteiShinseiYukoKubunCode,

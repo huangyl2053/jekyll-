@@ -314,8 +314,8 @@
         <result property="ninteiChosaItakusakiCode" column="dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/>
         <result property="ninteiChosainCode" column="dbT5101NinteiShinseiJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/>
         <result property="renrakuJikoToChosain" column="dbT5101NinteiShinseiJoho_renrakuJikoToChosain" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shujiiIryokikanCode" column="dbT5101NinteiShinseiJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shujiiCode" column="dbT5101NinteiShinseiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiIryokikanCode" column="dbT5101NinteiShinseiJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiIryokikanCodeTypeHandler"/>
+        <result property="shujiiCode" column="dbT5101NinteiShinseiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiCodeTypeHandler"/>
         <result property="shiteiiFlag" column="dbT5101NinteiShinseiJoho_shiteiiFlag" />
         <result property="ikenshoDataShubetsu" column="dbT5101NinteiShinseiJoho_ikenshoDataShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="renrakuJikoToShujii" column="dbT5101NinteiShinseiJoho_renrakuJikoToShujii" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -478,6 +478,7 @@
  <include refid="認定_前回情報" />
  <include refid="認定_その他情報" />
  <include refid="認定_完了情報" />
+LIMIT (#{limitCount})
 </select>
  <sql id="受給_基本の検索条件">
         <if test = "isHihokenshaNo">
