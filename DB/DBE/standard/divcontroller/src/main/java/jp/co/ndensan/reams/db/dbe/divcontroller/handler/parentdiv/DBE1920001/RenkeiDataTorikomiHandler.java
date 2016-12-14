@@ -197,7 +197,7 @@ public class RenkeiDataTorikomiHandler {
             dataParameter.set保険者番号(row.getHokenshano());
             dataParameter.set被保険者番号(row.getHihono());
             dataParameter.set認定申請日(row.getNinteishinseiymd().getValue().toDateString());
-            dataParameter.set申請種別コード(NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseikubunshinseiji().toString()).getコード());
+            dataParameter.set申請種別コード(NinteiShinseiShinseijiKubunCode.toName(row.getShinseikubunshinseiji().toString()).getコード());
             parameterList.add(dataParameter);
         }
         batchParameter.set申請情報データリスト(parameterList);
