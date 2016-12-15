@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -118,8 +116,53 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdTaskList() {
-        return this.getIkenshoiraitaishoichiran().getCcdTaskList();
+    public TextBox getTxtTotalCount() {
+        return this.getIkenshoiraitaishoichiran().getTxtTotalCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtTotalCount(TextBox txtTotalCount) {
+        this.getIkenshoiraitaishoichiran().setTxtTotalCount(txtTotalCount);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtCompleteCount() {
+        return this.getIkenshoiraitaishoichiran().getTxtCompleteCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtCompleteCount(TextBox txtCompleteCount) {
+        this.getIkenshoiraitaishoichiran().setTxtCompleteCount(txtCompleteCount);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtNoUpdate() {
+        return this.getIkenshoiraitaishoichiran().getTxtNoUpdate();
+    }
+
+    @JsonIgnore
+    public void  setTxtNoUpdate(TextBox txtNoUpdate) {
+        this.getIkenshoiraitaishoichiran().setTxtNoUpdate(txtNoUpdate);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadShoriJyotai() {
+        return this.getIkenshoiraitaishoichiran().getRadShoriJyotai();
+    }
+
+    @JsonIgnore
+    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
+        this.getIkenshoiraitaishoichiran().setRadShoriJyotai(radShoriJyotai);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getIkenshoiraitaishoichiran().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getIkenshoiraitaishoichiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore
