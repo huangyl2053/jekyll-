@@ -182,7 +182,6 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
     private static final RString 拡張子_PNG = new RString(".png");
     private static final RString マスキングあり = new RString("1");
     List<NinteichosaRelateEntity> 特記事項リスト;
-    private static final RString ローカルファイル名 = new RString("IMG");
     private static final RString SEPARATOR = new RString("/");
 
     @Override
@@ -334,7 +333,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
                     tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
                     tokki.set特記事項連番(entity.get(i).get特記事項連番());
                     RString fileName = get共有ファイル(entity.get(i).get特記事項番号(), entity.get(i).get特記事項連番(), ninteiEntity);
-                    if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+                    if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
                         tokki.set特記事項イメージ(fileName);
                     } else {
                         tokki.set特記事項イメージ(RString.EMPTY);
@@ -1007,7 +1006,7 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
 
     private RString getImageFile_C0007() {
         RString fileName = フラグ.equals(processPrm.getRadTokkiJikoMasking()) ? C0007_FILENAME : C0007_FILENAME_BAK;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
             return fileName;
         }
         return RString.EMPTY;
@@ -1025,15 +1024,15 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             imageFileName.append(BAK);
             imageFileName.append(拡張子_PNG);
         }
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, imageFileName.toRString()))) {
+        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), imageFileName.toRString()))) {
             return imageFileName.toRString();
         }
         return RString.EMPTY;
     }
 
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
     }

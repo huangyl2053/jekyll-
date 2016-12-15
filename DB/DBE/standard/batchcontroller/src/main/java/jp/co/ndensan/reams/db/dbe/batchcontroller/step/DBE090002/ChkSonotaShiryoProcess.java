@@ -155,18 +155,17 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
     }
 
     private RString 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
-        RString ローカルファイル名 = new RString("IMG");
         getFilePath(イメージID, 共有ファイル名);
         RString fileName = フラグ.equals(processPrm.getRadSohotaShiryoMasking()) ? FILENAME : FILENAME_BAK;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
             return fileName;
         }
         return RString.EMPTY;
     }
 
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
     }
