@@ -339,7 +339,7 @@ public class IchijiHanteiHandler {
      * @param business 要介護認定一次判定結果情報
      * @return 値を比較して、1項目でも差がある場合はtrueを返す。それ以外の場合はfalseを返す。
      */
-    public boolean equalsRowData(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
+    public boolean notEqualsRowData(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
 
         if (business == null) {
             return false;
@@ -350,7 +350,7 @@ public class IchijiHanteiHandler {
             return true;
         }
 
-        if (equalsRowData一次判定結果コード(row, business)) {
+        if (notEqualsRowData一次判定結果コード(row, business)) {
             return true;
         }
 
@@ -363,10 +363,10 @@ public class IchijiHanteiHandler {
             return true;
         }
 
-        if (equalsRowData基準時間(row, business)) {
+        if (notEqualsRowData基準時間(row, business)) {
             return true;
         }
-        if (equalsRowData中間評価項目(row, business)) {
+        if (notEqualsRowData中間評価項目(row, business)) {
             return true;
         }
 
@@ -387,7 +387,7 @@ public class IchijiHanteiHandler {
         return false;
     }
 
-    private boolean equalsRowData一次判定結果コード(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
+    private boolean notEqualsRowData一次判定結果コード(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
 
         if (business.get要介護認定一次判定結果コード() != null) {
             if (!row.getIchijiHanteiKekkaCode().equals(business.get要介護認定一次判定結果コード().getColumnValue())) {
@@ -401,7 +401,7 @@ public class IchijiHanteiHandler {
         return false;
     }
 
-    private boolean equalsRowData基準時間(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
+    private boolean notEqualsRowData基準時間(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
 
         if (!row.getKijunJikan().equals(new RString(String.valueOf(business.get要介護認定等基準時間())))) {
             return true;
@@ -433,7 +433,7 @@ public class IchijiHanteiHandler {
         return !row.getKijunJikanNinchishoKasan().equals(new RString(String.valueOf(business.get要介護認定等基準時間_認知症加算())));
     }
 
-    private boolean equalsRowData中間評価項目(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
+    private boolean notEqualsRowData中間評価項目(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
 
         if (!row.getChukanHyokaKomoku1gun().equals(new RString(String.valueOf(business.get中間評価項目得点第1群())))) {
             return true;
@@ -464,12 +464,12 @@ public class IchijiHanteiHandler {
             if (business.get要介護認定一次判定年月日() != null) {
                 row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
             }
-            if (business.get要介護認定一次判定結果コード() != null) {
+            if (!isNullOrEmpty(business.get要介護認定一次判定結果コード())) {
                 row.setIchijiHanteiKekkaCode(business.get要介護認定一次判定結果コード().getColumnValue());
                 row.setIchijiHanteiKekka(IchijiHanteiKekkaCode09.toValue(business.
                         get要介護認定一次判定結果コード().value()).get名称());
             }
-            if (business.get要介護認定一次判定結果コード_認知症加算() != null) {
+            if (!isNullOrEmpty(business.get要介護認定一次判定結果コード_認知症加算())) {
                 row.setIchijiHanteiKekkaNinchishoKasanCode(business.get要介護認定一次判定結果コード_認知症加算().getColumnValue());
                 row.setIchijiHanteiKekkaNinchishoKasan(IchijiHanteiKekkaCode09.
                         toValue(business.get要介護認定一次判定結果コード_認知症加算().value()).get名称());
@@ -492,18 +492,21 @@ public class IchijiHanteiHandler {
             row.setChukanHyokaKomoku3gun(new RString(String.valueOf(business.get中間評価項目得点第3群())));
             row.setChukanHyokaKomoku4gun(new RString(String.valueOf(business.get中間評価項目得点第4群())));
             row.setChukanHyokaKomoku5gun(new RString(String.valueOf(business.get中間評価項目得点第5群())));
-            if (business.get要介護認定状態の安定性コード() != null && !business.get要介護認定状態の安定性コード().isEmpty()) {
+            if (!isNullOrEmpty(business.get要介護認定状態の安定性コード())) {
                 row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
             }
             if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
                 row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())));
             }
-            if (business.get認知機能及び状態安定性から推定される給付区分コード() != null
-                    && !business.get認知機能及び状態安定性から推定される給付区分コード().isEmpty()) {
+            if (!isNullOrEmpty(business.get認知機能及び状態安定性から推定される給付区分コード())) {
                 row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get認知機能及び状態安定性から推定される給付区分コード().value()).get名称());
             }
         }
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getDataSource().set(index, row);
+    }
+
+    private boolean isNullOrEmpty(Code code) {
+        return code == null || code.isEmpty();
     }
 
     private RString get一次判定結果名称(Code 厚労省IF識別コード, Code 一次判定結果コード) {

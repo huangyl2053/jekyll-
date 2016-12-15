@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.chosakekkainfogaikyo;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
@@ -73,36 +72,6 @@ public class ChosaKekkaInfoGaikyo {
                 = ChosaKekkaInfoGaikyoFinder.createInstance().get5210NinteichosahyoShisetsu(gaikyoParameter).records();
         getHandler(div).onLoad(chosaKekkaInfoGaikyoList, serviceJokyos, shisetsuRiyos, gaikyoParameter);
         return createResponse(div);
-    }
-
-    private List<ChosaKekkaInfoGaikyoBusiness> get認定調査結果概況一覧(List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況List) {
-        RString 概況調査テキストイメージ区分 = RString.EMPTY;
-        int テキストイメージ区分レコードカウント = 0;
-        for (ChosaKekkaInfoGaikyoBusiness 認定調査結果概況Entity : 認定調査結果概況List) {
-            if (RString.isNullOrEmpty(概況調査テキストイメージ区分)) {
-                概況調査テキストイメージ区分 = 認定調査結果概況Entity.get概況調査テキストイメージ区分();
-                テキストイメージ区分レコードカウント++;
-            }
-            if (!概況調査テキストイメージ区分.equals(認定調査結果概況Entity.get概況調査テキストイメージ区分())) {
-                テキストイメージ区分レコードカウント++;
-                break;
-            }
-        }
-        if (テキストイメージ区分レコードカウント > 1) {
-            List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況ListCopy = new ArrayList<>(認定調査結果概況List);
-            認定調査結果概況List = remove認定調査結果概況一覧(認定調査結果概況ListCopy);
-        }
-        return 認定調査結果概況List;
-    }
-
-    private List<ChosaKekkaInfoGaikyoBusiness> remove認定調査結果概況一覧(List<ChosaKekkaInfoGaikyoBusiness> 認定調査結果概況List) {
-        List<ChosaKekkaInfoGaikyoBusiness> イメージのみ認定調査結果概況List = new ArrayList<>();
-        for (ChosaKekkaInfoGaikyoBusiness 認定調査結果概況Entity : 認定調査結果概況List) {
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(認定調査結果概況Entity.get概況調査テキストイメージ区分())) {
-                イメージのみ認定調査結果概況List.add(認定調査結果概況Entity);
-            }
-        }
-        return イメージのみ認定調査結果概況List;
     }
 
     /**

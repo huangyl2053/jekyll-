@@ -23,6 +23,8 @@ public class TelNoPanelDiv extends Panel {
      */
     @JsonProperty("imgTelNo")
     private DynamicImage imgTelNo;
+    @JsonProperty("lblNoImageTelNo")
+    private Label lblNoImageTelNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class TelNoPanelDiv extends Panel {
     @JsonProperty("imgTelNo")
     public void setImgTelNo(DynamicImage imgTelNo) {
         this.imgTelNo = imgTelNo;
+    }
+
+    /*
+     * getlblNoImageTelNo
+     * @return lblNoImageTelNo
+     */
+    @JsonProperty("lblNoImageTelNo")
+    public Label getLblNoImageTelNo() {
+        return lblNoImageTelNo;
+    }
+
+    /*
+     * setlblNoImageTelNo
+     * @param lblNoImageTelNo lblNoImageTelNo
+     */
+    @JsonProperty("lblNoImageTelNo")
+    public void setLblNoImageTelNo(Label lblNoImageTelNo) {
+        this.lblNoImageTelNo = lblNoImageTelNo;
     }
 
     // </editor-fold>

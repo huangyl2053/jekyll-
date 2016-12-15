@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.DBE2040001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.DBE2040001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranValidationHandler;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -84,6 +84,17 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     /**
+     * 処理状態が変更時、一覧の表示を制御します。 未処理：key0 完了可能：key1 すべて：key2
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onChange_radShoriJyotai(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        getHandler(div).onChange_radShoriJyotai();
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *
      * @param div コントロールdiv
@@ -91,11 +102,11 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_BtnYitiranSyuturyoku(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
+        if (new RString("0").equals(getHandler(div).一覧件数())) {
             getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
+        if (getHandler(div).getCheckbox() == null || getHandler(div).getCheckbox().isEmpty()) {
             getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -115,7 +126,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         try (CsvWriter<ShujiiIkenshoIraiCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
-            List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
+            List<dgNinteiTaskList_Row> rowList = getHandler(div).getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
@@ -139,19 +150,19 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnShujiiIrai(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
+        if (new RString("0").equals(getHandler(div).一覧件数())) {
             getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
+        if (getHandler(div).getCheckbox() == null || getHandler(div).getCheckbox().isEmpty()) {
             getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (div.getCcdTaskList().getCheckbox().size() > 1) {
+        if (getHandler(div).getCheckbox().size() > 1) {
             getValidationHandler().主治医意見書作成依頼一覧データの複数行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, getHandler(div).getCheckbox().get(0).getShinseishoKanriNo());
         RealInitialLocker.release(排他キー);
         return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
     }
@@ -164,15 +175,15 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onBeforeOpenDialog_btnIraishoToOutput(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
+        if (new RString("0").equals(getHandler(div).一覧件数())) {
             getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
+        if (getHandler(div).getCheckbox() == null || getHandler(div).getCheckbox().isEmpty()) {
             getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
+        List<dgNinteiTaskList_Row> rowList = getHandler(div).getCheckbox();
         for (dgNinteiTaskList_Row row : rowList) {
             if (row.getIkenshoIraiDay().getValue() == null) {
                 getValidationHandler().医療機関_主治医が割りつけられていないチェック(validationMessages);
@@ -218,15 +229,15 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
+            if (new RString("0").equals(getHandler(div).一覧件数())) {
                 getValidationHandler().主治医意見書作成依頼一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
+            if (getHandler(div).getCheckbox() == null || getHandler(div).getCheckbox().isEmpty()) {
                 getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            List<dgNinteiTaskList_Row> rowList = div.getCcdTaskList().getCheckbox();
+            List<dgNinteiTaskList_Row> rowList = getHandler(div).getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 if (RString.isNullOrEmpty(row.getKonkaiShujiiIryokikan()) || RString.isNullOrEmpty(row.getKonkaiShujii())) {
                     getValidationHandler().主治医意見書作成依頼一覧選択行の完了処理事前チェック(validationMessages);

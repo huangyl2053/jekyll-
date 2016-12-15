@@ -1,8 +1,5 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.jigyojokyohokoku.JisshiJokyoTokeiEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.jisshijokyotokei.JisshiJokyoTokei;
 import jp.co.ndensan.reams.db.dbe.business.report.jisshijokyotokei.JisshiJokyoTokeiReport;
@@ -11,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.Jiss
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.JisshiJokyoTokeiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jisshijokyotokei.JisshiJokyoTokeiReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -20,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -28,12 +24,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-public class JisshiJokyoTokeiProcess extends BatchKeyBreakBase<JisshiJokyoTokeiEntity> {
+public class JisshiJokyoTokeiProcess extends BatchProcessBase<JisshiJokyoTokeiEntity> {
 
     private static final RString SELECT_JISSHIJOKYO = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getJisshiJokyoTokei");
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(JisshiJokyoTokeiReportSource.ReportSourceFields.hokenshaNo.name())));
     private static final RString タイトル = new RString("要介護認定実施状況統計");
     private static final RString 開始年月日 = new RString("最初から");
     private static final RString 終了年月日 = new RString("最終まで");
@@ -67,23 +61,12 @@ public class JisshiJokyoTokeiProcess extends BatchKeyBreakBase<JisshiJokyoTokeiE
     @Override
     protected void createWriter() {
         batchWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE701003.getReportId().value())
-                .addBreak(new BreakerCatalog<JisshiJokyoTokeiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
-    protected void keyBreakProcess(JisshiJokyoTokeiEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            JisshiJokyoTokeiReport report = new JisshiJokyoTokeiReport(jisshiJokyoTokei);
-            report.writeBy(reportSourceWriter);
-            jisshiJokyoTokei = new JisshiJokyoTokei();
-            setヘッダー項目();
-        }
-    }
-
-    @Override
-    protected void usualProcess(JisshiJokyoTokeiEntity current) {
+    protected void process(JisshiJokyoTokeiEntity current) {
         isデータあり = true;
         new JisshiJokyoTokeiEditor(parameter, current, jisshiJokyoTokei).set要介護認定事業状況();
     }
@@ -95,10 +78,6 @@ public class JisshiJokyoTokeiProcess extends BatchKeyBreakBase<JisshiJokyoTokeiE
             JisshiJokyoTokeiReport report = new JisshiJokyoTokeiReport(jisshiJokyoTokei);
             report.writeBy(reportSourceWriter);
         }
-    }
-
-    private boolean hasBrek(JisshiJokyoTokeiEntity before, JisshiJokyoTokeiEntity current) {
-        return !(before.getShichosonCode().equals(current.getShichosonCode()));
     }
 
     private void setヘッダー項目() {

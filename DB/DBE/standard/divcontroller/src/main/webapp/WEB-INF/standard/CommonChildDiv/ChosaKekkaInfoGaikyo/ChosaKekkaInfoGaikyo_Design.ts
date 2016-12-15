@@ -61,6 +61,10 @@ module DBE {
                 return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
             }
 
+            public lblNoImageJisshiBasho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageJisshiBasho"));
+            }
+
             public GaikyoChosaTokkiPanel(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("GaikyoChosaTokkiPanel"));
             }
@@ -71,6 +75,10 @@ module DBE {
 
             public imgGaikyoChosaTokki(): UZA.DynamicImage {
                 return new UZA.DynamicImage(this.convFiledName("imgGaikyoChosaTokki"));
+            }
+
+            public lblNoImageGaikyoChosaTokki(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageGaikyoChosaTokki"));
             }
 
             public radServiceKubun(): UZA.RadioButton {
@@ -125,12 +133,20 @@ module DBE {
                 return new UZA.DynamicImage(this.convFiledName("imgRiyoShisetsuMeisho"));
             }
 
+            public lblNoImageRiyoShisetsuMeisho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageRiyoShisetsuMeisho"));
+            }
+
             public TelNoPanel(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("TelNoPanel"));
             }
 
             public imgTelNo(): UZA.DynamicImage {
                 return new UZA.DynamicImage(this.convFiledName("imgTelNo"));
+            }
+
+            public lblNoImageTelNo(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageTelNo"));
             }
 
             public lblRiyoShisetsuJusho(): UZA.Label {
@@ -149,6 +165,10 @@ module DBE {
                 return new UZA.DynamicImage(this.convFiledName("imgRiyoShisetsuJusho"));
             }
 
+            public lblNoImageRiyoShisetsuJusho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageRiyoShisetsuJusho"));
+            }
+
             public TokubetsuKyufuPanel(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("TokubetsuKyufuPanel"));
             }
@@ -161,6 +181,10 @@ module DBE {
                 return new UZA.DynamicImage(this.convFiledName("imgTokubetsuKyufu"));
             }
 
+            public lblNoImageTokubetsuKyufu(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageTokubetsuKyufu"));
+            }
+
             public ZaitakuServicePanel(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ZaitakuServicePanel"));
             }
@@ -171,6 +195,10 @@ module DBE {
 
             public imgZaitakuService(): UZA.DynamicImage {
                 return new UZA.DynamicImage(this.convFiledName("imgZaitakuService"));
+            }
+
+            public lblNoImageZaitakuService(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageZaitakuService"));
             }
 
             public GaikyoTokkiPanel(): UZA.Panel {
@@ -259,6 +287,10 @@ module DBE {
 
             public imgGaikyoTokki(): UZA.DynamicImage {
                 return new UZA.DynamicImage(this.convFiledName("imgGaikyoTokki"));
+            }
+
+            public lblNoImageGaikyoTokki(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImageGaikyoTokki"));
             }
 
             public btnReturn(): UZA.Button {

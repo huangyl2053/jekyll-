@@ -76,12 +76,12 @@ module DBE {
                 return "changeChkSonotaHifuShikkan";
             }
 
-            public static onClickBtnKakutei(): string {
-                return "onClickBtnKakutei";
-            }
-
             public static onClickBtnCancel(): string {
                 return "onClickBtnCancel";
+            }
+
+            public static onClickBtnKakutei(): string {
+                return "onClickBtnKakutei";
             }
 
         }
@@ -361,12 +361,12 @@ module DBE {
                 return new UZA.RadioButton(this.convFiledName("radSonotaHifuShikkanTeido"));
             }
 
-            public btnKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            }
-
             public btnCancel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            }
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

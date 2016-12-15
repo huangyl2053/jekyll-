@@ -22,7 +22,7 @@ public class maskTabPanel3Div extends TabPanel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("imgMask3")
-    private StaticImage imgMask3;
+    private DynamicImage imgMask3;
     @JsonProperty("LabelNoImage3")
     private Label LabelNoImage3;
 
@@ -37,7 +37,7 @@ public class maskTabPanel3Div extends TabPanel {
      * @return imgMask3
      */
     @JsonProperty("imgMask3")
-    public StaticImage getImgMask3() {
+    public DynamicImage getImgMask3() {
         return imgMask3;
     }
 
@@ -46,7 +46,7 @@ public class maskTabPanel3Div extends TabPanel {
      * @param imgMask3 imgMask3
      */
     @JsonProperty("imgMask3")
-    public void setImgMask3(StaticImage imgMask3) {
+    public void setImgMask3(DynamicImage imgMask3) {
         this.imgMask3 = imgMask3;
     }
 
