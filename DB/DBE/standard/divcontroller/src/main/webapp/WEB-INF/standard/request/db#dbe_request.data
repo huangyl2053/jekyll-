@@ -235,6 +235,7 @@ dbe/db/dbe/IkenshoShujiiIchiran/onChange_ddlOutputSort
 dbe/db/dbe/IkenshoShujiiIchiran/onClick_Check
 dbe/db/dbe/IkenshoShujiiIchiran/onClick_btnReportPublish
 dbe/db/dbe/IkenshoShujiiIchiran/onLoad
+dbe/db/dbe/Ikenshoget/onChange_jyotaiKubun
 dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoKanryo
 dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoTorikomi
 dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoToroku
@@ -723,6 +724,7 @@ dbe/db/dbe/SeikatsuhogoToroku/onClick_btnSaiban
 dbe/db/dbe/SeikatsuhogoToroku/onClick_btnToNinteiShinseiToroku
 dbe/db/dbe/SeikatsuhogoToroku/onLoad
 dbe/db/dbe/SeikatsuhogoToroku/onOkClose_btnAtenaKensaku
+dbe/db/dbe/SeikatsuhogoToroku/onOkClose_txtZenkokuJushoCode
 dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onChange_radDateRangeCriteriaType
 dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onChange_radSearchType
 dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onLoad
