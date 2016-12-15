@@ -11,26 +11,66 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujyo.NinteiChosaTokusokujoMybatisParameter"
             fetchSize="500">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        "DbT5101NinteiShinseiJoho".*
         FROM
-        rgdb."DbT5101NinteiShinseiJoho"  AS  "DbT5101NinteiShinseiJoho"
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS "DbT5101NinteiShinseiJoho"
+
+        INNER JOIN (
+            SELECT
+                DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
+                DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaKigenYMD",
+                DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD",
+                ROW_NUMBER() OVER (PARTITION BY DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
+                                                DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo"
+                                   ORDER BY DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" DESC) AS "rowNum"
+            FROM
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" />) AS DbT5201
+        ) AS "DbT5201NinteichosaIraiJoho"
+        ON "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = "DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_shinseishoKanriNo"
+        AND "DbT5201NinteichosaIraiJoho"."rowNum" = 1
+        <if test="temp_認定調査督促期限!=null">
+        AND "DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaKigenYMD" <![CDATA[<]]> #{temp_認定調査督促期限}
+        </if>
+        <if test="temp_印刷済対象者!=null and temp_印刷済対象者=1">
+        AND ("DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD" IS NULL
+             OR "DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD" = '')
+        </if>
+
+        INNER JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.noDeleted_DbT5105NinteiKanryoJoho" />) AS "DbT5105NinteiKanryoJoho"
+        ON "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_shinseishoKanriNo"
+        AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+             AND "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteiShinseiJohoTorokuKanryoYMD" != '')
+        AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteichosaIraiKanryoYMD" IS NOT NULL
+             AND "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteichosaIraiKanryoYMD" != '')
+        AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD" IS NULL
+             OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD" = '')
+        AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD" IS NULL
+             OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD" = '')
+        AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteiShinsakaiWariateKanryoYMD" IS NULL
+             OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteiShinsakaiWariateKanryoYMD" = '')
+        AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD" IS NULL
+             OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD" = '')
+        AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_centerSoshinYMD" IS NULL
+             OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_centerSoshinYMD" = '')
+
         <where>
             1 = 1
             <if test="temp_保険者コード!=null and !temp_保険者コード.isEmpty()">
-                AND  "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = #{temp_保険者コード}
+                AND  "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
             <if test="temp_認定調査委託先コード!=null and !temp_認定調査委託先コード.isEmpty()">
-                AND  "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = #{temp_認定調査委託先コード}
+                AND  "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" = #{temp_認定調査委託先コード}
             </if>
             <if test="temp_認定調査員コード!=null and !temp_認定調査員コード.isEmpty()">
-                AND  "DbT5101NinteiShinseiJoho"."ninteiChosainCode" = #{temp_認定調査員コード}
+                AND  "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosainCode" = #{temp_認定調査員コード}
             </if>
         </where>
-        AND  "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" != '1'
-        AND  "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" != '2'
+        AND  "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoriJotaiKubun" != '1'
+        AND  "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoriJotaiKubun" != '2'
         ORDER BY
-        "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo",
-        "DbT5101NinteiShinseiJoho"."hihokenshaKana"
+        "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo",
+        "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_hihokenshaKana"
     </select>
 
     <!--  NinteiChosaTokusokuTaishoshaIchiranhyoEntityの項目にマッピングします。-->

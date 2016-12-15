@@ -174,9 +174,12 @@ public class NinteiShinseiTorokuTorikeshiShosaiHandler {
         NinteiInputDataPassModel model = new NinteiInputDataPassModel();
         model.set要介護度コード(convertCodeToRString(認定情報.get要介護認定状態区分コード()));
         model.set要介護度名称(get要介護度名(認定情報.get厚労省IF識別コード(), convertCodeToRString(認定情報.get要介護認定状態区分コード())));
-        model.set有効開始年月日(認定情報.get認定有効期間開始年月日());
-        model.set有効終了年月日(認定情報.get認定有効期間終了年月日());
-        model.set認定年月日(認定情報.get認定年月日());
+        model.set有効開始年月日(new RDate(認定情報.get認定有効期間開始年月日().getYearValue(),
+                認定情報.get認定有効期間開始年月日().getMonthValue(), 認定情報.get認定有効期間開始年月日().getDayValue()));
+        model.set有効終了年月日(new RDate(認定情報.get認定有効期間終了年月日().getYearValue(),
+                認定情報.get認定有効期間終了年月日().getMonthValue(), 認定情報.get認定有効期間終了年月日().getDayValue()));
+        model.set認定年月日(new RDate(認定情報.get認定年月日().getYearValue(), 認定情報.get認定年月日().getMonthValue(),
+                認定情報.get認定年月日().getDayValue()));
         model.set審査会意見(認定情報.get介護認定審査会意見());
         model.set認定区分(new RString("1"));
         model.set申請書管理番号(new ShinseishoKanriNo(認定情報.get申請書管理番号受給()));

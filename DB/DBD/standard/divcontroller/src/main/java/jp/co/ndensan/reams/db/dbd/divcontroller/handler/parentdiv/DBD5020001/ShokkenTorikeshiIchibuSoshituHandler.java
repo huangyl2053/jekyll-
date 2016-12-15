@@ -262,17 +262,17 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         if (is今回) {
             passModel.set要介護度名称(div.getTxtYokaigodoKonkai().getValue());
             passModel.set要介護度コード(get要介護度コード(認定情報.get厚労省IF識別コード(), div.getTxtYokaigodoKonkai().getValue()));
-            passModel.set有効開始年月日(div.getTxtYukoKaishibiKonkai().getValue());
-            passModel.set有効終了年月日(div.getTxtYukoShuryobiKonkai().getValue());
-            passModel.set認定年月日(div.getTxtNinteibiKonkai().getValue());
+            passModel.set有効開始年月日(new RDate(div.getTxtYukoKaishibiKonkai().getValue().toString()));
+            passModel.set有効終了年月日(new RDate(div.getTxtYukoShuryobiKonkai().getValue().toString()));
+            passModel.set認定年月日(new RDate(div.getTxtNinteibiKonkai().getValue().toString()));
             passModel.set審査会意見(div.getTxtShinsakaiIkenKonkai().getValue());
             passModel.setサービス一覧リスト(getServiceCodeList(div.getTxtServiceShuruiKonkai().getValue()));
         } else {
             passModel.set要介護度名称(div.getTxtYokaigodoZenkai().getValue());
             passModel.set要介護度コード(get要介護度コード(認定情報.get厚労省IF識別コード(), div.getTxtYokaigodoZenkai().getValue()));
-            passModel.set有効開始年月日(div.getTxtYukoKaishibiZenkai().getValue());
-            passModel.set有効終了年月日(div.getTxtYukoShuryobiZenkai().getValue());
-            passModel.set認定年月日(div.getTxtNinteibiZenkai().getValue());
+            passModel.set有効開始年月日(new RDate(div.getTxtYukoKaishibiZenkai().getValue().toString()));
+            passModel.set有効終了年月日(new RDate(div.getTxtYukoShuryobiZenkai().getValue().toString()));
+            passModel.set認定年月日(new RDate(div.getTxtNinteibiZenkai().getValue().toString()));
             passModel.set審査会意見(div.getTxtShinsakaiIkenZenkai().getValue());
             passModel.setサービス一覧リスト(getServiceCodeList(div.getTxtServiceShuruiZenkai().getValue()));
         }
@@ -305,9 +305,9 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         NinteiInputNaiyo 認定内容 = model.get認定内容();
         div.setHdnYokaigodoCodeKonkai(認定内容.get要介護度コード());
         div.getTxtYokaigodoKonkai().setValue(認定内容.get要介護度名称());
-        div.getTxtYukoKaishibiKonkai().setValue(認定内容.get有効開始年月日());
-        div.getTxtYukoShuryobiKonkai().setValue(認定内容.get有効終了年月日());
-        div.getTxtNinteibiKonkai().setValue(認定内容.get認定年月日());
+        div.getTxtYukoKaishibiKonkai().setValue(new FlexibleDate(認定内容.get有効開始年月日().toString()));
+        div.getTxtYukoShuryobiKonkai().setValue(new FlexibleDate(認定内容.get有効終了年月日().toString()));
+        div.getTxtNinteibiKonkai().setValue(new FlexibleDate(認定内容.get認定年月日().toString()));
         RString サービス種類Str = RString.EMPTY;
         List<KekkaShosaiJohoServiceShuri> サービス類リスト = model.getサービス類リスト();
         if (null != サービス類リスト && サービス類リスト.size() > 0) {
