@@ -6,12 +6,30 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper">
 
+    <resultMap id="resultMap_AtenaKikan"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.AtenaKikan" autoMapping="true">
+        <result property="宛名機関名" column="dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="宛名郵便番号" column="dbT5910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="宛名住所" column="dbT5910NinteichosaItakusakiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="宛名調査員氏名" column="dbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <resultMap id="resultMap_NinteiChosaTokusokujoRelateEntity"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokujoRelateEntity" autoMapping="true">
+        <association property="認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity" />
+        <association property="宛名機関" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper.resultMap_AtenaKikan" />
+    </resultMap>
+
     <select resultOrdered="true" id="select要介護認定調査督促状ByKey"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
+            resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper.resultMap_NinteiChosaTokusokujoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujyo.NinteiChosaTokusokujoMybatisParameter"
             fetchSize="500">
         SELECT
-        "DbT5101NinteiShinseiJoho".*
+        "DbT5101NinteiShinseiJoho".*,
+        "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho",
+        "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_yubinNo",
+        "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_jusho",
+        "DbT5913ChosainJoho"."dbT5913ChosainJoho_chosainShimei"
+
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS "DbT5101NinteiShinseiJoho"
 
@@ -53,6 +71,21 @@
              OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD" = '')
         AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_centerSoshinYMD" IS NULL
              OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_centerSoshinYMD" = '')
+
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS "DbT7051KoseiShichosonMaster"
+        ON "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shoKisaiHokenshaNo"
+
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.noDeleted_DbT5910NinteichosaItakusakiJoho" />) AS "DbT5910NinteichosaItakusakiJoho"
+        ON "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shichosonCode" = "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_shichosonCode"
+        AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" = "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode"
+
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.noDeleted_DbT5913ChosainJoho" />) AS "DbT5913ChosainJoho"
+        ON "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shichosonCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_shichosonCode"
+        AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_ninteiChosaItakusakiCode"
+        AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosainCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_ninteiChosainCode"
 
         <where>
             1 = 1
