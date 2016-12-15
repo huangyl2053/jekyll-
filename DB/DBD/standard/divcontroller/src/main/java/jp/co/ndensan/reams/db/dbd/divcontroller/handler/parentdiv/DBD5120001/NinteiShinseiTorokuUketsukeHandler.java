@@ -1686,9 +1686,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set要介護認定状態区分コード(new Code(div.getCcdNinteiInput().getNaiyo().get要介護度コード()));
-        builder.set認定有効期間開始年月日(div.getCcdNinteiInput().getNaiyo().get有効開始年月日());
-        builder.set認定有効期間終了年月日(div.getCcdNinteiInput().getNaiyo().get有効終了年月日());
-        builder.set認定年月日(div.getCcdNinteiInput().getNaiyo().get認定年月日());
+        builder.set認定有効期間開始年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get有効開始年月日().toDateString()));
+        builder.set認定有効期間終了年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get有効終了年月日().toDateString()));
+        builder.set認定年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get認定年月日().toDateString()));
         //TODO指定サービス種類 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近異動年月日(FlexibleDate.getNowDate());
         builder.set直近異動事由コード(new Code("00"));
@@ -1828,9 +1828,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set要介護認定状態区分コード(new Code(div.getCcdNinteiInput().getNaiyo().get要介護度コード()));
-        builder.set認定有効期間開始年月日(div.getCcdNinteiInput().getNaiyo().get有効開始年月日());
-        builder.set認定有効期間終了年月日(div.getCcdNinteiInput().getNaiyo().get有効終了年月日());
-        builder.set認定年月日(div.getCcdNinteiInput().getNaiyo().get認定年月日());
+        builder.set認定有効期間開始年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get有効開始年月日().toDateString()));
+        builder.set認定有効期間終了年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get有効終了年月日().toDateString()));
+        builder.set認定年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get認定年月日().toDateString()));
         //TODO指定サービス種類 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近異動年月日(FlexibleDate.getNowDate());
         builder.set直近異動事由コード(new Code("10"));
@@ -1974,9 +1974,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set２号特定疾病コード(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedKey()));
         builder.set要介護認定状態区分コード(new Code(div.getCcdNinteiInput().getNaiyo().get要介護度コード()));
-        builder.set認定有効期間開始年月日(div.getCcdNinteiInput().getNaiyo().get有効開始年月日());
-        builder.set認定有効期間終了年月日(div.getCcdNinteiInput().getNaiyo().get有効終了年月日());
-        builder.set認定年月日(div.getCcdNinteiInput().getNaiyo().get認定年月日());
+        builder.set認定有効期間開始年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get有効開始年月日().toDateString()));
+        builder.set認定有効期間終了年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get有効終了年月日().toDateString()));
+        builder.set認定年月日(new FlexibleDate(div.getCcdNinteiInput().getNaiyo().get認定年月日().toDateString()));
         //TODO指定サービス種類 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近異動年月日(FlexibleDate.getNowDate());
         builder.set直近異動事由コード(new Code("01"));
@@ -2525,9 +2525,12 @@ public class NinteiShinseiTorokuUketsukeHandler {
             認定div.getNinteiJoho().getTxtYokaigodoName().setValue(
                     YokaigoJotaiKubun.toValue(result.getEntity().get要介護認定状態区分コード().getColumnValue()).get名称());
         }
-        認定div.getNinteiJoho().getTxtNinteiYMD().setValue(result.getEntity().get認定年月日());
-        認定div.getNinteiJoho().getTxtYukoKaishiYMD().setValue(result.getEntity().get認定有効期間開始年月日());
-        認定div.getNinteiJoho().getTxtYukoShuryoYMD().setValue(result.getEntity().get認定有効期間終了年月日());
+        認定div.getNinteiJoho().getTxtNinteiYMD().setValue(new RDate(result.getEntity().get認定年月日().getYearValue(),
+                result.getEntity().get認定年月日().getMonthValue(), result.getEntity().get認定年月日().getDayValue()));
+        認定div.getNinteiJoho().getTxtYukoKaishiYMD().setValue(new RDate(result.getEntity().get認定有効期間開始年月日().getYearValue(),
+                result.getEntity().get認定有効期間開始年月日().getMonthValue(), result.getEntity().get認定有効期間開始年月日().getDayValue()));
+        認定div.getNinteiJoho().getTxtYukoShuryoYMD().setValue(new RDate(result.getEntity().get認定有効期間終了年月日().getYearValue(),
+                result.getEntity().get認定有効期間終了年月日().getMonthValue(), result.getEntity().get認定有効期間終了年月日().getDayValue()));
         認定div.getTxtShinsakaiIken().setValue(result.getEntity().get介護認定審査会意見());
     }
 

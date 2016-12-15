@@ -139,11 +139,10 @@ public class NinteichosaItakusakiMasterHandler {
      */
     public List<KoseiShichosonMaster> searchShujii() {
 
-        RString 調査委託先コードFrom = RString.EMPTY;
-        RString 調査委託先コードTo = RString.EMPTY;
-
-        if (!div.getTxtSearchChosaItakusakiCodeFrom().getValue().isNullOrEmpty()
-                && !div.getTxtSearchChosaItakusakiCodeTo().getValue().isNullOrEmpty()) {
+        RString 調査委託先コードFrom;
+        RString 調査委託先コードTo;
+        if (!RString.isNullOrEmpty(div.getTxtSearchChosaItakusakiCodeFrom().getValue())
+                && !RString.isNullOrEmpty(div.getTxtSearchChosaItakusakiCodeTo().getValue())) {
             if (Long.valueOf(div.getTxtSearchChosaItakusakiCodeFrom().getValue().toString())
                     > Long.valueOf(div.getTxtSearchChosaItakusakiCodeTo().getValue().toString())) {
                 調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeTo().getValue();
@@ -448,10 +447,6 @@ public class NinteichosaItakusakiMasterHandler {
         List<dgChosainIchiran_Row> dataSources = new ArrayList<>();
         for (KoseiShichosonMaster master : list) {
             for (NinteichosaItakusakiJoho joho : master.getNinteichosaItakusakiJohoiList()) {
-                TextBoxCode 認定調査委託先コード = new TextBoxCode();
-                TextBoxNum 割付定員 = new TextBoxNum();
-                認定調査委託先コード.setValue(joho.get認定調査委託先コード());
-                割付定員.setValue(new Decimal(joho.get割付定員()));
                 RString chosaItakuKubunCode;
                 try {
                     chosaItakuKubunCode = ChosaItakuKubunCode.toValue(joho.get調査委託区分()).get名称();
@@ -465,30 +460,37 @@ public class NinteichosaItakusakiMasterHandler {
                     chosaKikanKubun = RString.EMPTY;
                 }
                 RString 特定調査員表示フラグ = get特定調査員表示フラグ(joho);
-                Code 割付地区 = joho.get割付地区() == null ? Code.EMPTY : new Code(joho.get割付地区().getColumnValue());
-                RString 割付地区名称 = CodeMaster.getCodeMeisho(
-                        SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), 割付地区, new FlexibleDate(RDate.getNowDate().toString()));
-                dgChosainIchiran_Row row = new dgChosainIchiran_Row(
-                        RString.EMPTY,
-                        master.get市町村名称() == null ? RString.EMPTY : master.get市町村名称(),
-                        認定調査委託先コード,
-                        joho.get事業者番号() == null ? RString.EMPTY : joho.get事業者番号().getColumnValue(),
-                        joho.get事業者名称() == null ? RString.EMPTY : joho.get事業者名称(),
-                        joho.get事業者カナ名称() == null ? RString.EMPTY : joho.get事業者カナ名称(),
-                        joho.get郵便番号() == null ? RString.EMPTY : joho.get郵便番号().getEditedYubinNo(),
-                        joho.get住所() == null ? RString.EMPTY : joho.get住所(),
-                        joho.get電話番号() == null ? RString.EMPTY : joho.get電話番号().getColumnValue(),
-                        joho.getFAX番号() == null ? RString.EMPTY : joho.getFAX番号().getColumnValue(),
-                        joho.get代表者氏名() == null ? RString.EMPTY : joho.get代表者氏名(),
-                        joho.get代表者カナ氏名() == null ? RString.EMPTY : joho.get代表者カナ氏名(),
-                        chosaItakuKubunCode,
-                        特定調査員表示フラグ,
-                        割付定員,
-                        割付地区.getColumnValue(),
-                        割付地区名称,
-                        joho.is自動割付フラグTrue() ? 自動割付フラグ可能 : 自動割付フラグ不可能,
-                        chosaKikanKubun,
-                        joho.is状況フラグ() ? 状況フラグ有効 : 状況フラグ無効);
+                RString 割付地区;
+                RString 割付地区名称;
+                if (joho.get割付地区() != null) {
+                    割付地区 = joho.get割付地区().value();
+                    割付地区名称 = CodeMaster.getCodeMeisho(
+                            SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), new Code(割付地区), FlexibleDate.getNowDate());
+                } else {
+                    割付地区 = RString.EMPTY;
+                    割付地区名称 = RString.EMPTY;
+                }
+                dgChosainIchiran_Row row = new dgChosainIchiran_Row();
+                row.setJotai(RString.EMPTY);
+                row.setShichoson((master.get市町村名称() == null) ? RString.EMPTY : master.get市町村名称());
+                row.getChosaItakusakiCode().setValue(joho.get認定調査委託先コード());
+                row.setJigyoshaNo((joho.get事業者番号() == null) ? RString.EMPTY : joho.get事業者番号().getColumnValue());
+                row.setChosaItakusakiMeisho((joho.get事業者名称() == null) ? RString.EMPTY : joho.get事業者名称());
+                row.setChosaItakusakiKana((joho.get事業者カナ名称() == null) ? RString.EMPTY : joho.get事業者カナ名称());
+                row.setYubinNo((joho.get郵便番号() == null) ? RString.EMPTY : joho.get郵便番号().getEditedYubinNo());
+                row.setJusho((joho.get住所() == null) ? RString.EMPTY : joho.get住所());
+                row.setTelNo((joho.get電話番号() == null) ? RString.EMPTY : joho.get電話番号().getColumnValue());
+                row.setFaxNo((joho.getFAX番号() == null) ? RString.EMPTY : joho.getFAX番号().getColumnValue());
+                row.setKikanDaihyoshaName((joho.get代表者氏名() == null) ? RString.EMPTY : joho.get代表者氏名());
+                row.setKikanDaihyoshaKanaName((joho.get代表者カナ氏名() == null) ? RString.EMPTY : joho.get代表者カナ氏名());
+                row.setChosaItakuKubun(chosaItakuKubunCode);
+                row.setTokuteiChosainDispFlag(特定調査員表示フラグ);
+                row.getWaritsukeTeiin().setValue(new Decimal(joho.get割付定員()));
+                row.setChikuCode(割付地区);
+                row.setChikuName(割付地区名称);
+                row.setAutoWaritsukeFlag((joho.is自動割付フラグTrue()) ? 自動割付フラグ可能 : 自動割付フラグ不可能);
+                row.setKikanKubun(chosaKikanKubun);
+                row.setJokyoFlag((joho.is状況フラグ()) ? 状況フラグ有効 : 状況フラグ無効);
                 dataSources.add(row);
                 div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(joho.get市町村コード().toString()).concat(CSV_WRITER_DELIMITER));
             }

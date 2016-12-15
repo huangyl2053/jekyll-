@@ -206,7 +206,7 @@ public class NinteichosaItakusakiMaster {
         getHandler(div).onSelectByDlbClick_dgChosainIchiran();
         return ResponseData.of(div).setState(DBE9030001StateName.詳細);
     }
-    
+
     /**
      * ＣＳＶを出力前のCheck
      *
@@ -224,7 +224,7 @@ public class NinteichosaItakusakiMaster {
             if (!RString.EMPTY.equals(row.getJotai())) {
                 pairs.add(new ValidationMessageControlPair(new DBE9030001ErrorMessage(DbzErrorMessages.編集後更新指示)));
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
-            }            
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -247,7 +247,7 @@ public class NinteichosaItakusakiMaster {
                 rowIndex++;
             }
             csvWriter.close();
-        } 
+        }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
@@ -462,7 +462,7 @@ public class NinteichosaItakusakiMaster {
                 .thenAdd(既に登録済).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.事業者番号存在チェック)
                 .thenAdd(入力値が不正_事業者番号存在チェック).messages());
-        
+
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 入力値が不正_事業者番号存在チェック, div.getChosaitakusakiJohoInput().getTxtjigyoshano()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -490,13 +490,13 @@ public class NinteichosaItakusakiMaster {
             if (is一覧エリア編集有り(div)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
             } else {
-                return onLoad(div);
+                return ResponseData.of(div).setState(DBE9030001StateName.検索);
             }
         } else {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-                return onLoad(div);
+                return ResponseData.of(div).setState(DBE9030001StateName.検索);
             }
             return ResponseData.of(div).respond();
         }
@@ -683,7 +683,7 @@ public class NinteichosaItakusakiMaster {
     }
 
     private static class DBE9030001ErrorMessage implements IMessageGettable, IValidationMessage {
-        
+
         private final Message message;
 
         public DBE9030001ErrorMessage(IMessageGettable message, String... replacements) {

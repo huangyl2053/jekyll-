@@ -72,6 +72,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -205,6 +207,9 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
     List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity;
     List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity;
+    private static final RString SEPARATOR = new RString("/");
+    private static final RString 拡張子_PNG = new RString(".png");
+    private static final RString フラグ = new RString("1");
 
     @Override
     protected void initialize() {
@@ -538,12 +543,14 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
         }
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
         if (イメージ.equals(entity.getテキスト_イメージ区分())) {
-            ninteiEntity.set実施場所イメージ(共有ファイルを引き出す(イメージID, イメージID01));
-            ninteiEntity.set市町村特別給付イメージ(共有ファイルを引き出す(イメージID, イメージID02));
-            ninteiEntity.set介護保険給付外の在宅イメージ(共有ファイルを引き出す(イメージID, イメージID03));
-            ninteiEntity.set施設名イメージ(共有ファイルを引き出す(イメージID, イメージID04));
-            ninteiEntity.set施設住所イメージ(共有ファイルを引き出す(イメージID, イメージID05));
-            ninteiEntity.set施設電話イメージ(共有ファイルを引き出す(イメージID, イメージID06));
+            RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
+            共有ファイルを引き出す(イメージID, 共有ファイル名);
+            ninteiEntity.set実施場所イメージ(getイメージファイル名(イメージID01));
+            ninteiEntity.set市町村特別給付イメージ(getイメージファイル名(イメージID02));
+            ninteiEntity.set介護保険給付外の在宅イメージ(getイメージファイル名(イメージID03));
+            ninteiEntity.set施設名イメージ(getイメージファイル名(イメージID04));
+            ninteiEntity.set施設住所イメージ(getイメージファイル名(イメージID05));
+            ninteiEntity.set施設電話イメージ(getイメージファイル名(イメージID06));
         }
         ninteiEntity.set施設利用(RString.isNullOrEmpty(entity.get施設利用()) ? RString.EMPTY
                 : GenzainoJokyoCode.toValue(entity.get施設利用()).get名称());
@@ -553,6 +560,32 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
         日常生活自立度リスト.add(RString.isNullOrEmpty(entity.get認知症高齢者自立度()) ? RString.EMPTY
                 : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認知症高齢者自立度()).get名称());
         ninteiEntity.set日常生活自立度リスト(日常生活自立度リスト);
+    }
+
+    private void 共有ファイルを引き出す(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId != null) {
+            ReadOnlySharedFileEntryDescriptor descriptor
+                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
+            try {
+                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite02.getImageFolderPath()));
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    private RString getイメージファイル名(RString fileName) {
+        RString file = フラグ.equals(processPrm.getRadShujii()) ? fileName : fileName.replace(拡張子_PNG.toString(), "_BAK.png");
+        if (!RString.isNullOrEmpty(getFilePath(batchWrite02.getImageFolderPath(), file))) {
+            return file;
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString get市町村特別給付(List<DbT5209NinteichosahyoKinyuItemEntity> dbt5209Entity, int 連番) {
@@ -595,26 +628,6 @@ public class ChkNinteiChosahyo02Process extends BatchProcessBase<YokaigoninteiEn
             ninteiEntity.set前回判定結果(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun99.toValue(entity.get前回認定結果()).get名称());
         }
-    }
-
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
-        }
-        return imagePath;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite02.getImageFolderPath()));
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-        return sharedFileName;
     }
 
     private RString get名称17(List<DbT5211NinteichosahyoChosaItemEntity> dbt5211Entity, int 連番) {
