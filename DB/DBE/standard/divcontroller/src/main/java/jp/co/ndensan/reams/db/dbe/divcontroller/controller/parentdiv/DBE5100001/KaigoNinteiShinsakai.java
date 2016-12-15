@@ -140,7 +140,7 @@ public class KaigoNinteiShinsakai {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         div.getCcdShinsakaiItiran().getSelectedGridLine();
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.個人別状況照会へ遷移する).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
     /**
