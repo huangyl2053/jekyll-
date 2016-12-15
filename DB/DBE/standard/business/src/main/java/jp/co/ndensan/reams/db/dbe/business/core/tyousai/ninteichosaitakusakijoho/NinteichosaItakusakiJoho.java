@@ -221,7 +221,7 @@ public class NinteichosaItakusakiJoho extends
      *
      * @return 割付定員
      */
-    public Integer get割付定員() {
+    public int get割付定員() {
         return entity.getWaritsukeTeiin();
     }
 
