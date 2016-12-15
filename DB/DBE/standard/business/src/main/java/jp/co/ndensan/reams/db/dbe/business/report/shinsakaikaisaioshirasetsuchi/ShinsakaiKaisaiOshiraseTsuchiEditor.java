@@ -120,7 +120,7 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     private RString getパターン9(FlexibleDate 予定年月日) {
         if (予定年月日 != null) {
             return 予定年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
     }
@@ -128,7 +128,7 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
     private RString getパターン9(RDate 発行日) {
         if (発行日 != null) {
             return 発行日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
     }
