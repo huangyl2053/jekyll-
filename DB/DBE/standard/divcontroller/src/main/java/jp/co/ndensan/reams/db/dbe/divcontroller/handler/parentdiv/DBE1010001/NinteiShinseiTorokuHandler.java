@@ -88,8 +88,7 @@ public class NinteiShinseiTorokuHandler {
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getBtnChosaJokyo().setDisabled(true);
         div.getTxtEnkiKetteiYMD().setDisabled(true);
-        div.getTxtEnkiMikomiKikanFrom().setDisabled(true);
-        div.getTxtEnkiMikomiKikanTo().setDisabled(true);
+        div.getTxtEnkiMikomiKikan().setDisabled(true);
         div.getBtnEnkiRiyuTeikeibun().setDisabled(true);
         div.getTxtEnkiRiyu().setDisabled(true);
         div.getTxtEnkiTsuchiHakkoYMD().setDisabled(true);

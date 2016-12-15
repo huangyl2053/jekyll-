@@ -36,6 +36,9 @@ public final class JigyoshaInputGuideParameter {
     private final boolean isJigyoshaKbn;
     private final RString zennpouitti;
     private final boolean isZennpouitti;
+    private final boolean isKanzenitti;
+    private final boolean isKouhouitti;
+    private final boolean isBubunitti;
     private final RString gunshiCode;
     private final boolean isGunshiCode;
     private final FlexibleDate systemdate;
@@ -67,6 +70,9 @@ public final class JigyoshaInputGuideParameter {
             boolean isJigyoshaKbn,
             RString zennpouitti,
             boolean isZennpouitti,
+            boolean isKanzenitti,
+            boolean isKouhouitti,
+            boolean isBubunitti,
             RString gunshiCode,
             boolean isGunshiCode,
             FlexibleDate systemdate,
@@ -96,6 +102,9 @@ public final class JigyoshaInputGuideParameter {
         this.isJigyoshaKbn = isJigyoshaKbn;
         this.zennpouitti = zennpouitti;
         this.isZennpouitti = isZennpouitti;
+        this.isKanzenitti = isKanzenitti;
+        this.isKouhouitti = isKouhouitti;
+        this.isBubunitti = isBubunitti;
         this.gunshiCode = gunshiCode;
         this.isGunshiCode = isGunshiCode;
         this.systemdate = systemdate;
@@ -157,6 +166,9 @@ public final class JigyoshaInputGuideParameter {
         boolean isKenCode = false;
         boolean isJigyoshaKbn = false;
         boolean isZennpouitti = false;
+        boolean isKanzenitti = false;
+        boolean isKouhouitti = false;
+        boolean isBubunitti = false;
         boolean isGunshiCode = false;
         boolean isKannaiKangaiKubun1Flg = false;
         boolean isKannaiKangaiKubun2Flg = false;
@@ -186,11 +198,18 @@ public final class JigyoshaInputGuideParameter {
             isKenCode = true;
         }
         if (new RString("key0").equals(zennpouitti)) {
-            isZennpouitti = false;
-        }
-        if (new RString("key1").equals(zennpouitti)) {
             isZennpouitti = true;
         }
+        if (new RString("key1").equals(zennpouitti)) {
+            isKanzenitti = true;
+        }
+        if (new RString("key2").equals(zennpouitti)) {
+            isKouhouitti = true;
+        }
+        if (new RString("key3").equals(zennpouitti)) {
+            isBubunitti = true;
+        }
+        
         if (!RString.isNullOrEmpty(jigyoshaKbn)) {
             isJigyoshaKbn = true;
         }
@@ -217,6 +236,9 @@ public final class JigyoshaInputGuideParameter {
                 isJigyoshaKbn,
                 zennpouitti,
                 isZennpouitti,
+                isKanzenitti,
+                isKouhouitti,
+                isBubunitti,
                 gunshiCode,
                 isGunshiCode,
                 systemdate,
