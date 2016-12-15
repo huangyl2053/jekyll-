@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
@@ -85,13 +86,13 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoReportSource implements IReportSour
     @ReportItem(name = "atesakiHokenshaName", length = 50, order = 34)
     public RString atesakiHokenshaName;
     @ReportItem(name = "shinkiShisetsuKingaku", length = 6, order = 35)
-    public RString shinkiShisetsuKingaku;
+    public Decimal shinkiShisetsuKingaku;
     @ReportItem(name = "shinkiZaitakuKingaku", length = 6, order = 36)
-    public RString shinkiZaitakuKingaku;
+    public Decimal shinkiZaitakuKingaku;
     @ReportItem(name = "keizokuZaitakuKingaku", length = 6, order = 37)
-    public RString keizokuZaitakuKingaku;
+    public Decimal keizokuZaitakuKingaku;
     @ReportItem(name = "keizokuShisetsuKingaku", length = 6, order = 38)
-    public RString keizokuShisetsuKingaku;
+    public Decimal keizokuShisetsuKingaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
