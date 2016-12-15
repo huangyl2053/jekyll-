@@ -16,6 +16,7 @@
     <resultMap id="resultMap_NinteiChosaTokusokujoRelateEntity"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokujoRelateEntity" autoMapping="true">
         <association property="認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity" />
+        <association property="認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity" />
         <association property="宛名機関" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper.resultMap_AtenaKikan" />
     </resultMap>
 
@@ -35,9 +36,7 @@
 
         INNER JOIN (
             SELECT
-                DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
-                DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaKigenYMD",
-                DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD",
+                DbT5201.*,
                 ROW_NUMBER() OVER (PARTITION BY DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
                                                 DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo"
                                    ORDER BY DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" DESC) AS "rowNum"

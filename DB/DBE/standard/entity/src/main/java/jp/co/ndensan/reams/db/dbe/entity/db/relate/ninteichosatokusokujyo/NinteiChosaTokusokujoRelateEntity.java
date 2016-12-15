@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ import lombok.Setter;
 public class NinteiChosaTokusokujoRelateEntity {
 
     private DbT5101NinteiShinseiJohoEntity 認定申請情報;
+    private DbT5201NinteichosaIraiJohoEntity 認定調査依頼情報;
     private AtenaKikan 宛名機関;
 
     /**
@@ -24,6 +26,7 @@ public class NinteiChosaTokusokujoRelateEntity {
      */
     public NinteiChosaTokusokujoRelateEntity() {
         this.認定申請情報 = new DbT5101NinteiShinseiJohoEntity();
+        this.認定調査依頼情報 = new DbT5201NinteichosaIraiJohoEntity();
         this.宛名機関 = new AtenaKikan();
     }
 }
