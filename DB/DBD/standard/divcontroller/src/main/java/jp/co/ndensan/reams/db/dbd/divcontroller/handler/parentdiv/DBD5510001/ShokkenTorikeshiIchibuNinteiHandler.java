@@ -243,12 +243,15 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             passModel.set申請書管理番号(要介護認定申請情報.get申請書管理番号());
             JukyushaDaicho 受給者台帳 = 認定情報.get受給者台帳();
             passModel.set厚労省IFコード(convertCodeToRString(要介護認定申請情報.get厚労省IF識別コード()));
-            passModel.set有効開始年月日(受給者台帳.get認定有効期間開始年月日());
-            passModel.set有効終了年月日(受給者台帳.get認定有効期間終了年月日());
+            passModel.set有効開始年月日(new RDate(受給者台帳.get認定有効期間開始年月日().getYearValue(),
+                    受給者台帳.get認定有効期間開始年月日().getMonthValue(), 受給者台帳.get認定有効期間開始年月日().getDayValue()));
+            passModel.set有効終了年月日(new RDate(受給者台帳.get認定有効期間終了年月日().getYearValue(),
+                    受給者台帳.get認定有効期間終了年月日().getMonthValue(), 受給者台帳.get認定有効期間終了年月日().getDayValue()));
             passModel.set要介護度コード(受給者台帳.get要介護認定状態区分コード().getKey());
             passModel.set要介護度名称(get要介護度名(要介護認定申請情報.get厚労省IF識別コード(), 受給者台帳.get要介護認定状態区分コード().value()));
             passModel.set審査会意見(認定情報.get要介護認定結果情報().get介護認定審査会意見());
-            passModel.set認定年月日(受給者台帳.get認定年月日());
+            passModel.set認定年月日(new RDate(受給者台帳.get認定年月日().getYearValue(),
+                    受給者台帳.get認定年月日().getMonthValue(), 受給者台帳.get認定年月日().getDayValue()));
             model.setDataPassModel(passModel);
             model.setIdoJiyuCode(convertCodeToRString(受給者台帳.getデータ区分()));
             model.setJukyuShikakuHakkoDay1(受給者台帳.get受給資格証明書発行年月日１());
@@ -323,9 +326,12 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         } else {
             div.getTxtYokaigodoKonkai().setValue(RString.EMPTY);
         }
-        div.getTxtYukoKaishibiKonkai().setValue(認定内容.get有効開始年月日());
-        div.getTxtYukoShuryobiKonkai().setValue(認定内容.get有効終了年月日());
-        div.getTxtNinteibiKonkai().setValue(認定内容.get認定年月日());
+        div.getTxtYukoKaishibiKonkai().setValue(new FlexibleDate(認定内容.get有効開始年月日().getYearValue(),
+                認定内容.get有効開始年月日().getMonthValue(), 認定内容.get有効開始年月日().getDayValue()));
+        div.getTxtYukoShuryobiKonkai().setValue(new FlexibleDate(認定内容.get有効終了年月日().getYearValue(),
+                認定内容.get有効終了年月日().getMonthValue(), 認定内容.get有効終了年月日().getDayValue()));
+        div.getTxtNinteibiKonkai().setValue(new FlexibleDate(認定内容.get認定年月日().getYearValue(),
+                認定内容.get認定年月日().getMonthValue(), 認定内容.get認定年月日().getDayValue()));
         RString サービス種類 = RString.EMPTY;
         List<KekkaShosaiJohoServiceShuri> サービス類リスト = model.getサービス類リスト();
         if (サービス類リスト != null && !サービス類リスト.isEmpty()) {
@@ -404,7 +410,8 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         if (メニュID_職権修正.equals(menuId)) {
             return null;
         } else if (メニュID_職権取消一部喪失.equals(menuId)) {
-            更新用情報Builder.set前回認定有効期間_終了(outModel.get認定内容().get有効開始年月日());
+            更新用情報Builder.set前回認定有効期間_終了(new FlexibleDate(outModel.get認定内容().get有効開始年月日().getYearValue(),
+                    outModel.get認定内容().get有効開始年月日().getMonthValue(), outModel.get認定内容().get有効開始年月日().getDayValue()));
         } else if (メニュID_区分変更認定.equals(menuId) || メニュID_認定データ更新.equals(menuId)) {
             更新用情報Builder.set審査継続区分(false);
             更新用情報Builder = create区変介護認定申請情報(更新用情報Builder, outModel, 今回情報);
@@ -478,8 +485,8 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             登録用情報Builder.set二次判定認定有効期間(set有効期間(outModel));
             if (outModel != null) {
                 登録用情報Builder.set二次判定要介護状態区分コード(new Code(outModel.get認定内容().get要介護度コード()));
-                登録用情報Builder.set二次判定認定有効開始年月日(nullToEmpty(outModel.get認定内容().get有効開始年月日()));
-                登録用情報Builder.set二次判定認定有効終了年月日(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
+                登録用情報Builder.set二次判定認定有効開始年月日(new FlexibleDate(nullToEmpty(outModel.get認定内容().get有効開始年月日().toDateString())));
+                登録用情報Builder.set二次判定認定有効終了年月日(new FlexibleDate(nullToEmpty(outModel.get認定内容().get有効終了年月日().toDateString())));
                 登録用情報Builder.set介護認定審査会意見(outModel.get認定内容().get審査会意見());
             }
             登録用情報Builder.set介護認定審査会資料作成年月日(FlexibleDate.EMPTY);
@@ -633,9 +640,9 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             KekkaShosaiJohoOutModel outModel = DataPassingConverter.deserialize(div.getHdnKekkaShosaiJohoOutModel(), KekkaShosaiJohoOutModel.class);
             登録用情報Builder.set前回要介護状態区分コード(今回情報.get受給者台帳().get要介護認定状態区分コード());
             if (outModel != null) {
-                登録用情報Builder.set前回認定年月日(nullToEmpty(outModel.get認定内容().get認定年月日()));
-                登録用情報Builder.set前回認定有効期間_開始(nullToEmpty(outModel.get認定内容().get有効開始年月日()));
-                登録用情報Builder.set前回認定有効期間_終了(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
+                登録用情報Builder.set前回認定年月日(new FlexibleDate(nullToEmpty(outModel.get認定内容().get認定年月日().toDateString())));
+                登録用情報Builder.set前回認定有効期間_開始(new FlexibleDate(nullToEmpty(outModel.get認定内容().get有効開始年月日().toDateString())));
+                登録用情報Builder.set前回認定有効期間_終了(new FlexibleDate(nullToEmpty(outModel.get認定内容().get有効終了年月日().toDateString())));
             } else {
                 登録用情報Builder.set前回認定年月日(nullToEmpty(要介護認定申請情報.get前回認定年月日()));
                 登録用情報Builder.set前回認定有効期間_開始(nullToEmpty(要介護認定申請情報.get前回認定有効期間_開始()));
@@ -771,7 +778,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             登録用builder = set指定サービス種類(登録用builder, 指定サービス種類_30, 指定サービス種類List.get(指定サービス種類_30 - 1));
             if (outModel != null) {
                 登録用builder.set要介護認定状態区分コード(new Code(outModel.get認定内容().get要介護度コード()));
-                登録用builder.set認定有効期間終了年月日(nullToEmpty(outModel.get認定内容().get有効終了年月日()));
+                登録用builder.set認定有効期間終了年月日(new FlexibleDate(nullToEmpty(outModel.get認定内容().get有効終了年月日().toDateString())));
             } else {
                 登録用builder.set要介護認定状態区分コード(nullToEmpty(受給者台帳.get要介護認定状態区分コード()));
                 登録用builder.set認定有効期間終了年月日(nullToEmpty(受給者台帳.get認定有効期間終了年月日()));
@@ -1065,7 +1072,8 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             更新用情報Builder.set取下区分コード(new Code(TorisageKubunCode.区分変更却下.getコード()));
             更新用情報Builder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
             if (outModel != null) {
-                更新用情報Builder.set却下年月日(outModel.get認定内容().get認定年月日());
+                更新用情報Builder.set却下年月日(new FlexibleDate(outModel.get認定内容().get認定年月日().getYearValue(),
+                        outModel.get認定内容().get認定年月日().getMonthValue(), outModel.get認定内容().get認定年月日().getDayValue()));
                 更新用情報Builder.set却下理由(outModel.get理由());
             }
         }
@@ -1085,7 +1093,8 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
                 && ShinseiJokyoKubun.申請中.getコード().equals(受給者台帳.get申請状況区分())) {
             更新用情報Builder.set市町村連絡事項(div.getHdnShichosonRenrakuJiko());
             if (outModel != null) {
-                更新用情報Builder.set却下年月日(outModel.get認定内容().get認定年月日());
+                更新用情報Builder.set却下年月日(new FlexibleDate(outModel.get認定内容().get認定年月日().getYearValue(),
+                        outModel.get認定内容().get認定年月日().getMonthValue(), outModel.get認定内容().get認定年月日().getDayValue()));
                 更新用情報Builder.set却下理由(outModel.get理由());
             }
         }
@@ -1103,9 +1112,12 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
 
             if (outModel != null) {
                 修正用builder.set要介護認定状態区分コード(new Code(outModel.get認定内容().get要介護度コード()));
-                修正用builder.set認定有効期間開始年月日(outModel.get認定内容().get有効開始年月日());
-                修正用builder.set認定有効期間終了年月日(outModel.get認定内容().get有効終了年月日());
-                修正用builder.set認定年月日(outModel.get認定内容().get認定年月日());
+                修正用builder.set認定有効期間開始年月日(new FlexibleDate(outModel.get認定内容().get有効開始年月日().getYearValue(),
+                        outModel.get認定内容().get有効開始年月日().getMonthValue(), outModel.get認定内容().get有効開始年月日().getDayValue()));
+                修正用builder.set認定有効期間終了年月日(new FlexibleDate(outModel.get認定内容().get有効終了年月日().getYearValue(),
+                        outModel.get認定内容().get有効終了年月日().getMonthValue(), outModel.get認定内容().get有効終了年月日().getDayValue()));
+                修正用builder.set認定年月日(new FlexibleDate(outModel.get認定内容().get認定年月日().getYearValue(),
+                        outModel.get認定内容().get認定年月日().getMonthValue(), outModel.get認定内容().get認定年月日().getDayValue()));
             }
             修正用builder.set申請状況区分(ShinseiJokyoKubun.認定完了.getコード());
             修正用builder.set直近フラグ(true);
@@ -1237,8 +1249,8 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
     }
 
     private int set有効期間(KekkaShosaiJohoOutModel outModel) {
-        if (outModel != null && outModel.get認定内容().get有効開始年月日() != null && !outModel.get認定内容().get有効開始年月日().isEmpty()
-                && outModel.get認定内容().get有効終了年月日() != null && !outModel.get認定内容().get有効終了年月日().isEmpty()) {
+        if (outModel != null && outModel.get認定内容().get有効開始年月日() != null && !outModel.get認定内容().get有効開始年月日().toDateString().isEmpty()
+                && outModel.get認定内容().get有効終了年月日() != null && !outModel.get認定内容().get有効終了年月日().toDateString().isEmpty()) {
             return outModel.get認定内容().get有効終了年月日().getMonthValue() - outModel.get認定内容().get有効開始年月日().getMonthValue() + 1;
         }
         return 0;

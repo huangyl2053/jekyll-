@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEnti
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 特殊修正Businessクラスです。
@@ -246,10 +247,13 @@ public class RirekiShuseiBusiness implements Serializable {
         RirekiShuseiDataPass dataPass = new RirekiShuseiDataPass();
         if (dbt4001 != null) {
             dataPass.setデータ区分(dbt4001.getデータ区分());
-            dataPass.set認定年月日(dbt4001.get認定年月日());
+            dataPass.set認定年月日(new RDate(dbt4001.get認定年月日().getYearValue(),
+                    dbt4001.get認定年月日().getMonthValue(), dbt4001.get認定年月日().getDayValue()));
             dataPass.set要介護状態区分コード(dbt4001.get要介護認定状態区分コード());
-            dataPass.set認定有効開始年月日(dbt4001.get認定有効期間開始年月日());
-            dataPass.set認定有効終了年月日(dbt4001.get認定有効期間終了年月日());
+            dataPass.set認定有効開始年月日(new RDate(dbt4001.get認定有効期間開始年月日().getYearValue(),
+                    dbt4001.get認定有効期間開始年月日().getMonthValue(), dbt4001.get認定有効期間開始年月日().getDayValue()));
+            dataPass.set認定有効終了年月日(new RDate(dbt4001.get認定有効期間終了年月日().getYearValue(),
+                    dbt4001.get認定有効期間終了年月日().getMonthValue(), dbt4001.get認定有効期間終了年月日().getDayValue()));
             dataPass.set旧措置フラグ(dbt4001.is旧措置者フラグ());
             dataPass.set受給申請事由(dbt4001.get受給申請事由());
             dataPass.set申請状況区分(dbt4001.get申請状況区分());
@@ -297,8 +301,10 @@ public class RirekiShuseiBusiness implements Serializable {
         }
         if (dbt4102 != null) {
             dataPass.set介護認定審査会意見(dbt4102.get介護認定審査会意見());
-            dataPass.set介護認定審査会資料作成年月日(dbt4102.get介護認定審査会資料作成年月日());
-            dataPass.set二次判定年月日(dbt4102.get二次判定年月日());
+            dataPass.set介護認定審査会資料作成年月日(new RDate(dbt4102.get介護認定審査会資料作成年月日().getYearValue(),
+                    dbt4102.get介護認定審査会資料作成年月日().getMonthValue(), dbt4102.get介護認定審査会資料作成年月日().getDayValue()));
+            dataPass.set二次判定年月日(new RDate(dbt4102.get二次判定年月日().getYearValue(),
+                    dbt4102.get二次判定年月日().getMonthValue(), dbt4102.get二次判定年月日().getDayValue()));
             dataPass.set二次判定要介護状態区分コード(dbt4102.get二次判定要介護状態区分コード());
             dataPass.set二次判定認定有効期間(dbt4102.get二次判定認定有効期間());
             dataPass.set二次判定認定有効開始年月日(dbt4102.get二次判定認定有効開始年月日());
@@ -319,7 +325,8 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set訪問調査先郵便番号(dbt4101.get訪問調査先郵便番号());
             dataPass.set訪問調査先住所(dbt4101.get訪問調査先住所());
             dataPass.set訪問調査先電話番号(dbt4101.get訪問調査先電話番号());
-            dataPass.set延期通知発行年月日(dbt4101.get延期通知発行年月日());
+            dataPass.set延期通知発行年月日(new RDate(dbt4101.get延期通知発行年月日().getYearValue(),
+                    dbt4101.get延期通知発行年月日().getMonthValue(), dbt4101.get延期通知発行年月日().getDayValue()));
             dataPass.set延期通知発行回数(dbt4101.get延期通知発行回数());
             dataPass.set厚労省IF識別コード(dbt4101.get厚労省IF識別コード());
         }
@@ -347,15 +354,20 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set調査委託区分(dbt4910Entity.getChosaItakuKubun());
         }
         if (dbt4201 != null) {
-            dataPass.set認定調査依頼年月日(dbt4201.get認定調査依頼年月日());
+            dataPass.set認定調査依頼年月日(new RDate(dbt4201.get認定調査依頼年月日().getYearValue(),
+                    dbt4201.get認定調査依頼年月日().getMonthValue(), dbt4201.get認定調査依頼年月日().getDayValue()));
         }
         if (dbt4123 != null) {
-            dataPass.set認定調査予定年月日(dbt4123.get認定調査予定年月日());
-            dataPass.set主治医意見書登録予定年月日(dbt4123.get主治医意見書登録予定年月日());
-            dataPass.set認定審査会予定年月日(dbt4123.get認定審査会予定年月日());
+            dataPass.set認定調査予定年月日(new RDate(dbt4123.get認定調査予定年月日().getYearValue(),
+                    dbt4123.get認定調査予定年月日().getMonthValue(), dbt4123.get認定調査予定年月日().getDayValue()));
+            dataPass.set主治医意見書登録予定年月日(new RDate(dbt4123.get主治医意見書登録予定年月日().getYearValue(),
+                    dbt4123.get主治医意見書登録予定年月日().getMonthValue(), dbt4123.get主治医意見書登録予定年月日().getDayValue()));
+            dataPass.set認定審査会予定年月日(new RDate(dbt4123.get認定審査会予定年月日().getYearValue(),
+                    dbt4123.get認定審査会予定年月日().getMonthValue(), dbt4123.get認定審査会予定年月日().getDayValue()));
         }
         if (dbt4202 != null) {
-            dataPass.set認定調査実施年月日(dbt4202.get認定調査実施年月日());
+            dataPass.set認定調査実施年月日(new RDate(dbt4202.get認定調査実施年月日().getYearValue(),
+                    dbt4202.get認定調査実施年月日().getMonthValue(), dbt4202.get認定調査実施年月日().getDayValue()));
         }
         if (dbt4912Entity != null) {
             dataPass.set主治医コード(dbt4912Entity.getShujiiCode());
@@ -369,14 +381,17 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set主治医電話番号(dbt4911Entity.getTelNo());
         }
         if (dbt4301 != null) {
-            dataPass.set主治医意見書作成依頼年月日(dbt4301.get主治医意見書作成依頼年月日());
+            dataPass.set主治医意見書作成依頼年月日(new RDate(dbt4301.get主治医意見書作成依頼年月日().getYearValue(),
+                    dbt4301.get主治医意見書作成依頼年月日().getMonthValue(), dbt4301.get主治医意見書作成依頼年月日().getDayValue()));
         }
         if (dbt4302 != null) {
-            dataPass.set主治医意見書記入年月日(dbt4302.get主治医意見書記入年月日());
+            dataPass.set主治医意見書記入年月日(new RDate(dbt4302.get主治医意見書記入年月日().getYearValue(),
+                    dbt4302.get主治医意見書記入年月日().getMonthValue(), dbt4302.get主治医意見書記入年月日().getDayValue()));
         }
         if (dbt4116 != null) {
             dataPass.set要介護認定一次判定結果コード(dbt4116.get要介護認定一次判定結果コード());
-            dataPass.set要介護認定一次判定年月日(dbt4116.get要介護認定一次判定年月日());
+            dataPass.set要介護認定一次判定年月日(new RDate(dbt4116.get要介護認定一次判定年月日().getYearValue(),
+                    dbt4116.get要介護認定一次判定年月日().getMonthValue(), dbt4116.get要介護認定一次判定年月日().getDayValue()));
             dataPass.set要介護認定一次判定結果コード_認知症加算(dbt4116.get要介護認定一次判定結果コード_認知症加算());
         }
         return dataPass;
@@ -392,10 +407,13 @@ public class RirekiShuseiBusiness implements Serializable {
         RirekiShuseiDataPass dataPass = new RirekiShuseiDataPass();
         if (dbt4001 != null) {
             dataPass.setデータ区分(Code.EMPTY);
-            dataPass.set認定年月日(dbt4001.get認定年月日());
+            dataPass.set認定年月日(new RDate(dbt4001.get認定年月日().getYearValue(),
+                    dbt4001.get認定年月日().getMonthValue(), dbt4001.get認定年月日().getDayValue()));
             dataPass.set要介護状態区分コード(Code.EMPTY);
-            dataPass.set認定有効開始年月日(dbt4001.get認定有効期間開始年月日());
-            dataPass.set認定有効終了年月日(dbt4001.get認定有効期間終了年月日());
+            dataPass.set認定有効開始年月日(new RDate(dbt4001.get認定有効期間開始年月日().getYearValue(),
+                    dbt4001.get認定有効期間開始年月日().getMonthValue(), dbt4001.get認定有効期間開始年月日().getDayValue()));
+            dataPass.set認定有効終了年月日(new RDate(dbt4001.get認定有効期間終了年月日().getYearValue(),
+                    dbt4001.get認定有効期間終了年月日().getMonthValue(), dbt4001.get認定有効期間終了年月日().getDayValue()));
             dataPass.set旧措置フラグ(dbt4001.is旧措置者フラグ());
             dataPass.set受給申請事由(dbt4001.get受給申請事由());
             dataPass.set申請状況区分(dbt4001.get申請状況区分());
@@ -443,8 +461,10 @@ public class RirekiShuseiBusiness implements Serializable {
         }
         if (dbt4102 != null) {
             dataPass.set介護認定審査会意見(dbt4102.get介護認定審査会意見());
-            dataPass.set介護認定審査会資料作成年月日(dbt4102.get介護認定審査会資料作成年月日());
-            dataPass.set二次判定年月日(dbt4102.get二次判定年月日());
+            dataPass.set介護認定審査会資料作成年月日(new RDate(dbt4102.get介護認定審査会資料作成年月日().getYearValue(),
+                    dbt4102.get介護認定審査会資料作成年月日().getMonthValue(), dbt4102.get介護認定審査会資料作成年月日().getDayValue()));
+            dataPass.set二次判定年月日(new RDate(dbt4102.get二次判定年月日().getYearValue(),
+                    dbt4102.get二次判定年月日().getMonthValue(), dbt4102.get二次判定年月日().getDayValue()));
             dataPass.set二次判定要介護状態区分コード(Code.EMPTY);
             dataPass.set二次判定認定有効期間(dbt4102.get二次判定認定有効期間());
             dataPass.set二次判定認定有効開始年月日(dbt4102.get二次判定認定有効開始年月日());
@@ -465,7 +485,8 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set訪問調査先郵便番号(dbt4101.get訪問調査先郵便番号());
             dataPass.set訪問調査先住所(dbt4101.get訪問調査先住所());
             dataPass.set訪問調査先電話番号(dbt4101.get訪問調査先電話番号());
-            dataPass.set延期通知発行年月日(dbt4101.get延期通知発行年月日());
+            dataPass.set延期通知発行年月日(new RDate(dbt4101.get延期通知発行年月日().getYearValue(),
+                    dbt4101.get延期通知発行年月日().getMonthValue(), dbt4101.get延期通知発行年月日().getDayValue()));
             dataPass.set延期通知発行回数(dbt4101.get延期通知発行回数());
             dataPass.set厚労省IF識別コード(厚労省IF識別コード);
         }
@@ -493,15 +514,19 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set調査委託区分(dbt4910Entity.getChosaItakuKubun());
         }
         if (dbt4201 != null) {
-            dataPass.set認定調査依頼年月日(dbt4201.get認定調査依頼年月日());
+            dataPass.set認定調査依頼年月日(new RDate(dbt4201.get認定調査依頼年月日().getYearValue(),
+                    dbt4201.get認定調査依頼年月日().getMonthValue(), dbt4201.get認定調査依頼年月日().getDayValue()));
         }
         if (dbt4123 != null) {
-            dataPass.set認定調査予定年月日(dbt4123.get認定調査予定年月日());
-            dataPass.set主治医意見書登録予定年月日(dbt4123.get主治医意見書登録予定年月日());
-            dataPass.set認定審査会予定年月日(dbt4123.get認定審査会予定年月日());
+            dataPass.set認定調査予定年月日(new RDate(dbt4123.get認定調査予定年月日().getYearValue(),
+                    dbt4123.get認定調査予定年月日().getMonthValue(), dbt4123.get認定調査予定年月日().getDayValue()));
+            dataPass.set主治医意見書登録予定年月日(new RDate(dbt4123.get主治医意見書登録予定年月日().getYearValue(),
+                    dbt4123.get主治医意見書登録予定年月日().getMonthValue(), dbt4123.get主治医意見書登録予定年月日().getDayValue()));
+            dataPass.set認定審査会予定年月日(new RDate(dbt4123.get認定審査会予定年月日().getDayValue()));
         }
         if (dbt4202 != null) {
-            dataPass.set認定調査実施年月日(dbt4202.get認定調査実施年月日());
+            dataPass.set認定調査実施年月日(new RDate(dbt4202.get認定調査実施年月日().getYearValue(),
+                    dbt4202.get認定調査実施年月日().getMonthValue(), dbt4202.get認定調査実施年月日().getDayValue()));
         }
         if (dbt4912Entity != null) {
             dataPass.set主治医コード(dbt4912Entity.getShujiiCode());
@@ -515,14 +540,17 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set主治医電話番号(dbt4911Entity.getTelNo());
         }
         if (dbt4301 != null) {
-            dataPass.set主治医意見書作成依頼年月日(dbt4301.get主治医意見書作成依頼年月日());
+            dataPass.set主治医意見書作成依頼年月日(new RDate(dbt4301.get主治医意見書作成依頼年月日().getYearValue(),
+                    dbt4301.get主治医意見書作成依頼年月日().getMonthValue(), dbt4301.get主治医意見書作成依頼年月日().getDayValue()));
         }
         if (dbt4302 != null) {
-            dataPass.set主治医意見書記入年月日(dbt4302.get主治医意見書記入年月日());
+            dataPass.set主治医意見書記入年月日(new RDate(dbt4302.get主治医意見書記入年月日().getYearValue(),
+                    dbt4302.get主治医意見書記入年月日().getMonthValue(), dbt4302.get主治医意見書記入年月日().getDayValue()));
         }
         if (dbt4116 != null) {
             dataPass.set要介護認定一次判定結果コード(Code.EMPTY);
-            dataPass.set要介護認定一次判定年月日(dbt4116.get要介護認定一次判定年月日());
+            dataPass.set要介護認定一次判定年月日(new RDate(dbt4116.get要介護認定一次判定年月日().getYearValue(),
+                    dbt4116.get要介護認定一次判定年月日().getMonthValue(), dbt4116.get要介護認定一次判定年月日().getDayValue()));
             dataPass.set要介護認定一次判定結果コード_認知症加算(Code.EMPTY);
         }
         return dataPass;
