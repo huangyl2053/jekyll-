@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>c# .NET的面试知识点 – huangyl2053 – Web Developer from Somewhere</title>    <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="c# .NET的面试知识点
+
+" />
+    <meta property="og:description" content="c# .NET的面试知识点
+
+" />
+    
+    <meta name="author" content="huangyl2053" />
+
+    
+    <meta property="og:title" content="c# .NET的面试知识点" />
+    <meta property="twitter:title" content="c# .NET的面试知识点" />
+    
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="huangyl2053 - Web Developer from Somewhere" href="/feed.xml" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.10.0.custom.css" />
+    <script src="/js/footerFixed.js" type="text/javascript"></script>
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/jquery-ui-1.10.0.custom.min.js" type="text/javascript"></script>
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now --></head>
+  
+  <body>
+    <div class="wrap">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="/" class="site-avatar">
+              <img src="https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png" /></a>
+            <div class="site-info">
+              <h1 class="site-name">
+                <a href="/">huangyl2053</a></h1>
+              <p class="site-description">Web Developer from Somewhere</p></div>
+            <nav>
+              <a href="/">学习的知识</a>
+              <a href="/about">About</a></nav>
+            <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+            opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+              <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签">
+              <div style="position: fixed; top: 16px; right: 16px;">
+                <img src="/search/img/cb-close.png" id="cb-close-btn" /></div>
+            </div>
+            <div>
+              <img src="/search/img/cb-search.png" id="cb-search-btn" title="双击ctrl试一下" /></div>
+            <link rel="stylesheet" href=" /search/css/cb-search.css ">
+            <script src=" /search/js/bootstrap3-typeahead.min.js "></script>
+            <script src=" /search/js/cb-search.js "></script>
+          </header>
+        </div>
+      </div>
+      <div id="main" role="main" class="container"><article class="post">
+  <h1>c# .NET的面试知识点</h1>
+
+  <div class="entry">
+    <p>c# .NET的面试知识点</p>
+
+<ul>
+  <li>什么是.NET？什么是CLI？什么是CLR？IL是什么？JIT是什么，它是如何工作的？GC是什么，简述一下GC的工作方式？</li>
+  <li>类（class）和结构（struct）的区别是什么？它们对性能有影响吗？.NET BCL里有哪些是类（结构），为什么它们不是结构（类）？在自定义类型时，您如何选择是类还是结构？</li>
+  <li>在.NET程序运行过程中，什么是堆，什么是栈？什么情况下会在堆（栈）上分配数据？它们有性能上的区别吗？“结构”对象可能分配在堆上吗？什么情况下会发生，有什么需要注意的吗？</li>
+  <li>泛型的作用是什么？它有什么优势？它对性能有影响吗？它在执行时的行为是什么？.NET BCL中有哪些泛型类型？举例说明平时编程中您定义的泛型类型。</li>
+  <li>异常的作用是什么？.NET BCL中有哪些常见的异常？在代码中您是如何捕获/处理异常的？在“catch (ex)”中，“throw”和“throw ex”有什么区别？您会如何设计异常的结构，什么情况下您会抛出异常？</li>
+  <li>List<T>和T[]的区别是什么，平时你如何进行选择？Dictionary&lt;TKey, TValue&gt;是做什么的？.NET BCL中还有哪些常用的容器？它们分别是如何实现的（哪种数据结构）？分别是适用于哪些场景？</T></li>
+  <li>抽象类和接口有什么区别？使用时有什么需要注意的吗？如何选择是定义一个“完全抽象”的抽象类，还是接口？什么是接口的“显式实现”？为什么说它很重要？</li>
+  <li>字符串是引用类型类型还是结构类型？它和普通的引用类型相比有什么特别的地方吗？使用字符串时有什么需要注意的地方？为什么说StringBuilder比较高效？在连接多个字符串时，它无论何时都比直接相加更高效吗？</li>
+  <li>如何高效地进行数组复制？“二维数组”和“数组的数组”有什么区别？在使用双重循环遍历一个二维数组时，如何选择内外层的遍历顺序？</li>
+  <li>什么是元编程，.NET有哪些元编程的手段和场景？什么是反射？能否举一些反射的常用场景？有人说反射性能较差，您怎么看待这个问题？有什么办法可以提高反射的性能吗？</li>
+  <li>委托是什么？匿名方法是什么？在C# 3.0中，Lambda表达式是什么？扩展方法是什么？LINQ是什么？您觉得C# 3.0中还有哪些重要的特性，它们带来了什么优势？BCL中哪些类库和这些特性有关？您平时最常用哪些？</li>
+  <li>工作之外您看哪些技术相关的书、网站、社区、项目等等？您还接触哪些.NET以外的技术，能和.NET或.NET中有针对性的部分做个对比吗？；</li>
+</ul>
+
+  </div>
+
+  <div class="date">
+    作于： December  9, 2016
+  </div>
+</br>
+</br>
+</br>
+<div style="float:center">  
+
+  <a href="/blog/2016/12/09/blog-it_3.html">上一篇：java的使用总结
+
+
+  <a href="/blog/2016/12/09/blog-it_1.html">&nbsp;&nbsp;&nbsp;下一篇：mybatis的使用
+
+
+</div>
+
+  
+
+</article>
+</div></div>
+    <footer id="footer" class="footer">
+      <div class="wrapper-footer">
+        <div class="container"> 
+
+
+
+<a href="https://github.com/huangyl2053/huangyl2053.github.io"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="https://www.twitter.com/huangyl2053"><i class="svg-icon twitter"></i></a>
+
+
+</div></div>
+    </footer>
+</body>
+
+</html>
