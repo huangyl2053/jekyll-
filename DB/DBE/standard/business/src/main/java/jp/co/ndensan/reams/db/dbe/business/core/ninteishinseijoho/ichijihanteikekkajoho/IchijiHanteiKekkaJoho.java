@@ -105,7 +105,7 @@ public class IchijiHanteiKekkaJoho
     /**
      * 一次判定結果の名称を返します。
      *
-     * @param 厚労省IF識別コード
+     * @param 厚労省IF識別コード Code
      * @return 一次判定結果名称
      */
     public RString get一次判定結果名称(Code 厚労省IF識別コード) {
