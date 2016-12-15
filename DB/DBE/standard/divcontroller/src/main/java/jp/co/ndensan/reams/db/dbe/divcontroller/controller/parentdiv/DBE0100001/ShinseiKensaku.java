@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -60,6 +59,7 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN43001 = new RString("DBEMN43001");
     private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
+    private static final RString MENUID_DBEMN71003 = new RString("DBEMN71003");
 //>>>>>>> origin/sync
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
     private static final RString 完了メッセージ = new RString("要介護認定・要支援認定等申請者一覧表の発行処理が完了しました。");
@@ -163,8 +163,6 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
-            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
-            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
@@ -172,8 +170,6 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
-            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
-            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 
@@ -216,6 +212,10 @@ public class ShinseiKensaku {
         } else if (MENUID_DBEMN72001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定イメージ情報管理へ).respond();
+        }
+        if (MENUID_DBEMN71003.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定進捗情報データ出力へ).respond();
         }
 
         return ResponseData.of(div).respond();

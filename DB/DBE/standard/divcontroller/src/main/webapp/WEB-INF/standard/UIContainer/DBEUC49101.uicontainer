@@ -18,34 +18,6 @@
     },
     {
      "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE4910001",
-     "layoutTitle": "要介護認定進捗データ出力",
-     "eventName": "被保険者検索",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "検索条件sub"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0200001",
-     "layoutTitle": "対象者検索",
-     "eventName": "対象者特定",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE4910001",
-     "toLayoutTitle": "要介護認定進捗データ出力",
-     "toState": "初期表示"
-    },
-    {
-     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE4910001",
@@ -53,6 +25,34 @@
      "eventName": "完了状態",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4910001",
+     "layoutTitle": "要介護認定進捗データ出力",
+     "eventName": "被保険者検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "要介護認定申請検索",
+     "toState": "申請検索"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0100001",
+     "layoutTitle": "要介護認定申請検索",
+     "eventName": "要介護認定進捗情報データ出力へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4910001",
+     "toLayoutTitle": "要介護認定進捗データ出力",
+     "toState": "初期表示"
     }
    ]
   }
