@@ -41,16 +41,16 @@
         <!--  自業務公開系 DBXのバージョンと一致させること -->
         <jp.co.ndensan.reams.dbxVersion>1.12.0</jp.co.ndensan.reams.dbxVersion>
         <!-- UZ -->
-        <jp.co.ndensan.reams.uzVersion>1.14.1</jp.co.ndensan.reams.uzVersion>
+        <jp.co.ndensan.reams.uzVersion>1.15.1</jp.co.ndensan.reams.uzVersion>
         <!-- 公開系 -->
-        <jp.co.ndensan.reams.urVersion>1.14.1</jp.co.ndensan.reams.urVersion>
+        <jp.co.ndensan.reams.urVersion>1.15.0</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.uaxVersion>1.14.1</jp.co.ndensan.reams.uaxVersion>
         <jp.co.ndensan.reams.uexVersion>1.12.2</jp.co.ndensan.reams.uexVersion>
-        <jp.co.ndensan.reams.uxxVersion>1.14.1</jp.co.ndensan.reams.uxxVersion>
-        <jp.co.ndensan.reams.caxVersion>1.13.3</jp.co.ndensan.reams.caxVersion>
+        <jp.co.ndensan.reams.uxxVersion>1.15.0</jp.co.ndensan.reams.uxxVersion>
+        <jp.co.ndensan.reams.caxVersion>1.14.0</jp.co.ndensan.reams.caxVersion>
         <jp.co.ndensan.reams.aaxVersion>1.13.0</jp.co.ndensan.reams.aaxVersion>
         <jp.co.ndensan.reams.dzxVersion>1.13.0</jp.co.ndensan.reams.dzxVersion>
-        <jp.co.ndensan.reams.uaVersion>1.13.3</jp.co.ndensan.reams.uaVersion>
+        <!-- <jp.co.ndensan.reams.uaVersion>1.13.3</jp.co.ndensan.reams.uaVersion> -->
         <jp.co.ndensan.reams.bbVersion>1.13.0</jp.co.ndensan.reams.bbVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

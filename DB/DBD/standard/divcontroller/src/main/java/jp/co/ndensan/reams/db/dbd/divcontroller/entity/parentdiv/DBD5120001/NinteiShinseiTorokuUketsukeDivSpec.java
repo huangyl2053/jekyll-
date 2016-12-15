@@ -34,7 +34,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
             return div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue() != null
-                    && !div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue().isEmpty()
+                    && !div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue().toString().isEmpty()
                     && div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().isValid();
         }
     },
@@ -48,7 +48,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
             return div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD().getValue() != null
-                    && !div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD().getValue().isEmpty()
+                    && !div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD().getValue().toString().isEmpty()
                     && div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD().isValid();
         }
     },
@@ -121,8 +121,8 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            FlexibleDate 開始日 = div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue();
-            FlexibleDate 終了日 = div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD().getValue();
+            FlexibleDate 開始日 = new FlexibleDate(div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue().toDateString());
+            FlexibleDate 終了日 = new FlexibleDate(div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD().getValue().toDateString());
             if (!終了日.isBeforeOrEquals(開始日)) {
                 return false;
             }
@@ -139,7 +139,7 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
         @Override
         public boolean apply(NinteiShinseiTorokuUketsukeDiv div) {
 
-            FlexibleDate 今回有効開始日 = div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue();
+            FlexibleDate 今回有効開始日 = new FlexibleDate(div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue().toDateString());
             FlexibleDate 前回有効終了日 = div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().getValue();
             if (今回有効開始日.isBeforeOrEquals(前回有効終了日)) {
                 return false;
@@ -307,8 +307,8 @@ public enum NinteiShinseiTorokuUketsukeDivSpec implements IPredicate<NinteiShins
 
             return !div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().isAllSelected()
                     && YokaigoJotaiKubun.非該当.get名称().equals(div.getCcdZenkaiNinteiKekkaJoho().getTxtYokaigodo().getValue())
-                    && !div.getCcdNinteiInput().getNaiyo().get有効開始年月日().isEmpty()
-                    && !div.getCcdNinteiInput().getNaiyo().get有効終了年月日().isEmpty();
+                    && !div.getCcdNinteiInput().getNaiyo().get有効開始年月日().toString().isEmpty()
+                    && !div.getCcdNinteiInput().getNaiyo().get有効終了年月日().toString().isEmpty();
         }
     },
     自立_かつサービス指定ありチェック {
