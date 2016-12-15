@@ -1,7 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBE {
 
@@ -37,12 +37,12 @@ module DBE {
                 return "onChange_antei";
             }
 
-            public static onClick_btnKakutei(): string {
-                return "onClick_btnKakutei";
-            }
-
             public static onClick_btnCansel(): string {
                 return "onClick_btnCansel";
+            }
+
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
             }
 
         }
@@ -114,9 +114,9 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
             }
 
-            //public ccdCodeInputGeninShikkan(): URZ.CodeInput.ModeController {
-            //    return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
-            //}
+            public ccdCodeInputGeninShikkan(): URZ.CodeInput.ModeController {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
+            }
 
             public radIsShutaruGeninShikkan(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radIsShutaruGeninShikkan"));
@@ -154,12 +154,12 @@ module DBE {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtNaiyo"));
             }
 
-            public btnKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            }
-
             public btnCansel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCansel"));
+            }
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

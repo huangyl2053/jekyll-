@@ -8,12 +8,12 @@ module DBE {
 
         export class Events {
 
-            public static btnKakutei(): string {
-                return "btnKakutei";
-            }
-
             public static btnCancel(): string {
                 return "btnCancel";
+            }
+
+            public static btnKakutei(): string {
+                return "btnKakutei";
             }
 
         }
@@ -53,12 +53,12 @@ module DBE {
                 return new UZA.CheckBoxList(this.convFiledName("chkShikkinTaio"));
             }
 
-            public btnKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            }
-
             public btnCancel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            }
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

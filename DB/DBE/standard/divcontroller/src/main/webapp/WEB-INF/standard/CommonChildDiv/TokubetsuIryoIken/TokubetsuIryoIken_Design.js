@@ -4,12 +4,12 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.btnKakutei = function () {
-                return "btnKakutei";
-            };
-
             Events.btnCancel = function () {
                 return "btnCancel";
+            };
+
+            Events.btnKakutei = function () {
+                return "btnKakutei";
             };
             return Events;
         })();
@@ -47,12 +47,12 @@ var DBE;
                 return new UZA.CheckBoxList(this.convFiledName("chkShikkinTaio"));
             };
 
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            };
-
             Controls.prototype.btnCancel = function () {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();
