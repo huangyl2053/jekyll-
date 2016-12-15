@@ -26,6 +26,7 @@ public class JisshiJokyoTokeiEditor {
     private final JisshiJokyoTokeiProcessParameter parameter;
     private final JisshiJokyoTokeiEntity entity;
     private final JisshiJokyoTokei jisshiJokyoTokei;
+    private static final RString 全市町村 = new RString("全市町村");
 
     /**
      * コンストラクタです。
@@ -196,8 +197,13 @@ public class JisshiJokyoTokeiEditor {
     }
 
     private void set保険者(JisshiJokyoTokeiEntity entity) {
-        jisshiJokyoTokei.set保険者番号(entity.getShoKisaiHokenshaNo());
-        jisshiJokyoTokei.set保険者名(entity.getShichosonMeisho());
+        if (!parameter.isEmptyHokensyaNo()) {
+            jisshiJokyoTokei.set保険者番号(entity.getShoKisaiHokenshaNo());
+            jisshiJokyoTokei.set保険者名(entity.getShichosonMeisho());
+        } else {
+            jisshiJokyoTokei.set保険者番号(RString.EMPTY);
+            jisshiJokyoTokei.set保険者名(全市町村);
+        }
     }
 
     /**
