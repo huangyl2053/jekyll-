@@ -374,7 +374,7 @@ public class IchijiHanteizumIfOutputBusiness {
         List<RString> 被保険者番号List = paramter.getHihokenshaNoList();
         List<RString> 申請日List = paramter.getShinseibiList();
 
-        int max = 証記載保険者List.size();//落ちる！！？
+        int max = 証記載保険者List.size();
         for (int i = 0; i < max; i++) {
             RStringBuilder jokenBuilder = new RStringBuilder();
             jokenBuilder.append(new RString("証記載保険者："));
