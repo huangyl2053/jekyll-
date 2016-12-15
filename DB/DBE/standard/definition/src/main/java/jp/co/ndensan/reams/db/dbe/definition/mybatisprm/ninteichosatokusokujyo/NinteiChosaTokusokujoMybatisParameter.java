@@ -21,8 +21,7 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisParameter {
 
-    private final FlexibleDate temp_基準日;
-    private final Decimal temp_認定調査督促期限日数;
+    private final FlexibleDate temp_認定調査督促期限;
     private final RString temp_印刷済対象者;
     private final RString temp_保険者コード;
     private final RString temp_認定調査委託先コード;
@@ -48,8 +47,11 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
             RString temp_認定調査員コード,
             LasdecCode temp_市町村コード
     ) {
-        this.temp_基準日 = temp_基準日;
-        this.temp_認定調査督促期限日数 = temp_認定調査督促期限日数;
+        if (temp_基準日 != null && temp_認定調査督促期限日数 != null) {
+            this.temp_認定調査督促期限 = temp_基準日.minusDay(temp_認定調査督促期限日数.intValue());
+        } else {
+            this.temp_認定調査督促期限 = null;
+        }
         this.temp_印刷済対象者 = temp_印刷済対象者;
         this.temp_保険者コード = temp_保険者コード;
         this.temp_認定調査委託先コード = temp_認定調査委託先コード;
