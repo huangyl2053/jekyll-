@@ -126,6 +126,8 @@ public class IchijiHantei {
                 }
                 response = ResponseData.of(div).setState(DBE3010001StateName.一次判定対象者一覧);
                 break;
+            default:
+                break;
 
         }
         return ResponseData.of(response.data).rootTitle(title).respond();
@@ -216,9 +218,6 @@ public class IchijiHantei {
      */
     public ResponseData<IchijiHanteiDiv> btn_syoKai(IchijiHanteiDiv div) {
 
-        dgIchijiHanteiTaishoshaIchiran_Row row = div.getIchijiHanteiShoriTaishoshaIchiran()
-                .getDgIchijiHanteiTaishoshaIchiran().getClickedItem();
-
         div.setModeType(ModeType.SHOKAI_MODE.getValue());
         return ResponseData.of(div).respond();
     }
@@ -248,9 +247,7 @@ public class IchijiHantei {
             if (!models.aliveValues().isEmpty()) {
                 identifier = new IchijiHanteiKekkaJohoIdentifier(shinseishoKanriNo);
                 IchijiHanteiKekkaJoho hanteiKekka = models.get(identifier);
-                if (hanteiKekka != null) {
-                    hanteiKekkaStr = DataPassingConverter.serialize(hanteiKekka);
-                }
+                hanteiKekkaStr = hanteiKekka != null ? DataPassingConverter.serialize(hanteiKekka) : hanteiKekkaStr;
             }
         }
 
@@ -272,7 +269,7 @@ public class IchijiHantei {
 
         if (!RString.isNullOrEmpty(div.getIchijiHanteiKekka())) {
             IchijiHanteiKekkaJoho kaJoho = DataPassingConverter.deserialize(div.getIchijiHanteiKekka(), IchijiHanteiKekkaJoho.class);
-            if (getHandler(div).equalsRowData(row, kaJoho)) {
+            if (!getHandler(div).equalsRowData(row, kaJoho)) {
                 getHandler(div).対象者一覧更新の編集(row, index, kaJoho);
             }
 
@@ -411,11 +408,8 @@ public class IchijiHantei {
             Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報Models) {
 
         if (!RString.isNullOrEmpty(row.getColumnState())) {
-
             IchijiHanteiKekkaJohoIdentifier key = new IchijiHanteiKekkaJohoIdentifier(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-
-            IchijiHanteiKekkaJoho kaJoho = 要介護認定一次判定結果情報Models.get(key);
-            return kaJoho;
+            return 要介護認定一次判定結果情報Models.get(key);
         }
         return null;
     }
