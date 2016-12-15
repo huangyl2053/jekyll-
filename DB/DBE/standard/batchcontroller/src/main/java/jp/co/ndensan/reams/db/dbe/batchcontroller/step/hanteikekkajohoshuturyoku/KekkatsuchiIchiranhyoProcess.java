@@ -79,7 +79,7 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
 
     @Override
     protected void process(KekkatsuchiIchiranhyoEntity entity) {
-        entity.setShichosonName(DbBusinessConfig.get(ConfigNameDBE.判定結果情報出力_広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        entity.setShichosonName(DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         builder = new RStringBuilder();
         builder.append(entity.getShinsakaiNo());
         builder.append("回");

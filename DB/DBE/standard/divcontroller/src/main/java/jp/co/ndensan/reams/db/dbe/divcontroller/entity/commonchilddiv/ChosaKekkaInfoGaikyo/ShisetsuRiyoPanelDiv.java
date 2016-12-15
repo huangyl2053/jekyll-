@@ -263,6 +263,16 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblNoImageRiyoShisetsuMeisho() {
+        return this.getShisetsuMeishoPanel().getLblNoImageRiyoShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setLblNoImageRiyoShisetsuMeisho(Label lblNoImageRiyoShisetsuMeisho) {
+        this.getShisetsuMeishoPanel().setLblNoImageRiyoShisetsuMeisho(lblNoImageRiyoShisetsuMeisho);
+    }
+
+    @JsonIgnore
     public DynamicImage getImgTelNo() {
         return this.getTelNoPanel().getImgTelNo();
     }
@@ -273,6 +283,16 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblNoImageTelNo() {
+        return this.getTelNoPanel().getLblNoImageTelNo();
+    }
+
+    @JsonIgnore
+    public void  setLblNoImageTelNo(Label lblNoImageTelNo) {
+        this.getTelNoPanel().setLblNoImageTelNo(lblNoImageTelNo);
+    }
+
+    @JsonIgnore
     public DynamicImage getImgRiyoShisetsuJusho() {
         return this.getShisetsuJushoPanel().getImgRiyoShisetsuJusho();
     }
@@ -280,6 +300,16 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     @JsonIgnore
     public void setImgRiyoShisetsuJusho(DynamicImage imgRiyoShisetsuJusho) {
         this.getShisetsuJushoPanel().setImgRiyoShisetsuJusho(imgRiyoShisetsuJusho);
+    }
+
+    @JsonIgnore
+    public Label getLblNoImageRiyoShisetsuJusho() {
+        return this.getShisetsuJushoPanel().getLblNoImageRiyoShisetsuJusho();
+    }
+
+    @JsonIgnore
+    public void  setLblNoImageRiyoShisetsuJusho(Label lblNoImageRiyoShisetsuJusho) {
+        this.getShisetsuJushoPanel().setLblNoImageRiyoShisetsuJusho(lblNoImageRiyoShisetsuJusho);
     }
 
     // </editor-fold>

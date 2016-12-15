@@ -72,7 +72,8 @@ public class IchijiHanteiValidatisonHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString 取込ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ取込ファイル名,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        if (!ファイル名.equals(取込ファイル名)) {
+
+        if (!ファイル名.equalsIgnoreCase(取込ファイル名)) {
             validPairs.add(new ValidationMessageControlPair(
                     new CheckMessages(UrErrorMessages.未指定,
                             取込ファイル名.concat("ファイル").toString()), div.getUplHanteiKekka()));

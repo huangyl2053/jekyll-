@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
@@ -40,7 +41,8 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
      * 主治医意見書作成料請求書の編集処理です。
      *
      * @param source 主治医意見書作成料請求書Sourceクラス
-     * @return ShujiiIkenshoSakuseiRyoSeikyushoReportSource 主治医意見書作成料請求書Sourceクラス
+     * @return ShujiiIkenshoSakuseiRyoSeikyushoReportSource
+     * 主治医意見書作成料請求書Sourceクラス
      */
     @Override
     public ShujiiIkenshoSakuseiRyoSeikyushoReportSource edit(ShujiiIkenshoSakuseiRyoSeikyushoReportSource source) {
@@ -52,10 +54,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
                     .fillType(FillType.BLANK).toDateString();
         }
         source.atesakiHokenshaName = item.getAtesakiHokenshaName();
-        source.shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
-        source.shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
-        source.keizokuZaitakuKingaku = item.getKeizokuZaitakuKingaku();
-        source.keizokuShisetsuKingaku = item.getKeizokuShisetsuKingaku();
+        source.shinkiZaitakuKingaku = new Decimal(item.getShinkiZaitakuKingaku().toString());
+        source.shinkiShisetsuKingaku = new Decimal(item.getShinkiShisetsuKingaku().toString());
+        source.keizokuZaitakuKingaku = new Decimal(item.getKeizokuZaitakuKingaku().toString());
+        source.keizokuShisetsuKingaku = new Decimal(item.getKeizokuShisetsuKingaku().toString());
         source.hihokenshaNo1 = item.getHihokenshaNo1();
         source.hihokenshaNo2 = item.getHihokenshaNo2();
         source.hihokenshaNo3 = item.getHihokenshaNo3();

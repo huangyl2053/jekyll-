@@ -25,6 +25,8 @@ public class ZaitakuServicePanelDiv extends Panel {
     private TextBoxMultiLine txtZaitakuService;
     @JsonProperty("imgZaitakuService")
     private DynamicImage imgZaitakuService;
+    @JsonProperty("lblNoImageZaitakuService")
+    private Label lblNoImageZaitakuService;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +68,24 @@ public class ZaitakuServicePanelDiv extends Panel {
     @JsonProperty("imgZaitakuService")
     public void setImgZaitakuService(DynamicImage imgZaitakuService) {
         this.imgZaitakuService = imgZaitakuService;
+    }
+
+    /*
+     * getlblNoImageZaitakuService
+     * @return lblNoImageZaitakuService
+     */
+    @JsonProperty("lblNoImageZaitakuService")
+    public Label getLblNoImageZaitakuService() {
+        return lblNoImageZaitakuService;
+    }
+
+    /*
+     * setlblNoImageZaitakuService
+     * @param lblNoImageZaitakuService lblNoImageZaitakuService
+     */
+    @JsonProperty("lblNoImageZaitakuService")
+    public void setLblNoImageZaitakuService(Label lblNoImageZaitakuService) {
+        this.lblNoImageZaitakuService = lblNoImageZaitakuService;
     }
 
     // </editor-fold>
