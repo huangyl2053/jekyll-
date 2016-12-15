@@ -55,6 +55,10 @@ var DBE;
                 return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
             };
 
+            Controls.prototype.lblNoImageJisshiBasho = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageJisshiBasho"));
+            };
+
             Controls.prototype.GaikyoChosaTokkiPanel = function () {
                 return new UZA.Panel(this.convFiledName("GaikyoChosaTokkiPanel"));
             };
@@ -65,6 +69,10 @@ var DBE;
 
             Controls.prototype.imgGaikyoChosaTokki = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgGaikyoChosaTokki"));
+            };
+
+            Controls.prototype.lblNoImageGaikyoChosaTokki = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageGaikyoChosaTokki"));
             };
 
             Controls.prototype.radServiceKubun = function () {
@@ -119,12 +127,20 @@ var DBE;
                 return new UZA.DynamicImage(this.convFiledName("imgRiyoShisetsuMeisho"));
             };
 
+            Controls.prototype.lblNoImageRiyoShisetsuMeisho = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageRiyoShisetsuMeisho"));
+            };
+
             Controls.prototype.TelNoPanel = function () {
                 return new UZA.Panel(this.convFiledName("TelNoPanel"));
             };
 
             Controls.prototype.imgTelNo = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTelNo"));
+            };
+
+            Controls.prototype.lblNoImageTelNo = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageTelNo"));
             };
 
             Controls.prototype.lblRiyoShisetsuJusho = function () {
@@ -143,6 +159,10 @@ var DBE;
                 return new UZA.DynamicImage(this.convFiledName("imgRiyoShisetsuJusho"));
             };
 
+            Controls.prototype.lblNoImageRiyoShisetsuJusho = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageRiyoShisetsuJusho"));
+            };
+
             Controls.prototype.TokubetsuKyufuPanel = function () {
                 return new UZA.Panel(this.convFiledName("TokubetsuKyufuPanel"));
             };
@@ -155,6 +175,10 @@ var DBE;
                 return new UZA.DynamicImage(this.convFiledName("imgTokubetsuKyufu"));
             };
 
+            Controls.prototype.lblNoImageTokubetsuKyufu = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageTokubetsuKyufu"));
+            };
+
             Controls.prototype.ZaitakuServicePanel = function () {
                 return new UZA.Panel(this.convFiledName("ZaitakuServicePanel"));
             };
@@ -165,6 +189,10 @@ var DBE;
 
             Controls.prototype.imgZaitakuService = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgZaitakuService"));
+            };
+
+            Controls.prototype.lblNoImageZaitakuService = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageZaitakuService"));
             };
 
             Controls.prototype.GaikyoTokkiPanel = function () {
@@ -253,6 +281,10 @@ var DBE;
 
             Controls.prototype.imgGaikyoTokki = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgGaikyoTokki"));
+            };
+
+            Controls.prototype.lblNoImageGaikyoTokki = function () {
+                return new UZA.Label(this.convFiledName("lblNoImageGaikyoTokki"));
             };
 
             Controls.prototype.btnReturn = function () {

@@ -233,12 +233,12 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgMask3() {
+    public DynamicImage getImgMask3() {
         return this.getMaskTabPanel3().getImgMask3();
     }
 
     @JsonIgnore
-    public void  setImgMask3(StaticImage imgMask3) {
+    public void  setImgMask3(DynamicImage imgMask3) {
         this.getMaskTabPanel3().setImgMask3(imgMask3);
     }
 
@@ -253,12 +253,12 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgMask4() {
+    public DynamicImage getImgMask4() {
         return this.getMaskTabPanel4().getImgMask4();
     }
 
     @JsonIgnore
-    public void  setImgMask4(StaticImage imgMask4) {
+    public void  setImgMask4(DynamicImage imgMask4) {
         this.getMaskTabPanel4().setImgMask4(imgMask4);
     }
 
@@ -273,12 +273,12 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgMask5() {
+    public DynamicImage getImgMask5() {
         return this.getMaskTabPanel5().getImgMask5();
     }
 
     @JsonIgnore
-    public void  setImgMask5(StaticImage imgMask5) {
+    public void  setImgMask5(DynamicImage imgMask5) {
         this.getMaskTabPanel5().setImgMask5(imgMask5);
     }
 
@@ -293,12 +293,12 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgMask6() {
+    public DynamicImage getImgMask6() {
         return this.getMaskTabPanel6().getImgMask6();
     }
 
     @JsonIgnore
-    public void  setImgMask6(StaticImage imgMask6) {
+    public void  setImgMask6(DynamicImage imgMask6) {
         this.getMaskTabPanel6().setImgMask6(imgMask6);
     }
 
@@ -313,12 +313,12 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgMask7() {
+    public DynamicImage getImgMask7() {
         return this.getMaskTabPanel7().getImgMask7();
     }
 
     @JsonIgnore
-    public void  setImgMask7(StaticImage imgMask7) {
+    public void  setImgMask7(DynamicImage imgMask7) {
         this.getMaskTabPanel7().setImgMask7(imgMask7);
     }
 
@@ -333,12 +333,12 @@ public class maskTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgMask8() {
+    public DynamicImage getImgMask8() {
         return this.getMaskTabPanel8().getImgMask8();
     }
 
     @JsonIgnore
-    public void  setImgMask8(StaticImage imgMask8) {
+    public void  setImgMask8(DynamicImage imgMask8) {
         this.getMaskTabPanel8().setImgMask8(imgMask8);
     }
 

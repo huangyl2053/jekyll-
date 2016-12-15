@@ -23,6 +23,8 @@ public class JisshiBashoMeishoPanelDiv extends Panel {
      */
     @JsonProperty("imgChosaJisshiBashoMeisho")
     private DynamicImage imgChosaJisshiBashoMeisho;
+    @JsonProperty("lblNoImageJisshiBasho")
+    private Label lblNoImageJisshiBasho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class JisshiBashoMeishoPanelDiv extends Panel {
     @JsonProperty("imgChosaJisshiBashoMeisho")
     public void setImgChosaJisshiBashoMeisho(DynamicImage imgChosaJisshiBashoMeisho) {
         this.imgChosaJisshiBashoMeisho = imgChosaJisshiBashoMeisho;
+    }
+
+    /*
+     * getlblNoImageJisshiBasho
+     * @return lblNoImageJisshiBasho
+     */
+    @JsonProperty("lblNoImageJisshiBasho")
+    public Label getLblNoImageJisshiBasho() {
+        return lblNoImageJisshiBasho;
+    }
+
+    /*
+     * setlblNoImageJisshiBasho
+     * @param lblNoImageJisshiBasho lblNoImageJisshiBasho
+     */
+    @JsonProperty("lblNoImageJisshiBasho")
+    public void setLblNoImageJisshiBasho(Label lblNoImageJisshiBasho) {
+        this.lblNoImageJisshiBasho = lblNoImageJisshiBasho;
     }
 
     // </editor-fold>

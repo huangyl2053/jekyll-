@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkens
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
@@ -55,12 +57,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShujiiIkenshoShokaiHandler {
 
     private final ShujiiIkenshoShokaiDiv div;
-    private final RString 共有エントリファイル名 = new RString("test.zip");
     private final RString ファイル名_主治医意見書_表 = new RString("E0001.png");
     private final RString ファイル名_主治医意見書_表BAK = new RString("E0001_BAK.png");
-    private final RString ファイル名_主治医意見書_裏 = new RString("/E0002.png");
-    private final RString ファイル名_主治医意見書_裏BAK = new RString("/E0002_BAK.png");
-    private RString コピー先フォルダ;
+    private final RString ファイル名_主治医意見書_裏 = new RString("E0002.png");
+    private final RString ファイル名_主治医意見書_裏BAK = new RString("E0002_BAK.png");
 
     /**
      * コンストラクタです。
@@ -78,9 +78,6 @@ public class ShujiiIkenshoShokaiHandler {
      * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
      */
     public void onLoad(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号) {
-        申請書管理番号 = new ShinseishoKanriNo(div.getHiddenShinseishoKanriNo());
-        主治医意見書作成依頼履歴番号 = Integer.parseInt(div.getHiddenIkenshoIraiRirekiNo().toString());
-
         List<ShujiiIkenshoIkenItemEntity> entityList = ShujiiIkenshoIkenItemManager.createInstance().select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号);
         RString 厚労省IF識別コード = RString.EMPTY;
         if (entityList != null && !entityList.isEmpty()) {
@@ -100,10 +97,8 @@ public class ShujiiIkenshoShokaiHandler {
 
         ImageManager imageManager = InstanceProvider.create(ImageManager.class);
         Image イメージ情報 = imageManager.getイメージ情報(申請書管理番号);
-        List<RString> イメージ元本パスリスト = new ArrayList<>();
-        List<RString> イメージ元本パスリスト_New = new ArrayList<>();
-        List<RString> イメージマスクパスリスト = new ArrayList<>();
-        List<RString> イメージマスクパスリスト_New = new ArrayList<>();
+        List<RString> イメージ原本バイナリリスト = new ArrayList<>();
+        List<RString> イメージマスクバイナリリスト = new ArrayList<>();
         List<RString> 原本タイトルリスト = new ArrayList<>();
         List<RString> マスクタイトルリスト = new ArrayList<>();
         if (イメージ情報 != null) {
@@ -111,54 +106,41 @@ public class ShujiiIkenshoShokaiHandler {
             RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
             RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
             RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
-
-            _Console.log(出力イメージフォルダパス.toString());
-            //div.getTxtTest().setValue(出力イメージフォルダパス);
-            //ImageConverter.convert(厚労省IF識別コード, ローカルファイル名, ImageFileType.PNG);
-
-            イメージ元本パスリスト = get原本FilePathList(出力イメージフォルダパス);
-            イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス);
-//            List<RString> fileList = Arrays.asList(Directory.getFiles(Path.combinePath(出力イメージフォルダパス), new RString("E0001.png"), true));
-
-            //RString imgBase64 = base64encode(出力イメージフォルダパス, イメージ元本パスリスト);
-            //div.getTxtTest3().setValue(DATAURI_BMP.concat(imgBase64));
-            イメージ元本パスリスト_New.add(sanitizePath(イメージ元本パスリスト, 出力イメージフォルダパス, 0));
-            イメージ元本パスリスト_New.add(sanitizePath(イメージ元本パスリスト, 出力イメージフォルダパス, 1));
-            イメージマスクパスリスト_New.add(sanitizePath(イメージマスクパスリスト, 出力イメージフォルダパス, 0));
-            イメージマスクパスリスト_New.add(sanitizePath(イメージマスクパスリスト, 出力イメージフォルダパス, 1));
-            原本タイトルリスト = getTitleList(イメージ元本パスリスト);
+            List<RString> イメージ原本パスリスト = get原本FilePathList(出力イメージフォルダパス);
+            List<RString> イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス);
+            
+            イメージ原本バイナリリスト = createImageBinaryList(イメージ原本パスリスト);
+            イメージマスクバイナリリスト = createImageBinaryList(イメージマスクパスリスト);
+            原本タイトルリスト = getTitleList(イメージ原本パスリスト);
             マスクタイトルリスト = getTitleList(イメージマスクパスリスト);
         } else {
             div.getCcdChosaTokkiShiryoShokai().setDisplayNone(true);
         }
 
-        div.getCcdChosaTokkiShiryoShokai().initialize(イメージ元本パスリスト_New, イメージマスクパスリスト_New, 原本タイトルリスト, マスクタイトルリスト);
+        div.getCcdChosaTokkiShiryoShokai().initialize(イメージ原本バイナリリスト, イメージマスクバイナリリスト, 原本タイトルリスト, マスクタイトルリスト);
+    }
+    
+    private List<RString> createImageBinaryList(List<RString> imagePathList) {
+        List<RString> imageBinaryList = new ArrayList<>();
+        for (RString imagePath : imagePathList) {
+            imageBinaryList.add(sanitizePath(imagePath));
+        }
+        return imageBinaryList;
     }
 
-    private RString sanitizePath(List<RString> イメージ元本パスリスト, RString 出力イメージフォルダパス, int index) {
+    private RString sanitizePath(RString イメージパス) {
         RString DATAURI_BMP = new RString("data:image/png;base64,");
-        return !イメージ元本パスリスト.get(index).isEmpty() ? DATAURI_BMP.concat(base64encode(出力イメージフォルダパス, イメージ元本パスリスト.get(index))) : RString.EMPTY;
+        return !イメージパス.isEmpty() ? DATAURI_BMP.concat(base64encode(イメージパス)) : RString.EMPTY;
     }
 
-    private RString base64encode(RString 出力イメージフォルダパス, RString イメージ元本パス) {
+    private RString base64encode(RString イメージパス) {
         RString imgBase64 = RString.EMPTY;
         try {
-            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(Path.combinePath(出力イメージフォルダパス).toString(), イメージ元本パス.toString())));
+            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージパス.toString())));
         } catch (IOException ex) {
+            throw new SystemException(ex);
         }
         return imgBase64;
-    }
-
-    void convertImage(RString fromPath, RString toPath) {
-        try {
-            BufferedImage image = ImageIO.read(new File(fromPath.toString()));
-            BufferedImage tmp = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
-            Graphics2D off = tmp.createGraphics();
-            off.drawImage(image, 0, 0, Color.WHITE, null);
-            ImageIO.write(tmp, "bmp", new File(toPath.toString()));
-        } catch (Exception e) {
-            throw new SystemException(e);
-        }
     }
 
     private void set必須５項目_99A(List<ShujiiIkenshoIkenItemEntity> entityList) {
@@ -265,12 +247,12 @@ public class ShujiiIkenshoShokaiHandler {
         List<RString> イメージファイルパス = new ArrayList<>();
         RString イメージパス_表 = RString.EMPTY;
         RString イメージパス_裏 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_表BAK))) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名_主治医意見書_表BAK))) {
             イメージパス_表 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_表);
         }
         イメージファイルパス.add(イメージパス_表);
 
-        if (!RString.isNullOrEmpty(getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_裏BAK))) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名_主治医意見書_裏BAK))) {
             イメージパス_裏 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_裏);
         }
         イメージファイルパス.add(イメージパス_裏);
@@ -278,23 +260,7 @@ public class ShujiiIkenshoShokaiHandler {
         return イメージファイルパス;
     }
 
-    private UzT0885SharedFileEntryEntity get共有ファイルEntity(Image イメージ情報, RString ファイル名) {
-        List<UzT0885SharedFileEntryEntity> ShareFileList;
-        SearchSharedFileOpts 検索条件 = new SearchSharedFileOpts();
-        検索条件.localFilePat(ファイル名);
-        ShareFileList = SharedFile.searchSharedFile(検索条件);
-        if (ShareFileList != null && !ShareFileList.isEmpty()) {
-            for (UzT0885SharedFileEntryEntity ShareFile : ShareFileList) {
-                if (イメージ情報.getイメージ共有ファイルID().equals(ShareFile.getSharedFileId())) {
-                    return ShareFile;
-                }
-            }
-        }
-        return null;
-    }
-
     private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        div.getTxtTest2().setValue(Path.combinePath(出力イメージフォルダパス, ファイル名));
         if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
             return Path.combinePath(出力イメージフォルダパス, ファイル名);
         }
@@ -302,13 +268,10 @@ public class ShujiiIkenshoShokaiHandler {
     }
 
     private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
-//        RString 出力イメージフォルダパス = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"),
-//                new RString("db#dbe"), new RString("WEB-INF"), new RString("image"));
         RString 出力イメージフォルダパス = Directory.createTmpDirectory();
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                         イメージ情報.getイメージ共有ファイルID());
-        deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
         return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
@@ -318,9 +281,5 @@ public class ShujiiIkenshoShokaiHandler {
             titleList.add(new RString(index).concat("枚目"));
         }
         return titleList;
-    }
-
-    private void deleteIMGDirecotry(RString 出力イメージパス, RString ローカルファイル名) {
-        Directory.deleteIfExists(Path.combinePath(出力イメージパス, ローカルファイル名));
     }
 }
