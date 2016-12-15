@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteiIchiran のクラスファイル 
+ * FileTorikomi のクラスファイル 
  * 
  * @author 自動生成
  */
-public class NinteiIchiranDiv extends Panel {
+public class FileTorikomiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
@@ -21,10 +21,8 @@ public class NinteiIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtNinzu")
-    private TextBox txtNinzu;
-    @JsonProperty("dgNinteiChosaData")
-    private DataGrid<dgNinteiChosaData_Row> dgNinteiChosaData;
+    @JsonProperty("uplFileTorikomi")
+    private UploadPanel uplFileTorikomi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +31,21 @@ public class NinteiIchiranDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtNinzu
-     * @return txtNinzu
+     * getuplFileTorikomi
+     * @return uplFileTorikomi
      */
-    @JsonProperty("txtNinzu")
-    public TextBox getTxtNinzu() {
-        return txtNinzu;
+    @JsonProperty("uplFileTorikomi")
+    public UploadPanel getUplFileTorikomi() {
+        return uplFileTorikomi;
     }
 
     /*
-     * settxtNinzu
-     * @param txtNinzu txtNinzu
+     * setuplFileTorikomi
+     * @param uplFileTorikomi uplFileTorikomi
      */
-    @JsonProperty("txtNinzu")
-    public void setTxtNinzu(TextBox txtNinzu) {
-        this.txtNinzu = txtNinzu;
-    }
-
-    /*
-     * getdgNinteiChosaData
-     * @return dgNinteiChosaData
-     */
-    @JsonProperty("dgNinteiChosaData")
-    public DataGrid<dgNinteiChosaData_Row> getDgNinteiChosaData() {
-        return dgNinteiChosaData;
-    }
-
-    /*
-     * setdgNinteiChosaData
-     * @param dgNinteiChosaData dgNinteiChosaData
-     */
-    @JsonProperty("dgNinteiChosaData")
-    public void setDgNinteiChosaData(DataGrid<dgNinteiChosaData_Row> dgNinteiChosaData) {
-        this.dgNinteiChosaData = dgNinteiChosaData;
+    @JsonProperty("uplFileTorikomi")
+    public void setUplFileTorikomi(UploadPanel uplFileTorikomi) {
+        this.uplFileTorikomi = uplFileTorikomi;
     }
 
     // </editor-fold>

@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.dgNi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoTokkiBuilder;
@@ -40,16 +38,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Tokkijik
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -86,36 +82,43 @@ public class Ninteishinseibi {
      * 取込むボタン。
      *
      * @param div NinteishinseibiDiv
+     * @param files FileData
      * @return ResponseData
      */
-    public ResponseData<NinteishinseibiDiv> btn_toRiKoMi(NinteishinseibiDiv div) {
+    public ResponseData<NinteishinseibiDiv> onClick_btnUpload(NinteishinseibiDiv div, FileData[] files) {
 
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        RString ファイルパス = RString.EMPTY;
+        for (FileData file : files) {
+            ファイルパス = file.getFilePath();
+            div.setファイルPath(ファイルパス);
+            break;
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            List<ChosaKekkaNyuryokuCsvEntity> csvEntityList = データ取込();
-            ValidationMessageControlPairs vallidation = getValidatisonHandler(div).取込対象データチェック(csvEntityList.isEmpty());
-            if (vallidation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(vallidation).respond();
-            }
-
-            List<dgNinteiChosaData_Row> rowList = div.getDgNinteiChosaData().getDataSource();
-            for (ChosaKekkaNyuryokuCsvEntity entity : csvEntityList) {
-                dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
-                getHandler(div).取込むの編集(row, entity);
-                rowList.add(row);
-            }
-            div.getTxtNinzu().setValue(new RString(rowList.size()));
-            div.getDgNinteiChosaData().setDataSource(rowList);
-            return ResponseData.of(div).setState(DBE2250001StateName.検索結果表示);
+        List<ChosaKekkaNyuryokuCsvEntity> csvEntityList = データ取込(ファイルパス);
+        ValidationMessageControlPairs vallidation = getValidatisonHandler(div).取込対象データチェック(csvEntityList.isEmpty());
+        if (vallidation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(vallidation).respond();
         }
+
+        List<dgNinteiChosaData_Row> rowList = div.getDgNinteiChosaData().getDataSource();
+        for (ChosaKekkaNyuryokuCsvEntity entity : csvEntityList) {
+            dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
+            getHandler(div).取込むの編集(row, entity);
+            rowList.add(row);
+        }
+        div.getTxtNinzu().setValue(new RString(rowList.size()));
+        div.getDgNinteiChosaData().setDataSource(rowList);
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * アップロードが完了した後に実行されます。
+     *
+     * @param div NinteishinseibiDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteishinseibiDiv> onAfterUploaded_btnImport(NinteishinseibiDiv div) {
+        return ResponseData.of(div).setState(DBE2250001StateName.検索結果表示);
     }
 
     /**
@@ -283,12 +286,8 @@ public class Ninteishinseibi {
         return shisetsuRiyoBuilder.build();
     }
 
-    private List<ChosaKekkaNyuryokuCsvEntity> データ取込() {
-
-        RString 調査取込用データ_モバイル_パス = DbBusinessConfig.get(ConfigNameDBE.調査取込用データ_モバイル_パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 調査取込用データ_モバイル = DbBusinessConfig.get(ConfigNameDBE.調査取込用データ_モバイル, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString filePath = Path.combinePath(調査取込用データ_モバイル_パス, 調査取込用データ_モバイル);
-        CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, ChosaKekkaNyuryokuCsvEntity.class)
+    private List<ChosaKekkaNyuryokuCsvEntity> データ取込(RString ファイルPath) {
+        CsvReader csvReader = new CsvReader.InstanceBuilder(ファイルPath, ChosaKekkaNyuryokuCsvEntity.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8)
                 .hasHeader(false).setNewLine(NewLine.CRLF).build();
         return readCsvFile(csvReader);
