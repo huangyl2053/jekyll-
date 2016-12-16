@@ -85,19 +85,13 @@ public class ShujiiIkenshoSakuseiIraiManager {
      * @return 主治医意見書作成依頼情報
      */
     @Transaction
-    public SearchResult<ShujiiIkenshoIraiJoho> get主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiParameter param) {
+    public ShujiiIkenshoIraiJoho get主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiParameter param) {
         IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
-        List<DbT5301ShujiiIkenshoIraiJohoEntity> entityList = mapper.get主治医意見書作成依頼情報(param);
-        List<ShujiiIkenshoIraiJoho> businessList = new ArrayList<>();
-        if (entityList.isEmpty()) {
-            return SearchResult.of(Collections.<Shujiiikenshosakuseiirai>emptyList(), 0, false);
+        DbT5301ShujiiIkenshoIraiJohoEntity entity = mapper.get主治医意見書作成依頼情報(param);
+        if (entity == null) {
+            return null;
         }
-        for (DbT5301ShujiiIkenshoIraiJohoEntity entity : entityList) {
-            if (entity != null) {
-                businessList.add(new ShujiiIkenshoIraiJoho(entity));
-            }
-        }
-        return SearchResult.of(businessList, businessList.size(), true);
+        return new ShujiiIkenshoIraiJoho(entity);
     }
 
     /**
@@ -107,17 +101,13 @@ public class ShujiiIkenshoSakuseiIraiManager {
      * @return 要介護認定申請情報
      */
     @Transaction
-    public SearchResult<NinteiShinseiJoho2> get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param) {
+    public NinteiShinseiJoho2 get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param) {
         IShujiiIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IShujiiIkenshoSakuseiIraiMapper.class);
-        List<DbT5101NinteiShinseiJohoEntity> entityList = mapper.get要介護認定申請情報(param);
-        List<NinteiShinseiJoho2> businessList = new ArrayList<>();
-        if (entityList.isEmpty()) {
-            return SearchResult.of(Collections.<Shujiiikenshosakuseiirai>emptyList(), 0, false);
+        DbT5101NinteiShinseiJohoEntity entity = mapper.get要介護認定申請情報(param);
+        if (entity == null) {
+            return null;
         }
-        for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
-            businessList.add(new NinteiShinseiJoho2(entity));
-        }
-        return SearchResult.of(businessList, businessList.size(), true);
+        return new NinteiShinseiJoho2(entity);
     }
 
     /**

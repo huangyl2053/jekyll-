@@ -35,10 +35,9 @@ public class ShinsakaiShukeihyoGenzaiEditor {
     private static final int 更新申請 = 1;
     private static final int 区分変更申請 = 2;
     private static final int 転入 = 3;
-    private static final int 有効期間6ヶ月 = 0;
-    private static final int 有効期間12ヶ月 = 1;
-    private static final int 有効期間24ヶ月 = 2;
-    private static final int 有効期間その他 = 3;
+    private static final int 有効期間6ヶ月 = 6;
+    private static final int 有効期間12ヶ月 = 12;
+    private static final int 有効期間24ヶ月 = 24;
     private static final RString 全市町村 = new RString("全市町村");
     private final ShinsakaiShukeihyoGenzaiEntity entity;
     private final ShinsakaiShukeiGenzainojokyoEntity genzainojokyo;
@@ -96,7 +95,7 @@ public class ShinsakaiShukeihyoGenzaiEditor {
             set新規申請12ヶ月();
         } else if (有効期間24ヶ月 == entity.getYukoKikan()) {
             set新規申請24ヶ月();
-        } else if (有効期間その他 == entity.getYukoKikan()) {
+        } else {
             set新規申請その他();
         }
         set新規合計_上段();
@@ -110,7 +109,7 @@ public class ShinsakaiShukeihyoGenzaiEditor {
             set更新申請12ヶ月();
         } else if (有効期間24ヶ月 == entity.getYukoKikan()) {
             set更新申請24ヶ月();
-        } else if (有効期間その他 == entity.getYukoKikan()) {
+        } else {
             set更新申請その他();
         }
         set更新合計_上段();
@@ -163,7 +162,7 @@ public class ShinsakaiShukeihyoGenzaiEditor {
             set区分変更申請12ヶ月();
         } else if (有効期間24ヶ月 == entity.getYukoKikan()) {
             set区分変更申請24ヶ月();
-        } else if (有効期間その他 == entity.getYukoKikan()) {
+        } else {
             set区分変更申請その他();
         }
         set区分変更合計_上段();
@@ -173,7 +172,7 @@ public class ShinsakaiShukeihyoGenzaiEditor {
     private void set転入() {
         if (有効期間6ヶ月 == entity.getYukoKikan()) {
             set転入申請6ヶ月();
-        } else if (有効期間その他 == entity.getYukoKikan()) {
+        } else {
             set転入申請その他();
         }
         set転入合計_上段();

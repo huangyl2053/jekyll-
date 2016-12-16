@@ -63,6 +63,8 @@
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
         <include refid="selectJouken" />
+        AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{shinseishoKanriNo}
+        LIMIT 1
     </select>
 
     <select resultOrdered="true" id="get主治医意見書作成依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
@@ -71,6 +73,9 @@
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
         <include refid="selectJouken" />
+        AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = #{rirekiNo}
+        LIMIT 1
     </select>
 
     <select resultOrdered="true" id="get宛名情報" resultMap="resultMap_ShujiiIraiAtena"
