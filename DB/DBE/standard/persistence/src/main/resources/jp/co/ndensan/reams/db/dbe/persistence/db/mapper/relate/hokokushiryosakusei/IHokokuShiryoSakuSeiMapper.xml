@@ -521,9 +521,9 @@
                 ) AS "shichosonMeisho"
             </when>
             <otherwise>
-                ,rshare."UDD023LasdecCode" '' AS "shichosonCode"
+                ,text '' AS "shichosonCode"
                 ,character varying(10) '全市町村' AS "shichosonMeisho"
-                ,rgdb."DbUDD015ShoKisaiHokenshaNo" '' AS "shoKisaiHokenshaNo"
+                ,character varying(6) '' AS "shoKisaiHokenshaNo"
             </otherwise>
         </choose>
         FROM (
