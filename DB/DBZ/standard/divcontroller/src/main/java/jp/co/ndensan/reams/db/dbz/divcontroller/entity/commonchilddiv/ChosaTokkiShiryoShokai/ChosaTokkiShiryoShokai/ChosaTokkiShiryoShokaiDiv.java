@@ -597,6 +597,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
         // タイトルリストのItem数はパスリストのItem数と一致してください。
         if (!imgMaskPathList.isEmpty() && imgMaskPathList.size() > 0 && !RString.isNullOrEmpty(imgMaskPathList.get(0))) {
             this.radGenpoMask.setSelectedKey(SELECTマスク);
+            this.getGenpoTabContainer().setDisplayNone(false);
+            this.getMaskTabContainer().setDisplayNone(true);
         } else {
             this.radGenpoMask.setSelectedKey(SELECT原本);
         }

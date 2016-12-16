@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.chosakekkainfokihon;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBusiness;
