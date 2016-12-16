@@ -1256,25 +1256,6 @@
 			INNER JOIN rgdb."DbT5101NinteiShinseiJoho" Dbt5101
 			ON DbT5101."shinseishoKanriNo" = Dbt5502."shinseishoKanriNo"
 		WHERE
-			<if test="!isEmptyGogitaiNo">
-				Dbt5511."gogitaiNo" = #{gogitaiNo}
-			</if>
-		        <if test="!isEmptyHokensyaNo">
-				<if test="!isEmptyGogitaiNo">
-					AND
-				</if>
-		            	Dbt5101."shoKisaiHokenshaNo" = #{hokensyaNo}
-		        </if>
-		        <choose>
-			  <when test="!isEmptyGogitaiNo">
-				AND
-			  </when>
-			  <otherwise>
-			        <if test="!isEmptyHokensyaNo">
-				AND
-				</if>
-		          </otherwise>
-		        </choose>
 		        <choose>
 		            <when test="isTaishoTsukiKubun">
 		                <if test="!isTaishoGeppiKubun">
@@ -1302,9 +1283,44 @@
 		                </if>
 		            </otherwise>
 		        </choose>
+		        <if test="!isEmptyHokensyaNo">
+				AND Dbt5101."shoKisaiHokenshaNo" = #{hokensyaNo}
+		        </if>
+		        <choose>
+		            <when test='"0".equals(hihokenshaKubun.toString())'>
+		                AND Dbt5101."hihokenshaKubunCode" IN ('1', '2', '9')
+		            </when>
+		            <when test='"1".equals(hihokenshaKubun.toString())'>
+		                AND Dbt5101."hihokenshaKubunCode" = '1'
+		            </when>
+		            <when test='"2".equals(hihokenshaKubun.toString())'>
+		                AND Dbt5101."hihokenshaKubunCode" = '2'
+		            </when>
+		            <when test='"3".equals(hihokenshaKubun.toString())'>
+		                AND Dbt5101."hihokenshaKubunCode" = '9'
+		            </when>
+		            <when test='"4".equals(hihokenshaKubun.toString())'>
+		                AND Dbt5101."hihokenshaKubunCode" IN ('1', '2')
+		            </when>
+		            <when test='"5".equals(hihokenshaKubun.toString())'>
+		                AND Dbt5101."hihokenshaKubunCode" IN ('1', '9')
+		            </when>
+		            <when test='"6".equals(hihokenshaKubun.toString())'>
+		                AND Dbt5101."hihokenshaKubunCode" IN ('2', '9')
+		            </when>
+		        </choose>
+			<if test="!isEmptyGogitaiNo">
+			    AND Dbt5511."gogitaiNo" = #{gogitaiNo}
+			</if>
+		        <if test="isShinseiji">
+		            AND Dbt5101."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+		        </if>
+		        <if test="isHorei">
+		            AND Dbt5101."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+		        </if>
 		Group by Dbt5101."shoKisaiHokenshaNo", Dbt5511."shinsakaiKaisaiNo", Dbt5511."gogitaiNo"
 		) AS S
-</select>
+ </select>
 
     <select resultOrdered="true" id="getShinsakaishukeihyoHanteiBetsu"
             resultMap="hokokushiryosakusei_ShinsakaishukeihyoHanteiBetsu"
