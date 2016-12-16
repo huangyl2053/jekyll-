@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIrai
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Nov 08 20:37:08 JST 2016 
+ * Fri Dec 16 16:16:23 JST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShujiiIkensho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
 
     private RString no;
     private RString hohokenshaBango;
