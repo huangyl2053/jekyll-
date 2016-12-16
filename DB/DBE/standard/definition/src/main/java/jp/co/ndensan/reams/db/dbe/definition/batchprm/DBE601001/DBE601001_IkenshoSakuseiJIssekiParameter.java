@@ -1,24 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikenshojissekiichiran.IkenshoJissekiIchiranKey;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojissekiichiran.IkenshoJissekiIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 介護認定審査会委員報酬集計表のバッチフロークラスパラメータです
+ * 主治医意見書作成実績集計表_バッチフロークラスパラメータクラスです。
  *
- * @reamsid_L DBE-1700-010 wanghuafeng
+ * @reamsid_L DBE-1690-020 dongyabin
  */
 @Setter
 @Getter
@@ -26,19 +20,22 @@ import lombok.Setter;
 public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
-    private static final String SHINSAKAI_KAISAIBI_FROM = "shinsakaikaisaibiFrom";
-    private static final String SHINSAKAI_KAISAIBI_TO = "shinsakaikaisaibiTo";
+    private static final String IKENSHO_KINYUBI_TO = "ikenshoKinyubiTo";
+    private static final String IKENSHO_KINYUBI_FROM = "ikenshoKinyubiFrom";
+    private static final String HOKENSYA = "hokensya";
     private static final String KEY_JOHO = "keyJoho";
-    private static final long serialVersionUID = 8362309102168284770L;
+    private static final long serialVersionUID = 8314555813503538349L;
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
-    @BatchParameter(key = SHINSAKAI_KAISAIBI_FROM, name = "審査会開催日FROM")
-    private FlexibleDate shinsakaikaisaibiFrom;
-    @BatchParameter(key = SHINSAKAI_KAISAIBI_TO, name = "審査会開催日To")
-    private FlexibleDate shinsakaikaisaibiTo;
+    @BatchParameter(key = IKENSHO_KINYUBI_TO, name = "意見書記入日FROM")
+    private RString ikenshoKinyubiTo;
+    @BatchParameter(key = IKENSHO_KINYUBI_FROM, name = "意見書記入日TO")
+    private RString ikenshoKinyubiFrom;
+    @BatchParameter(key = HOKENSYA, name = "保険者")
+    private RString hokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
-    private List<ShinsaiinJissekiIchiranKey> keyJoho;
+    private List<IkenshoJissekiIchiranKey> keyJoho;
 
     /**
      * コンストラクタです。
@@ -50,30 +47,33 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
      * コンストラクタです。
      *
      * @param syohyoSyuturyoku 帳票出力区分
-     * @param shinsakaikaisaibiFrom 審査会開催日FROM
-     * @param shinsakaikaisaibiTo 審査会開催日TO
+     * @param ikenshoKinyubiFrom 意見書記入日FROM
+     * @param ikenshoKinyubiTo 意見書記入日TO
+     * @param hokensya 保険者
      * @param keyJoho キー情報Entityリスト
      */
     public DBE601001_IkenshoSakuseiJIssekiParameter(RString syohyoSyuturyoku,
-            FlexibleDate shinsakaikaisaibiFrom,
-            FlexibleDate shinsakaikaisaibiTo,
-            List<ShinsaiinJissekiIchiranKey> keyJoho) {
+            RString ikenshoKinyubiFrom,
+            RString ikenshoKinyubiTo,
+            RString hokensya,
+            List<IkenshoJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
-        this.shinsakaikaisaibiFrom = shinsakaikaisaibiFrom;
-        this.shinsakaikaisaibiTo = shinsakaikaisaibiTo;
+        this.ikenshoKinyubiFrom = ikenshoKinyubiFrom;
+        this.ikenshoKinyubiTo = ikenshoKinyubiTo;
+        this.hokensya = hokensya;
         this.keyJoho = keyJoho;
     }
 
     /**
-     * 介護認定審査会委員報酬集計表のProcessParameterを作成します
+     * 主治医意見書作成実績集計表のProcessParameterを作成します
      *
-     * @return 介護認定審査会委員報酬集計表のProcessParameter
+     * @return 主治医意見書作成実績集計表のProcessParameter
      */
-    public ShinsaiinJissekiIchiranProcessParamter toProcessParamter() {
-        return new ShinsaiinJissekiIchiranProcessParamter(syohyoSyuturyoku,
-                shinsakaikaisaibiFrom,
-                shinsakaikaisaibiTo,
+    public IkenshoJissekiIchiranProcessParameter toProcessParamter() {
+        return new IkenshoJissekiIchiranProcessParameter(syohyoSyuturyoku,
+                ikenshoKinyubiFrom,
+                ikenshoKinyubiTo,
+                hokensya,
                 keyJoho);
     }
-
 }

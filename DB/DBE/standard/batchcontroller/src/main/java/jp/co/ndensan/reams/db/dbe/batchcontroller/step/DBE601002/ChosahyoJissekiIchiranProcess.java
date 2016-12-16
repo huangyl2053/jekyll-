@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ikenshojissekiichiran.IkenshoJissekiIchiranChange;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshojissekiichiran.IkenshoJissekiIchiranReport;
+import jp.co.ndensan.reams.db.dbe.business.core.chosahyojissekiichiran.ChosahyoJissekiIchiranChange;
+import jp.co.ndensan.reams.db.dbe.business.report.ichosahyojissekiichiran.ChosahyoJissekiIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojissekiichiran.IkenshoJissekiIchiranProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IIkenshoJissekiIchiranCsvEucEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.ikenshojissekiichiran.IkenshoJissekiIchiranReportSource;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.chosahyojissekiichiran.ChosahyoJissekiIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.IChosahyoJissekiIchiranCsvEucEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.chosahyojissekiichiran.ChosahyoJissekiIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -48,34 +48,35 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * 主治医意見書作成実績集計表のプロセス処理の帳票出力のプロセスクラスです。
+ * 帳票出力用認定調査実績集計表のReportSourceクラスです。
  *
- * @reamsid_L DBE-1690-020 dongyabin
+ * @reamsid_L DBE-1691-020 dangjigjing
  */
-public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissekiIchiranRelateEntity> {
+public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJissekiIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojissekiichiran.IIkenshoJissekiIchiranMapper.get主治医意見書作成実績集計表");
-    private static final ReportId REPORT_ID = ReportIdDBE.DBE601001.getReportId();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601001"));
-    private static final RString CSV_NAME = new RString("IkenshoJissekiIchiran.csv");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosahyojissekiichiran."
+            + "IChosahyoJissekiIchiranMapper.get帳票出力用認定調査実績集計表");
+    private static final ReportId REPORT_ID = ReportIdDBE.DBE601002.getReportId();
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601002"));
+    private static final RString CSV_NAME = new RString("ChosahyoJissekiIchiran.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
     private static final RString CSVを出力する = new RString("1");
     private static final RString 集計表を発行する = new RString("2");
-    private IkenshoJissekiIchiranProcessParameter paramter;
+    private ChosahyoJissekiIchiranProcessParameter paramter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString 導入団体コード;
     private RString 市町村名;
 
     @BatchWriter
-    private BatchReportWriter<IkenshoJissekiIchiranReportSource> batchWrite;
-    private ReportSourceWriter<IkenshoJissekiIchiranReportSource> reportSourceWriter;
+    private BatchReportWriter<ChosahyoJissekiIchiranReportSource> batchWrite;
+    private ReportSourceWriter<ChosahyoJissekiIchiranReportSource> reportSourceWriter;
 
     @BatchWriter
-    private EucCsvWriter<IIkenshoJissekiIchiranCsvEucEntity> eucCsvWriterJunitoJugo;
+    private EucCsvWriter<IChosahyoJissekiIchiranCsvEucEntity> eucCsvWriterJunitoJugo;
 
     @Override
     protected void beforeExecute() {
@@ -110,12 +111,12 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     }
 
     @Override
-    protected void process(IkenshoJissekiIchiranRelateEntity relateEntity) {
+    protected void process(ChosahyoJissekiIchiranRelateEntity relateEntity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            eucCsvWriterJunitoJugo.writeLine(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
+            eucCsvWriterJunitoJugo.writeLine(ChosahyoJissekiIchiranChange.createSyohyoData(relateEntity));
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
-            IkenshoJissekiIchiranReport report = new IkenshoJissekiIchiranReport(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
+            ChosahyoJissekiIchiranReport report = new ChosahyoJissekiIchiranReport(ChosahyoJissekiIchiranChange.createSyohyoData(relateEntity));
             report.writeBy(reportSourceWriter);
         }
     }
@@ -135,22 +136,22 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE601001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE601002.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 意見書記入日FROM_SB = new RStringBuilder("【意見書記入日（From）】");
-        意見書記入日FROM_SB.append(dateFormat(paramter.get意見書記入日FROM()));
-        RStringBuilder 意見書記入日To_SB = new RStringBuilder("【意見書記入日（To）】");
-        意見書記入日To_SB.append(dateFormat(paramter.get意見書記入日TO()));
+        RStringBuilder 調査実施日FROM_SB = new RStringBuilder("【調査実施日（From）】");
+        調査実施日FROM_SB.append(dateFormat(paramter.get調査実施日FROM()));
+        RStringBuilder 調査実施日To_SB = new RStringBuilder("【調査実施日（To）】");
+        調査実施日To_SB.append(dateFormat(paramter.get調査実施日TO()));
         RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
         保険者_SB.append(paramter.get保険者());
-        出力条件.add(意見書記入日FROM_SB.toRString());
-        出力条件.add(意見書記入日To_SB.toRString());
+        出力条件.add(調査実施日FROM_SB.toRString());
+        出力条件.add(調査実施日To_SB.toRString());
         出力条件.add(保険者_SB.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE601001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE601002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
@@ -162,22 +163,22 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 出力件数 = new RString(eucCsvWriterJunitoJugo.getCount());
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 意見書記入日FROM_SB = new RStringBuilder("【意見書記入日（From）】");
-        意見書記入日FROM_SB.append(dateFormat(paramter.get意見書記入日FROM()));
-        RStringBuilder 意見書記入日To_SB = new RStringBuilder("【意見書記入日（To）】");
-        意見書記入日To_SB.append(dateFormat(paramter.get意見書記入日TO()));
+        RStringBuilder 調査実施日FROM_SB = new RStringBuilder("【調査実施日（From）】");
+        調査実施日FROM_SB.append(dateFormat(paramter.get調査実施日FROM()));
+        RStringBuilder 調査実施日To_SB = new RStringBuilder("【調査実施日（To）】");
+        調査実施日To_SB.append(dateFormat(paramter.get調査実施日TO()));
         RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
         保険者_SB.append(paramter.get保険者());
-        出力条件.add(意見書記入日FROM_SB.toRString());
-        出力条件.add(意見書記入日To_SB.toRString());
+        出力条件.add(調査実施日FROM_SB.toRString());
+        出力条件.add(調査実施日To_SB.toRString());
         出力条件.add(保険者_SB.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("主治医意見書作成実績集計CSV"), 導入団体コード, 市町村名, ジョブ番号,
+                new RString("認定調査実績集計CSV"), 導入団体コード, 市町村名, ジョブ番号,
                 CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
-    private PersonalData toPersonalData(IkenshoJissekiIchiranRelateEntity entity) {
+    private PersonalData toPersonalData(ChosahyoJissekiIchiranRelateEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
                 entity.get申請書管理番号());
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
@@ -190,4 +191,5 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
         RDate date_tem = new RDate(date.toString());
         return date_tem.wareki().toDateString();
     }
+
 }
