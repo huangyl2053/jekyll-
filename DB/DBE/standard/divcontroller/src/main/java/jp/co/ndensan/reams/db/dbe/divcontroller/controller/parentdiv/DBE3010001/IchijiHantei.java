@@ -269,7 +269,7 @@ public class IchijiHantei {
 
         if (!RString.isNullOrEmpty(div.getIchijiHanteiKekka())) {
             IchijiHanteiKekkaJoho kaJoho = DataPassingConverter.deserialize(div.getIchijiHanteiKekka(), IchijiHanteiKekkaJoho.class);
-            if (!getHandler(div).equalsRowData(row, kaJoho)) {
+            if (getHandler(div).notEqualsRowData(row, kaJoho)) {
                 getHandler(div).対象者一覧更新の編集(row, index, kaJoho);
             }
 

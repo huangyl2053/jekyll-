@@ -10,6 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyoa4.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo02A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo06A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo09A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser03;
@@ -24,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser21;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser22;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
@@ -50,47 +56,6 @@ public final class ChkIchijiHanteiKekkaBusiness {
     private static final RString 識別コード02A = new RString("02A");
     private static final RString 識別コード09A = new RString("09A");
     private static final RString 識別コード99A = new RString("99A");
-    private static final RString 予防給付 = new RString("予防給付サービス");
-    private static final RString 介護給付 = new RString("介護給付サービス");
-    private static final RString 回月 = new RString("回 /月");
-    private static final RString 日月 = new RString("日 /月");
-    private static final RString 住宅改修 = new RString("住宅改修                                    ：");
-    private static final RString 訪問介護_ホームヘルプサービス = new RString("訪問介護（ホームヘルプサービス）            ：");
-    private static final RString 訪問入浴介護 = new RString("訪問入浴介護                                ：");
-    private static final RString 訪問看護 = new RString("訪問看護                                    ：");
-    private static final RString 訪問リハビリテーション = new RString("訪問リハビリテーション                      ：");
-    private static final RString 居宅療養管理指導 = new RString("居宅療養管理指導                            ：");
-    private static final RString 通所介護_デイサービス = new RString("通所介護（デイサービス）                    ：");
-    private static final RString 通所リハビリテーション = new RString("通所リハビリテーション                      ：");
-    private static final RString 短期入所生活介護 = new RString("短期入所生活介護（ショートステイ）          ：");
-    private static final RString 短期入所療養介護 = new RString("短期入所療養介護                            ：");
-    private static final RString 特定施設入居者生活介護 = new RString("特定施設入居者生活介護                      ：");
-    private static final RString 福祉用具貸与 = new RString("福祉用具貸与                                ：");
-    private static final RString 品目 = new RString("品目");
-    private static final RString 特定福祉用具販売 = new RString("特定福祉用具販売                            ：");
-    private static final RString 夜間対応型訪問介護 = new RString("夜間対応型訪問介護                          ：");
-    private static final RString 認知症対応型通所介護 = new RString("認知症対応型通所介護                        ：");
-    private static final RString 小規模多機能型住宅介護 = new RString("小規模多機能型住宅介護                      ：");
-    private static final RString 認知症対応型共同生活介護 = new RString("認知症対応型共同生活介護（グループホーム）　：");
-    private static final RString 地域密着型特定施設入所者生活介護 = new RString("地域密着型特定施設入所者生活介護　          ：");
-    private static final RString 地域密着型介護老人福祉施設入所者生活介護 = new RString("地域密着型介護老人福祉施設入所者生活介護    ：");
-    private static final RString 定期巡回_随時対応型訪問介護看護 = new RString("定期巡回・随時対応型訪問介護看護　　　　　　：");
-    private static final RString 看護小規模多機能型居宅介護 = new RString("看護小規模多機能型居宅介護　　　　　　　　　：");
-    private static final RString 介護予防訪問介護 = new RString("介護予防訪問介護（ホームヘルプ）・訪問型サービス   ：");
-    private static final RString 介護予防訪問入浴介護 = new RString("介護予防訪問入浴介護                               ：");
-    private static final RString 介護予防訪問看護 = new RString("介護予防訪問看護                                   ：");
-    private static final RString 介護予防訪問リハビリテーション = new RString("介護予防訪問リハビリテーション                     ：");
-    private static final RString 介護予防居宅療養管理指導 = new RString("介護予防居宅療養管理指導                           ：");
-    private static final RString 介護予防通所介護 = new RString("介護予防通所介護（デイサービス）・通所型サービス   ：");
-    private static final RString 介護予防通所リハビリテーション = new RString("介護予防通所リハビリテーション                     ：");
-    private static final RString 介護予防短期入所生活介護 = new RString("介護予防短期入所生活介護（ショートステイ）         ：");
-    private static final RString 介護予防短期入所療養介護 = new RString("介護予防短期入所療養介護                           ：");
-    private static final RString 介護予防特定施設入居者生活介護 = new RString("介護予防特定施設入居者生活介護                     ：");
-    private static final RString 介護予防福祉用具貸与 = new RString("介護予防福祉用具貸与                               ：");
-    private static final RString 特定介護予防福祉用具販売 = new RString("特定介護予防福祉用具販売                           ：");
-    private static final RString 介護予防小規模多機能型居宅介護 = new RString("介護予防小規模多機能型居宅介護                     ：");
-    private static final RString 介護予防認知症対応型共同生活介護 = new RString("介護予防認知症対応型共同生活介護（グループホーム） ：");
-    private static final RString 品目_6月間 = new RString("品目/6月間");
     private static final RString 印刷する = new RString("1");
     private static final RString 印刷しない = new RString("2");
     private static final RString 差分のみ印刷 = new RString("3");
@@ -1052,208 +1017,481 @@ public final class ChkIchijiHanteiKekkaBusiness {
     public static RString setサービス状況(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
             List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity, IchijihanteikekkahyoEntity bodyItem) {
         RStringBuilder builder = new RStringBuilder();
-        if (予防給付.equals(bodyItem.get現在のサービス利用状況名()) && (識別コード09B.equals(bodyItem.get厚労省IF識別コード())
-                || 識別コード09A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード06A.equals(bodyItem.get厚労省IF識別コード()))) {
-            bodyItem.setサービス名称1(介護予防訪問介護);
-            bodyItem.setサービス名称2(介護予防訪問入浴介護);
-            bodyItem.setサービス名称3(介護予防訪問看護);
-            bodyItem.setサービス名称4(介護予防訪問リハビリテーション);
-            bodyItem.setサービス名称5(介護予防居宅療養管理指導);
-            bodyItem.setサービス名称6(介護予防通所介護);
-            bodyItem.setサービス名称7(介護予防通所リハビリテーション);
-            bodyItem.setサービス名称8(介護予防短期入所生活介護);
-            bodyItem.setサービス名称9(介護予防短期入所療養介護);
-            bodyItem.setサービス名称10(介護予防特定施設入居者生活介護);
-            bodyItem.setサービス名称11(介護予防福祉用具貸与);
-            bodyItem.setサービス名称12(特定介護予防福祉用具販売);
-            bodyItem.setサービス名称13(住宅改修);
-            bodyItem.setサービス名称14(認知症対応型通所介護);
-            bodyItem.setサービス名称15(介護予防小規模多機能型居宅介護);
-            bodyItem.setサービス名称16(介護予防認知症対応型共同生活介護);
-            bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(回月)));
-            bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(回月)));
-            bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(回月)));
-            bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(回月)));
-            bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(回月)));
-            bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(回月)));
-            bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(回月)));
-            bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(回月)));
-            bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(回月)));
-            bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(回月)));
-            bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(品目)));
-            bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(品目_6月間)));
-            bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
-            bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(日月)));
-            bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(日月)));
-            bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(日月)));
+        if (ServiceKubunCode.予防給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード06A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_予防給付_06A(bodyItem, dbt5207Entity, dbt5208Entity);
+        } else if (ServiceKubunCode.予防給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_予防給付_09A(bodyItem, dbt5207Entity, dbt5208Entity);
+        } else if (ServiceKubunCode.予防給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード09B.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_予防給付_09B(bodyItem, dbt5207Entity, dbt5208Entity);
         }
-        if (予防給付.equals(bodyItem.get現在のサービス利用状況名()) && (識別コード02A.equals(bodyItem.get厚労省IF識別コード())
-                || 識別コード99A.equals(bodyItem.get厚労省IF識別コード()))) {
-            bodyItem.setサービス名称1(介護予防訪問介護);
-            bodyItem.setサービス名称2(介護予防訪問入浴介護);
-            bodyItem.setサービス名称3(介護予防訪問看護);
-            bodyItem.setサービス名称4(介護予防訪問リハビリテーション);
-            bodyItem.setサービス名称5(介護予防居宅療養管理指導);
-            bodyItem.setサービス名称6(介護予防通所介護);
-            bodyItem.setサービス名称7(介護予防通所リハビリテーション);
-            bodyItem.setサービス名称8(介護予防短期入所生活介護);
-            bodyItem.setサービス名称9(介護予防短期入所療養介護);
-            bodyItem.setサービス名称10(介護予防特定施設入居者生活介護);
-            bodyItem.setサービス名称11(介護予防福祉用具貸与);
-            bodyItem.setサービス名称12(特定介護予防福祉用具販売);
-            bodyItem.setサービス名称13(住宅改修);
-            bodyItem.setサービス名称14(特定介護予防福祉用具販売);
-            bodyItem.setサービス名称15(介護予防小規模多機能型居宅介護);
-            bodyItem.setサービス名称16(介護予防認知症対応型共同生活介護);
-            bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(回月)));
-            bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(回月)));
-            bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(回月)));
-            bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(回月)));
-            bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(回月)));
-            bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(回月)));
-            bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(回月)));
-            bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(日月)));
-            bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(日月)));
-            bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(日月)));
-            bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(品目)));
-            bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(品目_6月間)));
-            bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
-            bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(日月)));
-            bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(日月)));
-            bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(日月)));
+        if (ServiceKubunCode.予防給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_予防給付_02A(bodyItem, dbt5207Entity, dbt5208Entity);
+        } else if (ServiceKubunCode.予防給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_予防給付_99A(bodyItem, dbt5207Entity, dbt5208Entity);
         }
         getサービス状況(dbt5207Entity, dbt5208Entity, bodyItem);
         getサービス状況01(dbt5207Entity, dbt5208Entity, bodyItem);
         return builder.toRString();
     }
 
+    private static void set現在のサービス利用状況_予防給付_99A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo99A.訪問介護.get帳票上の名称());
+        bodyItem.setサービス名称2(ServiceJokyo99A.訪問入浴介護.get帳票上の名称());
+        bodyItem.setサービス名称3(ServiceJokyo99A.訪問看護.get帳票上の名称());
+        bodyItem.setサービス名称4(ServiceJokyo99A.訪問リハビリ.get帳票上の名称());
+        bodyItem.setサービス名称5(ServiceJokyo99A.居宅療養管理指導.get帳票上の名称());
+        bodyItem.setサービス名称6(ServiceJokyo99A.通所介護.get帳票上の名称());
+        bodyItem.setサービス名称7(ServiceJokyo99A.通所リハビリ.get帳票上の名称());
+        bodyItem.setサービス名称8(ServiceJokyo99A.短期入所生活介護.get帳票上の名称());
+        bodyItem.setサービス名称9(ServiceJokyo99A.短期入所療養介護.get帳票上の名称());
+        bodyItem.setサービス名称10(ServiceJokyo99A.特定施設入所者生活介護.get帳票上の名称());
+        bodyItem.setサービス名称11(ServiceJokyo99A.福祉用具貸与.get帳票上の名称());
+        bodyItem.setサービス名称12(ServiceJokyo99A.福祉用具購入.get帳票上の名称());
+        bodyItem.setサービス名称13(ServiceJokyo99A.住宅改修.get帳票上の名称());
+        bodyItem.setサービス名称14(RString.EMPTY);
+        bodyItem.setサービス名称15(RString.EMPTY);
+        bodyItem.setサービス名称16(RString.EMPTY);
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo99A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo99A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo99A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo99A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo99A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo99A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo99A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo99A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo99A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo99A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo99A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo99A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(RString.EMPTY);
+        bodyItem.setサービス回数15(RString.EMPTY);
+        bodyItem.setサービス回数16(RString.EMPTY);
+    }
+
+    private static void set現在のサービス利用状況_予防給付_02A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo02A.訪問介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称2(ServiceJokyo02A.訪問入浴介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称3(ServiceJokyo02A.訪問看護.get帳票上のラベル名称());
+        bodyItem.setサービス名称4(ServiceJokyo02A.訪問リハビリ.get帳票上のラベル名称());
+        bodyItem.setサービス名称5(ServiceJokyo02A.居宅療養管理指導.get帳票上のラベル名称());
+        bodyItem.setサービス名称6(ServiceJokyo02A.通所介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称7(ServiceJokyo02A.通所リハビリ.get帳票上のラベル名称());
+        bodyItem.setサービス名称8(ServiceJokyo02A.短期入所生活介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称9(ServiceJokyo02A.短期入所療養介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称10(ServiceJokyo02A.特定施設入所者生活介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称11(ServiceJokyo02A.福祉用具貸与.get帳票上のラベル名称());
+        bodyItem.setサービス名称12(ServiceJokyo02A.福祉用具購入.get帳票上のラベル名称());
+        bodyItem.setサービス名称13(ServiceJokyo02A.住宅改修.get帳票上のラベル名称());
+        bodyItem.setサービス名称14(RString.EMPTY);
+        bodyItem.setサービス名称15(RString.EMPTY);
+        bodyItem.setサービス名称16(RString.EMPTY);
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo02A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo02A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo02A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo02A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo02A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo02A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo02A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo02A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo02A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo02A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo02A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo02A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(RString.EMPTY);
+        bodyItem.setサービス回数15(RString.EMPTY);
+        bodyItem.setサービス回数16(RString.EMPTY);
+    }
+
+    private static void set現在のサービス利用状況_予防給付_09B(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo09B.訪問介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称2(ServiceJokyo09B.訪問入浴介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称3(ServiceJokyo09B.訪問看護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称4(ServiceJokyo09B.訪問リハビリ.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称5(ServiceJokyo09B.居宅療養管理指導.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称6(ServiceJokyo09B.通所介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称7(ServiceJokyo09B.通所リハビリ.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称8(ServiceJokyo09B.短期入所生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称9(ServiceJokyo09B.短期入所療養介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称10(ServiceJokyo09B.特定施設入所者生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称11(ServiceJokyo09B.福祉用具貸与.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称12(ServiceJokyo09B.福祉用具購入.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称13(ServiceJokyo09B.住宅改修.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称14(ServiceJokyo09B.認知症対応型通所介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称15(ServiceJokyo09B.小規模多機能型居宅介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称16(ServiceJokyo09B.認知症対応型共同生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo09B.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo09B.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo09B.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo09B.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo09B.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo09B.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo09B.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo09B.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo09B.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo09B.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(ServiceJokyo09B.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo09B.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(ServiceJokyo09B.認知症対応型通所介護.get単位())));
+        bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(ServiceJokyo09B.小規模多機能型居宅介護.get単位())));
+        bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(ServiceJokyo09B.認知症対応型共同生活介護.get単位())));
+    }
+
+    private static void set現在のサービス利用状況_予防給付_09A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo09A.訪問介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称2(ServiceJokyo09A.訪問入浴介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称3(ServiceJokyo09A.訪問看護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称4(ServiceJokyo09A.訪問リハビリ.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称5(ServiceJokyo09A.居宅療養管理指導.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称6(ServiceJokyo09A.通所介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称7(ServiceJokyo09A.通所リハビリ.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称8(ServiceJokyo09A.短期入所生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称9(ServiceJokyo09A.短期入所療養介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称10(ServiceJokyo09A.特定施設入所者生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称11(ServiceJokyo09A.福祉用具貸与.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称12(ServiceJokyo09A.福祉用具購入.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称13(ServiceJokyo09A.住宅改修.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称14(ServiceJokyo09A.認知症対応型通所介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称15(ServiceJokyo09A.小規模多機能型居宅介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称16(ServiceJokyo09A.認知症対応型共同生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo09A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo09A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo09A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo09A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo09A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo09A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo09A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo09A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo09A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo09A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(ServiceJokyo09A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo09A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(ServiceJokyo09A.認知症対応型通所介護.get単位())));
+        bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(ServiceJokyo09A.小規模多機能型居宅介護.get単位())));
+        bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(ServiceJokyo09A.認知症対応型共同生活介護.get単位())));
+    }
+
+    private static void set現在のサービス利用状況_予防給付_06A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo06A.訪問介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称2(ServiceJokyo06A.訪問入浴介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称3(ServiceJokyo06A.訪問看護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称4(ServiceJokyo06A.訪問リハビリ.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称5(ServiceJokyo06A.居宅療養管理指導.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称6(ServiceJokyo06A.通所介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称7(ServiceJokyo06A.通所リハビリ.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称8(ServiceJokyo06A.短期入所生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称9(ServiceJokyo06A.短期入所療養介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称10(ServiceJokyo06A.特定施設入所者生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称11(ServiceJokyo06A.福祉用具貸与.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称12(ServiceJokyo06A.福祉用具購入.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称13(ServiceJokyo06A.住宅改修.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称14(ServiceJokyo06A.認知症対応型通所介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称15(ServiceJokyo06A.小規模多機能型居宅介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称16(ServiceJokyo06A.認知症対応型共同生活介護.get帳票上の名称_予防給付());
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo06A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo06A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo06A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo06A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo06A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo06A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo06A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo06A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo06A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo06A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(ServiceJokyo06A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo06A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(ServiceJokyo06A.認知症対応型通所介護.get単位())));
+        bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(ServiceJokyo06A.小規模多機能型居宅介護.get単位())));
+        bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(ServiceJokyo06A.認知症対応型共同生活介護.get単位())));
+    }
+
     private static void getサービス状況(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
             List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity, IchijihanteikekkahyoEntity bodyItem) {
-        if (!予防給付.equals(bodyItem.get現在のサービス利用状況名()) && !介護給付.equals(bodyItem.get現在のサービス利用状況名())) {
+        if (!ServiceKubunCode.予防給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名())
+                && !ServiceKubunCode.介護給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名())) {
             bodyItem.setサービス名称10(new RString("                                      (なし)"));
         }
-        if (介護給付.equals(bodyItem.get現在のサービス利用状況名()) && (識別コード09B.equals(bodyItem.get厚労省IF識別コード())
-                || 識別コード09A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード06A.equals(bodyItem.get厚労省IF識別コード()))) {
-            bodyItem.setサービス名称1(訪問介護_ホームヘルプサービス);
-            bodyItem.setサービス名称2(訪問入浴介護);
-            bodyItem.setサービス名称3(訪問看護);
-            bodyItem.setサービス名称4(訪問リハビリテーション);
-            bodyItem.setサービス名称5(居宅療養管理指導);
-            bodyItem.setサービス名称6(通所介護_デイサービス);
-            bodyItem.setサービス名称7(通所リハビリテーション);
-            bodyItem.setサービス名称8(短期入所生活介護);
-            bodyItem.setサービス名称9(短期入所療養介護);
-            bodyItem.setサービス名称10(特定施設入居者生活介護);
-            bodyItem.setサービス名称11(福祉用具貸与);
-            bodyItem.setサービス名称12(特定福祉用具販売);
-            bodyItem.setサービス名称13(住宅改修);
-            bodyItem.setサービス名称14(夜間対応型訪問介護);
-            bodyItem.setサービス名称15(認知症対応型通所介護);
-            bodyItem.setサービス名称16(小規模多機能型住宅介護);
-            bodyItem.setサービス名称17(認知症対応型共同生活介護);
-            bodyItem.setサービス名称18(地域密着型特定施設入所者生活介護);
-            bodyItem.setサービス名称19(地域密着型介護老人福祉施設入所者生活介護);
-            bodyItem.setサービス名称20(定期巡回_随時対応型訪問介護看護);
-            bodyItem.setサービス名称21(看護小規模多機能型居宅介護);
-            bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(回月)));
-            bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(回月)));
-            bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(回月)));
-            bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(回月)));
-            bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(回月)));
-            bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(回月)));
-            bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(回月)));
-            bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(日月)));
-            bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(日月)));
-            bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(日月)));
-            bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(品目)));
-            bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(品目_6月間)));
-            bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
-            bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番12).concat(日月)));
-            bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(日月)));
-            bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(日月)));
-            bodyItem.setサービス回数17(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(日月)));
-            bodyItem.setサービス回数18(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番16).concat(日月)));
-            bodyItem.setサービス回数19(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番17).concat(日月)));
-            bodyItem.setサービス回数20(文字数揃え(getサービス回数20(dbt5207Entity, bodyItem.get厚労省IF識別コード())));
-            bodyItem.setサービス回数21(文字数揃え(getサービス回数21(dbt5207Entity, bodyItem.get厚労省IF識別コード())));
+        if (ServiceKubunCode.介護給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード06A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_介護給付_06A(bodyItem, dbt5207Entity, dbt5208Entity);
+        } else if (ServiceKubunCode.介護給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_介護給付_09A(bodyItem, dbt5207Entity, dbt5208Entity);
+        } else if (ServiceKubunCode.介護給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード09B.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_介護給付_09B(bodyItem, dbt5207Entity, dbt5208Entity);
         }
     }
 
-    private static RString getサービス回数20(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity, RString 厚労省IF識別コード) {
-        if (識別コード09B.equals(厚労省IF識別コード)) {
-            return getサービス連番の状況(dbt5207Entity, 連番18).concat(回月);
-        } else if (識別コード09A.equals(厚労省IF識別コード) || 識別コード06A.equals(厚労省IF識別コード)) {
-            return 回月;
-        }
-        return RString.EMPTY;
+    private static void set現在のサービス利用状況_介護給付_09B(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo09B.訪問介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称2(ServiceJokyo09B.訪問入浴介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称3(ServiceJokyo09B.訪問看護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称4(ServiceJokyo09B.訪問リハビリ.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称5(ServiceJokyo09B.居宅療養管理指導.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称6(ServiceJokyo09B.通所介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称7(ServiceJokyo09B.通所リハビリ.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称8(ServiceJokyo09B.短期入所生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称9(ServiceJokyo09B.短期入所療養介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称10(ServiceJokyo09B.特定施設入所者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称11(ServiceJokyo09B.福祉用具貸与.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称12(ServiceJokyo09B.福祉用具購入.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称13(ServiceJokyo09B.住宅改修.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称14(ServiceJokyo09B.夜間対応型訪問介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称15(ServiceJokyo09B.認知症対応型通所介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称16(ServiceJokyo09B.小規模多機能型居宅介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称17(ServiceJokyo09B.認知症対応型共同生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称18(ServiceJokyo09B.地域密着型特定施設入居者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称19(ServiceJokyo09B.地域密着型介護老人福祉施設入所者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称20(ServiceJokyo09B.定期巡回_随時対応型訪問介護看護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称21(ServiceJokyo09B.看護小規模多機能型居宅介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo09B.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo09B.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo09B.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo09B.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo09B.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo09B.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo09B.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo09B.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo09B.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo09B.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(ServiceJokyo09B.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo09B.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番12).concat(ServiceJokyo09B.夜間対応型訪問介護.get単位())));
+        bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(ServiceJokyo09B.認知症対応型通所介護.get単位())));
+        bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(ServiceJokyo09B.小規模多機能型居宅介護.get単位())));
+        bodyItem.setサービス回数17(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(ServiceJokyo09B.認知症対応型共同生活介護.get単位())));
+        bodyItem.setサービス回数18(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番16).concat(ServiceJokyo09B.地域密着型特定施設入居者生活介護.get単位())));
+        bodyItem.setサービス回数19(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番17).concat(ServiceJokyo09B.地域密着型介護老人福祉施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数20(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番18).concat(ServiceJokyo09B.定期巡回_随時対応型訪問介護看護.get単位())));
+        bodyItem.setサービス回数21(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番19).concat(ServiceJokyo09B.看護小規模多機能型居宅介護.get単位())));
     }
 
-    private static RString getサービス回数21(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity, RString 厚労省IF識別コード) {
-        if (識別コード09B.equals(厚労省IF識別コード)) {
-            return getサービス連番の状況(dbt5207Entity, 連番19).concat(日月);
-        } else if (識別コード09A.equals(厚労省IF識別コード) || 識別コード06A.equals(厚労省IF識別コード)) {
-            return 日月;
-        }
-        return RString.EMPTY;
+    private static void set現在のサービス利用状況_介護給付_09A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo09A.訪問介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称2(ServiceJokyo09A.訪問入浴介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称3(ServiceJokyo09A.訪問看護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称4(ServiceJokyo09A.訪問リハビリ.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称5(ServiceJokyo09A.居宅療養管理指導.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称6(ServiceJokyo09A.通所介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称7(ServiceJokyo09A.通所リハビリ.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称8(ServiceJokyo09A.短期入所生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称9(ServiceJokyo09A.短期入所療養介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称10(ServiceJokyo09A.特定施設入所者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称11(ServiceJokyo09A.福祉用具貸与.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称12(ServiceJokyo09A.福祉用具購入.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称13(ServiceJokyo09A.住宅改修.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称14(ServiceJokyo09A.夜間対応型訪問介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称15(ServiceJokyo09A.認知症対応型通所介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称16(ServiceJokyo09A.小規模多機能型居宅介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称17(ServiceJokyo09A.認知症対応型共同生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称18(ServiceJokyo09A.地域密着型特定施設入居者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称19(ServiceJokyo09A.地域密着型介護老人福祉施設入所者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称20(RString.EMPTY);
+        bodyItem.setサービス名称21(RString.EMPTY);
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo09A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo09A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo09A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo09A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo09A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo09A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo09A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo09A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo09A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo09A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(ServiceJokyo09A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo09A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番12).concat(ServiceJokyo09A.夜間対応型訪問介護.get単位())));
+        bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(ServiceJokyo09A.認知症対応型通所介護.get単位())));
+        bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(ServiceJokyo09A.小規模多機能型居宅介護.get単位())));
+        bodyItem.setサービス回数17(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(ServiceJokyo09A.認知症対応型共同生活介護.get単位())));
+        bodyItem.setサービス回数18(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番16).concat(ServiceJokyo09A.地域密着型特定施設入居者生活介護.get単位())));
+        bodyItem.setサービス回数19(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番17).concat(ServiceJokyo09A.地域密着型介護老人福祉施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数20(RString.EMPTY);
+        bodyItem.setサービス回数21(RString.EMPTY);
+    }
+
+    private static void set現在のサービス利用状況_介護給付_06A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo06A.訪問介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称2(ServiceJokyo06A.訪問入浴介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称3(ServiceJokyo06A.訪問看護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称4(ServiceJokyo06A.訪問リハビリ.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称5(ServiceJokyo06A.居宅療養管理指導.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称6(ServiceJokyo06A.通所介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称7(ServiceJokyo06A.通所リハビリ.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称8(ServiceJokyo06A.短期入所生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称9(ServiceJokyo06A.短期入所療養介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称10(ServiceJokyo06A.特定施設入所者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称11(ServiceJokyo06A.福祉用具貸与.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称12(ServiceJokyo06A.福祉用具購入.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称13(ServiceJokyo06A.住宅改修.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称14(ServiceJokyo06A.夜間対応型訪問介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称15(ServiceJokyo06A.認知症対応型通所介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称16(ServiceJokyo06A.小規模多機能型居宅介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称17(ServiceJokyo06A.認知症対応型共同生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称18(ServiceJokyo06A.地域密着型特定施設入居者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称19(ServiceJokyo06A.地域密着型介護老人福祉施設入所者生活介護.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称20(RString.EMPTY);
+        bodyItem.setサービス名称21(RString.EMPTY);
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo06A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo06A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo06A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo06A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo06A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo06A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo06A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo06A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo06A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo06A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(ServiceJokyo06A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo06A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番12).concat(ServiceJokyo06A.夜間対応型訪問介護.get単位())));
+        bodyItem.setサービス回数15(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番13).concat(ServiceJokyo06A.認知症対応型通所介護.get単位())));
+        bodyItem.setサービス回数16(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番14).concat(ServiceJokyo06A.小規模多機能型居宅介護.get単位())));
+        bodyItem.setサービス回数17(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番15).concat(ServiceJokyo06A.認知症対応型共同生活介護.get単位())));
+        bodyItem.setサービス回数18(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番16).concat(ServiceJokyo06A.地域密着型特定施設入居者生活介護.get単位())));
+        bodyItem.setサービス回数19(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番17).concat(ServiceJokyo06A.地域密着型介護老人福祉施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数20(RString.EMPTY);
+        bodyItem.setサービス回数21(RString.EMPTY);
     }
 
     private static void getサービス状況01(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
             List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity, IchijihanteikekkahyoEntity bodyItem) {
-        if (介護給付.equals(bodyItem.get現在のサービス利用状況名()) && (識別コード02A.equals(bodyItem.get厚労省IF識別コード())
-                || 識別コード99A.equals(bodyItem.get厚労省IF識別コード()))) {
-            bodyItem.setサービス名称1(訪問介護_ホームヘルプサービス);
-            bodyItem.setサービス名称2(訪問入浴介護);
-            bodyItem.setサービス名称3(訪問看護);
-            bodyItem.setサービス名称4(訪問リハビリテーション);
-            bodyItem.setサービス名称5(居宅療養管理指導);
-            bodyItem.setサービス名称6(通所介護_デイサービス);
-            bodyItem.setサービス名称7(通所リハビリテーション);
-            bodyItem.setサービス名称8(短期入所生活介護);
-            bodyItem.setサービス名称9(短期入所療養介護);
-            bodyItem.setサービス名称10(特定施設入居者生活介護);
-            bodyItem.setサービス名称11(福祉用具貸与);
-            bodyItem.setサービス名称12(特定福祉用具販売);
-            bodyItem.setサービス名称13(住宅改修);
-            bodyItem.setサービス名称14(夜間対応型訪問介護);
-            bodyItem.setサービス名称15(認知症対応型通所介護);
-            bodyItem.setサービス名称16(小規模多機能型住宅介護);
-            bodyItem.setサービス名称17(認知症対応型共同生活介護);
-            bodyItem.setサービス名称18(地域密着型特定施設入所者生活介護);
-            bodyItem.setサービス名称19(地域密着型介護老人福祉施設入所者生活介護);
-            bodyItem.setサービス名称20(定期巡回_随時対応型訪問介護看護);
-            bodyItem.setサービス名称21(看護小規模多機能型居宅介護);
-            bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(回月)));
-            bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(回月)));
-            bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(回月)));
-            bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(回月)));
-            bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(回月)));
-            bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(回月)));
-            bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(回月)));
-            bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(日月)));
-            bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(日月)));
-            bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(日月)));
-            bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(品目)));
-            bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番12).concat(品目_6月間)));
-            bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
-                    ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
-            bodyItem.setサービス回数14(文字数揃え(日月));
-            bodyItem.setサービス回数15(文字数揃え(日月));
-            bodyItem.setサービス回数16(文字数揃え(日月));
-            bodyItem.setサービス回数17(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番10).concat(日月)));
-            bodyItem.setサービス回数18(文字数揃え(日月));
-            bodyItem.setサービス回数19(文字数揃え(日月));
-            bodyItem.setサービス回数20(文字数揃え(回月));
-            bodyItem.setサービス回数21(文字数揃え(日月));
+        if (ServiceKubunCode.介護給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_99A(bodyItem, dbt5207Entity, dbt5208Entity);
+        } else if (ServiceKubunCode.介護給付サービス.get名称().equals(bodyItem.get現在のサービス利用状況名()) && 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
+            set現在のサービス利用状況_02A(bodyItem, dbt5207Entity, dbt5208Entity);
         }
+    }
+
+    private static void set現在のサービス利用状況_99A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo99A.訪問介護.get帳票上の名称());
+        bodyItem.setサービス名称2(ServiceJokyo99A.訪問入浴介護.get帳票上の名称());
+        bodyItem.setサービス名称3(ServiceJokyo99A.訪問看護.get帳票上の名称());
+        bodyItem.setサービス名称4(ServiceJokyo99A.訪問リハビリ.get帳票上の名称());
+        bodyItem.setサービス名称5(ServiceJokyo99A.居宅療養管理指導.get帳票上の名称());
+        bodyItem.setサービス名称6(ServiceJokyo99A.通所介護.get帳票上の名称());
+        bodyItem.setサービス名称7(ServiceJokyo99A.通所リハビリ.get帳票上の名称());
+        bodyItem.setサービス名称8(ServiceJokyo99A.短期入所生活介護.get帳票上の名称());
+        bodyItem.setサービス名称9(ServiceJokyo99A.短期入所療養介護.get帳票上の名称());
+        bodyItem.setサービス名称10(ServiceJokyo99A.特定施設入所者生活介護.get帳票上の名称());
+        bodyItem.setサービス名称11(ServiceJokyo99A.福祉用具貸与.get帳票上の名称());
+        bodyItem.setサービス名称12(ServiceJokyo99A.福祉用具購入.get帳票上の名称());
+        bodyItem.setサービス名称13(ServiceJokyo99A.住宅改修.get帳票上の名称());
+        bodyItem.setサービス名称14(RString.EMPTY);
+        bodyItem.setサービス名称15(RString.EMPTY);
+        bodyItem.setサービス名称16(RString.EMPTY);
+        bodyItem.setサービス名称17(RString.EMPTY);
+        bodyItem.setサービス名称18(RString.EMPTY);
+        bodyItem.setサービス名称19(RString.EMPTY);
+        bodyItem.setサービス名称20(RString.EMPTY);
+        bodyItem.setサービス名称21(RString.EMPTY);
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo99A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo99A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo99A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo99A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo99A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo99A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo99A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo99A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo99A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo99A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo99A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番12).concat(ServiceJokyo99A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(RString.EMPTY);
+        bodyItem.setサービス回数15(RString.EMPTY);
+        bodyItem.setサービス回数16(RString.EMPTY);
+        bodyItem.setサービス回数17(RString.EMPTY);
+        bodyItem.setサービス回数18(RString.EMPTY);
+        bodyItem.setサービス回数19(RString.EMPTY);
+        bodyItem.setサービス回数20(RString.EMPTY);
+        bodyItem.setサービス回数21(RString.EMPTY);
+    }
+
+    private static void set現在のサービス利用状況_02A(IchijihanteikekkahyoEntity bodyItem,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
+        bodyItem.setサービス名称1(ServiceJokyo02A.訪問介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称2(ServiceJokyo02A.訪問入浴介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称3(ServiceJokyo02A.訪問看護.get帳票上のラベル名称());
+        bodyItem.setサービス名称4(ServiceJokyo02A.訪問リハビリ.get帳票上のラベル名称());
+        bodyItem.setサービス名称5(ServiceJokyo02A.居宅療養管理指導.get帳票上のラベル名称());
+        bodyItem.setサービス名称6(ServiceJokyo02A.通所介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称7(ServiceJokyo02A.通所リハビリ.get帳票上のラベル名称());
+        bodyItem.setサービス名称8(ServiceJokyo02A.短期入所生活介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称9(ServiceJokyo02A.短期入所療養介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称10(ServiceJokyo02A.特定施設入所者生活介護.get帳票上のラベル名称());
+        bodyItem.setサービス名称11(ServiceJokyo02A.福祉用具貸与.get帳票上のラベル名称());
+        bodyItem.setサービス名称12(ServiceJokyo02A.福祉用具購入.get帳票上のラベル名称());
+        bodyItem.setサービス名称13(ServiceJokyo02A.住宅改修.get帳票上のラベル名称());
+        bodyItem.setサービス名称14(RString.EMPTY);
+        bodyItem.setサービス名称15(RString.EMPTY);
+        bodyItem.setサービス名称16(RString.EMPTY);
+        bodyItem.setサービス名称17(RString.EMPTY);
+        bodyItem.setサービス名称18(RString.EMPTY);
+        bodyItem.setサービス名称19(RString.EMPTY);
+        bodyItem.setサービス名称20(RString.EMPTY);
+        bodyItem.setサービス名称21(RString.EMPTY);
+        bodyItem.setサービス回数1(文字数揃え(getサービス連番の状況(dbt5207Entity, 0).concat(ServiceJokyo02A.訪問介護.get単位())));
+        bodyItem.setサービス回数2(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番1).concat(ServiceJokyo02A.訪問入浴介護.get単位())));
+        bodyItem.setサービス回数3(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番2).concat(ServiceJokyo02A.訪問看護.get単位())));
+        bodyItem.setサービス回数4(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番3).concat(ServiceJokyo02A.訪問リハビリ.get単位())));
+        bodyItem.setサービス回数5(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番4).concat(ServiceJokyo02A.居宅療養管理指導.get単位())));
+        bodyItem.setサービス回数6(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番5).concat(ServiceJokyo02A.通所介護.get単位())));
+        bodyItem.setサービス回数7(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番6).concat(ServiceJokyo02A.通所リハビリ.get単位())));
+        bodyItem.setサービス回数8(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番8).concat(ServiceJokyo02A.短期入所生活介護.get単位())));
+        bodyItem.setサービス回数9(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番9).concat(ServiceJokyo02A.短期入所療養介護.get単位())));
+        bodyItem.setサービス回数10(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番11).concat(ServiceJokyo02A.特定施設入所者生活介護.get単位())));
+        bodyItem.setサービス回数11(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番7).concat(ServiceJokyo02A.福祉用具貸与.get単位())));
+        bodyItem.setサービス回数12(文字数揃え(getサービス連番の状況(dbt5207Entity, 連番12).concat(ServiceJokyo02A.福祉用具購入.get単位())));
+        bodyItem.setサービス回数13((dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag())
+                ? 文字数揃え(IsJutakuKaishu.あり.get名称()) : 文字数揃え(IsJutakuKaishu.なし.get名称()));
+        bodyItem.setサービス回数14(RString.EMPTY);
+        bodyItem.setサービス回数15(RString.EMPTY);
+        bodyItem.setサービス回数16(RString.EMPTY);
+        bodyItem.setサービス回数17(RString.EMPTY);
+        bodyItem.setサービス回数18(RString.EMPTY);
+        bodyItem.setサービス回数19(RString.EMPTY);
+        bodyItem.setサービス回数20(RString.EMPTY);
+        bodyItem.setサービス回数21(RString.EMPTY);
     }
 
     private static RString 文字数揃え(RString target) {
         RStringBuilder rsb = new RStringBuilder(target);
         for (int i = rsb.length(); i < 現在のサービス利用状況_最大文字数; i++) {
-            rsb.insert(0, "　");
+            rsb.insert(0, RString.FULL_SPACE);
         }
         return rsb.toRString();
     }

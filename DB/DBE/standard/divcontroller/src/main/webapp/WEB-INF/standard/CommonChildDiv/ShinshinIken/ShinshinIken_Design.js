@@ -72,12 +72,12 @@ var DBE;
                 return "changeChkSonotaHifuShikkan";
             };
 
-            Events.onClickBtnKakutei = function () {
-                return "onClickBtnKakutei";
-            };
-
             Events.onClickBtnCancel = function () {
                 return "onClickBtnCancel";
+            };
+
+            Events.onClickBtnKakutei = function () {
+                return "onClickBtnKakutei";
             };
             return Events;
         })();
@@ -355,12 +355,12 @@ var DBE;
                 return new UZA.RadioButton(this.convFiledName("radSonotaHifuShikkanTeido"));
             };
 
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            };
-
             Controls.prototype.btnCancel = function () {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

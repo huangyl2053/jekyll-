@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tplEnkiDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,10 +23,8 @@ public class tplEnkiDiv extends TabPanel {
      */
     @JsonProperty("txtEnkiKetteiYMD")
     private TextBoxDate txtEnkiKetteiYMD;
-    @JsonProperty("txtEnkiMikomiKikanFrom")
-    private TextBoxDate txtEnkiMikomiKikanFrom;
-    @JsonProperty("txtEnkiMikomiKikanTo")
-    private TextBoxDate txtEnkiMikomiKikanTo;
+    @JsonProperty("txtEnkiMikomiKikan")
+    private TextBoxDateRange txtEnkiMikomiKikan;
     @JsonProperty("lblEnkiRiyu")
     private Label lblEnkiRiyu;
     @JsonProperty("btnEnkiRiyuTeikeibun")
@@ -63,39 +61,21 @@ public class tplEnkiDiv extends TabPanel {
     }
 
     /*
-     * gettxtEnkiMikomiKikanFrom
-     * @return txtEnkiMikomiKikanFrom
+     * gettxtEnkiMikomiKikan
+     * @return txtEnkiMikomiKikan
      */
-    @JsonProperty("txtEnkiMikomiKikanFrom")
-    public TextBoxDate getTxtEnkiMikomiKikanFrom() {
-        return txtEnkiMikomiKikanFrom;
+    @JsonProperty("txtEnkiMikomiKikan")
+    public TextBoxDateRange getTxtEnkiMikomiKikan() {
+        return txtEnkiMikomiKikan;
     }
 
     /*
-     * settxtEnkiMikomiKikanFrom
-     * @param txtEnkiMikomiKikanFrom txtEnkiMikomiKikanFrom
+     * settxtEnkiMikomiKikan
+     * @param txtEnkiMikomiKikan txtEnkiMikomiKikan
      */
-    @JsonProperty("txtEnkiMikomiKikanFrom")
-    public void setTxtEnkiMikomiKikanFrom(TextBoxDate txtEnkiMikomiKikanFrom) {
-        this.txtEnkiMikomiKikanFrom = txtEnkiMikomiKikanFrom;
-    }
-
-    /*
-     * gettxtEnkiMikomiKikanTo
-     * @return txtEnkiMikomiKikanTo
-     */
-    @JsonProperty("txtEnkiMikomiKikanTo")
-    public TextBoxDate getTxtEnkiMikomiKikanTo() {
-        return txtEnkiMikomiKikanTo;
-    }
-
-    /*
-     * settxtEnkiMikomiKikanTo
-     * @param txtEnkiMikomiKikanTo txtEnkiMikomiKikanTo
-     */
-    @JsonProperty("txtEnkiMikomiKikanTo")
-    public void setTxtEnkiMikomiKikanTo(TextBoxDate txtEnkiMikomiKikanTo) {
-        this.txtEnkiMikomiKikanTo = txtEnkiMikomiKikanTo;
+    @JsonProperty("txtEnkiMikomiKikan")
+    public void setTxtEnkiMikomiKikan(TextBoxDateRange txtEnkiMikomiKikan) {
+        this.txtEnkiMikomiKikan = txtEnkiMikomiKikan;
     }
 
     /*

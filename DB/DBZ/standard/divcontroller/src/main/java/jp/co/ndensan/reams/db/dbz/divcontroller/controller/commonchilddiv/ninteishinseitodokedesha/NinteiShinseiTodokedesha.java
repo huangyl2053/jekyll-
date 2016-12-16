@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
@@ -176,8 +178,12 @@ public class NinteiShinseiTodokedesha {
     public ResponseData<NinteiShinseiTodokedeshaDiv> onChangeChkKannaiKangai(NinteiShinseiTodokedeshaDiv div) {
         if (new RString("key0").equals(div.getRadKannaiKangai().getSelectedKey())) {
             div.setMode_DisplayType(NinteiShinseiTodokedeshaDiv.DisplayType.管内);
+            div.getCcdZenkokuJushoInput().setDisplayNone(true);
+            div.getCcdZenkokuJushoInput().setDisplayNoneMode(ZenkokuJushoInputDiv.DisplayNoneSetMode.使用しない);
         } else {
             div.setMode_DisplayType(NinteiShinseiTodokedeshaDiv.DisplayType.管外);
+            div.getCcdChoikiInput().setDisplayNoneMode(ChoikiInputDiv.DisplayNoneSetMode.使用しない);
+            div.getTxtYubinNo().setDisplayNone(true);
         }
         return ResponseData.of(div).respond();
     }

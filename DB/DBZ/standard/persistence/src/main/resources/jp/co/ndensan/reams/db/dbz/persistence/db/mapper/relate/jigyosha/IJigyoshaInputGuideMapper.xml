@@ -14,6 +14,7 @@
         <result property="telNo" column="dbT7060Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="serviceShuruiCode" column="dbT7063Kaigo_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceShuruiRyakusho" column="dbT7130Kaigo_serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yubinNo" column="dbT7060Kaigo_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
     </resultMap>
 
     <resultMap id="resultMap_tekiyoJogaiInputGuideEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
@@ -25,6 +26,7 @@
         <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jigyoshaJusho" column="dbT1005Kaigo_jigyoshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="telNo" column="dbT1005Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="yubinNo" column="dbT1005Kaigo_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
     </resultMap>
 
     <resultMap id="resultMap_otherTokureiInputGuideEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
@@ -36,6 +38,7 @@
         <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
         <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="telNo" column="dbT1005Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="yubinNo" column="dbT1005Kaigo_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
     </resultMap>
 
 
@@ -50,6 +53,7 @@
         dbT7060Kaigo."jigyoshaKanaAddress" AS "dbT7060Kaigo_jigyoshaKanaAddress",
         dbT7060Kaigo."jigyoshaAddress" AS "dbT7060Kaigo_jigyoshaAddress",
         dbT7060Kaigo."telNo" AS "dbT7060Kaigo_telNo",
+        dbT7060Kaigo."yubinNo" AS "dbT7060Kaigo_yubinNo",
         dbT7063Kaigo."serviceShuruiCode" AS "dbT7063Kaigo_serviceShuruiCode",
         dbT7130Kaigo2."serviceShuruiRyakusho" AS "dbT7130Kaigo_serviceShuruiRyakusho",
         row_number() OVER (PARTITION BY dbT7060Kaigo."jigyoshaNo"
@@ -109,17 +113,29 @@
                 dbT7063Kaigo."yukoKaishiYMD" <![CDATA[<=]]>  #{yukoKaishiYMDTo}
             </if>
             <if test = "isJigyoshaName">
-                <if test = "isZennpouitti">
+                <if test = "isKanzenitti">
                     AND
                     (dbT7060Kaigo."jigyoshaName" =  #{jigyoshaName}
                     OR
                     dbT7060Kaigo."jigyoshaNameKana" =  #{jigyoshaName})
                 </if>
-                <if test = "!isZennpouitti">
+                <if test = "isZennpouitti">
                     AND
                     (dbT7060Kaigo."jigyoshaName" LIKE  #{jigyoshaName} || '%'
                     OR
                     dbT7060Kaigo."jigyoshaNameKana" LIKE   #{jigyoshaName} || '%')
+                </if>
+                <if test = "isBubunitti">
+                    AND
+                    (dbT7060Kaigo."jigyoshaName" LIKE '%' || #{jigyoshaName} || '%'
+                    OR
+                    dbT7060Kaigo."jigyoshaNameKana" LIKE '%' || #{jigyoshaName} || '%')
+                </if>
+                <if test = "isKouhouitti">
+                    AND
+                    (dbT7060Kaigo."jigyoshaName" LIKE  '%' || #{jigyoshaName}
+                    OR
+                    dbT7060Kaigo."jigyoshaNameKana" LIKE   '%' || #{jigyoshaName})
                 </if>
             </if>
             <if test = "isYubinNo">
@@ -127,13 +143,21 @@
                 dbT7060Kaigo."yubinNo"  = #{yubinNo}
             </if>
             <if test = "isAddress">
-                <if test = "isZennpouitti">
+                <if test = "isKanzenitti">
                     AND
                     dbT7060Kaigo."jigyoshaAddress"  = #{address}
                 </if>
-                <if test = "!isZennpouitti">
+                <if test = "isZennpouitti">
                     AND
                     dbT7060Kaigo."jigyoshaAddress" LIKE  #{address} || '%'
+                </if>
+                <if test = "isBubunitti">
+                    AND
+                    dbT7060Kaigo."jigyoshaAddress" LIKE '%' || #{address} || '%'
+                </if>
+                <if test = "isKouhouitti">
+                    AND
+                    dbT7060Kaigo."jigyoshaAddress" LIKE  '%' || #{address}
                 </if>
             </if>
             <if test = "isServiceShuRui">
@@ -167,6 +191,7 @@
         dbT1005Kaigo."jigyoshaJusho" AS "dbT1005Kaigo_jigyoshaJusho",
         dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
         dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo",
+        dbT1005Kaigo."yubinNo" AS "dbT1005Kaigo_yubinNo",
         row_number() OVER (PARTITION BY dbT1005Kaigo."jigyoshaNo"
         ORDER BY dbT1005Kaigo."jigyoshaNo" DESC,dbT1005Kaigo."yukoKaishiYMD" DESC) AS rank_number
         FROM
@@ -194,17 +219,29 @@
                 dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
             </if>
             <if test = "isJigyoshaName">
-                <if test = "isZennpouitti">
+                <if test = "isKanzenitti">
                     AND
                     (dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
                     OR
                     dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName})
                 </if>
-                <if test = "!isZennpouitti">
+                <if test = "isZennpouitti">
                     AND
                     (dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
                     OR
                     dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%')
+                </if>
+                <if test = "isBubunitti">
+                    AND
+                    (dbT1005Kaigo."jigyoshaMeisho" LIKE '%' || #{jigyoshaName} || '%'
+                    OR
+                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE '%' || #{jigyoshaName} || '%')
+                </if>
+                <if test = "isKouhouitti">
+                    AND
+                    (dbT1005Kaigo."jigyoshaMeisho" LIKE  '%' || #{jigyoshaName}
+                    OR
+                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   '%' || #{jigyoshaName})
                 </if>
             </if>
             <if test = "isYubinNo">
@@ -212,13 +249,21 @@
                 dbT1005Kaigo."yubinNo"  = #{yubinNo}
             </if>
             <if test = "isAddress">
-                <if test = "isZennpouitti">
+                <if test = "isKanzenitti">
                     AND
                     dbT1005Kaigo."jigyoshaJusho" = #{address}
                 </if>
-                <if test = "!isZennpouitti">
+                <if test = "isZennpouitti">
                     AND
                     dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
+                </if>
+                <if test = "isBubunitti">
+                    AND
+                    dbT1005Kaigo."jigyoshaJusho" LIKE '%' || #{address} || '%'
+                </if>
+                <if test = "isKouhouitti">
+                    AND
+                    dbT1005Kaigo."jigyoshaJusho" LIKE  '%' || #{address}
                 </if>
             </if>
         </if>) AS dbT1005Kaigo1
@@ -235,6 +280,7 @@
         dbT1005Kaigo."jigyoshaKanaMeisho" AS "dbT1005Kaigo_jigyoshaKanaMeisho",
         dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
         dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo",
+        dbT1005Kaigo."yubinNo" AS "dbT1005Kaigo_yubinNo",
         row_number() OVER (PARTITION BY dbT1005Kaigo."jigyoshaNo"
         ORDER BY dbT1005Kaigo."jigyoshaNo" DESC,dbT1005Kaigo."yukoKaishiYMD" DESC) AS rank_number
         FROM
@@ -270,17 +316,29 @@
                 dbT1005Kaigo."yukoKaishiYMD" <![CDATA[<=]]> #{yukoKaishiYMDTo}
             </if>
             <if test = "isJigyoshaName">
-                <if test = "isZennpouitti">
+                <if test = "isKanzenitti">
                     AND
                     (dbT1005Kaigo."jigyoshaMeisho" =  #{jigyoshaName}
                     OR
                     dbT1005Kaigo."jigyoshaKanaMeisho" =  #{jigyoshaName})
                 </if>
-                <if test = "!isZennpouitti">
+                <if test = "isZennpouitti">
                     AND
                     (dbT1005Kaigo."jigyoshaMeisho" LIKE  #{jigyoshaName} || '%'
                     OR
                     dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   #{jigyoshaName} || '%')
+                </if>
+                <if test = "isBubunitti">
+                    AND
+                    (dbT1005Kaigo."jigyoshaMeisho" LIKE '%' || #{jigyoshaName} || '%'
+                    OR
+                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE '%' || #{jigyoshaName} || '%')
+                </if>
+                <if test = "isKouhouitti">
+                    AND
+                    (dbT1005Kaigo."jigyoshaMeisho" LIKE  '%' || #{jigyoshaName}
+                    OR
+                    dbT1005Kaigo."jigyoshaKanaMeisho" LIKE   '%' || #{jigyoshaName})
                 </if>
             </if>
             <if test = "isYubinNo">
@@ -288,13 +346,21 @@
                 dbT1005Kaigo."yubinNo"  = #{yubinNo}
             </if>
             <if test = "isAddress">
+                <if test = "isKanzenitti">
+                    AND
+                    dbT1005Kaigo."jigyoshaJusho" = #{address}
+                </if>
                 <if test = "isZennpouitti">
                     AND
-                    dbT1005Kaigo."jigyoshaJusho"  = #{address}
-                </if>
-                <if test = "!isZennpouitti">
-                    AND
                     dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
+                </if>
+                <if test = "isBubunitti">
+                    AND
+                    dbT1005Kaigo."jigyoshaJusho" LIKE '%' || #{address} || '%'
+                </if>
+                <if test = "isKouhouitti">
+                    AND
+                    dbT1005Kaigo."jigyoshaJusho" LIKE  '%' || #{address}
                 </if>
             </if>
         </if>) AS dbT1005Kaigo1

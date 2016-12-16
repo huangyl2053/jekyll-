@@ -8,12 +8,12 @@ module DBE {
 
         export class Events {
 
-            public static onClick_KakuTeyi(): string {
-                return "onClick_KakuTeyi";
-            }
-
             public static onClick_ToriKesi(): string {
                 return "onClick_ToriKesi";
+            }
+
+            public static onClick_KakuTeyi(): string {
+                return "onClick_KakuTeyi";
             }
 
         }
@@ -53,12 +53,12 @@ module DBE {
                 return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
             }
 
-            public btnKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            }
-
             public btnCancel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            }
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

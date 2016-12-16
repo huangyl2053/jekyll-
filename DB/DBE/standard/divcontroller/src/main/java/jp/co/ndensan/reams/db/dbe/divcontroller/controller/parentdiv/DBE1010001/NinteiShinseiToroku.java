@@ -507,8 +507,8 @@ public class NinteiShinseiToroku {
         if (div.getTxtEnkiTsuchishoHakkoCount().getValue() != null) {
             shinseiJohoBuilder.set延期通知発行回数(div.getTxtEnkiTsuchishoHakkoCount().getValue().intValue());
         }
-        shinseiJohoBuilder.set延期見込期間開始年月日(rDateTOFlexDate(div.getTxtEnkiMikomiKikanFrom().getValue()));
-        shinseiJohoBuilder.set延期見込期間終了年月日(rDateTOFlexDate(div.getTxtEnkiMikomiKikanTo().getValue()));
+        shinseiJohoBuilder.set延期見込期間開始年月日(rDateTOFlexDate(div.getTxtEnkiMikomiKikan().getFromValue()));
+        shinseiJohoBuilder.set延期見込期間終了年月日(rDateTOFlexDate(div.getTxtEnkiMikomiKikan().getToValue()));
         shinseiJohoBuilder.set論理削除フラグ(false);
         return shinseiJohoBuilder;
     }

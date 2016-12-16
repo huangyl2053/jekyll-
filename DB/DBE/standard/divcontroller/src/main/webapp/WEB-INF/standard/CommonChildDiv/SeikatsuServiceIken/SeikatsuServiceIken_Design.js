@@ -40,12 +40,12 @@ var DBE;
                 return "onChange_radKansenshoUmu";
             };
 
-            Events.onClick_btnKakutei = function () {
-                return "onClick_btnKakutei";
-            };
-
             Events.onClick_btnCancel = function () {
                 return "onClick_btnCancel";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
             };
             return Events;
         })();
@@ -215,12 +215,12 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtKansenshoShosai"));
             };
 
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            };
-
             Controls.prototype.btnCancel = function () {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.chosatokkiimageshokai;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -26,8 +25,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -130,7 +129,6 @@ public class ChosaTokkiImageShokaiHandler {
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
         RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
-        RString ローカルファイル名 = new RString("IMG");
         RString 出力イメージフォルダパス = RString.EMPTY;
         if (イメージ情報 != null) {
             出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
@@ -166,10 +164,8 @@ public class ChosaTokkiImageShokaiHandler {
             前回認定調査特記事項番号 = 認定調査特記事項Entity.get認定調査特記事項番号();
             前回認定調査特記事項連番 = 認定調査特記事項Entity.get認定調査特記事項連番();
         }
-        if (RString.isNullOrEmpty(出力イメージフォルダパス)) {
-            imgGenponPathList.add(sanitizePath(path原本, 出力イメージフォルダパス));
-            imgMaskPathList.add(sanitizePath(pathマスク, 出力イメージフォルダパス));
-        }
+        imgGenponPathList.add(sanitizePath(path原本));
+        imgMaskPathList.add(sanitizePath(pathマスク));
 
         List<RString> tabTitleGenponList = getTitleList(imgGenponPathList);
         List<RString> tabTitleMaskList = getTitleList(imgMaskPathList);
@@ -177,16 +173,17 @@ public class ChosaTokkiImageShokaiHandler {
         div.getCcdChosaTokkiShiryoShokai().initialize(imgGenponPathList, imgMaskPathList, tabTitleGenponList, tabTitleMaskList);
     }
 
-    private RString sanitizePath(RString imagePath, RString 出力イメージフォルダパス) {
+    private RString sanitizePath(RString imagePath) {
         RString DATAURI_BMP = new RString("data:image/png;base64,");
-        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(出力イメージフォルダパス, imagePath)) : RString.EMPTY;
+        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(imagePath)) : RString.EMPTY;
     }
 
-    private RString base64encode(RString 出力イメージフォルダパス, RString イメージパス) {
+    private RString base64encode(RString イメージパス) {
         RString imgBase64 = RString.EMPTY;
         try {
-            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(Path.combinePath(出力イメージフォルダパス).toString(), イメージパス.toString())));
+            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージパス.toString())));
         } catch (IOException ex) {
+            throw new SystemException(ex);
         }
         return imgBase64;
     }
@@ -233,28 +230,7 @@ public class ChosaTokkiImageShokaiHandler {
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                         イメージ情報.getイメージ共有ファイルID());
-        deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
         return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
-    }
-
-    private void deleteIMGDirecotry(RString 出力イメージパス, RString ローカルファイル名) {
-        Directory.deleteIfExists(Path.combinePath(出力イメージパス, ローカルファイル名));
-    }
-
-    private RString 共有ファイルを引き出す(Image イメージ情報, RString ファイル名) {
-        RString imagePath = RString.EMPTY;
-        if (イメージ情報 != null) {
-            imagePath = getFilePath(イメージ情報.getイメージ共有ファイルID(), ファイル名);
-        }
-        return imagePath;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbz/WEB-INF/image/"));
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
-        RString filePath = SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
-        return getImageSrc(Path.combinePath(filePath, sharedFileName));
     }
 
     private RString replaceShareFileName(RString sharedFileName, boolean isExistマスク) {
@@ -262,10 +238,6 @@ public class ChosaTokkiImageShokaiHandler {
             return sharedFileName.replace(".png", "_BAK.png");
         }
         return sharedFileName;
-    }
-
-    private RString getImageSrc(RString path) {
-        return Path.combinePath(new RString(File.separator + "db"), new RString("dbz"), path.substring(path.indexOf("image")));
     }
 
     private List<RString> getTitleList(List<RString> 表示イメージ) {

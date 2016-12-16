@@ -82,7 +82,7 @@ public class IkenshoSakuseiJissekiShokai {
                 意見書記入日TO,
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
                 new RString(div.getTxtMaxKensu().getValue().toString()));
-        getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter).records());
+        getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter));
         getHandler(div).set一覧状態();
         return ResponseData.of(div).respond();
     }

@@ -62,6 +62,10 @@ public class IkenshoSakuseiJissekiShokaiFindler {
         for (IkenshoJissekiIchiranRelateEntity entity : entityList) {
             主治医意見書作成実績集計表List.add(new IkenshoJissekiIchiran(entity));
         }
-        return SearchResult.of(主治医意見書作成実績集計表List, 0, false);
+        int 件数 = mapper.getTotalCount(mapperParameter);
+        if (件数 <= mapperParameter.get件数()) {
+            return SearchResult.of(主治医意見書作成実績集計表List, 件数, false);
+        }
+        return SearchResult.of(主治医意見書作成実績集計表List, 件数, true);
     }
 }

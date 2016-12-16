@@ -6,20 +6,39 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper">
 
+    <resultMap id="resultMap_AtenaKikan"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.AtenaKikan" autoMapping="true">
+        <result property="宛名機関名" column="dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名郵便番号" column="dbT5910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="宛名住所" column="dbT5910NinteichosaItakusakiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="宛名氏名" column="dbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <resultMap id="resultMap_NinteiChosaTokusokujoRelateEntity"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokujoRelateEntity" autoMapping="true">
+        <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" />
+        <association property="認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity" />
+        <association property="認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity" />
+        <association property="宛名機関" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper.resultMap_AtenaKikan" />
+    </resultMap>
+
     <select resultOrdered="true" id="select要介護認定調査督促状ByKey"
-            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
+            resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper.resultMap_NinteiChosaTokusokujoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujyo.NinteiChosaTokusokujoMybatisParameter"
             fetchSize="500">
         SELECT
-        "DbT5101NinteiShinseiJoho".*
+        "DbT5101NinteiShinseiJoho".*,
+        "DbT5201NinteichosaIraiJoho".*,
+        "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho",
+        "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_yubinNo",
+        "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_jusho",
+        "DbT5913ChosainJoho"."dbT5913ChosainJoho_chosainShimei"
+
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS "DbT5101NinteiShinseiJoho"
 
         INNER JOIN (
             SELECT
-                DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
-                DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaKigenYMD",
-                DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD",
+                DbT5201.*,
                 ROW_NUMBER() OVER (PARTITION BY DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
                                                 DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo"
                                    ORDER BY DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" DESC) AS "rowNum"
@@ -54,6 +73,21 @@
         AND ("DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_centerSoshinYMD" IS NULL
              OR "DbT5105NinteiKanryoJoho"."dbT5105NinteiKanryoJoho_centerSoshinYMD" = '')
 
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS "DbT7051KoseiShichosonMaster"
+        ON "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shoKisaiHokenshaNo"
+
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.noDeleted_DbT5910NinteichosaItakusakiJoho" />) AS "DbT5910NinteichosaItakusakiJoho"
+        ON "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shichosonCode" = "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_shichosonCode"
+        AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" = "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode"
+
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.noDeleted_DbT5913ChosainJoho" />) AS "DbT5913ChosainJoho"
+        ON "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shichosonCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_shichosonCode"
+        AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_ninteiChosaItakusakiCode"
+        AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosainCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_ninteiChosainCode"
+
         <where>
             1 = 1
             <if test="temp_保険者コード!=null and !temp_保険者コード.isEmpty()">
@@ -76,13 +110,13 @@
     <!--  NinteiChosaTokusokuTaishoshaIchiranhyoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" autoMapping="true">
+        <id property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <id property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <id property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_市町村コード" column="temp_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="temp_市町村名称" column="temp_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
-        <result property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
-        <result property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_督促状発行日" column="temp_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -110,14 +144,14 @@
         DbT5910NinteichosaItakusakiJoho."telNo"  AS  temp_事業者電話番号
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT7051KoseiShichosonMaster"  AS  DbT7051KoseiShichosonMaster
         ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         AND DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" =  DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho
         ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
         AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
