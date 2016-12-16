@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001.DBE525001_Hantei
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 判定結果情報出力(介護認定審査会)バッチ処理クラスです。
@@ -28,17 +27,22 @@ public class DBE525001_HanteiKekkaShinsakai extends BatchFlowBase<DBE525001_Hant
     private static final String HANTEIKEKKA_KAGAMI_PROCESS = "hanteiKekkaIchiranKagamiProcess";
     private static final String GIJIROKUSHUTURYOKU_PROCESS = "gijirokuShuturyokuProcess";
     private static final String KEKKATSUCHI_PROCESS = "kekkatsuchiIchiranhyoProcess";
-    private static final RString 発行帳票_判定結果など = new RString("1");
-    private static final RString 発行帳票_結果通知 = new RString("2");
 
     @Override
     protected void defineFlow() {
-        if (発行帳票_判定結果など.equals(getParameter().getHakkouTyouhyou())) {
-            executeStep(HANTEIKEKKA_PROCESS);
+        if (getParameter().isPublish_HanteiKekkaA3()) {
             executeStep(HANTEIKEKKA_A3_PROCESS);
+        }
+        if (getParameter().isPublish_HanteiKekka()) {
+            executeStep(HANTEIKEKKA_PROCESS);
+        }
+        if (getParameter().isPublish_HanteiKekkaKagami()) {
             executeStep(HANTEIKEKKA_KAGAMI_PROCESS);
+        }
+        if (getParameter().isPublish_ShinsakaiGijiroku()) {
             executeStep(GIJIROKUSHUTURYOKU_PROCESS);
-        } else if (発行帳票_結果通知.equals(getParameter().getHakkouTyouhyou())) {
+        }
+        if (getParameter().isPublish_KekkaTsuchiIchiran()) {
             executeStep(KEKKATSUCHI_PROCESS);
         }
     }

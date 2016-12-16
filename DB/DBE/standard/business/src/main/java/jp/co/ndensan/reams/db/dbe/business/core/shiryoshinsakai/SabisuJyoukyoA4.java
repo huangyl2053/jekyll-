@@ -26,9 +26,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.image.BarImageType;
+import jp.co.ndensan.reams.uz.uza.image.EachBarImage;
+import jp.co.ndensan.reams.uz.uza.image.StackBarImage;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -46,6 +47,8 @@ public class SabisuJyoukyoA4 {
     private static final Code A_09 = new Code("09A");
     private static final Code B_09 = new Code("09B");
     private static final RString 記号 = new RString("+");
+    private static final int IMAGE_WIDTH = 512;
+    private static final int IMAGE_HEIGHT = 40;
 
     /**
      * 項目の設定する。
@@ -90,7 +93,7 @@ public class SabisuJyoukyoA4 {
                 entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(), entity.getKijunJikanKansetsuCare(),
                 entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
                 entity.getKijunJikanNinchishoKasan(), entity.getKijunJikan()));
-        set基準時間の積み上げグラフ(項目, entity, ファイルパス);
+        set基準時間の積み上げグラフ(項目, entity);
         項目.set要介護認定等基準時間_食事(new RString(entity.getKijunJikanShokuji()));
         項目.set要介護認定等基準時間_排泄(new RString(entity.getKijunJikanHaisetsu()));
         項目.set要介護認定等基準時間_移動(new RString(entity.getKijunJikanIdo()));
@@ -273,21 +276,36 @@ public class SabisuJyoukyoA4 {
         return RString.EMPTY;
     }
 
-    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity, RString ファイルパス) {
-        RDateTime 日期 = RDate.getNowDateTime();
-        RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
-                .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
-        StackedBarChart stackedBarChart = new StackedBarChart(entity.getKijunJikanShokuji(), entity.getKijunJikanHaisetsu(),
-                entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(),
-                entity.getKijunJikanKansetsuCare(), entity.getKijunJikanBPSDKanren(),
-                entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
-                entity.getKijunJikanNinchishoKasan(), 文件名, ファイルパス);
-        stackedBarChart.getTitle();
-        RString 文件 = new RString(文件名 + ".png");
+    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
+        List<EachBarImage> イメージリストA4 = new ArrayList();
+        if (0 < entity.getKijunJikanShokuji()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanShokuji(), BarImageType.PATTERN1));
+        }
+        if (0 < entity.getKijunJikanHaisetsu()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanHaisetsu(), BarImageType.PATTERN2));
+        }
+        if (0 < entity.getKijunJikanIdo()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanIdo(), BarImageType.PATTERN3));
+        }
+        if (0 < entity.getKijunJikanSeiketsuHoji()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanSeiketsuHoji(), BarImageType.PATTERN4));
+        }
+        if (0 < entity.getKijunJikanKansetsuCare()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanKansetsuCare(), BarImageType.PATTERN5));
+        }
+        if (0 < entity.getKijunJikanBPSDKanren()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanBPSDKanren(), BarImageType.PATTERN6));
+        }
+        if (0 < entity.getKijunJikanKinoKunren()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanKinoKunren(), BarImageType.PATTERN7));
+        }
+        if (0 < entity.getKijunJikanIryoKanren()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanIryoKanren(), BarImageType.PATTERN8));
+        }
+        if (0 < entity.getKijunJikanNinchishoKasan()) {
+            イメージリストA4.add(new EachBarImage(entity.getKijunJikanNinchishoKasan(), BarImageType.PATTERN9));
+        }
+        RString 文件 = new StackBarImage().createHorizontalBarImage(IMAGE_WIDTH, IMAGE_HEIGHT, イメージリストA4);
         項目.set基準時間の積み上げグラフ(文件);
-    }
-
-    private RString get文件名(int 日期) {
-        return new RString(日期);
     }
 }

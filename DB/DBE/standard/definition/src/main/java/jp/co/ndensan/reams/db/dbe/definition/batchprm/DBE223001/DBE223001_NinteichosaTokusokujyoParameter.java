@@ -94,7 +94,6 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
     public NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter toNinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter() {
         NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter param = new NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter();
         param.setTemp_保険者コード(this.temp_保険者コード);
-        param.setTemp_保険者名称(this.temp_保険者名称);
         param.setTemp_認定調査委託先コード(this.temp_認定調査委託先コード);
         param.setTemp_認定調査員コード(this.temp_認定調査員コード);
         param.setTemp_基準日(this.temp_基準日);

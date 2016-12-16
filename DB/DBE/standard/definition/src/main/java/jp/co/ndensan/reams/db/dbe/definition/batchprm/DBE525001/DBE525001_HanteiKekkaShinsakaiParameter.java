@@ -23,26 +23,42 @@ import lombok.Setter;
 @Setter
 public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase {
 
-    private static final String KEY_HAKKOUTYOUHYOU = "hakkouTyouhyou";
     private static final String KEY_KAISAIBANGOULIST = "kaisaiBangouList";
     private static final String KEY_KAISAIBANGOU = "kaisaiBangou";
+    private static final String ISPUBLISH_KEKKAICHIRAN_A3 = "isPublish_HanteiKekkaA3";
+    private static final String ISPUBLISH_KEKKAICHIRAN = "isPublish_HanteiKekka";
+    private static final String ISPUBLISH_KEKKAICHIRAN_KAGAMI = "isPublish_HanteiKekkaKagami";
+    private static final String ISPUBLISH_SHINSAKAIGIJIROKU = "isPublish_ShinsakaiGijiroku";
+    private static final String ISPUBLISH_KEKKATSUCHIICHIRAN = "isPublish_KekkaTsuchiIchiran";
 
-    @BatchParameter(key = KEY_HAKKOUTYOUHYOU, name = "発行帳票")
-    private RString hakkouTyouhyou;
     @BatchParameter(key = KEY_KAISAIBANGOULIST, name = "開催番号")
     private List<RString> kaisaiBangouList;
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
     private RString kaisaiBangou;
+    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN_A3, name = "要介護認定判定結果一覧表A3版")
+    private boolean isPublish_HanteiKekkaA3;
+    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN, name = "要介護認定判定結果一覧表")
+    private boolean isPublish_HanteiKekka;
+    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN_KAGAMI, name = "要介護認定審査判定結果_鑑")
+    private boolean isPublish_HanteiKekkaKagami;
+    @BatchParameter(key = ISPUBLISH_SHINSAKAIGIJIROKU, name = "要介護認定審査会議事録")
+    private boolean isPublish_ShinsakaiGijiroku;
+    @BatchParameter(key = ISPUBLISH_KEKKATSUCHIICHIRAN, name = "要介護認定結果通知一覧表")
+    private boolean isPublish_KekkaTsuchiIchiran;
 
     /**
-     * バーチのパラメータを作成します。
+     * バッチのパラメータを作成します。
      *
      * @return HanteiKekkaJohoShuturyokuProcessParameter
      */
     public HanteiKekkaJohoShuturyokuProcessParameter toHanteiKekkaJohoShuturyokuProcessParameter() {
         return new HanteiKekkaJohoShuturyokuProcessParameter(
-                hakkouTyouhyou,
                 kaisaiBangouList,
-                kaisaiBangou);
+                kaisaiBangou,
+                isPublish_HanteiKekkaA3,
+                isPublish_HanteiKekka,
+                isPublish_HanteiKekkaKagami,
+                isPublish_ShinsakaiGijiroku,
+                isPublish_KekkaTsuchiIchiran);
     }
 }

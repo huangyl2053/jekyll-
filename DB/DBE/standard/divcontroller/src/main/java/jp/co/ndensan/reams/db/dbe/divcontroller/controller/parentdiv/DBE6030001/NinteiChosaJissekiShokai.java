@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6030001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_ShinsakaiiinJissekiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_NinteichosaJissekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.DBE6030001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.NinteiChosaJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6030001.NinteiChosaJissekiShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6030001.NinteiChosaJissekiShokaiValidationHandler;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -84,10 +86,6 @@ public class NinteiChosaJissekiShokai {
                 new RString(div.getChosaJisshibi().getTxtMaxKensu().getValue().toString()));
         getHandler(div).set一覧状態();
         getHandler(div).onClick_btnKensaku(NinteiChosaJissekiShokaiFindler.creatInstance().get帳票出力用認定調査実績集計表(paramter));
-        if (div.getDgNinteiChosaJisseki().getDataSource().isEmpty()) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), false);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -99,6 +97,25 @@ public class NinteiChosaJissekiShokai {
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnBackToKensaku(NinteiChosaJissekiShokaiDiv div) {
         getHandler(div).set初期状態();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態遷移された時のイベントです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<NinteiChosaJissekiShokaiDiv>
+     */
+    public ResponseData<NinteiChosaJissekiShokaiDiv> onChange_State(NinteiChosaJissekiShokaiDiv div) {
+        if (ResponseHolder.getState().equals(DBE6030001StateName.一覧.getName())) {
+            if (div.getDgNinteiChosaJisseki().getDataSource().isEmpty()) {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), true);
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), true);
+            } else {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), false);
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -122,8 +139,8 @@ public class NinteiChosaJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
      */
-    public ResponseData<DBE601003_ShinsakaiiinJissekiParameter> onClick_BtnShutsutyoku(NinteiChosaJissekiShokaiDiv div) {
-        DBE601003_ShinsakaiiinJissekiParameter param = getHandler(div).createBatchParam(CSVを出力する);
+    public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnShutsutyoku(NinteiChosaJissekiShokaiDiv div) {
+        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(CSVを出力する);
         return ResponseData.of(param).respond();
     }
 
@@ -133,8 +150,8 @@ public class NinteiChosaJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
      */
-    public ResponseData<DBE601003_ShinsakaiiinJissekiParameter> onClick_BtnPulish(NinteiChosaJissekiShokaiDiv div) {
-        DBE601003_ShinsakaiiinJissekiParameter param = getHandler(div).createBatchParam(集計表を発行する);
+    public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnPulish(NinteiChosaJissekiShokaiDiv div) {
+        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(集計表を発行する);
         return ResponseData.of(param).respond();
     }
 
