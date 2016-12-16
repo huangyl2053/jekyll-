@@ -345,10 +345,10 @@
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" C
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" C
         ON A."shoKisaiHokenshaNo" =  C."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
-        AND A."torisageKubunCode" IN ('1', '4')
+        AND A."torisageKubunCode" IN ('1', '2', '4')
         AND A."hihokenshaKubunCode" IN ('1', '2')
         AND B."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         <if test="!isEmptyHokensyaNo">
