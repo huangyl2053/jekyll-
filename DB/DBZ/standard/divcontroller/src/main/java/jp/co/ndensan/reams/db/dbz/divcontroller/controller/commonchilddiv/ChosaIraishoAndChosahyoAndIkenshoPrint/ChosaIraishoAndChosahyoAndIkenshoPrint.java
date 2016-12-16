@@ -200,7 +200,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private void updateData(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
-            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
             for (dgNinteiChosa_Row row : selectedItems) {
                 update認定調査依頼情報(div, row);

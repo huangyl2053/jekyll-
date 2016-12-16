@@ -6,10 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2010001;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiChosainBusiness;
@@ -20,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiItiranCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.ChosaInputCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001.NinteichosaIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001.NinteichosaIraiValidationHandler;
@@ -50,7 +48,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -114,6 +111,7 @@ public class NinteichosaIrai {
     private static final RString CSVフォルダ名 = new RString("ChosaKekkaNyuryokuMobile");
     private static final RString 書庫化ファイル名 = new RString("ChosaKekkaNyuryokuMobile.zip");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString 全て = new RString("3");
     private static final LockingKey 前排他ロックキー = new LockingKey("ShinseishoKanriNo");
 
     /**
@@ -128,6 +126,17 @@ public class NinteichosaIrai {
             throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
         }
         getHandler(requestDiv).onLoad();
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
+     * 再表示処理です。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onActive(NinteichosaIraiDiv requestDiv) {
+        getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -158,7 +167,7 @@ public class NinteichosaIrai {
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
                                                        = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
             setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
-            List<dgNinteiTaskList_Row> dataList = requestDiv.getCcdTaskList().getCheckbox();
+            List<dgNinteiTaskList_Row> dataList = requestDiv.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                                                                      row.getShinseishoKanriNo()));
@@ -250,7 +259,7 @@ public class NinteichosaIrai {
         Directory.deleteIfExists(filePath);
         Directory.createDirectories(filePath);
 
-        for (dgNinteiTaskList_Row row : requestDiv.getCcdTaskList().getCheckbox()) {
+        for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
             SearchResult<NinteichosaIraiBusiness> 調査入力用データ = NinteichosaIraiManager.createInstance().select調査結果入力用データ(
                 row.getShinseishoKanriNo());
             PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
@@ -368,7 +377,7 @@ public class NinteichosaIrai {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo());
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo());
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
         }
@@ -386,7 +395,7 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
-        List<dgNinteiTaskList_Row> rowList = requestDiv.getCcdTaskList().getCheckbox();
+        List<dgNinteiTaskList_Row> rowList = requestDiv.getDgNinteiTaskList().getSelectedItems();
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
         List<ShinseishoKanriNo> list = new ArrayList<>();
         for (dgNinteiTaskList_Row row : rowList) {
@@ -408,6 +417,7 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onOkClose_btnIraishoToOutput(NinteichosaIraiDiv requestDiv) {
+        getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -434,7 +444,7 @@ public class NinteichosaIrai {
                 requestDiv.setReadOnly(true);
                 throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
             }
-            要介護認定完了情報更新(requestDiv.getCcdTaskList().getCheckbox());
+            要介護認定完了情報更新(requestDiv.getDgNinteiTaskList().getSelectedItems());
             RealInitialLocker.release(前排他ロックキー);
             requestDiv.getCcdKanryoMsg().setMessage(
                 new RString("完了処理・認定調査依頼の保存処理が完了しました。"),
@@ -981,27 +991,20 @@ public class NinteichosaIrai {
     }
 
     private ValidationMessageControlPair 自動割付可能チェック(NinteichosaIraiDiv requestDiv) {
-        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getCcdTaskList().getCheckbox();
+        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getDgNinteiTaskList().getSelectedItems();
         if (選択されたデータ != null && !選択されたデータ.isEmpty()) {
             ValidationMessageControlPair validationMessage;
-            Map<RString, RString> shokisaiHokenNoList = new HashMap<>();
             for (dgNinteiTaskList_Row row : 選択されたデータ) {
-                RString shokisaiHokenNo = get証記載保険番号(row.getShinseishoKanriNo());
-                if (!shokisaiHokenNo.isEmpty() && !shokisaiHokenNoList.containsKey(shokisaiHokenNo)) {
-                    shokisaiHokenNoList.put(shokisaiHokenNo, row.getChikuCode());
-                }
-            }
-            for (Entry<RString, RString> shokisaiHokenNo : shokisaiHokenNoList.entrySet()) {
-                int 認定調査委託先情報件数 = NinteichosaIraiManager.createInstance().select認定調査委託先情報(shokisaiHokenNo.getKey());
+                int 認定調査委託先情報件数 = NinteichosaIraiManager.createInstance().select認定調査委託先情報(row.getGetShoKisaiHokenshaNo());
                 validationMessage = getValidationHandler(requestDiv).認定調査委託先情報件数チェック(
                     認定調査委託先情報件数);
                 if (validationMessage != null) {
                     return validationMessage;
                 }
             }
-            for (Entry<RString, RString> shokisaiHokenNo : shokisaiHokenNoList.entrySet()) {
-                int 調査可能人数 = NinteichosaIraiManager.createInstance().select調査可能人数(shokisaiHokenNo.getKey(), shokisaiHokenNo.getValue());
-                int 割付済人数 = NinteichosaIraiManager.createInstance().select割付済人数(shokisaiHokenNo.getKey(), shokisaiHokenNo.getValue());
+            for (dgNinteiTaskList_Row row : 選択されたデータ) {
+                int 調査可能人数 = NinteichosaIraiManager.createInstance().select調査可能人数(row.getGetShoKisaiHokenshaNo(), row.getChikuCode());
+                int 割付済人数 = NinteichosaIraiManager.createInstance().select割付済人数(row.getGetShoKisaiHokenshaNo(), row.getChikuCode());
                 validationMessage = getValidationHandler(requestDiv).割付申請者人数チェック(調査可能人数, 割付済人数);
                 if (validationMessage != null) {
                     return validationMessage;
@@ -1011,17 +1014,8 @@ public class NinteichosaIrai {
         return null;
     }
 
-    private RString get証記載保険番号(RString 申請書管理番号) {
-        SearchResult<NinteichosaIraiBusiness> result = NinteichosaIraiManager.createInstance().select調査結果入力用データ(申請書管理番号);
-        if (result.records().isEmpty()) {
-            return RString.EMPTY;
-        }
-        RString no = result.records().get(0).get証記載保険者番号();
-        return no == null ? 申請書管理番号 : no;
-    }
-
     private int 調査機関自動割付処理(NinteichosaIraiDiv requestDiv) {
-        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getCcdTaskList().getCheckbox();
+        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getDgNinteiTaskList().getSelectedItems();
         int tmp要割付人数 = 選択されたデータ.size();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
             tmp要割付人数 = NinteichosaIraiManager.createInstance().調査機関自動割付処理(row.getHihoNumber(), row.getChikuCode(),
@@ -1031,7 +1025,7 @@ public class NinteichosaIrai {
     }
 
     private List<ShinseishoKanriNo> get申請書管理番号リスト(NinteichosaIraiDiv requestDiv) {
-        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getCcdTaskList().getCheckbox();
+        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getDgNinteiTaskList().getSelectedItems();
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
             申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));

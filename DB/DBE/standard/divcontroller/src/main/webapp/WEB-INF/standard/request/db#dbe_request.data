@@ -620,6 +620,7 @@ dbe/db/dbe/NinteiShinseiToroku/onLoad
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnJogaiShinsakaiIinGuide
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnRenrakusaki
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnShichosonRenrakuJiko
+dbe/db/dbe/NinteichosaIrai/onActive
 dbe/db/dbe/NinteichosaIrai/onBefore_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnDataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnTaOutput
@@ -691,7 +692,8 @@ dbe/db/dbe/NinteishinsaKekkaOutput/onClick_btnDataSakusei
 dbe/db/dbe/NinteishinsaKekkaOutput/onClick_btnHyoji
 dbe/db/dbe/NinteishinsaKekkaOutput/onLoad
 dbe/db/dbe/Ninteishinseibi/btn_save
-dbe/db/dbe/Ninteishinseibi/btn_toRiKoMi
+dbe/db/dbe/Ninteishinseibi/onAfterUploaded_btnImport
+dbe/db/dbe/Ninteishinseibi/onClick_btnUpload
 dbe/db/dbe/Ninteishinseibi/onLoad
 dbe/db/dbe/NinteitsuchishoKobetsuHakko/onClick_btnToSearch
 dbe/db/dbe/NinteitsuchishoKobetsuHakko/onLoad
