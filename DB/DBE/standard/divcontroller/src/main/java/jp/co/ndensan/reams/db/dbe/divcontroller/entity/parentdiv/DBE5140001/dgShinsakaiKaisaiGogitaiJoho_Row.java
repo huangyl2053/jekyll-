@@ -3,12 +3,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Sep 08 15:06:50 JST 2016 
+ * Thu Dec 15 15:43:52 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -19,9 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
-    private RString number;
+    private TextBoxNum number;
     private RString gogitaiMeisho;
     private RString shurui;
     private RString shinsakaiIin1;
@@ -37,7 +38,7 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
 
     public dgShinsakaiKaisaiGogitaiJoho_Row() {
         super();
-        this.number = RString.EMPTY;
+        this.number = new TextBoxNum();
         this.gogitaiMeisho = RString.EMPTY;
         this.shurui = RString.EMPTY;
         this.shinsakaiIin1 = RString.EMPTY;
@@ -65,7 +66,7 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.setOriginalData("shinsakaiIin10", shinsakaiIin10);
     }
 
-    public dgShinsakaiKaisaiGogitaiJoho_Row(RString number, RString gogitaiMeisho, RString shurui, RString shinsakaiIin1, RString shinsakaiIin2, RString shinsakaiIin3, RString shinsakaiIin4, RString shinsakaiIin5, RString shinsakaiIin6, RString shinsakaiIin7, RString shinsakaiIin8, RString shinsakaiIin9, RString shinsakaiIin10) {
+    public dgShinsakaiKaisaiGogitaiJoho_Row(TextBoxNum number, RString gogitaiMeisho, RString shurui, RString shinsakaiIin1, RString shinsakaiIin2, RString shinsakaiIin3, RString shinsakaiIin4, RString shinsakaiIin5, RString shinsakaiIin6, RString shinsakaiIin7, RString shinsakaiIin8, RString shinsakaiIin9, RString shinsakaiIin10) {
         super();
         this.setOriginalData("number", number);
         this.setOriginalData("gogitaiMeisho", gogitaiMeisho);
@@ -95,7 +96,7 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.shinsakaiIin10 = shinsakaiIin10;
     }
 
-    public RString getNumber() {
+    public TextBoxNum getNumber() {
         return number;
     }
 
@@ -147,7 +148,7 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         return shinsakaiIin10;
     }
 
-    public void setNumber(RString number) {
+    public void setNumber(TextBoxNum number) {
         this.setOriginalData("number", number);
         this.number = number;
     }
