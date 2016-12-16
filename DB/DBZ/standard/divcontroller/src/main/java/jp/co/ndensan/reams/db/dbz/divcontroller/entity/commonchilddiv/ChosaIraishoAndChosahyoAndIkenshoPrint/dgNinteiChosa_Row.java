@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIrai
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Nov 08 20:37:08 JST 2016 
+ * Fri Dec 16 16:16:23 JST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiChosa_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
 
     private RString no;
     private RString hihokenshaBango;
@@ -32,6 +32,7 @@ public class dgNinteiChosa_Row extends DataRow {
     private RString chosaInShimei;
     private RString shinseishoKanriNo;
     private RString rirekiNo;
+    private RString sortNo;
 
     public dgNinteiChosa_Row() {
         super();
@@ -46,6 +47,7 @@ public class dgNinteiChosa_Row extends DataRow {
         this.chosaInShimei = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
+        this.sortNo = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
         this.setOriginalData("hihokenshaShimei", hihokenshaShimei);
@@ -57,9 +59,10 @@ public class dgNinteiChosa_Row extends DataRow {
         this.setOriginalData("chosaInShimei", chosaInShimei);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("sortNo", sortNo);
     }
 
-    public dgNinteiChosa_Row(RString no, RString hihokenshaBango, RString hihokenshaShimei, RString seibetsu, RString ninteiShinseibi, RString chosaItakusakiCode, RString chosaItakusakiMeisho, RString chosaInCode, RString chosaInShimei, RString shinseishoKanriNo, RString rirekiNo) {
+    public dgNinteiChosa_Row(RString no, RString hihokenshaBango, RString hihokenshaShimei, RString seibetsu, RString ninteiShinseibi, RString chosaItakusakiCode, RString chosaItakusakiMeisho, RString chosaInCode, RString chosaInShimei, RString shinseishoKanriNo, RString rirekiNo, RString sortNo) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
@@ -72,6 +75,7 @@ public class dgNinteiChosa_Row extends DataRow {
         this.setOriginalData("chosaInShimei", chosaInShimei);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("sortNo", sortNo);
         this.no = no;
         this.hihokenshaBango = hihokenshaBango;
         this.hihokenshaShimei = hihokenshaShimei;
@@ -83,6 +87,7 @@ public class dgNinteiChosa_Row extends DataRow {
         this.chosaInShimei = chosaInShimei;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.rirekiNo = rirekiNo;
+        this.sortNo = sortNo;
     }
 
     public RString getNo() {
@@ -127,6 +132,10 @@ public class dgNinteiChosa_Row extends DataRow {
 
     public RString getRirekiNo() {
         return rirekiNo;
+    }
+
+    public RString getSortNo() {
+        return sortNo;
     }
 
     public void setNo(RString no) {
@@ -182,6 +191,11 @@ public class dgNinteiChosa_Row extends DataRow {
     public void setRirekiNo(RString rirekiNo) {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.rirekiNo = rirekiNo;
+    }
+
+    public void setSortNo(RString sortNo) {
+        this.setOriginalData("sortNo", sortNo);
+        this.sortNo = sortNo;
     }
 
     // </editor-fold>
