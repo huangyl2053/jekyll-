@@ -318,11 +318,11 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         List<TokkiTextEntity> 全イメージリスト = new ArrayList<>();
         RString 共有ファイル名 = ninteiEntity.get保険者番号().concat(ninteiEntity.get被保険者番号());
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
-        共有ファイルを引き出す(イメージID, 共有ファイル名);
-        ninteiEntity.set概況調査特記事項イメージ(getImageFile_C0007());
+        RString path = 共有ファイルを引き出す(イメージID, 共有ファイル名);
+        ninteiEntity.set概況調査特記事項イメージ(getImageFile_C0007(path));
         if (全イメージ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             for (int i = 1; i <= 最大ページ; i++) {
-                set特記事項全イメージパス(entity, i, 全イメージリスト);
+                set特記事項全イメージパス(path, entity, i, 全イメージリスト);
             }
         } else if (短冊.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             for (int i = 0; i < entity.size(); i++) {
@@ -333,8 +333,9 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
                     tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
                     tokki.set特記事項連番(entity.get(i).get特記事項連番());
                     RString fileName = get共有ファイル(entity.get(i).get特記事項番号(), entity.get(i).get特記事項連番(), ninteiEntity);
-                    if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
-                        tokki.set特記事項イメージ(fileName);
+                    RString fileFullPath = getFilePath(path, fileName);
+                    if (!RString.isNullOrEmpty(fileFullPath)) {
+                        tokki.set特記事項イメージ(fileFullPath);
                     } else {
                         tokki.set特記事項イメージ(RString.EMPTY);
                     }
@@ -349,10 +350,10 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         return ninteiEntity;
     }
 
-    private void set特記事項全イメージパス(List<NinteichosaRelateEntity> entity, int i, List<TokkiTextEntity> 全イメージリスト) {
+    private void set特記事項全イメージパス(RString path, List<NinteichosaRelateEntity> entity, int i, List<TokkiTextEntity> 全イメージリスト) {
         if (!entity.isEmpty() && TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get(0).get特記事項区分())) {
             TokkiTextEntity tokki = new TokkiTextEntity();
-            RString fileName = getImageFile_C410X(i);
+            RString fileName = getImageFile_C410X(path, i);
             if (!RString.isNullOrEmpty(fileName)) {
                 tokki.set特記事項イメージ(fileName);
                 全イメージリスト.add(tokki);
@@ -993,26 +994,29 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private void 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
         if (イメージID != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名), イメージID);
             try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+                return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath())).getCanonicalPath());
             } catch (Exception e) {
+                return RString.EMPTY;
             }
-        }
-    }
-
-    private RString getImageFile_C0007() {
-        RString fileName = フラグ.equals(processPrm.getRadTokkiJikoMasking()) ? C0007_FILENAME : C0007_FILENAME_BAK;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
-            return fileName;
         }
         return RString.EMPTY;
     }
 
-    private RString getImageFile_C410X(int i) {
+    private RString getImageFile_C0007(RString path) {
+        RString fileName = フラグ.equals(processPrm.getRadTokkiJikoMasking()) ? C0007_FILENAME : C0007_FILENAME_BAK;
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getImageFile_C410X(RString path, int i) {
         RStringBuilder imageFileName = new RStringBuilder();
         if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
             imageFileName.append(FILENAME);
@@ -1024,8 +1028,9 @@ public class ChkTokkiJiko31Process extends BatchProcessBase<YokaigoninteiEntity>
             imageFileName.append(BAK);
             imageFileName.append(拡張子_PNG);
         }
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), imageFileName.toRString()))) {
-            return imageFileName.toRString();
+        RString fileFullPath = getFilePath(path, imageFileName.toRString());
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }

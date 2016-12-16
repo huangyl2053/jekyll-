@@ -307,7 +307,7 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
     private boolean isAru(TextBox kaisaiGogitai, List<dgShinsakaiKaisaiGogitaiJoho_Row> dgGogitaiRowList) {
         if (!kaisaiGogitai.isDisabled() && !kaisaiGogitai.getValue().isEmpty()) {
             for (dgShinsakaiKaisaiGogitaiJoho_Row dgGogitaiRow : dgGogitaiRowList) {
-                if (kaisaiGogitai.getValue().equals(dgGogitaiRow.getNumber())) {
+                if (kaisaiGogitai.getValue().equals(dgGogitaiRow.getNumber().getText())) {
                     return true;
                 }
             }

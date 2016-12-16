@@ -8,13 +8,14 @@
 
     <resultMap id="resultMap_AtenaKikan"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.AtenaKikan" autoMapping="true">
-        <result property="宛名機関名" column="dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="宛名機関名" column="dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="宛名郵便番号" column="dbT5910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="宛名住所" column="dbT5910NinteichosaItakusakiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="宛名調査員氏名" column="dbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="宛名氏名" column="dbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <resultMap id="resultMap_NinteiChosaTokusokujoRelateEntity"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokujoRelateEntity" autoMapping="true">
+        <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" />
         <association property="認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity" />
         <association property="認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity" />
         <association property="宛名機関" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo.INinteichosaTokusokujyoRelateMapper.resultMap_AtenaKikan" />
@@ -26,6 +27,7 @@
             fetchSize="500">
         SELECT
         "DbT5101NinteiShinseiJoho".*,
+        "DbT5201NinteichosaIraiJoho".*,
         "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho",
         "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_yubinNo",
         "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_jusho",
@@ -108,13 +110,13 @@
     <!--  NinteiChosaTokusokuTaishoshaIchiranhyoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" autoMapping="true">
+        <id property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <id property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <id property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_市町村コード" column="temp_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="temp_市町村名称" column="temp_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
-        <result property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
-        <result property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_督促状発行日" column="temp_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -142,14 +144,14 @@
         DbT5910NinteichosaItakusakiJoho."telNo"  AS  temp_事業者電話番号
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT7051KoseiShichosonMaster"  AS  DbT7051KoseiShichosonMaster
         ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         AND DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" =  DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho
         ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
         AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"

@@ -116,7 +116,6 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoSakuseiIraiShokai(KojinJokyoShokaiDiv div) {
-        div.setHihokenshano(div.getHihokenshano());
         return ResponseData.of(div).respond();
     }
 
@@ -127,7 +126,6 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(div.getHihokenshano()));
         return ResponseData.of(div).respond();
     }
     
