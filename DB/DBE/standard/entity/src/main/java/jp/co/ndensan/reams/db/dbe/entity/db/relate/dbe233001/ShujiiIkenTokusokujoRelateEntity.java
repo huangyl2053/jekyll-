@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -29,7 +30,9 @@ public class ShujiiIkenTokusokujoRelateEntity {
     private YubinNo temp_事業者郵便番号;
     private RString temp_市町村名称;
     private RString temp_事業者名称;
+    private RString temp_事業者住所;
     private RString temp_主治医氏名;
+    private RString temp_診療科名称;
     private RString temp_保険者番号;
     private RString temp_被保険者番号;
     private AtenaKanaMeisho temp_被保険者氏名カナ;
@@ -42,4 +45,12 @@ public class ShujiiIkenTokusokujoRelateEntity {
     private ShinseishoKanriNo temp_申請書管理番号;
     private Code temp_申請区分コード;
     private RString temp_処理名;
+    private DbT5301ShujiiIkenshoIraiJohoEntity 主治医意見書依頼情報;
+
+    /**
+     * デフォルトコンストラクタです。
+     */
+    public ShujiiIkenTokusokujoRelateEntity() {
+        主治医意見書依頼情報 = new DbT5301ShujiiIkenshoIraiJohoEntity();
+    }
 }
