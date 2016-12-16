@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujyo.N
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujyo.NinteiChosaTokusokujoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.AtenaKikan;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,15 +25,17 @@ public interface INinteichosaTokusokujyoRelateMapper {
      * 要介護認定調査督促状パラメータを取得します。
      *
      * @param parameter 検索条件
-     * @return 要介護認定申請情報テーブルのエンティティのリスト 検索結果の{@link DbT5101NinteiShinseiJohoEntity}
+     * @return 要介護認定申請情報テーブルのエンティティのリスト
+     * 検索結果の{@link NinteiChosaTokusokujoRelateEntity}
      */
-    List<DbT5101NinteiShinseiJohoEntity> select要介護認定調査督促状ByKey(NinteiChosaTokusokujoMybatisParameter parameter);
+    List<NinteiChosaTokusokujoRelateEntity> select要介護認定調査督促状ByKey(NinteiChosaTokusokujoMybatisParameter parameter);
 
     /**
      * 認定調査督促対象者一覧表パラメータを取得します。
      *
      * @param parameter 検索条件
-     * @return NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity 検索結果の{@link NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity}
+     * @return NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity
+     * 検索結果の{@link NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity}
      */
     List<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity>
             select認定調査督促対象者一覧表ByKey(NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter parameter);
@@ -42,7 +44,8 @@ public interface INinteichosaTokusokujyoRelateMapper {
      * 市町村コードを取得します。
      *
      * @param 保険者コード 保険者コード
-     * @return DbT7051KoseiShichosonMasterEntity 検索結果の{@link DbT7051KoseiShichosonMasterEntity}
+     * @return DbT7051KoseiShichosonMasterEntity
+     * 検索結果の{@link DbT7051KoseiShichosonMasterEntity}
      */
     DbT7051KoseiShichosonMasterEntity select市町村コード(RString 保険者コード);
 

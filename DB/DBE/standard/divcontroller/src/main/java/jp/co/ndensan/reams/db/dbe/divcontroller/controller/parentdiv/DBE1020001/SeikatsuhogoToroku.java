@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -95,7 +96,20 @@ public class SeikatsuhogoToroku {
         div.getDdlShisho().setDataSource(sourceList);
         return ResponseData.of(div).respond();
     }
-
+    
+    /**
+     * 選択されている住所に該当する郵便番号をセットします。
+     *
+     * @param div みなし2号登録Div
+     * @return ResponseData<SeikatsuhogoTorokuDiv>
+     */
+    public ResponseData<SeikatsuhogoTorokuDiv> onOkClose_txtZenkokuJushoCode(SeikatsuhogoTorokuDiv div) {
+        if (!div.getCcdZenkokuJushoInput().get郵便番号().isEmpty()) {
+            div.getTxtYubinNo().setValue(div.getCcdZenkokuJushoInput().get郵便番号());
+        }
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * みなし２号被保険者番号を採番する　ボタン、自動採番を行う
      *

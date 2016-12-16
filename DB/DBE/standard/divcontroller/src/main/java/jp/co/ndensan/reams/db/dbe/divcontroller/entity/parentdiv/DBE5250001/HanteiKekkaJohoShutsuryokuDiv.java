@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HanteiKekkaJohoShutsuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,6 +24,8 @@ public class HanteiKekkaJohoShutsuryokuDiv extends Panel {
      */
     @JsonProperty("ccdIShinsakaiIchiranList")
     private YokaigoNinteiShinsakaiIchiranListDiv ccdIShinsakaiIchiranList;
+    @JsonProperty("SelectShutsuryokuChohyo")
+    private SelectShutsuryokuChohyoDiv SelectShutsuryokuChohyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,6 +40,24 @@ public class HanteiKekkaJohoShutsuryokuDiv extends Panel {
     @JsonProperty("ccdIShinsakaiIchiranList")
     public IYokaigoNinteiShinsakaiIchiranListDiv getCcdIShinsakaiIchiranList() {
         return ccdIShinsakaiIchiranList;
+    }
+
+    /*
+     * getSelectShutsuryokuChohyo
+     * @return SelectShutsuryokuChohyo
+     */
+    @JsonProperty("SelectShutsuryokuChohyo")
+    public SelectShutsuryokuChohyoDiv getSelectShutsuryokuChohyo() {
+        return SelectShutsuryokuChohyo;
+    }
+
+    /*
+     * setSelectShutsuryokuChohyo
+     * @param SelectShutsuryokuChohyo SelectShutsuryokuChohyo
+     */
+    @JsonProperty("SelectShutsuryokuChohyo")
+    public void setSelectShutsuryokuChohyo(SelectShutsuryokuChohyoDiv SelectShutsuryokuChohyo) {
+        this.SelectShutsuryokuChohyo = SelectShutsuryokuChohyo;
     }
 
     // </editor-fold>

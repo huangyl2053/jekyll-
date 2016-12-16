@@ -52,8 +52,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class NinteiChosaIraiShudouHandler {
 
-    private static final RString CONFIGVALUE1 = new RString("1");
-    private static final RString KEY0 = new RString("key0");
+    private static final RString 未選択 = new RString("0");
+    private static final RString 選択 = new RString("1");
     private static final RString 元号_明治 = new RString("明治");
     private static final RString 元号_大正 = new RString("大正");
     private static final RString 元号_昭和 = new RString("昭和");
@@ -90,6 +90,8 @@ public class NinteiChosaIraiShudouHandler {
     private static final RString DDL_KEY0 = new RString("key0");
     private static final RString DDL_KEY1 = new RString("key1");
     private static final RString DDL_KEY2 = new RString("key2");
+    private static final RString デザインシートOCR = new RString("1");
+    private static final RString 白紙カラープリンター = new RString("2");
 
     /**
      * コンストラクタです。
@@ -125,53 +127,79 @@ public class NinteiChosaIraiShudouHandler {
             }
             div.getTxtHokkoymd().setValue(RDate.getNowDate());
             div.getTxtKigenymd().setValue(RDate.getNowDate());
-            setCheckBoxValue();
+            setCheckBoxValue(認定調査依頼.get市町村コード());
         }
     }
 
-    private void setCheckBoxValue() {
-        RDate date = RDate.getNowDate();
+    private void setCheckBoxValue(RString 市町村コード) {
 
+        RString 用紙タイプ = getConfigValue(ConfigNameDBE.認定調査票_概況調査_用紙タイプ,市町村コード);
+        
+        RString 認定調査依頼書 = 未選択;
+        RString 認定調査票 = 未選択;
+        RString 認定調査票_特記事項 = 未選択;
+        RString 認定調査票OCR = 未選択;
+        RString 認定調査票OCR_特記事項 = 未選択;
+        RString 認定調査票_特記事項_項目有り = 未選択;
+        RString 認定調査票_特記事項_項目無し = 未選択;
+        RString 認定調査票_特記事項_フリー様式 = 未選択;
+        RString 認定調査票差異チェック票 = 未選択;
+        RString 調査特記_概況特記 = 未選択;
+        RString 認定調査依頼該当者履歴一覧 = 未選択;
+
+        if(デザインシートOCR.equals(用紙タイプ)){
+            認定調査票 = 選択;
+            認定調査票_特記事項 = 選択;
+        }
+        if(白紙カラープリンター.equals(用紙タイプ)){
+            認定調査票OCR = 選択;
+            認定調査票OCR_特記事項 = 選択;
+        }
+    
         List<RString> selectedItemList = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査依頼書)) {
             selectedItemList.add(DDL_KEY0);
         }
         div.getChkIrai().setSelectedItemsByKey(selectedItemList);
+        
         selectedItemList = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票)) {
             selectedItemList.add(DDL_KEY0);
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票_特記事項)) {
             selectedItemList.add(DDL_KEY1);
         }
         div.getChkNinteichosaDesign().setSelectedItemsByKey(selectedItemList);
+        
         selectedItemList = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票OCR)) {
             selectedItemList.add(DDL_KEY0);
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票OCR_特記事項)) {
             selectedItemList.add(DDL_KEY1);
         }
         div.getChkNinteichosaOcr().setSelectedItemsByKey(selectedItemList);
+        
         selectedItemList = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票_特記事項_項目有り)) {
             selectedItemList.add(DDL_KEY0);
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票_特記事項_項目無し)) {
             selectedItemList.add(DDL_KEY1);
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票_特記事項_フリー様式)) {
             selectedItemList.add(DDL_KEY2);
         }
         div.getChkTokkiJko().setSelectedItemsByKey(selectedItemList);
+        
         selectedItemList = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査票差異チェック票)) {
             selectedItemList.add(DDL_KEY0);
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(調査特記_概況特記)) {
             selectedItemList.add(DDL_KEY1);
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼該当者履歴一覧, date, SubGyomuCode.DBE認定支援))) {
+        if (選択.equals(認定調査依頼該当者履歴一覧)) {
             selectedItemList.add(DDL_KEY2);
         }
         div.getChkSaiCheck().setSelectedItemsByKey(selectedItemList);
@@ -973,5 +1001,8 @@ public class NinteiChosaIraiShudouHandler {
             要介護詳細 = 文字列5;
         }
         return 要介護詳細;
+    }
+    private RString getConfigValue(ConfigNameDBE config,RString 市町村コード) {
+        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援,市町村コード);
     }
 }

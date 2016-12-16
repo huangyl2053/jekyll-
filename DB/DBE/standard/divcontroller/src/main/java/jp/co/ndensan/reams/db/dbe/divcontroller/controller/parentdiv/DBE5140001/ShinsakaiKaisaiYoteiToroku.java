@@ -49,10 +49,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.entities.UzV0002HolidayListEntity;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -563,7 +565,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 }
             }
             div.getCcdKanryoMessege().setMessage(new RString(
-                    UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+                    UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE5140001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -597,6 +599,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         div.getTxtSeteibi().setValue(null);
         div.getBtnDayBefore().setDisabled(true);
         div.getBtnDayAfter().setDisabled(true);
+        div.getBtnClear().setDisabled(true);
+        div.getBtnToroku().setDisabled(true);
         List<dgKaisaiYoteiNyuryokuran_Row> rowList = div.getDgKaisaiYoteiNyuryokuran().getDataSource();
         for (dgKaisaiYoteiNyuryokuran_Row row : rowList) {
             row.getKaisaiGogitai1().setValue(RString.EMPTY);
@@ -642,7 +646,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             yoteiJohoEntityList2.addAll(shinkiList);
         }
     }
-    
+
     private boolean isKoshin(List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuranRowList) {
         for (dgKaisaiYoteiNyuryokuran_Row dgNyuryokuRow : nyuryokuranRowList) {
             if ((!dgNyuryokuRow.getKaisaiGogitai1().isDisabled() && !dgNyuryokuRow.getKaisaiGogitai1().getValue().isEmpty())
@@ -669,7 +673,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private RString setLblMonth(RYearMonth month) {
-        return month.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+        return month.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
     }
 
     private RString setLblMonth(FlexibleYearMonth month) {
@@ -1051,7 +1055,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void set合議体情報用(GogitaiJohoShinsaRelateBusiness business,
             List<dgShinsakaiKaisaiGogitaiJoho_Row> gogitaiJohoRowList) {
         dgShinsakaiKaisaiGogitaiJoho_Row gogitaiJohoRow = new dgShinsakaiKaisaiGogitaiJoho_Row();
-        gogitaiJohoRow.setNumber(new RString(String.valueOf(business.get合議体番号())));
+        gogitaiJohoRow.getNumber().setValue(new Decimal(business.get合議体番号()));
         gogitaiJohoRow.setGogitaiMeisho(business.get合議体名称());
         if (business.is合議体精神科医存在フラグ()) {
             gogitaiJohoRow.setShurui(種類);
@@ -1082,6 +1086,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getBtnDayBefore().setDisabled(false);
             div.getBtnDayAfter().setDisabled(false);
         }
+        div.getBtnClear().setDisabled(false);
+        div.getBtnToroku().setDisabled(false);
         div.getDgKaisaiYoteiNyuryokuran().setDataSource(nyuryokuranRowList);
     }
 

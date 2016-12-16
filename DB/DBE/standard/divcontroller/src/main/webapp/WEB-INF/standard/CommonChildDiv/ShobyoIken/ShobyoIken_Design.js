@@ -32,12 +32,12 @@ var DBE;
                 return "onChange_antei";
             };
 
-            Events.onClick_btnKakutei = function () {
-                return "onClick_btnKakutei";
-            };
-
             Events.onClick_btnCansel = function () {
                 return "onClick_btnCansel";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
             };
             return Events;
         })();
@@ -107,6 +107,10 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
             };
 
+            Controls.prototype.ccdCodeInputGeninShikkan = function () {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
+            };
+
             Controls.prototype.radIsShutaruGeninShikkan = function () {
                 return new UZA.RadioButton(this.convFiledName("radIsShutaruGeninShikkan"));
             };
@@ -143,12 +147,12 @@ var DBE;
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtNaiyo"));
             };
 
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            };
-
             Controls.prototype.btnCansel = function () {
                 return new UZA.Button(this.convFiledName("btnCansel"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

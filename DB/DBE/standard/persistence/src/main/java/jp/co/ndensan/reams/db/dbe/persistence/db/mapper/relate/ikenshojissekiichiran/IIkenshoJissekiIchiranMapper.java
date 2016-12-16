@@ -24,4 +24,12 @@ public interface IIkenshoJissekiIchiranMapper {
      */
     List<IkenshoJissekiIchiranRelateEntity> get主治医意見書作成実績集計表(IkenshoJissekiIchiranMybitisParamter mapperParameter);
 
+    /**
+     * データの件数を取得します。
+     *
+     * @param mapperParameter 主治医意見書作成実績集計表のMyBatis用パラメータ
+     * @return 件数
+     */
+    int getTotalCount(IkenshoJissekiIchiranMybitisParamter mapperParameter);
+
 }

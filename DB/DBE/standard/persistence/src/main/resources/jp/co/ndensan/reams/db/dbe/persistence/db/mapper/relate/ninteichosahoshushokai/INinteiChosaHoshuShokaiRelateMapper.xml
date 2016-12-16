@@ -56,8 +56,12 @@
         AND			T5913."ninteiChosainCode"=T5601."ninteichosainCode"
         WHERE	 1=1
 
+        <if test="isFrom">
         AND #{調査依頼日開始} <![CDATA[<=]]>T5201."ninteichosaIraiYMD"
+        </if>
+        <if test="isTo">
         AND T5201."ninteichosaIraiYMD" <![CDATA[<=]]>#{調査依頼日終了}
+        </if>
         <if test="batchFlag">
             AND
             <foreach collection="ninteiChosa" item="nintei" open="(" separator="OR" close=")">

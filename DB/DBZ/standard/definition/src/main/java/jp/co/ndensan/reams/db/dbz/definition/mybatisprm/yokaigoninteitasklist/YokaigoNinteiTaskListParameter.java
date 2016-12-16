@@ -19,10 +19,12 @@ public final class YokaigoNinteiTaskListParameter {
 
     private final RString 通常;
     private final RString 延期;
+    private final RString 状態区分;
 
-    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期) {
+    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分) {
         this.通常 = 通常;
         this.延期 = 延期;
+        this.状態区分 = 状態区分;
     }
 
     /**
@@ -30,6 +32,24 @@ public final class YokaigoNinteiTaskListParameter {
      *
      * @param 通常 RString
      * @param 延期 RString
+     * @param 状態区分 RString
+     * @return YokaigoNinteiTaskListParameter
+     */
+    public static YokaigoNinteiTaskListParameter createParameter(
+            RString 通常,
+            RString 延期,
+            RString 状態区分) {
+        return new YokaigoNinteiTaskListParameter(
+                通常,
+                延期,
+                状態区分);
+    }
+
+    /**
+     * タスク一覧共有画面検索用パラメータを生成します。
+     *
+     * @param 通常 処理状態区分.通常
+     * @param 延期 処理状態区分.延期
      * @return YokaigoNinteiTaskListParameter
      */
     public static YokaigoNinteiTaskListParameter createParameter(
@@ -37,6 +57,7 @@ public final class YokaigoNinteiTaskListParameter {
             RString 延期) {
         return new YokaigoNinteiTaskListParameter(
                 通常,
-                延期);
+                延期,
+                RString.EMPTY);
     }
 }

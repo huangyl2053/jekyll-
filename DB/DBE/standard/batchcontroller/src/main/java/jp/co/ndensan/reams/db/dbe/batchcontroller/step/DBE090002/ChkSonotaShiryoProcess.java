@@ -155,31 +155,33 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
     }
 
     private RString 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
-        RString ローカルファイル名 = new RString("IMG");
-        getFilePath(イメージID, 共有ファイル名);
+        RString path = getFilePath(イメージID, 共有ファイル名);
         RString fileName = フラグ.equals(processPrm.getRadSohotaShiryoMasking()) ? FILENAME : FILENAME_BAK;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
-            return fileName;
+        RString fineFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fineFullPath)) {
+            return fineFullPath;
         }
         return RString.EMPTY;
     }
 
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
     }
 
-    private void getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
         if (sharedFileId != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
             try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+                return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath())).getCanonicalPath());
             } catch (Exception e) {
+                return RString.EMPTY;
             }
         }
+        return RString.EMPTY;
     }
 
     private void set出力条件表() {

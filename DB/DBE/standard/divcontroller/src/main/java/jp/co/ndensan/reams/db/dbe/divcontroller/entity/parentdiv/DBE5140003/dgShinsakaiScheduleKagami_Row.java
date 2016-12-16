@@ -3,22 +3,28 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 12 15:28:37 CST 2016
+ * Fri Dec 16 19:37:09 JST 2016 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
 
 /**
- * dgShinsakaiScheduleKagami_Row のクラスファイル。
- *
+ * dgShinsakaiScheduleKagami_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinsakaiScheduleKagami_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
     private RString shinsakaiIinCode;
     private RString shinsakaiIinName;
-    private RString shozokuGogitaiBango;
+    private TextBoxNum shozokuGogitaiBango;
     private RString shozokuGogitaiMeisho;
     private RString jusho;
 
@@ -26,7 +32,7 @@ public class dgShinsakaiScheduleKagami_Row extends DataRow {
         super();
         this.shinsakaiIinCode = RString.EMPTY;
         this.shinsakaiIinName = RString.EMPTY;
-        this.shozokuGogitaiBango = RString.EMPTY;
+        this.shozokuGogitaiBango = new TextBoxNum();
         this.shozokuGogitaiMeisho = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
@@ -36,7 +42,7 @@ public class dgShinsakaiScheduleKagami_Row extends DataRow {
         this.setOriginalData("jusho", jusho);
     }
 
-    public dgShinsakaiScheduleKagami_Row(RString shinsakaiIinCode, RString shinsakaiIinName, RString shozokuGogitaiBango, RString shozokuGogitaiMeisho, RString jusho) {
+    public dgShinsakaiScheduleKagami_Row(RString shinsakaiIinCode, RString shinsakaiIinName, TextBoxNum shozokuGogitaiBango, RString shozokuGogitaiMeisho, RString jusho) {
         super();
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shinsakaiIinName", shinsakaiIinName);
@@ -58,7 +64,7 @@ public class dgShinsakaiScheduleKagami_Row extends DataRow {
         return shinsakaiIinName;
     }
 
-    public RString getShozokuGogitaiBango() {
+    public TextBoxNum getShozokuGogitaiBango() {
         return shozokuGogitaiBango;
     }
 
@@ -80,7 +86,7 @@ public class dgShinsakaiScheduleKagami_Row extends DataRow {
         this.shinsakaiIinName = shinsakaiIinName;
     }
 
-    public void setShozokuGogitaiBango(RString shozokuGogitaiBango) {
+    public void setShozokuGogitaiBango(TextBoxNum shozokuGogitaiBango) {
         this.setOriginalData("shozokuGogitaiBango", shozokuGogitaiBango);
         this.shozokuGogitaiBango = shozokuGogitaiBango;
     }

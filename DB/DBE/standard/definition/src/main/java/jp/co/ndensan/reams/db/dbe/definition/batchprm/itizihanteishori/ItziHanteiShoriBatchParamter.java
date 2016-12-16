@@ -28,6 +28,12 @@ public class ItziHanteiShoriBatchParamter extends BatchParameterBase {
     private static final String FILEPATH = "fileId";
     @BatchParameter(key = SHINSEISHOLANRINOLIST, name = "申請書管理番号リスト")
     private List<RString> shinseishoKanriNoList;
+    @BatchParameter(key = "shokisaiHokenshaMeiList", name = "証記載保険者名リスト")
+    private List<RString> shokisaiHokenshaMeiList;
+    @BatchParameter(key = "hihokenshaNoList", name = "被保険者番号リスト")
+    private List<RString> hihokenshaNoList;
+    @BatchParameter(key = "shinseibiList", name = "申請日リスト")
+    private List<RString> shinseibiList;
     @BatchParameter(key = BATTISHUTURYOKUKUBUN, name = "バッチ出力区分")
     private RString battishuturyokukubun;
     @BatchParameter(key = FILEPATH, name = "込ファイルパス")
@@ -40,6 +46,9 @@ public class ItziHanteiShoriBatchParamter extends BatchParameterBase {
      */
     public ItziHanteiShoriProcessParamter toProcessParameter() {
         return new ItziHanteiShoriProcessParamter(shinseishoKanriNoList,
+                shokisaiHokenshaMeiList,
+                hihokenshaNoList,
+                shinseibiList,
                 battishuturyokukubun, fileId);
     }
 }

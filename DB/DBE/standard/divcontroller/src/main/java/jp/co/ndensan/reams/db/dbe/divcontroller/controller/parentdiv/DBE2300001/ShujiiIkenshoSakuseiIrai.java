@@ -41,9 +41,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakus
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ur.urz.business.core.kingaku.IKingakuFormatter;
-import jp.co.ndensan.reams.ur.urz.business.core.kingaku.KingakuFormatter;
-import jp.co.ndensan.reams.ur.urz.definition.core.kingaku.KingakuUnit;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -69,7 +66,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -721,20 +717,16 @@ public class ShujiiIkenshoSakuseiIrai {
         RString tempP_継続施設金額 = IkenshoSakuseiRyo.施設継続.get名称();
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
         if (!tempP_新規在宅金額.isNull() && !tempP_新規在宅金額.isEmpty()) {
-            IKingakuFormatter 新規在宅金額formatter = KingakuFormatter.create(new Decimal(tempP_新規在宅金額.toString()));
-            item.setShinkiZaitakuKingaku(new RString(新規在宅金額formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.setShinkiZaitakuKingaku(new RString(tempP_新規在宅金額.toString()));
         }
         if (!tempP_新規施設金額.isNull() && !tempP_新規施設金額.isEmpty()) {
-            IKingakuFormatter 新規施設金額formatter = KingakuFormatter.create(new Decimal(tempP_新規施設金額.toString()));
-            item.setShinkiShisetsuKingaku(new RString(新規施設金額formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.setShinkiShisetsuKingaku(new RString(tempP_新規施設金額.toString()));
         }
         if (!tempP_継続在宅金額.isNull() && !tempP_継続在宅金額.isEmpty()) {
-            IKingakuFormatter 継続在宅金額formatter = KingakuFormatter.create(new Decimal(tempP_継続在宅金額.toString()));
-            item.setKeizokuZaitakuKingaku(new RString(継続在宅金額formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.setKeizokuZaitakuKingaku(new RString(tempP_継続在宅金額.toString()));
         }
         if (!tempP_継続施設金額.isNull() && !tempP_継続施設金額.isEmpty()) {
-            IKingakuFormatter 継続施設金額formatter = KingakuFormatter.create(new Decimal(tempP_継続施設金額.toString()));
-            item.setKeizokuShisetsuKingaku(new RString(継続施設金額formatter.format(KingakuUnit.円).setCommaSeparated().toString()));
+            item.setKeizokuShisetsuKingaku(new RString(tempP_継続施設金額.toString()));
         }
         item.setGengo(RDate.getNowDate().toDateString());
         item.setAtesakiHokenshaName(row.getHokensha());
@@ -1054,7 +1046,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 if (!ResponseHolder.isReRequest()) {
                     return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("申請日より過去の日付けが設定されていますが")).respond();
                 }
-                if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) 
+                if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
                     div.getTxtjyushinymd().clearValue();
                 }

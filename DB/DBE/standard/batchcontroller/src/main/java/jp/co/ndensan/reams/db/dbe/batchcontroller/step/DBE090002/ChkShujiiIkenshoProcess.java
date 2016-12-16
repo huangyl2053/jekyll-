@@ -106,6 +106,7 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
                 .addBreak(new BreakerCatalog<ShujiiikenshoReportSource>().new SimpleLayoutBreaker(
 
 
+
                     ShujiiikenshoReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<ShujiiikenshoReportSource> occuredBreak(
@@ -173,46 +174,46 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
         RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
-        getFilePath(イメージID, 共有ファイル名);
-        shujiEntity.setイメージファイル1(共有ファイルを引き出す());
-        shujiEntity.setイメージファイル2(共有ファイル2を引き出す());
+        RString path = getFilePath(イメージID, 共有ファイル名);
+        shujiEntity.setイメージファイル1(共有ファイルを引き出す(path));
+        shujiEntity.setイメージファイル2(共有ファイル2を引き出す(path));
         return shujiEntity;
     }
 
-    private RString 共有ファイルを引き出す() {
-        RString ローカルファイル名 = new RString("IMG");
+    private RString 共有ファイルを引き出す(RString path) {
         RString fileName = フラグ.equals(processPrm.getRadShujii()) ? FILENAME : FILENAME_BAK;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
-            return fileName;
+        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
+            return getFilePath(path, fileName);
         }
         return RString.EMPTY;
     }
 
-    private RString 共有ファイル2を引き出す() {
-        RString ローカルファイル名 = new RString("IMG");
+    private RString 共有ファイル2を引き出す(RString path) {
         RString fileName = フラグ.equals(processPrm.getRadShujii()) ? FILENAME02 : FILENAME_BAK02;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
-            return fileName;
+        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
+            return getFilePath(path, fileName);
         }
         return RString.EMPTY;
     }
 
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
     }
 
-    private void getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
         if (sharedFileId != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
             try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+                return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath())).getCanonicalPath());
             } catch (Exception e) {
+                return RString.EMPTY;
             }
         }
+        return RString.EMPTY;
     }
 
     private void set出力条件表() {

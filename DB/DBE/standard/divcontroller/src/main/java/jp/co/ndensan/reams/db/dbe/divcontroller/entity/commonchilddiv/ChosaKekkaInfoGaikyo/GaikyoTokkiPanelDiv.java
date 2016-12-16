@@ -63,6 +63,8 @@ public class GaikyoTokkiPanelDiv extends Panel {
     private TextBoxMultiLine txtKikaiKiki;
     @JsonProperty("imgGaikyoTokki")
     private DynamicImage imgGaikyoTokki;
+    @JsonProperty("lblNoImageGaikyoTokki")
+    private Label lblNoImageGaikyoTokki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -446,6 +448,24 @@ public class GaikyoTokkiPanelDiv extends Panel {
     @JsonProperty("imgGaikyoTokki")
     public void setImgGaikyoTokki(DynamicImage imgGaikyoTokki) {
         this.imgGaikyoTokki = imgGaikyoTokki;
+    }
+
+    /*
+     * getlblNoImageGaikyoTokki
+     * @return lblNoImageGaikyoTokki
+     */
+    @JsonProperty("lblNoImageGaikyoTokki")
+    public Label getLblNoImageGaikyoTokki() {
+        return lblNoImageGaikyoTokki;
+    }
+
+    /*
+     * setlblNoImageGaikyoTokki
+     * @param lblNoImageGaikyoTokki lblNoImageGaikyoTokki
+     */
+    @JsonProperty("lblNoImageGaikyoTokki")
+    public void setLblNoImageGaikyoTokki(Label lblNoImageGaikyoTokki) {
+        this.lblNoImageGaikyoTokki = lblNoImageGaikyoTokki;
     }
 
     // </editor-fold>

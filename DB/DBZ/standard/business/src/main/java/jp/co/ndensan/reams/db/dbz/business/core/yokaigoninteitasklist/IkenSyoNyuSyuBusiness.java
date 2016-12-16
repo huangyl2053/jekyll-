@@ -40,6 +40,15 @@ public class IkenSyoNyuSyuBusiness {
     }
 
     /**
+     * 状態を返します。
+     *
+     * @return 状態
+     */
+    public RString get状態() {
+        return entity.getJyotai();
+    }
+
+    /**
      * 被保険者番号を返します。
      *
      * @return 被保険者番号
@@ -181,6 +190,15 @@ public class IkenSyoNyuSyuBusiness {
      */
     public FlexibleDate get主治医意見書読取年月日() {
         return entity.getIkenshoReadYMD();
+    }
+
+    /**
+     * 主治医意見書記入年月日を返します。
+     *
+     * @return 主治医意見書記入年月日
+     */
+    public FlexibleDate get主治医意見書記入年月日() {
+        return entity.getIkenshoKinyuYMD();
     }
 
     /**

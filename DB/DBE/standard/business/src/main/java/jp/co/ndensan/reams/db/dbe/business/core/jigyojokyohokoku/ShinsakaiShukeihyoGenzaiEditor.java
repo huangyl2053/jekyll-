@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.jigyojokyohokoku;
 
 import java.text.DecimalFormat;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.ShinsakaiShukeihyoGenzaiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaishukeigenzainojokyo.ShinsakaiShukeiGenzainojokyoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,16 +39,21 @@ public class ShinsakaiShukeihyoGenzaiEditor {
     private static final int 有効期間12ヶ月 = 1;
     private static final int 有効期間24ヶ月 = 2;
     private static final int 有効期間その他 = 3;
+    private static final RString 全市町村 = new RString("全市町村");
     private final ShinsakaiShukeihyoGenzaiEntity entity;
     private final ShinsakaiShukeiGenzainojokyoEntity genzainojokyo;
+    private final ShinsakaiShukeiGenzainojokyoProcessParameter parameter;
 
     /**
      * コンストラクタです。
      *
+     * @param parameter ShinsakaiShukeiGenzainojokyoProcessParameter
      * @param entity ShinsakaiShukeihyoGenzaiEntity
      * @param genzainojokyo ShinsakaiShukeiGenzainojokyoEntity
      */
-    public ShinsakaiShukeihyoGenzaiEditor(ShinsakaiShukeihyoGenzaiEntity entity, ShinsakaiShukeiGenzainojokyoEntity genzainojokyo) {
+    public ShinsakaiShukeihyoGenzaiEditor(ShinsakaiShukeiGenzainojokyoProcessParameter parameter,
+            ShinsakaiShukeihyoGenzaiEntity entity, ShinsakaiShukeiGenzainojokyoEntity genzainojokyo) {
+        this.parameter = parameter;
         this.entity = entity;
         this.genzainojokyo = genzainojokyo;
     }
@@ -74,8 +80,13 @@ public class ShinsakaiShukeihyoGenzaiEditor {
     }
 
     private void set市町村() {
-        genzainojokyo.set市町村コード(entity.getShichosonCode().value());
-        genzainojokyo.set市町村名(entity.getShichosonMeisho());
+        if (!parameter.isEmptyHokensyaNo()) {
+            genzainojokyo.set市町村コード(entity.getShichosonCode().value());
+            genzainojokyo.set市町村名(entity.getShichosonMeisho());
+        } else {
+            genzainojokyo.set市町村コード(RString.EMPTY);
+            genzainojokyo.set市町村名(全市町村);
+        }
     }
 
     private void set新規申請() {
@@ -171,19 +182,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set新規申請6ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規6ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規6ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get新規6ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規6ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規6ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get新規6ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規6ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規6ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get新規6ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規6ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規6ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get新規6ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規6ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規6ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get新規6ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規6ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規6ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get新規6ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規6ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規6ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get新規6ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set新規6ヶ月_計_上段();
         genzainojokyo.set新規6ヶ月_要支援1_下段(format下段(genzainojokyo.get新規6ヶ月_要支援1_上段(), genzainojokyo.get新規6ヶ月_計_上段()));
@@ -205,19 +216,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set新規申請12ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規12ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規12ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get新規12ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規12ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規12ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get新規12ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規12ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規12ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get新規12ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規12ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規12ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get新規12ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規12ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規12ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get新規12ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規12ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規12ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get新規12ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規12ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規12ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get新規12ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set新規12ヶ月_計_上段();
         genzainojokyo.set新規12ヶ月_要支援1_下段(format下段(genzainojokyo.get新規12ヶ月_要支援1_上段(), genzainojokyo.get新規12ヶ月_計_上段()));
@@ -239,19 +250,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set新規申請24ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規24ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規24ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get新規24ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規24ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規24ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get新規24ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規24ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規24ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get新規24ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規24ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規24ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get新規24ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規24ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規24ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get新規24ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規24ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規24ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get新規24ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規24ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規24ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get新規24ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set新規24ヶ月_計_上段();
         genzainojokyo.set新規24ヶ月_要支援1_下段(format下段(genzainojokyo.get新規24ヶ月_要支援1_上段(), genzainojokyo.get新規24ヶ月_計_上段()));
@@ -273,19 +284,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set新規申請その他() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規その他_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規その他_要支援1_上段(toRString(toInt(genzainojokyo.get新規その他_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規その他_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規その他_要支援2_上段(toRString(toInt(genzainojokyo.get新規その他_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規その他_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規その他_要介護1_上段(toRString(toInt(genzainojokyo.get新規その他_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規その他_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規その他_要介護2_上段(toRString(toInt(genzainojokyo.get新規その他_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規その他_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規その他_要介護3_上段(toRString(toInt(genzainojokyo.get新規その他_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規その他_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規その他_要介護4_上段(toRString(toInt(genzainojokyo.get新規その他_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set新規その他_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set新規その他_要介護5_上段(toRString(toInt(genzainojokyo.get新規その他_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set新規その他_計_上段();
         genzainojokyo.set新規その他_要支援1_下段(format下段(genzainojokyo.get新規その他_要支援1_上段(), genzainojokyo.get新規その他_計_上段()));
@@ -307,19 +318,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set更新申請6ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新6ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新6ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get更新6ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新6ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新6ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get更新6ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新6ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新6ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get更新6ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新6ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新6ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get更新6ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新6ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新6ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get更新6ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新6ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新6ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get更新6ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新6ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新6ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get更新6ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set更新6ヶ月_計_上段();
         genzainojokyo.set更新6ヶ月_要支援1_下段(format下段(genzainojokyo.get更新6ヶ月_要支援1_上段(), genzainojokyo.get更新6ヶ月_計_上段()));
@@ -341,19 +352,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set更新申請12ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新12ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新12ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get更新12ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新12ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新12ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get更新12ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新12ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新12ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get更新12ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新12ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新12ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get更新12ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新12ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新12ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get更新12ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新12ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新12ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get更新12ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新12ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新12ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get更新12ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set更新12ヶ月_計_上段();
         genzainojokyo.set更新12ヶ月_要支援1_下段(format下段(genzainojokyo.get更新12ヶ月_要支援1_上段(), genzainojokyo.get更新12ヶ月_計_上段()));
@@ -375,19 +386,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set更新申請24ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新24ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新24ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get更新24ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新24ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新24ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get更新24ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新24ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新24ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get更新24ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新24ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新24ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get更新24ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新24ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新24ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get更新24ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新24ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新24ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get更新24ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新24ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新24ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get更新24ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set更新24ヶ月_計_上段();
         genzainojokyo.set更新24ヶ月_要支援1_下段(format下段(genzainojokyo.get更新24ヶ月_要支援1_上段(), genzainojokyo.get更新24ヶ月_計_上段()));
@@ -409,19 +420,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set更新申請その他() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新その他_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新その他_要支援1_上段(toRString(toInt(genzainojokyo.get更新その他_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新その他_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新その他_要支援2_上段(toRString(toInt(genzainojokyo.get更新その他_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新その他_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新その他_要介護1_上段(toRString(toInt(genzainojokyo.get更新その他_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新その他_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新その他_要介護2_上段(toRString(toInt(genzainojokyo.get更新その他_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新その他_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新その他_要介護3_上段(toRString(toInt(genzainojokyo.get更新その他_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新その他_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新その他_要介護4_上段(toRString(toInt(genzainojokyo.get更新その他_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set更新その他_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set更新その他_要介護5_上段(toRString(toInt(genzainojokyo.get更新その他_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set更新その他_計_上段();
         genzainojokyo.set更新その他_要支援1_下段(format下段(genzainojokyo.get更新その他_要支援1_上段(), genzainojokyo.get更新その他_計_上段()));
@@ -482,19 +493,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set区分変更申請6ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更6ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更6ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get区分変更6ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更6ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更6ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get区分変更6ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更6ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更6ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get区分変更6ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更6ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更6ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get区分変更6ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更6ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更6ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get区分変更6ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更6ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更6ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get区分変更6ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更6ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更6ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get区分変更6ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set区分変更6ヶ月_計_上段();
         genzainojokyo.set区分変更6ヶ月_要支援1_下段(format下段(genzainojokyo.get区分変更6ヶ月_要支援1_上段(), genzainojokyo.get区分変更6ヶ月_計_上段()));
@@ -516,19 +527,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set区分変更申請12ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更12ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更12ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get区分変更12ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更12ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更12ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get区分変更12ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更12ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更12ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get区分変更12ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更12ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更12ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get区分変更12ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更12ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更12ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get区分変更12ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更12ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更12ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get区分変更12ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更12ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更12ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get区分変更12ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set区分変更12ヶ月_計_上段();
         genzainojokyo.set区分変更12ヶ月_要支援1_下段(format下段(genzainojokyo.get区分変更12ヶ月_要支援1_上段(), genzainojokyo.get区分変更12ヶ月_計_上段()));
@@ -550,19 +561,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set区分変更申請24ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更24ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更24ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get区分変更24ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更24ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更24ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get区分変更24ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更24ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更24ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get区分変更24ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更24ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更24ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get区分変更24ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更24ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更24ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get区分変更24ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更24ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更24ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get区分変更24ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更24ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更24ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get区分変更24ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set区分変更24ヶ月_計_上段();
         genzainojokyo.set区分変更24ヶ月_要支援1_下段(format下段(genzainojokyo.get区分変更24ヶ月_要支援1_上段(), genzainojokyo.get区分変更24ヶ月_計_上段()));
@@ -584,19 +595,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set区分変更申請その他() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更その他_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更その他_要支援1_上段(toRString(toInt(genzainojokyo.get区分変更その他_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更その他_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更その他_要支援2_上段(toRString(toInt(genzainojokyo.get区分変更その他_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更その他_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更その他_要介護1_上段(toRString(toInt(genzainojokyo.get区分変更その他_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更その他_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更その他_要介護2_上段(toRString(toInt(genzainojokyo.get区分変更その他_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更その他_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更その他_要介護3_上段(toRString(toInt(genzainojokyo.get区分変更その他_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更その他_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更その他_要介護4_上段(toRString(toInt(genzainojokyo.get区分変更その他_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set区分変更その他_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set区分変更その他_要介護5_上段(toRString(toInt(genzainojokyo.get区分変更その他_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set区分変更その他_計_上段();
         genzainojokyo.set区分変更その他_要支援1_下段(format下段(genzainojokyo.get区分変更その他_要支援1_上段(), genzainojokyo.get区分変更その他_計_上段()));
@@ -657,19 +668,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set転入申請6ヶ月() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入6ヶ月_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入6ヶ月_要支援1_上段(toRString(toInt(genzainojokyo.get転入6ヶ月_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入6ヶ月_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入6ヶ月_要支援2_上段(toRString(toInt(genzainojokyo.get転入6ヶ月_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入6ヶ月_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入6ヶ月_要介護1_上段(toRString(toInt(genzainojokyo.get転入6ヶ月_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入6ヶ月_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入6ヶ月_要介護2_上段(toRString(toInt(genzainojokyo.get転入6ヶ月_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入6ヶ月_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入6ヶ月_要介護3_上段(toRString(toInt(genzainojokyo.get転入6ヶ月_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入6ヶ月_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入6ヶ月_要介護4_上段(toRString(toInt(genzainojokyo.get転入6ヶ月_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入6ヶ月_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入6ヶ月_要介護5_上段(toRString(toInt(genzainojokyo.get転入6ヶ月_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set転入6ヶ月_計_上段();
         genzainojokyo.set転入6ヶ月_要支援1_下段(format下段(genzainojokyo.get転入6ヶ月_要支援1_上段(), genzainojokyo.get転入6ヶ月_計_上段()));
@@ -691,19 +702,19 @@ public class ShinsakaiShukeihyoGenzaiEditor {
 
     private void set転入申請その他() {
         if (要支援1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入その他_要支援1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入その他_要支援1_上段(toRString(toInt(genzainojokyo.get転入その他_要支援1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要支援2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入その他_要支援2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入その他_要支援2_上段(toRString(toInt(genzainojokyo.get転入その他_要支援2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護1.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入その他_要介護1_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入その他_要介護1_上段(toRString(toInt(genzainojokyo.get転入その他_要介護1_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護2.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入その他_要介護2_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入その他_要介護2_上段(toRString(toInt(genzainojokyo.get転入その他_要介護2_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護3.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入その他_要介護3_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入その他_要介護3_上段(toRString(toInt(genzainojokyo.get転入その他_要介護3_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護4.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入その他_要介護4_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入その他_要介護4_上段(toRString(toInt(genzainojokyo.get転入その他_要介護4_上段()) + entity.getCountHihokenshaNo()));
         } else if (要介護5.equals(entity.getNijiHanteiYokaigoJotaiKubunCode().value())) {
-            genzainojokyo.set転入その他_要介護5_上段(toRString(entity.getCountHihokenshaNo()));
+            genzainojokyo.set転入その他_要介護5_上段(toRString(toInt(genzainojokyo.get転入その他_要介護5_上段()) + entity.getCountHihokenshaNo()));
         }
         set転入その他_計_上段();
         genzainojokyo.set転入その他_要支援1_下段(format下段(genzainojokyo.get転入その他_要支援1_上段(), genzainojokyo.get転入その他_計_上段()));

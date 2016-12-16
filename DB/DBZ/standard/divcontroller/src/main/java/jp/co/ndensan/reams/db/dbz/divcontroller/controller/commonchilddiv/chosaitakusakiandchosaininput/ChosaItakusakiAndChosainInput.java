@@ -143,6 +143,7 @@ public class ChosaItakusakiAndChosainInput {
             ninteiShinseiCodeModel.set連絡事項(div.getHdnChosainRenrakuJiko());
         }
         ninteiShinseiCodeModel.set表示モード(HyojiMode.InputMode);
+        ninteiShinseiCodeModel.setメニューID(new RString("ChosaItakusakiAndChosainInput"));
         ViewStateHolder.put(ViewStateKeys.モード, ninteiShinseiCodeModel);
 
         return ResponseData.of(div).respond();

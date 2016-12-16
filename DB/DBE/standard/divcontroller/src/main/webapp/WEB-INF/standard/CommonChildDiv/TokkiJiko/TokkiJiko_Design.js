@@ -4,12 +4,12 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_KakuTeyi = function () {
-                return "onClick_KakuTeyi";
-            };
-
             Events.onClick_ToriKesi = function () {
                 return "onClick_ToriKesi";
+            };
+
+            Events.onClick_KakuTeyi = function () {
+                return "onClick_KakuTeyi";
             };
             return Events;
         })();
@@ -47,12 +47,12 @@ var DBE;
                 return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
             };
 
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            };
-
             Controls.prototype.btnCancel = function () {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

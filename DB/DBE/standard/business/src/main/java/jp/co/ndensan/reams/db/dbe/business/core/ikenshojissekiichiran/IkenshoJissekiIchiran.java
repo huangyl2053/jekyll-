@@ -36,6 +36,15 @@ public class IkenshoJissekiIchiran {
     }
 
     /**
+     * 市町村名称を取得します。
+     *
+     * @return 市町村名称
+     */
+    public RString get市町村名称() {
+        return entity.get市町村名称();
+    }
+
+    /**
      * 医療機関コードを取得します。
      *
      * @return 医療機関コード

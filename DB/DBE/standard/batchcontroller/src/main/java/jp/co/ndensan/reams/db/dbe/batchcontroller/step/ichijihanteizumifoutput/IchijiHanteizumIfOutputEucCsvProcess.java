@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -49,17 +48,21 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumifoutput."
             + "IchijiHanteizumIfOutputMapper.get日次進捗データ作成CSV出力");
+
+    private static RString ファイル名;
+    private static final RString 処理タイトル = new RString("一次判定インターフェース作成");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE309001"));
-    private ItziHanteiShoriProcessParamter paramter;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private RString koroshoIfShikibetsuCode = RString.EMPTY;
+
+    private ItziHanteiShoriProcessParamter paramter;
     private RString eucFilePath;
-    private IchijiHanteizumIfOutputBusiness business;
     private FileSpoolManager manager;
 
     @Override
     protected void initialize() {
+        ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
+
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString 一次判定IF文字コードファイル名 = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 一次判定IF文字コードファイル名);
@@ -69,18 +72,11 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
 
     @Override
     protected void beforeExecute() {
-        business = new IchijiHanteizumIfOutputBusiness();
     }
 
     @Override
     protected void createWriter() {
-        eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
-                setNewLine(NewLine.CRLF).
-                hasHeader(false).
-                build();
+        createWriterAndSetMojiCode();
     }
 
     @Override
@@ -92,8 +88,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
 
     @Override
     protected void process(IchijiHanteizumIfOutputRelateEntity entity) {
-        getファイル名(entity);
-        eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
+        eucCsvWriterJunitoJugo.writeLine(IchijiHanteizumIfOutputBusiness.setEucCsvEntity(entity));
         new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
     }
 
@@ -121,37 +116,18 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                EUC_ENTITY_ID.toRString(),
+                処理タイトル,
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("NCI221.CSV"),
-                new RString("CSVFile00001.csv"),
-                business.get出力件数(new Decimal(eucCsvWriterJunitoJugo.getCount())),
-                business.get出力条件(paramter));
+                ファイル名,
+                EUC_ENTITY_ID.toRString(),
+                IchijiHanteizumIfOutputBusiness.get出力件数(new Decimal(eucCsvWriterJunitoJugo.getCount())),
+                IchijiHanteizumIfOutputBusiness.get出力条件(paramter));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
-    private void getファイル名(IchijiHanteizumIfOutputRelateEntity entity) {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        if (RString.isNullOrEmpty(koroshoIfShikibetsuCode)) {
-            koroshoIfShikibetsuCode = entity.getKoroshoIfShikibetsuCode();
-            RStringBuilder jokenBuilder = new RStringBuilder();
-            RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
-            jokenBuilder.append(ファイル名.replace(".CSV", "_"));
-            jokenBuilder.append(entity.getKoroshoIfShikibetsuCode().concat(new RString(".csv")));
-            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), jokenBuilder.toRString());
-        }
-        if (!koroshoIfShikibetsuCode.equals(entity.getKoroshoIfShikibetsuCode())) {
-            eucCsvWriterJunitoJugo.close();
-            koroshoIfShikibetsuCode = entity.getKoroshoIfShikibetsuCode();
-            RStringBuilder jokenBuilder = new RStringBuilder();
-            RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
-            jokenBuilder.append(ファイル名.replace(".CSV", "_"));
-            jokenBuilder.append(entity.getKoroshoIfShikibetsuCode().concat(new RString(".csv")));
-            eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), jokenBuilder.toRString());
-        }
-
+    private void createWriterAndSetMojiCode() {
         RString 一次判定IF文字コード = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
         if (new RString("1").equals(一次判定IF文字コード)) {
             eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).

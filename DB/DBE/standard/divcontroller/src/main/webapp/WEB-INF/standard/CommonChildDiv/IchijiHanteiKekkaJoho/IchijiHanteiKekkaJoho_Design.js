@@ -55,12 +55,16 @@ var DBE;
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIchijiHanteibi"));
             };
 
-            Controls.prototype.txtIchijiHanteiKekka = function () {
-                return new UZA.TextBox(this.convFiledName("txtIchijiHanteiKekka"));
+            Controls.prototype.ddlIchijiHanteiKekka = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIchijiHanteiKekka"));
+            };
+
+            Controls.prototype.ddlIchijiHanteiKekkaNinchishoKasan = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIchijiHanteiKekkaNinchishoKasan"));
             };
 
             Controls.prototype.txtKijunJikan = function () {
-                return new UZA.TextBox(this.convFiledName("txtKijunJikan"));
+                return new UZA.TextBoxNum(this.convFiledName("txtKijunJikan"));
             };
 
             Controls.prototype.lblChukanHyokaKomokuTokuten = function () {
@@ -343,20 +347,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtGaizensei"));
             };
 
-            Controls.prototype.txtJiritsudoChosa = function () {
-                return new UZA.TextBox(this.convFiledName("txtJiritsudoChosa"));
+            Controls.prototype.ddlJiritsudoChosa = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlJiritsudoChosa"));
             };
 
-            Controls.prototype.txtJyotaiAnteisei = function () {
-                return new UZA.TextBox(this.convFiledName("txtJyotaiAnteisei"));
+            Controls.prototype.ddlJyotaiAnteisei = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlJyotaiAnteisei"));
             };
 
-            Controls.prototype.txtJiritsudoIkensho = function () {
-                return new UZA.TextBox(this.convFiledName("txtJiritsudoIkensho"));
+            Controls.prototype.ddlJiritsudoIkensho = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlJiritsudoIkensho"));
             };
 
-            Controls.prototype.txtKyufuKbn = function () {
-                return new UZA.TextBox(this.convFiledName("txtKyufuKbn"));
+            Controls.prototype.ddlKyufuKbn = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKyufuKbn"));
             };
 
             Controls.prototype.lblIchijiHanteiKeikokuCode = function () {

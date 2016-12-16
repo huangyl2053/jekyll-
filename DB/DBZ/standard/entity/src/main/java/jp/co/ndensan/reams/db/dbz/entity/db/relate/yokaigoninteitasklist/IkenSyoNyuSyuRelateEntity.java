@@ -24,6 +24,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenSyoNyuSyuRelateEntity {
 
+    private RString jyotai;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
@@ -40,6 +41,7 @@ public class IkenSyoNyuSyuRelateEntity {
     private FlexibleDate ikenshoSakuseiIraiYMD;
     private int ikenshoIraiRirekiNo;
     private Code ikenshoSakuseiKaisuKubun;
+    private FlexibleDate ikenshoKinyuYMD;
     private FlexibleDate ikenshoReadYMD;
     private RString iryoKikanMeisho;
     private RString shujiiName;

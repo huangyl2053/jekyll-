@@ -79,6 +79,9 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
         param.setTemp_基準日(this.temp_基準日);
         param.setTemp_認定調査督促期限日数(this.temp_認定調査督促期限日数);
         param.setTemp_印刷済対象者(this.temp_印刷済対象者);
+        param.setTemp_督促日(this.temp_督促日);
+        param.setTemp_督促方法(new RString(this.temp_督促方法));
+        param.setTemp_督促メモ(this.temp_督促メモ);
 
         return param;
     }
@@ -91,7 +94,6 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
     public NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter toNinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter() {
         NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter param = new NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter();
         param.setTemp_保険者コード(this.temp_保険者コード);
-        param.setTemp_保険者名称(this.temp_保険者名称);
         param.setTemp_認定調査委託先コード(this.temp_認定調査委託先コード);
         param.setTemp_認定調査員コード(this.temp_認定調査員コード);
         param.setTemp_基準日(this.temp_基準日);
