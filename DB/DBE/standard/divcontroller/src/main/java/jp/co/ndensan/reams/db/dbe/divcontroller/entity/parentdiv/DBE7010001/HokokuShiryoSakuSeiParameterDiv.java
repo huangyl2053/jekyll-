@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -116,23 +116,23 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public CheckBoxList getChkShutsuryokuChohyo() {
-        return this.getShutsuryokuChohyo().getChkShutsuryokuChohyo();
+    public RadioButton getRadhutsuryokuChohyo() {
+        return this.getShutsuryokuChohyo().getRadhutsuryokuChohyo();
     }
 
     @JsonIgnore
-    public void  setChkShutsuryokuChohyo(CheckBoxList chkShutsuryokuChohyo) {
-        this.getShutsuryokuChohyo().setChkShutsuryokuChohyo(chkShutsuryokuChohyo);
+    public void  setRadhutsuryokuChohyo(RadioButton radhutsuryokuChohyo) {
+        this.getShutsuryokuChohyo().setRadhutsuryokuChohyo(radhutsuryokuChohyo);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkCsvShutsuryoku() {
-        return this.getCsvKenHokokuShiryoSakusei().getChkCsvShutsuryoku();
+    public RadioButton getRadCsvShutsuryoku() {
+        return this.getCsvKenHokokuShiryoSakusei().getRadCsvShutsuryoku();
     }
 
     @JsonIgnore
-    public void  setChkCsvShutsuryoku(CheckBoxList chkCsvShutsuryoku) {
-        this.getCsvKenHokokuShiryoSakusei().setChkCsvShutsuryoku(chkCsvShutsuryoku);
+    public void  setRadCsvShutsuryoku(RadioButton radCsvShutsuryoku) {
+        this.getCsvKenHokokuShiryoSakusei().setRadCsvShutsuryoku(radCsvShutsuryoku);
     }
 
     @JsonIgnore
@@ -156,13 +156,13 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public RadioButton getRadKubun() {
-        return this.getChushutsuJoken().getRadKubun();
+    public TextBoxFlexibleYearMonth getTxtNengetsu() {
+        return this.getChushutsuJoken().getTxtNengetsu();
     }
 
     @JsonIgnore
-    public void  setRadKubun(RadioButton radKubun) {
-        this.getChushutsuJoken().setRadKubun(radKubun);
+    public void  setTxtNengetsu(TextBoxFlexibleYearMonth txtNengetsu) {
+        this.getChushutsuJoken().setTxtNengetsu(txtNengetsu);
     }
 
     @JsonIgnore
@@ -176,13 +176,13 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleYearMonth getTxtNengetsu() {
-        return this.getChushutsuJoken().getTxtNengetsu();
+    public TextBoxDateRange getTxtTaishoGappi() {
+        return this.getChushutsuJoken().getTxtTaishoGappi();
     }
 
     @JsonIgnore
-    public void  setTxtNengetsu(TextBoxFlexibleYearMonth txtNengetsu) {
-        this.getChushutsuJoken().setTxtNengetsu(txtNengetsu);
+    public void  setTxtTaishoGappi(TextBoxDateRange txtTaishoGappi) {
+        this.getChushutsuJoken().setTxtTaishoGappi(txtTaishoGappi);
     }
 
     @JsonIgnore
@@ -193,16 +193,6 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
     @JsonIgnore
     public void  setTxtKijyunYMD(TextBoxDate txtKijyunYMD) {
         this.getChushutsuJoken().setTxtKijyunYMD(txtKijyunYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtTaishoGappi() {
-        return this.getChushutsuJoken().getTxtTaishoGappi();
-    }
-
-    @JsonIgnore
-    public void  setTxtTaishoGappi(TextBoxDateRange txtTaishoGappi) {
-        this.getChushutsuJoken().setTxtTaishoGappi(txtTaishoGappi);
     }
 
     @JsonIgnore

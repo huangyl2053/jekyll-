@@ -30,7 +30,10 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
     private static final RString JIGYOJYOKYOHOKOKU = new RString("【事業状況報告出力区分】");
     private static final RString JISSIJYOKYOTOKEI = new RString("【実施状況統計出力区分】");
     private static final RString SINSAHANTEIJYOKYO = new RString("【審査判定状況出力区分】");
-    private static final RString SINSAKAIKANRENTOKEI = new RString("【審査会関連統計資料作成出力区分】");
+    private static final RString SINSAHANTEINOHENKOJYOKYO = new RString("【審査判定の変更状況出力区分】");
+    private static final RString KAIGONINTEISINSAKAISHUKEIHYOHANTEIBETSU = new RString("【介護認定審査会集計表（判定別）】");
+    private static final RString KAIGONINTEISINSAKAISHUKEIHYOSINSEIKUBUNBETSU = new RString("【介護認定審査会集計表（申請区分別）】");
+    private static final RString KAIGONINTEISINSAKAISHUKEIHYOGENZAINOJOKYOBETSU = new RString("【介護認定審査会集計表（現在の状況別）】");
     private static final RString CSVSHUTSURYOKU = new RString("【CSV出力区分】");
     private static final RString SHUTSURYOKUFAIRU = new RString("【出力ファイル名】");
     private static final RString HOKENSYANO = new RString("【保険者番号】");
@@ -54,7 +57,10 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
     private final int 事業状況報告帳票数 = 1;
     private final int 実施状況統計帳票数 = 1;
     private final int 審査判定状況帳票数 = 1;
-    private final int 審査会関連統計帳票数 = 5;
+    private final int 審査判定の変更状況帳票数 = 1;
+    private final int 審査会集計表判定別 = 1;
+    private final int 審査会集計表申請区分別 = 1;
+    private final int 審査会集計表現在の状況別 = 1;
 
     @Override
     protected void process() {
@@ -83,8 +89,17 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
         if (paramter.isSinsaHanteiJyokyo()) {
             i += 審査判定状況帳票数;
         }
-        if (paramter.isSinsakaiKanrenTokei()) {
-            i += 審査会関連統計帳票数;
+        if (paramter.isSinsaHanteiNoHenkouJokyo()) {
+            i += 審査判定の変更状況帳票数;
+        }
+        if (paramter.isKaigoNinteiSinsakaiShukeihyoHanteibetsu()) {
+            i += 審査会集計表判定別;
+        }
+        if (paramter.isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu()) {
+            i += 審査会集計表申請区分別;
+        }
+        if (paramter.isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu()) {
+            i += 審査会集計表現在の状況別;
         }
         return new RString(i);
     }
@@ -104,8 +119,20 @@ public class JokenhyoProcess extends SimpleBatchProcessBase {
         条件.append(paramter.isSinsaHanteiJyokyo() ? 出力する : 出力しない);
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
-        条件.append(SINSAKAIKANRENTOKEI);
-        条件.append(paramter.isSinsakaiKanrenTokei() ? 出力する : 出力しない);
+        条件.append(SINSAHANTEINOHENKOJYOKYO);
+        条件.append(paramter.isSinsaHanteiNoHenkouJokyo() ? 出力する : 出力しない);
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(KAIGONINTEISINSAKAISHUKEIHYOHANTEIBETSU);
+        条件.append(paramter.isKaigoNinteiSinsakaiShukeihyoHanteibetsu() ? 出力する : 出力しない);
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(KAIGONINTEISINSAKAISHUKEIHYOSINSEIKUBUNBETSU);
+        条件.append(paramter.isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu() ? 出力する : 出力しない);
+        出力条件.add(条件.toRString());
+        条件 = new RStringBuilder();
+        条件.append(KAIGONINTEISINSAKAISHUKEIHYOGENZAINOJOKYOBETSU);
+        条件.append(paramter.isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu() ? 出力する : 出力しない);
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(CSVSHUTSURYOKU);

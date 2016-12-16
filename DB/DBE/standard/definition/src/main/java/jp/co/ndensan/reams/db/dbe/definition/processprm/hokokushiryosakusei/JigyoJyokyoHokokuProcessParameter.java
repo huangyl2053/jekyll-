@@ -23,7 +23,10 @@ public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter
     private boolean isJigyoJyokyoHokoku;
     private boolean isJissiJyokyoTokei;
     private boolean isSinsaHanteiJyokyo;
-    private boolean isSinsakaiKanrenTokei;
+    private boolean isSinsaHanteiNoHenkouJokyo;
+    private boolean isKaigoNinteiSinsakaiShukeihyoHanteibetsu;
+    private boolean isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu;
+    private boolean isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu;
     private boolean isCsvShutsuryoku;
     private RString shutsuryokuFairuName;
     private RDate kijyunYMD;
@@ -45,7 +48,10 @@ public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter
      * @param isJigyoJyokyoHokoku 事業状況報告出力区分
      * @param isJissiJyokyoTokei 実施状況統計出力区分
      * @param isSinsaHanteiJyokyo 審査判定状況出力区分
-     * @param isSinsakaiKanrenTokei 審査会関連統計資料作成出力区分
+     * @param isSinsaHanteiNoHenkouJokyo 審査判定の変更状況出力区分
+     * @param isKaigoNinteiSinsakaiShukeihyoHanteibetsu 介護認定審査会集計表（判定別）出力区分
+     * @param isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu 介護認定審査会集計表（申請区分別）出力区分
+     * @param isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu 介護認定審査会集計表（現在の状況別）出力区分
      * @param isCsvShutsuryoku CSV出力区分
      * @param shutsuryokuFairuName 出力ファイル名
      * @param kijyunYMD 基準年月日
@@ -65,7 +71,10 @@ public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter
             boolean isJigyoJyokyoHokoku,
             boolean isJissiJyokyoTokei,
             boolean isSinsaHanteiJyokyo,
-            boolean isSinsakaiKanrenTokei,
+            boolean isSinsaHanteiNoHenkouJokyo,
+            boolean isKaigoNinteiSinsakaiShukeihyoHanteibetsu,
+            boolean isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+            boolean isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
             boolean isCsvShutsuryoku,
             RString shutsuryokuFairuName,
             RDate kijyunYMD,
@@ -83,7 +92,10 @@ public class JigyoJyokyoHokokuProcessParameter implements IBatchProcessParameter
         this.isJigyoJyokyoHokoku = isJigyoJyokyoHokoku;
         this.isJissiJyokyoTokei = isJissiJyokyoTokei;
         this.isSinsaHanteiJyokyo = isSinsaHanteiJyokyo;
-        this.isSinsakaiKanrenTokei = isSinsakaiKanrenTokei;
+        this.isSinsaHanteiNoHenkouJokyo = isSinsaHanteiNoHenkouJokyo;
+        this.isKaigoNinteiSinsakaiShukeihyoHanteibetsu = isKaigoNinteiSinsakaiShukeihyoHanteibetsu;
+        this.isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu = isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu;
+        this.isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu = isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu;
         this.isCsvShutsuryoku = isCsvShutsuryoku;
         this.shutsuryokuFairuName = shutsuryokuFairuName;
         this.kijyunYMD = kijyunYMD;
