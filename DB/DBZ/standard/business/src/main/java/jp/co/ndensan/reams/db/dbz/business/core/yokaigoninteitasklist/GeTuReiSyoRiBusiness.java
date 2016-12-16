@@ -202,11 +202,11 @@ public class GeTuReiSyoRiBusiness {
     }
 
     /**
-     * ＩＦ送付年月日を返します。
+     * センター送信情報抽出年月日を返します。
      *
-     * @return ＩＦ送付年月日
+     * @return センター送信情報抽出年月日
      */
-    public FlexibleDate getＩＦ送付年月日() {
-        return entity.getIfSofuYMD();
+    public FlexibleDate getセンター送信情報抽出年月日() {
+        return entity.getCenterSoshinChushutsuYMD();
     }
 }

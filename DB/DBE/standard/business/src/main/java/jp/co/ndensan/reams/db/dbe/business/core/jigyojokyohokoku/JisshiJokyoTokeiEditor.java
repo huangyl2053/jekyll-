@@ -221,7 +221,7 @@ public class JisshiJokyoTokeiEditor {
     }
 
     private RString toRString(int 保険者数) {
-        return 保険者数 == 0 ? RString.EMPTY : new RString(保険者数);
+        return new RString(保険者数);
     }
 
     private int toInt(RString 保険者数) {

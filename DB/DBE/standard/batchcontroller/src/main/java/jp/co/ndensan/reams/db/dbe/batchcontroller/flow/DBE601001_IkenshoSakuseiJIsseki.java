@@ -1,62 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601001.ShinsaiinJissekiIchiranCsvProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601001.ShinsaiinJissekiIchiranReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601001.IkenshoJissekiIchiranProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001.DBE601001_IkenshoSakuseiJIssekiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護認定審査会委員報酬実績集計表のバッチフロークラスです。
+ * 主治医意見書作成実績集計表のバッチフロークラスです。
  *
- * @reamsid_L DBE-1700-020 wanghuafeng
+ * @reamsid_L DBE-1690-020 dongyabin
  */
 public class DBE601001_IkenshoSakuseiJIsseki extends BatchFlowBase<DBE601001_IkenshoSakuseiJIssekiParameter> {
 
-    private static final String SHINSAI_JISSE_ICHIRAN_CSV = "shinsaiinjissekiichirancsv";
-    private static final String SHINSAI_JISSE_ICHIRAN_REPORT = "shinsaiinjissekiichiranreport";
-    private static final RString CSVを出力する = new RString("1");
-    private static final RString 集計表を発行する = new RString("2");
+    private static final String IKENSHO_JISSEKI_ICHIRAN = "ikenshoJissekiIchiran";
 
     @Override
     protected void defineFlow() {
         if (!getParameter().getKeyJoho().isEmpty()) {
-            if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
-                executeStep(SHINSAI_JISSE_ICHIRAN_CSV);
-            } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
-                executeStep(SHINSAI_JISSE_ICHIRAN_REPORT);
-            }
+            executeStep(IKENSHO_JISSEKI_ICHIRAN);
         }
     }
 
     /**
-     * 要介護認定事業状況データCSVの作成を行います。
+     * 要介護認定事業状況データの作成を行います。
      *
      * @return バッチコマンド
      */
-    @Step(SHINSAI_JISSE_ICHIRAN_CSV)
-    IBatchFlowCommand shinsaiinjissekiichiranCsv() {
-        return loopBatch(ShinsaiinJissekiIchiranCsvProcess.class)
-                .arguments(getParameter().toProcessParamter())
-                .define();
-    }
-
-    /**
-     * 要介護認定事業状況データ帳票の作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(SHINSAI_JISSE_ICHIRAN_REPORT)
-    IBatchFlowCommand shinsaiinjissekiichiranReport() {
-        return loopBatch(ShinsaiinJissekiIchiranReportProcess.class)
-                .arguments(getParameter().toProcessParamter())
-                .define();
+    @Step(IKENSHO_JISSEKI_ICHIRAN)
+    IBatchFlowCommand ikenshoJissekiIchiran() {
+        return loopBatch(IkenshoJissekiIchiranProcess.class)
+                .arguments(getParameter().toProcessParamter()).define();
     }
 }

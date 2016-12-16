@@ -47,12 +47,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("HyojiJoken"));
             };
 
-            Controls.prototype.txtHyojiKikanFrom = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtHyojiKikanFrom"));
-            };
-
-            Controls.prototype.txtHyojiKikanTo = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtHyojiKikanTo"));
+            Controls.prototype.txtHyojiKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtHyojiKikan"));
             };
 
             Controls.prototype.txtSaidaiHyojiKensu = function () {

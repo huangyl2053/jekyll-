@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601002;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +31,11 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -75,7 +75,7 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     private ReportSourceWriter<IkenshoJissekiIchiranReportSource> reportSourceWriter;
 
     @BatchWriter
-    private EucCsvWriter<IIkenshoJissekiIchiranCsvEucEntity> eucCsvWriterJunitoJugo;
+    private CsvWriter<IIkenshoJissekiIchiranCsvEucEntity> csvWriter;
 
     @Override
     protected void beforeExecute() {
@@ -96,13 +96,14 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = manager.getEucOutputDirectry();
             eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
-            eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                    setEncode(Encode.UTF_8withBOM)
+            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                    .setEncode(Encode.UTF_8withBOM)
                     .setDelimiter(EUC_WRITER_DELIMITER)
                     .setEnclosure(EUC_WRITER_ENCLOSURE)
                     .setNewLine(NewLine.CRLF)
-                    .hasHeader(true).
-                    build();
+                    .hasHeader(true)
+                    .build();
+
         } else {
             batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
             reportSourceWriter = new ReportSourceWriter<>(batchWrite);
@@ -113,7 +114,7 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     protected void process(IkenshoJissekiIchiranRelateEntity relateEntity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            eucCsvWriterJunitoJugo.writeLine(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
+            csvWriter.writeLine(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
             IkenshoJissekiIchiranReport report = new IkenshoJissekiIchiranReport(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
             report.writeBy(reportSourceWriter);
@@ -123,7 +124,7 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     @Override
     protected void afterExecute() {
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            eucCsvWriterJunitoJugo.close();
+            csvWriter.close();
             manager.spool(eucFilePath);
             バッチ出力条件リストの出力();
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
@@ -160,7 +161,7 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 出力件数 = new RString(eucCsvWriterJunitoJugo.getCount());
+        RString 出力件数 = new RString(csvWriter.getCount());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 意見書記入日FROM_SB = new RStringBuilder("【意見書記入日（From）】");
         意見書記入日FROM_SB.append(dateFormat(paramter.get意見書記入日FROM()));

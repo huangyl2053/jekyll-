@@ -63,8 +63,10 @@ public class ShinsakaiAutoHandler {
                 dgShinsakaiIchiran.setShinsakaiJidoWariateTeiin(jigyoshaInput.get自動割付定員());
                 dgShinsakaiIchiranList.add(dgShinsakaiIchiran);
             }
+            shindiv.getDgShinsakaiIchiran().setDataSource(dgShinsakaiIchiranList);
+        } else {
+            shindiv.getDgShinsakaiIchiran().setDataSource(dgShinsakaiIchiranList);
         }
-        shindiv.getDgShinsakaiIchiran().setDataSource(dgShinsakaiIchiranList);
     }
 
     /**

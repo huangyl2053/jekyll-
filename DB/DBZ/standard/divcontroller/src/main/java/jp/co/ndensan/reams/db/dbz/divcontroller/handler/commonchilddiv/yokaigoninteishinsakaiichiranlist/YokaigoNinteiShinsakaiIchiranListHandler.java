@@ -234,7 +234,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     public ValidationMessageControlPairs 表示期間Fromと表示期間Toの前後順チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiShinsakaiIchiranListMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
-                    div.getTxtHyojiKikanFrom().getText().toString(), div.getTxtHyojiKikanTo().getText().toString()), div.getTxtHyojiKikanFrom(), div.getTxtHyojiKikanTo()));
+                div.getTxtHyojiKikan().getFromText().toString(), div.getTxtHyojiKikan().getToText().toString()), div.getTxtHyojiKikan()));
         return validationMessages;
     }
 

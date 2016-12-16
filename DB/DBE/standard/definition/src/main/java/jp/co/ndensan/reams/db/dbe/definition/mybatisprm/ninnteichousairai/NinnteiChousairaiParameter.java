@@ -11,33 +11,32 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
+ * 認定調査依頼情報を特定するためのMyBatis用パラメータクラスです。
  *
  * @reamsid_L DBE-9999-011 sunhaidi
  */
-@lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Getter
 public final class NinnteiChousairaiParameter {
 
-    private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    private final RString shishoCode;
-    private final ChosaItakusakiCode ninteichosaItakusakiCode;
-    private final ChosainCode ninteiChosainCode;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final RString 支所コード;
+    private final ChosaItakusakiCode 認定調査委託先コード;
+    private final ChosainCode 認定調査員コード;
     private final boolean uses支所コード;
     private final boolean uses調査員コード;
 
     private NinnteiChousairaiParameter(
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo,
-            RString shishoCode,
-            ChosaItakusakiCode ninteichosaItakusakiCode,
-            ChosainCode ninteiChosainCode,
+            ShoKisaiHokenshaNo 証記載保険者番号,
+            RString 支所コード,
+            ChosaItakusakiCode 認定調査委託先コード,
+            ChosainCode 認定調査員コード,
             boolean uses支所コード,
             boolean uses調査員コード) {
-
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-        this.shishoCode = shishoCode;
-        this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
-        this.ninteiChosainCode = ninteiChosainCode;
+        this.証記載保険者番号 = 証記載保険者番号;
+        this.支所コード = 支所コード;
+        this.認定調査委託先コード = 認定調査委託先コード;
+        this.認定調査員コード = 認定調査員コード;
         this.uses支所コード = uses支所コード;
         this.uses調査員コード = uses調査員コード;
     }
@@ -45,61 +44,49 @@ public final class NinnteiChousairaiParameter {
     /**
      * 認定調査委託先のパラメータを生成します。
      *
-     * @param shoKisaiHokenshaNo 証記載保険者番号
-     * @param shishoCode 支所コード
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 支所コード 支所コード
      * @return 認定調査委託先情報パラメータ
      */
     public static NinnteiChousairaiParameter createParam調査委託先Or未割付申請者(
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo,
-            RString shishoCode) {
-        boolean uses支所コード = true;
-        if (shishoCode == null || shishoCode.isEmpty()) {
-            uses支所コード = false;
-        }
-        return new NinnteiChousairaiParameter(shoKisaiHokenshaNo, shishoCode, ChosaItakusakiCode.EMPTY, ChosainCode.EMPTY, uses支所コード, false);
+            ShoKisaiHokenshaNo 証記載保険者番号,
+            RString 支所コード) {
+        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
+        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, ChosaItakusakiCode.EMPTY, ChosainCode.EMPTY, uses支所コード, false);
     }
 
     /**
      * 調査員情報のパラメータを生成します。
      *
-     * @param shoKisaiHokenshaNo 証記載保険者番号
-     * @param shishoCode 支所コード
-     * @param ninteichosaItakusakiCode 認定調査委託先コード
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 支所コード 支所コード
+     * @param 認定調査委託先コード 認定調査委託先コード
      * @return 調査員情報パラメータ
      */
     public static NinnteiChousairaiParameter createParamfor調査員情報(
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo,
-            RString shishoCode,
-            ChosaItakusakiCode ninteichosaItakusakiCode) {
-        boolean uses支所コード = true;
-        if (shishoCode == null || shishoCode.isEmpty()) {
-            uses支所コード = false;
-        }
-        return new NinnteiChousairaiParameter(shoKisaiHokenshaNo, shishoCode, ninteichosaItakusakiCode, ChosainCode.EMPTY, uses支所コード, false);
+            ShoKisaiHokenshaNo 証記載保険者番号,
+            RString 支所コード,
+            ChosaItakusakiCode 認定調査委託先コード) {
+        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
+        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, 認定調査委託先コード, ChosainCode.EMPTY, uses支所コード, false);
     }
 
     /**
      * 割付済み申請者一覧のパラメータを生成します。
      *
-     * @param shoKisaiHokenshaNo 証記載保険者番号
-     * @param shishoCode 支所コード
-     * @param ninteichosaItakusakiCode 認定調査委託先コード
-     * @param ninteiChosainCode 認定調査員コード
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 支所コード 支所コード
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @param 認定調査員コード 認定調査員コード
      * @return 割付済み申請者一覧パラメータ
      */
     public static NinnteiChousairaiParameter createParamfor割付済み申請者一覧(
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo,
-            RString shishoCode,
-            ChosaItakusakiCode ninteichosaItakusakiCode,
-            ChosainCode ninteiChosainCode) {
-        boolean uses支所コード = true;
-        boolean uses調査員コード = true;
-        if (shishoCode == null || shishoCode.isEmpty()) {
-            uses支所コード = false;
-        }
-        if (ninteiChosainCode == null || ninteiChosainCode.value() == null) {
-            uses調査員コード = false;
-        }
-        return new NinnteiChousairaiParameter(shoKisaiHokenshaNo, shishoCode, ninteichosaItakusakiCode, ninteiChosainCode, uses支所コード, uses調査員コード);
+            ShoKisaiHokenshaNo 証記載保険者番号,
+            RString 支所コード,
+            ChosaItakusakiCode 認定調査委託先コード,
+            ChosainCode 認定調査員コード) {
+        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
+        boolean uses調査員コード = (認定調査員コード != null && 認定調査員コード.value() != null);
+        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, 認定調査委託先コード, 認定調査員コード, uses支所コード, uses調査員コード);
     }
 }

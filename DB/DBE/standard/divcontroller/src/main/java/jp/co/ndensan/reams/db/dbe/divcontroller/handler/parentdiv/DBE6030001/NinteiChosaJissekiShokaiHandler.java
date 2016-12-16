@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6030001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyojissekiichiran.ChosahyoJissekiIchiran;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_ShinsakaiiinJissekiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_NinteichosaJissekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyojissekiichiran.ChosahyoJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.NinteiChosaJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.dgNinteiChosaJisseki_Row;
@@ -97,7 +97,11 @@ public class NinteiChosaJissekiShokaiHandler {
     }
 
     private RString get保険者(ChosahyoJissekiIchiran data) {
-        return data.get証記載保険者番号().concat(RString.HALF_SPACE).concat(data.get市町村名称());
+        return nullToEmpty(data.get証記載保険者番号()).concat(RString.HALF_SPACE).concat(nullToEmpty(data.get市町村名称()));
+    }
+
+    private RString nullToEmpty(RString str) {
+        return str == null ? RString.EMPTY : str;
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {
@@ -127,8 +131,8 @@ public class NinteiChosaJissekiShokaiHandler {
      * @param 帳票出力区分 帳票出力区分
      * @return バッチパラメータ
      */
-    public DBE601003_ShinsakaiiinJissekiParameter createBatchParam(RString 帳票出力区分) {
-        DBE601003_ShinsakaiiinJissekiParameter param = new DBE601003_ShinsakaiiinJissekiParameter();
+    public DBE601002_NinteichosaJissekiParameter createBatchParam(RString 帳票出力区分) {
+        DBE601002_NinteichosaJissekiParameter param = new DBE601002_NinteichosaJissekiParameter();
         List<ChosahyoJissekiIchiranKey> keyJoho = new ArrayList<>();
         for (dgNinteiChosaJisseki_Row row : div.getDgNinteiChosaJisseki().getDataSource()) {
             if (row.getSelected()) {

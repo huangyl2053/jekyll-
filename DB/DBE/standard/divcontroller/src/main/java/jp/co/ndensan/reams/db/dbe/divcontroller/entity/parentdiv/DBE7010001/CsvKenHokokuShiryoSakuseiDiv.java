@@ -14,15 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class CsvKenHokokuShiryoSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkCsvShutsuryoku")
-    private CheckBoxList chkCsvShutsuryoku;
+    @JsonProperty("radCsvShutsuryoku")
+    private RadioButton radCsvShutsuryoku;
     @JsonProperty("txtShuturyokuSaki")
     private TextBox txtShuturyokuSaki;
 
@@ -33,21 +33,21 @@ public class CsvKenHokokuShiryoSakuseiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkCsvShutsuryoku
-     * @return chkCsvShutsuryoku
+     * getradCsvShutsuryoku
+     * @return radCsvShutsuryoku
      */
-    @JsonProperty("chkCsvShutsuryoku")
-    public CheckBoxList getChkCsvShutsuryoku() {
-        return chkCsvShutsuryoku;
+    @JsonProperty("radCsvShutsuryoku")
+    public RadioButton getRadCsvShutsuryoku() {
+        return radCsvShutsuryoku;
     }
 
     /*
-     * setchkCsvShutsuryoku
-     * @param chkCsvShutsuryoku chkCsvShutsuryoku
+     * setradCsvShutsuryoku
+     * @param radCsvShutsuryoku radCsvShutsuryoku
      */
-    @JsonProperty("chkCsvShutsuryoku")
-    public void setChkCsvShutsuryoku(CheckBoxList chkCsvShutsuryoku) {
-        this.chkCsvShutsuryoku = chkCsvShutsuryoku;
+    @JsonProperty("radCsvShutsuryoku")
+    public void setRadCsvShutsuryoku(RadioButton radCsvShutsuryoku) {
+        this.radCsvShutsuryoku = radCsvShutsuryoku;
     }
 
     /*

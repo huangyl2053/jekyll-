@@ -47,11 +47,16 @@ public class DBE701001_HokokuShiryo extends BatchFlowBase<DBE701001_HokokuShiryo
         if (getParameter().isSinsaHanteiJyokyo()) {
             executeStep(審査判定状況出力);
         }
-        if (getParameter().isSinsakaiKanrenTokei()) {
-            executeStep(状態区分別判定);
+        if (getParameter().isSinsaHanteiNoHenkouJokyo()) {
             executeStep(審査判定変更状況);
+        }
+        if (getParameter().isKaigoNinteiSinsakaiShukeihyoHanteibetsu()) {
             executeStep(審査会集計表判定別);
+        }
+        if (getParameter().isKaigoNinteiSinsakaiShukeihyoSinseikubunbetsu()) {
             executeStep(審査会集計表申請区分別);
+        }
+        if (getParameter().isKaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu()) {
             executeStep(審査会集計表現在状況別);
         }
         if (getParameter().isCsvShutsuryoku()) {
