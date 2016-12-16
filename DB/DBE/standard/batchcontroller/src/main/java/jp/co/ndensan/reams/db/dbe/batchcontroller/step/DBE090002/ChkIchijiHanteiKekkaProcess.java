@@ -217,7 +217,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private static final int 連番84 = 84;
     private static final int COUNT_15 = 15;
     private static final int COUNT_20 = 20;
-    private static final int IMAGE_WIDTH = 512;
+    private static final int IMAGE_WIDTH = 550;
     private static final int IMAGE_HEIGHT = 40;
     List<RString> list;
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
