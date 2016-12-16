@@ -92,12 +92,12 @@
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" G
         ON A."shinseishoKanriNo" = G."shinseishoKanriNo"
         AND (G."ninteichosaRirekiNo"||G."gaikyoChosaTextImageKubun") = (
-            SELECT
-                MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
-            FROM
-                rgdb."DbT5202NinteichosahyoGaikyoChosa"
-            WHERE
-                "shinseishoKanriNo" = A."shinseishoKanriNo"
+        SELECT
+        MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+        "shinseishoKanriNo" = A."shinseishoKanriNo"
         )
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
@@ -2019,423 +2019,102 @@
             resultMap="hokokushiryosakusei_ShinsakaiShukeiGenzainojokyo"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoMyBatisParameter"
             fetchSize="500">
-        SELECT * FROM
-        ( (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 0 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
+        SELECT
+            G."shichosonCode"
+            , 0 AS shinseiKubun -- 0:新規申請
+            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , COUNT(*) AS countHihokenshaNo
+        FROM
+            rgdb."DbT4102NinteiKekkaJoho" as a
+            INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+            a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+            AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+            AND b."ninteiShinseiShinseijiKubunCode" = '1'
+            <if test="!isEmptyHokensyaNo">
+                AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
+            </if>
         GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 1 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
+            G."shichosonCode"
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , a."nijiHanteiNinteiYukoKikan"
+    UNION ALL
+        SELECT
+            G."shichosonCode"
+            , 1 AS shinseiKubun -- 1:更新申請
+            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , COUNT(*) AS countHihokenshaNo
+        FROM
+            rgdb."DbT4102NinteiKekkaJoho" as a
+            INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+            a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+            AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+            AND b."ninteiShinseiShinseijiKubunCode" = '2'
+            <if test="!isEmptyHokensyaNo">
+                AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
+            </if>
         GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 2 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
+            G."shichosonCode"
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , a."nijiHanteiNinteiYukoKikan"
+    UNION ALL
+        SELECT
+            G."shichosonCode"
+            , 2 AS shinseiKubun --2:区分変更申請
+            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , COUNT(*) AS countHihokenshaNo
+        FROM
+            rgdb."DbT4102NinteiKekkaJoho" as a
+            INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+            a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+            AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+            AND b."ninteiShinseiShinseijiKubunCode" = '3'
+            <if test="!isEmptyHokensyaNo">
+                AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
+            </if>
         GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 3 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
+            G."shichosonCode"
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , a."nijiHanteiNinteiYukoKikan"
+    UNION ALL
+        SELECT
+            G."shichosonCode"
+            , 3 AS shinseiKubun -- 3:転入申請
+            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , COUNT(*) AS countHihokenshaNo
+        FROM
+            rgdb."DbT4102NinteiKekkaJoho" as a
+            INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+            a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+            AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+            AND b."ninteiShinseiShinseijiKubunCode" = '5'
+            <if test="!isEmptyHokensyaNo">
+                AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
+            </if>
         GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 0 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 1 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 2 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 3 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 0 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 1 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 2 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 3 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 0 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 1 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 2 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 3 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")) ShinsakaiShukeiGenzainojokyo
-        ORDER BY
+            G."shichosonCode"
+            , G."shichosonMeisho"
+            , a."nijiHanteiYokaigoJotaiKubunCode"
+            , a."nijiHanteiNinteiYukoKikan"
+    ORDER BY
         "shichosonCode"
         , shinseiKubun
         , yukoKikan
