@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran.ShinsaHoshuIc
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601006.DBE601006_ShinsakaiiinHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.ShinsakauIinHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.dgShinsakaiIinHoshu_Row;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -119,10 +118,17 @@ public class ShinsakauIinHoshuShokaiHandler {
         div.getShinsakaiIinHoshu().setDisplayNone(false);
         div.getDgShinsakaiIinHoshu().setDataSource(rowList);
         div.getTxtShinsaKaisu().setValue(総合計_審査回数);
-        div.getTxtHoshuSogaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬総額());
-        div.getTxtSonotaHiyo().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_その他費用());
-        div.getTxtZeiKojoGaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_税控除額());
-        div.getTxtHoshuGokei().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬合計());
+        if (!ihinsaHoshuIchiranList.isEmpty()) {
+            div.getTxtHoshuSogaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬総額());
+            div.getTxtSonotaHiyo().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_その他費用());
+            div.getTxtZeiKojoGaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_税控除額());
+            div.getTxtHoshuGokei().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬合計());
+        } else {
+            div.getTxtHoshuSogaku().setValue(Decimal.ZERO);
+            div.getTxtSonotaHiyo().setValue(Decimal.ZERO);
+            div.getTxtZeiKojoGaku().setValue(Decimal.ZERO);
+            div.getTxtHoshuGokei().setValue(Decimal.ZERO);
+        }
     }
 
     /**
