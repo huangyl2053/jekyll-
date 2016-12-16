@@ -35,15 +35,15 @@ public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase 
     private List<RString> kaisaiBangouList;
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
     private RString kaisaiBangou;
-    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN_A3, name = "発行フラグ_要介護認定判定結果一覧表A3版")
+    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN_A3, name = "要介護認定判定結果一覧表A3版")
     private boolean isPublish_HanteiKekkaA3;
-    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN, name = "発行フラグ_要介護認定判定結果一覧表")
+    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN, name = "要介護認定判定結果一覧表")
     private boolean isPublish_HanteiKekka;
-    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN_KAGAMI, name = "発行フラグ_要介護認定審査判定結果_鑑")
+    @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN_KAGAMI, name = "要介護認定審査判定結果_鑑")
     private boolean isPublish_HanteiKekkaKagami;
-    @BatchParameter(key = ISPUBLISH_SHINSAKAIGIJIROKU, name = "発行フラグ_要介護認定審査会議事録")
+    @BatchParameter(key = ISPUBLISH_SHINSAKAIGIJIROKU, name = "要介護認定審査会議事録")
     private boolean isPublish_ShinsakaiGijiroku;
-    @BatchParameter(key = ISPUBLISH_KEKKATSUCHIICHIRAN, name = "発行フラグ_要介護認定判定結果一覧表A3版")
+    @BatchParameter(key = ISPUBLISH_KEKKATSUCHIICHIRAN, name = "要介護認定結果通知一覧表")
     private boolean isPublish_KekkaTsuchiIchiran;
 
     /**
