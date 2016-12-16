@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 認定調査実績照会の画面処理クラスです。
@@ -58,13 +58,27 @@ public class NinteiChosaJissekiShokaiHandler {
     /**
      * 「検索する」ボタンを押します。
      *
-     * @param chosahyoJissekiIchiransList 認定調査実績照会
+     * @param searchResult 認定調査実績照会
      */
-    public void onClick_btnKensuku(List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList) {
+    public void onClick_btnKensaku(SearchResult<ChosahyoJissekiIchiran> searchResult) {
+
+        List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList = searchResult.records();
+        setRecords(chosahyoJissekiIchiransList);
+        if (searchResult.exceedsLimit()) {
+            div.getDgNinteiChosaJisseki().getGridSetting().setLimitRowCount(chosahyoJissekiIchiransList.size());
+            div.getDgNinteiChosaJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+        } else {
+            div.getDgNinteiChosaJisseki().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
+            div.getDgNinteiChosaJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+        }
+    }
+
+    private void setRecords(List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList) {
         List<dgNinteiChosaJisseki_Row> rowList = new ArrayList<>();
         for (ChosahyoJissekiIchiran data : chosahyoJissekiIchiransList) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(data.get申請書管理番号()));
-            dgNinteiChosaJisseki_Row row = new dgNinteiChosaJisseki_Row(data.get証記載保険者番号(),
+            dgNinteiChosaJisseki_Row row = new dgNinteiChosaJisseki_Row(
+                    get保険者(data),
                     data.get調査委託先コード(),
                     data.get事業者名称(),
                     data.get調査員氏名(),
@@ -82,6 +96,10 @@ public class NinteiChosaJissekiShokaiHandler {
         div.getDgNinteiChosaJisseki().setDataSource(rowList);
     }
 
+    private RString get保険者(ChosahyoJissekiIchiran data) {
+        return data.get証記載保険者番号().concat(RString.HALF_SPACE).concat(data.get市町村名称());
+    }
+
     private PersonalData toPersonalData(RString 申請書管理番号) {
         ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInformation);
@@ -91,9 +109,6 @@ public class NinteiChosaJissekiShokaiHandler {
      * 画面初期状態の設定です。
      */
     public void set初期状態() {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
         div.getNinteiChosaJisseki().setDisplayNone(true);
         div.getChosaJisshibi().setDisplayNone(false);
     }
@@ -102,9 +117,6 @@ public class NinteiChosaJissekiShokaiHandler {
      * 画面一覧状態の設定です。 検索結果表示状態
      */
     public void set一覧状態() {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, true);
         div.getNinteiChosaJisseki().setDisplayNone(false);
         div.getChosaJisshibi().setDisplayNone(true);
     }
