@@ -52,7 +52,7 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTo
     }
 
     private void edit保険者名(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
-        source.listUpper1_1 = entity.getTemp_保険者名称();
+        source.listUpper1_1 = entity.getTemp_市町村名称() == null ? RString.EMPTY : entity.getTemp_市町村名称();
     }
 
     private void edit被保険者氏名カナ(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
@@ -76,11 +76,11 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTo
     }
 
     private void edit事業者住所(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
-        source.listUpper2_2 = entity.getTemp_事業者住所();
+        source.listUpper2_2 = entity.getTemp_事業者住所() == null ? RString.EMPTY : entity.getTemp_事業者住所();
     }
 
     private void edit被保険者番号(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
-        source.listLower1_1 = entity.getTemp_被保険者番号();
+        source.listLower1_1 = entity.getTemp_被保険者番号() == null ? RString.EMPTY : entity.getTemp_被保険者番号();
     }
 
     private void edit被保険者氏名(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
@@ -88,7 +88,7 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTo
     }
 
     private void edit調査員名(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
-        source.listLower2_1 = entity.getTemp_調査員氏名();
+        source.listLower2_1 = entity.getTemp_調査員氏名() == null ? RString.EMPTY : entity.getTemp_調査員氏名();
     }
 
     private void edit事業者電話番号(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
