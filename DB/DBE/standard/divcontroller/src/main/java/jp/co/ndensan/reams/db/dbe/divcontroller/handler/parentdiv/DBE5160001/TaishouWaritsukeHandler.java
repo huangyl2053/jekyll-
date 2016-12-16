@@ -214,7 +214,7 @@ public class TaishouWaritsukeHandler {
         }
         set対象者一覧(grid表示対象者List);
         対象者一覧No振り直し();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, false);
     }
 
@@ -680,7 +680,6 @@ public class TaishouWaritsukeHandler {
     private void 対象者一覧更新() {
         ShinsakaiWariateJohoManager johoManager = ShinsakaiWariateJohoManager.createInstance();
         for (dgTaishoshaIchiran_Row row : div.getDgTaishoshaIchiran().getDataSource()) {
-            //元々対象者一覧に合ったデータ
             if (row.getJotaiFlag().equals(new RString("1"))) {
                 ShinsakaiWariateJohoMapperParameter mapperParameter
                         = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
@@ -694,7 +693,6 @@ public class TaishouWaritsukeHandler {
                     johoManager.save介護認定審査会割当情報(johoBuilder.build().modifiedModel());
                 }
             }
-            //元々候補者一覧に合ったデータ
             if (row.getJotaiFlag().equals(new RString("2"))) {
                 ShinsakaiWariateJoho2 shinsakaiWariateJoho = new ShinsakaiWariateJoho2(
                         div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),

@@ -21,12 +21,14 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import static jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -179,24 +181,33 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnRegister(TaishouWaritsukeDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        対象者一覧データ空チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (is対象者一覧データ空(div)) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(DBE5160001WarningMessage.対象未選択.getMessage()).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                登録処理(div);
+            }
+            return ResponseData.of(div).respond();
+        } else {
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            } else {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+                }
+                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                        .equals(ResponseHolder.getMessageCode())
+                        && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+                    TaishouWaritsukeHandler handler = getHandler(div);
+                    handler.介護認定審査会割付情報更新();
+                    handler.対象者一覧検索();
+                    handler.候補者一覧検索();
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
+                }
+                return ResponseData.of(div).respond();
+            }
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            TaishouWaritsukeHandler handler = getHandler(div);
-            handler.介護認定審査会割付情報更新();
-            handler.対象者一覧検索();
-            handler.候補者一覧検索();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
-        }
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -272,6 +283,10 @@ public class TaishouWaritsuke {
         return pairs;
     }
 
+    private boolean is対象者一覧データ空(TaishouWaritsukeDiv div) {
+        return div.getDgTaishoshaIchiran().getDataSource().isEmpty();
+    }
+
     private ValidationMessageControlPairs 対象者未選択チェック(ValidationMessageControlPairs pairs, TaishouWaritsukeDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         DBE5160001ErrorMessage 選択されていない = new DBE5160001ErrorMessage(UrErrorMessages.選択されていない, "対象者");
@@ -292,17 +307,60 @@ public class TaishouWaritsuke {
         return pairs;
     }
 
+    private void 登録処理(TaishouWaritsukeDiv div) {
+        TaishouWaritsukeHandler handler = getHandler(div);
+        handler.介護認定審査会割付情報更新();
+        handler.対象者一覧検索();
+        handler.候補者一覧検索();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
+    }
+
     private static class DBE5160001ErrorMessage implements IMessageGettable, IValidationMessage {
 
         private final Message message;
 
+        /**
+         * コンストラクト
+         *
+         * @param message message
+         * @param replacements replacements
+         */
         public DBE5160001ErrorMessage(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 
+        /**
+         * メッセージの取得
+         *
+         * @return Message
+         */
         @Override
         public Message getMessage() {
             return message;
         }
+    }
+
+    private static enum DBE5160001WarningMessage implements IMessageGettable {
+
+        対象未選択(0, "対象者が選択されていません。よろしいですか。");
+
+        private final int no;
+        private final RString message;
+
+        private DBE5160001WarningMessage(int no, String message) {
+            this.no = no;
+            this.message = new RString(message);
+        }
+
+        /**
+         * メッセージの取得
+         *
+         * @return Message
+         */
+        @Override
+        public Message getMessage() {
+            return new WarningMessage(toCode("W", no), this.message.toString());
+        }
+
     }
 }
