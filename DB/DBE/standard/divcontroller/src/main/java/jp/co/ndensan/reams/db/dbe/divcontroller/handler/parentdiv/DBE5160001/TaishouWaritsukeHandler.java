@@ -101,6 +101,7 @@ public class TaishouWaritsukeHandler {
         ヘッドエリア検索();
         対象者一覧検索();
         候補者一覧検索();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
     }
 
     /**
@@ -170,6 +171,7 @@ public class TaishouWaritsukeHandler {
      */
     public void 割付処理() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
         for (dgWaritsukeKohoshaIchiran_Row row : div.getDgWaritsukeKohoshaIchiran().getSelectedItems()) {
             候補者移転処理(row);
         }
@@ -184,6 +186,7 @@ public class TaishouWaritsukeHandler {
             対象者移転処理(row);
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
         div.getTxtWaritsukeNinzu().setValue(new Decimal(div.getDgTaishoshaIchiran().getDataSource().size()));
     }
 
@@ -203,7 +206,16 @@ public class TaishouWaritsukeHandler {
                     div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序);
         }
         List<Taishouichiran> ichiranList = finder.get対象者一覧(parameter);
-        set対象者一覧(ichiranList);
+        List<Taishouichiran> grid表示対象者List = new ArrayList<>();
+        for (Taishouichiran taishoshaichiran : ichiranList) {
+            if (is対象者Gridに存在する(taishoshaichiran)) {
+                grid表示対象者List.add(taishoshaichiran);
+            }
+        }
+        set対象者一覧(grid表示対象者List);
+        対象者一覧No振り直し();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, false);
     }
 
     /**
@@ -580,11 +592,18 @@ public class TaishouWaritsukeHandler {
     }
 
     private void 候補者移転処理(dgWaritsukeKohoshaIchiran_Row kohoshaIchiran_Row) {
+        int 対象者一覧GridMaxNo = 0;
+        for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
+            if (currentRow.getNo().toInt() > 対象者一覧GridMaxNo) {
+                対象者一覧GridMaxNo = currentRow.getNo().toInt();
+            }
+        }
+
         dgTaishoshaIchiran_Row taishoshaIchiran_Row = new dgTaishoshaIchiran_Row(
                 kohoshaIchiran_Row.getJotaiFlag(),
                 kohoshaIchiran_Row.getShinsajunKakuteiFlag(),
                 kohoshaIchiran_Row.getShinseishoKanriNo(),
-                kohoshaIchiran_Row.getNo(),
+                new RString(対象者一覧GridMaxNo + 1),
                 kohoshaIchiran_Row.getPriority(),
                 kohoshaIchiran_Row.getHihokenshaNumber(),
                 kohoshaIchiran_Row.getShimei(),
@@ -613,14 +632,22 @@ public class TaishouWaritsukeHandler {
         );
         div.getDgTaishoshaIchiran().getDataSource().add(taishoshaIchiran_Row);
         div.getDgWaritsukeKohoshaIchiran().getDataSource().remove(kohoshaIchiran_Row);
+        候補者一覧GridNo再割振(kohoshaIchiran_Row);
     }
 
     private void 対象者移転処理(dgTaishoshaIchiran_Row taishoshaIchiran_Row) {
+        int 候補者一覧GridMaxNo = 0;
+        for (dgWaritsukeKohoshaIchiran_Row currentRow : div.getDgWaritsukeKohoshaIchiran().getDataSource()) {
+            if (currentRow.getNo().toInt() > 候補者一覧GridMaxNo) {
+                候補者一覧GridMaxNo = currentRow.getNo().toInt();
+            }
+        }
+
         dgWaritsukeKohoshaIchiran_Row kohoshaIchiran_Row = new dgWaritsukeKohoshaIchiran_Row(
                 taishoshaIchiran_Row.getJotaiFlag(),
                 審査順確定フラグ_確定しない,
                 taishoshaIchiran_Row.getShinseishoKanriNo(),
-                taishoshaIchiran_Row.getNo(),
+                new RString(候補者一覧GridMaxNo + 1),
                 taishoshaIchiran_Row.getPriority(),
                 taishoshaIchiran_Row.getHihokenshaNumber(),
                 taishoshaIchiran_Row.getShimei(),
@@ -652,22 +679,22 @@ public class TaishouWaritsukeHandler {
 
     private void 対象者一覧更新() {
         ShinsakaiWariateJohoManager johoManager = ShinsakaiWariateJohoManager.createInstance();
-        int gridソート順 = 1;
         for (dgTaishoshaIchiran_Row row : div.getDgTaishoshaIchiran().getDataSource()) {
+            //元々対象者一覧に合ったデータ
             if (row.getJotaiFlag().equals(new RString("1"))) {
                 ShinsakaiWariateJohoMapperParameter mapperParameter
                         = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
                                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
                                 new ShinseishoKanriNo(row.getShinseishoKanriNo()));
                 ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
-                if (!row.getNo().equals(new RString(String.valueOf(gridソート順))) || (shinsakaiWariateJoho != null
-                        && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定) != (shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ()))) {
+                if ((shinsakaiWariateJoho != null && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定) != (shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ()))) {
                     ShinsakaiWariateJoho2Builder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
-                    johoBuilder.set介護認定審査会審査順(gridソート順);
+                    johoBuilder.set介護認定審査会審査順(row.getNo().toInt());
                     johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ());
                     johoManager.save介護認定審査会割当情報(johoBuilder.build().modifiedModel());
                 }
             }
+            //元々候補者一覧に合ったデータ
             if (row.getJotaiFlag().equals(new RString("2"))) {
                 ShinsakaiWariateJoho2 shinsakaiWariateJoho = new ShinsakaiWariateJoho2(
                         div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
@@ -675,12 +702,11 @@ public class TaishouWaritsukeHandler {
                 ShinsakaiWariateJoho2Builder builder = shinsakaiWariateJoho.createBuilderForEdit();
                 builder.set介護認定審査会開催年月日(div.getTxtKaisaiDate().getValue());
                 builder.set介護認定審査会割当年月日(new FlexibleDate(RDate.getNowDate().toString()));
-                builder.set介護認定審査会審査順(gridソート順);
+                builder.set介護認定審査会審査順(row.getNo().toInt());
                 builder.set介護認定審査会審査順確定フラグ(row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定));
                 builder.set審査会自動割付フラグ(IsShinsakaiJidoWaritsuke.手動.is審査会自動割付());
                 johoManager.save介護認定審査会割当情報(builder.build().modifiedModel());
             }
-            gridソート順++;
         }
     }
 
@@ -700,4 +726,30 @@ public class TaishouWaritsukeHandler {
         }
     }
 
+    private void 候補者一覧GridNo再割振(dgWaritsukeKohoshaIchiran_Row 割付対象候補者一覧GridData) {
+        int 割付対象GridNo = 割付対象候補者一覧GridData.getNo().toInt();
+        for (dgWaritsukeKohoshaIchiran_Row currentRow : div.getDgWaritsukeKohoshaIchiran().getDataSource()) {
+            if (currentRow.getNo().toInt() > 割付対象GridNo) {
+                currentRow.setNo(new RString(currentRow.getNo().toInt() - 1));
+            }
+        }
+
+    }
+
+    private void 対象者一覧No振り直し() {
+        int 対象者割当No = 1;
+        for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
+            currentRow.setNo(new RString(対象者割当No));
+            対象者割当No += 1;
+        }
+    }
+
+    private boolean is対象者Gridに存在する(Taishouichiran 検索該当者) {
+        for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
+            if (currentRow.getHihokenshaNumber().equals(検索該当者.get被保険者番号())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
