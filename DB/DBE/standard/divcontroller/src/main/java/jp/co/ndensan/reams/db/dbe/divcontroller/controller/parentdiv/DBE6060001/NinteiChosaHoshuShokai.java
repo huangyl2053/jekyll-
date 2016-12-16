@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -64,8 +63,14 @@ public class NinteiChosaHoshuShokai {
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
     public ResponseData<NinteiChosaHoshuShokaiDiv> onClick_btnKensaku(NinteiChosaHoshuShokaiDiv div) {
-        FlexibleDate 依頼日開始 = new FlexibleDate(div.getTxtChosaIraibi().getFromValue().toDateString());
-        FlexibleDate 依頼日終了 = new FlexibleDate(div.getTxtChosaIraibi().getToValue().toDateString());
+        RString 依頼日開始 = RString.EMPTY;
+        RString 依頼日終了 = RString.EMPTY;
+        if (div.getTxtChosaIraibi().getFromValue() != null) {
+            依頼日開始 = div.getTxtChosaIraibi().getFromValue().toDateString();
+        }
+        if (div.getTxtChosaIraibi().getToValue() != null) {
+            依頼日終了 = div.getTxtChosaIraibi().getToValue().toDateString();
+        }
         NinteiChosaHoshuShokaiMapperParameter chosaParamter = NinteiChosaHoshuShokaiMapperParameter.createSelectBy情報(
                 DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 依頼日開始, 依頼日終了, Integer.parseInt(div.getChosaIraibi().getTxtMaxKensu().getValue().toString()), false, null);
