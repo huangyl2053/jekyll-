@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter implements IBatchProcessParameter {
 
     private RString temp_保険者コード;
-    private RString temp_保険者名称;
     private RString temp_認定調査委託先コード;
     private RString temp_認定調査員コード;
     private FlexibleDate temp_基準日;
