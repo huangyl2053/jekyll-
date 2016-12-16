@@ -42,8 +42,14 @@ public class JiGyoSyaHandler {
     private final JigyoshaNyuryokuGudieCommonChildDivDiv div;
     private final RString 前方一致 = new RString("前方一致");
     private final RString 完全一致 = new RString("完全一致");
+    private final RString 後方一致 = new RString("後方一致");
+    private final RString 部分一致 = new RString("部分一致");
+    
     private final RString 前方一致_コード = new RString("key0");
     private final RString 完全一致_コード = new RString("key1");
+    private final RString 後方一致_コード = new RString("key2");
+    private final RString 部分一致_コード = new RString("key3");
+    
     private final RString 管内管外区分_全て = new RString("0");
     private final RString 管内管外区分_管内 = new RString("1");
     private final RString 管内管外区分_管外 = new RString("2");
@@ -137,6 +143,8 @@ public class JiGyoSyaHandler {
                             ? RString.EMPTY : Jigyosha.records().get(i).get介護事業者_事業者住所().value());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
+                    dgJigyoshaItiran.setTxtYubin(Jigyosha.records().get(i).get郵便番号() == null ? RString.EMPTY
+                            : Jigyosha.records().get(i).get郵便番号().getEditedYubinNo());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
                     dgJigyoshaItiran.getTxtYukoShuryobiYMD().setDisabled(true);
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
@@ -203,6 +211,8 @@ public class JiGyoSyaHandler {
                             ? RString.EMPTY : Jigyosha.records().get(i).get介護除外住所地特例対象施設_事業者住所());
                     dgJigyoshaItiran.setTxtTelNo(Jigyosha.records().get(i).get電話番号() == null ? RString.EMPTY
                             : Jigyosha.records().get(i).get電話番号().value());
+                    dgJigyoshaItiran.setTxtYubin(Jigyosha.records().get(i).get郵便番号() == null ? RString.EMPTY
+                            : Jigyosha.records().get(i).get郵便番号().getEditedYubinNo());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
                     dgJigyoshaItiran.getTxtYukoShuryobiYMD().setDisabled(true);
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
@@ -259,6 +269,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setDisabled(true);
                     dgJigyoshaItiran.getTxtYukoShuryobiYMD().setDisabled(true);
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
+                    dgJigyoshaItiran.setTxtYubin(Jigyosha.records().get(i).get郵便番号() == null ? RString.EMPTY
+                            : Jigyosha.records().get(i).get郵便番号().getEditedYubinNo());
                 }
                 DataGridSetting dataGrid = div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting();
                 dataGrid.setLimitRowCount(div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue());
@@ -478,13 +490,22 @@ public class JiGyoSyaHandler {
 
         KeyValueDataSource KeyValue1 = new KeyValueDataSource();
         KeyValueDataSource KeyValue2 = new KeyValueDataSource();
+        KeyValueDataSource KeyValue3 = new KeyValueDataSource();
+        KeyValueDataSource KeyValue4 = new KeyValueDataSource();
         KeyValue1.setKey(前方一致_コード);
         KeyValue2.setKey(完全一致_コード);
+        KeyValue3.setKey(後方一致_コード);
+        KeyValue4.setKey(部分一致_コード);
         KeyValue1.setValue(前方一致);
         KeyValue2.setValue(完全一致);
-
+        KeyValue3.setValue(後方一致);
+        KeyValue4.setValue(部分一致);
+        
         dataSource.add(KeyValue1);
         dataSource.add(KeyValue2);
+        dataSource.add(KeyValue3);
+        dataSource.add(KeyValue4);
+        
         return dataSource;
     }
 

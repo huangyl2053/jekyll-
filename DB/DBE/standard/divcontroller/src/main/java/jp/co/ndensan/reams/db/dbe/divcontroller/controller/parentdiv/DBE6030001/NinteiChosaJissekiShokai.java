@@ -83,10 +83,10 @@ public class NinteiChosaJissekiShokai {
                 div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value(),
                 new RString(div.getChosaJisshibi().getTxtMaxKensu().getValue().toString()));
         getHandler(div).set一覧状態();
-        getHandler(div).onClick_btnKensuku(NinteiChosaJissekiShokaiFindler.creatInstance().get帳票出力用認定調査実績集計表(paramter).records());
+        getHandler(div).onClick_btnKensaku(NinteiChosaJissekiShokaiFindler.creatInstance().get帳票出力用認定調査実績集計表(paramter));
         if (div.getDgNinteiChosaJisseki().getDataSource().isEmpty()) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
         }
         return ResponseData.of(div).respond();
     }
@@ -101,7 +101,7 @@ public class NinteiChosaJissekiShokai {
         getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * データの必須選択チェックを実施します。
      *
@@ -115,7 +115,7 @@ public class NinteiChosaJissekiShokai {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「CSVを出力する」ボタンを押します。
      *

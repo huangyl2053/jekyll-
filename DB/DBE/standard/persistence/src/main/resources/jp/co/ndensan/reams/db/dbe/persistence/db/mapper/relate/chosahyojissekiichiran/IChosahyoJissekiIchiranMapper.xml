@@ -5,44 +5,59 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosahyojissekiichiran.IChosahyoJissekiIchiranMapper">
 
-    
+
     <select id="get帳票出力用認定調査実績集計表"
-            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranRelateEntity" 
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true">
         SELECT
-          T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
-          , T5601."ninteichosaItakusakiCode" AS 調査委託先コード
-          , T5910."jigyoshaMeisho" AS 事業者名称
-          , T5601."ninteichosainCode" AS 調査員コード
-          , T5913."chosainShimei" AS 調査員氏名
-          , T5101."hihokenshaNo" AS 被保険者番号
-          , T5101."hihokenshaName" AS 被保険者氏名
-          , T5202."ninteichosaJisshiYMD" AS 認定調査実施年月日
-          , T5202."ninteiChosaKubunCode" AS 認定調査区分コード
-          , T5202."ninteichosaIraiKaisu" AS 認定調査実施場所名称
-          , T5202."ninteichousaIraiKubunCode" AS 認定調査依頼区分コード
-          , T5601."shinseishoKanriNo" AS 申請書管理番号
-          , T5601."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号
+        T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
+        , T7051."shichosonMeisho"
+        , T5601."ninteichosaItakusakiCode" AS 調査委託先コード
+        , T5910."jigyoshaMeisho" AS 事業者名称
+        , T5601."ninteichosainCode" AS 調査員コード
+        , T5913."chosainShimei" AS 調査員氏名
+        , T5101."hihokenshaNo" AS 被保険者番号
+        , T5101."hihokenshaName" AS 被保険者氏名
+        , T5202."ninteichosaJisshiYMD" AS 認定調査実施年月日
+        , T5202."ninteiChosaKubunCode" AS 認定調査区分コード
+        , T5202."ninteichosaIraiKaisu" AS 認定調査実施場所名称
+        , T5202."ninteichousaIraiKubunCode" AS 認定調査依頼区分コード
+        , T5601."shinseishoKanriNo" AS 申請書管理番号
+        , T5601."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号
+        <include refid="core" />
+        <include refid="order" />
+    </select>
+
+
+    <select id="getTotalCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true" >
+        SELECT
+        COUNT(*)
+        <include refid="core" />
+    </select>
+
+    <sql id="core">
         FROM
-          rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS T5601 
-          INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101 
-            ON T5101."shinseishoKanriNo" = T5601."shinseishoKanriNo" 
-          INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
-            ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
-          INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-            ON T5910."shichosonCode" = T7051."shichosonCode" 
-            AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode" 
-          INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
-            ON T5913."shichosonCode" = T7051."shichosonCode" 
-            AND T5913."ninteiChosaItakusakiCode" = T5601."ninteichosaItakusakiCode" 
-            AND T5913."ninteiChosainCode" = T5601."ninteichosainCode" 
-          INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
-            ON T5601."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
-            AND T5601."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
+        rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS T5601
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
+        ON T5101."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+        ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+        INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
+        ON T5910."shichosonCode" = T7051."shichosonCode"
+        AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
+        INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
+        ON T5913."shichosonCode" = T7051."shichosonCode"
+        AND T5913."ninteiChosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
+        AND T5913."ninteiChosainCode" = T5601."ninteichosainCode"
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
+        ON T5601."shinseishoKanriNo" = T5202."shinseishoKanriNo"
+        AND T5601."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo"
         WHERE
-          1 = 1 
+        1 = 1
         <if test="調査実施日FROMFlag">
-          AND #{調査実施日FROM} <![CDATA[<=]]> T5202."ninteichosaJisshiYMD" 
+            AND #{調査実施日FROM} <![CDATA[<=]]> T5202."ninteichosaJisshiYMD"
         </if>
         <if test="調査実施日TOFlag">
             AND T5202."ninteichosaJisshiYMD" <![CDATA[<=]]> #{調査実施日TO}
@@ -52,9 +67,9 @@
         </if>
         <if test="batchFlag">
             AND
-            <foreach collection="keyJoho" item="item" open="("  
-            separator="OR"  
-            close=")">
+            <foreach collection="keyJoho" item="item" open="("
+                     separator="OR"
+                     close=")">
                 (
                 T5601."ninteichosaItakusakiCode" = #{item.ninteichosaItakusakiCode}
                 AND T5601."ninteichosainCode" = #{item.ninteichosainCode}
@@ -63,12 +78,15 @@
                 )
             </foreach>
         </if>
+    </sql>
+
+    <sql id="order">
         <if test="gamenFlag">
             ORDER BY T5601."ninteichosaItakusakiCode", T5601."ninteichosainCode", T5601."shinseishoKanriNo", T5601."ninteichosaIraiRirekiNo"
             <if test="件数Flag">
                 LIMIT #{件数}
             </if>
         </if>
-    </select>
-    
+    </sql>
+
 </mapper>

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaJissekiShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -92,16 +92,6 @@ public class NinteiChosaJissekiShokaiDiv extends Panel {
     @JsonIgnore
     public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.getChosaJisshibi().setTxtMaxKensu(txtMaxKensu);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getChosaJisshibi().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getChosaJisshibi().setBtnKensaku(btnKensaku);
     }
 
     @JsonIgnore
