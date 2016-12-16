@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GetureiSyoriTantoshaWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IKnSyoiRaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IkenSyoNyuSyuRelateEntity;
@@ -178,9 +178,9 @@ public interface IYokaigoNinteiTaskListMapper {
      * &介護認定審査会開催予定情報&介護認定審査会開催結果情報
      *
      * @param parameter YokaigoNinteiTaskListParameter
-     * @return List<GeTuReiSyoRiRelateEntity>
+     * @return GetureiSyoriTantoshaWithCountEntity
      */
-    List<GeTuReiSyoRiRelateEntity> get月例処理(YokaigoNinteiTaskListParameter parameter);
+    GetureiSyoriTantoshaWithCountEntity get月例処理(YokaigoNinteiTaskListParameter parameter);
 
     /**
      * 要介護認定申請情報&構成市町村マスタ&要介護認定完了情報&要介護認定結果情報&介護認定審査会割当情報
