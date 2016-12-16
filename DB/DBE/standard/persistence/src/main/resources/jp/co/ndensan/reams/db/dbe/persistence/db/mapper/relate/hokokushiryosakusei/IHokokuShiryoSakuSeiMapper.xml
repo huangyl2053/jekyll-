@@ -1463,8 +1463,6 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
@@ -1476,27 +1474,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinseiJohoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(A."ninteiShinseiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (A."ninteiShinseiYMD" <![CDATA[<>]]> '' OR A."ninteiShinseiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1511,8 +1510,8 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" shin_chosaitaku
+        ON A."shinseishoKanriNo" = shin_chosaitaku."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
@@ -1524,27 +1523,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteichosaKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(shin_chosaitaku."ninteichosaJisshiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_chosaitaku."ninteichosaJisshiYMD"
+                                AND shin_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_chosaitaku."ninteichosaJisshiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND shin_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (shin_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<>]]> '' OR shin_chosaitaku."ninteichosaJisshiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1559,8 +1559,8 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" shin_shujii
+        ON A."shinseishoKanriNo" = shin_shujii."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
@@ -1572,27 +1572,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ikenshoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(shin_shujii."ikenshoKinyuYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shujii."ikenshoKinyuYMD"
+                                AND shin_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shujii."ikenshoKinyuYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND shin_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (shin_shujii."ikenshoKinyuYMD" <![CDATA[<>]]> '' OR shin_shujii."ikenshoKinyuYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1607,10 +1608,10 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" shin_shinsakai
+        ON D."shinsakaiKaisaiNo" = shin_shinsakai."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
@@ -1620,27 +1621,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinsakaiWariateKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(shin_shinsakai."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
-                                AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shinsakai."shinsakaiKaisaiYMD"
+                                AND shin_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shinsakai."shinsakaiKaisaiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND shin_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (shin_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<>]]> '' OR shin_shinsakai."shinsakaiKaisaiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1655,8 +1657,6 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
@@ -1691,6 +1691,7 @@
                 </choose>
             </otherwise>
         </choose>
+        AND (C."nijiHanteiYMD" <![CDATA[<>]]> '' OR C."nijiHanteiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1705,8 +1706,6 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
@@ -1718,27 +1717,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinseiJohoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(A."ninteiShinseiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (A."ninteiShinseiYMD" <![CDATA[<>]]> '' OR A."ninteiShinseiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1753,8 +1753,8 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" hou_chosaitaku
+        ON A."shinseishoKanriNo" = hou_chosaitaku."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
@@ -1766,27 +1766,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteichosaKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(hou_chosaitaku."ninteichosaJisshiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
+                                AND hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<>]]> '' OR hou_chosaitaku."ninteichosaJisshiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1801,8 +1802,8 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" hou_shujii
+        ON A."shinseishoKanriNo" = hou_shujii."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
@@ -1814,27 +1815,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ikenshoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(hou_shujii."ikenshoKinyuYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
+                                AND hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (hou_shujii."ikenshoKinyuYMD" <![CDATA[<>]]> '' OR hou_shujii."ikenshoKinyuYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1849,10 +1851,10 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" hou_shinsakai
+        ON D."shinsakaiKaisaiNo" = hou_shinsakai."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
@@ -1862,27 +1864,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinsakaiWariateKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(hou_shinsakai."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
-                                AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
+                                AND hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<>]]> '' OR hou_shinsakai."shinsakaiKaisaiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1897,8 +1900,6 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
@@ -1933,6 +1934,7 @@
                 </choose>
             </otherwise>
         </choose>
+        AND (C."nijiHanteiYMD" <![CDATA[<>]]> '' OR C."nijiHanteiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1947,12 +1949,16 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" hou_chosaitaku
+        ON A."shinseishoKanriNo" = hou_chosaitaku."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" hou_shujii
+        ON A."shinseishoKanriNo" = hou_shujii."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" hou_shinsakai
+        ON D."shinsakaiKaisaiNo" = hou_shinsakai."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
         ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
@@ -1963,10 +1969,10 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND (SUBSTR(B."ninteiShinseiJohoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
-                OR SUBSTR(B."ninteichosaKanryoYMD", 1, 6) = #{taishoNendoYM}
-                OR SUBSTR(B."ikenshoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
-                OR SUBSTR(B."ninteiShinsakaiWariateKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND (SUBSTR(A."ninteiShinseiYMD", 1, 6) = #{taishoNendoYM}
+                OR SUBSTR(hou_chosaitaku."ninteichosaJisshiYMD", 1, 6) = #{taishoNendoYM}
+                OR SUBSTR(hou_shujii."ikenshoKinyuYMD", 1, 6) = #{taishoNendoYM}
+                OR SUBSTR(hou_shinsakai."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
                 OR SUBSTR(C."nijiHanteiYMD", 1, 6) = #{taishoNendoYM} )
             </when>
             <otherwise>
@@ -1974,31 +1980,31 @@
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND ((#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
-                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
-                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
-                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
-                                AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                AND ((#{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
+                                AND hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
+                                AND hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
+                                AND hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
                                 OR (#{taishoGeppiFrom} <![CDATA[<=]]> C."nijiHanteiYMD"
                                 AND C."nijiHanteiYMD" <![CDATA[<=]]> #{taishoGeppiTo}))
                             </when>
                             <otherwise>
-                                AND (#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                OR #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                OR #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                OR #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
+                                AND (#{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                OR #{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
+                                OR #{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
+                                OR #{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
                                 OR #{taishoGeppiFrom} <![CDATA[<=]]> C."nijiHanteiYMD")
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND (B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                        OR B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                        OR B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                        OR B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND (A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        OR hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        OR hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        OR hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                         OR C."nijiHanteiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
                     </otherwise>
                 </choose>
