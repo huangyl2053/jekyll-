@@ -548,13 +548,13 @@ public class ChkNinteiChosahyo42Process extends BatchProcessBase<YokaigoninteiEn
         RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
         if (イメージ.equals(entity.getテキスト_イメージ区分())) {
             RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
-            共有ファイルを引き出す(イメージID, 共有ファイル名);
-            ninteiEntity.set実施場所イメージ(getイメージファイル名(イメージID01));
-            ninteiEntity.set市町村特別給付イメージ(getイメージファイル名(イメージID02));
-            ninteiEntity.set介護保険給付外の在宅イメージ(getイメージファイル名(イメージID03));
-            ninteiEntity.set施設名イメージ(getイメージファイル名(イメージID04));
-            ninteiEntity.set施設住所イメージ(getイメージファイル名(イメージID05));
-            ninteiEntity.set施設電話イメージ(getイメージファイル名(イメージID06));
+            RString path = 共有ファイルを引き出す(イメージID, 共有ファイル名);
+            ninteiEntity.set実施場所イメージ(getイメージファイル名(path, イメージID01));
+            ninteiEntity.set市町村特別給付イメージ(getイメージファイル名(path, イメージID02));
+            ninteiEntity.set介護保険給付外の在宅イメージ(getイメージファイル名(path, イメージID03));
+            ninteiEntity.set施設名イメージ(getイメージファイル名(path, イメージID04));
+            ninteiEntity.set施設住所イメージ(getイメージファイル名(path, イメージID05));
+            ninteiEntity.set施設電話イメージ(getイメージファイル名(path, イメージID06));
         }
         ninteiEntity.set施設利用(RString.isNullOrEmpty(entity.get施設利用()) ? RString.EMPTY
                 : GenzainoJokyoCode.toValue(entity.get施設利用()).get名称());
@@ -566,21 +566,24 @@ public class ChkNinteiChosahyo42Process extends BatchProcessBase<YokaigoninteiEn
         ninteiEntity.set日常生活自立度リスト(日常生活自立度リスト);
     }
 
-    private void 共有ファイルを引き出す(RDateTime sharedFileId, RString sharedFileName) {
+    private RString 共有ファイルを引き出す(RDateTime sharedFileId, RString sharedFileName) {
         if (sharedFileId != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
             try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite42.getImageFolderPath()));
+                return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite42.getImageFolderPath())).getCanonicalPath());
             } catch (Exception e) {
+                return RString.EMPTY;
             }
         }
+        return RString.EMPTY;
     }
 
-    private RString getイメージファイル名(RString fileName) {
+    private RString getイメージファイル名(RString path, RString fileName) {
         RString file = フラグ.equals(processPrm.getRadShujii()) ? fileName : fileName.replace(拡張子_PNG.toString(), "_BAK.png");
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite42.getImageFolderPath(), file))) {
-            return file;
+        RString fileFullPath = getFilePath(path, file);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
