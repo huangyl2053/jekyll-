@@ -213,62 +213,62 @@ public class genpoTabContainerDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo3() {
+    public DynamicImage getImgGenpo3() {
         return this.getGenpoTabPanel3().getImgGenpo3();
     }
 
     @JsonIgnore
-    public void  setImgGenpo3(StaticImage imgGenpo3) {
+    public void  setImgGenpo3(DynamicImage imgGenpo3) {
         this.getGenpoTabPanel3().setImgGenpo3(imgGenpo3);
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo4() {
+    public DynamicImage getImgGenpo4() {
         return this.getGenpoTabPanel4().getImgGenpo4();
     }
 
     @JsonIgnore
-    public void  setImgGenpo4(StaticImage imgGenpo4) {
+    public void  setImgGenpo4(DynamicImage imgGenpo4) {
         this.getGenpoTabPanel4().setImgGenpo4(imgGenpo4);
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo5() {
+    public DynamicImage getImgGenpo5() {
         return this.getGenpoTabPanel5().getImgGenpo5();
     }
 
     @JsonIgnore
-    public void  setImgGenpo5(StaticImage imgGenpo5) {
+    public void  setImgGenpo5(DynamicImage imgGenpo5) {
         this.getGenpoTabPanel5().setImgGenpo5(imgGenpo5);
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo6() {
+    public DynamicImage getImgGenpo6() {
         return this.getGenpoTabPanel6().getImgGenpo6();
     }
 
     @JsonIgnore
-    public void  setImgGenpo6(StaticImage imgGenpo6) {
+    public void  setImgGenpo6(DynamicImage imgGenpo6) {
         this.getGenpoTabPanel6().setImgGenpo6(imgGenpo6);
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo7() {
+    public DynamicImage getImgGenpo7() {
         return this.getGenpoTabPanel7().getImgGenpo7();
     }
 
     @JsonIgnore
-    public void  setImgGenpo7(StaticImage imgGenpo7) {
+    public void  setImgGenpo7(DynamicImage imgGenpo7) {
         this.getGenpoTabPanel7().setImgGenpo7(imgGenpo7);
     }
 
     @JsonIgnore
-    public StaticImage getImgGenpo8() {
+    public DynamicImage getImgGenpo8() {
         return this.getGenpoTabPanel8().getImgGenpo8();
     }
 
     @JsonIgnore
-    public void  setImgGenpo8(StaticImage imgGenpo8) {
+    public void  setImgGenpo8(DynamicImage imgGenpo8) {
         this.getGenpoTabPanel8().setImgGenpo8(imgGenpo8);
     }
 

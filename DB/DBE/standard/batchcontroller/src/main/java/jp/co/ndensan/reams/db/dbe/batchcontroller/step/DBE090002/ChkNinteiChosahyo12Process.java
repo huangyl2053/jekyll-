@@ -522,7 +522,8 @@ public class ChkNinteiChosahyo12Process extends BatchProcessBase<YokaigoninteiEn
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         ninteiEntity.set調査実施日(entity.get実施年月日() == null ? RString.EMPTY : entity.get実施年月日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-        ninteiEntity.set実施場所コード(ChosaJisshiBashoCode.toValue(entity.get実施場所コード()).get名称());
+        ninteiEntity.set実施場所コード(RString.isNullOrEmpty(entity.get実施場所コード()) ? RString.EMPTY
+                : ChosaJisshiBashoCode.toValue(entity.get実施場所コード()).get名称());
         ninteiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         ninteiEntity.setサービス区分コード(entity.getサービス区分コード());
         List<DbT5209NinteichosahyoKinyuItemEntity> dbt5209Entity = mapper.get認定調査票記入項目(processPrm.toYokaigoBatchMybitisParamter());

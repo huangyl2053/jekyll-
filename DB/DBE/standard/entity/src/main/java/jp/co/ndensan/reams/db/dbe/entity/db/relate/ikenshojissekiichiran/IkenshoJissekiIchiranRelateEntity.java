@@ -20,6 +20,7 @@ import lombok.Setter;
 public class IkenshoJissekiIchiranRelateEntity {
 
     private RString 証記載保険者番号;
+    private RString 市町村名称;
     private RString 医療機関コード;
     private RString 医療機関名称;
     private RString 主治医氏名;

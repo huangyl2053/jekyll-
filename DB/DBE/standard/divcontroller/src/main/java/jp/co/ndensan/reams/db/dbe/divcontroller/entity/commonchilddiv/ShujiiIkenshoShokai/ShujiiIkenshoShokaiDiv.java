@@ -34,12 +34,6 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
     private TextBox txtDentatsuNoryoku;
     @JsonProperty("txtShokujiKoi")
     private TextBox txtShokujiKoi;
-    @JsonProperty("txtTest")
-    private TextBox txtTest;
-    @JsonProperty("txtTest2")
-    private TextBox txtTest2;
-    @JsonProperty("txtTest3")
-    private TextBox txtTest3;
     @JsonProperty("CcdChosaTokkiShiryoShokai")
     private ChosaTokkiShiryoShokaiDiv CcdChosaTokkiShiryoShokai;
     @JsonProperty("btnReturn")
@@ -143,60 +137,6 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
     @JsonProperty("txtShokujiKoi")
     public void setTxtShokujiKoi(TextBox txtShokujiKoi) {
         this.txtShokujiKoi = txtShokujiKoi;
-    }
-
-    /*
-     * gettxtTest
-     * @return txtTest
-     */
-    @JsonProperty("txtTest")
-    public TextBox getTxtTest() {
-        return txtTest;
-    }
-
-    /*
-     * settxtTest
-     * @param txtTest txtTest
-     */
-    @JsonProperty("txtTest")
-    public void setTxtTest(TextBox txtTest) {
-        this.txtTest = txtTest;
-    }
-
-    /*
-     * gettxtTest2
-     * @return txtTest2
-     */
-    @JsonProperty("txtTest2")
-    public TextBox getTxtTest2() {
-        return txtTest2;
-    }
-
-    /*
-     * settxtTest2
-     * @param txtTest2 txtTest2
-     */
-    @JsonProperty("txtTest2")
-    public void setTxtTest2(TextBox txtTest2) {
-        this.txtTest2 = txtTest2;
-    }
-
-    /*
-     * gettxtTest3
-     * @return txtTest3
-     */
-    @JsonProperty("txtTest3")
-    public TextBox getTxtTest3() {
-        return txtTest3;
-    }
-
-    /*
-     * settxtTest3
-     * @param txtTest3 txtTest3
-     */
-    @JsonProperty("txtTest3")
-    public void setTxtTest3(TextBox txtTest3) {
-        this.txtTest3 = txtTest3;
     }
 
     /*

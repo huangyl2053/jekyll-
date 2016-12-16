@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -45,13 +44,10 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -380,7 +376,7 @@ public class ChosaKekkaInfoGaikyoHandler {
                 RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
                 RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
                 RString 出力イメージフォルダパス = copySharedFiles(image, 共有ファイル名);
-                
+
                 setImage認定調査実施場所(出力イメージフォルダパス);
                 setImage概況調査特記(出力イメージフォルダパス);
                 setImageサービス(gaikyoBusiness, 出力イメージフォルダパス);
@@ -494,56 +490,84 @@ public class ChosaKekkaInfoGaikyoHandler {
     }
 
     private void setImage認定調査実施場所(RString 出力イメージフォルダパス) {
-        RString 実施場所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_認定調査実施場所);        
-        gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(sanitizePath(実施場所ImagePath, 出力イメージフォルダパス));
-    }
-    
-    private RString sanitizePath(RString imagePath, RString 出力イメージフォルダパス) {
-        RString DATAURI_BMP = new RString("data:image/png;base64,");
-        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(出力イメージフォルダパス, imagePath)) : RString.EMPTY;
-    }
-    
-    private RString base64encode(RString 出力イメージフォルダパス, RString イメージパス) {
-        RString imgBase64 = RString.EMPTY;
-        try {
-            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(Path.combinePath(出力イメージフォルダパス).toString(), イメージパス.toString())));
-        } catch (IOException ex) {
+        RString 実施場所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_認定調査実施場所);
+        if (RString.isNullOrEmpty(実施場所ImagePath)) {
+            gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setDisplayNone(true);
+            gaikyoDiv.getJisshiBashoMeishoPanel().getLblNoImageJisshiBasho().setDisplayNone(false);
+        } else {
+            gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(sanitizePath(実施場所ImagePath));
         }
-        return imgBase64;
     }
 
     private void setImage概況調査特記(RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             RString 概況調査特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況調査特記);
-            gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(sanitizePath(概況調査特記ImagePath, 出力イメージフォルダパス));
+            if (RString.isNullOrEmpty(概況調査特記ImagePath)) {
+                gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setDisplayNone(true);
+                gaikyoDiv.getGaikyoChosaTokkiPanel().getLblNoImageGaikyoChosaTokki().setDisplayNone(false);
+            } else {
+                gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(sanitizePath(概況調査特記ImagePath));
+            }
         }
     }
 
     private void setImageサービス(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness, RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            if (gaikyoBusiness.get記入項目連番() == 1) {
-                RString 市町村特別給付ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_市町村特別給付);
-                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(sanitizePath(市町村特別給付ImagePath, 出力イメージフォルダパス));
+//            if (gaikyoBusiness.get記入項目連番() == 1) {
+            RString 市町村特別給付ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_市町村特別給付);
+            if (RString.isNullOrEmpty(市町村特別給付ImagePath)) {
+                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setDisplayNone(true);
+                gaikyoDiv.getTokubetsuKyufuPanel().getLblNoImageTokubetsuKyufu().setDisplayNone(false);
             } else {
-                RString 在宅サービスImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_在宅サービス);
-                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(sanitizePath(在宅サービスImagePath, 出力イメージフォルダパス));
+                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(sanitizePath(市町村特別給付ImagePath));
             }
+//            } else {
+            RString 在宅サービスImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_在宅サービス);
+            if (RString.isNullOrEmpty(在宅サービスImagePath)) {
+                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setDisplayNone(true);
+                gaikyoDiv.getZaitakuServicePanel().getLblNoImageZaitakuService().setDisplayNone(false);
+            } else {
+                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(sanitizePath(在宅サービスImagePath));
+            }
+//            }
         }
     }
 
     private void setImage利用施設情報(RString 出力イメージフォルダパス) {
         RString 施設名称ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設名);
+        if (RString.isNullOrEmpty(施設名称ImagePath)) {
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getImgRiyoShisetsuMeisho().setDisplayNone(true);
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getLblNoImageRiyoShisetsuMeisho().setDisplayNone(false);
+        } else {
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getImgRiyoShisetsuMeisho().setSrc(sanitizePath(施設名称ImagePath));
+        }
+
         RString 施設住所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設住所);
+        if (RString.isNullOrEmpty(施設住所ImagePath)) {
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().getImgRiyoShisetsuJusho().setDisplayNone(true);
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().getLblNoImageRiyoShisetsuJusho().setDisplayNone(false);
+        } else {
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().getImgRiyoShisetsuJusho().setSrc(sanitizePath(施設住所ImagePath));
+        }
+
         RString 電話番号ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_電話番号);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuMeisho().setSrc(sanitizePath(施設名称ImagePath, 出力イメージフォルダパス));
-        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuJusho().setSrc(sanitizePath(施設住所ImagePath, 出力イメージフォルダパス));
-        gaikyoDiv.getShisetsuRiyoPanel().getImgTelNo().setSrc(sanitizePath(電話番号ImagePath, 出力イメージフォルダパス));
+        if (RString.isNullOrEmpty(電話番号ImagePath)) {
+            gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().getImgTelNo().setDisplayNone(true);
+            gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().getLblNoImageTelNo().setDisplayNone(false);
+        } else {
+            gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().getImgTelNo().setSrc(sanitizePath(電話番号ImagePath));
+        }
     }
 
     private void setImage概況特記(RString 出力イメージフォルダパス) {
         if (出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             RString 概況特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況特記);
-            gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(sanitizePath(概況特記ImagePath, 出力イメージフォルダパス));
+            if (RString.isNullOrEmpty(概況特記ImagePath)) {
+                gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setDisplayNone(true);
+                gaikyoDiv.getGaikyoTokkiPanel().getLblNoImageGaikyoTokki().setDisplayNone(false);
+            } else {
+                gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(sanitizePath(概況特記ImagePath));
+            }
         }
     }
 
@@ -559,11 +583,20 @@ public class ChosaKekkaInfoGaikyoHandler {
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
                         イメージ情報.getイメージ共有ファイルID());
-        deleteIMGDirecotry(出力イメージフォルダパス, 共有ファイル名);
         return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
-    private void deleteIMGDirecotry(RString 出力イメージパス, RString ローカルファイル名) {
-        Directory.deleteIfExists(Path.combinePath(出力イメージパス, ローカルファイル名));
+    private RString sanitizePath(RString imagePath) {
+        RString DATAURI_BMP = new RString("data:image/png;base64,");
+        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(imagePath)) : RString.EMPTY;
+    }
+
+    private RString base64encode(RString イメージパス) {
+        RString imgBase64 = RString.EMPTY;
+        try {
+            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージパス.toString())));
+        } catch (IOException ex) {
+        }
+        return imgBase64;
     }
 }

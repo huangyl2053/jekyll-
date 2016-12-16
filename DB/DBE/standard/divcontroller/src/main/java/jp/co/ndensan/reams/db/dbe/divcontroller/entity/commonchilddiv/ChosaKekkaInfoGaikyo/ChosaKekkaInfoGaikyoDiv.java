@@ -469,6 +469,16 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     @JsonIgnore
+    public Label getLblNoImageJisshiBasho() {
+        return this.getJisshiBashoMeishoPanel().getLblNoImageJisshiBasho();
+    }
+
+    @JsonIgnore
+    public void  setLblNoImageJisshiBasho(Label lblNoImageJisshiBasho) {
+        this.getJisshiBashoMeishoPanel().setLblNoImageJisshiBasho(lblNoImageJisshiBasho);
+    }
+
+    @JsonIgnore
     public Label getLblShisetsuShurui() {
         return this.getShisetsuRiyoPanel().getLblShisetsuShurui();
     }
@@ -549,6 +559,16 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     @JsonIgnore
+    public Label getLblNoImageRiyoShisetsuMeisho() {
+        return this.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getLblNoImageRiyoShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setLblNoImageRiyoShisetsuMeisho(Label lblNoImageRiyoShisetsuMeisho) {
+        this.getShisetsuRiyoPanel().getShisetsuMeishoPanel().setLblNoImageRiyoShisetsuMeisho(lblNoImageRiyoShisetsuMeisho);
+    }
+
+    @JsonIgnore
     public TelNoPanelDiv getTelNoPanel() {
         return this.getShisetsuRiyoPanel().getTelNoPanel();
     }
@@ -566,6 +586,16 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonIgnore
     public void  setImgTelNo(DynamicImage imgTelNo) {
         this.getShisetsuRiyoPanel().getTelNoPanel().setImgTelNo(imgTelNo);
+    }
+
+    @JsonIgnore
+    public Label getLblNoImageTelNo() {
+        return this.getShisetsuRiyoPanel().getTelNoPanel().getLblNoImageTelNo();
+    }
+
+    @JsonIgnore
+    public void  setLblNoImageTelNo(Label lblNoImageTelNo) {
+        this.getShisetsuRiyoPanel().getTelNoPanel().setLblNoImageTelNo(lblNoImageTelNo);
     }
 
     @JsonIgnore
@@ -606,6 +636,16 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonIgnore
     public void  setImgRiyoShisetsuJusho(DynamicImage imgRiyoShisetsuJusho) {
         this.getShisetsuRiyoPanel().getShisetsuJushoPanel().setImgRiyoShisetsuJusho(imgRiyoShisetsuJusho);
+    }
+
+    @JsonIgnore
+    public Label getLblNoImageRiyoShisetsuJusho() {
+        return this.getShisetsuRiyoPanel().getShisetsuJushoPanel().getLblNoImageRiyoShisetsuJusho();
+    }
+
+    @JsonIgnore
+    public void  setLblNoImageRiyoShisetsuJusho(Label lblNoImageRiyoShisetsuJusho) {
+        this.getShisetsuRiyoPanel().getShisetsuJushoPanel().setLblNoImageRiyoShisetsuJusho(lblNoImageRiyoShisetsuJusho);
     }
 
     // </editor-fold>

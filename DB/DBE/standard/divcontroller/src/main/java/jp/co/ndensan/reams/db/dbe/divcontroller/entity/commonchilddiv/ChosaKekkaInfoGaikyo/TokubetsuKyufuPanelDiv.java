@@ -25,6 +25,8 @@ public class TokubetsuKyufuPanelDiv extends Panel {
     private TextBoxMultiLine txtTokubetsuKyufu;
     @JsonProperty("imgTokubetsuKyufu")
     private DynamicImage imgTokubetsuKyufu;
+    @JsonProperty("lblNoImageTokubetsuKyufu")
+    private Label lblNoImageTokubetsuKyufu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +68,24 @@ public class TokubetsuKyufuPanelDiv extends Panel {
     @JsonProperty("imgTokubetsuKyufu")
     public void setImgTokubetsuKyufu(DynamicImage imgTokubetsuKyufu) {
         this.imgTokubetsuKyufu = imgTokubetsuKyufu;
+    }
+
+    /*
+     * getlblNoImageTokubetsuKyufu
+     * @return lblNoImageTokubetsuKyufu
+     */
+    @JsonProperty("lblNoImageTokubetsuKyufu")
+    public Label getLblNoImageTokubetsuKyufu() {
+        return lblNoImageTokubetsuKyufu;
+    }
+
+    /*
+     * setlblNoImageTokubetsuKyufu
+     * @param lblNoImageTokubetsuKyufu lblNoImageTokubetsuKyufu
+     */
+    @JsonProperty("lblNoImageTokubetsuKyufu")
+    public void setLblNoImageTokubetsuKyufu(Label lblNoImageTokubetsuKyufu) {
+        this.lblNoImageTokubetsuKyufu = lblNoImageTokubetsuKyufu;
     }
 
     // </editor-fold>

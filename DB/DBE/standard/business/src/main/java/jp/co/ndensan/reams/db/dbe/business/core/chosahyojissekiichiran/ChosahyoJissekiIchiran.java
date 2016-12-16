@@ -36,6 +36,15 @@ public class ChosahyoJissekiIchiran {
     }
 
     /**
+     * 市町村名称を取得します。
+     *
+     * @return 市町村名称
+     */
+    public RString get市町村名称() {
+        return entity.get市町村名称();
+    }
+
+    /**
      * 調査委託先コードを取得します。
      *
      * @return 調査委託先コード

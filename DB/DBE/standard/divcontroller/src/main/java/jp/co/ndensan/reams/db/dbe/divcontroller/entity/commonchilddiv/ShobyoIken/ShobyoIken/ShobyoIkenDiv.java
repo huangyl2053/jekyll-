@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
  * @reamsid_L DBE-3000-130 zhengshukai
  */
 public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,10 +39,10 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     private ShojoAnteiseiDiv ShojoAnteisei;
     @JsonProperty("SeikatsuKinoGenin")
     private SeikatsuKinoGeninDiv SeikatsuKinoGenin;
-    @JsonProperty("btnKakutei")
-    private Button btnKakutei;
     @JsonProperty("btnCansel")
     private Button btnCansel;
+    @JsonProperty("btnKakutei")
+    private Button btnKakutei;
     @JsonProperty("Name1")
     private RString Name1;
     @JsonProperty("YMD1")
@@ -119,24 +119,6 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     }
 
     /*
-     * getbtnKakutei
-     * @return btnKakutei
-     */
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
-    }
-
-    /*
-     * setbtnKakutei
-     * @param btnKakutei btnKakutei
-     */
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei = btnKakutei;
-    }
-
-    /*
      * getbtnCansel
      * @return btnCansel
      */
@@ -152,6 +134,24 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     @JsonProperty("btnCansel")
     public void setBtnCansel(Button btnCansel) {
         this.btnCansel = btnCansel;
+    }
+
+    /*
+     * getbtnKakutei
+     * @return btnKakutei
+     */
+    @JsonProperty("btnKakutei")
+    public Button getBtnKakutei() {
+        return btnKakutei;
+    }
+
+    /*
+     * setbtnKakutei
+     * @param btnKakutei btnKakutei
+     */
+    @JsonProperty("btnKakutei")
+    public void setBtnKakutei(Button btnKakutei) {
+        this.btnKakutei = btnKakutei;
     }
 
     /*
