@@ -42,7 +42,7 @@ public interface IShujiiIkenshoSakuseiIraiMapper {
      * @param param 主治医意見書一覧のMyBatis用パラメータ
      * @return 主治医意見書作成依頼情報Entity
      */
-    List<DbT5301ShujiiIkenshoIraiJohoEntity> get主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiParameter param);
+    DbT5301ShujiiIkenshoIraiJohoEntity get主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiParameter param);
 
     /**
      * 要介護認定申請情報を取得します。
@@ -50,7 +50,7 @@ public interface IShujiiIkenshoSakuseiIraiMapper {
      * @param param 主治医意見書一覧のMyBatis用パラメータ
      * @return 要介護認定申請情報Entity
      */
-    List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param);
+    DbT5101NinteiShinseiJohoEntity get要介護認定申請情報(ShujiiIkenshoSakuseiIraiParameter param);
 
     /**
      * 宛名情報を取得します。

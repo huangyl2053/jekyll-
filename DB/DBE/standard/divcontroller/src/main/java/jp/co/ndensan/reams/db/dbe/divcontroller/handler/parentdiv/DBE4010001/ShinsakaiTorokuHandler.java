@@ -7,14 +7,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaitoroku.ShinsakaiTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class ShinsakaiTorokuHandler {
 
-    private final RString 審査会登録モード = new RString("審査会登録モード");
+//    private final RString 審査会登録モード = new RString("審査会登録モード");
     private final ShinsakaiTorokuDiv div;
 
     /**
@@ -41,7 +40,7 @@ public class ShinsakaiTorokuHandler {
      *
      */
     public void onLoad() {
-        div.getCcdTaskList().initialize(審査会登録モード);
+//        div.getCcdTaskList().initialize(審査会登録モード);
     }
 
     /**
@@ -51,7 +50,7 @@ public class ShinsakaiTorokuHandler {
      */
     public void 要介護認定完了更新(Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models) {
         FlexibleDate 割当完了年月日 = new FlexibleDate(RDate.getNowDate().toDateString());
-        List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
+        List<dgNinteiTaskList_Row> 選択データ = div.getDgNinteiTaskList().getSelectedItems();
         for (dgNinteiTaskList_Row データ : 選択データ) {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(データ.getShinseishoKanriNo());
             NinteiKanryoJohoIdentifier 要介護認定完了識別子 = new NinteiKanryoJohoIdentifier(申請書管理番号);

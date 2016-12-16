@@ -229,7 +229,57 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         parameter.setShoriJotaiKubunEnki(ShoriJotaiKubun.延期.getコード());
         return parameter;
     }
+    
+    /**
+     * 主治医意見書作成依頼情報検索条件を作成します。
+     * 
+     * @param 申請書管理番号 申請書管理番号
+     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
+     *
+     * @return 検索条件パラメータ
+     */
+    public ShujiiIkenshoSakuseiIraiParameter createParameterShujiiIkenshoIraiJoho(RString 申請書管理番号,int 主治医意見書作成依頼履歴番号) {
+        ShujiiIkenshoSakuseiIraiParameter parameter = new ShujiiIkenshoSakuseiIraiParameter();
+        parameter.setLimitCount(Integer.parseInt(div.getTxtMaxDisp().getValue().toString()));
+        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
+        editShosaiJokenForParameter(finderDiv, parameter);
+        editNinteiChosaForParameter(finderDiv, parameter);
+        editShujiiJohoForParameter(finderDiv, parameter);
+        editShinsakaiJohoForParameter(finderDiv, parameter);
+        editZenkaiJohoForParameter(finderDiv, parameter);
+        editNowPhaseForParameter(finderDiv, parameter);
+        editChkForParameter(finderDiv, parameter);
+        parameter.setShoriJotaiKubunTsujo(ShoriJotaiKubun.通常.getコード());
+        parameter.setShoriJotaiKubunEnki(ShoriJotaiKubun.延期.getコード());
+        parameter.setShinseishoKanriNo(申請書管理番号);
+        parameter.setRirekiNo(主治医意見書作成依頼履歴番号);
+        return parameter;
+    }
 
+        /**
+     * 要介護認定申請情報検索条件を作成します。
+     * 
+     * @param 申請書管理番号 申請書管理番号
+     *
+     * @return 検索条件パラメータ
+     */
+    public ShujiiIkenshoSakuseiIraiParameter createParameterNinteiShinseiJoho2(RString 申請書管理番号) {
+        ShujiiIkenshoSakuseiIraiParameter parameter = new ShujiiIkenshoSakuseiIraiParameter();
+        parameter.setLimitCount(Integer.parseInt(div.getTxtMaxDisp().getValue().toString()));
+        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
+        editShosaiJokenForParameter(finderDiv, parameter);
+        editNinteiChosaForParameter(finderDiv, parameter);
+        editShujiiJohoForParameter(finderDiv, parameter);
+        editShinsakaiJohoForParameter(finderDiv, parameter);
+        editZenkaiJohoForParameter(finderDiv, parameter);
+        editNowPhaseForParameter(finderDiv, parameter);
+        editChkForParameter(finderDiv, parameter);
+        parameter.setShoriJotaiKubunTsujo(ShoriJotaiKubun.通常.getコード());
+        parameter.setShoriJotaiKubunEnki(ShoriJotaiKubun.延期.getコード());
+        parameter.setShinseishoKanriNo(申請書管理番号);
+        return parameter;
+    }
+    
     private void editShinsakaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShujiiIkenshoSakuseiIraiParameter parameter) {
         boolean useNinteiKekkaJoho = false;
         RString 二次判定要介護状態区分コード = finderDiv.getDdlNijiHanteiKekka().getSelectedKey();

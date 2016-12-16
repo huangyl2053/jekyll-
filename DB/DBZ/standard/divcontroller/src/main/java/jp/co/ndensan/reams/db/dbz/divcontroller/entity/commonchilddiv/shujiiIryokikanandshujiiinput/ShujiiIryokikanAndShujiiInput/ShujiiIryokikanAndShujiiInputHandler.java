@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput;
 
 import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv.ShoriType;
+import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiIryokikanAndShujiiInputHandler {
 
     private final ShujiiIryokikanAndShujiiInputDiv div;
+    private static final RString KEY0 = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -71,7 +74,13 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.getTxtIryoKikanName().setValue(iryoKikanMeisho);
         div.getTxtShujiiCode().setValue(shujiiCode);
         div.getTxtShujiiName().setValue(shujiiName);
-        div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());
+        ShujiiIryokikanAndShujiiInputFinder finder = ShujiiIryokikanAndShujiiInputFinder.createInstance();
+        boolean 指定医フラグ = finder.getShiteiiFlag(shichosonCode, shujiiIryokikanCode, shujiiCode);
+        List<RString> shiteiiList = new ArrayList();
+        if (指定医フラグ) {
+            shiteiiList.add(KEY0);
+        }
+        div.getChkShiteii().setSelectedItemsByKey(shiteiiList);
         div.setHdnShichosonCode(shichosonCode.value());
         div.setHdnShinseishoKanriNo(shinseishoKanriNo.value());
         div.setHdnSubGyomuModel(gyomuCode.value());
