@@ -1975,7 +1975,7 @@
         SELECT
             G."shichosonCode"
             , 0 AS shinseiKubun -- 0:新規申請
-            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , a."nijiHanteiNinteiYukoKikan" AS yukoKikan
             , G."shichosonMeisho"
             , a."nijiHanteiYokaigoJotaiKubunCode"
             , COUNT(*) AS countHihokenshaNo
@@ -1999,7 +1999,7 @@
         SELECT
             G."shichosonCode"
             , 1 AS shinseiKubun -- 1:更新申請
-            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , a."nijiHanteiNinteiYukoKikan" AS yukoKikan
             , G."shichosonMeisho"
             , a."nijiHanteiYokaigoJotaiKubunCode"
             , COUNT(*) AS countHihokenshaNo
@@ -2023,7 +2023,7 @@
         SELECT
             G."shichosonCode"
             , 2 AS shinseiKubun --2:区分変更申請
-            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , a."nijiHanteiNinteiYukoKikan" AS yukoKikan
             , G."shichosonMeisho"
             , a."nijiHanteiYokaigoJotaiKubunCode"
             , COUNT(*) AS countHihokenshaNo
@@ -2047,7 +2047,7 @@
         SELECT
             G."shichosonCode"
             , 3 AS shinseiKubun -- 3:転入申請
-            , a."nijiHanteiNinteiYukoKikan" / 6 - 1 AS yukoKikan
+            , a."nijiHanteiNinteiYukoKikan"  AS yukoKikan
             , G."shichosonMeisho"
             , a."nijiHanteiYokaigoJotaiKubunCode"
             , COUNT(*) AS countHihokenshaNo
