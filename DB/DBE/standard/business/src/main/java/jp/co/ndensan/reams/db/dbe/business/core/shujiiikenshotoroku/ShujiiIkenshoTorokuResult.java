@@ -40,7 +40,11 @@ public class ShujiiIkenshoTorokuResult {
      * @return 主治医氏名
      */
     public RString get主治医氏名() {
-        return entity.getDbt5912Entity().getShujiiName();
+        if (entity.getDbt5912Entity() == null) {
+            return RString.EMPTY;
+        } else {
+            return entity.getDbt5912Entity().getShujiiName();
+        }
     }
 
     /**
@@ -58,7 +62,11 @@ public class ShujiiIkenshoTorokuResult {
      * @return 医療機関名称
      */
     public RString get医療機関名称() {
-        return entity.getDbt5911Entity().getIryoKikanMeisho();
+        if (entity.getDbt5911Entity() == null) {
+            return RString.EMPTY;
+        } else {
+            return entity.getDbt5911Entity().getIryoKikanMeisho();
+        }
     }
 
     /**
@@ -76,7 +84,11 @@ public class ShujiiIkenshoTorokuResult {
      * @return 住所
      */
     public RString get住所() {
-        return entity.getDbt5911Entity().getJusho();
+        if (entity.getDbt5911Entity() == null) {
+            return RString.EMPTY;
+        } else {
+            return entity.getDbt5911Entity().getJusho();
+        }
     }
 
     /**
@@ -258,7 +270,7 @@ public class ShujiiIkenshoTorokuResult {
     public RString get厚労省IF識別コード() {
         return entity.getDbt5302Entity().getKoroshoIfShikibetsuCode();
     }
-    
+
     /**
      * 主治医意見書作成依頼履歴番号を取得します。
      *

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -109,7 +110,7 @@ public class ShinsakaiScheduleHakko {
             row.setSelected(Boolean.TRUE);
             row.setShinsakaiIinCode(shinsakai.get介護認定審査会委員コード());
             row.setShinsakaiIinName(shinsakai.get介護認定審査会委員氏名());
-            row.setShozokuGogitaiBango(new RString(String.valueOf(shinsakai.get合議体番号())));
+            row.getShozokuGogitaiBango().setValue(new Decimal(shinsakai.get合議体番号()));
             row.setShozokuGogitaiMeisho(shinsakai.get合議体名称());
             row.setJusho(shinsakai.get住所());
             dgShinsakaiScheduleKagamiRow.add(row);

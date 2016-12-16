@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -9,20 +9,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * shinsakaikanryoselect のクラスファイル 
+ * CenterSoshinTaishoshaShutsuryoku のクラスファイル 
  * 
  * @author 自動生成
  */
-public class shinsakaikanryoselectDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+public class CenterSoshinTaishoshaShutsuryokuDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("shinsakaikanryooutput")
-    private ButtonDownLoad shinsakaikanryooutput;
+    @JsonProperty("btndataoutput")
+    private ButtonDownLoad btndataoutput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class shinsakaikanryoselectDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getshinsakaikanryooutput
-     * @return shinsakaikanryooutput
+     * getbtndataoutput
+     * @return btndataoutput
      */
-    @JsonProperty("shinsakaikanryooutput")
-    public ButtonDownLoad getShinsakaikanryooutput() {
-        return shinsakaikanryooutput;
+    @JsonProperty("btndataoutput")
+    public ButtonDownLoad getBtndataoutput() {
+        return btndataoutput;
     }
 
     /*
-     * setshinsakaikanryooutput
-     * @param shinsakaikanryooutput shinsakaikanryooutput
+     * setbtndataoutput
+     * @param btndataoutput btndataoutput
      */
-    @JsonProperty("shinsakaikanryooutput")
-    public void setShinsakaikanryooutput(ButtonDownLoad shinsakaikanryooutput) {
-        this.shinsakaikanryooutput = shinsakaikanryooutput;
+    @JsonProperty("btndataoutput")
+    public void setBtndataoutput(ButtonDownLoad btndataoutput) {
+        this.btndataoutput = btndataoutput;
     }
 
     // </editor-fold>

@@ -2539,6 +2539,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     @Override
     @JsonIgnore
     public boolean onLoad(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, ArrayList<RString> 認定調査特記事項番号List) {
+        if (認定調査特記事項番号List.isEmpty()) {
+            return false;
+        }
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
 
         ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号List);
@@ -2552,7 +2555,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         initializa(list, get特記事項番号(認定調査特記事項番号List));
         return true;
     }
-
+    
     private RString get特記事項番号(ArrayList<RString> 認定調査特記事項番号List) {
         if (RString.isNullOrEmpty(this.getTokkijikoNo())) {
             return 認定調査特記事項番号List.get(0);

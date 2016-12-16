@@ -53,12 +53,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("HyojiJoken"));
             }
 
-            public txtHyojiKikanFrom(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtHyojiKikanFrom"));
-            }
-
-            public txtHyojiKikanTo(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtHyojiKikanTo"));
+            public txtHyojiKikan(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtHyojiKikan"));
             }
 
             public txtSaidaiHyojiKensu(): UZA.TextBoxNum {

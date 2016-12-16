@@ -17,11 +17,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HokokuShiryoSakuSeiParameterValidationHandler {
 
-    private static final RString KEY_対象年月 = new RString("0");
     private final HokokuShiryoSakuSeiParameterDiv div;
     private static final RString SELECTKEY_KEY0 = new RString("key0");
     private static final RString SELECTKEY_KEY1 = new RString("key1");
-    private static final RString SELECTKEY_KEY2 = new RString("key2");
+    private static final RString KEY_事業状況報告 = new RString("0");
+    private static final RString KEY_実施状況報告 = new RString("1");
+    private static final RString KEY_審査判定状況 = new RString("2");
+    private static final RString KEY_審査判定の変更状況 = new RString("3");
+    private static final RString KEY_介護認定審査会集計表_判定別 = new RString("4");
+    private static final RString KEY_介護認定審査会集計表_申請区分別 = new RString("5");
+    private static final RString KEY_介護認定審査会集計表_現在の状況別 = new RString("6");
+    private static final RString KEY_CSV出力 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -40,7 +46,6 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
     public ValidationMessageControlPairs check_btnBatchRegisterHokokuShiryo() {
         ValidationMessageControlPairs message = new ValidationMessageControlPairs();
         check_Nengetsu(message);
-        check_ShutsuryokuChohyo(message);
         check_ChushutsuJoken(message);
         check_txtTaishoGappi(message);
         check_ChkCsvShutsuryoku(message);
@@ -49,29 +54,37 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
     }
 
     private void check_Nengetsu(ValidationMessageControlPairs validationMessages) {
-        if (KEY_対象年月.equals(div.getRadKubun().getSelectedKey()) && div.getTxtNengetsu().getDomain().isEmpty()) {
+        boolean flag_対象年月 = false;
+        boolean flag_対象年月日 = false;
+        if (KEY_事業状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
+            flag_対象年月 = true;
+            flag_対象年月日 = false;
+        } else if (KEY_実施状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_審査判定状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_審査判定の変更状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_介護認定審査会集計表_判定別.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_介護認定審査会集計表_申請区分別.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_CSV出力.equals(div.getRadCsvShutsuryoku().getSelectedKey())) {
+            flag_対象年月 = false;
+            flag_対象年月日 = true;
+        } else if (KEY_介護認定審査会集計表_現在の状況別.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
+            flag_対象年月 = false;
+            flag_対象年月日 = false;
+        }
+        if (flag_対象年月 && div.getTxtNengetsu().getDomain().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.必須項目_追加メッセージあり_対象年月));
             return;
         }
-        if (!KEY_対象年月.equals(div.getRadKubun().getSelectedKey())
+        if (flag_対象年月日
                 && div.getTxtTaishoGappi().getFromValue() == null && div.getTxtTaishoGappi().getToValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.必須項目_追加メッセージあり_対象年月日));
         }
-    }
-
-    private ValidationMessageControlPairs check_ShutsuryokuChohyo(ValidationMessageControlPairs validationMessages) {
-
-        if (div.getChkShutsuryokuChohyo().getSelectedKeys().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.選択されていない_出力帳票));
-        }
-        return validationMessages;
     }
 
     private ValidationMessageControlPairs check_ChushutsuJoken(ValidationMessageControlPairs validationMessages) {
 
         if (null == div.getCcdHokenshaList().getSelectedItem()
                 && div.getChkHihokenshaKubun().getSelectedKeys().isEmpty()
-                && div.getRadKubun().getSelectedKey().isEmpty()
                 && div.getDdlGogitaiBango().getSelectedKey().isEmpty()
                 && null == div.getTxtKijyunYMD().getValue()) {
             validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.選択されていない_抽出条件));
@@ -90,7 +103,7 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
 
     private ValidationMessageControlPairs check_ChkCsvShutsuryoku(ValidationMessageControlPairs validationMessages) {
 
-        if (!div.getChkCsvShutsuryoku().getSelectedKeys().isEmpty()
+        if (!div.getRadCsvShutsuryoku().getSelectedKey().isEmpty()
                 && RString.isNullOrEmpty(div.getTxtShuturyokuSaki().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.必須項目_追加メッセージあり_出力ファイル));
         }
@@ -98,8 +111,8 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
     }
 
     private ValidationMessageControlPairs check_ChkShukeiTani(ValidationMessageControlPairs validationMessages) {
-        if (div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY1)
-                || div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY2)) {
+        if (KEY_実施状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_審査判定状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
             if (div.getChkShukeiTani().getSelectedKeys().isEmpty()) {
                 validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.選択されていない_集計単位));
             } else if (div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY0)

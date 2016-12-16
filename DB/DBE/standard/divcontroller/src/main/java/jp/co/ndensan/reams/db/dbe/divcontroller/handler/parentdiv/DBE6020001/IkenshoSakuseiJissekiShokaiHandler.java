@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6020001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshojissekiichiran.IkenshoJissekiIchiran;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_NinteichosaJissekiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001.DBE601001_IkenshoSakuseiJIssekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshojissekiichiran.IkenshoJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.dgIkenshoSakuseiJisseki_Row;
@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 意見書作成実績照会の画面処理Handlerクラスです。
@@ -62,9 +63,21 @@ public class IkenshoSakuseiJissekiShokaiHandler {
     /**
      * 「検索する」ボタンを押します。
      *
-     * @param ikenshoJissekiIchiranList 意見書作成実績照会
+     * @param searchResult 検索結果
      */
-    public void onClick_BtnKensaku(List<IkenshoJissekiIchiran> ikenshoJissekiIchiranList) {
+    public void onClick_BtnKensaku(SearchResult<IkenshoJissekiIchiran> searchResult) {
+        List<IkenshoJissekiIchiran> records = searchResult.records();
+        setRecords(records);
+        if (searchResult.exceedsLimit()) {
+            div.getDgIkenshoSakuseiJisseki().getGridSetting().setLimitRowCount(records.size());
+            div.getDgIkenshoSakuseiJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+        } else {
+            div.getDgIkenshoSakuseiJisseki().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
+            div.getDgIkenshoSakuseiJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+        }
+    }
+
+    private void setRecords(List<IkenshoJissekiIchiran> ikenshoJissekiIchiranList) {
         List<dgIkenshoSakuseiJisseki_Row> rowList = new ArrayList<>();
         for (IkenshoJissekiIchiran data : ikenshoJissekiIchiranList) {
             AccessLogger.log(AccessLogType.照会, toPersonalData(data.get申請書管理番号()));
@@ -90,7 +103,8 @@ public class IkenshoSakuseiJissekiShokaiHandler {
                     施設_継 = MARU;
                 }
             }
-            dgIkenshoSakuseiJisseki_Row row = new dgIkenshoSakuseiJisseki_Row(data.get証記載保険者番号(),
+            dgIkenshoSakuseiJisseki_Row row = new dgIkenshoSakuseiJisseki_Row(
+                    get保険者(data),
                     data.get医療機関コード(),
                     data.get医療機関名称(),
                     data.get主治医氏名(),
@@ -109,6 +123,10 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             rowList.add(row);
         }
         div.getDgIkenshoSakuseiJisseki().setDataSource(rowList);
+    }
+
+    private RString get保険者(IkenshoJissekiIchiran data) {
+        return data.get証記載保険者番号().concat(RString.HALF_SPACE).concat(data.get市町村名称());
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {
@@ -138,8 +156,8 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * @param 帳票出力区分 帳票出力区分
      * @return バッチパラメータ
      */
-    public DBE601002_NinteichosaJissekiParameter createBatchParam(RString 帳票出力区分) {
-        DBE601002_NinteichosaJissekiParameter param = new DBE601002_NinteichosaJissekiParameter();
+    public DBE601001_IkenshoSakuseiJIssekiParameter createBatchParam(RString 帳票出力区分) {
+        DBE601001_IkenshoSakuseiJIssekiParameter param = new DBE601001_IkenshoSakuseiJIssekiParameter();
         List<IkenshoJissekiIchiranKey> keyJoho = new ArrayList<>();
         for (dgIkenshoSakuseiJisseki_Row row : div.getDgIkenshoSakuseiJisseki().getDataSource()) {
             if (row.getSelected()) {

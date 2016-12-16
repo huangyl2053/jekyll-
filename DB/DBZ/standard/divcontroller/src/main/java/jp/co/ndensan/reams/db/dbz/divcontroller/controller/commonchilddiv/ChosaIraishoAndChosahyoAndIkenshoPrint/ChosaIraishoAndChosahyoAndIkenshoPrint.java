@@ -148,7 +148,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
             }
             if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 RealInitialLocker.release(new LockingKey(排他キー));
                 return ResponseData.of(div).dialogOKClose();
             }
@@ -174,7 +174,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(DbQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
@@ -200,7 +200,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private void updateData(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
-            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
             for (dgNinteiChosa_Row row : selectedItems) {
                 update認定調査依頼情報(div, row);
@@ -217,8 +217,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private void update主治医意見書依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, dgShujiiIkensho_Row row) {
         Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> models = ViewStateHolder.get(ViewStateKeys.主治医意見書依頼情報, Models.class);
         ShujiiIkenshoIraiJohoIdentifier identifier = new ShujiiIkenshoIraiJohoIdentifier(
-                new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.parseInt(row.getRirekiNo().toString()));
+            new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+            Integer.parseInt(row.getRirekiNo().toString()));
 
         ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = models.get(identifier);
         ShujiiIkenshoIraiJohoBuilder shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJoho.createBuilderForEdit();
@@ -226,7 +226,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         RDate date = RDate.getNowDate();
         RString 期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, date, SubGyomuCode.DBE認定支援);
         int 作成期限日数
-                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, date, SubGyomuCode.DBE認定支援).toString());
+            = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, date, SubGyomuCode.DBE認定支援).toString());
         FlexibleDate 作成期限年月日 = null;
         if (CONFIGVALUE1.equals(期限設定方法)) {
             if (KEY0.equals(radTeishutsuKigen)) {
@@ -237,7 +237,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             } else if (KEY2.equals(radTeishutsuKigen)) {
                 RDate 共通日 = div.getTxtKyotsuDay().getValue();
                 作成期限年月日
-                        = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
+                = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
             }
         } else if (CONFIGVALUE2.equals(期限設定方法)) {
             作成期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).toDateString()).plusDay(作成期限日数);
@@ -256,8 +256,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
     private void update認定調査依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, dgNinteiChosa_Row row) {
         NinteichosaIraiJohoIdentifier identifier = new NinteichosaIraiJohoIdentifier(
-                new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                Integer.parseInt(row.getRirekiNo().toString()));
+            new ShinseishoKanriNo(row.getShinseishoKanriNo()),
+            Integer.parseInt(row.getRirekiNo().toString()));
         Models<NinteichosaIraiJohoIdentifier, NinteichosaIraiJoho> models = ViewStateHolder.get(ViewStateKeys.認定調査依頼情報, Models.class);
         NinteichosaIraiJoho ninteichosaIraiJoho = models.get(identifier);
         NinteichosaIraiJohoBuilder ninteichosaIraiJohoBuilder = ninteichosaIraiJoho.createBuilderForEdit();
@@ -265,7 +265,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         RDate date = RDate.getNowDate();
         RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, date, SubGyomuCode.DBE認定支援);
         int 認定調査作成期限日数
-                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援).toString());
+            = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援).toString());
         FlexibleDate 認定調査期限年月日 = null;
         if (CONFIGVALUE1.equals(認定調査期限設定方法)) {
             if (KEY0.equals(radTeishutsuKigen)) {
@@ -276,7 +276,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             } else if (KEY2.equals(radTeishutsuKigen)) {
                 RDate 共通日 = div.getTxtKyotsuDay().getValue();
                 認定調査期限年月日
-                        = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(認定調査作成期限日数).toDateString()));
+                = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(認定調査作成期限日数).toDateString()));
             }
         } else if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
             認定調査期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).plusDay(認定調査作成期限日数).toDateString());
@@ -287,7 +287,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set依頼書出力年月日(システム日付);
         }
         if (!div.getChkChosahyo().getSelectedKeys().isEmpty()
-                || !div.getChkOcrChosahyo().getSelectedKeys().isEmpty()) {
+            || !div.getChkOcrChosahyo().getSelectedKeys().isEmpty()) {
             ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set調査票等出力年月日(システム日付);
         }
         NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJohoBuilder.build().modifiedModel());
@@ -312,9 +312,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (chkChosahyo.contains(KEY2)) {
             call認定調査票_特記事項(div, printService);
         }
-        if (chkChosahyo.contains(KEY3)) {
-            call認定調査票_特記事項_フリー様式(div, printService);
-        }
+//        概況特記の帳票不明
+//        if (chkChosahyo.contains(KEY3)) {
+//
+//        }
         List<RString> chkOcrChosahyo = div.getChkOcrChosahyo().getSelectedKeys();
         if (chkOcrChosahyo.contains(KEY0)) {
             call認定調査票OCR_概況調査(div, printService);
@@ -325,9 +326,16 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (chkOcrChosahyo.contains(KEY2)) {
             call認定調査票OCR_特記事項(div, printService);
         }
+//        概況特記OCR不明
+//        if (chkOcrChosahyo.contains(KEY3)) {
+//
+//        }
         List<RString> chkChosahyo2 = div.getChkChosahyo2().getSelectedKeys();
         if (chkChosahyo2.contains(KEY0)) {
             call認定調査差異チェック表(div, printService);
+        }
+        if (chkChosahyo2.contains(KEY1)) {
+            call認定調査票_特記事項_フリー様式(div, printService);
         }
         List<RString> chkInsatsuIkensho = div.getChkInsatsuIkensho().getSelectedKeys();
         if (chkInsatsuIkensho.contains(KEY0)) {
@@ -357,19 +365,19 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             }
         }
         if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             }
         }
     }
@@ -379,12 +387,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             }
         }
     }
@@ -404,12 +412,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面1枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート片面2枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォームデザインシート両面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
     }
 
@@ -418,10 +426,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート片面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォームデザインシート両面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             }
         }
     }
@@ -430,12 +438,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面1枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート片面2枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォームデザインシート両面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
     }
 
@@ -443,34 +451,34 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面1枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー片面2枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷フォーム白紙カラー両面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
     }
 
     private void call認定調査票_特記事項(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, date, SubGyomuCode.DBE認定支援))
-                && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙カラー片面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
         if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, date, SubGyomuCode.DBE認定支援))
-                && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム白紙モノクロ片面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
         if (CONFIGVALUE4.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自片面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
                 getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷フォーム独自両面, date,
-                        SubGyomuCode.DBE認定支援), div, printService);
+                                                    SubGyomuCode.DBE認定支援), div, printService);
             }
         }
     }
@@ -478,14 +486,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private void call認定調査票_特記事項_フリー様式(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_用紙タイプ, date, SubGyomuCode.DBE認定支援))
-                && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_印刷フォーム白紙カラー片面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
         if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_用紙タイプ, date, SubGyomuCode.DBE認定支援))
-                && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            && CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項フリー_印刷フォーム白紙モノクロ片面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
     }
 
@@ -493,12 +501,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面1枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー片面2枚目, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_印刷フォーム白紙カラー両面, date,
-                    SubGyomuCode.DBE認定支援), div, printService);
+                                                SubGyomuCode.DBE認定支援), div, printService);
         }
     }
 
@@ -514,60 +522,60 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         if (DBE221021_ARI_COLOR.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221021_Ari_Color.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221021_Ari_Color.getReportId());
         }
         if (DBE221021_ARI_MONO.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221021_Ari_Mono.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221021_Ari_Mono.getReportId());
         }
         if (DBE221042_RYOMEN.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221042_Ryomen.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221042_Ryomen.getReportId());
         }
 
         if (DBE221042_KATAMEN.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221042_Katamen.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221042_Katamen.getReportId());
         }
 
         if (DBE221024_NASHI_COLOR.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Color.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Color.getReportId());
         }
 
         if (DBE221024_NASHI_MONO.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Mono.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Mono.getReportId());
         }
 
         if (DBE221031_FREE_COLOR.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Mono.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Mono.getReportId());
         }
 
         if (DBE221031_FREE_MONO.equals(rseValue)) {
             printService.print認定調査票_特記事項(
-                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Mono.getReportId());
+                getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221024_Nashi_Mono.getReportId());
         }
 
         if (DBE231011_RYOMEN_COLOR.equals(rseValue)) {
             printService.print主治医意見書記入用紙(
-                    getHandler(div).create主治医意見書記入情報1_パラメータ(), ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
+                getHandler(div).create主治医意見書記入情報1_パラメータ(), ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
         }
 
         if (DBE231011_KATAMEN_COLOR.equals(rseValue)) {
             printService.print主治医意見書記入用紙(
-                    getHandler(div).create主治医意見書記入情報2_パラメータ(), ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
+                getHandler(div).create主治医意見書記入情報2_パラメータ(), ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
         }
 
         if (DBE231001_RYOMEN_MONO.equals(rseValue)) {
             printService.print主治医意見書記入用紙(
-                    getHandler(div).create主治医意見書記入情報3_パラメータ(), ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId());
+                getHandler(div).create主治医意見書記入情報3_パラメータ(), ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId());
         }
 
         if (DBE231001_KATAMEN_MONO.equals(rseValue)) {
             printService.print主治医意見書記入用紙(
-                    getHandler(div).create主治医意見書記入情報3_パラメータ(), ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
+                getHandler(div).create主治医意見書記入情報3_パラメータ(), ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
         }
     }
 

@@ -65,7 +65,8 @@ public class ShujiiIryokikanAndShujiiInputFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIryokikanAndShujiiInputFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIryokikanAndShujiiInputFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiIryokikanAndShujiiInputFinder}のインスタンス
      */
     public static ShujiiIryokikanAndShujiiInputFinder createInstance() {
         return InstanceProvider.create(ShujiiIryokikanAndShujiiInputFinder.class);
@@ -96,6 +97,20 @@ public class ShujiiIryokikanAndShujiiInputFinder {
         return dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード) == null
                 ? RString.EMPTY
                 : dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード).getShujiiName();
+    }
+
+    /**
+     * 指定医フラグを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @param 主治医コード 主治医コード
+     * @return RString
+     */
+    public boolean getShiteiiFlag(LasdecCode 市町村コード, RString 主治医医療機関コード, RString 主治医コード) {
+        return dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード) == null
+                ? false
+                : dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード).getShiteiiFlag();
     }
 
     /**

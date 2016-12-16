@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaInputCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -20,14 +21,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
+
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -96,6 +94,17 @@ public class ShinsaKaiKekkaToroku {
     }
 
     /**
+     * 対象者状態ラジオボタンの押下チェック処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShinsaKaiKekkaTorokuDiv> onChange_radTaishoshaJotai(ShinsaKaiKekkaTorokuDiv div) {
+        getHandler(div).setJyotaiKubun();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 一覧を出力するボタンを押下前、チェックの処理する。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
@@ -126,7 +135,8 @@ public class ShinsaKaiKekkaToroku {
         try (CsvWriter<ShinsaKaiKekkaTorokuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
-            List<dgNinteiTaskList_Row> dataList = div.getCcdTaskList().getCheckbox();
+
+            List<dgNinteiTaskList_Row> dataList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                         row.getShinseishoKanriNo()));
@@ -158,7 +168,7 @@ public class ShinsaKaiKekkaToroku {
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
-            申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
+            申請書管理番号リスト(div.getDgNinteiTaskList().getSelectedItems());
             前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).respond();
         }
@@ -171,6 +181,14 @@ public class ShinsaKaiKekkaToroku {
      * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnMobileToroku(ShinsaKaiKekkaTorokuDiv div) {
+        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+        }
+        ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
+        if (validation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validation).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -179,22 +197,13 @@ public class ShinsaKaiKekkaToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            if (存在チェック結果.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
-            }
-            ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
-            } else {
-                RDate 日期 = RDate.getNowDate();
-                RString ファイルの場所 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル_パス, 日期, SubGyomuCode.DBE認定支援);
-                RString ファイルの名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル, 日期, SubGyomuCode.DBE認定支援);
-                List<ShinsaKaiKekkaInputCsvEntity> ファイルデータ = insertCsvDate(ファイルの場所, ファイルの名称);
-                getHandler(div).onClick_btnCyosakekkaInput(ファイルデータ);
-                前排他キーの解除();
-                onLoad(div);
-            }
+            RDate 日期 = RDate.getNowDate();
+            RString ファイルの場所 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル_パス, 日期, SubGyomuCode.DBE認定支援);
+            RString ファイルの名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル, 日期, SubGyomuCode.DBE認定支援);
+            List<ShinsaKaiKekkaInputCsvEntity> ファイルデータ = insertCsvDate(ファイルの場所, ファイルの名称);
+            getHandler(div).onClick_btnCyosakekkaInput(ファイルデータ);
+            前排他キーの解除();
+            onLoad(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -214,7 +223,7 @@ public class ShinsaKaiKekkaToroku {
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
-            ViewStateHolder.put(ViewStateKeys.開催番号, div.getCcdTaskList().getCheckbox().get(0).getNijihanteiKaisaiNumber());
+            ViewStateHolder.put(ViewStateKeys.開催番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getNijihanteiKaisaiNumber());
             前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.介護認定審査会審査結果登録_OCR_へ遷移する).respond();
         }
@@ -227,15 +236,7 @@ public class ShinsaKaiKekkaToroku {
      * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnKekkaToroku(ShinsaKaiKekkaTorokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
             if (存在チェック結果.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
             }
@@ -246,7 +247,15 @@ public class ShinsaKaiKekkaToroku {
             ValidationMessageControlPairs validation = getValidationHandler(div).完了処理事前チェック();
             if (validation.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validation).respond();
-            } else {
+            }
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 getHandler(div).要介護認定完了更新(models);
@@ -254,39 +263,21 @@ public class ShinsaKaiKekkaToroku {
                 div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
                         replace(審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBE4020001StateName.完了);
-            }
         }
         return ResponseData.of(div).respond();
     }
 
     private ShinsaKaiKekkaTorokuCsvEntity getCsvData(dgNinteiTaskList_Row row) {
-        RString 申請時コード = RString.EMPTY;
-        RString 法令コード = RString.EMPTY;
-        RString 入力方法 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(row.getShinseiKubunShinseiji())) {
-            申請時コード = NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード();
-        }
-        if (!RString.isNullOrEmpty(row.getShinseiKubunHorei())) {
-            法令コード = NinteiShinseiHoreiCode.valueOf(row.getShinseiKubunHorei().toString()).getコード();
-        }
-        if (!RString.isNullOrEmpty(row.getNyuryokuHoho())) {
-            入力方法 = NijiHanteiKekkaInputHoho.valueOf(row.getNyuryokuHoho().toString()).getコード();
-        }
         ShinsaKaiKekkaTorokuCsvEntity data = new ShinsaKaiKekkaTorokuCsvEntity(
-                row.getShinseishoKanriNo(),
+                row.getJotai(),
                 row.getHokensha(),
+                日期転換(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
                 row.getHihoShimei(),
-                申請時コード,
                 row.getShinseiKubunShinseiji(),
-                法令コード,
                 row.getShinseiKubunHorei(),
-                日期転換(row.getNinteiShinseiDay().getValue()),
-                日期転換(row.getNijihanteiKanryoDay().getValue()),
                 日期転換(row.getNijihanteiKekkaToroku().getValue()),
-                入力方法,
                 row.getNyuryokuHoho(),
-                row.getNijiHanteiYokaigoJotaiKubunCode(),
                 二次判定結果の名称(row.getKoroshoIfShikibetsuCode(), row.getNijiHanteiYokaigoJotaiKubunCode()),
                 row.getNijihanteiYukoKikan(),
                 日期転換(row.getNijihanteiShinsakaiKaisaiDay().getValue()),

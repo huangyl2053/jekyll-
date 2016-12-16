@@ -42,17 +42,17 @@ public class JigyoJyokyoHokokuDataSakuseiProcess extends BatchProcessBase<JigyoJ
 
     @Override
     protected void process(JigyoJyokyoHokokuHeaderEntity item) {
-        if (HihokenshaKubunCode.第１号被保険者.getコード().equals(item.getHihokenshaKubunCode())) {
+        if (年齢_65 <= item.getAge()) {
             item.setHihokenshaKubunCode(第1号保険者者);
             jigyoJyokyoHokokuTemp.insert(item);
-            if (年齢_65 <= item.getAge() && item.getAge() < 年齢_75) {
+            if (item.getAge() < 年齢_75) {
                 item.setHihokenshaKubunCode(歳65以上75未満);
                 jigyoJyokyoHokokuTemp.insert(item);
-            } else if (年齢_75 <= item.getAge()) {
+            } else {
                 item.setHihokenshaKubunCode(歳75以上);
                 jigyoJyokyoHokokuTemp.insert(item);
             }
-        } else if (HihokenshaKubunCode.第２号被保険者.getコード().equals(item.getHihokenshaKubunCode())) {
+        } else {
             item.setHihokenshaKubunCode(第2号被保険者);
             jigyoJyokyoHokokuTemp.insert(item);
         }

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
@@ -31,13 +32,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
- * NinteiShinseiToroku のクラスファイル
- *
+ * NinteiShinseiToroku のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiShinseiTorokuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -875,23 +875,13 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtEnkiMikomiKikanFrom() {
-        return this.getTabShinseishaJoho().getTplEnki().getTxtEnkiMikomiKikanFrom();
+    public TextBoxDateRange getTxtEnkiMikomiKikan() {
+        return this.getTabShinseishaJoho().getTplEnki().getTxtEnkiMikomiKikan();
     }
 
     @JsonIgnore
-    public void setTxtEnkiMikomiKikanFrom(TextBoxDate txtEnkiMikomiKikanFrom) {
-        this.getTabShinseishaJoho().getTplEnki().setTxtEnkiMikomiKikanFrom(txtEnkiMikomiKikanFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtEnkiMikomiKikanTo() {
-        return this.getTabShinseishaJoho().getTplEnki().getTxtEnkiMikomiKikanTo();
-    }
-
-    @JsonIgnore
-    public void setTxtEnkiMikomiKikanTo(TextBoxDate txtEnkiMikomiKikanTo) {
-        this.getTabShinseishaJoho().getTplEnki().setTxtEnkiMikomiKikanTo(txtEnkiMikomiKikanTo);
+    public void  setTxtEnkiMikomiKikan(TextBoxDateRange txtEnkiMikomiKikan) {
+        this.getTabShinseishaJoho().getTplEnki().setTxtEnkiMikomiKikan(txtEnkiMikomiKikan);
     }
 
     @JsonIgnore

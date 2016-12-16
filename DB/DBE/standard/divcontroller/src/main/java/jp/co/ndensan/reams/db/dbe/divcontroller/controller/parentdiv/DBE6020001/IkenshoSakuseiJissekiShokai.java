@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6020001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_NinteichosaJissekiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001.DBE601001_IkenshoSakuseiJIssekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojissekiichiran.IkenshoJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.DBE6020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiDiv;
@@ -82,7 +82,7 @@ public class IkenshoSakuseiJissekiShokai {
                 意見書記入日TO,
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
                 new RString(div.getTxtMaxKensu().getValue().toString()));
-        getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter).records());
+        getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter));
         getHandler(div).set一覧状態();
         return ResponseData.of(div).respond();
     }
@@ -137,8 +137,8 @@ public class IkenshoSakuseiJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<IkenshoJissekiIchiranBatchParameter>
      */
-    public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnShutsutyoku(IkenshoSakuseiJissekiShokaiDiv div) {
-        DBE601002_NinteichosaJissekiParameter paramter = getHandler(div).createBatchParam(CSVを出力する);
+    public ResponseData<DBE601001_IkenshoSakuseiJIssekiParameter> onClick_BtnShutsutyoku(IkenshoSakuseiJissekiShokaiDiv div) {
+        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(CSVを出力する);
         return ResponseData.of(paramter).respond();
     }
 
@@ -148,8 +148,8 @@ public class IkenshoSakuseiJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<IkenshoJissekiIchiranBatchParameter>
      */
-    public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnPulish(IkenshoSakuseiJissekiShokaiDiv div) {
-        DBE601002_NinteichosaJissekiParameter paramter = getHandler(div).createBatchParam(集計表を発行する);
+    public ResponseData<DBE601001_IkenshoSakuseiJIssekiParameter> onClick_BtnPulish(IkenshoSakuseiJissekiShokaiDiv div) {
+        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(集計表を発行する);
         return ResponseData.of(paramter).respond();
     }
 

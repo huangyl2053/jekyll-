@@ -3,12 +3,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jul 23 13:18:10 CST 2016 
+ * Fri Dec 16 20:05:36 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -19,9 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShinsakaiIinHoshu_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
 
-    private RString gogitaiBango;
+    private TextBoxNum gogitaiBango;
     private RString shinsaIinMei;
     private RString shussekijokyo1;
     private RString shussekijokyo2;
@@ -54,15 +55,15 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
     private RString shussekijokyo29;
     private RString shussekijokyo30;
     private RString shussekijokyo31;
-    private RString shussekiKaisu;
-    private RString sogaku;
-    private RString sonotaHiyo;
-    private RString zeiKojoGaku;
-    private RString sashihikiHoshu;
+    private TextBoxNum shussekiKaisu;
+    private TextBoxNum sogaku;
+    private TextBoxNum sonotaHiyo;
+    private TextBoxNum zeiKojoGaku;
+    private TextBoxNum sashihikiHoshu;
 
     public dgShinsakaiIinHoshu_Row() {
         super();
-        this.gogitaiBango = RString.EMPTY;
+        this.gogitaiBango = new TextBoxNum();
         this.shinsaIinMei = RString.EMPTY;
         this.shussekijokyo1 = RString.EMPTY;
         this.shussekijokyo2 = RString.EMPTY;
@@ -95,11 +96,11 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.shussekijokyo29 = RString.EMPTY;
         this.shussekijokyo30 = RString.EMPTY;
         this.shussekijokyo31 = RString.EMPTY;
-        this.shussekiKaisu = RString.EMPTY;
-        this.sogaku = RString.EMPTY;
-        this.sonotaHiyo = RString.EMPTY;
-        this.zeiKojoGaku = RString.EMPTY;
-        this.sashihikiHoshu = RString.EMPTY;
+        this.shussekiKaisu = new TextBoxNum();
+        this.sogaku = new TextBoxNum();
+        this.sonotaHiyo = new TextBoxNum();
+        this.zeiKojoGaku = new TextBoxNum();
+        this.sashihikiHoshu = new TextBoxNum();
         this.setOriginalData("gogitaiBango", gogitaiBango);
         this.setOriginalData("shinsaIinMei", shinsaIinMei);
         this.setOriginalData("shussekijokyo1", shussekijokyo1);
@@ -140,7 +141,7 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.setOriginalData("sashihikiHoshu", sashihikiHoshu);
     }
 
-    public dgShinsakaiIinHoshu_Row(RString gogitaiBango, RString shinsaIinMei, RString shussekijokyo1, RString shussekijokyo2, RString shussekijokyo3, RString shussekijokyo4, RString shussekijokyo5, RString shussekijokyo6, RString shussekijokyo7, RString shussekijokyo8, RString shussekijokyo9, RString shussekijokyo10, RString shussekijokyo11, RString shussekijokyo12, RString shussekijokyo13, RString shussekijokyo14, RString shussekijokyo15, RString shussekijokyo16, RString shussekijokyo17, RString shussekijokyo18, RString shussekijokyo19, RString shussekijokyo20, RString shussekijokyo21, RString shussekijokyo22, RString shussekijokyo23, RString shussekijokyo24, RString shussekijokyo25, RString shussekijokyo26, RString shussekijokyo27, RString shussekijokyo28, RString shussekijokyo29, RString shussekijokyo30, RString shussekijokyo31, RString shussekiKaisu, RString sogaku, RString sonotaHiyo, RString zeiKojoGaku, RString sashihikiHoshu) {
+    public dgShinsakaiIinHoshu_Row(TextBoxNum gogitaiBango, RString shinsaIinMei, RString shussekijokyo1, RString shussekijokyo2, RString shussekijokyo3, RString shussekijokyo4, RString shussekijokyo5, RString shussekijokyo6, RString shussekijokyo7, RString shussekijokyo8, RString shussekijokyo9, RString shussekijokyo10, RString shussekijokyo11, RString shussekijokyo12, RString shussekijokyo13, RString shussekijokyo14, RString shussekijokyo15, RString shussekijokyo16, RString shussekijokyo17, RString shussekijokyo18, RString shussekijokyo19, RString shussekijokyo20, RString shussekijokyo21, RString shussekijokyo22, RString shussekijokyo23, RString shussekijokyo24, RString shussekijokyo25, RString shussekijokyo26, RString shussekijokyo27, RString shussekijokyo28, RString shussekijokyo29, RString shussekijokyo30, RString shussekijokyo31, TextBoxNum shussekiKaisu, TextBoxNum sogaku, TextBoxNum sonotaHiyo, TextBoxNum zeiKojoGaku, TextBoxNum sashihikiHoshu) {
         super();
         this.setOriginalData("gogitaiBango", gogitaiBango);
         this.setOriginalData("shinsaIinMei", shinsaIinMei);
@@ -220,7 +221,7 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.sashihikiHoshu = sashihikiHoshu;
     }
 
-    public RString getGogitaiBango() {
+    public TextBoxNum getGogitaiBango() {
         return gogitaiBango;
     }
 
@@ -352,27 +353,27 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         return shussekijokyo31;
     }
 
-    public RString getShussekiKaisu() {
+    public TextBoxNum getShussekiKaisu() {
         return shussekiKaisu;
     }
 
-    public RString getSogaku() {
+    public TextBoxNum getSogaku() {
         return sogaku;
     }
 
-    public RString getSonotaHiyo() {
+    public TextBoxNum getSonotaHiyo() {
         return sonotaHiyo;
     }
 
-    public RString getZeiKojoGaku() {
+    public TextBoxNum getZeiKojoGaku() {
         return zeiKojoGaku;
     }
 
-    public RString getSashihikiHoshu() {
+    public TextBoxNum getSashihikiHoshu() {
         return sashihikiHoshu;
     }
 
-    public void setGogitaiBango(RString gogitaiBango) {
+    public void setGogitaiBango(TextBoxNum gogitaiBango) {
         this.setOriginalData("gogitaiBango", gogitaiBango);
         this.gogitaiBango = gogitaiBango;
     }
@@ -537,27 +538,27 @@ public class dgShinsakaiIinHoshu_Row extends DataRow {
         this.shussekijokyo31 = shussekijokyo31;
     }
 
-    public void setShussekiKaisu(RString shussekiKaisu) {
+    public void setShussekiKaisu(TextBoxNum shussekiKaisu) {
         this.setOriginalData("shussekiKaisu", shussekiKaisu);
         this.shussekiKaisu = shussekiKaisu;
     }
 
-    public void setSogaku(RString sogaku) {
+    public void setSogaku(TextBoxNum sogaku) {
         this.setOriginalData("sogaku", sogaku);
         this.sogaku = sogaku;
     }
 
-    public void setSonotaHiyo(RString sonotaHiyo) {
+    public void setSonotaHiyo(TextBoxNum sonotaHiyo) {
         this.setOriginalData("sonotaHiyo", sonotaHiyo);
         this.sonotaHiyo = sonotaHiyo;
     }
 
-    public void setZeiKojoGaku(RString zeiKojoGaku) {
+    public void setZeiKojoGaku(TextBoxNum zeiKojoGaku) {
         this.setOriginalData("zeiKojoGaku", zeiKojoGaku);
         this.zeiKojoGaku = zeiKojoGaku;
     }
 
-    public void setSashihikiHoshu(RString sashihikiHoshu) {
+    public void setSashihikiHoshu(TextBoxNum sashihikiHoshu) {
         this.setOriginalData("sashihikiHoshu", sashihikiHoshu);
         this.sashihikiHoshu = sashihikiHoshu;
     }

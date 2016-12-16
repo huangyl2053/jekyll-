@@ -129,7 +129,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         csvEntity.cityCode = entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue();
         csvEntity.cityName = entity.getTemp_市町村名称();
         csvEntity.no = new RString(String.valueOf(entity.get行番号()));
-        csvEntity.hokenshaName = entity.getTemp_保険者名称();
+        csvEntity.hokenshaName = entity.getTemp_市町村名称();
         csvEntity.hihokenshaNo = entity.getTemp_被保険者番号();
         csvEntity.hihokenshaKanaName = entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue();
         csvEntity.hihokenshaName = entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue();
