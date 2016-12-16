@@ -103,18 +103,7 @@ public class ShobyoIken {
      * @return ResponseData<ShobyoIkenDiv>
      */
     public ResponseData<ShobyoIkenDiv> onClick_btnNo(ShobyoIkenDiv div) {
-        if (getHandler(div).一覧編集がある()) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).clearValue();
-                return ResponseData.of(div).respond();
-            }
-        }
+        getHandler(div).clearValue();
         return ResponseData.of(div).respond();
     }
 

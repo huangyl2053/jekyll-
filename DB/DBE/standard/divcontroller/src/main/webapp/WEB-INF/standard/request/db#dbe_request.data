@@ -620,6 +620,7 @@ dbe/db/dbe/NinteiShinseiToroku/onLoad
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnJogaiShinsakaiIinGuide
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnRenrakusaki
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnShichosonRenrakuJiko
+dbe/db/dbe/NinteichosaIrai/onActive
 dbe/db/dbe/NinteichosaIrai/onBefore_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnDataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnTaOutput
