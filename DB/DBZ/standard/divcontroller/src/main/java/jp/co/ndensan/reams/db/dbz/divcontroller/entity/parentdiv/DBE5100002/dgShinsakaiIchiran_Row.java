@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBE5100002;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Dec 16 18:55:46 JST 2016 
+ * Fri Dec 16 18:23:55 JST 2016 
  */
 
 
