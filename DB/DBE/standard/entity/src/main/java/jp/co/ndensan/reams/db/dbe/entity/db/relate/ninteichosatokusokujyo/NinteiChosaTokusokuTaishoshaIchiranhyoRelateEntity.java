@@ -27,7 +27,6 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity {
     private LasdecCode temp_市町村コード;
     private RString temp_市町村名称;
     private RString temp_保険者番号;
-    private RString temp_保険者名称;
     private RString temp_被保険者番号;
     private AtenaKanaMeisho temp_被保険者氏名カナ;
     private AtenaMeisho temp_被保険者氏名;
