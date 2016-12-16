@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,9 +34,9 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
     @BatchParameter(key = KEY_ENTITY, name = "キー情報Entityリスト")
     private List<NinteiChosaHoshuShokaiFlowBusiness> 情報リスト;
     @BatchParameter(key = START_DAY, name = "調査依頼日開始")
-    private FlexibleDate 調査依頼日開始;
+    private RString 調査依頼日開始;
     @BatchParameter(key = END_DAY, name = "調査依頼日終了")
-    private FlexibleDate 調査依頼日終了;
+    private RString 調査依頼日終了;
 
     /**
      * コンストラクタです。
@@ -54,7 +53,7 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
      * @param 調査依頼日終了 調査依頼日終了
      */
     public DBE601005_NinteichosaHoshuParameter(RString 帳票出力区分, List<NinteiChosaHoshuShokaiFlowBusiness> 情報リスト,
-            FlexibleDate 調査依頼日開始, FlexibleDate 調査依頼日終了) {
+            RString 調査依頼日開始, RString 調査依頼日終了) {
         this.帳票出力区分 = 帳票出力区分;
         this.情報リスト = 情報リスト;
         this.調査依頼日開始 = 調査依頼日開始;
