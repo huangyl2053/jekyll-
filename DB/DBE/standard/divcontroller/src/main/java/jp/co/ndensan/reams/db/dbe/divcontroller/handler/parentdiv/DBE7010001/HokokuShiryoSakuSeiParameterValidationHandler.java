@@ -112,7 +112,9 @@ public class HokokuShiryoSakuSeiParameterValidationHandler {
 
     private ValidationMessageControlPairs check_ChkShukeiTani(ValidationMessageControlPairs validationMessages) {
         if (KEY_実施状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
-                || KEY_審査判定状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
+                || KEY_審査判定の変更状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_介護認定審査会集計表_申請区分別.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+                || KEY_介護認定審査会集計表_現在の状況別.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
             if (div.getChkShukeiTani().getSelectedKeys().isEmpty()) {
                 validationMessages.add(new ValidationMessageControlPair(HokokuShiryoSakuSeiParameterValidationMessage.選択されていない_集計単位));
             } else if (div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY0)
