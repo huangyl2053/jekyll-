@@ -214,6 +214,12 @@
     <result property="shinsakaiKaisaiNo_temp"  column="shinsakaiKaisaiNo_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="shinsakaiKaisaiYMD"  column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 </resultMap>
+
+<resultMap id="resultMap_GetureiSyoriTaishoshaWithCountEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GetureiSyoriTantoshaWithCountEntity" autoMapping="true">
+    <id property="totalCount" column="totalCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    <collection property="taishoshaList" resultMap="resultMap_GeTuReiSyoRiRelateEntity"
+                ofType ="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity"/>
+</resultMap>
 <resultMap id="resultMap_GeTuReiSyoRiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity" autoMapping="true">
     <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -231,7 +237,7 @@
     <result property="shinsakaiKaisaiNo"  column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="gogitaiNo"  column="gogitaiNo" />
     <result property="centerSoshinYMD"  column="centerSoshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-    <result property="ifSofuYMD"  column="ifSofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    <result property="centerSoshinChushutsuYMD"  column="centerSoshinChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
 </resultMap>
    <resultMap id="resultMap_ShinSaKeTuKeRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -1261,9 +1267,10 @@
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
     </select>
-    <select resultOrdered="true" id="get月例処理" resultMap="resultMap_GeTuReiSyoRiRelateEntity" 
+    <select resultOrdered="true" id="get月例処理" resultMap="resultMap_GetureiSyoriTaishoshaWithCountEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
+            COUNT(*) OVER () AS "totalCount",
             DbT5101."shinseishoKanriNo",
             DbT5101."hihokenshaNo",
             DbT5101."hihokenshaName",
@@ -1274,7 +1281,6 @@
             DbT5101."saiChosaIraiKaisu",
             DbT5101."saiSakuseiIraiKaisu",
             DbT5101."shinsakaiYusenWaritsukeKubunCode",
-            DbT5101."ifSofuYMD",
             DbT7051."shichosonMeisho",
             DbT5105."maskingKanryoYMD",
             DbT5105."ninteiShinsakaiKanryoYMD",
@@ -1283,7 +1289,8 @@
             DbT5501."shinsakaiKaisaiYoteiYMD",
             DbT5501."shinsakaiKaishiYoteiTime",
             DbT5501."shinsakaiKaisaiNo",
-            DbT5501."gogitaiNo"
+            DbT5501."gogitaiNo",
+            DbT7211."centerSoshinChushutsuYMD"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
@@ -1294,21 +1301,48 @@
                 ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
                 ON  DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
-        WHERE
-                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-            AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-            AND DbT5105."maskingKanryoYMD" IS NOT NULL
-            AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+            LEFT JOIN  rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
+                ON  DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
+        <where>
             AND DbT5101."logicalDeletedFlag" = FALSE
+            AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteichosaKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND DbT5105."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
+            AND DbT5105."ichijiHanteiKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5105."maskingKanryoYMD" IS NOT NULL
+            AND DbT5105."maskingKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+            AND (
+                DbT5105."centerSoshinYMD" is NULL 
+                OR DbT5105."centerSoshinYMD" = ''
+            )
+            <if test="状態区分 == 1" >
+                AND (
+                    DbT7211."centerSoshinChushutsuYMD" is NULL
+                    OR DbT7211."centerSoshinChushutsuYMD" = ''
+                )
+            </if>
+            <if test="状態区分 == 2" >
+                AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
+                AND DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+            </if>
+        </where>
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
+        LIMIT #{件数}
     </select>
     <resultMap id="resultMap_GeTuReiSyoRiRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
@@ -1327,22 +1361,48 @@
                 ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
                 ON  DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
-        WHERE
-                "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
-            AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+            LEFT JOIN  rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
+                ON  DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
+       <where>
             AND DbT5101."logicalDeletedFlag" = FALSE
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" <![CDATA[<>]]> ''
+            AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" <![CDATA[<>]]> ''
+            AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+            AND (
+                "DbT5105NinteiKanryoJoho"."centerSoshinYMD" is NULL 
+                OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = ''
+            )
+            <if test="状態区分 == 1" >
+                AND (
+                    DbT7211."centerSoshinChushutsuYMD" is NULL
+                    OR DbT7211."centerSoshinChushutsuYMD" = ''
+                )
+            </if>
+            <if test="状態区分 == 2" >
+                AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
+                AND DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+            </if>
+        </where>
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
+        LIMIT #{件数}
     </select>
     <select resultOrdered="true" id="get審査受付" resultMap="resultMap_ShinSaKeTuKeRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">

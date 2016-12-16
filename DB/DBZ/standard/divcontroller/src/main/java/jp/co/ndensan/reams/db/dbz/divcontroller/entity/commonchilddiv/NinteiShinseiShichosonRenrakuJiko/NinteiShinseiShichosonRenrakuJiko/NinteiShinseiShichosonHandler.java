@@ -20,7 +20,10 @@ public class NinteiShinseiShichosonHandler {
     private final NinteiShinseiShichosonRenrakuJikoDiv div;
     private static final RString 要介護認定申請登録申請メニューID = new RString("DBDMN51001");
     private static final RString 連絡事項タイトル = new RString("連絡事項");
-
+    private static final RString 認定調査委託先div = new RString("ChosaItakusakiAndChosainInput");
+    private static final RString 調査員への連絡事項タイトル = new RString("調査員への連絡事項");
+    private static final RString 主治医医療機関div = new RString("ShujiiIryokikanAndShujiiInput");
+    private static final RString 主治医への連絡事項タイトル = new RString("主治医への連絡事項");
     /**
      * コンストラクタです。
      *
@@ -38,9 +41,16 @@ public class NinteiShinseiShichosonHandler {
     public void initialize(NinteiShinseiCodeModel shinseiCodeModel) {
         div.getTxtRenrakujiko().clearValue();
         if (shinseiCodeModel.getメニューID() != null 
-                && !shinseiCodeModel.getメニューID().isEmpty() 
-                && shinseiCodeModel.getメニューID().equals(要介護認定申請登録申請メニューID)) {
-            div.setTitle(連絡事項タイトル);
+                && !shinseiCodeModel.getメニューID().isEmpty()) { 
+                if (shinseiCodeModel.getメニューID().equals(要介護認定申請登録申請メニューID)) {
+                    div.setTitle(連絡事項タイトル);
+                }
+                if (shinseiCodeModel.getメニューID().equals(認定調査委託先div)) {
+                    div.setTitle(調査員への連絡事項タイトル);
+                }
+                if (shinseiCodeModel.getメニューID().equals(主治医医療機関div)) {
+                    div.setTitle(主治医への連絡事項タイトル);
+                }
         }
         if (NinteiShinseiCodeModel.HyojiMode.InputMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());

@@ -55,7 +55,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahoshushokai."
             + "INinteiChosaHoshuShokaiRelateMapper.get報酬実績データ情報");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601006.getReportId();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601006"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE606001"));
     private static final RString CSV_NAME = new RString("IkenshoJissekiIchiran.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -125,7 +125,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE601001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE601006.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;

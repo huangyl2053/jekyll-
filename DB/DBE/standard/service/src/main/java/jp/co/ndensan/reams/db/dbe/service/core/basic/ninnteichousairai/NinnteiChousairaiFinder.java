@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -65,7 +63,8 @@ public class NinnteiChousairaiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinnteiChousairaiFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinnteiChousairaiFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinnteiChousairaiFinder}のインスタンス
      */
     public static NinnteiChousairaiFinder createInstance() {
         return InstanceProvider.create(NinnteiChousairaiFinder.class);
@@ -75,20 +74,17 @@ public class NinnteiChousairaiFinder {
      * 認定調査委託先情報を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
-     * @return SearchResult<NinnteiChousairaiBusiness> 認定調査委託先情報
+     * @return List<NinnteiChousairaiBusiness> 認定調査委託先情報
      */
     @Transaction
-    public SearchResult<NinnteiChousairaiBusiness> getNinnteiChousaItaku(NinnteiChousairaiParameter parametere) {
+    public List<NinnteiChousairaiBusiness> get認定調査委託先(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        List<NinnteiChousairaiEntity> entityList = mapper.selectNinnteiChousaItaku(parametere);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<NinnteiChousairaiBusiness>emptyList(), 0, false);
-        }
+        List<NinnteiChousairaiEntity> entityList = mapper.select認定調査委託先情報(parametere);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = new ArrayList<>();
         for (NinnteiChousairaiEntity entity : entityList) {
             認定調査委託先List.add(new NinnteiChousairaiBusiness(entity));
         }
-        return SearchResult.of(認定調査委託先List, 0, false);
+        return 認定調査委託先List;
     }
 
     /**
@@ -98,17 +94,14 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<NinnteiChousairaiBusiness> 調査員情報
      */
     @Transaction
-    public SearchResult<NinnteiChousairaiBusiness> getChousaIn(NinnteiChousairaiParameter parametere) {
+    public List<NinnteiChousairaiBusiness> get調査員(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        List<NinnteiChousairaiEntity> entityList = mapper.selectChousaIn(parametere);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<NinnteiChousairaiBusiness>emptyList(), 0, false);
-        }
-        List<NinnteiChousairaiBusiness> 調査員情報 = new ArrayList<>();
+        List<NinnteiChousairaiEntity> entityList = mapper.select調査員(parametere);
+        List<NinnteiChousairaiBusiness> 調査員List = new ArrayList<>();
         for (NinnteiChousairaiEntity entity : entityList) {
-            調査員情報.add(new NinnteiChousairaiBusiness(entity));
+            調査員List.add(new NinnteiChousairaiBusiness(entity));
         }
-        return SearchResult.of(調査員情報, 0, false);
+        return 調査員List;
     }
 
     /**
@@ -118,17 +111,14 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<WaritsukeBusiness> 割付済み申請者一覧
      */
     @Transaction
-    public SearchResult<WaritsukeBusiness> getWaritsuke(NinnteiChousairaiParameter parametere) {
+    public List<WaritsukeBusiness> get割付済み申請者(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        List<WaritsukeEntity> entityList = mapper.getWaritsuke(parametere);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<WaritsukeBusiness>emptyList(), 0, false);
-        }
-        List<WaritsukeBusiness> 割付済み申請者一覧 = new ArrayList<>();
+        List<WaritsukeEntity> entityList = mapper.select割付済み申請者(parametere);
+        List<WaritsukeBusiness> 割付済み申請者List = new ArrayList<>();
         for (WaritsukeEntity entity : entityList) {
-            割付済み申請者一覧.add(new WaritsukeBusiness(entity));
+            割付済み申請者List.add(new WaritsukeBusiness(entity));
         }
-        return SearchResult.of(割付済み申請者一覧, 0, false);
+        return 割付済み申請者List;
     }
 
     /**
@@ -138,17 +128,14 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<WaritsukeBusiness> 未割付申請者一覧（新規依頼）
      */
     @Transaction
-    public SearchResult<WaritsukeBusiness> getShiteWaritsuke(NinnteiChousairaiParameter parametere) {
+    public List<WaritsukeBusiness> get新規依頼未割付申請者(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        List<WaritsukeEntity> entityList = mapper.getShiteWaritsuke(parametere);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<WaritsukeBusiness>emptyList(), 0, false);
-        }
-        List<WaritsukeBusiness> 未割付申請者一覧 = new ArrayList<>();
+        List<WaritsukeEntity> entityList = mapper.select新規依頼未割付申請者(parametere);
+        List<WaritsukeBusiness> 未割付申請者List = new ArrayList<>();
         for (WaritsukeEntity entity : entityList) {
-            未割付申請者一覧.add(new WaritsukeBusiness(entity));
+            未割付申請者List.add(new WaritsukeBusiness(entity));
         }
-        return SearchResult.of(未割付申請者一覧, 0, false);
+        return 未割付申請者List;
     }
 
     /**
@@ -158,17 +145,14 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<WaritsukeBusiness> 未割付申請者一覧（再依頼）
      */
     @Transaction
-    public SearchResult<WaritsukeBusiness> getShiteWaritsukeSai(NinnteiChousairaiParameter parametere) {
+    public List<WaritsukeBusiness> get再依頼未割付申請者(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        List<WaritsukeEntity> entityList = mapper.getShiteWaritsukeSai(parametere);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<WaritsukeBusiness>emptyList(), 0, false);
-        }
-        List<WaritsukeBusiness> 未割付再依頼一覧 = new ArrayList<>();
+        List<WaritsukeEntity> entityList = mapper.select再依頼未割付申請者(parametere);
+        List<WaritsukeBusiness> 未割付申請者List = new ArrayList<>();
         for (WaritsukeEntity entity : entityList) {
-            未割付再依頼一覧.add(new WaritsukeBusiness(entity));
+            未割付申請者List.add(new WaritsukeBusiness(entity));
         }
-        return SearchResult.of(未割付再依頼一覧, 0, false);
+        return 未割付申請者List;
     }
 
     /**
@@ -178,13 +162,13 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<NinteichosaIraiJohoRelateBusiness> 割付済み一覧
      */
     @Transaction
-    public SearchResult<NinteichosaIraiJohoRelateBusiness> getNinteichosaIraiJohoList(NinnteiChousairaiParameter parametere) {
+    public List<NinteichosaIraiJohoRelateBusiness> getNinteichosaIraiJohoList(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
         NinteichosaIraiJohoRelateEntity entity = mapper.getNinteichosaIraiJohoList(parametere);
-        if (entity == null) {
-            return SearchResult.of(Collections.<NinteichosaIraiJohoRelateBusiness>emptyList(), 0, false);
-        }
         List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = new ArrayList<>();
+        if (entity == null) {
+            return 割付済み一覧;
+        }
         List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList<>();
         for (DbT5105NinteiKanryoJohoEntity ninteiKanryoJohoEntity : entity.getNinteiKanryoJohoEntity()) {
             ninteiKanryoJohoEntity.initializeMd5();
@@ -197,7 +181,7 @@ public class NinnteiChousairaiFinder {
             ninteichosaIraiJohoList.add(new NinteichosaIraiJoho(ninteichosaIraiJohoEntity));
         }
         割付済み一覧.add(new NinteichosaIraiJohoRelateBusiness(ninteichosaIraiJohoList, ninteiKanryoJohoList));
-        return SearchResult.of(割付済み一覧, 0, false);
+        return 割付済み一覧;
     }
 
     /**
@@ -207,16 +191,13 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<ShichosonMeishoBusiness> 市町村名称リスト
      */
     @Transaction
-    public SearchResult<ShichosonMeishoBusiness> getShichosonMeisho(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public List<ShichosonMeishoBusiness> get市町村名称(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         List<DbT7051KoseiShichosonMasterEntity> entityList = dac.getshichosonMeisho(shoKisaiHokenshaNo);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<ShichosonMeishoBusiness>emptyList(), 0, false);
-        }
-        List<ShichosonMeishoBusiness> shichosonMeisho = new ArrayList<>();
+        List<ShichosonMeishoBusiness> 市町村名称List = new ArrayList<>();
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
-            shichosonMeisho.add(new ShichosonMeishoBusiness(entity));
+            市町村名称List.add(new ShichosonMeishoBusiness(entity));
         }
-        return SearchResult.of(shichosonMeisho, 0, false);
+        return 市町村名称List;
     }
 
     /**
@@ -226,16 +207,14 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<NinteichosaIraiJoho> 認定調査依頼情報
      */
     @Transaction
-    public SearchResult<NinteichosaIraiJoho> getNinteichosaIraiJoho(RString 申請書管理番号) {
+    public NinteichosaIraiJoho get認定調査依頼情報(RString 申請書管理番号) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        DbT5201NinteichosaIraiJohoEntity entity = mapper.getNinteichosaIraiJoho(申請書管理番号);
+        DbT5201NinteichosaIraiJohoEntity entity = mapper.select認定調査依頼情報(申請書管理番号);
         if (entity == null) {
-            return SearchResult.of(Collections.<NinteichosaIraiJoho>emptyList(), 0, false);
+            return null;
         }
         entity.initializeMd5();
-        List<NinteichosaIraiJoho> list = new ArrayList<>();
-        list.add(new NinteichosaIraiJoho(entity));
-        return SearchResult.of(list, 0, false);
+        return new NinteichosaIraiJoho(entity);
     }
 
     /**
@@ -245,16 +224,13 @@ public class NinnteiChousairaiFinder {
      * @return SearchResult<SaiChekkuhyoBusiness> 認定調査票差異チェック票
      */
     @Transaction
-    public SearchResult<SaiChekkuhyoBusiness> get認定調査票差異チェック票情報(SaiChekkuhyoParameter parameter) {
+    public List<SaiChekkuhyoBusiness> get認定調査票差異チェック票情報(SaiChekkuhyoParameter parameter) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
         List<SaiChekkuhyoEntity> entityList = mapper.get認定調査票差異チェック票情報(parameter);
-        if (entityList == null) {
-            return SearchResult.of(Collections.<SaiChekkuhyoBusiness>emptyList(), 0, false);
-        }
         List<SaiChekkuhyoBusiness> list = new ArrayList<>();
         for (SaiChekkuhyoEntity entity : entityList) {
             list.add(new SaiChekkuhyoBusiness(entity));
         }
-        return SearchResult.of(list, 0, false);
+        return list;
     }
 }

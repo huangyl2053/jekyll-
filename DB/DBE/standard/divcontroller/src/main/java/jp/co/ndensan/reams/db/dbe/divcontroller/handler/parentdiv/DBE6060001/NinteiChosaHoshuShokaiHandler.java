@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6060001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshushokai.NinteichosahoshushokaiBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshuShokaiFlowBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.DBE601005_NinteichosaHoshuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshuShokaiFlowBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.NinteiChosaHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.dgNinteiChosaHoshu_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJis
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -109,7 +108,7 @@ public class NinteiChosaHoshuShokaiHandler {
                 row.setShisetsuSai(項目状態);
                 施設_再 = 施設_再 + 1;
             }
-            row.setItakuryo(DecimalFormatter.toコンマ区切りRString(new Decimal(調査一覧.get認定調査委託料()), 0).concat("円"));
+            row.setItakuryo(DecimalFormatter.toコンマ区切りRString(new Decimal(調査一覧.get認定調査委託料()), 0));
             委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
             listRow.add(row);
             アクセスログ(調査一覧.get申請書管理番号().getColumnValue());
@@ -140,8 +139,14 @@ public class NinteiChosaHoshuShokaiHandler {
      */
     public DBE601005_NinteichosaHoshuParameter getTempData(RString 出力区分) {
         DBE601005_NinteichosaHoshuParameter tempData = new DBE601005_NinteichosaHoshuParameter();
-        FlexibleDate 依頼日開始 = new FlexibleDate(div.getTxtChosaIraibi().getFromValue().toDateString());
-        FlexibleDate 依頼日終了 = new FlexibleDate(div.getTxtChosaIraibi().getToValue().toDateString());
+        RString 依頼日開始 = RString.EMPTY;
+        RString 依頼日終了 = RString.EMPTY;
+        if (div.getTxtChosaIraibi().getFromValue() != null) {
+            依頼日開始 = div.getTxtChosaIraibi().getFromValue().toDateString();
+        }
+        if (div.getTxtChosaIraibi().getToValue() != null) {
+            依頼日終了 = div.getTxtChosaIraibi().getToValue().toDateString();
+        }
         List<NinteiChosaHoshuShokaiFlowBusiness> 情報 = new ArrayList<>();
         List<dgNinteiChosaHoshu_Row> list = div.getDgNinteiChosaHoshu().getDataSource();
         for (dgNinteiChosaHoshu_Row rowList : list) {

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ChosaitakusakiJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,10 +42,10 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private TextBoxKana txtChosaitakusakiKananame;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
-    @JsonProperty("txtJusho")
-    private TextBoxJusho txtJusho;
     @JsonProperty("txtTelNo")
     private TextBoxTelNo txtTelNo;
+    @JsonProperty("txtJusho")
+    private TextBox txtJusho;
     @JsonProperty("txtFaxNo")
     private TextBoxTelNo txtFaxNo;
     @JsonProperty("txtdaihyoshaname")
@@ -64,8 +64,8 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private DropDownList ddlKikankubun;
     @JsonProperty("radChosainJokyo")
     private RadioButton radChosainJokyo;
-    @JsonProperty("btnKoza")
-    private ButtonDialog btnKoza;
+    @JsonProperty("KozaJoho")
+    private KozaJohoDiv KozaJoho;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
@@ -244,24 +244,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * gettxtJusho
-     * @return txtJusho
-     */
-    @JsonProperty("txtJusho")
-    public TextBoxJusho getTxtJusho() {
-        return txtJusho;
-    }
-
-    /*
-     * settxtJusho
-     * @param txtJusho txtJusho
-     */
-    @JsonProperty("txtJusho")
-    public void setTxtJusho(TextBoxJusho txtJusho) {
-        this.txtJusho = txtJusho;
-    }
-
-    /*
      * gettxtTelNo
      * @return txtTelNo
      */
@@ -277,6 +259,24 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("txtTelNo")
     public void setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.txtTelNo = txtTelNo;
+    }
+
+    /*
+     * gettxtJusho
+     * @return txtJusho
+     */
+    @JsonProperty("txtJusho")
+    public TextBox getTxtJusho() {
+        return txtJusho;
+    }
+
+    /*
+     * settxtJusho
+     * @param txtJusho txtJusho
+     */
+    @JsonProperty("txtJusho")
+    public void setTxtJusho(TextBox txtJusho) {
+        this.txtJusho = txtJusho;
     }
 
     /*
@@ -442,21 +442,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getbtnKoza
-     * @return btnKoza
+     * getKozaJoho
+     * @return KozaJoho
      */
-    @JsonProperty("btnKoza")
-    public ButtonDialog getBtnKoza() {
-        return btnKoza;
+    @JsonProperty("KozaJoho")
+    public KozaJohoDiv getKozaJoho() {
+        return KozaJoho;
     }
 
     /*
-     * setbtnKoza
-     * @param btnKoza btnKoza
+     * setKozaJoho
+     * @param KozaJoho KozaJoho
      */
-    @JsonProperty("btnKoza")
-    public void setBtnKoza(ButtonDialog btnKoza) {
-        this.btnKoza = btnKoza;
+    @JsonProperty("KozaJoho")
+    public void setKozaJoho(KozaJohoDiv KozaJoho) {
+        this.KozaJoho = KozaJoho;
     }
 
     /*

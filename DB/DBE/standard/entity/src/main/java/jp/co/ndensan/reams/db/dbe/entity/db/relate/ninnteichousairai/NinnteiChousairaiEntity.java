@@ -13,14 +13,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 認定調査情報の取得のEntityクラスです。
  *
  * @reamsid_L DBE-0010-010 sunhaidi
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-@SuppressWarnings("PMD.UnusedPrivateField")
 public class NinnteiChousairaiEntity {
 
     private RString ninteichosaItakusakiCode;

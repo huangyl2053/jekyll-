@@ -14,17 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class HyojiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHyojiKikanFrom")
-    private TextBoxDate txtHyojiKikanFrom;
-    @JsonProperty("txtHyojiKikanTo")
-    private TextBoxDate txtHyojiKikanTo;
+    @JsonProperty("txtHyojiKikan")
+    private TextBoxDateRange txtHyojiKikan;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("radHyojiJokenWaritsukeMikanryo")
@@ -49,39 +47,21 @@ public class HyojiJokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtHyojiKikanFrom
-     * @return txtHyojiKikanFrom
+     * gettxtHyojiKikan
+     * @return txtHyojiKikan
      */
-    @JsonProperty("txtHyojiKikanFrom")
-    public TextBoxDate getTxtHyojiKikanFrom() {
-        return txtHyojiKikanFrom;
+    @JsonProperty("txtHyojiKikan")
+    public TextBoxDateRange getTxtHyojiKikan() {
+        return txtHyojiKikan;
     }
 
     /*
-     * settxtHyojiKikanFrom
-     * @param txtHyojiKikanFrom txtHyojiKikanFrom
+     * settxtHyojiKikan
+     * @param txtHyojiKikan txtHyojiKikan
      */
-    @JsonProperty("txtHyojiKikanFrom")
-    public void setTxtHyojiKikanFrom(TextBoxDate txtHyojiKikanFrom) {
-        this.txtHyojiKikanFrom = txtHyojiKikanFrom;
-    }
-
-    /*
-     * gettxtHyojiKikanTo
-     * @return txtHyojiKikanTo
-     */
-    @JsonProperty("txtHyojiKikanTo")
-    public TextBoxDate getTxtHyojiKikanTo() {
-        return txtHyojiKikanTo;
-    }
-
-    /*
-     * settxtHyojiKikanTo
-     * @param txtHyojiKikanTo txtHyojiKikanTo
-     */
-    @JsonProperty("txtHyojiKikanTo")
-    public void setTxtHyojiKikanTo(TextBoxDate txtHyojiKikanTo) {
-        this.txtHyojiKikanTo = txtHyojiKikanTo;
+    @JsonProperty("txtHyojiKikan")
+    public void setTxtHyojiKikan(TextBoxDateRange txtHyojiKikan) {
+        this.txtHyojiKikan = txtHyojiKikan;
     }
 
     /*
