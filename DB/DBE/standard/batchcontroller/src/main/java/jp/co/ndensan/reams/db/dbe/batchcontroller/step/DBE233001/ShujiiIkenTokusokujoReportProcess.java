@@ -56,10 +56,6 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
  */
 public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIkenTokusokujoRelateEntity> {
 
-    /**
-     * OUT_SHINSEISHO_KANRINO_LISTです。
-     */
-    public static final RString OUT_SHINSEISHO_KANRINO_LIST;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001."
             + "IDbe233001RelateMapper.select主治医意見書督促状ByKey");
@@ -83,16 +79,8 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     private static final RString CSVファイル名 = new RString("-");
     IDbe233001RelateMapper mapper;
 
-    static {
-        OUT_SHINSEISHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
-    }
-    private OutputParameter<List<RString>> outShinseishoKanriNoList;
-    private List<RString> shinseishoKanriNoList;
-
     @Override
     protected void initialize() {
-        shinseishoKanriNoList = new ArrayList<>();
-        outShinseishoKanriNoList = new OutputParameter<>();
         super.initialize();
     }
 
@@ -114,7 +102,6 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
 
     @Override
     protected void process(ShujiiIkenTokusokujoRelateEntity entity) {
-        shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         bodyItem = setBodyItem(entity);
         ShujiiIkenshoSakuseiTokusokujoReport report = new ShujiiIkenshoSakuseiTokusokujoReport(bodyItem);
         report.writeBy(reportSourceWriter);
@@ -130,7 +117,6 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     @Override
     protected void afterExecute() {
         set出力条件表();
-        outShinseishoKanriNoList.setValue(shinseishoKanriNoList);
     }
 
     private void set出力条件表() {
