@@ -2180,7 +2180,7 @@
             resultMap="hokokushiryosakusei_CsvKenHokokuShiryoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter"
             fetchSize="500">
-        SELECT E."ichijiHanteiKekkaCode"
+        SELECT E."ichijiHanteiKekkaNinchishoKasanCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
         , COUNT(C."hihokenshaNo") AS hihokenshaCount
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
@@ -2212,7 +2212,6 @@
         </choose>
         AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
         AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-        AND H."shichosonCode" = #{shichosonCode}
         AND F."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND F."ninteichosaKanryoYMD" IS NOT NULL
         AND F."ikenshoTorokuKanryoYMD" IS NOT NULL
@@ -2254,10 +2253,10 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
-        E."ichijiHanteiKekkaCode"
+        E."ichijiHanteiKekkaNinchishoKasanCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
         ORDER BY
-        E."ichijiHanteiKekkaCode"
+        E."ichijiHanteiKekkaNinchishoKasanCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
     </select>
 
