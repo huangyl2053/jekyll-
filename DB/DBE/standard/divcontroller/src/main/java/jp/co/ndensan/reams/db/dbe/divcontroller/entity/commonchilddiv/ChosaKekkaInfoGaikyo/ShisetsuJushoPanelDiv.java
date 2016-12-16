@@ -23,6 +23,8 @@ public class ShisetsuJushoPanelDiv extends Panel {
      */
     @JsonProperty("imgRiyoShisetsuJusho")
     private DynamicImage imgRiyoShisetsuJusho;
+    @JsonProperty("lblNoImageRiyoShisetsuJusho")
+    private Label lblNoImageRiyoShisetsuJusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class ShisetsuJushoPanelDiv extends Panel {
     @JsonProperty("imgRiyoShisetsuJusho")
     public void setImgRiyoShisetsuJusho(DynamicImage imgRiyoShisetsuJusho) {
         this.imgRiyoShisetsuJusho = imgRiyoShisetsuJusho;
+    }
+
+    /*
+     * getlblNoImageRiyoShisetsuJusho
+     * @return lblNoImageRiyoShisetsuJusho
+     */
+    @JsonProperty("lblNoImageRiyoShisetsuJusho")
+    public Label getLblNoImageRiyoShisetsuJusho() {
+        return lblNoImageRiyoShisetsuJusho;
+    }
+
+    /*
+     * setlblNoImageRiyoShisetsuJusho
+     * @param lblNoImageRiyoShisetsuJusho lblNoImageRiyoShisetsuJusho
+     */
+    @JsonProperty("lblNoImageRiyoShisetsuJusho")
+    public void setLblNoImageRiyoShisetsuJusho(Label lblNoImageRiyoShisetsuJusho) {
+        this.lblNoImageRiyoShisetsuJusho = lblNoImageRiyoShisetsuJusho;
     }
 
     // </editor-fold>

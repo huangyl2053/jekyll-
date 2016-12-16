@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -44,4 +45,5 @@ public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable, Ser
     private RString jigyoshaJusho;
     private FlexibleDate yukoKaishiYMDFrom;
     private FlexibleDate yukoKaishiYMDTo;
+    private YubinNo yubinNo;
 }

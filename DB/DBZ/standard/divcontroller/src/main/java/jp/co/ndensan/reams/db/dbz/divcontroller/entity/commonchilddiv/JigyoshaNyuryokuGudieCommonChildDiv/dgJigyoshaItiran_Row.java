@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Nov 26 16:30:57 CST 2016 
+ * Thu Dec 15 19:57:34 JST 2016 
  */
 
 
@@ -20,15 +20,16 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgJigyoshaItiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
 
     private RString txtJigyoshaNo;
     private TextBoxDate txtYukoKaishibiYMD;
     private TextBoxDate txtYukoShuryobiYMD;
     private RString txtMeisho;
     private RString txtServiceShurui;
-    private RString txtJusho;
+    private RString txtYubin;
     private RString txtTelNo;
+    private RString txtJusho;
     private RString hdnServiceShuruiCode;
 
     public dgJigyoshaItiran_Row() {
@@ -38,36 +39,40 @@ public class dgJigyoshaItiran_Row extends DataRow {
         this.txtYukoShuryobiYMD = new TextBoxDate();
         this.txtMeisho = RString.EMPTY;
         this.txtServiceShurui = RString.EMPTY;
-        this.txtJusho = RString.EMPTY;
+        this.txtYubin = RString.EMPTY;
         this.txtTelNo = RString.EMPTY;
+        this.txtJusho = RString.EMPTY;
         this.hdnServiceShuruiCode = RString.EMPTY;
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
         this.setOriginalData("txtYukoKaishibiYMD", txtYukoKaishibiYMD);
         this.setOriginalData("txtYukoShuryobiYMD", txtYukoShuryobiYMD);
         this.setOriginalData("txtMeisho", txtMeisho);
         this.setOriginalData("txtServiceShurui", txtServiceShurui);
-        this.setOriginalData("txtJusho", txtJusho);
+        this.setOriginalData("txtYubin", txtYubin);
         this.setOriginalData("txtTelNo", txtTelNo);
+        this.setOriginalData("txtJusho", txtJusho);
         this.setOriginalData("hdnServiceShuruiCode", hdnServiceShuruiCode);
     }
 
-    public dgJigyoshaItiran_Row(RString txtJigyoshaNo, TextBoxDate txtYukoKaishibiYMD, TextBoxDate txtYukoShuryobiYMD, RString txtMeisho, RString txtServiceShurui, RString txtJusho, RString txtTelNo, RString hdnServiceShuruiCode) {
+    public dgJigyoshaItiran_Row(RString txtJigyoshaNo, TextBoxDate txtYukoKaishibiYMD, TextBoxDate txtYukoShuryobiYMD, RString txtMeisho, RString txtServiceShurui, RString txtYubin, RString txtTelNo, RString txtJusho, RString hdnServiceShuruiCode) {
         super();
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
         this.setOriginalData("txtYukoKaishibiYMD", txtYukoKaishibiYMD);
         this.setOriginalData("txtYukoShuryobiYMD", txtYukoShuryobiYMD);
         this.setOriginalData("txtMeisho", txtMeisho);
         this.setOriginalData("txtServiceShurui", txtServiceShurui);
-        this.setOriginalData("txtJusho", txtJusho);
+        this.setOriginalData("txtYubin", txtYubin);
         this.setOriginalData("txtTelNo", txtTelNo);
+        this.setOriginalData("txtJusho", txtJusho);
         this.setOriginalData("hdnServiceShuruiCode", hdnServiceShuruiCode);
         this.txtJigyoshaNo = txtJigyoshaNo;
         this.txtYukoKaishibiYMD = txtYukoKaishibiYMD;
         this.txtYukoShuryobiYMD = txtYukoShuryobiYMD;
         this.txtMeisho = txtMeisho;
         this.txtServiceShurui = txtServiceShurui;
-        this.txtJusho = txtJusho;
+        this.txtYubin = txtYubin;
         this.txtTelNo = txtTelNo;
+        this.txtJusho = txtJusho;
         this.hdnServiceShuruiCode = hdnServiceShuruiCode;
     }
 
@@ -91,12 +96,16 @@ public class dgJigyoshaItiran_Row extends DataRow {
         return txtServiceShurui;
     }
 
-    public RString getTxtJusho() {
-        return txtJusho;
+    public RString getTxtYubin() {
+        return txtYubin;
     }
 
     public RString getTxtTelNo() {
         return txtTelNo;
+    }
+
+    public RString getTxtJusho() {
+        return txtJusho;
     }
 
     public RString getHdnServiceShuruiCode() {
@@ -128,14 +137,19 @@ public class dgJigyoshaItiran_Row extends DataRow {
         this.txtServiceShurui = txtServiceShurui;
     }
 
-    public void setTxtJusho(RString txtJusho) {
-        this.setOriginalData("txtJusho", txtJusho);
-        this.txtJusho = txtJusho;
+    public void setTxtYubin(RString txtYubin) {
+        this.setOriginalData("txtYubin", txtYubin);
+        this.txtYubin = txtYubin;
     }
 
     public void setTxtTelNo(RString txtTelNo) {
         this.setOriginalData("txtTelNo", txtTelNo);
         this.txtTelNo = txtTelNo;
+    }
+
+    public void setTxtJusho(RString txtJusho) {
+        this.setOriginalData("txtJusho", txtJusho);
+        this.txtJusho = txtJusho;
     }
 
     public void setHdnServiceShuruiCode(RString hdnServiceShuruiCode) {

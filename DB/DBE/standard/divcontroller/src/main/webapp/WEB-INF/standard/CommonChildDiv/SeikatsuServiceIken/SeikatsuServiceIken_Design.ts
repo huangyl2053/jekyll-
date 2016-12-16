@@ -44,12 +44,12 @@ module DBE {
                 return "onChange_radKansenshoUmu";
             }
 
-            public static onClick_btnKakutei(): string {
-                return "onClick_btnKakutei";
-            }
-
             public static onClick_btnCancel(): string {
                 return "onClick_btnCancel";
+            }
+
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
             }
 
         }
@@ -221,12 +221,12 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtKansenshoShosai"));
             }
 
-            public btnKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            }
-
             public btnCancel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            }
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

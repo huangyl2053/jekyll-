@@ -60,7 +60,7 @@ public class GaikyoTokkiIchiranEditor implements IGaikyoTokkiIchiranEditor {
         RStringBuilder printTimeStampSb = new RStringBuilder();
         printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(String.format("%02d", printdate.getHour()));
         printTimeStampSb.append(DATE_時);
@@ -103,7 +103,7 @@ public class GaikyoTokkiIchiranEditor implements IGaikyoTokkiIchiranEditor {
 
     private RString get年度(RString 審査会番号) {
         if (!RString.isNullOrEmpty(審査会番号)) {
-            return new FlexibleYear(審査会番号.substring(0, INT_4)).wareki().firstYear(FirstYear.ICHI_NEN).toDateString();
+            return new FlexibleYear(審査会番号.substring(0, INT_4)).wareki().firstYear(FirstYear.GAN_NEN).toDateString();
         }
         return RString.EMPTY;
     }

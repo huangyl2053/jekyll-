@@ -25,6 +25,8 @@ public class GaikyoChosaTokkiPanelDiv extends Panel {
     private TextBoxMultiLine txtGaikyoChosaTokki;
     @JsonProperty("imgGaikyoChosaTokki")
     private DynamicImage imgGaikyoChosaTokki;
+    @JsonProperty("lblNoImageGaikyoChosaTokki")
+    private Label lblNoImageGaikyoChosaTokki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +68,24 @@ public class GaikyoChosaTokkiPanelDiv extends Panel {
     @JsonProperty("imgGaikyoChosaTokki")
     public void setImgGaikyoChosaTokki(DynamicImage imgGaikyoChosaTokki) {
         this.imgGaikyoChosaTokki = imgGaikyoChosaTokki;
+    }
+
+    /*
+     * getlblNoImageGaikyoChosaTokki
+     * @return lblNoImageGaikyoChosaTokki
+     */
+    @JsonProperty("lblNoImageGaikyoChosaTokki")
+    public Label getLblNoImageGaikyoChosaTokki() {
+        return lblNoImageGaikyoChosaTokki;
+    }
+
+    /*
+     * setlblNoImageGaikyoChosaTokki
+     * @param lblNoImageGaikyoChosaTokki lblNoImageGaikyoChosaTokki
+     */
+    @JsonProperty("lblNoImageGaikyoChosaTokki")
+    public void setLblNoImageGaikyoChosaTokki(Label lblNoImageGaikyoChosaTokki) {
+        this.lblNoImageGaikyoChosaTokki = lblNoImageGaikyoChosaTokki;
     }
 
     // </editor-fold>

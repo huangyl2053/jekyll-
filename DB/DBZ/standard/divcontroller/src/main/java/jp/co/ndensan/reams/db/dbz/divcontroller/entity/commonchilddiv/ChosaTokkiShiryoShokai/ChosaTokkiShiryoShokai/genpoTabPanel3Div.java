@@ -22,7 +22,7 @@ public class genpoTabPanel3Div extends TabPanel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("imgGenpo3")
-    private StaticImage imgGenpo3;
+    private DynamicImage imgGenpo3;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,7 +35,7 @@ public class genpoTabPanel3Div extends TabPanel {
      * @return imgGenpo3
      */
     @JsonProperty("imgGenpo3")
-    public StaticImage getImgGenpo3() {
+    public DynamicImage getImgGenpo3() {
         return imgGenpo3;
     }
 
@@ -44,7 +44,7 @@ public class genpoTabPanel3Div extends TabPanel {
      * @param imgGenpo3 imgGenpo3
      */
     @JsonProperty("imgGenpo3")
-    public void setImgGenpo3(StaticImage imgGenpo3) {
+    public void setImgGenpo3(DynamicImage imgGenpo3) {
         this.imgGenpo3 = imgGenpo3;
     }
 

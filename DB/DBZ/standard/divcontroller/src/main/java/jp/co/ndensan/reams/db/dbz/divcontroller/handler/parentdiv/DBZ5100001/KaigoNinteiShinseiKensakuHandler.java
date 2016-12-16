@@ -314,16 +314,20 @@ public class KaigoNinteiShinseiKensakuHandler {
                     getTxtZenkaiNinteiYukoKikan().getValue().toString());
         }
         int 経過日数Form = 0;
+        boolean is経過日数Form = false;
         if (finderDiv
                 .getTxtShinseiKeikaNissu().getFromValue() != null) {
             経過日数Form = finderDiv
                     .getTxtShinseiKeikaNissu().getFromValue().intValue();
+            is経過日数Form = true;
         }
         int 経過日数To = 0;
+        boolean is経過日数To = false;
         if (finderDiv
                 .getTxtShinseiKeikaNissu().getToValue() != null) {
             経過日数To = finderDiv
                     .getTxtShinseiKeikaNissu().getToValue().intValue();
+            is経過日数To = true;
         }
         int 検索件数 = 0;
         if (div.getTxtMaxKensu().getValue() != null) {
@@ -417,7 +421,10 @@ public class KaigoNinteiShinseiKensakuHandler {
                         getChkIkenshoNyushu().getSelectedKeys().isEmpty(),
                         !finderDiv.
                         getChkGetsureiShori().getSelectedKeys().isEmpty(),
-                        検索件数);
+                        検索件数,
+                        is経過日数Form,
+                        is経過日数To
+                        );
     }
 
     private RString nullTOEmpty(RString 項目) {

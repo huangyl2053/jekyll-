@@ -453,9 +453,9 @@ public class JimuShinsakaishiryoBusiness {
         List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");
         審査会開催年月日.append(paramter.getShinsakaiKaisaiYoteiYMD().getYear())
                 .append(new RString("年 "))
-                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getMonthValue()).padZeroToLeft(2))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getMonthValue()).padLeft(" ", 2))
                 .append(new RString("月 "))
-                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getDayValue()).padZeroToLeft(2))
+                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getDayValue()).padLeft(" ", 2))
                 .append(new RString("日 "))
                 .append(時分.get(0).padZeroToLeft(2))
                 .append(new RString("時 "))

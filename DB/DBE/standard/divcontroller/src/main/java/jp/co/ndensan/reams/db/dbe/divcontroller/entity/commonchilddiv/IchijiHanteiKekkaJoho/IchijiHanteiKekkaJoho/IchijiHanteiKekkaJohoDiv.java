@@ -40,10 +40,12 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private Button btnAfterIchijiHantei;
     @JsonProperty("txtIchijiHanteibi")
     private TextBoxFlexibleDate txtIchijiHanteibi;
-    @JsonProperty("txtIchijiHanteiKekka")
-    private TextBox txtIchijiHanteiKekka;
+    @JsonProperty("ddlIchijiHanteiKekka")
+    private DropDownList ddlIchijiHanteiKekka;
+    @JsonProperty("ddlIchijiHanteiKekkaNinchishoKasan")
+    private DropDownList ddlIchijiHanteiKekkaNinchishoKasan;
     @JsonProperty("txtKijunJikan")
-    private TextBox txtKijunJikan;
+    private TextBoxNum txtKijunJikan;
     @JsonProperty("lblChukanHyokaKomokuTokuten")
     private Label lblChukanHyokaKomokuTokuten;
     @JsonProperty("tblKijunJikan")
@@ -56,14 +58,14 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private Label lblNinchiNichijyoSeikatsuJiritsudo;
     @JsonProperty("txtGaizensei")
     private TextBoxNum txtGaizensei;
-    @JsonProperty("txtJiritsudoChosa")
-    private TextBox txtJiritsudoChosa;
-    @JsonProperty("txtJyotaiAnteisei")
-    private TextBox txtJyotaiAnteisei;
-    @JsonProperty("txtJiritsudoIkensho")
-    private TextBox txtJiritsudoIkensho;
-    @JsonProperty("txtKyufuKbn")
-    private TextBox txtKyufuKbn;
+    @JsonProperty("ddlJiritsudoChosa")
+    private DropDownList ddlJiritsudoChosa;
+    @JsonProperty("ddlJyotaiAnteisei")
+    private DropDownList ddlJyotaiAnteisei;
+    @JsonProperty("ddlJiritsudoIkensho")
+    private DropDownList ddlJiritsudoIkensho;
+    @JsonProperty("ddlKyufuKbn")
+    private DropDownList ddlKyufuKbn;
     @JsonProperty("lblIchijiHanteiKeikokuCode")
     private Label lblIchijiHanteiKeikokuCode;
     @JsonProperty("dgIchijiHanteiKeikokuCode")
@@ -144,21 +146,39 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     /*
-     * gettxtIchijiHanteiKekka
-     * @return txtIchijiHanteiKekka
+     * getddlIchijiHanteiKekka
+     * @return ddlIchijiHanteiKekka
      */
-    @JsonProperty("txtIchijiHanteiKekka")
-    public TextBox getTxtIchijiHanteiKekka() {
-        return txtIchijiHanteiKekka;
+    @JsonProperty("ddlIchijiHanteiKekka")
+    public DropDownList getDdlIchijiHanteiKekka() {
+        return ddlIchijiHanteiKekka;
     }
 
     /*
-     * settxtIchijiHanteiKekka
-     * @param txtIchijiHanteiKekka txtIchijiHanteiKekka
+     * setddlIchijiHanteiKekka
+     * @param ddlIchijiHanteiKekka ddlIchijiHanteiKekka
      */
-    @JsonProperty("txtIchijiHanteiKekka")
-    public void setTxtIchijiHanteiKekka(TextBox txtIchijiHanteiKekka) {
-        this.txtIchijiHanteiKekka = txtIchijiHanteiKekka;
+    @JsonProperty("ddlIchijiHanteiKekka")
+    public void setDdlIchijiHanteiKekka(DropDownList ddlIchijiHanteiKekka) {
+        this.ddlIchijiHanteiKekka = ddlIchijiHanteiKekka;
+    }
+
+    /*
+     * getddlIchijiHanteiKekkaNinchishoKasan
+     * @return ddlIchijiHanteiKekkaNinchishoKasan
+     */
+    @JsonProperty("ddlIchijiHanteiKekkaNinchishoKasan")
+    public DropDownList getDdlIchijiHanteiKekkaNinchishoKasan() {
+        return ddlIchijiHanteiKekkaNinchishoKasan;
+    }
+
+    /*
+     * setddlIchijiHanteiKekkaNinchishoKasan
+     * @param ddlIchijiHanteiKekkaNinchishoKasan ddlIchijiHanteiKekkaNinchishoKasan
+     */
+    @JsonProperty("ddlIchijiHanteiKekkaNinchishoKasan")
+    public void setDdlIchijiHanteiKekkaNinchishoKasan(DropDownList ddlIchijiHanteiKekkaNinchishoKasan) {
+        this.ddlIchijiHanteiKekkaNinchishoKasan = ddlIchijiHanteiKekkaNinchishoKasan;
     }
 
     /*
@@ -166,7 +186,7 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
      * @return txtKijunJikan
      */
     @JsonProperty("txtKijunJikan")
-    public TextBox getTxtKijunJikan() {
+    public TextBoxNum getTxtKijunJikan() {
         return txtKijunJikan;
     }
 
@@ -175,7 +195,7 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
      * @param txtKijunJikan txtKijunJikan
      */
     @JsonProperty("txtKijunJikan")
-    public void setTxtKijunJikan(TextBox txtKijunJikan) {
+    public void setTxtKijunJikan(TextBoxNum txtKijunJikan) {
         this.txtKijunJikan = txtKijunJikan;
     }
 
@@ -288,75 +308,75 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     /*
-     * gettxtJiritsudoChosa
-     * @return txtJiritsudoChosa
+     * getddlJiritsudoChosa
+     * @return ddlJiritsudoChosa
      */
-    @JsonProperty("txtJiritsudoChosa")
-    public TextBox getTxtJiritsudoChosa() {
-        return txtJiritsudoChosa;
+    @JsonProperty("ddlJiritsudoChosa")
+    public DropDownList getDdlJiritsudoChosa() {
+        return ddlJiritsudoChosa;
     }
 
     /*
-     * settxtJiritsudoChosa
-     * @param txtJiritsudoChosa txtJiritsudoChosa
+     * setddlJiritsudoChosa
+     * @param ddlJiritsudoChosa ddlJiritsudoChosa
      */
-    @JsonProperty("txtJiritsudoChosa")
-    public void setTxtJiritsudoChosa(TextBox txtJiritsudoChosa) {
-        this.txtJiritsudoChosa = txtJiritsudoChosa;
+    @JsonProperty("ddlJiritsudoChosa")
+    public void setDdlJiritsudoChosa(DropDownList ddlJiritsudoChosa) {
+        this.ddlJiritsudoChosa = ddlJiritsudoChosa;
     }
 
     /*
-     * gettxtJyotaiAnteisei
-     * @return txtJyotaiAnteisei
+     * getddlJyotaiAnteisei
+     * @return ddlJyotaiAnteisei
      */
-    @JsonProperty("txtJyotaiAnteisei")
-    public TextBox getTxtJyotaiAnteisei() {
-        return txtJyotaiAnteisei;
+    @JsonProperty("ddlJyotaiAnteisei")
+    public DropDownList getDdlJyotaiAnteisei() {
+        return ddlJyotaiAnteisei;
     }
 
     /*
-     * settxtJyotaiAnteisei
-     * @param txtJyotaiAnteisei txtJyotaiAnteisei
+     * setddlJyotaiAnteisei
+     * @param ddlJyotaiAnteisei ddlJyotaiAnteisei
      */
-    @JsonProperty("txtJyotaiAnteisei")
-    public void setTxtJyotaiAnteisei(TextBox txtJyotaiAnteisei) {
-        this.txtJyotaiAnteisei = txtJyotaiAnteisei;
+    @JsonProperty("ddlJyotaiAnteisei")
+    public void setDdlJyotaiAnteisei(DropDownList ddlJyotaiAnteisei) {
+        this.ddlJyotaiAnteisei = ddlJyotaiAnteisei;
     }
 
     /*
-     * gettxtJiritsudoIkensho
-     * @return txtJiritsudoIkensho
+     * getddlJiritsudoIkensho
+     * @return ddlJiritsudoIkensho
      */
-    @JsonProperty("txtJiritsudoIkensho")
-    public TextBox getTxtJiritsudoIkensho() {
-        return txtJiritsudoIkensho;
+    @JsonProperty("ddlJiritsudoIkensho")
+    public DropDownList getDdlJiritsudoIkensho() {
+        return ddlJiritsudoIkensho;
     }
 
     /*
-     * settxtJiritsudoIkensho
-     * @param txtJiritsudoIkensho txtJiritsudoIkensho
+     * setddlJiritsudoIkensho
+     * @param ddlJiritsudoIkensho ddlJiritsudoIkensho
      */
-    @JsonProperty("txtJiritsudoIkensho")
-    public void setTxtJiritsudoIkensho(TextBox txtJiritsudoIkensho) {
-        this.txtJiritsudoIkensho = txtJiritsudoIkensho;
+    @JsonProperty("ddlJiritsudoIkensho")
+    public void setDdlJiritsudoIkensho(DropDownList ddlJiritsudoIkensho) {
+        this.ddlJiritsudoIkensho = ddlJiritsudoIkensho;
     }
 
     /*
-     * gettxtKyufuKbn
-     * @return txtKyufuKbn
+     * getddlKyufuKbn
+     * @return ddlKyufuKbn
      */
-    @JsonProperty("txtKyufuKbn")
-    public TextBox getTxtKyufuKbn() {
-        return txtKyufuKbn;
+    @JsonProperty("ddlKyufuKbn")
+    public DropDownList getDdlKyufuKbn() {
+        return ddlKyufuKbn;
     }
 
     /*
-     * settxtKyufuKbn
-     * @param txtKyufuKbn txtKyufuKbn
+     * setddlKyufuKbn
+     * @param ddlKyufuKbn ddlKyufuKbn
      */
-    @JsonProperty("txtKyufuKbn")
-    public void setTxtKyufuKbn(TextBox txtKyufuKbn) {
-        this.txtKyufuKbn = txtKyufuKbn;
+    @JsonProperty("ddlKyufuKbn")
+    public void setDdlKyufuKbn(DropDownList ddlKyufuKbn) {
+        this.ddlKyufuKbn = ddlKyufuKbn;
     }
 
     /*

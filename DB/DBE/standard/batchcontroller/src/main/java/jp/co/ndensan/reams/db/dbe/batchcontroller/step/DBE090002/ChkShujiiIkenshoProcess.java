@@ -105,7 +105,6 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
         batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
                 .addBreak(new BreakerCatalog<ShujiiikenshoReportSource>().new SimpleLayoutBreaker(
 
-
                     ShujiiikenshoReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<ShujiiikenshoReportSource> occuredBreak(
@@ -180,26 +179,24 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
     }
 
     private RString 共有ファイルを引き出す() {
-        RString ローカルファイル名 = new RString("IMG");
         RString fileName = フラグ.equals(processPrm.getRadShujii()) ? FILENAME : FILENAME_BAK;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
             return fileName;
         }
         return RString.EMPTY;
     }
 
     private RString 共有ファイル2を引き出す() {
-        RString ローカルファイル名 = new RString("IMG");
         RString fileName = フラグ.equals(processPrm.getRadShujii()) ? FILENAME02 : FILENAME_BAK02;
-        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), ローカルファイル名, fileName))) {
+        if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
             return fileName;
         }
         return RString.EMPTY;
     }
 
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ローカルファイル名, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ローカルファイル名, SEPARATOR, ファイル名);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
     }

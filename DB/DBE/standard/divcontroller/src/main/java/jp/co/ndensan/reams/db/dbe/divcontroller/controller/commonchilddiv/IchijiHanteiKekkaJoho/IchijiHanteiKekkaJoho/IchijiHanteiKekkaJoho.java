@@ -39,6 +39,32 @@ public class IchijiHanteiKekkaJoho {
     private static final int RESULT_NUM = 8;
     private static final int DIVISION_NUM = 10;
 
+    private static final int ICHIJI_HANTEI_POINT = 0;
+    private static final int ICHIJI_HANTEI_KASAN_POINT = 1;
+    private static final int KIJUN_JIKAN_POINT = 2;
+    private static final int HYOKA_JIKAN_POINT = 3;
+    private static final int KEIKOKU_CODE_POINT = 4;
+    private static final int GAIZENSEI_POINT = 5;
+    private static final int ANTEISEI_POINT = 6;
+    private static final int KYUFU_KUBUN_POINT = 7;
+
+    private static final int 基準時間_POINT = 0;
+    private static final int 基準時間_食事_POINT = 1;
+    private static final int 基準時間_排泄_POINT = 2;
+    private static final int 基準時間_移動_POINT = 3;
+    private static final int 基準時間_清潔保持_POINT = 4;
+    private static final int 基準時間_間接ケア_POINT = 5;
+    private static final int 基準時間_BPSD関連_POINT = 6;
+    private static final int 基準時間_機能訓練_POINT = 7;
+    private static final int 基準時間_医療関連_POINT = 8;
+    private static final int 基準時間_認知症加算_POINT = 9;
+
+    private static final int 中間評価項目_第1群_POINT = 0;
+    private static final int 中間評価項目_第2群_食事_POINT = 1;
+    private static final int 中間評価項目_第3群_排泄_POINT = 2;
+    private static final int 中間評価項目_第4群_移動_POINT = 3;
+    private static final int 中間評価項目_第5群_清潔保持_POINT = 4;
+
     /**
      * 共通子DIVを初期化します。
      *
@@ -55,6 +81,8 @@ public class IchijiHanteiKekkaJoho {
             handler.setStateOfIchijiHanteiKekka(ModeType.SHOKAI_MODE);
             throw new ApplicationException(UrErrorMessages.設定不可.getMessage().replace("申請書管理番号が受け取れなかった"));
         }
+
+        handler.initializeDdl();
 
         if (!RString.isNullOrEmpty(div.getIchijiHanteiKekka())) {
             jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho hanteiKekka
@@ -91,8 +119,7 @@ public class IchijiHanteiKekkaJoho {
     public ResponseData<IchijiHanteiKekkaJohoDiv> onClick_btnKakutei(IchijiHanteiKekkaJohoDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
-            if (!RString.isNullOrEmpty(div.getIchijiHanteiKekka())) {
-            } else {
+            if (RString.isNullOrEmpty(div.getIchijiHanteiKekka())) {
                 return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定未処理.getMessage()).respond();
             }
 
@@ -111,7 +138,7 @@ public class IchijiHanteiKekkaJoho {
             ModeType modeType = getHandler(div).getモード();
 
             if (ModeType.SHOKAI_MODE.equals(modeType)) {
-                RString 一次判定結果 = div.getTxtIchijiHanteiKekka().getValue();
+                RString 一次判定結果 = div.getDdlIchijiHanteiKekka().getSelectedValue();
                 ViewStateHolder.put(ViewStateKeys.一次判定結果, 一次判定結果);
             } else if (ModeType.ADD_MODE.equals(modeType)) {
                 set一次判定結果情報(hanteiKekka, div);
@@ -168,46 +195,46 @@ public class IchijiHanteiKekkaJoho {
                 = new jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho(shinseishoKanriNo);
         IchijiHanteiKekkaJohoBuilder builder = hanteiKekka.createBuilderForEdit();
 
-        RString ichijiHanteiKekkaCode = resultList.get(0);
-        RString tumitashiKekkaCode = resultList.get(1);
+        RString ichijiHanteiKekkaCode = resultList.get(ICHIJI_HANTEI_POINT);
+        RString tumitashiKekkaCode = resultList.get(ICHIJI_HANTEI_KASAN_POINT);
 
         builder.set要介護認定一次判定年月日(FlexibleDate.getNowDate());
         builder.set要介護認定一次判定結果コード(new Code(ichijiHanteiKekkaCode));
         builder.set要介護認定一次判定結果コード_認知症加算(new Code(tumitashiKekkaCode));
 
-        RString kijunJikan = resultList.get(2);
+        RString kijunJikan = resultList.get(KIJUN_JIKAN_POINT);
         List<RString> kijunJikanSplit = kijunJikan.split("-");
-        builder.set要介護認定等基準時間(rStringToIntAndDivide10(kijunJikanSplit.get(0)));
-        builder.set要介護認定等基準時間_食事(rStringToIntAndDivide10(kijunJikanSplit.get(1)));
-        builder.set要介護認定等基準時間_排泄(rStringToIntAndDivide10(kijunJikanSplit.get(2)));
-        builder.set要介護認定等基準時間_移動(rStringToIntAndDivide10(kijunJikanSplit.get(3)));
-        builder.set要介護認定等基準時間_清潔保持(rStringToIntAndDivide10(kijunJikanSplit.get(4)));
-        builder.set要介護認定等基準時間_間接ケア(rStringToIntAndDivide10(kijunJikanSplit.get(5)));
-        builder.set要介護認定等基準時間_BPSD関連(rStringToIntAndDivide10(kijunJikanSplit.get(6)));
-        builder.set要介護認定等基準時間_機能訓練(rStringToIntAndDivide10(kijunJikanSplit.get(7)));
-        builder.set要介護認定等基準時間_医療関連(rStringToIntAndDivide10(kijunJikanSplit.get(8)));
-        builder.set要介護認定等基準時間_認知症加算(rStringToIntAndDivide10(kijunJikanSplit.get(9)));
+        builder.set要介護認定等基準時間(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_POINT)));
+        builder.set要介護認定等基準時間_食事(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_食事_POINT)));
+        builder.set要介護認定等基準時間_排泄(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_排泄_POINT)));
+        builder.set要介護認定等基準時間_移動(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_移動_POINT)));
+        builder.set要介護認定等基準時間_清潔保持(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_清潔保持_POINT)));
+        builder.set要介護認定等基準時間_間接ケア(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_間接ケア_POINT)));
+        builder.set要介護認定等基準時間_BPSD関連(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_BPSD関連_POINT)));
+        builder.set要介護認定等基準時間_機能訓練(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_機能訓練_POINT)));
+        builder.set要介護認定等基準時間_医療関連(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_医療関連_POINT)));
+        builder.set要介護認定等基準時間_認知症加算(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_認知症加算_POINT)));
 
-        RString hyokaJikan = resultList.get(3);
+        RString hyokaJikan = resultList.get(HYOKA_JIKAN_POINT);
         List<RString> hyokaJikanSplit = hyokaJikan.split("-");
-        builder.set中間評価項目得点第1群(rStringToIntAndDivide10(hyokaJikanSplit.get(0)));
-        builder.set中間評価項目得点第2群(rStringToIntAndDivide10(hyokaJikanSplit.get(1)));
-        builder.set中間評価項目得点第3群(rStringToIntAndDivide10(hyokaJikanSplit.get(2)));
-        builder.set中間評価項目得点第4群(rStringToIntAndDivide10(hyokaJikanSplit.get(3)));
-        builder.set中間評価項目得点第5群(rStringToIntAndDivide10(hyokaJikanSplit.get(4)));
+        builder.set中間評価項目得点第1群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第1群_POINT)));
+        builder.set中間評価項目得点第2群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第2群_食事_POINT)));
+        builder.set中間評価項目得点第3群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第3群_排泄_POINT)));
+        builder.set中間評価項目得点第4群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第4群_移動_POINT)));
+        builder.set中間評価項目得点第5群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第5群_清潔保持_POINT)));
         builder.set中間評価項目得点第6群(0);
         builder.set中間評価項目得点第7群(0);
 
-        RString keikokuCode = resultList.get(4);
+        RString keikokuCode = resultList.get(KEIKOKU_CODE_POINT);
         builder.set要介護認定一次判定警告コード(keikokuCode);
 
-        RString gaizenseiP = resultList.get(5);
+        RString gaizenseiP = resultList.get(GAIZENSEI_POINT);
         builder.set認知症自立度Ⅱ以上の蓋然性(rStringToDecimalAndDivide10(gaizenseiP));
 
-        RString anteisei = resultList.get(6);
+        RString anteisei = resultList.get(ANTEISEI_POINT);
         builder.set要介護認定状態の安定性コード(new Code(anteisei));
 
-        RString kyufuKubun = resultList.get(7);
+        RString kyufuKubun = resultList.get(KYUFU_KUBUN_POINT);
         builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(kyufuKubun));
 
         div.setIchijiHanteiKekka(DataPassingConverter.serialize(builder.build()));

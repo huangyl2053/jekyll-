@@ -14,9 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.ShinchokuDataOutputHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.ShinchokuDataOutputValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -59,12 +57,9 @@ public class ShinchokuDataOutput {
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onActive(ShinchokuDataOutputDiv div) {
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        if (taishoshaKey != null) {
-            HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-            if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-                div.getTxtHihokenshaCode().setValue(被保険者番号.getColumnValue());
-            }
+        RString hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        if (hihokenshaNo != null && !hihokenshaNo.isEmpty()) {
+            div.getTxtHihokenshaCode().setValue(hihokenshaNo);
         }
         return ResponseData.of(div).respond();
     }

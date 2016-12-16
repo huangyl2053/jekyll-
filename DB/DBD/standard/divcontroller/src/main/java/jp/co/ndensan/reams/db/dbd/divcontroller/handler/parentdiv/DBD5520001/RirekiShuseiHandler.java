@@ -219,10 +219,10 @@ public class RirekiShuseiHandler {
             row.setNinteiNaiyo(Datakubun.toValue(business.getデータ区分().value()).get名称());
             row.setDataKubun(business.getデータ区分().value());
         }
-        row.getNiteiDay().setValue(flexToRDate(business.get認定年月日()));
+        row.getNiteiDay().setValue(business.get認定年月日());
         set要介護認定状態区分コード(row, business.get厚労省IF識別コード(), business.get要介護状態区分コード());
-        row.getYukoKaishi().setValue(flexToRDate(business.get認定有効開始年月日()));
-        row.getYukoShuryo().setValue(flexToRDate(business.get認定有効終了年月日()));
+        row.getYukoKaishi().setValue(business.get認定有効開始年月日());
+        row.getYukoShuryo().setValue(business.get認定有効終了年月日());
         row.setKyusochi(business.is旧措置フラグ());
         row.setShinsakaiIken(business.get介護認定審査会意見());
         row.setShinseishoKanriNo(business.get申請書管理番号().value());
@@ -242,10 +242,10 @@ public class RirekiShuseiHandler {
             row.setNinteiNaiyo(Datakubun.toValue(business.getデータ区分().value()).get名称());
             row.setDataKubun(business.getデータ区分().value());
         }
-        row.getNiteiDay().setValue(flexToRDate(business.get認定年月日()));
+        row.getNiteiDay().setValue(business.get認定年月日());
         set要介護認定状態区分コード(row, business.get厚労省IF識別コード(), business.get要介護状態区分コード());
-        row.getYukoKaishi().setValue(flexToRDate(business.get認定有効開始年月日()));
-        row.getYukoShuryo().setValue(flexToRDate(business.get認定有効終了年月日()));
+        row.getYukoKaishi().setValue(business.get認定有効開始年月日());
+        row.getYukoShuryo().setValue(business.get認定有効終了年月日());
         row.setKyusochi(business.is旧措置フラグ());
         row.setShinsakaiIken(business.get介護認定審査会意見());
         row.setShinseishoKanriNo(business.get申請書管理番号().value());
@@ -311,9 +311,9 @@ public class RirekiShuseiHandler {
         受給者台帳Builder.set受給申請年月日(ObjectUtil.defaultIfNull(business.get認定申請年月日(), FlexibleDate.EMPTY));
         受給者台帳Builder.set２号特定疾病コード(business.get二号特定疾病コード());
         受給者台帳Builder.set要介護認定状態区分コード(business.get要介護状態区分コード());
-        受給者台帳Builder.set認定有効期間開始年月日(ObjectUtil.defaultIfNull(business.get認定有効開始年月日(), FlexibleDate.EMPTY));
-        受給者台帳Builder.set認定有効期間終了年月日(ObjectUtil.defaultIfNull(business.get認定有効終了年月日(), FlexibleDate.EMPTY));
-        受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(business.get認定年月日(), FlexibleDate.EMPTY));
+        受給者台帳Builder.set認定有効期間開始年月日(ObjectUtil.defaultIfNull(new FlexibleDate(business.get認定有効開始年月日().toDateString()), FlexibleDate.EMPTY));
+        受給者台帳Builder.set認定有効期間終了年月日(ObjectUtil.defaultIfNull(new FlexibleDate(business.get認定有効終了年月日().toDateString()), FlexibleDate.EMPTY));
+        受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(new FlexibleDate(business.get認定年月日().toDateString()), FlexibleDate.EMPTY));
         受給者台帳Builder.setみなし要介護区分コード(business.getみなし要介護区分コード());
         set指定サービス種類(business, 受給者台帳Builder);
         受給者台帳Builder.set喪失年月日(ObjectUtil.defaultIfNull(business.get喪失年月日(), FlexibleDate.EMPTY));
@@ -403,18 +403,18 @@ public class RirekiShuseiHandler {
             受給者台帳Builder.set届出者_本人との関係(ObjectUtil.defaultIfNull(dataPass.get本人との関係性(), RString.EMPTY));
             受給者台帳Builder.set受給申請年月日(ObjectUtil.defaultIfNull(dataPass.get認定申請年月日(), FlexibleDate.EMPTY));
             if (row.getDataKubun().startsWith(DATA_KU_BUN_1)) {
-                受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(dataPass.get認定年月日(), FlexibleDate.EMPTY));
+                受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(new FlexibleDate(dataPass.get認定年月日().toDateString()), FlexibleDate.EMPTY));
                 set指定サービス種類(dataPass, 受給者台帳Builder);
                 受給者台帳Builder.set喪失年月日(ObjectUtil.defaultIfNull(dataPass.get喪失年月日(), FlexibleDate.EMPTY));
                 set有効無効区分(受給者台帳Builder, business, dataPass, true);
             } else if (row.getDataKubun().startsWith(DATA_KU_BUN_2)) {
                 set有効無効区分(受給者台帳Builder, business, dataPass, false);
-                受給者台帳Builder.set認定有効期間開始年月日(ObjectUtil.defaultIfNull(dataPass.get認定有効開始年月日(), FlexibleDate.EMPTY));
-                受給者台帳Builder.set認定有効期間終了年月日(ObjectUtil.defaultIfNull(dataPass.get認定有効終了年月日(), FlexibleDate.EMPTY));
-                受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(dataPass.get認定年月日(), FlexibleDate.EMPTY));
+                受給者台帳Builder.set認定有効期間開始年月日(ObjectUtil.defaultIfNull(new FlexibleDate(dataPass.get認定有効開始年月日().toDateString()), FlexibleDate.EMPTY));
+                受給者台帳Builder.set認定有効期間終了年月日(ObjectUtil.defaultIfNull(new FlexibleDate(dataPass.get認定有効終了年月日().toDateString()), FlexibleDate.EMPTY));
+                受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(new FlexibleDate(dataPass.get認定年月日().toDateString()), FlexibleDate.EMPTY));
                 set指定サービス種類(dataPass, 受給者台帳Builder);
             } else if (row.getDataKubun().startsWith(DATA_KU_BUN_3)) {
-                受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(dataPass.get認定年月日(), FlexibleDate.EMPTY));
+                受給者台帳Builder.set認定年月日(ObjectUtil.defaultIfNull(new FlexibleDate(dataPass.get認定年月日().toDateString()), FlexibleDate.EMPTY));
                 set指定サービス種類(dataPass, 受給者台帳Builder);
                 set有効無効区分(受給者台帳Builder, business, dataPass, true);
             } else if (row.getDataKubun().startsWith(DATA_KU_BUN_4)) {
@@ -641,7 +641,7 @@ public class RirekiShuseiHandler {
             認定申請Builder.set却下年月日(ObjectUtil.defaultIfNull(dataPass.get喪失年月日(), FlexibleDate.EMPTY));
             認定申請Builder.set却下理由(ObjectUtil.defaultIfNull(dataPass.get異動理由(), RString.EMPTY));
         }
-        認定申請Builder.set延期通知発行年月日(dataPass.get調査状況用情報().get延期通知発行年月日());
+        認定申請Builder.set延期通知発行年月日(new FlexibleDate(dataPass.get調査状況用情報().get延期通知発行年月日().toDateString()));
         認定申請Builder.set延期通知発行回数(dataPass.get調査状況用情報().get延期通知発行回数());
         認定申請Builder.set認定申請情報登録年月日(FlexibleDate.getNowDate());
         認定申請Builder.set論理削除フラグ(false);
@@ -705,7 +705,7 @@ public class RirekiShuseiHandler {
         認定申請Builder.set訪問調査先住所(dataPass.get調査状況用情報().get訪問調査先住所());
         認定申請Builder.set訪問調査先名称(dataPass.get調査状況用情報().get訪問調査先名称());
         認定申請Builder.set訪問調査先電話番号(dataPass.get調査状況用情報().get訪問調査先電話番号());
-        認定申請Builder.set延期通知発行年月日(dataPass.get調査状況用情報().get延期通知発行年月日());
+        認定申請Builder.set延期通知発行年月日(new FlexibleDate(dataPass.get調査状況用情報().get延期通知発行年月日().toDateString()));
         認定申請Builder.set延期通知発行回数(dataPass.get調査状況用情報().get延期通知発行回数());
         return 認定申請Builder.build().modifiedModel();
     }
@@ -809,9 +809,9 @@ public class RirekiShuseiHandler {
         調査依頼情報Builder.set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.初回.getコード()));
         調査依頼情報Builder.set認定調査回数(1);
         調査依頼情報Builder.set認定調査依頼年月日(
-                ObjectUtil.defaultIfNull(dataPass.get調査状況用情報().get認定調査依頼年月日(), FlexibleDate.EMPTY));
+                ObjectUtil.defaultIfNull(new FlexibleDate(dataPass.get調査状況用情報().get認定調査依頼年月日().toDateString()), FlexibleDate.EMPTY));
         RString 日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        調査依頼情報Builder.set認定調査期限年月日(dataPass.get調査状況用情報().get認定調査依頼年月日().plusDay(Integer.parseInt(日数.toString())));
+        調査依頼情報Builder.set認定調査期限年月日(new FlexibleDate(dataPass.get調査状況用情報().get認定調査依頼年月日().plusDay(Integer.parseInt(日数.toString())).toDateString()));
         調査依頼情報Builder.set論理削除フラグ(false);
         return 調査依頼情報Builder.build();
     }
@@ -833,9 +833,9 @@ public class RirekiShuseiHandler {
         調査依頼情報Builder.set認定調査員コード(
                 ObjectUtil.defaultIfNull(dataPass.get調査状況用情報().get認定調査員コード(), RString.EMPTY));
         調査依頼情報Builder.set認定調査依頼年月日(
-                ObjectUtil.defaultIfNull(dataPass.get調査状況用情報().get認定調査依頼年月日(), FlexibleDate.EMPTY));
+                ObjectUtil.defaultIfNull(new FlexibleDate(dataPass.get調査状況用情報().get認定調査依頼年月日().toDateString()), FlexibleDate.EMPTY));
         RString 日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        調査依頼情報Builder.set認定調査期限年月日(dataPass.get調査状況用情報().get認定調査依頼年月日().plusDay(Integer.parseInt(日数.toString())));
+        調査依頼情報Builder.set認定調査期限年月日(new FlexibleDate(dataPass.get調査状況用情報().get認定調査依頼年月日().plusDay(Integer.parseInt(日数.toString())).toDateString()));
         return 調査依頼情報Builder.build().modifiedModel();
     }
 
@@ -855,7 +855,7 @@ public class RirekiShuseiHandler {
         認定調査票Builder.set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()));
         認定調査票Builder.set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.初回.getコード()));
         認定調査票Builder.set認定調査回数(1);
-        認定調査票Builder.set認定調査実施年月日(dataPass.get調査状況用情報().get認定調査実施年月日());
+        認定調査票Builder.set認定調査実施年月日(new FlexibleDate(dataPass.get調査状況用情報().get認定調査実施年月日().toDateString()));
         認定調査票Builder.set認定調査受領年月日(FlexibleDate.EMPTY);
         認定調査票Builder.set認定調査区分コード(new Code(ChosaKubun.新規調査.getコード()));
         認定調査票Builder.set認定調査委託先コード(new JigyoshaNo(dataPass.get調査状況用情報().get認定調査委託先コード()));
@@ -879,7 +879,7 @@ public class RirekiShuseiHandler {
                 = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
         DbT4202NinteichosahyoGaikyoChosaBuilder 認定調査票Builder = business.get認定調査票_概況調査().createBuilderForEdit();
         認定調査票Builder.set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()));
-        認定調査票Builder.set認定調査実施年月日(dataPass.get調査状況用情報().get認定調査実施年月日());
+        認定調査票Builder.set認定調査実施年月日(new FlexibleDate(dataPass.get調査状況用情報().get認定調査実施年月日().toDateString()));
         認定調査票Builder.set認定調査委託先コード(new JigyoshaNo(dataPass.get調査状況用情報().get認定調査委託先コード()));
         認定調査票Builder.set認定調査員コード(dataPass.get調査状況用情報().get認定調査員コード());
         return 認定調査票Builder.build().modifiedModel();
@@ -907,9 +907,9 @@ public class RirekiShuseiHandler {
         } else {
             主治医意見書作成依頼Builder.set医師区分コード(new Code(IshiKubunCode.主治医.getコード()));
         }
-        主治医意見書作成依頼Builder.set主治医意見書作成依頼年月日(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日());
-        主治医意見書作成依頼Builder.set主治医意見書作成期限年月日(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日().
-                plusDay(Integer.parseInt(主治医意見書作成期限年月日.toString())));
+        主治医意見書作成依頼Builder.set主治医意見書作成依頼年月日(new FlexibleDate(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日().toDateString()));
+        主治医意見書作成依頼Builder.set主治医意見書作成期限年月日(new FlexibleDate(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日().
+                plusDay(Integer.parseInt(主治医意見書作成期限年月日.toString())).toDateString()));
         主治医意見書作成依頼Builder.set論理削除フラグ(false);
         return 主治医意見書作成依頼Builder.build();
     }
@@ -934,9 +934,9 @@ public class RirekiShuseiHandler {
         } else {
             主治医意見書作成依頼Builder.set医師区分コード(new Code(IshiKubunCode.主治医.getコード()));
         }
-        主治医意見書作成依頼Builder.set主治医意見書作成依頼年月日(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日());
-        主治医意見書作成依頼Builder.set主治医意見書作成期限年月日(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日().
-                plusDay(Integer.parseInt(主治医意見書作成期限年月日.toString())));
+        主治医意見書作成依頼Builder.set主治医意見書作成依頼年月日(new FlexibleDate(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日().toDateString()));
+        主治医意見書作成依頼Builder.set主治医意見書作成期限年月日(new FlexibleDate(dataPass.get調査状況用情報().get主治医意見書作成依頼年月日().
+                plusDay(Integer.parseInt(主治医意見書作成期限年月日.toString())).toDateString()));
         return 主治医意見書作成依頼Builder.build().modifiedModel();
     }
 
@@ -956,7 +956,7 @@ public class RirekiShuseiHandler {
         主治医意見書情報Builder.set主治医医療機関コード(dataPass.get調査状況用情報().get主治医医療機関コード());
         主治医意見書情報Builder.set主治医コード(dataPass.get調査状況用情報().get主治医コード());
         主治医意見書情報Builder.set主治医意見書依頼区分(IkenshoIraiKubun.初回依頼.getコード());
-        主治医意見書情報Builder.set主治医意見書受領年月日(dataPass.get調査状況用情報().get主治医意見書記入年月日());
+        主治医意見書情報Builder.set主治医意見書受領年月日(new FlexibleDate(dataPass.get調査状況用情報().get主治医意見書記入年月日().toDateString()));
         主治医意見書情報Builder.set主治医意見書記入年月日(FlexibleDate.EMPTY);
         主治医意見書情報Builder.set意見書作成回数区分(new Code(IkenshoSakuseiKaisuKubun.初回.getコード()));
         主治医意見書情報Builder.set在宅_施設区分(Code.EMPTY);
@@ -978,7 +978,7 @@ public class RirekiShuseiHandler {
         主治医意見書情報Builder.set厚労省IF識別コード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード());
         主治医意見書情報Builder.set主治医医療機関コード(dataPass.get調査状況用情報().get主治医医療機関コード());
         主治医意見書情報Builder.set主治医コード(dataPass.get調査状況用情報().get主治医コード());
-        主治医意見書情報Builder.set主治医意見書受領年月日(dataPass.get調査状況用情報().get主治医意見書記入年月日());
+        主治医意見書情報Builder.set主治医意見書受領年月日(new FlexibleDate(dataPass.get調査状況用情報().get主治医意見書記入年月日().toDateString()));
         return 主治医意見書情報Builder.build().modifiedModel();
     }
 
@@ -995,7 +995,7 @@ public class RirekiShuseiHandler {
         IchijiHanteiKekkaJoho 一次判定結果 = new IchijiHanteiKekkaJoho(申請書管理番号);
         IchijiHanteiKekkaJohoBuilder 一次判定結果Builder = 一次判定結果.createBuilderForEdit();
         一次判定結果Builder.set仮一次判定区分(false);
-        一次判定結果Builder.set要介護認定一次判定年月日(dataPass.get調査状況用情報().get要介護認定一次判定年月日());
+        一次判定結果Builder.set要介護認定一次判定年月日(new FlexibleDate(dataPass.get調査状況用情報().get要介護認定一次判定年月日().toDateString()));
         一次判定結果Builder.set要介護認定一次判定結果コード(dataPass.get調査状況用情報().get要介護認定一次判定結果コード());
         一次判定結果Builder.set要介護認定一次判定結果コード_認知症加算(dataPass.get調査状況用情報().get要介護認定一次判定結果コード_認知症加算());
         return 一次判定結果Builder.build();
@@ -1013,7 +1013,7 @@ public class RirekiShuseiHandler {
         RirekiShuseiBusiness business
                 = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
         IchijiHanteiKekkaJohoBuilder 一次判定結果Builder = business.get一次判定結果().createBuilderForEdit();
-        一次判定結果Builder.set要介護認定一次判定年月日(dataPass.get調査状況用情報().get要介護認定一次判定年月日());
+        一次判定結果Builder.set要介護認定一次判定年月日(new FlexibleDate(dataPass.get調査状況用情報().get要介護認定一次判定年月日().toDateString()));
         一次判定結果Builder.set要介護認定一次判定結果コード(dataPass.get調査状況用情報().get要介護認定一次判定結果コード());
         一次判定結果Builder.set要介護認定一次判定結果コード_認知症加算(dataPass.get調査状況用情報().get要介護認定一次判定結果コード_認知症加算());
         return 一次判定結果Builder.build().modifiedModel();
@@ -1031,7 +1031,7 @@ public class RirekiShuseiHandler {
                 = DataPassingConverter.deserialize(row.getDataPass(), RirekiShuseiDataPass.class);
         DbT4102NinteiKekkaJoho 認定結果情報 = new DbT4102NinteiKekkaJoho(申請書管理番号);
         DbT4102NinteiKekkaJohoBuilder 認定結果情報Builder = 認定結果情報.createBuilderForEdit();
-        認定結果情報Builder.set二次判定年月日(dataPass.get調査状況用情報().get二次判定年月日());
+        認定結果情報Builder.set二次判定年月日(new FlexibleDate(dataPass.get調査状況用情報().get二次判定年月日().toDateString()));
         認定結果情報Builder.set二次判定要介護状態区分コード(dataPass.get調査状況用情報().get二次判定要介護状態区分コード());
         認定結果情報Builder.set二次判定認定有効期間(dataPass.get調査状況用情報().get二次判定認定有効期間());
         認定結果情報Builder.set二次判定認定有効開始年月日(dataPass.get調査状況用情報().get二次判定認定有効開始年月日());
@@ -1052,7 +1052,7 @@ public class RirekiShuseiHandler {
         RirekiShuseiBusiness business
                 = DataPassingConverter.deserialize(row.getDeserializedBusiness(), RirekiShuseiBusiness.class);
         DbT4102NinteiKekkaJohoBuilder 認定結果情報Builder = business.get要介護認定結果情報().createBuilderForEdit();
-        認定結果情報Builder.set二次判定年月日(dataPass.get調査状況用情報().get二次判定年月日());
+        認定結果情報Builder.set二次判定年月日(new FlexibleDate(dataPass.get調査状況用情報().get二次判定年月日().toDateString()));
         認定結果情報Builder.set二次判定要介護状態区分コード(dataPass.get調査状況用情報().get二次判定要介護状態区分コード());
         認定結果情報Builder.set二次判定認定有効期間(dataPass.get調査状況用情報().get二次判定認定有効期間());
         認定結果情報Builder.set二次判定認定有効開始年月日(dataPass.get調査状況用情報().get二次判定認定有効開始年月日());

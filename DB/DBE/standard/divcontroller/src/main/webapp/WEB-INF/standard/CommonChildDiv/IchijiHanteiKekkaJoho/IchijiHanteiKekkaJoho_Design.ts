@@ -61,12 +61,16 @@ module DBE {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIchijiHanteibi"));
             }
 
-            public txtIchijiHanteiKekka(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtIchijiHanteiKekka"));
+            public ddlIchijiHanteiKekka(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlIchijiHanteiKekka"));
             }
 
-            public txtKijunJikan(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtKijunJikan"));
+            public ddlIchijiHanteiKekkaNinchishoKasan(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlIchijiHanteiKekkaNinchishoKasan"));
+            }
+
+            public txtKijunJikan(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtKijunJikan"));
             }
 
             public lblChukanHyokaKomokuTokuten(): UZA.Label {
@@ -349,20 +353,20 @@ module DBE {
                 return new UZA.TextBoxNum(this.convFiledName("txtGaizensei"));
             }
 
-            public txtJiritsudoChosa(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJiritsudoChosa"));
+            public ddlJiritsudoChosa(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlJiritsudoChosa"));
             }
 
-            public txtJyotaiAnteisei(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJyotaiAnteisei"));
+            public ddlJyotaiAnteisei(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlJyotaiAnteisei"));
             }
 
-            public txtJiritsudoIkensho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJiritsudoIkensho"));
+            public ddlJiritsudoIkensho(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlJiritsudoIkensho"));
             }
 
-            public txtKyufuKbn(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtKyufuKbn"));
+            public ddlKyufuKbn(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKyufuKbn"));
             }
 
             public lblIchijiHanteiKeikokuCode(): UZA.Label {

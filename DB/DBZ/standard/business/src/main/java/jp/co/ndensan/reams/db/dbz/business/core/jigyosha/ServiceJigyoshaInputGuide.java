@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -150,6 +151,15 @@ public class ServiceJigyoshaInputGuide implements Serializable {
      */
     public TelNo get電話番号() {
         return entity.getTelNo();
+    }
+    
+    /**
+     * 郵便番号を取得します。
+     *
+     * @return 郵便番号
+     */
+    public YubinNo get郵便番号() {
+        return entity.getYubinNo();
     }
 
     /**
