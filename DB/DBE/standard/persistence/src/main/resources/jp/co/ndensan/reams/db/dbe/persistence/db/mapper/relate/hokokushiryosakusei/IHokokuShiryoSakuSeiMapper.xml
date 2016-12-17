@@ -2196,7 +2196,7 @@
             resultMap="hokokushiryosakusei_CsvKenHokokuShiryoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter"
             fetchSize="500">
-        SELECT E."ichijiHanteiKekkaNinchishoKasanCode"
+        SELECT E."ichijiHanteiKekkaNinchishoKasanCode" AS ichijiHanteiKekkaCode
         , D."nijiHanteiYokaigoJotaiKubunCode"
         , COUNT(C."hihokenshaNo") AS hihokenshaCount
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
