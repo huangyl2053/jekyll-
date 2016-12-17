@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosainSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,10 +33,10 @@ public class ChosainSearchDiv extends Panel {
     private TextBox txtSearchSonotaKikanMeisho;
     @JsonProperty("txtSearchSonotaKikanKanaMeisho")
     private TextBoxKana txtSearchSonotaKikanKanaMeisho;
-    @JsonProperty("ddlitakukubun")
-    private DropDownList ddlitakukubun;
     @JsonProperty("ddlkikankubun")
     private DropDownList ddlkikankubun;
+    @JsonProperty("ddlitakukubun")
+    private DropDownList ddlitakukubun;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("btnSearchShujii")
@@ -143,24 +143,6 @@ public class ChosainSearchDiv extends Panel {
     }
 
     /*
-     * getddlitakukubun
-     * @return ddlitakukubun
-     */
-    @JsonProperty("ddlitakukubun")
-    public DropDownList getDdlitakukubun() {
-        return ddlitakukubun;
-    }
-
-    /*
-     * setddlitakukubun
-     * @param ddlitakukubun ddlitakukubun
-     */
-    @JsonProperty("ddlitakukubun")
-    public void setDdlitakukubun(DropDownList ddlitakukubun) {
-        this.ddlitakukubun = ddlitakukubun;
-    }
-
-    /*
      * getddlkikankubun
      * @return ddlkikankubun
      */
@@ -176,6 +158,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("ddlkikankubun")
     public void setDdlkikankubun(DropDownList ddlkikankubun) {
         this.ddlkikankubun = ddlkikankubun;
+    }
+
+    /*
+     * getddlitakukubun
+     * @return ddlitakukubun
+     */
+    @JsonProperty("ddlitakukubun")
+    public DropDownList getDdlitakukubun() {
+        return ddlitakukubun;
+    }
+
+    /*
+     * setddlitakukubun
+     * @param ddlitakukubun ddlitakukubun
+     */
+    @JsonProperty("ddlitakukubun")
+    public void setDdlitakukubun(DropDownList ddlitakukubun) {
+        this.ddlitakukubun = ddlitakukubun;
     }
 
     /*
