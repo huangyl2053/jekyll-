@@ -199,10 +199,24 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         return response;
     }
 
+    /**
+     * 発行押下後、画面のデータを最新化する。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onClick_btnPrintKanryo(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
+        if (model != null) {
+            getHandler(div).initialize(model.get申請書管理番号リスト(), model.get遷移元画面区分());
+        }
+        return ResponseData.of(div).respond();
+    }
+    
     private void updateData(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
-            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
             for (dgNinteiChosa_Row row : selectedItems) {
                 update認定調査依頼情報(div, row);
@@ -253,7 +267,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (selectedKeys.contains(KEY0) || selectedKeys.contains(KEY1)) {
             shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set意見書出力年月日(システム日付);
         }
-        new ShujiiIkenshoIraiJohoManager().save主治医意見書作成依頼情報(shujiiIkenshoIraiJohoBuilder.build().modifiedModel());
+        ShujiiIkenshoIraiJohoManager.createInstance().save主治医意見書作成依頼情報(shujiiIkenshoIraiJohoBuilder.build().modifiedModel());
     }
 
     private void update認定調査依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, dgNinteiChosa_Row row) {
