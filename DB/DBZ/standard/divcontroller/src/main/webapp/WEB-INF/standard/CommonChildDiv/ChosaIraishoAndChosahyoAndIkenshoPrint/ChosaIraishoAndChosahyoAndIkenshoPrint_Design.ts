@@ -1,7 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../hokenshalist/HokenshaList.ts" />
+// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
@@ -54,9 +54,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("InsatsuTaishoShitei"));
             }
 
-            public ccdHokenshaList(): DBZ.HokenshaList.ModeController {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
-            }
+            //public ccdHokenshaList(): DBZ.HokenshaList.ModeController {
+            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
+            //}
 
             public NinteiChosa(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
