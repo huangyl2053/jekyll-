@@ -53,12 +53,12 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
             }
 
-            public txtHihokenshaKana(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
-            }
-
             public txtSeinenYmd(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtSeinenYmd"));
+            }
+
+            public txtHihokenshaKana(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
             }
 
             public txtNenrei(): UZA.TextBoxNum {

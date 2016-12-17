@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  *
  */
 public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinseishaKihonInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,10 +41,10 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     private TextBox txtHokenshaName;
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
-    @JsonProperty("txtHihokenshaKana")
-    private TextBox txtHihokenshaKana;
     @JsonProperty("txtSeinenYmd")
     private TextBoxDate txtSeinenYmd;
+    @JsonProperty("txtHihokenshaKana")
+    private TextBox txtHihokenshaKana;
     @JsonProperty("txtNenrei")
     private TextBoxNum txtNenrei;
     @JsonProperty("txtSeibetsu")
@@ -153,24 +153,6 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     }
 
     /*
-     * gettxtHihokenshaKana
-     * @return txtHihokenshaKana
-     */
-    @JsonProperty("txtHihokenshaKana")
-    public TextBox getTxtHihokenshaKana() {
-        return txtHihokenshaKana;
-    }
-
-    /*
-     * settxtHihokenshaKana
-     * @param txtHihokenshaKana txtHihokenshaKana
-     */
-    @JsonProperty("txtHihokenshaKana")
-    public void setTxtHihokenshaKana(TextBox txtHihokenshaKana) {
-        this.txtHihokenshaKana = txtHihokenshaKana;
-    }
-
-    /*
      * gettxtSeinenYmd
      * @return txtSeinenYmd
      */
@@ -186,6 +168,24 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @JsonProperty("txtSeinenYmd")
     public void setTxtSeinenYmd(TextBoxDate txtSeinenYmd) {
         this.txtSeinenYmd = txtSeinenYmd;
+    }
+
+    /*
+     * gettxtHihokenshaKana
+     * @return txtHihokenshaKana
+     */
+    @JsonProperty("txtHihokenshaKana")
+    public TextBox getTxtHihokenshaKana() {
+        return txtHihokenshaKana;
+    }
+
+    /*
+     * settxtHihokenshaKana
+     * @param txtHihokenshaKana txtHihokenshaKana
+     */
+    @JsonProperty("txtHihokenshaKana")
+    public void setTxtHihokenshaKana(TextBox txtHihokenshaKana) {
+        this.txtHihokenshaKana = txtHihokenshaKana;
     }
 
     /*

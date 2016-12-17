@@ -48,12 +48,12 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
             };
 
-            Controls.prototype.txtHihokenshaKana = function () {
-                return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
-            };
-
             Controls.prototype.txtSeinenYmd = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtSeinenYmd"));
+            };
+
+            Controls.prototype.txtHihokenshaKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
             };
 
             Controls.prototype.txtNenrei = function () {
