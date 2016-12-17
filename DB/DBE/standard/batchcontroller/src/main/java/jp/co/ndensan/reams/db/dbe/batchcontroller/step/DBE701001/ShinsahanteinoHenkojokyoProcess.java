@@ -169,13 +169,11 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
             henkojokyo.set合議体名称(paramter.getGogitaiName());
         }
         if (RString.isNullOrEmpty(paramter.getTaishoGeppiFrom())) {
-            _Console.log(paramter.getTaishoGeppiFrom().toString());
             審査会開始年月日 = new FlexibleDate(paramter.getTaishoGeppiFrom());
             審査会終了年月日 = new FlexibleDate(paramter.getTaishoGeppiTo());
             henkojokyo.set審査会開始年月日(審査会開始年月日.wareki().toDateString());
             henkojokyo.set審査会終了年月日(審査会終了年月日.wareki().toDateString());
         } else {
-            _Console.log(paramter.getTaishoNendoYM().toString());
             FlexibleYearMonth 審査会対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
             審査会開始年月日 = new FlexibleDate(
                     new RString(審査会対象年月.getYearValue())
