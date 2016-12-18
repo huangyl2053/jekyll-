@@ -872,8 +872,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         if (識別コード06A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応2リスト.add(get調査連番_社会生活(調査項目, 前回調査項目, 連番34, 連番1));
             社会生活への適応2リスト.add(get調査連番_社会生活(調査項目, 前回調査項目, 連番35, 連番2));
-            社会生活への適応2リスト.add(get調査連番_社会生活(調査項目, 前回調査項目, 連番36, 連番3));
-            社会生活への適応2リスト.add(get調査連番_社会生活(調査項目, 前回調査項目, 連番37, 連番4));
+            社会生活への適応2リスト.add(get調査連番_社会生活(調査項目, 前回調査項目, 連番37, 連番3));
             社会生活への適応2リスト.add(RString.EMPTY);
             社会生活への適応2リスト.add(RString.EMPTY);
             社会生活への適応2リスト.add(RString.EMPTY);
