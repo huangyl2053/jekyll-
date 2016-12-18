@@ -1393,10 +1393,6 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1442,10 +1438,14 @@
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" shin_chosaitaku
         ON A."shinseishoKanriNo" = shin_chosaitaku."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        AND (shin_chosaitaku."ninteichosaRirekiNo"||shin_chosaitaku."gaikyoChosaTextImageKubun") = (
+        SELECT
+            MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+            rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1491,10 +1491,14 @@
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" shin_shujii
         ON A."shinseishoKanriNo" = shin_shujii."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        AND shin_shujii."ikenshoIraiRirekiNo" = (
+        SELECT
+            MAX("ikenshoIraiRirekiNo")
+        FROM
+            rgdb."DbT5302ShujiiIkenshoJoho"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1538,12 +1542,9 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" shin_shinsakai
-        ON D."shinsakaiKaisaiNo" = shin_shinsakai."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" shin_shinsakai
+        ON A."shinseishoKanriNo" = shin_shinsakai."shinseishoKanriNo"
+        AND shin_shinsakai."hanteiKekkaCode" = '01' <!-- 認定のみ -->
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1589,10 +1590,6 @@
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1636,10 +1633,6 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1685,10 +1678,14 @@
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" hou_chosaitaku
         ON A."shinseishoKanriNo" = hou_chosaitaku."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        AND (hou_chosaitaku."ninteichosaRirekiNo"||hou_chosaitaku."gaikyoChosaTextImageKubun") = (
+        SELECT
+            MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+            rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1734,10 +1731,14 @@
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" hou_shujii
         ON A."shinseishoKanriNo" = hou_shujii."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        AND hou_shujii."ikenshoIraiRirekiNo" = (
+        SELECT
+            MAX("ikenshoIraiRirekiNo")
+        FROM
+            rgdb."DbT5302ShujiiIkenshoJoho"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1781,12 +1782,9 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" hou_shinsakai
-        ON D."shinsakaiKaisaiNo" = hou_shinsakai."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" hou_shinsakai
+        ON A."shinseishoKanriNo" = hou_shinsakai."shinseishoKanriNo"
+        AND hou_shinsakai."hanteiKekkaCode" = '01' <!-- 認定のみ -->
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1832,10 +1830,6 @@
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1881,16 +1875,29 @@
         FROM rgdb."DbT5101NinteiShinseiJoho" A
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" hou_chosaitaku
         ON A."shinseishoKanriNo" = hou_chosaitaku."shinseishoKanriNo"
+        AND (hou_chosaitaku."ninteichosaRirekiNo"||hou_chosaitaku."gaikyoChosaTextImageKubun") = (
+        SELECT
+            MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+            rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" hou_shujii
         ON A."shinseishoKanriNo" = hou_shujii."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" hou_shinsakai
-        ON D."shinsakaiKaisaiNo" = hou_shinsakai."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        AND hou_shujii."ikenshoIraiRirekiNo" = (
+        SELECT
+            MAX("ikenshoIraiRirekiNo")
+        FROM
+            rgdb."DbT5302ShujiiIkenshoJoho"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" hou_shinsakai
+        ON A."shinseishoKanriNo" = hou_shinsakai."shinseishoKanriNo"
+        AND hou_shinsakai."hanteiKekkaCode" = '01' <!-- 認定のみ -->
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -2381,6 +2388,7 @@
         <result property="countHihokenshaNo" column="countHihokenshaNo" />
     </resultMap>
 
+    <!-- getShinsakaiShukeihyoShinseiBetsu でのみ利用する共通の検索条件です。 -->
     <sql id="kensakuJyokenKyotsu">
         <if test="!isEmptyHokensyaNo">
             AND A."shoKisaiHokenshaNo" = #{hokensyaNo}
@@ -2408,9 +2416,6 @@
                 AND A."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
-        <if test="!isEmptyGogitaiNo">
-            AND E."gogitaiNo" = #{gogitaiNo}
-        </if>
     </sql>
 
     <sql id="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo">
