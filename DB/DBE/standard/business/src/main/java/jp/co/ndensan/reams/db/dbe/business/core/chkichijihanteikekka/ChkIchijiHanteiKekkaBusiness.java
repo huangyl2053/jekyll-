@@ -1636,8 +1636,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
                     = 前回意見書項目.get(0).getKoroshoIfShikibetsuCode() == null || 前回意見書項目.get(0).getKoroshoIfShikibetsuCode().isEmpty()
                     ? RString.EMPTY : 前回意見書項目.get(0).getKoroshoIfShikibetsuCode().value();
             int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
-            前回連番 = 前回連番 == 0 ? 連番 : 前回連番;
-            if (!RString.isNullOrEmpty(前回意見書項目.get(前回連番).getIkenItem())) {
+            if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).getIkenItem())) {
                 RString 前回調査 = 前回意見書項目.get(前回連番).getIkenItem();
                 if (!今回調査.equals(前回調査)) {
                     return 前回調査;
@@ -1821,8 +1820,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
                     = 前回意見書項目.get(0).getKoroshoIfShikibetsuCode() == null || 前回意見書項目.get(0).getKoroshoIfShikibetsuCode().isEmpty()
                     ? RString.EMPTY : 前回意見書項目.get(0).getKoroshoIfShikibetsuCode().value();
             int 前回連番 = change連番(前回厚労省IF識別コード, 項目連番);
-            前回連番 = 前回連番 == 0 ? 連番 : 前回連番;
-            if (!RString.isNullOrEmpty(前回意見書項目.get(前回連番).getResearchItem())) {
+            if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).getResearchItem())) {
                 RString 前回調査 = 前回意見書項目.get(前回連番).getResearchItem();
                 if (!今回調査.equals(前回調査)) {
                     return 前回調査;
