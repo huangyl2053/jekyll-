@@ -1869,7 +1869,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         if (連番 < 前回意見書項目.size()) {
             int 前回連番 = change連番_身体機能(bodyItem.get前回厚労省IF識別コード(), 項目連番);
             if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).getResearchItem())) {
-                RString 前回調査 = 前回意見書項目.get(連番).getResearchItem();
+                RString 前回調査 = 前回意見書項目.get(前回連番).getResearchItem();
                 if (!今回調査.equals(前回調査)) {
                     return 前回調査;
                 }
@@ -1887,7 +1887,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         if (連番 < 前回意見書項目.size()) {
             int 前回連番 = change連番_生活機能(bodyItem.get前回厚労省IF識別コード(), 項目連番);
             if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).getResearchItem())) {
-                RString 前回調査 = 前回意見書項目.get(連番).getResearchItem();
+                RString 前回調査 = 前回意見書項目.get(前回連番).getResearchItem();
                 if (!今回調査.equals(前回調査)) {
                     return 前回調査;
                 }
@@ -1905,7 +1905,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         if (連番 < 前回意見書項目.size()) {
             int 前回連番 = change連番_精神障害(bodyItem.get前回厚労省IF識別コード(), 項目連番);
             if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).getResearchItem())) {
-                RString 前回調査 = 前回意見書項目.get(連番).getResearchItem();
+                RString 前回調査 = 前回意見書項目.get(前回連番).getResearchItem();
                 if (!今回調査.equals(前回調査)) {
                     return 前回調査;
                 }
@@ -1923,7 +1923,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         if (連番 < 前回意見書項目.size()) {
             int 前回連番 = change連番_社会生活(bodyItem.get前回厚労省IF識別コード(), 項目連番);
             if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).getResearchItem())) {
-                RString 前回調査 = 前回意見書項目.get(連番).getResearchItem();
+                RString 前回調査 = 前回意見書項目.get(前回連番).getResearchItem();
                 if (!今回調査.equals(前回調査)) {
                     return 前回調査;
                 }
