@@ -164,7 +164,7 @@
                             AND #{taishoGeppiFrom} <![CDATA[<=]]> D."shinsakaiKaisaiYMD"
                         </if>
                         <if test="!isEmptyTaishoGeppiTo">
-                            AND #{taishoGeppiFrom} <![CDATA[<=]]> H."shinsakaiKaisaiYMD"
+                            AND #{taishoGeppiFrom} <![CDATA[<=]]> D."shinsakaiKaisaiYMD"
                             AND D."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                         </if>
                     </when>
