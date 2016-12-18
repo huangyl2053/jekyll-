@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  *
  */
 public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinseishaKihonInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -55,6 +55,12 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     private TextBox txtjusho;
     @JsonProperty("txtTelNo")
     private TextBox txtTelNo;
+    @JsonProperty("txtNinteiShinseibi")
+    private TextBoxDate txtNinteiShinseibi;
+    @JsonProperty("txtShinseiKubunShinseiji")
+    private TextBox txtShinseiKubunShinseiji;
+    @JsonProperty("txtShinseiKubunHoreiji")
+    private TextBox txtShinseiKubunHoreiji;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -276,6 +282,60 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @JsonProperty("txtTelNo")
     public void setTxtTelNo(TextBox txtTelNo) {
         this.txtTelNo = txtTelNo;
+    }
+
+    /*
+     * gettxtNinteiShinseibi
+     * @return txtNinteiShinseibi
+     */
+    @JsonProperty("txtNinteiShinseibi")
+    public TextBoxDate getTxtNinteiShinseibi() {
+        return txtNinteiShinseibi;
+    }
+
+    /*
+     * settxtNinteiShinseibi
+     * @param txtNinteiShinseibi txtNinteiShinseibi
+     */
+    @JsonProperty("txtNinteiShinseibi")
+    public void setTxtNinteiShinseibi(TextBoxDate txtNinteiShinseibi) {
+        this.txtNinteiShinseibi = txtNinteiShinseibi;
+    }
+
+    /*
+     * gettxtShinseiKubunShinseiji
+     * @return txtShinseiKubunShinseiji
+     */
+    @JsonProperty("txtShinseiKubunShinseiji")
+    public TextBox getTxtShinseiKubunShinseiji() {
+        return txtShinseiKubunShinseiji;
+    }
+
+    /*
+     * settxtShinseiKubunShinseiji
+     * @param txtShinseiKubunShinseiji txtShinseiKubunShinseiji
+     */
+    @JsonProperty("txtShinseiKubunShinseiji")
+    public void setTxtShinseiKubunShinseiji(TextBox txtShinseiKubunShinseiji) {
+        this.txtShinseiKubunShinseiji = txtShinseiKubunShinseiji;
+    }
+
+    /*
+     * gettxtShinseiKubunHoreiji
+     * @return txtShinseiKubunHoreiji
+     */
+    @JsonProperty("txtShinseiKubunHoreiji")
+    public TextBox getTxtShinseiKubunHoreiji() {
+        return txtShinseiKubunHoreiji;
+    }
+
+    /*
+     * settxtShinseiKubunHoreiji
+     * @param txtShinseiKubunHoreiji txtShinseiKubunHoreiji
+     */
+    @JsonProperty("txtShinseiKubunHoreiji")
+    public void setTxtShinseiKubunHoreiji(TextBox txtShinseiKubunHoreiji) {
+        this.txtShinseiKubunHoreiji = txtShinseiKubunHoreiji;
     }
 
     // </editor-fold>

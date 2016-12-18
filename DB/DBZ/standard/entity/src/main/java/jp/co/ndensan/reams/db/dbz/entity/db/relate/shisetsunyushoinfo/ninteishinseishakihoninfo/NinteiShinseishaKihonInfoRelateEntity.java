@@ -40,5 +40,8 @@ public class NinteiShinseishaKihonInfoRelateEntity {
     private AtenaJusho jusho;
     private RString shichosonMeisho;
     private RString shinsakaiKaisaiNo;
+    private FlexibleDate ninteiShinseiYMD;
+    private Code ninteiShinseiShinseijiKubunCode;
+    private Code ninteiShinseiHoreiKubunCode;
 
 }

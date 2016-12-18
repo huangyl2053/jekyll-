@@ -75,6 +75,18 @@ var DBZ;
             Controls.prototype.txtTelNo = function () {
                 return new UZA.TextBox(this.convFiledName("txtTelNo"));
             };
+
+            Controls.prototype.txtNinteiShinseibi = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShinseibi"));
+            };
+
+            Controls.prototype.txtShinseiKubunShinseiji = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunShinseiji"));
+            };
+
+            Controls.prototype.txtShinseiKubunHoreiji = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunHoreiji"));
+            };
             return Controls;
         })();
         NinteiShinseishaKihonInfo.Controls = Controls;

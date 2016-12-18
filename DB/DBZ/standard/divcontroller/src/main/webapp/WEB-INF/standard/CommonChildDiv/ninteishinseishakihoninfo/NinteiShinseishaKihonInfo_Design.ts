@@ -81,6 +81,18 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtTelNo"));
             }
 
+            public txtNinteiShinseibi(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShinseibi"));
+            }
+
+            public txtShinseiKubunShinseiji(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunShinseiji"));
+            }
+
+            public txtShinseiKubunHoreiji(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunHoreiji"));
+            }
+
         }
 
      }

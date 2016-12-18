@@ -24,6 +24,9 @@
             A."yubinNo",
             A."telNo",
             A."jusho",
+            A."ninteiShinseiYMD",
+            A."ninteiShinseiShinseijiKubunCode",
+            A."ninteiShinseiHoreiKubunCode",
             B."shichosonMeisho"
         FROM rgdb."DbT5101NinteiShinseiJoho" AS A
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS B
