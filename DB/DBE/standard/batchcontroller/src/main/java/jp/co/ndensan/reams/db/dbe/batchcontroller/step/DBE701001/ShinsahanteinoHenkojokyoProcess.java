@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,7 +36,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
 
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getShinsahanteinoHenkojokyoHeader");
-    private static final RString タイトル = new RString("認定審査会審査判定状況");
+    private static final RString タイトル = new RString("認定審査会審査変更状況");
     private static final RString 新規区分変更申請 = new RString("0");
     private static final RString 新規申請 = new RString("1");
     private static final RString 更新申請 = new RString("2");
@@ -156,6 +158,8 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
     }
 
     private void setヘッダ情報(SinsakaiHanteiJyokyoHeaderEntity current) {
+        FlexibleDate 審査会開始年月日;
+        FlexibleDate 審査会終了年月日;
         henkojokyo.setタイトル(タイトル);
         if (paramter.isEmptyGogitaiNo()) {
             henkojokyo.set合議体名称(全合議体);
@@ -163,8 +167,24 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
             henkojokyo.set合議体番号(new RString(paramter.getGogitaiNo()));
             henkojokyo.set合議体名称(paramter.getGogitaiName());
         }
-        henkojokyo.set審査会開始年月日(current.getShinsakaiKaisaiYMDMin());
-        henkojokyo.set審査会終了年月日(current.getShinsakaiKaisaiYMDMax());
+        if (!RString.isNullOrEmpty(paramter.getTaishoGeppiFrom())) {
+            審査会開始年月日 = new FlexibleDate(paramter.getTaishoGeppiFrom());
+            審査会終了年月日 = new FlexibleDate(paramter.getTaishoGeppiTo());
+            henkojokyo.set審査会開始年月日(審査会開始年月日.wareki().toDateString());
+            henkojokyo.set審査会終了年月日(審査会終了年月日.wareki().toDateString());
+        } else {
+            FlexibleYearMonth 審査会対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
+            審査会開始年月日 = new FlexibleDate(
+                    new RString(審査会対象年月.getYearValue())
+                    .concat(new RString(審査会対象年月.getMonthValue()))
+                    .concat("01"));
+            審査会終了年月日 = new FlexibleDate(
+                    new RString(審査会対象年月.getYearValue())
+                    .concat(new RString(審査会対象年月.getMonthValue()))
+                    .concat(new RString(審査会対象年月.getLastDay())));
+            henkojokyo.set審査会開始年月日(審査会開始年月日.wareki().toDateString());
+            henkojokyo.set審査会終了年月日(審査会終了年月日.wareki().toDateString());
+        }
         henkojokyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
         if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
             henkojokyo.set市町村名(全市町村);

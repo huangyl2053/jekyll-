@@ -120,6 +120,7 @@ public class ChosaJisshishaJohoHandler {
                 div.getTxtChosaKubun().setValue(RString.EMPTY);
             } else if (ChosaKubun.新規調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
                 div.getTxtChosaKubun().setValue(ChosaKubun.新規調査.get名称());
+                div.getDdlChosaJisshiBasho().setSelectedValue(ChosaJisshiBashoCode.自宅内.get名称());
             } else if (ChosaKubun.再調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
                 div.getTxtChosaKubun().setValue(ChosaKubun.再調査.get名称());
             } else {

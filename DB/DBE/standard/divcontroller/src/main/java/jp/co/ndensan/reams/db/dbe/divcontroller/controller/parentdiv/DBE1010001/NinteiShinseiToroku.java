@@ -77,6 +77,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.TextKind;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -117,8 +118,6 @@ public class NinteiShinseiToroku {
      */
     public ResponseData<NinteiShinseiTorokuDiv> onLoad(NinteiShinseiTorokuDiv div) {
         RString menuID = ResponseHolder.getMenuID();
-        ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnKojinMemo().setDisabled(Boolean.TRUE);
-        ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnSetaiMemo().setDisabled(Boolean.TRUE);
         ShichosonSecurityJoho shichosonSecurity = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         RString 介護導入形態 = RString.EMPTY;
         if (shichosonSecurity.get導入形態コード().value().equals(new RString("211"))) {
@@ -136,18 +135,15 @@ public class NinteiShinseiToroku {
 
             NinteiShinseiTorokuResult result = manager.getDataForLoad(管理番号);
             if (result != null) {
-                ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
-
-                getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
-                NinteiShinseiTodokedeshaDataPassModel dataPass = getHandler(div).set届出情報();
-                dataPass.set申請書管理番号(管理番号.value());
-                div.getCcdShinseiTodokedesha().initialize(dataPass);
-
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
-
                 div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
                 getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
             }
+            ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
+            getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
+            NinteiShinseiTodokedeshaDataPassModel dataPass = getHandler(div).set届出情報();
+            dataPass.set申請書管理番号(管理番号.value());
+            div.getCcdShinseiTodokedesha().initialize(dataPass);
             set連絡先(管理番号, div, false);
             RirekiJohoResult comResult = manager.get共有子データ(被保険者番号);
             div.setHdnKonkai(DataPassingConverter.serialize(comResult.get今回履歴情報()));
@@ -159,6 +155,8 @@ public class NinteiShinseiToroku {
             setIconName(div, 管理番号);
             div.setHdnShinseishoKanriNo(管理番号.value());
 
+            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnKojinMemo().setDisabled(Boolean.TRUE);
+            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnSetaiMemo().setDisabled(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
@@ -166,14 +164,11 @@ public class NinteiShinseiToroku {
         }
         if (MENUID_DBEMN31003.equals(menuID)) {
             Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
+            div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
             if (business != null) {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 getHandler(div).loadInsert(business, business.get保険者().get市町村コード(), 介護導入形態);
-
-                div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
-
                 getHandler(div).set医療保険(manager.get医療保険履歴(business.get識別コード()));
-
                 set連絡先(business.get前回申請書管理番号(), div, true);
                 div.setHdnJogaiMode(new RString("入力"));
                 div.setHdnShinseishoKanriNo(RString.EMPTY);
@@ -181,6 +176,9 @@ public class NinteiShinseiToroku {
                     throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("宛名情報"));
                 }
             }
+            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnKojinMemo().setDisabled(Boolean.TRUE);
+            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnSetaiMemo().setDisabled(Boolean.TRUE);
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBackToIchiran"), false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);

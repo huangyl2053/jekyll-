@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIrai
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Dec 16 16:16:23 JST 2016 
+ * Fri Dec 16 15:15:52 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShujiiIkensho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
 
     private RString no;
     private RString hohokenshaBango;
@@ -32,6 +33,12 @@ public class dgShujiiIkensho_Row extends DataRow {
     private RString shujiiShimei;
     private RString shinseishoKanriNo;
     private RString rirekiNo;
+    private RString hihokenshaShimeiKana;
+    private RString jusho;
+    private RString yubinNo;
+    private TextBoxFlexibleDate birthYMD;
+    private RString iryoKikanYubinNo;
+    private RString iryoukikanShozaichi;
 
     public dgShujiiIkensho_Row() {
         super();
@@ -46,6 +53,12 @@ public class dgShujiiIkensho_Row extends DataRow {
         this.shujiiShimei = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
+        this.hihokenshaShimeiKana = RString.EMPTY;
+        this.jusho = RString.EMPTY;
+        this.yubinNo = RString.EMPTY;
+        this.birthYMD = new TextBoxFlexibleDate();
+        this.iryoKikanYubinNo = RString.EMPTY;
+        this.iryoukikanShozaichi = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("hohokenshaBango", hohokenshaBango);
         this.setOriginalData("hihokenshaShimei", hihokenshaShimei);
@@ -57,9 +70,15 @@ public class dgShujiiIkensho_Row extends DataRow {
         this.setOriginalData("shujiiShimei", shujiiShimei);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("hihokenshaShimeiKana", hihokenshaShimeiKana);
+        this.setOriginalData("jusho", jusho);
+        this.setOriginalData("yubinNo", yubinNo);
+        this.setOriginalData("birthYMD", birthYMD);
+        this.setOriginalData("iryoKikanYubinNo", iryoKikanYubinNo);
+        this.setOriginalData("iryoukikanShozaichi", iryoukikanShozaichi);
     }
 
-    public dgShujiiIkensho_Row(RString no, RString hohokenshaBango, RString hihokenshaShimei, RString seibetsu, RString ninteiShinseibi, RString shujiiIryokikanCode, RString shujiiIryoKikanMeisho, RString shujiiCode, RString shujiiShimei, RString shinseishoKanriNo, RString rirekiNo) {
+    public dgShujiiIkensho_Row(RString no, RString hohokenshaBango, RString hihokenshaShimei, RString seibetsu, RString ninteiShinseibi, RString shujiiIryokikanCode, RString shujiiIryoKikanMeisho, RString shujiiCode, RString shujiiShimei, RString shinseishoKanriNo, RString rirekiNo, RString hihokenshaShimeiKana, RString jusho, RString yubinNo, TextBoxFlexibleDate birthYMD, RString iryoKikanYubinNo, RString iryoukikanShozaichi) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("hohokenshaBango", hohokenshaBango);
@@ -72,6 +91,12 @@ public class dgShujiiIkensho_Row extends DataRow {
         this.setOriginalData("shujiiShimei", shujiiShimei);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("hihokenshaShimeiKana", hihokenshaShimeiKana);
+        this.setOriginalData("jusho", jusho);
+        this.setOriginalData("yubinNo", yubinNo);
+        this.setOriginalData("birthYMD", birthYMD);
+        this.setOriginalData("iryoKikanYubinNo", iryoKikanYubinNo);
+        this.setOriginalData("iryoukikanShozaichi", iryoukikanShozaichi);
         this.no = no;
         this.hohokenshaBango = hohokenshaBango;
         this.hihokenshaShimei = hihokenshaShimei;
@@ -83,6 +108,12 @@ public class dgShujiiIkensho_Row extends DataRow {
         this.shujiiShimei = shujiiShimei;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.rirekiNo = rirekiNo;
+        this.hihokenshaShimeiKana = hihokenshaShimeiKana;
+        this.jusho = jusho;
+        this.yubinNo = yubinNo;
+        this.birthYMD = birthYMD;
+        this.iryoKikanYubinNo = iryoKikanYubinNo;
+        this.iryoukikanShozaichi = iryoukikanShozaichi;
     }
 
     public RString getNo() {
@@ -127,6 +158,30 @@ public class dgShujiiIkensho_Row extends DataRow {
 
     public RString getRirekiNo() {
         return rirekiNo;
+    }
+
+    public RString getHihokenshaShimeiKana() {
+        return hihokenshaShimeiKana;
+    }
+
+    public RString getJusho() {
+        return jusho;
+    }
+
+    public RString getYubinNo() {
+        return yubinNo;
+    }
+
+    public TextBoxFlexibleDate getBirthYMD() {
+        return birthYMD;
+    }
+
+    public RString getIryoKikanYubinNo() {
+        return iryoKikanYubinNo;
+    }
+
+    public RString getIryoukikanShozaichi() {
+        return iryoukikanShozaichi;
     }
 
     public void setNo(RString no) {
@@ -182,6 +237,36 @@ public class dgShujiiIkensho_Row extends DataRow {
     public void setRirekiNo(RString rirekiNo) {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.rirekiNo = rirekiNo;
+    }
+
+    public void setHihokenshaShimeiKana(RString hihokenshaShimeiKana) {
+        this.setOriginalData("hihokenshaShimeiKana", hihokenshaShimeiKana);
+        this.hihokenshaShimeiKana = hihokenshaShimeiKana;
+    }
+
+    public void setJusho(RString jusho) {
+        this.setOriginalData("jusho", jusho);
+        this.jusho = jusho;
+    }
+
+    public void setYubinNo(RString yubinNo) {
+        this.setOriginalData("yubinNo", yubinNo);
+        this.yubinNo = yubinNo;
+    }
+
+    public void setBirthYMD(TextBoxFlexibleDate birthYMD) {
+        this.setOriginalData("birthYMD", birthYMD);
+        this.birthYMD = birthYMD;
+    }
+
+    public void setIryoKikanYubinNo(RString iryoKikanYubinNo) {
+        this.setOriginalData("iryoKikanYubinNo", iryoKikanYubinNo);
+        this.iryoKikanYubinNo = iryoKikanYubinNo;
+    }
+
+    public void setIryoukikanShozaichi(RString iryoukikanShozaichi) {
+        this.setOriginalData("iryoukikanShozaichi", iryoukikanShozaichi);
+        this.iryoukikanShozaichi = iryoukikanShozaichi;
     }
 
     // </editor-fold>

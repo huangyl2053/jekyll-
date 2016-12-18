@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class RenrakusakiKinyuKikanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,8 +36,8 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
     private DropDownList ddlHaishiFlag;
     @JsonProperty("txtHaishiYMD")
     private TextBoxDate txtHaishiYMD;
-    @JsonProperty("btnKozaJohoToroku")
-    private ButtonDialog btnKozaJohoToroku;
+    @JsonProperty("KozaJoho")
+    private KozaJohoDiv KozaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -172,21 +172,21 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
     }
 
     /*
-     * getbtnKozaJohoToroku
-     * @return btnKozaJohoToroku
+     * getKozaJoho
+     * @return KozaJoho
      */
-    @JsonProperty("btnKozaJohoToroku")
-    public ButtonDialog getBtnKozaJohoToroku() {
-        return btnKozaJohoToroku;
+    @JsonProperty("KozaJoho")
+    public KozaJohoDiv getKozaJoho() {
+        return KozaJoho;
     }
 
     /*
-     * setbtnKozaJohoToroku
-     * @param btnKozaJohoToroku btnKozaJohoToroku
+     * setKozaJoho
+     * @param KozaJoho KozaJoho
      */
-    @JsonProperty("btnKozaJohoToroku")
-    public void setBtnKozaJohoToroku(ButtonDialog btnKozaJohoToroku) {
-        this.btnKozaJohoToroku = btnKozaJohoToroku;
+    @JsonProperty("KozaJoho")
+    public void setKozaJoho(KozaJohoDiv KozaJoho) {
+        this.KozaJoho = KozaJoho;
     }
 
     // </editor-fold>

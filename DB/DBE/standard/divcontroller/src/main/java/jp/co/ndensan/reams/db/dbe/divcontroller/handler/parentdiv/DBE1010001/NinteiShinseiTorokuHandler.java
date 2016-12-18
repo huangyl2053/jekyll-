@@ -68,11 +68,13 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(管理番号, ShikibetsuCode.EMPTY);
         div.getCcdAtenaInfo().setShoriType(new RString("2"));
         div.getCcdAtenaInfo().initialize();
-
-        if (result.get市町村コード() != null) {
-            div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
+        div.getCcdKaigoNinteiShinseiKihon().initialize();
+        if (result != null) {
+            if (result.get市町村コード() != null) {
+                div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
+            }
+            setCommonDiv(result, 管理番号);
         }
-        setCommonDiv(result, 管理番号);
     }
 
     /**
@@ -83,7 +85,6 @@ public class NinteiShinseiTorokuHandler {
      * @param 介護導入形態 介護導入形態
      */
     public void loadInsert(Minashi2shisaiJoho business, LasdecCode 市町村コード, RString 介護導入形態) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBackToIchiran"), false);
         div.getBtnIryohokenGuide().setDisabled(true);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getBtnChosaJokyo().setDisabled(true);
@@ -183,7 +184,7 @@ public class NinteiShinseiTorokuHandler {
     }
 
     private void setCommonDiv(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {
-        div.getCcdKaigoNinteiShinseiKihon().initialize();
+        
         if (result.get申請日() != null) {
             div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
                     result.get申請日().getMonthValue(), result.get申請日().getDayValue()));

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.ninteiinput.NinteiInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -54,12 +55,18 @@ public class NinteiInputHandler {
         }
         div.setHdnDatabaseSubGyomuCode(model.getSubGyomuCode());
         div.setHdnKoroshoIfShikibetsuCode(model.get厚労省IFコード());
-        div.getTxtNinteiYMD().setValue(model.get認定年月日());
+        if (model.get認定年月日() != null) {
+            div.getTxtNinteiYMD().setValue(model.get認定年月日());
+        } 
         div.getTxtShinsakaiIken().setValue(model.get審査会意見());
         div.getTxtYokaigodoCode().setValue(model.get要介護度コード());
         div.getTxtYokaigodoName().setValue(model.get要介護度名称());
-        div.getTxtYukoKaishiYMD().setValue(model.get有効開始年月日());
-        div.getTxtYukoShuryoYMD().setValue(model.get有効終了年月日());
+        if (model.get有効開始年月日() != null) {
+            div.getTxtYukoKaishiYMD().setValue(model.get有効開始年月日());
+        }
+        if (model.get有効終了年月日() != null) {
+            div.getTxtYukoShuryoYMD().setValue(model.get有効終了年月日());
+        }
         NinteiInputFinder ninteiInputFinder = NinteiInputFinder.createInstance();
         List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給,
                 DBDCodeShubetsu.指定サービス種類コード.getコード(), FlexibleDate.getNowDate());

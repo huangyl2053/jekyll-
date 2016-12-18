@@ -150,7 +150,6 @@ public class NinteichosaItakusakiMain {
         div.getChosaitakusakiJohoInput().setState(状態_追加);
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(false);
-        div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(false);
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
         div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setDataSource(getHandler(div).setItakukubun());
@@ -171,7 +170,6 @@ public class NinteichosaItakusakiMain {
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedItem();
         getHandler(div).setChosaitakusakiJohoInput(row);
-        div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(false);
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
         div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(true);
@@ -191,7 +189,6 @@ public class NinteichosaItakusakiMain {
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
         getHandler(div).setChosaitakusakiJohoInput(row);
         getHandler(div).setDisabledTrueToChosaitakusakiJohoInput();
-        div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(true);
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
         div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         return ResponseData.of(div).respond();
@@ -209,17 +206,14 @@ public class NinteichosaItakusakiMain {
         if (状態_修正.equals(row.getJotai())) {
             div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(true);
             div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().setDisabled(true);
-            div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(false);
             div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
             div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         } else if (状態_削除.equals(row.getJotai())) {
             getHandler(div).setDisabledTrueToChosaitakusakiJohoInput();
-            div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(true);
             div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
             div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         } else if (RString.EMPTY.equals(row.getJotai())) {
             getHandler(div).setDisabledTrueToChosaitakusakiJohoInput();
-            div.getChosaitakusakiJohoInput().getBtnRegisterKoza().setDisabled(true);
             div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(true);
             div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
         }
