@@ -452,7 +452,7 @@
         FROM
         (
         SELECT
-        G."shinsakaiKaisaiNo"
+        G."shinsakaiKaisaiNo"db
         FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" G
         INNER JOIN
@@ -830,7 +830,11 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoMyBatisParameter"
             fetchSize="500">
         SELECT S.* ,
-        (SELECT COUNT(G."shinsakaiKaisaiNo")
+        (
+        SELECT COUNT(1)
+        FROM (
+        SELECT
+            G."shinsakaiKaisaiNo"
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" G
         INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
         ON G."shinsakaiKaisaiNo" = dbt5502."shinsakaiKaisaiNo"
@@ -876,6 +880,8 @@
                 </if>
             </otherwise>
         </choose>
+        GROUP BY G."shinsakaiKaisaiNo"
+        ) AS shinsakaiKaisaiNo
         ) AS shinsakaiKaisaiNoCount
         FROM
         (SELECT
@@ -1238,7 +1244,7 @@
         SELECT
         min(S."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin,
         max(S."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax,
-        count(*) shinsakaiKaisaiNoCount
+        count(DISTINCT S."shinsakaiKaisaiNo") shinsakaiKaisaiNoCount
         FROM
         (SELECT
         Dbt5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
