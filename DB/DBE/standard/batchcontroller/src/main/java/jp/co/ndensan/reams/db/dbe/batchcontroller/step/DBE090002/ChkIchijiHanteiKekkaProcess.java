@@ -769,7 +769,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
             社会生活への適応4リスト.add(is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get名称10(dbt5211Entity, 連番60) : RString.EMPTY);
             社会生活への適応4リスト.add(is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get名称10(dbt5211Entity, 連番61) : RString.EMPTY);
         }
-        if (識別コード06A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
+        if (識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番40, 連番1).isEmpty() ? RString.EMPTY
                     : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get名称12(dbt5211Entity, 連番56)
                     : is厚労省識別コードが06A_02A(bodyItem.get前回厚労省IF識別コード()) ? get名称22(dbt5211Entity, 連番34) : get名称22(dbt5211Entity, 連番40));
@@ -2230,7 +2230,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
             } else if (連番 == 連番6) {
                 return 連番61;
             }
-        } else if (識別コード99A.equals(前回厚労省IF識別コード)) {
+        } else if (識別コード06A.equals(前回厚労省IF識別コード) || 識別コード02A.equals(前回厚労省IF識別コード)) {
             if (連番 == 連番1) {
                 return 連番34;
             } else if (連番 == 連番2) {
@@ -2238,7 +2238,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
             } else if (連番 == 連番3) {
                 return 連番37;
             }
-        } else if (識別コード06A.equals(前回厚労省IF識別コード) || 識別コード02A.equals(前回厚労省IF識別コード)) {
+        } else if (識別コード99A.equals(前回厚労省IF識別コード)) {
             if (連番 == 連番1) {
                 return 連番40;
             } else if (連番 == 連番2) {
