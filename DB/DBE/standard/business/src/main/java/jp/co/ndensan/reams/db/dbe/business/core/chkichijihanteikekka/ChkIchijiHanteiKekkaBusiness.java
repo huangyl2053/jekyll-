@@ -1633,15 +1633,15 @@ public final class ChkIchijiHanteiKekkaBusiness {
         }
         if (識別コード02A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
             主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                    : get意見書名称04(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番13 : 連番14));
+                    : get意見書名称03(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番13 : 連番14));
             主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                    : get意見書名称05(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
+                    : get意見書名称04(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
             主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                    : get意見書名称06(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
+                    : get意見書名称05(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
             主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                    : get意見書名称04(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
+                    : get意見書名称06(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
             主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番18, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                    : get意見書名称05(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番68 : 連番18));
+                    : get意見書名称14(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番68 : 連番18));
         }
         return 主治医意見書項目4リスト;
     }

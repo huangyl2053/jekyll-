@@ -803,10 +803,10 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
             if (識別コード09B.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get前回厚労省IF識別コード())) {
                 社会生活への適応4リスト.add(get名称12(前回調査項目, 連番56));
                 社会生活への適応4リスト.add(get名称12(前回調査項目, 連番57));
-                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番58));
-                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番59));
-                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番60));
-                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番61));
+                社会生活への適応4リスト.add(get名称17(前回調査項目, 連番58));
+                社会生活への適応4リスト.add(get名称16(前回調査項目, 連番59));
+                社会生活への適応4リスト.add(get名称10(前回調査項目, 連番60));
+                社会生活への適応4リスト.add(get名称10(前回調査項目, 連番61));
             }
             if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
                 社会生活への適応4リスト.add(get名称22(前回調査項目, 連番34));
