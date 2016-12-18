@@ -1217,29 +1217,29 @@
                     <when test="isJissiZumi">
                         AND (I."nijiHanteiYokaigoJotaiKubunCode" <![CDATA[<>]]> '01'
                         AND D."nijiHanteiYokaigoJotaiKubunCode" <![CDATA[<>]]> '01'
-                        AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan"
+                        AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                     </when>
                     <otherwise>
                         <choose>
                             <when test='"0".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
-                                AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan"
+                                AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                             <when test='"1".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
-                                AND 6 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan"
+                                AND 6 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                             <when test='"2".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
-                                AND 6 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan"
+                                AND 6 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                             <when test='"3".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
-                                AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan"
+                                AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                         </choose>
                     </otherwise>

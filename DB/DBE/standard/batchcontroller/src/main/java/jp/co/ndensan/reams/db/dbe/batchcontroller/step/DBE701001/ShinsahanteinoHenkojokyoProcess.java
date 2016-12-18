@@ -168,7 +168,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
             henkojokyo.set合議体番号(new RString(paramter.getGogitaiNo()));
             henkojokyo.set合議体名称(paramter.getGogitaiName());
         }
-        if (RString.isNullOrEmpty(paramter.getTaishoGeppiFrom())) {
+        if (!RString.isNullOrEmpty(paramter.getTaishoGeppiFrom())) {
             審査会開始年月日 = new FlexibleDate(paramter.getTaishoGeppiFrom());
             審査会終了年月日 = new FlexibleDate(paramter.getTaishoGeppiTo());
             henkojokyo.set審査会開始年月日(審査会開始年月日.wareki().toDateString());
@@ -177,14 +177,14 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
             FlexibleYearMonth 審査会対象年月 = new FlexibleYearMonth(paramter.getTaishoNendoYM());
             審査会開始年月日 = new FlexibleDate(
                     new RString(審査会対象年月.getYearValue())
-                            .concat(new RString(審査会対象年月.getMonthValue()))
-                            .concat("01"));
+                    .concat(new RString(審査会対象年月.getMonthValue()))
+                    .concat("01"));
             審査会終了年月日 = new FlexibleDate(
                     new RString(審査会対象年月.getYearValue())
-                            .concat(new RString(審査会対象年月.getMonthValue()))
-                            .concat(new RString(審査会対象年月.getLastDay())));
+                    .concat(new RString(審査会対象年月.getMonthValue()))
+                    .concat(new RString(審査会対象年月.getLastDay())));
             henkojokyo.set審査会開始年月日(審査会開始年月日.wareki().toDateString());
-            henkojokyo.set審査会終了年月日(審査会終了年月日.wareki().toDateString());            
+            henkojokyo.set審査会終了年月日(審査会終了年月日.wareki().toDateString());
         }
         henkojokyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
         if (RString.isNullOrEmpty(paramter.getShichosonCode().value())) {
