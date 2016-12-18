@@ -33,7 +33,7 @@ public class JisshiJokyoTokeiProcess extends BatchProcessBase<JisshiJokyoTokeiEn
     private static final RString 終了年月日 = new RString("最終まで");
     private static final RString 申請受付数タイトル = new RString("申請受付人数");
     private static final RString 調査実施数タイトル = new RString("調査実施人数");
-    private static final RString 審査会実施数タイトル = new RString("審査会開実施人数");
+    private static final RString 審査会実施数タイトル = new RString("審査会実施人数");
     private static final RString 認定結果数タイトル = new RString("認定結果人数");
     private static final RString 新規申請タイトル = new RString("新規");
     private static final RString 更新申請タイトル = new RString("更新");
