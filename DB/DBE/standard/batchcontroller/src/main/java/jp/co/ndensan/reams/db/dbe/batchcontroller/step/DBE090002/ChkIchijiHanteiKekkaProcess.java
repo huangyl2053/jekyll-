@@ -801,24 +801,24 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         }
         if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             if (識別コード09B.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                社会生活への適応4リスト.add(get名称12(dbt5211Entity, 連番56));
-                社会生活への適応4リスト.add(get名称12(dbt5211Entity, 連番57));
-                社会生活への適応4リスト.add(get名称12(dbt5211Entity, 連番58));
-                社会生活への適応4リスト.add(get名称12(dbt5211Entity, 連番59));
-                社会生活への適応4リスト.add(get名称12(dbt5211Entity, 連番60));
-                社会生活への適応4リスト.add(get名称12(dbt5211Entity, 連番61));
+                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番56));
+                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番57));
+                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番58));
+                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番59));
+                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番60));
+                社会生活への適応4リスト.add(get名称12(前回調査項目, 連番61));
             }
             if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                社会生活への適応4リスト.add(get名称22(dbt5211Entity, 連番34));
-                社会生活への適応4リスト.add(get名称22(dbt5211Entity, 連番35));
-                社会生活への適応4リスト.add(get名称17(dbt5211Entity, 連番37));
+                社会生活への適応4リスト.add(get名称22(前回調査項目, 連番34));
+                社会生活への適応4リスト.add(get名称22(前回調査項目, 連番35));
+                社会生活への適応4リスト.add(get名称17(前回調査項目, 連番37));
                 社会生活への適応4リスト.add(RString.EMPTY);
                 社会生活への適応4リスト.add(RString.EMPTY);
                 社会生活への適応4リスト.add(RString.EMPTY);
             }
             if (識別コード99A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                社会生活への適応4リスト.add(get名称22(dbt5211Entity, 連番40));
-                社会生活への適応4リスト.add(get名称22(dbt5211Entity, 連番41));
+                社会生活への適応4リスト.add(get名称22(前回調査項目, 連番40));
+                社会生活への適応4リスト.add(get名称22(前回調査項目, 連番41));
                 社会生活への適応4リスト.add(RString.EMPTY);
                 社会生活への適応4リスト.add(RString.EMPTY);
                 社会生活への適応4リスト.add(RString.EMPTY);
@@ -1082,52 +1082,52 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         }
         if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             if (識別コード09B.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番41));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番42));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番43));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番44));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番45));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番46));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番47));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番50));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番53));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番55));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番41));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番42));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番43));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番44));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番45));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番46));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番47));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番48));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番49));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番50));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番51));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番52));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番53));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番54));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番55));
             }
             if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番56));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番63));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番66));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番48));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番49));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番51));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番52));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番54));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番55));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番56));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番58));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番60));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番61));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番63));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番66));
                 精神_行動障害4リスト.add(RString.EMPTY);
                 精神_行動障害4リスト.add(RString.EMPTY);
                 精神_行動障害4リスト.add(RString.EMPTY);
             }
             if (識別コード99A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番57));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番62));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番64));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番66));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番67));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番69));
-                精神_行動障害4リスト.add(get名称16(dbt5211Entity, 連番42));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番54));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番55));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番57));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番58));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番60));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番61));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番62));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番64));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番66));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番67));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番69));
+                精神_行動障害4リスト.add(get名称16(前回調査項目, 連番42));
                 精神_行動障害4リスト.add(RString.EMPTY);
                 精神_行動障害4リスト.add(RString.EMPTY);
                 精神_行動障害4リスト.add(RString.EMPTY);
@@ -1463,60 +1463,60 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         }
         if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             if (識別コード09B.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                生活機能4リスト.add(get名称10(dbt5211Entity, 連番20));
-                生活機能4リスト.add(get名称10(dbt5211Entity, 連番21));
-                生活機能4リスト.add(get名称11(dbt5211Entity, 連番22));
-                生活機能4リスト.add(get名称10(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get名称10(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get名称10(dbt5211Entity, 連番25));
-                生活機能4リスト.add(get名称12(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get名称12(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get名称12(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get名称10(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get名称10(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get名称13(dbt5211Entity, 連番31));
+                生活機能4リスト.add(get名称10(前回調査項目, 連番20));
+                生活機能4リスト.add(get名称10(前回調査項目, 連番21));
+                生活機能4リスト.add(get名称11(前回調査項目, 連番22));
+                生活機能4リスト.add(get名称10(前回調査項目, 連番23));
+                生活機能4リスト.add(get名称10(前回調査項目, 連番24));
+                生活機能4リスト.add(get名称10(前回調査項目, 連番25));
+                生活機能4リスト.add(get名称12(前回調査項目, 連番26));
+                生活機能4リスト.add(get名称12(前回調査項目, 連番27));
+                生活機能4リスト.add(get名称12(前回調査項目, 連番28));
+                生活機能4リスト.add(get名称10(前回調査項目, 連番29));
+                生活機能4リスト.add(get名称10(前回調査項目, 連番30));
+                生活機能4リスト.add(get名称13(前回調査項目, 連番31));
             }
             if (識別コード99A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番17));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番17));
                 生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(get名称33(dbt5211Entity, 連番25));
-                生活機能4リスト.add(get名称33(dbt5211Entity, 連番30));
+                生活機能4リスト.add(get名称33(前回調査項目, 連番25));
+                生活機能4リスト.add(get名称33(前回調査項目, 連番30));
                 生活機能4リスト.add(RString.EMPTY);
                 生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番31));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番33));
-                生活機能4リスト.add(get名称34(dbt5211Entity, 連番36));
-                生活機能4リスト.add(get名称34(dbt5211Entity, 連番37));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番31));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番32));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番33));
+                生活機能4リスト.add(get名称34(前回調査項目, 連番36));
+                生活機能4リスト.add(get名称34(前回調査項目, 連番37));
                 生活機能4リスト.add(RString.EMPTY);
             }
             if (識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番16));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番17));
-                生活機能4リスト.add(get名称11(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番33));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番16));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番17));
+                生活機能4リスト.add(get名称11(前回調査項目, 連番23));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番24));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番26));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番27));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番28));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番29));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番30));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番32));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番33));
                 生活機能4リスト.add(RString.EMPTY);
             }
             if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番16));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番17));
-                生活機能4リスト.add(get名称11(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get名称22(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get名称20(dbt5211Entity, 連番33));
-                生活機能4リスト.add(get名称13(dbt5211Entity, 連番80));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番16));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番17));
+                生活機能4リスト.add(get名称11(前回調査項目, 連番23));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番24));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番26));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番27));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番28));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番29));
+                生活機能4リスト.add(get名称22(前回調査項目, 連番30));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番32));
+                生活機能4リスト.add(get名称20(前回調査項目, 連番33));
+                生活機能4リスト.add(get名称13(前回調査項目, 連番80));
             }
         }
         return 生活機能4リスト;

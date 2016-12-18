@@ -337,37 +337,37 @@ public final class ChkIchijiHanteiKekkaBusiness {
         }
         if (印刷する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
             if (識別コード09B.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                認知機能4リスト.add(get名称14(dbt5211Entity, 連番32));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番33));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番34));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番35));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番36));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番37));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番38));
-                認知機能4リスト.add(get名称16(dbt5211Entity, 連番39));
-                認知機能4リスト.add(get名称16(dbt5211Entity, 連番40));
+                認知機能4リスト.add(get名称14(前回調査項目, 連番32));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番33));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番34));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番35));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番36));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番37));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番38));
+                認知機能4リスト.add(get名称16(前回調査項目, 連番39));
+                認知機能4リスト.add(get名称16(前回調査項目, 連番40));
             }
             if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                認知機能4リスト.add(get名称14(dbt5211Entity, 連番40));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番42));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番43));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番44));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番45));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番46));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番47));
-                認知機能4リスト.add(get名称16(dbt5211Entity, 連番57));
-                認知機能4リスト.add(get名称16(dbt5211Entity, 連番59));
+                認知機能4リスト.add(get名称14(前回調査項目, 連番40));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番42));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番43));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番44));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番45));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番46));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番47));
+                認知機能4リスト.add(get名称16(前回調査項目, 連番57));
+                認知機能4リスト.add(get名称16(前回調査項目, 連番59));
             }
             if (識別コード99A.equals(bodyItem.get前回厚労省IF識別コード())) {
-                認知機能4リスト.add(get名称14(dbt5211Entity, 連番46));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番48));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番49));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番50));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番51));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番52));
-                認知機能4リスト.add(get名称15(dbt5211Entity, 連番53));
-                認知機能4リスト.add(get名称16(dbt5211Entity, 連番63));
-                認知機能4リスト.add(get名称16(dbt5211Entity, 連番65));
+                認知機能4リスト.add(get名称14(前回調査項目, 連番46));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番48));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番49));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番50));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番51));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番52));
+                認知機能4リスト.add(get名称15(前回調査項目, 連番53));
+                認知機能4リスト.add(get名称16(前回調査項目, 連番63));
+                認知機能4リスト.add(get名称16(前回調査項目, 連番65));
             }
         }
         return 認知機能4リスト;
