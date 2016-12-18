@@ -74,7 +74,8 @@ public class NinteiShinseishaKihonInfoHandler {
             div.getTxtNinteiShinseibi().setValue(new RDate(business.get認定申請日().toString()));
             div.getTxtShinseiKubunShinseiji().setValue(business.get申請区分_申請時() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
-            div.getTxtShinseiKubunHoreiji().setValue(business.get申請区分_法令時() == null
+            div.getTxtShinseiKubunHoreiji().setValue(
+                    business.get申請区分_法令時() == null || RString.isNullOrEmpty(business.get申請区分_法令時().getKey())
                     ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get申請区分_法令時().getKey()).get名称());
         }
 

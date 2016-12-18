@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsahanteinohenkojokyo.
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza._Console;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -37,7 +36,7 @@ public class ShinsahanteinoHenkojokyoProcess extends BatchProcessBase<SinsakaiHa
 
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getShinsahanteinoHenkojokyoHeader");
-    private static final RString タイトル = new RString("認定審査会審査判定状況");
+    private static final RString タイトル = new RString("認定審査会審査変更状況");
     private static final RString 新規区分変更申請 = new RString("0");
     private static final RString 新規申請 = new RString("1");
     private static final RString 更新申請 = new RString("2");
