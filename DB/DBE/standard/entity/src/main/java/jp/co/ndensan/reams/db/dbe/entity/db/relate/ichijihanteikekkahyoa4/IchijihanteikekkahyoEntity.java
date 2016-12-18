@@ -177,4 +177,5 @@ public class IchijihanteikekkahyoEntity {
     private List<RString> 特別な医療4_1リスト;
     private List<RString> 特別な医療4_2リスト;
     private RString 厚労省IF識別コード;
+    private RString 前回厚労省IF識別コード;
 }

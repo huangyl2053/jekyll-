@@ -217,7 +217,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private static final int 連番84 = 84;
     private static final int COUNT_15 = 15;
     private static final int COUNT_20 = 20;
-    private static final int IMAGE_WIDTH = 550;
+    private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
     List<RString> list;
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
@@ -1676,6 +1676,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         ichijiEntity.set現在のサービス利用状況名(RString.isNullOrEmpty(entity.getサービス区分コード()) ? RString.EMPTY
                 : ServiceKubunCode.toValue(remove半角スペース(entity.getサービス区分コード())).get名称());
         ichijiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
+        ichijiEntity.set前回厚労省IF識別コード(entity.get前回厚労省IF識別コード());
         List<RString> 高齢者自立度リスト = new ArrayList<>();
         高齢者自立度リスト.add(RString.isNullOrEmpty(entity.get障害高齢者自立度()) ? RString.EMPTY
                 : ShogaiNichijoSeikatsuJiritsudoCode.toValue(remove半角スペース(entity.get障害高齢者自立度())).get名称());
