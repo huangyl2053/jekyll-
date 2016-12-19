@@ -23,7 +23,6 @@ import lombok.Setter;
 @Setter
 public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase {
 
-    private static final String KEY_KAISAIBANGOULIST = "kaisaiBangouList";
     private static final String KEY_KAISAIBANGOU = "kaisaiBangou";
     private static final String ISPUBLISH_KEKKAICHIRAN_A3 = "isPublish_HanteiKekkaA3";
     private static final String ISPUBLISH_KEKKAICHIRAN = "isPublish_HanteiKekka";
@@ -32,8 +31,6 @@ public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase 
     private static final String ISPUBLISH_KEKKATSUCHIICHIRAN = "isPublish_KekkaTsuchiIchiran";
     private static final String USERID = "userId";
 
-    @BatchParameter(key = KEY_KAISAIBANGOULIST, name = "開催番号")
-    private List<RString> kaisaiBangouList;
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
     private RString kaisaiBangou;
     @BatchParameter(key = ISPUBLISH_KEKKAICHIRAN_A3, name = "要介護認定判定結果一覧表A3版")
@@ -56,7 +53,6 @@ public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase 
      */
     public HanteiKekkaJohoShuturyokuProcessParameter toHanteiKekkaJohoShuturyokuProcessParameter() {
         return new HanteiKekkaJohoShuturyokuProcessParameter(
-                kaisaiBangouList,
                 kaisaiBangou,
                 isPublish_HanteiKekkaA3,
                 isPublish_HanteiKekka,

@@ -712,7 +712,6 @@ public class NinteiChosaIrai {
             }
             RString 提出期限 = div.getRadkigen().getSelectedKey();
             FlexibleDate 発行日 = new FlexibleDate(div.getTxthokkoymd().getValue().toDateString());
-            FlexibleDate 共通日付 = new FlexibleDate(div.getTxtkigenymd().getValue().toDateString());
             if (div.getChkirai().getSelectedValues().contains(CHKNAME_認定調査依頼書)) {
                 FlexibleDate 認定調査期限年月日 = 認定調査依頼情報.get認定調査依頼年月日();
                 RDate date = RDate.getNowDate();
@@ -723,7 +722,7 @@ public class NinteiChosaIrai {
                 } else if (設定方法.equals(認定調査期限設定方法) && 提出期限_1.equals(提出期限)) {
                     認定調査期限年月日 = FlexibleDate.EMPTY;
                 } else if (設定方法.equals(認定調査期限設定方法) && 提出期限_2.equals(提出期限)) {
-                    認定調査期限年月日 = 共通日付;
+                    認定調査期限年月日 = new FlexibleDate(div.getTxtkigenymd().getValue().toDateString());
                 }
                 認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set依頼書出力年月日(発行日)
                         .set認定調査期限年月日(認定調査期限年月日).build();
