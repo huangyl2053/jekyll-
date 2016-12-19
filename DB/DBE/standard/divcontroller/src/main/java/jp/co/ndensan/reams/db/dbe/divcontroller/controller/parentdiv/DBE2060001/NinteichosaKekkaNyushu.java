@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.DBE2060001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.NinteichosaIraiListCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.NinteichosaKekkaNyushuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2060001.NinteichosaKekkaNyushuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2060001.NinteichosaKekkaNyushuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -21,8 +22,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -44,18 +45,16 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -71,6 +70,7 @@ public class NinteichosaKekkaNyushu {
 
     private static final RString CSVファイル名 = new RString("NinteichosahyoNyushuIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
     private static final LockingKey 前排他ロックキー = new LockingKey("ShinseishoKanriNo");
 
     /**
@@ -89,15 +89,28 @@ public class NinteichosaKekkaNyushu {
     }
 
     /**
+     * 状態区分ラジオボタンのonChangeイベントです。
+     *
+     * @param requestDiv 完了処理・認定調査結果入手Div
+     * @return レスポンス
+     */
+    public ResponseData onChange_radJotaiKubun(NinteichosaKekkaNyushuDiv requestDiv) {
+        NinteichosaKekkaNyushuHandler handler = getHandler(requestDiv);
+        handler.initialDataGrid();
+        handler.setCommonButtonState();
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
      * 「一覧を出力する」ボタンを押下する場合、入力チェックを実行します。
      *
      * @param requestDiv 完了処理・認定調査結果入手Div
      * @return レスポンス
      */
     public ResponseData onBefore_btnChosakekkaOutput(NinteichosaKekkaNyushuDiv requestDiv) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChosakekkaOutput();
-        if (vallidation.iterator().hasNext()) {
-            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        ValidationMessageControlPairs valid = getValidationHandler(requestDiv).入力チェック_btnChosakekkaOutput();
+        if (valid.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(valid).respond();
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -113,9 +126,9 @@ public class NinteichosaKekkaNyushu {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<NinteichosaIraiListCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
-            List<dgNinteiTaskList_Row> dataList = requestDiv.getCcdTaskList().getCheckbox();
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
+                setEnclosure(CSV_WRITER_ENCLOSURE).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgNinteiTaskList_Row> dataList = requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                         row.getShinseishoKanriNo()));
@@ -139,22 +152,34 @@ public class NinteichosaKekkaNyushu {
      * @return レスポンス
      */
     public ResponseData onClick_btnCyosakekkaInput(NinteichosaKekkaNyushuDiv requestDiv) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            List<ChosaInputCsvEntity> csvEntityList = モバイルデータ取込();
-            ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnCyosakekkaInput(csvEntityList.size());
-            if (vallidation.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        List<ChosaInputCsvEntity> csvEntityList = new ArrayList<>();
+        try {
+            CsvReader csvReader = getCsvReader();
+            csvEntityList = readCsvFile(csvReader);
+        } catch (SystemException e) {
+            ValidationMessageControlPairs valid = getValidationHandler(requestDiv).入力チェック_btnCyosakekkaInput1();
+            if (valid.iterator().hasNext()) {
+                return ResponseData.of(requestDiv).addValidationMessages(valid).respond();
             }
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs valid = getValidationHandler(requestDiv).入力チェック_btnCyosakekkaInput2(csvEntityList.size());
+            if (valid.iterator().hasNext()) {
+                return ResponseData.of(requestDiv).addValidationMessages(valid).respond();
+            }
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            RString message = new RString(csvEntityList.size()).concat(new RString("件のデータの取込み処理を実行しても"));
+            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace(message.toString())).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(requestDiv).onClick_btnCyosakekkaInput(csvEntityList);
             RealInitialLocker.release(前排他ロックキー);
             getHandler(requestDiv).onLoad();
+            return ResponseData.of(requestDiv).addMessage(UrInformationMessages.処理完了.getMessage()).respond();
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -167,21 +192,21 @@ public class NinteichosaKekkaNyushu {
      */
     public ResponseData onClick_btnKekkaTouroku(NinteichosaKekkaNyushuDiv requestDiv) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnKekkaTouroku();
-            if (vallidation.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+            ValidationMessageControlPairs valid = getValidationHandler(requestDiv).入力チェック_btnKekkaTouroku();
+            if (valid.iterator().hasNext()) {
+                return ResponseData.of(requestDiv).addValidationMessages(valid).respond();
             }
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                    new ShinseishoKanriNo(requestDiv.getCcdTaskList().getCheckbox().get(0).getShinseishoKanriNo()));
+                    new ShinseishoKanriNo(requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.valueOf(
-                    requestDiv.getCcdTaskList().getCheckbox().get(0).getNinteichosaIraiRirekiNo().toString()));
+                    requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getNinteichosaIraiRirekiNo().toString()));
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.調査結果登録遷移).respond();
         }
@@ -196,13 +221,10 @@ public class NinteichosaKekkaNyushu {
      */
     public ResponseData onClick_btnOCRTorikomi(NinteichosaKekkaNyushuDiv requestDiv) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
+            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.取込み_OCR_遷移).respond();
         }
@@ -217,17 +239,17 @@ public class NinteichosaKekkaNyushu {
      */
     public ResponseData onClick_btnChousaResultKanryo(NinteichosaKekkaNyushuDiv requestDiv) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChousaResultKanryo();
-            if (vallidation.iterator().hasNext()) {
-                return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+            ValidationMessageControlPairs valid = getValidationHandler(requestDiv).入力チェック_btnChousaResultKanryo();
+            if (valid.iterator().hasNext()) {
+                return ResponseData.of(requestDiv).addValidationMessages(valid).respond();
             }
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
                 requestDiv.setReadOnly(true);
                 throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
@@ -245,37 +267,40 @@ public class NinteichosaKekkaNyushu {
     }
 
     private NinteichosaIraiListCsvEntity getCsvData(dgNinteiTaskList_Row row) {
-        NinteichosaIraiListCsvEntity data = new NinteichosaIraiListCsvEntity(
+        return new NinteichosaIraiListCsvEntity(
                 row.getShinseishoKanriNo(),
-                row.getHihoNumber(),
+                row.getHihoNo(),
                 row.getHihoShimei(),
-                row.getNinteiShinseiDay().getValue() != null
-                ? row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                getDate32(row.getNinteiShinseiYMD().getValue()),
                 NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード(),
                 NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).get名称(),
-                row.getNinteiChosaItakusakiCode(),
-                row.getKonkaiChosaItakusaki(),
-                row.getNinteiChosainCode(),
-                row.getKonkaiChosain(),
+                row.getChosaItakusakiCode(),
+                row.getChosaItakusaki(),
+                row.getChosainCode(),
+                row.getChosain(),
                 row.getHokensha(),
-                row.getChosahyoDataNyuryokuDay().getValue() != null
-                ? row.getChosahyoDataNyuryokuDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-                row.getChosaTokusokuHakkoDay().getValue() != null
-                ? row.getChosaTokusokuHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-                row.getChosaTokusokuHoho(),
-                new RString(row.getChosaTokusokuCount().getValue().toString()),
-                row.getChosaTokusokuLiit().getValue() != null
-                ? row.getChosaTokusokuLiit().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-                row.getChosahyoKanryoDay().getValue() != null
-                ? row.getChosahyoKanryoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-                        FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                getDate32(row.getTokusokuHakkoYMD().getValue()),
+                row.getTokusokuHoho(),
+                new RString(row.getTokusokuKaisu().getValue().toString()),
+                getDate32(row.getTokusokuKigen().getValue()),
+                getDate32(row.getChosaJisshiYMD().getValue()),
                 row.getChikuCode(),
-                row.getChosaTokusokuChiku());
-        return data;
+                row.getTokusokuChiku(),
+                row.getJotai()
+        );
+    }
+
+    private CsvReader getCsvReader() {
+        RString 調査取込用データ_モバイル_パス = DbBusinessConfig.get(ConfigNameDBE.調査取込用データ_モバイル_パス, RDate.getNowDate());
+        RString 調査取込用データ_モバイル = DbBusinessConfig.get(ConfigNameDBE.調査取込用データ_モバイル, RDate.getNowDate());
+        RString filePath = Path.combinePath(調査取込用データ_モバイル_パス, 調査取込用データ_モバイル);
+        return new CsvReader.InstanceBuilder(filePath, ChosaInputCsvEntity.class)
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEnclosure(CSV_WRITER_ENCLOSURE)
+                .setEncode(Encode.SJIS)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(false)
+                .build();
     }
 
     private List<ChosaInputCsvEntity> モバイルデータ取込() {
@@ -283,8 +308,12 @@ public class NinteichosaKekkaNyushu {
         RString 調査取込用データ_モバイル = DbBusinessConfig.get(ConfigNameDBE.調査取込用データ_モバイル, RDate.getNowDate());
         RString filePath = Path.combinePath(調査取込用データ_モバイル_パス, 調査取込用データ_モバイル);
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, ChosaInputCsvEntity.class)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8)
-                .hasHeader(false).setNewLine(NewLine.CRLF).build();
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEnclosure(CSV_WRITER_ENCLOSURE)
+                .setEncode(Encode.SJIS)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(false)
+                .build();
         return readCsvFile(csvReader);
     }
 
@@ -300,6 +329,14 @@ public class NinteichosaKekkaNyushu {
         }
         csvReader.close();
         return csvEntityList;
+    }
+
+    private RString getDate32(RDate date) {
+        RString tmp = RString.EMPTY;
+        if (date != null) {
+            tmp = date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
+        return tmp;
     }
 
     private NinteichosaKekkaNyushuHandler getHandler(NinteichosaKekkaNyushuDiv div) {

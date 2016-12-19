@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001;
 import jp.co.ndensan.reams.db.dbe.definition.core.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenshoTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikentokusokujo.ShujiiIkenTokusokujoFinder;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -49,6 +50,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
     public void onLoad() {
         initializtion();
         onChange_radChohyo();
+        changeHokensha();
     }
 
     /**
@@ -108,9 +110,9 @@ public class ShujiiIkenTokusokujoHakkoHandler {
         tempData.setTemp_保険者名称(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
         tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getIryoKikanCode());
         tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getShujiiCode());
-        FlexibleDate TxtKijunDay = new FlexibleDate(div.getHakkoJoken().getTxtKijunDay().getValue().toString());
-        if (!TxtKijunDay.isEmpty()) {
-            tempData.setTemp_基準日(TxtKijunDay);
+        FlexibleDate txtKijunDay = new FlexibleDate(div.getHakkoJoken().getTxtKijunDay().getValue().toString());
+        if (!txtKijunDay.isEmpty()) {
+            tempData.setTemp_基準日(txtKijunDay);
         }
         tempData.setTemp_主治医意見書督促期限日数(div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().getValue());
         tempData.setTemp_主治医意見書督促状(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
@@ -125,14 +127,23 @@ public class ShujiiIkenTokusokujoHakkoHandler {
                 ? 選択された : 未選択);
         tempData.setTemp_督促方法(div.getShujiiIkenshoTokusokujo().getRadTokusokuHoho().getSelectedIndex());
         tempData.setTemp_督促メモ(div.getShujiiIkenshoTokusokujo().getTxtTokusokuMemo().getValue());
-        FlexibleDate TxtHakkoDay = new FlexibleDate(div.getShujiiIkenshoTokusokujo().getTxtHakkoDay().getValue().toString());
-        if (!TxtHakkoDay.isEmpty()) {
-            tempData.setTemp_督促日(TxtHakkoDay);
+        FlexibleDate txtHakkoDay = new FlexibleDate(div.getShujiiIkenshoTokusokujo().getTxtHakkoDay().getValue().toString());
+        if (!txtHakkoDay.isEmpty()) {
+            tempData.setTemp_督促日(txtHakkoDay);
         }
         tempData.setTemp_印刷期間開始日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue());
         tempData.setTemp_印刷期間終了日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue());
         tempData.setTemp_印刷書類区分(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
                 ? 印刷書類区分_主治医意見書提出督促状 : 印刷書類区分_主治医意見書督促対象者一覧表);
         return tempData;
+    }
+
+    /**
+     * 保険者の変更に伴う画面の変更です。
+     */
+    public void changeHokensha() {
+        boolean is全市町村 = HokenshaSummary.EMPTY.equals(div.getCcdHokenshaList().getSelectedItem());
+        div.getCcdIryokikanShujii().setDisabled(is全市町村);
+        div.getCcdIryokikanShujii().clear();
     }
 }

@@ -95,6 +95,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBE233001.value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+        dbT5301Writer = new BatchPermanentTableWriter<>(DbT5301ShujiiIkenshoIraiJohoEntity.class);
     }
 
     @Override

@@ -16,6 +16,10 @@ module DBZ {
                 return "onClick_btnClear";
             }
 
+            public static onClick_btnSelect(): string {
+                return "onClick_btnSelect";
+            }
+
         }
 
         export class Controls {

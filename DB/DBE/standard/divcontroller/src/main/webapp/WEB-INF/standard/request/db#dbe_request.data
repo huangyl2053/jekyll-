@@ -285,7 +285,7 @@ dbe/db/dbe/JizenShinsakaiShiryoPublication/onClick_btnParameter
 dbe/db/dbe/JizenShinsakaiShiryoPublication/onClick_chkPrintChohyoIin
 dbe/db/dbe/JizenShinsakaiShiryoPublication/onLoad
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnAutoWaritsuke
-dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnSelect
+dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnSelectAlias
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btndatainput
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btndataoutput
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnkojin
@@ -523,6 +523,7 @@ dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_Hokensya
 dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_TayisyouTiku
 dbe/db/dbe/NinteiChosaTokusokujoHakko/beforeJikkou
 dbe/db/dbe/NinteiChosaTokusokujoHakko/jikkou
+dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_ddlHokenshaList
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_radChohyo
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onLoad
 dbe/db/dbe/NinteiChosainJikanMaster/btnAbort

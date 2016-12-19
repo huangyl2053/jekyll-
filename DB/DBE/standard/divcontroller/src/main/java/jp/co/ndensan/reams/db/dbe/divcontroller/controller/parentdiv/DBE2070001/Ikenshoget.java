@@ -86,7 +86,7 @@ public class Ikenshoget {
      * @return レスポンスデータ
      */
     public ResponseData<IkenshogetDiv> onChange_jyotaiKubun(IkenshogetDiv div) {
-        getHandler(div).setJyotaiKubun();
+        getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
 
@@ -121,7 +121,7 @@ public class Ikenshoget {
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -250,7 +250,14 @@ public class Ikenshoget {
     }
 
     private IkenshoNyushuCsvEntity getCsvData(dgNinteiTaskList_Row row) {
+        RString jyotaiKubun = null;
+        if (row.getJyotai().equals(new RString("未"))) {
+            jyotaiKubun = new RString("未処理");
+        } else if (row.getJyotai().equals(new RString("可"))) {
+            jyotaiKubun = new RString("完了可能");
+        }
         return new IkenshoNyushuCsvEntity(
+                jyotaiKubun,
                 row.getShinseishoKanriNo(),
                 row.getHokensha(),
                 getパターン1(row.getNinteiShinseiDay().getValue()),
@@ -259,7 +266,7 @@ public class Ikenshoget {
                 getコード(row.getShinseiKubunShinseiji(), 1),
                 row.getShinseiKubunShinseiji(),
                 getパターン1(row.getIkenshoIraiKanryoDay().getValue()),
-                getパターン1(row.getIkenshoNyushuKanryoDay().getValue()),
+                getパターン1(row.getNyusyubi().getValue()),
                 getパターン1(row.getIkenshoNyushuTeikei().getValue()),
                 getコード(row.getIkenshoIraiShokai(), 2),
                 row.getIkenshoIraiShokai(),
