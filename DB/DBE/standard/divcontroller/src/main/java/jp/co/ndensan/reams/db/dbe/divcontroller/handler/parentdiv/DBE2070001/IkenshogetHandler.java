@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -88,6 +89,7 @@ public class IkenshogetHandler {
 
             if (business.get主治医意見書読取年月日() == null) {
                 row.setJyotai(未処理);
+                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
                 notCount++;
             } else if (business.get主治医意見書読取年月日() != null) {
                 row.setJyotai(完了可能);
@@ -137,13 +139,6 @@ public class IkenshogetHandler {
         }
         row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
         row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
-    }
-
-    /**
-     * 状態ラジオボタンの表示処理です。
-     */
-    public void setJyotaiKubun() {
-        initialize();
     }
 
     /**
