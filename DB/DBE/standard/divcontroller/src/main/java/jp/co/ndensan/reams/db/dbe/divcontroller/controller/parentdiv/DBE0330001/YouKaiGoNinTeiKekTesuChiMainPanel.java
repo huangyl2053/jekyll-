@@ -56,9 +56,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onLoad(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        LasdecCode lasdecCode = 市町村セキュリティ情報.get市町村情報().get市町村コード();
-        div.getCcdShujiiIryokikanAndShujiiInput().initialize(lasdecCode, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
 
         div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
@@ -77,9 +75,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnClear(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         div.getSearchConditionPanel().getTxtNijiHanteiKikan().clearFromValue();
         div.getSearchConditionPanel().getTxtNijiHanteiKikan().clearToValue();
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        LasdecCode lasdecCode = 市町村セキュリティ情報.get市町村情報().get市町村コード();
-        div.getCcdShujiiIryokikanAndShujiiInput().initialize(lasdecCode, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getRadKekkaTsuchiOutputTaisho().setSelectedKey(希望のみ);
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
@@ -174,6 +170,9 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
             div.getPrintPanel().getRadPrintCondition().setSelectedIndex(0);
             return ResponseData.of(div).setState(DBE0330001StateName.照会);
         }
+        if(ResponseHolder.getState().equals(DBE0330001StateName.主治医選択一覧.getName())) {
+            return ResponseData.of(div).setState(DBE0330001StateName.照会);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -243,6 +242,8 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
             支所コード = ShishoSecurityJoho.createInstance().getShishoCode(UrControlDataFactory.
                     createInstance().getLoginInfo().getUserId());
         }
+        System.out.println(市町村セキュリティ情報.get市町村情報().get市町村識別ID());
+        param.setUseShoKisaiHokenshaNo(!市町村セキュリティ情報.get市町村情報().get市町村識別ID().equals(new RString("00")));
         param.setShichosonCode(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShichosonCode());
         param.setShishoCode(支所コード);
         param.setShoKisaiHokenshaNo(市町村セキュリティ情報.get市町村情報().get証記載保険者番号().value());

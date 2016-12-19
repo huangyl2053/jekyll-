@@ -7,9 +7,13 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteichosairai;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiChosainBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIraiJidoWariate;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileChosainRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileRelateEntity;
@@ -145,7 +149,7 @@ public class NinteichosaIraiManager {
                         max履歴番号++;
                         dbT5201Dac.save(set認定調査依頼情報(申請書管理番号, max履歴番号, 厚労省IF識別コード,
                                                     entity.getNinteiChosaItakusakiCode(), entity.getNinteiChosainCode()).toEntity());
-                        tmp要割付人数 = tmp要割付人数 - 1;
+                        return tmp要割付人数 - 1;
                     }
                 }
             }
@@ -162,8 +166,9 @@ public class NinteichosaIraiManager {
     @Transaction
     public int getMax認定調査依頼履歴番号(RString 申請書管理番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
-        return mapper.selectMax認定調査依頼履歴番号(new NinteichosaIraiParameter(
+        RString result = mapper.selectMax認定調査依頼履歴番号(new NinteichosaIraiParameter(
             RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+        return result == null ? 0 : Integer.parseInt(result.toString());
     }
 
     /**

@@ -57,7 +57,7 @@ public class ShinsakaiKaisaiBashoJohoBuilder {
      * @return {@link ShinsakaiKaisaiBashoJohoBuilder}
      */
     public ShinsakaiKaisaiBashoJohoBuilder set介護認定審査会開催地区コード(Code 介護認定審査会開催地区コード) {
-        requireNonNull(介護認定審査会開催地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催地区コード"));
+        // requireNonNull(介護認定審査会開催地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催地区コード"));
         entity.setShinsakaiKaisaiChikuCode(介護認定審査会開催地区コード);
         return this;
     }
@@ -69,7 +69,7 @@ public class ShinsakaiKaisaiBashoJohoBuilder {
      * @return {@link ShinsakaiKaisaiBashoJohoBuilder}
      */
     public ShinsakaiKaisaiBashoJohoBuilder set介護認定審査会開催場所住所(RString 介護認定審査会開催場所住所) {
-        requireNonNull(介護認定審査会開催場所住所, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所住所"));
+        //requireNonNull(介護認定審査会開催場所住所, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所住所"));
         entity.setShinsakaiKaisaiBashoJusho(介護認定審査会開催場所住所);
         return this;
     }
@@ -81,7 +81,7 @@ public class ShinsakaiKaisaiBashoJohoBuilder {
      * @return {@link ShinsakaiKaisaiBashoJohoBuilder}
      */
     public ShinsakaiKaisaiBashoJohoBuilder set介護認定審査会開催場所電話番号(TelNo 介護認定審査会開催場所電話番号) {
-        requireNonNull(介護認定審査会開催場所電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所電話番号"));
+        //requireNonNull(介護認定審査会開催場所電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所電話番号"));
         entity.setShinsakaiKaisaiBashoTelNo(介護認定審査会開催場所電話番号);
         return this;
     }

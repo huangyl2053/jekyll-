@@ -26,8 +26,10 @@ public class ShinsakaiTorokuDiv extends Panel {
      */
     @JsonProperty("shinsakaitorokuichiran")
     private shinsakaitorokuichiranDiv shinsakaitorokuichiran;
-    @JsonProperty("btnShinsakekkakanryooutput")
-    private ButtonDownLoad btnShinsakekkakanryooutput;
+    @JsonProperty("shinsakaiTorokuFooterArea")
+    private shinsakaiTorokuFooterAreaDiv shinsakaiTorokuFooterArea;
+    @JsonProperty("shinsakaiIchiran")
+    private shinsakaiIchiranDiv shinsakaiIchiran;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
 
@@ -56,21 +58,39 @@ public class ShinsakaiTorokuDiv extends Panel {
     }
 
     /*
-     * getbtnShinsakekkakanryooutput
-     * @return btnShinsakekkakanryooutput
+     * getshinsakaiTorokuFooterArea
+     * @return shinsakaiTorokuFooterArea
      */
-    @JsonProperty("btnShinsakekkakanryooutput")
-    public ButtonDownLoad getBtnShinsakekkakanryooutput() {
-        return btnShinsakekkakanryooutput;
+    @JsonProperty("shinsakaiTorokuFooterArea")
+    public shinsakaiTorokuFooterAreaDiv getShinsakaiTorokuFooterArea() {
+        return shinsakaiTorokuFooterArea;
     }
 
     /*
-     * setbtnShinsakekkakanryooutput
-     * @param btnShinsakekkakanryooutput btnShinsakekkakanryooutput
+     * setshinsakaiTorokuFooterArea
+     * @param shinsakaiTorokuFooterArea shinsakaiTorokuFooterArea
      */
-    @JsonProperty("btnShinsakekkakanryooutput")
-    public void setBtnShinsakekkakanryooutput(ButtonDownLoad btnShinsakekkakanryooutput) {
-        this.btnShinsakekkakanryooutput = btnShinsakekkakanryooutput;
+    @JsonProperty("shinsakaiTorokuFooterArea")
+    public void setShinsakaiTorokuFooterArea(shinsakaiTorokuFooterAreaDiv shinsakaiTorokuFooterArea) {
+        this.shinsakaiTorokuFooterArea = shinsakaiTorokuFooterArea;
+    }
+
+    /*
+     * getshinsakaiIchiran
+     * @return shinsakaiIchiran
+     */
+    @JsonProperty("shinsakaiIchiran")
+    public shinsakaiIchiranDiv getShinsakaiIchiran() {
+        return shinsakaiIchiran;
+    }
+
+    /*
+     * setshinsakaiIchiran
+     * @param shinsakaiIchiran shinsakaiIchiran
+     */
+    @JsonProperty("shinsakaiIchiran")
+    public void setShinsakaiIchiran(shinsakaiIchiranDiv shinsakaiIchiran) {
+        this.shinsakaiIchiran = shinsakaiIchiran;
     }
 
     /*
@@ -105,32 +125,32 @@ public class ShinsakaiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtTotalCount() {
+    public TextBoxNum getTxtTotalCount() {
         return this.getShinsakaitorokuichiran().getTxtTotalCount();
     }
 
     @JsonIgnore
-    public void  setTxtTotalCount(TextBox txtTotalCount) {
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.getShinsakaitorokuichiran().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore
-    public TextBox getTxtCompleteCount() {
+    public TextBoxNum getTxtCompleteCount() {
         return this.getShinsakaitorokuichiran().getTxtCompleteCount();
     }
 
     @JsonIgnore
-    public void  setTxtCompleteCount(TextBox txtCompleteCount) {
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.getShinsakaitorokuichiran().setTxtCompleteCount(txtCompleteCount);
     }
 
     @JsonIgnore
-    public TextBox getTxtMishoriCount() {
+    public TextBoxNum getTxtMishoriCount() {
         return this.getShinsakaitorokuichiran().getTxtMishoriCount();
     }
 
     @JsonIgnore
-    public void  setTxtMishoriCount(TextBox txtMishoriCount) {
+    public void  setTxtMishoriCount(TextBoxNum txtMishoriCount) {
         this.getShinsakaitorokuichiran().setTxtMishoriCount(txtMishoriCount);
     }
 
@@ -142,6 +162,66 @@ public class ShinsakaiTorokuDiv extends Panel {
     @JsonIgnore
     public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getShinsakaitorokuichiran().setDgNinteiTaskList(dgNinteiTaskList);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTaishoshaMaxHyojiKensu() {
+        return this.getShinsakaitorokuichiran().getTxtTaishoshaMaxHyojiKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtTaishoshaMaxHyojiKensu(TextBoxNum txtTaishoshaMaxHyojiKensu) {
+        this.getShinsakaitorokuichiran().setTxtTaishoshaMaxHyojiKensu(txtTaishoshaMaxHyojiKensu);
+    }
+
+    @JsonIgnore
+    public ButtonDownLoad getBtnShinsakekkakanryooutput() {
+        return this.getShinsakaiTorokuFooterArea().getBtnShinsakekkakanryooutput();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakekkakanryooutput(ButtonDownLoad btnShinsakekkakanryooutput) {
+        this.getShinsakaiTorokuFooterArea().setBtnShinsakekkakanryooutput(btnShinsakekkakanryooutput);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtKensakuKaisaiYoteiYmd() {
+        return this.getShinsakaiIchiran().getTxtKensakuKaisaiYoteiYmd();
+    }
+
+    @JsonIgnore
+    public void  setTxtKensakuKaisaiYoteiYmd(TextBoxDateRange txtKensakuKaisaiYoteiYmd) {
+        this.getShinsakaiIchiran().setTxtKensakuKaisaiYoteiYmd(txtKensakuKaisaiYoteiYmd);
+    }
+
+    @JsonIgnore
+    public Button getBtnSearchShinsakai() {
+        return this.getShinsakaiIchiran().getBtnSearchShinsakai();
+    }
+
+    @JsonIgnore
+    public void  setBtnSearchShinsakai(Button btnSearchShinsakai) {
+        this.getShinsakaiIchiran().setBtnSearchShinsakai(btnSearchShinsakai);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtShinsakaiMaxHyojiKensu() {
+        return this.getShinsakaiIchiran().getTxtShinsakaiMaxHyojiKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiMaxHyojiKensu(TextBoxNum txtShinsakaiMaxHyojiKensu) {
+        this.getShinsakaiIchiran().setTxtShinsakaiMaxHyojiKensu(txtShinsakaiMaxHyojiKensu);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgShinsakaiList_Row> getDgShinsakaiList() {
+        return this.getShinsakaiIchiran().getDgShinsakaiList();
+    }
+
+    @JsonIgnore
+    public void  setDgShinsakaiList(DataGrid<dgShinsakaiList_Row> dgShinsakaiList) {
+        this.getShinsakaiIchiran().setDgShinsakaiList(dgShinsakaiList);
     }
 
     @JsonIgnore

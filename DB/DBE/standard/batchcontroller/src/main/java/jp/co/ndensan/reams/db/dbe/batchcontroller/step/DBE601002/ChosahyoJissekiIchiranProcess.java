@@ -58,8 +58,8 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosahyojissekiichiran."
             + "IChosahyoJissekiIchiranMapper.get帳票出力用認定調査実績集計表");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601002.getReportId();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601002"));
-    private static final RString CSV_NAME = new RString("ChosahyoJissekiIchiran.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE603001"));
+    private static final RString CSV_NAME = new RString("認定調査実績集計.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
@@ -93,21 +93,18 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
 
     @Override
     protected void createWriter() {
-        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-            RString spoolWorkPath = manager.getEucOutputDirectry();
-            eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
-            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                    .setEncode(Encode.UTF_8withBOM)
-                    .setDelimiter(EUC_WRITER_DELIMITER)
-                    .setEnclosure(EUC_WRITER_ENCLOSURE)
-                    .setNewLine(NewLine.CRLF)
-                    .hasHeader(true)
-                    .build();
-        } else {
-            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
-            reportSourceWriter = new ReportSourceWriter<>(batchWrite);
-        }
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                .setEncode(Encode.UTF_8withBOM)
+                .setDelimiter(EUC_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(true)
+                .build();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
     @Override

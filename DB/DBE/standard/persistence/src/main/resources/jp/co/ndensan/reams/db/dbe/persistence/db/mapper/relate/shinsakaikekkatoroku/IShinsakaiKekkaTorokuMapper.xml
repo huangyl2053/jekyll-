@@ -402,16 +402,26 @@
             INNER  JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
                 ON  DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         WHERE
-                "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
+                ("DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
+            OR  "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" = '')
+            AND ("DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS NOT NULL
+            AND "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
+            OR  "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = '')
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="状態区分 == 1" >
@@ -470,16 +480,26 @@
             INNER  JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
                 ON  DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         WHERE
-                DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-            AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-            AND DbT5105."maskingKanryoYMD" IS NOT NULL
-            AND DbT5105."centerSoshinYMD" IS NULL
+                (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND DbT5105."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND DbT5105."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
+            AND DbT5105."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+            OR  DbT5105."ninteiShinsakaiKanryoYMD" = '')
+            AND (DbT5105."maskingKanryoYMD" IS NOT NULL
+            AND DbT5105."maskingKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."centerSoshinYMD" IS NULL
+            OR  DbT5105."centerSoshinYMD" = '')
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="状態区分 == 1" >

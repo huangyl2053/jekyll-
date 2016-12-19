@@ -78,6 +78,23 @@ public class KojinJokyoShokaiHandler {
         getKojinJokyoShokai2(kojinJokyoShokaiList);
     }
 
+    /**
+     * 未登録時ボタン非活性。
+     *
+     * @param div 要介護認定個人状況照会div
+     */
+    public void 未登録時ボタン非活性(KojinJokyoShokaiDiv div) {
+
+        div.getBtnRenrakusaki().setDisabled(true);
+        div.getBtnShujiiIkenshoShokai().setDisabled(true);
+        div.getBtnNinteiChosaIraiShokai().setDisabled(true);
+        div.getBtnChosaKekkaInfoGaikyo().setDisabled(true);
+        div.getBtnChosaKekkaInfoKihon().setDisabled(true);
+        div.getBtnShichosonRenrakuJiko().setDisabled(true);
+        div.getBtnShujiiIkenshoSakuseiIraiShokai().setDisabled(true);
+        div.getBtnShinsakaiJoho().setDisabled(true);
+    }
+
     private void getchkShiteii(List<KojinJokyoShokai> kojinJokyoShokaiList) {
         RString 医師区分 = RString.EMPTY;
         if (kojinJokyoShokaiList.get(0).get医師区分コード() != null && !kojinJokyoShokaiList.get(0).get医師区分コード().isEmpty()) {

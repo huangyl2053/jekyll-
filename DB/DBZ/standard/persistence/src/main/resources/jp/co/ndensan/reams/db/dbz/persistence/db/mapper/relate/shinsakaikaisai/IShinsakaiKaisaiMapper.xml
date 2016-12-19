@@ -55,6 +55,8 @@
         FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS shinsakaiKaisaiYoteiJoho
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS gogitaiJoho
                 ON gogitaiJoho."gogitaiNo" = shinsakaiKaisaiYoteiJoho."gogitaiNo"
+               AND gogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+               AND gogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS shinsakaiKaisaiKekkaJoho
                 ON shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS shinsakaiKaisaiBashoJoho

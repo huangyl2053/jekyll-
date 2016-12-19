@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokujyo;
 
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -21,8 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 class NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor implements INinteiChosaTokusokuTaishoshaIchiranhyoEditor {
 
-    private final RString 市町村コード;
-    private final RString 市町村名称;
+    private final NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity;
     private static final RString タイトル = new RString("督促状発行対象者一覧");
     private static final RString 事業者名称タイトル = new RString("調査機関名称");
     private static final RString 事業者住所タイトル = new RString("調査機関住所");
@@ -38,13 +38,11 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor implements INinteiChosa
     /**
      * インスタンスを生成します。
      *
-     * @param 市町村コード 市町村コード(広域市町村コード)
-     * @param 市町村名称 市町村名称(広域市町村名称)
+     * @param item {@link NinteiChosaTokusokuTaishoshaIchiranhyoItem}
      */
     protected NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor(
-            RString 市町村コード, RString 市町村名称) {
-        this.市町村コード = 市町村コード;
-        this.市町村名称 = 市町村名称;
+            NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
+        this.entity = entity;
     }
 
     @Override
@@ -77,11 +75,11 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor implements INinteiChosa
     }
 
     private void edit市町村コード(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
-        source.cityCode = 市町村コード;
+        source.cityCode = entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue();
     }
 
     private void edit市町村名称(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
-        source.cityName = 市町村名称;
+        source.cityName = entity.getTemp_市町村名称();
     }
 
     private void edit事業者名称タイトル(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {

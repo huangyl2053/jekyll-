@@ -49,6 +49,10 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     private ShiryokuDiv Shiryoku;
     @JsonProperty("Choryoku")
     private ChoryokuDiv Choryoku;
+    @JsonProperty("btnBack")
+    private Button btnBack;
+    @JsonProperty("btnConfirm")
+    private Button btnConfirm;
     @JsonProperty("shinseishoKanriNo")
     private RString shinseishoKanriNo;
     @JsonProperty("recordNumber")
@@ -296,6 +300,42 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     @JsonProperty("Choryoku")
     public void setChoryoku(ChoryokuDiv Choryoku) {
         this.Choryoku = Choryoku;
+    }
+
+    /*
+     * getbtnBack
+     * @return btnBack
+     */
+    @JsonProperty("btnBack")
+    public Button getBtnBack() {
+        return btnBack;
+    }
+
+    /*
+     * setbtnBack
+     * @param btnBack btnBack
+     */
+    @JsonProperty("btnBack")
+    public void setBtnBack(Button btnBack) {
+        this.btnBack = btnBack;
+    }
+
+    /*
+     * getbtnConfirm
+     * @return btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public Button getBtnConfirm() {
+        return btnConfirm;
+    }
+
+    /*
+     * setbtnConfirm
+     * @param btnConfirm btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public void setBtnConfirm(Button btnConfirm) {
+        this.btnConfirm = btnConfirm;
     }
 
     /*

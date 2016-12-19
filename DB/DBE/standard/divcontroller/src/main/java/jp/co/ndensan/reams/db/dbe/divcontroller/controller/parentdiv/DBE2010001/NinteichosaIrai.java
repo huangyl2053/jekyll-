@@ -111,7 +111,6 @@ public class NinteichosaIrai {
     private static final RString CSVフォルダ名 = new RString("ChosaKekkaNyuryokuMobile");
     private static final RString 書庫化ファイル名 = new RString("ChosaKekkaNyuryokuMobile.zip");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 全て = new RString("3");
     private static final LockingKey 前排他ロックキー = new LockingKey("ShinseishoKanriNo");
 
     /**
@@ -150,6 +149,11 @@ public class NinteichosaIrai {
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnDataOutput();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            Message message = UrQuestionMessages.処理実行の確認.getMessage();
+            return ResponseData.of(requestDiv).addMessage(
+                new QuestionMessage(message.getCode(), message.evaluate(), ButtonSelectPattern.OKCancel)).respond();
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -395,6 +399,11 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
+        if (!ResponseHolder.isReRequest()) {
+            Message message = UrQuestionMessages.処理実行の確認.getMessage();
+            return ResponseData.of(requestDiv).addMessage(
+                new QuestionMessage(message.getCode(), message.evaluate(), ButtonSelectPattern.OKCancel)).respond();
+        }
         List<dgNinteiTaskList_Row> rowList = requestDiv.getDgNinteiTaskList().getSelectedItems();
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
         List<ShinseishoKanriNo> list = new ArrayList<>();
@@ -418,6 +427,24 @@ public class NinteichosaIrai {
      */
     public ResponseData onOkClose_btnIraishoToOutput(NinteichosaIraiDiv requestDiv) {
         getHandler(requestDiv).initDataGrid();
+        IkenshoPrintParameterModel model = DataPassingConverter.deserialize(requestDiv.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
+        if (model != null) {
+            List<ShinseishoKanriNo> kanriNo = model.get申請書管理番号リスト();
+            List<RString> kanriNoRString = new ArrayList<>();
+            for (ShinseishoKanriNo no : kanriNo) {
+                if (no != null && !no.isEmpty()) {
+                    kanriNoRString.add(no.value());
+                }
+            }
+            List<dgNinteiTaskList_Row> selected = new ArrayList<>();
+            for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getDataSource()) {
+                if (kanriNoRString.contains(row.getShinseishoKanriNo())) {
+                    selected.add(row);
+                }
+            }
+            requestDiv.getDgNinteiTaskList().setSelectedItems(selected);
+        }
+        requestDiv.setHiddenIuputModel(RString.EMPTY);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -456,6 +483,7 @@ public class NinteichosaIrai {
 
     private NinteichosaIraiItiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         NinteichosaIraiItiranCsvEntity data = new NinteichosaIraiItiranCsvEntity(
+            row.getJotai(),
             row.getShinseishoKanriNo(),
             row.getHokensha(),
             row.getNinteiShinseiDay().getValue() != null
@@ -465,9 +493,6 @@ public class NinteichosaIrai {
             row.getHihoShimei(),
             get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
             row.getShinseiKubunShinseiji(),
-            row.getChosaIraiKanryoDay().getValue() != null
-            ? row.getChosaIraiKanryoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
             row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
             row.getChosaIraishoHakkoDay().getValue() != null
             ? row.getChosaIraishoHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
@@ -982,11 +1007,12 @@ public class NinteichosaIrai {
     private void 要介護認定完了情報更新(List<dgNinteiTaskList_Row> 選択されたデータ) {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> 要介護認定完了情報Model
                                                              = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+        FlexibleDate today = FlexibleDate.getNowDate();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
             NinteiKanryoJohoIdentifier 要介護認定完了情報の識別子 = new NinteiKanryoJohoIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             NinteichosaIraiListManager.createInstance().save要介護認定完了情報(要介護認定完了情報Model.get(要介護認定完了情報の識別子).
-                createBuilderForEdit().set認定調査依頼完了年月日(FlexibleDate.getNowDate()).build().toEntity());
+                createBuilderForEdit().set認定調査依頼完了年月日(today).build().toEntity());
         }
     }
 
@@ -1018,7 +1044,7 @@ public class NinteichosaIrai {
         List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getDgNinteiTaskList().getSelectedItems();
         int tmp要割付人数 = 選択されたデータ.size();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            tmp要割付人数 = NinteichosaIraiManager.createInstance().調査機関自動割付処理(row.getHihoNumber(), row.getChikuCode(),
+            tmp要割付人数 = NinteichosaIraiManager.createInstance().調査機関自動割付処理(row.getGetShoKisaiHokenshaNo(), row.getChikuCode(),
                                                                           row.getShinseishoKanriNo(), tmp要割付人数, RString.EMPTY);
         }
         return tmp要割付人数;
@@ -1048,7 +1074,7 @@ public class NinteichosaIrai {
                 調査項目文言 = NinteichosaKomokuMapping09B.toValue(調査項目連番).get名称();
             }
         } catch (IllegalArgumentException ex) {
-
+            調査項目文言 = RString.EMPTY;
         }
         return 調査項目文言;
     }
@@ -1152,4 +1178,8 @@ public class NinteichosaIrai {
         return new NinteichosaIraiValidationHandler(div);
     }
 
+    private enum viewstateKeys {
+
+        選択値;
+    }
 }

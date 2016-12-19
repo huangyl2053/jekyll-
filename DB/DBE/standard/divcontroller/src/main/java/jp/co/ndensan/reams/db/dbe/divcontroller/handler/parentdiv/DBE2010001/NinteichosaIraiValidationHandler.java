@@ -43,8 +43,7 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnDataOutput() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(new RString(div.getTxtTotalCount().getValue().toString()))
-              && Integer.parseInt(div.getTxtTotalCount().getValue().toString()) > 0)) {
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
@@ -60,8 +59,7 @@ public class NinteichosaIraiValidationHandler {
     public ValidationMessageControlPairs 入力チェック_btnIraiAuto() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgNinteiTaskList_Row> 選択されたデータ = div.getDgNinteiTaskList().getSelectedItems();
-        if (!(!RString.isNullOrEmpty(new RString(div.getTxtTotalCount().getValue().toString()))
-              && Integer.parseInt(div.getTxtTotalCount().getValue().toString()) > 0)) {
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (選択されたデータ == null || 選択されたデータ.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));

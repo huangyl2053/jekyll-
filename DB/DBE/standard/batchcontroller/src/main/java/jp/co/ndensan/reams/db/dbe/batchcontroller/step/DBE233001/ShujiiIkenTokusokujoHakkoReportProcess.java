@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoReport;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShuturyokuJyoukenProcessParamter;
+import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoTokusokuTaishoshaIchiranhyoOutputJokenhyoEditor;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE233001.ShujiiIkenTokusokujoHakkoReportProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoHakkoRelateEntity;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -54,19 +55,11 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<ShujiiIkenTokusokujoHakkoRelateEntity> {
 
-    /**
-     * OUT_DATA_LISTです。
-     */
-    public static final RString OUT_DATA_LIST;
-    /**
-     * SHUJI_DATA_LISTです。
-     */
-    public static final RString SHUJI_DATA_LIST;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001."
             + "IDbe233001RelateMapper.select主治医意見書督促対象者一覧表ByKey");
 
-    private static final ReportId REPORT_DBE223002 = ReportIdDBE.DBE223002.getReportId();
+    private static final ReportId REPORT_DBE233002 = ReportIdDBE.DBE233002.getReportId();
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
@@ -77,10 +70,9 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> itemList;
     NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
     private boolean outputCsv;
-    private ShuturyokuJyoukenProcessParamter processPrm;
-    private static final RString CSV出力有無 = new RString("なし");
-    private static final RString CSVファイル名 = new RString("-");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("ShujiiIkenEucCsv"));
+    private ShujiiIkenTokusokujoHakkoReportProcessParameter processPrm;
+    private static final RString CSVファイル名 = new RString("主治医意見書督促対象者一覧表.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE223002"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString タイトル = new RString("督促状発行対象者一覧");
@@ -97,22 +89,12 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private static final RString 事業者名称 = new RString("事業者名称");
     private static final RString 事業者住所 = new RString("事業者住所");
     private static final RString 事業者電話番号 = new RString("事業者電話番号");
+    private static final RString 改頁キー = new RString("cityCode");
     private static int index = 1;
-
-    static {
-        OUT_DATA_LIST = new RString("outDataList");
-        SHUJI_DATA_LIST = new RString("shujiDataList");
-    }
-    private OutputParameter<List<RString>> outDataList;
-    private OutputParameter<List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>> shujiDataList;
-    private List<RString> shinseishoKanriNoList;
 
     @Override
     protected void initialize() {
         itemList = new ArrayList();
-        shinseishoKanriNoList = new ArrayList<>();
-        outDataList = new OutputParameter<>();
-        shujiDataList = new OutputParameter<>();
         outputCsv = processPrm.getTemp_CSV出力().equals(new RString("1"));
         super.initialize();
     }
@@ -124,13 +106,15 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBE223002.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBE233002.value())
+                .addBreak(new BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource>().simplePageBreaker(改頁キー))
+                .create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
         if (outputCsv) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                     UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = manager.getEucOutputDirectry();
-            eucFilePath = Path.combinePath(spoolWorkPath, new RString("ShujiiIkenEucCsv.csv"));
+            eucFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
             csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(false).build();
@@ -170,11 +154,10 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     @Override
     protected void process(ShujiiIkenTokusokujoHakkoRelateEntity entity) {
-        shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード()
                 .getColumnValue(),
                 entity.getTemp_市町村名称(),
-                processPrm.getTemp_保険者名称(),
+                entity.getTemp_市町村名称(),
                 entity.getTemp_被保険者番号(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
@@ -205,46 +188,24 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     @Override
     protected void afterExecute() {
-        set出力条件表();
-        outDataList.setValue(shinseishoKanriNoList);
-        shujiDataList.setValue(itemList);
+        ShujiiIkenshoTokusokuTaishoshaIchiranhyoOutputJokenhyoEditor outputJokenhyoEditor
+                = new ShujiiIkenshoTokusokuTaishoshaIchiranhyoOutputJokenhyoEditor(processPrm);
+        List<RString> 条件リスト = outputJokenhyoEditor.edit();
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        ReportOutputJokenhyoItem 帳票出力条件表パラメータ = new ReportOutputJokenhyoItem(
+                REPORT_DBE233002.value(),
+                association.get地方公共団体コード().value(),
+                association.get市町村名(),
+                new RString(JobContextHolder.getJobId()),
+                ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORT_DBE233002.value()),
+                new RString(batchWrite.getPageCount()),
+                outputCsv ? new RString("あり") : new RString("なし"),
+                outputCsv ? CSVファイル名 : RString.EMPTY,
+                条件リスト);
+        OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
         if (outputCsv) {
             csvWriter.close();
             manager.spool(eucFilePath);
         }
-    }
-
-    private void set出力条件表() {
-        List 出力条件 = new ArrayList();
-        出力条件.add(processPrm.getTemp_保険者コード());
-        出力条件.add(processPrm.getTemp_保険者名称());
-        出力条件.add(processPrm.getTemp_主治医医療機関コード());
-        出力条件.add(processPrm.getTemp_主治医コード());
-        出力条件.add(processPrm.getTemp_基準日() == null ? RString.EMPTY : new RString(processPrm.getTemp_基準日().toString()));
-        出力条件.add(processPrm.getTemp_主治医意見書督促期限日数() == null ? RString.EMPTY
-                : new RString(processPrm.getTemp_主治医意見書督促期限日数().toString()));
-        出力条件.add(processPrm.getTemp_主治医意見書督促状());
-        出力条件.add(processPrm.getTemp_主治医意見書督促対象者一覧表());
-        出力条件.add(processPrm.getTemp_CSV出力());
-        出力条件.add(processPrm.getTemp_印刷済対象者());
-        出力条件.add(processPrm.getTemp_発行履歴());
-        出力条件.add(new RString(String.valueOf(processPrm.getTemp_督促方法())));
-        出力条件.add(processPrm.getTemp_督促メモ());
-        出力条件.add(processPrm.getTemp_督促日() == null ? RString.EMPTY : new RString(processPrm.getTemp_督促日().toString()));
-        出力条件.add(processPrm.getTemp_印刷期間開始日() == null ? RString.EMPTY : new RString(processPrm.getTemp_印刷期間開始日().toString()));
-        出力条件.add(processPrm.getTemp_印刷期間終了日() == null ? RString.EMPTY : new RString(processPrm.getTemp_印刷期間終了日().toString()));
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem 帳票出力条件表パラメータ
-                = new ReportOutputJokenhyoItem(
-                        REPORT_DBE223002.value(),
-                        association.getLasdecCode_().getColumnValue(),
-                        association.get市町村名(),
-                        new RString("【ジョブ番号】").concat(String.valueOf(JobContextHolder.getJobId())),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORT_DBE223002.value()),
-                        new RString(String.valueOf(reportSourceWriter.pageCount().value())),
-                        CSV出力有無,
-                        CSVファイル名,
-                        出力条件);
-        OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
     }
 }

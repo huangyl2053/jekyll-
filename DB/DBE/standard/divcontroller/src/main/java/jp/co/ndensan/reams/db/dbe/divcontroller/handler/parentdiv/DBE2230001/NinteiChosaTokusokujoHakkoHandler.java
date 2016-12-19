@@ -9,8 +9,10 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosa.DbeBusinessConfigKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -48,6 +50,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
     public void onLoad() {
         initializtion();
         onChange_radChohyo();
+        changeHokensha();
     }
 
     /**
@@ -133,4 +136,15 @@ public class NinteiChosaTokusokujoHakkoHandler {
         div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().setValue(RDate.getNowDate());
     }
 
+    /**
+     * 保険者の変更に伴う画面の変更です。
+     */
+    public void changeHokensha() {
+        boolean is全市町村 = HokenshaSummary.EMPTY.equals(div.getCcdHokensha().getSelectedItem());
+        div.getCcdItakusakiAndChosain().setDisabled(is全市町村);
+        div.getCcdItakusakiAndChosain().onClickBtnClear();
+        div.getCcdItakusakiAndChosain().setHdnShinseishoKanriNo(ShinseishoKanriNo.EMPTY.value());
+        div.getCcdItakusakiAndChosain().setHdnDatabaseSubGyomuCode(SubGyomuCode.DBE認定支援.value());
+        div.getCcdItakusakiAndChosain().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
+    }
 }

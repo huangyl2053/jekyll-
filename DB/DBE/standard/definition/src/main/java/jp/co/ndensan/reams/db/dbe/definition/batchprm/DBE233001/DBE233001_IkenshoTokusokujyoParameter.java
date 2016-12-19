@@ -106,8 +106,8 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
      *
      * @return 出力条件表のパラメータ
      */
-    public ShuturyokuJyoukenProcessParamter toShuturyokuJyoukenProcessParamter() {
-        ShuturyokuJyoukenProcessParamter param = new ShuturyokuJyoukenProcessParamter();
+    public ShujiiIkenTokusokujoHakkoReportProcessParameter toShuturyokuJyoukenProcessParamter() {
+        ShujiiIkenTokusokujoHakkoReportProcessParameter param = new ShujiiIkenTokusokujoHakkoReportProcessParameter();
         param.setTemp_保険者コード(this.temp_保険者コード);
         param.setTemp_主治医医療機関コード(this.temp_主治医医療機関コード);
         param.setTemp_主治医コード(this.temp_主治医コード);

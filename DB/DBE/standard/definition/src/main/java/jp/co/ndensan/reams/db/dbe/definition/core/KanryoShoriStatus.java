@@ -39,6 +39,24 @@ public enum KanryoShoriStatus {
     }
 
     /**
+     * 列挙体の名称を取得します。
+     *
+     * @return 名称
+     */
+    public RString toRString() {
+        return new RString(this.toString());
+    }
+
+    /**
+     * コードを取得します。
+     *
+     * @return コード
+     */
+    public RString getコード() {
+        return this.code;
+    }
+
+    /**
      * 略称を取得します。
      *
      * @return 略称
