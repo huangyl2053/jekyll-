@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001.DBE525001SelectC
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001.DBE525001_HanteiKekkaShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250001.HanteiKekkaJohoShutsuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250001.HanteiKekkaJohoShutsuryokuValidationHandler;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
@@ -99,6 +100,7 @@ public class HanteiKekkaJohoShutsuryoku {
         } else {
             parameter.setPublish_KekkaTsuchiIchiran(false);
         }
+        parameter.setUserId(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
         return ResponseData.of(parameter).respond();
     }
 

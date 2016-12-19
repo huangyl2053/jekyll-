@@ -73,7 +73,8 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         List<RString> 処理状態区分 = new ArrayList<>();
         処理状態区分.add(ShoriJotaiKubun.通常.getコード());
         処理状態区分.add(ShoriJotaiKubun.延期.getコード());
-        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        ShichosonSecurityJoho shichosonSecurityJoho
+                = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, processParameter.getUserId());
         RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
         if (DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             出力対象 = DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);

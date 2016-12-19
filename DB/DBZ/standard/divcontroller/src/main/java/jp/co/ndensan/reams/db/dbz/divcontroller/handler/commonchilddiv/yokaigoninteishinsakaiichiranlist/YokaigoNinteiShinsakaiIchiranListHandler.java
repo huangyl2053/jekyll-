@@ -117,7 +117,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             } else {
                 row.setShiryoSakuseiKubun(RString.EMPTY);
             }
-            if (!shinsakaiKaisai.get介護認定審査会進捗状況().isNullOrEmpty()) {
+            if (!RString.isNullOrEmpty(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                 row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get名称());
             } else {
                 row.setShinchokuJokyo(RString.EMPTY);
@@ -158,7 +158,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         List<RString> list = new ArrayList<>();
         for (dgShinsakaiIchiran_Row row : rowList) {
             RString 合議体名称 = row.getShinsakaiMeisho();
-            if (row.getSelected() && !合議体名称.isNullOrEmpty()) {
+            if (row.getSelected() && !RString.isNullOrEmpty(合議体名称)) {
                 list.add(合議体名称.substring(1, 合議体名称.length() - LENGTH_4));
             }
         }
