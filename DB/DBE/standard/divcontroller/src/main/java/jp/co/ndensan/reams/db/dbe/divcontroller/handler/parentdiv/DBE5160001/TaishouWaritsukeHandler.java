@@ -298,7 +298,7 @@ public class TaishouWaritsukeHandler {
             div.getTxtWaritsukeNinzu().setValue(new Decimal(waritsukeHead.get割付人数()));
             RString 進捗状況;
             try {
-                進捗状況 = ShinsakaiShinchokuJokyo.toValue(waritsukeHead.get進捗状況().getColumnValue()).get名称();
+                進捗状況 = ShinsakaiShinchokuJokyo.toValue(waritsukeHead.get進捗状況().getColumnValue()).get画面表示名称();
             } catch (IllegalArgumentException e) {
                 進捗状況 = RString.EMPTY;
             }
