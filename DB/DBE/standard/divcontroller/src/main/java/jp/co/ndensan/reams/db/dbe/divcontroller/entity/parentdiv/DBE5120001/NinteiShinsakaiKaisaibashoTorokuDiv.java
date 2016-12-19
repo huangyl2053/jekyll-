@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,9 +15,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * NinteiShinsakaiKaisaibashoToroku のクラスファイル 
  * 
+ * @author 自動生成
  */
 public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -104,6 +106,26 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtDispMax() {
+        return this.getShinsakaiKaisaibashokensaku().getTxtDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtDispMax(TextBoxNum txtDispMax) {
+        this.getShinsakaiKaisaibashokensaku().setTxtDispMax(txtDispMax);
+    }
+
+    @JsonIgnore
+    public Button getBtnClear() {
+        return this.getShinsakaiKaisaibashokensaku().getBtnClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnClear(Button btnClear) {
+        this.getShinsakaiKaisaibashokensaku().setBtnClear(btnClear);
+    }
+
+    @JsonIgnore
     public Button getBtnKensaku() {
         return this.getShinsakaiKaisaibashokensaku().getBtnKensaku();
     }
@@ -184,11 +206,6 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ICodeInputDiv getCcdKaisaiChikuCode() {
-        return this.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
-    }
-
-    @JsonIgnore
     public Button getBtnupdate() {
         return this.getShinakaiKaisaIbashoShosai().getBtnupdate();
     }
@@ -206,6 +223,11 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnback(Button btnback) {
         this.getShinakaiKaisaIbashoShosai().setBtnback(btnback);
+    }
+
+    @JsonIgnore
+    public ICodeInputDiv getCcdKaisaiChikuCode() {
+        return this.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
     }
 
     // </editor-fold>
