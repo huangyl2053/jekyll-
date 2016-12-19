@@ -477,7 +477,7 @@
             AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
             AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+            AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
             AND DbT5105."maskingKanryoYMD" IS NOT NULL
             AND DbT5105."centerSoshinYMD" IS NULL
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
