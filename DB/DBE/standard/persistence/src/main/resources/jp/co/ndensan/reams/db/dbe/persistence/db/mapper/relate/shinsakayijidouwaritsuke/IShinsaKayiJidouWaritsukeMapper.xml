@@ -40,6 +40,8 @@
         INNER JOIN
         rgdb."DbT5591GogitaiJoho" as DbT5591
         ON DbT5591."gogitaiNo" = DbT5501."gogitaiNo"
+        AND DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  DbT5501."shinsakaiKaisaiYoteiYMD"
+        AND DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  DbT5501."shinsakaiKaisaiYoteiYMD"
         LEFT JOIN
         rgdb."DbT5592ShinsakaiKaisaiBashoJoho" as DbT5592
         ON DbT5592."shinsakaiKaisaiBashoCode" = DbT5501."shinsakaiKaisaiYoteiBashoCode"
@@ -54,6 +56,6 @@
              #{item}
         </foreach>
         ORDER BY
-        DbT5501."shinsakaiKaisaiNo" ASC
+          DbT5501."shinsakaiKaisaiYoteiYMD" DESC, DbT5501."shinsakaiKaisaiNo" ASC
     </select>
 </mapper>
