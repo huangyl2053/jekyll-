@@ -99,23 +99,17 @@ public class GetsureiShori {
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, 基準日, SubGyomuCode.DBU介護統計報告);
 
         YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(状態区分, toDecimal(最大取得件数));
-        SearchResult<GeTuReiSyoRiBusiness> 検索結果 = YokaigoNinteiTaskListFinder.createInstance().get月例処理モード(検索条件);
+        YokaigoNinteiTaskListFinder finder = YokaigoNinteiTaskListFinder.createInstance();
+        SearchResult<GeTuReiSyoRiBusiness> 検索結果 = finder.get月例処理モード(検索条件);
+        ShinSaKaiBusiness 認定完了情報 = finder.get前月例処理(検索条件);
         getHandler(div).initialize(状態区分, toDecimal(最大取得件数), toDecimal(最大取得件数上限));
         getHandler(div).set対象者一覧(検索結果);
         getHandler(div).set検索結果表示時の制御(状態区分);
-        if (検索結果 == null) {
+
+        if (認定完了情報 == null || 認定完了情報.get要介護認定完了情報Lsit() == null || 認定完了情報.get要介護認定完了情報Lsit().isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         } else {
-            ShinSaKaiBusiness 認定完了情報 = YokaigoNinteiTaskListFinder.createInstance().get前月例処理(検索条件);
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(認定完了情報.get要介護認定完了情報Lsit()));
-        }
-        List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgNinteiTaskList().getDataSource();
-        for (dgNinteiTaskList_Row row : dgNinteiTaskList_RowList) {
-            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-                    new RString("申請書管理番号"), row.getShinseishoKanriNo()));
-            personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("被保険者番号"),
-                    row.getHihoNumber()));
-            AccessLogger.log(AccessLogType.照会, personalData);
         }
         return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
@@ -130,13 +124,15 @@ public class GetsureiShori {
         RString 状態区分 = div.getRadJyotaiKubun().getSelectedKey();
         Decimal 最大取得件数 = div.getTxtDispMax().getValue();
         YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(状態区分, 最大取得件数);
-        SearchResult<GeTuReiSyoRiBusiness> 検索結果 = YokaigoNinteiTaskListFinder.createInstance().get月例処理モード(検索条件);
+        YokaigoNinteiTaskListFinder finder = YokaigoNinteiTaskListFinder.createInstance();
+        SearchResult<GeTuReiSyoRiBusiness> 検索結果 = finder.get月例処理モード(検索条件);
+        ShinSaKaiBusiness 認定完了情報 = finder.get前月例処理(検索条件);
         getHandler(div).set対象者一覧(検索結果);
         getHandler(div).set検索結果表示時の制御(状態区分);
-        if (検索結果 == null) {
+
+        if (認定完了情報 == null || 認定完了情報.get要介護認定完了情報Lsit() == null || 認定完了情報.get要介護認定完了情報Lsit().isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         } else {
-            ShinSaKaiBusiness 認定完了情報 = YokaigoNinteiTaskListFinder.createInstance().get前月例処理(検索条件);
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(認定完了情報.get要介護認定完了情報Lsit()));
         }
         return ResponseData.of(div).respond();
