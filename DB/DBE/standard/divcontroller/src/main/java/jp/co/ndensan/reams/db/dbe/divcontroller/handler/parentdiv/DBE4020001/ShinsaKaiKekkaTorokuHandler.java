@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
-import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -53,7 +52,7 @@ public class ShinsaKaiKekkaTorokuHandler {
 
     private final ShinsaKaiKekkaTorokuDiv div;
     private final RString 使用 = new RString("1");
-    private final String 状態 = "状態";
+    private final String 状態 = "jotai";
     private static final RString 未処理 = new RString("未");
     private static final RString 完了可能 = new RString("可");
     private static final RString KEY0 = new RString("0");
@@ -103,7 +102,7 @@ public class ShinsaKaiKekkaTorokuHandler {
                     get二次判定モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分)).records();
             if (!二次判定List.isEmpty()) {
-                ShinSaKaiBusiness 前二次判定Model = YokaigoNinteiTaskListFinder.createInstance().
+                ShinSaKaiBusiness 前二次判定Model = ShinsakaiKekkaTorokuFinder.createInstance().
                         get前二次判定(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分));
                 ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前二次判定Model.get要介護認定完了情報Lsit()));
@@ -211,14 +210,9 @@ public class ShinsaKaiKekkaTorokuHandler {
     }
 
     private void 活性非活性の設定() {
+        div.getBtnShinsakaikanryooutput().setDisplayNone(false);
         RDate 適用基準日 = RDate.getNowDate();
-        RString モバイル審査会使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会使用有無, 適用基準日, SubGyomuCode.DBE認定支援);
         RString 審査会結果OCR使用有無 = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, 適用基準日, SubGyomuCode.DBE認定支援);
-        if (使用.equals(モバイル審査会使用有無)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnMobileToroku"), false);
-        } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnMobileToroku"), true);
-        }
         if (使用.equals(審査会結果OCR使用有無)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnOCRToroku"), false);
         } else {
@@ -269,9 +263,9 @@ public class ShinsaKaiKekkaTorokuHandler {
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);
         }
-        div.getTxtMishoriCount().setValue(new RString(String.valueOf(notCount)));
-        div.getTxtTotalCount().setValue(new RString(String.valueOf(二次判定List.size())));
-        div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
+        div.getTxtMishoriCount().setValue(new Decimal(notCount));
+        div.getTxtTotalCount().setValue(new Decimal(二次判定List.size()));
+        div.getTxtCompleteCount().setValue(new Decimal(completeCount));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
     

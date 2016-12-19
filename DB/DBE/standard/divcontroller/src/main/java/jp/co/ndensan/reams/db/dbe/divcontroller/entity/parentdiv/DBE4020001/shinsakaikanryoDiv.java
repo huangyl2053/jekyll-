@@ -24,13 +24,15 @@ public class shinsakaikanryoDiv extends Panel {
     @JsonProperty("radTaishosyaJotai")
     private RadioButton radTaishosyaJotai;
     @JsonProperty("txtTotalCount")
-    private TextBox txtTotalCount;
+    private TextBoxNum txtTotalCount;
     @JsonProperty("txtCompleteCount")
-    private TextBox txtCompleteCount;
+    private TextBoxNum txtCompleteCount;
     @JsonProperty("txtMishoriCount")
-    private TextBox txtMishoriCount;
+    private TextBoxNum txtMishoriCount;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
+    @JsonProperty("txtMaxKensu")
+    private TextBoxNum txtMaxKensu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,7 +63,7 @@ public class shinsakaikanryoDiv extends Panel {
      * @return txtTotalCount
      */
     @JsonProperty("txtTotalCount")
-    public TextBox getTxtTotalCount() {
+    public TextBoxNum getTxtTotalCount() {
         return txtTotalCount;
     }
 
@@ -70,7 +72,7 @@ public class shinsakaikanryoDiv extends Panel {
      * @param txtTotalCount txtTotalCount
      */
     @JsonProperty("txtTotalCount")
-    public void setTxtTotalCount(TextBox txtTotalCount) {
+    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.txtTotalCount = txtTotalCount;
     }
 
@@ -79,7 +81,7 @@ public class shinsakaikanryoDiv extends Panel {
      * @return txtCompleteCount
      */
     @JsonProperty("txtCompleteCount")
-    public TextBox getTxtCompleteCount() {
+    public TextBoxNum getTxtCompleteCount() {
         return txtCompleteCount;
     }
 
@@ -88,7 +90,7 @@ public class shinsakaikanryoDiv extends Panel {
      * @param txtCompleteCount txtCompleteCount
      */
     @JsonProperty("txtCompleteCount")
-    public void setTxtCompleteCount(TextBox txtCompleteCount) {
+    public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.txtCompleteCount = txtCompleteCount;
     }
 
@@ -97,7 +99,7 @@ public class shinsakaikanryoDiv extends Panel {
      * @return txtMishoriCount
      */
     @JsonProperty("txtMishoriCount")
-    public TextBox getTxtMishoriCount() {
+    public TextBoxNum getTxtMishoriCount() {
         return txtMishoriCount;
     }
 
@@ -106,7 +108,7 @@ public class shinsakaikanryoDiv extends Panel {
      * @param txtMishoriCount txtMishoriCount
      */
     @JsonProperty("txtMishoriCount")
-    public void setTxtMishoriCount(TextBox txtMishoriCount) {
+    public void setTxtMishoriCount(TextBoxNum txtMishoriCount) {
         this.txtMishoriCount = txtMishoriCount;
     }
 
@@ -126,6 +128,24 @@ public class shinsakaikanryoDiv extends Panel {
     @JsonProperty("dgNinteiTaskList")
     public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.dgNinteiTaskList = dgNinteiTaskList;
+    }
+
+    /*
+     * gettxtMaxKensu
+     * @return txtMaxKensu
+     */
+    @JsonProperty("txtMaxKensu")
+    public TextBoxNum getTxtMaxKensu() {
+        return txtMaxKensu;
+    }
+
+    /*
+     * settxtMaxKensu
+     * @param txtMaxKensu txtMaxKensu
+     */
+    @JsonProperty("txtMaxKensu")
+    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.txtMaxKensu = txtMaxKensu;
     }
 
     // </editor-fold>
