@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -109,58 +107,93 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdTaskList() {
-        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getCcdTaskList();
+    public RadioButton getRadShoriJyotai() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getRadShoriJyotai();
     }
 
     @JsonIgnore
-    public chosairaiselectDiv getChosairaiselect() {
-        return this.getNinteichosaIraiList().getChosairaiselect();
+    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
     @JsonIgnore
-    public void  setChosairaiselect(chosairaiselectDiv chosairaiselect) {
-        this.getNinteichosaIraiList().setChosairaiselect(chosairaiselect);
+    public TextBoxNum getTxtTotalCount() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getTxtTotalCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtTotalCount(txtTotalCount);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtCompleteCount() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getTxtCompleteCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtCompleteCount(txtCompleteCount);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtNoUpdate() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getTxtNoUpdate();
+    }
+
+    @JsonIgnore
+    public void  setTxtNoUpdate(TextBoxNum txtNoUpdate) {
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtNoUpdate(txtNoUpdate);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore
     public ButtonDownLoad getBtndataoutput() {
-        return this.getNinteichosaIraiList().getChosairaiselect().getBtndataoutput();
+        return this.getNinteichosaIraiList().getBtndataoutput();
     }
 
     @JsonIgnore
     public void  setBtndataoutput(ButtonDownLoad btndataoutput) {
-        this.getNinteichosaIraiList().getChosairaiselect().setBtndataoutput(btndataoutput);
+        this.getNinteichosaIraiList().setBtndataoutput(btndataoutput);
     }
 
     @JsonIgnore
     public Button getBtniraiauto() {
-        return this.getNinteichosaIraiList().getChosairaiselect().getBtniraiauto();
+        return this.getNinteichosaIraiList().getBtniraiauto();
     }
 
     @JsonIgnore
     public void  setBtniraiauto(Button btniraiauto) {
-        this.getNinteichosaIraiList().getChosairaiselect().setBtniraiauto(btniraiauto);
+        this.getNinteichosaIraiList().setBtniraiauto(btniraiauto);
     }
 
     @JsonIgnore
     public ButtonDownLoad getBtnchosadataoutput() {
-        return this.getNinteichosaIraiList().getChosairaiselect().getBtnchosadataoutput();
+        return this.getNinteichosaIraiList().getBtnchosadataoutput();
     }
 
     @JsonIgnore
     public void  setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
-        this.getNinteichosaIraiList().getChosairaiselect().setBtnchosadataoutput(btnchosadataoutput);
+        this.getNinteichosaIraiList().setBtnchosadataoutput(btnchosadataoutput);
     }
 
     @JsonIgnore
     public ButtonDialog getBtnTaOutput() {
-        return this.getNinteichosaIraiList().getChosairaiselect().getBtnTaOutput();
+        return this.getNinteichosaIraiList().getBtnTaOutput();
     }
 
     @JsonIgnore
     public void  setBtnTaOutput(ButtonDialog btnTaOutput) {
-        this.getNinteichosaIraiList().getChosairaiselect().setBtnTaOutput(btnTaOutput);
+        this.getNinteichosaIraiList().setBtnTaOutput(btnTaOutput);
     }
 
     @JsonIgnore

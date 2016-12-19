@@ -133,6 +133,15 @@ public class CyoSaiRaiBusiness {
     }
 
     /**
+     * 証記載保険番号を返します。
+     *
+     * @return 証記載保険番号
+     */
+    public RString get証記載保険番号() {
+        return entity.getShoKisaiHokenshaNo();
+    }
+
+    /**
      * 入所施設を返します。
      *
      * @return 入所施設

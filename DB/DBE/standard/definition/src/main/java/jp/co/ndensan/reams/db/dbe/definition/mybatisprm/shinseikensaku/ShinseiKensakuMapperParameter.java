@@ -279,6 +279,10 @@ public class ShinseiKensakuMapperParameter {
     private boolean useGeninShikkan;
     // 画面詳細条件の完了情報を入力する場合
     private boolean useNinteiKanryoJoho;
+    //申請書管理番号
+    private RString shinseishoKanriNo;
+    //主治医意見書作成依頼履歴番号
+    private int rirekiNo;
 
     /**
      * 検索に用いる被保険者氏名を設定します。 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。

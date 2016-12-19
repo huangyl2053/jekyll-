@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -54,7 +55,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
 
     private static final ReportId REPORT_DBE223001 = ReportIdDBE.DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo.getReportId();
     private int 帳票データの行番号 = 1;
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE223002");
     private static final RString CSVファイル名 = new RString("認定調査督促対象者一覧表.csv");
     private static final RString CSVタイトル = new RString("督促状発行対象者一覧");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
@@ -64,6 +65,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
+    private static final RString 改頁キー = new RString("cityCode");
 
     private RString csvFilePath;
     private FileSpoolManager fileSpoolManager;
@@ -89,15 +91,19 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBE223001.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBE223001.value())
+                .addBreak(new BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource>().simplePageBreaker(改頁キー))
+                .create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
 
-        fileSpoolManager = new FileSpoolManager(
-                UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        csvFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
-        csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).canAppend(false)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build();
+        if (parameter.isCsv出力_選択された()) {
+            fileSpoolManager = new FileSpoolManager(
+                    UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
+            csvFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
+            csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).canAppend(false)
+                    .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build();
+        }
     }
 
     @Override
@@ -139,8 +145,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
 
     @Override
     protected void afterExecute() {
-        csvWriter.close();
-        if (!parameter.isCsv出力_選択された()) {
+        if (parameter.isCsv出力_選択された()) {
+            csvWriter.close();
             fileSpoolManager.spool(csvFilePath);
         }
     }

@@ -7,10 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -42,7 +41,7 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 存在チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getCcdTaskList().一覧件数())) {
+        if (div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.存在チェック));
         }
         return validPairs;
@@ -55,7 +54,7 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 選択チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getCcdTaskList().getCheckbox() == null || div.getCcdTaskList().getCheckbox().isEmpty()) {
+        if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.対象行を選択チェック));
         }
         return validPairs;
@@ -68,7 +67,7 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 完了処理事前チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
+        List<dgNinteiTaskList_Row> 選択データ = div.getDgNinteiTaskList().getSelectedItems();
         for (dgNinteiTaskList_Row データ : 選択データ) {
             if (データ.getNijihanteiKekkaToroku().getValue() == null) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.完了処理事前チェック));

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaitakusakichiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class ChosaitakusakichiranDiv extends Panel {
     private Button btnInsert;
     @JsonProperty("btnOutputCsv")
     private ButtonDownLoad btnOutputCsv;
+    @JsonProperty("btnOutputCsvCheck")
+    private Button btnOutputCsvCheck;
     @JsonProperty("dgChosainIchiran")
     private DataGrid<dgChosainIchiran_Row> dgChosainIchiran;
 
@@ -68,6 +70,24 @@ public class ChosaitakusakichiranDiv extends Panel {
     @JsonProperty("btnOutputCsv")
     public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
         this.btnOutputCsv = btnOutputCsv;
+    }
+
+    /*
+     * getbtnOutputCsvCheck
+     * @return btnOutputCsvCheck
+     */
+    @JsonProperty("btnOutputCsvCheck")
+    public Button getBtnOutputCsvCheck() {
+        return btnOutputCsvCheck;
+    }
+
+    /*
+     * setbtnOutputCsvCheck
+     * @param btnOutputCsvCheck btnOutputCsvCheck
+     */
+    @JsonProperty("btnOutputCsvCheck")
+    public void setBtnOutputCsvCheck(Button btnOutputCsvCheck) {
+        this.btnOutputCsvCheck = btnOutputCsvCheck;
     }
 
     /*

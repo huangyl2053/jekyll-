@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +26,8 @@ public class ShinsakaiTorokuDiv extends Panel {
      */
     @JsonProperty("shinsakaitorokuichiran")
     private shinsakaitorokuichiranDiv shinsakaitorokuichiran;
-    @JsonProperty("shinsakaitorokukanryoselect")
-    private shinsakaitorokukanryoselectDiv shinsakaitorokukanryoselect;
+    @JsonProperty("btnShinsakekkakanryooutput")
+    private ButtonDownLoad btnShinsakekkakanryooutput;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
 
@@ -58,21 +56,21 @@ public class ShinsakaiTorokuDiv extends Panel {
     }
 
     /*
-     * getshinsakaitorokukanryoselect
-     * @return shinsakaitorokukanryoselect
+     * getbtnShinsakekkakanryooutput
+     * @return btnShinsakekkakanryooutput
      */
-    @JsonProperty("shinsakaitorokukanryoselect")
-    public shinsakaitorokukanryoselectDiv getShinsakaitorokukanryoselect() {
-        return shinsakaitorokukanryoselect;
+    @JsonProperty("btnShinsakekkakanryooutput")
+    public ButtonDownLoad getBtnShinsakekkakanryooutput() {
+        return btnShinsakekkakanryooutput;
     }
 
     /*
-     * setshinsakaitorokukanryoselect
-     * @param shinsakaitorokukanryoselect shinsakaitorokukanryoselect
+     * setbtnShinsakekkakanryooutput
+     * @param btnShinsakekkakanryooutput btnShinsakekkakanryooutput
      */
-    @JsonProperty("shinsakaitorokukanryoselect")
-    public void setShinsakaitorokukanryoselect(shinsakaitorokukanryoselectDiv shinsakaitorokukanryoselect) {
-        this.shinsakaitorokukanryoselect = shinsakaitorokukanryoselect;
+    @JsonProperty("btnShinsakekkakanryooutput")
+    public void setBtnShinsakekkakanryooutput(ButtonDownLoad btnShinsakekkakanryooutput) {
+        this.btnShinsakekkakanryooutput = btnShinsakekkakanryooutput;
     }
 
     /*
@@ -97,18 +95,53 @@ public class ShinsakaiTorokuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdTaskList() {
-        return this.getShinsakaitorokuichiran().getCcdTaskList();
+    public RadioButton getRadTaishoshaJotai() {
+        return this.getShinsakaitorokuichiran().getRadTaishoshaJotai();
     }
 
     @JsonIgnore
-    public ButtonDownLoad getBtnshinsakekkakanryooutput() {
-        return this.getShinsakaitorokukanryoselect().getBtnshinsakekkakanryooutput();
+    public void  setRadTaishoshaJotai(RadioButton radTaishoshaJotai) {
+        this.getShinsakaitorokuichiran().setRadTaishoshaJotai(radTaishoshaJotai);
     }
 
     @JsonIgnore
-    public void  setBtnshinsakekkakanryooutput(ButtonDownLoad btnshinsakekkakanryooutput) {
-        this.getShinsakaitorokukanryoselect().setBtnshinsakekkakanryooutput(btnshinsakekkakanryooutput);
+    public TextBox getTxtTotalCount() {
+        return this.getShinsakaitorokuichiran().getTxtTotalCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtTotalCount(TextBox txtTotalCount) {
+        this.getShinsakaitorokuichiran().setTxtTotalCount(txtTotalCount);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtCompleteCount() {
+        return this.getShinsakaitorokuichiran().getTxtCompleteCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtCompleteCount(TextBox txtCompleteCount) {
+        this.getShinsakaitorokuichiran().setTxtCompleteCount(txtCompleteCount);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtMishoriCount() {
+        return this.getShinsakaitorokuichiran().getTxtMishoriCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtMishoriCount(TextBox txtMishoriCount) {
+        this.getShinsakaitorokuichiran().setTxtMishoriCount(txtMishoriCount);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getShinsakaitorokuichiran().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getShinsakaitorokuichiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore

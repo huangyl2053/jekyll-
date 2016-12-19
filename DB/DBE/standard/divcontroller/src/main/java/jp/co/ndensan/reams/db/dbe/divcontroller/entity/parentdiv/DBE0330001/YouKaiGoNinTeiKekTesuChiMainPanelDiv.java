@@ -4,26 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * YouKaiGoNinTeiKekTesuChiMainPanel のクラスファイル
- *
+ * YouKaiGoNinTeiKekTesuChiMainPanel のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -126,7 +120,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNijiHanteiKikan(TextBoxDateRange txtNijiHanteiKikan) {
+    public void  setTxtNijiHanteiKikan(TextBoxDateRange txtNijiHanteiKikan) {
         this.getSearchConditionPanel().setTxtNijiHanteiKikan(txtNijiHanteiKikan);
     }
 
@@ -136,7 +130,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
+    public void  setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
         this.getSearchConditionPanel().setRadKekkaTsuchiOutputTaisho(radKekkaTsuchiOutputTaisho);
     }
 
@@ -146,7 +140,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtDispMax(TextBoxNum txtDispMax) {
+    public void  setTxtDispMax(TextBoxNum txtDispMax) {
         this.getSearchConditionPanel().setTxtDispMax(txtDispMax);
     }
 
@@ -156,18 +150,8 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClear(Button btnClear) {
+    public void  setBtnClear(Button btnClear) {
         this.getSearchConditionPanel().setBtnClear(btnClear);
-    }
-
-    @JsonIgnore
-    public Button getBtnSearch() {
-        return this.getSearchConditionPanel().getBtnSearch();
-    }
-
-    @JsonIgnore
-    public void setBtnSearch(Button btnSearch) {
-        this.getSearchConditionPanel().setBtnSearch(btnSearch);
     }
 
     @JsonIgnore
@@ -181,7 +165,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgDoctorSelection(DataGrid<dgDoctorSelection_Row> dgDoctorSelection) {
+    public void  setDgDoctorSelection(DataGrid<dgDoctorSelection_Row> dgDoctorSelection) {
         this.getDoctorSelectionPanel().setDgDoctorSelection(dgDoctorSelection);
     }
 
@@ -191,7 +175,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgResultList(DataGrid<dgResultList_Row> dgResultList) {
+    public void  setDgResultList(DataGrid<dgResultList_Row> dgResultList) {
         this.getResultListPanel().setDgResultList(dgResultList);
     }
 
@@ -201,7 +185,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiJokyoTeikyoYMD(TextBoxDate txtNinteiJokyoTeikyoYMD) {
+    public void  setTxtNinteiJokyoTeikyoYMD(TextBoxDate txtNinteiJokyoTeikyoYMD) {
         this.getPrintPanel().setTxtNinteiJokyoTeikyoYMD(txtNinteiJokyoTeikyoYMD);
     }
 
@@ -211,7 +195,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadPrintCondition(RadioButton radPrintCondition) {
+    public void  setRadPrintCondition(RadioButton radPrintCondition) {
         this.getPrintPanel().setRadPrintCondition(radPrintCondition);
     }
 

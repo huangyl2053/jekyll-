@@ -502,16 +502,6 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnKozaJohoToroku() {
-        return this.getRenrakusakiKinyuKikan().getBtnKozaJohoToroku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKozaJohoToroku(ButtonDialog btnKozaJohoToroku) {
-        this.getRenrakusakiKinyuKikan().setBtnKozaJohoToroku(btnKozaJohoToroku);
-    }
-
-    @JsonIgnore
     public Button getBtnShozokuKikanAdd() {
         return this.getShozokuKikanIchiran().getBtnShozokuKikanAdd();
     }

@@ -95,6 +95,7 @@ public class ShujiiIryokikanShujiiIchiranhyoReportSource implements IReportSourc
      */
     public enum ReportSourceFields {
 
+        cityCode,
         listIchiranhyoUpper_1;
     }
 }

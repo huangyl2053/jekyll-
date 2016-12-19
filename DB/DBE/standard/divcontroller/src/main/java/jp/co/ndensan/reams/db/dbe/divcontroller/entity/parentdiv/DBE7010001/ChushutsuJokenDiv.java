@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ChushutsuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,16 +26,14 @@ public class ChushutsuJokenDiv extends Panel {
      */
     @JsonProperty("chkHihokenshaKubun")
     private CheckBoxList chkHihokenshaKubun;
-    @JsonProperty("radKubun")
-    private RadioButton radKubun;
-    @JsonProperty("ddlGogitaiBango")
-    private DropDownList ddlGogitaiBango;
     @JsonProperty("txtNengetsu")
     private TextBoxFlexibleYearMonth txtNengetsu;
-    @JsonProperty("txtKijyunYMD")
-    private TextBoxDate txtKijyunYMD;
+    @JsonProperty("ddlGogitaiBango")
+    private DropDownList ddlGogitaiBango;
     @JsonProperty("txtTaishoGappi")
     private TextBoxDateRange txtTaishoGappi;
+    @JsonProperty("txtKijyunYMD")
+    private TextBoxDate txtKijyunYMD;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
 
@@ -64,21 +62,21 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getradKubun
-     * @return radKubun
+     * gettxtNengetsu
+     * @return txtNengetsu
      */
-    @JsonProperty("radKubun")
-    public RadioButton getRadKubun() {
-        return radKubun;
+    @JsonProperty("txtNengetsu")
+    public TextBoxFlexibleYearMonth getTxtNengetsu() {
+        return txtNengetsu;
     }
 
     /*
-     * setradKubun
-     * @param radKubun radKubun
+     * settxtNengetsu
+     * @param txtNengetsu txtNengetsu
      */
-    @JsonProperty("radKubun")
-    public void setRadKubun(RadioButton radKubun) {
-        this.radKubun = radKubun;
+    @JsonProperty("txtNengetsu")
+    public void setTxtNengetsu(TextBoxFlexibleYearMonth txtNengetsu) {
+        this.txtNengetsu = txtNengetsu;
     }
 
     /*
@@ -100,21 +98,21 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * gettxtNengetsu
-     * @return txtNengetsu
+     * gettxtTaishoGappi
+     * @return txtTaishoGappi
      */
-    @JsonProperty("txtNengetsu")
-    public TextBoxFlexibleYearMonth getTxtNengetsu() {
-        return txtNengetsu;
+    @JsonProperty("txtTaishoGappi")
+    public TextBoxDateRange getTxtTaishoGappi() {
+        return txtTaishoGappi;
     }
 
     /*
-     * settxtNengetsu
-     * @param txtNengetsu txtNengetsu
+     * settxtTaishoGappi
+     * @param txtTaishoGappi txtTaishoGappi
      */
-    @JsonProperty("txtNengetsu")
-    public void setTxtNengetsu(TextBoxFlexibleYearMonth txtNengetsu) {
-        this.txtNengetsu = txtNengetsu;
+    @JsonProperty("txtTaishoGappi")
+    public void setTxtTaishoGappi(TextBoxDateRange txtTaishoGappi) {
+        this.txtTaishoGappi = txtTaishoGappi;
     }
 
     /*
@@ -133,24 +131,6 @@ public class ChushutsuJokenDiv extends Panel {
     @JsonProperty("txtKijyunYMD")
     public void setTxtKijyunYMD(TextBoxDate txtKijyunYMD) {
         this.txtKijyunYMD = txtKijyunYMD;
-    }
-
-    /*
-     * gettxtTaishoGappi
-     * @return txtTaishoGappi
-     */
-    @JsonProperty("txtTaishoGappi")
-    public TextBoxDateRange getTxtTaishoGappi() {
-        return txtTaishoGappi;
-    }
-
-    /*
-     * settxtTaishoGappi
-     * @param txtTaishoGappi txtTaishoGappi
-     */
-    @JsonProperty("txtTaishoGappi")
-    public void setTxtTaishoGappi(TextBoxDateRange txtTaishoGappi) {
-        this.txtTaishoGappi = txtTaishoGappi;
     }
 
     /*

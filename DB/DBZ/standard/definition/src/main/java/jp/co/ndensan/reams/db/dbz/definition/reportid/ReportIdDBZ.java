@@ -120,6 +120,11 @@ public enum ReportIdDBZ {
      */
     DBE235001(new ReportId("DBE235001_kaigohokenShindanMeireisho"), new RString("介護保険診断命令書")),
     /**
+     * 介護保険指定医依頼兼主治医意見書提出依頼書です。
+     */
+    DBE236001(
+            new ReportId("DBE236001_ShujiiIkenshoTeishutsuIraisho"), new RString("介護保険指定医依頼兼主治医意見書提出依頼書")),
+    /**
      * 主治医意見書作成依頼一覧の帳票ＩＤです。
      */
     DBE230002(

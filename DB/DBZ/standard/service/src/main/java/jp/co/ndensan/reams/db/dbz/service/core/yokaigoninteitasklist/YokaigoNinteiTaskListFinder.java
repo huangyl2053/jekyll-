@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GetureiSyoriTantoshaWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IKnSyoiRaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IkenSyoNyuSyuRelateEntity;
@@ -552,11 +554,15 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<GeTuReiSyoRiBusiness> get月例処理モード(YokaigoNinteiTaskListParameter parameter) {
         List<GeTuReiSyoRiBusiness> 月例処理List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<GeTuReiSyoRiRelateEntity> entityList = mapper.get月例処理(parameter);
-        for (GeTuReiSyoRiRelateEntity entity : entityList) {
+        GetureiSyoriTantoshaWithCountEntity searchResult = mapper.get月例処理(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<GeTuReiSyoRiBusiness>emptyList(), 0, false);
+        }
+        int totalcount = searchResult.getTotalCount().intValue();
+        for (GeTuReiSyoRiRelateEntity entity : searchResult.getTaishoshaList()) {
             月例処理List.add(new GeTuReiSyoRiBusiness(entity));
         }
-        return SearchResult.of(月例処理List, 0, false);
+        return SearchResult.of(月例処理List, totalcount, parameter.get件数().intValue() < totalcount);
     }
 
     /**

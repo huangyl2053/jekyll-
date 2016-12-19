@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -17,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaIraiListDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,8 +24,14 @@ public class NinteichosaIraiListDiv extends Panel {
      */
     @JsonProperty("chosairaitaishoshaichiran")
     private chosairaitaishoshaichiranDiv chosairaitaishoshaichiran;
-    @JsonProperty("chosairaiselect")
-    private chosairaiselectDiv chosairaiselect;
+    @JsonProperty("btndataoutput")
+    private ButtonDownLoad btndataoutput;
+    @JsonProperty("btniraiauto")
+    private Button btniraiauto;
+    @JsonProperty("btnchosadataoutput")
+    private ButtonDownLoad btnchosadataoutput;
+    @JsonProperty("btnTaOutput")
+    private ButtonDialog btnTaOutput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,69 +58,128 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     /*
-     * getchosairaiselect
-     * @return chosairaiselect
+     * getbtndataoutput
+     * @return btndataoutput
      */
-    @JsonProperty("chosairaiselect")
-    public chosairaiselectDiv getChosairaiselect() {
-        return chosairaiselect;
+    @JsonProperty("btndataoutput")
+    public ButtonDownLoad getBtndataoutput() {
+        return btndataoutput;
     }
 
     /*
-     * setchosairaiselect
-     * @param chosairaiselect chosairaiselect
+     * setbtndataoutput
+     * @param btndataoutput btndataoutput
      */
-    @JsonProperty("chosairaiselect")
-    public void setChosairaiselect(chosairaiselectDiv chosairaiselect) {
-        this.chosairaiselect = chosairaiselect;
+    @JsonProperty("btndataoutput")
+    public void setBtndataoutput(ButtonDownLoad btndataoutput) {
+        this.btndataoutput = btndataoutput;
+    }
+
+    /*
+     * getbtniraiauto
+     * @return btniraiauto
+     */
+    @JsonProperty("btniraiauto")
+    public Button getBtniraiauto() {
+        return btniraiauto;
+    }
+
+    /*
+     * setbtniraiauto
+     * @param btniraiauto btniraiauto
+     */
+    @JsonProperty("btniraiauto")
+    public void setBtniraiauto(Button btniraiauto) {
+        this.btniraiauto = btniraiauto;
+    }
+
+    /*
+     * getbtnchosadataoutput
+     * @return btnchosadataoutput
+     */
+    @JsonProperty("btnchosadataoutput")
+    public ButtonDownLoad getBtnchosadataoutput() {
+        return btnchosadataoutput;
+    }
+
+    /*
+     * setbtnchosadataoutput
+     * @param btnchosadataoutput btnchosadataoutput
+     */
+    @JsonProperty("btnchosadataoutput")
+    public void setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
+        this.btnchosadataoutput = btnchosadataoutput;
+    }
+
+    /*
+     * getbtnTaOutput
+     * @return btnTaOutput
+     */
+    @JsonProperty("btnTaOutput")
+    public ButtonDialog getBtnTaOutput() {
+        return btnTaOutput;
+    }
+
+    /*
+     * setbtnTaOutput
+     * @param btnTaOutput btnTaOutput
+     */
+    @JsonProperty("btnTaOutput")
+    public void setBtnTaOutput(ButtonDialog btnTaOutput) {
+        this.btnTaOutput = btnTaOutput;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdTaskList() {
-        return this.getChosairaitaishoshaichiran().getCcdTaskList();
+    public RadioButton getRadShoriJyotai() {
+        return this.getChosairaitaishoshaichiran().getRadShoriJyotai();
     }
 
     @JsonIgnore
-    public ButtonDownLoad getBtndataoutput() {
-        return this.getChosairaiselect().getBtndataoutput();
+    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
+        this.getChosairaitaishoshaichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
     @JsonIgnore
-    public void  setBtndataoutput(ButtonDownLoad btndataoutput) {
-        this.getChosairaiselect().setBtndataoutput(btndataoutput);
+    public TextBoxNum getTxtTotalCount() {
+        return this.getChosairaitaishoshaichiran().getTxtTotalCount();
     }
 
     @JsonIgnore
-    public Button getBtniraiauto() {
-        return this.getChosairaiselect().getBtniraiauto();
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.getChosairaitaishoshaichiran().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore
-    public void  setBtniraiauto(Button btniraiauto) {
-        this.getChosairaiselect().setBtniraiauto(btniraiauto);
+    public TextBoxNum getTxtCompleteCount() {
+        return this.getChosairaitaishoshaichiran().getTxtCompleteCount();
     }
 
     @JsonIgnore
-    public ButtonDownLoad getBtnchosadataoutput() {
-        return this.getChosairaiselect().getBtnchosadataoutput();
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+        this.getChosairaitaishoshaichiran().setTxtCompleteCount(txtCompleteCount);
     }
 
     @JsonIgnore
-    public void  setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
-        this.getChosairaiselect().setBtnchosadataoutput(btnchosadataoutput);
+    public TextBoxNum getTxtNoUpdate() {
+        return this.getChosairaitaishoshaichiran().getTxtNoUpdate();
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnTaOutput() {
-        return this.getChosairaiselect().getBtnTaOutput();
+    public void  setTxtNoUpdate(TextBoxNum txtNoUpdate) {
+        this.getChosairaitaishoshaichiran().setTxtNoUpdate(txtNoUpdate);
     }
 
     @JsonIgnore
-    public void  setBtnTaOutput(ButtonDialog btnTaOutput) {
-        this.getChosairaiselect().setBtnTaOutput(btnTaOutput);
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getChosairaitaishoshaichiran().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getChosairaitaishoshaichiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     // </editor-fold>

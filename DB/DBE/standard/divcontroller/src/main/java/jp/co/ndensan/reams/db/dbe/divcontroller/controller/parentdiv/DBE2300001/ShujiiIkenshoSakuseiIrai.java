@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Builder;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.ShujiiIraiAtenaJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoIraiKubun;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
@@ -73,7 +71,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -184,12 +181,6 @@ public class ShujiiIkenshoSakuseiIrai {
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
         createHandler(div).init(manager.get申請者情報(param));
-//        Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-//                = Models.create(manager.get主治医意見書作成依頼情報(param).records());
-//        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
-//                = Models.create(manager.get要介護認定申請情報(param).records());
-//        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
-//        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
         return ResponseData.of(div).respond();
     }
 
@@ -279,6 +270,20 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     /**
+     * dgShinseishaIchiranで照会ボタンを押下。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onBeforeOpenDialog_dgShinseishaIchiran(ShujiiIkenshoSakuseiIraiDiv div) {
+        dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
+        if (!RString.isNullOrEmpty(row.getShiseishoKanriNo())) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShiseishoKanriNo());
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 発行押下の処理を行います。
      *
      * @param div コントロールdiv
@@ -290,9 +295,6 @@ public class ShujiiIkenshoSakuseiIrai {
             toHozon(div);
             ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
             ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
-            Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                    = Models.create(manager.get主治医意見書作成依頼情報(param).records());
-            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, 主治医意見書作成依頼情報);
             printData(div, reportManager);
             createHandler(div).init(manager.get申請者情報(param));
             response.data = reportManager.publish();
@@ -324,10 +326,6 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     private void toHozon(ShujiiIkenshoSakuseiIraiDiv div) {
-        Models<NinteiShinseiJoho2Identifier, NinteiShinseiJoho2> 要介護認定申請情報
-                = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
-        Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼情報, Models.class);
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         RDate sysdate = RDate.getNowDate();
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, sysdate, SubGyomuCode.DBE認定支援);
@@ -340,8 +338,11 @@ public class ShujiiIkenshoSakuseiIrai {
                 }
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo), EntityDataState.Added);
-                NinteiShinseiJoho2 shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJoho2Identifier(
-                        new ShinseishoKanriNo(row.getShiseishoKanriNo())));
+                
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());        
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo);
+                NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param);
+                
                 NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
                 shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
@@ -349,8 +350,10 @@ public class ShujiiIkenshoSakuseiIrai {
                 shinseiJoho = shinseiJohoBuilder.build();
                 manager.save要介護認定申請情報(shinseiJoho, EntityDataState.Modified);
             } else if (修正.equals(row.getStatus())) {
-                ShujiiIkenshoIraiJoho ikenshoIraiJoho = 主治医意見書作成依頼情報.get(new ShujiiIkenshoIraiJohoIdentifier(
-                        new ShinseishoKanriNo(row.getShiseishoKanriNo()), Integer.parseInt(row.getRirekiNo().toString())));
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
+                        row.getRirekiNo().toInt());
+                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
                 ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
                 builder.set論理削除フラグ(true);
                 ikenshoIraiJoho = builder.build();
@@ -358,8 +361,9 @@ public class ShujiiIkenshoSakuseiIrai {
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
                                 Integer.parseInt(row.getRirekiNo().toString()) + 1), EntityDataState.Added);
-                NinteiShinseiJoho2 shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJoho2Identifier(
-                        new ShinseishoKanriNo(row.getShiseishoKanriNo())));
+                      
+                ShujiiIkenshoSakuseiIraiParameter param2 = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo);
+                NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param2);
                 NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
                 shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
@@ -367,8 +371,10 @@ public class ShujiiIkenshoSakuseiIrai {
                 shinseiJoho = shinseiJohoBuilder.build();
                 manager.save要介護認定申請情報(shinseiJoho, EntityDataState.Modified);
             } else if (削除.equals(row.getStatus())) {
-                ShujiiIkenshoIraiJoho ikenshoIraiJoho = 主治医意見書作成依頼情報.get(new ShujiiIkenshoIraiJohoIdentifier(
-                        new ShinseishoKanriNo(row.getShiseishoKanriNo()), Integer.parseInt(row.getRirekiNo().toString())));
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
+                        row.getRirekiNo().toInt());
+                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
                 ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
                 builder.set論理削除フラグ(true);
                 ikenshoIraiJoho = builder.build();
@@ -411,8 +417,6 @@ public class ShujiiIkenshoSakuseiIrai {
 
     private void printData(ShujiiIkenshoSakuseiIraiDiv div, ReportManager reportManager) {
 
-        Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼情報, Models.class);
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         主治医意見書作成依頼情報ItemList = new ArrayList<>();
         主治医意見書作成依頼一覧表ItemList = new ArrayList<>();
@@ -422,36 +426,33 @@ public class ShujiiIkenshoSakuseiIrai {
         主治医意見書記入用紙List = new ArrayList<>();
         主治医意見書記入用紙OCRList = new ArrayList<>();
         主治医意見書記入用紙DList = new ArrayList<>();
-        List<ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報List = new ArrayList<>();
-
         RDate sysdate = RDate.getNowDate();
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, sysdate, SubGyomuCode.DBE認定支援);
         RString 主治医意見書作成期限日数 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, sysdate, SubGyomuCode.DBE認定支援);
         for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
             if (row.getSelected() && !div.getChkirai().getSelectedKeys().isEmpty()) {
-                主治医意見書作成依頼情報List.add(create主治医意見書作成依頼情報(主治医意見書作成依頼情報, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, div, row));
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                int RirekiNo = Integer.parseInt(row.getRirekiNo().toString());
+                if (新規.equals(row.getStatus())) {
+                    RirekiNo = 数字_1;
+                    if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
+                        RirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
+                    }
+                }
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
+                        RirekiNo);
+                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
+                manager.save主治医意見書作成依頼情報(create主治医意見書作成依頼情報(ikenshoIraiJoho, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, div, row),
+                            EntityDataState.Modified);
             }
             createChoHyoData(div, row);
         }
         toPrint(reportManager);
-        for (ShujiiIkenshoIraiJoho ikenshoIraiJoho : 主治医意見書作成依頼情報List) {
-            manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
-        }
     }
 
-    private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報,
+    private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(ShujiiIkenshoIraiJoho ikenshoIraiJoho,
             RString 主治医意見書作成期限設定方法, RString 主治医意見書作成期限日数, ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row) {
-        int RirekiNo = Integer.parseInt(row.getRirekiNo().toString());
 
-        if (新規.equals(row.getStatus())) {
-            RirekiNo = 数字_1;
-            if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
-                RirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
-            }
-        }
-
-        ShujiiIkenshoIraiJoho ikenshoIraiJoho = 主治医意見書作成依頼情報.get(new ShujiiIkenshoIraiJohoIdentifier(
-                new ShinseishoKanriNo(row.getShiseishoKanriNo()), RirekiNo));
         ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
         builder.set依頼書出力年月日(FlexibleDate.getNowDate());
         if (主治医意見書作成期限設定方法_1.equals(主治医意見書作成期限設定方法)) {

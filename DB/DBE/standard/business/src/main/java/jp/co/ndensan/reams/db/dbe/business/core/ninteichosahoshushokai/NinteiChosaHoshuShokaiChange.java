@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.Nintei
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -72,6 +73,14 @@ public final class NinteiChosaHoshuShokaiChange {
             施設_継 = MARU;
         }
         ninteichosaItakusakiCode = entity.get認定調査委託先コード();
+        RString 調査依頼日開始 = RString.EMPTY;
+        RString 調査依頼日終了 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(parameter.get調査依頼日開始())) {
+            調査依頼日開始 = new FlexibleDate(parameter.get調査依頼日開始()).wareki().toDateString();
+        }
+        if (!RString.isNullOrEmpty(parameter.get調査依頼日終了())) {
+            調査依頼日終了 = new FlexibleDate(parameter.get調査依頼日終了()).wareki().toDateString();
+        }
         NinteiChosaHoshuShokaiCsvEntity data = new NinteiChosaHoshuShokaiCsvEntity(
                 ninteichosaItakusakiCode, entity.get事業者名称(),
                 entity.get認定調査員コード(), entity.get調査員氏名(),
@@ -82,8 +91,7 @@ public final class NinteiChosaHoshuShokaiChange {
                 entity.get被保険者氏名().getColumnValue(),
                 在宅_新, 在宅_継, 施設_新, 施設_継,
                 DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get認定調査委託料()), 0).concat("円"),
-                ZERO, ZERO, ZERO, ZERO, parameter.get調査依頼日開始().wareki().toDateString(),
-                parameter.get調査依頼日終了().wareki().toDateString(), 番号, ZERO);
+                ZERO, ZERO, ZERO, ZERO, 調査依頼日開始, 調査依頼日終了, 番号, ZERO);
         件数_値 = entity.get件数();
         if (件数_値 - ONE <= 件数 && 番号 % 頁_件数 == ONE) {
             data.set施設_再合計(entity.get施設再調査());

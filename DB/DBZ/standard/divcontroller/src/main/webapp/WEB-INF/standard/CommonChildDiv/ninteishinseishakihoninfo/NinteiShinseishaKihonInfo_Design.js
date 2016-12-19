@@ -48,12 +48,12 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
             };
 
-            Controls.prototype.txtHihokenshaKana = function () {
-                return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
-            };
-
             Controls.prototype.txtSeinenYmd = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtSeinenYmd"));
+            };
+
+            Controls.prototype.txtHihokenshaKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaKana"));
             };
 
             Controls.prototype.txtNenrei = function () {
@@ -74,6 +74,18 @@ var DBZ;
 
             Controls.prototype.txtTelNo = function () {
                 return new UZA.TextBox(this.convFiledName("txtTelNo"));
+            };
+
+            Controls.prototype.txtNinteiShinseibi = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShinseibi"));
+            };
+
+            Controls.prototype.txtShinseiKubunShinseiji = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunShinseiji"));
+            };
+
+            Controls.prototype.txtShinseiKubunHoreiji = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunHoreiji"));
             };
             return Controls;
         })();

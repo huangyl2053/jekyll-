@@ -7,7 +7,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiiinJohoGogitaiMapper">
     <select resultOrdered="true" id="search審査会委員情報"
             resultMap="resultMap_ShinsakaiIinJoho" fetchSize="500">
-        SELECT 
+        SELECT DISTINCT
             DBT5594."shinsakaiIinCode"
            ,DBT5594."shinsakaiIinShimei"
            ,DBT5591."gogitaiNo"

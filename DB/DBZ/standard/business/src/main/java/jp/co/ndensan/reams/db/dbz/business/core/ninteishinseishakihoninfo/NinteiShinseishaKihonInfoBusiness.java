@@ -153,4 +153,31 @@ public class NinteiShinseishaKihonInfoBusiness {
     public RString get市町村名称() {
         return relateEntity.getShichosonMeisho();
     }
+
+    /**
+     * 認定申請日を取得します。
+     *
+     * @return 認定申請日
+     */
+    public FlexibleDate get認定申請日() {
+        return relateEntity.getNinteiShinseiYMD();
+    }
+
+    /**
+     * 申請区分（申請時）を取得します。
+     *
+     * @return 申請区分（申請時）
+     */
+    public Code get申請区分_申請時() {
+        return relateEntity.getNinteiShinseiShinseijiKubunCode();
+    }
+
+    /**
+     * 申請区分（法令時）を取得します。
+     *
+     * @return 申請区分（法令時）
+     */
+    public Code get申請区分_法令時() {
+        return relateEntity.getNinteiShinseiHoreiKubunCode();
+    }
 }

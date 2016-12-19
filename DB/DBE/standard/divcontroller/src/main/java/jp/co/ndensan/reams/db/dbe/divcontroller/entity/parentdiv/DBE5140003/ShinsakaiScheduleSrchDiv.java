@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiScheduleSrchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
     private CheckBoxList chkShinsakaiSchedule;
     @JsonProperty("chkShinsakaiScheduleKagami")
     private CheckBoxList chkShinsakaiScheduleKagami;
+    @JsonProperty("Sp1")
+    private Space Sp1;
     @JsonProperty("chkShinsakaiScheduleNenkan")
     private CheckBoxList chkShinsakaiScheduleNenkan;
     @JsonProperty("txtNendo")
@@ -90,6 +92,24 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
     @JsonProperty("chkShinsakaiScheduleKagami")
     public void setChkShinsakaiScheduleKagami(CheckBoxList chkShinsakaiScheduleKagami) {
         this.chkShinsakaiScheduleKagami = chkShinsakaiScheduleKagami;
+    }
+
+    /*
+     * getSp1
+     * @return Sp1
+     */
+    @JsonProperty("Sp1")
+    public Space getSp1() {
+        return Sp1;
+    }
+
+    /*
+     * setSp1
+     * @param Sp1 Sp1
+     */
+    @JsonProperty("Sp1")
+    public void setSp1(Space Sp1) {
+        this.Sp1 = Sp1;
     }
 
     /*

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * タスク一覧共有画面クラスです。
@@ -20,11 +21,34 @@ public final class YokaigoNinteiTaskListParameter {
     private final RString 通常;
     private final RString 延期;
     private final RString 状態区分;
+    private final Decimal 件数;
 
-    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分) {
+    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分, Decimal 件数) {
         this.通常 = 通常;
         this.延期 = 延期;
         this.状態区分 = 状態区分;
+        this.件数 = 件数;
+    }
+
+    /**
+     * 検索処理取得パラメータ設定
+     *
+     * @param 通常 RString
+     * @param 延期 RString
+     * @param 状態区分 RString
+     * @param 件数 Decimal
+     * @return YokaigoNinteiTaskListParameter
+     */
+    public static YokaigoNinteiTaskListParameter createParameter(
+            RString 通常,
+            RString 延期,
+            RString 状態区分,
+            Decimal 件数) {
+        return new YokaigoNinteiTaskListParameter(
+                通常,
+                延期,
+                状態区分,
+                件数);
     }
 
     /**
@@ -42,7 +66,8 @@ public final class YokaigoNinteiTaskListParameter {
         return new YokaigoNinteiTaskListParameter(
                 通常,
                 延期,
-                状態区分);
+                状態区分,
+                Decimal.ZERO);
     }
 
     /**
@@ -58,6 +83,7 @@ public final class YokaigoNinteiTaskListParameter {
         return new YokaigoNinteiTaskListParameter(
                 通常,
                 延期,
-                RString.EMPTY);
+                RString.EMPTY,
+                Decimal.ZERO);
     }
 }

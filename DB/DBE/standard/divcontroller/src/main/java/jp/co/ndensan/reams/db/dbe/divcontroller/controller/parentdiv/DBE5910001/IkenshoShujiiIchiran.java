@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE591001.DBE591001_Iryoki
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * IkenshoShujiiIchiran のクラスファイルです。
@@ -53,16 +53,17 @@ public class IkenshoShujiiIchiran {
      * @return ResponseData<IkenshoShujiiIchiranDiv>
      */
     public ResponseData<IkenshoShujiiIchiranDiv> onClick_Check(IkenshoShujiiIchiranDiv div) {
-        if (0 < div.getTxtIryoKikanCodeFrom().getValue()
-                .compareTo(div.getTxtIryoKikanCodeTo().getValue())) {
-            throw new ApplicationException(
-                    UrErrorMessages.大小関係が不正.getMessage().replace("医療機関コード"));
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
         }
-
-        if (0 < div.getTxtShujiiCodeFrom().getValue()
-                .compareTo(div.getTxtShujiiCodeTo().getValue())) {
-            throw new ApplicationException(
-                    UrErrorMessages.大小関係が不正.getMessage().replace("主治医コード"));
+        if ((!div.getTxtIryoKikanCodeTo().getValue().isNull()) && (!div.getTxtIryoKikanCodeTo().getValue().isEmpty())
+                && (0 < div.getTxtIryoKikanCodeFrom().getValue().compareTo(div.getTxtIryoKikanCodeTo().getValue()))) {
+            return ResponseData.of(div).addMessage(UrErrorMessages.大小関係が不正.getMessage().replace("医療機関コード")).respond();
+        }
+        if ((!div.getTxtShujiiCodeTo().getValue().isNull()) && (!div.getTxtShujiiCodeTo().getValue().isEmpty())
+                && (0 < div.getTxtShujiiCodeFrom().getValue()
+                .compareTo(div.getTxtShujiiCodeTo().getValue()))) {
+            return ResponseData.of(div).addMessage(UrErrorMessages.大小関係が不正.getMessage().replace("主治医コード")).respond();
         }
         return ResponseData.of(div).respond();
     }
