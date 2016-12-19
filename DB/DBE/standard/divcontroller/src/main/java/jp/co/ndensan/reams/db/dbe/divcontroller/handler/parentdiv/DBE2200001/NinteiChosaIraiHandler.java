@@ -274,6 +274,8 @@ public class NinteiChosaIraiHandler {
             row.setHokensha(nullToEmpty(hokenshaName));
             if (未割付申請者.getChosaKubun() != null && !未割付申請者.getChosaKubun().isEmpty()) {
                 row.setChosaKubun(ChosaKubun.toValue(未割付申請者.getChosaKubun().value()).get名称());
+            } else {
+                row.setChosaKubun(ChosaKubun.新規調査.get名称());
             }
             if (未割付申請者.getJusho() != null) {
                 row.setJusho(未割付申請者.getJusho().value());
@@ -656,23 +658,6 @@ public class NinteiChosaIraiHandler {
             }
         }
         return false;
-    }
-
-    /**
-     * 割付済み人数を取得します。
-     *
-     * @return 割付済み人数
-     */
-    public int get既存割付済み人数() {
-        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseisha = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
-        int 既存割付済み人数 = 0;
-        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseisha : dgWaritsukeZumiShinseisha) {
-            RString jotai = waritsukeZumiShinseisha.getJotai();
-            if (RString.EMPTY.equals(jotai) || WARITSUKE_ZUMI.equals(jotai)) {
-                既存割付済み人数++;
-            }
-        }
-        return 既存割付済み人数;
     }
 
     /**
