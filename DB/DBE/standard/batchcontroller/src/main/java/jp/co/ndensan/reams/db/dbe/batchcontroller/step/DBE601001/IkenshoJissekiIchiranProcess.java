@@ -57,8 +57,8 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojissekiichiran.IIkenshoJissekiIchiranMapper.get主治医意見書作成実績集計表");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601001.getReportId();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601001"));
-    private static final RString CSV_NAME = new RString("IkenshoJissekiIchiran.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE602001"));
+    private static final RString CSV_NAME = new RString("主治医意見書作成実績集計.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
