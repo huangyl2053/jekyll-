@@ -100,7 +100,7 @@ public class KekkatsuchiIchiranhyoEditorImpl implements IKekkatsuchiIchiranhyoEd
     }
 
     private RString 和暦年月日Fomart(FlexibleDate date) {
-        return (date.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+        return (date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.ZERO).toDateString());
     }
 }

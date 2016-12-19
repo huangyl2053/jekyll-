@@ -73,29 +73,29 @@ public class HanteiKekkaJohoShutsuryoku {
      */
     public ResponseData<DBE525001_HanteiKekkaShinsakaiParameter> onClick_btnAction(HanteiKekkaJohoShutsuryokuDiv div) {
         DBE525001_HanteiKekkaShinsakaiParameter parameter = new DBE525001_HanteiKekkaShinsakaiParameter();
-        parameter.setKaisaiBangouList(div.getCcdIShinsakaiIchiranList().get開催番号List());
-        List<RString> selectedList = div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().getSelectedKeys();
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表A3版.getKey())) {
+        parameter.setKaisaiBangou(div.getCcdIShinsakaiIchiranList().get開催番号List().get(0));
+        List<RString> selectedChohyoList = div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().getSelectedKeys();
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表A3版.getKey())) {
             parameter.setPublish_HanteiKekkaA3(true);
         } else {
             parameter.setPublish_HanteiKekkaA3(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表.getKey())) {
             parameter.setPublish_HanteiKekka(true);
         } else {
             parameter.setPublish_HanteiKekka(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定審査判定結果_鑑.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定審査判定結果_鑑.getKey())) {
             parameter.setPublish_HanteiKekkaKagami(true);
         } else {
             parameter.setPublish_HanteiKekkaKagami(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定審査会議事録.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定審査会議事録.getKey())) {
             parameter.setPublish_ShinsakaiGijiroku(true);
         } else {
             parameter.setPublish_ShinsakaiGijiroku(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定結果通知一覧表.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定結果通知一覧表.getKey())) {
             parameter.setPublish_KekkaTsuchiIchiran(true);
         } else {
             parameter.setPublish_KekkaTsuchiIchiran(false);
