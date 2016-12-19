@@ -58,8 +58,8 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosahyojissekiichiran."
             + "IChosahyoJissekiIchiranMapper.get帳票出力用認定調査実績集計表");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601002.getReportId();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601002"));
-    private static final RString CSV_NAME = new RString("ChosahyoJissekiIchiran.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE603001"));
+    private static final RString CSV_NAME = new RString("認定調査実績集計.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
