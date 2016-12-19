@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5140002;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Builder;
@@ -103,10 +104,13 @@ public class ShinsakaiIinWaritsuke {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        List<dgShinsakaiIinIchiran_Row> 既存Data退避 = div.getDgShinsakaiIinIchiran().getDataSource();
+        div.getDgShinsakaiIinIchiran().setDataSource(new ArrayList<dgShinsakaiIinIchiran_Row>());
         for (dgShinsakaiIinKoseiIchiran_Row row : selectedItems) {
             getHandler(div).set介護認定審査会委員一覧(row);
             div.getDgShinsakaiIinKoseiIchiran().getDataSource().remove(row);
         }
+        div.getDgShinsakaiIinIchiran().getDataSource().addAll(selectedItems.size(), 既存Data退避);
         return ResponseData.of(div).respond();
     }
 
