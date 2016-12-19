@@ -637,10 +637,13 @@ public class CenterTransmissionEditEntity {
     }
 
     private RString get調査委託区分(RString code) {
-        if (RString.isNullOrEmpty(code)) {
-            return RString.EMPTY;
+
+        for (ChosaItakuKubunCode chosaItakuKubunCode : ChosaItakuKubunCode.values()) {
+            if (chosaItakuKubunCode.getコード().equals(code)) {
+                return ChosaItakuKubunCode.toValue(code).get名称();
+            }
         }
-        return ChosaItakuKubunCode.toValue(code).get名称();
+        return RString.EMPTY;
     }
 
     private RString get項目By厚労省99Aと02A(Code 厚労省IF識別コード, RString 項番1, RString 項番2) {
