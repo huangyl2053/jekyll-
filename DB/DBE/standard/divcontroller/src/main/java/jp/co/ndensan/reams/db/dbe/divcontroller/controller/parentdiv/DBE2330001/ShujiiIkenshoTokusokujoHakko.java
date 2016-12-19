@@ -57,6 +57,7 @@ public class ShujiiIkenshoTokusokujoHakko {
      * @return ResponseData<ShujiiIkenTokusokujoHakkoDiv>
      */
     public ResponseData<ShujiiIkenshoTokusokujoHakkoDiv> onChange_ccdHokenshaList(ShujiiIkenshoTokusokujoHakkoDiv div) {
+        getHandler(div).changeHokensha();
         div.getCcdIryokikanShujii().initialize(div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         return ResponseData.of(div).respond();
@@ -75,11 +76,11 @@ public class ShujiiIkenshoTokusokujoHakko {
     public ResponseData<ShujiiIkenshoTokusokujoHakkoDiv> beforeHakkou(ShujiiIkenshoTokusokujoHakkoDiv div) {
         ValidationMessageControlPairs message
                 = new ShujiiIkenTokusokujoHakkoValidationHandler(div).check_btnBatchRegisterHakko();
-        
+
         if (message.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(message).respond();
         }
-        
+
         RDate 開始日 = div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue() == null
                 ? RDate.MIN : div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue();
         RDate 終了日 = div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue() == null
