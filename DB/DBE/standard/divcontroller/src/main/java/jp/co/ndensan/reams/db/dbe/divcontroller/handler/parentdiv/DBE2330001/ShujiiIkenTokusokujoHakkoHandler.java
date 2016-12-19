@@ -110,9 +110,9 @@ public class ShujiiIkenTokusokujoHakkoHandler {
         tempData.setTemp_保険者名称(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
         tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getIryoKikanCode());
         tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getShujiiCode());
-        FlexibleDate TxtKijunDay = new FlexibleDate(div.getHakkoJoken().getTxtKijunDay().getValue().toString());
-        if (!TxtKijunDay.isEmpty()) {
-            tempData.setTemp_基準日(TxtKijunDay);
+        FlexibleDate txtKijunDay = new FlexibleDate(div.getHakkoJoken().getTxtKijunDay().getValue().toString());
+        if (!txtKijunDay.isEmpty()) {
+            tempData.setTemp_基準日(txtKijunDay);
         }
         tempData.setTemp_主治医意見書督促期限日数(div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().getValue());
         tempData.setTemp_主治医意見書督促状(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
@@ -127,9 +127,9 @@ public class ShujiiIkenTokusokujoHakkoHandler {
                 ? 選択された : 未選択);
         tempData.setTemp_督促方法(div.getShujiiIkenshoTokusokujo().getRadTokusokuHoho().getSelectedIndex());
         tempData.setTemp_督促メモ(div.getShujiiIkenshoTokusokujo().getTxtTokusokuMemo().getValue());
-        FlexibleDate TxtHakkoDay = new FlexibleDate(div.getShujiiIkenshoTokusokujo().getTxtHakkoDay().getValue().toString());
-        if (!TxtHakkoDay.isEmpty()) {
-            tempData.setTemp_督促日(TxtHakkoDay);
+        FlexibleDate txtHakkoDay = new FlexibleDate(div.getShujiiIkenshoTokusokujo().getTxtHakkoDay().getValue().toString());
+        if (!txtHakkoDay.isEmpty()) {
+            tempData.setTemp_督促日(txtHakkoDay);
         }
         tempData.setTemp_印刷期間開始日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue());
         tempData.setTemp_印刷期間終了日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue());
