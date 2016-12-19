@@ -16,9 +16,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class NinteiChosaTokusokujoOutputJokenhyoEditor {
 
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
     private static final String 督促方法コード_督促状郵送 = "0";
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
     private static final String 督促方法コード_督促状FAX = "1";
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
     private static final String 督促方法コード_電話 = "2";
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
     private static final String 督促方法コード_その他 = "3";
     private static final RString チェックボックス未選択 = new RString("0");
     private static final int 督促メモ表示最大桁数 = 184;
