@@ -38,23 +38,23 @@ public class NinteichosaIraiListCsvEntity {
     @CsvField(order = 10, name = "(今回調査)調査員")
     private final RString chosainShimei;
     @CsvField(order = 11, name = "保険者")
-    private final RString hihokensha;
-    @CsvField(order = 12, name = "(調査票入手)完了日")
-    private final RString ninteichosaKanryoYMD;
-    @CsvField(order = 13, name = "(調査督促)督促発行日")
+    private final RString hokensha;
+    @CsvField(order = 12, name = "(調査督促)督促発行日")
     private final RString ninteichosaTokusokuYMD;
-    @CsvField(order = 14, name = "(調査督促)方法")
+    @CsvField(order = 13, name = "(調査督促)方法")
     private final RString ninteichosaTokusokuHoho;
-    @CsvField(order = 15, name = "(調査督促)回数")
+    @CsvField(order = 14, name = "(調査督促)回数")
     private final RString ninteichosaTokusokuKaisu;
-    @CsvField(order = 16, name = "(調査督促)期限")
+    @CsvField(order = 15, name = "(調査督促)期限")
     private final RString ninteichosaKigenYMD;
-    @CsvField(order = 17, name = "(調査票入手)調査実施日")
+    @CsvField(order = 16, name = "(調査票入手)調査実施日")
     private final RString ninteichosaJisshiYMD;
-    @CsvField(order = 18, name = "(調査督促)地区")
+    @CsvField(order = 17, name = "(調査督促)地区コード")
     private final RString chikuCode;
-    @CsvField(order = 19, name = "(調査督促)地区")
+    @CsvField(order = 18, name = "(調査督促)地区")
     private final RString chikuName;
+    @CsvField(order = 19, name = "状態")
+    private final RString jotai;
 
     /**
      * コンストラクタです。
@@ -69,16 +69,15 @@ public class NinteichosaIraiListCsvEntity {
      * @param ninteiChosaItakusaki (今回調査)調査委託先
      * @param ninteiChosainCode (今回調査)調査員コード
      * @param chosainShimei (今回調査)調査員
-     * @param hihokensha 保険者
-     * @param ninteichosaKanryoYMD (調査票入手)完了日
+     * @param hokensha 保険者
      * @param ninteichosaTokusokuYMD (調査督促)督促発行日
      * @param ninteichosaTokusokuHoho (調査督促)方法
      * @param ninteichosaTokusokuKaisu (調査督促)回数
      * @param ninteichosaKigenYMD (調査督促)期限
      * @param ninteichosaJisshiYMD (調査票入手)調査実施日
-     * @param chikuCode (調査督促)地区
+     * @param chikuCode (調査督促)地区コード
      * @param chikuName (調査督促)地区
-     *
+     * @param jotai 状態
      */
     public NinteichosaIraiListCsvEntity(
             RString shinseishoKanriNo,
@@ -91,15 +90,15 @@ public class NinteichosaIraiListCsvEntity {
             RString ninteiChosaItakusaki,
             RString ninteiChosainCode,
             RString chosainShimei,
-            RString hihokensha,
-            RString ninteichosaKanryoYMD,
+            RString hokensha,
             RString ninteichosaTokusokuYMD,
             RString ninteichosaTokusokuHoho,
             RString ninteichosaTokusokuKaisu,
             RString ninteichosaKigenYMD,
             RString ninteichosaJisshiYMD,
             RString chikuCode,
-            RString chikuName) {
+            RString chikuName,
+            RString jotai) {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaName = hihokenshaName;
@@ -110,8 +109,7 @@ public class NinteichosaIraiListCsvEntity {
         this.ninteiChosaItakusaki = ninteiChosaItakusaki;
         this.ninteiChosainCode = ninteiChosainCode;
         this.chosainShimei = chosainShimei;
-        this.hihokensha = hihokensha;
-        this.ninteichosaKanryoYMD = ninteichosaKanryoYMD;
+        this.hokensha = hokensha;
         this.ninteichosaTokusokuYMD = ninteichosaTokusokuYMD;
         this.ninteichosaTokusokuHoho = ninteichosaTokusokuHoho;
         this.ninteichosaTokusokuKaisu = ninteichosaTokusokuKaisu;
@@ -119,5 +117,7 @@ public class NinteichosaIraiListCsvEntity {
         this.ninteichosaJisshiYMD = ninteichosaJisshiYMD;
         this.chikuCode = chikuCode;
         this.chikuName = chikuName;
+        this.jotai = jotai;
     }
+
 }

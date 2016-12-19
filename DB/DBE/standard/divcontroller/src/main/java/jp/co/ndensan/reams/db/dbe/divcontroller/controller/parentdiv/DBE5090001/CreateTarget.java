@@ -24,6 +24,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -44,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -332,6 +337,7 @@ public class CreateTarget {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        出力条件リストの出力(div, shinsei);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, ファイル名), response);
     }
 
@@ -1108,6 +1114,64 @@ public class CreateTarget {
         data.set前回識別コード(business.getCsvBusiness().getCreateCsvDataBusiness().get前回識別コード());
         data.set認定審査会意見等(business.getCsvBusiness().getCreateCsvDataBusiness().get認定審査会意見等());
         return data;
+    }
+
+    private void 出力条件リストの出力(CreateTargetDiv div, List<RString> shiki) {
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                new RString("認定支援センター送信ファイル"),
+                association.getLasdecCode_().value(),
+                association.get市町村名(),
+                new RString("56"),
+                DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名,
+                        RDate.getNowDate(), SubGyomuCode.DBE認定支援),
+                new RString("DBE561001"),
+                new RString(String.valueOf(shiki.size())),
+                get出力条件(div, shiki));
+        OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private List<RString> get出力条件(CreateTargetDiv div, List<RString> shinsei) {
+        RStringBuilder stringBuilder = new RStringBuilder();
+        List<RString> 出力条件List = new ArrayList<>();
+        stringBuilder.append(申請日_開始);
+        stringBuilder.append(div.getTxtShinseiYMD().getFromValue());
+        出力条件List.add(stringBuilder.toRString());
+        stringBuilder = new RStringBuilder();
+        stringBuilder.append(申請日_終了);
+        stringBuilder.append(div.getTxtShinseiYMD().getToValue());
+        出力条件List.add(stringBuilder.toRString());
+        stringBuilder = new RStringBuilder();
+        stringBuilder.append(認定日_開始);
+        stringBuilder.append(div.getNinteiYMD().getFromValue());
+        出力条件List.add(stringBuilder.toRString());
+        stringBuilder = new RStringBuilder();
+        stringBuilder.append(認定日_終了);
+        stringBuilder.append(div.getNinteiYMD().getToValue());
+        出力条件List.add(stringBuilder.toRString());
+        int i = shinsei.size() / 9;
+        if (i == 0) {
+            stringBuilder = new RStringBuilder();
+            stringBuilder.append(申請書管理番号);
+            stringBuilder.append(shinsei);
+            出力条件List.add(stringBuilder.toRString());
+        } else {
+            for (int j = 0; j < i; j++) {
+                stringBuilder = new RStringBuilder();
+                if (j == 0) {
+                    stringBuilder.append(申請書管理番号);
+                }
+                stringBuilder.append(shinsei.subList(j * 9, (j + 1) * 9));
+                stringBuilder.append("\n");
+                出力条件List.add(stringBuilder.toRString());
+            }
+            if (shinsei.size() % 9 != 0) {
+                stringBuilder = new RStringBuilder();
+                stringBuilder.append(shinsei.subList(i * 9, i * 9 + (shinsei.size() % 9)));
+                出力条件List.add(stringBuilder.toRString());
+            }
+        }
+        return 出力条件List;
     }
 
     private PersonalData toPersonalData(RString shinsei) {

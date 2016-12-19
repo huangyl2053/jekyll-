@@ -134,7 +134,7 @@ public class KaigoNinteiShinsakai {
      * @param div 審査会一覧Div
      * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
-    public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelect(KaigoNinteiShinsakaiDiv div) {
+    public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelectAlias(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会選択(div);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
