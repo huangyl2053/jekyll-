@@ -112,7 +112,7 @@ public class ShinsakaiShukeihyoShinseiBetsuEditor {
         if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
                 && 認定受付 == current.getNiTeiJokyo()) {
             shukeihyoShinseiBetsu.set申_更新申請_受付数(
-                    toRString(toInt(shukeihyoShinseiBetsu.get申_更新申請_調査数()) + current.getCountHihokenshaNo()));
+                    toRString(toInt(shukeihyoShinseiBetsu.get申_更新申請_受付数()) + current.getCountHihokenshaNo()));
         }
         if (NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(current.getNinteiShinseiShinseijiKubunCode().value())
                 && 認定調査 == current.getNiTeiJokyo()) {

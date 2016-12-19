@@ -27,7 +27,7 @@ public class ShujiiIkenshoIraiJohoManager {
      * コンストラクタです。
      */
     public ShujiiIkenshoIraiJohoManager() {
-        dac = InstanceProvider.create(DbT5301ShujiiIkenshoIraiJohoDac.class);
+        this.dac = InstanceProvider.create(DbT5301ShujiiIkenshoIraiJohoDac.class);
     }
 
     /**
@@ -39,6 +39,16 @@ public class ShujiiIkenshoIraiJohoManager {
         this.dac = dac;
     }
 
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoIraiJohoManager}のインスタンスを返します。
+     *
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoIraiJohoManager}のインスタンス
+     */
+    public static ShujiiIkenshoIraiJohoManager createInstance() {
+        return InstanceProvider.create(ShujiiIkenshoIraiJohoManager.class);
+    }
+    
     /**
      * 主キーに合致する主治医意見書作成依頼情報を返します。
      *

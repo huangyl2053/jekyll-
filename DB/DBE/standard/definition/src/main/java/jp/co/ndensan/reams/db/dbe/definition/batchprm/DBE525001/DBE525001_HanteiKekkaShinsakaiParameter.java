@@ -30,6 +30,7 @@ public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase 
     private static final String ISPUBLISH_KEKKAICHIRAN_KAGAMI = "isPublish_HanteiKekkaKagami";
     private static final String ISPUBLISH_SHINSAKAIGIJIROKU = "isPublish_ShinsakaiGijiroku";
     private static final String ISPUBLISH_KEKKATSUCHIICHIRAN = "isPublish_KekkaTsuchiIchiran";
+    private static final String USERID = "userId";
 
     @BatchParameter(key = KEY_KAISAIBANGOULIST, name = "開催番号")
     private List<RString> kaisaiBangouList;
@@ -45,6 +46,8 @@ public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase 
     private boolean isPublish_ShinsakaiGijiroku;
     @BatchParameter(key = ISPUBLISH_KEKKATSUCHIICHIRAN, name = "要介護認定結果通知一覧表")
     private boolean isPublish_KekkaTsuchiIchiran;
+    @BatchParameter(key = USERID, name = "ユーザID")
+    private RString userId;
 
     /**
      * バッチのパラメータを作成します。
@@ -59,6 +62,8 @@ public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase 
                 isPublish_HanteiKekka,
                 isPublish_HanteiKekkaKagami,
                 isPublish_ShinsakaiGijiroku,
-                isPublish_KekkaTsuchiIchiran);
+                isPublish_KekkaTsuchiIchiran,
+                userId
+        );
     }
 }

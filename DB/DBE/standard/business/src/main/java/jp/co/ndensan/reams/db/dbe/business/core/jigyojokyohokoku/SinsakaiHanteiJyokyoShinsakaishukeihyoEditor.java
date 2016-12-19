@@ -80,8 +80,8 @@ public class SinsakaiHanteiJyokyoShinsakaishukeihyoEditor {
 
     private void setヘッダ情報(SinsakaiHanteiJyokyoHeaderEntity current) {
         shinsakaishukeihyo.setタイトル(タイトル);
-        shinsakaishukeihyo.set審査会開始年月日(current.getShinsakaiKaisaiYMDMin());
-        shinsakaishukeihyo.set審査会終了年月日(current.getShinsakaiKaisaiYMDMax());
+        shinsakaishukeihyo.set審査会開始年月日(parameter.getTaishoGeppiFrom());
+        shinsakaishukeihyo.set審査会終了年月日(parameter.getTaishoGeppiTo());
         shinsakaishukeihyo.set開催回数(new RString(current.getShinsakaiKaisaiNoCount()));
         if (RString.isNullOrEmpty(parameter.getShichosonCode().value())) {
             shinsakaishukeihyo.set市町村名(全市町村);

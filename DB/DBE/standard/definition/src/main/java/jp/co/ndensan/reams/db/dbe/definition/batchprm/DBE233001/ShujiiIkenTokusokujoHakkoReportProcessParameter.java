@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class ShuturyokuJyoukenProcessParamter implements IBatchProcessParameter {
+public class ShujiiIkenTokusokujoHakkoReportProcessParameter implements IBatchProcessParameter {
 
     private RString temp_保険者コード;
     private RString temp_保険者名称;

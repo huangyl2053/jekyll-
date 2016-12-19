@@ -67,7 +67,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         renrakusakiKinyuKikanDiv_init();
         div.getBtnToroku().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
-        div.getBtnKozaJohoToroku().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
     }
 
@@ -228,7 +227,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtFaxNo().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.getBtnDelete().setDisabled(false);
-        div.getBtnKozaJohoToroku().setDisabled(false);
     }
 
     /**
@@ -256,7 +254,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getBtnDelete().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.getBtnShinsakaiIinAdd().setDisabled(true);
-        div.getBtnKozaJohoToroku().setDisabled(false);
     }
 
     /**

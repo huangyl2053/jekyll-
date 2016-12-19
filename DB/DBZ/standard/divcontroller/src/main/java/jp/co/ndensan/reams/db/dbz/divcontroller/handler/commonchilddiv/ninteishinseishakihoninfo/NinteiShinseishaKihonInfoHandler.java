@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoManager;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -69,6 +71,12 @@ public class NinteiShinseishaKihonInfoHandler {
                     business.get証記載保険者番号() == null ? Decimal.ZERO : new Decimal(business.get証記載保険者番号().toString()));
             div.getTxtHihokenshaNo().setValue(
                     business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
+            div.getTxtNinteiShinseibi().setValue(new RDate(business.get認定申請日().toString()));
+            div.getTxtShinseiKubunShinseiji().setValue(business.get申請区分_申請時() == null
+                    ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
+            div.getTxtShinseiKubunHoreiji().setValue(
+                    business.get申請区分_法令時() == null || RString.isNullOrEmpty(business.get申請区分_法令時().getKey())
+                    ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get申請区分_法令時().getKey()).get名称());
         }
 
     }

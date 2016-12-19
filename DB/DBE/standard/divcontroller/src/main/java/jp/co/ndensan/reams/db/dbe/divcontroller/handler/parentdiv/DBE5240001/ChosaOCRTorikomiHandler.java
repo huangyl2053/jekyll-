@@ -89,7 +89,7 @@ public class ChosaOCRTorikomiHandler {
         div.getTxtTaishoNinzu().setValue(new RString(torikomiList.get(0).get介護認定審査会実施人数()));
         div.getTxtGogitaiNo().setValue(torikomiList.get(0).get合議体名称());
         if (!torikomiList.get(0).get介護認定審査会進捗状況().isEmpty()) {
-            div.getTxtStutas().setValue(ShinsakaiShinchokuJokyo.toValue(torikomiList.get(0).get介護認定審査会進捗状況().value()).get名称());
+            div.getTxtStutas().setValue(ShinsakaiShinchokuJokyo.toValue(torikomiList.get(0).get介護認定審査会進捗状況().value()).get画面表示名称());
         }
         div.getTxtShinsakaiKaijo().setValue(torikomiList.get(0).get介護認定審査会開催場所名称());
         if (torikomiList.get(0).get介護認定審査会開催地区コード() != null) {

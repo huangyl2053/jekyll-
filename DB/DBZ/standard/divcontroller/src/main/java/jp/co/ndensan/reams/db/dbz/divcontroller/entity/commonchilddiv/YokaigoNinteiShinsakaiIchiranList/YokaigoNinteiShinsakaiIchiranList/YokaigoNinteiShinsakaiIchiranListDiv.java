@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYokaigoNinteiShinsakaiIchiranListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -153,23 +153,13 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxDate getTxtHyojiKikanFrom() {
-        return this.getHyojiJoken().getTxtHyojiKikanFrom();
+    public TextBoxDateRange getTxtHyojiKikan() {
+        return this.getHyojiJoken().getTxtHyojiKikan();
     }
 
     @JsonIgnore
-    public void  setTxtHyojiKikanFrom(TextBoxDate txtHyojiKikanFrom) {
-        this.getHyojiJoken().setTxtHyojiKikanFrom(txtHyojiKikanFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtHyojiKikanTo() {
-        return this.getHyojiJoken().getTxtHyojiKikanTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtHyojiKikanTo(TextBoxDate txtHyojiKikanTo) {
-        this.getHyojiJoken().setTxtHyojiKikanTo(txtHyojiKikanTo);
+    public void  setTxtHyojiKikan(TextBoxDateRange txtHyojiKikan) {
+        this.getHyojiJoken().setTxtHyojiKikan(txtHyojiKikan);
     }
 
     @JsonIgnore
@@ -240,6 +230,16 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     @JsonIgnore
     public void  setBtnKensaku(Button btnKensaku) {
         this.getHyojiJoken().setBtnKensaku(btnKensaku);
+    }
+
+    @JsonIgnore
+    public Button getBtnClear() {
+        return this.getHyojiJoken().getBtnClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnClear(Button btnClear) {
+        this.getHyojiJoken().setBtnClear(btnClear);
     }
 
     // </editor-fold>

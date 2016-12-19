@@ -58,16 +58,12 @@ public class ShinsahanteinoHenkojokyoEditor implements IShinsahanteinoHenkojokyo
         printTimeStampSb.append(DATE_秒);
         source.printTimeStamp = printTimeStampSb.toRString();
         source.gogitaiName = item.get合議体名称();
-        source.shinsakaiStartYMD = dateFormat(item.get審査会開始年月日());
-        source.shinsakaiEndYMD = dateFormat(item.get審査会終了年月日());
+        source.shinsakaiStartYMD = item.get審査会開始年月日();
+        source.shinsakaiEndYMD = item.get審査会終了年月日();
         source.shinsakaiKaisaiKaisu = item.get開催回数();
         source.shichosonNo = item.get市町村コード();
         source.shichosonName = item.get市町村名();
         return source;
     }
 
-    private RString dateFormat(RString date) {
-        return RString.isNullOrEmpty(date) ? RString.EMPTY : new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-    }
 }
