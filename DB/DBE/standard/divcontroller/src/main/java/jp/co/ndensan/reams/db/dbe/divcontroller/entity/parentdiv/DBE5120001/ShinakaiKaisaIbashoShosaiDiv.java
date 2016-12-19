@@ -15,9 +15,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 /**
  * ShinakaiKaisaIbashoShosai のクラスファイル 
  * 
+ * @author 自動生成
  */
 public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -95,7 +95,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         dbT5201Entity.setNinteichosaTokusokuYMD(paramter.getTemp_督促日());
         dbT5201Entity.setNinteichosaTokusokuMemo(paramter.getTemp_督促メモ());
         dbT5201Entity.setNinteichosaTokusokuHoho(paramter.getTemp_督促方法());
-        dbT5201Entity.setNinteichosaIraiKaisu(dbT5201Entity.getNinteichosaIraiKaisu() + 1);
+        dbT5201Entity.setNinteichosaTokusokuKaisu(dbT5201Entity.getNinteichosaTokusokuKaisu() + 1);
         dbT5201TableWriter.update(dbT5201Entity);
     }
 

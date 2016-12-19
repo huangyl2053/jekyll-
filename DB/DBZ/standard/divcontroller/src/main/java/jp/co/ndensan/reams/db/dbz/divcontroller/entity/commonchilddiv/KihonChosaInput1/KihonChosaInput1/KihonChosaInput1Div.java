@@ -36,10 +36,6 @@ public class KihonChosaInput1Div extends Panel implements IKihonChosaInput1Div {
     private Label ZenkaiHyojiTeiji;
     @JsonProperty("DaiichigunShintaiKino")
     private DaiichigunShintaiKinoDiv DaiichigunShintaiKino;
-    @JsonProperty("btnConfirm")
-    private Button btnConfirm;
-    @JsonProperty("btnBack")
-    private Button btnBack;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -81,42 +77,6 @@ public class KihonChosaInput1Div extends Panel implements IKihonChosaInput1Div {
     @JsonProperty("DaiichigunShintaiKino")
     public void setDaiichigunShintaiKino(DaiichigunShintaiKinoDiv DaiichigunShintaiKino) {
         this.DaiichigunShintaiKino = DaiichigunShintaiKino;
-    }
-
-    /*
-     * getbtnConfirm
-     * @return btnConfirm
-     */
-    @JsonProperty("btnConfirm")
-    public Button getBtnConfirm() {
-        return btnConfirm;
-    }
-
-    /*
-     * setbtnConfirm
-     * @param btnConfirm btnConfirm
-     */
-    @JsonProperty("btnConfirm")
-    public void setBtnConfirm(Button btnConfirm) {
-        this.btnConfirm = btnConfirm;
-    }
-
-    /*
-     * getbtnBack
-     * @return btnBack
-     */
-    @JsonProperty("btnBack")
-    public Button getBtnBack() {
-        return btnBack;
-    }
-
-    /*
-     * setbtnBack
-     * @param btnBack btnBack
-     */
-    @JsonProperty("btnBack")
-    public void setBtnBack(Button btnBack) {
-        this.btnBack = btnBack;
     }
 
     /*
@@ -510,6 +470,26 @@ public class KihonChosaInput1Div extends Panel implements IKihonChosaInput1Div {
     @JsonIgnore
     public void  setRadChoryoku(RadioButton radChoryoku) {
         this.getDaiichigunShintaiKino().getChoryoku().setRadChoryoku(radChoryoku);
+    }
+
+    @JsonIgnore
+    public Button getBtnBack() {
+        return this.getDaiichigunShintaiKino().getBtnBack();
+    }
+
+    @JsonIgnore
+    public void  setBtnBack(Button btnBack) {
+        this.getDaiichigunShintaiKino().setBtnBack(btnBack);
+    }
+
+    @JsonIgnore
+    public Button getBtnConfirm() {
+        return this.getDaiichigunShintaiKino().getBtnConfirm();
+    }
+
+    @JsonIgnore
+    public void  setBtnConfirm(Button btnConfirm) {
+        this.getDaiichigunShintaiKino().setBtnConfirm(btnConfirm);
     }
 
     // </editor-fold>

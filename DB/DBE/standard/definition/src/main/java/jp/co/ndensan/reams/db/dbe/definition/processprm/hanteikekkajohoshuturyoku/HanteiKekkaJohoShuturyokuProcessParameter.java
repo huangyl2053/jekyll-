@@ -22,7 +22,6 @@ import lombok.Setter;
 @Setter
 public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessParameter {
 
-    private List<RString> kaisaiBangouList;
     private RString kaisaiBangou;
     private List<RString> shoriJotaiKubun;
     private RString shoKisaiHokenshaNo;
@@ -36,7 +35,6 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
     /**
      * コンストラクタです。
      *
-     * @param kaisaiBangouList 開催番号List
      * @param kaisaiBangou 開催番号
      * @param isPublish_HanteiKekkaA3 要介護認定判定結果一覧表A3版
      * @param isPublish_HanteiKekka 要介護認定判定結果一覧表
@@ -46,7 +44,6 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
      * @param userId ユーザID
      */
     public HanteiKekkaJohoShuturyokuProcessParameter(
-            List<RString> kaisaiBangouList,
             RString kaisaiBangou,
             boolean isPublish_HanteiKekkaA3,
             boolean isPublish_HanteiKekka,
@@ -55,7 +52,6 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
             boolean isPublish_KekkaTsuchiIchiran,
             RString userId
     ) {
-        this.kaisaiBangouList = kaisaiBangouList;
         this.kaisaiBangou = kaisaiBangou;
         this.isPublish_HanteiKekkaA3 = isPublish_HanteiKekkaA3;
         this.isPublish_HanteiKekka = isPublish_HanteiKekka;
@@ -72,7 +68,6 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
      */
     public HanteiKekkaJohoShuturyokuMybatisParameter toHanteiKekkaJohoShuturyokuMybatisParameter() {
         return HanteiKekkaJohoShuturyokuMybatisParameter.creatParameter(
-                kaisaiBangouList,
                 kaisaiBangou,
                 shoriJotaiKubun,
                 shoKisaiHokenshaNo);

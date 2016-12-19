@@ -15,21 +15,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class HomonChosahoshuTankaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHomkaishiYM")
-    private TextBoxFlexibleYearMonth txtHomkaishiYM;
-    @JsonProperty("txtHomshuryoYM")
-    private TextBoxFlexibleYearMonth txtHomshuryoYM;
     @JsonProperty("ddlChosaKubun")
     private DropDownList ddlChosaKubun;
     @JsonProperty("ddlHomonShubetsu")
     private DropDownList ddlHomonShubetsu;
+    @JsonProperty("txtHomkaishiYM")
+    private TextBoxFlexibleYearMonth txtHomkaishiYM;
+    @JsonProperty("txtHomshuryoYM")
+    private TextBoxFlexibleYearMonth txtHomshuryoYM;
     @JsonProperty("txtHomtanka")
     private TextBoxNum txtHomtanka;
     @JsonProperty("btnHomKousin")
@@ -43,42 +43,6 @@ public class HomonChosahoshuTankaNyuryokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtHomkaishiYM
-     * @return txtHomkaishiYM
-     */
-    @JsonProperty("txtHomkaishiYM")
-    public TextBoxFlexibleYearMonth getTxtHomkaishiYM() {
-        return txtHomkaishiYM;
-    }
-
-    /*
-     * settxtHomkaishiYM
-     * @param txtHomkaishiYM txtHomkaishiYM
-     */
-    @JsonProperty("txtHomkaishiYM")
-    public void setTxtHomkaishiYM(TextBoxFlexibleYearMonth txtHomkaishiYM) {
-        this.txtHomkaishiYM = txtHomkaishiYM;
-    }
-
-    /*
-     * gettxtHomshuryoYM
-     * @return txtHomshuryoYM
-     */
-    @JsonProperty("txtHomshuryoYM")
-    public TextBoxFlexibleYearMonth getTxtHomshuryoYM() {
-        return txtHomshuryoYM;
-    }
-
-    /*
-     * settxtHomshuryoYM
-     * @param txtHomshuryoYM txtHomshuryoYM
-     */
-    @JsonProperty("txtHomshuryoYM")
-    public void setTxtHomshuryoYM(TextBoxFlexibleYearMonth txtHomshuryoYM) {
-        this.txtHomshuryoYM = txtHomshuryoYM;
-    }
-
     /*
      * getddlChosaKubun
      * @return ddlChosaKubun
@@ -113,6 +77,42 @@ public class HomonChosahoshuTankaNyuryokuDiv extends Panel {
     @JsonProperty("ddlHomonShubetsu")
     public void setDdlHomonShubetsu(DropDownList ddlHomonShubetsu) {
         this.ddlHomonShubetsu = ddlHomonShubetsu;
+    }
+
+    /*
+     * gettxtHomkaishiYM
+     * @return txtHomkaishiYM
+     */
+    @JsonProperty("txtHomkaishiYM")
+    public TextBoxFlexibleYearMonth getTxtHomkaishiYM() {
+        return txtHomkaishiYM;
+    }
+
+    /*
+     * settxtHomkaishiYM
+     * @param txtHomkaishiYM txtHomkaishiYM
+     */
+    @JsonProperty("txtHomkaishiYM")
+    public void setTxtHomkaishiYM(TextBoxFlexibleYearMonth txtHomkaishiYM) {
+        this.txtHomkaishiYM = txtHomkaishiYM;
+    }
+
+    /*
+     * gettxtHomshuryoYM
+     * @return txtHomshuryoYM
+     */
+    @JsonProperty("txtHomshuryoYM")
+    public TextBoxFlexibleYearMonth getTxtHomshuryoYM() {
+        return txtHomshuryoYM;
+    }
+
+    /*
+     * settxtHomshuryoYM
+     * @param txtHomshuryoYM txtHomshuryoYM
+     */
+    @JsonProperty("txtHomshuryoYM")
+    public void setTxtHomshuryoYM(TextBoxFlexibleYearMonth txtHomshuryoYM) {
+        this.txtHomshuryoYM = txtHomshuryoYM;
     }
 
     /*

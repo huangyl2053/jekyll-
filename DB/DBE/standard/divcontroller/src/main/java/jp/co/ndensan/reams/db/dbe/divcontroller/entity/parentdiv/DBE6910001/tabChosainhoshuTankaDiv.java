@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tabChosainhoshuTankaDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -94,6 +94,16 @@ public class tabChosainhoshuTankaDiv extends TabPanel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public DropDownList getDdlKaigoNinteiShinsaIinShubetsu() {
+        return this.getChosainhoshuTankaNyuryoku().getDdlKaigoNinteiShinsaIinShubetsu();
+    }
+
+    @JsonIgnore
+    public void  setDdlKaigoNinteiShinsaIinShubetsu(DropDownList ddlKaigoNinteiShinsaIinShubetsu) {
+        this.getChosainhoshuTankaNyuryoku().setDdlKaigoNinteiShinsaIinShubetsu(ddlKaigoNinteiShinsaIinShubetsu);
+    }
+
+    @JsonIgnore
     public TextBoxFlexibleYearMonth getTxtChoKaishiYM() {
         return this.getChosainhoshuTankaNyuryoku().getTxtChoKaishiYM();
     }
@@ -111,16 +121,6 @@ public class tabChosainhoshuTankaDiv extends TabPanel {
     @JsonIgnore
     public void  setTxtChoShuryoYM(TextBoxFlexibleYearMonth txtChoShuryoYM) {
         this.getChosainhoshuTankaNyuryoku().setTxtChoShuryoYM(txtChoShuryoYM);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKaigoNinteiShinsaIinShubetsu() {
-        return this.getChosainhoshuTankaNyuryoku().getDdlKaigoNinteiShinsaIinShubetsu();
-    }
-
-    @JsonIgnore
-    public void  setDdlKaigoNinteiShinsaIinShubetsu(DropDownList ddlKaigoNinteiShinsaIinShubetsu) {
-        this.getChosainhoshuTankaNyuryoku().setDdlKaigoNinteiShinsaIinShubetsu(ddlKaigoNinteiShinsaIinShubetsu);
     }
 
     @JsonIgnore

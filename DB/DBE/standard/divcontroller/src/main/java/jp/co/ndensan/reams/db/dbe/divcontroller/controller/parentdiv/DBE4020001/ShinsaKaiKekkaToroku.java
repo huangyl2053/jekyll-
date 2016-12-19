@@ -262,6 +262,7 @@ public class ShinsaKaiKekkaToroku {
                 前排他キーの解除();
                 div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
                         replace(審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+                div.getBtnShinsakaikanryooutput().setDisplayNone(true);
                 return ResponseData.of(div).setState(DBE4020001StateName.完了);
         }
         return ResponseData.of(div).respond();

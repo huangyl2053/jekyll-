@@ -109,7 +109,9 @@ public class NinteiChosaHoshuShokaiHandler {
                 施設_再 = 施設_再 + 1;
             }
             row.setItakuryo(DecimalFormatter.toコンマ区切りRString(new Decimal(調査一覧.get認定調査委託料()), 0));
-            委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
+            if (!調査一覧.get認定調査受領年月日().isEmpty()) {
+                委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
+            }
             listRow.add(row);
             アクセスログ(調査一覧.get申請書管理番号().getColumnValue());
         }

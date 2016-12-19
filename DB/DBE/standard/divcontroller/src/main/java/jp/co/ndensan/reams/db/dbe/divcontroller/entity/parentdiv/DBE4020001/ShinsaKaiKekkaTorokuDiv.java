@@ -105,32 +105,32 @@ public class ShinsaKaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtTotalCount() {
+    public TextBoxNum getTxtTotalCount() {
         return this.getShinsakaikanryo().getTxtTotalCount();
     }
 
     @JsonIgnore
-    public void  setTxtTotalCount(TextBox txtTotalCount) {
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.getShinsakaikanryo().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore
-    public TextBox getTxtCompleteCount() {
+    public TextBoxNum getTxtCompleteCount() {
         return this.getShinsakaikanryo().getTxtCompleteCount();
     }
 
     @JsonIgnore
-    public void  setTxtCompleteCount(TextBox txtCompleteCount) {
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.getShinsakaikanryo().setTxtCompleteCount(txtCompleteCount);
     }
 
     @JsonIgnore
-    public TextBox getTxtMishoriCount() {
+    public TextBoxNum getTxtMishoriCount() {
         return this.getShinsakaikanryo().getTxtMishoriCount();
     }
 
     @JsonIgnore
-    public void  setTxtMishoriCount(TextBox txtMishoriCount) {
+    public void  setTxtMishoriCount(TextBoxNum txtMishoriCount) {
         this.getShinsakaikanryo().setTxtMishoriCount(txtMishoriCount);
     }
 
@@ -142,6 +142,16 @@ public class ShinsaKaiKekkaTorokuDiv extends Panel {
     @JsonIgnore
     public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getShinsakaikanryo().setDgNinteiTaskList(dgNinteiTaskList);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxKensu() {
+        return this.getShinsakaikanryo().getTxtMaxKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.getShinsakaikanryo().setTxtMaxKensu(txtMaxKensu);
     }
 
     @JsonIgnore
