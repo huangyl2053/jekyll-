@@ -50,7 +50,7 @@
         <if test="temp_認定調査督促期限!=null">
         AND "DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaKigenYMD" <![CDATA[<]]> #{temp_認定調査督促期限}
         </if>
-        <if test="temp_印刷済対象者!=null and temp_印刷済対象者=1">
+        <if test="is印刷済対象者対象外">
         AND ("DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD" IS NULL
              OR "DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD" = '')
         </if>
