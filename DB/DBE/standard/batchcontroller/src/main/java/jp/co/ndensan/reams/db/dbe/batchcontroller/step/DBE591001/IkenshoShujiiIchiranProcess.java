@@ -11,10 +11,11 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoshujiiichiran.IkenshoShujiiIchiranHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoshujiiichiran.IkenshoShujiiIchiranReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputPage;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputPage1;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshoshujiiichiran.IkenshoShujiiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
@@ -46,8 +47,10 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoshujiiichiran."
             + "IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShujiiIryokikanShujiiIchiranhyoReportSource.ReportSourceFields.listIchiranhyoUpper_1.name())));
+    private static List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+            new RString(ShujiiIryokikanShujiiIchiranhyoReportSource.ReportSourceFields.cityCode.name()),
+            new RString(ShujiiIryokikanShujiiIchiranhyoReportSource.ReportSourceFields.listIchiranhyoUpper_1.name())
+    ));
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
     private static final RString 市町村コード = new RString("【市町村コード】");
@@ -87,6 +90,10 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void createWriter() {
+        if (processParameter.getNextpage().equals(ShujiiOutputPage.なし.getコード())) {
+            PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+                    new RString(ShujiiIryokikanShujiiIchiranhyoReportSource.ReportSourceFields.cityCode.name())));
+        }
         batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE591001.getReportId().value())
                 .addBreak(new BreakerCatalog<ShujiiIryokikanShujiiIchiranhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
