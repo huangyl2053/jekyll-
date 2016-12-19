@@ -17,22 +17,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteichosaIraiItiranCsvEntity {
 
-    @CsvField(order = 1, name = "申請書管理番号")
+    @CsvField(order = 1, name = "状態")
+    private final RString jotai;
+    @CsvField(order = 2, name = "申請書管理番号")
     private final RString shinseishoKanriNo;
-    @CsvField(order = 2, name = "保険者")
+    @CsvField(order = 3, name = "保険者")
     private final RString hihokensha;
-    @CsvField(order = 3, name = "認定申請日")
+    @CsvField(order = 4, name = "認定申請日")
     private final RString ninteiShinseiYMD;
-    @CsvField(order = 4, name = "(被保険者)被保番号")
+    @CsvField(order = 5, name = "(被保険者)被保番号")
     private final RString hihokenshaNo;
-    @CsvField(order = 5, name = "(被保険者)氏名")
+    @CsvField(order = 6, name = "(被保険者)氏名")
     private final RString hihokenshaName;
-    @CsvField(order = 6, name = "(申請区分)申請時コード")
+    @CsvField(order = 7, name = "(申請区分)申請時コード")
     private final RString ninteiShinseiShinseijiKubunCode;
-    @CsvField(order = 7, name = "(申請区分)申請時")
+    @CsvField(order = 8, name = "(申請区分)申請時")
     private final RString ninteiShinseiShinseijiKubunName;
-    @CsvField(order = 8, name = "(調査依頼)完了日")
-    private final RString ninteichosaIraiKanryoYMD;
     @CsvField(order = 9, name = "(調査依頼)再調査回数")
     private final RString saiChosaIraiKaisu;
     @CsvField(order = 10, name = "(調査依頼)依頼書発行日")
@@ -114,36 +114,37 @@ public class NinteichosaIraiItiranCsvEntity {
      *
      */
     public NinteichosaIraiItiranCsvEntity(
-            RString shinseishoKanriNo,
-            RString hihokensha,
-            RString ninteiShinseiYMD,
-            RString hihokenshaNo,
-            RString hihokenshaName,
-            RString ninteiShinseiShinseijiKubunCode,
-            RString ninteiShinseiShinseijiKubunName,
-            RString ninteichosaIraiKanryoYMD,
-            RString saiChosaIraiKaisu,
-            RString iraishoHakkoYMD,
-            RString chosahyoTouShutsuryokuYMD,
-            RString dataShutsuryokuYMD,
-            RString ninteichosaKigenYMD,
-            RString ninteichosaIraiKubun,
-            RString ninteichosaItakusaki,
-            RString chosainShimei,
-            RString ninteichosaIraiKaisu,
-            RString zenkaiChosaItakusaki,
-            RString zenkaiChosain,
-            RString zenzenkaiChosaItakusaki,
-            RString zenzenkaiChosain,
-            RString yubinNo,
-            RString jusho,
-            RString nyushoShisetsu,
-            RString ninteichosaTokusokuYMD,
-            RString ninteichosaTokusokuHoho,
-            RString ninteichosaTokusokuKaisu,
-            RString ninteichosaKusokuKigenYMD,
-            RString chikuCode,
-            RString chikuName) {
+        RString jotai,
+        RString shinseishoKanriNo,
+        RString hihokensha,
+        RString ninteiShinseiYMD,
+        RString hihokenshaNo,
+        RString hihokenshaName,
+        RString ninteiShinseiShinseijiKubunCode,
+        RString ninteiShinseiShinseijiKubunName,
+        RString saiChosaIraiKaisu,
+        RString iraishoHakkoYMD,
+        RString chosahyoTouShutsuryokuYMD,
+        RString dataShutsuryokuYMD,
+        RString ninteichosaKigenYMD,
+        RString ninteichosaIraiKubun,
+        RString ninteichosaItakusaki,
+        RString chosainShimei,
+        RString ninteichosaIraiKaisu,
+        RString zenkaiChosaItakusaki,
+        RString zenkaiChosain,
+        RString zenzenkaiChosaItakusaki,
+        RString zenzenkaiChosain,
+        RString yubinNo,
+        RString jusho,
+        RString nyushoShisetsu,
+        RString ninteichosaTokusokuYMD,
+        RString ninteichosaTokusokuHoho,
+        RString ninteichosaTokusokuKaisu,
+        RString ninteichosaKusokuKigenYMD,
+        RString chikuCode,
+        RString chikuName) {
+        this.jotai = jotai;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.hihokensha = hihokensha;
         this.ninteiShinseiYMD = ninteiShinseiYMD;
@@ -151,7 +152,6 @@ public class NinteichosaIraiItiranCsvEntity {
         this.hihokenshaName = hihokenshaName;
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
         this.ninteiShinseiShinseijiKubunName = ninteiShinseiShinseijiKubunName;
-        this.ninteichosaIraiKanryoYMD = ninteichosaIraiKanryoYMD;
         this.saiChosaIraiKaisu = saiChosaIraiKaisu;
         this.iraishoHakkoYMD = iraishoHakkoYMD;
         this.chosahyoTouShutsuryokuYMD = chosahyoTouShutsuryokuYMD;
