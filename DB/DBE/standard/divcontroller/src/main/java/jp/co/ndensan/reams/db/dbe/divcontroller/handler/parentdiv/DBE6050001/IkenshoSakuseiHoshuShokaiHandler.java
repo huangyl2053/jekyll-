@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 意見書作成報酬照会の画面処理Handlerクラスです。
@@ -38,9 +36,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 public class IkenshoSakuseiHoshuShokaiHandler {
 
     private static final RString MARO = new RString("○");
-    private static final RString 一覧表を発行する = new RString("btnPulish");
-    private static final RString CSVを出力する = new RString("btnShutsutyoku");
-    private static final RString 条件に戻る = new RString("btnModoru");
     private final IkenshoSakuseiHoshuShokaiDiv div;
 
     /**
@@ -50,28 +45,6 @@ public class IkenshoSakuseiHoshuShokaiHandler {
      */
     public IkenshoSakuseiHoshuShokaiHandler(IkenshoSakuseiHoshuShokaiDiv div) {
         this.div = div;
-    }
-
-    /**
-     * 画面初期状態の設定です。
-     */
-    public void set初期状態() {
-        div.getIkenshoSakuseiHoshu().setDisplayNone(true);
-        div.getSakuseiIraibi().setDisplayNone(false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(一覧表を発行する, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
-    }
-
-    /**
-     * 画面一覧状態の設定です。
-     */
-    public void set一覧状態() {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(一覧表を発行する, true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, true);
-        div.getSakuseiIraibi().setDisplayNone(true);
-        div.getIkenshoSakuseiHoshu().setDisplayNone(false);
     }
 
     /**
@@ -129,11 +102,11 @@ public class IkenshoSakuseiHoshuShokaiHandler {
                 txtShisetsuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
             }
             txtKotsuhito = txtKotsuhito.add(date.get主治医意見書作成料());
-            row.setSakuseiryo(DecimalFormatter.toコンマ区切りRString(new Decimal(date.get主治医意見書作成料()), 0).concat("円"));
+            row.getSakuseiryo().setValue(new Decimal(date.get主治医意見書作成料()));
             txtZeiKojoGaku = txtZeiKojoGaku.add(date.get主治医意見書別途診療費());
-            row.setShinryohito(DecimalFormatter.toコンマ区切りRString(new Decimal(date.get主治医意見書別途診療費()), 0).concat("円"));
+            row.getShinryohito().setValue(new Decimal(date.get主治医意見書別途診療費()));
             txtHoshuGokei = txtHoshuGokei.add(date.get主治医意見書報酬());
-            row.setGokei(DecimalFormatter.toコンマ区切りRString(new Decimal(date.get主治医意見書報酬()), 0).concat("円"));
+            row.getGokei().setValue(new Decimal(date.get主治医意見書報酬()));
             row.setShinseishoKanriNo(date.get申請書管理番号());
             row.setIkenshoIraiRirekiNo(new RString(date.get主治医意見書作成依頼履歴番号()));
             row_list.add(row);

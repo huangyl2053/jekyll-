@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jul 18 19:24:32 CST 2016 
+ * Mon Dec 19 21:01:14 JST 2016 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgIkenshoSakuseiHoshu_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
 
     private RString iryoKikanCode;
     private RString iryoKikanMei;
@@ -37,9 +38,9 @@ public class dgIkenshoSakuseiHoshu_Row extends DataRow {
     private RString zaitakuKe;
     private RString shisetsuShin;
     private RString shisetsuKe;
-    private RString sakuseiryo;
-    private RString shinryohito;
-    private RString gokei;
+    private TextBoxNum sakuseiryo;
+    private TextBoxNum shinryohito;
+    private TextBoxNum gokei;
     private RString shinseishoKanriNo;
     private RString ikenshoIraiRirekiNo;
 
@@ -60,9 +61,9 @@ public class dgIkenshoSakuseiHoshu_Row extends DataRow {
         this.zaitakuKe = RString.EMPTY;
         this.shisetsuShin = RString.EMPTY;
         this.shisetsuKe = RString.EMPTY;
-        this.sakuseiryo = RString.EMPTY;
-        this.shinryohito = RString.EMPTY;
-        this.gokei = RString.EMPTY;
+        this.sakuseiryo = new TextBoxNum();
+        this.shinryohito = new TextBoxNum();
+        this.gokei = new TextBoxNum();
         this.shinseishoKanriNo = RString.EMPTY;
         this.ikenshoIraiRirekiNo = RString.EMPTY;
         this.setOriginalData("iryoKikanCode", iryoKikanCode);
@@ -87,7 +88,7 @@ public class dgIkenshoSakuseiHoshu_Row extends DataRow {
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
     }
 
-    public dgIkenshoSakuseiHoshu_Row(RString iryoKikanCode, RString iryoKikanMei, RString code, RString shujiiShimei, TextBoxDate iraibi, TextBoxDate kinyubi, TextBoxDate nyushubi, RString ikenshoIraiKubun, RString hokenshaBango, RString hihokenshaBango, RString shinseishaShimei, RString zaitakuShin, RString zaitakuKe, RString shisetsuShin, RString shisetsuKe, RString sakuseiryo, RString shinryohito, RString gokei, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo) {
+    public dgIkenshoSakuseiHoshu_Row(RString iryoKikanCode, RString iryoKikanMei, RString code, RString shujiiShimei, TextBoxDate iraibi, TextBoxDate kinyubi, TextBoxDate nyushubi, RString ikenshoIraiKubun, RString hokenshaBango, RString hihokenshaBango, RString shinseishaShimei, RString zaitakuShin, RString zaitakuKe, RString shisetsuShin, RString shisetsuKe, TextBoxNum sakuseiryo, TextBoxNum shinryohito, TextBoxNum gokei, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo) {
         super();
         this.setOriginalData("iryoKikanCode", iryoKikanCode);
         this.setOriginalData("iryoKikanMei", iryoKikanMei);
@@ -191,15 +192,15 @@ public class dgIkenshoSakuseiHoshu_Row extends DataRow {
         return shisetsuKe;
     }
 
-    public RString getSakuseiryo() {
+    public TextBoxNum getSakuseiryo() {
         return sakuseiryo;
     }
 
-    public RString getShinryohito() {
+    public TextBoxNum getShinryohito() {
         return shinryohito;
     }
 
-    public RString getGokei() {
+    public TextBoxNum getGokei() {
         return gokei;
     }
 
@@ -286,17 +287,17 @@ public class dgIkenshoSakuseiHoshu_Row extends DataRow {
         this.shisetsuKe = shisetsuKe;
     }
 
-    public void setSakuseiryo(RString sakuseiryo) {
+    public void setSakuseiryo(TextBoxNum sakuseiryo) {
         this.setOriginalData("sakuseiryo", sakuseiryo);
         this.sakuseiryo = sakuseiryo;
     }
 
-    public void setShinryohito(RString shinryohito) {
+    public void setShinryohito(TextBoxNum shinryohito) {
         this.setOriginalData("shinryohito", shinryohito);
         this.shinryohito = shinryohito;
     }
 
-    public void setGokei(RString gokei) {
+    public void setGokei(TextBoxNum gokei) {
         this.setOriginalData("gokei", gokei);
         this.gokei = gokei;
     }
