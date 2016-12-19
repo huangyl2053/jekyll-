@@ -170,12 +170,16 @@ public class NinteiChosainMasterHandler {
             row.setSeibetsu(表示値_女);
         }
         row.setChikuCode(nullToEmpty(chiku));
-        RString chikuName = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
-                new Code(chiku), FlexibleDate.getNowDate());
+        RString chikuName = RString.EMPTY;
+        if (!RString.isNullOrEmpty(chiku)) {
+            chikuName = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                    DBECodeShubetsu.調査地区コード.getコード(),
+                    new Code(chiku), FlexibleDate.getNowDate());
+        }
         if (!RString.isNullOrEmpty(chikuName)) {
             row.setChiku(chikuName);
         }
-        
+
         if (!RString.isNullOrEmpty(chosainShikaku)) {
             chosainShikaku = chosainShikaku.trim();
         }
