@@ -6,13 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2010001;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiChosainBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIraiJidoWariate;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.ChosainInfoMobileCsvEntity;
@@ -114,7 +111,6 @@ public class NinteichosaIrai {
     private static final RString CSVフォルダ名 = new RString("ChosaKekkaNyuryokuMobile");
     private static final RString 書庫化ファイル名 = new RString("ChosaKekkaNyuryokuMobile.zip");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 全て = new RString("3");
     private static final LockingKey 前排他ロックキー = new LockingKey("ShinseishoKanriNo");
 
     /**
@@ -443,6 +439,7 @@ public class NinteichosaIrai {
             }
             requestDiv.getDgNinteiTaskList().setSelectedItems(selected);
         }
+        requestDiv.setHiddenIuputModel(RString.EMPTY);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -1005,11 +1002,12 @@ public class NinteichosaIrai {
     private void 要介護認定完了情報更新(List<dgNinteiTaskList_Row> 選択されたデータ) {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> 要介護認定完了情報Model
                                                              = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+        FlexibleDate today = FlexibleDate.getNowDate();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
             NinteiKanryoJohoIdentifier 要介護認定完了情報の識別子 = new NinteiKanryoJohoIdentifier(
                 new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             NinteichosaIraiListManager.createInstance().save要介護認定完了情報(要介護認定完了情報Model.get(要介護認定完了情報の識別子).
-                createBuilderForEdit().set認定調査依頼完了年月日(FlexibleDate.getNowDate()).build().toEntity());
+                createBuilderForEdit().set認定調査依頼完了年月日(today).build().toEntity());
         }
     }
 
@@ -1071,7 +1069,7 @@ public class NinteichosaIrai {
                 調査項目文言 = NinteichosaKomokuMapping09B.toValue(調査項目連番).get名称();
             }
         } catch (IllegalArgumentException ex) {
-
+            調査項目文言 = RString.EMPTY;
         }
         return 調査項目文言;
     }
