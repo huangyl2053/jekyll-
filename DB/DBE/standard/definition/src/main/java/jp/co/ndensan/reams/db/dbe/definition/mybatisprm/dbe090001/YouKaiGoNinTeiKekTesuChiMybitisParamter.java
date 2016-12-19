@@ -13,7 +13,7 @@ import lombok.Setter;
 
 /**
  * 主治医への結果通知書のMyBatis用パラメータクラスです。
- * 
+ *
  * @reamsid_L DBE-0220-030 wangkun
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -39,6 +39,8 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
     private final boolean use申請書管理番号;
     private final boolean use主治医情報;
 
+    private final boolean useShoKisaiHokenshaNo;
+
     /**
      * コンストラクタです。
      *
@@ -56,6 +58,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
      * @param use二次判定期間To use二次判定期間To
      * @param use申請書管理番号 use申請書管理番号
      * @param use主治医情報 use主治医情報
+     * @param useShoKisaiHokenshaNo useShoKisaiHokenshaNo
      */
     private YouKaiGoNinTeiKekTesuChiMybitisParamter(RString 二次判定期間From,
             RString 二次判定期間To,
@@ -70,7 +73,8 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
             boolean use二次判定期間From,
             boolean use二次判定期間To,
             boolean use申請書管理番号,
-            boolean use主治医情報) {
+            boolean use主治医情報,
+            boolean useShoKisaiHokenshaNo) {
         this.二次判定期間From = 二次判定期間From;
         this.二次判定期間To = 二次判定期間To;
         this.未出力フラグ = 未出力フラグ;
@@ -86,6 +90,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
         this.use二次判定期間To = use二次判定期間To;
         this.use申請書管理番号 = use申請書管理番号;
         this.use主治医情報 = use主治医情報;
+        this.useShoKisaiHokenshaNo = useShoKisaiHokenshaNo;
     }
 
     /**
@@ -99,8 +104,10 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @param 認定状況提供日 認定状況提供日
+     * @param useShoKisaiHokenshaNo useShoKisaiHokenshaNo
      *
-     * @return YouKaiGoNinTeiKekTesuChiMapperProcessParameter 主治医への結果通知書のMyBatis用パラメータクラスです。
+     * @return YouKaiGoNinTeiKekTesuChiMapperProcessParameter
+     * 主治医への結果通知書のMyBatis用パラメータクラスです。
      */
     public static YouKaiGoNinTeiKekTesuChiMybitisParamter create主治医への結果通知書Parameter(RString 二次判定期間From,
             RString 二次判定期間To,
@@ -109,7 +116,8 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
             RString 申請書管理番号,
             RString 証記載保険者番号,
             RString 支所コード,
-            RString 認定状況提供日) {
+            RString 認定状況提供日,
+            boolean useShoKisaiHokenshaNo) {
         boolean useTemp未出力フラグ = true;
         boolean useTemp支所コード = true;
         boolean useTemp二次判定期間From = true;
@@ -136,6 +144,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
         }
         return new YouKaiGoNinTeiKekTesuChiMybitisParamter(二次判定期間From, 二次判定期間To, 未出力フラグ,
                 主治医情報, 申請書管理番号, 証記載保険者番号, 支所コード, 認定状況提供日,
-                useTemp未出力フラグ, useTemp支所コード, useTemp二次判定期間From, useTemp二次判定期間To, useTemp申請書管理番号, useTemp主治医情報);
+                useTemp未出力フラグ, useTemp支所コード, useTemp二次判定期間From, useTemp二次判定期間To, useTemp申請書管理番号, useTemp主治医情報,
+                useShoKisaiHokenshaNo);
     }
 }

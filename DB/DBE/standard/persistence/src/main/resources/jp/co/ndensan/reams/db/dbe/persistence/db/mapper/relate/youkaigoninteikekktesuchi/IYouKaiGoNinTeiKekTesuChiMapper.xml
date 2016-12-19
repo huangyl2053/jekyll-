@@ -193,49 +193,56 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
-        WHERE
-        rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = #{証記載保険者番号}
-        <if test="use支所コード">
-            AND
-            rgdb."DbT5101NinteiShinseiJoho"."shishoCode" = #{支所コード}
-        </if>
-        AND
-        rgdb."DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})
-        AND
-        rgdb."DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
-        <if test="use二次判定期間From">
-            AND
-            rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[>=]]> #{二次判定期間From}
-        </if>
-        <if test="use二次判定期間To">
-            AND
-            rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定期間To}
-        </if>
-        <if test="use申請書管理番号">
-            AND
-            rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = #{申請書管理番号}
-        </if>
-        <if test="use主治医情報">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" || rgdb."DbT5301ShujiiIkenshoIraiJoho"."shujiiCode" =  #{主治医情報}
-        </if>
-        <if test="use未出力フラグ">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
-        </if>
+        <where>
+            <if test="useShoKisaiHokenshaNo">
+                AND rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = #{証記載保険者番号}
+            </if>
+            <if test="use支所コード">
+                AND
+                rgdb."DbT5101NinteiShinseiJoho"."shishoCode" = #{支所コード}
+            </if>
+            <if test="true">
+                AND
+                rgdb."DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})
+            </if>
+            <if test="true">
+                AND
+                rgdb."DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
+            </if>
+            <if test="use二次判定期間From">
+                AND
+                rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[>=]]> #{二次判定期間From}
+            </if>
+            <if test="use二次判定期間To">
+                AND
+                rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定期間To}
+            </if>
+            <if test="use申請書管理番号">
+                AND
+                rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = #{申請書管理番号}
+            </if>
+            <if test="use主治医情報">
+                AND
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" || rgdb."DbT5301ShujiiIkenshoIraiJoho"."shujiiCode" =  #{主治医情報}
+            </if>
+            <if test="use未出力フラグ">
+                AND
+                rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
+            </if>
+        </where>
         ORDER BY
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"
     </select>
 
     <select resultOrdered="true" id="get主治医意見書作成依頼情報ByKey" fetchSize="500" 
-        resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" >
         SELECT 
-          * 
+        * 
         FROM 
-          rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         WHERE
-          DbT5301."shinseishoKanriNo" = #{param1}
-          AND DbT5301."ikenshoIraiRirekiNo" = #{param2}
+        DbT5301."shinseishoKanriNo" = #{param1}
+        AND DbT5301."ikenshoIraiRirekiNo" = #{param2}
     </select>
 </mapper>
