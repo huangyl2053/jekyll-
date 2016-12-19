@@ -30,6 +30,7 @@
         <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" />
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
+        <result property="zenkaiKoroshoIfShikibetsuCode" column="zenkaiKoroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="selectShinseiJoho" resultMap="ResultMap_ShinseiKensakuRelateEntity"
@@ -74,6 +75,7 @@
         DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd",
         zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode",
         zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan",
+        zenkaiNinteiShinseiJoho."zenkaiKoroshoIfShikibetsuCode",
         DbT7051KoseiShichosonMaster."shichosonMeisho",
         DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho",
         DbT5913ChosainJoho."chosainShimei",
@@ -158,6 +160,7 @@
                 DbT5121."shinseishoKanriNo" AS "shinseishoKanriNo"
                 ,DbT5101."ninteiChosaItakusakiCode" AS "ninteiChosaItakusakiCode"
                 ,DbT5101."shujiiIryokikanCode" AS "shujiiIryokikanCode"
+                ,DbT5101."koroshoIfShikibetsuCode" AS "zenkaiKoroshoIfShikibetsuCode"
                 ,DbT5102."nijiHanteiYokaigoJotaiKubunCode" AS "nijiHanteiYokaigoJotaiKubunCode"
                 ,DbT5102."nijiHanteiNinteiYukoKikan" AS "nijiHanteiNinteiYukoKikan"
             FROM rgdb."DbT5121ShinseiRirekiJoho" DbT5121

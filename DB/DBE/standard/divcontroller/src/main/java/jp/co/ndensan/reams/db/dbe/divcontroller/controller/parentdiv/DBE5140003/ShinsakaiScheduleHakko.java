@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 介護認定審査会開催予定登録3クラスです。
@@ -100,6 +102,7 @@ public class ShinsakaiScheduleHakko {
      * @return ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter>
      */
     public ResponseData<DBE514001_ShinsakaiScheduleParameter> onClick_btnHakko(ShinsakaiScheduleHakkoDiv div) {
+        FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Batch")));
         return ResponseData.of(getParamter(div)).respond();
     }
 
