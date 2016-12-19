@@ -11,14 +11,6 @@ var DBZ;
             Events.onClick_btnClear = function () {
                 return "onClick_btnClear";
             };
-
-            Events.onClick_btnSelect = function () {
-                return "onClick_btnSelect";
-            };
-
-            Events.onClick_CheckBox = function () {
-                return "onClick_CheckBox";
-            };
             return Events;
         })();
         YokaigoNinteiShinsakaiIchiranList.Events = Events;

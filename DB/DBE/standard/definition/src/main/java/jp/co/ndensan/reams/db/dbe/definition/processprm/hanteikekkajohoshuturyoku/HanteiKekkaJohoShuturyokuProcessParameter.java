@@ -31,6 +31,7 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
     private boolean isPublish_HanteiKekkaKagami;
     private boolean isPublish_ShinsakaiGijiroku;
     private boolean isPublish_KekkaTsuchiIchiran;
+    private RString userId;
 
     /**
      * コンストラクタです。
@@ -42,6 +43,7 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
      * @param isPublish_HanteiKekkaKagami 要介護認定審査判定結果_鑑
      * @param isPublish_ShinsakaiGijiroku 要介護認定審査会議事録
      * @param isPublish_KekkaTsuchiIchiran 要介護認定結果通知一覧表
+     * @param userId ユーザID
      */
     public HanteiKekkaJohoShuturyokuProcessParameter(
             List<RString> kaisaiBangouList,
@@ -50,7 +52,8 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
             boolean isPublish_HanteiKekka,
             boolean isPublish_HanteiKekkaKagami,
             boolean isPublish_ShinsakaiGijiroku,
-            boolean isPublish_KekkaTsuchiIchiran
+            boolean isPublish_KekkaTsuchiIchiran,
+            RString userId
     ) {
         this.kaisaiBangouList = kaisaiBangouList;
         this.kaisaiBangou = kaisaiBangou;
@@ -59,6 +62,7 @@ public class HanteiKekkaJohoShuturyokuProcessParameter implements IBatchProcessP
         this.isPublish_HanteiKekkaKagami = isPublish_HanteiKekkaKagami;
         this.isPublish_ShinsakaiGijiroku = isPublish_ShinsakaiGijiroku;
         this.isPublish_KekkaTsuchiIchiran = isPublish_KekkaTsuchiIchiran;
+        this.userId = userId;
     }
 
     /**

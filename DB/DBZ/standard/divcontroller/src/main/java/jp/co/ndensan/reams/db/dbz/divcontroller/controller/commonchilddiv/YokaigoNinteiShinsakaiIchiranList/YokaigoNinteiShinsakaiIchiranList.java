@@ -114,28 +114,6 @@ public class YokaigoNinteiShinsakaiIchiranList {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 選択ボタンの処理です。
-     *
-     * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return 介護認定審査会共有一覧Divを持つResponseData
-     */
-    public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_btnSelect(YokaigoNinteiShinsakaiIchiranListDiv div) {
-        getHandler(div).get開催番号();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 選択チェックBOXの処理です。
-     *
-     * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return 介護認定審査会共有一覧Divを持つResponseData
-     */
-    public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_CheckBox(YokaigoNinteiShinsakaiIchiranListDiv div) {
-        getHandler(div).get開催番号List();
-        return ResponseData.of(div).respond();
-    }
-
     private YokaigoNinteiShinsakaiIchiranListHandler getHandler(YokaigoNinteiShinsakaiIchiranListDiv div) {
         return new YokaigoNinteiShinsakaiIchiranListHandler(div);
     }

@@ -28,6 +28,7 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
     private static final String SHUJIIJYOUHOU = "shuJiiJyouHou";
     private static final String SHINSEISHOKANRINO = "shinseishoKanriNo";
     private static final String SHOKISAIHOKENSHANO = "shoKisaiHokenshaNo";
+    private static final String USESHOKISAIHOKENSHANO = "useShoKisaiHokenshaNo";
     private static final String SHISHOCODE = "shishoCode";
     private static final String NINTEIJOHOTEIKYOYMD = "ninteiJohoTeikyoYMD";
     private static final String SHICHOSON_CODE = "shichosonCode";
@@ -45,6 +46,8 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
     private RString shinseishoKanriNo;
     @BatchParameter(key = SHOKISAIHOKENSHANO, name = "証記載保険者番号")
     private RString shoKisaiHokenshaNo;
+    @BatchParameter(key = USESHOKISAIHOKENSHANO, name = "証記載保険者番号使用フラグ")
+    private boolean useShoKisaiHokenshaNo;
     @BatchParameter(key = SHISHOCODE, name = "支所コード")
     private RString shishoCode;
     @BatchParameter(key = NINTEIJOHOTEIKYOYMD, name = "認定状況提供日")
@@ -66,6 +69,7 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
                 shoKisaiHokenshaNo,
                 shishoCode,
                 ninteiJohoTeikyoYMD,
-                shichosonCode);
+                shichosonCode,
+                useShoKisaiHokenshaNo);
     }
 }
