@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -126,5 +128,18 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
                                 eq(ninteiShinseiYMD, 認定申請年月日),
                                 eq(ninteiShinseiShinseijiKubunCode, 認定申請区分_申請時_コード))).
                 toList(DbT5101NinteiShinseiJohoEntity.class);
+    }
+    
+    @Transaction
+    public DbT5101NinteiShinseiJohoEntity selectByHihokenshaNo(RString 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        
+        return accessor.select().
+                table(DbT5101NinteiShinseiJoho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(shoKisaiHokenshaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT5101NinteiShinseiJohoEntity.class);
     }
 }
