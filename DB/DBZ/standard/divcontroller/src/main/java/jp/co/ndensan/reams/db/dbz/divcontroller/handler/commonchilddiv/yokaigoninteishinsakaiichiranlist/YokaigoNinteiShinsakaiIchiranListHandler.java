@@ -118,7 +118,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
                 row.setShiryoSakuseiKubun(RString.EMPTY);
             }
             if (!RString.isNullOrEmpty(shinsakaiKaisai.get介護認定審査会進捗状況())) {
-                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get名称());
+                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get画面表示名称());
             } else {
                 row.setShinchokuJokyo(RString.EMPTY);
             }

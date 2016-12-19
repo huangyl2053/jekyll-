@@ -244,7 +244,7 @@ public class NinteiChosaIrai {
             throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("認定調査依頼日"));
         }
 
-        if (isWaritsuke(selectedItems, div, handler)) {
+        if (is最大割付可能人数超過(div, selectedItems.size())) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbeWarningMessages.割付申請者人数が最大割付可能人数を超過.getMessage()).respond();
             }
@@ -262,38 +262,33 @@ public class NinteiChosaIrai {
         return ResponseData.of(div).respond();
     }
 
-    private boolean isWaritsuke(List<dgMiwaritsukeShinseishaIchiran_Row> selectedItems, NinteiChosaIraiDiv div, NinteiChosaIraiHandler handler) {
-        boolean isWaritsuke = false;
-        int 割付人数 = selectedItems.size();
-        int 既存割付済み人数 = handler.get既存割付済み人数();
+    private boolean is最大割付可能人数超過(NinteiChosaIraiDiv div, int 割付人数) {
+        boolean 最大割付可能人数超過 = false;
+        List<dgWaritsukeZumiShinseishaIchiran_Row> 割付済み申請者List = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
         RString 調査員コード = ViewStateHolder.get(ViewStateKeys.調査員コード, RString.class);
         RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
-        List<dgWaritsukeZumiShinseishaIchiran_Row> waritsukeZumiList = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
-        int waritsukeZumiCount = 0;
-        RYearMonth chosaIraiDay = div.getTxtChosaIraiDay().getValue().getYearMonth();
-        for (dgWaritsukeZumiShinseishaIchiran_Row row : waritsukeZumiList) {
-            if (!RString.isNullOrEmpty(row.getChosaIraiDay()) && (RString.EMPTY.equals(row.getJotai()) || WARITSUKE_ZUMI.equals(row.getJotai()))
-                    && chosaIraiDay.equals(new RDate(row.getChosaIraiDay().toString()).getYearMonth())) {
-                waritsukeZumiCount++;
-            }
-        }
-        RString 認定調査委託先割付定員 = ViewStateHolder.get(ViewStateKeys.認定調査委託先割付定員, RString.class);
-        RString 調査員割付可能人数_月 = ViewStateHolder.get(ViewStateKeys.調査員割付可能人数_月, RString.class);
-        int waritsukeTeiin = nullToZero(認定調査委託先割付定員);
-        int chosaKanoNinzuPerMonth = nullToZero(調査員割付可能人数_月);
+        int 認定調査委託先割付定員 = nullToZero(ViewStateHolder.get(ViewStateKeys.認定調査委託先割付定員, RString.class));
         if (!RString.isNullOrEmpty(認定調査委託先コード)
                 && RString.isNullOrEmpty(調査員コード)
-                && waritsukeTeiin < (割付人数 + 既存割付済み人数)) {
-            isWaritsuke = true;
+                && 認定調査委託先割付定員 < (割付人数 + 割付済み申請者List.size())) {
+            最大割付可能人数超過 = true;
         }
 
+        int 調査依頼年月割付済み人数 = 0;
+        RYearMonth 調査依頼年月 = div.getTxtChosaIraiDay().getValue().getYearMonth();
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : 割付済み申請者List) {
+            if (row.getChosaIraiDay().isEmpty()
+                    || 調査依頼年月.equals(new RDate(row.getChosaIraiDay().toString()).getYearMonth())) {
+                調査依頼年月割付済み人数++;
+            }
+        }
+        int 調査員割付可能人数_月 = nullToZero(ViewStateHolder.get(ViewStateKeys.調査員割付可能人数_月, RString.class));
         if (!RString.isNullOrEmpty(認定調査委託先コード)
                 && !RString.isNullOrEmpty(調査員コード)
-                && chosaKanoNinzuPerMonth < (割付人数 + waritsukeZumiCount)) {
-            isWaritsuke = true;
+                && 調査員割付可能人数_月 < (割付人数 + 調査依頼年月割付済み人数)) {
+            最大割付可能人数超過 = true;
         }
-
-        return isWaritsuke;
+        return 最大割付可能人数超過;
     }
 
     private int nullToZero(RString obj) {
@@ -436,7 +431,7 @@ public class NinteiChosaIrai {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            inertNinteichosaIraiJoho(div);
+            insertNinteichosaIraiJoho(div);
             updateNinteichosaIraiJoho(div);
             div.getKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
@@ -445,14 +440,14 @@ public class NinteiChosaIrai {
         return ResponseData.of(div).respond();
     }
 
-    private void inertNinteichosaIraiJoho(NinteiChosaIraiDiv div) {
-        List<dgWaritsukeZumiShinseishaIchiran_Row> waritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+    private void insertNinteichosaIraiJoho(NinteiChosaIraiDiv div) {
+        List<dgWaritsukeZumiShinseishaIchiran_Row> 割付済み申請者List = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
         NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
-        RDate date = RDate.getNowDate();
-        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, date, SubGyomuCode.DBE認定支援);
-        RString 認定調査期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援);
+        RDate nowDate = RDate.getNowDate();
+        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, nowDate, SubGyomuCode.DBE認定支援);
+        RString 認定調査期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, nowDate, SubGyomuCode.DBE認定支援);
         FlexibleDate 認定調査依頼年月日 = new FlexibleDate(div.getTxtChosaIraiDay().getValue().toDateString());
-        for (dgWaritsukeZumiShinseishaIchiran_Row row : waritsukeZumiShinseishaIchiran) {
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : 割付済み申請者List) {
             if (MIWARITSUKE.equals(row.getJotai())) {
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 int 認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString());
@@ -468,7 +463,8 @@ public class NinteiChosaIrai {
                 }
                 if (ChosaKubun.新規調査.get名称().equals(row.getChosaKubun())) {
                     NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
-                    ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
+                    ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
+                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
                             .set認定調査員コード(調査員コード)
                             .set認定調査依頼区分コード(new Code(NinteichosaIraiKubun.初回.getCode()))
@@ -476,15 +472,15 @@ public class NinteiChosaIrai {
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
                             .set論理削除フラグ(false)
-                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1).build();
+                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1)
+                            .build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
                     update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード);
-                }
-
-                if (ChosaKubun.再調査.get名称().equals(row.getChosaKubun())) {
+                } else if (ChosaKubun.再調査.get名称().equals(row.getChosaKubun())) {
                     認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()) + 1;
                     NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
-                    ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
+                    ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
+                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
                             .set認定調査員コード(調査員コード)
                             .set認定調査依頼区分コード(new Code(NinteichosaIraiKubun.再調査.getCode()))
@@ -492,21 +488,23 @@ public class NinteiChosaIrai {
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
                             .set論理削除フラグ(false)
-                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1).build();
+                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1)
+                            .build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
                 }
-
                 row.setJotai(WARITSUKE_ZUMI);
             }
         }
-        div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(waritsukeZumiShinseishaIchiran);
+        div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(割付済み申請者List);
     }
 
     private void update要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, RString 調査員コード, RString 認定調査委託先コード) {
         NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
         NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(申請書管理番号);
-        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード))
-                .set認定調査員コード(new ChosainCode(調査員コード)).build();
+        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit()
+                .set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード))
+                .set認定調査員コード(new ChosainCode(調査員コード))
+                .build();
         manager.save要介護認定申請情報(ninteiShinseiJoho.modifiedModel());
     }
 

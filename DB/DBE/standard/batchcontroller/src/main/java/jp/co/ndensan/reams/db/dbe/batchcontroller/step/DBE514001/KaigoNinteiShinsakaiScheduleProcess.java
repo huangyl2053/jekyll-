@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -57,7 +58,8 @@ public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoN
 
     @Override
     protected void process(KaigoNinteiShinsakaiScheduleRelateEntity entity) {
-        ShinsakaisukejuruhyoReport report = ShinsakaisukejuruhyoReport.createFrom(business.setHeaderItem(), business.setBodyItem(entity));
+        ShinsakaisukejuruhyoReport report
+                = ShinsakaisukejuruhyoReport.createFrom(business.setHeaderItem(new RYear(processParamter.getNendo())), business.setBodyItem(entity));
         report.writeBy(reportSourceWriter);
     }
 }

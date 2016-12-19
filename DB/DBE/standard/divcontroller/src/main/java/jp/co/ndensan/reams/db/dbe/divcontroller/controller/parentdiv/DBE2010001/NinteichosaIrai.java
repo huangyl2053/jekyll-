@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2010001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiChosainBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaIraiJidoWariate;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.ChosainInfoMobileCsvEntity;
@@ -150,6 +153,11 @@ public class NinteichosaIrai {
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnDataOutput();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            Message message = UrQuestionMessages.処理実行の確認.getMessage();
+            return ResponseData.of(requestDiv).addMessage(
+                new QuestionMessage(message.getCode(), message.evaluate(), ButtonSelectPattern.OKCancel)).respond();
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -418,6 +426,23 @@ public class NinteichosaIrai {
      */
     public ResponseData onOkClose_btnIraishoToOutput(NinteichosaIraiDiv requestDiv) {
         getHandler(requestDiv).initDataGrid();
+        IkenshoPrintParameterModel model = DataPassingConverter.deserialize(requestDiv.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
+        if (model != null) {
+            List<ShinseishoKanriNo> kanriNo = model.get申請書管理番号リスト();
+            List<RString> kanriNoRString = new ArrayList<>();
+            for (ShinseishoKanriNo no : kanriNo) {
+                if (no != null && !no.isEmpty()) {
+                    kanriNoRString.add(no.value());
+                }
+            }
+            List<dgNinteiTaskList_Row> selected = new ArrayList<>();
+            for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getDataSource()) {
+                if (kanriNoRString.contains(row.getShinseishoKanriNo())) {
+                    selected.add(row);
+                }
+            }
+            requestDiv.getDgNinteiTaskList().setSelectedItems(selected);
+        }
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -456,6 +481,7 @@ public class NinteichosaIrai {
 
     private NinteichosaIraiItiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         NinteichosaIraiItiranCsvEntity data = new NinteichosaIraiItiranCsvEntity(
+            row.getJotai(),
             row.getShinseishoKanriNo(),
             row.getHokensha(),
             row.getNinteiShinseiDay().getValue() != null
@@ -465,9 +491,6 @@ public class NinteichosaIrai {
             row.getHihoShimei(),
             get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
             row.getShinseiKubunShinseiji(),
-            row.getChosaIraiKanryoDay().getValue() != null
-            ? row.getChosaIraiKanryoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
             row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
             row.getChosaIraishoHakkoDay().getValue() != null
             ? row.getChosaIraishoHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
@@ -1018,7 +1041,7 @@ public class NinteichosaIrai {
         List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getDgNinteiTaskList().getSelectedItems();
         int tmp要割付人数 = 選択されたデータ.size();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            tmp要割付人数 = NinteichosaIraiManager.createInstance().調査機関自動割付処理(row.getHihoNumber(), row.getChikuCode(),
+            tmp要割付人数 = NinteichosaIraiManager.createInstance().調査機関自動割付処理(row.getGetShoKisaiHokenshaNo(), row.getChikuCode(),
                                                                           row.getShinseishoKanriNo(), tmp要割付人数, RString.EMPTY);
         }
         return tmp要割付人数;
@@ -1152,4 +1175,8 @@ public class NinteichosaIrai {
         return new NinteichosaIraiValidationHandler(div);
     }
 
+    private enum viewstateKeys {
+
+        選択値;
+    }
 }

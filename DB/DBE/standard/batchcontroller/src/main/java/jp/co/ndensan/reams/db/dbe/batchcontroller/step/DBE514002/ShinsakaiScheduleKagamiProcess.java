@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -101,8 +102,9 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
                 processParamter.getShinsakaiKaisaiKikanFrom(), processParamter.getShinsakaiKaisaiKikanTo(), compNinshosha.denshiKoin,
                 compNinshosha.hakkoYMD, compNinshosha.koinMojiretsu, compNinshosha.koinShoryaku, compNinshosha.ninshoshaShimeiKakeru,
                 compNinshosha.ninshoshaShimeiKakenai, compNinshosha.ninshoshaYakushokuMei, compNinshosha.ninshoshaYakushokuMei1,
-                compNinshosha.ninshoshaYakushokuMei2, customerBarCode, entity.getYubinNo(), entity.getJushoText(), 宛名機関名,
-                entity.getShimeiText(), ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(
+                compNinshosha.ninshoshaYakushokuMei2, customerBarCode, new YubinNo(entity.getYubinNo()).getEditedYubinNo(),
+                entity.getJushoText(), 宛名機関名, entity.getShimeiText(),
+                ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(
                                 ConfigNameDBE.介護認定審査会スケジュール表鏡_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 通知文Map.get(1), 通知文Map.get(KEY));
     }

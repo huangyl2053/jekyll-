@@ -260,4 +260,13 @@ public class ShinseiKensakuBusiness implements Serializable {
     public int get認定調査依頼履歴番号() {
         return entity.getNinteichosaIraiRirekiNo();
     }
+    
+     /**
+     * 前回厚労省IF識別コードを返します。
+     *
+     * @return 厚労省IF識別コード
+     */
+    public Code get前回厚労省IF識別コード() {
+        return entity.getZenkaiKoroshoIfShikibetsuCode();
+    }
 }
