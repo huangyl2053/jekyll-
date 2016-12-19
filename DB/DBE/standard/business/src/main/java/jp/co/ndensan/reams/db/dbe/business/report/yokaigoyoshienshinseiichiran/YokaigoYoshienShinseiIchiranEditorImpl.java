@@ -97,11 +97,11 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
     }
 
     private void editListShinseiIchiran8(YokaigoYoshienShinseiIchiranReportSource reportSource) {
-        Code koroshoIfShikibetsuCode = item.getKoroshoIfShikibetsuCode();
+        Code zenkaiKoroshoIfShikibetsuCode = item.getZenkaiKoroshoIfShikibetsuCode();
         Code kubunCode = item.getNijiHanteiYokaigoJotaiKubun();
-        RString koroshoIfShikibetsu = RString.EMPTY;
-        if (koroshoIfShikibetsuCode != null) {
-            koroshoIfShikibetsu = koroshoIfShikibetsuCode.value();
+        RString zenkaiKoroshoIfShikibetsu = RString.EMPTY;
+        if (zenkaiKoroshoIfShikibetsuCode != null) {
+            zenkaiKoroshoIfShikibetsu = zenkaiKoroshoIfShikibetsuCode.value();
         }
         RString nijiHanteiYokaigoJotaiKubun;
         if (kubunCode != null && !RString.isNullOrEmpty(kubunCode.value())) {
@@ -110,14 +110,14 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
             reportSource.listShinseiIchiran_8 = RString.EMPTY;
             return;
         }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(koroshoIfShikibetsu)) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
             reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun99.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(koroshoIfShikibetsu)) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
             reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun02.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(koroshoIfShikibetsu)) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
             reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun06.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(koroshoIfShikibetsu)
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(koroshoIfShikibetsu)) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(zenkaiKoroshoIfShikibetsu)
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
             reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun09.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
         }
     }

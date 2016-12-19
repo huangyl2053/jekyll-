@@ -55,4 +55,5 @@ public class ShinseiKensakuRelateEntity implements Serializable {
     private AtenaMeisho shujiiName;
     private int ikenshoIraiRirekiNo;
     private int ninteichosaIraiRirekiNo;
+    private Code zenkaiKoroshoIfShikibetsuCode;
 }

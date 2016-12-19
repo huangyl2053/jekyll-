@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -30,12 +29,13 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -121,9 +121,7 @@ public class ShinseiKensaku {
             getHandler(div).setShinseiJohoIchiran(searchResult);
         } else {
             div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
-            ShinseiKensakuErrorMessage 該当データなし = new ShinseiKensakuErrorMessage(UrErrorMessages.該当データなし);
-            pairs.add(new ValidationMessageControlPair(該当データなし));
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
@@ -296,6 +294,7 @@ public class ShinseiKensaku {
             item.setChosainShimei(row.get調査員氏名());
             item.setIryoKikanMeisho(row.get医療機関名称());
             item.setShujiiName(row.get主治医氏名());
+            item.setZenkaiKoroshoIfShikibetsuCode(row.get前回厚労省IF識別コード());
             items.add(item);
         }
         return ResponseData.of(new YokaigoYoshienShinseiIchiranPrintService().print(items)).respond();
