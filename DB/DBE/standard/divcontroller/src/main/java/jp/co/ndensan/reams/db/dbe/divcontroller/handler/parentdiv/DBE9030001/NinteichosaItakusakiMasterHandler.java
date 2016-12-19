@@ -210,6 +210,12 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().clearDisplayedValues();
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setSelectedKey(有効);
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setSelectedKey(有効);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
+
     }
 
     /**
@@ -643,6 +649,11 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setDisabled(isDisabled);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().setDisabled(isDisabled);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setDisabled(isDisabled);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setDisabled(isDisabled);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().setDisabled(isDisabled);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setDisabled(isDisabled);
     }
 
     private RString getChosaitakusakiJohoInputValue() {

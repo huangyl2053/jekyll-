@@ -523,6 +523,7 @@ dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_Hokensya
 dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_TayisyouTiku
 dbe/db/dbe/NinteiChosaTokusokujoHakko/beforeJikkou
 dbe/db/dbe/NinteiChosaTokusokujoHakko/jikkou
+dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_ddlHokenshaList
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_radChohyo
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onLoad
 dbe/db/dbe/NinteiChosainJikanMaster/btnAbort
