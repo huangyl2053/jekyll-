@@ -404,21 +404,34 @@ public class HoshuMasutaKoshin {
     }
 
     private void update一覧情報() {
+        List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ更新情報 = new ArrayList<>();
+        List<ShujiiIkenshoHoshuTanka> 意見書報酬単価マスタ更新情報 = new ArrayList<>();
+        List<NinteiChosaHoshuTanka> 訪問調査報酬単価マスタ更新情報 = new ArrayList<>();
+        List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ更新情報 = new ArrayList<>();
+
         Models<ShinsakaiIinHoshuTankaIdentifier, ShinsakaiIinHoshuTanka> 審査員報酬単価情報Model
                 = ViewStateHolder.get(ViewStateKeys.審査員報酬単価マスタ情報, Models.class);
-        List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ更新情報 = new ArrayList<>(審査員報酬単価情報Model.values());
+        if (null != 審査員報酬単価情報Model && null != 審査員報酬単価情報Model.values()) {
+            審査員報酬単価マスタ更新情報 = new ArrayList<>(審査員報酬単価情報Model.values());
+        }
 
         Models<ShujiiIkenshoHoshuTankaIdentifier, ShujiiIkenshoHoshuTanka> 意見書報酬単価情報Model
                 = ViewStateHolder.get(ViewStateKeys.意見書報酬単価マスタ情報, Models.class);
-        List<ShujiiIkenshoHoshuTanka> 意見書報酬単価マスタ更新情報 = new ArrayList<>(意見書報酬単価情報Model.values());
+        if (null != 意見書報酬単価情報Model && null != 意見書報酬単価情報Model.values()) {
+            意見書報酬単価マスタ更新情報 = new ArrayList<>(意見書報酬単価情報Model.values());
+        }
 
         Models<NinteiChosaHoshuTankaIdentifier, NinteiChosaHoshuTanka> 訪問調査報酬単価情報Model
                 = ViewStateHolder.get(ViewStateKeys.訪問調査報酬単価マスタ情報, Models.class);
-        List<NinteiChosaHoshuTanka> 訪問調査報酬単価マスタ更新情報 = new ArrayList<>(訪問調査報酬単価情報Model.values());
+        if (null != 訪問調査報酬単価情報Model && null != 訪問調査報酬単価情報Model.values()) {
+            訪問調査報酬単価マスタ更新情報 = new ArrayList<>(訪問調査報酬単価情報Model.values());
+        }
 
         Models<ShinsakaiIinBetsuTankaIdentifier, ShinsakaiIinBetsuTanka> 審査会委員別単価情報Model
                 = ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報, Models.class);
-        List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ更新情報 = new ArrayList<>(審査会委員別単価情報Model.values());
+        if (null != 審査会委員別単価情報Model && null != 審査会委員別単価情報Model.values()) {
+            審査会委員別単価マスタ更新情報 = new ArrayList<>(審査会委員別単価情報Model.values());
+        }
 
         HoshuMasutaKoshinManager.createInstance().updateマスタ情報(
                 審査員報酬単価マスタ更新情報, 意見書報酬単価マスタ更新情報,
