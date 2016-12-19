@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -177,7 +179,7 @@ public class NinteiChosaIraiHandler {
             row.getWaritsukeZumi().setValue(new Decimal(認定調査委託先.getWaritsukesumiKensu()));
             row.setChosaItakusakiJusho(nullToEmpty(認定調査委託先.getJusho()));
             row.setChosaItakusakiTelNo(認定調査委託先.getTelNo() == null ? RString.EMPTY : 認定調査委託先.getTelNo().value());
-            row.setChosaItakusakiKubun(nullToEmpty(認定調査委託先.getKikanKubun()));
+            row.setChosaItakusakiKubun(ChosaItakuKubunCode.toValue(認定調査委託先.getKikanKubun()).get名称());
             if (is単一保険者()) {
                 row.setHokenshaCode(nullToEmpty(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value()));
                 row.setHokenshaName(nullToEmpty(div.getCcdHokenshaList().getSelectedItem().get市町村名称()));
@@ -220,7 +222,9 @@ public class NinteiChosaIraiHandler {
                 }
             }
             row.getWaritsukeZumi().setValue(new Decimal(調査員.getWaritsukesumiKensu()));
-            row.setChosainShikaku(nullToEmpty(調査員.getChosainShikaku()));
+            if (!調査員.getChosainShikaku().trim().isEmpty()) {
+                row.setChosainShikaku(Sikaku.toValue(調査員.getChosainShikaku()).get名称());
+            }
             row.setChosaKanoNinzuPerMonth(new RString(調査員.getChosaKanoNinzuPerMonth()));
             row.setHokenshaCode(nullToEmpty(selectRow.getHokenshaCode()));
             row.setHokenshaName(nullToEmpty(selectRow.getHokenshaName()));
