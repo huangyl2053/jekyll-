@@ -108,10 +108,10 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void keyBreakProcess(IkenshoShujiiIchiranRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(headItem, current);
-            report.writeBy(reportSourceWriter);
-        }
+//        if (hasBrek(getBefore(), current)) {
+//            IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(headItem, current);
+//            report.writeBy(reportSourceWriter);
+//        }
     }
 
     @Override
@@ -119,11 +119,10 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
         set出力条件表();
     }
 
-    private boolean hasBrek(IkenshoShujiiIchiranRelateEntity before, IkenshoShujiiIchiranRelateEntity current) {
-        return !before.getShujiiCode().equals(current.getShujiiCode())
-                && !ShujiiOutputPage1.toValue(processParameter.getNextpage()).get名称().equals(new RString("なし"));
-    }
-
+//    private boolean hasBrek(IkenshoShujiiIchiranRelateEntity before, IkenshoShujiiIchiranRelateEntity current) {
+//        return !before.getShujiiCode().equals(current.getShujiiCode())
+//                && !ShujiiOutputPage1.toValue(processParameter.getNextpage()).get名称().equals(new RString("なし"));
+//    }
     private void set出力条件表() {
         List<RString> 出力条件 = new ArrayList();
         RStringBuilder builder = new RStringBuilder();
