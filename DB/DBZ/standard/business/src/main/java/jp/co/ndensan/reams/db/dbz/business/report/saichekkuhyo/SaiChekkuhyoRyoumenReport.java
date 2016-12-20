@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -30,6 +31,17 @@ public class SaiChekkuhyoRyoumenReport extends Report<SaiChekkuhyoReportSource> 
         return new SaiChekkuhyoRyoumenReport(itemList);
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param item 要介護認定調査票差異チェック票のItem
+     * @return 要介護認定調査票差異チェック票のReport
+     */
+    public static SaiChekkuhyoRyoumenReport createFrom(SaiChekkuhyoItem item) {
+        List<SaiChekkuhyoItem> itemList = new ArrayList();
+        itemList.add(item);
+        return new SaiChekkuhyoRyoumenReport(itemList);
+    }
     /**
      * インスタンスを生成します。
      *
