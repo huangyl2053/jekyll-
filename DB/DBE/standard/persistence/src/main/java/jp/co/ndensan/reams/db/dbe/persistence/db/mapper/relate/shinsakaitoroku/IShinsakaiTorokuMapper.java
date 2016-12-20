@@ -7,9 +7,9 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitoroku;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku.ShinsakaiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity;
 
 /**
  * 介護認定審査会登録
@@ -22,9 +22,9 @@ public interface IShinsakaiTorokuMapper {
      * 要介護認定申請情報&構成市町村マスタ&要介護認定完了情報&介護認定審査会割当情報&介護認定審査会開催予定情報
      *
      * @param parameter YokaigoNinteiTaskListParameter
-     * @return List<ShinSaKaiToRoKuRelateEntity>
+     * @return List<ShinsakaiTorokuRelateEntity>
      */
-    List<ShinSaKaiToRoKuRelateEntity> get審査会登録(YokaigoNinteiTaskListParameter parameter);
+    List<ShinsakaiTorokuRelateEntity> get審査会登録(YokaigoNinteiTaskListParameter parameter);
 
 
     /**
