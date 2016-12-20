@@ -20,20 +20,20 @@ public class ShujiiIkenshoIraiCsvEntity {
 
     @CsvField(order = 10, name = "申請書管理番号")
     private final RString 申請書管理番号;
-    @CsvField(order = 20, name = "保険者")
+    @CsvField(order = 20, name = "状態")
+    private final RString 状態;
+    @CsvField(order = 30, name = "保険者")
     private final RString 保険者;
-    @CsvField(order = 30, name = "認定申請日")
+    @CsvField(order = 40, name = "認定申請日")
     private final RString 認定申請日;
-    @CsvField(order = 40, name = "被保番号")
+    @CsvField(order = 50, name = "被保番号")
     private final RString 被保番号;
-    @CsvField(order = 50, name = "氏名")
+    @CsvField(order = 60, name = "氏名")
     private final RString 氏名;
-    @CsvField(order = 60, name = "申請時コード")
+    @CsvField(order = 70, name = "申請時コード")
     private final RString 申請時コード;
-    @CsvField(order = 70, name = "申請時")
+    @CsvField(order = 80, name = "申請時")
     private final RString 申請時;
-    @CsvField(order = 80, name = "完了日")
-    private final RString 完了日;
     @CsvField(order = 90, name = "再意見書回数")
     private final Decimal 再意見書回数;
     @CsvField(order = 100, name = "依頼日")
@@ -69,15 +69,14 @@ public class ShujiiIkenshoIraiCsvEntity {
 
     /**
      * コンストラクタです。
-     *
      * @param 申請書管理番号 申請書管理番号
+     * @param 状態 状態
      * @param 保険者 保険者
      * @param 認定申請日 認定申請日
      * @param 被保番号 被保番号
      * @param 氏名 氏名
      * @param 申請時コード 申請時コード
      * @param 申請時 申請時
-     * @param 完了日 完了日
      * @param 再意見書回数 再意見書回数
      * @param 依頼日 依頼日
      * @param 依頼書発行日 依頼書発行日
@@ -97,13 +96,13 @@ public class ShujiiIkenshoIraiCsvEntity {
      */
     public ShujiiIkenshoIraiCsvEntity(
             RString 申請書管理番号,
+            RString 状態,
             RString 保険者,
             RString 認定申請日,
             RString 被保番号,
             RString 氏名,
             RString 申請時コード,
             RString 申請時,
-            RString 完了日,
             Decimal 再意見書回数,
             RString 依頼日,
             RString 依頼書発行日,
@@ -121,13 +120,13 @@ public class ShujiiIkenshoIraiCsvEntity {
             RString 入所施設,
             int 経過日数) {
         this.申請書管理番号 = 申請書管理番号;
+        this.状態 = 状態;
         this.保険者 = 保険者;
         this.認定申請日 = 認定申請日;
         this.被保番号 = 被保番号;
         this.氏名 = 氏名;
         this.申請時コード = 申請時コード;
         this.申請時 = 申請時;
-        this.完了日 = 完了日;
         this.再意見書回数 = 再意見書回数;
         this.依頼日 = 依頼日;
         this.依頼書発行日 = 依頼書発行日;
