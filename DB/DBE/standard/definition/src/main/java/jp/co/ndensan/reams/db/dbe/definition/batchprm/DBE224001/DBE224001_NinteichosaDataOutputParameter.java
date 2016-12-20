@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataCsvProcessParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -65,13 +66,47 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
     /**
      * NinteiChosaDataOutputProcessParamterを作成します。
      *
+     * @param csvTempTableName 一時テーブル名
+     *
      * @return NinteiChosaDataOutputProcessParamter
      */
-    public NinteiChosaDataOutputProcessParamter toNinteiChosaDataOutputProcessParamter() {
+    public NinteiChosaDataOutputProcessParamter toNinteiChosaDataOutputProcessParamter(RString csvTempTableName) {
         return new NinteiChosaDataOutputProcessParamter(ninteichosaItakusakiCode,
                 ninteiChosainCode,
                 shinseishoKanriNoList,
-                shichosonCode);
-
+                shichosonCode,
+                csvTempTableName);
     }
+
+    /**
+     * NinteiChosaDataOutputProcessParamterを作成します。
+     *
+     * @param csvTempTableName 一時テーブル名
+     * @param shinseishoKanriNoList List<RString>
+     *
+     * @return NinteiChosaDataOutputProcessParamter
+     */
+    public NinteiChosaDataOutputProcessParamter toNinteiChosaDataOutputProcessParamter(
+            RString csvTempTableName, List<RString> shinseishoKanriNoList) {
+        return new NinteiChosaDataOutputProcessParamter(ninteichosaItakusakiCode,
+                ninteiChosainCode,
+                shinseishoKanriNoList,
+                shichosonCode,
+                csvTempTableName);
+    }
+
+    /**
+     * 認定調査データ出力（モバイル）のCSV出力のためのProcess用パラメータを取得します。
+     *
+     * @param csvTempTableName CSV一時テーブル名
+     * @param csvTempTableNameZenkai CSV一時テーブル名（前回）
+     * @return 認定調査データ出力（モバイル）のCSV出力のためのProcess用パラメータ取得
+     */
+    public NinteiChosaDataCsvProcessParamter toNinteiChosaDataCsvProcessParamter(
+            RString csvTempTableName, RString csvTempTableNameZenkai) {
+        return new NinteiChosaDataCsvProcessParamter(
+                csvTempTableName, csvTempTableNameZenkai,
+                this.ninteichosaItakusakiCode, this.ninteiChosainCode, this.shinseishoKanriNoList, this.shichosonCode);
+    }
+
 }

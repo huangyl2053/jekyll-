@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocrdataread;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocrfiledata.OcrFileLineDataTypeModel;
 import jp.co.ndensan.reams.db.dbe.entity.csv.jizenshinsakekka.OcrJohoOcrDataRecordEntity;
@@ -52,6 +53,7 @@ public class OcrDataReadResult {
     private RString 看護小規模多機能型居宅介護;
     private RString 随時対応型訪問介護看護;
     private RString 施設利用の有無;
+
     private RString 麻痺;
     private RString 拘縮;
     private RString 寝返り;
@@ -116,10 +118,7 @@ public class OcrDataReadResult {
 
     private static final RString 概況調査区分 = new RString("501");
     private static final RString 基本調査区分 = new RString("502");
-    private static final RString 概況調査区分ca3 = new RString("ID501");
-    private static final RString 基本調査区分ca3 = new RString("ID502");
-//    private static final RString PNG = new RString("png");
-//    private static final RString TIF = new RString("TIF");
+
     private List<RString> イメージファイル;
 
     /**
@@ -243,14 +242,6 @@ public class OcrDataReadResult {
     private OcrFileLineDataTypeModel parse1(RString line) {
         this.parse1データ行(line);
         return OcrFileLineDataTypeModel.行データタイプ_データ行;
-    }
-
-    private RString line補完(RString line, int lineEndIndex) {
-        if (line.length() >= lineEndIndex) {
-            return line;
-        }
-
-        return line.padRight(lineEndIndex);
     }
 
     /**
@@ -450,6 +441,7 @@ public class OcrDataReadResult {
             行項目_認知症高齢者の日常生活自立度 = lineList.get(61);
             行項目_障害高齢者の日常生活自立度 = lineList.get(62);
         } else {
+            イメージファイル = new ArrayList<>();
             for (int i = 0; i < size; i++) {
                 if (lineList.get(i).contains("\\")) {
                     RString fileTest = lineList.get(i).substring(lineList.get(i).lastIndexOf("\\") + 1);
@@ -473,9 +465,6 @@ public class OcrDataReadResult {
                         イメージファイル.add(fileName);
                     } else if (fileTest.contains("01i039")) {
                         RString fileName = new RString("C0003.png");
-                        イメージファイル.add(fileName);
-                    } else {
-                        RString fileName = new RString("C0007.png");
                         イメージファイル.add(fileName);
                     }
                 }
@@ -584,17 +573,17 @@ public class OcrDataReadResult {
             データ行Entity.set認知症高齢者の日常生活自立度(行項目_認知症高齢者の日常生活自立度);
 
             ocrDataデータ行Entity = データ行Entity;
-
         }
-
     }
 
-    private RString to西暦_年(RString 和暦_年) {
-        if (和暦_年 != null) {
-            和暦_年 = 和暦_年.trim();
+    private RString to西暦_年(RString 和暦_日付) {
+        RString 年号 = RDate.getNowDate().wareki().getEra();
+        if (和暦_日付 != null) {
+            和暦_日付 = 和暦_日付.trim();
+            RString 和暦 = 年号.concat(和暦_日付);
             RDate result = null;
-            result = new RDate(和暦_年.toString());
-            return result.seireki().toDateString();
+            result = new RDate(和暦.toString());
+            return result.toDateString();
         }
         return RString.EMPTY;
     }

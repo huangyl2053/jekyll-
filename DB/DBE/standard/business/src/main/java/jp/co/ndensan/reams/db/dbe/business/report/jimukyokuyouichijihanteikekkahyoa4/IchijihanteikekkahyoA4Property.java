@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBE-0150-400 lishengli
  */
-public class IchijihanteikekkahyoA4Property extends ReportPropertyBase<IchijihanteikekkahyoA4ReportSource> {
+public class IchijihanteikekkahyoA4Property extends ReportPropertyBase<IchijihanteikekkahyoReportSource> {
 
     /**
      * インスタンスを生成します。

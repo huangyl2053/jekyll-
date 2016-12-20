@@ -51,12 +51,12 @@
      "layoutName": "DBE2210001",
      "layoutTitle": "認定調査結果登録",
      "eventName": "検索結果一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2060001",
-     "toLayoutTitle": "完了処理・認定調査結果入手",
-     "toState": ""
+     "toLayoutTitle": "基本運用・認定調査結果入手",
+     "toState": "登録"
     },
     {
      "id": "5",
@@ -69,8 +69,8 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2060001",
-     "toLayoutTitle": "完了処理・認定調査結果入手",
-     "toState": ""
+     "toLayoutTitle": "基本運用・認定調査結果入手",
+     "toState": "登録"
     },
     {
      "id": "6",

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.OcrDataFileParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
@@ -70,8 +70,8 @@ public class DBE310100_OcrDataFileTest extends DbeTestDacBase {
         assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
     }
 
-    private static OcrDataFileParameter createParameter() {
-        OcrDataFileParameter batchFlowParameter = new OcrDataFileParameter();
+    private static DBE250001_NinteiChoshaKekkaTorikomiParameter createParameter() {
+        DBE250001_NinteiChoshaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChoshaKekkaTorikomiParameter();
         RString path = new RString("db|EucOther_DBA701002_186|2016-12-12 16:47:59.649232");
         batchFlowParameter.set共有ファイルエントリ情報文字列(path);
 

@@ -35,7 +35,6 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
     private RString temp_認定調査督促対象者一覧表;
     private RString temp_CSV出力;
     private RString temp_印刷済対象者;
-    private RString temp_発行履歴;
     private int temp_督促方法;
     private RString temp_督促メモ;
     private FlexibleDate temp_督促日;
@@ -58,7 +57,6 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
         this.temp_認定調査督促対象者一覧表 = tempData.getTemp_認定調査督促対象者一覧表();
         this.temp_CSV出力 = tempData.getTemp_CSV出力();
         this.temp_印刷済対象者 = tempData.getTemp_印刷済対象者();
-        this.temp_発行履歴 = tempData.getTemp_発行履歴();
         this.temp_督促方法 = tempData.getTemp_督促方法();
         this.temp_督促メモ = tempData.getTemp_督促メモ();
         this.temp_督促日 = tempData.getTemp_督促日();

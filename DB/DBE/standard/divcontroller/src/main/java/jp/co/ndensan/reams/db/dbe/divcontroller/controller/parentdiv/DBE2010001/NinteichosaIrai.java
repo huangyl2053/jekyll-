@@ -63,6 +63,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
@@ -105,9 +106,9 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class NinteichosaIrai {
 
-    private static final RString CSVファイル名_認定調査依頼一覧 = new RString("NinteichosaIraiIchiranJoho.csv");
-    private static final RString CSVファイル名_調査結果入力用データ = new RString("ChosaKekkaNyuryokuMobile");
-    private static final RString CSVファイル名_調査結果入力用調査員データ = new RString("ChosainInfoMobile");
+    private static final RString CSVファイルID_認定調査依頼一覧 = new RString("DBE201001");
+    private static final RString CSVファイルID_調査結果入力用データ = new RString("DBE201021");
+    private static final RString CSVファイルID_調査結果入力用調査員データ = new RString("DBE201022");
     private static final RString CSVフォルダ名 = new RString("ChosaKekkaNyuryokuMobile");
     private static final RString 書庫化ファイル名 = new RString("ChosaKekkaNyuryokuMobile.zip");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
@@ -120,9 +121,12 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onLoad(NinteichosaIraiDiv requestDiv) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(requestDiv).respond();
+        }
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             requestDiv.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         getHandler(requestDiv).onLoad();
         return ResponseData.of(requestDiv).respond();
@@ -150,11 +154,6 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            Message message = UrQuestionMessages.処理実行の確認.getMessage();
-            return ResponseData.of(requestDiv).addMessage(
-                new QuestionMessage(message.getCode(), message.evaluate(), ButtonSelectPattern.OKCancel)).respond();
-        }
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -166,11 +165,12 @@ public class NinteichosaIrai {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnDataOutput(NinteichosaIraiDiv requestDiv, IDownLoadServletResponse response) {
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名_認定調査依頼一覧);
+        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_認定調査依頼一覧);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
                                                        = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-            setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+            setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
@@ -180,12 +180,12 @@ public class NinteichosaIrai {
             }
             csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名_認定調査依頼一覧));
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(
-            new SharedFileDirectAccessDescriptor(entry, CSVファイル名_認定調査依頼一覧), response);
+            new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
     /**
@@ -218,7 +218,7 @@ public class NinteichosaIrai {
                     DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().evaluate())).respond();
             } else {
                 RealInitialLocker.release(前排他ロックキー);
-                getHandler(requestDiv).onLoad();
+                getHandler(requestDiv).initDataGrid();
                 return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
             }
         }
@@ -226,7 +226,7 @@ public class NinteichosaIrai {
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(前排他ロックキー);
-            getHandler(requestDiv).onLoad();
+            getHandler(requestDiv).initDataGrid();
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
         }
         return ResponseData.of(requestDiv).respond();
@@ -259,6 +259,8 @@ public class NinteichosaIrai {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnChosadataOutput(NinteichosaIraiDiv requestDiv, IDownLoadServletResponse response) {
+        RString 出力名調査結果 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_調査結果入力用データ).split("_").get(0);
+        RString 出力名調査員 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_調査結果入力用調査員データ).split("_").get(0);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVフォルダ名);
         Directory.deleteIfExists(filePath);
         Directory.createDirectories(filePath);
@@ -272,7 +274,7 @@ public class NinteichosaIrai {
                                  : 調査入力用データ.records().get(0).get認定調査員コード().value();
                 try (CsvWriter<ChosaInputCsvEntity> csvWriter
                                                     = new CsvWriter.InstanceBuilder(
-                    Path.combinePath(filePath, getファイル名(CSVファイル名_調査結果入力用データ, 調査員コード))).
+                    Path.combinePath(filePath, getファイル名(出力名調査結果, 調査員コード))).
                     canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                     setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
                     for (NinteichosaIraiBusiness data : 調査入力用データ.records()) {
@@ -321,8 +323,7 @@ public class NinteichosaIrai {
                 認定調査員コード_ファイル名 = 調査員.get認定調査員コード();
                 try (CsvWriter<ChosainInfoMobileCsvEntity> csvWriter
                                                            = new CsvWriter.InstanceBuilder(
-                    Path.combinePath(filePath, getファイル名(CSVファイル名_調査結果入力用調査員データ,
-                                                        調査員.get認定調査員コード()))).
+                    Path.combinePath(filePath, getファイル名(出力名調査員, 調査員.get認定調査員コード()))).
                     canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                     setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
                     for (NinteichosaIraiChosainBusiness data : 調査結果入力用調査員データ.records()) {
@@ -358,7 +359,7 @@ public class NinteichosaIrai {
             NinteichosaIraiManager.createInstance().update認定調査依頼情報(申請書管理番号.value());
         }
         RealInitialLocker.release(前排他ロックキー);
-        getHandler(requestDiv).onLoad();
+        getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
@@ -426,6 +427,10 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onOkClose_btnIraishoToOutput(NinteichosaIraiDiv requestDiv) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).check最大表示件数();
+        if (vallidation.existsError()) {
+            requestDiv.getTxtMaxCount().setValue(requestDiv.getMaxCount());
+        }
         getHandler(requestDiv).initDataGrid();
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(requestDiv.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (model != null) {
@@ -479,6 +484,28 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.完了);
         }
         return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
+     * 最大表示件数テキストボックスの値が変更された際の動作です。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_txtMaxCount(NinteichosaIraiDiv requestDiv) {
+        getHandler(requestDiv).initDataGrid();
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
+     * 継続ボタン押下動作です。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnContinue(NinteichosaIraiDiv requestDiv) {
+        getHandler(requestDiv).initDataGrid();
+        return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
     private NinteichosaIraiItiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {

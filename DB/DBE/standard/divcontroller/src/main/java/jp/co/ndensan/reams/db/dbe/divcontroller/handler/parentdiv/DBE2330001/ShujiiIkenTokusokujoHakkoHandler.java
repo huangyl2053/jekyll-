@@ -68,7 +68,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
     }
 
     private void initializtion() {
-        div.getHakkoJoken().getTxtKijunDay().setValue(RDate.getNowDate());
+        div.getShujiiIkenshoTokusokujo().getTxtKijunDay().setValue(RDate.getNowDate());
         RString 主治医意見書督促期限日数 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援) == null ? RString.EMPTY : DbBusinessConfig.get(ConfigNameDBE.主治医意見書督促期限日数,
                         RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -110,7 +110,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
         tempData.setTemp_保険者名称(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
         tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getIryoKikanCode());
         tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getShujiiCode());
-        FlexibleDate txtKijunDay = new FlexibleDate(div.getHakkoJoken().getTxtKijunDay().getValue().toString());
+        FlexibleDate txtKijunDay = new FlexibleDate(div.getShujiiIkenshoTokusokujo().getTxtKijunDay().getValue().toString());
         if (!txtKijunDay.isEmpty()) {
             tempData.setTemp_基準日(txtKijunDay);
         }
@@ -122,8 +122,6 @@ public class ShujiiIkenTokusokujoHakkoHandler {
         tempData.setTemp_CSV出力(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().contains(RADIOBUTTONKEY1)
                 ? 選択された : 未選択);
         tempData.setTemp_印刷済対象者(div.getShujiiIkenshoTokusokujo().getChkInsatsuzumiTaisho().getSelectedKeys().contains(RADIOBUTTONKEY0)
-                ? 選択された : 未選択);
-        tempData.setTemp_発行履歴(div.getShujiiIkenshoTokusokujo().getChkHakkoRireki().getSelectedKeys().contains(RADIOBUTTONKEY0)
                 ? 選択された : 未選択);
         tempData.setTemp_督促方法(div.getShujiiIkenshoTokusokujo().getRadTokusokuHoho().getSelectedIndex());
         tempData.setTemp_督促メモ(div.getShujiiIkenshoTokusokujo().getTxtTokusokuMemo().getValue());

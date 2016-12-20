@@ -53,7 +53,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     private static final RString MYBATIS_SELECT_ID_GOKE = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsahoshuichiran.IShinsaHoshuIchiranMapper.get合計額");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE604001"));
-    private static final RString CSV_FILE_NAME = new RString("Shinsahoshuichiran.csv");
+    private static final RString CSV_FILE_NAME = new RString("介護認定審査会委員報酬一覧表.csv");
     private static final RString なし = new RString("なし");
     private static final RString CSVを出力する = new RString("1");
     private static final RString 一覧表を発行する = new RString("2");

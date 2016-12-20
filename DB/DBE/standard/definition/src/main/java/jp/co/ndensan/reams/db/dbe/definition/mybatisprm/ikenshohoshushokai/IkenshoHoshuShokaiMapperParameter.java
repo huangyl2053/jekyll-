@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshohoshushokaiichiran.IkenshoHoshuShokaiIchiranKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 意見書作成報酬照会のMyBatis用パラメータクラスです。
@@ -23,7 +24,7 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
     private final FlexibleDate 作成依頼日開始;
     private final boolean 作成依頼日終了Flag;
     private final boolean 作成依頼日開始Flag;
-    private final int 最大表示件数;
+    private final Decimal 最大表示件数;
     private final boolean 最大表示件数Flag;
     private final boolean batchFlag;
     private final boolean 画面Flag;
@@ -42,11 +43,12 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
      * @param 画面Flag 画面Flag
      * @param ikenshoBusiness 主治医意見書作成報酬合計額リストのキー情報
      */
-    private IkenshoHoshuShokaiMapperParameter(FlexibleDate 作成依頼日終了,
+    private IkenshoHoshuShokaiMapperParameter(
+            FlexibleDate 作成依頼日終了,
             FlexibleDate 作成依頼日開始,
             boolean 作成依頼日終了Flag,
             boolean 作成依頼日開始Flag,
-            int 最大表示件数,
+            Decimal 最大表示件数,
             boolean 最大表示件数Flag,
             boolean batchFlag,
             boolean 画面Flag,
@@ -70,9 +72,10 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
      * @param 最大表示件数 最大表示件数
      * @return 合計額リストのパラメータ
      */
-    public static IkenshoHoshuShokaiMapperParameter createSelectBy情報(FlexibleDate 作成依頼日開始,
+    public static IkenshoHoshuShokaiMapperParameter createSelectBy情報(
+            FlexibleDate 作成依頼日開始,
             FlexibleDate 作成依頼日終了,
-            int 最大表示件数) {
+            Decimal 最大表示件数) {
         return new IkenshoHoshuShokaiMapperParameter(
                 作成依頼日終了,
                 作成依頼日開始,
@@ -93,7 +96,8 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
      * @param ikenshoBusiness 主治医意見書作成報酬合計額リストのキー情報
      * @return 合計額リストの帳票出力のパラメータ
      */
-    public static IkenshoHoshuShokaiMapperParameter createParamter(FlexibleDate 作成依頼日開始,
+    public static IkenshoHoshuShokaiMapperParameter createParamter(
+            FlexibleDate 作成依頼日開始,
             FlexibleDate 作成依頼日終了,
             List<IkenshoHoshuShokaiIchiranKey> ikenshoBusiness) {
         return new IkenshoHoshuShokaiMapperParameter(
@@ -101,7 +105,7 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
                 作成依頼日開始,
                 !作成依頼日終了.isEmpty(),
                 !作成依頼日開始.isEmpty(),
-                0,
+                null,
                 false,
                 true,
                 false,

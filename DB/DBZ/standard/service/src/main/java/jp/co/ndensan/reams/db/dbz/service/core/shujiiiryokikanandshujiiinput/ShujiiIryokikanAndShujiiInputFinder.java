@@ -80,9 +80,9 @@ public class ShujiiIryokikanAndShujiiInputFinder {
      * @return RString
      */
     public RString getIryoKikanMeisho(LasdecCode 市町村コード, RString 主治医医療機関コード) {
-        return dbt5911dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード) == null
+        return dbt5911dac.selectByKeyAndJokyoFlg(市町村コード, new ShujiiIryokikanCode(主治医医療機関コード)) == null
                 ? RString.EMPTY
-                : dbt5911dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード).getIryoKikanMeisho();
+                : dbt5911dac.selectByKeyAndJokyoFlg(市町村コード, new ShujiiIryokikanCode(主治医医療機関コード)).getIryoKikanMeisho();
     }
 
     /**

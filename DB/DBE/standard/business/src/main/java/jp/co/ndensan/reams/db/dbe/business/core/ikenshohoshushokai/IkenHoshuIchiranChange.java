@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public final class IkenHoshuIchiranChange {
 
-    private static int 件数_値;
+    private static int 総ページ数;
     private static final int 頁_件数 = 25;
     private static final int ONE = 1;
 
@@ -43,7 +43,8 @@ public final class IkenHoshuIchiranChange {
         } else {
             意見 = new RString("再");
         }
-        IkenHoshuIchiranEntity data = new IkenHoshuIchiranEntity(entity.get主治医医療機関コード(),
+        IkenHoshuIchiranEntity data = new IkenHoshuIchiranEntity(
+                entity.get主治医医療機関コード(),
                 entity.get医療機関名称(),
                 entity.get主治医コード(),
                 entity.get主治医氏名(),
@@ -74,13 +75,14 @@ public final class IkenHoshuIchiranChange {
      *
      * @param entity 主治医意見書作成実績集計表情報
      * @param 番号 主治医意見書作成報酬帳票の一覧リストのNo
-     * @param 件数 主治医意見書作成報酬帳票の一覧リストの件数
+     * @param カレントページ数 主治医意見書作成報酬帳票の一覧リストの件数
      * @return 主治医意見書作成実績集計表の帳票の合計データ
      */
-    public static GokeiEntity createGokeiDate(IkenshoHoshuShokaiRelateEntity entity, int 番号, int 件数) {
-        件数_値 = entity.get件数();
+    public static GokeiEntity createGokeiDate(IkenshoHoshuShokaiRelateEntity entity, int 番号, int カレントページ数) {
+        総ページ数 = entity.get件数();
         GokeiEntity data;
-        if (件数_値 - ONE <= 件数 && 番号 % 頁_件数 == ONE) {
+        if ((総ページ数 - ONE <= カレントページ数) 
+                && (番号 % 頁_件数 == ONE)) {
             data = new GokeiEntity(
                     entity.get在新_合計(),
                     entity.get在継_合計(),

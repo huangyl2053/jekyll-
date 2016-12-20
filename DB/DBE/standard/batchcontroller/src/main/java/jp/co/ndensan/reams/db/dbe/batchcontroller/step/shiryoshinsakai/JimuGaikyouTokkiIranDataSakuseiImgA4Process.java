@@ -70,7 +70,7 @@ public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBas
     @Override
     protected void process(ImjJohoEntity entity) {
         entity.setJimukyoku(true);
-        business = new JimuGaikyouTokkiBusiness(null, null, 概況特記イメージ情報, paramter, no, entity);
+        business = new JimuGaikyouTokkiBusiness(null, null, 概況特記イメージ情報, paramter, no, entity, batchWriteA4.getImageFolderPath());
         GaikyoTokkiIchiranReport report = new GaikyoTokkiIchiranReport(business);
         report.writeBy(reportSourceWriterA4);
         no = no + 1;

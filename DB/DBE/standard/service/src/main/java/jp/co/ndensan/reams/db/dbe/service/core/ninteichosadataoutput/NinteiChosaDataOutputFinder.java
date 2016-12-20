@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.DbT5121MybitisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputMybitisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosadataoutput.INinteiChosaDataOutputMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -70,4 +73,20 @@ public class NinteiChosaDataOutputFinder {
         return SearchResult.of(resultList, 0, false);
     }
 
+    /**
+     * 認定調査一覧情報を取得します。
+     *
+     * @param param NinteiChosaDataOutputMybitisParameter
+     * @return List<ShinseishoKanriNo>
+     */
+    @Transaction
+    public List<ShinseiRirekiJoho> get前回申請管理番号List(DbT5121MybitisParameter param) {
+        List<DbT5121ShinseiRirekiJohoEntity> 前回申請管理番号List
+                = mapperProvider.create(INinteiChosaDataOutputMapper.class).get前回申請管理番号List(param);
+        List<ShinseiRirekiJoho> resultList = new ArrayList<>();
+        for (DbT5121ShinseiRirekiJohoEntity entity : 前回申請管理番号List) {
+            resultList.add(new ShinseiRirekiJoho(entity));
+        }
+        return resultList;
+    }
 }

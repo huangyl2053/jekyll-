@@ -198,13 +198,25 @@ public class ShinsakaiToroku {
     /**
      * 対象者状態ラジオボタンの押下チェック処理です。
      *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
+     * @param div ShinsakaiTorokuDiv
+     * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onChange_radTaishoshaJotai(ShinsakaiTorokuDiv div) {
         getHandler(div).setJyotaiKubun();
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * データグリッドの取消ボタン押下時のイベントです。
+     * 
+     * @param div ShinsakaiTorokuDiv
+     * @return ResponseData<ShinsakaiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiTorokuDiv> onSelect_btnCancel(ShinsakaiTorokuDiv div) {
+        dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getClickedItem();
+        getHandler(div).onSelect_btnCancel(row);
+        return ResponseData.of(div).respond();
+    } 
 
     private void 前排他キーのセット() {
         LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
@@ -236,7 +248,7 @@ public class ShinsakaiToroku {
                 日期転換(row.getShinsakaiKaisaiDay().getValue()),
                 時刻転換(row.getShinsakaiKaisaiJikan().getValue()),
                 row.getYusenWaritsukesha(),
-                row.getKaisaiNumber(),
+                row.getShinsakaiMeisho(),
                 row.getGogitai());
         return data;
     }
