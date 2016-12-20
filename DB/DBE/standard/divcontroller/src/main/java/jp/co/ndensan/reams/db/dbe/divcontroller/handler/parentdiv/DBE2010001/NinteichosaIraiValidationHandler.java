@@ -11,10 +11,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.validation.ValidationMessage;
+import jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.UzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.portal.definition.PublicReportMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -155,6 +159,16 @@ public class NinteichosaIraiValidationHandler {
         return null;
     }
 
+    public ValidationMessageControlPairs check最大表示件数() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        Decimal 入力値 = div.getTxtMaxCount().getValue();
+        if (入力値 == null) {
+            pairs.add(new ValidationMessageControlPair(new validateMessage(
+                UzErrorMessages.入力値が不正), div.getTxtMaxCount()));
+        }
+        return pairs;
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
         該当データなし(UrErrorMessages.該当データなし),
@@ -179,6 +193,21 @@ public class NinteichosaIraiValidationHandler {
         public Message getMessage() {
             return message;
         }
+    }
+
+    private class validateMessage implements IValidationMessage {
+
+        private final Message message;
+
+        private validateMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+
     }
 
     private boolean is異なった保険者(List<dgNinteiTaskList_Row> 選択されたデータ) {

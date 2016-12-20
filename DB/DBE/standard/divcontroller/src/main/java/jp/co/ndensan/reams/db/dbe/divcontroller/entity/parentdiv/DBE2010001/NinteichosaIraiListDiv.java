@@ -182,5 +182,15 @@ public class NinteichosaIraiListDiv extends Panel {
         this.getChosairaitaishoshaichiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
+    @JsonIgnore
+    public TextBoxNum getTxtMaxCount() {
+        return this.getChosairaitaishoshaichiran().getTxtMaxCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
+        this.getChosairaitaishoshaichiran().setTxtMaxCount(txtMaxCount);
+    }
+
     // </editor-fold>
 }
