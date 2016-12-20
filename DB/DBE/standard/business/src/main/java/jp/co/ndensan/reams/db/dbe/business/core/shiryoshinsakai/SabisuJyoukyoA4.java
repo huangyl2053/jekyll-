@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.image.StackBarImage;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事務局一次判定結果票のEntityの編集クラスです。
@@ -47,8 +48,9 @@ public class SabisuJyoukyoA4 {
     private static final Code A_09 = new Code("09A");
     private static final Code B_09 = new Code("09B");
     private static final RString 記号 = new RString("+");
-    private static final int IMAGE_WIDTH = 512;
+    private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
+    private static final int 基準時間算出用_10 = 10;
 
     /**
      * 項目の設定する。
@@ -94,22 +96,22 @@ public class SabisuJyoukyoA4 {
                 entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
                 entity.getKijunJikanNinchishoKasan(), entity.getKijunJikan()));
         set基準時間の積み上げグラフ(項目, entity);
-        項目.set要介護認定等基準時間_食事(new RString(entity.getKijunJikanShokuji()));
-        項目.set要介護認定等基準時間_排泄(new RString(entity.getKijunJikanHaisetsu()));
-        項目.set要介護認定等基準時間_移動(new RString(entity.getKijunJikanIdo()));
-        項目.set要介護認定等基準時間_清潔保持(new RString(entity.getKijunJikanSeiketsuHoji()));
-        項目.set要介護認定等基準時間_間接(new RString(entity.getKijunJikanKansetsuCare()));
-        項目.set要介護認定等基準時間_BPSD関連(new RString(entity.getKijunJikanBPSDKanren()));
-        項目.set要介護認定等基準時間_機能訓練(new RString(entity.getKijunJikanKinoKunren()));
-        項目.set要介護認定等基準時間_医療関連(new RString(entity.getKijunJikanIryoKanren()));
-        項目.set要介護認定等基準時間_認知症加算(new RString(entity.getKijunJikanNinchishoKasan()));
+        項目.set要介護認定等基準時間_食事(new RString(new Decimal(entity.getKijunJikanShokuji()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_排泄(new RString(new Decimal(entity.getKijunJikanHaisetsu()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_移動(new RString(new Decimal(entity.getKijunJikanIdo()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_清潔保持(new RString(new Decimal(entity.getKijunJikanSeiketsuHoji()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_間接(new RString(new Decimal(entity.getKijunJikanKansetsuCare()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_BPSD関連(new RString(new Decimal(entity.getKijunJikanBPSDKanren()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_機能訓練(new RString(new Decimal(entity.getKijunJikanKinoKunren()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_医療関連(new RString(new Decimal(entity.getKijunJikanIryoKanren()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間_認知症加算(new RString(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10).toString()));
         項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
         TyukanHyouka 中間評価項目 = new TyukanHyouka();
-        中間評価項目.set第1群(new RString(entity.getChukanHyokaKomoku1gun()));
-        中間評価項目.set第2群(new RString(entity.getChukanHyokaKomoku2gun()));
-        中間評価項目.set第3群(new RString(entity.getChukanHyokaKomoku3gun()));
-        中間評価項目.set第4群(new RString(entity.getChukanHyokaKomoku4gun()));
-        中間評価項目.set第5群(new RString(entity.getChukanHyokaKomoku5gun()));
+        中間評価項目.set第1群(new RString(new Decimal(entity.getChukanHyokaKomoku1gun()).divide(基準時間算出用_10).toString()));
+        中間評価項目.set第2群(new RString(new Decimal(entity.getChukanHyokaKomoku2gun()).divide(基準時間算出用_10).toString()));
+        中間評価項目.set第3群(new RString(new Decimal(entity.getChukanHyokaKomoku3gun()).divide(基準時間算出用_10).toString()));
+        中間評価項目.set第4群(new RString(new Decimal(entity.getChukanHyokaKomoku4gun()).divide(基準時間算出用_10).toString()));
+        中間評価項目.set第5群(new RString(new Decimal(entity.getChukanHyokaKomoku5gun()).divide(基準時間算出用_10).toString()));
         List<TyukanHyouka> 中間評価リスト = new ArrayList<>();
         中間評価リスト.add(中間評価項目);
         項目.set中間評価リスト(中間評価リスト);
@@ -278,34 +280,38 @@ public class SabisuJyoukyoA4 {
 
     private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
         List<EachBarImage> イメージリストA4 = new ArrayList();
-        if (0 < entity.getKijunJikanShokuji()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanShokuji(), BarImageType.PATTERN1));
+        if (0 < getNumber(entity.getKijunJikanShokuji())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanShokuji()), BarImageType.PATTERN1));
         }
-        if (0 < entity.getKijunJikanHaisetsu()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanHaisetsu(), BarImageType.PATTERN2));
+        if (0 < getNumber(entity.getKijunJikanHaisetsu())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanHaisetsu()), BarImageType.PATTERN2));
         }
-        if (0 < entity.getKijunJikanIdo()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanIdo(), BarImageType.PATTERN3));
+        if (0 < getNumber(entity.getKijunJikanIdo())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanIdo()), BarImageType.PATTERN3));
         }
-        if (0 < entity.getKijunJikanSeiketsuHoji()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanSeiketsuHoji(), BarImageType.PATTERN4));
+        if (0 < getNumber(entity.getKijunJikanSeiketsuHoji())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanSeiketsuHoji()), BarImageType.PATTERN4));
         }
-        if (0 < entity.getKijunJikanKansetsuCare()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanKansetsuCare(), BarImageType.PATTERN5));
+        if (0 < getNumber(entity.getKijunJikanKansetsuCare())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanKansetsuCare()), BarImageType.PATTERN5));
         }
-        if (0 < entity.getKijunJikanBPSDKanren()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanBPSDKanren(), BarImageType.PATTERN6));
+        if (0 < getNumber(entity.getKijunJikanBPSDKanren())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanBPSDKanren()), BarImageType.PATTERN6));
         }
-        if (0 < entity.getKijunJikanKinoKunren()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanKinoKunren(), BarImageType.PATTERN7));
+        if (0 < getNumber(entity.getKijunJikanKinoKunren())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanKinoKunren()), BarImageType.PATTERN7));
         }
-        if (0 < entity.getKijunJikanIryoKanren()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanIryoKanren(), BarImageType.PATTERN8));
+        if (0 < getNumber(entity.getKijunJikanIryoKanren())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanIryoKanren()), BarImageType.PATTERN8));
         }
-        if (0 < entity.getKijunJikanNinchishoKasan()) {
-            イメージリストA4.add(new EachBarImage(entity.getKijunJikanNinchishoKasan(), BarImageType.PATTERN9));
+        if (0 < getNumber(entity.getKijunJikanNinchishoKasan())) {
+            イメージリストA4.add(new EachBarImage(getNumber(entity.getKijunJikanNinchishoKasan()), BarImageType.PATTERN9));
         }
         RString 文件 = new StackBarImage().createHorizontalBarImage(IMAGE_WIDTH, IMAGE_HEIGHT, イメージリストA4);
         項目.set基準時間の積み上げグラフ(文件);
+    }
+
+    private int getNumber(int 各基準時間) {
+        return 各基準時間 * 5 / 12;
     }
 }

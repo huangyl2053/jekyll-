@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoTokusokujoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,10 +27,10 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     private TextBoxNum txtOverChosaIraiDay;
     @JsonProperty("labOverChosaIraiDay")
     private Label labOverChosaIraiDay;
+    @JsonProperty("txtKijunDay")
+    private TextBoxDate txtKijunDay;
     @JsonProperty("chkInsatsuzumiTaisho")
     private CheckBoxList chkInsatsuzumiTaisho;
-    @JsonProperty("chkHakkoRireki")
-    private CheckBoxList chkHakkoRireki;
     @JsonProperty("radTokusokuHoho")
     private RadioButton radTokusokuHoho;
     @JsonProperty("txtTokusokuMemo")
@@ -83,6 +83,24 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     }
 
     /*
+     * gettxtKijunDay
+     * @return txtKijunDay
+     */
+    @JsonProperty("txtKijunDay")
+    public TextBoxDate getTxtKijunDay() {
+        return txtKijunDay;
+    }
+
+    /*
+     * settxtKijunDay
+     * @param txtKijunDay txtKijunDay
+     */
+    @JsonProperty("txtKijunDay")
+    public void setTxtKijunDay(TextBoxDate txtKijunDay) {
+        this.txtKijunDay = txtKijunDay;
+    }
+
+    /*
      * getchkInsatsuzumiTaisho
      * @return chkInsatsuzumiTaisho
      */
@@ -98,24 +116,6 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     @JsonProperty("chkInsatsuzumiTaisho")
     public void setChkInsatsuzumiTaisho(CheckBoxList chkInsatsuzumiTaisho) {
         this.chkInsatsuzumiTaisho = chkInsatsuzumiTaisho;
-    }
-
-    /*
-     * getchkHakkoRireki
-     * @return chkHakkoRireki
-     */
-    @JsonProperty("chkHakkoRireki")
-    public CheckBoxList getChkHakkoRireki() {
-        return chkHakkoRireki;
-    }
-
-    /*
-     * setchkHakkoRireki
-     * @param chkHakkoRireki chkHakkoRireki
-     */
-    @JsonProperty("chkHakkoRireki")
-    public void setChkHakkoRireki(CheckBoxList chkHakkoRireki) {
-        this.chkHakkoRireki = chkHakkoRireki;
     }
 
     /*
