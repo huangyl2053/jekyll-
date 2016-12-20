@@ -10,3 +10,9 @@ faxNo,UDD026TelNo,TelNo,,,,,FAX番号,A
 daihyoshaName,varchar,RString,,,,,代表者名,A
 daihyoshaNameKana,varchar,RString,,,,,代表者名カナ,A
 jokyoFlag,bool,boolean,,,,,状況フラグ,A
+kinyuKikanCode,UDD030KinyuKikanCode,KinyuKikanCode,,,,,金融機関コード,A
+kinyuKikanShitenCode,UDD031KinyuKikanShitenCode,KinyuKikanShitenCode,,,,,支店コード,A
+yokinShubetsu,varchar,RString,,,,,預金種別,A
+kozaNo,varchar,RString,,,,,口座番号,A
+kozaMeigininKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,口座名義人カナ,A
+kozaMeiginin,UDD042AtenaMeisho,AtenaMeisho,,,,,口座名義人,A
