@@ -252,9 +252,10 @@ public class IraishoIkkatsuHakkoHandler {
             } else {
                 ocrDisabledKeys.add(概況調査);
             }
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                ninteiChosahyoDisabledKeys.add(概況特記);
-            } else {
+//            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+//                ninteiChosahyoDisabledKeys.add(概況特記);
+//            } 
+            else {
                 ocrDisabledKeys.add(概況特記);
             }
             div.getChkNinteiChosahyoShurui().setDisabledItemsByKey(ninteiChosahyoDisabledKeys);
