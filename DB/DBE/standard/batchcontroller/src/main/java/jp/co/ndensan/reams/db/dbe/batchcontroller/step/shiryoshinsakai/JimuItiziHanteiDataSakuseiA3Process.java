@@ -134,6 +134,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
 
+
                     JimuTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuTokkiTextA3ReportSource> occuredBreak(ReportLineRecord<JimuTokkiTextA3ReportSource> currentRecord,
@@ -158,10 +159,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517041.getReportId().value(), new RString("概況調査の特記"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517031.getReportId().value(), new RString("特記事項（1枚目）"));
         outputJokenhyoFactory(ReportIdDBE.DBE517081.getReportId().value(), new RString("一次判定結果票"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517135.getReportId().value(), new RString("特記事項（2枚目以降）"));
     }
 
     private void outputJokenhyoFactory(RString id, RString 帳票名) {
