@@ -41,6 +41,7 @@ public final class YokaigoNinteiParamter {
     private final boolean hihokenshaNoFlag;
     private final RString shikibetsuCode;
     private final boolean shikibetsuCodeFlag;
+    private final boolean useShimei;
     private final RString shimei;
     private final boolean searchesShimeiByKana;
     private final boolean hizukeHaniKey0;
@@ -179,6 +180,7 @@ public final class YokaigoNinteiParamter {
         this.hihokenshaNoFlag = hihokenshaNoFlag;
         this.shikibetsuCode = shikibetsuCode;
         this.shikibetsuCodeFlag = shikibetsuCodeFlag;
+        this.useShimei = shimei != null && !shimei.isEmpty();
         this.shimei = shimei;
         this.searchesShimeiByKana = searchesShimeiByKana;
         this.hizukeHaniKey0 = hizukeHaniKey0;
