@@ -127,7 +127,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
             }
         } else if (一次判定結果_認知症加算_2.equals(entity.getTb_一次判定結果_加算())
                 || 一次判定結果_認知症加算_3.equals(entity.getTb_一次判定結果_加算())) {
-            if (entity.getTb_一次判定結果().isEmpty()) {
+            if (!entity.getTb_一次判定結果().isEmpty()) {
                 entity.setTb_一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.toValue(entity.getTb_一次判定結果()).get名称());
             } else {
                 entity.setTb_一次判定結果(RString.EMPTY);

@@ -34,8 +34,8 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 主治医氏名;
     @CsvField(order = 7, name = "被保険者番号")
     private final RString 被保険者番号;
-    @CsvField(order = 8, name = "申請者名")
-    private final RString 申請者氏名;
+    @CsvField(order = 8, name = "被保険者氏名")
+    private final RString 被保険者氏名;
     @CsvField(order = 9, name = "記入日")
     private final RString 記入日;
     @CsvField(order = 10, name = "入手日")
@@ -92,7 +92,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.主治医コード = 主治医コード;
         this.主治医氏名 = 主治医氏名;
         this.被保険者番号 = 被保険者番号;
-        this.申請者氏名 = 申請者氏名;
+        this.被保険者氏名 = 申請者氏名;
         this.記入日 = 記入日;
         this.入手日 = 入手日;
         this.入手パターン_在新 = 入手パターン_在新;

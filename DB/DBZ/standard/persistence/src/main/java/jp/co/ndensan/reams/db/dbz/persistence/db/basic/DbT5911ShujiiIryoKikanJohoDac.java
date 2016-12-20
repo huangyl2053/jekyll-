@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho.jokyoFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho.shichosonCode;
@@ -47,7 +48,7 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
     @Transaction
     public DbT5911ShujiiIryoKikanJohoEntity selectByKey(
             LasdecCode 市町村コード,
-            RString 主治医医療機関コード) throws NullPointerException {
+            ShujiiIryokikanCode 主治医医療機関コード) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードMSG.toString()));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
 
@@ -111,7 +112,7 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
      * @return 件数
      */
     @Transaction
-    public int countByShichosonCodeAndShujiiIryokikanCode(LasdecCode 市町村コード, RString 主治医医療機関コード) {
+    public int countByShichosonCodeAndShujiiIryokikanCode(LasdecCode 市町村コード, ShujiiIryokikanCode 主治医医療機関コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードMSG.toString()));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -135,7 +136,7 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
     @Transaction
     public DbT5911ShujiiIryoKikanJohoEntity selectByKeyAndJokyoFlg(
             LasdecCode 市町村コード,
-            RString 主治医医療機関コード) throws NullPointerException {
+            ShujiiIryokikanCode 主治医医療機関コード) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(市町村コードMSG.toString()));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
 
@@ -178,7 +179,7 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
      */
     @Transaction
     public List<DbT5911ShujiiIryoKikanJohoEntity> selectBy主治医医療機関コード(
-            RString 主治医医療機関コード) throws NullPointerException {
+            ShujiiIryokikanCode 主治医医療機関コード) throws NullPointerException {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage(主治医医療機関コードMSG.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

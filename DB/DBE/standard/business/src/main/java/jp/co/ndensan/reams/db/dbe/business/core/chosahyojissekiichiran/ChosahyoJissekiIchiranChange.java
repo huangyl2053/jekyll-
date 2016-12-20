@@ -34,6 +34,7 @@ public final class ChosahyoJissekiIchiranChange {
                 entity.get市町村名称(),
                 entity.get調査委託先コード(),
                 entity.get事業者名称(),
+                entity.get調査員コード(),
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 entity.get被保険者氏名(),

@@ -101,18 +101,24 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onChange_radShoriJyotai(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).onChange_radShoriJyotai();
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        if (div.getTxtSaidaiHyojiKensu().getValue() == null) {
+            div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+            div.getTxtSaidaiHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
+        }
+        getHandler(div).画面変更より最新データを検索();
         return ResponseData.of(div).respond();
     }
     
     /**
-     * 処理状態が変更時、一覧の表示を制御します。 未処理：key0 完了可能：key1 すべて：key2
+     * 画面の表示最大件数が変更時、再検索します。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onChange_txtSaidaiHyojiKensu(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).initialize();
+        getHandler(div).画面変更より最新データを検索();
         return ResponseData.of(div).respond();
     }
     

@@ -59,54 +59,8 @@ public class KojinIraiNaiyouKoshinHandler {
         div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
         set今回調査依頼情報(今回調査情報);
         set前回調査依頼情報(前回調査情報);
-        if (今回主治医情報 != null) {
-            div.getTxtIkenshoSakuseiIraiRirekiBango().setValue(new RString(今回主治医情報.get主治医意見書作成依頼履歴番号()));
-            div.getTxtIkenshoIraiKubun().setValue(IkenshoIraiKubun.toValue(今回主治医情報.get主治医意見書依頼区分()).get名称());
-            div.getTxtIkenshoSakuseiKaisu().setValue(new Decimal(今回主治医情報.get主治医意見書作成回数()));
-            div.getTxtShujiiShiteiiKubun().setValue(IshiKubunCode.toValue(今回主治医情報.get医師区分コード().value()).get名称());
-            div.getTxtIkenshoIraibi().setValue(new RDate(今回主治医情報.get主治医意見書作成依頼年月日().toString()));
-            div.getTxtIkenshoKinyubi().setValue(new RDate(今回主治医情報.get主治医意見書記入年月日().toString()));
-            List<RString> key = new ArrayList();
-            if (今回主治医情報.is認定情報提供希望フラグ()) {
-                key.add(キー_0);
-            } else {
-                key.add(キー_1);
-            }
-            div.getChkNinteiKekka().setSelectedItemsByKey(key);
-            div.getTxtShujiiCode().setValue(今回主治医情報.get主治医コード());
-            div.getTxtShujii().setValue(今回主治医情報.get主治医氏名());
-            div.getTxtIryoKikanCode().setValue(今回主治医情報.get主治医医療機関コード());
-            div.getTxtIryoKikan().setValue(今回主治医情報.get医療機関名称());
-            div.getTxtYubinGango().setValue(今回主治医情報.get郵便番号());
-            div.getTxtJusho().setDomain(new AtenaJusho(今回主治医情報.get住所()));
-            div.getTxtDenwaBangoIkensho().setDomain(今回主治医情報.get電話番号());
-            div.getTxtFaxIkensho().setDomain(今回主治医情報.get番号());
-            div.getTxtIryoKikanDaihyoshaShimei().setValue(今回主治医情報.get代表者名所());
-        }
-        if (前回主治医情報 != null) {
-            div.getTxtIkenshoSakuseiIraiRirekiBangoZen().setValue(new RString(前回主治医情報.get主治医意見書作成依頼履歴番号()));
-            div.getTxtIkenshoIraiKubunZen().setValue(IkenshoIraiKubun.toValue(前回主治医情報.get主治医意見書依頼区分()).get名称());
-            div.getTxtIkenshoSakuseiKaisuZen().setValue(new Decimal(前回主治医情報.get主治医意見書作成回数()));
-            div.getTxtShujiiShiteiiKubunZen().setValue(IshiKubunCode.toValue(前回主治医情報.get医師区分コード().value()).get名称());
-            div.getTxtIkenshoIraibiZen().setValue(new RDate(前回主治医情報.get主治医意見書作成依頼年月日().toString()));
-            div.getTxtIkenshoKinyubiZen().setValue(new RDate(前回主治医情報.get主治医意見書記入年月日().toString()));
-            List<RString> key = new ArrayList();
-            if (前回主治医情報.is認定情報提供希望フラグ()) {
-                key.add(キー_0);
-            } else {
-                key.add(キー_1);
-            }
-            div.getChkNinteiKekkaZen().setSelectedItemsByKey(key);
-            div.getTxtShujiiCodeZen().setValue(前回主治医情報.get主治医コード());
-            div.getTxtShujiiZen().setValue(前回主治医情報.get主治医氏名());
-            div.getTxtIryoKikanCodeZen().setValue(前回主治医情報.get主治医医療機関コード());
-            div.getTxtIryoKikanZen().setValue(前回主治医情報.get医療機関名称());
-            div.getTxtYubinGangoZen().setValue(前回主治医情報.get郵便番号());
-            div.getTxtJushoZen().setDomain(new AtenaJusho(前回主治医情報.get住所()));
-            div.getTxtDenwaBangoIkenshoZen().setDomain(前回主治医情報.get電話番号());
-            div.getTxtFaxIkenshoZen().setDomain(前回主治医情報.get番号());
-            div.getTxtIryoKikanDaihyoshaShimeiZen().setValue(前回主治医情報.get代表者名所());
-        }
+        set今回主治医情報(今回主治医情報);
+        set前回主治医情報(前回主治医情報);
     }
 
     private void set前回調査依頼情報(KojinIraiNaiyouBusiness 前回調査情報) {
@@ -210,4 +164,65 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtHomonUmu().setValue(KateiHomonUmu.toValue(今回調査情報.is家庭訪問の有無()).get名称());
         }
     }
+    
+   private void set今回主治医情報(KojinIraiNaiyouBusiness 今回主治医情報) {
+        if (今回主治医情報 != null) {
+            div.getTxtIkenshoSakuseiIraiRirekiBango().setValue(new RString(今回主治医情報.get主治医意見書作成依頼履歴番号()));
+            div.getTxtIkenshoIraiKubun().setValue(IkenshoIraiKubun.toValue(今回主治医情報.get主治医意見書依頼区分()).get名称());
+            div.getTxtIkenshoSakuseiKaisu().setValue(new Decimal(今回主治医情報.get主治医意見書作成回数()));
+            div.getTxtShujiiShiteiiKubun().setValue(IshiKubunCode.toValue(今回主治医情報.get医師区分コード().value()).get名称());
+            if (今回主治医情報.get主治医意見書作成依頼年月日() != null) {
+                div.getTxtIkenshoIraibi().setValue(new RDate(今回主治医情報.get主治医意見書作成依頼年月日().toString()));
+            }
+            if (今回主治医情報.get主治医意見書記入年月日() != null) {
+                div.getTxtIkenshoKinyubi().setValue(new RDate(今回主治医情報.get主治医意見書記入年月日().toString()));
+            }
+            List<RString> key = new ArrayList();
+            if (今回主治医情報.is認定情報提供希望フラグ()) {
+                key.add(キー_0);
+            } else {
+                key.add(キー_1);
+            }
+            div.getChkNinteiKekka().setSelectedItemsByKey(key);
+            div.getTxtShujiiCode().setValue(今回主治医情報.get主治医コード());
+            div.getTxtShujii().setValue(今回主治医情報.get主治医氏名());
+            div.getTxtIryoKikanCode().setValue(今回主治医情報.get主治医医療機関コード());
+            div.getTxtIryoKikan().setValue(今回主治医情報.get医療機関名称());
+            div.getTxtYubinGango().setValue(今回主治医情報.get郵便番号());
+            div.getTxtJusho().setDomain(new AtenaJusho(今回主治医情報.get住所()));
+            div.getTxtDenwaBangoIkensho().setDomain(今回主治医情報.get電話番号());
+            div.getTxtFaxIkensho().setDomain(今回主治医情報.get番号());
+            div.getTxtIryoKikanDaihyoshaShimei().setValue(今回主治医情報.get代表者名所());
+        }
+   }
+   private void set前回主治医情報(KojinIraiNaiyouBusiness 前回主治医情報) {
+        if (前回主治医情報 != null) {
+            div.getTxtIkenshoSakuseiIraiRirekiBangoZen().setValue(new RString(前回主治医情報.get主治医意見書作成依頼履歴番号()));
+            div.getTxtIkenshoIraiKubunZen().setValue(IkenshoIraiKubun.toValue(前回主治医情報.get主治医意見書依頼区分()).get名称());
+            div.getTxtIkenshoSakuseiKaisuZen().setValue(new Decimal(前回主治医情報.get主治医意見書作成回数()));
+            div.getTxtShujiiShiteiiKubunZen().setValue(IshiKubunCode.toValue(前回主治医情報.get医師区分コード().value()).get名称());
+            if (前回主治医情報.get主治医意見書作成依頼年月日() != null) {
+                div.getTxtIkenshoIraibiZen().setValue(new RDate(前回主治医情報.get主治医意見書作成依頼年月日().toString()));
+            }
+            if (前回主治医情報.get主治医意見書記入年月日() != null) {
+                div.getTxtIkenshoKinyubiZen().setValue(new RDate(前回主治医情報.get主治医意見書記入年月日().toString()));
+            }
+            List<RString> key = new ArrayList();
+            if (前回主治医情報.is認定情報提供希望フラグ()) {
+                key.add(キー_0);
+            } else {
+                key.add(キー_1);
+            }
+            div.getChkNinteiKekkaZen().setSelectedItemsByKey(key);
+            div.getTxtShujiiCodeZen().setValue(前回主治医情報.get主治医コード());
+            div.getTxtShujiiZen().setValue(前回主治医情報.get主治医氏名());
+            div.getTxtIryoKikanCodeZen().setValue(前回主治医情報.get主治医医療機関コード());
+            div.getTxtIryoKikanZen().setValue(前回主治医情報.get医療機関名称());
+            div.getTxtYubinGangoZen().setValue(前回主治医情報.get郵便番号());
+            div.getTxtJushoZen().setDomain(new AtenaJusho(前回主治医情報.get住所()));
+            div.getTxtDenwaBangoIkenshoZen().setDomain(前回主治医情報.get電話番号());
+            div.getTxtFaxIkenshoZen().setDomain(前回主治医情報.get番号());
+            div.getTxtIryoKikanDaihyoshaShimeiZen().setValue(前回主治医情報.get代表者名所());
+        }
+   }
 }

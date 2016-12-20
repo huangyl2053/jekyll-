@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT5914SonotaKikanJohoマスタとエンティティのマッピング用XMLです。 -->
-<!-- @reamsid_L DBE-3000-050 wangkun -->
+<!-- 作者： n1070 久保裕是 -->
+
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5914SonotaKikanJoho">
-        SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper.allColumns_DbT5914SonotaKikanJoho" />
-        FROM
-        rgdb."DbT5914SonotaKikanJoho"
-        WHERE
-        rgdb."DbT5914SonotaKikanJoho"."isDeleted" = FALSE
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5914SonotaKikanJohoMapper.allColumns_DbT5914SonotaKikanJoho" />
+     FROM
+         rgdb."DbT5914SonotaKikanJoho"
+     WHERE
+         rgdb."DbT5914SonotaKikanJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5914SonotaKikanJoho">
-        "DbT5914SonotaKikanJoho"."shoKisaiHokenshaNo" as "dbT5914SonotaKikanJoho_shoKisaiHokenshaNo",
-        "DbT5914SonotaKikanJoho"."sonotaKikanCode" as "dbT5914SonotaKikanJoho_sonotaKikanCode",
-        "DbT5914SonotaKikanJoho"."insertDantaiCd" as "dbT5914SonotaKikanJoho_insertDantaiCd",
-        "DbT5914SonotaKikanJoho"."insertTimestamp" as "dbT5914SonotaKikanJoho_insertTimestamp",
-        "DbT5914SonotaKikanJoho"."insertReamsLoginId" as "dbT5914SonotaKikanJoho_insertReamsLoginId",
-        "DbT5914SonotaKikanJoho"."insertContextId" as "dbT5914SonotaKikanJoho_insertContextId",
-        "DbT5914SonotaKikanJoho"."isDeleted" as "dbT5914SonotaKikanJoho_isDeleted",
-        "DbT5914SonotaKikanJoho"."updateCount" as "dbT5914SonotaKikanJoho_updateCount",
-        "DbT5914SonotaKikanJoho"."lastUpdateTimestamp" as "dbT5914SonotaKikanJoho_lastUpdateTimestamp",
-        "DbT5914SonotaKikanJoho"."lastUpdateReamsLoginId" as "dbT5914SonotaKikanJoho_lastUpdateReamsLoginId",
-        "DbT5914SonotaKikanJoho"."kikanMeisho" as "dbT5914SonotaKikanJoho_kikanMeisho",
-        "DbT5914SonotaKikanJoho"."kikanMeishoKana" as "dbT5914SonotaKikanJoho_kikanMeishoKana",
-        "DbT5914SonotaKikanJoho"."yubinNo" as "dbT5914SonotaKikanJoho_yubinNo",
-        "DbT5914SonotaKikanJoho"."jusho" as "dbT5914SonotaKikanJoho_jusho",
-        "DbT5914SonotaKikanJoho"."jushoKana" as "dbT5914SonotaKikanJoho_jushoKana",
-        "DbT5914SonotaKikanJoho"."telNo" as "dbT5914SonotaKikanJoho_telNo",
-        "DbT5914SonotaKikanJoho"."chosaItakuKubun" as "dbT5914SonotaKikanJoho_chosaItakuKubun",
-        "DbT5914SonotaKikanJoho"."waritsukeTeiin" as "dbT5914SonotaKikanJoho_waritsukeTeiin",
-        "DbT5914SonotaKikanJoho"."waritsukeChiku" as "dbT5914SonotaKikanJoho_waritsukeChiku",
-        "DbT5914SonotaKikanJoho"."kikanKubun" as "dbT5914SonotaKikanJoho_kikanKubun",
-        "DbT5914SonotaKikanJoho"."haishiFlag" as "dbT5914SonotaKikanJoho_haishiFlag"
+         "DbT5914SonotaKikanJoho"."shoKisaiHokenshaNo" as "dbT5914SonotaKikanJoho_shoKisaiHokenshaNo",
+         "DbT5914SonotaKikanJoho"."sonotaKikanCode" as "dbT5914SonotaKikanJoho_sonotaKikanCode",
+         "DbT5914SonotaKikanJoho"."insertDantaiCd" as "dbT5914SonotaKikanJoho_insertDantaiCd",
+         "DbT5914SonotaKikanJoho"."insertTimestamp" as "dbT5914SonotaKikanJoho_insertTimestamp",
+         "DbT5914SonotaKikanJoho"."insertReamsLoginId" as "dbT5914SonotaKikanJoho_insertReamsLoginId",
+         "DbT5914SonotaKikanJoho"."insertContextId" as "dbT5914SonotaKikanJoho_insertContextId",
+         "DbT5914SonotaKikanJoho"."isDeleted" as "dbT5914SonotaKikanJoho_isDeleted",
+         "DbT5914SonotaKikanJoho"."updateCount" as "dbT5914SonotaKikanJoho_updateCount",
+         "DbT5914SonotaKikanJoho"."lastUpdateTimestamp" as "dbT5914SonotaKikanJoho_lastUpdateTimestamp",
+         "DbT5914SonotaKikanJoho"."lastUpdateReamsLoginId" as "dbT5914SonotaKikanJoho_lastUpdateReamsLoginId",
+         "DbT5914SonotaKikanJoho"."kikanMeisho" as "dbT5914SonotaKikanJoho_kikanMeisho",
+         "DbT5914SonotaKikanJoho"."kikanMeishoKana" as "dbT5914SonotaKikanJoho_kikanMeishoKana",
+         "DbT5914SonotaKikanJoho"."yubinNo" as "dbT5914SonotaKikanJoho_yubinNo",
+         "DbT5914SonotaKikanJoho"."jusho" as "dbT5914SonotaKikanJoho_jusho",
+         "DbT5914SonotaKikanJoho"."jushoKana" as "dbT5914SonotaKikanJoho_jushoKana",
+         "DbT5914SonotaKikanJoho"."telNo" as "dbT5914SonotaKikanJoho_telNo",
+         "DbT5914SonotaKikanJoho"."chosaItakuKubun" as "dbT5914SonotaKikanJoho_chosaItakuKubun",
+         "DbT5914SonotaKikanJoho"."waritsukeTeiin" as "dbT5914SonotaKikanJoho_waritsukeTeiin",
+         "DbT5914SonotaKikanJoho"."waritsukeChiku" as "dbT5914SonotaKikanJoho_waritsukeChiku",
+         "DbT5914SonotaKikanJoho"."kikanKubun" as "dbT5914SonotaKikanJoho_kikanKubun",
+         "DbT5914SonotaKikanJoho"."haishiFlag" as "dbT5914SonotaKikanJoho_haishiFlag",
+         "DbT5914SonotaKikanJoho"."kinyuKikanCode" as "dbT5914SonotaKikanJoho_kinyuKikanCode",
+         "DbT5914SonotaKikanJoho"."kinyuKikanShitenCode" as "dbT5914SonotaKikanJoho_kinyuKikanShitenCode",
+         "DbT5914SonotaKikanJoho"."yokinShubetsu" as "dbT5914SonotaKikanJoho_yokinShubetsu",
+         "DbT5914SonotaKikanJoho"."kozaNo" as "dbT5914SonotaKikanJoho_kozaNo",
+         "DbT5914SonotaKikanJoho"."kozaMeigininKana" as "dbT5914SonotaKikanJoho_kozaMeigininKana",
+         "DbT5914SonotaKikanJoho"."kozaMeiginin" as "dbT5914SonotaKikanJoho_kozaMeiginin"
     </sql>
+
 
     <!--テーブルDbT5914SonotaKikanJohoの項目をDbT5914SonotaKikanJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5914SonotaKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity" autoMapping="true">
@@ -62,51 +70,12 @@
         <result property="waritsukeChiku" column="dbT5914SonotaKikanJoho_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
         <result property="kikanKubun" column="dbT5914SonotaKikanJoho_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="haishiFlag" column="dbT5914SonotaKikanJoho_haishiFlag" />
+        <result property="kinyuKikanCode" column="dbT5914SonotaKikanJoho_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <result property="kinyuKikanShitenCode" column="dbT5914SonotaKikanJoho_kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="yokinShubetsu" column="dbT5914SonotaKikanJoho_yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNo" column="dbT5914SonotaKikanJoho_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeigininKana" column="dbT5914SonotaKikanJoho_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kozaMeiginin" column="dbT5914SonotaKikanJoho_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
-    
-    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5914SonotaKikanJohoEntity">
-        SELECT
-        <include refid="allColumns_DbT5914SonotaKikanJoho"/>
-        FROM
-        rgdb."DbT5914SonotaKikanJoho"
-    </select>
-    
-    <select resultOrdered="true" id="getSoNoTaKiKanJohoList" resultMap="ResultMap_DbT5914SonotaKikanJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sonotakikanguide.SoNoTaKikanGuideParameter">
-        SELECT 
-            rgdb."DbT5914SonotaKikanJoho"."sonotaKikanCode"  AS dbT5914SonotaKikanJoho_sonotaKikanCode,
-            rgdb."DbT5914SonotaKikanJoho"."kikanMeisho"  AS dbT5914SonotaKikanJoho_kikanMeisho,
-            rgdb."DbT5914SonotaKikanJoho".jusho AS dbT5914SonotaKikanJoho_jusho,
-            rgdb."DbT5914SonotaKikanJoho"."telNo"  AS dbT5914SonotaKikanJoho_telNo,
-            rgdb."DbT5914SonotaKikanJoho"."chosaItakuKubun"  AS dbT5914SonotaKikanJoho_chosaItakuKubun
-        FROM   rgdb."DbT5914SonotaKikanJoho"
-        WHERE 
-           1 = 1
-       <if test="is証記載保険者番号Flag">
-        ADN
-            rgdb."DbT5914SonotaKikanJoho"."shoKisaiHokenshaNo" = #{証記載保険者番号}
-       </if>
-       <if test="isその他機関コードFromFlag">
-        AND 
-            rgdb."DbT5914SonotaKikanJoho"."sonotaKikanCode" <![CDATA[>=]]> #{その他機関コードFrom}
-       </if>
-       <if test="isその他機関コードToFlag">
-        AND 	
-            rgdb."DbT5914SonotaKikanJoho"."sonotaKikanCode" <![CDATA[<=]]> #{その他機関コードTo}
-       </if>
-       <if test="is含まない">
-        AND 
-            rgdb."DbT5914SonotaKikanJoho"."haishiFlag" = FALSE
-        </if>
-        <if test="isその他機関名称Flag">
-        AND 
-            rgdb."DbT5914SonotaKikanJoho"."kikanMeisho"   LIKE '%' || #{その他機関名称} || '%'
-        </if>
-        <if test="is調査委託先区分Flag">
-        AND 
-            rgdb."DbT5914SonotaKikanJoho"."chosaItakuKubun" = #{調査委託先区分}
-        </if>
-        ORDER BY
-            rgdb."DbT5914SonotaKikanJoho"."sonotaKikanCode"  ASC
-        LIMIT #{最大表示件数}  
-    </select>
+
 </mapper>

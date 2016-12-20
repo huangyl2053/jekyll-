@@ -9,14 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ImjJohoEntity;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 
 /**
  * 事務局用概況特記一覧表情報のBusinessの編集クラスです。
@@ -31,6 +27,7 @@ public class JimuGaikyouTokkiBusiness {
     private final List<GaikyoTokkiEntity> 概況特記一覧表情報;
     private final List<ImjJohoEntity> 概況特記イメージ情報;
     private final int no;
+    private final RString path;
     private static final int 件数 = 10;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -44,6 +41,7 @@ public class JimuGaikyouTokkiBusiness {
     private static final int INT_0 = 0;
     private static final RString ファイルID_C0007 = new RString("C0007.png");
     private static final RString ファイルID_C0007_BAK = new RString("C0007_BAK.png");
+    private static final RString SEPARATOR = new RString("/");
 
     /**
      * コンストラクタです。
@@ -54,20 +52,21 @@ public class JimuGaikyouTokkiBusiness {
      * @param paramter IinTokkiJikouItiziHanteiProcessParameter
      * @param no no
      * @param entityImg entityImg
+     * @param path path
      */
     public JimuGaikyouTokkiBusiness(
             GaikyoTokkiEntity entity,
             List<GaikyoTokkiEntity> 概況特記一覧表情報,
             List<ImjJohoEntity> 概況特記イメージ情報,
             IinTokkiJikouItiziHanteiProcessParameter paramter,
-            int no,
-            ImjJohoEntity entityImg) {
+            int no, ImjJohoEntity entityImg, RString path) {
         this.entity = entity;
         this.概況特記一覧表情報 = 概況特記一覧表情報;
         this.概況特記イメージ情報 = 概況特記イメージ情報;
         this.paramter = paramter;
         this.no = no;
         this.entityImg = entityImg;
+        this.path = path;
     }
 
     /**
@@ -308,30 +307,16 @@ public class JimuGaikyouTokkiBusiness {
 
     private RString getイメージ(int index) {
         if (entityImg.isJimukyoku()) {
-            return 共有ファイルを引き出す(概況特記イメージ情報.get(index).getDbt5115_imageSharedFileId(), ファイルID_C0007_BAK);
+            return getFilePath(path, ファイルID_C0007_BAK);
         } else {
-            return 共有ファイルを引き出す(概況特記イメージ情報.get(index).getDbt5115_imageSharedFileId(), ファイルID_C0007);
+            return getFilePath(path, ファイルID_C0007);
         }
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01);
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
-        return imagePath;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+        return RString.EMPTY;
     }
 }
