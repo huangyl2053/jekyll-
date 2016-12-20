@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -46,7 +47,6 @@ public class IkenshoSakuseiJissekiShokai {
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
 
@@ -58,8 +58,7 @@ public class IkenshoSakuseiJissekiShokai {
      */
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_BtnKensakuClear(IkenshoSakuseiJissekiShokaiDiv div) {
         getHandler(div).onClick_BtnKensakuClear();
-        getHandler(div).set初期状態();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6020001StateName.検索);
     }
 
     /**
@@ -69,6 +68,9 @@ public class IkenshoSakuseiJissekiShokai {
      * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
      */
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         RString 意見書記入日FROM = RString.EMPTY;
         RString 意見書記入日TO = RString.EMPTY;
         if (div.getTxtIkenshoKinyubi().getFromValue() != null) {
@@ -82,9 +84,11 @@ public class IkenshoSakuseiJissekiShokai {
                 意見書記入日TO,
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
                 new RString(div.getTxtMaxKensu().getValue().toString()));
-        getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter));
-        getHandler(div).set一覧状態();
-        return ResponseData.of(div).respond();
+        Message message = getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter));
+        if (message == null) {
+            return ResponseData.of(div).setState(DBE6020001StateName.一覧);
+        }
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**
@@ -113,8 +117,7 @@ public class IkenshoSakuseiJissekiShokai {
      * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
      */
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_btnBackToKensaku(IkenshoSakuseiJissekiShokaiDiv div) {
-        getHandler(div).set初期状態();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6020001StateName.検索);
     }
 
     /**

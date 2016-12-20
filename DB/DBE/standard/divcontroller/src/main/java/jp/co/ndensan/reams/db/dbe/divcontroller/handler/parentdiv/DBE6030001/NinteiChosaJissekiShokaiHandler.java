@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.dgNi
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -59,10 +61,14 @@ public class NinteiChosaJissekiShokaiHandler {
      * 「検索する」ボタンを押します。
      *
      * @param searchResult 認定調査実績照会
+     * @return 該当データがない場合はメッセージを返します。該当データがある場合は{@code null}を返します。
      */
-    public void onClick_btnKensaku(SearchResult<ChosahyoJissekiIchiran> searchResult) {
+    public Message onClick_btnKensaku(SearchResult<ChosahyoJissekiIchiran> searchResult) {
 
         List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList = searchResult.records();
+        if (chosahyoJissekiIchiransList.isEmpty()) {
+            return UrInformationMessages.該当データなし.getMessage();
+        }
         setRecords(chosahyoJissekiIchiransList);
         if (searchResult.exceedsLimit()) {
             div.getDgNinteiChosaJisseki().getGridSetting().setLimitRowCount(chosahyoJissekiIchiransList.size());
@@ -71,6 +77,7 @@ public class NinteiChosaJissekiShokaiHandler {
             div.getDgNinteiChosaJisseki().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
             div.getDgNinteiChosaJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
         }
+        return null;
     }
 
     private void setRecords(List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList) {
@@ -110,22 +117,6 @@ public class NinteiChosaJissekiShokaiHandler {
     }
 
     /**
-     * 画面初期状態の設定です。
-     */
-    public void set初期状態() {
-        div.getNinteiChosaJisseki().setDisplayNone(true);
-        div.getChosaJisshibi().setDisplayNone(false);
-    }
-
-    /**
-     * 画面一覧状態の設定です。 検索結果表示状態
-     */
-    public void set一覧状態() {
-        div.getNinteiChosaJisseki().setDisplayNone(false);
-        div.getChosaJisshibi().setDisplayNone(true);
-    }
-
-    /**
      * バッチパラメータを作成します。
      *
      * @param 帳票出力区分 帳票出力区分
@@ -155,7 +146,7 @@ public class NinteiChosaJissekiShokaiHandler {
         }
         param.setChosajisshibiFrom(調査実施日FROM);
         param.setChosajisshibiTo(調査実施日TO);
-        param.setHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
+        param.setHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }
