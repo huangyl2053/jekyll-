@@ -1205,14 +1205,8 @@ public class SabisuJyoukyoA3 {
         項目.set審査人数(new RString(entity.getShinsakaiOrder()));
         項目.set一次判定結果(set一次判定結果(entity.getKoroshoIfShikibetsuCode(),
                 entity.getIchijiHanteiKekkaCode(), entity.getIchijiHanteiKekkaNinchishoKasanCode()));
-        項目.set要介護認定等基準時間(set要介護認定等基準時間(entity.getKijunJikanShokuji(), entity.getKijunJikanHaisetsu(),
-                entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(), entity.getKijunJikanKansetsuCare(),
-                entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
-                entity.getKijunJikanNinchishoKasan(), entity.getKijunJikan()));
-        項目.set前回要介護認定等基準時間(set要介護認定等基準時間(entity.getZKijunJikanShokuji(), entity.getZKijunJikanHaisetsu(),
-                entity.getZKijunJikanIdo(), entity.getZKijunJikanSeiketsuHoji(), entity.getZKijunJikanKansetsuCare(),
-                entity.getZKijunJikanBPSDKanren(), entity.getZKijunJikanKinoKunren(), entity.getZKijunJikanIryoKanren(),
-                entity.getZKijunJikanNinchishoKasan(), entity.getZKijunJikan()));
+        項目.set要介護認定等基準時間(new RString(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10).toString()));
+        項目.set前回要介護認定等基準時間(new RString(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10).toString()));
         set基準時間の積み上げグラフ(項目, entity);
         List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
         NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
@@ -1358,24 +1352,6 @@ public class SabisuJyoukyoA3 {
         return builder.append(一次判定結果)
                 .append("→")
                 .append(一次判定結果_認知症加算).toRString();
-    }
-
-    private RString set要介護認定等基準時間(int 食事, int 排泄,
-            int 移動, int 清潔保持, int 間接,
-            int 関連, int 機能訓練, int 医療関連,
-            int 認知症加算, int 基準時間) {
-        RStringBuilder builder = new RStringBuilder();
-        return builder.append(new RString(食事)).append(記号)
-                .append(new RString(排泄)).append(記号)
-                .append(new RString(移動)).append(記号)
-                .append(new RString(清潔保持)).append(記号)
-                .append(new RString(間接)).append(記号)
-                .append(new RString(関連)).append(記号)
-                .append(new RString(機能訓練)).append(記号)
-                .append(new RString(医療関連)).append(記号)
-                .append(new RString(認知症加算)).append(new RString("="))
-                .append(new RString(基準時間))
-                .toRString();
     }
 
     private RString set障害高齢者自立度(Code 障害高齢者自立度コード) {
