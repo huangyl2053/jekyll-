@@ -98,7 +98,11 @@ public class NinteiOcrResult {
      * @return イメージ共有ファイルID
      */
     public RDateTime getイメージ共有ファイルID() {
-        return entity.getイメージ共有ファイルID();
+        if (entity.getイメージ共有ファイルID() != null) {
+            return entity.getイメージ共有ファイルID();
+        } else {
+            return RDateTime.MIN;
+        }
     }
 
     /**
