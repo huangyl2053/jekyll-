@@ -9,12 +9,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * chosairaiselect のクラスファイル 
+ * ButtonPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class chosairaiselectDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+public class ButtonPanelDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
