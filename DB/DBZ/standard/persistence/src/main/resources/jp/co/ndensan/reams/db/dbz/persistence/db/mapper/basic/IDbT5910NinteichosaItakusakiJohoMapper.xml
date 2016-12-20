@@ -42,7 +42,13 @@
          "DbT5910NinteichosaItakusakiJoho"."waritsukeChiku" as "dbT5910NinteichosaItakusakiJoho_waritsukeChiku",
          "DbT5910NinteichosaItakusakiJoho"."autoWaritsukeFlag" as "dbT5910NinteichosaItakusakiJoho_autoWaritsukeFlag",
          "DbT5910NinteichosaItakusakiJoho"."kikanKubun" as "dbT5910NinteichosaItakusakiJoho_kikanKubun",
-         "DbT5910NinteichosaItakusakiJoho"."jokyoFlag" as "dbT5910NinteichosaItakusakiJoho_jokyoFlag"
+         "DbT5910NinteichosaItakusakiJoho"."jokyoFlag" as "dbT5910NinteichosaItakusakiJoho_jokyoFlag",
+         "DbT5910NinteichosaItakusakiJoho"."kinyuKikanCode" as "dbT5910NinteichosaItakusakiJoho_kinyuKikanCode",
+         "DbT5910NinteichosaItakusakiJoho"."kinyuKikanShitenCode" as "dbT5910NinteichosaItakusakiJoho_kinyuKikanShitenCode",
+         "DbT5910NinteichosaItakusakiJoho"."yokinShubetsu" as "dbT5910NinteichosaItakusakiJoho_yokinShubetsu",
+         "DbT5910NinteichosaItakusakiJoho"."kozaNo" as "dbT5910NinteichosaItakusakiJoho_kozaNo",
+         "DbT5910NinteichosaItakusakiJoho"."kozaMeigininKana" as "dbT5910NinteichosaItakusakiJoho_kozaMeigininKana",
+         "DbT5910NinteichosaItakusakiJoho"."kozaMeiginin" as "dbT5910NinteichosaItakusakiJoho_kozaMeiginin"
     </sql>
 
 
@@ -74,6 +80,12 @@
         <result property="autoWaritsukeFlag" column="dbT5910NinteichosaItakusakiJoho_autoWaritsukeFlag" />
         <result property="kikanKubun" column="dbT5910NinteichosaItakusakiJoho_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5910NinteichosaItakusakiJoho_jokyoFlag" />
+        <result property="kinyuKikanCode" column="dbT5910NinteichosaItakusakiJoho_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <result property="kinyuKikanShitenCode" column="dbT5910NinteichosaItakusakiJoho_kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="yokinShubetsu" column="dbT5910NinteichosaItakusakiJoho_yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNo" column="dbT5910NinteichosaItakusakiJoho_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeigininKana" column="dbT5910NinteichosaItakusakiJoho_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kozaMeiginin" column="dbT5910NinteichosaItakusakiJoho_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
 <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5910NinteichosaItakusakiJohoEntity">
     SELECT
