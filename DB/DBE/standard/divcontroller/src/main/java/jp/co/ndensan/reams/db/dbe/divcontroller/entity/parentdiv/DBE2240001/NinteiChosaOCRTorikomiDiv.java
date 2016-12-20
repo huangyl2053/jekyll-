@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * Imageinput のクラスファイル 
+ * NinteiChosaOCRTorikomi のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ImageinputDiv extends Panel {
+public class NinteiChosaOCRTorikomiDiv extends PanelBatchParameter {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
@@ -24,8 +24,8 @@ public class ImageinputDiv extends Panel {
      */
     @JsonProperty("lblExplanation")
     private Label lblExplanation;
-    @JsonProperty("txtTorikomiDataPath")
-    private TextBox txtTorikomiDataPath;
+    @JsonProperty("txtTorikomiPath")
+    private TextBox txtTorikomiPath;
     @JsonProperty("hdnSharedFileEntryInfo")
     private RString hdnSharedFileEntryInfo;
 
@@ -54,21 +54,21 @@ public class ImageinputDiv extends Panel {
     }
 
     /*
-     * gettxtTorikomiDataPath
-     * @return txtTorikomiDataPath
+     * gettxtTorikomiPath
+     * @return txtTorikomiPath
      */
-    @JsonProperty("txtTorikomiDataPath")
-    public TextBox getTxtTorikomiDataPath() {
-        return txtTorikomiDataPath;
+    @JsonProperty("txtTorikomiPath")
+    public TextBox getTxtTorikomiPath() {
+        return txtTorikomiPath;
     }
 
     /*
-     * settxtTorikomiDataPath
-     * @param txtTorikomiDataPath txtTorikomiDataPath
+     * settxtTorikomiPath
+     * @param txtTorikomiPath txtTorikomiPath
      */
-    @JsonProperty("txtTorikomiDataPath")
-    public void setTxtTorikomiDataPath(TextBox txtTorikomiDataPath) {
-        this.txtTorikomiDataPath = txtTorikomiDataPath;
+    @JsonProperty("txtTorikomiPath")
+    public void setTxtTorikomiPath(TextBox txtTorikomiPath) {
+        this.txtTorikomiPath = txtTorikomiPath;
     }
 
     /*
