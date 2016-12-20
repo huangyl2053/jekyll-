@@ -11,9 +11,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.Nintei
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -32,6 +34,10 @@ public class ChosaItakusakiAndChosainInput {
      */
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onBlur_TxtChosaItakusakiCode(ChosaItakusakiAndChosainInputDiv div) {
         getHandler(div).onBlurTxtChosaItakusakiCode();
+        ValidationMessageControlPairs validationResult = getValidationHandler(div).validate調査委託先コード();
+        if (validationResult.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationResult).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -43,6 +49,10 @@ public class ChosaItakusakiAndChosainInput {
      */
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onBlur_TxtChosainCode(ChosaItakusakiAndChosainInputDiv div) {
         getHandler(div).onBlurTxtChosainCode();
+        ValidationMessageControlPairs validationResult = getValidationHandler(div).validate調査員コード();
+        if (validationResult.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationResult).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -78,8 +88,6 @@ public class ChosaItakusakiAndChosainInput {
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_BtnChosaItakusakiGuide(ChosaItakusakiAndChosainInputDiv div) {
         KijuntsukiShichosonjohoiDataPassModel modle = new KijuntsukiShichosonjohoiDataPassModel();
         modle.set市町村コード(div.getHdnShichosonCode());
-        modle.set委託先コード(div.getTxtChosaItakusakiCode().getValue());
-        modle.set委託先名(div.getTxtChosaItakusakiName().getValue());
         modle.set対象モード(new RString(TaishoMode.Itakusaki.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
         return ResponseData.of(div).respond();
@@ -109,8 +117,6 @@ public class ChosaItakusakiAndChosainInput {
         modle.set市町村コード(div.getHdnShichosonCode());
         modle.set委託先コード(div.getTxtChosaItakusakiCode().getValue());
         modle.set委託先名(div.getTxtChosaItakusakiName().getValue());
-        modle.set調査員コード(div.getTxtChosainCode().getValue());
-        modle.set調査員名(div.getTxtChosainName().getValue());
         modle.set対象モード(new RString(TaishoMode.Chosain.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
         return ResponseData.of(div).respond();
@@ -165,4 +171,7 @@ public class ChosaItakusakiAndChosainInput {
         return new ChosaItakusakiAndChosainInputHandler(div);
     }
 
+    private ChosaItakusakiAndChosainInputValidationHandler getValidationHandler(ChosaItakusakiAndChosainInputDiv div) {
+        return new ChosaItakusakiAndChosainInputValidationHandler(div);
+    }
 }
