@@ -28,6 +28,7 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
     private static final String END_DAY = "調査依頼日終了";
     private static final String KEY_ENTITY = "キー情報Entityリスト";
     private static final long serialVersionUID = 1L;
+    private static final String HOKENSYA = "hokensya";
 
     @BatchParameter(key = KUBUNCODE, name = "帳票出力区分")
     private RString 帳票出力区分;
@@ -37,6 +38,8 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
     private RString 調査依頼日開始;
     @BatchParameter(key = END_DAY, name = "調査依頼日終了")
     private RString 調査依頼日終了;
+    @BatchParameter(key = HOKENSYA, name = "保険者")
+    private RString hokensya;
 
     /**
      * コンストラクタです。
@@ -51,13 +54,15 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
      * @param 情報リスト List<NinteiChosaHoshuShokaiFlowBusiness>
      * @param 調査依頼日開始 調査依頼日開始
      * @param 調査依頼日終了 調査依頼日終了
+     * @param 保険者 保険者
      */
     public DBE601005_NinteichosaHoshuParameter(RString 帳票出力区分, List<NinteiChosaHoshuShokaiFlowBusiness> 情報リスト,
-            RString 調査依頼日開始, RString 調査依頼日終了) {
+            RString 調査依頼日開始, RString 調査依頼日終了, RString 保険者) {
         this.帳票出力区分 = 帳票出力区分;
         this.情報リスト = 情報リスト;
         this.調査依頼日開始 = 調査依頼日開始;
         this.調査依頼日終了 = 調査依頼日終了;
+        this.hokensya = 保険者;
     }
 
     /**
@@ -66,6 +71,6 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
      * @return 認定調査報酬照会のProcessParameter
      */
     public NinteiChosaHoshuShokaiProcessParameter toProcessParamter() {
-        return new NinteiChosaHoshuShokaiProcessParameter(帳票出力区分, 調査依頼日開始, 調査依頼日終了, 情報リスト);
+        return new NinteiChosaHoshuShokaiProcessParameter(帳票出力区分, 調査依頼日開始, 調査依頼日終了, 情報リスト, hokensya);
     }
 }

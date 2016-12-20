@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahoshushokai.NinteiChos
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -41,6 +42,7 @@ public class NinteiChosaHoshuShokai {
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
     public ResponseData<NinteiChosaHoshuShokaiDiv> onLoad(NinteiChosaHoshuShokaiDiv div) {
+        div.getChosaIraibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
@@ -69,7 +71,8 @@ public class NinteiChosaHoshuShokai {
         }
         NinteiChosaHoshuShokaiMapperParameter chosaParamter = NinteiChosaHoshuShokaiMapperParameter.createSelectBy情報(
                 DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
-                依頼日開始, 依頼日終了, Integer.parseInt(div.getChosaIraibi().getTxtMaxKensu().getValue().toString()), false, null);
+                依頼日開始, 依頼日終了, Integer.parseInt(div.getChosaIraibi().getTxtMaxKensu().getValue().toString()), false, null,
+                div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
         List<NinteichosahoshushokaiBusiness> 調査情報 = NinteiChosaHoshuShokaiFinder.createInstance().get認定調査報酬情報(chosaParamter).records();
         if (調査情報.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
@@ -153,11 +156,11 @@ public class NinteiChosaHoshuShokai {
         div.getChosaIraibi().getTxtChosaIraibi().setToValue(null);
         return onLoad(div);
     }
-
+    
     private NinteiChosaHoshuShokaiValidationHandler getValidationHandler(NinteiChosaHoshuShokaiDiv div) {
         return new NinteiChosaHoshuShokaiValidationHandler(div);
     }
-
+    
     private NinteiChosaHoshuShokaiHandler getHandler(NinteiChosaHoshuShokaiDiv div) {
         return new NinteiChosaHoshuShokaiHandler(div);
     }
