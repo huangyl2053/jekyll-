@@ -389,10 +389,11 @@ public class NinnteiChousaKekkaTouroku1 {
 
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setValue(gaikyoChosa.getTemp_利用施設名());
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo()
-                .setValue(new YubinNo(gaikyoChosa.getTemp_利用施設郵便番号()));
+                .setValue(new YubinNo(gaikyoChosa.getTemp_利用施設郵便番号() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設郵便番号()));
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho()
-                .setDomain(new AtenaJusho(gaikyoChosa.getTemp_利用施設住所()));
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDomain(new TelNo(gaikyoChosa.getTemp_利用施設電話番号()));
+                .setDomain(new AtenaJusho(gaikyoChosa.getTemp_利用施設住所() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設住所()));
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo()
+                .setDomain(new TelNo(gaikyoChosa.getTemp_利用施設電話番号() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設電話番号()));
 
         RString 施設連絡先 = gaikyoChosa.getTemp_利用施設名().concat(カンマ).concat(gaikyoChosa.getTemp_利用施設郵便番号()).concat(カンマ)
                 .concat(gaikyoChosa.getTemp_利用施設住所()).concat(カンマ).concat(gaikyoChosa.getTemp_利用施設電話番号());
