@@ -163,8 +163,7 @@ public class NinteichosaIraiValidationHandler {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         Decimal 入力値 = div.getTxtMaxCount().getValue();
         if (入力値 == null) {
-            pairs.add(new ValidationMessageControlPair(new validateMessage(
-                UzErrorMessages.入力値が不正), div.getTxtMaxCount()));
+            pairs.add(new ValidationMessageControlPair(new validateMessage(UzErrorMessages.入力値が不正), div.getTxtMaxCount()));
         }
         return pairs;
     }

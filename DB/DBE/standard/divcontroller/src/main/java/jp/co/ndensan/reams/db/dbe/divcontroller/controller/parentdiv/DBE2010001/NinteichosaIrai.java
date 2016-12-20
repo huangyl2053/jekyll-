@@ -84,7 +84,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -121,9 +120,12 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onLoad(NinteichosaIraiDiv requestDiv) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(requestDiv).respond();
+        }
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             requestDiv.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         getHandler(requestDiv).onLoad();
         return ResponseData.of(requestDiv).respond();
@@ -171,7 +173,7 @@ public class NinteichosaIrai {
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
                                                        = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-            setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+            setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
@@ -397,7 +399,6 @@ public class NinteichosaIrai {
      */
     public ResponseData onBefore_btnTaOutput(NinteichosaIraiDiv requestDiv) {
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnDataOutput();
-        vallidation.add(getValidationHandler(requestDiv).check最大表示件数());
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
@@ -428,13 +429,9 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onOkClose_btnIraishoToOutput(NinteichosaIraiDiv requestDiv) {
-        List<ErrorMessage> list = ResponseData.of(requestDiv).respond().getValidateErrorMessage();
-        if (!list.isEmpty()) {
-            return ResponseData.of(requestDiv).respond();
-        }
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).check最大表示件数();
         if (vallidation.existsError()) {
-            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+            requestDiv.getTxtMaxCount().setValue(requestDiv.getMaxCount());
         }
         getHandler(requestDiv).initDataGrid();
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(requestDiv.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
@@ -498,14 +495,6 @@ public class NinteichosaIrai {
      * @return ResponseData
      */
     public ResponseData onChange_txtMaxCount(NinteichosaIraiDiv requestDiv) {
-        if (ResponseHolder.isReRequest() && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            requestDiv.getTxtMaxCount().setValue(requestDiv.getMaxCount());
-            return ResponseData.of(requestDiv).respond();
-        }
-        if (!ResponseHolder.isReRequest() && !requestDiv.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-        }
-        requestDiv.setMaxCount(requestDiv.getTxtMaxCount().getValue());
         getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).respond();
     }
