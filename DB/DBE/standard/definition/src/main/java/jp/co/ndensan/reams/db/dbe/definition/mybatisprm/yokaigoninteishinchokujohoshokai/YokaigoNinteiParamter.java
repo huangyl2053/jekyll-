@@ -314,7 +314,7 @@ public final class YokaigoNinteiParamter {
                 key1判断(shinsakaiWaritsuke),
                 key0判断(shinsakaiJisshi),
                 key1判断(shinsakaiJisshi),
-                kensakuOption.contains(DATE_SOURCE_KEY0),
+                !kensakuOption.contains(DATE_SOURCE_KEY0),
                 !kensakuOption.contains(DATE_SOURCE_KEY1),
                 !kensakuOption.contains(DATE_SOURCE_KEY2),
                 maximumDisplayNumber,

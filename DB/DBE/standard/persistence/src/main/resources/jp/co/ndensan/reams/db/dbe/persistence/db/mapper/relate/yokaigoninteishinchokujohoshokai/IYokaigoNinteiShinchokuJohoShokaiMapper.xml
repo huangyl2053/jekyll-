@@ -184,12 +184,6 @@
                     AND TB."shinseishoKanriNo" IS NULL
                 </if>
             </if>
-            <if test="kensakuOptionKey0">
-                AND NOT EXISTS(SELECT "shinseishoKanriNo" FROM rgdb."DbT5102NinteiKekkaJoho" AS DbT5102 WHERE DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo")
-            </if>
-            <if test="kensakuOptionKey1">
-                AND NOT EXISTS(SELECT "shinseishoKanriNo" FROM rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121 WHERE DbT5121."zenkaiShinseishoKanriNo" = DbT5101."shinseishoKanriNo")
-            </if>
             <if test="kensakuOptionKey2">
                 AND DbT5101."torisageKubunCode" <![CDATA[<>]]>  #{torisageKubunCode}
             </if>
@@ -239,7 +233,21 @@
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        <if test="kensakuOptionKey0">
+            LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102
+            ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        </if>
+        <if test="kensakuOptionKey1">
+            LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+            ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        </if>
         <where>
+            <if test="kensakuOptionKey0">
+                DbT5102."shinseishoKanriNo" IS NULL
+            </if>
+            <if test="kensakuOptionKey1">
+                DbT5121."shinseishoKanriNo" IS NULL
+            </if>
             <if test="shichosonCodeFlag">
                 AND DbT7051."shichosonCode" = #{shichosonCode}
             </if>
