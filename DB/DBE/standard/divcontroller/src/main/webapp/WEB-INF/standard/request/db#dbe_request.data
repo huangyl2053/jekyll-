@@ -519,7 +519,6 @@ dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_Hokensya
 dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_TayisyouTiku
 dbe/db/dbe/NinteiChosaTokusokujoHakko/beforeJikkou
 dbe/db/dbe/NinteiChosaTokusokujoHakko/jikkou
-dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_ddlHokenshaList
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_radChohyo
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onLoad
 dbe/db/dbe/NinteiChosainJikanMaster/btnAbort
@@ -943,6 +942,7 @@ dbe/db/dbe/ShujiiIkenshoIraiShokai/initialize
 dbe/db/dbe/ShujiiIkenshoIraiShokai/onClick_btnReturn
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onBeforeOpenDialog_btnIraishoToOutput
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_radShoriJyotai
+dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_txtSaidaiHyojiKensu
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_BtnYitiranSyuturyoku
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnChousaIraiKanryo
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnOutputCsv

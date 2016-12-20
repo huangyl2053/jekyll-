@@ -57,7 +57,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
             + "INinteiChosaHoshuShokaiRelateMapper.get報酬実績データ情報");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601006.getReportId();
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE606001"));
-    private static final RString CSV_NAME = new RString("IkenshoJissekiIchiran.csv");
+    private static final RString CSV_NAME = new RString("認定調査報酬一覧表.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
