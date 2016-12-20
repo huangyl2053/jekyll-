@@ -8,17 +8,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
 /**
- * NinteichosaIrai のクラスファイル 
- * 
+ * NinteichosaIrai のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteichosaIraiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
@@ -102,7 +104,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChosairaitaishoshaichiran(chosairaitaishoshaichiranDiv chosairaitaishoshaichiran) {
+    public void setChosairaitaishoshaichiran(chosairaitaishoshaichiranDiv chosairaitaishoshaichiran) {
         this.getNinteichosaIraiList().setChosairaitaishoshaichiran(chosairaitaishoshaichiran);
     }
 
@@ -112,7 +114,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
+    public void setRadShoriJyotai(RadioButton radShoriJyotai) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
@@ -122,7 +124,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtTotalCount(txtTotalCount);
     }
 
@@ -132,7 +134,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+    public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtCompleteCount(txtCompleteCount);
     }
 
@@ -142,7 +144,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNoUpdate(TextBoxNum txtNoUpdate) {
+    public void setTxtNoUpdate(TextBoxNum txtNoUpdate) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtNoUpdate(txtNoUpdate);
     }
 
@@ -152,8 +154,18 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+    public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setDgNinteiTaskList(dgNinteiTaskList);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxCount() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getTxtMaxCount();
+    }
+
+    @JsonIgnore
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtMaxCount(txtMaxCount);
     }
 
     @JsonIgnore
@@ -162,7 +174,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtndataoutput(ButtonDownLoad btndataoutput) {
+    public void setBtndataoutput(ButtonDownLoad btndataoutput) {
         this.getNinteichosaIraiList().setBtndataoutput(btndataoutput);
     }
 
@@ -172,7 +184,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtniraiauto(Button btniraiauto) {
+    public void setBtniraiauto(Button btniraiauto) {
         this.getNinteichosaIraiList().setBtniraiauto(btniraiauto);
     }
 
@@ -182,7 +194,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
+    public void setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
         this.getNinteichosaIraiList().setBtnchosadataoutput(btnchosadataoutput);
     }
 
@@ -192,7 +204,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTaOutput(ButtonDialog btnTaOutput) {
+    public void setBtnTaOutput(ButtonDialog btnTaOutput) {
         this.getNinteichosaIraiList().setBtnTaOutput(btnTaOutput);
     }
 
@@ -202,4 +214,22 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     // </editor-fold>
+    //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 最大表示件数の現在値を保持します。
+     *
+     * @param value 最大表示件数
+     */
+    public void setMaxCount(Decimal value) {
+        PanelSessionAccessor.put(this, new RString("maxCount"), value);
+    }
+
+    /**
+     * 最大表示件数の値を取得します。
+     *
+     * @return 最大表示件数
+     */
+    public Decimal getMaxCount() {
+        return PanelSessionAccessor.get(this, new RString("maxCount"), Decimal.class);
+    }
 }
