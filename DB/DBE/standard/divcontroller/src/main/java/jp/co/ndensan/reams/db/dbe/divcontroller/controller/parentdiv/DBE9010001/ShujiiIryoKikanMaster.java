@@ -441,7 +441,7 @@ public class ShujiiIryoKikanMaster {
             int shujiioCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
                     KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
                             new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                            div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
+                            new ShujiiIryokikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue())));
             getValidationHandler(div).validateForKakutei(イベント状態, shujiioCount);
         }
         Models<ShujiiIryoKikanJohoIdentifier, ShujiiIryoKikanJoho> models
@@ -579,7 +579,7 @@ public class ShujiiIryoKikanMaster {
                 KoseiShujiiIryoKikanMasterSearchParameter parameter = KoseiShujiiIryoKikanMasterSearchParameter.
                         createParam_SelectShujiiIryoKikanJoho(
                                 new LasdecCode(row.getShichosonCode()),
-                                row.getShujiiIryoKikanCode().getValue());
+                                new ShujiiIryokikanCode(row.getShujiiIryoKikanCode().getValue()));
                 getValidationHandler(div).validateForDelete(
                         koseiShujiiIryoKikanMaster.getShujiiJohoCount(parameter));
             }
