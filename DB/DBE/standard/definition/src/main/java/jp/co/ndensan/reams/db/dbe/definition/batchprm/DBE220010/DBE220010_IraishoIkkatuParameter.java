@@ -53,6 +53,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String IKENSHO_SAKUSEI_IRAISHO = "shujiiIkenshoSakuseiIraisho";
     private static final String IKENSHO_KINYUU = "ikenshoKinyuu";
     private static final String IKENSHO_KINYUU_OCR = "ikenshoKinyuuOCR";
+    private static final String IKENSHO_KINYUU_DESIGN = "ikenshoKinyuuDesign";
     private static final String IKENSHO_SAKUSEI_SEIKYUUSHO = "ikenshoSakuseiSeikyuusho";
     private static final String IKENSHO_TEISHUTU = "ikenshoTeishutu";
     private static final String IKENSHO_SAKUSEI_IRAI_HAKKOU = "ikenshoSakuseiIraiHakkou";
@@ -114,6 +115,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private boolean ikenshoKinyuu;
     @BatchParameter(key = IKENSHO_KINYUU_OCR, name = "主治医意見書記入用紙OCR出力区分")
     private boolean ikenshoKinyuuOCR;
+    @BatchParameter(key = IKENSHO_KINYUU_DESIGN, name = "主治医意見書記入用紙(デザイン用紙)出力区分")
+    private boolean ikenshoKinyuuDesign;
     @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYUUSHO, name = "主治医意見書作成料請求書出力区分")
     private boolean ikenshoSakuseiSeikyuusho;
     @BatchParameter(key = IKENSHO_TEISHUTU, name = "介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分")
