@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
@@ -13,5 +13,5 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  *
  * @reamsid_L DBE-0150-400 lishengli
  */
-interface IIchijihanteikekkahyoA4Builder extends IReportBuilder<IchijihanteikekkahyoA4ReportSource> {
+interface IIchijihanteikekkahyoA4Builder extends IReportBuilder<IchijihanteikekkahyoReportSource> {
 }

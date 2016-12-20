@@ -40,6 +40,7 @@ public class IraishoIkkatsuHakko {
     private static final RString SELECTED_KEY0 = new RString("key0");
     private static final RString SELECTED_KEY1 = new RString("key1");
     private static final RString SELECTED_KEY2 = new RString("key2");
+    private static final RString SELECTED_KEY3 = new RString("key3");
     private static final RString STATE_NINTEIO = new RString("1");
     private static final RString STATE_SHUJII = new RString("2");
     private static final RString NO_PRINT = new RString("1");
@@ -314,6 +315,7 @@ public class IraishoIkkatsuHakko {
             param.setShujiiIkenshoSakuseiIraisho(div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().contains(SELECTED_KEY0));
             param.setIkenshoKinyuu(div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY0));
             param.setIkenshoKinyuuOCR(div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY1));
+            param.setIkenshoKinyuuDesign(div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY3));
             param.setIkenshoSakuseiSeikyuusho(div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY2));
             param.setIkenshoTeishutu(div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().contains(SELECTED_KEY0));
         }
