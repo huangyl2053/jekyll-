@@ -115,7 +115,11 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.listIchiranhyoUpper_1 = item.getShujiiIryokikanCode();
         source.listIchiranhyoUpper_2 = item.getIryoKikanMeishoKana();
         source.listIchiranhyoUpper_3 = item.getDaihyoshaNameKana();
-        source.listIchiranhyoUpper_4 = item.getYubinNo();
+        RString 郵便番号 = item.getYubinNo();
+        source.listIchiranhyoUpper_4 = RString.EMPTY;
+        if (RString.isNullOrEmpty(郵便番号)) {
+            source.listIchiranhyoUpper_4 = 郵便番号.substring(0, 3).concat("-").concat(郵便番号.substring(3, 7));
+        }
         source.listIchiranhyoUpper_5 = item.getTelNo();
         if (item.isJokyoFlag()) {
             source.listIchiranhyoUpper_6 = 有効_VALUE;
