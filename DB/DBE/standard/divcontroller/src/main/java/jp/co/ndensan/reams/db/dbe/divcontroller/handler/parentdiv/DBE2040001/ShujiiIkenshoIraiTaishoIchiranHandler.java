@@ -27,8 +27,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 完了処理・主治医意見書依頼のHandlerクラスです。
@@ -61,6 +63,9 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      *
      */
     public void initialize() {
+        rowListALL.clear();
+        rowListComplete.clear();
+        rowListNotreated.clear();
         RDate システム日付 = RDate.getNowDate();
         RString 表示区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
         if (表示区分 != null && !表示区分.isEmpty()) {
@@ -68,13 +73,11 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         } else {
             div.getRadShoriJyotai().setSelectedKey(SELECTED_KEY0);
         }
-        List<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().
-                get意見書依頼モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
-        if (!意見書依頼List.isEmpty()) {
-            ShinSaKaiBusiness 前意見書依頼Model = YokaigoNinteiTaskListFinder.createInstance().
-                    get前意見書依頼(YokaigoNinteiTaskListParameter.
-                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+        SearchResult<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().get意見書依頼モード(YokaigoNinteiTaskListParameter.
+                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, div.getTxtSaidaiHyojiKensu().getValue()));
+        if (!意見書依頼List.records().isEmpty()) {
+            ShinSaKaiBusiness 前意見書依頼Model = YokaigoNinteiTaskListFinder.createInstance().get前意見書依頼(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, div.getTxtSaidaiHyojiKensu().getValue()));
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書依頼Model.get要介護認定完了情報Lsit()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
@@ -93,10 +96,10 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
     }
     
-    private void 意見書依頼モード(List<IKnSyoiRaiBusiness> 意見書依頼List) {
+    private void 意見書依頼モード(SearchResult<IKnSyoiRaiBusiness> 意見書依頼List) {
         int completeCount = 0;
         int notreatedCount = 0;
-        for (IKnSyoiRaiBusiness business : 意見書依頼List) {
+        for (IKnSyoiRaiBusiness business : 意見書依頼List.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
@@ -116,8 +119,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().getEditedYubinNo());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
-            row.setIkenshoTokusokuHoho(
-                    business.get主治医意見書作成督促方法() == null
+            row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
                     || business.get主治医意見書作成督促方法().trim().isEmpty()
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
@@ -132,14 +134,17 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
                 rowListComplete.add(row);
             } else {
                 row.setJyotai(NOTREATED);
+                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
                 notreatedCount++;
                 rowListNotreated.add(row);
             }
             rowListALL.add(row);
         }
-        div.getTxtTotalCount().setValue(new RString(String.valueOf(意見書依頼List.size())));
+        div.getTxtTotalCount().setValue(new RString(String.valueOf(意見書依頼List.records().size())));
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getTxtNoUpdate().setValue(new RString(String.valueOf(notreatedCount)));
+        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
+        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書依頼List.totalCount());
         onChange_radShoriJyotai();
     }
 

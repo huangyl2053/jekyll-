@@ -1,26 +1,30 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 認定調査委託先情報テーブルのエンティティクラスです。
  */
 public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT5910NinteichosaItakusakiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5910NinteichosaItakusakiJoho");
 
@@ -52,6 +56,12 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
     private boolean autoWaritsukeFlag;
     private RString kikanKubun;
     private boolean jokyoFlag;
+    private KinyuKikanCode kinyuKikanCode;
+    private KinyuKikanShitenCode kinyuKikanShitenCode;
+    private RString yokinShubetsu;
+    private RString kozaNo;
+    private AtenaKanaMeisho kozaMeigininKana;
+    private AtenaMeisho kozaMeiginin;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -463,6 +473,120 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
     }
 
     /**
+     * 金融機関コードのgetメソッドです。
+     * 
+     * @return 金融機関コード
+     */
+    @CheckForNull
+    public KinyuKikanCode getKinyuKikanCode() {
+        return kinyuKikanCode;
+    }
+
+    /**
+     * 金融機関コードのsetメソッドです。
+     * 
+     * @param kinyuKikanCode 金融機関コード
+     */
+    public void setKinyuKikanCode(KinyuKikanCode kinyuKikanCode) {
+        this.kinyuKikanCode = kinyuKikanCode;
+    }
+
+    /**
+     * 支店コードのgetメソッドです。
+     * 
+     * @return 支店コード
+     */
+    @CheckForNull
+    public KinyuKikanShitenCode getKinyuKikanShitenCode() {
+        return kinyuKikanShitenCode;
+    }
+
+    /**
+     * 支店コードのsetメソッドです。
+     * 
+     * @param kinyuKikanShitenCode 支店コード
+     */
+    public void setKinyuKikanShitenCode(KinyuKikanShitenCode kinyuKikanShitenCode) {
+        this.kinyuKikanShitenCode = kinyuKikanShitenCode;
+    }
+
+    /**
+     * 預金種別のgetメソッドです。
+     * 
+     * @return 預金種別
+     */
+    @CheckForNull
+    public RString getYokinShubetsu() {
+        return yokinShubetsu;
+    }
+
+    /**
+     * 預金種別のsetメソッドです。
+     * 
+     * @param yokinShubetsu 預金種別
+     */
+    public void setYokinShubetsu(RString yokinShubetsu) {
+        this.yokinShubetsu = yokinShubetsu;
+    }
+
+    /**
+     * 口座番号のgetメソッドです。
+     * 
+     * @return 口座番号
+     */
+    @CheckForNull
+    public RString getKozaNo() {
+        return kozaNo;
+    }
+
+    /**
+     * 口座番号のsetメソッドです。
+     * 
+     * @param kozaNo 口座番号
+     */
+    public void setKozaNo(RString kozaNo) {
+        this.kozaNo = kozaNo;
+    }
+
+    /**
+     * 口座名義人カナのgetメソッドです。
+     * 
+     * @return 口座名義人カナ
+     */
+    @CheckForNull
+    public AtenaKanaMeisho getKozaMeigininKana() {
+        return kozaMeigininKana;
+    }
+
+    /**
+     * 口座名義人カナのsetメソッドです。
+     * 
+     * @param kozaMeigininKana 口座名義人カナ
+     */
+    public void setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
+        this.kozaMeigininKana = kozaMeigininKana;
+    }
+
+    /**
+     * 口座名義人のgetメソッドです。
+     * 
+     * @return 口座名義人
+     */
+    @CheckForNull
+    public AtenaMeisho getKozaMeiginin() {
+        return kozaMeiginin;
+    }
+
+    /**
+     * 口座名義人のsetメソッドです。
+     * 
+     * @param kozaMeiginin 口座名義人
+     */
+    public void setKozaMeiginin(AtenaMeisho kozaMeiginin) {
+        this.kozaMeiginin = kozaMeiginin;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT5910NinteichosaItakusakiJohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -506,6 +630,12 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
         this.autoWaritsukeFlag = entity.autoWaritsukeFlag;
         this.kikanKubun = entity.kikanKubun;
         this.jokyoFlag = entity.jokyoFlag;
+        this.kinyuKikanCode = entity.kinyuKikanCode;
+        this.kinyuKikanShitenCode = entity.kinyuKikanShitenCode;
+        this.yokinShubetsu = entity.yokinShubetsu;
+        this.kozaNo = entity.kozaNo;
+        this.kozaMeigininKana = entity.kozaMeigininKana;
+        this.kozaMeiginin = entity.kozaMeiginin;
     }
 
     /**
@@ -514,9 +644,10 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, ninteichosaItakusakiCode, jigyoshaNo, jigyoshaMeisho, jigyoshaMeishoKana, yubinNo, jusho, telNo, faxNo, daihyoshaName, daihyoshaNameKana, chosaItakuKubun, tokuteiChosainDisplayFlag, waritsukeTeiin, waritsukeChiku, autoWaritsukeFlag, kikanKubun, jokyoFlag);
+        return super.toMd5(shichosonCode, ninteichosaItakusakiCode, jigyoshaNo, jigyoshaMeisho, jigyoshaMeishoKana, yubinNo, jusho, telNo, faxNo, daihyoshaName, daihyoshaNameKana, chosaItakuKubun, tokuteiChosainDisplayFlag, waritsukeTeiin, waritsukeChiku, autoWaritsukeFlag, kikanKubun, jokyoFlag, kinyuKikanCode, kinyuKikanShitenCode, yokinShubetsu, kozaNo, kozaMeigininKana, kozaMeiginin);
     }
 
 // </editor-fold>
+
 
 }

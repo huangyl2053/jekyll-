@@ -4,8 +4,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,19 +15,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageinputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnIkenshuOCRTorikomi")
-    private Button btnIkenshuOCRTorikomi;
-    @JsonProperty("dgshinseishaichiran")
-    private DataGrid<dgshinseishaichiran_Row> dgshinseishaichiran;
-    @JsonProperty("imeUploadPanel")
-    private imeUploadPanelDiv imeUploadPanel;
+    @JsonProperty("lblExplanation")
+    private Label lblExplanation;
+    @JsonProperty("txtTorikomiDataPath")
+    private TextBox txtTorikomiDataPath;
+    @JsonProperty("hdnSharedFileEntryInfo")
+    private RString hdnSharedFileEntryInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,80 +36,57 @@ public class ImageinputDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnIkenshuOCRTorikomi
-     * @return btnIkenshuOCRTorikomi
+     * getlblExplanation
+     * @return lblExplanation
      */
-    @JsonProperty("btnIkenshuOCRTorikomi")
-    public Button getBtnIkenshuOCRTorikomi() {
-        return btnIkenshuOCRTorikomi;
+    @JsonProperty("lblExplanation")
+    public Label getLblExplanation() {
+        return lblExplanation;
     }
 
     /*
-     * setbtnIkenshuOCRTorikomi
-     * @param btnIkenshuOCRTorikomi btnIkenshuOCRTorikomi
+     * setlblExplanation
+     * @param lblExplanation lblExplanation
      */
-    @JsonProperty("btnIkenshuOCRTorikomi")
-    public void setBtnIkenshuOCRTorikomi(Button btnIkenshuOCRTorikomi) {
-        this.btnIkenshuOCRTorikomi = btnIkenshuOCRTorikomi;
+    @JsonProperty("lblExplanation")
+    public void setLblExplanation(Label lblExplanation) {
+        this.lblExplanation = lblExplanation;
     }
 
     /*
-     * getdgshinseishaichiran
-     * @return dgshinseishaichiran
+     * gettxtTorikomiDataPath
+     * @return txtTorikomiDataPath
      */
-    @JsonProperty("dgshinseishaichiran")
-    public DataGrid<dgshinseishaichiran_Row> getDgshinseishaichiran() {
-        return dgshinseishaichiran;
+    @JsonProperty("txtTorikomiDataPath")
+    public TextBox getTxtTorikomiDataPath() {
+        return txtTorikomiDataPath;
     }
 
     /*
-     * setdgshinseishaichiran
-     * @param dgshinseishaichiran dgshinseishaichiran
+     * settxtTorikomiDataPath
+     * @param txtTorikomiDataPath txtTorikomiDataPath
      */
-    @JsonProperty("dgshinseishaichiran")
-    public void setDgshinseishaichiran(DataGrid<dgshinseishaichiran_Row> dgshinseishaichiran) {
-        this.dgshinseishaichiran = dgshinseishaichiran;
+    @JsonProperty("txtTorikomiDataPath")
+    public void setTxtTorikomiDataPath(TextBox txtTorikomiDataPath) {
+        this.txtTorikomiDataPath = txtTorikomiDataPath;
     }
 
     /*
-     * getimeUploadPanel
-     * @return imeUploadPanel
+     * gethdnSharedFileEntryInfo
+     * @return hdnSharedFileEntryInfo
      */
-    @JsonProperty("imeUploadPanel")
-    public imeUploadPanelDiv getImeUploadPanel() {
-        return imeUploadPanel;
+    @JsonProperty("hdnSharedFileEntryInfo")
+    public RString getHdnSharedFileEntryInfo() {
+        return hdnSharedFileEntryInfo;
     }
 
     /*
-     * setimeUploadPanel
-     * @param imeUploadPanel imeUploadPanel
+     * sethdnSharedFileEntryInfo
+     * @param hdnSharedFileEntryInfo hdnSharedFileEntryInfo
      */
-    @JsonProperty("imeUploadPanel")
-    public void setImeUploadPanel(imeUploadPanelDiv imeUploadPanel) {
-        this.imeUploadPanel = imeUploadPanel;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public UploadPanel getUplPanel() {
-        return this.getImeUploadPanel().getUplPanel();
-    }
-
-    @JsonIgnore
-    public void  setUplPanel(UploadPanel UplPanel) {
-        this.getImeUploadPanel().setUplPanel(UplPanel);
-    }
-
-    @JsonIgnore
-    public Button getBtnUpload() {
-        return this.getImeUploadPanel().getBtnUpload();
-    }
-
-    @JsonIgnore
-    public void  setBtnUpload(Button btnUpload) {
-        this.getImeUploadPanel().setBtnUpload(btnUpload);
+    @JsonProperty("hdnSharedFileEntryInfo")
+    public void setHdnSharedFileEntryInfo(RString hdnSharedFileEntryInfo) {
+        this.hdnSharedFileEntryInfo = hdnSharedFileEntryInfo;
     }
 
     // </editor-fold>

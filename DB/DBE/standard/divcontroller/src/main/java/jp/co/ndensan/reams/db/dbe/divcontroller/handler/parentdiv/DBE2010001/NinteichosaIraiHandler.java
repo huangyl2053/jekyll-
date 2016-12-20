@@ -65,6 +65,12 @@ public class NinteichosaIraiHandler {
      * 完了処理・認定調査依頼に初期化を設定します。
      */
     public void onLoad() {
+        div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(
+            ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxCount().setMaxLength(Integer.toString(div.getTxtMaxCount().getMaxValue().intValue()).length());
+        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(
+            ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.setMaxCount(div.getTxtMaxCount().getValue());
         initDataGrid();
         RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
         if (使用する.equals(認定調査自動割付)) {
@@ -97,8 +103,7 @@ public class NinteichosaIraiHandler {
             市町村コード = LasdecCode.EMPTY;
         }
         RString 状態 = div.getRadShoriJyotai().getSelectedKey();
-        Decimal 最大件数 = new Decimal(DbBusinessConfig.get(
-            ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
+        Decimal 最大件数 = div.getTxtMaxCount().getValue();
         SearchResult<CyoSaiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
             get調査依頼モード(YokaigoNinteiTaskListParameter.
                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大件数, 市町村コード));

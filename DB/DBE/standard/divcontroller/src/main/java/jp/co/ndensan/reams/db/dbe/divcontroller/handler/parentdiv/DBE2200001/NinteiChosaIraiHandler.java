@@ -44,7 +44,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
@@ -159,18 +161,16 @@ public class NinteiChosaIraiHandler {
      */
     public void set認定調査委託先一覧(List<NinnteiChousairaiBusiness> 認定調査委託先List) {
         List<dgChosaItakusakiIchiran_Row> dataSource = new ArrayList<>();
+        boolean is単一保険者 = is単一保険者();
         for (NinnteiChousairaiBusiness 認定調査委託先 : 認定調査委託先List) {
             dgChosaItakusakiIchiran_Row row = new dgChosaItakusakiIchiran_Row();
             row.getChosaItakusakiCode().setValue(nullToEmpty(認定調査委託先.getNinteichosaItakusakiCode()));
             row.setChosaItakusakiMeisho(nullToEmpty(認定調査委託先.getJigyoshaMeisho()));
             if (認定調査委託先.getWaritsukeChiku() != null) {
-                RString codeName = CodeMaster.getCodeMeisho(
-                        SubGyomuCode.DBE認定支援,
-                        DBECodeShubetsu.調査地区コード.getコード(),
-                        new Code(認定調査委託先.getWaritsukeChiku().value()),
-                        FlexibleDate.getNowDate());
-                if (codeName != null) {
-                    row.setChosaChiku(codeName);
+                RString 割付地区 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
+                        new Code(認定調査委託先.getWaritsukeChiku().value()), FlexibleDate.getNowDate());
+                if (割付地区 != null) {
+                    row.setChosaChiku(割付地区);
                 } else {
                     throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
                 }
@@ -180,7 +180,7 @@ public class NinteiChosaIraiHandler {
             row.setChosaItakusakiJusho(nullToEmpty(認定調査委託先.getJusho()));
             row.setChosaItakusakiTelNo(認定調査委託先.getTelNo() == null ? RString.EMPTY : 認定調査委託先.getTelNo().value());
             row.setChosaItakusakiKubun(ChosaItakuKubunCode.toValue(認定調査委託先.getKikanKubun()).get名称());
-            if (is単一保険者()) {
+            if (is単一保険者) {
                 row.setHokenshaCode(nullToEmpty(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value()));
                 row.setHokenshaName(nullToEmpty(div.getCcdHokenshaList().getSelectedItem().get市町村名称()));
             } else {
@@ -864,6 +864,8 @@ public class NinteiChosaIraiHandler {
                         ? new RString(new FlexibleDate(row.getNinteiShinseiYMDKoShin()).plusDay(Integer.parseInt(認定調査作成期限日数.toString())).toString()) : RString.EMPTY;
             }
 
+            BunshoNo 文書番号 = BunshoNoFinderFactory
+                    .createInstance().get文書番号管理(ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
             for (ChosainJoho 調査員情報 : 調査員情報リスト) {
                 YubinNo 郵便番号 = 調査員情報.get郵便番号();
                 AtenaJusho 住所 = 調査員情報.get住所();
@@ -878,9 +880,9 @@ public class NinteiChosaIraiHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
-                        RString.EMPTY,
-                        郵便番号 == null ? RString.EMPTY : 郵便番号.getEditedYubinNo(),
-                        住所 == null ? RString.EMPTY : 住所.value(),
+                        (文書番号 != null) ? 文書番号.edit文書番号() : RString.EMPTY,
+                        (郵便番号 != null) ? 郵便番号.getEditedYubinNo() : RString.EMPTY,
+                        (住所 != null) ? 住所.value() : RString.EMPTY,
                         調査員情報.get所属機関名称(),
                         調査員情報.get調査員氏名(),
                         get名称付与(),

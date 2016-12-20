@@ -15,9 +15,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -87,6 +89,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, false);
         init最大表示件数();
         setDisable();
+        set広域用切替();
     }
 
     /**
@@ -278,7 +281,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         }
         setRow_bak(joho, row);
         row.setShinseishoKanriNo(nullToEmpty(joho.get申請書管理番号()));
-        row.setNinteichosaIraiRirekiNo(new RString(joho.get認定調査依頼履歴番号())); 
+        row.setNinteichosaIraiRirekiNo(new RString(joho.get認定調査依頼履歴番号()));
         return row;
     }
 
@@ -342,6 +345,12 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getDgShinseiJoho().getGridSetting().getColumn("kaigoNinteiShinsakaiYoteiDay").getCellDetails().setDisabled(true);
         div.getDgShinseiJoho().getGridSetting().getColumn("kaigoNinteiShinsakaiKaisaiDay").getCellDetails().setDisabled(true);
         div.getDgShinseiJoho().getGridSetting().getColumn("hihokenshaBirthDay").getCellDetails().setDisabled(true);
+    }
+
+    private void set広域用切替() {
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        boolean is広域 = 市町村セキュリティ情報.get導入形態コード().equals(new Code("211"));
+        div.getTxtShikibetsuCode().setDisplayNone(is広域);
     }
 
     private void clearBotton() {

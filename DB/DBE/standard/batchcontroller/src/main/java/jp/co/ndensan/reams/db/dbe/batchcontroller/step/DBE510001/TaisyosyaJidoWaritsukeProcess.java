@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
+import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -48,8 +47,9 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
     @Override
     protected void beforeExecute() {
         mapper = getMapper(ITaisyosyaJidoWaritsukeRelateMapper.class);
-        taisyosya = mapper.selectTaisyosya(一次判定後.equals(DbBusinessConfig.get(
-                ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
+        final RString マスキングチェックタイミング = DbBusinessConfig.get(
+                ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        taisyosya = mapper.selectTaisyosya(一次判定後.equals(マスキングチェックタイミング));
         shinsakaiWaritsukeNinsu = paramter.getShinsakaiWaritsukeNinsu();
         shinsakaiJidoWariateTeiin = paramter.getShinsakaiJidoWariateTeiin();
         shinsakaiKaisaiNo = paramter.getShinsakaiKaisaiNo();
@@ -59,9 +59,12 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         if (taisyosya == null || taisyosya.isEmpty()) {
-            throw new BatchInterruptedException(UrErrorMessages.対象者が存在しない.getMessage().toString());
+            final RString 対象者が存在しない = new RString("指定された条件に該当する対象者が存在しません。");
+            JournalWriter journalWriter = new JournalWriter();
+            journalWriter.writeErrorJournal(RDate.getNowDateTime(), 対象者が存在しない);
+        } else {
+            loop審査会割付();
         }
-        loop審査会割付();
     }
 
     @Transaction

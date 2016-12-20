@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -41,10 +42,13 @@ public class TokkiText1A4Business {
 
     private static final RString ファイルID_C0007 = new RString("C0007.png");
     private static final RString ファイルID_C0007BAK = new RString("C0007_BAK.png");
+    private static final RString ファイルID_C410 = new RString("C410.png");
+    private static final RString ファイルID_C410BAK = new RString("C410_BAK.png");
     private static final RString テキスト全面イメージ = new RString("1");
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
     private static final RString ハイフン = new RString("-");
+    private static final RString SEPARATOR = new RString("/");
     private static final int SIZE_5 = 5;
     private static final int 最大ページ = 6;
     private static final int 最大連番 = 10;
@@ -161,10 +165,12 @@ public class TokkiText1A4Business {
      */
     public RString get概況調査の特記事項イメージ() {
         if (イメージ.equals(kyotsuEntity.getGaikyoChosaTextImageKubun())) {
+            RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
+            RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
             if (kyotsuEntity.isJimukyoku()) {
-                return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C0007BAK);
+                return 共有ファイルを引き出す(path, ファイルID_C0007BAK);
             } else {
-                return getFilePath(kyotsuEntity.getImageSharedFileId(), ファイルID_C0007);
+                return 共有ファイルを引き出す(path, ファイルID_C0007);
             }
         }
         return RString.EMPTY;
@@ -195,7 +201,9 @@ public class TokkiText1A4Business {
                 if (TokkijikoTextImageKubun.テキスト.getコード().equals(get特記事項テキスト_イメージ区分())) {
                     短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
                 } else {
-                    短冊情報.set特記事項テキスト_イメージ(getFilePath(kyotsuEntity.getImageSharedFileId(),
+                    RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
+                    RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
+                    短冊情報.set特記事項テキスト_イメージ(共有ファイルを引き出す(path,
                             getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                 }
                 短冊情報リスト.add(短冊情報);
@@ -211,15 +219,14 @@ public class TokkiText1A4Business {
      */
     public List<RString> getTokkiImg() {
         List<RString> filePathList = new ArrayList<>();
+        RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
+        RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
         for (int i = 1; i <= 最大ページ; i++) {
             RString tokkiImgPath;
-            RStringBuilder ファイル名 = new RStringBuilder();
-            ファイル名.append("C410");
-            ファイル名.append(i);
             if (kyotsuEntity.isJimukyoku()) {
-                tokkiImgPath = getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append("_BAK.png").toRString());
+                tokkiImgPath = 共有ファイルを引き出す(path, ファイルID_C410BAK);
             } else {
-                tokkiImgPath = getFilePath(kyotsuEntity.getImageSharedFileId(), ファイル名.append(".png").toRString());
+                tokkiImgPath = 共有ファイルを引き出す(path, ファイルID_C410);
             }
             if (!RString.isNullOrEmpty(tokkiImgPath)) {
                 filePathList.add(tokkiImgPath);
@@ -335,6 +342,20 @@ public class TokkiText1A4Business {
                 イメージファイル.append("_BAK");
             }
             return イメージファイル.append(".png").toRString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString 共有ファイルを引き出す(RString path, RString fileName) {
+        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
+            return getFilePath(path, fileName);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
     }

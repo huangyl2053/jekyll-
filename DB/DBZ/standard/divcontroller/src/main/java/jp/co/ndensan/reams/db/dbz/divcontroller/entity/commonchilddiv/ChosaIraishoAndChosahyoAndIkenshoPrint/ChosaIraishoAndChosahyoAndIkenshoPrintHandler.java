@@ -245,6 +245,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード());
             if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
                 div.getRadTeishutsuKigen().setDisabled(true);
+                div.getTeishutsuKigen().setIsOpen(false);
             } else {
                 div.getRadTeishutsuKigen().setDisabled(false);
             }

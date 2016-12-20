@@ -66,6 +66,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.image.BarImageType;
 import jp.co.ndensan.reams.uz.uza.image.EachBarImage;
 import jp.co.ndensan.reams.uz.uza.image.StackBarImage;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -116,6 +118,7 @@ public class SabisuJyoukyoA3 {
     private static final RString 電話ファイル名 = new RString("C0006_BAK.png");
     private static final RString 認定調査主治段階悪化 = new RString("★");
     private static final RString 認定調査主治段階改善 = new RString("☆");
+    private static final RString SEPARATOR = new RString("/");
 
     /**
      * サービスの状況を設定します。
@@ -543,30 +546,38 @@ public class SabisuJyoukyoA3 {
             項目.set電話番号テキスト(RString.EMPTY);
             項目.set電話番号イメージ(RString.EMPTY);
         } else {
+            RString 共有ファイル名 = 共通情報.getShoKisaiHokenshaNo().concat(共通情報.getHihokenshaNo());
+            RString path = getFilePath(共通情報.getImageSharedFileId(), 共有ファイル名, ファイルパス);
             if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei())) {
                 項目.set施設名テキスト(共通情報.getRiyoShisetsuShimei());
             } else {
-                項目.set施設名イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 施設名ファイル名, ファイルパス));
+                項目.set施設名イメージ(共有ファイルを引き出す(path, 施設名ファイル名));
             }
             if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho())) {
                 項目.set住所テキスト(共通情報.getRiyoShisetsuJusho());
             } else {
-                項目.set住所イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 住所ファイル名, ファイルパス));
+                項目.set住所イメージ(共有ファイルを引き出す(path, 住所ファイル名));
             }
             if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuTelNo())) {
                 項目.set電話番号テキスト(共通情報.getRiyoShisetsuTelNo());
             } else {
-                項目.set電話番号イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 電話ファイル名, ファイルパス));
+                項目.set電話番号イメージ(共有ファイルを引き出す(path, 電話ファイル名));
             }
         }
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01, RString ファイルパス) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01, ファイルパス);
+    private RString 共有ファイルを引き出す(RString path, RString fileName) {
+        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
+            return getFilePath(path, fileName);
         }
-        return imagePath;
+        return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName, RString ファイルパス) {
