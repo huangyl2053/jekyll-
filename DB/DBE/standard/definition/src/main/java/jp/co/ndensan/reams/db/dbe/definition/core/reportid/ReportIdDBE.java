@@ -165,9 +165,13 @@ public enum ReportIdDBE {
      */
     DBE220003(new ReportId("DBE220003_ChosaIraiHakkoIchiranhyo"), new RString("認定調査依頼発行一覧表")),
     /**
-     * 認定調査依頼発行一覧表の帳票ＩＤです。
+     * 主治医意見書提出督促状の帳票ＩＤです。
      */
     DBE233001(new ReportId("DBE233001_ShujiiIkenshoSakuseiTokusokujo"), new RString("主治医意見書提出督促状")),
+    /**
+     * 主治医意見書督促対象者一覧表の帳票IDです。
+     */
+    DBE233002(new ReportId("DBE233002_ShujiiIkenshoTokusokuTaishoshaIchiranhyo"), new RString("主治医意見書督促対象者一覧表")),
     /**
      * その他資料A3の帳票ID。
      */

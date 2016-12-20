@@ -24,13 +24,17 @@ public class IkenshogetichiranDiv extends Panel {
     @JsonProperty("radJyotaiKubun")
     private RadioButton radJyotaiKubun;
     @JsonProperty("txtMisyori")
-    private TextBox txtMisyori;
+    private TextBoxNum txtMisyori;
     @JsonProperty("txtKanryouKano")
-    private TextBox txtKanryouKano;
+    private TextBoxNum txtKanryouKano;
     @JsonProperty("txtGokei")
-    private TextBox txtGokei;
+    private TextBoxNum txtGokei;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
+    @JsonProperty("btnikenshogetoutput")
+    private ButtonDownLoad btnikenshogetoutput;
+    @JsonProperty("txtMaxNumber")
+    private TextBoxNum txtMaxNumber;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,7 +65,7 @@ public class IkenshogetichiranDiv extends Panel {
      * @return txtMisyori
      */
     @JsonProperty("txtMisyori")
-    public TextBox getTxtMisyori() {
+    public TextBoxNum getTxtMisyori() {
         return txtMisyori;
     }
 
@@ -70,7 +74,7 @@ public class IkenshogetichiranDiv extends Panel {
      * @param txtMisyori txtMisyori
      */
     @JsonProperty("txtMisyori")
-    public void setTxtMisyori(TextBox txtMisyori) {
+    public void setTxtMisyori(TextBoxNum txtMisyori) {
         this.txtMisyori = txtMisyori;
     }
 
@@ -79,7 +83,7 @@ public class IkenshogetichiranDiv extends Panel {
      * @return txtKanryouKano
      */
     @JsonProperty("txtKanryouKano")
-    public TextBox getTxtKanryouKano() {
+    public TextBoxNum getTxtKanryouKano() {
         return txtKanryouKano;
     }
 
@@ -88,7 +92,7 @@ public class IkenshogetichiranDiv extends Panel {
      * @param txtKanryouKano txtKanryouKano
      */
     @JsonProperty("txtKanryouKano")
-    public void setTxtKanryouKano(TextBox txtKanryouKano) {
+    public void setTxtKanryouKano(TextBoxNum txtKanryouKano) {
         this.txtKanryouKano = txtKanryouKano;
     }
 
@@ -97,7 +101,7 @@ public class IkenshogetichiranDiv extends Panel {
      * @return txtGokei
      */
     @JsonProperty("txtGokei")
-    public TextBox getTxtGokei() {
+    public TextBoxNum getTxtGokei() {
         return txtGokei;
     }
 
@@ -106,7 +110,7 @@ public class IkenshogetichiranDiv extends Panel {
      * @param txtGokei txtGokei
      */
     @JsonProperty("txtGokei")
-    public void setTxtGokei(TextBox txtGokei) {
+    public void setTxtGokei(TextBoxNum txtGokei) {
         this.txtGokei = txtGokei;
     }
 
@@ -126,6 +130,42 @@ public class IkenshogetichiranDiv extends Panel {
     @JsonProperty("dgNinteiTaskList")
     public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.dgNinteiTaskList = dgNinteiTaskList;
+    }
+
+    /*
+     * getbtnikenshogetoutput
+     * @return btnikenshogetoutput
+     */
+    @JsonProperty("btnikenshogetoutput")
+    public ButtonDownLoad getBtnikenshogetoutput() {
+        return btnikenshogetoutput;
+    }
+
+    /*
+     * setbtnikenshogetoutput
+     * @param btnikenshogetoutput btnikenshogetoutput
+     */
+    @JsonProperty("btnikenshogetoutput")
+    public void setBtnikenshogetoutput(ButtonDownLoad btnikenshogetoutput) {
+        this.btnikenshogetoutput = btnikenshogetoutput;
+    }
+
+    /*
+     * gettxtMaxNumber
+     * @return txtMaxNumber
+     */
+    @JsonProperty("txtMaxNumber")
+    public TextBoxNum getTxtMaxNumber() {
+        return txtMaxNumber;
+    }
+
+    /*
+     * settxtMaxNumber
+     * @param txtMaxNumber txtMaxNumber
+     */
+    @JsonProperty("txtMaxNumber")
+    public void setTxtMaxNumber(TextBoxNum txtMaxNumber) {
+        this.txtMaxNumber = txtMaxNumber;
     }
 
     // </editor-fold>

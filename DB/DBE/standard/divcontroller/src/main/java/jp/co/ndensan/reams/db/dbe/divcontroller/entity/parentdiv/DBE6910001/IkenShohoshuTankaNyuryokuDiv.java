@@ -15,21 +15,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class IkenShohoshuTankaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtIkenKaishiYM")
-    private TextBoxFlexibleYearMonth txtIkenKaishiYM;
-    @JsonProperty("txtIkenShuryoYM")
-    private TextBoxFlexibleYearMonth txtIkenShuryoYM;
     @JsonProperty("ddlZaitakuShisetsuKubun")
     private DropDownList ddlZaitakuShisetsuKubun;
     @JsonProperty("ddlIkenshoSakuseiKaisuKubun")
     private DropDownList ddlIkenshoSakuseiKaisuKubun;
+    @JsonProperty("txtIkenKaishiYM")
+    private TextBoxFlexibleYearMonth txtIkenKaishiYM;
+    @JsonProperty("txtIkenShuryoYM")
+    private TextBoxFlexibleYearMonth txtIkenShuryoYM;
     @JsonProperty("txtTanka")
     private TextBoxNum txtTanka;
     @JsonProperty("btnIkenKousin")
@@ -43,42 +43,6 @@ public class IkenShohoshuTankaNyuryokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtIkenKaishiYM
-     * @return txtIkenKaishiYM
-     */
-    @JsonProperty("txtIkenKaishiYM")
-    public TextBoxFlexibleYearMonth getTxtIkenKaishiYM() {
-        return txtIkenKaishiYM;
-    }
-
-    /*
-     * settxtIkenKaishiYM
-     * @param txtIkenKaishiYM txtIkenKaishiYM
-     */
-    @JsonProperty("txtIkenKaishiYM")
-    public void setTxtIkenKaishiYM(TextBoxFlexibleYearMonth txtIkenKaishiYM) {
-        this.txtIkenKaishiYM = txtIkenKaishiYM;
-    }
-
-    /*
-     * gettxtIkenShuryoYM
-     * @return txtIkenShuryoYM
-     */
-    @JsonProperty("txtIkenShuryoYM")
-    public TextBoxFlexibleYearMonth getTxtIkenShuryoYM() {
-        return txtIkenShuryoYM;
-    }
-
-    /*
-     * settxtIkenShuryoYM
-     * @param txtIkenShuryoYM txtIkenShuryoYM
-     */
-    @JsonProperty("txtIkenShuryoYM")
-    public void setTxtIkenShuryoYM(TextBoxFlexibleYearMonth txtIkenShuryoYM) {
-        this.txtIkenShuryoYM = txtIkenShuryoYM;
-    }
-
     /*
      * getddlZaitakuShisetsuKubun
      * @return ddlZaitakuShisetsuKubun
@@ -113,6 +77,42 @@ public class IkenShohoshuTankaNyuryokuDiv extends Panel {
     @JsonProperty("ddlIkenshoSakuseiKaisuKubun")
     public void setDdlIkenshoSakuseiKaisuKubun(DropDownList ddlIkenshoSakuseiKaisuKubun) {
         this.ddlIkenshoSakuseiKaisuKubun = ddlIkenshoSakuseiKaisuKubun;
+    }
+
+    /*
+     * gettxtIkenKaishiYM
+     * @return txtIkenKaishiYM
+     */
+    @JsonProperty("txtIkenKaishiYM")
+    public TextBoxFlexibleYearMonth getTxtIkenKaishiYM() {
+        return txtIkenKaishiYM;
+    }
+
+    /*
+     * settxtIkenKaishiYM
+     * @param txtIkenKaishiYM txtIkenKaishiYM
+     */
+    @JsonProperty("txtIkenKaishiYM")
+    public void setTxtIkenKaishiYM(TextBoxFlexibleYearMonth txtIkenKaishiYM) {
+        this.txtIkenKaishiYM = txtIkenKaishiYM;
+    }
+
+    /*
+     * gettxtIkenShuryoYM
+     * @return txtIkenShuryoYM
+     */
+    @JsonProperty("txtIkenShuryoYM")
+    public TextBoxFlexibleYearMonth getTxtIkenShuryoYM() {
+        return txtIkenShuryoYM;
+    }
+
+    /*
+     * settxtIkenShuryoYM
+     * @param txtIkenShuryoYM txtIkenShuryoYM
+     */
+    @JsonProperty("txtIkenShuryoYM")
+    public void setTxtIkenShuryoYM(TextBoxFlexibleYearMonth txtIkenShuryoYM) {
+        this.txtIkenShuryoYM = txtIkenShuryoYM;
     }
 
     /*

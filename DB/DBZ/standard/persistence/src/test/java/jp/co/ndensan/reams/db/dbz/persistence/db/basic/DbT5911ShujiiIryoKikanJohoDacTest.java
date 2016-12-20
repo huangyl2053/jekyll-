@@ -13,7 +13,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKi
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -176,7 +175,7 @@ public class DbT5911ShujiiIryoKikanJohoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 LasdecCode 市町村コード,
-                RString 主治医医療機関コード) {
+                ShujiiIryokikanCode 主治医医療機関コード) {
             DbT5911ShujiiIryoKikanJohoEntity entity = DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setShujiiIryokikanCode(主治医医療機関コード);

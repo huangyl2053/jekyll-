@@ -519,7 +519,6 @@ dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_Hokensya
 dbe/db/dbe/NinteiChosaScheduleShosai/onSelect_TayisyouTiku
 dbe/db/dbe/NinteiChosaTokusokujoHakko/beforeJikkou
 dbe/db/dbe/NinteiChosaTokusokujoHakko/jikkou
-dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_ddlHokenshaList
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onChange_radChohyo
 dbe/db/dbe/NinteiChosaTokusokujoHakko/onLoad
 dbe/db/dbe/NinteiChosainJikanMaster/btnAbort
@@ -623,6 +622,7 @@ dbe/db/dbe/NinteichosaIrai/onActive
 dbe/db/dbe/NinteichosaIrai/onBefore_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnDataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnTaOutput
+dbe/db/dbe/NinteichosaIrai/onChange_txtMaxCount
 dbe/db/dbe/NinteichosaIrai/onClick_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onClick_btnChousaIraiKanryo
 dbe/db/dbe/NinteichosaIrai/onClick_btnDataOutput
@@ -721,6 +721,8 @@ dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onChange_radSearchType
 dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onLoad
 dbe/db/dbe/ShinchokuDataOutput/btn_check
 dbe/db/dbe/ShinchokuDataOutput/onActive
+dbe/db/dbe/ShinchokuDataOutput/onChange_ddlSichoson
+dbe/db/dbe/ShinchokuDataOutput/onChange_txtHihokenshaCode
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnHihokensha
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnJokenClear
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnKensaku
@@ -940,6 +942,7 @@ dbe/db/dbe/ShujiiIkenshoIraiShokai/initialize
 dbe/db/dbe/ShujiiIkenshoIraiShokai/onClick_btnReturn
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onBeforeOpenDialog_btnIraishoToOutput
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_radShoriJyotai
+dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_txtSaidaiHyojiKensu
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_BtnYitiranSyuturyoku
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnChousaIraiKanryo
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnOutputCsv

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tblIkenShohoshuTankaDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

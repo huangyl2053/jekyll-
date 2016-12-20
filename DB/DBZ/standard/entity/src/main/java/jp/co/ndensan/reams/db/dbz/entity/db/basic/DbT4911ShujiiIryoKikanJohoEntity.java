@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -14,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 
 /**
@@ -35,7 +35,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private RString shujiiIryokikanCode;
+    private ShujiiIryokikanCode shujiiIryokikanCode;
     private IryoKikanCode iryokikanCode;
     private RString iryoKikanMeisho;
     private RString iryoKikanMeishoKana;
@@ -115,7 +115,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      * 
      * @return 主治医医療機関コード
      */
-    public RString getShujiiIryokikanCode() {
+    public ShujiiIryokikanCode getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -124,7 +124,7 @@ public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911S
      * 
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(@Nonnull RString shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(@Nonnull ShujiiIryokikanCode shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 

@@ -181,8 +181,8 @@ public class ShinsakaiIinWaritsukeHandler {
         row.setSex(shinsakaiIinKoseiIchiranRow.getSex());
         row.setShinsakaiIinShikaku(shinsakaiIinKoseiIchiranRow.getShinsakaiInnShikaku());
         row.setHaishiFlag(shinsakaiIinKoseiIchiranRow.getHaishiFlag());
-        row.setShinsakaiIinKaishibi(shinsakaiIinKoseiIchiranRow.getShinsakaiIinKaishibi());
-        row.setShinsakaiIinShuryobi(shinsakaiIinKoseiIchiranRow.getShinsakaiIinShuryobi());
+        row.setShinsakaiIinKaishibi(new RDate(nullToEmpty(shinsakaiIinKoseiIchiranRow.getShinsakaiIinKaishibi()).toString()).wareki().toDateString());
+        row.setShinsakaiIinShuryobi(new RDate(nullToEmpty(shinsakaiIinKoseiIchiranRow.getShinsakaiIinShuryobi()).toString()).wareki().toDateString());
         row.setGogitaichoKubun(shinsakaiIinKoseiIchiranRow.getGogitaichoKubun());
         row.setShukketsuKubun(shinsakaiIinKoseiIchiranRow.getShukketsuKubun());
         div.getDgShinsakaiIinIchiran().getDataSource().add(row);

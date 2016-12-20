@@ -880,6 +880,8 @@
     <select id="getJimuGaikyoTokki" resultMap="Result_GaikyoTokki"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuGaikyoTokkiMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
+        ShinsakaiW.dbt5101_shoKisaiHokenshaNo, AS dbt5101_shoKisaiHokenshaNo,
+        ShinsakaiW.dbt5101_hihokenshaNo AS dbt5101_hihokenshaNo,
         ShinsakaiW.dbt5502_shinsakaiOrder AS dbt5502_shinsakaiOrder,
         GaikyoTokkiJoho.dbt5206_shuso AS dbt5206_shuso,
         GaikyoTokkiJoho.dbt5206_kazokuJokyo AS dbt5206_kazokuJokyo,
@@ -888,10 +890,15 @@
         FROM
         (
         SELECT
+        dbt5101."shoKisaiHokenshaNo" AS dbt5101_shoKisaiHokenshaNo,
+        dbt5101."hihokenshaNo" AS dbt5101_hihokenshaNo,
+        dbt5115."imageSharedFileId" AS dbt5115_imageSharedFileId,
         dbt5502."shinseishoKanriNo" AS dbt5502_shinseishoKanriNo,
         dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbt5101 ON dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+        LEFT OUTER JOIN rgdb."DbT5115Image" AS dbt5115 ON dbt5502."shinseishoKanriNo" = dbt5115."shinseishoKanriNo"
         WHERE
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
@@ -934,6 +941,9 @@
     </select>
 
     <resultMap id="Result_GaikyoTokki" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity" autoMapping="true">
+        <result property="dbt5101_shoKisaiHokenshaNo" column="dbt5101_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbt5101_hihokenshaNo" column="dbt5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbt5115_imageSharedFileId" column="dbt5115_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
         <result property="dbt5502_shinsakaiOrder" column="dbt5502_shinsakaiOrder" />
         <result property="dbt5206_shuso" column="dbt5206_shuso" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dbt5206_kazokuJokyo" column="dbt5206_kazokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -944,15 +954,20 @@
     <select id="getJimuImjJoho" resultMap="Result_ImjJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuGaikyoTokkiMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
+        ShinsakaiW.dbt5101_shoKisaiHokenshaNo AS dbt5101_shoKisaiHokenshaNo,
+        ShinsakaiW.dbt5101_hihokenshaNo AS dbt5101_hihokenshaNo,
         ShinsakaiW.dbt5502_shinsakaiOrder AS dbt5502_shinsakaiOrder,
         dbt5115."imageSharedFileId" AS dbt5115_imageSharedFileId
         FROM
         (
         SELECT
+        dbt5101."shoKisaiHokenshaNo" AS dbt5101_shoKisaiHokenshaNo,
+        dbt5101."hihokenshaNo" AS dbt5101_hihokenshaNo,
         dbt5502."shinseishoKanriNo" AS dbt5502_shinseishoKanriNo,
         dbt5502."shinsakaiOrder" AS dbt5502_shinsakaiOrder
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbt5101 ON dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
         WHERE
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
@@ -993,6 +1008,8 @@
     </select>
 
     <resultMap id="Result_ImjJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ImjJohoEntity" autoMapping="true">
+        <result property="dbt5101_shoKisaiHokenshaNo" column="dbt5101_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dbt5101_hihokenshaNo" column="dbt5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="dbt5502_shinsakaiOrder" column="dbt5502_shinsakaiOrder" />
         <result property="dbt5115_imageSharedFileId" column="dbt5115_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
     </resultMap>

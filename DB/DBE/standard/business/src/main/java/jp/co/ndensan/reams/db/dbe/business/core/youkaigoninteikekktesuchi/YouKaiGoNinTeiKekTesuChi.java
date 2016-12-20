@@ -187,7 +187,8 @@ public class YouKaiGoNinTeiKekTesuChi implements Serializable {
      * @return 申請区分_法令
      */
     public RString get申請区分_法令() {
-        return NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode()).get名称();
+        NinteiShinseiHoreiCode code = NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode());
+        return code != null ? code.get名称() : RString.EMPTY;
 
     }
 

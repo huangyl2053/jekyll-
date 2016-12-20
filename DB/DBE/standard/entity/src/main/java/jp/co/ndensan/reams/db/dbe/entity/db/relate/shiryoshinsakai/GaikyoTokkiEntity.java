@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GaikyoTokkiEntity {
 
+    private RString dbt5101_shoKisaiHokenshaNo;
+    private RString dbt5101_hihokenshaNo;
+    private RDateTime dbt5115_imageSharedFileId;
     private int dbt5502_shinsakaiOrder;
     private RString dbt5206_shuso;
     private RString dbt5206_kazokuJokyo;

@@ -28,7 +28,7 @@ public class ShinsakauIinHoshuShokai {
      * 画面の初期化です。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakauIinHoshuShokaiDiv>
+     * @return ResponseData&lt;ShinsakauIinHoshuShokaiDiv&gt;
      */
     public ResponseData<ShinsakauIinHoshuShokaiDiv> onLoad(ShinsakauIinHoshuShokaiDiv div) {
         div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().clearValue();
@@ -39,7 +39,7 @@ public class ShinsakauIinHoshuShokai {
      * 「条件に戻る」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakauIinHoshuShokaiDiv>
+     * @return ResponseData&lt;ShinsakauIinHoshuShokaiDiv&gt;
      */
     public ResponseData<ShinsakauIinHoshuShokaiDiv> onClick_btnBackToKensaku(ShinsakauIinHoshuShokaiDiv div) {
         return ResponseData.of(div).setState(DBE6040001StateName.検索条件入力);
@@ -49,7 +49,7 @@ public class ShinsakauIinHoshuShokai {
      * 「検索する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakauIinHoshuShokaiDiv>
+     * @return ResponseData&lt;ShinsakauIinHoshuShokaiDiv&gt;
      */
     public ResponseData<ShinsakauIinHoshuShokaiDiv> onClick_BtnKensaku(ShinsakauIinHoshuShokaiDiv div) {
         ShinsaHoshuIchiranMybitisParamter paramter = ShinsaHoshuIchiranMybitisParamter.createParamter(
@@ -67,7 +67,7 @@ public class ShinsakauIinHoshuShokai {
      * 「CSVを出力する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsaHoshuIchiranBatchParameter>
+     * @return ResponseDatalt;ShinsaHoshuIchiranBatchParameter&gt;
      */
     public ResponseData<DBE601006_ShinsakaiiinHoshuParameter> onClick_BtnShutsutyoku(ShinsakauIinHoshuShokaiDiv div) {
         DBE601006_ShinsakaiiinHoshuParameter paramter = getHandler(div).createBatchParam(CSVを出力する);
@@ -78,7 +78,7 @@ public class ShinsakauIinHoshuShokai {
      * 「集計表を発行する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsaHoshuIchiranBatchParameter>
+     * @return ResponseDatalt;ShinsaHoshuIchiranBatchParameter&gt;
      */
     public ResponseData<DBE601006_ShinsakaiiinHoshuParameter> onClick_BtnPulish(ShinsakauIinHoshuShokaiDiv div) {
         DBE601006_ShinsakaiiinHoshuParameter paramter = getHandler(div).createBatchParam(一覧表を発行する);

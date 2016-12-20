@@ -37,11 +37,11 @@
      "layoutName": "DBE2410002",
      "layoutTitle": "主治医意見書作成依頼（手動）",
      "eventName": "個人依頼内容更新に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2040001",
-     "toLayoutTitle": "完了処理・主治医意見書依頼",
+     "toLayoutTitle": "基本運用・主治医意見書依頼",
      "toState": "完了状態"
     },
     {
@@ -49,7 +49,7 @@
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2040001",
-     "layoutTitle": "完了処理・主治医意見書依頼",
+     "layoutTitle": "基本運用・主治医意見書依頼",
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.dgNi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -26,6 +28,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -49,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -68,7 +72,10 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("ShujiiIkenshoIraiIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-
+    private static final RString NOTREATED = new RString("未");
+    private static final RString 未処理 = new RString("未処理");
+    private static final RString 完了可能 = new RString("完了可能");
+    
     /**
      * 完了処理・主治医意見書依頼の初期化。(オンロード)<br/>
      *
@@ -78,7 +85,11 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onLoad(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         if (!RealInitialLocker.tryGetLock(排他キー)) {
             throw new PessimisticLockingException();
-        }
+        }        
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
         getHandler(div).initialize();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
@@ -90,9 +101,27 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onChange_radShoriJyotai(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).onChange_radShoriJyotai();
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        if (div.getTxtSaidaiHyojiKensu().getValue() == null) {
+            div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+            div.getTxtSaidaiHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
+        }
+        getHandler(div).画面変更より最新データを検索();
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 画面の表示最大件数が変更時、再検索します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onChange_txtSaidaiHyojiKensu(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        getHandler(div).画面変更より最新データを検索();
+        return ResponseData.of(div).respond();
+    }
+    
     
     /**
      * 一覧表を出力するボタンの押下チェック処理です。
@@ -125,7 +154,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<ShujiiIkenshoIraiCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = getHandler(div).getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -277,14 +306,15 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     private ShujiiIkenshoIraiCsvEntity getCsvData(dgNinteiTaskList_Row row) {
-        return new ShujiiIkenshoIraiCsvEntity(row.getShinseishoKanriNo(),
+        return new ShujiiIkenshoIraiCsvEntity(
+                row.getShinseishoKanriNo(),
+                処理区分変更(row.getJyotai()),
                 row.getHokensha(),
                 getパターン1(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 getコード(row.getShinseiKubunShinseiji(), 1),
                 row.getShinseiKubunShinseiji(),
-                getパターン1(row.getIkenshoIraiKanryoDay().getValue()),
                 row.getIkenshoIraiIkenCount().getValue(),
                 getパターン1(row.getIkenshoIraiDay().getValue()),
                 getパターン1(row.getIkenshoIraiIraishoHakkoDay().getValue()),
@@ -308,6 +338,14 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return new YubinNo(郵便番号).getEditedYubinNo();
         }
         return RString.EMPTY;
+    }
+    
+    private RString 処理区分変更(RString 処理区分) {
+        if (NOTREATED.equals(処理区分)) {
+            return 未処理;
+        } else {
+            return 完了可能;
+        }
     }
 
     private RString getコード(RString 名称, int kubun) {

@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -58,7 +59,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001."
             + "IDbe233001RelateMapper.select主治医意見書督促対象者一覧表ByKey");
 
-    private static final ReportId REPORT_DBE223002 = ReportIdDBE.DBE223002.getReportId();
+    private static final ReportId REPORT_DBE233002 = ReportIdDBE.DBE233002.getReportId();
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
@@ -88,6 +89,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private static final RString 事業者名称 = new RString("事業者名称");
     private static final RString 事業者住所 = new RString("事業者住所");
     private static final RString 事業者電話番号 = new RString("事業者電話番号");
+    private static final RString 改頁キー = new RString("cityCode");
     private static int index = 1;
 
     @Override
@@ -104,7 +106,9 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBE223002.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_DBE233002.value())
+                .addBreak(new BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource>().simplePageBreaker(改頁キー))
+                .create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
         if (outputCsv) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
@@ -153,7 +157,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード()
                 .getColumnValue(),
                 entity.getTemp_市町村名称(),
-                processPrm.getTemp_保険者名称(),
+                entity.getTemp_市町村名称(),
                 entity.getTemp_被保険者番号(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
@@ -189,11 +193,11 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         List<RString> 条件リスト = outputJokenhyoEditor.edit();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ = new ReportOutputJokenhyoItem(
-                REPORT_DBE223002.value(),
+                REPORT_DBE233002.value(),
                 association.get地方公共団体コード().value(),
                 association.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORT_DBE223002.value()),
+                ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORT_DBE233002.value()),
                 new RString(batchWrite.getPageCount()),
                 outputCsv ? new RString("あり") : new RString("なし"),
                 outputCsv ? CSVファイル名 : RString.EMPTY,

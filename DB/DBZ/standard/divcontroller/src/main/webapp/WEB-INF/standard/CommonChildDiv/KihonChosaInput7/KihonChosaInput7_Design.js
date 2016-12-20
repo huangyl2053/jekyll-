@@ -4,12 +4,12 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnConfirm = function () {
-                return "onClick_btnConfirm";
-            };
-
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
+            };
+
+            Events.onClick_btnConfirm = function () {
+                return "onClick_btnConfirm";
             };
             return Events;
         })();
@@ -67,12 +67,12 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo"));
             };
 
-            Controls.prototype.btnConfirm = function () {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            };
-
             Controls.prototype.btnBack = function () {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            };
+
+            Controls.prototype.btnConfirm = function () {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             };
             return Controls;
         })();
