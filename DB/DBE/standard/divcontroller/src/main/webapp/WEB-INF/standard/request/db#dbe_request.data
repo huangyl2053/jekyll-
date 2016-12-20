@@ -625,6 +625,7 @@ dbe/db/dbe/NinteichosaIrai/onBefore_btnTaOutput
 dbe/db/dbe/NinteichosaIrai/onChange_txtMaxCount
 dbe/db/dbe/NinteichosaIrai/onClick_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onClick_btnChousaIraiKanryo
+dbe/db/dbe/NinteichosaIrai/onClick_btnContinue
 dbe/db/dbe/NinteichosaIrai/onClick_btnDataOutput
 dbe/db/dbe/NinteichosaIrai/onClick_btnIraiAuto
 dbe/db/dbe/NinteichosaIrai/onClick_btnWaritukeShudo
