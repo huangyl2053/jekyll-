@@ -11,7 +11,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true">
         SELECT
         T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
-        , T7051."shichosonMeisho"
+        , T7051."shichosonMeisho" AS 市町村名称
         , T5601."ninteichosaItakusakiCode" AS 調査委託先コード
         , T5910."jigyoshaMeisho" AS 事業者名称
         , T5601."ninteichosainCode" AS 調査員コード
@@ -81,11 +81,9 @@
     </sql>
 
     <sql id="order">
-        <if test="gamenFlag">
-            ORDER BY T5601."ninteichosaItakusakiCode", T5601."ninteichosainCode", T5601."shinseishoKanriNo", T5601."ninteichosaIraiRirekiNo"
-            <if test="件数Flag">
-                LIMIT #{件数}
-            </if>
+        ORDER BY T5601."ninteichosaItakusakiCode", T5601."ninteichosainCode", T5601."shinseishoKanriNo", T5601."ninteichosaIraiRirekiNo"
+        <if test="件数Flag">
+            LIMIT #{件数}
         </if>
     </sql>
 

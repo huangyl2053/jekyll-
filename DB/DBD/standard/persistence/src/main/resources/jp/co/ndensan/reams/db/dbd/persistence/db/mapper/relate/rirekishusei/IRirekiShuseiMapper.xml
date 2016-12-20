@@ -37,124 +37,124 @@
     </resultMap>
 
     <sql id="selectJukyuuRirekiInfo">
-        SELECT                                        
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />,             
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.allColumns_DbT4121ShinseiRirekiJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.allColumns_DbT4120ShinseitodokedeJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper.allColumns_DbT4116IchijiHanteiKekkaJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4123NinteiKeikakuJohoMapper.allColumns_DbT4123NinteiKeikakuJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4301ShujiiIkenshoIraiJohoMapper.allColumns_DbT4301ShujiiIkenshoIraiJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4302ShujiiIkenshoJohoMapper.allColumns_DbT4302ShujiiIkenshoJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper.allColumns_DbT4201NinteichosaIraiJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4202NinteichosahyoGaikyoChosaMapper.allColumns_DbT4202NinteichosahyoGaikyoChosa" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.allColumns_DbT4910NinteichosaItakusakiJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4911ShujiiIryoKikanJohoMapper.allColumns_DbT4911ShujiiIryoKikanJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.allColumns_DbT4912ShujiiJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.allColumns_DbT4913ChosainJoho" />
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.allColumns_DbT4121ShinseiRirekiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.allColumns_DbT4120ShinseitodokedeJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper.allColumns_DbT4116IchijiHanteiKekkaJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4123NinteiKeikakuJohoMapper.allColumns_DbT4123NinteiKeikakuJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4301ShujiiIkenshoIraiJohoMapper.allColumns_DbT4301ShujiiIkenshoIraiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4302ShujiiIkenshoJohoMapper.allColumns_DbT4302ShujiiIkenshoJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper.allColumns_DbT4201NinteichosaIraiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4202NinteichosahyoGaikyoChosaMapper.allColumns_DbT4202NinteichosahyoGaikyoChosa" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.allColumns_DbT4910NinteichosaItakusakiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4911ShujiiIryoKikanJohoMapper.allColumns_DbT4911ShujiiIryoKikanJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.allColumns_DbT4912ShujiiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.allColumns_DbT4913ChosainJoho" />
         FROM
-              rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho" 
-              INNER JOIN rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho" 
-                ON "DbT4101NinteiShinseiJoho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo" 
-                AND "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4001JukyushaDaicho"."shinseishoKanriNo"
-              INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
-                ON "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
-              LEFT JOIN rgdb."DbT4201NinteichosaIraiJoho" AS "DbT4201NinteichosaIraiJoho" 
-                ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4201NinteichosaIraiJoho"."shinseishoKanriNo" 
-                AND "DbT4201NinteichosaIraiJoho"."logicalDeletedFlag" = False 
-                AND NOT EXISTS ( 
-                  SELECT
-                    'X' 
-                  FROM
-                    rgdb."DbT4201NinteichosaIraiJoho" AS B1 
-                  WHERE
-                    "DbT4201NinteichosaIraiJoho"."shinseishoKanriNo" = B1."shinseishoKanriNo" 
-                    AND B1."logicalDeletedFlag" = False 
-                    AND "DbT4201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
-                ) 
-              LEFT JOIN rgdb."DbT4202NinteichosahyoGaikyoChosa" AS "DbT4202NinteichosahyoGaikyoChosa" 
-                ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" 
-                AND NOT EXISTS ( 
-                  SELECT
-                    'X' 
-                  FROM
-                    rgdb."DbT4202NinteichosahyoGaikyoChosa" AS A1 
-                  WHERE
-                    "DbT4202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" = A1."shinseishoKanriNo" 
-                    AND "DbT4202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
-                ) 
-              LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" AS "DbT4910NinteichosaItakusakiJoho" 
-                ON "DbT4201NinteichosaIraiJoho"."ninteichosaItakusakiCode" = "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" 
-                AND T7051."shichosonCode" = "DbT4910NinteichosaItakusakiJoho"."shichosonCode" 
-                AND "DbT4910NinteichosaItakusakiJoho"."jokyoFlag" = True 
-              LEFT JOIN rgdb."DbT4913ChosainJoho" AS "DbT4913ChosainJoho" 
-                ON "DbT4201NinteichosaIraiJoho"."ninteichosaItakusakiCode" = "DbT4913ChosainJoho"."ninteiChosaItakusakiCode" 
-                AND "DbT4201NinteichosaIraiJoho"."ninteiChosainCode" = "DbT4913ChosainJoho"."ninteiChosainCode" 
-                AND T7051."shichosonCode" = "DbT4913ChosainJoho"."shichosonCode" 
-                AND "DbT4913ChosainJoho"."jokyoFlag" = True 
-              LEFT JOIN rgdb."DbT4301ShujiiIkenshoIraiJoho" AS "DbT4301ShujiiIkenshoIraiJoho" 
-                ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" 
-                AND "DbT4301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = False 
-                AND NOT EXISTS ( 
-                  SELECT
-                    'X' 
-                  FROM
-                    rgdb."DbT4301ShujiiIkenshoIraiJoho" AS B2 
-                  WHERE
-                    "DbT4301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = B2."shinseishoKanriNo" 
-                    AND B2."logicalDeletedFlag" = False 
-                    AND "DbT4301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo"
-                ) 
-              LEFT JOIN rgdb."DbT4302ShujiiIkenshoJoho" AS "DbT4302ShujiiIkenshoJoho" 
-                ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4302ShujiiIkenshoJoho"."shinseishoKanriNo" 
-                AND NOT EXISTS ( 
-                  SELECT
-                    'X' 
-                  FROM
-                    rgdb."DbT4302ShujiiIkenshoJoho" AS A2 
-                  WHERE
-                    "DbT4302ShujiiIkenshoJoho"."shinseishoKanriNo" = A2."shinseishoKanriNo" 
-                    AND "DbT4302ShujiiIkenshoJoho"."ikenshoIraiRirekiNo" <![CDATA[<]]> A2."ikenshoIraiRirekiNo"
-                ) 
-              LEFT JOIN rgdb."DbT4911ShujiiIryoKikanJoho" AS "DbT4911ShujiiIryoKikanJoho" 
-                ON "DbT4301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" = "DbT4911ShujiiIryoKikanJoho"."shujiiIryokikanCode" 
-                AND T7051."shichosonCode" = "DbT4911ShujiiIryoKikanJoho"."shichosonCode" 
-                AND "DbT4911ShujiiIryoKikanJoho"."jokyoFlag" = True 
-              LEFT JOIN rgdb."DbT4912ShujiiJoho" AS "DbT4912ShujiiJoho" 
-                ON "DbT4301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" = "DbT4912ShujiiJoho"."shujiiIryokikanCode" 
-                AND "DbT4301ShujiiIkenshoIraiJoho"."shujiiCode" = "DbT4912ShujiiJoho"."shujiiCode" 
-                AND T7051."shichosonCode" = "DbT4912ShujiiJoho"."shichosonCode" 
-                AND "DbT4912ShujiiJoho"."jokyoFlag" = True 
-              LEFT JOIN rgdb."DbT4123NinteiKeikakuJoho" AS "DbT4123NinteiKeikakuJoho" 
-                ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4123NinteiKeikakuJoho"."shinseishoKanriNo" 
-              LEFT JOIN rgdb."DbT4116IchijiHanteiKekkaJoho" AS "DbT4116IchijiHanteiKekkaJoho" 
-                ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4116IchijiHanteiKekkaJoho"."shinseishoKanriNo" 
-              LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
-                ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo" 
-              LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho" AS "DbT4120ShinseitodokedeJoho"
-                ON "DbT4120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
-              LEFT JOIN rgdb."DbT4121ShinseiRirekiJoho" AS "DbT4121ShinseiRirekiJoho"
-                ON "DbT4121ShinseiRirekiJoho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
-            WHERE
-              "DbT4001JukyushaDaicho"."hihokenshaNo" = #{被保険者番号} 
-            ORDER BY
-              "DbT4001JukyushaDaicho"."rirekiNo" ASC 
+        rgdb."DbT4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        INNER JOIN rgdb."DbT4101NinteiShinseiJoho" AS "DbT4101NinteiShinseiJoho"
+        ON "DbT4101NinteiShinseiJoho"."hihokenshaNo" = "DbT4001JukyushaDaicho"."hihokenshaNo"
+        AND "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4001JukyushaDaicho"."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
+        ON "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
+        LEFT JOIN rgdb."DbT4201NinteichosaIraiJoho" AS "DbT4201NinteichosaIraiJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4201NinteichosaIraiJoho"."shinseishoKanriNo"
+        AND "DbT4201NinteichosaIraiJoho"."logicalDeletedFlag" = False
+        AND NOT EXISTS (
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT4201NinteichosaIraiJoho" AS B1
+        WHERE
+        "DbT4201NinteichosaIraiJoho"."shinseishoKanriNo" = B1."shinseishoKanriNo"
+        AND B1."logicalDeletedFlag" = False
+        AND "DbT4201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+        )
+        LEFT JOIN rgdb."DbT4202NinteichosahyoGaikyoChosa" AS "DbT4202NinteichosahyoGaikyoChosa"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+        AND NOT EXISTS (
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT4202NinteichosahyoGaikyoChosa" AS A1
+        WHERE
+        "DbT4202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" = A1."shinseishoKanriNo"
+        AND "DbT4202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+        )
+        LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" AS "DbT4910NinteichosaItakusakiJoho"
+        ON "DbT4201NinteichosaIraiJoho"."ninteichosaItakusakiCode" = "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode"
+        AND T7051."shichosonCode" = "DbT4910NinteichosaItakusakiJoho"."shichosonCode"
+        AND "DbT4910NinteichosaItakusakiJoho"."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT4913ChosainJoho" AS "DbT4913ChosainJoho"
+        ON "DbT4201NinteichosaIraiJoho"."ninteichosaItakusakiCode" = "DbT4913ChosainJoho"."ninteiChosaItakusakiCode"
+        AND "DbT4201NinteichosaIraiJoho"."ninteiChosainCode" = "DbT4913ChosainJoho"."ninteiChosainCode"
+        AND T7051."shichosonCode" = "DbT4913ChosainJoho"."shichosonCode"
+        AND "DbT4913ChosainJoho"."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT4301ShujiiIkenshoIraiJoho" AS "DbT4301ShujiiIkenshoIraiJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4301ShujiiIkenshoIraiJoho"."shinseishoKanriNo"
+        AND "DbT4301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = False
+        AND NOT EXISTS (
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT4301ShujiiIkenshoIraiJoho" AS B2
+        WHERE
+        "DbT4301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = B2."shinseishoKanriNo"
+        AND B2."logicalDeletedFlag" = False
+        AND "DbT4301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo"
+        )
+        LEFT JOIN rgdb."DbT4302ShujiiIkenshoJoho" AS "DbT4302ShujiiIkenshoJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4302ShujiiIkenshoJoho"."shinseishoKanriNo"
+        AND NOT EXISTS (
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT4302ShujiiIkenshoJoho" AS A2
+        WHERE
+        "DbT4302ShujiiIkenshoJoho"."shinseishoKanriNo" = A2."shinseishoKanriNo"
+        AND "DbT4302ShujiiIkenshoJoho"."ikenshoIraiRirekiNo" <![CDATA[<]]> A2."ikenshoIraiRirekiNo"
+        )
+        LEFT JOIN rgdb."DbT4911ShujiiIryoKikanJoho" AS "DbT4911ShujiiIryoKikanJoho"
+        ON "DbT4301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" = "DbT4911ShujiiIryoKikanJoho"."shujiiIryokikanCode"
+        AND T7051."shichosonCode" = "DbT4911ShujiiIryoKikanJoho"."shichosonCode"
+        AND "DbT4911ShujiiIryoKikanJoho"."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT4912ShujiiJoho" AS "DbT4912ShujiiJoho"
+        ON "DbT4301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" = "DbT4912ShujiiJoho"."shujiiIryokikanCode"
+        AND "DbT4301ShujiiIkenshoIraiJoho"."shujiiCode" = "DbT4912ShujiiJoho"."shujiiCode"
+        AND T7051."shichosonCode" = "DbT4912ShujiiJoho"."shichosonCode"
+        AND "DbT4912ShujiiJoho"."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT4123NinteiKeikakuJoho" AS "DbT4123NinteiKeikakuJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4123NinteiKeikakuJoho"."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4116IchijiHanteiKekkaJoho" AS "DbT4116IchijiHanteiKekkaJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4116IchijiHanteiKekkaJoho"."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
+        ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4120ShinseitodokedeJoho" AS "DbT4120ShinseitodokedeJoho"
+        ON "DbT4120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT4121ShinseiRirekiJoho" AS "DbT4121ShinseiRirekiJoho"
+        ON "DbT4121ShinseiRirekiJoho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
+        WHERE
+        "DbT4001JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
+        ORDER BY
+        "DbT4001JukyushaDaicho"."rirekiNo" ASC
     </sql>
     <update id="upd履歴番号" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.rirekishusei.RirekiShuseiMapperParameter" >
         UPDATE rgdb."DbT4001JukyushaDaicho"
         SET
-            "updateCount" = #{update回数Upd},
-            "rirekiNo" = #{履歴番号Upd},
-            "remban" = #{履歴番号Upd},
-            "lastUpdateTimestamp" = #{最終Update日時},
-            "lastUpdateReamsLoginId" = #{ログインid}
+        "updateCount" = #{update回数Upd},
+        "rirekiNo" = #{履歴番号Upd},
+        "remban" = #{履歴番号Upd},
+        "lastUpdateTimestamp" = #{最終Update日時},
+        "lastUpdateReamsLoginId" = #{ログインid}
         WHERE
-            "shichosonCode" = #{市町村コード}
-            AND "hihokenshaNo" = #{被保険者番号}
-            AND "rirekiNo" = #{履歴番号}
-            AND "edaban" = #{枝番}
-            AND "jukyuShinseiJiyu" = #{受給申請事由}
-            AND "updateCount" = #{update回数}
+        "shichosonCode" = #{市町村コード}
+        AND "hihokenshaNo" = #{被保険者番号}
+        AND "rirekiNo" = #{履歴番号}
+        AND "edaban" = #{枝番}
+        AND "jukyuShinseiJiyu" = #{受給申請事由}
+        AND "updateCount" = #{update回数}
     </update>
 </mapper>

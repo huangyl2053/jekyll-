@@ -49,7 +49,7 @@ public class CsvKenHokokuShiryoSakuseiProcess extends BatchProcessBase<CsvKenHok
 
     @Override
     protected void initialize() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilename = Path.combinePath(spoolWorkPath, paramter.getShutsuryokuFairu());
         eucCsvWriterKenHokokuShiryo = new CsvWriter.InstanceBuilder(eucFilename).

@@ -5,36 +5,58 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601003.ChosahyoJissekiIchiranProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601003.ShinsaiinJissekiIchiranCsvProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601003.ShinsaiinJissekiIchiranReportProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_ShinsakaiiinJissekiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 帳票出力用認定調査実績集計表のReportSourceクラスです。
+ * 介護認定審査会委員報酬実績集計表のバッチフロークラスです。
  *
- * @reamsid_L DBE-1691-020 dangjingjing
+ * @reamsid_L DBE-1700-020 wanghuafeng
  */
 public class DBE601003_ShinsakaiiinJisseki extends BatchFlowBase<DBE601003_ShinsakaiiinJissekiParameter> {
 
-    private static final String CHOSAHYO_JISSEKI_ICHIRAN = "chosahyojissekiichiran";
+    private static final String SHINSAI_JISSE_ICHIRAN_CSV = "shinsaiinjissekiichirancsv";
+    private static final String SHINSAI_JISSE_ICHIRAN_REPORT = "shinsaiinjissekiichiranreport";
+    private static final RString CSVを出力する = new RString("1");
+    private static final RString 集計表を発行する = new RString("2");
 
     @Override
     protected void defineFlow() {
         if (!getParameter().getKeyJoho().isEmpty()) {
-            executeStep(CHOSAHYO_JISSEKI_ICHIRAN);
+            if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
+                executeStep(SHINSAI_JISSE_ICHIRAN_CSV);
+            } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
+                executeStep(SHINSAI_JISSE_ICHIRAN_REPORT);
+            }
         }
     }
 
     /**
-     * 要介護認定事業状況データの作成を行います。
+     * 要介護認定事業状況データCSVの作成を行います。
      *
      * @return バッチコマンド
      */
-    @Step(CHOSAHYO_JISSEKI_ICHIRAN)
-    IBatchFlowCommand chosahyojissekiichiran() {
-        return loopBatch(ChosahyoJissekiIchiranProcess.class)
-                .arguments(getParameter().toProcessParamter()).define();
+    @Step(SHINSAI_JISSE_ICHIRAN_CSV)
+    IBatchFlowCommand shinsaiinjissekiichiranCsv() {
+        return loopBatch(ShinsaiinJissekiIchiranCsvProcess.class)
+                .arguments(getParameter().toProcessParamter())
+                .define();
+    }
+
+    /**
+     * 要介護認定事業状況データ帳票の作成を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(SHINSAI_JISSE_ICHIRAN_REPORT)
+    IBatchFlowCommand shinsaiinjissekiichiranReport() {
+        return loopBatch(ShinsaiinJissekiIchiranReportProcess.class)
+                .arguments(getParameter().toProcessParamter())
+                .define();
     }
 }

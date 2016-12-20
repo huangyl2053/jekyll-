@@ -9,10 +9,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.NiJiHanTeiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -70,6 +73,24 @@ public interface IShinsakaiKekkaTorokuMapper {
      */
     List<DbT5105NinteiKanryoJohoEntity> get要介護認定完了情報(ShinsakaiKekkaTorokuParameter param);
 
+    /**
+     * 要介護認定申請情報&構成市町村マスタ&要介護認定完了情報&要介護認定結果情報&介護認定審査会割当情報
+     * &介護認定審査会開催予定情報&介護認定審査会開催結果情報
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return List<NiJiHanTeiRelateEntity>
+     */
+    List<NiJiHanTeiRelateEntity> get二次判定(YokaigoNinteiTaskListParameter parameter);
+
+    /**
+     * 要介護認定申請情報&構成市町村マスタ&要介護認定完了情報&要介護認定結果情報&介護認定審査会割当情報
+     * &介護認定審査会開催予定情報&介護認定審査会開催結果情報
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return List<ShinSaKaiToRoKuRelate>
+     */
+    List<ShinSaKaiToRoKuRelate> get前二次判定(YokaigoNinteiTaskListParameter parameter);
+    
     /**
      * MAX履歴番号を取得します。
      *

@@ -58,13 +58,16 @@ public class ShinsakaiAutoHandler {
                 dgShinsakaiIchiran.getEndtime().setValue(new RTime(jigyoshaInput.get終了時間()));
                 dgShinsakaiIchiran.getShinsakaiJidoWariateTeiin();
                 dgShinsakaiIchiran.setWaritsukeninzu(jigyoshaInput.get割付人数());
-                dgShinsakaiIchiran.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(jigyoshaInput.get進捗状況()).get名称());
+                dgShinsakaiIchiran.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(jigyoshaInput.get進捗状況()).get画面表示名称());
                 dgShinsakaiIchiran.setDammyflag(IsGogitaiDummy.toValue(jigyoshaInput.isダミーフラグ()).is合議体ダミーフラグTrue());
                 dgShinsakaiIchiran.setShinsakaiJidoWariateTeiin(jigyoshaInput.get自動割付定員());
+                dgShinsakaiIchiran.setSelected(Boolean.TRUE);
                 dgShinsakaiIchiranList.add(dgShinsakaiIchiran);
             }
+            shindiv.getDgShinsakaiIchiran().setDataSource(dgShinsakaiIchiranList);
+        } else {
+            shindiv.getDgShinsakaiIchiran().setDataSource(dgShinsakaiIchiranList);
         }
-        shindiv.getDgShinsakaiIchiran().setDataSource(dgShinsakaiIchiranList);
     }
 
     /**

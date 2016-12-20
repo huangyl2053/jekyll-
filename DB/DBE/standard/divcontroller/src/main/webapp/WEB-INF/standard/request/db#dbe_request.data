@@ -72,6 +72,7 @@ dbe/db/dbe/GaikyoTokkiYichiranNyuroku/onOkClose_btnThirdTokkiJikoTeikeibun
 dbe/db/dbe/GensenChoshuDataSakusei/getParameter
 dbe/db/dbe/GensenChoshuDataSakusei/onClick_csvCreate
 dbe/db/dbe/GensenChoshuDataSakusei/onLoad
+dbe/db/dbe/GetsureiShori/onChange_jyotaiKubun
 dbe/db/dbe/GetsureiShori/onClick_BtnCenterSoshin
 dbe/db/dbe/GetsureiShori/onClick_BtnCompleteGetsureiShori
 dbe/db/dbe/GetsureiShori/onClick_BtnDataOutput
@@ -132,8 +133,8 @@ dbe/db/dbe/HihokenshaOutline/onStart
 dbe/db/dbe/HihokenshaSearchForShinsei/onClick_btnToDecide
 dbe/db/dbe/HihokenshaSearchForShinsei/onClick_btnToSearch
 dbe/db/dbe/HihokenshaSearchForShinsei/onLoad
-dbe/db/dbe/HokokuShiryoSakuSeiParameter/onChange_chkShutsuryokuChohyo
-dbe/db/dbe/HokokuShiryoSakuSeiParameter/onChange_radKubun
+dbe/db/dbe/HokokuShiryoSakuSeiParameter/onChange_radCsvShutsuryoku
+dbe/db/dbe/HokokuShiryoSakuSeiParameter/onChange_radShutsuryokuChohyo
 dbe/db/dbe/HokokuShiryoSakuSeiParameter/onClick_btnBatchRegisterHokokuShiryo
 dbe/db/dbe/HokokuShiryoSakuSeiParameter/onClick_btnCheck
 dbe/db/dbe/HokokuShiryoSakuSeiParameter/onload
@@ -284,7 +285,7 @@ dbe/db/dbe/JizenShinsakaiShiryoPublication/onClick_btnParameter
 dbe/db/dbe/JizenShinsakaiShiryoPublication/onClick_chkPrintChohyoIin
 dbe/db/dbe/JizenShinsakaiShiryoPublication/onLoad
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnAutoWaritsuke
-dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnSelect
+dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnSelectAlias
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btndatainput
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btndataoutput
 dbe/db/dbe/KaigoNinteiShinsakai/onClick_btnkojin
@@ -401,6 +402,7 @@ dbe/db/dbe/NinteiChosaIraiShudou/onClick_btnPrint
 dbe/db/dbe/NinteiChosaIraiShudou/onClick_btnPrint_after
 dbe/db/dbe/NinteiChosaIraiShudou/onClick_btnPrint_check
 dbe/db/dbe/NinteiChosaIraiShudou/onLoad
+dbe/db/dbe/NinteiChosaJissekiShokai/onChange_State
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_BatchButton
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_BtnPulish
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_BtnShutsutyoku
@@ -620,6 +622,7 @@ dbe/db/dbe/NinteiShinseiToroku/onLoad
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnJogaiShinsakaiIinGuide
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnRenrakusaki
 dbe/db/dbe/NinteiShinseiToroku/onOkClose_btnShichosonRenrakuJiko
+dbe/db/dbe/NinteichosaIrai/onActive
 dbe/db/dbe/NinteichosaIrai/onBefore_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnDataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnTaOutput
@@ -691,7 +694,8 @@ dbe/db/dbe/NinteishinsaKekkaOutput/onClick_btnDataSakusei
 dbe/db/dbe/NinteishinsaKekkaOutput/onClick_btnHyoji
 dbe/db/dbe/NinteishinsaKekkaOutput/onLoad
 dbe/db/dbe/Ninteishinseibi/btn_save
-dbe/db/dbe/Ninteishinseibi/btn_toRiKoMi
+dbe/db/dbe/Ninteishinseibi/onAfterUploaded_btnImport
+dbe/db/dbe/Ninteishinseibi/onClick_btnUpload
 dbe/db/dbe/Ninteishinseibi/onLoad
 dbe/db/dbe/NinteitsuchishoKobetsuHakko/onClick_btnToSearch
 dbe/db/dbe/NinteitsuchishoKobetsuHakko/onLoad
@@ -736,6 +740,7 @@ dbe/db/dbe/ShinchokuDataOutput/onClick_btnKensaku
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnResearchr
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnShinchokuDataOutput
 dbe/db/dbe/ShinchokuDataOutput/onLoad
+dbe/db/dbe/ShinsaKaiKekkaToroku/onChange_radTaishoshaJotai
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnCompleteKekkaToroku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnKekkaToroku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnMobileToroku
@@ -947,12 +952,14 @@ dbe/db/dbe/ShujiiIkenshoIraiShokai/initialize
 dbe/db/dbe/ShujiiIkenshoIraiShokai/onClick_btnReturn
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onBeforeOpenDialog_btnIraishoToOutput
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_radShoriJyotai
+dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_txtSaidaiHyojiKensu
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_BtnYitiranSyuturyoku
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnChousaIraiKanryo
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnOutputCsv
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnShujiiIrai
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onLoad
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onOkClose_btnIraishoToOutput
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onBeforeOpenDialog_dgShinseishaIchiran
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onBlur_txtjyushinymd
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onChange_ddlHokensha
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_Chkprint

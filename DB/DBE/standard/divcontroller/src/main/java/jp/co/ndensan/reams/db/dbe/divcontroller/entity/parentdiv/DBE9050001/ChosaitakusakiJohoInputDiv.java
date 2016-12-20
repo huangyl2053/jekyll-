@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
@@ -50,16 +49,16 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private DropDownList ddlKikankubun;
     @JsonProperty("radHaishiFlag")
     private RadioButton radHaishiFlag;
-    @JsonProperty("btnRegisterKoza")
-    private ButtonDialog btnRegisterKoza;
+    @JsonProperty("KozaJoho")
+    private KozaJohoDiv KozaJoho;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
-    @JsonProperty("ccdHokenshaJoho")
-    private HokenshaJohoDiv ccdHokenshaJoho;
     @JsonProperty("ccdChiku")
     private CodeInputDiv ccdChiku;
+    @JsonProperty("ccdHokenshaJoho")
+    private HokenshaJohoDiv ccdHokenshaJoho;
     @JsonProperty("state")
     private RString state;
     @JsonProperty("hiddenInputDiv")
@@ -270,21 +269,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getbtnRegisterKoza
-     * @return btnRegisterKoza
+     * getKozaJoho
+     * @return KozaJoho
      */
-    @JsonProperty("btnRegisterKoza")
-    public ButtonDialog getBtnRegisterKoza() {
-        return btnRegisterKoza;
+    @JsonProperty("KozaJoho")
+    public KozaJohoDiv getKozaJoho() {
+        return KozaJoho;
     }
 
     /*
-     * setbtnRegisterKoza
-     * @param btnRegisterKoza btnRegisterKoza
+     * setKozaJoho
+     * @param KozaJoho KozaJoho
      */
-    @JsonProperty("btnRegisterKoza")
-    public void setBtnRegisterKoza(ButtonDialog btnRegisterKoza) {
-        this.btnRegisterKoza = btnRegisterKoza;
+    @JsonProperty("KozaJoho")
+    public void setKozaJoho(KozaJohoDiv KozaJoho) {
+        this.KozaJoho = KozaJoho;
     }
 
     /*
@@ -324,21 +323,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getccdHokenshaJoho
-     * @return ccdHokenshaJoho
-     */
-    @JsonProperty("ccdHokenshaJoho")
-    public IHokenshaJohoDiv getCcdHokenshaJoho() {
-        return ccdHokenshaJoho;
-    }
-
-    /*
      * getccdChiku
      * @return ccdChiku
      */
     @JsonProperty("ccdChiku")
     public ICodeInputDiv getCcdChiku() {
         return ccdChiku;
+    }
+
+    /*
+     * getccdHokenshaJoho
+     * @return ccdHokenshaJoho
+     */
+    @JsonProperty("ccdHokenshaJoho")
+    public IHokenshaJohoDiv getCcdHokenshaJoho() {
+        return ccdHokenshaJoho;
     }
 
     /*

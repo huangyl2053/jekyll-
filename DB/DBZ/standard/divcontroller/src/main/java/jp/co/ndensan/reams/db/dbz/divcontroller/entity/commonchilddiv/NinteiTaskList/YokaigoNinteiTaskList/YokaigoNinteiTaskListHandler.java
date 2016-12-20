@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteichosaTokusokuHoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -578,7 +577,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
             row.setIkenshoTokusokuHoho(
-                    business.get主治医意見書作成督促方法() == null 
+                    business.get主治医意見書作成督促方法() == null
                     || business.get主治医意見書作成督促方法().isEmpty()
                     || business.get主治医意見書作成督促方法().equals(" ")
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
@@ -1088,8 +1087,8 @@ public class YokaigoNinteiTaskListHandler {
             if (business.getセンター送信年月日() != null && !business.getセンター送信年月日().isEmpty()) {
                 row.getGetsureiShoriKanryoDay().setValue(new RDate(business.getセンター送信年月日().toString()));
             }
-            if (business.getＩＦ送付年月日() != null && !business.getＩＦ送付年月日().isEmpty()) {
-                row.getCenterSoshinDay().setValue(new RDate(business.getＩＦ送付年月日().toString()));
+            if (business.getセンター送信情報抽出年月日() != null && !business.getセンター送信情報抽出年月日().isEmpty()) {
+                row.getCenterSoshinDay().setValue(new RDate(business.getセンター送信情報抽出年月日().toString()));
             }
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
             rowList.add(row);

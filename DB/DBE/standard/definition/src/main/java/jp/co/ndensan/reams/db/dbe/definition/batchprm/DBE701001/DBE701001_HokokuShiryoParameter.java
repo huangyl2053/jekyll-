@@ -30,7 +30,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
     private static final String JIGYOJYOKYOHOKOKU = "jigyoJyokyoHokoku";
     private static final String JISSIJYOKYOTOKEI = "jissiJyokyoTokei";
     private static final String SINSAHANTEIJYOKYO = "sinsaHanteiJyokyo";
-    private static final String SINSAKAIKANRENTOKEI = "sinsakaiKanrenTokei";
+    private static final String SINSAHANTEINOHENKOUJOKYO = "sinsaHanteiNoHenkouJokyo";
+    private static final String KAIGONINTEISINSAKAISHUKEIHYOHANTEIBETSU = "kaigoNinteiSinsakaiShukeihyoHanteibetsu";
+    private static final String KAIGONINTEISINSAKAISHUKEIHYOSINSEIKUBUNBETSU = "kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu";
+    private static final String KAIGONINTEISINSAKAISHUKEIHYOGENZAINOJOKYOBETSU = "kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu";
     private static final String CSVSHUTSURYOKU = "csvShutsuryoku";
     private static final String SHUTSURYOKUFAIRU = "shutsuryokuFairu";
     private static final String HOKENSYANO = "hokensyaNo";
@@ -55,8 +58,14 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
     private boolean jissiJyokyoTokei;
     @BatchParameter(key = SINSAHANTEIJYOKYO, name = "審査判定状況出力区分")
     private boolean sinsaHanteiJyokyo;
-    @BatchParameter(key = SINSAKAIKANRENTOKEI, name = "審査会関連統計資料作成出力区分")
-    private boolean sinsakaiKanrenTokei;
+    @BatchParameter(key = SINSAHANTEINOHENKOUJOKYO, name = "審査判定の変更状況出力区分")
+    private boolean sinsaHanteiNoHenkouJokyo;
+    @BatchParameter(key = KAIGONINTEISINSAKAISHUKEIHYOHANTEIBETSU, name = "介護認定審査会集計表（判定別）出力区分")
+    private boolean kaigoNinteiSinsakaiShukeihyoHanteibetsu;
+    @BatchParameter(key = KAIGONINTEISINSAKAISHUKEIHYOSINSEIKUBUNBETSU, name = "介護認定審査会集計表（申請区分別）出力区分")
+    private boolean kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu;
+    @BatchParameter(key = KAIGONINTEISINSAKAISHUKEIHYOGENZAINOJOKYOBETSU, name = "介護認定審査会集計表（現在の状況別）出力区分")
+    private boolean kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu;
     @BatchParameter(key = CSVSHUTSURYOKU, name = "CSV出力区分")
     private boolean csvShutsuryoku;
     @BatchParameter(key = SHUTSURYOKUFAIRU, name = "出力ファイル名")
@@ -104,7 +113,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
      * @param jigyoJyokyoHokoku 事業状況報告出力区分
      * @param jissiJyokyoTokei 実施状況統計出力区分
      * @param sinsaHanteiJyokyo 審査判定状況出力区分
-     * @param sinsakaiKanrenTokei 審査会関連統計資料作成出力区分
+     * @param sinsaHanteiNoHenkouJokyo 審査判定の変更状況出力区分
+     * @param kaigoNinteiSinsakaiShukeihyoHanteibetsu 介護認定審査会集計表（判定別）出力区分
+     * @param kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu 介護認定審査会集計表（申請区分別）出力区分
+     * @param kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu 介護認定審査会集計表（現在の状況別）出力区分
      * @param csvShutsuryoku CSV出力区分
      * @param shutsuryokuFairu 出力ファイル名
      * @param hokensyaNo 保険者番号
@@ -127,7 +139,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
             boolean jigyoJyokyoHokoku,
             boolean jissiJyokyoTokei,
             boolean sinsaHanteiJyokyo,
-            boolean sinsakaiKanrenTokei,
+            boolean sinsaHanteiNoHenkouJokyo,
+            boolean kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+            boolean kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+            boolean kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
             boolean csvShutsuryoku,
             RString shutsuryokuFairu,
             RString hokensyaNo,
@@ -148,7 +163,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
         this.jigyoJyokyoHokoku = jigyoJyokyoHokoku;
         this.jissiJyokyoTokei = jissiJyokyoTokei;
         this.sinsaHanteiJyokyo = sinsaHanteiJyokyo;
-        this.sinsakaiKanrenTokei = sinsakaiKanrenTokei;
+        this.sinsaHanteiNoHenkouJokyo = sinsaHanteiNoHenkouJokyo;
+        this.kaigoNinteiSinsakaiShukeihyoHanteibetsu = kaigoNinteiSinsakaiShukeihyoHanteibetsu;
+        this.kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu = kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu;
+        this.kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu = kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu;
         this.csvShutsuryoku = csvShutsuryoku;
         this.shutsuryokuFairu = shutsuryokuFairu;
         this.hokensyaNo = hokensyaNo;
@@ -179,7 +197,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
                 jigyoJyokyoHokoku,
                 jissiJyokyoTokei,
                 sinsaHanteiJyokyo,
-                sinsakaiKanrenTokei,
+                sinsaHanteiNoHenkouJokyo,
+                kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+                kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+                kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
                 csvShutsuryoku,
                 shutsuryokuFairu,
                 kijyunYMD,
@@ -214,7 +235,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
                 jigyoJyokyoHokoku,
                 jissiJyokyoTokei,
                 sinsaHanteiJyokyo,
-                sinsakaiKanrenTokei,
+                sinsaHanteiNoHenkouJokyo,
+                kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+                kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+                kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
                 csvShutsuryoku,
                 shutsuryokuFairu,
                 kijyunYMD,
@@ -248,7 +272,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
                 jigyoJyokyoHokoku,
                 jissiJyokyoTokei,
                 sinsaHanteiJyokyo,
-                sinsakaiKanrenTokei,
+                sinsaHanteiNoHenkouJokyo,
+                kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+                kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+                kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
                 csvShutsuryoku,
                 shutsuryokuFairu,
                 kijyunYMD,
@@ -276,7 +303,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
                 jigyoJyokyoHokoku,
                 jissiJyokyoTokei,
                 sinsaHanteiJyokyo,
-                sinsakaiKanrenTokei,
+                sinsaHanteiNoHenkouJokyo,
+                kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+                kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+                kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
                 csvShutsuryoku,
                 shutsuryokuFairu,
                 kijyunYMD,
@@ -308,7 +338,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
                 jigyoJyokyoHokoku,
                 jissiJyokyoTokei,
                 sinsaHanteiJyokyo,
-                sinsakaiKanrenTokei,
+                sinsaHanteiNoHenkouJokyo,
+                kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+                kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+                kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
                 csvShutsuryoku,
                 shutsuryokuFairu,
                 kijyunYMD,
@@ -343,7 +376,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
                 jigyoJyokyoHokoku,
                 jissiJyokyoTokei,
                 sinsaHanteiJyokyo,
-                sinsakaiKanrenTokei,
+                sinsaHanteiNoHenkouJokyo,
+                kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+                kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+                kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
                 csvShutsuryoku,
                 shutsuryokuFairu,
                 kijyunYMD,
@@ -375,7 +411,10 @@ public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
                 jigyoJyokyoHokoku,
                 jissiJyokyoTokei,
                 sinsaHanteiJyokyo,
-                sinsakaiKanrenTokei,
+                sinsaHanteiNoHenkouJokyo,
+                kaigoNinteiSinsakaiShukeihyoHanteibetsu,
+                kaigoNinteiSinsakaiShukeihyoSinseikubunbetsu,
+                kaigoNinteiSinsakaiShukeihyoGenzainojokyobetsu,
                 csvShutsuryoku,
                 shutsuryokuFairu,
                 RString.isNullOrEmpty(hokensyaNo),

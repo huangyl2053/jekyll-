@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class HoshuMasutaTabDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -135,6 +135,16 @@ public class HoshuMasutaTabDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlKaigoNinteiShinsaIinShubetsu() {
+        return this.getTabHoshuMasutaKoshin().getTabChosainhoshuTanka().getChosainhoshuTankaNyuryoku().getDdlKaigoNinteiShinsaIinShubetsu();
+    }
+
+    @JsonIgnore
+    public void  setDdlKaigoNinteiShinsaIinShubetsu(DropDownList ddlKaigoNinteiShinsaIinShubetsu) {
+        this.getTabHoshuMasutaKoshin().getTabChosainhoshuTanka().getChosainhoshuTankaNyuryoku().setDdlKaigoNinteiShinsaIinShubetsu(ddlKaigoNinteiShinsaIinShubetsu);
+    }
+
+    @JsonIgnore
     public TextBoxFlexibleYearMonth getTxtChoKaishiYM() {
         return this.getTabHoshuMasutaKoshin().getTabChosainhoshuTanka().getChosainhoshuTankaNyuryoku().getTxtChoKaishiYM();
     }
@@ -152,16 +162,6 @@ public class HoshuMasutaTabDiv extends Panel {
     @JsonIgnore
     public void  setTxtChoShuryoYM(TextBoxFlexibleYearMonth txtChoShuryoYM) {
         this.getTabHoshuMasutaKoshin().getTabChosainhoshuTanka().getChosainhoshuTankaNyuryoku().setTxtChoShuryoYM(txtChoShuryoYM);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKaigoNinteiShinsaIinShubetsu() {
-        return this.getTabHoshuMasutaKoshin().getTabChosainhoshuTanka().getChosainhoshuTankaNyuryoku().getDdlKaigoNinteiShinsaIinShubetsu();
-    }
-
-    @JsonIgnore
-    public void  setDdlKaigoNinteiShinsaIinShubetsu(DropDownList ddlKaigoNinteiShinsaIinShubetsu) {
-        this.getTabHoshuMasutaKoshin().getTabChosainhoshuTanka().getChosainhoshuTankaNyuryoku().setDdlKaigoNinteiShinsaIinShubetsu(ddlKaigoNinteiShinsaIinShubetsu);
     }
 
     @JsonIgnore
@@ -275,6 +275,26 @@ public class HoshuMasutaTabDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxCode getTxtShinsaIinKodo() {
+        return this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinKodo();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsaIinKodo(TextBoxCode txtShinsaIinKodo) {
+        this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setTxtShinsaIinKodo(txtShinsaIinKodo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShinsaIinName() {
+        return this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinName();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsaIinName(TextBox txtShinsaIinName) {
+        this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setTxtShinsaIinName(txtShinsaIinName);
+    }
+
+    @JsonIgnore
     public TextBoxFlexibleYearMonth getTxtBetuKaishiYM() {
         return this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getTxtBetuKaishiYM();
     }
@@ -292,16 +312,6 @@ public class HoshuMasutaTabDiv extends Panel {
     @JsonIgnore
     public void  setTxtBetuShuryoYM(TextBoxFlexibleYearMonth txtBetuShuryoYM) {
         this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setTxtBetuShuryoYM(txtBetuShuryoYM);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShinsaIinKodo() {
-        return this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinKodo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShinsaIinKodo(TextBox txtShinsaIinKodo) {
-        this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setTxtShinsaIinKodo(txtShinsaIinKodo);
     }
 
     @JsonIgnore

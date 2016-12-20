@@ -40,7 +40,8 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor implements INinteiChosa
      *
      * @param item {@link NinteiChosaTokusokuTaishoshaIchiranhyoItem}
      */
-    protected NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor(NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
+    protected NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor(
+            NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
         this.entity = entity;
     }
 

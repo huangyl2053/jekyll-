@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DaiichigunShintaiKinoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -49,6 +49,10 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     private ShiryokuDiv Shiryoku;
     @JsonProperty("Choryoku")
     private ChoryokuDiv Choryoku;
+    @JsonProperty("btnBack")
+    private Button btnBack;
+    @JsonProperty("btnConfirm")
+    private Button btnConfirm;
     @JsonProperty("shinseishoKanriNo")
     private RString shinseishoKanriNo;
     @JsonProperty("recordNumber")
@@ -296,6 +300,42 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     @JsonProperty("Choryoku")
     public void setChoryoku(ChoryokuDiv Choryoku) {
         this.Choryoku = Choryoku;
+    }
+
+    /*
+     * getbtnBack
+     * @return btnBack
+     */
+    @JsonProperty("btnBack")
+    public Button getBtnBack() {
+        return btnBack;
+    }
+
+    /*
+     * setbtnBack
+     * @param btnBack btnBack
+     */
+    @JsonProperty("btnBack")
+    public void setBtnBack(Button btnBack) {
+        this.btnBack = btnBack;
+    }
+
+    /*
+     * getbtnConfirm
+     * @return btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public Button getBtnConfirm() {
+        return btnConfirm;
+    }
+
+    /*
+     * setbtnConfirm
+     * @param btnConfirm btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public void setBtnConfirm(Button btnConfirm) {
+        this.btnConfirm = btnConfirm;
     }
 
     /*

@@ -50,7 +50,7 @@
         <if test="temp_認定調査督促期限!=null">
         AND "DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaKigenYMD" <![CDATA[<]]> #{temp_認定調査督促期限}
         </if>
-        <if test="temp_印刷済対象者!=null and temp_印刷済対象者=1">
+        <if test="is印刷済対象者対象外">
         AND ("DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD" IS NULL
              OR "DbT5201NinteichosaIraiJoho"."dbT5201NinteichosaIraiJoho_ninteichosaTokusokuYMD" = '')
         </if>
@@ -110,13 +110,13 @@
     <!--  NinteiChosaTokusokuTaishoshaIchiranhyoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity" autoMapping="true">
+        <id property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <id property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <id property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_市町村コード" column="temp_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="temp_市町村名称" column="temp_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_保険者番号" column="temp_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_被保険者番号" column="temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="temp_被保険者氏名カナ" column="temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
-        <result property="temp_被保険者氏名" column="temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
-        <result property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_督促状発行日" column="temp_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -144,14 +144,14 @@
         DbT5910NinteichosaItakusakiJoho."telNo"  AS  temp_事業者電話番号
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT7051KoseiShichosonMaster"  AS  DbT7051KoseiShichosonMaster
         ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         AND DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" =  DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho
         ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
         AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"

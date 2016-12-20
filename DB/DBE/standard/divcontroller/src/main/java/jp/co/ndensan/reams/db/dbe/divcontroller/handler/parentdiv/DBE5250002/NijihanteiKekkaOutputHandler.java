@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -94,6 +95,10 @@ public class NijihanteiKekkaOutputHandler {
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHanteiDateFrom().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getLblNijiHanteiDate().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHnateiDateTo().setDisplayNone(true);
+        ShichosonSecurityJoho shichosonSecurityJoho
+                = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, UrControlDataFactory.createInstance().getLoginInfo().getUserId());
+        nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
+        nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(shichosonSecurityJoho.get市町村情報().get市町村名称());
     }
 
     private RString nullToEmpty(RString obj) {

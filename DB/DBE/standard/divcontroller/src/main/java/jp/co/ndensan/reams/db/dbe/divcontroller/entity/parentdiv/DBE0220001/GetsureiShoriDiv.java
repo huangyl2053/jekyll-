@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GetsureiShoriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,10 +26,10 @@ public class GetsureiShoriDiv extends Panel {
      */
     @JsonProperty("CenterSoshinTaishoshaIchiran")
     private CenterSoshinTaishoshaIchiranDiv CenterSoshinTaishoshaIchiran;
-    @JsonProperty("ShoriSelect")
-    private ShoriSelectDiv ShoriSelect;
-    @JsonProperty("ccdKanryoMessege")
-    private KanryoMessageDiv ccdKanryoMessege;
+    @JsonProperty("CenterSoshinTaishoshaShutsuryoku")
+    private CenterSoshinTaishoshaShutsuryokuDiv CenterSoshinTaishoshaShutsuryoku;
+    @JsonProperty("KanryoMsg")
+    private KanryoMsgDiv KanryoMsg;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -58,48 +56,127 @@ public class GetsureiShoriDiv extends Panel {
     }
 
     /*
-     * getShoriSelect
-     * @return ShoriSelect
+     * getCenterSoshinTaishoshaShutsuryoku
+     * @return CenterSoshinTaishoshaShutsuryoku
      */
-    @JsonProperty("ShoriSelect")
-    public ShoriSelectDiv getShoriSelect() {
-        return ShoriSelect;
+    @JsonProperty("CenterSoshinTaishoshaShutsuryoku")
+    public CenterSoshinTaishoshaShutsuryokuDiv getCenterSoshinTaishoshaShutsuryoku() {
+        return CenterSoshinTaishoshaShutsuryoku;
     }
 
     /*
-     * setShoriSelect
-     * @param ShoriSelect ShoriSelect
+     * setCenterSoshinTaishoshaShutsuryoku
+     * @param CenterSoshinTaishoshaShutsuryoku CenterSoshinTaishoshaShutsuryoku
      */
-    @JsonProperty("ShoriSelect")
-    public void setShoriSelect(ShoriSelectDiv ShoriSelect) {
-        this.ShoriSelect = ShoriSelect;
+    @JsonProperty("CenterSoshinTaishoshaShutsuryoku")
+    public void setCenterSoshinTaishoshaShutsuryoku(CenterSoshinTaishoshaShutsuryokuDiv CenterSoshinTaishoshaShutsuryoku) {
+        this.CenterSoshinTaishoshaShutsuryoku = CenterSoshinTaishoshaShutsuryoku;
     }
 
     /*
-     * getccdKanryoMessege
-     * @return ccdKanryoMessege
+     * getKanryoMsg
+     * @return KanryoMsg
      */
-    @JsonProperty("ccdKanryoMessege")
-    public IKanryoMessageDiv getCcdKanryoMessege() {
-        return ccdKanryoMessege;
+    @JsonProperty("KanryoMsg")
+    public KanryoMsgDiv getKanryoMsg() {
+        return KanryoMsg;
+    }
+
+    /*
+     * setKanryoMsg
+     * @param KanryoMsg KanryoMsg
+     */
+    @JsonProperty("KanryoMsg")
+    public void setKanryoMsg(KanryoMsgDiv KanryoMsg) {
+        this.KanryoMsg = KanryoMsg;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdNinteiTaskList() {
-        return this.getCenterSoshinTaishoshaIchiran().getCcdNinteiTaskList();
+    public TextBoxNum getTxtDispMax() {
+        return this.getCenterSoshinTaishoshaIchiran().getTxtDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtDispMax(TextBoxNum txtDispMax) {
+        this.getCenterSoshinTaishoshaIchiran().setTxtDispMax(txtDispMax);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadJyotaiKubun() {
+        return this.getCenterSoshinTaishoshaIchiran().getRadJyotaiKubun();
+    }
+
+    @JsonIgnore
+    public void  setRadJyotaiKubun(RadioButton radJyotaiKubun) {
+        this.getCenterSoshinTaishoshaIchiran().setRadJyotaiKubun(radJyotaiKubun);
+    }
+
+    @JsonIgnore
+    public Space getSpc1() {
+        return this.getCenterSoshinTaishoshaIchiran().getSpc1();
+    }
+
+    @JsonIgnore
+    public void  setSpc1(Space spc1) {
+        this.getCenterSoshinTaishoshaIchiran().setSpc1(spc1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtGokei() {
+        return this.getCenterSoshinTaishoshaIchiran().getTxtGokei();
+    }
+
+    @JsonIgnore
+    public void  setTxtGokei(TextBox txtGokei) {
+        this.getCenterSoshinTaishoshaIchiran().setTxtGokei(txtGokei);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKanryouKano() {
+        return this.getCenterSoshinTaishoshaIchiran().getTxtKanryouKano();
+    }
+
+    @JsonIgnore
+    public void  setTxtKanryouKano(TextBox txtKanryouKano) {
+        this.getCenterSoshinTaishoshaIchiran().setTxtKanryouKano(txtKanryouKano);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtMisyori() {
+        return this.getCenterSoshinTaishoshaIchiran().getTxtMisyori();
+    }
+
+    @JsonIgnore
+    public void  setTxtMisyori(TextBox txtMisyori) {
+        this.getCenterSoshinTaishoshaIchiran().setTxtMisyori(txtMisyori);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getCenterSoshinTaishoshaIchiran().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getCenterSoshinTaishoshaIchiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore
     public ButtonDownLoad getBtndataoutput() {
-        return this.getShoriSelect().getBtndataoutput();
+        return this.getCenterSoshinTaishoshaShutsuryoku().getBtndataoutput();
     }
 
     @JsonIgnore
     public void  setBtndataoutput(ButtonDownLoad btndataoutput) {
-        this.getShoriSelect().setBtndataoutput(btndataoutput);
+        this.getCenterSoshinTaishoshaShutsuryoku().setBtndataoutput(btndataoutput);
+    }
+
+    @JsonIgnore
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return this.getKanryoMsg().getCcdKanryoMsg();
     }
 
     // </editor-fold>

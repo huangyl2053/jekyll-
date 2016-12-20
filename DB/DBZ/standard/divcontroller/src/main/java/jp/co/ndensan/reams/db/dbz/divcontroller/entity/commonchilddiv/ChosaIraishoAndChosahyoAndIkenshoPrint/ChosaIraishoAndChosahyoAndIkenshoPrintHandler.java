@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiI
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
@@ -64,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -105,6 +107,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
     private static final int INDEX_11 = 11;
+    private static final int 数字_0 = 0;
+    private static final int 数字_1 = 1;
+    private static final int 数字_2 = 2;
+    private static final int 数字_3 = 3;
+    private static final int 数字_4 = 4;
+    private static final int 数字_5 = 5;
+    private static final int 数字_6 = 6;
+    private static final int 数字_7 = 7;
+    private static final int 数字_8 = 8;
+    private static final int 数字_9 = 9;
+    private static final int 数字_10 = 10;
     private static final RString IKENSHOSAKUSEIRYO_11 = new RString("11");
     private static final RString IKENSHOSAKUSEIRYO_12 = new RString("12");
     private static final RString IKENSHOSAKUSEIRYO_21 = new RString("21");
@@ -152,9 +165,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(認定調査依頼情報List));
             List<dgNinteiChosa_Row> rowList = new ArrayList<>();
             int rowNo = 1;
+            int length = Integer.toString(list.size()).length();
             for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
                 dgNinteiChosa_Row row = new dgNinteiChosa_Row();
                 row.setNo(new RString(String.valueOf(rowNo++)));
+                row.setSortNo(row.getNo().padZeroToLeft(length));
                 row.setHihokenshaBango(nullToEmpty(business.get被保険者番号()));
                 row.setHihokenshaShimei(nullToEmpty(business.get被保険者氏名()));
                 if (!RString.isNullOrEmpty(business.get性別())) {
@@ -184,6 +199,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 div.getRadTeishutsuKigen().setDisabled(false);
             }
         } else {
+            div.getCcdHokenshaList().setDisplayNone(true);
             div.getNinteiChosa().setDisplayNone(true);
             div.getShujiiIkensho().setDisplayNone(false);
             List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = printFinder.get主治医意見書依頼情報(parameter).records();
@@ -210,6 +226,16 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 row.setShujiiShimei(nullToEmpty(business.get主治医氏名()));
                 row.setShinseishoKanriNo(nullToEmpty(business.get申請書管理番号()));
                 row.setRirekiNo(nullToEmpty(business.get主治医意見書作成依頼履歴番号()));
+                row.setHihokenshaShimeiKana(business.get被保険者氏名カナ());
+                row.setJusho(business.get住所());
+                row.setYubinNo(business.get郵便番号());
+                if (business.get生年月日() != null && !business.get生年月日().isEmpty()) {
+                    row.getBirthYMD().setValue(new FlexibleDate(business.get生年月日()));
+                } else {
+                    row.getBirthYMD().setValue(FlexibleDate.EMPTY);
+                }
+                row.setIryoKikanYubinNo(business.get医療機関郵便番号());
+                row.setIryoukikanShozaichi(business.get医療機関住所());
                 rowList.add(row);
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
@@ -219,6 +245,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード());
             if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
                 div.getRadTeishutsuKigen().setDisabled(true);
+                div.getTeishutsuKigen().setIsOpen(false);
             } else {
                 div.getRadTeishutsuKigen().setDisabled(false);
             }
@@ -244,7 +271,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public void setChkIkenshoSakuseiryoSeikyusho() {
         List<RString> keys = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
-        if (keys.size() == 1) {
+        if (keys.contains(KEY1)) {
             div.getShindanMeirei().setDisplayNone(false);
         } else {
             div.getShindanMeirei().setDisplayNone(true);
@@ -405,7 +432,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      * @return 認定調査依頼書印刷用パラメータ
      */
     public List<ChosaIraishoHeadItem> create認定調査依頼書印刷用パラメータ() {
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
         RString タイトル = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -515,7 +542,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      * @return 認定調査依頼一覧表印刷用パラメータ
      */
     public List<ChosaIraiIchiranhyoBodyItem> create認定調査依頼一覧表印刷用パラメータ() {
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         for (dgNinteiChosa_Row row : selectedItems) {
             申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
@@ -577,7 +604,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ChosahyoGaikyochosaItem> create認定調査票_概況調査パラメータ() {
 
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
         List<ChosahyoGaikyochosaItem> itemList = new ArrayList<>();
         for (dgNinteiChosa_Row row : selectedItems) {
@@ -702,7 +729,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ChosahyoKihonchosaKatamenItem> create認定調査票_基本調査パラメータ() {
         List<ChosahyoKihonchosaKatamenItem> itemList = new ArrayList<>();
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
         for (dgNinteiChosa_Row row : selectedItems) {
             NinteiShinseiJoho ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
@@ -747,7 +774,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項パラメータ() {
         List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
         for (dgNinteiChosa_Row row : selectedItems) {
             NinteiShinseiJoho ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
@@ -793,7 +820,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項_フリー様式パラメータ() {
         List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
         for (dgNinteiChosa_Row row : selectedItems) {
             NinteiShinseiJoho ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
@@ -839,7 +866,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<SaiChekkuhyoItem> create調査票差異チェック票_DBE292004パラメータ() {
         List<SaiChekkuhyoItem> itemList = new ArrayList<>();
-        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+        List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
         Map<RString, RString> 前回連番Map = new HashMap();
         for (dgNinteiChosa_Row row : selectedItems) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
@@ -1404,6 +1431,91 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
         }
         return itemList;
+    }
+
+    /**
+     * 介護保険指定医依頼兼主治医意見書提出意見書印刷用パラメータを作成します。
+     *
+     * @return 介護保険指定医依頼兼主治医意見書提出意見書パラメータ
+     */
+    public List<ShujiiIkenshoTeishutsuIraishoItem> create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ() {
+        List<ShujiiIkenshoTeishutsuIraishoItem> itemList = new ArrayList<>();
+        ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
+        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+        for (dgShujiiIkensho_Row row : selectedItems) {
+            RString hihokenshaNo = row.getHohokenshaBango().padRight(RString.HALF_SPACE, 数字_10);
+            item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援,
+                    ReportIdDBZ.DBE236001.getReportId(), FlexibleDate.getNowDate()));
+            item.setTitle(ReportIdDBZ.DBE236001.getReportName());
+            item.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
+            item.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
+            item.setHihokenshaNo3(hihokenshaNo.substring(数字_2, 数字_3));
+            item.setHihokenshaNo4(hihokenshaNo.substring(数字_3, 数字_4));
+            item.setHihokenshaNo5(hihokenshaNo.substring(数字_4, 数字_5));
+            item.setHihokenshaNo6(hihokenshaNo.substring(数字_5, 数字_6));
+            item.setHihokenshaNo7(hihokenshaNo.substring(数字_6, 数字_7));
+            item.setHihokenshaNo8(hihokenshaNo.substring(数字_7, 数字_8));
+            item.setHihokenshaNo9(hihokenshaNo.substring(数字_8, 数字_9));
+            item.setHihokenshaNo10(hihokenshaNo.substring(数字_9));
+            item.setHihokenshaName(row.getHihokenshaShimei());
+            item.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
+            item.setJusho(row.getJusho());
+            item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
+            FlexibleDate birthYMD = row.getBirthYMD().getValue();
+            if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
+                item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(数字_2));
+                if (new RString("明").equals(birthYMD.wareki().getEra())) {
+                    item.setBirthGengoShowa(HOUSI);
+                    item.setBirthGengoTaisho(HOUSI);
+                } else if (new RString("大").equals(birthYMD.wareki().getEra())) {
+                    item.setBirthGengoMeiji(HOUSI);
+                    item.setBirthGengoShowa(HOUSI);
+                } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
+                    item.setBirthGengoTaisho(HOUSI);
+                    item.setBirthGengoMeiji(HOUSI);
+                } else {
+                    item.setBirthGengoMeiji(HOUSI);
+                    item.setBirthGengoShowa(HOUSI);
+                    item.setBirthGengoTaisho(HOUSI);
+                }
+            }
+            if (!RString.isNullOrEmpty(row.getSeibetsu())) {
+                if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
+                    item.setSeibetsuWoman(HOUSI);
+                } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
+                    item.setSeibetsuMan(HOUSI);
+                }
+            }
+            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
+                    ReportIdDBZ.DBE236001.getReportId(), KamokuCode.EMPTY, 数字_1);
+            item.setTsuchibun1(通知文.get(数字_1));
+            item.setTsuchibun2(通知文.get(数字_2));
+            item.setYubinNo1(getEditedYubinNo(row.getIryoKikanYubinNo()));
+            item.setJushoText(row.getIryoukikanShozaichi());
+            item.setKikanNameText(row.getShujiiIryokikanCode());
+            item.setShimeiText(row.getShujiiShimei());
+            item.setMeishoFuyo(ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.介護保険指定医依頼兼主治医意見書提出依頼書_宛先敬称,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
+            if (row.getIryoKikanYubinNo() != null && !row.getIryoKikanYubinNo().isEmpty() && row.getIryoukikanShozaichi() != null && !row.getIryoukikanShozaichi().isEmpty()) {
+                item.setCustomerBarCode(ReportUtil.getCustomerBarCode(row.getIryoKikanYubinNo(), row.getIryoukikanShozaichi()));
+            } else {
+                item.setCustomerBarCode(RString.EMPTY);
+            }
+            item.setSonota(row.getHohokenshaBango());
+            itemList.add(item);
+        }
+        return itemList;
+    }
+
+    private RString getEditedYubinNo(RString yubinNo) {
+        if (RString.isNullOrEmpty(yubinNo)) {
+            return RString.EMPTY;
+        }
+        if (yubinNo.length() < 数字_5) {
+            return yubinNo;
+        }
+        return yubinNo.insert(yubinNo.length() - 数字_4, "-");
     }
 
     private RString get受診日時または期間() {

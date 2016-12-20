@@ -596,7 +596,6 @@ public class ShinsakaiIinJohoToroku {
         div.getBtnShinsakaiIinAdd().setDisabled(false);
         div.getBtnToroku().setDisabled(true);
         div.getBtnDelete().setDisabled(true);
-        div.getBtnKozaJohoToroku().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         ViewStateHolder.put(ViewStateKeys.モード, RString.EMPTY);
     }

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -95,6 +96,9 @@ public class IraishoIkkatsuHakko {
      * @return ResponseData<IraishoIkkatsuHakkoDiv>
      */
     public ResponseData<IraishoIkkatsuHakkoDiv> onClick_btnKensanku(IraishoIkkatsuHakkoDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(getValidationHandler(div).iraibiZengoJunCheck());
         if (validationMessages.iterator().hasNext()) {

@@ -26,6 +26,9 @@ import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.I
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReport;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.ShujiiIkenshoTeishutsuIraishoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.ShujiiIkenshoTeishutsuIraishoProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.ShujiiIkenshoTeishutsuIraishoReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
@@ -57,6 +60,7 @@ import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.Chosahyo
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -462,5 +466,41 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             KaigohokenShindanMeireishoReport report = KaigohokenShindanMeireishoReport.createFrom(itemlist);
             report.writeBy(reportSourceWriter);
         }
+    }
+    
+    /**
+     * 介護保険指定医依頼兼主治医意見書提出意見書を印刷します。
+     *
+     * @param 介護保険指定医依頼兼主治医意見書提出意見書ItemList 介護保険指定医依頼兼主治医意見書提出意見書ItemList
+     */
+    public void print介護保険指定医依頼兼主治医意見書提出意見書(List<ShujiiIkenshoTeishutsuIraishoItem> 介護保険指定医依頼兼主治医意見書提出意見書ItemList) {
+        List<ShujiiIkenshoTeishutsuIraishoReport> list = new ArrayList<>();
+        ShujiiIkenshoTeishutsuIraishoProperty property = new ShujiiIkenshoTeishutsuIraishoProperty();
+        try (ReportAssembler<ShujiiIkenshoTeishutsuIraishoReportSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<ShujiiIkenshoTeishutsuIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(介護保険指定医依頼兼主治医意見書提出意見書ItemList,
+                    ninshosha)));
+            for (ShujiiIkenshoTeishutsuIraishoReport report : list) {
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    private List<ShujiiIkenshoTeishutsuIraishoItem> setNishosha(List<ShujiiIkenshoTeishutsuIraishoItem> itemList, NinshoshaSource ninshosha) {
+        List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
+        for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
+            item.setDenshiKoin(ninshosha.denshiKoin);
+            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+            item.setKoinShoryaku(ninshosha.koinShoryaku);
+            resultList.add(item);
+        }
+        return resultList;
     }
 }

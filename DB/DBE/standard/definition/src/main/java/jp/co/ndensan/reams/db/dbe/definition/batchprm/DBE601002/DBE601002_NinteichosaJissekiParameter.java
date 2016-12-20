@@ -1,8 +1,8 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.ikenshojissekiichiran.IkenshoJissekiIchiranKey;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojissekiichiran.IkenshoJissekiIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyojissekiichiran.ChosahyoJissekiIchiranKey;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.chosahyojissekiichiran.ChosahyoJissekiIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -10,9 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 主治医意見書作成実績集計表_バッチフロークラスパラメータクラスです。
+ * 帳票出力用認定調査実績集計表のReportSourceクラスです。
  *
- * @reamsid_L DBE-1690-020 dongyabin
+ * @reamsid_L DBE-1691-020 dangjingjing
  */
 @Setter
 @Getter
@@ -20,22 +20,22 @@ import lombok.Setter;
 public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
-    private static final String IKENSHO_KINYUBI_TO = "ikenshoKinyubiTo";
-    private static final String IKENSHO_KINYUBI_FROM = "ikenshoKinyubiFrom";
+    private static final String CHOSA_JISSHIBI_TO = "chosajisshibiTo";
+    private static final String CHOSA_JISSHIBI_FROM = "chosajisshibiFrom";
     private static final String HOKENSYA = "hokensya";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8314555813503538349L;
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
-    @BatchParameter(key = IKENSHO_KINYUBI_TO, name = "意見書記入日FROM")
-    private RString ikenshoKinyubiTo;
-    @BatchParameter(key = IKENSHO_KINYUBI_FROM, name = "意見書記入日TO")
-    private RString ikenshoKinyubiFrom;
+    @BatchParameter(key = CHOSA_JISSHIBI_TO, name = "調査実施日FROM")
+    private RString chosajisshibiTo;
+    @BatchParameter(key = CHOSA_JISSHIBI_FROM, name = "調査実施日TO")
+    private RString chosajisshibiFrom;
     @BatchParameter(key = HOKENSYA, name = "保険者")
     private RString hokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
-    private List<IkenshoJissekiIchiranKey> keyJoho;
+    private List<ChosahyoJissekiIchiranKey> keyJoho;
 
     /**
      * コンストラクタです。
@@ -47,32 +47,32 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
      * コンストラクタです。
      *
      * @param syohyoSyuturyoku 帳票出力区分
-     * @param ikenshoKinyubiFrom 意見書記入日FROM
-     * @param ikenshoKinyubiTo 意見書記入日TO
+     * @param chosajisshibiFrom 調査実施日FROM
+     * @param chosajisshibiTo 調査実施日TO
      * @param hokensya 保険者
      * @param keyJoho キー情報Entityリスト
      */
     public DBE601002_NinteichosaJissekiParameter(RString syohyoSyuturyoku,
-            RString ikenshoKinyubiFrom,
-            RString ikenshoKinyubiTo,
+            RString chosajisshibiFrom,
+            RString chosajisshibiTo,
             RString hokensya,
-            List<IkenshoJissekiIchiranKey> keyJoho) {
+            List<ChosahyoJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
-        this.ikenshoKinyubiFrom = ikenshoKinyubiFrom;
-        this.ikenshoKinyubiTo = ikenshoKinyubiTo;
+        this.chosajisshibiFrom = chosajisshibiFrom;
+        this.chosajisshibiTo = chosajisshibiTo;
         this.hokensya = hokensya;
         this.keyJoho = keyJoho;
     }
 
     /**
-     * 主治医意見書作成実績集計表のProcessParameterを作成します
+     * 帳票出力用認定調査実績集計表のProcessParameterを作成します
      *
-     * @return 主治医意見書作成実績集計表のProcessParameter
+     * @return 帳票出力用認定調査実績集計表のProcessParameter
      */
-    public IkenshoJissekiIchiranProcessParameter toProcessParamter() {
-        return new IkenshoJissekiIchiranProcessParameter(syohyoSyuturyoku,
-                ikenshoKinyubiFrom,
-                ikenshoKinyubiTo,
+    public ChosahyoJissekiIchiranProcessParameter toProcessParamter() {
+        return new ChosahyoJissekiIchiranProcessParameter(syohyoSyuturyoku,
+                chosajisshibiFrom,
+                chosajisshibiTo,
                 hokensya,
                 keyJoho);
     }

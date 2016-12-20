@@ -4,23 +4,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShinsakauIinHoshuShokai のクラスファイル
- *
+ * ShinsakauIinHoshuShokai のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShinsakauIinHoshuShokaiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -78,32 +73,12 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxDate getTxtShinsakaiKaisaiYM() {
-        return this.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM();
-    }
-
-    @JsonIgnore
-    public void setTxtShinsakaiKaisaiYM(TextBoxDate txtShinsakaiKaisaiYM) {
-        this.getShinsakaiKaisaibi().setTxtShinsakaiKaisaiYM(txtShinsakaiKaisaiYM);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getShinsakaiKaisaibi().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void setBtnKensaku(Button btnKensaku) {
-        this.getShinsakaiKaisaibi().setBtnKensaku(btnKensaku);
-    }
-
-    @JsonIgnore
     public DataGrid<dgShinsakaiIinHoshu_Row> getDgShinsakaiIinHoshu() {
         return this.getShinsakaiIinHoshu().getDgShinsakaiIinHoshu();
     }
 
     @JsonIgnore
-    public void setDgShinsakaiIinHoshu(DataGrid<dgShinsakaiIinHoshu_Row> dgShinsakaiIinHoshu) {
+    public void  setDgShinsakaiIinHoshu(DataGrid<dgShinsakaiIinHoshu_Row> dgShinsakaiIinHoshu) {
         this.getShinsakaiIinHoshu().setDgShinsakaiIinHoshu(dgShinsakaiIinHoshu);
     }
 
@@ -113,7 +88,7 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsaKaisu(TextBoxNum txtShinsaKaisu) {
+    public void  setTxtShinsaKaisu(TextBoxNum txtShinsaKaisu) {
         this.getShinsakaiIinHoshu().setTxtShinsaKaisu(txtShinsaKaisu);
     }
 
@@ -123,7 +98,7 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHoshuSogaku(TextBoxNum txtHoshuSogaku) {
+    public void  setTxtHoshuSogaku(TextBoxNum txtHoshuSogaku) {
         this.getShinsakaiIinHoshu().setTxtHoshuSogaku(txtHoshuSogaku);
     }
 
@@ -133,7 +108,7 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSonotaHiyo(TextBoxNum txtSonotaHiyo) {
+    public void  setTxtSonotaHiyo(TextBoxNum txtSonotaHiyo) {
         this.getShinsakaiIinHoshu().setTxtSonotaHiyo(txtSonotaHiyo);
     }
 
@@ -143,7 +118,7 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtZeiKojoGaku(TextBoxNum txtZeiKojoGaku) {
+    public void  setTxtZeiKojoGaku(TextBoxNum txtZeiKojoGaku) {
         this.getShinsakaiIinHoshu().setTxtZeiKojoGaku(txtZeiKojoGaku);
     }
 
@@ -153,7 +128,7 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHoshuGokei(TextBoxNum txtHoshuGokei) {
+    public void  setTxtHoshuGokei(TextBoxNum txtHoshuGokei) {
         this.getShinsakaiIinHoshu().setTxtHoshuGokei(txtHoshuGokei);
     }
 

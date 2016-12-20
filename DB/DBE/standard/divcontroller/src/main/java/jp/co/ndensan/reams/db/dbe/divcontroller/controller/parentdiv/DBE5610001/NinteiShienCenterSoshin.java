@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5610001.Cen
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5610001.NinteiShienCenterSoshinHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5610001.NinteiShienCenterSoshinValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishiencentersoshin.NinteiShienCenterSoshinFander;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -103,7 +105,7 @@ public class NinteiShienCenterSoshin {
         List<NinteiShienCenterSoshinData> dataList = NinteiShienCenterSoshinFander.creatInstance().get対象者一覧情報(parameter).records();
         validationMessages = getValidationHandler(div).対象者一覧0件チェック(dataList.size());
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         for (NinteiShienCenterSoshinData data : dataList) {
             PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
@@ -185,17 +187,18 @@ public class NinteiShienCenterSoshin {
      * @return レスポンスデータ
      */
     public ResponseData<NinteiShienCenterSoshinDiv> onClick_BtnDataoutputCheck(NinteiShienCenterSoshinDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        ValidationMessageControlPairs validationMessages = getValidationHandler(div).対象者一覧未選択チェック();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = getValidationHandler(div).対象者一覧未選択チェック();
-            if (validationMessages.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
+
         }
         return ResponseData.of(div).respond();
     }

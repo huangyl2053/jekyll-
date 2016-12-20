@@ -13,12 +13,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.Yok
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzNotificationMessage;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -81,11 +80,14 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return {@code ResponseData}
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnKensaku(YokaigoNinteiShinchokuJohoShokaiDiv div) {
+        if(ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         SearchResult<YokaigoNinteiShinchokuJoho> searchResult = YokaigoNinteiShinchokuJohoShokaiFinder
                 .createInstance().selectItirannJoho(get検索パラメータ(div));
         getHandler(div).btnKensaku(searchResult);
         if (searchResult.records().isEmpty()) {
-            return ResponseData.of(div).addMessage(DbzNotificationMessage.該当データなし.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getSerchFromHohokensha().setIsOpen(false);
         div.getSerchFromShinchokuJokyo().setIsOpen(false);
@@ -114,8 +116,8 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintCheck(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        if (div.getDgShinseiJoho().getDataSource().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        if (!ResponseHolder.isReRequest() && div.getDgShinseiJoho().getDataSource().isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }

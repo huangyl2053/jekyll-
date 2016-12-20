@@ -28,7 +28,7 @@ public interface INinnteiChousairaiMapper {
      * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
      * @return NinnteiChousairaiEntity 要介護認定結果情報Entityクラスです。
      */
-    List<NinnteiChousairaiEntity> selectNinnteiChousaItaku(NinnteiChousairaiParameter parametere);
+    List<NinnteiChousairaiEntity> select認定調査委託先情報(NinnteiChousairaiParameter parametere);
 
     /**
      * 調査員情報を取得します。
@@ -36,7 +36,7 @@ public interface INinnteiChousairaiMapper {
      * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
      * @return NinnteiChousairaiEntity 要介護認定結果情報Entityクラスです。
      */
-    List<NinnteiChousairaiEntity> selectChousaIn(NinnteiChousairaiParameter parametere);
+    List<NinnteiChousairaiEntity> select調査員(NinnteiChousairaiParameter parametere);
 
     /**
      * 割付済み申請者一覧を取得します。
@@ -44,7 +44,7 @@ public interface INinnteiChousairaiMapper {
      * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
      * @return WaritsukeEntity 割付済み申請者一覧Entityクラスです。
      */
-    List<WaritsukeEntity> getWaritsuke(NinnteiChousairaiParameter parametere);
+    List<WaritsukeEntity> select割付済み申請者(NinnteiChousairaiParameter parametere);
 
     /**
      * 認定調査依頼情報を取得します。
@@ -60,7 +60,7 @@ public interface INinnteiChousairaiMapper {
      * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
      * @return WaritsukeEntity 割付済み申請者一覧Entityクラスです。
      */
-    List<WaritsukeEntity> getShiteWaritsuke(NinnteiChousairaiParameter parametere);
+    List<WaritsukeEntity> select新規依頼未割付申請者(NinnteiChousairaiParameter parametere);
 
     /**
      * 未割付申請者一覧（再依頼）を取得します。
@@ -68,7 +68,7 @@ public interface INinnteiChousairaiMapper {
      * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
      * @return WaritsukeEntity 割付済み申請者一覧Entityクラスです。
      */
-    List<WaritsukeEntity> getShiteWaritsukeSai(NinnteiChousairaiParameter parametere);
+    List<WaritsukeEntity> select再依頼未割付申請者(NinnteiChousairaiParameter parametere);
 
     /**
      * 認定調査依頼情報を取得します。
@@ -76,7 +76,7 @@ public interface INinnteiChousairaiMapper {
      * @param 申請書管理番号 申請書管理番号。
      * @return WaritsukeEntity 認定調査依頼情報Entity
      */
-    DbT5201NinteichosaIraiJohoEntity getNinteichosaIraiJoho(RString 申請書管理番号);
+    DbT5201NinteichosaIraiJohoEntity select認定調査依頼情報(RString 申請書管理番号);
 
     /**
      * 認定調査票差異チェック票を取得します。

@@ -117,8 +117,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             } else {
                 row.setShiryoSakuseiKubun(RString.EMPTY);
             }
-            if (!shinsakaiKaisai.get介護認定審査会進捗状況().isNullOrEmpty()) {
-                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get名称());
+            if (!RString.isNullOrEmpty(shinsakaiKaisai.get介護認定審査会進捗状況())) {
+                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get画面表示名称());
             } else {
                 row.setShinchokuJokyo(RString.EMPTY);
             }
@@ -158,7 +158,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         List<RString> list = new ArrayList<>();
         for (dgShinsakaiIchiran_Row row : rowList) {
             RString 合議体名称 = row.getShinsakaiMeisho();
-            if (row.getSelected() && !合議体名称.isNullOrEmpty()) {
+            if (row.getSelected() && !RString.isNullOrEmpty(合議体名称)) {
                 list.add(合議体名称.substring(1, 合議体名称.length() - LENGTH_4));
             }
         }
@@ -234,7 +234,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     public ValidationMessageControlPairs 表示期間Fromと表示期間Toの前後順チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiShinsakaiIchiranListMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
-                    div.getTxtHyojiKikanFrom().getText().toString(), div.getTxtHyojiKikanTo().getText().toString()), div.getTxtHyojiKikanFrom(), div.getTxtHyojiKikanTo()));
+                div.getTxtHyojiKikan().getFromText().toString(), div.getTxtHyojiKikan().getToText().toString()), div.getTxtHyojiKikan()));
         return validationMessages;
     }
 

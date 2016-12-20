@@ -47,11 +47,11 @@ public class PrintValidationHandler {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
 
         if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
-
-            List<dgNinteiChosa_Row> rowList = div.getDgNinteiChosa().getSelectedItems();
-            if (rowList.isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.対象行を選択), div.getDgNinteiChosa()));
-            }
+//再選択を不要にしたため
+//            List<dgNinteiChosa_Row> rowList = div.getDgNinteiChosa().getSelectedItems();
+//            if (rowList.isEmpty()) {
+//                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.対象行を選択), div.getDgNinteiChosa()));
+//            }
 
             List<RString> chk = div.getChk().getSelectedKeys();
             List<RString> chkChosahyo = div.getChkChosahyo().getSelectedKeys();
@@ -59,9 +59,9 @@ public class PrintValidationHandler {
             List<RString> chkChosahyo2 = div.getChkChosahyo2().getSelectedKeys();
 
             if (chk.isEmpty()
-                    && chkChosahyo.isEmpty()
-                    && chkOcrChosahyo.isEmpty()
-                    && chkChosahyo2.isEmpty()) {
+                && chkChosahyo.isEmpty()
+                && chkOcrChosahyo.isEmpty()
+                && chkChosahyo2.isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getNinteiChosaPrint()));
             }
         } else {
@@ -73,8 +73,8 @@ public class PrintValidationHandler {
             List<RString> chkIkenshoSakusei = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
             List<RString> chkIkenshoSakuseiryo = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
             if (chkInsatsuIkensho.isEmpty()
-                    && chkIkenshoSakusei.isEmpty()
-                    && chkIkenshoSakuseiryo.isEmpty()) {
+                && chkIkenshoSakusei.isEmpty()
+                && chkIkenshoSakuseiryo.isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getShujiiIkenshoPrint()));
             }
 

@@ -127,7 +127,6 @@ public class NinteichosaItakusakiMaster {
             div.getChosaitakusakiJohoInput().getTxtShichosonmei().setDisabled(Boolean.TRUE);
             div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().setDisabled(Boolean.TRUE);
             div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(Boolean.FALSE);
-            div.getChosaitakusakiJohoInput().getBtnKoza().setVisible(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -220,7 +219,7 @@ public class NinteichosaItakusakiMaster {
             pairs.add(new ValidationMessageControlPair(new DBE9030001ErrorMessage(UrErrorMessages.該当データなし)));
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        for (dgChosainIchiran_Row row: list) {
+        for (dgChosainIchiran_Row row : list) {
             if (!RString.EMPTY.equals(row.getJotai())) {
                 pairs.add(new ValidationMessageControlPair(new DBE9030001ErrorMessage(DbzErrorMessages.編集後更新指示)));
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -322,7 +321,7 @@ public class NinteichosaItakusakiMaster {
                 ninteichosaItakusaki.getEntity().setJigyoshaMeisho(div.getChosaitakusakiJohoInput().getTxtChosaitakusakiname().getValue());
                 ninteichosaItakusaki.getEntity().setJigyoshaMeishoKana(div.getChosaitakusakiJohoInput().getTxtChosaitakusakiKananame().getValue());
                 ninteichosaItakusaki.getEntity().setYubinNo(div.getChosaitakusakiJohoInput().getTxtYubinNo().getValue());
-                ninteichosaItakusaki.getEntity().setJusho(div.getChosaitakusakiJohoInput().getTxtJusho().getDomain().getColumnValue());
+                ninteichosaItakusaki.getEntity().setJusho(div.getChosaitakusakiJohoInput().getTxtJusho().getValue());
                 ninteichosaItakusaki.getEntity().setTelNo(new TelNo(div.getChosaitakusakiJohoInput().getTxtTelNo().getDomain().getColumnValue()));
                 ninteichosaItakusaki.getEntity().setFaxNo(new TelNo(div.getChosaitakusakiJohoInput().getTxtFaxNo().getDomain().getColumnValue()));
                 ninteichosaItakusaki.getEntity().setDaihyoshaName(div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getValue());
@@ -368,7 +367,7 @@ public class NinteichosaItakusakiMaster {
                         div.getChosaitakusakiJohoInput().getTxtChosaitakusakiname().getValue(),
                         div.getChosaitakusakiJohoInput().getTxtChosaitakusakiKananame().getValue(),
                         div.getChosaitakusakiJohoInput().getTxtYubinNo().getValue().getEditedYubinNo(),
-                        div.getChosaitakusakiJohoInput().getTxtJusho().getDomain().getColumnValue(),
+                        div.getChosaitakusakiJohoInput().getTxtJusho().getValue(),
                         div.getChosaitakusakiJohoInput().getTxtTelNo().getDomain().getColumnValue(),
                         div.getChosaitakusakiJohoInput().getTxtFaxNo().getDomain().getColumnValue(),
                         div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().getValue(),

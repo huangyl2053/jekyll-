@@ -30,13 +30,13 @@ public class ShinsakaiTorokuManager {
 
     private final DbT5105NinteiKanryoJohoDac dbt5105Dac;
     private final DbT5102NinteiKekkaJohoDac dbt5102Dac;
-    private final DbT5510IchiGojiHanteiKekkaJohoDac dbt5501Dac;
+    private final DbT5510IchiGojiHanteiKekkaJohoDac dbt5510Dac;
     private final DbT5502ShinsakaiWariateJohoDac dbt5502Dac;
 
     ShinsakaiTorokuManager() {
         this.dbt5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
         this.dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
-        this.dbt5501Dac = InstanceProvider.create(DbT5510IchiGojiHanteiKekkaJohoDac.class);
+        this.dbt5510Dac = InstanceProvider.create(DbT5510IchiGojiHanteiKekkaJohoDac.class);
         this.dbt5502Dac = InstanceProvider.create(DbT5502ShinsakaiWariateJohoDac.class);
     }
 
@@ -48,11 +48,11 @@ public class ShinsakaiTorokuManager {
     ShinsakaiTorokuManager(
             DbT5105NinteiKanryoJohoDac dbt5105Dac,
             DbT5102NinteiKekkaJohoDac dbt5102Dac,
-            DbT5510IchiGojiHanteiKekkaJohoDac dbt5501Dac,
+            DbT5510IchiGojiHanteiKekkaJohoDac dbt5510Dac,
             DbT5502ShinsakaiWariateJohoDac dbt5502Dac) {
         this.dbt5105Dac = dbt5105Dac;
         this.dbt5102Dac = dbt5102Dac;
-        this.dbt5501Dac = dbt5501Dac;
+        this.dbt5510Dac = dbt5510Dac;
         this.dbt5502Dac = dbt5502Dac;
     }
 
@@ -105,9 +105,9 @@ public class ShinsakaiTorokuManager {
     }
 
     private void saveIchiGojiHanteiKekkaJoho(IchiGojiHanteiKekkaJoho 要介護認定1_5次判定結果情報) {
-        DbT5510IchiGojiHanteiKekkaJohoEntity entity = dbt5501Dac.selectByKey(要介護認定1_5次判定結果情報.get申請書管理番号());
+        DbT5510IchiGojiHanteiKekkaJohoEntity entity = dbt5510Dac.selectByKey(要介護認定1_5次判定結果情報.get申請書管理番号());
         if (entity == null) {
-            dbt5501Dac.save(要介護認定1_5次判定結果情報.toEntity());
+            dbt5510Dac.save(要介護認定1_5次判定結果情報.toEntity());
         } else {
             entity.setIchiGojiHanteiYMD(要介護認定1_5次判定結果情報.get要介護認定1_5次判定年月日());
             entity.setIchiGojiHanteiKekkaCode(要介護認定1_5次判定結果情報.get要介護認定1_5次判定結果コード());
@@ -132,7 +132,7 @@ public class ShinsakaiTorokuManager {
             entity.setNinchishoJiritsudoIIijoNoGaizensei(要介護認定1_5次判定結果情報.get認知症自立度Ⅱ以上の蓋然性());
             entity.setSuiteiKyufuKubunCode(要介護認定1_5次判定結果情報.get認知機能及び状態安定性から推定される給付区分コード());
             entity.setState(EntityDataState.Modified);
-            dbt5501Dac.save(entity);
+            dbt5510Dac.save(entity);
         }
     }
 }

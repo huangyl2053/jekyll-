@@ -1,0 +1,5 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+ninteichosaRirekiNo,int2,int,,,,,要介護認定調査履歴番号,A
+koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
+ninchishoNichijoSeikatsuJiritsudoCode,UDD035Code,Code,,,,,認定調査・認知症高齢者の日常生活自立度コード,A
+shogaiNichijoSeikatsuJiritsudoCode,UDD035Code,Code,,,,,認定調査・障害高齢者の日常生活自立度コード,A

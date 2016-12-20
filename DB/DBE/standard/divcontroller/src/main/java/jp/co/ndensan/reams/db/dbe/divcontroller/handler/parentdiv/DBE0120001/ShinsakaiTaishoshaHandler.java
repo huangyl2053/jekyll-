@@ -70,7 +70,7 @@ public class ShinsakaiTaishoshaHandler {
             div.getTxtYoteiTeiin().setValue(new Decimal(予定情報.getShinsakaiYoteiTeiin()));
             div.getTxtWaritsukeNinzu().setValue(new Decimal(予定情報.getShinsakaiWariateZumiNinzu()));
             try {
-                div.getTxtStatus().setValue(ShinsakaiShinchokuJokyo.toValue(予定情報.getShinsakaiShinchokuJokyo().getColumnValue()).get名称());
+                div.getTxtStatus().setValue(ShinsakaiShinchokuJokyo.toValue(予定情報.getShinsakaiShinchokuJokyo().getColumnValue()).get画面表示名称());
             } catch (IllegalArgumentException e) {
                 div.getTxtStatus().setValue(RString.EMPTY);
             }
@@ -152,7 +152,7 @@ public class ShinsakaiTaishoshaHandler {
             }
             if (shinsakaiTai.ninchishoNichijoSeikatsuJiritsudoCode() != null) {
                 try {
-                    
+
                     row.setChosahyoNinchido(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
                             shinsakaiTai.ninchishoNichijoSeikatsuJiritsudoCode().getColumnValue()).get名称());
                 } catch (IllegalArgumentException | NullPointerException e) {

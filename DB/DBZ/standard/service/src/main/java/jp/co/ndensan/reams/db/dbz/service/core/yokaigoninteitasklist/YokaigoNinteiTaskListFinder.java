@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -24,9 +25,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiT
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosairaiRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GetureiSyoriTantoshaWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IKnSyoiRaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IkenSyoNyuSyuRelateEntity;
@@ -70,8 +73,7 @@ public class YokaigoNinteiTaskListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
      */
     public static YokaigoNinteiTaskListFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiTaskListFinder.class);
@@ -121,11 +123,15 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<CyoSaiRaiBusiness> get調査依頼モード(YokaigoNinteiTaskListParameter parameter) {
         List<CyoSaiRaiBusiness> 調査依頼List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<CyoSaiRaiRelateEntity> entityList = mapper.get調査依頼(parameter);
-        for (CyoSaiRaiRelateEntity entity : entityList) {
+        ChosairaiRelateWithCountEntity searchResult = mapper.get調査依頼(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<CyoSaiRaiBusiness>emptyList(), 0, false);
+        }
+        int totalcount = searchResult.getTotalCount().intValue();
+        for (CyoSaiRaiRelateEntity entity : searchResult.getTaishoshaList()) {
             調査依頼List.add(new CyoSaiRaiBusiness(entity));
         }
-        return SearchResult.of(調査依頼List, 0, false);
+        return SearchResult.of(調査依頼List, totalcount, false);
     }
 
     /**
@@ -171,7 +177,8 @@ public class YokaigoNinteiTaskListFinder {
         for (IKnSyoiRaiRelateEntity entity : entityList) {
             意見書依頼List.add(new IKnSyoiRaiBusiness(entity));
         }
-        return SearchResult.of(意見書依頼List, 0, false);
+        int totalcount = mapper.get意見書依頼件数(parameter);
+        return SearchResult.of(意見書依頼List, totalcount, parameter.get件数().intValue() < totalcount);
     }
 
     /**
@@ -552,11 +559,15 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<GeTuReiSyoRiBusiness> get月例処理モード(YokaigoNinteiTaskListParameter parameter) {
         List<GeTuReiSyoRiBusiness> 月例処理List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<GeTuReiSyoRiRelateEntity> entityList = mapper.get月例処理(parameter);
-        for (GeTuReiSyoRiRelateEntity entity : entityList) {
+        GetureiSyoriTantoshaWithCountEntity searchResult = mapper.get月例処理(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<GeTuReiSyoRiBusiness>emptyList(), 0, false);
+        }
+        int totalcount = searchResult.getTotalCount().intValue();
+        for (GeTuReiSyoRiRelateEntity entity : searchResult.getTaishoshaList()) {
             月例処理List.add(new GeTuReiSyoRiBusiness(entity));
         }
-        return SearchResult.of(月例処理List, 0, false);
+        return SearchResult.of(月例処理List, totalcount, parameter.get件数().intValue() < totalcount);
     }
 
     /**

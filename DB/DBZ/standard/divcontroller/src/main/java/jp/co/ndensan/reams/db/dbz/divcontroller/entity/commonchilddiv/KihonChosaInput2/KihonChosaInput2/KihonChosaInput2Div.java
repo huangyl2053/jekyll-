@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @reamsid_L DBE-3000-091 wangjie2
  */
 public class KihonChosaInput2Div extends Panel implements IKihonChosaInput2Div {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,10 +35,10 @@ public class KihonChosaInput2Div extends Panel implements IKihonChosaInput2Div {
     private Label ZenkaiHyojiTeiji;
     @JsonProperty("SeikatsuKinou")
     private SeikatsuKinouDiv SeikatsuKinou;
-    @JsonProperty("btnConfirm")
-    private Button btnConfirm;
     @JsonProperty("btnBack")
     private Button btnBack;
+    @JsonProperty("btnConfirm")
+    private Button btnConfirm;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -83,24 +83,6 @@ public class KihonChosaInput2Div extends Panel implements IKihonChosaInput2Div {
     }
 
     /*
-     * getbtnConfirm
-     * @return btnConfirm
-     */
-    @JsonProperty("btnConfirm")
-    public Button getBtnConfirm() {
-        return btnConfirm;
-    }
-
-    /*
-     * setbtnConfirm
-     * @param btnConfirm btnConfirm
-     */
-    @JsonProperty("btnConfirm")
-    public void setBtnConfirm(Button btnConfirm) {
-        this.btnConfirm = btnConfirm;
-    }
-
-    /*
      * getbtnBack
      * @return btnBack
      */
@@ -116,6 +98,24 @@ public class KihonChosaInput2Div extends Panel implements IKihonChosaInput2Div {
     @JsonProperty("btnBack")
     public void setBtnBack(Button btnBack) {
         this.btnBack = btnBack;
+    }
+
+    /*
+     * getbtnConfirm
+     * @return btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public Button getBtnConfirm() {
+        return btnConfirm;
+    }
+
+    /*
+     * setbtnConfirm
+     * @param btnConfirm btnConfirm
+     */
+    @JsonProperty("btnConfirm")
+    public void setBtnConfirm(Button btnConfirm) {
+        this.btnConfirm = btnConfirm;
     }
 
     /*

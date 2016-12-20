@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE491001.DBE491001_Nichij
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.ShinchokuDataOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.dgShinchokuIchiran_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -26,7 +26,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -35,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 要介護認定進捗情報データ出力の処理です。
@@ -50,7 +53,11 @@ public class ShinchokuDataOutputHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
-    private static final RString 結果情報 = new RString("0");
+    private static final RString 進捗情報 = new RString("0");
+    private static final RString 処理名 = new RString("要介護認定申請連携データ取込");
+    private static final RString 処理枝番 = new RString("0000");
+    private static final RString 年度 = new RString("0000");
+    private static final RString 年度内連番 = new RString("0001");
 
     /**
      * コンストラクタです。
@@ -66,28 +73,23 @@ public class ShinchokuDataOutputHandler {
      */
     public void onLoad() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getRadKubun().setSelectedKey(結果情報);
+        div.getRadKubun().setSelectedKey(進捗情報);
         div.getTxtChuishutsuRange().setFromValue(new RDate(RDate.getNowDate().toString()));
         div.getTxtChuishutsuRange().setToValue(new RDate(RDate.getNowDate().toString()));
-        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        set抽出期間();
     }
 
     /**
      * 画面の検索条件入力項目をクリアする。
      */
     public void btnJokenClear() {
-        div.getRadKubun().setSelectedKey(結果情報);
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getRadKubun().setSelectedKey(進捗情報);
         div.getTxtChuishutsuRange().setFromValue(new RDate(RDate.getNowDate().toString()));
         div.getTxtChuishutsuRange().setToValue(new RDate(RDate.getNowDate().toString()));
-        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        set抽出期間();
         div.getTxtHihokenshaCode().clearValue();
-        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtShimei().clearValue();
     }
 
     /**
@@ -191,7 +193,7 @@ public class ShinchokuDataOutputHandler {
                 抽出期間終了日,
                 証記載保険者番号,
                 被保険者番号,
-                new Decimal(div.getTxtMaxKensu().getValue().toString()));
+                null);
     }
 
     /**
@@ -211,6 +213,57 @@ public class ShinchokuDataOutputHandler {
         batchparamter.setShinseishoKanriNoList(shinseishoKanriNo);
         batchparamter.setFayirukuben(div.getRadKubun().getSelectedKey());
         return batchparamter;
+    }
+    
+    /**
+     * 市町村情報変更時の動作。
+     */
+    public void onChange_ddlSichoson() {
+        set抽出期間();
+    }
+    
+    /**
+     * 被保険者番号変更時の動作。
+     */
+    public void onChange_txtHihokenshaCode() {
+        set被保険者指名();
+    }
+    
+    private void set抽出期間() {
+        DbT7022ShoriDateKanriEntity entity;
+        DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        LasdecCode 証記載保険者番号;
+        div.getTxtZenkaiChuishutsuRange().clearFromValue();
+        div.getTxtZenkaiChuishutsuRange().clearToValue();
+        if (div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号() == null
+                && div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().isEmpty()) {
+            証記載保険者番号 = new LasdecCode(RString.EMPTY);
+        } else {
+            証記載保険者番号 = new LasdecCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value());
+        }
+        entity = 処理日付管理Dac.select前回の実行情報(SubGyomuCode.DBE認定支援, 証記載保険者番号, 処理名, 処理枝番);
+        if (entity == null) {
+            div.getTxtChuishutsuRange().setFromValue(RDate.MIN);
+            div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
+        } else {
+            RDate 前回処理日付From = new RDate(entity.getTaishoKaishiYMD().toString());
+            RDate 前回処理日付To = new RDate(entity.getTaishoShuryoYMD().toString());
+            div.getTxtZenkaiChuishutsuRange().setFromValue(前回処理日付From);
+            div.getTxtZenkaiChuishutsuRange().setToValue(前回処理日付To);
+            div.getTxtChuishutsuRange().setFromValue(前回処理日付To.plusDay(1));
+            div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
+        }
+    }
+    
+    private void set被保険者指名() {
+        RString hihokenshaNo = div.getTxtHihokenshaCode().getValue();
+        if (hihokenshaNo != null && !hihokenshaNo.isEmpty()) {
+            DbT5101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
+            DbT5101NinteiShinseiJohoEntity entity = dac.selectByHihokenshaNo(hihokenshaNo);
+            if (entity != null) {
+                div.getTxtShimei().setValue(entity.getHihokenshaName().getColumnValue());
+            }
+        }
     }
 
     private RString get一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {

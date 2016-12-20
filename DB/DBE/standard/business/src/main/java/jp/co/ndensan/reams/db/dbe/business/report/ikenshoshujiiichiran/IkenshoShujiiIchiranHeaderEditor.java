@@ -77,8 +77,8 @@ class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
 
         source.shujiiJokyo = ShujiiHateiJokyo.toValue(item.getShujiiJokyo()).get名称();
         source.dataShubetsu = new RString("医療機関マスタ");
-        source.sort1 = ShujiiOutputSort.toValue(item.getSort()).get名称();
-        source.sort2 = RString.EMPTY;
+        source.sort1 = ShujiiOutputSort.toValue(item.getSort()).getソート名称１();
+        source.sort2 = ShujiiOutputSort.toValue(item.getSort()).getソート名称２();
         source.sort3 = RString.EMPTY;
         source.sort4 = RString.EMPTY;
         source.sort5 = RString.EMPTY;

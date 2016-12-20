@@ -226,13 +226,14 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         List<RString> 特記事項リスト4 = new ArrayList<>();
         RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
         for (int i = 0; i < 特記事項区分.size(); i++) {
-            共有ファイルを引き出す(getイメージID(特記事項区分, i), 共有ファイル名);
+            RString path = 共有ファイルを引き出す(getイメージID(特記事項区分, i), 共有ファイル名);
             RString fileName = get共有ファイル(get特記事項番号(特記事項区分, i), get特記事項連番(特記事項区分, i));
-            if (!RString.isNullOrEmpty(getFilePath(batchWrite.getImageFolderPath(), fileName))) {
+            RString fileFullPath = getFilePath(path, fileName);
+            if (!RString.isNullOrEmpty(fileFullPath)) {
                 if (フラグ.equals(processPrm.getRadTokkiJikoMasking())) {
-                    特記事項リスト4.add(fileName);
+                    特記事項リスト4.add(getFilePath(path, fileName));
                 } else {
-                    特記事項リスト4.add(fileName.replace(拡張子_PNG.toString(), "_BAK.png"));
+                    特記事項リスト4.add(getFilePath(path, fileName.replace(拡張子_PNG.toString(), "_BAK.png")));
                 }
             }
         }
@@ -879,15 +880,17 @@ public class ChkTokkiJiko03Process extends BatchProcessBase<YokaigoninteiEntity>
         return imageName;
     }
 
-    private void 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
         if (イメージID != null) {
             ReadOnlySharedFileEntryDescriptor descriptor
                     = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名), イメージID);
             try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath()));
+                return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath())).getCanonicalPath());
             } catch (Exception e) {
+                return RString.EMPTY;
             }
         }
+        return RString.EMPTY;
     }
 
     private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番) {

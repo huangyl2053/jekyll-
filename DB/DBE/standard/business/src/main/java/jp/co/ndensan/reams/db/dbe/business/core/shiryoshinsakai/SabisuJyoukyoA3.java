@@ -63,8 +63,12 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.image.BarImageType;
+import jp.co.ndensan.reams.uz.uza.image.EachBarImage;
+import jp.co.ndensan.reams.uz.uza.image.StackBarImage;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -104,6 +108,8 @@ public class SabisuJyoukyoA3 {
     private static final int 連番_18 = 18;
     private static final int 連番_19 = 19;
     private static final int 連番_20 = 20;
+    private static final int IMAGE_WIDTH = 512;
+    private static final int IMAGE_HEIGHT = 40;
     private static final Code 予防給付サービス = new Code("1");
     private static final Code 介護給付サービス = new Code("2");
     private static final RString 単位 = new RString(":");
@@ -112,6 +118,7 @@ public class SabisuJyoukyoA3 {
     private static final RString 電話ファイル名 = new RString("C0006_BAK.png");
     private static final RString 認定調査主治段階悪化 = new RString("★");
     private static final RString 認定調査主治段階改善 = new RString("☆");
+    private static final RString SEPARATOR = new RString("/");
 
     /**
      * サービスの状況を設定します。
@@ -539,30 +546,38 @@ public class SabisuJyoukyoA3 {
             項目.set電話番号テキスト(RString.EMPTY);
             項目.set電話番号イメージ(RString.EMPTY);
         } else {
+            RString 共有ファイル名 = 共通情報.getShoKisaiHokenshaNo().concat(共通情報.getHihokenshaNo());
+            RString path = getFilePath(共通情報.getImageSharedFileId(), 共有ファイル名, ファイルパス);
             if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei())) {
                 項目.set施設名テキスト(共通情報.getRiyoShisetsuShimei());
             } else {
-                項目.set施設名イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 施設名ファイル名, ファイルパス));
+                項目.set施設名イメージ(共有ファイルを引き出す(path, 施設名ファイル名));
             }
             if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho())) {
                 項目.set住所テキスト(共通情報.getRiyoShisetsuJusho());
             } else {
-                項目.set住所イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 住所ファイル名, ファイルパス));
+                項目.set住所イメージ(共有ファイルを引き出す(path, 住所ファイル名));
             }
             if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuTelNo())) {
                 項目.set電話番号テキスト(共通情報.getRiyoShisetsuTelNo());
             } else {
-                項目.set電話番号イメージ(共有ファイルを引き出す(共通情報.getImageSharedFileId(), 電話ファイル名, ファイルパス));
+                項目.set電話番号イメージ(共有ファイルを引き出す(path, 電話ファイル名));
             }
         }
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージID01, RString ファイルパス) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, イメージID01, ファイルパス);
+    private RString 共有ファイルを引き出す(RString path, RString fileName) {
+        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
+            return getFilePath(path, fileName);
         }
-        return imagePath;
+        return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName, RString ファイルパス) {
@@ -1196,7 +1211,7 @@ public class SabisuJyoukyoA3 {
                 entity.getZKijunJikanIdo(), entity.getZKijunJikanSeiketsuHoji(), entity.getZKijunJikanKansetsuCare(),
                 entity.getZKijunJikanBPSDKanren(), entity.getZKijunJikanKinoKunren(), entity.getZKijunJikanIryoKanren(),
                 entity.getZKijunJikanNinchishoKasan(), entity.getZKijunJikan()));
-        set基準時間の積み上げグラフ(項目, entity, ファイルパス);
+        set基準時間の積み上げグラフ(項目, entity);
         List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
         NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
         障害高齢者自立度.set特記事項フラグ(entity.getShogaiNichijoSeikatsuJiritsudo());
@@ -1793,21 +1808,36 @@ public class SabisuJyoukyoA3 {
         }
     }
 
-    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity, RString ファイルパス) {
-        RDateTime 日期 = RDate.getNowDateTime();
-        RString 文件名 = 日期.getDate().toDateString().concat(get文件名(日期.getHour()))
-                .concat(get文件名(日期.getSecond())).concat(get文件名(日期.getMicros()));
-        StackedBarChart stackedBarChart = new StackedBarChart(entity.getKijunJikanShokuji(), entity.getKijunJikanHaisetsu(),
-                entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(),
-                entity.getKijunJikanKansetsuCare(), entity.getKijunJikanBPSDKanren(),
-                entity.getKijunJikanKinoKunren(), entity.getKijunJikanIryoKanren(),
-                entity.getKijunJikanNinchishoKasan(), 文件名, ファイルパス);
-        stackedBarChart.getTitle();
-        RString 文件 = new RString(文件名 + ".png");
+    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
+        List<EachBarImage> イメージリストA3 = new ArrayList();
+        if (0 < entity.getKijunJikanShokuji()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanShokuji(), BarImageType.PATTERN1));
+        }
+        if (0 < entity.getKijunJikanHaisetsu()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanHaisetsu(), BarImageType.PATTERN2));
+        }
+        if (0 < entity.getKijunJikanIdo()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanIdo(), BarImageType.PATTERN3));
+        }
+        if (0 < entity.getKijunJikanSeiketsuHoji()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanSeiketsuHoji(), BarImageType.PATTERN4));
+        }
+        if (0 < entity.getKijunJikanKansetsuCare()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanKansetsuCare(), BarImageType.PATTERN5));
+        }
+        if (0 < entity.getKijunJikanBPSDKanren()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanBPSDKanren(), BarImageType.PATTERN6));
+        }
+        if (0 < entity.getKijunJikanKinoKunren()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanKinoKunren(), BarImageType.PATTERN7));
+        }
+        if (0 < entity.getKijunJikanIryoKanren()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanIryoKanren(), BarImageType.PATTERN8));
+        }
+        if (0 < entity.getKijunJikanNinchishoKasan()) {
+            イメージリストA3.add(new EachBarImage(entity.getKijunJikanNinchishoKasan(), BarImageType.PATTERN9));
+        }
+        RString 文件 = new StackBarImage().createHorizontalBarImage(IMAGE_WIDTH, IMAGE_HEIGHT, イメージリストA3);
         項目.set基準時間の積み上げグラフ(文件);
-    }
-
-    private RString get文件名(int 日期) {
-        return new RString(日期);
     }
 }

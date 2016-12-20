@@ -14,15 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShutsuryokuChohyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkShutsuryokuChohyo")
-    private CheckBoxList chkShutsuryokuChohyo;
+    @JsonProperty("radhutsuryokuChohyo")
+    private RadioButton radhutsuryokuChohyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class ShutsuryokuChohyoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkShutsuryokuChohyo
-     * @return chkShutsuryokuChohyo
+     * getradhutsuryokuChohyo
+     * @return radhutsuryokuChohyo
      */
-    @JsonProperty("chkShutsuryokuChohyo")
-    public CheckBoxList getChkShutsuryokuChohyo() {
-        return chkShutsuryokuChohyo;
+    @JsonProperty("radhutsuryokuChohyo")
+    public RadioButton getRadhutsuryokuChohyo() {
+        return radhutsuryokuChohyo;
     }
 
     /*
-     * setchkShutsuryokuChohyo
-     * @param chkShutsuryokuChohyo chkShutsuryokuChohyo
+     * setradhutsuryokuChohyo
+     * @param radhutsuryokuChohyo radhutsuryokuChohyo
      */
-    @JsonProperty("chkShutsuryokuChohyo")
-    public void setChkShutsuryokuChohyo(CheckBoxList chkShutsuryokuChohyo) {
-        this.chkShutsuryokuChohyo = chkShutsuryokuChohyo;
+    @JsonProperty("radhutsuryokuChohyo")
+    public void setRadhutsuryokuChohyo(RadioButton radhutsuryokuChohyo) {
+        this.radhutsuryokuChohyo = radhutsuryokuChohyo;
     }
 
     // </editor-fold>

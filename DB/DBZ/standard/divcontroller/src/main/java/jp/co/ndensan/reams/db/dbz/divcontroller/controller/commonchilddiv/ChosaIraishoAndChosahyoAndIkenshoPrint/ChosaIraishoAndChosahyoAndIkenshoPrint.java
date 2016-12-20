@@ -78,6 +78,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString DBE221031_FREE_MONO = new RString("DBE221031_chosahyoTokkijiko_Free_Mono");
     private static final RString DBE231011_RYOMEN_COLOR = new RString("DBE231011_ikenshokinyuyoshiOCR_Ryomen_Color");
     private static final RString DBE231011_KATAMEN_COLOR = new RString("DBE231011_ikenshokinyuyoshiOCR_Katamen_Color");
+    private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR");
+    private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR");
     private static final RString DBE231001_RYOMEN_MONO = new RString("DBE231001_ikenshokinyuyoshi_Ryomen_Mono");
     private static final RString DBE231001_KATAMEN_MONO = new RString("DBE231001_ikenshokinyuyoshi_Katamen_Mono");
     private static final RString 排他キー = new RString("ShinseishoKanriNo");
@@ -197,10 +199,24 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         return response;
     }
 
+    /**
+     * 発行押下後、画面のデータを最新化する。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onClick_btnPrintKanryo(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
+        if (model != null) {
+            getHandler(div).initialize(model.get申請書管理番号リスト(), model.get遷移元画面区分());
+        }
+        return ResponseData.of(div).respond();
+    }
+    
     private void updateData(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
-            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getSelectedItems();
+            List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
             for (dgNinteiChosa_Row row : selectedItems) {
                 update認定調査依頼情報(div, row);
@@ -251,7 +267,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (selectedKeys.contains(KEY0) || selectedKeys.contains(KEY1)) {
             shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set意見書出力年月日(システム日付);
         }
-        new ShujiiIkenshoIraiJohoManager().save主治医意見書作成依頼情報(shujiiIkenshoIraiJohoBuilder.build().modifiedModel());
+        ShujiiIkenshoIraiJohoManager.createInstance().save主治医意見書作成依頼情報(shujiiIkenshoIraiJohoBuilder.build().modifiedModel());
     }
 
     private void update認定調査依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, dgNinteiChosa_Row row) {
@@ -312,9 +328,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (chkChosahyo.contains(KEY2)) {
             call認定調査票_特記事項(div, printService);
         }
-        if (chkChosahyo.contains(KEY3)) {
-            call認定調査票_特記事項_フリー様式(div, printService);
-        }
+//        概況特記の帳票不明
+//        if (chkChosahyo.contains(KEY3)) {
+//
+//        }
         List<RString> chkOcrChosahyo = div.getChkOcrChosahyo().getSelectedKeys();
         if (chkOcrChosahyo.contains(KEY0)) {
             call認定調査票OCR_概況調査(div, printService);
@@ -325,9 +342,16 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (chkOcrChosahyo.contains(KEY2)) {
             call認定調査票OCR_特記事項(div, printService);
         }
+//        概況特記OCR不明
+//        if (chkOcrChosahyo.contains(KEY3)) {
+//
+//        }
         List<RString> chkChosahyo2 = div.getChkChosahyo2().getSelectedKeys();
         if (chkChosahyo2.contains(KEY0)) {
             call認定調査差異チェック表(div, printService);
+        }
+        if (chkChosahyo2.contains(KEY1)) {
+            call認定調査票_特記事項_フリー様式(div, printService);
         }
         List<RString> chkInsatsuIkensho = div.getChkInsatsuIkensho().getSelectedKeys();
         if (chkInsatsuIkensho.contains(KEY0)) {
@@ -344,11 +368,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             call主治医意見書記入用紙OCR(div, printService);
         }
         if (ichiran.contains(KEY2)) {
-            printService.print主治医意見書作成料請求書(getHandler(div).create主治医意見書作成料請求書_パラメータ());
+            create主治医意見書記入用紙D(div, printService);
         }
         List<RString> seikyusho = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
         if (seikyusho.contains(KEY0)) {
+            printService.print主治医意見書作成料請求書(getHandler(div).create主治医意見書作成料請求書_パラメータ());
+        }
+        if (seikyusho.contains(KEY1)) {
             printService.print介護保険診断命令書(getHandler(div).create介護保険診断命令書_パラメータ());
+        }
+        if (seikyusho.contains(KEY2)) {
+            printService.print介護保険指定医依頼兼主治医意見書提出意見書(getHandler(div).create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ());
         }
     }
 
@@ -388,7 +418,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             }
         }
     }
-
+    
+    private void create主治医意見書記入用紙D(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+        RDate date = RDate.getNowDate();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, date,
+                        SubGyomuCode.DBE認定支援), div, printService);
+            }
+        }
+    }
+    
     private void call認定調査差異チェック表(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
         RDate date = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
@@ -568,6 +611,16 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (DBE231001_KATAMEN_MONO.equals(rseValue)) {
             printService.print主治医意見書記入用紙(
                     getHandler(div).create主治医意見書記入情報3_パラメータ(), ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
+        }
+        
+        if (DBE231012.equals(rseValue)) {
+            printService.print主治医意見書記入用紙(
+                    getHandler(div).create主治医意見書記入情報1_パラメータ(), ReportIdDBZ.DBE231012.getReportId());
+        }
+        
+        if (DBE231014.equals(rseValue)) {
+            printService.print主治医意見書記入用紙(
+                    getHandler(div).create主治医意見書記入情報1_パラメータ(), ReportIdDBZ.DBE231014.getReportId());
         }
     }
 

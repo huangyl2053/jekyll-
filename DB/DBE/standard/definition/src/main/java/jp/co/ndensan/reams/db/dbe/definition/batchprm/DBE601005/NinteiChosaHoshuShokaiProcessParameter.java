@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteiChosaHoshuShokaiProcessParameter implements IBatchProcessParameter {
 
     private final RString 帳票出力区分;
-    private final FlexibleDate 調査依頼日開始;
-    private final FlexibleDate 調査依頼日終了;
+    private final RString 調査依頼日開始;
+    private final RString 調査依頼日終了;
     private final List<NinteiChosaHoshuShokaiFlowBusiness> キー情報Entityリスト;
 
     /**
@@ -37,7 +36,7 @@ public class NinteiChosaHoshuShokaiProcessParameter implements IBatchProcessPara
      * @param 調査依頼日終了 調査依頼日終了
      * @param キー情報Entityリスト キー情報Entityリスト
      */
-    public NinteiChosaHoshuShokaiProcessParameter(RString 帳票出力区分, FlexibleDate 調査依頼日開始, FlexibleDate 調査依頼日終了,
+    public NinteiChosaHoshuShokaiProcessParameter(RString 帳票出力区分, RString 調査依頼日開始, RString 調査依頼日終了,
             List<NinteiChosaHoshuShokaiFlowBusiness> キー情報Entityリスト) {
         this.帳票出力区分 = 帳票出力区分;
         this.キー情報Entityリスト = キー情報Entityリスト;

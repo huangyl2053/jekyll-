@@ -15,10 +15,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 介護認定審査会開催予定登録3クラスです。
@@ -99,6 +102,7 @@ public class ShinsakaiScheduleHakko {
      * @return ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter>
      */
     public ResponseData<DBE514001_ShinsakaiScheduleParameter> onClick_btnHakko(ShinsakaiScheduleHakkoDiv div) {
+        FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Batch")));
         return ResponseData.of(getParamter(div)).respond();
     }
 
@@ -109,7 +113,7 @@ public class ShinsakaiScheduleHakko {
             row.setSelected(Boolean.TRUE);
             row.setShinsakaiIinCode(shinsakai.get介護認定審査会委員コード());
             row.setShinsakaiIinName(shinsakai.get介護認定審査会委員氏名());
-            row.setShozokuGogitaiBango(new RString(String.valueOf(shinsakai.get合議体番号())));
+            row.getShozokuGogitaiBango().setValue(new Decimal(shinsakai.get合議体番号()));
             row.setShozokuGogitaiMeisho(shinsakai.get合議体名称());
             row.setJusho(shinsakai.get住所());
             dgShinsakaiScheduleKagamiRow.add(row);

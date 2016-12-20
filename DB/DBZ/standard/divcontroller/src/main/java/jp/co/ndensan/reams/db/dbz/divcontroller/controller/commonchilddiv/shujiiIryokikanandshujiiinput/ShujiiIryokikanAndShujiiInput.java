@@ -161,6 +161,7 @@ public class ShujiiIryokikanAndShujiiInput {
             shinseiCodeModel.set連絡事項(div.getHdnShujiiRenrakuJiko());
         }
         shinseiCodeModel.set表示モード(NinteiShinseiCodeModel.HyojiMode.InputMode);
+        shinseiCodeModel.setメニューID(new RString("ShujiiIryokikanAndShujiiInput"));
         ViewStateHolder.put(ViewStateKeys.モード, shinseiCodeModel);
 
         return ResponseData.of(div).respond();

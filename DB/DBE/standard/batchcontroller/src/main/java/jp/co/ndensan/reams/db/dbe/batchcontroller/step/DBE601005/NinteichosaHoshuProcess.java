@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.IChosa
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.NinteiChosaHoshuShokaiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshuichiran.ChosahoshuichiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
@@ -30,11 +31,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -55,8 +56,8 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahoshushokai."
             + "INinteiChosaHoshuShokaiRelateMapper.get報酬実績データ情報");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601006.getReportId();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601006"));
-    private static final RString CSV_NAME = new RString("IkenshoJissekiIchiran.csv");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE606001"));
+    private static final RString CSV_NAME = new RString("認定調査報酬一覧表.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");
@@ -74,7 +75,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
     private BatchReportWriter<ChosahoshuichiranReportSource> batchWrite;
     private ReportSourceWriter<ChosahoshuichiranReportSource> reportSourceWriter;
     @BatchWriter
-    private EucCsvWriter<IChosaHoshuShokaiCsvEucEntity> eucCsvWriter;
+    private CsvWriter<IChosaHoshuShokaiCsvEucEntity> csvWriter;
 
     @Override
     protected void initialize() {
@@ -84,7 +85,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
     protected void process(NinteiChosaHoshuShokaiRelateEntity relateEntity) {
 
         if (CSVを出力する.equals(parameter.get帳票出力区分())) {
-            eucCsvWriter.writeLine(NinteiChosaHoshuShokaiChange.createData(relateEntity));
+            csvWriter.writeLine(NinteiChosaHoshuShokaiChange.createData(relateEntity));
         } else if (集計表を発行する.equals(parameter.get帳票出力区分())) {
             if (!ninteichosaItakusakiCode.equals(relateEntity.get認定調査委託先コード())) {
                 count = 1;
@@ -108,7 +109,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setEncode(Encode.UTF_8withBOM)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -125,7 +126,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE601001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE601006.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
@@ -143,6 +144,24 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         printer.print();
     }
 
+    private void CSVバッチ出力条件リストの出力() {
+        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
+        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
+        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
+        RString 出力件数 = new RString(csvWriter.getCount());
+        List<RString> 出力条件 = new ArrayList<>();
+        RStringBuilder 調査依頼日FROM = new RStringBuilder("【調査依頼日（From）】");
+        調査依頼日FROM.append(parameter.get調査依頼日開始());
+        RStringBuilder 調査依頼日To = new RStringBuilder("【調査依頼日（To）】");
+        調査依頼日To.append(parameter.get調査依頼日終了());
+        出力条件.add(調査依頼日FROM.toRString());
+        出力条件.add(調査依頼日To.toRString());
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                new RString("認定調査報酬一覧表CSV"), 導入団体コード, 市町村名, ジョブ番号,
+                CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);
+        OutputJokenhyoFactory.createInstance(item).print();
+    }
+
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
@@ -153,8 +172,12 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
+        csvWriter.close();
         manager.spool(eucFilePath);
-        帳票バッチ出力条件リストの出力();
+        if (CSVを出力する.equals(parameter.get帳票出力区分())) {
+            CSVバッチ出力条件リストの出力();
+        } else {
+            帳票バッチ出力条件リストの出力();
+        }
     }
 }

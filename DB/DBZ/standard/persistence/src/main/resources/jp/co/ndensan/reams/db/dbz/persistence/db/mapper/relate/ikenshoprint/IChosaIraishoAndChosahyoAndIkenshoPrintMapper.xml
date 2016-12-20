@@ -177,13 +177,19 @@
               parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
          SELECT
                 A."hihokenshaNo"
+               ,A."hihokenshaKana"
                ,A."hihokenshaName"
                ,A."seibetsu"
                ,A."ninteiShinseiYMD"
                ,A."shinseishoKanriNo"
+               ,A."seinengappiYMD"
+               ,A."jusho"
+               ,A."telNo"
                ,B."shujiiIryokikanCode"
                ,B."ikenshoIraiRirekiNo"
                ,C."iryoKikanMeisho"
+               ,C."yubinNo" AS "iryoKikanYubinNo"
+               ,C."jusho" AS "iryoKikanJusho"
                ,B."shujiiCode"
                ,D."shujiiName"
          FROM

@@ -62,8 +62,8 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * @return 各入力値クリア後の画面情報
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_btnClear(YokaigoNinteiShinsakaiIchiranListDiv div) {
-        div.getTxtHyojiKikanFrom().clearValue();
-        div.getTxtHyojiKikanTo().clearValue();
+        div.getTxtHyojiKikan().clearFromValue();
+        div.getTxtHyojiKikan().clearToValue();
         div.getRadHyojiJokenWaritsukeMikanryo().setSelectedKey(ラジオボタン初期化_key0);
         div.getRadHyojiJokenWaritsukeKanryo().setSelectedKey(ラジオボタン初期化_key0);
         div.getRadHyojiJokenShinsakaiMikanryo().setSelectedKey(ラジオボタン初期化_key0);
@@ -81,8 +81,8 @@ public class YokaigoNinteiShinsakaiIchiranList {
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
         div.getDgShinsakaiIchiran().getDataSource().clear();
         モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
-        RDate 表示期間From = div.getTxtHyojiKikanFrom().getValue();
-        RDate 表示期間To = div.getTxtHyojiKikanTo().getValue();
+        RDate 表示期間From = div.getTxtHyojiKikan().getFromValue();
+        RDate 表示期間To = div.getTxtHyojiKikan().getToValue();
         ValidationMessageControlPairs validationMessages
                 = getHandler(div).表示期間Fromと表示期間Toの前後順チェック();
         if (表示期間From != null && 表示期間To != null && 表示期間To.isBefore(表示期間From)) {
@@ -122,17 +122,6 @@ public class YokaigoNinteiShinsakaiIchiranList {
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_btnSelect(YokaigoNinteiShinsakaiIchiranListDiv div) {
         getHandler(div).get開催番号();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 選択チェックBOXの処理です。
-     *
-     * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return 介護認定審査会共有一覧Divを持つResponseData
-     */
-    public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_CheckBox(YokaigoNinteiShinsakaiIchiranListDiv div) {
-        getHandler(div).get開催番号List();
         return ResponseData.of(div).respond();
     }
 

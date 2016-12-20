@@ -12,14 +12,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001.ShinsakaiTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001.ShinsakaiTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -113,7 +111,7 @@ public class ShinsakaiToroku {
         try (CsvWriter<ShinsakaiTorokuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
-            List<dgNinteiTaskList_Row> dataList = div.getCcdTaskList().getCheckbox();
+            List<dgNinteiTaskList_Row> dataList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                         row.getShinseishoKanriNo()));
@@ -148,7 +146,7 @@ public class ShinsakaiToroku {
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
-            申請書管理番号リスト(div.getCcdTaskList().getCheckbox());
+            申請書管理番号リスト(div.getDgNinteiTaskList().getSelectedItems());
             前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
                     .parameter(new RString("申請書管理番号リスト"));
@@ -162,7 +160,20 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnShinsakaiToruku(ShinsakaiTorokuDiv div) {
-
+        ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+        }
+        ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
+        if (選択チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(選択チェック).respond();
+        }
+        ValidationMessageControlPairs 完了処理事前チェック = getValidationHandler(div).完了処理事前チェック();
+//            ValidationMessageControlPairs 完了済みデータチェック = getValidationHandler(div).完了済みデータチェック(完了処理事前チェック);
+        ValidationMessageControlPairs validation = getValidationHandler(div).マスキング完了チェック(完了処理事前チェック);
+        if (validation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validation).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -171,30 +182,28 @@ public class ShinsakaiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            if (存在チェック結果.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
-            }
-            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
-            if (選択チェック.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(選択チェック).respond();
-            }
-            ValidationMessageControlPairs 完了処理事前チェック = getValidationHandler(div).完了処理事前チェック();
-            ValidationMessageControlPairs 完了済みデータチェック = getValidationHandler(div).完了済みデータチェック(完了処理事前チェック);
-            ValidationMessageControlPairs validation = getValidationHandler(div).マスキング完了チェック(完了済みデータチェック);
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
-            } else {
-                Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
-                        = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
-                getHandler(div).要介護認定完了更新(models);
-                前排他キーの解除();
-                div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                        replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-                return ResponseData.of(div).setState(DBE4010001StateName.完了);
-            }
+            Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
+                    = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+            getHandler(div).要介護認定完了更新(models);
+            前排他キーの解除();
+            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                    replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
+            return ResponseData.of(div).setState(DBE4010001StateName.完了);
+
         }
         return ResponseData.of(div).setState(DBE4010001StateName.登録);
+    }
+    
+    /**
+     * 対象者状態ラジオボタンの押下チェック処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShinsakaiTorokuDiv> onChange_radTaishoshaJotai(ShinsakaiTorokuDiv div) {
+        getHandler(div).setJyotaiKubun();
+        return ResponseData.of(div).respond();
     }
 
     private void 前排他キーのセット() {
@@ -212,30 +221,20 @@ public class ShinsakaiToroku {
     }
 
     private ShinsakaiTorokuCsvEntity getCsvData(dgNinteiTaskList_Row row) {
-        RString 申請時コード = RString.EMPTY;
-        RString 優先割付者コード = RString.EMPTY;
-        if (!RString.isNullOrEmpty(row.getShinseiKubunShinseiji())) {
-            申請時コード = NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード();
-        }
-        if (!RString.isNullOrEmpty(row.getYusenWaritsukesha())) {
-            優先割付者コード = ShinsakaiYusenWaritsukeKubunCode.valueOf(row.getYusenWaritsukesha().toString()).getコード();
-        }
         ShinsakaiTorokuCsvEntity data = new ShinsakaiTorokuCsvEntity(
-                row.getShinseishoKanriNo(),
+                row.getJotai(),
                 row.getHokensha(),
                 日期転換(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
                 row.getHihoShimei(),
-                申請時コード,
                 row.getShinseiKubunShinseiji(),
+                row.getShinseiKubunHorei(),
                 日期転換(row.getChosahyoKanryoDay().getValue()),
                 日期転換(row.getIkenshoNyushuKanryoDay().getValue()),
                 日期転換(row.getMaskingKanryoDay().getValue()),
-                日期転換(row.getShinsakaiKanryoDay().getValue()),
                 日期転換(row.getShinsakaiwaritukeDay().getValue()),
                 日期転換(row.getShinsakaiKaisaiDay().getValue()),
                 時刻転換(row.getShinsakaiKaisaiJikan().getValue()),
-                優先割付者コード,
                 row.getYusenWaritsukesha(),
                 row.getKaisaiNumber(),
                 row.getGogitai());

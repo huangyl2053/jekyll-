@@ -6,6 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper">
 
+<!-- 実施状況報告 ここから *************************************************************************************************************** -->
     <select resultOrdered="true" id="getJisshiJokyoTokei"
             resultMap="hokokushiryosakusei_JisshiJokyoTokei"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.JisshiJokyoTokeiMyBatisParameter"
@@ -23,43 +24,31 @@
         </if>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
-        <include refid="kensakuJyokenKyotsu" />
+        <include refid="kensakuJyokenKyotsu_getJisshiJokyoTokei" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinseiJohoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(A."ninteiShinseiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <if test="isEmptyTaishoGeppiTo">
-                            AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
+                            AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
                         </if>
                         <if test="!isEmptyTaishoGeppiTo">
-                            AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                            AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                            AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                            AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                         </if>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
@@ -91,22 +80,20 @@
         </if>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" G
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" G
         ON A."shinseishoKanriNo" = G."shinseishoKanriNo"
-        AND G."ninteichosaRirekiNo" = (
-        SELECT MAX("ninteichosaRirekiNo")
-        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa"
-        WHERE "shinseishoKanriNo" = A."shinseishoKanriNo")
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        AND (G."ninteichosaRirekiNo"||G."gaikyoChosaTextImageKubun") = (
+        SELECT
+        MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+        "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
-        <include refid="kensakuJyokenKyotsu" />
+        <include refid="kensakuJyokenKyotsu_getJisshiJokyoTokei" />
         <choose>
             <when test="isTaishoTsukiKubun">
                 AND SUBSTR(G."ninteichosaJisshiYMD", 1, 6) = #{taishoNendoYM}
@@ -128,12 +115,6 @@
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
@@ -165,45 +146,34 @@
         </if>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" H
-        ON D."shinsakaiKaisaiNo" = H."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        AND D."hanteiKekkaCode" = '01' <!-- 認定のみ -->
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
-        <include refid="kensakuJyokenKyotsu" />
+        <include refid="kensakuJyokenKyotsu_getJisshiJokyoTokei" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinsakaiWariateKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(D."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <if test="isEmptyTaishoGeppiTo">
-                            AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
+                            AND #{taishoGeppiFrom} <![CDATA[<=]]> D."shinsakaiKaisaiYMD"
                         </if>
                         <if test="!isEmptyTaishoGeppiTo">
-                            AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
-                            AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                            AND #{taishoGeppiFrom} <![CDATA[<=]]> D."shinsakaiKaisaiYMD"
+                            AND D."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                         </if>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND D."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
@@ -235,18 +205,12 @@
         </if>
         ,COUNT(A."shoKisaiHokenshaNo") AS countKensu
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
-        <include refid="kensakuJyokenKyotsu" />
+        <include refid="kensakuJyokenKyotsu_getJisshiJokyoTokei" />
         <choose>
             <when test="isTaishoTsukiKubun">
                 AND SUBSTR(C."nijiHanteiYMD", 1, 6) = #{taishoNendoYM}
@@ -268,12 +232,6 @@
                 </choose>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
-        <if test="isHorei">
-            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
-        </if>
         GROUP BY
         F."shichosonCode"
         ,F."shichosonMeisho"
@@ -301,6 +259,42 @@
             , "ninteiShinseiHoreiKubunCode"
         </if>
     </select>
+
+    <sql id="kensakuJyokenKyotsu_getJisshiJokyoTokei">
+        <if test="isShinseiji">
+            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+        </if>
+        <if test="isHorei">
+            AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+        </if>
+        <if test="!isEmptyHokensyaNo">
+            AND A."shoKisaiHokenshaNo" = #{hokensyaNo}
+        </if>
+        <choose>
+            <when test='"0".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" IN ('1', '2', '9')
+            </when>
+            <when test='"1".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" = '1'
+            </when>
+            <when test='"2".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" = '2'
+            </when>
+            <when test='"3".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" = '9'
+            </when>
+            <when test='"4".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" IN ('1', '2')
+            </when>
+            <when test='"5".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" IN ('1', '9')
+            </when>
+            <when test='"6".equals(hihokenshaKubun.toString())'>
+                AND A."hihokenshaKubunCode" IN ('2', '9')
+            </when>
+        </choose>
+    </sql>
+<!-- 実施状況報告 ここまで *************************************************************************************************************** -->
 
     <select resultOrdered="true" id="getGogitaiNo"
             resultMap="hokokushiryosakusei_gogitaiNo"
@@ -349,10 +343,10 @@
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" C
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" C
         ON A."shoKisaiHokenshaNo" =  C."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
-        AND A."torisageKubunCode" IN ('1', '4')
+        AND A."torisageKubunCode" IN ('1', '2', '4')
         AND A."hihokenshaKubunCode" IN ('1', '2')
         AND B."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
         <if test="!isEmptyHokensyaNo">
@@ -458,7 +452,7 @@
         FROM
         (
         SELECT
-        G."shinsakaiKaisaiNo"
+        G."shinsakaiKaisaiNo"db
         FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" G
         INNER JOIN
@@ -525,9 +519,9 @@
                 ) AS "shichosonMeisho"
             </when>
             <otherwise>
-                ,rshare."UDD023LasdecCode" '' AS "shichosonCode"
+                ,text '' AS "shichosonCode"
                 ,character varying(10) '全市町村' AS "shichosonMeisho"
-                ,rgdb."DbUDD015ShoKisaiHokenshaNo" '' AS "shoKisaiHokenshaNo"
+                ,character varying(6) '' AS "shoKisaiHokenshaNo"
             </otherwise>
         </choose>
         FROM (
@@ -836,7 +830,11 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsahanteinoHenkojokyoMyBatisParameter"
             fetchSize="500">
         SELECT S.* ,
-        (SELECT COUNT(G."shinsakaiKaisaiNo")
+        (
+        SELECT COUNT(1)
+        FROM (
+        SELECT
+            G."shinsakaiKaisaiNo"
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" G
         INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
         ON G."shinsakaiKaisaiNo" = dbt5502."shinsakaiKaisaiNo"
@@ -882,6 +880,8 @@
                 </if>
             </otherwise>
         </choose>
+        GROUP BY G."shinsakaiKaisaiNo"
+        ) AS shinsakaiKaisaiNo
         ) AS shinsakaiKaisaiNoCount
         FROM
         (SELECT
@@ -1088,6 +1088,7 @@
                 AND D."nijiHanteiNinteiYukoKikan" = 24
             </when>
             <otherwise>
+                AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13', '21', '22', '23', '24', '25')
                 AND D."nijiHanteiNinteiYukoKikan" NOT IN (3, 6, 12, 24)
             </otherwise>
         </choose>
@@ -1112,8 +1113,10 @@
         ON C."shinseishoKanriNo" = E."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" H
         ON C."shinseishoKanriNo" = H."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" I
-        ON I."shinseishoKanriNo" = H."zenkaiShinseishoKanriNo"
+        <if test='"2".equals(ninteiShinseiKubun.toString())'>
+            INNER JOIN rgdb."DbT5102NinteiKekkaJoho" I
+            ON I."shinseishoKanriNo" = H."zenkaiShinseishoKanriNo"
+        </if>
         WHERE
         <choose>
             <when test="!isEmptyGogitaiNo">
@@ -1194,41 +1197,36 @@
         <choose>
             <when test='"0".equals(ninteiShinseiKubun.toString())'>
                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('01', '12', '13', '21', '22', '23', '24', '25')
-                AND 6 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
-                AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 12
+                AND 6 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan"
             </when>
             <otherwise>
                 <choose>
                     <when test="isJissiZumi">
                         AND (I."nijiHanteiYokaigoJotaiKubunCode" <![CDATA[<>]]> '01'
                         AND D."nijiHanteiYokaigoJotaiKubunCode" <![CDATA[<>]]> '01'
-                        AND 12 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
-                        AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 24)
+                        AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                     </when>
                     <otherwise>
                         <choose>
                             <when test='"0".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
-                                AND D."nijiHanteiNinteiYukoKikan" = 12)
+                                AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                             <when test='"1".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
-                                AND 6 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
-                                AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 12)
+                                AND 6 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                             <when test='"2".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('12', '13')
-                                AND 6 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
-                                AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 12)
+                                AND 6 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                             <when test='"3".equals(jyotaiHenkoKubun.toString())'>
                                 AND (I."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
                                 AND D."nijiHanteiYokaigoJotaiKubunCode" IN ('21', '22', '23', '24', '25')
-                                AND 12 <![CDATA[<=]]> D."nijiHanteiNinteiYukoKikan"
-                                AND D."nijiHanteiNinteiYukoKikan" <![CDATA[<=]]> 24)
+                                AND 12 <![CDATA[<]]> D."nijiHanteiNinteiYukoKikan")
                             </when>
                         </choose>
                     </otherwise>
@@ -1240,33 +1238,30 @@
     </select>
 
     <select resultOrdered="true" id="getShinsakaishukeihyoHanteiBetsuHeader"
-            resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuMyBatisParameter"
-            fetchSize="500">
-        SELECT S.* ,
-        (SELECT COUNT(G."shinsakaiKaisaiNo")
-        FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" G
-        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
-        ON G."shinsakaiKaisaiNo" = dbt5502."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
-        ON dbt5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+         resultMap="hokokushiryosakusei_SinsakaiHanteiJyokyoHeader"
+         parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuMyBatisParameter"
+         fetchSize="500">
+        SELECT
+        min(S."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin,
+        max(S."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax,
+        count(DISTINCT S."shinsakaiKaisaiNo") shinsakaiKaisaiNoCount
+        FROM
+        (SELECT
+        Dbt5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        Dbt5511."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo",
+        Dbt5511."gogitaiNo" AS "gogitaiNo",
+        Dbt5511."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD"
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" Dbt5511
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" Dbt5502
+        ON Dbt5502."shinsakaiKaisaiNo" = Dbt5511."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" Dbt5101
+        ON DbT5101."shinseishoKanriNo" = Dbt5502."shinseishoKanriNo"
         WHERE
-        <choose>
-            <when test="!isEmptyGogitaiNo">
-                G."gogitaiNo" = #{gogitaiNo}
-            </when>
-            <otherwise>
-                G."gogitaiNo" IN
-                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
-            </otherwise>
-        </choose>
-        <if test="!isEmptyHokensyaNo">
-            AND dbt5101."shoKisaiHokenshaNo" = #{hokensyaNo}
-        </if>
         <choose>
             <when test="isTaishoTsukiKubun">
                 <if test="!isTaishoGeppiKubun">
-                    AND SUBSTR(G."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
+                    SUBSTR(Dbt5511."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
                 </if>
             </when>
             <otherwise>
@@ -1275,107 +1270,57 @@
                         <when test="!isEmptyTaishoGeppiFrom">
                             <choose>
                                 <when test="!isEmptyTaishoGeppiTo">
-                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> G."shinsakaiKaisaiYMD"
-                                    AND G."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                    #{taishoGeppiFrom} <![CDATA[<=]]> Dbt5511."shinsakaiKaisaiYMD"
+                                    AND Dbt5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                                 </when>
                                 <otherwise>
-                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> G."shinsakaiKaisaiYMD"
+                                    #{taishoGeppiFrom} <![CDATA[<=]]> Dbt5511."shinsakaiKaisaiYMD"
                                 </otherwise>
                             </choose>
                         </when>
                         <otherwise>
-                            AND G."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                            Dbt5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                         </otherwise>
                     </choose>
                 </if>
             </otherwise>
         </choose>
-        ) AS shinsakaiKaisaiNoCount
-        FROM
-        (SELECT
-        MIN(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMin
-        ,MAX(A."shinsakaiKaisaiYMD") AS shinsakaiKaisaiYMDMax
-        FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" B
-        ON A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" C
-        ON B."shinseishoKanriNo" = C."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" D
-        ON D."shinseishoKanriNo" = C."shinseishoKanriNo"
-        WHERE D."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND D."ninteichosaKanryoYMD" IS NOT NULL
-        AND D."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND D."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND D."maskingKanryoYMD" IS NOT NULL
-        AND D."ninteiShinsakaiKanryoYMD" IS NOT NULL
         <if test="!isEmptyHokensyaNo">
-            AND C."shoKisaiHokenshaNo" = #{hokensyaNo}
+            AND Dbt5101."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
         <choose>
             <when test='"0".equals(hihokenshaKubun.toString())'>
-                AND C."hihokenshaKubunCode" IN ('1', '2', '9')
+                AND Dbt5101."hihokenshaKubunCode" IN ('1', '2', '9')
             </when>
             <when test='"1".equals(hihokenshaKubun.toString())'>
-                AND C."hihokenshaKubunCode" = '1'
+                AND Dbt5101."hihokenshaKubunCode" = '1'
             </when>
             <when test='"2".equals(hihokenshaKubun.toString())'>
-                AND C."hihokenshaKubunCode" = '2'
+                AND Dbt5101."hihokenshaKubunCode" = '2'
             </when>
             <when test='"3".equals(hihokenshaKubun.toString())'>
-                AND C."hihokenshaKubunCode" = '9'
+                AND Dbt5101."hihokenshaKubunCode" = '9'
             </when>
             <when test='"4".equals(hihokenshaKubun.toString())'>
-                AND C."hihokenshaKubunCode" IN ('1', '2')
+                AND Dbt5101."hihokenshaKubunCode" IN ('1', '2')
             </when>
             <when test='"5".equals(hihokenshaKubun.toString())'>
-                AND C."hihokenshaKubunCode" IN ('1', '9')
+                AND Dbt5101."hihokenshaKubunCode" IN ('1', '9')
             </when>
             <when test='"6".equals(hihokenshaKubun.toString())'>
-                AND C."hihokenshaKubunCode" IN ('2', '9')
+                AND Dbt5101."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
-        <choose>
-            <when test="isTaishoTsukiKubun">
-                <if test="!isTaishoGeppiKubun">
-                    AND SUBSTR(A."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
-                </if>
-            </when>
-            <otherwise>
-                <if test="isTaishoGeppiKubun">
-                    <choose>
-                        <when test="!isEmptyTaishoGeppiFrom">
-                            <choose>
-                                <when test="!isEmptyTaishoGeppiTo">
-                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
-                                    AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                                </when>
-                                <otherwise>
-                                    AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
-                                </otherwise>
-                            </choose>
-                        </when>
-                        <otherwise>
-                            AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                        </otherwise>
-                    </choose>
-                </if>
-            </otherwise>
-        </choose>
-        <choose>
-            <when test="!isEmptyGogitaiNo">
-                AND A."gogitaiNo" = #{gogitaiNo}
-            </when>
-            <otherwise>
-                AND A."gogitaiNo" IN
-                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
-            </otherwise>
-        </choose>
+        <if test="!isEmptyGogitaiNo">
+            AND Dbt5511."gogitaiNo" = #{gogitaiNo}
+        </if>
         <if test="isShinseiji">
-            AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+            AND Dbt5101."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
         </if>
         <if test="isHorei">
-            AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
+            AND Dbt5101."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
+        Group by Dbt5101."shoKisaiHokenshaNo", Dbt5511."shinsakaiKaisaiNo", Dbt5511."gogitaiNo"
         ) AS S
     </select>
 
@@ -1435,15 +1380,6 @@
                 AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
-        <choose>
-            <when test="!isEmptyGogitaiNo">
-                AND A."gogitaiNo" = #{gogitaiNo}
-            </when>
-            <otherwise>
-                AND A."gogitaiNo" IN
-                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
-            </otherwise>
-        </choose>
         GROUP BY I."nijiHanteiYokaigoJotaiKubunCode"
         ,D."nijiHanteiYokaigoJotaiKubunCode"
         ORDER BY I."nijiHanteiYokaigoJotaiKubunCode"
@@ -1463,12 +1399,6 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1476,27 +1406,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinseiJohoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(A."ninteiShinseiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (A."ninteiShinseiYMD" <![CDATA[<>]]> '' OR A."ninteiShinseiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1511,12 +1442,16 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" shin_chosaitaku
+        ON A."shinseishoKanriNo" = shin_chosaitaku."shinseishoKanriNo"
+        AND (shin_chosaitaku."ninteichosaRirekiNo"||shin_chosaitaku."gaikyoChosaTextImageKubun") = (
+        SELECT
+            MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+            rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1524,27 +1459,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteichosaKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(shin_chosaitaku."ninteichosaJisshiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_chosaitaku."ninteichosaJisshiYMD"
+                                AND shin_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_chosaitaku."ninteichosaJisshiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND shin_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (shin_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<>]]> '' OR shin_chosaitaku."ninteichosaJisshiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1559,12 +1495,16 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" shin_shujii
+        ON A."shinseishoKanriNo" = shin_shujii."shinseishoKanriNo"
+        AND shin_shujii."ikenshoIraiRirekiNo" = (
+        SELECT
+            MAX("ikenshoIraiRirekiNo")
+        FROM
+            rgdb."DbT5302ShujiiIkenshoJoho"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1572,27 +1512,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ikenshoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(shin_shujii."ikenshoKinyuYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shujii."ikenshoKinyuYMD"
+                                AND shin_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shujii."ikenshoKinyuYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND shin_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (shin_shujii."ikenshoKinyuYMD" <![CDATA[<>]]> '' OR shin_shujii."ikenshoKinyuYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1607,12 +1548,9 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" shin_shinsakai
+        ON A."shinseishoKanriNo" = shin_shinsakai."shinseishoKanriNo"
+        AND shin_shinsakai."hanteiKekkaCode" = '01' <!-- 認定のみ -->
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1620,27 +1558,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinsakaiWariateKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(shin_shinsakai."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
-                                AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shinsakai."shinsakaiKaisaiYMD"
+                                AND shin_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> shin_shinsakai."shinsakaiKaisaiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND shin_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (shin_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<>]]> '' OR shin_shinsakai."shinsakaiKaisaiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1655,14 +1594,8 @@
         , '0' AS "ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1691,6 +1624,7 @@
                 </choose>
             </otherwise>
         </choose>
+        AND (C."nijiHanteiYMD" <![CDATA[<>]]> '' OR C."nijiHanteiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiShinseijiKubunCode"
@@ -1705,12 +1639,6 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1718,27 +1646,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinseiJohoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(A."ninteiShinseiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (A."ninteiShinseiYMD" <![CDATA[<>]]> '' OR A."ninteiShinseiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1753,12 +1682,16 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" hou_chosaitaku
+        ON A."shinseishoKanriNo" = hou_chosaitaku."shinseishoKanriNo"
+        AND (hou_chosaitaku."ninteichosaRirekiNo"||hou_chosaitaku."gaikyoChosaTextImageKubun") = (
+        SELECT
+            MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+            rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1766,27 +1699,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteichosaKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(hou_chosaitaku."ninteichosaJisshiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
+                                AND hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<>]]> '' OR hou_chosaitaku."ninteichosaJisshiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1801,12 +1735,16 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" hou_shujii
+        ON A."shinseishoKanriNo" = hou_shujii."shinseishoKanriNo"
+        AND hou_shujii."ikenshoIraiRirekiNo" = (
+        SELECT
+            MAX("ikenshoIraiRirekiNo")
+        FROM
+            rgdb."DbT5302ShujiiIkenshoJoho"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1814,27 +1752,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ikenshoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(hou_shujii."ikenshoKinyuYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
+                                AND hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (hou_shujii."ikenshoKinyuYMD" <![CDATA[<>]]> '' OR hou_shujii."ikenshoKinyuYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1849,12 +1788,9 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" hou_shinsakai
+        ON A."shinseishoKanriNo" = hou_shinsakai."shinseishoKanriNo"
+        AND hou_shinsakai."hanteiKekkaCode" = '01' <!-- 認定のみ -->
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1862,27 +1798,28 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND SUBSTR(B."ninteiShinsakaiWariateKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND SUBSTR(hou_shinsakai."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
             </when>
             <otherwise>
                 <choose>
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
-                                AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
+                                AND hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                             </when>
                             <otherwise>
-                                AND #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
+                                AND #{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                     </otherwise>
                 </choose>
             </otherwise>
         </choose>
+        AND (hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<>]]> '' OR hou_shinsakai."shinsakaiKaisaiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1897,14 +1834,8 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1933,6 +1864,7 @@
                 </choose>
             </otherwise>
         </choose>
+        AND (C."nijiHanteiYMD" <![CDATA[<>]]> '' OR C."nijiHanteiYMD" IS NOT NULL)
         GROUP BY F."shichosonCode"
         , F."shichosonMeisho"
         , A."ninteiShinseiHoreiKubunCode"
@@ -1947,14 +1879,31 @@
         , A."ninteiShinseiHoreiKubunCode"
         , COUNT(A."hihokenshaNo") AS countHihokenshaNo
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" C
         ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" E
-        ON D."shinsakaiKaisaiNo" = E."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" hou_chosaitaku
+        ON A."shinseishoKanriNo" = hou_chosaitaku."shinseishoKanriNo"
+        AND (hou_chosaitaku."ninteichosaRirekiNo"||hou_chosaitaku."gaikyoChosaTextImageKubun") = (
+        SELECT
+            MAX("ninteichosaRirekiNo"||"gaikyoChosaTextImageKubun")
+        FROM
+            rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" hou_shujii
+        ON A."shinseishoKanriNo" = hou_shujii."shinseishoKanriNo"
+        AND hou_shujii."ikenshoIraiRirekiNo" = (
+        SELECT
+            MAX("ikenshoIraiRirekiNo")
+        FROM
+            rgdb."DbT5302ShujiiIkenshoJoho"
+        WHERE
+            "shinseishoKanriNo" = A."shinseishoKanriNo"
+        )
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" hou_shinsakai
+        ON A."shinseishoKanriNo" = hou_shinsakai."shinseishoKanriNo"
+        AND hou_shinsakai."hanteiKekkaCode" = '01' <!-- 認定のみ -->
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" F
         ON A."shoKisaiHokenshaNo" = F."shoKisaiHokenshaNo"
         WHERE A."logicalDeletedFlag" = FALSE
@@ -1963,10 +1912,10 @@
         <include refid="kensakuJyokenKyotsu" />
         <choose>
             <when test="isTaishoTsukiKubun">
-                AND (SUBSTR(B."ninteiShinseiJohoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
-                OR SUBSTR(B."ninteichosaKanryoYMD", 1, 6) = #{taishoNendoYM}
-                OR SUBSTR(B."ikenshoTorokuKanryoYMD", 1, 6) = #{taishoNendoYM}
-                OR SUBSTR(B."ninteiShinsakaiWariateKanryoYMD", 1, 6) = #{taishoNendoYM}
+                AND (SUBSTR(A."ninteiShinseiYMD", 1, 6) = #{taishoNendoYM}
+                OR SUBSTR(hou_chosaitaku."ninteichosaJisshiYMD", 1, 6) = #{taishoNendoYM}
+                OR SUBSTR(hou_shujii."ikenshoKinyuYMD", 1, 6) = #{taishoNendoYM}
+                OR SUBSTR(hou_shinsakai."shinsakaiKaisaiYMD", 1, 6) = #{taishoNendoYM}
                 OR SUBSTR(C."nijiHanteiYMD", 1, 6) = #{taishoNendoYM} )
             </when>
             <otherwise>
@@ -1974,31 +1923,31 @@
                     <when test="!isEmptyTaishoGeppiFrom">
                         <choose>
                             <when test="!isEmptyTaishoGeppiTo">
-                                AND ((#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                AND B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
-                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                AND B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
-                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                AND B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
-                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
-                                AND B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                AND ((#{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
+                                AND hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
+                                AND hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo})
+                                OR (#{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
+                                AND hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
                                 OR (#{taishoGeppiFrom} <![CDATA[<=]]> C."nijiHanteiYMD"
                                 AND C."nijiHanteiYMD" <![CDATA[<=]]> #{taishoGeppiTo}))
                             </when>
                             <otherwise>
-                                AND (#{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinseiJohoTorokuKanryoYMD"
-                                OR #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteichosaKanryoYMD"
-                                OR #{taishoGeppiFrom} <![CDATA[<=]]> B."ikenshoTorokuKanryoYMD"
-                                OR #{taishoGeppiFrom} <![CDATA[<=]]> B."ninteiShinsakaiWariateKanryoYMD"
+                                AND (#{taishoGeppiFrom} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                                OR #{taishoGeppiFrom} <![CDATA[<=]]> hou_chosaitaku."ninteichosaJisshiYMD"
+                                OR #{taishoGeppiFrom} <![CDATA[<=]]> hou_shujii."ikenshoKinyuYMD"
+                                OR #{taishoGeppiFrom} <![CDATA[<=]]> hou_shinsakai."shinsakaiKaisaiYMD"
                                 OR #{taishoGeppiFrom} <![CDATA[<=]]> C."nijiHanteiYMD")
                             </otherwise>
                         </choose>
                     </when>
                     <otherwise>
-                        AND (B."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                        OR B."ninteichosaKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                        OR B."ikenshoTorokuKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-                        OR B."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        AND (A."ninteiShinseiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        OR hou_chosaitaku."ninteichosaJisshiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        OR hou_shujii."ikenshoKinyuYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+                        OR hou_shinsakai."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
                         OR C."nijiHanteiYMD" <![CDATA[<=]]> #{taishoGeppiTo})
                     </otherwise>
                 </choose>
@@ -2023,422 +1972,101 @@
             resultMap="hokokushiryosakusei_ShinsakaiShukeiGenzainojokyo"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoMyBatisParameter"
             fetchSize="500">
-        SELECT * FROM
-        ( (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 0 AS yukoKikan
+        SELECT
+        G."shichosonCode"
+        , 0 AS shinseiKubun -- 0:新規申請
+        , a."nijiHanteiNinteiYukoKikan" AS yukoKikan
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , COUNT(*) AS countHihokenshaNo
+        FROM
+        rgdb."DbT4102NinteiKekkaJoho" as a
+        INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+        a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+        AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+        AND b."ninteiShinseiShinseijiKubunCode" = '1'
+        <if test="!isEmptyHokensyaNo">
+            AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
         GROUP BY
         G."shichosonCode"
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , a."nijiHanteiNinteiYukoKikan"
         UNION ALL
-        (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 1 AS yukoKikan
+        SELECT
+        G."shichosonCode"
+        , 1 AS shinseiKubun -- 1:更新申請
+        , a."nijiHanteiNinteiYukoKikan" AS yukoKikan
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , COUNT(*) AS countHihokenshaNo
+        FROM
+        rgdb."DbT4102NinteiKekkaJoho" as a
+        INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+        a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+        AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+        AND b."ninteiShinseiShinseijiKubunCode" = '2'
+        <if test="!isEmptyHokensyaNo">
+            AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
         GROUP BY
         G."shichosonCode"
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , a."nijiHanteiNinteiYukoKikan"
         UNION ALL
-        (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 2 AS yukoKikan
+        SELECT
+        G."shichosonCode"
+        , 2 AS shinseiKubun --2:区分変更申請
+        , a."nijiHanteiNinteiYukoKikan" AS yukoKikan
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , COUNT(*) AS countHihokenshaNo
+        FROM
+        rgdb."DbT4102NinteiKekkaJoho" as a
+        INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+        a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+        AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+        AND b."ninteiShinseiShinseijiKubunCode" = '3'
+        <if test="!isEmptyHokensyaNo">
+            AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
         GROUP BY
         G."shichosonCode"
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , a."nijiHanteiNinteiYukoKikan"
         UNION ALL
-        (SELECT G."shichosonCode"
-        , 0 AS shinseiKubun
-        , 3 AS yukoKikan
+        SELECT
+        G."shichosonCode"
+        , 3 AS shinseiKubun -- 3:転入申請
+        , a."nijiHanteiNinteiYukoKikan"  AS yukoKikan
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '1'
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , COUNT(*) AS countHihokenshaNo
+        FROM
+        rgdb."DbT4102NinteiKekkaJoho" as a
+        INNER Join rgdb."DbT5101NinteiShinseiJoho" as b USING ("shinseishoKanriNo")
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" G ON b."shoKisaiHokenshaNo" = G."shoKisaiHokenshaNo"
+        WHERE
+        a."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{kijyunYMD}
+        AND #{kijyunYMD} <![CDATA[<]]> a."nijiHanteiNinteiYukoShuryoYMD"
+        AND b."ninteiShinseiShinseijiKubunCode" = '5'
+        <if test="!isEmptyHokensyaNo">
+            AND b."shoKisaiHokenshaNo" = #{hokensyaNo}
         </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '1'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '1'
-            OR B."ninteiShinseiHoreiKubunCode" = '1')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
         GROUP BY
         G."shichosonCode"
         , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 0 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 1 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 2 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 1 AS shinseiKubun
-        , 3 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '2'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '2'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '2'
-            OR B."ninteiShinseiHoreiKubunCode" = '2')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 0 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 1 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 2 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 2 AS shinseiKubun
-        , 3 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '3'
-        </if>
-        <if test="isHorei">
-            AND B."ninteiShinseiHoreiKubunCode" = '3'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND (B."ninteiShinseiShinseijiKubunCode" = '3'
-            OR B."ninteiShinseiHoreiKubunCode" = '3')
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 0 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 6
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 1 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 12
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 2 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" = 24
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")
-        UNION ALL
-        (SELECT G."shichosonCode"
-        , 3 AS shinseiKubun
-        , 3 AS yukoKikan
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        , COUNT(B."hihokenshaNo") AS countHihokenshaNo
-        FROM rgdb."DbT5102NinteiKekkaJoho" A
-        <include refid="kensakuJyokenKyotsu_ShinsakaiShukeiGenzainojokyo"/>
-        <if test="isShinseiji">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        <if test="!isShinseiji and !isHorei">
-            AND B."ninteiShinseiShinseijiKubunCode" = '5'
-        </if>
-        AND A."nijiHanteiNinteiYukoKikan" NOT IN (6, 12, 24)
-        GROUP BY
-        G."shichosonCode"
-        , G."shichosonMeisho"
-        , A."nijiHanteiYokaigoJotaiKubunCode"
-        ORDER BY
-        G."shichosonCode"
-        , A."nijiHanteiYokaigoJotaiKubunCode")) ShinsakaiShukeiGenzainojokyo
+        , a."nijiHanteiYokaigoJotaiKubunCode"
+        , a."nijiHanteiNinteiYukoKikan"
         ORDER BY
         "shichosonCode"
         , shinseiKubun
@@ -2568,7 +2196,7 @@
             resultMap="hokokushiryosakusei_CsvKenHokokuShiryoSakusei"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiMyBatisParameter"
             fetchSize="500">
-        SELECT E."ichijiHanteiKekkaCode"
+        SELECT E."ichijiHanteiKekkaNinchishoKasanCode" AS ichijiHanteiKekkaCode
         , D."nijiHanteiYokaigoJotaiKubunCode"
         , COUNT(C."hihokenshaNo") AS hihokenshaCount
         FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" A
@@ -2600,7 +2228,6 @@
         </choose>
         AND #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
         AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
-        AND H."shichosonCode" = #{shichosonCode}
         AND F."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND F."ninteichosaKanryoYMD" IS NOT NULL
         AND F."ikenshoTorokuKanryoYMD" IS NOT NULL
@@ -2642,10 +2269,10 @@
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
         GROUP BY
-        E."ichijiHanteiKekkaCode"
+        E."ichijiHanteiKekkaNinchishoKasanCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
         ORDER BY
-        E."ichijiHanteiKekkaCode"
+        E."ichijiHanteiKekkaNinchishoKasanCode"
         , D."nijiHanteiYokaigoJotaiKubunCode"
     </select>
 
@@ -2767,6 +2394,7 @@
         <result property="countHihokenshaNo" column="countHihokenshaNo" />
     </resultMap>
 
+    <!-- getShinsakaiShukeihyoShinseiBetsu でのみ利用する共通の検索条件です。 -->
     <sql id="kensakuJyokenKyotsu">
         <if test="!isEmptyHokensyaNo">
             AND A."shoKisaiHokenshaNo" = #{hokensyaNo}
@@ -2793,15 +2421,6 @@
             <when test='"6".equals(hihokenshaKubun.toString())'>
                 AND A."hihokenshaKubunCode" IN ('2', '9')
             </when>
-        </choose>
-        <choose>
-            <when test="!isEmptyGogitaiNo">
-                AND E."gogitaiNo" = #{gogitaiNo}
-            </when>
-            <otherwise>
-                AND E."gogitaiNo" IN
-                <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
-            </otherwise>
         </choose>
     </sql>
 

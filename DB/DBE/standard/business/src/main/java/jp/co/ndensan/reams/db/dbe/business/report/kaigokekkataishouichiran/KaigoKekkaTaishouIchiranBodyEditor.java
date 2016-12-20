@@ -48,7 +48,7 @@ class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEdi
         source.listKekkatsuchi_1 = index;
         source.listKekkatsuchi_2 = item.getListKekkatsuchi_2();
         RStringBuilder listKekkatsuchi_3 = new RStringBuilder();
-        listKekkatsuchi_3.append((new RDate(item.getListKekkatsuchi_3().toString()).wareki()).eraType(EraType.ALPHABET).
+        listKekkatsuchi_3.append((new RDate(item.getListKekkatsuchi_3().toString()).wareki()).eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
                 fillType(FillType.ZERO).toDateString());
@@ -61,7 +61,7 @@ class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEdi
         source.listKekkatsuchi_6 = item.getListKekkatsuchi_6();
         source.listKekkatsuchi_7 = item.getListKekkatsuchi_7();
         RStringBuilder listKekkatsuchi_8 = new RStringBuilder();
-        listKekkatsuchi_8.append((new RDate(item.getListKekkatsuchi_8().toString()).wareki()).eraType(EraType.ALPHABET).
+        listKekkatsuchi_8.append((new RDate(item.getListKekkatsuchi_8().toString()).wareki()).eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
                 fillType(FillType.ZERO).toDateString());

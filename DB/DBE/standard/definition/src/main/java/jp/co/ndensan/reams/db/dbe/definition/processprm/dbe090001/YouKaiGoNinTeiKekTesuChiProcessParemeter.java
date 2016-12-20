@@ -30,6 +30,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
     private RString shishoCode;
     private RString ninteiJohoTeikyoYMD;
     private RString shichosonCode;
+    private boolean useShoKisaiHokenshaNo;
 
     /**
      * コンストラクタ作成です。
@@ -43,6 +44,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
      * @param shishoCode 支所コード
      * @param ninteiJohoTeikyoYMD 認定情報提供年月日
      * @param shichosonCode 市町村コード
+     * @param useShoKisaiHokenshaNo useShoKisaiHokenshaNo
      */
     public YouKaiGoNinTeiKekTesuChiProcessParemeter(RString nijiHanteiYMDFrom,
             RString nijiHanteiYMDTo,
@@ -52,7 +54,8 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
             RString shoKisaiHokenshaNo,
             RString shishoCode,
             RString ninteiJohoTeikyoYMD,
-            RString shichosonCode) {
+            RString shichosonCode,
+            boolean useShoKisaiHokenshaNo) {
         this.nijiHanteiYMDFrom = nijiHanteiYMDFrom;
         this.nijiHanteiYMDTo = nijiHanteiYMDTo;
         this.maDaNyuRyoKu = maDaNyuRyoKu;
@@ -62,6 +65,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
         this.shishoCode = shishoCode;
         this.ninteiJohoTeikyoYMD = ninteiJohoTeikyoYMD;
         this.shichosonCode = shichosonCode;
+        this.useShoKisaiHokenshaNo = useShoKisaiHokenshaNo;
     }
 
     /**
@@ -77,6 +81,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
                 shinseishoKanriNo,
                 shoKisaiHokenshaNo,
                 shishoCode,
-                ninteiJohoTeikyoYMD);
+                ninteiJohoTeikyoYMD,
+                useShoKisaiHokenshaNo);
     }
 }

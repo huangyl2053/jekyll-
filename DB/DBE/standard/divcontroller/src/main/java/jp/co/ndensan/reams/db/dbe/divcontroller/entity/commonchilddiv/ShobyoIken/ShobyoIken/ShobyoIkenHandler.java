@@ -63,8 +63,8 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-        
-        if (意見書情報 != null) { 
+
+        if (意見書情報 != null) {
             if (!意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                     getShujiiIkenshoJohoList().isEmpty()) {
                 ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 意見書情報.
@@ -366,19 +366,22 @@ public class ShobyoIkenHandler {
         if (!div.getTxtShindanName1().getValue().equals(div.getName1())) {
             return true;
         }
-        if (div.getTxtShindanYMD1().getValue() != null && !div.getTxtShindanYMD1().getValue().toDateString().equals(div.getYMD1())) {
+        if ((div.getTxtShindanYMD1().getValue() == null && !RString.isNullOrEmpty(div.getYMD1()))
+                || (div.getTxtShindanYMD1().getValue() != null && !div.getTxtShindanYMD1().getValue().toDateString().equals(div.getYMD1()))) {
             return true;
         }
         if (!div.getTxtShindanName2().getValue().equals(div.getName2())) {
             return true;
         }
-        if (div.getTxtShindanYMD2().getValue() != null && !div.getTxtShindanYMD2().getValue().toDateString().equals(div.getYMD2())) {
+        if ((div.getTxtShindanYMD2().getValue() == null && !RString.isNullOrEmpty(div.getYMD2()))
+                || (div.getTxtShindanYMD2().getValue() != null && !div.getTxtShindanYMD2().getValue().toDateString().equals(div.getYMD2()))) {
             return true;
         }
         if (!div.getTxtShindanName().getValue().equals(div.getName3())) {
             return true;
         }
-        if (div.getTxtShindanYMD3().getValue() != null && !div.getTxtShindanYMD3().getValue().toDateString().equals(div.getYMD3())) {
+        if ((div.getTxtShindanYMD3().getValue() == null && !RString.isNullOrEmpty(div.getYMD3()))
+                || (div.getTxtShindanYMD3().getValue() != null && !div.getTxtShindanYMD3().getValue().toDateString().equals(div.getYMD3()))) {
             return true;
         }
         List<dgGenyin_Row> rowlist = div.getDgGenyin().getDataSource();
@@ -403,7 +406,7 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 主治医意見書登録_意見書情報 = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-        
+
         if (主治医意見書登録_意見書情報 != null) {
             if (!主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                     getShujiiIkenshoJohoList().isEmpty()) {
@@ -443,14 +446,20 @@ public class ShobyoIkenHandler {
         要介護認定主治医builder.set意見書_診断名1(div.getTxtShindanName1().getValue());
         if (div.getTxtShindanYMD1().getValue() != null) {
             要介護認定主治医builder.set意見書_発症年月日1(div.getTxtShindanYMD1().getValue().toDateString());
+        } else {
+            要介護認定主治医builder.set意見書_発症年月日1(RString.EMPTY);
         }
         要介護認定主治医builder.set意見書_診断名2(div.getTxtShindanName2().getValue());
         if (div.getTxtShindanYMD2().getValue() != null) {
             要介護認定主治医builder.set意見書_発症年月日2(div.getTxtShindanYMD2().getValue().toDateString());
+        } else {
+            要介護認定主治医builder.set意見書_発症年月日2(RString.EMPTY);
         }
         要介護認定主治医builder.set意見書_診断名3(div.getTxtShindanName().getValue());
         if (div.getTxtShindanYMD3().getValue() != null) {
             要介護認定主治医builder.set意見書_発症年月日3(div.getTxtShindanYMD3().getValue().toDateString());
+        } else {
+            要介護認定主治医builder.set意見書_発症年月日3(RString.EMPTY);
         }
         要介護認定主治医builder.set意見書_症状としての安定性(div.getRadShojoAnteisei().getSelectedKey());
         要介護認定主治医builder.set意見書_症状としての安定性_不安定状況(div.getTxtFuanteiShosaiJokyo().getValue());

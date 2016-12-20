@@ -7,14 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6040001
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601006.DBE601006_ShinsakaiiinHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsahoshuichiran.ShinsaHoshuIchiranMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.DBE6040001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.ShinsakauIinHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6040001.ShinsakauIinHoshuShokaiHandler;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6040001.ShinsakauIinHoshuShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsahoshushokai.ShinsakauIinHoshuShokaiFindler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 審査会委員報酬照会の画面処理クラスです。
@@ -30,11 +28,10 @@ public class ShinsakauIinHoshuShokai {
      * 画面の初期化です。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakauIinHoshuShokaiDiv>
+     * @return ResponseData&lt;ShinsakauIinHoshuShokaiDiv&gt;
      */
     public ResponseData<ShinsakauIinHoshuShokaiDiv> onLoad(ShinsakauIinHoshuShokaiDiv div) {
-        div.getTxtShinsakaiKaisaiYM().clearValue();
-        getHandler(div).set初期状態();
+        div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().clearValue();
         return ResponseData.of(div).respond();
     }
 
@@ -42,44 +39,35 @@ public class ShinsakauIinHoshuShokai {
      * 「条件に戻る」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakauIinHoshuShokaiDiv>
+     * @return ResponseData&lt;ShinsakauIinHoshuShokaiDiv&gt;
      */
     public ResponseData<ShinsakauIinHoshuShokaiDiv> onClick_btnBackToKensaku(ShinsakauIinHoshuShokaiDiv div) {
-        this.getHandler(div).set初期状態();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6040001StateName.検索条件入力);
     }
 
     /**
      * 「検索する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakauIinHoshuShokaiDiv>
+     * @return ResponseData&lt;ShinsakauIinHoshuShokaiDiv&gt;
      */
     public ResponseData<ShinsakauIinHoshuShokaiDiv> onClick_BtnKensaku(ShinsakauIinHoshuShokaiDiv div) {
-
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateFor必須引数();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-
         ShinsaHoshuIchiranMybitisParamter paramter = ShinsaHoshuIchiranMybitisParamter.createParamter(
-                new RString(div.getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
+                new RString(div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
 
         getHandler(div).onClick_BtnKensaku(ShinsakauIinHoshuShokaiFindler.createInstance().get審査会委員報酬照会(paramter).records());
-        getHandler(div).set一覧状態();
 
         if (div.getDgShinsakaiIinHoshu().getDataSource().isEmpty()) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
+            return ResponseData.of(div).setState(DBE6040001StateName.一覧表示結果無し);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6040001StateName.一覧表示);
     }
 
     /**
      * 「CSVを出力する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsaHoshuIchiranBatchParameter>
+     * @return ResponseDatalt;ShinsaHoshuIchiranBatchParameter&gt;
      */
     public ResponseData<DBE601006_ShinsakaiiinHoshuParameter> onClick_BtnShutsutyoku(ShinsakauIinHoshuShokaiDiv div) {
         DBE601006_ShinsakaiiinHoshuParameter paramter = getHandler(div).createBatchParam(CSVを出力する);
@@ -90,7 +78,7 @@ public class ShinsakauIinHoshuShokai {
      * 「集計表を発行する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsaHoshuIchiranBatchParameter>
+     * @return ResponseDatalt;ShinsaHoshuIchiranBatchParameter&gt;
      */
     public ResponseData<DBE601006_ShinsakaiiinHoshuParameter> onClick_BtnPulish(ShinsakauIinHoshuShokaiDiv div) {
         DBE601006_ShinsakaiiinHoshuParameter paramter = getHandler(div).createBatchParam(一覧表を発行する);
@@ -105,15 +93,5 @@ public class ShinsakauIinHoshuShokai {
      */
     private ShinsakauIinHoshuShokaiHandler getHandler(ShinsakauIinHoshuShokaiDiv div) {
         return new ShinsakauIinHoshuShokaiHandler(div);
-    }
-
-    /**
-     * ShinsakauIinHoshuShokaiValidationHandlerrの取得する。
-     *
-     * @param div
-     * @return ShinsakauIinHoshuShokaiValidationHandler
-     */
-    private ShinsakauIinHoshuShokaiValidationHandler getValidationHandler(ShinsakauIinHoshuShokaiDiv div) {
-        return new ShinsakauIinHoshuShokaiValidationHandler(div);
     }
 }
