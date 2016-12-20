@@ -8,12 +8,12 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnConfirm(): string {
-                return "onClick_btnConfirm";
-            }
-
             public static onClick_btnBack(): string {
                 return "onClick_btnBack";
+            }
+
+            public static onClick_btnConfirm(): string {
+                return "onClick_btnConfirm";
             }
 
         }
@@ -193,12 +193,12 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radHindo"));
             }
 
-            public btnConfirm(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            }
-
             public btnBack(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            }
+
+            public btnConfirm(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             }
 
         }

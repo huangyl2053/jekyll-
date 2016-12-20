@@ -4,11 +4,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -20,15 +17,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaKekkaNyushuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("NinteichosaIraiList")
-    private NinteichosaIraiListDiv NinteichosaIraiList;
+    @JsonProperty("ninteichosakekkainput")
+    private ninteichosakekkainputDiv ninteichosakekkainput;
+    @JsonProperty("btnchosakekkaoutput")
+    private ButtonDownLoad btnchosakekkaoutput;
+    @JsonProperty("btncyosakekkainput")
+    private Button btncyosakekkainput;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
 
@@ -39,21 +40,57 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getNinteichosaIraiList
-     * @return NinteichosaIraiList
+     * getninteichosakekkainput
+     * @return ninteichosakekkainput
      */
-    @JsonProperty("NinteichosaIraiList")
-    public NinteichosaIraiListDiv getNinteichosaIraiList() {
-        return NinteichosaIraiList;
+    @JsonProperty("ninteichosakekkainput")
+    public ninteichosakekkainputDiv getNinteichosakekkainput() {
+        return ninteichosakekkainput;
     }
 
     /*
-     * setNinteichosaIraiList
-     * @param NinteichosaIraiList NinteichosaIraiList
+     * setninteichosakekkainput
+     * @param ninteichosakekkainput ninteichosakekkainput
      */
-    @JsonProperty("NinteichosaIraiList")
-    public void setNinteichosaIraiList(NinteichosaIraiListDiv NinteichosaIraiList) {
-        this.NinteichosaIraiList = NinteichosaIraiList;
+    @JsonProperty("ninteichosakekkainput")
+    public void setNinteichosakekkainput(ninteichosakekkainputDiv ninteichosakekkainput) {
+        this.ninteichosakekkainput = ninteichosakekkainput;
+    }
+
+    /*
+     * getbtnchosakekkaoutput
+     * @return btnchosakekkaoutput
+     */
+    @JsonProperty("btnchosakekkaoutput")
+    public ButtonDownLoad getBtnchosakekkaoutput() {
+        return btnchosakekkaoutput;
+    }
+
+    /*
+     * setbtnchosakekkaoutput
+     * @param btnchosakekkaoutput btnchosakekkaoutput
+     */
+    @JsonProperty("btnchosakekkaoutput")
+    public void setBtnchosakekkaoutput(ButtonDownLoad btnchosakekkaoutput) {
+        this.btnchosakekkaoutput = btnchosakekkaoutput;
+    }
+
+    /*
+     * getbtncyosakekkainput
+     * @return btncyosakekkainput
+     */
+    @JsonProperty("btncyosakekkainput")
+    public Button getBtncyosakekkainput() {
+        return btncyosakekkainput;
+    }
+
+    /*
+     * setbtncyosakekkainput
+     * @param btncyosakekkainput btncyosakekkainput
+     */
+    @JsonProperty("btncyosakekkainput")
+    public void setBtncyosakekkainput(Button btncyosakekkainput) {
+        this.btncyosakekkainput = btncyosakekkainput;
     }
 
     /*
@@ -78,48 +115,53 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ninteichosakekkainputDiv getNinteichosakekkainput() {
-        return this.getNinteichosaIraiList().getNinteichosakekkainput();
+    public RadioButton getRadJotaiKubun() {
+        return this.getNinteichosakekkainput().getRadJotaiKubun();
     }
 
     @JsonIgnore
-    public void  setNinteichosakekkainput(ninteichosakekkainputDiv ninteichosakekkainput) {
-        this.getNinteichosaIraiList().setNinteichosakekkainput(ninteichosakekkainput);
+    public void  setRadJotaiKubun(RadioButton radJotaiKubun) {
+        this.getNinteichosakekkainput().setRadJotaiKubun(radJotaiKubun);
     }
 
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdTaskList() {
-        return this.getNinteichosaIraiList().getNinteichosakekkainput().getCcdTaskList();
+    public TextBoxNum getTxtMishori() {
+        return this.getNinteichosakekkainput().getTxtMishori();
     }
 
     @JsonIgnore
-    public chosakekkaselectDiv getChosakekkaselect() {
-        return this.getNinteichosaIraiList().getChosakekkaselect();
+    public void  setTxtMishori(TextBoxNum txtMishori) {
+        this.getNinteichosakekkainput().setTxtMishori(txtMishori);
     }
 
     @JsonIgnore
-    public void  setChosakekkaselect(chosakekkaselectDiv chosakekkaselect) {
-        this.getNinteichosaIraiList().setChosakekkaselect(chosakekkaselect);
+    public TextBoxNum getTxtKanryoKano() {
+        return this.getNinteichosakekkainput().getTxtKanryoKano();
     }
 
     @JsonIgnore
-    public ButtonDownLoad getBtnchosakekkaoutput() {
-        return this.getNinteichosaIraiList().getChosakekkaselect().getBtnchosakekkaoutput();
+    public void  setTxtKanryoKano(TextBoxNum txtKanryoKano) {
+        this.getNinteichosakekkainput().setTxtKanryoKano(txtKanryoKano);
     }
 
     @JsonIgnore
-    public void  setBtnchosakekkaoutput(ButtonDownLoad btnchosakekkaoutput) {
-        this.getNinteichosaIraiList().getChosakekkaselect().setBtnchosakekkaoutput(btnchosakekkaoutput);
+    public TextBoxNum getTxtGokei() {
+        return this.getNinteichosakekkainput().getTxtGokei();
     }
 
     @JsonIgnore
-    public Button getBtncyosakekkainput() {
-        return this.getNinteichosaIraiList().getChosakekkaselect().getBtncyosakekkainput();
+    public void  setTxtGokei(TextBoxNum txtGokei) {
+        this.getNinteichosakekkainput().setTxtGokei(txtGokei);
     }
 
     @JsonIgnore
-    public void  setBtncyosakekkainput(Button btncyosakekkainput) {
-        this.getNinteichosaIraiList().getChosakekkaselect().setBtncyosakekkainput(btncyosakekkainput);
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getNinteichosakekkainput().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getNinteichosakekkainput().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore

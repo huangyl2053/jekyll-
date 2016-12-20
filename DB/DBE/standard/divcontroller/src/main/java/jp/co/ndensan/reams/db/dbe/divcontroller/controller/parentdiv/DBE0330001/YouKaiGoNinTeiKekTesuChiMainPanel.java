@@ -22,12 +22,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -89,6 +88,9 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnSearch(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPairs = getHandler(div).二次判定期間の前後順チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -112,7 +114,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
                                 div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode(),
                                 div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode(), false, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         getHandler(div).edit主治医選択一覧情報(youKaiGoNinTeiKekTesuChi);
         return ResponseData.of(div).setState(DBE0330001StateName.主治医選択一覧);
@@ -125,6 +127,9 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_SelectByButton(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         boolean 希望のみFlag = false;
         if (希望のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
             希望のみFlag = true;
@@ -145,7 +150,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
                                 dateTo,
                                 主治医医療機関コード, 主治医コード, false, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         getHandler(div).edit結果通知出力対象申請者一覧情報(youKaiGoNinTeiKekTesuChi);
         return ResponseData.of(div).setState(DBE0330001StateName.一覧);
@@ -170,7 +175,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
             div.getPrintPanel().getRadPrintCondition().setSelectedIndex(0);
             return ResponseData.of(div).setState(DBE0330001StateName.照会);
         }
-        if(ResponseHolder.getState().equals(DBE0330001StateName.主治医選択一覧.getName())) {
+        if (ResponseHolder.getState().equals(DBE0330001StateName.主治医選択一覧.getName())) {
             return ResponseData.of(div).setState(DBE0330001StateName.照会);
         }
         return ResponseData.of(div).respond();

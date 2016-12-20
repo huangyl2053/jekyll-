@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tbShinsakaiIinBetuTankaDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -94,6 +94,26 @@ public class tbShinsakaiIinBetuTankaDiv extends TabPanel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public TextBoxCode getTxtShinsaIinKodo() {
+        return this.getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinKodo();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsaIinKodo(TextBoxCode txtShinsaIinKodo) {
+        this.getShinsakaiIinBetuTankaMeisai().setTxtShinsaIinKodo(txtShinsaIinKodo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShinsaIinName() {
+        return this.getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinName();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsaIinName(TextBox txtShinsaIinName) {
+        this.getShinsakaiIinBetuTankaMeisai().setTxtShinsaIinName(txtShinsaIinName);
+    }
+
+    @JsonIgnore
     public TextBoxFlexibleYearMonth getTxtBetuKaishiYM() {
         return this.getShinsakaiIinBetuTankaMeisai().getTxtBetuKaishiYM();
     }
@@ -111,16 +131,6 @@ public class tbShinsakaiIinBetuTankaDiv extends TabPanel {
     @JsonIgnore
     public void  setTxtBetuShuryoYM(TextBoxFlexibleYearMonth txtBetuShuryoYM) {
         this.getShinsakaiIinBetuTankaMeisai().setTxtBetuShuryoYM(txtBetuShuryoYM);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShinsaIinKodo() {
-        return this.getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinKodo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShinsaIinKodo(TextBox txtShinsaIinKodo) {
-        this.getShinsakaiIinBetuTankaMeisai().setTxtShinsaIinKodo(txtShinsaIinKodo);
     }
 
     @JsonIgnore

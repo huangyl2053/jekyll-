@@ -111,10 +111,11 @@
                                                 WHERE dbT5503."shinsakaiKaisaiYMD" = #{kaisaiYMD}
                                                 AND dbT5503."shinsakaiKaisaiNo" <![CDATA[<>]]> #{kaisaiNo}
                                                 )
+        AND dbT5594."haishiFlag" = false
     </select>
     <select resultOrdered="true" id="get審査会委員情報By開催年月日" resultMap="resultMap_getShinsakaiiinJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
-        SELECT
+        SELECT DISTINCT ON("shinsakaiIinCode", "shinsakaiIinShimei")
             dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
             ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
             ,CASE WHEN  dbT5595."shujiiIryokikanCode" IS NOT NULL THEN
@@ -158,5 +159,8 @@
                                                 FROM rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
                                                 WHERE dbT5503."shinsakaiKaisaiYMD" = #{kaisaiYMD}
                                                 )
+        AND dbT5594."haishiFlag" = false
+        AND "shinsakaiIinShuryoYMD" >= #{kaisaiYMD}
+        ORDER BY "shinsakaiIinCode"
     </select>
 </mapper>

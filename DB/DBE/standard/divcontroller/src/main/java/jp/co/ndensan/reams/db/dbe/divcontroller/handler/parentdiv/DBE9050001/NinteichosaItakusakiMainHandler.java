@@ -172,7 +172,7 @@ public class NinteichosaItakusakiMainHandler {
         } else {
             div.getSonotaKikanichiran().getBtnOutputCsv().setVisible(true);
         }
-        
+
         div.getSonotaKikanichiran().getDgSonotaKikanIchiran().setDataSource(dataGridList);
     }
 
@@ -416,6 +416,11 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().clearDisplayedValues();
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setSelectedIndex(0);
         div.getChosaitakusakiJohoInput().getRadHaishiFlag().setSelectedKey(CODE_有効);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
     }
 
     /**
@@ -435,6 +440,7 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().setDisabled(true);
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDisabled(true);
         div.getChosaitakusakiJohoInput().getRadHaishiFlag().setDisabled(true);
+        div.getChosaitakusakiJohoInput().getKozaJoho().setDisabled(true);
     }
 
     /**
@@ -454,6 +460,7 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().setDisabled(false);
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDisabled(false);
         div.getChosaitakusakiJohoInput().getRadHaishiFlag().setDisabled(false);
+        div.getChosaitakusakiJohoInput().getKozaJoho().setDisabled(false);
     }
 
     /**

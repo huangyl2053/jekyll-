@@ -15,19 +15,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ChosainhoshuTankaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ddlKaigoNinteiShinsaIinShubetsu")
+    private DropDownList ddlKaigoNinteiShinsaIinShubetsu;
     @JsonProperty("txtChoKaishiYM")
     private TextBoxFlexibleYearMonth txtChoKaishiYM;
     @JsonProperty("txtChoShuryoYM")
     private TextBoxFlexibleYearMonth txtChoShuryoYM;
-    @JsonProperty("ddlKaigoNinteiShinsaIinShubetsu")
-    private DropDownList ddlKaigoNinteiShinsaIinShubetsu;
     @JsonProperty("txtChoTanka")
     private TextBoxNum txtChoTanka;
     @JsonProperty("btnChoKousin")
@@ -41,6 +41,24 @@ public class ChosainhoshuTankaNyuryokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getddlKaigoNinteiShinsaIinShubetsu
+     * @return ddlKaigoNinteiShinsaIinShubetsu
+     */
+    @JsonProperty("ddlKaigoNinteiShinsaIinShubetsu")
+    public DropDownList getDdlKaigoNinteiShinsaIinShubetsu() {
+        return ddlKaigoNinteiShinsaIinShubetsu;
+    }
+
+    /*
+     * setddlKaigoNinteiShinsaIinShubetsu
+     * @param ddlKaigoNinteiShinsaIinShubetsu ddlKaigoNinteiShinsaIinShubetsu
+     */
+    @JsonProperty("ddlKaigoNinteiShinsaIinShubetsu")
+    public void setDdlKaigoNinteiShinsaIinShubetsu(DropDownList ddlKaigoNinteiShinsaIinShubetsu) {
+        this.ddlKaigoNinteiShinsaIinShubetsu = ddlKaigoNinteiShinsaIinShubetsu;
+    }
+
     /*
      * gettxtChoKaishiYM
      * @return txtChoKaishiYM
@@ -75,24 +93,6 @@ public class ChosainhoshuTankaNyuryokuDiv extends Panel {
     @JsonProperty("txtChoShuryoYM")
     public void setTxtChoShuryoYM(TextBoxFlexibleYearMonth txtChoShuryoYM) {
         this.txtChoShuryoYM = txtChoShuryoYM;
-    }
-
-    /*
-     * getddlKaigoNinteiShinsaIinShubetsu
-     * @return ddlKaigoNinteiShinsaIinShubetsu
-     */
-    @JsonProperty("ddlKaigoNinteiShinsaIinShubetsu")
-    public DropDownList getDdlKaigoNinteiShinsaIinShubetsu() {
-        return ddlKaigoNinteiShinsaIinShubetsu;
-    }
-
-    /*
-     * setddlKaigoNinteiShinsaIinShubetsu
-     * @param ddlKaigoNinteiShinsaIinShubetsu ddlKaigoNinteiShinsaIinShubetsu
-     */
-    @JsonProperty("ddlKaigoNinteiShinsaIinShubetsu")
-    public void setDdlKaigoNinteiShinsaIinShubetsu(DropDownList ddlKaigoNinteiShinsaIinShubetsu) {
-        this.ddlKaigoNinteiShinsaIinShubetsu = ddlKaigoNinteiShinsaIinShubetsu;
     }
 
     /*

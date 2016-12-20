@@ -25,6 +25,7 @@ class ChosaIraiHakkoIchiranhyoHeaderEditor implements IChosaIraiHakkoIchiranhyoE
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 作成 = new RString("作成");
     private static final RString BUNKATSU = new RString("～");
     private static final RString 依頼日 = new RString("調査依頼日");
     private static final RString 調査員 = new RString("調査員登録者のみ");
@@ -62,6 +63,8 @@ class ChosaIraiHakkoIchiranhyoHeaderEditor implements IChosaIraiHakkoIchiranhyoE
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(作成);
         source.printTimeStamp = printTimeStampSb.toRString();
         source.joken0 = 依頼日;
         RStringBuilder nichi = new RStringBuilder();

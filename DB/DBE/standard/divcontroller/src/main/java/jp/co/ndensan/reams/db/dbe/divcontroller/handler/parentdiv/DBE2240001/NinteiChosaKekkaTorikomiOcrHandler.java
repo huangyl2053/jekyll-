@@ -7,31 +7,35 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk99A;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiChosaKekkaTorikomiOcrDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiTorokuData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.dgTorikomiKekka_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 認定調査結果取込み（OCR）のコントローラクラスです。
@@ -42,9 +46,10 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
 
     private static final RString 空白 = RString.EMPTY;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString チェックNG = new RString("NG");
     private static final RString ファイル名 = new RString("OCRCHOSA.CSV");
-    private final NinteiChosaKekkaTorikomiOcrDiv div;
+    private final NinteiChosaOCRTorikomiDiv div;
+    private static final int DAY_COUNT_一週間 = 7;
+    private static final RString イメージ取込み = new RString("イメージ取込み");
     private List<RString> サービスの状況_99A;
     private List<RString> サービスの状況_02A;
     private List<RString> サービスの状況_06A;
@@ -56,8 +61,43 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
      *
      * @param div 画面情報
      */
-    public NinteiChosaKekkaTorikomiOcrHandler(NinteiChosaKekkaTorikomiOcrDiv div) {
+    public NinteiChosaKekkaTorikomiOcrHandler(NinteiChosaOCRTorikomiDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 画面に表示するサーバファイルパスを取得し、テキストボックスにセットします。
+     */
+    public void setサーバファイルパス() {
+        RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        div.getTxtTorikomiPath().setValue(imagePath);
+    }
+
+    /**
+     * コンフィグで指定されたフォルダに存在するファイルを共有ファイルにアップロードする。<br />
+     * アップロードされた共有ファイルのエントリ情報は hdnSharedFileEntryInfo に文字列としてセットされる。
+     *
+     */
+    public void upload() {
+        SharedFileDescriptor sfd = new SharedFileDescriptor(
+                GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み));
+        sfd = SharedFile.defineSharedFile(sfd);
+
+        CopyToSharedFileOpts opts
+                = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間));
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(
+                sfd, new FilesystemPath(div.getTxtTorikomiPath().getValue()), opts);
+        this.div.setHdnSharedFileEntryInfo(new RString(entry.toString()));
+    }
+
+    /**
+     * 画面情報としてセットされている項目を元に、バッチパラメータとして生成する。
+     *
+     * @return バッチパラメータ
+     */
+    public DBE250001_NinteiChoshaKekkaTorikomiParameter setバッチパラメータ() {
+        return new DBE250001_NinteiChoshaKekkaTorikomiParameter(div.getHdnSharedFileEntryInfo());
     }
 
     /**
@@ -67,35 +107,6 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
      */
     public List<NinteiTorokuData> onClick_BtnChosahyoTorikomi() {
         return getCSVファイル();
-    }
-
-    /**
-     * 画面一覧を設定します。
-     *
-     * @param dB更新用 dB更新用
-     */
-    public void set画面一覧(List<NinteiTorokuData> dB更新用) {
-        int 連番 = 0;
-        int エラー件数 = 0;
-        List<dgTorikomiKekka_Row> rowList = new ArrayList<>();
-        for (NinteiTorokuData data : dB更新用) {
-            連番++;
-            dgTorikomiKekka_Row row = new dgTorikomiKekka_Row(new RString(連番),
-                    data.getOK_NG(),
-                    data.get保険者(),
-                    data.get被保険者番号(),
-                    dateFormat(data.get申請日()),
-                    NinteiShinseiShinseijiKubunCode.toValue(data.get申請区分()).get名称(),
-                    dateFormat(data.get実施日時()),
-                    FlexibleDate.getNowDate().wareki().toDateString(),
-                    data.get証記載保険者番号());
-            rowList.add(row);
-            if (チェックNG.equals(data.getOK_NG())) {
-                エラー件数++;
-            }
-        }
-        div.getTxtError().setValue(new Decimal(エラー件数));
-        div.getDgTorikomiKekka().setDataSource(rowList);
     }
 
     /**
@@ -1431,4 +1442,5 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
         data.set番号(csvData.get番号());
         return data;
     }
+
 }

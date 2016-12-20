@@ -120,9 +120,12 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onLoad(NinteichosaIraiDiv requestDiv) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(requestDiv).respond();
+        }
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             requestDiv.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         getHandler(requestDiv).onLoad();
         return ResponseData.of(requestDiv).respond();
@@ -170,7 +173,7 @@ public class NinteichosaIrai {
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
                                                        = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-            setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+            setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
@@ -218,7 +221,7 @@ public class NinteichosaIrai {
                     DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().evaluate())).respond();
             } else {
                 RealInitialLocker.release(前排他ロックキー);
-                getHandler(requestDiv).onLoad();
+                getHandler(requestDiv).initDataGrid();
                 return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
             }
         }
@@ -226,7 +229,7 @@ public class NinteichosaIrai {
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RealInitialLocker.release(前排他ロックキー);
-            getHandler(requestDiv).onLoad();
+            getHandler(requestDiv).initDataGrid();
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
         }
         return ResponseData.of(requestDiv).respond();
@@ -358,7 +361,7 @@ public class NinteichosaIrai {
             NinteichosaIraiManager.createInstance().update認定調査依頼情報(申請書管理番号.value());
         }
         RealInitialLocker.release(前排他ロックキー);
-        getHandler(requestDiv).onLoad();
+        getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
@@ -399,6 +402,11 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
+        if (!ResponseHolder.isReRequest()) {
+            Message message = UrQuestionMessages.処理実行の確認.getMessage();
+            return ResponseData.of(requestDiv).addMessage(
+                new QuestionMessage(message.getCode(), message.evaluate(), ButtonSelectPattern.OKCancel)).respond();
+        }
         List<dgNinteiTaskList_Row> rowList = requestDiv.getDgNinteiTaskList().getSelectedItems();
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
         List<ShinseishoKanriNo> list = new ArrayList<>();
@@ -421,6 +429,10 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onOkClose_btnIraishoToOutput(NinteichosaIraiDiv requestDiv) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).check最大表示件数();
+        if (vallidation.existsError()) {
+            requestDiv.getTxtMaxCount().setValue(requestDiv.getMaxCount());
+        }
         getHandler(requestDiv).initDataGrid();
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(requestDiv.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (model != null) {
@@ -473,6 +485,17 @@ public class NinteichosaIrai {
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.完了);
         }
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
+     * 最大表示件数テキストボックスの値が変更された際の動作です。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_txtMaxCount(NinteichosaIraiDiv requestDiv) {
+        getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).respond();
     }
 

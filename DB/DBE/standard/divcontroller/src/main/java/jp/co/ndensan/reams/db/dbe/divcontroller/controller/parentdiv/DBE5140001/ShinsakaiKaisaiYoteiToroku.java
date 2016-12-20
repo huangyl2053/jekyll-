@@ -35,8 +35,11 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.HolidayAccessor;
 import jp.co.ndensan.reams.uz.uza.lang.HolidayCategory;
@@ -85,7 +88,6 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString MARU = new RString("○○");
     private static final RString BATU = new RString("×");
     private static final RString 審査会名称 = new RString("第○○回　合×");
-    private static final RString 汎用キー = new RString("審査会開催番号");
     private static final RString NENNDO = new RString("年");
     private static final RString GETSU = new RString("月");
     private static final RString 分割 = new RString("-");
@@ -634,10 +636,12 @@ public class ShinsakaiKaisaiYoteiToroku {
                     return entity1.get日付().compareTo(entity2.get日付());
                 }
             });
+            RString 汎用キー = new RString("審査会開催番号");
+            FlexibleYear 年度 = new FlexibleYear(div.getLblMonth().getText().substring(INDEX_0, INDEX_4));
             for (ShinsakaiKaisaiYoteiJohoParameter entity : shinkiList) {
-                RString 開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー).nextString();
+                RString 開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
                 if (Integer.parseInt(開催番号.toString()) == INDEX_0) {
-                    開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー).nextString();
+                    開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
                 }
                 RString 合議体番号 = new RString(entity.get合議体番号());
                 entity.set開催番号(開催番号);
@@ -678,6 +682,16 @@ public class ShinsakaiKaisaiYoteiToroku {
 
     private RString setLblMonth(FlexibleYearMonth month) {
         return month.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+    }
+
+    private RString setLblMonthWareki(RYearMonth month) {
+        return month.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO)
+                .toDateString();
+    }
+
+    private RString setLblMonthWareki(FlexibleYearMonth month) {
+        return month.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO)
+                .toDateString();
     }
 
     private ValidationMessageControlPairs getTorokuCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
@@ -773,7 +787,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         date = RDate.getNowDate();
         RString 年月 = date.getYearMonth().toDateString();
         div.getLblMonth().setText(setLblMonth(date.getYearMonth()));
-        div.getLblMonth2().setText(setLblMonth(date.getYearMonth()));
+        div.getLblMonth2().setText(setLblMonthWareki(date.getYearMonth()));
         モード = モード_初期化;
         set介護認定審査会開催予定一覧(年月);
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList = gogitaiManager.get合議体情報();
@@ -799,7 +813,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) - 1, 1);
         }
         div.getLblMonth().setText(setLblMonth(date2.getYearMonth()));
-        div.getLblMonth2().setText(setLblMonth(date2.getYearMonth()));
+        div.getLblMonth2().setText(setLblMonthWareki(date2.getYearMonth()));
         モード = モード_月;
         set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         clear入力();
@@ -814,7 +828,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) + 1, 1);
         }
         div.getLblMonth().setText(setLblMonth(date2.getYearMonth()));
-        div.getLblMonth2().setText(setLblMonth(date2.getYearMonth()));
+        div.getLblMonth2().setText(setLblMonthWareki(date2.getYearMonth()));
         モード = モード_月;
         set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         clear入力();

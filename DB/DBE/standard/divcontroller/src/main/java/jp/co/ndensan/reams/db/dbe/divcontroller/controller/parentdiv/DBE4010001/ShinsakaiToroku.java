@@ -188,10 +188,22 @@ public class ShinsakaiToroku {
             前排他キーの解除();
             div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
                     replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
             return ResponseData.of(div).setState(DBE4010001StateName.完了);
 
         }
         return ResponseData.of(div).setState(DBE4010001StateName.登録);
+    }
+    
+    /**
+     * 対象者状態ラジオボタンの押下チェック処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShinsakaiTorokuDiv> onChange_radTaishoshaJotai(ShinsakaiTorokuDiv div) {
+        getHandler(div).setJyotaiKubun();
+        return ResponseData.of(div).respond();
     }
 
     private void 前排他キーのセット() {
