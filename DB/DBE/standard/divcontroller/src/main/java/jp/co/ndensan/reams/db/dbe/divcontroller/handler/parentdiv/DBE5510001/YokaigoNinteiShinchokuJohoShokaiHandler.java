@@ -48,6 +48,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     private static final RString DATE_SOURCE_KEY0 = new RString("key0");
     private static final RString DATE_SOURCE_KEY1 = new RString("key1");
     private static final RString BTNPRINT = new RString("btnPrint");
+    private static final RString BTNRESEARCH = new RString("btnReSearch");
 
     private enum KensakuHoho {
 
@@ -86,7 +87,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getTxtShiteiHizukeRange().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, false);
+        set検索条件切替(false);
         init最大表示件数();
         setDisable();
         set広域用切替();
@@ -101,6 +102,14 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         if (Decimal.canConvert(データ出力件数閾値)) {
             div.getTxtMaximumDisplayNumber().setValue(new Decimal(データ出力件数閾値.toString()));
         }
+    }
+    
+    public void set検索条件切替(boolean is検索結果表示) {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnSearch"), !is検索結果表示);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, is検索結果表示);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNRESEARCH, is検索結果表示);
+        div.getKensakuJoken().setDisplayNone(is検索結果表示);
+        div.getShinseiJohoIchiran().setDisplayNone(!is検索結果表示);
     }
 
     /**
@@ -160,7 +169,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * @param searchResult 要介護認定進捗状況照会情報
      */
     public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> searchResult) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, true);
+        set検索条件切替(true);
         div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
         if (searchResult.records().isEmpty()) {

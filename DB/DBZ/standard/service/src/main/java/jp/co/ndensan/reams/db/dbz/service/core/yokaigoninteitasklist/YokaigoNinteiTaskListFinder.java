@@ -279,6 +279,18 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     /**
+     * マスキングモードの場合でデータ件数取得
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return int
+     */
+    @Transaction
+    public int getマスキングモード件数(YokaigoNinteiTaskListParameter parameter) {
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        return mapper.getマスキング件数(parameter);
+    }
+
+    /**
      * 審査会登録モードの場合でデータを検索します。
      *
      * @param parameter YokaigoNinteiTaskListParameter
@@ -496,6 +508,18 @@ public class YokaigoNinteiTaskListFinder {
             set前マスキング(要介護認定完了情報, shinSaKaiBusiness);
         }
         return shinSaKaiBusiness;
+    }
+
+    /**
+     * 前マスキングリストの件数を取得します
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return int
+     */
+    @Transaction
+    public int get前マスキングモード件数(YokaigoNinteiTaskListParameter parameter) {
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        return mapper.get前マスキング件数(parameter);
     }
 
     private void set前マスキング(

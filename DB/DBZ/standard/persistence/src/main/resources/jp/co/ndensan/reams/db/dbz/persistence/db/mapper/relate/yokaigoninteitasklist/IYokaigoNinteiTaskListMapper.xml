@@ -224,7 +224,7 @@
     <resultMap id="resultMap_GetureiSyoriTaishoshaWithCountEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GetureiSyoriTantoshaWithCountEntity" autoMapping="true">
         <id property="totalCount" column="totalCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <collection property="taishoshaList" resultMap="resultMap_GeTuReiSyoRiRelateEntity"
-                ofType ="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity"/>
+                    ofType ="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity"/>
     </resultMap>
     <resultMap id="resultMap_GeTuReiSyoRiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -280,7 +280,7 @@
         DbT5101."shoKisaiHokenshaNo"
     </select>
     <select resultOrdered="true" id="get申請受付" resultMap="resultMap_ShiSeiKeTuKeRelateEntity"
-           parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         DbT5101."shinseishoKanriNo",
         DbT5101."hihokenshaNo",
@@ -338,7 +338,7 @@
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get前調査依頼" resultMap="resultMap_CyoSaiRaiRelate"
-          parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
@@ -418,7 +418,7 @@
         DbT5101."shoKisaiHokenshaNo"
     </select>
     <select resultOrdered="true" id="get調査依頼" resultMap="resultMap_CyoSaiRaiRelateWithCountEntity"
-           parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         COUNT(*) OVER () AS "totalCount",
         DbT5101."shinseishoKanriNo",
@@ -549,7 +549,7 @@
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get前意見書依頼" resultMap="resultMap_IKnSyoiRaiRelate"
-           parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
@@ -632,10 +632,10 @@
         DbT5101."ninteiShinseiYMD",
         DbT5101."shoKisaiHokenshaNo"
     </select>
-        <select id="get意見書依頼件数" resultType="int"
-                      parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+    <select id="get意見書依頼件数" resultType="int"
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            count(1)
+        count(1)
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
         INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
@@ -715,7 +715,7 @@
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
     </select>
     <select resultOrdered="true" id="get意見書依頼" resultMap="resultMap_IKnSyoiRaiRelateEntity"
-           parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         DbT5101."shinseishoKanriNo",
         DbT5101."hihokenshaNo",
@@ -828,7 +828,7 @@
         LIMIT #{件数}
     </select>
     <select resultOrdered="true" id="get調査入手" resultMap="resultMap_CyoSaNyuSyuRelateEntity"
-           parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         DbT5101."shinseishoKanriNo",
         DbT5101."hihokenshaNo",
@@ -955,7 +955,7 @@
         DbT5101."shoKisaiHokenshaNo"
     </select>
     <select resultOrdered="true" id="get意見書入手" resultMap="resultMap_IkenSyoNyuSyuRelateEntity"
-           parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         DbT5101."shinseishoKanriNo",
         DbT5101."hihokenshaNo",
@@ -1150,25 +1150,33 @@
         ON  DbT5115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD"  <![CDATA[<>]]>  ''
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteichosaIraiKanryoYMD"  <![CDATA[<>]]>  ''
         AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteichosaKanryoYMD" <![CDATA[<>]]>  ''
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]>  ''
         AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ikenshoTorokuKanryoYMD" <![CDATA[<>]]>  ''
         AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        AND DbT5105."ichijiHanteiKanryoYMD" <![CDATA[<>]]>  ''
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiWariateKanryoYMD"  = '')
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiKanryoYMD"  = '')
+        AND (DbT5105."centerSoshinYMD" IS NULL OR DbT5105."centerSoshinYMD"  = '')
         AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
+        AND (DbT5105."maskingKanryoYMD" IS  NULL OR DbT5105."maskingKanryoYMD"  = '')
         ORDER BY  DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",
         DbT5101."shoKisaiHokenshaNo"
+        LIMIT #{件数}
     </select>
     <resultMap id="resultMap_MaSuKinGuRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get前マスキング" resultMap="resultMap_MaSuKinGuRelate"
-             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
@@ -1181,19 +1189,90 @@
         ON  DbT5115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         WHERE
         "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD"  <![CDATA[<>]]>  ''
         AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD"  <![CDATA[<>]]>  ''
         AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD"  <![CDATA[<>]]>  ''
         AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD"  <![CDATA[<>]]>  ''
         AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD"  <![CDATA[<>]]>  ''
         AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
-        AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
+        AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD"  <![CDATA[<>]]>  ''
+        AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD"  = '')
+        AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD"  = '')
+        AND ("DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD"  = '')
         AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
+        AND ("DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS  NULL OR "DbT5105NinteiKanryoJoho"."maskingKanryoYMD"  = '')
         ORDER BY  DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",
         DbT5101."shoKisaiHokenshaNo"
+    </select>
+    <select resultOrdered="true" id="getマスキング件数" resultType="int" 
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
+        ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER  JOIN  rgdb."DbT5115Image" DbT5115
+        ON  DbT5115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD"  <![CDATA[<>]]>  '' 
+        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteichosaIraiKanryoYMD"  <![CDATA[<>]]>  '' 
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteichosaKanryoYMD" <![CDATA[<>]]>  '' 
+        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]>  '' 
+        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ikenshoTorokuKanryoYMD" <![CDATA[<>]]>  '' 
+        AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
+        AND DbT5105."ichijiHanteiKanryoYMD" <![CDATA[<>]]>  '' 
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiWariateKanryoYMD"  = '')
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiKanryoYMD"  = '')
+        AND (DbT5105."centerSoshinYMD" IS NULL OR DbT5105."centerSoshinYMD"  = '')
+        AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+        AND DbT5101."logicalDeletedFlag" = FALSE
+        AND (DbT5105."maskingKanryoYMD" IS  NULL OR DbT5105."maskingKanryoYMD"  = '')
+    </select>
+    <select resultOrdered="true" id="get前マスキング件数" resultType="int" 
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho"
+        ON  "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER  JOIN  rgdb."DbT5115Image" DbT5115
+        ON  DbT5115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        WHERE
+        "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD"  <![CDATA[<>]]>  ''
+        AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD"  <![CDATA[<>]]>  ''
+        AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD"  <![CDATA[<>]]>  ''
+        AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD"  <![CDATA[<>]]>  ''
+        AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD"  <![CDATA[<>]]>  ''
+        AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD"  <![CDATA[<>]]>  ''
+        AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD"  = '')
+        AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD"  = '')
+        AND ("DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD"  = '')
+        AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+        AND DbT5101."logicalDeletedFlag" = FALSE
+        AND ("DbT5105NinteiKanryoJoho"."maskingKanryoYMD" IS  NULL OR "DbT5105NinteiKanryoJoho"."maskingKanryoYMD"  = '')
     </select>
     <select resultOrdered="true" id="get審査会登録" resultMap="resultMap_ShinSaKaiToRoKuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
@@ -1280,7 +1359,7 @@
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get前二次判定" resultMap="resultMap_NiJiHanTeiRelate"
-                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
@@ -1455,7 +1534,7 @@
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get前月例処理" resultMap="resultMap_GeTuReiSyoRiRelate"
-             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
@@ -1551,7 +1630,7 @@
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get前審査受付" resultMap="resultMap_ShinSaKeTuKeRelate"
-             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
@@ -1581,7 +1660,7 @@
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get前一次判定" resultMap="resultMap_IChiJiHanTeiRelate"
-             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM

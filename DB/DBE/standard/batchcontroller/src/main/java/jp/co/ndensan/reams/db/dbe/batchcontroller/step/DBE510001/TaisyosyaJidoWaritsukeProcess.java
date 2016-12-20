@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -76,6 +77,10 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
             if (開催予定情報 == null) {
                 continue;
             }
+            JournalWriter journalWriter = new JournalWriter();
+            final RString 申請者オブザーバーチェック = new RString("申請者オブザーバーチェックエラー  開催番号： ");
+            final RString 審査会委員除外存在チェック = new RString("審査会委員除外存在チェックエラー  開催番号： ");
+            final RString 対象者 = new RString(" 対象者： ");
             for (int j = 0; j < taisyosya.size(); j++) {
                 if (!(shinsakaiWaritsukeNinsu.get(i) < shinsakaiJidoWariateTeiin.get(i))) {
                     isExeNext = true;
@@ -83,9 +88,21 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                 }
                 TaisyosyaJidoWaritsukeMybatisParameter parameter = getParameter(shinsakaiKaisaiNo.get(i), taisyosya.get(j));
                 if (0 < mapper.selectCountShinsakaiWariateIinJoho(parameter)) {
+                    RStringBuilder errorMsg = new RStringBuilder();
+                    errorMsg.append(申請者オブザーバーチェック);
+                    errorMsg.append(shinsakaiKaisaiNo.get(i));
+                    errorMsg.append(対象者);
+                    errorMsg.append(taisyosya.get(j));
+                    journalWriter.writeErrorJournal(RDate.getNowDateTime(), errorMsg.toRString());
                     continue;
                 }
                 if (0 < mapper.selectCountShinsakaiIinJogaiJoho(parameter)) {
+                    RStringBuilder errorMsg = new RStringBuilder();
+                    errorMsg.append(審査会委員除外存在チェック);
+                    errorMsg.append(shinsakaiKaisaiNo.get(i));
+                    errorMsg.append(対象者);
+                    errorMsg.append(taisyosya.get(j));
+                    journalWriter.writeErrorJournal(RDate.getNowDateTime(), errorMsg.toRString());
                     continue;
                 }
                 insert介護認定審査会割付情報(shinsakaiKaisaiNo.get(i), taisyosya.get(j), shinsakaiKaisaiYMD.get(i));
