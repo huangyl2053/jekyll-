@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @reamsid_L DBE-0200-030 zhangzhiming
  */
 public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoIraiShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
