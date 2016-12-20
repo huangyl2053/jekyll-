@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5121ShinseiRirekiJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5121ShinseiRirekiJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.allColumns_DbT5121ShinseiRirekiJoho" />
+     FROM
+         rgdb."DbT5121ShinseiRirekiJoho"
+     WHERE
+         rgdb."DbT5121ShinseiRirekiJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5121ShinseiRirekiJoho">
+         "DbT5121ShinseiRirekiJoho"."shinseishoKanriNo" as "dbT5121ShinseiRirekiJoho_shinseishoKanriNo",
+         "DbT5121ShinseiRirekiJoho"."insertDantaiCd" as "dbT5121ShinseiRirekiJoho_insertDantaiCd",
+         "DbT5121ShinseiRirekiJoho"."insertTimestamp" as "dbT5121ShinseiRirekiJoho_insertTimestamp",
+         "DbT5121ShinseiRirekiJoho"."insertReamsLoginId" as "dbT5121ShinseiRirekiJoho_insertReamsLoginId",
+         "DbT5121ShinseiRirekiJoho"."insertContextId" as "dbT5121ShinseiRirekiJoho_insertContextId",
+         "DbT5121ShinseiRirekiJoho"."isDeleted" as "dbT5121ShinseiRirekiJoho_isDeleted",
+         "DbT5121ShinseiRirekiJoho"."updateCount" as "dbT5121ShinseiRirekiJoho_updateCount",
+         "DbT5121ShinseiRirekiJoho"."lastUpdateTimestamp" as "dbT5121ShinseiRirekiJoho_lastUpdateTimestamp",
+         "DbT5121ShinseiRirekiJoho"."lastUpdateReamsLoginId" as "dbT5121ShinseiRirekiJoho_lastUpdateReamsLoginId",
+         "DbT5121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo" as "dbT5121ShinseiRirekiJoho_zenkaiShinseishoKanriNo"
+    </sql>
+
+
+    <!--テーブルDbT5121ShinseiRirekiJohoの項目をDbT5121ShinseiRirekiJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5121ShinseiRirekiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5121ShinseiRirekiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5121ShinseiRirekiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5121ShinseiRirekiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5121ShinseiRirekiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5121ShinseiRirekiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5121ShinseiRirekiJoho_isDeleted" />
+        <result property="updateCount" column="dbT5121ShinseiRirekiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5121ShinseiRirekiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5121ShinseiRirekiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="zenkaiShinseishoKanriNo" column="dbT5121ShinseiRirekiJoho_zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5121ShinseiRirekiJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5121ShinseiRirekiJoho"/>
+        FROM
+        rgdb."DbT5121ShinseiRirekiJoho"
+        limit 1;
+    </select>
+</mapper>

@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataCsvProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputEucCsvEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
@@ -25,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -35,20 +40,20 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBE-1860-011 duanzhanli
  */
-public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaDataOutputBatchRelateEntity> {
+public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBasicDataRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosadataoutput.INinteiChosaDataOutputMapper."
-            + "get認定調査データ出力");
+            + "getCsvTable");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE224001");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private NinteiChosaDataOutputProcessParamter processParamter;
+    private NinteiChosaDataCsvProcessParamter processParamter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     @BatchWriter
     private CsvWriter<NinteiChosaDataOutputEucCsvEntity> eucCsvWriter;
-
+    private final List<PersonalData> personalDataList = new ArrayList<>();
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -57,7 +62,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaDa
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaDataOutputBatchMybitisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaDataOutputCsvMybitisParameter());
     }
 
     @Override
@@ -72,15 +77,18 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaDa
     }
 
     @Override
-    protected void process(NinteiChosaDataOutputBatchRelateEntity entity) {
+    protected void process(NinteiChosaBasicDataRelateEntity entity) {
         eucCsvWriter.writeLine(new NinteiChosaDataOutputResult().setEucCsvEntity(entity));
-        new NinteiChosaDataOutputResult().getアクセスログ(entity.get申請書管理番号());
+        PersonalData personalData = new NinteiChosaDataOutputResult().getPersonalData(entity.get今回分Entity().get申請書管理番号());
+        personalDataList.add(personalData);
+        
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, accessLogUUID);
         outputJokenhyoFactory();
     }
 
