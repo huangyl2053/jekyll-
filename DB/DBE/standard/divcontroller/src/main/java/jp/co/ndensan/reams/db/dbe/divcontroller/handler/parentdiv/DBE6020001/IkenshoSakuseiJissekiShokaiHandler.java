@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -28,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -64,9 +66,13 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * 「検索する」ボタンを押します。
      *
      * @param searchResult 検索結果
+     * @return 該当データがない場合はメッセージを返します。該当データがある場合は{@code null}を返します。
      */
-    public void onClick_BtnKensaku(SearchResult<IkenshoJissekiIchiran> searchResult) {
+    public Message onClick_BtnKensaku(SearchResult<IkenshoJissekiIchiran> searchResult) {
         List<IkenshoJissekiIchiran> records = searchResult.records();
+        if (records.isEmpty()) {
+            return UrInformationMessages.該当データなし.getMessage();
+        }
         setRecords(records);
         if (searchResult.exceedsLimit()) {
             div.getDgIkenshoSakuseiJisseki().getGridSetting().setLimitRowCount(records.size());
@@ -75,6 +81,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             div.getDgIkenshoSakuseiJisseki().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
             div.getDgIkenshoSakuseiJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
         }
+        return null;
     }
 
     private void setRecords(List<IkenshoJissekiIchiran> ikenshoJissekiIchiranList) {
@@ -135,22 +142,6 @@ public class IkenshoSakuseiJissekiShokaiHandler {
     }
 
     /**
-     * 画面初期状態の設定です。
-     */
-    public void set初期状態() {
-        div.getIkenshoSakuseiJisseki().setDisplayNone(true);
-        div.getIkenshoKinyubi().setDisplayNone(false);
-    }
-
-    /**
-     * 画面一覧状態の設定です。
-     */
-    public void set一覧状態() {
-        div.getIkenshoSakuseiJisseki().setDisplayNone(false);
-        div.getIkenshoKinyubi().setDisplayNone(true);
-    }
-
-    /**
      * バッチパラメータを作成します。
      *
      * @param 帳票出力区分 帳票出力区分
@@ -180,7 +171,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         }
         param.setIkenshoKinyubiFrom(意見書記入日FROM);
         param.setIkenshoKinyubiTo(意見書記入日TO);
-        param.setHokensya(div.getCcdHokensya().getSelectedItem().get市町村コード().value());
+        param.setHokensya(div.getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

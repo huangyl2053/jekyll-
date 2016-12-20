@@ -31,6 +31,8 @@ public class chosairaitaishoshaichiranDiv extends Panel {
     private TextBoxNum txtNoUpdate;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
+    @JsonProperty("txtMaxCount")
+    private TextBoxNum txtMaxCount;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -126,6 +128,24 @@ public class chosairaitaishoshaichiranDiv extends Panel {
     @JsonProperty("dgNinteiTaskList")
     public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.dgNinteiTaskList = dgNinteiTaskList;
+    }
+
+    /*
+     * gettxtMaxCount
+     * @return txtMaxCount
+     */
+    @JsonProperty("txtMaxCount")
+    public TextBoxNum getTxtMaxCount() {
+        return txtMaxCount;
+    }
+
+    /*
+     * settxtMaxCount
+     * @param txtMaxCount txtMaxCount
+     */
+    @JsonProperty("txtMaxCount")
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
+        this.txtMaxCount = txtMaxCount;
     }
 
     // </editor-fold>

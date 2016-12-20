@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -59,6 +61,7 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     private static final boolean あり = true;
     private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final RString SEPARATOR = new RString("/");
 
     @BatchWriter
     private BatchReportWriter<SonotashiryoA3ReportSource> batchWriteA3;
@@ -92,7 +95,9 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
         }
         business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-        business.set事務局概況特記イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイル名_G0001));
+        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+        RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+        business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
         存在ファイルindex = business.get存在ファイルIndex();
@@ -276,12 +281,18 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
         return ファイル名;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, sharedFileName);
+    private RString 共有ファイルを引き出す(RString path, RString fileName) {
+        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
+            return getFilePath(path, fileName);
         }
-        return imagePath;
+        return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
