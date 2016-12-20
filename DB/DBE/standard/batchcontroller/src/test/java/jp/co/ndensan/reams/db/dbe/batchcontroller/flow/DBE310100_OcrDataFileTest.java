@@ -5,21 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-//import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.OcrDataFileParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
+import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core._ControlData;
 import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.BatchFlowTestHelper;
 import jp.co.ndensan.reams.uz.uza.workflow.context.FlowContext;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.valueobject.FlowId;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.valueobject.FlowInstanceId;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 
@@ -58,21 +62,21 @@ public class DBE310100_OcrDataFileTest extends DbeTestDacBase {
     @Test
     public void testDefineFlow() {
 
-//        setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
-//        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE310100_OcrDataFile"),
-//                new RString("認定支援"),
-//                DBE250001_NinteiChoshaKekkaTorikomi.class,
-//                createParameter());
-//        assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
+        setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
+        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE310100_OcrDataFile"),
+                new RString("認定支援"),
+                DBE250001_NinteiChoshaKekkaTorikomi.class,
+                createParameter());
+        assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
     }
 
-//    private static OcrDataFileParameter createParameter() {
-//        OcrDataFileParameter batchFlowParameter = new OcrDataFileParameter();
-//        RString path = new RString("db|EucOther_DBA701002_186|2016-12-12 16:47:59.649232");
-//        batchFlowParameter.set共有ファイルエントリ情報文字列(path);
-//
-//        return batchFlowParameter;
-//    }
+    private static DBE250001_NinteiChoshaKekkaTorikomiParameter createParameter() {
+        DBE250001_NinteiChoshaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChoshaKekkaTorikomiParameter();
+        RString path = new RString("db|EucOther_DBA701002_186|2016-12-12 16:47:59.649232");
+        batchFlowParameter.set共有ファイルエントリ情報文字列(path);
+
+        return batchFlowParameter;
+    }
 
     private static void setExecutionSubGyomuCodeToControlData(SubGyomuCode executionSubGyomuCode) {
         _ControlData controlData = new _ControlData(executionSubGyomuCode.toString(), "KanriUser1", new ReamsDonyuDantaiCode("209007"));
