@@ -243,10 +243,10 @@
         </if>
         <where>
             <if test="kensakuOptionKey0">
-                DbT5102."shinseishoKanriNo" IS NULL
+                AND DbT5102."shinseishoKanriNo" IS NULL
             </if>
             <if test="kensakuOptionKey1">
-                DbT5121."shinseishoKanriNo" IS NULL
+                AND DbT5121."shinseishoKanriNo" IS NULL
             </if>
             <if test="shichosonCodeFlag">
                 AND DbT7051."shichosonCode" = #{shichosonCode}

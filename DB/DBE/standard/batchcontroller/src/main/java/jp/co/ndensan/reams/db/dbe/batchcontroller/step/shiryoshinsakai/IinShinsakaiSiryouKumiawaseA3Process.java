@@ -138,8 +138,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         }
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().
-        new SimpleLayoutBreaker(IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
+                    IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
                             ReportLineRecord<IinShinsakaishiryoA3ReportSource> currentRecord,
@@ -297,21 +297,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517001.getReportId().value(), get帳票名());
-        outputJokenhyoFactory(ReportIdDBE.DBE517041.getReportId().value(), new RString("概況調査の特記"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517031.getReportId().value(), new RString("特記事項（1枚目）"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517085.getReportId().value(), new RString("一次判定結果票"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517034.getReportId().value(), new RString("特記事項（2枚目以降）"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517005.getReportId().value(), new RString("主治医意見書"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517006.getReportId().value(), new RString("その他資料"));
-    }
-
-    private RString get帳票名() {
-        RString 介護認定審査会開催番号 = paramter.getShinsakaiKaisaiNo();
-        RStringBuilder 帳票名 = new RStringBuilder();
-        帳票名.append(介護認定審査会開催番号.substring(介護認定審査会開催番号.length() - INT_4));
-        帳票名.append(new RString("　審査会"));
-        return 帳票名.toRString();
+        outputJokenhyoFactory(ReportIdDBE.DBE517915.getReportId().value(), new RString("委員用審査会資料組み合わせ一覧"));
     }
 
     private void outputJokenhyoFactory(RString id, RString 帳票名) {
