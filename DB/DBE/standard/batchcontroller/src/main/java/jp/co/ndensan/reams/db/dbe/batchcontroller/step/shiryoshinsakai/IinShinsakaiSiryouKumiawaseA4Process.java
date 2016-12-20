@@ -137,8 +137,8 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         }
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().
-        new SimpleLayoutBreaker(IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+                    IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA4ReportSource> occuredBreak(
                             ReportLineRecord<IinShinsakaishiryoA4ReportSource> currentRecord,
@@ -298,14 +298,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517011.getReportId().value(), get帳票名());
-        outputJokenhyoFactory(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517038.getReportId().value(), new RString("一次判定結果票"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517134.getReportId().value(), new RString("特記事項（2枚目以降）"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517151.getReportId().value(), new RString("主治医意見書（表）"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517152.getReportId().value(), new RString("主治医意見書（裏）"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517016.getReportId().value(), new RString("その他資料"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517905.getReportId().value(), new RString("委員用審査会資料組み合わせ一覧"));
     }
 
     private RString get帳票名() {
