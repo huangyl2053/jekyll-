@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
@@ -11,11 +12,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShujiiSearch のクラスファイル 
- * 
+ * ShujiiSearch のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShujiiSearchDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
@@ -51,8 +53,6 @@ public class ShujiiSearchDiv extends Panel {
     private RadioButton radSearchJokyoFlag;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
-    @JsonProperty("btnSearchShujii")
-    private Button btnSearchShujii;
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
     @JsonProperty("ccdHokenshaList")
@@ -314,24 +314,6 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("txtSaidaiHyojiKensu")
     public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
-    }
-
-    /*
-     * getbtnSearchShujii
-     * @return btnSearchShujii
-     */
-    @JsonProperty("btnSearchShujii")
-    public Button getBtnSearchShujii() {
-        return btnSearchShujii;
-    }
-
-    /*
-     * setbtnSearchShujii
-     * @param btnSearchShujii btnSearchShujii
-     */
-    @JsonProperty("btnSearchShujii")
-    public void setBtnSearchShujii(Button btnSearchShujii) {
-        this.btnSearchShujii = btnSearchShujii;
     }
 
     /*

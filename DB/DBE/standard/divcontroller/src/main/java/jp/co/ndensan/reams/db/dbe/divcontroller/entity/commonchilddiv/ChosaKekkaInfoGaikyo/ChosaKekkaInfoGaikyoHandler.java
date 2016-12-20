@@ -137,7 +137,7 @@ public class ChosaKekkaInfoGaikyoHandler {
     private void setDisplayNoneイメージコントロール() {
         gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setDisplayNone(true);
         gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setDisplayNone(true);
-        gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuMeisho().setDisplayNone(true);
+        gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().setDisplayNone(true);
         gaikyoDiv.getShisetsuRiyoPanel().getImgTelNo().setDisplayNone(true);
         gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuJusho().setDisplayNone(true);
         gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setDisplayNone(true);

@@ -86,7 +86,7 @@ public class Ikenshoget {
      * @return レスポンスデータ
      */
     public ResponseData<IkenshogetDiv> onChange_jyotaiKubun(IkenshogetDiv div) {
-        getHandler(div).initialize();
+        getHandler(div).setJyotaiKubun();
         return ResponseData.of(div).respond();
     }
 

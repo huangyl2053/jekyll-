@@ -27,6 +27,7 @@ public class NinteiChosaHoshuShokaiProcessParameter implements IBatchProcessPara
     private final RString 調査依頼日開始;
     private final RString 調査依頼日終了;
     private final List<NinteiChosaHoshuShokaiFlowBusiness> キー情報Entityリスト;
+    private final RString 保険者;
 
     /**
      * コンストラクタです。
@@ -35,13 +36,15 @@ public class NinteiChosaHoshuShokaiProcessParameter implements IBatchProcessPara
      * @param 調査依頼日開始 調査依頼日開始
      * @param 調査依頼日終了 調査依頼日終了
      * @param キー情報Entityリスト キー情報Entityリスト
+     * @param 保険者 保険者
      */
     public NinteiChosaHoshuShokaiProcessParameter(RString 帳票出力区分, RString 調査依頼日開始, RString 調査依頼日終了,
-            List<NinteiChosaHoshuShokaiFlowBusiness> キー情報Entityリスト) {
+            List<NinteiChosaHoshuShokaiFlowBusiness> キー情報Entityリスト, RString 保険者) {
         this.帳票出力区分 = 帳票出力区分;
         this.キー情報Entityリスト = キー情報Entityリスト;
         this.調査依頼日開始 = 調査依頼日開始;
         this.調査依頼日終了 = 調査依頼日終了;
+        this.保険者 = 保険者;
     }
 
     /**
@@ -51,6 +54,6 @@ public class NinteiChosaHoshuShokaiProcessParameter implements IBatchProcessPara
      */
     public NinteiChosaHoshuShokaiMapperParameter toMybitisParamter() {
         return NinteiChosaHoshuShokaiMapperParameter.createParamter(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援), 調査依頼日開始, 調査依頼日終了, true, キー情報Entityリスト);
+                RDate.getNowDate(), SubGyomuCode.DBE認定支援), 調査依頼日開始, 調査依頼日終了, true, キー情報Entityリスト, 保険者);
     }
 }

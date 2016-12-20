@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-1691-020 dangjingjing
  */
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+
 public final class ChosahyoJissekiIchiranChange {
 
     private ChosahyoJissekiIchiranChange() {
@@ -30,8 +31,10 @@ public final class ChosahyoJissekiIchiranChange {
      */
     public static ChosahyoJissekiIchiranEntity createSyohyoData(ChosahyoJissekiIchiranRelateEntity entity) {
         ChosahyoJissekiIchiranEntity data = new ChosahyoJissekiIchiranEntity(entity.get証記載保険者番号(),
+                entity.get市町村名称(),
                 entity.get調査委託先コード(),
                 entity.get事業者名称(),
+                entity.get調査員コード(),
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 entity.get被保険者氏名(),

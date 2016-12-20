@@ -75,7 +75,12 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.getTxtShujiiCode().setValue(shujiiCode);
         div.getTxtShujiiName().setValue(shujiiName);
         ShujiiIryokikanAndShujiiInputFinder finder = ShujiiIryokikanAndShujiiInputFinder.createInstance();
-        boolean 指定医フラグ = finder.getShiteiiFlag(shichosonCode, shujiiIryokikanCode, shujiiCode);
+        boolean 指定医フラグ = false;
+        if(!(shichosonCode == null || shichosonCode.isEmpty()) &&
+           !(shujiiIryokikanCode == null || shujiiIryokikanCode.isEmpty()) &&
+           !(shujiiCode == null || shujiiCode.isEmpty())){
+            指定医フラグ = finder.getShiteiiFlag(shichosonCode, shujiiIryokikanCode, shujiiCode);
+        }
         List<RString> shiteiiList = new ArrayList();
         if (指定医フラグ) {
             shiteiiList.add(KEY0);

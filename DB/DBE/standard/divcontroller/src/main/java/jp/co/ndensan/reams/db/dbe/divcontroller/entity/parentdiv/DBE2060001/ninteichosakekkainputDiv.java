@@ -23,14 +23,18 @@ public class ninteichosakekkainputDiv extends Panel {
      */
     @JsonProperty("radJotaiKubun")
     private RadioButton radJotaiKubun;
-    @JsonProperty("txtMishori")
-    private TextBoxNum txtMishori;
-    @JsonProperty("txtKanryoKano")
-    private TextBoxNum txtKanryoKano;
     @JsonProperty("txtGokei")
     private TextBoxNum txtGokei;
+    @JsonProperty("txtKanryoKano")
+    private TextBoxNum txtKanryoKano;
+    @JsonProperty("txtMishori")
+    private TextBoxNum txtMishori;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
+    @JsonProperty("btnchosakekkaoutput")
+    private ButtonDownLoad btnchosakekkaoutput;
+    @JsonProperty("txtMaxKensu")
+    private TextBoxNum txtMaxKensu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -57,21 +61,21 @@ public class ninteichosakekkainputDiv extends Panel {
     }
 
     /*
-     * gettxtMishori
-     * @return txtMishori
+     * gettxtGokei
+     * @return txtGokei
      */
-    @JsonProperty("txtMishori")
-    public TextBoxNum getTxtMishori() {
-        return txtMishori;
+    @JsonProperty("txtGokei")
+    public TextBoxNum getTxtGokei() {
+        return txtGokei;
     }
 
     /*
-     * settxtMishori
-     * @param txtMishori txtMishori
+     * settxtGokei
+     * @param txtGokei txtGokei
      */
-    @JsonProperty("txtMishori")
-    public void setTxtMishori(TextBoxNum txtMishori) {
-        this.txtMishori = txtMishori;
+    @JsonProperty("txtGokei")
+    public void setTxtGokei(TextBoxNum txtGokei) {
+        this.txtGokei = txtGokei;
     }
 
     /*
@@ -93,21 +97,21 @@ public class ninteichosakekkainputDiv extends Panel {
     }
 
     /*
-     * gettxtGokei
-     * @return txtGokei
+     * gettxtMishori
+     * @return txtMishori
      */
-    @JsonProperty("txtGokei")
-    public TextBoxNum getTxtGokei() {
-        return txtGokei;
+    @JsonProperty("txtMishori")
+    public TextBoxNum getTxtMishori() {
+        return txtMishori;
     }
 
     /*
-     * settxtGokei
-     * @param txtGokei txtGokei
+     * settxtMishori
+     * @param txtMishori txtMishori
      */
-    @JsonProperty("txtGokei")
-    public void setTxtGokei(TextBoxNum txtGokei) {
-        this.txtGokei = txtGokei;
+    @JsonProperty("txtMishori")
+    public void setTxtMishori(TextBoxNum txtMishori) {
+        this.txtMishori = txtMishori;
     }
 
     /*
@@ -126,6 +130,42 @@ public class ninteichosakekkainputDiv extends Panel {
     @JsonProperty("dgNinteiTaskList")
     public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.dgNinteiTaskList = dgNinteiTaskList;
+    }
+
+    /*
+     * getbtnchosakekkaoutput
+     * @return btnchosakekkaoutput
+     */
+    @JsonProperty("btnchosakekkaoutput")
+    public ButtonDownLoad getBtnchosakekkaoutput() {
+        return btnchosakekkaoutput;
+    }
+
+    /*
+     * setbtnchosakekkaoutput
+     * @param btnchosakekkaoutput btnchosakekkaoutput
+     */
+    @JsonProperty("btnchosakekkaoutput")
+    public void setBtnchosakekkaoutput(ButtonDownLoad btnchosakekkaoutput) {
+        this.btnchosakekkaoutput = btnchosakekkaoutput;
+    }
+
+    /*
+     * gettxtMaxKensu
+     * @return txtMaxKensu
+     */
+    @JsonProperty("txtMaxKensu")
+    public TextBoxNum getTxtMaxKensu() {
+        return txtMaxKensu;
+    }
+
+    /*
+     * settxtMaxKensu
+     * @param txtMaxKensu txtMaxKensu
+     */
+    @JsonProperty("txtMaxKensu")
+    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.txtMaxKensu = txtMaxKensu;
     }
 
     // </editor-fold>

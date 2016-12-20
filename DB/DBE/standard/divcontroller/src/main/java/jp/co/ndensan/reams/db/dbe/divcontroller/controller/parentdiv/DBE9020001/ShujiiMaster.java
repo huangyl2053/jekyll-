@@ -123,9 +123,20 @@ public class ShujiiMaster {
      * @param div ShujiiMasterDiv
      * @return ResponseData<ShujiiMasterDiv>
      */
-    public ResponseData<ShujiiMasterDiv> onClick_btnSearchShujii(ShujiiMasterDiv div) {
+    public ResponseData<ShujiiMasterDiv> onClick_btnSearch(ShujiiMasterDiv div) {
         searchChosainInfo(div);
-        if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty()) {
+        boolean 検索条件初期値 = true;
+        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isEmpty()
+                || !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isEmpty()
+                || !div.getTxtSearchShujiiCodeFrom().getValue().isEmpty()
+                || !div.getTxtSearchShujiiCodeTo().getValue().isEmpty()
+                || !div.getTxtSearchShujiiIryokikanMeisho().getValue().isEmpty()
+                || !div.getTxtSearchShujiiIryokikanKanaMeisho().getValue().isEmpty()
+                || !div.getTxtSearchShujiiShimei().getValue().isEmpty()
+                || !div.getTxtSearchShujiiKanaShimei().getValue().isEmpty()) {
+            検索条件初期値 = false;
+        }
+        if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty() && !検索条件初期値) {
             getValidationHandler(div).validateBtnReSearchNoResult();
         }
         return ResponseData.of(div).respond();
@@ -139,15 +150,7 @@ public class ShujiiMaster {
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnReSearch(ShujiiMasterDiv div) {
 
-        List<dgShujiiIchiran_Row> ichiranList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
-        boolean isUpdate = false;
-        for (dgShujiiIchiran_Row row : ichiranList) {
-            if (!RString.EMPTY.equals(row.getJotai())) {
-                isUpdate = true;
-                break;
-            }
-        }
-        if (isUpdate) {
+        if (isUpdate(div.getShujiiIchiran().getDgShujiiIchiran().getDataSource())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()
                         .getCode(),
@@ -170,6 +173,15 @@ public class ShujiiMaster {
         return ResponseData.of(div).respond();
     }
 
+    private Boolean isUpdate(List<dgShujiiIchiran_Row> ichiranList) {
+        for (dgShujiiIchiran_Row row : ichiranList) {
+            if (!RString.EMPTY.equals(row.getJotai())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void searchChosainInfo(ShujiiMasterDiv div) {
         boolean jokyoFlag = false;
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
@@ -179,8 +191,8 @@ public class ShujiiMaster {
         RString 主治医医療機関コードFrom = RString.EMPTY;
         RString 主治医医療機関コードTo = RString.EMPTY;
 
-        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isNullOrEmpty()
-                && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isNullOrEmpty()) {
+        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isEmpty()
+                && !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isEmpty()) {
             if (Long.valueOf(div.getTxtSearchShujiiIryokikanCodeFrom().getValue().toString())
                     > Long.valueOf(div.getTxtSearchShujiiIryokikanCodeTo().getValue().toString())) {
                 主治医医療機関コードFrom = div.getTxtSearchShujiiIryokikanCodeTo().getValue();
@@ -197,8 +209,8 @@ public class ShujiiMaster {
         RString 主治医コードFrom = RString.EMPTY;
         RString 主治医コードTo = RString.EMPTY;
 
-        if (!div.getTxtSearchShujiiCodeFrom().getValue().isNullOrEmpty()
-                && !div.getTxtSearchShujiiCodeTo().getValue().isNullOrEmpty()) {
+        if (!div.getTxtSearchShujiiCodeFrom().getValue().isEmpty()
+                && !div.getTxtSearchShujiiCodeTo().getValue().isEmpty()) {
             if (Long.valueOf(div.getTxtSearchShujiiCodeFrom().getValue().toString())
                     > Long.valueOf(div.getTxtSearchShujiiCodeTo().getValue().toString())) {
                 主治医コードFrom = div.getTxtSearchShujiiCodeTo().getValue();
@@ -269,9 +281,28 @@ public class ShujiiMaster {
             onBlur_txtShichoson(div);
             onBlur_txtSearchShujiiIryokikanMeisho(div);
             return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
+        } else {
+            div.getShujiiJohoInput().getTxtShichoson().setValue(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+            onBlur_txtShichoson(div);
+            div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(edit主治医医療機関(div));
+            onBlur_txtSearchShujiiIryokikanMeisho(div);
         }
 
         return ResponseData.of(div).respond();
+    }
+
+    private RString edit主治医医療機関(ShujiiMasterDiv div) {
+
+        if (div.getShujiiJohoInput().getTxtShichoson().getValue().equals(RString.EMPTY)) {
+            return RString.EMPTY;
+        }
+        if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().size() == 1) {
+            return div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().get(0).getShujiiIryoKikanCode().getValue();
+        }
+        if (div.getTxtSearchShujiiIryokikanCodeFrom().getValue().equals(div.getTxtSearchShujiiIryokikanCodeTo().getValue())) {
+            return div.getTxtSearchShujiiIryokikanCodeFrom().getValue();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -355,7 +386,10 @@ public class ShujiiMaster {
         if (!RString.isNullOrEmpty(主治医医療機関コード)) {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
-        return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧);
+        if (isUpdate(div.getShujiiIchiran().getDgShujiiIchiran().getDataSource())) {
+            return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧);
+        }
+        return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_保存ボタン非活性);
     }
 
     /**
@@ -407,10 +441,7 @@ public class ShujiiMaster {
         div.getShujiiIchiran().setDisabled(false);
         getHandler(div).setShujiiJohoToIchiran(イベント状態);
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
-        if (!RString.isNullOrEmpty(主治医医療機関コード)) {
-            return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
-        }
-        return ResponseData.of(div).respond();
+        return responseWithSettingState(div, 主治医医療機関コード);
     }
 
     /**
@@ -667,7 +698,7 @@ public class ShujiiMaster {
     public ResponseData<ShujiiMasterDiv> onClick_btnBackIchiran(ShujiiMasterDiv div) {
         div.getShujiiIchiran().setDisabled(false);
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
-        return ResponseData.of(div).respond();
+        return responseWithSettingState(div, RString.EMPTY);
     }
 
     /**

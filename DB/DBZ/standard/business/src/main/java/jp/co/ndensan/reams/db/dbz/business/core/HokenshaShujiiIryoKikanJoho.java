@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -75,7 +76,7 @@ public class HokenshaShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public RString get主治医医療機関コード() {
+    public ShujiiIryokikanCode get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -295,7 +296,7 @@ public class HokenshaShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;

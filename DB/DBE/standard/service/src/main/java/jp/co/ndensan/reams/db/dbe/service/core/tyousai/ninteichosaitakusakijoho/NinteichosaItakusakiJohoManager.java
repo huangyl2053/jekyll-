@@ -127,6 +127,6 @@ public class NinteichosaItakusakiJohoManager {
     @Transaction
     public int deletePhysical(DbT5910NinteichosaItakusakiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報エンティティ"));
-        return 認定調査委託先情報Dac.save(entity);
+        return 認定調査委託先情報Dac.deletePhysical(entity);
     }
 }

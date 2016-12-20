@@ -61,6 +61,7 @@ public class NinteiChosaHoshuShokaiHandler {
         Decimal 委託料 = Decimal.ZERO;
         for (NinteichosahoshushokaiBusiness 調査一覧 : 調査情報) {
             dgNinteiChosaHoshu_Row row = new dgNinteiChosaHoshu_Row();
+            row.setHokensha(get保険者(調査一覧));
             row.setChosainCode(調査一覧.get認定調査員コード());
             row.setChosainShimei(調査一覧.get調査員氏名());
             row.setChosakikanCode(調査一覧.get認定調査委託先コード());
@@ -166,5 +167,14 @@ public class NinteiChosaHoshuShokaiHandler {
         tempData.set調査依頼日開始(依頼日開始);
         tempData.set調査依頼日終了(依頼日終了);
         return tempData;
+    }
+
+    private RString get保険者(NinteichosahoshushokaiBusiness 調査情報) {
+        return nullToEmpty(調査情報.get証記載保険者番号()).concat(RString.HALF_SPACE).concat(nullToEmpty(調査情報.get市町村名称()));
+
+    }
+
+    private RString nullToEmpty(RString str) {
+        return str == null ? RString.EMPTY : str;
     }
 }

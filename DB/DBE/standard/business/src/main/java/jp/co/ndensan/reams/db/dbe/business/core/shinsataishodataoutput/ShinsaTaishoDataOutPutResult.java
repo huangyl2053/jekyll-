@@ -284,102 +284,102 @@ public class ShinsaTaishoDataOutPutResult {
 
         for (ShinsakaiShinchokuJokyo shinsakaiShinchokuJokyo : ShinsakaiShinchokuJokyo.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("介護認定審査会進捗状況"));
-            eucCsvEntity.setコード値(shinsakaiShinchokuJokyo.getコード());
-            eucCsvEntity.setコード表示名称(shinsakaiShinchokuJokyo.get名称());
+            eucCsvEntity.setコード種別(new RString("介護認定審査会進捗状況"));
+            eucCsvEntity.setコード(shinsakaiShinchokuJokyo.getコード());
+            eucCsvEntity.set名称(shinsakaiShinchokuJokyo.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (KaigoninteiShinsakaiGichoKubunCode kaigonintei : KaigoninteiShinsakaiGichoKubunCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("介護認定審査会議長区分コード"));
-            eucCsvEntity.setコード値(kaigonintei.getコード());
-            eucCsvEntity.setコード表示名称(kaigonintei.get名称());
+            eucCsvEntity.setコード種別(new RString("介護認定審査会議長区分コード"));
+            eucCsvEntity.setコード(kaigonintei.getコード());
+            eucCsvEntity.set名称(kaigonintei.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
 
         for (YokaigoJotaizoReiCode yokaigoJotaizoReiCode : YokaigoJotaizoReiCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("要介護状態像例コード"));
-            eucCsvEntity.setコード値(yokaigoJotaizoReiCode.getコード());
-            eucCsvEntity.setコード表示名称(yokaigoJotaizoReiCode.get名称());
+            eucCsvEntity.setコード種別(new RString("要介護状態像例コード"));
+            eucCsvEntity.setコード(yokaigoJotaizoReiCode.getコード());
+            eucCsvEntity.set名称(yokaigoJotaizoReiCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         setEnumClassList(codeMasterEucCsvEntityList);
         for (NinteiShinsakaiIkenShurui ninteiShinsakaiIkenShurui : NinteiShinsakaiIkenShurui.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("認定審査会意見種類"));
-            eucCsvEntity.setコード値(ninteiShinsakaiIkenShurui.getコード());
-            eucCsvEntity.setコード表示名称(ninteiShinsakaiIkenShurui.get名称());
+            eucCsvEntity.setコード種別(new RString("認定審査会意見種類"));
+            eucCsvEntity.setコード(ninteiShinsakaiIkenShurui.getコード());
+            eucCsvEntity.set名称(ninteiShinsakaiIkenShurui.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (NijiHanteiKekkaInputHoho nijiHanteiKekkaInputHoho : NijiHanteiKekkaInputHoho.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("二次判定結果入力方法"));
-            eucCsvEntity.setコード値(nijiHanteiKekkaInputHoho.getコード());
-            eucCsvEntity.setコード表示名称(nijiHanteiKekkaInputHoho.get名称());
+            eucCsvEntity.setコード種別(new RString("二次判定結果入力方法"));
+            eucCsvEntity.setコード(nijiHanteiKekkaInputHoho.getコード());
+            eucCsvEntity.set名称(nijiHanteiKekkaInputHoho.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (NinteiShinseiHoreiCode ninteiShinseiHoreiCode : NinteiShinseiHoreiCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("申請区分（法令）コード"));
-            eucCsvEntity.setコード値(ninteiShinseiHoreiCode.getコード());
-            eucCsvEntity.setコード表示名称(ninteiShinseiHoreiCode.get名称());
+            eucCsvEntity.setコード種別(new RString("申請区分（法令）コード"));
+            eucCsvEntity.setコード(ninteiShinseiHoreiCode.getコード());
+            eucCsvEntity.set名称(ninteiShinseiHoreiCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (NinteiShinseiShinseijiKubunCode ninteiShinsei : NinteiShinseiShinseijiKubunCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("申請区分（申請時）コード"));
-            eucCsvEntity.setコード値(ninteiShinsei.getコード());
-            eucCsvEntity.setコード表示名称(ninteiShinsei.get名称());
+            eucCsvEntity.setコード種別(new RString("申請区分（申請時）コード"));
+            eucCsvEntity.setコード(ninteiShinsei.getコード());
+            eucCsvEntity.set名称(ninteiShinsei.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (JotaiAnteiseiCode jotaiAnteiseiCode : JotaiAnteiseiCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("要介護認定状態の安定性コード"));
-            eucCsvEntity.setコード値(jotaiAnteiseiCode.getコード());
-            eucCsvEntity.setコード表示名称(jotaiAnteiseiCode.get名称());
+            eucCsvEntity.setコード種別(new RString("要介護認定状態の安定性コード"));
+            eucCsvEntity.setコード(jotaiAnteiseiCode.getコード());
+            eucCsvEntity.set名称(jotaiAnteiseiCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (SuiteiKyufuKubunCode suiteiKyufuKubunCode : SuiteiKyufuKubunCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("認知機能及び状態安定性から推定される給付区分コード"));
-            eucCsvEntity.setコード値(suiteiKyufuKubunCode.getコード());
-            eucCsvEntity.setコード表示名称(suiteiKyufuKubunCode.get名称());
+            eucCsvEntity.setコード種別(new RString("認知機能及び状態安定性から推定される給付区分コード"));
+            eucCsvEntity.setコード(suiteiKyufuKubunCode.getコード());
+            eucCsvEntity.set名称(suiteiKyufuKubunCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (TokkijikoTextImageKubun tokkijikoTextImageKubun : TokkijikoTextImageKubun.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("特記事項テキスト・イメージ区分"));
-            eucCsvEntity.setコード値(tokkijikoTextImageKubun.getコード());
-            eucCsvEntity.setコード表示名称(tokkijikoTextImageKubun.get名称());
+            eucCsvEntity.setコード種別(new RString("特記事項テキスト・イメージ区分"));
+            eucCsvEntity.setコード(tokkijikoTextImageKubun.getコード());
+            eucCsvEntity.set名称(tokkijikoTextImageKubun.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (NinteiChousaIraiKubunCode ninteiChousaIraiKubunCode : NinteiChousaIraiKubunCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("認定調査依頼区分コード"));
-            eucCsvEntity.setコード値(ninteiChousaIraiKubunCode.getコード());
-            eucCsvEntity.setコード表示名称(ninteiChousaIraiKubunCode.get名称());
+            eucCsvEntity.setコード種別(new RString("認定調査依頼区分コード"));
+            eucCsvEntity.setコード(ninteiChousaIraiKubunCode.getコード());
+            eucCsvEntity.set名称(ninteiChousaIraiKubunCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (ChosaKubun chosaKubun : ChosaKubun.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("調査区分"));
-            eucCsvEntity.setコード値(chosaKubun.getコード());
-            eucCsvEntity.setコード表示名称(chosaKubun.get名称());
+            eucCsvEntity.setコード種別(new RString("調査区分"));
+            eucCsvEntity.setコード(chosaKubun.getコード());
+            eucCsvEntity.set名称(chosaKubun.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (ChosaJisshiBashoCode chosaJisshiBashoCode : ChosaJisshiBashoCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("調査実施場所コード"));
-            eucCsvEntity.setコード値(chosaJisshiBashoCode.getコード());
-            eucCsvEntity.setコード表示名称(chosaJisshiBashoCode.get名称());
+            eucCsvEntity.setコード種別(new RString("調査実施場所コード"));
+            eucCsvEntity.setコード(chosaJisshiBashoCode.getコード());
+            eucCsvEntity.set名称(chosaJisshiBashoCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (ServiceKubunCode serviceKubunCode : ServiceKubunCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("現在のサービス区分コード"));
-            eucCsvEntity.setコード値(serviceKubunCode.getコード());
-            eucCsvEntity.setコード表示名称(serviceKubunCode.get名称());
+            eucCsvEntity.setコード種別(new RString("現在のサービス区分コード"));
+            eucCsvEntity.setコード(serviceKubunCode.getコード());
+            eucCsvEntity.set名称(serviceKubunCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
 
@@ -390,109 +390,109 @@ public class ShinsaTaishoDataOutPutResult {
     private void setEnumClassList(List<CodeMasterEucCsvEntity> codeMasterEucCsvEntityList) {
         for (IsShiryoSakuseiZumi isShiryoSakuseiZumi : IsShiryoSakuseiZumi.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("資料作成済区分"));
+            eucCsvEntity.setコード種別(new RString("資料作成済区分"));
             if (isShiryoSakuseiZumi.is作成済()) {
-                eucCsvEntity.setコード値(new RString("1"));
+                eucCsvEntity.setコード(new RString("1"));
             } else {
-                eucCsvEntity.setコード値(new RString("0"));
+                eucCsvEntity.setコード(new RString("0"));
             }
-            eucCsvEntity.setコード表示名称(isShiryoSakuseiZumi.get名称());
+            eucCsvEntity.set名称(isShiryoSakuseiZumi.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (IsShusseki isShusseki : IsShusseki.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("委員出席"));
+            eucCsvEntity.setコード種別(new RString("委員出席"));
             if (isShusseki.is委員出席()) {
-                eucCsvEntity.setコード値(new RString("1"));
+                eucCsvEntity.setコード(new RString("1"));
             } else {
-                eucCsvEntity.setコード値(new RString("0"));
+                eucCsvEntity.setコード(new RString("0"));
             }
-            eucCsvEntity.setコード表示名称(isShusseki.get名称());
+            eucCsvEntity.set名称(isShusseki.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (IsChikokuUmu isChikokuUmu : IsChikokuUmu.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("委員遅刻有無"));
+            eucCsvEntity.setコード種別(new RString("委員遅刻有無"));
             if (isChikokuUmu.is委員遅刻()) {
-                eucCsvEntity.setコード値(new RString("1"));
+                eucCsvEntity.setコード(new RString("1"));
             } else {
-                eucCsvEntity.setコード値(new RString("0"));
+                eucCsvEntity.setコード(new RString("0"));
             }
-            eucCsvEntity.setコード表示名称(isChikokuUmu.get名称());
+            eucCsvEntity.set名称(isChikokuUmu.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (IssotaiUmu issotaiUmu : IssotaiUmu.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("委員早退有無"));
+            eucCsvEntity.setコード種別(new RString("委員早退有無"));
             if (issotaiUmu.is委員早退()) {
-                eucCsvEntity.setコード値(new RString("1"));
+                eucCsvEntity.setコード(new RString("1"));
             } else {
-                eucCsvEntity.setコード値(new RString("0"));
+                eucCsvEntity.setコード(new RString("0"));
             }
-            eucCsvEntity.setコード表示名称(issotaiUmu.get名称());
+            eucCsvEntity.set名称(issotaiUmu.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (HanteiKekkaCode hanteiKekkaCode : HanteiKekkaCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("判定結果コード"));
-            eucCsvEntity.setコード値(hanteiKekkaCode.getコード());
-            eucCsvEntity.setコード表示名称(hanteiKekkaCode.get名称());
+            eucCsvEntity.setコード種別(new RString("判定結果コード"));
+            eucCsvEntity.setコード(hanteiKekkaCode.getコード());
+            eucCsvEntity.set名称(hanteiKekkaCode.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (YokaigoJotaiKubun yokaigoJotaiKubun : YokaigoJotaiKubun.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("要介護状態区分コード"));
-            eucCsvEntity.setコード値(yokaigoJotaiKubun.getコード());
-            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun.get名称());
+            eucCsvEntity.setコード種別(new RString("要介護状態区分コード"));
+            eucCsvEntity.setコード(yokaigoJotaiKubun.getコード());
+            eucCsvEntity.set名称(yokaigoJotaiKubun.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (YokaigoJotaiKubun02 yokaigoJotaiKubun02 : YokaigoJotaiKubun02.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("要介護状態区分コード02"));
-            eucCsvEntity.setコード値(yokaigoJotaiKubun02.getコード());
-            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun02.get名称());
+            eucCsvEntity.setコード種別(new RString("要介護状態区分コード02"));
+            eucCsvEntity.setコード(yokaigoJotaiKubun02.getコード());
+            eucCsvEntity.set名称(yokaigoJotaiKubun02.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (YokaigoJotaiKubun06 yokaigoJotaiKubun06 : YokaigoJotaiKubun06.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("要介護状態区分コード06"));
-            eucCsvEntity.setコード値(yokaigoJotaiKubun06.getコード());
-            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun06.get名称());
+            eucCsvEntity.setコード種別(new RString("要介護状態区分コード06"));
+            eucCsvEntity.setコード(yokaigoJotaiKubun06.getコード());
+            eucCsvEntity.set名称(yokaigoJotaiKubun06.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (YokaigoJotaiKubun09 yokaigoJotaiKubun09 : YokaigoJotaiKubun09.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("要介護状態区分コード09"));
-            eucCsvEntity.setコード値(yokaigoJotaiKubun09.getコード());
-            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun09.get名称());
+            eucCsvEntity.setコード種別(new RString("要介護状態区分コード09"));
+            eucCsvEntity.setコード(yokaigoJotaiKubun09.getコード());
+            eucCsvEntity.set名称(yokaigoJotaiKubun09.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (YokaigoJotaiKubun99 yokaigoJotaiKubun99 : YokaigoJotaiKubun99.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("要介護状態区分コード99"));
-            eucCsvEntity.setコード値(yokaigoJotaiKubun99.getコード());
-            eucCsvEntity.setコード表示名称(yokaigoJotaiKubun99.get名称());
+            eucCsvEntity.setコード種別(new RString("要介護状態区分コード99"));
+            eucCsvEntity.setコード(yokaigoJotaiKubun99.getコード());
+            eucCsvEntity.set名称(yokaigoJotaiKubun99.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (GenponMaskKubun genponMaskKubun : GenponMaskKubun.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("原本マスク区分"));
-            eucCsvEntity.setコード値(genponMaskKubun.getコード());
-            eucCsvEntity.setコード表示名称(genponMaskKubun.get名称());
+            eucCsvEntity.setコード種別(new RString("原本マスク区分"));
+            eucCsvEntity.setコード(genponMaskKubun.getコード());
+            eucCsvEntity.set名称(genponMaskKubun.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (NinchishoNichijoSeikatsuJiritsudoCode ninchishoNichijo : NinchishoNichijoSeikatsuJiritsudoCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("認知症高齢者自立度コード"));
-            eucCsvEntity.setコード値(ninchishoNichijo.getコード());
-            eucCsvEntity.setコード表示名称(ninchishoNichijo.get名称());
+            eucCsvEntity.setコード種別(new RString("認知症高齢者自立度コード"));
+            eucCsvEntity.setコード(ninchishoNichijo.getコード());
+            eucCsvEntity.set名称(ninchishoNichijo.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
         for (ShogaiNichijoSeikatsuJiritsudoCode shogaiNichijo : ShogaiNichijoSeikatsuJiritsudoCode.values()) {
             CodeMasterEucCsvEntity eucCsvEntity = new CodeMasterEucCsvEntity();
-            eucCsvEntity.setコード名称(new RString("障害高齢者自立度コード"));
-            eucCsvEntity.setコード値(shogaiNichijo.getコード());
-            eucCsvEntity.setコード表示名称(shogaiNichijo.get名称());
+            eucCsvEntity.setコード種別(new RString("障害高齢者自立度コード"));
+            eucCsvEntity.setコード(shogaiNichijo.getコード());
+            eucCsvEntity.set名称(shogaiNichijo.get名称());
             codeMasterEucCsvEntityList.add(eucCsvEntity);
         }
     }

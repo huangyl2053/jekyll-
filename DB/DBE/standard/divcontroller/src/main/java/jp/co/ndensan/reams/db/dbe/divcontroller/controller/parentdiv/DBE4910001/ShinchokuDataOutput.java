@@ -29,8 +29,8 @@ public class ShinchokuDataOutput {
 
     private final YouKaigoNinteiShinchokuJohouFinder finder;
     private List<YouKaigoNinteiShinchokuJohouBusiness> 調査員情報Lis;
-    private static final RString 結果情報 = new RString("0");
-    private static final RString 進捗情報 = new RString("1");
+    private static final RString 結果情報 = new RString("1");
+    private static final RString 進捗情報 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -60,6 +60,7 @@ public class ShinchokuDataOutput {
         RString hihokenshaNo = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         if (hihokenshaNo != null && !hihokenshaNo.isEmpty()) {
             div.getTxtHihokenshaCode().setValue(hihokenshaNo);
+            getHandler(div).onChange_txtHihokenshaCode();
         }
         return ResponseData.of(div).respond();
     }
@@ -142,6 +143,27 @@ public class ShinchokuDataOutput {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 市町村DDL変更時の動作
+     * @param div
+     * @return ResponseData
+     */
+    public ResponseData<ShinchokuDataOutputDiv> onChange_ddlSichoson(ShinchokuDataOutputDiv div) {
+        getHandler(div).onChange_ddlSichoson();
+        return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
+    }
+    
+    /**
+     * 被保険者番号変更時の動作
+     * @param div
+     * @return ResponseData
+     */
+    public ResponseData<ShinchokuDataOutputDiv> onChange_txtHihokenshaCode(ShinchokuDataOutputDiv div) {
+        div.getTxtShimei().clearValue();
+        getHandler(div).onChange_txtHihokenshaCode();
+        return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
     }
 
     private ShinchokuDataOutputHandler getHandler(ShinchokuDataOutputDiv div) {

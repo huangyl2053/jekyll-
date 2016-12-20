@@ -176,7 +176,7 @@ public class DbT4911ShujiiIryoKikanJohoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 LasdecCode 市町村コード,
-                RString 主治医医療機関コード) {
+                ShujiiIryokikanCode 主治医医療機関コード) {
             DbT4911ShujiiIryoKikanJohoEntity entity = DbT4911ShujiiIryoKikanJohoEntityGenerator.createDbT4911ShujiiIryoKikanJohoEntity();
 
             sut.save(entity);

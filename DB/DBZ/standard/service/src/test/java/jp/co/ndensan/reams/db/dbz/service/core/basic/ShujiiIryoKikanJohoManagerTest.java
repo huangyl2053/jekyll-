@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJoho
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -50,7 +49,7 @@ public class ShujiiIryoKikanJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
             sut.get主治医医療機関情報(null, 主治医医療機関コード);
         }
 
@@ -63,10 +62,10 @@ public class ShujiiIryoKikanJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class))).thenReturn(null);
 
             LasdecCode 市町村コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
-            RString 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
             ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(市町村コード, 主治医医療機関コード);
 
             assertThat(result, is(nullValue()));
@@ -75,10 +74,10 @@ public class ShujiiIryoKikanJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5911ShujiiIryoKikanJohoEntity entity = DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity();
-            when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class))).thenReturn(entity);
 
             LasdecCode 市町村コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
-            RString 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
             ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(市町村コード, 主治医医療機関コード);
 
             assertThat(result.get市町村コード().value(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード.value()));

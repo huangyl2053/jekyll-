@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -62,6 +64,7 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     private static final RString ファイルID_E0002 = new RString("E0002.png");
     private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
     private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
+    private static final RString SEPARATOR = new RString("/");
 
     @Override
     protected void initialize() {
@@ -80,12 +83,14 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
         entity.setJimukyoku(true);
         business = new JimuShinsakaiWariateJohoBusiness(entity);
+        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+        RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         if (entity.isJimukyoku()) {
-            business.setイメージファイル(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001BAK));
-            business.setイメージファイル_BAK(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002BAK));
+            business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+            business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
         } else {
-            business.setイメージファイル(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0001));
-            business.setイメージファイル_BAK(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイルID_E0002));
+            business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001));
+            business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002));
         }
         Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(business);
         reportA4.writeBy(reportSourceWriterA4);
@@ -95,9 +100,7 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
     protected void createWriter() {
         batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
                 .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
-                .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().new SimpleLayoutBreaker(
-
-                    Shujiiikensho1A4ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().new SimpleLayoutBreaker(Shujiiikensho1A4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<Shujiiikensho1A4ReportSource> occuredBreak(
                             ReportLineRecord<Shujiiikensho1A4ReportSource> currentRecord,
@@ -166,12 +169,18 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
         return list;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, sharedFileName);
+    private RString 共有ファイルを引き出す(RString path, RString fileName) {
+        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
+            return getFilePath(path, fileName);
         }
-        return imagePath;
+        return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {

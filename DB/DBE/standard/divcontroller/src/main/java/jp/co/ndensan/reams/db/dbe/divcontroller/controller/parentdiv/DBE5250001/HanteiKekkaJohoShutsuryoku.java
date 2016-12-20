@@ -28,6 +28,7 @@ public class HanteiKekkaJohoShutsuryoku {
 
     private static final RString モード = new RString("hanteiKekka");
     private static final RString 帳票発行ボタン = new RString("btnHanteiKekkaIchiran");
+    private static final RString 一覧グリッド高さ = new RString("300");
 
     /**
      * 判定結果情報出力（介護認定審査会）Divを初期化します。
@@ -46,6 +47,7 @@ public class HanteiKekkaJohoShutsuryoku {
         map.put(DBE525001SelectChohyoType.要介護認定結果通知一覧表.getKey(), DBE525001SelectChohyoType.要介護認定結果通知一覧表.get帳票名称());
         div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().setDataSource(KeyValueDataSourceConverter.getDataSource(map));
         div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().setSelectedItems(KeyValueDataSourceConverter.getDataSource(map));
+        div.getCcdIShinsakaiIchiranList().set一覧グリッド高さ指定(一覧グリッド高さ);
         return ResponseData.of(div).respond();
     }
 

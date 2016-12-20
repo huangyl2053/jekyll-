@@ -174,7 +174,7 @@ public class RenkeiDataTorikomiBusiness {
         }
         DbT5911TempEntity dbT5911TempEntity = entity.getDbt5911TempEntity();
         dbt5911Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
-        dbt5911Entity.setShujiiIryokikanCode(dbT5911TempEntity.get医療機関コード());
+        dbt5911Entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(dbT5911TempEntity.get医療機関コード()));
         dbt5911Entity.setIryoKikanMeisho(dbT5911TempEntity.get医療機関名称());
         if (!processParamter.is厚労省フラグ()) {
             dbt5911Entity.setIryoKikanMeishoKana(dbT5911TempEntity.get医療機関名称カナ());

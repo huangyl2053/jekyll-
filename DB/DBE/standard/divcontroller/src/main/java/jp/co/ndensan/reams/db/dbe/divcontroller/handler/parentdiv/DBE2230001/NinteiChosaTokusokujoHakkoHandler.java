@@ -79,9 +79,11 @@ public class NinteiChosaTokusokujoHakkoHandler {
         NinteiChosaTokusokujoHakkoTempData tempData = new NinteiChosaTokusokujoHakkoTempData();
         tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
         tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get市町村名称());
-        tempData.setTemp_認定調査委託先コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosaItakusakiCode());
-        tempData.setTemp_認定調査員コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosain());
-        FlexibleDate txtKijunDay = new FlexibleDate(div.getHakkoJoken().getTxtKijunDay().getValue().toString());
+        tempData.setTemp_認定調査委託先コード(div.getYokaigoNinteiChosaTokusokujo()
+                .getCcdItakusakiAndChosain().getTxtChosaItakusakiCode().getValue());
+        tempData.setTemp_認定調査員コード(div.getYokaigoNinteiChosaTokusokujo()
+                .getCcdItakusakiAndChosain().getTxtChosainCode().getValue());
+        FlexibleDate txtKijunDay = new FlexibleDate(div.getYokaigoNinteiChosaTokusokujo().getTxtKijunDay().getValue().toString());
         if (!txtKijunDay.isEmpty()) {
             tempData.setTemp_基準日(txtKijunDay);
         }
@@ -90,11 +92,9 @@ public class NinteiChosaTokusokujoHakkoHandler {
                 ? 選択された : 未選択);
         tempData.setTemp_認定調査督促対象者一覧表(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY1)
                 ? 選択された : 未選択);
-        tempData.setTemp_CSV出力(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().contains(RADIOBUTTONKEY1)
+        tempData.setTemp_CSV出力(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkCSVShutsuryoku().getSelectedKeys().contains(RADIOBUTTONKEY1)
                 ? 選択された : 未選択);
         tempData.setTemp_印刷済対象者(div.getYokaigoNinteiChosaTokusokujo().getChkInsatsuzumiTaisho().getSelectedKeys().contains(RADIOBUTTONKEY0)
-                ? 選択された : 未選択);
-        tempData.setTemp_発行履歴(div.getYokaigoNinteiChosaTokusokujo().getChkHakkoRireki().getSelectedKeys().contains(RADIOBUTTONKEY0)
                 ? 選択された : 未選択);
         tempData.setTemp_督促方法(div.getYokaigoNinteiChosaTokusokujo().getRadTokusokuHoho().getSelectedIndex());
         tempData.setTemp_督促メモ(div.getYokaigoNinteiChosaTokusokujo().getTxtTokusokuMemo().getValue());
@@ -126,7 +126,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
     }
 
     private void initializtion() {
-        div.getHakkoJoken().getTxtKijunDay().setValue(RDate.getNowDate());
+        div.getYokaigoNinteiChosaTokusokujo().getTxtKijunDay().setValue(RDate.getNowDate());
         RString 認定調査督促期限日数 = DbBusinessConfig.get(DbeBusinessConfigKey.認定調査督促期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (Decimal.canConvert(認定調査督促期限日数)) {
             div.getYokaigoNinteiChosaTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(認定調査督促期限日数.toString()));
@@ -142,9 +142,8 @@ public class NinteiChosaTokusokujoHakkoHandler {
     public void changeHokensha() {
         boolean is全市町村 = HokenshaSummary.EMPTY.equals(div.getCcdHokensha().getSelectedItem());
         div.getCcdItakusakiAndChosain().setDisabled(is全市町村);
-        div.getCcdItakusakiAndChosain().onClickBtnClear();
+        div.getCcdItakusakiAndChosain().clear();
         div.getCcdItakusakiAndChosain().setHdnShinseishoKanriNo(ShinseishoKanriNo.EMPTY.value());
-        div.getCcdItakusakiAndChosain().setHdnDatabaseSubGyomuCode(SubGyomuCode.DBE認定支援.value());
         div.getCcdItakusakiAndChosain().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
     }
 }

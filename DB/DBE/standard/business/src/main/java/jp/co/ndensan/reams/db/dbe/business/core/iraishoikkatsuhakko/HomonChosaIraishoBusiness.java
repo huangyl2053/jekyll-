@@ -1073,8 +1073,9 @@ public class HomonChosaIraishoBusiness {
      * get認定調査票差異チェック票Listを設定メッソドです。
      *
      * @param entity entity
+     * @return 
      */
-    public void set認定調査票差異チェック票List(HomonChosaIraishoRelateEntity entity) {
+    public ChosahyoSaiCheckhyoRelateEntity set認定調査票差異チェック票List(HomonChosaIraishoRelateEntity entity) {
         ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
         前回連番Map.put(entity.get前回連番(), entity.get前回連番に対する調査項目());
         checkEntity.set被保険者番号(entity.get被保険者番号());
@@ -1090,13 +1091,14 @@ public class HomonChosaIraishoBusiness {
             shinseishoKanriNo = entity.get申請書管理番号();
             checkEntityList.add(checkEntity);
         }
+        return checkEntity;
     }
 
     /**
      * 帳票「認定調査票差異チェック票_DBE292001」のItemを取得メッソドです。
      *
      * @param entity entity
-     * @return ChosahyoTokkijikoBusiness
+     * @return SaiChekkuhyoItem
      */
     public SaiChekkuhyoItem setDBE292001Item(ChosahyoSaiCheckhyoRelateEntity entity) {
         return new SaiChekkuhyoItem(
@@ -1189,7 +1191,7 @@ public class HomonChosaIraishoBusiness {
      * 帳票「認定調査票差異チェック票_DBE292002」のItemを取得メッソドです。
      *
      * @param entity entity
-     * @return ChosahyoTokkijikoBusiness
+     * @return SaiChekkuhyoItem
      */
     public SaiChekkuhyoItem setDBE292002Item(ChosahyoSaiCheckhyoRelateEntity entity) {
         return new SaiChekkuhyoItem(
@@ -1277,7 +1279,15 @@ public class HomonChosaIraishoBusiness {
                 RString.EMPTY,
                 RString.EMPTY);
     }
-
+    /**
+     * 帳票「認定調査票差異チェック票_DBE292003」のItemを取得メッソドです。
+     *
+     * @param entity entity
+     * @return SaiChekkuhyoItem
+     */
+    public SaiChekkuhyoItem setDBE292003Item(ChosahyoSaiCheckhyoRelateEntity entity) {
+        return setDBE292002Item(entity);
+    }
     /**
      * 帳票「認定調査票差異チェック票_DBE292004」のItemを取得メッソドです。
      *
@@ -1397,6 +1407,46 @@ public class HomonChosaIraishoBusiness {
         reportEntity.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
         reportEntity.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
         reportEntity.setShinseiDD2(ninteiShinseiDay.substring(INT8));
+        reportEntity.setHihokenshaNo1(被保険者番号リスト.get(0));
+        reportEntity.setHihokenshaNo2(被保険者番号リスト.get(1));
+        reportEntity.setHihokenshaNo3(被保険者番号リスト.get(2));
+        reportEntity.setHihokenshaNo4(被保険者番号リスト.get(INT3));
+        reportEntity.setHihokenshaNo5(被保険者番号リスト.get(INT4));
+        reportEntity.setHihokenshaNo6(被保険者番号リスト.get(INT5));
+        reportEntity.setHihokenshaNo7(被保険者番号リスト.get(INT6));
+        reportEntity.setHihokenshaNo8(被保険者番号リスト.get(INT7));
+        reportEntity.setHihokenshaNo9(被保険者番号リスト.get(INT8));
+        reportEntity.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        reportEntity.setShinseishaName(entity.get被保険者氏名());
+        return reportEntity;
+    }
+
+    /**
+     * 帳票の編集。
+     *
+     * @param entity HomonChosaIraishoRelateEntity
+     * @return GaikyotokkiA4Business
+     */
+    public GaikyotokkiA4Business setDBE221051Item(HomonChosaIraishoRelateEntity entity) {
+//            RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+//                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        RString ninteiShinseiDay = entity.get認定申請年月日();
+        List<RString> 証記載保険者番号リスト = getValueList(entity.get証記載保険者番号());
+        List<RString> 被保険者番号リスト = getValueList(entity.get被保険者番号());
+        GaikyotokkiA4Business reportEntity = new GaikyotokkiA4Business();
+
+        reportEntity.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
+        reportEntity.setShinseiYY2(ninteiShinseiDay.substring(2, INT3));
+        reportEntity.setShinseiMM1(ninteiShinseiDay.substring(INT4, INT5));
+        reportEntity.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
+        reportEntity.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
+        reportEntity.setShinseiDD2(ninteiShinseiDay.substring(INT8));
+        reportEntity.setHokenshaNo1(証記載保険者番号リスト.get(0));
+        reportEntity.setHokenshaNo2(証記載保険者番号リスト.get(1));
+        reportEntity.setHokenshaNo3(証記載保険者番号リスト.get(2));
+        reportEntity.setHokenshaNo4(証記載保険者番号リスト.get(INT3));
+        reportEntity.setHokenshaNo5(証記載保険者番号リスト.get(INT4));
+        reportEntity.setHokenshaNo6(証記載保険者番号リスト.get(INT5));
         reportEntity.setHihokenshaNo1(被保険者番号リスト.get(0));
         reportEntity.setHihokenshaNo2(被保険者番号リスト.get(1));
         reportEntity.setHihokenshaNo3(被保険者番号リスト.get(2));

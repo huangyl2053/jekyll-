@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 認定調査委託先・認定調査員一覧表のHandlerクラスです。
+ *
  * @reamsid_L DBE-0290-010 dongyabin
  */
 public class ItakusakiChosainIchiranHandler {
@@ -47,22 +48,22 @@ public class ItakusakiChosainIchiranHandler {
         param.setShichosonCode(div.getHokensha().getSelectedItem().get市町村コード().getColumnValue());
         param.setShichosonMeisho(div.getHokensha().getSelectedItem().get市町村名称());
         if (RString.isNullOrEmpty(div.getTxtIryoKikanCodeFrom().getValue())) {
-            param.setItakusakiCodeFrom(new RString("0000000000"));
+            param.setItakusakiCodeFrom(RString.EMPTY);
         } else {
             param.setItakusakiCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
         }
         if (RString.isNullOrEmpty(div.getTxtIryoKikanCodeTo().getValue())) {
-            param.setItakusakiCodeTo(new RString("9999999999"));
+            param.setItakusakiCodeTo(RString.EMPTY);
         } else {
             param.setItakusakiCodeTo(div.getTxtIryoKikanCodeTo().getValue());
         }
         if (RString.isNullOrEmpty(div.getTxtShujiiCodeFrom().getValue())) {
-            param.setChosainNoFrom(new RString("00000000"));
+            param.setChosainNoFrom(RString.EMPTY);
         } else {
             param.setChosainNoFrom(div.getTxtShujiiCodeFrom().getValue());
         }
         if (RString.isNullOrEmpty(div.getTxtShujiiCodeTo().getValue())) {
-            param.setChosainNoTo(new RString("99999999"));
+            param.setChosainNoTo(RString.EMPTY);
         } else {
             param.setChosainNoTo(div.getTxtShujiiCodeTo().getValue());
         }

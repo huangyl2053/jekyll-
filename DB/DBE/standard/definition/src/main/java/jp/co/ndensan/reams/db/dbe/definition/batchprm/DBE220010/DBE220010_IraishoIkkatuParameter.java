@@ -53,6 +53,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String IKENSHO_SAKUSEI_IRAISHO = "shujiiIkenshoSakuseiIraisho";
     private static final String IKENSHO_KINYUU = "ikenshoKinyuu";
     private static final String IKENSHO_KINYUU_OCR = "ikenshoKinyuuOCR";
+    private static final String IKENSHO_KINYUU_DESIGN = "ikenshoKinyuuDesign";
     private static final String IKENSHO_SAKUSEI_SEIKYUUSHO = "ikenshoSakuseiSeikyuusho";
     private static final String IKENSHO_TEISHUTU = "ikenshoTeishutu";
     private static final String IKENSHO_SAKUSEI_IRAI_HAKKOU = "ikenshoSakuseiIraiHakkou";
@@ -114,6 +115,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private boolean ikenshoKinyuu;
     @BatchParameter(key = IKENSHO_KINYUU_OCR, name = "主治医意見書記入用紙OCR出力区分")
     private boolean ikenshoKinyuuOCR;
+    @BatchParameter(key = IKENSHO_KINYUU_DESIGN, name = "主治医意見書記入用紙(デザイン用紙)出力区分")
+    private boolean ikenshoKinyuuDesign;
     @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYUUSHO, name = "主治医意見書作成料請求書出力区分")
     private boolean ikenshoSakuseiSeikyuusho;
     @BatchParameter(key = IKENSHO_TEISHUTU, name = "介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分")
@@ -132,6 +135,44 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString kyotsuHizuke;
     @BatchParameter(key = IKENSHOIRAIRIREKIICHIRANKUBUN, name = "主治医意見書作成依頼履歴一覧出力区分")
     private boolean ikenshoirairirekiIchiranKubun;
+
+    private static final String IS_NINTEI_CHOSA_IRAISHO = "isNinteiChosaIraisho";
+    private static final String IS_NINTEI_CHOSAHYO_YOSHI = "isNinteiChosahyoYoshi";
+    private static final String IS_NINTEI_CHOSAHYO_OCR = "isNinteiChosahyoOcr";
+    private static final String IS_NINTEI_CHOSA_CHECK_HYO = "isNinteiChosaCheckHyo";
+    private static final String IS_TOKKI_YOSHI = "isTokkiYoshi";
+    private static final String IS_TOKKI_OCR = "isTokkiOcr";
+    private static final String IS_TOKKI_HAS_KOMOKU = "isTokkiHasKomoku";
+    private static final String IS_TOKKI_NO_KOMOKU = "isTokkiNoKomoku";
+    private static final String IS_TOKKI_FREE_TYPE = "isTokkiFreeType";
+    private static final String IS_TOKKI_INPUT_TYPE = "isTokkiInputType";
+    private static final String IS_GAIKYOU_TOKKI = "isGaikyouTokki";
+    private static final String IS_ZENKAI_NINTEI_CHOSAHYO = "isZenkaiNinteiChosahyo";
+
+    @BatchParameter(key = IS_NINTEI_CHOSA_IRAISHO, name = "認定調査依頼書")
+    private boolean is認定調査依頼書;
+    @BatchParameter(key = IS_NINTEI_CHOSAHYO_YOSHI, name = "認定調査票(デザイン用紙)")
+    private boolean is認定調査票_デザイン用紙;
+    @BatchParameter(key = IS_NINTEI_CHOSAHYO_OCR, name = "認定調査票OCR")
+    private boolean is認定調査票OCR;
+    @BatchParameter(key = IS_NINTEI_CHOSA_CHECK_HYO, name = "認定調査差異チェック票")
+    private boolean is認定調査差異チェック票;
+    @BatchParameter(key = IS_TOKKI_YOSHI, name = "特記事項(デザイン用紙)")
+    private boolean is特記事項_デザイン用紙;
+    @BatchParameter(key = IS_TOKKI_OCR, name = "特記事項OCR")
+    private boolean is特記事項OCR;
+    @BatchParameter(key = IS_TOKKI_HAS_KOMOKU, name = "特記事項(項目あり)")
+    private boolean is特記事項_項目あり;
+    @BatchParameter(key = IS_TOKKI_NO_KOMOKU, name = "特記事項(項目無し)")
+    private boolean is特記事項_項目無し;
+    @BatchParameter(key = IS_TOKKI_FREE_TYPE, name = "特記事項(フリータイプ)")
+    private boolean is特記事項_フリータイプ;
+    @BatchParameter(key = IS_TOKKI_INPUT_TYPE, name = "手入力タイプ")
+    private boolean is手入力タイプ;
+    @BatchParameter(key = IS_GAIKYOU_TOKKI, name = "概況特記")
+    private boolean is概況特記;
+    @BatchParameter(key = IS_ZENKAI_NINTEI_CHOSAHYO, name = "前回認定調査結果との比較表")
+    private boolean is前回認定調査結果との比較表;
 
     /**
      * 主治医意見書作成依頼発行一覧表ですためのprocessのパラメータを生成します。

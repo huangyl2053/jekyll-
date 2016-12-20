@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.jimukyokuyouichijihanteikekkahyo
 import jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4.IchijihanteikekkahyoA4Property;
 import jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4.IchijihanteikekkahyoA4Report;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
@@ -28,7 +28,7 @@ public class IchijihanteikekkahyoA4PrintService {
      */
     public SourceDataCollection print(IchijihanteikekkahyoA4Data data) {
         IchijihanteikekkahyoA4Property property = new IchijihanteikekkahyoA4Property();
-        return new Printer<IchijihanteikekkahyoA4ReportSource>().spool(property, toReports(getEntity(data)));
+        return new Printer<IchijihanteikekkahyoReportSource>().spool(property, toReports(getEntity(data)));
     }
 
     private static IchijihanteikekkahyoA4Report toReports(IchijihanteikekkahyoA4Entity item) {

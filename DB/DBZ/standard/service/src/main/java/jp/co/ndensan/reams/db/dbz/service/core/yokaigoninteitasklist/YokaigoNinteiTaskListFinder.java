@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiT
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosaNyushuRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosairaiRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
@@ -153,8 +154,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前調査依頼(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
             entity.initializeMd5();
@@ -177,7 +178,8 @@ public class YokaigoNinteiTaskListFinder {
         for (IKnSyoiRaiRelateEntity entity : entityList) {
             意見書依頼List.add(new IKnSyoiRaiBusiness(entity));
         }
-        return SearchResult.of(意見書依頼List, 0, false);
+        int totalcount = mapper.get意見書依頼件数(parameter);
+        return SearchResult.of(意見書依頼List, totalcount, parameter.get件数().intValue() < totalcount);
     }
 
     /**
@@ -190,11 +192,15 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<CyoSaNyuSyuBusiness> get調査入手モード(YokaigoNinteiTaskListParameter parameter) {
         List<CyoSaNyuSyuBusiness> 調査入手List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<CyoSaNyuSyuRelateEntity> entityList = mapper.get調査入手(parameter);
-        for (CyoSaNyuSyuRelateEntity entity : entityList) {
+        ChosaNyushuRelateWithCountEntity searchResult = mapper.get調査入手(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<CyoSaNyuSyuBusiness>emptyList(), 0, false);
+        }
+        int totalCount = searchResult.getTotalCount().intValue();
+        for (CyoSaNyuSyuRelateEntity entity : searchResult.getTaishoshaList()) {
             調査入手List.add(new CyoSaNyuSyuBusiness(entity));
         }
-        return SearchResult.of(調査入手List, 0, false);
+        return SearchResult.of(調査入手List, totalCount, false);
     }
 
     /**
@@ -216,8 +222,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前調査入手(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
             entity.initializeMd5();
@@ -275,6 +281,18 @@ public class YokaigoNinteiTaskListFinder {
             マスキングList.add(new MaSuKinGuBusiness(entity));
         }
         return SearchResult.of(マスキングList, 0, false);
+    }
+
+    /**
+     * マスキングモードの場合でデータ件数取得
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return int
+     */
+    @Transaction
+    public int getマスキングモード件数(YokaigoNinteiTaskListParameter parameter) {
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        return mapper.getマスキング件数(parameter);
     }
 
     /**
@@ -349,8 +367,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前審査会登録(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
             entity.initializeMd5();
@@ -378,8 +396,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前二次判定(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
 
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
@@ -408,8 +426,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前月例処理(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
 
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
@@ -438,8 +456,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前審査受付(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
 
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
@@ -468,8 +486,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前一次判定(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
 
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
@@ -497,9 +515,21 @@ public class YokaigoNinteiTaskListFinder {
         return shinSaKaiBusiness;
     }
 
+    /**
+     * 前マスキングリストの件数を取得します
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return int
+     */
+    @Transaction
+    public int get前マスキングモード件数(YokaigoNinteiTaskListParameter parameter) {
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        return mapper.get前マスキング件数(parameter);
+    }
+
     private void set前マスキング(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
 
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
@@ -510,8 +540,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前意見書入手(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
             entity.initializeMd5();
@@ -521,8 +551,8 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     private void set前意見書依頼(
-        List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-        ShinSaKaiBusiness shinSaKaiBusiness) {
+            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
+            ShinSaKaiBusiness shinSaKaiBusiness) {
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
         for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
             entity.initializeMd5();

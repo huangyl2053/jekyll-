@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,8 +27,6 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      */
     @JsonProperty("ikenshoiraitaishoichiran")
     private ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
-    @JsonProperty("ikenshoiraiselect")
-    private ikenshoiraiselectDiv ikenshoiraiselect;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
     @JsonProperty("hiddenIuputModel")
@@ -56,24 +54,6 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     @JsonProperty("ikenshoiraitaishoichiran")
     public void setIkenshoiraitaishoichiran(ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
         this.ikenshoiraitaishoichiran = ikenshoiraitaishoichiran;
-    }
-
-    /*
-     * getikenshoiraiselect
-     * @return ikenshoiraiselect
-     */
-    @JsonProperty("ikenshoiraiselect")
-    public ikenshoiraiselectDiv getIkenshoiraiselect() {
-        return ikenshoiraiselect;
-    }
-
-    /*
-     * setikenshoiraiselect
-     * @param ikenshoiraiselect ikenshoiraiselect
-     */
-    @JsonProperty("ikenshoiraiselect")
-    public void setIkenshoiraiselect(ikenshoiraiselectDiv ikenshoiraiselect) {
-        this.ikenshoiraiselect = ikenshoiraiselect;
     }
 
     /*
@@ -167,22 +147,32 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
 
     @JsonIgnore
     public ButtonDownLoad getBtnikenshoiraitaishooutput() {
-        return this.getIkenshoiraiselect().getBtnikenshoiraitaishooutput();
+        return this.getIkenshoiraitaishoichiran().getBtnikenshoiraitaishooutput();
     }
 
     @JsonIgnore
     public void  setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
-        this.getIkenshoiraiselect().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
+        this.getIkenshoiraitaishoichiran().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
     }
 
     @JsonIgnore
     public ButtonDialog getBtnIraishoToOutputDialog() {
-        return this.getIkenshoiraiselect().getBtnIraishoToOutputDialog();
+        return this.getIkenshoiraitaishoichiran().getBtnIraishoToOutputDialog();
     }
 
     @JsonIgnore
     public void  setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
-        this.getIkenshoiraiselect().setBtnIraishoToOutputDialog(btnIraishoToOutputDialog);
+        this.getIkenshoiraitaishoichiran().setBtnIraishoToOutputDialog(btnIraishoToOutputDialog);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return this.getIkenshoiraitaishoichiran().getTxtSaidaiHyojiKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.getIkenshoiraitaishoichiran().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
     @JsonIgnore
