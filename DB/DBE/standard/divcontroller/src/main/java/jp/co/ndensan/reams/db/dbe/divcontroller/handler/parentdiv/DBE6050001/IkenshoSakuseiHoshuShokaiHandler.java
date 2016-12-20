@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 意見書作成報酬照会の画面処理Handlerクラスです。
@@ -35,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 public class IkenshoSakuseiHoshuShokaiHandler {
 
-    private static final RString MARO = new RString("○");
+    private static final RString MARU = new RString("○");
     private final IkenshoSakuseiHoshuShokaiDiv div;
 
     /**
@@ -53,13 +52,13 @@ public class IkenshoSakuseiHoshuShokaiHandler {
      * @param ikenshoHoshuShokaiBusinessList 意見書作成報酬照会
      */
     public void set一覧結果(List<IkenshoHoshuShokaiBusiness> ikenshoHoshuShokaiBusinessList) {
-        Decimal txtZaitakuShinki = Decimal.ZERO;
-        Decimal txtZaitakuKeizoku = Decimal.ZERO;
-        Decimal txtShisetsuShinki = Decimal.ZERO;
-        Decimal txtShisetsuKeizoku = Decimal.ZERO;
-        Decimal txtKotsuhito = Decimal.ZERO;
-        Decimal txtZeiKojoGaku = Decimal.ZERO;
-        Decimal txtHoshuGokei = Decimal.ZERO;
+        Decimal 在宅新規_合計 = Decimal.ZERO;
+        Decimal 在宅継続_合計 = Decimal.ZERO;
+        Decimal 施設新規_合計 = Decimal.ZERO;
+        Decimal 施設継続_合計 = Decimal.ZERO;
+        Decimal 作成料_合計 = Decimal.ZERO;
+        Decimal 診療費_合計 = Decimal.ZERO;
+        Decimal 報酬_合計 = Decimal.ZERO;
         List<dgIkenshoSakuseiHoshu_Row> row_list = new ArrayList<>();
         for (IkenshoHoshuShokaiBusiness date : ikenshoHoshuShokaiBusinessList) {
             AccessLogger.log(AccessLogType.照会, this.toPersonalData(date.get申請書管理番号()));
@@ -69,13 +68,13 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             row.setCode(date.get主治医コード());
             row.setShujiiShimei(date.get主治医氏名());
             if (date.get主治医意見書作成依頼年月日() != null) {
-                row.setIraibi(toTextBoxDate(date.get主治医意見書作成依頼年月日().toString()));
+                row.getIraibi().setValue(new RDate(date.get主治医意見書作成依頼年月日().toString()));
             }
             if (date.get主治医意見書記入年月日() != null) {
-                row.setKinyubi(toTextBoxDate(date.get主治医意見書記入年月日().toString()));
+                row.getKinyubi().setValue(new RDate(date.get主治医意見書記入年月日().toString()));
             }
             if (date.get主治医意見書受領年月日() != null) {
-                row.setNyushubi(toTextBoxDate(date.get主治医意見書受領年月日().toString()));
+                row.getNyushubi().setValue(new RDate(date.get主治医意見書受領年月日().toString()));
             }
             if (NinteiChousaIraiKubunCode.初回.getコード().equals(date.get主治医意見書依頼区分())) {
                 row.setIkenshoIraiKubun(new RString("初"));
@@ -86,38 +85,38 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             row.setHihokenshaBango(date.get被保険者番号());
             row.setShinseishaShimei(date.get被保険者氏名());
             row.setZaitakuShin(date.get在宅_新());
-            if (date.get在宅_新().equals(MARO)) {
-                txtZaitakuShinki = txtZaitakuShinki.add(Decimal.ONE);
+            if (MARU.equals(date.get在宅_新())) {
+                在宅新規_合計 = 在宅新規_合計.add(Decimal.ONE);
             }
             row.setZaitakuKe(date.get在宅_継());
-            if (date.get在宅_継().equals(MARO)) {
-                txtZaitakuKeizoku = txtZaitakuKeizoku.add(Decimal.ONE);
+            if (MARU.equals(date.get在宅_継())) {
+                在宅継続_合計 = 在宅継続_合計.add(Decimal.ONE);
             }
             row.setShisetsuShin(date.get施設_新());
-            if (date.get施設_新().equals(MARO)) {
-                txtShisetsuShinki = txtShisetsuShinki.add(Decimal.ONE);
+            if (MARU.equals(date.get施設_新())) {
+                施設新規_合計 = 施設新規_合計.add(Decimal.ONE);
             }
             row.setShisetsuKe(date.get施設_継());
-            if (date.get施設_継().equals(MARO)) {
-                txtShisetsuKeizoku = txtShisetsuKeizoku.add(Decimal.ONE);
+            if (MARU.equals(date.get施設_継())) {
+                施設継続_合計 = 施設継続_合計.add(Decimal.ONE);
             }
-            txtKotsuhito = txtKotsuhito.add(date.get主治医意見書作成料());
             row.getSakuseiryo().setValue(new Decimal(date.get主治医意見書作成料()));
-            txtZeiKojoGaku = txtZeiKojoGaku.add(date.get主治医意見書別途診療費());
+            作成料_合計 = 作成料_合計.add(date.get主治医意見書作成料());
             row.getShinryohito().setValue(new Decimal(date.get主治医意見書別途診療費()));
-            txtHoshuGokei = txtHoshuGokei.add(date.get主治医意見書報酬());
+            診療費_合計 = 診療費_合計.add(date.get主治医意見書別途診療費());
             row.getGokei().setValue(new Decimal(date.get主治医意見書報酬()));
+            報酬_合計 = 報酬_合計.add(date.get主治医意見書報酬());
             row.setShinseishoKanriNo(date.get申請書管理番号());
             row.setIkenshoIraiRirekiNo(new RString(date.get主治医意見書作成依頼履歴番号()));
             row_list.add(row);
         }
-        div.getTxtZaitakuShinki().setValue(txtZaitakuShinki);
-        div.getTxtZaitakuKeizoku().setValue(txtZaitakuKeizoku);
-        div.getTxtShisetsuShinki().setValue(txtShisetsuShinki);
-        div.getTxtShisetsuKeizoku().setValue(txtShisetsuKeizoku);
-        div.getTxtKotsuhito().setValue(txtKotsuhito);
-        div.getTxtZeiKojoGaku().setValue(txtZeiKojoGaku);
-        div.getTxtHoshuGokei().setValue(txtHoshuGokei);
+        div.getTxtZaitakuShinki().setValue(在宅新規_合計);
+        div.getTxtZaitakuKeizoku().setValue(在宅継続_合計);
+        div.getTxtShisetsuShinki().setValue(施設新規_合計);
+        div.getTxtShisetsuKeizoku().setValue(施設継続_合計);
+        div.getTxtSakuseiryo().setValue(作成料_合計);
+        div.getTxtShinryohi().setValue(診療費_合計);
+        div.getTxtHoshuGokei().setValue(報酬_合計);
         div.getDgIkenshoSakuseiHoshu().setDataSource(row_list);
     }
 
@@ -130,14 +129,12 @@ public class IkenshoSakuseiHoshuShokaiHandler {
     public DBE601004_IkenshosakuseiHoshuParameter createBatchParam(RString 帳票出力区分) {
         List<IkenshoHoshuShokaiIchiranKey> keyJohoList = new ArrayList<>();
         for (dgIkenshoSakuseiHoshu_Row row : div.getDgIkenshoSakuseiHoshu().getSelectedItems()) {
-            if (row.getSelected()) {
-                IkenshoHoshuShokaiIchiranKey key = new IkenshoHoshuShokaiIchiranKey(
-                        row.getIryoKikanCode(),
-                        row.getCode(),
-                        row.getShinseishoKanriNo(),
-                        Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
-                keyJohoList.add(key);
-            }
+            IkenshoHoshuShokaiIchiranKey key = new IkenshoHoshuShokaiIchiranKey(
+                    row.getIryoKikanCode(),
+                    row.getCode(),
+                    row.getShinseishoKanriNo(),
+                    Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
+            keyJohoList.add(key);
         }
         FlexibleDate 作成依頼日開始 = FlexibleDate.EMPTY;
         FlexibleDate 作成依頼日終了 = FlexibleDate.EMPTY;
@@ -151,14 +148,9 @@ public class IkenshoSakuseiHoshuShokaiHandler {
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {
+        // TODO 介護認定用アクセスクラスへ変更
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
-    }
-
-    private TextBoxDate toTextBoxDate(String dateString) {
-        TextBoxDate textBoxDate = new TextBoxDate();
-        textBoxDate.setValue(new RDate(dateString));
-        return textBoxDate;
     }
 
     /**
