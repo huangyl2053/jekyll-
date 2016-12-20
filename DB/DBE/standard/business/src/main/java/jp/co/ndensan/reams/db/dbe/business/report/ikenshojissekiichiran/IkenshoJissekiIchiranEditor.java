@@ -49,7 +49,7 @@ public class IkenshoJissekiIchiranEditor implements IIkenshoJissekiIchiranEditor
         source.listIkenshoJissekiIchiran_3 = item.get医療機関名称();
         source.listIkenshoJissekiIchiran_4 = item.get主治医氏名();
         source.listIkenshoJissekiIchiran_5 = item.get被保険者番号();
-        source.listIkenshoJissekiIchiran_6 = item.get申請者氏名();
+        source.listIkenshoJissekiIchiran_6 = item.get被保険者氏名();
         source.listIkenshoJissekiIchiran_7 = item.get記入日();
         source.listIkenshoJissekiIchiran_8 = item.get入手日();
         source.listIkenshoJissekiIchiran_9 = item.get入手パターン_在新();

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関情報を特定するためのMyBatis用パラメータクラスです。
@@ -17,11 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class KoseiShujiiIryoKikanMasterSearchParameter {
 
     private final LasdecCode 市町村コード;
-    private final RString 主治医医療機関コード;
+    private final ShujiiIryokikanCode 主治医医療機関コード;
 
     private KoseiShujiiIryoKikanMasterSearchParameter(
             LasdecCode 市町村コード,
-            RString 主治医医療機関コード) {
+            ShujiiIryokikanCode 主治医医療機関コード) {
         this.市町村コード = 市町村コード;
         this.主治医医療機関コード = 主治医医療機関コード;
     }
@@ -36,7 +35,7 @@ public final class KoseiShujiiIryoKikanMasterSearchParameter {
      */
     public static KoseiShujiiIryoKikanMasterSearchParameter createParam_SelectShujiiIryoKikanJoho(
             LasdecCode 市町村コード,
-            RString 主治医医療機関コード
+            ShujiiIryokikanCode 主治医医療機関コード
     ) {
         return new KoseiShujiiIryoKikanMasterSearchParameter(
                 市町村コード, 主治医医療機関コード);
