@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 /**
  * 主治医医療機関情報テーブルのエンティティクラスです。
  */
-public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911ShujiiIryoKikanJohoEntity> implements IDbAccessable {
+public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911ShujiiIryoKikanJohoEntity> implements IDbAccessable, IShujiiIryoKikanJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5911ShujiiIryoKikanJoho");

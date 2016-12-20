@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT4911ShujiiIryoKikanJohoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202010");
-    public static final RString DEFAULT_主治医医療機関コード = new RString("00000001");
+    public static final ShujiiIryokikanCode DEFAULT_主治医医療機関コード = new ShujiiIryokikanCode("00000001");
     public static final IryoKikanCode DEFAULT_医療機関コード = new IryoKikanCode("1000000001");
     public static final RString DEFAULT_医療機関名称 = new RString("名称");
     public static final RString DEFAULT_医療機関名称カナ = new RString("名称");
