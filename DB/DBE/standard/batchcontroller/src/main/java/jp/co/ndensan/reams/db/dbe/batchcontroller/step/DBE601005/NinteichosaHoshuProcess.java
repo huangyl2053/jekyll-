@@ -135,8 +135,11 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         調査依頼日FROM.append(parameter.get調査依頼日開始());
         RStringBuilder 調査依頼日To = new RStringBuilder("【調査依頼日（To）】");
         調査依頼日To.append(parameter.get調査依頼日終了());
+        RStringBuilder 保険者_SB = new RStringBuilder(new RString("【保険者】"));
+        保険者_SB.append(parameter.get保険者());
         出力条件.add(調査依頼日FROM.toRString());
         出力条件.add(調査依頼日To.toRString());
+        出力条件.add(保険者_SB.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE601006.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
@@ -154,8 +157,11 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         調査依頼日FROM.append(parameter.get調査依頼日開始());
         RStringBuilder 調査依頼日To = new RStringBuilder("【調査依頼日（To）】");
         調査依頼日To.append(parameter.get調査依頼日終了());
+        RStringBuilder 保険者_SB = new RStringBuilder(new RString("【保険者】"));
+        保険者_SB.append(parameter.get保険者());
         出力条件.add(調査依頼日FROM.toRString());
         出力条件.add(調査依頼日To.toRString());
+        出力条件.add(保険者_SB.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("認定調査報酬一覧表CSV"), 導入団体コード, 市町村名, ジョブ番号,
                 CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);

@@ -4,20 +4,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitak
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ChosaItakusakiAndChosainInput のクラスファイル
@@ -25,8 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBZ-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaItakusakiAndChosainInputDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -73,7 +73,6 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosaItakusakiCode
      */
     @JsonProperty("txtChosaItakusakiCode")
-    @Override
     public TextBoxCode getTxtChosaItakusakiCode() {
         return txtChosaItakusakiCode;
     }
@@ -110,7 +109,6 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosaItakusakiName
      */
     @JsonProperty("txtChosaItakusakiName")
-    @Override
     public TextBox getTxtChosaItakusakiName() {
         return txtChosaItakusakiName;
     }
@@ -165,7 +163,6 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosainCode
      */
     @JsonProperty("txtChosainCode")
-    @Override
     public TextBoxCode getTxtChosainCode() {
         return txtChosainCode;
     }
@@ -202,7 +199,6 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @return txtChosainName
      */
     @JsonProperty("txtChosainName")
-    @Override
     public TextBox getTxtChosainName() {
         return txtChosainName;
     }
@@ -284,7 +280,6 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
      */
     @JsonProperty("hdnShinseishoKanriNo")
-    @Override
     public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
         this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
@@ -303,7 +298,6 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
      * @param hdnShichosonCode hdnShichosonCode
      */
     @JsonProperty("hdnShichosonCode")
-    @Override
     public void setHdnShichosonCode(RString hdnShichosonCode) {
         this.hdnShichosonCode = hdnShichosonCode;
     }
@@ -349,7 +343,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -364,11 +358,11 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
+        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
     }
 
-    public void setMode_ShoriType(ShoriType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
+    public void setMode_ShoriType( ShoriType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
     }
 
     // </editor-fold>

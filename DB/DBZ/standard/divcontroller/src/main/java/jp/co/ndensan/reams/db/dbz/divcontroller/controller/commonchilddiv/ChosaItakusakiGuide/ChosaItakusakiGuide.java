@@ -26,15 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ChosaItakusakiGuide {
 
-    private final KijuntsukiShichosonjohoFinder finder;
     private RString 市町村コード;
-
-    /**
-     * コンストラクタです。
-     */
-    public ChosaItakusakiGuide() {
-        finder = KijuntsukiShichosonjohoFinder.createInstance();
-    }
 
     /**
      * 調査委託先ガイドの初期化。<br/>
@@ -44,7 +36,9 @@ public class ChosaItakusakiGuide {
      */
     public ResponseData<ChosaItakusakiGuideDiv> onLoad(ChosaItakusakiGuideDiv div) {
         div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        getHandler(div).intialize();
+        ChosaItakusakiGuideHandler handler = getHandler(div);
+        handler.intialize();
+        handler.setDataGrid(searchChosaItakusaki(div));
         return ResponseData.of(div).respond();
     }
 
@@ -59,8 +53,7 @@ public class ChosaItakusakiGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<KijuntsukiShichosonjoho> list = finder.getChosaItakusaki(createParam(div)).records();
-        getHandler(div).setDataGrid(list);
+        getHandler(div).setDataGrid(searchChosaItakusaki(div));
         return ResponseData.of(div).respond();
     }
 
@@ -93,6 +86,12 @@ public class ChosaItakusakiGuide {
 
     private ChosaItakusakiGuideHandler getHandler(ChosaItakusakiGuideDiv div) {
         return new ChosaItakusakiGuideHandler(div);
+    }
+
+    private List<KijuntsukiShichosonjoho> searchChosaItakusaki(ChosaItakusakiGuideDiv div) {
+        KijuntsukiShichosonjohoFinder finder = KijuntsukiShichosonjohoFinder.createInstance();
+        List<KijuntsukiShichosonjoho> list = finder.getChosaItakusaki(createParam(div)).records();
+        return list;
     }
 
     private ChosaItakusakiAndChosainGuideParameter createParam(ChosaItakusakiGuideDiv div) {

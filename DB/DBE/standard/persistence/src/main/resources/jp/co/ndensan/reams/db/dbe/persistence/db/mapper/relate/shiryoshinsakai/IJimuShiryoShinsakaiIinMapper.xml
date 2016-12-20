@@ -880,7 +880,7 @@
     <select id="getJimuGaikyoTokki" resultMap="Result_GaikyoTokki"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuGaikyoTokkiMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
-        ShinsakaiW.dbt5101_shoKisaiHokenshaNo, AS dbt5101_shoKisaiHokenshaNo,
+        ShinsakaiW.dbt5101_shoKisaiHokenshaNo AS dbt5101_shoKisaiHokenshaNo,
         ShinsakaiW.dbt5101_hihokenshaNo AS dbt5101_hihokenshaNo,
         ShinsakaiW.dbt5502_shinsakaiOrder AS dbt5502_shinsakaiOrder,
         GaikyoTokkiJoho.dbt5206_shuso AS dbt5206_shuso,

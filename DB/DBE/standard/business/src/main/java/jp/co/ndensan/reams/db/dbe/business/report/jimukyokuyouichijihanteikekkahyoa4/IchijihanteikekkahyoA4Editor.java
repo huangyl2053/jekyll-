@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -42,11 +42,11 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
     }
 
     @Override
-    public IchijihanteikekkahyoA4ReportSource edit(IchijihanteikekkahyoA4ReportSource source) {
+    public IchijihanteikekkahyoReportSource edit(IchijihanteikekkahyoReportSource source) {
         return editSource(source);
     }
 
-    private IchijihanteikekkahyoA4ReportSource editSource(IchijihanteikekkahyoA4ReportSource source) {
+    private IchijihanteikekkahyoReportSource editSource(IchijihanteikekkahyoReportSource source) {
         source.title = new RString("認定情報（事務局用）");
         source.gogitaiNo = item.get合議体番号();
         source.shinseiCount = item.get審査順();
@@ -177,7 +177,7 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
         return editSource1(source);
     }
 
-    private IchijihanteikekkahyoA4ReportSource editSource1(IchijihanteikekkahyoA4ReportSource source) {
+    private IchijihanteikekkahyoReportSource editSource1(IchijihanteikekkahyoReportSource source) {
         if (index < item.get日常生活自立度リスト().size()) {
             source.listTokki8_1 = item.get日常生活自立度リスト().get(index).get特記事項フラグ();
             source.ｌistNichijoseikatsujiritsudo_1 = item.get日常生活自立度リスト().get(index).get認知症高齢者自立度();

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoDiv extends Panel {
      */
     @JsonProperty("chkInsatsuChohyo")
     private CheckBoxList chkInsatsuChohyo;
+    @JsonProperty("chkCSVShutsuryoku")
+    private CheckBoxList chkCSVShutsuryoku;
     @JsonProperty("txtInsatsuKikan")
     private TextBoxDateRange txtInsatsuKikan;
 
@@ -48,6 +50,24 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoDiv extends Panel {
     @JsonProperty("chkInsatsuChohyo")
     public void setChkInsatsuChohyo(CheckBoxList chkInsatsuChohyo) {
         this.chkInsatsuChohyo = chkInsatsuChohyo;
+    }
+
+    /*
+     * getchkCSVShutsuryoku
+     * @return chkCSVShutsuryoku
+     */
+    @JsonProperty("chkCSVShutsuryoku")
+    public CheckBoxList getChkCSVShutsuryoku() {
+        return chkCSVShutsuryoku;
+    }
+
+    /*
+     * setchkCSVShutsuryoku
+     * @param chkCSVShutsuryoku chkCSVShutsuryoku
+     */
+    @JsonProperty("chkCSVShutsuryoku")
+    public void setChkCSVShutsuryoku(CheckBoxList chkCSVShutsuryoku) {
+        this.chkCSVShutsuryoku = chkCSVShutsuryoku;
     }
 
     /*

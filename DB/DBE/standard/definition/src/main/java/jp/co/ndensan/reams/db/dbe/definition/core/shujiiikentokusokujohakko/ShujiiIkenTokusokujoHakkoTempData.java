@@ -34,7 +34,6 @@ public class ShujiiIkenTokusokujoHakkoTempData implements Serializable {
     private RString temp_主治医意見書督促対象者一覧表;
     private RString temp_CSV出力;
     private RString temp_印刷済対象者;
-    private RString temp_発行履歴;
     private int temp_督促方法;
     private RString temp_督促メモ;
     private FlexibleDate temp_督促日;

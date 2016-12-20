@@ -6,8 +6,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -105,16 +107,6 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtKijunDay() {
-        return this.getHakkoJoken().getTxtKijunDay();
-    }
-
-    @JsonIgnore
-    public void  setTxtKijunDay(TextBoxDate txtKijunDay) {
-        this.getHakkoJoken().setTxtKijunDay(txtKijunDay);
-    }
-
-    @JsonIgnore
     public IHokenshaListDiv getCcdHokenshaList() {
         return this.getHakkoJoken().getCcdHokenshaList();
     }
@@ -140,6 +132,16 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtKijunDay() {
+        return this.getShujiiIkenshoTokusokujo().getTxtKijunDay();
+    }
+
+    @JsonIgnore
+    public void  setTxtKijunDay(TextBoxDate txtKijunDay) {
+        this.getShujiiIkenshoTokusokujo().setTxtKijunDay(txtKijunDay);
+    }
+
+    @JsonIgnore
     public CheckBoxList getChkInsatsuzumiTaisho() {
         return this.getShujiiIkenshoTokusokujo().getChkInsatsuzumiTaisho();
     }
@@ -147,16 +149,6 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     @JsonIgnore
     public void  setChkInsatsuzumiTaisho(CheckBoxList chkInsatsuzumiTaisho) {
         this.getShujiiIkenshoTokusokujo().setChkInsatsuzumiTaisho(chkInsatsuzumiTaisho);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkHakkoRireki() {
-        return this.getShujiiIkenshoTokusokujo().getChkHakkoRireki();
-    }
-
-    @JsonIgnore
-    public void  setChkHakkoRireki(CheckBoxList chkHakkoRireki) {
-        this.getShujiiIkenshoTokusokujo().setChkHakkoRireki(chkHakkoRireki);
     }
 
     @JsonIgnore
@@ -202,6 +194,16 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     @JsonIgnore
     public void  setChkInsatsuChohyo(CheckBoxList chkInsatsuChohyo) {
         this.getNinteiChosaTokusokuTaishoshaIchiranhyo().setChkInsatsuChohyo(chkInsatsuChohyo);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkCSVShutsuryoku() {
+        return this.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkCSVShutsuryoku();
+    }
+
+    @JsonIgnore
+    public void  setChkCSVShutsuryoku(CheckBoxList chkCSVShutsuryoku) {
+        this.getNinteiChosaTokusokuTaishoshaIchiranhyo().setChkCSVShutsuryoku(chkCSVShutsuryoku);
     }
 
     @JsonIgnore
