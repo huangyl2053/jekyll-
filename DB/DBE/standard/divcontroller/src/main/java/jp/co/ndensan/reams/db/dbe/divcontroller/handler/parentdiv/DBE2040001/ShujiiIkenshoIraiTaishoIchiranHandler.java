@@ -45,9 +45,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     private static final RString SELECTED_KEY0 = new RString("1");
     private static final RString SELECTED_KEY1 = new RString("2");
     private static final RString SELECTED_KEY2 = new RString("3");
-    private static final List<dgNinteiTaskList_Row> rowListALL = new ArrayList<>();
-    private static final List<dgNinteiTaskList_Row> rowListComplete = new ArrayList<>();
-    private static final List<dgNinteiTaskList_Row> rowListNotreated = new ArrayList<>();
 
     /**
      * コンストラクタです。
@@ -63,9 +60,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      *
      */
     public void initialize() {
-        rowListALL.clear();
-        rowListComplete.clear();
-        rowListNotreated.clear();
         RDate システム日付 = RDate.getNowDate();
         RString 表示区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
         if (表示区分 != null && !表示区分.isEmpty()) {
@@ -73,18 +67,26 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         } else {
             div.getRadShoriJyotai().setSelectedKey(SELECTED_KEY0);
         }
+        画面変更より最新データを検索();
+    }
+
+    /**
+     * 画面変更より検索の処理です。
+     */
+    public void 画面変更より最新データを検索() {
+        RString 表示区分 = div.getRadShoriJyotai().getSelectedKey();
         SearchResult<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().get意見書依頼モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, div.getTxtSaidaiHyojiKensu().getValue()));
+                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 表示区分, div.getTxtSaidaiHyojiKensu().getValue()));
         if (!意見書依頼List.records().isEmpty()) {
             ShinSaKaiBusiness 前意見書依頼Model = YokaigoNinteiTaskListFinder.createInstance().get前意見書依頼(YokaigoNinteiTaskListParameter.
-                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, div.getTxtSaidaiHyojiKensu().getValue()));
+                    createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, div.getTxtSaidaiHyojiKensu().getValue()));
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書依頼Model.get要介護認定完了情報Lsit()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
         意見書依頼モード(意見書依頼List);
     }
-
+    
     /**
      * 要介護認定完了情報更新の処理です。
      *
@@ -97,6 +99,9 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     }
     
     private void 意見書依頼モード(SearchResult<IKnSyoiRaiBusiness> 意見書依頼List) {
+        List<dgNinteiTaskList_Row> rowListALL = new ArrayList<>();
+        List<dgNinteiTaskList_Row> rowListComplete = new ArrayList<>();
+        List<dgNinteiTaskList_Row> rowListNotreated = new ArrayList<>();
         int completeCount = 0;
         int notreatedCount = 0;
         for (IKnSyoiRaiBusiness business : 意見書依頼List.records()) {
@@ -145,7 +150,13 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getTxtNoUpdate().setValue(new RString(String.valueOf(notreatedCount)));
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書依頼List.totalCount());
-        onChange_radShoriJyotai();
+        if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListNotreated);
+        } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListComplete);
+        } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListALL);
+        }
     }
 
     private void 意見書依頼モードの日付設定(dgNinteiTaskList_Row row, IKnSyoiRaiBusiness business) {
@@ -181,20 +192,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     public RString 一覧件数() {
 
         return div.getTxtTotalCount().getValue();
-    }
-
-    /**
-     * 一覧の表示内容を設定します。
-     *
-     */
-    public void onChange_radShoriJyotai() {
-        if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
-            div.getDgNinteiTaskList().setDataSource(rowListNotreated);
-        } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
-            div.getDgNinteiTaskList().setDataSource(rowListComplete);
-        } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
-            div.getDgNinteiTaskList().setDataSource(rowListALL);
-        }
     }
     
     /**
