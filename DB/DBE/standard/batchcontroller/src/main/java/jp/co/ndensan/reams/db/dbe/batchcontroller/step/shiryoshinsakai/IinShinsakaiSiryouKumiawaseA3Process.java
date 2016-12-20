@@ -53,6 +53,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -94,6 +96,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
     private static final boolean あり = true;
     private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final RString SEPARATOR = new RString("/");
 
     @BatchWriter
     private BatchReportWriter<IinShinsakaishiryoA3ReportSource> batchReportWriter;
@@ -135,9 +138,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         }
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
-
-                    IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().
+        new SimpleLayoutBreaker(IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
                             ReportLineRecord<IinShinsakaishiryoA3ReportSource> currentRecord,
@@ -234,9 +236,9 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
     private JimuShinsakaiWariateJohoBusiness get主治医意見書情報(ShinseishoKanriNo shinseishoKanriNo) {
         for (ShinsakaiSiryoKyotsuEntity entity : 共通情報) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
-                entity.setHihokenshaNo(RString.EMPTY);
+//                entity.setHihokenshaNo(RString.EMPTY);
                 entity.setHihokenshaName(AtenaMeisho.EMPTY);
-                entity.setShoKisaiHokenshaNo(RString.EMPTY);
+//                entity.setShoKisaiHokenshaNo(RString.EMPTY);
                 entity.setJimukyoku(false);
                 return new JimuShinsakaiWariateJohoBusiness(entity);
             }
@@ -248,9 +250,9 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         JimuSonotashiryoBusiness その他資料 = null;
         for (ShinsakaiSiryoKyotsuEntity entity : 共通情報) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
-                entity.setHihokenshaNo(RString.EMPTY);
+//                entity.setHihokenshaNo(RString.EMPTY);
                 entity.setHihokenshaName(AtenaMeisho.EMPTY);
-                entity.setShoKisaiHokenshaNo(RString.EMPTY);
+//                entity.setShoKisaiHokenshaNo(RString.EMPTY);
                 entity.setJimukyoku(false);
                 if (shinsakaiOrder != entity.getShinsakaiOrder()) {
                     存在ファイルindex = 0;
@@ -262,7 +264,9 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
                 }
                 その他資料 = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-                その他資料.set事務局概況特記イメージ(共有ファイルを引き出す(entity.getImageSharedFileId(), ファイル名_G0001));
+                RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+                RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+                その他資料.set事務局概況特記イメージ(共有ファイルを引き出す(path));
                 存在ファイルindex = その他資料.get存在ファイルIndex();
                 shinsakaiOrder = entity.getShinsakaiOrder();
             }
@@ -463,12 +467,18 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         return ファイル名;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString sharedFileName) {
-        RString imagePath = RString.EMPTY;
-        if (イメージID != null) {
-            imagePath = getFilePath(イメージID, sharedFileName);
+    private RString 共有ファイルを引き出す(RString path) {
+        if (!RString.isNullOrEmpty(getFilePath(path, ファイル名_G0001))) {
+            return getFilePath(path, ファイル名_G0001);
         }
-        return imagePath;
+        return RString.EMPTY;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
+        }
+        return RString.EMPTY;
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
