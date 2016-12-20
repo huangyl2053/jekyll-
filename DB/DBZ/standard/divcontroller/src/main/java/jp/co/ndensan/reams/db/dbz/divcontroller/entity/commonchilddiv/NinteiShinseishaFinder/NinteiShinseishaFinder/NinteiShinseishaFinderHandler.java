@@ -56,6 +56,7 @@ public class NinteiShinseishaFinderHandler {
      * 条件検索画面初期化処理です。
      */
     public void initialize() {
+        div.getCcdSaikinShorisha().initialize();
         div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護認定);
         // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
         List<KeyValueDataSource> ddlShichosonCode = new ArrayList<>();

@@ -20,8 +20,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFind
 import jp.co.ndensan.reams.db.dbe.service.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -110,12 +108,31 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_btnKensaku(ShinseiKensakuDiv div) {
-        ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
-        if (pairs.iterator().hasNext()) {
+        return processKensaku(div, div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
+    }
+
+    /**
+     * 最近処理者の「表示する」を押下した時の処理です。
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<ShinseiKensakuDiv> onSaikinshorishaClick(ShinseiKensakuDiv div) {
+        ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().validate();
+        if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        getHandler(div).createParameter();
-        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter());
+
+        RString hihokenshaNo = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
+        return processKensaku(div, hihokenshaNo);
+    }
+
+    private ResponseData<ShinseiKensakuDiv> processKensaku(ShinseiKensakuDiv div, RString hihokenshaNo) throws ApplicationException {
+        ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter(hihokenshaNo));
         ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(searchResult.records()));
         if (!searchResult.records().isEmpty()) {
             getHandler(div).setShinseiJohoIchiran(searchResult);
@@ -127,8 +144,6 @@ public class ShinseiKensaku {
         div.getBtnClear().setDisabled(true);
         div.getTxtMaxDisp().setDisabled(true);
         div.getBtnModoru().setDisabled(false);
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
         if (searchResult.records().size() == 1) {
             div.getBtnClear().setDisabled(false);
             div.getTxtMaxDisp().setDisabled(false);
@@ -147,7 +162,7 @@ public class ShinseiKensaku {
         RString menuID = ResponseHolder.getMenuID();
         dgShinseiJoho_Row row = (event == Events.検索結果1件) ? div.getDgShinseiJoho().getDataSource().get(0)
                 : (event == Events.対象選択) ? div.getDgShinseiJoho().getClickedItem()
-                : null;
+                        : null;
         if (row == null) {
             return ResponseData.of(div).respond();
         }
@@ -156,6 +171,7 @@ public class ShinseiKensaku {
         int 認定調査履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         RString 主治医意見書作成依頼履歴番号 = row.getIkenshoIraiRirekiNo();
         RString 被保険者番号 = row.getHihokenshaNo();
+        RString 被保険者氏名 = row.getShimei();
         RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
@@ -168,6 +184,7 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().updateSaikinShorisha(被保険者番号, 被保険者氏名);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 

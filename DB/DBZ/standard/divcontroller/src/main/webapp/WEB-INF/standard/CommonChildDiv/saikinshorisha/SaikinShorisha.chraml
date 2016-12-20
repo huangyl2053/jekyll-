@@ -1,0 +1,98 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;saikinshorisha&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;SaikinShorisha&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onSaikishorishaClick&quot;}],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.SaikinShorisha"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="SaikinShorisha" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SaikinShorisha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;SaikinShorisha&quot;,&quot;title&quot;:&quot;最近処理対象&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SaikinShorisha&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;focusPositionID&quot;:&quot;restoreLayoutButton&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SaikinShorisha_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">最近処理対象</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SaikinShorisha_panel_body_area"><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlSaikinShorisha" style="width: 353px; height: 23px; position: relative;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSaikinShorisha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;350px&quot;,&quot;selectControlID&quot;:&quot;ddlSaikinShorisha_core&quot;,&quot;selectedItem&quot;:null,&quot;dataSource&quot;:[]}"><select class="CoreElement" id="ddlSaikinShorisha_core" style="width: 350px;"></select></div><button class="UzButton JSControl controlMargin-M Width-S ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnConfirm" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnConfirm&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnConfirm&quot;,&quot;onClick&quot;:&quot;onSaikishorishaClick&quot;,&quot;text&quot;:&quot;表示する&quot;}"><span>表示する</span></button></div></div>          
+     
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['SAIKINSHORISHA'] = {};
+DBZ['SAIKINSHORISHA'].SaikinShorishaRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SaikinShorisha').getProperty();parameter0.ddlSaikinShorisha = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlSaikinShorisha').getProperty();parameter0.btnConfirm = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnConfirm').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (SaikinShorisha) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onSaikishorishaClick = function () {
+                return "onSaikishorishaClick";
+            };
+            return Events;
+        })();
+        SaikinShorisha.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "SaikinShorisha";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.SaikinShorisha.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.SaikinShorisha.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.SaikinShorisha = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlSaikinShorisha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSaikinShorisha"));
+            };
+
+            Controls.prototype.btnConfirm = function () {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
+            };
+            return Controls;
+        })();
+        SaikinShorisha.Controls = Controls;
+    })(DBZ.SaikinShorisha || (DBZ.SaikinShorisha = {}));
+    var SaikinShorisha = DBZ.SaikinShorisha;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (SaikinShorisha) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SaikinShorisha.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new SaikinShorisha.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SaikinShorisha.ModeController = ModeController;
+    })(DBZ.SaikinShorisha || (DBZ.SaikinShorisha = {}));
+    var SaikinShorisha = DBZ.SaikinShorisha;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SaikinShorisha) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SaikinShorisha.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SaikinShorisha.PublicProperties = PublicProperties;
+    })(DBZ.SaikinShorisha || (DBZ.SaikinShorisha = {}));
+    var SaikinShorisha = DBZ.SaikinShorisha;
+})(DBZ || (DBZ = {}));
+</script></div>

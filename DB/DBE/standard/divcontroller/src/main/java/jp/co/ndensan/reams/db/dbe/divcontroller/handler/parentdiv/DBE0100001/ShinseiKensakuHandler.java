@@ -71,7 +71,7 @@ public class ShinseiKensakuHandler {
      *
      * @return 検索条件
      */
-    public ShinseiKensakuMapperParameter createParameter() {
+    public ShinseiKensakuMapperParameter createParameter(RString hihokenshaNo) {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
         parameter.setLimitCount(get最大表示件数());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
