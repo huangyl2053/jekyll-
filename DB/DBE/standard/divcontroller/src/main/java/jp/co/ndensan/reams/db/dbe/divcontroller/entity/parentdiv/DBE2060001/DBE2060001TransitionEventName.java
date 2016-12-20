@@ -16,7 +16,8 @@ public enum DBE2060001TransitionEventName implements IContainerEvents {
 
     処理完了("処理完了"),
     調査結果登録遷移("調査結果登録遷移"),
-    取込み_OCR_遷移("取込み_OCR_遷移");
+    取込み_OCR_遷移("取込み_OCR_遷移"),
+    処理継続("処理継続");
 
     private final RString name;
 
