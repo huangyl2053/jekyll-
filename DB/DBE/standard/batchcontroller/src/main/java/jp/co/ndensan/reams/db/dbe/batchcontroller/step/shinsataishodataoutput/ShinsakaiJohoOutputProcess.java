@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shinsataishodataoutput.ShinsaTaishoDataOutPutResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileShinsaiinEucCsvEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileShinsaiinRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.ShinsakaiJohoEucCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.ShinsakaiJohoRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -30,23 +30,21 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * 認定審査会割当委員情報（モバイル）のCSV出力処理クラスです。
- *
- * @reamsid_L DBE-1840-011 yaoyahui
+ * 介護認定審査会情報のCSV出力処理クラスです。
  */
-public class ShinsaTaishoDataOutPutProcess extends BatchProcessBase<NijihanteiKekkaTorokuMobileShinsaiinRelateEntity> {
+public class ShinsakaiJohoOutputProcess extends BatchProcessBase<ShinsakaiJohoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsataishodataoutput.IShinsaTaishoDataOutPutMapper."
-            + "get認定審査会割当委員情報出力");
+            + "get介護認定審査会情報");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518001");
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString FILE_NAME = new RString("審査会情報.csv");
+    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
     private ShinsaTaishoDataOutPutProcessParammeter processParamter;
     private RString eucFilePath;
     private FileSpoolManager manager;
     @BatchWriter
-    private CsvWriter<NijihanteiKekkaTorokuMobileShinsaiinEucCsvEntity> eucCsvWriter;
+    private CsvWriter<ShinsakaiJohoEucCsvEntity> eucCsvWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -56,9 +54,8 @@ public class ShinsaTaishoDataOutPutProcess extends BatchProcessBase<NijihanteiKe
     @Override
     protected void createWriter() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("NijihanteiKekkaTorokuMobileShinsaiin.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), FILE_NAME);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
@@ -67,8 +64,8 @@ public class ShinsaTaishoDataOutPutProcess extends BatchProcessBase<NijihanteiKe
     }
 
     @Override
-    protected void process(NijihanteiKekkaTorokuMobileShinsaiinRelateEntity entity) {
-        eucCsvWriter.writeLine(new ShinsaTaishoDataOutPutResult().setEucCsvEntity(entity));
+    protected void process(ShinsakaiJohoRelateEntity entity) {
+        eucCsvWriter.writeLine(createCsvEntity(entity));
     }
 
     @Override
@@ -78,6 +75,18 @@ public class ShinsaTaishoDataOutPutProcess extends BatchProcessBase<NijihanteiKe
         outputJokenhyoFactory();
     }
 
+    private ShinsakaiJohoEucCsvEntity createCsvEntity(ShinsakaiJohoRelateEntity entity) {
+        ShinsakaiJohoEucCsvEntity csvEntity = new ShinsakaiJohoEucCsvEntity();
+
+        csvEntity.set介護認定審査会開催番号(entity.get介護認定審査会開催番号());
+        csvEntity.set介護認定審査会開催年月日(entity.get介護認定審査会開催年月日());
+        csvEntity.set介護認定審査会開始時刻(entity.get介護認定審査会開始時刻());
+        csvEntity.set介護認定審査会終了時刻(entity.get介護認定審査会終了時刻());
+        csvEntity.set合議体番号(entity.get合議体番号());
+
+        return csvEntity;
+    }
+
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
@@ -85,8 +94,8 @@ public class ShinsaTaishoDataOutPutProcess extends BatchProcessBase<NijihanteiKe
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("認定審査会割当委員情報.csv"),
-                new RString("NijihanteiKekkaTorokuMobileShinsaiin.csv"),
+                FILE_NAME,
+                EUC_ENTITY_ID.toRString(),
                 new ShinsaTaishoDataOutPutResult().get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new ShinsaTaishoDataOutPutResult().get出力条件(processParamter));
         OutputJokenhyoFactory.createInstance(item).print();
