@@ -12,12 +12,12 @@ var DBE;
                 return "onClick_btnAfterIchijiHantei";
             };
 
-            Events.onClick_btnKakutei = function () {
-                return "onClick_btnKakutei";
-            };
-
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
             };
             return Events;
         })();
@@ -371,12 +371,12 @@ var DBE;
                 return new UZA.DataGrid(this.convFiledName("dgIchijiHanteiKeikokuCode"));
             };
 
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
-            };
-
             Controls.prototype.btnModoru = function () {
                 return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();
