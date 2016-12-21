@@ -16,23 +16,25 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShoriTaishoshaKensakuShijiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtHihokenshaNumber")
+    private TextBoxCode txtHihokenshaNumber;
     @JsonProperty("ddlKensakuTaisho")
     private DropDownList ddlKensakuTaisho;
     @JsonProperty("txtSearchStYMD")
     private TextBoxFlexibleDate txtSearchStYMD;
     @JsonProperty("txtSearchEdYMD")
     private TextBoxFlexibleDate txtSearchEdYMD;
-    @JsonProperty("btnTaishoKensaku")
-    private Button btnTaishoKensaku;
     @JsonProperty("btnClear")
     private Button btnClear;
+    @JsonProperty("txtMaxDisp")
+    private TextBoxNum txtMaxDisp;
     @JsonProperty("ccdHokensya")
     private HokenshaListDiv ccdHokensya;
 
@@ -42,6 +44,24 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtHihokenshaNumber
+     * @return txtHihokenshaNumber
+     */
+    @JsonProperty("txtHihokenshaNumber")
+    public TextBoxCode getTxtHihokenshaNumber() {
+        return txtHihokenshaNumber;
+    }
+
+    /*
+     * settxtHihokenshaNumber
+     * @param txtHihokenshaNumber txtHihokenshaNumber
+     */
+    @JsonProperty("txtHihokenshaNumber")
+    public void setTxtHihokenshaNumber(TextBoxCode txtHihokenshaNumber) {
+        this.txtHihokenshaNumber = txtHihokenshaNumber;
+    }
+
     /*
      * getddlKensakuTaisho
      * @return ddlKensakuTaisho
@@ -97,24 +117,6 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     }
 
     /*
-     * getbtnTaishoKensaku
-     * @return btnTaishoKensaku
-     */
-    @JsonProperty("btnTaishoKensaku")
-    public Button getBtnTaishoKensaku() {
-        return btnTaishoKensaku;
-    }
-
-    /*
-     * setbtnTaishoKensaku
-     * @param btnTaishoKensaku btnTaishoKensaku
-     */
-    @JsonProperty("btnTaishoKensaku")
-    public void setBtnTaishoKensaku(Button btnTaishoKensaku) {
-        this.btnTaishoKensaku = btnTaishoKensaku;
-    }
-
-    /*
      * getbtnClear
      * @return btnClear
      */
@@ -130,6 +132,24 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
         this.btnClear = btnClear;
+    }
+
+    /*
+     * gettxtMaxDisp
+     * @return txtMaxDisp
+     */
+    @JsonProperty("txtMaxDisp")
+    public TextBoxNum getTxtMaxDisp() {
+        return txtMaxDisp;
+    }
+
+    /*
+     * settxtMaxDisp
+     * @param txtMaxDisp txtMaxDisp
+     */
+    @JsonProperty("txtMaxDisp")
+    public void setTxtMaxDisp(TextBoxNum txtMaxDisp) {
+        this.txtMaxDisp = txtMaxDisp;
     }
 
     /*

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * 改頁を定義する列挙型です。
+ *
  * @reamsid_L DBE-0290-010 dongyabin
  */
 public enum NextPageType implements ICodeValueEnumeratedType {
@@ -49,8 +50,8 @@ public enum NextPageType implements ICodeValueEnumeratedType {
      * @param code 検索対象のコード
      * @return コードに該当する列挙型
      */
-    public static JyoukyouType toValue(RString code) {
-        for (JyoukyouType target : JyoukyouType.values()) {
+    public static NextPageType toValue(RString code) {
+        for (NextPageType target : NextPageType.values()) {
             if (target.code().compareTo(code) == 0) {
                 return target;
             }

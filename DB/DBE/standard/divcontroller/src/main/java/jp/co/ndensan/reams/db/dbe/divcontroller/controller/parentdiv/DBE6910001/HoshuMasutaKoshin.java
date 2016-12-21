@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -308,6 +309,17 @@ public class HoshuMasutaKoshin {
     }
 
     /**
+     * 審査員コードのonBlurイベント（審査員氏名を取得し、画面に設定する）。
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtShinsaIinKodo(HoshuMasutaKoshinDiv div) {
+        getHandler(div).onBlur_txtShinsaIinKodo();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 審査会委員別単価マスタ更新するボタンを押下するの場合、審査会委員別単価マスタ一覧を更新します。
      *
      * @param div 報酬マスタメンテナンスDiv
@@ -562,11 +574,15 @@ public class HoshuMasutaKoshin {
         Models<ShinsakaiIinBetsuTankaIdentifier, ShinsakaiIinBetsuTanka> 審査会委員別単価情報Model
                 = ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報, Models.class);
         for (dgShinsakaiIinBetuTanka_Row row : 審査会委員別単価一覧情報) {
+            FlexibleYearMonth 開始年月 = !row.getKaishiYM().getValue().isEmpty() ? row.getKaishiYM().getValue().getYearMonth() : FlexibleYearMonth.MIN;
+            FlexibleYearMonth 終了年月 = !row.getShuryoYM().getValue().isEmpty() ? row.getShuryoYM().getValue().getYearMonth() : FlexibleYearMonth.MAX;
+            RString 氏名 = null != row.getShinsakaiIinName() ? row.getShinsakaiIinName() : RString.EMPTY;
             if (追加モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTanka 新規情報 = new ShinsakaiIinBetsuTanka(
                         row.getShinsakaiIinCode(),
-                        row.getKaishiYM().getValue().getYearMonth(),
-                        row.getShuryoYM().getValue().getYearMonth());
+                        開始年月,
+                        終了年月,
+                        氏名);
                 新規情報 = 新規情報.createBuilderForEdit().
                         set単価(row.getTanka().getValue()).
                         setその他単価(row.getSonotaTanka().getValue()).
@@ -575,18 +591,19 @@ public class HoshuMasutaKoshin {
             } else if (更新モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
                         row.getShinsakaiIinCode(),
-                        row.getKaishiYM().getValue().getYearMonth(),
-                        row.getShuryoYM().getValue().getYearMonth());
+                        開始年月,
+                        終了年月);
                 ShinsakaiIinBetsuTanka 更新情報 = 審査会委員別単価情報Model.get(識別子).createBuilderForEdit().
                         set単価(row.getTanka().getValue()).
                         setその他単価(row.getSonotaTanka().getValue()).
+                        set氏名(氏名).
                         build().modifiedModel();
                 審査会委員別単価情報Model.add(更新情報);
             } else if (削除モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
                         row.getShinsakaiIinCode(),
-                        row.getKaishiYM().getValue().getYearMonth(),
-                        row.getShuryoYM().getValue().getYearMonth());
+                        開始年月,
+                        終了年月);
                 ShinsakaiIinBetsuTanka 削除情報 = 審査会委員別単価情報Model.get(識別子).deleted();
                 審査会委員別単価情報Model.add(削除情報);
             }
