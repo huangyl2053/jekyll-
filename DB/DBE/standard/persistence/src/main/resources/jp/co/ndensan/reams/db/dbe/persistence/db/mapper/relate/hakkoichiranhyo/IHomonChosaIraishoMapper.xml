@@ -171,11 +171,11 @@
         </foreach>
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = false
-        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        AND (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105."ninteichosaKanryoYMD" IS NULL OR DbT5105."ninteichosaKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiWariateKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105."centerSoshinYMD" IS NULL OR DbT5105."centerSoshinYMD" = '')
         <if test= "is依頼日From">
             AND DbT5201."ninteichosaIraiYMD" <![CDATA[>=]]> #{iraiFromYMD}
         </if>
@@ -184,18 +184,18 @@
         </if>
         <if test="!is認定調査依頼書未印刷_印刷済">
             <if test="is認定調査依頼書未印刷">
-                AND dbT5201."iraishoShutsuryokuYMD" IS NULL
+                AND (dbT5201."iraishoShutsuryokuYMD" IS NULL OR DbT5105."iraishoShutsuryokuYMD" = '')
             </if>
             <if test="is認定調査依頼書印刷済">
-                AND dbT5201."iraishoShutsuryokuYMD" IS NOT NULL
+                AND (dbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND dbT5201."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         <if test="!is認定調査票未印刷_印刷済">
             <if test="is認定調査票未印刷">
-                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NULL
+                AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NULL OR DbT5105."chosahyoTouShutsuryokuYMD" = '')
             </if>
             <if test="is認定調査票印刷済">
-                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL
+                AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND dbT5201."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         ORDER BY
@@ -374,11 +374,11 @@
         </foreach>
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = false
-        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        AND (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105."ninteichosaKanryoYMD" IS NULL OR DbT5105."ninteichosaKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiWariateKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105."centerSoshinYMD" IS NULL OR DbT5105."centerSoshinYMD" = '')
         <if test= "is依頼日From">
             AND DbT5201."ninteichosaIraiYMD" <![CDATA[>=]]> #{iraiFromYMD}
         </if>
@@ -387,18 +387,18 @@
         </if>
         <if test="!is認定調査依頼書未印刷_印刷済">
             <if test="is認定調査依頼書未印刷">
-                AND dbT5201."iraishoShutsuryokuYMD" IS NULL
+                AND (dbT5201."iraishoShutsuryokuYMD" IS NULL OR dbT5201."iraishoShutsuryokuYMD" = '')
             </if>
             <if test="is認定調査依頼書印刷済">
-                AND dbT5201."iraishoShutsuryokuYMD" IS NOT NULL
+                AND (dbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND dbT5201."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         <if test="!is認定調査票未印刷_印刷済">
             <if test="is認定調査票未印刷">
-                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NULL
+                AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NULL OR dbT5201."chosahyoTouShutsuryokuYMD" = '')
             </if>
             <if test="is認定調査票印刷済">
-                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL
+                AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND dbT5201."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         ORDER BY
@@ -489,6 +489,99 @@
         DbT5201."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
         AND DbT5201."logicalDeletedFlag"= false
         AND DbT5201."ninteichosaIraiRirekiNo"= ninteiChosaSaioIraiRirekiNo."ninteichosaIraiRirekiNo"
+        
+        
+        INNER JOIN 
+        rgdb."DbT4203NinteichosahyoKihonChosa" AS DbT4203
+        ON
+        DbT4203."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND NOT EXISTS ( 
+         SELECT 'X'
+         FROM
+         rgdb."DbT4203NinteichosahyoKihonChosa"     
+         WHERE
+         "shinseishoKanriNo" = DbT4203."shinseishoKanriNo"
+         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4203."ninteichosaRirekiNo"
+        )
+        AND DbT4203."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
+        
+        INNER JOIN 
+        rgdb."DbT4116IchijiHanteiKekkaJoho" AS DbT4116
+        ON
+        DbT4116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        
+        INNER JOIN 
+        rgdb."DbT4211NinteichosahyoChosaItem" AS DbT4211
+        ON
+        DbT4211."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND NOT EXISTS ( 
+         SELECT 'X'
+         FROM
+         rgdb."DbT4211NinteichosahyoChosaItem"  
+         WHERE
+         "shinseishoKanriNo" = DbT4211."shinseishoKanriNo"
+         AND "remban" = DbT4211."remban"
+         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4211."ninteichosaRirekiNo"
+        )
+        AND DbT4211."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
+        
+        LEFT JOIN
+        rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
+        ON
+        DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND (DbT5502."hanteiKekkaCode" IS NULL OR DbT5502."hanteiKekkaCode" = '01')
+        
+        LEFT JOIN
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
+        ON
+        DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo" 
+        
+        <!--前回-->
+        LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+        ON
+        DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        
+        INNER JOIN 
+        rgdb."DbT4203NinteichosahyoKihonChosa" AS DbT4203Zenkai
+        ON
+        DbT4203Zenkai."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
+        AND NOT EXISTS ( 
+         SELECT 'X'
+         FROM
+         rgdb."DbT4203NinteichosahyoKihonChosa"     
+         WHERE
+         "shinseishoKanriNo" = DbT4203Zenkai."shinseishoKanriNo"
+         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4203Zenkai."ninteichosaRirekiNo"
+        )
+        AND DbT4203Zenkai."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
+        
+        INNER JOIN 
+        rgdb."DbT4116IchijiHanteiKekkaJoho" AS DbT4116Zenkai
+        ON
+        DbT4116Zenkai."shinseishoKanriNo" = DbT4203Zenkai."shinseishoKanriNo"
+        
+        INNER JOIN
+        rgdb."DbT4102NinteiKekkaJoho" AS DbT4102
+        ON
+        DbT4102."shinseishoKanriNo" = DbT4203Zenkai."shinseishoKanriNo"
+        
+        INNER JOIN 
+        rgdb."DbT4211NinteichosahyoChosaItem" AS DbT4211Zenkai
+        ON
+        DbT4211Zenkai."shinseishoKanriNo" = DbT4203Zenkai."shinseishoKanriNo"
+        AND NOT EXISTS ( 
+         SELECT 'X'
+         FROM
+         rgdb."DbT4211NinteichosahyoChosaItem"  
+         WHERE
+         "shinseishoKanriNo" = DbT4211Zenkai."shinseishoKanriNo"
+         AND "remban" = DbT4211Zenkai."remban"
+         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4211Zenkai."ninteichosaRirekiNo"
+        )
+        AND DbT4211Zenkai."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
+        
+        
         LEFT JOIN
         rgdb."DbT5150RenrakusakiJoho" AS DbT5150
         ON
@@ -514,11 +607,11 @@
         </foreach>
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = false
-        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        AND (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105."ninteichosaKanryoYMD" IS NULL OR DbT5105."ninteichosaKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiWariateKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105."centerSoshinYMD" IS NULL OR DbT5105."centerSoshinYMD" = '')
         <if test= "is依頼日From">
             AND DbT5201."ninteichosaIraiYMD" <![CDATA[>=]]> #{iraiFromYMD}
         </if>
@@ -527,18 +620,18 @@
         </if>
         <if test="!is認定調査依頼書未印刷_印刷済">
             <if test="is認定調査依頼書未印刷">
-                AND dbT5201."iraishoShutsuryokuYMD" IS NULL
+                AND (dbT5201."iraishoShutsuryokuYMD" IS NULL OR dbT5201."iraishoShutsuryokuYMD" = '')
             </if>
             <if test="is認定調査依頼書印刷済">
-                AND dbT5201."iraishoShutsuryokuYMD" IS NOT NULL
+                AND (dbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND dbT5201."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         <if test="!is認定調査票未印刷_印刷済">
             <if test="is認定調査票未印刷">
-                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NULL
+                AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NULL OR dbT5201."chosahyoTouShutsuryokuYMD" = '')
             </if>
             <if test="is認定調査票印刷済">
-                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL
+                AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND dbT5201."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         ORDER BY
@@ -560,7 +653,7 @@
     </select>
 
     <select resultOrdered="true" id="get認定調査依頼履歴一覧" resultMap="resultMap_getHomonChosaIraisho"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter"
             fetchSize="500">
         SELECT
         A.直近区分 AS 直近区分

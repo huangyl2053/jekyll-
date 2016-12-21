@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.yokaigoninteitas
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosaNyushuRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosairaiRelateWithCountEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GetureiSyoriTantoshaWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IKnSyoiRaiRelateEntity;
@@ -88,9 +88,9 @@ public interface IYokaigoNinteiTaskListMapper {
      * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ＆ 認定調査依頼情報＆認定調査票（概況調査）＆認定調査委託先情報＆調査員情報
      *
      * @param parameter YokaigoNinteiTaskListParameter
-     * @return List<CyoSaNyuSyuRelateEntity>
+     * @return ChosaNyushuRelateWithCountEntity
      */
-    List<CyoSaNyuSyuRelateEntity> get調査入手(YokaigoNinteiTaskListParameter parameter);
+    ChosaNyushuRelateWithCountEntity get調査入手(YokaigoNinteiTaskListParameter parameter);
 
     /**
      * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ ＆ 認定調査依頼情報＆認定調査票（概況調査）＆認定調査委託先情報＆調査員情報

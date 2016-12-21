@@ -62,7 +62,7 @@ public class ShinsaTaishoDataOutPutProcess extends BatchProcessBase<NijihanteiKe
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build();
     }
 
