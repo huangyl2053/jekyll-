@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計_DBD522001_延期通知書出力バッチパラメタークラスです．
@@ -21,20 +22,24 @@ public class EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter implements IMyBat
     private FlexibleDate shorimikomibiFrom;
     private FlexibleDate shorimikomibiTo;
     private FlexibleDate tsuchishohakkonbi;
-
+    private RString bunshoBango;
+    
     /**
      * コンストラクタです。
      *
      * @param 処理見込み日From shorimikomibiFrom
      * @param 処理見込み日To shorimikomibiTo
      * @param 通知書発行日 tsuchishohakkonbi
+     * @param 文書番号 bunshoBango 
      */
     public EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter(
             FlexibleDate 処理見込み日From,
             FlexibleDate 処理見込み日To,
-            FlexibleDate 通知書発行日) {
+            FlexibleDate 通知書発行日,
+            RString 文書番号) {
         this.shorimikomibiFrom = 処理見込み日From;
         this.shorimikomibiTo = 処理見込み日To;
         this.tsuchishohakkonbi = 通知書発行日;
+        this.bunshoBango = 文書番号;
     }
 }

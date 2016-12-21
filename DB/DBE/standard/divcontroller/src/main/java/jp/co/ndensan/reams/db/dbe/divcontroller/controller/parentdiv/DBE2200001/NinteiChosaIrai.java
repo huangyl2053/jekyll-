@@ -592,7 +592,7 @@ public class NinteiChosaIrai {
         updateNinteichosaIraiJohoForPrint(div);
         NinteiChosaIraiPrintService ninteiChosaIraiPrintService = new NinteiChosaIraiPrintService(reportManager);
         if (checkList.contains(CHKNAME_認定調査依頼書)) {
-            ninteiChosaIraiPrintService.print要介護認定調査依頼書(handler.create認定調査依頼書印刷用パラメータ());
+            ninteiChosaIraiPrintService.print要介護認定調査依頼書(handler.create認定調査依頼書Item());
         }
         if (checkList.contains(CHKNAME_認定調査票デザイン用紙)) {
             call認定調査票_デザイン用紙(ninteiChosaIraiPrintService, handler);

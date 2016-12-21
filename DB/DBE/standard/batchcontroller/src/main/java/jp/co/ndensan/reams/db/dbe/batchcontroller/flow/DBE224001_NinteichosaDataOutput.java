@@ -45,7 +45,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
     private static final String NINTEICHOSADBT5211DATAGET = "ninteichosadbt5211dataget";
     private static final String NINTEICHOSADATAOUTPUT = "ninteichosadataoutput";
     private static final String NINTEICHOSATOKKIDATAOUTPUT = "ninteichosatokkidataoutput";
-    private static final String NINTEICHOSAGAIKYOTOKKIDATAOUTPUT = "ninteichosagaikyotokkidataoutput";
+    private static final String NINTEICHOSAGAIKYOTOKKIOUTPUT = "ninteichosagaikyotokkioutput";
     private static final String NINTEICHOSAINDATAOUTPUT = "ninteichosaindataoutput";
     private static final String DBUPDATEPROCESS = "dbT5301UpdateProcess";
     private RString ninteiChosaCsvTempTableName;
@@ -75,7 +75,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
         //各CSV出力
         executeStep(NINTEICHOSADATAOUTPUT);
         executeStep(NINTEICHOSATOKKIDATAOUTPUT);
-        executeStep(NINTEICHOSAGAIKYOTOKKIDATAOUTPUT);
+        executeStep(NINTEICHOSAGAIKYOTOKKIOUTPUT);
         executeStep(NINTEICHOSAINDATAOUTPUT);
         //DB更新
         executeStep(DBUPDATEPROCESS);
@@ -193,7 +193,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
      *
      * @return 認定調査データ出力（モバイル）
      */
-    @Step(NINTEICHOSAGAIKYOTOKKIDATAOUTPUT)
+    @Step(NINTEICHOSAGAIKYOTOKKIOUTPUT)
     protected IBatchFlowCommand callNinteiChosaGaikyoTokkiDataOutput() {
         return loopBatch(NinteiChosaGaikyoTokkiDataOutputProcess.class)
                 .arguments(getParameter().toNinteiChosaDataOutputProcessParamter(認定調査CSV一時テーブル名)).define();

@@ -59,6 +59,31 @@ public class DbT5211NinteichosahyoChosaItemDac implements ISaveable<DbT5211Ninte
     }
 
     /**
+     * 申請書管理番号,要介護認定調査履歴番号で認定調査票_基本調査_調査項目を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 要介護認定調査履歴番号 要介護認定調査履歴番号
+     * @return DbT5211NinteichosahyoChosaItemEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5211NinteichosahyoChosaItemEntity> select調査項目(
+            ShinseishoKanriNo 申請書管理番号,
+            int 要介護認定調査履歴番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(要介護認定調査履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5211NinteichosahyoChosaItem.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 要介護認定調査履歴番号))).
+                toList(DbT5211NinteichosahyoChosaItemEntity.class);
+    }
+    
+    /**
      * 認定調査票_基本調査_調査項目を全件返します。
      *
      * @return DbT5211NinteichosahyoChosaItemEntityの{@code list}

@@ -34,7 +34,9 @@ public class DBD522001_EnkitsuchiParameter extends BatchParameterBase {
     private List<FlexibleDate> 通知書発行日;
     @BatchParameter(key = "申請書管理番号リスト", name = "申請書管理番号リスト")
     private List<RString> 申請書管理番号リスト;
-
+    @BatchParameter(key = "文書番号", name = "文書番号")
+    private RString 文書番号;
+    
     /**
      * バーチのパラメータを作成します。
      *
@@ -42,7 +44,7 @@ public class DBD522001_EnkitsuchiParameter extends BatchParameterBase {
      */
     public EnkiTsuchishohakenIchiranhyoJyohoProcessParameter toEnkiTsuchishohakenIchiranhyoJyohoProcessParameter() {
         return new EnkiTsuchishohakenIchiranhyoJyohoProcessParameter(画面モード,
-                処理見込み日From, 処理見込み日To, 通知書発行日, 申請書管理番号リスト);
+                処理見込み日From, 処理見込み日To, 通知書発行日, 申請書管理番号リスト,文書番号);
     }
 
 }

@@ -73,9 +73,8 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(JimuShinsakaishiryoA3ReportSource.ReportSourceFields.tokkiText1.name()),
             new RString(JimuShinsakaishiryoA3ReportSource.ReportSourceFields.tokkiImg1.name())));
-    private static final RString 印字する = new RString("1");
-    private static final RString 両面 = new RString("1");
-    private static final int INT_4 = 4;
+    private static final RString STR_1 = new RString("1");
+    private static final RString STR_2 = new RString("2");
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IJimuShiryoShinsakaiIinMapper mapper;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
@@ -126,17 +125,25 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     @Override
     protected void process() {
 
-        RString reportId;
-        RDate 日期 = RDate.getNowDate();
-        if (両面.equals(paramter.getPrintHou())
-                && 印字する.equals(DbBusinessConfig.get(ConfigNameDBE.特記と意見書の見開き印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
-            reportId = ReportIdDBE.DBE517903.getReportId().value();
-        } else {
-            reportId = ReportIdDBE.DBE517902.getReportId().value();
-        }
+        RString reportId = ReportIdDBE.DBE517902.getReportId().value();
+        /*RDate 日期 = RDate.getNowDate();
+         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
+         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517911.getReportId().value();
+         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517912.getReportId().value();
+         }
+         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
+         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517913.getReportId().value();
+         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517914.getReportId().value();
+         }
+         }*/
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
+
                     JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(

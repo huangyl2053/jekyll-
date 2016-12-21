@@ -98,9 +98,40 @@ public class Masking {
         return ResponseData.of(div).setState(DBE2080001StateName.登録);
     }
 
+    /**
+     * 一覧表の表示データを制御する処理です。
+     *
+     * @param div MaskingDiv
+     * @return レスポンスデータ
+     */
     public ResponseData<MaskingDiv> onChange_radTaishoDataKubun(MaskingDiv div) {
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一覧表の表示データを制御する処理です。
+     *
+     * @param div MaskingDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<MaskingDiv> onChange_TxtSaidaiHyojiKensu(MaskingDiv div) {
+        getHandler(div).initialize();
+        if (div.getTxtSaidaiHyojiKensu().getValue().toString().isEmpty() || div.getTxtSaidaiHyojiKensu().getValue().compareTo(Decimal.ZERO) == 0) {
+            div.getTxtSaidaiHyojiKensu().setValue(
+                    new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一覧表の表示データを制御する処理です。
+     *
+     * @param div MaskingDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<MaskingDiv> onClick_btnShorikeizoku(MaskingDiv div) {
+        return ResponseData.of(div).setState(DBE2080001StateName.登録);
     }
 
     /**
@@ -157,12 +188,6 @@ public class Masking {
      */
     public ResponseData<MaskingDiv> onClick_BtnMasking(MaskingDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.画面遷移確認.getMessage().getCode(),
-                    DbzQuestionMessages.画面遷移確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(DbzQuestionMessages.画面遷移確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             if (div.getDgYokaigoNinteiTaskList().getDataSource().isEmpty()) {
                 getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
@@ -172,6 +197,11 @@ public class Masking {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.画面遷移確認.getMessage().getCode(),
+                    DbzQuestionMessages.画面遷移確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getDataSource());
             RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
@@ -187,12 +217,6 @@ public class Masking {
      */
     public ResponseData<MaskingDiv> onClick_BtnCompleteMasking(MaskingDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             if (div.getDgYokaigoNinteiTaskList().getDataSource().isEmpty()) {
                 getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
@@ -202,6 +226,11 @@ public class Masking {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model

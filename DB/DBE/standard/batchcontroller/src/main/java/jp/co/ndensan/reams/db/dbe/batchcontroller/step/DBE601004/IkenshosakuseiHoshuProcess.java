@@ -88,20 +88,18 @@ public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuSho
 
     @Override
     protected void createWriter() {
-        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-            RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-            eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME_EN);
-            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                    .setEncode(Encode.UTF_8withBOM)
-                    .hasHeader(true)
-                    .build();
-        } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
-            batchWriter = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                    .addBreak(new BreakerCatalog<IkenHoshuIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                    .create();
-            reportSourceWriter = new ReportSourceWriter<>(batchWriter);
-        }
+        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
+        eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME_EN);
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                .setEncode(Encode.UTF_8withBOM)
+                .hasHeader(true)
+                .build();
+        
+        batchWriter = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<IkenHoshuIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
@@ -124,13 +122,13 @@ public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuSho
 
     @Override
     protected void afterExecute() {
+        csvWriter.close();
+        fileSpoolManager.spool(eucFilePath);
+            
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            csvWriter.close();
-            fileSpoolManager.spool(eucFilePath);
-            
             バッチ出力条件リストの出力();
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
             帳票出力条件リストの出力();

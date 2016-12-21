@@ -86,6 +86,17 @@ public class ShinsakauIinHoshuShokai {
     }
 
     /**
+     * 一覧グリッドのソートイベント処理メソッドです。
+     *
+     * @param div 画面情報
+     * @return ResponseData&lt;ShinsakauIinHoshuShokaiDiv&gt;
+     */
+    public ResponseData<ShinsakauIinHoshuShokaiDiv> onSort_dgShinsakaiIinHoshu(ShinsakauIinHoshuShokaiDiv div) {
+        getHandler(div).resetシーケンス番号();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * ShinsakauIinHoshuShokaiHandlerの取得する。
      *
      * @param div

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinShinchokuShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,22 +29,24 @@ public class KojinShinchokuShosaiDiv extends Panel {
     private TextBox txtShinseiKubunShinseiji;
     @JsonProperty("txtShinseiKubunHorei")
     private TextBox txtShinseiKubunHorei;
+    @JsonProperty("txtIchijiHantei")
+    private TextBox txtIchijiHantei;
+    @JsonProperty("txtIchijiHanteiYMD")
+    private TextBoxDate txtIchijiHanteiYMD;
+    @JsonProperty("txtIchijiHanteiKeikokuCode")
+    private TextBoxCode txtIchijiHanteiKeikokuCode;
     @JsonProperty("txtNinteiKekka")
     private TextBox txtNinteiKekka;
+    @JsonProperty("txtNijiHanteiYMD")
+    private TextBoxDate txtNijiHanteiYMD;
     @JsonProperty("txtNinteiYukoKikanFrom")
     private TextBoxDate txtNinteiYukoKikanFrom;
     @JsonProperty("txtNinteiYukoKikanTo")
     private TextBoxDate txtNinteiYukoKikanTo;
     @JsonProperty("txtNinteiKikanMonth")
     private TextBoxNum txtNinteiKikanMonth;
-    @JsonProperty("txtNijiHanteiYMD")
-    private TextBoxDate txtNijiHanteiYMD;
     @JsonProperty("txtTokuteiShippei")
     private TextBox txtTokuteiShippei;
-    @JsonProperty("txtIchijiHantei")
-    private TextBox txtIchijiHantei;
-    @JsonProperty("txtIchijiHanteiYMD")
-    private TextBoxDate txtIchijiHanteiYMD;
     @JsonProperty("txtJohoTeikyoDoi")
     private TextBox txtJohoTeikyoDoi;
     @JsonProperty("txtShoriKubun")
@@ -129,6 +131,60 @@ public class KojinShinchokuShosaiDiv extends Panel {
     }
 
     /*
+     * gettxtIchijiHantei
+     * @return txtIchijiHantei
+     */
+    @JsonProperty("txtIchijiHantei")
+    public TextBox getTxtIchijiHantei() {
+        return txtIchijiHantei;
+    }
+
+    /*
+     * settxtIchijiHantei
+     * @param txtIchijiHantei txtIchijiHantei
+     */
+    @JsonProperty("txtIchijiHantei")
+    public void setTxtIchijiHantei(TextBox txtIchijiHantei) {
+        this.txtIchijiHantei = txtIchijiHantei;
+    }
+
+    /*
+     * gettxtIchijiHanteiYMD
+     * @return txtIchijiHanteiYMD
+     */
+    @JsonProperty("txtIchijiHanteiYMD")
+    public TextBoxDate getTxtIchijiHanteiYMD() {
+        return txtIchijiHanteiYMD;
+    }
+
+    /*
+     * settxtIchijiHanteiYMD
+     * @param txtIchijiHanteiYMD txtIchijiHanteiYMD
+     */
+    @JsonProperty("txtIchijiHanteiYMD")
+    public void setTxtIchijiHanteiYMD(TextBoxDate txtIchijiHanteiYMD) {
+        this.txtIchijiHanteiYMD = txtIchijiHanteiYMD;
+    }
+
+    /*
+     * gettxtIchijiHanteiKeikokuCode
+     * @return txtIchijiHanteiKeikokuCode
+     */
+    @JsonProperty("txtIchijiHanteiKeikokuCode")
+    public TextBoxCode getTxtIchijiHanteiKeikokuCode() {
+        return txtIchijiHanteiKeikokuCode;
+    }
+
+    /*
+     * settxtIchijiHanteiKeikokuCode
+     * @param txtIchijiHanteiKeikokuCode txtIchijiHanteiKeikokuCode
+     */
+    @JsonProperty("txtIchijiHanteiKeikokuCode")
+    public void setTxtIchijiHanteiKeikokuCode(TextBoxCode txtIchijiHanteiKeikokuCode) {
+        this.txtIchijiHanteiKeikokuCode = txtIchijiHanteiKeikokuCode;
+    }
+
+    /*
      * gettxtNinteiKekka
      * @return txtNinteiKekka
      */
@@ -144,6 +200,24 @@ public class KojinShinchokuShosaiDiv extends Panel {
     @JsonProperty("txtNinteiKekka")
     public void setTxtNinteiKekka(TextBox txtNinteiKekka) {
         this.txtNinteiKekka = txtNinteiKekka;
+    }
+
+    /*
+     * gettxtNijiHanteiYMD
+     * @return txtNijiHanteiYMD
+     */
+    @JsonProperty("txtNijiHanteiYMD")
+    public TextBoxDate getTxtNijiHanteiYMD() {
+        return txtNijiHanteiYMD;
+    }
+
+    /*
+     * settxtNijiHanteiYMD
+     * @param txtNijiHanteiYMD txtNijiHanteiYMD
+     */
+    @JsonProperty("txtNijiHanteiYMD")
+    public void setTxtNijiHanteiYMD(TextBoxDate txtNijiHanteiYMD) {
+        this.txtNijiHanteiYMD = txtNijiHanteiYMD;
     }
 
     /*
@@ -201,24 +275,6 @@ public class KojinShinchokuShosaiDiv extends Panel {
     }
 
     /*
-     * gettxtNijiHanteiYMD
-     * @return txtNijiHanteiYMD
-     */
-    @JsonProperty("txtNijiHanteiYMD")
-    public TextBoxDate getTxtNijiHanteiYMD() {
-        return txtNijiHanteiYMD;
-    }
-
-    /*
-     * settxtNijiHanteiYMD
-     * @param txtNijiHanteiYMD txtNijiHanteiYMD
-     */
-    @JsonProperty("txtNijiHanteiYMD")
-    public void setTxtNijiHanteiYMD(TextBoxDate txtNijiHanteiYMD) {
-        this.txtNijiHanteiYMD = txtNijiHanteiYMD;
-    }
-
-    /*
      * gettxtTokuteiShippei
      * @return txtTokuteiShippei
      */
@@ -234,42 +290,6 @@ public class KojinShinchokuShosaiDiv extends Panel {
     @JsonProperty("txtTokuteiShippei")
     public void setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
         this.txtTokuteiShippei = txtTokuteiShippei;
-    }
-
-    /*
-     * gettxtIchijiHantei
-     * @return txtIchijiHantei
-     */
-    @JsonProperty("txtIchijiHantei")
-    public TextBox getTxtIchijiHantei() {
-        return txtIchijiHantei;
-    }
-
-    /*
-     * settxtIchijiHantei
-     * @param txtIchijiHantei txtIchijiHantei
-     */
-    @JsonProperty("txtIchijiHantei")
-    public void setTxtIchijiHantei(TextBox txtIchijiHantei) {
-        this.txtIchijiHantei = txtIchijiHantei;
-    }
-
-    /*
-     * gettxtIchijiHanteiYMD
-     * @return txtIchijiHanteiYMD
-     */
-    @JsonProperty("txtIchijiHanteiYMD")
-    public TextBoxDate getTxtIchijiHanteiYMD() {
-        return txtIchijiHanteiYMD;
-    }
-
-    /*
-     * settxtIchijiHanteiYMD
-     * @param txtIchijiHanteiYMD txtIchijiHanteiYMD
-     */
-    @JsonProperty("txtIchijiHanteiYMD")
-    public void setTxtIchijiHanteiYMD(TextBoxDate txtIchijiHanteiYMD) {
-        this.txtIchijiHanteiYMD = txtIchijiHanteiYMD;
     }
 
     /*

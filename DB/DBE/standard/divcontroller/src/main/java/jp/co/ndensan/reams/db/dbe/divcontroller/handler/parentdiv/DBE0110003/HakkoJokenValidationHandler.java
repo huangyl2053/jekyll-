@@ -5,19 +5,23 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003;
 
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査に関する帳票発行画面のバリデーションクラスです
@@ -38,51 +42,6 @@ public class HakkoJokenValidationHandler {
      */
     public HakkoJokenValidationHandler(HakkoJokenDiv div) {
         this.div = div;
-    }
-
-    /**
-     * 申請日範囲不正チェック1です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請日範囲不正チェック1(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtYoteiMiteishaShinseiYMD().getFromValue();
-        RDate shinnseikato = div.getTxtYoteiMiteishaShinseiYMD().getToValue();
-        if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled() && shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 申請日範囲不正チェック2です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請日範囲不正チェック2(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue();
-        RDate shinnseikato = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue();
-        if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled() && shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 申請日範囲不正チェック3です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請日範囲不正チェック3(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtCheckListShinseiYMD().getFromValue();
-        RDate shinnseikato = div.getTxtCheckListShinseiYMD().getToValue();
-        if (!div.getTxtCheckListShinseiYMD().isDisabled() && shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日範囲不正チェック));
-        }
-        return validPairs;
     }
 
     /**
@@ -136,16 +95,21 @@ public class HakkoJokenValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 申請日入力チェック1(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtYoteiMiteishaShinseiYMD().getFromValue();
-        RDate shinnseikato = div.getTxtYoteiMiteishaShinseiYMD().getToValue();
-        RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+        RDate 申請日開始 = div.getTxtYoteiMiteishaShinseiYMD().getFromValue();
+        RDate 申請日終了 = div.getTxtYoteiMiteishaShinseiYMD().getToValue();
+        RString 切替日 = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 LASDEC_CODE, ConfigNameDBE.Reamsへの切り替え日.get名称());
-        RDate kijyundate = new RDate(kijyun.toString());
+        RString 照会可能期間 = BusinessConfig.get(ConfigNameDBE.依頼業務照会_申請日_照会可能期間, SubGyomuCode.DBE認定支援);
+        int 遡及可能日数 = Integer.parseInt(照会可能期間.toString());
+
+        RDate 基準日 = new RDate(切替日.toString());
+        RDate 遡及限界日 = 基準日.minusDay(遡及可能日数);
+
         if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
-            int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
-            int yearsto = kijyundate.getBetweenYears(shinnseikato);
-            if ((yearsfrom > 2) || (yearsto > 2)) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
+            if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
+                RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                IraiGyomuShokaiShinseiDateMessage message = new HakkoJokenValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
+                validPairs.add(new ValidationMessageControlPair(message));
             }
         }
         return validPairs;
@@ -158,16 +122,21 @@ public class HakkoJokenValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 申請日入力チェック2(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue();
-        RDate shinnseikato = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue();
-        RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+        RDate 申請日開始 = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getFromValue();
+        RDate 申請日終了 = div.getTxtIraisakiHenkoshaIchiranShinseiYMD().getToValue();
+        RString 切替日 = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 LASDEC_CODE, ConfigNameDBE.Reamsへの切り替え日.get名称());
-        RDate kijyundate = new RDate(kijyun.toString());
+        RString 照会可能期間 = BusinessConfig.get(ConfigNameDBE.依頼業務照会_申請日_照会可能期間, SubGyomuCode.DBE認定支援);
+        int 遡及可能日数 = Integer.parseInt(照会可能期間.toString());
+
+        RDate 基準日 = new RDate(切替日.toString());
+        RDate 遡及限界日 = 基準日.minusDay(遡及可能日数);
+
         if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
-            int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
-            int yearsto = kijyundate.getBetweenYears(shinnseikato);
-            if ((yearsfrom > 2) || (yearsto > 2)) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
+            if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
+                RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                IraiGyomuShokaiShinseiDateMessage message = new HakkoJokenValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
+                validPairs.add(new ValidationMessageControlPair(message));
             }
         }
         return validPairs;
@@ -180,25 +149,44 @@ public class HakkoJokenValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 申請日入力チェック3(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtCheckListShinseiYMD().getFromValue();
-        RDate shinnseikato = div.getTxtCheckListShinseiYMD().getToValue();
-        RString kijyun = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+        RDate 申請日開始 = div.getTxtCheckListShinseiYMD().getFromValue();
+        RDate 申請日終了 = div.getTxtCheckListShinseiYMD().getToValue();
+        RString 切替日 = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 LASDEC_CODE, ConfigNameDBE.Reamsへの切り替え日.get名称());
-        RDate kijyundate = new RDate(kijyun.toString());
+        RString 照会可能期間 = BusinessConfig.get(ConfigNameDBE.依頼業務照会_申請日_照会可能期間, SubGyomuCode.DBE認定支援);
+        int 遡及可能日数 = Integer.parseInt(照会可能期間.toString());
+
+        RDate 基準日 = new RDate(切替日.toString());
+        RDate 遡及限界日 = 基準日.minusDay(遡及可能日数);
+
         if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
-            int yearsfrom = kijyundate.getBetweenYears(shinnseikafrom);
-            int yearsto = kijyundate.getBetweenYears(shinnseikato);
-            if ((yearsfrom > 2) || (yearsto > 2)) {
-                validPairs.add(new ValidationMessageControlPair(HakkoJokenMessages.申請日入力チェック));
+            if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
+                RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                IraiGyomuShokaiShinseiDateMessage message = new HakkoJokenValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
+                validPairs.add(new ValidationMessageControlPair(message));
             }
         }
         return validPairs;
     }
 
+    private static final class IraiGyomuShokaiShinseiDateMessage implements IValidationMessage {
+
+        private final Message message;
+
+        private IraiGyomuShokaiShinseiDateMessage(IMessageGettable message, RString replaceParm) {
+            this.message = message.getMessage().replace(replaceParm.toString());
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+
+    }
+
     private static enum HakkoJokenMessages implements IValidationMessage {
 
         申請日入力チェック(UrErrorMessages.期間が不正_追加メッセージあり２, "申請日From", "申請日To"),
-        申請日範囲不正チェック(UrErrorMessages.期間が不正_追加メッセージあり２, "申請日From", "申請日To"),
         未入力チェック(UrErrorMessages.未指定, "選択したパネルの申請日または審査日または審査会を"),
         未選択チェック(UrErrorMessages.未指定, "出力帳票を");
         private final Message message;

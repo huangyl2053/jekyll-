@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -395,6 +396,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
         set開催予定入力欄(div.getTxtSeteibi().getValue());
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
         return ResponseData.of(div).respond();
     }
 
@@ -802,6 +804,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         div.getTxtSeteibi().setDisabled(true);
         set開催予定入力欄(date);
         div.getBtnShinsakaiIinWaritsuke().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), true);
     }
 
     private void setMonthBefore() {

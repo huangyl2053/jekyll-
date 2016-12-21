@@ -34,24 +34,24 @@ public class GogitaiJohoSakuseiCSVEntity {
     private RString gogitaiKaishiYoteiTime;
     @CsvField(order = 6)
     private RString gogitaiShuryoYoteiTime;
-    @CsvField(order = 10)
-    private RString shinsakaiKaisaiBashoCode;
     @CsvField(order = 7)
     private RString shinsakaiYoteiTeiin;
     @CsvField(order = 8)
     private RString shinsakaiJidoWariateTeiin;
     @CsvField(order = 9)
     private RString shinsakaiIinTeiin;
+    @CsvField(order = 10)
+    private RString shinsakaiKaisaiBashoCode;
     @CsvField(order = 11)
     private RString gogitaiSeishinkaSonzaiFlag;
     @CsvField(order = 12)
     private RString gogitaiDummyFlag;
     @CsvField(order = 13)
     private RString shinsakaiIinCode;
-    @CsvField(order = 15)
-    private RString gogitaichoKubunCode;
     @CsvField(order = 14)
     private RString substituteFlag;
+    @CsvField(order = 15)
+    private RString gogitaichoKubunCode;
 
     /**
      * CSVデータから、合議体情報テーブルを設定します。
@@ -61,9 +61,9 @@ public class GogitaiJohoSakuseiCSVEntity {
     public DbT5591GogitaiJohoEntity toDbt5591Entity() {
         DbT5591GogitaiJohoEntity entity = new DbT5591GogitaiJohoEntity();
         entity.setGogitaiNo(strToInt(this.gogitaiNo));
-        entity.setGogitaiMei(this.gogitaiMei);
         entity.setGogitaiYukoKikanKaishiYMD(strToFlex(this.gogitaiYukoKikanKaishiYMD));
         entity.setGogitaiYukoKikanShuryoYMD(strToFlex(this.gogitaiYukoKikanShuryoYMD));
+        entity.setGogitaiMei(this.gogitaiMei);
         entity.setGogitaiKaishiYoteiTime(this.gogitaiKaishiYoteiTime);
         entity.setGogitaiShuryoYoteiTime(this.gogitaiShuryoYoteiTime);
         entity.setShinsakaiKaisaiBashoCode(this.shinsakaiKaisaiBashoCode);

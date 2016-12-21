@@ -179,4 +179,38 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
                         )).order(by(ninteichosaTokkijikoNo), by(ninteichosaTokkijikoRemban)).toList(DbT5205NinteichosahyoTokkijikoEntity.class);
 
     }
+
+    /**
+     * 引数で指定したキーで認定調査票（特記情報）を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 特記事項テキスト_イメージ区分 特記事項テキスト_イメージ区分
+     * @param 原本マスク区分 原本マスク区分
+     * @return DbT5205NinteichosahyoTokkijikoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5205NinteichosahyoTokkijikoEntity> selectByKey(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            RString 特記事項テキスト_イメージ区分,
+            Code 原本マスク区分) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(特記事項テキスト_イメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項テキスト_イメージ区分"));
+        requireNonNull(原本マスク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク区分"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5205NinteichosahyoTokkijiko.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
+                                eq(tokkijikoTextImageKubun, 特記事項テキスト_イメージ区分),
+                                eq(genponMaskKubun, 原本マスク区分)
+                        )).
+                toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+    }
 }

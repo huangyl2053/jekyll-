@@ -41,16 +41,19 @@ public class DBE220010_IraishoIkkatu extends BatchFlowBase<DBE220010_IraishoIkka
     }
 
     private void call訪問調査依頼書発行バッチ() {
-        if (getParameter().isNinteiChosaIraisyo()
+        if (getParameter().is認定調査依頼書()
                 || getParameter().isNinteiChosaIraiChohyo()
-                || getParameter().isNinteiChosahyoKihon()
-                || getParameter().isNinteiChosahyoTokki()
-                || getParameter().isNinteiChosahyoGaikyou()
-                || getParameter().isNinteiChosahyoOCRKihon()
-                || getParameter().isNinteiChosahyoOCRTokki()
-                || getParameter().isNinteiChosahyoOCRGaikyou()
-                || getParameter().isNinteiChosaCheckHyo()
-                || getParameter().isZenkoNinteiChosahyo()
+                || getParameter().is認定調査票_デザイン用紙()
+                || getParameter().is特記事項_デザイン用紙()
+                || getParameter().is認定調査票OCR()
+                || getParameter().is特記事項OCR()
+                || getParameter().is認定調査差異チェック票()
+                || getParameter().is概況特記()
+                || getParameter().is前回認定調査結果との比較表()
+                || getParameter().is特記事項_項目あり()
+                || getParameter().is特記事項_項目無し()
+                || getParameter().is特記事項_フリータイプ()
+                || getParameter().is手入力タイプ()
                 || getParameter().is認定調査依頼履歴一覧()) {
             executeStep(CALL_HOMONCHOSAIRAISHOFLOW);
         }

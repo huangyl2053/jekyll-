@@ -20,13 +20,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class EnkiTsuchishoJyohoMybatisParameter implements IMyBatisParameter {
 
     private List<RString> shinseishokanribangorisuto;
+    private RString bunshoBango;
 
     /**
      * コンストラクタです。
      *
      * @param 申請書管理番号リスト shinseishokanribangorisuto
+     * @param 文書番号 bunshoBango 
      */
-    public EnkiTsuchishoJyohoMybatisParameter(List<RString> 申請書管理番号リスト) {
+    public EnkiTsuchishoJyohoMybatisParameter(List<RString> 申請書管理番号リスト, RString 文書番号) {
         this.shinseishokanribangorisuto = 申請書管理番号リスト;
+        this.bunshoBango = 文書番号;
     }
 }

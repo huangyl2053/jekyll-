@@ -66,7 +66,8 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
             }
         }
         if (flag) {
-            validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.一致性チェック));
+            validPairs.add(new ValidationMessageControlPair(new ValidationMessage(
+                UrErrorMessages.不正, fileName.toString()), div.getUplPanel()));
         }
         return validPairs;
     }
@@ -89,7 +90,8 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
     public ValidationMessageControlPairs データ件数チェック(ValidationMessageControlPairs validPairs) {
         for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getDataSource()) {
             if ((row.getSelected()) && (null == row.getDataNum().getValue() || 0 == row.getDataNum().getValue().compareTo(Decimal.ZERO))) {
-                validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.データ件数チェック));
+                validPairs.add(new ValidationMessageControlPair(new ValidationMessage(
+                    UrErrorMessages.対象データなし_追加メッセージあり, row.getFileName().toString()), div.getDgTorikomiTaiasho()));
             }
         }
         return validPairs;
@@ -103,6 +105,20 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
         private final Message message;
 
         private NinteiShinsakaiKekkaDataTorikomiMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
+    private class ValidationMessage implements IValidationMessage {
+
+        private final Message message;
+
+        private ValidationMessage(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

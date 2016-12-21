@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshohoshushokaiichiran.IkenshoHoshuShokaiIchiranKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -24,6 +25,8 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
     private final FlexibleDate 作成依頼日開始;
     private final boolean 作成依頼日終了Flag;
     private final boolean 作成依頼日開始Flag;
+    private final boolean 保険者Flag;
+    private final RString 保険者;
     private final Decimal 最大表示件数;
     private final boolean 最大表示件数Flag;
     private final boolean batchFlag;
@@ -37,6 +40,8 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
      * @param 作成依頼日開始 作成依頼日開始
      * @param 作成依頼日終了Flag 作成依頼日終了Flag,
      * @param 作成依頼日開始Flag 作成依頼日開始Flag,
+     * @param 保険者Flag 保険者Flag
+     * @param 保険者 保険者
      * @param 最大表示件数Flag 最大表示件数Flag
      * @param 最大表示件数 最大表示件数
      * @param batchFlag batchFlag
@@ -48,6 +53,8 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
             FlexibleDate 作成依頼日開始,
             boolean 作成依頼日終了Flag,
             boolean 作成依頼日開始Flag,
+            boolean 保険者Flag,
+            RString 保険者,
             Decimal 最大表示件数,
             boolean 最大表示件数Flag,
             boolean batchFlag,
@@ -57,6 +64,8 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
         this.作成依頼日開始 = 作成依頼日開始;
         this.作成依頼日終了Flag = 作成依頼日終了Flag;
         this.作成依頼日開始Flag = 作成依頼日開始Flag;
+        this.保険者Flag = 保険者Flag;
+        this.保険者 = 保険者;
         this.最大表示件数 = 最大表示件数;
         this.最大表示件数Flag = 最大表示件数Flag;
         this.batchFlag = batchFlag;
@@ -69,18 +78,22 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
      *
      * @param 作成依頼日開始 作成依頼日開始
      * @param 作成依頼日終了 作成依頼日終了
+     * @param 保険者 保険者
      * @param 最大表示件数 最大表示件数
      * @return 合計額リストのパラメータ
      */
     public static IkenshoHoshuShokaiMapperParameter createSelectBy情報(
             FlexibleDate 作成依頼日開始,
             FlexibleDate 作成依頼日終了,
+            RString 保険者,
             Decimal 最大表示件数) {
         return new IkenshoHoshuShokaiMapperParameter(
                 作成依頼日終了,
                 作成依頼日開始,
                 !作成依頼日終了.isEmpty(),
                 !作成依頼日開始.isEmpty(),
+                !RString.isNullOrEmpty(保険者),
+                保険者,
                 最大表示件数,
                 true,
                 false,
@@ -93,18 +106,22 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
      *
      * @param 作成依頼日開始 作成依頼日開始
      * @param 作成依頼日終了 作成依頼日終了
+     * @param 保険者 保険者
      * @param ikenshoBusiness 主治医意見書作成報酬合計額リストのキー情報
      * @return 合計額リストの帳票出力のパラメータ
      */
     public static IkenshoHoshuShokaiMapperParameter createParamter(
             FlexibleDate 作成依頼日開始,
             FlexibleDate 作成依頼日終了,
+            RString 保険者,
             List<IkenshoHoshuShokaiIchiranKey> ikenshoBusiness) {
         return new IkenshoHoshuShokaiMapperParameter(
                 作成依頼日終了,
                 作成依頼日開始,
                 !作成依頼日終了.isEmpty(),
                 !作成依頼日開始.isEmpty(),
+                !RString.isNullOrEmpty(保険者),
+                保険者,
                 null,
                 false,
                 true,

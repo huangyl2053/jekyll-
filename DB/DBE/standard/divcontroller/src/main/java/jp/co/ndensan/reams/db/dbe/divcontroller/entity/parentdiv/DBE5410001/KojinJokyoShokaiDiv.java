@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -717,6 +717,36 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtIchijiHantei() {
+        return this.getKojinShinchokuShosai().getTxtIchijiHantei();
+    }
+
+    @JsonIgnore
+    public void  setTxtIchijiHantei(TextBox txtIchijiHantei) {
+        this.getKojinShinchokuShosai().setTxtIchijiHantei(txtIchijiHantei);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtIchijiHanteiYMD() {
+        return this.getKojinShinchokuShosai().getTxtIchijiHanteiYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtIchijiHanteiYMD(TextBoxDate txtIchijiHanteiYMD) {
+        this.getKojinShinchokuShosai().setTxtIchijiHanteiYMD(txtIchijiHanteiYMD);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtIchijiHanteiKeikokuCode() {
+        return this.getKojinShinchokuShosai().getTxtIchijiHanteiKeikokuCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtIchijiHanteiKeikokuCode(TextBoxCode txtIchijiHanteiKeikokuCode) {
+        this.getKojinShinchokuShosai().setTxtIchijiHanteiKeikokuCode(txtIchijiHanteiKeikokuCode);
+    }
+
+    @JsonIgnore
     public TextBox getTxtNinteiKekka() {
         return this.getKojinShinchokuShosai().getTxtNinteiKekka();
     }
@@ -724,6 +754,16 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonIgnore
     public void  setTxtNinteiKekka(TextBox txtNinteiKekka) {
         this.getKojinShinchokuShosai().setTxtNinteiKekka(txtNinteiKekka);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtNijiHanteiYMD() {
+        return this.getKojinShinchokuShosai().getTxtNijiHanteiYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtNijiHanteiYMD(TextBoxDate txtNijiHanteiYMD) {
+        this.getKojinShinchokuShosai().setTxtNijiHanteiYMD(txtNijiHanteiYMD);
     }
 
     @JsonIgnore
@@ -757,16 +797,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtNijiHanteiYMD() {
-        return this.getKojinShinchokuShosai().getTxtNijiHanteiYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtNijiHanteiYMD(TextBoxDate txtNijiHanteiYMD) {
-        this.getKojinShinchokuShosai().setTxtNijiHanteiYMD(txtNijiHanteiYMD);
-    }
-
-    @JsonIgnore
     public TextBox getTxtTokuteiShippei() {
         return this.getKojinShinchokuShosai().getTxtTokuteiShippei();
     }
@@ -774,26 +804,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonIgnore
     public void  setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
         this.getKojinShinchokuShosai().setTxtTokuteiShippei(txtTokuteiShippei);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtIchijiHantei() {
-        return this.getKojinShinchokuShosai().getTxtIchijiHantei();
-    }
-
-    @JsonIgnore
-    public void  setTxtIchijiHantei(TextBox txtIchijiHantei) {
-        this.getKojinShinchokuShosai().setTxtIchijiHantei(txtIchijiHantei);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtIchijiHanteiYMD() {
-        return this.getKojinShinchokuShosai().getTxtIchijiHanteiYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtIchijiHanteiYMD(TextBoxDate txtIchijiHanteiYMD) {
-        this.getKojinShinchokuShosai().setTxtIchijiHanteiYMD(txtIchijiHanteiYMD);
     }
 
     @JsonIgnore

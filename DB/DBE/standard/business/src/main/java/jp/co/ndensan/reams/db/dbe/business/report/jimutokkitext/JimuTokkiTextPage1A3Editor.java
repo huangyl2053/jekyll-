@@ -85,10 +85,10 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         source.zenkaiNijihanteiDate = パターン16(item.get前回認定日());
         source.zenkaiJotaizo = item.get前回状態像();
         source.kanriNo = item.get管理番号();
-        source.sakuseiYMD = パターン16(item.get審査会資料作成年月日());
-        source.shinseiYMD = パターン16(item.get今回認定申請年月日());
-        source.chosaYMD = パターン16(item.get今回認定調査実施年月日());
-        source.shinsaYMD = パターン16(item.get今回認定審査年月日());
+        source.sakuseiYMD = パターン18(item.get審査会資料作成年月日());
+        source.shinseiYMD = パターン18(item.get今回認定申請年月日());
+        source.chosaYMD = パターン18(item.get今回認定調査実施年月日());
+        source.shinsaYMD = パターン18(item.get今回認定審査年月日());
         source.hokenshaName = item.get被保険者氏名();
         source.hihokenNo = item.get被保険者番号();
         source.hokenshaNo = item.get保険者番号();
@@ -98,7 +98,7 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         source.chosainNo = item.get認定調査員番号();
         source.chosainName = item.get認定調査員氏名();
         source.chosainShikaku = item.get調査員資格();
-        source.chosaJisshiDate1 = パターン17(item.get調査日());
+        source.chosaJisshiDate1 = パターン18(item.get調査日());
         source.chosaJisshiBasho = item.get調査実施場所();
         source.iryokikanNo = item.get医療機関番号();
         source.iryokikanName = item.get医療機関名称();
@@ -396,5 +396,14 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         return 年月日.wareki().eraType(EraType.ALPHABET)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH)
                 .fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString パターン18(FlexibleDate 年月日) {
+        if (年月日 == null || 年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 年月日.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString();
     }
 }

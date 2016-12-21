@@ -374,7 +374,7 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set主治医氏名(dbt4912Entity.getShujiiName());
         }
         if (dbt4911Entity != null) {
-            dataPass.set主治医医療機関コード(dbt4911Entity.getShujiiIryokikanCode());
+            dataPass.set主治医医療機関コード(dbt4911Entity.getShujiiIryokikanCode().getColumnValue());
             dataPass.set医療機関名称(dbt4911Entity.getIryoKikanMeisho());
             dataPass.set主治医郵便番号(dbt4911Entity.getYubinNo());
             dataPass.set主治医住所(dbt4911Entity.getJusho());
@@ -533,7 +533,7 @@ public class RirekiShuseiBusiness implements Serializable {
             dataPass.set主治医氏名(dbt4912Entity.getShujiiName());
         }
         if (dbt4911Entity != null) {
-            dataPass.set主治医医療機関コード(dbt4911Entity.getShujiiIryokikanCode());
+            dataPass.set主治医医療機関コード(dbt4911Entity.getShujiiIryokikanCode().getColumnValue());
             dataPass.set医療機関名称(dbt4911Entity.getIryoKikanMeisho());
             dataPass.set主治医郵便番号(dbt4911Entity.getYubinNo());
             dataPass.set主治医住所(dbt4911Entity.getJusho());
