@@ -98,22 +98,12 @@ public class Ikenshoget {
      */
     public ResponseData<IkenshogetDiv> onClick_BtnYitiranSyuturyoku(IkenshogetDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getDgNinteiTaskList().getDataSource().size())) {
+        if (0 == div.getDgNinteiTaskList().getDataSource().size()) {
             主治医意見書入手一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             主治医意見書入手一覧データの行選択チェック(validationMessages);
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
-
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
@@ -187,7 +177,7 @@ public class Ikenshoget {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (new RString("0").equals(div.getDgNinteiTaskList().getDataSource().size())) {
+            if (0 == div.getDgNinteiTaskList().getDataSource().size()) {
                 主治医意見書入手一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -217,6 +207,7 @@ public class Ikenshoget {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).initialize();
             return ResponseData.of(div).setState(DBE2070001StateName.登録);
         }
         return ResponseData.of(div).respond();
@@ -241,7 +232,7 @@ public class Ikenshoget {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (new RString("0").equals(div.getDgNinteiTaskList().getDataSource().size())) {
+            if (0 == div.getDgNinteiTaskList().getDataSource().size()) {
                 主治医意見書入手一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }

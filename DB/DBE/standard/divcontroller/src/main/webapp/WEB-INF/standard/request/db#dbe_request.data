@@ -233,6 +233,7 @@ dbe/db/dbe/IkenshoShujiiIchiran/onClick_Check
 dbe/db/dbe/IkenshoShujiiIchiran/onClick_btnReportPublish
 dbe/db/dbe/IkenshoShujiiIchiran/onLoad
 dbe/db/dbe/Ikenshoget/onChange_jyotaiKubun
+dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoBack
 dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoKanryo
 dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoTorikomi
 dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoToroku
