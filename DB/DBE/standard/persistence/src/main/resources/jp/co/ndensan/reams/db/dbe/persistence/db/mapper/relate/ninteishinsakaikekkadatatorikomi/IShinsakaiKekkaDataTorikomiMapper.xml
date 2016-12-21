@@ -8,11 +8,15 @@
 
     <select resultOrdered="true" id="getShinsakaiWariateIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiIinJohoEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity" fetchSize="500">
         SELECT
-        *
+        shinsaiin.*,
+        shinsakai."介護認定審査会開催年月日"
         FROM
-        "DBE518002_ShinsakaiIinJohoTemp"
+        "DBE518002_ShinsakaiIinJohoTemp" shinsaiin
+        LEFT JOIN
+        "DBE518002_ShinsakaiJohoTemp" shinsakai
+        ON shinsaiin."介護認定審査会開催番号" = shinsakai."介護認定審査会開催番号"
     </select>
 
     <select resultOrdered="true" id="getNijiHanteikekkaTourokuJoho"
@@ -22,6 +26,15 @@
         *
         FROM
         "DBE518002_ShinsakaiKekkaTemp"
+    </select>
+
+    <select resultOrdered="true" id="getShinsakaiJohoTemp"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        "DBE518002_ShinsakaiJohoTemp"
     </select>
 
     <select resultOrdered="true" id="getIchiGojiHanteiKekka"
@@ -78,5 +91,16 @@
         WHERE
         DbT5502."shinseishoKanriNo" = #{申請書管理番号}
         AND  DbT5502."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
+    </select>
+
+    <select resultOrdered="true" id="getShinsakaiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511
+        WHERE
+        DbT5511."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
     </select>
 </mapper>

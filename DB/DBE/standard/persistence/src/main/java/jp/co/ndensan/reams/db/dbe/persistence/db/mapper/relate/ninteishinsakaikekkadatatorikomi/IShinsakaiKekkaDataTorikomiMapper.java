@@ -8,13 +8,16 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaik
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNijiHanteikekkaTourokuyoDataItijiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNinteiShinsakaiWariateIinJohoItijiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 
 /**
  * 介護認定審査会審査結果データ取込み（モバイル）インタフェースです
@@ -28,14 +31,21 @@ public interface IShinsakaiKekkaDataTorikomiMapper {
      *
      * @return TmpNinteiShinsakaiWariateIinJohoItijiEntity 検索結果の{@link TmpNinteiShinsakaiWariateIinJohoItijiEntity}
      */
-    List<TmpNinteiShinsakaiWariateIinJohoItijiEntity> getShinsakaiWariateIinJoho();
+    List<TempShinsaIinRelateEntity> getShinsakaiWariateIinJoho();
 
     /**
      * 検索条件より、認定審査会割当委員情報を検索する。
      *
-     * @return TmpNinteiShinsakaiWariateIinJohoItijiEntity 検索結果の{@link TmpNinteiShinsakaiWariateIinJohoItijiEntity}
+     * @return TempShinsakaiKekkaEntity 検索結果の{@link TempShinsakaiKekkaEntity}
      */
-    List<TmpNijiHanteikekkaTourokuyoDataItijiEntity> getNijiHanteikekkaTourokuJoho();
+    List<TempShinsakaiKekkaEntity> getNijiHanteikekkaTourokuJoho();
+
+    /**
+     * 審査会情報一時テーブルを検索する。
+     *
+     * @return TempShinsakaiJohoEntity 検索結果の{@link TempShinsakaiJohoEntity}
+     */
+    List<TempShinsakaiJohoEntity> getShinsakaiJohoTemp();
 
     /**
      * 検索条件より、要介護認定1.5次判定結果情報を検索する。
@@ -77,4 +87,11 @@ public interface IShinsakaiKekkaDataTorikomiMapper {
      */
     DbT5502ShinsakaiWariateJohoEntity getShinsakaiWariateJoho(ShinsakaiKekkaDataTorikomiMybatisParameter param);
 
+    /**
+     * 検索条件より、審査会情報を検索する。
+     *
+     * @param param ShinsakaiKekkaDataTorikomiMybatisParameter
+     * @return DbT5511ShinsakaiKaisaiKekkaJohoEntity
+     */
+    DbT5511ShinsakaiKaisaiKekkaJohoEntity getShinsakaiJoho(ShinsakaiKekkaDataTorikomiMybatisParameter param);
 }
