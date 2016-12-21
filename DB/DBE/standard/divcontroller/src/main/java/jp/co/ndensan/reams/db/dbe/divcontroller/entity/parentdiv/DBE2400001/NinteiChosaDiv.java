@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -156,16 +156,6 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnNinteichosaKensaku() {
-        return this.getNinteichosaKensakuJoken().getBtnNinteichosaKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnNinteichosaKensaku(Button btnNinteichosaKensaku) {
-        this.getNinteichosaKensakuJoken().setBtnNinteichosaKensaku(btnNinteichosaKensaku);
-    }
-
-    @JsonIgnore
     public IHokenshaListDiv getCcdNinteiChosaHokensha() {
         return this.getNinteichosaKensakuJoken().getCcdNinteiChosaHokensha();
     }
@@ -201,23 +191,33 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkirai() {
-        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().getChkirai();
+    public CheckBoxList getChkChosaIrai() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().getChkChosaIrai();
     }
 
     @JsonIgnore
-    public void  setChkirai(CheckBoxList Chkirai) {
-        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().setChkirai(Chkirai);
+    public void  setChkChosaIrai(CheckBoxList chkChosaIrai) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().setChkChosaIrai(chkChosaIrai);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkchosaOcr() {
-        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().getChkchosaOcr();
+    public CheckBoxList getChkChosaOcr() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().getChkChosaOcr();
     }
 
     @JsonIgnore
-    public void  setChkchosaOcr(CheckBoxList ChkchosaOcr) {
-        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().setChkchosaOcr(ChkchosaOcr);
+    public void  setChkChosaOcr(CheckBoxList chkChosaOcr) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().setChkChosaOcr(chkChosaOcr);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkTokkiOcr() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().getChkTokkiOcr();
+    }
+
+    @JsonIgnore
+    public void  setChkTokkiOcr(CheckBoxList chkTokkiOcr) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsOne().setChkTokkiOcr(chkTokkiOcr);
     }
 
     @JsonIgnore
@@ -241,23 +241,43 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkchosa() {
-        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().getChkchosa();
+    public CheckBoxList getChkChosaDesign() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().getChkChosaDesign();
     }
 
     @JsonIgnore
-    public void  setChkchosa(CheckBoxList Chkchosa) {
-        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().setChkchosa(Chkchosa);
+    public void  setChkChosaDesign(CheckBoxList chkChosaDesign) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().setChkChosaDesign(chkChosaDesign);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkchosaSonota() {
-        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().getChkchosaSonota();
+    public CheckBoxList getChkTokkiDesign() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().getChkTokkiDesign();
     }
 
     @JsonIgnore
-    public void  setChkchosaSonota(CheckBoxList ChkchosaSonota) {
-        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().setChkchosaSonota(ChkchosaSonota);
+    public void  setChkTokkiDesign(CheckBoxList chkTokkiDesign) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().setChkTokkiDesign(chkTokkiDesign);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkSaiCheck() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().getChkSaiCheck();
+    }
+
+    @JsonIgnore
+    public void  setChkSaiCheck(CheckBoxList chkSaiCheck) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().setChkSaiCheck(chkSaiCheck);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkGaikyoTokki() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().getChkGaikyoTokki();
+    }
+
+    @JsonIgnore
+    public void  setChkGaikyoTokki(CheckBoxList chkGaikyoTokki) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoSelectItemsTwo().setChkGaikyoTokki(chkGaikyoTokki);
     }
 
     @JsonIgnore
@@ -271,13 +291,43 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkChosahyoTokkijiko() {
-        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getChkChosahyoTokkijiko();
+    public TokkiChecksDiv getTokkiChecks() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getTokkiChecks();
     }
 
     @JsonIgnore
-    public void  setChkChosahyoTokkijiko(CheckBoxList chkChosahyoTokkijiko) {
-        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().setChkChosahyoTokkijiko(chkChosahyoTokkijiko);
+    public void  setTokkiChecks(TokkiChecksDiv TokkiChecks) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().setTokkiChecks(TokkiChecks);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkTokkiKomokuAri() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getTokkiChecks().getChkTokkiKomokuAri();
+    }
+
+    @JsonIgnore
+    public void  setChkTokkiKomokuAri(CheckBoxList chkTokkiKomokuAri) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getTokkiChecks().setChkTokkiKomokuAri(chkTokkiKomokuAri);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkTokkiKomokuNashi() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getTokkiChecks().getChkTokkiKomokuNashi();
+    }
+
+    @JsonIgnore
+    public void  setChkTokkiKomokuNashi(CheckBoxList chkTokkiKomokuNashi) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getTokkiChecks().setChkTokkiKomokuNashi(chkTokkiKomokuNashi);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkTokkiFree() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getTokkiChecks().getChkTokkiFree();
+    }
+
+    @JsonIgnore
+    public void  setChkTokkiFree(CheckBoxList chkTokkiFree) {
+        this.getNinteiChosaInsatsuChohyoSentaku().getChosahyoTokkijikoSelect().getTokkiChecks().setChkTokkiFree(chkTokkiFree);
     }
 
     @JsonIgnore
