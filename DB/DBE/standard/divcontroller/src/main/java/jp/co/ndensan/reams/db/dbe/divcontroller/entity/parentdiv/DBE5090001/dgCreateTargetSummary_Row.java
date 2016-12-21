@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jul 18 14:38:25 CST 2016 
+ * Wed Dec 21 16:31:02 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgCreateTargetSummary_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
 
     private RString hokenshano;
     private RString hokensha;
@@ -32,6 +32,7 @@ public class dgCreateTargetSummary_Row extends DataRow {
     private TextBoxDate ninteiShinseibi;
     private RString shinseiKubunShin;
     private RString shinseiKubunHo;
+    private TextBoxDate nijiHanteiBi;
     private RString nijiHanteiKekka;
     private RString ninteiYukoKikan;
     private TextBoxDate yukoKikanstart;
@@ -51,6 +52,7 @@ public class dgCreateTargetSummary_Row extends DataRow {
         this.ninteiShinseibi = new TextBoxDate();
         this.shinseiKubunShin = RString.EMPTY;
         this.shinseiKubunHo = RString.EMPTY;
+        this.nijiHanteiBi = new TextBoxDate();
         this.nijiHanteiKekka = RString.EMPTY;
         this.ninteiYukoKikan = RString.EMPTY;
         this.yukoKikanstart = new TextBoxDate();
@@ -67,6 +69,7 @@ public class dgCreateTargetSummary_Row extends DataRow {
         this.setOriginalData("ninteiShinseibi", ninteiShinseibi);
         this.setOriginalData("shinseiKubunShin", shinseiKubunShin);
         this.setOriginalData("shinseiKubunHo", shinseiKubunHo);
+        this.setOriginalData("nijiHanteiBi", nijiHanteiBi);
         this.setOriginalData("nijiHanteiKekka", nijiHanteiKekka);
         this.setOriginalData("ninteiYukoKikan", ninteiYukoKikan);
         this.setOriginalData("yukoKikanstart", yukoKikanstart);
@@ -75,7 +78,7 @@ public class dgCreateTargetSummary_Row extends DataRow {
         this.setOriginalData("shinseishokanrino", shinseishokanrino);
     }
 
-    public dgCreateTargetSummary_Row(RString hokenshano, RString hokensha, RString hihokenshaBango, RString hihokenshaShimei, RString hihokenshaShimeiKana, RString sex, TextBoxDate birthDate, TextBoxDate ninteiShinseibi, RString shinseiKubunShin, RString shinseiKubunHo, RString nijiHanteiKekka, RString ninteiYukoKikan, TextBoxDate yukoKikanstart, TextBoxDate yukokikanend, TextBoxDate dataShutsuryoku, RString shinseishokanrino) {
+    public dgCreateTargetSummary_Row(RString hokenshano, RString hokensha, RString hihokenshaBango, RString hihokenshaShimei, RString hihokenshaShimeiKana, RString sex, TextBoxDate birthDate, TextBoxDate ninteiShinseibi, RString shinseiKubunShin, RString shinseiKubunHo, TextBoxDate nijiHanteiBi, RString nijiHanteiKekka, RString ninteiYukoKikan, TextBoxDate yukoKikanstart, TextBoxDate yukokikanend, TextBoxDate dataShutsuryoku, RString shinseishokanrino) {
         super();
         this.setOriginalData("hokenshano", hokenshano);
         this.setOriginalData("hokensha", hokensha);
@@ -87,6 +90,7 @@ public class dgCreateTargetSummary_Row extends DataRow {
         this.setOriginalData("ninteiShinseibi", ninteiShinseibi);
         this.setOriginalData("shinseiKubunShin", shinseiKubunShin);
         this.setOriginalData("shinseiKubunHo", shinseiKubunHo);
+        this.setOriginalData("nijiHanteiBi", nijiHanteiBi);
         this.setOriginalData("nijiHanteiKekka", nijiHanteiKekka);
         this.setOriginalData("ninteiYukoKikan", ninteiYukoKikan);
         this.setOriginalData("yukoKikanstart", yukoKikanstart);
@@ -103,6 +107,7 @@ public class dgCreateTargetSummary_Row extends DataRow {
         this.ninteiShinseibi = ninteiShinseibi;
         this.shinseiKubunShin = shinseiKubunShin;
         this.shinseiKubunHo = shinseiKubunHo;
+        this.nijiHanteiBi = nijiHanteiBi;
         this.nijiHanteiKekka = nijiHanteiKekka;
         this.ninteiYukoKikan = ninteiYukoKikan;
         this.yukoKikanstart = yukoKikanstart;
@@ -149,6 +154,10 @@ public class dgCreateTargetSummary_Row extends DataRow {
 
     public RString getShinseiKubunHo() {
         return shinseiKubunHo;
+    }
+
+    public TextBoxDate getNijiHanteiBi() {
+        return nijiHanteiBi;
     }
 
     public RString getNijiHanteiKekka() {
@@ -223,6 +232,11 @@ public class dgCreateTargetSummary_Row extends DataRow {
     public void setShinseiKubunHo(RString shinseiKubunHo) {
         this.setOriginalData("shinseiKubunHo", shinseiKubunHo);
         this.shinseiKubunHo = shinseiKubunHo;
+    }
+
+    public void setNijiHanteiBi(TextBoxDate nijiHanteiBi) {
+        this.setOriginalData("nijiHanteiBi", nijiHanteiBi);
+        this.nijiHanteiBi = nijiHanteiBi;
     }
 
     public void setNijiHanteiKekka(RString nijiHanteiKekka) {
