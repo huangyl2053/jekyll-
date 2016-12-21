@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.euc.renkeidatatorikomi;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
@@ -22,7 +23,7 @@ public class DbT5911KoroshoErrorTempEUCEntity {
     @CsvField(order = 3, name = "識別コード")
     private RString 識別コード;
     @CsvField(order = 4, name = "医療機関コード")
-    private RString 医療機関コード;
+    private ShujiiIryokikanCode 医療機関コード;
     @CsvField(order = 5, name = "医療機関名称")
     private RString 医療機関名称;
     @CsvField(order = 6, name = "郵便番号")

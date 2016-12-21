@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -27,7 +28,7 @@ public class DbT5911KoroshoTempEntity extends DbTableEntityBase<DbT5911KoroshoTe
     @TempTableColumnOrder(3)
     private RString 識別コード;
     @TempTableColumnOrder(4)
-    private RString 医療機関コード;
+    private ShujiiIryokikanCode 医療機関コード;
     @TempTableColumnOrder(5)
     private RString 医療機関名称;
     @TempTableColumnOrder(6)
