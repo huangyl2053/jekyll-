@@ -268,7 +268,7 @@
                         AND C1."logicalDeletedFlag" = False
                         AND C1."ninteichosaIraiYMD"<![CDATA[>=]]> #{抽出期間開始日}
                         AND C1."ninteichosaIraiYMD"<![CDATA[<=]]> #{抽出期間終了日}
-                        AND C."ninteichosaIraiRirekiNo" = C1."ninteichosaIraiRirekiNo"
+                        AND C."ninteichosaIraiRirekiNo" <![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
                 )
                 LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
                     ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 

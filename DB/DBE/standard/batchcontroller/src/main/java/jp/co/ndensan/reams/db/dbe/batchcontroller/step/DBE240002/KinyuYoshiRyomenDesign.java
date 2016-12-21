@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
@@ -24,14 +25,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 主治医意見書記入用紙_片面の出力処理クラスです。
+ *
+ * @author n3417
  */
-public class KinyuYoshiKatamen extends BatchProcessBase<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> {
+public class KinyuYoshiRyomenDesign extends BatchProcessBase<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
-    private static final ReportIdDBZ 帳票 = ReportIdDBZ.DBE231001_Katamen_Mono;
+    private static final ReportIdDBZ 帳票 = ReportIdDBZ.DBE231011_Katamen_Color;
     private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
     private IraishoIkkatsuHakkoBusiness business;
     @BatchWriter
