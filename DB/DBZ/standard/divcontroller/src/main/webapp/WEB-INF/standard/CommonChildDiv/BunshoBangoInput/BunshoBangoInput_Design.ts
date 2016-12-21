@@ -45,8 +45,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtBunshoHeader"));
             }
 
-            public txtBunshoNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtBunshoNo"));
+            public txtBunshoNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtBunshoNo"));
             }
 
             public txtBunshoFooter(): UZA.TextBox {
