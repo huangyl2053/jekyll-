@@ -89,9 +89,18 @@ public class YokaigoNinteiShinchokuJohoShokai {
         if (searchResult.records().isEmpty()) {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
-        div.getSerchFromHohokensha().setIsOpen(false);
-        div.getSerchFromShinchokuJokyo().setIsOpen(false);
         div.getShinseiJohoIchiran().setIsOpen(true);
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「再検索する」ボタン押下します。
+     *
+     * @param div 画面情報
+     * @return {@code ResponseData}
+     */
+    public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnReSearch(YokaigoNinteiShinchokuJohoShokaiDiv div) {
+        getHandler(div).set検索条件切替(false);
         return ResponseData.of(div).respond();
     }
 

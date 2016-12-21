@@ -344,6 +344,17 @@ public class IchijihanteikekkahyoReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokennshaNo;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation shinseishoKanriNo;
     @ReportItem(name = "sabisuName", length = 15, order = 300)
     public RString sabisuName;
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        shinseiCount,
+
+    }
 }

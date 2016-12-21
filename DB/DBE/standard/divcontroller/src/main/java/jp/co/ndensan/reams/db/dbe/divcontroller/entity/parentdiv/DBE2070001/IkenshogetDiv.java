@@ -26,8 +26,6 @@ public class IkenshogetDiv extends Panel {
      */
     @JsonProperty("Ikenshogetichiran")
     private IkenshogetichiranDiv Ikenshogetichiran;
-    @JsonProperty("Ikenshogetselect")
-    private IkenshogetselectDiv Ikenshogetselect;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
 
@@ -53,24 +51,6 @@ public class IkenshogetDiv extends Panel {
     @JsonProperty("Ikenshogetichiran")
     public void setIkenshogetichiran(IkenshogetichiranDiv Ikenshogetichiran) {
         this.Ikenshogetichiran = Ikenshogetichiran;
-    }
-
-    /*
-     * getIkenshogetselect
-     * @return Ikenshogetselect
-     */
-    @JsonProperty("Ikenshogetselect")
-    public IkenshogetselectDiv getIkenshogetselect() {
-        return Ikenshogetselect;
-    }
-
-    /*
-     * setIkenshogetselect
-     * @param Ikenshogetselect Ikenshogetselect
-     */
-    @JsonProperty("Ikenshogetselect")
-    public void setIkenshogetselect(IkenshogetselectDiv Ikenshogetselect) {
-        this.Ikenshogetselect = Ikenshogetselect;
     }
 
     /*
@@ -105,32 +85,32 @@ public class IkenshogetDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMisyori() {
+    public TextBoxNum getTxtMisyori() {
         return this.getIkenshogetichiran().getTxtMisyori();
     }
 
     @JsonIgnore
-    public void  setTxtMisyori(TextBox txtMisyori) {
+    public void  setTxtMisyori(TextBoxNum txtMisyori) {
         this.getIkenshogetichiran().setTxtMisyori(txtMisyori);
     }
 
     @JsonIgnore
-    public TextBox getTxtKanryouKano() {
+    public TextBoxNum getTxtKanryouKano() {
         return this.getIkenshogetichiran().getTxtKanryouKano();
     }
 
     @JsonIgnore
-    public void  setTxtKanryouKano(TextBox txtKanryouKano) {
+    public void  setTxtKanryouKano(TextBoxNum txtKanryouKano) {
         this.getIkenshogetichiran().setTxtKanryouKano(txtKanryouKano);
     }
 
     @JsonIgnore
-    public TextBox getTxtGokei() {
+    public TextBoxNum getTxtGokei() {
         return this.getIkenshogetichiran().getTxtGokei();
     }
 
     @JsonIgnore
-    public void  setTxtGokei(TextBox txtGokei) {
+    public void  setTxtGokei(TextBoxNum txtGokei) {
         this.getIkenshogetichiran().setTxtGokei(txtGokei);
     }
 
@@ -146,12 +126,22 @@ public class IkenshogetDiv extends Panel {
 
     @JsonIgnore
     public ButtonDownLoad getBtnikenshogetoutput() {
-        return this.getIkenshogetselect().getBtnikenshogetoutput();
+        return this.getIkenshogetichiran().getBtnikenshogetoutput();
     }
 
     @JsonIgnore
     public void  setBtnikenshogetoutput(ButtonDownLoad btnikenshogetoutput) {
-        this.getIkenshogetselect().setBtnikenshogetoutput(btnikenshogetoutput);
+        this.getIkenshogetichiran().setBtnikenshogetoutput(btnikenshogetoutput);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxNumber() {
+        return this.getIkenshogetichiran().getTxtMaxNumber();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxNumber(TextBoxNum txtMaxNumber) {
+        this.getIkenshogetichiran().setTxtMaxNumber(txtMaxNumber);
     }
 
     @JsonIgnore

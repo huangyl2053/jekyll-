@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査委託先情報テーブルの項目定義クラスです。
  */
 public enum DbT5910NinteichosaItakusakiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -116,7 +116,31 @@ public enum DbT5910NinteichosaItakusakiJoho implements IColumnDefinition {
      * 状況フラグ
      * <br/>True：有効　False：無効
      */
-    jokyoFlag(1, 0);
+    jokyoFlag(1, 0),
+    /**
+     * 金融機関コード
+     */
+    kinyuKikanCode(2147483647, 0),
+    /**
+     * 支店コード
+     */
+    kinyuKikanShitenCode(2147483647, 0),
+    /**
+     * 預金種別
+     */
+    yokinShubetsu(1, 0),
+    /**
+     * 口座番号
+     */
+    kozaNo(7, 0),
+    /**
+     * 口座名義人カナ
+     */
+    kozaMeigininKana(2147483647, 0),
+    /**
+     * 口座名義人
+     */
+    kozaMeiginin(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

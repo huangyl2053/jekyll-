@@ -8,15 +8,15 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakaitoroku;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaitoroku.ShinsakaiTorokuBusiness;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku.ShinsakaiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitoroku.IShinsakaiTorokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
-import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiToRoKuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -54,12 +54,12 @@ public class ShinsakaiTorokuFinder {
      * @return SearchResult<ShinSaKaiToRoKuBusiness>
      */
     @Transaction
-    public SearchResult<ShinSaKaiToRoKuBusiness> get審査会登録モード(YokaigoNinteiTaskListParameter parameter) {
-        List<ShinSaKaiToRoKuBusiness> 審査会登録List = new ArrayList<>();
+    public SearchResult<ShinsakaiTorokuBusiness> get審査会登録モード(YokaigoNinteiTaskListParameter parameter) {
+        List<ShinsakaiTorokuBusiness> 審査会登録List = new ArrayList<>();
         IShinsakaiTorokuMapper mapper = mapperProvider.create(IShinsakaiTorokuMapper.class);
-        List<ShinSaKaiToRoKuRelateEntity> entityList = mapper.get審査会登録(parameter);
-        for (ShinSaKaiToRoKuRelateEntity entity : entityList) {
-            審査会登録List.add(new ShinSaKaiToRoKuBusiness(entity));
+        List<ShinsakaiTorokuRelateEntity> entityList = mapper.get審査会登録(parameter);
+        for (ShinsakaiTorokuRelateEntity entity : entityList) {
+            審査会登録List.add(new ShinsakaiTorokuBusiness(entity));
         }
         return SearchResult.of(審査会登録List, 0, false);
     }

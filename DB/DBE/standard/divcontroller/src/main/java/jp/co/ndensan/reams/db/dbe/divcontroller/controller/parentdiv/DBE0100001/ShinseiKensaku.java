@@ -34,8 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -110,6 +109,10 @@ public class ShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_btnKensaku(ShinseiKensakuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+        }else{
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -121,7 +124,7 @@ public class ShinseiKensaku {
             getHandler(div).setShinseiJohoIchiran(searchResult);
         } else {
             div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);

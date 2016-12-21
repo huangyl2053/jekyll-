@@ -26,10 +26,6 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
      */
     @JsonProperty("ninteichosakekkainput")
     private ninteichosakekkainputDiv ninteichosakekkainput;
-    @JsonProperty("btnchosakekkaoutput")
-    private ButtonDownLoad btnchosakekkaoutput;
-    @JsonProperty("btncyosakekkainput")
-    private Button btncyosakekkainput;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
 
@@ -55,42 +51,6 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
     @JsonProperty("ninteichosakekkainput")
     public void setNinteichosakekkainput(ninteichosakekkainputDiv ninteichosakekkainput) {
         this.ninteichosakekkainput = ninteichosakekkainput;
-    }
-
-    /*
-     * getbtnchosakekkaoutput
-     * @return btnchosakekkaoutput
-     */
-    @JsonProperty("btnchosakekkaoutput")
-    public ButtonDownLoad getBtnchosakekkaoutput() {
-        return btnchosakekkaoutput;
-    }
-
-    /*
-     * setbtnchosakekkaoutput
-     * @param btnchosakekkaoutput btnchosakekkaoutput
-     */
-    @JsonProperty("btnchosakekkaoutput")
-    public void setBtnchosakekkaoutput(ButtonDownLoad btnchosakekkaoutput) {
-        this.btnchosakekkaoutput = btnchosakekkaoutput;
-    }
-
-    /*
-     * getbtncyosakekkainput
-     * @return btncyosakekkainput
-     */
-    @JsonProperty("btncyosakekkainput")
-    public Button getBtncyosakekkainput() {
-        return btncyosakekkainput;
-    }
-
-    /*
-     * setbtncyosakekkainput
-     * @param btncyosakekkainput btncyosakekkainput
-     */
-    @JsonProperty("btncyosakekkainput")
-    public void setBtncyosakekkainput(Button btncyosakekkainput) {
-        this.btncyosakekkainput = btncyosakekkainput;
     }
 
     /*
@@ -125,13 +85,13 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMishori() {
-        return this.getNinteichosakekkainput().getTxtMishori();
+    public TextBoxNum getTxtGokei() {
+        return this.getNinteichosakekkainput().getTxtGokei();
     }
 
     @JsonIgnore
-    public void  setTxtMishori(TextBoxNum txtMishori) {
-        this.getNinteichosakekkainput().setTxtMishori(txtMishori);
+    public void  setTxtGokei(TextBoxNum txtGokei) {
+        this.getNinteichosakekkainput().setTxtGokei(txtGokei);
     }
 
     @JsonIgnore
@@ -145,13 +105,13 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtGokei() {
-        return this.getNinteichosakekkainput().getTxtGokei();
+    public TextBoxNum getTxtMishori() {
+        return this.getNinteichosakekkainput().getTxtMishori();
     }
 
     @JsonIgnore
-    public void  setTxtGokei(TextBoxNum txtGokei) {
-        this.getNinteichosakekkainput().setTxtGokei(txtGokei);
+    public void  setTxtMishori(TextBoxNum txtMishori) {
+        this.getNinteichosakekkainput().setTxtMishori(txtMishori);
     }
 
     @JsonIgnore
@@ -162,6 +122,26 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
     @JsonIgnore
     public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getNinteichosakekkainput().setDgNinteiTaskList(dgNinteiTaskList);
+    }
+
+    @JsonIgnore
+    public ButtonDownLoad getBtnchosakekkaoutput() {
+        return this.getNinteichosakekkainput().getBtnchosakekkaoutput();
+    }
+
+    @JsonIgnore
+    public void  setBtnchosakekkaoutput(ButtonDownLoad btnchosakekkaoutput) {
+        this.getNinteichosakekkainput().setBtnchosakekkaoutput(btnchosakekkaoutput);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxKensu() {
+        return this.getNinteichosakekkainput().getTxtMaxKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.getNinteichosakekkainput().setTxtMaxKensu(txtMaxKensu);
     }
 
     @JsonIgnore

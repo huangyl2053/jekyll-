@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.IkenshogetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.IkenSyoNyuSyuBusiness;
@@ -19,6 +21,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,8 +41,8 @@ public class IkenshogetHandler {
     private final IkenshogetDiv div;
     private static final RString 未処理 = new RString("未");
     private static final RString 完了可能 = new RString("可");
-    private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
+    private static final RString KEY2 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -54,14 +58,13 @@ public class IkenshogetHandler {
      *
      */
     public void initialize() {
-        RString key = div.getRadJyotaiKubun().getSelectedKey();
-        RString 状態区分 = new RString("");
+        RDate システム日付 = RDate.getNowDate();
+        RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
+        div.getRadJyotaiKubun().setSelectedKey(状態区分);
+        意見書入手List(状態区分);
+    }
 
-        if (KEY0.equals(key)) {
-            状態区分 = new RString("1");
-        } else if (KEY1.equals(key)) {
-            状態区分 = new RString("2");
-        }
+    public void 意見書入手List(RString 状態区分) {
         List<IkenSyoNyuSyuBusiness> 意見書入手List = YokaigoNinteiTaskListFinder.createInstance().
                 get意見書入手モード(YokaigoNinteiTaskListParameter.
                         createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分)).records();
@@ -74,9 +77,19 @@ public class IkenshogetHandler {
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
-
         意見書入手モード(意見書入手List);
+        init最大表示件数();
+    }
 
+    /**
+     * 最大表示件数を初期化します。業務コンフィグからデフォルト値を取得して設定します。
+     */
+    public void init最大表示件数() {
+        RString データ出力件数閾値 = DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値"));
+        if (Decimal.canConvert(データ出力件数閾値)) {
+            div.getTxtMaxNumber().setValue(new Decimal(データ出力件数閾値.toString()));
+        }
     }
 
     private void 意見書入手モード(List<IkenSyoNyuSyuBusiness> 意見書入手List) {
@@ -113,9 +126,9 @@ public class IkenshogetHandler {
             意見書入手モードの日付設定(row, business);
             rowList.add(row);
         }
-        div.getTxtMisyori().setValue(new RString(String.valueOf(notCount)));
-        div.getTxtKanryouKano().setValue(new RString(String.valueOf(completeCount)));
-        div.getTxtGokei().setValue(new RString(String.valueOf(意見書入手List.size())));
+        div.getTxtMisyori().setValue(new Decimal(notCount));
+        div.getTxtKanryouKano().setValue(new Decimal(completeCount));
+        div.getTxtGokei().setValue(new Decimal(意見書入手List.size()));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
 
@@ -150,5 +163,20 @@ public class IkenshogetHandler {
         ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set主治医意見書登録完了年月日(
                 new FlexibleDate(RDate.getNowDate().toDateString())).build();
         IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
+    }
+
+    /**
+     * 状態ラジオボタンの表示処理です。
+     */
+    public void setJyotaiKubun() {
+        RString key = div.getRadJyotaiKubun().getSelectedKey();
+        RString 状態区分 = new RString("");
+
+        if (KEY1.equals(key)) {
+            状態区分 = new RString("1");
+        } else if (KEY2.equals(key)) {
+            状態区分 = new RString("2");
+        }
+        意見書入手List(状態区分);
     }
 }

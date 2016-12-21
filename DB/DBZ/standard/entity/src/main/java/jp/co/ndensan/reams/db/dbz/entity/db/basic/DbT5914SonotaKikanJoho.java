@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * その他機関情報テーブルの項目定義クラスです。
  */
 public enum DbT5914SonotaKikanJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -94,7 +94,31 @@ public enum DbT5914SonotaKikanJoho implements IColumnDefinition {
      * 廃止フラグ
      * <br/>Enum（DBE：廃止フラグ）旧「状況フラグ」
      */
-    haishiFlag(1, 0);
+    haishiFlag(1, 0),
+    /**
+     * 金融機関コード
+     */
+    kinyuKikanCode(2147483647, 0),
+    /**
+     * 支店コード
+     */
+    kinyuKikanShitenCode(2147483647, 0),
+    /**
+     * 預金種別
+     */
+    yokinShubetsu(1, 0),
+    /**
+     * 口座番号
+     */
+    kozaNo(7, 0),
+    /**
+     * 口座名義人カナ
+     */
+    kozaMeigininKana(2147483647, 0),
+    /**
+     * 口座名義人
+     */
+    kozaMeiginin(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

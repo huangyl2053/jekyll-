@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913Kor
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913TempEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -99,8 +100,8 @@ public class NinteiShinseirenkeiDataInsert {
         if (RString.isNullOrEmpty(entity.get医療機関コード())) {
             error.append(new RString("医療機関コードが未入力です;"));
         }
-        if (dac.selectBy主治医医療機関コード(entity.get医療機関コード()) == null
-                || dac.selectBy主治医医療機関コード(entity.get医療機関コード()).isEmpty()) {
+        if (dac.selectBy主治医医療機関コード(new ShujiiIryokikanCode(entity.get医療機関コード())) == null
+                || dac.selectBy主治医医療機関コード(new ShujiiIryokikanCode(entity.get医療機関コード())).isEmpty()) {
             error.append(new RString("医療機関コードが不正です;"));
         }
         if (RString.isNullOrEmpty(entity.get主治医コード())) {

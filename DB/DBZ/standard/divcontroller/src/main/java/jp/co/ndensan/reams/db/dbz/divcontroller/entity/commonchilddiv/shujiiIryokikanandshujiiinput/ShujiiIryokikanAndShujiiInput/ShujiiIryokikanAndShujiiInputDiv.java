@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  * @reamsid_L DBZ-1300-140 chengsanyuan
  */
 public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIryokikanAndShujiiInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -77,12 +77,11 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
- /*
+    /*
      * gettxtIryoKikanCode
      * @return txtIryoKikanCode
      */
     @JsonProperty("txtIryoKikanCode")
-    @Override
     public TextBoxCode getTxtIryoKikanCode() {
         return txtIryoKikanCode;
     }
@@ -119,7 +118,6 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @return txtIryoKikanName
      */
     @JsonProperty("txtIryoKikanName")
-    @Override
     public TextBox getTxtIryoKikanName() {
         return txtIryoKikanName;
     }
@@ -174,7 +172,6 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @return txtShujiiCode
      */
     @JsonProperty("txtShujiiCode")
-    @Override
     public TextBoxCode getTxtShujiiCode() {
         return txtShujiiCode;
     }
@@ -211,7 +208,6 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @return txtShujiiName
      */
     @JsonProperty("txtShujiiName")
-    @Override
     public TextBox getTxtShujiiName() {
         return txtShujiiName;
     }

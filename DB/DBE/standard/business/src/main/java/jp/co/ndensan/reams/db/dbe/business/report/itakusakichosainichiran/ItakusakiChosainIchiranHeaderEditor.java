@@ -76,17 +76,29 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         printTimeStampSb.append(DATE_作成);
         source.printTimeStamp = printTimeStampSb.toRString();
         source.title = 帳票名;
-        RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
-        iryoKikanCodeBulider.append(item.getIryoKikanCodeFrom());
-        iryoKikanCodeBulider.append(KANA);
-        iryoKikanCodeBulider.append(item.getIryoKikanCodeTo());
-        source.iryoKikanCode = iryoKikanCodeBulider.toRString();
 
-        RStringBuilder shujiiCodeBulider = new RStringBuilder();
-        shujiiCodeBulider.append(item.getShujiiCodeFrom());
-        shujiiCodeBulider.append(KANA);
-        shujiiCodeBulider.append(item.getShujiiCodeTo());
-        source.shujiiCode = shujiiCodeBulider.toRString();
+        RString 委託先コードFrom = item.getShujiiCodeFrom();
+        RString 委託先コードTo = item.getShujiiCodeTo();
+        source.iryoKikanCode = RString.EMPTY;
+        if (!RString.isNullOrEmpty(委託先コードFrom) || !RString.isNullOrEmpty(委託先コードTo)) {
+            RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
+            iryoKikanCodeBulider.append(item.getIryoKikanCodeFrom());
+            iryoKikanCodeBulider.append(KANA);
+            iryoKikanCodeBulider.append(item.getIryoKikanCodeTo());
+            source.iryoKikanCode = iryoKikanCodeBulider.toRString();
+        }
+
+        RString 調査員コードFrom = item.getShujiiCodeFrom();
+        RString 調査員コードTo = item.getShujiiCodeTo();
+        source.shujiiCode = RString.EMPTY;
+
+        if (!RString.isNullOrEmpty(調査員コードFrom) || !RString.isNullOrEmpty(調査員コードTo)) {
+            RStringBuilder shujiiCodeBulider = new RStringBuilder();
+            shujiiCodeBulider.append(item.getShujiiCodeFrom());
+            shujiiCodeBulider.append(KANA);
+            shujiiCodeBulider.append(item.getShujiiCodeTo());
+            source.shujiiCode = shujiiCodeBulider.toRString();
+        }
 
         if (JyoukyouType.有効のみ.code().equals(item.getShujiiJokyo())) {
             source.shujiiJokyo = JyoukyouType.有効のみ.toRString();
@@ -115,7 +127,11 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.listIchiranhyoUpper_1 = item.getShujiiIryokikanCode();
         source.listIchiranhyoUpper_2 = item.getIryoKikanMeishoKana();
         source.listIchiranhyoUpper_3 = item.getDaihyoshaNameKana();
-        source.listIchiranhyoUpper_4 = item.getYubinNo();
+        RString 郵便番号 = item.getYubinNo();
+        source.listIchiranhyoUpper_4 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(郵便番号)) {
+            source.listIchiranhyoUpper_4 = 郵便番号.substring(0, 3).concat("-").concat(郵便番号.substring(3, 7));
+        }
         source.listIchiranhyoUpper_5 = item.getTelNo();
         if (item.isJokyoFlag()) {
             source.listIchiranhyoUpper_6 = 有効_VALUE;

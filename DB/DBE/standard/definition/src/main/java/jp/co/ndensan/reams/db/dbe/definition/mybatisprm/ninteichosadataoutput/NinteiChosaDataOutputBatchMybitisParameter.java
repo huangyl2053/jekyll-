@@ -36,6 +36,7 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
     private final boolean isNinteichosaItakusakiCode;
     private final boolean isNinteiChosainCode;
     private final boolean isShichoson;
+    private final RString csvTempTableName;
 
     /**
      * コンストラクタです。
@@ -47,6 +48,7 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
      * @param is認定調査委託先コード is認定調査委託先コード
      * @param is認定調査委託先コード is認定調査委託先コード
      * @param is認定調査員コード is認定調査員コード
+     * @param csvTempTableName CSV一時テーブル名
      */
     private NinteiChosaDataOutputBatchMybitisParameter(RString 認定調査委託先コード,
             RString 認定調査員コード,
@@ -55,7 +57,8 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
             boolean isShinseishoKanriNo,
             boolean is認定調査委託先コード,
             boolean is認定調査員コード,
-            boolean is全市町村) {
+            boolean is全市町村,
+            RString csvTempTableName) {
         this.ninteichosaItakusakiCode = 認定調査委託先コード;
         this.ninteiChosainCode = 認定調査員コード;
         this.shinseishoKanriNoList = 申請書管理番号リスト;
@@ -64,6 +67,7 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
         this.isNinteichosaItakusakiCode = is認定調査委託先コード;
         this.isNinteiChosainCode = is認定調査員コード;
         this.isShichoson = is全市町村;
+        this.csvTempTableName = csvTempTableName;
     }
 
     /**
@@ -73,13 +77,15 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
      * @param 認定調査員コード 認定調査員コード
      * @param 申請書管理番号リスト 申請書管理番号リスト
      * @param 市町村コード 市町村コード
+     * @param csvTempTableName CSV一時テーブル名
      * @return ShujiiIkenshoSakuseiMybitisParamter
      */
     public static NinteiChosaDataOutputBatchMybitisParameter createSelectByKeyParam(
             RString 認定調査委託先コード,
             RString 認定調査員コード,
             List<RString> 申請書管理番号リスト,
-            RString 市町村コード) {
+            RString 市町村コード,
+            RString csvTempTableName) {
         boolean is認定調査委託先コード = false;
         boolean is認定調査員コード = false;
         boolean is全市町村 = false;
@@ -103,6 +109,7 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
                 is申請書管理番号フラグ,
                 is認定調査委託先コード,
                 is認定調査員コード,
-                is全市町村);
+                is全市町村,
+                csvTempTableName);
     }
 }

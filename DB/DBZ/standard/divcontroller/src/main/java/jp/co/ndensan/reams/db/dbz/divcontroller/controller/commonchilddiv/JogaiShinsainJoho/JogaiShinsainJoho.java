@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinItiran;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinItiranData;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinRelateJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.JogaiShinsainJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShozokuKikanIchiran_Row;
@@ -186,7 +187,7 @@ public class JogaiShinsainJoho {
             RString 主治医医療機関コード = joho.get主治医医療機関コード();
             if (!RString.isNullOrEmpty(主治医医療機関コード)) {
                 rowList.add(new dgShozokuKikanIchiran_Row(市町村名称, 主治医医療機関コード,
-                        getService().get医療機関名称(市町村コード, 主治医医療機関コード)));
+                        getService().get医療機関名称(市町村コード, new ShujiiIryokikanCode(主治医医療機関コード))));
             }
             RString 認定調査委託先コード = joho.get認定調査委託先コード();
             if (!RString.isNullOrEmpty(認定調査委託先コード)) {
@@ -236,7 +237,7 @@ public class JogaiShinsainJoho {
         List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
         for (ShinsakaiIinRelateJoho joho : johoList) {
             RStringBuilder 所属機関 = new RStringBuilder();
-            所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), joho.get主治医医療機関コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), new ShujiiIryokikanCode(joho.get主治医医療機関コード())));
             所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
             所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
             rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));
@@ -250,7 +251,7 @@ public class JogaiShinsainJoho {
         List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
         for (ShinsakaiIinRelateJoho joho : johoList) {
             RStringBuilder 所属機関 = new RStringBuilder();
-            所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), joho.get主治医医療機関コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), new ShujiiIryokikanCode(joho.get主治医医療機関コード())));
             所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
             所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
             rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));

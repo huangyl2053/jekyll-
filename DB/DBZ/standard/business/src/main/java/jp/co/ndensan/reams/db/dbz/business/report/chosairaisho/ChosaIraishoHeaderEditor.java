@@ -43,7 +43,7 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
     private ChosaIraishoReportSource editHeader(ChosaIraishoReportSource source) {
         source.bunshoNo = item.getBunshoNo();
-        if (item.getHakkoYMD1().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(item.getHakkoYMD1())) {
             source.hakkoYMD1 = RString.EMPTY;
         } else {
             source.hakkoYMD1 = パターン12(new RDate(item.getHakkoYMD1().toString()));

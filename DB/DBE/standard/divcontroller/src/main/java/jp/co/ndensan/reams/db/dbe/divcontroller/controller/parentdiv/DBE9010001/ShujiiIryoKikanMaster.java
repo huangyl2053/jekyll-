@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -440,7 +441,7 @@ public class ShujiiIryoKikanMaster {
             int shujiioCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
                     KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
                             new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                            div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
+                            new ShujiiIryokikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue())));
             getValidationHandler(div).validateForKakutei(イベント状態, shujiioCount);
         }
         Models<ShujiiIryoKikanJohoIdentifier, ShujiiIryoKikanJoho> models
@@ -449,13 +450,13 @@ public class ShujiiIryoKikanMaster {
         if (状態_追加.equals(イベント状態)) {
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = new ShujiiIryoKikanJoho(
                     new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                    div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
+                    new ShujiiIryokikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
             shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(shujiiIryoKikanJoho);
             models.add(shujiiIryoKikanJoho);
         } else if (状態_修正.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
                     new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                    div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
+                    new ShujiiIryokikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).
                     modifiedModel());
             models.deleteOrRemove(key);
@@ -463,7 +464,7 @@ public class ShujiiIryoKikanMaster {
         } else if (状態_削除.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
                     new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                    div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
+                    new ShujiiIryokikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
 
             RString jotai = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow().getJotai();
             if (状態_追加.equals(jotai)) {
@@ -578,7 +579,7 @@ public class ShujiiIryoKikanMaster {
                 KoseiShujiiIryoKikanMasterSearchParameter parameter = KoseiShujiiIryoKikanMasterSearchParameter.
                         createParam_SelectShujiiIryoKikanJoho(
                                 new LasdecCode(row.getShichosonCode()),
-                                row.getShujiiIryoKikanCode().getValue());
+                                new ShujiiIryokikanCode(row.getShujiiIryoKikanCode().getValue()));
                 getValidationHandler(div).validateForDelete(
                         koseiShujiiIryoKikanMaster.getShujiiJohoCount(parameter));
             }
@@ -600,7 +601,7 @@ public class ShujiiIryoKikanMaster {
             int shujiioCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
                     KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
                             new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                            div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
+                            new ShujiiIryokikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue())));
             getValidationHandler(div).validateForKakutei(イベント状態, shujiioCount);
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
@@ -615,7 +616,7 @@ public class ShujiiIryoKikanMaster {
                         get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
                 ShujiiIryoKikanJoho shujiiIryoKikanJoho = new ShujiiIryoKikanJoho(
                         new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
-                        div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
+                        new ShujiiIryokikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
                 shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(shujiiIryoKikanJoho);
                 ShujiiIryoKikanJohoManager shujiiIryoKikanJohoManager = ShujiiIryoKikanJohoManager.createInstance();
                 shujiiIryoKikanJohoManager.saveOrDelete主治医医療機関情報(shujiiIryoKikanJoho);
