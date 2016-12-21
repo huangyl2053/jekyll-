@@ -127,24 +127,26 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
 
     @Override
     protected void process() {
-        RString reportId = RString.EMPTY;
-        RDate 日期 = RDate.getNowDate();
-        if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
-            if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-                reportId = ReportIdDBE.DBE517905.getReportId().value();
-            } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-                reportId = ReportIdDBE.DBE517906.getReportId().value();
-            }
-        } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
-            if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-                reportId = ReportIdDBE.DBE517907.getReportId().value();
-            } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-                reportId = ReportIdDBE.DBE517908.getReportId().value();
-            }
-        }
+        RString reportId = ReportIdDBE.DBE517903.getReportId().value();
+        /*RDate 日期 = RDate.getNowDate();
+         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
+         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517905.getReportId().value();
+         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517906.getReportId().value();
+         }
+         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
+         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517907.getReportId().value();
+         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
+         reportId = ReportIdDBE.DBE517908.getReportId().value();
+         }
+         }*/
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+
+
                     IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA4ReportSource> occuredBreak(
@@ -232,7 +234,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
             if (shinseishoKanriNo.equals(kyotsuEntity.getShinseishoKanriNo())) {
                 kyotsuEntity.setJimukyoku(false);
                 List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-                return new TokkiText1A4Business(kyotsuEntity, 特記情報List);
+                return new TokkiText1A4Business(kyotsuEntity, 特記情報List, batchReportWriter.getImageFolderPath());
             }
         }
         return null;
@@ -305,7 +307,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517905.getReportId().value(), new RString("委員用審査会資料組み合わせ一覧"));
+        outputJokenhyoFactory(ReportIdDBE.DBE517903.getReportId().value(), new RString("委員用審査会資料組み合わせ一覧"));
     }
 
     private RString get帳票名() {
