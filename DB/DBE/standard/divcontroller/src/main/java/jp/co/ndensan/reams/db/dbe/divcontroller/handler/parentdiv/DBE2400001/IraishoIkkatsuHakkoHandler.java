@@ -36,12 +36,6 @@ public class IraishoIkkatsuHakkoHandler {
     private static final RString COMMON_SELECTED = new RString("key0");
     private static final RString CHOHYO_CHECKED = new RString("key1");
     private static final RString SHUTSU_CHECKED = new RString("key2");
-    private static final RString 基本調査 = new RString("key0");
-    private static final RString 特記事項 = new RString("key1");
-    private static final RString 概況調査 = new RString("key2");
-    private static final RString 概況特記 = new RString("key3");
-    private static final RString 記入用紙 = new RString("key0");
-    private static final RString 記入用紙OCR = new RString("key1");
     private static final RString SHINSEI_KASAN = new RString("2");
     private static final RString OCR = new RString("1");
     private final IraishoIkkatsuHakkoDiv div;
@@ -74,6 +68,7 @@ public class IraishoIkkatsuHakkoHandler {
         div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
         initializeNinteiChkShinseiTani();
+        initializeShujiiChkShinseiTani();
         setNinteiChkShinseiTani(true);
         div.getChkNinteiChosaIraiChohyo().setSelectedItemsByKey(Collections.<RString>emptyList());
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
@@ -213,22 +208,39 @@ public class IraishoIkkatsuHakkoHandler {
         }
     }
 
+    private void initializeShujiiChkShinseiTani() {
+        RDate 基準日 = RDate.getNowDate();
+        boolean is作成依頼書不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_意見書作成依頼書_出力有無, 基準日);
+        boolean is記入用紙不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_記入用紙_出力有無, 基準日);
+        boolean is記入用紙OCR不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_記入用紙OCR_出力有無, 基準日);
+        boolean is記入用紙デザイン不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_デザイン用紙_出力有無, 基準日);
+        boolean is作成料請求書不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_作成料請求書_出力有無, 基準日);
+        boolean is提出意見書不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_提出意見書_出力有無, 基準日);
+        div.getChkShujiiIkenshoSakuseiIraisho().setDisplayNone(is作成依頼書不使用);
+        div.getChkShujiIkenshoyoshi().setDisplayNone(is記入用紙不使用);
+        div.getChkShujiiIkenshoyoshiOcr().setWrap(is記入用紙不使用);
+        div.getChkShujiiIkenshoyoshiOcr().setDisplayNone(is記入用紙OCR不使用);
+        div.getChkShujiiIkenshoyoshiDesign().setWrap(is記入用紙不使用 && is記入用紙OCR不使用);
+        div.getChkShujiiIkenshoyoshiDesign().setDisplayNone(is記入用紙デザイン不使用);
+        div.getChkShujiiIkenshoSakuseiryoSeikyusho().setWrap(is記入用紙不使用 && is記入用紙OCR不使用 && is記入用紙デザイン不使用);
+        div.getChkShujiiIkenshoSakuseiryoSeikyusho().setDisplayNone(is作成料請求書不使用);
+        div.getChkShindanMeireishoAndTeishutsuIraisho().setDisplayNone(is提出意見書不使用);
+    }
+
     private void setShujiiChkShinseiTani(boolean flag) {
-        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabled(flag);
+        RDate 基準日 = RDate.getNowDate();
         div.getChkShujiiIkenshoSakuseiIraisho().setDisabled(flag);
+        div.getChkShujiIkenshoyoshi().setDisabled(flag);
+        div.getChkShujiiIkenshoyoshiOcr().setDisabled(flag);
+        div.getChkShujiiIkenshoyoshiDesign().setDisabled(flag);
+        div.getChkShujiiIkenshoSakuseiryoSeikyusho().setDisabled(flag);
         div.getChkShindanMeireishoAndTeishutsuIraisho().setDisabled(flag);
-        if (!flag) {
-            List<RString> shujiiIkenshoDisabledKeys = new ArrayList<>();
-            List<RString> ocrDisabledKeys = new ArrayList<>();
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                shujiiIkenshoDisabledKeys.add(記入用紙);
-                div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(shujiiIkenshoDisabledKeys);
-            } else {
-                ocrDisabledKeys.add(記入用紙OCR);
-                div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(ocrDisabledKeys);
-            }
-        }
-        clear主治医意見書申請単位();
+        setChkSelected(div.getChkShujiiIkenshoSakuseiIraisho(), ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼書, 基準日, flag);
+        setChkSelected(div.getChkShujiIkenshoyoshi(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙, 基準日, flag);
+        setChkSelected(div.getChkShujiiIkenshoyoshiOcr(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR, 基準日, flag);
+        setChkSelected(div.getChkShujiiIkenshoyoshiDesign(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙, 基準日, flag);
+        setChkSelected(div.getChkShujiiIkenshoSakuseiryoSeikyusho(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書作成料請求書, 基準日, flag);
+        setChkSelected(div.getChkShindanMeireishoAndTeishutsuIraisho(), ConfigNameDBE.主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書, 基準日, flag);
     }
 
     private void initializeNinteiChkShinseiTani() {
@@ -255,7 +267,6 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkTokkiKomokuNashi().setDisplayNone(is特記事項項目無不使用);
         div.getChkTokkiFree().setDisplayNone(is特記事項フリー不使用);
         div.getTokkiChecks().setDisplayNone(is特記事項項目有不使用 && is特記事項項目無不使用 && is特記事項フリー不使用);
-        clear認定調査申請単位();
     }
 
     private void setNinteiChkShinseiTani(boolean flag) {
@@ -282,15 +293,14 @@ public class IraishoIkkatsuHakkoHandler {
         setChkSelected(div.getChkTokkiKomokuAri(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, 基準日, flag);
         setChkSelected(div.getChkTokkiKomokuNashi(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, 基準日, flag);
         setChkSelected(div.getChkTokkiFree(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, 基準日, flag);
-        clear認定調査申請単位();
     }
 
     private boolean is使用ByConfig(ConfigNameDBE key, RDate 基準日) {
-        return DbBusinessConfig.get(key, 基準日, SubGyomuCode.DBE認定支援).equals(OCR);
+        return !DbBusinessConfig.get(key, 基準日, SubGyomuCode.DBE認定支援).equals(OCR);
     }
-    
+
     private void setChkSelected(CheckBoxList chk, ConfigNameDBE key, RDate 基準日, boolean is外す) {
-        boolean is手動 = !is外す && is使用ByConfig(key, 基準日);
+        boolean is手動 = !is外す && !is使用ByConfig(key, 基準日);
         setChkSelected(chk, is手動);
     }
 
@@ -305,17 +315,5 @@ public class IraishoIkkatsuHakkoHandler {
             div.getRadTeishutsuKigen().setDisabled(true);
         }
         div.getTxtKyotsuHizuke().setValue(RDate.getNowDate());
-    }
-
-    private void clear認定調査申請単位() {
-        div.getChkShujiiIkenshoSakuseiIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkShindanMeireishoAndTeishutsuIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
-    }
-
-    private void clear主治医意見書申請単位() {
-        div.getChkShujiiIkenshoSakuseiIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkShindanMeireishoAndTeishutsuIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
     }
 }
