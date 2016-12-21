@@ -79,6 +79,7 @@ public class IryohokenRirekiCommonChildDiv {
         requestDiv.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(dataSource);
         requestDiv.setVisible(true);
         responseData.data = requestDiv;
+        createHandlerOf(requestDiv).setState(mode);
         return responseData;
     }
 

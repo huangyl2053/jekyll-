@@ -47,7 +47,7 @@ public class NinteiChosainDataOutputProcess extends BatchProcessBase<NinteiChosa
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("ChosaKekkaNyuryokuMobile_Chosain.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("調査員情報.csv"));
     }
 
     @Override

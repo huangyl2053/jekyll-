@@ -123,7 +123,7 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
                 set特記事項イメージ(source);
             }
         }
-        if (ReportIdDBE.DBE517905.getReportId().value().equals(reportId)) {
+        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
             source.layout = Layouts.四頁目;
         } else {
             source.layout = Layouts.六頁目;

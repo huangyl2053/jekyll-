@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.yokaigonintei.shinsei.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataCsvProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKom
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping99A;
-import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
@@ -29,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -68,19 +65,19 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード()).get名称());
         eucCsvEntity.set証記載保険者番号(entity.get証記載保険者番号());
         eucCsvEntity.set被保険者番号(entity.get被保険者番号());
-        eucCsvEntity.set認定申請年月日(setDateFormat(entity.get認定申請年月日()));
+        eucCsvEntity.set認定申請年月日(entity.get認定申請年月日());
         eucCsvEntity.set認定申請区分申請時コード(entity.get認定申請区分_申請時_コード());
         eucCsvEntity.set認定申請区分申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get名称());
         eucCsvEntity.set被保険者氏名(entity.get被保険者氏名());
         eucCsvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
-        eucCsvEntity.set生年月日(setDateFormat(entity.get生年月日()));
+        eucCsvEntity.set生年月日(entity.get生年月日());
         eucCsvEntity.set年齢(entity.get年齢());
-        eucCsvEntity.set性別(Seibetsu.toValue(entity.get性別()).get名称());
+        eucCsvEntity.set性別(entity.get性別());
         eucCsvEntity.set郵便番号(setYobuinNoFormat(entity.get郵便番号()));
         eucCsvEntity.set住所(entity.get住所());
         eucCsvEntity.set電話番号(entity.get電話番号());
         eucCsvEntity.set保険者名(entity.get市町村名称());
-        eucCsvEntity.set認定調査依頼完了年月日(setDateFormat(entity.get認定調査依頼完了年月日()));
+        eucCsvEntity.set認定調査依頼完了年月日(entity.get認定調査依頼完了年月日());
         eucCsvEntity.set認定調査依頼履歴番号(entity.get認定調査依頼履歴番号());
         eucCsvEntity.set認定調査委託先コード(entity.get認定調査委託先コード());
         eucCsvEntity.set調査委託先(entity.get事業者名称());
@@ -99,8 +96,8 @@ public class NinteiChosaDataOutputResult {
             eucCsvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         }
         eucCsvEntity.set認定調査回数(entity.get認定調査回数());
-        eucCsvEntity.set認定調査実施年月日(setDateFormat(entity.get認定調査実施年月日()));
-        eucCsvEntity.set認定調査受領年月日(setDateFormat(entity.get認定調査受領年月日()));
+        eucCsvEntity.set認定調査実施年月日(entity.get認定調査実施年月日());
+        eucCsvEntity.set認定調査受領年月日(entity.get認定調査受領年月日());
 
         eucCsvEntity.set認定調査区分コード(entity.get認定調査区分コード());
         if (RString.isNullOrEmpty(entity.get認定調査区分コード())) {
@@ -131,8 +128,8 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set利用施設電話番号(entity.get利用施設電話番号());
         eucCsvEntity.set利用施設郵便番号(setYobuinNoFormat(entity.get利用施設郵便番号()));
         eucCsvEntity.set特記(entity.get特記());
-        eucCsvEntity.set認定調査特記事項受付年月日(setDateFormat(entity.get認定調査特記事項受付年月日()));
-        eucCsvEntity.set認定調査特記事項受領年月日(setDateFormat(entity.get認定調査特記事項受領年月日()));
+        eucCsvEntity.set認定調査特記事項受付年月日(entity.get認定調査特記事項受付年月日());
+        eucCsvEntity.set認定調査特記事項受領年月日(entity.get認定調査特記事項受領年月日());
         eucCsvEntity.set住宅改修_改修箇所(entity.get住宅改修());
         eucCsvEntity.set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名());
         eucCsvEntity.set介護保険給付以外の在宅サービス種類名(entity.get在宅サービス種類名());
@@ -154,18 +151,14 @@ public class NinteiChosaDataOutputResult {
         }
         set調査項目_今回(eucCsvEntity, entity);
         eucCsvEntity.setステータス(ステータス設定値);
-        if (RString.isNullOrEmpty(entity.get被保険者区分コード())) {
-            eucCsvEntity.set被保険者区分(RString.EMPTY);
-        } else {
-            eucCsvEntity.set被保険者区分(HihokenshaKubun.toValue(entity.get被保険者区分コード()).get名称());
-        }
+        eucCsvEntity.set被保険者区分(entity.get被保険者区分コード());
     }
 
     private void set前回分Entity(NinteiChosaBasicDataRelateEntity entityParam, NinteiChosaDataOutputEucCsvEntity eucCsvEntity) {
         NinteiChosaDataOutputBatchRelateEntity entityZenkai = entityParam.get前回分Entity();
         eucCsvEntity.set前回_証記載保険者番号(entityZenkai.get証記載保険者番号());
         eucCsvEntity.set前回_被保険者番号(entityZenkai.get被保険者番号());
-        eucCsvEntity.set前回_認定申請年月日(setDateFormat(entityZenkai.get認定申請年月日()));
+        eucCsvEntity.set前回_認定申請年月日(entityZenkai.get認定申請年月日());
         eucCsvEntity.set前回_認定調査_サービス区分コード(entityZenkai.getサービス区分コード());
         if (RString.isNullOrEmpty(entityZenkai.getサービス区分コード())) {
             eucCsvEntity.set前回_認定調査_サービス区分(RString.EMPTY);
@@ -824,14 +817,6 @@ public class NinteiChosaDataOutputResult {
             formatYobuinNo = new YubinNo(yobuinNo).getEditedYubinNo();
         }
         return formatYobuinNo;
-    }
-
-    private RString setDateFormat(RString date) {
-        RString formatDate = RString.EMPTY;
-        if (!RString.isNullOrEmpty(date)) {
-            formatDate = new FlexibleDate(date).wareki().toDateString();
-        }
-        return formatDate;
     }
 
     /**

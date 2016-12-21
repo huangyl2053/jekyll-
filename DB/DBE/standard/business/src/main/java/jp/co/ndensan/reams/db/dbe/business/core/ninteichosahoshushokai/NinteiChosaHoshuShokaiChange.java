@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.Nintei
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -134,7 +136,7 @@ public final class NinteiChosaHoshuShokaiChange {
             施設_継 = MARU;
         }
         if (entity.get認定調査依頼年月日() != null) {
-            依頼年月日 = entity.get認定調査依頼年月日().wareki().toDateString();
+            依頼年月日 = entity.get認定調査依頼年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
         NinteiChosaHoshuShokaiCsvNoMiEntity data = new NinteiChosaHoshuShokaiCsvNoMiEntity(
                 entity.get認定調査委託先コード(),
@@ -142,8 +144,8 @@ public final class NinteiChosaHoshuShokaiChange {
                 entity.get認定調査員コード(),
                 entity.get調査員氏名(),
                 依頼年月日,
-                entity.get認定調査実施年月日().wareki().toDateString(),
-                entity.get認定調査受領年月日().wareki().toDateString(),
+                entity.get認定調査実施年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString(),
+                entity.get認定調査受領年月日().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString(),
                 調査_再,
                 entity.get証記載保険者番号(),
                 entity.get被保険者番号(),

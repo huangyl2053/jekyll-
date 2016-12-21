@@ -37,6 +37,12 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
     private static final RString DATE_作成 = new RString("作成");
     private static final RString 帳票名 = new RString("介護保険 調査委託先・調査員一覧表");
     private static final RString 改頁 = new RString("認定調査委託先コード毎");
+    private static final RString 並び順１項１ = new RString("認定調査委託先コード");
+    private static final RString 並び順１項２ = new RString("認定調査委託先名称");
+    private static final RString 並び順２項１ = new RString("調査員コード");
+    private static final RString 並び順２項２ = new RString("調査員氏名");
+    private static final RString 並び順２項３ = new RString("調査員カナ氏名");
+
     private final ItakusakiChosainIchiranHead item;
 
     /**
@@ -110,10 +116,35 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.dataShubetsu = new RString("調査委託先マスタ");
         source.cityCode = item.getCityCode();
         source.cityName = item.getCityName();
-        source.sort1 = NarabiJunType.toValue(item.getSort()).toRString();
-        source.sort2 = RString.EMPTY;
+
+        NarabiJunType 並び順種類 = NarabiJunType.toValue(item.getSort());
+        RString 並び順１ = RString.EMPTY;
+        RString 並び順２ = RString.EMPTY;
+
+        if (並び順種類.compareTo(NarabiJunType.委託先コード_調査員コード) == 0) {
+            並び順１ = 並び順１項１;
+            並び順２ = 並び順２項１;
+        } else if (並び順種類.compareTo(NarabiJunType.委託先コード_調査員氏名) == 0) {
+            並び順１ = 並び順１項１;
+            並び順２ = 並び順２項２;
+        } else if (並び順種類.compareTo(NarabiJunType.委託先コード_調査員カナ氏名) == 0) {
+            並び順１ = 並び順１項１;
+            並び順２ = 並び順２項３;
+        } else if (並び順種類.compareTo(NarabiJunType.委託先名称_調査員コード) == 0) {
+            並び順１ = 並び順１項２;
+            並び順２ = 並び順２項１;
+        } else if (並び順種類.compareTo(NarabiJunType.委託先名称_調査員氏名) == 0) {
+            並び順１ = 並び順１項２;
+            並び順２ = 並び順２項２;
+        } else if (並び順種類.compareTo(NarabiJunType.委託先コード_調査員カナ氏名) == 0) {
+            並び順１ = 並び順１項２;
+            並び順２ = 並び順２項３;
+        }
+
+        source.sort1 = 並び順１;
+        source.sort2 = 並び順２;
         source.sort3 = RString.EMPTY;
-        source.sort2 = RString.EMPTY;
+        source.sort4 = RString.EMPTY;
         source.sort5 = RString.EMPTY;
         if (NextPageType.委託先コード.code().equals(item.getPage())) {
             source.page1 = 改頁;
