@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -33,153 +32,6 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
      */
     public HakkoJokenSyujiiIkensyoValidationHandler(HakkoJokenSyujiiIkensyoDiv div) {
         this.div = div;
-    }
-
-    /**
-     * 申請日範囲不正チェック1です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請日範囲不正チェック1(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtShinseiYMD1().getFromValue();
-        RDate shinnseikato = div.getTxtShinseiYMD1().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 申請日範囲不正チェック2です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請日範囲不正チェック2(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtShinsaYMD3().getFromValue();
-        RDate shinnseikato = div.getTxtShinsaYMD3().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 申請日範囲不正チェック3です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請日範囲不正チェック3(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtShinseiYMD4().getFromValue();
-        RDate shinnseikato = div.getTxtShinseiYMD4().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 申請日範囲不正チェック4です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 申請日範囲不正チェック4(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtShinseiYMD5().getFromValue();
-        RDate shinnseikato = div.getTxtShinseiYMD5().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.申請日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 受領日範囲不正チェックです
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 受領日範囲不正チェック(ValidationMessageControlPairs validPairs) {
-        RDate shinnseikafrom = div.getTxtJuryoYMD().getFromValue();
-        RDate shinnseikato = div.getTxtJuryoYMD().getToValue();
-        if (shinnseikafrom == null) {
-            shinnseikafrom = RDate.MIN;
-        }
-        if (shinnseikato == null) {
-            shinnseikato = RDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.受領日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 処理日範囲不正チェック1です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 処理日範囲不正チェック1(ValidationMessageControlPairs validPairs) {
-        RDate shoriYMDfrom = div.getTxtShoriYMD5().getFromValue();
-        RDate shoriYMDto = div.getTxtShoriYMD5().getToValue();
-        if (null == shoriYMDfrom) {
-            shoriYMDfrom = RDate.MIN;
-        }
-        if (null == shoriYMDto) {
-            shoriYMDto = RDate.MAX;
-        }
-        if (shoriYMDto.isBefore(shoriYMDfrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.処理日範囲不正チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 処理日範囲不正チェック2です
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 処理日範囲不正チェック2(ValidationMessageControlPairs validPairs) {
-        RDate shoriYMDfrom = div.getTxtSeikyuIchiranShoriYMD().getFromValue();
-        RDate shoriYMDto = div.getTxtSeikyuIchiranShoriYMD().getToValue();
-        if (null == shoriYMDfrom) {
-            shoriYMDfrom = RDate.MIN;
-        }
-        if (null == shoriYMDto) {
-            shoriYMDto = RDate.MAX;
-        }
-        if (shoriYMDto.isBefore(shoriYMDfrom)) {
-            validPairs.add(new ValidationMessageControlPair(HakkoJokenSyujiiIkensyoMessages.処理日範囲不正チェック));
-        }
-        return validPairs;
     }
 
     /**
@@ -239,9 +91,6 @@ public class HakkoJokenSyujiiIkensyoValidationHandler {
 
     private static enum HakkoJokenSyujiiIkensyoMessages implements IValidationMessage {
 
-        申請日範囲不正チェック(UrErrorMessages.期間が不正_追加メッセージあり２, "申請日From", "申請日To"),
-        処理日範囲不正チェック(UrErrorMessages.期間が不正_追加メッセージあり２, "処理日From", "処理日To"),
-        受領日範囲不正チェック(UrErrorMessages.期間が不正_追加メッセージあり２, "申請日From", "申請日To"),
         未入力チェック(UrErrorMessages.未指定, "選択したパネルの条件を"),
         未選択チェック(UrErrorMessages.未指定, "出力帳票を");
         private final Message message;

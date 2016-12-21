@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinseimonitor;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseimonitor.ShinseiMonitorEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinseimonitor.ShinseiMonitorReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.atenapsm.JuminJotaiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -75,7 +76,7 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
         source.listShinseimonita_11 = dateFormat(item.get前回認定有効期間開始日());
         source.listShinseimonita_12 = dateFormat(item.get前回認定有効期間終了日());
         source.listShinseimonita_13 = dateFormat(item.get前回認定申請年月日());
-        source.listShinseimonita_14 = item.get住民状態コード();
+        source.listShinseimonita_14 = get死亡転出区分(item.get住民状態コード());
         source.listShinseimonita_15 = dateFormat(item.get消除異動年月日());
         source.listShinseimonita_16 = RString.EMPTY;
         source.shikibetuCode = ShikibetsuCode.EMPTY;
@@ -117,6 +118,16 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
         }
         return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString get死亡転出区分(RString code) {
+        RString 区分 = RString.EMPTY;
+        JuminJotaiCode 住民状態 = JuminJotaiCode.toValue(code);
+        if (住民状態.equals(JuminJotaiCode.死亡者)
+                || 住民状態.equals(JuminJotaiCode.転出者)) {
+            区分 = 住民状態.get名称();
+        }
+        return 区分;
     }
 
     private RString set前回二次判定結果() {
