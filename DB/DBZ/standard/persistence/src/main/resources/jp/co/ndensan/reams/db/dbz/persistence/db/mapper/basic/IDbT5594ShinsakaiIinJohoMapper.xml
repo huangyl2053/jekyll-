@@ -40,7 +40,13 @@
          "DbT5594ShinsakaiIinJoho"."seinengappiYMD" as "dbT5594ShinsakaiIinJoho_seinengappiYMD",
          "DbT5594ShinsakaiIinJoho"."biko" as "dbT5594ShinsakaiIinJoho_biko",
          "DbT5594ShinsakaiIinJoho"."haishiFlag" as "dbT5594ShinsakaiIinJoho_haishiFlag",
-         "DbT5594ShinsakaiIinJoho"."haishiYMD" as "dbT5594ShinsakaiIinJoho_haishiYMD"
+         "DbT5594ShinsakaiIinJoho"."haishiYMD" as "dbT5594ShinsakaiIinJoho_haishiYMD",
+         "DbT5594ShinsakaiIinJoho"."kinyuKikanCode" as "dbT5594ShinsakaiIinJoho_kinyuKikanCode",
+         "DbT5594ShinsakaiIinJoho"."kinyuKikanShitenCode" as "dbT5594ShinsakaiIinJoho_kinyuKikanShitenCode",
+         "DbT5594ShinsakaiIinJoho"."yokinShubetsu" as "dbT5594ShinsakaiIinJoho_yokinShubetsu",
+         "DbT5594ShinsakaiIinJoho"."kozaNo" as "dbT5594ShinsakaiIinJoho_kozaNo",
+         "DbT5594ShinsakaiIinJoho"."kozaMeigininKana" as "dbT5594ShinsakaiIinJoho_kozaMeigininKana",
+         "DbT5594ShinsakaiIinJoho"."kozaMeiginin" as "dbT5594ShinsakaiIinJoho_kozaMeiginin"
     </sql>
 
 
@@ -71,8 +77,14 @@
         <result property="biko" column="dbT5594ShinsakaiIinJoho_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="haishiFlag" column="dbT5594ShinsakaiIinJoho_haishiFlag" />
         <result property="haishiYMD" column="dbT5594ShinsakaiIinJoho_haishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kinyuKikanCode" column="dbT5594ShinsakaiIinJoho_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <result property="kinyuKikanShitenCode" column="dbT5594ShinsakaiIinJoho_kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="yokinShubetsu" column="dbT5594ShinsakaiIinJoho_yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNo" column="dbT5594ShinsakaiIinJoho_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeigininKana" column="dbT5594ShinsakaiIinJoho_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kozaMeiginin" column="dbT5594ShinsakaiIinJoho_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
-   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5594ShinsakaiIinJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5594ShinsakaiIinJohoEntity">
         SELECT
         <include refid="allColumns_DbT5594ShinsakaiIinJoho"/>
         FROM

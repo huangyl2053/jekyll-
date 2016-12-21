@@ -13,7 +13,7 @@ public enum GaikyochosaKomoku06A_12 {
     /**
      * コード:012 名称:特定（介護予防）福祉用具販売 略称:定義なし 選択項目名称1:品目/
      */
-    特定_介護予防_福祉用具販売("012", "特定（介護予防）福祉用具販売", "品目/");
+    特定_介護予防_福祉用具販売("012", "特定（介護予防）福祉用具販売", "品目");
 
     private final RString code;
     private final RString fullName;

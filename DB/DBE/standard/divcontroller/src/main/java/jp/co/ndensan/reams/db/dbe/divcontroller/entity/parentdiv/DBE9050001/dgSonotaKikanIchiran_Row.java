@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Dec 17 13:58:45 JST 2016 
+ * Tue Dec 20 19:30:25 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgSonotaKikanIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
 
     private RString jotai;
     private RString hokenshaCode;
@@ -37,6 +37,12 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
     private RString chiku;
     private RString kikanKubun;
     private RString jokyoFlag;
+    private RString kinyuKikanCode;
+    private RString kinyuKikanShitenCode;
+    private RString yokinShubetsu;
+    private RString kozaNo;
+    private RString kozaMeigininKana;
+    private RString kozaMeiginin;
 
     public dgSonotaKikanIchiran_Row() {
         super();
@@ -55,6 +61,12 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.chiku = RString.EMPTY;
         this.kikanKubun = RString.EMPTY;
         this.jokyoFlag = RString.EMPTY;
+        this.kinyuKikanCode = RString.EMPTY;
+        this.kinyuKikanShitenCode = RString.EMPTY;
+        this.yokinShubetsu = RString.EMPTY;
+        this.kozaNo = RString.EMPTY;
+        this.kozaMeigininKana = RString.EMPTY;
+        this.kozaMeiginin = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokensha", hokensha);
@@ -70,9 +82,15 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.setOriginalData("chiku", chiku);
         this.setOriginalData("kikanKubun", kikanKubun);
         this.setOriginalData("jokyoFlag", jokyoFlag);
+        this.setOriginalData("kinyuKikanCode", kinyuKikanCode);
+        this.setOriginalData("kinyuKikanShitenCode", kinyuKikanShitenCode);
+        this.setOriginalData("yokinShubetsu", yokinShubetsu);
+        this.setOriginalData("kozaNo", kozaNo);
+        this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
+        this.setOriginalData("kozaMeiginin", kozaMeiginin);
     }
 
-    public dgSonotaKikanIchiran_Row(RString jotai, RString hokenshaCode, RString hokensha, RString sonotaKikanCode, RString kikanMeisho, RString kikanKana, RString yubinNo, RString jusho, RString jushoKana, RString telNo, RString chosaItakuKubun, TextBoxNum waritsukeTeiin, RString chiku, RString kikanKubun, RString jokyoFlag) {
+    public dgSonotaKikanIchiran_Row(RString jotai, RString hokenshaCode, RString hokensha, RString sonotaKikanCode, RString kikanMeisho, RString kikanKana, RString yubinNo, RString jusho, RString jushoKana, RString telNo, RString chosaItakuKubun, TextBoxNum waritsukeTeiin, RString chiku, RString kikanKubun, RString jokyoFlag, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaCode", hokenshaCode);
@@ -89,6 +107,12 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.setOriginalData("chiku", chiku);
         this.setOriginalData("kikanKubun", kikanKubun);
         this.setOriginalData("jokyoFlag", jokyoFlag);
+        this.setOriginalData("kinyuKikanCode", kinyuKikanCode);
+        this.setOriginalData("kinyuKikanShitenCode", kinyuKikanShitenCode);
+        this.setOriginalData("yokinShubetsu", yokinShubetsu);
+        this.setOriginalData("kozaNo", kozaNo);
+        this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
+        this.setOriginalData("kozaMeiginin", kozaMeiginin);
         this.jotai = jotai;
         this.hokenshaCode = hokenshaCode;
         this.hokensha = hokensha;
@@ -104,6 +128,12 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.chiku = chiku;
         this.kikanKubun = kikanKubun;
         this.jokyoFlag = jokyoFlag;
+        this.kinyuKikanCode = kinyuKikanCode;
+        this.kinyuKikanShitenCode = kinyuKikanShitenCode;
+        this.yokinShubetsu = yokinShubetsu;
+        this.kozaNo = kozaNo;
+        this.kozaMeigininKana = kozaMeigininKana;
+        this.kozaMeiginin = kozaMeiginin;
     }
 
     public RString getJotai() {
@@ -164,6 +194,30 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
 
     public RString getJokyoFlag() {
         return jokyoFlag;
+    }
+
+    public RString getKinyuKikanCode() {
+        return kinyuKikanCode;
+    }
+
+    public RString getKinyuKikanShitenCode() {
+        return kinyuKikanShitenCode;
+    }
+
+    public RString getYokinShubetsu() {
+        return yokinShubetsu;
+    }
+
+    public RString getKozaNo() {
+        return kozaNo;
+    }
+
+    public RString getKozaMeigininKana() {
+        return kozaMeigininKana;
+    }
+
+    public RString getKozaMeiginin() {
+        return kozaMeiginin;
     }
 
     public void setJotai(RString jotai) {
@@ -239,6 +293,36 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
     public void setJokyoFlag(RString jokyoFlag) {
         this.setOriginalData("jokyoFlag", jokyoFlag);
         this.jokyoFlag = jokyoFlag;
+    }
+
+    public void setKinyuKikanCode(RString kinyuKikanCode) {
+        this.setOriginalData("kinyuKikanCode", kinyuKikanCode);
+        this.kinyuKikanCode = kinyuKikanCode;
+    }
+
+    public void setKinyuKikanShitenCode(RString kinyuKikanShitenCode) {
+        this.setOriginalData("kinyuKikanShitenCode", kinyuKikanShitenCode);
+        this.kinyuKikanShitenCode = kinyuKikanShitenCode;
+    }
+
+    public void setYokinShubetsu(RString yokinShubetsu) {
+        this.setOriginalData("yokinShubetsu", yokinShubetsu);
+        this.yokinShubetsu = yokinShubetsu;
+    }
+
+    public void setKozaNo(RString kozaNo) {
+        this.setOriginalData("kozaNo", kozaNo);
+        this.kozaNo = kozaNo;
+    }
+
+    public void setKozaMeigininKana(RString kozaMeigininKana) {
+        this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
+        this.kozaMeigininKana = kozaMeigininKana;
+    }
+
+    public void setKozaMeiginin(RString kozaMeiginin) {
+        this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.kozaMeiginin = kozaMeiginin;
     }
 
     // </editor-fold>
