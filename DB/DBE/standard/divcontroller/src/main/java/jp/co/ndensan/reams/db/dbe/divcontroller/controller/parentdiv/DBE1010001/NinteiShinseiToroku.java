@@ -442,7 +442,7 @@ public class NinteiShinseiToroku {
         if (flag) {
             renrakusaki = new RenrakusakiJoho(申請書管理番号, renrakusakiJoho.get連番());
         } else {
-            renrakusaki = new RenrakusakiJoho(new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class)), renrakusakiJoho.get連番());
+            renrakusaki = new RenrakusakiJoho(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class), renrakusakiJoho.get連番());
         }
         RenrakusakiJohoBuilder renrakusakiBuilder = renrakusaki.createBuilderForEdit();
         renrakusakiBuilder.set連絡先区分番号(renrakusakiJoho.get連絡先区分番号());

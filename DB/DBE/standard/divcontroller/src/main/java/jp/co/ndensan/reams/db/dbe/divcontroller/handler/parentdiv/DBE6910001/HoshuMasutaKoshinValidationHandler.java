@@ -6,11 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6910001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.HoshuMasutaKoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgChosainhoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgHomonChosahoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgIkenShohoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgShinsakaiIinBetuTanka_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -89,7 +93,7 @@ public class HoshuMasutaKoshinValidationHandler {
         }
         return validPairs;
     }
-    
+
     /**
      * 審査員報酬単価マスタの入力明細エリア入力チェックを実行します。
      *
@@ -116,8 +120,8 @@ public class HoshuMasutaKoshinValidationHandler {
                 }
                 if (div.getHoshuMasutaTab().getDdlKaigoNinteiShinsaIinShubetsu().getSelectedKey().equals(
                         row.getKaigoNinteiShinsaIinShubetsuCode())
-                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
-                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(), 終了年月.getDomain(),
+                                row.getKaishiYM().getValue().getYearMonth(), row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -155,8 +159,8 @@ public class HoshuMasutaKoshinValidationHandler {
                         row.getZaitakuShisetsuKubunCode())
                         && div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlIkenshoSakuseiKaisuKubun().getSelectedKey().equals(
                                 row.getIkenshoSakuseiKaisuKubunCode())
-                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
-                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(), 終了年月.getDomain(),
+                                row.getKaishiYM().getValue().getYearMonth(), row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -195,8 +199,8 @@ public class HoshuMasutaKoshinValidationHandler {
                         row.getChosaKubunCode())
                         && div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlHomonShubetsu().getSelectedKey().equals(
                                 row.getHomonShubetsuCode())
-                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
-                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(開始年月.getDomain(), 終了年月.getDomain(),
+                                row.getKaishiYM().getValue().getYearMonth(), row.getShuryoYM().getValue().getYearMonth())) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -213,25 +217,27 @@ public class HoshuMasutaKoshinValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         TextBoxFlexibleYearMonth 開始年月 = div.getHoshuMasutaTab().getTxtBetuKaishiYM();
         TextBoxFlexibleYearMonth 終了年月 = div.getHoshuMasutaTab().getTxtBetuShuryoYM();
-        validationMessages.add(check開始年月が必須(開始年月));
-        validationMessages.add(check終了年月が必須(終了年月));
-        validationMessages.add(check審査委員コードが必須(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue()));
-        if (追加モード.equals(div.getShinsakaiIinBetuTankaState())
-                && 開始年月 != null && 開始年月.getDomain() != null && !開始年月.getDomain().isEmpty()
-                && 終了年月 != null && 終了年月.getDomain() != null && !終了年月.getDomain().isEmpty()) {
+
+        if (追加モード.equals(div.getShinsakaiIinBetuTankaState())) {
+            validationMessages.add(check開始年月が必須(開始年月));
+            validationMessages.add(check審査委員コードが必須(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue()));
+            validationMessages.add(check審査委員コードが登録済み(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue()));
             validationMessages.add(check期間が不正(開始年月, 終了年月));
             List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価一覧情報
                     = div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getDataSource();
             for (dgShinsakaiIinBetuTanka_Row row : 審査会委員別単価一覧情報) {
+                FlexibleYearMonth row開始年月 = row.getKaishiYM().getValue().isEmpty() ? FlexibleYearMonth.MIN : row.getKaishiYM().getValue().getYearMonth();
+                FlexibleYearMonth row終了年月 = row.getShuryoYM().getValue().isEmpty() ? FlexibleYearMonth.MAX : row.getShuryoYM().getValue().getYearMonth();
+                FlexibleYearMonth textbox開始年月 = 開始年月.getDomain().isEmpty() ? FlexibleYearMonth.MIN : 開始年月.getDomain();
+                FlexibleYearMonth textbox終了年月 = 終了年月.getDomain().isEmpty() ? FlexibleYearMonth.MAX : 終了年月.getDomain();
                 if (row.getShinsakaiIinCode().equals(
                         div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue())
-                        && row.getKaishiYM().getValue().getYearMonth().compareTo(開始年月.getDomain()) == 0
-                        && row.getShuryoYM().getValue().getYearMonth().compareTo(終了年月.getDomain()) == 0) {
+                        && row開始年月.compareTo(textbox開始年月) == 0
+                        && row終了年月.compareTo(textbox終了年月) == 0) {
                     validationMessages.add(checkデータが既に存在());
                 }
                 if (div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().equals(row.getShinsakaiIinCode())
-                        && is期間重複(開始年月.getDomain(),終了年月.getDomain(), 
-                                row.getKaishiYM().getValue().getYearMonth(),row.getShuryoYM().getValue().getYearMonth())) {
+                        && is期間重複(textbox開始年月, textbox終了年月, row開始年月, row終了年月)) {
                     validationMessages.add(check期間が重複());
                 }
             }
@@ -265,8 +271,11 @@ public class HoshuMasutaKoshinValidationHandler {
 
     private ValidationMessageControlPairs check期間が不正(TextBoxFlexibleYearMonth 開始年月, TextBoxFlexibleYearMonth 終了年月) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (終了年月.getDomain().isEmpty()) {
+            return validationMessages;
+        }
         if (終了年月.getDomain().isBefore(開始年月.getDomain())) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.期間が不正));
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.期間が不正, 開始年月, 終了年月));
         }
         return validationMessages;
     }
@@ -285,6 +294,21 @@ public class HoshuMasutaKoshinValidationHandler {
         return validationMessages;
     }
 
+    private ValidationMessageControlPairs check審査委員コードが登録済み(RString 審査委員コード) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (審査委員コード.isNull()
+                || 審査委員コード.isEmpty()) {
+            return validationMessages;
+        }
+        ShinsakaiIinJohoMapperParameter param = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(審査委員コード);
+        ShinsakaiIinJoho 審査会委員情報 = ShinsakaiIinJohoManager.createInstance().get介護認定審査会委員情報(param);
+        if (null == 審査会委員情報) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.審査委員コードエラー,
+                    div.getHoshuMasutaTab().getTxtShinsaIinKodo()));
+        }
+        return validationMessages;
+    }
+
     /**
      * 期間チェックを実行します。
      *
@@ -296,12 +320,11 @@ public class HoshuMasutaKoshinValidationHandler {
         return validationMessages;
     }
 
-    private boolean is期間重複(FlexibleYearMonth 新規作成開始年月, FlexibleYearMonth 新規作成終了年月, FlexibleYearMonth 既に存在開始年月,  FlexibleYearMonth 既に存在終了年月) {
-        
-        return 新規作成開始年月.isBeforeOrEquals(既に存在終了年月)&&既に存在開始年月.isBeforeOrEquals(新規作成開始年月)
-                || 新規作成終了年月.isBeforeOrEquals(既に存在終了年月)&&既に存在開始年月.isBeforeOrEquals(新規作成終了年月);
-    }
+    private boolean is期間重複(FlexibleYearMonth 新規作成開始年月, FlexibleYearMonth 新規作成終了年月, FlexibleYearMonth 既に存在開始年月, FlexibleYearMonth 既に存在終了年月) {
 
+        return 新規作成開始年月.isBeforeOrEquals(既に存在終了年月) && 既に存在開始年月.isBeforeOrEquals(新規作成開始年月)
+                || 新規作成終了年月.isBeforeOrEquals(既に存在終了年月) && 既に存在開始年月.isBeforeOrEquals(新規作成終了年月);
+    }
 
     private static enum RRVMessages implements IValidationMessage {
 
@@ -311,7 +334,8 @@ public class HoshuMasutaKoshinValidationHandler {
         期間が不正(UrErrorMessages.期間が不正_追加メッセージあり２, "開始年月", "終了年月"),
         既に存在(UrErrorMessages.既に存在, "データ"),
         審査委員コードが必須(UrErrorMessages.必須, "審査委員コード"),
-        期間が重複(UrErrorMessages.期間が重複);
+        期間が重複(UrErrorMessages.期間が重複),
+        審査委員コードエラー(DbeErrorMessages.審査委員コードエラー);
 
         private final Message message;
 
@@ -324,8 +348,8 @@ public class HoshuMasutaKoshinValidationHandler {
             return message;
         }
     }
-    
-        private static class IdocheckMessages implements IValidationMessage {
+
+    private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;
 

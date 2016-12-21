@@ -126,6 +126,7 @@ public class NinteiChosaIraiHandler {
     private static final RString DDL_KEY0 = new RString("key0");
     private static final RString DDL_KEY1 = new RString("key1");
     private static final RString DDL_KEY2 = new RString("key2");
+    private static final RString 中野市の地方公共団体コード = new RString("202118");
     private final NinteiChosaIraiDiv div;
 
     /**
@@ -863,8 +864,14 @@ public class NinteiChosaIraiHandler {
                         ? new RString(new FlexibleDate(row.getNinteiShinseiYMDKoShin()).plusDay(Integer.parseInt(認定調査作成期限日数.toString())).toString()) : RString.EMPTY;
             }
 
-            BunshoNo 文書番号 = BunshoNoFinderFactory
-                    .createInstance().get文書番号管理(ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
+            RString 文書番号 = RString.EMPTY;
+            if (中野市の地方公共団体コード.equals(row.getShichosonCode())) {
+                BunshoNo 文書番号管理
+                        = BunshoNoFinderFactory.createInstance().get文書番号管理(ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
+                if (文書番号 != null) {
+                    文書番号 = 文書番号管理.edit文書番号();
+                }
+            }
             for (ChosainJoho 調査員情報 : 調査員情報リスト) {
                 YubinNo 郵便番号 = 調査員情報.get郵便番号();
                 AtenaJusho 住所 = 調査員情報.get住所();
@@ -879,7 +886,7 @@ public class NinteiChosaIraiHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
-                        (文書番号 != null) ? 文書番号.edit文書番号() : RString.EMPTY,
+                        文書番号,
                         (郵便番号 != null) ? 郵便番号.getEditedYubinNo() : RString.EMPTY,
                         (住所 != null) ? 住所.value() : RString.EMPTY,
                         調査員情報.get所属機関名称(),

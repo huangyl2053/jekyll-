@@ -22,13 +22,13 @@ public class NinteiChosaHoshuShokaiCsvNoMiEntity implements IChosaHoshuShokaiCsv
     private final RString 調査機関コード;
     @CsvField(order = 2, name = "調査機関名")
     private final RString 調査機関名;
-    @CsvField(order = 3, name = "調査機関コード")
+    @CsvField(order = 3, name = "調査員_コード")
     private final RString 調査員_コード;
     @CsvField(order = 4, name = "調査員_氏名")
     private final RString 調査員_氏名;
-    @CsvField(order = 5, name = "調査機関コード")
+    @CsvField(order = 5, name = "依頼日")
     private final RString 依頼日;
-    @CsvField(order = 6, name = "依頼日")
+    @CsvField(order = 6, name = "調査日")
     private final RString 調査日;
     @CsvField(order = 7, name = "入手日")
     private final RString 入手日;
@@ -36,9 +36,9 @@ public class NinteiChosaHoshuShokaiCsvNoMiEntity implements IChosaHoshuShokaiCsv
     private final RString 調査_再;
     @CsvField(order = 9, name = "保険者")
     private final RString 保険者;
-    @CsvField(order = 10, name = "申請者_被保険者番号")
+    @CsvField(order = 10, name = "被保険者_被保険者番号")
     private final RString 申請者_被保険者番号;
-    @CsvField(order = 11, name = "申請者_氏名")
+    @CsvField(order = 11, name = "被保険者_氏名")
     private final RString 申請者_氏名;
     @CsvField(order = 12, name = "在宅_初")
     private final RString 在宅_初;

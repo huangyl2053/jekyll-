@@ -54,6 +54,7 @@ public class TokkiText1A4Business {
     private static final int 最大連番 = 10;
     private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
     private final ShinsakaiSiryoKyotsuEntity kyotsuEntity;
+    private final RString path;
     private final RString 特記パターン;
     private final int 最大文字数;
     private final int ページ最大表示行数;
@@ -64,13 +65,15 @@ public class TokkiText1A4Business {
      *
      * @param entity ShinsakaiSiryoKyotsuEntity
      * @param 特記情報List List<DbT5205NinteichosahyoTokkijikoEntity>
+     * @param ファイルパス ファイルパス
      */
-    public TokkiText1A4Business(ShinsakaiSiryoKyotsuEntity entity, List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
+    public TokkiText1A4Business(ShinsakaiSiryoKyotsuEntity entity, List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List, RString ファイルパス) {
         this.特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         this.最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.ページ最大表示行数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = entity;
+        this.path = ファイルパス;
         表示行数 = 0;
     }
 
@@ -364,16 +367,14 @@ public class TokkiText1A4Business {
         if (sharedFileId == null) {
             return RString.EMPTY;
         }
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(filename),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(path)).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(imagePath, filename);
     }
 
     private RString get特記事項テキスト(Code 厚労省IF識別コード, RString 調査特記事項番号, int 特記事項連番) {

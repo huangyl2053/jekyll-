@@ -79,7 +79,7 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
                 reportSourceWriter.writeLine(builder);
             }
         }
-        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
+        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517904.getReportId().value().equals(reportId)) {
             IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
             IIinShinsakaishiryoA3Builder builder1 = new IinShinsakaishiryoA3Builder(editor1);
             reportSourceWriter.writeLine(builder1);
@@ -93,7 +93,7 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
                 短冊Editor(reportSourceWriter, 短冊リスト, 短冊情報リスト);
             }
         }
-        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517916.getReportId().value().equals(reportId)) {
+        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517904.getReportId().value().equals(reportId)) {
             IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
             IIinShinsakaishiryoA3Builder builder1 = new IinShinsakaishiryoA3Builder(editor1);
             reportSourceWriter.writeLine(builder1);

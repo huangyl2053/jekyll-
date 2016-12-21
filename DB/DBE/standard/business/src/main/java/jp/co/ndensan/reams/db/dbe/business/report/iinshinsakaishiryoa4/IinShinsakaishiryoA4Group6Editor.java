@@ -70,7 +70,7 @@ public class IinShinsakaishiryoA4Group6Editor implements IIinShinsakaishiryoA4Ed
             source.hihokenshaNo = RString.EMPTY;
             source.hihokenshaName = RString.EMPTY;
         }
-        if (ReportIdDBE.DBE517905.getReportId().value().equals(reportId)) {
+        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
             source.layout = Layouts.六頁目;
         } else {
             source.layout = Layouts.五頁目;
