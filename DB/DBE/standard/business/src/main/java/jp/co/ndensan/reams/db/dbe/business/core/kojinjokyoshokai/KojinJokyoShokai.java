@@ -137,7 +137,7 @@ public class KojinJokyoShokai {
     public FlexibleDate get主治医意見書登録完了年月日() {
         return entity.getIkenshoTorokuKanryoYMD();
     }
-    
+
     /**
      * 主治医意見書作成依頼履歴番号を返します。
      *
@@ -146,8 +146,7 @@ public class KojinJokyoShokai {
     public RString get主治医意見書作成依頼履歴番号() {
         return entity.getIkenshoIraiRirekiNo();
     }
-    
-    
+
     /**
      * 認定調査依頼履歴番号を返します。
      *
@@ -246,7 +245,7 @@ public class KojinJokyoShokai {
     public Code get二次判定要介護状態区分コード() {
         return entity.getNijiHanteiYokaigoJotaiKubunCode() == null ? Code.EMPTY : entity.getNijiHanteiYokaigoJotaiKubunCode();
     }
-    
+
     /**
      * 二次判定年月日を返します。
      *
@@ -365,7 +364,7 @@ public class KojinJokyoShokai {
     public Code get要介護認定一次判定結果コード認知症加算() {
         return entity.getIchijiHanteiKekkaNinchishoKasanCode() == null ? Code.EMPTY : entity.getIchijiHanteiKekkaNinchishoKasanCode();
     }
-    
+
     /**
      * 一次判定年月日を返します。
      *
@@ -1435,5 +1434,14 @@ public class KojinJokyoShokai {
      */
     public FlexibleDate get前々回主治医意見書受領年月日() {
         return entity.getZennnoma_12() == null ? FlexibleDate.EMPTY : entity.getZennnoma_12();
+    }
+
+    /**
+     * 一次判定警告コードを返します。
+     *
+     * @return 一次判定警告コード
+     */
+    public RString get一次判定警告コード() {
+        return entity.getIchijiHnateiKeikokuCode();
     }
 }

@@ -8,7 +8,11 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -168,6 +172,78 @@ public class SonotaKikanJohoBuilder {
     public SonotaKikanJohoBuilder set廃止フラグ(boolean 廃止フラグ) {
         requireNonNull(廃止フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("廃止フラグ"));
         entity.setHaishiFlag(廃止フラグ);
+        return this;
+    }
+
+    /**
+     * 金融機関コードを設定します。
+     *
+     * @param 金融機関コード 金融機関コード
+     * @return {@link SonotaKikanJohoBuilder}
+     */
+    public SonotaKikanJohoBuilder set金融機関コード(KinyuKikanCode 金融機関コード) {
+        requireNonNull(金融機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("金融機関コード"));
+        entity.setKinyuKikanCode(金融機関コード);
+        return this;
+    }
+
+    /**
+     * 金融機関支店コードを設定します。
+     *
+     * @param 金融機関支店コード 金融機関支店コード
+     * @return {@link SonotaKikanJohoBuilder}
+     */
+    public SonotaKikanJohoBuilder set金融機関支店コード(KinyuKikanShitenCode 金融機関支店コード) {
+        requireNonNull(金融機関支店コード, UrSystemErrorMessages.値がnull.getReplacedMessage("金融機関支店コード"));
+        entity.setKinyuKikanShitenCode(金融機関支店コード);
+        return this;
+    }
+
+    /**
+     * 預金種別を設定します。
+     *
+     * @param 預金種別 預金種別
+     * @return {@link SonotaKikanJohoBuilder}
+     */
+    public SonotaKikanJohoBuilder set預金種別(RString 預金種別) {
+        requireNonNull(預金種別, UrSystemErrorMessages.値がnull.getReplacedMessage("預金種別"));
+        entity.setYokinShubetsu(預金種別);
+        return this;
+    }
+
+    /**
+     * 口座番号を設定します。
+     *
+     * @param 口座番号 口座番号
+     * @return {@link SonotaKikanJohoBuilder}
+     */
+    public SonotaKikanJohoBuilder set口座番号(RString 口座番号) {
+        requireNonNull(口座番号, UrSystemErrorMessages.値がnull.getReplacedMessage("口座番号"));
+        entity.setKozaNo(口座番号);
+        return this;
+    }
+
+    /**
+     * 口座名義人カナを設定します。
+     *
+     * @param 口座名義人カナ 口座名義人カナ
+     * @return {@link SonotaKikanJohoBuilder}
+     */
+    public SonotaKikanJohoBuilder set口座名義人カナ(AtenaKanaMeisho 口座名義人カナ) {
+        requireNonNull(口座名義人カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("口座名義人カナ"));
+        entity.setKozaMeigininKana(口座名義人カナ);
+        return this;
+    }
+
+    /**
+     * 漢字名義人を設定します。
+     *
+     * @param 漢字名義人 漢字名義人
+     * @return {@link SonotaKikanJohoBuilder}
+     */
+    public SonotaKikanJohoBuilder set漢字名義人(AtenaMeisho 漢字名義人) {
+        requireNonNull(漢字名義人, UrSystemErrorMessages.値がnull.getReplacedMessage("漢字名義人"));
+        entity.setKozaMeiginin(漢字名義人);
         return this;
     }
 

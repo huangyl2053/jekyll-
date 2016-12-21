@@ -58,5 +58,12 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxService</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-core</artifactId>
+            <version>1.6.1</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

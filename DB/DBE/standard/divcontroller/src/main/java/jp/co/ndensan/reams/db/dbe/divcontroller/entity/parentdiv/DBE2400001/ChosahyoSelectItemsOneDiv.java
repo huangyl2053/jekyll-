@@ -14,17 +14,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosahyoSelectItemsOneDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("Chkirai")
-    private CheckBoxList Chkirai;
-    @JsonProperty("ChkchosaOcr")
-    private CheckBoxList ChkchosaOcr;
+    @JsonProperty("chkChosaIrai")
+    private CheckBoxList chkChosaIrai;
+    @JsonProperty("chkChosaOcr")
+    private CheckBoxList chkChosaOcr;
+    @JsonProperty("chkTokkiOcr")
+    private CheckBoxList chkTokkiOcr;
     @JsonProperty("chkNinteiChosahyoSonota")
     private CheckBoxList chkNinteiChosahyoSonota;
 
@@ -35,39 +37,57 @@ public class ChosahyoSelectItemsOneDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getChkirai
-     * @return Chkirai
+     * getchkChosaIrai
+     * @return chkChosaIrai
      */
-    @JsonProperty("Chkirai")
-    public CheckBoxList getChkirai() {
-        return Chkirai;
+    @JsonProperty("chkChosaIrai")
+    public CheckBoxList getChkChosaIrai() {
+        return chkChosaIrai;
     }
 
     /*
-     * setChkirai
-     * @param Chkirai Chkirai
+     * setchkChosaIrai
+     * @param chkChosaIrai chkChosaIrai
      */
-    @JsonProperty("Chkirai")
-    public void setChkirai(CheckBoxList Chkirai) {
-        this.Chkirai = Chkirai;
+    @JsonProperty("chkChosaIrai")
+    public void setChkChosaIrai(CheckBoxList chkChosaIrai) {
+        this.chkChosaIrai = chkChosaIrai;
     }
 
     /*
-     * getChkchosaOcr
-     * @return ChkchosaOcr
+     * getchkChosaOcr
+     * @return chkChosaOcr
      */
-    @JsonProperty("ChkchosaOcr")
-    public CheckBoxList getChkchosaOcr() {
-        return ChkchosaOcr;
+    @JsonProperty("chkChosaOcr")
+    public CheckBoxList getChkChosaOcr() {
+        return chkChosaOcr;
     }
 
     /*
-     * setChkchosaOcr
-     * @param ChkchosaOcr ChkchosaOcr
+     * setchkChosaOcr
+     * @param chkChosaOcr chkChosaOcr
      */
-    @JsonProperty("ChkchosaOcr")
-    public void setChkchosaOcr(CheckBoxList ChkchosaOcr) {
-        this.ChkchosaOcr = ChkchosaOcr;
+    @JsonProperty("chkChosaOcr")
+    public void setChkChosaOcr(CheckBoxList chkChosaOcr) {
+        this.chkChosaOcr = chkChosaOcr;
+    }
+
+    /*
+     * getchkTokkiOcr
+     * @return chkTokkiOcr
+     */
+    @JsonProperty("chkTokkiOcr")
+    public CheckBoxList getChkTokkiOcr() {
+        return chkTokkiOcr;
+    }
+
+    /*
+     * setchkTokkiOcr
+     * @param chkTokkiOcr chkTokkiOcr
+     */
+    @JsonProperty("chkTokkiOcr")
+    public void setChkTokkiOcr(CheckBoxList chkTokkiOcr) {
+        this.chkTokkiOcr = chkTokkiOcr;
     }
 
     /*

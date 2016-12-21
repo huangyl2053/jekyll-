@@ -55,7 +55,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
     private final RString 画面モード_2 = new RString("2");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString NAME_被保険者番号 = new RString("被保険者番号");
-    private static final RString 帳票分類ID = new RString("DBD522002_NinteiEnkiTsuchishoHakkoIchiranhyo");
+    private static final RString 帳票分類ID = new RString("DBD522001_YokaigoNinteiEnkiTshuchisho");
 
     private final NinteiEnkiTsuchishoHakkoDiv div;
 

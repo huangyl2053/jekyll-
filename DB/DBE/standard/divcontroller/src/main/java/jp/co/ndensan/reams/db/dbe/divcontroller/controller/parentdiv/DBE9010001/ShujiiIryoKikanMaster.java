@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -89,6 +90,27 @@ public class ShujiiIryoKikanMaster {
     public ResponseData<ShujiiIryoKikanMasterDiv> onLoad(ShujiiIryoKikanMasterDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, true);
         getHandler(div).clearKensakuJoken();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 状態変更に従って、保存ボタンを制御する。
+     *
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onStateChange(ShujiiIryoKikanMasterDiv div) {
+        boolean changeFlag = Boolean.FALSE;
+        for (dgShujiiIchiran_Row row : div.getShujiiIchiran().getDgShujiiIchiran().getDataSource()) {
+            if (!row.getJotai().isEmpty() && !row.getJotai().isNull()) {
+                changeFlag = Boolean.TRUE;
+            }
+        }
+        if (changeFlag) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), Boolean.FALSE);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), Boolean.TRUE);
+        }
         return ResponseData.of(div).respond();
     }
 
