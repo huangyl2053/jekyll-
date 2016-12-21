@@ -92,17 +92,17 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.set総頁(entity.getCount() / PAGECOUNT);
         }
-        if (!entity.get被保険者区分().isEmpty()) {
+        if (entity.get被保険者区分() != null && !entity.get被保険者区分().isEmpty()) {
             entity.set被保険者区分(HihokenshaKubunCode.toValue(entity.get被保険者区分()).get略称());
         } else {
             entity.set被保険者区分(RString.EMPTY);
         }
-        if (!entity.get認定申請区分_申請時().isEmpty()) {
+        if (entity.get認定申請区分_申請時() != null && !entity.get認定申請区分_申請時().isEmpty()) {
             entity.set認定申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時()).get略称());
         } else {
             entity.set認定申請区分_申請時(RString.EMPTY);
         }
-        if (!entity.get認定申請区分_法令().isEmpty()) {
+        if (entity.get認定申請区分_法令() != null && !entity.get認定申請区分_法令().isEmpty()) {
             entity.set認定申請区分_法令(NinteiShinseiHoreiCode.toValue(entity.get認定申請区分_法令()).get略称());
         } else {
             entity.set認定申請区分_法令(RString.EMPTY);
@@ -116,7 +116,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.setTb_一次判定結果(RString.EMPTY);
         }
-        if (!entity.getTb_二次判定要介護状態区分().isEmpty()) {
+        if (entity.getTb_二次判定要介護状態区分() != null && !entity.getTb_二次判定要介護状態区分().isEmpty()) {
             entity.setTb_二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.getTb_二次判定要介護状態区分()).get名称());
         } else {
             entity.setTb_二次判定要介護状態区分(RString.EMPTY);
@@ -130,17 +130,17 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.set一次判定結果(RString.EMPTY);
         }
-        if (!entity.get二次判定要介護状態区分().isEmpty()) {
+        if (entity.get二次判定要介護状態区分() != null && !entity.get二次判定要介護状態区分().isEmpty()) {
             entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get名称());
         } else {
             entity.set二次判定要介護状態区分(RString.EMPTY);
         }
-        if (!entity.get要介護状態像例コード().isEmpty()) {
+        if (entity.get要介護状態像例コード() != null && !entity.get要介護状態像例コード().isEmpty()) {
             entity.set状態像内容(YokaigoJotaizoReiCode.toValue(entity.get要介護状態像例コード()).get名称());
         } else {
             entity.set状態像内容(RString.EMPTY);
         }
-        if (!entity.get二号特定疾病コード().isEmpty()) {
+        if (entity.get二号特定疾病コード() != null && !entity.get二号特定疾病コード().isEmpty()) {
             entity.set二号特定疾病内容(new RString(TokuteiShippei.toValue(entity.get二号特定疾病コード()).toString()));
         } else {
             entity.set二号特定疾病内容(RString.EMPTY);
