@@ -97,6 +97,7 @@ public class IraishoIkkatsuHakkoBusiness {
     private static final RString SHUJIIIKENSHOSAKUSEIIRAISHO = new RString("【主治医意見書作成依頼書出力区分】");
     private static final RString IKENSHOKINYUU = new RString("【主治医意見書記入用紙出力区分】");
     private static final RString IKENSHOKINYUUOCR = new RString("【主治医意見書記入用紙OCR出力区分】");
+    private static final RString IKENSHOKINYUUDESIGN = new RString("【主治医意見書記入用紙（デザイン用紙）出力区分】");
     private static final RString IKENSHOSAKUSEISEIKYUUSHO = new RString("【主治医意見書作成料請求書出力区分】");
     private static final RString IKENSHOTEISHUTU = new RString("【介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分】");
     private final ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity;
@@ -106,8 +107,10 @@ public class IraishoIkkatsuHakkoBusiness {
     /**
      * コンストラクタです。
      *
-     * @param entity DBより取得した{@link ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity}
-     * @param processParamter DBより取得した{@link ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter}
+     * @param entity
+     * DBより取得した{@link ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity}
+     * @param processParamter
+     * DBより取得した{@link ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter}
      */
     public IraishoIkkatsuHakkoBusiness(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity,
             ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter) {
@@ -748,11 +751,11 @@ public class IraishoIkkatsuHakkoBusiness {
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(IRAIFROMYMD);
-        builder.append(processParamter.getIraiFromYMD());
+        builder.append(ConvertDate(processParamter.getIraiFromYMD()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IRAITOYMD);
-        builder.append(processParamter.getIraiToYMD());
+        builder.append(ConvertDate(processParamter.getIraiToYMD()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(SHUJIIIKENSHOSAKUSEIIRAI);
@@ -782,15 +785,15 @@ public class IraishoIkkatsuHakkoBusiness {
         }
         builder = new RStringBuilder();
         builder.append(HAKKOBI);
-        builder.append(processParamter.getHakkobi());
+        builder.append(ConvertDate(processParamter.getHakkobi()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TEISHUTSUKIGEN);
-        builder.append(processParamter.getTeishutsuKigen());
+        builder.append(ConvertDate(processParamter.getTeishutsuKigen()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(KYOTSUHIZUKE);
-        builder.append(processParamter.getKyotsuHizuke());
+        builder.append(ConvertDate(processParamter.getKyotsuHizuke()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOSAKUSEIIRAI);
@@ -811,6 +814,9 @@ public class IraishoIkkatsuHakkoBusiness {
         builder = new RStringBuilder();
         builder.append(IKENSHOKINYUUOCR);
         builder.append(processParamter.isIkenshoKinyuuOCR());
+        builder = new RStringBuilder();
+        builder.append(IKENSHOKINYUUDESIGN);
+        builder.append(processParamter.isIkenshoKinyuuDesign());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOSAKUSEISEIKYUUSHO);
@@ -830,6 +836,13 @@ public class IraishoIkkatsuHakkoBusiness {
                 csv出力有無,
                 csvファイル名,
                 出力条件);
+    }
+
+    private RString ConvertDate(RString date) {
+        if (RString.isNullOrEmpty(date) || FlexibleDate.canConvert(date)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(date).wareki().toDateString();
     }
 
     /**
@@ -862,5 +875,42 @@ public class IraishoIkkatsuHakkoBusiness {
             item.setIkenshoSakuseiKaisuKubun(new Code(entity.get意見書作成回数区分()));
         }
         return new IkenshoirairirekiIchiran(item);
+    }
+
+    /**
+     * 主治医意見書記入用紙データを作成するメッソドです。
+     *
+     * @return IkenshoirairirekiIchiran
+     */
+    public IkenshokinyuyoshiBusiness create記入用紙() {
+        IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
+        List<RString> 保険者番号リスト = get被保険者番号(entity.get証記載保険者番号());
+        List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
+        item.setHokenshaNo1(保険者番号リスト.get(0));
+        item.setHokenshaNo2(保険者番号リスト.get(1));
+        item.setHokenshaNo3(保険者番号リスト.get(2));
+        item.setHokenshaNo4(保険者番号リスト.get(INT3));
+        item.setHokenshaNo5(保険者番号リスト.get(INT4));
+        item.setHokenshaNo6(保険者番号リスト.get(INT5));
+        item.setHihokenshaNo1(被保険者番号リスト.get(0));
+        item.setHihokenshaNo2(被保険者番号リスト.get(1));
+        item.setHihokenshaNo3(被保険者番号リスト.get(2));
+        item.setHihokenshaNo4(被保険者番号リスト.get(INT3));
+        item.setHihokenshaNo5(被保険者番号リスト.get(INT4));
+        item.setHihokenshaNo6(被保険者番号リスト.get(INT5));
+        item.setHihokenshaNo7(被保険者番号リスト.get(INT6));
+        item.setHihokenshaNo8(被保険者番号リスト.get(INT7));
+        item.setHihokenshaNo9(被保険者番号リスト.get(INT8));
+        item.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        item.setHihokenshaTel(entity.get電話番号());
+        RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
+                .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
+        item.setShinseiYY2(ninteiShinseiDay.substring(2, INT3));
+        item.setShinseiMM1(ninteiShinseiDay.substring(INT4, INT5));
+        item.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
+        item.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
+        item.setShinseiDD2(ninteiShinseiDay.substring(INT8));
+        return item;
     }
 }
