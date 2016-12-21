@@ -409,6 +409,7 @@ public class NinteiChosaIrai {
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor調査員情報(
                 保険者番号, 支所コード, chosaItakusakiCode);
         List<NinnteiChousairaiBusiness> 調査員情報一覧 = NinnteiChousairaiFinder.createInstance().get調査員(parameter);
+        handler.reset委託先基本情報();
         handler.set調査員情報一覧(調査員情報一覧, row);
         setData(null, handler);
         return ResponseData.of(div).setState(DBE2200001StateName.委託先選択後);
@@ -600,6 +601,12 @@ public class NinteiChosaIrai {
         if (checkList.contains(CHKNAME_特記事項デザイン用紙)) {
             call認定調査票_特記事項(ninteiChosaIraiPrintService, handler);
         }
+        if (checkList.contains(CHKNAME_認定調査票OCR)) {
+            call認定調査票_OCR(ninteiChosaIraiPrintService, handler);
+        }
+        if (checkList.contains(CHKNAME_特記事項OCR)) {
+            call認定調査票OCR_特記事項(ninteiChosaIraiPrintService, handler);
+        }
         if (checkList.contains(CHKNAME_特記事項_項目有り)) {
             call認定調査票_特記事項_項目有り(div, ninteiChosaIraiPrintService, handler);
         }
@@ -609,12 +616,6 @@ public class NinteiChosaIrai {
         if (checkList.contains(CHKNAME_特記事項_項目フリータイプ)) {
             call認定調査票_特記事項_フリータイプ(div, ninteiChosaIraiPrintService, handler);
         }
-        if (checkList.contains(CHKNAME_認定調査票OCR)) {
-            call認定調査票_OCR(ninteiChosaIraiPrintService, handler);
-        }
-        if (checkList.contains(CHKNAME_特記事項OCR)) {
-            call認定調査票OCR_特記事項(ninteiChosaIraiPrintService, handler);
-        }
         if (checkList.contains(CHKNAME_差異チェック票)) {
             call認定調査差異チェック表(ninteiChosaIraiPrintService, handler);
         }
@@ -623,19 +624,21 @@ public class NinteiChosaIrai {
         }
     }
 
-    private void call概況特記(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
-        ninteiChosaIraiPrintService.print概況特記(handler.create概況特記_パラメータ());
+    private void call認定調査票_デザイン用紙(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
+        RDate date = RDate.getNowDate();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            ninteiChosaIraiPrintService.print認定調査票_デザイン用紙片面(handler.create認定調査票_概況調査_基本調査パラメータ());
+        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            ninteiChosaIraiPrintService.print認定調査票_デザイン用紙両面(handler.create認定調査票_概況調査_基本調査パラメータ());
+        }
     }
 
-    private void call認定調査差異チェック表(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
-        RDate date = RDate.getNowDate();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(handler.create調査票差異チェック票_DBE292001パラメータ());
-        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面右(handler.create調査票差異チェック票_DBE292004パラメータ());
-        } else if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面左(handler.create調査票差異チェック票_DBE292004パラメータ());
-        }
+    private void call認定調査票_特記事項(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
+        ninteiChosaIraiPrintService.print認定調査票_特記事項_デザイン用紙(handler.create認定調査票_特記事項パラメータ(false));
+    }
+
+    private void call概況特記(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
+        ninteiChosaIraiPrintService.print概況特記(handler.create概況特記_パラメータ());
     }
 
     private void call認定調査票_OCR(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
@@ -658,19 +661,6 @@ public class NinteiChosaIrai {
                 ninteiChosaIraiPrintService.print認定調査票_特記事項_OCR両面(handler.create認定調査票_特記事項パラメータ(true));
             }
         }
-    }
-
-    private void call認定調査票_デザイン用紙(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
-        RDate date = RDate.getNowDate();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            ninteiChosaIraiPrintService.print認定調査票_デザイン用紙片面(handler.create認定調査票_概況調査_基本調査パラメータ());
-        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            ninteiChosaIraiPrintService.print認定調査票_デザイン用紙両面(handler.create認定調査票_概況調査_基本調査パラメータ());
-        }
-    }
-
-    private void call認定調査票_特記事項(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
-        ninteiChosaIraiPrintService.print認定調査票_特記事項_デザイン用紙(handler.create認定調査票_特記事項パラメータ(false));
     }
 
     private void call認定調査票_特記事項_項目有り(NinteiChosaIraiDiv div,
@@ -701,6 +691,17 @@ public class NinteiChosaIrai {
         }
     }
 
+    private void call認定調査差異チェック表(NinteiChosaIraiPrintService ninteiChosaIraiPrintService, NinteiChosaIraiHandler handler) {
+        RDate date = RDate.getNowDate();
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(handler.create調査票差異チェック票_DBE292001パラメータ());
+        } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面右(handler.create調査票差異チェック票_DBE292004パラメータ());
+        } else if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面左(handler.create調査票差異チェック票_DBE292004パラメータ());
+        }
+    }
+
     private void updateNinteichosaIraiJohoForPrint(NinteiChosaIraiDiv div) {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         NinnteiChousairaiFinder ninnteiChousairaiFinder = NinnteiChousairaiFinder.createInstance();
@@ -724,8 +725,10 @@ public class NinteiChosaIrai {
                 } else if (設定方法.equals(認定調査期限設定方法) && 提出期限_2.equals(提出期限)) {
                     認定調査期限年月日 = new FlexibleDate(div.getTxtkigenymd().getValue().toDateString());
                 }
-                認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set依頼書出力年月日(発行日)
-                        .set認定調査期限年月日(認定調査期限年月日).build();
+                認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
+                        .set依頼書出力年月日(発行日)
+                        .set認定調査期限年月日(認定調査期限年月日)
+                        .build();
                 ninteichosaIraiJohoManager.save認定調査依頼情報(認定調査依頼情報.modifiedModel());
             } else {
                 認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set依頼書出力年月日(発行日)

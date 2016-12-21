@@ -14,17 +14,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosahyoSelectItemsTwoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("Chkchosa")
-    private CheckBoxList Chkchosa;
-    @JsonProperty("ChkchosaSonota")
-    private CheckBoxList ChkchosaSonota;
+    @JsonProperty("chkChosaDesign")
+    private CheckBoxList chkChosaDesign;
+    @JsonProperty("chkTokkiDesign")
+    private CheckBoxList chkTokkiDesign;
+    @JsonProperty("chkSaiCheck")
+    private CheckBoxList chkSaiCheck;
+    @JsonProperty("chkGaikyoTokki")
+    private CheckBoxList chkGaikyoTokki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +37,75 @@ public class ChosahyoSelectItemsTwoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getChkchosa
-     * @return Chkchosa
+     * getchkChosaDesign
+     * @return chkChosaDesign
      */
-    @JsonProperty("Chkchosa")
-    public CheckBoxList getChkchosa() {
-        return Chkchosa;
+    @JsonProperty("chkChosaDesign")
+    public CheckBoxList getChkChosaDesign() {
+        return chkChosaDesign;
     }
 
     /*
-     * setChkchosa
-     * @param Chkchosa Chkchosa
+     * setchkChosaDesign
+     * @param chkChosaDesign chkChosaDesign
      */
-    @JsonProperty("Chkchosa")
-    public void setChkchosa(CheckBoxList Chkchosa) {
-        this.Chkchosa = Chkchosa;
+    @JsonProperty("chkChosaDesign")
+    public void setChkChosaDesign(CheckBoxList chkChosaDesign) {
+        this.chkChosaDesign = chkChosaDesign;
     }
 
     /*
-     * getChkchosaSonota
-     * @return ChkchosaSonota
+     * getchkTokkiDesign
+     * @return chkTokkiDesign
      */
-    @JsonProperty("ChkchosaSonota")
-    public CheckBoxList getChkchosaSonota() {
-        return ChkchosaSonota;
+    @JsonProperty("chkTokkiDesign")
+    public CheckBoxList getChkTokkiDesign() {
+        return chkTokkiDesign;
     }
 
     /*
-     * setChkchosaSonota
-     * @param ChkchosaSonota ChkchosaSonota
+     * setchkTokkiDesign
+     * @param chkTokkiDesign chkTokkiDesign
      */
-    @JsonProperty("ChkchosaSonota")
-    public void setChkchosaSonota(CheckBoxList ChkchosaSonota) {
-        this.ChkchosaSonota = ChkchosaSonota;
+    @JsonProperty("chkTokkiDesign")
+    public void setChkTokkiDesign(CheckBoxList chkTokkiDesign) {
+        this.chkTokkiDesign = chkTokkiDesign;
+    }
+
+    /*
+     * getchkSaiCheck
+     * @return chkSaiCheck
+     */
+    @JsonProperty("chkSaiCheck")
+    public CheckBoxList getChkSaiCheck() {
+        return chkSaiCheck;
+    }
+
+    /*
+     * setchkSaiCheck
+     * @param chkSaiCheck chkSaiCheck
+     */
+    @JsonProperty("chkSaiCheck")
+    public void setChkSaiCheck(CheckBoxList chkSaiCheck) {
+        this.chkSaiCheck = chkSaiCheck;
+    }
+
+    /*
+     * getchkGaikyoTokki
+     * @return chkGaikyoTokki
+     */
+    @JsonProperty("chkGaikyoTokki")
+    public CheckBoxList getChkGaikyoTokki() {
+        return chkGaikyoTokki;
+    }
+
+    /*
+     * setchkGaikyoTokki
+     * @param chkGaikyoTokki chkGaikyoTokki
+     */
+    @JsonProperty("chkGaikyoTokki")
+    public void setChkGaikyoTokki(CheckBoxList chkGaikyoTokki) {
+        this.chkGaikyoTokki = chkGaikyoTokki;
     }
 
     // </editor-fold>

@@ -47,6 +47,8 @@ public class NinteiChosaTokkiImageEditor implements INinteiChosaTokkiImageEditor
     private static final int 連番_22 = 22;
     private static final int 連番_23 = 23;
     private static final int 連番_24 = 24;
+    private static final RString 一枚目 = new RString("0");
+    private static final RString 二枚目以降 = new RString("1");
 
     /**
      * インスタンスを生成します。
@@ -118,8 +120,11 @@ public class NinteiChosaTokkiImageEditor implements INinteiChosaTokkiImageEditor
         source.tokki22 = getイメージ03(item.get特記事項リストイメージ(), 連番_22);
         source.tokki23 = getイメージ03(item.get特記事項リストイメージ(), 連番_23);
         source.tokki24 = getイメージ03(item.get特記事項リストイメージ(), 連番_24);
+        source.gaikyotokkiImg = item.get概況特記事項イメージ();
+        source.gaikyotokkiText = item.get概況特記事項テキスト();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        source.layout = getレイアウト();
         return source;
     }
 
@@ -149,5 +154,12 @@ public class NinteiChosaTokkiImageEditor implements INinteiChosaTokkiImageEditor
             return 区分.get(連番 - 1 + 連番_24 * (indexpage - 1));
         }
         return RString.EMPTY;
+    }
+
+    private RString getレイアウト() {
+        if (indexpage == 1) {
+            return 一枚目;
+        }
+        return 二枚目以降;
     }
 }

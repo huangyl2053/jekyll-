@@ -59,6 +59,31 @@ public class DbT5209NinteichosahyoKinyuItemDac implements ISaveable<DbT5209Ninte
     }
 
     /**
+     * 申請書管理番号, 認定調査依頼履歴番号で認定調査票_概況調査_記入項目を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return DbT5209NinteichosahyoKinyuItemEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5209NinteichosahyoKinyuItemEntity> select記入項目(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5209NinteichosahyoKinyuItem.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号))).
+                toList(DbT5209NinteichosahyoKinyuItemEntity.class);
+    }
+
+    /**
      * 認定調査票_概況調査_記入項目を全件返します。
      *
      * @return DbT5209NinteichosahyoKinyuItemEntityの{@code list}

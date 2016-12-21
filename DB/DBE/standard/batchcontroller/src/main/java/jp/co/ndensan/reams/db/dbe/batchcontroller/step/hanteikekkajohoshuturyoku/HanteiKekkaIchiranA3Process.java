@@ -44,7 +44,6 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getHanteiKekkaIchiranA3List");
     private static final RString REPORTNAME = new RString("認定審査会　判定結果一覧");
-    private static final int PAGECOUNT = 15;
     private static final RString 一次判定結果_認知症加算_1 = new RString("1");
     private static final RString 一次判定結果_認知症加算_2 = new RString("2");
     private static final RString 一次判定結果_認知症加算_3 = new RString("3");
@@ -82,16 +81,6 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         entity.setTitle(REPORTNAME);
         entity.setPrintTimeStamp(システム時刻);
         index = index + 1;
-        if (index % PAGECOUNT > 0) {
-            entity.set当前頁((index - (index % PAGECOUNT)) / PAGECOUNT + 1);
-        } else {
-            entity.set当前頁(index / PAGECOUNT);
-        }
-        if (entity.getCount() % PAGECOUNT > 0) {
-            entity.set総頁((entity.getCount() - (entity.getCount() % PAGECOUNT)) / PAGECOUNT + 1);
-        } else {
-            entity.set総頁(entity.getCount() / PAGECOUNT);
-        }
         if (entity.get被保険者区分() != null && !entity.get被保険者区分().isEmpty()) {
             entity.set被保険者区分(HihokenshaKubunCode.toValue(entity.get被保険者区分()).get略称());
         } else {

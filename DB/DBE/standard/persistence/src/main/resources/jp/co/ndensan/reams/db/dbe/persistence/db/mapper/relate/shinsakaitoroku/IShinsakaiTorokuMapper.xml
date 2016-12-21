@@ -149,4 +149,63 @@
     <result property="gogitaiMei"  column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
    </resultMap>
 
+    <resultMap id="resultMap_ShinsakaiKaisaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity" autoMapping="true">
+        <result property="shinsakaiKaisaiYoteiYMD" column="shinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKaishiYoteiTime" column="shinsakaiKaisaiYoteiJoho_shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合議体名称" column="合議体名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gogitaiMei" column="gogitaiJoho_gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="種類" column="種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiBashoName" column="shinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiWariateZumiNinzu" column="shinsakaiKaisaiYoteiJoho_shinsakaiWariateZumiNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shinsakaiYoteiTeiin" column="shinsakaiKaisaiYoteiJoho_shinsakaiYoteiTeiin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gogitaiDummyFlag" column="gogitaiJoho_gogitaiDummyFlag"/>
+        <result property="合議体番号" column="gogitaiJoho_gogitaiNo"/>
+        <result property="最大審査順" column="wariateJoho_shinsakaiOrder"/>    
+    </resultMap>
+    
+    <select resultOrdered="true" id="get審査会一覧"
+            resultMap="resultMap_ShinsakaiKaisaiRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter" fetchSize="500">
+        SELECT
+                shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiYMD",
+                shinsakaiKaisaiYoteiJoho."shinsakaiKaishiYoteiTime" AS "shinsakaiKaisaiYoteiJoho_shinsakaiKaishiYoteiTime",
+                gogitaiJoho."gogitaiNo" AS gogitaiJoho_gogitaiNo,
+                '第'||shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"||'回審査会' AS 合議体名称,
+                gogitaiJoho."gogitaiMei" AS "gogitaiJoho_gogitaiMei",
+                CASE WHEN gogitaiJoho."gogitaiSeishinkaSonzaiFlag" = True 
+                THEN '精' ELSE '' END AS 種類,
+                shinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoName",
+                shinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu" AS "shinsakaiKaisaiYoteiJoho_shinsakaiWariateZumiNinzu",
+                shinsakaiKaisaiYoteiJoho."shinsakaiYoteiTeiin" AS "shinsakaiKaisaiYoteiJoho_shinsakaiYoteiTeiin",
+                gogitaiJoho."gogitaiDummyFlag" AS "gogitaiJoho_gogitaiDummyFlag",
+                wariateJoho."shinsakaiOrder" AS wariateJoho_shinsakaiOrder
+        FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS shinsakaiKaisaiYoteiJoho
+        INNER JOIN rgdb."DbT5591GogitaiJoho" AS gogitaiJoho
+                ON gogitaiJoho."gogitaiNo" = shinsakaiKaisaiYoteiJoho."gogitaiNo"
+               AND gogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+               AND gogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+        LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS shinsakaiKaisaiKekkaJoho
+                ON shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS shinsakaiKaisaiBashoJoho
+                ON shinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
+        LEFT JOIN (
+                SELECT * FROM rgdb."DbT5502ShinsakaiWariateJoho" AS "mst"
+                WHERE NOT EXISTS (SELECT 'X'
+                FROM rgdb."DbT5502ShinsakaiWariateJoho" AS "slv"
+		WHERE "mst"."shinsakaiKaisaiNo" = "slv"."shinsakaiKaisaiNo"
+		AND "mst"."shinsakaiOrder" <![CDATA[<]]> "slv"."shinsakaiOrder")) AS wariateJoho
+                ON wariateJoho."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        WHERE shinsakaiKaisaiYoteiJoho."isDeleted" = false
+                AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{表示期間From}
+         	AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{表示期間To}
+                AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0'
+                AND shinsakaiKaisaiYoteiJoho."shinsakaiYoteiTeiin" <![CDATA[>]]> shinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu"
+        <if test="is開催予定登録OR対象者割付">
+            <if test="is表示しない">
+                AND gogitaiJoho."gogitaiDummyFlag" = false
+            </if>
+        </if>
+        ORDER BY shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" DESC, shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        LIMIT #{saidaiHyojiKensu}
+    </select>
 </mapper>

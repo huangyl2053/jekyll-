@@ -35,6 +35,7 @@
         <result property="koroshoIfShikibetsuCode" column="DbT5101Nintei_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ichijiHanteiKekkaCode" column="DbT5116Ichiji_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ichijiHanteiYMD" column="DbT5116Ichiji_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ichijiHnateiKeikokuCode" column="DbT4116Ichiji_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shoriJotaiKubun" column="DbT5101Nintei_shoriJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="shujiiIryokikanCode" column="DbT5911_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeisho" column="DbT5911_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -194,6 +195,7 @@
             DbT5116Ichiji."ichijiHanteiKekkaCode" AS "DbT5116Ichiji_ichijiHanteiKekkaCode",
             DbT5116Ichiji."ichijiHanteiYMD" AS "DbT5116Ichiji_ichijiHanteiYMD",
             DbT5116Ichiji."ichijiHanteiKekkaNinchishoKasanCode" AS "DbT5116Ichiji_ichijiHanteiKekkaNinchishoKasanCode",
+            DbT4116Ichiji."ichijiHnateiKeikokuCode" AS "DbT4116Ichiji_ichijiHnateiKeikokuCode",
             DbT5101Nintei."shoriJotaiKubun" AS "DbT5101Nintei_shoriJotaiKubun",
             DbT5911."shujiiIryokikanCode" AS "DbT5911_shujiiIryokikanCode",
             DbT5911."iryoKikanMeisho" AS "DbT5911_iryoKikanMeisho",
@@ -221,6 +223,9 @@
             LEFT JOIN
                 rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116Ichiji
             ON  DbT5116Ichiji."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
+           LEFT JOIN
+                rgdb."DbT4116IchijiHanteiKekkaJoho" AS DbT4116Ichiji
+            ON  DbT4116Ichiji."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
             INNER JOIN
                 rgdb."DbT7051KoseiShichosonMaster" AS DbT7051Kosei
             ON  DbT7051Kosei."shoKisaiHokenshaNo" = DbT5101Nintei."shoKisaiHokenshaNo"

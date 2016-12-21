@@ -233,6 +233,7 @@ public class KojinJokyoShokaiHandler {
     private void set一次判定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {
 //<<<<<<< HEAD
         div.getTxtIchijiHantei().setValue(kojinJokyoShokaiList.get(0).get一次判定結果名称());
+        div.getTxtIchijiHanteiKeikokuCode().setValue(kojinJokyoShokaiList.get(0).get一次判定警告コード());
 //=======
 //        RString 一次判定結果 = RString.EMPTY;
 //        RString 一次判定結果認知症加算 = RString.EMPTY;

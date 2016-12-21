@@ -189,7 +189,7 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
         }
         div.getCcdShinseiTodokedesha().initialize(model);
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(
-                今回情報.get主治医医療機関情報().get市町村コード(), 申請書管理番号, SubGyomuCode.DBD介護受給, 今回情報.get主治医医療機関情報().get主治医医療機関コード(),
+                今回情報.get主治医医療機関情報().get市町村コード(), 申請書管理番号, SubGyomuCode.DBD介護受給, 今回情報.get主治医医療機関情報().get主治医医療機関コード().getColumnValue(),
                 今回情報.get主治医医療機関情報().get医療機関名称(), 今回情報.get主治医情報().get主治医コード(), 今回情報.get主治医情報().get主治医氏名());
         div.getCcdShujiiIryokikanAndShujiiInput().setShiteii(今回情報.get要介護認定申請情報().is指定医フラグ());
         div.getCcdChosaItakusakiAndChosainInput().setHdnShichosonCode(今回情報.get認定調査委託先情報().get市町村コード().value());

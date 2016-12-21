@@ -1,5 +1,8 @@
 package jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokkiimage;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -118,6 +121,10 @@ public class NinteiChosaTokkiImageReportSource implements IReportSource {
     public RString tokki16;
     @ReportItem(name = "tokki24", order = 51)
     public RString tokki24;
+    @ReportItem(name = "gaikyotokkiImg", order = 52)
+    public RString gaikyotokkiImg;
+    @ReportItem(name = "gaikyotokkiText", order = 53)
+    public RString gaikyotokkiText;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -128,4 +135,15 @@ public class NinteiChosaTokkiImageReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hihokennshaNo;
+
+    //レイアウトブレイク用フィールド
+    @ReportItem(name = "layout", order = 999)
+    public RString layout;
+
+    //レイアウトブレイク用キーの一覧です。
+    public static final List<RString> LAYOUT_BREAK_KEYS;
+
+    static {
+        LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
+    }
 }

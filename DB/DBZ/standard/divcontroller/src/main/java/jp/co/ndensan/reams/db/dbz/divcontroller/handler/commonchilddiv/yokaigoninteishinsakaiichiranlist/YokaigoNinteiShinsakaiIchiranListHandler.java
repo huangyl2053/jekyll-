@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNin
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * {@link YokaigoNinteiShinsakaiIchiranListDiv}のHandlerクラスです。
@@ -91,11 +93,12 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     /**
      * 「検索する」ボタン押下処理です。
      *
-     * @param 審査会一覧 List<ShinsakaiKaisai>
+     * @param 審査会一覧 SearchResult<ShinsakaiKaisai>
+     * @param 最大表示件数 Decimal
      */
-    public void set審査会委員一覧(List<ShinsakaiKaisai> 審査会一覧) {
+    public void set審査会委員一覧(SearchResult<ShinsakaiKaisai> 審査会一覧, Decimal 最大表示件数) {
         List<dgShinsakaiIchiran_Row> list = new ArrayList<>();
-        for (ShinsakaiKaisai shinsakaiKaisai : 審査会一覧) {
+        for (ShinsakaiKaisai shinsakaiKaisai : 審査会一覧.records()) {
             dgShinsakaiIchiran_Row row = new dgShinsakaiIchiran_Row();
             row.getKaisaiYoteiDate().setValue(shinsakaiKaisai.get介護認定審査会開催予定年月日());
             row.getYoteiKaishiTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会開始予定時刻()));
@@ -127,6 +130,13 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             list.add(row);
         }
         div.getDgShinsakaiIchiran().setDataSource(list);
+        if (審査会一覧.exceedsLimit()) {
+            div.getDgShinsakaiIchiran().getGridSetting().setLimitRowCount(審査会一覧.records().size());
+            div.getDgShinsakaiIchiran().getGridSetting().setSelectedRowCount(審査会一覧.totalCount());
+        } else {
+            div.getDgShinsakaiIchiran().getGridSetting().setLimitRowCount(最大表示件数.intValue());
+            div.getDgShinsakaiIchiran().getGridSetting().setSelectedRowCount(審査会一覧.totalCount());
+        }
     }
 
     /**
@@ -186,7 +196,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             for (dgShinsakaiIchiran_Row row : rowList) {
                 if (row.getId() == Integer.valueOf(div.getHdnSelectedGridLine().toString())) {
                     ShinsakaiKaisai shinsakaiKaisai = new ShinsakaiKaisai();
-                    shinsakaiKaisai = shinsakaiKaisai.createBuilderForEdit().set介護認定審査会開催予定年月日(row.getKaisaiYoteiDate().getValue())
+                    shinsakaiKaisai = shinsakaiKaisai.createBuilderForEdit()
+                            .set介護認定審査会開催予定年月日(row.getKaisaiYoteiDate().getValue())
                             .set介護認定審査会開始予定時刻(new RString(row.getYoteiKaishiTime().getValue().toString()))
                             .set介護認定審査会終了予定時刻(new RString(row.getYoteiShuryoTime().getValue().toString()))
                             .set編集合議体名称(row.getShinsakaiMeisho())

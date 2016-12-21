@@ -364,4 +364,9 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     public RString get被保険者番号() {
         return this.getTxtHihokenshaNo().getValue();
     }
+
+    @Override
+    public RString get申請区分申請時() {
+        return this.getTxtShinseiKubunShinseiji().getValue();
+    }
 }

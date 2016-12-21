@@ -23,8 +23,6 @@ public class HanteiKekkaIchiranEntity {
     private RString title;
     private RString 出力対象;
     private RDateTime printTimeStamp;
-    private int 当前頁;
-    private int 総頁;
     private int no;
     private int 介護認定審査会審査順;
     private RString 市町村名称;
@@ -48,5 +46,4 @@ public class HanteiKekkaIchiranEntity {
     private RString 二号特定疾病コード;
     private RString 二号特定疾病内容;
     private RString 介護認定審査会意見;
-    private int count;
 }

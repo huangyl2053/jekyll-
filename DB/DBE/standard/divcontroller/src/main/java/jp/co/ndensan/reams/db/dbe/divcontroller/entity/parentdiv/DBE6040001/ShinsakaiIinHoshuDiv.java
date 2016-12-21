@@ -21,8 +21,14 @@ public class ShinsakaiIinHoshuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtShinsakaiKaisaiYMView")
+    private TextBoxDate txtShinsakaiKaisaiYMView;
     @JsonProperty("dgShinsakaiIinHoshu")
     private DataGrid<dgShinsakaiIinHoshu_Row> dgShinsakaiIinHoshu;
+    @JsonProperty("lblLegend")
+    private Label lblLegend;
+    @JsonProperty("txtTotalCount")
+    private TextBoxNum txtTotalCount;
     @JsonProperty("txtShinsaKaisu")
     private TextBoxNum txtShinsaKaisu;
     @JsonProperty("txtHoshuSogaku")
@@ -41,6 +47,24 @@ public class ShinsakaiIinHoshuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
+     * gettxtShinsakaiKaisaiYMView
+     * @return txtShinsakaiKaisaiYMView
+     */
+    @JsonProperty("txtShinsakaiKaisaiYMView")
+    public TextBoxDate getTxtShinsakaiKaisaiYMView() {
+        return txtShinsakaiKaisaiYMView;
+    }
+
+    /*
+     * settxtShinsakaiKaisaiYMView
+     * @param txtShinsakaiKaisaiYMView txtShinsakaiKaisaiYMView
+     */
+    @JsonProperty("txtShinsakaiKaisaiYMView")
+    public void setTxtShinsakaiKaisaiYMView(TextBoxDate txtShinsakaiKaisaiYMView) {
+        this.txtShinsakaiKaisaiYMView = txtShinsakaiKaisaiYMView;
+    }
+
+    /*
      * getdgShinsakaiIinHoshu
      * @return dgShinsakaiIinHoshu
      */
@@ -56,6 +80,42 @@ public class ShinsakaiIinHoshuDiv extends Panel {
     @JsonProperty("dgShinsakaiIinHoshu")
     public void setDgShinsakaiIinHoshu(DataGrid<dgShinsakaiIinHoshu_Row> dgShinsakaiIinHoshu) {
         this.dgShinsakaiIinHoshu = dgShinsakaiIinHoshu;
+    }
+
+    /*
+     * getlblLegend
+     * @return lblLegend
+     */
+    @JsonProperty("lblLegend")
+    public Label getLblLegend() {
+        return lblLegend;
+    }
+
+    /*
+     * setlblLegend
+     * @param lblLegend lblLegend
+     */
+    @JsonProperty("lblLegend")
+    public void setLblLegend(Label lblLegend) {
+        this.lblLegend = lblLegend;
+    }
+
+    /*
+     * gettxtTotalCount
+     * @return txtTotalCount
+     */
+    @JsonProperty("txtTotalCount")
+    public TextBoxNum getTxtTotalCount() {
+        return txtTotalCount;
+    }
+
+    /*
+     * settxtTotalCount
+     * @param txtTotalCount txtTotalCount
+     */
+    @JsonProperty("txtTotalCount")
+    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.txtTotalCount = txtTotalCount;
     }
 
     /*

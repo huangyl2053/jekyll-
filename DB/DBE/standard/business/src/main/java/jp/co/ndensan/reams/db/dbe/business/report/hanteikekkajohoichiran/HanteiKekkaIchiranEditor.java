@@ -45,12 +45,6 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
                 fillType(FillType.ZERO).toDateString());
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         source.title = item.getTitle();
-        source.pageCount1 = new RStringBuilder(new RString("「"))
-                .append(new RString(item.get当前頁()))
-                .append(new RString("／"))
-                .append(new RString(item.get総頁()))
-                .append(new RString("」"))
-                .toRString();
         source.taishoHokenshaName = item.get出力対象();
         source.hakkoYMD = hakkoYMD.toRString();
         source.listNo_1 = new RString(item.getNo());

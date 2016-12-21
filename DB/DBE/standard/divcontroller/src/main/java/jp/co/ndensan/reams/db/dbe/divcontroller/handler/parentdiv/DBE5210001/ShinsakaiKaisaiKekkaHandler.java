@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 介護認定審査会開催結果登録するクラスです。
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class ShinsakaiKaisaiKekkaHandler {
 
     private final ShinsakaiKaisaiKekkaDiv div;
+    private static final RString BUTTON_UPDATE = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -62,7 +64,7 @@ public class ShinsakaiKaisaiKekkaHandler {
             div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催日());
             div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
             div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
-            div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new RString(String.valueOf(business.get所要時間())));
+            div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new Decimal(business.get所要時間()));
             if (business.get開催会場() != null) {
                 div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
             }
@@ -121,6 +123,12 @@ public class ShinsakaiKaisaiKekkaHandler {
             dataGridList.add(row);
         }
         div.getDgShinsakaiIinIchiran().setDataSource(dataGridList);
+    }
+
+    public void set審査会登録入力不可() {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_UPDATE, Boolean.TRUE);
+        div.setDisabled(true);
+        div.getIinMiwariate().setDisplayNone(false);
     }
 
     private List<KeyValueDataSource> setKaigoninteiShinsakaiGichoKubunCode() {

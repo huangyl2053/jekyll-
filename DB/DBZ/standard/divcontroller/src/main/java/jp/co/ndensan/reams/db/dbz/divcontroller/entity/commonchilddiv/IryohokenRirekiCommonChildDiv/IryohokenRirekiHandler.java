@@ -96,7 +96,7 @@ public class IryohokenRirekiHandler {
             div.getDgIryohokenIchiran().setDataSource(dgiryohokenichiranList);
         }
 
-        setState(状態);
+        //setState(状態);
         div.set識別コード(識別コード);
     }
 
@@ -117,7 +117,7 @@ public class IryohokenRirekiHandler {
         div.getPnlIryohokenJoho().getDdlSyubetsu().setDataSource(keyvalueList);
     }
 
-    private void setState(RString 状態) {
+    public void setState(RString 状態) {
         if (状態_照会.equals(状態)) {
 
             div.getPnlIryohokenJoho().getTbdKanyubi().setReadOnly(true);
