@@ -176,11 +176,13 @@ public class IraishoIkkatsuHakkoHandler {
      * 共通日付txtの使用可否などを設定します。
      */
     public void setTxtKyotsuHizuke() {
-        if (SHUTSU_CHECKED.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            div.getTxtKyotsuHizuke().setReadOnly(false);
+        boolean is共通日付 = SHUTSU_CHECKED.equals(div.getRadTeishutsuKigen().getSelectedKey());
+        if (is共通日付) {
+            div.getTxtKyotsuHizuke().setValue(RDate.getNowDate());
         } else {
-            div.getTxtKyotsuHizuke().setReadOnly(true);
+            div.getTxtKyotsuHizuke().clearValue();
         }
+        div.getTxtKyotsuHizuke().setReadOnly(!is共通日付);
     }
 
     /**
@@ -304,7 +306,8 @@ public class IraishoIkkatsuHakkoHandler {
         if (SHINSEI_KASAN.equals(ninteiShinsei)) {
             div.getRadTeishutsuKigen().setDisabled(true);
         }
-        div.getTxtKyotsuHizuke().setValue(RDate.getNowDate());
+        div.getTxtKyotsuHizuke().clearValue();
+        div.getTxtKyotsuHizuke().setReadOnly(true);
     }
 
     private void clear認定調査申請単位() {
