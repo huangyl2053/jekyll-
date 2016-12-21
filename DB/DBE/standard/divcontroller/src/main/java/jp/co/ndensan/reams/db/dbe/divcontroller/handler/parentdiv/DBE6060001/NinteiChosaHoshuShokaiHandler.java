@@ -76,11 +76,11 @@ public class NinteiChosaHoshuShokaiHandler {
                         調査一覧.get認定調査依頼年月日().getDayValue()));
             }
             if (!調査一覧.get認定調査受領年月日().isEmpty()) {
-                row.getChosabi().setValue(new RDate(調査一覧.get認定調査受領年月日().getYearValue(),
+                row.getNyushubi().setValue(new RDate(調査一覧.get認定調査受領年月日().getYearValue(),
                         調査一覧.get認定調査受領年月日().getMonthValue(), 調査一覧.get認定調査受領年月日().getDayValue()));
             }
             if (!調査一覧.get認定調査実施年月日().isEmpty()) {
-                row.getNyushubi().setValue(new RDate(調査一覧.get認定調査実施年月日().getYearValue(),
+                row.getChosabi().setValue(new RDate(調査一覧.get認定調査実施年月日().getYearValue(),
                         調査一覧.get認定調査実施年月日().getMonthValue(), 調査一覧.get認定調査実施年月日().getDayValue()));
             }
             if (NinteiChousaIraiKubunCode.初回.getコード().equals(調査一覧.get認定調査依頼区分コード().value())) {
@@ -166,11 +166,12 @@ public class NinteiChosaHoshuShokaiHandler {
         tempData.set情報リスト(情報);
         tempData.set調査依頼日開始(依頼日開始);
         tempData.set調査依頼日終了(依頼日終了);
+        tempData.setHokensya(div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
         return tempData;
     }
 
     private RString get保険者(NinteichosahoshushokaiBusiness 調査情報) {
-        return nullToEmpty(調査情報.get証記載保険者番号()).concat(RString.HALF_SPACE).concat(nullToEmpty(調査情報.get市町村名称()));
+        return nullToEmpty(調査情報.get市町村名称());
 
     }
 
