@@ -844,11 +844,15 @@ public class HomonChosaIraishoBusiness {
     }
 
     private RString ConvertDate(RString date) {
-        if (RString.isNullOrEmpty(date) || FlexibleDate.canConvert(date)) {
+        if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
+        }
+        if (!FlexibleDate.canConvert(date)) {
+            return date;
         }
         return new FlexibleDate(date).wareki().toDateString();
     }
+
     private void setZenkaiChosakekka(ChosahyoSaiCheckhyoItem item) {
         item.setZenkaiChosakekkaNo1(前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左上肢.getコード()));
         item.setZenkaiChosakekkaNo2(前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード()));
