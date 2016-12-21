@@ -173,4 +173,13 @@ public class NinteichosahoshushokaiBusiness {
     public ShinseishoKanriNo get申請書管理番号() {
         return entity.get申請書管理番号();
     }
+
+    /**
+     * 市町村名称を取得します。
+     *
+     * @return 市町村名称
+     */
+    public RString get市町村名称() {
+        return entity.get市町村名称();
+    }
 }

@@ -70,18 +70,20 @@ public class NinteiChosainMaster {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CSVファイル名 = new RString("調査員情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 構成市町村マスタ市町村コード重複種別
-            = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
-                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
-    private static final RString 四マスタ優先表示市町村識別ID
-            = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
-                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    private static RString 構成市町村マスタ市町村コード重複種別;
+    private static RString 四マスタ優先表示市町村識別ID;
 
     /**
      * コンストラクタです。
      *
      */
     public NinteiChosainMaster() {
+        構成市町村マスタ市町村コード重複種別
+                = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                        SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+        四マスタ優先表示市町村識別ID
+                = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                        SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
     }
 
     /**

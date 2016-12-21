@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiT
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosaNyushuRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosairaiRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
@@ -191,11 +192,15 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<CyoSaNyuSyuBusiness> get調査入手モード(YokaigoNinteiTaskListParameter parameter) {
         List<CyoSaNyuSyuBusiness> 調査入手List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<CyoSaNyuSyuRelateEntity> entityList = mapper.get調査入手(parameter);
-        for (CyoSaNyuSyuRelateEntity entity : entityList) {
+        ChosaNyushuRelateWithCountEntity searchResult = mapper.get調査入手(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<CyoSaNyuSyuBusiness>emptyList(), 0, false);
+        }
+        int totalCount = searchResult.getTotalCount().intValue();
+        for (CyoSaNyuSyuRelateEntity entity : searchResult.getTaishoshaList()) {
             調査入手List.add(new CyoSaNyuSyuBusiness(entity));
         }
-        return SearchResult.of(調査入手List, 0, false);
+        return SearchResult.of(調査入手List, totalCount, false);
     }
 
     /**

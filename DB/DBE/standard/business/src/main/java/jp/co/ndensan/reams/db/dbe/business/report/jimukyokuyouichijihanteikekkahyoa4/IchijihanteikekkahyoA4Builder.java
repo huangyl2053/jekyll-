@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -30,11 +30,11 @@ class IchijihanteikekkahyoA4Builder implements IIchijihanteikekkahyoA4Builder {
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link IchijihanteikekkahyoA4ReportSource}
+     * @return {@link IchijihanteikekkahyoReportSource}
      */
     @Override
-    public IchijihanteikekkahyoA4ReportSource build() {
-        return ReportEditorJoiner.from(new IchijihanteikekkahyoA4ReportSource()).join(headerEditor).buildSource();
+    public IchijihanteikekkahyoReportSource build() {
+        return ReportEditorJoiner.from(new IchijihanteikekkahyoReportSource()).join(headerEditor).buildSource();
     }
 
 }

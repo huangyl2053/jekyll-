@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 
 /**
@@ -39,5 +38,5 @@ public interface IHomonChosaIraishoMapper {
      * @param parameter 認定調査依頼履歴一覧のパラメータ
      * @return List<HomonChosaIraishoRelateEntity>
      */
-    List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧(ShujiiIkenshoMybatisParameter parameter);
+    List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧(HomonChosaIraishoMybitisParamter parameter);
 }

@@ -25,8 +25,6 @@ public class SakuseiIraibiDiv extends Panel {
     private TextBoxDateRange txtSakuseiIraibi;
     @JsonProperty("txtMaxKensu")
     private TextBoxNum txtMaxKensu;
-    @JsonProperty("btnKensaku")
-    private Button btnKensaku;
     @JsonProperty("btnKensakuClear")
     private Button btnKensakuClear;
 
@@ -70,24 +68,6 @@ public class SakuseiIraibiDiv extends Panel {
     @JsonProperty("txtMaxKensu")
     public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.txtMaxKensu = txtMaxKensu;
-    }
-
-    /*
-     * getbtnKensaku
-     * @return btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public Button getBtnKensaku() {
-        return btnKensaku;
-    }
-
-    /*
-     * setbtnKensaku
-     * @param btnKensaku btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku = btnKensaku;
     }
 
     /*

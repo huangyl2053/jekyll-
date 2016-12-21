@@ -15,7 +15,8 @@ public enum DBE2010001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     認定調査依頼遷移("認定調査依頼遷移"),
-    処理完了("処理完了");
+    処理完了("処理完了"),
+    継続する("継続する");
 
     private final RString name;
 

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyouichijihanteikekkahyoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ichijihanteikekkahyoa4.IchijihanteikekkahyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0150-400 lishengli
  */
-public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4ReportSource> {
+public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoReportSource> {
 
     private static final int LENGTH_20 = 20;
     private final IchijihanteikekkahyoA4Entity item;
@@ -35,7 +35,7 @@ public class IchijihanteikekkahyoA4Report extends Report<IchijihanteikekkahyoA4R
      * @param reportSourceWriter 帳票Writer
      */
     @Override
-    public void writeBy(ReportSourceWriter<IchijihanteikekkahyoA4ReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<IchijihanteikekkahyoReportSource> reportSourceWriter) {
         for (int i = 0; i < LENGTH_20; i++) {
             IIchijihanteikekkahyoA4Editor headerEditor = new IchijihanteikekkahyoA4Editor(item, i);
             IIchijihanteikekkahyoA4Builder builder = new IchijihanteikekkahyoA4Builder(headerEditor);

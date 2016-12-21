@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HakkoJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,8 +25,6 @@ public class HakkoJokenDiv extends Panel {
      */
     @JsonProperty("radChohyoSentaku")
     private RadioButton radChohyoSentaku;
-    @JsonProperty("txtKijunDay")
-    private TextBoxDate txtKijunDay;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
 
@@ -52,24 +50,6 @@ public class HakkoJokenDiv extends Panel {
     @JsonProperty("radChohyoSentaku")
     public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
         this.radChohyoSentaku = radChohyoSentaku;
-    }
-
-    /*
-     * gettxtKijunDay
-     * @return txtKijunDay
-     */
-    @JsonProperty("txtKijunDay")
-    public TextBoxDate getTxtKijunDay() {
-        return txtKijunDay;
-    }
-
-    /*
-     * settxtKijunDay
-     * @param txtKijunDay txtKijunDay
-     */
-    @JsonProperty("txtKijunDay")
-    public void setTxtKijunDay(TextBoxDate txtKijunDay) {
-        this.txtKijunDay = txtKijunDay;
     }
 
     /*

@@ -166,6 +166,15 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     }
 
     /**
+     * 一覧グリッドの高さを指定します。
+     *
+     * @param height 指定する高さ
+     */
+    public void set一覧グリッド高さ指定(RString height) {
+        div.getDgShinsakaiIchiran().setHeight(height);
+    }
+
+    /**
      * SelectedGridLineを取得する。
      *
      */

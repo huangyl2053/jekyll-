@@ -34,6 +34,12 @@ public class IraishoIkkatsuHakkoHandler {
     private static final RString COMMON_SELECTED = new RString("key0");
     private static final RString CHOHYO_CHECKED = new RString("key1");
     private static final RString SHUTSU_CHECKED = new RString("key2");
+    private static final RString 基本調査 = new RString("key0");
+    private static final RString 特記事項 = new RString("key1");
+    private static final RString 概況調査 = new RString("key2");
+    private static final RString 概況特記 = new RString("key3");
+    private static final RString 記入用紙 = new RString("key0");
+    private static final RString 記入用紙OCR = new RString("key1");
     private static final RString SHINSEI_KASAN = new RString("2");
     private static final RString OCR = new RString("1");
     private final IraishoIkkatsuHakkoDiv div;
@@ -74,6 +80,7 @@ public class IraishoIkkatsuHakkoHandler {
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtChosaDispMax().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getChkchosairaiRireki().setSelectedItemsByKey(Collections.<RString>emptyList());
     }
 
     /**
@@ -102,6 +109,7 @@ public class IraishoIkkatsuHakkoHandler {
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtIkenshoDispMax().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getChkikenshiiraiRireki().setSelectedItemsByKey(Collections.<RString>emptyList());
     }
 
     /**
@@ -210,13 +218,14 @@ public class IraishoIkkatsuHakkoHandler {
             List<RString> shujiiIkenshoDisabledKeys = new ArrayList<>();
             List<RString> ocrDisabledKeys = new ArrayList<>();
             if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                shujiiIkenshoDisabledKeys.add(COMMON_SELECTED);
+                shujiiIkenshoDisabledKeys.add(記入用紙);
                 div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(shujiiIkenshoDisabledKeys);
             } else {
-                ocrDisabledKeys.add(CHOHYO_CHECKED);
+                ocrDisabledKeys.add(記入用紙OCR);
                 div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabledItemsByKey(ocrDisabledKeys);
             }
         }
+        clear主治医意見書申請単位();
     }
 
     private void setNinteiChkShinseiTani(boolean flag) {
@@ -229,23 +238,24 @@ public class IraishoIkkatsuHakkoHandler {
             List<RString> ninteiChosahyoDisabledKeys = new ArrayList<>();
             List<RString> ocrDisabledKeys = new ArrayList<>();
             if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                ninteiChosahyoDisabledKeys.add(COMMON_SELECTED);
+                ninteiChosahyoDisabledKeys.add(基本調査);
             } else {
-                ocrDisabledKeys.add(COMMON_SELECTED);
+                ocrDisabledKeys.add(基本調査);
             }
             if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                ninteiChosahyoDisabledKeys.add(CHOHYO_CHECKED);
+                ninteiChosahyoDisabledKeys.add(特記事項);
             } else {
-                ocrDisabledKeys.add(CHOHYO_CHECKED);
+                ocrDisabledKeys.add(特記事項);
             }
             if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                ninteiChosahyoDisabledKeys.add(SHUTSU_CHECKED);
+                ninteiChosahyoDisabledKeys.add(概況調査);
             } else {
-                ocrDisabledKeys.add(SHUTSU_CHECKED);
+                ocrDisabledKeys.add(概況調査);
             }
             div.getChkNinteiChosahyoShurui().setDisabledItemsByKey(ninteiChosahyoDisabledKeys);
             div.getChkNinteiChosahyoOcrShurui().setDisabledItemsByKey(ocrDisabledKeys);
         }
+        clear認定調査申請単位();
     }
 
     private void setHakkobiAndTeishutsuKigen(RString ninteiShinsei) {
@@ -254,5 +264,17 @@ public class IraishoIkkatsuHakkoHandler {
             div.getRadTeishutsuKigen().setDisabled(true);
         }
         div.getTxtKyotsuHizuke().setValue(RDate.getNowDate());
+    }
+
+    private void clear認定調査申請単位() {
+        div.getChkShujiiIkenshoSakuseiIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkShindanMeireishoAndTeishutsuIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
+    }
+
+    private void clear主治医意見書申請単位() {
+        div.getChkShujiiIkenshoSakuseiIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkShindanMeireishoAndTeishutsuIraisho().setSelectedItemsByKey(Collections.<RString>emptyList());
     }
 }

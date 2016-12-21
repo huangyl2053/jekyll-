@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -72,7 +72,7 @@ public class ShujiiIryoKikanJohoManager {
      * @return 件数
      */
     @Transaction
-    public int countByShichosonCodeAndShujiiIryokikanCode(LasdecCode 市町村コード, RString 主治医医療機関コード) {
+    public int countByShichosonCodeAndShujiiIryokikanCode(LasdecCode 市町村コード, ShujiiIryokikanCode 主治医医療機関コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         return 主治医医療機関情報Dac.countByShichosonCodeAndShujiiIryokikanCode(市町村コード, 主治医医療機関コード);

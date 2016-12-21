@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirai.koudemashite.KoueMashite;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsataishodataoutput.ShinsaTaishoDataOutPutResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.NijihanteiKekkaTorokuMobileEucCsvEntity;
@@ -63,8 +62,13 @@ public class NijihanteiKekkaTorokuMobileOutPutProcess extends BatchProcessBase<N
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build();
+    }
+
+    @Override
+    protected void beforeExecute() {
+
     }
 
     @Override
@@ -77,8 +81,6 @@ public class NijihanteiKekkaTorokuMobileOutPutProcess extends BatchProcessBase<N
         eucCsvWriter.close();
         manager.spool(eucFilePath);
         outputJokenhyoFactory();
-        new KoueMashite().codeMasterEucCsv();
-
     }
 
     private void outputJokenhyoFactory() {

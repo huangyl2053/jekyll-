@@ -32,8 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -42,23 +41,15 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
  */
 public class ShinseiKensaku {
 
-//<<<<<<< HEAD
     private static final RString MENUID_DBEMN21001 = new RString("DBEMN21001");
     private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
     private static final RString MENUID_DBEMN24001 = new RString("DBEMN24001");
     private static final RString MENUID_DBEMN42002 = new RString("DBEMN42002");
     private static final RString MENUID_DBEMN41005 = new RString("DBEMN41005");
-//=======
-//    private static final RString MENUID_DBEMN11001 = new RString("DBEMN11001");
-//    private static final RString MENUID_DBEMN11003 = new RString("DBEMN11003");
-//    private static final RString MENUID_DBEMN14001 = new RString("DBEMN14001");
-//    private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
-//    private static final RString MENUID_DBEMN31005 = new RString("DBEMN31005");
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN43001 = new RString("DBEMN43001");
     private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
     private static final RString MENUID_DBEMN71003 = new RString("DBEMN71003");
-//>>>>>>> origin/sync
     private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
     private static final RString 完了メッセージ = new RString("要介護認定・要支援認定等申請者一覧表の発行処理が完了しました。");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
@@ -128,6 +119,10 @@ public class ShinseiKensaku {
     }
 
     private ResponseData<ShinseiKensakuDiv> processKensaku(ShinseiKensakuDiv div, RString hihokenshaNo) throws ApplicationException {
+        if (!ResponseHolder.isReRequest()) {
+        } else {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -138,7 +133,7 @@ public class ShinseiKensaku {
             getHandler(div).setShinseiJohoIchiran(searchResult);
         } else {
             div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
@@ -199,18 +194,12 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
-//<<<<<<< HEAD
         }
 
         if (MENUID_DBEMN41005.equals(menuID)) {
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.申請書管理番号,
                     new ShinseishoKanriNo(申請書管理番号));
             ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.認定調査履歴番号,
-                    //=======
-                    //        } else if (MENUID_DBEMN31005.equals(menuID)) {
-                    //            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
-                    //            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号,
-                    //>>>>>>> origin/sync
                     認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         } else if (MENUID_DBEMN31001.equals(menuID)) {

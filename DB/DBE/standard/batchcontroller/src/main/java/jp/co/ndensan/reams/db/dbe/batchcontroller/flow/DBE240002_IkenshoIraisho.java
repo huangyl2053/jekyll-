@@ -84,48 +84,64 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
         RDate 基準日 = RDate.getNowDate();
         if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目3, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目3, 基準日,
-                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+                //TODO暫定対応
+                getExecuteStep(DBE231012);
+                getExecuteStep(DBE231014);
+                getExecuteStep(DBE231002);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面3, 基準日,
-                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+                //TODO暫定対応
+                getExecuteStep(DBE231012);
+                getExecuteStep(DBE231014);
+                getExecuteStep(DBE231002);
             }
         }
         if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目3, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目3, 基準日,
-                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+                //TODO暫定対応
+                getExecuteStep(DBE231012);
+                getExecuteStep(DBE231014);
+                getExecuteStep(DBE231002);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面3, 基準日,
-                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+                //TODO暫定対応
+                getExecuteStep(DBE231012);
+                getExecuteStep(DBE231014);
+                getExecuteStep(DBE231002);
             }
         }
     }
@@ -134,19 +150,27 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
         RDate 基準日 = RDate.getNowDate();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面3, 基準日,
-                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+                //TODO暫定対応
+                getExecuteStep(DBE231012);
+                getExecuteStep(DBE231014);
+                getExecuteStep(DBE231002);
             } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面1, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面2, 基準日,
-                        SubGyomuCode.DBE認定支援));
-                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面3, 基準日,
-                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面1, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面2, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面3, 基準日,
+//                        SubGyomuCode.DBE認定支援));
+                //TODO暫定対応
+                getExecuteStep(DBE231012);
+                getExecuteStep(DBE231014);
+                getExecuteStep(DBE231002);
             }
         }
     }
