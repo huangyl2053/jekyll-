@@ -125,16 +125,6 @@ public class ShinchokuDataOutputDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShimei() {
-        return this.getPnlKensaku().getTxtShimei();
-    }
-
-    @JsonIgnore
-    public void  setTxtShimei(TextBox txtShimei) {
-        this.getPnlKensaku().setTxtShimei(txtShimei);
-    }
-
-    @JsonIgnore
     public Button getBtnJokenClear() {
         return this.getPnlKensaku().getBtnJokenClear();
     }

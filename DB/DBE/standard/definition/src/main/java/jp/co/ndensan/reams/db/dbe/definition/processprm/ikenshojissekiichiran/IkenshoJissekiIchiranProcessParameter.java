@@ -22,8 +22,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class IkenshoJissekiIchiranProcessParameter implements IBatchProcessParameter {
 
     private final RString 帳票出力区分;
-    private final RString 意見書記入日FROM;
-    private final RString 意見書記入日TO;
+    private final RString 基準日FROM;
+    private final RString 基準日TO;
+    private final RString 基準日区分;
     private final RString 保険者;
     private final List<IkenshoJissekiIchiranKey> keyJoho;
 
@@ -31,19 +32,22 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
      * コンストラクタです。
      *
      * @param 帳票出力区分 帳票出力区分
-     * @param 意見書記入日FROM 意見書記入日FROM
-     * @param 意見書記入日TO 意見書記入日TO
+     * @param 基準日FROM 基準日FROM
+     * @param 基準日TO 基準日TO
+     * @param 基準日区分 基準日区分
      * @param 保険者 保険者
      * @param keyJoho キー情報Entityリスト
      */
     public IkenshoJissekiIchiranProcessParameter(RString 帳票出力区分,
-            RString 意見書記入日FROM,
-            RString 意見書記入日TO,
+            RString 基準日FROM,
+            RString 基準日TO,
+            RString 基準日区分,
             RString 保険者,
             List<IkenshoJissekiIchiranKey> keyJoho) {
         this.帳票出力区分 = 帳票出力区分;
-        this.意見書記入日FROM = 意見書記入日FROM;
-        this.意見書記入日TO = 意見書記入日TO;
+        this.基準日FROM = 基準日FROM;
+        this.基準日TO = 基準日TO;
+        this.基準日区分 = 基準日区分;
         this.保険者 = 保険者;
         this.keyJoho = keyJoho;
     }
@@ -55,8 +59,9 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
      */
     public IkenshoJissekiIchiranMybitisParamter toMybitisParamter() {
         return IkenshoJissekiIchiranMybitisParamter.createParamter(true,
-                意見書記入日FROM,
-                意見書記入日TO,
+                基準日FROM,
+                基準日TO,
+                基準日区分,
                 保険者,
                 keyJoho);
     }

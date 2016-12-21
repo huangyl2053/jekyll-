@@ -73,6 +73,16 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public TextBoxDate getTxtShinsakaiKaisaiYMView() {
+        return this.getShinsakaiIinHoshu().getTxtShinsakaiKaisaiYMView();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiKaisaiYMView(TextBoxDate txtShinsakaiKaisaiYMView) {
+        this.getShinsakaiIinHoshu().setTxtShinsakaiKaisaiYMView(txtShinsakaiKaisaiYMView);
+    }
+
+    @JsonIgnore
     public DataGrid<dgShinsakaiIinHoshu_Row> getDgShinsakaiIinHoshu() {
         return this.getShinsakaiIinHoshu().getDgShinsakaiIinHoshu();
     }
@@ -80,6 +90,26 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
     @JsonIgnore
     public void  setDgShinsakaiIinHoshu(DataGrid<dgShinsakaiIinHoshu_Row> dgShinsakaiIinHoshu) {
         this.getShinsakaiIinHoshu().setDgShinsakaiIinHoshu(dgShinsakaiIinHoshu);
+    }
+
+    @JsonIgnore
+    public Label getLblLegend() {
+        return this.getShinsakaiIinHoshu().getLblLegend();
+    }
+
+    @JsonIgnore
+    public void  setLblLegend(Label lblLegend) {
+        this.getShinsakaiIinHoshu().setLblLegend(lblLegend);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTotalCount() {
+        return this.getShinsakaiIinHoshu().getTxtTotalCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.getShinsakaiIinHoshu().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore

@@ -56,23 +56,19 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
-    private static final RString CONFIGVALUE4 = new RString("4");
-    private static final RString DBE221012 = new RString("DBE221012_chosahyoKihonchosa.rse");
-    private RDate 基準日;
-    private static final RString DBE221022 = new RString("DBE221022_chosahyoTokkijiko.rse");
-    private static final RString DBE221011 = new RString("DBE221011_chosahyoGaikyochosa.rse");
+    private final RDate 基準日 = RDate.getNowDate();
     private static final String ICHIRANHYOREPORT_PROCESS = "ichiranhyoReport_Process";
     private static final String DBT5201UPDATEPROCESS = "DbT5201UpdateProcess";
     private static final String CHOSAIRAISHOREPORT_PROCESS = "chosaIraishoReport_Process";
-    private static final String CHOSAHYOKIHONCHOSA = "chosahyoKihonchosa";
-    private static final String CHOSAHYOTOKKIJIKO22 = "chosahyoTokkijiko22";
-    private static final String CHOSAHYOGAIKYOCHOSA11 = "chosahyoGaikyochosa11";
-    private static final String SAICHEKKUHYO1 = "SaiChekkuhyo1";
-    private static final String SAICHEKKUHYO2 = "SaiChekkuhyo2";
-    private static final String SAICHEKKUHYO3 = "SaiChekkuhyo3";
-    private static final String SAICHEKKUHYO4 = "SaiChekkuhyo4";
+    private static final String CHOSAHYOKIHONCHOSA = "chosahyoKihonchosa";//TODO　使用しないのでクラスごと削除予定
+    private static final String CHOSAHYOTOKKIJIKO22 = "chosahyoTokkijiko22";//TODO　使用しないのでクラスごと削除予定
+    private static final String CHOSAHYOGAIKYOCHOSA11 = "chosahyoGaikyochosa11";//TODO　使用しないのでクラスごと削除予定
+    private static final String SAICHEKKUHYO1 = "SaiChekkuhyo1";//TODO　使用しないのでクラスごと削除予定
+    private static final String SAICHEKKUHYO2 = "SaiChekkuhyo2";//TODO　使用しないのでクラスごと削除予定
+    private static final String SAICHEKKUHYO3 = "SaiChekkuhyo3";//TODO　使用しないのでクラスごと削除予定
+    private static final String SAICHEKKUHYO4 = "SaiChekkuhyo4";//TODO　使用しないのでクラスごと削除予定
     private static final String CHOSAHYOSAICHECKHYO = "chosahyoSaiCheckhyo";
-    private static final String GAIKYOCHOSA = "GaikyoChosa";
+    private static final String GAIKYOCHOSA = "GaikyoChosa";//TODO　使用しないのでクラスごと削除予定
     private static final String CHOSAIRAIRIREKIICHIRAN = "ChosairairirekiIchiran";
     private static final String 認定調査票_デザイン用紙_片面 = "NinteiChosaDesignKatamen";
     private static final String 認定調査票_デザイン用紙_両面 = "NinteiChosaDesignRyomen";
@@ -94,7 +90,6 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
 
     @Override
     protected void defineFlow() {
-        基準日 = RDate.getNowDate();
         executeStep(DBT5201UPDATEPROCESS);
         if (getParameter().isNinteiChosaIraiChohyo()) {
             executeStep(CHOSAIRAISHOREPORT_PROCESS);
@@ -135,78 +130,41 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         if (getParameter().is前回認定調査結果との比較表()) {
             executeStep(CHOSAHYOSAICHECKHYO);
         }
-
-//        
-//        if (getParameter().isNinteiChosahyoKihon()) {
-//            call認定調査票_基本調査();
-//        }
-//        if (getParameter().isNinteiChosahyoTokki()) {
-//            call認定調査票_特記事項();
-//        }
-//        if (getParameter().isNinteiChosahyoGaikyou()) {
-//            call認定調査票_概況調査();
-//        }
-//        if (getParameter().isNinteiChosahyoOCRKihon()) {
-//            call認定調査票OCR_基本調査();
-//        }
-//        if (getParameter().isNinteiChosahyoOCRTokki()) {
-//            call認定調査票OCR_特記事項();
-//        }
-//        if (getParameter().isNinteiChosahyoOCRGaikyou()) {
-//            call認定調査票OCR_概況調査();
-//        }
-//        if (getParameter().isGaikyoChosa() || getParameter().isGaikyoChosaOCR()) {
-//            executeStep(GAIKYOCHOSA);
-//        }
-//        if (getParameter().isNinteiChosaCheckHyo()) {
-//            call認定調査差異チェック表();
-//        }
     }
 
     private void call概況特記() {
         executeStep(概況特記);
-//        printService.print概況特記(getHandler(div).create概況特記_パラメータ(ninteiShinseiJoho));
     }
 
     private void call認定調査差異チェック表() {
-        RDate date = RDate.getNowDate();
-        RString 業務コンフィグ認定調査票差異チェック票_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援);
+        RString 業務コンフィグ認定調査票差異チェック票_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
         if (CONFIGVALUE1.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
             executeStep(認定調査差異チェック表_片面);
-//            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(handler.create調査票差異チェック票_DBE292001パラメータ());
         } else if (CONFIGVALUE2.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
             executeStep(認定調査差異チェック表_両面右);
-//            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面右(handler.create調査票差異チェック票_DBE292004パラメータ());
         } else if (CONFIGVALUE3.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
             executeStep(認定調査差異チェック表_両面左);
-//            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面左(handler.create調査票差異チェック票_DBE292004パラメータ());
         }
     }
 
     private void call認定調査票_OCR() {
-        RDate date = RDate.getNowDate();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
-            RString 業務コンフィグ認定調査票_概況調査_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援);
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            RString 業務コンフィグ認定調査票_概況調査_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
             if (CONFIGVALUE1.equals(業務コンフィグ認定調査票_概況調査_印刷タイプ)) {
                 executeStep(認定調査票_OCR_片面);
-//                ninteiChosaIraiPrintService.print認定調査票OCR片面(handler.create認定調査票_概況調査_基本調査パラメータ());
             } else if (CONFIGVALUE2.equals(業務コンフィグ認定調査票_概況調査_印刷タイプ)) {
                 executeStep(認定調査票_OCR_両面);
-//                ninteiChosaIraiPrintService.print認定調査票OCR両面(handler.create認定調査票_概況調査_基本調査パラメータ());
             }
         }
     }
 
     private void call認定調査票OCR_特記事項() {
-        RDate date = RDate.getNowDate();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, date, SubGyomuCode.DBE認定支援))) {
-            RString 業務コンフィグ認定調査票差異チェック票_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, date, SubGyomuCode.DBE認定支援);
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
+            RString 業務コンフィグ認定調査票差異チェック票_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
             if (CONFIGVALUE1.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
                 executeStep(認定調査票_特記事項_OCR_片面);
-//                ninteiChosaIraiPrintService.print認定調査票_特記事項_OCR片面(handler.create認定調査票_特記事項パラメータ(false));
             } else if (CONFIGVALUE2.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
                 executeStep(認定調査票_特記事項_OCR_両面);
-//                ninteiChosaIraiPrintService.print認定調査票_特記事項_OCR両面(handler.create認定調査票_特記事項パラメータ(true));
             }
         }
     }
@@ -216,45 +174,36 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         RString 業務コンフィグ認定調査票_概況調査_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, date, SubGyomuCode.DBE認定支援);
         if (CONFIGVALUE1.equals(業務コンフィグ認定調査票_概況調査_印刷タイプ)) {
             executeStep(認定調査票_デザイン用紙_片面);
-//            ninteiChosaIraiPrintService.print認定調査票_デザイン用紙片面(handler.create認定調査票_概況調査_基本調査パラメータ());
         } else if (CONFIGVALUE2.equals(業務コンフィグ認定調査票_概況調査_印刷タイプ)) {
             executeStep(認定調査票_デザイン用紙_両面);
-//            ninteiChosaIraiPrintService.print認定調査票_デザイン用紙両面(handler.create認定調査票_概況調査_基本調査パラメータ());
         }
     }
 
     private void call認定調査票_特記事項() {
         executeStep(認定調査票_特記事項);
-//        ninteiChosaIraiPrintService.print認定調査票_特記事項_デザイン用紙(handler.create認定調査票_特記事項パラメータ(false));
     }
 
     private void call認定調査票_特記事項_項目有り() {
         if (getParameter().is手入力タイプ()) {
             executeStep(認定調査票_特記事項_項目有り_手入力);
-//            ninteiChosaIraiPrintService.print認定調査票_特記事項_項目有り_手入力(handler.create認定調査票_特記事項パラメータ(false));
         } else {
             executeStep(認定調査票_特記事項_項目有り);
-//            ninteiChosaIraiPrintService.print認定調査票_特記事項_項目有り(handler.create認定調査票_特記事項パラメータ(false));
         }
     }
 
     private void call認定調査票_特記事項_項目無し() {
         if (getParameter().is手入力タイプ()) {
-//            ninteiChosaIraiPrintService.print認定調査票_特記事項_項目無し_手入力(handler.create認定調査票_特記事項パラメータ(false));
             executeStep(認定調査票_特記事項_項目無し_手入力);
         } else {
             executeStep(認定調査票_特記事項_項目無し);
-//            ninteiChosaIraiPrintService.print認定調査票_特記事項_項目無し(handler.create認定調査票_特記事項パラメータ(false));
         }
     }
 
     private void call認定調査票_特記事項_フリータイプ() {
         if (getParameter().is手入力タイプ()) {
             executeStep(認定調査票_特記事項_フリータイプ);
-//            ninteiChosaIraiPrintService.print認定調査票_特記事項_フリータイプ_手入力(handler.create認定調査票_特記事項パラメータ(false));
         } else {
             executeStep(認定調査票_特記事項_フリータイプ_手入力);
-//            ninteiChosaIraiPrintService.print認定調査票_特記事項_フリータイプ(handler.create認定調査票_特記事項パラメータ(false));
         }
     }
 
