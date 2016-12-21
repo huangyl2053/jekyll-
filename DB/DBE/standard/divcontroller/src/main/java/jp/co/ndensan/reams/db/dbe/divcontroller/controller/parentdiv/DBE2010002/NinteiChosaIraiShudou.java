@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -89,7 +90,6 @@ public class NinteiChosaIraiShudou {
         if (!RealInitialLocker.tryGetLock(get排他キー())) {
             throw new PessimisticLockingException();
         }
-
         div.setReadOnly(false);
         NinnteiChousairaiShudouFinder finder = NinnteiChousairaiShudouFinder.createInstance();
         NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value());
@@ -111,7 +111,13 @@ public class NinteiChosaIraiShudou {
         }
 
         div.getCcdItakusakiAndChosainInput().getBtnChosaItakusakiGuide().setDisabled(true);
-
+        
+        if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
+                        div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())){
+            div.getNinteichosaIraiByHand().setDisabled(true);
+            div.getIraiprintPanel().setDisabled(true);
+        }
+        
         return ResponseData.of(div).respond();
     }
 
@@ -168,8 +174,10 @@ public class NinteiChosaIraiShudou {
         JigyoshaNo 認定調査委託先コード = new JigyoshaNo(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue());
         RString 認定調査員コード = div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue();
         Code 認定調査依頼区分コード = new Code(div.getNinteichosaIraiByHand().getDdlIraiKubun().getSelectedKey());
-        FlexibleDate 認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
-
+        FlexibleDate 認定調査依頼年月日 = FlexibleDate.EMPTY;
+        if(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue() != null){
+            認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
+        }
         NinteiShinseiJohoIdentifier ninteiShinseiJohoIdentifier = new NinteiShinseiJohoIdentifier(申請書管理番号);
 
         NinteiShinseiJoho 要介護認定申請情報 = 認定調査依頼情報List.get(ninteiShinseiJohoIdentifier);
@@ -281,7 +289,10 @@ public class NinteiChosaIraiShudou {
         RString 認定調査依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class);
         JigyoshaNo 認定調査委託先コード = new JigyoshaNo(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue());
         RString 認定調査員コード = div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue();
-        FlexibleDate 認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
+        FlexibleDate 認定調査依頼年月日 = FlexibleDate.EMPTY;
+        if(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue() != null){
+            認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
+        }
 
         NinteiShinseiJohoIdentifier ninteiShinseiJohoIdentifier = new NinteiShinseiJohoIdentifier(申請書管理番号);
         NinteiShinseiJoho 要介護認定申請情報 = 認定調査依頼情報List.get(ninteiShinseiJohoIdentifier);

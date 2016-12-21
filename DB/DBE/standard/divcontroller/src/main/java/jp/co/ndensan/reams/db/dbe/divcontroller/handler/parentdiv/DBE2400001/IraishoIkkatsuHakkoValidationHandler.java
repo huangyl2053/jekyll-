@@ -105,9 +105,6 @@ public class IraishoIkkatsuHakkoValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (STATE_NINTEIO.equals(div.getState())
                 && ((div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(KEY_1)
-//                && div.getChkNinteiChosaIraisho().getSelectedKeys().isEmpty()
-//                && div.getChkNinteiChosahyoShurui().getSelectedKeys().isEmpty()
-//                && div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().isEmpty()
                 && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty())
                 || (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().isEmpty()
                 && div.getChkchosairaihakko().getSelectedKeys().isEmpty()

@@ -76,8 +76,8 @@
             AND DbT5912ShujiiJoho."jokyoFlag" = true
         </if>
         <if test="isJyoukyouMukoFlag">
-            AND DbT5911ShujiiIryoKikanJoho."jokyoFlag" = false
-            AND DbT5912ShujiiJoho."jokyoFlag" = false
+            AND (DbT5911ShujiiIryoKikanJoho."jokyoFlag" = false
+            OR   DbT5912ShujiiJoho."jokyoFlag" = false)
         </if>
         <if test="isIryoKikanCodeShujiiCodeFlag">
             ORDER BY

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiInfoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,7 +28,7 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
     @JsonProperty("txtKaisaiEndTime")
     private TextBoxTime txtKaisaiEndTime;
     @JsonProperty("txtShoyoTime")
-    private TextBox txtShoyoTime;
+    private TextBoxNum txtShoyoTime;
     @JsonProperty("txtJissiSu")
     private TextBoxNum txtJissiSu;
     @JsonProperty("ddlKaisaiBasho")
@@ -99,7 +99,7 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
      * @return txtShoyoTime
      */
     @JsonProperty("txtShoyoTime")
-    public TextBox getTxtShoyoTime() {
+    public TextBoxNum getTxtShoyoTime() {
         return txtShoyoTime;
     }
 
@@ -108,7 +108,7 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
      * @param txtShoyoTime txtShoyoTime
      */
     @JsonProperty("txtShoyoTime")
-    public void setTxtShoyoTime(TextBox txtShoyoTime) {
+    public void setTxtShoyoTime(TextBoxNum txtShoyoTime) {
         this.txtShoyoTime = txtShoyoTime;
     }
 
