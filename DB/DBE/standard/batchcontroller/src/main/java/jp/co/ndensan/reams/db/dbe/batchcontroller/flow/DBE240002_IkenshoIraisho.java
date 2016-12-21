@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.DbT5301InsertProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.IkenshoSakuseiIraiIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiKatamen;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSakuseiIraishoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSakuseiRyoSeikyushoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSeikyuIchiranProcess;
@@ -50,7 +51,13 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
     private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR.rse");
     private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR.rse");
     private static final RString DBE231002 = new RString("DBE231002_ikenshokinyuyoshi.rse");
-
+    private static final String 主治医意見書記入用紙_片面 = "KinyuYoshiKatamen";
+    private static final String 主治医意見書記入用紙_両面 = "KinyuYoshiRyomen";
+    private static final String 主治医意見書記入用紙_片面_OCR = "KinyuYoshiKatamenOCR";
+    private static final String 主治医意見書記入用紙_両面_OCR = "KinyuYoshiRyomenOCR";
+    private static final String 主治医意見書記入用紙_片面_デザイン = "KinyuYoshiKatamenDesign";
+    private static final String 主治医意見書記入用紙_両面_デザイン = "KinyuYoshiRyomenDesign";
+    
     @Override
     protected void defineFlow() {
         if (getParameter().isIkenshoSakuseiirai()) {
@@ -68,13 +75,16 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
         if (getParameter().isIkenshoKinyuuOCR()) {
             call主治医意見書記入用紙OCR();
         }
+        if (getParameter().isIkenshoKinyuuDesign()) {
+            call主治医意見書記入用紙デザイン();
+        }
         if (getParameter().isIkenshoSakuseiSeikyuusho()) {
             executeStep(IKENSHOSAKUSEIRYOSEIKYUSHO);
         }
         if (getParameter().isIkenshoTeishutu()) {
             executeStep(SHUJIIIKENSHOTEISHUTSUIRAISHO);
         }
-        if (getParameter().isIkenshoirairirekiIchiranKubun()) {
+        if (getParameter().is主治医意見書依頼履歴一覧()) {
             executeStep(SHUJIIIKENSHO_DBE230004PROCESS);
         }
         executeStep(DBT5301INSERTPROCESS);
@@ -82,96 +92,37 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
 
     private void call主治医意見書記入用紙() {
         RDate 基準日 = RDate.getNowDate();
-        if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面1枚目3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー片面2枚目3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-                //TODO暫定対応
-                getExecuteStep(DBE231012);
-                getExecuteStep(DBE231014);
-                getExecuteStep(DBE231002);
-            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙カラー両面3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-                //TODO暫定対応
-                getExecuteStep(DBE231012);
-                getExecuteStep(DBE231014);
-                getExecuteStep(DBE231002);
-            }
-        }
-        if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面1枚目3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ片面2枚目3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-                //TODO暫定対応
-                getExecuteStep(DBE231012);
-                getExecuteStep(DBE231014);
-                getExecuteStep(DBE231002);
-            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォーム白紙モノクロ両面3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-                //TODO暫定対応
-                getExecuteStep(DBE231012);
-                getExecuteStep(DBE231014);
-                getExecuteStep(DBE231002);
-            }
+        RString 業務コンフィグ意見書印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
+        if (CONFIGVALUE1.equals(業務コンフィグ意見書印刷タイプ)) {
+            executeStep(主治医意見書記入用紙_片面);
+//                printService.print(主治医意見書記入用紙List, ReportIdDBZ.DBE231001_Katamen_Mono.getReportId());
+        } else if (CONFIGVALUE2.equals(業務コンフィグ意見書印刷タイプ)) {
+            executeStep(主治医意見書記入用紙_両面);
+//                printService.print(主治医意見書記入用紙List, ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId());
         }
     }
 
     private void call主治医意見書記入用紙OCR() {
         RDate 基準日 = RDate.getNowDate();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート片面3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-                //TODO暫定対応
-                getExecuteStep(DBE231012);
-                getExecuteStep(DBE231014);
-                getExecuteStep(DBE231002);
-            } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面1, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面2, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-//                getExecuteStep(DbBusinessConfig.get(ConfigNameDBE.意見書印刷フォームデザインシート両面3, 基準日,
-//                        SubGyomuCode.DBE認定支援));
-                //TODO暫定対応
-                getExecuteStep(DBE231012);
-                getExecuteStep(DBE231014);
-                getExecuteStep(DBE231002);
-            }
+        RString 業務コンフィグ意見書印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
+        if (CONFIGVALUE1.equals(業務コンフィグ意見書印刷タイプ)) {
+            executeStep(主治医意見書記入用紙_片面_OCR);
+//                printService.print(主治医意見書記入用紙OCRList, ReportIdDBZ.DBE231011_Katamen_Color.getReportId());
+        } else if (CONFIGVALUE2.equals(業務コンフィグ意見書印刷タイプ)) {
+            executeStep(主治医意見書記入用紙_両面_OCR);
+//                printService.print(主治医意見書記入用紙OCRList, ReportIdDBZ.DBE231011_Ryomen_Color.getReportId());
+        }
+    }
+
+    private void call主治医意見書記入用紙デザイン() {
+        RDate 基準日 = RDate.getNowDate();
+        RString 業務コンフィグ意見書印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
+        if (CONFIGVALUE1.equals(業務コンフィグ意見書印刷タイプ)) {
+            executeStep(主治医意見書記入用紙_片面_デザイン);
+//                printService.print(主治医意見書記入用紙DList, ReportIdDBZ.DBE231012.getReportId());
+        } else if (CONFIGVALUE2.equals(業務コンフィグ意見書印刷タイプ)) {
+            executeStep(主治医意見書記入用紙_両面_デザイン);
+//                printService.print(主治医意見書記入用紙DList, ReportIdDBZ.DBE231014.getReportId());
         }
     }
 
@@ -297,4 +248,64 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
                 .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
     }
 
+    /**
+     * 主治医意見書記入用紙_片面を出力します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(主治医意見書記入用紙_片面)
+    protected IBatchFlowCommand callKinyuYoshiKatamenProcess() {
+        return loopBatch(KinyuYoshiKatamen.class)
+                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+    }
+//    /**
+//     * 主治医意見書記入用紙_両面を出力します。
+//     *
+//     * @return IBatchFlowCommand
+//     */
+//    @Step(主治医意見書記入用紙_両面)
+//    protected IBatchFlowCommand callKinyuYoshiRyomenProcess() {
+//        return loopBatch(KinyuYoshiRyomen.class)
+//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+//    }
+//    /**
+//     * 主治医意見書記入用紙_片面_OCRを出力します。
+//     *
+//     * @return IBatchFlowCommand
+//     */
+//    @Step(主治医意見書記入用紙_片面_OCR)
+//    protected IBatchFlowCommand callKinyuYoshiKatamenOCRProcess() {
+//        return loopBatch(KinyuYoshiKatamenOCR.class)
+//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+//    }
+//    /**
+//     * 主治医意見書記入用紙_両面_OCRを出力します。
+//     *
+//     * @return IBatchFlowCommand
+//     */
+//    @Step(主治医意見書記入用紙_両面_OCR)
+//    protected IBatchFlowCommand callKinyuYoshiRyomenOCRProcess() {
+//        return loopBatch(KinyuYoshiRyomenOCR.class)
+//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+//    }
+//    /**
+//     * 主治医意見書記入用紙_片面_デザインを出力します。
+//     *
+//     * @return IBatchFlowCommand
+//     */
+//    @Step(主治医意見書記入用紙_片面_デザイン)
+//    protected IBatchFlowCommand callKinyuYoshiKatamenDesignProcess() {
+//        return loopBatch(KinyuYoshiKatamenDesign.class)
+//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+//    }
+//    /**
+//     * 主治医意見書記入用紙_両面_デザインを出力します。
+//     *
+//     * @return IBatchFlowCommand
+//     */
+//    @Step(主治医意見書記入用紙_両面_デザイン)
+//    protected IBatchFlowCommand callKinyuYoshiRyomenDesignProcess() {
+//        return loopBatch(KinyuYoshiRyomenDesign.class)
+//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+//    }
 }
