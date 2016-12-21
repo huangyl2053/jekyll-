@@ -134,7 +134,7 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
                 source = set特記事項イメージ(source);
             }
         }
-        if (ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
+        if (ReportIdDBE.DBE517904.getReportId().value().equals(reportId)) {
             source.layout = Layouts.四頁目;
         } else {
             source.layout = Layouts.任意;

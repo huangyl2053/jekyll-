@@ -119,7 +119,7 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                 }
             },
     事業者番号存在チェック {
-        /**
+                /**
                  * 事業者番号存在チェックです。
                  *
                  * @param div ServiceCodeCommonChildDivDiv
@@ -128,27 +128,50 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                 @Override
                 public boolean apply(NinteichosaItakusakiMasterDiv div) {
                     SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
-                    JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(div.getChosaitakusakiJohoInput().getTxtjigyoshano().getText()),
-                            FlexibleDate.EMPTY,
-                            FlexibleDate.EMPTY,
-                            new AtenaMeisho(RString.EMPTY),
-                            new YubinNo(RString.EMPTY),
-                            RString.EMPTY,
-                            RString.EMPTY,
-                            RString.EMPTY,
-                            RString.EMPTY,
-                            RString.EMPTY,
-                            FlexibleDate.getNowDate(),
-                            RString.EMPTY,
-                            1));
+                            JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(div.getChosaitakusakiJohoInput().getTxtjigyoshano().getText()),
+                                    FlexibleDate.EMPTY,
+                                    FlexibleDate.EMPTY,
+                                    new AtenaMeisho(RString.EMPTY),
+                                    new YubinNo(RString.EMPTY),
+                                    RString.EMPTY,
+                                    RString.EMPTY,
+                                    RString.EMPTY,
+                                    RString.EMPTY,
+                                    RString.EMPTY,
+                                    FlexibleDate.getNowDate(),
+                                    RString.EMPTY,
+                                    1));
                     if (Jigyosha.totalCount() > 0) {
                         return true;
                     } else {
                         return false;
                     }
                 }
-        
-    };
+
+            },
+    口座情報入力有り時必須項目チェック {
+                /**
+                 * 口座情報入力有り時必須項目チェックです。
+                 *
+                 * @param div NinteichosaItakusakiMasterDiv
+                 * @return true:口座情報必須入力不備なし、false:口座情報必須不備あり
+                 */
+                @Override
+                public boolean apply(NinteichosaItakusakiMasterDiv div) {
+                    if (!div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
+                        return !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
+                    }
+                    return true;
+                }
+            };
 
     private static NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
         return new NinteichosaItakusakiMasterHandler(div);

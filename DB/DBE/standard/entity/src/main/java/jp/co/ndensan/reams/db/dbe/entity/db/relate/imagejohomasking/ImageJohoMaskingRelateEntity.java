@@ -36,13 +36,9 @@ public class ImageJohoMaskingRelateEntity {
     private int 主治医意見書作成依頼履歴番号;
     private ShinseishoKanriNo 申請書管理番号;
     private LasdecCode 市町村コード;
-    private RString 認定調査特記事項番号;
-    private int 認定調査特記事項連番;
     private Code 帳票ID;
-    private int 取込みページ番号;
     private int 認定申請年;
     private RDateTime イメージ共有ファイルID;
-    private RString マスク区分;
-    private RString イメージ区分;
-    private RString 特記事項;
+    private RString 特記マスク区分;
+    private RString 意見書マスク区分;
 }

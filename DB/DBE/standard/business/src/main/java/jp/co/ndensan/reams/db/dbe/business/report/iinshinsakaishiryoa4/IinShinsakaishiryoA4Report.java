@@ -93,7 +93,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 }
             }
         }
-        if (ReportIdDBE.DBE517906.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
+        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
             IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
             IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
             reportSourceWriter.writeLine(builder);
@@ -110,7 +110,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 }
             }
         }
-        if (ReportIdDBE.DBE517905.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
+        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
             IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
             IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
             reportSourceWriter.writeLine(builder);
