@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * イメージ情報マスキングのパラメータクラス
@@ -33,6 +34,8 @@ public final class ImageJohoMaskingParameter {
     private final RString イメージ区分;
     private final RString 事項番号;
     private final List<RString> 申請書管理番号リスト;
+    private final RString 被保険者番号;
+    private final Decimal 最大表示件数;
 
     private final boolean is用紙タイプ;
     private final boolean is画面;
@@ -45,6 +48,7 @@ public final class ImageJohoMaskingParameter {
     private final boolean is申請日;
     private final boolean is日付範囲開始;
     private final boolean is日付範囲終了;
+    private final boolean is被保険者番号;
 
     /**
      * コンストラクタです。
@@ -60,6 +64,8 @@ public final class ImageJohoMaskingParameter {
             RString イメージ区分,
             RString 事項番号,
             List<RString> 申請書管理番号リスト,
+            RString 被保険者番号,
+            Decimal 最大表示件数,
             boolean is用紙タイプ,
             boolean is画面,
             boolean isメニュー,
@@ -70,7 +76,8 @@ public final class ImageJohoMaskingParameter {
             boolean is一次判定日,
             boolean is主治医意見書受領日,
             boolean is認定調査結果受領日,
-            boolean is申請日) {
+            boolean is申請日,
+            boolean is被保険者番号) {
         this.日付範囲開始 = 日付範囲開始;
         this.市町村コード = 市町村コード;
         this.日付範囲終了 = 日付範囲終了;
@@ -79,6 +86,8 @@ public final class ImageJohoMaskingParameter {
         this.イメージ区分 = イメージ区分;
         this.事項番号 = 事項番号;
         this.申請書管理番号リスト = 申請書管理番号リスト;
+        this.被保険者番号 = 被保険者番号;
+        this.最大表示件数 = 最大表示件数;
         this.is用紙タイプ = is用紙タイプ;
         this.is画面 = is画面;
         this.isメニュー = isメニュー;
@@ -90,6 +99,7 @@ public final class ImageJohoMaskingParameter {
         this.is主治医意見書受領日 = is主治医意見書受領日;
         this.is申請日 = is申請日;
         this.is認定調査結果受領日 = is認定調査結果受領日;
+        this.is被保険者番号 = is被保険者番号;
     }
 
     /**
@@ -100,12 +110,15 @@ public final class ImageJohoMaskingParameter {
      * @param 日付範囲終了 日付範囲終了
      * @param 検索対象 検索対象
      * @param 申請書管理番号リスト 申請書管理番号リスト
+     * @param 被保険者番号 被保険者番号
+     * @param 最大表示件数 最大表示件数
      * @return イメージ情報マスキングパラメータークラス
      */
     public static ImageJohoMaskingParameter createImageJohoMaskingParameter(
             LasdecCode 市町村コード, FlexibleDate 日付範囲開始,
             FlexibleDate 日付範囲終了, RString 検索対象,
-            List<RString> 申請書管理番号リスト) {
+            List<RString> 申請書管理番号リスト, RString 被保険者番号,
+            Decimal 最大表示件数) {
         boolean is画面 = false;
         boolean isメニュー = true;
         boolean is用紙タイプ = false;
@@ -117,6 +130,7 @@ public final class ImageJohoMaskingParameter {
         boolean is主治医意見書受領日 = false;
         boolean is認定調査結果受領日 = false;
         boolean is申請日 = false;
+        boolean is被保険者番号 = false;
         if (申請書管理番号リスト != null && !申請書管理番号リスト.isEmpty()) {
             is画面 = true;
             isメニュー = false;
@@ -149,10 +163,14 @@ public final class ImageJohoMaskingParameter {
         if (検索対象.equals(new RString("5"))) {
             is申請日 = true;
         }
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            is被保険者番号 = true;
+        }
         return new ImageJohoMaskingParameter(市町村コード, 日付範囲開始, 日付範囲終了,
                 ShoriJotaiKubun.取下.getコード(), ShoriJotaiKubun.延期.getコード(),
-                TokkijikoTextImageKubun.イメージ.getコード(), new RString("001"), 申請書管理番号リスト,
+                TokkijikoTextImageKubun.イメージ.getコード(), new RString("001"),
+                申請書管理番号リスト, 被保険者番号, 最大表示件数,
                 is用紙タイプ, is画面, isメニュー, is保険者, is審査会開催予定日, is日付範囲開始, is日付範囲終了,
-                is一次判定日, is主治医意見書受領日, is認定調査結果受領日, is申請日);
+                is一次判定日, is主治医意見書受領日, is認定調査結果受領日, is申請日, is被保険者番号);
     }
 }
