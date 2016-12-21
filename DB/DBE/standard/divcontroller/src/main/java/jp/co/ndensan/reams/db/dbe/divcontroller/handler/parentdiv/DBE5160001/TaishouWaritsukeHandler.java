@@ -109,7 +109,7 @@ public class TaishouWaritsukeHandler {
      */
     public void setCommonButtonDisabled() {
         RString 進捗状況 = div.getTxtStatus().getValue();
-        if (ShinsakaiShinchokuJokyo.中止.get名称().equals(進捗状況) || ShinsakaiShinchokuJokyo.完了.get名称().equals(進捗状況) || 進捗状況.isEmpty()) {
+        if (ShinsakaiShinchokuJokyo.中止.get画面表示名称().equals(進捗状況) || ShinsakaiShinchokuJokyo.完了.get画面表示名称().equals(進捗状況) || 進捗状況.isEmpty()) {
             div.getBtnJidoWaritsuke().setDisabled(true);
             div.getBtnWaritsuke().setDisabled(true);
             div.getBtnWaritsukeKaijo().setDisabled(true);
@@ -117,7 +117,7 @@ public class TaishouWaritsukeHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
         }
-        if (!ShinsakaiShinchokuJokyo.未開催.get名称().equals(進捗状況)) {
+        if (!ShinsakaiShinchokuJokyo.未開催.get画面表示名称().equals(進捗状況)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         }
     }
