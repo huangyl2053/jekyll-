@@ -36,6 +36,7 @@ public class CreateTargetRelateEntity {
     private RString 申請書管理番号;
     private Code 厚労省IF識別コード;
     private FlexibleDate 送信年月日;
+    private FlexibleDate 二次判定日;
     private RString 状態区分コード;
     private int 認定有効期間;
     private FlexibleDate 認定有効開始年月日;
