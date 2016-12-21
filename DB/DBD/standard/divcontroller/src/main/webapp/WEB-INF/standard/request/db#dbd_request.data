@@ -629,15 +629,16 @@ dbd/db/dbd/SystemKanriShakaiFukushiTotal/onLoad
 dbd/db/dbd/SystemKanriTokubetsuChiikiTotal/onClick_btnUpdate
 dbd/db/dbd/SystemKanriTokubetsuChiikiTotal/onLoad
 dbd/db/dbd/TainoInfo/initialize
+dbd/db/dbd/TainoInfo/onBeforeOpenDialog_BtnDispGengakuJoho
 dbd/db/dbd/TainoInfo/onClick_btnKakutei
 dbd/db/dbd/TainoInfo/onClick_btnKensaku
 dbd/db/dbd/TainoInfo/onClick_btnReturn
+dbd/db/dbd/TainoInfo/onOkClose_BtnDispGengakuJoho
 dbd/db/dbd/TainoKeikokuMain/onClick_btnNext
 dbd/db/dbd/TainoKeikokuMain/onLoad
 dbd/db/dbd/TainoKeikokuMain/onStateTransition
 dbd/db/dbd/TaishoShoriPanel/onChange_ddlShichosonshitei
 dbd/db/dbd/TaishoShoriPanel/onChange_ddlShoriNendo
-dbd/db/dbd/TaishoShoriPanel/onClick_afterUpload
 dbd/db/dbd/TaishoShoriPanel/onClick_btnBack
 dbd/db/dbd/TaishoShoriPanel/onClick_btnShoriSettei
 dbd/db/dbd/TaishoShoriPanel/onClick_btnUpdate
@@ -674,7 +675,6 @@ dbd/db/dbd/TsuchiShori/onClick_btnHakkou
 dbd/db/dbd/TsuchiShori/onClick_btnKanryo
 dbd/db/dbd/TsuchiShori/onClick_btnOutputCsv
 dbd/db/dbd/TsuchiShori/onLoad
-dbd/db/dbd/UplodPanel/onClick_appurodo
 dbd/db/dbd/YogaigoNinteiKekkaRenkeiDataTorikomi/after_onClick
 dbd/db/dbd/YogaigoNinteiKekkaRenkeiDataTorikomi/before_onClick
 dbd/db/dbd/YogaigoNinteiKekkaRenkeiDataTorikomi/onChange_data
