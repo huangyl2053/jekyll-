@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -23,12 +24,8 @@ public class ShujiiIkenshoInsatsuChohyoDiv extends Panel {
      */
     @JsonProperty("chkShujiiIkenshoShutsuryoku")
     private CheckBoxList chkShujiiIkenshoShutsuryoku;
-    @JsonProperty("chkShujiiIkenshoSakuseiIraisho")
-    private CheckBoxList chkShujiiIkenshoSakuseiIraisho;
-    @JsonProperty("chkShujiIkenshoKinyuAndSakuseiryoSeikyu")
-    private CheckBoxList chkShujiIkenshoKinyuAndSakuseiryoSeikyu;
-    @JsonProperty("chkShindanMeireishoAndTeishutsuIraisho")
-    private CheckBoxList chkShindanMeireishoAndTeishutsuIraisho;
+    @JsonProperty("ShujiiIkenshoChecks")
+    private ShujiiIkenshoChecksDiv ShujiiIkenshoChecks;
     @JsonProperty("Chkikenshiiraihakko")
     private CheckBoxList Chkikenshiiraihakko;
     @JsonProperty("ChkikenshiiraiRireki")
@@ -59,57 +56,21 @@ public class ShujiiIkenshoInsatsuChohyoDiv extends Panel {
     }
 
     /*
-     * getchkShujiiIkenshoSakuseiIraisho
-     * @return chkShujiiIkenshoSakuseiIraisho
+     * getShujiiIkenshoChecks
+     * @return ShujiiIkenshoChecks
      */
-    @JsonProperty("chkShujiiIkenshoSakuseiIraisho")
-    public CheckBoxList getChkShujiiIkenshoSakuseiIraisho() {
-        return chkShujiiIkenshoSakuseiIraisho;
+    @JsonProperty("ShujiiIkenshoChecks")
+    public ShujiiIkenshoChecksDiv getShujiiIkenshoChecks() {
+        return ShujiiIkenshoChecks;
     }
 
     /*
-     * setchkShujiiIkenshoSakuseiIraisho
-     * @param chkShujiiIkenshoSakuseiIraisho chkShujiiIkenshoSakuseiIraisho
+     * setShujiiIkenshoChecks
+     * @param ShujiiIkenshoChecks ShujiiIkenshoChecks
      */
-    @JsonProperty("chkShujiiIkenshoSakuseiIraisho")
-    public void setChkShujiiIkenshoSakuseiIraisho(CheckBoxList chkShujiiIkenshoSakuseiIraisho) {
-        this.chkShujiiIkenshoSakuseiIraisho = chkShujiiIkenshoSakuseiIraisho;
-    }
-
-    /*
-     * getchkShujiIkenshoKinyuAndSakuseiryoSeikyu
-     * @return chkShujiIkenshoKinyuAndSakuseiryoSeikyu
-     */
-    @JsonProperty("chkShujiIkenshoKinyuAndSakuseiryoSeikyu")
-    public CheckBoxList getChkShujiIkenshoKinyuAndSakuseiryoSeikyu() {
-        return chkShujiIkenshoKinyuAndSakuseiryoSeikyu;
-    }
-
-    /*
-     * setchkShujiIkenshoKinyuAndSakuseiryoSeikyu
-     * @param chkShujiIkenshoKinyuAndSakuseiryoSeikyu chkShujiIkenshoKinyuAndSakuseiryoSeikyu
-     */
-    @JsonProperty("chkShujiIkenshoKinyuAndSakuseiryoSeikyu")
-    public void setChkShujiIkenshoKinyuAndSakuseiryoSeikyu(CheckBoxList chkShujiIkenshoKinyuAndSakuseiryoSeikyu) {
-        this.chkShujiIkenshoKinyuAndSakuseiryoSeikyu = chkShujiIkenshoKinyuAndSakuseiryoSeikyu;
-    }
-
-    /*
-     * getchkShindanMeireishoAndTeishutsuIraisho
-     * @return chkShindanMeireishoAndTeishutsuIraisho
-     */
-    @JsonProperty("chkShindanMeireishoAndTeishutsuIraisho")
-    public CheckBoxList getChkShindanMeireishoAndTeishutsuIraisho() {
-        return chkShindanMeireishoAndTeishutsuIraisho;
-    }
-
-    /*
-     * setchkShindanMeireishoAndTeishutsuIraisho
-     * @param chkShindanMeireishoAndTeishutsuIraisho chkShindanMeireishoAndTeishutsuIraisho
-     */
-    @JsonProperty("chkShindanMeireishoAndTeishutsuIraisho")
-    public void setChkShindanMeireishoAndTeishutsuIraisho(CheckBoxList chkShindanMeireishoAndTeishutsuIraisho) {
-        this.chkShindanMeireishoAndTeishutsuIraisho = chkShindanMeireishoAndTeishutsuIraisho;
+    @JsonProperty("ShujiiIkenshoChecks")
+    public void setShujiiIkenshoChecks(ShujiiIkenshoChecksDiv ShujiiIkenshoChecks) {
+        this.ShujiiIkenshoChecks = ShujiiIkenshoChecks;
     }
 
     /*
@@ -146,6 +107,69 @@ public class ShujiiIkenshoInsatsuChohyoDiv extends Panel {
     @JsonProperty("ChkikenshiiraiRireki")
     public void setChkikenshiiraiRireki(CheckBoxList ChkikenshiiraiRireki) {
         this.ChkikenshiiraiRireki = ChkikenshiiraiRireki;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public CheckBoxList getChkShujiiIkenshoSakuseiIraisho() {
+        return this.getShujiiIkenshoChecks().getChkShujiiIkenshoSakuseiIraisho();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiiIkenshoSakuseiIraisho(CheckBoxList chkShujiiIkenshoSakuseiIraisho) {
+        this.getShujiiIkenshoChecks().setChkShujiiIkenshoSakuseiIraisho(chkShujiiIkenshoSakuseiIraisho);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShujiIkenshoyoshi() {
+        return this.getShujiiIkenshoChecks().getChkShujiIkenshoyoshi();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiIkenshoyoshi(CheckBoxList chkShujiIkenshoyoshi) {
+        this.getShujiiIkenshoChecks().setChkShujiIkenshoyoshi(chkShujiIkenshoyoshi);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShujiiIkenshoyoshiOcr() {
+        return this.getShujiiIkenshoChecks().getChkShujiiIkenshoyoshiOcr();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiiIkenshoyoshiOcr(CheckBoxList chkShujiiIkenshoyoshiOcr) {
+        this.getShujiiIkenshoChecks().setChkShujiiIkenshoyoshiOcr(chkShujiiIkenshoyoshiOcr);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShujiiIkenshoyoshiDesign() {
+        return this.getShujiiIkenshoChecks().getChkShujiiIkenshoyoshiDesign();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiiIkenshoyoshiDesign(CheckBoxList chkShujiiIkenshoyoshiDesign) {
+        this.getShujiiIkenshoChecks().setChkShujiiIkenshoyoshiDesign(chkShujiiIkenshoyoshiDesign);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShujiiIkenshoSakuseiryoSeikyusho() {
+        return this.getShujiiIkenshoChecks().getChkShujiiIkenshoSakuseiryoSeikyusho();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiiIkenshoSakuseiryoSeikyusho(CheckBoxList chkShujiiIkenshoSakuseiryoSeikyusho) {
+        this.getShujiiIkenshoChecks().setChkShujiiIkenshoSakuseiryoSeikyusho(chkShujiiIkenshoSakuseiryoSeikyusho);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShindanMeireishoAndTeishutsuIraisho() {
+        return this.getShujiiIkenshoChecks().getChkShindanMeireishoAndTeishutsuIraisho();
+    }
+
+    @JsonIgnore
+    public void  setChkShindanMeireishoAndTeishutsuIraisho(CheckBoxList chkShindanMeireishoAndTeishutsuIraisho) {
+        this.getShujiiIkenshoChecks().setChkShindanMeireishoAndTeishutsuIraisho(chkShindanMeireishoAndTeishutsuIraisho);
     }
 
     // </editor-fold>

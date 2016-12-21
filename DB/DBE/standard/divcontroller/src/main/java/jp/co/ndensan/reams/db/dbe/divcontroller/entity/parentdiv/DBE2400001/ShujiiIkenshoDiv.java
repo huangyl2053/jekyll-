@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
@@ -180,33 +181,73 @@ public class ShujiiIkenshoDiv extends Panel {
     }
 
     @JsonIgnore
+    public ShujiiIkenshoChecksDiv getShujiiIkenshoChecks() {
+        return this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks();
+    }
+
+    @JsonIgnore
+    public void  setShujiiIkenshoChecks(ShujiiIkenshoChecksDiv ShujiiIkenshoChecks) {
+        this.getShujiiIkenshoInsatsuChohyo().setShujiiIkenshoChecks(ShujiiIkenshoChecks);
+    }
+
+    @JsonIgnore
     public CheckBoxList getChkShujiiIkenshoSakuseiIraisho() {
-        return this.getShujiiIkenshoInsatsuChohyo().getChkShujiiIkenshoSakuseiIraisho();
+        return this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().getChkShujiiIkenshoSakuseiIraisho();
     }
 
     @JsonIgnore
     public void  setChkShujiiIkenshoSakuseiIraisho(CheckBoxList chkShujiiIkenshoSakuseiIraisho) {
-        this.getShujiiIkenshoInsatsuChohyo().setChkShujiiIkenshoSakuseiIraisho(chkShujiiIkenshoSakuseiIraisho);
+        this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().setChkShujiiIkenshoSakuseiIraisho(chkShujiiIkenshoSakuseiIraisho);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkShujiIkenshoKinyuAndSakuseiryoSeikyu() {
-        return this.getShujiiIkenshoInsatsuChohyo().getChkShujiIkenshoKinyuAndSakuseiryoSeikyu();
+    public CheckBoxList getChkShujiIkenshoyoshi() {
+        return this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().getChkShujiIkenshoyoshi();
     }
 
     @JsonIgnore
-    public void  setChkShujiIkenshoKinyuAndSakuseiryoSeikyu(CheckBoxList chkShujiIkenshoKinyuAndSakuseiryoSeikyu) {
-        this.getShujiiIkenshoInsatsuChohyo().setChkShujiIkenshoKinyuAndSakuseiryoSeikyu(chkShujiIkenshoKinyuAndSakuseiryoSeikyu);
+    public void  setChkShujiIkenshoyoshi(CheckBoxList chkShujiIkenshoyoshi) {
+        this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().setChkShujiIkenshoyoshi(chkShujiIkenshoyoshi);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShujiiIkenshoyoshiOcr() {
+        return this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().getChkShujiiIkenshoyoshiOcr();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiiIkenshoyoshiOcr(CheckBoxList chkShujiiIkenshoyoshiOcr) {
+        this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().setChkShujiiIkenshoyoshiOcr(chkShujiiIkenshoyoshiOcr);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShujiiIkenshoyoshiDesign() {
+        return this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().getChkShujiiIkenshoyoshiDesign();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiiIkenshoyoshiDesign(CheckBoxList chkShujiiIkenshoyoshiDesign) {
+        this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().setChkShujiiIkenshoyoshiDesign(chkShujiiIkenshoyoshiDesign);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShujiiIkenshoSakuseiryoSeikyusho() {
+        return this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().getChkShujiiIkenshoSakuseiryoSeikyusho();
+    }
+
+    @JsonIgnore
+    public void  setChkShujiiIkenshoSakuseiryoSeikyusho(CheckBoxList chkShujiiIkenshoSakuseiryoSeikyusho) {
+        this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().setChkShujiiIkenshoSakuseiryoSeikyusho(chkShujiiIkenshoSakuseiryoSeikyusho);
     }
 
     @JsonIgnore
     public CheckBoxList getChkShindanMeireishoAndTeishutsuIraisho() {
-        return this.getShujiiIkenshoInsatsuChohyo().getChkShindanMeireishoAndTeishutsuIraisho();
+        return this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().getChkShindanMeireishoAndTeishutsuIraisho();
     }
 
     @JsonIgnore
     public void  setChkShindanMeireishoAndTeishutsuIraisho(CheckBoxList chkShindanMeireishoAndTeishutsuIraisho) {
-        this.getShujiiIkenshoInsatsuChohyo().setChkShindanMeireishoAndTeishutsuIraisho(chkShindanMeireishoAndTeishutsuIraisho);
+        this.getShujiiIkenshoInsatsuChohyo().getShujiiIkenshoChecks().setChkShindanMeireishoAndTeishutsuIraisho(chkShindanMeireishoAndTeishutsuIraisho);
     }
 
     @JsonIgnore
