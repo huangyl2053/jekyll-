@@ -65,9 +65,6 @@ public class ShinseiKensaku {
         div.getCcdNinteishinseishaFinder().initialize();
         getHandler(div).load();
 
-        //とりあえず、メニューDBEMN21003の場合だけだす
-        div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().setVisible(MENUID_DBEMN21003.equals(ResponseHolder.getMenuID()));
-
         return ResponseData.of(div).setState(findStateAt条件指定());
     }
 
