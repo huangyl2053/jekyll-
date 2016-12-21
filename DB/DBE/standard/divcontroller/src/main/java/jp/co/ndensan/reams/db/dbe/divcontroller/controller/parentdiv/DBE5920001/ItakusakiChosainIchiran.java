@@ -11,10 +11,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
  * 認定調査委託先・認定調査員一覧表のクラスです。
+ *
  * @reamsid_L DBE-0290-010 dongyabin
  */
 public class ItakusakiChosainIchiran {
@@ -38,13 +40,20 @@ public class ItakusakiChosainIchiran {
      * @return ResponseData<ItakusakiChosainIchiranDiv>
      */
     public ResponseData<ItakusakiChosainIchiranDiv> onclick_Check(ItakusakiChosainIchiranDiv div) {
-        if (div.getTxtIryoKikanCodeFrom().getValue().compareTo(
-                div.getTxtIryoKikanCodeTo().getValue()) > 0) {
-            throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("委託先コード"));
+        RString 委託先コードFrom = div.getTxtIryoKikanCodeFrom().getValue();
+        RString 委託先コードTo = div.getTxtIryoKikanCodeTo().getValue();
+        RString 調査員コードFrom = div.getTxtShujiiCodeFrom().getValue();
+        RString 調査員コードTo = div.getTxtShujiiCodeTo().getValue();
+
+        if (!RString.isNullOrEmpty(委託先コードFrom) && !RString.isNullOrEmpty(委託先コードTo)) {
+            if (委託先コードFrom.compareTo(委託先コードTo) > 0) {
+                throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("委託先コード"));
+            }
         }
-        if (div.getTxtShujiiCodeFrom().getValue().compareTo(
-                div.getTxtShujiiCodeTo().getValue()) > 0) {
-            throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("調査員コード"));
+        if (!RString.isNullOrEmpty(調査員コードFrom) && !RString.isNullOrEmpty(調査員コードTo)) {
+            if (調査員コードFrom.compareTo(調査員コードTo) > 0) {
+                throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("調査員コード"));
+            }
         }
         return ResponseData.of(div).respond();
     }
