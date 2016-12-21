@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Nov 17 16:34:18 JST 2016 
+ * Wed Dec 21 21:51:54 JST 2016 
  */
 
 
@@ -19,14 +19,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgIkenshoSakuseiJisseki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
 
     private RString hokensha;
     private RString code;
     private RString meisho;
+    private RString shujiiCode;
     private RString shujiimei;
     private RString hihokenshaBango;
     private RString shimei;
+    private RString iraibi;
     private RString kinyubi;
     private RString nyushubi;
     private RString zaitakuShin;
@@ -34,7 +36,6 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
     private RString shisetsuShin;
     private RString shisetsuKe;
     private RString ishiKubun;
-    private RString shujiiCode;
     private RString shinseishoKanriNo;
     private RString ikenshoIraiRirekiNo;
 
@@ -43,9 +44,11 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.hokensha = RString.EMPTY;
         this.code = RString.EMPTY;
         this.meisho = RString.EMPTY;
+        this.shujiiCode = RString.EMPTY;
         this.shujiimei = RString.EMPTY;
         this.hihokenshaBango = RString.EMPTY;
         this.shimei = RString.EMPTY;
+        this.iraibi = RString.EMPTY;
         this.kinyubi = RString.EMPTY;
         this.nyushubi = RString.EMPTY;
         this.zaitakuShin = RString.EMPTY;
@@ -53,15 +56,16 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.shisetsuShin = RString.EMPTY;
         this.shisetsuKe = RString.EMPTY;
         this.ishiKubun = RString.EMPTY;
-        this.shujiiCode = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.ikenshoIraiRirekiNo = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("code", code);
         this.setOriginalData("meisho", meisho);
+        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiimei", shujiimei);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
         this.setOriginalData("shimei", shimei);
+        this.setOriginalData("iraibi", iraibi);
         this.setOriginalData("kinyubi", kinyubi);
         this.setOriginalData("nyushubi", nyushubi);
         this.setOriginalData("zaitakuShin", zaitakuShin);
@@ -69,19 +73,20 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.setOriginalData("shisetsuShin", shisetsuShin);
         this.setOriginalData("shisetsuKe", shisetsuKe);
         this.setOriginalData("ishiKubun", ishiKubun);
-        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
     }
 
-    public dgIkenshoSakuseiJisseki_Row(RString hokensha, RString code, RString meisho, RString shujiimei, RString hihokenshaBango, RString shimei, RString kinyubi, RString nyushubi, RString zaitakuShin, RString zaitakuKe, RString shisetsuShin, RString shisetsuKe, RString ishiKubun, RString shujiiCode, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo) {
+    public dgIkenshoSakuseiJisseki_Row(RString hokensha, RString code, RString meisho, RString shujiiCode, RString shujiimei, RString hihokenshaBango, RString shimei, RString iraibi, RString kinyubi, RString nyushubi, RString zaitakuShin, RString zaitakuKe, RString shisetsuShin, RString shisetsuKe, RString ishiKubun, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("code", code);
         this.setOriginalData("meisho", meisho);
+        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiimei", shujiimei);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
         this.setOriginalData("shimei", shimei);
+        this.setOriginalData("iraibi", iraibi);
         this.setOriginalData("kinyubi", kinyubi);
         this.setOriginalData("nyushubi", nyushubi);
         this.setOriginalData("zaitakuShin", zaitakuShin);
@@ -89,15 +94,16 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.setOriginalData("shisetsuShin", shisetsuShin);
         this.setOriginalData("shisetsuKe", shisetsuKe);
         this.setOriginalData("ishiKubun", ishiKubun);
-        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
         this.hokensha = hokensha;
         this.code = code;
         this.meisho = meisho;
+        this.shujiiCode = shujiiCode;
         this.shujiimei = shujiimei;
         this.hihokenshaBango = hihokenshaBango;
         this.shimei = shimei;
+        this.iraibi = iraibi;
         this.kinyubi = kinyubi;
         this.nyushubi = nyushubi;
         this.zaitakuShin = zaitakuShin;
@@ -105,7 +111,6 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.shisetsuShin = shisetsuShin;
         this.shisetsuKe = shisetsuKe;
         this.ishiKubun = ishiKubun;
-        this.shujiiCode = shujiiCode;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
     }
@@ -122,6 +127,10 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         return meisho;
     }
 
+    public RString getShujiiCode() {
+        return shujiiCode;
+    }
+
     public RString getShujiimei() {
         return shujiimei;
     }
@@ -132,6 +141,10 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
 
     public RString getShimei() {
         return shimei;
+    }
+
+    public RString getIraibi() {
+        return iraibi;
     }
 
     public RString getKinyubi() {
@@ -162,10 +175,6 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         return ishiKubun;
     }
 
-    public RString getShujiiCode() {
-        return shujiiCode;
-    }
-
     public RString getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
@@ -189,6 +198,11 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.meisho = meisho;
     }
 
+    public void setShujiiCode(RString shujiiCode) {
+        this.setOriginalData("shujiiCode", shujiiCode);
+        this.shujiiCode = shujiiCode;
+    }
+
     public void setShujiimei(RString shujiimei) {
         this.setOriginalData("shujiimei", shujiimei);
         this.shujiimei = shujiimei;
@@ -202,6 +216,11 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
     public void setShimei(RString shimei) {
         this.setOriginalData("shimei", shimei);
         this.shimei = shimei;
+    }
+
+    public void setIraibi(RString iraibi) {
+        this.setOriginalData("iraibi", iraibi);
+        this.iraibi = iraibi;
     }
 
     public void setKinyubi(RString kinyubi) {
@@ -237,11 +256,6 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
     public void setIshiKubun(RString ishiKubun) {
         this.setOriginalData("ishiKubun", ishiKubun);
         this.ishiKubun = ishiKubun;
-    }
-
-    public void setShujiiCode(RString shujiiCode) {
-        this.setOriginalData("shujiiCode", shujiiCode);
-        this.shujiiCode = shujiiCode;
     }
 
     public void setShinseishoKanriNo(RString shinseishoKanriNo) {
