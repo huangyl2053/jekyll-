@@ -39,8 +39,11 @@ public class NinteiChosainDataOutputResult {
         eucCsvEntity.set調査委託先名称(entityParam.get事業者名称());
         eucCsvEntity.set性別(Seibetsu.toValue(entityParam.get性別()).get名称());
         eucCsvEntity.set地区コード(entityParam.get地区コード());
-        RString 地区名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
-                new Code(entityParam.get地区コード()), FlexibleDate.getNowDate());
+        RString 地区名称 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(entityParam.get地区コード())) {
+            地区名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
+                    new Code(entityParam.get地区コード()), FlexibleDate.getNowDate());
+        }
         eucCsvEntity.set地区名称(地区名称);
         eucCsvEntity.set調査員資格(entityParam.get調査員資格());
         eucCsvEntity.set調査可能人数(entityParam.get調査可能人数());
