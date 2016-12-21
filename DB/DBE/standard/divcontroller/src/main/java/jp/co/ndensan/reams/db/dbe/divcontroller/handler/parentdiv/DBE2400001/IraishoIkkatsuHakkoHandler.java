@@ -229,9 +229,9 @@ public class IraishoIkkatsuHakkoHandler {
     }
 
     private void setNinteiChkShinseiTani(boolean flag) {
-        div.getChkNinteiChosahyoShurui().setDisabled(flag);
-        div.getChkNinteiChosahyoOcrShurui().setDisabled(flag);
-        div.getChkNinteiChosaIraisho().setDisabled(flag);
+//        div.getChkNinteiChosahyoShurui().setDisabled(flag);
+//        div.getChkNinteiChosahyoOcrShurui().setDisabled(flag);
+//        div.getChkNinteiChosaIraisho().setDisabled(flag);
         div.getChkNinteiChosahyoSonota().setDisabled(flag);
         RDate 基準日 = RDate.getNowDate();
         if (!flag) {
@@ -252,8 +252,8 @@ public class IraishoIkkatsuHakkoHandler {
             } else {
                 ocrDisabledKeys.add(概況調査);
             }
-            div.getChkNinteiChosahyoShurui().setDisabledItemsByKey(ninteiChosahyoDisabledKeys);
-            div.getChkNinteiChosahyoOcrShurui().setDisabledItemsByKey(ocrDisabledKeys);
+//            div.getChkNinteiChosahyoShurui().setDisabledItemsByKey(ninteiChosahyoDisabledKeys);
+//            div.getChkNinteiChosahyoOcrShurui().setDisabledItemsByKey(ocrDisabledKeys);
         }
         clear認定調査申請単位();
     }
