@@ -152,6 +152,15 @@ public class CreateTargetBusiness {
     }
 
     /**
+     * 二次判定日を返します。
+     *
+     * @return 二次判定日
+     */
+    public FlexibleDate get二次判定日() {
+        return entity.get二次判定日();
+    }
+
+    /**
      * 状態区分コードを返します。
      *
      * @return 状態区分コード

@@ -18,6 +18,7 @@
         <result property="申請書管理番号" column="dbt5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="厚労省IF識別コード" column="dbt5101_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="送信年月日" column="dbt5101_ifSofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="二次判定日" column="dbt5102_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="状態区分コード" column="dbt5102_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定有効期間" column="dbt5102_nijiHanteiNinteiYukoKikan" />
         <result property="認定有効開始年月日" column="dbt5102_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -82,6 +83,7 @@
             , dbt5101."shinseishoKanriNo" AS "dbt5101_shinseishoKanriNo"
             , dbt5101."koroshoIfShikibetsuCode" AS "dbt5101_koroshoIfShikibetsuCode"
             , dbt5101."ifSofuYMD" AS "dbt5101_ifSofuYMD"
+            , dbt5102."nijiHanteiYMD" AS "dbt5102_nijiHanteiYMD"
             , dbt5102."nijiHanteiYokaigoJotaiKubunCode" AS "dbt5102_nijiHanteiYokaigoJotaiKubunCode"
             , dbt5102."nijiHanteiNinteiYukoKikan" AS "dbt5102_nijiHanteiNinteiYukoKikan"
             , dbt5102."nijiHanteiNinteiYukoKaishiYMD" AS "dbt5102_nijiHanteiNinteiYukoKaishiYMD"
