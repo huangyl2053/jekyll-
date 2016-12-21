@@ -145,12 +145,39 @@ public class ImageJohoMaskingResult {
     }
 
     /**
+     * 認定調査特記事項番号を取得します。
+     *
+     * @return 認定調査特記事項番号
+     */
+    public RString get認定調査特記事項番号() {
+        return entity.get認定調査特記事項番号();
+    }
+
+    /**
+     * 認定調査特記事項連番を取得します。
+     *
+     * @return 認定調査特記事項連番
+     */
+    public int get認定調査特記事項連番() {
+        return entity.get認定調査特記事項連番();
+    }
+
+    /**
      * 帳票IDを取得します。
      *
      * @return 帳票ID
      */
     public Code get帳票ID() {
         return entity.get帳票ID();
+    }
+
+    /**
+     * 取込みページ番号を取得します。
+     *
+     * @return 取込みページ番号
+     */
+    public int get取込みページ番号() {
+        return entity.get取込みページ番号();
     }
 
     /**
@@ -176,16 +203,26 @@ public class ImageJohoMaskingResult {
      *
      * @return マスク区分
      */
-    public RString get特記マスク区分() {
-        return entity.get特記マスク区分();
+    public RString getマスク区分() {
+        return entity.getマスク区分();
     }
 
     /**
-     * マスク区分を取得します。
+     * イメージ区分を取得します。
      *
-     * @return マスク区分
+     * @return イメージ区分
      */
-    public RString get意見書マスク区分() {
-        return entity.get意見書マスク区分();
+    public RString getイメージ区分() {
+        return entity.getイメージ区分();
     }
+
+    /**
+     * 特記事項を取得します。
+     *
+     * @return 特記事項
+     */
+    public RString get特記事項() {
+        return entity.get特記事項();
+    }
+
 }

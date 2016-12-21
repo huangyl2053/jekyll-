@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ChosaitakusakiJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -55,10 +55,10 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
-    @JsonProperty("ccdChiku")
-    private CodeInputDiv ccdChiku;
     @JsonProperty("ccdHokenshaJoho")
     private HokenshaJohoDiv ccdHokenshaJoho;
+    @JsonProperty("ccdChiku")
+    private CodeInputDiv ccdChiku;
     @JsonProperty("state")
     private RString state;
     @JsonProperty("hiddenInputDiv")
@@ -323,21 +323,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getccdChiku
-     * @return ccdChiku
-     */
-    @JsonProperty("ccdChiku")
-    public ICodeInputDiv getCcdChiku() {
-        return ccdChiku;
-    }
-
-    /*
      * getccdHokenshaJoho
      * @return ccdHokenshaJoho
      */
     @JsonProperty("ccdHokenshaJoho")
     public IHokenshaJohoDiv getCcdHokenshaJoho() {
         return ccdHokenshaJoho;
+    }
+
+    /*
+     * getccdChiku
+     * @return ccdChiku
+     */
+    @JsonProperty("ccdChiku")
+    public ICodeInputDiv getCcdChiku() {
+        return ccdChiku;
     }
 
     /*

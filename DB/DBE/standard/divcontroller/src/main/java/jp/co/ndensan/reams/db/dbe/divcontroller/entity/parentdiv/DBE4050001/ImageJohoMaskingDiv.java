@@ -10,9 +10,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uzi.divcontroller.entity.commonchilddiv.ImageMasking.IImageMaskingDiv;
+import jp.co.ndensan.reams.uz.uzi.divcontroller.entity.commonchilddiv.ImageMasking.ImageMaskingDiv;
 
 /**
  * ImageJohoMasking のクラスファイル 
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageJohoMaskingDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,8 +36,8 @@ public class ImageJohoMaskingDiv extends Panel {
     private hihokenshaInfoPanelDiv hihokenshaInfoPanel;
     @JsonProperty("ImageMaskTaishoShiji")
     private ImageMaskTaishoShijiDiv ImageMaskTaishoShiji;
-    @JsonProperty("hiddenImagePath")
-    private RString hiddenImagePath;
+    @JsonProperty("maskingPanel")
+    private maskingPanelDiv maskingPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -117,36 +118,26 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     /*
-     * gethiddenImagePath
-     * @return hiddenImagePath
+     * getmaskingPanel
+     * @return maskingPanel
      */
-    @JsonProperty("hiddenImagePath")
-    public RString getHiddenImagePath() {
-        return hiddenImagePath;
+    @JsonProperty("maskingPanel")
+    public maskingPanelDiv getMaskingPanel() {
+        return maskingPanel;
     }
 
     /*
-     * sethiddenImagePath
-     * @param hiddenImagePath hiddenImagePath
+     * setmaskingPanel
+     * @param maskingPanel maskingPanel
      */
-    @JsonProperty("hiddenImagePath")
-    public void setHiddenImagePath(RString hiddenImagePath) {
-        this.hiddenImagePath = hiddenImagePath;
+    @JsonProperty("maskingPanel")
+    public void setMaskingPanel(maskingPanelDiv maskingPanel) {
+        this.maskingPanel = maskingPanel;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public TextBoxCode getTxtHihokenshaNumber() {
-        return this.getShoriTaishoshaKensakuShiji().getTxtHihokenshaNumber();
-    }
-
-    @JsonIgnore
-    public void  setTxtHihokenshaNumber(TextBoxCode txtHihokenshaNumber) {
-        this.getShoriTaishoshaKensakuShiji().setTxtHihokenshaNumber(txtHihokenshaNumber);
-    }
-
     @JsonIgnore
     public DropDownList getDdlKensakuTaisho() {
         return this.getShoriTaishoshaKensakuShiji().getDdlKensakuTaisho();
@@ -178,6 +169,16 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnTaishoKensaku() {
+        return this.getShoriTaishoshaKensakuShiji().getBtnTaishoKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnTaishoKensaku(Button btnTaishoKensaku) {
+        this.getShoriTaishoshaKensakuShiji().setBtnTaishoKensaku(btnTaishoKensaku);
+    }
+
+    @JsonIgnore
     public Button getBtnClear() {
         return this.getShoriTaishoshaKensakuShiji().getBtnClear();
     }
@@ -185,16 +186,6 @@ public class ImageJohoMaskingDiv extends Panel {
     @JsonIgnore
     public void  setBtnClear(Button btnClear) {
         this.getShoriTaishoshaKensakuShiji().setBtnClear(btnClear);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtMaxDisp() {
-        return this.getShoriTaishoshaKensakuShiji().getTxtMaxDisp();
-    }
-
-    @JsonIgnore
-    public void  setTxtMaxDisp(TextBoxNum txtMaxDisp) {
-        this.getShoriTaishoshaKensakuShiji().setTxtMaxDisp(txtMaxDisp);
     }
 
     @JsonIgnore
@@ -213,48 +204,63 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnSaiKensaku() {
+        return this.getShoriTaishoshaIchiran().getBtnSaiKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnSaiKensaku(Button btnSaiKensaku) {
+        this.getShoriTaishoshaIchiran().setBtnSaiKensaku(btnSaiKensaku);
+    }
+
+    @JsonIgnore
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return this.getHihokenshaInfoPanel().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
-    public DataGrid<dgImageMaskingTaisho_Row> getDgImageMaskingTaisho() {
-        return this.getImageMaskTaishoShiji().getDgImageMaskingTaisho();
+    public RadioButton getRdoIkenshoHyo() {
+        return this.getImageMaskTaishoShiji().getRdoIkenshoHyo();
     }
 
     @JsonIgnore
-    public void  setDgImageMaskingTaisho(DataGrid<dgImageMaskingTaisho_Row> dgImageMaskingTaisho) {
-        this.getImageMaskTaishoShiji().setDgImageMaskingTaisho(dgImageMaskingTaisho);
+    public void  setRdoIkenshoHyo(RadioButton rdoIkenshoHyo) {
+        this.getImageMaskTaishoShiji().setRdoIkenshoHyo(rdoIkenshoHyo);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnMaskingGenpon() {
-        return this.getImageMaskTaishoShiji().getBtnMaskingGenpon();
+    public RadioButton getRdoIkenshoUra() {
+        return this.getImageMaskTaishoShiji().getRdoIkenshoUra();
     }
 
     @JsonIgnore
-    public void  setBtnMaskingGenpon(ButtonDialog btnMaskingGenpon) {
-        this.getImageMaskTaishoShiji().setBtnMaskingGenpon(btnMaskingGenpon);
+    public void  setRdoIkenshoUra(RadioButton rdoIkenshoUra) {
+        this.getImageMaskTaishoShiji().setRdoIkenshoUra(rdoIkenshoUra);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnMaskingMask() {
-        return this.getImageMaskTaishoShiji().getBtnMaskingMask();
+    public DropDownList getDdlMaskKubun() {
+        return this.getImageMaskTaishoShiji().getDdlMaskKubun();
     }
 
     @JsonIgnore
-    public void  setBtnMaskingMask(ButtonDialog btnMaskingMask) {
-        this.getImageMaskTaishoShiji().setBtnMaskingMask(btnMaskingMask);
+    public void  setDdlMaskKubun(DropDownList ddlMaskKubun) {
+        this.getImageMaskTaishoShiji().setDdlMaskKubun(ddlMaskKubun);
     }
 
     @JsonIgnore
-    public Button getBtnTorikeshi() {
-        return this.getImageMaskTaishoShiji().getBtnTorikeshi();
+    public Button getBtnMasking() {
+        return this.getImageMaskTaishoShiji().getBtnMasking();
     }
 
     @JsonIgnore
-    public void  setBtnTorikeshi(Button btnTorikeshi) {
-        this.getImageMaskTaishoShiji().setBtnTorikeshi(btnTorikeshi);
+    public void  setBtnMasking(Button btnMasking) {
+        this.getImageMaskTaishoShiji().setBtnMasking(btnMasking);
+    }
+
+    @JsonIgnore
+    public IImageMaskingDiv getCcdImageMasking() {
+        return this.getMaskingPanel().getCcdImageMasking();
     }
 
     // </editor-fold>

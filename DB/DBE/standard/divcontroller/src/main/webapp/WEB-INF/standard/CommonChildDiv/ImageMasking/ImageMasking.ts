@@ -1,8 +1,7 @@
-/// <reference path='ImageJohoMaskingDialog_Design.ts' />
-/// <reference path='../../d.ts/UZICommonChildDiv.d.ts' />
+/// <reference path='ImageMasking_Design.ts' />
 module DBE
 {
-    export module ImageJohoMaskingDialog
+    export module ImageMasking
     {
         export class ModeController {
             private controls: Controls;
@@ -11,14 +10,6 @@ module DBE
             constructor(fieldName: string) {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
-                Uz.GyomuJSHelper.registOriginalEvent(DBE.ImageJohoMaskingDialog.Events.onClick_btnHozon(),
-                function (control) {
-                         (<any>Uz)._MessageUtil.confirm("保存します。よろしいですか？", function (isOk) {
-                             if (isOk) { UZI.ImageMasking.EventScripts.beforeClick();
-                                 $("#" + Uz.JSControlUtil.getJSControl("btnSave").fieldName).click();
-                             }
-                         });
-                 });
             }
 
             public Properties() {
@@ -37,7 +28,7 @@ module DBE
 
 module DBE
 {
-    export module ImageJohoMaskingDialog
+    export module ImageMasking
     {
         export class PublicProperties {
             private controls: Controls;
@@ -56,3 +47,4 @@ module DBE
         }
     }
 }
+

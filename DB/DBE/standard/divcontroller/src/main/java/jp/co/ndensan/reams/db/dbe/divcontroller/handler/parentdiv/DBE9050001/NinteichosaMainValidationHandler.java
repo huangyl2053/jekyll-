@@ -88,6 +88,12 @@ public class NinteichosaMainValidationHandler {
         if ((状態_追加.equals(状態) || 状態_修正.equals(状態)) && (状態_修正.equals(状態) && !isUpdate())) {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
         }
+        if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
+            if (!is口座情報あり_必須項目入力あり(div)) {
+                validPairs.add(new ValidationMessageControlPair(
+                        new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "口座情報"), div.getChosaitakusakiJohoInput().getKozaJoho()));
+            }
+        }
         if (状態_追加.equals(状態)) {
             if (!RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo())
                     && RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaName())) {
@@ -164,6 +170,22 @@ public class NinteichosaMainValidationHandler {
     public boolean isUpdate() {
         NinteichosaItakusakiMainHandler handler = new NinteichosaItakusakiMainHandler(div);
         return !handler.getInputDiv().equals(div.getChosaitakusakiJohoInput().getHiddenInputDiv());
+    }
+
+    private boolean is口座情報あり_必須項目入力あり(NinteichosaItakusakiMainDiv div) {
+        if (!div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
+            return !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
+        }
+        return true;
+
     }
 
     private static class IdocheckMessages implements IValidationMessage {

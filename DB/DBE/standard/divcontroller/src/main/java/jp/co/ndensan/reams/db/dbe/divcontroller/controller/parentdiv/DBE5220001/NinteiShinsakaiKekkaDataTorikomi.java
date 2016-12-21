@@ -123,7 +123,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
 
     private boolean savaCsvファイル(FileData file) {
         RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-            .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         File サーバ = new File(path.toString());
         File local = new File(file.getFilePath().toString());
         boolean mkdirsFlag = false;
