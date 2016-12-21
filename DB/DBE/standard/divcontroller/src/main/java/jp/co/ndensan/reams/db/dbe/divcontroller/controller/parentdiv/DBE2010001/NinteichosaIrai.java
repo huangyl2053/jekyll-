@@ -382,8 +382,7 @@ public class NinteichosaIrai {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                                new ShinseishoKanriNo(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo());
             RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
         }

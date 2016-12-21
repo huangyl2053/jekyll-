@@ -37,7 +37,7 @@
      "layoutName": "DBE5220001",
      "layoutTitle": "介護認定審査会結果データ取込み(モバイル)",
      "eventName": "一覧に戻る",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",

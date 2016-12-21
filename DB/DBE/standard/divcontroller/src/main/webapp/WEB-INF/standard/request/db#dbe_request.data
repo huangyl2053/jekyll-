@@ -327,13 +327,11 @@ dbe/db/dbe/KojinJokyoShokai/onClick_btnprint
 dbe/db/dbe/KojinJokyoShokai/onLoad
 dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onClick_btnToSearch
 dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onLoad
-dbe/db/dbe/Masking/onChange_TxtSaidaiHyojiKensu
 dbe/db/dbe/Masking/onChange_radTaishoDataKubun
 dbe/db/dbe/Masking/onClick_BtnCompleteMasking
 dbe/db/dbe/Masking/onClick_BtnDataOutput
 dbe/db/dbe/Masking/onClick_BtnMasking
 dbe/db/dbe/Masking/onClick_btnOutputCsv
-dbe/db/dbe/Masking/onClick_btnShorikeizoku
 dbe/db/dbe/Masking/onLoad
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_BtnClear
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_Btnkennsaku

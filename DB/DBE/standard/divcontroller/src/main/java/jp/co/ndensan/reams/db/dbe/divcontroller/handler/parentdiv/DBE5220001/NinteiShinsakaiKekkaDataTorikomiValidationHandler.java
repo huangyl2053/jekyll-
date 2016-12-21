@@ -66,8 +66,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
             }
         }
         if (flag) {
-            validPairs.add(new ValidationMessageControlPair(new validationMessage(
-                UrErrorMessages.対象データなし_追加メッセージあり, fileName.toString()), div.getUplPanel()));
+            validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.一致性チェック));
         }
         return validPairs;
     }
@@ -105,20 +104,6 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
         private final Message message;
 
         private NinteiShinsakaiKekkaDataTorikomiMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
-    }
-
-    private class validationMessage implements IValidationMessage {
-
-        private final Message message;
-
-        private validationMessage(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

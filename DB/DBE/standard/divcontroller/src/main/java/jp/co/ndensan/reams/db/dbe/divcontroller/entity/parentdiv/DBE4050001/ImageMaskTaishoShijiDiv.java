@@ -14,21 +14,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageMaskTaishoShijiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgImageMaskingTaisho")
-    private DataGrid<dgImageMaskingTaisho_Row> dgImageMaskingTaisho;
-    @JsonProperty("btnMaskingGenpon")
-    private ButtonDialog btnMaskingGenpon;
-    @JsonProperty("btnMaskingMask")
-    private ButtonDialog btnMaskingMask;
-    @JsonProperty("btnTorikeshi")
-    private Button btnTorikeshi;
+    @JsonProperty("rdoIkenshoHyo")
+    private RadioButton rdoIkenshoHyo;
+    @JsonProperty("rdoIkenshoUra")
+    private RadioButton rdoIkenshoUra;
+    @JsonProperty("ddlMaskKubun")
+    private DropDownList ddlMaskKubun;
+    @JsonProperty("btnMasking")
+    private Button btnMasking;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,75 +37,75 @@ public class ImageMaskTaishoShijiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgImageMaskingTaisho
-     * @return dgImageMaskingTaisho
+     * getrdoIkenshoHyo
+     * @return rdoIkenshoHyo
      */
-    @JsonProperty("dgImageMaskingTaisho")
-    public DataGrid<dgImageMaskingTaisho_Row> getDgImageMaskingTaisho() {
-        return dgImageMaskingTaisho;
+    @JsonProperty("rdoIkenshoHyo")
+    public RadioButton getRdoIkenshoHyo() {
+        return rdoIkenshoHyo;
     }
 
     /*
-     * setdgImageMaskingTaisho
-     * @param dgImageMaskingTaisho dgImageMaskingTaisho
+     * setrdoIkenshoHyo
+     * @param rdoIkenshoHyo rdoIkenshoHyo
      */
-    @JsonProperty("dgImageMaskingTaisho")
-    public void setDgImageMaskingTaisho(DataGrid<dgImageMaskingTaisho_Row> dgImageMaskingTaisho) {
-        this.dgImageMaskingTaisho = dgImageMaskingTaisho;
+    @JsonProperty("rdoIkenshoHyo")
+    public void setRdoIkenshoHyo(RadioButton rdoIkenshoHyo) {
+        this.rdoIkenshoHyo = rdoIkenshoHyo;
     }
 
     /*
-     * getbtnMaskingGenpon
-     * @return btnMaskingGenpon
+     * getrdoIkenshoUra
+     * @return rdoIkenshoUra
      */
-    @JsonProperty("btnMaskingGenpon")
-    public ButtonDialog getBtnMaskingGenpon() {
-        return btnMaskingGenpon;
+    @JsonProperty("rdoIkenshoUra")
+    public RadioButton getRdoIkenshoUra() {
+        return rdoIkenshoUra;
     }
 
     /*
-     * setbtnMaskingGenpon
-     * @param btnMaskingGenpon btnMaskingGenpon
+     * setrdoIkenshoUra
+     * @param rdoIkenshoUra rdoIkenshoUra
      */
-    @JsonProperty("btnMaskingGenpon")
-    public void setBtnMaskingGenpon(ButtonDialog btnMaskingGenpon) {
-        this.btnMaskingGenpon = btnMaskingGenpon;
+    @JsonProperty("rdoIkenshoUra")
+    public void setRdoIkenshoUra(RadioButton rdoIkenshoUra) {
+        this.rdoIkenshoUra = rdoIkenshoUra;
     }
 
     /*
-     * getbtnMaskingMask
-     * @return btnMaskingMask
+     * getddlMaskKubun
+     * @return ddlMaskKubun
      */
-    @JsonProperty("btnMaskingMask")
-    public ButtonDialog getBtnMaskingMask() {
-        return btnMaskingMask;
+    @JsonProperty("ddlMaskKubun")
+    public DropDownList getDdlMaskKubun() {
+        return ddlMaskKubun;
     }
 
     /*
-     * setbtnMaskingMask
-     * @param btnMaskingMask btnMaskingMask
+     * setddlMaskKubun
+     * @param ddlMaskKubun ddlMaskKubun
      */
-    @JsonProperty("btnMaskingMask")
-    public void setBtnMaskingMask(ButtonDialog btnMaskingMask) {
-        this.btnMaskingMask = btnMaskingMask;
+    @JsonProperty("ddlMaskKubun")
+    public void setDdlMaskKubun(DropDownList ddlMaskKubun) {
+        this.ddlMaskKubun = ddlMaskKubun;
     }
 
     /*
-     * getbtnTorikeshi
-     * @return btnTorikeshi
+     * getbtnMasking
+     * @return btnMasking
      */
-    @JsonProperty("btnTorikeshi")
-    public Button getBtnTorikeshi() {
-        return btnTorikeshi;
+    @JsonProperty("btnMasking")
+    public Button getBtnMasking() {
+        return btnMasking;
     }
 
     /*
-     * setbtnTorikeshi
-     * @param btnTorikeshi btnTorikeshi
+     * setbtnMasking
+     * @param btnMasking btnMasking
      */
-    @JsonProperty("btnTorikeshi")
-    public void setBtnTorikeshi(Button btnTorikeshi) {
-        this.btnTorikeshi = btnTorikeshi;
+    @JsonProperty("btnMasking")
+    public void setBtnMasking(Button btnMasking) {
+        this.btnMasking = btnMasking;
     }
 
     // </editor-fold>
