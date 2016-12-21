@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
@@ -71,6 +73,7 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkNinteioChosaIraisho().setSelectedItemsByKey(selectKeys);
         div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
+        initializeNinteiChkShinseiTani();
         setNinteiChkShinseiTani(true);
         div.getChkNinteiChosaIraiChohyo().setSelectedItemsByKey(Collections.<RString>emptyList());
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
@@ -228,34 +231,72 @@ public class IraishoIkkatsuHakkoHandler {
         clear主治医意見書申請単位();
     }
 
-    private void setNinteiChkShinseiTani(boolean flag) {
-        div.getChkNinteiChosahyoShurui().setDisabled(flag);
-        div.getChkNinteiChosahyoOcrShurui().setDisabled(flag);
-        div.getChkNinteiChosaIraisho().setDisabled(flag);
-        div.getChkNinteiChosahyoSonota().setDisabled(flag);
+    private void initializeNinteiChkShinseiTani() {
         RDate 基準日 = RDate.getNowDate();
-        if (!flag) {
-            List<RString> ninteiChosahyoDisabledKeys = new ArrayList<>();
-            List<RString> ocrDisabledKeys = new ArrayList<>();
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                ninteiChosahyoDisabledKeys.add(基本調査);
-            } else {
-                ocrDisabledKeys.add(基本調査);
-            }
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                ninteiChosahyoDisabledKeys.add(特記事項);
-            } else {
-                ocrDisabledKeys.add(特記事項);
-            }
-            if (OCR.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 基準日, SubGyomuCode.DBE認定支援))) {
-                ninteiChosahyoDisabledKeys.add(概況調査);
-            } else {
-                ocrDisabledKeys.add(概況調査);
-            }
-            div.getChkNinteiChosahyoShurui().setDisabledItemsByKey(ninteiChosahyoDisabledKeys);
-            div.getChkNinteiChosahyoOcrShurui().setDisabledItemsByKey(ocrDisabledKeys);
-        }
+        boolean isデザイン用紙不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, 基準日);
+        boolean is特記デザイン用紙不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, 基準日);
+        boolean isOCR不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_OCR_出力有無, 基準日);
+        boolean is特記OCR不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_OCR_出力有無, 基準日);
+        boolean is差異チェック票不使用 = is使用ByConfig(ConfigNameDBE.認定調査差異チェック票_出力有無, 基準日);
+        boolean is概要特記不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_概況特記_出力有無, 基準日);
+        boolean is特記事項項目有不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_項目有り_出力有無, 基準日);
+        boolean is特記事項項目無不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_項目無し_出力有無, 基準日);
+        boolean is特記事項フリー不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, 基準日);
+        div.getChkChosaDesign().setDisplayNone(isデザイン用紙不使用);
+        div.getChkTokkiDesign().setDisplayNone(is特記デザイン用紙不使用);
+        div.getChkChosaOcr().setDisplayNone(isOCR不使用);
+        div.getChkTokkiOcr().setWrap(isOCR不使用);
+        div.getChkTokkiOcr().setDisplayNone(is特記OCR不使用);
+        div.getChkSaiCheck().setDisplayNone(is差異チェック票不使用);
+        div.getChkGaikyoTokki().setWrap(is差異チェック票不使用);
+        div.getChkGaikyoTokki().setDisplayNone(is概要特記不使用);
+        div.getChosahyoSelectItemsTwo().setDisplayNone(isデザイン用紙不使用 && is特記デザイン用紙不使用 && is差異チェック票不使用 && is概要特記不使用);
+        div.getChkTokkiKomokuAri().setDisplayNone(is特記事項項目有不使用);
+        div.getChkTokkiKomokuNashi().setDisplayNone(is特記事項項目無不使用);
+        div.getChkTokkiFree().setDisplayNone(is特記事項フリー不使用);
+        div.getTokkiChecks().setDisplayNone(is特記事項項目有不使用 && is特記事項項目無不使用 && is特記事項フリー不使用);
         clear認定調査申請単位();
+    }
+
+    private void setNinteiChkShinseiTani(boolean flag) {
+        div.getChkChosaIrai().setDisabled(flag);
+        div.getChkNinteiChosahyoSonota().setDisabled(flag);
+        div.getChkChosaDesign().setDisabled(flag);
+        div.getChkTokkiDesign().setDisabled(flag);
+        div.getChkChosaOcr().setDisabled(flag);
+        div.getChkTokkiOcr().setDisabled(flag);
+        div.getChkSaiCheck().setDisabled(flag);
+        div.getChkGaikyoTokki().setDisabled(flag);
+        div.getChkTokkiKomokuAri().setDisabled(flag);
+        div.getChkTokkiKomokuNashi().setDisabled(flag);
+        div.getChkTokkiFree().setDisabled(flag);
+        div.getChkTokkijikoTenyuryoku().setDisabled(flag);
+        RDate 基準日 = RDate.getNowDate();
+        setChkSelected(div.getChkChosaIrai(), ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, 基準日, flag);
+        setChkSelected(div.getChkChosaDesign(), ConfigNameDBE.認定調査依頼_手動_認定調査票, 基準日, flag);
+        setChkSelected(div.getChkTokkiDesign(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, 基準日, flag);
+        setChkSelected(div.getChkChosaOcr(), ConfigNameDBE.認定調査依頼_手動_認定調査票OCR, 基準日, flag);
+        setChkSelected(div.getChkTokkiOcr(), ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, 基準日, flag);
+        setChkSelected(div.getChkSaiCheck(), ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, 基準日, flag);
+        setChkSelected(div.getChkGaikyoTokki(), ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, 基準日, flag);
+        setChkSelected(div.getChkTokkiKomokuAri(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, 基準日, flag);
+        setChkSelected(div.getChkTokkiKomokuNashi(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, 基準日, flag);
+        setChkSelected(div.getChkTokkiFree(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, 基準日, flag);
+        clear認定調査申請単位();
+    }
+
+    private boolean is使用ByConfig(ConfigNameDBE key, RDate 基準日) {
+        return DbBusinessConfig.get(key, 基準日, SubGyomuCode.DBE認定支援).equals(OCR);
+    }
+    
+    private void setChkSelected(CheckBoxList chk, ConfigNameDBE key, RDate 基準日, boolean is外す) {
+        boolean is手動 = !is外す && is使用ByConfig(key, 基準日);
+        setChkSelected(chk, is手動);
+    }
+
+    private void setChkSelected(CheckBoxList chk, boolean isSelected) {
+        List<KeyValueDataSource> source = isSelected ? chk.getDataSource() : Collections.EMPTY_LIST;
+        chk.setSelectedItems(source);
     }
 
     private void setHakkobiAndTeishutsuKigen(RString ninteiShinsei) {

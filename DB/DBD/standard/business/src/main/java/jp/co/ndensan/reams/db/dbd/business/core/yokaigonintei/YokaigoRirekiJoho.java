@@ -214,7 +214,7 @@ public class YokaigoRirekiJoho {
      * @return 主治医医療機関コード RString
      */
     public RString get主治医医療機関コード() {
-        return null == 主治医医療機関情報受給Entity ? RString.EMPTY : 主治医医療機関情報受給Entity.getShujiiIryokikanCode();
+        return null == 主治医医療機関情報受給Entity ? RString.EMPTY : 主治医医療機関情報受給Entity.getShujiiIryokikanCode().getColumnValue();
     }
 
     /**

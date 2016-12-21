@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
@@ -35,8 +33,6 @@ import jp.co.ndensan.reams.uz.uza.io.ByteReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -56,7 +52,6 @@ public class ShinsakaiKaisaiKekka {
     private final ShinsakaiKaisaiYoteiJohoManager manager;
     private final ShinsakaiOnseiJohoManager onseiJohoManager;
     private final LockingKey 前排他ロックキー;
-    private static final RString BUTTON_UPDATE = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -65,7 +60,7 @@ public class ShinsakaiKaisaiKekka {
         service = ShinsakaiKaisaiKekkaFinder.createInstance();
         manager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
         onseiJohoManager = new ShinsakaiOnseiJohoManager();
-        前排他ロックキー = new LockingKey("DBEShinsakaiNo" + ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
+        前排他ロックキー = new LockingKey((new RString("DBEShinsakaiNo")).concat(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)));
     }
 
     /**
@@ -80,13 +75,14 @@ public class ShinsakaiKaisaiKekka {
         RealInitialLocker.lock(前排他ロックキー);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setDataSource(service.get開催会場());
-        getHandler(div).onLoad(saiYoteiJoho);
-        getHandler(div).setDisabled();
+        ShinsakaiKaisaiKekkaHandler handler = getHandler(div);
+        handler.onLoad(saiYoteiJoho);
+        handler.setDisabled();
         List<ShinsakaiWariateIinJohoBusiness> list = service.get審査会委員一覧検索(開催番号).records();
         if (list.isEmpty()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_UPDATE, Boolean.TRUE);
+            handler.set審査会登録入力不可();
         } else {
-            getHandler(div).initialize(list);
+            handler.initialize(list);
         }
 
         List<ShinsakaiKaisaiYoteiJoho2> yoteiJohoList = service.get審査会委員(開催番号).records();
@@ -158,39 +154,16 @@ public class ShinsakaiKaisaiKekka {
      * @return ResponseData<ShinsakaiKaisaiKekkaDiv>
      */
     public ResponseData onClick_btnUpdate(ShinsakaiKaisaiKekkaDiv div) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ShinsakaiKaisaiValidationHandler handler = getValidationHandler(div);
-        handler.yoteiStartToKaisaiEndTimeCheck(validationMessages);
-        handler.出席時間Check(validationMessages);
-        handler.退席時間Check(validationMessages);
-        handler.議長複数Check(validationMessages);
-        handler.議長出席Check(validationMessages);
-        handler.全員が遅刻Check(validationMessages);
-        handler.全員が早退Check(validationMessages);
-        handler.必須項目Check(validationMessages);
+        ShinsakaiKaisaiValidationHandler validationHandler = getValidationHandler(div);
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
-        handler.変更有無Check(validationMessages, getKekkaJoho(div, 開催番号));
+        ShinsakaiKaisaiYoteiJoho2 結果情報 = getKekkaJoho(div, 開催番号);
+        ValidationMessageControlPairs validationMessages = validationHandler.validate(結果情報);
         if (!ResponseHolder.isReRequest()) {
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
         }
-        if (is委員のみ(div)) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.委員のみが指定されている.getMessage().getCode(),
-                        DbeQuestionMessages.委員のみが指定されている.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        }
-        if (new RString(DbeQuestionMessages.委員のみが指定されている.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
-        }
-        if (new RString(DbeQuestionMessages.委員のみが指定されている.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
-        }
-        if (!ResponseHolder.isReRequest()) {
+        if (!ResponseHolder.isReRequest() || ResponseHolder.getButtonType() == null) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
@@ -215,6 +188,7 @@ public class ShinsakaiKaisaiKekka {
      * @return ResponseData<ShinsakaiKaisaiKekkaDiv>
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnRetuen(ShinsakaiKaisaiKekkaDiv div) {
+        RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(div).forwardWithEventName(DBE5210001TransitionEventName.審査会一覧に戻る).respond();
     }
 
@@ -309,15 +283,4 @@ public class ShinsakaiKaisaiKekka {
         return new RString(String.valueOf(hour)).padZeroToLeft(2).concat(new RString(String.valueOf(min)).padZeroToLeft(2));
     }
 
-    private boolean is委員のみ(ShinsakaiKaisaiKekkaDiv div) {
-        List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
-        if (!rowList.isEmpty()) {
-            for (dgShinsakaiIinIchiran_Row row : rowList) {
-                if (row.getGichoKubun().getSelectedKey().equals(KaigoninteiShinsakaiGichoKubunCode.議長.getコード())) {
-                    return Boolean.FALSE;
-                }
-            }
-        }
-        return Boolean.TRUE;
-    }
 }

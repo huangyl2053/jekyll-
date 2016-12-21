@@ -138,4 +138,13 @@ public class NinteiChosaIraiShokaiMaster {
     public Code getNinteichosaIraiKubunCode() {
         return entity.getNinteichosaIraiKubunCode();
     }
+    
+    /**
+     * 調査依頼日を取得します。
+     *
+     * @return 調査依頼日
+     */
+    public FlexibleDate getNinteichosaIraiYMD() {
+        return entity.getNinteichosaIraiYMD();
+    }
 }

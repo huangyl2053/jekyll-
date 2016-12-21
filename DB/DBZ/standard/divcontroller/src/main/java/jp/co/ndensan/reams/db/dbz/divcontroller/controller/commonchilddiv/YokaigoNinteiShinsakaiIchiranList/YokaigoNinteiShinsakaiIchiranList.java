@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.YokaigoNinteiShinsakaiIchiranList;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -20,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 介護認定審査会共有一覧のDivControllerです。
@@ -80,6 +80,8 @@ public class YokaigoNinteiShinsakaiIchiranList {
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
         div.getDgShinsakaiIchiran().getDataSource().clear();
+        div.getDgShinsakaiIchiran().getGridSetting().setLimitRowCount(0);
+        div.getDgShinsakaiIchiran().getGridSetting().setSelectedRowCount(0);
         モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
         RDate 表示期間From = div.getTxtHyojiKikan().getFromValue();
         RDate 表示期間To = div.getTxtHyojiKikan().getToValue();
@@ -103,13 +105,13 @@ public class YokaigoNinteiShinsakaiIchiranList {
             表示条件 = div.getRadHyojiJokenShinsakaiKanryo().getSelectedValue();
 
         }
-        List<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
-                createInstance().get審査会一覧(表示期間From, 表示期間To, モード, 表示条件, div.getTxtSaidaiHyojiKensu().getValue(), ダミー審査会).records();
-        if (審査会一覧 == null || 審査会一覧.isEmpty()) {
+        SearchResult<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
+                createInstance().get審査会一覧(表示期間From, 表示期間To, モード, 表示条件, div.getTxtSaidaiHyojiKensu().getValue(), ダミー審査会);
+        if (審査会一覧 == null || 審査会一覧.records().isEmpty()) {
             validationMessages = getHandler(div).該当データが存在のチェック();
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        getHandler(div).set審査会委員一覧(審査会一覧);
+        getHandler(div).set審査会委員一覧(審査会一覧, div.getTxtSaidaiHyojiKensu().getValue());
 
         return ResponseData.of(div).respond();
     }

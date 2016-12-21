@@ -1,19 +1,20 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ButtonPanel のクラスファイル 
+ * NinteiEnkiTsuchishoBunshoBangoSetting のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ButtonPanelDiv extends Panel {
+public class NinteiEnkiTsuchishoBunshoBangoSettingDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
@@ -21,8 +22,8 @@ public class ButtonPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btndataoutput")
-    private ButtonDownLoad btndataoutput;
+    @JsonProperty("ccdNinteiEnkiTsuchishoBunshoBango")
+    private BunshoBangoInputDiv ccdNinteiEnkiTsuchishoBunshoBango;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +32,12 @@ public class ButtonPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtndataoutput
-     * @return btndataoutput
+     * getccdNinteiEnkiTsuchishoBunshoBango
+     * @return ccdNinteiEnkiTsuchishoBunshoBango
      */
-    @JsonProperty("btndataoutput")
-    public ButtonDownLoad getBtndataoutput() {
-        return btndataoutput;
-    }
-
-    /*
-     * setbtndataoutput
-     * @param btndataoutput btndataoutput
-     */
-    @JsonProperty("btndataoutput")
-    public void setBtndataoutput(ButtonDownLoad btndataoutput) {
-        this.btndataoutput = btndataoutput;
+    @JsonProperty("ccdNinteiEnkiTsuchishoBunshoBango")
+    public IBunshoBangoInputDiv getCcdNinteiEnkiTsuchishoBunshoBango() {
+        return ccdNinteiEnkiTsuchishoBunshoBango;
     }
 
     // </editor-fold>

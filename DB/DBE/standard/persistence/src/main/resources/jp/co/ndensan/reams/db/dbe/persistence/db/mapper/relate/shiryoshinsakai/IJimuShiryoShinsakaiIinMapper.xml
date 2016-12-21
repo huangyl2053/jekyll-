@@ -882,6 +882,7 @@
         SELECT
         ShinsakaiW.dbt5101_shoKisaiHokenshaNo AS dbt5101_shoKisaiHokenshaNo,
         ShinsakaiW.dbt5101_hihokenshaNo AS dbt5101_hihokenshaNo,
+        ShinsakaiW.dbt5115_imageSharedFileId AS dbt5115_imageSharedFileId,
         ShinsakaiW.dbt5502_shinsakaiOrder AS dbt5502_shinsakaiOrder,
         GaikyoTokkiJoho.dbt5206_shuso AS dbt5206_shuso,
         GaikyoTokkiJoho.dbt5206_kazokuJokyo AS dbt5206_kazokuJokyo,

@@ -22,6 +22,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsakaiKaisaiRelateEntity implements Serializable {
 
+    private int totalCount;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
     private RString shinsakaiShuryoYoteiTime;

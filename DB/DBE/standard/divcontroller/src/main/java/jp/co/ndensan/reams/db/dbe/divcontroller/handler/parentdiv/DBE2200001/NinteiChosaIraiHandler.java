@@ -798,11 +798,11 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
-     * 認定調査依頼書印刷用パラメータを作成します。
+     * 認定調査依頼書Itemを作成します。
      *
-     * @return 認定調査依頼書印刷用パラメータ
+     * @return ChosaIraishoHeadItemのList
      */
-    public List<ChosaIraishoHeadItem> create認定調査依頼書印刷用パラメータ() {
+    public List<ChosaIraishoHeadItem> create認定調査依頼書Item() {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
@@ -841,9 +841,8 @@ public class NinteiChosaIraiHandler {
                     調査員情報リスト.add(調査員情報);
                 }
             }
-            Map<Integer, RString> 通知文
-                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
-            RString homonChosasakiJusho = row.getHomonChosasakiJusho();
+            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
+                    ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, Integer.parseInt(row.getShichosonCode().toString()));
             RString 認定調査提出期限 = RString.EMPTY;
             RString 認定調査委期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             RString 認定調査作成期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -888,8 +887,8 @@ public class NinteiChosaIraiHandler {
                         get名称付与(),
                         getカスタマーバーコード(調査員情報),
                         RString.EMPTY,
-                        ConfigNameDBE.認定調査依頼書.get名称(),
-                        通知文.get(1),
+                        (通知文.containsKey(0)) ? 通知文.get(0) : RString.EMPTY,
+                        (通知文.containsKey(1)) ? 通知文.get(1) : RString.EMPTY,
                         被保険者番号リスト.get(0),
                         被保険者番号リスト.get(1),
                         被保険者番号リスト.get(2),
@@ -912,12 +911,12 @@ public class NinteiChosaIraiHandler {
                         row.getJusho(),
                         row.getTelNo(),
                         editYubinNoToIchiran(row.getHomonChosasakiYubinNo()),
-                        homonChosasakiJusho,
+                        row.getHomonChosasakiJusho(),
                         row.getHomonChosasakiName(),
                         row.getHomonChosasakiTelNo(),
                         row.getNinteiShinseiYMDKoShin(),
                         認定調査提出期限,
-                        通知文.get(2)
+                        (通知文.containsKey(2)) ? 通知文.get(2) : RString.EMPTY
                 );
                 chosaIraishoHeadItemList.add(item);
             }
