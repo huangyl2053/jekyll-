@@ -63,7 +63,6 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
-    @BatchWriter
     private CsvWriter<ShujiiIkenTokusokujoCsvEntity> csvWriter;
     private FileSpoolManager manager;
     private RString eucFilePath;
