@@ -277,6 +277,17 @@ public class ShinsakaiToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
+        getHandler(div).onClick_btnWaritsuke(div.getDgShinsakaiList().getClickedItem());
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 対象者最大審査順表示件数テキスト変更イベントです。
+     * 
+     * @param div ShinsakaiTorokuDiv
+     * @return ResponseData<ShinsakaiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiTorokuDiv> onChange_txtTaishoshaMaxHyojiKensu(ShinsakaiTorokuDiv div) {
         return ResponseData.of(div).respond();
     }
 
