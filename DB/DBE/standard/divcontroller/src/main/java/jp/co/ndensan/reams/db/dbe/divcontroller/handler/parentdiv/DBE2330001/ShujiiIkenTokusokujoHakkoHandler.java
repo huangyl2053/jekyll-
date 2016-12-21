@@ -119,7 +119,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
                 ? 選択された : 未選択);
         tempData.setTemp_主治医意見書督促対象者一覧表(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY1)
                 ? 選択された : 未選択);
-        tempData.setTemp_CSV出力(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().contains(RADIOBUTTONKEY1)
+        tempData.setTemp_CSV出力(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkCSVShutsuryoku().getSelectedKeys().contains(RADIOBUTTONKEY1)
                 ? 選択された : 未選択);
         tempData.setTemp_印刷済対象者(div.getShujiiIkenshoTokusokujo().getChkInsatsuzumiTaisho().getSelectedKeys().contains(RADIOBUTTONKEY0)
                 ? 選択された : 未選択);
