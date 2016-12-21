@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinsakaiIinToroku のクラスファイル 
+ * IinMiwariate のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShinsakaiIinTorokuDiv extends Panel {
+public class IinMiwariateDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
@@ -21,8 +21,10 @@ public class ShinsakaiIinTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
+    @JsonProperty("icoIinMiwariate")
+    private Icon icoIinMiwariate;
+    @JsonProperty("lblIinMiwariate")
+    private Label lblIinMiwariate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +33,39 @@ public class ShinsakaiIinTorokuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgShinsakaiIinIchiran
-     * @return dgShinsakaiIinIchiran
+     * geticoIinMiwariate
+     * @return icoIinMiwariate
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
-        return dgShinsakaiIinIchiran;
+    @JsonProperty("icoIinMiwariate")
+    public Icon getIcoIinMiwariate() {
+        return icoIinMiwariate;
     }
 
     /*
-     * setdgShinsakaiIinIchiran
-     * @param dgShinsakaiIinIchiran dgShinsakaiIinIchiran
+     * seticoIinMiwariate
+     * @param icoIinMiwariate icoIinMiwariate
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
-        this.dgShinsakaiIinIchiran = dgShinsakaiIinIchiran;
+    @JsonProperty("icoIinMiwariate")
+    public void setIcoIinMiwariate(Icon icoIinMiwariate) {
+        this.icoIinMiwariate = icoIinMiwariate;
+    }
+
+    /*
+     * getlblIinMiwariate
+     * @return lblIinMiwariate
+     */
+    @JsonProperty("lblIinMiwariate")
+    public Label getLblIinMiwariate() {
+        return lblIinMiwariate;
+    }
+
+    /*
+     * setlblIinMiwariate
+     * @param lblIinMiwariate lblIinMiwariate
+     */
+    @JsonProperty("lblIinMiwariate")
+    public void setLblIinMiwariate(Label lblIinMiwariate) {
+        this.lblIinMiwariate = lblIinMiwariate;
     }
 
     // </editor-fold>
