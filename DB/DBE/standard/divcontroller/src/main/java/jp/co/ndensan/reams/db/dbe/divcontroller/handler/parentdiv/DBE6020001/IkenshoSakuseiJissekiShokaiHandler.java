@@ -171,7 +171,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         }
         param.setIkenshoKinyubiFrom(意見書記入日FROM);
         param.setIkenshoKinyubiTo(意見書記入日TO);
-        param.setHokensya(div.getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
+        param.setHokensya(div.getCcdHokensya().getSelectedItem().get市町村コード().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

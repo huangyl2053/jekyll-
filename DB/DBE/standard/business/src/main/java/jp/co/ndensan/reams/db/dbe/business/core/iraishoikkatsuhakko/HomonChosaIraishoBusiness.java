@@ -224,7 +224,7 @@ public class HomonChosaIraishoBusiness {
                     break;
             }
         }
-        if (processParamter.isNinteiChosaIraiChohyo() || processParamter.isNinteiChosaIraisyo()) {
+        if (processParamter.isNinteiChosaIraiChohyo() || processParamter.is認定調査依頼書()) {
             dbT5201Entity.setIraishoShutsuryokuYMD(get発行日(processParamter.getHakkobi()));
         }
         if (is調査票等出力年月日()) {
@@ -242,14 +242,18 @@ public class HomonChosaIraishoBusiness {
     }
 
     private boolean is調査票等出力年月日() {
-        return processParamter.isNinteiChosahyoKihon()
-                || processParamter.isNinteiChosahyoTokki()
-                || processParamter.isNinteiChosahyoGaikyou()
-                || processParamter.isNinteiChosahyoOCRKihon()
-                || processParamter.isNinteiChosahyoOCRTokki()
-                || processParamter.isNinteiChosahyoOCRGaikyou()
-                || processParamter.isNinteiChosaCheckHyo()
-                || processParamter.isZenkoNinteiChosahyo();
+        return processParamter.is認定調査依頼書()
+                || processParamter.is認定調査票_デザイン用紙()
+                || processParamter.is特記事項_デザイン用紙()
+                || processParamter.is認定調査票OCR()
+                || processParamter.is特記事項OCR()
+                || processParamter.is概況特記()
+                || processParamter.is認定調査差異チェック票()
+                || processParamter.is前回認定調査結果との比較表()
+                || processParamter.is特記事項_項目あり()
+                || processParamter.is特記事項_項目無し()
+                || processParamter.is特記事項_フリータイプ()
+                || processParamter.is手入力タイプ();
     }
 
     /**
@@ -779,33 +783,34 @@ public class HomonChosaIraishoBusiness {
         builder.append(KYOTSUHIZUKE);
         builder.append(processParamter.getKyotsuHizuke());
         出力条件.add(builder.toRString());
+        
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAISYO);
-        builder.append(processParamter.isNinteiChosaIraisyo());
+        builder.append(processParamter.is認定調査依頼書());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAHYOKIHON);
-        builder.append(processParamter.isNinteiChosahyoKihon());
+//        builder.append(processParamter.isNinteiChosahyoKihon());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAHYOTOKKI);
-        builder.append(processParamter.isNinteiChosahyoTokki());
+//        builder.append(processParamter.isNinteiChosahyoTokki());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAHYOGAIKYOU);
-        builder.append(processParamter.isNinteiChosahyoGaikyou());
+//        builder.append(processParamter.isNinteiChosahyoGaikyou());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAHYOOCRKIHON);
-        builder.append(processParamter.isNinteiChosahyoOCRKihon());
+//        builder.append(processParamter.isNinteiChosahyoOCRKihon());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAHYOOCRTOKKI);
-        builder.append(processParamter.isNinteiChosahyoOCRTokki());
+//        builder.append(processParamter.isNinteiChosahyoOCRTokki());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAHYOOCRGAIKYOU);
-        builder.append(processParamter.isNinteiChosahyoOCRGaikyou());
+//        builder.append(processParamter.isNinteiChosahyoOCRGaikyou());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAIRIREKIICHIRAN);
@@ -813,7 +818,7 @@ public class HomonChosaIraishoBusiness {
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSACHECKHYO);
-        builder.append(processParamter.isNinteiChosaCheckHyo());
+//        builder.append(processParamter.isNinteiChosaCheckHyo());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAICHOHYO);
@@ -821,7 +826,7 @@ public class HomonChosaIraishoBusiness {
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(ZENKONINTEICHOSAHYO);
-        builder.append(processParamter.isZenkoNinteiChosahyo());
+//        builder.append(processParamter.isZenkoNinteiChosahyo());
         出力条件.add(builder.toRString());
         return 出力条件;
     }

@@ -66,13 +66,13 @@ public class MaskingHandler {
     public void initialize() {
         List<MaSuKinGuBusiness> マスキングList = YokaigoNinteiTaskListFinder.createInstance().
                 getマスキングモード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY,
-                                div.getTxtSaidaiHyojiKensu().getValue())).records();
+                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(),
+                                div.getRadTaishoDataKubun().getSelectedKey(), div.getTxtSaidaiHyojiKensu().getValue())).records();
         if (!マスキングList.isEmpty()) {
             ShinSaKaiBusiness 前マスキングModel = YokaigoNinteiTaskListFinder.createInstance().
                     get前マスキング(YokaigoNinteiTaskListParameter.
-                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY,
-                                    div.getTxtSaidaiHyojiKensu().getValue()));
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(),
+                                    div.getRadTaishoDataKubun().getSelectedKey(), div.getTxtSaidaiHyojiKensu().getValue()));
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前マスキングModel.get要介護認定完了情報Lsit()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));

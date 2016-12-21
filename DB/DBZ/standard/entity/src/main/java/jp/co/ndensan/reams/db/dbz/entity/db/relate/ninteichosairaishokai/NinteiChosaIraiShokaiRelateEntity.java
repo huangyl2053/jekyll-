@@ -34,4 +34,5 @@ public class NinteiChosaIraiShokaiRelateEntity {
     private ChosainCode ninteiChosainCode;
     private RString chosainShimei;
     private Code ninteichosaIraiKubunCode;
+    private FlexibleDate ninteichosaIraiYMD;
 }
