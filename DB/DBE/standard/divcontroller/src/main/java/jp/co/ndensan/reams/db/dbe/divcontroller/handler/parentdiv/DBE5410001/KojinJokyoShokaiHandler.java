@@ -308,8 +308,10 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setShinseiRiyu(kojinJokyoShokaiList.get(0).get認定申請理由());
         jokyohyoEntity.setShinseishaName(kojinJokyoShokaiList.get(0).get申請者氏名());
         jokyohyoEntity.setShinseiDaikoJigyoshaName(kojinJokyoShokaiList.get(0).get申請代行事業者());
-        jokyohyoEntity.setShinseishaKankei(ShinseiTodokedeDaikoKubunCode.toValue(
-                kojinJokyoShokaiList.get(0).get申請届出代行区分コード().getColumnValue()).toRString());
+        if (kojinJokyoShokaiList.get(0).get申請者氏名() != null) {
+            jokyohyoEntity.setShinseishaKankei(ShinseiTodokedeDaikoKubunCode.toValue(
+                    kojinJokyoShokaiList.get(0).get申請届出代行区分コード().getColumnValue()).toRString());
+        }
         jokyohyoEntity.setHonninKankei(kojinJokyoShokaiList.get(0).get申請届出者続柄コード().getColumnValue());
         jokyohyoEntity.setYubinNo2(kojinJokyoShokaiList.get(0).get申請者郵便番号().getColumnValue());
         jokyohyoEntity.setShinseishaJusho(kojinJokyoShokaiList.get(0).get申請届出者住所().getColumnValue());
