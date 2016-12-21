@@ -125,16 +125,19 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+
+
+
                     JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA4ReportSource> occuredBreak(
                             ReportLineRecord<JimuShinsakaishiryoA4ReportSource> currentRecord,
                             ReportLineRecord<JimuShinsakaishiryoA4ReportSource> nextRecord,
                             ReportDynamicChart dynamicChart) {
-                                int layout = currentRecord.getSource().layout.index();
+                                int layout = currentRecord.getSource().layout;
                                 currentRecord.setFormGroupIndex(layout);
                                 if (nextRecord != null && nextRecord.getSource() != null) {
-                                    layout = nextRecord.getSource().layout.index();
+                                    layout = nextRecord.getSource().layout;
                                     nextRecord.setFormGroupIndex(layout);
                                 }
                                 return currentRecord;
@@ -452,11 +455,10 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchReportWriter.getImageFolderPath()));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchReportWriter.getImageFolderPath())).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 
 }

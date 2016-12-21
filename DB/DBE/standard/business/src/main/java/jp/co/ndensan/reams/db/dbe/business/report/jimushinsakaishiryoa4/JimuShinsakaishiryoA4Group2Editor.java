@@ -168,7 +168,7 @@ public class JimuShinsakaishiryoA4Group2Editor implements IJimuShinsakaishiryoA4
             source.listChukanhyoka_4 = item.get中間評価リスト().get(index).get第4群();
             source.listChukanhyoka_5 = item.get中間評価リスト().get(index).get第5群();
         }
-        source.layout = Layouts.必須;
+        source.layout = 2;
         return editSource1(source);
     }
 
