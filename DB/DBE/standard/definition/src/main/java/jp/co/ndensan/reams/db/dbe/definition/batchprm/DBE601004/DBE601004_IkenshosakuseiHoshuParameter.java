@@ -27,6 +27,7 @@ public class DBE601004_IkenshosakuseiHoshuParameter extends BatchParameterBase {
     private static final String KEY_SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String KEY_IRAISHO_SAKUSEI_IRAI_FROM = "iraishoSakuseiIraiFrom";
     private static final String KEY_IRAISHO_SAKUSEI_IRAI_TO = "iraishoSakuseiIraiTo";
+    private static final String KEY_HOKENSHA = "hokensha";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 7174093335006943966L;
 
@@ -36,6 +37,8 @@ public class DBE601004_IkenshosakuseiHoshuParameter extends BatchParameterBase {
     private FlexibleDate iraishoSakuseiIraiFrom;
     @BatchParameter(key = KEY_IRAISHO_SAKUSEI_IRAI_TO, name = "作成依頼日期間終了")
     private FlexibleDate iraishoSakuseiIraiTo;
+    @BatchParameter(key = KEY_HOKENSHA, name = "保険者")
+    private RString hokensha;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<IkenshoHoshuShokaiIchiranKey> keyJoho;
 
@@ -45,16 +48,19 @@ public class DBE601004_IkenshosakuseiHoshuParameter extends BatchParameterBase {
      * @param syohyoSyuturyoku 帳票出力区分
      * @param iraishoSakuseiIraiFrom 作成依頼日期間開始
      * @param iraishoSakuseiIraiTo 作成依頼日期間終了
+     * @param hokensha 保険者
      * @param keyJoho キー情報Entityリスト
      */
     public DBE601004_IkenshosakuseiHoshuParameter(
             RString syohyoSyuturyoku,
             FlexibleDate iraishoSakuseiIraiFrom,
             FlexibleDate iraishoSakuseiIraiTo,
+            RString hokensha,
             List<IkenshoHoshuShokaiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.iraishoSakuseiIraiFrom = iraishoSakuseiIraiFrom;
         this.iraishoSakuseiIraiTo = iraishoSakuseiIraiTo;
+        this.hokensha = hokensha;
         this.keyJoho = keyJoho;
     }
 
@@ -73,6 +79,7 @@ public class DBE601004_IkenshosakuseiHoshuParameter extends BatchParameterBase {
         return new IkenHoshuIchiranProcessParameter(syohyoSyuturyoku,
                 iraishoSakuseiIraiFrom,
                 iraishoSakuseiIraiTo,
+                hokensha,
                 keyJoho);
     }
 
