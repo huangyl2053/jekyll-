@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.csv.jizenshinsakekka;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.io.fld.FldField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -142,5 +143,7 @@ public class OcrJohoOcrDataRecordEntity extends OcrJohoOcrRecordEntity {
     private RString 障害高齢者の日常生活自立度;
     @FldField(order = 63, length = 3)
     private RString 認知症高齢者の日常生活自立度;
+     @FldField(order = 64, length = 3)
+    private List<RString> ファイルList;
 
 }
