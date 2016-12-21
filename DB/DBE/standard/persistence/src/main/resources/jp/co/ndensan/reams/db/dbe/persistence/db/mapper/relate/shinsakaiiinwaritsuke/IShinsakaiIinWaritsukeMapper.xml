@@ -112,6 +112,7 @@
                                                 AND dbT5503."shinsakaiKaisaiNo" <![CDATA[<>]]> #{kaisaiNo}
                                                 )
         AND dbT5594."haishiFlag" = false
+        AND "shinsakaiIinShuryoYMD" >= #{kaisaiYMD}
     </select>
     <select resultOrdered="true" id="get審査会委員情報By開催年月日" resultMap="resultMap_getShinsakaiiinJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
