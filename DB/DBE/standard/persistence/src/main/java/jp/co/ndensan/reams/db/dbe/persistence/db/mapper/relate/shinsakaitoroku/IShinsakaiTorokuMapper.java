@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitoroku;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku.ShinsakaiTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
 
 /**
@@ -34,5 +36,13 @@ public interface IShinsakaiTorokuMapper {
      * @return List<ShinSaKaiToRoKuRelateEntity>
      */
     List<ShinSaKaiToRoKuRelate> get前審査会登録(YokaigoNinteiTaskListParameter parameter);
+    
+    /**
+     * 審査会一覧情報検索する。
+     *
+     * @param parameter 介護認定審査会共有一覧のパラメータクラス
+     * @return List<ShinsakaiKaisaiRelateEntity>
+     */
+    List<ShinsakaiKaisaiRelateEntity> get審査会一覧(ShinsakaiKaisaiParameter parameter);
 
 }

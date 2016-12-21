@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
@@ -14,25 +15,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class HakkoJokenSinnseiDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblSakuseiChohyo")
-    private Label lblSakuseiChohyo;
-    @JsonProperty("chkSakuseiChohyo")
-    private CheckBoxList chkSakuseiChohyo;
-    @JsonProperty("lblSakuseiJoken")
-    private Label lblSakuseiJoken;
-    @JsonProperty("radHakoJyoken")
-    private RadioButton radHakoJyoken;
-    @JsonProperty("txtShoriYMD")
-    private TextBoxDateRange txtShoriYMD;
-    @JsonProperty("txtShinseibi")
-    private TextBoxDateRange txtShinseibi;
+    @JsonProperty("MonitorJoken")
+    private MonitorJokenDiv MonitorJoken;
+    @JsonProperty("ShinseishaIchiranJoken")
+    private ShinseishaIchiranJokenDiv ShinseishaIchiranJoken;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,111 +34,142 @@ public class HakkoJokenSinnseiDiv extends PanelBatchParameter {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblSakuseiChohyo
-     * @return lblSakuseiChohyo
+     * getMonitorJoken
+     * @return MonitorJoken
      */
-    @JsonProperty("lblSakuseiChohyo")
-    public Label getLblSakuseiChohyo() {
-        return lblSakuseiChohyo;
+    @JsonProperty("MonitorJoken")
+    public MonitorJokenDiv getMonitorJoken() {
+        return MonitorJoken;
     }
 
     /*
-     * setlblSakuseiChohyo
-     * @param lblSakuseiChohyo lblSakuseiChohyo
+     * setMonitorJoken
+     * @param MonitorJoken MonitorJoken
      */
-    @JsonProperty("lblSakuseiChohyo")
-    public void setLblSakuseiChohyo(Label lblSakuseiChohyo) {
-        this.lblSakuseiChohyo = lblSakuseiChohyo;
+    @JsonProperty("MonitorJoken")
+    public void setMonitorJoken(MonitorJokenDiv MonitorJoken) {
+        this.MonitorJoken = MonitorJoken;
     }
 
     /*
-     * getchkSakuseiChohyo
-     * @return chkSakuseiChohyo
+     * getShinseishaIchiranJoken
+     * @return ShinseishaIchiranJoken
      */
-    @JsonProperty("chkSakuseiChohyo")
-    public CheckBoxList getChkSakuseiChohyo() {
-        return chkSakuseiChohyo;
+    @JsonProperty("ShinseishaIchiranJoken")
+    public ShinseishaIchiranJokenDiv getShinseishaIchiranJoken() {
+        return ShinseishaIchiranJoken;
     }
 
     /*
-     * setchkSakuseiChohyo
-     * @param chkSakuseiChohyo chkSakuseiChohyo
+     * setShinseishaIchiranJoken
+     * @param ShinseishaIchiranJoken ShinseishaIchiranJoken
      */
-    @JsonProperty("chkSakuseiChohyo")
-    public void setChkSakuseiChohyo(CheckBoxList chkSakuseiChohyo) {
-        this.chkSakuseiChohyo = chkSakuseiChohyo;
+    @JsonProperty("ShinseishaIchiranJoken")
+    public void setShinseishaIchiranJoken(ShinseishaIchiranJokenDiv ShinseishaIchiranJoken) {
+        this.ShinseishaIchiranJoken = ShinseishaIchiranJoken;
     }
 
     /*
-     * getlblSakuseiJoken
-     * @return lblSakuseiJoken
+     * [ ショートカットの作成 ]
      */
-    @JsonProperty("lblSakuseiJoken")
-    public Label getLblSakuseiJoken() {
-        return lblSakuseiJoken;
+    @JsonIgnore
+    public CheckBoxList getChkMonitror() {
+        return this.getMonitorJoken().getChkMonitror();
     }
 
-    /*
-     * setlblSakuseiJoken
-     * @param lblSakuseiJoken lblSakuseiJoken
-     */
-    @JsonProperty("lblSakuseiJoken")
-    public void setLblSakuseiJoken(Label lblSakuseiJoken) {
-        this.lblSakuseiJoken = lblSakuseiJoken;
+    @JsonIgnore
+    public void  setChkMonitror(CheckBoxList chkMonitror) {
+        this.getMonitorJoken().setChkMonitror(chkMonitror);
     }
 
-    /*
-     * getradHakoJyoken
-     * @return radHakoJyoken
-     */
-    @JsonProperty("radHakoJyoken")
-    public RadioButton getRadHakoJyoken() {
-        return radHakoJyoken;
+    @JsonIgnore
+    public Label getLblMonitorSakuseiJoken() {
+        return this.getMonitorJoken().getLblMonitorSakuseiJoken();
     }
 
-    /*
-     * setradHakoJyoken
-     * @param radHakoJyoken radHakoJyoken
-     */
-    @JsonProperty("radHakoJyoken")
-    public void setRadHakoJyoken(RadioButton radHakoJyoken) {
-        this.radHakoJyoken = radHakoJyoken;
+    @JsonIgnore
+    public void  setLblMonitorSakuseiJoken(Label lblMonitorSakuseiJoken) {
+        this.getMonitorJoken().setLblMonitorSakuseiJoken(lblMonitorSakuseiJoken);
     }
 
-    /*
-     * gettxtShoriYMD
-     * @return txtShoriYMD
-     */
-    @JsonProperty("txtShoriYMD")
-    public TextBoxDateRange getTxtShoriYMD() {
-        return txtShoriYMD;
+    @JsonIgnore
+    public RadioButton getRadMonitorJoken() {
+        return this.getMonitorJoken().getRadMonitorJoken();
     }
 
-    /*
-     * settxtShoriYMD
-     * @param txtShoriYMD txtShoriYMD
-     */
-    @JsonProperty("txtShoriYMD")
-    public void setTxtShoriYMD(TextBoxDateRange txtShoriYMD) {
-        this.txtShoriYMD = txtShoriYMD;
+    @JsonIgnore
+    public void  setRadMonitorJoken(RadioButton radMonitorJoken) {
+        this.getMonitorJoken().setRadMonitorJoken(radMonitorJoken);
     }
 
-    /*
-     * gettxtShinseibi
-     * @return txtShinseibi
-     */
-    @JsonProperty("txtShinseibi")
-    public TextBoxDateRange getTxtShinseibi() {
-        return txtShinseibi;
+    @JsonIgnore
+    public TextBoxDateRange getTxtMonitorShoriYMD() {
+        return this.getMonitorJoken().getTxtMonitorShoriYMD();
     }
 
-    /*
-     * settxtShinseibi
-     * @param txtShinseibi txtShinseibi
-     */
-    @JsonProperty("txtShinseibi")
-    public void setTxtShinseibi(TextBoxDateRange txtShinseibi) {
-        this.txtShinseibi = txtShinseibi;
+    @JsonIgnore
+    public void  setTxtMonitorShoriYMD(TextBoxDateRange txtMonitorShoriYMD) {
+        this.getMonitorJoken().setTxtMonitorShoriYMD(txtMonitorShoriYMD);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtMonitorShinseiYMD() {
+        return this.getMonitorJoken().getTxtMonitorShinseiYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtMonitorShinseiYMD(TextBoxDateRange txtMonitorShinseiYMD) {
+        this.getMonitorJoken().setTxtMonitorShinseiYMD(txtMonitorShinseiYMD);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShinseishaIchiran() {
+        return this.getShinseishaIchiranJoken().getChkShinseishaIchiran();
+    }
+
+    @JsonIgnore
+    public void  setChkShinseishaIchiran(CheckBoxList chkShinseishaIchiran) {
+        this.getShinseishaIchiranJoken().setChkShinseishaIchiran(chkShinseishaIchiran);
+    }
+
+    @JsonIgnore
+    public Label getLblShinseishaSakuseiJoken() {
+        return this.getShinseishaIchiranJoken().getLblShinseishaSakuseiJoken();
+    }
+
+    @JsonIgnore
+    public void  setLblShinseishaSakuseiJoken(Label lblShinseishaSakuseiJoken) {
+        this.getShinseishaIchiranJoken().setLblShinseishaSakuseiJoken(lblShinseishaSakuseiJoken);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadShinseishaJoken() {
+        return this.getShinseishaIchiranJoken().getRadShinseishaJoken();
+    }
+
+    @JsonIgnore
+    public void  setRadShinseishaJoken(RadioButton radShinseishaJoken) {
+        this.getShinseishaIchiranJoken().setRadShinseishaJoken(radShinseishaJoken);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtShinseishaShoriYMD() {
+        return this.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinseishaShoriYMD(TextBoxDateRange txtShinseishaShoriYMD) {
+        this.getShinseishaIchiranJoken().setTxtShinseishaShoriYMD(txtShinseishaShoriYMD);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtShinseishaShinseiYMD() {
+        return this.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinseishaShinseiYMD(TextBoxDateRange txtShinseishaShinseiYMD) {
+        this.getShinseishaIchiranJoken().setTxtShinseishaShinseiYMD(txtShinseishaShinseiYMD);
     }
 
     // </editor-fold>

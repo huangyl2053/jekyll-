@@ -22,29 +22,47 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
     private static final long serialVersionUID = -3010965675691712156L;
     private static final String SHINSEI_MONITORFLAG = "shinseimonitorflag";
     private static final String YOKAIGOYOSHIENSEII_CHIRANFLAG = "yokaigoyoshienseiichiranflag";
-    private static final String SAKUSEI_JYOUKEN = "sakuseijyouken";
-    private static final String SAKUSEI_JYOUKENUSER = "sakuseijyoukenuser";
-    private static final String SHORI_KAFROM = "shorikaFrom";
-    private static final String SHORI_KATO = "shorikaTo";
-    private static final String SHINNSEI_KAFROM = "shinnseikaFrom";
-    private static final String SHINNSEI_KATO = "shinnseikaTo";
+    private static final String MONITOR_SAKUSEI_JYOUKEN = "monitorsakuseijyouken";
+    private static final String SHINSEISHAICHIRAN_SAKUSEI_JYOUKEN = "shinseishaichiransakuseijyouken";
+    private static final String MONITOR_SAKUSEI_JYOUKENUSER = "monitorsakuseijyoukenuser";
+    private static final String SHINSEISHAICHIRAN_SAKUSEI_JYOUKENUSER = "shinseishasakuseijyoukenuser";
+    private static final String MONITOR_SHORI_KAFROM = "monitorshorikaFrom";
+    private static final String MONITOR_SHORI_KATO = "monitorshorikaTo";
+    private static final String MONITOR_SHINNSEI_KAFROM = "monitorshinnseikaFrom";
+    private static final String MONITOR_SHINNSEI_KATO = "monitorshinnseikaTo";
+    private static final String SHINSEISHAICHIRAN_SHORI_KAFROM = "shinseishashorikaFrom";
+    private static final String SHINSEISHAICHIRAN_SHORI_KATO = "shinseishashorikaTo";
+    private static final String SHINSEISHAICHIRAN_SHINNSEI_KAFROM = "shinseishashinnseikaFrom";
+    private static final String SHINSEISHAICHIRAN_SHINNSEI_KATO = "shinseishashinnseikaTo";
 
     @BatchParameter(key = SHINSEI_MONITORFLAG, name = "要介護認定申請モニタリストフラグ")
     private boolean shinseimonitorflag;
     @BatchParameter(key = YOKAIGOYOSHIENSEII_CHIRANFLAG, name = "要介護認定・要支援認定等申請者一覧フラグ")
     private boolean yokaigoyoshienseiichiranflag;
-    @BatchParameter(key = SAKUSEI_JYOUKEN, name = "作成条件")
-    private RString sakuseijyouken;
-    @BatchParameter(key = SHORI_KAFROM, name = "処理日From")
-    private RDateTime shorikaFrom;
-    @BatchParameter(key = SHORI_KATO, name = "処理日To")
-    private RDateTime shorikaTo;
-    @BatchParameter(key = SHINNSEI_KAFROM, name = "申請日From")
-    private FlexibleDate shinnseikaFrom;
-    @BatchParameter(key = SHINNSEI_KATO, name = "申請日To")
-    private FlexibleDate shinnseikaTo;
-    @BatchParameter(key = SAKUSEI_JYOUKENUSER, name = "作成条件User")
-    private boolean sakuseijyoukenuser;
+    @BatchParameter(key = MONITOR_SAKUSEI_JYOUKEN, name = "モニタリスト作成条件")
+    private RString monitorsakuseijyouken;
+    @BatchParameter(key = SHINSEISHAICHIRAN_SAKUSEI_JYOUKEN, name = "申請者一覧作成条件")
+    private RString shinseishaichiransakuseijyouken;
+    @BatchParameter(key = MONITOR_SHORI_KAFROM, name = "モニタリスト処理日From")
+    private RDateTime monitorshorikaFrom;
+    @BatchParameter(key = SHINSEISHAICHIRAN_SHORI_KAFROM, name = "申請者一覧処理日From")
+    private RDateTime shinseishashorikaFrom;
+    @BatchParameter(key = MONITOR_SHORI_KATO, name = "モニタリスト処理日To")
+    private RDateTime monitorshorikaTo;
+    @BatchParameter(key = SHINSEISHAICHIRAN_SHORI_KATO, name = "申請者一覧処理日To")
+    private RDateTime shinseishashorikaTo;
+    @BatchParameter(key = MONITOR_SHINNSEI_KAFROM, name = "モニタリスト申請日From")
+    private FlexibleDate monitorshinnseikaFrom;
+    @BatchParameter(key = SHINSEISHAICHIRAN_SHINNSEI_KAFROM, name = "申請者一覧申請日From")
+    private FlexibleDate shinseishashinnseikaFrom;
+    @BatchParameter(key = MONITOR_SHINNSEI_KATO, name = "モニタリスト申請日To")
+    private FlexibleDate monitorshinnseikaTo;
+    @BatchParameter(key = SHINSEISHAICHIRAN_SHINNSEI_KATO, name = "申請者一覧申請日To")
+    private FlexibleDate shinseishashinnseikaTo;
+    @BatchParameter(key = MONITOR_SAKUSEI_JYOUKENUSER, name = "モニタリスト作成条件User")
+    private boolean monitorsakuseijyoukenuser;
+    @BatchParameter(key = SHINSEISHAICHIRAN_SAKUSEI_JYOUKENUSER, name = "申請者一覧作成条件User")
+    private boolean shinseishasakuseijyoukenuser;
 
     /**
      * コンストラクタです。
@@ -75,11 +93,11 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
     ) {
         this.shinseimonitorflag = shinseimonitorflag;
         this.yokaigoyoshienseiichiranflag = yokaigoyoshienseiichiranflag;
-        this.sakuseijyouken = sakuseijyouken;
-        this.shorikaFrom = shorikaFrom;
-        this.shorikaTo = shorikaTo;
-        this.shinnseikaFrom = shinnseikaFrom;
-        this.shinnseikaTo = shinnseikaTo;
+        this.monitorsakuseijyouken = sakuseijyouken;
+        this.monitorshorikaFrom = shorikaFrom;
+        this.monitorshorikaTo = shorikaTo;
+        this.monitorshinnseikaFrom = shinnseikaFrom;
+        this.monitorshinnseikaTo = shinnseikaTo;
 
     }
 
@@ -88,15 +106,33 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
      *
      * @return TaisyosyaJidoWaritsukeProcessParameter
      */
-    public ShinseiJouhouInsatuProcessParameter toShinseiJouhouInsatuProcessParameter() {
+    public ShinseiJouhouInsatuProcessParameter toMonitorPrintParameter() {
         return new ShinseiJouhouInsatuProcessParameter(shinseimonitorflag,
                 yokaigoyoshienseiichiranflag,
-                sakuseijyouken,
-                shorikaFrom,
-                shorikaTo,
-                shinnseikaFrom,
-                shinnseikaTo,
-                sakuseijyoukenuser
+                monitorsakuseijyouken,
+                monitorshorikaFrom,
+                monitorshorikaTo,
+                monitorshinnseikaFrom,
+                monitorshinnseikaTo,
+                monitorsakuseijyoukenuser
         );
     }
+
+    /**
+     * processのパラメータを生成します。
+     *
+     * @return TaisyosyaJidoWaritsukeProcessParameter
+     */
+    public ShinseiJouhouInsatuProcessParameter toShinseishaIchiranPrintParameter() {
+        return new ShinseiJouhouInsatuProcessParameter(shinseimonitorflag,
+                yokaigoyoshienseiichiranflag,
+                shinseishaichiransakuseijyouken,
+                shinseishashorikaFrom,
+                shinseishashorikaTo,
+                shinseishashinnseikaFrom,
+                shinseishashinnseikaTo,
+                shinseishasakuseijyoukenuser
+        );
+    }
+
 }
