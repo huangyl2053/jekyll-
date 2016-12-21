@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
@@ -20,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiEnkiTsuchishoHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -168,16 +170,6 @@ public class NinteiEnkiTsuchishoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getCblNinteiChosa() {
-        return this.getBatchParameter().getKensakuJoken().getKensakujyokenNini().getCblNinteiChosa();
-    }
-
-    @JsonIgnore
-    public void  setCblNinteiChosa(CheckBoxList cblNinteiChosa) {
-        this.getBatchParameter().getKensakuJoken().getKensakujyokenNini().setCblNinteiChosa(cblNinteiChosa);
-    }
-
-    @JsonIgnore
     public CheckBoxList getCblIkenshoJyuryo() {
         return this.getBatchParameter().getKensakuJoken().getKensakujyokenNini().getCblIkenshoJyuryo();
     }
@@ -185,6 +177,16 @@ public class NinteiEnkiTsuchishoHakkoDiv extends Panel {
     @JsonIgnore
     public void  setCblIkenshoJyuryo(CheckBoxList cblIkenshoJyuryo) {
         this.getBatchParameter().getKensakuJoken().getKensakujyokenNini().setCblIkenshoJyuryo(cblIkenshoJyuryo);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getCblNinteiChosa() {
+        return this.getBatchParameter().getKensakuJoken().getKensakujyokenNini().getCblNinteiChosa();
+    }
+
+    @JsonIgnore
+    public void  setCblNinteiChosa(CheckBoxList cblNinteiChosa) {
+        this.getBatchParameter().getKensakuJoken().getKensakujyokenNini().setCblNinteiChosa(cblNinteiChosa);
     }
 
     @JsonIgnore
@@ -280,6 +282,21 @@ public class NinteiEnkiTsuchishoHakkoDiv extends Panel {
     @JsonIgnore
     public void  setBtnSetting(Button btnSetting) {
         this.getBatchParameter().getEnkiTsuchiHakkoTaishosha().getEnkiRiyuSetting().setBtnSetting(btnSetting);
+    }
+
+    @JsonIgnore
+    public NinteiEnkiTsuchishoBunshoBangoSettingDiv getNinteiEnkiTsuchishoBunshoBangoSetting() {
+        return this.getBatchParameter().getEnkiTsuchiHakkoTaishosha().getNinteiEnkiTsuchishoBunshoBangoSetting();
+    }
+
+    @JsonIgnore
+    public void  setNinteiEnkiTsuchishoBunshoBangoSetting(NinteiEnkiTsuchishoBunshoBangoSettingDiv NinteiEnkiTsuchishoBunshoBangoSetting) {
+        this.getBatchParameter().getEnkiTsuchiHakkoTaishosha().setNinteiEnkiTsuchishoBunshoBangoSetting(NinteiEnkiTsuchishoBunshoBangoSetting);
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdNinteiEnkiTsuchishoBunshoBango() {
+        return this.getBatchParameter().getEnkiTsuchiHakkoTaishosha().getNinteiEnkiTsuchishoBunshoBangoSetting().getCcdNinteiEnkiTsuchishoBunshoBango();
     }
 
     @JsonIgnore

@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class NinteiEnkiTsuchishoHakko {
 
     private final RString グループコード = new RString("1007");
+    private final RString 一覧表を発行する_FileName = new RString("btnPrint1");
 
     /**
      * 画面初期化処理です。
@@ -67,6 +69,8 @@ public class NinteiEnkiTsuchishoHakko {
      * @return ResponseData<NinteiEnkiTsuchishoHakkoDiv>
      */
     public ResponseData<NinteiEnkiTsuchishoHakkoDiv> onClick_btnSearch(NinteiEnkiTsuchishoHakkoDiv div) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
+        
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         NinteiEnkiTsuchishoHakkoValidationHandler validationHandler = getValidationHandler();
         validationHandler.申請区分の未入力チェック(pairs, div);
