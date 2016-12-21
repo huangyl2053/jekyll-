@@ -65,7 +65,7 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
         source.shinsaDD = get日(business.get今回認定審査年月日());
         source.imgIkensho1 = business.get左の主治医意見書イメージ();
         source.imgIkensho2 = business.get右の主治医意見書イメージ();
-        if (ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
+        if (ReportIdDBE.DBE517904.getReportId().value().equals(reportId)) {
             source.layout = Layouts.任意;
         } else {
             source.layout = Layouts.四頁目;

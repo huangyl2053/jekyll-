@@ -98,14 +98,6 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
                 }
             }
         }
-        if (ReportIdDBE.DBE517904.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
-            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
-            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
-            reportSourceWriter.writeLine(builder);
-            IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
-            IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
-            reportSourceWriter.writeLine(builder1);
-        }
         if (tokkiTextBusiness != null) {
             if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
                 テキスト全面Editor(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
