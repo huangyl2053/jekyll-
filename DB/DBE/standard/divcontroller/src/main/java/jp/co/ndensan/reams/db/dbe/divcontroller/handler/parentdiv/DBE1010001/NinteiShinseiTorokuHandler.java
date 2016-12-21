@@ -69,11 +69,25 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdAtenaInfo().setShoriType(new RString("2"));
         div.getCcdAtenaInfo().initialize();
         div.getCcdKaigoNinteiShinseiKihon().initialize();
+        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
+        div.getCcdShinseiSonotaJohoInput().initialize();
+        
         if (result != null) {
             if (result.get市町村コード() != null) {
                 div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
             }
             setCommonDiv(result, 管理番号);
+        } else {
+            div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY,
+                管理番号, SubGyomuCode.DBE認定支援,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+            div.getCcdChodsItakusakiAndChosainInput().initialize(new RString("InputMode"),
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+            NinteiInputDataPassModel ninteiInput = new NinteiInputDataPassModel();
+            ninteiInput.setSubGyomuCode(SubGyomuCode.DBE認定支援.value());
+            ninteiInput.set申請書管理番号(管理番号);
+            div.getCcdShisetsuJoho().initialize();
+            div.getCcdNinteiInput().initialize(ninteiInput);
         }
     }
 
@@ -233,9 +247,7 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdChodsItakusakiAndChosainInput().setHdnShinseishoKanriNo(管理番号.value());
         div.getCcdChodsItakusakiAndChosainInput().setHdnShichosonCode(result.get市町村コード().value());
         div.getCcdChodsItakusakiAndChosainInput().setChosainRenrakuJiko(result.get調査員への連絡事項());
-        div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
 
-        div.getCcdShinseiSonotaJohoInput().initialize();
         if (result.get削除事由コード() != null) {
             div.getCcdShinseiSonotaJohoInput().set削除事由(result.get削除事由コード().value());
         }

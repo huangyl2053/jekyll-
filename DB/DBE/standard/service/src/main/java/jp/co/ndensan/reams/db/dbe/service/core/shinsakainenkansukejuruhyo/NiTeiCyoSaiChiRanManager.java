@@ -173,9 +173,7 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
-     * @param 概況調査テキストイメージ区分 RString
-     * @param 認定調査特記事項番号 RString
-     * @param 特記事項テキスト_イメージ区分 RString
+     * @param テキストイメージ区分 RString
      * @param 原本マスク区分 Code
      * @param 概況調査 NinteichosahyoGaikyoChosaBuilder
      * @param 特記情報 NinteichosahyoTokkijiko
@@ -187,53 +185,37 @@ public class NiTeiCyoSaiChiRanManager {
      * @param サービスの状況フラグ NinteichosahyoServiceJokyoFlag
      * @param 記入項目 NinteichosahyoKinyuItem
      * @param 施設利用 NinteichosahyoShisetsuRiyo
-     * @param 調査項目連番 int
-     * @param 認定調査特記事項連番 int
-     * @param サービス状況連番 int
-     * @param サービス状況フラグ連番 int
-     * @param サービス状況記入連番 int
-     * @param 施設利用フラグ連番 int
      */
     @Transaction
     public void 認定調査一覧更新処理(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            RString 概況調査テキストイメージ区分,
-            RString 認定調査特記事項番号,
-            RString 特記事項テキスト_イメージ区分,
+            RString テキストイメージ区分,
             Code 原本マスク区分,
-            NinteichosahyoTokkijiko 特記情報,
+            List<NinteichosahyoTokkijiko> 特記情報,
             NinteichosahyoGaikyoChosa 概況調査,
             GaikyoTokki 概況特記,
             NinteichosahyoKihonChosa 基本調査,
             int 要介護認定調査履歴番号,
-            NinteichosahyoChosaItem 調査項目,
-            NinteichosahyoServiceJokyo サービスの状況,
-            NinteichosahyoServiceJokyoFlag サービスの状況フラグ,
-            NinteichosahyoKinyuItem 記入項目,
-            NinteichosahyoShisetsuRiyo 施設利用,
-            int 調査項目連番,
-            int 認定調査特記事項連番,
-            int サービス状況連番,
-            int サービス状況フラグ連番,
-            int サービス状況記入連番,
-            int 施設利用フラグ連番
+            List<NinteichosahyoChosaItem> 調査項目,
+            List<NinteichosahyoServiceJokyo> サービスの状況,
+            List<NinteichosahyoServiceJokyoFlag> サービスの状況フラグ,
+            List<NinteichosahyoKinyuItem> 記入項目,
+            List<NinteichosahyoShisetsuRiyo> 施設利用
     ) {
         認定調査票概況調査(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                概況調査テキストイメージ区分,
+                テキストイメージ区分,
                 概況調査);
         認定調査票概況特記(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                概況調査テキストイメージ区分,
+                テキストイメージ区分,
                 概況特記);
         認定調査票特記情報(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                認定調査特記事項番号,
-                認定調査特記事項連番,
-                特記事項テキスト_イメージ区分,
+                テキストイメージ区分,
                 原本マスク区分,
                 特記情報);
         認定調査票基本調査(
@@ -243,27 +225,22 @@ public class NiTeiCyoSaiChiRanManager {
         基本調査調査項目(
                 申請書管理番号,
                 要介護認定調査履歴番号,
-                調査項目連番,
                 調査項目);
         認定調査票概況調査サービスの状況(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                サービス状況連番,
                 サービスの状況);
         認定調査票概況調査サービスの状況フラグ(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                サービス状況フラグ連番,
                 サービスの状況フラグ);
         認定調査票概況調査記入項目(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                サービス状況記入連番,
                 記入項目);
         認定調査票概況調査施設利用(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                施設利用フラグ連番,
                 施設利用);
     }
 
@@ -367,8 +344,6 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
-     * @param 認定調査特記事項番号 RString
-     * @param 認定調査特記事項連番 int
      * @param 特記事項テキスト_イメージ区分 RString
      * @param 原本マスク区分 Code
      * @param 特記情報 NinteichosahyoTokkijiko
@@ -377,26 +352,37 @@ public class NiTeiCyoSaiChiRanManager {
     private boolean 認定調査票特記情報(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            RString 認定調査特記事項番号,
-            int 認定調査特記事項連番,
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分,
-            NinteichosahyoTokkijiko 特記情報) {
+            List<NinteichosahyoTokkijiko> 特記情報List) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
-        requireNonNull(認定調査特記事項番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査特記事項番号"));
-        requireNonNull(認定調査特記事項連番, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査特記事項連番"));
         requireNonNull(特記事項テキスト_イメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項テキスト_イメージ区分"));
-        DbT5205NinteichosahyoTokkijikoEntity entity = dbT5205Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号,
-                認定調査特記事項番号, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, 原本マスク区分);
-        if (!特記情報.hasChanged()) {
-            return false;
+        List<DbT5205NinteichosahyoTokkijikoEntity> entityList = dbT5205Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号,
+                特記事項テキスト_イメージ区分, 原本マスク区分);
+
+        int updateCount = 0;
+        if (entityList == null || entityList.isEmpty()) {
+            for (NinteichosahyoTokkijiko 特記事項 : 特記情報List) {
+                updateCount = updateCount + dbT5205Dac.save(特記事項.toEntity());
+            }
+            return updateCount == 特記情報List.size();
         }
-        if (entity == null) {
-            return 1 == dbT5205Dac.save(特記情報.toEntity());
+
+        for (NinteichosahyoTokkijiko 特記事項 : 特記情報List) {
+            for (DbT5205NinteichosahyoTokkijikoEntity entity : entityList) {
+                if (特記事項.get申請書管理番号().equals(entity.getShinseishoKanriNo())
+                        && 特記事項.get認定調査依頼履歴番号() == entity.getNinteichosaRirekiNo()
+                        && 特記事項.get認定調査特記事項番号().equals(entity.getNinteichosaTokkijikoNo())
+                        && 特記事項.get認定調査特記事項連番() == entity.getNinteichosaTokkijikoRemban()
+                        && 特記事項.get特記事項テキスト_イメージ区分().equals(entity.getTokkijikoTextImageKubun())
+                        && 特記事項.get原本マスク区分().equals(entity.getGenponMaskKubun())) {
+                    updateCount = updateCount + dbT5205Dac.save(createModifyData(entity, 特記事項));
+                }
+            }
         }
-        return 1 == dbT5205Dac.save(createModifyData(entity, 特記情報));
+        return updateCount == 特記情報List.size();
     }
 
     private DbT5205NinteichosahyoTokkijikoEntity createModifyData(DbT5205NinteichosahyoTokkijikoEntity entity,
@@ -452,27 +438,36 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 要介護認定調査履歴番号 int
-     * @param 連番 int
      * @param 調査項目 NinteichosahyoChosaItem
      * @return （基本調査）調査項目のCOUNT
      */
     private boolean 基本調査調査項目(
             ShinseishoKanriNo 申請書管理番号,
             int 要介護認定調査履歴番号,
-            int 連番,
-            NinteichosahyoChosaItem 調査項目) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
+            List<NinteichosahyoChosaItem> 調査項目List) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号.toString()));
         requireNonNull(要介護認定調査履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査履歴番号"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
-        DbT5211NinteichosahyoChosaItemEntity entity = dbT5211Dac.selectByKey(申請書管理番号, 要介護認定調査履歴番号, 連番);
-        if (!調査項目.hasChanged()) {
-            return false;
+        List<DbT5211NinteichosahyoChosaItemEntity> entityList = dbT5211Dac.select調査項目(申請書管理番号, 要介護認定調査履歴番号);
+
+        int updateCount = 0;
+        if (entityList == null || entityList.isEmpty()) {
+            for (NinteichosahyoChosaItem 調査項目 : 調査項目List) {
+                updateCount = updateCount + dbT5211Dac.save(調査項目.toEntity());
+            }
+            return updateCount == 調査項目List.size();
         }
-        if (entity == null) {
-            return 1 == dbT5211Dac.save(調査項目.toEntity());
+
+        for (NinteichosahyoChosaItem 調査項目 : 調査項目List) {
+            for (DbT5211NinteichosahyoChosaItemEntity entity : entityList) {
+                if (調査項目.get申請書管理番号().equals(entity.getShinseishoKanriNo())
+                        && 調査項目.get要介護認定調査履歴番号() == entity.getNinteichosaRirekiNo()
+                        && 調査項目.get連番() == entity.getRemban()) {
+                    updateCount = updateCount + dbT5211Dac.save(createModifyData(entity, 調査項目));
+                }
+            }
         }
-        return 1 == dbT5211Dac.save(createModifyData(entity, 調査項目));
+        return updateCount == 調査項目List.size();
     }
 
     private DbT5211NinteichosahyoChosaItemEntity createModifyData(DbT5211NinteichosahyoChosaItemEntity entity,
@@ -490,27 +485,35 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
-     * @param 連番 int
-     * @param サービスの状況 NinteichosahyoServiceJokyo
+     * @param サービスの状況List NinteichosahyoServiceJokyo
      * @return 認定調査票（概況調査）サービスの状況のCOUNT
      */
     private boolean 認定調査票概況調査サービスの状況(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            int 連番,
-            NinteichosahyoServiceJokyo サービスの状況) {
+            List<NinteichosahyoServiceJokyo> サービスの状況List) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        DbT5207NinteichosahyoServiceJokyoEntity entity = dbT5207Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
+        List<DbT5207NinteichosahyoServiceJokyoEntity> entityList = dbT5207Dac.selectサービスの状況(申請書管理番号, 認定調査依頼履歴番号);
 
-        if (!サービスの状況.hasChanged()) {
-            return false;
+        int updateCount = 0;
+        if (entityList == null || entityList.isEmpty()) {
+            for (NinteichosahyoServiceJokyo サービスの状況 : サービスの状況List) {
+                updateCount = updateCount + dbT5207Dac.save(サービスの状況.toEntity());
+            }
+            return updateCount == サービスの状況List.size();
         }
-        if (entity == null) {
-            return 1 == dbT5207Dac.save(サービスの状況.toEntity());
+
+        for (NinteichosahyoServiceJokyo サービスの状況 : サービスの状況List) {
+            for (DbT5207NinteichosahyoServiceJokyoEntity entity : entityList) {
+                if (サービスの状況.get申請書管理番号().equals(entity.getShinseishoKanriNo())
+                        && サービスの状況.get認定調査依頼履歴番号() == entity.getNinteichosaRirekiNo()
+                        && サービスの状況.get連番() == entity.getRemban()) {
+                    updateCount = updateCount + dbT5207Dac.save(createModifyData(entity, サービスの状況));
+                }
+            }
         }
-        return 1 == dbT5207Dac.save(createModifyData(entity, サービスの状況));
+        return updateCount == サービスの状況List.size();
     }
 
     private DbT5207NinteichosahyoServiceJokyoEntity createModifyData(DbT5207NinteichosahyoServiceJokyoEntity entity,
@@ -528,28 +531,36 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
-     * @param 連番 int
      * @param サービスの状況フラグ NinteichosahyoServiceJokyoFlag
      * @return 認定調査票（概況調査）サービスの状況のCOUNT
      */
     private boolean 認定調査票概況調査サービスの状況フラグ(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            int 連番,
-            NinteichosahyoServiceJokyoFlag サービスの状況フラグ) {
+            List<NinteichosahyoServiceJokyoFlag> サービスの状況フラグList) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
-        DbT5208NinteichosahyoServiceJokyoFlagEntity entity = dbT5208Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
+        List<DbT5208NinteichosahyoServiceJokyoFlagEntity> entityList = dbT5208Dac.selectサービスの状況フラグ(申請書管理番号, 認定調査依頼履歴番号);
 
-        if (!サービスの状況フラグ.hasChanged()) {
-            return false;
+        int updateCount = 0;
+        if (entityList == null || entityList.isEmpty()) {
+            for (NinteichosahyoServiceJokyoFlag サービスの状況フラグ : サービスの状況フラグList) {
+                updateCount = updateCount + dbT5208Dac.save(サービスの状況フラグ.toEntity());
+            }
+            return updateCount == サービスの状況フラグList.size();
         }
-        if (entity == null) {
-            return 1 == dbT5208Dac.save(サービスの状況フラグ.toEntity());
+
+        for (NinteichosahyoServiceJokyoFlag サービスの状況フラグ : サービスの状況フラグList) {
+            for (DbT5208NinteichosahyoServiceJokyoFlagEntity entity : entityList) {
+                if (サービスの状況フラグ.get申請書管理番号().equals(entity.getShinseishoKanriNo())
+                        && サービスの状況フラグ.get認定調査依頼履歴番号() == entity.getNinteichosaRirekiNo()
+                        && サービスの状況フラグ.get連番() == entity.getRemban()) {
+                    updateCount = updateCount + dbT5208Dac.save(createModifyData(entity, サービスの状況フラグ));
+                }
+            }
         }
-        return 1 == dbT5208Dac.save(createModifyData(entity, サービスの状況フラグ));
+        return updateCount == サービスの状況フラグList.size();
     }
 
     private DbT5208NinteichosahyoServiceJokyoFlagEntity createModifyData(DbT5208NinteichosahyoServiceJokyoFlagEntity entity,
@@ -567,27 +578,35 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
-     * @param 連番 int
      * @param 記入項目 NinteichosahyoKinyuItem
      * @return 認定調査票（概況調査）記入項目のCOUNT
      */
     private boolean 認定調査票概況調査記入項目(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            int 連番,
-            NinteichosahyoKinyuItem 記入項目) {
+            List<NinteichosahyoKinyuItem> 記入項目List) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        DbT5209NinteichosahyoKinyuItemEntity entity = dbT5209Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
+        List<DbT5209NinteichosahyoKinyuItemEntity> entityList = dbT5209Dac.select記入項目(申請書管理番号, 認定調査依頼履歴番号);
 
-        if (!記入項目.hasChanged()) {
-            return false;
+        int updateCount = 0;
+        if (entityList == null || entityList.isEmpty()) {
+            for (NinteichosahyoKinyuItem 記入項目 : 記入項目List) {
+                updateCount = updateCount + dbT5209Dac.save(記入項目.toEntity());
+            }
+            return updateCount == 記入項目List.size();
         }
-        if (entity == null) {
-            return 1 == dbT5209Dac.save(記入項目.toEntity());
+
+        for (NinteichosahyoKinyuItem 記入項目 : 記入項目List) {
+            for (DbT5209NinteichosahyoKinyuItemEntity entity : entityList) {
+                if (記入項目.get申請書管理番号().equals(entity.getShinseishoKanriNo())
+                        && 記入項目.get認定調査依頼履歴番号() == entity.getNinteichosaRirekiNo()
+                        && 記入項目.get連番() == entity.getRemban()) {
+                    updateCount = updateCount + dbT5209Dac.save(createModifyData(entity, 記入項目));
+                }
+            }
         }
-        return 1 == dbT5209Dac.save(createModifyData(entity, 記入項目));
+        return updateCount == 記入項目List.size();
     }
 
     private DbT5209NinteichosahyoKinyuItemEntity createModifyData(DbT5209NinteichosahyoKinyuItemEntity entity,
@@ -605,27 +624,35 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
-     * @param 連番 int
      * @param 施設利用 NinteichosahyoShisetsuRiyo
      * @return 認定調査票（概況調査）記入項目のCOUNT
      */
     private boolean 認定調査票概況調査施設利用(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            int 連番,
-            NinteichosahyoShisetsuRiyo 施設利用) {
+            List<NinteichosahyoShisetsuRiyo> 施設利用List) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        DbT5210NinteichosahyoShisetsuRiyoEntity entity = dbT5210Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 連番);
+        List<DbT5210NinteichosahyoShisetsuRiyoEntity> entityList = dbT5210Dac.selectBy連番除外(申請書管理番号, 認定調査依頼履歴番号);
 
-        if (!施設利用.hasChanged()) {
-            return false;
+        int updateCount = 0;
+        if (entityList == null || entityList.isEmpty()) {
+            for (NinteichosahyoShisetsuRiyo 施設利用 : 施設利用List) {
+                updateCount = updateCount + dbT5210Dac.save(施設利用.toEntity());
+            }
+            return updateCount == 施設利用List.size();
         }
-        if (entity == null) {
-            return 1 == dbT5210Dac.save(施設利用.toEntity());
+
+        for (NinteichosahyoShisetsuRiyo 施設利用 : 施設利用List) {
+            for (DbT5210NinteichosahyoShisetsuRiyoEntity entity : entityList) {
+                if (施設利用.get申請書管理番号().equals(entity.getShinseishoKanriNo())
+                        && 施設利用.get認定調査依頼履歴番号() == entity.getNinteichosaRirekiNo()
+                        && 施設利用.get連番() == entity.getRemban()) {
+                    updateCount = updateCount + dbT5210Dac.save(createModifyData(entity, 施設利用));
+                }
+            }
         }
-        return 1 == dbT5210Dac.save(createModifyData(entity, 施設利用));
+        return updateCount == 施設利用List.size();
     }
 
     private DbT5210NinteichosahyoShisetsuRiyoEntity createModifyData(DbT5210NinteichosahyoShisetsuRiyoEntity entity,

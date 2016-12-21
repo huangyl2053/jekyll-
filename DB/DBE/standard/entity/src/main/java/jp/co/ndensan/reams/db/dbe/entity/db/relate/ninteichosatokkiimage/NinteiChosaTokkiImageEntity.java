@@ -44,4 +44,8 @@ public class NinteiChosaTokkiImageEntity {
     private List<RString> 特記事項リスト名称;
     private List<RString> 特記事項リストイメージ;
     private RString 厚労省IF識別コード;
+    private RString 概況特記事項イメージ;
+    private RString 概況特記事項テキスト;
+    private RString レイアウト;
+
 }

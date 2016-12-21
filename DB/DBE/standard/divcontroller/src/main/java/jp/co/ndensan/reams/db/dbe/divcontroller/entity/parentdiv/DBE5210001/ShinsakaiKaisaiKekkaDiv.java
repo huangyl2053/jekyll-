@@ -16,13 +16,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("IinMiwariate")
+    private IinMiwariateDiv IinMiwariate;
     @JsonProperty("ShinsakaiYoteiInfo")
     private ShinsakaiYoteiInfoDiv ShinsakaiYoteiInfo;
     @JsonProperty("ShinsakaiKaisaiInfo")
@@ -35,6 +37,8 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private RString Model;
     @JsonProperty("gogitaiNo")
     private RString gogitaiNo;
+    @JsonProperty("validateProgress")
+    private RString validateProgress;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,6 +46,24 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getIinMiwariate
+     * @return IinMiwariate
+     */
+    @JsonProperty("IinMiwariate")
+    public IinMiwariateDiv getIinMiwariate() {
+        return IinMiwariate;
+    }
+
+    /*
+     * setIinMiwariate
+     * @param IinMiwariate IinMiwariate
+     */
+    @JsonProperty("IinMiwariate")
+    public void setIinMiwariate(IinMiwariateDiv IinMiwariate) {
+        this.IinMiwariate = IinMiwariate;
+    }
+
     /*
      * getShinsakaiYoteiInfo
      * @return ShinsakaiYoteiInfo
@@ -151,8 +173,46 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     /*
+     * getvalidateProgress
+     * @return validateProgress
+     */
+    @JsonProperty("validateProgress")
+    public RString getValidateProgress() {
+        return validateProgress;
+    }
+
+    /*
+     * setvalidateProgress
+     * @param validateProgress validateProgress
+     */
+    @JsonProperty("validateProgress")
+    public void setValidateProgress(RString validateProgress) {
+        this.validateProgress = validateProgress;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public Icon getIcoIinMiwariate() {
+        return this.getIinMiwariate().getIcoIinMiwariate();
+    }
+
+    @JsonIgnore
+    public void  setIcoIinMiwariate(Icon icoIinMiwariate) {
+        this.getIinMiwariate().setIcoIinMiwariate(icoIinMiwariate);
+    }
+
+    @JsonIgnore
+    public Label getLblIinMiwariate() {
+        return this.getIinMiwariate().getLblIinMiwariate();
+    }
+
+    @JsonIgnore
+    public void  setLblIinMiwariate(Label lblIinMiwariate) {
+        this.getIinMiwariate().setLblIinMiwariate(lblIinMiwariate);
+    }
+
     @JsonIgnore
     public TextBox getTxtShinsakaiMeisho() {
         return this.getShinsakaiYoteiInfo().getTxtShinsakaiMeisho();

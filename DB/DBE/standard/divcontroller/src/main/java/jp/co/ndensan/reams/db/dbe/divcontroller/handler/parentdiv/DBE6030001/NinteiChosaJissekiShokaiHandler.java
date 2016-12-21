@@ -146,7 +146,7 @@ public class NinteiChosaJissekiShokaiHandler {
         }
         param.setChosajisshibiFrom(調査実施日FROM);
         param.setChosajisshibiTo(調査実施日TO);
-        param.setHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
+        param.setHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

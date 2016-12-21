@@ -44,7 +44,7 @@ public class NinteiChosaGaikyoTokkiDataOutputProcess extends BatchProcessBase<Ni
     @Override
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("ChosaKekkaNyuryokuMobile_GaikyoTokki.csv"));
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("概況調査サービス_概況特記データ.csv"));
     }
 
     @Override

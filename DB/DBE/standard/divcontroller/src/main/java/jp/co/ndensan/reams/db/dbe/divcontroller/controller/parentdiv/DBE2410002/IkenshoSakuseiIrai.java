@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.I
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
@@ -121,6 +122,13 @@ public class IkenshoSakuseiIrai {
             div.getTxtHakobi().setValue(RDate.getNowDate());
         }
         div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
+        
+        if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
+                        div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())){
+            div.getIkenshoIraiTorokuPanel().setDisabled(true);
+            div.getIraiprintPanel().setDisabled(true);
+            div.getMeireishoPanel().setDisabled(true);
+        }
         onChange_radKigen(div);
         return ResponseData.of(div).respond();
     }

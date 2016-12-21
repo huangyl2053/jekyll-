@@ -68,6 +68,30 @@ public class ShinsakaiTorokuValidationHandler {
     }
 
     /**
+     * 対象者選択チェックを行う。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 対象者選択チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.対象者選択チェック));
+        }
+        return validPairs;
+    }
+
+    /**
+     * 対象データ有無チェックを行う。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 対象者データ有無チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(RRVMessages.対象データなし));
+        return validPairs;
+    }
+
+    /**
      * 割付可能チェックを行う。
      *
      * @return バリデーション結果
@@ -102,23 +126,6 @@ public class ShinsakaiTorokuValidationHandler {
     }
 
     /**
-     * 完了済みデータチェックを行う。
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return バリデーション結果
-     */
-//    public ValidationMessageControlPairs 完了済みデータチェック(ValidationMessageControlPairs validPairs) {
-//        List<dgNinteiTaskList_Row> 選択データ = div.getDgNinteiTaskList().getSelectedItems();
-//        for (dgNinteiTaskList_Row データ : 選択データ) {
-//            if (データ.getShinsakaiKanryoDay().getValue() != null) {
-//                validPairs.add(new ValidationMessageControlPair(RRVMessages.完了済みデータチェック));
-//                break;
-//            }
-//        }
-//        return validPairs;
-//    }
-
-    /**
      * マスキング完了チェックを行う。
      *
      * @param validPairs ValidationMessageControlPairs
@@ -147,7 +154,9 @@ public class ShinsakaiTorokuValidationHandler {
         割付可能チェック(DbeErrorMessages.審査会割付不可),
         完了処理事前チェック(DbzErrorMessages.理由付き完了不可, "審査会未割付"),
         完了済みデータチェック(DbzErrorMessages.理由付き完了不可, "完了済みデータ"),
-        マスキング完了チェック(DbzErrorMessages.理由付き完了不可, "マスキング未完了");
+        マスキング完了チェック(DbzErrorMessages.理由付き完了不可, "マスキング未完了"),
+        対象者選択チェック(UrErrorMessages.対象者を選択),
+        対象データなし(UrErrorMessages.対象データなし);
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

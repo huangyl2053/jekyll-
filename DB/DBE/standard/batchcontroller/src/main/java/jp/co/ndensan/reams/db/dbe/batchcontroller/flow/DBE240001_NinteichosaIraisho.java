@@ -57,7 +57,6 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
     private static final RString CONFIGVALUE4 = new RString("4");
-
     private static final RString DBE221012 = new RString("DBE221012_chosahyoKihonchosa.rse");
     private RDate 基準日;
     private static final RString DBE221022 = new RString("DBE221022_chosahyoTokkijiko.rse");
@@ -100,7 +99,7 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         if (getParameter().isNinteiChosaIraiChohyo()) {
             executeStep(CHOSAIRAISHOREPORT_PROCESS);
         }
-        if (getParameter().isNinteiChosaIraisyo()) {
+        if (getParameter().is認定調査依頼書()) {
             executeStep(ICHIRANHYOREPORT_PROCESS);
         }
         if (getParameter().is認定調査票_デザイン用紙()) {
@@ -121,10 +120,10 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         if (getParameter().is認定調査票OCR()) {
             call認定調査票_OCR();
         }
-        if (getParameter().isNinteiChosahyoOCRTokki()) {
+        if (getParameter().is特記事項OCR()) {
             call認定調査票OCR_特記事項();
         }
-        if (getParameter().isNinteiChosaCheckHyo()) {
+        if (getParameter().is認定調査差異チェック票()) {
             call認定調査差異チェック表();
         }
         if (getParameter().is概況特記()) {
@@ -133,7 +132,7 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         if (getParameter().is認定調査依頼履歴一覧()) {
             executeStep(CHOSAIRAIRIREKIICHIRAN);
         }
-        if (getParameter().isZenkoNinteiChosahyo()) {
+        if (getParameter().is前回認定調査結果との比較表()) {
             executeStep(CHOSAHYOSAICHECKHYO);
         }
 
@@ -575,7 +574,7 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     @Step(CHOSAIRAIRIREKIICHIRAN)
     protected IBatchFlowCommand chosairairirekiIchiranProcess() {
         return loopBatch(ChosairairirekiIchiran_DBE220004Process.class)
-                .arguments(getParameter().toShujiiIkenshoSakuseiProcessParamter()).define();
+                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }
 
     /**

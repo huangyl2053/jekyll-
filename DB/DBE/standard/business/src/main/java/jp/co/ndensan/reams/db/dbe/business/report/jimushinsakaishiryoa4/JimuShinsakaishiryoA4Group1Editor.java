@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa4;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa4.JimuShinsakaishiryoA4ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -75,7 +74,7 @@ public class JimuShinsakaishiryoA4Group1Editor implements IJimuShinsakaishiryoA4
                 source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号().getColumnValue());
             }
         }
-        source.layout = Layouts.鑑;
+        source.layout = 1;
         return source;
     }
 

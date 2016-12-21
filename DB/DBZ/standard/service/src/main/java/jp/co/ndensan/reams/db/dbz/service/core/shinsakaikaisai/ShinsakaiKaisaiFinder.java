@@ -48,7 +48,8 @@ public class ShinsakaiKaisaiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiFinder}のインスタンス
      */
     public static ShinsakaiKaisaiFinder createInstance() {
         return InstanceProvider.create(ShinsakaiKaisaiFinder.class);
@@ -96,13 +97,16 @@ public class ShinsakaiKaisaiFinder {
                 モード, 表示条件, 最大表示件数, ダミー審査会);
         List<ShinsakaiKaisaiRelateEntity> relateEntityList = mapper.get審査会一覧(parameter);
 
+        int totalcount = 0;
         if (relateEntityList == null || relateEntityList.isEmpty()) {
-            return SearchResult.of(Collections.<ShinsakaiKaisai>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ShinsakaiKaisai>emptyList(), totalcount, false);
+        } else {
+            totalcount = relateEntityList.get(0).getTotalCount();
         }
         List<ShinsakaiKaisai> 審査会情報List = new ArrayList<>();
         for (ShinsakaiKaisaiRelateEntity relateEntity : relateEntityList) {
             審査会情報List.add(new ShinsakaiKaisai(relateEntity));
         }
-        return SearchResult.of(審査会情報List, 0, false);
+        return SearchResult.of(審査会情報List, totalcount, parameter.getSaidaiHyojiKensu().intValue() < totalcount);
     }
 }

@@ -68,7 +68,13 @@
         dbt5910."chosaItakuKubun",
         dbt5910."tokuteiChosainDisplayFlag",
         dbt5910."kikanKubun",
-        dbt5910."jokyoFlag"
+        dbt5910."jokyoFlag",
+        dbt5910."kinyuKikanCode",
+        dbt5910."kinyuKikanShitenCode",                
+        dbt5910."yokinShubetsu", 
+        dbt5910."kozaNo",  
+        dbt5910."kozaMeigininKana",
+        dbt5910."kozaMeiginin"        
         FROM
         rgdb."DbT5910NinteichosaItakusakiJoho" AS dbt5910
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051

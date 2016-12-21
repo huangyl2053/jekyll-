@@ -28,6 +28,7 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
     private static final long serialVersionUID = -8277962158005872532L;
     private final DbT5034ShinsakaiIinBetsuTankaEntity entity;
     private final ShinsakaiIinBetsuTankaIdentifier id;
+    private final RString shiMei;
 
     /**
      * コンストラクタです。<br/>
@@ -36,17 +37,21 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
      * @param 介護認定審査会委員コード 介護認定審査会委員コード
      * @param 開始年月 開始年月
      * @param 終了年月 終了年月
+     * @param 氏名 氏名
      */
     public ShinsakaiIinBetsuTanka(RString 介護認定審査会委員コード,
             FlexibleYearMonth 開始年月,
-            FlexibleYearMonth 終了年月) {
+            FlexibleYearMonth 終了年月,
+            RString 氏名) {
         requireNonNull(介護認定審査会委員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
         requireNonNull(開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月"));
         requireNonNull(終了年月, UrSystemErrorMessages.値がnull.getReplacedMessage("終了年月"));
+        requireNonNull(氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("氏名"));
         this.entity = new DbT5034ShinsakaiIinBetsuTankaEntity();
         this.entity.setShinsakaiIinCode(介護認定審査会委員コード);
         this.entity.setKaishiYM(開始年月);
         this.entity.setShuryoYM(終了年月);
+        this.shiMei = 氏名;
         this.id = new ShinsakaiIinBetsuTankaIdentifier(
                 介護認定審査会委員コード,
                 開始年月,
@@ -58,13 +63,15 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
      * シリアライズ、ビルダー用コンストラクタです。
      *
      * @param entity {@link DbT5034ShinsakaiIinBetsuTankaEntity}
+     * @param 氏名 氏名
      */
-    public ShinsakaiIinBetsuTanka(DbT5034ShinsakaiIinBetsuTankaEntity entity) {
+    public ShinsakaiIinBetsuTanka(DbT5034ShinsakaiIinBetsuTankaEntity entity, RString 氏名) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員別単価"));
         this.id = new ShinsakaiIinBetsuTankaIdentifier(
                 entity.getShinsakaiIinCode(),
                 entity.getKaishiYM(),
                 entity.getShuryoYM());
+        this.shiMei = 氏名;
     }
 
     /**
@@ -72,13 +79,16 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
      *
      * @param entity {@link DbT5034ShinsakaiIinBetsuTankaEntity}
      * @param id {@link ShinsakaiIinBetsuTankaIdentifier}
+     * @param 氏名 氏名
      */
     ShinsakaiIinBetsuTanka(
             DbT5034ShinsakaiIinBetsuTankaEntity entity,
-            ShinsakaiIinBetsuTankaIdentifier id
+            ShinsakaiIinBetsuTankaIdentifier id,
+            RString 氏名
     ) {
         this.entity = entity;
         this.id = id;
+        this.shiMei = 氏名;
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
@@ -128,6 +138,15 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
     }
 
     /**
+     * 氏名を返します。
+     *
+     * @return 氏名
+     */
+    public RString get氏名() {
+        return this.shiMei;
+    }
+
+    /**
      * {@link DbT5034ShinsakaiIinBetsuTankaEntity}のクローンを返します。
      *
      * @return {@link DbT5034ShinsakaiIinBetsuTankaEntity}のクローン
@@ -163,7 +182,7 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShinsakaiIinBetsuTanka(
-                deletedEntity, id);
+                deletedEntity, id, shiMei);
     }
 
     @Override
@@ -183,7 +202,7 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new ShinsakaiIinBetsuTanka(
-                modifiedEntity, id);
+                modifiedEntity, id, shiMei);
     }
 
     /**
@@ -192,7 +211,7 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
      * @return {@link ShinsakaiIinBetsuTanka}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id);
+        return new _SerializationProxy(entity, id, shiMei);
 
     }
 
@@ -201,14 +220,16 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
         private static final long serialVersionUID = -5699627682795659469L;
         private final DbT5034ShinsakaiIinBetsuTankaEntity entity;
         private final ShinsakaiIinBetsuTankaIdentifier id;
+        private final RString shiMei;
 
-        private _SerializationProxy(DbT5034ShinsakaiIinBetsuTankaEntity entity, ShinsakaiIinBetsuTankaIdentifier id) {
+        private _SerializationProxy(DbT5034ShinsakaiIinBetsuTankaEntity entity, ShinsakaiIinBetsuTankaIdentifier id, RString shiMei) {
             this.entity = entity;
             this.id = id;
+            this.shiMei = shiMei;
         }
 
         private Object readResolve() {
-            return new ShinsakaiIinBetsuTanka(this.entity, this.id);
+            return new ShinsakaiIinBetsuTanka(this.entity, this.id, this.shiMei);
         }
     }
 
@@ -219,7 +240,7 @@ public class ShinsakaiIinBetsuTanka extends ModelBase<ShinsakaiIinBetsuTankaIden
      * @return Builder
      */
     public ShinsakaiIinBetsuTankaBuilder createBuilderForEdit() {
-        return new ShinsakaiIinBetsuTankaBuilder(entity, id);
+        return new ShinsakaiIinBetsuTankaBuilder(entity, id, shiMei);
     }
 
     @Override

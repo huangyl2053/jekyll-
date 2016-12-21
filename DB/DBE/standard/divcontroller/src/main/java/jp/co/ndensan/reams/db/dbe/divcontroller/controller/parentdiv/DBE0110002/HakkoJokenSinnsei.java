@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class HakkoJokenSinnsei {
 
     private static final RString SELECT_KEY0 = new RString("key0");
-    private static final RString SELECT_KEY1 = new RString("key1");
     private static final RString KEY = new RString("key");
     private static final RString VALUE_BATCH = new RString("Batch1");
 
@@ -45,25 +44,49 @@ public class HakkoJokenSinnsei {
     }
 
     /**
-     * 作成帳票チェックボックス処理です。
+     * 要介護認定申請モニタリスト帳票チェックボックス処理です。
      *
      * @param div 画面情報
      * @return ResponseData<HakkoJokenSinnseiDiv>
      */
-    public ResponseData<HakkoJokenSinnseiDiv> onClick_chkSakuseiChohyo(HakkoJokenSinnseiDiv div) {
-        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY0) || div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY1)) {
-            div.getRadHakoJyoken().setDisabled(false);
-            div.getTxtShoriYMD().setDisabled(false);
-            div.getTxtShinseibi().setDisabled(false);
-            onClick_radHakoJyoken(div);
+    public ResponseData<HakkoJokenSinnseiDiv> onClick_ChkMonitror(HakkoJokenSinnseiDiv div) {
+
+        if (div.getMonitorJoken().getChkMonitror().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getMonitorJoken().getRadMonitorJoken().setDisabled(false);
+            onClick_radMonitorJoken(div);
         } else {
-            div.getRadHakoJyoken().setDisabled(true);
-            div.getTxtShoriYMD().clearFromValue();
-            div.getTxtShoriYMD().clearToValue();
-            div.getTxtShoriYMD().setDisabled(true);
-            div.getTxtShinseibi().clearFromValue();
-            div.getTxtShinseibi().clearToValue();
-            div.getTxtShinseibi().setDisabled(true);
+            div.getMonitorJoken().getRadMonitorJoken().setDisabled(true);
+            div.getMonitorJoken().getTxtMonitorShinseiYMD().clearFromValue();
+            div.getMonitorJoken().getTxtMonitorShinseiYMD().clearToValue();
+            div.getMonitorJoken().getTxtMonitorShinseiYMD().setDisabled(true);
+            div.getMonitorJoken().getTxtMonitorShoriYMD().clearFromValue();
+            div.getMonitorJoken().getTxtMonitorShoriYMD().clearToValue();
+            div.getMonitorJoken().getTxtMonitorShoriYMD().setDisabled(true);
+            div.getMonitorJoken().setIsOpen(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 要介護認定・要支援認定申請者一覧帳票チェックボックス処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSinnseiDiv>
+     */
+    public ResponseData<HakkoJokenSinnseiDiv> onClick_ChkShinseisha(HakkoJokenSinnseiDiv div) {
+
+        if (div.getShinseishaIchiranJoken().getChkShinseishaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
+            div.getShinseishaIchiranJoken().getRadShinseishaJoken().setDisabled(false);
+            onClick_radShinseishaJyoken(div);
+        } else {
+            div.getShinseishaIchiranJoken().getRadShinseishaJoken().setDisabled(true);
+            div.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD().clearFromValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD().clearToValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD().setDisabled(true);
+            div.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD().clearFromValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD().clearToValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD().setDisabled(true);
+            div.getShinseishaIchiranJoken().setIsOpen(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -74,17 +97,38 @@ public class HakkoJokenSinnsei {
      * @param div 画面情報
      * @return ResponseData<HakkoJokenSinnseiDiv>
      */
-    public ResponseData<HakkoJokenSinnseiDiv> onClick_radHakoJyoken(HakkoJokenSinnseiDiv div) {
-        if (div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
-            div.getTxtShoriYMD().setDisabled(false);
-            div.getTxtShinseibi().clearFromValue();
-            div.getTxtShinseibi().clearToValue();
-            div.getTxtShinseibi().setDisabled(true);
+    public ResponseData<HakkoJokenSinnseiDiv> onClick_radMonitorJoken(HakkoJokenSinnseiDiv div) {
+        if (div.getMonitorJoken().getRadMonitorJoken().getSelectedKey().contains(SELECT_KEY0)) {
+            div.getMonitorJoken().getTxtMonitorShoriYMD().setDisabled(false);
+            div.getMonitorJoken().getTxtMonitorShinseiYMD().clearFromValue();
+            div.getMonitorJoken().getTxtMonitorShinseiYMD().clearToValue();
+            div.getMonitorJoken().getTxtMonitorShinseiYMD().setDisabled(true);
         } else {
-            div.getTxtShinseibi().setDisabled(false);
-            div.getTxtShoriYMD().clearFromValue();
-            div.getTxtShoriYMD().clearToValue();
-            div.getTxtShoriYMD().setDisabled(true);
+            div.getMonitorJoken().getTxtMonitorShinseiYMD().setDisabled(false);
+            div.getMonitorJoken().getTxtMonitorShoriYMD().clearFromValue();
+            div.getMonitorJoken().getTxtMonitorShoriYMD().clearToValue();
+            div.getMonitorJoken().getTxtMonitorShoriYMD().setDisabled(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 作成条件ラジオボタン処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData<HakkoJokenSinnseiDiv>
+     */
+    public ResponseData<HakkoJokenSinnseiDiv> onClick_radShinseishaJyoken(HakkoJokenSinnseiDiv div) {
+        if (div.getShinseishaIchiranJoken().getRadShinseishaJoken().getSelectedKey().contains(SELECT_KEY0)) {
+            div.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD().setDisabled(false);
+            div.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD().clearFromValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD().clearToValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD().setDisabled(true);
+        } else {
+            div.getShinseishaIchiranJoken().getTxtShinseishaShinseiYMD().setDisabled(false);
+            div.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD().clearFromValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD().clearToValue();
+            div.getShinseishaIchiranJoken().getTxtShinseishaShoriYMD().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -113,19 +157,19 @@ public class HakkoJokenSinnsei {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        validPairs = getValidationHandler(div).未入力チェック(validationMessages);
+        validPairs = getValidationHandler(div).要介護認定申請モニタリスト未入力チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        validPairs = getValidationHandler(div).処理日範囲不正チェック(validationMessages);
+        validPairs = getValidationHandler(div).要介護認定要支援認定等申請者一覧未入力チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック(validationMessages);
+        validPairs = getValidationHandler(div).要介護認定申請モニタリスト申請日入力チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        validPairs = getValidationHandler(div).申請日入力チェック(validationMessages);
+        validPairs = getValidationHandler(div).要介護認定要支援認定等申請者一覧申請日入力チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

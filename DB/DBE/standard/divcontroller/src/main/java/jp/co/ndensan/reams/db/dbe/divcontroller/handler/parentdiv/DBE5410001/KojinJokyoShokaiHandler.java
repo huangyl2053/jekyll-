@@ -233,6 +233,7 @@ public class KojinJokyoShokaiHandler {
     private void set一次判定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {
 //<<<<<<< HEAD
         div.getTxtIchijiHantei().setValue(kojinJokyoShokaiList.get(0).get一次判定結果名称());
+        div.getTxtIchijiHanteiKeikokuCode().setValue(kojinJokyoShokaiList.get(0).get一次判定警告コード());
 //=======
 //        RString 一次判定結果 = RString.EMPTY;
 //        RString 一次判定結果認知症加算 = RString.EMPTY;
@@ -308,8 +309,10 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setShinseiRiyu(kojinJokyoShokaiList.get(0).get認定申請理由());
         jokyohyoEntity.setShinseishaName(kojinJokyoShokaiList.get(0).get申請者氏名());
         jokyohyoEntity.setShinseiDaikoJigyoshaName(kojinJokyoShokaiList.get(0).get申請代行事業者());
-        jokyohyoEntity.setShinseishaKankei(ShinseiTodokedeDaikoKubunCode.toValue(
-                kojinJokyoShokaiList.get(0).get申請届出代行区分コード().getColumnValue()).toRString());
+        if (kojinJokyoShokaiList.get(0).get申請者氏名() != null) {
+            jokyohyoEntity.setShinseishaKankei(ShinseiTodokedeDaikoKubunCode.toValue(
+                    kojinJokyoShokaiList.get(0).get申請届出代行区分コード().getColumnValue()).toRString());
+        }
         jokyohyoEntity.setHonninKankei(kojinJokyoShokaiList.get(0).get申請届出者続柄コード().getColumnValue());
         jokyohyoEntity.setYubinNo2(kojinJokyoShokaiList.get(0).get申請者郵便番号().getColumnValue());
         jokyohyoEntity.setShinseishaJusho(kojinJokyoShokaiList.get(0).get申請届出者住所().getColumnValue());

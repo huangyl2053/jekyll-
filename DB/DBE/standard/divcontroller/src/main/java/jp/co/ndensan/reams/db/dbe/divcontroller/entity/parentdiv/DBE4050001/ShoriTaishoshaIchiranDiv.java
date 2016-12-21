@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShoriTaishoshaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +23,6 @@ public class ShoriTaishoshaIchiranDiv extends Panel {
      */
     @JsonProperty("dgImageMaskShoriTaishosha")
     private DataGrid<dgImageMaskShoriTaishosha_Row> dgImageMaskShoriTaishosha;
-    @JsonProperty("btnSaiKensaku")
-    private Button btnSaiKensaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,24 +46,6 @@ public class ShoriTaishoshaIchiranDiv extends Panel {
     @JsonProperty("dgImageMaskShoriTaishosha")
     public void setDgImageMaskShoriTaishosha(DataGrid<dgImageMaskShoriTaishosha_Row> dgImageMaskShoriTaishosha) {
         this.dgImageMaskShoriTaishosha = dgImageMaskShoriTaishosha;
-    }
-
-    /*
-     * getbtnSaiKensaku
-     * @return btnSaiKensaku
-     */
-    @JsonProperty("btnSaiKensaku")
-    public Button getBtnSaiKensaku() {
-        return btnSaiKensaku;
-    }
-
-    /*
-     * setbtnSaiKensaku
-     * @param btnSaiKensaku btnSaiKensaku
-     */
-    @JsonProperty("btnSaiKensaku")
-    public void setBtnSaiKensaku(Button btnSaiKensaku) {
-        this.btnSaiKensaku = btnSaiKensaku;
     }
 
     // </editor-fold>

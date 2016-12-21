@@ -35,7 +35,7 @@ public class DBE011001_ShinseiInfoPrint extends BatchFlowBase<DBE011001_ShinseiI
     @Step(SHINSEIJOUHOUINSATU_PROCESS)
     protected IBatchFlowCommand createShinseiJouhouInsatuData() {
         return loopBatch(ShinseiJouhouInsatuProcess.class).arguments(
-                getParameter().toShinseiJouhouInsatuProcessParameter()).define();
+                getParameter().toMonitorPrintParameter()).define();
     }
 
     /**
@@ -46,6 +46,6 @@ public class DBE011001_ShinseiInfoPrint extends BatchFlowBase<DBE011001_ShinseiI
     @Step(YOKAIGOYOSHIENCHIRAN_PROCESS)
     protected IBatchFlowCommand createYokaigoyoShienchiranData() {
         return loopBatch(YokaigoyoShienchiranProcess.class).arguments(
-                getParameter().toShinseiJouhouInsatuProcessParameter()).define();
+                getParameter().toShinseishaIchiranPrintParameter()).define();
     }
 }

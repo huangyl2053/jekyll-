@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoKensakujokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,8 +35,6 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
     private TextBoxNum txtIkenshoDispMax;
     @JsonProperty("btnIkenshoClear")
     private Button btnIkenshoClear;
-    @JsonProperty("btnShujiiIkenshoKensaku")
-    private Button btnShujiiIkenshoKensaku;
     @JsonProperty("ccdShujiiIkenshoHokensha")
     private HokenshaListDiv ccdShujiiIkenshoHokensha;
 
@@ -152,24 +150,6 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
     @JsonProperty("btnIkenshoClear")
     public void setBtnIkenshoClear(Button btnIkenshoClear) {
         this.btnIkenshoClear = btnIkenshoClear;
-    }
-
-    /*
-     * getbtnShujiiIkenshoKensaku
-     * @return btnShujiiIkenshoKensaku
-     */
-    @JsonProperty("btnShujiiIkenshoKensaku")
-    public Button getBtnShujiiIkenshoKensaku() {
-        return btnShujiiIkenshoKensaku;
-    }
-
-    /*
-     * setbtnShujiiIkenshoKensaku
-     * @param btnShujiiIkenshoKensaku btnShujiiIkenshoKensaku
-     */
-    @JsonProperty("btnShujiiIkenshoKensaku")
-    public void setBtnShujiiIkenshoKensaku(Button btnShujiiIkenshoKensaku) {
-        this.btnShujiiIkenshoKensaku = btnShujiiIkenshoKensaku;
     }
 
     /*
