@@ -110,7 +110,7 @@ public class ShinseiKensaku {
      */
     public ResponseData<ShinseiKensakuDiv> onClick_btnKensaku(ShinseiKensakuDiv div) {
         if (!ResponseHolder.isReRequest()) {
-        }else{
+        } else {
             return ResponseData.of(div).respond();
         }
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
@@ -198,6 +198,8 @@ public class ShinseiKensaku {
                     //            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号,
                     //>>>>>>> origin/sync
                     認定調査履歴番号);
+            ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
+            ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         } else if (MENUID_DBEMN31001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
