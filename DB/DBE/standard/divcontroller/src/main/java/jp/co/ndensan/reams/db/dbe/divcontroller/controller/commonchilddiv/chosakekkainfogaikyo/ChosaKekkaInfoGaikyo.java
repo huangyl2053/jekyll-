@@ -30,7 +30,7 @@ public class ChosaKekkaInfoGaikyo {
     private static final RString 出力する = new RString("1");
 
     /**
-     * 認定調査結果情報照会_概況調査_一覧情報。
+     * 認定調査結果情報照会_概況調setサービス状況査_一覧情報。
      *
      * @param div 認定調査結果情報照会_概況調査_一覧情報Div
      * @return 認定調査結果情報照会Div
