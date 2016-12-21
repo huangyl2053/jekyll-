@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -63,6 +64,10 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onLoad(ShinseiKensakuDiv div) {
         div.getCcdNinteishinseishaFinder().initialize();
         getHandler(div).load();
+
+        //とりあえず、メニューDBEMN21003の場合だけだす
+        div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().setVisible(MENUID_DBEMN21003.equals(ResponseHolder.getMenuID()));
+
         return ResponseData.of(div).setState(findStateAt条件指定());
     }
 
@@ -118,7 +123,7 @@ public class ShinseiKensaku {
         return processKensaku(div, hihokenshaNo);
     }
 
-    private ResponseData<ShinseiKensakuDiv> processKensaku(ShinseiKensakuDiv div, RString hihokenshaNo) throws ApplicationException {
+    private ResponseData<ShinseiKensakuDiv> processKensaku(ShinseiKensakuDiv div, RString hihokenshaNo) {
         if (!ResponseHolder.isReRequest()) {
         } else {
             return ResponseData.of(div).respond();
@@ -130,6 +135,21 @@ public class ShinseiKensaku {
         SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter(hihokenshaNo));
         ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(searchResult.records()));
         if (!searchResult.records().isEmpty()) {
+            int lastShinseiYmdIndex = 0;
+            FlexibleDate lastNinteiShinseiYmd = null;
+            for (int i = 0; i < searchResult.records().size(); i++) {
+                ShinseiKensakuBusiness rec = searchResult.records().get(i);
+                if (lastNinteiShinseiYmd == null) {
+                    lastNinteiShinseiYmd = rec.get認定申請年月日();
+                }
+                if (rec.get認定申請年月日().isAfter(lastNinteiShinseiYmd)) {
+                    lastNinteiShinseiYmd = rec.get認定申請年月日();
+                    lastShinseiYmdIndex = i;
+                }
+            }
+
+            div.getCcdNinteishinseishaFinder().updateSaikinShorisha(hihokenshaNo, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
+            div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
             getHandler(div).setShinseiJohoIchiran(searchResult);
         } else {
             div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
@@ -179,7 +199,6 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
-            div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().updateSaikinShorisha(被保険者番号, 被保険者氏名);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定個人状況照会へ).respond();
         }
 

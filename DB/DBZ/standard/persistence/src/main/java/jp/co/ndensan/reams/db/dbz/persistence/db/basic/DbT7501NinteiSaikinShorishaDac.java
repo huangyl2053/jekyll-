@@ -17,8 +17,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7501NinteiSaikinShorishaMapper;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 
 /**
  * 認定支援用　最近処理者テーブルにアクセスするためのクラスです。
@@ -40,14 +42,13 @@ public class DbT7501NinteiSaikinShorishaDac implements ISaveable<DbT7501NinteiSa
         requireNonNull(reamsLoginId, UrSystemErrorMessages.値がnull.getReplacedMessage("reamsLoginId"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
 
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
+        return new DbAccessorNormalType(session).select().
                 table(DbT7501NinteiSaikinShorisha.class).
                 where(and(
                         eq(DbT7501NinteiSaikinShorisha.reamsLoginId, reamsLoginId),
-                        eq(DbT7501NinteiSaikinShorisha.shoKisaiHokenshaNo, 証記載保険者番号))
-                ).
+                        eq(DbT7501NinteiSaikinShorisha.shoKisaiHokenshaNo, 証記載保険者番号))).
+                order(by(DbT7501NinteiSaikinShorisha.insertTimestamp, Order.DESC)).
+                limit(15).
                 toList(DbT7501NinteiSaikinShorishaEntity.class);
     }
 

@@ -175,14 +175,6 @@ var DBZ;
                 return new UZA.HorizontalLine(this.convFiledName("linHorizon"));
             };
 
-            Controls.prototype.tpl1 = function () {
-                return new UZA.TablePanel(this.convFiledName("tpl1"));
-            };
-
-            Controls.prototype.tcl1 = function () {
-                return new UZA.TableCell(this.convFiledName("tcl1"));
-            };
-
             Controls.prototype.txtHihokenshaName = function () {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
             };
@@ -219,16 +211,16 @@ var DBZ;
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBirthDateTO"));
             };
 
+            Controls.prototype.pnlForDesign = function () {
+                return new UZA.Panel(this.convFiledName("pnlForDesign"));
+            };
+
             Controls.prototype.ddlShinseijiShinseiKubun = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlShinseijiShinseiKubun"));
             };
 
             Controls.prototype.chkSeibetsu = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
-            };
-
-            Controls.prototype.tcl2 = function () {
-                return new UZA.TableCell(this.convFiledName("tcl2"));
             };
 
             Controls.prototype.ShosaiJoken = function () {

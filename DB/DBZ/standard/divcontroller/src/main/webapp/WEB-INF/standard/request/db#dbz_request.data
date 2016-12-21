@@ -263,6 +263,7 @@ dbz/db/dbz/NinteiShinseiTodokedesha/onOkClose_atenKensaku
 dbz/db/dbz/NinteiShinseiTodokedesha/onOkClose_seitai
 dbz/db/dbz/NinteiShinseishaFinder/initialize
 dbz/db/dbz/NinteiShinseishaFinder/onBlur_txtHihokenshaNumber
+dbz/db/dbz/NinteiShinseishaFinder/onChange_Hokenja
 dbz/db/dbz/NinteiShinseishaFinder/onChange_chkChosaIrai
 dbz/db/dbz/NinteiShinseishaFinder/onChange_chkChosaNyushu
 dbz/db/dbz/NinteiShinseishaFinder/onChange_chkGetsureiShori

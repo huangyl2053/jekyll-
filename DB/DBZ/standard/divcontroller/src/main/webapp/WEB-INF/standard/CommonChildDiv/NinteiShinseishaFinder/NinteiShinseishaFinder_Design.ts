@@ -188,14 +188,6 @@ module DBZ {
                 return new UZA.HorizontalLine(this.convFiledName("linHorizon"));
             }
 
-            public tpl1(): UZA.TablePanel {
-                return new UZA.TablePanel(this.convFiledName("tpl1"));
-            }
-
-            public tcl1(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("tcl1"));
-            }
-
             public txtHihokenshaName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
             }
@@ -232,16 +224,16 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBirthDateTO"));
             }
 
+            public pnlForDesign(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("pnlForDesign"));
+            }
+
             public ddlShinseijiShinseiKubun(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShinseijiShinseiKubun"));
             }
 
             public chkSeibetsu(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
-            }
-
-            public tcl2(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("tcl2"));
             }
 
             //public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {

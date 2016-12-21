@@ -1,5 +1,4 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.saikinshorisha.SaikinShorisha;
-
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -8,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.saikinsho
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @author 自動生成
  */
 public class SaikinShorishaDiv extends Panel implements ISaikinShorishaDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -36,7 +35,7 @@ public class SaikinShorishaDiv extends Panel implements ISaikinShorishaDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
- /*
+    /*
      * getddlSaikinShorisha
      * @return ddlSaikinShorisha
      */
@@ -75,13 +74,13 @@ public class SaikinShorishaDiv extends Panel implements ISaikinShorishaDiv {
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void initialize() {
-        getHandler().initialize();
+    public void initialize(ShoKisaiHokenshaNo 証記載保険者番号) {
+        getHandler().initialize(証記載保険者番号);
     }
 
     @Override
-    public void update(RString hihokenshaNo, RString hihokenshaName) {
-        getHandler().update(hihokenshaNo, hihokenshaName);
+    public void update(RString hihokenshaNo, RString hihokenshaName, ShoKisaiHokenshaNo 証記載保険者番号) {
+        getHandler().update(hihokenshaNo, hihokenshaName, 証記載保険者番号);
     }
 
     @Override

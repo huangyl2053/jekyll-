@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.service.core.saikinshorisha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7501NinteiSaikinShorishaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7501NinteiSaikinShorishaDac;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
@@ -25,10 +23,10 @@ public class SaikinShorishaService {
      *
      * @return
      */
-    public List<DbT7501NinteiSaikinShorishaEntity> findTarget() {
+    public List<DbT7501NinteiSaikinShorishaEntity> findTarget(ShoKisaiHokenshaNo 証記載保険者番号) {
         DbT7501NinteiSaikinShorishaDac dac = InstanceProvider.create(DbT7501NinteiSaikinShorishaDac.class);
 
-        return dac.selectByKey(ControlDataHolder.getUserId(), get証記載保険者番号());
+        return dac.selectByKey(ControlDataHolder.getUserId(), 証記載保険者番号);
     }
 
     /**
@@ -38,14 +36,13 @@ public class SaikinShorishaService {
      * @param hihokenshaNo
      * @param hihokenshaName
      */
-    public void update(RString hihokenshaNo, RString hihokenshaName) {
+    public void update(RString hihokenshaNo, RString hihokenshaName, ShoKisaiHokenshaNo 証記載保険者番号) {
+        if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {   //被保険者番号未指定は保存しない
+            return;
+        }
+
         DbT7501NinteiSaikinShorishaDac dac = InstanceProvider.create(DbT7501NinteiSaikinShorishaDac.class);
 
-        dac.save(new DbT7501NinteiSaikinShorishaEntity(ControlDataHolder.getUserId(), get証記載保険者番号(), hihokenshaNo, hihokenshaName));
+        dac.save(new DbT7501NinteiSaikinShorishaEntity(ControlDataHolder.getUserId(), 証記載保険者番号, hihokenshaNo, hihokenshaName));
     }
-
-    private ShoKisaiHokenshaNo get証記載保険者番号() {
-        return ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, ControlDataHolder.getUserId()).get市町村情報().get証記載保険者番号();
-    }
-
 }
