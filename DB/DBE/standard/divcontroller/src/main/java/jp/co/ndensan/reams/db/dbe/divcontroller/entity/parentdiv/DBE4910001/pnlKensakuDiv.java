@@ -33,8 +33,6 @@ public class pnlKensakuDiv extends Panel {
     private TextBoxCode txtHihokenshaCode;
     @JsonProperty("btnHihokensha")
     private Button btnHihokensha;
-    @JsonProperty("txtShimei")
-    private TextBox txtShimei;
     @JsonProperty("btnJokenClear")
     private Button btnJokenClear;
     @JsonProperty("btnKensaku")
@@ -136,24 +134,6 @@ public class pnlKensakuDiv extends Panel {
     @JsonProperty("btnHihokensha")
     public void setBtnHihokensha(Button btnHihokensha) {
         this.btnHihokensha = btnHihokensha;
-    }
-
-    /*
-     * gettxtShimei
-     * @return txtShimei
-     */
-    @JsonProperty("txtShimei")
-    public TextBox getTxtShimei() {
-        return txtShimei;
-    }
-
-    /*
-     * settxtShimei
-     * @param txtShimei txtShimei
-     */
-    @JsonProperty("txtShimei")
-    public void setTxtShimei(TextBox txtShimei) {
-        this.txtShimei = txtShimei;
     }
 
     /*

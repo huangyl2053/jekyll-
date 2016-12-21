@@ -32,6 +32,21 @@ public class ShinchokuDataOutputValidatisonHandler {
     }
 
     /**
+     * 抽出期間のどちらかが空の場合、エラーとする。
+     * 
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 抽出期間チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getTxtChuishutsuRange().getFromValue() == null 
+                || div.getTxtChuishutsuRange().getToValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(ShinchokuDataOutputValidatisonHandler.RRVMessages.抽出期間の入力チェック,
+                    div.getTxtChuishutsuRange()));
+        }
+        return validPairs;
+    }
+
+    /**
      * 対象者一覧データの件数が空の場合、エラーとする。
      *
      * @return バリデーション結果
@@ -75,7 +90,8 @@ public class ShinchokuDataOutputValidatisonHandler {
     private static enum RRVMessages implements IValidationMessage {
 
         Validate対象者一覧未表示(UrErrorMessages.該当データなし),
-        対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択);
+        対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択),
+        抽出期間の入力チェック(UrErrorMessages.必須, "抽出期間");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
