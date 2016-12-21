@@ -93,16 +93,6 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getSakuseiIraibi().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getSakuseiIraibi().setBtnKensaku(btnKensaku);
-    }
-
-    @JsonIgnore
     public Button getBtnKensakuClear() {
         return this.getSakuseiIraibi().getBtnKensakuClear();
     }
@@ -163,23 +153,23 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtKotsuhito() {
-        return this.getIkenshoSakuseiHoshu().getTxtKotsuhito();
+    public TextBoxNum getTxtSakuseiryo() {
+        return this.getIkenshoSakuseiHoshu().getTxtSakuseiryo();
     }
 
     @JsonIgnore
-    public void  setTxtKotsuhito(TextBoxNum txtKotsuhito) {
-        this.getIkenshoSakuseiHoshu().setTxtKotsuhito(txtKotsuhito);
+    public void  setTxtSakuseiryo(TextBoxNum txtSakuseiryo) {
+        this.getIkenshoSakuseiHoshu().setTxtSakuseiryo(txtSakuseiryo);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtZeiKojoGaku() {
-        return this.getIkenshoSakuseiHoshu().getTxtZeiKojoGaku();
+    public TextBoxNum getTxtShinryohi() {
+        return this.getIkenshoSakuseiHoshu().getTxtShinryohi();
     }
 
     @JsonIgnore
-    public void  setTxtZeiKojoGaku(TextBoxNum txtZeiKojoGaku) {
-        this.getIkenshoSakuseiHoshu().setTxtZeiKojoGaku(txtZeiKojoGaku);
+    public void  setTxtShinryohi(TextBoxNum txtShinryohi) {
+        this.getIkenshoSakuseiHoshu().setTxtShinryohi(txtShinryohi);
     }
 
     @JsonIgnore

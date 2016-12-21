@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -16,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class EnkiTsuchiHakkoTaishoshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +29,8 @@ public class EnkiTsuchiHakkoTaishoshaDiv extends Panel {
     private DataGrid<dgHakkotaishosha_Row> dgHakkotaishosha;
     @JsonProperty("EnkiRiyuSetting")
     private EnkiRiyuSettingDiv EnkiRiyuSetting;
+    @JsonProperty("NinteiEnkiTsuchishoBunshoBangoSetting")
+    private NinteiEnkiTsuchishoBunshoBangoSettingDiv NinteiEnkiTsuchishoBunshoBangoSetting;
     @JsonProperty("EnkitsuchiNaiyo")
     private EnkitsuchiNaiyoDiv EnkitsuchiNaiyo;
     @JsonProperty("hiddenGyomuCode")
@@ -76,6 +80,24 @@ public class EnkiTsuchiHakkoTaishoshaDiv extends Panel {
     @JsonProperty("EnkiRiyuSetting")
     public void setEnkiRiyuSetting(EnkiRiyuSettingDiv EnkiRiyuSetting) {
         this.EnkiRiyuSetting = EnkiRiyuSetting;
+    }
+
+    /*
+     * getNinteiEnkiTsuchishoBunshoBangoSetting
+     * @return NinteiEnkiTsuchishoBunshoBangoSetting
+     */
+    @JsonProperty("NinteiEnkiTsuchishoBunshoBangoSetting")
+    public NinteiEnkiTsuchishoBunshoBangoSettingDiv getNinteiEnkiTsuchishoBunshoBangoSetting() {
+        return NinteiEnkiTsuchishoBunshoBangoSetting;
+    }
+
+    /*
+     * setNinteiEnkiTsuchishoBunshoBangoSetting
+     * @param NinteiEnkiTsuchishoBunshoBangoSetting NinteiEnkiTsuchishoBunshoBangoSetting
+     */
+    @JsonProperty("NinteiEnkiTsuchishoBunshoBangoSetting")
+    public void setNinteiEnkiTsuchishoBunshoBangoSetting(NinteiEnkiTsuchishoBunshoBangoSettingDiv NinteiEnkiTsuchishoBunshoBangoSetting) {
+        this.NinteiEnkiTsuchishoBunshoBangoSetting = NinteiEnkiTsuchishoBunshoBangoSetting;
     }
 
     /*
@@ -171,6 +193,11 @@ public class EnkiTsuchiHakkoTaishoshaDiv extends Panel {
     @JsonIgnore
     public void  setBtnSetting(Button btnSetting) {
         this.getEnkiRiyuSetting().setBtnSetting(btnSetting);
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdNinteiEnkiTsuchishoBunshoBango() {
+        return this.getNinteiEnkiTsuchishoBunshoBangoSetting().getCcdNinteiEnkiTsuchishoBunshoBango();
     }
 
     @JsonIgnore

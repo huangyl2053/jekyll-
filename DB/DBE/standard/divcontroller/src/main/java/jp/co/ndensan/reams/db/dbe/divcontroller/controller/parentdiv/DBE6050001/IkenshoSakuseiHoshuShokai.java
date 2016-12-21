@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ikenshohoshushokai.IkenshoHoshuSh
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -58,6 +59,12 @@ public class IkenshoSakuseiHoshuShokai {
      * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BtnKensaku(IkenshoSakuseiHoshuShokaiDiv div) {
+        // 作成依頼開始＞作成依頼終了の場合、エラーとする
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate開始日終了日();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+
         FlexibleDate 作成依頼日開始 = FlexibleDate.EMPTY;
         FlexibleDate 作成依頼日終了 = FlexibleDate.EMPTY;
         if (div.getTxtSakuseiIraibi().getFromValue() != null) {
@@ -67,14 +74,9 @@ public class IkenshoSakuseiHoshuShokai {
             作成依頼日終了 = new FlexibleDate(div.getTxtSakuseiIraibi().getToValue().toDateString());
         }
         
-        // TODO 作成依頼日_終了日が開始日以前チェック
-//        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForIraishoSakuseiIraiYMD();
-//        if (validPairs.iterator().hasNext()) {
-//            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-//        }
-        
-        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(作成依頼日開始,
-                作成依頼日終了, div.getTxtMaxKensu().getValue().intValue());
+        Decimal 最大件数 = div.getTxtMaxKensu().getValue();
+        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(
+                作成依頼日開始, 作成依頼日終了, 最大件数);
         getHandler(div).set一覧結果(IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter).records());
         
         if (div.getDgIkenshoSakuseiHoshu().getDataSource().isEmpty()) {

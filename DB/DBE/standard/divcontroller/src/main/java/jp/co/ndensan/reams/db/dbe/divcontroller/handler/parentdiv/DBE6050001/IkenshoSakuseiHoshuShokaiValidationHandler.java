@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -32,14 +33,20 @@ public class IkenshoSakuseiHoshuShokaiValidationHandler {
     }
 
     /**
-     * 作成依頼日の必須入力チェックを実施します。
+     * 作成依頼日_終了日が開始日以前チェックを実施します。
+     * 「検索する」ボタンを押下、作成依頼開始＞作成依頼終了の場合、エラーとする
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validateForIraishoSakuseiIraiYMD() {
+    public ValidationMessageControlPairs validate開始日終了日() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtSakuseiIraibi().getFromValue() == null || div.getTxtSakuseiIraibi().getToValue() == null) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目)));
+        if ((div.getTxtSakuseiIraibi().getFromValue() != null) 
+                && (div.getTxtSakuseiIraibi().getToValue() != null)) {
+            RDate 依頼開始日 = div.getTxtSakuseiIraibi().getFromValue();
+            RDate 依頼終了日 = div.getTxtSakuseiIraibi().getToValue();
+            if (依頼開始日.isAfter(依頼終了日)) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.終了日が開始日以前)));
+            }
         }
         return validPairs;
     }

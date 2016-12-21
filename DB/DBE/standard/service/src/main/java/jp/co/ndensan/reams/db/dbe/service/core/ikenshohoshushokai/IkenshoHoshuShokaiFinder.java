@@ -54,7 +54,7 @@ public class IkenshoHoshuShokaiFinder {
      * 合計額リストの作成です。
      *
      * @param ikenshoParamter IkenshoHoshuShokaiMapperParameter
-     * @return SearchResult<IkenshoHoshuShokaiBusiness>
+     * @return SearchResult&lt;IkenshoHoshuShokaiBusiness&gt;
      */
     public SearchResult<IkenshoHoshuShokaiBusiness> select合計額リスト(IkenshoHoshuShokaiMapperParameter ikenshoParamter) {
         IIkenshoHoshuShokaiRelateMapper mapper = mapperProvider.create(IIkenshoHoshuShokaiRelateMapper.class);

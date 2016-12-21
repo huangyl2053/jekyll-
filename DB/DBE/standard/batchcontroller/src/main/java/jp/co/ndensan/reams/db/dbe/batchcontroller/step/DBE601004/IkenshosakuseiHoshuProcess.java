@@ -30,11 +30,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -54,11 +53,9 @@ public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuSho
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshohoshushokai.IIkenshoHoshuShokaiRelateMapper.select合計額リスト");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601004.getReportId();
     private static final RString REPORT_NAME = ReportIdDBE.DBE601004.getReportName();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601004"));
-    private static final RString CSV_NAME_EN = new RString("DBE601004_NinteichosaHoshu.csv");
-    private static final RString CSV_NAME_JP = new RString("主治医意見書作成報酬一覧表CSV.csv");
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE605001"));
+    private static final RString CSV_NAME_EN = new RString("主治医意見書作成料一覧表.csv");
+    private static final RString CSV_NAME_JP = new RString("主治医意見書作成料一覧表CSV");
     private static final RString なし = new RString("なし");
     private static final RString CSVを出力する = new RString("1");
     private static final RString 集計表を発行する = new RString("2");
@@ -67,24 +64,21 @@ public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuSho
     private int count = 0;
     private RString 医療機関番号 = RString.EMPTY;
     private IkenHoshuIchiranProcessParameter paramter;
-    private FileSpoolManager manager;
+    private FileSpoolManager fileSpoolManager;
     private RString eucFilePath;
     private RString 導入団体コード;
     private RString 市町村名;
 
     @BatchWriter
-    private BatchReportWriter<IkenHoshuIchiranReportSource> batchWrite;
+    private BatchReportWriter<IkenHoshuIchiranReportSource> batchWriter;
     private ReportSourceWriter<IkenHoshuIchiranReportSource> reportSourceWriter;
 
     @BatchWriter
-    private EucCsvWriter<IIkenHoshuIchiranCsvEucEntity> eucCsvWriterJunitoJugo;
+    private CsvWriter<IIkenHoshuIchiranCsvEucEntity> csvWriter;
 
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        導入団体コード = 導入団体クラス.getLasdecCode_().value();
-        市町村名 = 導入団体クラス.get市町村名();
     }
 
     @Override
@@ -94,26 +88,26 @@ public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuSho
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME_EN);
-        eucCsvWriterJunitoJugo = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
-                setEncode(Encode.UTF_8withBOM)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true).
-                build();
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<IkenHoshuIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .create();
-        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
+            fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
+            eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME_EN);
+            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .build();
+        } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
+            batchWriter = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                    .addBreak(new BreakerCatalog<IkenHoshuIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                    .create();
+            reportSourceWriter = new ReportSourceWriter<>(batchWriter);
+        }
     }
 
     @Override
     protected void process(IkenshoHoshuShokaiRelateEntity relateEntity) {
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            eucCsvWriterJunitoJugo.writeLine(IkenHoshuIchiranChange.createIkenHoshuIchiranData(relateEntity, paramter));
+            csvWriter.writeLine(IkenHoshuIchiranChange.createIkenHoshuIchiranData(relateEntity, paramter));
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
             if (!医療機関番号.equals(relateEntity.get主治医医療機関コード())) {
                 count = 1;
@@ -130,29 +124,31 @@ public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuSho
 
     @Override
     protected void afterExecute() {
-        eucCsvWriterJunitoJugo.close();
-        manager.spool(eucFilePath);
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        導入団体コード = 導入団体クラス.getLasdecCode_().value();
+        市町村名 = 導入団体クラス.get市町村名();
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
+            csvWriter.close();
+            fileSpoolManager.spool(eucFilePath);
+            
             バッチ出力条件リストの出力();
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
-            帳票バッチ出力条件リストの出力();
+            帳票出力条件リストの出力();
         }
     }
 
-    private void 帳票バッチ出力条件リストの出力() {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
+    private void 帳票出力条件リストの出力() {
+        RString ジョブ番号 = new RString(JobContextHolder.getJobId());
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 意見書記入日FROM_SB = new RStringBuilder("【意見書記入日（From）】");
-        意見書記入日FROM_SB.append(dateFormat(paramter.get作成依頼日期間開始()));
-        RStringBuilder 意見書記入日To_SB = new RStringBuilder("【意見書記入日（To）】");
-        意見書記入日To_SB.append(dateFormat(paramter.get作成依頼日期間終了()));
-        出力条件.add(意見書記入日FROM_SB.toRString());
-        出力条件.add(意見書記入日To_SB.toRString());
+        RStringBuilder 作成依頼日From = new RStringBuilder("【作成依頼日（From）】");
+        作成依頼日From.append(dateFormat(paramter.get作成依頼日期間開始()));
+        RStringBuilder 作成依頼日To = new RStringBuilder("【作成依頼日（To）】");
+        作成依頼日To.append(dateFormat(paramter.get作成依頼日期間終了()));
+        出力条件.add(作成依頼日From.toRString());
+        出力条件.add(作成依頼日To.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 REPORT_ID.value(),
                 導入団体コード,
@@ -167,17 +163,15 @@ public class IkenshosakuseiHoshuProcess extends BatchProcessBase<IkenshoHoshuSho
     }
 
     private void バッチ出力条件リストの出力() {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 出力件数 = new RString(eucCsvWriterJunitoJugo.getCount());
+        RString ジョブ番号 = new RString(JobContextHolder.getJobId());
+        RString 出力件数 = new RString(csvWriter.getCount());
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 意見書記入日FROM_SB = new RStringBuilder("【意見書記入日（From）】");
-        意見書記入日FROM_SB.append(dateFormat(paramter.get作成依頼日期間開始()));
-        RStringBuilder 意見書記入日To_SB = new RStringBuilder("【意見書記入日（To）】");
-        意見書記入日To_SB.append(dateFormat(paramter.get作成依頼日期間終了()));
-        出力条件.add(意見書記入日FROM_SB.toRString());
-        出力条件.add(意見書記入日To_SB.toRString());
+        RStringBuilder 作成依頼日From = new RStringBuilder("【作成依頼日（From）】");
+        作成依頼日From.append(dateFormat(paramter.get作成依頼日期間開始()));
+        RStringBuilder 作成依頼日To = new RStringBuilder("【作成依頼日（To）】");
+        作成依頼日To.append(dateFormat(paramter.get作成依頼日期間終了()));
+        出力条件.add(作成依頼日From.toRString());
+        出力条件.add(作成依頼日To.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 CSV_NAME_JP,
                 導入団体コード,

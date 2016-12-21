@@ -31,10 +31,10 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
     private TextBoxNum txtShisetsuShinki;
     @JsonProperty("txtShisetsuKeizoku")
     private TextBoxNum txtShisetsuKeizoku;
-    @JsonProperty("txtKotsuhito")
-    private TextBoxNum txtKotsuhito;
-    @JsonProperty("txtZeiKojoGaku")
-    private TextBoxNum txtZeiKojoGaku;
+    @JsonProperty("txtSakuseiryo")
+    private TextBoxNum txtSakuseiryo;
+    @JsonProperty("txtShinryohi")
+    private TextBoxNum txtShinryohi;
     @JsonProperty("txtHoshuGokei")
     private TextBoxNum txtHoshuGokei;
 
@@ -135,39 +135,39 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
     }
 
     /*
-     * gettxtKotsuhito
-     * @return txtKotsuhito
+     * gettxtSakuseiryo
+     * @return txtSakuseiryo
      */
-    @JsonProperty("txtKotsuhito")
-    public TextBoxNum getTxtKotsuhito() {
-        return txtKotsuhito;
+    @JsonProperty("txtSakuseiryo")
+    public TextBoxNum getTxtSakuseiryo() {
+        return txtSakuseiryo;
     }
 
     /*
-     * settxtKotsuhito
-     * @param txtKotsuhito txtKotsuhito
+     * settxtSakuseiryo
+     * @param txtSakuseiryo txtSakuseiryo
      */
-    @JsonProperty("txtKotsuhito")
-    public void setTxtKotsuhito(TextBoxNum txtKotsuhito) {
-        this.txtKotsuhito = txtKotsuhito;
+    @JsonProperty("txtSakuseiryo")
+    public void setTxtSakuseiryo(TextBoxNum txtSakuseiryo) {
+        this.txtSakuseiryo = txtSakuseiryo;
     }
 
     /*
-     * gettxtZeiKojoGaku
-     * @return txtZeiKojoGaku
+     * gettxtShinryohi
+     * @return txtShinryohi
      */
-    @JsonProperty("txtZeiKojoGaku")
-    public TextBoxNum getTxtZeiKojoGaku() {
-        return txtZeiKojoGaku;
+    @JsonProperty("txtShinryohi")
+    public TextBoxNum getTxtShinryohi() {
+        return txtShinryohi;
     }
 
     /*
-     * settxtZeiKojoGaku
-     * @param txtZeiKojoGaku txtZeiKojoGaku
+     * settxtShinryohi
+     * @param txtShinryohi txtShinryohi
      */
-    @JsonProperty("txtZeiKojoGaku")
-    public void setTxtZeiKojoGaku(TextBoxNum txtZeiKojoGaku) {
-        this.txtZeiKojoGaku = txtZeiKojoGaku;
+    @JsonProperty("txtShinryohi")
+    public void setTxtShinryohi(TextBoxNum txtShinryohi) {
+        this.txtShinryohi = txtShinryohi;
     }
 
     /*
