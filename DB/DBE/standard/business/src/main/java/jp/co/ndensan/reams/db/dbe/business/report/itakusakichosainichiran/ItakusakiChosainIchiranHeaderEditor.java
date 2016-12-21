@@ -77,8 +77,8 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.printTimeStamp = printTimeStampSb.toRString();
         source.title = 帳票名;
 
-        RString 委託先コードFrom = item.getShujiiCodeFrom();
-        RString 委託先コードTo = item.getShujiiCodeTo();
+        RString 委託先コードFrom = item.getIryoKikanCodeFrom();
+        RString 委託先コードTo = item.getIryoKikanCodeTo();
         source.iryoKikanCode = RString.EMPTY;
         if (!RString.isNullOrEmpty(委託先コードFrom) || !RString.isNullOrEmpty(委託先コードTo)) {
             RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
