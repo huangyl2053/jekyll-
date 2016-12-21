@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi.DataTorikomiEdit;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNinteiShinsakaiWariateIinJohoItijiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi.IShinsakaiKekkaDataTorikomiMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -22,11 +22,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1841-020 xuyongchao
  */
-public class ShinsakaiWariateProcess extends BatchProcessBase<TmpNinteiShinsakaiWariateIinJohoItijiEntity> {
+public class ShinsakaiWariateProcess extends BatchProcessBase<TempShinsakaiIinJohoEntity> {
 
     private static final RString 割当委員情報 = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi."
-            + "IShinsakaiKekkaDataTorikomiMapper.getShinsakaiWariateIinJoho");
+        "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi."
+        + "IShinsakaiKekkaDataTorikomiMapper.getShinsakaiWariateIinJoho");
     private IShinsakaiKekkaDataTorikomiMapper mapper;
     private DataTorikomiEdit edit;
     private ShinsakaiKekkaDataTorikomiMybatisParameter mybatisParameter;
@@ -51,10 +51,10 @@ public class ShinsakaiWariateProcess extends BatchProcessBase<TmpNinteiShinsakai
     }
 
     @Override
-    protected void process(TmpNinteiShinsakaiWariateIinJohoItijiEntity entity) {
+    protected void process(TempShinsakaiIinJohoEntity entity) {
         if (null != entity) {
-            mybatisParameter = ShinsakaiKekkaDataTorikomiMybatisParameter.createParam(RString.EMPTY,
-                    entity.getShinsakaiKaisaiNo(), entity.getShinsakaiIinCode());
+            mybatisParameter = ShinsakaiKekkaDataTorikomiMybatisParameter.createParam(
+                RString.EMPTY, entity.get介護認定審査会開催番号(), entity.get介護認定審査会委員コード());
             DbT5503ShinsakaiWariateIinJohoEntity t5503Entity = mapper.getShinsakaiWariateIin(mybatisParameter);
             if (null == t5503Entity) {
                 dbT5503Writer.insert(edit.insertDbT5503Entity(entity));
