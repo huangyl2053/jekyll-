@@ -36,7 +36,6 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
  *
  * @author
  */
-@Ignore
 @RunWith(Enclosed.class)
 public class DBE518002_NinteiShinsaIraiIfTorikomiTest extends DbeTestDacBase {
 
@@ -92,9 +91,10 @@ public class DBE518002_NinteiShinsaIraiIfTorikomiTest extends DbeTestDacBase {
             DBE518002_NinteiShinsaIraiIfTorikomiParameter parameter = new DBE518002_NinteiShinsaIraiIfTorikomiParameter();
             List<RString> list = new ArrayList<>();
             list.add(new RString("NijihanteiKekkaTorokuMobile.csv"));
+            list.add(new RString("NijihanteiKekkaTorokuMobileShinsaiin.csv"));
             parameter.setFilename(list);
             parameter.setMediapath(new RString("/home/D209007/shared/sharedFiles/DB/DBE/OCR"));
-            parameter.setShinsakaiiintorikomikubun(new RString("2"));
+            parameter.setShinsakaiiintorikomikubun(new RString("1"));
             parameter.setTorikomidatakubun(new RString("1"));
             parameter.setTorikominaiyoukubun(new RString("1"));
 
