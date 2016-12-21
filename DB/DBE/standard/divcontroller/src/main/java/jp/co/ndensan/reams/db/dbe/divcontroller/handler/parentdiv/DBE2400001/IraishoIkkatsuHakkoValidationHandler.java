@@ -103,28 +103,56 @@ public class IraishoIkkatsuHakkoValidationHandler {
      */
     public ValidationMessageControlPairs printChouhyouSentakuCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (STATE_NINTEIO.equals(div.getState())
-                && ((div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(KEY_1)
-                && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty())
-                || (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().isEmpty()
-                && div.getChkchosairaihakko().getSelectedKeys().isEmpty()
-                && div.getChkchosairaiRireki().getSelectedKeys().isEmpty()))) {
+        if (STATE_NINTEIO.equals(div.getState()) && isNinteiNoSelected()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }
-        if (STATE_SHUJII.equals(div.getState())
-                && ((div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(KEY_2)
-                && div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().isEmpty()
-                && div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().isEmpty()
-                && div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty())
-                || div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().isEmpty()
-                && div.getChkikenshiiraihakko().getSelectedKeys().isEmpty()
-                && div.getChkikenshiiraiRireki().getSelectedKeys().isEmpty())) {
+        if (STATE_SHUJII.equals(div.getState()) && isShujiiNoSelected()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }
 
         return validationMessages;
+    }
+    
+    private boolean isNinteiNoSelected() {
+        boolean is調査書なし = div.getChkNinteiChosaIraiChohyo().getSelectedKeys().isEmpty();
+        boolean is調査書以外なし = div.getChkchosairaihakko().getSelectedKeys().isEmpty()
+                && div.getChkchosairaiRireki().getSelectedKeys().isEmpty();
+        if (is調査書なし) {
+            return is調査書以外なし;
+        }
+        return div.getChkChosaIrai().getSelectedKeys().isEmpty()
+                && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty()
+                && div.getChkChosaDesign().getSelectedKeys().isEmpty()
+                && div.getChkTokkiDesign().getSelectedKeys().isEmpty()
+                && div.getChkChosaOcr().getSelectedKeys().isEmpty()
+                && div.getChkTokkiOcr().getSelectedKeys().isEmpty()
+                && div.getChkSaiCheck().getSelectedKeys().isEmpty()
+                && div.getChkGaikyoTokki().getSelectedKeys().isEmpty()
+                && div.getChkTokkiKomokuAri().getSelectedKeys().isEmpty()
+                && div.getChkTokkiKomokuNashi().getSelectedKeys().isEmpty()
+                && div.getChkTokkiFree().getSelectedKeys().isEmpty()
+                && div.getChkTokkijikoTenyuryoku().getSelectedKeys().isEmpty()
+                && is調査書以外なし;
+
+    }
+
+    private boolean isShujiiNoSelected() {
+        boolean is意見書なし = div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().isEmpty();
+        boolean is意見書以外なし = div.getChkikenshiiraihakko().getSelectedKeys().isEmpty()
+                && div.getChkikenshiiraiRireki().getSelectedKeys().isEmpty();
+        if (is意見書なし) {
+            return is意見書以外なし;
+        }
+        return div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().isEmpty()
+                && div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().isEmpty()
+                && div.getChkShujiIkenshoyoshi().getSelectedKeys().isEmpty()
+                && div.getChkShujiiIkenshoyoshiOcr().getSelectedKeys().isEmpty()
+                && div.getChkShujiiIkenshoyoshiDesign().getSelectedKeys().isEmpty()
+                && div.getChkShujiiIkenshoSakuseiryoSeikyusho().getSelectedKeys().isEmpty()
+                && div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty()
+                && is意見書以外なし;
     }
 
     /**
