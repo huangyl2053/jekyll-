@@ -132,18 +132,7 @@ public class ShinseiKensaku {
         SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter(hihokenshaNo));
         ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(searchResult.records()));
         if (!searchResult.records().isEmpty()) {
-            int lastShinseiYmdIndex = 0;
-            FlexibleDate lastNinteiShinseiYmd = null;
-            for (int i = 0; i < searchResult.records().size(); i++) {
-                ShinseiKensakuBusiness rec = searchResult.records().get(i);
-                if (lastNinteiShinseiYmd == null) {
-                    lastNinteiShinseiYmd = rec.get認定申請年月日();
-                }
-                if (rec.get認定申請年月日().isAfter(lastNinteiShinseiYmd)) {
-                    lastNinteiShinseiYmd = rec.get認定申請年月日();
-                    lastShinseiYmdIndex = i;
-                }
-            }
+            int lastShinseiYmdIndex = findLastIndex(searchResult);
 
             div.getCcdNinteishinseishaFinder().updateSaikinShorisha(hihokenshaNo, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
@@ -162,6 +151,22 @@ public class ShinseiKensaku {
             return forwardNextOrStay(div, Events.検索結果1件);
         }
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
+    }
+
+    private int findLastIndex(SearchResult<ShinseiKensakuBusiness> searchResult) {
+        int lastShinseiYmdIndex = 0;
+        FlexibleDate lastNinteiShinseiYmd = null;
+        for (int i = 0; i < searchResult.records().size(); i++) {
+            ShinseiKensakuBusiness rec = searchResult.records().get(i);
+            if (lastNinteiShinseiYmd == null) {
+                lastNinteiShinseiYmd = rec.get認定申請年月日();
+            }
+            if (rec.get認定申請年月日().isAfter(lastNinteiShinseiYmd)) {
+                lastNinteiShinseiYmd = rec.get認定申請年月日();
+                lastShinseiYmdIndex = i;
+            }
+        }
+        return lastShinseiYmdIndex;
     }
 
     private static enum Events {

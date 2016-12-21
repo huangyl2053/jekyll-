@@ -337,6 +337,7 @@ dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnCheck
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnHanteikekkaOutput
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnRenkeiDataOutput
 dbe/db/dbe/NijihanteiKekkaOutput/onLoad
+dbe/db/dbe/NijihanteiKekkaOutput/onSaikinshorishaClick
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onActive
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnIchiHanteiJisshi
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnKihonChosa
@@ -969,6 +970,7 @@ dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnHozon
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnIrai
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnSearch
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onLoad
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSaikinshorishaClick
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSelect_dgShinseishaIchiran
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onBlur_Shinryohi
 dbe/db/dbe/ShujiiIkenshoSakuseiryoNyuryoku/onChange_Kuben
