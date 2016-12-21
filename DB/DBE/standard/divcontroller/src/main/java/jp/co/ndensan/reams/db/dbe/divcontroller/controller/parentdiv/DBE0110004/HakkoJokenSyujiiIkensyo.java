@@ -156,6 +156,8 @@ public class HakkoJokenSyujiiIkensyo {
                 div.getTxtShinsaYMD3().clearFromValue();
                 div.getTxtShinsaYMD3().clearToValue();
                 div.getTxtShinsaYMD3().setDisabled(true);
+            } else {
+                div.getTxtShinsaYMD3().setDisabled(false);
             }
         } else {
             div.getRadJoken3().setDisabled(true);
@@ -335,34 +337,6 @@ public class HakkoJokenSyujiiIkensyo {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         validPairs = getValidationHandler(div).未入力チェック(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).処理日範囲不正チェック1(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).処理日範囲不正チェック2(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).受領日範囲不正チェック(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック1(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック2(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック3(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック4(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
