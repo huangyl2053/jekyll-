@@ -18,6 +18,7 @@
         <result column="ninteiChosainCode" property="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler" />
         <result column="chosainShimei" property="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result column="ninteichosaIraiKubunCode" property="ninteichosaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result column="ninteichosaIraiYMD" property="ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
 
     <select resultOrdered="true" id="get認定調査情報" resultMap="result_NinteiRelateEntity" 
@@ -34,7 +35,8 @@
            dbT5101."ninteiChosaItakusakiCode" AS "ninteiChosaItakusakiCode",
            dbT5101."ninteiChosainCode" AS "ninteiChosainCode",
            dbT5913."chosainShimei" AS "chosainShimei",
-           dbT5201."ninteichosaIraiKubunCode" AS "ninteichosaIraiKubunCode"
+           dbT5201."ninteichosaIraiKubunCode" AS "ninteichosaIraiKubunCode",
+           dbT5201."ninteichosaIraiYMD" AS "ninteichosaIraiYMD"
       FROM
            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
            INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
