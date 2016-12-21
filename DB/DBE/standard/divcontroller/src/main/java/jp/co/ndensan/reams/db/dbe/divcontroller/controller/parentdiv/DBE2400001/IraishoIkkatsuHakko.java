@@ -265,15 +265,18 @@ public class IraishoIkkatsuHakko {
         param.setNinteiChosaIraiList(ninteiChosaIraiList);
         param.setNinteiChosaIraiChohyo(div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY0));
         if (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY1)) {
-            param.setNinteiChosaIraisyo(div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0));
-            param.setNinteiChosahyoKihon(div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY0));
-            param.setNinteiChosahyoTokki(div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY1));
-            param.setNinteiChosahyoGaikyou(div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY2));
-            param.setNinteiChosahyoOCRKihon(div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY0));
-            param.setNinteiChosahyoOCRTokki(div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY1));
-            param.setNinteiChosahyoOCRGaikyou(div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY2));
-            param.setNinteiChosaCheckHyo(div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY0));
-            param.setZenkoNinteiChosahyo(div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY1));
+            param.set認定調査依頼書(div.getChkirai().getSelectedKeys().contains(SELECTED_KEY0));
+            param.set認定調査票_デザイン用紙(div.getChkchosa().getSelectedKeys().contains(SELECTED_KEY0));
+            param.set特記事項_デザイン用紙(div.getChkchosa().getSelectedKeys().contains(SELECTED_KEY1));
+            param.set認定調査票OCR(div.getChkchosaOcr().getSelectedKeys().contains(SELECTED_KEY0));
+            param.set特記事項OCR(div.getChkchosaOcr().getSelectedKeys().contains(SELECTED_KEY1));
+            param.set認定調査差異チェック票(div.getChkchosaSonota().getSelectedKeys().contains(SELECTED_KEY0));
+            param.set概況特記(div.getChkchosaSonota().getSelectedKeys().contains(SELECTED_KEY1));
+            param.set特記事項_項目あり(div.getChkChosahyoTokkijiko().getSelectedKeys().contains(SELECTED_KEY0));
+            param.set特記事項_項目無し(div.getChkChosahyoTokkijiko().getSelectedKeys().contains(SELECTED_KEY1));
+            param.set特記事項_フリータイプ(div.getChkChosahyoTokkijiko().getSelectedKeys().contains(SELECTED_KEY2));
+            param.set手入力タイプ(div.getChkTokkijikoTenyuryoku().getSelectedKeys().contains(SELECTED_KEY0));
+            param.set前回認定調査結果との比較表(div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY0));
         }
         param.setNinteiChosairaiHakkou(div.getChkchosairaihakko().getSelectedKeys().contains(SELECTED_KEY0));
         param.set認定調査依頼履歴一覧(div.getChkchosairaiRireki().getSelectedKeys().contains(SELECTED_KEY0));
