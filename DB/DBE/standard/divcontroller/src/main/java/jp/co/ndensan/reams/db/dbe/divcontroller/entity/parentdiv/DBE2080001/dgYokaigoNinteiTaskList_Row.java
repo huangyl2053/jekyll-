@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 20 09:29:01 JST 2016 
+ * Wed Dec 21 13:02:55 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgYokaigoNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
 
     private RString johtai;
     private RString hokensha;
@@ -32,6 +32,7 @@ public class dgYokaigoNinteiTaskList_Row extends DataRow {
     private TextBoxDate chosahyoKanryoDay;
     private TextBoxDate ikenshoIraiKanryoDay;
     private TextBoxDate ikenshoNyushuKanryoDay;
+    private RString cyoSaHyo;
     private RString cyoSaHyoToKi;
     private RString jyuJiIiKenJyo;
     private RString shinseishoKanriNo;
@@ -48,6 +49,7 @@ public class dgYokaigoNinteiTaskList_Row extends DataRow {
         this.chosahyoKanryoDay = new TextBoxDate();
         this.ikenshoIraiKanryoDay = new TextBoxDate();
         this.ikenshoNyushuKanryoDay = new TextBoxDate();
+        this.cyoSaHyo = RString.EMPTY;
         this.cyoSaHyoToKi = RString.EMPTY;
         this.jyuJiIiKenJyo = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
@@ -61,12 +63,13 @@ public class dgYokaigoNinteiTaskList_Row extends DataRow {
         this.setOriginalData("chosahyoKanryoDay", chosahyoKanryoDay);
         this.setOriginalData("ikenshoIraiKanryoDay", ikenshoIraiKanryoDay);
         this.setOriginalData("ikenshoNyushuKanryoDay", ikenshoNyushuKanryoDay);
+        this.setOriginalData("cyoSaHyo", cyoSaHyo);
         this.setOriginalData("cyoSaHyoToKi", cyoSaHyoToKi);
         this.setOriginalData("jyuJiIiKenJyo", jyuJiIiKenJyo);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgYokaigoNinteiTaskList_Row(RString johtai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate chosaIraiKanryoDay, TextBoxDate chosahyoKanryoDay, TextBoxDate ikenshoIraiKanryoDay, TextBoxDate ikenshoNyushuKanryoDay, RString cyoSaHyoToKi, RString jyuJiIiKenJyo, RString shinseishoKanriNo) {
+    public dgYokaigoNinteiTaskList_Row(RString johtai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate chosaIraiKanryoDay, TextBoxDate chosahyoKanryoDay, TextBoxDate ikenshoIraiKanryoDay, TextBoxDate ikenshoNyushuKanryoDay, RString cyoSaHyo, RString cyoSaHyoToKi, RString jyuJiIiKenJyo, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("johtai", johtai);
         this.setOriginalData("hokensha", hokensha);
@@ -78,6 +81,7 @@ public class dgYokaigoNinteiTaskList_Row extends DataRow {
         this.setOriginalData("chosahyoKanryoDay", chosahyoKanryoDay);
         this.setOriginalData("ikenshoIraiKanryoDay", ikenshoIraiKanryoDay);
         this.setOriginalData("ikenshoNyushuKanryoDay", ikenshoNyushuKanryoDay);
+        this.setOriginalData("cyoSaHyo", cyoSaHyo);
         this.setOriginalData("cyoSaHyoToKi", cyoSaHyoToKi);
         this.setOriginalData("jyuJiIiKenJyo", jyuJiIiKenJyo);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
@@ -91,6 +95,7 @@ public class dgYokaigoNinteiTaskList_Row extends DataRow {
         this.chosahyoKanryoDay = chosahyoKanryoDay;
         this.ikenshoIraiKanryoDay = ikenshoIraiKanryoDay;
         this.ikenshoNyushuKanryoDay = ikenshoNyushuKanryoDay;
+        this.cyoSaHyo = cyoSaHyo;
         this.cyoSaHyoToKi = cyoSaHyoToKi;
         this.jyuJiIiKenJyo = jyuJiIiKenJyo;
         this.shinseishoKanriNo = shinseishoKanriNo;
@@ -134,6 +139,10 @@ public class dgYokaigoNinteiTaskList_Row extends DataRow {
 
     public TextBoxDate getIkenshoNyushuKanryoDay() {
         return ikenshoNyushuKanryoDay;
+    }
+
+    public RString getCyoSaHyo() {
+        return cyoSaHyo;
     }
 
     public RString getCyoSaHyoToKi() {
@@ -196,6 +205,11 @@ public class dgYokaigoNinteiTaskList_Row extends DataRow {
     public void setIkenshoNyushuKanryoDay(TextBoxDate ikenshoNyushuKanryoDay) {
         this.setOriginalData("ikenshoNyushuKanryoDay", ikenshoNyushuKanryoDay);
         this.ikenshoNyushuKanryoDay = ikenshoNyushuKanryoDay;
+    }
+
+    public void setCyoSaHyo(RString cyoSaHyo) {
+        this.setOriginalData("cyoSaHyo", cyoSaHyo);
+        this.cyoSaHyo = cyoSaHyo;
     }
 
     public void setCyoSaHyoToKi(RString cyoSaHyoToKi) {
