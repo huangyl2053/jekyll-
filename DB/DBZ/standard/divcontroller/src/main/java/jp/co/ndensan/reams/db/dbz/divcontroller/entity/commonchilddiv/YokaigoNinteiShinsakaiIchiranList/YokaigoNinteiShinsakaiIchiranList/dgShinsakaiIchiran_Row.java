@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 20 18:23:44 JST 2016 
+ * Wed Dec 21 18:26:37 JST 2016 
  */
 
 
