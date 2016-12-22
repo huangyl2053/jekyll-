@@ -974,6 +974,7 @@ dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_radShoriJyotai
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_txtSaidaiHyojiKensu
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_BtnYitiranSyuturyoku
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnChousaIraiKanryo
+dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnModoruShujiiIkenshoIraiTaishoIchiran
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnOutputCsv
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnShujiiIrai
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onLoad
