@@ -57,8 +57,8 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
             ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査結果, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
 
-            審査会審査結果データ = new RString("モバイル審査会結果データ審査会情報（仮）");
-            ファイル名称 = new RString("NijihanteiKekkaTorokuMobileShinsakai.csv");
+            審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会結果データ審査会情報取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査会情報, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
         }
         if (div.getRadTorikomiTaishoData().getSelectedKey().contains(SELECT_KEY0)
@@ -67,8 +67,8 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
             ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査結果, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
 
-            審査会審査結果データ = new RString("モバイル審査会結果データ審査会情報（仮）");
-            ファイル名称 = new RString("NijihanteiKekkaTorokuMobileShinsakai.csv");
+            審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会結果データ審査会情報取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査会情報, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
         }
         if (div.getRadTorikomiTaishoData().getSelectedKey().contains(SELECT_KEY1)) {
