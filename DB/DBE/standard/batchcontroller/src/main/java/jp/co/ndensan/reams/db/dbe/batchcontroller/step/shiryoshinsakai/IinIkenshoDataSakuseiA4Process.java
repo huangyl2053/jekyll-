@@ -79,10 +79,6 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
 
     @Override
     protected void process(ShinsakaiSiryoKyotsuEntity entity) {
-//        entity.setHihokenshaNo(RString.EMPTY);
-//        entity.setHihokenshaName(AtenaMeisho.EMPTY);
-//        entity.setShoKisaiHokenshaNo(RString.EMPTY);
-//        entity.setJimukyoku(false);
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
         RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         主治医意見書 = new JimuShinsakaiWariateJohoBusiness(entity);
@@ -95,7 +91,8 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
     @Override
     protected void createWriter() {
         batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
-                .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().new SimpleLayoutBreaker(Shujiiikensho1A4ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().new SimpleLayoutBreaker(
+                    Shujiiikensho1A4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<Shujiiikensho1A4ReportSource> occuredBreak(
                             ReportLineRecord<Shujiiikensho1A4ReportSource> currentRecord,
@@ -165,14 +162,16 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA4.getImageFolderPath()));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA4.getImageFolderPath())).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 }
