@@ -7,7 +7,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4010001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaitoroku.ShinsakaiTorokuBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.ShinsakaiTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.dgShinsakaiList_Row;
@@ -20,6 +24,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShinsakaiJidoWaritsuke;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
@@ -65,6 +73,11 @@ public class ShinsakaiTorokuHandler {
     private static final int LENGTH_4 = 4;
     private static final int 審査会開催番号start = 1;
 
+    private static final RString 検索制御_最大取得件数上限
+            = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+    private static final RString 検索制御_最大取得件数
+            = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+
     /**
      * コンストラクタです。
      *
@@ -104,6 +117,12 @@ public class ShinsakaiTorokuHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, false);
         }
 
+        if (div.getTxtTaishoshaMaxHyojiKensu() == null 
+                || !(div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue() <= div.getTxtTaishoshaMaxHyojiKensu().getMaxValue().intValue()
+                && 1 <= div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue())) {
+            div.getTxtTaishoshaMaxHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
+        }
+
         List<ShinsakaiTorokuBusiness> 審査会登録List = ShinsakaiTorokuFinder.createInstance().
                 get審査会登録モード(YokaigoNinteiTaskListParameter.
                         createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分)).records();
@@ -139,9 +158,15 @@ public class ShinsakaiTorokuHandler {
     /**
      * 最大表示件数にコンフィグの値をセットします。
      */
+    public void set対象者最大表示件数() {
+        div.getTxtTaishoshaMaxHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+        div.getTxtTaishoshaMaxHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
+    }
+
+    /**
+     * 最大表示件数にコンフィグの値をセットします。
+     */
     public void set審査会最大表示件数() {
-        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtShinsakaiMaxHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
         div.getTxtShinsakaiMaxHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
     }
@@ -153,7 +178,15 @@ public class ShinsakaiTorokuHandler {
      */
     public void onClick_btnSearch(List<ShinsakaiKaisai> 審査会一覧) {
         List<dgShinsakaiList_Row> list = new ArrayList<>();
-        for (ShinsakaiKaisai shinsakaiKaisai : 審査会一覧) {
+        List<ShinsakaiKaisai> newRowList = new ArrayList<>(); 
+        if (審査会一覧.size() > div.getTxtShinsakaiMaxHyojiKensu().getValue().intValue()) {     
+            for (int count = 0; count < div.getTxtShinsakaiMaxHyojiKensu().getValue().intValue(); count++) {
+                newRowList.add(審査会一覧.get(count));
+            }
+        } else {
+            newRowList.addAll(審査会一覧);
+        }
+        for (ShinsakaiKaisai shinsakaiKaisai : newRowList) {
             dgShinsakaiList_Row row = new dgShinsakaiList_Row();
             row.getKaisaiYoteiYmd().setValue(shinsakaiKaisai.get介護認定審査会開催予定年月日());
             row.getKaisaiYoteiTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会開始予定時刻()));
@@ -171,6 +204,8 @@ public class ShinsakaiTorokuHandler {
             list.add(row);
         }
         div.getDgShinsakaiList().setDataSource(list);
+        div.getDgShinsakaiList().getGridSetting().setSelectedRowCount(審査会一覧.size());
+        div.getDgShinsakaiList().getGridSetting().setLimitRowCount(div.getTxtShinsakaiMaxHyojiKensu().getValue().intValue());
     }
 
     /**
@@ -187,9 +222,17 @@ public class ShinsakaiTorokuHandler {
 
     private void 審査会登録モード(List<ShinsakaiTorokuBusiness> 審査会登録List) {
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
+        List<ShinsakaiTorokuBusiness> newRowList = new ArrayList<>(); 
         int completeCount = 0;
         int notCount = 0;
-        for (ShinsakaiTorokuBusiness business : 審査会登録List) {
+        if (審査会登録List.size() > div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue()) {         
+            for (int count = 0; count < div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue(); count++) {
+                newRowList.add(審査会登録List.get(count));
+            }
+        } else {
+            newRowList.addAll(審査会登録List);
+        }
+        for (ShinsakaiTorokuBusiness business : newRowList) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setRowState(RowState.Unchanged);
             row.setCancelButtonState(DataGridButtonState.Disabled);
@@ -216,9 +259,11 @@ public class ShinsakaiTorokuHandler {
             rowList.add(row);
         }
         div.getTxtMishoriCount().setValue(new Decimal(notCount));
-        div.getTxtTotalCount().setValue(new Decimal(審査会登録List.size()));
+        div.getTxtTotalCount().setValue(new Decimal(rowList.size()));
         div.getTxtCompleteCount().setValue(new Decimal(completeCount));
         div.getDgNinteiTaskList().setDataSource(rowList);
+        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(審査会登録List.size());
+        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue());
     }
 
     private RString edit審査会名称(RString 審査会開催番号) {
@@ -264,7 +309,6 @@ public class ShinsakaiTorokuHandler {
      */
     public void onSelect_btnCancel(dgNinteiTaskList_Row row) {
         RString 取消開催番号 = row.getKaisaiNumber();
-        row.setSelected(Boolean.FALSE);
         row.setCancelButtonState(DataGridButtonState.Disabled);
         row.setRowState(RowState.Unchanged);
         row.getShinsakaiwaritukeDay().clearValue();
@@ -300,6 +344,7 @@ public class ShinsakaiTorokuHandler {
         }
         return 最大審査順;
     }
+
     /**
      * 割り付けボタンクリックイベントです。
      *
@@ -310,6 +355,7 @@ public class ShinsakaiTorokuHandler {
         RDate 現在日付 = RDate.getNowDate();
         Decimal 最大審査順 = shinsakaiRow.getMaxShinsakaiOrder().getValue();
         for (dgNinteiTaskList_Row 選択データ : rowList) {
+            選択データ.setSelected(Boolean.FALSE);
             選択データ.setCancelButtonState(DataGridButtonState.Enabled);
             選択データ.setRowState(RowState.Modified);
             選択データ.getShinsakaiwaritukeDay().setValue(現在日付);
@@ -322,6 +368,61 @@ public class ShinsakaiTorokuHandler {
             選択データ.setGogitai(shinsakaiRow.getGogitaiMeisho());
             最大審査順 = 最大審査順.add(1);
         }
+    }
+
+    /**
+     * 保存するボタンクリックイベントです。
+     *
+     * @param 修正リスト List<dgNinteiTaskList_Row>
+     */
+    public void onClick_btnSave(List<dgNinteiTaskList_Row> 修正リスト) {
+        ShinsakaiWariateJohoManager wariateJohoManager = ShinsakaiWariateJohoManager.createInstance();
+        ShinsakaiKaisaiYoteiJohoManager kaisaiYoteiJohoManager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
+        List<dgNinteiTaskList_Row> ソート後リスト = new ArrayList<>();
+        for (dgNinteiTaskList_Row 修正データ : 修正リスト) {
+            if (!ソート後リスト.contains(修正データ)) {
+                ソート後リスト.add(修正データ);
+                for (dgNinteiTaskList_Row 修正データ2 : 修正リスト) {
+                    if (!ソート後リスト.contains(修正データ2)
+                            && ソート後リスト.get(ソート後リスト.size() - 1).getKaisaiNumber().equals(修正データ2.getKaisaiNumber())) {
+                        ソート後リスト.add(修正データ2);
+                    }
+                }
+            }
+        }
+        RString beforeKaisaiNo = RString.EMPTY;
+        int 更新件数 = 0;
+        for (dgNinteiTaskList_Row ソート後データ : ソート後リスト) {
+            if (!beforeKaisaiNo.isEmpty() && beforeKaisaiNo.equals(ソート後データ.getKaisaiNumber())) {
+                審査会開催予定情報更新(beforeKaisaiNo, 更新件数, kaisaiYoteiJohoManager);
+                更新件数 = 0;
+            }
+            ShinsakaiWariateJoho2 shinsakaiWariateJoho = new ShinsakaiWariateJoho2(
+                    ソート後データ.getKaisaiNumber(),
+                    new ShinseishoKanriNo(ソート後データ.getShinseishoKanriNo()));
+            ShinsakaiWariateJoho2Builder builder = shinsakaiWariateJoho.createBuilderForEdit();
+            builder.set介護認定審査会開催年月日(new FlexibleDate(ソート後データ.getShinsakaiKaisaiDay().getValue().toString()));
+            builder.set介護認定審査会割当年月日(new FlexibleDate(ソート後データ.getShinsakaiwaritukeDay().getValue().toString()));
+            builder.set介護認定審査会審査順(ソート後データ.getShinsakaiOrder().getValue().intValue());
+            builder.set介護認定審査会審査順確定フラグ(true);
+            builder.set審査会自動割付フラグ(IsShinsakaiJidoWaritsuke.手動.is審査会自動割付());
+            wariateJohoManager.save介護認定審査会割当情報(builder.build().modifiedModel());
+            更新件数 = 更新件数 + 1;
+            beforeKaisaiNo = ソート後データ.getKaisaiNumber();
+        }
+        審査会開催予定情報更新(beforeKaisaiNo, 更新件数, kaisaiYoteiJohoManager);
+    }
+
+    private void 審査会開催予定情報更新(RString 審査会番号, int 更新件数, ShinsakaiKaisaiYoteiJohoManager kaisaiYoteiJohoManager) {
+        ShinsakaiKaisaiYoteiJohoMapperParameter mapperParameter
+                = ShinsakaiKaisaiYoteiJohoMapperParameter.createSelectByKeyParam(審査会番号);
+        ShinsakaiKaisaiYoteiJoho2 joho = kaisaiYoteiJohoManager.get介護認定審査会開催予定情報(mapperParameter);
+        if (joho != null) {
+            ShinsakaiKaisaiYoteiJoho2Builder builder = joho.createBuilderForEdit();
+            builder.set介護認定審査会割当済み人数(更新件数 + joho.get介護認定審査会割当済み人数());
+            kaisaiYoteiJohoManager.save(builder.build().modifiedModel());
+        }
+
     }
 
     /**
