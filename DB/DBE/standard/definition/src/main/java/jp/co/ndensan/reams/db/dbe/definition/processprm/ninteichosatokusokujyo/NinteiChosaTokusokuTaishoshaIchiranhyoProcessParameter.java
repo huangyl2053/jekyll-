@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosatokusokujyo.N
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 認定調査督促対象者一覧表作成_バッチ処理クラスパラメータクラスです。
@@ -24,12 +23,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter implements I
     private RString temp_保険者コード;
     private RString temp_認定調査委託先コード;
     private RString temp_認定調査員コード;
-    private FlexibleDate temp_基準日;
-    private Decimal temp_認定調査督促期限日数;
-    private RString temp_印刷済対象者;
     private FlexibleDate temp_印刷期間開始日;
     private FlexibleDate temp_印刷期間終了日;
-    private RString temp_出力順;
     private boolean csv出力_選択された;
 
     /**
@@ -38,15 +33,12 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter implements I
      * @return 認定調査督促対象者一覧表のMybatisパラメータ
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter toNinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter() {
-        return new NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter(this.temp_基準日,
-                this.temp_認定調査督促期限日数,
-                this.temp_印刷済対象者,
+        return new NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter(
                 this.temp_保険者コード,
                 this.temp_認定調査委託先コード,
                 this.temp_認定調査員コード,
                 this.temp_印刷期間開始日,
-                this.temp_印刷期間終了日,
-                this.temp_出力順);
+                this.temp_印刷期間終了日);
     }
 
 }
