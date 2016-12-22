@@ -41,7 +41,6 @@ public class IraishoIkkatsuHakko {
     private static final RString SELECTED_KEY0 = new RString("key0");
     private static final RString SELECTED_KEY1 = new RString("key1");
     private static final RString SELECTED_KEY2 = new RString("key2");
-    private static final RString SELECTED_KEY3 = new RString("key3");
     private static final RString NO_PRINT = new RString("1");
     private static final RString PRINT = new RString("2");
     private static final RString PRINT_AND_NOPRINT = new RString("3");
@@ -202,14 +201,14 @@ public class IraishoIkkatsuHakko {
      */
     public ResponseData<DBE220010_IraishoIkkatuParameter> onClick_btnBatchRegister(IraishoIkkatsuHakkoDiv div) {
         DBE220010_IraishoIkkatuParameter param = new DBE220010_IraishoIkkatuParameter();
-        if (new RString(DBE2400001StateName.認定調査依頼_検索結果.name()).equals(div.getState())) {
+        if (new RString(DBE2400001StateName.認定調査依頼_検索結果.name()).equals(ResponseHolder.getState())) {
             param.setIraiFromYMD(div.getTxtIraibiFrom().getValue() == null
                     ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
             param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
                     ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
             setNinteParam(param, div);
         }
-        if (new RString(DBE2400001StateName.主治医意見書作成依頼_検索結果.name()).equals(div.getState())) {
+        if (new RString(DBE2400001StateName.主治医意見書作成依頼_検索結果.name()).equals(ResponseHolder.getState())) {
             param.setIraiFromYMD(div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue() == null
                     ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().toDateString());
             param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null
@@ -265,8 +264,8 @@ public class IraishoIkkatsuHakko {
             ninteiChosaIraiList.add(gridParameter);
         }
         param.setNinteiChosaIraiList(ninteiChosaIraiList);
-        param.setNinteiChosaIraiChohyo(div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY0));
-        if (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY1)) {
+        param.setNinteiChosaIraiChohyo(is適用(div.getChkNinteiChosaIraiIchiran()));
+        if (is適用(div.getChkNinteiChosaShinseiTani())) {
             param.set認定調査依頼書(is適用(div.getChkChosaIrai()));
             param.set認定調査票_デザイン用紙(is適用(div.getChkChosaDesign()));
             param.set特記事項_デザイン用紙(is適用(div.getChkTokkiDesign()));
@@ -280,12 +279,12 @@ public class IraishoIkkatsuHakko {
             param.set手入力タイプ(is適用(div.getChkTokkijikoTenyuryoku()));
             param.set前回認定調査結果との比較表(is適用(div.getChkNinteiChosahyoSonota()));
         }
-        param.setNinteiChosairaiHakkou(div.getChkchosairaihakko().getSelectedKeys().contains(SELECTED_KEY0));
-        param.set認定調査依頼履歴一覧(div.getChkchosairaiRireki().getSelectedKeys().contains(SELECTED_KEY0));
+        param.setNinteiChosairaiHakkou(is適用(div.getChkchosairaihakko()));
+        param.set認定調査依頼履歴一覧(is適用(div.getChkchosairaiRireki()));
     }
-    
+
     private boolean is適用(CheckBoxList chk) {
-        return !chk.getSelectedKeys().isEmpty();
+        return !chk.getSelectedKeys().isEmpty() && !chk.isDisplayNone();
     }
 
     private void setShujiiParam(DBE220010_IraishoIkkatuParameter param, IraishoIkkatsuHakkoDiv div) {
@@ -318,9 +317,9 @@ public class IraishoIkkatsuHakko {
             shujiiIkenshoSakuseiIraiList.add(gridParameter);
         }
         param.setShujiiIkenshoSakuseiIraiList(shujiiIkenshoSakuseiIraiList);
-        param.setIkenshoSakuseiirai(div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY0));
-        param.setIkenshoSakuseiSeikyuu(div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY1));
-        if (div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY2)) {
+        param.setIkenshoSakuseiirai(is適用(div.getChkShujiiIkenshoSakuseiIrai()));
+        param.setIkenshoSakuseiSeikyuu(is適用(div.getChkShujiiIkenshoSakuseiSeikyu()));
+        if (is適用(div.getChkShujiiIkenshoShinseiTani())) {
             param.setShujiiIkenshoSakuseiIraisho(is適用(div.getChkShujiiIkenshoSakuseiIraisho()));
             param.setIkenshoKinyuu(is適用(div.getChkShujiIkenshoyoshi()));
             param.setIkenshoKinyuuOCR(is適用(div.getChkShujiiIkenshoyoshiOcr()));
@@ -328,8 +327,8 @@ public class IraishoIkkatsuHakko {
             param.setIkenshoSakuseiSeikyuusho(is適用(div.getChkShujiiIkenshoSakuseiryoSeikyusho()));
             param.setIkenshoTeishutu(is適用(div.getChkShindanMeireishoAndTeishutsuIraisho()));
         }
-        param.setIkenshoSakuseiIraiHakkou(div.getChkikenshiiraihakko().getSelectedKeys().contains(SELECTED_KEY0));
-        param.set主治医意見書依頼履歴一覧(div.getChkikenshiiraiRireki().getSelectedKeys().contains(SELECTED_KEY0));
+        param.setIkenshoSakuseiIraiHakkou(is適用(div.getChkikenshiiraihakko()));
+        param.set主治医意見書依頼履歴一覧(is適用(div.getChkikenshiiraiRireki()));
     }
 
     private IraishoIkkatsuHakkoHandler getHandler(IraishoIkkatsuHakkoDiv div) {
