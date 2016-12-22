@@ -25,7 +25,7 @@ public class TempGogitaiJohoSakusei implements IDbAccessable {
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("TempGogitaiJoho");
+        TABLE_NAME = new RString("TempGogitaiJohoSakusei");
     }
     @TempTableColumnOrder(10)
     @PrimaryKey

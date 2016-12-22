@@ -22,18 +22,16 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class JimuShinsakaishiryoA4Group6Editor implements IJimuShinsakaishiryoA4Editor {
 
     private static final int INT_4 = 4;
+    private static final int FORM_GROUP_INDEX_14 = 14;
     private final JimuShinsakaiWariateJohoBusiness business;
-    private final RString reportId;
 
     /**
      * インスタンスを生成します。
      *
      * @param business {@link JimuShinsakaiWariateJohoBusiness}
-     * @param reportId 帳票ＩＤ
      */
-    protected JimuShinsakaishiryoA4Group6Editor(JimuShinsakaiWariateJohoBusiness business, RString reportId) {
+    protected JimuShinsakaishiryoA4Group6Editor(JimuShinsakaiWariateJohoBusiness business) {
         this.business = business;
-        this.reportId = reportId;
     }
 
     @Override
@@ -68,7 +66,7 @@ public class JimuShinsakaishiryoA4Group6Editor implements IJimuShinsakaishiryoA4
             source.hihokenshaNo = RString.EMPTY;
             source.hihokenshaName = RString.EMPTY;
         }
-        source.layout = 14;
+        source.layout = FORM_GROUP_INDEX_14;
         return source;
     }
 

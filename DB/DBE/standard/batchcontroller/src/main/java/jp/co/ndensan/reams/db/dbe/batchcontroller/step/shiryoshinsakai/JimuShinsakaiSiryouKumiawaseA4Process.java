@@ -82,11 +82,12 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private int no;
     private int count;
     private int shinsakaiOrder;
+    private RString path;
     private int 存在ファイルindex;
     private static final int INDEX_5 = 5;
-    private static final boolean あり = true;
-    private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private boolean is審査会対象一覧印刷済み;
     private static final RString SEPARATOR = new RString("/");
 
@@ -121,13 +122,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
 
     @Override
     protected void process() {
-        RString reportId = ReportIdDBE.DBE517901.getReportId().value();
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517901.getReportId().value())
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
-
-
-
                     JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA4ReportSource> occuredBreak(
@@ -156,12 +153,17 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
             }
         }
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
+            for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiSiryoKyotsuEntityList) {
+                if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                    RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+                    path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+                }
+            }
             JimuShinsakaishiryoA4Report report = new JimuShinsakaishiryoA4Report(jimuShinsakaishiryoList,
                     get一次判定結果票情報(shinseishoKanriNo),
                     get特記事項情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo),
-                    reportId, is審査会対象一覧印刷済み);
+                    getその他資料情報(shinseishoKanriNo), is審査会対象一覧印刷済み);
             report.writeBy(reportSourceWriter);
             is審査会対象一覧印刷済み = true;
         }
@@ -226,7 +228,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
             if (shinseishoKanriNo.equals(kyotsuEntity.getShinseishoKanriNo())) {
                 kyotsuEntity.setJimukyoku(true);
                 List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-                return new TokkiText1A4Business(kyotsuEntity, 特記情報List, batchReportWriter.getImageFolderPath());
+                return new TokkiText1A4Business(kyotsuEntity, 特記情報List, path);
             }
         }
         return null;
@@ -235,8 +237,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private JimuShinsakaiWariateJohoBusiness get主治医意見書情報(ShinseishoKanriNo shinseishoKanriNo) {
         for (ShinsakaiSiryoKyotsuEntity kyotsuEntity : shinsakaiSiryoKyotsuEntityList) {
             if (shinseishoKanriNo.equals(kyotsuEntity.getShinseishoKanriNo())) {
-                kyotsuEntity.setJimukyoku(true);
-                return new JimuShinsakaiWariateJohoBusiness(kyotsuEntity);
+                JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(kyotsuEntity);
+                business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+                business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
             }
         }
         return null;
@@ -256,8 +259,6 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 } else {
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
                 }
-                RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-                RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
                 business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
                 business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
                 存在ファイルindex = business.get存在ファイルIndex();
@@ -331,21 +332,15 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         if (sharedFileId == null) {
             return ファイルPathList;
         }
-        boolean is存在;
         int index = 0;
         for (int i = 0; i < ファイル名List.size(); i++) {
             RString ファイル名 = ファイル名List.get(i);
-            ReadOnlySharedFileEntryDescriptor descriptor
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), sharedFileId);
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchReportWriter.getImageFolderPath()));
-                is存在 = あり;
-            } catch (Exception e) {
-                is存在 = 無し;
-            }
-            if (is存在 && index < INDEX_5) {
-                ファイルPathList.add(ファイル名);
-                index = i + 1;
+            if (!RString.isNullOrEmpty(path) && index < INDEX_5) {
+                RString fileFullPath = getFilePath(path, ファイル名);
+                if (!RString.isNullOrEmpty(fileFullPath)) {
+                    ファイルPathList.add(fileFullPath);
+                    index = i + 1;
+                }
             }
             if (INDEX_5 <= index) {
                 return ファイルPathList;
@@ -437,8 +432,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
