@@ -23,10 +23,12 @@ import lombok.Setter;
 public final class ChosahyoJissekiIchiranMybitisParamter implements IMyBatisParameter {
 
     private final boolean batchFlag;
-    private final boolean 調査実施日FROMFlag;
-    private final RString 調査実施日FROM;
-    private final boolean 調査実施日TOFlag;
-    private final RString 調査実施日TO;
+    private final boolean 基準日FROMFlag;
+    private final RString 基準日FROM;
+    private final boolean 基準日TOFlag;
+    private final RString 基準日TO;
+    private final boolean 基準日区分Flag;
+    private final RString 基準日区分;
     private final boolean 保険者Flag;
     private final RString 保険者;
     private final boolean 件数Flag;
@@ -35,10 +37,12 @@ public final class ChosahyoJissekiIchiranMybitisParamter implements IMyBatisPara
     private final List<ChosahyoJissekiIchiranKey> keyJoho;
 
     private ChosahyoJissekiIchiranMybitisParamter(boolean batchFlag,
-            boolean 調査実施日FROMFlag,
-            RString 調査実施日FROM,
-            boolean 調査実施日TOFlag,
-            RString 調査実施日TO,
+            boolean 基準日FROMFlag,
+            RString 基準日FROM,
+            boolean 基準日TOFlag,
+            RString 基準日TO,
+            boolean 基準日区分Flag,
+            RString 基準日区分,
             boolean 保険者Flag,
             RString 保険者,
             boolean 件数Flag,
@@ -46,10 +50,12 @@ public final class ChosahyoJissekiIchiranMybitisParamter implements IMyBatisPara
             boolean gamenFlag,
             List<ChosahyoJissekiIchiranKey> keyJoho) {
         this.batchFlag = batchFlag;
-        this.調査実施日FROMFlag = 調査実施日FROMFlag;
-        this.調査実施日FROM = 調査実施日FROM;
-        this.調査実施日TOFlag = 調査実施日TOFlag;
-        this.調査実施日TO = 調査実施日TO;
+        this.基準日FROMFlag = 基準日FROMFlag;
+        this.基準日FROM = 基準日FROM;
+        this.基準日TOFlag = 基準日TOFlag;
+        this.基準日TO = 基準日TO;
+        this.基準日区分Flag = 基準日区分Flag;
+        this.基準日区分 = 基準日区分;
         this.保険者Flag = 保険者Flag;
         this.保険者 = 保険者;
         this.件数Flag = 件数Flag;
@@ -62,22 +68,26 @@ public final class ChosahyoJissekiIchiranMybitisParamter implements IMyBatisPara
      * 帳票出力用認定調査実績集計表のデータ取得のパラメータを作成します。
      *
      * @param batchFlag batchFlag
-     * @param 調査実施日FROM 意見書記入日FROM
-     * @param 調査実施日TO 意見書記入日TO
+     * @param 基準日FROM 基準日FROM
+     * @param 基準日TO 基準日TO
+     * @param 基準日区分 基準日区分
      * @param 保険者 保険者
      * @param keyJoho 帳票出力用認定調査実績集計表のキー情報
      * @return 帳票出力用認定調査実績集計表のデータ取得パラメータ
      */
     public static ChosahyoJissekiIchiranMybitisParamter createParamter(boolean batchFlag,
-            RString 調査実施日FROM,
-            RString 調査実施日TO,
+            RString 基準日FROM,
+            RString 基準日TO,
+            RString 基準日区分,
             RString 保険者,
             List<ChosahyoJissekiIchiranKey> keyJoho) {
         return new ChosahyoJissekiIchiranMybitisParamter(batchFlag,
-                !RString.isNullOrEmpty(調査実施日FROM),
-                調査実施日FROM,
-                !RString.isNullOrEmpty(調査実施日TO),
-                調査実施日TO,
+                !RString.isNullOrEmpty(基準日FROM),
+                基準日FROM,
+                !RString.isNullOrEmpty(基準日TO),
+                基準日TO,
+                !RString.isNullOrEmpty(基準日区分),
+                基準日区分,
                 !RString.isNullOrEmpty(保険者),
                 保険者,
                 false,
@@ -90,22 +100,26 @@ public final class ChosahyoJissekiIchiranMybitisParamter implements IMyBatisPara
      * 帳票出力用認定調査実績集計表のデータ取得のパラメータを作成します。
      *
      * @param batchFlag batchFlag
-     * @param 調査実施日FROM 意見書記入日FROM
-     * @param 調査実施日TO 意見書記入日TO
+     * @param 基準日FROM 基準日FROM
+     * @param 基準日TO 基準日TO
+     * @param 基準日区分
      * @param 保険者 保険者
      * @param 最大表示件数 最大表示件数
      * @return 帳票出力用認定調査実績集計表のデータ取得パラメータ
      */
     public static ChosahyoJissekiIchiranMybitisParamter createGamenParamter(boolean batchFlag,
-            RString 調査実施日FROM,
-            RString 調査実施日TO,
+            RString 基準日FROM,
+            RString 基準日TO,
+            RString 基準日区分,
             RString 保険者,
             RString 最大表示件数) {
         return new ChosahyoJissekiIchiranMybitisParamter(batchFlag,
-                !RString.isNullOrEmpty(調査実施日FROM),
-                調査実施日FROM,
-                !RString.isNullOrEmpty(調査実施日TO),
-                調査実施日TO,
+                !RString.isNullOrEmpty(基準日FROM),
+                基準日FROM,
+                !RString.isNullOrEmpty(基準日TO),
+                基準日TO,
+                !RString.isNullOrEmpty(基準日区分),
+                基準日区分,
                 !RString.isNullOrEmpty(保険者),
                 保険者,
                 !RString.isNullOrEmpty(最大表示件数),

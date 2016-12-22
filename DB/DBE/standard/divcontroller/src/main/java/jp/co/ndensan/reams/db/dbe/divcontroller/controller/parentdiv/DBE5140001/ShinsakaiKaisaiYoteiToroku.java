@@ -459,6 +459,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 set開催予定入力欄(div.getTxtSeteibi().getValue());
             }
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
         return ResponseData.of(div).respond();
 
     }

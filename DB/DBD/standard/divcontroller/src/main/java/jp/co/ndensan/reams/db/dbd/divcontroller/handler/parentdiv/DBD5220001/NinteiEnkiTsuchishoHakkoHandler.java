@@ -97,6 +97,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         }
         div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtInsatsuDate().setValue(RDate.getNowDate());
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
         div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(new ReportId(帳票分類ID));
     }
 

@@ -61,6 +61,9 @@ public class IkenshogetHandler {
         RDate システム日付 = RDate.getNowDate();
         RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
         div.getRadJyotaiKubun().setSelectedKey(状態区分);
+        div.getTxtMisyori().setDisplayNone(false);
+        div.getTxtKanryouKano().setDisplayNone(false);
+        div.getTxtGokei().setDisplayNone(false);
         意見書入手List(状態区分);
     }
 
@@ -173,8 +176,18 @@ public class IkenshogetHandler {
 
         if (KEY1.equals(key)) {
             状態区分 = new RString("1");
+            div.getTxtMisyori().setDisplayNone(false);
+            div.getTxtKanryouKano().setDisplayNone(true);
+            div.getTxtGokei().setDisplayNone(true);
         } else if (KEY2.equals(key)) {
             状態区分 = new RString("2");
+            div.getTxtMisyori().setDisplayNone(true);
+            div.getTxtKanryouKano().setDisplayNone(false);
+            div.getTxtGokei().setDisplayNone(true);
+        } else {
+            div.getTxtMisyori().setDisplayNone(false);
+            div.getTxtKanryouKano().setDisplayNone(false);
+            div.getTxtGokei().setDisplayNone(false);
         }
         意見書入手List(状態区分);
     }

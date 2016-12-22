@@ -19,7 +19,6 @@ import lombok.Getter;
 public class ShinsaTaishoDataOutPutMybatisParameter implements IMyBatisParameter {
 
     private final RString kaisaiBangou;
-    private final RString koroshoIfShikibetsuCode;
 
     /**
      * コンストラクタです。
@@ -28,22 +27,6 @@ public class ShinsaTaishoDataOutPutMybatisParameter implements IMyBatisParameter
      */
     public ShinsaTaishoDataOutPutMybatisParameter(RString kaisaiBangou) {
         this.kaisaiBangou = kaisaiBangou;
-        this.koroshoIfShikibetsuCode = RString.EMPTY;
-
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param kaisaiBangou 開催番号
-     * @param koroshoIfShikibetsuCode 厚労省IF識別コード
-     */
-    public ShinsaTaishoDataOutPutMybatisParameter(
-            RString kaisaiBangou,
-            RString koroshoIfShikibetsuCode) {
-        this.kaisaiBangou = kaisaiBangou;
-        this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
-
     }
 
     /**

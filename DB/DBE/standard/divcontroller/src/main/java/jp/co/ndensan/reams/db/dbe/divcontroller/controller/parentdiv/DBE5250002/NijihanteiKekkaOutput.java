@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  * @reamsid_L DBE-0190-010 lizhuoxuan
  */
 public class NijihanteiKekkaOutput {
-    
+
     private final RString 判定結果ボタン = new RString("btnRenkeiDataOutput");
     private final RString 判定結果ボタン２ = new RString("btnCheck1");
     private final RString 連携ボタン = new RString("btnHanteikekkaOutput");
@@ -74,16 +74,33 @@ public class NijihanteiKekkaOutput {
     /**
      * 検索ボタン。<br/>
      *
-     * @param nijiDiv NijihanteiKekkaOutputDiv
+     * @param div NijihanteiKekkaOutputDiv
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
-    public ResponseData<NijihanteiKekkaOutputDiv> onClick_Btnkennsaku(NijihanteiKekkaOutputDiv nijiDiv) {
-        ValidationMessageControlPairs pairs = nijiDiv.getKensakuJoken().getCcdShinseishaFinder().validate();
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(nijiDiv).addValidationMessages(pairs).respond();
+    public ResponseData<NijihanteiKekkaOutputDiv> onClick_Btnkennsaku(NijihanteiKekkaOutputDiv div) {
+        ValidationMessageControlPairs pairs = div.getKensakuJoken().getCcdShinseishaFinder().validate();
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        createHandlerOf(nijiDiv).kennsaku();
-        return createResponseData(nijiDiv);
+
+        createHandlerOf(div).kennsaku(div.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
+        return createResponseData(div);
+    }
+
+    /**
+     * 最近処理者の「表示する」を押下した時の処理です。
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<NijihanteiKekkaOutputDiv> onSaikinshorishaClick(NijihanteiKekkaOutputDiv div) {
+        ValidationMessageControlPairs pairs = div.getKensakuJoken().getCcdShinseishaFinder().getSaikinShorishaDiv().validate();
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
+        createHandlerOf(div).kennsaku(div.getKensakuJoken().getCcdShinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo());
+        return createResponseData(div);
     }
 
     /**

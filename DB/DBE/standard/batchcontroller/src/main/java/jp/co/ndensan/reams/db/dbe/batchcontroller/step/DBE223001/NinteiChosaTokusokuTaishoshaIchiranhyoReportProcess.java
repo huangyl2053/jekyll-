@@ -63,7 +63,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     private int 帳票データの行番号 = 1;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE223002");
     private static final RString CSVファイル名 = new RString("認定調査督促対象者一覧表.csv");
-    private static final RString CSVタイトル = new RString("督促状発行対象者一覧");
+    private static final RString CSVタイトル = new RString("認定調査督促対象者一覧");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
@@ -72,6 +72,20 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
     private static final RString 改頁キー = new RString("cityCode");
+    private static final RString ヘッダ_市町村コード = new RString("市町村コード");
+    private static final RString ヘッダ_市町村名称 = new RString("市町村名称");
+    private static final RString ヘッダ_NO = new RString("No");
+    private static final RString ヘッダ_保険者名 = new RString("保険者名");
+    private static final RString ヘッダ_被保険者番号 = new RString("被保険者番号");
+    private static final RString ヘッダ_被保険者氏名カナ = new RString("被保険者氏名カナ");
+    private static final RString ヘッダ_被保険者氏名 = new RString("被保険者氏名");
+    private static final RString ヘッダ_申請日 = new RString("申請日");
+    private static final RString ヘッダ_督促状発行日 = new RString("督促状発行日");
+    private static final RString ヘッダ_事業所コード = new RString("調査機関コード");
+    private static final RString ヘッダ_事業所名称 = new RString("調査機関名称");
+    private static final RString ヘッダ_調査員氏名 = new RString("調査員氏名");
+    private static final RString ヘッダ_事業者住所 = new RString("調査機関住所");
+    private static final RString ヘッダ_事業者電話番号 = new RString("調査機関電話番号");
 
     private RString csvFilePath;
     private FileSpoolManager fileSpoolManager;
@@ -123,6 +137,11 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                     null, null, null, null,
                     null, null, null, null,
                     null, null, null, null, null));
+            csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
+                    ヘッダ_NO, ヘッダ_市町村コード,
+                    ヘッダ_市町村名称, ヘッダ_保険者名, ヘッダ_被保険者番号,
+                    ヘッダ_被保険者氏名カナ, ヘッダ_被保険者氏名, ヘッダ_申請日, ヘッダ_督促状発行日,
+                    ヘッダ_事業所コード, ヘッダ_事業所名称, ヘッダ_事業者住所, ヘッダ_事業者電話番号, ヘッダ_調査員氏名));
         }
     }
 

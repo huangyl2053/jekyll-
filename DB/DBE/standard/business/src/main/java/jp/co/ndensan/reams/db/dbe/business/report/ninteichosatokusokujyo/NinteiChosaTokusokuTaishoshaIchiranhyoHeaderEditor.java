@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 class NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor implements INinteiChosaTokusokuTaishoshaIchiranhyoEditor {
 
     private final NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity;
-    private static final RString タイトル = new RString("督促状発行対象者一覧");
+    private static final RString タイトル = new RString("認定調査督促対象者一覧");
     private static final RString 事業者名称タイトル = new RString("調査機関名称");
     private static final RString 事業者住所タイトル = new RString("調査機関住所");
     private static final RString 氏名タイトル = new RString("調査員氏名");

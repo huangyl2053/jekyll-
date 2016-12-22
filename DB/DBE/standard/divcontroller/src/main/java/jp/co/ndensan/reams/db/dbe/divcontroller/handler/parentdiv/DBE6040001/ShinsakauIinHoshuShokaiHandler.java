@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6040001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran.ShinsaHoshuIchiran;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601006.DBE601006_ShinsakaiiinHoshuParameter;
@@ -40,14 +42,16 @@ public class ShinsakauIinHoshuShokaiHandler {
      * @param ihinsaHoshuIchiranList 介護認定審査会委員報酬一覧表のリストデタ
      */
     public void onClick_BtnKensaku(List<ShinsaHoshuIchiran> ihinsaHoshuIchiranList) {
-
+        div.getTxtShinsakaiKaisaiYMView().setValue(div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().getValue());
+        
+        Decimal count = Decimal.ZERO;
         List<dgShinsakaiIinHoshu_Row> rowList = new ArrayList<>();
-
         for (ShinsaHoshuIchiran data : ihinsaHoshuIchiranList) {
-
+            count = count.add(Decimal.ONE);
             総合計_審査回数 = 総合計_審査回数.add(data.get出席回数());
 
             dgShinsakaiIinHoshu_Row row = new dgShinsakaiIinHoshu_Row();
+            row.setNo(new RString(count.intValue()));
             row.getGogitaiBango().setValue(new Decimal(data.get合議体番号()));
             row.setShinsaIinMei(data.get介護認定審査会委員氏名());
             row.setShussekijokyo1(data.get出席状況_1日());
@@ -86,9 +90,11 @@ public class ShinsakauIinHoshuShokaiHandler {
             row.getSonotaHiyo().setValue(data.getその他費用());
             row.getZeiKojoGaku().setValue(data.get税額控除());
             row.getSashihikiHoshu().setValue(data.get報酬合計());
+            row.setShinsakaiIinCode(data.get介護認定審査会委員コード());
             rowList.add(row);
         }
         div.getDgShinsakaiIinHoshu().setDataSource(rowList);
+        div.getTxtTotalCount().setValue(count);
         div.getTxtShinsaKaisu().setValue(総合計_審査回数);
         if (!ihinsaHoshuIchiranList.isEmpty()) {
             div.getTxtHoshuSogaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬総額());
@@ -114,5 +120,178 @@ public class ShinsakauIinHoshuShokaiHandler {
         param.setShinsakaiKaisaiYMD(new RString(div.getShinsakaiKaisaibi().getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
+    }
+    
+    public void resetシーケンス番号() {
+        final RString sortKey = div.getDgShinsakaiIinHoshu().getSortOrder();
+        List<dgShinsakaiIinHoshu_Row> rows = div.getDgShinsakaiIinHoshu().getDataSource();
+        List<dgShinsakaiIinHoshu_Row> sortedRows = new ArrayList<>(rows);
+        if (!RString.isNullOrEmpty(sortKey)) {
+            // 指定の列で並び替え
+            Collections.sort(sortedRows, new Comparator<dgShinsakaiIinHoshu_Row>() {
+                @Override
+                public int compare(dgShinsakaiIinHoshu_Row o1, dgShinsakaiIinHoshu_Row o2) {
+                    int result;
+                    switch(sortKey.toString()) {
+                        case "gogitaiBango":
+                            result = compareDecimal(o1.getGogitaiBango().getValue(), o2.getGogitaiBango().getValue());
+                            break;
+                        case "shinsaIinMei":
+                            result = o1.getShinsaIinMei().compareTo(o2.getShinsaIinMei());
+                            break;
+                        case "shussekijokyo1":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo2":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo3":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo4":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo5":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo6":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo7":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo8":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo9":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo10":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo11":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo12":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo13":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo14":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo15":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo16":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo17":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo18":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo19":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo20":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo21":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo22":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo23":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo24":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo25":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo26":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo27":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo28":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo29":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo30":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekijokyo31":
+                            result = o1.getShussekijokyo1().compareTo(o2.getShussekijokyo1());
+                            break;
+                        case "shussekiKaisu":
+                            result = compareDecimal(o1.getShussekiKaisu().getValue(), o2.getShussekiKaisu().getValue());
+                            break;
+                        case "sogaku":
+                            result = compareDecimal(o1.getSogaku().getValue(), o2.getSogaku().getValue());
+                            break;
+                        case "sonotaHiyo":
+                            result = compareDecimal(o1.getSonotaHiyo().getValue(), o2.getSonotaHiyo().getValue());
+                            break;
+                        case "zeiKojoGaku":
+                            result = compareDecimal(o1.getZeiKojoGaku().getValue(), o2.getZeiKojoGaku().getValue());
+                            break;
+                        case "sashihikiHoshu":
+                            result = compareDecimal(o1.getSashihikiHoshu().getValue(), o2.getSashihikiHoshu().getValue());
+                            break;
+                        default:
+                            result = 0;
+                            break;
+                    }
+                    
+                    return result;
+                }
+            });
+        } else {
+            // デフォルト順で並び替え（合議体番号、介護認定審査会委員コード）
+            Collections.sort(sortedRows, new Comparator<dgShinsakaiIinHoshu_Row>() {
+                @Override
+                public int compare(dgShinsakaiIinHoshu_Row o1, dgShinsakaiIinHoshu_Row o2) {
+                    int result;
+                    
+                    // 合議体番号
+                    result = compareDecimal(o1.getGogitaiBango().getValue(), o2.getGogitaiBango().getValue());
+                    if (result != 0) {
+                        return result;
+                    }
+                    
+                    // 介護認定審査会委員コード
+                    return o1.getShinsakaiIinCode().compareTo(o2.getShinsakaiIinCode());
+                }
+            });
+        }
+        
+        // シーケンス番号を採番
+        Decimal count = Decimal.ZERO;
+        for (dgShinsakaiIinHoshu_Row row : sortedRows) {
+            count = count.add(Decimal.ONE);
+            row.setNo(new RString(count.intValue()));
+        }
+    }
+    
+    private static int compareDecimal(Decimal decimal1, Decimal decimal2) {
+        int result;
+        if ((decimal1 != null)
+                && (decimal2 != null)) {
+            result = decimal1.compareTo(decimal2);
+        } else if (decimal1 == null) {
+            result = -1;
+        } else {
+            result = 1;
+        }
+        return result;
     }
 }

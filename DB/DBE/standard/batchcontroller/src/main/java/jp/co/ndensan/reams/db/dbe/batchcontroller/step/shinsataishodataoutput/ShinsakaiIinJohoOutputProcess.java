@@ -39,7 +39,7 @@ public class ShinsakaiIinJohoOutputProcess extends BatchProcessBase<ShinsakaiIin
             + "get介護認定審査会委員情報");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518002");
     private static final RString FILE_NAME = new RString("審査会委員情報.csv");
-    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private ShinsaTaishoDataOutPutProcessParammeter processParamter;
     private RString eucFilePath;
     private FileSpoolManager manager;

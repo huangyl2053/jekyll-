@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医医療機関情報を管理するクラスです。
+ *
  * @reamsid_L DBE-0240-010 dongyabin
  */
 public class KoseiShujiiIryoKikanMasterFinder {
@@ -58,7 +59,8 @@ public class KoseiShujiiIryoKikanMasterFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KoseiShujiiIryoKikanMasterFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KoseiShujiiIryoKikanMasterFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KoseiShujiiIryoKikanMasterFinder}のインスタンス
      */
     public static KoseiShujiiIryoKikanMasterFinder createInstance() {
         return InstanceProvider.create(KoseiShujiiIryoKikanMasterFinder.class);
@@ -68,7 +70,7 @@ public class KoseiShujiiIryoKikanMasterFinder {
      * 主キーに合致する主治医医療機関情報を返します。
      *
      * @param 主治医医療機関情報検索条件 主治医医療機関情報検索条件
-     * @return SearchResult<KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報を管理 nullが返る可能性があります。
+     * @return SearchResult<KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報を管理
      */
     @Transaction
     public SearchResult<KoseiShujiiIryoKikanMasterBusiness> getShujiKikanJohoIchiranList(
@@ -76,14 +78,17 @@ public class KoseiShujiiIryoKikanMasterFinder {
         requireNonNull(主治医医療機関情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報検索条件"));
         IKoseiShujiiIryoKikanMasterMapper mapper = mapperProvider.create(IKoseiShujiiIryoKikanMasterMapper.class);
         List<KoseiShujiiIryoKikanMasterRelateEntity> relateEntityList = mapper.selectShujiKikanJohoIchiranList(主治医医療機関情報検索条件);
+        int totalcount = 0;
         if (relateEntityList.isEmpty()) {
-            return SearchResult.of(Collections.<KoseiShujiiIryoKikanMasterBusiness>emptyList(), 0, false);
+            return SearchResult.of(Collections.<KoseiShujiiIryoKikanMasterBusiness>emptyList(), totalcount, false);
+        } else {
+            totalcount = relateEntityList.get(0).getTotalCount();
         }
         List<KoseiShujiiIryoKikanMasterBusiness> 調査員情報List = new ArrayList<>();
         for (KoseiShujiiIryoKikanMasterRelateEntity relateEntity : relateEntityList) {
             調査員情報List.add(new KoseiShujiiIryoKikanMasterBusiness(relateEntity));
         }
-        return SearchResult.of(調査員情報List, 0, false);
+        return SearchResult.of(調査員情報List, totalcount, 主治医医療機関情報検索条件.getSaidaiHyojiKensu().intValue() < totalcount);
     }
 
     /**
@@ -130,7 +135,7 @@ public class KoseiShujiiIryoKikanMasterFinder {
         IKoseiShujiiIryoKikanMasterMapper mapper = mapperProvider.create(IKoseiShujiiIryoKikanMasterMapper.class);
         return mapper.selectShujiiJohoCount(主治医情報検索条件);
     }
-    
+
     /**
      * 検索条件に従い、市町村名検索します。
      *

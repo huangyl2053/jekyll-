@@ -33,6 +33,10 @@ public class NinteishinseibiDiv extends Panel {
     private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ファイルPath")
     private RString ファイルPath;
+    @JsonProperty("特記事項Map")
+    private RString 特記事項Map;
+    @JsonProperty("概況特記事項Map")
+    private RString 概況特記事項Map;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -101,6 +105,42 @@ public class NinteishinseibiDiv extends Panel {
     @JsonProperty("ファイルPath")
     public void setファイルPath(RString ファイルPath) {
         this.ファイルPath = ファイルPath;
+    }
+
+    /*
+     * get特記事項Map
+     * @return 特記事項Map
+     */
+    @JsonProperty("特記事項Map")
+    public RString get特記事項Map() {
+        return 特記事項Map;
+    }
+
+    /*
+     * set特記事項Map
+     * @param 特記事項Map 特記事項Map
+     */
+    @JsonProperty("特記事項Map")
+    public void set特記事項Map(RString 特記事項Map) {
+        this.特記事項Map = 特記事項Map;
+    }
+
+    /*
+     * get概況特記事項Map
+     * @return 概況特記事項Map
+     */
+    @JsonProperty("概況特記事項Map")
+    public RString get概況特記事項Map() {
+        return 概況特記事項Map;
+    }
+
+    /*
+     * set概況特記事項Map
+     * @param 概況特記事項Map 概況特記事項Map
+     */
+    @JsonProperty("概況特記事項Map")
+    public void set概況特記事項Map(RString 概況特記事項Map) {
+        this.概況特記事項Map = 概況特記事項Map;
     }
 
     /*

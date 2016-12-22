@@ -71,10 +71,10 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private boolean outputCsv;
     private ShujiiIkenTokusokujoHakkoReportProcessParameter processPrm;
     private static final RString CSVファイル名 = new RString("主治医意見書督促対象者一覧表.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE223002"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE233002"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString タイトル = new RString("督促状発行対象者一覧");
+    private static final RString CSVタイトル = new RString("主治医意見書督促対象者一覧");
     private static final RString 市町村コード = new RString("市町村コード");
     private static final RString 市町村名称 = new RString("市町村名称");
     private static final RString 番号 = new RString("No");
@@ -84,10 +84,11 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private static final RString 被保険者氏名 = new RString("被保険者氏名");
     private static final RString 申請日 = new RString("申請日");
     private static final RString 督促状発行日 = new RString("督促状発行日");
-    private static final RString 氏名 = new RString("氏名");
-    private static final RString 事業者名称 = new RString("事業者名称");
-    private static final RString 事業者住所 = new RString("事業者住所");
-    private static final RString 事業者電話番号 = new RString("事業者電話番号");
+    private static final RString 氏名 = new RString("主治医氏名");
+    private static final RString 事業者コード = new RString("医療機関コード");
+    private static final RString 事業者名称 = new RString("医療機関名称");
+    private static final RString 事業者住所 = new RString("医療機関住所");
+    private static final RString 事業者電話番号 = new RString("医療機関電話番号");
     private static final RString 改頁キー = new RString("cityCode");
     private static int index = 1;
 
@@ -116,7 +117,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
             eucFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
             csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(false).build();
+                    setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).hasHeader(false).build();
         }
     }
 
@@ -124,9 +125,9 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     protected void beforeExecute() {
         if (outputCsv) {
             csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    タイトル, null, null, null, null,
+                    CSVタイトル, null, null, null, null,
                     null, null, null, null,
-                    null, null, null, null));
+                    null, null, null, null, null));
             RStringBuilder systemDateTime = new RStringBuilder();
             RDateTime datetime = RDate.getNowDateTime();
             systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
@@ -144,10 +145,10 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
                     systemDateTime.toRString(),
                     null, null, null, null,
                     null, null, null, null,
-                    null, null, null, null));
+                    null, null, null, null, null));
             csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    市町村コード, 市町村名称, 番号, 保険者名, 被保険者番号, 被保険者氏名カナ, 被保険者氏名, 申請日, 督促状発行日,
-                    氏名, 事業者名称, 事業者住所, 事業者電話番号));
+                    番号, 市町村コード, 市町村名称, 保険者名, 被保険者番号, 被保険者氏名カナ, 被保険者氏名, 申請日, 督促状発行日,
+                    事業者コード, 事業者名称, 事業者住所, 事業者電話番号, 氏名));
         }
     }
 
@@ -171,18 +172,22 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         index = index + 1;
         report.writeBy(reportSourceWriter);
         if (outputCsv) {
-            csvWriter.writeLine(createCsvEntity(item, index));
+            csvWriter.writeLine(createCsvEntity(
+                    item,
+                    entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().value(),
+                    index));
         }
     }
 
-    private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item, int idenx) {
+    private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item,
+            RString 事業者コード, int idenx) {
         return new ShujiiIkenTokusokujoCsvEntity(
                 item.getCityCode(), item.getCityName(), new RString(String.valueOf(idenx)), item.getListUpper1_1(),
                 item.getListLower1_1(), item.getListUpper1_2(),
                 item.getListLower1_2(), item.getListShinseiYMD_1().toDateString(),
                 item.getListTokusokujoHakkoYMD_1().toDateString(),
-                item.getListLower2_1(), item.getListUpper2_1(),
-                item.getListUpper2_2(), item.getListLower2_2());
+                事業者コード, item.getListUpper2_1(),
+                item.getListUpper2_2(), item.getListLower2_2(), item.getListLower2_1());
     }
 
     @Override

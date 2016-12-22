@@ -26,11 +26,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -38,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -109,7 +103,6 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory();
     }
 
     private List<DbT5207NinteichosahyoServiceJokyoEntity> getサービス利用状況(ItiziHanteiEntity entity,
@@ -125,37 +118,5 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
 
     private boolean hasBrek(ItiziHanteiEntity before, ItiziHanteiEntity current) {
         return before.getShinsakaiOrder() != current.getShinsakaiOrder();
-    }
-
-    private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE517038.getReportId().value(),
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("一次判定結果票"),
-                new RString(batchWriteA4.getPageCount()),
-                RString.EMPTY,
-                RString.EMPTY,
-                contribute());
-        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
-    }
-
-    private List<RString> contribute() {
-        List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(条件(new RString("合議体番号"), new RString(paramter.getGogitaiNo())));
-        出力条件.add(条件(new RString("介護認定審査会開催予定年月日"), paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString()));
-        出力条件.add(条件(new RString("介護認定審査会開催番号"), paramter.getShinsakaiKaisaiNo()));
-        return 出力条件;
-    }
-
-    private RString 条件(RString バッチパラメータ名, RString 値) {
-        RStringBuilder 条件 = new RStringBuilder();
-        条件.append(new RString("【"));
-        条件.append(バッチパラメータ名);
-        条件.append(new RString("】"));
-        条件.append(値);
-        return 条件.toRString();
     }
 }

@@ -134,7 +134,6 @@ public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitor
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 帳票名 = ReportIdDBE.DBE011002.getReportName();

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinbetsutankasearchresult;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5034ShinsakaiIinBetsuTankaEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,6 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 public class ShinsakaiIinBetsuTankaRelateEntity {
 
+    private RString ShinsakaiIinCode;
+    private FlexibleYearMonth kaishiYM;
+    private FlexibleYearMonth shuryoYM;
     private DbT5034ShinsakaiIinBetsuTankaEntity 介護認定審査会委員別単価;
     private RString 氏名;
 }

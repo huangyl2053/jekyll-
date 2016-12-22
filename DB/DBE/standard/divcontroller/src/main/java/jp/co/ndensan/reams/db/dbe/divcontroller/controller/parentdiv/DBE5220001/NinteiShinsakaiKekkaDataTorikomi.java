@@ -110,11 +110,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
      */
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onClick_Check(NinteiShinsakaiKekkaDataTorikomiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).対象未選択チェック(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).データ件数チェック(validationMessages);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).データ件数チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -123,7 +119,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
 
     private boolean savaCsvファイル(FileData file) {
         RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         File サーバ = new File(path.toString());
         File local = new File(file.getFilePath().toString());
         boolean mkdirsFlag = false;

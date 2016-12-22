@@ -163,7 +163,8 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RString check医療機関一時テーブル電算(DbT5911TempEntity entity) {
         RString error = RString.EMPTY;
-        if (RString.isNullOrEmpty(entity.get医療機関コード())) {
+        if (entity.get医療機関コード() == null 
+                || entity.get医療機関コード() == ShujiiIryokikanCode.EMPTY) {
             error = new RString("医療機関コードが未入力です");
         }
         return error;

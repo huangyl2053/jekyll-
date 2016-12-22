@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517001.DBE517001_ShinsakaiShiryoJImukyokuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002.DBE517002_ShinsakaiShiryoIinParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShins
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuutishoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.OutputJokenhyoFactoryProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -284,9 +286,10 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     /**
      * DBE517001_ShinsakaiShiryoJImukyokuParameterに転換します。
      *
+     * @param 帳票一覧Map 帳票一覧Map
      * @return IinItiziHanteiProcessParameter
      */
-    public DBE517001_ShinsakaiShiryoJImukyokuParameter toDBE517001_ShinsakaiShiryoJImukyokuParameter() {
+    public DBE517001_ShinsakaiShiryoJImukyokuParameter toDBE517001_ShinsakaiShiryoJImukyokuParameter(Map<RString, RString> 帳票一覧Map) {
         return new DBE517001_ShinsakaiShiryoJImukyokuParameter(shinsakaiKaisaiNo,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
@@ -306,15 +309,17 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
                 choyoJimu_sonotaSiryoFalg,
                 choyoJimu_gaikyouTokkiFalg,
                 choyoJimu_hanteiFalg,
-                choyoJimu_gaikyouTokkiIranFalg);
+                choyoJimu_gaikyouTokkiIranFalg,
+                帳票一覧Map);
     }
 
     /**
      * DBE517001_ShinsakaiShiryoJImukyokuParameterに転換します。
      *
+     * @param 帳票一覧Map 帳票一覧Map
      * @return IinItiziHanteiProcessParameter
      */
-    public DBE517002_ShinsakaiShiryoIinParameter toDBE517002_ShinsakaiShiryoIinParameter() {
+    public DBE517002_ShinsakaiShiryoIinParameter toDBE517002_ShinsakaiShiryoIinParameter(Map<RString, RString> 帳票一覧Map) {
         return new DBE517002_ShinsakaiShiryoIinParameter(shinsakaiKaisaiNo,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
@@ -333,6 +338,29 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
                 chohyoIin_ikenshoFalg,
                 chohyoIin_sonotaSiryoFalg,
                 chohyoIin_tuutishoFalg,
-                chohyoIin_hanteiFalg);
+                chohyoIin_hanteiFalg,
+                帳票一覧Map);
     }
+
+    /**
+     * OutputJokenhyoFactoryProcessParameterに変換します。
+     *
+     * @param 帳票一覧Map 帳票一覧Map
+     * @return OutputJokenhyoFactoryProcessParameter
+     */
+    public OutputJokenhyoFactoryProcessParameter toOutputJokenhyoFactoryProcessParameter(Map<RString, RString> 帳票一覧Map) {
+        return new OutputJokenhyoFactoryProcessParameter(
+                gogitaiNo,
+                bangoStart,
+                bangoEnd,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaisaiNo,
+                shuturyokuJun,
+                shuturyokuSutairu,
+                printHou,
+                shinsakaiKaishiYoteiTime,
+                sakuseiJoken,
+                帳票一覧Map);
+    }
+
 }

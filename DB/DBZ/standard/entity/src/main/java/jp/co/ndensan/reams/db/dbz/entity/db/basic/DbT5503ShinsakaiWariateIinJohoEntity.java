@@ -10,12 +10,13 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護認定審査会割当委員情報テーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5503ShinsakaiWariateIinJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 

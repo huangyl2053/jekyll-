@@ -25,9 +25,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.editor.EucDateFormator;
@@ -51,8 +48,8 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoSakuseiEntity> {
 
-    private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakusei.IGogitaiJohoSakuseiMapper.getTempGogitaiJohoSakuseiSearchResult");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate."
+            + "gogitaijohosakusei.IGogitaiJohoSakuseiMapper.getTempGogitaiJohoSakuseiSearchResult");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
     private static final int INT_0 = 0;
@@ -179,8 +176,6 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
 
     @Override
     protected void afterExecute() {
-        SharedFile.deleteEntry(new SharedFileEntryDescriptor(new FilesystemName(parameter.getSharedFileName()),
-                parameter.getSharedFileID()));
         csvWriter.close();
         if (csv出力) {
             manager.spool(eucFilePath);
@@ -188,20 +183,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     }
 
     private void csv項目チェック(TempGogitaiJohoSakusei 合議体情報) {
-        if (!RStringUtil.matchesRegex(合議体情報.get合議体NO(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get有効開始日(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get有効終了日(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体開始予定時刻(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体終了予定時刻(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get審査会予定定員(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get審査会自動割当定員(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get審査会委員定員(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get開催場所コード(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get精神科医所属(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体ダミーフラグ(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get審査会委員コード(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get補欠(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体長区分コード(), POSITIVE_INTEGERS_REGEX)) {
+        if (is数字チェック1(合議体情報) || is数字チェック2(合議体情報)) {
             RString message = new RString(UrErrorMessages.不正.getMessage().replace("データの形式、内容").evaluate());
             errorMessage = errorMessage.concat(message);
             RLogger.error(message);
@@ -223,14 +205,15 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     }
 
     private void 有効期間チェック(TempGogitaiJohoSakusei 合議体情報) {
-        List<GogitaiJohoSakuseiEntity> 合議体情報List = mapper.getGogitaiJohoByYukoKikanKaishiYMD(GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
-                FlexibleDate.MAX,
-                true,
-                Integer.parseInt(合議体情報.get合議体NO().toString()),
-                new FlexibleDate(合議体情報.get有効開始日()),
-                RString.EMPTY,
-                0
-        ));
+        List<GogitaiJohoSakuseiEntity> 合議体情報List = mapper.getGogitaiJohoByYukoKikanKaishiYMD(
+                GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
+                        FlexibleDate.MAX,
+                        true,
+                        Integer.parseInt(合議体情報.get合議体NO().toString()),
+                        new FlexibleDate(合議体情報.get有効開始日()),
+                        RString.EMPTY,
+                        0
+                ));
         if (合議体情報List != null && !合議体情報List.isEmpty()) {
             RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効期間不正.getErrorMSG())
                     .concat(EucDateFormator.y_slash.format(new RString(合議体情報List.get(INT_0).get合議体情報().getGogitaiYukoKikanShuryoYMD().toString())));
@@ -363,6 +346,26 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         return INT_0 < count;
     }
 
+    private boolean is数字チェック1(TempGogitaiJohoSakusei 合議体情報) {
+        return !RStringUtil.matchesRegex(合議体情報.get合議体NO(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get有効開始日(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get有効終了日(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get合議体開始予定時刻(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get合議体終了予定時刻(), POSITIVE_INTEGERS_REGEX);
+    }
+
+    private boolean is数字チェック2(TempGogitaiJohoSakusei 合議体情報) {
+        return !RStringUtil.matchesRegex(合議体情報.get審査会予定定員(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get審査会自動割当定員(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get審査会委員定員(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get開催場所コード(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get精神科医所属(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get合議体ダミーフラグ(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get審査会委員コード(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get補欠(), POSITIVE_INTEGERS_REGEX)
+                || !RStringUtil.matchesRegex(合議体情報.get合議体長区分コード(), POSITIVE_INTEGERS_REGEX);
+    }
+
     private DbT5591GogitaiJohoEntity createDbT5591Entity(TempGogitaiJohoSakusei 合議体情報) {
         DbT5591GogitaiJohoEntity entity = new DbT5591GogitaiJohoEntity();
 
@@ -398,22 +401,22 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     private GogitaiJohoSakuseiErrKekkaCSVEntity createErrKekkaCSVEntity(TempGogitaiJohoSakusei 合議体情報) {
         GogitaiJohoSakuseiErrKekkaCSVEntity entity = new GogitaiJohoSakuseiErrKekkaCSVEntity();
 
-        entity.setGogitaiNo(合議体情報.get合議体NO());
-        entity.setGogitaiMei(合議体情報.get合議体名称());
-        entity.setGogitaiYukoKikanKaishiYMD(合議体情報.get有効開始日());
-        entity.setGogitaiYukoKikanShuryoYMD(合議体情報.get有効終了日());
-        entity.setGogitaiKaishiYoteiTime(合議体情報.get合議体開始予定時刻());
-        entity.setGogitaiShuryoYoteiTime(合議体情報.get合議体終了予定時刻());
-        entity.setShinsakaiYoteiTeiin(合議体情報.get審査会予定定員());
-        entity.setShinsakaiJidoWariateTeiin(合議体情報.get審査会自動割当定員());
-        entity.setShinsakaiIinTeiin(合議体情報.get審査会委員定員());
-        entity.setShinsakaiKaisaiBashoCode(合議体情報.get開催場所コード());
-        entity.setGogitaiSeishinkaSonzaiFlag(合議体情報.get精神科医所属());
-        entity.setGogitaiDummyFlag(合議体情報.get合議体ダミーフラグ());
-        entity.setShinsakaiIinCode(合議体情報.get審査会委員コード());
-        entity.setSubstituteFlag(合議体情報.get補欠());
-        entity.setGogitaichoKubunCode(合議体情報.get合議体長区分コード());
-        entity.setErrJoho(errorMessage);
+        entity.set合議体NO(合議体情報.get合議体NO());
+        entity.set合議体名称(合議体情報.get合議体名称());
+        entity.set有効開始日(合議体情報.get有効開始日());
+        entity.set有効終了日(合議体情報.get有効終了日());
+        entity.set合議体開始予定時刻(合議体情報.get合議体開始予定時刻());
+        entity.set合議体終了予定時刻(合議体情報.get合議体終了予定時刻());
+        entity.set審査会予定定員(合議体情報.get審査会予定定員());
+        entity.set審査会自動割当定員(合議体情報.get審査会自動割当定員());
+        entity.set審査会委員定員(合議体情報.get審査会委員定員());
+        entity.set開催場所コード(合議体情報.get開催場所コード());
+        entity.set精神科医所属(合議体情報.get精神科医所属());
+        entity.set合議体ダミーフラグ(合議体情報.get合議体ダミーフラグ());
+        entity.set審査会委員コード(合議体情報.get審査会委員コード());
+        entity.set補欠(合議体情報.get補欠());
+        entity.set合議体長区分コード(合議体情報.get合議体長区分コード());
+        entity.setエラー事由(errorMessage);
 
         return entity;
     }

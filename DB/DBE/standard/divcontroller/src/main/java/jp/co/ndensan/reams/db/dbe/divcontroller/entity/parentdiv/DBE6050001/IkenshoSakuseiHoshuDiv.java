@@ -23,6 +23,8 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
      */
     @JsonProperty("dgIkenshoSakuseiHoshu")
     private DataGrid<dgIkenshoSakuseiHoshu_Row> dgIkenshoSakuseiHoshu;
+    @JsonProperty("txtTotalCount")
+    private TextBoxNum txtTotalCount;
     @JsonProperty("txtZaitakuShinki")
     private TextBoxNum txtZaitakuShinki;
     @JsonProperty("txtZaitakuKeizoku")
@@ -60,6 +62,24 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
     @JsonProperty("dgIkenshoSakuseiHoshu")
     public void setDgIkenshoSakuseiHoshu(DataGrid<dgIkenshoSakuseiHoshu_Row> dgIkenshoSakuseiHoshu) {
         this.dgIkenshoSakuseiHoshu = dgIkenshoSakuseiHoshu;
+    }
+
+    /*
+     * gettxtTotalCount
+     * @return txtTotalCount
+     */
+    @JsonProperty("txtTotalCount")
+    public TextBoxNum getTxtTotalCount() {
+        return txtTotalCount;
+    }
+
+    /*
+     * settxtTotalCount
+     * @param txtTotalCount txtTotalCount
+     */
+    @JsonProperty("txtTotalCount")
+    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.txtTotalCount = txtTotalCount;
     }
 
     /*

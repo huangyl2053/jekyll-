@@ -4,6 +4,14 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBeforeOpenDialog_btnShogaiKoreisha = function () {
+                return "onBeforeOpenDialog_btnShogaiKoreisha";
+            };
+
+            Events.onBeforeOpenDialog_btnNinchishaJiritsudo = function () {
+                return "onBeforeOpenDialog_btnNinchishaJiritsudo";
+            };
+
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
             };

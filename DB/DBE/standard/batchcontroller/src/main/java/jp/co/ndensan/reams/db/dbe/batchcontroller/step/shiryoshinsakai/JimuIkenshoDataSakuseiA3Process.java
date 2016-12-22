@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,11 +17,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShins
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoa3.ShujiiikenshoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -37,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -114,44 +107,6 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory();
-    }
-
-    private void outputJokenhyoFactory() {
-        RString id = ReportIdDBE.DBE517005.getReportId().getColumnValue();
-        RString 総ページ数 = new RString(batchWriteA3.getPageCount());
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
-                id,
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("主治医意見書"),
-                総ページ数,
-                RString.EMPTY,
-                RString.EMPTY,
-                出力条件());
-        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
-    }
-
-    private List<RString> 出力条件() {
-        List<RString> list = new ArrayList<>();
-        RStringBuilder builder1 = new RStringBuilder();
-        builder1.append("【合議体番号】")
-                .append(" ")
-                .append(paramter.getGogitaiNo());
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append("【介護認定審査会開催予定年月日】")
-                .append(" ")
-                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
-        RStringBuilder builder3 = new RStringBuilder();
-        builder3.append("【介護認定審査会開催番号】")
-                .append(" ")
-                .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder1.toRString());
-        list.add(builder2.toRString());
-        list.add(builder3.toRString());
-        return list;
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
@@ -169,14 +124,15 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA3.getImageFolderPath()));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA3.getImageFolderPath())).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 }

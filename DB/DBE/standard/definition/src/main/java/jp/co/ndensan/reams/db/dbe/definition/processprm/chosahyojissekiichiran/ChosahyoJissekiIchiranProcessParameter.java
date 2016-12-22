@@ -22,29 +22,37 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class ChosahyoJissekiIchiranProcessParameter implements IBatchProcessParameter {
 
     private final RString 帳票出力区分;
-    private final RString 調査実施日FROM;
-    private final RString 調査実施日TO;
+    private final RString 基準日FROM;
+    private final RString 基準日TO;
+    private final RString 基準日区分;
     private final RString 保険者;
+    private final RString 証記載保険者;
     private final List<ChosahyoJissekiIchiranKey> keyJoho;
 
     /**
      * コンストラクタです。
      *
      * @param 帳票出力区分 帳票出力区分
-     * @param 調査実施日FROM 調査実施日FROM
-     * @param 調査実施日TO 調査実施日TO
+     * @param 基準日FROM 基準日FROM
+     * @param 基準日TO 基準日TO
+     * @param 基準日区分 基準日区分
      * @param 保険者 保険者
+     * @param 証記載保険者 証記載保険者
      * @param keyJoho キー情報Entityリスト
      */
     public ChosahyoJissekiIchiranProcessParameter(RString 帳票出力区分,
-            RString 調査実施日FROM,
-            RString 調査実施日TO,
+            RString 基準日FROM,
+            RString 基準日TO,
+            RString 基準日区分,
             RString 保険者,
+            RString 証記載保険者,
             List<ChosahyoJissekiIchiranKey> keyJoho) {
         this.帳票出力区分 = 帳票出力区分;
-        this.調査実施日FROM = 調査実施日FROM;
-        this.調査実施日TO = 調査実施日TO;
+        this.基準日FROM = 基準日FROM;
+        this.基準日TO = 基準日TO;
+        this.基準日区分 = 基準日区分;
         this.保険者 = 保険者;
+        this.証記載保険者 = 証記載保険者;
         this.keyJoho = keyJoho;
     }
 
@@ -55,8 +63,9 @@ public final class ChosahyoJissekiIchiranProcessParameter implements IBatchProce
      */
     public ChosahyoJissekiIchiranMybitisParamter toMybitisParamter() {
         return ChosahyoJissekiIchiranMybitisParamter.createParamter(true,
-                調査実施日FROM,
-                調査実施日TO,
+                基準日FROM,
+                基準日TO,
+                基準日区分,
                 保険者,
                 keyJoho);
     }

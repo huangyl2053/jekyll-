@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorik
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.batch.BatchGyomuException;
 import jp.co.ndensan.reams.uz.uza.batch.DbTableType;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -70,56 +72,57 @@ public class DBE518002_NinteiShinsaIraiIfTorikomi extends BatchFlowBase<DBE51800
         審査委員ファイル = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査委員, 基準日, SubGyomuCode.DBE認定支援);
         審査結果ファイル = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査結果, 基準日, SubGyomuCode.DBE認定支援);
         認定ソフトファイル = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会結果データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-        審査会情報ファイル = new RString("NijihanteiKekkaTorokuMobileShinsakai.csv");
+        審査会情報ファイル = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査会情報, 基準日, SubGyomuCode.DBE認定支援);
         List<RString> fileList = getParameter().getFilename();
-        if (null != fileList && !fileList.isEmpty()) {
-            for (RString file : fileList) {
-                if (審査委員ファイル.equals(file)) {
-                    shinsaIinPath = new RString(Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath()).toString()
-                                                + File.separator + 審査委員ファイル.toString());
-                    shinsaIinTempPath = shinsaIinPath.substring(0, shinsaIinPath.length() - DOTCSV).concat(TEMP);
-                    convertOriginalPath = shinsaIinPath;
-                    convertTempPath = shinsaIinTempPath;
-                } else if (審査結果ファイル.equals(file)) {
-                    shinsaKekkaPath = new RString(Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath()).toString()
-                                                  + File.separator + 審査結果ファイル.toString());
-                    shinsaKekkaTempPath = shinsaKekkaPath.substring(0, shinsaKekkaPath.length() - DOTCSV).concat(TEMP);
-                    convertOriginalPath = shinsaKekkaPath;
-                    convertTempPath = shinsaKekkaTempPath;
-                } else if (認定ソフトファイル.equals(file)) {
-                    ninteiSoftPath = new RString(Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath()).toString()
-                                                 + File.separator + 認定ソフトファイル.toString());
-                    ninteiSoftTempPath = ninteiSoftPath.substring(0, ninteiSoftPath.length() - DOTCSV).concat(TEMP);
-                    convertOriginalPath = ninteiSoftPath;
-                    convertTempPath = ninteiSoftTempPath;
-                } else if (審査会情報ファイル.equals(file)) {
-                    shinsakaiJohoPath = new RString(Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath()).toString()
-                                                    + File.separator + 審査会情報ファイル.toString());
-                    shinsakaiJohoTempPath = shinsakaiJohoPath.substring(0, shinsaIinPath.length() - DOTCSV).concat(TEMP);
-                    convertOriginalPath = shinsakaiJohoPath;
-                    convertTempPath = shinsakaiJohoTempPath;
-                }
-                executeStep(CONVERT_PROCESS);
-                File.deleteIfExists(convertTempPath);
+        if (fileList == null || fileList.isEmpty()) {
+            throw new BatchGyomuException(UrErrorMessages.ファイル名取得エラー.getMessage());
+        }
+        for (RString file : fileList) {
+            if (審査委員ファイル.equals(file)) {
+                shinsaIinPath = Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath(), 審査委員ファイル);
+                check(shinsaIinPath, 審査委員ファイル);
+                shinsaIinTempPath = shinsaIinPath.substring(0, shinsaIinPath.length() - DOTCSV).concat(TEMP);
+                convertOriginalPath = shinsaIinPath;
+                convertTempPath = shinsaIinTempPath;
+            } else if (審査結果ファイル.equals(file)) {
+                shinsaKekkaPath = Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath(), 審査結果ファイル);
+                check(shinsaKekkaPath, 審査結果ファイル);
+                shinsaKekkaTempPath = shinsaKekkaPath.substring(0, shinsaKekkaPath.length() - DOTCSV).concat(TEMP);
+                convertOriginalPath = shinsaKekkaPath;
+                convertTempPath = shinsaKekkaTempPath;
+            } else if (認定ソフトファイル.equals(file)) {
+                ninteiSoftPath = Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath(), 認定ソフトファイル);
+                check(ninteiSoftPath, 認定ソフトファイル);
+                ninteiSoftTempPath = ninteiSoftPath.substring(0, ninteiSoftPath.length() - DOTCSV).concat(TEMP);
+                convertOriginalPath = ninteiSoftPath;
+                convertTempPath = ninteiSoftTempPath;
+            } else if (審査会情報ファイル.equals(file)) {
+                shinsakaiJohoPath = Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath(), 審査会情報ファイル);
+                check(shinsakaiJohoPath, 審査会情報ファイル);
+                shinsakaiJohoTempPath = shinsakaiJohoPath.substring(0, shinsakaiJohoPath.length() - DOTCSV).concat(TEMP);
+                convertOriginalPath = shinsakaiJohoPath;
+                convertTempPath = shinsakaiJohoTempPath;
             }
-            if (RSRING_1.equals(getParameter().getTorikomidatakubun())) {
-                executeStep(CREATE審査会情報登録用データ一時TBL);
-                executeStep(INSERT審査会情報登録用データ一時TBL);
-                executeStep(SHINSAKAIJOHOTORIKOMI_PROCESS);
-                executeStep(CREATE二次判定結果登録用データ一時TBL);
-                executeStep(INSERT二次判定結果登録用データ一時TBL);
-                executeStep(DATATORIKOMI_PROCESS);
-                if (RSRING_1.equals(getParameter().getShinsakaiiintorikomikubun())) {
-                    executeStep(CREATE認定審査会割当委員情報一時TBL);
-                    executeStep(INSERT認定審査会割当委員情報一時TBL);
-                    executeStep(SHINSAKAIWARIATE_PROCESS);
-                }
+            executeStep(CONVERT_PROCESS);
+            File.deleteIfExists(convertTempPath);
+        }
+        if (RSRING_1.equals(getParameter().getTorikomidatakubun())) {
+            executeStep(CREATE審査会情報登録用データ一時TBL);
+            executeStep(INSERT審査会情報登録用データ一時TBL);
+            executeStep(SHINSAKAIJOHOTORIKOMI_PROCESS);
+            executeStep(CREATE二次判定結果登録用データ一時TBL);
+            executeStep(INSERT二次判定結果登録用データ一時TBL);
+            executeStep(DATATORIKOMI_PROCESS);
+            if (RSRING_1.equals(getParameter().getShinsakaiiintorikomikubun())) {
+                executeStep(CREATE認定審査会割当委員情報一時TBL);
+                executeStep(INSERT認定審査会割当委員情報一時TBL);
+                executeStep(SHINSAKAIWARIATE_PROCESS);
             }
-            if (RSRING_2.equals(getParameter().getShinsakaiiintorikomikubun())) {
-                executeStep(CREATE二次判定結果登録用データ一時TBL);
-                executeStep(INSERT二次判定結果登録用データ一時TBL);
-                executeStep(DATATORIKOMI_PROCESS);
-            }
+        }
+        if (RSRING_2.equals(getParameter().getShinsakaiiintorikomikubun())) {
+            executeStep(CREATE二次判定結果登録用データ一時TBL);
+            executeStep(INSERT二次判定結果登録用データ一時TBL);
+            executeStep(DATATORIKOMI_PROCESS);
         }
     }
 
@@ -241,5 +244,11 @@ public class DBE518002_NinteiShinsaIraiIfTorikomi extends BatchFlowBase<DBE51800
         parameter.put(new RString(BatchTextFileConvertBatchParameter.KEY_WRITE_ROW_DELIMITER), BatchTextFileConvert.ROWDELIMITER_CRLF);
 
         return simpleBatch(BatchTextFileConvert.class).arguments(parameter).define();
+    }
+
+    private void check(RString filePath, RString fileName) {
+        if (!File.exists(filePath)) {
+            throw new BatchGyomuException(UrErrorMessages.対象ファイルが存在しない.getMessage().replace(fileName.toString()));
+        }
     }
 }

@@ -65,6 +65,7 @@ public class DBE220010_IraishoIkkatu extends BatchFlowBase<DBE220010_IraishoIkka
                 || getParameter().isShujiiIkenshoSakuseiIraisho()
                 || getParameter().isIkenshoKinyuu()
                 || getParameter().isIkenshoKinyuuOCR()
+                || getParameter().isIkenshoKinyuuDesign()
                 || getParameter().isIkenshoSakuseiSeikyuusho()
                 || getParameter().isIkenshoTeishutu()
                 || getParameter().is主治医意見書依頼履歴一覧()) {

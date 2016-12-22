@@ -23,8 +23,10 @@ public class NinteiChosaInsatsuChohyoSentakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkNinteiChosaIraiChohyo")
-    private CheckBoxList chkNinteiChosaIraiChohyo;
+    @JsonProperty("chkNinteiChosaIraiIchiran")
+    private CheckBoxList chkNinteiChosaIraiIchiran;
+    @JsonProperty("chkNinteiChosaShinseiTani")
+    private CheckBoxList chkNinteiChosaShinseiTani;
     @JsonProperty("ChosahyoSelectItemsOne")
     private ChosahyoSelectItemsOneDiv ChosahyoSelectItemsOne;
     @JsonProperty("ChosahyoSelectItemsTwo")
@@ -43,21 +45,39 @@ public class NinteiChosaInsatsuChohyoSentakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkNinteiChosaIraiChohyo
-     * @return chkNinteiChosaIraiChohyo
+     * getchkNinteiChosaIraiIchiran
+     * @return chkNinteiChosaIraiIchiran
      */
-    @JsonProperty("chkNinteiChosaIraiChohyo")
-    public CheckBoxList getChkNinteiChosaIraiChohyo() {
-        return chkNinteiChosaIraiChohyo;
+    @JsonProperty("chkNinteiChosaIraiIchiran")
+    public CheckBoxList getChkNinteiChosaIraiIchiran() {
+        return chkNinteiChosaIraiIchiran;
     }
 
     /*
-     * setchkNinteiChosaIraiChohyo
-     * @param chkNinteiChosaIraiChohyo chkNinteiChosaIraiChohyo
+     * setchkNinteiChosaIraiIchiran
+     * @param chkNinteiChosaIraiIchiran chkNinteiChosaIraiIchiran
      */
-    @JsonProperty("chkNinteiChosaIraiChohyo")
-    public void setChkNinteiChosaIraiChohyo(CheckBoxList chkNinteiChosaIraiChohyo) {
-        this.chkNinteiChosaIraiChohyo = chkNinteiChosaIraiChohyo;
+    @JsonProperty("chkNinteiChosaIraiIchiran")
+    public void setChkNinteiChosaIraiIchiran(CheckBoxList chkNinteiChosaIraiIchiran) {
+        this.chkNinteiChosaIraiIchiran = chkNinteiChosaIraiIchiran;
+    }
+
+    /*
+     * getchkNinteiChosaShinseiTani
+     * @return chkNinteiChosaShinseiTani
+     */
+    @JsonProperty("chkNinteiChosaShinseiTani")
+    public CheckBoxList getChkNinteiChosaShinseiTani() {
+        return chkNinteiChosaShinseiTani;
+    }
+
+    /*
+     * setchkNinteiChosaShinseiTani
+     * @param chkNinteiChosaShinseiTani chkNinteiChosaShinseiTani
+     */
+    @JsonProperty("chkNinteiChosaShinseiTani")
+    public void setChkNinteiChosaShinseiTani(CheckBoxList chkNinteiChosaShinseiTani) {
+        this.chkNinteiChosaShinseiTani = chkNinteiChosaShinseiTani;
     }
 
     /*

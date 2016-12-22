@@ -27,35 +27,9 @@
         <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="count" column="COUNT" />
     </resultMap>
-    <select resultOrdered="true" id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
-            fetchSize="500">
-        SELECT
-        A.shinsakaiOrder AS shinsakaiOrder
-        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
-        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
-        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
-        ,A.nijiHanteiYMD AS nijiHanteiYMD
-        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
-        ,A.shichosonMeisho AS shichosonMeisho
-        ,A.hihokenshaNo AS hihokenshaNo
-        ,A.hihokenshaName AS hihokenshaName
-        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
-        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
-        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
-        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
-        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
-        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
-        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
-        ,A.shinsakaiIken AS shinsakaiIken
-        ,B.COUNT AS COUNT
-        FROM
+    <!--判定結果一覧クエリ部品-->
+    <sql id="HanteiKekkaIchiranList">
         (SELECT
         dbT5502."shinsakaiOrder" AS shinsakaiOrder
         ,dbT5101."ninteiShinseiShinseijiKubunCode" AS ninteiShinseiShinseijiKubunCode
@@ -63,6 +37,7 @@
         ,dbT5101."ninteiShinseiYMD" AS ninteiShinseiYMD
         ,dbT5102."nijiHanteiYMD" AS nijiHanteiYMD
         ,dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
+        ,dbT7051."shichosonCode" AS shichosonCode
         ,dbT7051."shichosonMeisho" AS shichosonMeisho
         ,dbT5101."hihokenshaNo" AS hihokenshaNo
         ,dbT5101."hihokenshaName" AS hihokenshaName
@@ -115,56 +90,55 @@
         <if test="isShoKisaiHokenshaNoFlag">
             AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         </if>
-        ORDER BY dbT5502."shinsakaiOrder") AS A
-        LEFT JOIN
-        (SELECT
-        COUNT(1) AS COUNT
-        ,dbT5502."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
-        ,dbT7051."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo"
-        FROM
-        rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
-        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
-        ON dbT5102."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
-        ON dbT5101."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        AND dbT5101."shoriJotaiKubun" IN
-        <foreach collection="shoriJotaiKubun" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        AND dbT5101."logicalDeletedFlag" = False
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
-        ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
-        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
-        ON dbT5116."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        LEFT JOIN
-        (
+        ) AS A
+    </sql>
+
+    <!--判定結果一覧帳票データ抽出用-->
+    <select resultOrdered="true" id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
         SELECT
-        dbT5116."ichijiHanteiKekkaCode"
-        ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode"
-        ,dbT5102."nijiHanteiYokaigoJotaiKubunCode"
-        ,dbT5502."shinseishoKanriNo"
+        A.shinsakaiOrder AS shinsakaiOrder
+        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
+        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
+        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
+        ,A.nijiHanteiYMD AS nijiHanteiYMD
+        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
+        ,A.shichosonCode AS shichosonCode
+        ,A.shichosonMeisho AS shichosonMeisho
+        ,A.hihokenshaNo AS hihokenshaNo
+        ,A.hihokenshaName AS hihokenshaName
+        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
+        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
+        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
+        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
+        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
+        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
+        ,A.shinsakaiIken AS shinsakaiIken
         FROM
-        rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
-        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
-        ON dbT5121."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
-        ON dbT5116."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
-        ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
-        WHERE
-        dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
-        ) AS TB ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        WHERE
-        dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
-        <if test="isShoKisaiHokenshaNoFlag">
-            AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
-        </if>
-        GROUP BY
-        dbT5502."shinsakaiKaisaiNo"
-        ,dbT7051."shoKisaiHokenshaNo") AS B
-        ON A."shinsakaiKaisaiNo" = B."shinsakaiKaisaiNo"
-        <if test="isShoKisaiHokenshaNoFlag">
-            AND A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
-        </if>
+        <include refid="HanteiKekkaIchiranList" />
+        ORDER BY
+        shichosonCode,
+        shinsakaiOrder
     </select>
+
+    <!--判定結果一覧総ページ数用カウント-->
+    <select resultOrdered="true" id="countHanteiKekkaIchiranList"  resultType = "int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        COUNT(*)
+        FROM
+        <include refid="HanteiKekkaIchiranList" />
+
+    </select>
+
+
     <resultMap id="resultMap_HanteiKekkaIchiranA3List" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity" autoMapping="true">
         <result property="介護認定審査会審査順" column="shinsakaiOrder" />
         <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -194,44 +168,13 @@
         <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="合議体番号" column="gogitaiNo" />
-        <result property="count" column="COUNT" />
     </resultMap>
-    <select resultOrdered="true" id="getHanteiKekkaIchiranA3List" resultMap="resultMap_HanteiKekkaIchiranA3List"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
-            fetchSize="500">
-        SELECT
-        A.shinsakaiOrder AS shinsakaiOrder
-        ,A.shichosonMeisho AS shichosonMeisho
-        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
-        ,A.hihokenshaName AS hihokenshaName
-        ,A.hihokenshaNo AS hihokenshaNo
-        ,A.seinengappiYMD AS seinengappiYMD
-        ,A.seibetsu AS seibetsu
-        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
-        ,A.nijiHanteiYMD AS nijiHanteiYMD
-        ,A.hihokenshaKubunCode AS hihokenshaKubunCode
-        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
-        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
-        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
-        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
-        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
-        ,A.nijiHanteiNinteiYukoKaishiYMD AS tb_nijiHanteiNinteiYukoKaishiYMD
-        ,A.nijiHanteiNinteiYukoShuryoYMD AS tb_nijiHanteiNinteiYukoShuryoYMD
-        ,A.nijiHanteiNinteiYukoKikan AS tb_nijiHanteiNinteiYukoKikan
-        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
-        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
-        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
-        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
-        ,A.shinsakaiIken AS shinsakaiIken
-        ,A.gogitaiNo AS gogitaiNo
-        ,B.COUNT AS COUNT
-        FROM
+
+    <!--判定結果一覧A3用クエリ部品-->
+    <sql id="HanteiKekkaIchiranA3List">
         (SELECT
         dbT5502."shinsakaiOrder" AS shinsakaiOrder
+        ,dbT7051."shichosonCode" AS shichosonCode
         ,dbT7051."shichosonMeisho" AS shichosonMeisho
         ,dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
         ,dbT5101."hihokenshaName" AS hihokenshaName
@@ -298,54 +241,61 @@
         ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
         WHERE
         dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
+        ) AS A
+    </sql>
+
+    <!--判定結果一覧A3帳票作成用データ取得-->
+    <select resultOrdered="true" id="getHanteiKekkaIchiranA3List" resultMap="resultMap_HanteiKekkaIchiranA3List"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        A.shinsakaiOrder AS shinsakaiOrder
+        ,A.shichosonCode AS shichosonCode
+        ,A.shichosonMeisho AS shichosonMeisho
+        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
+        ,A.hihokenshaName AS hihokenshaName
+        ,A.hihokenshaNo AS hihokenshaNo
+        ,A.seinengappiYMD AS seinengappiYMD
+        ,A.seibetsu AS seibetsu
+        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
+        ,A.nijiHanteiYMD AS nijiHanteiYMD
+        ,A.hihokenshaKubunCode AS hihokenshaKubunCode
+        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
+        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
+        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
+        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
+        ,A.nijiHanteiNinteiYukoKaishiYMD AS tb_nijiHanteiNinteiYukoKaishiYMD
+        ,A.nijiHanteiNinteiYukoShuryoYMD AS tb_nijiHanteiNinteiYukoShuryoYMD
+        ,A.nijiHanteiNinteiYukoKikan AS tb_nijiHanteiNinteiYukoKikan
+        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
+        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
+        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
+        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
+        ,A.shinsakaiIken AS shinsakaiIken
+        ,A.gogitaiNo AS gogitaiNo
+        FROM
+        <include refid="HanteiKekkaIchiranA3List" />
         ORDER BY
-        dbT5502."shinsakaiOrder") AS A
-        LEFT JOIN (
-        SELECT
-        COUNT(1) AS COUNT
-        , dbT5502."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo
-        FROM
-        rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
-        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
-        ON dbT5102."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
-        ON dbT5101."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        AND dbT5101."shoriJotaiKubun" IN
-        <foreach collection="shoriJotaiKubun" item="code" open="(" separator="," close=")"> #{code} </foreach>
-        AND dbT5101."logicalDeletedFlag" = False
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
-        ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
-        INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
-        ON dbT5116."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511
-        ON dbT5511."shinsakaiKaisaiNo" = dbT5502."shinsakaiKaisaiNo"
-        LEFT JOIN (
-        SELECT
-        dbT5116."ichijiHanteiKekkaCode"
-        ,dbT5116."ichijiHanteiKekkaNinchishoKasanCode"
-        ,dbT5102."nijiHanteiYokaigoJotaiKubunCode"
-        ,dbT5102."nijiHanteiNinteiYukoKaishiYMD"
-        ,dbT5102."nijiHanteiNinteiYukoShuryoYMD"
-        ,dbT5102."nijiHanteiNinteiYukoKikan"
-        ,dbT5502."shinseishoKanriNo"
-        FROM
-        rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
-        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121
-        ON dbT5121."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
-        ON dbT5116."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
-        ON dbT5102."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo"
-        WHERE
-        dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
-        ) AS TB
-        ON TB."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
-        WHERE
-        dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
-        GROUP BY
-        dbT5502."shinsakaiKaisaiNo") AS B
-        ON A.shinsakaiKaisaiNo = B.shinsakaiKaisaiNo
+        shichosonCode,
+        shinsakaiOrder
     </select>
+
+    <!--判定結果一覧A3総ページ数判定用-->
+    <select resultOrdered="true" id="countHanteiKekkaIchiranA3List"  resultType = "int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        COUNT(*)
+        FROM
+        <include refid="HanteiKekkaIchiranA3List" />
+
+    </select>
+
 
     <resultMap id="resultMap_ShinsakaiKaisaiKekkaJoho" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity" autoMapping="true">
         <result property="shinsakaiKaisaiYMD" column="審査会開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

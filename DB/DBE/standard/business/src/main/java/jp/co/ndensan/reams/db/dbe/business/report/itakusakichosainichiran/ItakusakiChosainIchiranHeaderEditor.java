@@ -136,7 +136,7 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         } else if (並び順種類.compareTo(NarabiJunType.委託先名称_調査員氏名) == 0) {
             並び順１ = 並び順１項２;
             並び順２ = 並び順２項２;
-        } else if (並び順種類.compareTo(NarabiJunType.委託先コード_調査員カナ氏名) == 0) {
+        } else if (並び順種類.compareTo(NarabiJunType.委託先名称_調査員カナ氏名) == 0) {
             並び順１ = 並び順１項２;
             並び順２ = 並び順２項３;
         }

@@ -54,5 +54,4 @@ public class HanteiKekkaIchiranA3Entity {
     private int 合議体番号;
     private int 当前頁;
     private int 総頁;
-    private int count;
 }

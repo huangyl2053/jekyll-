@@ -24,6 +24,7 @@ import org.junit.AfterClass;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -89,9 +90,9 @@ public class DBE518002_NinteiShinsaIraiIfTorikomiTest extends DbeTestDacBase {
         private static DBE518002_NinteiShinsaIraiIfTorikomiParameter createParameter() {
             DBE518002_NinteiShinsaIraiIfTorikomiParameter parameter = new DBE518002_NinteiShinsaIraiIfTorikomiParameter();
             List<RString> list = new ArrayList<>();
+            list.add(new RString("NijihanteiKekkaTorokuMobileShinsakai.csv"));
             list.add(new RString("NijihanteiKekkaTorokuMobile.csv"));
             list.add(new RString("NijihanteiKekkaTorokuMobileShinsaiin.csv"));
-            list.add(new RString("NijihanteiKekkaTorokuMobileShinsakai.csv"));
             parameter.setFilename(list);
             parameter.setMediapath(new RString("/home/D209007/shared/sharedFiles/DB/DBE/OCR"));
             parameter.setShinsakaiiintorikomikubun(new RString("1"));

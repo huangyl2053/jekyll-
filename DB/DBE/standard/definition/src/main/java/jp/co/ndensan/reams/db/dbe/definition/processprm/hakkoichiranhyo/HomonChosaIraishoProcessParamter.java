@@ -49,7 +49,7 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
      *
      * @param ninteioChosaIraisho 認定調査依頼書印刷区分
      * @param ninteiChosahyo 認定調査票印刷区分
-     * @param ninteiChosaIraiList 認定調査依頼リスト
+     * @param ninteiChosaIraiList 認定調査依頼リスト/
      * @param ninteiChosaIraiChohyo 認定調査依頼一覧表出力区分
      * @param 認定調査依頼書 認定調査依頼書出力区分
      * @param 認定調査票_デザイン用紙 認定調査デザイン用紙出力区分
@@ -71,7 +71,8 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
      * @param is認定調査依頼履歴一覧 認定調査依頼履歴一覧
      *
      */
-    public HomonChosaIraishoProcessParamter(RString ninteioChosaIraisho,
+    public HomonChosaIraishoProcessParamter(
+            RString ninteioChosaIraisho,
             RString ninteiChosahyo,
             List<GridParameter> ninteiChosaIraiList,
             boolean ninteiChosaIraiChohyo,
