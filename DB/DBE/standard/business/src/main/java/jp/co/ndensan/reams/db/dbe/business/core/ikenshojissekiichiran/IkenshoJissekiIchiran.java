@@ -90,6 +90,15 @@ public class IkenshoJissekiIchiran {
     }
 
     /**
+     * 依頼日を取得します。
+     *
+     * @return 依頼日
+     */
+    public RString get依頼日() {
+        return entity.get依頼日();
+    }
+
+    /**
      * 記入日を取得します。
      *
      * @return 記入日

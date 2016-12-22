@@ -66,6 +66,10 @@ var DBE;
             Controls.prototype.btnAfterImg = function () {
                 return new UZA.Button(this.convFiledName("btnAfterImg"));
             };
+
+            Controls.prototype.lblNoImage = function () {
+                return new UZA.Label(this.convFiledName("lblNoImage"));
+            };
             return Controls;
         })();
         ImageDisplay.Controls = Controls;

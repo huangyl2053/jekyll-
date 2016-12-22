@@ -37,7 +37,6 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoOutputJokenhyoEditor {
     public List<RString> edit() {
         List<RString> 出力条件List = new ArrayList<>();
         出力条件List.add(new RString("【保険者コード】").concat(edit保険者コード(param.getTemp_保険者コード())));
-        出力条件List.add(new RString("【督促基準日】").concat(param.getTemp_基準日().wareki().toDateString()));
         出力条件List.add(new RString("【督促期間】").concat(edit督促期間(param.getTemp_印刷期間開始日(), param.getTemp_印刷期間終了日())));
         return 出力条件List;
     }

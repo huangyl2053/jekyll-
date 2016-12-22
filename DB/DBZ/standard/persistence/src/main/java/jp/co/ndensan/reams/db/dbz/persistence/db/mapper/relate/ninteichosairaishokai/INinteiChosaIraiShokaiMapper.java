@@ -24,4 +24,12 @@ public interface INinteiChosaIraiShokaiMapper {
      * @return List<NinteiChosaIraiShokaiRelateEntity>
      */
     List<NinteiChosaIraiShokaiRelateEntity> get認定調査情報(NinteiChosaIraiShokaiParameter parameter);
+
+    /**
+     * 認定調査情報の件数取得処理します。
+     *
+     * @param parameter 認定調査情報を取得するのParameterクラス
+     * @return int
+     */
+    int get認定調査情報件数(NinteiChosaIraiShokaiParameter parameter);
 }

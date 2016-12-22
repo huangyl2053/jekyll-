@@ -53,7 +53,7 @@
             L."shinsakaiKaisaiYMD" as "L_shinsakaiKaisaiYMD"  
         FROM  
             rgdb."DbT5101NinteiShinseiJoho" AS A
-        INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+        LEFT  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
           ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo" 
         LEFT JOIN  rgdb."DbT5201NinteichosaIraiJoho"  AS C 
           ON A."shinseishoKanriNo" = C ."shinseishoKanriNo"  
@@ -115,11 +115,9 @@
             <if test="被保険者番号フラグ">
               AND  A."hihokenshaNo" = #{被保険者番号}
             </if>
+            AND A."hihokenshaKubunCode" in ('1', '2')
         ORDER BY
           A."hihokenshaNo" desc
-        <if test="usesSaidaiHyojiKensu">
-            LIMIT #{saidaiHyojiKensu}
-        </if>       
     </select>
     <select resultOrdered="true" id="get進捗情報"
             resultMap="ResultMap_YouKaigoNinteiShinchokuJohouRelateEntity"
@@ -268,7 +266,7 @@
                         AND C1."logicalDeletedFlag" = False
                         AND C1."ninteichosaIraiYMD"<![CDATA[>=]]> #{抽出期間開始日}
                         AND C1."ninteichosaIraiYMD"<![CDATA[<=]]> #{抽出期間終了日}
-                        AND C."ninteichosaIraiRirekiNo" = C1."ninteichosaIraiRirekiNo"
+                        AND C."ninteichosaIraiRirekiNo" <![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
                 )
                 LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
                     ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 

@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.Co
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.DbT5501UpdateProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.GaikyoChosaDataOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.KihonChosaKomokuDataOutputProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.NijihanteiKekkaTorokuMobileOutPutProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.ShinsaTaishoDataOutPutProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.ShinsakaiIinJohoOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.ShinsakaiJohoOutputProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsataishodataoutput.ShinsaTaishoDataOutPutBatchParammeter;
@@ -30,10 +28,7 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
     private static final String 基本調査項目データ出力 = "基本調査項目データ出力";
     private static final String 概況調査データ出力 = "概況調査データ出力";
     private static final String コードマスタ出力 = "コードマスタ出力";
-    private static final String SHINSATAISHODATAOUTPUT = "shinsataishodataoutput";
-    private static final String NIJIHANTEIKEKKATOROK = "nijihanteikekkatorokumobileoutput";
-    private static final String CODEMASTEROUTPUT = "CodeMasterOutput";
-    private static final String DBT5501UPDATEPROCESS = "dbt5501updateprocess";
+    private static final String DbT5501更新 = "DbT5501更新";
 
     @Override
     protected void defineFlow() {
@@ -42,7 +37,7 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
         executeStep(概況調査データ出力);
         executeStep(基本調査項目データ出力);
         executeStep(コードマスタ出力);
-        executeStep(DBT5501UPDATEPROCESS);
+        executeStep(DbT5501更新);
 
     }
 
@@ -91,28 +86,6 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
     }
 
     /**
-     * 認定調査データ出力（モバイル）のCSV出力Processです。
-     *
-     * @return 認定調査データ出力（モバイル）
-     */
-    @Step(SHINSATAISHODATAOUTPUT)
-    protected IBatchFlowCommand callShinsaTaishoDataOutPut() {
-        return loopBatch(ShinsaTaishoDataOutPutProcess.class)
-                .arguments(getParameter().toShinsaTaishoDataOutProcessParammeter()).define();
-    }
-
-    /**
-     * 二次判定結果登録用データ（モバイル）のCSV出力Processです。
-     *
-     * @return 二次判定結果登録用データ（モバイル）
-     */
-    @Step(NIJIHANTEIKEKKATOROK)
-    protected IBatchFlowCommand callNijihanteiKekkaTorokuMobileOutPut() {
-        return loopBatch(NijihanteiKekkaTorokuMobileOutPutProcess.class)
-                .arguments(getParameter().toShinsaTaishoDataOutProcessParammeter()).define();
-    }
-
-    /**
      * コードマスタCSV出力Processです。
      *
      * @return コードマスタCSV出力
@@ -128,7 +101,7 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
      *
      * @return DB出力(介護認定審査会開催予定情報)
      */
-    @Step(DBT5501UPDATEPROCESS)
+    @Step(DbT5501更新)
     protected IBatchFlowCommand callDbT5501Update() {
         return loopBatch(DbT5501UpdateProcess.class)
                 .arguments(getParameter().toShinsaTaishoDataOutProcessParammeter()).define();

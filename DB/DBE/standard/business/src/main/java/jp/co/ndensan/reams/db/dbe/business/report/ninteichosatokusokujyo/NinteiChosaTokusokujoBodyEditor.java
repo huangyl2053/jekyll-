@@ -121,7 +121,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     private void edit宛名郵便番号(NinteiChosaTokusokujoReportSource source) {
         RString 宛名郵便番号 = RString.EMPTY;
         if (atenaKikan.get宛名郵便番号() != null) {
-            宛名郵便番号 = atenaKikan.get宛名郵便番号().getColumnValue();
+            宛名郵便番号 = atenaKikan.get宛名郵便番号().getEditedYubinNo();
         }
         source.yubinNo1 = 宛名郵便番号;
     }

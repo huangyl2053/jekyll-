@@ -104,6 +104,7 @@ public class RenkeiDataTorikomiHandler {
         }
         div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setDisabled(true);
         div.getUploadArea().getBtnDataTorikomi().setDisabled(true);
+        div.getDgTorikomiTaisho().setReadOnly(true);
         RString 要介護認定申請 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査委託先 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査員 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
@@ -167,6 +168,11 @@ public class RenkeiDataTorikomiHandler {
         for (dgTorikomiTaisho_Row rowData : dataSource) {
             if (rowData.getFileName().equals(file.getFileName())) {
                 getFileCount(path.toRString(), RString.EMPTY, rowData);
+                if (!rowData.getTotal().equals(なし)) {
+                    div.getDgTorikomiTaisho().setReadOnly(false);
+                    rowData.setSelectable(Boolean.TRUE);
+                    rowData.setSelected(Boolean.TRUE);
+                }
                 break;
             }
         }
@@ -364,7 +370,6 @@ public class RenkeiDataTorikomiHandler {
 
     private dgTorikomiTaisho_Row setRowFile(RString path, RString フォーマット, RString 名称, RString ファイル名) {
         dgTorikomiTaisho_Row row = new dgTorikomiTaisho_Row();
-        row.setSelected(Boolean.TRUE);
         row.setFileFormat(フォーマット);
         row.setMeisho(名称);
         row.setFileName(ファイル名);

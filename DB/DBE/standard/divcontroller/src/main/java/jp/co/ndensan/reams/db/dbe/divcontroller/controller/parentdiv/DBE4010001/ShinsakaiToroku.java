@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -70,8 +72,9 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class ShinsakaiToroku {
 
-    private final RString 出力名 = new RString("ShinsakaiTorokuIchiran.csv");
+    private static final RString CSVファイルID_審査会登録一覧 = new RString("DBE401001");
     private final RString 介護認定審査会登録 = new RString("完了処理・介護認定審査会登録");
+    private final RString 介護認定審査会割当 = new RString("完了処理・介護認定審査会割当");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 割付未完了のみ = new RString("割付未完了分のみ");
 
@@ -83,9 +86,11 @@ public class ShinsakaiToroku {
      */
     public ResponseData<ShinsakaiTorokuDiv> onLoad(ShinsakaiTorokuDiv div) {
         前排他キーのセット();
+        getHandler(div).set対象者最大表示件数();
         getHandler(div).onLoad();
-        getHandler(div).審査会一覧データグリッド初期化();
+        getHandler(div).審査会一覧データグリッド初期化();       
         getHandler(div).set審査会最大表示件数();
+        ViewStateHolder.put(ViewStateKeys.状態, div.getRadTaishoshaJotai().getSelectedKey());
         return ResponseData.of(div).respond();
     }
 
@@ -115,6 +120,7 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public IDownLoadServletResponse onClick_btnRyooutput(ShinsakaiTorokuDiv div, IDownLoadServletResponse response) {
+        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_審査会登録一覧);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<ShinsakaiTorokuCsvEntity> csvWriter
@@ -210,6 +216,20 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onChange_radTaishoshaJotai(ShinsakaiTorokuDiv div) {
+        if (!get修正リスト(div).isEmpty()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                div.getRadTaishoshaJotai().setSelectedKey(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
+                return ResponseData.of(div).respond();
+            }
+        }
+        ViewStateHolder.put(ViewStateKeys.状態, div.getRadTaishoshaJotai().getSelectedKey());
         getHandler(div).setJyotaiKubun();
         return ResponseData.of(div).respond();
     }
@@ -280,38 +300,84 @@ public class ShinsakaiToroku {
         getHandler(div).onClick_btnWaritsuke(div.getDgShinsakaiList().getClickedItem());
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 対象者最大審査順表示件数テキスト変更イベントです。
-     * 
+     *
      * @param div ShinsakaiTorokuDiv
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onChange_txtTaishoshaMaxHyojiKensu(ShinsakaiTorokuDiv div) {
+        if (!get修正リスト(div).isEmpty()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
 
     /**
      * 保存するボタンクリックイベントです。
-     * 
+     *
      * @param div ShinsakaiTorokuDiv
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnSave(ShinsakaiTorokuDiv div) {
         ValidationMessageControlPairs 対象者データ有無チェック = getValidationHandler(div).対象者データ有無チェック();
-        List<dgNinteiTaskList_Row> データリスト = div.getDgNinteiTaskList().getDataSource();
-        int 修正人数 = 0;
-        for (dgNinteiTaskList_Row データ : データリスト) {
-            if (データ.getRowState().equals(RowState.Modified)) {
-                修正人数++;
-            }
-        }
-        if (修正人数 == 0) {
+        List<dgNinteiTaskList_Row> 修正リスト = get修正リスト(div);
+        if (修正リスト.isEmpty()) {
             return ResponseData.of(div).addValidationMessages(対象者データ有無チェック).respond();
         }
-        return ResponseData.of(div).respond();
+
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).onClick_btnSave(修正リスト);
+            前排他キーの解除();
+            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                    replace(介護認定審査会割当.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
+            return ResponseData.of(div).setState(DBE4010001StateName.完了);
+
+        }
+        return ResponseData.of(div).setState(DBE4010001StateName.登録);
     }
+
     
+    /**
+     * 継続ボタン押下動作です。
+     *
+     * @param div ShinsakaiTorokuDiv
+     * @return ResponseData<ShinsakaiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiTorokuDiv> onClick_btnContinue(ShinsakaiTorokuDiv div) {
+        getHandler(div).onLoad();
+        return ResponseData.of(div).setState(DBE4010001StateName.登録);
+    }
+    private List<dgNinteiTaskList_Row> get修正リスト(ShinsakaiTorokuDiv div) {
+        List<dgNinteiTaskList_Row> データリスト = div.getDgNinteiTaskList().getDataSource();
+        List<dgNinteiTaskList_Row> 修正リスト = new ArrayList<>();
+        for (dgNinteiTaskList_Row データ : データリスト) {
+            if (データ.getRowState().equals(RowState.Modified)) {
+                修正リスト.add(データ);
+            }
+        }
+        return 修正リスト;
+    }
+
     private void 前排他キーのセット() {
         LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
         if (!RealInitialLocker.tryGetLock(排他キー)) {

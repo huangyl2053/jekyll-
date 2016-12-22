@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshoSakuseiJissekiShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -74,6 +74,16 @@ public class IkenshoSakuseiJissekiShokaiDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public RadioButton getRadKensakuKijunbi() {
+        return this.getIkenshoKinyubi().getRadKensakuKijunbi();
+    }
+
+    @JsonIgnore
+    public void  setRadKensakuKijunbi(RadioButton radKensakuKijunbi) {
+        this.getIkenshoKinyubi().setRadKensakuKijunbi(radKensakuKijunbi);
+    }
+
     @JsonIgnore
     public TextBoxDateRange getTxtIkenshoKinyubi() {
         return this.getIkenshoKinyubi().getTxtIkenshoKinyubi();

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関情報検索用RelateEntityクラスです。
+ *
  * @reamsid_L DBE-0240-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 public class KoseiShujiiIryoKikanMasterRelateEntity {
 
+    private int totalCount;
     private LasdecCode shichosonCode;
     private RString shujiiIryokikanCode;
     private IryoKikanCode iryokikanCode;

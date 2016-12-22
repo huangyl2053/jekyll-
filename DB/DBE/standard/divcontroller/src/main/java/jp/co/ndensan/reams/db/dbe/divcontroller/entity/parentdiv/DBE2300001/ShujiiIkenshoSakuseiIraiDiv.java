@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,6 +38,8 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     private iraiprintDiv iraiprint;
     @JsonProperty("meireisho")
     private meireishoDiv meireisho;
+    @JsonProperty("hdnClickedButton")
+    private RString hdnClickedButton;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -132,6 +135,24 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     @JsonProperty("meireisho")
     public void setMeireisho(meireishoDiv meireisho) {
         this.meireisho = meireisho;
+    }
+
+    /*
+     * gethdnClickedButton
+     * @return hdnClickedButton
+     */
+    @JsonProperty("hdnClickedButton")
+    public RString getHdnClickedButton() {
+        return hdnClickedButton;
+    }
+
+    /*
+     * sethdnClickedButton
+     * @param hdnClickedButton hdnClickedButton
+     */
+    @JsonProperty("hdnClickedButton")
+    public void setHdnClickedButton(RString hdnClickedButton) {
+        this.hdnClickedButton = hdnClickedButton;
     }
 
     /*

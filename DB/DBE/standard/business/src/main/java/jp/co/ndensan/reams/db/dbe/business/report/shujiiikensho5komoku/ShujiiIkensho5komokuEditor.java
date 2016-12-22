@@ -146,12 +146,9 @@ public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
         return source;
     }
 
-    private RString set性別(RString 性別コード) {
-        RString 性別 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(性別コード)) {
-            性別 = Seibetsu.toValue(item.get性別()).get名称();
-        }
-        return 性別;
+    private RString set性別(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : Seibetsu.toValue(code).get名称();
     }
 
     private RString getNo(int index_tmp) {
@@ -161,12 +158,9 @@ public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
         return new RString(String.valueOf(index_tmp + 1));
     }
 
-    private RString set申請区分(RString 申請区分申請時コード) {
-        RString 申請区分 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(申請区分申請時コード)) {
-            申請区分 = NinteiShinseiShinseijiKubunCode.toValue(item.get認定申請区分申請時コード()).get名称();
-        }
-        return 申請区分;
+    private RString set申請区分(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(code).get名称();
     }
 
     private RString dateFormat(FlexibleDate date) {
@@ -177,44 +171,29 @@ public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
-    private RString get認知度(RString 意見項目) {
-        RString 認知度 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(意見項目)) {
-            認知度 = IkenKomoku03.toValue(意見項目).get名称();
-        }
-        return 認知度;
+    private RString get認知度(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : IkenKomoku03.toValue(code).get名称();
     }
 
-    private RString get短期記憶(RString 意見項目) {
-        RString 短期記憶 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(意見項目)) {
-            短期記憶 = IkenKomoku04.toValue(意見項目).get名称();
-        }
-        return 短期記憶;
+    private RString get短期記憶(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : IkenKomoku04.toValue(code).get名称();
     }
 
-    private RString get意思決定(RString 意見項目) {
-        RString 意思決定 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(意見項目)) {
-            意思決定 = IkenKomoku05.toValue(意見項目).get名称();
-        }
-        return 意思決定;
+    private RString get意思決定(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : IkenKomoku05.toValue(code).get名称();
     }
 
-    private RString get伝達能力(RString 意見項目) {
-        RString 伝達能力 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(意見項目)) {
-            伝達能力 = IkenKomoku06.toValue(意見項目).get名称();
-        }
-        return 伝達能力;
+    private RString get伝達能力(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : IkenKomoku06.toValue(code).get名称();
     }
 
-    private RString get食事行為(RString 意見項目) {
-        RString 食事行為 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(意見項目)) {
-            食事行為 = IkenKomoku14.toValue(意見項目).get名称();
-        }
-        return 食事行為;
+    private RString get食事行為(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : IkenKomoku14.toValue(code).get名称();
     }
 
     private RString get記載有無(ShujiiIkensho5komokuReportSource source) {

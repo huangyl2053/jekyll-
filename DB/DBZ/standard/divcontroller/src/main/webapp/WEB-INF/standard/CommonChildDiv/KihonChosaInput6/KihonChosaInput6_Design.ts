@@ -8,6 +8,14 @@ module DBZ {
 
         export class Events {
 
+            public static onBeforeOpenDialog_btnShochiNaiyo(): string {
+                return "onBeforeOpenDialog_btnShochiNaiyo";
+            }
+
+            public static onBeforeOpenDialog_btnTokiTaiou(): string {
+                return "onBeforeOpenDialog_btnTokiTaiou";
+            }
+
             public static onClick_btnBack(): string {
                 return "onClick_btnBack";
             }

@@ -57,6 +57,7 @@ public class NinteiShinseishaFinderHandler {
      */
     public void initialize() {
         div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
         // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
         List<KeyValueDataSource> ddlShichosonCode = new ArrayList<>();
         ddlShichosonCode.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));

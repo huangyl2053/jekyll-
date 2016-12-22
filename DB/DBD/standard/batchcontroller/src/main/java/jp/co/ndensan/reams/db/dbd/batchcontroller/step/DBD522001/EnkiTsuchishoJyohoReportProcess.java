@@ -137,7 +137,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
         }
         
         FlexibleDate 通知書発行日 = get通知書発行日(dbtEntity.getShinseishoKanriNo().value());
-        entity.set文書番号(ReportUtil.get文書番号(SubGyomuCode.DBD介護受給, REPORT_DBD522001, 通知書発行日));
+        entity.set文書番号(parameter.get文書番号());
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBD介護受給,
                 REPORT_DBD522001,

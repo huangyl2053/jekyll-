@@ -152,10 +152,19 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書依頼List.totalCount());
         if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
             div.getDgNinteiTaskList().setDataSource(rowListNotreated);
+            div.getTxtTotalCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(true);
+            div.getTxtNoUpdate().setDisplayNone(false);
         } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
             div.getDgNinteiTaskList().setDataSource(rowListComplete);
+            div.getTxtNoUpdate().setDisplayNone(true);
+            div.getTxtTotalCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(false);
         } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
             div.getDgNinteiTaskList().setDataSource(rowListALL);
+            div.getTxtTotalCount().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtNoUpdate().setDisplayNone(false);
         }
     }
 

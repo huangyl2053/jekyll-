@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class NinteiChosainDataOutputResult {
 
+    private static final RString BOOLEAN_TRUE = new RString("True");
+    private static final RString BOOLEAN_FALSE = new RString("False");
+
     /**
      * EucCsvEntityの設定メッソドです。
      *
@@ -47,7 +50,8 @@ public class NinteiChosainDataOutputResult {
         eucCsvEntity.set地区名称(地区名称);
         eucCsvEntity.set調査員資格(entityParam.get調査員資格());
         eucCsvEntity.set調査可能人数(entityParam.get調査可能人数());
-        eucCsvEntity.set状況フラグ(entityParam.get状況フラグ());
+        RString 状況フラグ = convertBoolean(entityParam.get状況フラグ());
+        eucCsvEntity.set状況フラグ(状況フラグ);
         eucCsvEntity.set郵便番号(entityParam.get郵便番号());
         eucCsvEntity.set住所(entityParam.get住所());
         eucCsvEntity.set電話番号(entityParam.get電話番号());
@@ -56,4 +60,12 @@ public class NinteiChosainDataOutputResult {
         return eucCsvEntity;
     }
 
+    private RString convertBoolean(RString value) {
+        if (new RString("t").equals(value)) {
+            return BOOLEAN_TRUE;
+        } else if (new RString("f").equals(value)) {
+            return BOOLEAN_FALSE;
+        }
+        return RString.EMPTY;
+    }
 }

@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -50,26 +52,28 @@ public class RenkeiDataTorikomi {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString path = RString.EMPTY;
         try {
-             path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         } catch (SystemException e) {
             throw new ApplicationException(DbxErrorMessages.業務コンフィグなし.getMessage().replace(ConfigNameDBE.認定申請連携データ出力先.name()));
-        } 
-        
+        }
+
         getHandler(div).onLoad(RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate()), path);
         for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource()) {
             if (Integer.parseInt(row.getTotal().toString()) > なし) {
+                RString error = RString.EMPTY;
                 if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, path, false);
+                    error = getValidationHandler(div).check認定申請情報ファイル(path, false);
                 } else if (認定調査委託先データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, path, false);
+                    error = getValidationHandler(div).check認定調査委託先情報ファイル(path, false);
                 } else if (認定調査員データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, path, false);
+                    error = getValidationHandler(div).check認定調査員情報ファイル(path, false);
                 } else if (主治医医療機関データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, path, false);
+                    error = getValidationHandler(div).check主治医医療機関情報ファイル(path, false);
                 } else if (主治医データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, path, false);
+                    error = getValidationHandler(div).check主治医情報ファイル(path, false);
                 }
             }
+            row.setSelectable(Boolean.FALSE);
         }
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -86,7 +90,7 @@ public class RenkeiDataTorikomi {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<RenkeiDataTorikomiDiv> onClick_TorikomiBtn(RenkeiDataTorikomiDiv div, FileData[] files) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        RString error = RString.EMPTY;
         RString 要介護認定申請 = DbBusinessConfig.get(
                 ConfigNameDBE.要介護認定申請連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 認定調査委託先 = DbBusinessConfig.get(
@@ -97,40 +101,35 @@ public class RenkeiDataTorikomi {
                 ConfigNameDBE.主治医医療機関データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 主治医 = DbBusinessConfig.get(
                 ConfigNameDBE.主治医データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        boolean is認定申請情報ファイル = false;
-        boolean is認定調査委託先情報ファイル = false;
-        boolean is認定調査員情報ファイル = false;
-        boolean is主治医医療機関情報ファイル = false;
-        boolean is主治医情報ファイル = false;
         for (FileData file : files) {
             if (要介護認定申請.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, file.getFilePath(), true);
-                is認定申請情報ファイル = true;
+                error = getValidationHandler(div).check認定申請情報ファイル(file.getFilePath(), true);
             } else if (認定調査委託先.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, file.getFilePath(), true);
-                is認定調査委託先情報ファイル = true;
+                error = getValidationHandler(div).check認定調査委託先情報ファイル(file.getFilePath(), true);
             } else if (認定調査員.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, file.getFilePath(), true);
-                is認定調査員情報ファイル = true;
+                error = getValidationHandler(div).check認定調査員情報ファイル(file.getFilePath(), true);
             } else if (主治医医療機関.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, file.getFilePath(), true);
-                is主治医医療機関情報ファイル = true;
+                error = getValidationHandler(div).check主治医医療機関情報ファイル(file.getFilePath(), true);
             } else if (主治医.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, file.getFilePath(), true);
-                is主治医情報ファイル = true;
+                error = getValidationHandler(div).check主治医情報ファイル(file.getFilePath(), true);
             }
-        }
-        validPairs = getValidationHandler(div).checkFileName(validPairs,
-                is認定申請情報ファイル, is認定調査委託先情報ファイル, is認定調査員情報ファイル,
-                is主治医医療機関情報ファイル, is主治医情報ファイル);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         RStringBuilder buider = new RStringBuilder();
         for (FileData file : files) {
             getHandler(div).upLoadFile(file, buider);
         }
-        div.getUploadArea().getBtnDataTorikomi().setDisabled(false);
+        boolean flag = false;
+        if (div.getDgTorikomiTaisho().getSelectedItems() != null && !div.getDgTorikomiTaisho().getSelectedItems().isEmpty()) {
+            flag = true;
+        }
+        if (flag) {
+            div.getUploadArea().getBtnDataTorikomi().setDisabled(false);
+        }
+        if (!RString.isNullOrEmpty(error)) {
+            getValidationHandler(div).checkゼロ件ファイル(files);
+        } else {
+            div.setHiddenErrorFiles(error);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -167,6 +166,26 @@ public class RenkeiDataTorikomi {
      */
     public ResponseData<DBE192001_NnteiShinseiInfoUploadParameter> onClick_JikkouBtn(RenkeiDataTorikomiDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+    }
+
+    /**
+     * アップロード時のエラーチェックを行います。
+     *
+     * @param div RenkeiDataTorikomiDiv
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<RenkeiDataTorikomiDiv> afterUpload(RenkeiDataTorikomiDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            Message error = getValidationHandler(div).getError();
+            if (!error.equals(Message.NO_MESSAGE)) {
+                return ResponseData.of(div).addMessage(error).respond();
+            }
+            Message message = getValidationHandler(div).getMessage();
+            if (!message.equals(Message.NO_MESSAGE)) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        return ResponseData.of(div).respond();
     }
 
     private RenkeiDataTorikomiHandler getHandler(RenkeiDataTorikomiDiv div) {

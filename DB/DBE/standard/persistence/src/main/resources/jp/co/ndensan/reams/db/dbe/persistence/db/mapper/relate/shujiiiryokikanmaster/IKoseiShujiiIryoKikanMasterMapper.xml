@@ -35,6 +35,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
             resultMap="resultMap_KoseiShujiiIryoKikanMasterEntity"            fetchSize="500">
         SELECT
+        COUNT(*) OVER () AS "totalCount",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" AS "dbT5911ShujiiIryoKikanJoho_shichosonCode",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" AS "dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryokikanCode" AS "dbT5911ShujiiIryoKikanJoho_iryokikanCode",
@@ -115,9 +116,7 @@
         ORDER BY
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode"
-        <if test="usesSaidaiHyojiKensu">
-            LIMIT #{saidaiHyojiKensu}
-        </if>
+        LIMIT #{saidaiHyojiKensu}
     </select>
 
     <resultMap id="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity" autoMapping="true">
@@ -189,6 +188,7 @@
     <resultMap id="resultMap_KoseiShujiiIryoKikanMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="totalCount" column="totalCount" />
         <result property="iryokikanCode" column="dbT5911ShujiiIryoKikanJoho_iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler"/>
         <result property="iryoKikanMeisho" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeishoKana" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

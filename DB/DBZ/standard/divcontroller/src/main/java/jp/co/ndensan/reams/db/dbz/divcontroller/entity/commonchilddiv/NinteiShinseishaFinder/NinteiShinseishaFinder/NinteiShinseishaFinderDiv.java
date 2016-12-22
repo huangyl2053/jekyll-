@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.saikinshorisha.SaikinShorisha.ISaikinShorishaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.saikinshorisha.SaikinShorisha.SaikinShorishaDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,14 +20,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseishaFinderDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -72,10 +72,10 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     private Label lblBirthDate;
     @JsonProperty("txtBirthDateTO")
     private TextBoxFlexibleDate txtBirthDateTO;
-    @JsonProperty("ddlShinseijiShinseiKubun")
-    private DropDownList ddlShinseijiShinseiKubun;
-    @JsonProperty("chkSeibetsu")
-    private CheckBoxList chkSeibetsu;
+    @JsonProperty("pnlForDesign")
+    private pnlForDesignDiv pnlForDesign;
+    @JsonProperty("ccdSaikinShorisha")
+    private SaikinShorishaDiv ccdSaikinShorisha;
     @JsonProperty("ShosaiJoken")
     private ShosaiJokenDiv ShosaiJoken;
     @JsonProperty("hdnDataPass")
@@ -329,39 +329,30 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     /*
-     * getddlShinseijiShinseiKubun
-     * @return ddlShinseijiShinseiKubun
+     * getpnlForDesign
+     * @return pnlForDesign
      */
-    @JsonProperty("ddlShinseijiShinseiKubun")
-    public DropDownList getDdlShinseijiShinseiKubun() {
-        return ddlShinseijiShinseiKubun;
+    @JsonProperty("pnlForDesign")
+    public pnlForDesignDiv getPnlForDesign() {
+        return pnlForDesign;
     }
 
     /*
-     * setddlShinseijiShinseiKubun
-     * @param ddlShinseijiShinseiKubun ddlShinseijiShinseiKubun
+     * setpnlForDesign
+     * @param pnlForDesign pnlForDesign
      */
-    @JsonProperty("ddlShinseijiShinseiKubun")
-    public void setDdlShinseijiShinseiKubun(DropDownList ddlShinseijiShinseiKubun) {
-        this.ddlShinseijiShinseiKubun = ddlShinseijiShinseiKubun;
+    @JsonProperty("pnlForDesign")
+    public void setPnlForDesign(pnlForDesignDiv pnlForDesign) {
+        this.pnlForDesign = pnlForDesign;
     }
 
     /*
-     * getchkSeibetsu
-     * @return chkSeibetsu
+     * getccdSaikinShorisha
+     * @return ccdSaikinShorisha
      */
-    @JsonProperty("chkSeibetsu")
-    public CheckBoxList getChkSeibetsu() {
-        return chkSeibetsu;
-    }
-
-    /*
-     * setchkSeibetsu
-     * @param chkSeibetsu chkSeibetsu
-     */
-    @JsonProperty("chkSeibetsu")
-    public void setChkSeibetsu(CheckBoxList chkSeibetsu) {
-        this.chkSeibetsu = chkSeibetsu;
+    @JsonProperty("ccdSaikinShorisha")
+    public ISaikinShorishaDiv getCcdSaikinShorisha() {
+        return ccdSaikinShorisha;
     }
 
     /*
@@ -667,6 +658,26 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public DropDownList getDdlShinseijiShinseiKubun() {
+        return this.getPnlForDesign().getDdlShinseijiShinseiKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlShinseijiShinseiKubun(DropDownList ddlShinseijiShinseiKubun) {
+        this.getPnlForDesign().setDdlShinseijiShinseiKubun(ddlShinseijiShinseiKubun);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkSeibetsu() {
+        return this.getPnlForDesign().getChkSeibetsu();
+    }
+
+    @JsonIgnore
+    public void  setChkSeibetsu(CheckBoxList chkSeibetsu) {
+        this.getPnlForDesign().setChkSeibetsu(chkSeibetsu);
+    }
+
     @JsonIgnore
     public KihonJohoDiv getKihonJoho() {
         return this.getShosaiJoken().getKihonJoho();
@@ -1770,6 +1781,26 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     @Override
     public ValidationMessageControlPairs validate() {
         return getValidationHandler(this).validate();
+    }
+
+    /**
+     * 最近処理者Divを取得します。
+     *
+     * @return
+     */
+    @Override
+    public ISaikinShorishaDiv getSaikinShorishaDiv() {
+        return this.getCcdSaikinShorisha();
+    }
+
+    @Override
+    public void updateSaikinShorisha(RString hihokenshaNo, RString hihokenshaName) {
+        this.getCcdSaikinShorisha().update(hihokenshaNo, hihokenshaName, this.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
+    }
+
+    @Override
+    public void reloadSaikinShorisha() {
+        this.getCcdSaikinShorisha().initialize(this.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
     }
 
     private NinteiShinseishaFinderHandler getHandler(NinteiShinseishaFinderDiv div) {

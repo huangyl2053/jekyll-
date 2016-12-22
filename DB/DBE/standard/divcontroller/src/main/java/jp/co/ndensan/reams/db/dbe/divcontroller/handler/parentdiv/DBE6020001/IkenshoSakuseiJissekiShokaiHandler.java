@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class IkenshoSakuseiJissekiShokaiHandler {
 
     private static final RString MARU = new RString("○");
+    private static final RString KEY_基準日_初期値 = new RString("3");
     private final IkenshoSakuseiJissekiShokaiDiv div;
 
     /**
@@ -55,6 +56,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * 条件をクリアする」ボタンを押します。
      */
     public void onClick_BtnKensakuClear() {
+        div.getRadKensakuKijunbi().setSelectedKey(KEY_基準日_初期値);
         div.getTxtIkenshoKinyubi().clearFromValue();
         div.getTxtIkenshoKinyubi().clearToValue();
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
@@ -114,9 +116,11 @@ public class IkenshoSakuseiJissekiShokaiHandler {
                     get保険者(data),
                     data.get医療機関コード(),
                     data.get医療機関名称(),
+                    data.get主治医コード(),
                     data.get主治医氏名(),
                     data.get被保険者番号(),
                     data.get申請者氏名(),
+                    dataFormat(data.get依頼日()),
                     dataFormat(data.get記入日()),
                     dataFormat(data.get入手日()),
                     在宅_新,
@@ -124,9 +128,9 @@ public class IkenshoSakuseiJissekiShokaiHandler {
                     施設_新,
                     施設_継,
                     IshiKubunCode.toValue(data.get医師区分コード()).get名称(),
-                    data.get主治医コード(),
                     data.get申請書管理番号(),
-                    data.get主治医意見書作成依頼履歴番号());
+                    data.get主治医意見書作成依頼履歴番号()
+            );
             rowList.add(row);
         }
         div.getDgIkenshoSakuseiJisseki().setDataSource(rowList);
@@ -161,17 +165,19 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             }
         }
         param.setKeyJoho(keyJoho);
-        RString 意見書記入日FROM = RString.EMPTY;
-        RString 意見書記入日TO = RString.EMPTY;
+        RString 基準日FROM = RString.EMPTY;
+        RString 基準日TO = RString.EMPTY;
         if (div.getTxtIkenshoKinyubi().getFromValue() != null) {
-            意見書記入日FROM = div.getTxtIkenshoKinyubi().getFromValue().toDateString();
+            基準日FROM = div.getTxtIkenshoKinyubi().getFromValue().toDateString();
         }
         if (div.getTxtIkenshoKinyubi().getToValue() != null) {
-            意見書記入日TO = div.getTxtIkenshoKinyubi().getToValue().toDateString();
+            基準日TO = div.getTxtIkenshoKinyubi().getToValue().toDateString();
         }
-        param.setIkenshoKinyubiFrom(意見書記入日FROM);
-        param.setIkenshoKinyubiTo(意見書記入日TO);
+        param.setIkenshoKijunbiFrom(基準日FROM);
+        param.setIkenshoKijunbiTo(基準日TO);
+        param.setIkenshoKijunbiKubun(div.getRadKensakuKijunbi().getSelectedKey());
         param.setHokensya(div.getCcdHokensya().getSelectedItem().get市町村コード().value());
+        param.setShokisaiHokensya(div.getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

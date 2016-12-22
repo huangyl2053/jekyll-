@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.Image
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ImageDisplay.ImageDisplay.ImageDisplayDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ImageDisplay.ImageDisplay.ImageDisplayHandler;
@@ -16,14 +17,12 @@ import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo.Yokaigon
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -35,12 +34,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ImageDisplay {
 
-    private static final RString イメージ区分_1 = new RString("1");
-    private static final RString イメージ区分_2 = new RString("2");
-    private static final RString イメージ区分_3 = new RString("3");
-    private static RString imagePath = RString.EMPTY;
+    private static final RString IMAGE_GAIKYOTOKKI = new RString("1");
+    private static final RString IMAGE_TEIKEIOPINIONFILE = new RString("2");
+    private static final RString IMAGE_OTHERFILE = new RString("3");
+    private static final RString IMAGE_TEIKEIGAIOPINIONFILE = new RString("4");
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
-    private static final RString イメージパス = new RString("/db/dbe/image/");
     private static final RString ファイルまで = new RString("_BAK.png");
 
     /**
@@ -50,33 +48,194 @@ public class ImageDisplay {
      * @return ResponseData<ImageDisplayDiv>
      */
     public ResponseData<ImageDisplayDiv> onLoad(ImageDisplayDiv div) {
+        List<RString> originalImagePathList;
+        List<RString> maskImagePathList;
+        List<RString> originalImageBinaryList;
+        List<RString> maskImageBinaryList;
+        List<RString> originalTitleList;
+        List<RString> maskTitleList;
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
+
         if (イメージ情報.getイメージ共有ファイルID() == null) {
             ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
             this.get_メッセージ(div, validPairs);
         }
+
         RString イメージ区分 = ViewStateHolder.get(ViewStateKeys.イメージ区分, RString.class);
         ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
                 イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())),
                 イメージ情報.getイメージ共有ファイルID());
+
         List<RString> 存在したイメージファイル名 = YokaigoninteiimagesakujoManager.createInstance().get存在したイメージファイル名(descriptor);
         this.チェック(イメージ区分, div, 存在したイメージファイル名);
-        HashMap<Integer, List<RString>> 初期化のイメージ = this.getFilePath(イメージ区分);
-        ViewStateHolder.put(ViewStateKeys.イメージ情報_存在, 初期化のイメージ);
-        if (!初期化のイメージ.isEmpty()) {
-            RString 初期化のイメージ_1 = 初期化のイメージ.get(1).get(0);
-            div.getImgGenbon().setSrc(初期化のイメージ_1);
-            div.getImgMask().setSrc(初期化のイメージ.get(1).get(1));
-            div.setHdnImageDisplay(イメージ区分_1);
-            div.getBtnBefore().setDisabled(true);
-            if (1 == 初期化のイメージ.size()) {
-                div.getBtnAfterImg().setDisabled(true);
+
+        RString toCopyPath = div.getHdnImageLocalCopyPath();
+        if (IMAGE_TEIKEIGAIOPINIONFILE.equals(イメージ区分)) {
+            div.getCcdChosaTokkiShiryoShokai().setDisplayNone(true);
+            HashMap<Integer, List<RString>> 初期化のイメージ = this.getFilePathMap(toCopyPath);
+            ViewStateHolder.put(ViewStateKeys.イメージ情報_存在, 初期化のイメージ);
+            if (!初期化のイメージ.isEmpty() && !RString.isNullOrEmpty(初期化のイメージ.get(1).get(0))) {
+                RString 初期化のイメージ_1 = 初期化のイメージ.get(1).get(0);
+                div.getImgGenbon().setSrc(初期化のイメージ_1);
+                div.getImgMask().setSrc(初期化のイメージ.get(1).get(1));
+                div.setHdnImageDisplay(IMAGE_TEIKEIGAIOPINIONFILE);
+                div.getBtnBefore().setDisabled(true);
+                if (1 == 初期化のイメージ.size()) {
+                    div.getBtnAfterImg().setDisabled(true);
+                }
+                setOCROpinionFileController(div, false);
+            } else {
+                setOCROpinionFileController(div, true);
+                div.getLblNoImage().setDisplayNone(false);
             }
         } else {
-            div.getBtnBefore().setDisabled(true);
-            div.getBtnAfterImg().setDisabled(true);
+            setOCROpinionFileController(div, true);
+            originalImagePathList = getOriginalFilePathList(イメージ区分, toCopyPath);
+            maskImagePathList = getMaskFilePathList(イメージ区分, toCopyPath, originalImagePathList);
+
+            originalImageBinaryList = createImageBinaryList(originalImagePathList);
+            maskImageBinaryList = createImageBinaryList(maskImagePathList);
+            originalTitleList = getTitleList(originalImagePathList);
+            maskTitleList = getTitleList(maskImagePathList);
+
+            if (originalImageBinaryList != null && !RString.isNullOrEmpty(originalImageBinaryList.get(0))) {
+                div.getCcdChosaTokkiShiryoShokai().setDisplayNone(false);
+                div.getCcdChosaTokkiShiryoShokai().initialize(originalImageBinaryList, maskImageBinaryList, originalTitleList, maskTitleList);
+            } else {
+                div.getCcdChosaTokkiShiryoShokai().setDisplayNone(true);
+                div.getLblNoImage().setDisplayNone(false);
+            }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setOCROpinionFileController(ImageDisplayDiv div, boolean value) {
+        div.getLblGenbon().setDisplayNone(value);
+        div.getLblMask().setDisplayNone(value);
+        div.getImgGenbon().setDisplayNone(value);
+        div.getImgMask().setDisplayNone(value);
+        div.getBtnBefore().setDisabled(value);
+        div.getBtnAfterImg().setDisabled(value);
+    }
+
+    private List<RString> createImageBinaryList(List<RString> imagePathList) {
+        List<RString> imageBinaryList = new ArrayList<>();
+        for (RString imagePath : imagePathList) {
+            imageBinaryList.add(DBEImageUtil.sanitizePath(imagePath));
+        }
+        return imageBinaryList;
+    }
+
+    private List<RString> getTitleList(List<RString> 表示イメージ) {
+        List<RString> titleList = new ArrayList<>();
+        for (int index = 1; index <= 表示イメージ.size(); index++) {
+            titleList.add(new RString(index).concat("枚目"));
+        }
+        return titleList;
+    }
+
+    private List<RString> getOriginalFilePathList(RString imageKubun, RString toCopyPath) {
+        List<RString> imageFilePathList = new ArrayList<>();
+        RString imageFilePath = RString.EMPTY;
+
+        if (IMAGE_GAIKYOTOKKI.equals(imageKubun)) {
+            RString imageFile = new RString("G0001.png");
+            imageFilePathList.add(getFilePath(toCopyPath, imageFile));
+        } else if (IMAGE_TEIKEIOPINIONFILE.equals(imageKubun)) {
+            RString imageFile1 = new RString("E0001.png");
+            RString imageFile1_BAK = new RString("E0001_BAK.png");
+            RString imageFile2 = new RString("E0002.png");
+            RString imageFile2_BAK = new RString("E0002_BAK.png");
+
+            imageFilePath = getFilePath(toCopyPath, imageFile1_BAK);
+            if (RString.isNullOrEmpty(imageFilePath)) {
+                imageFilePath = getFilePath(toCopyPath, imageFile1);
+            }
+            imageFilePathList.add(imageFilePath);
+
+            imageFilePath = getFilePath(toCopyPath, imageFile2_BAK);
+            if (RString.isNullOrEmpty(imageFilePath)) {
+                imageFilePath = getFilePath(toCopyPath, imageFile2);
+            }
+            imageFilePathList.add(imageFilePath);
+        } else if (IMAGE_OTHERFILE.equals(imageKubun)) {
+            List<RString> imageFileList = getOtherFileList();
+            for (int index = 1; index < 7; index++) {
+                for (RString imageFile : imageFileList) {
+                    if (imageFilePath.isEmpty()) {
+                        imageFilePath = getFilePath(toCopyPath, replaceShareFileName(imageFile, index, true));
+                        if (imageFilePath.isEmpty()) {
+                            imageFilePath = getFilePath(toCopyPath, replaceShareFileName(imageFile, index, false));
+                        } else {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                imageFilePathList.add(imageFilePath);
+                imageFilePath = RString.EMPTY;
+            }
+        }
+        return imageFilePathList;
+    }
+
+    private List<RString> getOtherFileList() {
+        List<RString> imageFileList = new ArrayList<>();
+        imageFileList.add(new RString("F1401Axx.png"));
+        imageFileList.add(new RString("F1401Bxx.png"));
+        imageFileList.add(new RString("F1401Cxx.png"));
+        imageFileList.add(new RString("F1401Dxx.png"));
+        imageFileList.add(new RString("F1401Exx.png"));
+        imageFileList.add(new RString("F1401Fxx.png"));
+        return imageFileList;
+    }
+
+    private List<RString> getMaskFilePathList(RString imageKubun, RString toCopyPath, List<RString> originalImagePathList) {
+        List<RString> imageFilePathList = new ArrayList<>();
+        RString imageFilePath = RString.EMPTY;
+
+        if (IMAGE_TEIKEIOPINIONFILE.equals(imageKubun)) {
+            RString imageFile1 = new RString("E0001.png");
+            RString imageFile1_BAK = new RString("E0001_BAK.png");
+            RString imageFile2 = new RString("E0002.png");
+            RString imageFile2_BAK = new RString("E0002_BAK.png");
+            if (Directory.exists(Path.combinePath(toCopyPath, imageFile1_BAK))) {
+                imageFilePath = getFilePath(toCopyPath, imageFile1);
+            }
+            imageFilePathList.add(imageFilePath);
+
+            imageFilePath = RString.EMPTY;
+            if (Directory.exists(Path.combinePath(toCopyPath, imageFile2_BAK))) {
+                imageFilePath = getFilePath(toCopyPath, imageFile2);
+            }
+            imageFilePathList.add(imageFilePath);
+
+        } else if (IMAGE_OTHERFILE.equals(imageKubun)) {
+            for (RString imageFile : originalImagePathList) {
+                if (Directory.exists(replaceShareFileName(imageFile, 0, true))) {
+                    imageFilePathList.add(replaceShareFileName(imageFile, 0, false));
+                } else {
+                    imageFilePathList.add(RString.EMPTY);
+                }
+            }
+        }
+        return imageFilePathList;
+    }
+
+    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ファイル名);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString replaceShareFileName(RString baseFileName, Integer remban, boolean isExistマスク) {
+        RString fileName = baseFileName.replace("xx", new RString(remban.toString()).padZeroToLeft(2).toString());
+        if (isExistマスク) {
+            return fileName.replace(".png", "_BAK.png");
+        }
+        return fileName;
     }
 
     /**
@@ -150,88 +309,39 @@ public class ImageDisplay {
     }
 
     private void チェック(RString イメージ区分, ImageDisplayDiv div, List<RString> 存在したイメージファイル名) {
-        if (イメージ区分_1.equals(イメージ区分) && getHandler().is調査票概況のイメージファイルが存在しない(存在したイメージファイル名)) {
+        if (IMAGE_GAIKYOTOKKI.equals(イメージ区分) && getHandler().is調査票概況のイメージファイルが存在しない(存在したイメージファイル名)) {
             getValidationHandler().調査票概況イメージファイル存在チェック();
             ValidationMessageControlPairs validPairs = getValidationHandler().調査票概況イメージファイル存在チェック();
             this.get_メッセージ(div, validPairs);
-        } else if (イメージ区分_2.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
+        } else if (IMAGE_TEIKEIOPINIONFILE.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
                 getその他資料のイメージファイルが存在区分(存在したイメージファイル名))) {
             ValidationMessageControlPairs validPairs = getValidationHandler().その他資料イメージファイル存在チェック();
             this.get_メッセージ(div, validPairs);
-        } else if (イメージ区分_3.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
+        } else if (IMAGE_OTHERFILE.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
                 get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名))) {
             ValidationMessageControlPairs validPairs = getValidationHandler().主治医意見書イメージファイル存在チェック();
             this.get_メッセージ(div, validPairs);
         }
     }
 
-    private HashMap<Integer, List<RString>> getFilePath(RString イメージ区分) {
-        imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
-        List<RString> イメージ管理資料_2 = this.イメージ管理資料();
-        List<RString> イメージ管理資料_3 = this.イメージ管理資料_3();
+    private HashMap<Integer, List<RString>> getFilePathMap(RString toCopyPath) {
+        List<RString> imageOpinionFileList = this.イメージ管理資料();
+        List<RString> imgaeOpinionFileBinaryList;
         HashMap<Integer, List<RString>> dataMap = new HashMap<>();
         int index = 1;
-        ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-        if (イメージ区分_1.equals(イメージ区分)) {
-            List<RString> イメージファイル = new ArrayList<>();
-            RString ファイル = new RString("G0001.png");
-            try {
-                ReadOnlySharedFileEntryDescriptor descriptor_2
-                        = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル),
-                                イメージ情報.getイメージ共有ファイルID());
-                SharedFile.copyToLocal(descriptor_2, new FilesystemPath(imagePath));
-                イメージファイル.add(Path.combinePath(イメージパス, ファイル));
-                イメージファイル.add(RString.EMPTY);
-                dataMap.put(index, イメージファイル);
-            } catch (Exception e) {
-                if (イメージ区分_1.equals(イメージ区分_2)) {
-                    return dataMap;
-                }
+        for (RString imageFile : imageOpinionFileList) {
+            List<RString> imageFileList = new ArrayList<>();
+            if (Directory.exists(Path.combinePath(toCopyPath, imageFile))) {
+                imageFileList.add(Path.combinePath(toCopyPath, imageFile));
             }
-        } else if (イメージ区分_2.equals(イメージ区分)) {
-            for (RString ファイル : イメージ管理資料_2) {
-                List<RString> イメージファイル = new ArrayList<>();
-                try {
-                    ReadOnlySharedFileEntryDescriptor descriptor_2
-                            = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル),
-                                    イメージ情報.getイメージ共有ファイルID());
-                    SharedFile.copyToLocal(descriptor_2, new FilesystemPath(imagePath.concat(ファイル)));
-                    イメージファイル.add(Path.combinePath(イメージパス, ファイル));
-                    if (ファイル.endsWith(ファイルまで.toString())) {
-                        イメージファイル.add(Path.combinePath(イメージパス, ファイル.replace(ファイルまで.toString(), ".png")));
-                    } else {
-                        イメージファイル.add(RString.EMPTY);
-                    }
-                    dataMap.put(index, イメージファイル);
-                    index = index + 1;
-                } catch (Exception e) {
-                    if (イメージ区分_1.equals(イメージ区分_2)) {
-                        return dataMap;
-                    }
-                }
+            if (imageFile.endsWith(ファイルまで.toString()) && !imageFileList.isEmpty()) {
+                imageFileList.add(Path.combinePath(toCopyPath, imageFile.replace(ファイルまで.toString(), ".png")));
+            } else {
+                imageFileList.add(RString.EMPTY);
             }
-        } else if (イメージ区分_3.equals(イメージ区分)) {
-            for (RString ファイル : イメージ管理資料_3) {
-                List<RString> イメージファイル = new ArrayList<>();
-                try {
-                    ReadOnlySharedFileEntryDescriptor descriptor_2
-                            = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル),
-                                    イメージ情報.getイメージ共有ファイルID());
-                    SharedFile.copyToLocal(descriptor_2, new FilesystemPath(imagePath.concat(ファイル)));
-                    イメージファイル.add(Path.combinePath(イメージパス, ファイル));
-                    if (ファイル.endsWith(ファイルまで.toString())) {
-                        イメージファイル.add(Path.combinePath(イメージパス, ファイル.replace(ファイルまで.toString(), ".png")));
-                    } else {
-                        イメージファイル.add(RString.EMPTY);
-                    }
-                    dataMap.put(index, イメージファイル);
-                    index = index + 1;
-                } catch (Exception e) {
-                    if (イメージ区分_1.equals(イメージ区分_2)) {
-                        return dataMap;
-                    }
-                }
-            }
+            imgaeOpinionFileBinaryList = createImageBinaryList(imageFileList);
+            dataMap.put(index, imgaeOpinionFileBinaryList);
+            index = index + 1;
         }
         return dataMap;
     }
@@ -268,8 +378,6 @@ public class ImageDisplay {
         イメージ.add(new RString("D1029.png"));
         イメージ.add(new RString("D1030.png"));
         イメージ.add(new RString("D1031.png"));
-        イメージ.add(new RString("E0001_BAK.png"));
-        イメージ.add(new RString("E0002_BAK.png"));
         return イメージ;
     }
 

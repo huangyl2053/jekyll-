@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsataishodataoutput.ShinsaTaishoDataOutPutResult;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsChikokuUmu;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.CodeMasterEucCsvEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
@@ -25,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiCh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NinteiShinsakaiIkenShurui;
@@ -56,7 +59,10 @@ public class CodeMasterOutputProcess extends SimpleBatchProcessBase {
 
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518005");
     private static final RString FILE_NAME = new RString("コードマスタ.csv");
-    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+
+    private static final int サービス状況コード長さ = 2;
+
     private ShinsaTaishoDataOutPutProcessParammeter processParamter;
     private RString eucFilePath;
     private FileSpoolManager manager;
@@ -77,6 +83,8 @@ public class CodeMasterOutputProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
+        writeサービス状況();
+        write一次判定警告コード();
         write介護認定審査会進捗状況();
         write資料作成済区分();
         write介護認定審査会議長区分コード();
@@ -121,6 +129,37 @@ public class CodeMasterOutputProcess extends SimpleBatchProcessBase {
                 new ShinsaTaishoDataOutPutResult().get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new ShinsaTaishoDataOutPutResult().get出力条件(processParamter));
         OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private void writeサービス状況() {
+        for (ServiceJokyo09B value : ServiceJokyo09B.values()) {
+            CodeMasterEucCsvEntity entity = new CodeMasterEucCsvEntity();
+
+            entity.setコード種別(new RString("サービス状況"));
+            entity.setコード(new RString(value.getテーブル内連番()).padZeroToLeft(サービス状況コード長さ));
+            entity.set名称(value.get帳票上の名称_予防給付());
+            List<RString> 単位 = value.get単位().split(RString.HALF_SPACE.toString());
+            if (Decimal.ZERO.intValue() < 単位.size()) {
+                entity.set備考1(単位.get(Decimal.ZERO.intValue()));
+            }
+            if (Decimal.ONE.intValue() < 単位.size()) {
+                entity.set備考2(単位.get(Decimal.ONE.intValue()));
+            }
+
+            eucCsvWriter.writeLine(entity);
+        }
+    }
+
+    private void write一次判定警告コード() {
+        for (IchijiHanteiKeikoku value : IchijiHanteiKeikoku.values()) {
+            CodeMasterEucCsvEntity entity = new CodeMasterEucCsvEntity();
+
+            entity.setコード種別(new RString("一次判定警告コード"));
+            entity.setコード(value.getコード());
+            entity.set名称(value.get名称());
+
+            eucCsvWriter.writeLine(entity);
+        }
     }
 
     private void write介護認定審査会進捗状況() {

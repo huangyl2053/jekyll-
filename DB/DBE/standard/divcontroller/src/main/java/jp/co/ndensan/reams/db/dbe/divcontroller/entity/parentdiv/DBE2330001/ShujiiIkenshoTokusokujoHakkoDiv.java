@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
@@ -184,6 +186,11 @@ public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdIryokikanShujii() {
         return this.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii();
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return this.getShujiiIkenshoTokusokujo().getCcdBunshoNo();
     }
 
     @JsonIgnore

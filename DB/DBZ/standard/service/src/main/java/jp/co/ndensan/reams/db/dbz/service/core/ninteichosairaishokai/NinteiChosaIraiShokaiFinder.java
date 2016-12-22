@@ -70,4 +70,18 @@ public class NinteiChosaIraiShokaiFinder {
         }
         return SearchResult.of(shokaiMaster, 0, false);
     }
+    
+    /**
+     * 定調査情報件数を取得の処理です。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return int 定調査情報件数
+     */
+    public int get認定調査情報件数(RString 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        NinteiChosaIraiShokaiParameter parameter = NinteiChosaIraiShokaiParameter.createParam(申請書管理番号);
+        INinteiChosaIraiShokaiMapper mapper = mapperProvider.create(INinteiChosaIraiShokaiMapper.class);
+        return mapper.get認定調査情報件数(parameter);
+
+    }
 }

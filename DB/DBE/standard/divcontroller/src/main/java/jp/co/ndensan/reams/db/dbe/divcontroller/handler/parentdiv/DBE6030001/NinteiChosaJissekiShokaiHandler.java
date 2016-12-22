@@ -34,9 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class NinteiChosaJissekiShokaiHandler {
 
-    private static final RString 集計表を発行する = new RString("btnPulish");
-    private static final RString CSVを出力する = new RString("btnShutsutyoku");
-    private static final RString 条件に戻る = new RString("btnBackToKensaku");
+    private static final RString KEY_基準日_初期値 = new RString("3");
     private final NinteiChosaJissekiShokaiDiv div;
 
     /**
@@ -52,6 +50,7 @@ public class NinteiChosaJissekiShokaiHandler {
      * 条件をクリアする」ボタンを押します。
      */
     public void onClick_BtnKensakuClear() {
+        div.getRadKijunbi().setSelectedValue(KEY_基準日_初期値);
         div.getChosaJisshibi().getTxtChosaJisshibi().clearFromValue();
         div.getChosaJisshibi().getTxtChosaJisshibi().clearToValue();
         div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
@@ -88,13 +87,15 @@ public class NinteiChosaJissekiShokaiHandler {
                     get保険者(data),
                     data.get調査委託先コード(),
                     data.get事業者名称(),
+                    data.get調査員コード(),
                     data.get調査員氏名(),
                     data.get被保険者番号(),
                     data.get被保険者氏名(),
+                    dataFormat(data.get認定調査依頼年月日()),
                     dataFormat(data.get認定調査実施年月日()),
+                    dataFormat(data.get認定調査入手年月日()),
                     ChosaKubun.toValue(data.get認定調査区分コード()).get名称(),
                     NinteiChousaIraiKubunCode.toValue(data.get認定調査依頼区分コード()).get名称(),
-                    data.get調査員コード(),
                     data.get申請書管理番号(),
                     data.get認定調査依頼履歴番号()
             );
@@ -144,9 +145,11 @@ public class NinteiChosaJissekiShokaiHandler {
         if (div.getChosaJisshibi().getTxtChosaJisshibi().getToValue() != null) {
             調査実施日TO = div.getChosaJisshibi().getTxtChosaJisshibi().getToValue().toDateString();
         }
-        param.setChosajisshibiFrom(調査実施日FROM);
-        param.setChosajisshibiTo(調査実施日TO);
+        param.setChosaKijunbiFrom(調査実施日FROM);
+        param.setChosaKijunbiTo(調査実施日TO);
+        param.setChosaKijunbiKubun(div.getRadKijunbi().getSelectedKey());
         param.setHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
+        param.setShokisaiHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

@@ -60,7 +60,7 @@ public class INinteichosaTokusokujyoRelateMapperTest extends DbeTestDacBase {
     public void 認定調査督促対象者一覧表データ取得SQLにエラーがないこと() {
         NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter param
                 = new NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter(
-                        null, null, null, null, null, null, FlexibleDate.MIN, FlexibleDate.MAX, null);
+                        null, null, null, FlexibleDate.MIN, FlexibleDate.MAX);
         List<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity> result = sut.select認定調査督促対象者一覧表ByKey(param);
         assertTrue(true);
     }

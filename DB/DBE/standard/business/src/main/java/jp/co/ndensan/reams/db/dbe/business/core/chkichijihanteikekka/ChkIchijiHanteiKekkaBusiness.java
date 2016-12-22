@@ -15,6 +15,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJo
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyo.ServiceJokyo99A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag.ServiceJokyoFlag02A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag.ServiceJokyoFlag06A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag.ServiceJokyoFlag09A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag.ServiceJokyoFlag09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag.ServiceJokyoFlag99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser03;
@@ -1053,7 +1058,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo99A.特定施設入所者生活介護.get帳票上の名称());
         bodyItem.setサービス名称11(ServiceJokyo99A.福祉用具貸与.get帳票上の名称());
         bodyItem.setサービス名称12(ServiceJokyo99A.福祉用具購入.get帳票上の名称());
-        bodyItem.setサービス名称13(ServiceJokyo99A.住宅改修.get帳票上の名称());
+        bodyItem.setサービス名称13(ServiceJokyoFlag99A.住宅改修.get名称());
         bodyItem.setサービス名称14(RString.EMPTY);
         bodyItem.setサービス名称15(RString.EMPTY);
         bodyItem.setサービス名称16(RString.EMPTY);
@@ -1091,7 +1096,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo02A.特定施設入所者生活介護.get帳票上のラベル名称());
         bodyItem.setサービス名称11(ServiceJokyo02A.福祉用具貸与.get帳票上のラベル名称());
         bodyItem.setサービス名称12(ServiceJokyo02A.福祉用具購入.get帳票上のラベル名称());
-        bodyItem.setサービス名称13(ServiceJokyo02A.住宅改修.get帳票上のラベル名称());
+        bodyItem.setサービス名称13(ServiceJokyoFlag02A.住宅改修.get名称());
         bodyItem.setサービス名称14(RString.EMPTY);
         bodyItem.setサービス名称15(RString.EMPTY);
         bodyItem.setサービス名称16(RString.EMPTY);
@@ -1129,7 +1134,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo09B.特定施設入所者生活介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称11(ServiceJokyo09B.福祉用具貸与.get帳票上の名称_予防給付());
         bodyItem.setサービス名称12(ServiceJokyo09B.福祉用具購入.get帳票上の名称_予防給付());
-        bodyItem.setサービス名称13(ServiceJokyo09B.住宅改修.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称13(ServiceJokyoFlag09B.住宅改修.get名称());
         bodyItem.setサービス名称14(ServiceJokyo09B.認知症対応型通所介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称15(ServiceJokyo09B.小規模多機能型居宅介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称16(ServiceJokyo09B.認知症対応型共同生活介護.get帳票上の名称_予防給付());
@@ -1167,7 +1172,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo09A.特定施設入所者生活介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称11(ServiceJokyo09A.福祉用具貸与.get帳票上の名称_予防給付());
         bodyItem.setサービス名称12(ServiceJokyo09A.福祉用具購入.get帳票上の名称_予防給付());
-        bodyItem.setサービス名称13(ServiceJokyo09A.住宅改修.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称13(ServiceJokyoFlag09A.住宅改修.get名称());
         bodyItem.setサービス名称14(ServiceJokyo09A.認知症対応型通所介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称15(ServiceJokyo09A.小規模多機能型居宅介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称16(ServiceJokyo09A.認知症対応型共同生活介護.get帳票上の名称_予防給付());
@@ -1205,7 +1210,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo06A.特定施設入所者生活介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称11(ServiceJokyo06A.福祉用具貸与.get帳票上の名称_予防給付());
         bodyItem.setサービス名称12(ServiceJokyo06A.福祉用具購入.get帳票上の名称_予防給付());
-        bodyItem.setサービス名称13(ServiceJokyo06A.住宅改修.get帳票上の名称_予防給付());
+        bodyItem.setサービス名称13(ServiceJokyoFlag06A.住宅改修.get名称());
         bodyItem.setサービス名称14(ServiceJokyo06A.認知症対応型通所介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称15(ServiceJokyo06A.小規模多機能型居宅介護.get帳票上の名称_予防給付());
         bodyItem.setサービス名称16(ServiceJokyo06A.認知症対応型共同生活介護.get帳票上の名称_予防給付());
@@ -1258,7 +1263,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo09B.特定施設入所者生活介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称11(ServiceJokyo09B.福祉用具貸与.get帳票上の名称_介護給付());
         bodyItem.setサービス名称12(ServiceJokyo09B.福祉用具購入.get帳票上の名称_介護給付());
-        bodyItem.setサービス名称13(ServiceJokyo09B.住宅改修.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称13(ServiceJokyoFlag09B.住宅改修.get名称());
         bodyItem.setサービス名称14(ServiceJokyo09B.夜間対応型訪問介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称15(ServiceJokyo09B.認知症対応型通所介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称16(ServiceJokyo09B.小規模多機能型居宅介護.get帳票上の名称_介護給付());
@@ -1306,7 +1311,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo09A.特定施設入所者生活介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称11(ServiceJokyo09A.福祉用具貸与.get帳票上の名称_介護給付());
         bodyItem.setサービス名称12(ServiceJokyo09A.福祉用具購入.get帳票上の名称_介護給付());
-        bodyItem.setサービス名称13(ServiceJokyo09A.住宅改修.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称13(ServiceJokyoFlag09A.住宅改修.get名称());
         bodyItem.setサービス名称14(ServiceJokyo09A.夜間対応型訪問介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称15(ServiceJokyo09A.認知症対応型通所介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称16(ServiceJokyo09A.小規模多機能型居宅介護.get帳票上の名称_介護給付());
@@ -1354,7 +1359,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo06A.特定施設入所者生活介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称11(ServiceJokyo06A.福祉用具貸与.get帳票上の名称_介護給付());
         bodyItem.setサービス名称12(ServiceJokyo06A.福祉用具購入.get帳票上の名称_介護給付());
-        bodyItem.setサービス名称13(ServiceJokyo06A.住宅改修.get帳票上の名称_介護給付());
+        bodyItem.setサービス名称13(ServiceJokyoFlag06A.住宅改修.get名称());
         bodyItem.setサービス名称14(ServiceJokyo06A.夜間対応型訪問介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称15(ServiceJokyo06A.認知症対応型通所介護.get帳票上の名称_介護給付());
         bodyItem.setサービス名称16(ServiceJokyo06A.小規模多機能型居宅介護.get帳票上の名称_介護給付());
@@ -1411,7 +1416,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo99A.特定施設入所者生活介護.get帳票上の名称());
         bodyItem.setサービス名称11(ServiceJokyo99A.福祉用具貸与.get帳票上の名称());
         bodyItem.setサービス名称12(ServiceJokyo99A.福祉用具購入.get帳票上の名称());
-        bodyItem.setサービス名称13(ServiceJokyo99A.住宅改修.get帳票上の名称());
+        bodyItem.setサービス名称13(ServiceJokyoFlag99A.住宅改修.get名称());
         bodyItem.setサービス名称14(RString.EMPTY);
         bodyItem.setサービス名称15(RString.EMPTY);
         bodyItem.setサービス名称16(RString.EMPTY);
@@ -1459,7 +1464,7 @@ public final class ChkIchijiHanteiKekkaBusiness {
         bodyItem.setサービス名称10(ServiceJokyo02A.特定施設入所者生活介護.get帳票上のラベル名称());
         bodyItem.setサービス名称11(ServiceJokyo02A.福祉用具貸与.get帳票上のラベル名称());
         bodyItem.setサービス名称12(ServiceJokyo02A.福祉用具購入.get帳票上のラベル名称());
-        bodyItem.setサービス名称13(ServiceJokyo02A.住宅改修.get帳票上のラベル名称());
+        bodyItem.setサービス名称13(ServiceJokyoFlag02A.住宅改修.get名称());
         bodyItem.setサービス名称14(RString.EMPTY);
         bodyItem.setサービス名称15(RString.EMPTY);
         bodyItem.setサービス名称16(RString.EMPTY);

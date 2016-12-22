@@ -38,7 +38,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE0100001",
      "toLayoutTitle": "要介護認定申請検索",
-     "toState": "申請検索"
+     "toState": "要介護認定進捗データ出力へ"
     },
     {
      "id": "4",

@@ -50,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class NinteichosaKekkaNyushuHandler {
 
     private final NinteichosaKekkaNyushuDiv div;
-    private static final RString 使用する = new RString("1");
     private static final RString 調査結果を登録するボタン = new RString("btnKekkaTouroku");
     private static final RString 調査票入手を完了するボタン = new RString("btnChousaResultKanryo");
     private static final int INT_0 = 0;
@@ -93,10 +92,11 @@ public class NinteichosaKekkaNyushuHandler {
      * 対象者一覧グリッドに対象者を設定します。
      */
     public void initialDataGrid() {
+        RString 状態 = div.getRadJotaiKubun().getSelectedKey();
         Decimal 最大取得件数 = div.getTxtMaxKensu().getValue();
         SearchResult<CyoSaNyuSyuBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
                 get調査入手モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, 最大取得件数));
+                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大取得件数));
         List<CyoSaNyuSyuBusiness> 調査入手List = searchResult.records();
         if (!調査入手List.isEmpty()) {
             ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().

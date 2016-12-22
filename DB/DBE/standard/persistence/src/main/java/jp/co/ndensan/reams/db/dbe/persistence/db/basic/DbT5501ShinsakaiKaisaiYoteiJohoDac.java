@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoho.gogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -49,7 +47,7 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501Shin
         return accessor.select().
                 table(DbT5501ShinsakaiKaisaiYoteiJoho.class).
                 where(
-                        eq(shinsakaiKaisaiNo, 介護認定審査会開催番号)).
+                        eq(DbT5501ShinsakaiKaisaiYoteiJoho.shinsakaiKaisaiNo, 介護認定審査会開催番号)).
                 toObject(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
     }
 
@@ -119,7 +117,7 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501Shin
         return accessor.select().
                 table(DbT5501ShinsakaiKaisaiYoteiJoho.class).
                 where(
-                        eq(gogitaiNo, 合議体番号)
+                        eq(DbT5501ShinsakaiKaisaiYoteiJoho.gogitaiNo, 合議体番号)
                 ).getCount();
     }
 }

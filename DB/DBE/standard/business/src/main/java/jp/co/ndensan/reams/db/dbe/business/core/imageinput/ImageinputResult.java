@@ -97,7 +97,11 @@ public class ImageinputResult {
      * @return T5115_イメージ共有ファイルID
      */
     public RDateTime getT5115_イメージ共有ファイルID() {
-        return entity.getT5115_イメージ共有ファイルID();
+        if (entity.getT5115_イメージ共有ファイルID() != null) {
+            return entity.getT5115_イメージ共有ファイルID();
+        } else {
+            return RDateTime.MIN;
+        }
     }
 
     /**
