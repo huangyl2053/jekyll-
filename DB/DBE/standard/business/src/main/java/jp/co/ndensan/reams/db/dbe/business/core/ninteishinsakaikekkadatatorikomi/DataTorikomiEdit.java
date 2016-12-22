@@ -174,7 +174,7 @@ public class DataTorikomiEdit {
                                            ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(entity.get申請書管理番号()));
         dbt5102Entity.setNijiHanteiYMD(entity.get今回_二次判定日() == null
                                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_二次判定日()));
-        dbt5102Entity.setNijiHanteiYokaigoJotaiKubunCode(Code.EMPTY);//要介護状態区分？
+        dbt5102Entity.setNijiHanteiYokaigoJotaiKubunCode(entity.get今回_二次判定() == null ? Code.EMPTY : new Code(entity.get今回_二次判定()));
         dbt5102Entity.setNijiHanteiNinteiYukoKikan(entity.get今回_認定期間() == null ? 0 : entity.get今回_認定期間().toInt());
         dbt5102Entity.setNijiHanteiNinteiYukoKaishiYMD(entity.get今回_認定有効開始年月日() == null
                                                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_認定有効開始年月日()));
@@ -183,10 +183,10 @@ public class DataTorikomiEdit {
         dbt5102Entity.setShinsakaiShiryoSakuseiYMD(審査会資料作成年月日);
         dbt5102Entity.setShinsakaiKaisaiNo(entity.get今回_審査会開催番号() == null ? RString.EMPTY : entity.get今回_審査会開催番号());
         dbt5102Entity.setShinsakaiIken(entity.get今回_審査会意見() == null ? RString.EMPTY : entity.get今回_審査会意見());
-        dbt5102Entity.setIchijiHanteiKekkaHenkoRiyu(RString.EMPTY);//変更理由？
+        dbt5102Entity.setIchijiHanteiKekkaHenkoRiyu(RString.EMPTY);
         dbt5102Entity.setYokaigoJotaizoReiCode(entity.get今回_状態像() == null ? Code.EMPTY : new Code(entity.get今回_状態像()));
         dbt5102Entity.setShinsakaiMemo(entity.get今回_審査会メモ() == null ? RString.EMPTY : entity.get今回_審査会メモ());
-        dbt5102Entity.setNinteishinsakaiIkenShurui(RString.EMPTY);//意見種類？
+        dbt5102Entity.setNinteishinsakaiIkenShurui(RString.EMPTY);
         dbt5102Entity.setNijiHanteiKekkaInputHoho(new Code("2"));
         dbt5102Entity.setNijiHanteiKekkaInputYMD(nowDate);
         return dbt5102Entity;
