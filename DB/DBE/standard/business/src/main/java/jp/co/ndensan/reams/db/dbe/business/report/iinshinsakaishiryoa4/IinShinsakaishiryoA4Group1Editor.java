@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa4;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class IinShinsakaishiryoA4Group1Editor implements IIinShinsakaishiryoA4Editor {
 
+    private static final int INT_1 = 1;
     private static final int INT_4 = 4;
     private final JimuShinsakaishiryoBusiness business;
 
@@ -66,7 +66,7 @@ public class IinShinsakaishiryoA4Group1Editor implements IIinShinsakaishiryoA4Ed
         source.listShinsei_11 = business.get基準時間();
         source.listShinsei_12 = RString.EMPTY;
         source.listShinsei_13 = RString.EMPTY;
-        source.layout = Layouts.鑑;
+        source.layout = INT_1;
         return source;
     }
 

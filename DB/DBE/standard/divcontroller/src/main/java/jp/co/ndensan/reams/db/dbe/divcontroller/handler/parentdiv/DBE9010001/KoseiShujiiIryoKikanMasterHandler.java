@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 主治医医療機関マスタ画面のハンドラークラスです。
@@ -76,11 +77,12 @@ public class KoseiShujiiIryoKikanMasterHandler {
     /**
      * 主治医医療機関一覧へのデータを設定します。
      *
-     * @param koseiShujiiIryoKikanMasterList 主治医医療機関一覧List
+     * @param 主治医医療機関情報一覧 主治医医療機関情報一覧
+     * @param 最大表示件数 最大表示件数
      */
-    public void setShujiKikanJohoIchiran(List<KoseiShujiiIryoKikanMasterBusiness> koseiShujiiIryoKikanMasterList) {
+    public void setShujiKikanJohoIchiran(SearchResult<KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報一覧, Decimal 最大表示件数) {
         List<dgShujiiIchiran_Row> dataGridList = new ArrayList<>();
-        for (KoseiShujiiIryoKikanMasterBusiness koseiShujiiIryoKikanMaster : koseiShujiiIryoKikanMasterList) {
+        for (KoseiShujiiIryoKikanMasterBusiness koseiShujiiIryoKikanMaster : 主治医医療機関情報一覧.records()) {
             dataGridList.add(createDgShujiiIchiranRow(
                     RString.EMPTY,
                     koseiShujiiIryoKikanMaster.get市町村(),
@@ -98,6 +100,13 @@ public class KoseiShujiiIryoKikanMasterHandler {
                     koseiShujiiIryoKikanMaster.is状況フラグ()));
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
+        if (主治医医療機関情報一覧.exceedsLimit()) {
+            div.getDgShujiiIchiran().getGridSetting().setLimitRowCount(主治医医療機関情報一覧.records().size());
+            div.getDgShujiiIchiran().getGridSetting().setSelectedRowCount(主治医医療機関情報一覧.totalCount());
+        } else {
+            div.getDgShujiiIchiran().getGridSetting().setLimitRowCount(最大表示件数.intValue());
+            div.getDgShujiiIchiran().getGridSetting().setSelectedRowCount(主治医医療機関情報一覧.totalCount());
+        }
     }
 
     private dgShujiiIchiran_Row createDgShujiiIchiranRow(

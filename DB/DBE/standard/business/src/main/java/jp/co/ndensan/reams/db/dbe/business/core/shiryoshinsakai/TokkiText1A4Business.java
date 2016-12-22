@@ -367,7 +367,7 @@ public class TokkiText1A4Business {
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString filename) {
-        if (sharedFileId == null) {
+        if (sharedFileId == null || RString.isNullOrEmpty(filename)) {
             return RString.EMPTY;
         }
         ReadOnlySharedFileEntryDescriptor descriptor

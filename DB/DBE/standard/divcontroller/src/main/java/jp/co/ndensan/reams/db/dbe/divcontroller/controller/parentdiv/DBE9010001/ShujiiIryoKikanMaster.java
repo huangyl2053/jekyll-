@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 主治医医療機関情報処理のクラスです。
@@ -184,9 +185,9 @@ public class ShujiiIryoKikanMaster {
                         div.getTxtSaidaiHyojiKensu().getValue(),
                         構成市町村マスタ市町村コード重複種別
                 );
-        List<KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報List
-                = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter).records();
-        getHandler(div).setShujiKikanJohoIchiran(主治医医療機関情報List);
+        SearchResult<KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報一覧
+                = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter);
+        getHandler(div).setShujiKikanJohoIchiran(主治医医療機関情報一覧, div.getTxtSaidaiHyojiKensu().getValue());
         List<ShujiiIryoKikanJoho> 主治医医療機関マスタList
                 = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoList(parameter).records();
         ViewStateHolder.put(ViewStateKeys.主治医医療機関マスタ検索結果, Models.create(主治医医療機関マスタList));

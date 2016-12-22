@@ -20,18 +20,21 @@ import lombok.Setter;
 public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
-    private static final String CHOSA_JISSHIBI_TO = "chosajisshibiTo";
-    private static final String CHOSA_JISSHIBI_FROM = "chosajisshibiFrom";
+    private static final String CHOSA_KIJUNBI_TO = "chosaKijunbiTo";
+    private static final String CHOSA_KIJUNBI_FROM = "chosaKijunbiFrom";
+    private static final String CHOSA_KIJUNBI_KUBUN = "chosaKijunbiKubun";
     private static final String HOKENSYA = "hokensya";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8314555813503538349L;
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
-    @BatchParameter(key = CHOSA_JISSHIBI_TO, name = "調査実施日FROM")
-    private RString chosajisshibiTo;
-    @BatchParameter(key = CHOSA_JISSHIBI_FROM, name = "調査実施日TO")
-    private RString chosajisshibiFrom;
+    @BatchParameter(key = CHOSA_KIJUNBI_TO, name = "基準日TO")
+    private RString chosaKijunbiTo;
+    @BatchParameter(key = CHOSA_KIJUNBI_FROM, name = "基準日FROM")
+    private RString chosaKijunbiFrom;
+    @BatchParameter(key = CHOSA_KIJUNBI_KUBUN, name = "基準日区分")
+    private RString chosaKijunbiKubun;
     @BatchParameter(key = HOKENSYA, name = "保険者")
     private RString hokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
@@ -47,19 +50,22 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
      * コンストラクタです。
      *
      * @param syohyoSyuturyoku 帳票出力区分
-     * @param chosajisshibiFrom 調査実施日FROM
-     * @param chosajisshibiTo 調査実施日TO
+     * @param chosaKijunbiFrom 基準日FROM
+     * @param chosaKijunbiTo 基準日TO
+     * @param chosaKijunbiKubun 基準日区分
      * @param hokensya 保険者
      * @param keyJoho キー情報Entityリスト
      */
     public DBE601002_NinteichosaJissekiParameter(RString syohyoSyuturyoku,
-            RString chosajisshibiFrom,
-            RString chosajisshibiTo,
+            RString chosaKijunbiFrom,
+            RString chosaKijunbiTo,
+            RString chosaKijunbiKubun,
             RString hokensya,
             List<ChosahyoJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
-        this.chosajisshibiFrom = chosajisshibiFrom;
-        this.chosajisshibiTo = chosajisshibiTo;
+        this.chosaKijunbiFrom = chosaKijunbiFrom;
+        this.chosaKijunbiTo = chosaKijunbiTo;
+        this.chosaKijunbiKubun = chosaKijunbiKubun;
         this.hokensya = hokensya;
         this.keyJoho = keyJoho;
     }
@@ -71,8 +77,9 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
      */
     public ChosahyoJissekiIchiranProcessParameter toProcessParamter() {
         return new ChosahyoJissekiIchiranProcessParameter(syohyoSyuturyoku,
-                chosajisshibiFrom,
-                chosajisshibiTo,
+                chosaKijunbiFrom,
+                chosaKijunbiTo,
+                chosaKijunbiKubun,
                 hokensya,
                 keyJoho);
     }

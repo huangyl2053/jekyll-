@@ -99,12 +99,30 @@ public class ChosahyoJissekiIchiran {
     }
 
     /**
+     * 認定調査依頼年月日を取得します。
+     *
+     * @return 認定調査依頼年月日
+     */
+    public RString get認定調査依頼年月日() {
+        return entity.get認定調査依頼年月日();
+    }
+
+    /**
      * 認定調査実施年月日を取得します。
      *
      * @return 認定調査実施年月日
      */
     public RString get認定調査実施年月日() {
         return entity.get認定調査実施年月日();
+    }
+
+    /**
+     * 認定調査入手年月日を取得します。
+     *
+     * @return 認定調査依頼年月日
+     */
+    public RString get認定調査入手年月日() {
+        return entity.get認定調査受領年月日();
     }
 
     /**
