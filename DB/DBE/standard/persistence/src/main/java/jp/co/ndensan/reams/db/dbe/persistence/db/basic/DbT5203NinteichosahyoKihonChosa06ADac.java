@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import static java.util.Objects.requireNonNull;
@@ -27,8 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8429
  */
-public class DbT5203NinteichosahyoKihonChosa06ADac  implements ISaveable<DbT5203NinteichosahyoKihonChosa06AEntity> {
-         @InjectSession
+public class DbT5203NinteichosahyoKihonChosa06ADac implements ISaveable<DbT5203NinteichosahyoKihonChosa06AEntity> {
+
+    @InjectSession
     private SqlSession session;
 
     /**
@@ -41,9 +41,9 @@ public class DbT5203NinteichosahyoKihonChosa06ADac  implements ISaveable<DbT5203
      */
     @Transaction
     public DbT5203NinteichosahyoKihonChosa06AEntity selectByKey(
-            ShinseishoKanriNo 申請書管理番号, 
-            int 認定調査依頼履歴番号 
-            ) throws NullPointerException {
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号
+    ) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
 
@@ -51,7 +51,7 @@ public class DbT5203NinteichosahyoKihonChosa06ADac  implements ISaveable<DbT5203
 
         return accessor.select().
                 table(DbT5203NinteichosahyoKihonChosa06A.class).
-                 where(and(
+                where(and(
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ninteichosaRirekiNo, 認定調査依頼履歴番号))).
                 toObject(DbT5203NinteichosahyoKihonChosa06AEntity.class);

@@ -63,7 +63,6 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
-    @BatchWriter
     private CsvWriter<ShujiiIkenTokusokujoCsvEntity> csvWriter;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -117,7 +116,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
             eucFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
             csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8).setNewLine(NewLine.CRLF).hasHeader(false).build();
+                    setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).hasHeader(false).build();
         }
     }
 

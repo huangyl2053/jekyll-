@@ -126,6 +126,7 @@ public class CreateTargetHandler {
             if (list.get認定申請区分_法令コード() != null && !list.get認定申請区分_法令コード().value().isEmpty()) {
                 row.setShinseiKubunHo(NinteiShinseiHoreiCode.toValue(list.get認定申請区分_法令コード().value()).get名称());
             }
+            row.getNijiHanteiBi().setValue(getNull(list.get二次判定日()));
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(list.get厚労省IF識別コード().value())) {
                 row.setNijiHanteiKekka(YokaigoJotaiKubun99.toValue(list.get状態区分コード()).get名称());
             }

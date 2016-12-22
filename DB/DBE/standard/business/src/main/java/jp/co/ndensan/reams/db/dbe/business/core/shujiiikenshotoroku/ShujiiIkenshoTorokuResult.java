@@ -75,7 +75,11 @@ public class ShujiiIkenshoTorokuResult {
      * @return 電話番号
      */
     public TelNo get電話番号() {
-        return entity.getDbt5911Entity().getTelNo();
+        if (entity.getDbt5911Entity() == null) {
+            return new TelNo(RString.EMPTY);
+        } else {
+            return entity.getDbt5911Entity().getTelNo();
+        }
     }
 
     /**
@@ -97,7 +101,11 @@ public class ShujiiIkenshoTorokuResult {
      * @return FAX番号
      */
     public TelNo getFAX番号() {
-        return entity.getDbt5911Entity().getFaxNo();
+        if (entity.getDbt5911Entity() == null) {
+            return new TelNo(RString.EMPTY);
+        } else {
+            return entity.getDbt5911Entity().getFaxNo();
+        }
     }
 
     /**

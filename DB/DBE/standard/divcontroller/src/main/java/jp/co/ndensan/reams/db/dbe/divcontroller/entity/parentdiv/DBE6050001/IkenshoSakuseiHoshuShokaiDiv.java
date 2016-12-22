@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -83,13 +85,8 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMaxKensu() {
-        return this.getSakuseiIraibi().getTxtMaxKensu();
-    }
-
-    @JsonIgnore
-    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
-        this.getSakuseiIraibi().setTxtMaxKensu(txtMaxKensu);
+    public IHokenshaListDiv getCcdHokensya() {
+        return this.getSakuseiIraibi().getCcdHokensya();
     }
 
     @JsonIgnore
@@ -103,6 +100,16 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaxKensu() {
+        return this.getSakuseiIraibi().getTxtMaxKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.getSakuseiIraibi().setTxtMaxKensu(txtMaxKensu);
+    }
+
+    @JsonIgnore
     public DataGrid<dgIkenshoSakuseiHoshu_Row> getDgIkenshoSakuseiHoshu() {
         return this.getIkenshoSakuseiHoshu().getDgIkenshoSakuseiHoshu();
     }
@@ -110,6 +117,16 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     @JsonIgnore
     public void  setDgIkenshoSakuseiHoshu(DataGrid<dgIkenshoSakuseiHoshu_Row> dgIkenshoSakuseiHoshu) {
         this.getIkenshoSakuseiHoshu().setDgIkenshoSakuseiHoshu(dgIkenshoSakuseiHoshu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTotalCount() {
+        return this.getIkenshoSakuseiHoshu().getTxtTotalCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.getIkenshoSakuseiHoshu().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore

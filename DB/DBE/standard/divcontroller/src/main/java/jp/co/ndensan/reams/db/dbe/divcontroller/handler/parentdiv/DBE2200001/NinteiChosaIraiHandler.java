@@ -126,6 +126,7 @@ public class NinteiChosaIraiHandler {
     private static final RString DDL_KEY0 = new RString("key0");
     private static final RString DDL_KEY1 = new RString("key1");
     private static final RString DDL_KEY2 = new RString("key2");
+    private static final RString 中野市の地方公共団体コード = new RString("202118");
     private final NinteiChosaIraiDiv div;
 
     /**
@@ -798,11 +799,11 @@ public class NinteiChosaIraiHandler {
     }
 
     /**
-     * 認定調査依頼書印刷用パラメータを作成します。
+     * 認定調査依頼書Itemを作成します。
      *
-     * @return 認定調査依頼書印刷用パラメータ
+     * @return ChosaIraishoHeadItemのList
      */
-    public List<ChosaIraishoHeadItem> create認定調査依頼書印刷用パラメータ() {
+    public List<ChosaIraishoHeadItem> create認定調査依頼書Item() {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
@@ -841,9 +842,8 @@ public class NinteiChosaIraiHandler {
                     調査員情報リスト.add(調査員情報);
                 }
             }
-            Map<Integer, RString> 通知文
-                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
-            RString homonChosasakiJusho = row.getHomonChosasakiJusho();
+            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
+                    ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, Integer.parseInt(row.getShichosonCode().toString()));
             RString 認定調査提出期限 = RString.EMPTY;
             RString 認定調査委期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             RString 認定調査作成期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -856,16 +856,22 @@ public class NinteiChosaIraiHandler {
                 } else if (div.getRadkigen().getSelectedKey().equals(提出期限_空欄)) {
                     認定調査提出期限 = RString.EMPTY;
                 } else if (div.getRadkigen().getSelectedKey().equals(提出期限_共通日付)) {
-                    認定調査提出期限 = div.getTxtkigenymd().getValue().plusDay(Integer.parseInt(認定調査作成期限日数.toString()))
-                            .wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                    認定調査提出期限 = div.getTxtkigenymd().getValue().wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 }
             } else {
                 認定調査提出期限 = !RString.isNullOrEmpty(row.getNinteiShinseiYMDKoShin())
-                        ? new RString(new FlexibleDate(row.getNinteiShinseiYMDKoShin()).plusDay(Integer.parseInt(認定調査作成期限日数.toString())).toString()) : RString.EMPTY;
+                        ? new RString(new FlexibleDate(row.getNinteiShinseiYMDKoShin()).plusDay(Integer.parseInt(認定調査作成期限日数.toString())).toString())
+                        : RString.EMPTY;
             }
 
-            BunshoNo 文書番号 = BunshoNoFinderFactory
-                    .createInstance().get文書番号管理(ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
+            RString 文書番号 = RString.EMPTY;
+            if (中野市の地方公共団体コード.equals(row.getShichosonCode())) {
+                BunshoNo 文書番号管理
+                        = BunshoNoFinderFactory.createInstance().get文書番号管理(ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
+                if (文書番号 != null) {
+                    文書番号 = 文書番号管理.edit文書番号();
+                }
+            }
             for (ChosainJoho 調査員情報 : 調査員情報リスト) {
                 YubinNo 郵便番号 = 調査員情報.get郵便番号();
                 AtenaJusho 住所 = 調査員情報.get住所();
@@ -880,7 +886,7 @@ public class NinteiChosaIraiHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
-                        (文書番号 != null) ? 文書番号.edit文書番号() : RString.EMPTY,
+                        文書番号,
                         (郵便番号 != null) ? 郵便番号.getEditedYubinNo() : RString.EMPTY,
                         (住所 != null) ? 住所.value() : RString.EMPTY,
                         調査員情報.get所属機関名称(),
@@ -888,8 +894,8 @@ public class NinteiChosaIraiHandler {
                         get名称付与(),
                         getカスタマーバーコード(調査員情報),
                         RString.EMPTY,
-                        ConfigNameDBE.認定調査依頼書.get名称(),
-                        通知文.get(1),
+                        (通知文.containsKey(0)) ? 通知文.get(0) : RString.EMPTY,
+                        (通知文.containsKey(1)) ? 通知文.get(1) : RString.EMPTY,
                         被保険者番号リスト.get(0),
                         被保険者番号リスト.get(1),
                         被保険者番号リスト.get(2),
@@ -912,12 +918,12 @@ public class NinteiChosaIraiHandler {
                         row.getJusho(),
                         row.getTelNo(),
                         editYubinNoToIchiran(row.getHomonChosasakiYubinNo()),
-                        homonChosasakiJusho,
+                        row.getHomonChosasakiJusho(),
                         row.getHomonChosasakiName(),
                         row.getHomonChosasakiTelNo(),
                         row.getNinteiShinseiYMDKoShin(),
                         認定調査提出期限,
-                        通知文.get(2)
+                        (通知文.containsKey(2)) ? 通知文.get(2) : RString.EMPTY
                 );
                 chosaIraishoHeadItemList.add(item);
             }
@@ -1060,113 +1066,20 @@ public class NinteiChosaIraiHandler {
                     get要支援詳細(前回要介護状態区分コード),
                     get要介護(前回要介護状態区分コード),
                     get要介護詳細(前回要介護状態区分コード),
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY);
-            itemList.add(item);
-            List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
-            item = createChosahyoKihonchosa(証記載保険者番号リスト, ninteiShinseiDay, 被保険者番号リスト);
+                    被保険者番号リスト.get(0),
+                    被保険者番号リスト.get(1),
+                    被保険者番号リスト.get(2),
+                    被保険者番号リスト.get(INDEX_3),
+                    被保険者番号リスト.get(INDEX_4),
+                    被保険者番号リスト.get(INDEX_5),
+                    被保険者番号リスト.get(INDEX_6),
+                    被保険者番号リスト.get(INDEX_7),
+                    被保険者番号リスト.get(INDEX_8),
+                    被保険者番号リスト.get(INDEX_9));
             itemList.add(item);
 
         }
         return itemList;
-    }
-
-    private ChosahyoGaikyochosaItem createChosahyoKihonchosa(List<RString> 証記載保険者番号リスト, RString ninteiShinseiDay, List<RString> 被保険者番号リスト) {
-        ChosahyoGaikyochosaItem item;
-        item = new ChosahyoGaikyochosaItem(
-                証記載保険者番号リスト.get(0),
-                証記載保険者番号リスト.get(1),
-                証記載保険者番号リスト.get(2),
-                証記載保険者番号リスト.get(INDEX_3),
-                証記載保険者番号リスト.get(INDEX_4),
-                証記載保険者番号リスト.get(INDEX_5),
-                ninteiShinseiDay.substring(1, 2),
-                ninteiShinseiDay.substring(2, INDEX_3),
-                ninteiShinseiDay.substring(INDEX_4, INDEX_5),
-                ninteiShinseiDay.substring(INDEX_5, INDEX_6),
-                ninteiShinseiDay.substring(INDEX_7, INDEX_8),
-                ninteiShinseiDay.substring(INDEX_8),
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                被保険者番号リスト.get(0),
-                被保険者番号リスト.get(1),
-                被保険者番号リスト.get(2),
-                被保険者番号リスト.get(INDEX_3),
-                被保険者番号リスト.get(INDEX_4),
-                被保険者番号リスト.get(INDEX_5),
-                被保険者番号リスト.get(INDEX_6),
-                被保険者番号リスト.get(INDEX_7),
-                被保険者番号リスト.get(INDEX_8),
-                被保険者番号リスト.get(INDEX_9));
-        return item;
     }
 
     private RString get要支援詳細(RString yokaigoJotaiKubun) {

@@ -207,9 +207,9 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                     DecimalFormatter.toコンマ区切りRString(総合計_税控除額, ZERO),
                     DecimalFormatter.toコンマ区切りRString(総合計_報酬合計, ZERO));
             csvWriter.writeLine(総合計);
-            csvWriter.close();
-            fileSpoolManager.spool(eucFilePath);
         }
+        csvWriter.close();
+        fileSpoolManager.spool(eucFilePath);
         
         Association 導入団体 = AssociationFinderFactory.createInstance().getAssociation();
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {

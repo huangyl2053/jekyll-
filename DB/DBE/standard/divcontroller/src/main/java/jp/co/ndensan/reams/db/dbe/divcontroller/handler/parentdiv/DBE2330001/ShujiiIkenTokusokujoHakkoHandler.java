@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenshoTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikentokusokujo.ShujiiIkenTokusokujoFinder;
@@ -80,6 +81,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getHakkoJoken().getRadChohyoSentaku().setSelectedKey(RADIOBUTTONKEY0);
         div.getShujiiIkenshoTokusokujo().getTxtHakkoDay().setValue(RDate.getNowDate());
+        div.getCcdBunshoNo().initialize(ReportIdDBE.DBE233001.getReportId());
     }
 
     /**
@@ -119,7 +121,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
                 ? 選択された : 未選択);
         tempData.setTemp_主治医意見書督促対象者一覧表(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY1)
                 ? 選択された : 未選択);
-        tempData.setTemp_CSV出力(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().contains(RADIOBUTTONKEY1)
+        tempData.setTemp_CSV出力(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkCSVShutsuryoku().getSelectedKeys().contains(RADIOBUTTONKEY1)
                 ? 選択された : 未選択);
         tempData.setTemp_印刷済対象者(div.getShujiiIkenshoTokusokujo().getChkInsatsuzumiTaisho().getSelectedKeys().contains(RADIOBUTTONKEY0)
                 ? 選択された : 未選択);
@@ -133,6 +135,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
         tempData.setTemp_印刷期間終了日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue());
         tempData.setTemp_印刷書類区分(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
                 ? 印刷書類区分_主治医意見書提出督促状 : 印刷書類区分_主治医意見書督促対象者一覧表);
+        tempData.setTemp_文書番号(div.getCcdBunshoNo().get文書番号());
         return tempData;
     }
 

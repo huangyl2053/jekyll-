@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -132,9 +133,9 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         RString csvファイル名 = なし;
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 調査依頼日FROM = new RStringBuilder("【調査依頼日（From）】");
-        調査依頼日FROM.append(parameter.get調査依頼日開始());
+        調査依頼日FROM.append(toWareki(parameter.get調査依頼日開始()));
         RStringBuilder 調査依頼日To = new RStringBuilder("【調査依頼日（To）】");
-        調査依頼日To.append(parameter.get調査依頼日終了());
+        調査依頼日To.append(toWareki(parameter.get調査依頼日終了()));
         RStringBuilder 保険者_SB = new RStringBuilder(new RString("【保険者】"));
         保険者_SB.append(parameter.get保険者());
         出力条件.add(調査依頼日FROM.toRString());
@@ -154,9 +155,9 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         RString 出力件数 = new RString(csvWriter.getCount());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 調査依頼日FROM = new RStringBuilder("【調査依頼日（From）】");
-        調査依頼日FROM.append(parameter.get調査依頼日開始());
+        調査依頼日FROM.append(toWareki(parameter.get調査依頼日開始()));
         RStringBuilder 調査依頼日To = new RStringBuilder("【調査依頼日（To）】");
-        調査依頼日To.append(parameter.get調査依頼日終了());
+        調査依頼日To.append(toWareki(parameter.get調査依頼日終了()));
         RStringBuilder 保険者_SB = new RStringBuilder(new RString("【保険者】"));
         保険者_SB.append(parameter.get保険者());
         出力条件.add(調査依頼日FROM.toRString());
@@ -185,5 +186,12 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         } else {
             帳票バッチ出力条件リストの出力();
         }
+    }
+
+    private RString toWareki(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(date).wareki().toDateString();
     }
 }

@@ -29,6 +29,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
     private final boolean shujiiIkenshoSakuseiIraisho;
     private final boolean ikenshoKinyuu;
     private final boolean ikenshoKinyuuOCR;
+    private final boolean ikenshoKinyuuDesign;
     private final boolean ikenshoSakuseiSeikyuusho;
     private final boolean ikenshoTeishutu;
     private final RString iraiFromYMD;
@@ -48,6 +49,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
      * @param shujiiIkenshoSakuseiIraisho 主治医意見書作成依頼書出力区分
      * @param ikenshoKinyuu 主治医意見書記入用紙出力区分
      * @param ikenshoKinyuuOCR 主治医意見書記入用紙OCR出力区分
+     * @param ikenshoKinyuuDesign　主治医意見書記入用紙デザイン出力区分
      * @param ikenshoSakuseiSeikyuusho 主治医意見書作成料請求書出力区分
      * @param ikenshoTeishutu 介護保険指定医依頼兼主治医意見書提出依頼書出力区分
      * @param iraiFromYMD 依頼開始日
@@ -65,6 +67,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
             boolean shujiiIkenshoSakuseiIraisho,
             boolean ikenshoKinyuu,
             boolean ikenshoKinyuuOCR,
+            boolean ikenshoKinyuuDesign,
             boolean ikenshoSakuseiSeikyuusho,
             boolean ikenshoTeishutu,
             RString iraiFromYMD,
@@ -80,6 +83,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
         this.shujiiIkenshoSakuseiIraisho = shujiiIkenshoSakuseiIraisho;
         this.ikenshoKinyuu = ikenshoKinyuu;
         this.ikenshoKinyuuOCR = ikenshoKinyuuOCR;
+        this.ikenshoKinyuuDesign = ikenshoKinyuuDesign;
         this.ikenshoSakuseiSeikyuusho = ikenshoSakuseiSeikyuusho;
         this.ikenshoTeishutu = ikenshoTeishutu;
         this.iraiFromYMD = iraiFromYMD;

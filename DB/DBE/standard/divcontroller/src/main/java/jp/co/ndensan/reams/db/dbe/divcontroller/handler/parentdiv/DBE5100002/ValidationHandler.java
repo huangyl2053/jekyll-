@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.ShinsakaiAutoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ValidationHandler {
 
     private final ShinsakaiAutoDiv shinDiv;
-    private final RString 未開催 = new RString("未開催");
-    private final RString 未開催_割付完了 = new RString("未開催/割付完了");
 
     /**
      * コンストラクタです。
@@ -74,7 +72,8 @@ public class ValidationHandler {
      */
     public ValidationMessageControlPairs 審査会開催チェック(ValidationMessageControlPairs validPairs) {
         for (dgShinsakaiIchiran_Row row : shinDiv.getDgShinsakaiIchiran().getSelectedItems()) {
-            if (!未開催.equals(row.getShinchokuJokyo()) && !未開催_割付完了.equals(row.getShinchokuJokyo())) {
+            if (!ShinsakaiShinchokuJokyo.未開催.get画面表示名称().equals(row.getShinchokuJokyo())
+                    && !ShinsakaiShinchokuJokyo.未開催_割付完了.get画面表示名称().equals(row.getShinchokuJokyo())) {
                 validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate未開催以外の場合,
                         shinDiv.getDgShinsakaiIchiran()));
                 break;

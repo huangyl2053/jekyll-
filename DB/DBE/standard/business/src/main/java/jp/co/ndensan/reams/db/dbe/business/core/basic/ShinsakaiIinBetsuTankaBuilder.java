@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5034ShinsakaiIinBetsuTankaEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -17,6 +18,7 @@ public class ShinsakaiIinBetsuTankaBuilder {
 
     private final DbT5034ShinsakaiIinBetsuTankaEntity entity;
     private final ShinsakaiIinBetsuTankaIdentifier id;
+    private RString shiMei;
 
     /**
      * {@link DbT5034ShinsakaiIinBetsuTankaEntity}より{@link ShinsakaiIinBetsuTanka}の編集用Builderクラスを生成します。
@@ -27,10 +29,12 @@ public class ShinsakaiIinBetsuTankaBuilder {
      */
     ShinsakaiIinBetsuTankaBuilder(
             DbT5034ShinsakaiIinBetsuTankaEntity entity,
-            ShinsakaiIinBetsuTankaIdentifier id
+            ShinsakaiIinBetsuTankaIdentifier id,
+            RString shiMei
     ) {
         this.entity = entity.clone();
         this.id = id;
+        this.shiMei = shiMei;
 
     }
 
@@ -57,11 +61,22 @@ public class ShinsakaiIinBetsuTankaBuilder {
     }
 
     /**
+     * その他単価を設定します。
+     *
+     * @param 氏名 氏名
+     * @return {@link ShinsakaiIinBetsuTankaBuilder}
+     */
+    public ShinsakaiIinBetsuTankaBuilder set氏名(RString 氏名) {
+        this.shiMei = 氏名;
+        return this;
+    }
+
+    /**
      * {@link ShinsakaiIinBetsuTanka}のインスタンスを生成します。
      *
      * @return {@link ShinsakaiIinBetsuTanka}のインスタンス
      */
     public ShinsakaiIinBetsuTanka build() {
-        return new ShinsakaiIinBetsuTanka(entity, id);
+        return new ShinsakaiIinBetsuTanka(entity, id, shiMei);
     }
 }

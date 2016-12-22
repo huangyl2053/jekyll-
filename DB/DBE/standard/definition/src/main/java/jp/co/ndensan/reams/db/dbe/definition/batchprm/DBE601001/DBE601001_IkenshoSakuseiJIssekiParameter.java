@@ -20,18 +20,21 @@ import lombok.Setter;
 public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
-    private static final String IKENSHO_KINYUBI_TO = "ikenshoKinyubiTo";
-    private static final String IKENSHO_KINYUBI_FROM = "ikenshoKinyubiFrom";
+    private static final String IKENSHO_KIJUNBI_TO = "ikenshoKijunbiTo";
+    private static final String IKENSHO_KIJUNBI_FROM = "ikenshoKijunbiFrom";
+    private static final String IKENSHO_SHUKEI = "ikenshoKijunbiKubun";
     private static final String HOKENSYA = "hokensya";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8314555813503538349L;
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
-    @BatchParameter(key = IKENSHO_KINYUBI_TO, name = "意見書記入日FROM")
-    private RString ikenshoKinyubiTo;
-    @BatchParameter(key = IKENSHO_KINYUBI_FROM, name = "意見書記入日TO")
-    private RString ikenshoKinyubiFrom;
+    @BatchParameter(key = IKENSHO_KIJUNBI_TO, name = "基準日FROM")
+    private RString ikenshoKijunbiTo;
+    @BatchParameter(key = IKENSHO_KIJUNBI_FROM, name = "基準日TO")
+    private RString ikenshoKijunbiFrom;
+    @BatchParameter(key = IKENSHO_SHUKEI, name = "基準日")
+    private RString ikenshoKijunbiKubun;
     @BatchParameter(key = HOKENSYA, name = "保険者")
     private RString hokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
@@ -58,8 +61,8 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
             RString hokensya,
             List<IkenshoJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
-        this.ikenshoKinyubiFrom = ikenshoKinyubiFrom;
-        this.ikenshoKinyubiTo = ikenshoKinyubiTo;
+        this.ikenshoKijunbiFrom = ikenshoKinyubiFrom;
+        this.ikenshoKijunbiTo = ikenshoKinyubiTo;
         this.hokensya = hokensya;
         this.keyJoho = keyJoho;
     }
@@ -71,8 +74,9 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
      */
     public IkenshoJissekiIchiranProcessParameter toProcessParamter() {
         return new IkenshoJissekiIchiranProcessParameter(syohyoSyuturyoku,
-                ikenshoKinyubiFrom,
-                ikenshoKinyubiTo,
+                ikenshoKijunbiFrom,
+                ikenshoKijunbiTo,
+                ikenshoKijunbiKubun,
                 hokensya,
                 keyJoho);
     }

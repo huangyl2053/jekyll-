@@ -20,6 +20,12 @@
         <result property="kikanKubun" column="dbT5914SonotaKi_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="haishiFlag" column="dbT5914SonotaKi_haishiFlag" />
         <result property="hokensha" column="urT0507_hokenjaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kinyuKikanCode" column="dbT5914SonotaKi_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler" />
+        <result property="kinyuKikanShitenCode" column="dbT5914SonotaKi_kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler" />
+        <result property="yokinShubetsu" column="dbT5914SonotaKi_yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kozaNo" column="dbT5914SonotaKi_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kozaMeigininKana" column="dbT5914SonotaKi_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="kozaMeiginin" column="dbT5914SonotaKi_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
     </resultMap>
 
     <select resultOrdered="true" id="selectSonotaKikanichiranList"
@@ -39,8 +45,13 @@
                 dbT5914SonotaKi."waritsukeTeiin" AS "dbT5914SonotaKi_waritsukeTeiin",
                 dbT5914SonotaKi."waritsukeChiku" AS "dbT5914SonotaKi_waritsukeChiku",
                 dbT5914SonotaKi."kikanKubun" AS "dbT5914SonotaKi_kikanKubun",
-                dbT5914SonotaKi."haishiFlag" AS "dbT5914SonotaKi_haishiFlag"
-             
+                dbT5914SonotaKi."haishiFlag" AS "dbT5914SonotaKi_haishiFlag",
+                dbT5914SonotaKi."kinyuKikanCode" AS "dbT5914SonotaKi_kinyuKikanCode",
+                dbT5914SonotaKi."kinyuKikanShitenCode" AS "dbT5914SonotaKi_kinyuKikanShitenCode",
+                dbT5914SonotaKi."yokinShubetsu" AS "dbT5914SonotaKi_yokinShubetsu",
+                dbT5914SonotaKi."kozaNo" AS "dbT5914SonotaKi_kozaNo",
+                dbT5914SonotaKi."kozaMeigininKana" AS "dbT5914SonotaKi_kozaMeigininKana",
+                dbT5914SonotaKi."kozaMeiginin" AS "dbT5914SonotaKi_kozaMeiginin"             
             FROM	
                 rgdb."DbT5914SonotaKikanJoho" AS dbT5914SonotaKi
             LEFT JOIN rgur."UrT0507Hokenja" UrT0507

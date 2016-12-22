@@ -115,10 +115,9 @@ public class IkenshogetHandler {
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
             if (business.get主治医意見書登録完了年月日() != null && !business.get主治医意見書登録完了年月日().isEmpty()) {
-
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
-//            row.getIkenshoNyushuTeikei().setValue(new RDate(business.get));
+//            row.getIkenshoNyushuTeikei().setValue();
             row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
             row.setChosaTokusokuHoho(business.get主治医意見書作成督促方法() == null ? RString.EMPTY : business.get主治医意見書作成督促方法());
@@ -140,8 +139,8 @@ public class IkenshogetHandler {
         if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
             row.getKoshinKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
         }
-        if (business.get主治医意見書記入年月日() != null && !business.get主治医意見書記入年月日().isEmpty()) {
-            row.getNyusyubi().setValue(new RDate(business.get主治医意見書記入年月日().toString()));
+        if (business.get主治医意見書読取年月日() != null && !business.get主治医意見書読取年月日().isEmpty()) {
+            row.getNyusyubi().setValue(new RDate(business.get主治医意見書読取年月日().toString()));
         }
         if (business.get主治医意見書作成督促年月日() != null && !business.get主治医意見書作成督促年月日().isEmpty()) {
             row.getChosaTokusokuHakkoDay().setValue(new RDate(business.get主治医意見書作成督促年月日().toString()));

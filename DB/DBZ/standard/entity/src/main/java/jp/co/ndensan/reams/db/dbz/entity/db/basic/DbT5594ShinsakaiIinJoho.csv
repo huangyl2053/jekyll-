@@ -15,3 +15,9 @@ seinengappiYMD,UDD015YMD,FlexibleDate,,,,,生年月日,A
 biko,text,RString,,,,,備考,A
 haishiFlag,bool,boolean,,,,,廃止フラグ,A
 haishiYMD,UDD015YMD,FlexibleDate,,,,,廃止年月日,A
+kinyuKikanCode,UDD030KinyuKikanCode,KinyuKikanCode,,,,,kinyuKikanCode,A
+kinyuKikanShitenCode,UDD031KinyuKikanShitenCode,KinyuKikanShitenCode,,,,,kinyuKikanShitenCode,A
+yokinShubetsu,varchar,RString,,,,,yokinShubetsu,A
+kozaNo,varchar,RString,,,,,kozaNo,A
+kozaMeigininKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,kozaMeigininKana,A
+kozaMeiginin,UDD042AtenaMeisho,AtenaMeisho,,,,,kozaMeiginin,A

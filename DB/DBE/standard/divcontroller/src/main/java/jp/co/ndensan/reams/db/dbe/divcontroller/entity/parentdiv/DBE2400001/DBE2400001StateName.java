@@ -16,7 +16,9 @@ public enum DBE2400001StateName implements IStateEnumerations {
 
     NoChange(""),
     認定調査依頼("認定調査依頼"),
-    主治医意見書作成依頼("主治医意見書作成依頼");
+    主治医意見書作成依頼("主治医意見書作成依頼"),
+    認定調査依頼_検索結果("認定調査依頼_検索結果"),
+    主治医意見書作成依頼_検索結果("主治医意見書作成依頼_検索結果");
 
     private final RString name;
 

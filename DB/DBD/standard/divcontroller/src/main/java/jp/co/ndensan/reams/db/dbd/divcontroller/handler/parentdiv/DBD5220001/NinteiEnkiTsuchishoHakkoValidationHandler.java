@@ -251,7 +251,7 @@ public class NinteiEnkiTsuchishoHakkoValidationHandler {
         対象行を選択チェック(UrErrorMessages.対象行を選択.getMessage()),
         更新対象のデータがないチェック(UrErrorMessages.更新対象のデータがない.getMessage()),
         整合性チェック(UrErrorMessages.更新不可_汎用.getMessage(), "延期理由、処理見込み日（開始）、見込処理期間（終了）、延期決定日いずれか空白"),
-        変更内容保存チェック(UrErrorMessages.実行不可.getMessage(), "変更内容は既に保存されていないため、通知書発行");
+        変更内容保存チェック(UrErrorMessages.実行不可.getMessage(), "変更内容が保存されていないため、通知書発行ができませんでした。");
         private final Message message;
 
         private NoInputMessages(Message message, String... replacements) {

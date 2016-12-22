@@ -13,6 +13,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk06A;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk09A;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk09B;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyoukSgJg;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyoukinyukomoku.GaikyoChosahyouKinyuKomoku02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyoukinyukomoku.GaikyoChosahyouKinyuKomoku06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyoukinyukomoku.GaikyoChosahyouKinyuKomoku09A;
@@ -24,11 +28,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy99A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk99A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyoukSgJg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -191,21 +191,21 @@ public class ChosaKekkaInfoGaikyoHandler {
             count = GaikyoChosahyouServiceJyouk02A.values().length;
         } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
             if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = GaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(予防給付サービス);
+                count = CKGaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(予防給付サービス);
             } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = GaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(介護給付サービス);
+                count = CKGaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(介護給付サービス);
             }
         } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
             if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = GaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(予防給付サービス);
+                count = CKGaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(予防給付サービス);
             } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = GaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(介護給付サービス);
+                count = CKGaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(介護給付サービス);
             }
         } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
             if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = GaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(予防給付サービス);
+                count = CKGaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(予防給付サービス);
             } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = GaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(介護給付サービス);
+                count = CKGaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(介護給付サービス);
             }
         }
         for (int i = 0; i < count; i++) {
@@ -273,7 +273,7 @@ public class ChosaKekkaInfoGaikyoHandler {
     private RString getName(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
         if (連番 < serviceJokyos.size()) {
             if ((実施済).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return GaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+                return CKGaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
             }
             if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
                 return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
@@ -282,14 +282,14 @@ public class ChosaKekkaInfoGaikyoHandler {
                 return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
             }
             if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+                return CKGaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
             }
             if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+                return CKGaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
             }
             if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())
                     && (未実施).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+                return CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
             }
         }
         return RString.EMPTY;
@@ -305,7 +305,7 @@ public class ChosaKekkaInfoGaikyoHandler {
     private RString getTan1(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
         if (連番 < serviceJokyos.size()) {
             if ((実施済).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return GaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+                return CKGaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
             }
             if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
                 return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
@@ -314,13 +314,13 @@ public class ChosaKekkaInfoGaikyoHandler {
                 return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
             }
             if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+                return CKGaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
             }
             if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+                return CKGaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
             }
             if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+                return CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
             }
         }
         return RString.EMPTY;
@@ -329,7 +329,7 @@ public class ChosaKekkaInfoGaikyoHandler {
     private RString getTan2(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
         if (連番 < serviceJokyos.size()) {
             if ((実施済).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return GaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+                return CKGaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
             }
             if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
                 return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
@@ -338,13 +338,13 @@ public class ChosaKekkaInfoGaikyoHandler {
                 return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
             }
             if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+                return CKGaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
             }
             if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+                return CKGaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
             }
             if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
+                return CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
             }
         }
         return RString.EMPTY;

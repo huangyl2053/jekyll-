@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -66,6 +67,7 @@ public class ShujiiIryoKikanMaster {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CSVファイル名 = new RString("主治医医療機関情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString 医療機関コード_0000000000 = new RString("0000000000");
     private static final RString 構成市町村マスタ市町村コード重複種別
             = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
@@ -93,6 +95,30 @@ public class ShujiiIryoKikanMaster {
     }
 
     /**
+     * 状態変更に従って、主治医医療機関一覧を表示する。
+     *
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onStateChange(ShujiiIryoKikanMasterDiv div) {
+        boolean changeFlag = Boolean.FALSE;
+        for (dgShujiiIchiran_Row row : div.getShujiiIchiran().getDgShujiiIchiran().getDataSource()) {
+            if (医療機関コード_0000000000.equals(row.getIryoKikanCode())) {
+                row.setIryoKikanCode(RString.EMPTY);
+            }
+            if (!row.getJotai().isEmpty() && !row.getJotai().isNull()) {
+                changeFlag = Boolean.TRUE;
+            }
+        }
+        if (changeFlag) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), Boolean.FALSE);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), Boolean.TRUE);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * クリアボタン押下で検索条件入力項目をクリアします。
      *
      * @param div ShujiiIryoKikanMasterDiv
@@ -116,6 +142,8 @@ public class ShujiiIryoKikanMaster {
             getValidationHandler(div).validateBtnReSearchNoResult();
         }
         div.getShujiiIchiran().setDisabled(false);
+        div.setHdnShichosonCode(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+        div.setHdnShichosonName(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
         return ResponseData.of(div).respond();
     }
 
@@ -178,6 +206,12 @@ public class ShujiiIryoKikanMaster {
         div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         div.getShujiiJohoInput().getBtnRegisterKoza().setDisabled(false);
         div.getShujiiJohoInput().getBtnshujiiinsert().setDisabled(false);
+        if (!div.getHdnShichosonCode().isEmpty() && !div.getHdnShichosonName().isEmpty()) {
+            div.getShujiiJohoInput().getTxtShichoson().setValue(div.getHdnShichosonCode());
+            div.getShujiiJohoInput().getTxtShichosonmei().setValue(div.getHdnShichosonName());
+            div.getShujiiJohoInput().getTxtShichoson().setDisabled(Boolean.TRUE);
+            div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(Boolean.TRUE);
+        }
         return ResponseData.of(div).respond();
     }
 

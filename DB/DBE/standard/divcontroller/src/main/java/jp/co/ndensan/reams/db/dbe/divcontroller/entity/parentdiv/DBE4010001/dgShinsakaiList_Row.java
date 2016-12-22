@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 19 20:08:32 JST 2016 
+ * Tue Dec 20 19:21:19 JST 2016 
  */
 
 
@@ -11,7 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -28,7 +28,7 @@ public class dgShinsakaiList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
 
     private Button btnWritsuke;
-    private TextBoxDate kaisaiYoteiYmd;
+    private TextBoxFlexibleDate kaisaiYoteiYmd;
     private TextBoxTime kaisaiYoteiTime;
     private RString shinsakaiKaisaiNo;
     private RString shinsakaiMeisho;
@@ -44,7 +44,7 @@ public class dgShinsakaiList_Row extends DataRow {
     public dgShinsakaiList_Row() {
         super();
         this.btnWritsuke = new Button();
-        this.kaisaiYoteiYmd = new TextBoxDate();
+        this.kaisaiYoteiYmd = new TextBoxFlexibleDate();
         this.kaisaiYoteiTime = new TextBoxTime();
         this.shinsakaiKaisaiNo = RString.EMPTY;
         this.shinsakaiMeisho = RString.EMPTY;
@@ -71,7 +71,7 @@ public class dgShinsakaiList_Row extends DataRow {
         this.setOriginalData("maxShinsakaiOrder", maxShinsakaiOrder);
     }
 
-    public dgShinsakaiList_Row(Button btnWritsuke, TextBoxDate kaisaiYoteiYmd, TextBoxTime kaisaiYoteiTime, RString shinsakaiKaisaiNo, RString shinsakaiMeisho, RString gogitaiNo, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxNum yoteiTeiin, TextBoxNum wariateZumiNinzu, DataGridColumnCheckBox dummyFlag, TextBoxNum maxShinsakaiOrder) {
+    public dgShinsakaiList_Row(Button btnWritsuke, TextBoxFlexibleDate kaisaiYoteiYmd, TextBoxTime kaisaiYoteiTime, RString shinsakaiKaisaiNo, RString shinsakaiMeisho, RString gogitaiNo, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxNum yoteiTeiin, TextBoxNum wariateZumiNinzu, DataGridColumnCheckBox dummyFlag, TextBoxNum maxShinsakaiOrder) {
         super();
         this.setOriginalData("btnWritsuke", btnWritsuke);
         this.setOriginalData("kaisaiYoteiYmd", kaisaiYoteiYmd);
@@ -104,7 +104,7 @@ public class dgShinsakaiList_Row extends DataRow {
     public dgShinsakaiList_Row(DataGridSetting gridSetting) {
         super();
         this.btnWritsuke = new Button();
-        this.kaisaiYoteiYmd = new TextBoxDate();
+        this.kaisaiYoteiYmd = new TextBoxFlexibleDate();
         this.kaisaiYoteiTime = new TextBoxTime();
         this.shinsakaiKaisaiNo = RString.EMPTY;
         this.shinsakaiMeisho = RString.EMPTY;
@@ -135,7 +135,7 @@ public class dgShinsakaiList_Row extends DataRow {
         return btnWritsuke;
     }
 
-    public TextBoxDate getKaisaiYoteiYmd() {
+    public TextBoxFlexibleDate getKaisaiYoteiYmd() {
         return kaisaiYoteiYmd;
     }
 
@@ -188,7 +188,7 @@ public class dgShinsakaiList_Row extends DataRow {
         this.btnWritsuke = btnWritsuke;
     }
 
-    public void setKaisaiYoteiYmd(TextBoxDate kaisaiYoteiYmd) {
+    public void setKaisaiYoteiYmd(TextBoxFlexibleDate kaisaiYoteiYmd) {
         this.setOriginalData("kaisaiYoteiYmd", kaisaiYoteiYmd);
         this.kaisaiYoteiYmd = kaisaiYoteiYmd;
     }

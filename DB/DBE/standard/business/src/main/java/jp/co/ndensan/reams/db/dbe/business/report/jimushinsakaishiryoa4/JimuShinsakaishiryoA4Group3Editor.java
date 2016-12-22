@@ -129,7 +129,19 @@ public class JimuShinsakaishiryoA4Group3Editor implements IJimuShinsakaishiryoA4
             editイメージ(source, 短冊リスト);
             set特記事項イメージ(source);
         }
-        source.layout = Layouts.任意;
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 全面.equals(item.get特記パターン())) {
+            source.layout = 5;
+        } else if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 短冊.equals(item.get特記パターン())) {
+            source.layout = 6;
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 全面.equals(item.get特記パターン())) {
+            source.layout = 7;
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 短冊.equals(item.get特記パターン())) {
+            source.layout = 8;
+        }
         return source;
     }
 
