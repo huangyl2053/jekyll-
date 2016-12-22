@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -23,9 +22,13 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class IinShinsakaishiryoA4Group2Editor implements IIinShinsakaishiryoA4Editor {
 
+    private static final int INT_2 = 2;
+    private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private final IchijihanteikekkahyoA4Entity item;
     private final int index;
+    private static final RString サービス区分コード1 = new RString("1");
+    private static final RString サービス区分コード2 = new RString("2");
 
     /**
      * インスタンスを生成します。
@@ -141,7 +144,13 @@ public class IinShinsakaishiryoA4Group2Editor implements IIinShinsakaishiryoA4Ed
         source.sabisuKaisu19 = item.getSabisuKaisu19();
         source.sabisuKaisu20 = item.getSabisuKaisu20();
         source.sabisuKaisu21 = item.getSabisuKaisu21();
-        source.layout = Layouts.必須;
+        if (サービス区分コード1.equals(item.getSabisuKubun())) {
+            source.layout = INT_3;
+        } else if (サービス区分コード2.equals(item.getSabisuKubun())) {
+            source.layout = INT_4;
+        } else {
+            source.layout = INT_2;
+        }
         return editSource1(source);
     }
 
