@@ -177,6 +177,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         param.setIkenshoKijunbiTo(基準日TO);
         param.setIkenshoKijunbiKubun(div.getRadKensakuKijunbi().getSelectedKey());
         param.setHokensya(div.getCcdHokensya().getSelectedItem().get市町村コード().value());
+        param.setShokisaiHokensya(div.getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

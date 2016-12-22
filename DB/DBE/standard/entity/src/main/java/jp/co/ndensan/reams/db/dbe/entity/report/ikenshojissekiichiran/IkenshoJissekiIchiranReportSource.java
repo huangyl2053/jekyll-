@@ -30,7 +30,7 @@ public class IkenshoJissekiIchiranReportSource implements IReportSource {
     public RString listIkenshoJissekiIchiran_7;
     @ReportItem(name = "listIkenshoJissekiIchiran_8", length = 11, order = 9)
     public RString listIkenshoJissekiIchiran_8;
-    @ReportItem(name = "listIkenshoJissekiIchiran_9", length = 1, order = 10)
+    @ReportItem(name = "listIkenshoJissekiIchiran_9", length = 11, order = 10)
     public RString listIkenshoJissekiIchiran_9;
     @ReportItem(name = "listIkenshoJissekiIchiran_10", length = 1, order = 11)
     public RString listIkenshoJissekiIchiran_10;
@@ -38,8 +38,10 @@ public class IkenshoJissekiIchiranReportSource implements IReportSource {
     public RString listIkenshoJissekiIchiran_11;
     @ReportItem(name = "listIkenshoJissekiIchiran_12", length = 1, order = 13)
     public RString listIkenshoJissekiIchiran_12;
-    @ReportItem(name = "listIkenshoJissekiIchiran_13", length = 3, order = 14)
+    @ReportItem(name = "listIkenshoJissekiIchiran_13", length = 1, order = 14)
     public RString listIkenshoJissekiIchiran_13;
+    @ReportItem(name = "listIkenshoJissekiIchiran_14", length = 3, order = 15)
+    public RString listIkenshoJissekiIchiran_14;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
