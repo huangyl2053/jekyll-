@@ -27,7 +27,9 @@ public class ChosahyoJissekiIchiranRelateEntity {
     private RString 調査員氏名;
     private RString 被保険者番号;
     private RString 被保険者氏名;
+    private RString 認定調査依頼年月日;
     private RString 認定調査実施年月日;
+    private RString 認定調査受領年月日;
     private RString 認定調査区分コード;
     private RString 認定調査実施場所名称;
     private RString 認定調査依頼区分コード;

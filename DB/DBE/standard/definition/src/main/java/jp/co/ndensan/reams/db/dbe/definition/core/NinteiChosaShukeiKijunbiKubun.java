@@ -9,22 +9,22 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 意見書集計基準日区分を表す列挙型です。
+ * 認定調査集計基準日を表す列挙型です。
  */
-public enum IkenshoShukeiKijunbiKubun {
+public enum NinteiChosaShukeiKijunbiKubun {
 
     /**
      * 依頼日を表します。
      */
-    依頼日("1", "意見書依頼日"),
+    依頼日("1", "調査依頼日"),
     /**
-     * 記入日を表します。
+     * 実施日を表します。
      */
-    記入日("2", "意見書記入日"),
+    実施日("2", "調査実施日"),
     /**
      * 入手日を表します。
      */
-    入手日("3", "意見書入手日");
+    入手日("3", "調査入手日");
 
     private final RString kubun;
     private final RString title;
@@ -33,14 +33,15 @@ public enum IkenshoShukeiKijunbiKubun {
      * コンストラクタです。
      *
      * @param kubun kubun
+     * @param title title
      */
-    private IkenshoShukeiKijunbiKubun(String kubun, String title) {
+    private NinteiChosaShukeiKijunbiKubun(String kubun, String title) {
         this.kubun = new RString(kubun);
         this.title = new RString(title);
     }
 
     /**
-     * 区分の値を返します。
+     * 区分を返します。
      *
      * @return 区分
      */
@@ -58,20 +59,18 @@ public enum IkenshoShukeiKijunbiKubun {
     }
 
     /**
-     * 引数の値と一致する意見書集計基準日区分を返します。
+     * 引数と一致する認定調査集計基準日区分を返します。
      *
      * @param kubun kubun
-     * @return 意見書集計基準日区分
-     * @throws IllegalArgumentException 一致する区分がない場合
+     * @return 認定調査集計基準日区分
      */
-    public static IkenshoShukeiKijunbiKubun toValue(RString kubun) throws IllegalArgumentException {
-        for (IkenshoShukeiKijunbiKubun value : values()) {
+    public static NinteiChosaShukeiKijunbiKubun toValue(RString kubun) {
+        for (NinteiChosaShukeiKijunbiKubun value : values()) {
             if (value.getKubun().equals(kubun)) {
                 return value;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("意見書集計基準日区分"));
-
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査集計基準日区分"));
     }
 
 }
