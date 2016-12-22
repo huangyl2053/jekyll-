@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoninteiimagekanriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +35,12 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     private RString hdnNinteichosaRirekiNo;
     @JsonProperty("hdnGaikyoChosaTextImageKubun")
     private RString hdnGaikyoChosaTextImageKubun;
+    @JsonProperty("hdnHihokenshaNo")
+    private RString hdnHihokenshaNo;
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    private RString hdnShokisaiHokenshaNo;
+    @JsonProperty("hdnImageLocalCopyPath")
+    private RString hdnImageLocalCopyPath;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -124,6 +130,60 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     }
 
     /*
+     * gethdnHihokenshaNo
+     * @return hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public RString getHdnHihokenshaNo() {
+        return hdnHihokenshaNo;
+    }
+
+    /*
+     * sethdnHihokenshaNo
+     * @param hdnHihokenshaNo hdnHihokenshaNo
+     */
+    @JsonProperty("hdnHihokenshaNo")
+    public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
+        this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * gethdnShokisaiHokenshaNo
+     * @return hdnShokisaiHokenshaNo
+     */
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    public RString getHdnShokisaiHokenshaNo() {
+        return hdnShokisaiHokenshaNo;
+    }
+
+    /*
+     * sethdnShokisaiHokenshaNo
+     * @param hdnShokisaiHokenshaNo hdnShokisaiHokenshaNo
+     */
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    public void setHdnShokisaiHokenshaNo(RString hdnShokisaiHokenshaNo) {
+        this.hdnShokisaiHokenshaNo = hdnShokisaiHokenshaNo;
+    }
+
+    /*
+     * gethdnImageLocalCopyPath
+     * @return hdnImageLocalCopyPath
+     */
+    @JsonProperty("hdnImageLocalCopyPath")
+    public RString getHdnImageLocalCopyPath() {
+        return hdnImageLocalCopyPath;
+    }
+
+    /*
+     * sethdnImageLocalCopyPath
+     * @param hdnImageLocalCopyPath hdnImageLocalCopyPath
+     */
+    @JsonProperty("hdnImageLocalCopyPath")
+    public void setHdnImageLocalCopyPath(RString hdnImageLocalCopyPath) {
+        this.hdnImageLocalCopyPath = hdnImageLocalCopyPath;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -174,6 +234,16 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     @JsonIgnore
     public void  setBtnIkensho(ButtonDialog btnIkensho) {
         this.getImagePanel().setBtnIkensho(btnIkensho);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIkenshoOCR() {
+        return this.getImagePanel().getBtnIkenshoOCR();
+    }
+
+    @JsonIgnore
+    public void  setBtnIkenshoOCR(ButtonDialog btnIkenshoOCR) {
+        this.getImagePanel().setBtnIkenshoOCR(btnIkenshoOCR);
     }
 
     @JsonIgnore
