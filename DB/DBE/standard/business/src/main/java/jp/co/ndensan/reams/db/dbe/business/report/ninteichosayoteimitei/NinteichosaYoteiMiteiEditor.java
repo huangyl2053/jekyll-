@@ -60,11 +60,13 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
         source.listChosaYoteimitei_4 = item.getDbT5101_hihokenshaName() == null ? RString.EMPTY : item.getDbT5101_hihokenshaName().value();
         source.listChosaYoteimitei_5 = item.getDbT5101_hihokenshaNo();
         source.listChosaYoteimitei_6 = dateFormat(item.getDbT5101_ninteiShinseiYMD());
-        source.listChosaYoteimitei_7 = item.getDbT5101_seibetsu() == null ? RString.EMPTY : Seibetsu.toValue(item
-                .getDbT5101_seibetsu().value()).get名称();
+        source.listChosaYoteimitei_7 = item.getDbT5101_seibetsu() == null
+                ? RString.EMPTY : RString.isNullOrEmpty(item.getDbT5101_seibetsu().value())
+                ? RString.EMPTY : Seibetsu.toValue(item.getDbT5101_seibetsu().value()).get名称();
         source.listChosaYoteimitei_8 = dateFormat(item.getDbT5101_seinengappiYMD());
-        source.listChosaYoteimitei_9 = item.getDbT5101_ninteiShinseiShinseijiKubunCode() == null ? RString.EMPTY : NinteiShinseiShinseijiKubunCode
-                .toValue(item.getDbT5101_ninteiShinseiShinseijiKubunCode().value()).get名称();
+        source.listChosaYoteimitei_9 = item.getDbT5101_ninteiShinseiShinseijiKubunCode() == null
+                ? RString.EMPTY : RString.isNullOrEmpty(item.getDbT5101_ninteiShinseiShinseijiKubunCode().value())
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(item.getDbT5101_ninteiShinseiShinseijiKubunCode().value()).get名称();
         source.listChosaYoteimitei_10 = item.getDbT5910_ZenZenkai_jigyoshaMeisho();
         source.listChosaYoteimitei_11 = item.getDbT5913_ZenZenkai_chosainShimei();
         source.listChosaYoteimitei_12 = item.getDbT5910_Zenkai_jigyoshaMeisho();

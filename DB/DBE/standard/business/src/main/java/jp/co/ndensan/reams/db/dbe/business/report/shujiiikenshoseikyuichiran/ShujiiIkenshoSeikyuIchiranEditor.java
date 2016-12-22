@@ -86,12 +86,9 @@ public class ShujiiIkenshoSeikyuIchiranEditor implements IShujiiIkenshoSeikyuIch
         return source;
     }
 
-    private RString set性別(RString 性別コード) {
-        RString 性別 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(性別コード)) {
-            性別 = Seibetsu.toValue(item.get性別()).get名称();
-        }
-        return 性別;
+    private RString set性別(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : Seibetsu.toValue(code).get名称();
     }
 
     private RString getNo(int index_tmp) {
@@ -101,12 +98,9 @@ public class ShujiiIkenshoSeikyuIchiranEditor implements IShujiiIkenshoSeikyuIch
         return new RString(String.valueOf(index_tmp + 1));
     }
 
-    private RString set申請区分(RString 申請区分申請時コード) {
-        RString 申請区分 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(申請区分申請時コード)) {
-            申請区分 = NinteiShinseiShinseijiKubunCode.toValue(item.get認定申請区分申請時コード()).get名称();
-        }
-        return 申請区分;
+    private RString set申請区分(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(code).get名称();
     }
 
     private RString dateFormat(FlexibleDate date) {
