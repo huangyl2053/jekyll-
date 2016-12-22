@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -64,7 +65,7 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
         FileSpoolManager manager = new FileSpoolManager(
                 UzUDE0835SpoolOutputType.EucOther, new RString("ItizihanteiIFtoriKomiProcess"), UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(込ファイル名),
+        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(GyomuCode.DB介護保険, new FilesystemName(込ファイル名),
                 paramter.getFileId()), new FilesystemPath(spoolWorkPath));
         filePath = Path.combinePath(spoolWorkPath, 込ファイル名);
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, IchijiHanteizumIfOutputEucCsvEntity.class)
