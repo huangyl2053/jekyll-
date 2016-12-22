@@ -55,11 +55,14 @@ public final class IkenshoJissekiIchiranChange {
             }
         }
         IkenshoJissekiIchiranEntity data = new IkenshoJissekiIchiranEntity(entity.get証記載保険者番号(),
+                entity.get市町村名称(),
                 entity.get医療機関コード(),
                 entity.get医療機関名称(),
+                entity.get主治医コード(),
                 entity.get主治医氏名(),
                 entity.get被保険者番号(),
                 entity.get申請者氏名(),
+                dateFormat(entity.get依頼日()),
                 dateFormat(entity.get記入日()),
                 dateFormat(entity.get入手日()),
                 在宅_新,

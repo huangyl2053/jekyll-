@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -59,7 +60,7 @@ public class ShujiiIryoKikanJohoBuilder {
      * @param 主治医医療機関コード 主治医医療機関コード
      * @return {@link ShujiiIryoKikanJohoBuilder}
      */
-    public ShujiiIryoKikanJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
+    public ShujiiIryoKikanJohoBuilder set主治医医療機関コード(ShujiiIryokikanCode 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         entity.setShujiiIryokikanCode(主治医医療機関コード);
         return this;

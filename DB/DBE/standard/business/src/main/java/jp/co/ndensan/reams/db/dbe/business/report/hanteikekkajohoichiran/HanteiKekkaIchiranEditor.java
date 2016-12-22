@@ -57,11 +57,11 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listNo_2 = new RString(item.get介護認定審査会審査順());
         source.listNo_3 = item.get認定申請区分_申請時();
         source.listNo_4 = item.get認定申請区分_法令();
-        source.listNo_5 = new RDate(item.get認定申請日().toString()).wareki().eraType(EraType.ALPHABET).
+        source.listNo_5 = new RDate(item.get認定申請日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString();
-        source.listNo_6 = new RDate(item.get二次判定年月日().toString()).wareki().eraType(EraType.ALPHABET).
+        source.listNo_6 = new RDate(item.get二次判定年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString();
@@ -79,12 +79,12 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         tempTokuteishippei_1
                 .append("ヵ月");
         RStringBuilder tempTokuteishippei_2 = new RStringBuilder(new RDate(item.get二次判定認定有効開始年月日().toString()).wareki()
-                .eraType(EraType.ALPHABET).
+                .eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
                 fillType(FillType.BLANK).toDateString());
         tempTokuteishippei_2.append("～")
-                .append(new RDate(item.get二次判定認定有効終了年月日().toString()).wareki().eraType(EraType.ALPHABET).
+                .append(new RDate(item.get二次判定認定有効終了年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.GAN_NEN).
                         separator(Separator.PERIOD).
                         fillType(FillType.BLANK).toDateString());

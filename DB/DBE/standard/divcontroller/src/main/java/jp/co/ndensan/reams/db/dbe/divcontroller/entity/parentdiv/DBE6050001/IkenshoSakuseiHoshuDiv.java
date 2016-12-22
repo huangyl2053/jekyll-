@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshoSakuseiHoshuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
      */
     @JsonProperty("dgIkenshoSakuseiHoshu")
     private DataGrid<dgIkenshoSakuseiHoshu_Row> dgIkenshoSakuseiHoshu;
+    @JsonProperty("txtTotalCount")
+    private TextBoxNum txtTotalCount;
     @JsonProperty("txtZaitakuShinki")
     private TextBoxNum txtZaitakuShinki;
     @JsonProperty("txtZaitakuKeizoku")
@@ -31,10 +33,10 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
     private TextBoxNum txtShisetsuShinki;
     @JsonProperty("txtShisetsuKeizoku")
     private TextBoxNum txtShisetsuKeizoku;
-    @JsonProperty("txtKotsuhito")
-    private TextBoxNum txtKotsuhito;
-    @JsonProperty("txtZeiKojoGaku")
-    private TextBoxNum txtZeiKojoGaku;
+    @JsonProperty("txtSakuseiryo")
+    private TextBoxNum txtSakuseiryo;
+    @JsonProperty("txtShinryohi")
+    private TextBoxNum txtShinryohi;
     @JsonProperty("txtHoshuGokei")
     private TextBoxNum txtHoshuGokei;
 
@@ -60,6 +62,24 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
     @JsonProperty("dgIkenshoSakuseiHoshu")
     public void setDgIkenshoSakuseiHoshu(DataGrid<dgIkenshoSakuseiHoshu_Row> dgIkenshoSakuseiHoshu) {
         this.dgIkenshoSakuseiHoshu = dgIkenshoSakuseiHoshu;
+    }
+
+    /*
+     * gettxtTotalCount
+     * @return txtTotalCount
+     */
+    @JsonProperty("txtTotalCount")
+    public TextBoxNum getTxtTotalCount() {
+        return txtTotalCount;
+    }
+
+    /*
+     * settxtTotalCount
+     * @param txtTotalCount txtTotalCount
+     */
+    @JsonProperty("txtTotalCount")
+    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.txtTotalCount = txtTotalCount;
     }
 
     /*
@@ -135,39 +155,39 @@ public class IkenshoSakuseiHoshuDiv extends Panel {
     }
 
     /*
-     * gettxtKotsuhito
-     * @return txtKotsuhito
+     * gettxtSakuseiryo
+     * @return txtSakuseiryo
      */
-    @JsonProperty("txtKotsuhito")
-    public TextBoxNum getTxtKotsuhito() {
-        return txtKotsuhito;
+    @JsonProperty("txtSakuseiryo")
+    public TextBoxNum getTxtSakuseiryo() {
+        return txtSakuseiryo;
     }
 
     /*
-     * settxtKotsuhito
-     * @param txtKotsuhito txtKotsuhito
+     * settxtSakuseiryo
+     * @param txtSakuseiryo txtSakuseiryo
      */
-    @JsonProperty("txtKotsuhito")
-    public void setTxtKotsuhito(TextBoxNum txtKotsuhito) {
-        this.txtKotsuhito = txtKotsuhito;
+    @JsonProperty("txtSakuseiryo")
+    public void setTxtSakuseiryo(TextBoxNum txtSakuseiryo) {
+        this.txtSakuseiryo = txtSakuseiryo;
     }
 
     /*
-     * gettxtZeiKojoGaku
-     * @return txtZeiKojoGaku
+     * gettxtShinryohi
+     * @return txtShinryohi
      */
-    @JsonProperty("txtZeiKojoGaku")
-    public TextBoxNum getTxtZeiKojoGaku() {
-        return txtZeiKojoGaku;
+    @JsonProperty("txtShinryohi")
+    public TextBoxNum getTxtShinryohi() {
+        return txtShinryohi;
     }
 
     /*
-     * settxtZeiKojoGaku
-     * @param txtZeiKojoGaku txtZeiKojoGaku
+     * settxtShinryohi
+     * @param txtShinryohi txtShinryohi
      */
-    @JsonProperty("txtZeiKojoGaku")
-    public void setTxtZeiKojoGaku(TextBoxNum txtZeiKojoGaku) {
-        this.txtZeiKojoGaku = txtZeiKojoGaku;
+    @JsonProperty("txtShinryohi")
+    public void setTxtShinryohi(TextBoxNum txtShinryohi) {
+        this.txtShinryohi = txtShinryohi;
     }
 
     /*

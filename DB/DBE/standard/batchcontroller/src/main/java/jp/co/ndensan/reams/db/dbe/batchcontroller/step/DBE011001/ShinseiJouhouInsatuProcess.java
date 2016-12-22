@@ -58,7 +58,6 @@ public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitor
     private ShinseiJouhouInsatuProcessParameter processParameter;
     private static final List<RString> PAGE_BREAK_KEYS = Collections
             .unmodifiableList(Arrays.asList(new RString(ShinseiMonitorReportSource.ReportSourceFields.shichosonName.name())));
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString 無し = new RString("無し");
     @BatchWriter
@@ -135,11 +134,9 @@ public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitor
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JOBNO_NAME);
-        ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE012001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE011002.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = 無し;
         RString csvファイル名 = MIDDLELINE;
@@ -147,7 +144,7 @@ public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitor
         出力条件.add(dateFormat(processParameter.getShinnseikaFrom()));
         出力条件.add(dateFormat(processParameter.getShinnseikaTo()));
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE012001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE011002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();

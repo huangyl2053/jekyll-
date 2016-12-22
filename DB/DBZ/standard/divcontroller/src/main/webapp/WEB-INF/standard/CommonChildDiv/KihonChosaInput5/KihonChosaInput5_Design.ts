@@ -8,12 +8,36 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnConfirm(): string {
-                return "onClick_btnConfirm";
+            public static onBeforeOpenDialog_btnKusuri(): string {
+                return "onBeforeOpenDialog_btnKusuri";
+            }
+
+            public static onBeforeOpenDialog_btnKingakuKanri(): string {
+                return "onBeforeOpenDialog_btnKingakuKanri";
+            }
+
+            public static onBeforeOpenDialog_btnIshiKetei(): string {
+                return "onBeforeOpenDialog_btnIshiKetei";
+            }
+
+            public static onBeforeOpenDialog_btnShudan(): string {
+                return "onBeforeOpenDialog_btnShudan";
+            }
+
+            public static onBeforeOpenDialog_btnKaiMono(): string {
+                return "onBeforeOpenDialog_btnKaiMono";
+            }
+
+            public static onBeforeOpenDialog_btnKantanChori(): string {
+                return "onBeforeOpenDialog_btnKantanChori";
             }
 
             public static onClick_btnBack(): string {
                 return "onClick_btnBack";
+            }
+
+            public static onClick_btnConfirm(): string {
+                return "onClick_btnConfirm";
             }
 
         }
@@ -121,12 +145,12 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKantanChori"));
             }
 
-            public btnConfirm(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            }
-
             public btnBack(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            }
+
+            public btnConfirm(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             }
 
         }

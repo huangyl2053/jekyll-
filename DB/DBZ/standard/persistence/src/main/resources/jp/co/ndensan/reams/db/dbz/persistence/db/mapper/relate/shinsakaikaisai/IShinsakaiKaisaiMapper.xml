@@ -6,6 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shinsakaikaisai.IShinsakaiKaisaiMapper">
 
     <resultMap id="resultMap_ShinsakaiKaisaiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity" autoMapping="true">
+        <result property="totalCount" column="totalCount" />
         <result property="shinsakaiKaisaiYoteiYMD" column="shinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shinsakaiKaishiYoteiTime" column="shinsakaiKaisaiYoteiJoho_shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiShuryoYoteiTime" column="shinsakaiKaisaiYoteiJoho_shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -31,6 +32,7 @@
             resultMap="resultMap_ShinsakaiKaisaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter" fetchSize="500">
         SELECT
+                COUNT(*) OVER () AS "totalCount",
                 shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiYMD",
                 shinsakaiKaisaiYoteiJoho."shinsakaiKaishiYoteiTime" AS "shinsakaiKaisaiYoteiJoho_shinsakaiKaishiYoteiTime",
                 shinsakaiKaisaiYoteiJoho."shinsakaiShuryoYoteiTime" AS "shinsakaiKaisaiYoteiJoho_shinsakaiShuryoYoteiTime",
@@ -55,6 +57,8 @@
         FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS shinsakaiKaisaiYoteiJoho
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS gogitaiJoho
                 ON gogitaiJoho."gogitaiNo" = shinsakaiKaisaiYoteiJoho."gogitaiNo"
+               AND gogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+               AND gogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS shinsakaiKaisaiKekkaJoho
                 ON shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS shinsakaiKaisaiBashoJoho

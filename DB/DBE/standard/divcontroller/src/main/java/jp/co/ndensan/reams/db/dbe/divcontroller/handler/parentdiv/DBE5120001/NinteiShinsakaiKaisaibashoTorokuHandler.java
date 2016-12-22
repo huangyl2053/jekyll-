@@ -51,33 +51,41 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      */
     public void set介護認定審査会開催場所一覧(List<ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList) {
         List<dgKaisaibashoIchiran_Row> rowList = new ArrayList();
+        int i = 0;
         for (ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho : shinsakaiKaisaiBashoJohoList) {
-            RString 開催地区コード = RString.EMPTY;
-            if (shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード() != null
-                    && !shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード().isEmpty()) {
-                開催地区コード = shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード().value();
-            }
 
-            RString 開催場所電話番号 = RString.EMPTY;
-            if (shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号() != null
-                    && !shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().isEmpty()) {
-                開催場所電話番号 = shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().value();
+            if (i < div.getShinsakaiKaisaibashokensaku().getTxtDispMax().getValue().intValue()) {
+                RString 開催地区コード = RString.EMPTY;
+                if (shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード() != null
+                        && !shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード().isEmpty()) {
+                    開催地区コード = shinsakaiKaisaiBashoJoho.get介護認定審査会開催地区コード().value();
+                }
+
+                RString 開催場所電話番号 = RString.EMPTY;
+                if (shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号() != null
+                        && !shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().isEmpty()) {
+                    開催場所電話番号 = shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().value();
+                }
+                dgKaisaibashoIchiran_Row row = new dgKaisaibashoIchiran_Row(RString.EMPTY,
+                        shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所コード(),
+                        shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所名称(),
+                        開催地区コード,
+                        shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所住所(),
+                        開催場所電話番号,
+                        RString.EMPTY);
+                if (shinsakaiKaisaiBashoJoho.is介護認定審査会開催場所状況()) {
+                    row.setKaisaibashoJokyo(通常);
+                } else {
+                    row.setKaisaibashoJokyo(削除);
+                }
+                rowList.add(row);
+                i++;
             }
-            dgKaisaibashoIchiran_Row row = new dgKaisaibashoIchiran_Row(RString.EMPTY,
-                    shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所コード(),
-                    shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所名称(),
-                    開催地区コード,
-                    shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所住所(),
-                    開催場所電話番号,
-                    RString.EMPTY);
-            if (shinsakaiKaisaiBashoJoho.is介護認定審査会開催場所状況()) {
-                row.setKaisaibashoJokyo(通常);
-            } else {
-                row.setKaisaibashoJokyo(削除);
-            }
-            rowList.add(row);
         }
+        int listsize = shinsakaiKaisaiBashoJohoList.size();
         div.getDgKaisaibashoIchiran().setDataSource(rowList);
+        div.getDgKaisaibashoIchiran().getGridSetting().setLimitRowCount(div.getShinsakaiKaisaibashokensaku().getTxtDispMax().getValue().intValue());
+        div.getDgKaisaibashoIchiran().getGridSetting().setSelectedRowCount(listsize);
         clear開催場所編集エリア();
         set開催場所編集エリア非活性();
     }
@@ -250,11 +258,11 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     }
 
     private void setSelectItem(dgKaisaibashoIchiran_Row clickedItem) {
-        div.getTxtKaisaibashoCode().setValue(clickedItem.getKaisaibashoCode());
-        div.getTxtKaisaibashoMeisho().setValue(clickedItem.getKaisaibashoMeisho());
-        div.getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho());
-        div.getTxtTelNumber().setDomain(new TelNo(clickedItem.getKaisaibashoTelNo()));
-        div.getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho());
+        div.getTxtKaisaibashoCode().setValue(RString.isNullOrEmpty(clickedItem.getKaisaibashoCode()) ? RString.EMPTY : clickedItem.getKaisaibashoCode());
+        div.getTxtKaisaibashoMeisho().setValue(RString.isNullOrEmpty(clickedItem.getKaisaibashoMeisho()) ? RString.EMPTY : clickedItem.getKaisaibashoMeisho());
+        div.getTxtKaisaibashoJusho().setValue(RString.isNullOrEmpty(clickedItem.getKaisaibashoJusho()) ? RString.EMPTY : clickedItem.getKaisaibashoJusho());
+        div.getTxtTelNumber().setDomain(new TelNo(RString.isNullOrEmpty(clickedItem.getKaisaibashoTelNo()) ? RString.EMPTY : clickedItem.getKaisaibashoTelNo()));
+//        div.getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho());
         if (通常.equals(clickedItem.getKaisaibashoJokyo())) {
             div.getDdlKaisaiBashoJokyo().setSelectedIndex(0);
         } else if (削除.equals(clickedItem.getKaisaibashoJokyo())) {

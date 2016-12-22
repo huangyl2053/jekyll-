@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 務局用概況特記一覧表情報です。
@@ -17,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ImjJohoEntity {
 
+    private RString dbt5101_shoKisaiHokenshaNo;
+    private RString dbt5101_hihokenshaNo;
     private int dbt5502_shinsakaiOrder;
     private RDateTime dbt5115_imageSharedFileId;
     private boolean isJimukyoku;

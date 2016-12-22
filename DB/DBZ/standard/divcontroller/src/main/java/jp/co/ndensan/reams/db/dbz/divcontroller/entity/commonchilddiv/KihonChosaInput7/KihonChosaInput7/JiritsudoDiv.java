@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JiritsudoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,8 @@ public class JiritsudoDiv extends Panel {
     private RString recordNumber;
     @JsonProperty("ninteichosaTokkijikoNoList")
     private RString ninteichosaTokkijikoNoList;
+    @JsonProperty("tokkijikoNo")
+    private RString tokkijikoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -128,6 +130,24 @@ public class JiritsudoDiv extends Panel {
     @JsonProperty("ninteichosaTokkijikoNoList")
     public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
         this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * gettokkijikoNo
+     * @return tokkijikoNo
+     */
+    @JsonProperty("tokkijikoNo")
+    public RString getTokkijikoNo() {
+        return tokkijikoNo;
+    }
+
+    /*
+     * settokkijikoNo
+     * @param tokkijikoNo tokkijikoNo
+     */
+    @JsonProperty("tokkijikoNo")
+    public void setTokkijikoNo(RString tokkijikoNo) {
+        this.tokkijikoNo = tokkijikoNo;
     }
 
     /*

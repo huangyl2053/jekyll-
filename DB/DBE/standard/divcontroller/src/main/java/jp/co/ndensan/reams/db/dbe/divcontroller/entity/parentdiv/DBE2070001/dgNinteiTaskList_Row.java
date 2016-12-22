@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 13 15:18:59 JST 2016 
+ * Wed Dec 21 13:21:26 JST 2016 
  */
 
 
@@ -30,9 +30,9 @@ public class dgNinteiTaskList_Row extends DataRow {
     private RString hihoShimei;
     private RString shinseiKubunShinseiji;
     private TextBoxDate koshinKanryoDay;
+    private RString ikenshoIraiShokai;
     private TextBoxDate ikenshoNyushuTeikei;
     private TextBoxDate nyusyubi;
-    private RString ikenshoIraiShokai;
     private TextBoxDate chosaTokusokuHakkoDay;
     private RString chosaTokusokuHoho;
     private TextBoxNum chosaTokusokuCount;
@@ -52,9 +52,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.hihoShimei = RString.EMPTY;
         this.shinseiKubunShinseiji = RString.EMPTY;
         this.koshinKanryoDay = new TextBoxDate();
+        this.ikenshoIraiShokai = RString.EMPTY;
         this.ikenshoNyushuTeikei = new TextBoxDate();
         this.nyusyubi = new TextBoxDate();
-        this.ikenshoIraiShokai = RString.EMPTY;
         this.chosaTokusokuHakkoDay = new TextBoxDate();
         this.chosaTokusokuHoho = RString.EMPTY;
         this.chosaTokusokuCount = new TextBoxNum();
@@ -71,9 +71,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("hihoShimei", hihoShimei);
         this.setOriginalData("shinseiKubunShinseiji", shinseiKubunShinseiji);
         this.setOriginalData("koshinKanryoDay", koshinKanryoDay);
+        this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
         this.setOriginalData("ikenshoNyushuTeikei", ikenshoNyushuTeikei);
         this.setOriginalData("nyusyubi", nyusyubi);
-        this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
         this.setOriginalData("chosaTokusokuHakkoDay", chosaTokusokuHakkoDay);
         this.setOriginalData("chosaTokusokuHoho", chosaTokusokuHoho);
         this.setOriginalData("chosaTokusokuCount", chosaTokusokuCount);
@@ -85,7 +85,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
     }
 
-    public dgNinteiTaskList_Row(RString jyotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate koshinKanryoDay, TextBoxDate ikenshoNyushuTeikei, TextBoxDate nyusyubi, RString ikenshoIraiShokai, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, TextBoxDate chosaTokusokuLiit, TextBoxNum keikaNissu, RString shinseishoKanriNo, TextBoxDate ikenshoIraiKanryoDay, TextBoxDate ikenshoNyushuKanryoDay, RString ikenshoIraiRirekiNo) {
+    public dgNinteiTaskList_Row(RString jyotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate koshinKanryoDay, RString ikenshoIraiShokai, TextBoxDate ikenshoNyushuTeikei, TextBoxDate nyusyubi, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, TextBoxDate chosaTokusokuLiit, TextBoxNum keikaNissu, RString shinseishoKanriNo, TextBoxDate ikenshoIraiKanryoDay, TextBoxDate ikenshoNyushuKanryoDay, RString ikenshoIraiRirekiNo) {
         super();
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("hokensha", hokensha);
@@ -94,9 +94,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("hihoShimei", hihoShimei);
         this.setOriginalData("shinseiKubunShinseiji", shinseiKubunShinseiji);
         this.setOriginalData("koshinKanryoDay", koshinKanryoDay);
+        this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
         this.setOriginalData("ikenshoNyushuTeikei", ikenshoNyushuTeikei);
         this.setOriginalData("nyusyubi", nyusyubi);
-        this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
         this.setOriginalData("chosaTokusokuHakkoDay", chosaTokusokuHakkoDay);
         this.setOriginalData("chosaTokusokuHoho", chosaTokusokuHoho);
         this.setOriginalData("chosaTokusokuCount", chosaTokusokuCount);
@@ -113,9 +113,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.hihoShimei = hihoShimei;
         this.shinseiKubunShinseiji = shinseiKubunShinseiji;
         this.koshinKanryoDay = koshinKanryoDay;
+        this.ikenshoIraiShokai = ikenshoIraiShokai;
         this.ikenshoNyushuTeikei = ikenshoNyushuTeikei;
         this.nyusyubi = nyusyubi;
-        this.ikenshoIraiShokai = ikenshoIraiShokai;
         this.chosaTokusokuHakkoDay = chosaTokusokuHakkoDay;
         this.chosaTokusokuHoho = chosaTokusokuHoho;
         this.chosaTokusokuCount = chosaTokusokuCount;
@@ -155,16 +155,16 @@ public class dgNinteiTaskList_Row extends DataRow {
         return koshinKanryoDay;
     }
 
+    public RString getIkenshoIraiShokai() {
+        return ikenshoIraiShokai;
+    }
+
     public TextBoxDate getIkenshoNyushuTeikei() {
         return ikenshoNyushuTeikei;
     }
 
     public TextBoxDate getNyusyubi() {
         return nyusyubi;
-    }
-
-    public RString getIkenshoIraiShokai() {
-        return ikenshoIraiShokai;
     }
 
     public TextBoxDate getChosaTokusokuHakkoDay() {
@@ -238,6 +238,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.koshinKanryoDay = koshinKanryoDay;
     }
 
+    public void setIkenshoIraiShokai(RString ikenshoIraiShokai) {
+        this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
+        this.ikenshoIraiShokai = ikenshoIraiShokai;
+    }
+
     public void setIkenshoNyushuTeikei(TextBoxDate ikenshoNyushuTeikei) {
         this.setOriginalData("ikenshoNyushuTeikei", ikenshoNyushuTeikei);
         this.ikenshoNyushuTeikei = ikenshoNyushuTeikei;
@@ -246,11 +251,6 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setNyusyubi(TextBoxDate nyusyubi) {
         this.setOriginalData("nyusyubi", nyusyubi);
         this.nyusyubi = nyusyubi;
-    }
-
-    public void setIkenshoIraiShokai(RString ikenshoIraiShokai) {
-        this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
-        this.ikenshoIraiShokai = ikenshoIraiShokai;
     }
 
     public void setChosaTokusokuHakkoDay(TextBoxDate chosaTokusokuHakkoDay) {

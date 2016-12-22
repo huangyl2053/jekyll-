@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001.DBE525001SelectC
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001.DBE525001_HanteiKekkaShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250001.HanteiKekkaJohoShutsuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250001.HanteiKekkaJohoShutsuryokuValidationHandler;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
@@ -27,6 +28,7 @@ public class HanteiKekkaJohoShutsuryoku {
 
     private static final RString モード = new RString("hanteiKekka");
     private static final RString 帳票発行ボタン = new RString("btnHanteiKekkaIchiran");
+    private static final RString 一覧グリッド高さ = new RString("300");
 
     /**
      * 判定結果情報出力（介護認定審査会）Divを初期化します。
@@ -45,6 +47,7 @@ public class HanteiKekkaJohoShutsuryoku {
         map.put(DBE525001SelectChohyoType.要介護認定結果通知一覧表.getKey(), DBE525001SelectChohyoType.要介護認定結果通知一覧表.get帳票名称());
         div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().setDataSource(KeyValueDataSourceConverter.getDataSource(map));
         div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().setSelectedItems(KeyValueDataSourceConverter.getDataSource(map));
+        div.getCcdIShinsakaiIchiranList().set一覧グリッド高さ指定(一覧グリッド高さ);
         return ResponseData.of(div).respond();
     }
 
@@ -72,33 +75,34 @@ public class HanteiKekkaJohoShutsuryoku {
      */
     public ResponseData<DBE525001_HanteiKekkaShinsakaiParameter> onClick_btnAction(HanteiKekkaJohoShutsuryokuDiv div) {
         DBE525001_HanteiKekkaShinsakaiParameter parameter = new DBE525001_HanteiKekkaShinsakaiParameter();
-        parameter.setKaisaiBangouList(div.getCcdIShinsakaiIchiranList().get開催番号List());
-        List<RString> selectedList = div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().getSelectedKeys();
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表A3版.getKey())) {
+        parameter.setKaisaiBangou(div.getCcdIShinsakaiIchiranList().get開催番号List().get(0));
+        List<RString> selectedChohyoList = div.getSelectShutsuryokuChohyo().getCblSelectShutsuryokuChohyo().getSelectedKeys();
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表A3版.getKey())) {
             parameter.setPublish_HanteiKekkaA3(true);
         } else {
             parameter.setPublish_HanteiKekkaA3(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定判定結果一覧表.getKey())) {
             parameter.setPublish_HanteiKekka(true);
         } else {
             parameter.setPublish_HanteiKekka(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定審査判定結果_鑑.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定審査判定結果_鑑.getKey())) {
             parameter.setPublish_HanteiKekkaKagami(true);
         } else {
             parameter.setPublish_HanteiKekkaKagami(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定審査会議事録.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定審査会議事録.getKey())) {
             parameter.setPublish_ShinsakaiGijiroku(true);
         } else {
             parameter.setPublish_ShinsakaiGijiroku(false);
         }
-        if (selectedList.contains(DBE525001SelectChohyoType.要介護認定結果通知一覧表.getKey())) {
+        if (selectedChohyoList.contains(DBE525001SelectChohyoType.要介護認定結果通知一覧表.getKey())) {
             parameter.setPublish_KekkaTsuchiIchiran(true);
         } else {
             parameter.setPublish_KekkaTsuchiIchiran(false);
         }
+        parameter.setUserId(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
         return ResponseData.of(parameter).respond();
     }
 

@@ -6,8 +6,8 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiiryokikanmaster.IKoseiShujiiIryoKikanMasterMapper">
 
     <select resultOrdered="true" id="selectShujiiIryoKikanJohoCount"
-             resultType="int"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
         SELECT
         COUNT(0)
         FROM
@@ -32,9 +32,10 @@
     </select>
 
     <select resultOrdered="true" id="selectShujiKikanJohoIchiranList"
-           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
-           resultMap="resultMap_KoseiShujiiIryoKikanMasterEntity"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
+            resultMap="resultMap_KoseiShujiiIryoKikanMasterEntity"            fetchSize="500">
         SELECT
+        COUNT(*) OVER () AS "totalCount",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" AS "dbT5911ShujiiIryoKikanJoho_shichosonCode",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" AS "dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryokikanCode" AS "dbT5911ShujiiIryoKikanJoho_iryokikanCode",
@@ -71,7 +72,7 @@
             <if test="uses主治医医療機関コードTo">
                 AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" <![CDATA[<=]]> #{主治医医療機関コードTo}
             </if>
-            
+
             <if test="uses医療機関名称">
                 <if test="医療機関名称前方一致Flag">
                     AND DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho" LIKE #{医療機関名称} || '%'
@@ -102,27 +103,25 @@
             </if>
             <if test="市町村識別ID利用Flag">
                 AND DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonShokibetsuID" NOT IN (
-                        SELECT "shichosonShokibetsuID"
-                        FROM rgdb."DbT7051KoseiShichosonMaster"
-                        WHERE  "shichosonCode"=(
-                                                SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
-                                                WHERE "shichosonShokibetsuID" = #{市町村識別ID}
-                                                )
-                        AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
-                        )
+                SELECT "shichosonShokibetsuID"
+                FROM rgdb."DbT7051KoseiShichosonMaster"
+                WHERE  "shichosonCode"=(
+                SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
+                WHERE "shichosonShokibetsuID" = #{市町村識別ID}
+                )
+                AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
+                )
             </if>
         </where>
         ORDER BY
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode"
-        <if test="usesSaidaiHyojiKensu">
-            LIMIT #{saidaiHyojiKensu}
-        </if>
+        LIMIT #{saidaiHyojiKensu}
     </select>
 
     <resultMap id="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiIryokikanCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5911ShujiiIryoKikanJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5911ShujiiIryoKikanJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5911ShujiiIryoKikanJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -144,8 +143,8 @@
     </resultMap>
 
     <select resultOrdered="true" id="selectShujiiIryoKikanJohoList"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
-             resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
+            resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho.*
         FROM
@@ -189,6 +188,7 @@
     <resultMap id="resultMap_KoseiShujiiIryoKikanMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="shujiiIryokikanCode" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="totalCount" column="totalCount" />
         <result property="iryokikanCode" column="dbT5911ShujiiIryoKikanJoho_iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler"/>
         <result property="iryoKikanMeisho" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeishoKana" column="dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

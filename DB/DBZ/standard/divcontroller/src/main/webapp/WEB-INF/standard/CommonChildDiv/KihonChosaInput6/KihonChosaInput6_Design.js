@@ -4,12 +4,20 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnConfirm = function () {
-                return "onClick_btnConfirm";
+            Events.onBeforeOpenDialog_btnShochiNaiyo = function () {
+                return "onBeforeOpenDialog_btnShochiNaiyo";
+            };
+
+            Events.onBeforeOpenDialog_btnTokiTaiou = function () {
+                return "onBeforeOpenDialog_btnTokiTaiou";
             };
 
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
+            };
+
+            Events.onClick_btnConfirm = function () {
+                return "onClick_btnConfirm";
             };
             return Events;
         })();
@@ -67,12 +75,12 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou"));
             };
 
-            Controls.prototype.btnConfirm = function () {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            };
-
             Controls.prototype.btnBack = function () {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            };
+
+            Controls.prototype.btnConfirm = function () {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             };
             return Controls;
         })();

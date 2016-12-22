@@ -42,6 +42,18 @@ public class NinteiShinseishaFinder {
     }
 
     /**
+     * 保険者DDLを変更した時の処理です。<br/>
+     * 最近処理者の一覧を更新します。
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onChange_Hokenja(NinteiShinseishaFinderDiv div) {
+        div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 詳細条件パネルの初期化処理です。
      *
      * @param div NinteiShinseishaFinderDiv
@@ -273,7 +285,7 @@ public class NinteiShinseishaFinder {
         List<RString> selectedkeyKanryo = new ArrayList();
         selectedkeyMikann.add(処理状態未完了);
         selectedkeyKanryo.add(処理状態完了);
-         div.getChkIchijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkIchijiHantei().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkMasking().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkShinsakaiToroku().setSelectedItemsByKey(selectedkeyMikann);
@@ -282,7 +294,7 @@ public class NinteiShinseishaFinder {
         div.getChkChosaNyushu().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkIkenshoNyushu().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
-            //div.getChkShoriJotai().setSelectedItemsByKey(selectedkeyMikann);
+        //div.getChkShoriJotai().setSelectedItemsByKey(selectedkeyMikann);
         // ①フェーズDDLが申請受付の場合
         if (KanryoInfoPhase.申請受付.getコード().equals(nowPhase)
                 && div.getChkShinseiUketsuke().getSelectedKeys().contains(処理状態完了)) {
@@ -595,7 +607,7 @@ public class NinteiShinseishaFinder {
         List<RString> selectedkeyMikann = new ArrayList();
         List<RString> selectedkeyKanryo = new ArrayList();
         selectedkeyMikann.add(処理状態未完了);
-        selectedkeyKanryo.add(処理状態完了);  
+        selectedkeyKanryo.add(処理状態完了);
         div.getChkIchijiHantei().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkMasking().setSelectedItemsByKey(selectedkeyMikann);
@@ -624,7 +636,7 @@ public class NinteiShinseishaFinder {
         return ResponseData.of(div).respond();
     }
 
-     /**
+    /**
      * 現在のフェーズDDLより、処理状態のonChangeまだonClick場合、各処理状態を制御します。
      *
      * @param div NinteiShinseishaFinderDiv
@@ -744,7 +756,7 @@ public class NinteiShinseishaFinder {
 //        }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 主治医医療機関の検索処理です。
      *
@@ -769,8 +781,8 @@ public class NinteiShinseishaFinder {
     public ResponseData<NinteiShinseishaFinderDiv> onOkClose_btnShujiiIryokikanGuide(NinteiShinseishaFinderDiv div) {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
-        if (!dataPassModel.get市町村コード().equals(div.getHdnShujiiShichosonCode()) || 
-                !div.getHdnShujiiIryokikanCode().equals(dataPassModel.get主治医医療機関コード())) {
+        if (!dataPassModel.get市町村コード().equals(div.getHdnShujiiShichosonCode())
+                || !div.getHdnShujiiIryokikanCode().equals(dataPassModel.get主治医医療機関コード())) {
             div.getTxtShujiiIryokikanName().setValue(dataPassModel.get主治医医療機関名称());
             div.setHdnShujiiIryokikanCode(dataPassModel.get主治医医療機関コード());
             div.setHdnShujiiShichosonCode(dataPassModel.get市町村コード());
@@ -841,8 +853,8 @@ public class NinteiShinseishaFinder {
     public ResponseData<NinteiShinseishaFinderDiv> onOkClose_btnNinteiChosaItakusakiGuide(NinteiShinseishaFinderDiv div) {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        if (!dataPassModel.get市町村コード().equals(div.getHdnChosaShichosonCode()) || 
-                !div.getHdnChosaItakusakiCode().equals(dataPassModel.get委託先コード())) {
+        if (!dataPassModel.get市町村コード().equals(div.getHdnChosaShichosonCode())
+                || !div.getHdnChosaItakusakiCode().equals(dataPassModel.get委託先コード())) {
             div.getTxtNinteiChosaItakusakiName().setValue(dataPassModel.get委託先名());
             div.setHdnChosaItakusakiCode(dataPassModel.get委託先コード());
             div.setHdnChosaShichosonCode(dataPassModel.get市町村コード());

@@ -25,9 +25,9 @@
 					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='2' AND T5302."zaitakuShisetsuKubun"='2' THEN '○' ELSE '' END AS "施設_継",												
 					T5302."ikenshoIraiKubun",											
 					T5602."shujiiCode",													
-					T5602."ikenshoSakuseiryo",													
-					T5602."ikenshoBettoShinryohi",
-                                        T5602."ikenshoHoshu",	
+					COALESCE(T5602."ikenshoSakuseiryo", 0) AS "ikenshoSakuseiryo",													
+					COALESCE(T5602."ikenshoBettoShinryohi", 0) AS "ikenshoBettoShinryohi",
+                                        COALESCE(T5602."ikenshoHoshu", 0) AS "ikenshoHoshu",	
                                         T5602."shinseishoKanriNo",
                                         T5602."ikenshoIraiRirekiNo"							
 		FROM		rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS  T5602													
@@ -53,6 +53,9 @@
                 <if test="作成依頼日終了Flag">
                     AND T5602."iraishoSakuseiIraiYMD" <![CDATA[<=]]> #{作成依頼日終了}
                 </if>
+                <if test="保険者Flag">
+                    AND T7051."shichosonCode" = #{保険者}
+                </if>
                 <if test="batchFlag">
                     AND
                      <foreach collection="ikenshoBusiness" item="ikensho" open="(" separator="OR" close=")">
@@ -62,12 +65,13 @@
                      AND T5602."ikenshoIraiRirekiNo"=#{ikensho.主治医意見書作成依頼履歴番号})
                      </foreach>	 
                 </if>
-                <if test="画面Flag">
+                <!-- バッチから呼び出された場合に主治医医療機関コードで改ページするため、並び替えが必要 -->
+                <!--<if test="画面Flag">-->
 		    ORDER BY            T7051."shichosonCode",													
 		    			T5602."shujiiIryoKikanCode",													
 		    			T5602."shujiiCode",													
 					T5602."iraishoSakuseiIraiYMD" DESC	
-                </if>												
+                <!--</if>-->
 		<if test="最大表示件数Flag">
                     LIMIT #{最大表示件数}	
                 </if> 	

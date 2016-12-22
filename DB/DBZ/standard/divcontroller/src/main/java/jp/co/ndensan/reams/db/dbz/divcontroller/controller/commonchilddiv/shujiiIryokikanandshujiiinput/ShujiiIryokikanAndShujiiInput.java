@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.Sh
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -48,6 +50,10 @@ public class ShujiiIryokikanAndShujiiInput {
         RString 主治医医療機関名称 = servie.getIryoKikanMeisho(new LasdecCode(div.getHdnShichosonCode()),
                 div.getTxtIryoKikanCode().getValue());
         createHandler(div).setIryoKikanName(主治医医療機関名称);
+        ValidationMessageControlPairs validationResult = createValidationHandler(div).validate医療機関コード();
+        if (validationResult.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationResult).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -62,6 +68,10 @@ public class ShujiiIryokikanAndShujiiInput {
                 div.getTxtIryoKikanCode().getValue(),
                 div.getTxtShujiiCode().getValue());
         createHandler(div).setShujiiName(主治医氏名);
+        ValidationMessageControlPairs validationResult = createValidationHandler(div).validate主治医コード();
+        if (validationResult.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationResult).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -101,6 +111,8 @@ public class ShujiiIryokikanAndShujiiInput {
         ShujiiIryokikanandshujiiDataPassModel modle = new ShujiiIryokikanandshujiiDataPassModel();
         modle.set市町村コード(div.getHdnShichosonCode());
         modle.setサブ業務コード(div.getHdnSubGyomuModel());
+        modle.set主治医医療機関コード(div.getTxtIryoKikanCode().getValue());
+        modle.set主治医医療機関名称(div.getTxtIryoKikanName().getValue());
         modle.set対象モード(new RString(TaishoMode.ShujiiMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
         return ResponseData.of(div).respond();
@@ -181,5 +193,9 @@ public class ShujiiIryokikanAndShujiiInput {
 
     private ShujiiIryokikanAndShujiiInputHandler createHandler(ShujiiIryokikanAndShujiiInputDiv div) {
         return new ShujiiIryokikanAndShujiiInputHandler(div);
+    }
+
+    private ShujiiIryokikanAndShujiiInputValidationHandler createValidationHandler(ShujiiIryokikanAndShujiiInputDiv div) {
+        return new ShujiiIryokikanAndShujiiInputValidationHandler(div);
     }
 }

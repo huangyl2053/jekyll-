@@ -24,12 +24,9 @@ public class ShinsaTaishoDataOutPutMybatisParameter implements IMyBatisParameter
      * コンストラクタです。
      *
      * @param kaisaiBangou 開催番号
-     *
-     * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public ShinsaTaishoDataOutPutMybatisParameter(RString kaisaiBangou) {
         this.kaisaiBangou = kaisaiBangou;
-
     }
 
     /**

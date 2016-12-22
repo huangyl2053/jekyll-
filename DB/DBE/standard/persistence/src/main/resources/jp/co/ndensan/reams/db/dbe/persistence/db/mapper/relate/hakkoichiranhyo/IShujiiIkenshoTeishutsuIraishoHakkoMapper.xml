@@ -46,80 +46,84 @@
     <select resultOrdered="true" id="get主治医意見書提出依頼書発行" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter" fetchSize="500">
         SELECT
-            DbT5101."shinseishoKanriNo"
-            , DbT5101."shoKisaiHokenshaNo"
-            , DbT5101."hihokenshaKana"
-            , DbT5101."hihokenshaName"
-            , DbT5101."hihokenshaNo"
-            , DbT5101."age"
-            , DbT5101."jusho"
-            , DbT5101."seinengappiYMD"
-            , DbT5101."seibetsu"
-            , DbT5101."yubinNo"
-            , DbT5101."ninteiShinseiYMD"
-            , DbT5101."telNo"
-            , DbT5101."shujiiIryokikanCode"
-            , DbT5101."shujiiCode"
-            , DbT5911."jusho" AS 医療機関住所
-            , DbT5911."telNo" AS 医療機関電話番号
-            , DbT5911."faxNo" AS 医療機関FAX番号
-            , DbT5911."yubinNo" AS 医療機関郵便番号
-            , DbT5911."iryoKikanMeisho"
-            , DbT5911."daihyoshaName"
-            , DbT5301."ikenshoIraiKubun"
-            , DbT5301."ikenshoSakuseiKigenYMD"
-            , DbT5302."zaitakuShisetsuKubun"
-            , DbT5301."ikenshoSakuseiIraiYMD"
-            , DbT5101."ninteiShinseiShinseijiKubunCode"
-            , DbT5302."ikenshoSakuseiKaisuKubun"
-            , DbT5302."ikenshoKinyuYMD"
-            , DbT5302."ikenshoReadYMD"
-            , DbT5912."shujiiName"
-            , DbT7051."shichosonMeisho" AS 保険者名
-            , DbT5602."ikenshoBettoShinryohi"
-            , DbT5602."hoshuShiharaiYMD"
-            , rirekiNosho."ikenshoIraiRirekiNo" 
-          FROM
-            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
-            INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
-              ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
-              ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
-            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
-              ON DbT5911."shichosonCode" = DbT7051."shichosonCode" 
-              AND DbT5911."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode" 
-              AND DbT5911."jokyoFlag" = true 
-            INNER JOIN ( 
-              SELECT
-                MAX("ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
-                , "shinseishoKanriNo" 
-              FROM
-                rgdb."DbT5301ShujiiIkenshoIraiJoho" 
-              WHERE
-                "logicalDeletedFlag" = false 
-              GROUP BY
-                "shinseishoKanriNo"
-            ) rirekiNosho 
-              ON rirekiNosho."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-            LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301 
-              ON DbT5301."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-              AND DbT5301."logicalDeletedFlag" = false 
-              AND DbT5301."ikenshoIraiRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
-            LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
-              ON DbT5202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-              AND DbT5202."ninteichosaRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
-            LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302 
-              ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-              AND DbT5302."ikenshoIraiRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
-            LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912 
-              ON DbT5301."shujiiIryokikanCode" = DbT5912."shujiiIryokikanCode" 
-              AND DbT5301."shujiiCode" = DbT5912."shujiiCode" 
-              AND DbT7051."shichosonCode" = DbT5912."shichosonCode" 
-              AND DbT5912."jokyoFlag" = true 
-            LEFT JOIN rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS DbT5602 
-              ON DbT5602."shinseishoKanriNo" = DbT5302."shinseishoKanriNo" 
-              AND DbT5602."shujiiIryoKikanCode" = DbT5302."shujiiIryoKikanCode" 
-              AND DbT5602."ikenshoIraiRirekiNo" = DbT5302."ikenshoIraiRirekiNo"
+        DbT5101."shinseishoKanriNo"
+        , DbT5101."shoKisaiHokenshaNo"
+        , DbT5101."hihokenshaKana"
+        , DbT5101."hihokenshaName"
+        , DbT5101."hihokenshaNo"
+        , DbT5101."age"
+        , DbT5101."jusho"
+        , DbT5101."seinengappiYMD"
+        , DbT5101."seibetsu"
+        , DbT5101."yubinNo"
+        , DbT5101."ninteiShinseiYMD"
+        , DbT5101."telNo"
+        , DbT5101."shujiiIryokikanCode"
+        , DbT5101."shujiiCode"
+        , DbT5911."jusho" AS 医療機関住所
+        , DbT5911."telNo" AS 医療機関電話番号
+        , DbT5911."faxNo" AS 医療機関FAX番号
+        , DbT5911."yubinNo" AS 医療機関郵便番号
+        , DbT5911."iryoKikanMeisho"
+        , DbT5911."daihyoshaName"
+        , DbT5301."ikenshoIraiKubun"
+        , DbT5301."ikenshoSakuseiKigenYMD"
+        , DbT5302."zaitakuShisetsuKubun"
+        , DbT5301."ikenshoSakuseiIraiYMD"
+        , DbT5101."ninteiShinseiShinseijiKubunCode"
+        , DbT5302."ikenshoSakuseiKaisuKubun"
+        , DbT5302."ikenshoKinyuYMD"
+        , DbT5302."ikenshoReadYMD"
+        , DbT5302."ikenshoIraiKubun"
+        , DbT5912."shujiiName"
+        , DbT7051."shichosonMeisho" AS 保険者名
+        , DbT5602."ikenshoBettoShinryohi"
+        , DbT5602."hoshuShiharaiYMD"
+        , rirekiNosho."ikenshoIraiRirekiNo" 
+        <include refid="ShujiiIkenshoTeishutsuIraiHakko" />
+    </select>
+    <sql id="ShujiiIkenshoTeishutsuIraiHakko">
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
+        ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
+        ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
+        ON DbT5911."shichosonCode" = DbT7051."shichosonCode" 
+        AND DbT5911."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode" 
+        AND DbT5911."jokyoFlag" = true 
+        INNER JOIN ( 
+        SELECT
+        MAX("ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
+        , "shinseishoKanriNo" 
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" 
+        WHERE
+        "logicalDeletedFlag" = false 
+        GROUP BY
+        "shinseishoKanriNo"
+        ) rirekiNosho 
+        ON rirekiNosho."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301 
+        ON DbT5301."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+        AND DbT5301."logicalDeletedFlag" = false 
+        AND DbT5301."ikenshoIraiRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
+        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+        ON DbT5202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+        AND DbT5202."ninteichosaRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302 
+        ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+        AND DbT5302."ikenshoIraiRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912 
+        ON DbT5301."shujiiIryokikanCode" = DbT5912."shujiiIryokikanCode" 
+        AND DbT5301."shujiiCode" = DbT5912."shujiiCode" 
+        AND DbT7051."shichosonCode" = DbT5912."shichosonCode" 
+        AND DbT5912."jokyoFlag" = true 
+        LEFT JOIN rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS DbT5602 
+        ON DbT5602."shinseishoKanriNo" = DbT5302."shinseishoKanriNo" 
+        AND DbT5602."shujiiIryoKikanCode" = DbT5302."shujiiIryoKikanCode" 
+        AND DbT5602."ikenshoIraiRirekiNo" = DbT5302."ikenshoIraiRirekiNo"
         WHERE
         <foreach  
             collection="shujiiIkenshoSakuseiIraiList"
@@ -127,16 +131,16 @@
             open="("  
             separator="OR"  
             close=")">  
-           (DbT5101."shujiiIryokikanCode" =  #{item.shujiiIryoKikanCode} 
-           AND DbT5101."shujiiCode" = #{item.ishiNo} 
-           AND Dbt5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
+            (DbT5101."shujiiIryokikanCode" =  #{item.shujiiIryoKikanCode} 
+            AND DbT5101."shujiiCode" = #{item.ishiNo} 
+            AND Dbt5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
         </foreach>
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag"= false 
-        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL 
-        AND DbT5105."centerSoshinYMD" IS NULL 
+        AND (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiWariateKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105."centerSoshinYMD" IS NULL OR DbT5105."centerSoshinYMD" = '')
         <if test="is依頼日From">
             AND DbT5301."ikenshoSakuseiIraiYMD"<![CDATA[>=]]> #{iraiFromYMD}
         </if>
@@ -145,34 +149,34 @@
         </if>
         <if test="!is意見書作成未印刷_印刷済">
             <if test="is意見書作成未印刷">
-                AND DbT5301."iraishoShutsuryokuYMD" IS NULL
+                AND (DbT5301."iraishoShutsuryokuYMD" IS NULL OR DbT5105."iraishoShutsuryokuYMD" = '')
             </if>
             <if test="is意見書作成印刷済">
-                AND DbT5301."iraishoShutsuryokuYMD" IS NOT NULL
+                AND (DbT5301."iraishoShutsuryokuYMD" IS NOT NULL AND DbT5301."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         <if test="!is意見書未印刷_印刷済">
             <if test="is意見書未印刷">
-                AND DbT5301."ikenshoShutsuryokuYMD" IS NULL
+                AND (DbT5301."ikenshoShutsuryokuYMD" IS NULL OR DbT5105."ikenshoShutsuryokuYMD" = '')
             </if>
             <if test="is意見書印刷済">
-                AND DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL
+                AND (DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL AND DbT5301."ikenshoShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         ORDER BY
-            DbT5101."shujiiIryokikanCode",
-            DbT5101."shujiiCode"
-    </select>
+        DbT5101."shujiiIryokikanCode",
+        DbT5101."shujiiCode"
+    </sql>
       
-      <select resultOrdered="true" id="get主治医意見書作成依頼情報" 
-              resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
-          parameterType="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity" fetchSize="500">
-       SELECT
+    <select resultOrdered="true" id="get主治医意見書作成依頼情報" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity" fetchSize="500">
+        SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
         FROM
         rgdb."DbT5301ShujiiIkenshoIraiJoho"
         WHERE
-           "shinseishoKanriNo" = #{申請書管理番号}
+        "shinseishoKanriNo" = #{申請書管理番号}
         AND "ikenshoIraiRirekiNo" = #{最大依頼履歴番号}
         AND "logicalDeletedFlag" = false
     </select>   
@@ -180,126 +184,134 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoMybatisParameter"
             fetchSize="500">
         SELECT
-          A.直近区分 AS 直近区分
-          , A.被保険者番号 AS hihokenshaNo
-          , A.被保険者氏名カナ AS hihokenshaKana
-          , A.被保険者氏名 AS hihokenshaName
-          , A.住所 AS jusho
-          , A.医療機関名称 AS iryoKikanMeisho
-          , A.主治医氏名 AS shujiiName
-          , A.主治医意見書作成依頼年月日 AS ikenshoSakuseiIraiYMD
-          , A.認定申請区分申請時コード AS ninteiShinseiShinseijiKubunCode
-          , A.意見書作成回数区分 AS ikenshoSakuseiKaisuKubun
+        A.直近区分 AS 直近区分
+        , A.被保険者番号 AS hihokenshaNo
+        , A.被保険者氏名カナ AS hihokenshaKana
+        , A.被保険者氏名 AS hihokenshaName
+        , A.住所 AS jusho
+        , A.医療機関名称 AS iryoKikanMeisho
+        , A.主治医氏名 AS shujiiName
+        , A.主治医意見書作成依頼年月日 AS ikenshoSakuseiIraiYMD
+        , A.認定申請区分申請時コード AS ninteiShinseiShinseijiKubunCode
+        , A.意見書作成回数区分 AS ikenshoSakuseiKaisuKubun
         FROM
-          ( 
-            (SELECT
-              '直近' AS 直近区分
-              , T5101."hihokenshaNo" AS 被保険者番号
-              , T5101."hihokenshaKana" AS 被保険者氏名カナ
-              , T5101."hihokenshaName" AS 被保険者氏名
-              , T5101."jusho" AS 住所
-              , T5911."iryoKikanMeisho" AS 医療機関名称
-              , T5912."shujiiName" AS 主治医氏名
-              , T5301."ikenshoSakuseiIraiYMD" AS 主治医意見書作成依頼年月日
-              , T5101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード
-              , T5302."ikenshoSakuseiKaisuKubun" AS 意見書作成回数区分 
-            FROM
-              rgdb."DbT5101NinteiShinseiJoho" T5101 
-              INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
-                ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
-              LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
-                ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
-                AND T5301."logicalDeletedFlag" = False 
-                AND NOT EXISTS ( 
-                  SELECT
-                    'X' 
-                  FROM
-                    rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1 
-                  WHERE
-                    T5301."shinseishoKanriNo" = B1."shinseishoKanriNo" 
-                    AND B1."logicalDeletedFlag" = False 
-                    AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
-                ) 
-              LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302 
-                ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
-                AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo" 
-              LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" T5911 
-                ON T5301."shujiiIryokikanCode" = T5911."shujiiIryokikanCode" 
-                AND T7051."shichosonCode" = T5911."shichosonCode" 
-                AND T5911."jokyoFlag" = True 
-              LEFT JOIN rgdb."DbT5912ShujiiJoho" T5912 
-                ON T5301."shujiiIryokikanCode" = T5912."shujiiIryokikanCode" 
-                AND T5301."shujiiCode" = T5912."shujiiCode" 
-                AND T7051."shichosonCode" = T5912."shichosonCode" 
-                AND T5912."jokyoFlag" = True 
-            WHERE
-              T5101."hihokenshaNo" IN 
-              <foreach collection="被保険者番号リスト" item="被保険者番号" open="(" separator="," close=")">#{被保険者番号}</foreach>
-              AND T5101."logicalDeletedFlag" = FALSE 
-            ORDER BY
-              T5101."ninteiShinseiYMD" DESC 
-            LIMIT
-              1 )
-            UNION 
-            (SELECT
-              '' AS 直近区分
-              ,'' AS 被保険者番号
-              , '' AS 被保険者氏名カナ
-              , '' AS 被保険者氏名
-              , '' AS 住所
-              , T5911."iryoKikanMeisho" AS 医療機関名称
-              , T5912."shujiiName" AS 主治医氏名
-              , T5301."ikenshoSakuseiIraiYMD" AS 主治医意見書作成依頼年月日
-              , T5101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード
-              , T5302."ikenshoSakuseiKaisuKubun" AS 意見書作成回数区分 
-            FROM
-              rgdb."DbT5101NinteiShinseiJoho" T5101 
-              LEFT JOIN ( 
-                SELECT
-                  T5121."zenkaiShinseishoKanriNo"
-                  , T5101_2."hihokenshaNo" 
-                FROM
-                  rgdb."DbT5121ShinseiRirekiJoho" T5121 
-                  INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101_2 
-                    ON T5101_2."shinseishoKanriNo" = T5121."zenkaiShinseishoKanriNo" 
-                    AND T5101_2."hihokenshaNo" IN 
-                    <foreach collection="被保険者番号リスト" item="被保険者番号" open="(" separator="," close=")">#{被保険者番号}</foreach>
-              ) D 
-                ON D."zenkaiShinseishoKanriNo" = T5101."shinseishoKanriNo" 
-              INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
-                ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
-              LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
-                ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
-                AND T5301."logicalDeletedFlag" = False 
-                AND NOT EXISTS ( 
-                  SELECT
-                    'X' 
-                  FROM
-                    rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1 
-                  WHERE
-                    T5301."shinseishoKanriNo" = B1."shinseishoKanriNo" 
-                    AND B1."logicalDeletedFlag" = False 
-                    AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
-                ) 
-              LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302 
-                ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
-                AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo" 
-              LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" T5911 
-                ON T5301."shujiiIryokikanCode" = T5911."shujiiIryokikanCode" 
-                AND T7051."shichosonCode" = T5911."shichosonCode" 
-                AND T5911."jokyoFlag" = True 
-              LEFT JOIN rgdb."DbT5912ShujiiJoho" T5912 
-                ON T5301."shujiiIryokikanCode" = T5912."shujiiIryokikanCode" 
-                AND T5301."shujiiCode" = T5912."shujiiCode" 
-                AND T7051."shichosonCode" = T5912."shichosonCode" 
-                AND T5912."jokyoFlag" = True 
-            WHERE
-              T5101."logicalDeletedFlag" = FALSE 
-            ORDER BY
-              T5101."ninteiShinseiYMD" DESC)
-          ) AS A
+        ( 
+        (SELECT
+        '直近' AS 直近区分
+        , T5101."hihokenshaNo" AS 被保険者番号
+        , T5101."hihokenshaKana" AS 被保険者氏名カナ
+        , T5101."hihokenshaName" AS 被保険者氏名
+        , T5101."jusho" AS 住所
+        , T5911."iryoKikanMeisho" AS 医療機関名称
+        , T5912."shujiiName" AS 主治医氏名
+        , T5301."ikenshoSakuseiIraiYMD" AS 主治医意見書作成依頼年月日
+        , T5101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード
+        , T5302."ikenshoSakuseiKaisuKubun" AS 意見書作成回数区分 
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" T5101 
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
+        ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
+        ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+        AND T5301."logicalDeletedFlag" = False 
+        AND NOT EXISTS ( 
+        SELECT
+        'X' 
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1 
+        WHERE
+        T5301."shinseishoKanriNo" = B1."shinseishoKanriNo" 
+        AND B1."logicalDeletedFlag" = False 
+        AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
+        ) 
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302 
+        ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+        AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo" 
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" T5911 
+        ON T5301."shujiiIryokikanCode" = T5911."shujiiIryokikanCode" 
+        AND T7051."shichosonCode" = T5911."shichosonCode" 
+        AND T5911."jokyoFlag" = True 
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" T5912 
+        ON T5301."shujiiIryokikanCode" = T5912."shujiiIryokikanCode" 
+        AND T5301."shujiiCode" = T5912."shujiiCode" 
+        AND T7051."shichosonCode" = T5912."shichosonCode" 
+        AND T5912."jokyoFlag" = True 
+        WHERE
+        T5101."hihokenshaNo"  = (
+        SELECT 
+        DISTINCT
+        ,DbT5101."hihokenshaNo"
+        <include refid="ShujiiIkenshoTeishutsuIraiHakko" />
+        )
+        AND T5101."logicalDeletedFlag" = FALSE 
         ORDER BY
-          A.被保険者番号 DESC
-          , A.主治医意見書作成依頼年月日 DESC
+        T5101."ninteiShinseiYMD" DESC 
+        LIMIT
+        1 )
+        UNION 
+        (SELECT
+        '' AS 直近区分
+        ,'' AS 被保険者番号
+        , '' AS 被保険者氏名カナ
+        , '' AS 被保険者氏名
+        , '' AS 住所
+        , T5911."iryoKikanMeisho" AS 医療機関名称
+        , T5912."shujiiName" AS 主治医氏名
+        , T5301."ikenshoSakuseiIraiYMD" AS 主治医意見書作成依頼年月日
+        , T5101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード
+        , T5302."ikenshoSakuseiKaisuKubun" AS 意見書作成回数区分 
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" T5101 
+        LEFT JOIN ( 
+        SELECT
+        T5121."zenkaiShinseishoKanriNo"
+        , T5101_2."hihokenshaNo" 
+        FROM
+        rgdb."DbT5121ShinseiRirekiJoho" T5121 
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101_2 
+        ON T5101_2."shinseishoKanriNo" = T5121."zenkaiShinseishoKanriNo" 
+        AND T5101_2."hihokenshaNo" = (
+        SELECT 
+        DISTINCT
+        ,DbT5101."hihokenshaNo"
+        <include refid="ShujiiIkenshoTeishutsuIraiHakko" />
+        )
+        ) D 
+        ON D."zenkaiShinseishoKanriNo" = T5101."shinseishoKanriNo" 
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
+        ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
+        ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+        AND T5301."logicalDeletedFlag" = False 
+        AND NOT EXISTS ( 
+        SELECT
+        'X' 
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1 
+        WHERE
+        T5301."shinseishoKanriNo" = B1."shinseishoKanriNo" 
+        AND B1."logicalDeletedFlag" = False 
+        AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
+        ) 
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302 
+        ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
+        AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo" 
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" T5911 
+        ON T5301."shujiiIryokikanCode" = T5911."shujiiIryokikanCode" 
+        AND T7051."shichosonCode" = T5911."shichosonCode" 
+        AND T5911."jokyoFlag" = True 
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" T5912 
+        ON T5301."shujiiIryokikanCode" = T5912."shujiiIryokikanCode" 
+        AND T5301."shujiiCode" = T5912."shujiiCode" 
+        AND T7051."shichosonCode" = T5912."shichosonCode" 
+        AND T5912."jokyoFlag" = True 
+        WHERE
+        T5101."logicalDeletedFlag" = FALSE 
+        ORDER BY
+        T5101."ninteiShinseiYMD" DESC)
+        ) AS A
+        ORDER BY
+        A.被保険者番号 DESC
+        , A.主治医意見書作成依頼年月日 DESC
     </select>     
 </mapper>

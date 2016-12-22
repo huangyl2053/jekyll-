@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItaku
 import jp.co.ndensan.reams.db.dbz.service.core.iknijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -56,11 +57,16 @@ public class ChosaItakusakiAndChosainGuide {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
-            if (!RString.isNullOrEmpty(dataPassModel.get委託先コード())) {
-                if (new RString(TaishoMode.Chosain.toString()).equals(dataPassModel.get対象モード())) {
-                    div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
-                    div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
-                }
+            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = dataPassModel.get市町村コード();
+                div.getHokensha().setSelectedShichosonIfExist(new LasdecCode(市町村コード));
+            }
+            if (!RString.isNullOrEmpty(dataPassModel.get委託先コード())
+                    && new RString(TaishoMode.Chosain.toString()).equals(dataPassModel.get対象モード())) {
+                div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
+                div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
             }
             List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
             getHandler(div).setDataGrid(list);
@@ -151,7 +157,7 @@ public class ChosaItakusakiAndChosainGuide {
         }
         市町村コード = dataPassModel.get市町村コード();
         if (RString.isNullOrEmpty(市町村コード)) {
-        市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
+            市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
         }
         return ChosaItakusakiAndChosainGuideParameter.createParam(
                 調査委託先コードFrom,

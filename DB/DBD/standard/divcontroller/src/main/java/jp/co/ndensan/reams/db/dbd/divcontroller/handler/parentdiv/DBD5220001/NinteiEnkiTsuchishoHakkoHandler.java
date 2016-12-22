@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -54,6 +55,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
     private final RString 画面モード_2 = new RString("2");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString NAME_被保険者番号 = new RString("被保険者番号");
+    private static final RString 帳票分類ID = new RString("DBD522001_YokaigoNinteiEnkiTshuchisho");
 
     private final NinteiEnkiTsuchishoHakkoDiv div;
 
@@ -96,6 +98,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtInsatsuDate().setValue(RDate.getNowDate());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
+        div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(new ReportId(帳票分類ID));
     }
 
     private void clear検索条件() {
@@ -481,12 +484,25 @@ public class NinteiEnkiTsuchishoHakkoHandler {
                 通知書発行日List.add(new FlexibleDate(div.getTxtInsatsuDate().getValue().toDateString()));
                 parameter.set通知書発行日(通知書発行日List);
             }
+            RString 文書番号 = div.getCcdNinteiEnkiTsuchishoBunshoBango().get文書番号();
+            if (!文書番号.equals(RString.EMPTY)){
+                parameter.set文書番号(文書番号);
+            }else{
+                parameter.set文書番号(RString.EMPTY);
+            }
+            
         } else if (通知書.getName().equals(ResponseHolder.getState())) {
             parameter.set画面モード(画面モード_2);
             parameter.set申請書管理番号リスト(get申請書管理番号リスト(通知書発行日List));
             parameter.set処理見込み日From(FlexibleDate.EMPTY);
             parameter.set処理見込み日To(FlexibleDate.EMPTY);
             parameter.set通知書発行日(通知書発行日List);
+            RString 文書番号 = div.getCcdNinteiEnkiTsuchishoBunshoBango().get文書番号();
+            if (!文書番号.equals(RString.EMPTY)){
+                parameter.set文書番号(文書番号);
+            }else{
+                parameter.set文書番号(RString.EMPTY);
+            }
         }
         return parameter;
     }

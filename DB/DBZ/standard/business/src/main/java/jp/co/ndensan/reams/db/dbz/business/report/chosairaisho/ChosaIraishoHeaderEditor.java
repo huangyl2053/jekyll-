@@ -43,7 +43,7 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
 
     private ChosaIraishoReportSource editHeader(ChosaIraishoReportSource source) {
         source.bunshoNo = item.getBunshoNo();
-        if (item.getHakkoYMD1().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(item.getHakkoYMD1())) {
             source.hakkoYMD1 = RString.EMPTY;
         } else {
             source.hakkoYMD1 = パターン12(new RDate(item.getHakkoYMD1().toString()));
@@ -96,12 +96,12 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.homonChosasakiJusho = item.getHomonChosasakiJusho();
         source.homonChosasakiName = item.getHomonChosasakiJushoName();
         source.homonChosasakiTelNo = item.getHomonChosasakiTelNo();
-        if (item.getShinseiYMD().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(item.getShinseiYMD())) {
             source.shinseiYMD = RString.EMPTY;
         } else {
             source.shinseiYMD = パターン12(new RDate(item.getShinseiYMD().toString()));
         }
-        if (item.getTeishutsuKigen().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(item.getTeishutsuKigen())) {
             source.teishutsuKigen = RString.EMPTY;
         } else {
             source.teishutsuKigen = パターン12(new RDate(item.getTeishutsuKigen().toString()));

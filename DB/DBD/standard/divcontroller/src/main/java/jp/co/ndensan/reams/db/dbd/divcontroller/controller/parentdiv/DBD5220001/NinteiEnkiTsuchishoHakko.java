@@ -15,8 +15,13 @@ import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD52200
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001.NinteiEnkiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5220001.NinteiEnkiTsuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5220001.NinteiEnkiTsuchishoHakkoValidationHandler;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -25,9 +30,11 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定延期通知発行画面のDivControllerです。
@@ -37,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class NinteiEnkiTsuchishoHakko {
 
     private final RString グループコード = new RString("1007");
+    private final RString 一覧表を発行する_FileName = new RString("btnPrint1");
 
     /**
      * 画面初期化処理です。
@@ -67,6 +75,8 @@ public class NinteiEnkiTsuchishoHakko {
      * @return ResponseData<NinteiEnkiTsuchishoHakkoDiv>
      */
     public ResponseData<NinteiEnkiTsuchishoHakkoDiv> onClick_btnSearch(NinteiEnkiTsuchishoHakkoDiv div) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
+        
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         NinteiEnkiTsuchishoHakkoValidationHandler validationHandler = getValidationHandler();
         validationHandler.申請区分の未入力チェック(pairs, div);

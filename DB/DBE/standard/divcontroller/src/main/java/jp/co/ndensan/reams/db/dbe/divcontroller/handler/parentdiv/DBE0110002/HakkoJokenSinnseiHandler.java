@@ -21,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HakkoJokenSinnseiHandler {
 
     private static final RString SELECT_KEY0 = new RString("key0");
-    private static final RString SELECT_KEY1 = new RString("key1");
+    private static final RString 処理日使用 = new RString("1");
+    private static final RString 申請日使用 = new RString("2");
     private static final List<RString> SELECT_LIST = new ArrayList<>();
     private final HakkoJokenSinnseiDiv div;
 
@@ -45,11 +46,11 @@ public class HakkoJokenSinnseiHandler {
         checkPanel(要介護認定申請モニタリストフラグ, 要支援認定等申請者一覧フラグ);
         if (要介護認定申請モニタリストフラグ) {
             SELECT_LIST.add(SELECT_KEY0);
-            div.getChkSakuseiChohyo().setSelectedItemsByKey(SELECT_LIST);
+            div.getChkMonitror().setSelectedItemsByKey(SELECT_LIST);
         }
         if (要支援認定等申請者一覧フラグ) {
-            SELECT_LIST.add(SELECT_KEY1);
-            div.getChkSakuseiChohyo().setSelectedItemsByKey(SELECT_LIST);
+            SELECT_LIST.add(SELECT_KEY0);
+            div.getChkShinseishaIchiran().setSelectedItemsByKey(SELECT_LIST);
         }
         SELECT_LIST.clear();
     }
@@ -61,18 +62,43 @@ public class HakkoJokenSinnseiHandler {
      * @param 要支援認定等申請者一覧フラグ 遷移元画面から受け取った引数
      */
     public void checkPanel(boolean 要介護認定申請モニタリストフラグ, boolean 要支援認定等申請者一覧フラグ) {
-        if (要介護認定申請モニタリストフラグ || 要支援認定等申請者一覧フラグ) {
-            div.getRadHakoJyoken().setDisabled(false);
-            if (div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
-                div.getTxtShinseibi().setDisabled(true);
-            } else {
-                div.getTxtShoriYMD().setDisabled(true);
-            }
+        div.getTxtMonitorShinseiYMD().clearFromValue();
+        div.getTxtMonitorShinseiYMD().clearToValue();
+        div.getTxtMonitorShoriYMD().clearFromValue();
+        div.getTxtMonitorShoriYMD().clearToValue();
+        div.getTxtShinseishaShinseiYMD().clearFromValue();
+        div.getTxtShinseishaShinseiYMD().clearToValue();
+        div.getTxtShinseishaShoriYMD().clearFromValue();
+        div.getTxtShinseishaShoriYMD().clearToValue();
+
+        if (要介護認定申請モニタリストフラグ) {
+
+            div.getMonitorJoken().setIsOpen(true);
+            div.getRadMonitorJoken().setDisabled(false);
+            div.getRadMonitorJoken().setSelectedKey(SELECT_KEY0);
+            div.getTxtMonitorShoriYMD().setDisabled(false);
+            div.getTxtMonitorShinseiYMD().setDisabled(true);
         } else {
-            div.getRadHakoJyoken().setDisabled(true);
-            div.getTxtShoriYMD().setDisabled(true);
-            div.getTxtShinseibi().setDisabled(true);
+            div.getMonitorJoken().setIsOpen(false);
+            div.getRadMonitorJoken().setDisabled(true);
+            div.getTxtMonitorShinseiYMD().setDisabled(true);
+            div.getTxtMonitorShoriYMD().setDisabled(true);
         }
+
+        if (要支援認定等申請者一覧フラグ) {
+
+            div.getShinseishaIchiranJoken().setIsOpen(true);
+            div.getRadShinseishaJoken().setDisabled(false);
+            div.getRadShinseishaJoken().setSelectedKey(SELECT_KEY0);
+            div.getTxtShinseishaShoriYMD().setDisabled(false);
+            div.getTxtShinseishaShinseiYMD().setDisabled(true);
+        } else {
+            div.getShinseishaIchiranJoken().setIsOpen(false);
+            div.getRadShinseishaJoken().setDisabled(true);
+            div.getTxtShinseishaShinseiYMD().setDisabled(true);
+            div.getTxtShinseishaShoriYMD().setDisabled(true);
+        }
+
     }
 
     /**
@@ -81,30 +107,50 @@ public class HakkoJokenSinnseiHandler {
      * @return DBE011001_ShinseiInfoPrintParameter
      */
     public DBE011001_ShinseiInfoPrintParameter setBatchParameter() {
-        DBE011001_ShinseiInfoPrintParameter shinseijouhoubatchParameter = new DBE011001_ShinseiInfoPrintParameter();
-        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY0)) {
-            shinseijouhoubatchParameter.setShinseimonitorflag(true);
+        DBE011001_ShinseiInfoPrintParameter parameter = new DBE011001_ShinseiInfoPrintParameter();
+        if (div.getChkMonitror().getSelectedKeys().contains(SELECT_KEY0)) {
+            parameter.setShinseimonitorflag(true);
         } else {
-            shinseijouhoubatchParameter.setShinseimonitorflag(false);
+            parameter.setShinseimonitorflag(false);
         }
-        if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY1)) {
-            shinseijouhoubatchParameter.setYokaigoyoshienseiichiranflag(true);
+
+        if (div.getChkShinseishaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
+            parameter.setYokaigoyoshienseiichiranflag(true);
         } else {
-            shinseijouhoubatchParameter.setYokaigoyoshienseiichiranflag(false);
+            parameter.setYokaigoyoshienseiichiranflag(false);
         }
-        if (div.getRadHakoJyoken().getSelectedKey().contains(SELECT_KEY0)) {
-            shinseijouhoubatchParameter.setSakuseijyouken(new RString("1"));
-            RDateTime rDataTimeFrom = RDateTime.of(div.getTxtShoriYMD().getFromValue().toDateString(), new RString(""));
-            RDateTime rDataTimeTo = RDateTime.of(div.getTxtShoriYMD().getToValue().toDateString(), new RString(""));
-            shinseijouhoubatchParameter.setShorikaFrom(rDataTimeFrom);
-            shinseijouhoubatchParameter.setShorikaTo(rDataTimeTo);
-        } else {
-            shinseijouhoubatchParameter.setSakuseijyouken(new RString("2"));
-            FlexibleDate flexibledataFrom = new FlexibleDate(div.getTxtShinseibi().getFromValue().toDateString());
-            FlexibleDate flexibledataTo = new FlexibleDate(div.getTxtShinseibi().getToValue().toDateString());
-            shinseijouhoubatchParameter.setShinnseikaFrom(flexibledataFrom);
-            shinseijouhoubatchParameter.setShinnseikaTo(flexibledataTo);
+
+        if (div.getChkMonitror().getSelectedKeys().contains(SELECT_KEY0)) {
+            if (div.getRadMonitorJoken().getSelectedKey().contains(SELECT_KEY0)) {
+                parameter.setMonitorsakuseijyouken(処理日使用);
+                RDateTime rDataTimeFrom = RDateTime.of(div.getTxtMonitorShoriYMD().getFromValue().toDateString(), new RString(""));
+                RDateTime rDataTimeTo = RDateTime.of(div.getTxtMonitorShoriYMD().getToValue().toDateString(), new RString(""));
+                parameter.setMonitorshorikaFrom(rDataTimeFrom);
+                parameter.setMonitorshorikaTo(rDataTimeTo);
+            } else {
+                parameter.setMonitorsakuseijyouken(申請日使用);
+                FlexibleDate flexibledataFrom = new FlexibleDate(div.getTxtMonitorShinseiYMD().getFromValue().toDateString());
+                FlexibleDate flexibledataTo = new FlexibleDate(div.getTxtMonitorShinseiYMD().getToValue().toDateString());
+                parameter.setMonitorshinnseikaFrom(flexibledataFrom);
+                parameter.setMonitorshinnseikaTo(flexibledataTo);
+            }
         }
-        return shinseijouhoubatchParameter;
+
+        if (div.getChkShinseishaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
+            if (div.getRadShinseishaJoken().getSelectedKey().contains(SELECT_KEY0)) {
+                parameter.setShinseishaichiransakuseijyouken(処理日使用);
+                RDateTime rDataTimeFrom = RDateTime.of(div.getTxtShinseishaShoriYMD().getFromValue().toDateString(), new RString(""));
+                RDateTime rDataTimeTo = RDateTime.of(div.getTxtShinseishaShoriYMD().getToValue().toDateString(), new RString(""));
+                parameter.setShinseishashorikaFrom(rDataTimeFrom);
+                parameter.setShinseishashorikaTo(rDataTimeTo);
+            } else {
+                parameter.setShinseishaichiransakuseijyouken(申請日使用);
+                FlexibleDate flexibledataFrom = new FlexibleDate(div.getTxtShinseishaShinseiYMD().getFromValue().toDateString());
+                FlexibleDate flexibledataTo = new FlexibleDate(div.getTxtShinseishaShinseiYMD().getToValue().toDateString());
+                parameter.setShinseishashinnseikaFrom(flexibledataFrom);
+                parameter.setShinseishashinnseikaTo(flexibledataTo);
+            }
+        }
+        return parameter;
     }
 }

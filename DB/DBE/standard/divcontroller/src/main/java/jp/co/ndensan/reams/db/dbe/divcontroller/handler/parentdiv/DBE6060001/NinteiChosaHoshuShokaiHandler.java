@@ -61,6 +61,7 @@ public class NinteiChosaHoshuShokaiHandler {
         Decimal 委託料 = Decimal.ZERO;
         for (NinteichosahoshushokaiBusiness 調査一覧 : 調査情報) {
             dgNinteiChosaHoshu_Row row = new dgNinteiChosaHoshu_Row();
+            row.setHokensha(get保険者(調査一覧));
             row.setChosainCode(調査一覧.get認定調査員コード());
             row.setChosainShimei(調査一覧.get調査員氏名());
             row.setChosakikanCode(調査一覧.get認定調査委託先コード());
@@ -75,11 +76,11 @@ public class NinteiChosaHoshuShokaiHandler {
                         調査一覧.get認定調査依頼年月日().getDayValue()));
             }
             if (!調査一覧.get認定調査受領年月日().isEmpty()) {
-                row.getChosabi().setValue(new RDate(調査一覧.get認定調査受領年月日().getYearValue(),
+                row.getNyushubi().setValue(new RDate(調査一覧.get認定調査受領年月日().getYearValue(),
                         調査一覧.get認定調査受領年月日().getMonthValue(), 調査一覧.get認定調査受領年月日().getDayValue()));
             }
             if (!調査一覧.get認定調査実施年月日().isEmpty()) {
-                row.getNyushubi().setValue(new RDate(調査一覧.get認定調査実施年月日().getYearValue(),
+                row.getChosabi().setValue(new RDate(調査一覧.get認定調査実施年月日().getYearValue(),
                         調査一覧.get認定調査実施年月日().getMonthValue(), 調査一覧.get認定調査実施年月日().getDayValue()));
             }
             if (NinteiChousaIraiKubunCode.初回.getコード().equals(調査一覧.get認定調査依頼区分コード().value())) {
@@ -109,7 +110,9 @@ public class NinteiChosaHoshuShokaiHandler {
                 施設_再 = 施設_再 + 1;
             }
             row.setItakuryo(DecimalFormatter.toコンマ区切りRString(new Decimal(調査一覧.get認定調査委託料()), 0));
-            委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
+            if (!調査一覧.get認定調査受領年月日().isEmpty()) {
+                委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
+            }
             listRow.add(row);
             アクセスログ(調査一覧.get申請書管理番号().getColumnValue());
         }
@@ -163,6 +166,16 @@ public class NinteiChosaHoshuShokaiHandler {
         tempData.set情報リスト(情報);
         tempData.set調査依頼日開始(依頼日開始);
         tempData.set調査依頼日終了(依頼日終了);
+        tempData.setHokensya(div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
         return tempData;
+    }
+
+    private RString get保険者(NinteichosahoshushokaiBusiness 調査情報) {
+        return nullToEmpty(調査情報.get市町村名称());
+
+    }
+
+    private RString nullToEmpty(RString str) {
+        return str == null ? RString.EMPTY : str;
     }
 }

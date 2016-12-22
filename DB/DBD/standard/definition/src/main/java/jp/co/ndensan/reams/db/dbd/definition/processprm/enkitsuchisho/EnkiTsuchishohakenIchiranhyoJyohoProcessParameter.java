@@ -29,6 +29,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
     private FlexibleDate 処理見込み日To;
     private List<FlexibleDate> 通知書発行日;
     private List<RString> 申請書管理番号リスト;
+    private RString 文書番号;
 
     /**
      * コンストラクタです。
@@ -38,18 +39,21 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
      * @param shorimikomibiTo 処理見込み日To
      * @param tsuchishohakkonbi 通知書発行日
      * @param shinseishokanribangorisuto 申請書管理番号リスト
+     * @param bunshoBango 文書番号
      */
     public EnkiTsuchishohakenIchiranhyoJyohoProcessParameter(
             RString gamenmodo,
             FlexibleDate shorimikomibiFrom,
             FlexibleDate shorimikomibiTo,
             List<FlexibleDate> tsuchishohakkonbi,
-            List<RString> shinseishokanribangorisuto) {
+            List<RString> shinseishokanribangorisuto,
+            RString bunshoBango) {
         this.画面モード = gamenmodo;
         this.処理見込み日From = shorimikomibiFrom;
         this.処理見込み日To = shorimikomibiTo;
         this.通知書発行日 = tsuchishohakkonbi;
         this.申請書管理番号リスト = shinseishokanribangorisuto;
+        this.文書番号 = bunshoBango;
     }
 
     /**
@@ -58,7 +62,7 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
      * @return EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter
      */
     public EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter toEnkiTsuchishohakenIchiranhyoJyohoMybatisParameter() {
-        return new EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter(処理見込み日From, 処理見込み日To, 通知書発行日.get(0));
+        return new EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter(処理見込み日From, 処理見込み日To, 通知書発行日.get(0), 文書番号);
     }
 
     /**
@@ -67,6 +71,6 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
      * @return EnkiTsuchishoJyohoMybatisParameter
      */
     public EnkiTsuchishoJyohoMybatisParameter toEnkiTsuchishoJyohoMybatisParameter() {
-        return new EnkiTsuchishoJyohoMybatisParameter(申請書管理番号リスト);
+        return new EnkiTsuchishoJyohoMybatisParameter(申請書管理番号リスト,文書番号);
     }
 }

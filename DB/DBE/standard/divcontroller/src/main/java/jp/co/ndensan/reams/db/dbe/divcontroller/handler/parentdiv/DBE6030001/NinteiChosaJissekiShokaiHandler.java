@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.dgNi
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -32,9 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class NinteiChosaJissekiShokaiHandler {
 
-    private static final RString 集計表を発行する = new RString("btnPulish");
-    private static final RString CSVを出力する = new RString("btnShutsutyoku");
-    private static final RString 条件に戻る = new RString("btnBackToKensaku");
+    private static final RString KEY_基準日_初期値 = new RString("3");
     private final NinteiChosaJissekiShokaiDiv div;
 
     /**
@@ -50,6 +50,7 @@ public class NinteiChosaJissekiShokaiHandler {
      * 条件をクリアする」ボタンを押します。
      */
     public void onClick_BtnKensakuClear() {
+        div.getRadKijunbi().setSelectedValue(KEY_基準日_初期値);
         div.getChosaJisshibi().getTxtChosaJisshibi().clearFromValue();
         div.getChosaJisshibi().getTxtChosaJisshibi().clearToValue();
         div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
@@ -59,10 +60,14 @@ public class NinteiChosaJissekiShokaiHandler {
      * 「検索する」ボタンを押します。
      *
      * @param searchResult 認定調査実績照会
+     * @return 該当データがない場合はメッセージを返します。該当データがある場合は{@code null}を返します。
      */
-    public void onClick_btnKensaku(SearchResult<ChosahyoJissekiIchiran> searchResult) {
+    public Message onClick_btnKensaku(SearchResult<ChosahyoJissekiIchiran> searchResult) {
 
         List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList = searchResult.records();
+        if (chosahyoJissekiIchiransList.isEmpty()) {
+            return UrInformationMessages.該当データなし.getMessage();
+        }
         setRecords(chosahyoJissekiIchiransList);
         if (searchResult.exceedsLimit()) {
             div.getDgNinteiChosaJisseki().getGridSetting().setLimitRowCount(chosahyoJissekiIchiransList.size());
@@ -71,6 +76,7 @@ public class NinteiChosaJissekiShokaiHandler {
             div.getDgNinteiChosaJisseki().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
             div.getDgNinteiChosaJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
         }
+        return null;
     }
 
     private void setRecords(List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList) {
@@ -81,13 +87,15 @@ public class NinteiChosaJissekiShokaiHandler {
                     get保険者(data),
                     data.get調査委託先コード(),
                     data.get事業者名称(),
+                    data.get調査員コード(),
                     data.get調査員氏名(),
                     data.get被保険者番号(),
                     data.get被保険者氏名(),
+                    dataFormat(data.get認定調査依頼年月日()),
                     dataFormat(data.get認定調査実施年月日()),
+                    dataFormat(data.get認定調査入手年月日()),
                     ChosaKubun.toValue(data.get認定調査区分コード()).get名称(),
                     NinteiChousaIraiKubunCode.toValue(data.get認定調査依頼区分コード()).get名称(),
-                    data.get調査員コード(),
                     data.get申請書管理番号(),
                     data.get認定調査依頼履歴番号()
             );
@@ -107,22 +115,6 @@ public class NinteiChosaJissekiShokaiHandler {
     private PersonalData toPersonalData(RString 申請書管理番号) {
         ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInformation);
-    }
-
-    /**
-     * 画面初期状態の設定です。
-     */
-    public void set初期状態() {
-        div.getNinteiChosaJisseki().setDisplayNone(true);
-        div.getChosaJisshibi().setDisplayNone(false);
-    }
-
-    /**
-     * 画面一覧状態の設定です。 検索結果表示状態
-     */
-    public void set一覧状態() {
-        div.getNinteiChosaJisseki().setDisplayNone(false);
-        div.getChosaJisshibi().setDisplayNone(true);
     }
 
     /**
@@ -153,9 +145,11 @@ public class NinteiChosaJissekiShokaiHandler {
         if (div.getChosaJisshibi().getTxtChosaJisshibi().getToValue() != null) {
             調査実施日TO = div.getChosaJisshibi().getTxtChosaJisshibi().getToValue().toDateString();
         }
-        param.setChosajisshibiFrom(調査実施日FROM);
-        param.setChosajisshibiTo(調査実施日TO);
+        param.setChosaKijunbiFrom(調査実施日FROM);
+        param.setChosaKijunbiTo(調査実施日TO);
+        param.setChosaKijunbiKubun(div.getRadKijunbi().getSelectedKey());
         param.setHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
+        param.setShokisaiHokensya(div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }

@@ -21,11 +21,16 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -39,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBE-1360-010 suguangjun
  */
 public class NinteichosaItakusakiMainHandler {
-
+    
     private static final RString 表示値_有効 = new RString("有効");
     private static final RString 表示値_無効 = new RString("無効");
     private static final RString CODE_有効 = new RString("yuko");
@@ -66,7 +71,7 @@ public class NinteichosaItakusakiMainHandler {
     private static final RString その他 = new RString("その他");
     private static final RString 非調査機関 = new RString("非調査機関");
     private static final RString 調査機関 = new RString("調査機関");
-
+    
     private final NinteichosaItakusakiMainDiv div;
 
     /**
@@ -164,7 +169,13 @@ public class NinteichosaItakusakiMainHandler {
                     sonotaKikanJohoEntity.getWaritsukeTeiin(),
                     sonotaKikanJohoEntity.getWaritsukeChiku(),
                     sonotaKikanJohoEntity.getKikanKubun(),
-                    sonotaKikanJohoEntity.isHaishiFlag()
+                    sonotaKikanJohoEntity.isHaishiFlag(),
+                    sonotaKikanJohoEntity.getKinyuKikanCode(),
+                    sonotaKikanJohoEntity.getKinyuKikanShitenCode(),
+                    sonotaKikanJohoEntity.getYokinShubetsu(),
+                    sonotaKikanJohoEntity.getKozaNo(),
+                    sonotaKikanJohoEntity.getKozaMeigininKana(),
+                    sonotaKikanJohoEntity.getKozaMeiginin()
             ));
         }
         if (dataGridList.isEmpty()) {
@@ -175,7 +186,7 @@ public class NinteichosaItakusakiMainHandler {
         
         div.getSonotaKikanichiran().getDgSonotaKikanIchiran().setDataSource(dataGridList);
     }
-
+    
     private dgSonotaKikanIchiran_Row createDgSonotaKikanichiranRow(
             RString jotai,
             RString hokensha,
@@ -191,7 +202,13 @@ public class NinteichosaItakusakiMainHandler {
             int waritsukeTeiin,
             ChikuCode chiku,
             RString kikanKubun,
-            boolean jokyoFlag
+            boolean jokyoFlag,
+            KinyuKikanCode kinyuKikanCode,
+            KinyuKikanShitenCode kinyuKikanShitenCode,
+            RString yokinShubetsu,
+            RString kozaNo,
+            AtenaKanaMeisho kozaMeigininKana,
+            AtenaMeisho kozaMeiginin
     ) {
         dgSonotaKikanIchiran_Row row = new dgSonotaKikanIchiran_Row();
         row.setJotai(nullToEmpty(jotai));
@@ -227,6 +244,13 @@ public class NinteichosaItakusakiMainHandler {
         } else {
             row.setJokyoFlag(表示値_有効);
         }
+        //口座情報
+        row.setKinyuKikanCode(kinyuKikanCode == null ? RString.EMPTY : kinyuKikanCode.value());
+        row.setKinyuKikanShitenCode(kinyuKikanShitenCode == null ? RString.EMPTY : kinyuKikanShitenCode.value());
+        row.setYokinShubetsu(nullToEmpty(yokinShubetsu));
+        row.setKozaNo(nullToEmpty(kozaNo));
+        row.setKozaMeigininKana(kozaMeigininKana == null ? RString.EMPTY : kozaMeigininKana.value());
+        row.setKozaMeiginin(kozaMeiginin == null ? RString.EMPTY : kozaMeiginin.value());
         return row;
     }
 
@@ -274,8 +298,15 @@ public class NinteichosaItakusakiMainHandler {
         } else {
             div.getChosaitakusakiJohoInput().getRadHaishiFlag().setSelectedKey(CODE_無効);
         }
+        //口座情報
+        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
+                new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(row.getKinyuKikanShitenCode()), FlexibleDate.getNowDate());
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu().isEmpty() ? new RString(0) : row.getYokinShubetsu());
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setValue(row.getKozaNo());
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());
     }
-
+    
     private RString get調査委託区分(dgSonotaKikanIchiran_Row row) {
         RString 調査委託区分 = RString.EMPTY;
         if (保険者_市町村等.equals(row.getChosaItakuKubun())) {
@@ -295,7 +326,7 @@ public class NinteichosaItakusakiMainHandler {
         }
         return 調査委託区分;
     }
-
+    
     private RString get機関の区分(dgSonotaKikanIchiran_Row row) {
         RString 機関の区分 = RString.EMPTY;
         if (非調査機関.equals(row.getKikanKubun())) {
@@ -305,7 +336,7 @@ public class NinteichosaItakusakiMainHandler {
         }
         return 機関の区分;
     }
-
+    
     private RString nullToEmpty(RString obj) {
         if (obj == null) {
             return RString.EMPTY;
@@ -347,6 +378,14 @@ public class NinteichosaItakusakiMainHandler {
         } else {
             row.setJokyoFlag(表示値_無効);
         }
+        //口座情報
+        row.setKinyuKikanCode(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value()));
+        row.setKinyuKikanShitenCode(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value()));
+        row.setYokinShubetsu(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey()));
+        row.setKozaNo(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue()));
+        row.setKozaMeigininKana(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue()));
+        row.setKozaMeiginin(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()));
+        
         int index = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
@@ -360,7 +399,7 @@ public class NinteichosaItakusakiMainHandler {
             div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource().set(index, row);
         }
     }
-
+    
     private RString editYubinNoToIchiran(RString yubinNo) {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (INDEX_3 <= yubinNo.length()) {
@@ -396,7 +435,14 @@ public class NinteichosaItakusakiMainHandler {
                 .set割付定員(割付定員)
                 .set割付地区(new ChikuCode(div.getChosaitakusakiJohoInput().getCcdChiku().getCode().value()))
                 .set機関の区分(div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedKey())
-                .set廃止フラグ(CODE_無効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey())).build();
+                .set廃止フラグ(CODE_無効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey()))
+                .set金融機関コード(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode())
+                .set金融機関支店コード(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode())
+                .set預金種別(div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey())
+                .set口座番号(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue())
+                .set口座名義人カナ(new AtenaKanaMeisho(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue()))
+                .set漢字名義人(new AtenaMeisho(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()))
+                .build();
     }
 
     /**
@@ -416,6 +462,11 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().clearDisplayedValues();
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setSelectedIndex(0);
         div.getChosaitakusakiJohoInput().getRadHaishiFlag().setSelectedKey(CODE_有効);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
     }
 
     /**
@@ -435,6 +486,7 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().setDisabled(true);
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDisabled(true);
         div.getChosaitakusakiJohoInput().getRadHaishiFlag().setDisabled(true);
+        div.getChosaitakusakiJohoInput().getKozaJoho().setDisabled(true);
     }
 
     /**
@@ -454,6 +506,7 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getCcdChiku().setDisabled(false);
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDisabled(false);
         div.getChosaitakusakiJohoInput().getRadHaishiFlag().setDisabled(false);
+        div.getChosaitakusakiJohoInput().getKozaJoho().setDisabled(false);
     }
 
     /**
@@ -481,6 +534,13 @@ public class NinteichosaItakusakiMainHandler {
         inputDiv.append(shujiiJohoInputDiv.getCcdChiku().getCode().value());
         inputDiv.append(shujiiJohoInputDiv.getDdlKikankubun().getSelectedKey());
         inputDiv.append((shujiiJohoInputDiv.getRadHaishiFlag().getSelectedKey()));
+        //口座情報
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getTxtGinkoKozaNo().getValue());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getTxtKozaMeiginin().getValue());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getTxtKanjiMeiginin().getValue());
         return inputDiv.toRString();
     }
 }

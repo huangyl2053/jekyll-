@@ -43,4 +43,5 @@ public class NinteiChosaHoshuShokaiRelateEntity {
     private int 施設初回;
     private int 施設再調査;
     private int 委託料合計;
+    private RString 市町村名称;
 }

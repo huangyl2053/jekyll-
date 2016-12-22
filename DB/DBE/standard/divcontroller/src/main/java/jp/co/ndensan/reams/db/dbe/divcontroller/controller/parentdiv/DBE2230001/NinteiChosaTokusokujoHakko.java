@@ -69,6 +69,17 @@ public class NinteiChosaTokusokujoHakko {
     }
 
     /**
+     * 保険者選択時のイベントです。
+     *
+     * @param div NinteiChosaTokusokujoHakkoDiv
+     * @return ResponseData<NinteiChosaTokusokujoHakkoDiv>
+     */
+    public ResponseData<NinteiChosaTokusokujoHakkoDiv> onChange_ddlHokenshaList(NinteiChosaTokusokujoHakkoDiv div) {
+        getHandler(div).changeHokensha();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「発行する」ボタンをクリックの設定します。
      *
      * @param div NinteiChosaTokusokujoHakkoDiv

@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -18,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RenkeiDataTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +34,8 @@ public class RenkeiDataTorikomiDiv extends Panel {
     private RString path;
     @JsonProperty("hiddenFileId")
     private RString hiddenFileId;
+    @JsonProperty("hiddenErrorFiles")
+    private RString hiddenErrorFiles;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -130,6 +131,24 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonProperty("hiddenFileId")
     public void setHiddenFileId(RString hiddenFileId) {
         this.hiddenFileId = hiddenFileId;
+    }
+
+    /*
+     * gethiddenErrorFiles
+     * @return hiddenErrorFiles
+     */
+    @JsonProperty("hiddenErrorFiles")
+    public RString getHiddenErrorFiles() {
+        return hiddenErrorFiles;
+    }
+
+    /*
+     * sethiddenErrorFiles
+     * @param hiddenErrorFiles hiddenErrorFiles
+     */
+    @JsonProperty("hiddenErrorFiles")
+    public void setHiddenErrorFiles(RString hiddenErrorFiles) {
+        this.hiddenErrorFiles = hiddenErrorFiles;
     }
 
     /*

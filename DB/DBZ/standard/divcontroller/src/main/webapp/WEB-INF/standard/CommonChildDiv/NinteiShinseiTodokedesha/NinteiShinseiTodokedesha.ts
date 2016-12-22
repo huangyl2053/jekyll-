@@ -47,8 +47,8 @@ module DBZ {
                     this.controls.btnSetaiIchiran().disabled = true;
                     this.controls.btnAtenaKensaku().disabled = true;
                     this.controls.btnZenkaiFukusha().disabled = false;
-                    this.controls.txtJigyoshaCode().readOnly = true;
-                    this.controls.btnJigyoshaGuide().disabled = true;
+                    //this.controls.txtJigyoshaCode().readOnly = true;
+                    //this.controls.btnJigyoshaGuide().disabled = true;
                     this.controls.txtShimei().readOnly = false;
                     this.controls.txtKanaShimei().readOnly = false;
                     this.controls.txtHonninKankeisei().readOnly = false;
@@ -63,8 +63,8 @@ module DBZ {
                     this.controls.btnSetaiIchiran().disabled = true;
                     this.controls.btnAtenaKensaku().disabled = true;
                     this.controls.btnZenkaiFukusha().disabled = true;
-                    this.controls.txtJigyoshaCode().readOnly = true;
-                    this.controls.btnJigyoshaGuide().disabled = true;
+                    //this.controls.txtJigyoshaCode().readOnly = true;
+                    //this.controls.btnJigyoshaGuide().disabled = true;
                     this.controls.txtShimei().readOnly = true;
                     this.controls.txtKanaShimei().readOnly = true;
                     this.controls.txtHonninKankeisei().readOnly = true;
@@ -111,8 +111,8 @@ module DBZ {
                     this.controls.btnSetaiIchiran().disabled = true;
                     this.controls.btnAtenaKensaku().disabled = true;
                     this.controls.btnZenkaiFukusha().disabled = true;
-                    this.controls.txtJigyoshaCode().readOnly = true;
-                    this.controls.btnJigyoshaGuide().disabled = true;
+                    //this.controls.txtJigyoshaCode().readOnly = true;
+                    //this.controls.btnJigyoshaGuide().disabled = true;
                     this.controls.txtShimei().readOnly = true;
                     this.controls.txtKanaShimei().readOnly = true;
                     this.controls.txtHonninKankeisei().readOnly = true;
@@ -128,8 +128,8 @@ module DBZ {
                     this.controls.btnSetaiIchiran().disabled = true;
                     this.controls.btnAtenaKensaku().disabled = true;
                     this.controls.btnZenkaiFukusha().disabled = true;
-                    this.controls.txtJigyoshaCode().readOnly = true;
-                    this.controls.btnJigyoshaGuide().disabled = true;
+                    //this.controls.txtJigyoshaCode().readOnly = true;
+                    //this.controls.btnJigyoshaGuide().disabled = true;
                     this.controls.txtShimei().readOnly = true;
                     this.controls.txtKanaShimei().readOnly = true;
                     this.controls.txtHonninKankeisei().readOnly = true;

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 
 /**
  *
@@ -81,11 +82,12 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     /**
      * 介護認定審査会スケジュール表HeaderItemデータを作成するメッソドです。
      *
+     * @param 年度 年度
      * @return ShinsakaisukejuruhyoBodyItem
      */
-    public ShinsakaisukejuruhyoHeadItem setHeaderItem() {
+    public ShinsakaisukejuruhyoHeadItem setHeaderItem(RYear 年度) {
         ShinsakaisukejuruhyoHeadItem headItem = new ShinsakaisukejuruhyoHeadItem();
-        headItem.set年度(RDate.getNowDate().wareki().eraType(EraType.KANJI).getYear());
+        headItem.set年度(new RStringBuilder(年度.wareki().eraType(EraType.KANJI).getYear()).append("年度").toRString());
         headItem.set広域連合(DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         return headItem;
     }

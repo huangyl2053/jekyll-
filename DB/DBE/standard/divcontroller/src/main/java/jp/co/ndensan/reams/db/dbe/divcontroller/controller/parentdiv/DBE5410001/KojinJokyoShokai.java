@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.Koji
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001.KojinJokyoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai.KojinJokyoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoPrintService;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
@@ -50,6 +49,12 @@ public class KojinJokyoShokai {
             getHandler(div).setKojinJokyoShokai(kojinJokyoShokaiList, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, kojinJokyoShokaiList.get(0).get主治医意見書作成依頼履歴番号());
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, kojinJokyoShokaiList.get(0).get認定調査依頼履歴番号());
+            if (RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get市町村連絡事項())) {
+                div.getBtnShichosonRenrakuJiko().setDisabled(true);
+            }
+            getHandler(div).ボタン非活性();
+        } else {
+            getHandler(div).未登録時ボタン非活性(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -128,7 +133,7 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 基本調査照会ボタン処理です。
      *
@@ -160,7 +165,7 @@ public class KojinJokyoShokai {
         div.setHdnNinteiChosaRirekiNo(認定調査依頼履歴番号);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 意見書照会ボタン処理です。
      *
@@ -176,7 +181,7 @@ public class KojinJokyoShokai {
         div.setHdnIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 個人進捗状況表を発行する処理です。
      *

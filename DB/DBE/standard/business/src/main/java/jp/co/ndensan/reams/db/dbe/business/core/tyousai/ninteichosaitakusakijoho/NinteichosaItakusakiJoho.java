@@ -19,7 +19,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJoh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -262,6 +266,60 @@ public class NinteichosaItakusakiJoho extends
     }
 
     /**
+     * 金融機関コードを返します。
+     *
+     * @return 金融機関コード
+     */
+    public KinyuKikanCode get金融機関コード() {
+        return entity.getKinyuKikanCode();
+    }
+
+    /**
+     * 金融機関支店コードを返します。
+     *
+     * @return 金融機関支店コード
+     */
+    public KinyuKikanShitenCode get金融機関支店コード() {
+        return entity.getKinyuKikanShitenCode();
+    }
+
+    /**
+     * 預金種別を返します。
+     *
+     * @return 預金種別
+     */
+    public RString get預金種別() {
+        return entity.getYokinShubetsu();
+    }
+
+    /**
+     * 口座番号を返します。
+     *
+     * @return 口座番号
+     */
+    public RString get口座番号() {
+        return entity.getKozaNo();
+    }
+
+    /**
+     * 口座名義人カナを返します。
+     *
+     * @return 口座名義人カナ
+     */
+    public AtenaKanaMeisho get口座名義人カナ() {
+        return entity.getKozaMeigininKana();
+    }
+
+    /**
+     * 漢字名義人を返します。
+     *
+     * @return 漢字名義人
+     */
+    public AtenaMeisho get漢字名義人() {
+        return entity.getKozaMeiginin();
+    }
+
+    /**
      * {@link DbT5910NinteichosaItakusakiJohoEntity}のクローンを返します。
      *
      * @return {@link DbT5910NinteichosaItakusakiJohoEntity}のクローン
@@ -282,11 +340,14 @@ public class NinteichosaItakusakiJoho extends
     }
 
     /**
-     * 認定調査委託先情報配下の要素を削除対象とします。<br/> {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査委託先情報配下の要素である調査員情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteichosaItakusakiJoho}を返します。
+     * 認定調査委託先情報配下の要素を削除対象とします。<br/>
+     * {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査委託先情報配下の要素である調査員情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link NinteichosaItakusakiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosaItakusakiJoho}
-     * @throws IllegalStateException DbT5910NinteichosaItakusakiJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException
+     * DbT5910NinteichosaItakusakiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public NinteichosaItakusakiJoho deleted() {
@@ -306,7 +367,8 @@ public class NinteichosaItakusakiJoho extends
     }
 
     /**
-     * 認定調査委託先情報のみを変更対象とします。<br/> {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査委託先情報のみを変更対象とします。<br/>
+     * {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaItakusakiJoho}
      */

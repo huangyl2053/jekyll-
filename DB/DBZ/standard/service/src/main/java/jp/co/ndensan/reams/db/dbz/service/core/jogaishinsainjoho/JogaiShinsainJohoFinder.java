@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinRelateJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
@@ -139,8 +140,8 @@ public class JogaiShinsainJohoFinder {
      * @param 主治医医療機関コード 主治医医療機関コード
      * @return 医療機関名称
      */
-    public RString get医療機関名称(RString 市町村コード, RString 主治医医療機関コード) {
-        if (!RString.isNullOrEmpty(主治医医療機関コード)
+    public RString get医療機関名称(RString 市町村コード, ShujiiIryokikanCode 主治医医療機関コード) {
+        if (!RString.isNullOrEmpty(主治医医療機関コード.value())
                 && !RString.isNullOrEmpty(市町村コード)) {
             DbT5911ShujiiIryoKikanJohoEntity entity = dbT5911Dac.selectByKey(new LasdecCode(市町村コード), 主治医医療機関コード);
             if (entity != null) {

@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -83,23 +85,8 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMaxKensu() {
-        return this.getSakuseiIraibi().getTxtMaxKensu();
-    }
-
-    @JsonIgnore
-    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
-        this.getSakuseiIraibi().setTxtMaxKensu(txtMaxKensu);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getSakuseiIraibi().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getSakuseiIraibi().setBtnKensaku(btnKensaku);
+    public IHokenshaListDiv getCcdHokensya() {
+        return this.getSakuseiIraibi().getCcdHokensya();
     }
 
     @JsonIgnore
@@ -113,6 +100,16 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaxKensu() {
+        return this.getSakuseiIraibi().getTxtMaxKensu();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.getSakuseiIraibi().setTxtMaxKensu(txtMaxKensu);
+    }
+
+    @JsonIgnore
     public DataGrid<dgIkenshoSakuseiHoshu_Row> getDgIkenshoSakuseiHoshu() {
         return this.getIkenshoSakuseiHoshu().getDgIkenshoSakuseiHoshu();
     }
@@ -120,6 +117,16 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     @JsonIgnore
     public void  setDgIkenshoSakuseiHoshu(DataGrid<dgIkenshoSakuseiHoshu_Row> dgIkenshoSakuseiHoshu) {
         this.getIkenshoSakuseiHoshu().setDgIkenshoSakuseiHoshu(dgIkenshoSakuseiHoshu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTotalCount() {
+        return this.getIkenshoSakuseiHoshu().getTxtTotalCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.getIkenshoSakuseiHoshu().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore
@@ -163,23 +170,23 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtKotsuhito() {
-        return this.getIkenshoSakuseiHoshu().getTxtKotsuhito();
+    public TextBoxNum getTxtSakuseiryo() {
+        return this.getIkenshoSakuseiHoshu().getTxtSakuseiryo();
     }
 
     @JsonIgnore
-    public void  setTxtKotsuhito(TextBoxNum txtKotsuhito) {
-        this.getIkenshoSakuseiHoshu().setTxtKotsuhito(txtKotsuhito);
+    public void  setTxtSakuseiryo(TextBoxNum txtSakuseiryo) {
+        this.getIkenshoSakuseiHoshu().setTxtSakuseiryo(txtSakuseiryo);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtZeiKojoGaku() {
-        return this.getIkenshoSakuseiHoshu().getTxtZeiKojoGaku();
+    public TextBoxNum getTxtShinryohi() {
+        return this.getIkenshoSakuseiHoshu().getTxtShinryohi();
     }
 
     @JsonIgnore
-    public void  setTxtZeiKojoGaku(TextBoxNum txtZeiKojoGaku) {
-        this.getIkenshoSakuseiHoshu().setTxtZeiKojoGaku(txtZeiKojoGaku);
+    public void  setTxtShinryohi(TextBoxNum txtShinryohi) {
+        this.getIkenshoSakuseiHoshu().setTxtShinryohi(txtShinryohi);
     }
 
     @JsonIgnore

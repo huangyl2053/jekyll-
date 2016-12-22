@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinchokuDataOutputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -85,6 +85,16 @@ public class ShinchokuDataOutputDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxDateRange getTxtZenkaiChuishutsuRange() {
+        return this.getPnlKensaku().getTxtZenkaiChuishutsuRange();
+    }
+
+    @JsonIgnore
+    public void  setTxtZenkaiChuishutsuRange(TextBoxDateRange txtZenkaiChuishutsuRange) {
+        this.getPnlKensaku().setTxtZenkaiChuishutsuRange(txtZenkaiChuishutsuRange);
+    }
+
+    @JsonIgnore
     public TextBoxDateRange getTxtChuishutsuRange() {
         return this.getPnlKensaku().getTxtChuishutsuRange();
     }
@@ -102,16 +112,6 @@ public class ShinchokuDataOutputDiv extends Panel {
     @JsonIgnore
     public void  setTxtHihokenshaCode(TextBoxCode txtHihokenshaCode) {
         this.getPnlKensaku().setTxtHihokenshaCode(txtHihokenshaCode);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtMaxKensu() {
-        return this.getPnlKensaku().getTxtMaxKensu();
-    }
-
-    @JsonIgnore
-    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
-        this.getPnlKensaku().setTxtMaxKensu(txtMaxKensu);
     }
 
     @JsonIgnore

@@ -22,7 +22,7 @@ import lombok.Getter;
 public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisParameter {
 
     private final FlexibleDate temp_認定調査督促期限;
-    private final RString temp_印刷済対象者;
+    private final boolean is印刷済対象者対象外;
     private final RString temp_保険者コード;
     private final RString temp_認定調査委託先コード;
     private final RString temp_認定調査員コード;
@@ -52,7 +52,7 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
         } else {
             this.temp_認定調査督促期限 = null;
         }
-        this.temp_印刷済対象者 = temp_印刷済対象者;
+        this.is印刷済対象者対象外 = temp_印刷済対象者 != null && temp_印刷済対象者.equals(new RString("1"));
         this.temp_保険者コード = temp_保険者コード;
         this.temp_認定調査委託先コード = temp_認定調査委託先コード;
         this.temp_認定調査員コード = temp_認定調査員コード;

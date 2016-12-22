@@ -76,26 +76,30 @@
             AND DbT5912ShujiiJoho."jokyoFlag" = true
         </if>
         <if test="isJyoukyouMukoFlag">
-            AND DbT5911ShujiiIryoKikanJoho."jokyoFlag" = false
-            AND DbT5912ShujiiJoho."jokyoFlag" = false
+            AND (DbT5911ShujiiIryoKikanJoho."jokyoFlag" = false
+            OR   DbT5912ShujiiJoho."jokyoFlag" = false)
         </if>
         <if test="isIryoKikanCodeShujiiCodeFlag">
             ORDER BY
+            DbT5912ShujiiJoho."shichosonCode",
             DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode",
             DbT5912ShujiiJoho."shujiiCode"
         </if>
         <if test="isIryoKikanCodeShujiiNameFlag">
             ORDER BY
+            DbT5912ShujiiJoho."shichosonCode",
             DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode",
             DbT5912ShujiiJoho."shujiiName"
         </if>
         <if test="isIryoKikanNameShujiiCodeFlag">
             ORDER BY
+            DbT5912ShujiiJoho."shichosonCode",
             DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
             DbT5912ShujiiJoho."shujiiCode"
         </if>
         <if test="isIryoKikanNameShujiiNameFlag">
             ORDER BY
+            DbT5912ShujiiJoho."shichosonCode",
             DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
             DbT5912ShujiiJoho."shujiiName"
         </if>

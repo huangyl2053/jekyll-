@@ -22,11 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -34,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -79,6 +73,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
                 .addBreak(new BreakerCatalog<TokkiTextA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<TokkiTextA4ReportSource>().new SimpleLayoutBreaker(
 
+
                     TokkiTextA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<TokkiTextA4ReportSource> occuredBreak(ReportLineRecord<TokkiTextA4ReportSource> currentRecord,
@@ -107,7 +102,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
         kyotsuEntity.setJimukyoku(true);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
-        TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List);
+        TokkiText1A4Business business = new TokkiText1A4Business(kyotsuEntity, 特記情報List, batchWriteA4.getImageFolderPath());
         TokkiTextA4Report report = new TokkiTextA4Report(business);
         report.writeBy(reportSourceWriterA4);
         ページ表示行数 = business.getページ表示行数();
@@ -115,9 +110,6 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void afterExecute() {
-        出力条件表(ReportIdDBE.DBE517141.getReportId().value(), new RString("概況調査の特記"));
-        出力条件表(ReportIdDBE.DBE517131.getReportId().value(), new RString("特記事項（1枚目）"));
-        出力条件表(ReportIdDBE.DBE517135.getReportId().value(), new RString("特記事項（2枚目以降）"));
     }
 
     private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
@@ -133,38 +125,6 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
 
     private boolean hasBrek(ShinsakaiSiryoKyotsuEntity before, ShinsakaiSiryoKyotsuEntity current) {
         return !(before.getShinsakaiOrder() == current.getShinsakaiOrder()) || ページ表示行数 % 最大表示行数 == 0;
-    }
-
-    private void 出力条件表(RString 帳票, RString 帳票名) {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                帳票,
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(JobContextHolder.getJobId()),
-                帳票名,
-                new RString(reportSourceWriterA4.pageCount().value()),
-                RString.EMPTY,
-                RString.EMPTY,
-                contribute());
-        OutputJokenhyoFactory.createInstance(item).print();
-    }
-
-    private List<RString> contribute() {
-        List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(条件(new RString("合議体番号"), new RString(paramter.getGogitaiNo())));
-        出力条件.add(条件(new RString("介護認定審査会開催予定年月日"), paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString()));
-        出力条件.add(条件(new RString("介護認定審査会開催番号"), paramter.getShinsakaiKaisaiNo()));
-        return 出力条件;
-    }
-
-    private RString 条件(RString バッチパラメータ名, RString 値) {
-        RStringBuilder 条件 = new RStringBuilder();
-        条件.append(new RString("【"));
-        条件.append(バッチパラメータ名);
-        条件.append(new RString("】"));
-        条件.append(値);
-        return 条件.toRString();
     }
 
     @Override

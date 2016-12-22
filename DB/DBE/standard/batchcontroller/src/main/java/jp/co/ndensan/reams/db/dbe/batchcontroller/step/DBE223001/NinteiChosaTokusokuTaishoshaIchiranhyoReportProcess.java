@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE223001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoOutputJokenhyoEditor;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter;
@@ -12,7 +14,10 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.Nintei
 import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -20,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -35,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -48,7 +55,6 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
-    @BatchWriter
     private CsvWriter<NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity> csvWriter;
 
     private NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter parameter;
@@ -57,7 +63,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     private int 帳票データの行番号 = 1;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE223002");
     private static final RString CSVファイル名 = new RString("認定調査督促対象者一覧表.csv");
-    private static final RString CSVタイトル = new RString("督促状発行対象者一覧");
+    private static final RString CSVタイトル = new RString("認定調査督促対象者一覧");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
@@ -66,23 +72,27 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
     private static final RString 改頁キー = new RString("cityCode");
+    private static final RString ヘッダ_市町村コード = new RString("市町村コード");
+    private static final RString ヘッダ_市町村名称 = new RString("市町村名称");
+    private static final RString ヘッダ_NO = new RString("No");
+    private static final RString ヘッダ_保険者名 = new RString("保険者名");
+    private static final RString ヘッダ_被保険者番号 = new RString("被保険者番号");
+    private static final RString ヘッダ_被保険者氏名カナ = new RString("被保険者氏名カナ");
+    private static final RString ヘッダ_被保険者氏名 = new RString("被保険者氏名");
+    private static final RString ヘッダ_申請日 = new RString("申請日");
+    private static final RString ヘッダ_督促状発行日 = new RString("督促状発行日");
+    private static final RString ヘッダ_事業所コード = new RString("調査機関コード");
+    private static final RString ヘッダ_事業所名称 = new RString("調査機関名称");
+    private static final RString ヘッダ_調査員氏名 = new RString("調査員氏名");
+    private static final RString ヘッダ_事業者住所 = new RString("調査機関住所");
+    private static final RString ヘッダ_事業者電話番号 = new RString("調査機関電話番号");
 
     private RString csvFilePath;
     private FileSpoolManager fileSpoolManager;
-    private RString 市町村コード;
-    private RString 市町村名称;
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosatokusokujyo."
                     + "INinteichosaTokusokujyoRelateMapper.select認定調査督促対象者一覧表ByKey");
-
-    @Override
-    protected void initialize() {
-        super.initialize();
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        市町村コード = association.get地方公共団体コード().value();
-        市町村名称 = association.get市町村名();
-    }
 
     @Override
     protected IBatchReader createReader() {
@@ -127,6 +137,11 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                     null, null, null, null,
                     null, null, null, null,
                     null, null, null, null, null));
+            csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
+                    ヘッダ_NO, ヘッダ_市町村コード,
+                    ヘッダ_市町村名称, ヘッダ_保険者名, ヘッダ_被保険者番号,
+                    ヘッダ_被保険者氏名カナ, ヘッダ_被保険者氏名, ヘッダ_申請日, ヘッダ_督促状発行日,
+                    ヘッダ_事業所コード, ヘッダ_事業所名称, ヘッダ_事業者住所, ヘッダ_事業者電話番号, ヘッダ_調査員氏名));
         }
     }
 
@@ -135,7 +150,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
         entity.set行番号(帳票データの行番号++);
 
         NinteiChosaTokusokuTaishoshaIchiranhyoReport report
-                = new NinteiChosaTokusokuTaishoshaIchiranhyoReport(entity, 市町村コード, 市町村名称);
+                = new NinteiChosaTokusokuTaishoshaIchiranhyoReport(entity);
         report.writeBy(reportSourceWriter);
 
         if (parameter.isCsv出力_選択された()) {
@@ -149,5 +164,20 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
             csvWriter.close();
             fileSpoolManager.spool(csvFilePath);
         }
+        NinteiChosaTokusokuTaishoshaIchiranhyoOutputJokenhyoEditor outputJokenhyoEditor
+                = new NinteiChosaTokusokuTaishoshaIchiranhyoOutputJokenhyoEditor(parameter);
+        List<RString> 条件リスト = outputJokenhyoEditor.edit();
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        ReportOutputJokenhyoItem 帳票出力条件表パラメータ = new ReportOutputJokenhyoItem(
+                REPORT_DBE223001.value(),
+                association.get地方公共団体コード().value(),
+                association.get市町村名(),
+                new RString(JobContextHolder.getJobId()),
+                ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORT_DBE223001.value()),
+                new RString(batchWrite.getPageCount()),
+                parameter.isCsv出力_選択された() ? new RString("あり") : new RString("なし"),
+                parameter.isCsv出力_選択された() ? CSVファイル名 : RString.EMPTY,
+                条件リスト);
+        OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
     }
 }

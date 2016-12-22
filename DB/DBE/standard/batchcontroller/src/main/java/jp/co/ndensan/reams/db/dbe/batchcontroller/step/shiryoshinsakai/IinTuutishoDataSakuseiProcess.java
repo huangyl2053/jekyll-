@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,13 +23,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -42,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -119,7 +112,6 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory();
     }
 
     private void 通知文設定(ShinsakaiYoteiJohoEntity 委員情報, PsmJohoEntity psmJohoEntity) {
@@ -168,21 +160,6 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         item.set通知文3(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号).get(項目番号));
     }
 
-    private void outputJokenhyoFactory() {
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE515001.getReportId().getColumnValue(),
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("審査会開催通知書"),
-                new RString("1"),
-                RString.EMPTY,
-                RString.EMPTY,
-                出力条件());
-        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
-    }
-
     @Override
     protected void keyBreakProcess(ShinsakaiIinCodeEntity current) {
         hasBrek(getBefore(), current);
@@ -190,15 +167,5 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
 
     private boolean hasBrek(ShinsakaiIinCodeEntity before, ShinsakaiIinCodeEntity current) {
         return !before.getShinsakaiIinCode().equals(current.getShinsakaiIinCode());
-    }
-
-    private List<RString> 出力条件() {
-        List<RString> list = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("【介護認定審査会開催番号】")
-                .append(" ")
-                .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder.toRString());
-        return list;
     }
 }

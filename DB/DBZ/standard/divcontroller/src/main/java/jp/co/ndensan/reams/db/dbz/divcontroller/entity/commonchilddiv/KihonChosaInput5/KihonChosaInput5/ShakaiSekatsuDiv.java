@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShakaiSekatsuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,6 +41,8 @@ public class ShakaiSekatsuDiv extends Panel {
     private RString recordNumber;
     @JsonProperty("ninteichosaTokkijikoNoList")
     private RString ninteichosaTokkijikoNoList;
+    @JsonProperty("tokkijikoNo")
+    private RString tokkijikoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -208,6 +210,24 @@ public class ShakaiSekatsuDiv extends Panel {
     @JsonProperty("ninteichosaTokkijikoNoList")
     public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
         this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * gettokkijikoNo
+     * @return tokkijikoNo
+     */
+    @JsonProperty("tokkijikoNo")
+    public RString getTokkijikoNo() {
+        return tokkijikoNo;
+    }
+
+    /*
+     * settokkijikoNo
+     * @param tokkijikoNo tokkijikoNo
+     */
+    @JsonProperty("tokkijikoNo")
+    public void setTokkijikoNo(RString tokkijikoNo) {
+        this.tokkijikoNo = tokkijikoNo;
     }
 
     /*

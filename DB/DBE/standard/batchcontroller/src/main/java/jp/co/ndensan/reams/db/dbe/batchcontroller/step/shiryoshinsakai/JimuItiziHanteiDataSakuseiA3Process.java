@@ -30,11 +30,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -42,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -134,6 +128,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
 
+
                     JimuTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuTokkiTextA3ReportSource> occuredBreak(ReportLineRecord<JimuTokkiTextA3ReportSource> currentRecord,
@@ -158,46 +153,6 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517041.getReportId().value(), new RString("概況調査の特記"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517031.getReportId().value(), new RString("特記事項（1枚目）"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517081.getReportId().value(), new RString("一次判定結果票"));
-        outputJokenhyoFactory(ReportIdDBE.DBE517135.getReportId().value(), new RString("特記事項（2枚目以降）"));
-    }
-
-    private void outputJokenhyoFactory(RString id, RString 帳票名) {
-        RString 総ページ数 = new RString(batchWriteA3.getPageCount());
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
-                id,
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                帳票名,
-                総ページ数,
-                RString.EMPTY,
-                RString.EMPTY,
-                出力条件());
-        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
-    }
-
-    private List<RString> 出力条件() {
-        List<RString> list = new ArrayList<>();
-        RStringBuilder builder1 = new RStringBuilder();
-        builder1.append("【合議体番号】")
-                .append(" ")
-                .append(paramter.getGogitaiNo());
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append("【介護認定審査会開催予定年月日】")
-                .append(" ")
-                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
-        RStringBuilder builder3 = new RStringBuilder();
-        builder3.append("【介護認定審査会開催番号】")
-                .append(" ")
-                .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder1.toRString());
-        list.add(builder2.toRString());
-        list.add(builder3.toRString());
-        return list;
     }
 
     private ShinsakaiSiryoKyotsuEntity get共通情報(List<ShinsakaiSiryoKyotsuEntity> 共通情報,

@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaiRaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
@@ -20,8 +23,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Ninteich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -31,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 完了処理・認定調査依頼のHandlerクラスです。
@@ -59,6 +65,12 @@ public class NinteichosaIraiHandler {
      * 完了処理・認定調査依頼に初期化を設定します。
      */
     public void onLoad() {
+        div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(
+            ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxCount().setMaxLength(Integer.toString(div.getTxtMaxCount().getMaxValue().intValue()).length());
+        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(
+            ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.setMaxCount(div.getTxtMaxCount().getValue());
         initDataGrid();
         RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
         if (使用する.equals(認定調査自動割付)) {
@@ -79,10 +91,24 @@ public class NinteichosaIraiHandler {
      * DataGridを更新します。
      */
     public void initDataGrid() {
+        List<HokenshaSummary> hokenshaList = new ArrayList<>(
+            HokenshaListLoader.createInstance()
+            .getShichosonCodeNameList(GyomuBunrui.介護認定)
+            .getAll()
+        );
+        LasdecCode 市町村コード;
+        if (!hokenshaList.isEmpty() && hokenshaList.size() == 1) {
+            市町村コード = hokenshaList.get(0).get市町村コード();
+        } else {
+            市町村コード = LasdecCode.EMPTY;
+        }
         RString 状態 = div.getRadShoriJyotai().getSelectedKey();
-        List<CyoSaiRaiBusiness> 調査依頼List = YokaigoNinteiTaskListFinder.createInstance().
+        Decimal 最大件数 = div.getTxtMaxCount().getValue();
+        SearchResult<CyoSaiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
             get調査依頼モード(YokaigoNinteiTaskListParameter.
-                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態)).records();
+                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大件数, 市町村コード));
+        int all = searchResult.totalCount();
+        List<CyoSaiRaiBusiness> 調査依頼List = searchResult.records();
         if (!調査依頼List.isEmpty()) {
             ShinSaKaiBusiness 前調査依頼Model = YokaigoNinteiTaskListFinder.createInstance().
                 get前調査依頼モード(YokaigoNinteiTaskListParameter.
@@ -145,6 +171,8 @@ public class NinteichosaIraiHandler {
             rowList.add(row);
         }
         div.getDgNinteiTaskList().setDataSource(rowList);
+        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(all);
+        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
         if (状態.equals(KEY_未)) {
             div.getTxtNoUpdate().setValue(new Decimal(notUpdateCount));

@@ -14,11 +14,17 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.enkitsuchisho.EnkiTsuchi
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.enkitsuchisho.YokaigoNinteiEnkiTshuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd522001.YokaigoNinteiEnkiTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -54,6 +60,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 延期通知書情報の作成_process処理クラスです。
@@ -64,6 +71,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
+    private static final int INDEX_ZERO = 0;
 
     private static final ReportId REPORT_DBD522001 = ReportIdDBD.DBD522001.getReportId();
     private static final RString MYBATIS_SELECT_ID
@@ -110,9 +118,26 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     protected void process(DbT4101NinteiShinseiJohoEntity dbtEntity) {
         YokaigoNinteiEnkiTshuchishoEntity entity = new YokaigoNinteiEnkiTshuchishoEntity();
         entity.setEntity(dbtEntity);
-        set送付物宛先情報(entity);
+        DbT5101NinteiShinseiJohoDac dbT5101Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
+        boolean 広域フラグ = false;
+        DbT5101NinteiShinseiJohoEntity 要介護認定申請情報 = null;
+        KaigoDonyuKeitaiManager 介護導入形態manager = KaigoDonyuKeitaiManager.createInstance();
+        List<KaigoDonyuKeitai> list介護事務 = 介護導入形態manager.get介護導入形態By業務分類(GyomuBunrui.介護事務);
+        if (!list介護事務.get(INDEX_ZERO).get導入形態コード().equals(DonyuKeitaiCode.事務広域)){
+            List<KaigoDonyuKeitai> list介護認定 = 介護導入形態manager.get介護導入形態By業務分類(GyomuBunrui.介護認定);
+            if (list介護認定.get(INDEX_ZERO).get導入形態コード().equals(DonyuKeitaiCode.認定広域)){
+                要介護認定申請情報 =  dbT5101Dac.selectByKey(dbtEntity.getShinseishoKanriNo());
+                広域フラグ = true;
+            }
+        }
+        if (広域フラグ = true){
+            set送付先申請先情報(entity, 要介護認定申請情報);
+        }else{
+            set送付物宛先情報(entity);
+        }
+        
         FlexibleDate 通知書発行日 = get通知書発行日(dbtEntity.getShinseishoKanriNo().value());
-        entity.set文書番号(ReportUtil.get文書番号(SubGyomuCode.DBD介護受給, REPORT_DBD522001, 通知書発行日));
+        entity.set文書番号(parameter.get文書番号());
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBD介護受給,
                 REPORT_DBD522001,
@@ -174,6 +199,40 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
         return 通知書発行日;
     }
 
+    private void set送付先申請先情報(YokaigoNinteiEnkiTshuchishoEntity entity, DbT5101NinteiShinseiJohoEntity 要介護認定申請情報){
+        entity.set郵便番号(要介護認定申請情報.getYubinNo().getEditedYubinNo());
+        entity.set行政区(RString.EMPTY);
+        entity.set住所TextField(要介護認定申請情報.getJusho().getColumnValue());
+        entity.set住所優先順位1(RString.EMPTY);
+        entity.set住所優先順位2(RString.EMPTY);
+        entity.set住所優先順位3(RString.EMPTY);
+        entity.set方書TextField(RString.EMPTY);
+        entity.set方書優先順位1標準(RString.EMPTY);
+        entity.set方書優先順位2標準(RString.EMPTY);
+        entity.set方書優先順位1小(RString.EMPTY);
+        entity.set方書優先順位2小(RString.EMPTY);
+        entity.set代納人区分(RString.EMPTY);
+        entity.set氏名1TextField(要介護認定申請情報.getHihokenshaName().getColumnValue());
+        entity.set氏名1優先順位1標準(RString.EMPTY);
+        entity.set氏名1優先順位2標準(RString.EMPTY);
+        entity.set氏名1優先順位1小(RString.EMPTY);
+        entity.set氏名1優先順位2小(RString.EMPTY);
+        entity.set氏名2TextField(RString.EMPTY);
+        entity.set氏名2優先順位1標準(RString.EMPTY);
+        entity.set氏名2優先順位2標準(RString.EMPTY);
+        entity.set氏名2優先順位1小(RString.EMPTY);
+        entity.set氏名2優先順位2小(RString.EMPTY);
+        entity.set氏名1敬称1(new RString("様"));
+        entity.set氏名1敬称2(RString.EMPTY);
+        entity.set氏名2敬称1(RString.EMPTY);
+        entity.set氏名2敬称2(RString.EMPTY);
+        entity.set左括弧1(RString.EMPTY);
+        entity.set左括弧2(RString.EMPTY);
+        entity.set右括弧1(RString.EMPTY);
+        entity.set右括弧2(RString.EMPTY);
+        entity.setカスタマバーコード(RString.EMPTY);
+    }
+        
     private void set送付物宛先情報(YokaigoNinteiEnkiTshuchishoEntity entity) {
         entity.set郵便番号(sofubutsuAtesakiSource.yubinNo);
         entity.set行政区(sofubutsuAtesakiSource.gyoseiku);
@@ -235,18 +294,20 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        boolean 空白Flag = Boolean.FALSE;
+        // TODO：2016/12/20 不要の為、削除
+//        boolean 空白Flag = Boolean.FALSE;
         出力条件.add(通知書発行日.concat(get通知書発行日リスト()));
-        if (parameter.get申請書管理番号リスト() != null) {
-            for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {
-                if (!空白Flag) {
-                    出力条件.add(申請書管理番号リスト.concat(申請書管理番号));
-                    空白Flag = Boolean.TRUE;
-                } else {
-                    出力条件.add(申請書管理番号空白.concat(申請書管理番号));
-                }
-            }
-        }
+        // TODO：2016/12/20 不要の為、削除
+//        if (parameter.get申請書管理番号リスト() != null) {
+//            for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {
+//                if (!空白Flag) {
+//                    出力条件.add(申請書管理番号リスト.concat(申請書管理番号));
+//                    空白Flag = Boolean.TRUE;
+//                } else {
+//                    出力条件.add(申請書管理番号空白.concat(申請書管理番号));
+//                }
+//            }
+//        }
         return 出力条件;
     }
 

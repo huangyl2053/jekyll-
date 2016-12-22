@@ -14,13 +14,16 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinBetsuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShujiiIkenshoHoshuTanka;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.HomonShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.HoshuMasutaKoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgChosainhoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgHomonChosahoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgIkenShohoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgShinsakaiIinBetuTanka_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
@@ -54,7 +57,7 @@ public class HoshuMasutaKoshinHandler {
      *
      * @param 審査員報酬単価マスタ情報 審査員報酬単価マスタ情報
      */
-    public void onLoad(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報) {
+    public void set審査員報酬単価マスタタブ(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報) {
         set審査員報酬単価一覧情報(審査員報酬単価マスタ情報);
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabChosainhoshuTanka());
     }
@@ -417,6 +420,7 @@ public class HoshuMasutaKoshinHandler {
         div.getHoshuMasutaTab().getTxtBetuKaishiYM().clearDomain();
         div.getHoshuMasutaTab().getTxtBetuShuryoYM().clearDomain();
         div.getHoshuMasutaTab().getTxtShinsaIinKodo().clearValue();
+        div.getHoshuMasutaTab().getTxtShinsaIinName().clearValue();
         div.getHoshuMasutaTab().getTxtBetuTanka().clearValue();
         div.getHoshuMasutaTab().getTxtBetuSonotaTanka().clearValue();
         div.setShinsakaiIinBetuTankaState(追加モード);
@@ -454,9 +458,28 @@ public class HoshuMasutaKoshinHandler {
         div.getHoshuMasutaTab().getTxtBetuKaishiYM().clearDomain();
         div.getHoshuMasutaTab().getTxtBetuShuryoYM().clearDomain();
         div.getHoshuMasutaTab().getTxtShinsaIinKodo().clearValue();
+        div.getHoshuMasutaTab().getTxtShinsaIinName().clearValue();
         div.getHoshuMasutaTab().getTxtBetuTanka().clearValue();
         div.getHoshuMasutaTab().getTxtBetuSonotaTanka().clearValue();
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTbShinsakaiIinBetuTanka());
+    }
+
+    /**
+     * 審査会委員別単価マスタ入力を取りやめるボタンを押下するの場合、内容を破棄して一覧状態に戻ります。
+     */
+    public void onBlur_txtShinsaIinKodo() {
+        if (div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().isNull()
+                || div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().isEmpty()) {
+            div.getHoshuMasutaTab().getTxtShinsaIinKodo().clearValue();
+            return;
+        }
+        ShinsakaiIinJohoMapperParameter param = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue());
+        ShinsakaiIinJoho 審査会委員情報 = ShinsakaiIinJohoManager.createInstance().get介護認定審査会委員情報(param);
+        if (null != 審査会委員情報) {
+            div.getHoshuMasutaTab().getTxtShinsaIinName().setValue(審査会委員情報.get介護認定審査会委員氏名().value());
+        } else {
+            div.getHoshuMasutaTab().getTxtShinsaIinName().clearValue();
+        }
     }
 
     /**
@@ -474,6 +497,7 @@ public class HoshuMasutaKoshinHandler {
             新規データ.getKaishiYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().toDateString()));
             新規データ.getShuryoYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().toDateString()));
             新規データ.setShinsakaiIinCode(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue());
+            新規データ.setShinsakaiIinName(div.getHoshuMasutaTab().getTxtShinsaIinName().getValue());
             新規データ.getTanka().setValue(div.getHoshuMasutaTab().getTxtBetuTanka().getValue());
             新規データ.getSonotaTanka().setValue(div.getHoshuMasutaTab().getTxtBetuSonotaTanka().getValue());
             審査会委員別単価マスタ一覧情報.add(新規データ);
@@ -486,6 +510,7 @@ public class HoshuMasutaKoshinHandler {
                 選択したデータ.getKaishiYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().toDateString()));
                 選択したデータ.getShuryoYM().setValue(new FlexibleDate(div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().toDateString()));
                 選択したデータ.setShinsakaiIinCode(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue());
+                選択したデータ.setShinsakaiIinName(div.getHoshuMasutaTab().getTxtShinsaIinName().getValue());
                 選択したデータ.getTanka().setValue(div.getHoshuMasutaTab().getTxtBetuTanka().getValue());
                 選択したデータ.getSonotaTanka().setValue(div.getHoshuMasutaTab().getTxtBetuSonotaTanka().getValue());
             }
@@ -502,6 +527,15 @@ public class HoshuMasutaKoshinHandler {
         List<dgChosainhoshuTankaIchiran_Row> 審査員報酬単価一覧情報 = new ArrayList<>();
         for (ShinsakaiIinHoshuTanka 審査員報酬単価 : 審査員報酬単価マスタ情報) {
             dgChosainhoshuTankaIchiran_Row row = new dgChosainhoshuTankaIchiran_Row();
+            if (審査員報酬単価.isAdded()) {
+                row.setColumnState(追加モード);
+            } else if (審査員報酬単価.isModified()) {
+                row.setColumnState(更新モード);
+            } else if (審査員報酬単価.isDeleted()) {
+                row.setColumnState(削除モード);
+            } else {
+                row.setColumnState(RString.EMPTY);
+            }
             row.getKaishiYM().setValue(new FlexibleDate(審査員報酬単価.get開始年月().toDateString()));
             row.getShuryoYM().setValue(new FlexibleDate(審査員報酬単価.get終了年月().toDateString()));
             row.setKaigoNinteiShinsaIinShubetsu(ShinsakaiIinShubetsu.toValue(審査員報酬単価.get介護認定審査委員種別().value()).get名称());
@@ -527,6 +561,15 @@ public class HoshuMasutaKoshinHandler {
         List<dgIkenShohoshuTankaIchiran_Row> 意見書報酬単価一覧情報 = new ArrayList<>();
         for (ShujiiIkenshoHoshuTanka 意見書報酬単価 : 意見書報酬単価マスタ情報) {
             dgIkenShohoshuTankaIchiran_Row row = new dgIkenShohoshuTankaIchiran_Row();
+            if (意見書報酬単価.isAdded()) {
+                row.setColumnState(追加モード);
+            } else if (意見書報酬単価.isModified()) {
+                row.setColumnState(更新モード);
+            } else if (意見書報酬単価.isDeleted()) {
+                row.setColumnState(削除モード);
+            } else {
+                row.setColumnState(RString.EMPTY);
+            }
             row.getKaishiYM().setValue(new FlexibleDate(意見書報酬単価.get開始年月().toDateString()));
             row.getShuryoYM().setValue(new FlexibleDate(意見書報酬単価.get終了年月().toDateString()));
             row.setZaitakuShisetsuKubun(ZaitakuShisetsuKubun.toValue(意見書報酬単価.get在宅施設区分().getKey()).get名称());
@@ -564,6 +607,15 @@ public class HoshuMasutaKoshinHandler {
         List<dgHomonChosahoshuTankaIchiran_Row> 訪問調査報酬単価一覧情報 = new ArrayList<>();
         for (NinteiChosaHoshuTanka 訪問調査報酬単価 : 訪問調査報酬単価マスタ情報) {
             dgHomonChosahoshuTankaIchiran_Row row = new dgHomonChosahoshuTankaIchiran_Row();
+            if (訪問調査報酬単価.isAdded()) {
+                row.setColumnState(追加モード);
+            } else if (訪問調査報酬単価.isModified()) {
+                row.setColumnState(更新モード);
+            } else if (訪問調査報酬単価.isDeleted()) {
+                row.setColumnState(削除モード);
+            } else {
+                row.setColumnState(RString.EMPTY);
+            }
             row.getKaishiYM().setValue(new FlexibleDate(訪問調査報酬単価.get開始年月().toDateString()));
             row.getShuryoYM().setValue(new FlexibleDate(訪問調査報酬単価.get終了年月().toDateString()));
             row.setChosaKubun(ChosaKubun.toValue(訪問調査報酬単価.get調査区分().value()).get名称());
@@ -601,9 +653,19 @@ public class HoshuMasutaKoshinHandler {
         List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価一覧情報 = new ArrayList<>();
         for (ShinsakaiIinBetsuTanka 審査会委員別単価 : 審査会委員別単価マスタ情報) {
             dgShinsakaiIinBetuTanka_Row row = new dgShinsakaiIinBetuTanka_Row();
+            if (審査会委員別単価.isAdded()) {
+                row.setColumnState(追加モード);
+            } else if (審査会委員別単価.isModified()) {
+                row.setColumnState(更新モード);
+            } else if (審査会委員別単価.isDeleted()) {
+                row.setColumnState(削除モード);
+            } else {
+                row.setColumnState(RString.EMPTY);
+            }
             row.getKaishiYM().setValue(new FlexibleDate(審査会委員別単価.get開始年月().toDateString()));
             row.getShuryoYM().setValue(new FlexibleDate(審査会委員別単価.get終了年月().toDateString()));
             row.setShinsakaiIinCode(審査会委員別単価.get介護認定審査会委員コード());
+            row.setShinsakaiIinName(審査会委員別単価.get氏名());
             row.getTanka().setValue(審査会委員別単価.get単価());
             row.getSonotaTanka().setValue(審査会委員別単価.getその他単価());
             審査会委員別単価一覧情報.add(row);
@@ -804,22 +866,49 @@ public class HoshuMasutaKoshinHandler {
     }
 
     private void set審査会委員別単価マスタ明細内容(dgShinsakaiIinBetuTanka_Row 選択行の審査会委員別単価情報) {
-        div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDomain(選択行の審査会委員別単価情報.getKaishiYM().getValue().getYearMonth());
+        if (FlexibleDate.EMPTY.equals(選択行の審査会委員別単価情報.getKaishiYM().getValue())) {
+            div.getHoshuMasutaTab().getTxtBetuKaishiYM().clearDomain();
+        } else {
+            div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDomain(選択行の審査会委員別単価情報.getKaishiYM().getValue().getYearMonth());
+        }
         if (FlexibleDate.EMPTY.equals(選択行の審査会委員別単価情報.getShuryoYM().getValue())) {
             div.getHoshuMasutaTab().getTxtBetuShuryoYM().clearDomain();
         } else {
             div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDomain(選択行の審査会委員別単価情報.getShuryoYM().getValue().getYearMonth());
         }
         div.getHoshuMasutaTab().getTxtShinsaIinKodo().setValue(選択行の審査会委員別単価情報.getShinsakaiIinCode());
+        div.getHoshuMasutaTab().getTxtShinsaIinName().setValue(選択行の審査会委員別単価情報.getShinsakaiIinName());
         div.getHoshuMasutaTab().getTxtBetuTanka().setValue(選択行の審査会委員別単価情報.getTanka().getValue());
         div.getHoshuMasutaTab().getTxtBetuSonotaTanka().setValue(選択行の審査会委員別単価情報.getSonotaTanka().getValue());
     }
 
     private boolean isデータ変更(dgShinsakaiIinBetuTanka_Row 選択データ) {
-        return !(選択データ.getKaishiYM().getValue().getYearMonth().compareTo(
-                div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain()) == 0
-                && 選択データ.getShuryoYM().getValue().getYearMonth().compareTo(
-                        div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain()) == 0
+        boolean isEquals開始日;
+        if (選択データ.getKaishiYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().isEmpty()) {
+            isEquals開始日 = true;
+        } else if (選択データ.getKaishiYM().getValue().isEmpty() && !div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().isEmpty()) {
+            isEquals開始日 = false;
+        } else if (!選択データ.getKaishiYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().isEmpty()) {
+            isEquals開始日 = false;
+        } else {
+            isEquals開始日 = 選択データ.getKaishiYM().getValue().getYearMonth().compareTo(
+                    div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain()) == 0;
+        }
+
+        boolean isEquals終了日;
+        if (選択データ.getShuryoYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().isEmpty()) {
+            isEquals終了日 = true;
+        } else if (選択データ.getShuryoYM().getValue().isEmpty() && !div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().isEmpty()) {
+            isEquals終了日 = false;
+        } else if (!選択データ.getShuryoYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().isEmpty()) {
+            isEquals終了日 = false;
+        } else {
+            isEquals終了日 = 選択データ.getShuryoYM().getValue().getYearMonth().compareTo(
+                    div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain()) == 0;
+        }
+
+        return !(isEquals開始日
+                && isEquals終了日
                 && 選択データ.getShinsakaiIinCode().equals(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue())
                 && (選択データ.getTanka().getValue() != null && 選択データ.getTanka().getValue().equals(
                         div.getHoshuMasutaTab().getTxtBetuTanka().getValue()))

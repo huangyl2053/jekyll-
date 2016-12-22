@@ -70,18 +70,20 @@ public class NinteiChosainMaster {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CSVファイル名 = new RString("調査員情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 構成市町村マスタ市町村コード重複種別
-            = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
-                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
-    private static final RString 四マスタ優先表示市町村識別ID
-            = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
-                    SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    private static RString 構成市町村マスタ市町村コード重複種別;
+    private static RString 四マスタ優先表示市町村識別ID;
 
     /**
      * コンストラクタです。
      *
      */
     public NinteiChosainMaster() {
+        構成市町村マスタ市町村コード重複種別
+                = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
+                        SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+        四マスタ優先表示市町村識別ID
+                = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
+                        SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
     }
 
     /**
@@ -330,22 +332,21 @@ public class NinteiChosainMaster {
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnTorikeshi(NinteiChosainMasterDiv div) {
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if ((状態_追加.equals(div.getChosainJohoInput().getState())
-                || 状態_修正.equals(div.getChosainJohoInput().getState()))
-                && getValidationHandler(div).isUpdate()) {
-            if (!ResponseHolder.isReRequest()) {
+
+        if (!ResponseHolder.isReRequest()) {
+            RString 画面状態 = div.getChosainJohoInput().getState();
+            boolean 編集有 = getValidationHandler(div).isUpdate();
+            if ((画面状態.equals(状態_追加) || 画面状態.equals(状態_修正)) && 編集有) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                resposneSettingState(div, 認定調査委託先コード);
-            }
+
+        } else if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).setState(DBE9040001StateName.詳細);
         }
         return resposneSettingState(div, 認定調査委託先コード);
+
     }
 
     private ResponseData<NinteiChosainMasterDiv> resposneSettingState(NinteiChosainMasterDiv div, RString 認定調査委託先コード) {

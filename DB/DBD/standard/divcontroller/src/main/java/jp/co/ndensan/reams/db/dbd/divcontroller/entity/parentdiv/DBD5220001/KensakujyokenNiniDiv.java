@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakujyokenNiniDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,10 +31,10 @@ public class KensakujyokenNiniDiv extends Panel {
     private Space spSpace1;
     @JsonProperty("spSpace2")
     private Space spSpace2;
-    @JsonProperty("cblNinteiChosa")
-    private CheckBoxList cblNinteiChosa;
     @JsonProperty("cblIkenshoJyuryo")
     private CheckBoxList cblIkenshoJyuryo;
+    @JsonProperty("cblNinteiChosa")
+    private CheckBoxList cblNinteiChosa;
     @JsonProperty("cblIchijiHantei")
     private CheckBoxList cblIchijiHantei;
     @JsonProperty("cblShinsakaiWaritsuke")
@@ -121,24 +121,6 @@ public class KensakujyokenNiniDiv extends Panel {
     }
 
     /*
-     * getcblNinteiChosa
-     * @return cblNinteiChosa
-     */
-    @JsonProperty("cblNinteiChosa")
-    public CheckBoxList getCblNinteiChosa() {
-        return cblNinteiChosa;
-    }
-
-    /*
-     * setcblNinteiChosa
-     * @param cblNinteiChosa cblNinteiChosa
-     */
-    @JsonProperty("cblNinteiChosa")
-    public void setCblNinteiChosa(CheckBoxList cblNinteiChosa) {
-        this.cblNinteiChosa = cblNinteiChosa;
-    }
-
-    /*
      * getcblIkenshoJyuryo
      * @return cblIkenshoJyuryo
      */
@@ -154,6 +136,24 @@ public class KensakujyokenNiniDiv extends Panel {
     @JsonProperty("cblIkenshoJyuryo")
     public void setCblIkenshoJyuryo(CheckBoxList cblIkenshoJyuryo) {
         this.cblIkenshoJyuryo = cblIkenshoJyuryo;
+    }
+
+    /*
+     * getcblNinteiChosa
+     * @return cblNinteiChosa
+     */
+    @JsonProperty("cblNinteiChosa")
+    public CheckBoxList getCblNinteiChosa() {
+        return cblNinteiChosa;
+    }
+
+    /*
+     * setcblNinteiChosa
+     * @param cblNinteiChosa cblNinteiChosa
+     */
+    @JsonProperty("cblNinteiChosa")
+    public void setCblNinteiChosa(CheckBoxList cblNinteiChosa) {
+        this.cblNinteiChosa = cblNinteiChosa;
     }
 
     /*

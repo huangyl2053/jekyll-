@@ -8,12 +8,60 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnConfirm(): string {
-                return "onClick_btnConfirm";
+            public static onBeforeOpenDialog_btnIjyo(): string {
+                return "onBeforeOpenDialog_btnIjyo";
+            }
+
+            public static onBeforeOpenDialog_btnIdou(): string {
+                return "onBeforeOpenDialog_btnIdou";
+            }
+
+            public static onBeforeOpenDialog_btnEnka(): string {
+                return "onBeforeOpenDialog_btnEnka";
+            }
+
+            public static onBeforeOpenDialog_btnShokuji(): string {
+                return "onBeforeOpenDialog_btnShokuji";
+            }
+
+            public static onBeforeOpenDialog_btnHainyo(): string {
+                return "onBeforeOpenDialog_btnHainyo";
+            }
+
+            public static onBeforeOpenDialog_btnHaiben(): string {
+                return "onBeforeOpenDialog_btnHaiben";
+            }
+
+            public static onBeforeOpenDialog_btnKokou(): string {
+                return "onBeforeOpenDialog_btnKokou";
+            }
+
+            public static onBeforeOpenDialog_btnSengan(): string {
+                return "onBeforeOpenDialog_btnSengan";
+            }
+
+            public static onBeforeOpenDialog_btnSeihatsu(): string {
+                return "onBeforeOpenDialog_btnSeihatsu";
+            }
+
+            public static onBeforeOpenDialog_btnUwagi(): string {
+                return "onBeforeOpenDialog_btnUwagi";
+            }
+
+            public static onBeforeOpenDialog_btnZubon(): string {
+                return "onBeforeOpenDialog_btnZubon";
+            }
+
+            public static onBeforeOpenDialog_btnHindo(): string {
+                return "onBeforeOpenDialog_btnHindo";
             }
 
             public static onClick_btnBack(): string {
                 return "onClick_btnBack";
+            }
+
+            public static onClick_btnConfirm(): string {
+                return "onClick_btnConfirm";
             }
 
         }
@@ -193,12 +241,12 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radHindo"));
             }
 
-            public btnConfirm(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            }
-
             public btnBack(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            }
+
+            public btnConfirm(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             }
 
         }

@@ -190,7 +190,10 @@
             dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
             dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiKubunCode",
             dbT5101."chikuCode" AS "chikuCode",
-            dbT5101."chosaKubun" AS "chosaKubun",
+            CASE WHEN dbT5101."chosaKubun" IS NOT NULL
+                    THEN dbT5101."chosaKubun"
+                    ELSE '0'
+            END AS "chosaKubun",
             dbT5101."jusho" AS "jusho",
             dbT5101."hihokenshaKana" AS "hihokenshaKana",
             dbT5101."seinengappiYMD" AS "seinengappiYMD",
@@ -432,7 +435,10 @@
                 dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
                 dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiKubunCode",
                 dbT5101."chikuCode" AS "chikuCode",
-                dbT5101."chosaKubun" AS "chosaKubun",
+                CASE WHEN dbT5101."chosaKubun" IS NOT NULL
+                        THEN dbT5101."chosaKubun"
+                        ELSE '0'
+                END AS "chosaKubun",
                 dbT5101."jusho" AS "jusho",
                 dbT5101."hihokenshaKana" AS "hihokenshaKana",
                 dbT5101."seinengappiYMD" AS "seinengappiYMD",
@@ -624,7 +630,10 @@
             dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
             dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiKubunCode",
             dbT5101."chikuCode" AS "chikuCode",
-            dbT5101."chosaKubun" AS "chosaKubun",
+            CASE WHEN dbT5101."chosaKubun" IS NOT NULL
+                    THEN dbT5101."chosaKubun"
+                    ELSE '0'
+            END AS "chosaKubun",
             dbT5101."jusho" AS "jusho",
             dbT5911Shujii."iryoKikanMeisho" AS iryoKikanMeisho,
             dbT5912Shujii."shujiiName" AS shujiiName,
@@ -737,7 +746,7 @@
             AND dbT5101."shishoCode" = #{支所コード}
             </if>
             AND dbT5101ShiTe.shinseishoKanriNoNull IS NULL
-            AND dbT5101."ninteiShinseiShinseijiKubunCode" NOT IN ('A','B')
+            AND dbT5101."ninteiShinseiShinseijiKubunCode" NOT IN ('5','6','A','B')
         ORDER BY
             dbT5101."chosaKubun"
     </select>
@@ -773,7 +782,10 @@
             dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
             dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode",
             dbT5101."chikuCode" AS "chikuCode",
-            dbT5101."chosaKubun" AS "chosaKubun",
+            CASE WHEN dbT5101."chosaKubun" IS NOT NULL
+                    THEN dbT5101."chosaKubun"
+                    ELSE '0'
+            END AS "chosaKubun",
             dbT5101."jusho" AS "jusho",
             dbT5101."ninteiChosainCode" AS "ninteiChosainCode",
             dbT5911Shujii."iryoKikanMeisho" AS iryoKikanMeisho,
@@ -893,7 +905,7 @@
             <if test="uses支所コード">
             AND dbT5101."shishoCode" = #{支所コード}
             </if>
-            AND dbT5101."ninteiShinseiShinseijiKubunCode" NOT IN ('A','B')
+            AND dbT5101."ninteiShinseiShinseijiKubunCode" NOT IN ('5','6','A','B')
         ORDER BY
             dbT5101."chosaKubun"
     </select>

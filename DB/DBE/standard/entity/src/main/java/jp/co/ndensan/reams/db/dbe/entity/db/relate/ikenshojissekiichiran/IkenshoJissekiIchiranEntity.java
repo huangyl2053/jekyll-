@@ -20,42 +20,51 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEucEntity {
 
-    @CsvField(order = 1, name = "保険者")
+    @CsvField(order = 1, name = "保険者番号")
     private final RString 保険者番号;
-    @CsvField(order = 2, name = "医療機関コード")
+    @CsvField(order = 2, name = "保険者名称")
+    private final RString 保険者名称;
+    @CsvField(order = 3, name = "医療機関コード")
     private final RString 医療機関コード;
-    @CsvField(order = 3, name = "医療機関名")
+    @CsvField(order = 4, name = "医療機関名")
     private final RString 医療機関名称;
-    @CsvField(order = 4, name = "主治医名")
+    @CsvField(order = 5, name = "主治医コード")
+    private final RString 主治医コード;
+    @CsvField(order = 6, name = "主治医名")
     private final RString 主治医氏名;
-    @CsvField(order = 5, name = "被保険者番号")
+    @CsvField(order = 7, name = "被保険者番号")
     private final RString 被保険者番号;
-    @CsvField(order = 6, name = "申請者名")
-    private final RString 申請者氏名;
-    @CsvField(order = 7, name = "記入日")
+    @CsvField(order = 8, name = "被保険者氏名")
+    private final RString 被保険者氏名;
+    @CsvField(order = 9, name = "依頼日")
+    private final RString 依頼日;
+    @CsvField(order = 10, name = "記入日")
     private final RString 記入日;
-    @CsvField(order = 8, name = "入手日")
+    @CsvField(order = 11, name = "入手日")
     private final RString 入手日;
-    @CsvField(order = 9, name = "在宅_新")
+    @CsvField(order = 12, name = "在宅_新")
     private final RString 入手パターン_在新;
-    @CsvField(order = 10, name = "在宅_継")
+    @CsvField(order = 13, name = "在宅_継")
     private final RString 入手パターン_在継;
-    @CsvField(order = 11, name = "施設_新")
+    @CsvField(order = 14, name = "施設_新")
     private final RString 入手パターン_施新;
-    @CsvField(order = 12, name = "施設_継")
+    @CsvField(order = 15, name = "施設_継")
     private final RString 入手パターン_施継;
-    @CsvField(order = 13, name = "医師区分")
+    @CsvField(order = 16, name = "医師区分")
     private final RString 医師区分;
 
     /**
      * コンストラクタです。
      *
      * @param 保険者番号 保険者番号
+     * @param 保険者名称 保険者名称
      * @param 医療機関コード 医療機関コード
      * @param 医療機関名称 医療機関名称
+     * @param 主治医コード 主治医コード
      * @param 主治医氏名 主治医氏名
      * @param 被保険者番号 被保険者番号
      * @param 申請者氏名 申請者氏名
+     * @param 依頼日 依頼日
      * @param 記入日 記入日
      * @param 入手日 入手日
      * @param 入手パターン_在新 入手パターン_在新
@@ -65,11 +74,14 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
      * @param 医師区分 医師区分
      */
     public IkenshoJissekiIchiranEntity(RString 保険者番号,
+            RString 保険者名称,
             RString 医療機関コード,
             RString 医療機関名称,
+            RString 主治医コード,
             RString 主治医氏名,
             RString 被保険者番号,
             RString 申請者氏名,
+            RString 依頼日,
             RString 記入日,
             RString 入手日,
             RString 入手パターン_在新,
@@ -78,11 +90,14 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
             RString 入手パターン_施継,
             RString 医師区分) {
         this.保険者番号 = 保険者番号;
+        this.保険者名称 = 保険者名称;
         this.医療機関コード = 医療機関コード;
         this.医療機関名称 = 医療機関名称;
+        this.主治医コード = 主治医コード;
         this.主治医氏名 = 主治医氏名;
         this.被保険者番号 = 被保険者番号;
-        this.申請者氏名 = 申請者氏名;
+        this.被保険者氏名 = 申請者氏名;
+        this.依頼日 = 依頼日;
         this.記入日 = 記入日;
         this.入手日 = 入手日;
         this.入手パターン_在新 = 入手パターン_在新;

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class pnlKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,12 +25,12 @@ public class pnlKensakuDiv extends Panel {
      */
     @JsonProperty("radKubun")
     private RadioButton radKubun;
+    @JsonProperty("txtZenkaiChuishutsuRange")
+    private TextBoxDateRange txtZenkaiChuishutsuRange;
     @JsonProperty("txtChuishutsuRange")
     private TextBoxDateRange txtChuishutsuRange;
     @JsonProperty("txtHihokenshaCode")
     private TextBoxCode txtHihokenshaCode;
-    @JsonProperty("txtMaxKensu")
-    private TextBoxNum txtMaxKensu;
     @JsonProperty("btnHihokensha")
     private Button btnHihokensha;
     @JsonProperty("btnJokenClear")
@@ -62,6 +62,24 @@ public class pnlKensakuDiv extends Panel {
     @JsonProperty("radKubun")
     public void setRadKubun(RadioButton radKubun) {
         this.radKubun = radKubun;
+    }
+
+    /*
+     * gettxtZenkaiChuishutsuRange
+     * @return txtZenkaiChuishutsuRange
+     */
+    @JsonProperty("txtZenkaiChuishutsuRange")
+    public TextBoxDateRange getTxtZenkaiChuishutsuRange() {
+        return txtZenkaiChuishutsuRange;
+    }
+
+    /*
+     * settxtZenkaiChuishutsuRange
+     * @param txtZenkaiChuishutsuRange txtZenkaiChuishutsuRange
+     */
+    @JsonProperty("txtZenkaiChuishutsuRange")
+    public void setTxtZenkaiChuishutsuRange(TextBoxDateRange txtZenkaiChuishutsuRange) {
+        this.txtZenkaiChuishutsuRange = txtZenkaiChuishutsuRange;
     }
 
     /*
@@ -98,24 +116,6 @@ public class pnlKensakuDiv extends Panel {
     @JsonProperty("txtHihokenshaCode")
     public void setTxtHihokenshaCode(TextBoxCode txtHihokenshaCode) {
         this.txtHihokenshaCode = txtHihokenshaCode;
-    }
-
-    /*
-     * gettxtMaxKensu
-     * @return txtMaxKensu
-     */
-    @JsonProperty("txtMaxKensu")
-    public TextBoxNum getTxtMaxKensu() {
-        return txtMaxKensu;
-    }
-
-    /*
-     * settxtMaxKensu
-     * @param txtMaxKensu txtMaxKensu
-     */
-    @JsonProperty("txtMaxKensu")
-    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
-        this.txtMaxKensu = txtMaxKensu;
     }
 
     /*

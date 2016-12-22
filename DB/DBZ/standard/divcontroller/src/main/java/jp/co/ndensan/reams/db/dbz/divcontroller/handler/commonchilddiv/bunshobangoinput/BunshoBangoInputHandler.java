@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
+import jp.co.ndensan.reams.ur.urz.definition.core.bunshono.UrUDE005NoEditPattern;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
@@ -73,9 +74,12 @@ public class BunshoBangoInputHandler {
             div.setMode_DisplayType(BunshoBangoInputDiv.DisplayType.Kotei);
         } else if (BunshoNoHatsubanHoho.toValue(bunshoNo.get文書番号発番方法()) == BunshoNoHatsubanHoho.手入力) {
             div.setMode_DisplayType(BunshoBangoInputDiv.DisplayType.ShudoNyuryoku);
+            div.getTxtBunshoNo().setMaxLength(bunshoNo.get文書番号有効文字数());
         } else {
             div.setMode_DisplayType(BunshoBangoInputDiv.DisplayType.JidoSaiban);
         }
+        div.getTxtBunshoNo().setPaddingZero(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前ゼロ編集);
+        div.setHdnPadSpaceFlag(new RString(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前スペース編集));
 
         div.getTxtBunshoKigo().setValue(bunshoNo.getEdit文書番号記号());
         div.getTxtBunshoHeader().setValue(bunshoNo.getEditヘッダー文字());
@@ -98,15 +102,22 @@ public class BunshoBangoInputHandler {
     }
 
     /**
-     * 「文書番号記号」「ヘッダー文字」「文書番号」「フッター文字」を連結した文字列を返します。（空白の場合はEmptyを返します。）
+     * 「文書番号記号」「ヘッダー文字」「文書番号」「フッター文字」を連結した文字列を返します。<br/>
+     * 文書番号が空白だった場合は、最大桁数分の空白文字を文書番号として返します。
      *
      * @return RString
      */
     public RString getEdit文書番号() {
-
+        RString bunshoNo = div.getTxtBunshoNo().getValue();
+        boolean is前スペース編集 = Boolean.parseBoolean(div.getHdnPadSpaceFlag().toString());
+        bunshoNo = is前スペース編集
+                ? bunshoNo.padLeft(div.getTxtBunshoNo().getMaxLength())
+                : bunshoNo;
         return new RStringBuilder(div.getTxtBunshoKigo().getValue())
                 .append(div.getTxtBunshoHeader().getValue())
-                .append(div.getTxtBunshoNo().getValue())
+                .append(bunshoNo.isEmpty()
+                        ? RString.EMPTY.padLeft(div.getTxtBunshoNo().getMaxLength())
+                        : bunshoNo)
                 .append(div.getTxtBunshoFooter().getValue())
                 .toRString();
     }

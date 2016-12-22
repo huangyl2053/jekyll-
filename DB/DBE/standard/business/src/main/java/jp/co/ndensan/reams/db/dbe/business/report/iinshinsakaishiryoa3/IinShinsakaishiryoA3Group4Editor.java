@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -24,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Editor {
 
     private static final int INT_4 = 4;
+    private static final int INT_14 = 14;
     private final JimuShinsakaiWariateJohoBusiness business;
     private final RString reportId;
 
@@ -65,11 +64,7 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
         source.shinsaDD = get日(business.get今回認定審査年月日());
         source.imgIkensho1 = business.get左の主治医意見書イメージ();
         source.imgIkensho2 = business.get右の主治医意見書イメージ();
-        if (ReportIdDBE.DBE517915.getReportId().value().equals(reportId)) {
-            source.layout = Layouts.任意;
-        } else {
-            source.layout = Layouts.四頁目;
-        }
+        source.layout = INT_14;
         return source;
     }
 

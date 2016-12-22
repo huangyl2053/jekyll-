@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa4;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa4.JimuShinsakaishiryoA4ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -68,7 +67,7 @@ public class JimuShinsakaishiryoA4Group7Editor implements IJimuShinsakaishiryoA4
         if (index < business.getその他資料().size()) {
             source.imgSonotashiryo = business.getその他資料().get(index);
         }
-        source.layout = Layouts.七頁目;
+        source.layout = 15;
         return source;
     }
 

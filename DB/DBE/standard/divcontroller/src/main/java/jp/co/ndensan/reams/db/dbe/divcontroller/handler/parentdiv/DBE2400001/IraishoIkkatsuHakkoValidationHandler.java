@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -26,7 +27,6 @@ public class IraishoIkkatsuHakkoValidationHandler {
     private static final RString STATE_NINTEIO = new RString("1");
     private static final RString STATE_SHUJII = new RString("2");
     private static final RString KEY_2 = new RString("key2");
-    private static final RString KEY_1 = new RString("key1");
 
     private final IraishoIkkatsuHakkoDiv div;
 
@@ -103,31 +103,52 @@ public class IraishoIkkatsuHakkoValidationHandler {
      */
     public ValidationMessageControlPairs printChouhyouSentakuCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (STATE_NINTEIO.equals(div.getState())
-                && ((div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(KEY_1)
-                && div.getChkNinteiChosaIraisho().getSelectedKeys().isEmpty()
-                && div.getChkNinteiChosahyoShurui().getSelectedKeys().isEmpty()
-                && div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().isEmpty()
-                && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty())
-                || (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().isEmpty()
-                && div.getChkchosairaihakko().getSelectedKeys().isEmpty()
-                && div.getChkchosairaiRireki().getSelectedKeys().isEmpty()))) {
+        if (STATE_NINTEIO.equals(div.getState()) && isNinteiNoSelected()) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
+                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定), div.getNinteiChosaInsatsuChohyoSentaku()));
         }
-        if (STATE_SHUJII.equals(div.getState())
-                && ((div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(KEY_2)
-                && div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().isEmpty()
-                && div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().isEmpty()
-                && div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty())
-                || div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().isEmpty()
-                && div.getChkikenshiiraihakko().getSelectedKeys().isEmpty()
-                && div.getChkikenshiiraiRireki().getSelectedKeys().isEmpty())) {
+        if (STATE_SHUJII.equals(div.getState()) && isShujiiNoSelected()) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
+                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定), div.getShujiiIkenshoInsatsuChohyo()));
         }
 
         return validationMessages;
+    }
+
+    private boolean isNinteiNoSelected() {
+        return is適用なし(div.getChkNinteiChosaIraiIchiran())
+                && is適用なし(div.getChkChosaIrai())
+                && is適用なし(div.getChkNinteiChosahyoSonota())
+                && is適用なし(div.getChkChosaDesign())
+                && is適用なし(div.getChkTokkiDesign())
+                && is適用なし(div.getChkChosaOcr())
+                && is適用なし(div.getChkTokkiOcr())
+                && is適用なし(div.getChkSaiCheck())
+                && is適用なし(div.getChkGaikyoTokki())
+                && is適用なし(div.getChkTokkiKomokuAri())
+                && is適用なし(div.getChkTokkiKomokuNashi())
+                && is適用なし(div.getChkTokkiFree())
+                && is適用なし(div.getChkTokkijikoTenyuryoku())
+                && is適用なし(div.getChkchosairaihakko())
+                && is適用なし(div.getChkchosairaiRireki());
+
+    }
+
+    private boolean is適用なし(CheckBoxList chk) {
+        return !(!chk.getSelectedKeys().isEmpty() && !chk.isDisplayNone());
+    }
+
+    private boolean isShujiiNoSelected() {
+        return is適用なし(div.getChkShujiiIkenshoSakuseiIrai())
+                && is適用なし(div.getChkShujiiIkenshoSakuseiSeikyu())
+                && is適用なし(div.getChkShujiiIkenshoSakuseiIraisho())
+                && is適用なし(div.getChkShujiIkenshoyoshi())
+                && is適用なし(div.getChkShujiiIkenshoyoshiOcr())
+                && is適用なし(div.getChkShujiiIkenshoyoshiDesign())
+                && is適用なし(div.getChkShujiiIkenshoSakuseiryoSeikyusho())
+                && is適用なし(div.getChkShindanMeireishoAndTeishutsuIraisho())
+                && is適用なし(div.getChkikenshiiraihakko())
+                && is適用なし(div.getChkikenshiiraiRireki());
     }
 
     /**

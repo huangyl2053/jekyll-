@@ -42,6 +42,7 @@ public class CreateTargetHandler {
 
     private final CreateTargetDiv div;
     private static final RString キー_0 = new RString("key0");
+    private static final RString キー_1 = new RString("key1");
 
     /**
      * コンストラクタです。
@@ -57,9 +58,9 @@ public class CreateTargetHandler {
      *
      */
     public void onLoad() {
-        div.getRdoShinseiNintei().setSelectedKey(キー_0);
-        div.getTxtShinseiYMD().setDisabled(false);
-        div.getNinteiYMD().setDisabled(true);
+        div.getRdoShinseiNintei().setSelectedKey(キー_1);
+        div.getTxtShinseiYMD().setDisabled(true);
+        div.getNinteiYMD().setDisabled(false);
         div.getRdoSyutsuryoku().setSelectedKey(キー_0);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
@@ -72,11 +73,11 @@ public class CreateTargetHandler {
      *
      */
     public void onClick_btnClear() {
-        div.getRdoShinseiNintei().setSelectedKey(キー_0);
-        div.getTxtShinseiYMD().setDisabled(false);
+        div.getRdoShinseiNintei().setSelectedKey(キー_1);
+        div.getTxtShinseiYMD().setDisabled(true);
         div.getTxtShinseiYMD().clearFromValue();
         div.getTxtShinseiYMD().clearToValue();
-        div.getNinteiYMD().setDisabled(true);
+        div.getNinteiYMD().setDisabled(false);
         div.getNinteiYMD().clearFromValue();
         div.getNinteiYMD().clearToValue();
         div.getRdoSyutsuryoku().setSelectedKey(キー_0);
@@ -125,6 +126,7 @@ public class CreateTargetHandler {
             if (list.get認定申請区分_法令コード() != null && !list.get認定申請区分_法令コード().value().isEmpty()) {
                 row.setShinseiKubunHo(NinteiShinseiHoreiCode.toValue(list.get認定申請区分_法令コード().value()).get名称());
             }
+            row.getNijiHanteiBi().setValue(getNull(list.get二次判定日()));
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(list.get厚労省IF識別コード().value())) {
                 row.setNijiHanteiKekka(YokaigoJotaiKubun99.toValue(list.get状態区分コード()).get名称());
             }

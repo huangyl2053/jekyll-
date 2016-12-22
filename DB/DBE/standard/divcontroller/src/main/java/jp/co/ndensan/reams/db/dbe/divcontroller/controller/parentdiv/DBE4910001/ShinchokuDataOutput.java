@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.ShinchokuDataOutputValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -29,8 +31,8 @@ public class ShinchokuDataOutput {
 
     private final YouKaigoNinteiShinchokuJohouFinder finder;
     private List<YouKaigoNinteiShinchokuJohouBusiness> 調査員情報Lis;
-    private static final RString 結果情報 = new RString("0");
-    private static final RString 進捗情報 = new RString("1");
+    private static final RString 結果情報 = new RString("1");
+    private static final RString 進捗情報 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -93,16 +95,20 @@ public class ShinchokuDataOutput {
      * @return ResponseData<ShinchokuDataOutputDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onClick_btnKensaku(ShinchokuDataOutputDiv div) {
+        ValidationMessageControlPairs validation = getValidatisonHandler(div).抽出期間チェック();
+        if (validation.iterator().hasNext()) {
+
+            return ResponseData.of(div).addValidationMessages(validation).respond();
+        }
         if (結果情報.equals(div.getRadKubun().getSelectedKey())) {
             調査員情報Lis = finder.get結果情報検索(getHandler(div).createParam(div)).records();
         } else if (進捗情報.equals(div.getRadKubun().getSelectedKey())) {
             調査員情報Lis = finder.get進捗情報検索(getHandler(div).createParam(div)).records();
         }
         getHandler(div).setdgShinchokuIchiran(調査員情報Lis);
-        ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
-        if (validation.iterator().hasNext()) {
-
-            return ResponseData.of(div).addValidationMessages(validation).respond();
+        if (div.getDgShinchokuIchiran().getDataSource() == null
+                || div.getDgShinchokuIchiran().getDataSource().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         return ResponseData.of(div).setState(DBE4910001StateName.一覧照会);
     }
@@ -142,6 +148,26 @@ public class ShinchokuDataOutput {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 市町村DDL変更時の動作
+     * @param div
+     * @return ResponseData
+     */
+    public ResponseData<ShinchokuDataOutputDiv> onChange_ddlSichoson(ShinchokuDataOutputDiv div) {
+        getHandler(div).onChange_ddlSichoson();
+        return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
+    }
+    
+    /**
+     * 抽出期間変更時の動作
+     * @param div
+     * @return ResponseData
+     */
+    public ResponseData<ShinchokuDataOutputDiv> onChange_txtChuishutsuRange(ShinchokuDataOutputDiv div) {
+        div.getTxtChuishutsuRange().setFromRequired(true);
+        return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
     }
 
     private ShinchokuDataOutputHandler getHandler(ShinchokuDataOutputDiv div) {

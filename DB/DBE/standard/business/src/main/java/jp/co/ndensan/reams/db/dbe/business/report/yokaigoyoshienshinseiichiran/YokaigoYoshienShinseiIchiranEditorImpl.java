@@ -43,7 +43,8 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
      * ReportSourceの編集処理です。
      *
      * @param reportSource 要支援認定等申請者一覧表ReportSourceクラス
-     * @return YokaigoYoshienShinseiIchiranReportSource 要支援認定等申請者一覧表ReportSourceクラス
+     * @return YokaigoYoshienShinseiIchiranReportSource
+     * 要支援認定等申請者一覧表ReportSourceクラス
      */
     @Override
     public YokaigoYoshienShinseiIchiranReportSource edit(YokaigoYoshienShinseiIchiranReportSource reportSource) {
@@ -63,7 +64,8 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
         }
         Code seibetsu = item.getSeibetsu();
         if (seibetsu != null) {
-            reportSource.listShinseiIchiran_7 = Seibetsu.toValue(seibetsu.value()).get名称();
+            reportSource.listShinseiIchiran_7 = RString.isNullOrEmpty(seibetsu.value())
+                    ? RString.EMPTY : Seibetsu.toValue(seibetsu.value()).get名称();
         }
         editListShinseiIchiran8(reportSource);
         reportSource.listShinseiIchiran_9 = new RString(String.valueOf(item.getNijiHanteiNinteiYukoKikan()));
@@ -87,7 +89,8 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
         }
         Code shinseijiKubunCode = item.getNinteiShinseiShinseijiKubun();
         if (shinseijiKubunCode != null) {
-            reportSource.listShinseiIchiran_13 = NinteiShinseiShinseijiKubunCode.toValue(shinseijiKubunCode.value()).get略称();
+            reportSource.listShinseiIchiran_13 = RString.isNullOrEmpty(shinseijiKubunCode.value())
+                    ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(shinseijiKubunCode.value()).get略称();
         }
         reportSource.listShinseiIchiran_14 = item.getJigyoshaMeisho();
         reportSource.listShinseiIchiran_15 = item.getChosainShimei();
@@ -97,28 +100,32 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
     }
 
     private void editListShinseiIchiran8(YokaigoYoshienShinseiIchiranReportSource reportSource) {
-        Code koroshoIfShikibetsuCode = item.getKoroshoIfShikibetsuCode();
+        Code zenkaiKoroshoIfShikibetsuCode = item.getZenkaiKoroshoIfShikibetsuCode();
         Code kubunCode = item.getNijiHanteiYokaigoJotaiKubun();
-        RString koroshoIfShikibetsu = RString.EMPTY;
-        if (koroshoIfShikibetsuCode != null) {
-            koroshoIfShikibetsu = koroshoIfShikibetsuCode.value();
+        RString zenkaiKoroshoIfShikibetsu = RString.EMPTY;
+        if (zenkaiKoroshoIfShikibetsuCode != null) {
+            zenkaiKoroshoIfShikibetsu = zenkaiKoroshoIfShikibetsuCode.value();
         }
-        RString nijiHanteiYokaigoJotaiKubun;
+        RString code;
         if (kubunCode != null && !RString.isNullOrEmpty(kubunCode.value())) {
-            nijiHanteiYokaigoJotaiKubun = kubunCode.value();
+            code = kubunCode.value();
         } else {
             reportSource.listShinseiIchiran_8 = RString.EMPTY;
             return;
         }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(koroshoIfShikibetsu)) {
-            reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun99.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(koroshoIfShikibetsu)) {
-            reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun02.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(koroshoIfShikibetsu)) {
-            reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun06.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(koroshoIfShikibetsu)
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(koroshoIfShikibetsu)) {
-            reportSource.listShinseiIchiran_8 = YokaigoJotaiKubun09.toValue(nijiHanteiYokaigoJotaiKubun).get名称();
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
+            reportSource.listShinseiIchiran_8 = RString.isNullOrEmpty(code)
+                    ? RString.EMPTY : YokaigoJotaiKubun99.toValue(code).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
+            reportSource.listShinseiIchiran_8 = RString.isNullOrEmpty(code)
+                    ? RString.EMPTY : YokaigoJotaiKubun02.toValue(code).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
+            reportSource.listShinseiIchiran_8 = RString.isNullOrEmpty(code)
+                    ? RString.EMPTY : YokaigoJotaiKubun06.toValue(code).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(zenkaiKoroshoIfShikibetsu)
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(zenkaiKoroshoIfShikibetsu)) {
+            reportSource.listShinseiIchiran_8 = RString.isNullOrEmpty(code)
+                    ? RString.EMPTY : YokaigoJotaiKubun09.toValue(code).get名称();
         }
     }
 }

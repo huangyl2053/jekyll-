@@ -13,11 +13,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.menu.Menus;
 
 /**
  * 審査会一覧のコントローラです。
@@ -35,22 +38,18 @@ public class KaigoNinteiShinsakai {
     private static final RString 遷移モード_審査会結果登録 = new RString("shinsaKekkaToroku");
     private static final RString 遷移モード_介護認定審査会審査結果データ取込み = new RString("dataShutsuryoku");
     private static final RString 遷移モード_介護認定審査会審査結果登録 = new RString("shinsaKekkaToroku");
+    private static final RString 遷移モード_介護認定審査会委員割付 = new RString("shinsakaiShiryoSakusei");
     private static final RString メニューID_審査会個人別状況照会 = new RString("DBEMN21004");
     private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN61004");
     private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN61005");
     private static final RString メニューID_介護認定審査会資料作成 = new RString("DBEMN61007");
-//<<<<<<< HEAD
-//    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN61008");
-//=======
     private static final RString メニューID_介護認定審査会委員事前審査 = new RString("DBEMN61008");
     private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN61009");
-//>>>>>>> origin/sync
     private static final RString メニューID_審査会開催結果登録 = new RString("DBEMN62001");
     private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN62003");
     private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN62002");
     private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN62004");
     private static final RString メニューID_介護認定審査会委員割付 = new RString("DBEMN61010");
-    private static final RString 遷移モード_介護認定審査会委員割付 = new RString("shinsakaiShiryoSakusei");
     private static final int 数字_0 = 0;
 
     /**
@@ -63,7 +62,10 @@ public class KaigoNinteiShinsakai {
 
         RString menuID = ResponseHolder.getMenuID();
         div.getCcdShinsakaiItiran().initialize(getMode().get(menuID));
-        return ResponseData.of(div).setState(getState().get(menuID));
+        IParentResponse<KaigoNinteiShinsakaiDiv> response = ResponseData.of(div);
+        response.rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName());
+        response.setState(getState().get(menuID));
+        return response.respond();
     }
 
     /**
@@ -75,10 +77,13 @@ public class KaigoNinteiShinsakai {
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnkojin(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択不可(div);
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            return ResponseData.of(div)
+                    .rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName())
+                    .addValidationMessages(validationMessages).respond();
         }
         ViewStateHolder.put(ViewStateKeys.開催番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.個人別状況照会へ遷移する).respond();
+        return ResponseData.of(div)
+                .forwardWithEventName(DBE5100001TransitionEventName.個人別状況照会へ遷移する).respond();
     }
 
     /**
@@ -90,11 +95,14 @@ public class KaigoNinteiShinsakai {
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btndataoutput(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択可(div);
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            return ResponseData.of(div)
+                    .rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName())
+                    .addValidationMessages(validationMessages).respond();
         }
         ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ出力を実行する).respond();
+        return ResponseData.of(div)
+                .forwardWithEventName(DBE5100001TransitionEventName.データ出力を実行する).respond();
     }
 
     /**
@@ -106,10 +114,13 @@ public class KaigoNinteiShinsakai {
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnwaritsuke(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択不可(div);
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            return ResponseData.of(div)
+                    .rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName())
+                    .addValidationMessages(validationMessages).respond();
         }
         ViewStateHolder.put(ViewStateKeys.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会対象者割付へ遷移する).respond();
+        return ResponseData.of(div)
+                .forwardWithEventName(DBE5100001TransitionEventName.審査会対象者割付へ遷移する).respond();
     }
 
     /**
@@ -121,11 +132,14 @@ public class KaigoNinteiShinsakai {
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnAutoWaritsuke(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会複数選択可(div);
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            return ResponseData.of(div)
+                    .rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName())
+                    .addValidationMessages(validationMessages).respond();
         }
         ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.自動割付を実行する).respond();
+        return ResponseData.of(div)
+                .forwardWithEventName(DBE5100001TransitionEventName.自動割付を実行する).respond();
     }
 
     /**
@@ -134,13 +148,16 @@ public class KaigoNinteiShinsakai {
      * @param div 審査会一覧Div
      * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
-    public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelect(KaigoNinteiShinsakaiDiv div) {
+    public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelectAlias(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = check_審査会選択(div);
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            return ResponseData.of(div)
+                    .rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName())
+                    .addValidationMessages(validationMessages).respond();
         }
         div.getCcdShinsakaiItiran().getSelectedGridLine();
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
+        return ResponseData.of(div)
+                .forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
     /**
@@ -153,11 +170,14 @@ public class KaigoNinteiShinsakai {
 
         ValidationMessageControlPairs validationMessages = check_審査会複数選択可(div);
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            return ResponseData.of(div)
+                    .rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName())
+                    .addValidationMessages(validationMessages).respond();
         }
         ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
-        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ取込みを実行する).respond();
+        return ResponseData.of(div)
+                .forwardWithEventName(DBE5100001TransitionEventName.データ取込みを実行する).respond();
     }
 
     private KaigoNinteiShinsakaiValidationHandler createValidationHandler(KaigoNinteiShinsakaiDiv div) {

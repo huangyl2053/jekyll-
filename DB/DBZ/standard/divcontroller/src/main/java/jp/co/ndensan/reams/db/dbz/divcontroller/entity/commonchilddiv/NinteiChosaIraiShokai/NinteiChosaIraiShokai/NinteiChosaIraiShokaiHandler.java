@@ -67,6 +67,7 @@ public class NinteiChosaIraiShokaiHandler {
                         entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
             }
             row.setYukoKikan(new RString(Integer.toString(entity.getNijiHanteiNinteiYukoKikan()) + "ヶ月"));
+            row.setChosaIraiDate(日期フォマト(entity.getNinteichosaIraiYMD()));
             row.setNinteichosaItakusakiCode(entity.getNinteiChosaItakusakiCode().getColumnValue());
             row.setNinteichosaItakusakiName(entity.getJigyoshaMeisho());
             row.setNinteiChosainCode(entity.getNinteiChosainCode().getColumnValue());

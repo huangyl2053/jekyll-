@@ -17,6 +17,7 @@
         , T5912."shujiiName" AS 主治医氏名
         , T5101."hihokenshaNo" AS 被保険者番号
         , T5101."hihokenshaName" AS 申請者氏名
+        , T5602."iraishoSakuseiIraiYMD" AS 依頼日
         , T5602."ikenshoKinyuYMD" AS 記入日
         , T5602."ikenshoJuryoYMD" AS 入手日
         , T5302."zaitakuShisetsuKubun" AS 在宅_施設区分
@@ -55,38 +56,56 @@
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
         ON T5602."shinseishoKanriNo" = T5302."shinseishoKanriNo"
         AND T5602."ikenshoIraiRirekiNo" = T5302."ikenshoIraiRirekiNo"
-        WHERE
-        1 = 1
-        <if test="意見書記入日FROMFlag">
-            AND #{意見書記入日FROM} <![CDATA[<=]]> T5602."ikenshoKinyuYMD"
-        </if>
-        <if test="意見書記入日TOFlag">
-            AND T5602."ikenshoKinyuYMD" <![CDATA[<=]]> #{意見書記入日TO}
-        </if>
-        <if test="保険者Flag">
-            AND T7051."shichosonCode" = #{保険者}
-        </if>
-        <if test="batchFlag">
-            AND
-            <foreach collection="keyJoho" item="item" open="("
-                     separator="OR"
-                     close=")">
-                (
-                T5602."shujiiIryoKikanCode" = #{item.shujiiIryoKikanCode}
-                AND T5602."shujiiCode" = #{item.shujiiCode}
-                AND T5602."shinseishoKanriNo" = #{item.shinseishoKanriNo}
-                AND T5602."ikenshoIraiRirekiNo" = #{item.ikenshoIraiRirekiNo}
-                )
-            </foreach>
-        </if>
+        <where>
+            <choose>
+                <when test="基準日区分 == 1">
+                    <if test="基準日FROMFlag">
+                        AND #{基準日FROM} <![CDATA[<=]]> T5602."iraishoSakuseiIraiYMD"
+                    </if>
+                    <if test="基準日TOFlag">
+                        AND T5602."iraishoSakuseiIraiYMD" <![CDATA[<=]]> #{基準日TO}
+                    </if>
+                </when>
+                <when test="基準日区分 == 2">
+                    <if test="基準日FROMFlag">
+                        AND #{基準日FROM} <![CDATA[<=]]> T5602."ikenshoKinyuYMD"
+                    </if>
+                    <if test="基準日TOFlag">
+                        AND T5602."ikenshoKinyuYMD" <![CDATA[<=]]> #{基準日TO}
+                    </if>
+                </when>
+                <when test="基準日区分 == 3">
+                    <if test="基準日FROMFlag">
+                        AND #{基準日FROM} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                    </if>
+                    <if test="基準日TOFlag">
+                        AND T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{基準日TO}
+                    </if>
+                </when>
+            </choose>
+            <if test="保険者Flag">
+                AND T7051."shichosonCode" = #{保険者}
+            </if>
+            <if test="batchFlag">
+                AND
+                <foreach collection="keyJoho" item="item" open="("
+                         separator="OR"
+                         close=")">
+                    (
+                    T5602."shujiiIryoKikanCode" = #{item.shujiiIryoKikanCode}
+                    AND T5602."shujiiCode" = #{item.shujiiCode}
+                    AND T5602."shinseishoKanriNo" = #{item.shinseishoKanriNo}
+                    AND T5602."ikenshoIraiRirekiNo" = #{item.ikenshoIraiRirekiNo}
+                    )
+                </foreach>
+            </if>
+        </where>
     </sql>
 
     <sql id="order">
-        <if test="gamenFlag">
-            ORDER BY T5602."shujiiIryoKikanCode", T5602."shujiiCode", T5602."shinseishoKanriNo", T5602."ikenshoIraiRirekiNo"
-            <if test="件数Flag">
-                LIMIT #{件数}
-            </if>
+        ORDER BY T5602."shujiiIryoKikanCode", T5602."shujiiCode", T5602."shinseishoKanriNo", T5602."ikenshoIraiRirekiNo"
+        <if test="件数Flag">
+            LIMIT #{件数}
         </if>
     </sql>
 

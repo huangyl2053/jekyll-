@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakus
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.TempGogitaiJohoSakuseiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,7 +27,7 @@ public interface IGogitaiJohoSakuseiMapper {
      * @return List<GogitaiJohoSakuseiRelateEntity>
      */
     List<GogitaiJohoSakuseiRelateEntity> getGogitaiJohoSakuseiGridList(GogitaiJohoSakuseiParameter param);
-    
+
     /**
      * 合議体情報Gridデータを取得します。
      *
@@ -51,6 +53,21 @@ public interface IGogitaiJohoSakuseiMapper {
     List<GogitaiJohoSakuseiRelateEntity> getGogitaiJohoForCSV(GogitaiJohoSakuseiParameter param);
 
     /**
+     * 一時テーブルの合議体情報データを取得します。
+     *
+     * @return List<TempGogitaiJohoSakuseiEntity>
+     */
+    List<TempGogitaiJohoSakuseiEntity> getTempGogitaiJohoSakuseiSearchResult();
+
+    /**
+     * 合議体情報データを取得します。
+     *
+     * @param param 合議体情報作成のパラメータ
+     * @return List<GogitaiJohoSakuseiEntity>
+     */
+    List<GogitaiJohoSakuseiEntity> getGogitaiJohoByYukoKikanKaishiYMD(GogitaiJohoSakuseiParameter param);
+
+    /**
      * 開催場所コードの存在をチェックします。
      *
      * @param shinsakaiKaisaiBashoCode 開催場所コード
@@ -65,14 +82,6 @@ public interface IGogitaiJohoSakuseiMapper {
      * @return int
      */
     int getShinsakaiIinJohoCount(RString shinsakaiIinCode);
-
-    /**
-     * 「合議体情報」テーブルの存在をチェックします。
-     *
-     * @param param 合議体情報作成のパラメータ
-     * @return int
-     */
-    int getGogitaiJohoCount(GogitaiJohoSakuseiParameter param);
 
     /**
      * 「合議体割当委員情報」テーブルの存在をチェックします。

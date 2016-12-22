@@ -13,30 +13,32 @@ public enum ShinsakaiShinchokuJokyo {
     /**
      * コード:0 名称:未開催 略称:定義なし
      */
-    未開催("0", "未開催"),
+    未開催("0", "未開催", ""),
     /**
      * コード:1 名称:未開催/割付完了 略称:定義なし
      */
-    未開催_割付完了("1", "未開催/割付完了"),
+    未開催_割付完了("1", "未開催/割付完了", "割付完了"),
     /**
      * コード:2 名称:完了 略称:定義なし
      */
-    完了("2", "完了"),
+    完了("2", "完了", "完了"),
     /**
      * コード:3 名称:中止 略称:定義なし
      */
-    中止("3", "中止"),
+    中止("3", "中止", "中止"),
     /**
      * コード:9 名称:その他 略称:定義なし
      */
-    その他("9", "その他");
+    その他("9", "その他", "その他");
 
     private final RString code;
     private final RString fullName;
+    private final RString diplayName;
 
-    private ShinsakaiShinchokuJokyo(String code, String fullname) {
+    private ShinsakaiShinchokuJokyo(String code, String fullname, String diplayName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.diplayName = new RString(diplayName);
     }
 
     /**
@@ -55,6 +57,15 @@ public enum ShinsakaiShinchokuJokyo {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 介護認定審査会進捗状況の画面表示名称を返します。
+     *
+     * @return 介護認定審査会進捗状況の画面表示名称
+     */
+    public RString get画面表示名称() {
+        return diplayName;
     }
 
     /**

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-0090-020 chengsanyuan
  */
 public enum GogitaiJohoIkkatuSakuseiErrorMessage {
+
     /**
      * 合議体Noが空
      */
@@ -51,7 +52,7 @@ public enum GogitaiJohoIkkatuSakuseiErrorMessage {
      */
     有効終了日が日付("有効終了日の入力値が不正。"),
     /**
-     * 有効開始日>有効終了日
+     * 有効開始日＞有効終了日
      */
     有効開始日大有効終了日("終了日が開始日以前の日付です。"),
     /**
@@ -83,7 +84,7 @@ public enum GogitaiJohoIkkatuSakuseiErrorMessage {
      */
     予定定員が正整数字("予定定員が正整数字入力してください。"),
     /**
-     * 予定定員の桁数>4
+     * 予定定員の桁数＞4
      */
     予定定員の桁数大4("予定定員の桁数が超過しています。4桁以下に調整してください。"),
     /**
@@ -91,7 +92,7 @@ public enum GogitaiJohoIkkatuSakuseiErrorMessage {
      */
     自動割当定員が正整数字("自動割当定員が正整数字入力してください。"),
     /**
-     * 自動割当定員の桁数>4
+     * 自動割当定員の桁数＞4
      */
     自動割当定員の桁数大4("自動割当定員の桁数が超過しています。4桁以下に調整してください。"),
     /**
@@ -103,7 +104,7 @@ public enum GogitaiJohoIkkatuSakuseiErrorMessage {
      */
     委員定員が正整数字("委員定員が正整数字入力してください。"),
     /**
-     * 委員定員の桁数>4
+     * 委員定員の桁数＞4
      */
     委員定員の桁数大4("委員定員の桁数が超過しています。4桁以下に調整してください。"),
     /**
@@ -141,7 +142,19 @@ public enum GogitaiJohoIkkatuSakuseiErrorMessage {
     /**
      * 補欠が「0」、「１」
      */
-    補欠が01("補欠の入力値が不正。");
+    補欠が01("補欠の入力値が不正。"),
+    /**
+     * CSVファイルデータと有効期間が重複するデータが存在する
+     */
+    有効期間不正("有効開始日が不正。直近データの有効終了日："),
+    /**
+     * 委員数＜3
+     */
+    委員数が3人未満("は委員数が3人未満です。"),
+    /**
+     * 委員数＞委員定員
+     */
+    委員数が超過("は委員数が定員を超過しています。");
 
     private final RString errorMsg;
 
@@ -154,7 +167,17 @@ public enum GogitaiJohoIkkatuSakuseiErrorMessage {
      *
      * @return エラーメッセージ
      */
+    public RString getMessage() {
+        return this.errorMsg;
+    }
+
+    /**
+     * エラーメッセージを返します。
+     *
+     * @return エラーメッセージ
+     */
     public RString getErrorMSG() {
         return new RString("行目の").concat(this.errorMsg);
     }
+
 }

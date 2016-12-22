@@ -19,105 +19,105 @@ public class NinteichosaIraiListCsvEntity {
 
     @CsvField(order = 1, name = "申請書管理番号")
     private final RString shinseishoKanriNo;
-    @CsvField(order = 2, name = "(被保険者)被保番号")
-    private final RString hihokenshaNo;
-    @CsvField(order = 3, name = "(被保険者)氏名")
-    private final RString hihokenshaName;
+    @CsvField(order = 2, name = "状態")
+    private final RString jotai;
+    @CsvField(order = 3, name = "保険者")
+    private final RString hokensha;
     @CsvField(order = 4, name = "認定申請日")
     private final RString ninteiShinseiYMD;
-    @CsvField(order = 5, name = "認定申請区分コード")
+    @CsvField(order = 5, name = "(被保険者)被保番号")
+    private final RString hihokenshaNo;
+    @CsvField(order = 6, name = "(被保険者)氏名")
+    private final RString hihokenshaName;
+    @CsvField(order = 7, name = "（申請区分）申請時コード")
     private final RString ninteiShinseiShinseijiKubunCode;
-    @CsvField(order = 6, name = "認定申請区分")
+    @CsvField(order = 8, name = "（申請区分）申請時")
     private final RString ninteiShinseiShinseijiKubunName;
-    @CsvField(order = 7, name = "(今回調査)調査委託先コード")
+    @CsvField(order = 9, name = "(今回調査)調査委託先コード")
     private final RString ninteiChosaItakusakiCode;
-    @CsvField(order = 8, name = "(今回調査)調査委託先")
+    @CsvField(order = 10, name = "(今回調査)調査委託先")
     private final RString ninteiChosaItakusaki;
-    @CsvField(order = 9, name = "(今回調査)調査員コード")
+    @CsvField(order = 11, name = "(今回調査)調査員コード")
     private final RString ninteiChosainCode;
-    @CsvField(order = 10, name = "(今回調査)調査員")
+    @CsvField(order = 12, name = "(今回調査)調査員")
     private final RString chosainShimei;
-    @CsvField(order = 11, name = "保険者")
-    private final RString hihokensha;
-    @CsvField(order = 12, name = "(調査票入手)完了日")
-    private final RString ninteichosaKanryoYMD;
-    @CsvField(order = 13, name = "(調査督促)督促発行日")
-    private final RString ninteichosaTokusokuYMD;
-    @CsvField(order = 14, name = "(調査督促)方法")
-    private final RString ninteichosaTokusokuHoho;
-    @CsvField(order = 15, name = "(調査督促)回数")
-    private final RString ninteichosaTokusokuKaisu;
-    @CsvField(order = 16, name = "(調査督促)期限")
-    private final RString ninteichosaKigenYMD;
-    @CsvField(order = 17, name = "(調査票入手)調査実施日")
+    @CsvField(order = 13, name = "(調査票入手)調査実施日")
     private final RString ninteichosaJisshiYMD;
-    @CsvField(order = 18, name = "(調査督促)地区")
+    @CsvField(order = 14, name = "(調査督促)督促発行日")
+    private final RString ninteichosaTokusokuYMD;
+    @CsvField(order = 15, name = "(調査督促)方法")
+    private final RString ninteichosaTokusokuHoho;
+    @CsvField(order = 16, name = "(調査督促)回数")
+    private final RString ninteichosaTokusokuKaisu;
+    @CsvField(order = 17, name = "(調査督促)期限")
+    private final RString ninteichosaKigenYMD;
+    @CsvField(order = 18, name = "地区コード")
     private final RString chikuCode;
-    @CsvField(order = 19, name = "(調査督促)地区")
+    @CsvField(order = 19, name = "地区")
     private final RString chikuName;
 
     /**
      * コンストラクタです。
      *
      * @param shinseishoKanriNo 申請書管理番号
+     * @param jotai 状態
+     * @param hokensha 保険者
+     * @param ninteiShinseiYMD 認定申請日
      * @param hihokenshaNo (被保険者)被保番号
      * @param hihokenshaName (被保険者)氏名
-     * @param ninteiShinseiYMD 認定申請日
-     * @param ninteiShinseiShinseijiKubunCode 認定申請区分コード
-     * @param ninteiShinseiShinseijiKubunName 認定申請区分
+     * @param ninteiShinseiShinseijiKubunCode (申請区分)申請時コード
+     * @param ninteiShinseiShinseijiKubunName (申請区分)申請日
      * @param ninteiChosaItakusakiCode (今回調査)調査委託先コード
      * @param ninteiChosaItakusaki (今回調査)調査委託先
      * @param ninteiChosainCode (今回調査)調査員コード
      * @param chosainShimei (今回調査)調査員
-     * @param hihokensha 保険者
-     * @param ninteichosaKanryoYMD (調査票入手)完了日
+     * @param ninteichosaJisshiYMD (調査票入手)調査実施日
      * @param ninteichosaTokusokuYMD (調査督促)督促発行日
      * @param ninteichosaTokusokuHoho (調査督促)方法
      * @param ninteichosaTokusokuKaisu (調査督促)回数
      * @param ninteichosaKigenYMD (調査督促)期限
-     * @param ninteichosaJisshiYMD (調査票入手)調査実施日
-     * @param chikuCode (調査督促)地区
-     * @param chikuName (調査督促)地区
-     *
+     * @param chikuCode 地区コード
+     * @param chikuName 地区
      */
     public NinteichosaIraiListCsvEntity(
             RString shinseishoKanriNo,
+            RString jotai,
+            RString hokensha,
+            RString ninteiShinseiYMD,
             RString hihokenshaNo,
             RString hihokenshaName,
-            RString ninteiShinseiYMD,
             RString ninteiShinseiShinseijiKubunCode,
             RString ninteiShinseiShinseijiKubunName,
             RString ninteiChosaItakusakiCode,
             RString ninteiChosaItakusaki,
             RString ninteiChosainCode,
             RString chosainShimei,
-            RString hihokensha,
-            RString ninteichosaKanryoYMD,
+            RString ninteichosaJisshiYMD,
             RString ninteichosaTokusokuYMD,
             RString ninteichosaTokusokuHoho,
             RString ninteichosaTokusokuKaisu,
             RString ninteichosaKigenYMD,
-            RString ninteichosaJisshiYMD,
             RString chikuCode,
             RString chikuName) {
         this.shinseishoKanriNo = shinseishoKanriNo;
+        this.jotai = jotai;
+        this.hokensha = hokensha;
+        this.ninteiShinseiYMD = ninteiShinseiYMD;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaName = hihokenshaName;
-        this.ninteiShinseiYMD = ninteiShinseiYMD;
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
         this.ninteiShinseiShinseijiKubunName = ninteiShinseiShinseijiKubunName;
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
         this.ninteiChosaItakusaki = ninteiChosaItakusaki;
         this.ninteiChosainCode = ninteiChosainCode;
         this.chosainShimei = chosainShimei;
-        this.hihokensha = hihokensha;
-        this.ninteichosaKanryoYMD = ninteichosaKanryoYMD;
+        this.ninteichosaJisshiYMD = ninteichosaJisshiYMD;
         this.ninteichosaTokusokuYMD = ninteichosaTokusokuYMD;
         this.ninteichosaTokusokuHoho = ninteichosaTokusokuHoho;
         this.ninteichosaTokusokuKaisu = ninteichosaTokusokuKaisu;
         this.ninteichosaKigenYMD = ninteichosaKigenYMD;
-        this.ninteichosaJisshiYMD = ninteichosaJisshiYMD;
         this.chikuCode = chikuCode;
         this.chikuName = chikuName;
     }
+
 }

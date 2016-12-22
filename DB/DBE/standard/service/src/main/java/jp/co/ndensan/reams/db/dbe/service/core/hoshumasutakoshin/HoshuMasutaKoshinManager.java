@@ -16,10 +16,13 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEn
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5032ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5033ShinsakaiIinHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5034ShinsakaiIinBetsuTankaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinbetsutankasearchresult.ShinsakaiIinBetsuTankaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5031NinteiChosaHoshuTankaDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5032ShujiiIkenshoHoshuTankaDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5033ShinsakaiIinHoshuTankaDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5034ShinsakaiIinBetsuTankaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinbetsutanka.IShinsakaiIinBetsuTankaRelateMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -36,6 +39,7 @@ public class HoshuMasutaKoshinManager {
     private final DbT5032ShujiiIkenshoHoshuTankaDac dbT5032Dac;
     private final DbT5033ShinsakaiIinHoshuTankaDac dbT5033Dac;
     private final DbT5034ShinsakaiIinBetsuTankaDac dbT5034Dac;
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
@@ -45,6 +49,7 @@ public class HoshuMasutaKoshinManager {
         dbT5032Dac = InstanceProvider.create(DbT5032ShujiiIkenshoHoshuTankaDac.class);
         dbT5033Dac = InstanceProvider.create(DbT5033ShinsakaiIinHoshuTankaDac.class);
         dbT5034Dac = InstanceProvider.create(DbT5034ShinsakaiIinBetsuTankaDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -57,17 +62,20 @@ public class HoshuMasutaKoshinManager {
      */
     HoshuMasutaKoshinManager(DbT5031NinteiChosaHoshuTankaDac dbT5031Dac,
             DbT5032ShujiiIkenshoHoshuTankaDac dbT5032Dac, DbT5033ShinsakaiIinHoshuTankaDac dbT5033Dac,
-            DbT5034ShinsakaiIinBetsuTankaDac dbT5034Dac) {
+            DbT5034ShinsakaiIinBetsuTankaDac dbT5034Dac,
+            MapperProvider mapperProvider) {
         this.dbT5031Dac = dbT5031Dac;
         this.dbT5032Dac = dbT5032Dac;
         this.dbT5033Dac = dbT5033Dac;
         this.dbT5034Dac = dbT5034Dac;
+        this.mapperProvider = mapperProvider;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link HoshuMasutaKoshinManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HoshuMasutaKoshinManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HoshuMasutaKoshinManager}のインスタンス
      */
     public static HoshuMasutaKoshinManager createInstance() {
         return InstanceProvider.create(HoshuMasutaKoshinManager.class);
@@ -137,16 +145,21 @@ public class HoshuMasutaKoshinManager {
      */
     @Transaction
     public SearchResult<ShinsakaiIinBetsuTanka> get審査会委員別単価マスタ情報() {
-        List<ShinsakaiIinBetsuTanka> list = new ArrayList<>();
-        List<DbT5034ShinsakaiIinBetsuTankaEntity> entityList = dbT5034Dac.selectAllOrderBy();
+        List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ情報List = new ArrayList<>();
+        IShinsakaiIinBetsuTankaRelateMapper mapper = mapperProvider.create(IShinsakaiIinBetsuTankaRelateMapper.class);
+        List<ShinsakaiIinBetsuTankaRelateEntity> entityList = mapper.select介護認定審査会委員別単価全件();
         if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShinsakaiIinBetsuTanka>emptyList(), 0, false);
         }
-        for (DbT5034ShinsakaiIinBetsuTankaEntity entity : entityList) {
-            entity.initializeMd5();
-            list.add(new ShinsakaiIinBetsuTanka(entity));
+        for (ShinsakaiIinBetsuTankaRelateEntity entity : entityList) {
+            if (entity != null) {
+                entity.get介護認定審査会委員別単価().initializeMd5();
+                ShinsakaiIinBetsuTanka shinsakaiIinBetsuTanka
+                        = new ShinsakaiIinBetsuTanka(entity.get介護認定審査会委員別単価(), entity.get氏名());
+                審査会委員別単価マスタ情報List.add(shinsakaiIinBetsuTanka);
+            }
         }
-        return SearchResult.of(list, 0, false);
+        return SearchResult.of(審査会委員別単価マスタ情報List, 0, false);
     }
 
     /**

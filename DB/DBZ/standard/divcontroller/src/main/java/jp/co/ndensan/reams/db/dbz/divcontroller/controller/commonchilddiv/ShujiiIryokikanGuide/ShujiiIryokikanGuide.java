@@ -43,7 +43,9 @@ public class ShujiiIryokikanGuide {
      */
     public ResponseData<ShujiiIryokikanGuideDiv> onLoad(ShujiiIryokikanGuideDiv div) {
         div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-        getHandler(div).intialize();
+        ShujiiIryokikanGuideHandler handler = getHandler(div);
+        handler.intialize();
+        handler.setDataGrid(searchIryoKikan(div));
         return ResponseData.of(div).respond();
     }
 
@@ -69,23 +71,7 @@ public class ShujiiIryokikanGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        RString 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
-        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関情報(
-                ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
-                        市町村コード,
-                        SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()),
-                        div.getTxtIryoKikanCodeFrom().getValue(),
-                        div.getTxtIryoKikanCodeTo().getValue(),
-                        状況フラグ_有効.equals(div.getRadIryoKikanJokyo().getSelectedValue()),
-                        div.getTxtIryoKikanName().getValue(),
-                        div.getTxtIryoKikanKanaMeisho().getValue(),
-                        new RString(""),
-                        new RString(""),
-                        true,
-                        new RString(""),
-                        new RString(""),
-                        div.getTxtMaxKensu().getValue().intValue())).records();
-        getHandler(div).setDataGrid(list);
+        getHandler(div).setDataGrid(searchIryoKikan(div));
         return ResponseData.of(div).respond();
     }
 
@@ -102,6 +88,26 @@ public class ShujiiIryokikanGuide {
         }
         getHandler(div).onSelectbtn();
         return ResponseData.of(div).dialogOKClose();
+    }
+
+    private List<ShujiiIryokikanAndShujii> searchIryoKikan(ShujiiIryokikanGuideDiv div) {
+        RString 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
+        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関情報(
+                ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
+                        市町村コード,
+                        SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()),
+                        div.getTxtIryoKikanCodeFrom().getValue(),
+                        div.getTxtIryoKikanCodeTo().getValue(),
+                        状況フラグ_有効.equals(div.getRadIryoKikanJokyo().getSelectedValue()),
+                        div.getTxtIryoKikanName().getValue(),
+                        div.getTxtIryoKikanKanaMeisho().getValue(),
+                        new RString(""),
+                        new RString(""),
+                        true,
+                        new RString(""),
+                        new RString(""),
+                        div.getTxtMaxKensu().getValue().intValue())).records();
+        return list;
     }
 
     private ShujiiIryokikanGuideHandler getHandler(ShujiiIryokikanGuideDiv div) {

@@ -4,12 +4,72 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnConfirm = function () {
-                return "onClick_btnConfirm";
+            Events.onBeforeOpenDialog_btnHiryaku = function () {
+                return "onBeforeOpenDialog_btnHiryaku";
+            };
+
+            Events.onBeforeOpenDialog_btnTukuriHanashi = function () {
+                return "onBeforeOpenDialog_btnTukuriHanashi";
+            };
+
+            Events.onBeforeOpenDialog_btnKanjyo = function () {
+                return "onBeforeOpenDialog_btnKanjyo";
+            };
+
+            Events.onBeforeOpenDialog_btnChuyaku = function () {
+                return "onBeforeOpenDialog_btnChuyaku";
+            };
+
+            Events.onBeforeOpenDialog_btnOnajiHanashi = function () {
+                return "onBeforeOpenDialog_btnOnajiHanashi";
+            };
+
+            Events.onBeforeOpenDialog_btnBigVoice = function () {
+                return "onBeforeOpenDialog_btnBigVoice";
+            };
+
+            Events.onBeforeOpenDialog_btnTeikou = function () {
+                return "onBeforeOpenDialog_btnTeikou";
+            };
+
+            Events.onBeforeOpenDialog_btnOchituki = function () {
+                return "onBeforeOpenDialog_btnOchituki";
+            };
+
+            Events.onBeforeOpenDialog_btnOutLonly = function () {
+                return "onBeforeOpenDialog_btnOutLonly";
+            };
+
+            Events.onBeforeOpenDialog_btnShushu = function () {
+                return "onBeforeOpenDialog_btnShushu";
+            };
+
+            Events.onBeforeOpenDialog_btnKowasu = function () {
+                return "onBeforeOpenDialog_btnKowasu";
+            };
+
+            Events.onBeforeOpenDialog_btnMonoWasure = function () {
+                return "onBeforeOpenDialog_btnMonoWasure";
+            };
+
+            Events.onBeforeOpenDialog_btnHitoriWarai = function () {
+                return "onBeforeOpenDialog_btnHitoriWarai";
+            };
+
+            Events.onBeforeOpenDialog_btnKateKodo = function () {
+                return "onBeforeOpenDialog_btnKateKodo";
+            };
+
+            Events.onBeforeOpenDialog_btnMatomeNai = function () {
+                return "onBeforeOpenDialog_btnMatomeNai";
             };
 
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
+            };
+
+            Events.onClick_btnConfirm = function () {
+                return "onClick_btnConfirm";
             };
             return Events;
         })();
@@ -223,12 +283,12 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radMatomeNai"));
             };
 
-            Controls.prototype.btnConfirm = function () {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            };
-
             Controls.prototype.btnBack = function () {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            };
+
+            Controls.prototype.btnConfirm = function () {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             };
             return Controls;
         })();

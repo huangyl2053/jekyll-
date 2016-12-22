@@ -15,19 +15,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtShinsaIinKodo")
+    private TextBoxCode txtShinsaIinKodo;
+    @JsonProperty("txtShinsaIinName")
+    private TextBox txtShinsaIinName;
     @JsonProperty("txtBetuKaishiYM")
     private TextBoxFlexibleYearMonth txtBetuKaishiYM;
     @JsonProperty("txtBetuShuryoYM")
     private TextBoxFlexibleYearMonth txtBetuShuryoYM;
-    @JsonProperty("txtShinsaIinKodo")
-    private TextBox txtShinsaIinKodo;
     @JsonProperty("txtBetuTanka")
     private TextBoxNum txtBetuTanka;
     @JsonProperty("txtBetuSonotaTanka")
@@ -43,6 +45,42 @@ public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtShinsaIinKodo
+     * @return txtShinsaIinKodo
+     */
+    @JsonProperty("txtShinsaIinKodo")
+    public TextBoxCode getTxtShinsaIinKodo() {
+        return txtShinsaIinKodo;
+    }
+
+    /*
+     * settxtShinsaIinKodo
+     * @param txtShinsaIinKodo txtShinsaIinKodo
+     */
+    @JsonProperty("txtShinsaIinKodo")
+    public void setTxtShinsaIinKodo(TextBoxCode txtShinsaIinKodo) {
+        this.txtShinsaIinKodo = txtShinsaIinKodo;
+    }
+
+    /*
+     * gettxtShinsaIinName
+     * @return txtShinsaIinName
+     */
+    @JsonProperty("txtShinsaIinName")
+    public TextBox getTxtShinsaIinName() {
+        return txtShinsaIinName;
+    }
+
+    /*
+     * settxtShinsaIinName
+     * @param txtShinsaIinName txtShinsaIinName
+     */
+    @JsonProperty("txtShinsaIinName")
+    public void setTxtShinsaIinName(TextBox txtShinsaIinName) {
+        this.txtShinsaIinName = txtShinsaIinName;
+    }
+
     /*
      * gettxtBetuKaishiYM
      * @return txtBetuKaishiYM
@@ -77,24 +115,6 @@ public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
     @JsonProperty("txtBetuShuryoYM")
     public void setTxtBetuShuryoYM(TextBoxFlexibleYearMonth txtBetuShuryoYM) {
         this.txtBetuShuryoYM = txtBetuShuryoYM;
-    }
-
-    /*
-     * gettxtShinsaIinKodo
-     * @return txtShinsaIinKodo
-     */
-    @JsonProperty("txtShinsaIinKodo")
-    public TextBox getTxtShinsaIinKodo() {
-        return txtShinsaIinKodo;
-    }
-
-    /*
-     * settxtShinsaIinKodo
-     * @param txtShinsaIinKodo txtShinsaIinKodo
-     */
-    @JsonProperty("txtShinsaIinKodo")
-    public void setTxtShinsaIinKodo(TextBox txtShinsaIinKodo) {
-        this.txtShinsaIinKodo = txtShinsaIinKodo;
     }
 
     /*

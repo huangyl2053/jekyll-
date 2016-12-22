@@ -43,4 +43,11 @@ public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBa
      *
      */
     void getSelectedGridLine();
+
+    /**
+     * 一覧グリッドの高さを指定します。
+     *
+     * @param height 指定する高さ
+     */
+    void set一覧グリッド高さ指定(RString height);
 }

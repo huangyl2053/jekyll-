@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -61,6 +62,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
         div.getShinsakaiKaisaibashokensaku().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
         div.getBtnTsuika().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
         return ResponseData.of(div).respond();
     }
 
@@ -100,8 +102,11 @@ public class NinteiShinsakaiKaisaibashoToroku {
             getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
             div.getBtnTsuika().setDisabled(false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+            return ResponseData.of(div).respond();
         }
-
+        getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
+        div.getBtnTsuika().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 
@@ -250,17 +255,23 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnUpdate(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
                     = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
             getHandler(div).save(shinsakaiKaisaiBashoJohoList);
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+
+        }
+        if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
+                equals(ResponseHolder.getMessageCode().toString())) {
             onLoad(div);
         }
+
         return ResponseData.of(div).respond();
     }
 
@@ -282,6 +293,12 @@ public class NinteiShinsakaiKaisaibashoToroku {
                 = Models.create(businessList);
         ViewStateHolder.put(ViewStateKeys.開催場所情報一覧, shinsakaiKaisaiBashoJohoList);
         return businessList;
+    }
+
+    private int get最大件数(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
+        int 最大件数 = manager.get介護認定審査会開催場所情報一覧().records().size();
+        return 最大件数;
     }
 
     private void 開催場所コードの重複チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {

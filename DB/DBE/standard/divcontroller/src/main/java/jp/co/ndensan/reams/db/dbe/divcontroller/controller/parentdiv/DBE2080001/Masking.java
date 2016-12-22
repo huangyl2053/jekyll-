@@ -11,20 +11,26 @@ import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.S
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.DBE2080001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.DBE2080001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.MaskingDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.dgYokaigoNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2080001.MaskingHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2080001.MaskingIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2080001.MaskingValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
 import jp.co.ndensan.reams.db.dbe.service.core.masking.MaskingManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.KihonunyoShoriJotai;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -47,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -76,12 +83,54 @@ public class Masking {
         if (!RealInitialLocker.tryGetLock(排他キー)) {
             throw new PessimisticLockingException();
         }
+        div.getRadTaishoDataKubun().setSelectedKey(DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援));
+        div.getTxtSaidaiHyojiKensu().setMaxValue(
+                new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtSaidaiHyojiKensu().setValue(
+                new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         getHandler(div).initialize();
-        List<dgNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
-        for (dgNinteiTaskList_Row row : dgNinteiTaskList_RowList) {
-            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-                    new RString("申請書管理番号"), row.getShinseishoKanriNo())));
+//        List<dgYokaigoNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
+//        for (dgYokaigoNinteiTaskList_Row row : dgYokaigoNinteiTaskList_Row) {
+//            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+//                    new RString("申請書管理番号"), row.getShinseishoKanriNo())));
+//        }
+        return ResponseData.of(div).setState(DBE2080001StateName.登録);
+    }
+
+    /**
+     * 一覧表の表示データを制御する処理です。
+     *
+     * @param div MaskingDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<MaskingDiv> onChange_radTaishoDataKubun(MaskingDiv div) {
+        getHandler(div).initialize();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一覧表の表示データを制御する処理です。
+     *
+     * @param div MaskingDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<MaskingDiv> onChange_TxtSaidaiHyojiKensu(MaskingDiv div) {
+        getHandler(div).initialize();
+        if (div.getTxtSaidaiHyojiKensu().getValue().toString().isEmpty() || div.getTxtSaidaiHyojiKensu().getValue().compareTo(Decimal.ZERO) == 0) {
+            div.getTxtSaidaiHyojiKensu().setValue(
+                    new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一覧表の表示データを制御する処理です。
+     *
+     * @param div MaskingDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<MaskingDiv> onClick_btnShorikeizoku(MaskingDiv div) {
         return ResponseData.of(div).setState(DBE2080001StateName.登録);
     }
 
@@ -93,11 +142,11 @@ public class Masking {
      */
     public ResponseData<MaskingDiv> onClick_BtnDataOutput(MaskingDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("0").equals(div.getDgYokaigoNinteiTaskList().一覧件数())) {
+        if (div.getDgYokaigoNinteiTaskList().getDataSource().isEmpty()) {
             getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (div.getDgYokaigoNinteiTaskList().getCheckbox() == null || div.getDgYokaigoNinteiTaskList().getCheckbox().isEmpty()) {
+        if (is選択なし(div.getDgYokaigoNinteiTaskList().getDataSource())) {
             getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
@@ -116,11 +165,11 @@ public class Masking {
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            List<dgNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getCheckbox();
-            for (dgNinteiTaskList_Row row : rowList) {
+            List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
+            for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
-                AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-                        new RString("申請書管理番号"), row.getShinseishoKanriNo())));
+//                AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+//                        new RString("申請書管理番号"), row.getShinseishoKanriNo())));
             }
             csvWriter.close();
         }
@@ -139,22 +188,21 @@ public class Masking {
      */
     public ResponseData<MaskingDiv> onClick_BtnMasking(MaskingDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getDgYokaigoNinteiTaskList().一覧件数())) {
+            if (div.getDgYokaigoNinteiTaskList().getDataSource().isEmpty()) {
                 getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            if (div.getDgYokaigoNinteiTaskList().getCheckbox() == null || div.getDgYokaigoNinteiTaskList().getCheckbox().isEmpty()) {
+            if (is選択なし(div.getDgYokaigoNinteiTaskList().getDataSource())) {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getCheckbox());
+            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.画面遷移確認.getMessage().getCode(),
+                    DbzQuestionMessages.画面遷移確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getDataSource());
             RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
         }
@@ -169,23 +217,22 @@ public class Masking {
      */
     public ResponseData<MaskingDiv> onClick_BtnCompleteMasking(MaskingDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            if (div.getDgYokaigoNinteiTaskList().getDataSource().isEmpty()) {
+                getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            if (is選択なし(div.getDgYokaigoNinteiTaskList().getDataSource())) {
+                getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (new RString("0").equals(div.getDgYokaigoNinteiTaskList().一覧件数())) {
-                getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getDgYokaigoNinteiTaskList().getCheckbox() == null || div.getDgYokaigoNinteiTaskList().getCheckbox().isEmpty()) {
-                getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            List<dgNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getCheckbox();
-            for (dgNinteiTaskList_Row row : rowList) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
+            for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
@@ -194,7 +241,7 @@ public class Masking {
                             new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                     IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
-                    AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                    AccessLogger.log(AccessLogType.更新, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
                             new RString("申請書管理番号"), row.getShinseishoKanriNo())));
                 }
             }
@@ -206,8 +253,19 @@ public class Masking {
         return ResponseData.of(div).respond();
     }
 
-    private MaskingIchiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {
-        return new MaskingIchiranCsvEntity(row.getShinseishoKanriNo(),
+    private boolean is選択なし(List<dgYokaigoNinteiTaskList_Row> rowList) {
+        for (dgYokaigoNinteiTaskList_Row row : rowList) {
+            if (row.getSelected()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private MaskingIchiranCsvEntity getCsvData(dgYokaigoNinteiTaskList_Row row) {
+        return new MaskingIchiranCsvEntity(
+                row.getJohtai().equals(KihonunyoShoriJotai.未処理.get略称()) ? KihonunyoShoriJotai.未処理.get名称() : KihonunyoShoriJotai.処理可能.get名称(),
+                row.getShinseishoKanriNo(),
                 row.getHokensha(),
                 getパターン1(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
@@ -216,14 +274,15 @@ public class Masking {
                 getパターン1(row.getChosaIraiKanryoDay().getValue()),
                 getパターン1(row.getChosahyoKanryoDay().getValue()),
                 getパターン1(row.getIkenshoIraiKanryoDay().getValue()),
-                getパターン1(row.getIkenshoNyushuKanryoDay().getValue()),
-                getパターン1(row.getMaskingKanryoDay().getValue()));
+                getパターン1(row.getIkenshoNyushuKanryoDay().getValue()));
     }
 
-    private void 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {
+    private void 申請書管理番号リスト(List<dgYokaigoNinteiTaskList_Row> 選択データ) {
         List<RString> 申請書管理番号リスト = new ArrayList<>();
-        for (dgNinteiTaskList_Row データ : 選択データ) {
-            申請書管理番号リスト.add(データ.getShinseishoKanriNo());
+        for (dgYokaigoNinteiTaskList_Row データ : 選択データ) {
+            if (データ.getSelected()) {
+                申請書管理番号リスト.add(データ.getShinseishoKanriNo());
+            }
         }
         ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
         shinseishoKanriNoList.setShinseishoKanriNoS(申請書管理番号リスト);

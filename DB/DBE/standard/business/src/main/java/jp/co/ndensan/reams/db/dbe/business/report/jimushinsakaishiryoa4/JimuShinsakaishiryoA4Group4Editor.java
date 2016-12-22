@@ -7,11 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa4;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa4.JimuShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -31,6 +29,10 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
     private static final int PAGECOUNT = 15;
+    private static final int FORM_GROUP_INDEX_9 = 9;
+    private static final int FORM_GROUP_INDEX_10 = 10;
+    private static final int FORM_GROUP_INDEX_11 = 11;
+    private static final int FORM_GROUP_INDEX_12 = 12;
     private final int index;
     private final int page;
     private static final int INT_3 = 3;
@@ -47,7 +49,6 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
     private static final int INT_14 = 14;
     private final List<TokkiA4Entity> 短冊情報リスト;
     private final List<RString> 短冊リスト;
-    private final RString reportId;
     private final List<RString> テキスト全面List;
     private final List<RString> イメージ全面List;
 
@@ -61,16 +62,14 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
      * @param テキスト全面List List<RString>
      * @param イメージ全面List List<RString>
      * @param page page
-     * @param reportId 帳票ＩＤ
      */
     protected JimuShinsakaishiryoA4Group4Editor(TokkiText1A4Business item, List<TokkiA4Entity> 短冊情報リスト,
-            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List, int index, int page, RString reportId) {
+            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List, int index, int page) {
         this.item = item;
         this.index = index;
         this.page = page;
         this.短冊情報リスト = 短冊情報リスト;
         this.短冊リスト = 短冊リスト;
-        this.reportId = reportId;
         this.テキスト全面List = テキスト全面List;
         this.イメージ全面List = イメージ全面List;
     }
@@ -111,22 +110,21 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText = getテキスト全面();
+                source.layout = FORM_GROUP_INDEX_9;
             } else if (短冊.equals(item.get特記パターン())) {
                 editテキスト(source, 短冊リスト);
                 set特記事項テキスト(source);
+                source.layout = FORM_GROUP_INDEX_10;
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiImg = getイメージ全面();
+                source.layout = FORM_GROUP_INDEX_11;
             } else if (短冊.equals(item.get特記パターン())) {
                 editイメージ(source, 短冊リスト);
                 set特記事項イメージ(source);
+                source.layout = FORM_GROUP_INDEX_12;
             }
-        }
-        if (ReportIdDBE.DBE517901.getReportId().value().equals(reportId)) {
-            source.layout = Layouts.四頁目;
-        } else {
-            source.layout = Layouts.六頁目;
         }
         return source;
     }

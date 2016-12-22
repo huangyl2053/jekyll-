@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -23,7 +25,7 @@ import javax.annotation.Nonnull;
  * 介護認定審査会委員情報テーブルのエンティティクラスです。
  */
 public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594ShinsakaiIinJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5594ShinsakaiIinJoho");
 
@@ -53,6 +55,12 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
     private RString biko;
     private boolean haishiFlag;
     private FlexibleDate haishiYMD;
+    private KinyuKikanCode kinyuKikanCode;
+    private KinyuKikanShitenCode kinyuKikanShitenCode;
+    private RString yokinShubetsu;
+    private RString kozaNo;
+    private AtenaKanaMeisho kozaMeigininKana;
+    private AtenaMeisho kozaMeiginin;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -432,6 +440,120 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
     }
 
     /**
+     * kinyuKikanCodeのgetメソッドです。
+     * 
+     * @return kinyuKikanCode
+     */
+    @CheckForNull
+    public KinyuKikanCode getKinyuKikanCode() {
+        return kinyuKikanCode;
+    }
+
+    /**
+     * kinyuKikanCodeのsetメソッドです。
+     * 
+     * @param kinyuKikanCode kinyuKikanCode
+     */
+    public void setKinyuKikanCode(KinyuKikanCode kinyuKikanCode) {
+        this.kinyuKikanCode = kinyuKikanCode;
+    }
+
+    /**
+     * kinyuKikanShitenCodeのgetメソッドです。
+     * 
+     * @return kinyuKikanShitenCode
+     */
+    @CheckForNull
+    public KinyuKikanShitenCode getKinyuKikanShitenCode() {
+        return kinyuKikanShitenCode;
+    }
+
+    /**
+     * kinyuKikanShitenCodeのsetメソッドです。
+     * 
+     * @param kinyuKikanShitenCode kinyuKikanShitenCode
+     */
+    public void setKinyuKikanShitenCode(KinyuKikanShitenCode kinyuKikanShitenCode) {
+        this.kinyuKikanShitenCode = kinyuKikanShitenCode;
+    }
+
+    /**
+     * yokinShubetsuのgetメソッドです。
+     * 
+     * @return yokinShubetsu
+     */
+    @CheckForNull
+    public RString getYokinShubetsu() {
+        return yokinShubetsu;
+    }
+
+    /**
+     * yokinShubetsuのsetメソッドです。
+     * 
+     * @param yokinShubetsu yokinShubetsu
+     */
+    public void setYokinShubetsu(RString yokinShubetsu) {
+        this.yokinShubetsu = yokinShubetsu;
+    }
+
+    /**
+     * kozaNoのgetメソッドです。
+     * 
+     * @return kozaNo
+     */
+    @CheckForNull
+    public RString getKozaNo() {
+        return kozaNo;
+    }
+
+    /**
+     * kozaNoのsetメソッドです。
+     * 
+     * @param kozaNo kozaNo
+     */
+    public void setKozaNo(RString kozaNo) {
+        this.kozaNo = kozaNo;
+    }
+
+    /**
+     * kozaMeigininKanaのgetメソッドです。
+     * 
+     * @return kozaMeigininKana
+     */
+    @CheckForNull
+    public AtenaKanaMeisho getKozaMeigininKana() {
+        return kozaMeigininKana;
+    }
+
+    /**
+     * kozaMeigininKanaのsetメソッドです。
+     * 
+     * @param kozaMeigininKana kozaMeigininKana
+     */
+    public void setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
+        this.kozaMeigininKana = kozaMeigininKana;
+    }
+
+    /**
+     * kozaMeigininのgetメソッドです。
+     * 
+     * @return kozaMeiginin
+     */
+    @CheckForNull
+    public AtenaMeisho getKozaMeiginin() {
+        return kozaMeiginin;
+    }
+
+    /**
+     * kozaMeigininのsetメソッドです。
+     * 
+     * @param kozaMeiginin kozaMeiginin
+     */
+    public void setKozaMeiginin(AtenaMeisho kozaMeiginin) {
+        this.kozaMeiginin = kozaMeiginin;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT5594ShinsakaiIinJohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -471,6 +593,12 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
         this.biko = entity.biko;
         this.haishiFlag = entity.haishiFlag;
         this.haishiYMD = entity.haishiYMD;
+        this.kinyuKikanCode = entity.kinyuKikanCode;
+        this.kinyuKikanShitenCode = entity.kinyuKikanShitenCode;
+        this.yokinShubetsu = entity.yokinShubetsu;
+        this.kozaNo = entity.kozaNo;
+        this.kozaMeigininKana = entity.kozaMeigininKana;
+        this.kozaMeiginin = entity.kozaMeiginin;
     }
 
     /**
@@ -479,10 +607,11 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinsakaiIinCode, shinsakaiIinKaishiYMD, shinsakaiIinShuryoYMD, shinsakaiIinShimei, shinsakaiIinKanaShimei, seibetsu, shinsakaiIinShikakuCode, shinsainYusoKubun, tantoChikuCode, yubinNo, Jusho, telNo, faxNo, seinengappiYMD, biko, haishiFlag, haishiYMD);
+        return super.toMd5(shinsakaiIinCode, shinsakaiIinKaishiYMD, shinsakaiIinShuryoYMD, shinsakaiIinShimei, shinsakaiIinKanaShimei, seibetsu, shinsakaiIinShikakuCode, shinsainYusoKubun, tantoChikuCode, yubinNo, Jusho, telNo, faxNo, seinengappiYMD, biko, haishiFlag, haishiYMD, kinyuKikanCode, kinyuKikanShitenCode, yokinShubetsu, kozaNo, kozaMeigininKana, kozaMeiginin);
     }
 
 // </editor-fold>
+
 
 
 }

@@ -18,67 +18,19 @@ public enum ReportIdDBE {
     /**
      * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
      */
-    DBE517918(new ReportId("DBE517918_ShinsakaishiryoA3_iin_image_separate"), new RString("委員用審査会資料組み合わせ一覧A3版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
-     */
-    DBE517917(new ReportId("DBE517917_ShinsakaishiryoA3_iin_image_all"), new RString("委員用審査会資料組み合わせ一覧A3版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
-     */
-    DBE517916(new ReportId("DBE517916_ShinsakaishiryoA3_iin_text_separate"), new RString("委員用審査会資料組み合わせ一覧A3版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
-     */
-    DBE517915(new ReportId("DBE517915_ShinsakaishiryoA3_iin_text_all"), new RString("委員用審査会資料組み合わせ一覧A3版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
-     */
-    DBE517914(new ReportId("DBE517914_ShinsakaishiryoA3_jimu_image_separate"), new RString("委員用審査会資料組み合わせ一覧A3版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
-     */
-    DBE517913(new ReportId("DBE517913_ShinsakaishiryoA3_jimu_image_all"), new RString("委員用審査会資料組み合わせ一覧A3版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
-     */
-    DBE517912(new ReportId("DBE517912_ShinsakaishiryoA3_jimu_text_separate"), new RString("委員用審査会資料組み合わせ一覧A3版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A3版の帳票ID。
-     */
-    DBE517911(new ReportId("DBE517911_ShinsakaishiryoA3_jimu_text_all"), new RString("委員用審査会資料組み合わせ一覧A3版")),
+    DBE517904(new ReportId("DBE517904_ShinsakaishiryoA3_iin"), new RString("委員用審査会資料組み合わせ一覧A3版")),
     /**
      * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
      */
-    DBE517908(new ReportId("DBE517908_ShinsakaishiryoA4_iin_image_separate"), new RString("委員用審査会資料組み合わせ一覧A4版")),
+    DBE517903(new ReportId("DBE517903_ShinsakaishiryoA4_iin"), new RString("委員用審査会資料組み合わせ一覧A4版")),
     /**
-     * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
+     * 事務局審査会資料組み合わせ一覧A3版の帳票ID。
      */
-    DBE517907(new ReportId("DBE517907_ShinsakaishiryoA4_iin_image_all"), new RString("委員用審査会資料組み合わせ一覧A4版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
-     */
-    DBE517906(new ReportId("DBE517906_ShinsakaishiryoA4_iin_text_separate"), new RString("委員用審査会資料組み合わせ一覧A4版")),
-    /**
-     * 委員用審査会資料組み合わせ一覧A4版の帳票ID。
-     */
-    DBE517905(new ReportId("DBE517905_ShinsakaishiryoA4_iin_text_all"), new RString("委員用審査会資料組み合わせ一覧A4版")),
+    DBE517902(new ReportId("DBE517902_ShinsakaishiryoA3_jimu"), new RString("事務局審査会資料組み合わせ一覧A3版")),
     /**
      * 事務局審査会資料組み合わせ一覧A4版の帳票ID。
      */
-    DBE517904(new ReportId("DBE517904_ShinsakaishiryoA4_jimu_image_separate"), new RString("事務局審査会資料組み合わせ一覧A4版")),
-    /**
-     * 事務局審査会資料組み合わせ一覧A4版の帳票ID。
-     */
-    DBE517903(new ReportId("DBE517903_ShinsakaishiryoA4_jimu_image_all"), new RString("事務局審査会資料組み合わせ一覧A4版")),
-    /**
-     * 事務局審査会資料組み合わせ一覧A4版の帳票ID。
-     */
-    DBE517902(new ReportId("DBE517902_ShinsakaishiryoA4_jimu_text_separate"), new RString("事務局審査会資料組み合わせ一覧A4版")),
-    /**
-     * 事務局審査会資料組み合わせ一覧A4版の帳票ID。
-     */
-    DBE517901(new ReportId("DBE517901_ShinsakaishiryoA4_jimu_text_all"), new RString("事務局審査会資料組み合わせ一覧A4版")),
+    DBE517901(new ReportId("DBE517901_ShinsakaishiryoA4_jimu"), new RString("事務局審査会資料組み合わせ一覧A4版")),
     /**
      * 特記事項（2枚目以降）A3版の帳票ID。
      */
@@ -165,9 +117,13 @@ public enum ReportIdDBE {
      */
     DBE220003(new ReportId("DBE220003_ChosaIraiHakkoIchiranhyo"), new RString("認定調査依頼発行一覧表")),
     /**
-     * 認定調査依頼発行一覧表の帳票ＩＤです。
+     * 主治医意見書提出督促状の帳票ＩＤです。
      */
     DBE233001(new ReportId("DBE233001_ShujiiIkenshoSakuseiTokusokujo"), new RString("主治医意見書提出督促状")),
+    /**
+     * 主治医意見書督促対象者一覧表の帳票IDです。
+     */
+    DBE233002(new ReportId("DBE233002_ShujiiIkenshoTokusokuTaishoshaIchiranhyo"), new RString("主治医意見書督促対象者一覧表")),
     /**
      * その他資料A3の帳票ID。
      */
@@ -486,7 +442,7 @@ public enum ReportIdDBE {
     /**
      * 主治医意見書作成実績集計表の帳票ID。
      */
-    DBE601001(new ReportId("DBE601001_IkenshoJissekiIchiran"), new RString("主治医意見書作成実績集計表")),
+    DBE601001(new ReportId("DBE601001_IkenshoJissekiIchiran"), new RString("意見書作成実績一覧")),
     /**
      * 認定調査報酬請求書の帳票ID。
      */
@@ -514,7 +470,7 @@ public enum ReportIdDBE {
     /**
      * 帳票出力用認定調査実績集計表の帳票ID。
      */
-    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("帳票出力用認定調査実績集計表")),
+    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("認定調査実績一覧")),
     /**
      * 介護認定審査会委員実績集計表の帳票ID。
      */
@@ -522,7 +478,7 @@ public enum ReportIdDBE {
     /**
      * 意見書作成報酬照会の帳票ID。
      */
-    DBE601004(new ReportId("DBE601004_ikenhoshuichiran"), new RString("主治医意見書作成報酬一覧表")),
+    DBE601004(new ReportId("DBE601004_ikenhoshuichiran"), new RString("主治医意見書作成料一覧表")),
     /**
      * 認定調査依頼履歴一覧表の帳票ID。
      */

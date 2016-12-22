@@ -4,12 +4,36 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnConfirm = function () {
-                return "onClick_btnConfirm";
+            Events.onBeforeOpenDialog_btnKusuri = function () {
+                return "onBeforeOpenDialog_btnKusuri";
+            };
+
+            Events.onBeforeOpenDialog_btnKingakuKanri = function () {
+                return "onBeforeOpenDialog_btnKingakuKanri";
+            };
+
+            Events.onBeforeOpenDialog_btnIshiKetei = function () {
+                return "onBeforeOpenDialog_btnIshiKetei";
+            };
+
+            Events.onBeforeOpenDialog_btnShudan = function () {
+                return "onBeforeOpenDialog_btnShudan";
+            };
+
+            Events.onBeforeOpenDialog_btnKaiMono = function () {
+                return "onBeforeOpenDialog_btnKaiMono";
+            };
+
+            Events.onBeforeOpenDialog_btnKantanChori = function () {
+                return "onBeforeOpenDialog_btnKantanChori";
             };
 
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
+            };
+
+            Events.onClick_btnConfirm = function () {
+                return "onClick_btnConfirm";
             };
             return Events;
         })();
@@ -115,12 +139,12 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKantanChori"));
             };
 
-            Controls.prototype.btnConfirm = function () {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            };
-
             Controls.prototype.btnBack = function () {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            };
+
+            Controls.prototype.btnConfirm = function () {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             };
             return Controls;
         })();

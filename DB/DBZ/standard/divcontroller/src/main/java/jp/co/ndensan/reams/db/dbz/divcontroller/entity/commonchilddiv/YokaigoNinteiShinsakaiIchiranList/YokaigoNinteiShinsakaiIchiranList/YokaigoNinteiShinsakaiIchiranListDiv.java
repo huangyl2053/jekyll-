@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYokaigoNinteiShinsakaiIchiranListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -267,6 +267,11 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     @Override
     public void getSelectedGridLine() {
         getHandler().getSelectedGridLine();
+    }
+
+    @Override
+    public void set一覧グリッド高さ指定(RString height) {
+        getHandler().set一覧グリッド高さ指定(height);
     }
 
     @JsonIgnore

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa4;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa4.JimuShinsakaishiryoA4ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -27,6 +26,11 @@ public class JimuShinsakaishiryoA4Group2Editor implements IJimuShinsakaishiryoA4
     private static final int INT_4 = 4;
     private final IchijihanteikekkahyoA4Entity item;
     private final int index;
+    private static final RString サービス区分コード1 = new RString("1");
+    private static final RString サービス区分コード2 = new RString("2");
+    private static final int FORM_GROUP_INDEX_2 = 2;
+    private static final int FORM_GROUP_INDEX_3 = 3;
+    private static final int FORM_GROUP_INDEX_4 = 4;
 
     /**
      * インスタンスを生成します。
@@ -168,7 +172,13 @@ public class JimuShinsakaishiryoA4Group2Editor implements IJimuShinsakaishiryoA4
             source.listChukanhyoka_4 = item.get中間評価リスト().get(index).get第4群();
             source.listChukanhyoka_5 = item.get中間評価リスト().get(index).get第5群();
         }
-        source.layout = Layouts.必須;
+        if (サービス区分コード1.equals(item.getSabisuKubun())) {
+            source.layout = FORM_GROUP_INDEX_3;
+        } else if (サービス区分コード2.equals(item.getSabisuKubun())) {
+            source.layout = FORM_GROUP_INDEX_4;
+        } else {
+            source.layout = FORM_GROUP_INDEX_2;
+        }
         return editSource1(source);
     }
 

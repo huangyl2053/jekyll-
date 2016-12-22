@@ -191,18 +191,6 @@ public class HakkoJoken {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック1(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック2(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        validPairs = getValidationHandler(div).申請日範囲不正チェック3(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
         validPairs = getValidationHandler(div).申請日入力チェック1(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Dec 10 15:19:45 JST 2016 
+ * Wed Dec 21 11:29:28 JST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiChosaIrai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
 
     private RString no;
     private RString ninteiShinseiDate;
@@ -28,6 +28,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
     private RString ninteiDate;
     private RString yokaigodo;
     private RString yukoKikan;
+    private RString chosaIraiDate;
     private RString ninteichosaItakusakiCode;
     private RString ninteichosaItakusakiName;
     private RString ninteiChosainCode;
@@ -43,6 +44,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.ninteiDate = RString.EMPTY;
         this.yokaigodo = RString.EMPTY;
         this.yukoKikan = RString.EMPTY;
+        this.chosaIraiDate = RString.EMPTY;
         this.ninteichosaItakusakiCode = RString.EMPTY;
         this.ninteichosaItakusakiName = RString.EMPTY;
         this.ninteiChosainCode = RString.EMPTY;
@@ -55,6 +57,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.setOriginalData("ninteiDate", ninteiDate);
         this.setOriginalData("yokaigodo", yokaigodo);
         this.setOriginalData("yukoKikan", yukoKikan);
+        this.setOriginalData("chosaIraiDate", chosaIraiDate);
         this.setOriginalData("ninteichosaItakusakiCode", ninteichosaItakusakiCode);
         this.setOriginalData("ninteichosaItakusakiName", ninteichosaItakusakiName);
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
@@ -62,7 +65,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgNinteiChosaIrai_Row(RString no, RString ninteiShinseiDate, RString shinseiKubun, RString shinseiTorikeshiDate, RString ninteiDate, RString yokaigodo, RString yukoKikan, RString ninteichosaItakusakiCode, RString ninteichosaItakusakiName, RString ninteiChosainCode, RString ninteiChosainName, RString rirekiNo) {
+    public dgNinteiChosaIrai_Row(RString no, RString ninteiShinseiDate, RString shinseiKubun, RString shinseiTorikeshiDate, RString ninteiDate, RString yokaigodo, RString yukoKikan, RString chosaIraiDate, RString ninteichosaItakusakiCode, RString ninteichosaItakusakiName, RString ninteiChosainCode, RString ninteiChosainName, RString rirekiNo) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
@@ -71,6 +74,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.setOriginalData("ninteiDate", ninteiDate);
         this.setOriginalData("yokaigodo", yokaigodo);
         this.setOriginalData("yukoKikan", yukoKikan);
+        this.setOriginalData("chosaIraiDate", chosaIraiDate);
         this.setOriginalData("ninteichosaItakusakiCode", ninteichosaItakusakiCode);
         this.setOriginalData("ninteichosaItakusakiName", ninteichosaItakusakiName);
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
@@ -83,6 +87,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.ninteiDate = ninteiDate;
         this.yokaigodo = yokaigodo;
         this.yukoKikan = yukoKikan;
+        this.chosaIraiDate = chosaIraiDate;
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
         this.ninteichosaItakusakiName = ninteichosaItakusakiName;
         this.ninteiChosainCode = ninteiChosainCode;
@@ -116,6 +121,10 @@ public class dgNinteiChosaIrai_Row extends DataRow {
 
     public RString getYukoKikan() {
         return yukoKikan;
+    }
+
+    public RString getChosaIraiDate() {
+        return chosaIraiDate;
     }
 
     public RString getNinteichosaItakusakiCode() {
@@ -171,6 +180,11 @@ public class dgNinteiChosaIrai_Row extends DataRow {
     public void setYukoKikan(RString yukoKikan) {
         this.setOriginalData("yukoKikan", yukoKikan);
         this.yukoKikan = yukoKikan;
+    }
+
+    public void setChosaIraiDate(RString chosaIraiDate) {
+        this.setOriginalData("chosaIraiDate", chosaIraiDate);
+        this.chosaIraiDate = chosaIraiDate;
     }
 
     public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {

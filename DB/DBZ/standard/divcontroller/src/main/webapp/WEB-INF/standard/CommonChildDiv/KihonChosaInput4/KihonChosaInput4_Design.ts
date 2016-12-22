@@ -8,12 +8,72 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnConfirm(): string {
-                return "onClick_btnConfirm";
+            public static onBeforeOpenDialog_btnHiryaku(): string {
+                return "onBeforeOpenDialog_btnHiryaku";
+            }
+
+            public static onBeforeOpenDialog_btnTukuriHanashi(): string {
+                return "onBeforeOpenDialog_btnTukuriHanashi";
+            }
+
+            public static onBeforeOpenDialog_btnKanjyo(): string {
+                return "onBeforeOpenDialog_btnKanjyo";
+            }
+
+            public static onBeforeOpenDialog_btnChuyaku(): string {
+                return "onBeforeOpenDialog_btnChuyaku";
+            }
+
+            public static onBeforeOpenDialog_btnOnajiHanashi(): string {
+                return "onBeforeOpenDialog_btnOnajiHanashi";
+            }
+
+            public static onBeforeOpenDialog_btnBigVoice(): string {
+                return "onBeforeOpenDialog_btnBigVoice";
+            }
+
+            public static onBeforeOpenDialog_btnTeikou(): string {
+                return "onBeforeOpenDialog_btnTeikou";
+            }
+
+            public static onBeforeOpenDialog_btnOchituki(): string {
+                return "onBeforeOpenDialog_btnOchituki";
+            }
+
+            public static onBeforeOpenDialog_btnOutLonly(): string {
+                return "onBeforeOpenDialog_btnOutLonly";
+            }
+
+            public static onBeforeOpenDialog_btnShushu(): string {
+                return "onBeforeOpenDialog_btnShushu";
+            }
+
+            public static onBeforeOpenDialog_btnKowasu(): string {
+                return "onBeforeOpenDialog_btnKowasu";
+            }
+
+            public static onBeforeOpenDialog_btnMonoWasure(): string {
+                return "onBeforeOpenDialog_btnMonoWasure";
+            }
+
+            public static onBeforeOpenDialog_btnHitoriWarai(): string {
+                return "onBeforeOpenDialog_btnHitoriWarai";
+            }
+
+            public static onBeforeOpenDialog_btnKateKodo(): string {
+                return "onBeforeOpenDialog_btnKateKodo";
+            }
+
+            public static onBeforeOpenDialog_btnMatomeNai(): string {
+                return "onBeforeOpenDialog_btnMatomeNai";
             }
 
             public static onClick_btnBack(): string {
                 return "onClick_btnBack";
+            }
+
+            public static onClick_btnConfirm(): string {
+                return "onClick_btnConfirm";
             }
 
         }
@@ -229,12 +289,12 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radMatomeNai"));
             }
 
-            public btnConfirm(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnConfirm"));
-            }
-
             public btnBack(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBack"));
+            }
+
+            public btnConfirm(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnConfirm"));
             }
 
         }

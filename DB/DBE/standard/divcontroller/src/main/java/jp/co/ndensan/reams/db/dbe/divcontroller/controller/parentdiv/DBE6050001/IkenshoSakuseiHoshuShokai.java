@@ -7,14 +7,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6050001
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601004.DBE601004_IkenshosakuseiHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshohoshushokai.IkenshoHoshuShokaiMapperParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.DBE6050001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshohoshushokai.IkenshoHoshuShokaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -31,12 +33,12 @@ public class IkenshoSakuseiHoshuShokai {
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenshoSakuseiHoshuShokaiDiv>
+     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onLoad(IkenshoSakuseiHoshuShokaiDiv div) {
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).clear作成依頼日();
         getHandler(div).set初期最大取得件数();
-        getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
 
@@ -44,12 +46,12 @@ public class IkenshoSakuseiHoshuShokai {
      * 「条件をクリアする」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenshoSakuseiHoshuShokaiDiv>
+     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BtnKensakuClear(IkenshoSakuseiHoshuShokaiDiv div) {
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).clear作成依頼日();
         getHandler(div).set初期最大取得件数();
-        getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
 
@@ -57,13 +59,15 @@ public class IkenshoSakuseiHoshuShokai {
      * 「検索する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenshoSakuseiHoshuShokaiDiv>
+     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BtnKensaku(IkenshoSakuseiHoshuShokaiDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForIraishoSakuseiIraiYMD();
+        // 作成依頼開始＞作成依頼終了の場合、エラーとする
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate開始日終了日();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+
         FlexibleDate 作成依頼日開始 = FlexibleDate.EMPTY;
         FlexibleDate 作成依頼日終了 = FlexibleDate.EMPTY;
         if (div.getTxtSakuseiIraibi().getFromValue() != null) {
@@ -72,33 +76,36 @@ public class IkenshoSakuseiHoshuShokai {
         if (div.getTxtSakuseiIraibi().getToValue() != null) {
             作成依頼日終了 = new FlexibleDate(div.getTxtSakuseiIraibi().getToValue().toDateString());
         }
-        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(作成依頼日開始,
-                作成依頼日終了, div.getTxtMaxKensu().getValue().intValue());
+        
+        Decimal 最大件数 = div.getTxtMaxKensu().getValue();
+        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(
+                作成依頼日開始, 
+                作成依頼日終了, 
+                div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
+                最大件数);
         getHandler(div).set一覧結果(IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter).records());
-        getHandler(div).set一覧状態();
+        
         if (div.getDgIkenshoSakuseiHoshu().getDataSource().isEmpty()) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
+            return ResponseData.of(div).setState(DBE6050001StateName.検索結果表示結果無し);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6050001StateName.検索結果表示);
     }
 
     /**
      * 「条件に戻る」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenshoSakuseiHoshuShokaiDiv>
+     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BtnModoru(IkenshoSakuseiHoshuShokaiDiv div) {
-        getHandler(div).set初期状態();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6050001StateName.検索条件入力);
     }
 
     /**
      * データの必須選択チェックを実施します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenshoSakuseiHoshuShokaiDiv>
+     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BatchButton(IkenshoSakuseiHoshuShokaiDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCheckedDataCount();
@@ -112,7 +119,7 @@ public class IkenshoSakuseiHoshuShokai {
      * 「CSVを出力する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenHoshuIchiranBatchParameter>
+     * @return ResponseData&lt;IkenHoshuIchiranBatchParameter&gt;
      */
     public ResponseData<DBE601004_IkenshosakuseiHoshuParameter> onClick_BtnShutsutyoku(IkenshoSakuseiHoshuShokaiDiv div) {
         DBE601004_IkenshosakuseiHoshuParameter parameter = getHandler(div).createBatchParam(CSVを出力する);
@@ -123,11 +130,22 @@ public class IkenshoSakuseiHoshuShokai {
      * 「一覧表を発行する」ボタンを押します。
      *
      * @param div 画面情報
-     * @return ResponseData<IkenHoshuIchiranBatchParameter>
+     * @return ResponseData&lt;IkenHoshuIchiranBatchParameter&gt;
      */
     public ResponseData<DBE601004_IkenshosakuseiHoshuParameter> onClick_BtnPulish(IkenshoSakuseiHoshuShokaiDiv div) {
         DBE601004_IkenshosakuseiHoshuParameter parameter = getHandler(div).createBatchParam(一覧表を発行する);
         return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 一覧グリッドのソートイベント処理メソッドです。
+     *
+     * @param div 画面情報
+     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
+     */
+    public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onSort_dgIkenshoSakuseiHoshu(IkenshoSakuseiHoshuShokaiDiv div) {
+        getHandler(div).resetシーケンス番号();
+        return ResponseData.of(div).respond();
     }
 
     private IkenshoSakuseiHoshuShokaiHandler getHandler(IkenshoSakuseiHoshuShokaiDiv div) {

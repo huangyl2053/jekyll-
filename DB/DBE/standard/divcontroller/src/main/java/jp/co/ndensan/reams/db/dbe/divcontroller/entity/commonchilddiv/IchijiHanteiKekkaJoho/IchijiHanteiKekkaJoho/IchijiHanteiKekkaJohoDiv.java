@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekkaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -70,10 +70,10 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private Label lblIchijiHanteiKeikokuCode;
     @JsonProperty("dgIchijiHanteiKeikokuCode")
     private DataGrid<dgIchijiHanteiKeikokuCode_Row> dgIchijiHanteiKeikokuCode;
-    @JsonProperty("btnKakutei")
-    private Button btnKakutei;
     @JsonProperty("btnModoru")
     private Button btnModoru;
+    @JsonProperty("btnKakutei")
+    private Button btnKakutei;
     @JsonProperty("hanteiArgument")
     private RString hanteiArgument;
     @JsonProperty("hanteiResult")
@@ -416,24 +416,6 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     /*
-     * getbtnKakutei
-     * @return btnKakutei
-     */
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
-    }
-
-    /*
-     * setbtnKakutei
-     * @param btnKakutei btnKakutei
-     */
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei = btnKakutei;
-    }
-
-    /*
      * getbtnModoru
      * @return btnModoru
      */
@@ -449,6 +431,24 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     @JsonProperty("btnModoru")
     public void setBtnModoru(Button btnModoru) {
         this.btnModoru = btnModoru;
+    }
+
+    /*
+     * getbtnKakutei
+     * @return btnKakutei
+     */
+    @JsonProperty("btnKakutei")
+    public Button getBtnKakutei() {
+        return btnKakutei;
+    }
+
+    /*
+     * setbtnKakutei
+     * @param btnKakutei btnKakutei
+     */
+    @JsonProperty("btnKakutei")
+    public void setBtnKakutei(Button btnKakutei) {
+        this.btnKakutei = btnKakutei;
     }
 
     /*

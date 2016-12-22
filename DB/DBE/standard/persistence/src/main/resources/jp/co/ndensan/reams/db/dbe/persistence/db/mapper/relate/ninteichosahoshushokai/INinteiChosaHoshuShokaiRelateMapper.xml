@@ -23,7 +23,8 @@
         T5202."chosaJisshiBashoCode",
         T5601."chosaItakuryo",
         T5601."shinseishoKanriNo",
-        T5601."ninteichosaIraiRirekiNo"
+        T5601."ninteichosaIraiRirekiNo",
+        T7051."shichosonMeisho"
         FROM		rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS  T5601
         INNER JOIN	rgdb."DbT5101NinteiShinseiJoho" AS  T5101
         ON			T5101."shinseishoKanriNo"=T5601."shinseishoKanriNo"
@@ -34,9 +35,6 @@
         AND			T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND			T5105."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND			T5105."ninteichosaKanryoYMD" IS NOT NULL
-        AND			T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND			T5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND			T5105."centerSoshinYMD" IS NULL
         INNER JOIN	rgdb."DbT5201NinteichosaIraiJoho" AS T5201
         ON			T5201."shinseishoKanriNo"=T5601."shinseishoKanriNo"
         AND			T5201."ninteichosaIraiRirekiNo"=T5601."ninteichosaIraiRirekiNo"
@@ -61,6 +59,9 @@
         </if>
         <if test="isTo">
         AND T5201."ninteichosaIraiYMD" <![CDATA[<=]]>#{調査依頼日終了}
+        </if>
+        <if test="isHokensha">
+            AND T7051."shichosonCode" = #{保険者}
         </if>
         <if test="batchFlag">
             AND
@@ -118,6 +119,7 @@
         <result property="施設初回" column="shisetsusho" />
         <result property="施設再調査" column="shisetsusai" />
         <result property="委託料合計" column="itakuryogokei" />
+        <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 
     </resultMap>
 </mapper>

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -94,6 +95,10 @@ public class NijihanteiKekkaOutputHandler {
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHanteiDateFrom().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getLblNijiHanteiDate().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHnateiDateTo().setDisplayNone(true);
+        ShichosonSecurityJoho shichosonSecurityJoho
+                = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, UrControlDataFactory.createInstance().getLoginInfo().getUserId());
+        nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
+        nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(shichosonSecurityJoho.get市町村情報().get市町村名称());
     }
 
     private RString nullToEmpty(RString obj) {
@@ -106,9 +111,9 @@ public class NijihanteiKekkaOutputHandler {
     /**
      * 判定結果情報出力(保険者)検索処理する。
      */
-    public void kennsaku() {
+    public void kennsaku(RString 被保険者番号) {
         List<dgTaishoshaIchiran_Row> dgTaishoshaIchiranList = new ArrayList<>();
-        HanteiKekkaJouhouShuturyokuParameter hanteiParameter = createParameter();
+        HanteiKekkaJouhouShuturyokuParameter hanteiParameter = createParameter(被保険者番号);
         List<HanteiKekkaJouhouShuturyokuBusiness> ninteiList = HanteiKekkaJouhouShuturyokuFinder.createInstance()
                 .getHanteiKekka(hanteiParameter).records();
         if (ninteiList != null && !ninteiList.isEmpty()) {
@@ -139,6 +144,11 @@ public class NijihanteiKekkaOutputHandler {
                 dgTaishoshaIchiranList.add(dgFukushiyoguShohin);
                 アクセスログ();
             }
+
+            HanteiKekkaJouhouShuturyokuBusiness rec = ninteiList.get(findLastIndex(ninteiList));
+            nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().updateSaikinShorisha(rec.get被保険者番号(), rec.get被保険者氏名());
+            nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().reloadSaikinShorisha();
+
             CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン, false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン２, false);
@@ -149,12 +159,28 @@ public class NijihanteiKekkaOutputHandler {
         nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgTaishoshaIchiranList);
     }
 
+    private int findLastIndex(List<HanteiKekkaJouhouShuturyokuBusiness> searchResult) {
+        int lastShinseiYmdIndex = 0;
+        RString lastNinteiShinseiYmd = null;
+        for (int i = 0; i < searchResult.size(); i++) {
+            HanteiKekkaJouhouShuturyokuBusiness rec = searchResult.get(i);
+            if (lastNinteiShinseiYmd == null) {
+                lastNinteiShinseiYmd = rec.get認定申請年月日();
+            }
+            if (rec.get認定申請年月日().compareTo(lastNinteiShinseiYmd) > 0) {
+                lastNinteiShinseiYmd = rec.get認定申請年月日();
+                lastShinseiYmdIndex = i;
+            }
+        }
+        return lastShinseiYmdIndex;
+    }
+
     /**
      * 検索条件を作成します。
      *
      * @return 検索条件
      */
-    private HanteiKekkaJouhouShuturyokuParameter createParameter() {
+    private HanteiKekkaJouhouShuturyokuParameter createParameter(RString 被保険者番号) {
         HanteiKekkaJouhouShuturyokuParameter parameter = new HanteiKekkaJouhouShuturyokuParameter();
         int 最大表示件数 = Integer.parseInt(nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().toString());
         if (最大表示件数 != 0) {
@@ -162,7 +188,7 @@ public class NijihanteiKekkaOutputHandler {
             parameter.setLimitCount(最大表示件数);
         }
         NinteiShinseishaFinderDiv finderDiv = nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv();
-        editShosaiJokenForParameter(finderDiv, parameter);
+        editShosaiJokenForParameter(finderDiv, parameter, 被保険者番号);
         editNinteiChosaForParameter(finderDiv, parameter);
         editShujiiJohoForParameter(finderDiv, parameter);
         editShinsakaiJohoForParameter(finderDiv, parameter);
@@ -172,7 +198,7 @@ public class NijihanteiKekkaOutputHandler {
         return parameter;
     }
 
-    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, HanteiKekkaJouhouShuturyokuParameter parameter) {
+    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, HanteiKekkaJouhouShuturyokuParameter parameter, RString 被保険者番号) {
         RString fromtime = RString.EMPTY;
         if (nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() != null) {
             fromtime = new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString());
@@ -195,7 +221,6 @@ public class NijihanteiKekkaOutputHandler {
         if (未出力のみ.equals(データ出力有無)) {
             parameter.setUseMisyutsuryokuNomi(true);
         }
-        RString 被保険者番号 = finderDiv.getTxtHihokenshaNumber().getValue();
         if (!RString.isNullOrEmpty(被保険者番号)) {
             parameter.setHihokenshaNo(被保険者番号);
             parameter.setUseHihokenshaNo(true);

@@ -1,6 +1,6 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
 ninteichosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
-jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,事業者番号,A
+jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
 jigyoshaMeisho,varchar,RString,,,,,事業者名称,A
 jigyoshaMeishoKana,varchar,RString,,,,,事業者名称カナ,A
 yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
@@ -16,3 +16,9 @@ waritsukeChiku,UDD011ChikuCode,ChikuCode,,,,,割付地区,A
 autoWaritsukeFlag,bool,boolean,,,,,自動割付フラグ,A
 kikanKubun,bpchar,RString,,,,,機関の区分,A
 jokyoFlag,bool,boolean,,,,,状況フラグ,A
+kinyuKikanCode,UDD030KinyuKikanCode,KinyuKikanCode,,,,,金融機関コード,A
+kinyuKikanShitenCode,UDD031KinyuKikanShitenCode,KinyuKikanShitenCode,,,,,支店コード,A
+yokinShubetsu,varchar,RString,,,,,預金種別,A
+kozaNo,varchar,RString,,,,,口座番号,A
+kozaMeigininKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,口座名義人カナ,A
+kozaMeiginin,UDD042AtenaMeisho,AtenaMeisho,,,,,口座名義人,A

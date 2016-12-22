@@ -89,7 +89,7 @@ public class NinteiShinsakaiIinGuideManager {
         }
         for (DbT5911ShujiiIryoKikanJohoEntity entity : shujiiIryoKikanJohoEntityList) {
             KeyValueDataSource dateSource = new KeyValueDataSource();
-            dateSource.setKey(entity.getShujiiIryokikanCode());
+            dateSource.setKey(entity.getShujiiIryokikanCode().value());
             dateSource.setValue(entity.getIryoKikanMeisho());
             医療機関リスト.add(dateSource);
 

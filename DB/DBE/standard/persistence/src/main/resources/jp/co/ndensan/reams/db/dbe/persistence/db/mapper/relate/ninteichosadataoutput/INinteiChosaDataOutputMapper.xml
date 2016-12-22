@@ -18,6 +18,297 @@
         <result property="調査員氏名" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
+    <resultMap id="resultMap_getChosain" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosainDataRelateEntity" autoMapping="true">
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査員コード" column="調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査員氏名" column="調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査員カナ氏名" column="調査員カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査委託先コード" column="調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="地区コード" column="地区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査員資格" column="調査員資格" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査可能人数" column="調査可能人数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ" column="状況フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ＦＡＸ番号" column="ＦＡＸ番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所属機関名称" column="所属機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="getChosain" resultMap="resultMap_getChosain"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+       SELECT
+         DbT5913."shichosonCode" AS "市町村コード",
+         DbT5913."ninteiChosainCode" AS "調査員コード",
+         DbT5913."chosainShimei" AS "調査員氏名",
+         DbT5913."chosainKanaShimei" AS "調査員カナ氏名",
+         DbT5913."ninteiChosaItakusakiCode" AS "調査委託先コード",
+         DbT5910."jigyoshaMeisho" AS "事業者名称",
+         DbT5913."seibetsu" AS "性別",
+         DbT5913."chikuCode" AS "地区コード",
+         DbT5913."chosainShikaku" AS "調査員資格",
+         DbT5913."chosaKanoNinzuPerMonth" AS "調査可能人数",
+         DbT5913."jokyoFlag" AS "状況フラグ",
+         DbT5913."yubinNo" AS "郵便番号",
+         DbT5913."jusho" AS "住所",
+         DbT5913."telNo" AS "電話番号",
+         DbT5913."faxNo" AS "ＦＡＸ番号",
+         DbT5913."shozokuKikanName" AS "所属機関名称"
+       FROM
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+         INNER JOIN
+               rgdb."DbT5913ChosainJoho" AS DbT5913
+            ON
+               DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+           AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+           AND DbT5913."shichosonCode" = DbT7051."shichosonCode"
+           LEFT JOIN
+               rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+           ON
+               DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+           AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
+       WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+    AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+    AND DbT5105."centerSoshinYMD" IS NULL
+    AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
+    AND DbT5101."logicalDeletedFlag" = false
+   <if test= "isShinseishoKanriNo">
+       AND DbT5101."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+   </if>
+   <if test= "!isShichoson">    
+       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+    </if>
+    </select>
+
+    <resultMap id="resultMap_getGaikyoTokkiJiko" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaGaikyoTokkiDataRelateEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="概況特記事項主訴" column="概況特記事項主訴" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="概況特記事項家族状況" column="概況特記事項家族状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="概況特記事項居住環境" column="概況特記事項居住環境" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="概況特記事項機器器械" column="概況特記事項機器器械" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="getGaikyoTokkiJiko" resultMap="resultMap_getGaikyoTokkiJiko"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+       SELECT
+         DbT5101."shinseishoKanriNo" AS "申請書管理番号"
+         , DbT5101."shoKisaiHokenshaNo" AS "証記載保険者番号"
+         , DbT5101."hihokenshaNo" AS "被保険者番号"
+         , DbT5101."ninteiShinseiYMD" AS "認定申請年月日"
+         , DbT5206."shuso" AS "概況特記事項主訴"
+         , DbT5206."kazokuJokyo" AS "概況特記事項家族状況"
+         , DbT5206."kyojuKankyo" AS "概況特記事項居住環境" 
+         , DbT5206."kikaiKiki" AS "概況特記事項機器器械" 
+       FROM
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
+           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+           AND DbT5201."ninteichosaIraiRirekiNo" = ( 
+             SELECT
+               MAX("ninteichosaIraiRirekiNo") 
+             FROM
+               rgdb."DbT5201NinteichosaIraiJoho" 
+             WHERE
+               "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+           ) 
+           AND DbT5201."logicalDeletedFlag" = false 
+         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+           ON DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo" 
+           AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo" 
+           AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode" 
+           AND DbT5202."gaikyoChosaTextImageKubun" = #{imageKubun}
+         INNER JOIN rgdb."DbT5206GaikyoTokki" AS DbT5206 
+           ON DbT5206."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" 
+           AND DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo" 
+           AND DbT5206."gaikyoTokkiTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun" 
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+       WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+    AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+    AND DbT5105."centerSoshinYMD" IS NULL
+    AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
+    AND DbT5101."logicalDeletedFlag" = false
+    <if test= "isNinteichosaItakusakiCode">
+        AND DbT5201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+    </if>
+    <if test= "isNinteiChosainCode">
+       AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
+   </if>
+   <if test= "isShinseishoKanriNo">
+       AND DbT5201."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+   </if>
+   <if test= "!isShichoson">    
+       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+    </if>
+    </select>
+
+    <resultMap id="resultMap_getTokkiJiko" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaTokkiDataRelateEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回今回区分" column="前回今回区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項番号" column="認定調査特記事項番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項連番" column="認定調査特記事項連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記事項" column="特記事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="getTokkiJiko" resultMap="resultMap_getTokkiJiko"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+       SELECT
+         DbT5101."shinseishoKanriNo" AS "申請書管理番号"
+         , DbT5101."shoKisaiHokenshaNo" AS "証記載保険者番号"
+         , DbT5101."hihokenshaNo" AS "被保険者番号"
+         , DbT5101."ninteiShinseiYMD" AS "認定申請年月日"
+         , '1' AS "前回今回区分"
+         , DbT5205Zenkai."ninteichosaTokkijikoNo" AS "認定調査特記事項番号"
+         , DbT5205Zenkai."ninteichosaTokkijikoRemban" AS "認定調査特記事項連番"
+         , DbT5205Zenkai."tokkiJiko" AS "特記事項" 
+       FROM
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
+         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121 
+           ON DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Zenkai 
+           ON DbT5101Zenkai."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Zenkai 
+           ON DbT5201Zenkai."shinseishoKanriNo" = DbT5101Zenkai."shinseishoKanriNo" 
+           AND DbT5201Zenkai."ninteichosaIraiRirekiNo" = ( 
+             SELECT
+               MAX("ninteichosaIraiRirekiNo") 
+             FROM
+               rgdb."DbT5201NinteichosaIraiJoho" 
+             WHERE
+               "shinseishoKanriNo" = DbT5101Zenkai."shinseishoKanriNo"
+           ) 
+           AND DbT5201Zenkai."logicalDeletedFlag" = false 
+         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202Zenkai 
+           ON DbT5202Zenkai."shinseishoKanriNo" = DbT5201Zenkai."shinseishoKanriNo" 
+           AND DbT5202Zenkai."ninteichosaRirekiNo" = DbT5201Zenkai."ninteichosaIraiRirekiNo" 
+           AND DbT5202Zenkai."koroshoIfShikibetsuCode" = DbT5201Zenkai."koroshoIfShikibetsuCode" 
+           AND DbT5202Zenkai."gaikyoChosaTextImageKubun" = #{imageKubun}
+         INNER JOIN rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205Zenkai 
+           ON DbT5205Zenkai."shinseishoKanriNo" = DbT5202Zenkai."shinseishoKanriNo" 
+           AND DbT5205Zenkai."ninteichosaRirekiNo" = DbT5202Zenkai."ninteichosaRirekiNo" 
+           AND DbT5205Zenkai."tokkijikoTextImageKubun" = DbT5202Zenkai."gaikyoChosaTextImageKubun" 
+
+         --今回分のデータを取得（条件抽出のため）
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
+           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+           AND DbT5201."ninteichosaIraiRirekiNo" = ( 
+             SELECT
+               MAX("ninteichosaIraiRirekiNo") 
+             FROM
+               rgdb."DbT5201NinteichosaIraiJoho" 
+             WHERE
+               "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+           ) 
+           AND DbT5201."logicalDeletedFlag" = false 
+       WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+    AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+    AND DbT5105."centerSoshinYMD" IS NULL
+    AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
+    AND DbT5101."logicalDeletedFlag" = false
+    <if test= "isNinteichosaItakusakiCode">
+        AND DbT5201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+    </if>
+    <if test= "isNinteiChosainCode">
+       AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
+   </if>
+   <if test= "isShinseishoKanriNo">
+       AND DbT5201."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+   </if>
+   <if test= "!isShichoson">    
+       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+    </if>
+          
+       UNION ALL
+
+       --今回分取得
+       SELECT
+         DbT5101."shinseishoKanriNo" AS "申請書管理番号"
+         , DbT5101."shoKisaiHokenshaNo" AS "証記載保険者番号"
+         , DbT5101."hihokenshaNo" AS "被保険者番号"
+         , DbT5101."ninteiShinseiYMD" AS "認定申請年月日"
+         , '2' AS "前回今回区分"
+         , DbT5205."ninteichosaTokkijikoNo" AS "認定調査特記事項番号"
+         , DbT5205."ninteichosaTokkijikoRemban" AS "認定調査特記事項連番"
+         , DbT5205."tokkiJiko" AS "特記事項" 
+       FROM
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
+           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+           AND DbT5201."ninteichosaIraiRirekiNo" = ( 
+             SELECT
+               MAX("ninteichosaIraiRirekiNo") 
+             FROM
+               rgdb."DbT5201NinteichosaIraiJoho" 
+             WHERE
+               "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+           ) 
+           AND DbT5201."logicalDeletedFlag" = false 
+         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+           ON DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo" 
+           AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo" 
+           AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode" 
+           AND DbT5202."gaikyoChosaTextImageKubun" = #{imageKubun}
+         INNER JOIN rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205 
+           ON DbT5205."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" 
+           AND DbT5205."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo" 
+           AND DbT5205."tokkijikoTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun" 
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+       WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+    AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+    AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+    AND DbT5105."centerSoshinYMD" IS NULL
+    AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
+    AND DbT5101."logicalDeletedFlag" = false
+    <if test= "isNinteichosaItakusakiCode">
+        AND DbT5201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+    </if>
+    <if test= "isNinteiChosainCode">
+       AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
+   </if>
+   <if test= "isShinseishoKanriNo">
+       AND DbT5201."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+   </if>
+   <if test= "!isShichoson">    
+       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+    </if>
+    </select>
+
     <select resultOrdered="true" id="get認定調査一覧" resultMap="resultMap_getNinteiChosaIchiran"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputMybitisParameter" fetchSize="500">
        SELECT
@@ -82,9 +373,9 @@
         #{maxCount}
     </select>
 
-
   <resultMap id="resultMap_getNinteiChosaData" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity" autoMapping="true">
         <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回申請書管理番号" column="zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="厚労省IF識別コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -100,6 +391,7 @@
         <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定調査委託先コード" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定調査員コード" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分コード" column="hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定調査依頼完了年月日" column="ninteichosaIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定調査依頼履歴番号" column="ninteichosaIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -113,6 +405,11 @@
         <result property="認定調査区分コード" column="ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定調査実施場所コード" column="chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定調査実施場所名称" column="chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者郵便番号" column="shinseiTodokedeshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者電話番号" column="shinseiTodokedeshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者住所" column="shinseiTodokedeshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者氏名" column="shinseiTodokedeshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者続柄" column="shinseiTodokedeshaTsuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="サービス区分コード" column="serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用施設名" column="riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="利用施設住所" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -145,10 +442,12 @@
         <result property="調査項目連番" column="調査項目連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
+    
   <select resultOrdered="true" id="get認定調査データ出力" resultMap="resultMap_getNinteiChosaData"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
     SELECT
         DbT5101."shinseishoKanriNo",
+        DbT5121."zenkaiShinseishoKanriNo",
         DbT5101."koroshoIfShikibetsuCode",
         DbT5101."shoKisaiHokenshaNo",
         DbT5101."hihokenshaNo",
@@ -164,6 +463,12 @@
         DbT5101."telNo",
         DbT5101."ninteiChosaItakusakiCode",
         DbT5101."ninteiChosainCode",
+        DbT5101."hihokenshaKubunCode",
+        DbT5120."shinseiTodokedeshaYubinNo",
+        DbT5120."shinseiTodokedeshaTelNo",
+        DbT5120."shinseiTodokedeshaJusho",
+        DbT5120."shinseiTodokedeshaShimei",
+        DbT5120."shinseiTodokedeshaTsuzukigara",
         DbT7051."shichosonMeisho",
         DbT5105."ninteichosaIraiKanryoYMD",
         DbT5201."ninteichosaIraiRirekiNo",
@@ -185,29 +490,8 @@
         DbT5202."tokki",
         DbT5202."tokkijikoUketsukeYMD",
         DbT5202."tokkijikoJuryoYMD",
-        DbT5206."jutakuKaishu",
-        DbT5206."tokubetsuKyufuService",
-        DbT5206."zaitakuService",
-        DbT5206."shuso",
-        DbT5206."kazokuJokyo",
-        DbT5206."kyojuKankyo",
-        DbT5206."kikaiKiki",
-        DbT5205."ninteichosaTokkijikoNo",
-        DbT5205."ninteichosaTokkijikoRemban" AS 認定調査特記事項番号,
-        DbT5205."genponMaskKubun",
-        DbT5205."tokkiJiko",
-        DbT5207."remban" AS 状況連番,
-        DbT5207."serviceJokyo" AS 状況,
-        DbT5208."remban" AS 状況フラグ連番,
-        DbT5208."serviceJokyoFlag" AS 状況フラグ,
-        DbT5209."remban" AS 記入項目連番,
-        DbT5209."serviceJokyoKinyu" AS 状況記入,
-        DbT5210."remban" AS 施設利用連番,
-        DbT5210."shisetsuRiyoFlag" AS 施設利用フラグ,
         DbT5203."ninchishoNichijoSeikatsuJiritsudoCode",
-        DbT5203."shogaiNichijoSeikatsuJiritsudoCode",
-        DbT5211."remban" AS 調査項目連番,
-        DbT5211."researchItem"
+        DbT5203."shogaiNichijoSeikatsuJiritsudoCode"
     FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
     INNER JOIN
@@ -218,6 +502,14 @@
         rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
     ON
         DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+    LEFT JOIN
+        rgdb."DbT5120ShinseitodokedeJoho" AS DbT5120
+    ON
+        DbT5120."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+    LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+    ON
+        DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
     LEFT JOIN
         rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
     ON
@@ -244,57 +536,16 @@
     LEFT JOIN
         rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
     ON
-        DbT5202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+    AND  DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
+    AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode"
     AND DbT5202."gaikyoChosaTextImageKubun" = #{imageKubun}
-    AND DbT5202."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
-    LEFT JOIN
-        rgdb."DbT5206GaikyoTokki" AS DbT5206
-    ON
-        DbT5206."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5206."ninteichosaRirekiNo"
-    AND DbT5206."gaikyoTokkiTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun"
-    LEFT JOIN
-        rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207
-    ON
-        DbT5207."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5207."ninteichosaRirekiNo"
-    AND DbT5207."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
-    LEFT JOIN
-        rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS DbT5208
-    ON
-        DbT5208."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5208."ninteichosaRirekiNo"
-    AND DbT5208."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
-    LEFT JOIN
-        rgdb."DbT5209NinteichosahyoKinyuItem" AS DbT5209
-    ON
-        DbT5209."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5209."ninteichosaRirekiNo"
-    AND DbT5209."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
-    LEFT JOIN
-        rgdb."DbT5210NinteichosahyoShisetsuRiyo"AS DbT5210
-    ON
-        DbT5210."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5210."ninteichosaRirekiNo"
-    AND DbT5210."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
     LEFT JOIN
         rgdb."DbT5203NinteichosahyoKihonChosa"AS DbT5203
     ON
-        DbT5203."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5203."ninteichosaRirekiNo"
-    AND DbT5203."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
-    LEFT JOIN
-        rgdb."DbT5211NinteichosahyoChosaItem"AS DbT5211
-    ON
-        DbT5211."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5211."ninteichosaRirekiNo"
-    AND DbT5211."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
-    LEFT JOIN
-        rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205
-    ON
-        DbT5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-    AND DbT5201."ninteichosaIraiRirekiNo" = DbT5205."ninteichosaRirekiNo"
+        DbT5203."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+    AND DbT5203."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
+    AND DbT5203."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode"
     WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
     AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -313,18 +564,96 @@
        AND DbT5201."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
-   <if test= "!isShichoson">
+   <if test= "!isShichoson">    
        AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
     </if>
-    ORDER BY
-       状況連番,
-       状況フラグ連番,
-       記入項目連番,
-       施設利用連番,
-       調査項目連番,
-       認定調査特記事項番号
   </select>
 
+  <select resultOrdered="true" id="getDbT5207" resultMap="resultMap_getCsvTable"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+      SELECT 
+      <include refid="selectItem" />,
+        DbT5207."remban" AS "状況連番",
+        DbT5207."serviceJokyo" AS "状況"
+      FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
+      LEFT JOIN 
+      rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207 
+      ON DbT5207."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      AND  DbT5207."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
+      AND DbT5207."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      ORDER BY
+        "申請書管理番号",
+        "状況連番"
+  </select>
+  
+  <select resultOrdered="true" id="getDbT5208" resultMap="resultMap_getCsvTable"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+      SELECT 
+      <include refid="selectItem" />,
+        DbT5208."remban" AS "状況フラグ連番",
+        DbT5208."serviceJokyoFlag" AS "状況フラグ"
+      FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
+      LEFT JOIN 
+      rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS DbT5208
+      ON DbT5208."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      AND DbT5208."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
+      AND DbT5208."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      ORDER BY
+        "申請書管理番号",
+        "状況フラグ連番"
+  </select>
+  
+  <select resultOrdered="true" id="getDbT5209" resultMap="resultMap_getCsvTable"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+      SELECT 
+      <include refid="selectItem" />,
+        DbT5209."remban" AS "記入項目連番",
+        DbT5209."serviceJokyoKinyu" AS "状況記入"
+      FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
+      LEFT JOIN 
+      rgdb."DbT5209NinteichosahyoKinyuItem" AS DbT5209
+      ON DbT5209."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      AND DbT5209."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
+      AND DbT5209."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      ORDER BY
+        "申請書管理番号",
+        "記入項目連番"
+  </select>
+  
+  <select resultOrdered="true" id="getDbT5210" resultMap="resultMap_getCsvTable"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+      SELECT 
+      <include refid="selectItem" />,
+        DbT5210."remban" AS "施設利用連番",
+        DbT5210."shisetsuRiyoFlag" AS "施設利用フラグ"
+      FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
+      LEFT JOIN 
+      rgdb."DbT5210NinteichosahyoShisetsuRiyo"AS DbT5210
+      ON DbT5210."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      AND DbT5210."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
+      AND DbT5210."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      ORDER BY
+        "申請書管理番号",
+        "施設利用連番"
+  </select>
+  
+  <select resultOrdered="true" id="getDbT5211" resultMap="resultMap_getCsvTable"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+      SELECT 
+      <include refid="selectItem" />,
+        DbT5211."remban" AS "調査項目連番",
+        DbT5211."researchItem" AS "調査項目"
+      FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
+      LEFT JOIN 
+      rgdb."DbT5211NinteichosahyoChosaItem"AS DbT5211
+      ON DbT5211."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      AND DbT5211."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
+      AND DbT5211."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      ORDER BY
+        "申請書管理番号",
+        "調査項目連番"
+  </select>
+  
     <select resultOrdered="true" id="getDbT5201NinteichosaIraiJoho"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
@@ -343,4 +672,1149 @@
      AND  "shinseishoKanriNo" IN #{shinseishoKanriNo}
     </if>
     </select>
+
+    <select resultOrdered="true" id="get前回申請管理番号List"
+            resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.ResultMap_DbT5121ShinseiRirekiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.DbT5121MybitisParameter" fetchSize="500">
+    SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.allColumns_DbT5121ShinseiRirekiJoho" />
+    FROM
+        rgdb."DbT5121ShinseiRirekiJoho"
+    WHERE
+        "shinseishoKanriNo" IN 
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+    </select>
+    
+    <resultMap id="resultMap_CsvOutPutTable"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity"
+               autoMapping="true">
+        <id column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association  property="今回分Entity"
+                     resultMap="resultMap_getCsvTable"/>
+        <association  property="前回分Entity"
+                     resultMap="resultMap_getCsvTableZenkai"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="getCsvTable" resultMap="resultMap_CsvOutPutTable"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputCsvMybitisParameter" fetchSize="500">
+        SELECT 
+        <include refid="selectItem" />,
+        <include refid="selectItemZenkai" />
+        FROM &quot;${csvTempTableName}&quot; AS "CsvTempTable"
+        LEFT JOIN
+        &quot;${csvTempTableNameZenkai}&quot; AS "CsvTempTableZenkai"
+        ON
+        "CsvTempTable".申請書管理番号 = "CsvTempTableZenkai".前回申請書管理番号
+    </select>
+      
+  <!--今回分のresultMap-->
+  <resultMap id="resultMap_getCsvTable" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回申請書管理番号" column="前回申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請区分_申請時_コード" column="認定申請区分_申請時_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名カナ" column="被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="年齢" column="年齢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査委託先コード" column="認定調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査員コード" column="認定調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査依頼完了年月日" column="認定調査依頼完了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査依頼履歴番号" column="認定調査依頼履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査員氏名" column="調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="イメージ区分" column="イメージ区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査依頼区分コード" column="認定調査依頼区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査回数" column="認定調査回数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査実施年月日" column="認定調査実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査受領年月日" column="認定調査受領年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査区分コード" column="認定調査区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査実施場所コード" column="認定調査実施場所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査実施場所名称" column="認定調査実施場所名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者郵便番号" column="申請届出者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者電話番号" column="申請届出者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者住所" column="申請届出者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者氏名" column="申請届出者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者続柄" column="申請届出者続柄" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス区分コード" column="サービス区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設名" column="利用施設名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設住所" column="利用施設住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設電話番号" column="利用施設電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設郵便番号" column="利用施設郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記" column="特記" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項受付年月日" column="認定調査特記事項受付年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項受領年月日" column="認定調査特記事項受領年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住宅改修" column="住宅改修" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村特別給付サービス種類名" column="市町村特別給付サービス種類名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="在宅サービス種類名" column="在宅サービス種類名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主訴" column="主訴" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="家族状況" column="家族状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住環境" column="居住環境" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機器_器械" column="機器_器械" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項番号" column="認定調査特記事項番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項連番" column="認定調査特記事項連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="原本マスク区分" column="原本マスク区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記事項" column="特記事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番" column="状況連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況" column="状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番1" column="状況連番1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況1" column="状況1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番2" column="状況連番2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況2" column="状況2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番3" column="状況連番3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況3" column="状況3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番4" column="状況連番4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況4" column="状況4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番5" column="状況連番5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況5" column="状況5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番6" column="状況連番6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況6" column="状況6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番7" column="状況連番7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況7" column="状況7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番8" column="状況連番8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況8" column="状況8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番9" column="状況連番9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況9" column="状況9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番10" column="状況連番10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況10" column="状況10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番11" column="状況連番11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況11" column="状況11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番12" column="状況連番12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況12" column="状況12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番13" column="状況連番13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況13" column="状況13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番14" column="状況連番14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況14" column="状況14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番15" column="状況連番15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況15" column="状況15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番16" column="状況連番16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況16" column="状況16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番17" column="状況連番17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況17" column="状況17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番18" column="状況連番18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況18" column="状況18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番19" column="状況連番19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況19" column="状況19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番20" column="状況連番20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況20" column="状況20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ連番" column="状況フラグ連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ" column="状況フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ連番1" column="状況フラグ連番1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ1" column="状況フラグ1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="記入項目連番" column="記入項目連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況記入" column="状況記入" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="記入項目連番1" column="記入項目連番1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況記入1" column="状況記入1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="記入項目連番2" column="記入項目連番2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況記入2" column="状況記入2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番" column="施設利用連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ" column="施設利用フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番1" column="施設利用連番1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ1" column="施設利用フラグ1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番2" column="施設利用連番2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ2" column="施設利用フラグ2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番3" column="施設利用連番3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ3" column="施設利用フラグ3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番4" column="施設利用連番4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ4" column="施設利用フラグ4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番5" column="施設利用連番5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ5" column="施設利用フラグ5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番6" column="施設利用連番6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ6" column="施設利用フラグ6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番7" column="施設利用連番7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ7" column="施設利用フラグ7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番8" column="施設利用連番8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ8" column="施設利用フラグ8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番9" column="施設利用連番9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ9" column="施設利用フラグ9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認知症日常生活自立度コード" column="認知症日常生活自立度コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="障害日常生活自立度コード" column="障害日常生活自立度コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番" column="調査項目連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目" column="調査項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番1" column="調査項目連番1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目1" column="調査項目1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番2" column="調査項目連番2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目2" column="調査項目2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番3" column="調査項目連番3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目3" column="調査項目3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番4" column="調査項目連番4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目4" column="調査項目4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番5" column="調査項目連番5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目5" column="調査項目5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番6" column="調査項目連番6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目6" column="調査項目6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番7" column="調査項目連番7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目7" column="調査項目7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番8" column="調査項目連番8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目8" column="調査項目8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番9" column="調査項目連番9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目9" column="調査項目9" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番10" column="調査項目連番10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目10" column="調査項目10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番11" column="調査項目連番11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目11" column="調査項目11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番12" column="調査項目連番12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目12" column="調査項目12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番13" column="調査項目連番13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目13" column="調査項目13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番14" column="調査項目連番14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目14" column="調査項目14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番15" column="調査項目連番15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目15" column="調査項目15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番16" column="調査項目連番16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目16" column="調査項目16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番17" column="調査項目連番17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目17" column="調査項目17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番18" column="調査項目連番18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目18" column="調査項目18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番19" column="調査項目連番19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目19" column="調査項目19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番20" column="調査項目連番20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目20" column="調査項目20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番21" column="調査項目連番21" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目21" column="調査項目21" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番22" column="調査項目連番22" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目22" column="調査項目22" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番23" column="調査項目連番23" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目23" column="調査項目23" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番24" column="調査項目連番24" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目24" column="調査項目24" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番25" column="調査項目連番25" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目25" column="調査項目25" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番26" column="調査項目連番26" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目26" column="調査項目26" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番27" column="調査項目連番27" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目27" column="調査項目27" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番28" column="調査項目連番28" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目28" column="調査項目28" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番29" column="調査項目連番29" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目29" column="調査項目29" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番30" column="調査項目連番30" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目30" column="調査項目30" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番31" column="調査項目連番31" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目31" column="調査項目31" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番32" column="調査項目連番32" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目32" column="調査項目32" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番33" column="調査項目連番33" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目33" column="調査項目33" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番34" column="調査項目連番34" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目34" column="調査項目34" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番35" column="調査項目連番35" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目35" column="調査項目35" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番36" column="調査項目連番36" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目36" column="調査項目36" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番37" column="調査項目連番37" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目37" column="調査項目37" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番38" column="調査項目連番38" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目38" column="調査項目38" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番39" column="調査項目連番39" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目39" column="調査項目39" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番40" column="調査項目連番40" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目40" column="調査項目40" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番41" column="調査項目連番41" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目41" column="調査項目41" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番42" column="調査項目連番42" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目42" column="調査項目42" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番43" column="調査項目連番43" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目43" column="調査項目43" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番44" column="調査項目連番44" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目44" column="調査項目44" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番45" column="調査項目連番45" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目45" column="調査項目45" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番46" column="調査項目連番46" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目46" column="調査項目46" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番47" column="調査項目連番47" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目47" column="調査項目47" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番48" column="調査項目連番48" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目48" column="調査項目48" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番49" column="調査項目連番49" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目49" column="調査項目49" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番50" column="調査項目連番50" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目50" column="調査項目50" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番51" column="調査項目連番51" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目51" column="調査項目51" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番52" column="調査項目連番52" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目52" column="調査項目52" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番53" column="調査項目連番53" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目53" column="調査項目53" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番54" column="調査項目連番54" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目54" column="調査項目54" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番55" column="調査項目連番55" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目55" column="調査項目55" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番56" column="調査項目連番56" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目56" column="調査項目56" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番57" column="調査項目連番57" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目57" column="調査項目57" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番58" column="調査項目連番58" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目58" column="調査項目58" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番59" column="調査項目連番59" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目59" column="調査項目59" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番60" column="調査項目連番60" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目60" column="調査項目60" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番61" column="調査項目連番61" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目61" column="調査項目61" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番62" column="調査項目連番62" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目62" column="調査項目62" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番63" column="調査項目連番63" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目63" column="調査項目63" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番64" column="調査項目連番64" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目64" column="調査項目64" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番65" column="調査項目連番65" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目65" column="調査項目65" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番66" column="調査項目連番66" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目66" column="調査項目66" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番67" column="調査項目連番67" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目67" column="調査項目67" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番68" column="調査項目連番68" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目68" column="調査項目68" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番69" column="調査項目連番69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目69" column="調査項目69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番70" column="調査項目連番70" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目70" column="調査項目70" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番71" column="調査項目連番71" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目71" column="調査項目71" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番72" column="調査項目連番72" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目72" column="調査項目72" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番73" column="調査項目連番73" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目73" column="調査項目73" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番74" column="調査項目連番74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目74" column="調査項目74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+  </resultMap>
+  
+  <!--前回分のresultMap-->
+  <resultMap id="resultMap_getCsvTableZenkai" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回申請書管理番号" column="前回申請書管理番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請区分_申請時_コード" column="認定申請区分_申請時_コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名カナ" column="被保険者氏名カナ_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="生年月日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="年齢" column="年齢_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別" column="性別_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="電話番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査委託先コード" column="認定調査委託先コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査員コード" column="認定調査員コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者区分コード" column="被保険者区分コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村名称" column="市町村名称_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査依頼完了年月日" column="認定調査依頼完了年月日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査依頼履歴番号" column="認定調査依頼履歴番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者名称" column="事業者名称_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査員氏名" column="調査員氏名_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="イメージ区分" column="イメージ区分_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査依頼区分コード" column="認定調査依頼区分コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査回数" column="認定調査回数_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査実施年月日" column="認定調査実施年月日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査受領年月日" column="認定調査受領年月日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査区分コード" column="認定調査区分コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査実施場所コード" column="認定調査実施場所コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査実施場所名称" column="認定調査実施場所名称_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者郵便番号" column="申請届出者郵便番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者電話番号" column="申請届出者電話番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者住所" column="申請届出者住所_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者氏名" column="申請届出者氏名_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請届出者続柄" column="申請届出者続柄_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービス区分コード" column="サービス区分コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設名" column="利用施設名_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設住所" column="利用施設住所_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設電話番号" column="利用施設電話番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="利用施設郵便番号" column="利用施設郵便番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記" column="特記_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項受付年月日" column="認定調査特記事項受付年月日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項受領年月日" column="認定調査特記事項受領年月日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住宅改修" column="住宅改修_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村特別給付サービス種類名" column="市町村特別給付サービス種類名_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="在宅サービス種類名" column="在宅サービス種類名_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主訴" column="主訴_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="家族状況" column="家族状況_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="居住環境" column="居住環境_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="機器_器械" column="機器_器械_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項番号" column="認定調査特記事項番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項連番" column="認定調査特記事項連番_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="原本マスク区分" column="原本マスク区分_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記事項" column="特記事項_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番" column="状況連番_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況" column="状況_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番1" column="状況連番1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況1" column="状況1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番2" column="状況連番2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況2" column="状況2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番3" column="状況連番3_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況3" column="状況3_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番4" column="状況連番4_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況4" column="状況4_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番5" column="状況連番5_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況5" column="状況5_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番6" column="状況連番6_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況6" column="状況6_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番7" column="状況連番7_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況7" column="状況7_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番8" column="状況連番8_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況8" column="状況8_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番9" column="状況連番9_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況9" column="状況9_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番10" column="状況連番10_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況10" column="状況10_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番11" column="状況連番11_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況11" column="状況11_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番12" column="状況連番12_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況12" column="状況12_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番13" column="状況連番13_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況13" column="状況13_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番14" column="状況連番14_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況14" column="状況14_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番15" column="状況連番15_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況15" column="状況15_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番16" column="状況連番16_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況16" column="状況16_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番17" column="状況連番17_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況17" column="状況17_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番18" column="状況連番18_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況18" column="状況18_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番19" column="状況連番19_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況19" column="状況19_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況連番20" column="状況連番20_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況20" column="状況20_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ連番" column="状況フラグ連番_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ" column="状況フラグ_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ連番1" column="状況フラグ連番1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況フラグ1" column="状況フラグ1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="記入項目連番" column="記入項目連番_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況記入" column="状況記入_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="記入項目連番1" column="記入項目連番1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況記入1" column="状況記入1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="記入項目連番2" column="記入項目連番2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="状況記入2" column="状況記入2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番" column="施設利用連番_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ" column="施設利用フラグ_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番1" column="施設利用連番1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ1" column="施設利用フラグ1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番2" column="施設利用連番2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ2" column="施設利用フラグ2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番3" column="施設利用連番3_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ3" column="施設利用フラグ3_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番4" column="施設利用連番4_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ4" column="施設利用フラグ4_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番5" column="施設利用連番5_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ5" column="施設利用フラグ5_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番6" column="施設利用連番6_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ6" column="施設利用フラグ6_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番7" column="施設利用連番7_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ7" column="施設利用フラグ7_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番8" column="施設利用連番8_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ8" column="施設利用フラグ8_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用連番9" column="施設利用連番9_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用フラグ9" column="施設利用フラグ9_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認知症日常生活自立度コード" column="認知症日常生活自立度コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="障害日常生活自立度コード" column="障害日常生活自立度コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番" column="調査項目連番_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目" column="調査項目_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番1" column="調査項目連番1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目1" column="調査項目1_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番2" column="調査項目連番2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目2" column="調査項目2_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番3" column="調査項目連番3_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目3" column="調査項目3_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番4" column="調査項目連番4_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目4" column="調査項目4_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番5" column="調査項目連番5_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目5" column="調査項目5_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番6" column="調査項目連番6_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目6" column="調査項目6_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番7" column="調査項目連番7_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目7" column="調査項目7_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番8" column="調査項目連番8_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目8" column="調査項目8_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番9" column="調査項目連番9_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目9" column="調査項目9_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番10" column="調査項目連番10_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目10" column="調査項目10_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番11" column="調査項目連番11_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目11" column="調査項目11_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番12" column="調査項目連番12_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目12" column="調査項目12_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番13" column="調査項目連番13_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目13" column="調査項目13_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番14" column="調査項目連番14_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目14" column="調査項目14_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番15" column="調査項目連番15_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目15" column="調査項目15_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番16" column="調査項目連番16_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目16" column="調査項目16_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番17" column="調査項目連番17_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目17" column="調査項目17_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番18" column="調査項目連番18_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目18" column="調査項目18_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番19" column="調査項目連番19_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目19" column="調査項目19_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番20" column="調査項目連番20_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目20" column="調査項目20_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番21" column="調査項目連番21_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目21" column="調査項目21_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番22" column="調査項目連番22_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目22" column="調査項目22_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番23" column="調査項目連番23_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目23" column="調査項目23_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番24" column="調査項目連番24_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目24" column="調査項目24_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番25" column="調査項目連番25_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目25" column="調査項目25_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番26" column="調査項目連番26_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目26" column="調査項目26_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番27" column="調査項目連番27_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目27" column="調査項目27_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番28" column="調査項目連番28_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目28" column="調査項目28_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番29" column="調査項目連番29_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目29" column="調査項目29_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番30" column="調査項目連番30_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目30" column="調査項目30_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番31" column="調査項目連番31_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目31" column="調査項目31_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番32" column="調査項目連番32_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目32" column="調査項目32_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番33" column="調査項目連番33_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目33" column="調査項目33_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番34" column="調査項目連番34_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目34" column="調査項目34_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番35" column="調査項目連番35_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目35" column="調査項目35_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番36" column="調査項目連番36_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目36" column="調査項目36_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番37" column="調査項目連番37_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目37" column="調査項目37_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番38" column="調査項目連番38_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目38" column="調査項目38_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番39" column="調査項目連番39_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目39" column="調査項目39_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番40" column="調査項目連番40_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目40" column="調査項目40_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番41" column="調査項目連番41_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目41" column="調査項目41_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番42" column="調査項目連番42_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目42" column="調査項目42_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番43" column="調査項目連番43_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目43" column="調査項目43_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番44" column="調査項目連番44_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目44" column="調査項目44_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番45" column="調査項目連番45_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目45" column="調査項目45_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番46" column="調査項目連番46_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目46" column="調査項目46_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番47" column="調査項目連番47_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目47" column="調査項目47_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番48" column="調査項目連番48_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目48" column="調査項目48_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番49" column="調査項目連番49_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目49" column="調査項目49_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番50" column="調査項目連番50_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目50" column="調査項目50_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番51" column="調査項目連番51_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目51" column="調査項目51_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番52" column="調査項目連番52_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目52" column="調査項目52_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番53" column="調査項目連番53_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目53" column="調査項目53_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番54" column="調査項目連番54_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目54" column="調査項目54_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番55" column="調査項目連番55_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目55" column="調査項目55_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番56" column="調査項目連番56_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目56" column="調査項目56_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番57" column="調査項目連番57_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目57" column="調査項目57_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番58" column="調査項目連番58_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目58" column="調査項目58_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番59" column="調査項目連番59_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目59" column="調査項目59_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番60" column="調査項目連番60_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目60" column="調査項目60_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番61" column="調査項目連番61_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目61" column="調査項目61_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番62" column="調査項目連番62_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目62" column="調査項目62_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番63" column="調査項目連番63_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目63" column="調査項目63_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番64" column="調査項目連番64_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目64" column="調査項目64_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番65" column="調査項目連番65_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目65" column="調査項目65_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番66" column="調査項目連番66_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目66" column="調査項目66_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番67" column="調査項目連番67_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目67" column="調査項目67_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番68" column="調査項目連番68_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目68" column="調査項目68_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番69" column="調査項目連番69_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目69" column="調査項目69_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番70" column="調査項目連番70_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目70" column="調査項目70_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番71" column="調査項目連番71_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目71" column="調査項目71_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番72" column="調査項目連番72_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目72" column="調査項目72_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番73" column="調査項目連番73_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目73" column="調査項目73_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目連番74" column="調査項目連番74_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目74" column="調査項目74_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+  </resultMap>
+      
+    <sql id="selectItem">
+      "CsvTempTable"."申請書管理番号"
+      ,"CsvTempTable"."前回申請書管理番号"
+      ,"CsvTempTable"."厚労省IF識別コード"
+      ,"CsvTempTable"."証記載保険者番号"
+      ,"CsvTempTable"."被保険者番号"
+      ,"CsvTempTable"."認定申請年月日"
+      ,"CsvTempTable"."認定申請区分_申請時_コード"
+      ,"CsvTempTable"."被保険者氏名"
+      ,"CsvTempTable"."被保険者氏名カナ"
+      ,"CsvTempTable"."生年月日"
+      ,"CsvTempTable"."年齢"
+      ,"CsvTempTable"."性別"
+      ,"CsvTempTable"."郵便番号"
+      ,"CsvTempTable"."住所"
+      ,"CsvTempTable"."電話番号"
+      ,"CsvTempTable"."認定調査委託先コード"
+      ,"CsvTempTable"."認定調査員コード"
+      ,"CsvTempTable"."被保険者区分コード"
+      ,"CsvTempTable"."市町村名称"
+      ,"CsvTempTable"."認定調査依頼完了年月日"
+      ,"CsvTempTable"."認定調査依頼履歴番号"
+      ,"CsvTempTable"."事業者名称"
+      ,"CsvTempTable"."調査員氏名"
+      ,"CsvTempTable"."イメージ区分"
+      ,"CsvTempTable"."認定調査依頼区分コード"
+      ,"CsvTempTable"."認定調査回数"
+      ,"CsvTempTable"."認定調査実施年月日"
+      ,"CsvTempTable"."認定調査受領年月日"
+      ,"CsvTempTable"."認定調査区分コード"
+      ,"CsvTempTable"."認定調査実施場所コード"
+      ,"CsvTempTable"."認定調査実施場所名称"
+      ,"CsvTempTable"."申請届出者郵便番号" AS "申請届出者郵便番号"
+      ,"CsvTempTable"."申請届出者電話番号" AS "申請届出者電話番号"
+      ,"CsvTempTable"."申請届出者住所" AS "申請届出者住所"
+      ,"CsvTempTable"."申請届出者氏名" AS "申請届出者氏名"
+      ,"CsvTempTable"."申請届出者続柄" AS "申請届出者続柄"
+      ,"CsvTempTable"."サービス区分コード"
+      ,"CsvTempTable"."利用施設名"
+      ,"CsvTempTable"."利用施設住所"
+      ,"CsvTempTable"."利用施設電話番号"
+      ,"CsvTempTable"."利用施設郵便番号"
+      ,"CsvTempTable"."特記"
+      ,"CsvTempTable"."認定調査特記事項受付年月日"
+      ,"CsvTempTable"."認定調査特記事項受領年月日"
+      ,"CsvTempTable"."住宅改修"
+      ,"CsvTempTable"."市町村特別給付サービス種類名"
+      ,"CsvTempTable"."在宅サービス種類名"
+      ,"CsvTempTable"."主訴"
+      ,"CsvTempTable"."家族状況"
+      ,"CsvTempTable"."居住環境"
+      ,"CsvTempTable"."機器_器械"
+      ,"CsvTempTable"."認定調査特記事項番号"
+      ,"CsvTempTable"."認定調査特記事項連番"
+      ,"CsvTempTable"."原本マスク区分"
+      ,"CsvTempTable"."特記事項"
+      ,"CsvTempTable"."状況連番1"
+      ,"CsvTempTable"."状況1"
+      ,"CsvTempTable"."状況連番2"
+      ,"CsvTempTable"."状況2"
+      ,"CsvTempTable"."状況連番3"
+      ,"CsvTempTable"."状況3"
+      ,"CsvTempTable"."状況連番4"
+      ,"CsvTempTable"."状況4"
+      ,"CsvTempTable"."状況連番5"
+      ,"CsvTempTable"."状況5"
+      ,"CsvTempTable"."状況連番6"
+      ,"CsvTempTable"."状況6"
+      ,"CsvTempTable"."状況連番7"
+      ,"CsvTempTable"."状況7"
+      ,"CsvTempTable"."状況連番8"
+      ,"CsvTempTable"."状況8"
+      ,"CsvTempTable"."状況連番9"
+      ,"CsvTempTable"."状況9"
+      ,"CsvTempTable"."状況連番10"
+      ,"CsvTempTable"."状況10"
+      ,"CsvTempTable"."状況連番11"
+      ,"CsvTempTable"."状況11"
+      ,"CsvTempTable"."状況連番12"
+      ,"CsvTempTable"."状況12"
+      ,"CsvTempTable"."状況連番13"
+      ,"CsvTempTable"."状況13"
+      ,"CsvTempTable"."状況連番14"
+      ,"CsvTempTable"."状況14"
+      ,"CsvTempTable"."状況連番15"
+      ,"CsvTempTable"."状況15"
+      ,"CsvTempTable"."状況連番16"
+      ,"CsvTempTable"."状況16"
+      ,"CsvTempTable"."状況連番17"
+      ,"CsvTempTable"."状況17"
+      ,"CsvTempTable"."状況連番18"
+      ,"CsvTempTable"."状況18"
+      ,"CsvTempTable"."状況連番19"
+      ,"CsvTempTable"."状況19"
+      ,"CsvTempTable"."状況連番20"
+      ,"CsvTempTable"."状況20"
+      ,"CsvTempTable"."状況フラグ連番1"
+      ,"CsvTempTable"."状況フラグ1"
+      ,"CsvTempTable"."記入項目連番1"
+      ,"CsvTempTable"."状況記入1"
+      ,"CsvTempTable"."記入項目連番2"
+      ,"CsvTempTable"."状況記入2"
+      ,"CsvTempTable"."施設利用連番1"
+      ,"CsvTempTable"."施設利用フラグ1"
+      ,"CsvTempTable"."施設利用連番2"
+      ,"CsvTempTable"."施設利用フラグ2"
+      ,"CsvTempTable"."施設利用連番3"
+      ,"CsvTempTable"."施設利用フラグ3"
+      ,"CsvTempTable"."施設利用連番4"
+      ,"CsvTempTable"."施設利用フラグ4"
+      ,"CsvTempTable"."施設利用連番5"
+      ,"CsvTempTable"."施設利用フラグ5"
+      ,"CsvTempTable"."施設利用連番6"
+      ,"CsvTempTable"."施設利用フラグ6"
+      ,"CsvTempTable"."施設利用連番7"
+      ,"CsvTempTable"."施設利用フラグ7"
+      ,"CsvTempTable"."施設利用連番8"
+      ,"CsvTempTable"."施設利用フラグ8"
+      ,"CsvTempTable"."施設利用連番9"
+      ,"CsvTempTable"."施設利用フラグ9"
+      ,"CsvTempTable"."認知症日常生活自立度コード"
+      ,"CsvTempTable"."障害日常生活自立度コード"
+      ,"CsvTempTable"."調査項目連番1"
+      ,"CsvTempTable"."調査項目1"
+      ,"CsvTempTable"."調査項目連番2"
+      ,"CsvTempTable"."調査項目2"
+      ,"CsvTempTable"."調査項目連番3"
+      ,"CsvTempTable"."調査項目3"
+      ,"CsvTempTable"."調査項目連番4"
+      ,"CsvTempTable"."調査項目4"
+      ,"CsvTempTable"."調査項目連番5"
+      ,"CsvTempTable"."調査項目5"
+      ,"CsvTempTable"."調査項目連番6"
+      ,"CsvTempTable"."調査項目6"
+      ,"CsvTempTable"."調査項目連番7"
+      ,"CsvTempTable"."調査項目7"
+      ,"CsvTempTable"."調査項目連番8"
+      ,"CsvTempTable"."調査項目8"
+      ,"CsvTempTable"."調査項目連番9"
+      ,"CsvTempTable"."調査項目9"
+      ,"CsvTempTable"."調査項目連番10"
+      ,"CsvTempTable"."調査項目10"
+      ,"CsvTempTable"."調査項目連番11"
+      ,"CsvTempTable"."調査項目11"
+      ,"CsvTempTable"."調査項目連番12"
+      ,"CsvTempTable"."調査項目12"
+      ,"CsvTempTable"."調査項目連番13"
+      ,"CsvTempTable"."調査項目13"
+      ,"CsvTempTable"."調査項目連番14"
+      ,"CsvTempTable"."調査項目14"
+      ,"CsvTempTable"."調査項目連番15"
+      ,"CsvTempTable"."調査項目15"
+      ,"CsvTempTable"."調査項目連番16"
+      ,"CsvTempTable"."調査項目16"
+      ,"CsvTempTable"."調査項目連番17"
+      ,"CsvTempTable"."調査項目17"
+      ,"CsvTempTable"."調査項目連番18"
+      ,"CsvTempTable"."調査項目18"
+      ,"CsvTempTable"."調査項目連番19"
+      ,"CsvTempTable"."調査項目19"
+      ,"CsvTempTable"."調査項目連番20"
+      ,"CsvTempTable"."調査項目20"
+      ,"CsvTempTable"."調査項目連番21"
+      ,"CsvTempTable"."調査項目21"
+      ,"CsvTempTable"."調査項目連番22"
+      ,"CsvTempTable"."調査項目22"
+      ,"CsvTempTable"."調査項目連番23"
+      ,"CsvTempTable"."調査項目23"
+      ,"CsvTempTable"."調査項目連番24"
+      ,"CsvTempTable"."調査項目24"
+      ,"CsvTempTable"."調査項目連番25"
+      ,"CsvTempTable"."調査項目25"
+      ,"CsvTempTable"."調査項目連番26"
+      ,"CsvTempTable"."調査項目26"
+      ,"CsvTempTable"."調査項目連番27"
+      ,"CsvTempTable"."調査項目27"
+      ,"CsvTempTable"."調査項目連番28"
+      ,"CsvTempTable"."調査項目28"
+      ,"CsvTempTable"."調査項目連番29"
+      ,"CsvTempTable"."調査項目29"
+      ,"CsvTempTable"."調査項目連番30"
+      ,"CsvTempTable"."調査項目30"
+      ,"CsvTempTable"."調査項目連番31"
+      ,"CsvTempTable"."調査項目31"
+      ,"CsvTempTable"."調査項目連番32"
+      ,"CsvTempTable"."調査項目32"
+      ,"CsvTempTable"."調査項目連番33"
+      ,"CsvTempTable"."調査項目33"
+      ,"CsvTempTable"."調査項目連番34"
+      ,"CsvTempTable"."調査項目34"
+      ,"CsvTempTable"."調査項目連番35"
+      ,"CsvTempTable"."調査項目35"
+      ,"CsvTempTable"."調査項目連番36"
+      ,"CsvTempTable"."調査項目36"
+      ,"CsvTempTable"."調査項目連番37"
+      ,"CsvTempTable"."調査項目37"
+      ,"CsvTempTable"."調査項目連番38"
+      ,"CsvTempTable"."調査項目38"
+      ,"CsvTempTable"."調査項目連番39"
+      ,"CsvTempTable"."調査項目39"
+      ,"CsvTempTable"."調査項目連番40"
+      ,"CsvTempTable"."調査項目40"
+      ,"CsvTempTable"."調査項目連番41"
+      ,"CsvTempTable"."調査項目41"
+      ,"CsvTempTable"."調査項目連番42"
+      ,"CsvTempTable"."調査項目42"
+      ,"CsvTempTable"."調査項目連番43"
+      ,"CsvTempTable"."調査項目43"
+      ,"CsvTempTable"."調査項目連番44"
+      ,"CsvTempTable"."調査項目44"
+      ,"CsvTempTable"."調査項目連番45"
+      ,"CsvTempTable"."調査項目45"
+      ,"CsvTempTable"."調査項目連番46"
+      ,"CsvTempTable"."調査項目46"
+      ,"CsvTempTable"."調査項目連番47"
+      ,"CsvTempTable"."調査項目47"
+      ,"CsvTempTable"."調査項目連番48"
+      ,"CsvTempTable"."調査項目48"
+      ,"CsvTempTable"."調査項目連番49"
+      ,"CsvTempTable"."調査項目49"
+      ,"CsvTempTable"."調査項目連番50"
+      ,"CsvTempTable"."調査項目50"
+      ,"CsvTempTable"."調査項目連番51"
+      ,"CsvTempTable"."調査項目51"
+      ,"CsvTempTable"."調査項目連番52"
+      ,"CsvTempTable"."調査項目52"
+      ,"CsvTempTable"."調査項目連番53"
+      ,"CsvTempTable"."調査項目53"
+      ,"CsvTempTable"."調査項目連番54"
+      ,"CsvTempTable"."調査項目54"
+      ,"CsvTempTable"."調査項目連番55"
+      ,"CsvTempTable"."調査項目55"
+      ,"CsvTempTable"."調査項目連番56"
+      ,"CsvTempTable"."調査項目56"
+      ,"CsvTempTable"."調査項目連番57"
+      ,"CsvTempTable"."調査項目57"
+      ,"CsvTempTable"."調査項目連番58"
+      ,"CsvTempTable"."調査項目58"
+      ,"CsvTempTable"."調査項目連番59"
+      ,"CsvTempTable"."調査項目59"
+      ,"CsvTempTable"."調査項目連番60"
+      ,"CsvTempTable"."調査項目60"
+      ,"CsvTempTable"."調査項目連番61"
+      ,"CsvTempTable"."調査項目61"
+      ,"CsvTempTable"."調査項目連番62"
+      ,"CsvTempTable"."調査項目62"
+      ,"CsvTempTable"."調査項目連番63"
+      ,"CsvTempTable"."調査項目63"
+      ,"CsvTempTable"."調査項目連番64"
+      ,"CsvTempTable"."調査項目64"
+      ,"CsvTempTable"."調査項目連番65"
+      ,"CsvTempTable"."調査項目65"
+      ,"CsvTempTable"."調査項目連番66"
+      ,"CsvTempTable"."調査項目66"
+      ,"CsvTempTable"."調査項目連番67"
+      ,"CsvTempTable"."調査項目67"
+      ,"CsvTempTable"."調査項目連番68"
+      ,"CsvTempTable"."調査項目68"
+      ,"CsvTempTable"."調査項目連番69"
+      ,"CsvTempTable"."調査項目69"
+      ,"CsvTempTable"."調査項目連番70"
+      ,"CsvTempTable"."調査項目70"
+      ,"CsvTempTable"."調査項目連番71"
+      ,"CsvTempTable"."調査項目71"
+      ,"CsvTempTable"."調査項目連番72"
+      ,"CsvTempTable"."調査項目72"
+      ,"CsvTempTable"."調査項目連番73"
+      ,"CsvTempTable"."調査項目73"
+      ,"CsvTempTable"."調査項目連番74"
+      ,"CsvTempTable"."調査項目74"
+    </sql>
+
+    <sql id="selectItemZenkai">
+      "CsvTempTableZenkai"."申請書管理番号" AS "申請書管理番号_前回"
+      ,"CsvTempTableZenkai"."前回申請書管理番号" AS "前回申請書管理番号_前回"
+      ,"CsvTempTableZenkai"."厚労省IF識別コード" AS "厚労省IF識別コード_前回"
+      ,"CsvTempTableZenkai"."証記載保険者番号" AS "証記載保険者番号_前回"
+      ,"CsvTempTableZenkai"."被保険者番号" AS "被保険者番号_前回"
+      ,"CsvTempTableZenkai"."認定申請年月日" AS "認定申請年月日_前回"
+      ,"CsvTempTableZenkai"."認定申請区分_申請時_コード" AS "認定申請区分_申請時_コード_前回"
+      ,"CsvTempTableZenkai"."被保険者氏名" AS "被保険者氏名_前回"
+      ,"CsvTempTableZenkai"."被保険者氏名カナ" AS "被保険者氏名カナ_前回"
+      ,"CsvTempTableZenkai"."生年月日" AS "生年月日_前回"
+      ,"CsvTempTableZenkai"."年齢" AS "年齢_前回"
+      ,"CsvTempTableZenkai"."性別" AS "性別_前回"
+      ,"CsvTempTableZenkai"."郵便番号" AS "郵便番号_前回"
+      ,"CsvTempTableZenkai"."住所" AS "住所_前回"
+      ,"CsvTempTableZenkai"."電話番号" AS "電話番号_前回"
+      ,"CsvTempTableZenkai"."認定調査委託先コード" AS "認定調査委託先コード_前回"
+      ,"CsvTempTableZenkai"."認定調査員コード" AS "認定調査員コード_前回"
+      ,"CsvTempTableZenkai"."被保険者区分コード" AS "被保険者区分コード_前回"
+      ,"CsvTempTableZenkai"."市町村名称" AS "市町村名称_前回"
+      ,"CsvTempTableZenkai"."認定調査依頼完了年月日" AS "認定調査依頼完了年月日_前回"
+      ,"CsvTempTableZenkai"."認定調査依頼履歴番号" AS "認定調査依頼履歴番号_前回"
+      ,"CsvTempTableZenkai"."事業者名称" AS "事業者名称_前回"
+      ,"CsvTempTableZenkai"."調査員氏名" AS "調査員氏名_前回"
+      ,"CsvTempTableZenkai"."イメージ区分" AS "イメージ区分_前回"
+      ,"CsvTempTableZenkai"."認定調査依頼区分コード" AS "認定調査依頼区分コード_前回"
+      ,"CsvTempTableZenkai"."認定調査回数" AS "認定調査回数_前回"
+      ,"CsvTempTableZenkai"."認定調査実施年月日" AS "認定調査実施年月日_前回"
+      ,"CsvTempTableZenkai"."認定調査受領年月日" AS "認定調査受領年月日_前回"
+      ,"CsvTempTableZenkai"."認定調査区分コード" AS "認定調査区分コード_前回"
+      ,"CsvTempTableZenkai"."認定調査実施場所コード" AS "認定調査実施場所コード_前回"
+      ,"CsvTempTableZenkai"."認定調査実施場所名称" AS "認定調査実施場所名称_前回"
+      ,"CsvTempTableZenkai"."申請届出者郵便番号" AS "申請届出者郵便番号_前回"
+      ,"CsvTempTableZenkai"."申請届出者電話番号" AS "申請届出者電話番号_前回"
+      ,"CsvTempTableZenkai"."申請届出者住所" AS "申請届出者住所_前回"
+      ,"CsvTempTableZenkai"."申請届出者氏名" AS "申請届出者氏名_前回"
+      ,"CsvTempTableZenkai"."申請届出者続柄" AS "申請届出者続柄_前回"
+      ,"CsvTempTableZenkai"."サービス区分コード" AS "サービス区分コード_前回"
+      ,"CsvTempTableZenkai"."利用施設名" AS "利用施設名_前回"
+      ,"CsvTempTableZenkai"."利用施設住所" AS "利用施設住所_前回"
+      ,"CsvTempTableZenkai"."利用施設電話番号" AS "利用施設電話番号_前回"
+      ,"CsvTempTableZenkai"."利用施設郵便番号" AS "利用施設郵便番号_前回"
+      ,"CsvTempTableZenkai"."特記" AS "特記_前回"
+      ,"CsvTempTableZenkai"."認定調査特記事項受付年月日" AS "認定調査特記事項受付年月日_前回"
+      ,"CsvTempTableZenkai"."認定調査特記事項受領年月日" AS "認定調査特記事項受領年月日_前回"
+      ,"CsvTempTableZenkai"."住宅改修" AS "住宅改修_前回"
+      ,"CsvTempTableZenkai"."市町村特別給付サービス種類名" AS "市町村特別給付サービス種類名_前回"
+      ,"CsvTempTableZenkai"."在宅サービス種類名" AS "在宅サービス種類名_前回"
+      ,"CsvTempTableZenkai"."主訴" AS "主訴_前回"
+      ,"CsvTempTableZenkai"."家族状況" AS "家族状況_前回"
+      ,"CsvTempTableZenkai"."居住環境" AS "居住環境_前回"
+      ,"CsvTempTableZenkai"."機器_器械" AS "機器_器械_前回"
+      ,"CsvTempTableZenkai"."認定調査特記事項番号" AS "認定調査特記事項番号_前回"
+      ,"CsvTempTableZenkai"."認定調査特記事項連番" AS "認定調査特記事項連番_前回"
+      ,"CsvTempTableZenkai"."原本マスク区分" AS "原本マスク区分_前回"
+      ,"CsvTempTableZenkai"."特記事項" AS "特記事項_前回"
+      ,"CsvTempTableZenkai"."状況連番1" AS "状況連番1_前回"
+      ,"CsvTempTableZenkai"."状況1" AS "状況1_前回"
+      ,"CsvTempTableZenkai"."状況連番2" AS "状況連番2_前回"
+      ,"CsvTempTableZenkai"."状況2" AS "状況2_前回"
+      ,"CsvTempTableZenkai"."状況連番3" AS "状況連番3_前回"
+      ,"CsvTempTableZenkai"."状況3" AS "状況3_前回"
+      ,"CsvTempTableZenkai"."状況連番4" AS "状況連番4_前回"
+      ,"CsvTempTableZenkai"."状況4" AS "状況4_前回"
+      ,"CsvTempTableZenkai"."状況連番5" AS "状況連番5_前回"
+      ,"CsvTempTableZenkai"."状況5" AS "状況5_前回"
+      ,"CsvTempTableZenkai"."状況連番6" AS "状況連番6_前回"
+      ,"CsvTempTableZenkai"."状況6" AS "状況6_前回"
+      ,"CsvTempTableZenkai"."状況連番7" AS "状況連番7_前回"
+      ,"CsvTempTableZenkai"."状況7" AS "状況7_前回"
+      ,"CsvTempTableZenkai"."状況連番8" AS "状況連番8_前回"
+      ,"CsvTempTableZenkai"."状況8" AS "状況8_前回"
+      ,"CsvTempTableZenkai"."状況連番9" AS "状況連番9_前回"
+      ,"CsvTempTableZenkai"."状況9" AS "状況9_前回"
+      ,"CsvTempTableZenkai"."状況連番10" AS "状況連番10_前回"
+      ,"CsvTempTableZenkai"."状況10" AS "状況10_前回"
+      ,"CsvTempTableZenkai"."状況連番11" AS "状況連番11_前回"
+      ,"CsvTempTableZenkai"."状況11" AS "状況11_前回"
+      ,"CsvTempTableZenkai"."状況連番12" AS "状況連番12_前回"
+      ,"CsvTempTableZenkai"."状況12" AS "状況12_前回"
+      ,"CsvTempTableZenkai"."状況連番13" AS "状況連番13_前回"
+      ,"CsvTempTableZenkai"."状況13" AS "状況13_前回"
+      ,"CsvTempTableZenkai"."状況連番14" AS "状況連番14_前回"
+      ,"CsvTempTableZenkai"."状況14" AS "状況14_前回"
+      ,"CsvTempTableZenkai"."状況連番15" AS "状況連番15_前回"
+      ,"CsvTempTableZenkai"."状況15" AS "状況15_前回"
+      ,"CsvTempTableZenkai"."状況連番16" AS "状況連番16_前回"
+      ,"CsvTempTableZenkai"."状況16" AS "状況16_前回"
+      ,"CsvTempTableZenkai"."状況連番17" AS "状況連番17_前回"
+      ,"CsvTempTableZenkai"."状況17" AS "状況17_前回"
+      ,"CsvTempTableZenkai"."状況連番18" AS "状況連番18_前回"
+      ,"CsvTempTableZenkai"."状況18" AS "状況18_前回"
+      ,"CsvTempTableZenkai"."状況連番19" AS "状況連番19_前回"
+      ,"CsvTempTableZenkai"."状況19" AS "状況19_前回"
+      ,"CsvTempTableZenkai"."状況連番20" AS "状況連番20_前回"
+      ,"CsvTempTableZenkai"."状況20" AS "状況20_前回"
+      ,"CsvTempTableZenkai"."状況フラグ連番1" AS "状況フラグ連番1_前回"
+      ,"CsvTempTableZenkai"."状況フラグ1" AS "状況フラグ1_前回"
+      ,"CsvTempTableZenkai"."記入項目連番1" AS "記入項目連番1_前回"
+      ,"CsvTempTableZenkai"."状況記入1" AS "状況記入1_前回"
+      ,"CsvTempTableZenkai"."記入項目連番2" AS "記入項目連番2_前回"
+      ,"CsvTempTableZenkai"."状況記入2" AS "状況記入2_前回"
+      ,"CsvTempTableZenkai"."施設利用連番1" AS "施設利用連番1_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ1" AS "施設利用フラグ1_前回"
+      ,"CsvTempTableZenkai"."施設利用連番2" AS "施設利用連番2_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ2" AS "施設利用フラグ2_前回"
+      ,"CsvTempTableZenkai"."施設利用連番3" AS "施設利用連番3_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ3" AS "施設利用フラグ3_前回"
+      ,"CsvTempTableZenkai"."施設利用連番4" AS "施設利用連番4_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ4" AS "施設利用フラグ4_前回"
+      ,"CsvTempTableZenkai"."施設利用連番5" AS "施設利用連番5_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ5" AS "施設利用フラグ5_前回"
+      ,"CsvTempTableZenkai"."施設利用連番6" AS "施設利用連番6_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ6" AS "施設利用フラグ6_前回"
+      ,"CsvTempTableZenkai"."施設利用連番7" AS "施設利用連番7_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ7" AS "施設利用フラグ7_前回"
+      ,"CsvTempTableZenkai"."施設利用連番8" AS "施設利用連番8_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ8" AS "施設利用フラグ8_前回"
+      ,"CsvTempTableZenkai"."施設利用連番9" AS "施設利用連番9_前回"
+      ,"CsvTempTableZenkai"."施設利用フラグ9" AS "施設利用フラグ9_前回"
+      ,"CsvTempTableZenkai"."認知症日常生活自立度コード" AS "認知症日常生活自立度コード_前回"
+      ,"CsvTempTableZenkai"."障害日常生活自立度コード" AS "障害日常生活自立度コード_前回"
+      ,"CsvTempTableZenkai"."調査項目連番1" AS "調査項目連番1_前回"
+      ,"CsvTempTableZenkai"."調査項目1" AS "調査項目1_前回"
+      ,"CsvTempTableZenkai"."調査項目連番2" AS "調査項目連番2_前回"
+      ,"CsvTempTableZenkai"."調査項目2" AS "調査項目2_前回"
+      ,"CsvTempTableZenkai"."調査項目連番3" AS "調査項目連番3_前回"
+      ,"CsvTempTableZenkai"."調査項目3" AS "調査項目3_前回"
+      ,"CsvTempTableZenkai"."調査項目連番4" AS "調査項目連番4_前回"
+      ,"CsvTempTableZenkai"."調査項目4" AS "調査項目4_前回"
+      ,"CsvTempTableZenkai"."調査項目連番5" AS "調査項目連番5_前回"
+      ,"CsvTempTableZenkai"."調査項目5" AS "調査項目5_前回"
+      ,"CsvTempTableZenkai"."調査項目連番6" AS "調査項目連番6_前回"
+      ,"CsvTempTableZenkai"."調査項目6" AS "調査項目6_前回"
+      ,"CsvTempTableZenkai"."調査項目連番7" AS "調査項目連番7_前回"
+      ,"CsvTempTableZenkai"."調査項目7" AS "調査項目7_前回"
+      ,"CsvTempTableZenkai"."調査項目連番8" AS "調査項目連番8_前回"
+      ,"CsvTempTableZenkai"."調査項目8" AS "調査項目8_前回"
+      ,"CsvTempTableZenkai"."調査項目連番9" AS "調査項目連番9_前回"
+      ,"CsvTempTableZenkai"."調査項目9" AS "調査項目9_前回"
+      ,"CsvTempTableZenkai"."調査項目連番10" AS "調査項目連番10_前回"
+      ,"CsvTempTableZenkai"."調査項目10" AS "調査項目10_前回"
+      ,"CsvTempTableZenkai"."調査項目連番11" AS "調査項目連番11_前回"
+      ,"CsvTempTableZenkai"."調査項目11" AS "調査項目11_前回"
+      ,"CsvTempTableZenkai"."調査項目連番12" AS "調査項目連番12_前回"
+      ,"CsvTempTableZenkai"."調査項目12" AS "調査項目12_前回"
+      ,"CsvTempTableZenkai"."調査項目連番13" AS "調査項目連番13_前回"
+      ,"CsvTempTableZenkai"."調査項目13" AS "調査項目13_前回"
+      ,"CsvTempTableZenkai"."調査項目連番14" AS "調査項目連番14_前回"
+      ,"CsvTempTableZenkai"."調査項目14" AS "調査項目14_前回"
+      ,"CsvTempTableZenkai"."調査項目連番15" AS "調査項目連番15_前回"
+      ,"CsvTempTableZenkai"."調査項目15" AS "調査項目15_前回"
+      ,"CsvTempTableZenkai"."調査項目連番16" AS "調査項目連番16_前回"
+      ,"CsvTempTableZenkai"."調査項目16" AS "調査項目16_前回"
+      ,"CsvTempTableZenkai"."調査項目連番17" AS "調査項目連番17_前回"
+      ,"CsvTempTableZenkai"."調査項目17" AS "調査項目17_前回"
+      ,"CsvTempTableZenkai"."調査項目連番18" AS "調査項目連番18_前回"
+      ,"CsvTempTableZenkai"."調査項目18" AS "調査項目18_前回"
+      ,"CsvTempTableZenkai"."調査項目連番19" AS "調査項目連番19_前回"
+      ,"CsvTempTableZenkai"."調査項目19" AS "調査項目19_前回"
+      ,"CsvTempTableZenkai"."調査項目連番20" AS "調査項目連番20_前回"
+      ,"CsvTempTableZenkai"."調査項目20" AS "調査項目20_前回"
+      ,"CsvTempTableZenkai"."調査項目連番21" AS "調査項目連番21_前回"
+      ,"CsvTempTableZenkai"."調査項目21" AS "調査項目21_前回"
+      ,"CsvTempTableZenkai"."調査項目連番22" AS "調査項目連番22_前回"
+      ,"CsvTempTableZenkai"."調査項目22" AS "調査項目22_前回"
+      ,"CsvTempTableZenkai"."調査項目連番23" AS "調査項目連番23_前回"
+      ,"CsvTempTableZenkai"."調査項目23" AS "調査項目23_前回"
+      ,"CsvTempTableZenkai"."調査項目連番24" AS "調査項目連番24_前回"
+      ,"CsvTempTableZenkai"."調査項目24" AS "調査項目24_前回"
+      ,"CsvTempTableZenkai"."調査項目連番25" AS "調査項目連番25_前回"
+      ,"CsvTempTableZenkai"."調査項目25" AS "調査項目25_前回"
+      ,"CsvTempTableZenkai"."調査項目連番26" AS "調査項目連番26_前回"
+      ,"CsvTempTableZenkai"."調査項目26" AS "調査項目26_前回"
+      ,"CsvTempTableZenkai"."調査項目連番27" AS "調査項目連番27_前回"
+      ,"CsvTempTableZenkai"."調査項目27" AS "調査項目27_前回"
+      ,"CsvTempTableZenkai"."調査項目連番28" AS "調査項目連番28_前回"
+      ,"CsvTempTableZenkai"."調査項目28" AS "調査項目28_前回"
+      ,"CsvTempTableZenkai"."調査項目連番29" AS "調査項目連番29_前回"
+      ,"CsvTempTableZenkai"."調査項目29" AS "調査項目29_前回"
+      ,"CsvTempTableZenkai"."調査項目連番30" AS "調査項目連番30_前回"
+      ,"CsvTempTableZenkai"."調査項目30" AS "調査項目30_前回"
+      ,"CsvTempTableZenkai"."調査項目連番31" AS "調査項目連番31_前回"
+      ,"CsvTempTableZenkai"."調査項目31" AS "調査項目31_前回"
+      ,"CsvTempTableZenkai"."調査項目連番32" AS "調査項目連番32_前回"
+      ,"CsvTempTableZenkai"."調査項目32" AS "調査項目32_前回"
+      ,"CsvTempTableZenkai"."調査項目連番33" AS "調査項目連番33_前回"
+      ,"CsvTempTableZenkai"."調査項目33" AS "調査項目33_前回"
+      ,"CsvTempTableZenkai"."調査項目連番34" AS "調査項目連番34_前回"
+      ,"CsvTempTableZenkai"."調査項目34" AS "調査項目34_前回"
+      ,"CsvTempTableZenkai"."調査項目連番35" AS "調査項目連番35_前回"
+      ,"CsvTempTableZenkai"."調査項目35" AS "調査項目35_前回"
+      ,"CsvTempTableZenkai"."調査項目連番36" AS "調査項目連番36_前回"
+      ,"CsvTempTableZenkai"."調査項目36" AS "調査項目36_前回"
+      ,"CsvTempTableZenkai"."調査項目連番37" AS "調査項目連番37_前回"
+      ,"CsvTempTableZenkai"."調査項目37" AS "調査項目37_前回"
+      ,"CsvTempTableZenkai"."調査項目連番38" AS "調査項目連番38_前回"
+      ,"CsvTempTableZenkai"."調査項目38" AS "調査項目38_前回"
+      ,"CsvTempTableZenkai"."調査項目連番39" AS "調査項目連番39_前回"
+      ,"CsvTempTableZenkai"."調査項目39" AS "調査項目39_前回"
+      ,"CsvTempTableZenkai"."調査項目連番40" AS "調査項目連番40_前回"
+      ,"CsvTempTableZenkai"."調査項目40" AS "調査項目40_前回"
+      ,"CsvTempTableZenkai"."調査項目連番41" AS "調査項目連番41_前回"
+      ,"CsvTempTableZenkai"."調査項目41" AS "調査項目41_前回"
+      ,"CsvTempTableZenkai"."調査項目連番42" AS "調査項目連番42_前回"
+      ,"CsvTempTableZenkai"."調査項目42" AS "調査項目42_前回"
+      ,"CsvTempTableZenkai"."調査項目連番43" AS "調査項目連番43_前回"
+      ,"CsvTempTableZenkai"."調査項目43" AS "調査項目43_前回"
+      ,"CsvTempTableZenkai"."調査項目連番44" AS "調査項目連番44_前回"
+      ,"CsvTempTableZenkai"."調査項目44" AS "調査項目44_前回"
+      ,"CsvTempTableZenkai"."調査項目連番45" AS "調査項目連番45_前回"
+      ,"CsvTempTableZenkai"."調査項目45" AS "調査項目45_前回"
+      ,"CsvTempTableZenkai"."調査項目連番46" AS "調査項目連番46_前回"
+      ,"CsvTempTableZenkai"."調査項目46" AS "調査項目46_前回"
+      ,"CsvTempTableZenkai"."調査項目連番47" AS "調査項目連番47_前回"
+      ,"CsvTempTableZenkai"."調査項目47" AS "調査項目47_前回"
+      ,"CsvTempTableZenkai"."調査項目連番48" AS "調査項目連番48_前回"
+      ,"CsvTempTableZenkai"."調査項目48" AS "調査項目48_前回"
+      ,"CsvTempTableZenkai"."調査項目連番49" AS "調査項目連番49_前回"
+      ,"CsvTempTableZenkai"."調査項目49" AS "調査項目49_前回"
+      ,"CsvTempTableZenkai"."調査項目連番50" AS "調査項目連番50_前回"
+      ,"CsvTempTableZenkai"."調査項目50" AS "調査項目50_前回"
+      ,"CsvTempTableZenkai"."調査項目連番51" AS "調査項目連番51_前回"
+      ,"CsvTempTableZenkai"."調査項目51" AS "調査項目51_前回"
+      ,"CsvTempTableZenkai"."調査項目連番52" AS "調査項目連番52_前回"
+      ,"CsvTempTableZenkai"."調査項目52" AS "調査項目52_前回"
+      ,"CsvTempTableZenkai"."調査項目連番53" AS "調査項目連番53_前回"
+      ,"CsvTempTableZenkai"."調査項目53" AS "調査項目53_前回"
+      ,"CsvTempTableZenkai"."調査項目連番54" AS "調査項目連番54_前回"
+      ,"CsvTempTableZenkai"."調査項目54" AS "調査項目54_前回"
+      ,"CsvTempTableZenkai"."調査項目連番55" AS "調査項目連番55_前回"
+      ,"CsvTempTableZenkai"."調査項目55" AS "調査項目55_前回"
+      ,"CsvTempTableZenkai"."調査項目連番56" AS "調査項目連番56_前回"
+      ,"CsvTempTableZenkai"."調査項目56" AS "調査項目56_前回"
+      ,"CsvTempTableZenkai"."調査項目連番57" AS "調査項目連番57_前回"
+      ,"CsvTempTableZenkai"."調査項目57" AS "調査項目57_前回"
+      ,"CsvTempTableZenkai"."調査項目連番58" AS "調査項目連番58_前回"
+      ,"CsvTempTableZenkai"."調査項目58" AS "調査項目58_前回"
+      ,"CsvTempTableZenkai"."調査項目連番59" AS "調査項目連番59_前回"
+      ,"CsvTempTableZenkai"."調査項目59" AS "調査項目59_前回"
+      ,"CsvTempTableZenkai"."調査項目連番60" AS "調査項目連番60_前回"
+      ,"CsvTempTableZenkai"."調査項目60" AS "調査項目60_前回"
+      ,"CsvTempTableZenkai"."調査項目連番61" AS "調査項目連番61_前回"
+      ,"CsvTempTableZenkai"."調査項目61" AS "調査項目61_前回"
+      ,"CsvTempTableZenkai"."調査項目連番62" AS "調査項目連番62_前回"
+      ,"CsvTempTableZenkai"."調査項目62" AS "調査項目62_前回"
+      ,"CsvTempTableZenkai"."調査項目連番63" AS "調査項目連番63_前回"
+      ,"CsvTempTableZenkai"."調査項目63" AS "調査項目63_前回"
+      ,"CsvTempTableZenkai"."調査項目連番64" AS "調査項目連番64_前回"
+      ,"CsvTempTableZenkai"."調査項目64" AS "調査項目64_前回"
+      ,"CsvTempTableZenkai"."調査項目連番65" AS "調査項目連番65_前回"
+      ,"CsvTempTableZenkai"."調査項目65" AS "調査項目65_前回"
+      ,"CsvTempTableZenkai"."調査項目連番66" AS "調査項目連番66_前回"
+      ,"CsvTempTableZenkai"."調査項目66" AS "調査項目66_前回"
+      ,"CsvTempTableZenkai"."調査項目連番67" AS "調査項目連番67_前回"
+      ,"CsvTempTableZenkai"."調査項目67" AS "調査項目67_前回"
+      ,"CsvTempTableZenkai"."調査項目連番68" AS "調査項目連番68_前回"
+      ,"CsvTempTableZenkai"."調査項目68" AS "調査項目68_前回"
+      ,"CsvTempTableZenkai"."調査項目連番69" AS "調査項目連番69_前回"
+      ,"CsvTempTableZenkai"."調査項目69" AS "調査項目69_前回"
+      ,"CsvTempTableZenkai"."調査項目連番70" AS "調査項目連番70_前回"
+      ,"CsvTempTableZenkai"."調査項目70" AS "調査項目70_前回"
+      ,"CsvTempTableZenkai"."調査項目連番71" AS "調査項目連番71_前回"
+      ,"CsvTempTableZenkai"."調査項目71" AS "調査項目71_前回"
+      ,"CsvTempTableZenkai"."調査項目連番72" AS "調査項目連番72_前回"
+      ,"CsvTempTableZenkai"."調査項目72" AS "調査項目72_前回"
+      ,"CsvTempTableZenkai"."調査項目連番73" AS "調査項目連番73_前回"
+      ,"CsvTempTableZenkai"."調査項目73" AS "調査項目73_前回"
+      ,"CsvTempTableZenkai"."調査項目連番74" AS "調査項目連番74_前回"
+      ,"CsvTempTableZenkai"."調査項目74" AS "調査項目74_前回"
+    </sql>
+      
 </mapper>

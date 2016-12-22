@@ -57,7 +57,6 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     private static final List<RString> PAGE_BREAK_KEYS = Collections
             .unmodifiableList(Arrays.asList(new RString(ChosahyoIkenshoCheckListReportSource.ReportSourceFields.hihokenshaNo.name())));
     private static final ReportId REPORT_ID = ReportIdDBE.DBE012003.getReportId();
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString なし = new RString("無し");
     private ChosahyoIkenshoCheckListProcessParamter paramter;
@@ -142,8 +141,6 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JOBNO_NAME);
-        ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 帳票名 = ReportIdDBE.DBE012003.getReportName();

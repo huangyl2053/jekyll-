@@ -37,12 +37,12 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
     private static final String SHUJII_IKENTOKUSOKUJO_HAKKO = "temp_主治医意見書督促対象者一覧表";
     private static final String CSV_SHUTURYOKU = "temp_CSV出力";
     private static final String INNSATU_TAI_ZOU_MONO = "temp_印刷済対象者";
-    private static final String HAKKOU_RIREKI = "temp_発行履歴";
     private static final String IKENSHO_SAKUSEI_TOKU_SOKUHOHO = "temp_督促方法";
     private static final String IKENSHO_TOKUSOKU_MEMO = "temp_督促メモ";
     private static final String IKENSHO_TOKUSOKUYMD = "temp_督促日";
     private static final String IKENSHO_SAKUSEI_TOKU_HAKKOU = "temp_印刷期間開始日";
     private static final String IKENSHO_SAKUSEI_IRAI_HAKKOU = "temp_印刷期間終了日";
+    private static final String BUNSHO_NO = "temp_文書番号";
 
     @BatchParameter(key = HOKENN_CODE, name = "保険者コード")
     private RString temp_保険者コード;
@@ -64,8 +64,6 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
     private RString temp_CSV出力;
     @BatchParameter(key = INNSATU_TAI_ZOU_MONO, name = "印刷済対象者")
     private RString temp_印刷済対象者;
-    @BatchParameter(key = HAKKOU_RIREKI, name = "発行履歴")
-    private RString temp_発行履歴;
     @BatchParameter(key = IKENSHO_SAKUSEI_TOKU_SOKUHOHO, name = "督促方法")
     private int temp_督促方法;
     @BatchParameter(key = IKENSHO_TOKUSOKU_MEMO, name = "督促メモ")
@@ -76,6 +74,8 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
     private RDate temp_印刷期間開始日;
     @BatchParameter(key = IKENSHO_SAKUSEI_IRAI_HAKKOU, name = "印刷期間終了日")
     private RDate temp_印刷期間終了日;
+    @BatchParameter(key = BUNSHO_NO, name = "文書番号")
+    private RString temp_文書番号;
 
     /**
      * 画面からのパラメータを作成します。
@@ -93,12 +93,12 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
         this.temp_主治医意見書督促対象者一覧表 = tempData.getTemp_主治医意見書督促対象者一覧表();
         this.temp_CSV出力 = tempData.getTemp_CSV出力();
         this.temp_印刷済対象者 = tempData.getTemp_印刷済対象者();
-        this.temp_発行履歴 = tempData.getTemp_発行履歴();
         this.temp_督促方法 = tempData.getTemp_督促方法();
         this.temp_督促メモ = tempData.getTemp_督促メモ();
         this.temp_督促日 = tempData.getTemp_督促日();
         this.temp_印刷期間開始日 = tempData.getTemp_印刷期間開始日();
         this.temp_印刷期間終了日 = tempData.getTemp_印刷期間終了日();
+        this.temp_文書番号 = tempData.getTemp_文書番号();
     }
 
     /**
@@ -106,8 +106,8 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
      *
      * @return 出力条件表のパラメータ
      */
-    public ShuturyokuJyoukenProcessParamter toShuturyokuJyoukenProcessParamter() {
-        ShuturyokuJyoukenProcessParamter param = new ShuturyokuJyoukenProcessParamter();
+    public ShujiiIkenTokusokujoHakkoReportProcessParameter toShuturyokuJyoukenProcessParamter() {
+        ShujiiIkenTokusokujoHakkoReportProcessParameter param = new ShujiiIkenTokusokujoHakkoReportProcessParameter();
         param.setTemp_保険者コード(this.temp_保険者コード);
         param.setTemp_主治医医療機関コード(this.temp_主治医医療機関コード);
         param.setTemp_主治医コード(this.temp_主治医コード);
@@ -122,7 +122,6 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
         param.setTemp_督促日(this.temp_督促日);
         param.setTemp_督促方法(this.temp_督促方法);
         param.setTemp_督促メモ(this.temp_督促メモ);
-        param.setTemp_発行履歴(this.temp_発行履歴);
         param.setTemp_保険者名称(this.temp_保険者名称);
         return param;
     }

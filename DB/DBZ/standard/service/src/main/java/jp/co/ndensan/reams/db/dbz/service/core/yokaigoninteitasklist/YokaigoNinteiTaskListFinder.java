@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiT
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosaNyushuRelateWithCountEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ChosairaiRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity;
@@ -72,8 +74,7 @@ public class YokaigoNinteiTaskListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
      */
     public static YokaigoNinteiTaskListFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiTaskListFinder.class);
@@ -123,11 +124,15 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<CyoSaiRaiBusiness> get調査依頼モード(YokaigoNinteiTaskListParameter parameter) {
         List<CyoSaiRaiBusiness> 調査依頼List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<CyoSaiRaiRelateEntity> entityList = mapper.get調査依頼(parameter);
-        for (CyoSaiRaiRelateEntity entity : entityList) {
+        ChosairaiRelateWithCountEntity searchResult = mapper.get調査依頼(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<CyoSaiRaiBusiness>emptyList(), 0, false);
+        }
+        int totalcount = searchResult.getTotalCount().intValue();
+        for (CyoSaiRaiRelateEntity entity : searchResult.getTaishoshaList()) {
             調査依頼List.add(new CyoSaiRaiBusiness(entity));
         }
-        return SearchResult.of(調査依頼List, 0, false);
+        return SearchResult.of(調査依頼List, totalcount, false);
     }
 
     /**
@@ -173,7 +178,8 @@ public class YokaigoNinteiTaskListFinder {
         for (IKnSyoiRaiRelateEntity entity : entityList) {
             意見書依頼List.add(new IKnSyoiRaiBusiness(entity));
         }
-        return SearchResult.of(意見書依頼List, 0, false);
+        int totalcount = mapper.get意見書依頼件数(parameter);
+        return SearchResult.of(意見書依頼List, totalcount, parameter.get件数().intValue() < totalcount);
     }
 
     /**
@@ -186,11 +192,15 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<CyoSaNyuSyuBusiness> get調査入手モード(YokaigoNinteiTaskListParameter parameter) {
         List<CyoSaNyuSyuBusiness> 調査入手List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<CyoSaNyuSyuRelateEntity> entityList = mapper.get調査入手(parameter);
-        for (CyoSaNyuSyuRelateEntity entity : entityList) {
+        ChosaNyushuRelateWithCountEntity searchResult = mapper.get調査入手(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<CyoSaNyuSyuBusiness>emptyList(), 0, false);
+        }
+        int totalCount = searchResult.getTotalCount().intValue();
+        for (CyoSaNyuSyuRelateEntity entity : searchResult.getTaishoshaList()) {
             調査入手List.add(new CyoSaNyuSyuBusiness(entity));
         }
-        return SearchResult.of(調査入手List, 0, false);
+        return SearchResult.of(調査入手List, totalCount, false);
     }
 
     /**
@@ -271,6 +281,18 @@ public class YokaigoNinteiTaskListFinder {
             マスキングList.add(new MaSuKinGuBusiness(entity));
         }
         return SearchResult.of(マスキングList, 0, false);
+    }
+
+    /**
+     * マスキングモードの場合でデータ件数取得
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return int
+     */
+    @Transaction
+    public int getマスキングモード件数(YokaigoNinteiTaskListParameter parameter) {
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        return mapper.getマスキング件数(parameter);
     }
 
     /**
@@ -491,6 +513,18 @@ public class YokaigoNinteiTaskListFinder {
             set前マスキング(要介護認定完了情報, shinSaKaiBusiness);
         }
         return shinSaKaiBusiness;
+    }
+
+    /**
+     * 前マスキングリストの件数を取得します
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return int
+     */
+    @Transaction
+    public int get前マスキングモード件数(YokaigoNinteiTaskListParameter parameter) {
+        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
+        return mapper.get前マスキング件数(parameter);
     }
 
     private void set前マスキング(
