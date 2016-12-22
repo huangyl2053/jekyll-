@@ -181,9 +181,7 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.noDeleted_DbT5591GogitaiJoho" />
         ORDER BY
-        "dbT5591GogitaiJoho_gogitaiNo"
-         LIMIT
-            #{最大表示件数}) AS DbT5591GogitaiJoho
+        "dbT5591GogitaiJoho_gogitaiNo") AS DbT5591GogitaiJoho
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.noDeleted_DbT5592ShinsakaiKaisaiBashoJoho" />) AS DbT5592ShinsakaiKaisaiBashoJoho
         ON
@@ -206,6 +204,7 @@
         </where>
         ORDER BY
             DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo",
+            DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD",            
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" DESC,
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" ASC
     </sql>
