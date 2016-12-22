@@ -22,8 +22,12 @@ public class ShujiiIkenshoInsatsuChohyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkShujiiIkenshoShutsuryoku")
-    private CheckBoxList chkShujiiIkenshoShutsuryoku;
+    @JsonProperty("chkShujiiIkenshoSakuseiIrai")
+    private CheckBoxList chkShujiiIkenshoSakuseiIrai;
+    @JsonProperty("chkShujiiIkenshoSakuseiSeikyu")
+    private CheckBoxList chkShujiiIkenshoSakuseiSeikyu;
+    @JsonProperty("chkShujiiIkenshoShinseiTani")
+    private CheckBoxList chkShujiiIkenshoShinseiTani;
     @JsonProperty("ShujiiIkenshoChecks")
     private ShujiiIkenshoChecksDiv ShujiiIkenshoChecks;
     @JsonProperty("Chkikenshiiraihakko")
@@ -38,21 +42,57 @@ public class ShujiiIkenshoInsatsuChohyoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkShujiiIkenshoShutsuryoku
-     * @return chkShujiiIkenshoShutsuryoku
+     * getchkShujiiIkenshoSakuseiIrai
+     * @return chkShujiiIkenshoSakuseiIrai
      */
-    @JsonProperty("chkShujiiIkenshoShutsuryoku")
-    public CheckBoxList getChkShujiiIkenshoShutsuryoku() {
-        return chkShujiiIkenshoShutsuryoku;
+    @JsonProperty("chkShujiiIkenshoSakuseiIrai")
+    public CheckBoxList getChkShujiiIkenshoSakuseiIrai() {
+        return chkShujiiIkenshoSakuseiIrai;
     }
 
     /*
-     * setchkShujiiIkenshoShutsuryoku
-     * @param chkShujiiIkenshoShutsuryoku chkShujiiIkenshoShutsuryoku
+     * setchkShujiiIkenshoSakuseiIrai
+     * @param chkShujiiIkenshoSakuseiIrai chkShujiiIkenshoSakuseiIrai
      */
-    @JsonProperty("chkShujiiIkenshoShutsuryoku")
-    public void setChkShujiiIkenshoShutsuryoku(CheckBoxList chkShujiiIkenshoShutsuryoku) {
-        this.chkShujiiIkenshoShutsuryoku = chkShujiiIkenshoShutsuryoku;
+    @JsonProperty("chkShujiiIkenshoSakuseiIrai")
+    public void setChkShujiiIkenshoSakuseiIrai(CheckBoxList chkShujiiIkenshoSakuseiIrai) {
+        this.chkShujiiIkenshoSakuseiIrai = chkShujiiIkenshoSakuseiIrai;
+    }
+
+    /*
+     * getchkShujiiIkenshoSakuseiSeikyu
+     * @return chkShujiiIkenshoSakuseiSeikyu
+     */
+    @JsonProperty("chkShujiiIkenshoSakuseiSeikyu")
+    public CheckBoxList getChkShujiiIkenshoSakuseiSeikyu() {
+        return chkShujiiIkenshoSakuseiSeikyu;
+    }
+
+    /*
+     * setchkShujiiIkenshoSakuseiSeikyu
+     * @param chkShujiiIkenshoSakuseiSeikyu chkShujiiIkenshoSakuseiSeikyu
+     */
+    @JsonProperty("chkShujiiIkenshoSakuseiSeikyu")
+    public void setChkShujiiIkenshoSakuseiSeikyu(CheckBoxList chkShujiiIkenshoSakuseiSeikyu) {
+        this.chkShujiiIkenshoSakuseiSeikyu = chkShujiiIkenshoSakuseiSeikyu;
+    }
+
+    /*
+     * getchkShujiiIkenshoShinseiTani
+     * @return chkShujiiIkenshoShinseiTani
+     */
+    @JsonProperty("chkShujiiIkenshoShinseiTani")
+    public CheckBoxList getChkShujiiIkenshoShinseiTani() {
+        return chkShujiiIkenshoShinseiTani;
+    }
+
+    /*
+     * setchkShujiiIkenshoShinseiTani
+     * @param chkShujiiIkenshoShinseiTani chkShujiiIkenshoShinseiTani
+     */
+    @JsonProperty("chkShujiiIkenshoShinseiTani")
+    public void setChkShujiiIkenshoShinseiTani(CheckBoxList chkShujiiIkenshoShinseiTani) {
+        this.chkShujiiIkenshoShinseiTani = chkShujiiIkenshoShinseiTani;
     }
 
     /*

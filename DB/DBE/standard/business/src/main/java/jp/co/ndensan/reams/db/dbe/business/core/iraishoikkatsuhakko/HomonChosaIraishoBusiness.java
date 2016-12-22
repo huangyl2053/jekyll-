@@ -780,7 +780,7 @@ public class HomonChosaIraishoBusiness {
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TEISHUTSUKIGEN);
-        builder.append(ConvertDate(processParamter.getTeishutsuKigen()));
+        builder.append(processParamter.getTeishutsuKigen());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(KYOTSUHIZUKE);
@@ -850,7 +850,7 @@ public class HomonChosaIraishoBusiness {
         if (!FlexibleDate.canConvert(date)) {
             return date;
         }
-        return new FlexibleDate(date).wareki().toDateString();
+        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
     }
 
     private void setZenkaiChosakekka(ChosahyoSaiCheckhyoItem item) {
