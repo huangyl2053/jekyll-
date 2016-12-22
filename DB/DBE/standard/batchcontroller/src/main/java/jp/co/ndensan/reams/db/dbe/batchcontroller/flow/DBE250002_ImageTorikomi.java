@@ -1,0 +1,73 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ocrdataread.OcrDataReadProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.imagetorikomi.ImageTorikomiProcessParameter;
+import jp.co.ndensan.reams.uz.uza.batch.Step;
+import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
+import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+/**
+ *
+ * @author n2818
+ */
+public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageTorikomiParameter> {
+
+    private int fileIndex = 0;
+    private List<RString> filePathList;
+    private static final String OCRデータの読み込み_PROCESS = "OCRデータの読み込み_PROCESS";
+
+    @Override
+    protected void defineFlow() {
+        readAllOcrDataFile();
+        while (fileIndex < filePathList.size()) {
+            executeStep(OCRデータの読み込み_PROCESS);
+            fileIndex++;
+        }
+    }
+
+    @Step(OCRデータの読み込み_PROCESS)
+    IBatchFlowCommand executeOCRデータの読み込み() {
+        return loopBatch(OcrDataReadProcess.class)
+                .arguments(new ImageTorikomiProcessParameter(RDate.getNowDate(), (filePathList.get(fileIndex))))
+                .define();
+    }
+
+    /**
+     * バッチパラメータの共有ファイルIDから共有ファイルのOCRデータを読み込む
+     */
+    private void readAllOcrDataFile() {
+        RString tempDirPath = Directory.createTmpDirectory();
+        File tempDir = new File(tempDirPath.toString());
+        ReadOnlySharedFileEntryDescriptor entry
+                = ReadOnlySharedFileEntryDescriptor.fromString(getParameter().get共有ファイルエントリ情報文字列().toString());
+        SharedFile.copyToLocal(entry, new FilesystemPath(tempDirPath));
+        filePathList = new ArrayList<>();
+        setFilePath(tempDir);
+    }
+
+    private void setFilePath(File directory) {
+        for (File file : directory.listFiles()) {
+            if (file.isFile()) {
+                filePathList.add(new RString(file.getAbsolutePath()));
+            } else {
+                setFilePath(file);
+            }
+        }
+    }
+}
