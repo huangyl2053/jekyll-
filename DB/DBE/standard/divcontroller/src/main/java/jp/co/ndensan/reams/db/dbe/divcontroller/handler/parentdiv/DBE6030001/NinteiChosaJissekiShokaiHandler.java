@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class NinteiChosaJissekiShokaiHandler {
 
-    private static final RString 基準日Key_初期値 = new RString("3");
+    private static final RString KEY_基準日_初期値 = new RString("3");
     private final NinteiChosaJissekiShokaiDiv div;
 
     /**
@@ -50,7 +50,7 @@ public class NinteiChosaJissekiShokaiHandler {
      * 条件をクリアする」ボタンを押します。
      */
     public void onClick_BtnKensakuClear() {
-        div.getRadKijunbi().setSelectedValue(基準日Key_初期値);
+        div.getRadKijunbi().setSelectedValue(KEY_基準日_初期値);
         div.getChosaJisshibi().getTxtChosaJisshibi().clearFromValue();
         div.getChosaJisshibi().getTxtChosaJisshibi().clearToValue();
         div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
