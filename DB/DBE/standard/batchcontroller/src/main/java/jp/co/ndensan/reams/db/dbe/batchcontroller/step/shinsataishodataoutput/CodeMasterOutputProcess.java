@@ -56,7 +56,7 @@ public class CodeMasterOutputProcess extends SimpleBatchProcessBase {
 
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518005");
     private static final RString FILE_NAME = new RString("コードマスタ.csv");
-    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private ShinsaTaishoDataOutPutProcessParammeter processParamter;
     private RString eucFilePath;
     private FileSpoolManager manager;
