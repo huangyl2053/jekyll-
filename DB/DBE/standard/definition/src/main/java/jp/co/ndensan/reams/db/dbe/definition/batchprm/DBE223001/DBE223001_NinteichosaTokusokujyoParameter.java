@@ -113,9 +113,6 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
         param.setTemp_保険者コード(this.temp_保険者コード);
         param.setTemp_認定調査委託先コード(this.temp_認定調査委託先コード);
         param.setTemp_認定調査員コード(this.temp_認定調査員コード);
-        param.setTemp_基準日(this.temp_基準日);
-        param.setTemp_認定調査督促期限日数(this.temp_認定調査督促期限日数);
-        param.setTemp_印刷済対象者(this.temp_印刷済対象者);
         param.setTemp_印刷期間開始日(this.temp_印刷期間開始日);
         param.setTemp_印刷期間終了日(this.temp_印刷期間終了日);
         param.setCsv出力_選択された(new RString("1").equals(this.temp_CSV出力));
