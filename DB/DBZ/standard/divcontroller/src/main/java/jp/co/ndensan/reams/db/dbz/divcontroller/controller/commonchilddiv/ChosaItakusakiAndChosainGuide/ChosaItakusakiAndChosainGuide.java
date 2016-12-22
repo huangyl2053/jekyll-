@@ -63,11 +63,10 @@ public class ChosaItakusakiAndChosainGuide {
                 市町村コード = dataPassModel.get市町村コード();
                 div.getHokensha().setSelectedShichosonIfExist(new LasdecCode(市町村コード));
             }
-            if (!RString.isNullOrEmpty(dataPassModel.get委託先コード())) {
-                if (new RString(TaishoMode.Chosain.toString()).equals(dataPassModel.get対象モード())) {
-                    div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
-                    div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
-                }
+            if (!RString.isNullOrEmpty(dataPassModel.get委託先コード())
+                    && new RString(TaishoMode.Chosain.toString()).equals(dataPassModel.get対象モード())) {
+                div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
+                div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
             }
             List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
             getHandler(div).setDataGrid(list);

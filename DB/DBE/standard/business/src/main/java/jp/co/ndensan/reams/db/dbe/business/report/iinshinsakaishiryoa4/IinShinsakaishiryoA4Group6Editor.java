@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa4;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -24,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class IinShinsakaishiryoA4Group6Editor implements IIinShinsakaishiryoA4Editor {
 
     private static final int INT_4 = 4;
+    private static final int INT_14 = 14;
     private final JimuShinsakaiWariateJohoBusiness business;
     private final RString reportId;
 
@@ -70,11 +69,7 @@ public class IinShinsakaishiryoA4Group6Editor implements IIinShinsakaishiryoA4Ed
             source.hihokenshaNo = RString.EMPTY;
             source.hihokenshaName = RString.EMPTY;
         }
-        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
-            source.layout = Layouts.六頁目;
-        } else {
-            source.layout = Layouts.五頁目;
-        }
+        source.layout = INT_14;
         return source;
     }
 

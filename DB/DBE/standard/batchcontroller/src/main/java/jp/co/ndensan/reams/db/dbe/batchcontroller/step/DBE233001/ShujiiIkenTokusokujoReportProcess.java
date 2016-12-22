@@ -174,7 +174,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
         int 保険者番号の桁 = 0;
         int 被保険者番号の桁 = 0;
         return new ShujiiIkenshoSakuseiTokusokujoItem(
-                ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日()),
+                processPrm.getTemp_文書番号(),
                 source.denshiKoin,
                 source.hakkoYMD,
                 source.koinMojiretsu,

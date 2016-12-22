@@ -30,6 +30,7 @@ public class NinteiChosaTokusokujoProcessParameter implements IBatchProcessParam
     private FlexibleDate temp_督促日;
     private RString temp_督促方法;
     private RString temp_督促メモ;
+    private RString temp_文書番号;
 
     /**
      * 要介護認定調査督促状のMybatisパラメータを作成します。

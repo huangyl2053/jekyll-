@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -41,6 +43,8 @@ public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
     private TextBoxDate txtHakkoDay;
     @JsonProperty("ccdItakusakiAndChosain")
     private ChosaItakusakiAndChosainInputDiv ccdItakusakiAndChosain;
+    @JsonProperty("ccdBunshoNo")
+    private BunshoBangoInputDiv ccdBunshoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -181,6 +185,15 @@ public class YokaigoNinteiChosaTokusokujoDiv extends Panel {
     @JsonProperty("ccdItakusakiAndChosain")
     public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosain() {
         return ccdItakusakiAndChosain;
+    }
+
+    /*
+     * getccdBunshoNo
+     * @return ccdBunshoNo
+     */
+    @JsonProperty("ccdBunshoNo")
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return ccdBunshoNo;
     }
 
     // </editor-fold>

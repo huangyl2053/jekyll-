@@ -28,6 +28,9 @@ public class JimuShinsakaishiryoA4Group2Editor implements IJimuShinsakaishiryoA4
     private final int index;
     private static final RString サービス区分コード1 = new RString("1");
     private static final RString サービス区分コード2 = new RString("2");
+    private static final int FORM_GROUP_INDEX_2 = 2;
+    private static final int FORM_GROUP_INDEX_3 = 3;
+    private static final int FORM_GROUP_INDEX_4 = 4;
 
     /**
      * インスタンスを生成します。
@@ -170,11 +173,11 @@ public class JimuShinsakaishiryoA4Group2Editor implements IJimuShinsakaishiryoA4
             source.listChukanhyoka_5 = item.get中間評価リスト().get(index).get第5群();
         }
         if (サービス区分コード1.equals(item.getSabisuKubun())) {
-            source.layout = 3;
-        } else if (サービス区分コード1.equals(item.getSabisuKubun())) {
-            source.layout = 4;
+            source.layout = FORM_GROUP_INDEX_3;
+        } else if (サービス区分コード2.equals(item.getSabisuKubun())) {
+            source.layout = FORM_GROUP_INDEX_4;
         } else {
-            source.layout = 2;
+            source.layout = FORM_GROUP_INDEX_2;
         }
         return editSource1(source);
     }
