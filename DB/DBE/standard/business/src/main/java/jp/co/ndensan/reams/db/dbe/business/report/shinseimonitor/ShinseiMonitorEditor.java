@@ -90,11 +90,8 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
     }
 
     private RString set性別(RString 性別コード) {
-        RString 性別 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(性別コード)) {
-            性別 = Seibetsu.toValue(item.get性別()).get名称();
-        }
-        return 性別;
+        return RString.isNullOrEmpty(性別コード)
+                ? RString.EMPTY : Seibetsu.toValue(性別コード).get名称();
     }
 
     private RString getNo(int index_tmp) {
@@ -104,12 +101,9 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
         return new RString(String.valueOf(index_tmp + 1));
     }
 
-    private RString set申請区分(RString 申請区分申請時コード) {
-        RString 申請区分 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(申請区分申請時コード)) {
-            申請区分 = NinteiShinseiShinseijiKubunCode.toValue(item.get前回申請区分()).get名称();
-        }
-        return 申請区分;
+    private RString set申請区分(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(code).get名称();
     }
 
     private RString dateFormat(FlexibleDate date) {
@@ -122,17 +116,19 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
 
     private RString get死亡転出区分(RString code) {
         RString 区分 = RString.EMPTY;
-        JuminJotaiCode 住民状態 = JuminJotaiCode.toValue(code);
-        if (住民状態.equals(JuminJotaiCode.死亡者)
-                || 住民状態.equals(JuminJotaiCode.転出者)) {
-            区分 = 住民状態.get名称();
+        if (!RString.isNullOrEmpty(code)) {
+            JuminJotaiCode 住民状態 = JuminJotaiCode.toValue(code);
+            if (住民状態.equals(JuminJotaiCode.死亡者)
+                    || 住民状態.equals(JuminJotaiCode.転出者)) {
+                区分 = 住民状態.get名称();
+            }
         }
         return 区分;
     }
 
     private RString set前回二次判定結果() {
         RString 前回二次判定結果 = RString.EMPTY;
-        if (item.get前回二次判定結果コード() != null && !item.get前回二次判定結果コード().isEmpty()) {
+        if (!RString.isNullOrEmpty(item.get前回二次判定結果コード())) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(item.get厚労省認定ソフトバージョン())) {
                 前回二次判定結果 = YokaigoJotaiKubun99.toValue(item.get前回二次判定結果コード()).get名称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(item.get厚労省認定ソフトバージョン())) {

@@ -86,20 +86,14 @@ public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsu
         return source;
     }
 
-    private RString set性別(RString 性別コード) {
-        RString 性別 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(性別コード)) {
-            性別 = Seibetsu.toValue(item.get性別()).get名称();
-        }
-        return 性別;
+    private RString set性別(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : Seibetsu.toValue(code).get名称();
     }
 
-    private RString set申請区分(RString 申請区分申請時コード) {
-        RString 申請区分 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(申請区分申請時コード)) {
-            申請区分 = NinteiShinseiShinseijiKubunCode.toValue(item.get申請区分()).get名称();
-        }
-        return 申請区分;
+    private RString set申請区分(RString code) {
+        return RString.isNullOrEmpty(code)
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(code).get名称();
     }
 
     private RString getNo(int index_tmp) {
