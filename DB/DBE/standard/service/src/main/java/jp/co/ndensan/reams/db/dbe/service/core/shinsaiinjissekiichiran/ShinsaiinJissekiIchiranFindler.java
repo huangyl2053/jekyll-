@@ -43,7 +43,8 @@ public class ShinsaiinJissekiIchiranFindler {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsaiinJissekiIchiranFindler}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsaiinJissekiIchiranFindler}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsaiinJissekiIchiranFindler}のインスタンス
      */
     public static ShinsaiinJissekiIchiranFindler createInstance() {
         return InstanceProvider.create(ShinsaiinJissekiIchiranFindler.class);
@@ -62,6 +63,10 @@ public class ShinsaiinJissekiIchiranFindler {
         for (ShinsaiinJissekiIchiranRelateEntity entity : entityList) {
             介護認定審査会委員報酬集計表List.add(new ShinsaiinJissekiIchiran(entity));
         }
-        return SearchResult.of(介護認定審査会委員報酬集計表List, 0, false);
+        int 件数 = mapper.getTotalCount(mapperParameter);
+        if (件数 <= mapperParameter.get件数()) {
+            return SearchResult.of(介護認定審査会委員報酬集計表List, 件数, false);
+        }
+        return SearchResult.of(介護認定審査会委員報酬集計表List, 件数, true);
     }
 }

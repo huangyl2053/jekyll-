@@ -10,14 +10,13 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.Chosah
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 
 /**
  * 帳票出力用認定調査実績集計表Builderクラスです。
  *
  * @reamsid_L DBE-1691-020 dangjingjing
  */
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
-
 public final class ChosahyoJissekiIchiranChange {
 
     private ChosahyoJissekiIchiranChange() {
@@ -38,7 +37,9 @@ public final class ChosahyoJissekiIchiranChange {
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 entity.get被保険者氏名(),
+                dateFormat(entity.get認定調査依頼年月日()),
                 dateFormat(entity.get認定調査実施年月日()),
+                dateFormat(entity.get認定調査受領年月日()),
                 ChosaKubun.toValue(entity.get認定調査区分コード()).get名称(),
                 NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         return data;

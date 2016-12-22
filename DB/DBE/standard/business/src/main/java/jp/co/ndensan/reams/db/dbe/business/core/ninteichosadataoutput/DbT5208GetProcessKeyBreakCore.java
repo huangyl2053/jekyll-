@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 
 /**
@@ -15,6 +16,8 @@ public class DbT5208GetProcessKeyBreakCore {
 
     private NinteiChosaDataOutputBatchRelateEntity entity;
     private int count = 0;
+    private static final RString BOOLEAN_TRUE = new RString("True");
+    private static final RString BOOLEAN_FALSE = new RString("False");
 
     /**
      * コンストラクタです。
@@ -46,15 +49,25 @@ public class DbT5208GetProcessKeyBreakCore {
      */
     public void usualProcess(NinteiChosaDataOutputBatchRelateEntity current) {
         count++;
+        RString 状況フラグ = convertBoolean(current.get状況フラグ());
         switch (count) {
             case 1:
                 entity = current;
                 entity.set状況フラグ連番1(current.get状況フラグ連番());
-                entity.set状況フラグ1(current.get状況フラグ());
+                entity.set状況フラグ1(状況フラグ);
                 break;
             default:
                 throw new SystemException("認定調査票（概況調査）サービスの状況フラグテーブルのデータ数が誤っています。2以上存在します。");
         }
+    }
+
+    private RString convertBoolean(RString value) {
+        if (new RString("t").equals(value)) {
+            return BOOLEAN_TRUE;
+        } else if (new RString("f").equals(value)) {
+            return BOOLEAN_FALSE;
+        }
+        return RString.EMPTY;
     }
 
     /**

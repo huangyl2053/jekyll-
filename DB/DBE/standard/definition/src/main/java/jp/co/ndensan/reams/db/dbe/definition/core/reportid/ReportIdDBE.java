@@ -442,7 +442,7 @@ public enum ReportIdDBE {
     /**
      * 主治医意見書作成実績集計表の帳票ID。
      */
-    DBE601001(new ReportId("DBE601001_IkenshoJissekiIchiran"), new RString("主治医意見書作成実績集計表")),
+    DBE601001(new ReportId("DBE601001_IkenshoJissekiIchiran"), new RString("意見書作成実績一覧")),
     /**
      * 認定調査報酬請求書の帳票ID。
      */
@@ -470,7 +470,7 @@ public enum ReportIdDBE {
     /**
      * 帳票出力用認定調査実績集計表の帳票ID。
      */
-    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("帳票出力用認定調査実績集計表")),
+    DBE601002(new ReportId("DBE601002_ChosahyoJissekiIchiran"), new RString("認定調査実績一覧")),
     /**
      * 介護認定審査会委員実績集計表の帳票ID。
      */

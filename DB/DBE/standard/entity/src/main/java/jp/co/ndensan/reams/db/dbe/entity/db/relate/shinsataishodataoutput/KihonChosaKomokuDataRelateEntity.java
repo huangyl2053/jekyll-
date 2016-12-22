@@ -19,7 +19,7 @@ public class KihonChosaKomokuDataRelateEntity {
     private RString 証記載保険者番号;
     private RString 被保険者番号;
     private RString 認定申請年月日;
-    private RString 申請書管理番号;
     private Decimal 連番;
+    private RString 厚労省IF識別コード;
 
 }

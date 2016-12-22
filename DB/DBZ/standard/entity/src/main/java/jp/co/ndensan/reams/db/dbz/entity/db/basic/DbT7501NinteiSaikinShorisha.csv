@@ -1,0 +1,4 @@
+﻿reamsLoginId,varchar,RString,,,,,ユーザーID,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,RString,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,RString,,,,,被保険者番号,A
+hihokenshaName,text,RString,,,,,被保険者氏名,A

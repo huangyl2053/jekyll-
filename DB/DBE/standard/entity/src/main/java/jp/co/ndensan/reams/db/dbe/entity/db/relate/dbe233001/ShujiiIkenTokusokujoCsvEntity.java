@@ -18,14 +18,14 @@ import lombok.Getter;
 @Getter
 public class ShujiiIkenTokusokujoCsvEntity {
 
+    @CsvField(order = 1, name = "No")
+    private final RString no;
+
     @CsvField(order = 3, name = "市町村コード")
     private final RString cityCode;
 
     @CsvField(order = 4, name = "市町村名称")
     private final RString cityName;
-
-    @CsvField(order = 5, name = "No")
-    private final RString no;
 
     @CsvField(order = 6, name = "保険者")
     private final RString hokenshaName;
@@ -57,6 +57,9 @@ public class ShujiiIkenTokusokujoCsvEntity {
     @CsvField(order = 15, name = "事業者電話番号")
     private final RString kikanTel;
 
+    @CsvField(order = 16, name = "主治医氏名")
+    private final RString shujiiName;
+
     /**
      * コンストラクタです。
      *
@@ -73,6 +76,7 @@ public class ShujiiIkenTokusokujoCsvEntity {
      * @param kikanName 事業者名称
      * @param kikanJusho 事業者住所
      * @param kikanTel 事業者電話番号
+     * @param shujiiName 主治医氏名
      */
     public ShujiiIkenTokusokujoCsvEntity(RString cityCode,
             RString cityName,
@@ -86,7 +90,8 @@ public class ShujiiIkenTokusokujoCsvEntity {
             RString kikanCode,
             RString kikanName,
             RString kikanJusho,
-            RString kikanTel) {
+            RString kikanTel,
+            RString shujiiName) {
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.no = no;
@@ -100,5 +105,6 @@ public class ShujiiIkenTokusokujoCsvEntity {
         this.kikanName = kikanName;
         this.kikanJusho = kikanJusho;
         this.kikanTel = kikanTel;
+        this.shujiiName = shujiiName;
     }
 }

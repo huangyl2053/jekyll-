@@ -89,6 +89,11 @@ public class IkenshoJissekiIchiran {
         return entity.get申請者氏名();
     }
 
+    /**
+     * 依頼日を取得します。
+     *
+     * @return 依頼日
+     */
     public RString get依頼日() {
         return entity.get依頼日();
     }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyojissekiichiran.ChosahyoJissekiIchiranChange;
 import jp.co.ndensan.reams.db.dbe.business.report.ichosahyojissekiichiran.ChosahyoJissekiIchiranReport;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteiChosaShukeiKijunbiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.chosahyojissekiichiran.ChosahyoJissekiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranRelateEntity;
@@ -137,16 +138,7 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = なし;
-        List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 調査実施日FROM_SB = new RStringBuilder("【調査実施日（From）】");
-        調査実施日FROM_SB.append(dateFormat(paramter.get調査実施日FROM()));
-        RStringBuilder 調査実施日To_SB = new RStringBuilder("【調査実施日（To）】");
-        調査実施日To_SB.append(dateFormat(paramter.get調査実施日TO()));
-        RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
-        保険者_SB.append(paramter.get保険者());
-        出力条件.add(調査実施日FROM_SB.toRString());
-        出力条件.add(調査実施日To_SB.toRString());
-        出力条件.add(保険者_SB.toRString());
+        List<RString> 出力条件 = get出力条件();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE601002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
@@ -159,20 +151,47 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 出力件数 = new RString(csvWriter.getCount());
-        List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 調査実施日FROM_SB = new RStringBuilder("【調査実施日（From）】");
-        調査実施日FROM_SB.append(dateFormat(paramter.get調査実施日FROM()));
-        RStringBuilder 調査実施日To_SB = new RStringBuilder("【調査実施日（To）】");
-        調査実施日To_SB.append(dateFormat(paramter.get調査実施日TO()));
-        RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
-        保険者_SB.append(paramter.get保険者());
-        出力条件.add(調査実施日FROM_SB.toRString());
-        出力条件.add(調査実施日To_SB.toRString());
-        出力条件.add(保険者_SB.toRString());
+        List<RString> 出力条件 = get出力条件();
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("認定調査実績集計CSV"), 導入団体コード, 市町村名, ジョブ番号,
                 CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
+    }
+
+    private List<RString> get出力条件() {
+        List<RString> 出力条件 = new ArrayList<>();
+        RString 基準日区分 = get基準日区分();
+        RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
+        保険者_SB.append(paramter.get証記載保険者());
+        出力条件.add(get出力条件_基準日From(基準日区分));
+        出力条件.add(get出力条件_基準日TO(基準日区分));
+        出力条件.add(保険者_SB.toRString());
+        return 出力条件;
+    }
+
+    private RString get基準日区分() {
+        if (paramter.get基準日区分() == null || paramter.get基準日区分().isEmpty()) {
+            return new RString("基準日");
+        }
+        return NinteiChosaShukeiKijunbiKubun.toValue(paramter.get基準日区分()).getTitle();
+    }
+
+    private RString get出力条件_基準日From(RString 基準日区分) {
+        RStringBuilder br = new RStringBuilder();
+        return br.append("【")
+                .append(基準日区分)
+                .append("（From）】")
+                .append(dateFormat(paramter.get基準日FROM()))
+                .toRString();
+    }
+
+    private RString get出力条件_基準日TO(RString 基準日区分) {
+        RStringBuilder br = new RStringBuilder();
+        return br.append("【")
+                .append(基準日区分)
+                .append("（To）】")
+                .append(dateFormat(paramter.get基準日TO()))
+                .toRString();
     }
 
     private PersonalData toPersonalData(ChosahyoJissekiIchiranRelateEntity entity) {

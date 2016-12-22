@@ -1,6 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="./../ShisetsuJohoCommonChildDiv.ts" />
 /// <reference path="../../d.ts/URACommonChildDiv.d.ts" />
 /// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
@@ -24,10 +25,6 @@ module DBZ {
 
             public static onClick_btnZenkaiFukusha(): string {
                 return "onClick_btnZenkaiFukusha";
-            }
-
-            public static onClick_lostFocus(): string {
-                return "onClick_lostFocus";
             }
 
             public static onChangeChkKannaiKangai(): string {
@@ -75,16 +72,8 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnZenkaiFukusha"));
             }
 
-            public txtJigyoshaCode(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJigyoshaCode"));
-            }
-
-            public btnJigyoshaGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnJigyoshaGuide"));
-            }
-
-            public txtJigyoshaName(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
+            public ccdShisetsuJohoCommonChildDiv(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
+                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJohoCommonChildDiv"));
             }
 
             public ddlShinseiKankeisha(): UZA.DropDownList {

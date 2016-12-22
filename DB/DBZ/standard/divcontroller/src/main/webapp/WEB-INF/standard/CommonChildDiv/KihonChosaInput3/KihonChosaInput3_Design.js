@@ -4,6 +4,42 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBeforeOpenDialog_btnIshiDentatsu = function () {
+                return "onBeforeOpenDialog_btnIshiDentatsu";
+            };
+
+            Events.onBeforeOpenDialog_btnNikka = function () {
+                return "onBeforeOpenDialog_btnNikka";
+            };
+
+            Events.onBeforeOpenDialog_btnInfo = function () {
+                return "onBeforeOpenDialog_btnInfo";
+            };
+
+            Events.onBeforeOpenDialog_btnDankiKioku = function () {
+                return "onBeforeOpenDialog_btnDankiKioku";
+            };
+
+            Events.onBeforeOpenDialog_btnNameInfo = function () {
+                return "onBeforeOpenDialog_btnNameInfo";
+            };
+
+            Events.onBeforeOpenDialog_btnKisetsu = function () {
+                return "onBeforeOpenDialog_btnKisetsu";
+            };
+
+            Events.onBeforeOpenDialog_btnBasho = function () {
+                return "onBeforeOpenDialog_btnBasho";
+            };
+
+            Events.onBeforeOpenDialog_btnHaikai = function () {
+                return "onBeforeOpenDialog_btnHaikai";
+            };
+
+            Events.onBeforeOpenDialog_btnModoru = function () {
+                return "onBeforeOpenDialog_btnModoru";
+            };
+
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
             };

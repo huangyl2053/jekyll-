@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput6.KihonChosaInput6.KihonChosaInput6Div;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput6.KihonChosaInput6.KihonChosaInputHandler6;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -74,4 +76,35 @@ public class KihonChosaInput6 {
         return new KihonChosaInputHandler6(div);
     }
 
+    /**
+     * 処置内容（複数回答可）の特記事項をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput6Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput6Div> onBeforeOpenDialog_btnShochiNaiyo(KihonChosaInput6Div div) {
+        div.getTokubetsuIryo().setTokkijikoNo(NinteiChosaTokkiJikou.点滴の管理.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特別な対応（複数回答可）の特記事項をクリックした際に、特記事項番号の設定をおこないます。
+     *
+     * @param div {@link KihonChosaInput6Div 認定基本調査入力Div}
+     * @return 認定基本調査入力Divを持つResponseData
+     */
+    public ResponseData<KihonChosaInput6Div> onBeforeOpenDialog_btnTokiTaiou(KihonChosaInput6Div div) {
+        div.getTokubetsuIryo().setTokkijikoNo(NinteiChosaTokkiJikou.中心静脈栄養.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
+        return ResponseData.of(div).respond();
+    }
+
+    private void setDailogDataPassing(KihonChosaInput6Div div) {
+        RString rirekiNo = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
+        div.getTokubetsuIryo().setRecordNumber(rirekiNo);
+        ArrayList list = new ArrayList();
+        list.add(div.getTokubetsuIryo().getTokkijikoNo());
+        div.getTokubetsuIryo().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(list));
+    }
 }

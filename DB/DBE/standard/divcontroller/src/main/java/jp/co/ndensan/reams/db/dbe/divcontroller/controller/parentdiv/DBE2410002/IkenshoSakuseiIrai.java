@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.Ikensho
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudou;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouReportJoho;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.DBE2410002StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiValidationHandler;
@@ -56,7 +57,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -122,14 +122,16 @@ public class IkenshoSakuseiIrai {
             div.getTxtHakobi().setValue(RDate.getNowDate());
         }
         div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
+        onChange_radKigen(div);
         
         if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
                         div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())){
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
             div.getIraiprintPanel().setDisabled(true);
             div.getMeireishoPanel().setDisabled(true);
+            return ResponseData.of(div).setState(DBE2410002StateName.ReadOnly);
         }
-        onChange_radKigen(div);
+
         return ResponseData.of(div).respond();
     }
 

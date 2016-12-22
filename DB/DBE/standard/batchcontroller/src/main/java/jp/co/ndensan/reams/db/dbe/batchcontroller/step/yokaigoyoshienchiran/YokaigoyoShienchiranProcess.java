@@ -55,7 +55,6 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseijouhouinnsatu."
             + "IShinseiJouhouInsatuRelateMapper.selectShinseiJouhou");
     private ShinseiJouhouInsatuProcessParameter processParameter;
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString 無し = new RString("無し");
     @BatchWriter
@@ -120,8 +119,6 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JOBNO_NAME);
-        ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
         RString 帳票名 = ReportIdDBE.DBE011001.getReportName();

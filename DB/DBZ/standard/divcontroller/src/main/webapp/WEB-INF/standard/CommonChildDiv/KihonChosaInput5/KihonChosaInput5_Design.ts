@@ -8,6 +8,30 @@ module DBZ {
 
         export class Events {
 
+            public static onBeforeOpenDialog_btnKusuri(): string {
+                return "onBeforeOpenDialog_btnKusuri";
+            }
+
+            public static onBeforeOpenDialog_btnKingakuKanri(): string {
+                return "onBeforeOpenDialog_btnKingakuKanri";
+            }
+
+            public static onBeforeOpenDialog_btnIshiKetei(): string {
+                return "onBeforeOpenDialog_btnIshiKetei";
+            }
+
+            public static onBeforeOpenDialog_btnShudan(): string {
+                return "onBeforeOpenDialog_btnShudan";
+            }
+
+            public static onBeforeOpenDialog_btnKaiMono(): string {
+                return "onBeforeOpenDialog_btnKaiMono";
+            }
+
+            public static onBeforeOpenDialog_btnKantanChori(): string {
+                return "onBeforeOpenDialog_btnKantanChori";
+            }
+
             public static onClick_btnBack(): string {
                 return "onClick_btnBack";
             }

@@ -48,6 +48,11 @@ public enum IkenshoShukeiKijunbiKubun {
         return kubun;
     }
 
+    /**
+     * タイトルを返します。
+     *
+     * @return タイトル
+     */
     public RString getTitle() {
         return title;
     }

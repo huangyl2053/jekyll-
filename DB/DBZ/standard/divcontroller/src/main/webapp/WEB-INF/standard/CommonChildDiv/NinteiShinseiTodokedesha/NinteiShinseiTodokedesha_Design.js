@@ -20,10 +20,6 @@ var DBZ;
                 return "onClick_btnZenkaiFukusha";
             };
 
-            Events.onClick_lostFocus = function () {
-                return "onClick_lostFocus";
-            };
-
             Events.onChangeChkKannaiKangai = function () {
                 return "onChangeChkKannaiKangai";
             };
@@ -67,16 +63,8 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnZenkaiFukusha"));
             };
 
-            Controls.prototype.txtJigyoshaCode = function () {
-                return new UZA.TextBox(this.convFiledName("txtJigyoshaCode"));
-            };
-
-            Controls.prototype.btnJigyoshaGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnJigyoshaGuide"));
-            };
-
-            Controls.prototype.txtJigyoshaName = function () {
-                return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
+            Controls.prototype.ccdShisetsuJohoCommonChildDiv = function () {
+                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJohoCommonChildDiv"));
             };
 
             Controls.prototype.ddlShinseiKankeisha = function () {

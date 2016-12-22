@@ -181,9 +181,7 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.noDeleted_DbT5591GogitaiJoho" />
         ORDER BY
-        "dbT5591GogitaiJoho_gogitaiNo"
-         LIMIT
-            #{最大表示件数}) AS DbT5591GogitaiJoho
+        "dbT5591GogitaiJoho_gogitaiNo") AS DbT5591GogitaiJoho
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.noDeleted_DbT5592ShinsakaiKaisaiBashoJoho" />) AS DbT5592ShinsakaiKaisaiBashoJoho
         ON
@@ -206,6 +204,7 @@
         </where>
         ORDER BY
             DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo",
+            DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD",            
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" DESC,
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" ASC
     </sql>
@@ -237,27 +236,27 @@
     </resultMap>
 
     <sql id="allColumns_TempGogitaiJohoSakusei">
-        "TempGogitaiJohoSakusei"."合議体NO" as "tempGogitaiJohoSakusei_合議体NO",
-        "TempGogitaiJohoSakusei"."有効開始日" as "tempGogitaiJohoSakusei_有効開始日",
-        "TempGogitaiJohoSakusei"."有効終了日" as "tempGogitaiJohoSakusei_有効終了日",
-        "TempGogitaiJohoSakusei"."合議体名称" as "tempGogitaiJohoSakusei_合議体名称",
-        "TempGogitaiJohoSakusei"."合議体開始予定時刻" as "tempGogitaiJohoSakusei_合議体開始予定時刻",
-        "TempGogitaiJohoSakusei"."合議体終了予定時刻" as "tempGogitaiJohoSakusei_合議体終了予定時刻",
-        "TempGogitaiJohoSakusei"."審査会予定定員" as "tempGogitaiJohoSakusei_審査会予定定員",
-        "TempGogitaiJohoSakusei"."審査会自動割当定員" as "tempGogitaiJohoSakusei_審査会自動割当定員",
-        "TempGogitaiJohoSakusei"."審査会委員定員" as "tempGogitaiJohoSakusei_審査会委員定員",
-        "TempGogitaiJohoSakusei"."開催場所コード" as "tempGogitaiJohoSakusei_開催場所コード",
-        "TempGogitaiJohoSakusei"."精神科医所属" as "tempGogitaiJohoSakusei_精神科医所属",
-        "TempGogitaiJohoSakusei"."合議体ダミーフラグ" as "tempGogitaiJohoSakusei_合議体ダミーフラグ",
-        "TempGogitaiJohoSakusei"."審査会委員コード" as "tempGogitaiJohoSakusei_審査会委員コード",
-        "TempGogitaiJohoSakusei"."補欠" as "tempGogitaiJohoSakusei_補欠",
-        "TempGogitaiJohoSakusei"."合議体長区分コード" as "tempGogitaiJohoSakusei_合議体長区分コード"
+        "TempGogitaiJohoSakusei"."合議体NO" as "TempGogitaiJohoSakusei_合議体NO",
+        "TempGogitaiJohoSakusei"."有効開始日" as "TempGogitaiJohoSakusei_有効開始日",
+        "TempGogitaiJohoSakusei"."有効終了日" as "TempGogitaiJohoSakusei_有効終了日",
+        "TempGogitaiJohoSakusei"."合議体名称" as "TempGogitaiJohoSakusei_合議体名称",
+        "TempGogitaiJohoSakusei"."合議体開始予定時刻" as "TempGogitaiJohoSakusei_合議体開始予定時刻",
+        "TempGogitaiJohoSakusei"."合議体終了予定時刻" as "TempGogitaiJohoSakusei_合議体終了予定時刻",
+        "TempGogitaiJohoSakusei"."審査会予定定員" as "TempGogitaiJohoSakusei_審査会予定定員",
+        "TempGogitaiJohoSakusei"."審査会自動割当定員" as "TempGogitaiJohoSakusei_審査会自動割当定員",
+        "TempGogitaiJohoSakusei"."審査会委員定員" as "TempGogitaiJohoSakusei_審査会委員定員",
+        "TempGogitaiJohoSakusei"."開催場所コード" as "TempGogitaiJohoSakusei_開催場所コード",
+        "TempGogitaiJohoSakusei"."精神科医所属" as "TempGogitaiJohoSakusei_精神科医所属",
+        "TempGogitaiJohoSakusei"."合議体ダミーフラグ" as "TempGogitaiJohoSakusei_合議体ダミーフラグ",
+        "TempGogitaiJohoSakusei"."審査会委員コード" as "TempGogitaiJohoSakusei_審査会委員コード",
+        "TempGogitaiJohoSakusei"."補欠" as "TempGogitaiJohoSakusei_補欠",
+        "TempGogitaiJohoSakusei"."合議体長区分コード" as "TempGogitaiJohoSakusei_合議体長区分コード"
     </sql>
 
     <resultMap id="resultMap_TempGogitaiJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.TempGogitaiJohoSakuseiEntity" autoMapping="true">
-        <id column="tempGogitaiJohoSakusei_合議体NO"/>
-        <id column="tempGogitaiJohoSakusei_有効開始日"/>
-        <id column="tempGogitaiJohoSakusei_有効終了日"/>
+        <id column="TempGogitaiJohoSakusei_合議体NO"/>
+        <id column="TempGogitaiJohoSakusei_有効開始日"/>
+        <id column="TempGogitaiJohoSakusei_有効終了日"/>
         <association property="合議体情報作成Temp"
                      resultMap="resultMap_TempGogitaiJohoSakusei"/>
     </resultMap>

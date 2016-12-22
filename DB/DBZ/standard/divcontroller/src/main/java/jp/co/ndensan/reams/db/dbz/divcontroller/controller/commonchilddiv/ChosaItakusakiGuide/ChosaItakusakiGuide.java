@@ -90,8 +90,7 @@ public class ChosaItakusakiGuide {
 
     private List<KijuntsukiShichosonjoho> searchChosaItakusaki(ChosaItakusakiGuideDiv div) {
         KijuntsukiShichosonjohoFinder finder = KijuntsukiShichosonjohoFinder.createInstance();
-        List<KijuntsukiShichosonjoho> list = finder.getChosaItakusaki(createParam(div)).records();
-        return list;
+        return finder.getChosaItakusaki(createParam(div)).records();
     }
 
     private ChosaItakusakiAndChosainGuideParameter createParam(ChosaItakusakiGuideDiv div) {

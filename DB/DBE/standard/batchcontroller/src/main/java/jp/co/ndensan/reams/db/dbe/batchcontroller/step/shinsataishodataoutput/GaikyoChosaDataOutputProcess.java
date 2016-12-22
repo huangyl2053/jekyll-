@@ -5,27 +5,38 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsataishodataoutput.ShinsaTaishoDataOutPutResult;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.GaikyoChosaDataMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.GaikyoChosaData5207_08_09_10RelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.GaikyoChosaDataEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.GaikyoChosaDataRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.GaikyoChosaDataZenkaiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsataishodataoutput.IShinsaTaishoDataOutPutMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku14;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -56,10 +67,33 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
             + "get概況調査データ");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518003");
     private static final RString FILE_NAME = new RString("概況調査データ.csv");
-    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+
+    private static final int 連番1 = 1;
+    private static final int 連番2 = 2;
+    private static final int 連番3 = 3;
+    private static final int 連番4 = 4;
+    private static final int 連番5 = 5;
+    private static final int 連番6 = 6;
+    private static final int 連番7 = 7;
+    private static final int 連番8 = 8;
+    private static final int 連番9 = 9;
+    private static final int 連番10 = 10;
+    private static final int 連番11 = 11;
+    private static final int 連番12 = 12;
+    private static final int 連番13 = 13;
+    private static final int 連番14 = 14;
+    private static final int 連番15 = 15;
+    private static final int 連番16 = 16;
+    private static final int 連番17 = 17;
+    private static final int 連番18 = 18;
+    private static final int 連番19 = 19;
+    private static final int 連番20 = 20;
+
     private ShinsaTaishoDataOutPutProcessParammeter processParamter;
     private RString eucFilePath;
     private FileSpoolManager manager;
+    private IShinsaTaishoDataOutPutMapper mapper;
     @BatchWriter
     private CsvWriter<GaikyoChosaDataEucCsvEntity> eucCsvWriter;
 
@@ -81,6 +115,11 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
     }
 
     @Override
+    protected void beforeExecute() {
+        mapper = getMapper(IShinsaTaishoDataOutPutMapper.class);
+    }
+
+    @Override
     protected void process(GaikyoChosaDataRelateEntity entity) {
         eucCsvWriter.writeLine(createCsvEntity(entity));
     }
@@ -97,12 +136,14 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
 
         csvEntity.set申請書管理番号(entity.get申請書管理番号());
         csvEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
-        //csvEntity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード()).get名称());
+        csvEntity.set厚労省認定ソフトのバージョン(RString.EMPTY);
         csvEntity.set証記載保険者番号(entity.get証記載保険者番号());
         csvEntity.set被保険者番号(entity.get被保険者番号());
         csvEntity.set認定申請年月日(entity.get認定申請年月日());
         csvEntity.set認定申請区分_申請時_コード(entity.get認定申請区分_申請時_コード());
-        //csvEntity.set認定申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get略称());
+        csvEntity.set認定申請区分_申請時(
+                RString.isNullOrEmpty(entity.get認定申請区分_申請時_コード())
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get略称());
         csvEntity.set被保険者氏名(entity.get被保険者氏名());
         csvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
         csvEntity.set生年月日(entity.get生年月日());
@@ -115,20 +156,26 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set認定調査依頼完了年月日(entity.get認定調査依頼完了年月日());
         csvEntity.set認定調査依頼履歴番号(entity.get認定調査依頼履歴番号());
         csvEntity.set認定調査委託先コード(entity.get認定調査委託先コード());
-        //csvEntity.set調査委託先();
+        csvEntity.set調査委託先(entity.get調査委託先());
         csvEntity.set認定調査員コード(entity.get認定調査員コード());
         csvEntity.set調査員氏名(entity.get調査員氏名());
         csvEntity.set概況特記テキスト_イメージ区分コード(entity.get概況特記テキスト_イメージ区分コード());
-        //csvEntity.set概況特記テキスト_イメージ区分(TokkijikoTextImageKubun.toValue(entity.get概況特記テキスト_イメージ区分コード()).get名称());
+        csvEntity.set概況特記テキスト_イメージ区分(
+                RString.isNullOrEmpty(entity.get概況特記テキスト_イメージ区分コード())
+                ? RString.EMPTY : TokkijikoTextImageKubun.toValue(entity.get概況特記テキスト_イメージ区分コード()).get名称());
         csvEntity.set認定調査依頼区分コード(entity.get認定調査依頼区分コード());
-        //csvEntity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
+        csvEntity.set認定調査依頼区分(
+                RString.isNullOrEmpty(entity.get認定調査依頼区分コード())
+                ? RString.EMPTY : NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         csvEntity.set認定調査回数(entity.get認定調査回数());
         csvEntity.set認定調査実施年月日(entity.get認定調査実施年月日());
         csvEntity.set認定調査受領年月日(entity.get認定調査受領年月日());
         csvEntity.set認定調査区分コード(entity.get認定調査区分コード());
-        //csvEntity.set認定調査区分(ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
+        csvEntity.set認定調査区分(
+                RString.isNullOrEmpty(entity.get認定調査区分コード())
+                ? RString.EMPTY : ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
         csvEntity.set認定調査実施場所コード(entity.get認定調査実施場所コード());
-        csvEntity.set認定調査実施場所(entity.get認定調査実施場所());
+        csvEntity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(entity.get認定調査実施場所コード()).get名称());
         csvEntity.set認定調査実施場所名称(entity.get認定調査実施場所名称());
         csvEntity.set家族等連絡先郵便番号(entity.get家族等連絡先郵便番号());
         csvEntity.set家族等電話番号(entity.get家族等電話番号());
@@ -136,7 +183,9 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set家族等氏名(entity.get家族等氏名());
         csvEntity.set調査対象者との関係(entity.get調査対象者との関係());
         csvEntity.set認定調査_サービス区分コード(entity.get認定調査_サービス区分コード());
-        //csvEntity.set認定調査_サービス区分(ServiceKubunCode.toValue(entity.get認定調査_サービス区分コード()).get名称());
+        csvEntity.set認定調査_サービス区分(
+                RString.isNullOrEmpty(entity.get認定調査_サービス区分コード())
+                ? RString.EMPTY : ServiceKubunCode.toValue(entity.get認定調査_サービス区分コード()).get名称());
         csvEntity.set利用施設名(entity.get利用施設名());
         csvEntity.set利用施設住所(entity.get利用施設住所());
         csvEntity.set利用施設電話番号(entity.get利用施設電話番号());
@@ -147,99 +196,54 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set住宅改修_改修箇所(entity.get住宅改修_改修箇所());
         csvEntity.set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名());
         csvEntity.set介護保険給付以外の在宅サービス種類名(entity.get介護保険給付以外の在宅サービス種類名());
-        csvEntity.setサービスの状況連番01(entity.getサービスの状況連番01());
-        csvEntity.setサービスの状況01(entity.getサービスの状況01());
-        csvEntity.setサービスの状況連番02(entity.getサービスの状況連番02());
-        csvEntity.setサービスの状況02(entity.getサービスの状況02());
-        csvEntity.setサービスの状況連番03(entity.getサービスの状況連番03());
-        csvEntity.setサービスの状況03(entity.getサービスの状況03());
-        csvEntity.setサービスの状況連番04(entity.getサービスの状況連番04());
-        csvEntity.setサービスの状況04(entity.getサービスの状況04());
-        csvEntity.setサービスの状況連番05(entity.getサービスの状況連番05());
-        csvEntity.setサービスの状況05(entity.getサービスの状況05());
-        csvEntity.setサービスの状況連番06(entity.getサービスの状況連番06());
-        csvEntity.setサービスの状況06(entity.getサービスの状況06());
-        csvEntity.setサービスの状況連番07(entity.getサービスの状況連番07());
-        csvEntity.setサービスの状況07(entity.getサービスの状況07());
-        csvEntity.setサービスの状況連番08(entity.getサービスの状況連番08());
-        csvEntity.setサービスの状況08(entity.getサービスの状況08());
-        csvEntity.setサービスの状況連番09(entity.getサービスの状況連番09());
-        csvEntity.setサービスの状況09(entity.getサービスの状況09());
-        csvEntity.setサービスの状況連番10(entity.getサービスの状況連番10());
-        csvEntity.setサービスの状況10(entity.getサービスの状況10());
-        csvEntity.setサービスの状況連番11(entity.getサービスの状況連番11());
-        csvEntity.setサービスの状況11(entity.getサービスの状況11());
-        csvEntity.setサービスの状況連番12(entity.getサービスの状況連番12());
-        csvEntity.setサービスの状況12(entity.getサービスの状況12());
-        csvEntity.setサービスの状況連番13(entity.getサービスの状況連番13());
-        csvEntity.setサービスの状況13(entity.getサービスの状況13());
-        csvEntity.setサービスの状況連番14(entity.getサービスの状況連番14());
-        csvEntity.setサービスの状況14(entity.getサービスの状況14());
-        csvEntity.setサービスの状況連番15(entity.getサービスの状況連番15());
-        csvEntity.setサービスの状況15(entity.getサービスの状況15());
-        csvEntity.setサービスの状況連番16(entity.getサービスの状況連番16());
-        csvEntity.setサービスの状況16(entity.getサービスの状況16());
-        csvEntity.setサービスの状況連番17(entity.getサービスの状況連番17());
-        csvEntity.setサービスの状況17(entity.getサービスの状況17());
-        csvEntity.setサービスの状況連番18(entity.getサービスの状況連番18());
-        csvEntity.setサービスの状況18(entity.getサービスの状況18());
-        csvEntity.setサービスの状況連番19(entity.getサービスの状況連番19());
-        csvEntity.setサービスの状況19(entity.getサービスの状況19());
-        csvEntity.setサービスの状況連番20(entity.getサービスの状況連番20());
-        csvEntity.setサービスの状況20(entity.getサービスの状況20());
-        csvEntity.setサービスの状況フラグ連番(entity.getサービスの状況フラグ連番());
-        csvEntity.setサービスの状況フラグ(entity.isサービスの状況フラグ());
-        csvEntity.set記入項目連番01(entity.get記入項目連番01());
-        csvEntity.setサービスの状況記入01(entity.getサービスの状況記入01());
-        csvEntity.set記入項目連番02(entity.get記入項目連番02());
-        csvEntity.setサービスの状況記入02(entity.getサービスの状況記入02());
-        csvEntity.set施設利用連番01(entity.get施設利用連番01());
-        csvEntity.set施設利用フラグ01(entity.is施設利用フラグ01());
-        csvEntity.set施設利用連番02(entity.get施設利用連番02());
-        csvEntity.set施設利用フラグ02(entity.is施設利用フラグ02());
-        csvEntity.set施設利用連番03(entity.get施設利用連番03());
-        csvEntity.set施設利用フラグ03(entity.is施設利用フラグ03());
-        csvEntity.set施設利用連番04(entity.get施設利用連番04());
-        csvEntity.set施設利用フラグ04(entity.is施設利用フラグ04());
-        csvEntity.set施設利用連番05(entity.get施設利用連番05());
-        csvEntity.set施設利用フラグ05(entity.is施設利用フラグ05());
-        csvEntity.set施設利用連番06(entity.get施設利用連番06());
-        csvEntity.set施設利用フラグ06(entity.is施設利用フラグ06());
-        csvEntity.set施設利用連番07(entity.get施設利用連番07());
-        csvEntity.set施設利用フラグ07(entity.is施設利用フラグ07());
-        csvEntity.set施設利用連番08(entity.get施設利用連番08());
-        csvEntity.set施設利用フラグ08(entity.is施設利用フラグ08());
-        csvEntity.set施設利用連番09(entity.get施設利用連番09());
-        csvEntity.set施設利用フラグ09(entity.is施設利用フラグ09());
         csvEntity.set認定調査認知症高齢者の日常生活自立度コード(entity.get認定調査認知症高齢者の日常生活自立度コード());
-        //csvEntity.set認定調査認知症高齢者の日常生活自立度(
-        //        NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
+        csvEntity.set認定調査認知症高齢者の日常生活自立度(
+                RString.isNullOrEmpty(entity.get認定調査認知症高齢者の日常生活自立度コード())
+                ? RString.EMPTY : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
         csvEntity.set認定調査障害高齢者の日常生活自立度コード(entity.get認定調査障害高齢者の日常生活自立度コード());
-        //csvEntity.set認定調査障害高齢者の日常生活自立度(
-        //        ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
-        csvEntity.setステータス(entity.getステータス());
+        csvEntity.set認定調査障害高齢者の日常生活自立度(
+                RString.isNullOrEmpty(entity.get認定調査障害高齢者の日常生活自立度コード())
+                ? RString.EMPTY : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
+        csvEntity.setステータス(RString.EMPTY);
         csvEntity.set中間評価項目得点第1群(entity.get中間評価項目得点第1群());
         csvEntity.set中間評価項目得点第2群(entity.get中間評価項目得点第2群());
         csvEntity.set中間評価項目得点第3群(entity.get中間評価項目得点第3群());
         csvEntity.set中間評価項目得点第4群(entity.get中間評価項目得点第4群());
         csvEntity.set中間評価項目得点第5群(entity.get中間評価項目得点第5群());
         csvEntity.set被保険者区分コード(entity.get被保険者区分コード());
-        //csvEntity.set被保険者区分名称(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get略称());
+        csvEntity.set被保険者区分名称(
+                RString.isNullOrEmpty(entity.get被保険者区分コード())
+                ? RString.EMPTY : HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get略称());
         csvEntity.set認知症自立度Ⅱ以上の蓋然性(entity.get認知症自立度Ⅱ以上の蓋然性());
         csvEntity.set給付区分コード(entity.get給付区分コード());
-        //csvEntity.set給付区分(SuiteiKyufuKubunCode.toValue(entity.get給付区分コード()).get名称());
+        csvEntity.set給付区分(
+                RString.isNullOrEmpty(entity.get給付区分コード())
+                ? RString.EMPTY : SuiteiKyufuKubunCode.toValue(entity.get給付区分コード()).get名称());
         csvEntity.set状態の安定性コード(entity.get状態の安定性コード());
-        //csvEntity.set状態の安定性(JotaiAnteiseiCode.toValue(entity.get状態の安定性コード()).get名称());
-        csvEntity.set主治医認定調査認知症高齢者の日常生活自立度コード(entity.get主治医認定調査認知症高齢者の日常生活自立度コード());
-        //csvEntity.set主治医認定調査認知症高齢者の日常生活自立度(
-        //        NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get主治医認定調査認知症高齢者の日常生活自立度コード()).get名称());
-        csvEntity.set主治医認定調査障害高齢者の日常生活自立度コード(entity.get主治医認定調査障害高齢者の日常生活自立度コード());
-        //csvEntity.set主治医認定調査障害高齢者の日常生活自立度(
-        //        ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get主治医認定調査障害高齢者の日常生活自立度コード()).get名称());
+        csvEntity.set状態の安定性(
+                RString.isNullOrEmpty(entity.get状態の安定性コード())
+                ? RString.EMPTY : JotaiAnteiseiCode.toValue(entity.get状態の安定性コード()).get名称());
         csvEntity.set二号特定疾病コード(entity.get二号特定疾病コード());
         csvEntity.set認定申請理由(entity.get認定申請理由());
         csvEntity.set要介護認定一次判定結果コード(entity.get要介護認定一次判定結果コード());
-        //csvEntity.set要介護認定一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード())) {
+            csvEntity.set要介護認定一次判定結果(
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode02.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード())) {
+            csvEntity.set要介護認定一次判定結果(
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode06.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())) {
+            csvEntity.set要介護認定一次判定結果(
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード())) {
+            csvEntity.set要介護認定一次判定結果(
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode99.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+        }
         csvEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
         csvEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
         csvEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
@@ -251,34 +255,6 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set要介護認定等基準時間_医療関連(entity.get要介護認定等基準時間_医療関連());
         csvEntity.set要介護認定等基準時間_認知症加算(entity.get要介護認定等基準時間_認知症加算());
         csvEntity.set要介護認定一次判定警告コード(entity.get要介護認定一次判定警告コード());
-        csvEntity.set前回_審査会開催番号(entity.get前回_審査会開催番号());
-        csvEntity.set前回_認定有効開始年月日(entity.get前回_認定有効開始年月日());
-        csvEntity.set前回_認定有効終了年月日(entity.get前回_認定有効終了年月日());
-        csvEntity.set前回_認定期間(entity.get前回_認定期間());
-        csvEntity.set前回_二次判定日(entity.get前回_二次判定日());
-        csvEntity.set前回_申請区分_申(entity.get前回_申請区分_申());
-        csvEntity.set前回_申請区分_法(entity.get前回_申請区分_法());
-        csvEntity.set前回_通知区分(entity.get前回_通知区分());
-        csvEntity.set前回_特定疾病(entity.get前回_特定疾病());
-        csvEntity.set前回_一次判定(entity.get前回_一次判定());
-        csvEntity.set前回_二次判定(entity.get前回_二次判定());
-        csvEntity.set前回_状態像(entity.get前回_状態像());
-        csvEntity.set前回_審査会メモ(entity.get前回_審査会メモ());
-        csvEntity.set前回_審査会意見(entity.get前回_審査会意見());
-        csvEntity.set前々回_審査会開催番号(entity.get前々回_審査会開催番号());
-        csvEntity.set前々回_認定有効開始年月日(entity.get前々回_認定有効開始年月日());
-        csvEntity.set前々回_認定有効終了年月日(entity.get前々回_認定有効終了年月日());
-        csvEntity.set前々回_認定期間(entity.get前々回_認定期間());
-        csvEntity.set前々回_二次判定日(entity.get前々回_二次判定日());
-        csvEntity.set前々回_申請区分_申(entity.get前々回_申請区分_申());
-        csvEntity.set前々回_申請区分_法(entity.get前々回_申請区分_法());
-        csvEntity.set前々回_通知区分(entity.get前々回_通知区分());
-        csvEntity.set前々回_特定疾病(entity.get前々回_特定疾病());
-        csvEntity.set前々回_一次判定(entity.get前々回_一次判定());
-        csvEntity.set前々回_二次判定(entity.get前々回_二次判定());
-        csvEntity.set前々回_状態像(entity.get前々回_状態像());
-        csvEntity.set前々回_審査会メモ(entity.get前々回_審査会メモ());
-        csvEntity.set前々回_審査会意見(entity.get前々回_審査会意見());
         csvEntity.set今回_審査会開催番号(entity.get今回_審査会開催番号());
         csvEntity.set今回_認定有効開始年月日(entity.get今回_認定有効開始年月日());
         csvEntity.set今回_認定有効終了年月日(entity.get今回_認定有効終了年月日());
@@ -293,40 +269,298 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set今回_状態像(entity.get今回_状態像());
         csvEntity.set今回_審査会メモ(entity.get今回_審査会メモ());
         csvEntity.set今回_審査会意見(entity.get今回_審査会意見());
-        csvEntity.set要介護認定1_5次判定年月日(entity.get要介護認定1_5次判定年月日());
-        csvEntity.set要介護認定1_5次判定結果コード(entity.get要介護認定1_5次判定結果コード());
-        //csvEntity.set要介護認定1_5次判定結果(IchijiHanteiKekkaCode09.toValue(entity.get要介護認定1_5次判定結果コード()).get名称());
-        csvEntity.set要介護認定1_5次判定結果コード_認知症加算(entity.get要介護認定1_5次判定結果コード_認知症加算());
-        //csvEntity.set要介護認定1_5次判定結果_認知症加算(
-        //        IchijiHanteiKekkaNinchishoKasanCode.toValue(entity.get要介護認定1_5次判定結果コード_認知症加算()).get名称());
-        csvEntity.set要介護認定等基準時間_1_5次(entity.get要介護認定等基準時間_1_5次());
-        csvEntity.set要介護認定等基準時間_食事_1_5次(entity.get要介護認定等基準時間_食事_1_5次());
-        csvEntity.set要介護認定等基準時間_排泄_1_5次(entity.get要介護認定等基準時間_排泄_1_5次());
-        csvEntity.set要介護認定等基準時間_移動_1_5次(entity.get要介護認定等基準時間_移動_1_5次());
-        csvEntity.set要介護認定等基準時間_清潔保持_1_5次(entity.get要介護認定等基準時間_清潔保持_1_5次());
-        csvEntity.set要介護認定等基準時間_間接ケア_1_5次(entity.get要介護認定等基準時間_間接ケア_1_5次());
-        csvEntity.set要介護認定等基準時間_BPSD関連_1_5次(entity.get要介護認定等基準時間_BPSD関連_1_5次());
-        csvEntity.set要介護認定等基準時間_機能訓練_1_5次(entity.get要介護認定等基準時間_機能訓練_1_5次());
-        csvEntity.set要介護認定等基準時間_医療関連_1_5次(entity.get要介護認定等基準時間_医療関連_1_5次());
-        csvEntity.set要介護認定等基準時間_認知症加算_1_5次(entity.get要介護認定等基準時間_認知症加算_1_5次());
-        csvEntity.set中間評価項目得点第1群_1_5次(entity.get中間評価項目得点第1群_1_5次());
-        csvEntity.set中間評価項目得点第2群_1_5次(entity.get中間評価項目得点第2群_1_5次());
-        csvEntity.set中間評価項目得点第3群_1_5次(entity.get中間評価項目得点第3群_1_5次());
-        csvEntity.set中間評価項目得点第4群_1_5次(entity.get中間評価項目得点第4群_1_5次());
-        csvEntity.set中間評価項目得点第5群_1_5次(entity.get中間評価項目得点第5群_1_5次());
-        csvEntity.set要介護認定1_5次判定警告コード_1_5次(entity.get要介護認定1_5次判定警告コード_1_5次());
-        csvEntity.set要介護認定状態の安定性コード_1_5次(entity.get要介護認定状態の安定性コード_1_5次());
-        csvEntity.set認知症自立度Ⅱ以上の蓋然性_1_5次(entity.get認知症自立度Ⅱ以上の蓋然性_1_5次());
-        csvEntity.set認知機能及び状態安定性から推定される給付区分コード_1_5次(entity.get認知機能及び状態安定性から推定される給付区分コード_1_5次());
-        csvEntity.set短期記憶内容コード(entity.get短期記憶内容コード());
-        //csvEntity.set短期記憶内容(IkenKomoku04.toValue(entity.get短期記憶内容コード()).get名称());
-        csvEntity.set認知能力内容コード(entity.get認知能力内容コード());
-        //csvEntity.set認知能力内容(IkenKomoku05.toValue(entity.get認知能力内容コード()).get名称());
-        csvEntity.set伝達能力内容コード(entity.get伝達能力内容コード());
-        //csvEntity.set伝達能力内容(IkenKomoku06.toValue(entity.get伝達能力内容コード()).get名称());
-        csvEntity.set食事行為内容コード(entity.get食事行為内容コード());
-        //csvEntity.set食事行為内容(IkenKomoku14.toValue(entity.get食事行為内容コード()).get名称());
+        csvEntity.set要介護認定1_5次判定年月日(RString.EMPTY);
+        csvEntity.set要介護認定1_5次判定結果コード(RString.EMPTY);
+        csvEntity.set要介護認定1_5次判定結果(RString.EMPTY);
+        csvEntity.set要介護認定1_5次判定結果コード_認知症加算(RString.EMPTY);
+        csvEntity.set要介護認定1_5次判定結果_認知症加算(RString.EMPTY);
+        csvEntity.set要介護認定等基準時間_1_5次(null);
+        csvEntity.set要介護認定等基準時間_食事_1_5次(null);
+        csvEntity.set要介護認定等基準時間_排泄_1_5次(null);
+        csvEntity.set要介護認定等基準時間_移動_1_5次(null);
+        csvEntity.set要介護認定等基準時間_清潔保持_1_5次(null);
+        csvEntity.set要介護認定等基準時間_間接ケア_1_5次(null);
+        csvEntity.set要介護認定等基準時間_BPSD関連_1_5次(null);
+        csvEntity.set要介護認定等基準時間_機能訓練_1_5次(null);
+        csvEntity.set要介護認定等基準時間_医療関連_1_5次(null);
+        csvEntity.set要介護認定等基準時間_認知症加算_1_5次(null);
+        csvEntity.set中間評価項目得点第1群_1_5次(null);
+        csvEntity.set中間評価項目得点第2群_1_5次(null);
+        csvEntity.set中間評価項目得点第3群_1_5次(null);
+        csvEntity.set中間評価項目得点第4群_1_5次(null);
+        csvEntity.set中間評価項目得点第5群_1_5次(null);
+        csvEntity.set要介護認定1_5次判定警告コード_1_5次(RString.EMPTY);
+        csvEntity.set要介護認定状態の安定性コード_1_5次(RString.EMPTY);
+        csvEntity.set認知症自立度Ⅱ以上の蓋然性_1_5次(null);
+        csvEntity.set認知機能及び状態安定性から推定される給付区分コード_1_5次(RString.EMPTY);
+        csvEntity.set短期記憶内容コード(RString.EMPTY);
+        csvEntity.set短期記憶内容(RString.EMPTY);
+        csvEntity.set認知能力内容コード(RString.EMPTY);
+        csvEntity.set認知能力内容(RString.EMPTY);
+        csvEntity.set伝達能力内容コード(RString.EMPTY);
+        csvEntity.set伝達能力内容(RString.EMPTY);
+        csvEntity.set食事行為内容コード(RString.EMPTY);
+        csvEntity.set食事行為内容(RString.EMPTY);
         csvEntity.set介護認定審査会審査順(entity.get介護認定審査会審査順());
+
+        csvEntity = setサービスの状況等(entity.get申請書管理番号(), entity.get認定調査依頼履歴番号(), csvEntity);
+        csvEntity = set前回前々回情報(entity.get申請書管理番号(), csvEntity);
+        csvEntity = set主治医意見書情報(entity.get申請書管理番号(), csvEntity);
+
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity setサービスの状況等(
+            RString 申請書管理番号,
+            Decimal 認定調査依頼履歴番号,
+            GaikyoChosaDataEucCsvEntity csvEntity) {
+
+        GaikyoChosaDataMybatisParameter parameter = GaikyoChosaDataMybatisParameter.createParamter(
+                申請書管理番号,
+                認定調査依頼履歴番号);
+        GaikyoChosaData5207_08_09_10RelateEntity サービスの状況等リスト = mapper.get概況調査データサービスの状況等(parameter);
+
+        if (サービスの状況等リスト == null) {
+            return csvEntity;
+        }
+        csvEntity = setサービスの状況(csvEntity, サービスの状況等リスト.getサービスの状況リスト());
+        csvEntity = setサービスの状況フラグ(csvEntity, サービスの状況等リスト.getサービスの状況フラグリスト());
+        csvEntity = set記入項目(csvEntity, サービスの状況等リスト.get記入項目リスト());
+        csvEntity = set施設利用(csvEntity, サービスの状況等リスト.get施設利用リスト());
+
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity setサービスの状況(
+            GaikyoChosaDataEucCsvEntity csvEntity,
+            List<DbT5207NinteichosahyoServiceJokyoEntity> サービスの状況リスト) {
+
+        for (DbT5207NinteichosahyoServiceJokyoEntity サービスの状況 : サービスの状況リスト) {
+            if (サービスの状況.getRemban() == 連番1) {
+                csvEntity.setサービスの状況連番01(サービスの状況.getRemban());
+                csvEntity.setサービスの状況01(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番2) {
+                csvEntity.setサービスの状況連番02(サービスの状況.getRemban());
+                csvEntity.setサービスの状況02(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番3) {
+                csvEntity.setサービスの状況連番03(サービスの状況.getRemban());
+                csvEntity.setサービスの状況03(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番4) {
+                csvEntity.setサービスの状況連番04(サービスの状況.getRemban());
+                csvEntity.setサービスの状況04(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番5) {
+                csvEntity.setサービスの状況連番05(サービスの状況.getRemban());
+                csvEntity.setサービスの状況05(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番6) {
+                csvEntity.setサービスの状況連番06(サービスの状況.getRemban());
+                csvEntity.setサービスの状況06(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番7) {
+                csvEntity.setサービスの状況連番07(サービスの状況.getRemban());
+                csvEntity.setサービスの状況07(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番8) {
+                csvEntity.setサービスの状況連番08(サービスの状況.getRemban());
+                csvEntity.setサービスの状況08(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番9) {
+                csvEntity.setサービスの状況連番09(サービスの状況.getRemban());
+                csvEntity.setサービスの状況09(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番10) {
+                csvEntity.setサービスの状況連番10(サービスの状況.getRemban());
+                csvEntity.setサービスの状況10(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番11) {
+                csvEntity.setサービスの状況連番11(サービスの状況.getRemban());
+                csvEntity.setサービスの状況11(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番12) {
+                csvEntity.setサービスの状況連番12(サービスの状況.getRemban());
+                csvEntity.setサービスの状況12(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番13) {
+                csvEntity.setサービスの状況連番13(サービスの状況.getRemban());
+                csvEntity.setサービスの状況13(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番14) {
+                csvEntity.setサービスの状況連番14(サービスの状況.getRemban());
+                csvEntity.setサービスの状況14(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番15) {
+                csvEntity.setサービスの状況連番15(サービスの状況.getRemban());
+                csvEntity.setサービスの状況15(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番16) {
+                csvEntity.setサービスの状況連番16(サービスの状況.getRemban());
+                csvEntity.setサービスの状況16(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番17) {
+                csvEntity.setサービスの状況連番17(サービスの状況.getRemban());
+                csvEntity.setサービスの状況17(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番18) {
+                csvEntity.setサービスの状況連番18(サービスの状況.getRemban());
+                csvEntity.setサービスの状況18(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番19) {
+                csvEntity.setサービスの状況連番19(サービスの状況.getRemban());
+                csvEntity.setサービスの状況19(サービスの状況.getServiceJokyo());
+            } else if (サービスの状況.getRemban() == 連番20) {
+                csvEntity.setサービスの状況連番20(サービスの状況.getRemban());
+                csvEntity.setサービスの状況20(サービスの状況.getServiceJokyo());
+            }
+        }
+
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity setサービスの状況フラグ(
+            GaikyoChosaDataEucCsvEntity csvEntity,
+            List<DbT5208NinteichosahyoServiceJokyoFlagEntity> サービスの状況フラグリスト) {
+
+        for (DbT5208NinteichosahyoServiceJokyoFlagEntity サービスの状況フラグ : サービスの状況フラグリスト) {
+            if (サービスの状況フラグ.getRemban() == 連番1) {
+                csvEntity.setサービスの状況フラグ連番(サービスの状況フラグ.getRemban());
+                csvEntity.setサービスの状況フラグ(サービスの状況フラグ.getServiceJokyoFlag());
+            }
+        }
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity set記入項目(
+            GaikyoChosaDataEucCsvEntity csvEntity,
+            List<DbT5209NinteichosahyoKinyuItemEntity> 記入項目リスト) {
+
+        for (DbT5209NinteichosahyoKinyuItemEntity 記入項目 : 記入項目リスト) {
+            if (記入項目.getRemban() == 連番1) {
+                csvEntity.set記入項目連番01(記入項目.getRemban());
+                csvEntity.setサービスの状況記入01(記入項目.getServiceJokyoKinyu());
+            } else if (記入項目.getRemban() == 連番2) {
+                csvEntity.set記入項目連番02(記入項目.getRemban());
+                csvEntity.setサービスの状況記入02(記入項目.getServiceJokyoKinyu());
+            }
+        }
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity set施設利用(
+            GaikyoChosaDataEucCsvEntity csvEntity,
+            List<DbT5210NinteichosahyoShisetsuRiyoEntity> 施設利用リスト) {
+        for (DbT5210NinteichosahyoShisetsuRiyoEntity 施設利用 : 施設利用リスト) {
+            if (施設利用.getRemban() == 連番1) {
+                csvEntity.set施設利用連番01(施設利用.getRemban());
+                csvEntity.set施設利用フラグ01(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番2) {
+                csvEntity.set施設利用連番02(施設利用.getRemban());
+                csvEntity.set施設利用フラグ02(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番3) {
+                csvEntity.set施設利用連番03(施設利用.getRemban());
+                csvEntity.set施設利用フラグ03(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番4) {
+                csvEntity.set施設利用連番04(施設利用.getRemban());
+                csvEntity.set施設利用フラグ04(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番5) {
+                csvEntity.set施設利用連番05(施設利用.getRemban());
+                csvEntity.set施設利用フラグ05(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番6) {
+                csvEntity.set施設利用連番06(施設利用.getRemban());
+                csvEntity.set施設利用フラグ06(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番7) {
+                csvEntity.set施設利用連番07(施設利用.getRemban());
+                csvEntity.set施設利用フラグ07(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番8) {
+                csvEntity.set施設利用連番08(施設利用.getRemban());
+                csvEntity.set施設利用フラグ08(施設利用.getShisetsuRiyoFlag());
+            } else if (施設利用.getRemban() == 連番9) {
+                csvEntity.set施設利用連番09(施設利用.getRemban());
+                csvEntity.set施設利用フラグ09(施設利用.getShisetsuRiyoFlag());
+            }
+        }
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity set前回前々回情報(
+            RString 申請書管理番号,
+            GaikyoChosaDataEucCsvEntity csvEntity) {
+
+        GaikyoChosaDataMybatisParameter parameter = GaikyoChosaDataMybatisParameter.createParamter(
+                申請書管理番号);
+        GaikyoChosaDataZenkaiJohoRelateEntity 前回情報 = mapper.get概況調査データ前回情報(parameter);
+
+        if (前回情報 == null) {
+            return csvEntity;
+        } else {
+            csvEntity = set前回情報(csvEntity, 前回情報);
+        }
+
+        parameter = GaikyoChosaDataMybatisParameter.createParamter(
+                前回情報.get申請書管理番号());
+
+        GaikyoChosaDataZenkaiJohoRelateEntity 前々回情報 = mapper.get概況調査データ前回情報(parameter);
+
+        if (前々回情報 == null) {
+            return csvEntity;
+        } else {
+            csvEntity = set前々回情報(csvEntity, 前々回情報);
+        }
+
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity set前回情報(
+            GaikyoChosaDataEucCsvEntity csvEntity,
+            GaikyoChosaDataZenkaiJohoRelateEntity 前回情報) {
+
+        csvEntity.set前回_審査会開催番号(前回情報.get審査会開催番号());
+        csvEntity.set前回_認定有効開始年月日(前回情報.get認定有効開始年月日());
+        csvEntity.set前回_認定有効終了年月日(前回情報.get認定有効終了年月日());
+        csvEntity.set前回_認定期間(前回情報.get認定期間());
+        csvEntity.set前回_二次判定日(前回情報.get二次判定日());
+        csvEntity.set前回_申請区分_申(前回情報.get申請区分_申());
+        csvEntity.set前回_申請区分_法(前回情報.get申請区分_法());
+        csvEntity.set前回_通知区分(前回情報.get通知区分());
+        csvEntity.set前回_特定疾病(前回情報.get特定疾病());
+        csvEntity.set前回_一次判定(前回情報.get一次判定());
+        csvEntity.set前回_二次判定(前回情報.get二次判定());
+        csvEntity.set前回_状態像(前回情報.get状態像());
+        csvEntity.set前回_審査会メモ(前回情報.get審査会メモ());
+        csvEntity.set前回_審査会意見(前回情報.get審査会意見());
+
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity set前々回情報(
+            GaikyoChosaDataEucCsvEntity csvEntity,
+            GaikyoChosaDataZenkaiJohoRelateEntity 前々回情報) {
+
+        csvEntity.set前々回_審査会開催番号(前々回情報.get審査会開催番号());
+        csvEntity.set前々回_認定有効開始年月日(前々回情報.get認定有効開始年月日());
+        csvEntity.set前々回_認定有効終了年月日(前々回情報.get認定有効終了年月日());
+        csvEntity.set前々回_認定期間(前々回情報.get認定期間());
+        csvEntity.set前々回_二次判定日(前々回情報.get二次判定日());
+        csvEntity.set前々回_申請区分_申(前々回情報.get申請区分_申());
+        csvEntity.set前々回_申請区分_法(前々回情報.get申請区分_法());
+        csvEntity.set前々回_通知区分(前々回情報.get通知区分());
+        csvEntity.set前々回_特定疾病(前々回情報.get特定疾病());
+        csvEntity.set前々回_一次判定(前々回情報.get一次判定());
+        csvEntity.set前々回_二次判定(前々回情報.get二次判定());
+        csvEntity.set前々回_状態像(前々回情報.get状態像());
+        csvEntity.set前々回_審査会メモ(前々回情報.get審査会メモ());
+        csvEntity.set前々回_審査会意見(前々回情報.get審査会意見());
+
+        return csvEntity;
+    }
+
+    private GaikyoChosaDataEucCsvEntity set主治医意見書情報(
+            RString 申請書管理番号,
+            GaikyoChosaDataEucCsvEntity csvEntity) {
+
+        GaikyoChosaDataMybatisParameter parameter = GaikyoChosaDataMybatisParameter.createParamter(
+                申請書管理番号);
+        List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書意見項目リスト = mapper.get要介護認定主治医意見書意見項目(parameter);
+
+        for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書意見項目 : 主治医意見書意見項目リスト) {
+            if (主治医意見書意見項目.getRemban() == 連番14) {
+                csvEntity.set主治医認定調査認知症高齢者の日常生活自立度コード(主治医意見書意見項目.getIkenItem());
+                csvEntity.set主治医認定調査認知症高齢者の日常生活自立度(
+                        RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
+                        ? RString.EMPTY : IkenKomoku03.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+            }
+            if (主治医意見書意見項目.getRemban() == 連番13) {
+                csvEntity.set主治医認定調査障害高齢者の日常生活自立度コード(主治医意見書意見項目.getIkenItem());
+                csvEntity.set主治医認定調査障害高齢者の日常生活自立度(
+                        RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
+                        ? RString.EMPTY : IkenKomoku02.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+            }
+        }
 
         return csvEntity;
     }

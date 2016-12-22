@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinHanteiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinIkenshoDataSakuseiA4Process;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaS
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuikaSiryoDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.IinTuutishoDataSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002.DBE517002_ShinsakaiShiryoIinParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -47,9 +49,11 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     private static final String 審査会資料組み合わせ一覧A4版 = "審査会資料組み合わせ一覧A4版";
     private static final RString 選択 = new RString("1");
     private static final RString 作成条件_追加分 = new RString("追加分");
+    private Map<RString, RString> 出力帳票一覧;
 
     @Override
     protected void defineFlow() {
+        出力帳票一覧 = getParameter().get帳票一覧Map();
         if (選択.equals(getParameter().getChohyoIin_tuutishoFalg())) {
             executeStep(委員_審査会開催通知書);
         }
@@ -91,6 +95,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
                 executeStep(委員_追加資料鑑);
             }
         }
+        putFlowResult(new RString("出力帳票一覧"), 出力帳票一覧);
     }
 
     private void 主治医意見書Flow() {
@@ -110,6 +115,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(委員_審査会開催通知書)
     protected IBatchFlowCommand createIinTuutishoData() {
+        出力帳票一覧.put(ReportIdDBE.DBE515001.getReportId().getColumnValue(), ReportIdDBE.DBE515001.getReportName());
         return loopBatch(IinTuutishoDataSakuseiProcess.class)
                 .arguments(getParameter().toIinTuutishoProcessParameter()).define();
     }
@@ -121,6 +127,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(委員_特記事項)
     protected IBatchFlowCommand createIinTokkiJikouData() {
+        出力帳票一覧.put(ReportIdDBE.DBE517131.getReportId().getColumnValue(), ReportIdDBE.DBE517131.getReportName());
         return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
@@ -132,6 +139,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(委員_特記事項_一次判定結果)
     protected IBatchFlowCommand createIinTokkiJikouItiziHanteiData() {
+        出力帳票一覧.put(ReportIdDBE.DBE517085.getReportId().getColumnValue(), ReportIdDBE.DBE517085.getReportName());
         return loopBatch(IinTokkiJikouItiziHanteiDataSakuseiA3Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
@@ -143,6 +151,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(委員_一次判定結果)
     protected IBatchFlowCommand createIinItiziHanteiData() {
+        出力帳票一覧.put(ReportIdDBE.DBE517038.getReportId().getColumnValue(), ReportIdDBE.DBE517038.getReportName());
         return loopBatch(IinItiziHanteiDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
@@ -154,6 +163,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(委員_主治医意見書_1枚目)
     protected IBatchFlowCommand createIinIkenshoData_A4_1() {
+        出力帳票一覧.put(ReportIdDBE.DBE517151.getReportId().getColumnValue(), ReportIdDBE.DBE517151.getReportName());
         return loopBatch(IinIkenshoDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
@@ -165,6 +175,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(委員_主治医意見書_A3)
     protected IBatchFlowCommand createIinIkenshoData_A3() {
+        出力帳票一覧.put(ReportIdDBE.DBE517005.getReportId().getColumnValue(), ReportIdDBE.DBE517005.getReportName());
         return loopBatch(IinIkenshoDataSakuseiA3Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
@@ -176,6 +187,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(委員_予備判定一覧)
     protected IBatchFlowCommand createIinHanteiData() {
+        出力帳票一覧.put(ReportIdDBE.DBE517022.getReportId().getColumnValue(), ReportIdDBE.DBE517022.getReportName());
         return loopBatch(IinHanteiDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
@@ -188,9 +200,11 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     @Step(委員_審査対象者一覧)
     protected IBatchFlowCommand createIinShinsakaiIinJohoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
+            出力帳票一覧.put(ReportIdDBE.DBE517011.getReportId().getColumnValue(), ReportIdDBE.DBE517011.getReportName());
             return loopBatch(IinShinsakaiIinJohoDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         } else {
+            出力帳票一覧.put(ReportIdDBE.DBE517001.getReportId().getColumnValue(), ReportIdDBE.DBE517001.getReportName());
             return loopBatch(IinShinsakaiIinJohoDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         }
@@ -204,9 +218,11 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     @Step(委員_追加資料鑑)
     protected IBatchFlowCommand createIinTuikaSiryoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
+            出力帳票一覧.put(ReportIdDBE.DBE517019.getReportId().getColumnValue(), ReportIdDBE.DBE517019.getReportName());
             return loopBatch(IinTuikaSiryoDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         } else {
+            出力帳票一覧.put(ReportIdDBE.DBE517009.getReportId().getColumnValue(), ReportIdDBE.DBE517009.getReportName());
             return loopBatch(IinTuikaSiryoDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinShinsakaiIinJohoProcessParameter()).define();
         }
@@ -220,9 +236,11 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     @Step(委員_その他資料)
     protected IBatchFlowCommand createSonotaJohoData() {
         if (選択.equals(getParameter().getShuturyokuSutairu())) {
+            出力帳票一覧.put(ReportIdDBE.DBE517016.getReportId().getColumnValue(), ReportIdDBE.DBE517016.getReportName());
             return loopBatch(IinSonotaJohoDataSakuseiA4Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         } else {
+            出力帳票一覧.put(ReportIdDBE.DBE517006.getReportId().getColumnValue(), ReportIdDBE.DBE517006.getReportName());
             return loopBatch(IinSonotaJohoDataSakuseiA3Process.class)
                     .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
         }
@@ -235,6 +253,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(審査会資料組み合わせ一覧A3版)
     protected IBatchFlowCommand createJimuShinsakaiSiryouKumiawaseA3() {
+        出力帳票一覧.put(ReportIdDBE.DBE517904.getReportId().getColumnValue(), ReportIdDBE.DBE517904.getReportName());
         return simpleBatch(IinShinsakaiSiryouKumiawaseA3Process.class)
                 .arguments(getParameter().toShinsakaiSiryouKumiawaseA3ProcessParameter()).define();
     }
@@ -246,6 +265,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      */
     @Step(審査会資料組み合わせ一覧A4版)
     protected IBatchFlowCommand createJimuShinsakaiSiryouKumiawaseA4() {
+        出力帳票一覧.put(ReportIdDBE.DBE517903.getReportId().getColumnValue(), ReportIdDBE.DBE517903.getReportName());
         return simpleBatch(IinShinsakaiSiryouKumiawaseA4Process.class)
                 .arguments(getParameter().toShinsakaiSiryouKumiawaseA3ProcessParameter()).define();
     }

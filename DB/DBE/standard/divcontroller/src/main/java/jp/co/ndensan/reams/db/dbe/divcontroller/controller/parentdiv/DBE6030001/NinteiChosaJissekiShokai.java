@@ -47,7 +47,6 @@ public class NinteiChosaJissekiShokai {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getChosaJisshibi().getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-//        getHandler(div).set初期状態();
         return ResponseData.of(div).respond();
     }
 
@@ -58,7 +57,6 @@ public class NinteiChosaJissekiShokai {
      * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnKensakuClear(NinteiChosaJissekiShokaiDiv div) {
-//        getHandler(div).set初期状態();
         getHandler(div).onClick_BtnKensakuClear();
         div.getChosaJisshibi().getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
@@ -86,11 +84,11 @@ public class NinteiChosaJissekiShokai {
         ChosahyoJissekiIchiranMybitisParamter paramter = ChosahyoJissekiIchiranMybitisParamter.createGamenParamter(false,
                 意見書記入日FROM,
                 意見書記入日TO,
+                div.getRadKijunbi().getSelectedKey(),
                 div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value(),
                 new RString(div.getChosaJisshibi().getTxtMaxKensu().getValue().toString()));
         Message message = getHandler(div).onClick_btnKensaku(NinteiChosaJissekiShokaiFindler.creatInstance().get帳票出力用認定調査実績集計表(paramter));
         if (message == null) {
-//            getHandler(div).set一覧状態();
             return ResponseData.of(div).setState(DBE6030001StateName.一覧);
         }
         return ResponseData.of(div).addMessage(message).respond();
@@ -103,7 +101,6 @@ public class NinteiChosaJissekiShokai {
      * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnBackToKensaku(NinteiChosaJissekiShokaiDiv div) {
-//        getHandler(div).set初期状態();
         return ResponseData.of(div).setState(DBE6030001StateName.初期表示);
     }
 

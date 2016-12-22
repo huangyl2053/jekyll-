@@ -48,7 +48,11 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
         RString ファイル名称 = RString.EMPTY;
         RDate 基準日 = RDate.getNowDate();
         if (div.getRadTorikomiTaishoData().getSelectedKey().contains(SELECT_KEY0)
-                && div.getRadShinsain().getSelectedKey().contains(SELECT_KEY0)) {
+            && div.getRadShinsain().getSelectedKey().contains(SELECT_KEY0)) {
+            審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会結果データ審査会情報取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査会情報, 基準日, SubGyomuCode.DBE認定支援);
+            dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
+
             審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会結果データ審査委員取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
             ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査委員, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
@@ -56,17 +60,27 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
             審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会結果データ審査結果取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
             ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査結果, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
+
+            div.getDgTorikomiTaiasho().setHeight(new RString("99"));
         }
         if (div.getRadTorikomiTaishoData().getSelectedKey().contains(SELECT_KEY0)
-                && div.getRadShinsain().getSelectedKey().contains(SELECT_KEY1)) {
+            && div.getRadShinsain().getSelectedKey().contains(SELECT_KEY1)) {
+            審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会結果データ審査会情報取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査会情報, 基準日, SubGyomuCode.DBE認定支援);
+            dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
+
             審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.モバイル審査会結果データ審査結果取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
             ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル審査結果, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
+
+            div.getDgTorikomiTaiasho().setHeight(new RString("74"));
         }
         if (div.getRadTorikomiTaishoData().getSelectedKey().contains(SELECT_KEY1)) {
             審査会審査結果データ = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会結果データファイル名, 基準日, SubGyomuCode.DBE認定支援);
             ファイル名称 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト審査会結果データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
             dataGridList.add(creatDgShinseishaIchiranRow(審査会審査結果データ, ファイル名称));
+
+            div.getDgTorikomiTaiasho().setHeight(new RString("49"));
         }
         div.getDgTorikomiTaiasho().getDataSource().clear();
         div.getDgTorikomiTaiasho().setDataSource(dataGridList);
@@ -80,7 +94,7 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
     public DBE518002_NinteiShinsaIraiIfTorikomiParameter setBatchParameter() {
         DBE518002_NinteiShinsaIraiIfTorikomiParameter batchParameter = new DBE518002_NinteiShinsaIraiIfTorikomiParameter();
         List<RString> fileList = new ArrayList<>();
-        for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getSelectedItems()) {
+        for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getDataSource()) {
             fileList.add(row.getFileName());
         }
         batchParameter.setFilename(fileList);
@@ -100,7 +114,7 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
             batchParameter.setShinsakaiiintorikomikubun(RSTRING_2);
         }
         batchParameter.setMediapath(DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+            .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         return batchParameter;
     }
 

@@ -23,6 +23,8 @@ public class ChosaJisshibiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("radKijunbi")
+    private RadioButton radKijunbi;
     @JsonProperty("txtChosaJisshibi")
     private TextBoxDateRange txtChosaJisshibi;
     @JsonProperty("txtMaxKensu")
@@ -38,6 +40,24 @@ public class ChosaJisshibiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradKijunbi
+     * @return radKijunbi
+     */
+    @JsonProperty("radKijunbi")
+    public RadioButton getRadKijunbi() {
+        return radKijunbi;
+    }
+
+    /*
+     * setradKijunbi
+     * @param radKijunbi radKijunbi
+     */
+    @JsonProperty("radKijunbi")
+    public void setRadKijunbi(RadioButton radKijunbi) {
+        this.radKijunbi = radKijunbi;
+    }
+
     /*
      * gettxtChosaJisshibi
      * @return txtChosaJisshibi

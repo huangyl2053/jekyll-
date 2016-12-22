@@ -11,14 +11,18 @@ import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shisetsu.ShisetsuJohoInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -227,6 +231,18 @@ public class ShisetsuJohoHandler {
                 div.getTxtNyuryokuShisetsuMeisho().clearValue();
             }
         }
+        if (new RString("DBEMN31001").equals(ResponseHolder.getMenuID())
+            && 台帳種別表示有り.equals(ViewStateHolder.get(ViewStateKeys.台帳種別表示, RString.class))
+                && div.getTxtNyuryokuShisetsuKodo() != null && !div.getTxtNyuryokuShisetsuKodo().getValue().isEmpty()) {
+                NinteiShinseiTodokedeshaFinder finder = NinteiShinseiTodokedeshaFinder.createInstance();
+                List<KaigoJigyoshaInputGuide> kaigoList = finder.getKaigoJigyoshaInputGuide(
+                    new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()),
+                    FlexibleDate.getNowDate()).records();
+            if (!kaigoList.isEmpty()) {
+                div.getTxtNyuryokuShisetsuMeisho().setValue(kaigoList.get(0).get事業者名称().value());
+            }
+        }
+        
         if (DaichoType.被保険者.getコード().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
             div.getRadKaigoHokenShisetsu().setVisible(true);
             div.getRadOtherTokureiShisetsu().setVisible(true);

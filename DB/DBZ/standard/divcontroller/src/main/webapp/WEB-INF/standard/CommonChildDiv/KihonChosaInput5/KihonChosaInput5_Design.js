@@ -4,6 +4,30 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBeforeOpenDialog_btnKusuri = function () {
+                return "onBeforeOpenDialog_btnKusuri";
+            };
+
+            Events.onBeforeOpenDialog_btnKingakuKanri = function () {
+                return "onBeforeOpenDialog_btnKingakuKanri";
+            };
+
+            Events.onBeforeOpenDialog_btnIshiKetei = function () {
+                return "onBeforeOpenDialog_btnIshiKetei";
+            };
+
+            Events.onBeforeOpenDialog_btnShudan = function () {
+                return "onBeforeOpenDialog_btnShudan";
+            };
+
+            Events.onBeforeOpenDialog_btnKaiMono = function () {
+                return "onBeforeOpenDialog_btnKaiMono";
+            };
+
+            Events.onBeforeOpenDialog_btnKantanChori = function () {
+                return "onBeforeOpenDialog_btnKantanChori";
+            };
+
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
             };

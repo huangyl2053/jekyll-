@@ -42,7 +42,7 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511001"));
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter<TempGogitaiJohoSakusei> gogitaiJohoSakuseiTempTableWriter;
+    private BatchEntityCreatedTempTableWriter<TempGogitaiJohoSakusei> gogitaiTempTableWriter;
 
     @Override
     protected void initialize() {
@@ -51,7 +51,7 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
 
     @Override
     protected void createWriter() {
-        gogitaiJohoSakuseiTempTableWriter = new BatchEntityCreatedTempTableWriter<>(TempGogitaiJohoSakusei.TABLE_NAME, TempGogitaiJohoSakusei.class);
+        gogitaiTempTableWriter = new BatchEntityCreatedTempTableWriter<>(TempGogitaiJohoSakusei.TABLE_NAME, TempGogitaiJohoSakusei.class);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
     @Override
     protected void process(GogitaiJohoSakuseiCSVEntity entity) {
         if (entity != null) {
-            gogitaiJohoSakuseiTempTableWriter.insert(getGogitaiJohoSakusei(entity));
+            gogitaiTempTableWriter.insert(getGogitaiJohoSakusei(entity));
         }
     }
 

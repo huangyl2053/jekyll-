@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class IkenshoSakuseiJissekiShokaiHandler {
 
     private static final RString MARU = new RString("○");
+    private static final RString KEY_基準日_初期値 = new RString("3");
     private final IkenshoSakuseiJissekiShokaiDiv div;
 
     /**
@@ -55,6 +56,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * 条件をクリアする」ボタンを押します。
      */
     public void onClick_BtnKensakuClear() {
+        div.getRadKensakuKijunbi().setSelectedKey(KEY_基準日_初期値);
         div.getTxtIkenshoKinyubi().clearFromValue();
         div.getTxtIkenshoKinyubi().clearToValue();
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
@@ -175,6 +177,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         param.setIkenshoKijunbiTo(基準日TO);
         param.setIkenshoKijunbiKubun(div.getRadKensakuKijunbi().getSelectedKey());
         param.setHokensya(div.getCcdHokensya().getSelectedItem().get市町村コード().value());
+        param.setShokisaiHokensya(div.getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }
