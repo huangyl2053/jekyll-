@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinse
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2010002StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.NinteiChosaIraiShudouDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouValidationHandler;
@@ -116,6 +117,7 @@ public class NinteiChosaIraiShudou {
                         div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())){
             div.getNinteichosaIraiByHand().setDisabled(true);
             div.getIraiprintPanel().setDisabled(true);
+            return ResponseData.of(div).setState(DBE2010002StateName.ReadOnly);
         }
         
         return ResponseData.of(div).respond();
