@@ -42,8 +42,9 @@ public class TokkiText1A4Business {
 
     private static final RString ファイルID_C0007 = new RString("C0007.png");
     private static final RString ファイルID_C0007BAK = new RString("C0007_BAK.png");
-    private static final RString ファイルID_C410 = new RString("C410.png");
-    private static final RString ファイルID_C410BAK = new RString("C410_BAK.png");
+    private static final RString ファイルID_C410 = new RString("C410");
+    private static final RString BAK = new RString("_BAK");
+    private static final RString 拡張子_PNG = new RString(".png");
     private static final RString テキスト全面イメージ = new RString("1");
     private static final RString テキスト = new RString("1");
     private static final RString イメージ = new RString("2");
@@ -224,11 +225,14 @@ public class TokkiText1A4Business {
         List<RString> filePathList = new ArrayList<>();
         for (int i = 1; i <= 最大ページ; i++) {
             RString tokkiImgPath;
-            if (kyotsuEntity.isJimukyoku()) {
-                tokkiImgPath = 共有ファイルを引き出す(path, ファイルID_C410BAK);
-            } else {
-                tokkiImgPath = 共有ファイルを引き出す(path, ファイルID_C410);
+            RStringBuilder fileName = new RStringBuilder();
+            fileName.append(ファイルID_C410);
+            fileName.append(i);
+            if (!kyotsuEntity.isJimukyoku()) {
+                fileName.append(BAK);
             }
+            fileName.append(拡張子_PNG);
+            tokkiImgPath = 共有ファイルを引き出す(path, fileName.toRString());
             if (!RString.isNullOrEmpty(tokkiImgPath)) {
                 filePathList.add(tokkiImgPath);
             }
@@ -348,8 +352,9 @@ public class TokkiText1A4Business {
     }
 
     private RString 共有ファイルを引き出す(RString filePath, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(filePath, fileName))) {
-            return getFilePath(filePath, fileName);
+        RString fileFullPath = getFilePath(filePath, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
