@@ -655,6 +655,7 @@ dbe/db/dbe/NinteichosaIrai/onLoad
 dbe/db/dbe/NinteichosaIrai/onOkClose_btnIraishoToOutput
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnBackSonotaIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnClearKensakuJoken
+dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvSpool
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnInsert
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnKakutei
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnOutputCsv
@@ -667,7 +668,6 @@ dbe/db/dbe/NinteichosaItakusakiMain/onLoad
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByDeleteButton_dgSonotaKikanIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByDlbClick_dgSonotaKikanIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByModifyButton_dgSonotaKikanIchiran
-dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvSpool
 dbe/db/dbe/NinteichosaItakusakiMaster/onActive
 dbe/db/dbe/NinteichosaItakusakiMaster/onBeforeDownlaod_btnOutputCsv
 dbe/db/dbe/NinteichosaItakusakiMaster/onBeforeOpenDialog_btnKoza
@@ -892,6 +892,7 @@ dbe/db/dbe/ShinsakaiTaishosha/btn_Shokai
 dbe/db/dbe/ShinsakaiTaishosha/onLoad
 dbe/db/dbe/ShinsakaiToroku/onChange_radTaishoshaJotai
 dbe/db/dbe/ShinsakaiToroku/onChange_txtTaishoshaMaxHyojiKensu
+dbe/db/dbe/ShinsakaiToroku/onClick_btnContinue
 dbe/db/dbe/ShinsakaiToroku/onClick_btnRyooutput
 dbe/db/dbe/ShinsakaiToroku/onClick_btnRyooutputBoffer
 dbe/db/dbe/ShinsakaiToroku/onClick_btnSave
@@ -924,6 +925,7 @@ dbe/db/dbe/ShinseiJohoTorokuKanryo/onLoad
 dbe/db/dbe/ShinseiKensaku/onClick_btnClear
 dbe/db/dbe/ShinseiKensaku/onClick_btnKensaku
 dbe/db/dbe/ShinseiKensaku/onClick_btnModoru
+dbe/db/dbe/ShinseiKensaku/onClick_btnModoruShinchokuData
 dbe/db/dbe/ShinseiKensaku/onClick_btnitiranprint
 dbe/db/dbe/ShinseiKensaku/onClick_printAfter
 dbe/db/dbe/ShinseiKensaku/onLoad
@@ -1124,7 +1126,10 @@ dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/radHizukeHaniChange
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/radKensakuHohoChange
 dbe/db/dbe/YokaigoninteiProgress/onClick_btnToSearch
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnChosahyoGaikyo
-dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnIkensho
+dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnChosahyoTokki
+dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnGaikyoTokki
+dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnIkenshoTeikei
+dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnIkenshoTeikeigai
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnImageDelete
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnImageOutput
 dbe/db/dbe/Yokaigoninteiimagekanri/onClick_btnSonota

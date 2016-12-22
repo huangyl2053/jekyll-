@@ -78,6 +78,8 @@ public class ShinseiKensaku {
                 || MENUID_DBEMN42002.equals(menuID)
                 || MENUID_DBEMN41005.equals(menuID)) {
             return DBE0100001StateName.情報提供;
+        } else if (MENUID_DBEMN71003.equals(menuID)) {
+            return DBE0100001StateName.要介護認定進捗データ出力へ;
         }
         return DBE0100001StateName.条件指定;
     }
@@ -179,7 +181,7 @@ public class ShinseiKensaku {
         RString menuID = ResponseHolder.getMenuID();
         dgShinseiJoho_Row row = (event == Events.検索結果1件) ? div.getDgShinseiJoho().getDataSource().get(0)
                 : (event == Events.対象選択) ? div.getDgShinseiJoho().getClickedItem()
-                        : null;
+                : null;
         if (row == null) {
             return ResponseData.of(div).respond();
         }
@@ -273,6 +275,16 @@ public class ShinseiKensaku {
         div.getTxtMaxDisp().setDisabled(false);
         div.getBtnModoru().setDisabled(true);
         return ResponseData.of(div).setState(findStateAt条件指定());
+    }
+    
+    /**
+     * 「戻る」ボタン処理です。「要介護認定進捗データ出力画面へ戻る」
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<ShinseiKensakuDiv> onClick_btnModoruShinchokuData(ShinseiKensakuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定進捗情報データ出力へ).respond();
     }
 
     /**
