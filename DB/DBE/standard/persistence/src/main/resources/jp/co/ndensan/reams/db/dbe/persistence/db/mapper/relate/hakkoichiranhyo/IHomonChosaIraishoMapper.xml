@@ -742,8 +742,12 @@
         rgdb."DbT5121ShinseiRirekiJoho" T5121
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" T5101_2
         ON T5101_2."shinseishoKanriNo" = T5121."zenkaiShinseishoKanriNo"
-        AND T5101_2."hihokenshaNo" IN 
-        <foreach collection="被保険者番号リスト" item="被保険者番号" open="(" separator="," close=")">#{被保険者番号}</foreach>
+        AND T5101_2."hihokenshaNo" = (
+        SELECT 
+        DISTINCT
+        ,DbT5101."hihokenshaNo"
+        <include refid="HomonChosaIraisho" />
+        )
         ) D
         ON D."zenkaiShinseishoKanriNo" = T5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051

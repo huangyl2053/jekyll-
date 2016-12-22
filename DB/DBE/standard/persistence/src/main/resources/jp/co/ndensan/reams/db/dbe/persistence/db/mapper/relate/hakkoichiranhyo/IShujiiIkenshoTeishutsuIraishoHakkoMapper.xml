@@ -237,8 +237,12 @@
         AND T7051."shichosonCode" = T5912."shichosonCode" 
         AND T5912."jokyoFlag" = True 
         WHERE
-        T5101."hihokenshaNo" IN 
-        <foreach collection="被保険者番号リスト" item="被保険者番号" open="(" separator="," close=")">#{被保険者番号}</foreach>
+        T5101."hihokenshaNo"  = (
+        SELECT 
+        DISTINCT
+        ,DbT5101."hihokenshaNo"
+        <include refid="ShujiiIkenshoTeishutsuIraiHakko" />
+        )
         AND T5101."logicalDeletedFlag" = FALSE 
         ORDER BY
         T5101."ninteiShinseiYMD" DESC 
