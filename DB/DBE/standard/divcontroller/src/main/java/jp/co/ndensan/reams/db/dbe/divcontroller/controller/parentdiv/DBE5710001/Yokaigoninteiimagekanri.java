@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ImageDisplay.ImageDisplay.ImageDisplayValidationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.DBE5710001TransitionEventName;
@@ -9,17 +10,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.Yoka
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -40,8 +36,9 @@ public class Yokaigoninteiimagekanri {
     private static final RString その他資料6 = new RString("F0");
     private static final RString その他資料 = new RString("F1401");
     private static final RString イメージ区分_調査票概況 = new RString("1");
-    private static final RString イメージ区分_意見書 = new RString("2");
+    private static final RString イメージ区分_意見書定型外 = new RString("2");
     private static final RString イメージ区分_その他資料 = new RString("3");
+    private static final RString イメージ区分_意見書定型 = new RString("4");
     private static final int その他資料MAX = 6;
     private final YokaigoninteiimagekanriFinder finder;
 
@@ -59,12 +56,14 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onLoad(YokaigoninteiimagekanriDiv div) {
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
-        div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
+        div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
         if (イメージ管理情報.get申請書管理番号() != null && !イメージ管理情報.get申請書管理番号().isEmpty()) {
             div.setHdnShinseishoKanriNo(イメージ管理情報.get申請書管理番号().value());
+            div.setHdnHihokenshaNo(イメージ管理情報.get被保険者番号());
+            div.setHdnShokisaiHokenshaNo(イメージ管理情報.get証記載保険者番号());
         }
         if (イメージ管理情報.get認定調査依頼履歴番号() != 0) {
             div.setHdnNinteichosaRirekiNo(new RString(イメージ管理情報.get認定調査依頼履歴番号()));
@@ -74,10 +73,19 @@ public class Yokaigoninteiimagekanri {
         }
         init_SetDisabled(div);
         init_SetValue(div, イメージ管理情報);
-        if (イメージ管理情報.getイメージ共有ファイルID() != null && hasその他資料イメージ(イメージ管理情報.getイメージ共有ファイルID())) {
-            div.getRadSonota().setSelectedIndex(0);
+        if (イメージ管理情報.getイメージ共有ファイルID() != null) {
+            RString toCopyPath = DBEImageUtil.copySharedFiles(
+                    イメージ管理情報.getイメージ共有ファイルID(), div.getHdnShokisaiHokenshaNo().concat(div.getHdnHihokenshaNo()));
+            div.setHdnImageLocalCopyPath(toCopyPath);
+            if (hasその他資料イメージ(toCopyPath)) {
+                div.getRadSonota().setSelectedIndex(0);
+            }
         } else {
             div.getRadSonota().setSelectedIndex(1);
+            div.getBtnGaikyoTokuki().setDisabled(true);
+            div.getBtnIkensho().setDisabled(true);
+            div.getBtnIkenshoOCR().setDisabled(true);
+            div.getBtnSonota().setDisabled(true);
         }
         if (イメージ管理情報.getイメージ共有ファイルID() == null) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageOutput"), true);
@@ -90,7 +98,7 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
-     * 概況特記ボタンをクリックします。
+     * イメージ出力ボタンをクリックします。
      *
      * @param div 介護認定審査会委員情報
      * @return ResponseData
@@ -101,7 +109,7 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
-     * 調査票特記ボタンをクリックします。
+     * イメージ削除ボタンをクリックします。
      *
      * @param div 介護認定審査会委員情報
      * @return ResponseData
@@ -112,6 +120,38 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
+     * 概況特記ボタンをクリックします。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnGaikyoTokki(YokaigoninteiimagekanriDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 認定調査依頼履歴番号 = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHdnHihokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
+        div.setHdnShinseishoKanriNo(申請書管理番号);
+        div.setHdnNinteichosaRirekiNo(認定調査依頼履歴番号);
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 調査票特記ボタンをクリックします。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnChosahyoTokki(YokaigoninteiimagekanriDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 認定調査依頼履歴番号 = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHdnHihokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
+        div.setHdnShinseishoKanriNo(申請書管理番号);
+        div.setHdnNinteichosaRirekiNo(認定調査依頼履歴番号);
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
      * 調査票概況ボタンをクリックします。
      *
      * @param div 介護認定審査会委員情報
@@ -119,8 +159,8 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnChosahyoGaikyo(YokaigoninteiimagekanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_調査票概況);
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         if (イメージ管理情報.getイメージ共有ファイルID() == null) {
             ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
             if (validPairs.iterator().hasNext()) {
@@ -135,15 +175,34 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
-     * 意見書ボタンをクリックします。
+     * 意見書定型外ボタンをクリックします。
      *
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
-    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnIkensho(YokaigoninteiimagekanriDiv div) {
-        ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_意見書);
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnIkenshoTeikeigai(YokaigoninteiimagekanriDiv div) {
+        ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_意見書定型外);
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
+        if (イメージ管理情報.getイメージ共有ファイルID() == null) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 意見書定型ボタンをクリックします。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnIkenshoTeikei(YokaigoninteiimagekanriDiv div) {
+        ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_意見書定型);
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         if (イメージ管理情報.getイメージ共有ファイルID() == null) {
             ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
             if (validPairs.iterator().hasNext()) {
@@ -161,8 +220,8 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnSonota(YokaigoninteiimagekanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_その他資料);
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号.value());
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         if (イメージ管理情報.getイメージ共有ファイルID() == null) {
             ValidationMessageControlPairs validPairs = getValidationHandler().イメージ存在チェック();
             if (validPairs.iterator().hasNext()) {
@@ -199,22 +258,14 @@ public class Yokaigoninteiimagekanri {
         }
     }
 
-    private boolean hasその他資料イメージ(RDateTime イメージ共有ファイルID) {
+    private boolean hasその他資料イメージ(RString toCopyPath) {
         List<RString> その他資料ファイル名 = getその他資料ファイル名();
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"), new RString("db#dbe"),
-                new RString("WEB-INF"), new RString("image"));
-        boolean hasImage = true;
         for (RString その他資料ファイル : その他資料ファイル名) {
-            ReadOnlySharedFileEntryDescriptor descriptor
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(その他資料ファイル), イメージ共有ファイルID);
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
+            if (Directory.exists(Path.combinePath(toCopyPath, その他資料ファイル))) {
                 return true;
-            } catch (SystemException e) {
-                hasImage = false;
             }
         }
-        return hasImage;
+        return false;
     }
 
     private List<RString> getその他資料ファイル名() {

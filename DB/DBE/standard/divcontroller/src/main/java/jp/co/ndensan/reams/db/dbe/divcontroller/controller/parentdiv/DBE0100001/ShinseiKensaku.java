@@ -237,7 +237,8 @@ public class ShinseiKensaku {
             }
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.個人依頼内容更新へ).respond();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
+            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定イメージ情報管理へ).respond();
         }
         if (MENUID_DBEMN71003.equals(menuID)) {

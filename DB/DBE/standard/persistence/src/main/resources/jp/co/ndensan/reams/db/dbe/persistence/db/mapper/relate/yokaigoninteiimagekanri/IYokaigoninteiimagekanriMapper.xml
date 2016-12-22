@@ -52,9 +52,25 @@
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202
         ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo"
         AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+        AND T5202."gaikyoChosaTextImageKubun" = (
+          SELECT T5202Sub."gaikyoChosaTextImageKubun"
+          FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202Sub
+          WHERE T5202Sub."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+          AND T5202Sub."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+          ORDER BY T5202Sub."gaikyoChosaTextImageKubun" DESC
+          LIMIT (1)
+        )
         LEFT JOIN rgdb."DbT5206GaikyoTokki" T5206
         ON T5206."shinseishoKanriNo" = T5201."shinseishoKanriNo"
         AND T5206."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+        AND T5206."gaikyoTokkiTextImageKubun" = (
+          SELECT T5206Sub."gaikyoTokkiTextImageKubun"
+          FROM rgdb."DbT5206GaikyoTokki" T5206Sub
+          WHERE T5206Sub."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+          AND T5206Sub."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+          ORDER BY T5206Sub."gaikyoTokkiTextImageKubun" DESC
+          LIMIT (1)
+        )
         LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302
         ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo"
         AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
