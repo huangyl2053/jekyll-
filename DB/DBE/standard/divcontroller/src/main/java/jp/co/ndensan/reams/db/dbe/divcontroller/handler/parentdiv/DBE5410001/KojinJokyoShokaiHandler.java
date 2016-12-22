@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -93,6 +94,19 @@ public class KojinJokyoShokaiHandler {
         div.getBtnShichosonRenrakuJiko().setDisabled(true);
         div.getBtnShujiiIkenshoSakuseiIraiShokai().setDisabled(true);
         div.getBtnShinsakaiJoho().setDisabled(true);
+    }
+    
+    /**
+     * ボタン非活性。
+     *
+     * @param 申請書管理番号 RString
+     */
+    public void ボタン非活性(RString 申請書管理番号) {
+
+        int 認定調査情報件数 = NinteiChosaIraiShokaiFinder.createInstance().get認定調査情報件数(申請書管理番号);
+        if (認定調査情報件数 == Decimal.ZERO.intValue()){
+            div.getBtnShujiiIkenshoShokai().setDisabled(true);
+        }
     }
 
     private void getchkShiteii(List<KojinJokyoShokai> kojinJokyoShokaiList) {

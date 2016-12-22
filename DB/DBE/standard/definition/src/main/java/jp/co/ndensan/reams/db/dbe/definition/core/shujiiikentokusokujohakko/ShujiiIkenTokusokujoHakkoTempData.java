@@ -40,4 +40,5 @@ public class ShujiiIkenTokusokujoHakkoTempData implements Serializable {
     private RDate temp_印刷期間開始日;
     private RDate temp_印刷期間終了日;
     private RString temp_印刷書類区分;
+    private RString temp_文書番号;
 }

@@ -174,12 +174,36 @@ public class ShujiiIkenshoSakuseiIrai {
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnSearch(ShujiiIkenshoSakuseiIraiDiv div) {
 
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
-        if (pairs.iterator().hasNext()) {
+        if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+
+        div.setHdnClickedButton(new RString(ClickedButton.検索する.name()));
+        RString hihokenshaNo = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue();
+        return searchCore(div, hihokenshaNo);
+    }
+
+    /**
+     * 最近処理者の「表示する」を押下した時の処理です。
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSaikinshorishaClick(ShujiiIkenshoSakuseiIraiDiv div) {
+        ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().validate();
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
+        div.setHdnClickedButton(new RString(ClickedButton.表示する.name()));
+        RString hihokenshaNo = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
+        return searchCore(div, hihokenshaNo);
+    }
+
+    private ResponseData<ShujiiIkenshoSakuseiIraiDiv> searchCore(ShujiiIkenshoSakuseiIraiDiv div, RString hihokenshaNo) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(div));
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
-        ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
+        ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter(hihokenshaNo);
         createHandler(div).init(manager.get申請者情報(param));
         return ResponseData.of(div).respond();
     }
@@ -294,7 +318,7 @@ public class ShujiiIkenshoSakuseiIrai {
         try (ReportManager reportManager = new ReportManager()) {
             toHozon(div);
             ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
-            ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter();
+            ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter(getHihokenshaNo(div));
             printData(div, reportManager);
             createHandler(div).init(manager.get申請者情報(param));
             response.data = reportManager.publish();
@@ -338,11 +362,11 @@ public class ShujiiIkenshoSakuseiIrai {
                 }
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo), EntityDataState.Added);
-                
-                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());        
-                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo);
+
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
                 NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param);
-                
+
                 NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
                 shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
@@ -352,7 +376,7 @@ public class ShujiiIkenshoSakuseiIrai {
             } else if (修正.equals(row.getStatus())) {
                 RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
                 ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
-                        row.getRirekiNo().toInt());
+                        row.getRirekiNo().toInt(), getHihokenshaNo(div));
                 ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
                 ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
                 builder.set論理削除フラグ(true);
@@ -361,8 +385,8 @@ public class ShujiiIkenshoSakuseiIrai {
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
                                 Integer.parseInt(row.getRirekiNo().toString()) + 1), EntityDataState.Added);
-                      
-                ShujiiIkenshoSakuseiIraiParameter param2 = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo);
+
+                ShujiiIkenshoSakuseiIraiParameter param2 = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
                 NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param2);
                 NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
@@ -373,7 +397,7 @@ public class ShujiiIkenshoSakuseiIrai {
             } else if (削除.equals(row.getStatus())) {
                 RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
                 ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
-                        row.getRirekiNo().toInt());
+                        row.getRirekiNo().toInt(), getHihokenshaNo(div));
                 ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
                 ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
                 builder.set論理削除フラグ(true);
@@ -440,10 +464,10 @@ public class ShujiiIkenshoSakuseiIrai {
                     }
                 }
                 ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
-                        RirekiNo);
+                        RirekiNo, getHihokenshaNo(div));
                 ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
                 manager.save主治医意見書作成依頼情報(create主治医意見書作成依頼情報(ikenshoIraiJoho, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, div, row),
-                            EntityDataState.Modified);
+                        EntityDataState.Modified);
             }
             createChoHyoData(div, row);
         }
@@ -534,7 +558,7 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         iraishoItem.setMeishoFuyo(
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
-                                RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
+                        RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
         iraishoItem.setSonota(RString.EMPTY);
 
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
@@ -581,7 +605,7 @@ public class ShujiiIkenshoSakuseiIrai {
         }
         item.setMeishoFuyo(
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称,
-                                RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
+                        RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
         RStringBuilder systemDateTime = new RStringBuilder();
         RDateTime datetime = RDate.getNowDateTime();
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
@@ -783,26 +807,24 @@ public class ShujiiIkenshoSakuseiIrai {
                 item.setSeikyugakuIkenshoSakuseiRyo3(tempP_継続在宅金額.substring(数字_2, 数字_3));
                 item.setSeikyugakuIkenshoSakuseiRyo4(tempP_継続在宅金額.substring(数字_3));
             }
-        } else {
-            if (new RString(ShujiiIkenshoIraiKubun.初回.name()).equals(row.getIraiKubun())) {
-                item.setIkenshoSakuseiRyo1(tempP_新規施設金額.substring(数字_0, 数字_1));
-                item.setIkenshoSakuseiRyo2(tempP_新規施設金額.substring(数字_1, 数字_2));
-                item.setIkenshoSakuseiRyo3(tempP_新規施設金額.substring(数字_2, 数字_3));
-                item.setIkenshoSakuseiRyo4(tempP_新規施設金額.substring(数字_3));
-                item.setSeikyugakuIkenshoSakuseiRyo1(tempP_新規施設金額.substring(数字_0, 数字_1));
-                item.setSeikyugakuIkenshoSakuseiRyo2(tempP_新規施設金額.substring(数字_1, 数字_2));
-                item.setSeikyugakuIkenshoSakuseiRyo3(tempP_新規施設金額.substring(数字_2, 数字_3));
-                item.setSeikyugakuIkenshoSakuseiRyo4(tempP_新規施設金額.substring(数字_3));
-            } else if (new RString(ShujiiIkenshoIraiKubun.再依頼.name()).equals(row.getIraiKubun())) {
-                item.setIkenshoSakuseiRyo1(tempP_継続施設金額.substring(数字_0, 数字_1));
-                item.setIkenshoSakuseiRyo2(tempP_継続施設金額.substring(数字_1, 数字_2));
-                item.setIkenshoSakuseiRyo3(tempP_継続施設金額.substring(数字_2, 数字_3));
-                item.setIkenshoSakuseiRyo4(tempP_継続施設金額.substring(数字_3));
-                item.setSeikyugakuIkenshoSakuseiRyo1(tempP_継続施設金額.substring(数字_0, 数字_1));
-                item.setSeikyugakuIkenshoSakuseiRyo2(tempP_継続施設金額.substring(数字_1, 数字_2));
-                item.setSeikyugakuIkenshoSakuseiRyo3(tempP_継続施設金額.substring(数字_2, 数字_3));
-                item.setSeikyugakuIkenshoSakuseiRyo4(tempP_継続施設金額.substring(数字_3));
-            }
+        } else if (new RString(ShujiiIkenshoIraiKubun.初回.name()).equals(row.getIraiKubun())) {
+            item.setIkenshoSakuseiRyo1(tempP_新規施設金額.substring(数字_0, 数字_1));
+            item.setIkenshoSakuseiRyo2(tempP_新規施設金額.substring(数字_1, 数字_2));
+            item.setIkenshoSakuseiRyo3(tempP_新規施設金額.substring(数字_2, 数字_3));
+            item.setIkenshoSakuseiRyo4(tempP_新規施設金額.substring(数字_3));
+            item.setSeikyugakuIkenshoSakuseiRyo1(tempP_新規施設金額.substring(数字_0, 数字_1));
+            item.setSeikyugakuIkenshoSakuseiRyo2(tempP_新規施設金額.substring(数字_1, 数字_2));
+            item.setSeikyugakuIkenshoSakuseiRyo3(tempP_新規施設金額.substring(数字_2, 数字_3));
+            item.setSeikyugakuIkenshoSakuseiRyo4(tempP_新規施設金額.substring(数字_3));
+        } else if (new RString(ShujiiIkenshoIraiKubun.再依頼.name()).equals(row.getIraiKubun())) {
+            item.setIkenshoSakuseiRyo1(tempP_継続施設金額.substring(数字_0, 数字_1));
+            item.setIkenshoSakuseiRyo2(tempP_継続施設金額.substring(数字_1, 数字_2));
+            item.setIkenshoSakuseiRyo3(tempP_継続施設金額.substring(数字_2, 数字_3));
+            item.setIkenshoSakuseiRyo4(tempP_継続施設金額.substring(数字_3));
+            item.setSeikyugakuIkenshoSakuseiRyo1(tempP_継続施設金額.substring(数字_0, 数字_1));
+            item.setSeikyugakuIkenshoSakuseiRyo2(tempP_継続施設金額.substring(数字_1, 数字_2));
+            item.setSeikyugakuIkenshoSakuseiRyo3(tempP_継続施設金額.substring(数字_2, 数字_3));
+            item.setSeikyugakuIkenshoSakuseiRyo4(tempP_継続施設金額.substring(数字_3));
         }
         return item;
     }
@@ -1005,17 +1027,15 @@ public class ShujiiIkenshoSakuseiIrai {
                     提出期限 = (共通日 != null ? 共通日.plusDay(期限日数).wareki().toDateString() : RString.EMPTY);
                 }
             }
+        } else if (SELECTED_KEY0.equals(kubun)) {
+            提出期限 = row.getShinseiDay().getValue() != null
+                    ? row.getShinseiDay().getValue().plusDay(期限日数).
+                    wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY;
         } else {
-            if (SELECTED_KEY0.equals(kubun)) {
-                提出期限 = row.getShinseiDay().getValue() != null
-                        ? row.getShinseiDay().getValue().plusDay(期限日数).
-                        wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY;
-            } else {
-                提出期限 = row.getShinseiDay().getValue() != null
-                        ? row.getShinseiDay().getValue().plusDay(期限日数).
-                        wareki().toDateString() : RString.EMPTY;
-            }
+            提出期限 = row.getShinseiDay().getValue() != null
+                    ? row.getShinseiDay().getValue().plusDay(期限日数).
+                    wareki().toDateString() : RString.EMPTY;
         }
         return 提出期限;
     }
@@ -1057,4 +1077,16 @@ public class ShujiiIkenshoSakuseiIrai {
         return ResponseData.of(div).respond();
     }
 
+    private static RString getHihokenshaNo(ShujiiIkenshoSakuseiIraiDiv div) {
+        if (div.getHdnClickedButton().toString().equals(ClickedButton.表示する.name())) {
+            return div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
+        } else {
+            return div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue();
+        }
+    }
+
+    private enum ClickedButton {
+        表示する,
+        検索する
+    }
 }

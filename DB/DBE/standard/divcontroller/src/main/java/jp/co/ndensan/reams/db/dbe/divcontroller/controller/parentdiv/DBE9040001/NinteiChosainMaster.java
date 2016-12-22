@@ -332,22 +332,21 @@ public class NinteiChosainMaster {
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnTorikeshi(NinteiChosainMasterDiv div) {
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
-        if ((状態_追加.equals(div.getChosainJohoInput().getState())
-                || 状態_修正.equals(div.getChosainJohoInput().getState()))
-                && getValidationHandler(div).isUpdate()) {
-            if (!ResponseHolder.isReRequest()) {
+
+        if (!ResponseHolder.isReRequest()) {
+            RString 画面状態 = div.getChosainJohoInput().getState();
+            boolean 編集有 = getValidationHandler(div).isUpdate();
+            if ((画面状態.equals(状態_追加) || 画面状態.equals(状態_修正)) && 編集有) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                resposneSettingState(div, 認定調査委託先コード);
-            }
+
+        } else if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).setState(DBE9040001StateName.詳細);
         }
         return resposneSettingState(div, 認定調査委託先コード);
+
     }
 
     private ResponseData<NinteiChosainMasterDiv> resposneSettingState(NinteiChosainMasterDiv div, RString 認定調査委託先コード) {

@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,23 +17,23 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class iraiprintDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("Chkirai")
-    private CheckBoxList Chkirai;
     @JsonProperty("txthokkoymd")
     private TextBoxDate txthokkoymd;
+    @JsonProperty("ccdBunshoBangoInput")
+    private BunshoBangoInputDiv ccdBunshoBangoInput;
+    @JsonProperty("Chkirai")
+    private CheckBoxList Chkirai;
     @JsonProperty("radkigen")
     private RadioButton radkigen;
     @JsonProperty("txtkigenymd")
     private TextBoxDate txtkigenymd;
-    @JsonProperty("SP")
-    private Space SP;
     @JsonProperty("NinteiChosahyoPrintList")
     private NinteiChosahyoPrintListDiv NinteiChosahyoPrintList;
     @JsonProperty("ChosahyoTokkijikoSelect")
@@ -43,24 +45,6 @@ public class iraiprintDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getChkirai
-     * @return Chkirai
-     */
-    @JsonProperty("Chkirai")
-    public CheckBoxList getChkirai() {
-        return Chkirai;
-    }
-
-    /*
-     * setChkirai
-     * @param Chkirai Chkirai
-     */
-    @JsonProperty("Chkirai")
-    public void setChkirai(CheckBoxList Chkirai) {
-        this.Chkirai = Chkirai;
-    }
-
     /*
      * gettxthokkoymd
      * @return txthokkoymd
@@ -77,6 +61,33 @@ public class iraiprintDiv extends Panel {
     @JsonProperty("txthokkoymd")
     public void setTxthokkoymd(TextBoxDate txthokkoymd) {
         this.txthokkoymd = txthokkoymd;
+    }
+
+    /*
+     * getccdBunshoBangoInput
+     * @return ccdBunshoBangoInput
+     */
+    @JsonProperty("ccdBunshoBangoInput")
+    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
+        return ccdBunshoBangoInput;
+    }
+
+    /*
+     * getChkirai
+     * @return Chkirai
+     */
+    @JsonProperty("Chkirai")
+    public CheckBoxList getChkirai() {
+        return Chkirai;
+    }
+
+    /*
+     * setChkirai
+     * @param Chkirai Chkirai
+     */
+    @JsonProperty("Chkirai")
+    public void setChkirai(CheckBoxList Chkirai) {
+        this.Chkirai = Chkirai;
     }
 
     /*
@@ -113,24 +124,6 @@ public class iraiprintDiv extends Panel {
     @JsonProperty("txtkigenymd")
     public void setTxtkigenymd(TextBoxDate txtkigenymd) {
         this.txtkigenymd = txtkigenymd;
-    }
-
-    /*
-     * getSP
-     * @return SP
-     */
-    @JsonProperty("SP")
-    public Space getSP() {
-        return SP;
-    }
-
-    /*
-     * setSP
-     * @param SP SP
-     */
-    @JsonProperty("SP")
-    public void setSP(Space SP) {
-        this.SP = SP;
     }
 
     /*

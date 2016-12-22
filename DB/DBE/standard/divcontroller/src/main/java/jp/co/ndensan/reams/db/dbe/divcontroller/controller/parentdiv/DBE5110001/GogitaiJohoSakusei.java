@@ -21,26 +21,35 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.GogitaiJohoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.GogitaiJohoSakuseiValidationHandler;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.KyoyuFileName;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -49,15 +58,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 
 /**
  * 合議体情報作成のコントローラです。
@@ -75,6 +75,7 @@ public class GogitaiJohoSakusei {
     private static final RString RAD_KEY_1 = new RString("key1");
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("合議体情報.csv");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegister");
+    private static final RString COMMON_BUTTON_UPDATE_NAME = new RString("btnupdate");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -102,6 +103,7 @@ public class GogitaiJohoSakusei {
         getHandler(div).init最大表示件数();
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.合議体情報, Models.create(new ArrayList<GogitaiJoho>()));
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE_NAME, true);
         return ResponseData.of(div).respond();
     }
 
@@ -397,7 +399,7 @@ public class GogitaiJohoSakusei {
         }
 
         Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
-
+        ViewStateHolder.put(ViewStateKeys.合議体情報更新前, gogitaiJohoModel);
         if (JYOTAI_CODE_ADD.equals(jyotai)) {
             GogitaiJoho gogitaiJoho = new GogitaiJoho(
                     Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),
@@ -453,15 +455,35 @@ public class GogitaiJohoSakusei {
                     manager.deletePhysicalWithoutGogitaiWariateIin(gogitaiJoho);
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Modified) {
-                    manager.saveWithDeletePhysical(gogitaiJoho);
+                    manager.saveWithDeletePhysical(koshinmaedate(gogitaiJoho));
                     GogitaiWariateIinJohoManager gogitaiWariateIinJohoManager = GogitaiWariateIinJohoManager.createInstance();
                     for (GogitaiWariateIinJoho gogitaiWariateIinJoho : gogitaiJohoModel.get(gogitaiJoho.identifier()).getGogitaiWariateIinJohoList()) {
                         gogitaiWariateIinJohoManager.save(gogitaiWariateIinJoho);
                     }
                 }
             }
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        return onClick_btnKensaku(div);
+        if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
+                equals(ResponseHolder.getMessageCode().toString())) {
+            onLoad(div);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private GogitaiJoho koshinmaedate(GogitaiJoho gogitaiJoho) {
+        Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModeltmp = ViewStateHolder.get(ViewStateKeys.合議体情報更新前, Models.class);
+        Iterator<GogitaiJoho> 合議体情報tmp = gogitaiJohoModeltmp.iterator();
+        while (合議体情報tmp.hasNext()) {
+            GogitaiJoho gogitaiJohotmp = 合議体情報tmp.next();
+
+            if (gogitaiJohotmp.get合議体番号() == gogitaiJoho.get合議体番号()
+                    && gogitaiJohotmp.get合議体有効期間開始年月日().equals(gogitaiJoho.get合議体有効期間開始年月日())) {
+                return gogitaiJohotmp;
+            }
+
+        }
+        return gogitaiJoho;
     }
 
     /**

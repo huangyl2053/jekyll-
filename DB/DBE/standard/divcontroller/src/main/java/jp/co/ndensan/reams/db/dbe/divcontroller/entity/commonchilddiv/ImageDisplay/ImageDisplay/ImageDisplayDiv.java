@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ImageDisp
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokkiShiryoShokai.ChosaTokkiShiryoShokai.ChosaTokkiShiryoShokaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokkiShiryoShokai.ChosaTokkiShiryoShokai.IChosaTokkiShiryoShokaiDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -15,13 +17,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdChosaTokkiShiryoShokai")
+    private ChosaTokkiShiryoShokaiDiv ccdChosaTokkiShiryoShokai;
     @JsonProperty("lblGenbon")
     private Label lblGenbon;
     @JsonProperty("imgGenbon")
@@ -36,8 +40,12 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
     private Button btnBack;
     @JsonProperty("btnAfterImg")
     private Button btnAfterImg;
+    @JsonProperty("lblNoImage")
+    private Label lblNoImage;
     @JsonProperty("HdnImageDisplay")
     private RString HdnImageDisplay;
+    @JsonProperty("hdnImageLocalCopyPath")
+    private RString hdnImageLocalCopyPath;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -45,6 +53,15 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdChosaTokkiShiryoShokai
+     * @return ccdChosaTokkiShiryoShokai
+     */
+    @JsonProperty("ccdChosaTokkiShiryoShokai")
+    public IChosaTokkiShiryoShokaiDiv getCcdChosaTokkiShiryoShokai() {
+        return ccdChosaTokkiShiryoShokai;
+    }
+
     /*
      * getlblGenbon
      * @return lblGenbon
@@ -172,6 +189,24 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
     }
 
     /*
+     * getlblNoImage
+     * @return lblNoImage
+     */
+    @JsonProperty("lblNoImage")
+    public Label getLblNoImage() {
+        return lblNoImage;
+    }
+
+    /*
+     * setlblNoImage
+     * @param lblNoImage lblNoImage
+     */
+    @JsonProperty("lblNoImage")
+    public void setLblNoImage(Label lblNoImage) {
+        this.lblNoImage = lblNoImage;
+    }
+
+    /*
      * getHdnImageDisplay
      * @return HdnImageDisplay
      */
@@ -187,6 +222,24 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
     @JsonProperty("HdnImageDisplay")
     public void setHdnImageDisplay(RString HdnImageDisplay) {
         this.HdnImageDisplay = HdnImageDisplay;
+    }
+
+    /*
+     * gethdnImageLocalCopyPath
+     * @return hdnImageLocalCopyPath
+     */
+    @JsonProperty("hdnImageLocalCopyPath")
+    public RString getHdnImageLocalCopyPath() {
+        return hdnImageLocalCopyPath;
+    }
+
+    /*
+     * sethdnImageLocalCopyPath
+     * @param hdnImageLocalCopyPath hdnImageLocalCopyPath
+     */
+    @JsonProperty("hdnImageLocalCopyPath")
+    public void setHdnImageLocalCopyPath(RString hdnImageLocalCopyPath) {
+        this.hdnImageLocalCopyPath = hdnImageLocalCopyPath;
     }
 
     // </editor-fold>

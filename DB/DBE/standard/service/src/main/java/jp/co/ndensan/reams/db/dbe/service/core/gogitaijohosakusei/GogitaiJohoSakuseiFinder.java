@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJ
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho.IGogitaiJohoMapper;
@@ -25,16 +26,16 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBas
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5593GogitaiWariateIinJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
+
 /**
  * 合議体情報作成のサービスクラスです。
  *
@@ -80,7 +81,8 @@ public class GogitaiJohoSakuseiFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link GogitaiJohoSakuseiFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link GogitaiJohoSakuseiFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link GogitaiJohoSakuseiFinder}のインスタンス
      */
     public static GogitaiJohoSakuseiFinder createInstance() {
         return InstanceProvider.create(GogitaiJohoSakuseiFinder.class);
@@ -207,12 +209,12 @@ public class GogitaiJohoSakuseiFinder {
             return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
         }
         for (GogitaiJohoSakuseiRelateEntity entity : gogitaiJohoForCSVList) {
-            
+
             GogitaiJohoSakuseiCSVEntity tmpEntity = new GogitaiJohoSakuseiCSVEntity();
             tmpEntity.setGogitaiNo(new RString(entity.getGogitaiNo()));
             tmpEntity.setGogitaiMei(entity.getGogitaiMei());
-            tmpEntity.setGogitaiYukoKikanKaishiYMD(entity.getGogitaiYukoKikanKaishiYMD().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
-            tmpEntity.setGogitaiYukoKikanShuryoYMD(entity.getGogitaiYukoKikanShuryoYMD().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString());
+            tmpEntity.setGogitaiYukoKikanKaishiYMD(entity.getGogitaiYukoKikanKaishiYMD().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
+            tmpEntity.setGogitaiYukoKikanShuryoYMD(entity.getGogitaiYukoKikanShuryoYMD().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
             tmpEntity.setGogitaiKaishiYoteiTime(new RString(entity.getGogitaiKaishiYoteiTime().toString()));
             tmpEntity.setGogitaiShuryoYoteiTime(new RString(entity.getGogitaiShuryoYoteiTime().toString()));
             tmpEntity.setShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode());

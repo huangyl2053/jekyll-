@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJ
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
@@ -49,7 +47,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -57,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -76,8 +72,6 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.tokkiText.name()),
             new RString(IinShinsakaishiryoA4ReportSource.ReportSourceFields.tokkiImg.name())));
-    private static final RString STR_1 = new RString("1");
-    private static final RString STR_2 = new RString("2");
     private static final int INT_4 = 4;
     private ShinsakaiSiryouKumiawaseA3ProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
@@ -128,35 +122,19 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
     @Override
     protected void process() {
         RString reportId = ReportIdDBE.DBE517903.getReportId().value();
-        /*RDate 日期 = RDate.getNowDate();
-         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
-         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-         reportId = ReportIdDBE.DBE517905.getReportId().value();
-         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-         reportId = ReportIdDBE.DBE517906.getReportId().value();
-         }
-         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.特記事項テキストイメージ区分, 日期, SubGyomuCode.DBE認定支援))) {
-         if (STR_1.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-         reportId = ReportIdDBE.DBE517907.getReportId().value();
-         } else if (STR_2.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, 日期, SubGyomuCode.DBE認定支援))) {
-         reportId = ReportIdDBE.DBE517908.getReportId().value();
-         }
-         }*/
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
-
-
-                    IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().
+        new SimpleLayoutBreaker(IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA4ReportSource> occuredBreak(
                             ReportLineRecord<IinShinsakaishiryoA4ReportSource> currentRecord,
                             ReportLineRecord<IinShinsakaishiryoA4ReportSource> nextRecord,
                             ReportDynamicChart dynamicChart) {
-                                int layout = currentRecord.getSource().layout.index();
+                                int layout = currentRecord.getSource().layout;
                                 currentRecord.setFormGroupIndex(layout);
                                 if (nextRecord != null && nextRecord.getSource() != null) {
-                                    layout = nextRecord.getSource().layout.index();
+                                    layout = nextRecord.getSource().layout;
                                     nextRecord.setFormGroupIndex(layout);
                                 }
                                 return currentRecord;

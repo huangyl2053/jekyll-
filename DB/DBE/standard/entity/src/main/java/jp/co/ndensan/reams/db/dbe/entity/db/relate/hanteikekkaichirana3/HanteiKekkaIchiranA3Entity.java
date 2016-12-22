@@ -52,4 +52,6 @@ public class HanteiKekkaIchiranA3Entity {
     private RString 二号特定疾病内容;
     private RString 介護認定審査会意見;
     private int 合議体番号;
+    private int 当前頁;
+    private int 総頁;
 }

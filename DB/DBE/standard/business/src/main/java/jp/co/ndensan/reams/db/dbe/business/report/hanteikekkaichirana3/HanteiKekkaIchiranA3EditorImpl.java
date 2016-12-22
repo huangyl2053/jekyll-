@@ -27,6 +27,7 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
+    private static final RString 記号 = new RString("／");
     private final HanteiKekkaIchiranA3Entity entity;
 
     /**
@@ -64,6 +65,11 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         printTimeStamp.append(String.format("%02d", entity.getPrintTimeStamp().getSecond()));
         printTimeStamp.append(DATE_秒);
         source.hakkoYMD = printTimeStamp.toRString();
+        RStringBuilder 頁数 = new RStringBuilder();
+        頁数.append(entity.get当前頁());
+        頁数.append(記号);
+        頁数.append(entity.get総頁());
+        source.pageCount1 = 頁数.toRString();
         source.listHanteikekka_1 = new RString(String.valueOf(entity.get介護認定審査会審査順()));
         source.listHanteikekka_2 = entity.get市町村名称();
         source.listHanteikekka_3 = entity.get証記載保険者番号();

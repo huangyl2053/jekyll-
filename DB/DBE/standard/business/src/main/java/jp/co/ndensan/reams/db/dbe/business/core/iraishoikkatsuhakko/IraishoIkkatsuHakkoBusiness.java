@@ -839,8 +839,11 @@ public class IraishoIkkatsuHakkoBusiness {
     }
 
     private RString ConvertDate(RString date) {
-        if (RString.isNullOrEmpty(date) || FlexibleDate.canConvert(date)) {
+        if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
+        }
+        if (!FlexibleDate.canConvert(date)) {
+            return date;
         }
         return new FlexibleDate(date).wareki().toDateString();
     }

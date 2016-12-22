@@ -28,33 +28,8 @@
         <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select resultOrdered="true" id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
-            fetchSize="500">
-        SELECT
-        A.shinsakaiOrder AS shinsakaiOrder
-        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
-        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
-        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
-        ,A.nijiHanteiYMD AS nijiHanteiYMD
-        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
-        ,A.shichosonCode AS shichosonCode
-        ,A.shichosonMeisho AS shichosonMeisho
-        ,A.hihokenshaNo AS hihokenshaNo
-        ,A.hihokenshaName AS hihokenshaName
-        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
-        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
-        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
-        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
-        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
-        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
-        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
-        ,A.shinsakaiIken AS shinsakaiIken
-        FROM
+    <!--判定結果一覧クエリ部品-->
+    <sql id="HanteiKekkaIchiranList">
         (SELECT
         dbT5502."shinsakaiOrder" AS shinsakaiOrder
         ,dbT5101."ninteiShinseiShinseijiKubunCode" AS ninteiShinseiShinseijiKubunCode
@@ -116,10 +91,54 @@
             AND dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
         </if>
         ) AS A
+    </sql>
+
+    <!--判定結果一覧帳票データ抽出用-->
+    <select resultOrdered="true" id="getHanteiKekkaIchiranList" resultMap="resultMap_HanteiKekkaIchiranList"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        A.shinsakaiOrder AS shinsakaiOrder
+        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
+        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
+        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
+        ,A.nijiHanteiYMD AS nijiHanteiYMD
+        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
+        ,A.shichosonCode AS shichosonCode
+        ,A.shichosonMeisho AS shichosonMeisho
+        ,A.hihokenshaNo AS hihokenshaNo
+        ,A.hihokenshaName AS hihokenshaName
+        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
+        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
+        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
+        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
+        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
+        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
+        ,A.shinsakaiIken AS shinsakaiIken
+        FROM
+        <include refid="HanteiKekkaIchiranList" />
         ORDER BY
         shichosonCode,
         shinsakaiOrder
     </select>
+
+    <!--判定結果一覧総ページ数用カウント-->
+    <select resultOrdered="true" id="countHanteiKekkaIchiranList"  resultType = "int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        COUNT(*)
+        FROM
+        <include refid="HanteiKekkaIchiranList" />
+
+    </select>
+
+
     <resultMap id="resultMap_HanteiKekkaIchiranA3List" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity" autoMapping="true">
         <result property="介護認定審査会審査順" column="shinsakaiOrder" />
         <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -150,40 +169,9 @@
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="合議体番号" column="gogitaiNo" />
     </resultMap>
-    <select resultOrdered="true" id="getHanteiKekkaIchiranA3List" resultMap="resultMap_HanteiKekkaIchiranA3List"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
-            fetchSize="500">
-        SELECT
-        A.shinsakaiOrder AS shinsakaiOrder
-        ,A.shichosonCode AS shichosonCode
-        ,A.shichosonMeisho AS shichosonMeisho
-        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
-        ,A.hihokenshaName AS hihokenshaName
-        ,A.hihokenshaNo AS hihokenshaNo
-        ,A.seinengappiYMD AS seinengappiYMD
-        ,A.seibetsu AS seibetsu
-        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
-        ,A.nijiHanteiYMD AS nijiHanteiYMD
-        ,A.hihokenshaKubunCode AS hihokenshaKubunCode
-        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
-        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
-        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
-        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
-        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
-        ,A.nijiHanteiNinteiYukoKaishiYMD AS tb_nijiHanteiNinteiYukoKaishiYMD
-        ,A.nijiHanteiNinteiYukoShuryoYMD AS tb_nijiHanteiNinteiYukoShuryoYMD
-        ,A.nijiHanteiNinteiYukoKikan AS tb_nijiHanteiNinteiYukoKikan
-        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
-        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
-        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
-        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
-        ,A.shinsakaiIken AS shinsakaiIken
-        ,A.gogitaiNo AS gogitaiNo
-        FROM
+
+    <!--判定結果一覧A3用クエリ部品-->
+    <sql id="HanteiKekkaIchiranA3List">
         (SELECT
         dbT5502."shinsakaiOrder" AS shinsakaiOrder
         ,dbT7051."shichosonCode" AS shichosonCode
@@ -254,10 +242,60 @@
         WHERE
         dbT5502."shinsakaiKaisaiNo" = #{kaisaiBangou}
         ) AS A
+    </sql>
+
+    <!--判定結果一覧A3帳票作成用データ取得-->
+    <select resultOrdered="true" id="getHanteiKekkaIchiranA3List" resultMap="resultMap_HanteiKekkaIchiranA3List"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        A.shinsakaiOrder AS shinsakaiOrder
+        ,A.shichosonCode AS shichosonCode
+        ,A.shichosonMeisho AS shichosonMeisho
+        ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
+        ,A.hihokenshaName AS hihokenshaName
+        ,A.hihokenshaNo AS hihokenshaNo
+        ,A.seinengappiYMD AS seinengappiYMD
+        ,A.seibetsu AS seibetsu
+        ,A.ninteiShinseiYMD AS ninteiShinseiYMD
+        ,A.nijiHanteiYMD AS nijiHanteiYMD
+        ,A.hihokenshaKubunCode AS hihokenshaKubunCode
+        ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
+        ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
+        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+        ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
+        ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
+        ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
+        ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
+        ,A.nijiHanteiNinteiYukoKaishiYMD AS tb_nijiHanteiNinteiYukoKaishiYMD
+        ,A.nijiHanteiNinteiYukoShuryoYMD AS tb_nijiHanteiNinteiYukoShuryoYMD
+        ,A.nijiHanteiNinteiYukoKikan AS tb_nijiHanteiNinteiYukoKikan
+        ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
+        ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
+        ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan
+        ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
+        ,A.shinsakaiIken AS shinsakaiIken
+        ,A.gogitaiNo AS gogitaiNo
+        FROM
+        <include refid="HanteiKekkaIchiranA3List" />
         ORDER BY
         shichosonCode,
         shinsakaiOrder
     </select>
+
+    <!--判定結果一覧A3総ページ数判定用-->
+    <select resultOrdered="true" id="countHanteiKekkaIchiranA3List"  resultType = "int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
+            fetchSize="500">
+        SELECT
+        COUNT(*)
+        FROM
+        <include refid="HanteiKekkaIchiranA3List" />
+
+    </select>
+
 
     <resultMap id="resultMap_ShinsakaiKaisaiKekkaJoho" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity" autoMapping="true">
         <result property="shinsakaiKaisaiYMD" column="審査会開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

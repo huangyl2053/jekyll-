@@ -73,11 +73,11 @@ public class CreateTargetHandler {
      *
      */
     public void onClick_btnClear() {
-        div.getRdoShinseiNintei().setSelectedKey(キー_0);
-        div.getTxtShinseiYMD().setDisabled(false);
+        div.getRdoShinseiNintei().setSelectedKey(キー_1);
+        div.getTxtShinseiYMD().setDisabled(true);
         div.getTxtShinseiYMD().clearFromValue();
         div.getTxtShinseiYMD().clearToValue();
-        div.getNinteiYMD().setDisabled(true);
+        div.getNinteiYMD().setDisabled(false);
         div.getNinteiYMD().clearFromValue();
         div.getNinteiYMD().clearToValue();
         div.getRdoSyutsuryoku().setSelectedKey(キー_0);

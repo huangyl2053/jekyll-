@@ -41,5 +41,5 @@ public class NinteiChosaTokusokujoHakkoTempData implements Serializable {
     private RString temp_集計;
     private RString temp_改頁;
     private RString temp_印刷書類区分;
-
+    private RString temp_文書番号;
 }

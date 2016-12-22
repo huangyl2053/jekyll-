@@ -93,10 +93,11 @@ public class NinteichosaKekkaNyushuHandler {
      * 対象者一覧グリッドに対象者を設定します。
      */
     public void initialDataGrid() {
+        RString 状態 = div.getRadJotaiKubun().getSelectedKey();
         Decimal 最大取得件数 = div.getTxtMaxKensu().getValue();
         SearchResult<CyoSaNyuSyuBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
                 get調査入手モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, 最大取得件数));
+                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大取得件数));
         List<CyoSaNyuSyuBusiness> 調査入手List = searchResult.records();
         if (!調査入手List.isEmpty()) {
             ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
