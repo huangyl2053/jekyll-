@@ -63,7 +63,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
     protected void initialize() {
         システム時刻 = RDateTime.now();
         index = 0;
-        mybatisParameter = processParameter.toHanteiKekkaJohoShuturyokuMybatisParameter();
+
     }
 
     @Override
@@ -83,6 +83,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
 
     @Override
     protected void beforeExecute() {
+        mybatisParameter = processParameter.toHanteiKekkaJohoShuturyokuMybatisParameter();
         int 総レコード数 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).countHanteiKekkaIchiranA3List(mybatisParameter);
         int レコード余り = 総レコード数 % ページあたりレコード数;
         int ページ算出値 = 総レコード数 / ページあたりレコード数;
