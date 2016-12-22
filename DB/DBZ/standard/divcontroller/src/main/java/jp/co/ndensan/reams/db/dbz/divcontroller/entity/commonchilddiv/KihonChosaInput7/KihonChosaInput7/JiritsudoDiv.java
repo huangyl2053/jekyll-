@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JiritsudoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,8 @@ public class JiritsudoDiv extends Panel {
     private RString recordNumber;
     @JsonProperty("ninteichosaTokkijikoNoList")
     private RString ninteichosaTokkijikoNoList;
+    @JsonProperty("tokkijikoNo")
+    private RString tokkijikoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -131,6 +133,24 @@ public class JiritsudoDiv extends Panel {
     }
 
     /*
+     * gettokkijikoNo
+     * @return tokkijikoNo
+     */
+    @JsonProperty("tokkijikoNo")
+    public RString getTokkijikoNo() {
+        return tokkijikoNo;
+    }
+
+    /*
+     * settokkijikoNo
+     * @param tokkijikoNo tokkijikoNo
+     */
+    @JsonProperty("tokkijikoNo")
+    public void setTokkijikoNo(RString tokkijikoNo) {
+        this.tokkijikoNo = tokkijikoNo;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -139,7 +159,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
+    public void setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
         this.getShogaiKoreisha().setBtnShogaiKoreisha(btnShogaiKoreisha);
     }
 
@@ -149,7 +169,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
+    public void setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
         this.getShogaiKoreisha().setRadShogaiKoreisha(radShogaiKoreisha);
     }
 
@@ -159,7 +179,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
+    public void setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
         this.getNinchishaJiritsudo().setBtnNinchishaJiritsudo(btnNinchishaJiritsudo);
     }
 
@@ -169,7 +189,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
+    public void setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
         this.getNinchishaJiritsudo().setRadNinchishaJiritsudo(radNinchishaJiritsudo);
     }
 

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -61,7 +63,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class Ikenshoget {
 
-    private static final RString CSVファイル名 = new RString("ShujiiIkenshoNyushuIchiran.csv");
+    private static final RString CSVファイル名 = new RString("DBE207001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
 
@@ -117,7 +119,8 @@ public class Ikenshoget {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(IkenshogetDiv div, IDownLoadServletResponse response) {
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイル名);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
@@ -135,7 +138,7 @@ public class Ikenshoget {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         AccessLogger.log(AccessLogType.照会, personalData);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
     /**
@@ -225,6 +228,19 @@ public class Ikenshoget {
             主治医意見書入手一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        if (0 == div.getDgNinteiTaskList().getDataSource().size()) {
+            主治医意見書入手一覧データの存在チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        boolean 完了条件 = get完了条件(div.getDgNinteiTaskList().getSelectedItems().get(0));
+        if (完了条件) {
+            主治医意見書入手一覧選択行の完了処理事前チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        if (div.getDgNinteiTaskList().getSelectedItems().get(0).getIkenshoNyushuKanryoDay().getValue() != null) {
+            主治医意見書入手一覧選択行の完了処理チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -232,19 +248,6 @@ public class Ikenshoget {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (0 == div.getDgNinteiTaskList().getDataSource().size()) {
-                主治医意見書入手一覧データの存在チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            boolean 完了条件 = get完了条件(div.getDgNinteiTaskList().getSelectedItems().get(0));
-            if (完了条件) {
-                主治医意見書入手一覧選択行の完了処理事前チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getDgNinteiTaskList().getSelectedItems().get(0).getIkenshoNyushuKanryoDay().getValue() != null) {
-                主治医意見書入手一覧選択行の完了処理チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();

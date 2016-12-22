@@ -47,10 +47,17 @@ public class NinteiChosaJokyoHandler {
     public void setLoad() {
         NinteiChosaJokyoDataPass konkaiDataPass = DataPassingConverter.deserialize(div.getHdnSerializedBusiness_Konkai(),
                 NinteiChosaJokyoDataPass.class);
-//        RString displayModeKey = div.getHdnDisplayModeKey();
-//        if (new RString("1").equals(displayModeKey)) {
-//            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.shokai);
-//        }
+        RString displayModeKey = div.getHdnDisplayModeKey();
+        if (new RString("1").equals(displayModeKey)) {
+            div.getNinteiChosa().setDisabled(true);
+            div.getHomonChosasaki().setDisabled(true);
+            div.getShujiiAndShujiIryoKikan().setDisabled(true);
+            div.getIchijiHantei().setDisabled(true);
+            div.getKaigoNinteiShinsakai().setDisabled(true);
+            div.getEnkiTsuchi().setDisabled(true);
+            div.getBtnAllClear().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
+        }
 //        if (new RString("2").equals(displayModeKey)) {
 //            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.input);
 //        }

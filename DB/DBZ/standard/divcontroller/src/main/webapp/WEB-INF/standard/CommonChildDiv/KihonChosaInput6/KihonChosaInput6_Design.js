@@ -4,6 +4,14 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBeforeOpenDialog_btnShochiNaiyo = function () {
+                return "onBeforeOpenDialog_btnShochiNaiyo";
+            };
+
+            Events.onBeforeOpenDialog_btnTokiTaiou = function () {
+                return "onBeforeOpenDialog_btnTokiTaiou";
+            };
+
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
             };

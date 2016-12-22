@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517001;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
@@ -88,6 +89,8 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
     private RString choyoJimu_hanteiFalg;
     @BatchParameter(key = CHOYOJIMU_GAIKYOUTOKKIIRANFALG, name = "事務局概況特記一覧フラグ")
     private RString choyoJimu_gaikyouTokkiIranFalg;
+    
+    private Map<RString, RString> 帳票一覧Map;
 
     /**
      * コンストラクタです。
@@ -118,6 +121,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
      * @param choyoJimu_gaikyouTokkiFalg 事務_概況特記フラグ
      * @param choyoJimu_hanteiFalg 事務_予備判定記入表フラグ
      * @param choyoJimu_gaikyouTokkiIranFalg 事務_概況特記一覧フラグ
+     * @param 帳票一覧Map 帳票一覧Map
      */
     public DBE517001_ShinsakaiShiryoJImukyokuParameter(
             RString shinsakaiKaisaiNo,
@@ -139,7 +143,8 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
             RString choyoJimu_sonotaSiryoFalg,
             RString choyoJimu_gaikyouTokkiFalg,
             RString choyoJimu_hanteiFalg,
-            RString choyoJimu_gaikyouTokkiIranFalg) {
+            RString choyoJimu_gaikyouTokkiIranFalg,
+            Map<RString, RString> 帳票一覧Map) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
@@ -160,6 +165,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
         this.choyoJimu_gaikyouTokkiFalg = choyoJimu_gaikyouTokkiFalg;
         this.choyoJimu_hanteiFalg = choyoJimu_hanteiFalg;
         this.choyoJimu_gaikyouTokkiIranFalg = choyoJimu_gaikyouTokkiIranFalg;
+        this.帳票一覧Map = 帳票一覧Map;
     }
 
     /**

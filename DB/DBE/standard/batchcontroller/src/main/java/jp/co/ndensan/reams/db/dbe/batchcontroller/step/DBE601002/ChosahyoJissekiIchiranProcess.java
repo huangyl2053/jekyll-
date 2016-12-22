@@ -162,7 +162,7 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
         List<RString> 出力条件 = new ArrayList<>();
         RString 基準日区分 = get基準日区分();
         RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
-        保険者_SB.append(paramter.get保険者());
+        保険者_SB.append(paramter.get証記載保険者());
         出力条件.add(get出力条件_基準日From(基準日区分));
         出力条件.add(get出力条件_基準日TO(基準日区分));
         出力条件.add(保険者_SB.toRString());

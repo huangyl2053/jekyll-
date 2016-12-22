@@ -49,8 +49,8 @@ public class NinteiShinseiTodokedeshaHandler {
      */
     public void initialize(NinteiShinseiTodokedeshaDataPassModel model) {
         div.getTxtHonninKankeisei().clearValue();
-        div.getTxtJigyoshaCode().clearValue();
-        div.getTxtJigyoshaName().clearValue();
+        div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().clearValue();
+        div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuMeisho().clearValue();
         div.getTxtKanaShimei().clearValue();
         div.getTxtShimei().clearValue();
         div.getTxtTelNo().clearDomain();
@@ -68,7 +68,8 @@ public class NinteiShinseiTodokedeshaHandler {
         }
         div.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
         if ((NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode).equals(div.getMode_ShoriType())) {
-            div.getTxtJigyoshaCode().setValue(model.get申請届出代行事業者番号());
+            div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().setValue(model.get申請届出代行事業者番号());
+            //div.getTxtJigyoshaCode().setValue(model.get申請届出代行事業者番号());
             div.getTxtHonninKankeisei().setValue(model.get続柄());
             div.getTxtShimei().setValue(model.get氏名());
             div.getTxtKanaShimei().setValue(model.getカナ氏名());
@@ -99,8 +100,8 @@ public class NinteiShinseiTodokedeshaHandler {
         NinteiShinseiTodokedeshaNaiyo naiyo = new NinteiShinseiTodokedeshaNaiyo();
         naiyo.set届出代行区分(div.getDdlTodokledeDaikoKubun().getSelectedKey());
         naiyo.set管内管外区分(div.getRadKannaiKangai().getSelectedKey());
-        naiyo.set事業者コード(div.getTxtJigyoshaCode().getValue());
-        naiyo.set事業者名称(div.getTxtJigyoshaName().getValue());
+        naiyo.set事業者コード(div.getCcdShisetsuJohoCommonChildDiv().getNyuryokuShisetsuKodo());
+        naiyo.set事業者名称(div.getCcdShisetsuJohoCommonChildDiv().getNyuryokuShisetsuMeisho());
         naiyo.set申請関係者(div.getDdlShinseiKankeisha().getSelectedKey());
         naiyo.setカナ氏名(div.getTxtKanaShimei().getValue());
         naiyo.set氏名(div.getTxtShimei().getValue());

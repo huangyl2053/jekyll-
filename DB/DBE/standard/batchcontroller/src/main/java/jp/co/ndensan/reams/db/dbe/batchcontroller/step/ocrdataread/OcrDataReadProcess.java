@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbe.business.core.ocrdataread.OcrDataReadResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocrdataread.OcrFileReadResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocrdataread.OcrDataReadProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.jizenshinsakekka.OcrJohoOcrDataRecordEntity;
@@ -31,8 +32,10 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoKihonChosa06A
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoKihonChosa09AManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoKihonChosa09BManager;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoChosaItemManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoServiceJokyoFlagManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoServiceJokyoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoShisetsuRiyoManager;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
@@ -65,6 +68,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     private OcrDataReadProcessParameter processParameter;
     private long 読取中行番号;
     private OcrDataReadResult ocrデータ解析結果 = new OcrDataReadResult();
+    private static OcrFileReadResult ca3解析結果;
     private static final RString 厚労省IF識別コード_06A = new RString("06A");
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
@@ -86,6 +90,75 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     private static final int 連番3 = 3;
     private static final int 連番4 = 4;
     private static final int 連番5 = 5;
+    private static final int 連番6 = 6;
+    private static final int 連番7 = 7;
+    private static final int 連番8 = 8;
+    private static final int 連番9 = 9;
+    private static final int 連番10 = 10;
+    private static final int 連番11 = 11;
+    private static final int 連番12 = 12;
+    private static final int 連番13 = 13;
+    private static final int 連番14 = 14;
+    private static final int 連番15 = 15;
+    private static final int 連番16 = 16;
+    private static final int 連番17 = 17;
+    private static final int 連番18 = 18;
+    private static final int 連番19 = 19;
+    private static final int 連番20 = 20;
+    private static final int 連番21 = 21;
+    private static final int 連番22 = 22;
+    private static final int 連番23 = 23;
+    private static final int 連番24 = 24;
+    private static final int 連番25 = 25;
+    private static final int 連番26 = 26;
+    private static final int 連番27 = 27;
+    private static final int 連番28 = 28;
+    private static final int 連番29 = 29;
+    private static final int 連番30 = 30;
+    private static final int 連番31 = 31;
+    private static final int 連番32 = 32;
+    private static final int 連番33 = 33;
+    private static final int 連番34 = 34;
+    private static final int 連番35 = 35;
+    private static final int 連番36 = 36;
+    private static final int 連番37 = 37;
+    private static final int 連番38 = 38;
+    private static final int 連番39 = 39;
+    private static final int 連番40 = 40;
+    private static final int 連番41 = 41;
+    private static final int 連番42 = 42;
+    private static final int 連番43 = 43;
+    private static final int 連番44 = 44;
+    private static final int 連番45 = 45;
+    private static final int 連番46 = 46;
+    private static final int 連番47 = 47;
+    private static final int 連番48 = 48;
+    private static final int 連番49 = 49;
+    private static final int 連番50 = 50;
+    private static final int 連番51 = 51;
+    private static final int 連番52 = 52;
+    private static final int 連番53 = 53;
+    private static final int 連番54 = 54;
+    private static final int 連番55 = 55;
+    private static final int 連番56 = 56;
+    private static final int 連番57 = 57;
+    private static final int 連番58 = 58;
+    private static final int 連番59 = 59;
+    private static final int 連番60 = 60;
+    private static final int 連番61 = 61;
+    private static final int 連番62 = 62;
+    private static final int 連番63 = 63;
+    private static final int 連番64 = 64;
+    private static final int 連番65 = 65;
+    private static final int 連番66 = 66;
+    private static final int 連番67 = 67;
+    private static final int 連番68 = 68;
+    private static final int 連番69 = 69;
+    private static final int 連番70 = 70;
+    private static final int 連番71 = 71;
+    private static final int 連番72 = 72;
+    private static final int 連番73 = 73;
+    private static final int 連番74 = 74;
 
     private NinteichosahyoGaikyoChosa09BManager manager09b;
     private NinteichosahyoGaikyoChosa09AManager manager09a;
@@ -95,6 +168,8 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     private NinteichosahyoKihonChosa09BManager managerKihon09b;
     private NinteichosahyoServiceJokyoManager serviceManager;
     private NinteichosahyoServiceJokyoFlagManager serviceFlagManager;
+    private NinteichosahyoShisetsuRiyoManager shisetsuManager;
+    private NinteichosahyoChosaItemManager itemManager;
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5202NinteichosahyoGaikyoChosa09BEntity> writer09b;
@@ -125,6 +200,11 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     }
 
     @Override
+    protected void initialize() {
+        ca3解析結果 = new OcrFileReadResult();
+    }
+
+    @Override
     protected void createWriter() {
         writer06a = new BatchPermanentTableWriter<>(DbT5202NinteichosahyoGaikyoChosa06AEntity.class);
         writer09a = new BatchPermanentTableWriter<>(DbT5202NinteichosahyoGaikyoChosa09AEntity.class);
@@ -148,6 +228,11 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
             ocrデータ解析結果.parse(line, 読取中行番号);
 
             ocrデータ解析結果 = this.チェック処理(ocrデータ解析結果);
+            if (processParameter.getファイルPath().contains(".ca3")) {
+                ca3解析結果.clear();
+                ca3解析結果.parse(line, 読取中行番号);
+                processParameter.setファイルList(ca3解析結果.getイメージファイル());
+            }
 
             NinteiOcrMapperParamter paramter = NinteiOcrMapperParamter.createParamter(ocrデータ解析結果.get保険者番号(),
                     ocrデータ解析結果.get被保険者番号(),
@@ -228,19 +313,19 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                             dbT5202Entity09BUpdate(ocrデータ解析結果, result);
                             dbT5207EntityUpdate(ocrデータ解析結果, result);
                             dbT5208EntityUpdate(ocrデータ解析結果, result);
-
+                            dbT5210EntityUpdate(ocrデータ解析結果, result);
                         } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
 
                             dbT5202Entity09AUpdate(ocrデータ解析結果, result);
                             dbT5207EntityUpdate(ocrデータ解析結果, result);
                             dbT5208EntityUpdate(ocrデータ解析結果, result);
-
+                            dbT5210EntityUpdate(ocrデータ解析結果, result);
                         } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
 
                             dbT5202Entity06AUpdate(ocrデータ解析結果, result);
                             dbT5207EntityUpdate(ocrデータ解析結果, result);
                             dbT5208EntityUpdate(ocrデータ解析結果, result);
-
+                            dbT5210EntityUpdate(ocrデータ解析結果, result);
                         }
                     } else if (ocrデータ解析結果.get調査区分().equals(基本調査区分)) {
                         if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
@@ -251,6 +336,8 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                             entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
                             entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
                             writerKihon09b.update(entityKihon);
+                            dbT5211EntityUpdate(ocrデータ解析結果, result);
+
                         } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
                             managerKihon09a = new NinteichosahyoKihonChosa09AManager();
                             DbT5203NinteichosahyoKihonChosa09AEntity entityKihon = managerKihon09a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
@@ -259,6 +346,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                             entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
                             entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
                             writerKihon09a.update(entityKihon);
+                            dbT5211EntityUpdate(ocrデータ解析結果, result);
                         } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
                             managerKihon06a = new NinteichosahyoKihonChosa06AManager();
                             DbT5203NinteichosahyoKihonChosa06AEntity entityKihon = managerKihon06a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
@@ -267,6 +355,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                             entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
                             entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
                             writerKihon06a.update(entityKihon);
+                            dbT5211EntityUpdate(ocrデータ解析結果, result);
                         }
                     }
                 }
@@ -283,7 +372,8 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                     entityImage.setImageSharedFileId(entity.getSharedFileId());
                     writerImage.insert(entityImage);
                 } else {
-                    imageList = ocrデータ解析結果.getイメージファイル();
+//                     ocrデータ解析結果.getイメージファイル();
+                    imageList = processParameter.getファイルList();
                     if (imageList != null) {
                         for (int j = 0; j < imageList.size(); j++) {
                             ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
@@ -299,15 +389,16 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     private OcrDataReadResult チェック処理(OcrDataReadResult ocrデータ解析結果) {
         OcrJohoOcrDataRecordEntity ocrDataデータ行 = (OcrJohoOcrDataRecordEntity) ocrデータ解析結果.getOcrDataデータ行Entity();
         if (ocrDataデータ行 != null) {
-            if (ocrDataデータ行.get調査区分().equals(概況調査区分)) {
-                set概況調査(ocrデータ解析結果, ocrDataデータ行);
-            } else if (ocrDataデータ行.get調査区分().equals(基本調査区分)) {
-                set基本調査(ocrデータ解析結果, ocrDataデータ行);
+            if (ocrDataデータ行.get調査区分() != null) {
+                if (ocrDataデータ行.get調査区分().equals(概況調査区分)) {
+                    set概況調査(ocrデータ解析結果, ocrDataデータ行);
+                } else if (ocrDataデータ行.get調査区分().equals(基本調査区分)) {
+                    set基本調査(ocrデータ解析結果, ocrDataデータ行);
+                }
             } else {
                 ocrデータ解析結果.setイメージファイル(ocrDataデータ行.getファイルList());
             }
         }
-
         return ocrデータ解析結果;
     }
 
@@ -560,22 +651,76 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     }
 
     private void dbT5207EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
-        DbT5207NinteichosahyoServiceJokyoEntity entityService = new DbT5207NinteichosahyoServiceJokyoEntity();
-        entityService.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-        entityService.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-        entityService.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
-        entityService.setRemban(連番1);
-        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問介護の回数().toString()));
-        writerService.insert(entityService);
-        DbT5207NinteichosahyoServiceJokyoEntity entity1 = entityService.clone();
-        entity1.setRemban(連番2);
-        entity1.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問入浴介護の回数().toString()));
-        writerService.insert(entity1);
-        DbT5207NinteichosahyoServiceJokyoEntity entity2 = entityService.clone();
-        entity2.setRemban(連番3);
-        entity2.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問看護の回数().toString()));
-        writerService.insert(entity2);
-
+        for (int i = 1; i <= 20; i++) {
+            DbT5207NinteichosahyoServiceJokyoEntity entityService = new DbT5207NinteichosahyoServiceJokyoEntity();
+            entityService.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+            entityService.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+            entityService.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
+            entityService.setRemban(i);
+            switch (i) {
+                case 連番1:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問介護の回数().toString()));
+                    break;
+                case 連番2:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問入浴介護の回数().toString()));
+                    break;
+                case 連番3:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問看護の回数().toString()));
+                    break;
+                case 連番4:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数().toString()));
+                    break;
+                case 連番5:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get居宅療養管理指導の回数().toString()));
+                    break;
+                case 連番6:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get通所看護の回数().toString()));
+                    break;
+                case 連番7:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数().toString()));
+                    break;
+                case 連番8:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get短期入所生活介護の日数().toString()));
+                    break;
+                case 連番9:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get短期入所療養介護の日数().toString()));
+                    break;
+                case 連番10:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get特定施設入所者生活介護の日数().toString()));
+                    break;
+                case 連番11:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get福祉用具貸与の品目().toString()));
+                    break;
+                case 連番12:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get福祉用具購入の品目().toString()));
+                    break;
+                case 連番13:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get夜間対応型訪問介護の日数().toString()));
+                    break;
+                case 連番14:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get認知症対応型通所介護の日数().toString()));
+                    break;
+                case 連番15:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get小規模多機能型居宅介護の日数().toString()));
+                    break;
+                case 連番16:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get認知症対応型共同生活介護の日数().toString()));
+                    break;
+                case 連番17:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get地域密着型特定施設入居者生活介護の日数().toString()));
+                    break;
+                case 連番18:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get地域密着型介護老人福祉施設入居者生活介護の日数().toString()));
+                    break;
+                case 連番19:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get随時対応型訪問介護看護().toString()));
+                    break;
+                case 連番20:
+                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get随時対応型訪問介護看護().toString()));
+                    break;
+            }
+            writerService.insert(entityService);
+        }
     }
 
     private void dbT5208EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
@@ -590,46 +735,328 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     }
 
     private void dbT5210EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
-        DbT5210NinteichosahyoShisetsuRiyoEntity entityShisetsu = new DbT5210NinteichosahyoShisetsuRiyoEntity();
-        entityShisetsu.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-        entityShisetsu.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-        entityShisetsu.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
-        entityShisetsu.setRemban(連番1);
-        entityShisetsu.setShisetsuRiyoFlag(施設利用チェック(entityShisetsu.getRemban()));
-        writerShisetsu.insert(entityShisetsu);
+
+        for (int i = 1; i <= 9; i++) {
+            DbT5210NinteichosahyoShisetsuRiyoEntity entityShisetsu = new DbT5210NinteichosahyoShisetsuRiyoEntity();
+            entityShisetsu.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+            entityShisetsu.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+            entityShisetsu.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
+            entityShisetsu.setRemban(i);
+            entityShisetsu.setShisetsuRiyoFlag(施設利用チェック(entityShisetsu.getRemban()));
+            writerShisetsu.insert(entityShisetsu);
+        }
     }
 
     private void dbT5211EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
-        DbT5211NinteichosahyoChosaItemEntity entityItem = new DbT5211NinteichosahyoChosaItemEntity();
-        entityItem.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-        entityItem.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-        entityItem.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
-        entityItem.setRemban(連番1);
-        entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(0, 1));
-        writerItem.insert(entityItem);
+        for (int i = 1; i <= 62; i++) {
+            DbT5211NinteichosahyoChosaItemEntity entityItem = new DbT5211NinteichosahyoChosaItemEntity();
+            entityItem.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+            entityItem.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+            entityItem.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
+            entityItem.setRemban(i);
+            switch (i) {
+                case 連番1:
+                    entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(1));
+                    break;
+                case 連番2:
+                    entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(2));
+                    break;
+                case 連番3:
+                    entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(3));
+                    break;
+                case 連番4:
+                    entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(4));
+                    break;
+                case 連番5:
+                    entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(5));
+                    break;
+                case 連番6:
+                    entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(1));
+                    break;
+                case 連番7:
+                    entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(2));
+                    break;
+                case 連番8:
+                    entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(3));
+                    break;
+                case 連番9:
+                    entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(4));
+                    break;
+                case 連番10:
+                    entityItem.setResearchItem(ocrデータ解析結果.get寝返り());
+                    break;
+                case 連番11:
+                    entityItem.setResearchItem(ocrデータ解析結果.get起き上がり());
+                    break;
+                case 連番12:
+                    entityItem.setResearchItem(ocrデータ解析結果.get座位保持());
+                    break;
+                case 連番13:
+                    entityItem.setResearchItem(ocrデータ解析結果.get両足での立位());
+                    break;
+                case 連番14:
+                    entityItem.setResearchItem(ocrデータ解析結果.get歩行());
+                    break;
+                case 連番15:
+                    entityItem.setResearchItem(ocrデータ解析結果.get立ち上がり());
+                    break;
+                case 連番16:
+                    entityItem.setResearchItem(ocrデータ解析結果.get片足での立位());
+                    break;
+                case 連番17:
+                    entityItem.setResearchItem(ocrデータ解析結果.get洗身());
+                    break;
+                case 連番18:
+                    entityItem.setResearchItem(ocrデータ解析結果.getつめ切り());
+                    break;
+                case 連番19:
+                    entityItem.setResearchItem(ocrデータ解析結果.get視力());
+                    break;
+                case 連番20:
+                    entityItem.setResearchItem(ocrデータ解析結果.get聴力());
+                    break;
+                case 連番21:
+                    entityItem.setResearchItem(ocrデータ解析結果.get移乗());
+                    break;
+                case 連番22:
+                    entityItem.setResearchItem(ocrデータ解析結果.get移動());
+                    break;
+                case 連番23:
+                    entityItem.setResearchItem(ocrデータ解析結果.get食事摂取());
+                    break;
+                case 連番24:
+                    entityItem.setResearchItem(ocrデータ解析結果.get食事摂取());
+                    break;
+                case 連番25:
+                    entityItem.setResearchItem(ocrデータ解析結果.get排尿());
+                    break;
+                case 連番26:
+                    entityItem.setResearchItem(ocrデータ解析結果.get排便());
+                    break;
+                case 連番27:
+                    entityItem.setResearchItem(ocrデータ解析結果.get口腔清潔());
+                    break;
+                case 連番28:
+                    entityItem.setResearchItem(ocrデータ解析結果.get洗顔());
+                    break;
+                case 連番29:
+                    entityItem.setResearchItem(ocrデータ解析結果.get整髪());
+                    break;
+                case 連番30:
+                    entityItem.setResearchItem(ocrデータ解析結果.get上衣の着脱());
+                    break;
+                case 連番31:
+                    entityItem.setResearchItem(ocrデータ解析結果.getズボン等の着脱());
+                    break;
+                case 連番32:
+                    entityItem.setResearchItem(ocrデータ解析結果.get外出頻度());
+                    break;
+                case 連番33:
+                    entityItem.setResearchItem(ocrデータ解析結果.get毎日の日課を理解());
+                    break;
+                case 連番34:
+                    entityItem.setResearchItem(ocrデータ解析結果.get毎日の日課を理解());
+                    break;
+                case 連番35:
+                    entityItem.setResearchItem(ocrデータ解析結果.get生年月日をいう());
+                    break;
+                case 連番36:
+                    entityItem.setResearchItem(ocrデータ解析結果.get短期記憶());
+                    break;
+                case 連番37:
+                    entityItem.setResearchItem(ocrデータ解析結果.get自分の名前をいう());
+                    break;
+                case 連番38:
+                    entityItem.setResearchItem(ocrデータ解析結果.get今の季節を理解());
+                    break;
+                case 連番39:
+                    entityItem.setResearchItem(ocrデータ解析結果.get場所の理解());
+                    break;
+                case 連番40:
+                    entityItem.setResearchItem(ocrデータ解析結果.get徘徊());
+                    break;
+                case 連番41:
+                    entityItem.setResearchItem(ocrデータ解析結果.get外出して戻れない());
+                    break;
+                case 連番42:
+                    entityItem.setResearchItem(ocrデータ解析結果.get被害的());
+                    break;
+                case 連番43:
+                    entityItem.setResearchItem(ocrデータ解析結果.get作話());
+                    break;
+                case 連番44:
+                    entityItem.setResearchItem(ocrデータ解析結果.get感情が不安定());
+                    break;
+                case 連番45:
+                    entityItem.setResearchItem(ocrデータ解析結果.get昼夜逆転());
+                    break;
+                case 連番46:
+                    entityItem.setResearchItem(ocrデータ解析結果.get同じ話をする());
+                    break;
+                case 連番47:
+                    entityItem.setResearchItem(ocrデータ解析結果.get大声を出す());
+                    break;
+                case 連番48:
+                    entityItem.setResearchItem(ocrデータ解析結果.get介護に抵抗());
+                    break;
+                case 連番49:
+                    entityItem.setResearchItem(ocrデータ解析結果.get落ち着きなし());
+                    break;
+                case 連番50:
+                    entityItem.setResearchItem(ocrデータ解析結果.get一人で出たがる());
+                    break;
+                case 連番51:
+                    entityItem.setResearchItem(ocrデータ解析結果.get収集癖());
+                    break;
+                case 連番52:
+                    entityItem.setResearchItem(ocrデータ解析結果.get物や衣類を壊す());
+                    break;
+                case 連番53:
+                    entityItem.setResearchItem(ocrデータ解析結果.getひどい物忘れ());
+                    break;
+                case 連番54:
+                    entityItem.setResearchItem(ocrデータ解析結果.get独り言());
+                    break;
+                case 連番55:
+                    entityItem.setResearchItem(ocrデータ解析結果.get自分勝手に行動する());
+                    break;
+                case 連番56:
+                    entityItem.setResearchItem(ocrデータ解析結果.get話がまとまらない());
+                    break;
+                case 連番57:
+                    entityItem.setResearchItem(ocrデータ解析結果.get薬の内服());
+                    break;
+                case 連番58:
+                    entityItem.setResearchItem(ocrデータ解析結果.get金銭の管理());
+                    break;
+                case 連番59:
+                    entityItem.setResearchItem(ocrデータ解析結果.get日常の意思決定());
+                    break;
+                case 連番60:
+                    entityItem.setResearchItem(ocrデータ解析結果.get集団への不適応());
+                    break;
+                case 連番61:
+                    entityItem.setResearchItem(ocrデータ解析結果.get買い物());
+                    break;
+                case 連番62:
+                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+                    break;
+//                case 連番63:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番64:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番65:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番66:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番67:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番68:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番69:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番70:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番71:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番72:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番73:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番74:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+
+            }
+            writerItem.insert(entityItem);
+        }
     }
 
     private void dbT5207EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
 
         serviceManager = new NinteichosahyoServiceJokyoManager();
-
-        DbT5207NinteichosahyoServiceJokyoEntity entityService = serviceManager.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), 連番1);
-        if (entityService != null) {
-            entityService.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-            entityService.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-            entityService.setRemban(連番1);
-            entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問介護の回数().toString()));
-            writerService.update(entityService);
+        for (int i = 1; i <= 20; i++) {
+            DbT5207NinteichosahyoServiceJokyoEntity entityService = serviceManager.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), i);
+            if (entityService != null) {
+                entityService.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+                entityService.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+                entityService.setRemban(i);
+                switch (i) {
+                    case 連番1:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問介護の回数().toString()));
+                        break;
+                    case 連番2:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問入浴介護の回数().toString()));
+                        break;
+                    case 連番3:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問看護の回数().toString()));
+                        break;
+                    case 連番4:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数().toString()));
+                        break;
+                    case 連番5:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get居宅療養管理指導の回数().toString()));
+                        break;
+                    case 連番6:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get通所看護の回数().toString()));
+                        break;
+                    case 連番7:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数().toString()));
+                        break;
+                    case 連番8:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get短期入所生活介護の日数().toString()));
+                        break;
+                    case 連番9:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get短期入所療養介護の日数().toString()));
+                        break;
+                    case 連番10:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get特定施設入所者生活介護の日数().toString()));
+                        break;
+                    case 連番11:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get福祉用具貸与の品目().toString()));
+                        break;
+                    case 連番12:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get福祉用具購入の品目().toString()));
+                        break;
+                    case 連番13:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get夜間対応型訪問介護の日数().toString()));
+                        break;
+                    case 連番14:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get認知症対応型通所介護の日数().toString()));
+                        break;
+                    case 連番15:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get小規模多機能型居宅介護の日数().toString()));
+                        break;
+                    case 連番16:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get認知症対応型共同生活介護の日数().toString()));
+                        break;
+                    case 連番17:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get地域密着型特定施設入居者生活介護の日数().toString()));
+                        break;
+                    case 連番18:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get地域密着型介護老人福祉施設入居者生活介護の日数().toString()));
+                        break;
+                    case 連番19:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get随時対応型訪問介護看護().toString()));
+                        break;
+                    case 連番20:
+                        entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get随時対応型訪問介護看護().toString()));
+                        break;
+                }
+                writerService.update(entityService);
+            }
         }
-
-//        DbT5207NinteichosahyoServiceJokyoEntity entity1 = entityService.clone();
-//        entity1.setRemban(連番2);
-//        entity1.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問入浴介護の回数().toString()));
-//        writerService.insert(entity1);
-//        DbT5207NinteichosahyoServiceJokyoEntity entity2 = entityService.clone();
-//        entity2.setRemban(連番3);
-//        entity2.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問看護の回数().toString()));
-//        writerService.insert(entity2);
     }
 
     private void dbT5208EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
@@ -643,6 +1070,258 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
             entityFlag.setRemban(連番1);
             entityFlag.setServiceJokyoFlag(住宅改修チェック(ocrデータ解析結果.get住宅改修()));
             writerServiceFlag.update(entityFlag);
+        }
+    }
+
+    private void dbT5210EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+        shisetsuManager = new NinteichosahyoShisetsuRiyoManager();
+
+        for (int i = 1; i <= 9; i++) {
+            DbT5210NinteichosahyoShisetsuRiyoEntity entityRiyo = shisetsuManager.select施設利用(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), i);
+            if (entityRiyo != null) {
+                entityRiyo.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+                entityRiyo.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+                entityRiyo.setRemban(i);
+                entityRiyo.setShisetsuRiyoFlag(施設利用チェック(entityRiyo.getRemban()));
+                writerShisetsu.update(entityRiyo);
+            }
+        }
+    }
+
+    private void dbT5211EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+        itemManager = new NinteichosahyoChosaItemManager();
+        for (int i = 1; i <= 62; i++) {
+            DbT5211NinteichosahyoChosaItemEntity entityItem = itemManager.select調査項目(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), i);
+            if (entityItem != null) {
+                entityItem.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+                entityItem.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+                entityItem.setRemban(i);
+                switch (i) {
+                    case 連番1:
+                        entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(1));
+                        break;
+                    case 連番2:
+                        entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(2));
+                        break;
+                    case 連番3:
+                        entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(3));
+                        break;
+                    case 連番4:
+                        entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(4));
+                        break;
+                    case 連番5:
+                        entityItem.setResearchItem(ocrデータ解析結果.get麻痺().substring(5));
+                        break;
+                    case 連番6:
+                        entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(1));
+                        break;
+                    case 連番7:
+                        entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(2));
+                        break;
+                    case 連番8:
+                        entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(3));
+                        break;
+                    case 連番9:
+                        entityItem.setResearchItem(ocrデータ解析結果.get拘縮().substring(4));
+                        break;
+                    case 連番10:
+                        entityItem.setResearchItem(ocrデータ解析結果.get寝返り());
+                        break;
+                    case 連番11:
+                        entityItem.setResearchItem(ocrデータ解析結果.get起き上がり());
+                        break;
+                    case 連番12:
+                        entityItem.setResearchItem(ocrデータ解析結果.get座位保持());
+                        break;
+                    case 連番13:
+                        entityItem.setResearchItem(ocrデータ解析結果.get両足での立位());
+                        break;
+                    case 連番14:
+                        entityItem.setResearchItem(ocrデータ解析結果.get歩行());
+                        break;
+                    case 連番15:
+                        entityItem.setResearchItem(ocrデータ解析結果.get立ち上がり());
+                        break;
+                    case 連番16:
+                        entityItem.setResearchItem(ocrデータ解析結果.get片足での立位());
+                        break;
+                    case 連番17:
+                        entityItem.setResearchItem(ocrデータ解析結果.get洗身());
+                        break;
+                    case 連番18:
+                        entityItem.setResearchItem(ocrデータ解析結果.getつめ切り());
+                        break;
+                    case 連番19:
+                        entityItem.setResearchItem(ocrデータ解析結果.get視力());
+                        break;
+                    case 連番20:
+                        entityItem.setResearchItem(ocrデータ解析結果.get聴力());
+                        break;
+                    case 連番21:
+                        entityItem.setResearchItem(ocrデータ解析結果.get移乗());
+                        break;
+                    case 連番22:
+                        entityItem.setResearchItem(ocrデータ解析結果.get移動());
+                        break;
+                    case 連番23:
+                        entityItem.setResearchItem(ocrデータ解析結果.get食事摂取());
+                        break;
+                    case 連番24:
+                        entityItem.setResearchItem(ocrデータ解析結果.get食事摂取());
+                        break;
+                    case 連番25:
+                        entityItem.setResearchItem(ocrデータ解析結果.get排尿());
+                        break;
+                    case 連番26:
+                        entityItem.setResearchItem(ocrデータ解析結果.get排便());
+                        break;
+                    case 連番27:
+                        entityItem.setResearchItem(ocrデータ解析結果.get口腔清潔());
+                        break;
+                    case 連番28:
+                        entityItem.setResearchItem(ocrデータ解析結果.get洗顔());
+                        break;
+                    case 連番29:
+                        entityItem.setResearchItem(ocrデータ解析結果.get整髪());
+                        break;
+                    case 連番30:
+                        entityItem.setResearchItem(ocrデータ解析結果.get上衣の着脱());
+                        break;
+                    case 連番31:
+                        entityItem.setResearchItem(ocrデータ解析結果.getズボン等の着脱());
+                        break;
+                    case 連番32:
+                        entityItem.setResearchItem(ocrデータ解析結果.get外出頻度());
+                        break;
+                    case 連番33:
+                        entityItem.setResearchItem(ocrデータ解析結果.get毎日の日課を理解());
+                        break;
+                    case 連番34:
+                        entityItem.setResearchItem(ocrデータ解析結果.get毎日の日課を理解());
+                        break;
+                    case 連番35:
+                        entityItem.setResearchItem(ocrデータ解析結果.get生年月日をいう());
+                        break;
+                    case 連番36:
+                        entityItem.setResearchItem(ocrデータ解析結果.get短期記憶());
+                        break;
+                    case 連番37:
+                        entityItem.setResearchItem(ocrデータ解析結果.get自分の名前をいう());
+                        break;
+                    case 連番38:
+                        entityItem.setResearchItem(ocrデータ解析結果.get今の季節を理解());
+                        break;
+                    case 連番39:
+                        entityItem.setResearchItem(ocrデータ解析結果.get場所の理解());
+                        break;
+                    case 連番40:
+                        entityItem.setResearchItem(ocrデータ解析結果.get徘徊());
+                        break;
+                    case 連番41:
+                        entityItem.setResearchItem(ocrデータ解析結果.get外出して戻れない());
+                        break;
+                    case 連番42:
+                        entityItem.setResearchItem(ocrデータ解析結果.get被害的());
+                        break;
+                    case 連番43:
+                        entityItem.setResearchItem(ocrデータ解析結果.get作話());
+                        break;
+                    case 連番44:
+                        entityItem.setResearchItem(ocrデータ解析結果.get感情が不安定());
+                        break;
+                    case 連番45:
+                        entityItem.setResearchItem(ocrデータ解析結果.get昼夜逆転());
+                        break;
+                    case 連番46:
+                        entityItem.setResearchItem(ocrデータ解析結果.get同じ話をする());
+                        break;
+                    case 連番47:
+                        entityItem.setResearchItem(ocrデータ解析結果.get大声を出す());
+                        break;
+                    case 連番48:
+                        entityItem.setResearchItem(ocrデータ解析結果.get介護に抵抗());
+                        break;
+                    case 連番49:
+                        entityItem.setResearchItem(ocrデータ解析結果.get落ち着きなし());
+                        break;
+                    case 連番50:
+                        entityItem.setResearchItem(ocrデータ解析結果.get一人で出たがる());
+                        break;
+                    case 連番51:
+                        entityItem.setResearchItem(ocrデータ解析結果.get収集癖());
+                        break;
+                    case 連番52:
+                        entityItem.setResearchItem(ocrデータ解析結果.get物や衣類を壊す());
+                        break;
+                    case 連番53:
+                        entityItem.setResearchItem(ocrデータ解析結果.getひどい物忘れ());
+                        break;
+                    case 連番54:
+                        entityItem.setResearchItem(ocrデータ解析結果.get独り言());
+                        break;
+                    case 連番55:
+                        entityItem.setResearchItem(ocrデータ解析結果.get自分勝手に行動する());
+                        break;
+                    case 連番56:
+                        entityItem.setResearchItem(ocrデータ解析結果.get話がまとまらない());
+                        break;
+                    case 連番57:
+                        entityItem.setResearchItem(ocrデータ解析結果.get薬の内服());
+                        break;
+                    case 連番58:
+                        entityItem.setResearchItem(ocrデータ解析結果.get金銭の管理());
+                        break;
+                    case 連番59:
+                        entityItem.setResearchItem(ocrデータ解析結果.get日常の意思決定());
+                        break;
+                    case 連番60:
+                        entityItem.setResearchItem(ocrデータ解析結果.get集団への不適応());
+                        break;
+                    case 連番61:
+                        entityItem.setResearchItem(ocrデータ解析結果.get買い物());
+                        break;
+                    case 連番62:
+                        entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+                        break;
+//                case 連番63:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番64:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番65:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番66:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番67:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番68:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番69:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番70:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番71:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番72:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番73:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+//                case 連番74:
+//                    entityItem.setResearchItem(ocrデータ解析結果.get簡単な調理());
+//                    break;
+                }
+                writerItem.update(entityItem);
+            }
         }
     }
 
