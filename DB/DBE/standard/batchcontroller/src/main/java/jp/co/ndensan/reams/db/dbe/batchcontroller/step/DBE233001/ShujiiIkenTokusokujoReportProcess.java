@@ -161,8 +161,10 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
 
         YubinNo yubinNo = entity.getTemp_事業者郵便番号();
         RString 宛名郵便番号 = RString.EMPTY;
+        RString edited郵便番号 = RString.EMPTY;
         if (yubinNo != null) {
             宛名郵便番号 = yubinNo.getColumnValue();
+            edited郵便番号 = yubinNo.getEditedYubinNo();
         }
         RString 宛名住所 = entity.getTemp_事業者住所() == null ? RString.EMPTY : entity.getTemp_事業者住所();
         CustomerBarCode barcode = new CustomerBarCode();
@@ -186,7 +188,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 source.ninshoshaYakushokuMei2,
                 new RString("1"),
                 宛名名称付与,
-                宛名郵便番号,
+                edited郵便番号,
                 宛名住所,
                 entity.getTemp_診療科名称() == null ? RString.EMPTY : entity.getTemp_診療科名称(),
                 entity.getTemp_主治医氏名() == null ? RString.EMPTY : entity.getTemp_主治医氏名(),
