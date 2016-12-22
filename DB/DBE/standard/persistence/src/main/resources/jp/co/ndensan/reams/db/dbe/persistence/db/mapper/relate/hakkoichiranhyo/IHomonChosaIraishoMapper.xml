@@ -104,6 +104,10 @@
         , DbT5150."renrakusakiJusho"
         , DbT5101."ninteiChosaItakusakiCode"
         , DbT5101."ninteiChosainCode"
+        <include refid="HomonChosaIraisho" />
+    </select>
+    
+    <sql id="HomonChosaIraisho">
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN
@@ -201,7 +205,7 @@
         ORDER BY
         DbT5101."ninteiChosaItakusakiCode",
         DbT5101."ninteiChosainCode"
-    </select>
+    </sql>
 
     <select resultOrdered="true" id="get認定調査結果" resultMap="resultMap_getHomonChosaIraisho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter" fetchSize="500">
@@ -496,12 +500,12 @@
         ON
         DbT4203."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND NOT EXISTS ( 
-         SELECT 'X'
-         FROM
-         rgdb."DbT4203NinteichosahyoKihonChosa"     
-         WHERE
-         "shinseishoKanriNo" = DbT4203."shinseishoKanriNo"
-         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4203."ninteichosaRirekiNo"
+        SELECT 'X'
+        FROM
+        rgdb."DbT4203NinteichosahyoKihonChosa"     
+        WHERE
+        "shinseishoKanriNo" = DbT4203."shinseishoKanriNo"
+        AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4203."ninteichosaRirekiNo"
         )
         AND DbT4203."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
         
@@ -515,13 +519,13 @@
         ON
         DbT4211."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND NOT EXISTS ( 
-         SELECT 'X'
-         FROM
-         rgdb."DbT4211NinteichosahyoChosaItem"  
-         WHERE
-         "shinseishoKanriNo" = DbT4211."shinseishoKanriNo"
-         AND "remban" = DbT4211."remban"
-         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4211."ninteichosaRirekiNo"
+        SELECT 'X'
+        FROM
+        rgdb."DbT4211NinteichosahyoChosaItem"  
+        WHERE
+        "shinseishoKanriNo" = DbT4211."shinseishoKanriNo"
+        AND "remban" = DbT4211."remban"
+        AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4211."ninteichosaRirekiNo"
         )
         AND DbT4211."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
         
@@ -547,12 +551,12 @@
         ON
         DbT4203Zenkai."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
         AND NOT EXISTS ( 
-         SELECT 'X'
-         FROM
-         rgdb."DbT4203NinteichosahyoKihonChosa"     
-         WHERE
-         "shinseishoKanriNo" = DbT4203Zenkai."shinseishoKanriNo"
-         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4203Zenkai."ninteichosaRirekiNo"
+        SELECT 'X'
+        FROM
+        rgdb."DbT4203NinteichosahyoKihonChosa"     
+        WHERE
+        "shinseishoKanriNo" = DbT4203Zenkai."shinseishoKanriNo"
+        AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4203Zenkai."ninteichosaRirekiNo"
         )
         AND DbT4203Zenkai."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
         
@@ -571,13 +575,13 @@
         ON
         DbT4211Zenkai."shinseishoKanriNo" = DbT4203Zenkai."shinseishoKanriNo"
         AND NOT EXISTS ( 
-         SELECT 'X'
-         FROM
-         rgdb."DbT4211NinteichosahyoChosaItem"  
-         WHERE
-         "shinseishoKanriNo" = DbT4211Zenkai."shinseishoKanriNo"
-         AND "remban" = DbT4211Zenkai."remban"
-         AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4211Zenkai."ninteichosaRirekiNo"
+        SELECT 'X'
+        FROM
+        rgdb."DbT4211NinteichosahyoChosaItem"  
+        WHERE
+        "shinseishoKanriNo" = DbT4211Zenkai."shinseishoKanriNo"
+        AND "remban" = DbT4211Zenkai."remban"
+        AND "ninteichosaRirekiNo" <![CDATA[>]]> DbT4211Zenkai."ninteichosaRirekiNo"
         )
         AND DbT4211Zenkai."koroshoIfShikibetsuCode" = DbT5101."koroshoIfShikibetsuCode"
         
@@ -705,8 +709,12 @@
         AND T7051."shichosonCode" = T5913."shichosonCode"
         AND T5913."jokyoFlag" = True
         WHERE
-        T5101."hihokenshaNo" IN 
-        <foreach collection="被保険者番号リスト" item="被保険者番号" open="(" separator="," close=")">#{被保険者番号}</foreach>
+        T5101."hihokenshaNo" = (
+        SELECT 
+        DISTINCT
+        ,DbT5101."hihokenshaNo"
+        <include refid="HomonChosaIraisho" />
+        )
         AND T5101."logicalDeletedFlag" = FALSE
         ORDER BY
         T5101."ninteiShinseiYMD" DESC
