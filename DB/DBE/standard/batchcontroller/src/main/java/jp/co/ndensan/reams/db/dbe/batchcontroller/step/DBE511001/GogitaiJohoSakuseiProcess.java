@@ -197,7 +197,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
             RLogger.error(message);
             noErrorFlag = false;
         } else if (new FlexibleDate(合議体情報.get有効開始日()).isAfter(new FlexibleDate(合議体情報.get有効終了日()))) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日大有効終了日.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日大有効終了日.getMessage();
             errorMessage = errorMessage.concat(message);
             RLogger.error(message);
             noErrorFlag = false;
@@ -215,7 +215,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
                         0
                 ));
         if (合議体情報List != null && !合議体情報List.isEmpty()) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.有効期間不正.getErrorMSG())
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.有効期間不正.getMessage()
                     .concat(EucDateFormator.y_slash.format(new RString(合議体情報List.get(INT_0).get合議体情報().getGogitaiYukoKikanShuryoYMD().toString())));
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
@@ -225,54 +225,54 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
 
     private void 各項目チェック1(TempGogitaiJohoSakusei 合議体情報) {
         if (合議体情報.get合議体NO().length() != INT_2) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体Noは２桁.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.合議体Noは２桁.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (RString.isNullOrEmpty(合議体情報.get合議体名称())) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称が空.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称が空.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         } else if (INT_40 < 合議体情報.get合議体名称().length()) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称の桁数.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.合議体名称の桁数.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (!RTime.canConvert(合議体情報.get合議体開始予定時刻())) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開始予定時刻が時刻.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.開始予定時刻が時刻.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (!RTime.canConvert(合議体情報.get合議体終了予定時刻())) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.終了予定時刻が時刻.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.終了予定時刻が時刻.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (mapper.getKaisaiBashoJohoCount(合議体情報.get開催場所コード()) == INT_0) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.開催場所コードがテーブルに存在.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.開催場所コードがテーブルに存在.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (INT_4 < 合議体情報.get審査会予定定員().length()) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.予定定員の桁数大4.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.予定定員の桁数大4.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (INT_4 < 合議体情報.get審査会自動割当定員().length()) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.自動割当定員の桁数大4.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.自動割当定員の桁数大4.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (INT_4 < 合議体情報.get審査会委員定員().length()) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.委員定員の桁数大4.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.委員定員の桁数大4.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
@@ -282,20 +282,20 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     private void 各項目チェック2(TempGogitaiJohoSakusei 合議体情報) {
         if (!(FLAG_TRUE.equals(合議体情報.get精神科医所属())
                 || FLAG_FALSE.equals(合議体情報.get精神科医所属()))) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.精神科医所属が01.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.精神科医所属が01.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (!(FLAG_TRUE.equals(合議体情報.get合議体ダミーフラグ())
                 || FLAG_FALSE.equals(合議体情報.get合議体ダミーフラグ()))) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.ダミーフラグが01.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.ダミーフラグが01.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (mapper.getShinsakaiIinJohoCount(合議体情報.get審査会委員コード()) == INT_0) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.審査会委員コードがテーブルに存在.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.審査会委員コードがテーブルに存在.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
@@ -303,14 +303,14 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         if (!(GogitaichoKubunCode.通常.getコード().equals(合議体情報.get合議体長区分コード())
                 || GogitaichoKubunCode.副合議体長.getコード().equals(合議体情報.get合議体長区分コード())
                 || GogitaichoKubunCode.合議体長.getコード().equals(合議体情報.get合議体長区分コード()))) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.合議体長区分コードが012.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
         }
         if (!(FLAG_TRUE.equals(合議体情報.get補欠())
                 || FLAG_FALSE.equals(合議体情報.get補欠()))) {
-            RString message = intToRStr(errorNo).concat(GogitaiJohoIkkatuSakuseiErrorMessage.補欠が01.getErrorMSG());
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.補欠が01.getMessage();
             RLogger.error(message);
             errorMessage = errorMessage.concat(message);
             noErrorFlag = true;
