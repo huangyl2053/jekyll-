@@ -71,11 +71,11 @@ public class ShinseiKensakuHandler {
      *
      * @return 検索条件
      */
-    public ShinseiKensakuMapperParameter createParameter() {
+    public ShinseiKensakuMapperParameter createParameter(RString hihokenshaNo) {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
         parameter.setLimitCount(get最大表示件数());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
-        editShosaiJokenForParameter(finderDiv, parameter);
+        editShosaiJokenForParameter(finderDiv, parameter, hihokenshaNo);
         editNinteiChosaForParameter(finderDiv, parameter);
         editShujiiJohoForParameter(finderDiv, parameter);
         editShinsakaiJohoForParameter(finderDiv, parameter);
@@ -429,9 +429,8 @@ public class ShinseiKensakuHandler {
         }
         parameter.setUseNinteichosahyoKihonChosa(useNinteichosahyoKihonChosa);
     }
-
-    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
-        RString 被保険者番号 = finderDiv.getTxtHihokenshaNumber().getValue();
+    
+    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter, RString 被保険者番号) {
         if (!RString.isNullOrEmpty(被保険者番号)) {
             parameter.setHihokenshaNo(被保険者番号);
             parameter.setUseHihokenshaNo(true);

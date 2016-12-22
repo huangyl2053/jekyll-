@@ -5,17 +5,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SonotaJoho のクラスファイル
- *
- * @reamsid_L DBE-3000-010 sunhaidi
+ * pnlForDesign のクラスファイル 
+ * 
+ * @author 自動生成
  */
-public class SonotaJohoDiv extends Panel {
+public class pnlForDesignDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -23,10 +21,10 @@ public class SonotaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdGeninShikkan")
-    private CodeInputDiv ccdGeninShikkan;
-    @JsonProperty("txtShinseiKeikaNissu")
-    private TextBoxNumRange txtShinseiKeikaNissu;
+    @JsonProperty("ddlShinseijiShinseiKubun")
+    private DropDownList ddlShinseijiShinseiKubun;
+    @JsonProperty("chkSeibetsu")
+    private CheckBoxList chkSeibetsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,30 +33,39 @@ public class SonotaJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdGeninShikkan
-     * @return ccdGeninShikkan
+     * getddlShinseijiShinseiKubun
+     * @return ddlShinseijiShinseiKubun
      */
-    @JsonProperty("ccdGeninShikkan")
-    public ICodeInputDiv getCcdGeninShikkan() {
-        return ccdGeninShikkan;
+    @JsonProperty("ddlShinseijiShinseiKubun")
+    public DropDownList getDdlShinseijiShinseiKubun() {
+        return ddlShinseijiShinseiKubun;
     }
 
     /*
-     * gettxtShinseiKeikaNissu
-     * @return txtShinseiKeikaNissu
+     * setddlShinseijiShinseiKubun
+     * @param ddlShinseijiShinseiKubun ddlShinseijiShinseiKubun
      */
-    @JsonProperty("txtShinseiKeikaNissu")
-    public TextBoxNumRange getTxtShinseiKeikaNissu() {
-        return txtShinseiKeikaNissu;
+    @JsonProperty("ddlShinseijiShinseiKubun")
+    public void setDdlShinseijiShinseiKubun(DropDownList ddlShinseijiShinseiKubun) {
+        this.ddlShinseijiShinseiKubun = ddlShinseijiShinseiKubun;
     }
 
     /*
-     * settxtShinseiKeikaNissu
-     * @param txtShinseiKeikaNissu txtShinseiKeikaNissu
+     * getchkSeibetsu
+     * @return chkSeibetsu
      */
-    @JsonProperty("txtShinseiKeikaNissu")
-    public void setTxtShinseiKeikaNissu(TextBoxNumRange txtShinseiKeikaNissu) {
-        this.txtShinseiKeikaNissu = txtShinseiKeikaNissu;
+    @JsonProperty("chkSeibetsu")
+    public CheckBoxList getChkSeibetsu() {
+        return chkSeibetsu;
+    }
+
+    /*
+     * setchkSeibetsu
+     * @param chkSeibetsu chkSeibetsu
+     */
+    @JsonProperty("chkSeibetsu")
+    public void setChkSeibetsu(CheckBoxList chkSeibetsu) {
+        this.chkSeibetsu = chkSeibetsu;
     }
 
     // </editor-fold>
