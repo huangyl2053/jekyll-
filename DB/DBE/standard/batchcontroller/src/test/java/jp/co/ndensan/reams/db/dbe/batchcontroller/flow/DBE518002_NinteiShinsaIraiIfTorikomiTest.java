@@ -91,6 +91,7 @@ public class DBE518002_NinteiShinsaIraiIfTorikomiTest extends DbeTestDacBase {
             List<RString> list = new ArrayList<>();
             list.add(new RString("NijihanteiKekkaTorokuMobile.csv"));
             list.add(new RString("NijihanteiKekkaTorokuMobileShinsaiin.csv"));
+            list.add(new RString("NijihanteiKekkaTorokuMobileShinsakai.csv"));
             parameter.setFilename(list);
             parameter.setMediapath(new RString("/home/D209007/shared/sharedFiles/DB/DBE/OCR"));
             parameter.setShinsakaiiintorikomikubun(new RString("1"));

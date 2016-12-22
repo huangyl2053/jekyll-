@@ -263,6 +263,8 @@ public class ShinsakaiTorokuHandler {
      * @param row dgNinteiTaskList_Row
      */
     public void onSelect_btnCancel(dgNinteiTaskList_Row row) {
+        RString 取消開催番号 = row.getKaisaiNumber();
+        row.setSelected(Boolean.FALSE);
         row.setCancelButtonState(DataGridButtonState.Disabled);
         row.setRowState(RowState.Unchanged);
         row.getShinsakaiwaritukeDay().clearValue();
@@ -273,6 +275,53 @@ public class ShinsakaiTorokuHandler {
         row.setKaisaiNumber(RString.EMPTY);
         row.setShinsakaiMeisho(RString.EMPTY);
         row.setGogitai(RString.EMPTY);
+        審査順振り直し(取消開催番号);
+    }
+
+    private void 審査順振り直し(RString 取消開催番号) {
+        List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getDataSource();
+        Decimal 最大審査順 = 取消審査会最大審査順再取得(取消開催番号);
+        for (dgNinteiTaskList_Row row : rowList) {
+            if (row.getRowState().equals(RowState.Modified) && row.getKaisaiNumber().equals(取消開催番号)) {
+                row.getShinsakaiOrder().setValue(edit審査順(最大審査順));
+                最大審査順 = 最大審査順.add(1);
+            }
+        }
+    }
+
+    private Decimal 取消審査会最大審査順再取得(RString 取消開催番号) {
+        List<dgShinsakaiList_Row> rowList = div.getDgShinsakaiList().getDataSource();
+        Decimal 最大審査順 = Decimal.ZERO;
+        for (dgShinsakaiList_Row row : rowList) {
+            if (row.getShinsakaiKaisaiNo().equals(取消開催番号)) {
+                最大審査順 = row.getMaxShinsakaiOrder().getValue();
+                break;
+            }
+        }
+        return 最大審査順;
+    }
+    /**
+     * 割り付けボタンクリックイベントです。
+     *
+     * @param shinsakaiRow dgShinsakaiList_Row
+     */
+    public void onClick_btnWaritsuke(dgShinsakaiList_Row shinsakaiRow) {
+        List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
+        RDate 現在日付 = RDate.getNowDate();
+        Decimal 最大審査順 = shinsakaiRow.getMaxShinsakaiOrder().getValue();
+        for (dgNinteiTaskList_Row 選択データ : rowList) {
+            選択データ.setCancelButtonState(DataGridButtonState.Enabled);
+            選択データ.setRowState(RowState.Modified);
+            選択データ.getShinsakaiwaritukeDay().setValue(現在日付);
+            選択データ.getShinsakaiKaisaiDay().setValue(new RDate(shinsakaiRow.getKaisaiYoteiYmd().getValue().toString()));
+            選択データ.getShinsakaiKaisaiJikan().setValue(shinsakaiRow.getKaisaiYoteiTime().getValue());
+            選択データ.getShinsakaiOrder().setValue(edit審査順(最大審査順));
+            選択データ.setYusenWaritsukesha(ShinsakaiYusenWaritsukeKubunCode.通常.get名称());
+            選択データ.setKaisaiNumber(shinsakaiRow.getShinsakaiKaisaiNo());
+            選択データ.setShinsakaiMeisho(shinsakaiRow.getShinsakaiMeisho());
+            選択データ.setGogitai(shinsakaiRow.getGogitaiMeisho());
+            最大審査順 = 最大審査順.add(1);
+        }
     }
 
     /**
@@ -285,6 +334,10 @@ public class ShinsakaiTorokuHandler {
         validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiShinsakaiIchiranListMessage(UrErrorMessages.期間が不正_追加メッセージあり１,
                 div.getTxtKensakuKaisaiYoteiYmd().getFromText().toString(), div.getTxtKensakuKaisaiYoteiYmd().getToText().toString()), div.getTxtKensakuKaisaiYoteiYmd()));
         return validationMessages;
+    }
+
+    private Decimal edit審査順(Decimal 最大審査順) {
+        return 最大審査順.add(1);
     }
 
     /**

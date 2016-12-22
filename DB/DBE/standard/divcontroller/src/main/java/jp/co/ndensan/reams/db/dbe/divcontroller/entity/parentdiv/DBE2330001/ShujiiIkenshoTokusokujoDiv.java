@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -39,6 +41,8 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     private TextBoxDate txtHakkoDay;
     @JsonProperty("ccdIryokikanShujii")
     private ShujiiIryokikanAndShujiiInputDiv ccdIryokikanShujii;
+    @JsonProperty("ccdBunshoNo")
+    private BunshoBangoInputDiv ccdBunshoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -179,6 +183,15 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     @JsonProperty("ccdIryokikanShujii")
     public IShujiiIryokikanAndShujiiInputDiv getCcdIryokikanShujii() {
         return ccdIryokikanShujii;
+    }
+
+    /*
+     * getccdBunshoNo
+     * @return ccdBunshoNo
+     */
+    @JsonProperty("ccdBunshoNo")
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return ccdBunshoNo;
     }
 
     // </editor-fold>

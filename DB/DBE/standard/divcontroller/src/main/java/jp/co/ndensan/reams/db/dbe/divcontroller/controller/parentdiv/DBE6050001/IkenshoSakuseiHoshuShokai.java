@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.Iken
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001.IkenshoSakuseiHoshuShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshohoshushokai.IkenshoHoshuShokaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,6 +36,7 @@ public class IkenshoSakuseiHoshuShokai {
      * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onLoad(IkenshoSakuseiHoshuShokaiDiv div) {
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).clear作成依頼日();
         getHandler(div).set初期最大取得件数();
         return ResponseData.of(div).respond();
@@ -47,6 +49,7 @@ public class IkenshoSakuseiHoshuShokai {
      * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BtnKensakuClear(IkenshoSakuseiHoshuShokaiDiv div) {
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).clear作成依頼日();
         getHandler(div).set初期最大取得件数();
         return ResponseData.of(div).respond();
@@ -76,7 +79,10 @@ public class IkenshoSakuseiHoshuShokai {
         
         Decimal 最大件数 = div.getTxtMaxKensu().getValue();
         IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(
-                作成依頼日開始, 作成依頼日終了, 最大件数);
+                作成依頼日開始, 
+                作成依頼日終了, 
+                div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
+                最大件数);
         getHandler(div).set一覧結果(IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter).records());
         
         if (div.getDgIkenshoSakuseiHoshu().getDataSource().isEmpty()) {
@@ -129,6 +135,17 @@ public class IkenshoSakuseiHoshuShokai {
     public ResponseData<DBE601004_IkenshosakuseiHoshuParameter> onClick_BtnPulish(IkenshoSakuseiHoshuShokaiDiv div) {
         DBE601004_IkenshosakuseiHoshuParameter parameter = getHandler(div).createBatchParam(一覧表を発行する);
         return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 一覧グリッドのソートイベント処理メソッドです。
+     *
+     * @param div 画面情報
+     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
+     */
+    public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onSort_dgIkenshoSakuseiHoshu(IkenshoSakuseiHoshuShokaiDiv div) {
+        getHandler(div).resetシーケンス番号();
+        return ResponseData.of(div).respond();
     }
 
     private IkenshoSakuseiHoshuShokaiHandler getHandler(IkenshoSakuseiHoshuShokaiDiv div) {

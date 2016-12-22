@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -102,7 +103,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onClick_chkKoshukuChange(KihonChosaInput1Div div) {
         getHandler(div).拘縮の有無ないChange();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).focusId(div.getChkKoshuku().getSelectControlID()).respond();
     }
 
     private KihonChosaInputHandler1 getHandler(KihonChosaInput1Div div) {
@@ -134,6 +135,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnMahi(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.麻痺等の有無.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -145,6 +147,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnKoshuku(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.拘縮の有無.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -156,6 +159,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnNeKaeri(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.寝返り.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -167,6 +171,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnOkiAgari(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.起き上がり.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -178,6 +183,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnZai(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.座位保持.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -189,6 +195,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnRyoAshi(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.両足での立位保持.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -200,6 +207,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnBuko(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.歩行.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -211,6 +219,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnTachiAgari(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.立ち上がり.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -222,6 +231,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnKataAshi(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.片足での立位.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -233,6 +243,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnSenshin(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.洗身.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -244,6 +255,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnTumeKiri(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.つめ切り.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -255,6 +267,7 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnShiryoku(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.視力.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
 
@@ -266,6 +279,16 @@ public class KihonChosaInput1 {
      */
     public ResponseData<KihonChosaInput1Div> onBeforeOpenDialog_btnChoryoku(KihonChosaInput1Div div) {
         div.getDaiichigunShintaiKino().setTokkijikoNo(NinteiChosaTokkiJikou.聴力.get認定調査票_特記情報_認定調査特記事項番号());
+        setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }
+
+    private void setDailogDataPassing(KihonChosaInput1Div div) {
+        RString rirekiNo = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
+        div.getDaiichigunShintaiKino().setRecordNumber(rirekiNo);
+        ArrayList list = new ArrayList();
+        list.add(div.getDaiichigunShintaiKino().getTokkijikoNo());
+        div.getDaiichigunShintaiKino().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(list));
+    }
+
 }

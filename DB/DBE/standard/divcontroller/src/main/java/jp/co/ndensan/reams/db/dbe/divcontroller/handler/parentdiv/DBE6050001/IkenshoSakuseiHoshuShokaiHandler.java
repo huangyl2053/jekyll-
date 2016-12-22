@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshohoshushokai.IkenshoHoshuShokaiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601004.DBE601004_IkenshosakuseiHoshuParameter;
@@ -59,10 +61,13 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         Decimal 作成料_合計 = Decimal.ZERO;
         Decimal 診療費_合計 = Decimal.ZERO;
         Decimal 報酬_合計 = Decimal.ZERO;
+        Decimal count = Decimal.ZERO;
         List<dgIkenshoSakuseiHoshu_Row> row_list = new ArrayList<>();
         for (IkenshoHoshuShokaiBusiness date : ikenshoHoshuShokaiBusinessList) {
             AccessLogger.log(AccessLogType.照会, this.toPersonalData(date.get申請書管理番号()));
             dgIkenshoSakuseiHoshu_Row row = new dgIkenshoSakuseiHoshu_Row();
+            count = count.add(Decimal.ONE);
+            row.setNo(new RString(count.intValue()));
             row.setIryoKikanCode(date.get主治医医療機関コード());
             row.setIryoKikanMei(date.get医療機関名称());
             row.setCode(date.get主治医コード());
@@ -110,6 +115,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             row.setIkenshoIraiRirekiNo(new RString(date.get主治医意見書作成依頼履歴番号()));
             row_list.add(row);
         }
+        div.getTxtTotalCount().setValue(count);
         div.getTxtZaitakuShinki().setValue(在宅新規_合計);
         div.getTxtZaitakuKeizoku().setValue(在宅継続_合計);
         div.getTxtShisetsuShinki().setValue(施設新規_合計);
@@ -144,7 +150,8 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         if (div.getTxtSakuseiIraibi().getToValue() != null) {
             作成依頼日終了 = new FlexibleDate(div.getTxtSakuseiIraibi().getToValue().toDateString());
         }
-        return new DBE601004_IkenshosakuseiHoshuParameter(帳票出力区分, 作成依頼日開始, 作成依頼日終了, keyJohoList);
+        RString 保険者 = div.getCcdHokensya().getSelectedItem().get市町村コード().value();
+        return new DBE601004_IkenshosakuseiHoshuParameter(帳票出力区分, 作成依頼日開始, 作成依頼日終了, 保険者, keyJohoList);
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {
@@ -169,5 +176,137 @@ public class IkenshoSakuseiHoshuShokaiHandler {
                 SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告).toString()));
+    }
+    
+    public void resetシーケンス番号() {
+        final RString sortKey = div.getDgIkenshoSakuseiHoshu().getSortOrder();
+        List<dgIkenshoSakuseiHoshu_Row> rows = div.getDgIkenshoSakuseiHoshu().getDataSource();
+        List<dgIkenshoSakuseiHoshu_Row> sortedRows = new ArrayList<>(rows);
+        if (!RString.isNullOrEmpty(sortKey)) {
+            // 指定の列で並び替え
+            Collections.sort(sortedRows, new Comparator<dgIkenshoSakuseiHoshu_Row>() {
+                @Override
+                public int compare(dgIkenshoSakuseiHoshu_Row o1, dgIkenshoSakuseiHoshu_Row o2) {
+                    int result;
+                    switch(sortKey.toString()) {
+                        case "iryoKikanCode":
+                            result = o1.getIryoKikanCode().compareTo(o2.getIryoKikanCode());
+                            break;
+                        case "iryoKikanMei":
+                            result = o1.getIryoKikanMei().compareTo(o2.getIryoKikanMei());
+                            break;
+                        case "code":
+                            result = o1.getCode().compareTo(o2.getCode());
+                            break;
+                        case "shujiiShimei":
+                            result = o1.getShujiiShimei().compareTo(o2.getShujiiShimei());
+                            break;
+                        case "iraibi":
+                            result = o1.getIraibi().getValue().compareTo(o2.getIraibi().getValue());
+                            break;
+                        case "kinyubi":
+                            result = o1.getKinyubi().getValue().compareTo(o2.getKinyubi().getValue());
+                            break;
+                        case "nyushubi":
+                            result = o1.getNyushubi().getValue().compareTo(o2.getNyushubi().getValue());
+                            break;
+                        case "ikenshoIraiKubun":
+                            result = o1.getIkenshoIraiKubun().compareTo(o2.getIkenshoIraiKubun());
+                            break;
+                        case "hokenshaBango":
+                            result = o1.getHokenshaBango().compareTo(o2.getHokenshaBango());
+                            break;
+                        case "hihokenshaBango":
+                            result = o1.getHihokenshaBango().compareTo(o2.getHihokenshaBango());
+                            break;
+                        case "shinseishaShimei":
+                            result = o1.getShinseishaShimei().compareTo(o2.getShinseishaShimei());
+                            break;
+                        case "zaitakuShin":
+                            result = o1.getZaitakuShin().compareTo(o2.getZaitakuShin());
+                            break;
+                        case "zaitakuKe":
+                            result = o1.getZaitakuKe().compareTo(o2.getZaitakuKe());
+                            break;
+                        case "shisetsuShin":
+                            result = o1.getShisetsuShin().compareTo(o2.getShisetsuShin());
+                            break;
+                        case "shisetsuKe":
+                            result = o1.getShisetsuKe().compareTo(o2.getShisetsuKe());
+                            break;
+                        case "sakuseiryo":
+                            result = compareDecimal(o1.getSakuseiryo().getValue(), o2.getSakuseiryo().getValue());
+                            break;
+                        case "shinryohito":
+                            result = compareDecimal(o1.getShinryohito().getValue(), o2.getShinryohito().getValue());
+                            break;
+                        case "gokei":
+                            result = compareDecimal(o1.getGokei().getValue(), o2.getGokei().getValue());
+                            break;
+                        case "shinseishoKanriNo":
+                            result = o1.getShinseishoKanriNo().compareTo(o2.getShinseishoKanriNo());
+                            break;
+                        case "ikenshoIraiRirekiNo":
+                            result = o1.getIkenshoIraiRirekiNo().compareTo(o2.getIkenshoIraiRirekiNo());
+                            break;
+                        default:
+                            result = 0;
+                            break;
+                    }
+                    
+                    return result;
+                }
+            });
+        } else {
+            // デフォルト順で並び替え（主治医医療機関コード、主治医コード、申請書管理番号、主治医意見書作成依頼履歴番号）
+            Collections.sort(sortedRows, new Comparator<dgIkenshoSakuseiHoshu_Row>() {
+                @Override
+                public int compare(dgIkenshoSakuseiHoshu_Row o1, dgIkenshoSakuseiHoshu_Row o2) {
+                    int result;
+                    
+                    // 主治医医療機関コード
+                    result = o1.getIryoKikanCode().compareTo(o2.getIryoKikanCode());
+                    if (result != 0) {
+                        return result;
+                    }
+                    
+                    // 主治医コード
+                    result = o1.getCode().compareTo(o2.getCode());
+                    if (result != 0) {
+                        return result;
+                    }
+                    
+                    // 申請書管理番号
+                    result = o1.getShinseishoKanriNo().compareTo(o2.getShinseishoKanriNo());
+                    if (result != 0) {
+                        return result;
+                    }
+                    
+                    // 主治医意見書作成依頼履歴番号
+                    result = o1.getIkenshoIraiRirekiNo().compareTo(o2.getIkenshoIraiRirekiNo());
+                    return result;
+                }
+            });
+        }
+        
+        // シーケンス番号を採番
+        Decimal count = Decimal.ZERO;
+        for (dgIkenshoSakuseiHoshu_Row row : sortedRows) {
+            count = count.add(Decimal.ONE);
+            row.setNo(new RString(count.intValue()));
+        }
+    }
+    
+    private static int compareDecimal(Decimal decimal1, Decimal decimal2) {
+        int result;
+        if ((decimal1 != null)
+                && (decimal2 != null)) {
+            result = decimal1.compareTo(decimal2);
+        } else if (decimal1 == null) {
+            result = -1;
+        } else {
+            result = 1;
+        }
+        return result;
     }
 }

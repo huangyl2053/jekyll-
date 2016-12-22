@@ -196,7 +196,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             for (dgShinsakaiIchiran_Row row : rowList) {
                 if (row.getId() == Integer.valueOf(div.getHdnSelectedGridLine().toString())) {
                     ShinsakaiKaisai shinsakaiKaisai = new ShinsakaiKaisai();
-                    shinsakaiKaisai = shinsakaiKaisai.createBuilderForEdit().set介護認定審査会開催予定年月日(row.getKaisaiYoteiDate().getValue())
+                    shinsakaiKaisai = shinsakaiKaisai.createBuilderForEdit()
+                            .set介護認定審査会開催予定年月日(row.getKaisaiYoteiDate().getValue())
                             .set介護認定審査会開始予定時刻(new RString(row.getYoteiKaishiTime().getValue().toString()))
                             .set介護認定審査会終了予定時刻(new RString(row.getYoteiShuryoTime().getValue().toString()))
                             .set編集合議体名称(row.getShinsakaiMeisho())

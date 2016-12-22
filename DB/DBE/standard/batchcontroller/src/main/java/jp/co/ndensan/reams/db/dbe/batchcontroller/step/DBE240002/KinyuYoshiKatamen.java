@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -54,9 +55,9 @@ public class KinyuYoshiKatamen extends BatchProcessBase<ShujiiIkenshoTeishutsuIr
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
-//        business = new IraishoIkkatsuHakkoBusiness(entity, processParamter);
-//        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.setDBE231014Item());
-//        report.writeBy(reportSourceWriter);
+        business = new IraishoIkkatsuHakkoBusiness(entity, processParamter);
+        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.create記入用紙(),帳票.getReportId());
+        report.writeBy(reportSourceWriter);
     }
 
     @Override

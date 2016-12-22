@@ -18,6 +18,7 @@ import javax.annotation.Nonnull;
  */
 public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5503ShinsakaiWariateIinJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5503ShinsakaiWariateIinJoho");
 
@@ -42,8 +43,23 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
     private RString taisekiTime;
 
     /**
+     * コンストラクタです。
+     */
+    public DbT5503ShinsakaiWariateIinJohoEntity() {
+        shinsakaiKaisaiNo = RString.EMPTY;
+        shinsakaiIinCode = RString.EMPTY;
+        shinsakaiKaisaiYMD = FlexibleDate.EMPTY;
+        kaigoninteiShinsakaiGichoKubunCode = Code.EMPTY;
+        shussekiFlag = false;
+        existChikokuFlag = false;
+        shussekiTime = RString.EMPTY;
+        existSotaiFlag = false;
+        taisekiTime = RString.EMPTY;
+    }
+
+    /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -52,7 +68,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -61,7 +77,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -70,17 +86,16 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,7 +106,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 介護認定審査会開催番号のgetメソッドです。
      * <br/>
      * <br/>介護認定審査会開催予定情報
-     * 
+     *
      * @return 介護認定審査会開催番号
      */
     public RString getShinsakaiKaisaiNo() {
@@ -102,7 +117,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 介護認定審査会開催番号のsetメソッドです。
      * <br/>
      * <br/>介護認定審査会開催予定情報
-     * 
+     *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
     public void setShinsakaiKaisaiNo(@Nonnull RString shinsakaiKaisaiNo) {
@@ -113,7 +128,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 介護認定審査会委員コードのgetメソッドです。
      * <br/>
      * <br/>介護認定審査会委員情報
-     * 
+     *
      * @return 介護認定審査会委員コード
      */
     public RString getShinsakaiIinCode() {
@@ -124,7 +139,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 介護認定審査会委員コードのsetメソッドです。
      * <br/>
      * <br/>介護認定審査会委員情報
-     * 
+     *
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
     public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
@@ -133,7 +148,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 介護認定審査会開催年月日のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会開催年月日
      */
     public FlexibleDate getShinsakaiKaisaiYMD() {
@@ -142,7 +157,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 介護認定審査会開催年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKaisaiYMD 介護認定審査会開催年月日
      */
     public void setShinsakaiKaisaiYMD(@Nonnull FlexibleDate shinsakaiKaisaiYMD) {
@@ -153,7 +168,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 介護認定審査会議長区分コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：介護認定審査会議長区分コード）0：委員、1：議長
-     * 
+     *
      * @return 介護認定審査会議長区分コード
      */
     public Code getKaigoninteiShinsakaiGichoKubunCode() {
@@ -164,7 +179,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 介護認定審査会議長区分コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：介護認定審査会議長区分コード）0：委員、1：議長
-     * 
+     *
      * @param kaigoninteiShinsakaiGichoKubunCode 介護認定審査会議長区分コード
      */
     public void setKaigoninteiShinsakaiGichoKubunCode(@Nonnull Code kaigoninteiShinsakaiGichoKubunCode) {
@@ -175,7 +190,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 委員出席のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：委員出席）
-     * 
+     *
      * @return 委員出席
      */
     public boolean getShussekiFlag() {
@@ -186,7 +201,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 委員出席のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：委員出席）
-     * 
+     *
      * @param shussekiFlag 委員出席
      */
     public void setShussekiFlag(@Nonnull boolean shussekiFlag) {
@@ -197,7 +212,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 委員遅刻有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：委員遅刻有無）
-     * 
+     *
      * @return 委員遅刻有無
      */
     public boolean getExistChikokuFlag() {
@@ -208,7 +223,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 委員遅刻有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：委員遅刻有無）
-     * 
+     *
      * @param existChikokuFlag 委員遅刻有無
      */
     public void setExistChikokuFlag(@Nonnull boolean existChikokuFlag) {
@@ -217,7 +232,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 委員出席時間のgetメソッドです。
-     * 
+     *
      * @return 委員出席時間
      */
     public RString getShussekiTime() {
@@ -226,7 +241,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 委員出席時間のsetメソッドです。
-     * 
+     *
      * @param shussekiTime 委員出席時間
      */
     public void setShussekiTime(@Nonnull RString shussekiTime) {
@@ -237,7 +252,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 委員早退有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：委員早退有無）
-     * 
+     *
      * @return 委員早退有無
      */
     public boolean getExistSotaiFlag() {
@@ -248,7 +263,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 委員早退有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：委員早退有無）
-     * 
+     *
      * @param existSotaiFlag 委員早退有無
      */
     public void setExistSotaiFlag(@Nonnull boolean existSotaiFlag) {
@@ -257,7 +272,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 委員退席時間のgetメソッドです。
-     * 
+     *
      * @return 委員退席時間
      */
     public RString getTaisekiTime() {
@@ -266,7 +281,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 委員退席時間のsetメソッドです。
-     * 
+     *
      * @param taisekiTime 委員退席時間
      */
     public void setTaisekiTime(@Nonnull RString taisekiTime) {
@@ -275,10 +290,9 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * このエンティティの主キーが他の{@literal DbT5503ShinsakaiWariateIinJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5503ShinsakaiWariateIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5503ShinsakaiWariateIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5503ShinsakaiWariateIinJohoEntity other) {
@@ -312,6 +326,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -320,5 +335,4 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
     }
 
 // </editor-fold>
-
 }

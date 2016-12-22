@@ -40,7 +40,7 @@ var DBZ;
             };
 
             Controls.prototype.txtBunshoNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtBunshoNo"));
+                return new UZA.TextBoxCode(this.convFiledName("txtBunshoNo"));
             };
 
             Controls.prototype.txtBunshoFooter = function () {

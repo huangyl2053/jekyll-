@@ -1,8 +1,9 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../hokenshalist/HokenshaList.ts" />
-/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
+// <reference path="./../hokenshalist/HokenshaList.ts" />
+// <reference path="./../saikinshorisha/SaikinShorisha.ts" />
+// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -175,9 +176,9 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            }
+            //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            //}
 
             public ddlShichosonCode(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
@@ -223,6 +224,10 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtBirthDateTO"));
             }
 
+            public pnlForDesign(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("pnlForDesign"));
+            }
+
             public ddlShinseijiShinseiKubun(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShinseijiShinseiKubun"));
             }
@@ -230,6 +235,10 @@ module DBZ {
             public chkSeibetsu(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             }
+
+            //public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {
+            //    return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            //}
 
             public ShosaiJoken(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ShosaiJoken"));
@@ -551,9 +560,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             }
 
-            public ccdGeninShikkan(): URZ.CodeInput.ModeController {
-                return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
-            }
+            //public ccdGeninShikkan(): URZ.CodeInput.ModeController {
+            //    return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
+            //}
 
             public txtShinseiKeikaNissu(): UZA.TextBoxNumRange {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));
