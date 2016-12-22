@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
@@ -87,6 +88,8 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
     @BatchParameter(key = CHOHYOIIN_HANTEIFALG, name = "委員用予備判定記入表フラグ")
     private RString chohyoIin_hanteiFalg;
 
+    private Map<RString, RString> 帳票一覧Map;
+
     /**
      * コンストラクタです。
      */
@@ -115,6 +118,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
+     * @param 帳票一覧Map 帳票一覧Map
      */
     public DBE517002_ShinsakaiShiryoIinParameter(
             RString shinsakaiKaisaiNo,
@@ -135,7 +139,8 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString chohyoIin_ikenshoFalg,
             RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
-            RString chohyoIin_hanteiFalg) {
+            RString chohyoIin_hanteiFalg,
+            Map<RString, RString> 帳票一覧Map) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
@@ -155,6 +160,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
         this.chohyoIin_sonotaSiryoFalg = chohyoIin_sonotaSiryoFalg;
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
+        this.帳票一覧Map = 帳票一覧Map;
     }
 
     /**

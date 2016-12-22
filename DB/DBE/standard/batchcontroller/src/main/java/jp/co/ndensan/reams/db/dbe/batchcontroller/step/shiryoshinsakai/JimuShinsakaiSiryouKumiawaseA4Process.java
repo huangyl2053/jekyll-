@@ -37,11 +37,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -55,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -281,43 +275,6 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
 
     @Override
     protected void afterExecute() {
-        outputJokenhyoFactory(ReportIdDBE.DBE517901.getReportId().value(), new RString("事務局審査会資料組み合わせ一覧"));
-    }
-
-    private void outputJokenhyoFactory(RString id, RString 帳票名) {
-        RString 総ページ数 = new RString(batchReportWriter.getPageCount());
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem jokenhyoItem = new ReportOutputJokenhyoItem(
-                id,
-                association.getLasdecCode_().getColumnValue(),
-                association.get市町村名(),
-                new RString(String.valueOf(JobContextHolder.getJobId())),
-                帳票名,
-                総ページ数,
-                RString.EMPTY,
-                RString.EMPTY,
-                出力条件());
-        OutputJokenhyoFactory.createInstance(jokenhyoItem).print();
-    }
-
-    private List<RString> 出力条件() {
-        List<RString> list = new ArrayList<>();
-        RStringBuilder builder1 = new RStringBuilder();
-        builder1.append("【合議体番号】")
-                .append(" ")
-                .append(paramter.getGogitaiNo());
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append("【介護認定審査会開催予定年月日】")
-                .append(" ")
-                .append(paramter.getShinsakaiKaisaiYoteiYMD().wareki().toDateString());
-        RStringBuilder builder3 = new RStringBuilder();
-        builder3.append("【介護認定審査会開催番号】")
-                .append(" ")
-                .append(paramter.getShinsakaiKaisaiNo());
-        list.add(builder1.toRString());
-        list.add(builder2.toRString());
-        list.add(builder3.toRString());
-        return list;
     }
 
     /**

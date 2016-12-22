@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
+import java.util.HashMap;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.OutputJokenhyoFactoryProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiKaisaiYoteiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -25,7 +28,9 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     private static final String 委員_審査会資料一括作成 = "DBE517002_ShinsakaiShiryoIin";
     private static final RString 委員_審査会資料一括作成ID = new RString("DBE517002_ShinsakaiShiryoIin");
     private static final String 審査会開催予定情報更新 = "kousin";
+    private static final String 出力条件表出力 = "outputJokenhyoFactory";
     private static final RString 選択 = new RString("1");
+    private Map<RString, RString> 出力帳票一覧Map = new HashMap<>();
 
     @Override
     protected void defineFlow() {
@@ -55,6 +60,7 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
         }
         if (is資料作成済) {
             executeStep(審査会開催予定情報更新);
+            executeStep(出力条件表出力);
         }
     }
 
@@ -65,8 +71,9 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      */
     @Step(委員_審査会資料一括作成)
     protected IBatchFlowCommand callIinShiryoShinsakaiFlow() {
+        出力帳票一覧Map = new HashMap<>();
         return otherBatchFlow(委員_審査会資料一括作成ID, SubGyomuCode.DBE認定支援,
-                getParameter().toDBE517002_ShinsakaiShiryoIinParameter()).define();
+                getParameter().toDBE517002_ShinsakaiShiryoIinParameter(出力帳票一覧Map)).define();
     }
 
     /**
@@ -76,8 +83,9 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      */
     @Step(事務局_審査会資料一括作成)
     protected IBatchFlowCommand callJimuShiryoShinsakaiFlow() {
+        出力帳票一覧Map.putAll(getResult(Map.class, 委員_審査会資料一括作成, new RString("出力帳票一覧")));
         return otherBatchFlow(事務局_審査会資料一括作成ID, SubGyomuCode.DBE認定支援,
-                getParameter().toDBE517001_ShinsakaiShiryoJImukyokuParameter()).define();
+                getParameter().toDBE517001_ShinsakaiShiryoJImukyokuParameter(出力帳票一覧Map)).define();
     }
 
     /**
@@ -89,5 +97,17 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     protected IBatchFlowCommand createKosinData() {
         return loopBatch(ShinsakaiKaisaiYoteiJohoUpdateProcess.class)
                 .arguments(getParameter().toIinItiziHanteiProcessParameter()).define();
+    }
+
+    /**
+     * 出力条件表の出力を行います。
+     *
+     * @return バッチコマンド
+     */
+    @Step(出力条件表出力)
+    protected IBatchFlowCommand createOutputJokenhyoFactory() {
+        Map<RString, RString> 帳票Map = getResult(Map.class, 事務局_審査会資料一括作成, new RString("出力帳票一覧"));
+        return simpleBatch(OutputJokenhyoFactoryProcess.class)
+                .arguments(getParameter().toOutputJokenhyoFactoryProcessParameter(帳票Map)).define();
     }
 }
