@@ -84,7 +84,7 @@ public class ShinsaiinJissekiIchiranReportProcess extends BatchProcessBase<Shins
         RString 帳票名 = ReportIdDBE.DBE601003.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
-        RString csvファイル名 = なし;
+        RString csvファイル名 = RString.EMPTY;
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
         審査会開催日FROM_SB.append(dateFormat(paramter.get審査会開催日FROM()));

@@ -24,4 +24,12 @@ public interface IShinsaiinJissekiIchiranMapper {
      */
     List<ShinsaiinJissekiIchiranRelateEntity> get介護認定審査会委員報酬集計表(ShinsaiinJissekiIchiranMybitisParamter mapperParameter);
 
+    /**
+     * データの件数を取得します。
+     *
+     * @param mapperParameter 介護認定審査会委員報酬集計表のMyBatis用パラメータ
+     * @return 件数
+     */
+    int getTotalCount(ShinsaiinJissekiIchiranMybitisParamter mapperParameter);
+
 }

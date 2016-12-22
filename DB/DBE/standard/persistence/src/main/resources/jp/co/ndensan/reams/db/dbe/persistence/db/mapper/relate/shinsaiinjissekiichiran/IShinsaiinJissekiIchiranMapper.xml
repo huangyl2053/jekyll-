@@ -44,6 +44,21 @@
           , T5603."shinsakaiKaisaiYMD" AS 実施年月日
           , T5603."remban" AS 連番
           , T5503."kaigoninteiShinsakaiGichoKubunCode" AS 審査員種別
+        <include refid="core" />
+            ORDER BY T5603."shinsakaiIinCode", T5603."shinsakaiIinHoshuKubun", T5603."shinsakaiKaisaiYMD", T5603."remban" 
+            <if test="件数Flag">
+                LIMIT #{件数}
+            </if>
+    </select>
+    
+    <select id="getTotalCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true" >
+        SELECT
+        COUNT(*)
+        <include refid="core" />
+    </select>
+    <sql id="core">
         FROM
           rgdb."DbT5603ShinsakaiIinHoshuJissekiJoho" AS T5603 
           INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS T5594 
@@ -96,13 +111,6 @@
                 AND T5603."remban" = #{item.remban}
                 )
             </foreach>
-        </if>
-        <if test="gamenFlag">
-            ORDER BY T5603."shinsakaiIinCode", T5603."shinsakaiIinHoshuKubun", T5603."shinsakaiKaisaiYMD", T5603."remban" 
-            <if test="件数Flag">
-                LIMIT #{件数}
-            </if>
-        </if>
-        
-    </select>
+        </if>        
+    </sql>                
 </mapper>
