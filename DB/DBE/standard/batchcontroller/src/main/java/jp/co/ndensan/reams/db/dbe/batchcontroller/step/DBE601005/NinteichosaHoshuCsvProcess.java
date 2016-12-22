@@ -6,33 +6,31 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601005;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahoshushokai.NinteiChosaHoshuShokaiChange;
-import jp.co.ndensan.reams.db.dbe.business.report.chosahoshuichiran.ChosahoshuichiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshuShokaiProcessParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.IChosaHoshuShokaiCsvEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahoshushokai.NinteiChosaHoshuShokaiRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshuichiran.ChosahoshuichiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 認定調査報酬照会csvの作成クラスです。
@@ -40,23 +38,22 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * @reamsid_L DBE-1940-020 jinjue
  *
  */
-public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuShokaiRelateEntity> {
+public class NinteichosaHoshuCsvProcess extends BatchProcessBase<NinteiChosaHoshuShokaiRelateEntity> {
 
     private NinteiChosaHoshuShokaiProcessParameter parameter;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahoshushokai."
             + "INinteiChosaHoshuShokaiRelateMapper.get報酬実績データ情報");
-    private static final ReportId REPORT_ID = ReportIdDBE.DBE601006.getReportId();
-    private static final RString なし = new RString("なし");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE606001"));
+    private static final RString CSV_NAME = new RString("認定調査報酬一覧表.csv");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private FileSpoolManager manager;
+    private RString eucFilePath;
     private RString 導入団体コード;
     private RString 市町村名;
-    private int count = 0;
-    private RString ninteichosaItakusakiCode = RString.EMPTY;
-    private static final List<RString> PAGE_BREAK_KEYS = Collections
-            .unmodifiableList(Arrays.asList(new RString(ChosahoshuichiranReportSource.ReportSourceFields.chosaItakusakiNo.name())));
     @BatchWriter
-    private BatchReportWriter<ChosahoshuichiranReportSource> batchWrite;
-    private ReportSourceWriter<ChosahoshuichiranReportSource> reportSourceWriter;
+    private CsvWriter<IChosaHoshuShokaiCsvEucEntity> csvWriter;
 
     @Override
     protected void initialize() {
@@ -64,16 +61,7 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
 
     @Override
     protected void process(NinteiChosaHoshuShokaiRelateEntity relateEntity) {
-
-        if (!ninteichosaItakusakiCode.equals(relateEntity.get認定調査委託先コード())) {
-            count = 1;
-        } else {
-            count = count + 1;
-        }
-        ninteichosaItakusakiCode = relateEntity.get認定調査委託先コード();
-        ChosahoshuichiranReport report = new ChosahoshuichiranReport(NinteiChosaHoshuShokaiChange.createShokaiData(relateEntity,
-                parameter, count, reportSourceWriter.pageCount().value()));
-        report.writeBy(reportSourceWriter);
+        csvWriter.writeLine(NinteiChosaHoshuShokaiChange.createData(relateEntity));
     }
 
     @Override
@@ -83,20 +71,23 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<ChosahoshuichiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .create();
-        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
+        eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                setEncode(Encode.UTF_8withBOM)
+                .setDelimiter(EUC_WRITER_DELIMITER)
+                .setEnclosure(EUC_WRITER_ENCLOSURE)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(true).
+                build();
     }
 
-    private void 帳票バッチ出力条件リストの出力() {
+    private void CSVバッチ出力条件リストの出力() {
         RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE601006.getReportName();
-        RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
-        RString csv出力有無 = なし;
-        RString csvファイル名 = なし;
+        RString 出力件数 = new RString(csvWriter.getCount());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder 調査依頼日FROM = new RStringBuilder("【調査依頼日（From）】");
         調査依頼日FROM.append(toWareki(parameter.get調査依頼日開始()));
@@ -107,11 +98,10 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
         出力条件.add(調査依頼日FROM.toRString());
         出力条件.add(調査依頼日To.toRString());
         出力条件.add(保険者_SB.toRString());
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE601006.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
-                帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
-        printer.print();
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                new RString("認定調査報酬一覧表CSV"), 導入団体コード, 市町村名, ジョブ番号,
+                CSV_NAME, EUC_ENTITY_ID.toRString(), 出力件数, 出力条件);
+        OutputJokenhyoFactory.createInstance(item).print();
     }
 
     @Override
@@ -124,7 +114,9 @@ public class NinteichosaHoshuProcess extends BatchProcessBase<NinteiChosaHoshuSh
 
     @Override
     protected void afterExecute() {
-        帳票バッチ出力条件リストの出力();
+        csvWriter.close();
+        manager.spool(eucFilePath);
+        CSVバッチ出力条件リストの出力();
     }
 
     private RString toWareki(RString date) {
