@@ -75,6 +75,16 @@ public class NinteiChosaJissekiShokaiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public RadioButton getRadKijunbi() {
+        return this.getChosaJisshibi().getRadKijunbi();
+    }
+
+    @JsonIgnore
+    public void  setRadKijunbi(RadioButton radKijunbi) {
+        this.getChosaJisshibi().setRadKijunbi(radKijunbi);
+    }
+
+    @JsonIgnore
     public TextBoxDateRange getTxtChosaJisshibi() {
         return this.getChosaJisshibi().getTxtChosaJisshibi();
     }

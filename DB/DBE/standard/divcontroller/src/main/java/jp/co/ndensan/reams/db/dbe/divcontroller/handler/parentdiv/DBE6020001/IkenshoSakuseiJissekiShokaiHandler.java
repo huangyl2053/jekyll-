@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class IkenshoSakuseiJissekiShokaiHandler {
 
     private static final RString MARU = new RString("○");
+    private static final RString 基準日Key_初期値 = new RString("3");
     private final IkenshoSakuseiJissekiShokaiDiv div;
 
     /**
@@ -55,6 +56,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * 条件をクリアする」ボタンを押します。
      */
     public void onClick_BtnKensakuClear() {
+        div.getRadKensakuKijunbi().setSelectedKey(基準日Key_初期値);
         div.getTxtIkenshoKinyubi().clearFromValue();
         div.getTxtIkenshoKinyubi().clearToValue();
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
