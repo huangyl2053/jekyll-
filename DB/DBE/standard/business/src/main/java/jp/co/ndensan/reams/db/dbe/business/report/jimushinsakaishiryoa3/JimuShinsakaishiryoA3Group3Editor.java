@@ -6,11 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -28,6 +26,10 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
 
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
+    private static final RString 特記事項テキスト_イメージ区分1 = new RString("1");
+    private static final RString 特記事項テキスト_イメージ区分2 = new RString("2");
+    private static final RString 特記パターン1 = new RString("1");
+    private static final RString 特記パターン2 = new RString("2");
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
@@ -133,10 +135,18 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
                 source = set特記事項イメージ(source);
             }
         }
-        if (ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
-            source.layout = Layouts.四頁目;
-        } else {
-            source.layout = Layouts.任意;
+        if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_15;
+        } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_16;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_17;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_18;
         }
         return source;
     }
