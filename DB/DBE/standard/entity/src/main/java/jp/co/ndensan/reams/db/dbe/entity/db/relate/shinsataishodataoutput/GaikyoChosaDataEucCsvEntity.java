@@ -54,7 +54,7 @@ public class GaikyoChosaDataEucCsvEntity {
     @CsvField(order = 18, name = "認定調査依頼完了年月日")
     private RString 認定調査依頼完了年月日;
     @CsvField(order = 19, name = "認定調査依頼履歴番号")
-    private RString 認定調査依頼履歴番号;
+    private Decimal 認定調査依頼履歴番号;
     @CsvField(order = 20, name = "認定調査委託先コード")
     private RString 認定調査委託先コード;
     @CsvField(order = 21, name = "調査委託先")
@@ -122,131 +122,131 @@ public class GaikyoChosaDataEucCsvEntity {
     @CsvField(order = 52, name = "介護保険給付以外の在宅サービス種類名")
     private RString 介護保険給付以外の在宅サービス種類名;
     @CsvField(order = 53, name = "サービスの状況連番01")
-    private Decimal サービスの状況連番01;
+    private int サービスの状況連番01;
     @CsvField(order = 54, name = "サービスの状況01")
-    private Decimal サービスの状況01;
+    private int サービスの状況01;
     @CsvField(order = 55, name = "サービスの状況連番02")
-    private Decimal サービスの状況連番02;
+    private int サービスの状況連番02;
     @CsvField(order = 56, name = "サービスの状況02")
-    private Decimal サービスの状況02;
+    private int サービスの状況02;
     @CsvField(order = 57, name = "サービスの状況連番03")
-    private Decimal サービスの状況連番03;
+    private int サービスの状況連番03;
     @CsvField(order = 58, name = "サービスの状況03")
-    private Decimal サービスの状況03;
+    private int サービスの状況03;
     @CsvField(order = 59, name = "サービスの状況連番04")
-    private Decimal サービスの状況連番04;
+    private int サービスの状況連番04;
     @CsvField(order = 60, name = "サービスの状況04")
-    private Decimal サービスの状況04;
+    private int サービスの状況04;
     @CsvField(order = 61, name = "サービスの状況連番05")
-    private Decimal サービスの状況連番05;
+    private int サービスの状況連番05;
     @CsvField(order = 62, name = "サービスの状況05")
-    private Decimal サービスの状況05;
+    private int サービスの状況05;
     @CsvField(order = 63, name = "サービスの状況連番06")
-    private Decimal サービスの状況連番06;
+    private int サービスの状況連番06;
     @CsvField(order = 64, name = "サービスの状況06")
-    private Decimal サービスの状況06;
+    private int サービスの状況06;
     @CsvField(order = 65, name = "サービスの状況連番07")
-    private Decimal サービスの状況連番07;
+    private int サービスの状況連番07;
     @CsvField(order = 66, name = "サービスの状況07")
-    private Decimal サービスの状況07;
+    private int サービスの状況07;
     @CsvField(order = 67, name = "サービスの状況連番08")
-    private Decimal サービスの状況連番08;
+    private int サービスの状況連番08;
     @CsvField(order = 68, name = "サービスの状況08")
-    private Decimal サービスの状況08;
+    private int サービスの状況08;
     @CsvField(order = 69, name = "サービスの状況連番09")
-    private Decimal サービスの状況連番09;
+    private int サービスの状況連番09;
     @CsvField(order = 70, name = "サービスの状況09")
-    private Decimal サービスの状況09;
+    private int サービスの状況09;
     @CsvField(order = 71, name = "サービスの状況連番10")
-    private Decimal サービスの状況連番10;
+    private int サービスの状況連番10;
     @CsvField(order = 72, name = "サービスの状況10")
-    private Decimal サービスの状況10;
+    private int サービスの状況10;
     @CsvField(order = 73, name = "サービスの状況連番11")
-    private Decimal サービスの状況連番11;
+    private int サービスの状況連番11;
     @CsvField(order = 74, name = "サービスの状況11")
-    private Decimal サービスの状況11;
+    private int サービスの状況11;
     @CsvField(order = 75, name = "サービスの状況連番12")
-    private Decimal サービスの状況連番12;
+    private int サービスの状況連番12;
     @CsvField(order = 76, name = "サービスの状況12")
-    private Decimal サービスの状況12;
+    private int サービスの状況12;
     @CsvField(order = 77, name = "サービスの状況連番13")
-    private Decimal サービスの状況連番13;
+    private int サービスの状況連番13;
     @CsvField(order = 78, name = "サービスの状況13")
-    private Decimal サービスの状況13;
+    private int サービスの状況13;
     @CsvField(order = 79, name = "サービスの状況連番14")
-    private Decimal サービスの状況連番14;
+    private int サービスの状況連番14;
     @CsvField(order = 80, name = "サービスの状況14")
-    private Decimal サービスの状況14;
+    private int サービスの状況14;
     @CsvField(order = 81, name = "サービスの状況連番15")
-    private Decimal サービスの状況連番15;
+    private int サービスの状況連番15;
     @CsvField(order = 82, name = "サービスの状況15")
-    private Decimal サービスの状況15;
+    private int サービスの状況15;
     @CsvField(order = 83, name = "サービスの状況連番16")
-    private Decimal サービスの状況連番16;
+    private int サービスの状況連番16;
     @CsvField(order = 84, name = "サービスの状況16")
-    private Decimal サービスの状況16;
+    private int サービスの状況16;
     @CsvField(order = 85, name = "サービスの状況連番17")
-    private Decimal サービスの状況連番17;
+    private int サービスの状況連番17;
     @CsvField(order = 86, name = "サービスの状況17")
-    private Decimal サービスの状況17;
+    private int サービスの状況17;
     @CsvField(order = 87, name = "サービスの状況連番18")
-    private Decimal サービスの状況連番18;
+    private int サービスの状況連番18;
     @CsvField(order = 88, name = "サービスの状況18")
-    private Decimal サービスの状況18;
+    private int サービスの状況18;
     @CsvField(order = 89, name = "サービスの状況連番19")
-    private Decimal サービスの状況連番19;
+    private int サービスの状況連番19;
     @CsvField(order = 90, name = "サービスの状況19")
-    private Decimal サービスの状況19;
+    private int サービスの状況19;
     @CsvField(order = 91, name = "サービスの状況連番20")
-    private Decimal サービスの状況連番20;
+    private int サービスの状況連番20;
     @CsvField(order = 92, name = "サービスの状況20")
-    private Decimal サービスの状況20;
+    private int サービスの状況20;
     @CsvField(order = 93, name = "サービスの状況フラグ連番")
-    private Decimal サービスの状況フラグ連番;
+    private int サービスの状況フラグ連番;
     @CsvField(order = 94, name = "サービスの状況フラグ")
     private boolean サービスの状況フラグ;
     @CsvField(order = 95, name = "記入項目連番01")
-    private Decimal 記入項目連番01;
+    private int 記入項目連番01;
     @CsvField(order = 96, name = "サービスの状況記入01")
     private RString サービスの状況記入01;
     @CsvField(order = 97, name = "記入項目連番02")
-    private Decimal 記入項目連番02;
+    private int 記入項目連番02;
     @CsvField(order = 98, name = "サービスの状況記入02")
     private RString サービスの状況記入02;
     @CsvField(order = 99, name = "施設利用連番01")
-    private Decimal 施設利用連番01;
+    private int 施設利用連番01;
     @CsvField(order = 100, name = "施設利用フラグ01")
     private boolean 施設利用フラグ01;
     @CsvField(order = 101, name = "施設利用連番02")
-    private Decimal 施設利用連番02;
+    private int 施設利用連番02;
     @CsvField(order = 102, name = "施設利用フラグ02")
     private boolean 施設利用フラグ02;
     @CsvField(order = 103, name = "施設利用連番03")
-    private Decimal 施設利用連番03;
+    private int 施設利用連番03;
     @CsvField(order = 104, name = "施設利用フラグ03")
     private boolean 施設利用フラグ03;
     @CsvField(order = 105, name = "施設利用連番04")
-    private Decimal 施設利用連番04;
+    private int 施設利用連番04;
     @CsvField(order = 106, name = "施設利用フラグ04")
     private boolean 施設利用フラグ04;
     @CsvField(order = 107, name = "施設利用連番05")
-    private Decimal 施設利用連番05;
+    private int 施設利用連番05;
     @CsvField(order = 108, name = "施設利用フラグ05")
     private boolean 施設利用フラグ05;
     @CsvField(order = 109, name = "施設利用連番06")
-    private Decimal 施設利用連番06;
+    private int 施設利用連番06;
     @CsvField(order = 110, name = "施設利用フラグ06")
     private boolean 施設利用フラグ06;
     @CsvField(order = 111, name = "施設利用連番07")
-    private Decimal 施設利用連番07;
+    private int 施設利用連番07;
     @CsvField(order = 112, name = "施設利用フラグ07")
     private boolean 施設利用フラグ07;
     @CsvField(order = 113, name = "施設利用連番08")
-    private Decimal 施設利用連番08;
+    private int 施設利用連番08;
     @CsvField(order = 114, name = "施設利用フラグ08")
     private boolean 施設利用フラグ08;
     @CsvField(order = 115, name = "施設利用連番09")
-    private Decimal 施設利用連番09;
+    private int 施設利用連番09;
     @CsvField(order = 116, name = "施設利用フラグ09")
     private boolean 施設利用フラグ09;
     @CsvField(order = 117, name = "認定調査認知症高齢者の日常生活自立度コード")
