@@ -4,6 +4,54 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBeforeOpenDialog_btnIjyo = function () {
+                return "onBeforeOpenDialog_btnIjyo";
+            };
+
+            Events.onBeforeOpenDialog_btnIdou = function () {
+                return "onBeforeOpenDialog_btnIdou";
+            };
+
+            Events.onBeforeOpenDialog_btnEnka = function () {
+                return "onBeforeOpenDialog_btnEnka";
+            };
+
+            Events.onBeforeOpenDialog_btnShokuji = function () {
+                return "onBeforeOpenDialog_btnShokuji";
+            };
+
+            Events.onBeforeOpenDialog_btnHainyo = function () {
+                return "onBeforeOpenDialog_btnHainyo";
+            };
+
+            Events.onBeforeOpenDialog_btnHaiben = function () {
+                return "onBeforeOpenDialog_btnHaiben";
+            };
+
+            Events.onBeforeOpenDialog_btnKokou = function () {
+                return "onBeforeOpenDialog_btnKokou";
+            };
+
+            Events.onBeforeOpenDialog_btnSengan = function () {
+                return "onBeforeOpenDialog_btnSengan";
+            };
+
+            Events.onBeforeOpenDialog_btnSeihatsu = function () {
+                return "onBeforeOpenDialog_btnSeihatsu";
+            };
+
+            Events.onBeforeOpenDialog_btnUwagi = function () {
+                return "onBeforeOpenDialog_btnUwagi";
+            };
+
+            Events.onBeforeOpenDialog_btnZubon = function () {
+                return "onBeforeOpenDialog_btnZubon";
+            };
+
+            Events.onBeforeOpenDialog_btnHindo = function () {
+                return "onBeforeOpenDialog_btnHindo";
+            };
+
             Events.onClick_btnBack = function () {
                 return "onClick_btnBack";
             };
