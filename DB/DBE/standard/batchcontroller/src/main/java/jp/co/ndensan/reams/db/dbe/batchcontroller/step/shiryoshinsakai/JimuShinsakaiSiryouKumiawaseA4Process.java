@@ -86,6 +86,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private int 存在ファイルindex;
     private static final int INDEX_5 = 5;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private boolean is審査会対象一覧印刷済み;
     private static final RString SEPARATOR = new RString("/");
 
@@ -123,8 +125,6 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517901.getReportId().value())
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
-
-
                     JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA4ReportSource> occuredBreak(
@@ -237,8 +237,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private JimuShinsakaiWariateJohoBusiness get主治医意見書情報(ShinseishoKanriNo shinseishoKanriNo) {
         for (ShinsakaiSiryoKyotsuEntity kyotsuEntity : shinsakaiSiryoKyotsuEntityList) {
             if (shinseishoKanriNo.equals(kyotsuEntity.getShinseishoKanriNo())) {
-                kyotsuEntity.setJimukyoku(true);
-                return new JimuShinsakaiWariateJohoBusiness(kyotsuEntity);
+                JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(kyotsuEntity);
+                business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+                business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
             }
         }
         return null;
