@@ -169,11 +169,11 @@ public class TokkiText1A4Business {
     public RString get概況調査の特記事項イメージ() {
         if (イメージ.equals(kyotsuEntity.getGaikyoChosaTextImageKubun())) {
             RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-            RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
+            RString filePath = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
             if (kyotsuEntity.isJimukyoku()) {
-                return 共有ファイルを引き出す(path, ファイルID_C0007BAK);
+                return 共有ファイルを引き出す(filePath, ファイルID_C0007BAK);
             } else {
-                return 共有ファイルを引き出す(path, ファイルID_C0007);
+                return 共有ファイルを引き出す(filePath, ファイルID_C0007);
             }
         }
         return RString.EMPTY;
@@ -205,8 +205,8 @@ public class TokkiText1A4Business {
                     短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
                 } else {
                     RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-                    RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
-                    短冊情報.set特記事項テキスト_イメージ(共有ファイルを引き出す(path,
+                    RString filePath = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
+                    短冊情報.set特記事項テキスト_イメージ(共有ファイルを引き出す(filePath,
                             getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                 }
                 短冊情報リスト.add(短冊情報);
@@ -222,8 +222,6 @@ public class TokkiText1A4Business {
      */
     public List<RString> getTokkiImg() {
         List<RString> filePathList = new ArrayList<>();
-        RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-        RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
         for (int i = 1; i <= 最大ページ; i++) {
             RString tokkiImgPath;
             if (kyotsuEntity.isJimukyoku()) {
@@ -349,9 +347,9 @@ public class TokkiText1A4Business {
         return RString.EMPTY;
     }
 
-    private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+    private RString 共有ファイルを引き出す(RString filePath, RString fileName) {
+        if (!RString.isNullOrEmpty(getFilePath(filePath, fileName))) {
+            return getFilePath(filePath, fileName);
         }
         return RString.EMPTY;
     }

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class JimuShinsakaishiryoA4Group5Editor implements IJimuShinsakaishiryoA4Editor {
 
     private static final int INT_4 = 4;
+    private static final int FORM_GROUP_INDEX_13 = 13;
     private final JimuShinsakaiWariateJohoBusiness business;
 
     /**
@@ -65,7 +66,7 @@ public class JimuShinsakaishiryoA4Group5Editor implements IJimuShinsakaishiryoA4
             source.hihokenshaNo = RString.EMPTY;
             source.hihokenshaName = RString.EMPTY;
         }
-        source.layout = 13;
+        source.layout = FORM_GROUP_INDEX_13;
         return source;
     }
 
