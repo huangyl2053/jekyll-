@@ -136,6 +136,20 @@ module DBZ {
                     this.controls.btnShujiiRenrakuJiko().displayNone = true;
 
                 }
+                
+                public OnlyShujiiGuideInputMode2():void {
+                    this.controls.txtIryoKikanCode().readOnly = true;
+                    this.controls.txtShujiiCode().readOnly = true;
+                    this.controls.chkShiteii().readOnly = false;
+
+                    this.controls.btnIryokikanGuide().displayNone = true;
+                    this.controls.btnShujiiGuide().disabled = false;
+                    this.controls.btnShujiiRenrakuJiko().disabled = false;
+
+                    this.controls.btnZenkaiIrokikanJoho().displayNone = true;
+                    this.controls.btnClear().displayNone = true;
+                    this.controls.btnShujiiRenrakuJiko().displayNone = true;
+                }
             }
         }
     }
