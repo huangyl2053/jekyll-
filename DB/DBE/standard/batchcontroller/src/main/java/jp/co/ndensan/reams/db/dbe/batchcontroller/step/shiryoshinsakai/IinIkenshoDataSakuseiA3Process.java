@@ -86,10 +86,6 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiS
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
-//        entity.setHihokenshaNo(RString.EMPTY);
-//        entity.setHihokenshaName(AtenaMeisho.EMPTY);
-//        entity.setShoKisaiHokenshaNo(RString.EMPTY);
-//        entity.setJimukyoku(false);
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
         RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
@@ -168,14 +164,16 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiS
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA3.getImageFolderPath()));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA3.getImageFolderPath())).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 }

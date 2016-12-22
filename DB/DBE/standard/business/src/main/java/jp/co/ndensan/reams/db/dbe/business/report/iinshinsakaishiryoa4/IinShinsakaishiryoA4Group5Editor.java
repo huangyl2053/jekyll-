@@ -24,17 +24,14 @@ public class IinShinsakaishiryoA4Group5Editor implements IIinShinsakaishiryoA4Ed
     private static final int INT_4 = 4;
     private static final int INT_13 = 13;
     private final JimuShinsakaiWariateJohoBusiness business;
-    private final RString reportId;
 
     /**
      * インスタンスを生成します。
      *
      * @param business {@link JimuShinsakaiWariateJohoBusiness}
-     * @param reportId 帳票ＩＤ
      */
-    protected IinShinsakaishiryoA4Group5Editor(JimuShinsakaiWariateJohoBusiness business, RString reportId) {
+    protected IinShinsakaishiryoA4Group5Editor(JimuShinsakaiWariateJohoBusiness business) {
         this.business = business;
-        this.reportId = reportId;
     }
 
     @Override
