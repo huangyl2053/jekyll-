@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImagePanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,6 +31,8 @@ public class ImagePanelDiv extends Panel {
     private ButtonDialog btnChosahyoGaikyo;
     @JsonProperty("btnIkensho")
     private ButtonDialog btnIkensho;
+    @JsonProperty("btnIkenshoOCR")
+    private ButtonDialog btnIkenshoOCR;
     @JsonProperty("btnSonota")
     private ButtonDialog btnSonota;
     @JsonProperty("txtJuryoYMD")
@@ -138,6 +140,24 @@ public class ImagePanelDiv extends Panel {
     @JsonProperty("btnIkensho")
     public void setBtnIkensho(ButtonDialog btnIkensho) {
         this.btnIkensho = btnIkensho;
+    }
+
+    /*
+     * getbtnIkenshoOCR
+     * @return btnIkenshoOCR
+     */
+    @JsonProperty("btnIkenshoOCR")
+    public ButtonDialog getBtnIkenshoOCR() {
+        return btnIkenshoOCR;
+    }
+
+    /*
+     * setbtnIkenshoOCR
+     * @param btnIkenshoOCR btnIkenshoOCR
+     */
+    @JsonProperty("btnIkenshoOCR")
+    public void setBtnIkenshoOCR(ButtonDialog btnIkenshoOCR) {
+        this.btnIkenshoOCR = btnIkenshoOCR;
     }
 
     /*

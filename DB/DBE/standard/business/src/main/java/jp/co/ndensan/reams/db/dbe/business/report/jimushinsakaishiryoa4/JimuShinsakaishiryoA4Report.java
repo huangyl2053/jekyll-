@@ -103,13 +103,17 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
                 }
             }
         }
-        IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
-        IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
-        reportSourceWriter.writeLine(builder);
-        IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
-        IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
-        reportSourceWriter.writeLine(builder1);
-        if (sonotashiryoBusiness != null) {
+        if (shinsakaiWariateJoho != null && !RString.isNullOrEmpty(shinsakaiWariateJoho.get主治医意見書イメージ１())) {
+            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
+            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
+            reportSourceWriter.writeLine(builder);
+            if (!RString.isNullOrEmpty(shinsakaiWariateJoho.get主治医意見書イメージ２())) {
+                IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
+                IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
+                reportSourceWriter.writeLine(builder1);
+            }
+        }
+        if (sonotashiryoBusiness != null && !sonotashiryoBusiness.getその他資料().isEmpty()) {
             List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
             if (ファイルPathList != null && 0 < ファイルPathList.size()) {
                 for (int i = 0; i < ファイルPathList.size(); i++) {

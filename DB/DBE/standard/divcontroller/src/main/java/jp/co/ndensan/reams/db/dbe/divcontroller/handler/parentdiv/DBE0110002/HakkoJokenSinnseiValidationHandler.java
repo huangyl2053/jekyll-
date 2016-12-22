@@ -117,17 +117,18 @@ public class HakkoJokenSinnseiValidationHandler {
         RString 切替日 = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 LASDEC_CODE, ConfigNameDBE.Reamsへの切り替え日.get名称());
         RString 照会可能期間 = BusinessConfig.get(ConfigNameDBE.依頼業務照会_申請日_照会可能期間, SubGyomuCode.DBE認定支援);
-        int 遡及可能日数 = Integer.parseInt(照会可能期間.toString());
 
-        RDate 基準日 = new RDate(切替日.toString());
-        RDate 遡及限界日 = 基準日.minusDay(遡及可能日数);
-
-        if (!div.getTxtMonitorShinseiYMD().isDisabled()) {
-            if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
-                RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
-                IraiGyomuShokaiShinseiDateMessage message
-                        = new HakkoJokenSinnseiValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
-                validPairs.add(new ValidationMessageControlPair(message));
+        if (!RString.isNullOrEmpty(切替日) && !RString.isNullOrEmpty(照会可能期間)) {
+            int 遡及可能日数 = Integer.parseInt(照会可能期間.toString());
+            RDate 基準日 = new RDate(切替日.toString());
+            RDate 遡及限界日 = 基準日.minusDay(遡及可能日数);
+            if (!div.getTxtMonitorShinseiYMD().isDisabled()) {
+                if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
+                    RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                    IraiGyomuShokaiShinseiDateMessage message
+                            = new HakkoJokenSinnseiValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
+                    validPairs.add(new ValidationMessageControlPair(message));
+                }
             }
         }
 
@@ -152,20 +153,21 @@ public class HakkoJokenSinnseiValidationHandler {
         RString 切替日 = DbBusinessConfig.get(ConfigNameDBE.Reamsへの切り替え日, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 LASDEC_CODE, ConfigNameDBE.Reamsへの切り替え日.get名称());
         RString 照会可能期間 = BusinessConfig.get(ConfigNameDBE.依頼業務照会_申請日_照会可能期間, SubGyomuCode.DBE認定支援);
-        int 遡及可能日数 = Integer.parseInt(照会可能期間.toString());
 
-        RDate 基準日 = new RDate(切替日.toString());
-        RDate 遡及限界日 = 基準日.minusDay(遡及可能日数);
+        if (!RString.isNullOrEmpty(切替日) && !RString.isNullOrEmpty(照会可能期間)) {
+            int 遡及可能日数 = Integer.parseInt(照会可能期間.toString());
+            RDate 基準日 = new RDate(切替日.toString());
+            RDate 遡及限界日 = 基準日.minusDay(遡及可能日数);
 
-        if (!div.getTxtShinseishaShinseiYMD().isDisabled()) {
-            if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
-                RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
-                IraiGyomuShokaiShinseiDateMessage message
-                        = new HakkoJokenSinnseiValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
-                validPairs.add(new ValidationMessageControlPair(message));
+            if (!div.getTxtShinseishaShinseiYMD().isDisabled()) {
+                if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
+                    RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                    IraiGyomuShokaiShinseiDateMessage message
+                            = new HakkoJokenSinnseiValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
+                    validPairs.add(new ValidationMessageControlPair(message));
+                }
             }
         }
-
         return validPairs;
     }
 

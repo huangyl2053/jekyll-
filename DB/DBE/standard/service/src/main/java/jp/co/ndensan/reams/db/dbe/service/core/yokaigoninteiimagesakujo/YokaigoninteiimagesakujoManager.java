@@ -118,7 +118,7 @@ public class YokaigoninteiimagesakujoManager {
         List<SharedFileEntryInfoEntity> sharedFileEntryInfoEntity = SharedFile.getEntryInfo(descriptor);
         for (SharedFileEntryInfoEntity info : sharedFileEntryInfoEntity) {
             if (info.getFilesEntity() != null) {
-                存在したイメージファイル名.add(info.getFilesEntity().getPathname().split("\\.").get(0));
+                存在したイメージファイル名.add(info.getFilesEntity().getPathname());
             }
         }
         return 存在したイメージファイル名;

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Busi
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
@@ -129,7 +128,19 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
             editイメージ(source, 短冊リスト);
             set特記事項イメージ(source);
         }
-        source.layout = Layouts.任意;
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 全面.equals(item.get特記パターン())) {
+            source.layout = INT_5;
+        } else if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 短冊.equals(item.get特記パターン())) {
+            source.layout = INT_6;
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 全面.equals(item.get特記パターン())) {
+            source.layout = INT_7;
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())
+                && 短冊.equals(item.get特記パターン())) {
+            source.layout = INT_8;
+        }
         return source;
     }
 

@@ -1,6 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+// <reference path="../../d.ts/DBZCommonChildDiv.d.ts" />
 
 module DBE {
 
@@ -45,6 +46,10 @@ module DBE {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
+            //public ccdChosaTokkiShiryoShokai(): DBZ.ChosaTokkiShiryoShokai.ModeController {
+            //    return new DBZ.ChosaTokkiShiryoShokai.ModeController(this.convFiledName("ccdChosaTokkiShiryoShokai"));
+            //}
+
             public lblGenbon(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblGenbon"));
             }
@@ -71,6 +76,10 @@ module DBE {
 
             public btnAfterImg(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnAfterImg"));
+            }
+
+            public lblNoImage(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImage"));
             }
 
         }

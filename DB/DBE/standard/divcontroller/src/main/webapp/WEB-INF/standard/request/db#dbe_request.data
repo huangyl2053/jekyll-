@@ -667,6 +667,7 @@ dbe/db/dbe/NinteichosaItakusakiMain/onLoad
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByDeleteButton_dgSonotaKikanIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByDlbClick_dgSonotaKikanIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onSelectByModifyButton_dgSonotaKikanIchiran
+dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvSpool
 dbe/db/dbe/NinteichosaItakusakiMaster/onActive
 dbe/db/dbe/NinteichosaItakusakiMaster/onBeforeDownlaod_btnOutputCsv
 dbe/db/dbe/NinteichosaItakusakiMaster/onBeforeOpenDialog_btnKoza
@@ -974,6 +975,7 @@ dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_radShoriJyotai
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onChange_txtSaidaiHyojiKensu
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_BtnYitiranSyuturyoku
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnChousaIraiKanryo
+dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnModoruShujiiIkenshoIraiTaishoIchiran
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnOutputCsv
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onClick_btnShujiiIrai
 dbe/db/dbe/ShujiiIkenshoIraiTaishoIchiran/onLoad
