@@ -47,7 +47,6 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
     private final List<RString> 短冊リスト;
     private final List<RString> テキスト全面List;
     private final List<RString> イメージ全面List;
-    private final RString reportId;
 
     /**
      * インスタンスを生成します。
@@ -59,16 +58,14 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
      * @param テキスト全面List List<RString>
      * @param イメージ全面List List<RString>
      * @param page page
-     * @param reportId 帳票ＩＤ
      */
     protected IinShinsakaishiryoA4Group4Editor(TokkiText1A4Business item, List<TokkiA4Entity> 短冊情報リスト,
-            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List, int index, int page, RString reportId) {
+            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List, int index, int page) {
         this.item = item;
         this.index = index;
         this.page = page;
         this.短冊情報リスト = 短冊情報リスト;
         this.短冊リスト = 短冊リスト;
-        this.reportId = reportId;
         this.テキスト全面List = テキスト全面List;
         this.イメージ全面List = イメージ全面List;
     }

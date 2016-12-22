@@ -171,13 +171,23 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkNinteiChosaIraiChohyo() {
-        return this.getNinteiChosaInsatsuChohyoSentaku().getChkNinteiChosaIraiChohyo();
+    public CheckBoxList getChkNinteiChosaIraiIchiran() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChkNinteiChosaIraiIchiran();
     }
 
     @JsonIgnore
-    public void  setChkNinteiChosaIraiChohyo(CheckBoxList chkNinteiChosaIraiChohyo) {
-        this.getNinteiChosaInsatsuChohyoSentaku().setChkNinteiChosaIraiChohyo(chkNinteiChosaIraiChohyo);
+    public void  setChkNinteiChosaIraiIchiran(CheckBoxList chkNinteiChosaIraiIchiran) {
+        this.getNinteiChosaInsatsuChohyoSentaku().setChkNinteiChosaIraiIchiran(chkNinteiChosaIraiIchiran);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkNinteiChosaShinseiTani() {
+        return this.getNinteiChosaInsatsuChohyoSentaku().getChkNinteiChosaShinseiTani();
+    }
+
+    @JsonIgnore
+    public void  setChkNinteiChosaShinseiTani(CheckBoxList chkNinteiChosaShinseiTani) {
+        this.getNinteiChosaInsatsuChohyoSentaku().setChkNinteiChosaShinseiTani(chkNinteiChosaShinseiTani);
     }
 
     @JsonIgnore

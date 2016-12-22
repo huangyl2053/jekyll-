@@ -47,16 +47,17 @@ public class KojinJokyoShokai {
                 = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
         if (!kojinJokyoShokaiList.isEmpty()) {
             getHandler(div).setKojinJokyoShokai(kojinJokyoShokaiList, 申請書管理番号);
-            getHandler(div).ボタン非活性(申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, kojinJokyoShokaiList.get(0).get主治医意見書作成依頼履歴番号());
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, kojinJokyoShokaiList.get(0).get認定調査依頼履歴番号());
+            if (RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get市町村連絡事項())) {
+                div.getBtnShichosonRenrakuJiko().setDisabled(true);
+            }
+            getHandler(div).ボタン非活性();
         } else {
             getHandler(div).未登録時ボタン非活性(div);
         }
         return ResponseData.of(div).respond();
     }
-
-   
 
     /**
      * 連絡先ボタン処理です。
@@ -132,7 +133,7 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnNinteiChosaIraiShokai(KojinJokyoShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 基本調査照会ボタン処理です。
      *
@@ -164,7 +165,7 @@ public class KojinJokyoShokai {
         div.setHdnNinteiChosaRirekiNo(認定調査依頼履歴番号);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 意見書照会ボタン処理です。
      *
@@ -180,7 +181,7 @@ public class KojinJokyoShokai {
         div.setHdnIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 個人進捗状況表を発行する処理です。
      *

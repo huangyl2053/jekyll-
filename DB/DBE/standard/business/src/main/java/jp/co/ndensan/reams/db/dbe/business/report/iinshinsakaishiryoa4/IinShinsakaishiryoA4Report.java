@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWar
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
@@ -35,7 +34,6 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
     private final TokkiText1A4Business tokkiTextBusiness;
     private final JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho;
     private final JimuSonotashiryoBusiness sonotashiryoBusiness;
-    private final RString reportId;
 
     /**
      * インスタンスを生成します。
@@ -45,18 +43,15 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
      * @param tokkiTextBusiness 特記事項の編集クラス
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
-     * @param reportId 帳票ＩＤ
      */
     public IinShinsakaishiryoA4Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA4Entity ichijihanteiEntity, TokkiText1A4Business tokkiTextBusiness,
-            JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness,
-            RString reportId) {
+            JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteiEntity = ichijihanteiEntity;
         this.tokkiTextBusiness = tokkiTextBusiness;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
-        this.reportId = reportId;
     }
 
     @Override
@@ -93,11 +88,11 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 }
             }
         }
-        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
-            IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
+        if (shinsakaiWariateJoho != null) {
+            IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
             IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
             reportSourceWriter.writeLine(builder);
-            IIinShinsakaishiryoA4Editor editor1 = new IinShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
+            IIinShinsakaishiryoA4Editor editor1 = new IinShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
             IIinShinsakaishiryoA4Builder builder1 = new IinShinsakaishiryoA4Builder(editor1);
             reportSourceWriter.writeLine(builder1);
         }
@@ -110,14 +105,6 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 }
             }
         }
-//        if (ReportIdDBE.DBE517903.getReportId().value().equals(reportId) && shinsakaiWariateJoho != null) {
-//            IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho, reportId);
-//            IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
-//            reportSourceWriter.writeLine(builder);
-//            IIinShinsakaishiryoA4Editor editor1 = new IinShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho, reportId);
-//            IIinShinsakaishiryoA4Builder builder1 = new IinShinsakaishiryoA4Builder(editor1);
-//            reportSourceWriter.writeLine(builder1);
-//        }
         if (sonotashiryoBusiness != null) {
             List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
             if (ファイルPathList != null && 0 < ファイルPathList.size()) {
@@ -151,7 +138,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
             for (int i = 0; i < テキスト全面List.size(); i++) {
                 if (0 < i) {
                     IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group4Editor(
-                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List, i, i + 1, reportId);
+                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List, i, i + 1);
                     IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
                     reportSourceWriter.writeLine(builder2);
                 }
@@ -160,7 +147,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
             for (int i = 0; i < イメージ全面List.size(); i++) {
                 if (0 < i) {
                     IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group4Editor(
-                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List, i, i + 1, reportId);
+                            tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List, i, i + 1);
                     IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
                     reportSourceWriter.writeLine(builder2);
                 }
@@ -173,7 +160,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
         if (MAXCOUNT <= i) {
             int page = (i + MAXCOUNT) / MAXCOUNT;
             IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group4Editor(
-                    tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List, i, page, reportId);
+                    tokkiTextBusiness, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List, i, page);
             IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
             reportSourceWriter.writeLine(builder2);
         }

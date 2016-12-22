@@ -18,14 +18,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.Shis
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.dgShisakaiIinJisseki_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 審査会委員実績照会の画面処理Handlerクラスです
@@ -34,9 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  */
 public class ShisakaiIinJissekiShokaiHandler {
 
-    private static final RString 集計表を発行する = new RString("btnPulish");
-    private static final RString CSVを出力する = new RString("btnShutsutyoku");
-    private static final RString 条件に戻る = new RString("btnBackToKensaku");
     private final ShisakaiIinJissekiShokaiDiv div;
 
     /**
@@ -56,11 +55,6 @@ public class ShisakaiIinJissekiShokaiHandler {
                 SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, false);
-        div.getShisakaiIinJisseki().setDisplayNone(true);
-        div.getShinsakaiKaisaibi().setDisplayNone(false);
     }
 
     /**
@@ -74,26 +68,22 @@ public class ShisakaiIinJissekiShokaiHandler {
     }
 
     /**
-     * 画面一覧状態の設定です。
-     */
-    public void set一覧状態() {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(集計表を発行する, true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(CSVを出力する, true);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(条件に戻る, true);
-        div.getShisakaiIinJisseki().setDisplayNone(false);
-        div.getShinsakaiKaisaibi().setDisplayNone(true);
-    }
-
-    /**
      * 「検索する」ボタンを押します。
      *
-     * @param shinsaiinjissekiichiranList 審査会委員実績照会
+     * @param searchResult 審査会委員実績照会
+     * @return 該当データがない場合はメッセージを返します。該当データがある場合は{@code null}を返します。
      */
-    public void onClick_BtnKensaku(List<ShinsaiinJissekiIchiran> shinsaiinjissekiichiranList) {
+    public Message onClick_BtnKensaku(SearchResult<ShinsaiinJissekiIchiran> searchResult) {
+        List<ShinsaiinJissekiIchiran> shinsaiinjissekiichiranList = searchResult.records();
+        if (shinsaiinjissekiichiranList.isEmpty()) {
+            return UrInformationMessages.該当データなし.getMessage();
+        }
         List<dgShisakaiIinJisseki_Row> rowList = new ArrayList<>();
         for (ShinsaiinJissekiIchiran data : shinsaiinjissekiichiranList) {
             dgShisakaiIinJisseki_Row row = new dgShisakaiIinJisseki_Row(data.getコード(),
                     data.get氏名(),
+                    KaigoninteiShinsakaiGichoKubunCode.toValue(data.get審査員種別()).get名称(),
+                    IsShusseki.toValue(data.is出欠()).get名称(),
                     ShinsakaiIinHoshukubun.toValue(data.get報酬区分()).get名称(),
                     data.get所属機関(),
                     data.get審査会地区(),
@@ -101,13 +91,19 @@ public class ShisakaiIinJissekiShokaiHandler {
                     dateFormat(data.get実施日()),
                     set時刻(data.get開始()),
                     set時刻(data.get終了()),
-                    KaigoninteiShinsakaiGichoKubunCode.toValue(data.get審査員種別()).get名称(),
-                    IsShusseki.toValue(data.is出欠()).get名称(),
                     data.get実施年月日(),
                     new RString(Integer.toString(data.get連番())));
             rowList.add(row);
         }
         div.getDgShisakaiIinJisseki().setDataSource(rowList);
+        if (searchResult.exceedsLimit()) {
+            div.getDgShisakaiIinJisseki().getGridSetting().setLimitRowCount(shinsaiinjissekiichiranList.size());
+            div.getDgShisakaiIinJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+        } else {
+            div.getDgShisakaiIinJisseki().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
+            div.getDgShisakaiIinJisseki().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+        }
+        return null;
     }
 
     /**
@@ -165,16 +161,6 @@ public class ShisakaiIinJissekiShokaiHandler {
         ShinsaiinJissekiIchiranMybitisParamter paramter = ShinsaiinJissekiIchiranMybitisParamter.createParamter(false,
                 審査会開催日FROM, 審査会開催日TO, new RString(div.getTxtMaxKensu().getValue().toString()));
         return paramter;
-    }
-
-    /**
-     * CommonButtonHolderをセート
-     */
-    public void setCommonButton() {
-        if (div.getDgShisakaiIinJisseki().getDataSource().isEmpty()) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnPulish"), false);
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
-        }
     }
 
     private RString set時刻(RString date) {

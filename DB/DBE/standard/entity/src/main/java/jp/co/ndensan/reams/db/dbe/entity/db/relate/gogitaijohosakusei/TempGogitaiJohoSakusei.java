@@ -116,18 +116,18 @@ public class TempGogitaiJohoSakusei implements IDbAccessable {
     }
 
     /**
-     * 合議体名称有効終了日を返します。
+     * 合議体名称を返します。
      *
-     * @return 合議体名称有効終了日
+     * @return 合議体名称
      */
     public RString get合議体名称() {
         return 合議体名称;
     }
 
     /**
-     * 合議体名称有効終了日を設定します。
+     * 合議体名称を設定します。
      *
-     * @param 合議体名称有効終了日 合議体名称有効終了日
+     * @param 合議体名称 合議体名称
      */
     public void set合議体名称(RString 合議体名称) {
         this.合議体名称 = 合議体名称;
@@ -152,18 +152,18 @@ public class TempGogitaiJohoSakusei implements IDbAccessable {
     }
 
     /**
-     * 合議体終了開始予定時刻を返します。
+     * 合議体終了予定時刻を返します。
      *
-     * @return 合議体終了開始予定時刻
+     * @return 合議体終了予定時刻
      */
     public RString get合議体終了予定時刻() {
         return 合議体終了予定時刻;
     }
 
     /**
-     * 合議体終了開始予定時刻を設定します。
+     * 合議体終了予定時刻を設定します。
      *
-     * @param 合議体終了開始予定時刻 合議体終了開始予定時刻
+     * @param 合議体終了予定時刻 合議体終了予定時刻
      */
     public void set合議体終了予定時刻(RString 合議体終了予定時刻) {
         this.合議体終了予定時刻 = 合議体終了予定時刻;

@@ -1,13 +1,13 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taisyosyajidowaritsuke;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeKensakuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * 対象者自動割付のマッパーインタフェースです。
@@ -19,10 +19,10 @@ public interface ITaisyosyaJidoWaritsukeRelateMapper {
     /**
      * 対象者を取得します。
      *
-     * @param isIchijiHanteiGo 一次判定後
+     * @param parameter 対象者自動割付のMybatisパラメータ
      * @return List<TaisyosyaJidoWaritsukeEntity>
      */
-    List<TaisyosyaJidoWaritsukeEntity> selectTaisyosya(@Param(value = "isIchijiHanteiGo") boolean isIchijiHanteiGo);
+    List<TaisyosyaJidoWaritsukeEntity> selectTaisyosya(TaisyosyaJidoWaritsukeKensakuParameter parameter);
 
     /**
      * 介護認定審査会開催予定情報を取得します。

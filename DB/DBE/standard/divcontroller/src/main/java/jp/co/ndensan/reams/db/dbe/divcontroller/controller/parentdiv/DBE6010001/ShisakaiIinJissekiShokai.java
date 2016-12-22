@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6010001
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_ShinsakaiiinJissekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.DBE6010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001.ShisakaiIinJissekiShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranFindler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -54,16 +57,20 @@ public class ShisakaiIinJissekiShokai {
      * @return ResponseData<ShisakaiIinJissekiShokaiDiv>
      */
     public ResponseData<ShisakaiIinJissekiShokaiDiv> onClick_BtnKensaku(ShisakaiIinJissekiShokaiDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForNyuryuku(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         ShinsaiinJissekiIchiranMybitisParamter paramter = getHandler(div).setMybatisParameta();
-        getHandler(div).onClick_BtnKensaku(ShinsaiinJissekiIchiranFindler.createInstance().get介護認定審査会委員報酬集計表(paramter).records());
-        getHandler(div).set一覧状態();
-        getHandler(div).setCommonButton();
-        return ResponseData.of(div).respond();
+        Message message = getHandler(div).onClick_BtnKensaku(ShinsaiinJissekiIchiranFindler.createInstance().get介護認定審査会委員報酬集計表(paramter));
+        if (message == null) {
+            return ResponseData.of(div).setState(DBE6010001StateName.一覧);
+        }
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**
@@ -73,8 +80,7 @@ public class ShisakaiIinJissekiShokai {
      * @return ResponseData<ShisakaiIinJissekiShokaiDiv>
      */
     public ResponseData<ShisakaiIinJissekiShokaiDiv> onClick_btnBackToKensaku(ShisakaiIinJissekiShokaiDiv div) {
-        this.onLoad(div);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE6010001StateName.初期表示);
     }
 
     /**
