@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -74,9 +72,10 @@ public class ShinchokuDataOutputHandler {
     public void onLoad() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKubun().setSelectedKey(進捗情報);
-        div.getTxtChuishutsuRange().setFromValue(new RDate(RDate.getNowDate().toString()));
-        div.getTxtChuishutsuRange().setToValue(new RDate(RDate.getNowDate().toString()));
         set抽出期間();
+        if (div.getTxtChuishutsuRange().getFromValue() == null) {
+            div.getTxtChuishutsuRange().setFromRequired(false);
+        }
     }
 
     /**
@@ -85,11 +84,11 @@ public class ShinchokuDataOutputHandler {
     public void btnJokenClear() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKubun().setSelectedKey(進捗情報);
-        div.getTxtChuishutsuRange().setFromValue(new RDate(RDate.getNowDate().toString()));
-        div.getTxtChuishutsuRange().setToValue(new RDate(RDate.getNowDate().toString()));
         set抽出期間();
+        if (div.getTxtChuishutsuRange().getFromValue() == null) {
+            div.getTxtChuishutsuRange().setFromRequired(false);
+        }
         div.getTxtHihokenshaCode().clearValue();
-        div.getTxtShimei().clearValue();
     }
 
     /**
@@ -214,21 +213,14 @@ public class ShinchokuDataOutputHandler {
         batchparamter.setFayirukuben(div.getRadKubun().getSelectedKey());
         return batchparamter;
     }
-    
+
     /**
      * 市町村情報変更時の動作。
      */
     public void onChange_ddlSichoson() {
         set抽出期間();
     }
-    
-    /**
-     * 被保険者番号変更時の動作。
-     */
-    public void onChange_txtHihokenshaCode() {
-        set被保険者指名();
-    }
-    
+
     private void set抽出期間() {
         DbT7022ShoriDateKanriEntity entity;
         DbT7022ShoriDateKanriDac 処理日付管理Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
@@ -243,7 +235,7 @@ public class ShinchokuDataOutputHandler {
         }
         entity = 処理日付管理Dac.select前回の実行情報(SubGyomuCode.DBE認定支援, 証記載保険者番号, 処理名, 処理枝番);
         if (entity == null) {
-            div.getTxtChuishutsuRange().setFromValue(RDate.MIN);
+            div.getTxtChuishutsuRange().clearFromValue();
             div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
         } else {
             RDate 前回処理日付From = new RDate(entity.getTaishoKaishiYMD().toString());
@@ -252,17 +244,6 @@ public class ShinchokuDataOutputHandler {
             div.getTxtZenkaiChuishutsuRange().setToValue(前回処理日付To);
             div.getTxtChuishutsuRange().setFromValue(前回処理日付To.plusDay(1));
             div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
-        }
-    }
-    
-    private void set被保険者指名() {
-        RString hihokenshaNo = div.getTxtHihokenshaCode().getValue();
-        if (hihokenshaNo != null && !hihokenshaNo.isEmpty()) {
-            DbT5101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
-            DbT5101NinteiShinseiJohoEntity entity = dac.selectByHihokenshaNo(hihokenshaNo);
-            if (entity != null) {
-                div.getTxtShimei().setValue(entity.getHihokenshaName().getColumnValue());
-            }
         }
     }
 
@@ -280,7 +261,7 @@ public class ShinchokuDataOutputHandler {
         }
         return RString.EMPTY;
     }
-    
+
     private RString get要介護状態区分名称取得(Code 厚労省IF識別コード, Code 要介護状態区分コード) {
         if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
             return YokaigoJotaiKubun99.toValue(要介護状態区分コード.getKey()).get名称();

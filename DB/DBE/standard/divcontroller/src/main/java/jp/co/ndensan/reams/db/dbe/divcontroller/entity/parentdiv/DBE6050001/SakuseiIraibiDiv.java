@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,10 +25,12 @@ public class SakuseiIraibiDiv extends Panel {
      */
     @JsonProperty("txtSakuseiIraibi")
     private TextBoxDateRange txtSakuseiIraibi;
-    @JsonProperty("txtMaxKensu")
-    private TextBoxNum txtMaxKensu;
+    @JsonProperty("ccdHokensya")
+    private HokenshaListDiv ccdHokensya;
     @JsonProperty("btnKensakuClear")
     private Button btnKensakuClear;
+    @JsonProperty("txtMaxKensu")
+    private TextBoxNum txtMaxKensu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,21 +57,12 @@ public class SakuseiIraibiDiv extends Panel {
     }
 
     /*
-     * gettxtMaxKensu
-     * @return txtMaxKensu
+     * getccdHokensya
+     * @return ccdHokensya
      */
-    @JsonProperty("txtMaxKensu")
-    public TextBoxNum getTxtMaxKensu() {
-        return txtMaxKensu;
-    }
-
-    /*
-     * settxtMaxKensu
-     * @param txtMaxKensu txtMaxKensu
-     */
-    @JsonProperty("txtMaxKensu")
-    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
-        this.txtMaxKensu = txtMaxKensu;
+    @JsonProperty("ccdHokensya")
+    public IHokenshaListDiv getCcdHokensya() {
+        return ccdHokensya;
     }
 
     /*
@@ -86,6 +81,24 @@ public class SakuseiIraibiDiv extends Panel {
     @JsonProperty("btnKensakuClear")
     public void setBtnKensakuClear(Button btnKensakuClear) {
         this.btnKensakuClear = btnKensakuClear;
+    }
+
+    /*
+     * gettxtMaxKensu
+     * @return txtMaxKensu
+     */
+    @JsonProperty("txtMaxKensu")
+    public TextBoxNum getTxtMaxKensu() {
+        return txtMaxKensu;
+    }
+
+    /*
+     * settxtMaxKensu
+     * @param txtMaxKensu txtMaxKensu
+     */
+    @JsonProperty("txtMaxKensu")
+    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+        this.txtMaxKensu = txtMaxKensu;
     }
 
     // </editor-fold>

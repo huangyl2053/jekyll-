@@ -42,6 +42,7 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
     private static final String IKENSHO_TOKUSOKUYMD = "temp_督促日";
     private static final String IKENSHO_SAKUSEI_TOKU_HAKKOU = "temp_印刷期間開始日";
     private static final String IKENSHO_SAKUSEI_IRAI_HAKKOU = "temp_印刷期間終了日";
+    private static final String BUNSHO_NO = "temp_文書番号";
 
     @BatchParameter(key = HOKENN_CODE, name = "保険者コード")
     private RString temp_保険者コード;
@@ -73,6 +74,8 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
     private RDate temp_印刷期間開始日;
     @BatchParameter(key = IKENSHO_SAKUSEI_IRAI_HAKKOU, name = "印刷期間終了日")
     private RDate temp_印刷期間終了日;
+    @BatchParameter(key = BUNSHO_NO, name = "文書番号")
+    private RString temp_文書番号;
 
     /**
      * 画面からのパラメータを作成します。
@@ -95,6 +98,7 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
         this.temp_督促日 = tempData.getTemp_督促日();
         this.temp_印刷期間開始日 = tempData.getTemp_印刷期間開始日();
         this.temp_印刷期間終了日 = tempData.getTemp_印刷期間終了日();
+        this.temp_文書番号 = tempData.getTemp_文書番号();
     }
 
     /**

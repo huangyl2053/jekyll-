@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2230001;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.DbeBusinessConfigKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
@@ -45,7 +46,6 @@ public class NinteiChosaTokusokujoHakkoHandler {
 
     /**
      * サービスコード検索一覧初期化の設定します。
-     *
      */
     public void onLoad() {
         initializtion();
@@ -108,6 +108,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
                 ? null : new FlexibleDate(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue().toString()));
         tempData.setTemp_印刷書類区分(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
                 ? 印刷書類区分_要介護認定調査督促状 : 印刷書類区分_認定調査督促状対象者一覧);
+        tempData.setTemp_文書番号(div.getCcdBunshoNo().get文書番号());
         return tempData;
     }
 
@@ -134,6 +135,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
         div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getHakkoJoken().getRadChohyoSentaku().setSelectedKey(RADIOBUTTONKEY0);
         div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().setValue(RDate.getNowDate());
+        div.getCcdBunshoNo().initialize(ReportIdDBE.DBE223001_NinteiChosaTokusokujo.getReportId());
     }
 
     /**

@@ -72,4 +72,13 @@
            ORDER BY
                dbT5101."ninteiShinseiYMD" DESC
     </select>
+     <select id="get認定調査情報件数" resultType="int" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteichosairaishokai.NinteiChosaIraiShokaiParameter">
+      SELECT
+           count(*)
+      FROM
+           rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+      WHERE
+           dbT5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+           AND dbT5101."shoriJotaiKubun" IN (#{tujou}, #{enki})
+    </select>
 </mapper>

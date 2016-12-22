@@ -101,16 +101,19 @@ public class HomonChosaIraishoBusiness {
     private static final RString TEISHUTSUKIGEN = new RString("【提出期限】");
     private static final RString KYOTSUHIZUKE = new RString("【共通日付】");
     private static final RString NINTEICHOSAIRAISYO = new RString("【認定調査依頼書出力区分】");
-    private static final RString NINTEICHOSAHYOKIHON = new RString("【認定調査票(基本調査)出力区分】");
-    private static final RString NINTEICHOSAHYOTOKKI = new RString("【認定調査票(特記事項)出力区分】");
-    private static final RString NINTEICHOSAHYOGAIKYOU = new RString("【認定調査票(概況調査)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRKIHON = new RString("【認定調査票OCR(基本調査)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRTOKKI = new RString("【認定調査票OCR(特記事項)出力区分】");
-    private static final RString NINTEICHOSAHYOOCRGAIKYOU = new RString("【認定調査票OCR(概況調査)出力区分】");
-    private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("【認定調査依頼履歴一覧出力区分】");
+    private static final RString NINTEICHOSADESIGN = new RString("【認定調査票（デザイン用紙）出力区分】");
+    private static final RString TOKKIJIKODESIGN = new RString("【特記事項（デザイン用紙）出力区分】");
+    private static final RString NINTEICHOSAOCR = new RString("【認定調査票OCR出力区分】");
+    private static final RString TOKKIJIKOOCR = new RString("【特記事項OCR出力区分】");
+    private static final RString GAIKYOTOKKI = new RString("【概況特記出力区分】");
     private static final RString NINTEICHOSACHECKHYO = new RString("【認定調査差異チェック表出力区分】");
-    private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼一覧表出力区分】");
     private static final RString ZENKONINTEICHOSAHYO = new RString("【前回認定調査結果との比較表出力区分】");
+    private static final RString TOKKIJIKO_KOMOKUARI = new RString("【特記事項（項目有り）】");
+    private static final RString TOKKIJIKO_KOMOKUNASHI = new RString("【特記事項（項目無し）】");
+    private static final RString TOKKIJIKO_FREE = new RString("【特記事項（フリータイプ）】");
+    private static final RString TENYURYOKU = new RString("【手入力タイプ】");
+    private static final RString NINTEICHOSAIRAICHOHYO = new RString("【認定調査依頼一覧表出力区分】");
+    private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("【認定調査依頼履歴一覧出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
     private RString 誕生日明治;
@@ -126,10 +129,10 @@ public class HomonChosaIraishoBusiness {
     private RString 申請日2;
     private RString shinseishoKanriNo = RString.EMPTY;
     private final HomonChosaIraishoProcessParamter processParamter;
-    private List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
-    private Map<RString, RString> 今回連番Map;
-    private Map<RString, RString> 前回連番Map;
-    private RDate 基準日;
+    private final List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
+    private final Map<RString, RString> 今回連番Map;
+    private final Map<RString, RString> 前回連番Map;
+    private final RDate 基準日;
 
     /**
      * コンストラクタです。
@@ -739,11 +742,11 @@ public class HomonChosaIraishoBusiness {
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(IRAIFROMYMD);
-        builder.append(processParamter.getIraiFromYMD());
+        builder.append(ConvertDate(processParamter.getIraiFromYMD()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IRAITOYMD);
-        builder.append(processParamter.getIraiToYMD());
+        builder.append(ConvertDate(processParamter.getIraiToYMD()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEIOCHOSAIRAISHO);
@@ -773,62 +776,81 @@ public class HomonChosaIraishoBusiness {
         }
         builder = new RStringBuilder();
         builder.append(HAKKOBI);
-        builder.append(processParamter.getHakkobi());
+        builder.append(ConvertDate(processParamter.getHakkobi()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TEISHUTSUKIGEN);
-        builder.append(processParamter.getTeishutsuKigen());
+        builder.append(ConvertDate(processParamter.getTeishutsuKigen()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(KYOTSUHIZUKE);
-        builder.append(processParamter.getKyotsuHizuke());
+        builder.append(ConvertDate(processParamter.getKyotsuHizuke()));
         出力条件.add(builder.toRString());
-        
+
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAISYO);
         builder.append(processParamter.is認定調査依頼書());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(NINTEICHOSAHYOKIHON);
-//        builder.append(processParamter.isNinteiChosahyoKihon());
+        builder.append(NINTEICHOSADESIGN);
+        builder.append(processParamter.is認定調査票_デザイン用紙());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(NINTEICHOSAHYOTOKKI);
-//        builder.append(processParamter.isNinteiChosahyoTokki());
+        builder.append(TOKKIJIKODESIGN);
+        builder.append(processParamter.is特記事項_デザイン用紙());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(NINTEICHOSAHYOGAIKYOU);
-//        builder.append(processParamter.isNinteiChosahyoGaikyou());
+        builder.append(NINTEICHOSAOCR);
+        builder.append(processParamter.is認定調査票OCR());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(NINTEICHOSAHYOOCRKIHON);
-//        builder.append(processParamter.isNinteiChosahyoOCRKihon());
+        builder.append(TOKKIJIKOOCR);
+        builder.append(processParamter.is特記事項OCR());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(NINTEICHOSAHYOOCRTOKKI);
-//        builder.append(processParamter.isNinteiChosahyoOCRTokki());
-        出力条件.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append(NINTEICHOSAHYOOCRGAIKYOU);
-//        builder.append(processParamter.isNinteiChosahyoOCRGaikyou());
-        出力条件.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append(NINTEICHOSAIRAIRIREKIICHIRAN);
-        builder.append(processParamter.is認定調査依頼履歴一覧());
+        builder.append(GAIKYOTOKKI);
+        builder.append(processParamter.is概況特記());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSACHECKHYO);
-//        builder.append(processParamter.isNinteiChosaCheckHyo());
-        出力条件.add(builder.toRString());
+        builder.append(processParamter.is認定調査差異チェック票());
+        builder = new RStringBuilder();
+        builder.append(ZENKONINTEICHOSAHYO);
+        builder.append(processParamter.is前回認定調査結果との比較表());
+        builder = new RStringBuilder();
+        builder.append(TOKKIJIKO_KOMOKUARI);
+        builder.append(processParamter.is特記事項_項目あり());
+        builder = new RStringBuilder();
+        builder.append(TOKKIJIKO_KOMOKUNASHI);
+        builder.append(processParamter.is特記事項_項目無し());
+        builder = new RStringBuilder();
+        builder.append(TOKKIJIKO_FREE);
+        builder.append(processParamter.is特記事項_フリータイプ());
+        builder = new RStringBuilder();
+        builder.append(TENYURYOKU);
+        builder.append(processParamter.is手入力タイプ());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAICHOHYO);
         builder.append(processParamter.isNinteiChosaIraiChohyo());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
-        builder.append(ZENKONINTEICHOSAHYO);
-//        builder.append(processParamter.isZenkoNinteiChosahyo());
+        builder.append(NINTEICHOSAIRAIRIREKIICHIRAN);
+        builder.append(processParamter.is認定調査依頼履歴一覧());
+        出力条件.add(builder.toRString());
+        出力条件.add(builder.toRString());
+        出力条件.add(builder.toRString());
         出力条件.add(builder.toRString());
         return 出力条件;
+    }
+
+    private RString ConvertDate(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        if (!FlexibleDate.canConvert(date)) {
+            return date;
+        }
+        return new FlexibleDate(date).wareki().toDateString();
     }
 
     private void setZenkaiChosakekka(ChosahyoSaiCheckhyoItem item) {
@@ -1078,7 +1100,7 @@ public class HomonChosaIraishoBusiness {
      * get認定調査票差異チェック票Listを設定メッソドです。
      *
      * @param entity entity
-     * @return 
+     * @return
      */
     public ChosahyoSaiCheckhyoRelateEntity set認定調査票差異チェック票List(HomonChosaIraishoRelateEntity entity) {
         ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
@@ -1284,6 +1306,7 @@ public class HomonChosaIraishoBusiness {
                 RString.EMPTY,
                 RString.EMPTY);
     }
+
     /**
      * 帳票「認定調査票差異チェック票_DBE292003」のItemを取得メッソドです。
      *
@@ -1293,6 +1316,7 @@ public class HomonChosaIraishoBusiness {
     public SaiChekkuhyoItem setDBE292003Item(ChosahyoSaiCheckhyoRelateEntity entity) {
         return setDBE292002Item(entity);
     }
+
     /**
      * 帳票「認定調査票差異チェック票_DBE292004」のItemを取得メッソドです。
      *

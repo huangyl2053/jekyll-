@@ -30,12 +30,28 @@ public interface IHanteiKekkaJohoShuturyokuMapper {
     List<HanteiKekkaIchiranA3Entity> getHanteiKekkaIchiranList(HanteiKekkaJohoShuturyokuMybatisParameter parameter);
 
     /**
+     * 要介護認定判定結果一覧表の出力対象者一覧の総レコード数を返します。
+     *
+     * @param parameter 判定結果情報出力(介護認定審査会)のMyBatisパラメータ
+     * @return int
+     */
+    int countHanteiKekkaIchiranList(HanteiKekkaJohoShuturyokuMybatisParameter parameter);
+
+    /**
      * 要介護認定判定結果一覧表Ａ３版の出力対象者一覧を取得します。
      *
      * @param parameter 判定結果情報出力(介護認定審査会)のMyBatisパラメータ
      * @return List<HanteiKekkaIchiranA3Entity>
      */
     List<HanteiKekkaIchiranA3Entity> getHanteiKekkaIchiranA3List(HanteiKekkaJohoShuturyokuMybatisParameter parameter);
+
+    /**
+     * 要介護認定判定結果一覧表Ａ３版の総レコード数を返します。
+     *
+     * @param parameter 判定結果情報出力(介護認定審査会)のMyBatisパラメータ
+     * @return int
+     */
+    int countHanteiKekkaIchiranA3List(HanteiKekkaJohoShuturyokuMybatisParameter parameter);
 
     /**
      * 介護認定審査判定結果（鑑）の出力対象者一覧を取得します。

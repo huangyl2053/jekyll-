@@ -53,6 +53,9 @@
                 <if test="作成依頼日終了Flag">
                     AND T5602."iraishoSakuseiIraiYMD" <![CDATA[<=]]> #{作成依頼日終了}
                 </if>
+                <if test="保険者Flag">
+                    AND T7051."shichosonCode" = #{保険者}
+                </if>
                 <if test="batchFlag">
                     AND
                      <foreach collection="ikenshoBusiness" item="ikensho" open="(" separator="OR" close=")">

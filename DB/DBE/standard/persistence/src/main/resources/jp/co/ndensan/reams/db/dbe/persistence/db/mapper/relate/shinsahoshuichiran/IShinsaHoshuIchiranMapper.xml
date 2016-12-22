@@ -144,6 +144,7 @@
                 AND         A.介護認定審査会開催年月日 <![CDATA[<=]]> C."yukoShuryoYMD"
                 )AS Z)AS X
         GROUP BY   合議体番号,介護認定審査会委員コード
+        ORDER BY 合議体番号, 介護認定審査会委員コード
         )
         SELECT G.* , 
         (SELECT SUM(G.報酬総額) FROM G) AS 総合計_報酬総額,

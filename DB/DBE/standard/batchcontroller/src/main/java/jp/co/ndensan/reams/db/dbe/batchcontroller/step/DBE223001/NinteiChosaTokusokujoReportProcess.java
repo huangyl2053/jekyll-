@@ -58,7 +58,6 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     INinteichosaTokusokujyoRelateMapper mapper;
 
     private final int パターン番号_1 = 1;
-    RString 文書番号;
     NinshoshaSource ninshoshaSource;
     Map<Integer, RString> 通知文;
 
@@ -88,7 +87,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     protected void process(NinteiChosaTokusokujoRelateEntity entity) {
         NinteiChosaTokusokujoReport report = new NinteiChosaTokusokujoReport(
                 entity.get認定申請情報(), ninshoshaSource, entity.get宛名機関(),
-                文書番号, 通知文, createCustomerBarCode(entity.get宛名機関()));
+                paramter.getTemp_文書番号(), 通知文, createCustomerBarCode(entity.get宛名機関()));
         report.writeBy(reportSourceWriter);
 
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = entity.get認定調査依頼情報();
@@ -118,7 +117,6 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     }
 
     private void getKyotsuData() {
-        文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日());
         ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE223001, paramter.getTemp_基準日(),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
         通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
