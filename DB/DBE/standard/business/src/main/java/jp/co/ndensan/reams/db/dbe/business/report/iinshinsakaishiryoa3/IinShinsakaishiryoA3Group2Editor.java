@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -29,6 +28,13 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
     private static final RString イメージ = new RString("2");
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
+    private static final RString サービス区分コード1 = new RString("1");
+    private static final RString サービス区分コード2 = new RString("2");
+    private static final RString 特記事項テキスト_イメージ区分1 = new RString("1");
+    private static final RString 特記事項テキスト_イメージ区分2 = new RString("2");
+    private static final RString 特記パターン1 = new RString("1");
+    private static final RString 特記パターン2 = new RString("2");
+    private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
@@ -158,8 +164,62 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
         source.imgShisetsuName = item.get施設名イメージ();
         source.imgShisetsuAddress = item.get住所イメージ();
         source.imgShisetsuTel = item.get電話番号イメージ();
-        source.layout = Layouts.必須;
+        if (サービス区分コード1.equals(item.getSabisuKubun())) {
+            setLayout1(source);
+        } else if (サービス区分コード2.equals(item.getSabisuKubun())) {
+            setLayout2(source);
+        } else {
+            setLayout3(source);
+        }
         return source;
+    }
+
+    private void setLayout1(IinShinsakaishiryoA3ReportSource source) {
+        if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_6;
+        } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_7;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_8;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_9;
+        }
+    }
+
+    private void setLayout2(IinShinsakaishiryoA3ReportSource source) {
+        if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_10;
+        } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_11;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_12;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_13;
+        }
+    }
+
+    private void setLayout3(IinShinsakaishiryoA3ReportSource source) {
+        if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_2;
+        } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_3;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン1.equals(item.get特記パターン())) {
+            source.layout = INT_4;
+        } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
+                && 特記パターン2.equals(item.get特記パターン())) {
+            source.layout = INT_5;
+        }
     }
 
     private IinShinsakaishiryoA3ReportSource editSource1(IinShinsakaishiryoA3ReportSource source) {

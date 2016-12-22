@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class IinShinsakaishiryoA3Group1Editor implements IIinShinsakaishiryoA3Editor {
 
+    private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_4 = 4;
     private static final int INT_25 = 25;
@@ -90,7 +90,7 @@ public class IinShinsakaishiryoA3Group1Editor implements IIinShinsakaishiryoA3Ed
             source.listZenkaiｙukokikan2_1 = shinsakaishiryoList.get(index + INT_25).get前回期間_下();
             source.listYukokikan2_1 = RString.EMPTY;
         }
-        source.layout = Layouts.鑑;
+        source.layout = INT_1;
         return source;
     }
 
