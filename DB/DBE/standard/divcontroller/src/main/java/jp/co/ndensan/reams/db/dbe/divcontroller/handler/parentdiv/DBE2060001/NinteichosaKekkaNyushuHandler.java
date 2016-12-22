@@ -50,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class NinteichosaKekkaNyushuHandler {
 
     private final NinteichosaKekkaNyushuDiv div;
-    private static final RString 使用する = new RString("1");
     private static final RString 調査結果を登録するボタン = new RString("btnKekkaTouroku");
     private static final RString 調査票入手を完了するボタン = new RString("btnChousaResultKanryo");
     private static final int INT_0 = 0;
