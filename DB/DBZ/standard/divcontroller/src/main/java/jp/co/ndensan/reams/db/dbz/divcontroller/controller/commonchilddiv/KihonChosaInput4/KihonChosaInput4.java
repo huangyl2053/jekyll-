@@ -94,7 +94,7 @@ public class KihonChosaInput4 {
      * @return 認定基本調査入力Divを持つResponseData
      */
     public ResponseData<KihonChosaInput4Div> onBeforeOpenDialog_btnHiryaku(KihonChosaInput4Div div) {
-        div.getKoudoShogai().setTokkijikoNo(NinteiChosaTokkiJikou.被虐的.get認定調査票_特記情報_認定調査特記事項番号());
+        div.getKoudoShogai().setTokkijikoNo(NinteiChosaTokkiJikou.被害的.get認定調査票_特記情報_認定調査特記事項番号());
         setDailogDataPassing(div);
         return ResponseData.of(div).respond();
     }

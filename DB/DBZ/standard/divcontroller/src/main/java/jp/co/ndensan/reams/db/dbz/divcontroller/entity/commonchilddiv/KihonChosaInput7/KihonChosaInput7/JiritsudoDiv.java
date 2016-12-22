@@ -159,7 +159,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
+    public void  setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
         this.getShogaiKoreisha().setBtnShogaiKoreisha(btnShogaiKoreisha);
     }
 
@@ -169,7 +169,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
+    public void  setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
         this.getShogaiKoreisha().setRadShogaiKoreisha(radShogaiKoreisha);
     }
 
@@ -179,7 +179,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
+    public void  setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
         this.getNinchishaJiritsudo().setBtnNinchishaJiritsudo(btnNinchishaJiritsudo);
     }
 
@@ -189,7 +189,7 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
+    public void  setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
         this.getNinchishaJiritsudo().setRadNinchishaJiritsudo(radNinchishaJiritsudo);
     }
 

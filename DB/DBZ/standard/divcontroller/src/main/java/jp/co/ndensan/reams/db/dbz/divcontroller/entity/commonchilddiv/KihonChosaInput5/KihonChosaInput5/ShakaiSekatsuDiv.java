@@ -239,7 +239,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKusuri(ButtonDialog btnKusuri) {
+    public void  setBtnKusuri(ButtonDialog btnKusuri) {
         this.getKusuri().setBtnKusuri(btnKusuri);
     }
 
@@ -249,7 +249,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKusuri(RadioButton radKusuri) {
+    public void  setRadKusuri(RadioButton radKusuri) {
         this.getKusuri().setRadKusuri(radKusuri);
     }
 
@@ -259,7 +259,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKingakuKanri(ButtonDialog btnKingakuKanri) {
+    public void  setBtnKingakuKanri(ButtonDialog btnKingakuKanri) {
         this.getKingakuKanri().setBtnKingakuKanri(btnKingakuKanri);
     }
 
@@ -269,7 +269,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKingakuKanri(RadioButton radKingakuKanri) {
+    public void  setRadKingakuKanri(RadioButton radKingakuKanri) {
         this.getKingakuKanri().setRadKingakuKanri(radKingakuKanri);
     }
 
@@ -279,7 +279,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnIshiKetei(ButtonDialog btnIshiKetei) {
+    public void  setBtnIshiKetei(ButtonDialog btnIshiKetei) {
         this.getIshiKetei().setBtnIshiKetei(btnIshiKetei);
     }
 
@@ -289,7 +289,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadIshiKetei(RadioButton radIshiKetei) {
+    public void  setRadIshiKetei(RadioButton radIshiKetei) {
         this.getIshiKetei().setRadIshiKetei(radIshiKetei);
     }
 
@@ -299,7 +299,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnShudan(ButtonDialog btnShudan) {
+    public void  setBtnShudan(ButtonDialog btnShudan) {
         this.getShudan().setBtnShudan(btnShudan);
     }
 
@@ -309,7 +309,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShudan(RadioButton radShudan) {
+    public void  setRadShudan(RadioButton radShudan) {
         this.getShudan().setRadShudan(radShudan);
     }
 
@@ -319,7 +319,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKaiMono(ButtonDialog btnKaiMono) {
+    public void  setBtnKaiMono(ButtonDialog btnKaiMono) {
         this.getKaiMono().setBtnKaiMono(btnKaiMono);
     }
 
@@ -329,7 +329,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKaiMono(RadioButton radKaiMono) {
+    public void  setRadKaiMono(RadioButton radKaiMono) {
         this.getKaiMono().setRadKaiMono(radKaiMono);
     }
 
@@ -339,7 +339,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKantanChori(ButtonDialog btnKantanChori) {
+    public void  setBtnKantanChori(ButtonDialog btnKantanChori) {
         this.getKantanChori().setBtnKantanChori(btnKantanChori);
     }
 
@@ -349,7 +349,7 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadKantanChori(RadioButton radKantanChori) {
+    public void  setRadKantanChori(RadioButton radKantanChori) {
         this.getKantanChori().setRadKantanChori(radKantanChori);
     }
 
