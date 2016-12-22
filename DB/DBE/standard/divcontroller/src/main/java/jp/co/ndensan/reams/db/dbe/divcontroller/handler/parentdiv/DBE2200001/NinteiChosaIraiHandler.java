@@ -850,8 +850,8 @@ public class NinteiChosaIraiHandler {
                     調査員情報リスト.add(調査員情報);
                 }
             }
-            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
-                    ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, Integer.parseInt(row.getShichosonCode().toString()));
+            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(),
+                    KamokuCode.EMPTY, Integer.parseInt(div.getDgChosaItakusakiIchiran().getActiveRow().getHokenshaCode().toString()));
             RString 認定調査提出期限 = RString.EMPTY;
             RString 認定調査委期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             RString 認定調査作成期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
