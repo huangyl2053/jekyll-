@@ -33,21 +33,33 @@
             ON dbT5101."shinseishoKanriNo" = dbT5102."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
             ON dbT5105."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
-            AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND dbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND dbT5105."ninteichosaKanryoYMD" IS NOT NULL
-            AND dbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND dbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-            AND dbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND dbT5105."maskingKanryoYMD" IS NOT NULL
-            AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND dbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-            AND dbT5105."centerSoshinYMD" IS NOT NULL
         LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" AS dbT7211
             ON dbT7211."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
-        WHERE dbT5101."logicalDeletedFlag" = False
+        <where>
+            AND dbT5101."logicalDeletedFlag" = False
+            AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."ninteichosaKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteichosaKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+            AND dbT5105."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+            AND dbT5105."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
+            AND dbT5105."ichijiHanteiKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+            AND dbT5105."ninteiShinsakaiKanryoYMD" <![CDATA[<>]]> ''
+            AND dbT5105."maskingKanryoYMD" IS NOT NULL
+            AND dbT5105."maskingKanryoYMD" <![CDATA[<>]]> ''
             <if test="is未出力">
-                AND dbT7211."centerSoshinChushutsuYMD" IS NULL
+                AND (
+                    dbT7211."centerSoshinChushutsuYMD" IS NULL
+                    OR dbT7211."centerSoshinChushutsuYMD" = ''
+                )
             </if>
             <if test="has二次判定日_開始">
                 AND #{二次判定日_開始} <![CDATA[<=]]> dbT5102."nijiHanteiNinteiYukoKaishiYMD"
@@ -55,6 +67,7 @@
             <if test="has二次判定日_終了">
                 AND dbT5102."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{二次判定日_終了}
             </if>
+        </where>
         ORDER BY dbT5101."hihokenshaNo"
         LIMIT(#{件数})
     </select>

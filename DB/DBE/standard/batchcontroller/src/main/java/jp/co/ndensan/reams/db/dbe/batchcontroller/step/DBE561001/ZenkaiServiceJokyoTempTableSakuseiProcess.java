@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.Cente
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiChosahyoServiceJokyoTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiServiceJokyoTempTableEditorEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -31,7 +29,6 @@ public class ZenkaiServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase
             + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getZenkaiNinteichosahyoServiceJokyo");
     private CenterTransmissionProcessParameter parameter;
     private CenterTransmissionMybitisParamter mybitisParamter;
-    private ICenterTransmissionMapper mapper;
     private ZenkaiChosahyoServiceJokyoTempEntity tempEntity;
     private List<RString> 申請書管理番号リスト;
     private boolean isデータあり;
@@ -44,10 +41,6 @@ public class ZenkaiServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase
         isデータあり = false;
         申請書管理番号リスト = parameter.get申請書管理番号リスト();
         mybitisParamter = parameter.toCenterTransmissionMybitisParamter();
-        mapper = getMapper(ICenterTransmissionMapper.class);
-        if (parameter.is転入死亡情報出力()) {
-            get申請書管理番号リスト(mapper.getShinseishoKanriNoByTennyuShibo(mybitisParamter));
-        }
         mybitisParamter.setShinseishoKanriNoList(申請書管理番号リスト);
         tempEntity = new ZenkaiChosahyoServiceJokyoTempEntity();
     }
@@ -91,13 +84,4 @@ public class ZenkaiServiceJokyoTempTableSakuseiProcess extends BatchKeyBreakBase
         return !before.getShinseishoKanriNo().equals(current.getShinseishoKanriNo())
                 || !before.getKoroshoIfShikibetsuCode().equals(current.getKoroshoIfShikibetsuCode());
     }
-
-    private void get申請書管理番号リスト(List<DbT5129TennyuShiboEntity> shinseishoKanriNoList) {
-        for (DbT5129TennyuShiboEntity entity : shinseishoKanriNoList) {
-            if (!申請書管理番号リスト.contains(entity.getShinseishoKanriNo().value())) {
-                申請書管理番号リスト.add(entity.getShinseishoKanriNo().value());
-            }
-        }
-    }
-
 }

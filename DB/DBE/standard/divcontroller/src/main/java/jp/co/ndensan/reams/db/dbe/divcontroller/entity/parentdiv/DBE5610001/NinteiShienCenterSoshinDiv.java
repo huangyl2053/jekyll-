@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiShienCenterSoshinDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +24,6 @@ public class NinteiShienCenterSoshinDiv extends Panel {
      */
     @JsonProperty("KensakuJoken")
     private KensakuJokenDiv KensakuJoken;
-    @JsonProperty("TaishoshaIchiran")
-    private TaishoshaIchiranDiv TaishoshaIchiran;
     @JsonProperty("ShutsuryokuJoken")
     private ShutsuryokuJokenDiv ShutsuryokuJoken;
 
@@ -51,24 +49,6 @@ public class NinteiShienCenterSoshinDiv extends Panel {
     @JsonProperty("KensakuJoken")
     public void setKensakuJoken(KensakuJokenDiv KensakuJoken) {
         this.KensakuJoken = KensakuJoken;
-    }
-
-    /*
-     * getTaishoshaIchiran
-     * @return TaishoshaIchiran
-     */
-    @JsonProperty("TaishoshaIchiran")
-    public TaishoshaIchiranDiv getTaishoshaIchiran() {
-        return TaishoshaIchiran;
-    }
-
-    /*
-     * setTaishoshaIchiran
-     * @param TaishoshaIchiran TaishoshaIchiran
-     */
-    @JsonProperty("TaishoshaIchiran")
-    public void setTaishoshaIchiran(TaishoshaIchiranDiv TaishoshaIchiran) {
-        this.TaishoshaIchiran = TaishoshaIchiran;
     }
 
     /*
@@ -110,56 +90,6 @@ public class NinteiShienCenterSoshinDiv extends Panel {
     @JsonIgnore
     public void  setTxtNijiHanteibi(TextBoxDateRange txtNijiHanteibi) {
         this.getKensakuJoken().setTxtNijiHanteibi(txtNijiHanteibi);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtDispMax() {
-        return this.getKensakuJoken().getTxtDispMax();
-    }
-
-    @JsonIgnore
-    public void  setTxtDispMax(TextBoxNum txtDispMax) {
-        this.getKensakuJoken().setTxtDispMax(txtDispMax);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getKensakuJoken().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getKensakuJoken().setBtnKensaku(btnKensaku);
-    }
-
-    @JsonIgnore
-    public Button getBtnClear() {
-        return this.getKensakuJoken().getBtnClear();
-    }
-
-    @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
-        this.getKensakuJoken().setBtnClear(btnClear);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgTaishoshaIchiran_Row> getDgTaishoshaIchiran() {
-        return this.getTaishoshaIchiran().getDgTaishoshaIchiran();
-    }
-
-    @JsonIgnore
-    public void  setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
-        this.getTaishoshaIchiran().setDgTaishoshaIchiran(dgTaishoshaIchiran);
-    }
-
-    @JsonIgnore
-    public ButtonDownLoad getBtnTaishoshaOutput() {
-        return this.getTaishoshaIchiran().getBtnTaishoshaOutput();
-    }
-
-    @JsonIgnore
-    public void  setBtnTaishoshaOutput(ButtonDownLoad btnTaishoshaOutput) {
-        this.getTaishoshaIchiran().setBtnTaishoshaOutput(btnTaishoshaOutput);
     }
 
     @JsonIgnore
