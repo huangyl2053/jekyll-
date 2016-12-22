@@ -385,17 +385,9 @@ public class ShujiiIkenshoSakuseiIrai {
                     rirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
                 }
                 manager.save主治医意見書作成依頼情報(
-<<<<<<< Updated upstream
-                        create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo), EntityDataState.Added);
-
+                create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo,共通日), EntityDataState.Added);
                 RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
                 ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
-=======
-                        create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo,共通日), EntityDataState.Added);
-                
-                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());        
-                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo);
->>>>>>> Stashed changes
                 NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param);
 
                 NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
@@ -415,15 +407,9 @@ public class ShujiiIkenshoSakuseiIrai {
                 manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
                 manager.save主治医意見書作成依頼情報(
                         create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
-<<<<<<< Updated upstream
-                                Integer.parseInt(row.getRirekiNo().toString()) + 1), EntityDataState.Added);
+                                Integer.parseInt(row.getRirekiNo().toString()) + 1,共通日), EntityDataState.Added);
 
                 ShujiiIkenshoSakuseiIraiParameter param2 = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
-=======
-                                Integer.parseInt(row.getRirekiNo().toString()) + 1,共通日), EntityDataState.Added);
-                      
-                ShujiiIkenshoSakuseiIraiParameter param2 = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo);
->>>>>>> Stashed changes
                 NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param2);
                 NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
                 shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
@@ -491,24 +477,6 @@ public class ShujiiIkenshoSakuseiIrai {
         主治医意見書記入用紙OCRList = new ArrayList<>();
         主治医意見書記入用紙DList = new ArrayList<>();
         for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
-<<<<<<< Updated upstream
-            if (row.getSelected() && !div.getChkirai().getSelectedKeys().isEmpty()) {
-                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
-                int RirekiNo = Integer.parseInt(row.getRirekiNo().toString());
-                if (新規.equals(row.getStatus())) {
-                    RirekiNo = 数字_1;
-                    if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
-                        RirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
-                    }
-                }
-                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
-                        RirekiNo, getHihokenshaNo(div));
-                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
-                manager.save主治医意見書作成依頼情報(create主治医意見書作成依頼情報(ikenshoIraiJoho, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, div, row),
-                        EntityDataState.Modified);
-            }
-=======
->>>>>>> Stashed changes
             createChoHyoData(div, row);
         }
         toPrint(reportManager);
