@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaibiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,8 +25,6 @@ public class ShinsakaiKaisaibiDiv extends Panel {
     private TextBoxDateRange txtShinsakaiKaisaibi;
     @JsonProperty("txtMaxKensu")
     private TextBoxNum txtMaxKensu;
-    @JsonProperty("btnKensaku")
-    private Button btnKensaku;
     @JsonProperty("btnKensakuClear")
     private Button btnKensakuClear;
 
@@ -70,24 +68,6 @@ public class ShinsakaiKaisaibiDiv extends Panel {
     @JsonProperty("txtMaxKensu")
     public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.txtMaxKensu = txtMaxKensu;
-    }
-
-    /*
-     * getbtnKensaku
-     * @return btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public Button getBtnKensaku() {
-        return btnKensaku;
-    }
-
-    /*
-     * setbtnKensaku
-     * @param btnKensaku btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku = btnKensaku;
     }
 
     /*
