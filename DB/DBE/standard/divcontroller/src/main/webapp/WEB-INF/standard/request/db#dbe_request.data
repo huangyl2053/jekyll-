@@ -214,6 +214,7 @@ dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnModoru
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnPulish
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnShutsutyoku
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onLoad
+dbe/db/dbe/IkenshoSakuseiHoshuShokai/onSort_dgIkenshoSakuseiHoshu
 dbe/db/dbe/IkenshoSakuseiIrai/onChange_radJyushin
 dbe/db/dbe/IkenshoSakuseiIrai/onChange_radKigen
 dbe/db/dbe/IkenshoSakuseiIrai/onClick_Chkprint
@@ -714,6 +715,7 @@ dbe/db/dbe/PublicationShiryoShinsakai/onClick_chkPrintChoyoJimu
 dbe/db/dbe/PublicationShiryoShinsakai/onClick_radSakuseiJoken
 dbe/db/dbe/PublicationShiryoShinsakai/onClick_syutuHeDa
 dbe/db/dbe/PublicationShiryoShinsakai/onLoad
+dbe/db/dbe/RenkeiDataTorikomi/afterUpload
 dbe/db/dbe/RenkeiDataTorikomi/onClick_JikkouBtn
 dbe/db/dbe/RenkeiDataTorikomi/onClick_JikkouCheck
 dbe/db/dbe/RenkeiDataTorikomi/onClick_SetItiran
@@ -743,7 +745,7 @@ dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onLoad
 dbe/db/dbe/ShinchokuDataOutput/btn_check
 dbe/db/dbe/ShinchokuDataOutput/onActive
 dbe/db/dbe/ShinchokuDataOutput/onChange_ddlSichoson
-dbe/db/dbe/ShinchokuDataOutput/onChange_txtHihokenshaCode
+dbe/db/dbe/ShinchokuDataOutput/onChange_txtChuishutsuRange
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnHihokensha
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnJokenClear
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnKensaku
@@ -887,6 +889,7 @@ dbe/db/dbe/ShinsakaiShiryoPublication/onClick_btnToReturn
 dbe/db/dbe/ShinsakaiTaishosha/btn_Shokai
 dbe/db/dbe/ShinsakaiTaishosha/onLoad
 dbe/db/dbe/ShinsakaiToroku/onChange_radTaishoshaJotai
+dbe/db/dbe/ShinsakaiToroku/onChange_txtTaishoshaMaxHyojiKensu
 dbe/db/dbe/ShinsakaiToroku/onClick_btnRyooutput
 dbe/db/dbe/ShinsakaiToroku/onClick_btnRyooutputBoffer
 dbe/db/dbe/ShinsakaiToroku/onClick_btnSave
@@ -901,6 +904,7 @@ dbe/db/dbe/ShinsakauIinHoshuShokai/onClick_BtnPulish
 dbe/db/dbe/ShinsakauIinHoshuShokai/onClick_BtnShutsutyoku
 dbe/db/dbe/ShinsakauIinHoshuShokai/onClick_btnBackToKensaku
 dbe/db/dbe/ShinsakauIinHoshuShokai/onLoad
+dbe/db/dbe/ShinsakauIinHoshuShokai/onSort_dgShinsakaiIinHoshu
 dbe/db/dbe/ShinseiJohoInput/onChange_radShinseishaKubun
 dbe/db/dbe/ShinseiJohoInput/onClick_btnCommonSaveShinsei
 dbe/db/dbe/ShinseiJohoInput/onClick_btnDecideJogaiIin
