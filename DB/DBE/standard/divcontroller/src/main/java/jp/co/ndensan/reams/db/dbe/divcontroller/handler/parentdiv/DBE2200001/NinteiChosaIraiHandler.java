@@ -44,9 +44,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
@@ -660,24 +658,34 @@ public class NinteiChosaIraiHandler {
      */
     public void init印刷条件DIV() {
         RDate nowDate = RDate.getNowDate();
-        init認定調査依頼書(nowDate);
-        init認定調査票_デザイン用紙(nowDate);
-        init認定調査票_OCR(nowDate);
-        init認定調査票_特記事項(nowDate);
-        init認定調査票_その他(nowDate);
-        init提出期限(nowDate);
+        RString 保険者コード = div.getDgChosaItakusakiIchiran().getActiveRow().getHokenshaCode();
         div.getTxthokkoymd().setValue(nowDate);
+        if (中野市の地方公共団体コード.equals(保険者コード)) {
+            div.getCcdBunshoBangoInput().initialize(ReportIdDBZ.DBE220001.getReportId());
+            div.getCcdBunshoBangoInput().setDisabled(false);
+        } else {
+            div.getCcdBunshoBangoInput().initialize(null);
+            div.getCcdBunshoBangoInput().setDisabled(true);
+        }
+        init認定調査依頼書(nowDate, 保険者コード);
+        init認定調査票_デザイン用紙(nowDate, 保険者コード);
+        init認定調査票_OCR(nowDate, 保険者コード);
+        init認定調査票_特記事項(nowDate, 保険者コード);
+        init認定調査票_その他(nowDate, 保険者コード);
+        init提出期限(nowDate);
     }
 
-    private void init認定調査依頼書(RDate nowDate) {
+    private void init認定調査依頼書(RDate nowDate, RString 保険者コード) {
         List<RString> selectedItems = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, nowDate, SubGyomuCode.DBE認定支援))) {
+        RString 認定調査依頼_手動_認定調査依頼書
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, nowDate, SubGyomuCode.DBE認定支援, 保険者コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査依頼書)) {
             selectedItems.add(DDL_KEY0);
         }
         div.getChkirai().setSelectedItemsByKey(selectedItems);
     }
 
-    private void init認定調査票_デザイン用紙(RDate nowDate) {
+    private void init認定調査票_デザイン用紙(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
@@ -688,7 +696,7 @@ public class NinteiChosaIraiHandler {
         }
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項デザイン用紙));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY1);
             }
         }
@@ -700,7 +708,7 @@ public class NinteiChosaIraiHandler {
         }
     }
 
-    private void init認定調査票_OCR(RDate nowDate) {
+    private void init認定調査票_OCR(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
@@ -711,7 +719,7 @@ public class NinteiChosaIraiHandler {
         }
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項OCR));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY1);
             }
         }
@@ -723,7 +731,7 @@ public class NinteiChosaIraiHandler {
         }
     }
 
-    private void init認定調査票_特記事項(RDate nowDate) {
+    private void init認定調査票_特記事項(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_項目有り_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
@@ -740,7 +748,7 @@ public class NinteiChosaIraiHandler {
         }
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY2, CHKNAME_特記事項_フリータイプ));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY2);
             }
         }
@@ -752,18 +760,18 @@ public class NinteiChosaIraiHandler {
         }
     }
 
-    private void init認定調査票_その他(RDate nowDate) {
+    private void init認定調査票_その他(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査差異チェック票_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_差異チェック票));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY0);
             }
         }
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_概況特記));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY1);
             }
         }
@@ -864,14 +872,7 @@ public class NinteiChosaIraiHandler {
                         : RString.EMPTY;
             }
 
-            RString 文書番号 = RString.EMPTY;
-            if (中野市の地方公共団体コード.equals(row.getShichosonCode())) {
-                BunshoNo 文書番号管理
-                        = BunshoNoFinderFactory.createInstance().get文書番号管理(ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
-                if (文書番号 != null) {
-                    文書番号 = 文書番号管理.edit文書番号();
-                }
-            }
+            RString 文書番号 = div.getCcdBunshoBangoInput().get文書番号();
             for (ChosainJoho 調査員情報 : 調査員情報リスト) {
                 YubinNo 郵便番号 = 調査員情報.get郵便番号();
                 AtenaJusho 住所 = 調査員情報.get住所();
