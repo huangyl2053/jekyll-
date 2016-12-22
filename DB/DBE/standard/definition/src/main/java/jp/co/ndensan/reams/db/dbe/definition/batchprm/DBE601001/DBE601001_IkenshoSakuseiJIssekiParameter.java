@@ -24,6 +24,7 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
     private static final String IKENSHO_KIJUNBI_FROM = "ikenshoKijunbiFrom";
     private static final String IKENSHO_SHUKEI = "ikenshoKijunbiKubun";
     private static final String HOKENSYA = "hokensya";
+    private static final String SHOKISAI_HOKENSYA = "shokisaiHokensya";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8314555813503538349L;
 
@@ -37,6 +38,8 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
     private RString ikenshoKijunbiKubun;
     @BatchParameter(key = HOKENSYA, name = "保険者")
     private RString hokensya;
+    @BatchParameter(key = SHOKISAI_HOKENSYA, name = "証記載保険者")
+    private RString shokisaiHokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<IkenshoJissekiIchiranKey> keyJoho;
 
@@ -53,16 +56,19 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
      * @param ikenshoKinyubiFrom 意見書記入日FROM
      * @param ikenshoKinyubiTo 意見書記入日TO
      * @param hokensya 保険者
+     * @param shokisaiHokensya 証記載保険者
      * @param keyJoho キー情報Entityリスト
      */
     public DBE601001_IkenshoSakuseiJIssekiParameter(RString syohyoSyuturyoku,
             RString ikenshoKinyubiFrom,
             RString ikenshoKinyubiTo,
             RString hokensya,
+            RString shokisaiHokensya,
             List<IkenshoJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.ikenshoKijunbiFrom = ikenshoKinyubiFrom;
         this.ikenshoKijunbiTo = ikenshoKinyubiTo;
+        this.shokisaiHokensya = shokisaiHokensya;
         this.hokensya = hokensya;
         this.keyJoho = keyJoho;
     }
@@ -77,6 +83,7 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
                 ikenshoKijunbiFrom,
                 ikenshoKijunbiTo,
                 ikenshoKijunbiKubun,
+                shokisaiHokensya,
                 hokensya,
                 keyJoho);
     }

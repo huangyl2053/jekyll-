@@ -59,9 +59,13 @@ public class NinteichosaIraiHenkoEditor implements INinteichosaIraiHenkoEditor {
         source.listChosaIraihenko_4 = item.get氏名() == null ? RString.EMPTY : item.get氏名().value();
         source.listChosaIraihenko_5 = item.get被保険者番号();
         source.listChosaIraihenko_6 = dateFormat(item.get生年月日());
-        source.listChosaIraihenko_7 = item.get性別() == null ? RString.EMPTY : Seibetsu.toValue(item.get性別().value()).get名称();
+        source.listChosaIraihenko_7 = item.get性別() == null ? RString.EMPTY
+                : RString.isNullOrEmpty(item.get性別().value())
+                ? RString.EMPTY : Seibetsu.toValue(item.get性別().value()).get名称();
         source.listChosaIraihenko_8 = dateFormat(item.get認定申請年月日());
-        source.listChosaIraihenko_9 = item.get認定申請区分_申請時_コード() == null ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.
+        source.listChosaIraihenko_9 = item.get認定申請区分_申請時_コード() == null ? RString.EMPTY
+                : RString.isNullOrEmpty(item.get認定申請区分_申請時_コード().value())
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.
                 toValue(item.get認定申請区分_申請時_コード().value()).get名称();
         source.listChosaIraihenko_10 = item.get変更回数();
         source.listChosaIraihenko_11 = item.get変更前調査事業所();

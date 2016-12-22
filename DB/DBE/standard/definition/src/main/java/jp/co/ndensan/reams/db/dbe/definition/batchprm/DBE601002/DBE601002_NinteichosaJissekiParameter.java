@@ -24,6 +24,7 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
     private static final String CHOSA_KIJUNBI_FROM = "chosaKijunbiFrom";
     private static final String CHOSA_KIJUNBI_KUBUN = "chosaKijunbiKubun";
     private static final String HOKENSYA = "hokensya";
+    private static final String SHOKISAI_HOKENSYA = "shokisaiHokensya";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8314555813503538349L;
 
@@ -37,6 +38,8 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
     private RString chosaKijunbiKubun;
     @BatchParameter(key = HOKENSYA, name = "保険者")
     private RString hokensya;
+    @BatchParameter(key = SHOKISAI_HOKENSYA, name = "証記載保険者")
+    private RString shokisaiHokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<ChosahyoJissekiIchiranKey> keyJoho;
 
@@ -54,6 +57,7 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
      * @param chosaKijunbiTo 基準日TO
      * @param chosaKijunbiKubun 基準日区分
      * @param hokensya 保険者
+     * @param shoKisaiHokensya 証記載保険者
      * @param keyJoho キー情報Entityリスト
      */
     public DBE601002_NinteichosaJissekiParameter(RString syohyoSyuturyoku,
@@ -61,12 +65,14 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
             RString chosaKijunbiTo,
             RString chosaKijunbiKubun,
             RString hokensya,
+            RString shoKisaiHokensya,
             List<ChosahyoJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.chosaKijunbiFrom = chosaKijunbiFrom;
         this.chosaKijunbiTo = chosaKijunbiTo;
         this.chosaKijunbiKubun = chosaKijunbiKubun;
         this.hokensya = hokensya;
+        this.shokisaiHokensya = shoKisaiHokensya;
         this.keyJoho = keyJoho;
     }
 
@@ -81,6 +87,7 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
                 chosaKijunbiTo,
                 chosaKijunbiKubun,
                 hokensya,
+                shokisaiHokensya,
                 keyJoho);
     }
 }
