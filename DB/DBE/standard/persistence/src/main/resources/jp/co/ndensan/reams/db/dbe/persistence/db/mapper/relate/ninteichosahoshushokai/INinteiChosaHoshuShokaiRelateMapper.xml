@@ -35,9 +35,6 @@
         AND			T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND			T5105."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND			T5105."ninteichosaKanryoYMD" IS NOT NULL
-        AND			T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND			T5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND			T5105."centerSoshinYMD" IS NULL
         INNER JOIN	rgdb."DbT5201NinteichosaIraiJoho" AS T5201
         ON			T5201."shinseishoKanriNo"=T5601."shinseishoKanriNo"
         AND			T5201."ninteichosaIraiRirekiNo"=T5601."ninteichosaIraiRirekiNo"

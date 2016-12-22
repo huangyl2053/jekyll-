@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.hanteikekkajohoichiran.HanteiKekkaIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkajohoichiran.HanteiKekkaIchiranA4ReportSource;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku.IHanteiKekkaJohoShuturyokuMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -49,14 +51,16 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getHanteiKekkaIchiranList");
     private static final RString REPORTNAME = new RString("審査判定結果一覧");
-    private static final int PAGECOUNT = 10;
+    private static final int ページあたりレコード数 = 10;
     private static final RString 一次判定結果_認知症加算_1 = new RString("1");
     private static final RString 一次判定結果_認知症加算_2 = new RString("2");
     private static final RString 一次判定結果_認知症加算_3 = new RString("3");
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private RDateTime システム時刻;
     private RString 出力対象;
+    private int 総ページ数;
     private int index;
+    private HanteiKekkaJohoShuturyokuMybatisParameter mybatisParameter;
 
     @BatchWriter
     private BatchReportWriter<HanteiKekkaIchiranA4ReportSource> batchReportWriter;
@@ -65,7 +69,8 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
     @Override
     protected void initialize() {
         システム時刻 = RDateTime.now();
-        index = 1;
+        index = 0;
+
     }
 
     @Override
@@ -94,20 +99,30 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
     }
 
     @Override
+    protected void beforeExecute() {
+        mybatisParameter = processParameter.toHanteiKekkaJohoShuturyokuMybatisParameter();
+        int 総レコード数 = getMapper(IHanteiKekkaJohoShuturyokuMapper.class).countHanteiKekkaIchiranList(mybatisParameter);
+        int レコード余り = 総レコード数 % ページあたりレコード数;
+        int ページ算出値 = 総レコード数 / ページあたりレコード数;
+        if (レコード余り > 0) {
+            総ページ数 = ページ算出値 + 1;
+        } else {
+            総ページ数 = ページ算出値;
+        }
+    }
+
+    @Override
     protected void process(HanteiKekkaIchiranEntity entity) {
         entity.setTitle(REPORTNAME);
         entity.set出力対象(出力対象);
         entity.setPrintTimeStamp(システム時刻);
-        if (index % PAGECOUNT > 0) {
-            entity.set当前頁((index - (index % PAGECOUNT)) / PAGECOUNT + 1);
+        index = index + 1;
+        if (index % ページあたりレコード数 > 0) {
+            entity.set当前頁((index - (index % ページあたりレコード数)) / ページあたりレコード数 + 1);
         } else {
-            entity.set当前頁(index / PAGECOUNT);
+            entity.set当前頁(index / ページあたりレコード数);
         }
-        if (entity.getCount() % PAGECOUNT > 0) {
-            entity.set総頁((entity.getCount() - (entity.getCount() % PAGECOUNT)) / PAGECOUNT + 1);
-        } else {
-            entity.set総頁(entity.getCount() / PAGECOUNT);
-        }
+        entity.set総頁(総ページ数);
         entity.setNo(index);
         if (entity.get認定申請区分_申請時() != null && !entity.get認定申請区分_申請時().isEmpty()) {
             entity.set認定申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時()).get略称());
@@ -156,7 +171,6 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         }
         HanteiKekkaIchiranReport report = new HanteiKekkaIchiranReport(entity);
         report.writeBy(reportSourceWriter);
-        index = index + 1;
     }
 
 }

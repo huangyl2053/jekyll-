@@ -31,11 +31,11 @@ import static org.mockito.Mockito.when;
  *
  * @author n8429
  */
-public class DBE310100_OcrDataFileTest extends DbeTestDacBase {
+public class DBE250001_NinteiChoshaKekkaTorikomiTest {
 
     private static BatchFlowTestHelper flowHelper;
 
-    public DBE310100_OcrDataFileTest() {
+    public DBE250001_NinteiChoshaKekkaTorikomiTest() {
     }
 
     @BeforeClass

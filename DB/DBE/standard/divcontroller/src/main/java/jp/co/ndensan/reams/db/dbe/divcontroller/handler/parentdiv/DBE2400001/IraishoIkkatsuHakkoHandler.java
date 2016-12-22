@@ -70,7 +70,8 @@ public class IraishoIkkatsuHakkoHandler {
         initializeShujiiChkShinseiTani();
         initializeNinteiChkShinseiTani();
         setNinteiChkShinseiTani(true);
-        div.getChkNinteiChosaIraiChohyo().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkNinteiChosaIraiIchiran().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkNinteiChosaShinseiTani().setSelectedItemsByKey(Collections.<RString>emptyList());
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_NINTEIO);
@@ -99,7 +100,9 @@ public class IraishoIkkatsuHakkoHandler {
         div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
         setShujiiChkShinseiTani(true);
-        div.getChkShujiiIkenshoShutsuryoku().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkShujiiIkenshoSakuseiIrai().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkShujiiIkenshoSakuseiSeikyu().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getChkShujiiIkenshoShinseiTani().setSelectedItemsByKey(Collections.<RString>emptyList());
         div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_SHUJII);
@@ -152,14 +155,14 @@ public class IraishoIkkatsuHakkoHandler {
      */
     public void setChkShinseiTani() {
         if (STATE_NINTEIO.equals(div.getState())) {
-            if (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(CHOHYO_CHECKED)) {
+            if (!div.getChkNinteiChosaShinseiTani().getSelectedKeys().isEmpty()) {
                 setNinteiChkShinseiTani(false);
             } else {
                 setNinteiChkShinseiTani(true);
             }
         }
         if (STATE_SHUJII.equals(div.getState())) {
-            if (div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SHUTSU_CHECKED)) {
+            if (!div.getChkShujiiIkenshoShinseiTani().getSelectedKeys().isEmpty()) {
                 setShujiiChkShinseiTani(false);
             } else {
                 setShujiiChkShinseiTani(true);
@@ -295,6 +298,10 @@ public class IraishoIkkatsuHakkoHandler {
         setChkSelected(div.getChkTokkiKomokuAri(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, 基準日, flag);
         setChkSelected(div.getChkTokkiKomokuNashi(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, 基準日, flag);
         setChkSelected(div.getChkTokkiFree(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, 基準日, flag);
+        if(flag){
+        setChkSelected(div.getChkNinteiChosahyoSonota(),false);
+        setChkSelected(div.getChkTokkijikoTenyuryoku(),false);
+        }
     }
 
     private boolean is使用ByConfig(ConfigNameDBE key, RDate 基準日) {

@@ -282,7 +282,7 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         return ファイル名;
     }
 
-   private RString 共有ファイルを引き出す(RString path, RString fileName) {
+    private RString 共有ファイルを引き出す(RString path, RString fileName) {
         if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
             return getFilePath(path, fileName);
         }
@@ -297,15 +297,17 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA4.getImageFolderPath()));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA4.getImageFolderPath())).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 
 }

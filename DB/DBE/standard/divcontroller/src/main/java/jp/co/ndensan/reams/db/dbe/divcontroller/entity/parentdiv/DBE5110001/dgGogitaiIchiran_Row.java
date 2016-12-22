@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Dec 10 14:19:59 JST 2016 
+ * Thu Dec 22 12:51:39 JST 2016 
  */
 
 
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  */
 
 public class dgGogitaiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
 
     private RString jyotai;
     private TextBoxNum gogitaiNumber;
@@ -32,6 +32,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
     private TextBoxTime gogitaiKaishiYoteiTime;
     private TextBoxTime gogitaiShuryoYoteiTime;
     private RString kaisaiBashoCode;
+    private RString kaisaiBasho;
     private Boolean seishinkaiSonzai;
     private Boolean gogitaiDummyFlag;
     private TextBoxNum yoteiTeiin;
@@ -48,6 +49,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         this.gogitaiKaishiYoteiTime = new TextBoxTime();
         this.gogitaiShuryoYoteiTime = new TextBoxTime();
         this.kaisaiBashoCode = RString.EMPTY;
+        this.kaisaiBasho = RString.EMPTY;
         this.seishinkaiSonzai = false;
         this.gogitaiDummyFlag = false;
         this.yoteiTeiin = new TextBoxNum();
@@ -61,6 +63,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         this.setOriginalData("gogitaiKaishiYoteiTime", gogitaiKaishiYoteiTime);
         this.setOriginalData("gogitaiShuryoYoteiTime", gogitaiShuryoYoteiTime);
         this.setOriginalData("kaisaiBashoCode", kaisaiBashoCode);
+        this.setOriginalData("kaisaiBasho", kaisaiBasho);
         this.setOriginalData("seishinkaiSonzai", seishinkaiSonzai);
         this.setOriginalData("gogitaiDummyFlag", gogitaiDummyFlag);
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
@@ -68,7 +71,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         this.setOriginalData("iinTeiin", iinTeiin);
     }
 
-    public dgGogitaiIchiran_Row(RString jyotai, TextBoxNum gogitaiNumber, RString gogitaiName, TextBoxDate yukoKaishiYMD, TextBoxDate yukoShuryoYMD, TextBoxTime gogitaiKaishiYoteiTime, TextBoxTime gogitaiShuryoYoteiTime, RString kaisaiBashoCode, Boolean seishinkaiSonzai, Boolean gogitaiDummyFlag, TextBoxNum yoteiTeiin, TextBoxNum jidoWariateTeiin, TextBoxNum iinTeiin) {
+    public dgGogitaiIchiran_Row(RString jyotai, TextBoxNum gogitaiNumber, RString gogitaiName, TextBoxDate yukoKaishiYMD, TextBoxDate yukoShuryoYMD, TextBoxTime gogitaiKaishiYoteiTime, TextBoxTime gogitaiShuryoYoteiTime, RString kaisaiBashoCode, RString kaisaiBasho, Boolean seishinkaiSonzai, Boolean gogitaiDummyFlag, TextBoxNum yoteiTeiin, TextBoxNum jidoWariateTeiin, TextBoxNum iinTeiin) {
         super();
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("gogitaiNumber", gogitaiNumber);
@@ -78,6 +81,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         this.setOriginalData("gogitaiKaishiYoteiTime", gogitaiKaishiYoteiTime);
         this.setOriginalData("gogitaiShuryoYoteiTime", gogitaiShuryoYoteiTime);
         this.setOriginalData("kaisaiBashoCode", kaisaiBashoCode);
+        this.setOriginalData("kaisaiBasho", kaisaiBasho);
         this.setOriginalData("seishinkaiSonzai", seishinkaiSonzai);
         this.setOriginalData("gogitaiDummyFlag", gogitaiDummyFlag);
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
@@ -91,6 +95,7 @@ public class dgGogitaiIchiran_Row extends DataRow {
         this.gogitaiKaishiYoteiTime = gogitaiKaishiYoteiTime;
         this.gogitaiShuryoYoteiTime = gogitaiShuryoYoteiTime;
         this.kaisaiBashoCode = kaisaiBashoCode;
+        this.kaisaiBasho = kaisaiBasho;
         this.seishinkaiSonzai = seishinkaiSonzai;
         this.gogitaiDummyFlag = gogitaiDummyFlag;
         this.yoteiTeiin = yoteiTeiin;
@@ -128,6 +133,10 @@ public class dgGogitaiIchiran_Row extends DataRow {
 
     public RString getKaisaiBashoCode() {
         return kaisaiBashoCode;
+    }
+
+    public RString getKaisaiBasho() {
+        return kaisaiBasho;
     }
 
     public Boolean getSeishinkaiSonzai() {
@@ -188,6 +197,11 @@ public class dgGogitaiIchiran_Row extends DataRow {
     public void setKaisaiBashoCode(RString kaisaiBashoCode) {
         this.setOriginalData("kaisaiBashoCode", kaisaiBashoCode);
         this.kaisaiBashoCode = kaisaiBashoCode;
+    }
+
+    public void setKaisaiBasho(RString kaisaiBasho) {
+        this.setOriginalData("kaisaiBasho", kaisaiBasho);
+        this.kaisaiBasho = kaisaiBasho;
     }
 
     public void setSeishinkaiSonzai(Boolean seishinkaiSonzai) {

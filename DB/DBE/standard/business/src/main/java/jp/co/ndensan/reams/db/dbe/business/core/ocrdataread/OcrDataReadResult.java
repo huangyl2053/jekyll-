@@ -214,6 +214,7 @@ public class OcrDataReadResult {
         this.過去14日間に受けた治療 = RString.EMPTY;
         this.認知症高齢者の日常生活自立度 = RString.EMPTY;
         this.障害高齢者の日常生活自立度 = RString.EMPTY;
+        this.イメージファイル = new ArrayList<>();
 
     }
 
@@ -342,6 +343,8 @@ public class OcrDataReadResult {
         RString 行項目_認知症高齢者の日常生活自立度 = RString.EMPTY;
         RString 行項目_障害高齢者の日常生活自立度 = RString.EMPTY;
 
+        List<RString> ファイルList = new ArrayList<>();
+
         List<RString> lineList = line.split(",");
         int size = lineList.size();
         if (size == 32) {
@@ -441,31 +444,31 @@ public class OcrDataReadResult {
             行項目_認知症高齢者の日常生活自立度 = lineList.get(61);
             行項目_障害高齢者の日常生活自立度 = lineList.get(62);
         } else {
-            イメージファイル = new ArrayList<>();
+
             for (int i = 0; i < size; i++) {
                 if (lineList.get(i).contains("\\")) {
                     RString fileTest = lineList.get(i).substring(lineList.get(i).lastIndexOf("\\") + 1);
                     if (fileTest.contains("01i011")) {
                         RString fileName = new RString("C0001.png");
-                        イメージファイル.add(fileName);
+                        ファイルList.add(fileName);
                     } else if (fileTest.contains("01i048")) {
                         RString fileName = new RString("C0004.png");
-                        イメージファイル.add(fileName);
+                        ファイルList.add(fileName);
                     } else if (fileTest.contains("01i049")) {
                         RString fileName = new RString("C0005.png");
-                        イメージファイル.add(fileName);
+                        ファイルList.add(fileName);
                     } else if (fileTest.contains("01i050")) {
                         RString fileName = new RString("C0006.png");
-                        イメージファイル.add(fileName);
+                        ファイルList.add(fileName);
                     } else if (fileTest.contains("01i051")) {
                         RString fileName = new RString("G0001.png");
-                        イメージファイル.add(fileName);
+                        ファイルList.add(fileName);
                     } else if (fileTest.contains("01i038")) {
                         RString fileName = new RString("C0002.png");
-                        イメージファイル.add(fileName);
+                        ファイルList.add(fileName);
                     } else if (fileTest.contains("01i039")) {
                         RString fileName = new RString("C0003.png");
-                        イメージファイル.add(fileName);
+                        ファイルList.add(fileName);
                     }
                 }
             }
@@ -478,7 +481,7 @@ public class OcrDataReadResult {
             データ行Entity.set保険者番号(行項目_保険者番号);
             データ行Entity.set申請日(to西暦_年(行項目_申請日));
             データ行Entity.set被保険者番号(行項目_被保険者番号);
-            データ行Entity.set行項目_6(行項目_実施日時);
+            データ行Entity.set行項目_6(to西暦_年(行項目_実施日時));
             データ行Entity.set行項目_7(行項目_実施場所);
             データ行Entity.set行項目_8(行項目_記入者);
             データ行Entity.set行項目_9(行項目_所属機関);
@@ -572,6 +575,10 @@ public class OcrDataReadResult {
             データ行Entity.set障害高齢者の日常生活自立度(行項目_障害高齢者の日常生活自立度);
             データ行Entity.set認知症高齢者の日常生活自立度(行項目_認知症高齢者の日常生活自立度);
 
+            ocrDataデータ行Entity = データ行Entity;
+        } else {
+            OcrJohoOcrDataRecordEntity データ行Entity = new OcrJohoOcrDataRecordEntity();
+            データ行Entity.setファイルList(ファイルList);
             ocrDataデータ行Entity = データ行Entity;
         }
     }

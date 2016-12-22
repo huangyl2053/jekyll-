@@ -30,7 +30,6 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
     private final FlexibleDate 審査会開催日TO;
     private final boolean 件数Flag;
     private final int 件数;
-    private final boolean gamenFlag;
     private final List<ShinsaiinJissekiIchiranKey> keyJoho;
 
     private ShinsaiinJissekiIchiranMybitisParamter(boolean batchFlag,
@@ -40,7 +39,6 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
             FlexibleDate 審査会開催日TO,
             boolean 件数Flag,
             int 件数,
-            boolean gamenFlag,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         this.batchFlag = batchFlag;
         this.審査会開催日FROMFlag = 審査会開催日FROMFlag;
@@ -49,7 +47,6 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
         this.審査会開催日TO = 審査会開催日TO;
         this.件数Flag = 件数Flag;
         this.件数 = 件数;
-        this.gamenFlag = gamenFlag;
         this.keyJoho = keyJoho;
     }
 
@@ -73,7 +70,6 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
                 審査会開催日TO,
                 !RString.isNullOrEmpty(最大表示件数),
                 Integer.parseInt(最大表示件数.toString()),
-                true,
                 null);
     }
 
@@ -97,7 +93,6 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
                 審査会開催日TO,
                 false,
                 0,
-                false,
                 keyJoho);
     }
 }

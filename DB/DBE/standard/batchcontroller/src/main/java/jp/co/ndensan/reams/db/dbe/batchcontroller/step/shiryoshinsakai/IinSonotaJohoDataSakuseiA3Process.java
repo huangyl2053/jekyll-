@@ -100,9 +100,7 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
-//        entity.setHihokenshaNo(RString.EMPTY);
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
-//        entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
         if (shinsakaiOrder != entity.getShinsakaiOrder()) {
             存在ファイルindex = 0;
@@ -299,15 +297,17 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA3.getImageFolderPath()));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA3.getImageFolderPath())).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 
 }

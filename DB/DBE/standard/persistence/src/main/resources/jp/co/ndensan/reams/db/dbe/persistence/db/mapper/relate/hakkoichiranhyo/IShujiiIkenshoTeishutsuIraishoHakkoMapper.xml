@@ -74,6 +74,7 @@
             , DbT5302."ikenshoSakuseiKaisuKubun"
             , DbT5302."ikenshoKinyuYMD"
             , DbT5302."ikenshoReadYMD"
+            , DbT5302."ikenshoIraiKubun"
             , DbT5912."shujiiName"
             , DbT7051."shichosonMeisho" AS 保険者名
             , DbT5602."ikenshoBettoShinryohi"
@@ -133,10 +134,10 @@
         </foreach>
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag"= false 
-        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL 
-        AND DbT5105."centerSoshinYMD" IS NULL 
+        AND (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiWariateKanryoYMD" = '')
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105."centerSoshinYMD" IS NULL OR DbT5105."centerSoshinYMD" = '')
         <if test="is依頼日From">
             AND DbT5301."ikenshoSakuseiIraiYMD"<![CDATA[>=]]> #{iraiFromYMD}
         </if>
@@ -145,18 +146,18 @@
         </if>
         <if test="!is意見書作成未印刷_印刷済">
             <if test="is意見書作成未印刷">
-                AND DbT5301."iraishoShutsuryokuYMD" IS NULL
+                AND (DbT5301."iraishoShutsuryokuYMD" IS NULL OR DbT5105."iraishoShutsuryokuYMD" = '')
             </if>
             <if test="is意見書作成印刷済">
-                AND DbT5301."iraishoShutsuryokuYMD" IS NOT NULL
+                AND (DbT5301."iraishoShutsuryokuYMD" IS NOT NULL AND DbT5301."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         <if test="!is意見書未印刷_印刷済">
             <if test="is意見書未印刷">
-                AND DbT5301."ikenshoShutsuryokuYMD" IS NULL
+                AND (DbT5301."ikenshoShutsuryokuYMD" IS NULL OR DbT5105."ikenshoShutsuryokuYMD" = '')
             </if>
             <if test="is意見書印刷済">
-                AND DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL
+                AND (DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL AND DbT5301."ikenshoShutsuryokuYMD" <![CDATA[<>]]> '')
             </if>
         </if>
         ORDER BY

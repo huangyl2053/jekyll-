@@ -82,6 +82,7 @@ public class IkenshoSakuseiJissekiShokai {
         IkenshoJissekiIchiranMybitisParamter paramter = IkenshoJissekiIchiranMybitisParamter.createGamenParamter(false,
                 意見書記入日FROM,
                 意見書記入日TO,
+                div.getRadKensakuKijunbi().getSelectedKey(),
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
                 new RString(div.getTxtMaxKensu().getValue().toString()));
         Message message = getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter));
