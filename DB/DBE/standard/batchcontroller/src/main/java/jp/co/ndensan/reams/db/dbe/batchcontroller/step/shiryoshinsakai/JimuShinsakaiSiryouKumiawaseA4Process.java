@@ -121,12 +121,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
 
     @Override
     protected void process() {
-        RString reportId = ReportIdDBE.DBE517901.getReportId().value();
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517901.getReportId().value())
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
-
-
 
                     JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
@@ -160,8 +157,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                     get一次判定結果票情報(shinseishoKanriNo),
                     get特記事項情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo),
-                    reportId, is審査会対象一覧印刷済み);
+                    getその他資料情報(shinseishoKanriNo), is審査会対象一覧印刷済み);
             report.writeBy(reportSourceWriter);
             is審査会対象一覧印刷済み = true;
         }
