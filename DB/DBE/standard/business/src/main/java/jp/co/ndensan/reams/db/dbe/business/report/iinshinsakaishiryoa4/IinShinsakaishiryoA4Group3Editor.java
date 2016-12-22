@@ -128,6 +128,11 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
             editイメージ(source, 短冊リスト);
             set特記事項イメージ(source);
         }
+        setLayout(source);
+        return source;
+    }
+
+    private void setLayout(IinShinsakaishiryoA4ReportSource source) {
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())
                 && 全面.equals(item.get特記パターン())) {
             source.layout = INT_5;
@@ -141,7 +146,6 @@ public class IinShinsakaishiryoA4Group3Editor implements IIinShinsakaishiryoA4Ed
                 && 短冊.equals(item.get特記パターン())) {
             source.layout = INT_8;
         }
-        return source;
     }
 
     private IinShinsakaishiryoA4ReportSource set特記事項テキスト(IinShinsakaishiryoA4ReportSource source) {
