@@ -214,6 +214,7 @@ dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnModoru
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnPulish
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnShutsutyoku
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onLoad
+dbe/db/dbe/IkenshoSakuseiHoshuShokai/onSort_dgIkenshoSakuseiHoshu
 dbe/db/dbe/IkenshoSakuseiIrai/onChange_radJyushin
 dbe/db/dbe/IkenshoSakuseiIrai/onChange_radKigen
 dbe/db/dbe/IkenshoSakuseiIrai/onClick_Chkprint
@@ -901,6 +902,7 @@ dbe/db/dbe/ShinsakauIinHoshuShokai/onClick_BtnPulish
 dbe/db/dbe/ShinsakauIinHoshuShokai/onClick_BtnShutsutyoku
 dbe/db/dbe/ShinsakauIinHoshuShokai/onClick_btnBackToKensaku
 dbe/db/dbe/ShinsakauIinHoshuShokai/onLoad
+dbe/db/dbe/ShinsakauIinHoshuShokai/onSort_dgShinsakaiIinHoshu
 dbe/db/dbe/ShinseiJohoInput/onChange_radShinseishaKubun
 dbe/db/dbe/ShinseiJohoInput/onClick_btnCommonSaveShinsei
 dbe/db/dbe/ShinseiJohoInput/onClick_btnDecideJogaiIin
