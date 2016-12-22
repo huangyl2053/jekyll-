@@ -31,11 +31,17 @@ public class DBE250001_NinteiChoshaKekkaTorikomi extends BatchFlowBase<DBE250001
     private int fileIndex = 0;
     private List<RString> filePathList;
     private static final String OCRデータの読み込み_PROCESS = "OCRデータの読み込み_PROCESS";
+    private OcrDataReadProcessParameter processParameter;
 
     @Override
     protected void defineFlow() {
         readAllOcrDataFile();
         while (fileIndex < filePathList.size()) {
+            if (processParameter == null) {
+                processParameter = new OcrDataReadProcessParameter(RDate.getNowDate(), filePathList.get(fileIndex));
+            } else {
+                processParameter.setファイルPath(filePathList.get(fileIndex));
+            }
             executeStep(OCRデータの読み込み_PROCESS);
             fileIndex++;
         }
@@ -44,8 +50,7 @@ public class DBE250001_NinteiChoshaKekkaTorikomi extends BatchFlowBase<DBE250001
     @Step(OCRデータの読み込み_PROCESS)
     IBatchFlowCommand executeOCRデータの読み込み() {
         return loopBatch(OcrDataReadProcess.class)
-                .arguments(new OcrDataReadProcessParameter(RDate.getNowDate(),
-                                filePathList.get(fileIndex)))
+                .arguments(processParameter)
                 .define();
     }
 
