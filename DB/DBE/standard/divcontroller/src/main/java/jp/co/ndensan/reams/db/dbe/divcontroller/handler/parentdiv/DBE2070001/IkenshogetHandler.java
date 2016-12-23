@@ -112,10 +112,11 @@ public class IkenshogetHandler {
     private void 意見書入手モード(List<IkenSyoNyuSyuBusiness> 意見書入手List) {
 
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
+        IkenSyoNyuSyuBusiness business;
         int completeCount = 0;
         int notCount = 0;
+
         Decimal 最大表示件数 = div.getTxtMaxNumber().getValue();
-        IkenSyoNyuSyuBusiness business;
         int disPlayMaxCount = 最大表示件数.intValue() > 意見書入手List.size() ? 意見書入手List.size() : 最大表示件数.intValue();
         for (int i = 0; i < disPlayMaxCount; i++) {
             business = 意見書入手List.get(i);
@@ -149,7 +150,7 @@ public class IkenshogetHandler {
         }
         div.getTxtMisyori().setValue(new Decimal(notCount));
         div.getTxtKanryouKano().setValue(new Decimal(completeCount));
-        div.getTxtGokei().setValue(new Decimal(意見書入手List.size()));
+        div.getTxtGokei().setValue(new Decimal(notCount + completeCount));
         div.getDgNinteiTaskList().setDataSource(rowList);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大表示件数.intValue());
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書入手List.size());
@@ -192,7 +193,9 @@ public class IkenshogetHandler {
      * 状態ラジオボタンの表示処理です。
      */
     public void setJyotaiKubun() {
-        init最大表示件数();
+        if (div.getTxtMaxNumber().getValue() == null) {
+            init最大表示件数();
+        }
         RString key = div.getRadJyotaiKubun().getSelectedKey();
         RString 状態区分 = new RString("");
 
