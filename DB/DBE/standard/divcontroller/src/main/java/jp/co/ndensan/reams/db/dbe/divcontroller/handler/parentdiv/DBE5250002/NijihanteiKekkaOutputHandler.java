@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.Ha
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuFinder;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -24,10 +23,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -91,14 +88,12 @@ public class NijihanteiKekkaOutputHandler {
         nijidiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(new Decimal(検索制御_最大取得件数.toString()));
         List<dgTaishoshaIchiran_Row> dgKoufuKaishuList = new ArrayList<>();
         nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgKoufuKaishuList);
-        hokenjouhou();
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHanteiDateFrom().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getLblNijiHanteiDate().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHnateiDateTo().setDisplayNone(true);
         ShichosonSecurityJoho shichosonSecurityJoho
                 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, UrControlDataFactory.createInstance().getLoginInfo().getUserId());
-        nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
-        nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(shichosonSecurityJoho.get市町村情報().get市町村名称());
+        nijidiv.getKensakuJoken().getCcdShinseishaFinder().getSaikinShorishaDiv().initialize(shichosonSecurityJoho.get市町村情報().get証記載保険者番号());
     }
 
     private RString nullToEmpty(RString obj) {
@@ -110,6 +105,8 @@ public class NijihanteiKekkaOutputHandler {
 
     /**
      * 判定結果情報出力(保険者)検索処理する。
+     *
+     * @param 被保険者番号
      */
     public void kennsaku(RString 被保険者番号) {
         List<dgTaishoshaIchiran_Row> dgTaishoshaIchiranList = new ArrayList<>();
@@ -836,16 +833,4 @@ public class NijihanteiKekkaOutputHandler {
         return PersonalData.of(申請書管理番号, expandedInfo);
     }
 
-    private void hokenjouhou() {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString loginId = controlData.getLoginInfo().getUserId();
-        List<AuthorityItem> 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(loginId);
-        if (市町村識別ID != null && !市町村識別ID.isEmpty()) {
-            KoseiShichosonJoho 市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID.get(0).getItemId());
-            if (市町村情報 != null) {
-                nijidiv.getKensakuJoken().getTxtHokenshaNo().setValue(new RString(市町村情報.get証記載保険者番号().toString()));
-                nijidiv.getKensakuJoken().getTxtHokenshaName().setValue(市町村情報.get市町村名称());
-            }
-        }
-    }
 }
