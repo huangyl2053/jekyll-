@@ -41,7 +41,7 @@ public class NinteiShinseiValidationHandler {
     public ValidationMessageControlPairs check_登録する(NinteiShinseiRenrakusakiJohoDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getRenrakusakiNyuryoku().getTxtTelNo().getDomain().isEmpty()
-                || div.getRenrakusakiNyuryoku().getTxtMobileNo().getDomain().isEmpty()) {
+                && div.getRenrakusakiNyuryoku().getTxtMobileNo().getDomain().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり,
                     "自宅電話番号　または　携帯電話番号"),
                     div.getRenrakusakiNyuryoku().getTxtTelNo(), div.getRenrakusakiNyuryoku().getTxtMobileNo()));
