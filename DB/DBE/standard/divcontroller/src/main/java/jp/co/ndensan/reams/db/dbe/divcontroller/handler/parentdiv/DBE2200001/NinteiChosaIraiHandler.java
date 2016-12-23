@@ -178,7 +178,11 @@ public class NinteiChosaIraiHandler {
             row.getWaritsukeZumi().setValue(new Decimal(認定調査委託先.getWaritsukesumiKensu()));
             row.setChosaItakusakiJusho(nullToEmpty(認定調査委託先.getJusho()));
             row.setChosaItakusakiTelNo(認定調査委託先.getTelNo() == null ? RString.EMPTY : 認定調査委託先.getTelNo().value());
-            row.setChosaItakusakiKubun(ChosaItakuKubunCode.toValue(認定調査委託先.getKikanKubun()).get名称());
+            if (!認定調査委託先.getKikanKubun().trim().isEmpty()) {
+                row.setChosaItakusakiKubun(ChosaItakuKubunCode.toValue(認定調査委託先.getKikanKubun()).get名称());
+            } else {
+                row.setChosaItakusakiKubun(RString.EMPTY);
+            }
             if (is単一保険者) {
                 row.setHokenshaCode(nullToEmpty(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value()));
                 row.setHokenshaName(nullToEmpty(div.getCcdHokenshaList().getSelectedItem().get市町村名称()));
@@ -221,7 +225,7 @@ public class NinteiChosaIraiHandler {
                 }
             }
             row.getWaritsukeZumi().setValue(new Decimal(調査員.getWaritsukesumiKensu()));
-            if (!調査員.getChosainShikaku().trim().isEmpty()) {
+            if (調査員.getChosainShikaku() != null && !調査員.getChosainShikaku().trim().isEmpty()) {
                 row.setChosainShikaku(Sikaku.toValue(調査員.getChosainShikaku()).get名称());
             }
             row.setChosaKanoNinzuPerMonth(new RString(調査員.getChosaKanoNinzuPerMonth()));
@@ -655,10 +659,10 @@ public class NinteiChosaIraiHandler {
     /**
      * 印刷条件DIVの初期化処理です。
      *
+     * @param 保険者コード 保険者コード
      */
-    public void init印刷条件DIV() {
+    public void init印刷条件DIV(RString 保険者コード) {
         RDate nowDate = RDate.getNowDate();
-        RString 保険者コード = div.getDgChosaItakusakiIchiran().getActiveRow().getHokenshaCode();
         div.getTxthokkoymd().setValue(nowDate);
         if (中野市の地方公共団体コード.equals(保険者コード)) {
             div.getCcdBunshoBangoInput().initialize(ReportIdDBZ.DBE220001.getReportId());
@@ -809,9 +813,10 @@ public class NinteiChosaIraiHandler {
     /**
      * 認定調査依頼書Itemを作成します。
      *
+     * @param 保険者コード 保険者コード
      * @return ChosaIraishoHeadItemのList
      */
-    public List<ChosaIraishoHeadItem> create認定調査依頼書Item() {
+    public List<ChosaIraishoHeadItem> create認定調査依頼書Item(RString 保険者コード) {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
@@ -850,8 +855,8 @@ public class NinteiChosaIraiHandler {
                     調査員情報リスト.add(調査員情報);
                 }
             }
-            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(),
-                    KamokuCode.EMPTY, Integer.parseInt(div.getDgChosaItakusakiIchiran().getActiveRow().getHokenshaCode().toString()));
+            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
+                    ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, Integer.parseInt(保険者コード.toString()));
             RString 認定調査提出期限 = RString.EMPTY;
             RString 認定調査委期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             RString 認定調査作成期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -1124,10 +1129,9 @@ public class NinteiChosaIraiHandler {
     /**
      * 認定調査票_特記事項印刷用パラメータを作成します。
      *
-     * @param 両面出力フラグ 両面出力フラグ
      * @return 認定調査票_特記事項パラメータ
      */
-    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項パラメータ(boolean 両面出力フラグ) {
+    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項パラメータ() {
         List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
 
@@ -1161,13 +1165,6 @@ public class NinteiChosaIraiHandler {
                     被保険者番号リスト.get(1),
                     row.getHihokenshaShimei());
             itemList.add(item);
-            if (両面出力フラグ) {
-                itemList.add(new ChosahyoTokkijikoBusiness(
-                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
-            }
         }
         return itemList;
     }
