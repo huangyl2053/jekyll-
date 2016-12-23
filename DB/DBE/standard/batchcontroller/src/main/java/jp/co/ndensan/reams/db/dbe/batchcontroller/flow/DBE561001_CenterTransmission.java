@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.CenterTransmissionProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ChosaItemTempTableSakuseiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.SoshinDataSakuseiTaishoshaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.IkenItemTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ServiceJokyoTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.UpdateGaibuRenkeiDataoutputJohoProcess;
@@ -16,9 +17,12 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiChosaItem
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiServiceJokyoTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.SoshinDataSakuseiTaishoshaTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.batch.flow.value.NewTempTableCreateOption;
+import jp.co.ndensan.reams.uz.uza.batch.flow.value.PKColumn;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_CenterTransmissionParameter> {
 
+    private static final String 送信データ作成対象者一覧一時テーブル = "SoshinDataSakuseiTaishoshaTempTableSakusei";
+    private static final String 送信データ作成対象者抽出 = "SoshinDataSakuseiTaishoshaChushutsu";
     private static final String 調査票概況調査サービスの状況一時テーブル = "NinteichosahyoServiceJokyoTempTableSakusei";
     private static final String 前回調査票概況調査サービスの状況一時テーブル = "ZenkaiNinteichosahyoServiceJokyoTempTableSakusei";
     private static final String 要介護認定主治医意見書意見項目一時テーブル = "ShujiiIkenshoIkenItemTempTableSakusei";
@@ -40,6 +46,8 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
 
     @Override
     protected void defineFlow() {
+        executeStep(送信データ作成対象者一覧一時テーブル);
+        executeStep(送信データ作成対象者抽出);
         executeStep(調査票概況調査サービスの状況一時テーブル);
         executeStep(前回調査票概況調査サービスの状況一時テーブル);
         executeStep(要介護認定主治医意見書意見項目一時テーブル);
@@ -52,6 +60,24 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
             executeStep(DB出力要介護認定申請情報);
             executeStep(DB出力外部連携データ抽出情報);
         }
+    }
+
+    @Step(送信データ作成対象者一覧一時テーブル)
+    IBatchFlowCommand createSoshinDataSakuseiTaishoshaTempTable() {
+        PKColumn primaryKey = new PKColumn(PrimaryKey.Name, PrimaryKey.Column);
+        NewTempTableCreateOption option = new NewTempTableCreateOption().primaryKey(primaryKey);
+        return createTempTable(SoshinDataSakuseiTaishoshaTempEntity.TABLE_NAME, SoshinDataSakuseiTaishoshaTempEntity.class, option).define();
+    }
+
+    /**
+     * 画面で指定された条件に該当する対象者を抽出します。
+     *
+     * @return バッチコマンド
+     */
+    @Step(送信データ作成対象者抽出)
+    IBatchFlowCommand insertSoshinDataSakuseiTaishoshaTempTable() {
+        return loopBatch(SoshinDataSakuseiTaishoshaChushutsuProcess.class)
+                .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
     }
 
     /**
@@ -140,5 +166,11 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
     IBatchFlowCommand updateGaibuRenkeiDataoutputJoho() {
         return loopBatch(UpdateGaibuRenkeiDataoutputJohoProcess.class)
                 .arguments(new CenterTransmissionUpdateProcessParameter(出力された申請書管理番号)).define();
+    }
+
+    private static class PrimaryKey {
+
+        static final String Name = "SoshinDataSakuseiTaishoshaTemp_pkey";
+        static final String Column = "shinseishoKanriNo";
     }
 }

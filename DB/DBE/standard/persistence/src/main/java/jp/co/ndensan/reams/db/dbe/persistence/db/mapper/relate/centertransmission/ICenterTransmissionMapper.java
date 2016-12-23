@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.SoshinDataSakuseiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiChosaItemEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.ZenkaiServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
@@ -96,4 +97,12 @@ public interface ICenterTransmissionMapper {
      * @return List<DbT7211GaibuRenkeiDataoutputJohoEntity>
      */
     List<DbT7211GaibuRenkeiDataoutputJohoEntity> getGaibuRenkeiDataoutputJoho(CenterTransmissionUpdateMybitisParamter paramter);
+
+    /**
+     * センター送信データ作成の対象者を取得します。
+     *
+     * @param paramter CenterTransmissionMybitisParamter
+     * @return List<YokaigoNinteiTempEntity>
+     */
+    List<SoshinDataSakuseiTaishoshaTempEntity> getDataSakuseiTaishosha(CenterTransmissionMybitisParamter paramter);
 }

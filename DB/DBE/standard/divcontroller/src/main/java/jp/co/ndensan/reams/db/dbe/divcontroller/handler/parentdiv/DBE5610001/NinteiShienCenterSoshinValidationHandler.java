@@ -45,38 +45,9 @@ public class NinteiShienCenterSoshinValidationHandler {
         return validationMessages;
     }
 
-    /**
-     * 対象者一覧0件チェックを行います。
-     *
-     * @param 一覧件数 一覧件数
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 対象者一覧0件チェック(int 一覧件数) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (一覧件数 == 0) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShienMessages.該当データなし));
-        }
-        return validationMessages;
-    }
-
-    /**
-     * 対象者一覧未選択チェックを行います。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 対象者一覧未選択チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getDgTaishoshaIchiran().getSelectedItems() == null || div.getDgTaishoshaIchiran().getSelectedItems().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShienMessages.対象者一覧未選択チェック));
-        }
-        return validationMessages;
-    }
-
     private static enum NinteiShienMessages implements IValidationMessage {
 
-        二次判定日大小関係チェック(UrErrorMessages.終了日が開始日以前),
-        該当データなし(UrErrorMessages.該当データなし),
-        対象者一覧未選択チェック(UrErrorMessages.対象者を選択);
+        二次判定日大小関係チェック(UrErrorMessages.終了日が開始日以前);
         private final Message message;
 
         private NinteiShienMessages(IMessageGettable message, String... replacements) {

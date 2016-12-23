@@ -12,11 +12,9 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.Cente
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEditEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -57,7 +55,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
             + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getCenterTransmissionData");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE561001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
 
     private CenterTransmissionProcessParameter parameter;
     private CenterTransmissionMybitisParamter mybitisParamter;
@@ -134,6 +132,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     protected void afterExecute() {
         outputShinseishoKanriNo.setValue(出力された申請書管理番号);
         outputJokenhyoFactory();
+        csvWriterCenterTransmission.close();
         manager.spool(filename);
     }
 
@@ -158,7 +157,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(条件(new RString("【申請書管理番号】"), get申請書管理番号For出力条件()));
         出力条件.add(条件(new RString("【転入/死亡情報出力区分】"), get情報出力区分For出力条件(parameter.is転入死亡情報出力())));
         出力条件.add(条件(new RString("【二次判定日(開始)】"), parameter.get二次判定開始日()));
         出力条件.add(条件(new RString("【二次判定日(終了)】"), parameter.get二次判定終了日()));
@@ -170,26 +168,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         条件.append(バッチパラメータ名);
         条件.append(値);
         return 条件.toRString();
-    }
-
-    private RString get申請書管理番号For出力条件() {
-        if (parameter.is転入死亡情報出力()) {
-            ICenterTransmissionMapper mapper = getMapper(ICenterTransmissionMapper.class);
-            for (DbT5129TennyuShiboEntity entity : mapper.getShinseishoKanriNoByTennyuShibo(mybitisParamter)) {
-                if (!申請書管理番号リスト.contains(entity.getShinseishoKanriNo().value())) {
-                    申請書管理番号リスト.add(entity.getShinseishoKanriNo().value());
-                }
-            }
-        }
-        RStringBuilder 条件 = new RStringBuilder();
-        for (RString rString : 申請書管理番号リスト) {
-            条件.append(rString);
-            条件.append(", ");
-        }
-        if (0 < 条件.length()) {
-            return 条件.toRString().substring(0, 条件.length() - 2);
-        }
-        return RString.EMPTY;
     }
 
     private RString get情報出力区分For出力条件(boolean is情報出力) {

@@ -61,6 +61,31 @@ public class DbT5202NinteichosahyoGaikyoChosaDac implements ISaveable<DbT5202Nin
     }
 
     /**
+     * 主キーで認定調査票（概況調査）（子）を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return DbT5202NinteichosahyoGaikyoChosaEntityの{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5202NinteichosahyoGaikyoChosaEntity> selectByKey(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_TMP.toString()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5202NinteichosahyoGaikyoChosa.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号))).
+                toList(DbT5202NinteichosahyoGaikyoChosaEntity.class);
+    }
+
+    /**
      * 認定調査票（概況調査）（子）を全件返します。
      *
      * @return DbT5202NinteichosahyoGaikyoChosaEntityの{@code list}

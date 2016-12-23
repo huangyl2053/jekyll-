@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class ShujiiIkenshoSakuseiIraiHandler {
 
-    private static final RString 主治医意見書作成期限設定方法_2 = new RString("2");
     private static final RString 新規 = new RString("新規");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -87,19 +86,12 @@ public class ShujiiIkenshoSakuseiIraiHandler {
      */
     public void init(SearchResult<Shujiiikenshosakuseiirai> 申請者情報一覧) {
         set申請者一覧(申請者情報一覧);
-
         if (!申請者情報一覧.records().isEmpty()) {
+            //TODO チェック制約違反でシステムエラーになるため、一旦、コメントアウト
+            //Cause: org.postgresql.util.PSQLException: ERROR: value for domain "DbUDD003HokenshaNo" violates check constraint "DbUDD003_ck保険者no_ge_0"
             Shujiiikenshosakuseiirai rec = 申請者情報一覧.records().get(findLastIndex(申請者情報一覧));
-            div.getCcdNinteishinseishaFinder().updateSaikinShorisha(rec.get被保険者番号(), rec.getTemp_被保険者氏名().value());
-            div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
-        }
-        if (主治医意見書作成期限設定方法_2.equals(
-                DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-            div.getRadkigen().setDisabled(true);
-            div.getTxtkigenymd().setDisabled(true);
-        } else {
-            div.getRadkigen().setDisabled(false);
-            div.getTxtkigenymd().setDisabled(false);
+//            div.getCcdNinteishinseishaFinder().updateSaikinShorisha(rec.get被保険者番号(), rec.getTemp_被保険者氏名().value());
+//            div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
         }
     }
 

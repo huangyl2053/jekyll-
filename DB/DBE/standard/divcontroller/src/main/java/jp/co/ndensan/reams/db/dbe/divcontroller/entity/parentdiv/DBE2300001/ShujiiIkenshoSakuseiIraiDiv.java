@@ -249,13 +249,23 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkirai() {
-        return this.getIraiprint().getChkirai();
+    public Label getPrintName() {
+        return this.getIraiprint().getPrintName();
     }
 
     @JsonIgnore
-    public void  setChkirai(CheckBoxList Chkirai) {
-        this.getIraiprint().setChkirai(Chkirai);
+    public void  setPrintName(Label printName) {
+        this.getIraiprint().setPrintName(printName);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getIraiSho() {
+        return this.getIraiprint().getIraiSho();
+    }
+
+    @JsonIgnore
+    public void  setIraiSho(CheckBoxList iraiSho) {
+        this.getIraiprint().setIraiSho(iraiSho);
     }
 
     @JsonIgnore
@@ -289,6 +299,26 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Space getSp2() {
+        return this.getIraiprint().getSp2();
+    }
+
+    @JsonIgnore
+    public void  setSp2(Space Sp2) {
+        this.getIraiprint().setSp2(Sp2);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getIraiIchiranHyo() {
+        return this.getIraiprint().getIraiIchiranHyo();
+    }
+
+    @JsonIgnore
+    public void  setIraiIchiranHyo(CheckBoxList iraiIchiranHyo) {
+        this.getIraiprint().setIraiIchiranHyo(iraiIchiranHyo);
+    }
+
+    @JsonIgnore
     public Space getSp() {
         return this.getIraiprint().getSp();
     }
@@ -299,13 +329,83 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkprint() {
-        return this.getIraiprint().getChkprint();
+    public Space getSp3() {
+        return this.getIraiprint().getSp3();
     }
 
     @JsonIgnore
-    public void  setChkprint(CheckBoxList Chkprint) {
-        this.getIraiprint().setChkprint(Chkprint);
+    public void  setSp3(Space Sp3) {
+        this.getIraiprint().setSp3(Sp3);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getKinyoYoshi() {
+        return this.getIraiprint().getKinyoYoshi();
+    }
+
+    @JsonIgnore
+    public void  setKinyoYoshi(CheckBoxList kinyoYoshi) {
+        this.getIraiprint().setKinyoYoshi(kinyoYoshi);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getKinyuYoshiOCR() {
+        return this.getIraiprint().getKinyuYoshiOCR();
+    }
+
+    @JsonIgnore
+    public void  setKinyuYoshiOCR(CheckBoxList kinyuYoshiOCR) {
+        this.getIraiprint().setKinyuYoshiOCR(kinyuYoshiOCR);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getKinyuYoshiDesign() {
+        return this.getIraiprint().getKinyuYoshiDesign();
+    }
+
+    @JsonIgnore
+    public void  setKinyuYoshiDesign(CheckBoxList kinyuYoshiDesign) {
+        this.getIraiprint().setKinyuYoshiDesign(kinyuYoshiDesign);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getSeikyuSho() {
+        return this.getIraiprint().getSeikyuSho();
+    }
+
+    @JsonIgnore
+    public void  setSeikyuSho(CheckBoxList seikyuSho) {
+        this.getIraiprint().setSeikyuSho(seikyuSho);
+    }
+
+    @JsonIgnore
+    public Space getSp4() {
+        return this.getIraiprint().getSp4();
+    }
+
+    @JsonIgnore
+    public void  setSp4(Space Sp4) {
+        this.getIraiprint().setSp4(Sp4);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getMeireiSho() {
+        return this.getIraiprint().getMeireiSho();
+    }
+
+    @JsonIgnore
+    public void  setMeireiSho(CheckBoxList meireiSho) {
+        this.getIraiprint().setMeireiSho(meireiSho);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getTeishutsuIraiSho() {
+        return this.getIraiprint().getTeishutsuIraiSho();
+    }
+
+    @JsonIgnore
+    public void  setTeishutsuIraiSho(CheckBoxList teishutsuIraiSho) {
+        this.getIraiprint().setTeishutsuIraiSho(teishutsuIraiSho);
     }
 
     @JsonIgnore

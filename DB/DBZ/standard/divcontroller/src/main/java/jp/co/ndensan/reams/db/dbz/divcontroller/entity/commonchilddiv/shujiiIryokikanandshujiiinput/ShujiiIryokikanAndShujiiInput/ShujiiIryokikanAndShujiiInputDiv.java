@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  * @reamsid_L DBZ-1300-140 chengsanyuan
  */
 public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIryokikanAndShujiiInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -378,7 +378,8 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
         ShokaiMode("ShokaiMode"),
         SimpleInputMode("SimpleInputMode"),
         SimpleShokaiMode("SimpleShokaiMode"),
-        OnlyShujiiGuideInputMode("OnlyShujiiGuideInputMode");
+        OnlyShujiiGuideInputMode("OnlyShujiiGuideInputMode"),
+        OnlyShujiiGuideInputMode2("OnlyShujiiGuideInputMode2");
 
         private final String name;
 

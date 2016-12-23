@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,12 +25,6 @@ public class KensakuJokenDiv extends Panel {
     private RadioButton radDataShutsuryoku;
     @JsonProperty("txtNijiHanteibi")
     private TextBoxDateRange txtNijiHanteibi;
-    @JsonProperty("txtDispMax")
-    private TextBoxNum txtDispMax;
-    @JsonProperty("btnKensaku")
-    private Button btnKensaku;
-    @JsonProperty("btnClear")
-    private Button btnClear;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,60 +66,6 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("txtNijiHanteibi")
     public void setTxtNijiHanteibi(TextBoxDateRange txtNijiHanteibi) {
         this.txtNijiHanteibi = txtNijiHanteibi;
-    }
-
-    /*
-     * gettxtDispMax
-     * @return txtDispMax
-     */
-    @JsonProperty("txtDispMax")
-    public TextBoxNum getTxtDispMax() {
-        return txtDispMax;
-    }
-
-    /*
-     * settxtDispMax
-     * @param txtDispMax txtDispMax
-     */
-    @JsonProperty("txtDispMax")
-    public void setTxtDispMax(TextBoxNum txtDispMax) {
-        this.txtDispMax = txtDispMax;
-    }
-
-    /*
-     * getbtnKensaku
-     * @return btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public Button getBtnKensaku() {
-        return btnKensaku;
-    }
-
-    /*
-     * setbtnKensaku
-     * @param btnKensaku btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku = btnKensaku;
-    }
-
-    /*
-     * getbtnClear
-     * @return btnClear
-     */
-    @JsonProperty("btnClear")
-    public Button getBtnClear() {
-        return btnClear;
-    }
-
-    /*
-     * setbtnClear
-     * @param btnClear btnClear
-     */
-    @JsonProperty("btnClear")
-    public void setBtnClear(Button btnClear) {
-        this.btnClear = btnClear;
     }
 
     // </editor-fold>

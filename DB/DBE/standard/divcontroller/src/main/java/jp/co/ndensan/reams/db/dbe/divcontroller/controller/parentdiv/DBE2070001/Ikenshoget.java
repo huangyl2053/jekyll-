@@ -93,6 +93,17 @@ public class Ikenshoget {
     }
 
     /**
+     * 最大表示件数テキストボックスの値が変更された際の動作です。
+     *
+     * @param div IkenshogetDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_txtMaxNumber(IkenshogetDiv div) {
+        getHandler(div).getMaxNumber();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *
      * @param div コントロールdiv

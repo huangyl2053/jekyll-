@@ -54,6 +54,25 @@ public class DbT5301ShujiiIkenshoIraiJohoDac implements ISaveable<DbT5301ShujiiI
     }
 
     /**
+     * 申請書管理番号で主治医意見書作成依頼情報を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5301ShujiiIkenshoIraiJohoEntityの{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5301ShujiiIkenshoIraiJohoEntity> selectByKey(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5301ShujiiIkenshoIraiJoho.class).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT5301ShujiiIkenshoIraiJohoEntity.class);
+    }
+
+    /**
      * 主治医意見書作成依頼情報を全件返します。
      *
      * @return DbT5301ShujiiIkenshoIraiJohoEntityの{@code list}

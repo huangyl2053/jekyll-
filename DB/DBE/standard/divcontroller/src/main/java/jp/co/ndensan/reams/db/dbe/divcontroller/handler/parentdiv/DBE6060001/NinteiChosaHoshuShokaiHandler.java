@@ -12,9 +12,13 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.DBE601005_Nintei
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshuShokaiFlowBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.NinteiChosaHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.dgNinteiChosaHoshu_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,6 +41,7 @@ public class NinteiChosaHoshuShokaiHandler {
     private static final Code SHIKI = new Code("0001");
     private static final RString 管理番号 = new RString("申請書管理番号");
     private static final RString 項目状態 = new RString("○");
+    private static final RString 広域 = new RString("211");
 
     /**
      * コンストラクタです。
@@ -177,5 +182,29 @@ public class NinteiChosaHoshuShokaiHandler {
 
     private RString nullToEmpty(RString str) {
         return str == null ? RString.EMPTY : str;
+    }
+
+    /**
+     * 広域か単一か判定します。
+     *
+     * @return 広域の場合 True 単一の場合 False
+     */
+    public boolean is広域() {
+        ShichosonSecurityJoho 市町村情報
+                = jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (市町村情報 != null && 市町村情報.get導入形態コード() != null) {
+            return 市町村情報.get導入形態コード().getColumnValue().equals(広域);
+        }
+        return false;
+    }
+
+    /**
+     * 市町村名を返します。
+     *
+     * @return 市町村名
+     */
+    public RString get市町村名() {
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        return 導入団体クラス.get市町村名();
     }
 }
