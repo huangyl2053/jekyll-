@@ -401,10 +401,9 @@ public class RenkeiDataTorikomiValidationHandler {
 
     private int getSize(CsvListReader read) {
         int size = 0;
-        if (read.readLine() != null) {
-            if (read.readLine() != null && read.readLine().isEmpty()) {
-                size = read.readLine().size();
-            }
+        List<RString> list = read.readLine();
+        if (list != null && !list.isEmpty()) {
+                size = list.size();
         }
         return size;
     }
