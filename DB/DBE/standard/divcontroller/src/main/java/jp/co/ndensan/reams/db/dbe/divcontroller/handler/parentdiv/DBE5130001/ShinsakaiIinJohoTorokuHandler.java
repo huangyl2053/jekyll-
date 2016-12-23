@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -26,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 介護認定審査会委員情報のハンドラークラスです。
@@ -37,6 +38,7 @@ public class ShinsakaiIinJohoTorokuHandler {
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
+    private static final RString 状態_削除 = new RString("削除");
     private static final RString 廃止 = new RString("廃止");
     private static final RString 有効 = new RString("有効");
     private static final RString KEY_廃止 = new RString("key0");
@@ -61,13 +63,6 @@ public class ShinsakaiIinJohoTorokuHandler {
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        shinsakaiIinJohoIchiranDiv_init();
-        shinsakaiIinJohoDiv_init();
-        shozokuKikanIchiranDiv_init();
-        renrakusakiKinyuKikanDiv_init();
-        div.getBtnToroku().setDisabled(true);
-        div.getBtnDelete().setDisabled(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
     }
 
     /**
@@ -77,14 +72,20 @@ public class ShinsakaiIinJohoTorokuHandler {
      * @return List<dgShinsaInJohoIchiran_Row>
      */
     public List<dgShinsaInJohoIchiran_Row> setShinsaInJohoIchiranDiv(List<ShinsakaiIinJoho> list) {
+        shinsakaiIinJohoIchiranDiv_init();
         List<dgShinsaInJohoIchiran_Row> 審査会委員一覧 = new ArrayList<>();
         for (ShinsakaiIinJoho shinsakaiIinJoho : list) {
             dgShinsaInJohoIchiran_Row row = new dgShinsaInJohoIchiran_Row();
             row.setStatus(RString.EMPTY);
             row.setShinsainCode(shinsakaiIinJoho.get介護認定審査会委員コード());
-            row.getShinsakaiIinKaishiYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員開始年月日().toString()));
+            if (shinsakaiIinJoho.get介護認定審査会委員開始年月日() != null && !shinsakaiIinJoho.get介護認定審査会委員開始年月日().isEmpty()) {
+                if (!shinsakaiIinJoho.get介護認定審査会委員開始年月日().equals(FlexibleDate.MIN)) {
+                    row.getShinsakaiIinKaishiYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員開始年月日().toString()));
+                }
+            }
+
             if (!(shinsakaiIinJoho.get介護認定審査会委員終了年月日() == null || shinsakaiIinJoho.get介護認定審査会委員終了年月日().isEmpty())) {
-                if (!shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString().equals("99999999")) {
+                if (!shinsakaiIinJoho.get介護認定審査会委員終了年月日().equals(FlexibleDate.MAX)) {
                     row.getShinsakaiIinShuryoYMD().setValue(new RDate(shinsakaiIinJoho.get介護認定審査会委員終了年月日().toString()));
                 }
             }
@@ -127,6 +128,17 @@ public class ShinsakaiIinJohoTorokuHandler {
             if (shinsakaiIinJoho.getFAX番号() != null) {
                 row.setFaxNo(shinsakaiIinJoho.getFAX番号().value());
             }
+            row.setKinyuKikanCode(shinsakaiIinJoho.get金融機関コード() != null
+                    ? shinsakaiIinJoho.get金融機関コード().value() : RString.EMPTY);
+            row.setKinyuKikanShitenCode(shinsakaiIinJoho.get金融機関支店コード() != null
+                    ? shinsakaiIinJoho.get金融機関支店コード().value() : RString.EMPTY);
+            row.setYokinShubetsu(shinsakaiIinJoho.get預金種別() != null ? shinsakaiIinJoho.get預金種別() : RString.EMPTY);
+            row.setKozaNo(shinsakaiIinJoho.get口座番号() != null ? shinsakaiIinJoho.get口座番号() : RString.EMPTY);
+            row.setKozaMeigininKana(shinsakaiIinJoho.get口座名義人カナ() != null
+                    ? shinsakaiIinJoho.get口座名義人カナ().value() : RString.EMPTY);
+            row.setKozaMeiginin(shinsakaiIinJoho.get口座名義人() != null
+                    ? shinsakaiIinJoho.get口座名義人().value() : RString.EMPTY);
+            row.setShikakuCodeCode(shinsakaiIinJoho.get介護認定審査員資格コード().value());
             審査会委員一覧.add(row);
         }
         return 審査会委員一覧;
@@ -170,8 +182,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtShimei().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShimei());
         div.getTxtKanaShimei().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKanaShimei());
         if (div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue() != null) {
-            div.getTxtBirthYMD().setValue(
-                    new FlexibleDate(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue().toDateString().toString()));
+            div.getTxtBirthYMD().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue());
         }
         div.getRadSeibetsu().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu());
         div.getDdlShikakuCode().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShikakuCode());
@@ -195,6 +206,14 @@ public class ShinsakaiIinJohoTorokuHandler {
         }
         div.getTxtTelNo1().setDomain(new TelNo(div.getDgShinsaInJohoIchiran().getClickedItem().getTelNo1()));
         div.getTxtFaxNo().setDomain(new TelNo(div.getDgShinsaInJohoIchiran().getClickedItem().getFaxNo()));
+        div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
+                new KinyuKikanCode(div.getDgShinsaInJohoIchiran().getClickedItem().getKinyuKikanCode()),
+                new KinyuKikanShitenCode(div.getDgShinsaInJohoIchiran().getClickedItem().getKinyuKikanShitenCode()),
+                FlexibleDate.getNowDate());
+        div.getKozaJoho().getDdlYokinShubetsu().setSelectedKey(div.getDgShinsaInJohoIchiran().getClickedItem().getYokinShubetsu());
+        div.getKozaJoho().getTxtGinkoKozaNo().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKozaNo());
+        div.getKozaJoho().getTxtKozaMeiginin().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKozaMeigininKana());
+        div.getKozaJoho().getTxtKanjiMeiginin().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKozaMeiginin());
     }
 
     /**
@@ -202,7 +221,6 @@ public class ShinsakaiIinJohoTorokuHandler {
      */
     public void set部品状態_修正ボタン() {
         div.getTxtShinsainCode().setDisabled(true);
-        div.getBtnShinsakaiIinAdd().setDisabled(false);
         div.getTxtShinsaIinYMDFrom().setDisabled(false);
         div.getTxtShinsaIinYMDTo().setDisabled(false);
         div.getTxtShimei().setDisabled(false);
@@ -225,8 +243,11 @@ public class ShinsakaiIinJohoTorokuHandler {
         }
         div.getTxtTelNo1().setDisabled(false);
         div.getTxtFaxNo().setDisabled(false);
-        div.getBtnToroku().setDisabled(false);
-        div.getBtnDelete().setDisabled(false);
+        div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().setDisabled(false);
+        div.getKozaJoho().getDdlYokinShubetsu().setDisabled(false);
+        div.getKozaJoho().getTxtGinkoKozaNo().setDisabled(false);
+        div.getKozaJoho().getTxtKozaMeiginin().setDisabled(false);
+        div.getKozaJoho().getTxtKanjiMeiginin().setDisabled(false);
     }
 
     /**
@@ -249,11 +270,45 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlYusoKubun().setDisabled(false);
         div.getTxtJusho().setDisabled(false);
         div.getDdlHaishiFlag().setDisabled(false);
+        div.getTxtHaishiYMD().setDisabled(false);
+        div.getTxtHaishiYMD().setReadOnly(true);
         div.getTxtTelNo1().setDisabled(false);
         div.getTxtFaxNo().setDisabled(false);
-        div.getBtnDelete().setDisabled(false);
-        div.getBtnToroku().setDisabled(false);
-        div.getBtnShinsakaiIinAdd().setDisabled(true);
+        div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().setDisabled(false);
+        div.getKozaJoho().getDdlYokinShubetsu().setDisabled(false);
+        div.getKozaJoho().getTxtGinkoKozaNo().setDisabled(false);
+        div.getKozaJoho().getTxtKozaMeiginin().setDisabled(false);
+        div.getKozaJoho().getTxtKanjiMeiginin().setDisabled(false);
+    }
+
+    /**
+     * 「削除する」ボタンを押下、部品活性状態をセットする。
+     */
+    public void set部品状態_削除ボタン() {
+        div.getTxtShinsainCode().setDisabled(true);
+        div.getTxtShinsaIinYMDFrom().setDisabled(true);
+        div.getTxtShinsaIinYMDTo().setDisabled(true);
+        div.getTxtShimei().setDisabled(true);
+        div.getTxtKanaShimei().setDisabled(true);
+        div.getTxtBirthYMD().setDisabled(true);
+        div.getRadSeibetsu().setDisabled(true);
+        div.getDdlShikakuCode().setDisabled(true);
+        div.getCcdshinsakaiChikuCode().setDisabled(true);
+        div.getTxtBiko().setDisabled(true);
+        div.getBtnShozokuKikanAdd().setDisabled(true);
+        div.getDgShozokuKikanIchiran().setDisabled(true);
+        div.getTxtYubinNo().setDisabled(true);
+        div.getDdlYusoKubun().setDisabled(true);
+        div.getTxtJusho().setDisabled(true);
+        div.getDdlHaishiFlag().setDisabled(true);
+        div.getTxtHaishiYMD().setDisabled(true);
+        div.getTxtTelNo1().setDisabled(true);
+        div.getTxtFaxNo().setDisabled(true);
+        div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().setDisabled(true);
+        div.getKozaJoho().getDdlYokinShubetsu().setDisabled(true);
+        div.getKozaJoho().getTxtGinkoKozaNo().setDisabled(true);
+        div.getKozaJoho().getTxtKozaMeiginin().setDisabled(true);
+        div.getKozaJoho().getTxtKanjiMeiginin().setDisabled(true);
     }
 
     /**
@@ -283,19 +338,15 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtHaishiYMD().clearValue();
         div.getTxtTelNo1().clearDomain();
         div.getTxtFaxNo().clearDomain();
-    }
-    
-    /**
-     * 検索条件エリアをクリアする
-     */
-    public void clear検索条件() {
-        kensakuJokenDiv_init(new RString("key1"));
-        div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
+        div.getKozaJoho().getDdlYokinShubetsu().setSelectedValue(RString.EMPTY);
+        div.getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getKozaJoho().getTxtKanjiMeiginin().clearValue();
     }
 
     /**
-     * 更新モードで、審査会委員詳細情報エリア変更を判断します。
+     * 審査会委員詳細情報エリア変更を判断します。
      *
      * @return 詳細情報を変更された場合、trueを返却します、以外場合、falseを返却します。
      */
@@ -306,28 +357,24 @@ public class ShinsakaiIinJohoTorokuHandler {
         builder.append(div.getTxtShimei().getValue());
         builder.append(div.getTxtKanaShimei().getValue());
         builder.append(div.getRadSeibetsu().getSelectedValue());
-        builder.append(div.getTxtBirthYMD().getValue().wareki().toDateString());
+        builder.append(nullToEmpty(div.getTxtBirthYMD().getValue()));
         builder.append(div.getDdlShikakuCode().getSelectedValue());
         builder.append(div.getCcdshinsakaiChikuCode().getCode().value());
         builder.append(div.getTxtBiko().getValue());
-
+        builder.append(div.getTxtYubinNo().getValue());
+        builder.append(div.getTxtJusho().getDomain().value());
+        builder.append(div.getTxtTelNo1().getDomain().value());
+        builder.append(div.getTxtFaxNo().getDomain().value());
+        builder.append(div.getDdlYusoKubun().getSelectedKey());
+        builder.append(div.getDdlHaishiFlag().getSelectedValue());
+        builder.append(nullToEmpty(div.getTxtHaishiYMD().getValue()));
+        builder.append(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
+        builder.append(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
+        builder.append(div.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        builder.append(div.getKozaJoho().getTxtGinkoKozaNo().getValue());
+        builder.append(div.getKozaJoho().getTxtKozaMeiginin().getValue());
+        builder.append(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
         return !div.getHdnShinsakaiIinJohoSyosai().equals(builder.toRString());
-    }
-
-    /**
-     * 新規モードで、審査会委員詳細情報エリアの入力判断です。
-     *
-     * @return hasChanged合議体詳細情報
-     */
-    public boolean has審査会委員詳細情報入力() {
-        return !RString.isNullOrEmpty(div.getTxtShinsainCode().getValue())
-                || div.getTxtShinsaIinYMDFrom().getValue() != null
-                || div.getTxtShinsaIinYMDTo().getValue() != null
-                || !RString.isNullOrEmpty(div.getTxtShimei().getValue())
-                || !RString.isNullOrEmpty(div.getTxtKanaShimei().getValue())
-                || !(div.getTxtBirthYMD().getValue() == null || div.getTxtBirthYMD().getValue().isEmpty())
-                || !(div.getCcdshinsakaiChikuCode().getCode() == null || div.getCcdshinsakaiChikuCode().getCode().isEmpty())
-                || !RString.isNullOrEmpty(div.getTxtBiko().getValue());
     }
 
     /**
@@ -347,53 +394,6 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     /**
-     * 審査会委員詳細情報は初期状態にセットする。
-     */
-    public void shinsakaiIinJohoDiv_init() {
-        clear審査会委員詳細情報();
-        div.getTxtShinsainCode().setDisabled(true);
-        div.getTxtShinsaIinYMDFrom().setDisabled(true);
-        div.getTxtShinsaIinYMDTo().setDisabled(true);
-        div.getTxtShimei().setDisabled(true);
-        div.getTxtKanaShimei().setDisabled(true);
-        div.getTxtBirthYMD().setDisabled(true);
-        div.getRadSeibetsu().setDisabled(true);
-        div.getDdlShikakuCode().setDisabled(true);
-        div.getCcdshinsakaiChikuCode().setDisabled(true);
-        div.getCcdshinsakaiChikuCode().applyNoOptionCodeMaster().load(
-                SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード());
-        div.getTxtBiko().setDisabled(true);
-    }
-
-    /**
-     * 所属機関一覧情報は初期状態にセットする。
-     */
-    public void shozokuKikanIchiranDiv_init() {
-        div.getBtnShozokuKikanAdd().setDisabled(true);
-        div.getDgShozokuKikanIchiran().getDataSource().clear();
-    }
-
-    /**
-     * 連絡先/金融機関情報は初期状態にセットする。
-     */
-    public void renrakusakiKinyuKikanDiv_init() {
-        div.getTxtYubinNo().clearValue();
-        div.getTxtYubinNo().setDisabled(true);
-        div.getDdlYusoKubun().setSelectedIndex(0);
-        div.getDdlYusoKubun().setDisabled(true);
-        div.getTxtJusho().clearDomain();
-        div.getTxtJusho().setDisabled(true);
-        div.getDdlHaishiFlag().setSelectedKey(KEY_有効);
-        div.getDdlHaishiFlag().setDisabled(true);
-        div.getTxtHaishiYMD().clearValue();
-        div.getTxtHaishiYMD().setReadOnly(true);
-        div.getTxtTelNo1().clearDomain();
-        div.getTxtTelNo1().setDisabled(true);
-        div.getTxtFaxNo().clearDomain();
-        div.getTxtFaxNo().setDisabled(true);
-    }
-
-    /**
      * 新規モード、審査会委員詳細情報を審査会委員一覧に設定します。
      *
      * @return List<dgShinsaInJohoIchiran_Row>
@@ -409,7 +409,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setShimei(div.getTxtShimei().getValue());
         row.setKanaShimei(div.getTxtKanaShimei().getValue());
         row.setSeibetsu(Seibetsu.toValue(div.getRadSeibetsu().getSelectedKey()).get名称());
-        if (!div.getTxtBirthYMD().getValue().isEmpty()) {
+        if (div.getTxtBirthYMD().getValue() != null && !div.getTxtBirthYMD().getValue().toDateString().isEmpty()) {
             row.getBarthYMD().setValue(new RDate(div.getTxtBirthYMD().getValue().toString()));
         }
         row.setShikakuCode(div.getDdlShikakuCode().getSelectedValue());
@@ -425,6 +425,12 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.getHaishiYMD().setValue(div.getTxtHaishiYMD().getValue());
         row.setTelNo1(div.getTxtTelNo1().getDomain().value());
         row.setFaxNo(div.getTxtFaxNo().getDomain().value());
+        row.setKinyuKikanCode(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
+        row.setKinyuKikanShitenCode(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
+        row.setYokinShubetsu(div.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        row.setKozaNo(div.getKozaJoho().getTxtGinkoKozaNo().getValue());
+        row.setKozaMeigininKana(div.getKozaJoho().getTxtKozaMeiginin().getValue());
+        row.setKozaMeiginin(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
         審査会委員一覧情報.add(row);
         return 審査会委員一覧情報;
     }
@@ -448,7 +454,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setShimei(div.getTxtShimei().getValue());
         row.setKanaShimei(div.getTxtKanaShimei().getValue());
         row.setSeibetsu(Seibetsu.toValue(div.getRadSeibetsu().getSelectedKey()).get名称());
-        if (!div.getTxtBirthYMD().getValue().isEmpty()) {
+        if (div.getTxtBirthYMD().getValue() != null && !div.getTxtBirthYMD().getValue().toDateString().isEmpty()) {
             row.getBarthYMD().setValue(new RDate(div.getTxtBirthYMD().getValue().toString()));
         }
         row.setShikakuCode(div.getDdlShikakuCode().getSelectedValue());
@@ -464,6 +470,30 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.getHaishiYMD().setValue(div.getTxtHaishiYMD().getValue());
         row.setTelNo1(div.getTxtTelNo1().getDomain().value());
         row.setFaxNo(div.getTxtFaxNo().getDomain().value());
+        row.setKinyuKikanCode(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
+        row.setKinyuKikanShitenCode(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
+        row.setYokinShubetsu(div.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        row.setKozaNo(div.getKozaJoho().getTxtGinkoKozaNo().getValue());
+        row.setKozaMeigininKana(div.getKozaJoho().getTxtKozaMeiginin().getValue());
+        row.setKozaMeiginin(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
+        審査会委員一覧情報.set(count, row);
+        return 審査会委員一覧情報;
+    }
+
+    /**
+     * 削除モード、審査会委員詳細情報を審査会委員一覧に設定します。
+     *
+     * @return List<dgShinsaInJohoIchiran_Row>
+     */
+    public List<dgShinsaInJohoIchiran_Row> set審査会委員一覧By削除モード() {
+        List<dgShinsaInJohoIchiran_Row> 審査会委員一覧情報 = div.getDgShinsaInJohoIchiran().getDataSource();
+        int count = div.getDgShinsaInJohoIchiran().getClickedRowId();
+        dgShinsaInJohoIchiran_Row row = div.getDgShinsaInJohoIchiran().getClickedItem();
+        if (状態_追加.equals(row.getStatus())) {
+            row.setStatus(RString.EMPTY);
+        } else {
+            row.setStatus(状態_削除);
+        }
         審査会委員一覧情報.set(count, row);
         return 審査会委員一覧情報;
     }
@@ -517,6 +547,13 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     /**
+     * 追加するの場合、hidden項目にEmpty格納します。
+     */
+    public void setShinsakaiIinJohoSyosaiEmpty() {
+        div.setHdnShinsakaiIinJohoSyosai(RString.EMPTY);
+    }
+
+    /**
      * 選択された審査会委員詳細情報をhidden項目に格納します。
      */
     public void setShinsakaiIinJohoSyosai() {
@@ -533,6 +570,21 @@ public class ShinsakaiIinJohoTorokuHandler {
         builder.append(clickRow.getShikakuCode());
         builder.append(clickRow.getShinsakaiChikuCode());
         builder.append(clickRow.getBiko());
+        builder.append(clickRow.getYubinNo());
+        builder.append(clickRow.getJusho());
+        builder.append(clickRow.getTelNo1());
+        builder.append(clickRow.getFaxNo());
+        builder.append(clickRow.getYusoKubun());
+        builder.append(clickRow.getJokyo());
+        if (clickRow.getHaishiYMD().getValue() != null) {
+            builder.append(clickRow.getHaishiYMD().getValue().wareki().toDateString());
+        }
+        builder.append(clickRow.getKinyuKikanCode());
+        builder.append(clickRow.getKinyuKikanShitenCode());
+        builder.append(clickRow.getYokinShubetsu());
+        builder.append(clickRow.getKozaNo());
+        builder.append(clickRow.getKozaMeigininKana());
+        builder.append(clickRow.getKozaMeiginin());
         div.setHdnShinsakaiIinJohoSyosai(builder.toRString());
     }
 
@@ -545,5 +597,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         } else {
             div.getBtnShozokuKikanAdd().setDisabled(true);
         }
+    }
+
+    private RString nullToEmpty(RDate 日付) {
+        return 日付 != null ? 日付.wareki().toDateString() : RString.EMPTY;
     }
 }

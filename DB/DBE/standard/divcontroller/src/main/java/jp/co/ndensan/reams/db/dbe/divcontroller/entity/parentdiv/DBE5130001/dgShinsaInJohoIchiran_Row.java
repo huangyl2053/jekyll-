@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Dec 17 15:00:47 JST 2016 
+ * Fri Dec 23 11:32:28 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgShinsaInJohoIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
 
     private RString status;
     private RString shinsainCode;
@@ -40,6 +40,13 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
     private TextBoxDate haishiYMD;
     private RString telNo1;
     private RString faxNo;
+    private RString kinyuKikanCode;
+    private RString kinyuKikanShitenCode;
+    private RString yokinShubetsu;
+    private RString kozaNo;
+    private RString kozaMeigininKana;
+    private RString kozaMeiginin;
+    private RString shikakuCodeCode;
 
     public dgShinsaInJohoIchiran_Row() {
         super();
@@ -61,6 +68,13 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.haishiYMD = new TextBoxDate();
         this.telNo1 = RString.EMPTY;
         this.faxNo = RString.EMPTY;
+        this.kinyuKikanCode = RString.EMPTY;
+        this.kinyuKikanShitenCode = RString.EMPTY;
+        this.yokinShubetsu = RString.EMPTY;
+        this.kozaNo = RString.EMPTY;
+        this.kozaMeigininKana = RString.EMPTY;
+        this.kozaMeiginin = RString.EMPTY;
+        this.shikakuCodeCode = RString.EMPTY;
         this.setOriginalData("status", status);
         this.setOriginalData("shinsainCode", shinsainCode);
         this.setOriginalData("shinsakaiIinKaishiYMD", shinsakaiIinKaishiYMD);
@@ -79,9 +93,16 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("haishiYMD", haishiYMD);
         this.setOriginalData("telNo1", telNo1);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("kinyuKikanCode", kinyuKikanCode);
+        this.setOriginalData("kinyuKikanShitenCode", kinyuKikanShitenCode);
+        this.setOriginalData("yokinShubetsu", yokinShubetsu);
+        this.setOriginalData("kozaNo", kozaNo);
+        this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
+        this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.setOriginalData("shikakuCodeCode", shikakuCodeCode);
     }
 
-    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString jokyo, RString biko, RString shinsakaiChikuCode, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo1, RString faxNo) {
+    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString jokyo, RString biko, RString shinsakaiChikuCode, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo1, RString faxNo, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin, RString shikakuCodeCode) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("shinsainCode", shinsainCode);
@@ -101,6 +122,13 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("haishiYMD", haishiYMD);
         this.setOriginalData("telNo1", telNo1);
         this.setOriginalData("faxNo", faxNo);
+        this.setOriginalData("kinyuKikanCode", kinyuKikanCode);
+        this.setOriginalData("kinyuKikanShitenCode", kinyuKikanShitenCode);
+        this.setOriginalData("yokinShubetsu", yokinShubetsu);
+        this.setOriginalData("kozaNo", kozaNo);
+        this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
+        this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.setOriginalData("shikakuCodeCode", shikakuCodeCode);
         this.status = status;
         this.shinsainCode = shinsainCode;
         this.shinsakaiIinKaishiYMD = shinsakaiIinKaishiYMD;
@@ -119,6 +147,13 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.haishiYMD = haishiYMD;
         this.telNo1 = telNo1;
         this.faxNo = faxNo;
+        this.kinyuKikanCode = kinyuKikanCode;
+        this.kinyuKikanShitenCode = kinyuKikanShitenCode;
+        this.yokinShubetsu = yokinShubetsu;
+        this.kozaNo = kozaNo;
+        this.kozaMeigininKana = kozaMeigininKana;
+        this.kozaMeiginin = kozaMeiginin;
+        this.shikakuCodeCode = shikakuCodeCode;
     }
 
     public RString getStatus() {
@@ -191,6 +226,34 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
 
     public RString getFaxNo() {
         return faxNo;
+    }
+
+    public RString getKinyuKikanCode() {
+        return kinyuKikanCode;
+    }
+
+    public RString getKinyuKikanShitenCode() {
+        return kinyuKikanShitenCode;
+    }
+
+    public RString getYokinShubetsu() {
+        return yokinShubetsu;
+    }
+
+    public RString getKozaNo() {
+        return kozaNo;
+    }
+
+    public RString getKozaMeigininKana() {
+        return kozaMeigininKana;
+    }
+
+    public RString getKozaMeiginin() {
+        return kozaMeiginin;
+    }
+
+    public RString getShikakuCodeCode() {
+        return shikakuCodeCode;
     }
 
     public void setStatus(RString status) {
@@ -281,6 +344,41 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
     public void setFaxNo(RString faxNo) {
         this.setOriginalData("faxNo", faxNo);
         this.faxNo = faxNo;
+    }
+
+    public void setKinyuKikanCode(RString kinyuKikanCode) {
+        this.setOriginalData("kinyuKikanCode", kinyuKikanCode);
+        this.kinyuKikanCode = kinyuKikanCode;
+    }
+
+    public void setKinyuKikanShitenCode(RString kinyuKikanShitenCode) {
+        this.setOriginalData("kinyuKikanShitenCode", kinyuKikanShitenCode);
+        this.kinyuKikanShitenCode = kinyuKikanShitenCode;
+    }
+
+    public void setYokinShubetsu(RString yokinShubetsu) {
+        this.setOriginalData("yokinShubetsu", yokinShubetsu);
+        this.yokinShubetsu = yokinShubetsu;
+    }
+
+    public void setKozaNo(RString kozaNo) {
+        this.setOriginalData("kozaNo", kozaNo);
+        this.kozaNo = kozaNo;
+    }
+
+    public void setKozaMeigininKana(RString kozaMeigininKana) {
+        this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
+        this.kozaMeigininKana = kozaMeigininKana;
+    }
+
+    public void setKozaMeiginin(RString kozaMeiginin) {
+        this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.kozaMeiginin = kozaMeiginin;
+    }
+
+    public void setShikakuCodeCode(RString shikakuCodeCode) {
+        this.setOriginalData("shikakuCodeCode", shikakuCodeCode);
+        this.shikakuCodeCode = shikakuCodeCode;
     }
 
     // </editor-fold>

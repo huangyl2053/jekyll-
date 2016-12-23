@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -250,6 +252,60 @@ public class ShinsakaiIinJoho
     }
 
     /**
+     * 金融機関コードを返します。
+     *
+     * @return 金融機関コード
+     */
+    public KinyuKikanCode get金融機関コード() {
+        return entity.getKinyuKikanCode();
+    }
+
+    /**
+     * 金融機関支店コードを返します。
+     *
+     * @return 金融機関支店コード
+     */
+    public KinyuKikanShitenCode get金融機関支店コード() {
+        return entity.getKinyuKikanShitenCode();
+    }
+
+    /**
+     * 預金種別を返します。
+     *
+     * @return 預金種別
+     */
+    public RString get預金種別() {
+        return entity.getYokinShubetsu();
+    }
+
+    /**
+     * 口座番号を返します。
+     *
+     * @return 口座番号
+     */
+    public RString get口座番号() {
+        return entity.getKozaNo();
+    }
+
+    /**
+     * 口座名義人カナを返します。
+     *
+     * @return 口座名義人カナ
+     */
+    public AtenaKanaMeisho get口座名義人カナ() {
+        return entity.getKozaMeigininKana();
+    }
+
+    /**
+     * 口座名義人を返します。
+     *
+     * @return 口座名義人
+     */
+    public AtenaMeisho get口座名義人() {
+        return entity.getKozaMeiginin();
+    }
+
+    /**
      * {@link DbT5594ShinsakaiIinJohoEntity}のクローンを返します。
      *
      * @return {@link DbT5594ShinsakaiIinJohoEntity}のクローン
@@ -270,8 +326,10 @@ public class ShinsakaiIinJoho
     }
 
     /**
-     * 介護認定審査会委員情報配下の要素を削除対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 介護認定審査会委員情報配下の要素である介護認定審査会委員所属機関情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShinsakaiIinJoho}を返します。
+     * 介護認定審査会委員情報配下の要素を削除対象とします。<br/>
+     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 介護認定審査会委員情報配下の要素である介護認定審査会委員所属機関情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link ShinsakaiIinJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiIinJoho}
      * @throws IllegalStateException DbT5594ShinsakaiIinJohoEntityのデータ状態が変更の場合
@@ -297,7 +355,8 @@ public class ShinsakaiIinJoho
     }
 
     /**
-     * 介護認定審査会委員情報のみを変更対象とします。<br/> {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会委員情報のみを変更対象とします。<br/>
+     * {@link DbT5594ShinsakaiIinJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiIinJoho}
      */
