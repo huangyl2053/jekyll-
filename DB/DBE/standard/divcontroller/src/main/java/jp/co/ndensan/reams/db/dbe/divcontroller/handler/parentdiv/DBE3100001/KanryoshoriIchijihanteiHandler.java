@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijipanteisyori.IChiJiPanTeiSyoRiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
@@ -45,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -61,6 +63,7 @@ public class KanryoshoriIchijihanteiHandler {
     private final KanryoshoriIchijihanteiDiv div;
 
     private static final RString COMMONBUTTON_KANRYO = new RString("btnCompleteIchijiHantei");
+    private static final RString COMMONBUTTON_UPDATE_ICHIJIHANTEI = new RString("btnUpdateHanteiKekka");
     private static final RString COMMONBUTTON_ICHIJI_HANTEI = new RString("btnIchijiHantei");
 
     private static final RString 完了処理_一次判定 = new RString("DBEMN11006");
@@ -141,6 +144,28 @@ public class KanryoshoriIchijihanteiHandler {
 
         RString 取得件数 = new RString(div.getIchijiHanteiShoriTaishoshaIchiran().getTxtMaxCount().getValue().toString());
         div.setTxtMaxCountBefore(取得件数);
+    }
+
+    /**
+     * ラジオボタンの選択状態に合わせて、共通ボタンの表示非表示を切り替えます。
+     */
+    public void setCommonButtonDisplayNone() {
+
+        RString 状態区分 = div.getIchijiHanteiShoriTaishoshaIchiran().getRadStatus().getSelectedKey();
+
+        if (状態区分_未処理.equals(状態区分)) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_KANRYO, true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE_ICHIJIHANTEI, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_ICHIJI_HANTEI, false);
+        } else if (状態区分_完了可能.equals(状態区分)) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_KANRYO, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE_ICHIJIHANTEI, true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_ICHIJI_HANTEI, true);
+        } else if (状態区分_すべて.equals(状態区分)) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_KANRYO, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE_ICHIJIHANTEI, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_ICHIJI_HANTEI, false);
+        }
     }
 
     /**
@@ -260,7 +285,7 @@ public class KanryoshoriIchijihanteiHandler {
             row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
         }
         if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
-            row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())));
+            row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性().roundUpTo(2))));
         }
         if (business.get推定される給付区分コード() != null && !business.get推定される給付区分コード().isEmpty()) {
             row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get推定される給付区分コード().value()).get名称());
@@ -639,15 +664,21 @@ public class KanryoshoriIchijihanteiHandler {
             if (kekka == null) {
                 continue;
             }
-
             update対象者一覧(row, kekka);
+
             Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models = ViewStateHolder
                     .get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
             if (models == null) {
                 models = Models.create(new ArrayList<IchijiHanteiKekkaJoho>());
             }
             if (!kekka.isError()) {
-                models.add(kekka.getHanteiKekka());
+                IchijiHanteiKekkaJoho joho = models.get(kekka.getHanteiKekka().identifier());
+                if (joho == null) {
+                    models.add(kekka.getHanteiKekka());
+                } else {
+                    joho = updateIchijiHanteiKekkaJoho(joho, kekka.getHanteiKekka());
+                    models.add(joho);
+                }
             }
             ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, models);
         }
@@ -661,5 +692,98 @@ public class KanryoshoriIchijihanteiHandler {
             }
         }
         return null;
+    }
+
+    private IchijiHanteiKekkaJoho updateIchijiHanteiKekkaJoho(IchijiHanteiKekkaJoho original, IchijiHanteiKekkaJoho updateData) {
+
+        IchijiHanteiKekkaJohoBuilder builder = original.createBuilderForEdit();
+        builder.set仮一次判定区分(false);
+        builder.set要介護認定一次判定年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
+
+        builder.set要介護認定一次判定結果コード(updateData.get要介護認定一次判定結果コード());
+        builder.set要介護認定一次判定結果コード_認知症加算(updateData.get要介護認定一次判定結果コード_認知症加算());
+
+        builder.set要介護認定等基準時間(updateData.get要介護認定等基準時間());
+        builder.set要介護認定等基準時間_食事(updateData.get要介護認定等基準時間_食事());
+        builder.set要介護認定等基準時間_排泄(updateData.get要介護認定等基準時間_排泄());
+        builder.set要介護認定等基準時間_移動(updateData.get要介護認定等基準時間_移動());
+        builder.set要介護認定等基準時間_清潔保持(updateData.get要介護認定等基準時間_清潔保持());
+        builder.set要介護認定等基準時間_間接ケア(updateData.get要介護認定等基準時間_間接ケア());
+        builder.set要介護認定等基準時間_BPSD関連(updateData.get要介護認定等基準時間_BPSD関連());
+        builder.set要介護認定等基準時間_機能訓練(updateData.get要介護認定等基準時間_機能訓練());
+        builder.set要介護認定等基準時間_医療関連(updateData.get要介護認定等基準時間_医療関連());
+        builder.set要介護認定等基準時間_認知症加算(updateData.get要介護認定等基準時間_認知症加算());
+        builder.set中間評価項目得点第1群(updateData.get中間評価項目得点第1群());
+        builder.set中間評価項目得点第2群(updateData.get中間評価項目得点第2群());
+        builder.set中間評価項目得点第3群(updateData.get中間評価項目得点第3群());
+        builder.set中間評価項目得点第4群(updateData.get中間評価項目得点第4群());
+        builder.set中間評価項目得点第5群(updateData.get中間評価項目得点第5群());
+        builder.set中間評価項目得点第6群(updateData.get中間評価項目得点第6群());
+        builder.set中間評価項目得点第7群(updateData.get中間評価項目得点第7群());
+
+        builder.set要介護認定状態の安定性コード(updateData.get要介護認定状態の安定性コード());
+        builder.set認知症自立度Ⅱ以上の蓋然性(updateData.get認知症自立度Ⅱ以上の蓋然性());
+        builder.set認知機能及び状態安定性から推定される給付区分コード(updateData.get認知機能及び状態安定性から推定される給付区分コード());
+
+        builder.set運動能力の低下していない認知症高齢者の指標コード(Code.EMPTY);
+        builder.set日常生活自立度の組み合わせ_自立(0);
+        builder.set日常生活自立度の組み合わせ_要支援(0);
+        builder.set日常生活自立度の組み合わせ_要介護１(0);
+        builder.set日常生活自立度の組み合わせ_要介護２(0);
+        builder.set日常生活自立度の組み合わせ_要介護３(0);
+        builder.set日常生活自立度の組み合わせ_要介護４(0);
+        builder.set日常生活自立度の組み合わせ_要介護５(0);
+        builder.set認知症高齢者の日常生活自立度の蓋然性評価コード(Code.EMPTY);
+        builder.set認知症高齢者の日常生活自立度の蓋然性評価(0);
+        builder.set一次判定結果送付区分(RString.EMPTY);
+        builder.set一次判定結果送付年月日(FlexibleDate.EMPTY);
+        builder.setチャート(RString.EMPTY);
+        builder.set状態像(RString.EMPTY);
+
+        return builder.build();
+    }
+
+    /**
+     * グリッド上に表示されている情報を元にCSVデータを作成します。
+     *
+     * @param row グリッドの1行
+     * @return １行分のCSVデータ
+     */
+    public KanryoshoriCsvEntity getCsvData(dgHanteiTaishosha_Row row) {
+        return new KanryoshoriCsvEntity(
+                row.getShinseishoKanriNo(),
+                row.getHokensha(),
+                row.getHihokenNo(),
+                row.getHihokenshaName(),
+                new RString(row.getShinseibi().getValue().toString()),
+                row.getShinseiKbnShin(),
+                new RString(row.getIchijiHanteibi().getValue().toString()),
+                row.getIchijiHanteiKekka(),
+                row.getIchijiHanteiKekkaCode(),
+                row.getIchijiHanteiKekkaNinchishoKasan(),
+                row.getIchijiHanteiKekkaNinchishoKasanCode(),
+                row.getKeikokuCode(),
+                new RString(row.getChosaJissibi().getValue().toString()),
+                new RString(row.getIkenshoJuryobi().getValue().toString()),
+                row.getKijunJikan(),
+                row.getKijunJikanShokuji(),
+                row.getKijunJikanHaisetsu(),
+                row.getKijunJikanIdo(),
+                row.getKijunJikanSeiketsuHoji(),
+                row.getKijunJikanKansetsuCare(),
+                row.getKijunJikanBPSDKanren(),
+                row.getKijunJikanKinoKunren(),
+                row.getKijunJikanIryoKanren(),
+                row.getKijunJikanNinchishoKasan(),
+                row.getChukanHyokaKomoku1gun(),
+                row.getChukanHyokaKomoku2gun(),
+                row.getChukanHyokaKomoku3gun(),
+                row.getChukanHyokaKomoku4gun(),
+                row.getChukanHyokaKomoku5gun(),
+                row.getJotaiAnteiseiCode(),
+                row.getNinchishoJiritsudoIIijoNoGaizensei(),
+                row.getSuiteiKyufuKubunCode(),
+                row.getKoroshoIfShikibetsuCode()
+        );
     }
 }

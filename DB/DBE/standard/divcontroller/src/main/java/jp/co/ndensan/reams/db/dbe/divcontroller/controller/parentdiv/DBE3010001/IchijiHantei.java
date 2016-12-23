@@ -335,7 +335,7 @@ public class IchijiHantei {
 
             FlexibleDate nowDate = FlexibleDate.getNowDate();
             for (NinteiKanryoJoho joho : ninteiKanryoJohoList) {
-                outputNinteiKanryoJohoList.add(joho.createBuilderForEdit().set認定調査完了年月日(nowDate).build());
+                outputNinteiKanryoJohoList.add(joho.createBuilderForEdit().set要介護認定一次判定完了年月日(nowDate).build());
             }
             ninteiKanryoManager.save要介護認定完了情報List(outputNinteiKanryoJohoList);
 

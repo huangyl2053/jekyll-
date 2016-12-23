@@ -388,7 +388,7 @@ public class IchijiHanteiKekkaJohoHandler {
         builder.set認知症自立度Ⅱ以上の蓋然性(div.getTxtGaizensei().getValue() == null ? Decimal.ZERO : div.getTxtGaizensei().getValue());
         builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(getValueOrEmpty(div.getDdlKyufuKbn().getSelectedKey())));
 
-        builder.set運動能力の低下していない認知症高齢者の指標コード(new Code("1"));
+        builder.set運動能力の低下していない認知症高齢者の指標コード(Code.EMPTY);
         builder.set日常生活自立度の組み合わせ_自立(0);
         builder.set日常生活自立度の組み合わせ_要支援(0);
         builder.set日常生活自立度の組み合わせ_要介護１(0);
