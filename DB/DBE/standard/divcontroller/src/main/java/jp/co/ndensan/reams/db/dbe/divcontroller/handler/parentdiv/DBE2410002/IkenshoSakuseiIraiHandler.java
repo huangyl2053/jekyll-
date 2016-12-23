@@ -1031,7 +1031,7 @@ public class IkenshoSakuseiIraiHandler {
 
             受診日時または期間.append(ymd.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+            受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分));
             受診日時または期間.append(文字列_まで);
         } else {
             RDate from = div.getTxtJyushinKikan().getFromValue();

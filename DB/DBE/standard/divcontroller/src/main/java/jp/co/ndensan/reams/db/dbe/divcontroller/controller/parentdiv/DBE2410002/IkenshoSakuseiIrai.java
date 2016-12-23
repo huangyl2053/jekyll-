@@ -152,11 +152,10 @@ public class IkenshoSakuseiIrai {
                 div.getTxtKigenymd().setDisabled(true);
                 div.getTxtKigenymd().setValue(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数));
             } else if (SELECTED_KEY1.equals(key)) {
-                div.getTxtKigenymd().setDisabled(false);
+                div.getTxtKigenymd().setDisabled(true);
                 div.getTxtKigenymd().clearValue();
             } else if (SELECTED_KEY2.equals(key)) {
-                div.getTxtKigenymd().setDisabled(true);
-                div.getTxtKigenymd().setValue(RDate.getNowDate().plusDay(期限日数));
+                div.getTxtKigenymd().setDisabled(false);
             }
         } else if (認定申請年月日 != null) {
             div.getTxtKigenymd().setValue(認定申請年月日.plusDay(期限日数));
