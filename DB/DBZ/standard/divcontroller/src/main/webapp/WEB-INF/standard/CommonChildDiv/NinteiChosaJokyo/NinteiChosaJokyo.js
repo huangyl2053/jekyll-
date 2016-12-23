@@ -13,9 +13,44 @@ var DBZ;
             ModeController.prototype.PublicProperties = function () {
                 return new NinteiChosaJokyo.PublicProperties(this.fieldName);
             };
+            ModeController.prototype.DisplayType = function () {
+                return new Modes.DisplayType(this.controls);
+            };
             return ModeController;
         })();
         NinteiChosaJokyo.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayType = (function () {
+                function DisplayType(controls) {
+                    this.controls = controls;
+                }
+                DisplayType.prototype.input = function () {
+                    this.controls.NinteiChosa().readOnly = false;
+                    this.controls.HomonChosasaki().readOnly = false;
+                    this.controls.ShujiiAndShujiIryoKikan().readOnly = false;
+                    this.controls.IchijiHantei().readOnly = false;
+                    this.controls.KaigoNinteiShinsakai().readOnly = false;
+                    this.controls.EnkiTsuchi().readOnly = false;
+                    this.controls.btnAllClear().displayNone = false;
+                    this.controls.btnKakutei().displayNone = false;
+                };
+
+                DisplayType.prototype.shokai = function () {
+                    this.controls.NinteiChosa().readOnly = true;
+                    this.controls.HomonChosasaki().readOnly = true;
+                    this.controls.ShujiiAndShujiIryoKikan().readOnly = true;
+                    this.controls.IchijiHantei().readOnly = true;
+                    this.controls.KaigoNinteiShinsakai().readOnly = true;
+                    this.controls.EnkiTsuchi().readOnly = true;
+                    this.controls.btnAllClear().displayNone = true;
+                    this.controls.btnKakutei().displayNone = true;
+                };
+                return DisplayType;
+            })();
+            Modes.DisplayType = DisplayType;
+        })(NinteiChosaJokyo.Modes || (NinteiChosaJokyo.Modes = {}));
+        var Modes = NinteiChosaJokyo.Modes;
     })(DBZ.NinteiChosaJokyo || (DBZ.NinteiChosaJokyo = {}));
     var NinteiChosaJokyo = DBZ.NinteiChosaJokyo;
 })(DBZ || (DBZ = {}));

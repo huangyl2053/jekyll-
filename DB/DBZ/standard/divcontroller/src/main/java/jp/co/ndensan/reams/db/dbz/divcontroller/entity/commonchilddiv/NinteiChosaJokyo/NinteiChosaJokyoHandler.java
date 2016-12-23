@@ -49,18 +49,11 @@ public class NinteiChosaJokyoHandler {
                 NinteiChosaJokyoDataPass.class);
         RString displayModeKey = div.getHdnDisplayModeKey();
         if (new RString("1").equals(displayModeKey)) {
-            div.getNinteiChosa().setDisabled(true);
-            div.getHomonChosasaki().setDisabled(true);
-            div.getShujiiAndShujiIryoKikan().setDisabled(true);
-            div.getIchijiHantei().setDisabled(true);
-            div.getKaigoNinteiShinsakai().setDisabled(true);
-            div.getEnkiTsuchi().setDisabled(true);
-            div.getBtnAllClear().setDisabled(true);
-            div.getBtnKakutei().setDisabled(true);
+            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.shokai);
         }
-//        if (new RString("2").equals(displayModeKey)) {
-//            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.input);
-//        }
+        if (new RString("2").equals(displayModeKey)) {
+            div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.input);
+        }
         List<KeyValueDataSource> keyValueList = new ArrayList<>();
         for (ChosaItakuKubunCode chosaItaku : ChosaItakuKubunCode.values()) {
             keyValueList.add(new KeyValueDataSource(chosaItaku.getコード(), chosaItaku.get名称()));
