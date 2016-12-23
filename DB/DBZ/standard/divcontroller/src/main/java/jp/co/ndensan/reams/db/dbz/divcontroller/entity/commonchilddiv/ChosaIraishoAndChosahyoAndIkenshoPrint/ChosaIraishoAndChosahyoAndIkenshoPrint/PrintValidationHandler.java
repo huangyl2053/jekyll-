@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
@@ -71,10 +71,8 @@ public class PrintValidationHandler {
             }
             List<RString> chkInsatsuIkensho = div.getChkInsatsuIkensho().getSelectedKeys();
             List<RString> chkIkenshoSakusei = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
-            List<RString> chkIkenshoSakuseiryo = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
             if (chkInsatsuIkensho.isEmpty()
-                && chkIkenshoSakusei.isEmpty()
-                && chkIkenshoSakuseiryo.isEmpty()) {
+                && chkIkenshoSakusei.isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getShujiiIkenshoPrint()));
             }
 
