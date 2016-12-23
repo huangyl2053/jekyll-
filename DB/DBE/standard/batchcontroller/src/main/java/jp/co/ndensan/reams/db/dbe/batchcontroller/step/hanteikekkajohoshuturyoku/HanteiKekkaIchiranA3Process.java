@@ -105,6 +105,7 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
             entity.set当前頁(index / ページあたりレコード数);
         }
         entity.set総頁(総ページ数);
+        entity.set項番(index);
         if (entity.get被保険者区分() != null && !entity.get被保険者区分().isEmpty()) {
             entity.set被保険者区分(HihokenshaKubunCode.toValue(entity.get被保険者区分()).get略称());
         } else {
