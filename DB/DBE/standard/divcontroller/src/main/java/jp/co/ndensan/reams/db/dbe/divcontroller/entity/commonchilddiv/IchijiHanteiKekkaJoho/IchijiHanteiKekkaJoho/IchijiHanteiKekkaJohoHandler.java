@@ -202,7 +202,7 @@ public class IchijiHanteiKekkaJohoHandler {
                     .get要介護認定一次判定結果コード_認知症加算().getColumnValue());
         }
 
-        div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()));
+        div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()/DOUBLE_10));
         div.getTxtShokuji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_食事()/DOUBLE_10));
         div.getTxtHaisetsu().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_排泄()/DOUBLE_10));
         div.getTxtIdo().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_移動()/DOUBLE_10));
