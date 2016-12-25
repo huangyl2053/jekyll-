@@ -181,11 +181,14 @@ public class ChosaJisshishaJohoHandler {
      * 調査実施場所ddl変更時のイベントメソッド
      */
     public void onChange_ddlChosaJisshiBasho() {
-        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())
-                || ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
+        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
             div.getTxtJisshiBashoMeisho().clearValue();
             div.getTxtJisshiBashoMeisho().setDisabled(true);
+        } else if (ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
+            div.getTxtJisshiBashoMeisho().clearValue();
+            div.getTxtJisshiBashoMeisho().setDisabled(false);
         } else {
+            div.getTxtJisshiBashoMeisho().clearValue();
             div.getTxtJisshiBashoMeisho().setDisabled(false);
         }
     }
