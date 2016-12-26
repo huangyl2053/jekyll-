@@ -851,15 +851,19 @@ public class NinteiChosaDataOutputResult {
         jokenBuilder.append(processParamter.getShichosonCode());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("【申請書管理番号リスト】"));
+        jokenBuilder.append(new RString("【被保険者番号リスト】"));
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("("));
-        List<RString> shinseishoKanriNoList = processParamter.getShinseishoKanriNoList();
-        for (RString shinseishoKanriNo : shinseishoKanriNoList) {
-            jokenBuilder.append(shinseishoKanriNo);
-            jokenBuilder.append(new RString(","));
+        List<RString> hihokenshaNoList = processParamter.getHihokenshaNoList();
+        RStringBuilder rsbHihokensha = new RStringBuilder();
+        for (RString hihokenshaNo : hihokenshaNoList) {
+            if(rsbHihokensha.length() > 0){
+                rsbHihokensha.append(",");
+            }
+            rsbHihokensha.append(hihokenshaNo);
         }
+        jokenBuilder.append(rsbHihokensha.toRString());
         jokenBuilder.append(new RString(")"));
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;

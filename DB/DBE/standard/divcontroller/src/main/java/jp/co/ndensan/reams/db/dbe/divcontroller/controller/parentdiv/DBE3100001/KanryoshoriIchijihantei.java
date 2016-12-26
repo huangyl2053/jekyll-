@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.kanryoshoriichijihantei.Kanryosho
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -48,7 +47,6 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -299,10 +297,6 @@ public class KanryoshoriIchijihantei {
         return ResponseData.of(div).respond();
     }
 
-    private boolean is仮一次判定(RString 申請書管理番号) {
-        return KanryoshoriIchijihanteiManager.createInstance().get仮一次判定区分(new ShinseishoKanriNo(申請書管理番号));
-    }
-
     private KanryoshoriIchijihanteiHandler getHandler(KanryoshoriIchijihanteiDiv div) {
         return new KanryoshoriIchijihanteiHandler(div);
     }
@@ -312,7 +306,7 @@ public class KanryoshoriIchijihantei {
     }
 
     /**
-     * 一次判定を完了するボタンを押下する。
+     * グリッド上の照会BTNをクリックした場合の処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ

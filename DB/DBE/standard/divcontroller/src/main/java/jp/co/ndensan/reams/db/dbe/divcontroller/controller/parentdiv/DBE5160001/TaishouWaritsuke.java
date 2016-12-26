@@ -158,6 +158,7 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnDetermineToShinsakaiOrder(TaishouWaritsukeDiv div) {
+        TaishouWaritsukeHandler handler = getHandler(div);
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         対象者一覧データ空チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
@@ -169,8 +170,11 @@ public class TaishouWaritsuke {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            getHandler(div).審査会順序確定();
+            handler.審査会順序確定();
         }
+        handler.介護認定審査会割付情報更新();
+        handler.対象者一覧検索();
+        handler.候補者一覧検索();
         return ResponseData.of(div).respond();
     }
 

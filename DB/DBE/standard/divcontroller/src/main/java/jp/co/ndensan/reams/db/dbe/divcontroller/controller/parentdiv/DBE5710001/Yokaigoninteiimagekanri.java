@@ -83,8 +83,8 @@ public class Yokaigoninteiimagekanri {
         } else {
             div.getRadSonota().setSelectedIndex(1);
             div.getBtnGaikyoTokuki().setDisabled(true);
-            div.getBtnIkensho().setDisabled(true);
-            div.getBtnIkenshoOCR().setDisabled(true);
+            div.getBtnIkenshoTeikeigai().setDisabled(true);
+            div.getBtnIkenshoTeikei().setDisabled(true);
             div.getBtnSonota().setDisabled(true);
         }
         if (イメージ管理情報.getイメージ共有ファイルID() == null) {

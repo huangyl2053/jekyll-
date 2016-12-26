@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710003;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DeletePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelHandler;
@@ -42,7 +43,7 @@ public class DeletePanel {
     private static final RString 確認メッセージ出力要 = new RString("1");
     private static final RString KEY_マスキングを削除 = new RString("2");
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
-    private static final RString イメージファイルが存在区分_原本とマスキングが両方存在 = new RString("2");
+    private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
     private ReadOnlySharedFileEntryDescriptor descriptor;
 
     /**
@@ -89,30 +90,43 @@ public class DeletePanel {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-                SharedFile.deleteEntry(descriptor);
-                updateOrDelete(div);
-                return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
-            } else {
+            RString localCopyPath = DBEImageUtil.copySharedFiles(descriptor.getSharedFileId(), descriptor.getSharedFileName().toRString());
+//            if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
+//                deleteImageFile(localCopyPath, 選択したイメージ対象, 存在したイメージファイル名, false);
+//                updateOrDelete(div);
+//                return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
+//            } else {
+            boolean isMaskOnly = div.getRadDeleteTaisho().getSelectedKey().equals(KEY_マスキングを削除);
+            deleteImageFile(localCopyPath, 選択したイメージ対象, 存在したイメージファイル名, isMaskOnly);
+//            updateOrDelete(div);
+            return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
 
-                if (div.getRadDeleteTaisho().getSelectedKey().equals(KEY_マスキングを削除)) {
-                    SharedFile.deleteEntry(descriptor);
-                    updateOrDelete(div);
-                    return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
-                }
+//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
+//                    UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
+//            }
+        }
+//        if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+//                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//            SharedFile.deleteEntry(descriptor);
+//            updateOrDelete(div);
+//            return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
+//        }
+        return ResponseData.of(div).respond();
+    }
 
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                        UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+    private void deleteImageFile(RString localCopyPath, List<RString> selectDeleteImageList, List<RString> imageFileList, boolean isMaskOnly) {
+        for (RString selectDeleteImage : selectDeleteImageList) {
+            if (KEY_調査票特記.equals(selectDeleteImage)) {
+                getHandler().deleteGaikyoChosaImageFile(descriptor, localCopyPath, imageFileList, isMaskOnly);
+            } else if (KEY_調査票概況.equals(selectDeleteImage)) {
+                getHandler().deleteGaikyoTokkiImageFile(descriptor, imageFileList);
+            } else if (KEY_主治医意見書.equals(selectDeleteImage)) {
+                getHandler().deleteOpinionImageFile(descriptor, localCopyPath, imageFileList, isMaskOnly);
+            } else if (KEY_その他資料.equals(selectDeleteImage)) {
+                getHandler().deleteOtherImageFile(descriptor, localCopyPath, imageFileList, isMaskOnly);
             }
         }
-        if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            SharedFile.deleteEntry(descriptor);
-            updateOrDelete(div);
-            return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
-        }
-        return ResponseData.of(div).respond();
     }
 
     private DeletePanelHandler getHandler() {
@@ -163,7 +177,7 @@ public class DeletePanel {
                     確認メッセージ出力区分 = RString.EMPTY;
                     return getValidationHandler(div).その他資料イメージファイル存在チェック();
                 }
-                if (イメージファイルが存在区分_原本とマスキングが両方存在.equals(イメージファイルが存在区分)) {
+                if (イメージファイルが存在区分_マスキング有.equals(イメージファイルが存在区分)) {
                     確認メッセージ出力区分 = 確認メッセージ出力要;
                 }
             }
@@ -179,7 +193,7 @@ public class DeletePanel {
             確認メッセージ出力区分 = RString.EMPTY;
             return getValidationHandler(div).調査票特記イメージファイル存在チェック();
         } else {
-            if (イメージファイルが存在区分_原本とマスキングが両方存在.equals(イメージファイルが存在区分)) {
+            if (イメージファイルが存在区分_マスキング有.equals(イメージファイルが存在区分)) {
                 確認メッセージ出力区分 = 確認メッセージ出力要;
             }
             FlexibleDate 認定調査委託料支払年月日 = YokaigoninteiimagesakujoManager.createInstance().getChosaItakuryoShiharaiYMD(
@@ -213,7 +227,7 @@ public class DeletePanel {
             確認メッセージ出力区分 = RString.EMPTY;
             return getValidationHandler(div).主治医意見書イメージファイル存在チェック();
         } else {
-            if (イメージファイルが存在区分_原本とマスキングが両方存在.equals(イメージファイルが存在区分)) {
+            if (イメージファイルが存在区分_マスキング有.equals(イメージファイルが存在区分)) {
                 確認メッセージ出力区分 = 確認メッセージ出力要;
             }
             FlexibleDate 主治医意見書報酬支払年月日 = YokaigoninteiimagesakujoManager.createInstance().getHoshuShiharaiYMD(

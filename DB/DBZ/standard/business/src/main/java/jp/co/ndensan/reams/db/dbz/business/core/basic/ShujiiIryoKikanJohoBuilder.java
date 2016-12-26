@@ -10,7 +10,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -182,6 +185,72 @@ public class ShujiiIryoKikanJohoBuilder {
     public ShujiiIryoKikanJohoBuilder set状況フラグ(boolean 状況フラグ) {
         requireNonNull(状況フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("状況フラグ"));
         entity.setJokyoFlag(状況フラグ);
+        return this;
+    }
+
+    /**
+     * 金融機関コードを設定します。
+     *
+     * @param 金融機関コード 金融機関コード
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set金融機関コード(KinyuKikanCode 金融機関コード) {
+        entity.setKinyuKikanCode(金融機関コード);
+        return this;
+    }
+
+    /**
+     * 支店コードを設定します。
+     *
+     * @param 支店コード 支店コード
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set支店コード(KinyuKikanShitenCode 支店コード) {
+        entity.setKinyuKikanShitenCode(支店コード);
+        return this;
+    }
+
+    /**
+     * 預金種別を設定します。
+     *
+     * @param 預金種別 預金種別
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set預金種別(RString 預金種別) {
+        entity.setYokinShubetsu(預金種別);
+        return this;
+    }
+
+    /**
+     * 口座番号を設定します。
+     *
+     * @param 口座番号 口座番号
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set口座番号(RString 口座番号) {
+        entity.setKozaNo(口座番号);
+        return this;
+    }
+
+    /**
+     * 口座名義人カナを設定します。
+     *
+     * @param 口座名義人カナ 口座名義人カナ
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set口座名義人カナ(AtenaKanaMeisho 口座名義人カナ) {
+        entity.setKozaMeigininKana(口座名義人カナ);
+        return this;
+    }
+
+    /**
+     * 口座名義人を設定します。
+     *
+     * @param 口座名義人 口座名義人
+     * @return {@link ShujiiIryoKikanJohoBuilder}
+     */
+    public ShujiiIryoKikanJohoBuilder set口座名義人(AtenaMeisho 口座名義人) {
+        entity.setKozaMeiginin(口座名義人);
         return this;
     }
 

@@ -27,6 +27,14 @@ public interface IIChiJiPanTeiSyoRiMapper {
     List<IChiJiPanTeiSyoRiRelateEntity> get対象者一覧(IChiJiPanTeiSyoRiParameter parameter);
 
     /**
+     * 対象者一覧の検索と同条件で何件のデータが取得できるのかをカウントします。
+     *
+     * @param parameter IChiJiPanTeiSyoRiParameter
+     * @return 対象者件数
+     */
+    int get対象者件数(IChiJiPanTeiSyoRiParameter parameter);
+
+    /**
      * 要介護認定一次判定結果情報の検索。
      *
      * @param parameter IChiJiPanTeiSyoRiParameter

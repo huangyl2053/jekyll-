@@ -383,8 +383,8 @@ public class CreateTarget {
                 data.set認知症対応型共同生活介護グループホーム(getサービス状況項目(business.getサービスの状況(), 連番10));
                 data.set地域密着型特定施設入居者生活介護(RString.EMPTY);
                 data.set地域密着型介護老人福祉施設入所者生活介護(RString.EMPTY);
-                data.set地域密着型特定施設入居者生活介護(RString.EMPTY);
-                data.set地域密着型介護老人福祉施設入所者生活介護(RString.EMPTY);
+                data.set定期巡回随時対応型訪問介護看護(RString.EMPTY);
+                data.set複合型サービス(RString.EMPTY);
             } else {
                 data.set短期入所生活介護ショートステイ(getサービス状況項目(business.getサービスの状況(), 連番7));
                 data.set短期入所療養介護(getサービス状況項目(business.getサービスの状況(), 連番8));
@@ -946,16 +946,7 @@ public class CreateTarget {
                 data.set前回結果_定期巡回随時対応型訪問介護看護(get前回サービス状況項目(business.get前回サービスの状況(), 連番18));
                 data.set前回結果_複合型サービス(get前回サービス状況項目(business.get前回サービスの状況(), 連番19));
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(business.getCsvBusiness().get識別コード())
-                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(business.getCsvBusiness().get識別コード())) {
-                data.set前回結果_定期巡回随時対応型訪問介護看護(RString.EMPTY);
-                data.set前回結果_複合型サービス(RString.EMPTY);
-            } else {
-                data.set前回結果_定期巡回随時対応型訪問介護看護(get前回サービス状況項目(business.get前回サービスの状況(), 連番18));
-                data.set前回結果_複合型サービス(get前回サービス状況項目(business.get前回サービスの状況(), 連番19));
-            }
         }
-
         if (ServiceKubunCode.予防給付サービス.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness()
                 .get前回結果_現在のサービス区分コード())) {
             data.set前回結果_介護予防訪問介護ホームヘルプサービス(get前回サービス状況項目(business.get前回サービスの状況(), 連番0));
