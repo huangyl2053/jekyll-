@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
@@ -29,6 +30,9 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
     private static final RString テキスト全面イメージ = new RString("1");
     private static final int LENGTH_20 = 20;
     private static final int MAXCOUNT = 30;
+    private final JimuTuikaSiryoBusiness 審査会追加資料;
+    private final RString 作成条件;
+    private final RString 作成条件_追加分 = new RString("追加分");
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
     private final IchijihanteikekkahyoA4Entity ichijihanteiEntity;
     private final TokkiText1A4Business tokkiTextBusiness;
@@ -43,15 +47,20 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
      * @param tokkiTextBusiness 特記事項の編集クラス
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
+     * @param jimuTuikaSiryoBusiness 審査会追加資料のBusinessの編集クラス
+     * @param sakuseiJoken 作成条件
      */
     public IinShinsakaishiryoA4Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA4Entity ichijihanteiEntity, TokkiText1A4Business tokkiTextBusiness,
-            JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness) {
+            JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness,
+            JimuTuikaSiryoBusiness jimuTuikaSiryoBusiness, RString sakuseiJoken) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteiEntity = ichijihanteiEntity;
         this.tokkiTextBusiness = tokkiTextBusiness;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
+        this.審査会追加資料 = jimuTuikaSiryoBusiness;
+        this.作成条件 = sakuseiJoken;
     }
 
     @Override
@@ -118,6 +127,11 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 IIinShinsakaishiryoA4Builder builder2 = new IinShinsakaishiryoA4Builder(editor2);
                 reportSourceWriter.writeLine(builder2);
             }
+        }
+        if (審査会追加資料 != null && 作成条件_追加分.equals(作成条件)) {
+            IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group8Editor(審査会追加資料);
+            IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 

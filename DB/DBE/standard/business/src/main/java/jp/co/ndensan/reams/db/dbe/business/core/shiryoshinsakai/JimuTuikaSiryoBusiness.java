@@ -350,7 +350,10 @@ public class JimuTuikaSiryoBusiness {
      * @return 識別コード
      */
     public RString get識別コード() {
-        return entity.getShoKisaiHokenshaNo().substring(0, SIZE_5).concat(entity.getHihokenshaNo());
+        if (!entity.getShoKisaiHokenshaNo().isEmpty()) {
+            return entity.getShoKisaiHokenshaNo().substring(0, SIZE_5).concat(entity.getHihokenshaNo());
+        }
+        return entity.getShoKisaiHokenshaNo();
     }
 
     private RString get開催年月日() {

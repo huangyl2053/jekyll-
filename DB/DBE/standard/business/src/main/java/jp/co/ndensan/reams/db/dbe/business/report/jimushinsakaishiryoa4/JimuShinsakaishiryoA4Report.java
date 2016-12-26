@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
@@ -35,6 +36,9 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
     private final TokkiText1A4Business tokkiTextBusiness;
     private final JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho;
     private final JimuSonotashiryoBusiness sonotashiryoBusiness;
+    private final JimuTuikaSiryoBusiness 審査会追加資料;
+    private final RString 作成条件;
+    private final RString 作成条件_追加分 = new RString("追加分");
 
     /**
      * インスタンスを生成します。
@@ -45,17 +49,21 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
      * @param is審査会対象一覧印刷済み is審査会対象一覧印刷済み
+     * @param jimuTuikaSiryoBusiness 審査会追加資料のBusinessの編集クラス
+     * @param sakuseiJoken 作成条件
      */
     public JimuShinsakaishiryoA4Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA4Entity ichijihanteiEntity, TokkiText1A4Business tokkiTextBusiness,
             JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness,
-            boolean is審査会対象一覧印刷済み) {
+            boolean is審査会対象一覧印刷済み, JimuTuikaSiryoBusiness jimuTuikaSiryoBusiness, RString sakuseiJoken) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteiEntity = ichijihanteiEntity;
         this.tokkiTextBusiness = tokkiTextBusiness;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
         this.is審査会対象一覧印刷済み = is審査会対象一覧印刷済み;
+        this.審査会追加資料 = jimuTuikaSiryoBusiness;
+        this.作成条件 = sakuseiJoken;
     }
 
     @Override
@@ -126,6 +134,15 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
                 IJimuShinsakaishiryoA4Builder builder2 = new JimuShinsakaishiryoA4Builder(editor2);
                 reportSourceWriter.writeLine(builder2);
             }
+        }
+        get審査会追加資料(reportSourceWriter);
+    }
+
+    private void get審査会追加資料(ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter) {
+        if (審査会追加資料 != null && 作成条件_追加分.equals(作成条件)) {
+            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group8Editor(審査会追加資料);
+            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 

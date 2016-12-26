@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.Ichijihanteikekk
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3.IinShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -36,11 +37,14 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -84,6 +88,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
     private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
     private static final RString SEPARATOR = new RString("/");
+    private List<ShinsakaiTaiyosyaJohoEntity> 委員審査会追加資料A3リスト;
 
     @BatchWriter
     private BatchReportWriter<IinShinsakaishiryoA3ReportSource> batchReportWriter;
@@ -109,7 +114,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         共通情報 = mapper.getShinsakaiSiryoKyotsu(一次判定myBatisParameter);
         データ件数 = mapper.getTokkiJikouItiziHanteiCount(一次判定myBatisParameter);
         itiziHanteiEntityList = mapper.getTokkiJikouItiziHantei(一次判定myBatisParameter);
-
+        委員審査会追加資料A3リスト = mapper.getShinsakaiTaiyosyaJoho(一覧表myBatisParameter);
         get審査対象者一覧表情報();
     }
 
@@ -151,7 +156,10 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
             IinShinsakaishiryoA3Report report = new IinShinsakaishiryoA3Report(jimuShinsakaishiryoList,
                     get特記事項と一次判定結果票情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo), reportId);
+                    getその他資料情報(shinseishoKanriNo),
+                    get審査会追加資料情報(shinseishoKanriNo),
+                    reportId,
+                    paramter.getSakuseiJoken());
             report.writeBy(reportSourceWriter);
         }
         batchReportWriter.close();
@@ -252,6 +260,18 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
             }
         }
         return その他資料;
+    }
+
+    private JimuTuikaSiryoBusiness get審査会追加資料情報(ShinseishoKanriNo shinseishoKanriNo) {
+        JimuTuikaSiryoBusiness 審査会追加資料 = null;
+        for (ShinsakaiTaiyosyaJohoEntity entity : 委員審査会追加資料A3リスト) {
+            if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                審査会追加資料 = new JimuTuikaSiryoBusiness(entity, shinsakaiIinJohoList, paramter.toIinShinsakaiIinJohoProcessParameter(), count,
+                        ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
+                                KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
+            }
+        }
+        return 審査会追加資料;
     }
 
     private ShinsakaiSiryoKyotsuEntity get共通情報(List<ShinsakaiSiryoKyotsuEntity> 共通情報,
