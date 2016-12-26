@@ -42,7 +42,7 @@ public class DeletePanelValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<RString> 選択したイメージ対象 = div.getChkImage().getSelectedKeys();
         if (選択したイメージ対象 == null || 選択したイメージ対象.isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.出力項目を指定));
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.削除ファイル未指定));
         }
         return validationMessages;
     }
@@ -134,9 +134,9 @@ public class DeletePanelValidationHandler {
         調査票概況存在しない(UrErrorMessages.存在しない, "調査票概況のイメージファイル"),
         主治医意見書存在しない(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),
         その他資料存在しない(UrErrorMessages.存在しない, "その他資料のイメージファイル"),
-        出力項目を指定(UrErrorMessages.出力項目を指定),
-        調査票削除不可(UrErrorMessages.削除不可, "認定調査委託料が支払されました"),
-        主治医意見書削除不可(UrErrorMessages.削除不可, "主治医意見書報酬が支払されました");
+        削除ファイル未指定(UrErrorMessages.未指定, "削除ファイルを"),
+        調査票削除不可(UrErrorMessages.削除不可, "認定調査委託料が支払われた"),
+        主治医意見書削除不可(UrErrorMessages.削除不可, "主治医意見書報酬が支払われた");
 
         private final Message message;
 
