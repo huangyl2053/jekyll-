@@ -38,12 +38,13 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     private final AtenaKikan atenaKikan;
     private final RString customerBarCode;
     private final FlexibleDate 調査依頼日;
-
+    private final int pageCount;
     private static final int 一桁 = 1;
     private static final RString 星アイコン = new RString("＊");
     private static final RString 明 = new RString("明");
     private static final RString 大 = new RString("大");
     private static final RString 昭 = new RString("昭");
+    private static final int 宛名連番桁数 = 8;
 
     /**
      * インスタンスを生成します。
@@ -55,12 +56,13 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
      * @param 通知文 通知文
      * @param customerBarCode customerBarCode
      * @param 調査依頼日 調査依頼日
+     * @param pageCount ページ数
      */
     protected NinteiChosaTokusokujoBodyEditor(DbT5101NinteiShinseiJohoEntity entity, NinshoshaSource ninshoshaSource,
             AtenaKikan atenaKikan,
             RString 文書番号,
             Map<Integer, RString> 通知文, RString customerBarCode,
-            FlexibleDate 調査依頼日) {
+            FlexibleDate 調査依頼日, int pageCount) {
         this.entity = entity;
         this.ninshoshaSource = ninshoshaSource;
         this.atenaKikan = atenaKikan;
@@ -68,6 +70,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         this.通知文 = 通知文;
         this.customerBarCode = customerBarCode;
         this.調査依頼日 = 調査依頼日;
+        this.pageCount = pageCount;
     }
 
     @Override
@@ -86,6 +89,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         edit宛名氏名(source);
         edti宛名名称付与(source);
         edit宛名その他(source);
+        edit宛名連番(source);
         editタイトル(source);
         edit通知文定型文(source);
         edti被保険者番号(source);
@@ -163,6 +167,10 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
 
     private void edit宛名その他(NinteiChosaTokusokujoReportSource source) {
         source.sonota = entity.getShoKisaiHokenshaNo();
+    }
+
+    private void edit宛名連番(NinteiChosaTokusokujoReportSource source) {
+        source.atenaRenban = new RString(pageCount).padZeroToLeft(宛名連番桁数);
     }
 
     private void editタイトル(NinteiChosaTokusokujoReportSource source) {

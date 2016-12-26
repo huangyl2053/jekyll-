@@ -112,6 +112,8 @@ public class NinteiChosaTokusokujoReportSource implements IReportSource {
     public RString tsuchibun2;
     @ReportItem(name = "chosaIraiYMD", length = 11, order = 50)
     public RString chosaIraiYMD;
+    @ReportItem(name = "atenaRenban", length = 8, order = 51)
+    public RString atenaRenban;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

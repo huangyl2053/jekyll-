@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
@@ -21,14 +22,19 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoSakuseiTokusokujoEditor {
 
     private final ShujiiIkenshoSakuseiTokusokujoItem headitem;
+    private final int pageCount;
+    private static final int 宛名連番桁数 = 8;
 
     /**
      * インスタンスを生成します。
      *
      * @param headitem {@link ShujiiIkenshoSakuseiTokusokujoItem}
+     * @param pageCount pageCount
      */
-    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem) {
+    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem,
+            int pageCount) {
         this.headitem = headitem;
+        this.pageCount = pageCount;
     }
 
     @Override
@@ -60,6 +66,7 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.shimeiText = headitem.getShimeiText();
         source.meishoFuyo = headitem.getMeishoFuyo();
         source.sonota = headitem.getSonota();
+        source.atenaRenban = new RString(pageCount).padZeroToLeft(宛名連番桁数);
         source.title = headitem.getTitle();
         source.tsuchibun1 = headitem.getTsuchibun1();
         source.hihokenshaNo1 = headitem.getHihokenshaNo1();

@@ -120,6 +120,8 @@ public class ShujiiIkenshoSakuseiTokusokujoReportSource implements IReportSource
     public RString ikenshoIraiYMD;
     @ReportItem(name = "title", length = 50, order = 52)
     public RString title;
+    @ReportItem(name = "atenaRenban", length = 8, order = 53)
+    public RString atenaRenban;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
