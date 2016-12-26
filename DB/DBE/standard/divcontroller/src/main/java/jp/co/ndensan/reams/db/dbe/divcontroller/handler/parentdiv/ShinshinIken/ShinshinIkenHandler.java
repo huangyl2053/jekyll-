@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku07;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku08;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku09;
@@ -669,7 +672,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (短期記憶 == item.get連番()) {
                 flag = true;
-                div.getRadTankiKioku().setSelectedKey(setRadioKey(item));
+                div.getRadTankiKioku().setSelectedKey(setCheck短期記憶(item));
                 モード判断_意見項目(item);
             }
         }
@@ -685,7 +688,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (認知能力 == item.get連番()) {
                 flag = true;
-                div.getRadNichijoNinchiNoryoku().setSelectedKey(setRadioKey(item));
+                div.getRadNichijoNinchiNoryoku().setSelectedKey(setCheck認知能(item));
                 モード判断_意見項目(item);
             }
         }
@@ -701,7 +704,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (伝達能力 == item.get連番()) {
                 flag = true;
-                div.getRadIshiDentatsuNoryoku().setSelectedKey(setRadioKey(item));
+                div.getRadIshiDentatsuNoryoku().setSelectedKey(setCheck伝達能力(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1812,6 +1815,50 @@ public class ShinshinIkenHandler {
             selectKey.add(KEY_1);
         } else {
             selectKey.add(KEY_0);
+        }
+        return selectKey;
+    }
+
+    private RString setCheck短期記憶(ShujiiIkenshoIkenItem item) {
+        RString selectKey = RString.EMPTY;
+        if (IkenKomoku04.問題なし.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_0;
+        } else if (IkenKomoku04.問題あり.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_1;
+        } else {
+            selectKey = KEY_2;
+        }
+        return selectKey;
+    }
+
+    private RString setCheck認知能(ShujiiIkenshoIkenItem item) {
+        RString selectKey = RString.EMPTY;
+        if (IkenKomoku05.自立.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_0;
+        } else if (IkenKomoku05.いくらか困難.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_1;
+        } else if (IkenKomoku05.見守りが必要.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_2;
+        } else if (IkenKomoku05.判断できない.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_3;
+        } else {
+            selectKey = KEY_4;
+        }
+        return selectKey;
+    }
+
+    private RString setCheck伝達能力(ShujiiIkenshoIkenItem item) {
+        RString selectKey = RString.EMPTY;
+        if (IkenKomoku06.伝えられる.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_0;
+        } else if (IkenKomoku06.いくらか困難.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_1;
+        } else if (IkenKomoku06.具体的要求に限られる.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_2;
+        } else if (IkenKomoku06.伝えられない.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_3;
+        } else {
+            selectKey = KEY_4;
         }
         return selectKey;
     }
