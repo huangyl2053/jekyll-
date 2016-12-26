@@ -150,29 +150,29 @@ public class IkenshoImageJohoManagerTest {
             assertThat(sut.save要介護認定意見書イメージ情報(要介護認定意見書イメージ情報), is(false));
         }
 
-        @Test
-        public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT5305IkenshoImageJohoEntity.class))).thenReturn(1);
+//        @Test
+//        public void updateに成功するとtrueが返る() {
+//            when(dac.save(any(DbT5305IkenshoImageJohoEntity.class))).thenReturn(1);
+//
+//            DbT5305IkenshoImageJohoEntity entity = DbT5305IkenshoImageJohoEntityGenerator.createDbT5305IkenshoImageJohoEntity();
+//            entity.initializeMd5();
+//            IkenshoImageJoho 要介護認定意見書イメージ情報 = new IkenshoImageJoho(entity);
+//            要介護認定意見書イメージ情報 = 要介護認定意見書イメージ情報.createBuilderForEdit().set認定申請年(1999).build();
+//
+//            assertThat(sut.save要介護認定意見書イメージ情報(要介護認定意見書イメージ情報), is(true));
+//        }
 
-            DbT5305IkenshoImageJohoEntity entity = DbT5305IkenshoImageJohoEntityGenerator.createDbT5305IkenshoImageJohoEntity();
-            entity.initializeMd5();
-            IkenshoImageJoho 要介護認定意見書イメージ情報 = new IkenshoImageJoho(entity);
-            要介護認定意見書イメージ情報 = 要介護認定意見書イメージ情報.createBuilderForEdit().set認定申請年(1999).build();
-
-            assertThat(sut.save要介護認定意見書イメージ情報(要介護認定意見書イメージ情報), is(true));
-        }
-
-        @Test
-        public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT5305IkenshoImageJohoEntity.class))).thenReturn(0);
-
-            DbT5305IkenshoImageJohoEntity entity = DbT5305IkenshoImageJohoEntityGenerator.createDbT5305IkenshoImageJohoEntity();
-            entity.initializeMd5();
-            IkenshoImageJoho 要介護認定意見書イメージ情報 = new IkenshoImageJoho(entity);
-            要介護認定意見書イメージ情報 = 要介護認定意見書イメージ情報.createBuilderForEdit().set認定申請年(1999).build();
-
-            assertThat(sut.save要介護認定意見書イメージ情報(要介護認定意見書イメージ情報), is(false));
-        }
+//        @Test
+//        public void updateに失敗するとfalseが返る() {
+//            when(dac.save(any(DbT5305IkenshoImageJohoEntity.class))).thenReturn(0);
+//
+//            DbT5305IkenshoImageJohoEntity entity = DbT5305IkenshoImageJohoEntityGenerator.createDbT5305IkenshoImageJohoEntity();
+//            entity.initializeMd5();
+//            IkenshoImageJoho 要介護認定意見書イメージ情報 = new IkenshoImageJoho(entity);
+//            要介護認定意見書イメージ情報 = 要介護認定意見書イメージ情報.createBuilderForEdit().set認定申請年(1999).build();
+//
+//            assertThat(sut.save要介護認定意見書イメージ情報(要介護認定意見書イメージ情報), is(false));
+//        }
 
         @Test
         public void deleteに成功するとtrueが返る() {

@@ -79,7 +79,7 @@ public class IkenshoImageJohoTest extends DbzTestBase {
             assertThat(sut.get主治医意見書作成依頼履歴番号(), is(主治医意見書作成依頼履歴番号));
             assertThat(sut.getマスキングデータ区分(), is(マスキングデータ区分));
             assertThat(sut.get帳票ID(), is(帳票ID));
-            assertThat(sut.get取込みページ番号(), is(取込みページ番号));
+//            assertThat(sut.get取込みページ番号(), is(取込みページ番号));
         }
 
         @Test
@@ -89,7 +89,7 @@ public class IkenshoImageJohoTest extends DbzTestBase {
             assertThat(sut.identifier().get主治医意見書作成依頼履歴番号(), is(主治医意見書作成依頼履歴番号));
             assertThat(sut.identifier().getマスキングデータ区分(), is(マスキングデータ区分));
             assertThat(sut.identifier().get帳票ID(), is(帳票ID));
-            assertThat(sut.identifier().get取込みページ番号(), is(取込みページ番号));
+//            assertThat(sut.identifier().get取込みページ番号(), is(取込みページ番号));
         }
     }
 
@@ -145,23 +145,23 @@ public class IkenshoImageJohoTest extends DbzTestBase {
 
         @Test
         public void getマスキングデータ区分は_entityが持つマスキングデータ区分を返す() {
-            assertThat(sut.getマスキングデータ区分(), is(IkenshoImageJohoEntity.getMaskDataKubun()));
+            assertThat(sut.getマスキングデータ区分(), is(IkenshoImageJohoEntity.getGenponMaskKubun()));
         }
 
-        @Test
-        public void get取込みページ番号は_entityが持つ取込みページ番号を返す() {
-            assertThat(sut.get取込みページ番号(), is(IkenshoImageJohoEntity.getTorikomiPageNo()));
-        }
-
-        @Test
-        public void get認定申請年は_entityが持つ認定申請年を返す() {
-            assertThat(sut.get認定申請年(), is(IkenshoImageJohoEntity.getNinteiShinseiNen()));
-        }
-
-        @Test
-        public void get共有ファイルIDは_entityが持つ共有ファイルIDを返す() {
-            assertThat(sut.get共有ファイルID(), is(IkenshoImageJohoEntity.getSharedFileId()));
-        }
+//        @Test
+//        public void get取込みページ番号は_entityが持つ取込みページ番号を返す() {
+//            assertThat(sut.get取込みページ番号(), is(IkenshoImageJohoEntity.getTorikomiPageNo()));
+//        }
+//
+//        @Test
+//        public void get認定申請年は_entityが持つ認定申請年を返す() {
+//            assertThat(sut.get認定申請年(), is(IkenshoImageJohoEntity.getNinteiShinseiNen()));
+//        }
+//
+//        @Test
+//        public void get共有ファイルIDは_entityが持つ共有ファイルIDを返す() {
+//            assertThat(sut.get共有ファイルID(), is(IkenshoImageJohoEntity.getSharedFileId()));
+//        }
     }
 
     public static class toEntityテスト extends DbzTestBase {

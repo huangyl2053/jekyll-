@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定意見書イメージ情報テーブルの項目定義クラスです。
  */
 public enum DbT5305IkenshoImageJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -54,23 +54,14 @@ public enum DbT5305IkenshoImageJoho implements IColumnDefinition {
      */
     ChoyoID(2147483647, 0),
     /**
-     * マスキングデータ区分
+     * 連番
+     */
+    remban(5, 0),
+    /**
+     * 原本マスク区分
      * <br/>Enum（DBE：原本マスク区分）
      */
-    maskDataKubun(1, 0),
-    /**
-     * 取込みページ番号
-     */
-    torikomiPageNo(5, 0),
-    /**
-     * 認定申請年
-     * <br/>パーティション振り分け用
-     */
-    ninteiShinseiNen(10, 0),
-    /**
-     * 共有ファイルID
-     */
-    sharedFileId(29, 0);
+    genponMaskKubun(1, 0);
 
     private final int maxLength;
     private final int scale;

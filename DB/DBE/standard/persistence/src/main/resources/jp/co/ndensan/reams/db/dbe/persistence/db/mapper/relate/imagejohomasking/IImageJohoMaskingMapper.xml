@@ -5,7 +5,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imagejohomasking.IImageJohoMaskingMapper">
     <sql id="selectImageJoho">
         SELECT
-        C.* 
+        DISTINCT C.* 
         FROM
         ( 
         SELECT
@@ -25,62 +25,33 @@
         , T5305."ChoyoID"
         , T5305."ninteiShinseiNen"
         , T5115."imageSharedFileId"
-        , T5205."genponMaskKubun" AS "tokkiMaskKubun"
-        , T5305."maskDataKubun" AS "ikenshoMaskKubun"
+        , CASE
+        WHEN T5205."shinseishoKanriNo" is not null or T5205."shinseishoKanriNo" <![CDATA[<>]]> '' THEN true
+        ELSE false
+        END "hasTokkiMask" ,
+        CASE
+        WHEN T5305."shinseishoKanriNo" is not null or T5305."shinseishoKanriNo" <![CDATA[<>]]> '' THEN true
+        ELSE false
+        END "hasIkenshoMask" ,
+        CASE
+        WHEN T5213."shinseishoKanriNo" is not null AND T5213."shinseishoKanriNo" <![CDATA[<>]]> '' THEN true
+        ELSE false
+        END "hasGaikyoMask"
         FROM
         (SELECT
         *
         FROM
         rgdb."DbT5101NinteiShinseiJoho" T5101a
         where
-        T5101a."shoriJotaiKubun" IN( '1' , '3' ) 
-        AND T5101a."logicalDeletedFlag" = False ) as T5101
+        T5101a."shoriJotaiKubun" IN ( #{取下} , #{延期} )
+        AND T5101a."logicalDeletedFlag" = False
+        <if test="isメニュー">  
+            <if test="is被保険者番号">                                                                             
+                AND T5101a."hihokenshaNo" = #{被保険者番号}                                                          
+            </if>  
+        </if>    ) as T5101
         INNER JOIN rgdb."DbT5115Image" T5115 
         ON T5115."shinseishoKanriNo" = T5101."shinseishoKanriNo"
-        LEFT JOIN
-        (SELECT
-        T5205a."shinseishoKanriNo"
-        , T5205a."genponMaskKubun"
-        FROM
-        rgdb."DbT5205NinteichosahyoTokkijiko" T5205a
-        WHERE
-        T5205a."tokkijikoTextImageKubun" = #{イメージ区分}
-        <if test = "is用紙タイプ"> 
-            AND T5205a."ninteichosaTokkijikoNo" = #{事項番号} 
-        </if> 
-        AND NOT EXISTS (
-        SELECT
-        'X' 
-        FROM
-        rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
-        WHERE
-        T5205a."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
-        AND T5205a."genponMaskKubun"  <![CDATA[<]]> T5205b."genponMaskKubun" 
-        )
-        GROUP BY T5205a."shinseishoKanriNo" , T5205a."genponMaskKubun"
-        ) AS T5205
-        ON T5205."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
-        LEFT JOIN
-        (SELECT
-        T5305a."shinseishoKanriNo"
-        , T5305a."maskDataKubun"
-        , T5305a."ChoyoID"
-        , T5305a."ninteiShinseiNen"
-        FROM
-        rgdb."DbT5305IkenshoImageJoho" T5305a
-        where
-        NOT EXISTS (
-        SELECT
-        'X' 
-        FROM
-        rgdb."DbT5305IkenshoImageJoho" T5305b
-        WHERE
-        T5305a."shinseishoKanriNo" = T5305b."shinseishoKanriNo"
-        AND T5305a."maskDataKubun"  <![CDATA[<]]> T5305b."maskDataKubun" 
-        ) 
-        GROUP BY T5305a."shinseishoKanriNo", T5305a."maskDataKubun", T5305a."ChoyoID", T5305a."ninteiShinseiNen"
-        ) AS T5305
-        ON T5101."shinseishoKanriNo" = T5305."shinseishoKanriNo" 
         INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301 
         ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
         AND T5301."logicalDeletedFlag" = FALSE 
@@ -129,13 +100,52 @@
         AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
         AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
         AND T5105."centerSoshinYMD" IS NULL 
+        LEFT JOIN
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205
+        on T5205."tokkijikoTextImageKubun" = #{イメージ区分}
+        AND T5205."genponMaskKubun" ='2'
+        AND NOT EXISTS	(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
+        WHERE
+        T5205."ninteichosaRirekiNo" <![CDATA[<]]> T5205b."ninteichosaRirekiNo"
+        )
+        AND T5205."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5305IkenshoImageJoho" T5305
+        on T5305."maskDataKubun" = #{イメージ区分}
+        AND T5305."torikomiPageNo" = '1'
+        AND NOT EXISTS	(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5305IkenshoImageJoho" T5305b
+        WHERE
+        T5305."iraiRirekiNo" <![CDATA[<]]> T5305b."iraiRirekiNo"
+        )
+        AND T5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213
+        ON
+        T5213."gaikyoChosaTextImageKubun" = #{イメージ区分}
+        AND NOT EXISTS	(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
+        WHERE
+        T5213."ninteichosaRirekiNo" <![CDATA[<]]> T5213b."ninteichosaRirekiNo"
+        )
+        AND T5101."shinseishoKanriNo" = T5213."shinseishoKanriNo"
+
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" T5502 
         ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" T5501 
         ON T5501."shinsakaiKaisaiNo" = T5502."shinsakaiKaisaiNo" 
         ) AS C
-        WHERE 1 = 1               
-        AND (C."tokkiMaskKubun" IS NOT NULL OR C."ikenshoMaskKubun" IS NOT NULL)                                          
+        WHERE 1 = 1                                        
         <if test="is画面">                                                                                
             AND C."shinseishoKanriNo"  IN 
             <foreach collection="申請書管理番号リスト" item="item" open="(" separator="," close=")">  
@@ -143,9 +153,6 @@
             </foreach>                                                         
         </if>                                                                                 
         <if test="isメニュー">  
-            <if test="is被保険者番号">                                                                             
-                AND C."hihokenshaNo" = #{被保険者番号}                                                          
-            </if>                                                                          
             <if test="is保険者">                                                                             
                 AND C."shichosonCode" = #{市町村コード}                                                          
             </if>                                                                          
@@ -213,7 +220,8 @@
         <result property="帳票ID" column="ChoyoID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="認定申請年" column="ninteiShinseiNen"/>
         <result property="イメージ共有ファイルID" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="特記マスク区分" column="tokkiMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="意見書マスク区分" column="ikenshoMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記マスク有無" column="hasTokkiMask"/>
+        <result property="意見書マスク有無" column="hasIkenshoMask"/>
+        <result property="概況マスク有無" column="hasGaikyoMask"/>
     </resultMap>
 </mapper>

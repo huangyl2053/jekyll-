@@ -181,11 +181,13 @@ public class KojinJokyoShokaiHandler {
         if (認定調査情報.isEmpty()) {
             div.getBtnShujiiIkenshoSakuseiIraiShokai().setDisabled(true);
         }
-
-        List<ShujiiIkenshoIkenItemEntity> entityList = ShujiiIkenshoIkenItemManager.createInstance().select主治医意見書(new ShinseishoKanriNo(申請書管理番号), Integer.parseInt(主治医意見書作成依頼履歴番号.toString()));
+        List<ShujiiIkenshoIkenItemEntity> entityList = null;
+        if (主治医意見書作成依頼履歴番号 != null) {
+            entityList = ShujiiIkenshoIkenItemManager.createInstance().select主治医意見書(new ShinseishoKanriNo(申請書管理番号), Integer.parseInt(主治医意見書作成依頼履歴番号.toString()));
+        }
         ImageManager imageManager = InstanceProvider.create(ImageManager.class);
         Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(申請書管理番号));
-        if (entityList.isEmpty() && イメージ情報 == null) {
+        if ((entityList == null || entityList.isEmpty()) && イメージ情報 == null) {
             div.getBtnShujiiIkenshoShokai().setDisabled(true);
         }
 

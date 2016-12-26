@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 
@@ -31,6 +32,7 @@ import static org.mockito.Mockito.when;
  *
  * @author n8429
  */
+//@Ignore
 public class DBE250001_NinteiChoshaKekkaTorikomiTest {
 
     private static BatchFlowTestHelper flowHelper;
@@ -63,7 +65,7 @@ public class DBE250001_NinteiChoshaKekkaTorikomiTest {
     public void testDefineFlow() {
 
         setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
-        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE310100_OcrDataFile"),
+        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE250001_NinteiChoshaKekkaTorikomi"),
                 new RString("認定支援"),
                 DBE250001_NinteiChoshaKekkaTorikomi.class,
                 createParameter());

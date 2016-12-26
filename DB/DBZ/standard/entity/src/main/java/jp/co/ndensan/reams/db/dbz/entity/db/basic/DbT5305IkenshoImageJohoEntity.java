@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
-import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
@@ -17,8 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
  * 要介護認定意見書イメージ情報テーブルのエンティティクラスです。
  */
 public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305IkenshoImageJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5305IkenshoImageJoho");
 
@@ -37,15 +35,13 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
     @PrimaryKey
     private Code ChoyoID;
     @PrimaryKey
-    private RString maskDataKubun;
+    private int remban;
     @PrimaryKey
-    private int torikomiPageNo;
-    private int ninteiShinseiNen;
-    private RDateTime sharedFileId;
+    private RString genponMaskKubun;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +50,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +59,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,16 +68,17 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -92,7 +89,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
@@ -103,7 +100,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     *
+     * 
      * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
@@ -114,7 +111,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      * 主治医意見書作成依頼履歴番号のgetメソッドです。
      * <br/>
      * <br/>主治医意見書作成依頼情報
-     *
+     * 
      * @return 主治医意見書作成依頼履歴番号
      */
     public int getIraiRirekiNo() {
@@ -125,7 +122,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
      * 主治医意見書作成依頼履歴番号のsetメソッドです。
      * <br/>
      * <br/>主治医意見書作成依頼情報
-     *
+     * 
      * @param iraiRirekiNo 主治医意見書作成依頼履歴番号
      */
     public void setIraiRirekiNo(@Nonnull int iraiRirekiNo) {
@@ -134,7 +131,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
 
     /**
      * 帳票IDのgetメソッドです。
-     *
+     * 
      * @return 帳票ID
      */
     public Code getChoyoID() {
@@ -143,7 +140,7 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
 
     /**
      * 帳票IDのsetメソッドです。
-     *
+     * 
      * @param ChoyoID 帳票ID
      */
     public void setChoyoID(@Nonnull Code ChoyoID) {
@@ -151,91 +148,50 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
     }
 
     /**
-     * マスキングデータ区分のgetメソッドです。
+     * 連番のgetメソッドです。
+     * 
+     * @return 連番
+     */
+    public int getRemban() {
+        return remban;
+    }
+
+    /**
+     * 連番のsetメソッドです。
+     * 
+     * @param remban 連番
+     */
+    public void setRemban(@Nonnull int remban) {
+        this.remban = remban;
+    }
+
+    /**
+     * 原本マスク区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：原本マスク区分）
-     *
-     * @return マスキングデータ区分
+     * 
+     * @return 原本マスク区分
      */
-    public RString getMaskDataKubun() {
-        return maskDataKubun;
+    public RString getGenponMaskKubun() {
+        return genponMaskKubun;
     }
 
     /**
-     * マスキングデータ区分のsetメソッドです。
+     * 原本マスク区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：原本マスク区分）
-     *
-     * @param maskDataKubun マスキングデータ区分
+     * 
+     * @param genponMaskKubun 原本マスク区分
      */
-    public void setMaskDataKubun(@Nonnull RString maskDataKubun) {
-        this.maskDataKubun = maskDataKubun;
-    }
-
-    /**
-     * 取込みページ番号のgetメソッドです。
-     *
-     * @return 取込みページ番号
-     */
-    public int getTorikomiPageNo() {
-        return torikomiPageNo;
-    }
-
-    /**
-     * 取込みページ番号のsetメソッドです。
-     *
-     * @param torikomiPageNo 取込みページ番号
-     */
-    public void setTorikomiPageNo(@Nonnull int torikomiPageNo) {
-        this.torikomiPageNo = torikomiPageNo;
-    }
-
-    /**
-     * 認定申請年のgetメソッドです。
-     * <br/>
-     * <br/>パーティション振り分け用
-     *
-     * @return 認定申請年
-     */
-    public int getNinteiShinseiNen() {
-        return ninteiShinseiNen;
-    }
-
-    /**
-     * 認定申請年のsetメソッドです。
-     * <br/>
-     * <br/>パーティション振り分け用
-     *
-     * @param ninteiShinseiNen 認定申請年
-     */
-    public void setNinteiShinseiNen(@Nonnull int ninteiShinseiNen) {
-        this.ninteiShinseiNen = ninteiShinseiNen;
-    }
-
-    /**
-     * 共有ファイルIDのgetメソッドです。
-     *
-     * @return 共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getSharedFileId() {
-        return sharedFileId;
-    }
-
-    /**
-     * 共有ファイルIDのsetメソッドです。
-     *
-     * @param sharedFileId 共有ファイルID
-     */
-    public void setSharedFileId(RDateTime sharedFileId) {
-        this.sharedFileId = sharedFileId;
+    public void setGenponMaskKubun(@Nonnull RString genponMaskKubun) {
+        this.genponMaskKubun = genponMaskKubun;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5305IkenshoImageJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5305IkenshoImageJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -252,10 +208,10 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
         if (!Objects.equals(this.ChoyoID, other.ChoyoID)) {
             return false;
         }
-        if (!Objects.equals(this.maskDataKubun, other.maskDataKubun)) {
+        if (this.remban != other.remban) {
             return false;
         }
-        if (this.torikomiPageNo != other.torikomiPageNo) {
+        if (!Objects.equals(this.genponMaskKubun, other.genponMaskKubun)) {
             return false;
         }
         return true;
@@ -269,21 +225,19 @@ public class DbT5305IkenshoImageJohoEntity extends DbTableEntityBase<DbT5305Iken
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.iraiRirekiNo = entity.iraiRirekiNo;
         this.ChoyoID = entity.ChoyoID;
-        this.maskDataKubun = entity.maskDataKubun;
-        this.torikomiPageNo = entity.torikomiPageNo;
-        this.ninteiShinseiNen = entity.ninteiShinseiNen;
-        this.sharedFileId = entity.sharedFileId;
+        this.remban = entity.remban;
+        this.genponMaskKubun = entity.genponMaskKubun;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, iraiRirekiNo, ChoyoID, maskDataKubun, torikomiPageNo, ninteiShinseiNen, sharedFileId);
+        return super.toMd5(shinseishoKanriNo, iraiRirekiNo, ChoyoID, remban, genponMaskKubun);
     }
 
 // </editor-fold>
+
 }

@@ -77,6 +77,7 @@ public class NijihanteiKekkaOutput {
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_Btnkennsaku(NijihanteiKekkaOutputDiv div) {
         ValidationMessageControlPairs pairs = div.getKensakuJoken().getCcdShinseishaFinder().validate();
+
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

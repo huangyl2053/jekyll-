@@ -125,7 +125,7 @@ public class ShinsakaiToroku {
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<ShinsakaiTorokuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),

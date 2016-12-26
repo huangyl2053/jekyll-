@@ -938,10 +938,10 @@
         AND DbT5101."logicalDeletedFlag" = FALSE
         AND DbT5105."ninteichosaKanryoYMD" IS NULL
         <if test="状態区分 == 1">
-            AND DbT4202."ninteichosaJisshiYMD" IS NULL OR DbT4202."ninteichosaJisshiYMD" = ''
+            AND (DbT4202."ninteichosaJisshiYMD" IS NULL OR DbT4202."ninteichosaJisshiYMD" = '')
         </if>
         <if test="状態区分 == 2">
-            AND DbT4202."ninteichosaJisshiYMD" IS NOT NULL AND DbT4202."ninteichosaJisshiYMD" != ''
+            AND (DbT4202."ninteichosaJisshiYMD" IS NOT NULL AND DbT4202."ninteichosaJisshiYMD" != '')
         </if>
         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}

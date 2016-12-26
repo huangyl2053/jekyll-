@@ -82,23 +82,23 @@ public class IkenshoImageJohoBuilderTest extends DbzTestBase {
             assertThat(business.getマスキングデータ区分(), is(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_マスキングデータ区分));
         }
 
-        @Test
-        public void 戻り値の取込みページ番号は_設定した値と同じ取込みページ番号を返す() {
-            business = sut.set取込みページ番号(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_取込みページ番号).build();
-            assertThat(business.get取込みページ番号(), is(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_取込みページ番号));
-        }
+//        @Test
+//        public void 戻り値の取込みページ番号は_設定した値と同じ取込みページ番号を返す() {
+//            business = sut.set取込みページ番号(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_取込みページ番号).build();
+//            assertThat(business.get取込みページ番号(), is(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_取込みページ番号));
+//        }
 
-        @Test
-        public void 戻り値の認定申請年は_設定した値と同じ認定申請年を返す() {
-            business = sut.set認定申請年(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_認定申請年).build();
-            assertThat(business.get認定申請年(), is(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_認定申請年));
-        }
+//        @Test
+//        public void 戻り値の認定申請年は_設定した値と同じ認定申請年を返す() {
+//            business = sut.set認定申請年(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_認定申請年).build();
+//            assertThat(business.get認定申請年(), is(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_認定申請年));
+//        }
 
-        @Test
-        public void 戻り値の共有ファイルIDは_設定した値と同じ共有ファイルIDを返す() {
-            business = sut.set共有ファイルID(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_共有ファイルID).build();
-            assertThat(business.get共有ファイルID(), is(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_共有ファイルID));
-        }
+//        @Test
+//        public void 戻り値の共有ファイルIDは_設定した値と同じ共有ファイルIDを返す() {
+//            business = sut.set共有ファイルID(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_共有ファイルID).build();
+//            assertThat(business.get共有ファイルID(), is(DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_共有ファイルID));
+//        }
 
     }
 }
