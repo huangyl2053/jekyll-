@@ -14,17 +14,25 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokiTaiouDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnTokiTaiou")
-    private ButtonDialog btnTokiTaiou;
-    @JsonProperty("chkTokiTaiou")
-    private CheckBoxList chkTokiTaiou;
+    @JsonProperty("btnMonita")
+    private ButtonDialog btnMonita;
+    @JsonProperty("chkMonita")
+    private CheckBoxList chkMonita;
+    @JsonProperty("btnJyokuso")
+    private ButtonDialog btnJyokuso;
+    @JsonProperty("chkJyokuso")
+    private CheckBoxList chkJyokuso;
+    @JsonProperty("btnbtnKateru")
+    private ButtonDialog btnbtnKateru;
+    @JsonProperty("chkKateru")
+    private CheckBoxList chkKateru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +41,111 @@ public class TokiTaiouDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnTokiTaiou
-     * @return btnTokiTaiou
+     * getbtnMonita
+     * @return btnMonita
      */
-    @JsonProperty("btnTokiTaiou")
-    public ButtonDialog getBtnTokiTaiou() {
-        return btnTokiTaiou;
+    @JsonProperty("btnMonita")
+    public ButtonDialog getBtnMonita() {
+        return btnMonita;
     }
 
     /*
-     * setbtnTokiTaiou
-     * @param btnTokiTaiou btnTokiTaiou
+     * setbtnMonita
+     * @param btnMonita btnMonita
      */
-    @JsonProperty("btnTokiTaiou")
-    public void setBtnTokiTaiou(ButtonDialog btnTokiTaiou) {
-        this.btnTokiTaiou = btnTokiTaiou;
+    @JsonProperty("btnMonita")
+    public void setBtnMonita(ButtonDialog btnMonita) {
+        this.btnMonita = btnMonita;
     }
 
     /*
-     * getchkTokiTaiou
-     * @return chkTokiTaiou
+     * getchkMonita
+     * @return chkMonita
      */
-    @JsonProperty("chkTokiTaiou")
-    public CheckBoxList getChkTokiTaiou() {
-        return chkTokiTaiou;
+    @JsonProperty("chkMonita")
+    public CheckBoxList getChkMonita() {
+        return chkMonita;
     }
 
     /*
-     * setchkTokiTaiou
-     * @param chkTokiTaiou chkTokiTaiou
+     * setchkMonita
+     * @param chkMonita chkMonita
      */
-    @JsonProperty("chkTokiTaiou")
-    public void setChkTokiTaiou(CheckBoxList chkTokiTaiou) {
-        this.chkTokiTaiou = chkTokiTaiou;
+    @JsonProperty("chkMonita")
+    public void setChkMonita(CheckBoxList chkMonita) {
+        this.chkMonita = chkMonita;
+    }
+
+    /*
+     * getbtnJyokuso
+     * @return btnJyokuso
+     */
+    @JsonProperty("btnJyokuso")
+    public ButtonDialog getBtnJyokuso() {
+        return btnJyokuso;
+    }
+
+    /*
+     * setbtnJyokuso
+     * @param btnJyokuso btnJyokuso
+     */
+    @JsonProperty("btnJyokuso")
+    public void setBtnJyokuso(ButtonDialog btnJyokuso) {
+        this.btnJyokuso = btnJyokuso;
+    }
+
+    /*
+     * getchkJyokuso
+     * @return chkJyokuso
+     */
+    @JsonProperty("chkJyokuso")
+    public CheckBoxList getChkJyokuso() {
+        return chkJyokuso;
+    }
+
+    /*
+     * setchkJyokuso
+     * @param chkJyokuso chkJyokuso
+     */
+    @JsonProperty("chkJyokuso")
+    public void setChkJyokuso(CheckBoxList chkJyokuso) {
+        this.chkJyokuso = chkJyokuso;
+    }
+
+    /*
+     * getbtnbtnKateru
+     * @return btnbtnKateru
+     */
+    @JsonProperty("btnbtnKateru")
+    public ButtonDialog getBtnbtnKateru() {
+        return btnbtnKateru;
+    }
+
+    /*
+     * setbtnbtnKateru
+     * @param btnbtnKateru btnbtnKateru
+     */
+    @JsonProperty("btnbtnKateru")
+    public void setBtnbtnKateru(ButtonDialog btnbtnKateru) {
+        this.btnbtnKateru = btnbtnKateru;
+    }
+
+    /*
+     * getchkKateru
+     * @return chkKateru
+     */
+    @JsonProperty("chkKateru")
+    public CheckBoxList getChkKateru() {
+        return chkKateru;
+    }
+
+    /*
+     * setchkKateru
+     * @param chkKateru chkKateru
+     */
+    @JsonProperty("chkKateru")
+    public void setChkKateru(CheckBoxList chkKateru) {
+        this.chkKateru = chkKateru;
     }
 
     // </editor-fold>

@@ -72,7 +72,8 @@ public class NinteiChosaHoshuShokai {
         NinteiChosaHoshuShokaiMapperParameter chosaParamter = NinteiChosaHoshuShokaiMapperParameter.createSelectBy情報(
                 DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
                 依頼日開始, 依頼日終了, Integer.parseInt(div.getChosaIraibi().getTxtMaxKensu().getValue().toString()), false, null,
-                div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
+                div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村コード().value(),
+                getHandler(div).is広域(), getHandler(div).get市町村名());
         List<NinteichosahoshushokaiBusiness> 調査情報 = NinteiChosaHoshuShokaiFinder.createInstance().get認定調査報酬情報(chosaParamter).records();
         if (調査情報.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
@@ -156,11 +157,11 @@ public class NinteiChosaHoshuShokai {
         div.getChosaIraibi().getTxtChosaIraibi().setToValue(null);
         return onLoad(div);
     }
-    
+
     private NinteiChosaHoshuShokaiValidationHandler getValidationHandler(NinteiChosaHoshuShokaiDiv div) {
         return new NinteiChosaHoshuShokaiValidationHandler(div);
     }
-    
+
     private NinteiChosaHoshuShokaiHandler getHandler(NinteiChosaHoshuShokaiDiv div) {
         return new NinteiChosaHoshuShokaiHandler(div);
     }

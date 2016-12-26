@@ -8,6 +8,10 @@ module DBE {
 
         export class Events {
 
+            public static onChange_chkHokohojoShiyo(): string {
+                return "onChange_chkHokohojoShiyo";
+            }
+
             public static onChange_radGenzaiEiyoJotai(): string {
                 return "onChange_radGenzaiEiyoJotai";
             }
@@ -115,6 +119,10 @@ module DBE {
 
             public chkHasseiShojo(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkHasseiShojo"));
+            }
+
+            public Dummy01(): UZA.Space {
+                return new UZA.Space(this.convFiledName("Dummy01"));
             }
 
             public chkJotaiSonota(): UZA.CheckBoxList {

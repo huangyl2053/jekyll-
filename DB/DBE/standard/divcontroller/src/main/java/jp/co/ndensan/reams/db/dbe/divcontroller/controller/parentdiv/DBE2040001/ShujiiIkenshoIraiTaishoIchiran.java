@@ -201,7 +201,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             getValidationHandler().主治医意見書作成依頼一覧データの複数行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, getHandler(div).getCheckbox().get(0).getShinseishoKanriNo());
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(getHandler(div).getCheckbox().get(0).getShinseishoKanriNo()));
         RealInitialLocker.release(排他キー);
         return ResponseData.of(div).forwardWithEventName(DBE2040001TransitionEventName.主治医意見書作成依頼画面へ遷移する).respond();
     }

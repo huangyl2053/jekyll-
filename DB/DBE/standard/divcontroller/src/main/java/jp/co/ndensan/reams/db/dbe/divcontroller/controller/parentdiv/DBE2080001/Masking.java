@@ -117,10 +117,6 @@ public class Masking {
      */
     public ResponseData<MaskingDiv> onChange_TxtSaidaiHyojiKensu(MaskingDiv div) {
         getHandler(div).initialize();
-        if (div.getTxtSaidaiHyojiKensu().getValue().toString().isEmpty() || div.getTxtSaidaiHyojiKensu().getValue().compareTo(Decimal.ZERO) == 0) {
-            div.getTxtSaidaiHyojiKensu().setValue(
-                    new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        }
         return ResponseData.of(div).respond();
     }
 

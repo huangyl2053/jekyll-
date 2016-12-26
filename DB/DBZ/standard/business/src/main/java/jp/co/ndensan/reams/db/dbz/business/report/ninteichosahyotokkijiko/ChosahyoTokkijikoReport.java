@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSource> {
 
-    private List<ChosahyoTokkijikoBusiness> businessList;
-    private ChosahyoTokkijikoBusiness business;
+    private final List<ChosahyoTokkijikoBusiness> businessList;
+    private final ChosahyoTokkijikoBusiness business;
     private final ReportId id;
 
     /**
@@ -31,6 +31,7 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
      * @param id 帳票ID
      */
     public ChosahyoTokkijikoReport(ChosahyoTokkijikoBusiness business, ReportId id) {
+        this.businessList = null;
         this.business = business;
         this.id = id;
     }
@@ -43,6 +44,7 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
      */
     public ChosahyoTokkijikoReport(List<ChosahyoTokkijikoBusiness> businessList, ReportId id) {
         this.businessList = businessList;
+        this.business = null;
         this.id = id;
     }
 
@@ -131,7 +133,8 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
                 IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoKatamenBuilderImpl(editor);
                 reportSourceWriter.writeLine(builder);
             }
-        } else if (ReportIdDBZ.DBE221003.getReportId().equals(id) || ReportIdDBZ.DBE221031.getReportId().equals(id)
+        } else if (ReportIdDBZ.DBE221003.getReportId().equals(id)
+                || ReportIdDBZ.DBE221031.getReportId().equals(id)
                 || ReportIdDBZ.DBE221032.getReportId().equals(id)) {
             if (business == null) {
                 for (ChosahyoTokkijikoBusiness chosahyoTokkijikoBusiness : businessList) {

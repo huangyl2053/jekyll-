@@ -11,9 +11,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 /**
  * HasseiJotaiTaishoHoshin のクラスファイル 
  * 
+ * @author 自動生成
  */
 public class HasseiJotaiTaishoHoshinDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,6 +23,8 @@ public class HasseiJotaiTaishoHoshinDiv extends Panel {
      */
     @JsonProperty("chkHasseiShojo")
     private CheckBoxList chkHasseiShojo;
+    @JsonProperty("Dummy01")
+    private Space Dummy01;
     @JsonProperty("chkJotaiSonota")
     private CheckBoxList chkJotaiSonota;
     @JsonProperty("txtSonotaJotaiShosai")
@@ -51,6 +54,24 @@ public class HasseiJotaiTaishoHoshinDiv extends Panel {
     @JsonProperty("chkHasseiShojo")
     public void setChkHasseiShojo(CheckBoxList chkHasseiShojo) {
         this.chkHasseiShojo = chkHasseiShojo;
+    }
+
+    /*
+     * getDummy01
+     * @return Dummy01
+     */
+    @JsonProperty("Dummy01")
+    public Space getDummy01() {
+        return Dummy01;
+    }
+
+    /*
+     * setDummy01
+     * @param Dummy01 Dummy01
+     */
+    @JsonProperty("Dummy01")
+    public void setDummy01(Space Dummy01) {
+        this.Dummy01 = Dummy01;
     }
 
     /*

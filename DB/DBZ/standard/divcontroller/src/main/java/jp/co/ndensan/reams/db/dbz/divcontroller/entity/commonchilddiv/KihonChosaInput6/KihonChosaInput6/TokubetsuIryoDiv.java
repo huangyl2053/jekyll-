@@ -154,43 +154,243 @@ public class TokubetsuIryoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ButtonDialog getBtnShochiNaiyo() {
-        return this.getShochiNaiyo().getBtnShochiNaiyo();
+    public ButtonDialog getBtnTenteki() {
+        return this.getShochiNaiyo().getBtnTenteki();
     }
 
     @JsonIgnore
-    public void setBtnShochiNaiyo(ButtonDialog btnShochiNaiyo) {
-        this.getShochiNaiyo().setBtnShochiNaiyo(btnShochiNaiyo);
+    public void  setBtnTenteki(ButtonDialog btnTenteki) {
+        this.getShochiNaiyo().setBtnTenteki(btnTenteki);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkShochiNaiyo() {
-        return this.getShochiNaiyo().getChkShochiNaiyo();
+    public CheckBoxList getChkTenteki() {
+        return this.getShochiNaiyo().getChkTenteki();
     }
 
     @JsonIgnore
-    public void setChkShochiNaiyo(CheckBoxList chkShochiNaiyo) {
-        this.getShochiNaiyo().setChkShochiNaiyo(chkShochiNaiyo);
+    public void  setChkTenteki(CheckBoxList chkTenteki) {
+        this.getShochiNaiyo().setChkTenteki(chkTenteki);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnTokiTaiou() {
-        return this.getTokiTaiou().getBtnTokiTaiou();
+    public ButtonDialog getBtnSeimyaku() {
+        return this.getShochiNaiyo().getBtnSeimyaku();
     }
 
     @JsonIgnore
-    public void setBtnTokiTaiou(ButtonDialog btnTokiTaiou) {
-        this.getTokiTaiou().setBtnTokiTaiou(btnTokiTaiou);
+    public void  setBtnSeimyaku(ButtonDialog btnSeimyaku) {
+        this.getShochiNaiyo().setBtnSeimyaku(btnSeimyaku);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkTokiTaiou() {
-        return this.getTokiTaiou().getChkTokiTaiou();
+    public CheckBoxList getChkSeimyaku() {
+        return this.getShochiNaiyo().getChkSeimyaku();
     }
 
     @JsonIgnore
-    public void setChkTokiTaiou(CheckBoxList chkTokiTaiou) {
-        this.getTokiTaiou().setChkTokiTaiou(chkTokiTaiou);
+    public void  setChkSeimyaku(CheckBoxList chkSeimyaku) {
+        this.getShochiNaiyo().setChkSeimyaku(chkSeimyaku);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTouseki() {
+        return this.getShochiNaiyo().getBtnTouseki();
+    }
+
+    @JsonIgnore
+    public void  setBtnTouseki(ButtonDialog btnTouseki) {
+        this.getShochiNaiyo().setBtnTouseki(btnTouseki);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkTouseki() {
+        return this.getShochiNaiyo().getChkTouseki();
+    }
+
+    @JsonIgnore
+    public void  setChkTouseki(CheckBoxList chkTouseki) {
+        this.getShochiNaiyo().setChkTouseki(chkTouseki);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnSutoma() {
+        return this.getShochiNaiyo().getBtnSutoma();
+    }
+
+    @JsonIgnore
+    public void  setBtnSutoma(ButtonDialog btnSutoma) {
+        this.getShochiNaiyo().setBtnSutoma(btnSutoma);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkSutoma() {
+        return this.getShochiNaiyo().getChkSutoma();
+    }
+
+    @JsonIgnore
+    public void  setChkSutoma(CheckBoxList chkSutoma) {
+        this.getShochiNaiyo().setChkSutoma(chkSutoma);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnSansou() {
+        return this.getShochiNaiyo().getBtnSansou();
+    }
+
+    @JsonIgnore
+    public void  setBtnSansou(ButtonDialog btnSansou) {
+        this.getShochiNaiyo().setBtnSansou(btnSansou);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkSansou() {
+        return this.getShochiNaiyo().getChkSansou();
+    }
+
+    @JsonIgnore
+    public void  setChkSansou(CheckBoxList chkSansou) {
+        this.getShochiNaiyo().setChkSansou(chkSansou);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnResupireta() {
+        return this.getShochiNaiyo().getBtnResupireta();
+    }
+
+    @JsonIgnore
+    public void  setBtnResupireta(ButtonDialog btnResupireta) {
+        this.getShochiNaiyo().setBtnResupireta(btnResupireta);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkResupireta() {
+        return this.getShochiNaiyo().getChkResupireta();
+    }
+
+    @JsonIgnore
+    public void  setChkResupireta(CheckBoxList chkResupireta) {
+        this.getShochiNaiyo().setChkResupireta(chkResupireta);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnKikan() {
+        return this.getShochiNaiyo().getBtnKikan();
+    }
+
+    @JsonIgnore
+    public void  setBtnKikan(ButtonDialog btnKikan) {
+        this.getShochiNaiyo().setBtnKikan(btnKikan);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkKikan() {
+        return this.getShochiNaiyo().getChkKikan();
+    }
+
+    @JsonIgnore
+    public void  setChkKikan(CheckBoxList chkKikan) {
+        this.getShochiNaiyo().setChkKikan(chkKikan);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnToutsu() {
+        return this.getShochiNaiyo().getBtnToutsu();
+    }
+
+    @JsonIgnore
+    public void  setBtnToutsu(ButtonDialog btnToutsu) {
+        this.getShochiNaiyo().setBtnToutsu(btnToutsu);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkToutsu() {
+        return this.getShochiNaiyo().getChkToutsu();
+    }
+
+    @JsonIgnore
+    public void  setChkToutsu(CheckBoxList chkToutsu) {
+        this.getShochiNaiyo().setChkToutsu(chkToutsu);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnKeikan() {
+        return this.getShochiNaiyo().getBtnKeikan();
+    }
+
+    @JsonIgnore
+    public void  setBtnKeikan(ButtonDialog btnKeikan) {
+        this.getShochiNaiyo().setBtnKeikan(btnKeikan);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkKeikan() {
+        return this.getShochiNaiyo().getChkKeikan();
+    }
+
+    @JsonIgnore
+    public void  setChkKeikan(CheckBoxList chkKeikan) {
+        this.getShochiNaiyo().setChkKeikan(chkKeikan);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnMonita() {
+        return this.getTokiTaiou().getBtnMonita();
+    }
+
+    @JsonIgnore
+    public void  setBtnMonita(ButtonDialog btnMonita) {
+        this.getTokiTaiou().setBtnMonita(btnMonita);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkMonita() {
+        return this.getTokiTaiou().getChkMonita();
+    }
+
+    @JsonIgnore
+    public void  setChkMonita(CheckBoxList chkMonita) {
+        this.getTokiTaiou().setChkMonita(chkMonita);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnJyokuso() {
+        return this.getTokiTaiou().getBtnJyokuso();
+    }
+
+    @JsonIgnore
+    public void  setBtnJyokuso(ButtonDialog btnJyokuso) {
+        this.getTokiTaiou().setBtnJyokuso(btnJyokuso);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkJyokuso() {
+        return this.getTokiTaiou().getChkJyokuso();
+    }
+
+    @JsonIgnore
+    public void  setChkJyokuso(CheckBoxList chkJyokuso) {
+        this.getTokiTaiou().setChkJyokuso(chkJyokuso);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnbtnKateru() {
+        return this.getTokiTaiou().getBtnbtnKateru();
+    }
+
+    @JsonIgnore
+    public void  setBtnbtnKateru(ButtonDialog btnbtnKateru) {
+        this.getTokiTaiou().setBtnbtnKateru(btnbtnKateru);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkKateru() {
+        return this.getTokiTaiou().getChkKateru();
+    }
+
+    @JsonIgnore
+    public void  setChkKateru(CheckBoxList chkKateru) {
+        this.getTokiTaiou().setChkKateru(chkKateru);
     }
 
     // </editor-fold>

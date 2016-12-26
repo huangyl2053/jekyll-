@@ -299,7 +299,7 @@ public class IchijiHanteiHandler {
                 row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
             }
             if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
-                row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())));
+                row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性().roundUpTo(2))));
             }
             if (business.get推定される給付区分コード() != null && !business.get推定される給付区分コード().isEmpty()) {
                 row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get推定される給付区分コード().value()).get名称());

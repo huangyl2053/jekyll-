@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -23,6 +23,8 @@ public class KozaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
+    private KinyuKikanInputDiv ccdKozaJohoMeisaiKinyuKikanInput;
     @JsonProperty("ddlYokinShubetsu")
     private DropDownList ddlYokinShubetsu;
     @JsonProperty("txtGinkoKozaNo")
@@ -31,8 +33,6 @@ public class KozaJohoDiv extends Panel {
     private TextBox txtKozaMeiginin;
     @JsonProperty("txtKanjiMeiginin")
     private TextBox txtKanjiMeiginin;
-    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
-    private KinyuKikanInputDiv ccdKozaJohoMeisaiKinyuKikanInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,6 +40,15 @@ public class KozaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdKozaJohoMeisaiKinyuKikanInput
+     * @return ccdKozaJohoMeisaiKinyuKikanInput
+     */
+    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
+    public IKinyuKikanInputDiv getCcdKozaJohoMeisaiKinyuKikanInput() {
+        return ccdKozaJohoMeisaiKinyuKikanInput;
+    }
+
     /*
      * getddlYokinShubetsu
      * @return ddlYokinShubetsu
@@ -110,15 +119,6 @@ public class KozaJohoDiv extends Panel {
     @JsonProperty("txtKanjiMeiginin")
     public void setTxtKanjiMeiginin(TextBox txtKanjiMeiginin) {
         this.txtKanjiMeiginin = txtKanjiMeiginin;
-    }
-
-    /*
-     * getccdKozaJohoMeisaiKinyuKikanInput
-     * @return ccdKozaJohoMeisaiKinyuKikanInput
-     */
-    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
-    public IKinyuKikanInputDiv getCcdKozaJohoMeisaiKinyuKikanInput() {
-        return ccdKozaJohoMeisaiKinyuKikanInput;
     }
 
     // </editor-fold>

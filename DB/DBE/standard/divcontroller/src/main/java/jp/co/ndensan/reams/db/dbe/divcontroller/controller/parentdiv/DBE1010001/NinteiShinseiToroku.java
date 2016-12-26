@@ -182,6 +182,8 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
+            div.getBtnTainoJokyo().setDisplayNone(Boolean.TRUE);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(Boolean.TRUE);       
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
 
@@ -330,13 +332,6 @@ public class NinteiShinseiToroku {
         NinteiShinseiBusinessCollection zenkaiJoho = DataPassingConverter.deserialize(div.getHdnRenrakusakiJoho(), NinteiShinseiBusinessCollection.class);
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (MENUID_DBEMN31003.equals(menuID)) {
-            validationMessages.add(getValidationHandler(div).データ重複チェック(
-                    manager.has要介護認定申請情報(div.getCcdShikakuInfo().getHookenshaCode(),
-                            div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue(),
-                            rDateTOFlexDate(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv()
-                                    .getTxtShinseiYMD().getValue()), new Code(div.getCcdKaigoNinteiShinseiKihon().
-                                    getKaigoNinteiShinseiKihonJohoInputDiv()
-                                    .getDdlShinseiKubunShinseiji().getSelectedKey()))));
             validationMessages.add(getValidationHandler(div).被保険者区分チェック());
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
@@ -353,11 +348,6 @@ public class NinteiShinseiToroku {
         } else {
             KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
             NinteiShinseiJoho shinseiJoho = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
-            validationMessages.add(getValidationHandler(div).データ重複チェック(
-                    manager.has要介護認定申請情報(
-                            shinseiJoho.get証記載保険者番号(), shinseiJoho.get被保険者番号(), rDateTOFlexDate(kihonJohoInputDiv
-                                    .getTxtShinseiYMD().getValue()), new Code(kihonJohoInputDiv
-                                    .getDdlShinseiKubunShinseiji().getSelectedKey()))));
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }

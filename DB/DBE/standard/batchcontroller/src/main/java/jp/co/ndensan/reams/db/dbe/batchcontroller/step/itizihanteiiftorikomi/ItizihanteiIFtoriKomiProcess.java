@@ -65,14 +65,12 @@ public class ItizihanteiIFtoriKomiProcess extends BatchProcessBase<IchijiHanteiz
         FileSpoolManager manager = new FileSpoolManager(
                 UzUDE0835SpoolOutputType.EucOther, new RString("ItizihanteiIFtoriKomiProcess"), UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
-        SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(GyomuCode.DB介護保険, new FilesystemName(込ファイル名),
-                paramter.getFileId()), new FilesystemPath(spoolWorkPath));
+        SharedFile.copyToLocal(new FilesystemName(込ファイル名), new FilesystemPath(spoolWorkPath));
         filePath = Path.combinePath(spoolWorkPath, 込ファイル名);
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, IchijiHanteizumIfOutputEucCsvEntity.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                 .hasHeader(false).setNewLine(NewLine.CRLF).build();
         return new BatchCsvReader(csvReader);
-
     }
 
     @Override

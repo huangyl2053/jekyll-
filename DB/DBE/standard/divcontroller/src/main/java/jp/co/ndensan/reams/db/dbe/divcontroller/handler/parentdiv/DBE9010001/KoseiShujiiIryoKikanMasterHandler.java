@@ -17,11 +17,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -97,7 +101,13 @@ public class KoseiShujiiIryoKikanMasterHandler {
                     koseiShujiiIryoKikanMaster.getFAX番号(),
                     koseiShujiiIryoKikanMaster.get代表者名(),
                     koseiShujiiIryoKikanMaster.get代表者名カナ(),
-                    koseiShujiiIryoKikanMaster.is状況フラグ()));
+                    koseiShujiiIryoKikanMaster.is状況フラグ(),
+                    koseiShujiiIryoKikanMaster.get金融機関コード(),
+                    koseiShujiiIryoKikanMaster.get金融機関支店コード(),
+                    koseiShujiiIryoKikanMaster.get預金種別(),
+                    koseiShujiiIryoKikanMaster.get口座番号(),
+                    koseiShujiiIryoKikanMaster.get口座名義人カナ(),
+                    koseiShujiiIryoKikanMaster.get口座名義人()));
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
         if (主治医医療機関情報一覧.exceedsLimit()) {
@@ -123,7 +133,13 @@ public class KoseiShujiiIryoKikanMasterHandler {
             TelNo faxNo,
             RString daihyoshaName,
             RString daihyoshaNameKana,
-            boolean jokyoFlag
+            boolean jokyoFlag,
+            KinyuKikanCode kinyuKikanCode,
+            KinyuKikanShitenCode kinyuKikanShitenCode,
+            RString yokinShubetsu,
+            RString kozaNo,
+            AtenaKanaMeisho kozaMeigininKana,
+            AtenaMeisho kozaMeiginin
     ) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         row.setJotai(jotai);
@@ -143,6 +159,12 @@ public class KoseiShujiiIryoKikanMasterHandler {
         row.setDaihyosha(daihyoshaName != null ? daihyoshaName : RString.EMPTY);
         row.setDaihyoshakana(nullToEmpty(daihyoshaNameKana));
         row.setJokyoFlag(jokyoFlag ? 表示値_有効 : 表示値_無効);
+        row.setKinyuKikanCode(kinyuKikanCode != null ? kinyuKikanCode.value() : RString.EMPTY);
+        row.setKinyuKikanShitenCode(kinyuKikanShitenCode != null ? kinyuKikanShitenCode.value() : RString.EMPTY);
+        row.setYokinShubetsu(yokinShubetsu);
+        row.setKozaNo(kozaNo);
+        row.setKozaMeigininKana(kozaMeigininKana != null ? kozaMeigininKana.value() : RString.EMPTY);
+        row.setKozaMeiginin(kozaMeiginin != null ? kozaMeiginin.value() : RString.EMPTY);
         return row;
     }
 
@@ -166,6 +188,12 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getShujiiJohoInput().getTxtdaihyoshakananame().setValue(nullToEmpty(row.getDaihyoshakana()));
         div.getShujiiJohoInput().getRadJokyoFlag().setSelectedKey(
                 表示値_有効.equals(row.getJokyoFlag()) ? CODE_有効 : CODE_無効);
+        div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
+                new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(row.getKinyuKikanShitenCode()), FlexibleDate.getNowDate());
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu() == null ? new RString(0) : row.getYokinShubetsu());
+        div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setValue(row.getKozaNo());
+        div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
+        div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());
     }
 
     private RString nullToEmpty(RString obj) {
@@ -285,6 +313,11 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getShujiiJohoInput().getTxtdaihyoshaname().setDisabled(true);
         div.getShujiiJohoInput().getTxtdaihyoshakananame().setDisabled(true);
         div.getShujiiJohoInput().getRadJokyoFlag().setDisabled(true);
+        div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().setDisabled(true);
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setDisabled(true);
+        div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setDisabled(true);
+        div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().setDisabled(true);
+        div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setDisabled(true);
     }
 
     /**
@@ -306,6 +339,11 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getShujiiJohoInput().getTxtdaihyoshakananame().setDisabled(false);
         div.getShujiiJohoInput().getRadJokyoFlag().setDisabled(false);
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
+        div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().setDisabled(false);
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setDisabled(false);
+        div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setDisabled(false);
+        div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().setDisabled(false);
+        div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setDisabled(false);
     }
 
     /**
@@ -325,6 +363,11 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getShujiiJohoInput().getTxtdaihyoshaname().clearValue();
         div.getShujiiJohoInput().getTxtdaihyoshakananame().clearValue();
         div.getShujiiJohoInput().getRadJokyoFlag().setSelectedIndex(0);
+        div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
     }
 
     /**

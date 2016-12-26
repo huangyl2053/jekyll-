@@ -217,7 +217,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         FlexibleDate 年月日 = entity.getNinteiShinseiYMD();
         RString 申請年月日 = 年月日 == null ? RString.EMPTY : 年月日.wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.shinseiYMD = 申請年月日;
     }
 
@@ -253,7 +253,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         source.birthGengoShowa = tempP_誕生日昭和;
         source.birthYMD = entity.getSeinengappiYMD() == null ? RString.EMPTY : entity.getSeinengappiYMD().
                 wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(2);
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(2);
     }
 
     private void edit住所郵便(NinteiChosaTokusokujoReportSource source) {

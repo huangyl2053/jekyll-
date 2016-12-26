@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001.dgHa
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3100001.KanryoshoriCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3100001.KanryoshoriIchijihanteiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3100001.KanryoshoriIchijihanteiValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.kanryoshoriichijihantei.KanryoshoriIchijihanteiManager;
@@ -46,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -81,16 +83,12 @@ public class KanryoshoriIchijihantei {
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             throw new PessimisticLockingException();
         }
-
-        //テスト用値設定
-        div.setIchijiHanteiArgument(new RString("before"));
-
         return ResponseData.of(div).respond();
     }
 
     /**
      * 処理対象を示すラジオボタンに変更があった場合に発生するイベントです。<br/>
-     * 処理対象者の再建策を行います。
+     * 処理対象者の再検索を行います。
      *
      * @param div KanryoshoriIchijihanteiDiv
      * @return レスポンスデータ
@@ -101,7 +99,7 @@ public class KanryoshoriIchijihantei {
 
     /**
      * 処理対象者の最大表示件数に変更があった場合に発生するイベントです。<br/>
-     * 処理対象者の再建策を行います。
+     * 処理対象者の再検索を行います。
      *
      * @param div KanryoshoriIchijihanteiDiv
      * @return レスポンスデータ
@@ -118,6 +116,10 @@ public class KanryoshoriIchijihantei {
             if (models.hasAnyChanged()) {
                 return ResponseData.of(div).addMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().replace("一次判定結果")).respond();
             }
+
+            getHandler(div).set対象者一覧();
+            getHandler(div).set対象者数();
+            getHandler(div).setHiddenSearchCondition();
         }
 
         if (new RString(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode())
@@ -127,10 +129,13 @@ public class KanryoshoriIchijihantei {
             getHandler(div).set対象者一覧();
             getHandler(div).set対象者数();
             getHandler(div).setHiddenSearchCondition();
-        } else {
+        } else if (new RString(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             getHandler(div).resetSearchCondition();
         }
 
+        getHandler(div).setCommonButtonDisplayNone();
         return ResponseData.of(div).respond();
     }
 
@@ -180,7 +185,7 @@ public class KanryoshoriIchijihantei {
 
             List<dgHanteiTaishosha_Row> rowList = div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getSelectedItems();
             for (dgHanteiTaishosha_Row row : rowList) {
-                csvWriter.writeLine(getCsvData(row));
+                csvWriter.writeLine(getHandler(div).getCsvData(row));
 
                 handler.setLogOfPersonalData(row, AccessLogType.照会);
             }
@@ -223,7 +228,7 @@ public class KanryoshoriIchijihantei {
             Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報Models
                     = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
 
-            if (要介護認定一次判定結果情報Models == null || 要介護認定一次判定結果情報Models.aliveValues().isEmpty()
+            if (要介護認定一次判定結果情報Models == null || 要介護認定一次判定結果情報Models.values().isEmpty()
                     || !要介護認定一次判定結果情報Models.hasAnyChanged()) {
                 return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
             }
@@ -249,73 +254,52 @@ public class KanryoshoriIchijihantei {
      * @return レスポンスデータ
      */
     public ResponseData<KanryoshoriIchijihanteiDiv> onClick_BtnCompleteIchijiHantei(KanryoshoriIchijihanteiDiv div) {
+
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+
         if (!ResponseHolder.isReRequest()) {
+            validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧データの存在チェック());
+            validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧データの行選択チェック());
+            if (validationMessages.existsError()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧データの存在チェック());
-            validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧データの行選択チェック());
 
-            List<dgHanteiTaishosha_Row> rowList = div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getSelectedItems();
-            for (dgHanteiTaishosha_Row row : rowList) {
-
-                //完了データは表示されないはずなのでチェック不要。
-//                if (row.getIchijiHanteiKanryoDay().getValue() != null) {
-//                    validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧選択行の完了処理チェック());
-//                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-//                }
-                Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
-                        = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
-                RString 申請書管理番号 = row.getShinseishoKanriNo();
-
-                if (!RString.isNullOrEmpty(申請書管理番号) && !is仮一次判定(申請書管理番号)) {
-                    NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
-                            new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
-                    KanryoshoriIchijihanteiManager.createInstance().要介護認定完了情報更新(getHandler(div)
-                            .要介護認定完了情報更新(ninteiKanryoJoho));
-
-                }
+            //TODOn8178 仮判定区分によるチェックも必要？
+            validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧選択行の完了処理チェック());
+            if (validationMessages.existsError()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+
+            List<ShinseishoKanriNo> noList = getHandler(div).getSelected申請書管理番号();
+
+            NinteiKanryoJohoManager ninteiKanryoManager = NinteiKanryoJohoManager.createInstance();
+            List<NinteiKanryoJoho> ninteiKanryoJohoList = ninteiKanryoManager.get要介護認定完了情報List(noList);
+            List<NinteiKanryoJoho> outputNinteiKanryoJohoList = new ArrayList<>();
+
+            FlexibleDate nowDate = FlexibleDate.getNowDate();
+            for (NinteiKanryoJoho joho : ninteiKanryoJohoList) {
+                outputNinteiKanryoJohoList.add(joho.createBuilderForEdit().set要介護認定一次判定完了年月日(nowDate).build());
+            }
+            ninteiKanryoManager.save要介護認定完了情報List(outputNinteiKanryoJohoList);
+
+            div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定を完了しました。"));
+
             RealInitialLocker.release(LOCKINGKEY);
             div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).setState(DBE3100001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
 
-    private KanryoshoriCsvEntity getCsvData(dgHanteiTaishosha_Row row) {
-        //大きくなる。
-//        return new KanryoshoriCsvEntity(row.getShinseishoKanriNo(),
-//                row.getHokensha(),
-//                getパターン1(new RDate(row.getShinseibi().getValue().toString())),
-//                row.getHihokenNo(),
-//                row.getHihokenshaName(),
-//                row.getShinseiKbnShin(),
-//                RString.EMPTY,//getパターン1(row.getChosahyoKanryoDay().getValue()),
-//                RString.EMPTY,//getパターン1(row.getIkenshoNyushuKanryoDay().getValue()),
-//                RString.EMPTY,//getパターン1(row.getIchijiHanteiKanryoDay().getValue()),
-//                getパターン1(row.get().getValue()),
-//                getパターン1(row.getIchijiHantei().getValue()),
-//                row.getIchijiHanteiKekka(),
-//                row.getKeikokuCode()
-//        );
-        return null;
-
-    }
-
-    private RString getValueOrEmpty(RDate date) {
-        if (date == null) {
-            return RString.EMPTY;
-        }
-        return date.wareki().toDateString();
-    }
-
     private boolean is仮一次判定(RString 申請書管理番号) {
-
         return KanryoshoriIchijihanteiManager.createInstance().get仮一次判定区分(new ShinseishoKanriNo(申請書管理番号));
     }
 
@@ -395,4 +379,20 @@ public class KanryoshoriIchijihantei {
 
         return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定処理完了.getMessage()).respond();
     }
+
+    /**
+     * 一次判定処理後の戻り値を判定する処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<KanryoshoriIchijihanteiDiv> onClick_btnSaishori(KanryoshoriIchijihanteiDiv div) {
+        getHandler(div).initialize();
+
+        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
+            throw new PessimisticLockingException();
+        }
+        return ResponseData.of(div).setState(DBE3100001StateName.初期表示);
+    }
+
 }

@@ -67,6 +67,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
 
         if (entity.getDbT5101Entity() == null) {
             dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
+            dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
         } else {
             if (更新フラグ１(entity)) {
                 dbT5101Writer.update(business.setDbt5101Entity(entity, 更新1, processParamter));

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1.TempData;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.definition.core.ichijihanteikekkacode.IchijiHanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
@@ -53,8 +52,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoChosaItemManager;
@@ -475,17 +472,17 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     private ResponseData<NinnteiChousaKekkaTouroku1Div> 在宅クリック(NinnteiChousaKekkaTouroku1Div div) {
 
-//        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
-//        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所)) {
-//            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅外で在宅.getMessage().getCode(),
-//                    DbeWarningMessages.自宅外で在宅.getMessage().evaluate());
-//            return ResponseData.of(div).addMessage(message).respond();
-//        }
-//        if (new RString(DbeWarningMessages.自宅外で在宅.getMessage().getCode())
-//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-//            div.getTabChosaBasho().setSelectedItem(new tplShisetsuDiv());
-//            return ResponseData.of(div).respond();
-//        }
+        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
+        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所)) {
+            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅外で在宅.getMessage().getCode(),
+                    DbeWarningMessages.自宅外で在宅.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(DbeWarningMessages.自宅外で在宅.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            div.getTabChosaBasho().setSelectedItem(new tplShisetsuDiv());
+            return ResponseData.of(div).respond();
+        }
         ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 在宅);
         div.getRadGenzaiservis().setDisabled(Boolean.FALSE);
         return ResponseData.of(div).respond();
@@ -499,17 +496,17 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     private ResponseData<NinnteiChousaKekkaTouroku1Div> 施設クリック(NinnteiChousaKekkaTouroku1Div div) {
 
-//        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
-//        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅内.get名称().equals(実施場所)) {
-//            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅内で施設.getMessage().getCode(),
-//                    DbeWarningMessages.自宅内で施設.getMessage().evaluate());
-//            return ResponseData.of(div).addMessage(message).respond();
-//        }
-//        if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
-//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-//            div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
-//            return ResponseData.of(div).respond();
-//        }
+        RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
+        if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅内.get名称().equals(実施場所)) {
+            WarningMessage message = new WarningMessage(DbeWarningMessages.自宅内で施設.getMessage().getCode(),
+                    DbeWarningMessages.自宅内で施設.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(DbeWarningMessages.自宅内で施設.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
+            return ResponseData.of(div).respond();
+        }
         RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
         ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 施設);
         getHandler(div).施設の表示(temp_厚労省IF識別コード);
@@ -565,7 +562,7 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnIchiHanteiJisshi(NinnteiChousaKekkaTouroku1Div div) {
-        ViewStateHolder.put(ViewStateKeys.モード, ModeType.ADD_MODE);
+        ViewStateHolder.put(ViewStateKeys.モード, ModeType.SHOKAI_MODE);
         return ResponseData.of(div).respond();
     }
 
@@ -941,7 +938,7 @@ public class NinnteiChousaKekkaTouroku1 {
             更新処理(div);
             前排他キーの解除();
             div.getKanryoMessage().getCcdKanryoMessage().setMessage(
-                    new RString(UrInformationMessages.正常終了.getMessage().replace("処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2210001StateName.完了);
         }
         return ResponseData.of(div).respond();

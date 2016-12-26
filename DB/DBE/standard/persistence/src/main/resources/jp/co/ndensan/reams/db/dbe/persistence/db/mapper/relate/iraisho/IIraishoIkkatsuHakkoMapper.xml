@@ -19,11 +19,11 @@
             rgdb."DbT5101NinteiShinseiJoho"                  
         <where>                    
             AND "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
-            AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode"                  
+            AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
             AND "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
-            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode"                  
-            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5101NinteiShinseiJoho"."ninteiChosainCode"                  
-            AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                  
+            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
+            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"                  
+            AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"             
             AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = 
             (SELECT 
                 MAX("ninteichosaIraiRirekiNo") 
@@ -37,10 +37,16 @@
             AND "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"         
             AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})                 
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false                  
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL                  
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL                  
-            AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL 
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+                OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" = '')                   
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL 
+                OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" = '')                     
+            AND ("DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL 
+                OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = '')
+            AND ("DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{転入}
+                AND "DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{喪失})
             <if test="is依頼日From">
                 AND #{依頼日From} <![CDATA[<=]]> "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"
             </if>
@@ -49,10 +55,12 @@
             </if>
             <if test="!is認定調査依頼書未印刷_印刷済">
                 <if test="is認定調査依頼書未印刷">
-                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL
+                    AND ("DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL 
+                        OR "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" = '')    
                 </if>
                 <if test="is認定調査依頼書印刷済">
-                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+                    AND ("DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+                        AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')  
                 </if>
             </if>
             <if test="is保険者">
@@ -61,10 +69,12 @@
             </if>
             <if test="!is認定調査票未印刷_印刷済">
                 <if test="is認定調査票未印刷">
-                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NULL
+                    AND ("DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NULL 
+                        OR "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" = '')    
                 </if>
                 <if test="is認定調査票印刷済">
-                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NOT NULL
+                    AND ("DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NOT NULL
+                        AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')  
                 </if>
             </if>
          </where>
@@ -125,10 +135,14 @@
             AND "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"         										
             AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})										
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false									
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL                  
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL                  
-            AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL 	
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')                   
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+                OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')                    
+            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL 
+                OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" <![CDATA[<>]]> '')                      
+            AND ("DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL 
+                OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" <![CDATA[<>]]> '')    	
             <if test="is依頼日From">
                 AND #{依頼日From} <![CDATA[<=]]> "DbT5301ShujiiIkenshoIraiJoho"."ikenshoSakuseiIraiYMD"
             </if>
@@ -137,10 +151,12 @@
             </if>
             <if test="!is主治医意見書作成依頼書未印刷_印刷済">
                 <if test="is主治医意見書作成依頼書未印刷">
-                    AND "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NULL
+                    AND ("DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NULL 
+                        OR "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')    
                 </if>
                 <if test="is主治医意見書作成依頼書印刷済">
-                    AND "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+                    AND ("DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+                        AND "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')  
                 </if>
             </if>
             <if test="is保険者">
@@ -149,10 +165,12 @@
             </if>
             <if test="!is主治医意見書未印刷_印刷済">
                 <if test="is主治医意見書未印刷">
-                    AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NULL
+                    AND ("DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NULL 
+                        OR "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" <![CDATA[<>]]> '')    
                 </if>
                 <if test="is主治医意見書印刷済">
-                    AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NOT NULL
+                    AND ("DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NOT NULL
+                        AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" <![CDATA[<>]]> '')  
                 </if>
             </if>
          </where>

@@ -4,6 +4,10 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_chkHokohojoShiyo = function () {
+                return "onChange_chkHokohojoShiyo";
+            };
+
             Events.onChange_radGenzaiEiyoJotai = function () {
                 return "onChange_radGenzaiEiyoJotai";
             };
@@ -109,6 +113,10 @@ var DBE;
 
             Controls.prototype.chkHasseiShojo = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkHasseiShojo"));
+            };
+
+            Controls.prototype.Dummy01 = function () {
+                return new UZA.Space(this.convFiledName("Dummy01"));
             };
 
             Controls.prototype.chkJotaiSonota = function () {

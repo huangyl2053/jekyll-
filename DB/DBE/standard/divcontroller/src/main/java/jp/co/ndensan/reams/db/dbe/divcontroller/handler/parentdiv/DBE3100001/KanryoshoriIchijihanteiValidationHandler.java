@@ -78,23 +78,28 @@ public class KanryoshoriIchijihanteiValidationHandler {
         return pairs;
     }
 
-    //TODO n8178 城間　完了データは表示しないためチェック不要か？　後で削除する。
-//    /**
-//     * 一次判定完了対象者一覧選択行の完了処理チェックを行います。
-//     *
-//     * @param pairs バリデーションコントロール
-//     * @return バリデーション結果
-//     */
-//    public ValidationMessageControlPairs 一次判定完了対象者一覧選択行の完了処理チェック() {
-//        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-//        pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.一次判定完了対象者一覧選択行の完了処理チェック));
-//        return pairs;
-//    }
+    /**
+     * 一次判定完了対象者一覧選択行の完了処理チェックを行います。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 一次判定完了対象者一覧選択行の完了処理チェック() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        List<dgHanteiTaishosha_Row> list = div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getSelectedItems();
+        for (dgHanteiTaishosha_Row row : list) {
+            if ((row.getIchijiHanteibi().getValue() == null || row.getIchijiHanteibi().getValue().isEmpty())) {
+                pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.一次判定完了対象者一覧選択行の完了処理チェック));
+                return pairs;
+            }
+        }
+        return pairs;
+    }
+
     private static enum KanryoshoriIchijihanteiMessages implements IValidationMessage {
 
         一次判定完了対象者一覧データの存在チェック(UrErrorMessages.該当データなし),
         一次判定完了対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択),
-        一次判定完了対象者一覧選択行の完了処理チェック(DbzErrorMessages.理由付き完了不可, "完了済みデータ"),
+        一次判定完了対象者一覧選択行の完了処理チェック(DbzErrorMessages.理由付き完了不可, "一次判定未処理データ"),
         一次判定引数チェック(DbeErrorMessages.一次判定実行不可_申請日);
         private final Message message;
 

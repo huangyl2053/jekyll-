@@ -559,7 +559,7 @@ public class GaikyoTokkiYichiranNyuroku {
         if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue().isEmpty()) {
             return ResponseData.of(div).respond();
         }
-        
+
         if (!ResponseHolder.isReRequest()) {
             ErrorMessage message = getHandler(div).checkChange特記事項(
                     getKey(div, KEY1), div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
@@ -594,7 +594,7 @@ public class GaikyoTokkiYichiranNyuroku {
         if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue().isEmpty()) {
             return ResponseData.of(div).respond();
         }
-        
+
         if (!ResponseHolder.isReRequest()) {
             ErrorMessage message = getHandler(div).checkChange特記事項(
                     getKey(div, KEY2), div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
@@ -629,7 +629,7 @@ public class GaikyoTokkiYichiranNyuroku {
         if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue().isEmpty()) {
             return ResponseData.of(div).respond();
         }
-        
+
         if (!ResponseHolder.isReRequest()) {
             ErrorMessage message = getHandler(div).checkChange特記事項(
                     getKey(div, KEY3), div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
@@ -664,7 +664,7 @@ public class GaikyoTokkiYichiranNyuroku {
         if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue().isEmpty()) {
             return ResponseData.of(div).respond();
         }
-        
+
         if (!ResponseHolder.isReRequest()) {
             ErrorMessage message = getHandler(div).checkChange特記事項(
                     getKey(div, KEY4), div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
@@ -699,7 +699,7 @@ public class GaikyoTokkiYichiranNyuroku {
         if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue().isEmpty()) {
             return ResponseData.of(div).respond();
         }
-        
+
         if (!ResponseHolder.isReRequest()) {
             ErrorMessage message = getHandler(div).checkChange特記事項(
                     getKey(div, KEY5), div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
@@ -734,6 +734,9 @@ public class GaikyoTokkiYichiranNyuroku {
 
         boolean notEmpty = getHandler(div).onClick_btnBack();
 
+        if (!ResponseHolder.isReRequest() && (!notEmpty)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
+        }
         if (!ResponseHolder.isReRequest() && (notEmpty)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                     UrQuestionMessages.画面遷移の確認.getMessage().evaluate());

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-110 wangkun
  */
 public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -481,6 +481,16 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     @JsonIgnore
     public void  setChkHasseiShojo(CheckBoxList chkHasseiShojo) {
         this.getHasseiJotaiTaishoHoshin().setChkHasseiShojo(chkHasseiShojo);
+    }
+
+    @JsonIgnore
+    public Space getDummy01() {
+        return this.getHasseiJotaiTaishoHoshin().getDummy01();
+    }
+
+    @JsonIgnore
+    public void  setDummy01(Space Dummy01) {
+        this.getHasseiJotaiTaishoHoshin().setDummy01(Dummy01);
     }
 
     @JsonIgnore

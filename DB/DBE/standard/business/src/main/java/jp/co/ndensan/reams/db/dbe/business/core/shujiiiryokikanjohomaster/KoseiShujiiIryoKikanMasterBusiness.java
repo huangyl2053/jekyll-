@@ -9,6 +9,10 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -16,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関情報を管理するクラスです。
+ *
  * @reamsid_L DBE-0240-010 dongyabin
  */
 public class KoseiShujiiIryoKikanMasterBusiness {
@@ -138,6 +143,60 @@ public class KoseiShujiiIryoKikanMasterBusiness {
      */
     public RString get代表者名カナ() {
         return entity.getDaihyoshaNameKana();
+    }
+
+    /**
+     * 金融機関コードを返します。
+     *
+     * @return 金融機関コード
+     */
+    public KinyuKikanCode get金融機関コード() {
+        return entity.getKinyuKikanCode();
+    }
+
+    /**
+     * 金融機関支店コードを返します。
+     *
+     * @return 金融機関支店コード
+     */
+    public KinyuKikanShitenCode get金融機関支店コード() {
+        return entity.getKinyuKikanShitenCode();
+    }
+
+    /**
+     * 預金種別を返します。
+     *
+     * @return 預金種別
+     */
+    public RString get預金種別() {
+        return entity.getYokinShubetsu();
+    }
+
+    /**
+     * 口座番号を返します。
+     *
+     * @return 口座番号
+     */
+    public RString get口座番号() {
+        return entity.getKozaNo();
+    }
+
+    /**
+     * 口座名義人カナを返します。
+     *
+     * @return 口座名義人カナ
+     */
+    public AtenaKanaMeisho get口座名義人カナ() {
+        return entity.getKozaMeigininKana();
+    }
+
+    /**
+     * 口座名義人を返します。
+     *
+     * @return 口座名義人
+     */
+    public AtenaMeisho get口座名義人() {
+        return entity.getKozaMeiginin();
     }
 
     /**

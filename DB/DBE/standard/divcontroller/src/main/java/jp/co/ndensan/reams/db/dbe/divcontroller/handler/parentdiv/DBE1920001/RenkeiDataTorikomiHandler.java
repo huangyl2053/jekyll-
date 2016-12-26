@@ -75,7 +75,6 @@ public class RenkeiDataTorikomiHandler {
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString 共有ファイル名 = new RString("要介護認定申請連携データ取込");
     private static final int 無 = 0;
-    private static final int タイトルINDEX = 1;
     private final RenkeiDataTorikomiDiv div;
     private final RDate 基準日;
 
@@ -229,7 +228,7 @@ public class RenkeiDataTorikomiHandler {
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setEncode(コード)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build()) {
+                        .hasHeader(false).build()) {
                     List<NinteiShinseiJohoDensanCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
                         NinteiShinseiJohoDensanCsvEntity entity = csvReader.readLine();
@@ -268,7 +267,7 @@ public class RenkeiDataTorikomiHandler {
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setEncode(コード)
                         .setNewLine(NewLine.CRLF)
-                        .hasHeader(true).build()) {
+                        .hasHeader(false).build()) {
                     List<NinteiShinseiJohoKouroushouCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
                         NinteiShinseiJohoKouroushouCsvEntity entity = csvReader.readLine();
@@ -304,7 +303,7 @@ public class RenkeiDataTorikomiHandler {
             } else if (東芝版_197 == size) {
                 try (CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
                         filePath, NinteiShinseiJohoDensanCsvEntity.class).setDelimiter(EUC_WRITER_DELIMITER)
-                        .setEncode(コード).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                        .setEncode(コード).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
                     List<NinteiShinseiJohoDensanCsvEntity> csvEntityList = new ArrayList<>();
                     while (true) {
                         NinteiShinseiJohoDensanCsvEntity csventity = csvReader.readLine();
@@ -361,7 +360,7 @@ public class RenkeiDataTorikomiHandler {
             if (list.size() == 無) {
                 row.setTotal(new RString(list.size()));
             } else {
-                row.setTotal(new RString(list.size() - タイトルINDEX));
+                row.setTotal(new RString(list.size()));
             }
         } else {
             row.setTotal(なし);

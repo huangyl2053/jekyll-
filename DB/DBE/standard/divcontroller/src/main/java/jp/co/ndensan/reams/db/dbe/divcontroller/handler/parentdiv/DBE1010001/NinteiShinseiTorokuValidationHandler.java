@@ -39,15 +39,15 @@ public class NinteiShinseiTorokuValidationHandler {
 
     /**
      *
-     * データ重複チェック
+     * 編集なしチェック
      *
-     * @param hasFlag データ重複フラグ
+     * @param flag フラグ
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs データ重複チェック(boolean hasFlag) {
+    public ValidationMessageControlPairs 編集なしチェック(boolean flag) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (hasFlag) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.既に登録済));
+        if (flag) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.編集なしで更新不可));
             return validationMessages;
         }
         return validationMessages;
@@ -73,7 +73,7 @@ public class NinteiShinseiTorokuValidationHandler {
 
     private static enum NinteiShinseiTorokuMessages implements IValidationMessage {
 
-        既に登録済(UrErrorMessages.既に登録済, "証記載保険者番号、被保険者番号、認定申請年月日と認定申請区分(申請時)コード"),
+        編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
         項目に対する制約(UrErrorMessages.項目に対する制約, "みなし２号審査受付場合、被保険者区分", "\"8\" (生活保護)");
 
         private final Message message;

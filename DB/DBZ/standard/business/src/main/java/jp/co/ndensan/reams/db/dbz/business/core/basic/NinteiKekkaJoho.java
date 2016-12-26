@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -75,6 +78,132 @@ public class NinteiKekkaJoho extends
     }
 
     /**
+     * 二次判定年月日を返します。
+     *
+     * @return 二次判定年月日
+     */
+    public FlexibleDate get二次判定年月日() {
+        return entity.getNijiHanteiYMD();
+    }
+
+    /**
+     * 二次判定要介護状態区分コードを返します。
+     *
+     * @return 二次判定要介護状態区分コード
+     */
+    public Code get二次判定要介護状態区分コード() {
+        return entity.getNijiHanteiYokaigoJotaiKubunCode();
+    }
+
+    /**
+     * 二次判定認定有効期間を返します。
+     *
+     * @return 二次判定認定有効期間
+     */
+    public int get二次判定認定有効期間() {
+        return entity.getNijiHanteiNinteiYukoKikan();
+    }
+
+    /**
+     * 二次判定認定有効開始年月日を返します。
+     *
+     * @return 二次判定認定有効開始年月日
+     */
+    public FlexibleDate get二次判定認定有効開始年月日() {
+        return entity.getNijiHanteiNinteiYukoKaishiYMD();
+    }
+
+    /**
+     * 二次判定認定有効終了年月日を返します。
+     *
+     * @return 二次判定認定有効終了年月日
+     */
+    public FlexibleDate get二次判定認定有効終了年月日() {
+        return entity.getNijiHanteiNinteiYukoShuryoYMD();
+    }
+
+    /**
+     * 介護認定審査会資料作成年月日を返します。
+     *
+     * @return 介護認定審査会資料作成年月日
+     */
+    public FlexibleDate get介護認定審査会資料作成年月日() {
+        return entity.getShinsakaiShiryoSakuseiYMD();
+    }
+
+    /**
+     * 介護認定審査会開催番号を返します。
+     *
+     * @return 介護認定審査会開催番号
+     */
+    public RString get介護認定審査会開催番号() {
+        return entity.getShinsakaiKaisaiNo();
+    }
+
+    /**
+     * 介護認定審査会意見を返します。
+     *
+     * @return 介護認定審査会意見
+     */
+    public RString get介護認定審査会意見() {
+        return entity.getShinsakaiIken();
+    }
+
+    /**
+     * 一次判定結果変更理由を返します。
+     *
+     * @return 一次判定結果変更理由
+     */
+    public RString get一次判定結果変更理由() {
+        return entity.getIchijiHanteiKekkaHenkoRiyu();
+    }
+
+    /**
+     * 要介護状態像例コードを返します。
+     *
+     * @return 要介護状態像例コード
+     */
+    public Code get要介護状態像例コード() {
+        return entity.getYokaigoJotaizoReiCode();
+    }
+
+    /**
+     * 認定審査会意見種類を返します。
+     *
+     * @return 認定審査会意見種類
+     */
+    public RString get認定審査会意見種類() {
+        return entity.getNinteishinsakaiIkenShurui();
+    }
+
+    /**
+     * 審査会メモを返します。
+     *
+     * @return 審査会メモ
+     */
+    public RString get審査会メモ() {
+        return entity.getShinsakaiMemo();
+    }
+
+    /**
+     * 二次判定結果入力方法を返します。
+     *
+     * @return 二次判定結果入力方法
+     */
+    public Code get二次判定結果入力方法() {
+        return entity.getNijiHanteiKekkaInputHoho();
+    }
+
+    /**
+     * 二次判定結果入力年月日を返します。
+     *
+     * @return 二次判定結果入力年月日
+     */
+    public FlexibleDate get二次判定結果入力年月日() {
+        return entity.getNijiHanteiKekkaInputYMD();
+    }
+
+    /**
      * {@link DbT5102NinteiKekkaJohoEntity}のクローンを返します。
      *
      * @return {@link DbT5102NinteiKekkaJohoEntity}のクローン
@@ -95,7 +224,8 @@ public class NinteiKekkaJoho extends
     }
 
     /**
-     * 要介護認定結果情報のみを変更対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定結果情報のみを変更対象とします。<br/>
+     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiKekkaJoho}
      */
@@ -109,7 +239,8 @@ public class NinteiKekkaJoho extends
     }
 
     /**
-     * 保持する要介護認定結果情報を削除対象とします。<br/> {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定結果情報を削除対象とします。<br/>
+     * {@link DbT5102NinteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiKekkaJoho}
      */
