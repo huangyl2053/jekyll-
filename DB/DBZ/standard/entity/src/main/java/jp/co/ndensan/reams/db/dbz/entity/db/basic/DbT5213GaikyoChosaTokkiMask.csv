@@ -1,0 +1,4 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+ninteichosaRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
+gaikyoChosaTextImageKubun,bpchar,RString,,,,,概況調査テキスト・イメージ区分,A
+tokki,text,RString,,,,,特記,A
