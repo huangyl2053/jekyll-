@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.Ichijihanteikekk
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3.JimuShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -35,10 +36,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -82,6 +86,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     private static final RString ファイル名_G0001 = new RString("G0001.png");
     private boolean is審査会対象一覧印刷済み;
     private static final RString SEPARATOR = new RString("/");
+    private List<ShinsakaiTaiyosyaJohoEntity> 事務局審査会追加資料A3リスト;
 
     @BatchWriter
     private BatchReportWriter<JimuShinsakaishiryoA3ReportSource> batchReportWriter;
@@ -108,6 +113,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         itiziHanteiEntityList = mapper.get事務局一次判定(myBatisParameter);
         get審査対象者一覧表情報();
         is審査会対象一覧印刷済み = false;
+        事務局審査会追加資料A3リスト = mapper.get審査会追加分(myBatisParameter);
     }
 
     @Override
@@ -116,8 +122,8 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         RString reportId = ReportIdDBE.DBE517902.getReportId().value();
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>()
-        .new SimpleLayoutBreaker(JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().
+        new SimpleLayoutBreaker(JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
                             ReportLineRecord<JimuShinsakaishiryoA3ReportSource> currentRecord,
@@ -147,11 +153,24 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
             JimuShinsakaishiryoA3Report report = new JimuShinsakaishiryoA3Report(businessList,
                     get一次判定結果票(shinseishoKanriNo), get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo), reportId, is審査会対象一覧印刷済み);
+                    getその他資料情報(shinseishoKanriNo), get審査会追加資料情報(shinseishoKanriNo),
+                    reportId, is審査会対象一覧印刷済み, paramter.getSakuseiJoken());
             report.writeBy(reportSourceWriter);
             is審査会対象一覧印刷済み = true;
         }
         batchReportWriter.close();
+    }
+
+    private JimuTuikaSiryoBusiness get審査会追加資料情報(ShinseishoKanriNo shinseishoKanriNo) {
+        JimuTuikaSiryoBusiness 審査会追加資料 = null;
+        for (ShinsakaiTaiyosyaJohoEntity entity : 事務局審査会追加資料A3リスト) {
+            if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                審査会追加資料 = new JimuTuikaSiryoBusiness(entity, shinsakaiIinJohoList, paramter, count,
+                        ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
+                                KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
+            }
+        }
+        return 審査会追加資料;
     }
 
     private void get審査対象者一覧表情報() {

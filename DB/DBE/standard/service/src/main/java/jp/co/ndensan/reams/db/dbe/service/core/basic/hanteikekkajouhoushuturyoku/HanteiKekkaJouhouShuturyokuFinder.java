@@ -66,10 +66,16 @@ public class HanteiKekkaJouhouShuturyokuFinder {
         if (判定結果情報出力リスト == null || 判定結果情報出力リスト.isEmpty()) {
             return SearchResult.of(Collections.<HanteiKekkaJouhouShuturyokuBusiness>emptyList(), 0, false);
         }
+        int totalCount;
+        if (判定結果情報出力リスト.size() < parametere.getLimitCount()) {
+            totalCount = 判定結果情報出力リスト.size();
+        } else {
+            totalCount = mapper.countNinteiChousaSukeList(parametere);
+        }
         for (HanteiKekkaJouhouShuturyokuRelateEntity entity : 判定結果情報出力リスト) {
             kojinJokyoShokaiList.add(new HanteiKekkaJouhouShuturyokuBusiness(entity));
         }
-        return SearchResult.of(kojinJokyoShokaiList, 0, false);
+        return SearchResult.of(kojinJokyoShokaiList, totalCount, (parametere.getLimitCount() < totalCount));
     }
 
 }
