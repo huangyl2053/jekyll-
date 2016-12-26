@@ -23,6 +23,7 @@
                 }
                 GridDisplayMode.prototype.KaisaiYoteiToroku = function () {
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = false;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = false;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -60,6 +61,7 @@
 
                 GridDisplayMode.prototype.TaishoshaWaritsuke = function () {
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = false;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = false;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -96,6 +98,7 @@
                 };
                 GridDisplayMode.prototype.ShinsakaiShiryoSakusei = function () {
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -132,6 +135,7 @@
                 };
                 GridDisplayMode.prototype.ShinsaKekkaToroku = function () {
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -168,6 +172,7 @@
                 };
                 GridDisplayMode.prototype.JizenKekkaToroku = function () {
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -204,6 +209,7 @@
                 };
                 GridDisplayMode.prototype.DataShutsuryoku = function () {
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -240,6 +246,7 @@
                 };
                 GridDisplayMode.prototype.HanteiKekka = function () {
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = false;

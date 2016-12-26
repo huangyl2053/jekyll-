@@ -79,11 +79,12 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     private int no;
     private int count;
     private int shinsakaiOrder;
+    private RString path;
     private int 存在ファイルindex;
     private static final int INDEX_5 = 5;
-    private static final boolean あり = true;
-    private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private boolean is審査会対象一覧印刷済み;
     private static final RString SEPARATOR = new RString("/");
     private List<ShinsakaiTaiyosyaJohoEntity> 事務局審査会追加資料A3リスト;
@@ -118,12 +119,12 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
 
     @Override
     protected void process() {
-
         RString reportId = ReportIdDBE.DBE517902.getReportId().value();
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().
-        new SimpleLayoutBreaker(JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
+
+                    JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
                             ReportLineRecord<JimuShinsakaishiryoA3ReportSource> currentRecord,
@@ -151,6 +152,13 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
             }
         }
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
+            for (ShinsakaiSiryoKyotsuEntity entity : 共通情報) {
+                if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                    RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+                    path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+                    break;
+                }
+            }
             JimuShinsakaishiryoA3Report report = new JimuShinsakaishiryoA3Report(businessList,
                     get一次判定結果票(shinseishoKanriNo), get主治医意見書情報(shinseishoKanriNo),
                     getその他資料情報(shinseishoKanriNo), get審査会追加資料情報(shinseishoKanriNo),
@@ -238,7 +246,10 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         for (ShinsakaiSiryoKyotsuEntity entity : 共通情報) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                 entity.setJimukyoku(true);
-                return new JimuShinsakaiWariateJohoBusiness(entity);
+                JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
+                business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+                business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
+                return business;
             }
         }
         return null;
@@ -258,10 +269,8 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 } else {
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
                 }
-                RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-                RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
                 business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-                business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
+                business.set事務局概況特記イメージ(共有ファイルを引き出す(batchReportWriter.getImageFolderPath(), ファイル名_G0001));
                 存在ファイルindex = business.get存在ファイルIndex();
                 shinsakaiOrder = entity.getShinsakaiOrder();
             }
@@ -307,21 +316,15 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         if (sharedFileId == null) {
             return ファイルPathList;
         }
-        boolean is存在;
         int index = 0;
         for (int i = 0; i < ファイル名List.size(); i++) {
             RString ファイル名 = ファイル名List.get(i);
-            ReadOnlySharedFileEntryDescriptor descriptor
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), sharedFileId);
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchReportWriter.getImageFolderPath()));
-                is存在 = あり;
-            } catch (Exception e) {
-                is存在 = 無し;
-            }
-            if (is存在 && index < INDEX_5) {
-                ファイルPathList.add(ファイル名);
-                index = i + 1;
+            if (!RString.isNullOrEmpty(path) && index < INDEX_5) {
+                RString fileFullPath = getFilePath(path, ファイル名);
+                if (!RString.isNullOrEmpty(fileFullPath)) {
+                    ファイルPathList.add(fileFullPath);
+                    index = i + 1;
+                }
             }
             if (INDEX_5 <= index) {
                 return ファイルPathList;
@@ -413,8 +416,9 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
@@ -427,14 +431,16 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(batchReportWriter.getImageFolderPath()));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchReportWriter.getImageFolderPath())).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 }

@@ -22,7 +22,7 @@
     </resultMap>
 
     <!--クエリ部品本体-->
-    <sql id="QueryParts_NinteiChousaSukeList">
+    <sql id="QueryParts_NinteiChousaList">
         FROM
         rgdb."DbT5101NinteiShinseiJoho" as DbT5101
         INNER JOIN
@@ -541,7 +541,7 @@
         ,DbT5501."shinsakaiKaisaiYoteiYMD" as "DbT5501_shinsakaiKaisaiYoteiYMD"
         ,DbT5511."shinsakaiKaisaiYMD" as "DbT5511_shinsakaiKaisaiYMD"
         ,DbT7211."shinsakaiKekkaJohoChushutsuYMD" as "DbT7211_shinsakaiKekkaJohoChushutsuYMD"
-        <include refid="HanteiKekkaIchiranList" />
+        <include refid="QueryParts_NinteiChousaList" />
         ORDER BY
         DbT5101."ninteiShinseiYMD"
         <if test="useLimitCount">
@@ -555,7 +555,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter" fetchSize="500">
         SELECT
         COUNT(*)
-        <include refid="HanteiKekkaIchiranList" />
+        <include refid="QueryParts_NinteiChousaList" />
 
     </select>
 </mapper>

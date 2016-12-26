@@ -124,8 +124,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     protected void process() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517901.getReportId().value())
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>()
-        .new SimpleLayoutBreaker(JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+                    JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA4ReportSource> occuredBreak(
                             ReportLineRecord<JimuShinsakaishiryoA4ReportSource> currentRecord,
@@ -157,6 +157,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                     RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
                     path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+                    break;
                 }
             }
             JimuShinsakaishiryoA4Report report = new JimuShinsakaishiryoA4Report(jimuShinsakaishiryoList,
@@ -241,6 +242,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(kyotsuEntity);
                 business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
                 business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
+                return business;
             }
         }
         return null;
@@ -423,6 +425,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
