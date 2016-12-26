@@ -102,18 +102,18 @@
         SELECT
             COUNT(0)
         FROM
-            rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS DbT5592ShinsakaiKaisaiBashoJoho
+            rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS "DbT5592ShinsakaiKaisaiBashoJoho"
         WHERE
-            DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = #{shinsakaiKaisaiBashoCode}
+            "DbT5592ShinsakaiKaisaiBashoJoho"."shinsakaiKaisaiBashoCode" = #{shinsakaiKaisaiBashoCode}
     </select>
 
     <select resultOrdered="true" id="getShinsakaiIinJohoCount" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultType="int">
         SELECT
             COUNT(0)
         FROM
-            rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594ShinsakaiIinJoho
+            rgdb."DbT5594ShinsakaiIinJoho" AS "DbT5594ShinsakaiIinJoho"
         WHERE
-            DbT5594ShinsakaiIinJoho."shinsakaiIinCode" = #{shinsakaiIinCode}
+            "DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" = #{shinsakaiIinCode}
     </select>
 
     <resultMap id="resultMap_GogitaiJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiEntity" autoMapping="true">
@@ -129,23 +129,23 @@
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.allColumns_DbT5591GogitaiJoho"/>
         FROM
-            rgdb."DbT5591GogitaiJoho" AS DbT5591GogitaiJoho
+            rgdb."DbT5591GogitaiJoho" AS "DbT5591GogitaiJoho"
         WHERE
-            DbT5591GogitaiJoho."gogitaiNo" = #{合議体番号} AND
-            DbT5591GogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> #{合議体有効期間開始年月日}
+            "DbT5591GogitaiJoho"."gogitaiNo" = #{合議体番号} AND
+            "DbT5591GogitaiJoho"."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> #{合議体有効期間開始年月日}
         ORDER BY
-            DbT5591GogitaiJoho."gogitaiYukoKikanShuryoYMD" DESC;
+            "DbT5591GogitaiJoho"."gogitaiYukoKikanShuryoYMD" DESC;
     </select>
 
     <select resultOrdered="true" id="getGogitaiWariateIinJohoCount" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultType="int">
         SELECT
             COUNT(0)
         FROM
-            rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593GogitaiWariateIinJoho
+            rgdb."DbT5593GogitaiWariateIinJoho" AS "DbT5593GogitaiWariateIinJoho"
         WHERE
-            DbT5593GogitaiWariateIinJoho."gogitaiNo" = #{合議体番号} AND
-            DbT5593GogitaiWariateIinJoho."gogitaiYukoKikanKaishiYMD" = #{合議体有効期間開始年月日} AND
-            DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" = #{審査会委員コード}
+            "DbT5593GogitaiWariateIinJoho"."gogitaiNo" = #{合議体番号} AND
+            "DbT5593GogitaiWariateIinJoho"."gogitaiYukoKikanKaishiYMD" = #{合議体有効期間開始年月日} AND
+            "DbT5593GogitaiWariateIinJoho"."shinsakaiIinCode" = #{審査会委員コード}
     </select>
 
     <resultMap id="resultMap_GogitaiJohoSakuseiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity" autoMapping="true">
