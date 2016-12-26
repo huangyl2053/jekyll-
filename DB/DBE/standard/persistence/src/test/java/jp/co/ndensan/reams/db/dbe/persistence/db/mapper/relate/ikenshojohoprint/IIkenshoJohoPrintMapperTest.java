@@ -30,14 +30,14 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
     @Test
     public void get主治医意見書作成依頼変更者情報_動作確認() {
         List<IkenshoJohoPrintRelateEntity> result = sut.get主治医意見書作成依頼変更者情報(create変更者情報検索条件());
-        System.out.println(result.size());
+        System.out.println("作成依頼変更者 件数：" + result.size());
         assertTrue(true);
     }
 
     @Test
     public void get主治医意見書作成料請求情報_動作確認() {
         List<IkenshoJohoPrintRelateEntity> result = sut.get主治医意見書作成料請求情報(create作成料請求検索条件());
-        System.out.println(result.size());
+        System.out.println("作成料請求 件数：" + result.size());
         assertTrue(true);
     }
 
@@ -58,14 +58,16 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
 
     private IkenshoJohoPrintMapperParameter create作成料請求検索条件() {
         RString 作成条件 = new RString("1");
-        FlexibleDate 処理日開始 = new FlexibleDate(1999, 1, 1);
-        FlexibleDate 処理日終了 = new FlexibleDate(2017, 1, 1);
-        FlexibleDate 受領日開始 = new FlexibleDate(1999, 1, 1);
-        FlexibleDate 受領日終了 = new FlexibleDate(2017, 1, 1);
+        RString 通常 = new RString("0");
+        RString 延期 = new RString("3");
+        FlexibleDate 処理日開始 = new FlexibleDate(2010, 10, 10);
+        FlexibleDate 処理日終了 = new FlexibleDate(2010, 10, 10);
+        FlexibleDate 受領日開始 = new FlexibleDate(2010, 10, 10);
+        FlexibleDate 受領日終了 = new FlexibleDate(2010, 10, 10);
         IkenshoJohoPrintMapperParameter param = IkenshoJohoPrintMapperParameter.createSelectByKeyParam(
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
-                作成条件, 処理日開始, 処理日終了, 受領日開始, 受領日終了, RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY);
+                作成条件, 処理日開始, 処理日終了, 受領日開始, 受領日終了, 通常, 延期, FlexibleDate.EMPTY);
         return param;
     }
 
