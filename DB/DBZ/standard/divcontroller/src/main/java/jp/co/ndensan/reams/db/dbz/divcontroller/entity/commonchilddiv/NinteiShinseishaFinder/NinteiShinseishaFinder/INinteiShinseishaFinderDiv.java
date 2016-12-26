@@ -17,6 +17,11 @@ public interface INinteiShinseishaFinderDiv extends ICommonChildDivBasePropertie
     void initialize();
 
     /**
+     * 最近処理者を使用しない場合の初期化処理です。
+     */
+    void initialize_最近処理者非表示();
+
+    /**
      * 最近処理者共有子Divをリロードします。
      */
     void reloadSaikinShorisha();

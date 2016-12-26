@@ -43,13 +43,15 @@ public class NinteiShinseishaFinder {
 
     /**
      * 保険者DDLを変更した時の処理です。<br/>
-     * 最近処理者の一覧を更新します。
+     * 最近処理者が使用可能である場合に最近処理者の一覧を更新します。
      *
      * @param div
      * @return
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_Hokenja(NinteiShinseishaFinderDiv div) {
-        div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
+        if (div.getCcdSaikinShorisha().isDisplayNone() || !div.getCcdSaikinShorisha().isVisible()) {
+            div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
+        }
         return ResponseData.of(div).respond();
     }
 
