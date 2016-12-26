@@ -87,18 +87,8 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnWaritukeShudo() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        RString 状態 = div.getRadShoriJyotai().getSelectedKey();
-        RString 件数;
-        if (状態.equals(new RString("1"))) {
-            件数 = div.getTxtNoUpdate().getText();
-        } else if (状態.equals(new RString("2"))) {
-            件数 = div.getTxtNoUpdate().getText();
-        } else {
-            件数 = div.getTxtTotalCount().getText();
-        }
 
-        if (!(!RString.isNullOrEmpty(件数)
-                && Integer.parseInt(件数.toString()) > 0)) {
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
@@ -120,8 +110,7 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnChousaIraiKanryo() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!(!RString.isNullOrEmpty(div.getTxtTotalCount().getText())
-                && Integer.parseInt(div.getTxtTotalCount().getValue().toString()) > 0)) {
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));

@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -173,13 +174,23 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
+    public BatchParamPanelDiv getBatchParamPanel() {
+        return this.getChosairaitaishoshaichiran().getBatchParamPanel();
+    }
+
+    @JsonIgnore
+    public void  setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
+        this.getChosairaitaishoshaichiran().setBatchParamPanel(BatchParamPanel);
+    }
+
+    @JsonIgnore
     public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
-        return this.getChosairaitaishoshaichiran().getDgNinteiTaskList();
+        return this.getChosairaitaishoshaichiran().getBatchParamPanel().getDgNinteiTaskList();
     }
 
     @JsonIgnore
     public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
-        this.getChosairaitaishoshaichiran().setDgNinteiTaskList(dgNinteiTaskList);
+        this.getChosairaitaishoshaichiran().getBatchParamPanel().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore
