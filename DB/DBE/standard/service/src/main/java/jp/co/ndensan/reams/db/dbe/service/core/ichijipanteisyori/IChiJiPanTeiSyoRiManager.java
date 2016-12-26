@@ -105,6 +105,18 @@ public class IChiJiPanTeiSyoRiManager {
     }
 
     /**
+     * 要介護認定一次判定結果情報の検索と同条件で取得できる実際の件数を返します。
+     *
+     * @param parameter IChiJiPanTeiSyoRiParameter
+     * @return 対象者件数
+     */
+    @Transaction
+    public int get対象者件数(IChiJiPanTeiSyoRiParameter parameter) {
+        IIChiJiPanTeiSyoRiMapper mapper = mapperProvider.create(IIChiJiPanTeiSyoRiMapper.class);
+        return mapper.get対象者件数(parameter);
+    }
+
+    /**
      * 認定調査票（概況調査）に登録する。
      *
      * @param 要介護認定一次判定結果情報 IchijiHanteiKekkaJoho

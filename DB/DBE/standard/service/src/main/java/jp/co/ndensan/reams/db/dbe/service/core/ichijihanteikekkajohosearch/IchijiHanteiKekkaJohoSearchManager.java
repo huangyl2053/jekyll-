@@ -37,8 +37,8 @@ public class IchijiHanteiKekkaJohoSearchManager {
 
     private final MapperProvider mapperProvider;
 
-    private final RString ARGMENT_SPLIT_STR = new RString("|");
-    private final RString DATA_SPLIT_STR = new RString(",");
+    private static final RString ARGMENT_SPLIT_STR = new RString("|");
+    private static final RString DATA_SPLIT_STR = new RString(",");
 
     /**
      * コンストラクタです。
@@ -61,7 +61,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
      * ただし、申請書管理番号が正しく渡せていなかったり、引数の作成できないデータ（厚労省IF識別コードが過去のもの）が渡された場合、
      * EMPTYを返します。
      *
-     * @param 申請書管理番号List
+     * @param 申請書管理番号List List<ShinseishoKanriNo>
      * @return 一次判定に必要な引数（複数対象者一括処理用）。もしくはEMPTY
      */
     @Transaction
@@ -171,12 +171,12 @@ public class IchijiHanteiKekkaJohoSearchManager {
         }
         一次判定結果情報Entity.set厚労省IF識別コード(厚労省IF識別コード);
         //TODO 組み込み関数  QA79385  今回の実装はTODOとしてください  checkstyleので、以下sourceは注釈しました
-        List<RString> 基本調査項目List = get基本調査項目(申請書管理番号);
-        List<RString> 主治医意見書項目List = get主治医意見書項目(申請書管理番号);
-        DbT4203NinteichosahyoKihonChosaEntity 認定調査票_基本調査 = get認定調査票_基本調査(申請書管理番号);
-        Code 障害高齢者自立度 = 認定調査票_基本調査.getShogaiNichijoSeikatsuJiritsudoCode();
-        Code 認知症高齢者自立度 = 認定調査票_基本調査.getNinchishoNichijoSeikatsuJiritsudoCode();
-        RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
+//        List<RString> 基本調査項目List = get基本調査項目(申請書管理番号);
+//        List<RString> 主治医意見書項目List = get主治医意見書項目(申請書管理番号);
+//        DbT4203NinteichosahyoKihonChosaEntity 認定調査票_基本調査 = get認定調査票_基本調査(申請書管理番号);
+//        Code 障害高齢者自立度 = 認定調査票_基本調査.getShogaiNichijoSeikatsuJiritsudoCode();
+//        Code 認知症高齢者自立度 = 認定調査票_基本調査.getNinchishoNichijoSeikatsuJiritsudoCode();
+//        RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
 
         int 認定調査票_基本調査件数 = mapper.get認定調査票_基本調査件数(申請書管理番号);
         int 要介護認定主治医意見書情報件数 = mapper.get要介護認定主治医意見書情報件数(申請書管理番号);
