@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101ErrorTempEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi.NinteiShinseirenkeiDataInsert;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -22,12 +23,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1490-020 duanzhanli
  */
-public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101TempEntity> {
+public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101RelateEntity> {
 
     private static final RString 申請一時電算_東芝情報 = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get申請一時電算_東芝情報");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_電算東芝版");
     private static final RString 申請一時厚労省情報 = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get申請一時厚労省情報");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_厚労省");
     private RenkeiDataTorikomiProcessParamter processParamter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT5101Temp;
@@ -52,11 +53,11 @@ public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101Temp
     }
 
     @Override
-    protected void process(DbT5101TempEntity entity) {
+    protected void process(DbT5101RelateEntity entity) {
         DbT5101ErrorTempEntity errorEntity = new NinteiShinseirenkeiDataInsert().getDbT5101ErrorTempEntity(entity, processParamter);
         if (errorEntity != null) {
             dbT5101ErrorTemp.insert(errorEntity);
-            dbT5101Temp.delete(entity);
+            dbT5101Temp.delete(entity.getDbt5101TempEntity());
         }
     }
 

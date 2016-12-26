@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5911KoroshoErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5911KoroshoTempEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5911TempEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5911RelateEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi.NinteiShinseirenkeiDataInsert;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1490-020 duanzhanli
  */
-public class DbT5911KoroshoErrorCheckProcess extends BatchProcessBase<DbT5911TempEntity> {
+public class DbT5911KoroshoErrorCheckProcess extends BatchProcessBase<DbT5911RelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5911TempMapper.get医療機関情報_厚労省");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5911TempMapper.get医療機関更新対象情報_厚労省");
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT5911KoroshoTemp;
     @BatchWriter
@@ -45,11 +45,11 @@ public class DbT5911KoroshoErrorCheckProcess extends BatchProcessBase<DbT5911Tem
     }
 
     @Override
-    protected void process(DbT5911TempEntity entity) {
+    protected void process(DbT5911RelateEntity entity) {
         DbT5911KoroshoErrorTempEntity dbT5911KoroshoErrorTempEntity = new NinteiShinseirenkeiDataInsert().getDbT5911KoroshoErrorTempEntity(entity);
         if (dbT5911KoroshoErrorTempEntity != null) {
             dbT5911ErrorKoroshoTemp.insert(dbT5911KoroshoErrorTempEntity);
-            dbT5911KoroshoTemp.delete(entity);
+            dbT5911KoroshoTemp.delete(entity.getDbt5911TempEntity());
         }
     }
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913ErrorTempEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913RelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913TempEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi.NinteiShinseirenkeiDataInsert;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -21,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1490-020 duanzhanli
  */
-public class DbT5913DensanErrorCheckProcess extends BatchProcessBase<DbT5913TempEntity> {
+public class DbT5913DensanErrorCheckProcess extends BatchProcessBase<DbT5913RelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5913TempMapper.get調査員情報_電算");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5913TempMapper.get調査員更新対象情報_電算");
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT5913Temp;
     @BatchWriter
@@ -44,11 +45,11 @@ public class DbT5913DensanErrorCheckProcess extends BatchProcessBase<DbT5913Temp
     }
 
     @Override
-    protected void process(DbT5913TempEntity entity) {
+    protected void process(DbT5913RelateEntity entity) {
         DbT5913ErrorTempEntity dbT5913ErrorTempEntity = new NinteiShinseirenkeiDataInsert().getDbT5913ErrorTempEntity(entity);
         if (dbT5913ErrorTempEntity != null) {
             dbT5913ErrorTemp.insert(dbT5913ErrorTempEntity);
-            dbT5913Temp.delete(entity);
+            dbT5913Temp.delete(entity.getDbt5913TempEntity());
         }
     }
 }
