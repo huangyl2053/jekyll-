@@ -23,25 +23,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProcessParameter {
 
     private final RString 帳票出力区分;
-    private final FlexibleDate 審査会開催日FROM;
-    private final FlexibleDate 審査会開催日TO;
+    private final FlexibleDate 審査会実施日FROM;
+    private final FlexibleDate 審査会実施日TO;
     private final List<ShinsaiinJissekiIchiranKey> keyJoho;
 
     /**
      * コンストラクタです。
      *
      * @param 帳票出力区分 帳票出力区分
-     * @param 審査会開催日FROM 審査会開催日FROM
-     * @param 審査会開催日TO 審査会開催日TO
+     * @param 審査会実施日FROM 審査会実施日FROM
+     * @param 審査会実施日TO 審査会実施日TO
      * @param keyJoho キー情報Entityリスト
      */
     public ShinsaiinJissekiIchiranProcessParamter(RString 帳票出力区分,
-            FlexibleDate 審査会開催日FROM,
-            FlexibleDate 審査会開催日TO,
+            FlexibleDate 審査会実施日FROM,
+            FlexibleDate 審査会実施日TO,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         this.帳票出力区分 = 帳票出力区分;
-        this.審査会開催日FROM = 審査会開催日FROM;
-        this.審査会開催日TO = 審査会開催日TO;
+        this.審査会実施日FROM = 審査会実施日FROM;
+        this.審査会実施日TO = 審査会実施日TO;
         this.keyJoho = keyJoho;
     }
 
@@ -52,8 +52,8 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
      */
     public ShinsaiinJissekiIchiranMybitisParamter toMybitisParameter() {
         return ShinsaiinJissekiIchiranMybitisParamter.createParamter(true,
-                審査会開催日FROM,
-                審査会開催日TO,
+                審査会実施日FROM,
+                審査会実施日TO,
                 keyJoho);
     }
 }
