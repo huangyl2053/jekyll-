@@ -34,10 +34,10 @@ public final class DbT5305IkenshoImageJohoEntityGenerator {
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
         entity.setIraiRirekiNo(DEFAULT_主治医意見書作成依頼履歴番号);
         entity.setChoyoID(DEFAULT_帳票ID);
-        entity.setMaskDataKubun(DEFAULT_マスキングデータ区分);
-        entity.setTorikomiPageNo(DEFAULT_取込みページ番号);
-        entity.setNinteiShinseiNen(DEFAULT_認定申請年);
-        entity.setSharedFileId(DEFAULT_共有ファイルID);
+        entity.setGenponMaskKubun(DEFAULT_マスキングデータ区分);
+//        entity.setTorikomiPageNo(DEFAULT_取込みページ番号);
+//        entity.setNinteiShinseiNen(DEFAULT_認定申請年);
+//        entity.setSharedFileId(DEFAULT_共有ファイルID);
         return entity;
     }
 }
