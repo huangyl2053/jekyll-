@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
@@ -28,10 +29,13 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
 
     private static final RString テキスト全面イメージ = new RString("1");
     private static final int INT_25 = 25;
+    private final RString 作成条件_追加分 = new RString("追加分");
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
     private final IchijihanteikekkahyoA3Entity ichijihanteikekkahyoA3Entity;
     private final JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho;
     private final JimuSonotashiryoBusiness sonotashiryoBusiness;
+    private final JimuTuikaSiryoBusiness 審査会追加資料;
+    private final RString 作成条件;
     private final RString reportId;
     private static final int PAGECOUN = 15;
     private static final int MAXCOUNT = 30;
@@ -44,19 +48,25 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
      * @param ichijihanteikekkahyoA3Entity 委員用特記事項+一次判定結果票（A3版）のEntityクラス
      * @param shinsakaiWariateJoho 主治医意見書のBusinessの編集クラス
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
+     * @param jimuTuikaSiryoBusiness 審査会追加資料のBusinessの編集クラス
      * @param reportId 帳票ＩＤ
+     * @param sakuseiJoken 作成条件
      */
     public IinShinsakaishiryoA3Report(
             List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA3Entity ichijihanteikekkahyoA3Entity,
             JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho,
             JimuSonotashiryoBusiness sonotashiryoBusiness,
-            RString reportId) {
+            JimuTuikaSiryoBusiness jimuTuikaSiryoBusiness,
+            RString reportId,
+            RString sakuseiJoken) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteikekkahyoA3Entity = ichijihanteikekkahyoA3Entity;
         this.shinsakaiWariateJoho = shinsakaiWariateJoho;
         this.sonotashiryoBusiness = sonotashiryoBusiness;
+        this.審査会追加資料 = jimuTuikaSiryoBusiness;
         this.reportId = reportId;
+        this.作成条件 = sakuseiJoken;
     }
 
     @Override
@@ -111,6 +121,11 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
                 IIinShinsakaishiryoA3Builder builder2 = new IinShinsakaishiryoA3Builder(editor2);
                 reportSourceWriter.writeLine(builder2);
             }
+        }
+        if (審査会追加資料 != null && 作成条件_追加分.equals(作成条件)) {
+            IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group6Editor(審査会追加資料);
+            IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 

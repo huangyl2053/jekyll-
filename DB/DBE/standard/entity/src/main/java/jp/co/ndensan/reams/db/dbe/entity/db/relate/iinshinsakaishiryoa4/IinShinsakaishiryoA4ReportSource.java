@@ -8,9 +8,13 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 委員審査会資料組み合わせ一覧A4のReportSourceです。
@@ -439,6 +443,12 @@ public class IinShinsakaishiryoA4ReportSource implements IReportSource {
     //DBE517016
     @ReportItem(name = "imgSonotashiryo", order = 620)
     public RString imgSonotashiryo;
+    
+    //DBE517019
+    @ReportItem(name = "shinsakaiTsuikasha", length = 2, order = 707)
+    public RString shinsakaiTsuikasha;
+    @ReportItem(name = "tsuchibun", order = 713)
+    public RString tsuchibun;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
@@ -457,6 +467,11 @@ public class IinShinsakaishiryoA4ReportSource implements IReportSource {
         LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
     }
 // </editor-fold>
+
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hishokenshaNo;
 
     /**
      * 改ページ条件のキーです。
