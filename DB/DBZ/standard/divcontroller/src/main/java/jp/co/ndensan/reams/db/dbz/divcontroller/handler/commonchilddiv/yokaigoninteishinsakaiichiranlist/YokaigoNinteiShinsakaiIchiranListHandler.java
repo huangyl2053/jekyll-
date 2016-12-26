@@ -7,17 +7,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigon
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisaiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -185,6 +191,17 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     }
 
     /**
+     * 最大取得件数を設定します。
+     *
+     */
+    public void set最大取得件数() {
+        RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
+    }
+
+    /**
      * SelectedGridLineを取得する。
      *
      */
@@ -259,6 +276,19 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     }
 
     /**
+     * 最大表示件数チェック処理です。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 最大表示件数チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(
+                new YokaigoNinteiShinsakaiIchiranListMessage(YokaigoNinteiShinsakaiIchiranErrorMessage.最大表示件数が0),
+                div.getTxtSaidaiHyojiKensu()));
+        return validationMessages;
+    }
+
+    /**
      * 該当データが存在のチェック処理です。
      *
      * @return ValidationMessageControlPairs
@@ -288,6 +318,26 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         @Override
         public Message getMessage() {
             return message;
+        }
+    }
+
+    private enum YokaigoNinteiShinsakaiIchiranErrorMessage implements IMessageGettable {
+
+        /**
+         * "1以上の値を入力してください。"を定義します。
+         */
+        最大表示件数が0(1, "1以上の値を入力してください。");
+        private final int no;
+        private final RString message;
+
+        private YokaigoNinteiShinsakaiIchiranErrorMessage(int no, String message) {
+            this.no = no;
+            this.message = new RString(message);
+        }
+
+        @Override
+        public Message getMessage() {
+            return new ErrorMessage(toCode("E", no), this.message.toString());
         }
     }
 }

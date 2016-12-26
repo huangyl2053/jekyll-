@@ -26,7 +26,7 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("ikenshoiraitaishoichiran")
-    private ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
+    private IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
     @JsonProperty("hiddenIuputModel")
@@ -43,7 +43,7 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * @return ikenshoiraitaishoichiran
      */
     @JsonProperty("ikenshoiraitaishoichiran")
-    public ikenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
+    public IkenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
         return ikenshoiraitaishoichiran;
     }
 
@@ -52,7 +52,7 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * @param ikenshoiraitaishoichiran ikenshoiraitaishoichiran
      */
     @JsonProperty("ikenshoiraitaishoichiran")
-    public void setIkenshoiraitaishoichiran(ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
+    public void setIkenshoiraitaishoichiran(IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
         this.ikenshoiraitaishoichiran = ikenshoiraitaishoichiran;
     }
 

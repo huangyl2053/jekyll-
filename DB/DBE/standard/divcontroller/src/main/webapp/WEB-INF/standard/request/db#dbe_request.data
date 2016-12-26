@@ -361,7 +361,6 @@ dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnCheck
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnHanteikekkaOutput
 dbe/db/dbe/NijihanteiKekkaOutput/onClick_btnRenkeiDataOutput
 dbe/db/dbe/NijihanteiKekkaOutput/onLoad
-dbe/db/dbe/NijihanteiKekkaOutput/onSaikinshorishaClick
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onActive
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnIchiHanteiJisshi
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onBeforeOpenDialog_btnKihonChosa
