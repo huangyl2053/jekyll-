@@ -48,6 +48,12 @@
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_daihyoshaName" AS "dbT5911ShujiiIryoKikanJoho_daihyoshaName",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_daihyoshaNameKana" AS "dbT5911ShujiiIryoKikanJoho_daihyoshaNameKana",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_jokyoFlag" AS "dbT5911ShujiiIryoKikanJoho_jokyoFlag",
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kinyuKikanCode" AS "dbT5911ShujiiIryoKikanJoho_kinyuKikanCode",
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kinyuKikanShitenCode" AS "dbT5911ShujiiIryoKikanJoho_kinyuKikanShitenCode",
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_yokinShubetsu" AS "dbT5911ShujiiIryoKikanJoho_yokinShubetsu",
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kozaNo" AS "dbT5911ShujiiIryoKikanJoho_kozaNo",
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kozaMeigininKana" AS "dbT5911ShujiiIryoKikanJoho_kozaMeigininKana",
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kozaMeiginin" AS "dbT5911ShujiiIryoKikanJoho_kozaMeiginin",
         DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho" AS "dbT7051KoseiShichosonMaster_shichosonMeisho"
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.noDeleted_DbT5911ShujiiIryoKikanJoho" />) AS DbT5911ShujiiIryoKikanJoho
@@ -199,6 +205,12 @@
         <result property="daihyoshaName" column="dbT5911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="daihyoshaNameKana" column="dbT5911ShujiiIryoKikanJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5911ShujiiIryoKikanJoho_jokyoFlag" />
+        <result property="kinyuKikanCode" column="dbT5911ShujiiIryoKikanJoho_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <result property="kinyuKikanShitenCode" column="dbT5911ShujiiIryoKikanJoho_kinyuKikanShitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="yokinShubetsu" column="dbT5911ShujiiIryoKikanJoho_yokinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNo" column="dbT5911ShujiiIryoKikanJoho_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeigininKana" column="dbT5911ShujiiIryoKikanJoho_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kozaMeiginin" column="dbT5911ShujiiIryoKikanJoho_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shichosonMeisho" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 </mapper>
