@@ -240,7 +240,6 @@ public class NinteichosaIrai {
         List<RString> 被保険者番号リスト = new ArrayList<>();
         for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
             申請書管理番号リスト.add(row.getShinseishoKanriNo());
-            被保険者番号リスト.add(row.getHihoNumber());
         }
         param.setShinseishoKanriNoList(申請書管理番号リスト);
         param.setHihokenshaNoList(被保険者番号リスト);

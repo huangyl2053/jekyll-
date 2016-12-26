@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -52,6 +53,10 @@ public class NinteichosaIraiHandler {
     private static final RString 可 = new RString("可");
     private static final RString KEY_未 = new RString("1");
     private static final RString KEY_可 = new RString("2");
+    private static final RString KEY_全 = new RString("3");
+    private static final RString VALUE_未処理 = new RString("未処理");
+    private static final RString VALUE_完了 = new RString("完了可能");
+    private static final RString VALUE_全 = new RString("すべて");
     private static final RString 調査依頼完了ボタン = new RString("btnChousaIraiKanryo");
 
     /**
@@ -73,6 +78,7 @@ public class NinteichosaIraiHandler {
         div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(
             ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.setMaxCount(div.getTxtMaxCount().getValue());
+        setRad();
         initDataGrid();
         RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
         if (使用する.equals(認定調査自動割付)) {
@@ -87,6 +93,22 @@ public class NinteichosaIraiHandler {
             div.getBtnchosadataoutput().setDisabled(true);
         }
 
+    }
+
+    private void setRad() {
+        RString config = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        List<KeyValueDataSource> source = new ArrayList<>();
+        if (KEY_未.equals(config)) {
+            source.add(new KeyValueDataSource(KEY_未, VALUE_未処理));
+        } else if (KEY_可.equals(config)) {
+            source.add(new KeyValueDataSource(KEY_可, VALUE_完了));
+        } else {
+            source.add(new KeyValueDataSource(KEY_未, VALUE_未処理));
+            source.add(new KeyValueDataSource(KEY_可, VALUE_完了));
+            source.add(new KeyValueDataSource(KEY_全, VALUE_全));
+        }
+        div.getRadShoriJyotai().setDataSource(source);
+        div.getRadShoriJyotai().setSelectedIndex(0);
     }
 
     /**
