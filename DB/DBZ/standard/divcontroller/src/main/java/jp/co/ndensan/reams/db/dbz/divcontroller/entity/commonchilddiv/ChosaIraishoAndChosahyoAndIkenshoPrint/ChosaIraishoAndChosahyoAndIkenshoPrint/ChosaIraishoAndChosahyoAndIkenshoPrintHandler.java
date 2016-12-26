@@ -1858,7 +1858,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             } else if (KEY2.equals(key)) {
                 RDate 共通日 = div.getTxtKyotsuDay().getValue();
 
-                提出期限 = (共通日 != null ? new RString(共通日.plusDay(期限日数).toString()) : RString.EMPTY);
+                提出期限 = (共通日 != null ? new RString(共通日.toString()) : RString.EMPTY);
             }
         } else {
             提出期限 = !RString.isNullOrEmpty(business.get認定申請年月日())
