@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 
@@ -32,12 +31,11 @@ import static org.mockito.Mockito.when;
  *
  * @author n8429
  */
-//@Ignore
-public class DBE250001_NinteiChoshaKekkaTorikomiTest {
+public class DBE250002_ImageTorikomiTest {
 
     private static BatchFlowTestHelper flowHelper;
 
-    public DBE250001_NinteiChoshaKekkaTorikomiTest() {
+    public DBE250002_ImageTorikomiTest() {
     }
 
     @BeforeClass
@@ -51,6 +49,7 @@ public class DBE250001_NinteiChoshaKekkaTorikomiTest {
 
     @Before
     public void setUp() {
+
         flowHelper = new BatchFlowTestHelper();
     }
 
@@ -59,21 +58,21 @@ public class DBE250001_NinteiChoshaKekkaTorikomiTest {
     }
 
     /**
-     * Test of defineFlow method, of class DBE310100_OcrDataFile.
+     * Test of defineFlow method, of class DBE250002_ImageTorikomi.
      */
     @Test
     public void testDefineFlow() {
 
         setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
-        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE250001_NinteiChoshaKekkaTorikomi"),
+        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE250002_ImageTorikomi"),
                 new RString("認定支援"),
-                DBE250001_NinteiChoshaKekkaTorikomi.class,
+                DBE250002_ImageTorikomi.class,
                 createParameter());
         assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
     }
 
-    private static DBE250001_NinteiChoshaKekkaTorikomiParameter createParameter() {
-        DBE250001_NinteiChoshaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChoshaKekkaTorikomiParameter();
+    private static DBE250002_ImageTorikomiParameter createParameter() {
+        DBE250002_ImageTorikomiParameter batchFlowParameter = new DBE250002_ImageTorikomiParameter();
         RString path = new RString("db|EucOther_DBA701002_186|2016-12-12 16:47:59.649232");
         batchFlowParameter.set共有ファイルエントリ情報文字列(path);
 

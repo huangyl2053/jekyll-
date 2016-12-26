@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItem;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItem.ikenshoIraiRirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItem.remban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItem.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -50,6 +51,34 @@ public class DbT5304ShujiiIkenshoIkenItemDac implements ISaveable<DbT5304ShujiiI
                 where(and(
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ikenshoIraiRirekiNo, 主治医意見書作成依頼履歴番号))).
+                toObject(DbT5304ShujiiIkenshoIkenItemEntity.class);
+    }
+    
+        /**
+     * 主キーで要介護認定主治医意見書意見項目を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
+     * @param 連番
+     * @return DbT5304ShujiiIkenshoIkenItemEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT5304ShujiiIkenshoIkenItemEntity selectByMainKey(
+            ShinseishoKanriNo 申請書管理番号,
+            int 主治医意見書作成依頼履歴番号,
+            int 連番) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(主治医意見書作成依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼履歴番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5304ShujiiIkenshoIkenItem.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ikenshoIraiRirekiNo, 主治医意見書作成依頼履歴番号),
+                                eq(remban, 連番))).
                 toObject(DbT5304ShujiiIkenshoIkenItemEntity.class);
     }
 
