@@ -242,7 +242,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
-            setDisableToShujiiIkenshoChk();
             RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード());
@@ -282,6 +281,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             List<RString> keyChkIkenshoSakuseiIchiranList = new ArrayList<>();
             List<KeyValueDataSource> dataSourceChkIkenshoSakuseiIchiranList = new ArrayList<>();
+            LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+            RString 意見書用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
             RString 主治医意見書作成依頼_手動_主治医意見書記入用紙 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             RString 主治医意見書作成依頼_記入用紙_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_記入用紙_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (主治医意見書作成依頼_記入用紙_出力有無 != null && !主治医意見書作成依頼_記入用紙_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_記入用紙_出力有無)) {
@@ -289,7 +291,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 KeyValueDataSource dateSource = new KeyValueDataSource(KEY0, value);
                 dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
                 if (主治医意見書作成依頼_手動_主治医意見書記入用紙 != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY0);
+                    if (CONFIGVALUE1.equals(意見書用紙タイプ)) {
+                        keyChkIkenshoSakuseiIchiranList.add(KEY0);
+                    }
                 }
             }
             RString 主治医意見書作成依頼_手動_主治医意見書記入用紙OCR = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -299,7 +303,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 KeyValueDataSource dateSource = new KeyValueDataSource(KEY1, value);
                 dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
                 if (主治医意見書作成依頼_手動_主治医意見書記入用紙OCR != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙OCR.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙OCR)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY1);
+                    if (CONFIGVALUE2.equals(意見書用紙タイプ)) {
+                        keyChkIkenshoSakuseiIchiranList.add(KEY1);
+                    }
                 }
             }
             RString 主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -390,13 +396,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getTxtJushinKikan().setDisabled(true);
             div.getTxtJushinKikan().setFromRequired(false);
             div.getTxtJushinKikan().setToRequired(false);
+            div.getTxtJushinKikan().clearFromValue();
+            div.getTxtJushinKikan().clearToValue();
             div.getTxtJushinBasho().setDisabled(false);
             div.getTxtJushinBasho().setRequired(true);
         } else {
             div.getTxtJyushinymd().setDisabled(true);
             div.getTxtJyushinymd().setRequired(false);
+            div.getTxtJyushinymd().clearValue();
             div.getTxtJushinTime().setDisabled(true);
             div.getTxtJushinTime().setRequired(false);
+            div.getTxtJushinTime().clearValue();
             div.getTxtJushinKikan().setDisabled(false);
             div.getTxtJushinKikan().setFromRequired(true);
             div.getTxtJushinKikan().setToRequired(true);

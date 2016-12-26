@@ -73,6 +73,7 @@ public class IkenshoSakuseiIraiHandler {
     private static final RString SELECTED_KEY4 = new RString("key4");
     private static final RString SELECTED_KEY5 = new RString("key5");
     private static final RString CONFIGVALUE1 = new RString("1");
+    private static final RString CONFIGVALUE2 = new RString("2");
     private static final int 初期履歴番号 = 1;
     private static final int 初期作成回数 = 1;
     private static final RString 主治医意見書作成期限設定方法_1 = new RString("1");
@@ -188,7 +189,9 @@ public class IkenshoSakuseiIraiHandler {
             KeyValueDataSource dateSource = new KeyValueDataSource(SELECTED_KEY0, value);
             dataSourCechkPrintList.add(dateSource);
             if (主治医意見書作成依頼_手動_主治医意見書記入用紙 != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙)) {
-                keyChkPrintList.add(SELECTED_KEY0);
+                if (CONFIGVALUE1.equals(用紙タイプ)) {
+                    keyChkPrintList.add(SELECTED_KEY0);
+                }
             }
         }
         RString 主治医意見書作成依頼_手動_主治医意見書記入用紙OCR = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -198,7 +201,9 @@ public class IkenshoSakuseiIraiHandler {
             KeyValueDataSource dateSource = new KeyValueDataSource(SELECTED_KEY1, value);
             dataSourCechkPrintList.add(dateSource);
             if (主治医意見書作成依頼_手動_主治医意見書記入用紙OCR != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙OCR.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙OCR)) {
-                keyChkPrintList.add(SELECTED_KEY1);
+                if (CONFIGVALUE2.equals(用紙タイプ)) {
+                    keyChkPrintList.add(SELECTED_KEY1);
+                }
             }
         }
         RString 主治医意見書作成依頼_手動_主治医意見書作成料請求書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書作成料請求書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
