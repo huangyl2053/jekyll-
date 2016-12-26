@@ -129,7 +129,7 @@
         <result property="temp_申請日" column="temp_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_申請書管理番号" column="temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="temp_督促状発行日" column="temp_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="temp_医療機関コード" column="temp_医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者住所" column="temp_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_主治医氏名" column="temp_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -148,7 +148,7 @@
         DbT5101NinteiShinseiJoho."ninteiShinseiYMD" AS temp_申請日,
         DbT5101NinteiShinseiJoho."shinseishoKanriNo" AS temp_申請書管理番号,
         DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" AS temp_督促状発行日,
-        DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" AS temp_事業者コード,
+        DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" AS temp_医療機関コード,
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" AS temp_事業者名称,
         DbT5911ShujiiIryoKikanJoho."jusho" AS temp_事業者住所,
         DbT5912ShujiiJoho."shujiiName" AS temp_主治医氏名,

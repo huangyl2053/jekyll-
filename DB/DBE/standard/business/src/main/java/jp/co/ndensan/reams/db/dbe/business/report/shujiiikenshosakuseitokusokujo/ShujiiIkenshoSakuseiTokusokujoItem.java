@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -29,7 +30,6 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
     private final RString ninshoshaShimeiKakenai;
     private final RString ninshoshaYakushokuMei1;
     private final RString ninshoshaYakushokuMei2;
-    private final RString atenaRenban;
     private final RString customerBarCode;
     private final RString yubinNo1;
     private final RString jushoText;
@@ -37,6 +37,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
     private final RString shimeiText;
     private final RString meishoFuyo;
     private final RString sonota;
+    private final RString title;
     private final RString tsuchibun1;
     private final RString tsuchibun2;
     private final RString hihokenshaNo1;
@@ -58,6 +59,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
     private final RString shinseiKubun;
     private final RString hihokenshaNameKana;
     private final RString hihokennsyaName;
+    private final FlexibleDate ikenshoIraiYMD;
     private final RDate shinseiYMD;
     private final RString yubinNo;
     private final RString jusho;
@@ -83,7 +85,6 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
      * @param ninshoshaShimeiKakenai 認証者氏名公印掛けない
      * @param ninshoshaYakushokuMei1 認証者役職名1行目
      * @param ninshoshaYakushokuMei2 認証者役職名2行目
-     * @param atenaRenban 宛名連番
      * @param customerBarCode カスタマーバーコード
      * @param yubinNo1 宛名郵便番号
      * @param jushoText 宛名住所
@@ -91,6 +92,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
      * @param shimeiText 宛名氏名
      * @param meishoFuyo 宛名名称付与
      * @param sonota 宛名その他
+     * @param title タイトル
      * @param tsuchibun1 通知文1
      * @param tsuchibun2 通知文2
      * @param hihokenshaNo1 被保険者番号1
@@ -112,6 +114,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
      * @param shinseiKubun 申請区分
      * @param hihokenshaNameKana 被保険者氏名カナ
      * @param hihokennsyaName 被保険者氏名
+     * @param ikenshoIraiYMD 意見書依頼日
      * @param shinseiYMD 申請日
      * @param yubinNo 郵便番号
      * @param jusho 住所
@@ -126,13 +129,14 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
      */
     public ShujiiIkenshoSakuseiTokusokujoItem(RString bunshoNo, RString denshikoin, RString hakkoYMD1,
             RString koinMojiretsu, RString koinShoryaku, RString ninshoshaShimeiKakeru, RString ninshoshaYakushokuMei, RString ninshoshaShimeiKakenai,
-            RString ninshoshaYakushokuMei1, RString ninshoshaYakushokuMei2, RString atenaRenban, RString customerBarCode,
-            RString yubinNo1, RString jushoText, RString kikanNameText, RString shimeiText, RString meishoFuyo, RString sonota, RString tsuchibun1,
+            RString ninshoshaYakushokuMei1, RString ninshoshaYakushokuMei2, RString customerBarCode,
+            RString yubinNo1, RString jushoText, RString kikanNameText, RString shimeiText, RString meishoFuyo, RString sonota,
+            RString title, RString tsuchibun1,
             RString tsuchibun2, RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3,
             RString hihokenshaNo4, RString hihokenshaNo5, RString hihokenshaNo6, RString hihokenshaNo7,
             RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10, RString hokenshaNo1,
             RString hokenshaNo2, RString hokenshaNo3, RString hokenshaNo4, RString hokenshaNo5, RString hokenshaNo6,
-            RString shinseiKubun, RString hihokenshaNameKana, RString hihokennsyaName, RDate shinseiYMD,
+            RString shinseiKubun, RString hihokenshaNameKana, RString hihokennsyaName, FlexibleDate ikenshoIraiYMD, RDate shinseiYMD,
             RString yubinNo, RString jusho, RDate birthYMD, RString remban,
             RString seyibenMan, RString seyibenWoman, RString birthGengoMeiji, RString birthGengoTaisho,
             RString birthGengoShowa, RString shoriName) {
@@ -146,7 +150,6 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
         this.ninshoshaShimeiKakenai = ninshoshaShimeiKakenai;
         this.ninshoshaYakushokuMei1 = ninshoshaYakushokuMei1;
         this.ninshoshaYakushokuMei2 = ninshoshaYakushokuMei2;
-        this.atenaRenban = atenaRenban;
         this.customerBarCode = customerBarCode;
         this.yubinNo1 = yubinNo1;
         this.jushoText = jushoText;
@@ -154,6 +157,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
         this.shimeiText = shimeiText;
         this.meishoFuyo = meishoFuyo;
         this.sonota = sonota;
+        this.title = title;
         this.tsuchibun1 = tsuchibun1;
         this.tsuchibun2 = tsuchibun2;
         this.hihokenshaNo1 = hihokenshaNo1;
@@ -175,6 +179,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
         this.shinseiKubun = shinseiKubun;
         this.hihokenshaNameKana = hihokenshaNameKana;
         this.hihokennsyaName = hihokennsyaName;
+        this.ikenshoIraiYMD = ikenshoIraiYMD;
         this.shinseiYMD = shinseiYMD;
         this.yubinNo = yubinNo;
         this.jusho = jusho;

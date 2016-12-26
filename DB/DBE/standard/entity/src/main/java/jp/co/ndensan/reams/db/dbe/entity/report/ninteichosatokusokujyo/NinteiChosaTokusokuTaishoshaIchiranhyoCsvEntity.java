@@ -49,8 +49,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     @CsvField(order = 11, name = "督促状発行日")
     private RString tokusokujoHakkoYMD;
 
-    @CsvField(order = 12, name = "事業者コード")
-    private RString jigyoshaCode;
+    @CsvField(order = 12, name = "調査委託先コード")
+    private RString chosaItakusakiCode;
 
     @CsvField(order = 13, name = "事業者名称")
     private RString kikanName;
@@ -73,35 +73,36 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     /**
      * コンストラクタです。
      *
+     * @param no No
      * @param cityCode 市町村コード
      * @param cityName 市町村名称
-     * @param no No
      * @param hokenshaName 保険者
      * @param hihokenshaNo 被保険者番号
      * @param hihokenshaKanaName 被保険者氏名カナ
      * @param hihokenshaName 被保険者氏名
      * @param shinseiYMD 申請日
      * @param tokusokujoHakkoYMD 督促状発行日
-     * @param jigyoshaCode 事業者コード
+     * @param chosaItakusakiCode 調査委託先コード
      * @param kikanName 事業者名称
-     * @param chosainShime 調査員氏名
      * @param kikanJusho 事業者住所
      * @param kikanTel 事業者電話番号
+     * @param chosainShime 調査員氏名
      */
-    public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(RString cityCode,
-            RString cityName,
+    public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
             RString no,
+            RString cityCode,
+            RString cityName,
             RString hokenshaName,
             RString hihokenshaNo,
             RString hihokenshaKanaName,
             RString hihokenshaName,
             RString shinseiYMD,
             RString tokusokujoHakkoYMD,
-            RString jigyoshaCode,
+            RString chosaItakusakiCode,
             RString kikanName,
-            RString chosainShime,
             RString kikanJusho,
-            RString kikanTel) {
+            RString kikanTel,
+            RString chosainShime) {
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.no = no;
@@ -111,7 +112,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         this.hihokenshaName = hihokenshaName;
         this.shinseiYMD = shinseiYMD;
         this.tokusokujoHakkoYMD = tokusokujoHakkoYMD;
-        this.jigyoshaCode = jigyoshaCode;
+        this.chosaItakusakiCode = chosaItakusakiCode;
         this.kikanName = kikanName;
         this.chosainShime = chosainShime;
         this.kikanJusho = kikanJusho;
@@ -137,7 +138,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         csvEntity.tokusokujoHakkoYMD = entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().wareki().
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        csvEntity.jigyoshaCode = entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().getColumnValue();
+        csvEntity.chosaItakusakiCode = entity.getTemp_調査委託先コード() == null ? RString.EMPTY : entity.getTemp_調査委託先コード();
         csvEntity.kikanName = entity.getTemp_事業者名称() == null ? RString.EMPTY : entity.getTemp_事業者名称();
         csvEntity.chosainShime = entity.getTemp_調査員氏名();
         csvEntity.kikanJusho = entity.getTemp_事業者住所();
