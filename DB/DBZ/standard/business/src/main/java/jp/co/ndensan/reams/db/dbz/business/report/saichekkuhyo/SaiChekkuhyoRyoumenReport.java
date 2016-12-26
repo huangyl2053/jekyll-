@@ -42,6 +42,7 @@ public class SaiChekkuhyoRyoumenReport extends Report<SaiChekkuhyoReportSource> 
         itemList.add(item);
         return new SaiChekkuhyoRyoumenReport(itemList);
     }
+
     /**
      * インスタンスを生成します。
      *
