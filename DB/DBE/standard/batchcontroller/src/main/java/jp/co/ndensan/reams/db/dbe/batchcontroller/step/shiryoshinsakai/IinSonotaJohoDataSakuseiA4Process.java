@@ -99,15 +99,14 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
             存在ファイルindex = 0;
         }
         List<RString> イメージファイルリスト;
+        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         if (!entity.isJimukyoku()) {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名());
         } else {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
         }
-
         その他資料 = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         その他資料.set事務局概況特記イメージ(共有ファイルを引き出す(path));
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(その他資料);
         reportA4.writeBy(reportSourceWriterA4);
