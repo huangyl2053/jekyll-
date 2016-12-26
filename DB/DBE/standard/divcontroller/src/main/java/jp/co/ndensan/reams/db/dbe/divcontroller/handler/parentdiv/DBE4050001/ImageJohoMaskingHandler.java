@@ -372,9 +372,9 @@ public class ImageJohoMaskingHandler {
 
                 IkenshoImageJohoBuilder builder = imageJoho.createBuilderForEdit();
 
-                builder.set認定申請年(Integer.parseInt(taishoshaRow.get認定申請年().toString()));
-
-                builder.set共有ファイルID(RDateTime.parse(taishoshaRow.get共有ファイルID().toString()));
+//                builder.set認定申請年(Integer.parseInt(taishoshaRow.get認定申請年().toString()));
+//
+//                builder.set共有ファイルID(RDateTime.parse(taishoshaRow.get共有ファイルID().toString()));
 
                 imageJohoManager.save要介護認定意見書イメージ情報(builder.build());
 
