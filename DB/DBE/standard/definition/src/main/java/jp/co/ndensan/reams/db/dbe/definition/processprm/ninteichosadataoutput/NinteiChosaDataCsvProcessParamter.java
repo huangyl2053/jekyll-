@@ -24,6 +24,7 @@ public class NinteiChosaDataCsvProcessParamter implements IBatchProcessParameter
     private final RString ninteiChosainCode;
     private final List<RString> shinseishoKanriNoList;
     private final RString shichosonCode;
+    private final List<RString> hihokenshaNoList;
 
     /**
      * コンストラクタです。
@@ -34,6 +35,7 @@ public class NinteiChosaDataCsvProcessParamter implements IBatchProcessParameter
      * @param ninteiChosainCode 認定調査員コード
      * @param shinseishoKanriNoList 申請書管理番号リスト
      * @param shichosonCode 市町村コード
+     * @param hihokenshaNoList 被保険者番号リスト
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public NinteiChosaDataCsvProcessParamter(
@@ -42,13 +44,15 @@ public class NinteiChosaDataCsvProcessParamter implements IBatchProcessParameter
             RString ninteichosaItakusakiCode,
             RString ninteiChosainCode,
             List<RString> shinseishoKanriNoList,
-            RString shichosonCode) {
+            RString shichosonCode,
+            List<RString> hihokenshaNoList) {
         this.csvTempTableName = csvTempTableName;
         this.csvTempTableNameZenkai = csvTempTableNameZenkai;
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
         this.ninteiChosainCode = ninteiChosainCode;
         this.shinseishoKanriNoList = shinseishoKanriNoList;
         this.shichosonCode = shichosonCode;
+        this.hihokenshaNoList = hihokenshaNoList;
     }
 
     /**
