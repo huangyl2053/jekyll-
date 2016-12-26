@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KobetsuHyojiAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,12 +30,14 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private TextBoxFlexibleDate txtBirthYMD;
     @JsonProperty("txtShinseiKubunShinseiji")
     private TextBox txtShinseiKubunShinseiji;
-    @JsonProperty("txtShinseiKubunLow")
-    private TextBox txtShinseiKubunLow;
+    @JsonProperty("txtShinseiKubunLaw")
+    private TextBox txtShinseiKubunLaw;
+    @JsonProperty("txtTorisageKubun")
+    private TextBox txtTorisageKubun;
     @JsonProperty("txtIchijiHantei")
     private TextBox txtIchijiHantei;
     @JsonProperty("txtNijiHanteiDay")
-    private TextBoxFlexibleDate txtNijiHanteiDay;
+    private TextBoxDate txtNijiHanteiDay;
     @JsonProperty("txtTokuteiShippei")
     private TextBox txtTokuteiShippei;
     @JsonProperty("ddlJotaiZo")
@@ -60,6 +62,8 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private Label lblShinsakaiIken;
     @JsonProperty("ddlShinsakaiIkenShurui")
     private DropDownList ddlShinsakaiIkenShurui;
+    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
+    private ButtonDialog btnShinsakiIkenTeikeibunGuide;
     @JsonProperty("txtShinsakaiMemo")
     private TextBoxMultiLine txtShinsakaiMemo;
     @JsonProperty("txtShinsakaiIken")
@@ -72,14 +76,16 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private TextBoxMultiLine txtIchijiHanteiKekkaHenkoRiyu;
     @JsonProperty("btnNinteiChosaJokyoShokai")
     private ButtonDialog btnNinteiChosaJokyoShokai;
-    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
-    private ButtonDialog btnShinsakiIkenTeikeibunGuide;
     @JsonProperty("btnToroku")
     private Button btnToroku;
     @JsonProperty("btnIchigoHantei")
     private ButtonDialog btnIchigoHantei;
+    @JsonProperty("btnCancel")
+    private Button btnCancel;
     @JsonProperty("hasData")
     private RString hasData;
+    @JsonProperty("prevNinteiKikanMonth")
+    private RString prevNinteiKikanMonth;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -160,21 +166,39 @@ public class KobetsuHyojiAreaDiv extends Panel {
     }
 
     /*
-     * gettxtShinseiKubunLow
-     * @return txtShinseiKubunLow
+     * gettxtShinseiKubunLaw
+     * @return txtShinseiKubunLaw
      */
-    @JsonProperty("txtShinseiKubunLow")
-    public TextBox getTxtShinseiKubunLow() {
-        return txtShinseiKubunLow;
+    @JsonProperty("txtShinseiKubunLaw")
+    public TextBox getTxtShinseiKubunLaw() {
+        return txtShinseiKubunLaw;
     }
 
     /*
-     * settxtShinseiKubunLow
-     * @param txtShinseiKubunLow txtShinseiKubunLow
+     * settxtShinseiKubunLaw
+     * @param txtShinseiKubunLaw txtShinseiKubunLaw
      */
-    @JsonProperty("txtShinseiKubunLow")
-    public void setTxtShinseiKubunLow(TextBox txtShinseiKubunLow) {
-        this.txtShinseiKubunLow = txtShinseiKubunLow;
+    @JsonProperty("txtShinseiKubunLaw")
+    public void setTxtShinseiKubunLaw(TextBox txtShinseiKubunLaw) {
+        this.txtShinseiKubunLaw = txtShinseiKubunLaw;
+    }
+
+    /*
+     * gettxtTorisageKubun
+     * @return txtTorisageKubun
+     */
+    @JsonProperty("txtTorisageKubun")
+    public TextBox getTxtTorisageKubun() {
+        return txtTorisageKubun;
+    }
+
+    /*
+     * settxtTorisageKubun
+     * @param txtTorisageKubun txtTorisageKubun
+     */
+    @JsonProperty("txtTorisageKubun")
+    public void setTxtTorisageKubun(TextBox txtTorisageKubun) {
+        this.txtTorisageKubun = txtTorisageKubun;
     }
 
     /*
@@ -200,7 +224,7 @@ public class KobetsuHyojiAreaDiv extends Panel {
      * @return txtNijiHanteiDay
      */
     @JsonProperty("txtNijiHanteiDay")
-    public TextBoxFlexibleDate getTxtNijiHanteiDay() {
+    public TextBoxDate getTxtNijiHanteiDay() {
         return txtNijiHanteiDay;
     }
 
@@ -209,7 +233,7 @@ public class KobetsuHyojiAreaDiv extends Panel {
      * @param txtNijiHanteiDay txtNijiHanteiDay
      */
     @JsonProperty("txtNijiHanteiDay")
-    public void setTxtNijiHanteiDay(TextBoxFlexibleDate txtNijiHanteiDay) {
+    public void setTxtNijiHanteiDay(TextBoxDate txtNijiHanteiDay) {
         this.txtNijiHanteiDay = txtNijiHanteiDay;
     }
 
@@ -430,6 +454,24 @@ public class KobetsuHyojiAreaDiv extends Panel {
     }
 
     /*
+     * getbtnShinsakiIkenTeikeibunGuide
+     * @return btnShinsakiIkenTeikeibunGuide
+     */
+    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
+    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
+        return btnShinsakiIkenTeikeibunGuide;
+    }
+
+    /*
+     * setbtnShinsakiIkenTeikeibunGuide
+     * @param btnShinsakiIkenTeikeibunGuide btnShinsakiIkenTeikeibunGuide
+     */
+    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
+    public void setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
+        this.btnShinsakiIkenTeikeibunGuide = btnShinsakiIkenTeikeibunGuide;
+    }
+
+    /*
      * gettxtShinsakaiMemo
      * @return txtShinsakaiMemo
      */
@@ -538,24 +580,6 @@ public class KobetsuHyojiAreaDiv extends Panel {
     }
 
     /*
-     * getbtnShinsakiIkenTeikeibunGuide
-     * @return btnShinsakiIkenTeikeibunGuide
-     */
-    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
-    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
-        return btnShinsakiIkenTeikeibunGuide;
-    }
-
-    /*
-     * setbtnShinsakiIkenTeikeibunGuide
-     * @param btnShinsakiIkenTeikeibunGuide btnShinsakiIkenTeikeibunGuide
-     */
-    @JsonProperty("btnShinsakiIkenTeikeibunGuide")
-    public void setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
-        this.btnShinsakiIkenTeikeibunGuide = btnShinsakiIkenTeikeibunGuide;
-    }
-
-    /*
      * getbtnToroku
      * @return btnToroku
      */
@@ -592,6 +616,24 @@ public class KobetsuHyojiAreaDiv extends Panel {
     }
 
     /*
+     * getbtnCancel
+     * @return btnCancel
+     */
+    @JsonProperty("btnCancel")
+    public Button getBtnCancel() {
+        return btnCancel;
+    }
+
+    /*
+     * setbtnCancel
+     * @param btnCancel btnCancel
+     */
+    @JsonProperty("btnCancel")
+    public void setBtnCancel(Button btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    /*
      * gethasData
      * @return hasData
      */
@@ -607,6 +649,24 @@ public class KobetsuHyojiAreaDiv extends Panel {
     @JsonProperty("hasData")
     public void setHasData(RString hasData) {
         this.hasData = hasData;
+    }
+
+    /*
+     * getprevNinteiKikanMonth
+     * @return prevNinteiKikanMonth
+     */
+    @JsonProperty("prevNinteiKikanMonth")
+    public RString getPrevNinteiKikanMonth() {
+        return prevNinteiKikanMonth;
+    }
+
+    /*
+     * setprevNinteiKikanMonth
+     * @param prevNinteiKikanMonth prevNinteiKikanMonth
+     */
+    @JsonProperty("prevNinteiKikanMonth")
+    public void setPrevNinteiKikanMonth(RString prevNinteiKikanMonth) {
+        this.prevNinteiKikanMonth = prevNinteiKikanMonth;
     }
 
     // </editor-fold>

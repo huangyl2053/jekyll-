@@ -33,5 +33,6 @@ public class ShinsakaiKekkaTorokuRelateEntity {
     private RString 開催開始時間;
     private RString 開催終了時間;
     private boolean 合議体精神科医存在フラグ;
+    private FlexibleDate 開催予定日;
 
 }

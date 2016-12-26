@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKekkaTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,6 +41,10 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     private RString hdnGroupCd;
     @JsonProperty("hdnShinseishoKanriNo")
     private RString hdnShinseishoKanriNo;
+    @JsonProperty("hdnNinteiChosaJokyo")
+    private RString hdnNinteiChosaJokyo;
+    @JsonProperty("hdnDialogDisplayModeKey")
+    private RString hdnDialogDisplayModeKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -211,6 +215,42 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     /*
+     * gethdnNinteiChosaJokyo
+     * @return hdnNinteiChosaJokyo
+     */
+    @JsonProperty("hdnNinteiChosaJokyo")
+    public RString getHdnNinteiChosaJokyo() {
+        return hdnNinteiChosaJokyo;
+    }
+
+    /*
+     * sethdnNinteiChosaJokyo
+     * @param hdnNinteiChosaJokyo hdnNinteiChosaJokyo
+     */
+    @JsonProperty("hdnNinteiChosaJokyo")
+    public void setHdnNinteiChosaJokyo(RString hdnNinteiChosaJokyo) {
+        this.hdnNinteiChosaJokyo = hdnNinteiChosaJokyo;
+    }
+
+    /*
+     * gethdnDialogDisplayModeKey
+     * @return hdnDialogDisplayModeKey
+     */
+    @JsonProperty("hdnDialogDisplayModeKey")
+    public RString getHdnDialogDisplayModeKey() {
+        return hdnDialogDisplayModeKey;
+    }
+
+    /*
+     * sethdnDialogDisplayModeKey
+     * @param hdnDialogDisplayModeKey hdnDialogDisplayModeKey
+     */
+    @JsonProperty("hdnDialogDisplayModeKey")
+    public void setHdnDialogDisplayModeKey(RString hdnDialogDisplayModeKey) {
+        this.hdnDialogDisplayModeKey = hdnDialogDisplayModeKey;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -254,12 +294,12 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtChiku() {
+    public TextBox getTxtChiku() {
         return this.getKyotsuHyojiArea().getTxtChiku();
     }
 
     @JsonIgnore
-    public void  setTxtChiku(TextBoxCode txtChiku) {
+    public void  setTxtChiku(TextBox txtChiku) {
         this.getKyotsuHyojiArea().setTxtChiku(txtChiku);
     }
 
@@ -324,6 +364,16 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxFlexibleDate getTxtShinsakaiKaisaiYoteiYMD() {
+        return this.getKyotsuHyojiArea().getTxtShinsakaiKaisaiYoteiYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiKaisaiYoteiYMD(TextBoxFlexibleDate txtShinsakaiKaisaiYoteiYMD) {
+        this.getKyotsuHyojiArea().setTxtShinsakaiKaisaiYoteiYMD(txtShinsakaiKaisaiYoteiYMD);
+    }
+
+    @JsonIgnore
     public Label getLblTaishosha() {
         return this.getShinseishaIchiran().getLblTaishosha();
     }
@@ -384,13 +434,23 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShinseiKubunLow() {
-        return this.getKobetsuHyojiArea().getTxtShinseiKubunLow();
+    public TextBox getTxtShinseiKubunLaw() {
+        return this.getKobetsuHyojiArea().getTxtShinseiKubunLaw();
     }
 
     @JsonIgnore
-    public void  setTxtShinseiKubunLow(TextBox txtShinseiKubunLow) {
-        this.getKobetsuHyojiArea().setTxtShinseiKubunLow(txtShinseiKubunLow);
+    public void  setTxtShinseiKubunLaw(TextBox txtShinseiKubunLaw) {
+        this.getKobetsuHyojiArea().setTxtShinseiKubunLaw(txtShinseiKubunLaw);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTorisageKubun() {
+        return this.getKobetsuHyojiArea().getTxtTorisageKubun();
+    }
+
+    @JsonIgnore
+    public void  setTxtTorisageKubun(TextBox txtTorisageKubun) {
+        this.getKobetsuHyojiArea().setTxtTorisageKubun(txtTorisageKubun);
     }
 
     @JsonIgnore
@@ -404,12 +464,12 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNijiHanteiDay() {
+    public TextBoxDate getTxtNijiHanteiDay() {
         return this.getKobetsuHyojiArea().getTxtNijiHanteiDay();
     }
 
     @JsonIgnore
-    public void  setTxtNijiHanteiDay(TextBoxFlexibleDate txtNijiHanteiDay) {
+    public void  setTxtNijiHanteiDay(TextBoxDate txtNijiHanteiDay) {
         this.getKobetsuHyojiArea().setTxtNijiHanteiDay(txtNijiHanteiDay);
     }
 
@@ -534,6 +594,16 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
+        return this.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
+        this.getKobetsuHyojiArea().setBtnShinsakiIkenTeikeibunGuide(btnShinsakiIkenTeikeibunGuide);
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtShinsakaiMemo() {
         return this.getKobetsuHyojiArea().getTxtShinsakaiMemo();
     }
@@ -594,16 +664,6 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnShinsakiIkenTeikeibunGuide() {
-        return this.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnShinsakiIkenTeikeibunGuide(ButtonDialog btnShinsakiIkenTeikeibunGuide) {
-        this.getKobetsuHyojiArea().setBtnShinsakiIkenTeikeibunGuide(btnShinsakiIkenTeikeibunGuide);
-    }
-
-    @JsonIgnore
     public Button getBtnToroku() {
         return this.getKobetsuHyojiArea().getBtnToroku();
     }
@@ -621,6 +681,16 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnIchigoHantei(ButtonDialog btnIchigoHantei) {
         this.getKobetsuHyojiArea().setBtnIchigoHantei(btnIchigoHantei);
+    }
+
+    @JsonIgnore
+    public Button getBtnCancel() {
+        return this.getKobetsuHyojiArea().getBtnCancel();
+    }
+
+    @JsonIgnore
+    public void  setBtnCancel(Button btnCancel) {
+        this.getKobetsuHyojiArea().setBtnCancel(btnCancel);
     }
 
     // </editor-fold>
