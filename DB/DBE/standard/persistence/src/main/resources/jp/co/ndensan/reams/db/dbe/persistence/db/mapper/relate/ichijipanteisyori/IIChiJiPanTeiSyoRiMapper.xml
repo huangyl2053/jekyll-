@@ -77,9 +77,51 @@
     ,DbT5302."ikenshoJuryoYMD"
     ,DbT5101."shinseishoKanriNo"
     ,DbT5101."koroshoIfShikibetsuCode"
-FROM
-    <include refid="検索条件" />
-</select>
+    FROM
+        <include refid="検索条件" />
+    </select>
+
+    <select id="get対象者件数" resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter"
+            resultOrdered="true" fetchSize="500">
+        SELECT COUNT("countData") FROM (
+            SELECT
+            DbT7051."shichosonMeisho"
+            ,DbT5101."hihokenshaNo"
+            ,DbT5101."hihokenshaName"
+            ,DbT5101."ninteiShinseiYMD"
+            ,DbT5101."ninteiShinseiShinseijiKubunCode"
+            ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD"
+            ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode"
+            ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHnateiKeikokuCode"
+            ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikan"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanShokuji"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanHaisetsu"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanIdo"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanSeiketsuHoji"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanKansetsuCare"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanBPSDKanren"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanKinoKunren"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanIryoKanren"
+            ,"DbT5116IchijiHanteiKekkaJoho"."kijunJikanNinchishoKasan"
+            ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku1gun"
+            ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku2gun"
+            ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku3gun"
+            ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku4gun"
+            ,"DbT5116IchijiHanteiKekkaJoho"."chukanHyokaKomoku5gun"
+            ,"DbT5116IchijiHanteiKekkaJoho"."jotaiAnteiseiCode"
+            ,"DbT5116IchijiHanteiKekkaJoho"."ninchishoJiritsudoIIijoNoGaizensei"
+            ,"DbT5116IchijiHanteiKekkaJoho"."suiteiKyufuKubunCode"
+            ,DbT5202."ninteichosaJisshiYMD"
+            ,DbT5302."ikenshoJuryoYMD"
+            ,DbT5101."shinseishoKanriNo"
+            ,DbT5101."koroshoIfShikibetsuCode"
+            FROM
+            <include refid="検索条件" />
+        ) AS "countData"
+    </select>
+
 <select id="get要介護認定一次判定結果情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.ResultMap_DbT5116IchijiHanteiKekkaJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter"
             resultOrdered="true" fetchSize="500">
@@ -88,6 +130,7 @@ FROM
   FROM
     <include refid="検索条件" />
 </select>
+
  <sql id="検索条件">
      rgdb."DbT5101NinteiShinseiJoho" DbT5101
     INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051

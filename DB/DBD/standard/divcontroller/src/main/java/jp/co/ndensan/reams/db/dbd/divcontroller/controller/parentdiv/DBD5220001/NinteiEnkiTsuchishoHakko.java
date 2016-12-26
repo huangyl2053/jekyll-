@@ -80,6 +80,7 @@ public class NinteiEnkiTsuchishoHakko {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        div.getDgHakkotaishosha().getGridSetting().setLimitRowCount(div.getTxtMaxDisp().getValue().intValue());
         NinteiEnkiTsuchishoHakkoHandler handler = getHandler(div);
         List<NinteiEnkiTsuchishoHakkoBusiness> 発行対象者一覧情報 = handler.発行対象者一覧情報取得();
         if (発行対象者一覧情報.isEmpty()) {

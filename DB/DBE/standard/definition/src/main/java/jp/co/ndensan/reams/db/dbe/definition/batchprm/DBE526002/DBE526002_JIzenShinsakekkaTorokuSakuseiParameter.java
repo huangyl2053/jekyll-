@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526002;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002.DBE517002_ShinsakaiShiryoIinParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.jizenshinsakekka.JizenShinsakekkaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -83,6 +84,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
     private RString ikensyoFlag;
     @BatchParameter(key = YOBIHENTEIFLAG, name = "予備判定記入表フラグ")
     private RString yobiHenteiFlag;
+    private Map<RString, RString> 帳票一覧Map;
 
     /**
      * コンストラクタです。
@@ -212,6 +214,8 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 ikensyoFlag,
                 RString.EMPTY,
                 tuutiFlag,
-                yobiHenteiFlag);
+                yobiHenteiFlag,
+                帳票一覧Map
+        );
     }
 }

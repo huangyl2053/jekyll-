@@ -17,19 +17,19 @@ public class IchijiHanteiShoriKekka {
 
     private final ShinseishoKanriNo shinseishoKanriNo;
     private final IchijiHanteiKekkaJoho hanteiKekka;
-    private final boolean isError;
+    private final boolean errorFlg;
 
     /**
      * コンストラクタ
      *
      * @param shinseishoKanriNo 申請書管理番号
      * @param hanteiKekka 一次判定結果
-     * @param isError エラーしたか否か。
+     * @param errorFlg エラーしたか否か。
      */
-    public IchijiHanteiShoriKekka(ShinseishoKanriNo shinseishoKanriNo, IchijiHanteiKekkaJoho hanteiKekka, boolean isError) {
+    public IchijiHanteiShoriKekka(ShinseishoKanriNo shinseishoKanriNo, IchijiHanteiKekkaJoho hanteiKekka, boolean errorFlg) {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.hanteiKekka = hanteiKekka;
-        this.isError = isError;
+        this.errorFlg = errorFlg;
     }
 
     /**
@@ -56,7 +56,7 @@ public class IchijiHanteiShoriKekka {
      * @return エラーしていたなら、{@code true}が返る。
      */
     public boolean isError() {
-        return isError;
+        return errorFlg;
     }
 
 }

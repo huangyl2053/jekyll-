@@ -158,8 +158,8 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnModoru"));
             }
 
-            public btnPrint(): UZA.ButtonPrint {
-                return new UZA.ButtonPrint(this.convFiledName("btnPrint"));
+            public btnPrint(): UZA.ButtonReportPublish {
+                return new UZA.ButtonReportPublish(this.convFiledName("btnPrint"));
             }
 
         }

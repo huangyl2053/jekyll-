@@ -23,16 +23,16 @@ public class KozaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
-    private KinyuKikanInputDiv ccdKozaJohoMeisaiKinyuKikanInput;
     @JsonProperty("ddlYokinShubetsu")
     private DropDownList ddlYokinShubetsu;
     @JsonProperty("txtGinkoKozaNo")
     private TextBoxCode txtGinkoKozaNo;
     @JsonProperty("txtKozaMeiginin")
-    private TextBox txtKozaMeiginin;
+    private TextBoxKana txtKozaMeiginin;
     @JsonProperty("txtKanjiMeiginin")
     private TextBox txtKanjiMeiginin;
+    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
+    private KinyuKikanInputDiv ccdKozaJohoMeisaiKinyuKikanInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,15 +40,6 @@ public class KozaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKozaJohoMeisaiKinyuKikanInput
-     * @return ccdKozaJohoMeisaiKinyuKikanInput
-     */
-    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
-    public IKinyuKikanInputDiv getCcdKozaJohoMeisaiKinyuKikanInput() {
-        return ccdKozaJohoMeisaiKinyuKikanInput;
-    }
-
     /*
      * getddlYokinShubetsu
      * @return ddlYokinShubetsu
@@ -90,7 +81,7 @@ public class KozaJohoDiv extends Panel {
      * @return txtKozaMeiginin
      */
     @JsonProperty("txtKozaMeiginin")
-    public TextBox getTxtKozaMeiginin() {
+    public TextBoxKana getTxtKozaMeiginin() {
         return txtKozaMeiginin;
     }
 
@@ -99,7 +90,7 @@ public class KozaJohoDiv extends Panel {
      * @param txtKozaMeiginin txtKozaMeiginin
      */
     @JsonProperty("txtKozaMeiginin")
-    public void setTxtKozaMeiginin(TextBox txtKozaMeiginin) {
+    public void setTxtKozaMeiginin(TextBoxKana txtKozaMeiginin) {
         this.txtKozaMeiginin = txtKozaMeiginin;
     }
 
@@ -119,6 +110,15 @@ public class KozaJohoDiv extends Panel {
     @JsonProperty("txtKanjiMeiginin")
     public void setTxtKanjiMeiginin(TextBox txtKanjiMeiginin) {
         this.txtKanjiMeiginin = txtKanjiMeiginin;
+    }
+
+    /*
+     * getccdKozaJohoMeisaiKinyuKikanInput
+     * @return ccdKozaJohoMeisaiKinyuKikanInput
+     */
+    @JsonProperty("ccdKozaJohoMeisaiKinyuKikanInput")
+    public IKinyuKikanInputDiv getCcdKozaJohoMeisaiKinyuKikanInput() {
+        return ccdKozaJohoMeisaiKinyuKikanInput;
     }
 
     // </editor-fold>

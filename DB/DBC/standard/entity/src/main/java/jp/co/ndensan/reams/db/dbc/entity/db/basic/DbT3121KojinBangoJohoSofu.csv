@@ -1,0 +1,11 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+kojinNo,varchar,RString,,,,,個人番号,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+shoriYM,UDD014YM,FlexibleYearMonth,,,,,処理年月,A
+teiseiYMD,UDD015YMD,FlexibleDate,,,,,訂正年月日,A
+teiseiKubunCode,varchar,RString,,,,,訂正区分,A
+idoJiyu,varchar,RString,,,,,異動事由,A
+idoKubunCode,varchar,RString,,,,,異動区分,A

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -34,7 +33,7 @@ public class ShujiiIkenTokusokujoHakkoRelateEntity {
     private AtenaMeisho temp_被保険者氏名;
     private FlexibleDate temp_申請日;
     private FlexibleDate temp_督促状発行日;
-    private JigyoshaNo temp_事業者コード;
+    private RString temp_医療機関コード;
     private RString temp_事業者名称;
     private RString temp_事業者住所;
     private RString temp_主治医氏名;

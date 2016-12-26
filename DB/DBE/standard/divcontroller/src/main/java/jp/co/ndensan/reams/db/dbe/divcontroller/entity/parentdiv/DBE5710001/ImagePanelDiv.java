@@ -29,10 +29,10 @@ public class ImagePanelDiv extends Panel {
     private ButtonDialog btnChosahyoTokuki;
     @JsonProperty("btnChosahyoGaikyo")
     private ButtonDialog btnChosahyoGaikyo;
-    @JsonProperty("btnIkensho")
-    private ButtonDialog btnIkensho;
-    @JsonProperty("btnIkenshoOCR")
-    private ButtonDialog btnIkenshoOCR;
+    @JsonProperty("btnIkenshoTeikei")
+    private ButtonDialog btnIkenshoTeikei;
+    @JsonProperty("btnIkenshoTeikeigai")
+    private ButtonDialog btnIkenshoTeikeigai;
     @JsonProperty("btnSonota")
     private ButtonDialog btnSonota;
     @JsonProperty("txtJuryoYMD")
@@ -125,39 +125,39 @@ public class ImagePanelDiv extends Panel {
     }
 
     /*
-     * getbtnIkensho
-     * @return btnIkensho
+     * getbtnIkenshoTeikei
+     * @return btnIkenshoTeikei
      */
-    @JsonProperty("btnIkensho")
-    public ButtonDialog getBtnIkensho() {
-        return btnIkensho;
+    @JsonProperty("btnIkenshoTeikei")
+    public ButtonDialog getBtnIkenshoTeikei() {
+        return btnIkenshoTeikei;
     }
 
     /*
-     * setbtnIkensho
-     * @param btnIkensho btnIkensho
+     * setbtnIkenshoTeikei
+     * @param btnIkenshoTeikei btnIkenshoTeikei
      */
-    @JsonProperty("btnIkensho")
-    public void setBtnIkensho(ButtonDialog btnIkensho) {
-        this.btnIkensho = btnIkensho;
+    @JsonProperty("btnIkenshoTeikei")
+    public void setBtnIkenshoTeikei(ButtonDialog btnIkenshoTeikei) {
+        this.btnIkenshoTeikei = btnIkenshoTeikei;
     }
 
     /*
-     * getbtnIkenshoOCR
-     * @return btnIkenshoOCR
+     * getbtnIkenshoTeikeigai
+     * @return btnIkenshoTeikeigai
      */
-    @JsonProperty("btnIkenshoOCR")
-    public ButtonDialog getBtnIkenshoOCR() {
-        return btnIkenshoOCR;
+    @JsonProperty("btnIkenshoTeikeigai")
+    public ButtonDialog getBtnIkenshoTeikeigai() {
+        return btnIkenshoTeikeigai;
     }
 
     /*
-     * setbtnIkenshoOCR
-     * @param btnIkenshoOCR btnIkenshoOCR
+     * setbtnIkenshoTeikeigai
+     * @param btnIkenshoTeikeigai btnIkenshoTeikeigai
      */
-    @JsonProperty("btnIkenshoOCR")
-    public void setBtnIkenshoOCR(ButtonDialog btnIkenshoOCR) {
-        this.btnIkenshoOCR = btnIkenshoOCR;
+    @JsonProperty("btnIkenshoTeikeigai")
+    public void setBtnIkenshoTeikeigai(ButtonDialog btnIkenshoTeikeigai) {
+        this.btnIkenshoTeikeigai = btnIkenshoTeikeigai;
     }
 
     /*

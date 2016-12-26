@@ -155,7 +155,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
             tempP_誕生日明治 = 星アイコン;
             tempP_誕生日大正 = 星アイコン;
         }
-        NinshoshaSource source = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日(),
+        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_督促日(),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE233001, KamokuCode.EMPTY, パターン番号_1);
 
@@ -177,16 +177,15 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
         int 被保険者番号の桁 = 0;
         return new ShujiiIkenshoSakuseiTokusokujoItem(
                 processPrm.getTemp_文書番号(),
-                source.denshiKoin,
-                source.hakkoYMD,
-                source.koinMojiretsu,
-                source.koinShoryaku,
-                source.ninshoshaShimeiKakeru,
-                source.ninshoshaYakushokuMei,
-                source.ninshoshaShimeiKakenai,
-                source.ninshoshaYakushokuMei1,
-                source.ninshoshaYakushokuMei2,
-                new RString("1"),
+                ninshoshaSource.denshiKoin,
+                ninshoshaSource.hakkoYMD,
+                ninshoshaSource.koinMojiretsu,
+                ninshoshaSource.koinShoryaku,
+                ninshoshaSource.ninshoshaShimeiKakeru,
+                ninshoshaSource.ninshoshaYakushokuMei,
+                ninshoshaSource.ninshoshaShimeiKakenai,
+                ninshoshaSource.ninshoshaYakushokuMei1,
+                ninshoshaSource.ninshoshaYakushokuMei2,
                 宛名名称付与,
                 edited郵便番号,
                 宛名住所,
@@ -195,6 +194,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称,
                                 RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 RString.EMPTY,
+                通知文.get(0),
                 通知文.get(1),
                 通知文.get(2),
                 getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
@@ -217,6 +217,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.getTemp_申請区分コード().getColumnValue()).get名称(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
+                entity.get主治医意見書依頼情報().getIkenshoSakuseiIraiYMD(),
                 entity.getTemp_申請年月日() == null ? null : new RDate(entity.getTemp_申請年月日().toString()),
                 entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
                 entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),

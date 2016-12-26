@@ -29,11 +29,11 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
     @JsonProperty("lblGenbon")
     private Label lblGenbon;
     @JsonProperty("imgGenbon")
-    private StaticImage imgGenbon;
+    private DynamicImage imgGenbon;
     @JsonProperty("lblMask")
     private Label lblMask;
     @JsonProperty("imgMask")
-    private StaticImage imgMask;
+    private DynamicImage imgMask;
     @JsonProperty("btnBefore")
     private Button btnBefore;
     @JsonProperty("btnBack")
@@ -85,7 +85,7 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
      * @return imgGenbon
      */
     @JsonProperty("imgGenbon")
-    public StaticImage getImgGenbon() {
+    public DynamicImage getImgGenbon() {
         return imgGenbon;
     }
 
@@ -94,7 +94,7 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
      * @param imgGenbon imgGenbon
      */
     @JsonProperty("imgGenbon")
-    public void setImgGenbon(StaticImage imgGenbon) {
+    public void setImgGenbon(DynamicImage imgGenbon) {
         this.imgGenbon = imgGenbon;
     }
 
@@ -121,7 +121,7 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
      * @return imgMask
      */
     @JsonProperty("imgMask")
-    public StaticImage getImgMask() {
+    public DynamicImage getImgMask() {
         return imgMask;
     }
 
@@ -130,7 +130,7 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
      * @param imgMask imgMask
      */
     @JsonProperty("imgMask")
-    public void setImgMask(StaticImage imgMask) {
+    public void setImgMask(DynamicImage imgMask) {
         this.imgMask = imgMask;
     }
 

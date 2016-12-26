@@ -150,7 +150,9 @@ public class IkenshoSakuseiIrai {
         if (CONFIGVALUE1.equals(コンフィグ_主治医意見書作成期限設定方法)) {
             if (SELECTED_KEY0.equals(key)) {
                 div.getTxtKigenymd().setDisabled(true);
-                div.getTxtKigenymd().setValue(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数));
+                if(div.getTxtSakuseiIraiD().getValue() != null){
+                    div.getTxtKigenymd().setValue(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数));
+                }
             } else if (SELECTED_KEY1.equals(key)) {
                 div.getTxtKigenymd().setDisabled(true);
                 div.getTxtKigenymd().clearValue();
@@ -317,16 +319,22 @@ public class IkenshoSakuseiIrai {
     private void update主治医意見書作成依頼情報(IkenshoSakuseiIraiDiv div) {
         ShujiiIkenshoIraiJohoBuilder 主治医意見書依頼情報builder = null;
         NinteiShinseiJoho 要介護認定申請情報 = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
-        ShujiiIkenshoIraiJoho ikenshoIraiJoho = 要介護認定申請情報.getshujiiIkenshoIraiJohoList().get(数字_0);
-        if (div.getChkIrai().getSelectedKeys().contains(SELECTED_KEY0) || div.getChkIrai().getSelectedKeys().contains(SELECTED_KEY1)) {
-            主治医意見書依頼情報builder = ikenshoIraiJoho.createBuilderForEdit();
-            主治医意見書依頼情報builder.set依頼書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
-        }
-        if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0) || div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY1)) {
-            主治医意見書依頼情報builder = ikenshoIraiJoho.createBuilderForEdit();
-            主治医意見書依頼情報builder.set意見書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
-            主治医意見書依頼情報builder.set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode());
-            主治医意見書依頼情報builder.set主治医コード(div.getCcdShujiiInput().getShujiiCode());
+        if (!要介護認定申請情報.getshujiiIkenshoIraiJohoList().isEmpty()) {        
+            ShujiiIkenshoIraiJoho ikenshoIraiJoho = 要介護認定申請情報.getshujiiIkenshoIraiJohoList().get(数字_0);
+            if (div.getChkIrai().getSelectedKeys().contains(SELECTED_KEY0) || div.getChkIrai().getSelectedKeys().contains(SELECTED_KEY1)) {
+                主治医意見書依頼情報builder = ikenshoIraiJoho.createBuilderForEdit();
+                if(div.getTxtHakobi().getValue() != null){
+                    主治医意見書依頼情報builder.set依頼書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
+                }
+            }
+            if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY0) || div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY1)) {
+                主治医意見書依頼情報builder = ikenshoIraiJoho.createBuilderForEdit();
+                if(div.getTxtHakobi().getValue() != null){
+                    主治医意見書依頼情報builder.set意見書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
+                }
+                主治医意見書依頼情報builder.set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode());
+                主治医意見書依頼情報builder.set主治医コード(div.getCcdShujiiInput().getShujiiCode());
+            }
         }
         if (主治医意見書依頼情報builder != null) {
             NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit();
