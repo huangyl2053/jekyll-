@@ -45,14 +45,10 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnDataOutput() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        List<dgNinteiTaskList_Row> 選択されたデータ = div.getDgNinteiTaskList().getSelectedItems();
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
-        }
-        if (!is委托先非空(選択されたデータ)) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.選択割付必須));
         }
         return validationMessages;
     }
@@ -178,7 +174,7 @@ public class NinteichosaIraiValidationHandler {
         選択割付必須(DbeErrorMessages.選択必須, "割付のデータ"),
         存在しない(UrErrorMessages.存在しない, "割付可能な調査委託先"),
         割付可能人数は0です_割付不可(DbeErrorMessages.割付可能人数は0です_割付不可),
-        複数選択不可_認定調査票入手一覧(DbeErrorMessages.複数選択不可, "認定調査票入手一覧"),
+        複数選択不可_認定調査票入手一覧(DbeErrorMessages.複数選択不可, "認定調査依頼一覧"),
         理由付き完了不可(DbzErrorMessages.理由付き完了不可, "認定調査依頼先が未確定"),
         理由付き完了不可_認定調査期限年月日(DbzErrorMessages.理由付き完了不可, "認定調査期限年月日が未設定"),
         理由付き完了不可_依頼書出力年月日(DbzErrorMessages.理由付き完了不可, "依頼書出力年月日が未設定"),
