@@ -291,6 +291,9 @@ public class TokkiText1A4Business {
      * @return 識別コード
      */
     public RString get識別コード() {
+        if (RString.isNullOrEmpty(kyotsuEntity.getShoKisaiHokenshaNo()) || RString.isNullOrEmpty(kyotsuEntity.getHihokenshaNo())) {
+            return RString.EMPTY;
+        }
         return kyotsuEntity.getShoKisaiHokenshaNo().substring(0, SIZE_5).concat(kyotsuEntity.getHihokenshaNo());
     }
 

@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.Shinsa
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -50,7 +51,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.entities.UzV0002HolidayListEntity;
+import jp.co.ndensan.reams.uz.uza.math.CheckDigitKind;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -119,9 +122,12 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static List<RString> 時間枠;
     private static List<ShinsakaiKaisaiYoteiJohoParameter> yoteiJohoEntityList = new ArrayList<>();
     private static List<ShinsakaiKaisaiYoteiJohoParameter> yoteiJohoEntityList2 = new ArrayList<>();
+    private static List<dgShinsakaiKaisaiYoteiIchiran_Row> 審査会開催予定一覧_当月分 = new ArrayList<>();
+    private static List<dgShinsakaiKaisaiYoteiIchiran_Row> 審査会開催予定一覧_翌月分 = new ArrayList<>();
     private ShinsakaiKaisaiYoteiTorokuDiv div;
     private RString モード = RString.EMPTY;
     private RDate date;
+    private boolean 翌月更新有無 = false;
 
     /**
      * コンストラクタです。
@@ -155,7 +161,12 @@ public class ShinsakaiKaisaiYoteiToroku {
         this.div = div;
         date = RDate.getNowDate();
         if (!ResponseHolder.isReRequest()) {
-            if (!is保存()) {
+            int 表示月の前月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).minusMonth(1).getMonthValue();
+            int 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, Integer.class);
+            if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
+                    && 表示月の前月 == 当月更新有りの月) {
+                setMonthBefore();
+            } else if (!is保存()) {
                 return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
             } else {
                 setMonthBefore();
@@ -179,7 +190,12 @@ public class ShinsakaiKaisaiYoteiToroku {
         this.div = div;
         date = RDate.getNowDate();
         if (!ResponseHolder.isReRequest()) {
-            if (!is保存()) {
+            int 表示月の翌月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).plusMonth(1).getMonthValue();
+            int 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
+            if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
+                    && 表示月の翌月 == 翌月更新有りの月) {
+                setMonthAfter();
+            } else if (!is保存()) {
                 return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
             } else {
                 setMonthAfter();
@@ -407,6 +423,21 @@ public class ShinsakaiKaisaiYoteiToroku {
      * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_BtnWeekCopy(ShinsakaiKaisaiYoteiTorokuDiv div) {
+
+        int 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).getMonthValue();
+        int 週コピー実施翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
+        if (表示月 == 週コピー実施翌月更新月) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(
+                        new ErrorMessage(UrErrorMessages.更新不可_汎用.getMessage().getCode(),
+                                UrErrorMessages.更新不可_汎用.getMessage().replace("前月にも「週コピーする」が使用されている").evaluate()
+                                .concat(BREAK.toString()).concat("「保存する」を実行後、再度処理を行ってください。")))
+                        .respond();
+            } else {
+                return ResponseData.of(div).respond();
+            }
+        }
+
         this.div = div;
         ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler = new ShinsakaiKaisaiYoteiTorokuValidationHandler(div);
         ValidationMessageControlPairs validPairs = getWeekCopyCheck(validationHandler);
@@ -451,6 +482,14 @@ public class ShinsakaiKaisaiYoteiToroku {
                     for (ShinsakaiKaisaiYoteiJohoBusiness yoteiJohoBusiness : yoteiJohoNichiBusinessList.records()) {
                         内部実績AddEntity(yoteiJohoBusiness);
                     }
+                    if (翌月更新有無 == false) {
+                        翌月更新有無 = 週コピー開始日.getMonthValue() != 開始日.getMonthValue();
+                        if (翌月更新有無) {
+                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, true);
+                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 週コピー開始日.getMonthValue());
+                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 開始日.getMonthValue());
+                        }
+                    }
                 }
             }
             モード = モード_週COPY;
@@ -473,7 +512,17 @@ public class ShinsakaiKaisaiYoteiToroku {
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_BtnKaisaiBangoFuban(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;
         set番号();
-        set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
+        FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
+        int 週コピー翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
+        if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
+                && 表示月.getMonthValue() == 週コピー翌月更新月) {
+            FlexibleYearMonth 設定月 = 表示月.minusMonth(1).getYearMonth();
+            div.getLblMonth().setText(setLblMonth(設定月));
+            div.getLblMonth2().setText(setLblMonthWareki(設定月));
+            set介護認定審査会開催予定一覧(設定月.toDateString());
+        } else {
+            set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -640,12 +689,14 @@ public class ShinsakaiKaisaiYoteiToroku {
                 }
             });
             RString 汎用キー = new RString("審査会開催番号");
-            FlexibleYear 年度 = new FlexibleYear(div.getLblMonth().getText().substring(INDEX_0, INDEX_4));
             for (ShinsakaiKaisaiYoteiJohoParameter entity : shinkiList) {
-                RString 開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
-                if (Integer.parseInt(開催番号.toString()) == INDEX_0) {
-                    開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
+                FlexibleYear 年度 = entity.get日付().getNendo();
+                RString 開催番号;
+                if (Saiban.referMetaData(SubGyomuCode.DBE認定支援, 汎用キー, 年度) == null) {
+                    long minNumber = new Long(年度.toString().concat("0001"));
+                    Saiban.insert(SubGyomuCode.DBE認定支援, 汎用キー, 年度, minNumber, 99999999, false, 1, 0, CheckDigitKind.Unchecked);
                 }
+                開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
                 RString 合議体番号 = new RString(entity.get合議体番号());
                 entity.set開催番号(開催番号);
                 entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号).replace(BATU, 合議体番号));
@@ -819,7 +870,14 @@ public class ShinsakaiKaisaiYoteiToroku {
         div.getLblMonth().setText(setLblMonth(date2.getYearMonth()));
         div.getLblMonth2().setText(setLblMonthWareki(date2.getYearMonth()));
         モード = モード_月;
-        set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
+
+        FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
+        int 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, Integer.class);
+        if (表示月.getMonthValue() == 当月更新有りの月) {
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_当月分);
+        } else {
+            set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
+        }
         clear入力();
     }
 
@@ -834,7 +892,15 @@ public class ShinsakaiKaisaiYoteiToroku {
         div.getLblMonth().setText(setLblMonth(date2.getYearMonth()));
         div.getLblMonth2().setText(setLblMonthWareki(date2.getYearMonth()));
         モード = モード_月;
-        set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
+
+        FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
+        int 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
+        if (表示月.getMonthValue() == 翌月更新有りの月) {
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_翌月分);
+        } else {
+            set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
+        }
+
         clear入力();
     }
 
@@ -871,12 +937,23 @@ public class ShinsakaiKaisaiYoteiToroku {
 
     private void set介護認定審査会開催予定一覧(RString 年月) {
         List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList_翌月分 = new ArrayList<>();
         getConfig時間枠();
         FlexibleDate zenbuDate = new FlexibleDate(Integer.parseInt(年月.substring(0, INDEX_4).toString()),
                 Integer.parseInt(年月.substring(INDEX_4).toString()), 1);
+        FlexibleYearMonth 年月_翌月分 = new FlexibleYearMonth(年月).plusMonth(1);
+        FlexibleDate zenbuDate_翌月分 = new FlexibleDate(年月_翌月分.getYearValue(), 年月_翌月分.getMonthValue(), 1);
         List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList(HolidayCategory.日本の休日.getCategoryId());
         int dayCount = zenbuDate.getLastDay();
+        int dayCount_翌月分 = zenbuDate_翌月分.getLastDay();
         if (モード.equals(モード_月) || モード.equals(モード_初期化)) {
+
+            翌月更新有無 = false;
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, false);
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 0);
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 0);
+
+            //当月分
             yoteiJohoEntityList = new ArrayList<>();
             yoteiJohoEntityList2 = new ArrayList<>();
             SearchResult<ShinsakaiKaisaiYoteiJohoBusiness> yoteiJohoGetsuBusinessList = yoteiJohoManager.search審査会開催予定情報Of指定月(年月);
@@ -919,6 +996,48 @@ public class ShinsakaiKaisaiYoteiToroku {
                 dgShinsakaRowList.add(dgShinsakaRow);
                 zenbuDate = zenbuDate.plusDay(1);
             }
+            //翌月分
+            SearchResult<ShinsakaiKaisaiYoteiJohoBusiness> yoteiJohoGetsuBusinessList_翌月分 = yoteiJohoManager.search審査会開催予定情報Of指定月(年月_翌月分.toDateString());
+            List<ShinsakaiKaisaiYoteiJoho> yoteiJoho_翌月分 = yoteiTorokuManager.get介護認定審査会開催予定情報(年月_翌月分.toDateString()).records();
+            Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> chikuNinteiChosain_翌月分 = Models.create(yoteiJoho_翌月分);
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月分, chikuNinteiChosain_翌月分);
+            for (ShinsakaiKaisaiYoteiJohoBusiness business : yoteiJohoGetsuBusinessList_翌月分.records()) {
+                ShinsakaiKaisaiYoteiJohoParameter entity = new ShinsakaiKaisaiYoteiJohoParameter();
+                entity.set開催番号(business.get開催番号());
+                entity.set日付(business.get開催予定日());
+                entity.set開始予定時刻(business.get予定開始時間());
+                entity.set終了予定時刻(business.get予定終了時間());
+                entity.set介護認定審査会進捗状況(business.get介護認定審査会進捗状況());
+                entity.set合議体番号(business.get合議体番号());
+                entity.set審査会名称(business.get審査会名称());
+                entity.set存在(true);
+                yoteiJohoEntityList.add(entity);
+                ShinsakaiKaisaiYoteiJohoParameter 内部entity = new ShinsakaiKaisaiYoteiJohoParameter();
+                内部entity.set予定定員(entity.get予定定員());
+                内部entity.set介護認定審査会進捗状況(entity.get介護認定審査会進捗状況());
+                内部entity.set催予定場所コード(entity.get催予定場所コード());
+                内部entity.set合議体番号(entity.get合議体番号());
+                内部entity.set委員定員(entity.get委員定員());
+                内部entity.set存在(entity.is存在());
+                内部entity.set審査会名称(entity.get審査会名称());
+                内部entity.set日付(entity.get日付());
+                内部entity.set終了予定時刻(entity.get終了予定時刻());
+                内部entity.set自動割当定員(entity.get自動割当定員());
+                内部entity.set開催番号(entity.get開催番号());
+                内部entity.set開始予定時刻(entity.get開始予定時刻());
+                yoteiJohoEntityList2.add(内部entity);
+            }
+            for (int i = 0; i < dayCount_翌月分; i++) {
+                dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow_翌月分 = new dgShinsakaiKaisaiYoteiIchiran_Row();
+                dgShinsakaRow_翌月分.setKaisaiYoteibi(new RString(String.valueOf(i + 1)));
+                dgShinsakaRow_翌月分.setKaisaiYoteiYobi(new RString(zenbuDate_翌月分.getDayOfWeek().getShortTerm()));
+                setHoliday(zenbuDate_翌月分, holiDay, dgShinsakaRow_翌月分);
+                set審査会名称用(yoteiJohoGetsuBusinessList_翌月分, zenbuDate_翌月分, dgShinsakaRow_翌月分);
+                setSelected(zenbuDate_翌月分, dgShinsakaRow_翌月分);
+                dgShinsakaRowList_翌月分.add(dgShinsakaRow_翌月分);
+                zenbuDate_翌月分 = zenbuDate_翌月分.plusDay(1);
+            }
+
         } else {
             for (int i = 0; i < dayCount; i++) {
                 dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow = new dgShinsakaiKaisaiYoteiIchiran_Row();
@@ -929,8 +1048,19 @@ public class ShinsakaiKaisaiYoteiToroku {
                 dgShinsakaRowList.add(dgShinsakaRow);
                 zenbuDate = zenbuDate.plusDay(1);
             }
+            for (int i = 0; i < dayCount_翌月分; i++) {
+                dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow_翌月分 = new dgShinsakaiKaisaiYoteiIchiran_Row();
+                setClearSelected(zenbuDate_翌月分, dgShinsakaRow_翌月分);
+                dgShinsakaRow_翌月分.setKaisaiYoteibi(new RString(String.valueOf(i + 1)));
+                setHoliday(zenbuDate_翌月分, holiDay, dgShinsakaRow_翌月分);
+                set内部審査会名称用(dgShinsakaRow_翌月分, zenbuDate_翌月分);
+                dgShinsakaRowList_翌月分.add(dgShinsakaRow_翌月分);
+                zenbuDate_翌月分 = zenbuDate_翌月分.plusDay(1);
+            }
         }
         div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+        審査会開催予定一覧_当月分 = dgShinsakaRowList;
+        審査会開催予定一覧_翌月分 = dgShinsakaRowList_翌月分;
     }
 
     private void setClearSelected(FlexibleDate zenbuDate, dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow) {
@@ -988,9 +1118,6 @@ public class ShinsakaiKaisaiYoteiToroku {
         RStringBuilder juKoyo = new RStringBuilder();
 
         for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
-            if (entity.get日付().getMonthValue() != Integer.valueOf(getLblMonth(div.getLblMonth().getText()).substring(INDEX_4).toString())) {
-                return;
-            }
             if (juKo.equals(juKoyo.append(entity.get日付().toString()).append(
                     entity.get開始予定時刻()).append(entity.get終了予定時刻()).toRString())) {
                 setBreak(審査会名称作成, entity.get介護認定審査会進捗状況(), entity.get審査会名称());

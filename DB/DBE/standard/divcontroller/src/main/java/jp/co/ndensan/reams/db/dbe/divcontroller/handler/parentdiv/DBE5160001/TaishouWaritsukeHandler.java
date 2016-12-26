@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoh
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
@@ -56,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -81,6 +83,7 @@ public class TaishouWaritsukeHandler {
     private static final RString 厚労省IF識別コード_06 = new RString("06");
     private static final RString 厚労省IF識別コード_02 = new RString("02");
     private static final RString 厚労省IF識別コード_99 = new RString("99");
+    private static final RString ZERO = new RString("0");
 
     /**
      * コンストラクタです。
@@ -214,17 +217,33 @@ public class TaishouWaritsukeHandler {
         }
         set対象者一覧(grid表示対象者List);
         対象者一覧No振り直し();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
+        div.getBtnJidoWaritsuke().setDisabled(true);
+        div.getBtnWaritsuke().setDisabled(true);
+        div.getBtnWaritsukeKaijo().setDisabled(true);
     }
 
     /**
      * 審査会順序確定。
      */
     public void 審査会順序確定() {
+        int max確定No = 0;
         for (dgTaishoshaIchiran_Row row : div.getDgTaishoshaIchiran().getDataSource()) {
             row.setShinsajunKakuteiFlag(審査順確定フラグ_確定);
+            row.setTorokuZumiNo(row.getNo());
+            if (row.getNo().toInt() > max確定No) {
+                max確定No = row.getNo().toInt();
+            }
         }
+        ViewStateHolder.put(ViewStateKeys.番号, new RString(max確定No));
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
+        div.getBtnJidoWaritsuke().setDisabled(false);
+        div.getBtnWaritsuke().setDisabled(false);
+        div.getBtnWaritsukeKaijo().setDisabled(false);
     }
 
     /**
@@ -341,8 +360,11 @@ public class TaishouWaritsukeHandler {
         RString 前回一次判定 = RString.EMPTY;
         RString 前回二次判定 = RString.EMPTY;
         dgTaishoshaIchiran_Row row;
+        RString 最大登録済No = ZERO;
         for (Taishouichiran taishouichiran : ichiranList) {
             RString no = new RString(Integer.toString(taishouichiran.get介護認定審査会審査順()));
+            RString 登録済No = no;
+            Boolean 登録済フラグ = true;
             try {
                 優先 = taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
                         ? ShinsakaiYusenWaritsukeKubunCode.toValue(taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
@@ -428,11 +450,17 @@ public class TaishouWaritsukeHandler {
                     taishouichiran.get調査員氏名(),
                     再調査,
                     taishouichiran.get医療機関名称(),
-                    taishouichiran.get主治医氏名().getColumnValue()
+                    taishouichiran.get主治医氏名().getColumnValue(),
+                    登録済フラグ,
+                    登録済No
             );
             rows.add(row);
+            if (登録済No.toInt() > 最大登録済No.toInt()) {
+                最大登録済No = 登録済No;
+            }
         }
         div.getDgTaishoshaIchiran().setDataSource(rows);
+        ViewStateHolder.put(ViewStateKeys.番号, 最大登録済No);
     }
 
     private RString set前回二次判定区分(Code code, RString 厚労省IF識別コード, RString 前回二次判定) {
@@ -500,6 +528,8 @@ public class TaishouWaritsukeHandler {
         RString 前回二次判定 = RString.EMPTY;
         dgWaritsukeKohoshaIchiran_Row row;
         for (KohoshaIchiran kohoshaIchiran : ichiranList) {
+            RString 登録済No = ZERO;
+            Boolean 登録済フラグ = false;
             try {
                 優先 = kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
                         ? ShinsakaiYusenWaritsukeKubunCode.toValue(kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
@@ -585,25 +615,35 @@ public class TaishouWaritsukeHandler {
                     kohoshaIchiran.get調査員氏名(),
                     再調査,
                     kohoshaIchiran.get医療機関名称(),
-                    kohoshaIchiran.get主治医氏名().getColumnValue());
+                    kohoshaIchiran.get主治医氏名().getColumnValue(),
+                    登録済フラグ,
+                    登録済No
+            );
             rows.add(row);
         }
         div.getDgWaritsukeKohoshaIchiran().setDataSource(rows);
     }
 
     private void 候補者移転処理(dgWaritsukeKohoshaIchiran_Row kohoshaIchiran_Row) {
-        int 対象者一覧GridMaxNo = 0;
+        int 対象者一覧GridMaxNo = ViewStateHolder.get(ViewStateKeys.番号, RString.class).toInt();
         for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
             if (currentRow.getNo().toInt() > 対象者一覧GridMaxNo) {
                 対象者一覧GridMaxNo = currentRow.getNo().toInt();
             }
         }
 
+        RString no;
+        if (kohoshaIchiran_Row.getTorokuZumiFlag()) {
+            no = kohoshaIchiran_Row.getTorokuZumiNo();
+        } else {
+            no = new RString(対象者一覧GridMaxNo + 1);
+        }
+
         dgTaishoshaIchiran_Row taishoshaIchiran_Row = new dgTaishoshaIchiran_Row(
                 kohoshaIchiran_Row.getJotaiFlag(),
                 kohoshaIchiran_Row.getShinsajunKakuteiFlag(),
                 kohoshaIchiran_Row.getShinseishoKanriNo(),
-                new RString(対象者一覧GridMaxNo + 1),
+                no,
                 kohoshaIchiran_Row.getPriority(),
                 kohoshaIchiran_Row.getHihokenshaNumber(),
                 kohoshaIchiran_Row.getShimei(),
@@ -628,7 +668,9 @@ public class TaishouWaritsukeHandler {
                 kohoshaIchiran_Row.getChosain(),
                 kohoshaIchiran_Row.getSaiChosa(),
                 kohoshaIchiran_Row.getIryoKikan(),
-                kohoshaIchiran_Row.getShujii()
+                kohoshaIchiran_Row.getShujii(),
+                kohoshaIchiran_Row.getTorokuZumiFlag(),
+                kohoshaIchiran_Row.getTorokuZumiNo()
         );
         div.getDgTaishoshaIchiran().getDataSource().add(taishoshaIchiran_Row);
         div.getDgWaritsukeKohoshaIchiran().getDataSource().remove(kohoshaIchiran_Row);
@@ -645,7 +687,7 @@ public class TaishouWaritsukeHandler {
 
         dgWaritsukeKohoshaIchiran_Row kohoshaIchiran_Row = new dgWaritsukeKohoshaIchiran_Row(
                 taishoshaIchiran_Row.getJotaiFlag(),
-                審査順確定フラグ_確定しない,
+                taishoshaIchiran_Row.getShinsajunKakuteiFlag(),
                 taishoshaIchiran_Row.getShinseishoKanriNo(),
                 new RString(候補者一覧GridMaxNo + 1),
                 taishoshaIchiran_Row.getPriority(),
@@ -672,9 +714,13 @@ public class TaishouWaritsukeHandler {
                 taishoshaIchiran_Row.getChosain(),
                 taishoshaIchiran_Row.getSaiChosa(),
                 taishoshaIchiran_Row.getIryoKikan(),
-                taishoshaIchiran_Row.getShujii());
+                taishoshaIchiran_Row.getShujii(),
+                taishoshaIchiran_Row.getTorokuZumiFlag(),
+                taishoshaIchiran_Row.getTorokuZumiNo()
+        );
         div.getDgTaishoshaIchiran().getDataSource().remove(taishoshaIchiran_Row);
         div.getDgWaritsukeKohoshaIchiran().getDataSource().add(kohoshaIchiran_Row);
+        対象者一覧GridNo再割振();
     }
 
     private void 対象者一覧更新() {
@@ -749,5 +795,48 @@ public class TaishouWaritsukeHandler {
             }
         }
         return false;
+    }
+
+    private void 対象者一覧GridNo再割振() {
+        boolean has確定フラグ = false;
+        int max確定No = 0;
+        for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
+            if (currentRow.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定)) {
+                has確定フラグ = true;
+                max確定No = currentRow.getNo().toInt() > max確定No ? currentRow.getNo().toInt() : max確定No;
+            }
+        }
+
+        boolean フラグ = true;
+        int 未登録MaxNo = 0;
+        for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
+            if (has確定フラグ) {
+                if (currentRow.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定しない)) {
+                    if (!currentRow.getTorokuZumiFlag()) {
+                        if (フラグ) {
+                            RString no = new RString(max確定No + 1);
+                            currentRow.setNo(no);
+                            フラグ = false;
+                            未登録MaxNo = no.toInt();
+                        } else {
+                            currentRow.setNo(new RString(未登録MaxNo + 1));
+                        }
+                    }
+                }
+            } else {
+                if (currentRow.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定しない)) {
+                    if (!currentRow.getTorokuZumiFlag()) {
+                        if (フラグ) {
+                            RString no = new RString(ViewStateHolder.get(ViewStateKeys.番号, RString.class).toInt() + 1);
+                            currentRow.setNo(no);
+                            フラグ = false;
+                            未登録MaxNo = no.toInt();
+                        } else {
+                            currentRow.setNo(new RString(未登録MaxNo + 1));
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -61,7 +61,7 @@ public class NinteiChosaTokusokujoReport extends Report<NinteiChosaTokusokujoRep
 
         INinteiChosaTokusokujoEditor bodyEditor
                 = new NinteiChosaTokusokujoBodyEditor(entity, ninshoshaSource,
-                        atenaKikan, 文書番号, 通知文, customerBarCode, 調査依頼日, reportSourceWriter.pageCount().value());
+                        atenaKikan, 文書番号, 通知文, customerBarCode, 調査依頼日, reportSourceWriter.pageCount().value() + 1);
         INinteiChosaTokusokujoBuilder builder = new NinteiChosaTokusokujoBuilderImpl(bodyEditor);
         reportSourceWriter.writeLine(builder);
     }

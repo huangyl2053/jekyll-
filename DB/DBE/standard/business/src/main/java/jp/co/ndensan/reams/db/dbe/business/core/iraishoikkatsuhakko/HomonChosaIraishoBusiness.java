@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 
@@ -116,17 +117,6 @@ public class HomonChosaIraishoBusiness {
     private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("【認定調査依頼履歴一覧出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
-    private RString 誕生日明治;
-    private RString 誕生日大正;
-    private RString 誕生日昭和;
-    private RString 性別_男;
-    private RString 性別_女;
-    private RString 申請年1;
-    private RString 申請年2;
-    private RString 申請月1;
-    private RString 申請月2;
-    private RString 申請日1;
-    private RString 申請日2;
     private RString shinseishoKanriNo = RString.EMPTY;
     private final HomonChosaIraishoProcessParamter processParamter;
     private final List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
@@ -280,7 +270,7 @@ public class HomonChosaIraishoBusiness {
                 ninshoshaSource.ninshoshaShimeiKakeru,
                 ninshoshaSource.koinMojiretsu,
                 ninshoshaSource.koinShoryaku,
-                entity.get調査委託先住所_郵便番号(),
+                entity.get調査委託先住所_郵便番号() != null ? new YubinNo(entity.get調査委託先住所_郵便番号()).getEditedYubinNo() : RString.EMPTY,
                 entity.get調査委託先住所(),
                 entity.get事業者名称(),
                 entity.get代表者名(),
@@ -345,12 +335,13 @@ public class HomonChosaIraishoBusiness {
      */
     public ChosaIraishoHeadItem setChosaIraishoHeadItem(HomonChosaIraishoRelateEntity entity, Map<Integer, RString> 通知文Map,
             NinshoshaSource ninshoshaSource, RString 文書番号) {
-        if (entity.get生年月日() != null && !entity.get生年月日().isEmpty()) {
-            get年号(new FlexibleDate(entity.get生年月日()));
-        }
-        get性別(entity.get性別());
+        RString 生年月日年号 = entity.get生年月日() != null && RDate.canConvert(entity.get生年月日())
+                ? new RDate(entity.get生年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).getEra()
+                : RString.EMPTY;
+
         getカスタマーバーコード(entity);
         List<RString> 被保険者番号リスト = getValueList(entity.get被保険者番号());
+
         return new ChosaIraishoHeadItem(
                 ninshoshaSource.hakkoYMD,
                 ninshoshaSource.denshiKoin,
@@ -362,7 +353,8 @@ public class HomonChosaIraishoBusiness {
                 ninshoshaSource.ninshoshaShimeiKakenai,
                 ninshoshaSource.koinShoryaku,
                 文書番号,
-                entity.get調査委託先住所_郵便番号(),
+                entity.get調査委託先住所_郵便番号() != null
+                ? new YubinNo(entity.get調査委託先住所_郵便番号()).getEditedYubinNo() : RString.EMPTY,
                 entity.get調査委託先住所(),
                 entity.get事業者名称(),
                 entity.get調査員氏名(),
@@ -382,13 +374,13 @@ public class HomonChosaIraishoBusiness {
                 getCode(被保険者番号リスト, INT8),
                 getCode(被保険者番号リスト, INT9),
                 entity.get被保険者氏名カナ(),
-                誕生日明治,
-                誕生日大正,
-                誕生日昭和,
+                !生年月日年号.equals(年号_明治) ? 記号_星 : RString.EMPTY,
+                !生年月日年号.equals(年号_大正) ? 記号_星 : RString.EMPTY,
+                !生年月日年号.equals(年号_昭和) ? 記号_星 : RString.EMPTY,
                 entity.get生年月日(),
                 entity.get被保険者氏名(),
-                性別_男,
-                性別_女,
+                !entity.get性別().equals(Seibetsu.男.getコード()) ? 記号_星 : RString.EMPTY,
+                !entity.get性別().equals(Seibetsu.女.getコード()) ? 記号_星 : RString.EMPTY,
                 entity.get郵便番号() != null ? new YubinNo(entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY,
                 entity.get住所(),
                 entity.get電話番号(),
@@ -408,7 +400,32 @@ public class HomonChosaIraishoBusiness {
      * @return ChosahyoKihonchosaKatamenItem
      */
     public ChosahyoKihonchosaKatamenItem setChosahyoKihonchosaKatamenItem(HomonChosaIraishoRelateEntity entity) {
-        get申請日(entity);
+        RString shinseiYY1;
+        RString shinseiYY2;
+        RString shinseiMM1;
+        RString shinseiMM2;
+        RString shinseiDD1;
+        RString shinseiDD2;
+        RString ninteiShinseiDay = entity.get認定申請年月日();
+        if (ninteiShinseiDay != null && RDate.canConvert(ninteiShinseiDay)) {
+            Wareki ninteiShinseiYMDWareki = new RDate(ninteiShinseiDay.toString()).wareki();
+            RString warekiYear = ninteiShinseiYMDWareki.getYear();
+            shinseiYY1 = warekiYear.substring(1, 2);
+            shinseiYY2 = warekiYear.substring(2, INT3);
+            RString warekiMonth = ninteiShinseiYMDWareki.getMonth();
+            shinseiMM1 = warekiMonth.substring(0, 1);
+            shinseiMM2 = warekiMonth.substring(1, 2);
+            RString warekiDay = ninteiShinseiYMDWareki.getDay();
+            shinseiDD1 = warekiDay.substring(0, 1);
+            shinseiDD2 = warekiDay.substring(1, 2);
+        } else {
+            shinseiYY1 = RString.EMPTY;
+            shinseiYY2 = RString.EMPTY;
+            shinseiMM1 = RString.EMPTY;
+            shinseiMM2 = RString.EMPTY;
+            shinseiDD1 = RString.EMPTY;
+            shinseiDD2 = RString.EMPTY;
+        }
         List<RString> 被保険者番号リスト = getValueList(entity.get被保険者番号());
         List<RString> 証記載保険者番号リスト = getValueList(entity.get証記載保険者番号());
         return new ChosahyoKihonchosaKatamenItem(
@@ -422,12 +439,12 @@ public class HomonChosaIraishoBusiness {
                 getCode(被保険者番号リスト, INT7),
                 getCode(被保険者番号リスト, INT8),
                 getCode(被保険者番号リスト, INT9),
-                申請年1,
-                申請年2,
-                申請月1,
-                申請月2,
-                申請日1,
-                申請日2,
+                shinseiYY1,
+                shinseiYY2,
+                shinseiMM1,
+                shinseiMM2,
+                shinseiDD1,
+                shinseiDD2,
                 getCode(証記載保険者番号リスト, 0),
                 getCode(証記載保険者番号リスト, 1),
                 getCode(証記載保険者番号リスト, 2),
@@ -447,9 +464,32 @@ public class HomonChosaIraishoBusiness {
         List<RString> 証記載保険者番号リスト = getValueList(entity.get証記載保険者番号());
         List<RString> 記入者コードリスト = getValueList(entity.get認定調査員コード());
         List<RString> 定調査委託先コードリスト = getValueList(entity.get認定調査委託先コード());
-        get申請日(entity);
-        get性別(entity.get性別());
-        get年号(entity.get生年月日());
+        RString shinseiYY1;
+        RString shinseiYY2;
+        RString shinseiMM1;
+        RString shinseiMM2;
+        RString shinseiDD1;
+        RString shinseiDD2;
+        RString ninteiShinseiDay = entity.get認定申請年月日();
+        if (ninteiShinseiDay != null && RDate.canConvert(ninteiShinseiDay)) {
+            Wareki ninteiShinseiYMDWareki = new RDate(ninteiShinseiDay.toString()).wareki();
+            RString warekiYear = ninteiShinseiYMDWareki.getYear();
+            shinseiYY1 = warekiYear.substring(1, 2);
+            shinseiYY2 = warekiYear.substring(2, INT3);
+            RString warekiMonth = ninteiShinseiYMDWareki.getMonth();
+            shinseiMM1 = warekiMonth.substring(0, 1);
+            shinseiMM2 = warekiMonth.substring(1, 2);
+            RString warekiDay = ninteiShinseiYMDWareki.getDay();
+            shinseiDD1 = warekiDay.substring(0, 1);
+            shinseiDD2 = warekiDay.substring(1, 2);
+        } else {
+            shinseiYY1 = RString.EMPTY;
+            shinseiYY2 = RString.EMPTY;
+            shinseiMM1 = RString.EMPTY;
+            shinseiMM2 = RString.EMPTY;
+            shinseiDD1 = RString.EMPTY;
+            shinseiDD2 = RString.EMPTY;
+        }
         RString 要支援 = RString.EMPTY;
         if (YOKAIGOJOTAIKUBUN12.equals(entity.get前回要介護状態区分コード())
                 || YOKAIGOJOTAIKUBUN13.equals(entity.get前回要介護状態区分コード())) {
@@ -461,7 +501,9 @@ public class HomonChosaIraishoBusiness {
         } else if (YOKAIGOJOTAIKUBUN13.equals(entity.get前回要介護状態区分コード())) {
             要支援詳細 = 文字列2;
         }
-        get年月日(entity.get生年月日());
+        RString 生年月日年号 = entity.get生年月日() != null && RDate.canConvert(entity.get生年月日())
+                ? new RDate(entity.get生年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).getEra()
+                : RString.EMPTY;
         return new ChosahyoGaikyochosaItem(
                 getCode(証記載保険者番号リスト, 0),
                 getCode(証記載保険者番号リスト, 1),
@@ -469,12 +511,12 @@ public class HomonChosaIraishoBusiness {
                 getCode(証記載保険者番号リスト, INT3),
                 getCode(証記載保険者番号リスト, INT4),
                 getCode(証記載保険者番号リスト, INT5),
-                申請年1,
-                申請年2,
-                申請月1,
-                申請月2,
-                申請日1,
-                申請日2,
+                shinseiYY1,
+                shinseiYY2,
+                shinseiMM1,
+                shinseiMM2,
+                shinseiDD1,
+                shinseiDD2,
                 getCode(被保険者番号リスト, 0),
                 getCode(被保険者番号リスト, 1),
                 getCode(被保険者番号リスト, 2),
@@ -509,14 +551,14 @@ public class HomonChosaIraishoBusiness {
                 entity.get事業者名称(),
                 entity.get被保険者氏名カナ(),
                 entity.get被保険者氏名(),
-                性別_男,
-                性別_女,
+                !entity.get性別().equals(Seibetsu.男.getコード()) ? 記号_星 : RString.EMPTY,
+                !entity.get性別().equals(Seibetsu.女.getコード()) ? 記号_星 : RString.EMPTY,
                 entity.get住所(),
                 entity.get郵便番号(),
                 entity.get電話番号(),
-                誕生日明治,
-                誕生日大正,
-                誕生日昭和,
+                !生年月日年号.equals(年号_明治) ? 記号_星 : RString.EMPTY,
+                !生年月日年号.equals(年号_大正) ? 記号_星 : RString.EMPTY,
+                !生年月日年号.equals(年号_昭和) ? 記号_星 : RString.EMPTY,
                 get年月日(entity.get生年月日()),
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT6) : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT6, INT8) : RString.EMPTY,
@@ -538,16 +580,16 @@ public class HomonChosaIraishoBusiness {
                 要支援詳細,
                 get要介護詳細(entity),
                 get要介護詳細(entity.get前回要介護状態区分コード()),
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY);
+                getCode(被保険者番号リスト, 0),
+                getCode(被保険者番号リスト, 1),
+                getCode(被保険者番号リスト, 2),
+                getCode(被保険者番号リスト, INT3),
+                getCode(被保険者番号リスト, INT4),
+                getCode(被保険者番号リスト, INT5),
+                getCode(被保険者番号リスト, INT6),
+                getCode(被保険者番号リスト, INT7),
+                getCode(被保険者番号リスト, INT8),
+                getCode(被保険者番号リスト, INT9));
     }
 
     private RString getCode(List<RString> list, int index) {
@@ -593,49 +635,6 @@ public class HomonChosaIraishoBusiness {
         return 要介護詳細;
     }
 
-    private void get性別(RString 性別コード) {
-        if (性別コード.equals(Seibetsu.男.getコード())) {
-            性別_男 = 記号;
-        } else if (性別コード.equals(Seibetsu.女.getコード())) {
-            性別_女 = 記号;
-        }
-    }
-
-    private void get年号(RString 生年月日) {
-        誕生日明治 = RString.EMPTY;
-        誕生日大正 = RString.EMPTY;
-        誕生日昭和 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(生年月日)) {
-            RString 年号 = new FlexibleDate(生年月日).wareki().toDateString();
-            if (年号.startsWith(年号_明治)) {
-                誕生日明治 = 記号;
-            } else if (年号.startsWith(年号_大正)) {
-                誕生日大正 = 記号;
-            } else if (年号.startsWith(年号_昭和)) {
-                誕生日昭和 = 記号;
-            }
-        }
-    }
-
-    private void get申請日(HomonChosaIraishoRelateEntity entity) {
-        申請年1 = RString.EMPTY;
-        申請年2 = RString.EMPTY;
-        申請月1 = RString.EMPTY;
-        申請月2 = RString.EMPTY;
-        申請日1 = RString.EMPTY;
-        申請日2 = RString.EMPTY;
-        RString 申請日 = entity.get認定申請年月日();
-        if (!RString.isNullOrEmpty(申請日)) {
-            RString shiseiYMD = new FlexibleDate(申請日).wareki().eraType(EraType.KANJI).toDateString();
-            申請年1 = shiseiYMD.substring(2, INT3);
-            申請年2 = shiseiYMD.substring(INT3, INT4);
-            申請月1 = shiseiYMD.substring(INT5, INT6);
-            申請月2 = shiseiYMD.substring(INT6, INT7);
-            申請日1 = shiseiYMD.substring(INT8, INT9);
-            申請日2 = shiseiYMD.substring(INT9, INT10);
-        }
-    }
-
     private RString get認定調査依頼書名称付与() {
         RString key = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援);
         RString meishoFuyo = RString.EMPTY;
@@ -647,24 +646,6 @@ public class HomonChosaIraishoBusiness {
             meishoFuyo = ChohyoAtesakiKeisho.殿.get名称();
         }
         return meishoFuyo;
-    }
-
-    private void get年号(FlexibleDate 生年月日) {
-        RString 年号 = 生年月日.wareki().toDateString();
-        if (年号.startsWith(年号_明治)) {
-            誕生日大正 = 記号_星;
-            誕生日昭和 = 記号_星;
-        } else if (年号.startsWith(年号_大正)) {
-            誕生日明治 = 記号_星;
-            誕生日昭和 = 記号_星;
-        } else if (年号.startsWith(年号_昭和)) {
-            誕生日明治 = 記号_星;
-            誕生日大正 = 記号_星;
-        } else {
-            誕生日明治 = 記号_星;
-            誕生日大正 = 記号_星;
-            誕生日昭和 = 記号_星;
-        }
     }
 
     private RString getカスタマーバーコード(HomonChosaIraishoRelateEntity entity) {
@@ -716,22 +697,46 @@ public class HomonChosaIraishoBusiness {
     public ChosahyoTokkijikoBusiness setDBE221022Item(HomonChosaIraishoRelateEntity entity) {
         List<RString> 被保険者番号リスト = getValueList(entity.get被保険者番号());
         List<RString> 証記載保険者番号リスト = getValueList(entity.get証記載保険者番号());
-        get申請日(entity);
-        return new ChosahyoTokkijikoBusiness(getCode(証記載保険者番号リスト, 0),
+        RString shinseiYY1;
+        RString shinseiYY2;
+        RString shinseiMM1;
+        RString shinseiMM2;
+        RString shinseiDD1;
+        RString shinseiDD2;
+        RString ninteiShinseiDay = entity.get認定申請年月日();
+        if (ninteiShinseiDay != null && RDate.canConvert(ninteiShinseiDay)) {
+            Wareki ninteiShinseiYMDWareki = new RDate(ninteiShinseiDay.toString()).wareki();
+            RString warekiYear = ninteiShinseiYMDWareki.getYear();
+            shinseiYY1 = warekiYear.substring(1, 2);
+            shinseiYY2 = warekiYear.substring(2, INT3);
+            RString warekiMonth = ninteiShinseiYMDWareki.getMonth();
+            shinseiMM1 = warekiMonth.substring(0, 1);
+            shinseiMM2 = warekiMonth.substring(1, 2);
+            RString warekiDay = ninteiShinseiYMDWareki.getDay();
+            shinseiDD1 = warekiDay.substring(0, 1);
+            shinseiDD2 = warekiDay.substring(1, 2);
+        } else {
+            shinseiYY1 = RString.EMPTY;
+            shinseiYY2 = RString.EMPTY;
+            shinseiMM1 = RString.EMPTY;
+            shinseiMM2 = RString.EMPTY;
+            shinseiDD1 = RString.EMPTY;
+            shinseiDD2 = RString.EMPTY;
+        }
+        return new ChosahyoTokkijikoBusiness(
+                getCode(証記載保険者番号リスト, INT3),
+                shinseiYY1,
+                shinseiYY2,
+                shinseiMM1,
+                shinseiMM2,
+                shinseiDD1,
+                shinseiDD2,
+                getCode(証記載保険者番号リスト, 0),
                 getCode(証記載保険者番号リスト, 1),
                 getCode(証記載保険者番号リスト, 2),
-                getCode(証記載保険者番号リスト, INT3),
                 getCode(証記載保険者番号リスト, INT4),
                 getCode(証記載保険者番号リスト, INT5),
-                申請年1,
-                申請年2,
-                申請月1,
-                申請月2,
-                申請日1,
-                申請日2,
-                entity.get被保険者氏名(),
                 getCode(被保険者番号リスト, 0),
-                getCode(被保険者番号リスト, 1),
                 getCode(被保険者番号リスト, 2),
                 getCode(被保険者番号リスト, INT3),
                 getCode(被保険者番号リスト, INT4),
@@ -739,7 +744,9 @@ public class HomonChosaIraishoBusiness {
                 getCode(被保険者番号リスト, INT6),
                 getCode(被保険者番号リスト, INT7),
                 getCode(被保険者番号リスト, INT8),
-                getCode(被保険者番号リスト, INT9));
+                getCode(被保険者番号リスト, INT9),
+                getCode(被保険者番号リスト, 1),
+                entity.get被保険者氏名());
     }
 
     /**
@@ -1127,21 +1134,21 @@ public class HomonChosaIraishoBusiness {
         checkEntity.set前回障害高齢者自立度(
                 RString.isNullOrEmpty(entity.get前回障害高齢者自立度())
                 ? RString.EMPTY : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get前回障害高齢者自立度()).get名称());
-    if (entity.get申請書管理番号 () 
-        != null && !shinseishoKanriNo.equals(entity.get申請書管理番号())) {
+        if (entity.get申請書管理番号()
+                != null && !shinseishoKanriNo.equals(entity.get申請書管理番号())) {
             shinseishoKanriNo = entity.get申請書管理番号();
-        checkEntityList.add(checkEntity);
+            checkEntityList.add(checkEntity);
+        }
+        return checkEntity;
     }
-    return checkEntity ;
-}
 
-/**
- * 帳票「認定調査票差異チェック票_DBE292001」のItemを取得メッソドです。
- *
- * @param entity entity
- * @return SaiChekkuhyoItem
- */
-public SaiChekkuhyoItem setDBE292001Item(ChosahyoSaiCheckhyoRelateEntity entity) {
+    /**
+     * 帳票「認定調査票差異チェック票_DBE292001」のItemを取得メッソドです。
+     *
+     * @param entity entity
+     * @return SaiChekkuhyoItem
+     */
+    public SaiChekkuhyoItem setDBE292001Item(ChosahyoSaiCheckhyoRelateEntity entity) {
         return new SaiChekkuhyoItem(
                 entity.get前回一次判定結果(),
                 entity.get被保険者番号(),
@@ -1471,19 +1478,31 @@ public SaiChekkuhyoItem setDBE292001Item(ChosahyoSaiCheckhyoRelateEntity entity)
      * @return GaikyotokkiA4Business
      */
     public GaikyotokkiA4Business setDBE221051Item(HomonChosaIraishoRelateEntity entity) {
-//            RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
-//                    .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        RString ninteiShinseiDay = entity.get認定申請年月日();
-        List<RString> 証記載保険者番号リスト = getValueList(entity.get証記載保険者番号());
-        List<RString> 被保険者番号リスト = getValueList(entity.get被保険者番号());
         GaikyotokkiA4Business reportEntity = new GaikyotokkiA4Business();
 
-        reportEntity.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
-        reportEntity.setShinseiYY2(ninteiShinseiDay.substring(2, INT3));
-        reportEntity.setShinseiMM1(ninteiShinseiDay.substring(INT4, INT5));
-        reportEntity.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
-        reportEntity.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
-        reportEntity.setShinseiDD2(ninteiShinseiDay.substring(INT8));
+        RString ninteiShinseiDay = entity.get認定申請年月日();
+        if (ninteiShinseiDay != null && RDate.canConvert(ninteiShinseiDay)) {
+            Wareki ninteiShinseiYMDWareki = new RDate(ninteiShinseiDay.toString()).wareki();
+            RString warekiYear = ninteiShinseiYMDWareki.getYear();
+            reportEntity.setShinseiYY1(warekiYear.substring(1, 2));
+            reportEntity.setShinseiYY2(warekiYear.substring(2, INT3));
+            RString warekiMonth = ninteiShinseiYMDWareki.getMonth();
+            reportEntity.setShinseiMM1(warekiMonth.substring(0, 1));
+            reportEntity.setShinseiMM2(warekiMonth.substring(1, 2));
+            RString warekiDay = ninteiShinseiYMDWareki.getDay();
+            reportEntity.setShinseiDD1(warekiDay.substring(0, 1));
+            reportEntity.setShinseiDD2(warekiDay.substring(1, 2));
+        } else {
+            reportEntity.setShinseiYY1(RString.EMPTY);
+            reportEntity.setShinseiYY2(RString.EMPTY);
+            reportEntity.setShinseiMM1(RString.EMPTY);
+            reportEntity.setShinseiMM2(RString.EMPTY);
+            reportEntity.setShinseiDD1(RString.EMPTY);
+            reportEntity.setShinseiDD2(RString.EMPTY);
+        }
+
+        List<RString> 証記載保険者番号リスト = getValueList(entity.get証記載保険者番号());
+        List<RString> 被保険者番号リスト = getValueList(entity.get被保険者番号());
         reportEntity.setHokenshaNo1(getCode(証記載保険者番号リスト, 0));
         reportEntity.setHokenshaNo2(getCode(証記載保険者番号リスト, 1));
         reportEntity.setHokenshaNo3(getCode(証記載保険者番号リスト, 2));

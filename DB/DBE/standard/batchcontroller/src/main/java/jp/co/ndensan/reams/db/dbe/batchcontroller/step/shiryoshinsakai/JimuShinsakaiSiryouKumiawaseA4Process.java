@@ -124,8 +124,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     protected void process() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517901.getReportId().value())
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
-                    JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>()
+        .new SimpleLayoutBreaker(JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA4ReportSource> occuredBreak(
                             ReportLineRecord<JimuShinsakaishiryoA4ReportSource> currentRecord,
@@ -164,8 +164,11 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                     get一次判定結果票情報(shinseishoKanriNo),
                     get特記事項情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo), is審査会対象一覧印刷済み,
-                    get審査会追加資料情報(shinseishoKanriNo), paramter.getSakuseiJoken());
+                    getその他資料情報(shinseishoKanriNo),
+                    is審査会対象一覧印刷済み,
+                    get審査会追加資料情報(shinseishoKanriNo),
+                    paramter.getSakuseiJoken(),
+                    paramter.getPrintHou());
             report.writeBy(reportSourceWriter);
             is審査会対象一覧印刷済み = true;
         }

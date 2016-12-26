@@ -10,18 +10,18 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.GetsureiShoriDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001.CenterSoshinIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001.GetsureiShoriHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001.GetsureiShoriValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.GeTuReiSyoRiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
@@ -139,6 +139,17 @@ public class GetsureiShori {
     }
 
     /**
+     * 最大表示件数テキストボックスの値が変更された際の動作です。
+     *
+     * @param div
+     * @return ResponseData
+     */
+    public ResponseData onChange_txtMaxCount(GetsureiShoriDiv div) {
+        onChange_jyotaiKubun(div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *
      * @param div コントロールdiv
@@ -207,6 +218,11 @@ public class GetsureiShori {
             return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    public ResponseData<GetsureiShoriDiv> onClick_shorikeizoku(GetsureiShoriDiv div) {
+        onLoad(div);
+        return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
 
     /**

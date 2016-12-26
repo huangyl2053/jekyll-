@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -29,8 +30,8 @@ public class chosairaitaishoshaichiranDiv extends Panel {
     private TextBoxNum txtCompleteCount;
     @JsonProperty("txtNoUpdate")
     private TextBoxNum txtNoUpdate;
-    @JsonProperty("dgNinteiTaskList")
-    private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
+    @JsonProperty("BatchParamPanel")
+    private BatchParamPanelDiv BatchParamPanel;
     @JsonProperty("txtMaxCount")
     private TextBoxNum txtMaxCount;
 
@@ -113,21 +114,21 @@ public class chosairaitaishoshaichiranDiv extends Panel {
     }
 
     /*
-     * getdgNinteiTaskList
-     * @return dgNinteiTaskList
+     * getBatchParamPanel
+     * @return BatchParamPanel
      */
-    @JsonProperty("dgNinteiTaskList")
-    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
-        return dgNinteiTaskList;
+    @JsonProperty("BatchParamPanel")
+    public BatchParamPanelDiv getBatchParamPanel() {
+        return BatchParamPanel;
     }
 
     /*
-     * setdgNinteiTaskList
-     * @param dgNinteiTaskList dgNinteiTaskList
+     * setBatchParamPanel
+     * @param BatchParamPanel BatchParamPanel
      */
-    @JsonProperty("dgNinteiTaskList")
-    public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
-        this.dgNinteiTaskList = dgNinteiTaskList;
+    @JsonProperty("BatchParamPanel")
+    public void setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
+        this.BatchParamPanel = BatchParamPanel;
     }
 
     /*
@@ -146,6 +147,19 @@ public class chosairaitaishoshaichiranDiv extends Panel {
     @JsonProperty("txtMaxCount")
     public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.txtMaxCount = txtMaxCount;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getBatchParamPanel().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getBatchParamPanel().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     // </editor-fold>

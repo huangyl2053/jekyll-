@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GetsureiShoriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -95,16 +95,6 @@ public class GetsureiShoriDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxNum getTxtDispMax() {
-        return this.getCenterSoshinTaishoshaIchiran().getTxtDispMax();
-    }
-
-    @JsonIgnore
-    public void  setTxtDispMax(TextBoxNum txtDispMax) {
-        this.getCenterSoshinTaishoshaIchiran().setTxtDispMax(txtDispMax);
-    }
-
-    @JsonIgnore
     public RadioButton getRadJyotaiKubun() {
         return this.getCenterSoshinTaishoshaIchiran().getRadJyotaiKubun();
     }
@@ -112,16 +102,6 @@ public class GetsureiShoriDiv extends Panel {
     @JsonIgnore
     public void  setRadJyotaiKubun(RadioButton radJyotaiKubun) {
         this.getCenterSoshinTaishoshaIchiran().setRadJyotaiKubun(radJyotaiKubun);
-    }
-
-    @JsonIgnore
-    public Space getSpc1() {
-        return this.getCenterSoshinTaishoshaIchiran().getSpc1();
-    }
-
-    @JsonIgnore
-    public void  setSpc1(Space spc1) {
-        this.getCenterSoshinTaishoshaIchiran().setSpc1(spc1);
     }
 
     @JsonIgnore
@@ -162,6 +142,16 @@ public class GetsureiShoriDiv extends Panel {
     @JsonIgnore
     public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getCenterSoshinTaishoshaIchiran().setDgNinteiTaskList(dgNinteiTaskList);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtDispMax() {
+        return this.getCenterSoshinTaishoshaIchiran().getTxtDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtDispMax(TextBoxNum txtDispMax) {
+        this.getCenterSoshinTaishoshaIchiran().setTxtDispMax(txtDispMax);
     }
 
     @JsonIgnore

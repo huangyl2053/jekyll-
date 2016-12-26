@@ -41,7 +41,7 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onLoad(NijihanteiKekkaOutputDiv nijiDiv) {
-        nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize();
+        nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize_最近処理者非表示();
         createHandlerOf(nijiDiv).initialize();
         return createResponseData(nijiDiv);
     }
@@ -53,9 +53,7 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_BtnClear(NijihanteiKekkaOutputDiv nijiDiv) {
-        nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize();
-        nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
-        nijiDiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
+        nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize_最近処理者非表示();
         nijiDiv.getKensakuJoken().getRadDataShutsuryokuUmu().setSelectedIndex(0);
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
@@ -79,27 +77,12 @@ public class NijihanteiKekkaOutput {
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_Btnkennsaku(NijihanteiKekkaOutputDiv div) {
         ValidationMessageControlPairs pairs = div.getKensakuJoken().getCcdShinseishaFinder().validate();
+
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
         createHandlerOf(div).kennsaku(div.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
-        return createResponseData(div);
-    }
-
-    /**
-     * 最近処理者の「表示する」を押下した時の処理です。
-     *
-     * @param div ShinseiKensakuDiv
-     * @return ResponseData<ShinseiKensakuDiv>
-     */
-    public ResponseData<NijihanteiKekkaOutputDiv> onSaikinshorishaClick(NijihanteiKekkaOutputDiv div) {
-        ValidationMessageControlPairs pairs = div.getKensakuJoken().getCcdShinseishaFinder().getSaikinShorishaDiv().validate();
-        if (pairs.existsError()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-
-        createHandlerOf(div).kennsaku(div.getKensakuJoken().getCcdShinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo());
         return createResponseData(div);
     }
 

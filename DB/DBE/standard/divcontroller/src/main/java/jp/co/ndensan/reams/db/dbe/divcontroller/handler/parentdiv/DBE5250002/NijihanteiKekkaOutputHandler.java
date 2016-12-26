@@ -16,14 +16,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.dgTa
 import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -82,8 +79,6 @@ public class NijihanteiKekkaOutputHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン２, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン２, true);
-        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
-        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         nijidiv.getKensakuJoken().getTxtHyojiDataLimit().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
@@ -93,9 +88,6 @@ public class NijihanteiKekkaOutputHandler {
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHanteiDateFrom().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getLblNijiHanteiDate().setDisplayNone(true);
         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNijiHnateiDateTo().setDisplayNone(true);
-        ShichosonSecurityJoho shichosonSecurityJoho
-                = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, UrControlDataFactory.createInstance().getLoginInfo().getUserId());
-        nijidiv.getKensakuJoken().getCcdShinseishaFinder().getSaikinShorishaDiv().initialize(shichosonSecurityJoho.get市町村情報().get証記載保険者番号());
     }
 
     private RString nullToEmpty(RString obj) {
@@ -148,9 +140,6 @@ public class NijihanteiKekkaOutputHandler {
             gridSetting.setLimitRowCount(hanteiParameter.getLimitCount());
             gridSetting.setSelectedRowCount(判定結果情報検索結果.totalCount());
             nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setGridSetting(gridSetting);
-            HanteiKekkaJouhouShuturyokuBusiness rec = ninteiList.get(findLastIndex(ninteiList));
-            nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().updateSaikinShorisha(rec.get被保険者番号(), rec.get被保険者氏名());
-            nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().reloadSaikinShorisha();
 
             CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン, false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, false);
@@ -160,22 +149,6 @@ public class NijihanteiKekkaOutputHandler {
             throw new ApplicationException(UrErrorMessages.対象者が存在しない.getMessage());
         }
         nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgTaishoshaIchiranList);
-    }
-
-    private int findLastIndex(List<HanteiKekkaJouhouShuturyokuBusiness> searchResult) {
-        int lastShinseiYmdIndex = 0;
-        RString lastNinteiShinseiYmd = null;
-        for (int i = 0; i < searchResult.size(); i++) {
-            HanteiKekkaJouhouShuturyokuBusiness rec = searchResult.get(i);
-            if (lastNinteiShinseiYmd == null) {
-                lastNinteiShinseiYmd = rec.get認定申請年月日();
-            }
-            if (rec.get認定申請年月日().compareTo(lastNinteiShinseiYmd) > 0) {
-                lastNinteiShinseiYmd = rec.get認定申請年月日();
-                lastShinseiYmdIndex = i;
-            }
-        }
-        return lastShinseiYmdIndex;
     }
 
     /**

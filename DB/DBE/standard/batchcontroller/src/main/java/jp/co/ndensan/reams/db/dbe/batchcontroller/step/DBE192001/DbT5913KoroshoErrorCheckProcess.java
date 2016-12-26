@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913KoroshoErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913KoroshoTempEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913TempEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5913RelateEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi.NinteiShinseirenkeiDataInsert;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1490-020 duanzhanli
  */
-public class DbT5913KoroshoErrorCheckProcess extends BatchProcessBase<DbT5913TempEntity> {
+public class DbT5913KoroshoErrorCheckProcess extends BatchProcessBase<DbT5913RelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5913TempMapper.get調査員情報_厚労省");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5913TempMapper.get調査員更新対象情報_厚労省");
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT5913KoroshoTemp;
     @BatchWriter
@@ -45,11 +45,11 @@ public class DbT5913KoroshoErrorCheckProcess extends BatchProcessBase<DbT5913Tem
     }
 
     @Override
-    protected void process(DbT5913TempEntity entity) {
+    protected void process(DbT5913RelateEntity entity) {
         DbT5913KoroshoErrorTempEntity dbT5913KoroshoErrorTempEntity = new NinteiShinseirenkeiDataInsert().getDbT5913KoroshoErrorTempEntity(entity);
         if (dbT5913KoroshoErrorTempEntity != null) {
             dbT5913KoroshoErrorTemp.insert(dbT5913KoroshoErrorTempEntity);
-            dbT5913KoroshoTemp.delete(entity);
+            dbT5913KoroshoTemp.delete(entity.getDbt5913TempEntity());
         }
     }
 }

@@ -86,6 +86,43 @@ public class KanryoshoriCsvEntity {
     @CsvField(order = 330, name = "厚労省IF識別コード")
     private final RString 厚労省IF識別コード;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 証記載保険者 証記載保険者
+     * @param 被保険者番号 被保険者番号
+     * @param 被保険者名 被保険者名
+     * @param 申請日 申請日
+     * @param 申請区分_申請時 申請区分_申請時
+     * @param 一次判定日 一次判定日
+     * @param 一次判定結果 一次判定結果
+     * @param 一次判定結果コード 一次判定結果コード
+     * @param 一次判定結果_認知症加算 一次判定結果_認知症加算
+     * @param 一次判定結果コード_認知症加算 一次判定結果コード_認知症加算
+     * @param 一次判定警告コード 一次判定警告コード
+     * @param 調査実地日 調査実地日
+     * @param 意見書受領日 意見書受領日
+     * @param 基準時間 基準時間
+     * @param 基準時間_食事 基準時間_食事
+     * @param 基準時間_排泄 基準時間_排泄
+     * @param 基準時間_移動 基準時間_移動
+     * @param 基準時間_清潔保持 基準時間_清潔保持
+     * @param 基準時間_間接ケア 基準時間_間接ケア
+     * @param 基準時間_BPSD 基準時間_BPSD
+     * @param 基準時間_機能訓練 基準時間_機能訓練
+     * @param 基準時間_医療関連 基準時間_医療関連
+     * @param 基準時間_認知症加算 基準時間_認知症加算
+     * @param 中間評価項目特定第１群 中間評価項目特定第１群
+     * @param 中間評価項目特定第２群 中間評価項目特定第２群
+     * @param 中間評価項目特定第３群 中間評価項目特定第３群
+     * @param 中間評価項目特定第４群 中間評価項目特定第４群
+     * @param 中間評価項目特定第５群 中間評価項目特定第５群
+     * @param 安定性 安定性
+     * @param 認知症自立度２以上の蓋然性 認知症自立度２以上の蓋然性
+     * @param 推定される給付区分 推定される給付区分
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     */
     public KanryoshoriCsvEntity(RString 申請書管理番号, RString 証記載保険者, RString 被保険者番号,
             RString 被保険者名, RString 申請日, RString 申請区分_申請時, RString 一次判定日,
             RString 一次判定結果, RString 一次判定結果コード, RString 一次判定結果_認知症加算,

@@ -32,7 +32,7 @@ public class ShujiiIkenshoSakuseiTokusokujoReport extends Report<ShujiiIkenshoSa
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoSakuseiTokusokujoReportSource> reportSourceWriter) {
         IShujiiIkenshoSakuseiTokusokujoEditor editor = new ShujiiIkenshoSakuseiTokusokujoHeadEditor(
-                itemList, reportSourceWriter.pageCount().value());
+                itemList, reportSourceWriter.pageCount().value() + 1);
         IShujiiIkenshoSakuseiTokusokujoBuilder builder = new ShujiiIkenshoSakuseiTokusokujoBuilderImpl(editor);
         reportSourceWriter.writeLine(builder);
     }

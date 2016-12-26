@@ -165,7 +165,8 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                     get主治医意見書情報(shinseishoKanriNo),
                     getその他資料情報(shinseishoKanriNo),
                     get審査会追加資料情報(shinseishoKanriNo),
-                    paramter.getSakuseiJoken());
+                    paramter.getSakuseiJoken(),
+                    paramter.getPrintHou());
             report.writeBy(reportSourceWriter);
         }
         batchReportWriter.close();

@@ -43,7 +43,8 @@ public class KaigoNinteiShinsakaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getCcdShinsakaiItiran().get一覧件数() == 0) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.対象データなし_追加メッセージあり, 審査会)));
+                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.対象データなし_追加メッセージあり, 審査会),
+                    div.getCcdShinsakaiItiran().getDgShinsakaiIchiran()));
         }
         return validationMessages;
     }
@@ -57,7 +58,8 @@ public class KaigoNinteiShinsakaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (0 < div.getCcdShinsakaiItiran().get一覧件数() && div.getCcdShinsakaiItiran().get開催番号List().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会)));
+                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会),
+                    div.getCcdShinsakaiItiran().getDgShinsakaiIchiran()));
         }
         return validationMessages;
     }
@@ -72,7 +74,8 @@ public class KaigoNinteiShinsakaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (RString.isNullOrEmpty(開催番号)) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会)));
+                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会),
+                    div.getCcdShinsakaiItiran().getDgShinsakaiIchiran()));
         }
         return validationMessages;
     }
@@ -86,7 +89,8 @@ public class KaigoNinteiShinsakaiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (1 < div.getCcdShinsakaiItiran().get開催番号List().size()) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(DbeErrorMessages.複数選択不可, 審査会)));
+                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(DbeErrorMessages.複数選択不可, 審査会),
+                    div.getCcdShinsakaiItiran().getDgShinsakaiIchiran()));
         }
         return validationMessages;
 

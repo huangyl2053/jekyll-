@@ -49,13 +49,13 @@ public class IchijiHanteiKekkaResultConveter {
          */
         DATA_DETAIL_SPLIT("\\-");
 
-        private final String value;
+        private final RString value;
 
         private SplitString(String str) {
-            this.value = str;
+            this.value = new RString(str);
         }
 
-        public String value() {
+        public RString value() {
             return value;
         }
     }
@@ -237,17 +237,19 @@ public class IchijiHanteiKekkaResultConveter {
 
     /**
      * 判定結果が１つでもエラーしている場合にtrueを返します。
+     *
+     * @return 判定結果が１つ以上エラーしている場合、true。エラーが無い場合はfalse
      */
     public boolean isHanteiKekkaError() {
         if (RString.isNullOrEmpty(ichijiHanteiKekka)) {
             return true;
         }
-        List<IchijiHanteiKekkaJoho> retList = new ArrayList<>();
-        List<RString> ichijiHanteiKekkaArgSplit = ichijiHanteiKekka.split(SplitString.ARGMENT_SPLIT.value());
+
+        List<RString> ichijiHanteiKekkaArgSplit = ichijiHanteiKekka.split(SplitString.ARGMENT_SPLIT.value().toString());
 
         for (RString ichijiHanteiKekkaArg : ichijiHanteiKekkaArgSplit) {
 
-            List<RString> resultList = ichijiHanteiKekkaArg.split(SplitString.DATA_SPLIT.value());
+            List<RString> resultList = ichijiHanteiKekkaArg.split(SplitString.DATA_SPLIT.value().toString());
             if (resultList.size() != RESULT_NUM) {
                 return true;
             }
@@ -266,13 +268,13 @@ public class IchijiHanteiKekkaResultConveter {
             return Collections.emptyList();
         }
         List<IchijiHanteiShoriKekka> retList = new ArrayList<>();
-        List<RString> ichijiHanteiKekkaArgSplit = ichijiHanteiKekka.split(SplitString.ARGMENT_SPLIT.value());
+        List<RString> ichijiHanteiKekkaArgSplit = ichijiHanteiKekka.split(SplitString.ARGMENT_SPLIT.value().toString());
 
         for (int i = 0; i < shinseishoKanriNoList.size(); i++) {
             ShinseishoKanriNo shinseishoKanriNo = shinseishoKanriNoList.get(i);
             RString ichijiHanteiKekkaArg = ichijiHanteiKekkaArgSplit.get(i);
 
-            List<RString> resultList = ichijiHanteiKekkaArg.split(SplitString.DATA_SPLIT.value());
+            List<RString> resultList = ichijiHanteiKekkaArg.split(SplitString.DATA_SPLIT.value().toString());
             IchijiHanteiKekkaJoho hanteiKekka = new IchijiHanteiKekkaJoho(shinseishoKanriNo);
 
             if (resultList.size() != RESULT_NUM) {
@@ -291,7 +293,7 @@ public class IchijiHanteiKekkaResultConveter {
             builder.set要介護認定一次判定結果コード_認知症加算(new Code(tumitashiKekkaCode));
 
             RString kijunJikan = resultList.get(IchijiHanteiPoint.基準時間.value());
-            List<RString> kijunJikanSplit = kijunJikan.split(SplitString.DATA_DETAIL_SPLIT.value());
+            List<RString> kijunJikanSplit = kijunJikan.split(SplitString.DATA_DETAIL_SPLIT.value().toString());
             builder.set要介護認定等基準時間(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.合計.value())));
             builder.set要介護認定等基準時間_食事(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.食事.value())));
             builder.set要介護認定等基準時間_排泄(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.排泄.value())));

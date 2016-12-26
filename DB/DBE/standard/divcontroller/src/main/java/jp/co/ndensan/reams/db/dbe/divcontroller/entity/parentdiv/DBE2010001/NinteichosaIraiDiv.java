@@ -149,13 +149,23 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
+    public BatchParamPanelDiv getBatchParamPanel() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getBatchParamPanel();
+    }
+
+    @JsonIgnore
+    public void setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setBatchParamPanel(BatchParamPanel);
+    }
+
+    @JsonIgnore
     public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
-        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getDgNinteiTaskList();
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getBatchParamPanel().getDgNinteiTaskList();
     }
 
     @JsonIgnore
     public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
-        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setDgNinteiTaskList(dgNinteiTaskList);
+        this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getBatchParamPanel().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore

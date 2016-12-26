@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Dec 23 11:32:28 JST 2016 
+ * Mon Dec 26 16:57:39 JST 2016 
  */
 
 
@@ -40,6 +40,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
     private ButtonDialog sonotaKikanGuide;
     private TextBox sonotaKikanName;
     private RString shichosonCode;
+    private RString hdnColumn;
 
     public dgShozokuKikanIchiran_Row() {
         super();
@@ -58,6 +59,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.sonotaKikanGuide = new ButtonDialog();
         this.sonotaKikanName = new TextBox();
         this.shichosonCode = RString.EMPTY;
+        this.hdnColumn = RString.EMPTY;
         this.setOriginalData("deleteButton", deleteButton);
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
         this.setOriginalData("hokenshaName", hokenshaName);
@@ -73,9 +75,10 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.setOriginalData("sonotaKikanGuide", sonotaKikanGuide);
         this.setOriginalData("sonotaKikanName", sonotaKikanName);
         this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("hdnColumn", hdnColumn);
     }
 
-    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog ninteiChosaItakusakiGuide, RString ninteiChosainCode, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, RString shujiiCode, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName, RString shichosonCode) {
+    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog ninteiChosaItakusakiGuide, RString ninteiChosainCode, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, RString shujiiCode, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName, RString shichosonCode, RString hdnColumn) {
         super();
         this.setOriginalData("deleteButton", deleteButton);
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
@@ -92,6 +95,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.setOriginalData("sonotaKikanGuide", sonotaKikanGuide);
         this.setOriginalData("sonotaKikanName", sonotaKikanName);
         this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("hdnColumn", hdnColumn);
         this.deleteButton = deleteButton;
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
         this.hokenshaName = hokenshaName;
@@ -107,6 +111,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.sonotaKikanGuide = sonotaKikanGuide;
         this.sonotaKikanName = sonotaKikanName;
         this.shichosonCode = shichosonCode;
+        this.hdnColumn = hdnColumn;
     }
 
     public Button getDeleteButton() {
@@ -167,6 +172,10 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
 
     public RString getShichosonCode() {
         return shichosonCode;
+    }
+
+    public RString getHdnColumn() {
+        return hdnColumn;
     }
 
     public void setDeleteButton(Button deleteButton) {
@@ -242,6 +251,11 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
     public void setShichosonCode(RString shichosonCode) {
         this.setOriginalData("shichosonCode", shichosonCode);
         this.shichosonCode = shichosonCode;
+    }
+
+    public void setHdnColumn(RString hdnColumn) {
+        this.setOriginalData("hdnColumn", hdnColumn);
+        this.hdnColumn = hdnColumn;
     }
 
     // </editor-fold>

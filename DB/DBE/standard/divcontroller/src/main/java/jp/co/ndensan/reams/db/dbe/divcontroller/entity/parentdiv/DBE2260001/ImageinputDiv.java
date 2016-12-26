@@ -15,17 +15,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageinputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblExplanation")
-    private Label lblExplanation;
-    @JsonProperty("txtTorikomiDataPath")
-    private TextBox txtTorikomiDataPath;
+    @JsonProperty("uplImageInput")
+    private UploadPanel uplImageInput;
+    @JsonProperty("btnUpload")
+    private Button btnUpload;
     @JsonProperty("hdnSharedFileEntryInfo")
     private RString hdnSharedFileEntryInfo;
 
@@ -36,39 +36,39 @@ public class ImageinputDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblExplanation
-     * @return lblExplanation
+     * getuplImageInput
+     * @return uplImageInput
      */
-    @JsonProperty("lblExplanation")
-    public Label getLblExplanation() {
-        return lblExplanation;
+    @JsonProperty("uplImageInput")
+    public UploadPanel getUplImageInput() {
+        return uplImageInput;
     }
 
     /*
-     * setlblExplanation
-     * @param lblExplanation lblExplanation
+     * setuplImageInput
+     * @param uplImageInput uplImageInput
      */
-    @JsonProperty("lblExplanation")
-    public void setLblExplanation(Label lblExplanation) {
-        this.lblExplanation = lblExplanation;
+    @JsonProperty("uplImageInput")
+    public void setUplImageInput(UploadPanel uplImageInput) {
+        this.uplImageInput = uplImageInput;
     }
 
     /*
-     * gettxtTorikomiDataPath
-     * @return txtTorikomiDataPath
+     * getbtnUpload
+     * @return btnUpload
      */
-    @JsonProperty("txtTorikomiDataPath")
-    public TextBox getTxtTorikomiDataPath() {
-        return txtTorikomiDataPath;
+    @JsonProperty("btnUpload")
+    public Button getBtnUpload() {
+        return btnUpload;
     }
 
     /*
-     * settxtTorikomiDataPath
-     * @param txtTorikomiDataPath txtTorikomiDataPath
+     * setbtnUpload
+     * @param btnUpload btnUpload
      */
-    @JsonProperty("txtTorikomiDataPath")
-    public void setTxtTorikomiDataPath(TextBox txtTorikomiDataPath) {
-        this.txtTorikomiDataPath = txtTorikomiDataPath;
+    @JsonProperty("btnUpload")
+    public void setBtnUpload(Button btnUpload) {
+        this.btnUpload = btnUpload;
     }
 
     /*

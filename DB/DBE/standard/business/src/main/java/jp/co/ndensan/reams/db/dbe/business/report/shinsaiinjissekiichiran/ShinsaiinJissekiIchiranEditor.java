@@ -51,14 +51,15 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
         source.printTimeStamp = get作成年月日時();
         source.listShinsainJissekiIchiran_1 = item.getコード();
         source.listShinsainJissekiIchiran_2 = item.get氏名();
-        source.listShinsainJissekiIchiran_3 = item.get所属機関();
-        source.listShinsainJissekiIchiran_4 = item.get審査会地区();
-        source.listShinsainJissekiIchiran_5 = item.get審査会番号();
-        source.listShinsainJissekiIchiran_6 = dateFormat(item.get実施日());
-        source.listShinsainJissekiIchiran_7 = set時刻(item.get開始());
-        source.listShinsainJissekiIchiran_8 = set時刻(item.get終了());
-        source.listShinsainJissekiIchiran_9 = KaigoninteiShinsakaiGichoKubunCode.toValue(item.get審査員種別()).get名称();
-        source.listShinsainJissekiIchiran_10 = IsShusseki.toValue(item.is出欠()).get名称();
+        source.listShinsainJissekiIchiran_3 = KaigoninteiShinsakaiGichoKubunCode.toValue(item.get審査員種別()).get名称();
+        source.listShinsainJissekiIchiran_4 = IsShusseki.toValue(item.is出欠()).get名称();
+        source.listShinsainJissekiIchiran_5 = item.get所属機関();
+        source.listShinsainJissekiIchiran_6 = item.get審査会地区();
+        source.listShinsainJissekiIchiran_7 = item.get審査会番号();
+        source.listShinsainJissekiIchiran_8 = dateFormat(item.get実施日());
+        source.listShinsainJissekiIchiran_9 = set時刻(item.get開始());
+        source.listShinsainJissekiIchiran_10 = set時刻(item.get終了());
+
         return source;
     }
 

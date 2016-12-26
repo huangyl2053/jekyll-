@@ -23,6 +23,10 @@ public class DBE250002_ImageTorikomiParameter extends BatchParameterBase {
     @BatchParameter(key = KYOYU_FILE_ENTRY, name = "共有ファイルエントリ情報文字列")
     private RString 共有ファイルエントリ情報文字列;
 
+    public DBE250002_ImageTorikomiParameter() {
+
+    }
+
     /**
      * イメージ取込（規定・規定外）バッチパラメータクラスのコンストラクタです。
      *

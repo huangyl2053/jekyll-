@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.processprm.imagetorikomi;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,6 +21,7 @@ public class ImageTorikomiProcessParameter implements IBatchProcessParameter {
 
     private final RDate 処理日;
     private final RString ファイルPath;
+    private List<RString> ファイルList;
 
     /**
      * コンストラクタ

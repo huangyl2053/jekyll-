@@ -8,13 +8,12 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ocrdataread.OcrDataReadProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002.ImageInputProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.imagetorikomi.ImageTorikomiProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe250002.OcrImageReadProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * イメージ取込み_バッチフロークラスです。
  *
  * @author n2818
  */
@@ -30,21 +30,33 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
 
     private int fileIndex = 0;
     private List<RString> filePathList;
-    private static final String OCRデータの読み込み_PROCESS = "OCRデータの読み込み_PROCESS";
+    private static final String OCRイメージの読み込み_PROCESS = "OCRイメージの読み込み_PROCESS";
+    private OcrImageReadProcessParameter processParameter;
+    private List<RString> filePathListPng;
 
     @Override
     protected void defineFlow() {
         readAllOcrDataFile();
+        filePathListPng = new ArrayList<>();
         while (fileIndex < filePathList.size()) {
-            executeStep(OCRデータの読み込み_PROCESS);
+            if (filePathList.get(fileIndex).contains(".png")) {
+                filePathListPng.add(filePathList.get(fileIndex));
+            }
+            if (processParameter == null) {
+                processParameter = new OcrImageReadProcessParameter(RDate.getNowDate(), filePathList.get(fileIndex), filePathListPng);
+            } else {
+                processParameter.setファイルPath(filePathList.get(fileIndex));
+                processParameter.setファイルPathList(filePathListPng);
+            }
+            executeStep(OCRイメージの読み込み_PROCESS);
             fileIndex++;
         }
     }
 
-    @Step(OCRデータの読み込み_PROCESS)
-    IBatchFlowCommand executeOCRデータの読み込み() {
-        return loopBatch(OcrDataReadProcess.class)
-                .arguments(new ImageTorikomiProcessParameter(RDate.getNowDate(), (filePathList.get(fileIndex))))
+    @Step(OCRイメージの読み込み_PROCESS)
+    IBatchFlowCommand executeOCRイメージの読み込み() {
+        return loopBatch(ImageInputProcess.class)
+                .arguments(processParameter)
                 .define();
     }
 

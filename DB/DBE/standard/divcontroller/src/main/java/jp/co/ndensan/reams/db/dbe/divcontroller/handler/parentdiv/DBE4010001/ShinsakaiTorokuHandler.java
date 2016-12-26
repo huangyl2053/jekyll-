@@ -249,7 +249,8 @@ public class ShinsakaiTorokuHandler {
             row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
-            row.setYusenWaritsukesha(business.get介護認定審査会優先振分区分コード() == null ? RString.EMPTY
+            row.setYusenWaritsukesha((business.get介護認定審査会優先振分区分コード() == null 
+                    || (business.get介護認定審査会割当年月日() == null || business.get介護認定審査会割当年月日().isEmpty())) ? RString.EMPTY
                     : ShinsakaiYusenWaritsukeKubunCode.toValue(business.get介護認定審査会優先振分区分コード().getKey()).get名称());
             row.setKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY : business.get介護認定審査会開催番号());
             row.setShinsakaiMeisho(business.get介護認定審査会開催番号() == null ? RString.EMPTY : edit審査会名称(business.get介護認定審査会開催番号()));

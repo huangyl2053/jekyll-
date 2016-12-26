@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
@@ -26,36 +27,57 @@ public class TempGogitaiJohoSakusei implements IDbAccessable {
     static {
         TABLE_NAME = new RString("TempGogitaiJohoSakusei");
     }
+    @PrimaryKey
     @TempTableColumnOrder(10)
-    private RString 合議体NO;
+    private int シーケンス番号;
     @TempTableColumnOrder(20)
-    private RString 有効開始日;
+    private RString 合議体NO;
     @TempTableColumnOrder(30)
-    private RString 有効終了日;
+    private RString 有効開始日;
     @TempTableColumnOrder(40)
-    private RString 合議体名称;
+    private RString 有効終了日;
     @TempTableColumnOrder(50)
-    private RString 合議体開始予定時刻;
+    private RString 合議体名称;
     @TempTableColumnOrder(60)
-    private RString 合議体終了予定時刻;
+    private RString 合議体開始予定時刻;
     @TempTableColumnOrder(70)
-    private RString 審査会予定定員;
+    private RString 合議体終了予定時刻;
     @TempTableColumnOrder(80)
-    private RString 審査会自動割当定員;
+    private RString 審査会予定定員;
     @TempTableColumnOrder(90)
-    private RString 審査会委員定員;
+    private RString 審査会自動割当定員;
     @TempTableColumnOrder(100)
-    private RString 開催場所コード;
+    private RString 審査会委員定員;
     @TempTableColumnOrder(110)
-    private RString 精神科医所属;
+    private RString 開催場所コード;
     @TempTableColumnOrder(120)
-    private RString 合議体ダミーフラグ;
+    private RString 精神科医所属;
     @TempTableColumnOrder(130)
-    private RString 審査会委員コード;
+    private RString 合議体ダミーフラグ;
     @TempTableColumnOrder(140)
-    private RString 補欠;
+    private RString 審査会委員コード;
     @TempTableColumnOrder(150)
+    private RString 補欠;
+    @TempTableColumnOrder(160)
     private RString 合議体長区分コード;
+
+    /**
+     * シーケンス番号を返します。
+     *
+     * @return シーケンス番号
+     */
+    public int getシーケンス番号() {
+        return シーケンス番号;
+    }
+
+    /**
+     * シーケンス番号を設定します。
+     *
+     * @param シーケンス番号
+     */
+    public void setシーケンス番号(int シーケンス番号) {
+        this.シーケンス番号 = シーケンス番号;
+    }
 
     /**
      * 合議体NOを返します。

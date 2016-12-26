@@ -138,4 +138,31 @@ public class MaSuKinGuBusiness {
     public RDateTime getイメージ共有ファイルID() {
         return entity.getImageSharedFileId();
     }
+    
+    /**
+     * 特記マスクフラグを返します。
+     *
+     * @return 特記マスクフラグ
+     */
+    public boolean has特記マスク() {
+        return entity.isHasTokkiMask();
+    }
+    
+    /**
+     * 概況マスクフラグを返します。
+     *
+     * @return 概況マスクフラグ
+     */
+    public boolean has概況マスク() {
+        return entity.isHasGaikyoMask();
+    }
+        
+    /**
+     * 意見書マスクフラグを返します。
+     *
+     * @return 意見書マスクフラグ
+     */
+    public boolean has意見書マスク() {
+        return entity.isHasIkenshoMask();
+    }
 }
