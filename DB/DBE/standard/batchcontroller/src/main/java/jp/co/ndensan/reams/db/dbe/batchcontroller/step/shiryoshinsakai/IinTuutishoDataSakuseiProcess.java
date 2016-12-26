@@ -131,7 +131,8 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         item.set帳票名(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会開催のお知らせ, 発行日, SubGyomuCode.DBE認定支援));
         item.set文書番号(文書番号);
         item.setページ番号(RString.EMPTY);
-        item.setカスタマーバーコード(ReportUtil.getCustomerBarCode(psmJohoEntity.getYubinNo(), psmJohoEntity.getJusho()));
+        item.setカスタマーバーコード(RString.isNullOrEmpty(ReportUtil.getCustomerBarCode(psmJohoEntity.getYubinNo(), psmJohoEntity.getJusho()))
+                ? RString.EMPTY : ReportUtil.getCustomerBarCode(psmJohoEntity.getYubinNo(), psmJohoEntity.getJusho()));
         item.set宛名郵便番号(psmJohoEntity.getYubinNo());
         item.set宛名住所(psmJohoEntity.getJusho());
         item.set宛名機関名(psmJohoEntity.getKikanMeisho());
