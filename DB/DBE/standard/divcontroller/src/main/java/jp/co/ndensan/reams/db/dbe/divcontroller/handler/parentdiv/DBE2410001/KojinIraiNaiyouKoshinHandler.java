@@ -67,7 +67,8 @@ public class KojinIraiNaiyouKoshinHandler {
         if (前回調査情報 != null && NinteiChousaIraiKubunCode.初回.getコード().equals(前回調査情報.get認定調査依頼区分コード().value())) {
             div.getTxtChosaBashoKubunZen().setValue(前回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
                     : ChosaJisshiBashoCode.toValue(前回調査情報.get認定調査実施場所コード().value()).get名称());
-            if (前回調査情報.get認定調査実施年月日() != null) {
+            if (前回調査情報.get認定調査実施年月日() != null
+                && !前回調査情報.get認定調査実施年月日().toString().equals("")) {
                 div.getTxtChosaJisshibiZen().setValue(new RDate(前回調査情報.get認定調査実施年月日().toString()));
             }
             div.getTxtChosaJIsshiChikuCodeZen().setValue(前回調査情報.get地区コード());
@@ -90,8 +91,9 @@ public class KojinIraiNaiyouKoshinHandler {
         if (前回調査情報 != null && (NinteiChousaIraiKubunCode.再依頼.getコード().equals(前回調査情報.get認定調査依頼区分コード().value())
                 || NinteiChousaIraiKubunCode.再調査.getコード().equals(前回調査情報.get認定調査依頼区分コード().value()))) {
             div.getTxtChosaBashoKubunSaiZen().setValue(前回調査情報.get認定調査実施場所コード() == null
-                    ? RString.EMPTY : ChosaJisshiBashoCode.toValue(前回調査情報.get認定調査実施場所コード().value()).get名称());
-            if (前回調査情報.get認定調査実施年月日() != null) {
+                    ? RString.EMPTY : ChosaJisshiBashoCode.toValue(前回調査情報.get認定調査実施場所コード().value()).get名称());                           
+             if (前回調査情報.get認定調査実施年月日() != null 
+                && !前回調査情報.get認定調査実施年月日().toString().equals("")) {
                 div.getTxtChosaJisshibiSaiZen().setValue(new RDate(前回調査情報.get認定調査実施年月日().toString()));
             }
             div.getTxtChosaJIsshiChikuCodeSaiZen().setValue(前回調査情報.get地区コード());
@@ -118,7 +120,8 @@ public class KojinIraiNaiyouKoshinHandler {
         if (今回調査情報 != null && NinteiChousaIraiKubunCode.初回.getコード().equals(今回調査情報.get認定調査依頼区分コード().value())) {
             div.getTxtChosaBashoKubun().setValue(今回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
                     : ChosaJisshiBashoCode.toValue(今回調査情報.get認定調査実施場所コード().value()).get名称());
-            if (今回調査情報.get認定調査実施年月日() != null) {
+            if (今回調査情報.get認定調査実施年月日() != null
+                && !今回調査情報.get認定調査実施年月日().toString().equals("")) {
                 div.getTxtChosaJisshibi().setValue(new RDate(今回調査情報.get認定調査実施年月日().toString()));
             }
             div.getTxtChosaJIsshiChikuCode().setValue(今回調査情報.get地区コード());
@@ -142,7 +145,8 @@ public class KojinIraiNaiyouKoshinHandler {
                 || NinteiChousaIraiKubunCode.再調査.getコード().equals(今回調査情報.get認定調査依頼区分コード().value()))) {
             div.getTxtChosaBashoKubunSai().setValue(今回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
                     : ChosaJisshiBashoCode.toValue(今回調査情報.get認定調査実施場所コード().value()).get名称());
-            if (今回調査情報.get認定調査実施年月日() != null) {
+            if (今回調査情報.get認定調査実施年月日() != null
+                && !今回調査情報.get認定調査実施年月日().toString().equals("")) {
                 div.getTxtChosaJisshibiSai().setValue(new RDate(今回調査情報.get認定調査実施年月日().toString()));
             }
             div.getTxtChosaJIsshiChikuCodeSai().setValue(今回調査情報.get地区コード());
@@ -171,10 +175,12 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtIkenshoIraiKubun().setValue(IkenshoIraiKubun.toValue(今回主治医情報.get主治医意見書依頼区分()).get名称());
             div.getTxtIkenshoSakuseiKaisu().setValue(new Decimal(今回主治医情報.get主治医意見書作成回数()));
             div.getTxtShujiiShiteiiKubun().setValue(IshiKubunCode.toValue(今回主治医情報.get医師区分コード().value()).get名称());
-            if (今回主治医情報.get主治医意見書作成依頼年月日() != null) {
+            if (今回主治医情報.get主治医意見書作成依頼年月日() != null
+                && !今回主治医情報.get主治医意見書作成依頼年月日().toString().equals("")) {
                 div.getTxtIkenshoIraibi().setValue(new RDate(今回主治医情報.get主治医意見書作成依頼年月日().toString()));
             }
-            if (今回主治医情報.get主治医意見書記入年月日() != null) {
+            if (今回主治医情報.get主治医意見書記入年月日() != null
+                && !今回主治医情報.get主治医意見書記入年月日().toString().equals("")) {
                 div.getTxtIkenshoKinyubi().setValue(new RDate(今回主治医情報.get主治医意見書記入年月日().toString()));
             }
             List<RString> key = new ArrayList();
@@ -201,10 +207,12 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtIkenshoIraiKubunZen().setValue(IkenshoIraiKubun.toValue(前回主治医情報.get主治医意見書依頼区分()).get名称());
             div.getTxtIkenshoSakuseiKaisuZen().setValue(new Decimal(前回主治医情報.get主治医意見書作成回数()));
             div.getTxtShujiiShiteiiKubunZen().setValue(IshiKubunCode.toValue(前回主治医情報.get医師区分コード().value()).get名称());
-            if (前回主治医情報.get主治医意見書作成依頼年月日() != null) {
+            if (前回主治医情報.get主治医意見書作成依頼年月日() != null
+                && !前回主治医情報.get主治医意見書作成依頼年月日().toString().equals("")) {
                 div.getTxtIkenshoIraibiZen().setValue(new RDate(前回主治医情報.get主治医意見書作成依頼年月日().toString()));
             }
-            if (前回主治医情報.get主治医意見書記入年月日() != null) {
+            if (前回主治医情報.get主治医意見書記入年月日() != null
+                && !前回主治医情報.get主治医意見書記入年月日().toString().equals("")) {
                 div.getTxtIkenshoKinyubiZen().setValue(new RDate(前回主治医情報.get主治医意見書記入年月日().toString()));
             }
             List<RString> key = new ArrayList();
