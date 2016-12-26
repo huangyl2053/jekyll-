@@ -16,12 +16,13 @@ import jp.co.ndensan.reams.uz.uza.testhelper.BatchFlowTestHelper;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- *
- * @author N3010
+ * {@link DBE224001_NinteichosaDataOutput}のテストクラスです。
  */
+@Ignore
 public class DBE224001_NinteichosaDataOutputTest {
 
     private static DBE517000_ShinsakaiShiryoParameter batchParameter;

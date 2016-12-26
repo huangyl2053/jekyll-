@@ -474,7 +474,7 @@
         DbT5201."ninteichosaIraiRirekiNo",
         DbT5910."jigyoshaMeisho",
         DbT5913."chosainShimei",
-        DbT5202."gaikyoChosaTextImageKubun",
+        #{imageKubun} AS "gaikyoChosaTextImageKubun",
         DbT5202."ninteichousaIraiKubunCode",
         DbT5202."ninteichosaIraiKaisu",
         DbT5202."ninteichosaJisshiYMD",
