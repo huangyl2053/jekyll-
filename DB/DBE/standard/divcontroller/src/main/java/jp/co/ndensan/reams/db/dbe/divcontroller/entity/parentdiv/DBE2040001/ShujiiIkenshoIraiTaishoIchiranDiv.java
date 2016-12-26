@@ -25,8 +25,8 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ikenshoiraitaishoichiran")
-    private IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
+//    @JsonProperty("ikenshoiraitaishoichiran")
+//    private IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
     @JsonProperty("hiddenIuputModel")
@@ -42,19 +42,19 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * getikenshoiraitaishoichiran
      * @return ikenshoiraitaishoichiran
      */
-    @JsonProperty("ikenshoiraitaishoichiran")
-    public IkenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
-        return ikenshoiraitaishoichiran;
-    }
+//    @JsonProperty("ikenshoiraitaishoichiran")
+//    public IkenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
+//        return ikenshoiraitaishoichiran;
+//    }
 
     /*
      * setikenshoiraitaishoichiran
      * @param ikenshoiraitaishoichiran ikenshoiraitaishoichiran
      */
-    @JsonProperty("ikenshoiraitaishoichiran")
-    public void setIkenshoiraitaishoichiran(IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
-        this.ikenshoiraitaishoichiran = ikenshoiraitaishoichiran;
-    }
+//    @JsonProperty("ikenshoiraitaishoichiran")
+//    public void setIkenshoiraitaishoichiran(IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
+//        this.ikenshoiraitaishoichiran = ikenshoiraitaishoichiran;
+//    }
 
     /*
      * getKanryoMsg
@@ -95,85 +95,85 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public TextBox getTxtTotalCount() {
-        return this.getIkenshoiraitaishoichiran().getTxtTotalCount();
-    }
-
-    @JsonIgnore
-    public void  setTxtTotalCount(TextBox txtTotalCount) {
-        this.getIkenshoiraitaishoichiran().setTxtTotalCount(txtTotalCount);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtCompleteCount() {
-        return this.getIkenshoiraitaishoichiran().getTxtCompleteCount();
-    }
-
-    @JsonIgnore
-    public void  setTxtCompleteCount(TextBox txtCompleteCount) {
-        this.getIkenshoiraitaishoichiran().setTxtCompleteCount(txtCompleteCount);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNoUpdate() {
-        return this.getIkenshoiraitaishoichiran().getTxtNoUpdate();
-    }
-
-    @JsonIgnore
-    public void  setTxtNoUpdate(TextBox txtNoUpdate) {
-        this.getIkenshoiraitaishoichiran().setTxtNoUpdate(txtNoUpdate);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadShoriJyotai() {
-        return this.getIkenshoiraitaishoichiran().getRadShoriJyotai();
-    }
-
-    @JsonIgnore
-    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
-        this.getIkenshoiraitaishoichiran().setRadShoriJyotai(radShoriJyotai);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
-        return this.getIkenshoiraitaishoichiran().getDgNinteiTaskList();
-    }
-
-    @JsonIgnore
-    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
-        this.getIkenshoiraitaishoichiran().setDgNinteiTaskList(dgNinteiTaskList);
-    }
-
-    @JsonIgnore
-    public ButtonDownLoad getBtnikenshoiraitaishooutput() {
-        return this.getIkenshoiraitaishoichiran().getBtnikenshoiraitaishooutput();
-    }
-
-    @JsonIgnore
-    public void  setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
-        this.getIkenshoiraitaishoichiran().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnIraishoToOutputDialog() {
-        return this.getIkenshoiraitaishoichiran().getBtnIraishoToOutputDialog();
-    }
-
-    @JsonIgnore
-    public void  setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
-        this.getIkenshoiraitaishoichiran().setBtnIraishoToOutputDialog(btnIraishoToOutputDialog);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtSaidaiHyojiKensu() {
-        return this.getIkenshoiraitaishoichiran().getTxtSaidaiHyojiKensu();
-    }
-
-    @JsonIgnore
-    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
-        this.getIkenshoiraitaishoichiran().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
-    }
+//    @JsonIgnore
+//    public TextBox getTxtTotalCount() {
+//        return this.getIkenshoiraitaishoichiran().getTxtTotalCount();
+//    }
+//
+//    @JsonIgnore
+//    public void  setTxtTotalCount(TextBox txtTotalCount) {
+//        this.getIkenshoiraitaishoichiran().setTxtTotalCount(txtTotalCount);
+//    }
+//
+//    @JsonIgnore
+//    public TextBox getTxtCompleteCount() {
+//        return this.getIkenshoiraitaishoichiran().getTxtCompleteCount();
+//    }
+//
+//    @JsonIgnore
+//    public void  setTxtCompleteCount(TextBox txtCompleteCount) {
+//        this.getIkenshoiraitaishoichiran().setTxtCompleteCount(txtCompleteCount);
+//    }
+//
+//    @JsonIgnore
+//    public TextBox getTxtNoUpdate() {
+//        return this.getIkenshoiraitaishoichiran().getTxtNoUpdate();
+//    }
+//
+//    @JsonIgnore
+//    public void  setTxtNoUpdate(TextBox txtNoUpdate) {
+//        this.getIkenshoiraitaishoichiran().setTxtNoUpdate(txtNoUpdate);
+//    }
+//
+//    @JsonIgnore
+//    public RadioButton getRadShoriJyotai() {
+//        return this.getIkenshoiraitaishoichiran().getRadShoriJyotai();
+//    }
+//
+//    @JsonIgnore
+//    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
+//        this.getIkenshoiraitaishoichiran().setRadShoriJyotai(radShoriJyotai);
+//    }
+//
+//    @JsonIgnore
+//    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+//        return this.getIkenshoiraitaishoichiran().getDgNinteiTaskList();
+//    }
+//
+//    @JsonIgnore
+//    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+//        this.getIkenshoiraitaishoichiran().setDgNinteiTaskList(dgNinteiTaskList);
+//    }
+//
+//    @JsonIgnore
+//    public ButtonDownLoad getBtnikenshoiraitaishooutput() {
+//        return this.getIkenshoiraitaishoichiran().getBtnikenshoiraitaishooutput();
+//    }
+//
+//    @JsonIgnore
+//    public void  setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
+//        this.getIkenshoiraitaishoichiran().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
+//    }
+//
+//    @JsonIgnore
+//    public ButtonDialog getBtnIraishoToOutputDialog() {
+//        return this.getIkenshoiraitaishoichiran().getBtnIraishoToOutputDialog();
+//    }
+//
+//    @JsonIgnore
+//    public void  setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
+//        this.getIkenshoiraitaishoichiran().setBtnIraishoToOutputDialog(btnIraishoToOutputDialog);
+//    }
+//
+//    @JsonIgnore
+//    public TextBoxNum getTxtSaidaiHyojiKensu() {
+//        return this.getIkenshoiraitaishoichiran().getTxtSaidaiHyojiKensu();
+//    }
+//
+//    @JsonIgnore
+//    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+//        this.getIkenshoiraitaishoichiran().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
+//    }
 
     @JsonIgnore
     public IKanryoMessageDiv getCcdKanryoMsg() {
