@@ -20,14 +20,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KoseiShichosonShishoMasterManager;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -47,6 +49,7 @@ public class SeikatsuhogoToroku {
     private final ShishoSecurityJoho shishoSecurity;
     private final KoseiShichosonShishoMasterManager manager;
     private final SeikatsuhogoTorokuFinder finder;
+    private final NinteiShinseiJohoManager shinseiJohoManager;
 
     /**
      * コンストラクタです。
@@ -56,6 +59,7 @@ public class SeikatsuhogoToroku {
         shishoSecurity = ShishoSecurityJoho.createInstance();
         manager = KoseiShichosonShishoMasterManager.createInstance();
         finder = SeikatsuhogoTorokuFinder.createInstance();
+        shinseiJohoManager = NinteiShinseiJohoManager.createInstance();
     }
 
     /**
@@ -77,6 +81,44 @@ public class SeikatsuhogoToroku {
             div.getBtnSaiban().setDisabled(false);
         }
         getHandler(div).load(result, list);
+        return ResponseData.of(div).respond();
+    }
+    
+        /**
+     * みなし2号登録onActive事件。
+     *
+     * @param div みなし2号登録Div
+     * @return ResponseData<SeikatsuhogoTorokuDiv>
+     */
+    public ResponseData<SeikatsuhogoTorokuDiv> onActive(SeikatsuhogoTorokuDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        NinteiShinseiJoho ninteiShinseiJoho = null;
+        if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
+            ninteiShinseiJoho = shinseiJohoManager.get要介護認定申請情報(new ShinseishoKanriNo(申請書管理番号));
+        }
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            div.getHihokenshaNoSaiban().getTxtHihokenshaNo().setValue(被保険者番号);
+        }
+        if (ninteiShinseiJoho != null) {
+            div.getTxtShimei().setValue(ninteiShinseiJoho.get被保険者氏名().value());
+            if (ninteiShinseiJoho.get被保険者氏名カナ() != null) {
+                div.getTxtKanaShimei().setValue(ninteiShinseiJoho.get被保険者氏名カナ().value());
+            }
+            if (ninteiShinseiJoho.get生年月日() != null) {
+                div.getTxtBirthYMD().setValue(ninteiShinseiJoho.get生年月日().toRDate());
+            }
+            
+            if (ninteiShinseiJoho.get性別() != null) {
+                div.getRadSeibetsu().setSelectedKey(ninteiShinseiJoho.get性別().getKey());
+            }
+            div.getTxtYubinNo().setValue(ninteiShinseiJoho.get郵便番号());
+            div.getSeikatsuHogoshaJohoInput().getCcdZenkokuJushoInput().load(ZenkokuJushoCode.EMPTY, ninteiShinseiJoho.get住所().value());
+            div.getTxtTelNo().setDomain(ninteiShinseiJoho.get電話番号());
+            if (ninteiShinseiJoho.get識別コード() != null) {
+                div.getTxtShikibetsuCode().setValue(ninteiShinseiJoho.get識別コード().value());
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
