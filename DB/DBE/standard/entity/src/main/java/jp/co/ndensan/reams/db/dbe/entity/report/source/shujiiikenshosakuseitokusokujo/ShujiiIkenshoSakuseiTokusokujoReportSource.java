@@ -52,11 +52,9 @@ public class ShujiiIkenshoSakuseiTokusokujoReportSource implements IReportSource
     public RString customerBarCode;
     @ReportItem(name = "sonota", length = 14, order = 17)
     public RString sonota;
-    @ReportItem(name = "atenaRenban", length = 8, order = 18)
-    public RString atenaRenban;
     @ReportItem(name = "tsuchibun1", order = 19)
     public RString tsuchibun1;
-    @ReportItem(name = "shinseiKubun", length = 2, order = 20)
+    @ReportItem(name = "shinseiKubun", order = 20)
     public RString shinseiKubun;
     @ReportItem(name = "hokenshaNo1", length = 1, order = 21)
     public RString hokenshaNo1;
@@ -118,6 +116,11 @@ public class ShujiiIkenshoSakuseiTokusokujoReportSource implements IReportSource
     public RString shoriName;
     @ReportItem(name = "remban", length = 4, order = 50)
     public RString remban;
+    @ReportItem(name = "ikenshoIraiYMD", length = 11, order = 51)
+    public RString ikenshoIraiYMD;
+    @ReportItem(name = "title", length = 50, order = 52)
+    public RString title;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -52,7 +52,7 @@ public class NinteiChosaTokusokujoReportSource implements IReportSource {
     public RString title;
     @ReportItem(name = "tsuchibun1", order = 20)
     public RString tsuchibun1;
-    @ReportItem(name = "shinseiKubun", length = 2, order = 21)
+    @ReportItem(name = "shinseiKubun", order = 21)
     public RString shinseiKubun;
     @ReportItem(name = "hokenshaNo1", length = 1, order = 22)
     public RString hokenshaNo1;
@@ -110,6 +110,8 @@ public class NinteiChosaTokusokujoReportSource implements IReportSource {
     public RString jusho;
     @ReportItem(name = "tsuchibun2", order = 49)
     public RString tsuchibun2;
+    @ReportItem(name = "chosaIraiYMD", length = 11, order = 50)
+    public RString chosaIraiYMD;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

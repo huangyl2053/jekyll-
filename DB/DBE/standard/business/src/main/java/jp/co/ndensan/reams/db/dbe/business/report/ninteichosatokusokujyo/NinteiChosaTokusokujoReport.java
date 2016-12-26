@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.AtenaK
 import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosatokusokujyo.NinteiChosaTokusokujoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -23,6 +24,7 @@ public class NinteiChosaTokusokujoReport extends Report<NinteiChosaTokusokujoRep
 
     private final DbT5101NinteiShinseiJohoEntity entity;
     private final NinshoshaSource ninshoshaSource;
+    private final FlexibleDate 調査依頼日;
     private final RString 文書番号;
     private final Map<Integer, RString> 通知文;
     private final AtenaKikan atenaKikan;
@@ -37,11 +39,13 @@ public class NinteiChosaTokusokujoReport extends Report<NinteiChosaTokusokujoRep
      * @param 文書番号 文書番号
      * @param 通知文 通知文
      * @param customerBarCode customerBarCode
+     * @param 調査依頼日 調査依頼日
      */
     public NinteiChosaTokusokujoReport(DbT5101NinteiShinseiJohoEntity entity, NinshoshaSource ninshoshaSource,
             AtenaKikan atenaKikan,
             RString 文書番号,
-            Map<Integer, RString> 通知文, RString customerBarCode) {
+            Map<Integer, RString> 通知文, RString customerBarCode,
+            FlexibleDate 調査依頼日) {
 
         this.entity = entity;
         this.ninshoshaSource = ninshoshaSource;
@@ -49,13 +53,15 @@ public class NinteiChosaTokusokujoReport extends Report<NinteiChosaTokusokujoRep
         this.文書番号 = 文書番号;
         this.通知文 = 通知文;
         this.customerBarCode = customerBarCode;
+        this.調査依頼日 = 調査依頼日;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<NinteiChosaTokusokujoReportSource> reportSourceWriter) {
 
         INinteiChosaTokusokujoEditor bodyEditor
-                = new NinteiChosaTokusokujoBodyEditor(entity, ninshoshaSource, atenaKikan, 文書番号, 通知文, customerBarCode);
+                = new NinteiChosaTokusokujoBodyEditor(entity, ninshoshaSource,
+                        atenaKikan, 文書番号, 通知文, customerBarCode, 調査依頼日);
         INinteiChosaTokusokujoBuilder builder = new NinteiChosaTokusokujoBuilderImpl(bodyEditor);
         reportSourceWriter.writeLine(builder);
     }
