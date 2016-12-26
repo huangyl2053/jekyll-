@@ -29,6 +29,7 @@ module DBZ {
                 public KaisaiYoteiToroku(): void {
 
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = false;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = false;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -69,6 +70,7 @@ module DBZ {
                 public TaishoshaWaritsuke(): void {
 
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = false;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = false;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -106,6 +108,7 @@ module DBZ {
                 public ShinsakaiShiryoSakusei(): void {
 
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -144,6 +147,7 @@ module DBZ {
                 public ShinsaKekkaToroku(): void {
                     
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -182,6 +186,7 @@ module DBZ {
                 public JizenKekkaToroku(): void {
 
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -219,6 +224,7 @@ module DBZ {
                 public DataShutsuryoku(): void {
 
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = false;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
@@ -256,6 +262,7 @@ module DBZ {
                 public HanteiKekka(): void {
 
                     this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = true;
                     this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
                     this.controls.radHyojiJokenShinsakaiKanryo().displayNone = false;

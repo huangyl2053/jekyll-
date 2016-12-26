@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
@@ -52,7 +51,6 @@ public class RenkeiDataTorikomiValidationHandler {
     private static final RString 主治医医療機関データ取込みファイル名 = new RString("C1NCI121.CSV");
     private static final RString 主治医データ取込みファイル名 = new RString("C1NCI131.CSV");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString TITLE = new RString("シーケンシャル番号");
     private static final RString 電算標準版 = new RString("3");
     private static final RString 厚労省 = new RString("4");
     private static final RString 東芝版 = new RString("5");
@@ -156,7 +154,7 @@ public class RenkeiDataTorikomiValidationHandler {
     }
 
     /**
-     * ゼロ件チェックの結果をメッセージに変換します。
+     * 不正ファイルの結果をメッセージに変換します。
      *
      * @return message
      */
@@ -169,14 +167,49 @@ public class RenkeiDataTorikomiValidationHandler {
     }
 
     /**
+     * 初期エラーの結果をメッセージに変換します。
+     *
+     * @param error
+     * @return message
+     */
+    public Message get初期Error(RString error) {
+        return InfoMessages.初期ファイル不正.getMessage().replace(error.toString());
+    }
+
+    /**
+     * ファイル名の不正の結果
+     *
+     * @param error
+     * @param file
+     * @return message
+     */
+    public RString setファイル名不正(RString error, FileData file) {
+        error = set複数エラー(error, file.getFileName(), true);
+        return error;
+    }
+
+    /**
+     * ファイル名の不正の結果をメッセージに変換します。
+     *
+     * @return message
+     */
+    public Message get不正ファイル名() {
+        RString rmessage = div.getHiddenErrorFiles();
+        if (!RString.isNullOrEmpty(rmessage)) {
+            return InfoMessages.ファイル名の不正.getMessage().replace(rmessage.toString());
+        }
+        return Message.NO_MESSAGE;
+    }
+
+    /**
      * 認定申請情報ファイルの取り込みとき、バリデーションチェックを実施します。
      *
-     * @param validPairs validPairs
+     * @param error
      * @param path path
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public RString check認定申請情報ファイル(RString path, boolean pathFlag) {
+    public RString check認定申請情報ファイル(RString error, RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
@@ -185,58 +218,58 @@ public class RenkeiDataTorikomiValidationHandler {
         }
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            boolean flag = false;
             if (電算標準版.equals(認定申請IF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, NinteiShinseiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 要介護認定申請連携データ取込みファイル名;
+                    flag = true;
                 }
                 if (電算標準版_197 < getSize(read)) {
-                    return 要介護認定申請連携データ取込みファイル名;
+                    flag = true;
                 }
             } else if (厚労省.equals(認定申請IF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 要介護認定申請連携データ取込みファイル名;
+                    flag = true;
                 }
                 if (厚労省_174 < getSize(read)) {
-                    return 要介護認定申請連携データ取込みファイル名;
+                    flag = true;
                 }
             } else if (東芝版.equals(認定申請IF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, NinteiShinseiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 要介護認定申請連携データ取込みファイル名;
+                    flag = true;
                 }
                 if (東芝版_197 < getSize(read)) {
-                    return 要介護認定申請連携データ取込みファイル名;
-                } else {
-                    return 要介護認定申請連携データ取込みファイル名;
+                    flag = true;
                 }
             }
-            return RString.EMPTY;
+            return set複数エラー(error, 要介護認定申請連携データ取込みファイル名, flag);
         }
     }
 
     /**
      * 認定調査委託先情報ファイルの取り込みとき、バリデーションチェックを実施します。
      *
-     * @param validPairs validPairs
+     * @param error
      * @param path path
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public RString check認定調査委託先情報ファイル(RString path, boolean pathFlag) {
+    public RString check認定調査委託先情報ファイル(RString error, RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
         } else {
             filePath = Path.combinePath(path, 認定調査委託先データ取込みファイル名);
         }
+        boolean flag = false;
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類)) {
@@ -244,10 +277,10 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteichosaItakusakiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 認定調査委託先データ取込みファイル名;
+                    flag = true;
                 }
                 if (電算標準版_11 < getSize(read)) {
-                    return 認定調査委託先データ取込みファイル名;
+                    flag = true;
                 }
 
             } else if (厚労省.equals(マスタIF種類)) {
@@ -255,33 +288,32 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteichosaItakusakiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 認定調査委託先データ取込みファイル名;
+                    flag = true;
                 }
                 if (厚労省_10 < getSize(read)) {
-                    return 認定調査委託先データ取込みファイル名;
+                    flag = true;
                 }
-            } else {
-                return 認定調査委託先データ取込みファイル名;
             }
+            return set複数エラー(error, 認定調査委託先データ取込みファイル名, flag);
         }
-        return RString.EMPTY;
     }
 
     /**
      * 認定調査員情報ファイル(電算標準版)の取り込みとき、バリデーションチェックを実施します。
      *
-     * @param validPairs validPairs
+     * @param error
      * @param path path
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public RString check認定調査員情報ファイル(RString path, boolean pathFlag) {
+    public RString check認定調査員情報ファイル(RString error, RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
         } else {
             filePath = Path.combinePath(path, 認定調査員データ取込みファイル名);
         }
+        boolean flag = false;
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類)) {
@@ -289,121 +321,135 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ChosainJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 認定調査員データ取込みファイル名;
+                    flag = true;
                 }
                 if (電算標準版_9 < getSize(read)) {
-                    return 認定調査員データ取込みファイル名;
+                    flag = true;
                 }
             } else if (厚労省.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, ChosainJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 認定調査員データ取込みファイル名;
+                    flag = true;
                 }
                 if (厚労省_8 < getSize(read)) {
-                    return 認定調査員データ取込みファイル名;
+                    flag = true;
                 }
-            } else {
-                return 認定調査員データ取込みファイル名;
             }
+            return set複数エラー(error, 認定調査員データ取込みファイル名, flag);
         }
-        return RString.EMPTY;
     }
 
     /**
      * 主治医医療機関情報ファイルの取り込みとき、バリデーションチェックを実施します。
      *
-     * @param validPairs validPairs
+     * @param error
      * @param path path
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public RString check主治医医療機関情報ファイル(RString path, boolean pathFlag) {
+    public RString check主治医医療機関情報ファイル(RString error, RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
         } else {
             filePath = Path.combinePath(path, 主治医医療機関データ取込みファイル名);
         }
+        boolean flag = false;
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
-                        filePath, ShujiiIryoKikanJohoDensanCsvEntity.class)
+                        filePath, ShujiiIryoKikanJohoDensanCsvEntity.class
+                )
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 認定調査員データ取込みファイル名;
+                    flag = true;
                 }
                 if (電算標準版_10 < getSize(read)) {
-                    return 主治医医療機関データ取込みファイル名;
+                    flag = true;
+
                 }
             } else if (厚労省.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
-                        filePath, ShujiiIryoKikanJohoKouroushouCsvEntity.class)
+                        filePath, ShujiiIryoKikanJohoKouroushouCsvEntity.class
+                )
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 主治医医療機関データ取込みファイル名;
+                    flag = true;
                 }
                 if (厚労省_9 < getSize(read)) {
-                    return 主治医医療機関データ取込みファイル名;
+                    flag = true;
                 }
-            } else {
-                return 主治医医療機関データ取込みファイル名;
             }
+            return set複数エラー(error, 主治医医療機関データ取込みファイル名, flag);
         }
-        return RString.EMPTY;
     }
 
     /**
      * 主治医情報ファイルの取り込みとき、バリデーションチェックを実施します。
      *
-     * @param validPairs validPairs
+     * @param error
      * @param path path
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public RString check主治医情報ファイル(RString path, boolean pathFlag) {
+    public RString check主治医情報ファイル(RString error, RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
         } else {
             filePath = Path.combinePath(path, 主治医データ取込みファイル名);
         }
+        boolean flag = false;
         try (CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build()) {
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (電算標準版.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
-                        filePath, ShujiiJohoDensanCsvEntity.class)
+                        filePath, ShujiiJohoDensanCsvEntity.class
+                )
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 主治医データ取込みファイル名;
+                    flag = true;
                 }
                 if (電算標準版_8 < getSize(read)) {
-                    return 主治医データ取込みファイル名;
+                    flag = true;
+
                 }
             } else if (厚労省.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
-                        filePath, ShujiiJohoKouroushouCsvEntity.class)
+                        filePath, ShujiiJohoKouroushouCsvEntity.class
+                )
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    return 主治医データ取込みファイル名;
+                    flag = true;
                 }
                 if (厚労省_7 < getSize(read)) {
-                    return 主治医データ取込みファイル名;
+                    flag = true;
                 }
+            }
+            return set複数エラー(error, 主治医データ取込みファイル名, flag);
+        }
+    }
+
+    private RString set複数エラー(RString error, RString ファイル名, boolean flag) {
+        if (flag) {
+            if (!RString.isNullOrEmpty(error)) {
+                error = error.concat(new RString(","));
+                error = error.concat(ファイル名);
             } else {
-                return 主治医データ取込みファイル名;
+                error = ファイル名;
             }
         }
-        return RString.EMPTY;
+        return error;
     }
 
     private int getSize(CsvListReader read) {
         int size = 0;
         List<RString> list = read.readLine();
         if (list != null && !list.isEmpty()) {
-                size = list.size();
+            size = list.size();
         }
         return size;
     }
@@ -417,6 +463,7 @@ public class RenkeiDataTorikomiValidationHandler {
             コード = Encode.UTF_8;
         }
         return コード;
+
     }
 
     private static enum FilecheckMessages implements IValidationMessage {
@@ -445,8 +492,10 @@ public class RenkeiDataTorikomiValidationHandler {
         /**
          * "保存は正常に終了しました。"を定義しています。
          */
-        ゼロ件チェック(10, "?は総件数が0件のためアップロードできません。"),
-        不正ファイル(20, "?は不正のファイルのためアップロードできません。");
+        ゼロ件チェック(30, "?は総件数が0件のためアップロードできません。"),
+        不正ファイル(20, "?は不正のファイルのためアップロードできません。"),
+        初期ファイル不正(00, "?が不正のファイルです。"),
+        ファイル名の不正(10, "?のファイル名が不正のためアップロードできません。");
 
         private final int no;
         private final RString message;
@@ -461,23 +510,5 @@ public class RenkeiDataTorikomiValidationHandler {
             return new InformationMessage(toCode("I", no), message.toString());
         }
 
-    }
-
-    public enum ErrorMessages implements IMessageGettable {
-
-        不正ファイル(1, "?が不正のファイルのためアップロードできません。");
-
-        private final int no;
-        private final RString message;
-
-        private ErrorMessages(int no, String message) {
-            this.no = no;
-            this.message = new RString(message);
-        }
-
-        @Override
-        public Message getMessage() {
-            return new ErrorMessage(toCode("E", no), message.toString());
-        }
     }
 }
