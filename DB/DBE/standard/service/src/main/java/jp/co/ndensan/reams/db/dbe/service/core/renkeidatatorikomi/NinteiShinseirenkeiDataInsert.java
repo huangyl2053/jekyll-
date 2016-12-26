@@ -349,9 +349,6 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RString check申請情報一時テーブル電算(DbT5101TempEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
         RStringBuilder errorBuilder = new RStringBuilder();
-        if (RString.isNullOrEmpty(entity.get申請者氏名カナ())) {
-            errorBuilder.append(new RString("申請者フリガナの入力がありません;"));
-        }
         nullCheck申請区分(entity.get申請区分_申請時コード(), errorBuilder);
         if (!RString.isNullOrEmpty(processParamter.get市町村コード())
                 && processParamter.get市町村コード().equals(entity.get市町村コード())) {
@@ -363,9 +360,6 @@ public class NinteiShinseirenkeiDataInsert {
         }
         check被保険者番号未入力(entity.get被保険者番号(), errorBuilder);
         check特定疾病コード(entity.get被保険者区分コード(), entity.get特定疾病コード(), errorBuilder);
-        if (RString.isNullOrEmpty(entity.get申請者氏名())) {
-            errorBuilder.append(new RString("申請者氏名の入力がありません;"));
-        }
         check生年月日(entity.get生年月日(), errorBuilder);
         check年齢(entity.get生年月日(), errorBuilder);
         check市町村コード未入力(entity.get市町村コード(), errorBuilder);
@@ -387,9 +381,6 @@ public class NinteiShinseirenkeiDataInsert {
         }
         check被保険者番号未入力(entity.get被保険者番号(), errorBuilder);
         check特定疾病コード(entity.get被保険者区分コード(), entity.get特定疾病コード(), errorBuilder);
-        if (RString.isNullOrEmpty(entity.get申請者氏名())) {
-            errorBuilder.append(new RString("申請者氏名の入力がありません;"));
-        }
         check生年月日(entity.get生年月日(), errorBuilder);
         check認定申請日入力不正(entity.get認定申請日(), errorBuilder);
         check生年月日入力不正(entity.get生年月日(), errorBuilder);

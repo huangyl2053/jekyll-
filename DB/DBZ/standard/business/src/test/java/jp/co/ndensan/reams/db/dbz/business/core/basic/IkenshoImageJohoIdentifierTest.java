@@ -45,7 +45,7 @@ public class IkenshoImageJohoIdentifierTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            IkenshoImageJohoIdentifier sut = new IkenshoImageJohoIdentifier(申請書管理番号, 主治医意見書作成依頼履歴番号, 帳票ID, マスキングデータ区分, 取込みページ番号);
+            IkenshoImageJohoIdentifier sut = new IkenshoImageJohoIdentifier(申請書管理番号, 主治医意見書作成依頼履歴番号, 帳票ID, マスキングデータ区分);
             assertThat(sut, is(serializable()));
         }
     }

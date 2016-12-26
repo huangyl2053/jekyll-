@@ -172,20 +172,29 @@ public class ImageJohoMaskingResult {
     }
 
     /**
-     * マスク区分を取得します。
+     * 特記マスク有無のマスク有無を取得します。
      *
-     * @return マスク区分
+     * @return 特記マスク有無
      */
-    public RString get特記マスク区分() {
-        return entity.get特記マスク区分();
+    public boolean has特記マスク() {
+        return entity.is特記マスク有無();
     }
 
     /**
-     * マスク区分を取得します。
+     * 意見書マスク有無のマスク有無を取得します。
      *
-     * @return マスク区分
+     * @return 意見書マスク有無
      */
-    public RString get意見書マスク区分() {
-        return entity.get意見書マスク区分();
+    public boolean has意見書マスク() {
+        return entity.is意見書マスク有無();
+    }
+
+    /**
+     * 概況調査特記のマスク有無を取得します。
+     *
+     * @return 概況マスク有無
+     */
+    public boolean has概況マスク() {
+        return entity.is概況マスク有無();
     }
 }

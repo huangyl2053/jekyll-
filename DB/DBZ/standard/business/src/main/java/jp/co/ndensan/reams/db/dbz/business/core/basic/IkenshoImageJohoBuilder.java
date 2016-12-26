@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5305IkenshoImageJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -83,45 +82,45 @@ public class IkenshoImageJohoBuilder {
      */
     public IkenshoImageJohoBuilder setマスキングデータ区分(RString マスキングデータ区分) {
         requireNonNull(マスキングデータ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("マスキングデータ区分"));
-        entity.setMaskDataKubun(マスキングデータ区分);
+        entity.setGenponMaskKubun(マスキングデータ区分);
         return this;
     }
-
-    /**
-     * 取込みページ番号を設定します。
-     *
-     * @param 取込みページ番号 取込みページ番号
-     * @return {@link IkenshoImageJohoBuilder}
-     */
-    public IkenshoImageJohoBuilder set取込みページ番号(int 取込みページ番号) {
-        requireNonNull(取込みページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込みページ番号"));
-        entity.setTorikomiPageNo(取込みページ番号);
-        return this;
-    }
-
-    /**
-     * 認定申請年を設定します。
-     *
-     * @param 認定申請年 認定申請年
-     * @return {@link IkenshoImageJohoBuilder}
-     */
-    public IkenshoImageJohoBuilder set認定申請年(int 認定申請年) {
-        requireNonNull(認定申請年, UrSystemErrorMessages.値がnull.getReplacedMessage("認定申請年"));
-        entity.setNinteiShinseiNen(認定申請年);
-        return this;
-    }
-
-    /**
-     * 共有ファイルIDを設定します。
-     *
-     * @param 共有ファイルID 共有ファイルID
-     * @return {@link IkenshoImageJohoBuilder}
-     */
-    public IkenshoImageJohoBuilder set共有ファイルID(RDateTime 共有ファイルID) {
-        requireNonNull(共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("共有ファイルID"));
-        entity.setSharedFileId(共有ファイルID);
-        return this;
-    }
+//
+//    /**
+//     * 取込みページ番号を設定します。
+//     *
+//     * @param 取込みページ番号 取込みページ番号
+//     * @return {@link IkenshoImageJohoBuilder}
+//     */
+//    public IkenshoImageJohoBuilder set取込みページ番号(int 取込みページ番号) {
+//        requireNonNull(取込みページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込みページ番号"));
+//        entity.setTorikomiPageNo(取込みページ番号);
+//        return this;
+//    }
+//
+//    /**
+//     * 認定申請年を設定します。
+//     *
+//     * @param 認定申請年 認定申請年
+//     * @return {@link IkenshoImageJohoBuilder}
+//     */
+//    public IkenshoImageJohoBuilder set認定申請年(int 認定申請年) {
+//        requireNonNull(認定申請年, UrSystemErrorMessages.値がnull.getReplacedMessage("認定申請年"));
+//        entity.setNinteiShinseiNen(認定申請年);
+//        return this;
+//    }
+//
+//    /**
+//     * 共有ファイルIDを設定します。
+//     *
+//     * @param 共有ファイルID 共有ファイルID
+//     * @return {@link IkenshoImageJohoBuilder}
+//     */
+//    public IkenshoImageJohoBuilder set共有ファイルID(RDateTime 共有ファイルID) {
+//        requireNonNull(共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("共有ファイルID"));
+//        entity.setSharedFileId(共有ファイルID);
+//        return this;
+//    }
 
     /**
      * {@link IkenshoImageJoho}のインスタンスを生成します。

@@ -140,6 +140,8 @@
         AND
         DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{主治医意見書作成依頼変更者一覧表申請日To} 
         ORDER BY
+        DbT5301."shinseishoKanriNo",
+        DbT5301."ikenshoIraiRirekiNo",
         DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD"
     </select>
@@ -512,7 +514,12 @@
         ON
         DbT5301."shinseishoKanriNo" =  DbT5101."shinseishoKanriNo"
         AND 
-        DbT5301."ikenshoIraiRirekiNo" =  (SELECT MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" )
+        DbT5301."ikenshoIraiRirekiNo" =  (SELECT
+        MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo")
+        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        )
         AND 
         DbT5301."isDeleted" = FALSE
         LEFT JOIN
