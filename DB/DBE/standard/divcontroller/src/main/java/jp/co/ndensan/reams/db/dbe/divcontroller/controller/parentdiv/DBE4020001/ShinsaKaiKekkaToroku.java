@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -102,6 +101,17 @@ public class ShinsaKaiKekkaToroku {
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onChange_radTaishoshaJotai(ShinsaKaiKekkaTorokuDiv div) {
         getHandler(div).setJyotaiKubun();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 最大表示件数テキストボックスの値が変更された際の動作です。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_txtMaxCount(ShinsaKaiKekkaTorokuDiv requestDiv) {
+        getHandler(requestDiv).二次判定モード();
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
@@ -229,6 +239,11 @@ public class ShinsaKaiKekkaToroku {
         }
     }
 
+    public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_shorikeizoku(ShinsaKaiKekkaTorokuDiv div) {
+        onLoad(div);
+        return ResponseData.of(div).setState(DBE4020001StateName.登録);
+    }
+
     /**
      * 結果登録を完了するボタンを押下する場合、審査会結果登録完了処理を行う。
      *
@@ -237,17 +252,17 @@ public class ShinsaKaiKekkaToroku {
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnKekkaToroku(ShinsaKaiKekkaTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
-            if (存在チェック結果.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
-            }
-            ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
-            if (選択チェック.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(選択チェック).respond();
-            }
-            ValidationMessageControlPairs validation = getValidationHandler(div).完了処理事前チェック();
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
-            }
+        if (存在チェック結果.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
+        }
+        ValidationMessageControlPairs 選択チェック = getValidationHandler(div).選択チェック();
+        if (選択チェック.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(選択チェック).respond();
+        }
+        ValidationMessageControlPairs validation = getValidationHandler(div).完了処理事前チェック();
+        if (validation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validation).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -256,14 +271,14 @@ public class ShinsaKaiKekkaToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
-                        = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
-                getHandler(div).要介護認定完了更新(models);
-                前排他キーの解除();
-                div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                        replace(審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-                div.getBtnShinsakaikanryooutput().setDisplayNone(true);
-                return ResponseData.of(div).setState(DBE4020001StateName.完了);
+            Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
+                    = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+            getHandler(div).要介護認定完了更新(models);
+            前排他キーの解除();
+            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                    replace(審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            div.getBtnShinsakaikanryooutput().setDisplayNone(true);
+            return ResponseData.of(div).setState(DBE4020001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
