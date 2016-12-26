@@ -36,6 +36,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
  *
  * @author
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DBE518002_NinteiShinsaIraiIfTorikomiTest extends DbeTestDacBase {
 
