@@ -36,4 +36,7 @@ public class MaSuKinGuRelateEntity {
     private FlexibleDate ikenshoTorokuKanryoYMD;
     private FlexibleDate maskingKanryoYMD;
     private RDateTime imageSharedFileId;
+    private boolean hasTokkiMask;
+    private boolean hasIkenshoMask;
+    private boolean hasGaikyoMask;
 }
