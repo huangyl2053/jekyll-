@@ -33,7 +33,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     @JsonProperty("btnModoru")
     private Button btnModoru;
     @JsonProperty("btnPrint")
-    private ButtonPrint btnPrint;
+    private ButtonReportPublish btnPrint;
     @JsonProperty("hiddenIuputModel")
     private RString hiddenIuputModel;
     @JsonProperty("hiddenData")
@@ -104,7 +104,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
      * @return btnPrint
      */
     @JsonProperty("btnPrint")
-    public ButtonPrint getBtnPrint() {
+    public ButtonReportPublish getBtnPrint() {
         return btnPrint;
     }
 
@@ -113,7 +113,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
      * @param btnPrint btnPrint
      */
     @JsonProperty("btnPrint")
-    public void setBtnPrint(ButtonPrint btnPrint) {
+    public void setBtnPrint(ButtonReportPublish btnPrint) {
         this.btnPrint = btnPrint;
     }
 
