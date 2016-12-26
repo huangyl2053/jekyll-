@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.GogitaiJohoIkkatuSakuseiErrorMessage;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.gogitaijohosakusei.GogitaiJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiErrKekkaCSVEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.TempGogitaiJohoSakusei;
@@ -63,8 +62,6 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     private static final RString FLAG_TRUE = new RString("1");
     private static final RString FLAG_FALSE = new RString("0");
     private static final RString 合議体NO = new RString("合議体NO：");
-    private GogitaiJohoSakuseiProcessParamter parameter;
-    private int errorNo;
     private int insertCount;
     private boolean csv出力;
     private boolean noErrorFlag;
@@ -85,7 +82,6 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
 
     @Override
     protected void initialize() {
-        errorNo = 0;
         insertCount = 0;
         errorMessage = RString.EMPTY;
         csv出力 = false;
@@ -124,7 +120,6 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     protected void process(TempGogitaiJohoSakuseiEntity entity) {
         TempGogitaiJohoSakusei 合議体情報 = entity.get合議体情報作成Temp();
 
-        errorNo++;
         noErrorFlag = true;
         errorMessage = RString.EMPTY;
         isClearInsertCount(合議体情報.get合議体NO());
@@ -183,7 +178,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     }
 
     private void csv項目チェック(TempGogitaiJohoSakusei 合議体情報) {
-        if (is数字チェック1(合議体情報) || is数字チェック2(合議体情報)) {
+        if (!(is数字チェック1(合議体情報) && is数字チェック2(合議体情報))) {
             RString message = new RString(UrErrorMessages.不正.getMessage().replace("データの形式、内容").evaluate());
             errorMessage = errorMessage.concat(message);
             RLogger.error(message);
@@ -347,23 +342,23 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     }
 
     private boolean is数字チェック1(TempGogitaiJohoSakusei 合議体情報) {
-        return !RStringUtil.matchesRegex(合議体情報.get合議体NO(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get有効開始日(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get有効終了日(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体開始予定時刻(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体終了予定時刻(), POSITIVE_INTEGERS_REGEX);
+        return RStringUtil.matchesRegex(合議体情報.get合議体NO().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get有効開始日().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get有効終了日().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体開始予定時刻().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体終了予定時刻().trim(), POSITIVE_INTEGERS_REGEX);
     }
 
     private boolean is数字チェック2(TempGogitaiJohoSakusei 合議体情報) {
-        return !RStringUtil.matchesRegex(合議体情報.get審査会予定定員(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get審査会自動割当定員(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get審査会委員定員(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get開催場所コード(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get精神科医所属(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体ダミーフラグ(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get審査会委員コード(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get補欠(), POSITIVE_INTEGERS_REGEX)
-                || !RStringUtil.matchesRegex(合議体情報.get合議体長区分コード(), POSITIVE_INTEGERS_REGEX);
+        return RStringUtil.matchesRegex(合議体情報.get審査会予定定員().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get審査会自動割当定員().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get審査会委員定員().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get開催場所コード().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get精神科医所属().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体ダミーフラグ().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get審査会委員コード().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get補欠().trim(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体長区分コード().trim(), POSITIVE_INTEGERS_REGEX);
     }
 
     private DbT5591GogitaiJohoEntity createDbT5591Entity(TempGogitaiJohoSakusei 合議体情報) {

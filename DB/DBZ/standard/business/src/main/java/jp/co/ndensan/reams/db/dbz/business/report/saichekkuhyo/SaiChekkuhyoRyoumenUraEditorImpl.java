@@ -211,10 +211,10 @@ public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenEdi
     }
 
     private RString setChosaAnser01(RString chosakekkaNo) {
-        RString chosaAnser;
+        RString chosaAnser = RString.EMPTY;
         if (ChosaAnser01.あり.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser01.あり.get名称();
-        } else {
+        } else if (ChosaAnser01.なし.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser01.なし.get名称();
         }
         return chosaAnser;
@@ -325,11 +325,13 @@ public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenEdi
     }
 
     private RString setChosaAnser16(RString chosakekkaNo) {
-        RString chosaAnser;
+        RString chosaAnser = RString.EMPTY;
         if (ChosaAnser16.ある.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser16.ある.get名称();
-        } else {
+        } else if (ChosaAnser16.ない.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser16.ない.get名称();
+        } else if (ChosaAnser16.ときどきある.getコード().equals(chosakekkaNo)) {
+            chosaAnser = ChosaAnser16.ときどきある.get名称();
         }
         return chosaAnser;
     }

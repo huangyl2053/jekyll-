@@ -148,7 +148,7 @@ var DBZ;
             };
 
             Controls.prototype.btnPrint = function () {
-                return new UZA.ButtonPrint(this.convFiledName("btnPrint"));
+                return new UZA.ButtonReportPublish(this.convFiledName("btnPrint"));
             };
             return Controls;
         })();
