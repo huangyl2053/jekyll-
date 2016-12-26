@@ -218,6 +218,7 @@
     </resultMap>
 
     <resultMap id="resultMap_TempGogitaiJohoSakusei" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.TempGogitaiJohoSakusei" autoMapping="true">
+        <result property="シーケンス番号" column="tempGogitaiJohoSakusei_シーケンス番号"/>
         <result property="合議体NO" column="tempGogitaiJohoSakusei_合議体NO" typeHandler="RStringTypeHandler"/>
         <result property="有効開始日" column="tempGogitaiJohoSakusei_有効開始日" typeHandler="RStringTypeHandler"/>
         <result property="有効終了日" column="tempGogitaiJohoSakusei_有効終了日" typeHandler="RStringTypeHandler"/>
@@ -236,6 +237,7 @@
     </resultMap>
 
     <sql id="allColumns_TempGogitaiJohoSakusei">
+        "TempGogitaiJohoSakusei"."シーケンス番号" as "tempGogitaiJohoSakusei_シーケンス番号",
         "TempGogitaiJohoSakusei"."合議体NO" as "TempGogitaiJohoSakusei_合議体NO",
         "TempGogitaiJohoSakusei"."有効開始日" as "TempGogitaiJohoSakusei_有効開始日",
         "TempGogitaiJohoSakusei"."有効終了日" as "TempGogitaiJohoSakusei_有効終了日",
@@ -254,6 +256,7 @@
     </sql>
 
     <resultMap id="resultMap_TempGogitaiJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.TempGogitaiJohoSakuseiEntity" autoMapping="true">
+        <id column="tempGogitaiJohoSakusei_シーケンス番号"/>
         <association property="合議体情報作成Temp"
                      resultMap="resultMap_TempGogitaiJohoSakusei"/>
     </resultMap>
