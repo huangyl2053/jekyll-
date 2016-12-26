@@ -195,7 +195,9 @@ public class ImageDisplay {
         List<RString> imageFilePathList = new ArrayList<>();
         RString imageFilePath = RString.EMPTY;
 
-        if (IMAGE_TEIKEIOPINIONFILE.equals(imageKubun)) {
+        if (IMAGE_GAIKYOTOKKI.equals(imageKubun)) {
+            imageFilePathList.add(RString.EMPTY);
+        } else if (IMAGE_TEIKEIOPINIONFILE.equals(imageKubun)) {
             RString imageFile1 = new RString("E0001.png");
             RString imageFile1_BAK = new RString("E0001_BAK.png");
             RString imageFile2 = new RString("E0002.png");

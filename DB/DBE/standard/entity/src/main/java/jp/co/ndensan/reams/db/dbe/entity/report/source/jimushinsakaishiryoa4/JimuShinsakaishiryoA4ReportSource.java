@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa4;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -485,6 +484,12 @@ public class JimuShinsakaishiryoA4ReportSource implements IReportSource {
     @ReportItem(name = "imgSonotashiryo", order = 620)
     public RString imgSonotashiryo;
 
+    //DBE517019
+    @ReportItem(name = "shinsakaiTsuikasha", length = 2, order = 707)
+    public RString shinsakaiTsuikasha;
+    @ReportItem(name = "tsuchibun", order = 713)
+    public RString tsuchibun;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -507,6 +512,8 @@ public class JimuShinsakaishiryoA4ReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation shinseishoKanriNo;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hishokenshaNo;
 
     /**
      * 改ページ条件のキーです。

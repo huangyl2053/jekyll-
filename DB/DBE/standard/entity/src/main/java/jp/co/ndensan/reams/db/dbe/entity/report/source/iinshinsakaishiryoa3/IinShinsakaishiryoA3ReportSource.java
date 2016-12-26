@@ -8,10 +8,13 @@ package jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 委員審査会資料組み合わせ一覧A3のReportSourceです。
@@ -591,6 +594,54 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     @ReportItem(name = "imgSonotashiryo2", order = 621)
     public RString imgSonotashiryo2;
 
+    //DBE517009_TsuikashiryokagamiA3
+    @ReportItem(name = "tsuchibun", order = 702)
+    public RString tsuchibun;
+    @ReportItem(name = "ShinsainName1", length = 20, order = 703)
+    public RString shinsainName1;
+    @ReportItem(name = "ShinsainName2", length = 20, order = 704)
+    public RString shinsainName2;
+    @ReportItem(name = "ShinsainName3", length = 20, order = 705)
+    public RString shinsainName3;
+    @ReportItem(name = "ShinsainName4", length = 20, order = 706)
+    public RString shinsainName4;
+    @ReportItem(name = "ShinsainName5", length = 20, order = 707)
+    public RString shinsainName5;
+    @ReportItem(name = "ShinsainName6", length = 20, order = 708)
+    public RString shinsainName6;
+    @ReportItem(name = "ShinsainName7", length = 20, order = 710)
+    public RString shinsainName7;
+    @ReportItem(name = "ShinsainName8", length = 20, order = 712)
+    public RString shinsainName8;
+    @ReportItem(name = "shinsakaiTsuikasha", length = 2, order = 713)
+    public RString shinsakaiTsuikasha;
+    @ReportItem(name = "listShinsei_1", length = 2, order = 714)
+    public RString listShinsei_1;
+    @ReportItem(name = "listShinsei_2", length = 6, order = 715)
+    public RString listShinsei_2;
+    @ReportItem(name = "listShinsei_3", length = 10, order = 716)
+    public RString listShinsei_3;
+    @ReportItem(name = "listShinsei_4", length = 30, order = 717)
+    public RString listShinsei_4;
+    @ReportItem(name = "listShinsei_5", length = 1, order = 718)
+    public RString listShinsei_5;
+    @ReportItem(name = "listShinsei_6", length = 3, order = 719)
+    public RString listShinsei_6;
+    @ReportItem(name = "listShinsei_7", length = 3, order = 720)
+    public RString listShinsei_7;
+    @ReportItem(name = "listShinsei_8", length = 4, order = 721)
+    public RString listShinsei_8;
+    @ReportItem(name = "listShinsei_9", length = 7, order = 722)
+    public RString listShinsei_9;
+    @ReportItem(name = "listShinsei_10", length = 3, order = 723)
+    public RString listShinsei_10;
+    @ReportItem(name = "listShinsei_11", length = 4, order = 724)
+    public RString listShinsei_11;
+    @ReportItem(name = "listZenkaiｙukokikan_1", length = 19, order = 725)
+    public RString listZenkaiｙukokikan_1;
+    @ReportItem(name = "listYukokikan_1", length = 19, order = 726)
+    public RString listYukokikan_1;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -608,6 +659,11 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
         LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
     }
 // </editor-fold>
+
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hishokenshaNo;
 
     /**
      * 改ページ条件のキーです。
