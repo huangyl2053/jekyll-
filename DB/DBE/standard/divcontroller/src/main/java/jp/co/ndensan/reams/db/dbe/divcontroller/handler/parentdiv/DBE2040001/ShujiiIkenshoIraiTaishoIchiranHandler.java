@@ -60,13 +60,13 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      *
      */
     public void initialize() {
-//        RDate システム日付 = RDate.getNowDate();
-//        RString 表示区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
-//        if (表示区分 != null && !表示区分.isEmpty()) {
-//            div.getRadShoriJyotai().setSelectedKey(表示区分);
-//        } else {
-//            div.getRadShoriJyotai().setSelectedKey(SELECTED_KEY0);
-//        }
+        RDate システム日付 = RDate.getNowDate();
+        RString 表示区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
+        if (表示区分 != null && !表示区分.isEmpty()) {
+            div.getRadShoriJyotai().setSelectedKey(表示区分);
+        } else {
+            div.getRadShoriJyotai().setSelectedKey(SELECTED_KEY0);
+        }
         画面変更より最新データを検索();
     }
 
@@ -74,17 +74,17 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      * 画面変更より検索の処理です。
      */
     public void 画面変更より最新データを検索() {
-//        RString 表示区分 = div.getRadShoriJyotai().getSelectedKey();
-//        SearchResult<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().get意見書依頼モード(YokaigoNinteiTaskListParameter.
-//                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 表示区分, div.getTxtSaidaiHyojiKensu().getValue()));
-//        if (!意見書依頼List.records().isEmpty()) {
-//            ShinSaKaiBusiness 前意見書依頼Model = YokaigoNinteiTaskListFinder.createInstance().get前意見書依頼(YokaigoNinteiTaskListParameter.
-//                    createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, div.getTxtSaidaiHyojiKensu().getValue()));
-//            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書依頼Model.get要介護認定完了情報Lsit()));
-//        } else {
-//            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
-//        }
-//        意見書依頼モード(意見書依頼List);
+        RString 表示区分 = div.getRadShoriJyotai().getSelectedKey();
+        SearchResult<IKnSyoiRaiBusiness> 意見書依頼List = YokaigoNinteiTaskListFinder.createInstance().get意見書依頼モード(YokaigoNinteiTaskListParameter.
+                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 表示区分, div.getTxtSaidaiHyojiKensu().getValue()));
+        if (!意見書依頼List.records().isEmpty()) {
+            ShinSaKaiBusiness 前意見書依頼Model = YokaigoNinteiTaskListFinder.createInstance().get前意見書依頼(YokaigoNinteiTaskListParameter.
+                    createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, div.getTxtSaidaiHyojiKensu().getValue()));
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書依頼Model.get要介護認定完了情報Lsit()));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+        }
+        意見書依頼モード(意見書依頼List);
     }
     
     /**
@@ -145,27 +145,27 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             }
             rowListALL.add(row);
         }
-//        div.getTxtTotalCount().setValue(new RString(String.valueOf(意見書依頼List.records().size())));
-//        div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
-//        div.getTxtNoUpdate().setValue(new RString(String.valueOf(notreatedCount)));
-//        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
-//        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書依頼List.totalCount());
-//        if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
-//            div.getDgNinteiTaskList().setDataSource(rowListNotreated);
-//            div.getTxtTotalCount().setDisplayNone(true);
-//            div.getTxtCompleteCount().setDisplayNone(true);
-//            div.getTxtNoUpdate().setDisplayNone(false);
-//        } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
-//            div.getDgNinteiTaskList().setDataSource(rowListComplete);
-//            div.getTxtNoUpdate().setDisplayNone(true);
-//            div.getTxtTotalCount().setDisplayNone(true);
-//            div.getTxtCompleteCount().setDisplayNone(false);
-//        } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
-//            div.getDgNinteiTaskList().setDataSource(rowListALL);
-//            div.getTxtTotalCount().setDisplayNone(false);
-//            div.getTxtCompleteCount().setDisplayNone(false);
-//            div.getTxtNoUpdate().setDisplayNone(false);
-//        }
+        div.getTxtTotalCount().setValue(new RString(String.valueOf(意見書依頼List.records().size())));
+        div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
+        div.getTxtNoUpdate().setValue(new RString(String.valueOf(notreatedCount)));
+        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
+        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書依頼List.totalCount());
+        if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListNotreated);
+            div.getTxtTotalCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(true);
+            div.getTxtNoUpdate().setDisplayNone(false);
+        } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListComplete);
+            div.getTxtNoUpdate().setDisplayNone(true);
+            div.getTxtTotalCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(false);
+        } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListALL);
+            div.getTxtTotalCount().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtNoUpdate().setDisplayNone(false);
+        }
     }
 
     private void 意見書依頼モードの日付設定(dgNinteiTaskList_Row row, IKnSyoiRaiBusiness business) {
@@ -200,8 +200,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      */
     public RString 一覧件数() {
 
-//        return div.getTxtTotalCount().getValue();
-        return null;
+        return div.getTxtTotalCount().getValue();
     }
     
     /**
@@ -211,8 +210,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      */
     public List<dgNinteiTaskList_Row> getCheckbox() {
 
-//        return div.getDgNinteiTaskList().getSelectedItems();
-        return null;
+        return div.getDgNinteiTaskList().getSelectedItems();
     }
 
     /**
@@ -221,7 +219,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      * @return 一覧のデータ
      */
     public List<dgNinteiTaskList_Row> getDataSource() {
-     //   return div.getDgNinteiTaskList().getDataSource();
-        return null;
+        return div.getDgNinteiTaskList().getDataSource();
     }
 }

@@ -270,7 +270,6 @@ dbe/db/dbe/ImagePanel/onclick_btnDownLoadCheck
 dbe/db/dbe/Imageinput/onBeforeOpenDialog_btnBatchRegister
 dbe/db/dbe/Imageinput/onClick_BtnSave
 dbe/db/dbe/Imageinput/onClick_Ikensho
-dbe/db/dbe/Imageinput/onClick_btnUpload
 dbe/db/dbe/Imageinput/onLoad
 dbe/db/dbe/Imageinput/onSetBatchParameterURL
 dbe/db/dbe/Imageinput/onclick_BtnUpload
@@ -820,6 +819,7 @@ dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnSave
 dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnShinsakaiIinAdd
 dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnShozokuKikanAdd
 dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnToroku
+dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_shinsaInJohoIchiranGyo
 dbe/db/dbe/ShinsakaiIinJohoToroku/onDoubleClick_shinsaInJohoIchiranGyo
 dbe/db/dbe/ShinsakaiIinJohoToroku/onLoad
 dbe/db/dbe/ShinsakaiIinJohoToroku/onOkClose_btnNiteiChosaItakusakiGuide
@@ -872,7 +872,6 @@ dbe/db/dbe/ShinsakaiKekkaToroku/onClick_KaKuTeiButton
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_Save
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_SelectButton
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_btnBack
-dbe/db/dbe/ShinsakaiKekkaToroku/onClick_btnCancel
 dbe/db/dbe/ShinsakaiKekkaToroku/onLoad
 dbe/db/dbe/ShinsakaiKekkaToroku/onOkClose_btnIChiTeikeibunGuide
 dbe/db/dbe/ShinsakaiKekkaToroku/onOkClose_btnIkenTeikeibunGuide
