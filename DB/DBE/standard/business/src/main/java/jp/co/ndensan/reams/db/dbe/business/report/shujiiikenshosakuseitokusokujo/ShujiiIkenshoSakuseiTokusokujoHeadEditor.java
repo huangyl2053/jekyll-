@@ -89,7 +89,7 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.hihokenshaNameKana = headitem.getHihokenshaNameKana();
         source.hihokenshaName = headitem.getHihokennsyaName();
         if (headitem.getIkenshoIraiYMD() != null) {
-            source.shinseiYMD = headitem.getShinseiYMD().wareki()
+            source.ikenshoIraiYMD = headitem.getShinseiYMD().wareki()
                     .eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE)
