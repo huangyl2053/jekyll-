@@ -789,6 +789,14 @@ public class NinnteiChousaKekkaTouroku1 {
             ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY5)));
             ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY6)));
             ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, getHandler(div).基本調査群規定値設定(map.get(KEY7)));
+            ViewStateHolder.put(ViewStateKeys.基本調査の入力状況, new RString("1"));
+            RString 基本調査の入力状況 = ViewStateHolder.get(ViewStateKeys.基本調査の入力状況, RString.class);
+            div.setHiddenKihonChosaInput1Flag(基本調査の入力状況);
+            div.setHiddenKihonChosaInput2Flag(基本調査の入力状況);
+            div.setHiddenKihonChosaInput3Flag(基本調査の入力状況);
+            div.setHiddenKihonChosaInput4Flag(基本調査の入力状況);
+            div.setHiddenKihonChosaInput5Flag(基本調査の入力状況);
+            div.setHiddenKihonChosaInput7Flag(基本調査の入力状況);
             return ResponseData.of(div).respond();
         } else {
             return ResponseData.of(div).respond();
