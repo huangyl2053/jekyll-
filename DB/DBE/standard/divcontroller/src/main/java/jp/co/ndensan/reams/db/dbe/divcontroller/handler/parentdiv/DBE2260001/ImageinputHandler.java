@@ -21,14 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku14;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKinyuMapping99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -39,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * イメージ取込み（規定・規定外）のコントローラクラスです。
@@ -63,32 +57,6 @@ public class ImageinputHandler {
      */
     public ImageinputHandler(ImageinputDiv div) {
         this.div = div;
-    }
-
-    /**
-     * 画面に表示するサーバファイルパスを取得し、テキストボックスにセットします。
-     */
-    public void setサーバファイルパス() {
-        RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        div.getTxtTorikomiDataPath().setValue(imagePath);
-    }
-
-    /**
-     * コンフィグで指定されたフォルダに存在するファイルを共有ファイルにアップロードする。<br />
-     * アップロードされた共有ファイルのエントリ情報は hdnSharedFileEntryInfo に文字列としてセットされる。
-     *
-     */
-    public void upload() {
-        SharedFileDescriptor sfd = new SharedFileDescriptor(
-                GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み));
-        sfd = SharedFile.defineSharedFile(sfd);
-
-        CopyToSharedFileOpts opts
-                = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間));
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(
-                sfd, new FilesystemPath(div.getTxtTorikomiDataPath().getValue()), opts);
-        this.div.setHdnSharedFileEntryInfo(new RString(entry.toString()));
     }
 
     /**

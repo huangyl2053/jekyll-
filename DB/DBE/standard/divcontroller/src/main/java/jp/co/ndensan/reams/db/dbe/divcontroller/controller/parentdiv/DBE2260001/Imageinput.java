@@ -27,9 +27,16 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -42,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -58,6 +66,9 @@ public class Imageinput {
     private static final RString チェックNG = new RString("NG");
     private static final RString ファイル名 = new RString("OCRIKEN.CSV");
     private static final int CSV項目数 = 140;
+    private static final RString イメージ取込み = new RString("イメージ取込み");
+    private static final int DAY_COUNT_一週間 = 7;
+    private static final RString バッチ実行ボタン名 = new RString("btnBatchRegister");
 
     /**
      * 画面の初期化します。
@@ -66,7 +77,38 @@ public class Imageinput {
      * @return ResponseData<ImageinputDiv>
      */
     public ResponseData<ImageinputDiv> onLoad(ImageinputDiv div) {
-        getHandler(div).setサーバファイルパス();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(バッチ実行ボタン名, true);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「アップロードする」ボタンのイベント処理です。<br>
+     * 指定されたファイルをサーバーへアップロードします。
+     *
+     * @param div イメージ取込み画面情報
+     * @param files 選択されたファイル
+     * @return 処理後の画面情報
+     */
+    public ResponseData<ImageinputDiv> onClick_btnUpload(ImageinputDiv div, FileData[] files) {
+        SharedFileDescriptor sfd = new SharedFileDescriptor(
+                GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts
+                = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間)).isCompressedArchive(false);
+        RString SharedFileEntryDescriptorString = RString.EMPTY;
+        for (FileData file : files) {
+            if (SharedFileEntryDescriptorString.isEmpty()) {
+                SharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(file.getFilePath()), opts).toString());
+            } else {
+                ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
+                        GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み),
+                        SharedFileEntryDescriptor.fromString(SharedFileEntryDescriptorString.toString()).getSharedFileId());
+                SharedFile.appendNewFile(ro_sfd, new FilesystemPath(file.getFilePath()), "");
+            }
+        }
+
+        div.setHdnSharedFileEntryInfo(SharedFileEntryDescriptorString);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(バッチ実行ボタン名, false);
         return ResponseData.of(div).respond();
     }
 
@@ -77,7 +119,6 @@ public class Imageinput {
      * @return 処理後の画面情報
      */
     public ResponseData<ImageinputDiv> onBeforeOpenDialog_btnBatchRegister(ImageinputDiv div) {
-        getHandler(div).upload();
         return ResponseData.of(div).respond();
     }
 
