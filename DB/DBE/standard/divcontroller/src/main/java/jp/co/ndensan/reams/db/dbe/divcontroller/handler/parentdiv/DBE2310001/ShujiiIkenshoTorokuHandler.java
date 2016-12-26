@@ -114,7 +114,7 @@ public class ShujiiIkenshoTorokuHandler {
     public void setChosaTishoJohoDisable(boolean takaFlag) {
         div.getChkTakaJushinSelect().setDisabled(takaFlag);
         div.getChkSonota().setDisabled(takaFlag);
-        div.getTxtSonotaNyuryoku().setDisabled(takaFlag);
+        div.getTxtSonotaNyuryoku().setDisabled(true);
         List<RString> selKeysList = new ArrayList<>();
         div.getChkTakaJushinSelect().setSelectedItemsByKey(selKeysList);
         div.getChkSonota().setSelectedItemsByKey(selKeysList);
@@ -128,7 +128,7 @@ public class ShujiiIkenshoTorokuHandler {
      */
     public void setSonotaDisable(boolean sonotaFlag) {
         div.getTxtSonotaNyuryoku().setDisabled(sonotaFlag);
-        if(sonotaFlag){
+        if (sonotaFlag) {
             div.getTxtSonotaNyuryoku().clearValue();
         }
     }
