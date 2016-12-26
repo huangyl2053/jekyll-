@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class IkenshoShujiiIchiranHandler {
 
+    private final RString 全市町村 = new RString("全市町村");
     private final IkenshoShujiiIchiranDiv div;
 
     /**
@@ -75,10 +76,12 @@ public class IkenshoShujiiIchiranHandler {
      * @return 医療機関・主治医一覧表作成_バッチフロークラスパラメータ
      */
     public DBE591001_IryokikanShujiiParameter onClick_btnReportPublish() {
+        RString 市町村コード = div.getCcdHokensha().getSelectedItem().get市町村コード().value();
+        RString 市町村名称 = div.getCcdHokensha().getSelectedItem().get市町村名称();
 
         DBE591001_IryokikanShujiiParameter batchParameter = new DBE591001_IryokikanShujiiParameter();
-        batchParameter.setShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
-        batchParameter.setShichosonName(div.getCcdHokensha().getSelectedItem().get市町村名称());
+        batchParameter.setShichosonCode(RString.isNullOrEmpty(市町村コード) ? RString.EMPTY : 市町村コード);
+        batchParameter.setShichosonName(RString.isNullOrEmpty(市町村名称) ? 全市町村 : 市町村名称);
         if (RString.isNullOrEmpty(div.getTxtIryoKikanCodeFrom().getValue())) {
             batchParameter.setIryoKikanCodeFrom(new RString("0000000000"));
         } else {

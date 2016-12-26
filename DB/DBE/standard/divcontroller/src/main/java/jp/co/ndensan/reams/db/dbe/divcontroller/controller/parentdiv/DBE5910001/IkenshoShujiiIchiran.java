@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE591001.DBE591001_Iryoki
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5910001.IkenshoShujiiIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
@@ -58,12 +59,12 @@ public class IkenshoShujiiIchiran {
         }
         if ((!div.getTxtIryoKikanCodeTo().getValue().isNull()) && (!div.getTxtIryoKikanCodeTo().getValue().isEmpty())
                 && (0 < div.getTxtIryoKikanCodeFrom().getValue().compareTo(div.getTxtIryoKikanCodeTo().getValue()))) {
-            return ResponseData.of(div).addMessage(UrErrorMessages.大小関係が不正.getMessage().replace("医療機関コード")).respond();
+            throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("医療機関コード"));
         }
         if ((!div.getTxtShujiiCodeTo().getValue().isNull()) && (!div.getTxtShujiiCodeTo().getValue().isEmpty())
                 && (0 < div.getTxtShujiiCodeFrom().getValue()
                 .compareTo(div.getTxtShujiiCodeTo().getValue()))) {
-            return ResponseData.of(div).addMessage(UrErrorMessages.大小関係が不正.getMessage().replace("主治医コード")).respond();
+            throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("主治医コード"));
         }
         return ResponseData.of(div).respond();
     }
