@@ -44,7 +44,7 @@ var DBE;
             };
 
             Controls.prototype.imgGenbon = function () {
-                return new UZA.StaticImage(this.convFiledName("imgGenbon"));
+                return new UZA.DynamicImage(this.convFiledName("imgGenbon"));
             };
 
             Controls.prototype.lblMask = function () {
@@ -52,7 +52,7 @@ var DBE;
             };
 
             Controls.prototype.imgMask = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMask"));
+                return new UZA.DynamicImage(this.convFiledName("imgMask"));
             };
 
             Controls.prototype.btnBefore = function () {

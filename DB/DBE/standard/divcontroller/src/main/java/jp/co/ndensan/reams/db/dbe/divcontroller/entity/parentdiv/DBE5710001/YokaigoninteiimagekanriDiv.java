@@ -227,23 +227,23 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnIkensho() {
-        return this.getImagePanel().getBtnIkensho();
+    public ButtonDialog getBtnIkenshoTeikei() {
+        return this.getImagePanel().getBtnIkenshoTeikei();
     }
 
     @JsonIgnore
-    public void  setBtnIkensho(ButtonDialog btnIkensho) {
-        this.getImagePanel().setBtnIkensho(btnIkensho);
+    public void  setBtnIkenshoTeikei(ButtonDialog btnIkenshoTeikei) {
+        this.getImagePanel().setBtnIkenshoTeikei(btnIkenshoTeikei);
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnIkenshoOCR() {
-        return this.getImagePanel().getBtnIkenshoOCR();
+    public ButtonDialog getBtnIkenshoTeikeigai() {
+        return this.getImagePanel().getBtnIkenshoTeikeigai();
     }
 
     @JsonIgnore
-    public void  setBtnIkenshoOCR(ButtonDialog btnIkenshoOCR) {
-        this.getImagePanel().setBtnIkenshoOCR(btnIkenshoOCR);
+    public void  setBtnIkenshoTeikeigai(ButtonDialog btnIkenshoTeikeigai) {
+        this.getImagePanel().setBtnIkenshoTeikeigai(btnIkenshoTeikeigai);
     }
 
     @JsonIgnore

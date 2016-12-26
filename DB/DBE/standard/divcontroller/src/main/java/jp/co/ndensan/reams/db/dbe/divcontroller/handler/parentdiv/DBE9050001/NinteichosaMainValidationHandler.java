@@ -99,13 +99,29 @@ public class NinteichosaMainValidationHandler {
                     && RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaName())) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.入力値が不正_追加メッセージあり, "証記載保険者番号"),
-                        div.getChosaitakusakiJohoInput()));
+                        div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNotext()));
             }
             RString sonotaKikanCode = div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue();
             if (0 < count) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
                         UrErrorMessages.既に登録済, String.valueOf(sonotaKikanCode)),
                         div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode()));
+            }
+            //一覧にすでにあれはメッセージ
+            RString 保険者コード = div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo();
+            RString その他コード = div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue();
+
+            List<dgSonotaKikanIchiran_Row> dataList_ForValidation = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
+            for (dgSonotaKikanIchiran_Row row : dataList_ForValidation) {
+                if (row.getJotai().equals(状態_追加)
+                        && row.getHokenshaCode().equals(保険者コード)
+                        && row.getSonotaKikanCode().equals(その他コード)) {
+                    validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                            UrErrorMessages.既に存在, "保険者とその他機関コード"),
+                            div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNotext(),
+                            div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode()
+                    ));
+                }
             }
         }
         return validPairs;

@@ -94,6 +94,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (!最大表示件数.isNullOrEmpty()) {
             div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
+            div.getDgHakkotaishosha().getGridSetting().setLimitRowCount(div.getTxtMaxDisp().getValue().intValue());
         }
         div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtInsatsuDate().setValue(RDate.getNowDate());
@@ -160,9 +161,14 @@ public class NinteiEnkiTsuchishoHakkoHandler {
     public void 通知書モード表示(List<NinteiEnkiTsuchishoHakkoBusiness> 発行対象者一覧情報) {
         List<dgHakkotaishosha_Row> dataSourceList = new ArrayList<>();
         List<RString> 被保番号List = new ArrayList<>();
+        int maxSearchRowCnt = 0 ;
         for (NinteiEnkiTsuchishoHakkoBusiness 発行対象者情報 : 発行対象者一覧情報) {
+            if (maxSearchRowCnt >= div.getTxtMaxDisp().getValue().intValue()){
+                break;
+            }
             dataSourceList.add(getDataSource(発行対象者情報));
             被保番号List.add(発行対象者情報.get被保番号());
+            maxSearchRowCnt++;
         }
         if (div.getTxtMaxDisp().getValue() != null) {
             div.getDgHakkotaishosha().getGridSetting().setLimitRowCount(div.getTxtMaxDisp().getValue().intValue());

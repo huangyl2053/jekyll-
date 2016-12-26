@@ -248,6 +248,12 @@ public class KoseiShujiiIryoKikanMasterHandler {
         row.setDaihyoshakana(div.getShujiiJohoInput().getTxtdaihyoshakananame().getValue());
         RString jokyoFlag = div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey();
         row.setJokyoFlag(CODE_有効.equals(jokyoFlag) ? 表示値_有効 : 表示値_無効);
+        row.setKinyuKikanCode(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
+        row.setKinyuKikanShitenCode(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
+        row.setYokinShubetsu(div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        row.setKozaNo(div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue());
+        row.setKozaMeigininKana(div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue());
+        row.setKozaMeiginin(div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue());
     }
 
     private RString editYubinNoToIchiran(RString yubinNo) {
@@ -291,7 +297,14 @@ public class KoseiShujiiIryoKikanMasterHandler {
                 .set代表者名(new AtenaMeisho(div.getShujiiJohoInput().getTxtdaihyoshaname().getValue()))
                 .set代表者名カナ(div.getShujiiJohoInput().getTxtdaihyoshakananame().getValue())
                 .setFax番号(div.getShujiiJohoInput().getTxtFaxNo().getDomain())
-                .set状況フラグ(CODE_有効.equals(div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey())).build();
+                .set状況フラグ(CODE_有効.equals(div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey()))
+                .set金融機関コード(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode())
+                .set支店コード(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode())
+                .set預金種別(div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey())
+                .set口座番号(div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getText())
+                .set口座名義人カナ(new AtenaKanaMeisho(div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getText()))
+                .set口座名義人(new AtenaMeisho(div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getText()))
+                .build();
     }
 
     /**
@@ -389,6 +402,12 @@ public class KoseiShujiiIryoKikanMasterHandler {
         inputDiv.append(shujiiJohoInputDiv.getTxtdaihyoshaname().getValue());
         inputDiv.append(shujiiJohoInputDiv.getTxtdaihyoshakananame().getValue());
         inputDiv.append(shujiiJohoInputDiv.getRadJokyoFlag().getSelectedKey());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getTxtGinkoKozaNo().getValue());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getTxtKozaMeiginin().getValue());
+        inputDiv.append(shujiiJohoInputDiv.getKozaJoho().getTxtKanjiMeiginin().getValue());
         return inputDiv.toRString();
     }
 

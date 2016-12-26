@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
  *
@@ -102,5 +103,14 @@ public class HokenshaJohoHandler {
      */
     public void setHokenjaName(RString 保険者名) {
         div.getTxtHokenshaMeisho().setValue(保険者名);
+    }
+
+    /**
+     * 保険者番号のコントロールを取得する。
+     *
+     * @return 保険者番号
+     */
+    public TextBoxCode getHokenjaNotext() {
+        return div.getTxtHokenshaNo();
     }
 }

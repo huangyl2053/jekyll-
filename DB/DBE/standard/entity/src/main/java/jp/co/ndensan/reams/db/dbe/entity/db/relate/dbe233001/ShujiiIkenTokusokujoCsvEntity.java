@@ -63,9 +63,9 @@ public class ShujiiIkenTokusokujoCsvEntity {
     /**
      * コンストラクタです。
      *
+     * @param no No
      * @param cityCode 市町村コード
      * @param cityName 市町村名称
-     * @param no No
      * @param hokenshaName 保険者
      * @param hihokenshaNo 被保険者番号
      * @param hihokenshaKanaName 被保険者氏名カナ
@@ -78,9 +78,10 @@ public class ShujiiIkenTokusokujoCsvEntity {
      * @param kikanTel 事業者電話番号
      * @param shujiiName 主治医氏名
      */
-    public ShujiiIkenTokusokujoCsvEntity(RString cityCode,
-            RString cityName,
+    public ShujiiIkenTokusokujoCsvEntity(
             RString no,
+            RString cityCode,
+            RString cityName,
             RString hokenshaName,
             RString hihokenshaNo,
             RString hihokenshaKanaName,

@@ -282,7 +282,7 @@ public class IkenshoSakuseiIraiHandler {
             } else if (SELECTED_KEY1.equals(key)) {
                 提出期限 = FlexibleDate.EMPTY;
             } else if (SELECTED_KEY2.equals(key) && div.getTxtKigenymd().getValue() != null) {
-                提出期限 = new FlexibleDate(div.getTxtKigenymd().getValue().plusDay(期限日数).toDateString());
+                提出期限 = new FlexibleDate(div.getTxtKigenymd().getValue().toDateString());
             }
         } else if (認定申請年月日 != null) {
             提出期限 = 認定申請年月日.plusDay(期限日数);

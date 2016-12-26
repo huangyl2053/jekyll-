@@ -51,9 +51,8 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     private JimuSonotashiryoBusiness business;
     private int shinsakaiOrder;
     private int 存在ファイルindex;
+    private RString path;
     private static final int INDEX_5 = 5;
-    private static final boolean あり = true;
-    private static final boolean 無し = false;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
     private static final RString SEPARATOR = new RString("/");
 
@@ -90,7 +89,7 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
         }
         business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-        RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
@@ -131,21 +130,15 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
         if (sharedFileId == null) {
             return ファイルPathList;
         }
-        boolean is存在;
         int index = 0;
         for (int i = 0; i < ファイル名List.size(); i++) {
             RString ファイル名 = ファイル名List.get(i);
-            ReadOnlySharedFileEntryDescriptor descriptor
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), sharedFileId);
-            try {
-                SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA3.getImageFolderPath()));
-                is存在 = あり;
-            } catch (Exception e) {
-                is存在 = 無し;
-            }
-            if (is存在 && index < INDEX_5) {
-                ファイルPathList.add(ファイル名);
-                index = i + 1;
+            if (!RString.isNullOrEmpty(path) && index < INDEX_5) {
+                RString fileFullPath = getFilePath(path, ファイル名);
+                if (!RString.isNullOrEmpty(fileFullPath)) {
+                    ファイルPathList.add(fileFullPath);
+                    index = i + 1;
+                }
             }
             if (INDEX_5 <= index) {
                 return ファイルPathList;
@@ -237,8 +230,9 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }

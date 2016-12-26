@@ -227,7 +227,7 @@ public class NinteichosaItakusakiMainHandler {
         if (telNo != null) {
             row.setTelNo(telNo.value());
         }
-        if (!RString.isNullOrEmpty(chosaItakuKubun.trim())) {
+        if (chosaItakuKubun != null && !RString.isNullOrEmpty(chosaItakuKubun.trim())) {
             row.setChosaItakuKubun(nullToEmpty(ChosaItakuKubunCode.toValue(chosaItakuKubun).get名称()));
         }
         TextBoxNum num = new TextBoxNum();
@@ -236,7 +236,7 @@ public class NinteichosaItakusakiMainHandler {
         if (chiku != null) {
             row.setChiku(chiku.value());
         }
-        if (!RString.isNullOrEmpty(kikanKubun.trim())) {
+        if (kikanKubun != null && !RString.isNullOrEmpty(kikanKubun.trim())) {
             row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
         }
         if (jokyoFlag) {

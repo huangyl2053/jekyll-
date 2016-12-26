@@ -543,6 +543,7 @@
         ,DbT7211."shinsakaiKekkaJohoChushutsuYMD" as "DbT7211_shinsakaiKekkaJohoChushutsuYMD"
         <include refid="QueryParts_NinteiChousaList" />
         ORDER BY
+        DbT5501."shinsakaiKaisaiNo",
         DbT5101."ninteiShinseiYMD"
         <if test="useLimitCount">
             LIMIT #{limitCount}

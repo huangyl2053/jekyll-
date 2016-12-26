@@ -29,7 +29,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
     private static final RString 医療機関住所 = new RString("医療機関住所");
     private static final RString 主治医氏名 = new RString("主治医氏名");
     private static final RString 医療機関TEL = new RString("医療機関TEL");
-    private static final RString 督促状発行対象者一覧 = new RString("主治医意見書督促対象者一覧");
+    private static final RString 督促状発行対象者一覧 = new RString("主治医意見書督促対象者一覧表");
 
     /**
      * インスタンスを生成します。
