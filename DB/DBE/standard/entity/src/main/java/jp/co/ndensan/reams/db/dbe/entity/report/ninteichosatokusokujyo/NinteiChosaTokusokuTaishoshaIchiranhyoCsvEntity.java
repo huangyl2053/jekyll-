@@ -73,9 +73,9 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     /**
      * コンストラクタです。
      *
+     * @param no No
      * @param cityCode 市町村コード
      * @param cityName 市町村名称
-     * @param no No
      * @param hokenshaName 保険者
      * @param hihokenshaNo 被保険者番号
      * @param hihokenshaKanaName 被保険者氏名カナ
@@ -84,13 +84,14 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
      * @param tokusokujoHakkoYMD 督促状発行日
      * @param chosaItakusakiCode 調査委託先コード
      * @param kikanName 事業者名称
-     * @param chosainShime 調査員氏名
      * @param kikanJusho 事業者住所
      * @param kikanTel 事業者電話番号
+     * @param chosainShime 調査員氏名
      */
-    public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(RString cityCode,
-            RString cityName,
+    public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
             RString no,
+            RString cityCode,
+            RString cityName,
             RString hokenshaName,
             RString hihokenshaNo,
             RString hihokenshaKanaName,
@@ -99,9 +100,9 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
             RString tokusokujoHakkoYMD,
             RString chosaItakusakiCode,
             RString kikanName,
-            RString chosainShime,
             RString kikanJusho,
-            RString kikanTel) {
+            RString kikanTel,
+            RString chosainShime) {
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.no = no;
