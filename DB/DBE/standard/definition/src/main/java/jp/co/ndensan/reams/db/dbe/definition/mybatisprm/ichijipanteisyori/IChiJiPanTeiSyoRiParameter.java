@@ -143,4 +143,26 @@ public final class IChiJiPanTeiSyoRiParameter {
                 申請書管理番号List,
                 完了可能区分);
     }
+
+    /**
+     * 基本運用の完了・一次判定処理内で、実際に取得可能な件数を取得するためのパラメータを返します。
+     *
+     * @param parameter NiTeiCyoSaiChiRanParameter
+     * @return 元々のparameterを元に、LIMIT句を使用しないように修正したparameter
+     */
+    public static IChiJiPanTeiSyoRiParameter createParameterOf一次判定対象件数(IChiJiPanTeiSyoRiParameter parameter) {
+        return new IChiJiPanTeiSyoRiParameter(
+                parameter.通常,
+                parameter.延期,
+                parameter.イメージ区分,
+                parameter.認定申請年月日開始,
+                parameter.認定申請年月日終了,
+                parameter.最大表示件数,
+                parameter.認定申請年月日開始From,
+                parameter.認定申請年月日開始To,
+                false,
+                parameter.完了処理一次判定_遷移,
+                parameter.申請書管理番号List,
+                parameter.完了可能区分);
+    }
 }

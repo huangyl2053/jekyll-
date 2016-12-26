@@ -46,7 +46,7 @@ public class IkenHoshuIchiranBodyEditor implements IIkenHoshuIchiranEditor {
         source.listIkenshosakuseiryo_7 = item.get意見();
         source.listIkenshosakuseiryo_8 = item.get保険者番号();
         source.listIkenshosakuseiryo_9 = item.get被保険者番号();
-        source.listIkenshosakuseiryo_10 = item.get申請者();
+        source.listIkenshosakuseiryo_10 = item.get被保険者氏名();
         source.listIkenshosakuseiryo_11 = item.get在新();
         source.listIkenshosakuseiryo_12 = item.get在継();
         source.listIkenshosakuseiryo_13 = item.get施新();

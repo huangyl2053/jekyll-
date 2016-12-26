@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshohoshushokai.IkenH
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.GokeiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenHoshuIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenshoHoshuShokaiRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -48,9 +49,9 @@ public final class IkenHoshuIchiranChange {
                 entity.get医療機関名称(),
                 entity.get主治医コード(),
                 entity.get主治医氏名(),
-                entity.get主治医意見書作成依頼年月日().wareki().toDateString(),
-                entity.get主治医意見書記入年月日().wareki().toDateString(),
-                entity.get主治医意見書受領年月日().wareki().toDateString(),
+                getWarekiDateString(entity.get主治医意見書作成依頼年月日()),
+                getWarekiDateString(entity.get主治医意見書記入年月日()),
+                getWarekiDateString(entity.get主治医意見書受領年月日()),
                 意見,
                 entity.get証記載保険者番号(),
                 entity.get被保険者番号(),
@@ -63,10 +64,10 @@ public final class IkenHoshuIchiranChange {
                 DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書別途診療費()), 0).concat("円"),
                 DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書報酬()), 0).concat("円"));
         RStringBuilder 抽出期間 = new RStringBuilder();
-        抽出期間.append(parameter.get作成依頼日期間開始().wareki().toDateString());
+        抽出期間.append(getWarekiDateString(parameter.get作成依頼日期間開始()));
         抽出期間.append("～");
-        抽出期間.append(parameter.get作成依頼日期間終了().wareki().toDateString());
-        data.set抽出期間(抽出期間.toRString());
+        抽出期間.append(getWarekiDateString(parameter.get作成依頼日期間終了()));
+        data.set抽出期間(抽出期間.toRString().equals(new RString("～")) ? RString.EMPTY : 抽出期間.toRString());
         return data;
     }
 
@@ -98,5 +99,14 @@ public final class IkenHoshuIchiranChange {
             data.set番号(番号);
         }
         return data;
+    }
+    
+    private static RString getWarekiDateString(FlexibleDate date) {
+        if ((date == null)
+                || (date.isEmpty())) {
+            return RString.EMPTY;
+        }
+        
+        return date.wareki().toDateString();
     }
 }

@@ -63,7 +63,7 @@ public class KanryoshoriIchijihanteiHandler {
     private final KanryoshoriIchijihanteiDiv div;
 
     private static final RString COMMONBUTTON_KANRYO = new RString("btnCompleteIchijiHantei");
-    private static final RString COMMONBUTTON_UPDATE_ICHIJIHANTEI = new RString("btnUpdateHanteiKekka");
+    private static final RString COMMONBUTTON_UPDATE = new RString("btnUpdateHanteiKekka");
     private static final RString COMMONBUTTON_ICHIJI_HANTEI = new RString("btnIchijiHantei");
 
     private static final RString 完了処理_一次判定 = new RString("DBEMN11006");
@@ -103,7 +103,7 @@ public class KanryoshoriIchijihanteiHandler {
     }
 
     /**
-     *
+     * 対象者一覧に対して、DBから取得出来る一次判定対象者情報を設定します。
      */
     public void set対象者一覧() {
         List<IChiJiPanTeiSyoRiBusiness> list = get一次判定結果情報();
@@ -155,21 +155,21 @@ public class KanryoshoriIchijihanteiHandler {
 
         if (状態区分_未処理.equals(状態区分)) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_KANRYO, true);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE_ICHIJIHANTEI, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE, false);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_ICHIJI_HANTEI, false);
         } else if (状態区分_完了可能.equals(状態区分)) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_KANRYO, false);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE_ICHIJIHANTEI, true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE, true);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_ICHIJI_HANTEI, true);
         } else if (状態区分_すべて.equals(状態区分)) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_KANRYO, false);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE_ICHIJIHANTEI, false);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_UPDATE, false);
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(COMMONBUTTON_ICHIJI_HANTEI, false);
         }
     }
 
     /**
-     * 一次判定結果情報を取得します。
+     * 一次判定結果情報を取得します。また、検索上限以上のデータが条件に合致した場合に、グリッド上に実際に取得できたはずの件数を設定します。
      *
      * @return 一次判定結果情報（表示用）のリスト
      */
@@ -205,7 +205,7 @@ public class KanryoshoriIchijihanteiHandler {
 
         RString 完了可能区分 = div.getIchijiHanteiShoriTaishoshaIchiran().getRadStatus().getSelectedKey();
 
-        RString 取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+        RString 取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         Decimal 取得件数num = new Decimal(取得件数.toString());
         Decimal 検索件数 = div.getIchijiHanteiShoriTaishoshaIchiran().getTxtMaxCount().getValue();
@@ -241,9 +241,22 @@ public class KanryoshoriIchijihanteiHandler {
             rowList.add(row);
         }
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().setDataSource(rowList);
+
+        IChiJiPanTeiSyoRiParameter parameter = createMybatisParameter();
+        IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
+        Decimal 検索件数 = div.getIchijiHanteiShoriTaishoshaIchiran().getTxtMaxCount().getValue();
+        Decimal dataNum = new Decimal(manager.get対象者件数(IChiJiPanTeiSyoRiParameter.createParameterOf一次判定対象件数(parameter)));
+        if (検索件数.compareTo(dataNum) < 0) {
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getGridSetting().setLimitRowCount(検索件数.intValue());
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getGridSetting().setSelectedRowCount(dataNum.intValue());
+        } else {
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getGridSetting().setLimitRowCount(0);
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getGridSetting().setSelectedRowCount(0);
+        }
     }
 
     private dgHanteiTaishosha_Row setRowData(dgHanteiTaishosha_Row row, IChiJiPanTeiSyoRiBusiness business) {
+        row.setRowState(RowState.Unchanged);
         row.setColumnState(RString.EMPTY);
         row.setHokensha(business.get市町村名称());
         row.setHihokenNo(business.get被保険者番号());
@@ -257,12 +270,20 @@ public class KanryoshoriIchijihanteiHandler {
             row.setIchijiHanteiKekkaCode(business.get要介護認定一次判定結果コード().getColumnValue());
             row.setIchijiHanteiKekka(get一次判定結果名称(new Code(business.
                     get厚労省IF識別コード()), business.get要介護認定一次判定結果コード()));
+        } else {
+            row.setIchijiHanteiKekkaCode(RString.EMPTY);
+            row.setIchijiHanteiKekka(RString.EMPTY);
         }
+
         if (business.get要介護認定一次判定結果コード_認知症加算() != null) {
             row.setIchijiHanteiKekkaNinchishoKasanCode(business.get要介護認定一次判定結果コード_認知症加算().getColumnValue());
             row.setIchijiHanteiKekkaNinchishoKasan(get一次判定結果名称(new Code(business.
                     get厚労省IF識別コード()), business.get要介護認定一次判定結果コード_認知症加算()));
+        } else {
+            row.setIchijiHanteiKekkaNinchishoKasanCode(RString.EMPTY);
+            row.setIchijiHanteiKekkaNinchishoKasan(RString.EMPTY);
         }
+
         row.setKeikokuCode(business.get要介護認定一次判定警告コード());
         row.getChosaJissibi().setValue(business.get認定調査実施年月日());
         row.getIkenshoJuryobi().setValue(business.get主治医意見書受領年月日());
@@ -281,15 +302,25 @@ public class KanryoshoriIchijihanteiHandler {
         row.setChukanHyokaKomoku3gun(new RString(String.valueOf(business.get中間評価項目得点第3群())));
         row.setChukanHyokaKomoku4gun(new RString(String.valueOf(business.get中間評価項目得点第4群())));
         row.setChukanHyokaKomoku5gun(new RString(String.valueOf(business.get中間評価項目得点第5群())));
+
         if (business.get要介護認定状態の安定性コード() != null && !business.get要介護認定状態の安定性コード().isEmpty()) {
             row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
+        } else {
+            row.setJotaiAnteiseiCode(RString.EMPTY);
         }
+
         if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
             row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性().roundUpTo(2))));
+        } else {
+            row.setNinchishoJiritsudoIIijoNoGaizensei(RString.EMPTY);
         }
+
         if (business.get推定される給付区分コード() != null && !business.get推定される給付区分コード().isEmpty()) {
             row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get推定される給付区分コード().value()).get名称());
+        } else {
+            row.setSuiteiKyufuKubunCode(RString.EMPTY);
         }
+
         row.setShinseishoKanriNo(business.get申請書管理番号().value());
         row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
 
@@ -363,7 +394,6 @@ public class KanryoshoriIchijihanteiHandler {
             div.getIchijiHanteiShoriTaishoshaIchiran().getTxtSum().setDisplayNone(false);
             div.getIchijiHanteiShoriTaishoshaIchiran().getTxtSum().setValue(new Decimal(mishoriValue + kanryoKanoValue));
         }
-
     }
 
     /**
@@ -389,13 +419,18 @@ public class KanryoshoriIchijihanteiHandler {
         IChiJiPanTeiSyoRiBusiness business = businessList.get(0);
         setRowData(row, business);
 
-        List<IchijiHanteiKekkaJoho> kekkaJohoList = manager.get要介護認定一次判定結果情報(parameter).records();
-        IchijiHanteiKekkaJoho kekkaJoho = kekkaJohoList.get(0);
-
         Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models
                 = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
-        models.add(kekkaJoho);
-        ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, models);
+        List<IchijiHanteiKekkaJoho> kekkaJohoList = manager.get要介護認定一次判定結果情報(parameter).records();
+
+        if (kekkaJohoList == null || kekkaJohoList.isEmpty() || !(kekkaJohoList.size() == 1)) {
+            IchijiHanteiKekkaJohoIdentifier id = new IchijiHanteiKekkaJohoIdentifier(shinseishoKanriNo);
+            models.deleteOrRemove(id);
+        } else {
+            IchijiHanteiKekkaJoho kekkaJoho = kekkaJohoList.get(0);
+            models.add(kekkaJoho);
+            ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, models);
+        }
     }
 
     /**
@@ -429,13 +464,12 @@ public class KanryoshoriIchijihanteiHandler {
      */
     public void setClickedIchijiHanteiData(ShinseishoKanriNo shinseishoKanriNo) {
 
-        Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models;
-        IchijiHanteiKekkaJohoIdentifier identifier;
+        Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models
+                = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
         RString hanteiKekkaStr = RString.EMPTY;
-        models = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
 
-        if (models != null && !models.aliveValues().isEmpty()) {
-            identifier = new IchijiHanteiKekkaJohoIdentifier(shinseishoKanriNo);
+        if (models != null && !models.values().isEmpty()) {
+            IchijiHanteiKekkaJohoIdentifier identifier = new IchijiHanteiKekkaJohoIdentifier(shinseishoKanriNo);
             IchijiHanteiKekkaJoho hanteiKekka = models.get(identifier);
             hanteiKekkaStr = hanteiKekka != null ? DataPassingConverter.serialize(hanteiKekka) : hanteiKekkaStr;
         }
@@ -523,8 +557,6 @@ public class KanryoshoriIchijihanteiHandler {
         if (!isNullOrEmpty(ichijiHantei.get認知機能及び状態安定性から推定される給付区分コード())) {
             row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(ichijiHantei.get認知機能及び状態安定性から推定される給付区分コード().value()).get名称());
         }
-
-        //div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getDataSource().set(index, row);
     }
 
     private boolean isNullOrEmpty(Code code) {
