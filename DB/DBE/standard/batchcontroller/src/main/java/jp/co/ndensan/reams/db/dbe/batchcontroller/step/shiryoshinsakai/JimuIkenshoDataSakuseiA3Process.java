@@ -110,8 +110,9 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
