@@ -599,8 +599,10 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
             this.radGenpoMask.setSelectedKey(SELECTマスク);
             this.getGenpoTabContainer().setDisplayNone(true);
             this.getMaskTabContainer().setDisplayNone(false);
+            this.getMaskTabContainer().setSelectedItem(this.getMaskTabPanel1());
         } else {
             this.radGenpoMask.setSelectedKey(SELECT原本);
+            this.getGenpoTabContainer().setSelectedItem(this.getGenpoTabPanel1());
         }
         this.maskTabContainer.setDisplayNone(true);
 

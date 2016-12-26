@@ -24,6 +24,7 @@ public class SeikatsuServiceIken {
 
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
+    private static final RString KEY2 = new RString("key2");
 
     /**
      * コンストラクタです。

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.iraisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,6 +32,8 @@ public final class IraishoIkkatsuHakkoParameter {
     private final Decimal 最大表示件数;
     private final RString 通常 = ShoriJotaiKubun.通常.getコード();
     private final RString 延期 = ShoriJotaiKubun.延期.getコード();
+    private final RString 転入 = NinteiShinseiShinseijiKubunCode.転入申請.getコード();
+    private final RString 喪失 = NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード();
     private final boolean is依頼日From;
     private final boolean is依頼日To;
     private final boolean is認定調査依頼書未印刷;

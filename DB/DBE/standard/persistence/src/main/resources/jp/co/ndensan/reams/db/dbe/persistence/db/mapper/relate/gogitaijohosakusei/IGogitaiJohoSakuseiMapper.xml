@@ -204,7 +204,7 @@
         </where>
         ORDER BY
             DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo",
-            DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD",            
+            DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD",
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" DESC,
             DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" ASC
     </sql>
@@ -254,9 +254,6 @@
     </sql>
 
     <resultMap id="resultMap_TempGogitaiJohoSakuseiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.TempGogitaiJohoSakuseiEntity" autoMapping="true">
-        <id column="TempGogitaiJohoSakusei_合議体NO"/>
-        <id column="TempGogitaiJohoSakusei_有効開始日"/>
-        <id column="TempGogitaiJohoSakusei_有効終了日"/>
         <association property="合議体情報作成Temp"
                      resultMap="resultMap_TempGogitaiJohoSakusei"/>
     </resultMap>

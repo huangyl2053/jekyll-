@@ -37,12 +37,14 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     private final Map<Integer, RString> 通知文;
     private final AtenaKikan atenaKikan;
     private final RString customerBarCode;
-
+    private final FlexibleDate 調査依頼日;
+    private final int pageCount;
     private static final int 一桁 = 1;
     private static final RString 星アイコン = new RString("＊");
     private static final RString 明 = new RString("明");
     private static final RString 大 = new RString("大");
     private static final RString 昭 = new RString("昭");
+    private static final int 宛名連番桁数 = 8;
 
     /**
      * インスタンスを生成します。
@@ -53,17 +55,22 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
      * @param 文書番号 文書番号
      * @param 通知文 通知文
      * @param customerBarCode customerBarCode
+     * @param 調査依頼日 調査依頼日
+     * @param pageCount ページ数
      */
     protected NinteiChosaTokusokujoBodyEditor(DbT5101NinteiShinseiJohoEntity entity, NinshoshaSource ninshoshaSource,
             AtenaKikan atenaKikan,
             RString 文書番号,
-            Map<Integer, RString> 通知文, RString customerBarCode) {
+            Map<Integer, RString> 通知文, RString customerBarCode,
+            FlexibleDate 調査依頼日, int pageCount) {
         this.entity = entity;
         this.ninshoshaSource = ninshoshaSource;
         this.atenaKikan = atenaKikan;
         this.文書番号 = 文書番号;
         this.通知文 = 通知文;
         this.customerBarCode = customerBarCode;
+        this.調査依頼日 = 調査依頼日;
+        this.pageCount = pageCount;
     }
 
     @Override
@@ -82,6 +89,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         edit宛名氏名(source);
         edti宛名名称付与(source);
         edit宛名その他(source);
+        edit宛名連番(source);
         editタイトル(source);
         edit通知文定型文(source);
         edti被保険者番号(source);
@@ -89,6 +97,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         edit申請区分(source);
         edit被保険者氏名カナ(source);
         edit被保険者氏名(source);
+        edit調査依頼日(source);
         edit申請日(source);
         edit性別(source);
         edti誕生日(source);
@@ -160,14 +169,12 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         source.sonota = entity.getShoKisaiHokenshaNo();
     }
 
+    private void edit宛名連番(NinteiChosaTokusokujoReportSource source) {
+        source.atenaRenban = new RString(pageCount).padZeroToLeft(宛名連番桁数);
+    }
+
     private void editタイトル(NinteiChosaTokusokujoReportSource source) {
-        RString title;
-        try {
-            title = DbBusinessConfig.get(ConfigNameDBE.要介護認定調査督促状, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        } catch (Exception e) {
-            title = RString.EMPTY;
-        }
-        source.title = title;
+        source.title = 通知文.get(0);
     }
 
     private void edit通知文定型文(NinteiChosaTokusokujoReportSource source) {
@@ -213,11 +220,19 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         source.hihokenshaName = entity.getHihokenshaName() == null ? RString.EMPTY : entity.getHihokenshaName().getColumnValue();
     }
 
+    private void edit調査依頼日(NinteiChosaTokusokujoReportSource source) {
+        RString 調査依頼年月日 = 調査依頼日 == null ? RString.EMPTY
+                : 調査依頼日.wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.chosaIraiYMD = 調査依頼年月日;
+    }
+
     private void edit申請日(NinteiChosaTokusokujoReportSource source) {
         FlexibleDate 年月日 = entity.getNinteiShinseiYMD();
         RString 申請年月日 = 年月日 == null ? RString.EMPTY : 年月日.wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.shinseiYMD = 申請年月日;
     }
 
@@ -253,7 +268,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         source.birthGengoShowa = tempP_誕生日昭和;
         source.birthYMD = entity.getSeinengappiYMD() == null ? RString.EMPTY : entity.getSeinengappiYMD().
                 wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(2);
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(2);
     }
 
     private void edit住所郵便(NinteiChosaTokusokujoReportSource source) {

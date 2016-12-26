@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
@@ -31,9 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ListControl;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -45,6 +42,7 @@ public class IchijiHanteiKekkaJohoHandler {
 
     private final IchijiHanteiKekkaJohoDiv div;
     private static final RString VALUE_ISBLANKLINE = new RString("isBlankLine");
+    private static final double DOUBLE_10 = 10.0;
 
     private enum MiSumiKubun {
 
@@ -204,24 +202,24 @@ public class IchijiHanteiKekkaJohoHandler {
                     .get要介護認定一次判定結果コード_認知症加算().getColumnValue());
         }
 
-        div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()));
-        div.getTxtShokuji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_食事()));
-        div.getTxtHaisetsu().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_排泄()));
-        div.getTxtIdo().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_移動()));
-        div.getTxtSeiketsuHoji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_清潔保持()));
-        div.getTxtKansetsuCare().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_間接ケア()));
-        div.getTxtBpsdKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_BPSD関連()));
-        div.getTxtKinoKunren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_機能訓練()));
-        div.getTxtIryoKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_医療関連()));
-        div.getTxtNinchishoKasan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_認知症加算()));
+        div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()/DOUBLE_10));
+        div.getTxtShokuji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_食事()/DOUBLE_10));
+        div.getTxtHaisetsu().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_排泄()/DOUBLE_10));
+        div.getTxtIdo().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_移動()/DOUBLE_10));
+        div.getTxtSeiketsuHoji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_清潔保持()/DOUBLE_10));
+        div.getTxtKansetsuCare().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_間接ケア()/DOUBLE_10));
+        div.getTxtBpsdKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_BPSD関連()/DOUBLE_10));
+        div.getTxtKinoKunren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_機能訓練()/DOUBLE_10));
+        div.getTxtIryoKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_医療関連()/DOUBLE_10));
+        div.getTxtNinchishoKasan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_認知症加算()/DOUBLE_10));
 
-        div.getTxtDai1gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第1群()));
-        div.getTxtDai2gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第2群()));
-        div.getTxtDai3gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第3群()));
-        div.getTxtDai4gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第4群()));
-        div.getTxtDai5gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第5群()));
-        div.getTxtDai6gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第6群()));
-        div.getTxtDai7gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第7群()));
+        div.getTxtDai1gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第1群()/DOUBLE_10));
+        div.getTxtDai2gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第2群()/DOUBLE_10));
+        div.getTxtDai3gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第3群()/DOUBLE_10));
+        div.getTxtDai4gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第4群()/DOUBLE_10));
+        div.getTxtDai5gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第5群()/DOUBLE_10));
+        div.getTxtDai6gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第6群()/DOUBLE_10));
+        div.getTxtDai7gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第7群()/DOUBLE_10));
 
         MiSumiKubun ninteiChosaMisumiKubun = hasNot認定調査票(shinseishoKanriNo) ? MiSumiKubun.未 : MiSumiKubun.済;
         div.getDdlJiritsudoChosa().setSelectedKey(ninteiChosaMisumiKubun.getKey());

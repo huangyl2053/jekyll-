@@ -8,12 +8,52 @@ module DBZ {
 
         export class Events {
 
-            public static onBeforeOpenDialog_btnShochiNaiyo(): string {
-                return "onBeforeOpenDialog_btnShochiNaiyo";
+            public static onBeforeOpenDialog_btnTenteki(): string {
+                return "onBeforeOpenDialog_btnTenteki";
             }
 
-            public static onBeforeOpenDialog_btnTokiTaiou(): string {
-                return "onBeforeOpenDialog_btnTokiTaiou";
+            public static onBeforeOpenDialog_btnSeimyaku(): string {
+                return "onBeforeOpenDialog_btnSeimyaku";
+            }
+
+            public static onBeforeOpenDialog_btnTouseki(): string {
+                return "onBeforeOpenDialog_btnTouseki";
+            }
+
+            public static onBeforeOpenDialog_btnSutoma(): string {
+                return "onBeforeOpenDialog_btnSutoma";
+            }
+
+            public static onBeforeOpenDialog_btnSansou(): string {
+                return "onBeforeOpenDialog_btnSansou";
+            }
+
+            public static onBeforeOpenDialog_btnResupireta(): string {
+                return "onBeforeOpenDialog_btnResupireta";
+            }
+
+            public static onBeforeOpenDialog_btnKikan(): string {
+                return "onBeforeOpenDialog_btnKikan";
+            }
+
+            public static onBeforeOpenDialog_btnToutsu(): string {
+                return "onBeforeOpenDialog_btnToutsu";
+            }
+
+            public static onBeforeOpenDialog_btnKeikan(): string {
+                return "onBeforeOpenDialog_btnKeikan";
+            }
+
+            public static onBeforeOpenDialog_btnMonita(): string {
+                return "onBeforeOpenDialog_btnMonita";
+            }
+
+            public static onBeforeOpenDialog_btnJyokuso(): string {
+                return "onBeforeOpenDialog_btnJyokuso";
+            }
+
+            public static onBeforeOpenDialog_btnKateru(): string {
+                return "onBeforeOpenDialog_btnKateru";
             }
 
             public static onClick_btnBack(): string {
@@ -61,24 +101,104 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ShochiNaiyo"));
             }
 
-            public btnShochiNaiyo(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnShochiNaiyo"));
+            public btnTenteki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnTenteki"));
             }
 
-            public chkShochiNaiyo(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkShochiNaiyo"));
+            public chkTenteki(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkTenteki"));
+            }
+
+            public btnSeimyaku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSeimyaku"));
+            }
+
+            public chkSeimyaku(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkSeimyaku"));
+            }
+
+            public btnTouseki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnTouseki"));
+            }
+
+            public chkTouseki(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkTouseki"));
+            }
+
+            public btnSutoma(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSutoma"));
+            }
+
+            public chkSutoma(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkSutoma"));
+            }
+
+            public btnSansou(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSansou"));
+            }
+
+            public chkSansou(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkSansou"));
+            }
+
+            public btnResupireta(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnResupireta"));
+            }
+
+            public chkResupireta(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkResupireta"));
+            }
+
+            public btnKikan(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKikan"));
+            }
+
+            public chkKikan(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKikan"));
+            }
+
+            public btnToutsu(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnToutsu"));
+            }
+
+            public chkToutsu(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkToutsu"));
+            }
+
+            public btnKeikan(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKeikan"));
+            }
+
+            public chkKeikan(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKeikan"));
             }
 
             public TokiTaiou(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("TokiTaiou"));
             }
 
-            public btnTokiTaiou(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnTokiTaiou"));
+            public btnMonita(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnMonita"));
             }
 
-            public chkTokiTaiou(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou"));
+            public chkMonita(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkMonita"));
+            }
+
+            public btnJyokuso(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnJyokuso"));
+            }
+
+            public chkJyokuso(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkJyokuso"));
+            }
+
+            public btnbtnKateru(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnbtnKateru"));
+            }
+
+            public chkKateru(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKateru"));
             }
 
             public btnBack(): UZA.Button {

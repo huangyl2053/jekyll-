@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002;
 
+import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
@@ -94,6 +95,71 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * コンストラクタです。
      */
     public DBE517002_ShinsakaiShiryoIinParameter() {
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定年月日
+     * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
+     * @param gogitaiNo 合議体番号
+     * @param gogitaiName 合議体名称
+     * @param shuturyokuJun 出力順
+     * @param shuturyokuSutairu 出力スタイル
+     * @param printHou 印刷方法
+     * @param sakuseiJoken 作成条件
+     * @param bangoStart 開始資料番号
+     * @param bangoEnd 終了資料番号
+     * @param chohyoIin_taishoushaFalg 委員用審査会対象者一覧フラグ
+     * @param chohyoIin_tuutishoFalg 委員_審査会開催通知書フラグ
+     * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
+     * @param chohyoIin_itiziHanteiFalg 委員_一次判定結果票フラグ
+     * @param chohyoIin_tokkiJikouHanteiFalg 委員_特記事項_一次判定フラグ
+     * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
+     * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
+     * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
+     */
+    public DBE517002_ShinsakaiShiryoIinParameter(
+            RString shinsakaiKaisaiNo,
+            FlexibleDate shinsakaiKaisaiYoteiYMD,
+            RString shinsakaiKaishiYoteiTime,
+            int gogitaiNo,
+            RString gogitaiName,
+            RString shuturyokuJun,
+            RString shuturyokuSutairu,
+            RString printHou,
+            RString sakuseiJoken,
+            int bangoStart,
+            int bangoEnd,
+            RString chohyoIin_taishoushaFalg,
+            RString chohyoIin_tokkiJikouFalg,
+            RString chohyoIin_itiziHanteiFalg,
+            RString chohyoIin_tokkiJikouHanteiFalg,
+            RString chohyoIin_ikenshoFalg,
+            RString chohyoIin_sonotaSiryoFalg,
+            RString chohyoIin_tuutishoFalg,
+            RString chohyoIin_hanteiFalg) {
+        this(shinsakaiKaisaiNo,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaishiYoteiTime,
+                gogitaiNo,
+                gogitaiName,
+                shuturyokuJun,
+                shuturyokuSutairu,
+                printHou,
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                chohyoIin_taishoushaFalg,
+                chohyoIin_tokkiJikouFalg,
+                chohyoIin_itiziHanteiFalg,
+                chohyoIin_tokkiJikouHanteiFalg,
+                chohyoIin_ikenshoFalg,
+                chohyoIin_sonotaSiryoFalg,
+                chohyoIin_tuutishoFalg,
+                chohyoIin_hanteiFalg,
+                new HashMap<RString, RString>());
     }
 
     /**

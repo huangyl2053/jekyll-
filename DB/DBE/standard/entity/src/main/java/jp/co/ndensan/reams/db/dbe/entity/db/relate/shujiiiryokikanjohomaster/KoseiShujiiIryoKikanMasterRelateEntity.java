@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster;
 
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -34,5 +38,11 @@ public class KoseiShujiiIryoKikanMasterRelateEntity {
     private RString daihyoshaName;
     private RString daihyoshaNameKana;
     private boolean jokyoFlag;
+    private KinyuKikanCode kinyuKikanCode;
+    private KinyuKikanShitenCode kinyuKikanShitenCode;
+    private RString yokinShubetsu;
+    private RString kozaNo;
+    private AtenaKanaMeisho kozaMeigininKana;
+    private AtenaMeisho kozaMeiginin;
     private RString shichosonMeisho;
 }

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
@@ -21,14 +22,19 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoSakuseiTokusokujoEditor {
 
     private final ShujiiIkenshoSakuseiTokusokujoItem headitem;
+    private final int pageCount;
+    private static final int 宛名連番桁数 = 8;
 
     /**
      * インスタンスを生成します。
      *
      * @param headitem {@link ShujiiIkenshoSakuseiTokusokujoItem}
+     * @param pageCount pageCount
      */
-    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem) {
+    protected ShujiiIkenshoSakuseiTokusokujoHeadEditor(ShujiiIkenshoSakuseiTokusokujoItem headitem,
+            int pageCount) {
         this.headitem = headitem;
+        this.pageCount = pageCount;
     }
 
     @Override
@@ -53,7 +59,6 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.ninshoshaYakushokuMei = headitem.getNinshoshaYakushokuMei();
         source.ninshoshaYakushokuMei1 = headitem.getNinshoshaYakushokuMei1();
         source.ninshoshaYakushokuMei2 = headitem.getNinshoshaYakushokuMei2();
-        source.atenaRenban = headitem.getAtenaRenban();
         source.customerBarCode = headitem.getCustomerBarCode();
         source.yubinNo1 = headitem.getYubinNo1();
         source.jushoText = headitem.getJushoText();
@@ -61,6 +66,8 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.shimeiText = headitem.getShimeiText();
         source.meishoFuyo = headitem.getMeishoFuyo();
         source.sonota = headitem.getSonota();
+        source.atenaRenban = new RString(pageCount).padZeroToLeft(宛名連番桁数);
+        source.title = headitem.getTitle();
         source.tsuchibun1 = headitem.getTsuchibun1();
         source.hihokenshaNo1 = headitem.getHihokenshaNo1();
         source.hihokenshaNo2 = headitem.getHihokenshaNo2();
@@ -81,6 +88,13 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.shinseiKubun = headitem.getShinseiKubun();
         source.hihokenshaNameKana = headitem.getHihokenshaNameKana();
         source.hihokenshaName = headitem.getHihokennsyaName();
+        if (headitem.getIkenshoIraiYMD() != null) {
+            source.shinseiYMD = headitem.getShinseiYMD().wareki()
+                    .eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
         if (headitem.getShinseiYMD() != null) {
             source.shinseiYMD = headitem.getShinseiYMD().wareki()
                     .eraType(EraType.KANJI)

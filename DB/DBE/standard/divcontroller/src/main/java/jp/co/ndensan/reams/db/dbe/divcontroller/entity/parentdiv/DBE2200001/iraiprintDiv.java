@@ -26,8 +26,6 @@ public class iraiprintDiv extends Panel {
      */
     @JsonProperty("txthokkoymd")
     private TextBoxDate txthokkoymd;
-    @JsonProperty("ccdBunshoBangoInput")
-    private BunshoBangoInputDiv ccdBunshoBangoInput;
     @JsonProperty("Chkirai")
     private CheckBoxList Chkirai;
     @JsonProperty("radkigen")
@@ -38,6 +36,8 @@ public class iraiprintDiv extends Panel {
     private NinteiChosahyoPrintListDiv NinteiChosahyoPrintList;
     @JsonProperty("ChosahyoTokkijikoSelect")
     private ChosahyoTokkijikoSelectDiv ChosahyoTokkijikoSelect;
+    @JsonProperty("ccdBunshoBangoInput")
+    private BunshoBangoInputDiv ccdBunshoBangoInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,15 +61,6 @@ public class iraiprintDiv extends Panel {
     @JsonProperty("txthokkoymd")
     public void setTxthokkoymd(TextBoxDate txthokkoymd) {
         this.txthokkoymd = txthokkoymd;
-    }
-
-    /*
-     * getccdBunshoBangoInput
-     * @return ccdBunshoBangoInput
-     */
-    @JsonProperty("ccdBunshoBangoInput")
-    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
-        return ccdBunshoBangoInput;
     }
 
     /*
@@ -160,6 +151,15 @@ public class iraiprintDiv extends Panel {
     @JsonProperty("ChosahyoTokkijikoSelect")
     public void setChosahyoTokkijikoSelect(ChosahyoTokkijikoSelectDiv ChosahyoTokkijikoSelect) {
         this.ChosahyoTokkijikoSelect = ChosahyoTokkijikoSelect;
+    }
+
+    /*
+     * getccdBunshoBangoInput
+     * @return ccdBunshoBangoInput
+     */
+    @JsonProperty("ccdBunshoBangoInput")
+    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
+        return ccdBunshoBangoInput;
     }
 
     /*

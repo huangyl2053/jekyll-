@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshika
  * @author 自動生成
  */
 public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +30,8 @@ public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiS
     private Button btnClose;
     @JsonProperty("hdnHihokenshaNo")
     private RString hdnHihokenshaNo;
+    @JsonProperty("shinseishaKanriNo")
+    private RString shinseishaKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,6 +91,24 @@ public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiS
     @JsonProperty("hdnHihokenshaNo")
     public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
         this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * getshinseishaKanriNo
+     * @return shinseishaKanriNo
+     */
+    @JsonProperty("shinseishaKanriNo")
+    public RString getShinseishaKanriNo() {
+        return shinseishaKanriNo;
+    }
+
+    /*
+     * setshinseishaKanriNo
+     * @param shinseishaKanriNo shinseishaKanriNo
+     */
+    @JsonProperty("shinseishaKanriNo")
+    public void setShinseishaKanriNo(RString shinseishaKanriNo) {
+        this.shinseishaKanriNo = shinseishaKanriNo;
     }
 
     // </editor-fold>

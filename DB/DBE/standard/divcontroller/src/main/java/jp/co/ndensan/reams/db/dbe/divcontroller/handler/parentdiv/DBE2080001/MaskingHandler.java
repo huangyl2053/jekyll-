@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.MaskingDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.dgYokaigoNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.MaSuKinGuBusiness;
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.KihonunyoShor
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.TaishoDataKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -78,6 +81,7 @@ public class MaskingHandler {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
         データグリッド部編集(マスキングList);
+        setCountDisplay();
     }
 
     /**
@@ -147,6 +151,11 @@ public class MaskingHandler {
     }
 
     private void その他項目編集(int 完了可能件数, int 未処理件数) {
+        if (null == div.getTxtSaidaiHyojiKensu().getValue() || div.getTxtSaidaiHyojiKensu().getValue().toString().isEmpty()
+                || div.getTxtSaidaiHyojiKensu().getValue().compareTo(Decimal.ZERO) == 0) {
+            div.getTxtSaidaiHyojiKensu().setValue(
+                    new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        }
         div.getDgYokaigoNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
         div.getDgYokaigoNinteiTaskList().getGridSetting().setSelectedRowCount(
                 YokaigoNinteiTaskListFinder.createInstance().getマスキングモード件数(YokaigoNinteiTaskListParameter.
@@ -206,6 +215,24 @@ public class MaskingHandler {
         }
         if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
             row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
+        }
+    }
+
+    private void setCountDisplay() {
+        if (div.getRadTaishoDataKubun().getSelectedKey().equals(TaishoDataKubun.すべて.getCode())) {
+            div.getTxtMishoriCount().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtTotalCount().setDisplayNone(false);
+        }
+        if (div.getRadTaishoDataKubun().getSelectedKey().equals(TaishoDataKubun.完了可能.getCode())) {
+            div.getTxtMishoriCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtTotalCount().setDisplayNone(true);
+        }
+        if (div.getRadTaishoDataKubun().getSelectedKey().equals(TaishoDataKubun.未処理.getCode())) {
+            div.getTxtMishoriCount().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(true);
+            div.getTxtTotalCount().setDisplayNone(true);
         }
     }
 

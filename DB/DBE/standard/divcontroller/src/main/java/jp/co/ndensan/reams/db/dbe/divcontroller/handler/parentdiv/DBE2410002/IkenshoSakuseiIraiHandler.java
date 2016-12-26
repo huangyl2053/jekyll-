@@ -282,7 +282,7 @@ public class IkenshoSakuseiIraiHandler {
             } else if (SELECTED_KEY1.equals(key)) {
                 提出期限 = FlexibleDate.EMPTY;
             } else if (SELECTED_KEY2.equals(key) && div.getTxtKigenymd().getValue() != null) {
-                提出期限 = new FlexibleDate(div.getTxtKigenymd().getValue().plusDay(期限日数).toDateString());
+                提出期限 = new FlexibleDate(div.getTxtKigenymd().getValue().toDateString());
             }
         } else if (認定申請年月日 != null) {
             提出期限 = 認定申請年月日.plusDay(期限日数);
@@ -1031,7 +1031,7 @@ public class IkenshoSakuseiIraiHandler {
 
             受診日時または期間.append(ymd.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+            受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分));
             受診日時または期間.append(文字列_まで);
         } else {
             RDate from = div.getTxtJyushinKikan().getFromValue();

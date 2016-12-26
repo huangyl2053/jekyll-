@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -56,7 +55,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
@@ -142,6 +140,7 @@ public class NinteiChosaIrai {
         dgChosaItakusakiIchiran_Row row = div.getDgChosaItakusakiIchiran().getSelectedItems().get(0);
         handler.set委託先基本情報(row);
         ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue());
+        ViewStateHolder.put(ViewStateKeys.市町村コード, row.getHokenshaCode());
         ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
         ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
         ViewStateHolder.put(ViewStateKeys.認定調査委託先割付定員, row.getWaritsukeTeiin().getText());
@@ -152,11 +151,6 @@ public class NinteiChosaIrai {
         List<NinnteiChousairaiBusiness> 調査員情報List = NinnteiChousairaiFinder.createInstance().get調査員(parameter);
         handler.set調査員情報一覧(調査員情報List, row);
         setData(null, handler);
-        try {
-            handler.init印刷条件DIV();
-        } catch (SystemException e) {
-            throw new ApplicationException(DbxErrorMessages.業務コンフィグなし.getMessage().replace(ConfigNameDBE.認定調査期限設定方法.name()));
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -174,7 +168,7 @@ public class NinteiChosaIrai {
         ViewStateHolder.put(ViewStateKeys.調査員コード, row.getChosainCode().getValue());
         ViewStateHolder.put(ViewStateKeys.調査員割付可能人数_月, row.getChosaKanoNinzuPerMonth());
         setData(new ChosainCode(row.getChosainCode().getValue()), handler);
-        handler.init印刷条件DIV();
+        handler.init印刷条件DIV(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
         return ResponseData.of(div).respond();
     }
 
@@ -191,7 +185,7 @@ public class NinteiChosaIrai {
         ViewStateHolder.put(ViewStateKeys.調査員コード, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.調査員割付可能人数_月, RString.EMPTY);
         setData(null, handler);
-        handler.init印刷条件DIV();
+        handler.init印刷条件DIV(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
         return ResponseData.of(div).respond();
     }
 
@@ -593,9 +587,9 @@ public class NinteiChosaIrai {
         updateNinteichosaIraiJohoForPrint(div);
         NinteiChosaIraiPrintService printService = new NinteiChosaIraiPrintService(reportManager);
         RDate nowDate = RDate.getNowDate();
-        RString 保険者コード = div.getDgChosaItakusakiIchiran().getActiveRow().getHokenshaCode();
+        RString 保険者コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
         if (checkList.contains(CHKNAME_認定調査依頼書)) {
-            printService.print要介護認定調査依頼書(handler.create認定調査依頼書Item());
+            printService.print要介護認定調査依頼書(handler.create認定調査依頼書Item(保険者コード));
         }
         if (checkList.contains(CHKNAME_認定調査票デザイン用紙)) {
             call認定調査票_デザイン用紙(printService, nowDate, 保険者コード, handler);
@@ -638,55 +632,51 @@ public class NinteiChosaIrai {
     }
 
     private void call認定調査票_特記事項(NinteiChosaIraiPrintService printService, NinteiChosaIraiHandler handler) {
-        printService.print認定調査票_特記事項_デザイン用紙(handler.create認定調査票_特記事項パラメータ(false));
+        printService.print認定調査票_特記事項_デザイン用紙(handler.create認定調査票_特記事項パラメータ());
     }
 
     private void call認定調査票_OCR(NinteiChosaIraiPrintService printService, RDate nowDate, RString 保険者コード, NinteiChosaIraiHandler handler) {
         RString 認定調査票_概況調査_印刷タイプ
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_印刷タイプ, nowDate, SubGyomuCode.DBE認定支援, 保険者コード);
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
-            if (CONFIGVALUE1.equals(認定調査票_概況調査_印刷タイプ)) {
-                printService.print認定調査票OCR片面(handler.create認定調査票_概況調査_基本調査パラメータ());
-            } else if (CONFIGVALUE2.equals(認定調査票_概況調査_印刷タイプ)) {
-                printService.print認定調査票OCR両面(handler.create認定調査票_概況調査_基本調査パラメータ());
-            }
+        if (CONFIGVALUE1.equals(認定調査票_概況調査_印刷タイプ)) {
+            printService.print認定調査票OCR片面(handler.create認定調査票_概況調査_基本調査パラメータ());
+        } else if (CONFIGVALUE2.equals(認定調査票_概況調査_印刷タイプ)) {
+            printService.print認定調査票OCR両面(handler.create認定調査票_概況調査_基本調査パラメータ());
         }
     }
 
     private void call認定調査票OCR_特記事項(NinteiChosaIraiPrintService printService, RDate nowDate, RString 保険者コード, NinteiChosaIraiHandler handler) {
         RString 認定調査票_特記事項_印刷タイプ
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_印刷タイプ, nowDate, SubGyomuCode.DBE認定支援, 保険者コード);
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
-            if (CONFIGVALUE1.equals(認定調査票_特記事項_印刷タイプ)) {
-                printService.print認定調査票_特記事項_OCR片面(handler.create認定調査票_特記事項パラメータ(false));
-            } else if (CONFIGVALUE2.equals(認定調査票_特記事項_印刷タイプ)) {
-                printService.print認定調査票_特記事項_OCR両面(handler.create認定調査票_特記事項パラメータ(true));
-            }
+        if (CONFIGVALUE1.equals(認定調査票_特記事項_印刷タイプ)) {
+            printService.print認定調査票_特記事項_OCR片面(handler.create認定調査票_特記事項パラメータ());
+        } else if (CONFIGVALUE2.equals(認定調査票_特記事項_印刷タイプ)) {
+            printService.print認定調査票_特記事項_OCR両面(handler.create認定調査票_特記事項パラメータ());
         }
     }
 
     private void call認定調査票_特記事項_項目有り(NinteiChosaIraiDiv div, NinteiChosaIraiPrintService printService, NinteiChosaIraiHandler handler) {
         if (div.getChkTokkijikoTenyuryoku().getSelectedItems().isEmpty()) {
-            printService.print認定調査票_特記事項_項目有り(handler.create認定調査票_特記事項パラメータ(false));
+            printService.print認定調査票_特記事項_項目有り(handler.create認定調査票_特記事項パラメータ());
         } else {
-            printService.print認定調査票_特記事項_項目有り_手入力(handler.create認定調査票_特記事項パラメータ(false));
+            printService.print認定調査票_特記事項_項目有り_手入力(handler.create認定調査票_特記事項パラメータ());
         }
 
     }
 
     private void call認定調査票_特記事項_項目無し(NinteiChosaIraiDiv div, NinteiChosaIraiPrintService printService, NinteiChosaIraiHandler handler) {
         if (div.getChkTokkijikoTenyuryoku().getSelectedItems().isEmpty()) {
-            printService.print認定調査票_特記事項_項目無し(handler.create認定調査票_特記事項パラメータ(false));
+            printService.print認定調査票_特記事項_項目無し(handler.create認定調査票_特記事項パラメータ());
         } else {
-            printService.print認定調査票_特記事項_項目無し_手入力(handler.create認定調査票_特記事項パラメータ(false));
+            printService.print認定調査票_特記事項_項目無し_手入力(handler.create認定調査票_特記事項パラメータ());
         }
     }
 
     private void call認定調査票_特記事項_フリータイプ(NinteiChosaIraiDiv div, NinteiChosaIraiPrintService printService, NinteiChosaIraiHandler handler) {
         if (div.getChkTokkijikoTenyuryoku().getSelectedItems().isEmpty()) {
-            printService.print認定調査票_特記事項_フリータイプ(handler.create認定調査票_特記事項パラメータ(false));
+            printService.print認定調査票_特記事項_フリータイプ(handler.create認定調査票_特記事項パラメータ());
         } else {
-            printService.print認定調査票_特記事項_フリータイプ_手入力(handler.create認定調査票_特記事項パラメータ(false));
+            printService.print認定調査票_特記事項_フリータイプ_手入力(handler.create認定調査票_特記事項パラメータ());
         }
     }
 
@@ -749,8 +739,9 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onClick_WaritsukeZumiShokai(NinteiChosaIraiDiv div) {
-        dgWaritsukeZumiShinseishaIchiran_Row row = div.getDgWaritsukeZumiShinseishaIchiran().getActiveRow();
+        dgWaritsukeZumiShinseishaIchiran_Row row = div.getDgWaritsukeZumiShinseishaIchiran().getClickedItem();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
+        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
 
@@ -761,8 +752,9 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onClick_MiwaritsukeShokai(NinteiChosaIraiDiv div) {
-        dgMiwaritsukeShinseishaIchiran_Row row = div.getDgMiwaritsukeShinseishaIchiran().getActiveRow();
+        dgMiwaritsukeShinseishaIchiran_Row row = div.getDgMiwaritsukeShinseishaIchiran().getClickedItem();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
+        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
 

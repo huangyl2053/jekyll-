@@ -96,7 +96,7 @@ public class IryohokenRirekiHandler {
             div.getDgIryohokenIchiran().setDataSource(dgiryohokenichiranList);
         }
 
-        //setState(状態);
+        setState(状態);
         div.set識別コード(識別コード);
     }
 

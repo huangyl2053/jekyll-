@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class ShinsakaiIinJohoIchiranDiv extends Panel {
      */
     @JsonProperty("btnShinsakaiIinAdd")
     private Button btnShinsakaiIinAdd;
+    @JsonProperty("btnKozaMitorokuCSV")
+    private Button btnKozaMitorokuCSV;
     @JsonProperty("dgShinsaInJohoIchiran")
     private DataGrid<dgShinsaInJohoIchiran_Row> dgShinsaInJohoIchiran;
 
@@ -48,6 +50,24 @@ public class ShinsakaiIinJohoIchiranDiv extends Panel {
     @JsonProperty("btnShinsakaiIinAdd")
     public void setBtnShinsakaiIinAdd(Button btnShinsakaiIinAdd) {
         this.btnShinsakaiIinAdd = btnShinsakaiIinAdd;
+    }
+
+    /*
+     * getbtnKozaMitorokuCSV
+     * @return btnKozaMitorokuCSV
+     */
+    @JsonProperty("btnKozaMitorokuCSV")
+    public Button getBtnKozaMitorokuCSV() {
+        return btnKozaMitorokuCSV;
+    }
+
+    /*
+     * setbtnKozaMitorokuCSV
+     * @param btnKozaMitorokuCSV btnKozaMitorokuCSV
+     */
+    @JsonProperty("btnKozaMitorokuCSV")
+    public void setBtnKozaMitorokuCSV(Button btnKozaMitorokuCSV) {
+        this.btnKozaMitorokuCSV = btnKozaMitorokuCSV;
     }
 
     /*

@@ -123,6 +123,7 @@ public final class DBE233001_IkenshoTokusokujyoParameter extends BatchParameterB
         param.setTemp_督促方法(this.temp_督促方法);
         param.setTemp_督促メモ(this.temp_督促メモ);
         param.setTemp_保険者名称(this.temp_保険者名称);
+        param.setTemp_文書番号(this.temp_文書番号);
         return param;
     }
 }

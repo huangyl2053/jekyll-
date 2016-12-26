@@ -42,7 +42,7 @@ public class YokaigoninteiimageShutsuryokuFinder {
         List<RString> 存在するファイル = new ArrayList<>();
         for (RString file : sharedFiles) {
             for (RString name : fileName) {
-                if (name.concat(拡張子).equals(file)) {
+                if (file.contains(name.concat(拡張子))) {
                     存在するファイル.add(name);
                 }
             }
@@ -61,7 +61,7 @@ public class YokaigoninteiimageShutsuryokuFinder {
             if (info.getFilesEntity() == null) {
                 continue;
             }
-            存在したイメージファイル名.add(info.getFileEntryEntity().getLocalFileName());
+            存在したイメージファイル名.add(info.getFilesEntity().getPathname());
         }
         return 存在したイメージファイル名;
     }

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobang
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -41,6 +42,8 @@ public class NinteiChosaIraiDiv extends Panel {
     private iraiprintDiv iraiprint;
     @JsonProperty("KanryoMessage")
     private KaigoKanryoMessageDiv KanryoMessage;
+    @JsonProperty("shinseishaKanriNo")
+    private RString shinseishaKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -145,6 +148,24 @@ public class NinteiChosaIraiDiv extends Panel {
     @JsonProperty("KanryoMessage")
     public IKaigoKanryoMessageDiv getKanryoMessage() {
         return KanryoMessage;
+    }
+
+    /*
+     * getshinseishaKanriNo
+     * @return shinseishaKanriNo
+     */
+    @JsonProperty("shinseishaKanriNo")
+    public RString getShinseishaKanriNo() {
+        return shinseishaKanriNo;
+    }
+
+    /*
+     * setshinseishaKanriNo
+     * @param shinseishaKanriNo shinseishaKanriNo
+     */
+    @JsonProperty("shinseishaKanriNo")
+    public void setShinseishaKanriNo(RString shinseishaKanriNo) {
+        this.shinseishaKanriNo = shinseishaKanriNo;
     }
 
     /*
@@ -316,11 +337,6 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
-        return this.getIraiprint().getCcdBunshoBangoInput();
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkirai() {
         return this.getIraiprint().getChkirai();
     }
@@ -418,6 +434,11 @@ public class NinteiChosaIraiDiv extends Panel {
     @JsonIgnore
     public void  setChkTokkijikoTenyuryoku(CheckBoxList chkTokkijikoTenyuryoku) {
         this.getIraiprint().getChosahyoTokkijikoSelect().setChkTokkijikoTenyuryoku(chkTokkijikoTenyuryoku);
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
+        return this.getIraiprint().getCcdBunshoBangoInput();
     }
 
     // </editor-fold>

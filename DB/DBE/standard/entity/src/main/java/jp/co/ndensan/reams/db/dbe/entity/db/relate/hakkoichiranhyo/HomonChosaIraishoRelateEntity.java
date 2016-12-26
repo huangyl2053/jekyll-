@@ -45,7 +45,7 @@ public class HomonChosaIraishoRelateEntity {
     private RString 事業者番号;
     private RString 調査員氏名;
     private FlexibleDate 認定調査依頼年月日;
-    private int 最大依頼履歴番号;
+    private Integer 最大依頼履歴番号;
     private RString 認定調査期限年月日;
     private RString 認定調査員コード;
     private RString 認定調査委託先コード;

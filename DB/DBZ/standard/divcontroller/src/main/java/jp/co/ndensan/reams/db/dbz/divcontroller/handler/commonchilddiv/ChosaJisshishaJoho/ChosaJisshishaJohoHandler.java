@@ -121,6 +121,7 @@ public class ChosaJisshishaJohoHandler {
             } else if (ChosaKubun.新規調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
                 div.getTxtChosaKubun().setValue(ChosaKubun.新規調査.get名称());
                 div.getDdlChosaJisshiBasho().setSelectedValue(ChosaJisshiBashoCode.自宅内.get名称());
+                div.getDdlChosaJisshiBasho().setReadOnly(true);
             } else if (ChosaKubun.再調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
                 div.getTxtChosaKubun().setValue(ChosaKubun.再調査.get名称());
             } else {
@@ -180,11 +181,14 @@ public class ChosaJisshishaJohoHandler {
      * 調査実施場所ddl変更時のイベントメソッド
      */
     public void onChange_ddlChosaJisshiBasho() {
-        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())
-                || ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
+        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
             div.getTxtJisshiBashoMeisho().clearValue();
             div.getTxtJisshiBashoMeisho().setDisabled(true);
+        } else if (ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
+            div.getTxtJisshiBashoMeisho().clearValue();
+            div.getTxtJisshiBashoMeisho().setDisabled(false);
         } else {
+            div.getTxtJisshiBashoMeisho().clearValue();
             div.getTxtJisshiBashoMeisho().setDisabled(false);
         }
     }

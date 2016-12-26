@@ -12,7 +12,10 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEnti
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -177,6 +180,60 @@ public class ShujiiIryoKikanJoho extends
     }
 
     /**
+     * 金融機関コードを返します。
+     *
+     * @return 金融機関コード
+     */
+    public KinyuKikanCode get金融機関コード() {
+        return entity.getKinyuKikanCode();
+    }
+
+    /**
+     * 支店コードを返します。
+     *
+     * @return 支店コード
+     */
+    public KinyuKikanShitenCode get支店コード() {
+        return entity.getKinyuKikanShitenCode();
+    }
+
+    /**
+     * 預金種別を返します。
+     *
+     * @return 預金種別
+     */
+    public RString get預金種別() {
+        return entity.getYokinShubetsu();
+    }
+
+    /**
+     * 口座番号を返します。
+     *
+     * @return 口座番号
+     */
+    public RString get口座番号() {
+        return entity.getKozaNo();
+    }
+
+    /**
+     * 口座名義人カナを返します。
+     *
+     * @return 口座名義人カナ
+     */
+    public AtenaKanaMeisho get口座名義人カナ() {
+        return entity.getKozaMeigininKana();
+    }
+
+    /**
+     * 口座名義人を返します。
+     *
+     * @return 口座名義人
+     */
+    public AtenaMeisho get口座名義人() {
+        return entity.getKozaMeiginin();
+    }
+
+    /**
      * {@link DbT5911ShujiiIryoKikanJohoEntity}のクローンを返します。
      *
      * @return {@link DbT5911ShujiiIryoKikanJohoEntity}のクローン
@@ -197,7 +254,8 @@ public class ShujiiIryoKikanJoho extends
     }
 
     /**
-     * 主治医医療機関情報のみを変更対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医医療機関情報のみを変更対象とします。<br/>
+     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIryoKikanJoho}
      */
@@ -211,7 +269,8 @@ public class ShujiiIryoKikanJoho extends
     }
 
     /**
-     * 保持する主治医医療機関情報を削除対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する主治医医療機関情報を削除対象とします。<br/>
+     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShujiiIryoKikanJoho}
      */

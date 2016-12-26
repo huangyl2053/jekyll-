@@ -122,7 +122,7 @@ public class TokkiTextPage2A4Editor implements ITokkiTextA4Editor {
                 set特記事項イメージ(source);
             }
         }
-        source.shikibetuCode = new ShikibetsuCode(item.get識別コード());
+        source.shikibetuCode = RString.isNullOrEmpty(item.get識別コード()) ? ShikibetsuCode.EMPTY : new ShikibetsuCode(item.get識別コード());
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     item.get申請書管理番号());
