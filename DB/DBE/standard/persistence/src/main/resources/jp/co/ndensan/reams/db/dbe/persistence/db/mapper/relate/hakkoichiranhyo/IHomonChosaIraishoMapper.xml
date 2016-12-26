@@ -255,7 +255,8 @@
         ORDER BY
         pickout."shoKisaiHokenshaNo",
         pickout."ninteichosaItakusakiCode",
-        pickout."ninteiChosainCode"
+        pickout."ninteiChosainCode",
+        pickout."shinseishoKanriNo" 
     </select>
     
     <sql id="HomonChosaIraisho">

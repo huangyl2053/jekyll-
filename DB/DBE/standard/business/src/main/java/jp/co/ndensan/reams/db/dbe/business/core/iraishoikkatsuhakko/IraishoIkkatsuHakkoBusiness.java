@@ -393,10 +393,10 @@ public class IraishoIkkatsuHakkoBusiness {
     /**
      * 「DbT5301ShujiiIkenshoIraiJoho_主治医意見書提出依頼書発行」Entityデータを作成するメッソドです。
      *
-     * @param dbT5301Entity dbT5301Entity
      * @return DbT5301ShujiiIkenshoIraiJohoEntity
      */
-    public DbT5301ShujiiIkenshoIraiJohoEntity setDbt5301Entity(DbT5301ShujiiIkenshoIraiJohoEntity dbT5301Entity) {
+    public DbT5301ShujiiIkenshoIraiJohoEntity setDbt5301Entity() {
+        DbT5301ShujiiIkenshoIraiJohoEntity dbT5301Entity = entity.getDbt5301Entity();
         dbT5301Entity.setShinseishoKanriNo(new ShinseishoKanriNo(entity.get申請書管理番号()));
         dbT5301Entity.setIkenshoIraiRirekiNo(entity.get最大依頼履歴番号());
         dbT5301Entity.setLogicalDeletedFlag(false);

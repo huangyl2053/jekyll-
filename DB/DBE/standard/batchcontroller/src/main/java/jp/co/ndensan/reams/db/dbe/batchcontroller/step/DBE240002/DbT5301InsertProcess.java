@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -27,14 +26,13 @@ public class DbT5301InsertProcess extends BatchProcessBase<ShujiiIkenshoTeishuts
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
-    private IShujiiIkenshoTeishutsuIraishoHakkoMapper mapper;
     private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
+    private IraishoIkkatsuHakkoBusiness business;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5301ShujiiIkenshoIraiJohoEntity> dbT5301SEntityWriter;
 
     @Override
     protected void initialize() {
-        mapper = getMapper(IShujiiIkenshoTeishutsuIraishoHakkoMapper.class);
     }
 
     @Override
@@ -49,8 +47,8 @@ public class DbT5301InsertProcess extends BatchProcessBase<ShujiiIkenshoTeishuts
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
-        dbT5301SEntityWriter.update(new IraishoIkkatsuHakkoBusiness(entity, processParamter)
-                .setDbt5301Entity(mapper.get主治医意見書作成依頼情報(entity)));
+        business = new IraishoIkkatsuHakkoBusiness(entity, processParamter);
+        dbT5301SEntityWriter.update(business.setDbt5301Entity());
     }
 
 }
