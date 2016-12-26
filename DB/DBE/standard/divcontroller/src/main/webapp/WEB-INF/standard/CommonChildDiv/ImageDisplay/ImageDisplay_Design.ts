@@ -54,16 +54,16 @@ module DBE {
                 return new UZA.Label(this.convFiledName("lblGenbon"));
             }
 
-            public imgGenbon(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgGenbon"));
+            public imgGenbon(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgGenbon"));
             }
 
             public lblMask(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblMask"));
             }
 
-            public imgMask(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgMask"));
+            public imgMask(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgMask"));
             }
 
             public btnBefore(): UZA.Button {

@@ -17,7 +17,8 @@ public enum DBE5710001TransitionEventName implements IContainerEvents {
     検索へ戻る("検索へ戻る"),
     要介護認定イメージ情報出力へ("要介護認定イメージ情報出力へ"),
     要介護認定イメージ情報削除へ("要介護認定イメージ情報削除へ"),
-    完了("完了");
+    完了("完了"),
+    一覧に戻る("一覧に戻る");
 
     private final RString name;
 
