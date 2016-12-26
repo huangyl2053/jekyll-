@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShinsakaiIinJohoSpec;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 
 /**
@@ -33,6 +35,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 public class ShinsakaiIinJohoTorokuValidationHandler {
 
     private final ShinsakaiIinJohoTorokuDiv div;
+    private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_修正 = new RString("修正");
+    private static final RString 状態_削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -46,27 +51,40 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
     /**
      * 審査会委員入力情報をチェックします。
      *
-     * @param is更新モード boolean
+     * @param 状態 RString
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 審査会委員情報入力チェック(boolean is更新モード) {
+    public ValidationMessageControlPairs 審査会委員情報入力チェック(RString 状態) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!is更新モード) {
-            boolean is重複コード = is重複コード(div.getTxtShinsainCode().getValue());
-            if (is重複コード) {
+        ShinsakaiIinJohoTorokuHandler handler = new ShinsakaiIinJohoTorokuHandler(div);
+        if (!状態_削除.equals(状態)) {
+            if (!handler.hasChanged合議体詳細情報()) {
+                validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.編集なしで更新不可));
+            }
+        }
+
+        if (状態_追加.equals(状態)) {
+            if (is重複コード(div.getTxtShinsainCode().getValue())) {
                 validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.既に登録済));
             }
         }
-        
+
+        if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
+            if (!is口座情報あり_必須項目入力あり()) {
+                validationMessages.add(new ValidationMessageControlPair(
+                        new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "口座情報"), div.getKozaJoho()));
+            }
+        }
+
         List<ViewControl> shinsaIinYMD = new ArrayList<>();
         shinsaIinYMD.add(div.getTxtShinsaIinYMDFrom());
         shinsaIinYMD.add(div.getTxtShinsaIinYMDTo());
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(ShinsakaiIinJohoSpec.審査会委員開始日終了日の大小チェック)
-            .thenAdd(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前).messages());
+                .thenAdd(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前).messages());
         validationMessages.add(new ValidationMessageControlDictionaryBuilder().add(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前,
                 shinsaIinYMD).build().check(messages));
-        
+
         if (div.getCcdshinsakaiChikuCode().getCode() != null && !div.getCcdshinsakaiChikuCode().getCode().isEmpty()) {
             UzT0007CodeEntity 地区コード = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(),
                     div.getCcdshinsakaiChikuCode().getCode(), FlexibleDate.getNowDate());
@@ -76,10 +94,26 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         }
         return validationMessages;
     }
-    
+
+    private boolean is口座情報あり_必須項目入力あり() {
+        if (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                || !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                || !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                || !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                || !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
+            return !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                    && !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                    && !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                    && !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                    && !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
+        }
+        return true;
+
+    }
+
     /**
      * 審査会委員開始日・終了日の大小チェック。
-     * 
+     *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 審査会委員開始日終了日の大小チェック() {
@@ -89,14 +123,14 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         shinsaIinYMD.add(div.getTxtShinsaIinYMDTo());
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(ShinsakaiIinJohoSpec.審査会委員開始日終了日の大小チェック)
-            .thenAdd(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前).messages());
+                .thenAdd(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前).messages());
         validationMessages.add(new ValidationMessageControlDictionaryBuilder().add(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前,
                 shinsaIinYMD).build().check(messages));
 
         return validationMessages;
 
     }
-    
+
     private boolean is重複コード(RString 審査会委員コード) {
         for (dgShinsaInJohoIchiran_Row row : div.getDgShinsaInJohoIchiran().getDataSource()) {
             if (審査会委員コード.equals(row.getShinsainCode())) {
@@ -108,15 +142,67 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         return 0 < count;
     }
 
+    /**
+     * 保存するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     */
+    public void validateForUpdate() {
+
+        List<dgShinsaInJohoIchiran_Row> ichiranList = div.getDgShinsaInJohoIchiran().getDataSource();
+        boolean notUpdate = true;
+        for (dgShinsaInJohoIchiran_Row row : ichiranList) {
+            if (!RString.EMPTY.equals(row.getStatus())) {
+                notUpdate = false;
+                break;
+            }
+        }
+        if (notUpdate) {
+            throw new ApplicationException(ShinsakaiIinJohoTorokuValidationMessage.編集なしで更新不可.getMessage());
+        }
+    }
+
+    /**
+     * ＣＳＶを出力するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     */
+    public void validateForKozaMitorokuCsv() {
+        List<dgShinsaInJohoIchiran_Row> ichiranList = div.getDgShinsaInJohoIchiran().getDataSource();
+        if (ichiranList.isEmpty()) {
+            throw new ApplicationException(ShinsakaiIinJohoTorokuValidationMessage.該当データなし.getMessage());
+        }
+        for (dgShinsaInJohoIchiran_Row row : ichiranList) {
+            if (!RString.EMPTY.equals(row.getStatus())) {
+                throw new ApplicationException(ShinsakaiIinJohoTorokuValidationMessage.編集後更新指示.getMessage());
+            }
+        }
+    }
+
     private enum ShinsakaiIinJohoTorokuValidationMessage implements IValidationMessage {
 
         既に登録済(UrErrorMessages.既に登録済, "審査会委員コード"),
         終了日が開始日以前(UrErrorMessages.終了日が開始日以前),
-        コードマスタなし(UrErrorMessages.コードマスタなし);
+        コードマスタなし(UrErrorMessages.コードマスタなし),
+        編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
+        該当データなし(UrErrorMessages.該当データなし),
+        編集後更新指示(DbzErrorMessages.編集後更新指示);
 
         private final Message message;
 
         private ShinsakaiIinJohoTorokuValidationMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

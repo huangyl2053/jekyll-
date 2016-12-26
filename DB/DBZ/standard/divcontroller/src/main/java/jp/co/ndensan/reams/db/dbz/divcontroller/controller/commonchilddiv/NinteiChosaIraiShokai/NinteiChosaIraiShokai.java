@@ -30,7 +30,10 @@ public class NinteiChosaIraiShokai {
      * @return 認定調査情報div
      */
     public ResponseData<NinteiChosaIraiShokaiDiv> onLoad(NinteiChosaIraiShokaiDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 申請書管理番号 = div.getShinseishaKanriNo();
+        if (申請書管理番号 == null) {
+            申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        }
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
                 = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(申請書管理番号).records();
         getHandler(div).onLoad(ninteiChosaList);

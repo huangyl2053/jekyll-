@@ -201,7 +201,7 @@ public class CyoSaiRaiBusiness {
      * @return 認定調査督促年月日
      */
     public FlexibleDate get認定調査督促年月日() {
-        return entity.getNinteichosaKigenYMD();
+        return entity.getNinteichosaTokusokuYMD();
     }
 
     /**

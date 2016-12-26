@@ -70,7 +70,7 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         頁数.append(記号);
         頁数.append(entity.get総頁());
         source.pageCount1 = 頁数.toRString();
-        source.listHanteikekka_1 = new RString(String.valueOf(entity.get介護認定審査会審査順()));
+        source.listHanteikekka_1 = new RString(String.valueOf(entity.get項番()));
         source.listHanteikekka_2 = entity.get市町村名称();
         source.listHanteikekka_3 = entity.get証記載保険者番号();
         source.listHanteikekka_4 = entity.get被保険者氏名();

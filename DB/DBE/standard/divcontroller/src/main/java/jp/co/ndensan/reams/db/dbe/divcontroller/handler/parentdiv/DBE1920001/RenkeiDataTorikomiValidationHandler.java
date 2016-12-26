@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import static jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -29,9 +30,12 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -65,6 +69,7 @@ public class RenkeiDataTorikomiValidationHandler {
     private static final int 厚労省_7 = 7;
     private static final RString SJIS = new RString("1");
     private static final RString UTF8 = new RString("2");
+    private static final RString なし = new RString("0");
     private final RenkeiDataTorikomiDiv div;
     private final RDate 基準日;
 
@@ -85,18 +90,82 @@ public class RenkeiDataTorikomiValidationHandler {
      */
     public ValidationMessageControlPairs checkSelected() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        RString 要介護認定申請 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        if (div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems().isEmpty()) {
+        if (div.getDgTorikomiTaisho().getSelectedItems() == null) {
             validPairs.add(new ValidationMessageControlPair(
                     FilecheckMessages.Validate未選択, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-        } else {
-            if (要介護認定申請.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems().get(0).getFileName())
-                    && div.getTorikomiichiran().getDgtorikomidataichiran().getSelectedItems().isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate未選択, div.getTorikomiichiran().getDgtorikomidataichiran()));
+            return validPairs;
+        }
+        boolean flag = true;
+        for (dgTorikomiTaisho_Row row : div.getDgTorikomiTaisho().getSelectedItems()) {
+            if (row.getFileName().equals(要介護認定申請連携データ取込みファイル名)) {
+                flag = false;
             }
         }
+        if (flag && !div.getTorikomiichiran().getDgtorikomidataichiran().getSelectedItems().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(
+                    FilecheckMessages.Validateチェック, div.getTorikomiichiran().getDgtorikomidataichiran()));
+        }
+        if (!flag && div.getTorikomiichiran().getDgtorikomidataichiran().getSelectedItems().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(
+                    FilecheckMessages.Validate未選択, div.getTorikomiichiran().getDgtorikomidataichiran()));
+        }
         return validPairs;
+    }
+
+    /**
+     * ファイルを取込むとき、バリデーションチェックを実施します。
+     *
+     * @param files
+     */
+    public void checkゼロ件ファイル(FileData[] files) {
+        RString rmessage = RString.EMPTY;
+        boolean flag = false;
+        for (FileData file : files) {
+            List<dgTorikomiTaisho_Row> dataSource = div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource();
+            for (dgTorikomiTaisho_Row rowData : dataSource) {
+                if (rowData.getFileName().equals(file.getFileName())) {
+                    if (rowData.getTotal().equals(なし)) {
+                        if (flag) {
+                            rmessage = rmessage.concat(new RString(","));
+                        }
+                        if (flag) {
+                            rmessage = rmessage.concat(new RString(file.getFileName().toString()));
+                        } else {
+                            rmessage = new RString(file.getFileName().toString());
+                        }
+                        flag = true;
+                    }
+                    break;
+                }
+            }
+        }
+        div.setHiddenErrorFiles(rmessage);
+    }
+
+    /**
+     * ゼロ件チェックの結果をメッセージに変換します。
+     *
+     * @return message
+     */
+    public Message getMessage() {
+        RString rmessage = div.getHiddenErrorFiles();
+        if (!RString.isNullOrEmpty(rmessage)) {
+            return InfoMessages.ゼロ件チェック.getMessage().replace(rmessage.toString());
+        }
+        return Message.NO_MESSAGE;
+    }
+
+    /**
+     * ゼロ件チェックの結果をメッセージに変換します。
+     *
+     * @return message
+     */
+    public Message getError() {
+        RString rmessage = div.getHiddenErrorFiles();
+        if (!RString.isNullOrEmpty(rmessage)) {
+            return InfoMessages.不正ファイル.getMessage().replace(rmessage.toString());
+        }
+        return Message.NO_MESSAGE;
     }
 
     /**
@@ -107,7 +176,7 @@ public class RenkeiDataTorikomiValidationHandler {
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs check認定申請情報ファイル(ValidationMessageControlPairs validPairs, RString path, boolean pathFlag) {
+    public RString check認定申請情報ファイル(RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
@@ -121,62 +190,36 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteiShinseiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 要介護認定申請連携データ取込みファイル名;
                 }
-                CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteiShinseiJohoDensanCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (電算標準版_197 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (電算標準版_197 < getSize(read)) {
+                    return 要介護認定申請連携データ取込みファイル名;
                 }
-
             } else if (厚労省.equals(認定申請IF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 要介護認定申請連携データ取込みファイル名;
                 }
-                CsvReader<NinteiShinseiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteiShinseiJohoKouroushouCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (厚労省_174 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (厚労省_174 < getSize(read)) {
+                    return 要介護認定申請連携データ取込みファイル名;
                 }
             } else if (東芝版.equals(認定申請IF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, NinteiShinseiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 要介護認定申請連携データ取込みファイル名;
                 }
-                CsvReader<NinteiShinseiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteiShinseiJohoDensanCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (東芝版_197 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (東芝版_197 < getSize(read)) {
+                    return 要介護認定申請連携データ取込みファイル名;
+                } else {
+                    return 要介護認定申請連携データ取込みファイル名;
                 }
-            } else {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定申請情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
             }
+            return RString.EMPTY;
         }
-        return validPairs;
     }
 
     /**
@@ -187,7 +230,7 @@ public class RenkeiDataTorikomiValidationHandler {
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs check認定調査委託先情報ファイル(ValidationMessageControlPairs validPairs, RString path, boolean pathFlag) {
+    public RString check認定調査委託先情報ファイル(RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
@@ -201,18 +244,10 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteichosaItakusakiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 認定調査委託先データ取込みファイル名;
                 }
-                CsvReader<NinteichosaItakusakiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteichosaItakusakiJohoDensanCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (電算標準版_11 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (電算標準版_11 < getSize(read)) {
+                    return 認定調査委託先データ取込みファイル名;
                 }
 
             } else if (厚労省.equals(マスタIF種類)) {
@@ -220,25 +255,16 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, NinteichosaItakusakiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 認定調査委託先データ取込みファイル名;
                 }
-                CsvReader<NinteichosaItakusakiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, NinteichosaItakusakiJohoKouroushouCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (厚労省_10 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (厚労省_10 < getSize(read)) {
+                    return 認定調査委託先データ取込みファイル名;
                 }
             } else {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定調査委託先情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                return 認定調査委託先データ取込みファイル名;
             }
         }
-        return validPairs;
+        return RString.EMPTY;
     }
 
     /**
@@ -249,7 +275,7 @@ public class RenkeiDataTorikomiValidationHandler {
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs check認定調査員情報ファイル(ValidationMessageControlPairs validPairs, RString path, boolean pathFlag) {
+    public RString check認定調査員情報ファイル(RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
@@ -263,43 +289,26 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ChosainJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 認定調査員データ取込みファイル名;
                 }
-                CsvReader<ChosainJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, ChosainJohoDensanCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (電算標準版_9 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (電算標準版_9 < getSize(read)) {
+                    return 認定調査員データ取込みファイル名;
                 }
             } else if (厚労省.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, ChosainJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 認定調査員データ取込みファイル名;
                 }
-                CsvReader<ChosainJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, ChosainJohoKouroushouCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (厚労省_8 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (厚労省_8 < getSize(read)) {
+                    return 認定調査員データ取込みファイル名;
                 }
             } else {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate認定調査員情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                return 認定調査員データ取込みファイル名;
             }
         }
-        return validPairs;
+        return RString.EMPTY;
     }
 
     /**
@@ -310,7 +319,7 @@ public class RenkeiDataTorikomiValidationHandler {
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs check主治医医療機関情報ファイル(ValidationMessageControlPairs validPairs, RString path, boolean pathFlag) {
+    public RString check主治医医療機関情報ファイル(RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
@@ -324,43 +333,26 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ShujiiIryoKikanJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 認定調査員データ取込みファイル名;
                 }
-                CsvReader<ShujiiIryoKikanJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, ShujiiIryoKikanJohoDensanCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (電算標準版_10 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (電算標準版_10 < getSize(read)) {
+                    return 主治医医療機関データ取込みファイル名;
                 }
             } else if (厚労省.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, ShujiiIryoKikanJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 主治医医療機関データ取込みファイル名;
                 }
-                CsvReader<ShujiiIryoKikanJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, ShujiiIryoKikanJohoKouroushouCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (厚労省_9 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (厚労省_9 < getSize(read)) {
+                    return 主治医医療機関データ取込みファイル名;
                 }
             } else {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate主治医医療機関情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                return 主治医医療機関データ取込みファイル名;
             }
         }
-        return validPairs;
+        return RString.EMPTY;
     }
 
     /**
@@ -371,7 +363,7 @@ public class RenkeiDataTorikomiValidationHandler {
      * @param pathFlag pathFlag
      * @return ValidationMessageControlPairs(バリデーション結果)
      */
-    public ValidationMessageControlPairs check主治医情報ファイル(ValidationMessageControlPairs validPairs, RString path, boolean pathFlag) {
+    public RString check主治医情報ファイル(RString path, boolean pathFlag) {
         RString filePath;
         if (pathFlag) {
             filePath = path;
@@ -385,94 +377,33 @@ public class RenkeiDataTorikomiValidationHandler {
                         filePath, ShujiiJohoDensanCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 主治医データ取込みファイル名;
                 }
-                CsvReader<ShujiiJohoDensanCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, ShujiiJohoDensanCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (電算標準版_8 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (電算標準版_8 < getSize(read)) {
+                    return 主治医データ取込みファイル名;
                 }
             } else if (厚労省.equals(マスタIF種類)) {
                 if (new CsvReader.InstanceBuilder(
                         filePath, ShujiiJohoKouroushouCsvEntity.class)
                         .setDelimiter(EUC_WRITER_DELIMITER)
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-                    return validPairs;
+                    return 主治医データ取込みファイル名;
                 }
-                CsvReader<ShujiiJohoKouroushouCsvEntity> csvReader = new CsvReader.InstanceBuilder(
-                        filePath, ShujiiJohoKouroushouCsvEntity.class)
-                        .setDelimiter(EUC_WRITER_DELIMITER).setEncode(set文字コード())
-                        .setNewLine(NewLine.CRLF)
-                        .hasHeader(false).build();
-                if (厚労省_7 < getSize(read) || !TITLE.equals(csvReader.readLine().getシーケンシャル番号())) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                if (厚労省_7 < getSize(read)) {
+                    return 主治医データ取込みファイル名;
                 }
             } else {
-                validPairs.add(new ValidationMessageControlPair(
-                        FilecheckMessages.Validate主治医情報ファイル, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
+                return 主治医データ取込みファイル名;
             }
         }
-        return validPairs;
-    }
-
-    /**
-     * ファイル名称チェックを実施します。
-     *
-     * @param validPairs validPairs
-     * @param is認定申請情報ファイル is認定申請情報ファイル
-     * @param is認定調査委託先情報ファイル is認定調査委託先情報ファイル
-     * @param is認定調査員情報ファイル is認定調査員情報ファイル
-     * @param is主治医医療機関情報ファイル is主治医医療機関情報ファイル
-     * @param is主治医情報ファイル is主治医情報ファイル
-     * @return ValidationMessageControlPairs(バリデーション結果)
-     */
-    public ValidationMessageControlPairs checkFileName(ValidationMessageControlPairs validPairs,
-            boolean is認定申請情報ファイル, boolean is認定調査委託先情報ファイル, boolean is認定調査員情報ファイル,
-            boolean is主治医医療機関情報ファイル, boolean is主治医情報ファイル) {
-        List<dgTorikomiTaisho_Row> checkitems = div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems();
-        if (checkitems != null && !checkitems.isEmpty()) {
-            for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems()) {
-                if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName()) && !is認定申請情報ファイル) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定申請情報ファイル, div.getUploadArea().getUploadTool()));
-                }
-                if (認定調査委託先データ取込みファイル名.equals(row.getFileName()) && !is認定調査委託先情報ファイル) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査委託先情報ファイル, div.getUploadArea().getUploadTool()));
-                }
-                if (認定調査員データ取込みファイル名.equals(row.getFileName()) && !is認定調査員情報ファイル) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate認定調査員情報ファイル, div.getUploadArea().getUploadTool()));
-                }
-                if (主治医医療機関データ取込みファイル名.equals(row.getFileName()) && !is主治医医療機関情報ファイル) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医医療機関情報ファイル, div.getUploadArea().getUploadTool()));
-                }
-                if (主治医データ取込みファイル名.equals(row.getFileName()) && !is主治医情報ファイル) {
-                    validPairs.add(new ValidationMessageControlPair(
-                            FilecheckMessages.Validate主治医情報ファイル, div.getUploadArea().getUploadTool()));
-                }
-            }
-        } else {
-            validPairs.add(new ValidationMessageControlPair(
-                    FilecheckMessages.Validate未選択, div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho()));
-        }
-        return validPairs;
+        return RString.EMPTY;
     }
 
     private int getSize(CsvListReader read) {
         int size = 0;
-        if (read.readLine() != null) {
-            size = read.readLine().size();
+        List<RString> list = read.readLine();
+        if (list != null && !list.isEmpty()) {
+                size = list.size();
         }
         return size;
     }
@@ -495,7 +426,8 @@ public class RenkeiDataTorikomiValidationHandler {
         Validate認定調査委託先情報ファイル(UrErrorMessages.不正, "認定調査委託先情報ファイル"),
         Validate認定調査員情報ファイル(UrErrorMessages.不正, "認定調査員情報ファイル"),
         Validate主治医医療機関情報ファイル(UrErrorMessages.不正, "主治医医療機関情報ファイル"),
-        Validate主治医情報ファイル(UrErrorMessages.不正, "主治医情報ファイル");
+        Validate主治医情報ファイル(UrErrorMessages.不正, "主治医情報ファイル"),
+        Validateチェック(UrErrorMessages.設定不可, "認定申請情報が選択されていない");
         private final Message message;
 
         private FilecheckMessages(IMessageGettable message, String... replacements) {
@@ -505,6 +437,47 @@ public class RenkeiDataTorikomiValidationHandler {
         @Override
         public Message getMessage() {
             return message;
+        }
+    }
+
+    private enum InfoMessages implements IMessageGettable {
+
+        /**
+         * "保存は正常に終了しました。"を定義しています。
+         */
+        ゼロ件チェック(10, "?は総件数が0件のためアップロードできません。"),
+        不正ファイル(20, "?は不正のファイルのためアップロードできません。");
+
+        private final int no;
+        private final RString message;
+
+        private InfoMessages(int no, String message) {
+            this.no = no;
+            this.message = new RString(message);
+        }
+
+        @Override
+        public Message getMessage() {
+            return new InformationMessage(toCode("I", no), message.toString());
+        }
+
+    }
+
+    public enum ErrorMessages implements IMessageGettable {
+
+        不正ファイル(1, "?が不正のファイルのためアップロードできません。");
+
+        private final int no;
+        private final RString message;
+
+        private ErrorMessages(int no, String message) {
+            this.no = no;
+            this.message = new RString(message);
+        }
+
+        @Override
+        public Message getMessage() {
+            return new ErrorMessage(toCode("E", no), message.toString());
         }
     }
 }

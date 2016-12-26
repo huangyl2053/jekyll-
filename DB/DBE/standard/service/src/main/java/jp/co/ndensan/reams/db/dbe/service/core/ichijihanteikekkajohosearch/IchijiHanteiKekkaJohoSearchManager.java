@@ -37,6 +37,9 @@ public class IchijiHanteiKekkaJohoSearchManager {
 
     private final MapperProvider mapperProvider;
 
+    private final RString ARGMENT_SPLIT_STR = new RString("|");
+    private final RString DATA_SPLIT_STR = new RString(",");
+
     /**
      * コンストラクタです。
      */
@@ -53,15 +56,51 @@ public class IchijiHanteiKekkaJohoSearchManager {
         return InstanceProvider.create(IchijiHanteiKekkaJohoSearchManager.class);
     }
 
+    /**
+     * 一次判定に必要な引数の作成を行います。このメソッドは複数件の申請者の一次判定を一括で行いたい場合に使用します。<br/>
+     * ただし、申請書管理番号が正しく渡せていなかったり、引数の作成できないデータ（厚労省IF識別コードが過去のもの）が渡された場合、
+     * EMPTYを返します。
+     *
+     * @param 申請書管理番号List
+     * @return 一次判定に必要な引数（複数対象者一括処理用）。もしくはEMPTY
+     */
+    @Transaction
+    public RString get一次判定引数(List<ShinseishoKanriNo> 申請書管理番号List) {
+        RStringBuilder builder = new RStringBuilder();
+        for (ShinseishoKanriNo 申請書管理番号 : 申請書管理番号List) {
+            RString argument = get一次判定引数(申請書管理番号);
+            if (RString.isNullOrEmpty(argument)) {
+                return RString.EMPTY;
+            }
+            builder.append(argument);
+            builder.append(ARGMENT_SPLIT_STR);
+        }
+        RString 引数 = builder.toRString();
+        引数 = 引数.substring(0, 引数.length() - 1);
+        return 引数;
+    }
+
+    /**
+     * 一次判定処理に必要な、引数の作成を行います。このメソッドは１人１人一次判定を行いたい場合に使用します。<br/>
+     * ただし、申請書管理番号が正しく渡せていなかったり、引数の作成できないデータ（厚労省IF識別コードが過去のもの）が渡された場合、
+     * EMPTYを返します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @return 一次判定DLLに渡す引数。もしくはEMPTY
+     */
     @Transaction
     public RString get一次判定引数(ShinseishoKanriNo 申請書管理番号) {
         if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("申請書管理番号"));
+            //TODO n8178 城間 一次判定DLLを実行する側で、ValidationErrorを待ち受けているため、ApplicationExceptionを発生させない方針に変更。
+            //throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("申請書管理番号"));
+            return RString.EMPTY;
         }
         Code 厚労省IF識別コード = get厚労省IF識別コード(申請書管理番号);
         if (!KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
                 && !KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-            throw new ApplicationException(DbeErrorMessages.一次判定実行不可.getMessage());
+            //TODO n8178 城間 一次判定DLLを実行する側で、ValidationErrorを待ち受けているため、ApplicationExceptionを発生させない方針に変更。
+            //throw new ApplicationException(DbeErrorMessages.一次判定実行不可_申請日.getMessage());
+            return RString.EMPTY;
         }
 
         List<RString> 基本調査項目List = get基本調査項目(申請書管理番号);
@@ -83,13 +122,13 @@ public class IchijiHanteiKekkaJohoSearchManager {
 
         RStringBuilder builder = new RStringBuilder();
         builder.append(基本調査項目);
-        builder.append(",");
+        builder.append(DATA_SPLIT_STR);
         builder.append(主治医意見書項目);
-        builder.append(",");
+        builder.append(DATA_SPLIT_STR);
         builder.append(障害高齢者自立度);
-        builder.append(",");
+        builder.append(DATA_SPLIT_STR);
         builder.append(認知症高齢者自立度);
-        builder.append(",");
+        builder.append(DATA_SPLIT_STR);
         builder.append(認知症高齢者自立度_主治医意見書);
 
         return builder.toRString();
@@ -107,7 +146,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
         return builder.toRString();
     }
 
-    //TODO n8178 不要か判断した後削除する。（一次判定は行えない以上不要と思われるが、別処理でも利用されているので現状は残している）
+    //TODO n8178 不要か判断した後削除する。（一次判定は行えない以上不要と思われるが、別処理でも利用されているようなので現状は残している）
     /**
      * 被保険者編集
      *

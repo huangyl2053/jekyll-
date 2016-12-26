@@ -13,44 +13,16 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE3100001",
-     "toLayoutTitle": "完了処理・一次判定",
-     "toState": "登録"
+     "toLayoutTitle": "一次判定処理",
+     "toState": "初期表示"
     },
     {
      "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE3100001",
-     "layoutTitle": "完了処理・一次判定",
-     "eventName": "一次判定処理",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE3010001",
-     "toLayoutTitle": "要介護認定一次判定",
-     "toState": "一次判定対象者一覧"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE3010001",
-     "layoutTitle": "要介護認定一次判定",
-     "eventName": "戻る",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE3100001",
-     "toLayoutTitle": "完了処理・一次判定",
-     "toState": "登録"
-    },
-    {
-     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE3100001",
      "layoutTitle": "完了処理・一次判定",
-     "eventName": "終了状態",
+     "eventName": "終了",
      "destroy": false,
      "condition": ""
     }

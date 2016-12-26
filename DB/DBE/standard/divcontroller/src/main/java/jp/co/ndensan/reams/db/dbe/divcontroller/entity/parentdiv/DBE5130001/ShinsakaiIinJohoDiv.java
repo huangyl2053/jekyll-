@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtShinsainCode")
-    private TextBox txtShinsainCode;
+    private TextBoxCode txtShinsainCode;
     @JsonProperty("txtShinsaIinYMDFrom")
     private TextBoxDate txtShinsaIinYMDFrom;
     @JsonProperty("txtShinsaIinYMDTo")
@@ -36,7 +36,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
     @JsonProperty("radSeibetsu")
     private RadioButton radSeibetsu;
     @JsonProperty("txtBirthYMD")
-    private TextBoxFlexibleDate txtBirthYMD;
+    private TextBoxDate txtBirthYMD;
     @JsonProperty("ddlShikakuCode")
     private DropDownList ddlShikakuCode;
     @JsonProperty("txtBiko")
@@ -55,7 +55,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * @return txtShinsainCode
      */
     @JsonProperty("txtShinsainCode")
-    public TextBox getTxtShinsainCode() {
+    public TextBoxCode getTxtShinsainCode() {
         return txtShinsainCode;
     }
 
@@ -64,7 +64,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * @param txtShinsainCode txtShinsainCode
      */
     @JsonProperty("txtShinsainCode")
-    public void setTxtShinsainCode(TextBox txtShinsainCode) {
+    public void setTxtShinsainCode(TextBoxCode txtShinsainCode) {
         this.txtShinsainCode = txtShinsainCode;
     }
 
@@ -163,7 +163,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * @return txtBirthYMD
      */
     @JsonProperty("txtBirthYMD")
-    public TextBoxFlexibleDate getTxtBirthYMD() {
+    public TextBoxDate getTxtBirthYMD() {
         return txtBirthYMD;
     }
 
@@ -172,7 +172,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * @param txtBirthYMD txtBirthYMD
      */
     @JsonProperty("txtBirthYMD")
-    public void setTxtBirthYMD(TextBoxFlexibleDate txtBirthYMD) {
+    public void setTxtBirthYMD(TextBoxDate txtBirthYMD) {
         this.txtBirthYMD = txtBirthYMD;
     }
 

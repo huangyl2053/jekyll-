@@ -55,8 +55,7 @@ public class NinteiShinseiTodokedesha {
      */
     public ResponseData<NinteiShinseiTodokedeshaDiv> onLoad(NinteiShinseiTodokedeshaDiv div) {
         div.getTxtHonninKankeisei().clearValue();
-        div.getTxtJigyoshaCode().clearValue();
-        div.getTxtJigyoshaName().clearValue();
+        clearCcdShisetsuJohoCommonChildDiv(div);
         div.getTxtKanaShimei().clearValue();
         div.getTxtShimei().clearValue();
         div.getTxtTelNo().clearDomain();
@@ -97,16 +96,21 @@ public class NinteiShinseiTodokedesha {
                 div.getCcdZenkokuJushoInput().load(ZenkokuJushoCode.EMPTY, div.getHdnJusho(), new YubinNo(div.getHdnYubinNo()));
             }
             div.getTxtTelNo().setDomain(new TelNo(div.getHdnTelNo()));
+            clearCcdShisetsuJohoCommonChildDiv(div);
         } else if (ShinseiTodokedeDaikoKubunCode.家族.getCode().equals(div.getDdlTodokledeDaikoKubun().getSelectedKey())) {
             div.getBtnSetaiIchiran().setDisabled(false);
+            clearCcdShisetsuJohoCommonChildDiv(div);
         } else if (ShinseiTodokedeDaikoKubunCode.委任.getCode().equals(div.getDdlTodokledeDaikoKubun().getSelectedKey())) {
             div.getBtnAtenaKensaku().setDisabled(false);
+            clearCcdShisetsuJohoCommonChildDiv(div);
         } else if (ShinseiTodokedeDaikoKubunCode.代行.getCode().equals(div.getDdlTodokledeDaikoKubun().getSelectedKey())) {
-            div.getTxtJigyoshaCode().setReadOnly(false);
-            div.getBtnJigyoshaGuide().setDisabled(false);
+            div.getCcdShisetsuJohoCommonChildDiv().setDisabled(false);
+//            div.getTxtJigyoshaCode().setReadOnly(false);
+//            div.getBtnJigyoshaGuide().setDisabled(false);
             div.getDdlShinseiKankeisha().setReadOnly(false);
         } else {
             setその他(div);
+            clearCcdShisetsuJohoCommonChildDiv(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -195,16 +199,17 @@ public class NinteiShinseiTodokedesha {
      * @return NinteiShinseiTodokedeshaDivのResponseData
      */
     public ResponseData<NinteiShinseiTodokedeshaDiv> lostFocus(NinteiShinseiTodokedeshaDiv div) {
-        if (!RString.isNullOrEmpty(div.getTxtJigyoshaCode().getValue())) {
+        if (!RString.isNullOrEmpty(div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().getValue())) {
             NinteiShinseiTodokedeshaFinder finder = NinteiShinseiTodokedeshaFinder.createInstance();
-            List<KaigoJigyoshaInputGuide> kaigoList = finder.getKaigoJigyoshaInputGuide(new JigyoshaNo(div.getTxtJigyoshaCode().getValue()),
+            List<KaigoJigyoshaInputGuide> kaigoList = finder.getKaigoJigyoshaInputGuide(
+                    new JigyoshaNo(div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().getValue()),
                     FlexibleDate.getNowDate()).records();
             if (!kaigoList.isEmpty()) {
-                div.getTxtJigyoshaName().setValue(kaigoList.get(0).get事業者名称().value());
+                div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuMeisho().setValue(kaigoList.get(0).get事業者名称().value());
                 return ResponseData.of(div).respond();
             }
         }
-        div.getTxtJigyoshaName().setValue(RString.EMPTY);
+       div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuMeisho().setValue(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -221,7 +226,7 @@ public class NinteiShinseiTodokedesha {
 
     private void set前回内容(DbT4120ShinseitodokedeJohoBusiness dbt4120, NinteiShinseiTodokedeshaDiv div) {
         if (dbt4120 != null) {
-            div.getTxtJigyoshaCode().setValue(dbt4120.get申請届出代行事業者番号().value());
+            div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().setValue(dbt4120.get申請届出代行事業者番号().value());
             div.getTxtHonninKankeisei().setValue(dbt4120.get申請届出者続柄());
             div.getTxtShimei().setValue(dbt4120.get申請届出者氏名());
             div.getTxtKanaShimei().setValue(dbt4120.get申請届出者氏名カナ());
@@ -238,15 +243,12 @@ public class NinteiShinseiTodokedesha {
         div.getBtnSetaiIchiran().setDisabled(true);
         div.getBtnAtenaKensaku().setDisabled(true);
         div.getBtnZenkaiFukusha().setDisabled(false);
-        div.getBtnJigyoshaGuide().setDisabled(true);
-        div.getTxtJigyoshaCode().setReadOnly(true);
+        div.getCcdShisetsuJohoCommonChildDiv().setDisabled(true);
     }
 
     private void setその他(NinteiShinseiTodokedeshaDiv div) {
         div.getDdlShinseiKankeisha().setSelectedIndex(0);
         div.getTxtHonninKankeisei().clearValue();
-        div.getTxtJigyoshaCode().clearValue();
-        div.getTxtJigyoshaName().clearValue();
         div.getTxtKanaShimei().clearValue();
         div.getTxtShimei().clearValue();
         div.getTxtTelNo().clearDomain();
@@ -254,11 +256,16 @@ public class NinteiShinseiTodokedesha {
         div.getCcdChoikiInput().clear();
         div.getCcdZenkokuJushoInput().clear();
         div.getBtnAtenaKensaku().setDisabled(true);
-        div.getBtnJigyoshaGuide().setDisabled(true);
+        div.getCcdShisetsuJohoCommonChildDiv().setDisabled(true);
         div.getBtnSetaiIchiran().setDisabled(true);
-        div.getTxtJigyoshaCode().setReadOnly(true);
         div.getDdlShinseiKankeisha().setReadOnly(true);
     }
+    
+    private void clearCcdShisetsuJohoCommonChildDiv(NinteiShinseiTodokedeshaDiv div) {
+        div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().clearValue();
+        div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuMeisho().clearValue();
+    }
+    
 
     private List<KeyValueDataSource> setDataSource(List<RString> codeList, boolean kubun) {
         Collections.sort(codeList);

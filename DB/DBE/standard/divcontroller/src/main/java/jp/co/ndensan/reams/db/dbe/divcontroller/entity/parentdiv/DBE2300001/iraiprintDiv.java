@@ -21,18 +21,38 @@ public class iraiprintDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("Chkirai")
-    private CheckBoxList Chkirai;
+    @JsonProperty("printName")
+    private Label printName;
+    @JsonProperty("iraiSho")
+    private CheckBoxList iraiSho;
     @JsonProperty("txtHakobi")
     private TextBoxDate txtHakobi;
     @JsonProperty("radkigen")
     private RadioButton radkigen;
     @JsonProperty("txtkigenymd")
     private TextBoxDate txtkigenymd;
+    @JsonProperty("Sp2")
+    private Space Sp2;
+    @JsonProperty("iraiIchiranHyo")
+    private CheckBoxList iraiIchiranHyo;
     @JsonProperty("Sp")
     private Space Sp;
-    @JsonProperty("Chkprint")
-    private CheckBoxList Chkprint;
+    @JsonProperty("Sp3")
+    private Space Sp3;
+    @JsonProperty("kinyoYoshi")
+    private CheckBoxList kinyoYoshi;
+    @JsonProperty("kinyuYoshiOCR")
+    private CheckBoxList kinyuYoshiOCR;
+    @JsonProperty("kinyuYoshiDesign")
+    private CheckBoxList kinyuYoshiDesign;
+    @JsonProperty("seikyuSho")
+    private CheckBoxList seikyuSho;
+    @JsonProperty("Sp4")
+    private Space Sp4;
+    @JsonProperty("meireiSho")
+    private CheckBoxList meireiSho;
+    @JsonProperty("teishutsuIraiSho")
+    private CheckBoxList teishutsuIraiSho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,21 +61,39 @@ public class iraiprintDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getChkirai
-     * @return Chkirai
+     * getprintName
+     * @return printName
      */
-    @JsonProperty("Chkirai")
-    public CheckBoxList getChkirai() {
-        return Chkirai;
+    @JsonProperty("printName")
+    public Label getPrintName() {
+        return printName;
     }
 
     /*
-     * setChkirai
-     * @param Chkirai Chkirai
+     * setprintName
+     * @param printName printName
      */
-    @JsonProperty("Chkirai")
-    public void setChkirai(CheckBoxList Chkirai) {
-        this.Chkirai = Chkirai;
+    @JsonProperty("printName")
+    public void setPrintName(Label printName) {
+        this.printName = printName;
+    }
+
+    /*
+     * getiraiSho
+     * @return iraiSho
+     */
+    @JsonProperty("iraiSho")
+    public CheckBoxList getIraiSho() {
+        return iraiSho;
+    }
+
+    /*
+     * setiraiSho
+     * @param iraiSho iraiSho
+     */
+    @JsonProperty("iraiSho")
+    public void setIraiSho(CheckBoxList iraiSho) {
+        this.iraiSho = iraiSho;
     }
 
     /*
@@ -113,6 +151,42 @@ public class iraiprintDiv extends Panel {
     }
 
     /*
+     * getSp2
+     * @return Sp2
+     */
+    @JsonProperty("Sp2")
+    public Space getSp2() {
+        return Sp2;
+    }
+
+    /*
+     * setSp2
+     * @param Sp2 Sp2
+     */
+    @JsonProperty("Sp2")
+    public void setSp2(Space Sp2) {
+        this.Sp2 = Sp2;
+    }
+
+    /*
+     * getiraiIchiranHyo
+     * @return iraiIchiranHyo
+     */
+    @JsonProperty("iraiIchiranHyo")
+    public CheckBoxList getIraiIchiranHyo() {
+        return iraiIchiranHyo;
+    }
+
+    /*
+     * setiraiIchiranHyo
+     * @param iraiIchiranHyo iraiIchiranHyo
+     */
+    @JsonProperty("iraiIchiranHyo")
+    public void setIraiIchiranHyo(CheckBoxList iraiIchiranHyo) {
+        this.iraiIchiranHyo = iraiIchiranHyo;
+    }
+
+    /*
      * getSp
      * @return Sp
      */
@@ -131,21 +205,147 @@ public class iraiprintDiv extends Panel {
     }
 
     /*
-     * getChkprint
-     * @return Chkprint
+     * getSp3
+     * @return Sp3
      */
-    @JsonProperty("Chkprint")
-    public CheckBoxList getChkprint() {
-        return Chkprint;
+    @JsonProperty("Sp3")
+    public Space getSp3() {
+        return Sp3;
     }
 
     /*
-     * setChkprint
-     * @param Chkprint Chkprint
+     * setSp3
+     * @param Sp3 Sp3
      */
-    @JsonProperty("Chkprint")
-    public void setChkprint(CheckBoxList Chkprint) {
-        this.Chkprint = Chkprint;
+    @JsonProperty("Sp3")
+    public void setSp3(Space Sp3) {
+        this.Sp3 = Sp3;
+    }
+
+    /*
+     * getkinyoYoshi
+     * @return kinyoYoshi
+     */
+    @JsonProperty("kinyoYoshi")
+    public CheckBoxList getKinyoYoshi() {
+        return kinyoYoshi;
+    }
+
+    /*
+     * setkinyoYoshi
+     * @param kinyoYoshi kinyoYoshi
+     */
+    @JsonProperty("kinyoYoshi")
+    public void setKinyoYoshi(CheckBoxList kinyoYoshi) {
+        this.kinyoYoshi = kinyoYoshi;
+    }
+
+    /*
+     * getkinyuYoshiOCR
+     * @return kinyuYoshiOCR
+     */
+    @JsonProperty("kinyuYoshiOCR")
+    public CheckBoxList getKinyuYoshiOCR() {
+        return kinyuYoshiOCR;
+    }
+
+    /*
+     * setkinyuYoshiOCR
+     * @param kinyuYoshiOCR kinyuYoshiOCR
+     */
+    @JsonProperty("kinyuYoshiOCR")
+    public void setKinyuYoshiOCR(CheckBoxList kinyuYoshiOCR) {
+        this.kinyuYoshiOCR = kinyuYoshiOCR;
+    }
+
+    /*
+     * getkinyuYoshiDesign
+     * @return kinyuYoshiDesign
+     */
+    @JsonProperty("kinyuYoshiDesign")
+    public CheckBoxList getKinyuYoshiDesign() {
+        return kinyuYoshiDesign;
+    }
+
+    /*
+     * setkinyuYoshiDesign
+     * @param kinyuYoshiDesign kinyuYoshiDesign
+     */
+    @JsonProperty("kinyuYoshiDesign")
+    public void setKinyuYoshiDesign(CheckBoxList kinyuYoshiDesign) {
+        this.kinyuYoshiDesign = kinyuYoshiDesign;
+    }
+
+    /*
+     * getseikyuSho
+     * @return seikyuSho
+     */
+    @JsonProperty("seikyuSho")
+    public CheckBoxList getSeikyuSho() {
+        return seikyuSho;
+    }
+
+    /*
+     * setseikyuSho
+     * @param seikyuSho seikyuSho
+     */
+    @JsonProperty("seikyuSho")
+    public void setSeikyuSho(CheckBoxList seikyuSho) {
+        this.seikyuSho = seikyuSho;
+    }
+
+    /*
+     * getSp4
+     * @return Sp4
+     */
+    @JsonProperty("Sp4")
+    public Space getSp4() {
+        return Sp4;
+    }
+
+    /*
+     * setSp4
+     * @param Sp4 Sp4
+     */
+    @JsonProperty("Sp4")
+    public void setSp4(Space Sp4) {
+        this.Sp4 = Sp4;
+    }
+
+    /*
+     * getmeireiSho
+     * @return meireiSho
+     */
+    @JsonProperty("meireiSho")
+    public CheckBoxList getMeireiSho() {
+        return meireiSho;
+    }
+
+    /*
+     * setmeireiSho
+     * @param meireiSho meireiSho
+     */
+    @JsonProperty("meireiSho")
+    public void setMeireiSho(CheckBoxList meireiSho) {
+        this.meireiSho = meireiSho;
+    }
+
+    /*
+     * getteishutsuIraiSho
+     * @return teishutsuIraiSho
+     */
+    @JsonProperty("teishutsuIraiSho")
+    public CheckBoxList getTeishutsuIraiSho() {
+        return teishutsuIraiSho;
+    }
+
+    /*
+     * setteishutsuIraiSho
+     * @param teishutsuIraiSho teishutsuIraiSho
+     */
+    @JsonProperty("teishutsuIraiSho")
+    public void setTeishutsuIraiSho(CheckBoxList teishutsuIraiSho) {
+        this.teishutsuIraiSho = teishutsuIraiSho;
     }
 
     // </editor-fold>

@@ -54,19 +54,19 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
      */
     public void setDdlTodokledeDaikoKubun(DropDownList ddlTodokledeDaikoKubun);
 
-    /**
-     * 事業者を設定。
-     *
-     * @param txtJigyoshaCode TextBox
-     */
-    public void setTxtJigyoshaCode(TextBox txtJigyoshaCode);
+//    /**
+//     * 事業者を設定。
+//     *
+//     * @param txtJigyoshaCode TextBox
+//     */
+//    public void setTxtJigyoshaCode(TextBox txtJigyoshaCode);
 
-    /**
-     * 事業者を取得。
-     *
-     * @return TextBox
-     */
-    public TextBox getTxtJigyoshaCode();
+//    /**
+//     * 事業者を取得。
+//     *
+//     * @return TextBox
+//     */
+//    public TextBox getTxtJigyoshaCode();
 
     /**
      * 申請関係者を取得。

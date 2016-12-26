@@ -5,92 +5,48 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601006;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran.ShinsaHoshuIchiranChange;
-import jp.co.ndensan.reams.db.dbe.business.report.shinsahoshuichiran.ShinsaHoshuIchiranReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsahoshuichiran.ShinsaHoshuIchiranProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.IShinsaHoshuIchiranEntityCsvEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsahoshuichiran.ShinsaHoshuIchiranRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.shinsahoshuichiran.ShinsaHoshuIchiranReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsahoshuichiran.IShinsaHoshuIchiranMapper;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬一覧表のプロセス処理の帳票出力のプロセスクラスです。
  *
  * @reamsid_L DBE-1920-020 zhaoyao
  */
-public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchiranRelateEntity> {
+public abstract class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID_GOKE = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsahoshuichiran.IShinsaHoshuIchiranMapper.get合計額");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE604001"));
-    private static final RString CSV_FILE_NAME = new RString("介護認定審査会委員報酬一覧表.csv");
-    private static final RString なし = new RString("なし");
+    protected static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE604001"));
+    protected static final RString CSV_FILE_NAME = new RString("介護認定審査会委員報酬一覧表.csv");
+    protected static final RString なし = new RString("なし");
     private static final RString CSVを出力する = new RString("1");
     private static final RString 一覧表を発行する = new RString("2");
     private ShinsaHoshuIchiranChange 審査報酬一覧EntityConvertor;
-    private ShinsaHoshuIchiranProcessParameter paramter;
+    protected ShinsaHoshuIchiranProcessParameter paramter;
     private List<ShinsaHoshuIchiranRelateEntity> 出席状況EntityList;
-    private FileSpoolManager fileSpoolManager;
-    private RString eucFilePath;
     private int 出席回数;
     private static final RString 長 = new RString("長");
     private static final RString 出 = new RString("出");
     private static final RString 副 = new RString("副");
     private static final RString 月 = new RString("月");
-    private static final int ZERO = 0;
-    private static final long ONE = 1;
+    protected static final int ZERO = 0;
+    protected static final long ONE = 1;
     private static final int FOUR = 4;
-    private boolean is初回目 = true;
-    private int 総合計_審査回数;
-    private Decimal 総合計_報酬総額;
-    private Decimal 総合計_その他費用;
-    private Decimal 総合計_税控除額;
-    private Decimal 総合計_報酬合計;
-
-    @BatchWriter
-    private CsvWriter<IShinsaHoshuIchiranEntityCsvEucEntity> csvWriter;
-    @BatchWriter
-    private BatchReportWriter<ShinsaHoshuIchiranReportSource> batchWriter;
-    private ReportSourceWriter<ShinsaHoshuIchiranReportSource> reportWriter;
-
 
     @Override
     protected void initialize() {
-        総合計_審査回数 = 0;
-        総合計_報酬総額 = Decimal.ZERO;
-        総合計_その他費用 = Decimal.ZERO;
-        総合計_税控除額 = Decimal.ZERO;
-        総合計_報酬合計 = Decimal.ZERO;
         審査報酬一覧EntityConvertor = new ShinsaHoshuIchiranChange();
     }
     
@@ -104,20 +60,6 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID_GOKE, paramter.toMybitisParamter());
-    }
-
-    @Override
-    protected void createWriter() {
-        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        eucFilePath = Path.combinePath(spoolWorkPath, CSV_FILE_NAME);
-        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true)
-                .build();
-        
-        batchWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE601005.getReportId().value()).create();
-        reportWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
@@ -167,95 +109,16 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
                 this.count出席回数(出席状況Entity.get出席状況_29日());
                 this.count出席回数(出席状況Entity.get出席状況_30日());
                 this.count出席回数(出席状況Entity.get出席状況_31日());
-                出席状況Entity.set出席回数(出席回数);                    
-                総合計_審査回数 += 出席回数;
-
-                if (is初回目) {
-                    総合計_報酬総額 = 合計額Entity.get総合計_報酬総額();
-                    総合計_その他費用 = 合計額Entity.getその他費用();
-                    総合計_税控除額 = 合計額Entity.get税額控除();
-                    総合計_報酬合計 = 合計額Entity.get総合計_報酬合計();
-                    is初回目 = false;
-                }
+                出席状況Entity.set出席回数(出席回数);
 
                 ShinsaHoshuIchiranEntity 審査報酬一覧Entity = 
                         審査報酬一覧EntityConvertor.createData(出席状況Entity, paramter.get帳票出力区分());
-                if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-                    csvWriter.writeLine(審査報酬一覧Entity);
-                } else if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
-                    ShinsaHoshuIchiranReport report = new ShinsaHoshuIchiranReport(審査報酬一覧Entity);
-                    report.writeBy(reportWriter);
-                }
+                output(審査報酬一覧Entity);
             }
         }
     }
-
-    @Override
-    protected void afterExecute() {
-        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            ShinsaHoshuIchiranEntity 総合計 = new ShinsaHoshuIchiranEntity(
-                    null, null, null, null, null,
-                    null, null, null, null, null,
-                    null, null, null, null, null,
-                    null, null, null, null, null,
-                    null, null, null, null, null,
-                    null, null, null, null, null,
-                    null, null, null, null, null,
-                    null, null, null, null, new RString(総合計_審査回数),
-                    DecimalFormatter.toコンマ区切りRString(総合計_報酬総額, ZERO),
-                    DecimalFormatter.toコンマ区切りRString(総合計_その他費用, ZERO),
-                    DecimalFormatter.toコンマ区切りRString(総合計_税控除額, ZERO),
-                    DecimalFormatter.toコンマ区切りRString(総合計_報酬合計, ZERO));
-            csvWriter.writeLine(総合計);
-        }
-        csvWriter.close();
-        fileSpoolManager.spool(eucFilePath);
-        
-        Association 導入団体 = AssociationFinderFactory.createInstance().getAssociation();
-        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            バッチ出力条件リストの出力(導入団体);
-        } else if (一覧表を発行する.equals(paramter.get帳票出力区分())) {
-            帳票出力条件リストの出力(導入団体);
-        }
-    }
-
-    private void バッチ出力条件リストの出力(Association 導入団体) {
-        List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 審査会開催年月 = new RStringBuilder("【対象年月】");
-        審査会開催年月.append(getFormatted年月(paramter.get審査会開催年月()));
-        出力条件.add(審査会開催年月.toRString());
-        
-        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
-                new RString("介護認定審査会委員報酬一覧表CSV"),
-                導入団体.getLasdecCode_().value(), 
-                導入団体.get市町村名(), 
-                new RString(JobContextHolder.getJobId()),
-                CSV_FILE_NAME, 
-                EUC_ENTITY_ID.toRString(), 
-                new RString(csvWriter.getCount() - ONE), 
-                出力条件);
-        OutputJokenhyoFactory.createInstance(item).print();
-    }
-
-    private void 帳票出力条件リストの出力(Association 導入団体) {
-        List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 審査会開催年月 = new RStringBuilder("【対象年月】");
-        審査会開催年月.append(getFormatted年月(paramter.get審査会開催年月()));
-        出力条件.add(審査会開催年月.toRString());
-        
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE601005.getReportId().value(),
-                導入団体.getLasdecCode_().value(), 
-                導入団体.get市町村名(), 
-                new RString(JobContextHolder.getJobId()),
-                ReportIdDBE.DBE601005.getReportName(), 
-                new RString(reportWriter.pageCount().value()), 
-                なし, 
-                なし, 
-                出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
-        printer.print();
-    }
+    
+    protected abstract void output(ShinsaHoshuIchiranEntity 審査報酬一覧Entity);
 
     private void count出席回数(RString 出席状況) {
         if (ShinsaHoshuIchiranProcess.長.equals(出席状況) 
@@ -265,7 +128,7 @@ public class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaHoshuIchir
         }
     }
 
-    private static RString getFormatted年月(RString 年月RString) {
+    protected static RString getFormatted年月(RString 年月RString) {
         if (RString.isNullOrEmpty(年月RString)) {
             return RString.EMPTY;
         }

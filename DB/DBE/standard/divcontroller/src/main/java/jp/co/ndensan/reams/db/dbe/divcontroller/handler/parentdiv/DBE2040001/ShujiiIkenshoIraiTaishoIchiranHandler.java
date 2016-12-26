@@ -85,7 +85,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
         意見書依頼モード(意見書依頼List);
-        setCountDisplay();
     }
     
     /**
@@ -153,10 +152,19 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書依頼List.totalCount());
         if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
             div.getDgNinteiTaskList().setDataSource(rowListNotreated);
+            div.getTxtTotalCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(true);
+            div.getTxtNoUpdate().setDisplayNone(false);
         } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
             div.getDgNinteiTaskList().setDataSource(rowListComplete);
+            div.getTxtNoUpdate().setDisplayNone(true);
+            div.getTxtTotalCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(false);
         } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
             div.getDgNinteiTaskList().setDataSource(rowListALL);
+            div.getTxtTotalCount().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtNoUpdate().setDisplayNone(false);
         }
     }
 
@@ -212,21 +220,5 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      */
     public List<dgNinteiTaskList_Row> getDataSource() {
         return div.getDgNinteiTaskList().getDataSource();
-    }
-
-    private void setCountDisplay() {
-        if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
-            div.getTxtNoUpdate().setDisplayNone(false);
-            div.getTxtCompleteCount().setDisplayNone(true);
-            div.getTxtTotalCount().setDisplayNone(true);
-        } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
-            div.getTxtNoUpdate().setDisplayNone(true);
-            div.getTxtCompleteCount().setDisplayNone(false);
-            div.getTxtTotalCount().setDisplayNone(true);
-        } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
-            div.getTxtNoUpdate().setDisplayNone(false);
-            div.getTxtCompleteCount().setDisplayNone(false);
-            div.getTxtTotalCount().setDisplayNone(false);
-        }
     }
 }

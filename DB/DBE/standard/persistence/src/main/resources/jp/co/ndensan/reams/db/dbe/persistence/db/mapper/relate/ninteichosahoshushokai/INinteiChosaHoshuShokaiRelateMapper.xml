@@ -24,7 +24,12 @@
         T5601."chosaItakuryo",
         T5601."shinseishoKanriNo",
         T5601."ninteichosaIraiRirekiNo",
-        T7051."shichosonMeisho"
+        <if test="isKoiki">
+            #{広域_市町村名} AS shichosonMeisho
+        </if>
+        <if test="!isKoiki">
+            T7051."shichosonMeisho"
+        </if>
         FROM		rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS  T5601
         INNER JOIN	rgdb."DbT5101NinteiShinseiJoho" AS  T5101
         ON			T5101."shinseishoKanriNo"=T5601."shinseishoKanriNo"
@@ -43,13 +48,15 @@
         ON			T5202."shinseishoKanriNo"=T5601."shinseishoKanriNo"
         AND			T5202."ninteichosaRirekiNo"=T5601."ninteichosaIraiRirekiNo"
         AND			T5202."gaikyoChosaTextImageKubun"=#{テキストイメージ区分}
+        <if test="!isKoiki">
         INNER JOIN	rgdb."DbT7051KoseiShichosonMaster" AS  T7051
-        ON			T7051."shoKisaiHokenshaNo"=T5101."shoKisaiHokenshaNo"
+        ON			T7051."shoKisaiHokenshaNo"=T5101."shoKisaiHokenshaNo"            
+        </if>
         INNER JOIN	rgdb."DbT5910NinteichosaItakusakiJoho" AS  T5910
-        ON			T5910."shichosonCode"=T7051."shichosonCode"
+        ON			SUBSTR(T5910."shichosonCode", 1, 5)=SUBSTR(T5101."shoKisaiHokenshaNo", 1, 5)
         AND			T5910."ninteichosaItakusakiCode"=T5601."ninteichosaItakusakiCode"
         INNER JOIN	rgdb."DbT5913ChosainJoho" AS  T5913
-        ON			T5913."shichosonCode"=T7051."shichosonCode"
+        ON			SUBSTR(T5913."shichosonCode", 1, 5)=SUBSTR(T5101."shoKisaiHokenshaNo", 1, 5)
         AND			T5913."ninteiChosaItakusakiCode"=T5601."ninteichosaItakusakiCode"
         AND			T5913."ninteiChosainCode"=T5601."ninteichosainCode"
         WHERE	 1=1
@@ -61,7 +68,7 @@
         AND T5201."ninteichosaIraiYMD" <![CDATA[<=]]>#{調査依頼日終了}
         </if>
         <if test="isHokensha">
-            AND T7051."shichosonCode" = #{保険者}
+            AND SUBSTR(T5101."shoKisaiHokenshaNo", 1, 5) = SUBSTR(#{保険者} ,1 ,5)
         </if>
         <if test="batchFlag">
             AND

@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DbT5201UpdateProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
-            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査依頼情報");
+            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
     private HomonChosaIraishoProcessParamter processParamter;
     private HomonChosaIraishoBusiness business;
     @BatchWriter

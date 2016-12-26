@@ -187,7 +187,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請中間一時TBL_東芝版)
     protected IBatchFlowCommand insert要介護認定申請一時テーブル_東芝版() {
-        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -264,7 +264,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT主治医一時TBL_厚労省)
     protected IBatchFlowCommand insert主治医情報一時TBL_厚労省() {
-        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -320,7 +320,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT医療機関一時TBL_厚労省)
     protected IBatchFlowCommand insert主治医医療機関一時TBL_厚労省() {
-        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -376,7 +376,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT調査員一時TBL_厚労省)
     protected IBatchFlowCommand insert認定調査員一時TBL_厚労省() {
-        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -432,7 +432,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT委託先一時TBL_厚労)
     protected IBatchFlowCommand insert認定調査委託先一時TBL_厚労() {
-        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -487,7 +487,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請一時TBL_厚労省)
     protected IBatchFlowCommand insert認定申請一時中間テーブル_厚労省() {
-        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(認定申請ファイル, 認定申請一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     private void call電算標準版_認定申請IF種類(List<RString> 取込み対象ファイルリスト) {
@@ -543,7 +543,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT主治医一時TBL_電算)
     protected IBatchFlowCommand insert主治医情報一時TBL_電算() {
-        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(主治医情報ファイル, 主治医情報一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -611,7 +611,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT医療機関一時TBL_電算)
     protected IBatchFlowCommand insert主治医医療機関一時TBL_電算() {
-        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(医療機関ファイル, 医療機関一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -679,7 +679,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT調査員一時TBL_電算)
     protected IBatchFlowCommand insert認定調査員一時TBL_電算() {
-        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(認定調査員ファイル, 認定調査員一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -747,7 +747,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT委託先一時TBL_電算)
     protected IBatchFlowCommand insert認定調査委託先一時TBL_電算() {
-        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(調査委託先ファイル, 調査委託先一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**
@@ -819,7 +819,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
      */
     @Step(INSERT申請中間一時TBL_電算)
     protected IBatchFlowCommand insert認定申請一時中間テーブル_電算標準版() {
-        return importCsv(認定申請ファイル, 認定申請中間一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(true).define();
+        return importCsv(認定申請ファイル, 認定申請中間一時テーブルNAME, DbTableType.TEMPORARY).encode(encodeForParam).hasHeader(false).define();
     }
 
     /**

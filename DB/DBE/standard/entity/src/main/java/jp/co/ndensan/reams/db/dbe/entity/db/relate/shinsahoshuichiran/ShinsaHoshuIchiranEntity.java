@@ -98,15 +98,10 @@ public class ShinsaHoshuIchiranEntity implements IShinsaHoshuIchiranEntityCsvEuc
     private final RString 税額控除;
     @CsvField(order = 39, name = "報酬合計")
     private final RString 報酬合計;
-    @CsvField(order = 40, name = "審査回数")
     private final RString 審査回数_合計;
-    @CsvField(order = 41, name = "報酬総額")
     private final RString 報酬総額_合計;
-    @CsvField(order = 42, name = "その他費用")
     private final RString その他費用_合計;
-    @CsvField(order = 43, name = "税額控除")
     private final RString 税額控除_合計;
-    @CsvField(order = 44, name = "報酬合計")
     private final RString 報酬合計_合計;
 
     /**

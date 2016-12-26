@@ -128,22 +128,22 @@ public class IraishoIkkatsuHakkoBusiness {
         List<RString> 保険者番号リスト = get被保険者番号(entity.get証記載保険者番号());
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
-        item.setHokenshaNo1(保険者番号リスト.get(0));
-        item.setHokenshaNo2(保険者番号リスト.get(1));
-        item.setHokenshaNo3(保険者番号リスト.get(2));
-        item.setHokenshaNo4(保険者番号リスト.get(INT3));
-        item.setHokenshaNo5(保険者番号リスト.get(INT4));
-        item.setHokenshaNo6(保険者番号リスト.get(INT5));
-        item.setHihokenshaNo1(被保険者番号リスト.get(0));
-        item.setHihokenshaNo2(被保険者番号リスト.get(1));
-        item.setHihokenshaNo3(被保険者番号リスト.get(2));
-        item.setHihokenshaNo4(被保険者番号リスト.get(INT3));
-        item.setHihokenshaNo5(被保険者番号リスト.get(INT4));
-        item.setHihokenshaNo6(被保険者番号リスト.get(INT5));
-        item.setHihokenshaNo7(被保険者番号リスト.get(INT6));
-        item.setHihokenshaNo8(被保険者番号リスト.get(INT7));
-        item.setHihokenshaNo9(被保険者番号リスト.get(INT8));
-        item.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        item.setHokenshaNo1(getCode(保険者番号リスト,0));
+        item.setHokenshaNo2(getCode(保険者番号リスト,1));
+        item.setHokenshaNo3(getCode(保険者番号リスト,2));
+        item.setHokenshaNo4(getCode(保険者番号リスト,INT3));
+        item.setHokenshaNo5(getCode(保険者番号リスト,INT4));
+        item.setHokenshaNo6(getCode(保険者番号リスト,INT5));
+        item.setHihokenshaNo1(getCode(被保険者番号リスト,0));
+        item.setHihokenshaNo2(getCode(被保険者番号リスト,1));
+        item.setHihokenshaNo3(getCode(被保険者番号リスト,2));
+        item.setHihokenshaNo4(getCode(被保険者番号リスト,INT3));
+        item.setHihokenshaNo5(getCode(被保険者番号リスト,INT4));
+        item.setHihokenshaNo6(getCode(被保険者番号リスト,INT5));
+        item.setHihokenshaNo7(getCode(被保険者番号リスト,INT6));
+        item.setHihokenshaNo8(getCode(被保険者番号リスト,INT7));
+        item.setHihokenshaNo9(getCode(被保険者番号リスト,INT8));
+        item.setHihokenshaNo10(getCode(被保険者番号リスト,INT9));
         RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -166,22 +166,22 @@ public class IraishoIkkatsuHakkoBusiness {
         RString 生年月日 = entity.get生年月日();
         RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
-        item.setHokenshaNo1(保険者番号リスト.get(0));
-        item.setHokenshaNo2(保険者番号リスト.get(1));
-        item.setHokenshaNo3(保険者番号リスト.get(2));
-        item.setHokenshaNo4(保険者番号リスト.get(INT3));
-        item.setHokenshaNo5(保険者番号リスト.get(INT4));
-        item.setHokenshaNo6(保険者番号リスト.get(INT5));
-        item.setHihokenshaNo1(被保険者番号リスト.get(0));
-        item.setHihokenshaNo2(被保険者番号リスト.get(1));
-        item.setHihokenshaNo3(被保険者番号リスト.get(2));
-        item.setHihokenshaNo4(被保険者番号リスト.get(INT3));
-        item.setHihokenshaNo5(被保険者番号リスト.get(INT4));
-        item.setHihokenshaNo6(被保険者番号リスト.get(INT5));
-        item.setHihokenshaNo7(被保険者番号リスト.get(INT6));
-        item.setHihokenshaNo8(被保険者番号リスト.get(INT7));
-        item.setHihokenshaNo9(被保険者番号リスト.get(INT8));
-        item.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        item.setHokenshaNo1(getCode(保険者番号リスト,0));
+        item.setHokenshaNo2(getCode(保険者番号リスト,1));
+        item.setHokenshaNo3(getCode(保険者番号リスト,2));
+        item.setHokenshaNo4(getCode(保険者番号リスト,INT3));
+        item.setHokenshaNo5(getCode(保険者番号リスト,INT4));
+        item.setHokenshaNo6(getCode(保険者番号リスト,INT5));
+        item.setHihokenshaNo1(getCode(被保険者番号リスト,0));
+        item.setHihokenshaNo2(getCode(被保険者番号リスト,1));
+        item.setHihokenshaNo3(getCode(被保険者番号リスト,2));
+        item.setHihokenshaNo4(getCode(被保険者番号リスト,INT3));
+        item.setHihokenshaNo5(getCode(被保険者番号リスト,INT4));
+        item.setHihokenshaNo6(getCode(被保険者番号リスト,INT5));
+        item.setHihokenshaNo7(getCode(被保険者番号リスト,INT6));
+        item.setHihokenshaNo8(getCode(被保険者番号リスト,INT7));
+        item.setHihokenshaNo9(getCode(被保険者番号リスト,INT8));
+        item.setHihokenshaNo10(getCode(被保険者番号リスト,INT9));
         item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
         item.setHihokenshaName(entity.get被保険者氏名());
         item.setAge(entity.get年齢());
@@ -252,16 +252,16 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setTitle(ReportIdDBE.DBE236001.getReportName());
         item.setTsuchibun1(通知文Map.get(1));
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
-        item.setHihokenshaNo1(被保険者番号リスト.get(0));
-        item.setHihokenshaNo2(被保険者番号リスト.get(1));
-        item.setHihokenshaNo3(被保険者番号リスト.get(2));
-        item.setHihokenshaNo4(被保険者番号リスト.get(INT3));
-        item.setHihokenshaNo5(被保険者番号リスト.get(INT4));
-        item.setHihokenshaNo6(被保険者番号リスト.get(INT5));
-        item.setHihokenshaNo7(被保険者番号リスト.get(INT6));
-        item.setHihokenshaNo8(被保険者番号リスト.get(INT7));
-        item.setHihokenshaNo9(被保険者番号リスト.get(INT8));
-        item.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        item.setHihokenshaNo1(getCode(被保険者番号リスト,0));
+        item.setHihokenshaNo2(getCode(被保険者番号リスト,1));
+        item.setHihokenshaNo3(getCode(被保険者番号リスト,2));
+        item.setHihokenshaNo4(getCode(被保険者番号リスト,INT3));
+        item.setHihokenshaNo5(getCode(被保険者番号リスト,INT4));
+        item.setHihokenshaNo6(getCode(被保険者番号リスト,INT5));
+        item.setHihokenshaNo7(getCode(被保険者番号リスト,INT6));
+        item.setHihokenshaNo8(getCode(被保険者番号リスト,INT7));
+        item.setHihokenshaNo9(getCode(被保険者番号リスト,INT8));
+        item.setHihokenshaNo10(getCode(被保険者番号リスト,INT9));
         item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
         item.setHihokenshaName(entity.get被保険者氏名());
         item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
@@ -294,16 +294,16 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.施設新規.get名称());
         item.setKeizokuShisetsuKingaku(IkenshoSakuseiRyo.施設継続.get名称());
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
-        item.setHihokenshaNo1(被保険者番号リスト.get(0));
-        item.setHihokenshaNo2(被保険者番号リスト.get(1));
-        item.setHihokenshaNo3(被保険者番号リスト.get(2));
-        item.setHihokenshaNo4(被保険者番号リスト.get(INT3));
-        item.setHihokenshaNo5(被保険者番号リスト.get(INT4));
-        item.setHihokenshaNo6(被保険者番号リスト.get(INT5));
-        item.setHihokenshaNo7(被保険者番号リスト.get(INT6));
-        item.setHihokenshaNo8(被保険者番号リスト.get(INT7));
-        item.setHihokenshaNo9(被保険者番号リスト.get(INT8));
-        item.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        item.setHihokenshaNo1(getCode(被保険者番号リスト,0));
+        item.setHihokenshaNo2(getCode(被保険者番号リスト,1));
+        item.setHihokenshaNo3(getCode(被保険者番号リスト,2));
+        item.setHihokenshaNo4(getCode(被保険者番号リスト,INT3));
+        item.setHihokenshaNo5(getCode(被保険者番号リスト,INT4));
+        item.setHihokenshaNo6(getCode(被保険者番号リスト,INT5));
+        item.setHihokenshaNo7(getCode(被保険者番号リスト,INT6));
+        item.setHihokenshaNo8(getCode(被保険者番号リスト,INT7));
+        item.setHihokenshaNo9(getCode(被保険者番号リスト,INT8));
+        item.setHihokenshaNo10(getCode(被保険者番号リスト,INT9));
         item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
         item.setHihokenshaName(entity.get被保険者氏名());
         item.setBirthYMD(entity.get生年月日());
@@ -644,41 +644,15 @@ public class IraishoIkkatsuHakkoBusiness {
     }
 
     private List<RString> get被保険者番号(RString 被保険者番号) {
-        List<RString> 被保険者番号リスト = new ArrayList<>();
-        for (int i = 0; i <= INT9; i++) {
-            被保険者番号リスト.add(RString.EMPTY);
+        List<RString> 被保険者番号List = new ArrayList<>();
+        for (int i = 0; i < 被保険者番号.length(); i++) {
+            if (i == 被保険者番号.length() - 1) {
+                被保険者番号List.add(被保険者番号.substring(i));
+            } else {
+                被保険者番号List.add(被保険者番号.substring(i, i + 1));
+            }
         }
-        if (0 < 被保険者番号.length()) {
-            被保険者番号リスト.set(0, 被保険者番号.substring(0, 1));
-        }
-        if (1 < 被保険者番号.length()) {
-            被保険者番号リスト.set(1, 被保険者番号.substring(1, 2));
-        }
-        if (2 < 被保険者番号.length()) {
-            被保険者番号リスト.set(2, 被保険者番号.substring(2, INT3));
-        }
-        if (INT3 < 被保険者番号.length()) {
-            被保険者番号リスト.set(INT3, 被保険者番号.substring(INT3, INT4));
-        }
-        if (INT4 < 被保険者番号.length()) {
-            被保険者番号リスト.set(INT4, 被保険者番号.substring(INT4, INT5));
-        }
-        if (INT5 < 被保険者番号.length()) {
-            被保険者番号リスト.set(INT5, 被保険者番号.substring(INT5, INT6));
-        }
-        if (INT6 < 被保険者番号.length()) {
-            被保険者番号リスト.set(INT6, 被保険者番号.substring(INT6, INT7));
-        }
-        if (INT7 < 被保険者番号.length()) {
-            被保険者番号リスト.set(INT7, 被保険者番号.substring(INT7, INT8));
-        }
-        if (INT8 < 被保険者番号.length()) {
-            被保険者番号リスト.set(INT8, 被保険者番号.substring(INT8, INT9));
-        }
-        if (INT9 < 被保険者番号.length()) {
-            被保険者番号リスト.set(INT9, 被保険者番号.substring(INT9));
-        }
-        return 被保険者番号リスト;
+        return 被保険者番号List;
     }
 
     private RString get印刷日時() {
@@ -889,22 +863,22 @@ public class IraishoIkkatsuHakkoBusiness {
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
         List<RString> 保険者番号リスト = get被保険者番号(entity.get証記載保険者番号());
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
-        item.setHokenshaNo1(保険者番号リスト.get(0));
-        item.setHokenshaNo2(保険者番号リスト.get(1));
-        item.setHokenshaNo3(保険者番号リスト.get(2));
-        item.setHokenshaNo4(保険者番号リスト.get(INT3));
-        item.setHokenshaNo5(保険者番号リスト.get(INT4));
-        item.setHokenshaNo6(保険者番号リスト.get(INT5));
-        item.setHihokenshaNo1(被保険者番号リスト.get(0));
-        item.setHihokenshaNo2(被保険者番号リスト.get(1));
-        item.setHihokenshaNo3(被保険者番号リスト.get(2));
-        item.setHihokenshaNo4(被保険者番号リスト.get(INT3));
-        item.setHihokenshaNo5(被保険者番号リスト.get(INT4));
-        item.setHihokenshaNo6(被保険者番号リスト.get(INT5));
-        item.setHihokenshaNo7(被保険者番号リスト.get(INT6));
-        item.setHihokenshaNo8(被保険者番号リスト.get(INT7));
-        item.setHihokenshaNo9(被保険者番号リスト.get(INT8));
-        item.setHihokenshaNo10(被保険者番号リスト.get(INT9));
+        item.setHokenshaNo1(getCode(保険者番号リスト,0));
+        item.setHokenshaNo2(getCode(保険者番号リスト,1));
+        item.setHokenshaNo3(getCode(保険者番号リスト,2));
+        item.setHokenshaNo4(getCode(保険者番号リスト,INT3));
+        item.setHokenshaNo5(getCode(保険者番号リスト,INT4));
+        item.setHokenshaNo6(getCode(保険者番号リスト,INT5));
+        item.setHihokenshaNo1(getCode(被保険者番号リスト,0));
+        item.setHihokenshaNo2(getCode(被保険者番号リスト,1));
+        item.setHihokenshaNo3(getCode(被保険者番号リスト,2));
+        item.setHihokenshaNo4(getCode(被保険者番号リスト,INT3));
+        item.setHihokenshaNo5(getCode(被保険者番号リスト,INT4));
+        item.setHihokenshaNo6(getCode(被保険者番号リスト,INT5));
+        item.setHihokenshaNo7(getCode(被保険者番号リスト,INT6));
+        item.setHihokenshaNo8(getCode(被保険者番号リスト,INT7));
+        item.setHihokenshaNo9(getCode(被保険者番号リスト,INT8));
+        item.setHihokenshaNo10(getCode(被保険者番号リスト,INT9));
         item.setHihokenshaTel(entity.get電話番号());
         RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
@@ -915,5 +889,12 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
         item.setShinseiDD2(ninteiShinseiDay.substring(INT8));
         return item;
+    }
+    
+    private RString getCode(List<RString> list,int index){
+        if(index <list.size()){
+            return list.get(index);
+        }
+        return RString.EMPTY;
     }
 }

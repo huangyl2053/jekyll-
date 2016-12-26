@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.Iken
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -60,6 +60,7 @@ public class IkenshogetHandler {
     public void initialize() {
         RDate システム日付 = RDate.getNowDate();
         RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
+        init最大表示件数();
         div.getRadJyotaiKubun().setSelectedKey(状態区分);
         div.getTxtMisyori().setDisplayNone(false);
         div.getTxtKanryouKano().setDisplayNone(false);
@@ -81,26 +82,45 @@ public class IkenshogetHandler {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
         意見書入手モード(意見書入手List);
-        init最大表示件数();
     }
 
     /**
      * 最大表示件数を初期化します。業務コンフィグからデフォルト値を取得して設定します。
      */
     public void init最大表示件数() {
-        RString データ出力件数閾値 = DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, RDate.getNowDate(),
-                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値"));
-        if (Decimal.canConvert(データ出力件数閾値)) {
-            div.getTxtMaxNumber().setValue(new Decimal(データ出力件数閾値.toString()));
+        RDate 基準日 = RDate.getNowDate();
+        RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, 基準日, SubGyomuCode.DBU介護統計報告);
+        RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, 基準日, SubGyomuCode.DBU介護統計報告);
+
+        if (!RString.isNullOrEmpty(最大取得件数)) {
+            div.getTxtMaxNumber().setValue(new Decimal(最大取得件数.toString()));
         }
+        if (!RString.isNullOrEmpty(最大取得件数上限)) {
+            div.getTxtMaxNumber().setMaxValue(new Decimal(最大取得件数上限.toString()));
+        }
+    }
+
+    /**
+     * 最大表示件数。
+     *
+     */
+    public void getMaxNumber() {
+        RString 状態区分 = div.getRadJyotaiKubun().getSelectedKey();
+        意見書入手List(状態区分);
     }
 
     private void 意見書入手モード(List<IkenSyoNyuSyuBusiness> 意見書入手List) {
 
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
+        IkenSyoNyuSyuBusiness business;
         int completeCount = 0;
         int notCount = 0;
-        for (IkenSyoNyuSyuBusiness business : 意見書入手List) {
+
+        Decimal 最大表示件数 = div.getTxtMaxNumber().getValue();
+        int disPlayMaxCount = 最大表示件数.intValue() > 意見書入手List.size() ? 意見書入手List.size() : 最大表示件数.intValue();
+        for (int i = 0; i < disPlayMaxCount; i++) {
+            business = 意見書入手List.get(i);
+
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
 
             if (business.get主治医意見書読取年月日() == null) {
@@ -130,8 +150,10 @@ public class IkenshogetHandler {
         }
         div.getTxtMisyori().setValue(new Decimal(notCount));
         div.getTxtKanryouKano().setValue(new Decimal(completeCount));
-        div.getTxtGokei().setValue(new Decimal(意見書入手List.size()));
+        div.getTxtGokei().setValue(new Decimal(notCount + completeCount));
         div.getDgNinteiTaskList().setDataSource(rowList);
+        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大表示件数.intValue());
+        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書入手List.size());
     }
 
     private void 意見書入手モードの日付設定(dgNinteiTaskList_Row row, IkenSyoNyuSyuBusiness business) {
@@ -171,6 +193,9 @@ public class IkenshogetHandler {
      * 状態ラジオボタンの表示処理です。
      */
     public void setJyotaiKubun() {
+        if (div.getTxtMaxNumber().getValue() == null) {
+            init最大表示件数();
+        }
         RString key = div.getRadJyotaiKubun().getSelectedKey();
         RString 状態区分 = new RString("");
 

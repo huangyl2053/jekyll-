@@ -81,6 +81,7 @@ public class MaskingHandler {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
         データグリッド部編集(マスキングList);
+        setCountDisplay();
     }
 
     /**
@@ -214,6 +215,24 @@ public class MaskingHandler {
         }
         if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
             row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
+        }
+    }
+
+    private void setCountDisplay() {
+        if (div.getRadTaishoDataKubun().getSelectedKey().equals(TaishoDataKubun.すべて.getCode())) {
+            div.getTxtMishoriCount().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtTotalCount().setDisplayNone(false);
+        }
+        if (div.getRadTaishoDataKubun().getSelectedKey().equals(TaishoDataKubun.完了可能.getCode())) {
+            div.getTxtMishoriCount().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtTotalCount().setDisplayNone(true);
+        }
+        if (div.getRadTaishoDataKubun().getSelectedKey().equals(TaishoDataKubun.未処理.getCode())) {
+            div.getTxtMishoriCount().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(true);
+            div.getTxtTotalCount().setDisplayNone(true);
         }
     }
 

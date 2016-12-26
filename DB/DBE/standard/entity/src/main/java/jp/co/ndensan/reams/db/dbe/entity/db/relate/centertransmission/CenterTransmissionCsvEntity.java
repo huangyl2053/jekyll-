@@ -220,10 +220,10 @@ public class CenterTransmissionCsvEntity {
     private RString 介護予防居宅療養管理指導;
     @CsvField(order = 101, name = "介護予防通所介護（デイサービス）")
     private RString 介護予防通所介護デイサービス;
-    @CsvField(order = 102, name = "介護予防短期入所生活介護（ショートステイ）")
-    private RString 介護予防短期入所生活介護ショートステイ;
-    @CsvField(order = 103, name = "介護予防通所リハビリテーション")
+    @CsvField(order = 102, name = "介護予防通所リハビリテーション")
     private RString 介護予防通所リハビリテーション;
+    @CsvField(order = 103, name = "介護予防短期入所生活介護（ショートステイ）")
+    private RString 介護予防短期入所生活介護ショートステイ;
     @CsvField(order = 104, name = "介護予防短期入所療養介護")
     private RString 介護予防短期入所療養介護;
     @CsvField(order = 105, name = "介護予防特定施設入居者生活介護")

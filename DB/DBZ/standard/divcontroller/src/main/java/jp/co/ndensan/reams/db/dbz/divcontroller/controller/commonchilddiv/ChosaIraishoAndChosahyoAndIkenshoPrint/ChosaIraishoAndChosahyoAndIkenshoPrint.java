@@ -20,11 +20,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdent
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrintDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrintHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.PrintValidationHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.dgNinteiChosa_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.dgShujiiIkensho_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrintDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrintHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.PrintValidationHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.dgNinteiChosa_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.dgShujiiIkensho_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
@@ -58,6 +58,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
     private static final RString KEY3 = new RString("3");
+    private static final RString KEY4 = new RString("4");
+    private static final RString KEY5 = new RString("5");
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
@@ -370,14 +372,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (ichiran.contains(KEY2)) {
             create主治医意見書記入用紙D(div, printService);
         }
-        List<RString> seikyusho = div.getChkIkenshoSakuseiryoSeikyusho().getSelectedKeys();
-        if (seikyusho.contains(KEY0)) {
+        if (ichiran.contains(KEY3)) {
             printService.print主治医意見書作成料請求書(getHandler(div).create主治医意見書作成料請求書_パラメータ());
         }
-        if (seikyusho.contains(KEY1)) {
+        if (ichiran.contains(KEY4)) {
             printService.print介護保険診断命令書(getHandler(div).create介護保険診断命令書_パラメータ());
         }
-        if (seikyusho.contains(KEY2)) {
+        if (ichiran.contains(KEY5)) {
             printService.print介護保険指定医依頼兼主治医意見書提出意見書(getHandler(div).create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ());
         }
     }

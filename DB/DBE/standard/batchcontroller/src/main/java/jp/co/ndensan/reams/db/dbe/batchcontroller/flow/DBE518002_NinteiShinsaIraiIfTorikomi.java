@@ -99,31 +99,30 @@ public class DBE518002_NinteiShinsaIraiIfTorikomi extends BatchFlowBase<DBE51800
             } else if (審査会情報ファイル.equals(file)) {
                 shinsakaiJohoPath = Path.combinePath(Path.getRootPath(RString.EMPTY), getParameter().getMediapath(), 審査会情報ファイル);
                 check(shinsakaiJohoPath, 審査会情報ファイル);
-                shinsakaiJohoTempPath = shinsakaiJohoPath.substring(0, shinsaIinPath.length() - DOTCSV).concat(TEMP);
+                shinsakaiJohoTempPath = shinsakaiJohoPath.substring(0, shinsakaiJohoPath.length() - DOTCSV).concat(TEMP);
                 convertOriginalPath = shinsakaiJohoPath;
                 convertTempPath = shinsakaiJohoTempPath;
             }
             executeStep(CONVERT_PROCESS);
             File.deleteIfExists(convertTempPath);
         }
-        for (RString file : fileList) {
-            if (審査委員ファイル.equals(file)) {
+        if (RSRING_1.equals(getParameter().getTorikomidatakubun())) {
+            executeStep(CREATE審査会情報登録用データ一時TBL);
+            executeStep(INSERT審査会情報登録用データ一時TBL);
+            executeStep(SHINSAKAIJOHOTORIKOMI_PROCESS);
+            executeStep(CREATE二次判定結果登録用データ一時TBL);
+            executeStep(INSERT二次判定結果登録用データ一時TBL);
+            executeStep(DATATORIKOMI_PROCESS);
+            if (RSRING_1.equals(getParameter().getShinsakaiiintorikomikubun())) {
                 executeStep(CREATE認定審査会割当委員情報一時TBL);
                 executeStep(INSERT認定審査会割当委員情報一時TBL);
                 executeStep(SHINSAKAIWARIATE_PROCESS);
-            } else if (審査結果ファイル.equals(file)) {
-                executeStep(CREATE二次判定結果登録用データ一時TBL);
-                executeStep(INSERT二次判定結果登録用データ一時TBL);
-                executeStep(DATATORIKOMI_PROCESS);
-            } else if (認定ソフトファイル.equals(file)) {
-                executeStep(CREATE二次判定結果登録用データ一時TBL);
-                executeStep(INSERT二次判定結果登録用データ一時TBL);
-                executeStep(DATATORIKOMI_PROCESS);
-            } else if (審査会情報ファイル.equals(file)) {
-                executeStep(CREATE審査会情報登録用データ一時TBL);
-                executeStep(INSERT審査会情報登録用データ一時TBL);
-                executeStep(SHINSAKAIJOHOTORIKOMI_PROCESS);
             }
+        }
+        if (RSRING_2.equals(getParameter().getShinsakaiiintorikomikubun())) {
+            executeStep(CREATE二次判定結果登録用データ一時TBL);
+            executeStep(INSERT二次判定結果登録用データ一時TBL);
+            executeStep(DATATORIKOMI_PROCESS);
         }
     }
 

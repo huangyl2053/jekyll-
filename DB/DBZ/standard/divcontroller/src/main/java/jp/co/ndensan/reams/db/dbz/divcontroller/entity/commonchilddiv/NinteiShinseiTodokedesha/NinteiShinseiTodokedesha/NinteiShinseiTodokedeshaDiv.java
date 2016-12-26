@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.ChoikiInputDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
@@ -27,7 +29,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishi
  * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinseiTodokedeshaDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,12 +44,8 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     private ButtonDialog btnAtenaKensaku;
     @JsonProperty("btnZenkaiFukusha")
     private Button btnZenkaiFukusha;
-    @JsonProperty("txtJigyoshaCode")
-    private TextBox txtJigyoshaCode;
-    @JsonProperty("btnJigyoshaGuide")
-    private ButtonDialog btnJigyoshaGuide;
-    @JsonProperty("txtJigyoshaName")
-    private TextBox txtJigyoshaName;
+    @JsonProperty("ccdShisetsuJohoCommonChildDiv")
+    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJohoCommonChildDiv;
     @JsonProperty("ddlShinseiKankeisha")
     private DropDownList ddlShinseiKankeisha;
     @JsonProperty("txtShimei")
@@ -170,57 +168,12 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     /*
-     * gettxtJigyoshaCode
-     * @return txtJigyoshaCode
+     * getccdShisetsuJohoCommonChildDiv
+     * @return ccdShisetsuJohoCommonChildDiv
      */
-    @JsonProperty("txtJigyoshaCode")
-    public TextBox getTxtJigyoshaCode() {
-        return txtJigyoshaCode;
-    }
-
-    /*
-     * settxtJigyoshaCode
-     * @param txtJigyoshaCode txtJigyoshaCode
-     */
-    @JsonProperty("txtJigyoshaCode")
-    public void setTxtJigyoshaCode(TextBox txtJigyoshaCode) {
-        this.txtJigyoshaCode = txtJigyoshaCode;
-    }
-
-    /*
-     * getbtnJigyoshaGuide
-     * @return btnJigyoshaGuide
-     */
-    @JsonProperty("btnJigyoshaGuide")
-    public ButtonDialog getBtnJigyoshaGuide() {
-        return btnJigyoshaGuide;
-    }
-
-    /*
-     * setbtnJigyoshaGuide
-     * @param btnJigyoshaGuide btnJigyoshaGuide
-     */
-    @JsonProperty("btnJigyoshaGuide")
-    public void setBtnJigyoshaGuide(ButtonDialog btnJigyoshaGuide) {
-        this.btnJigyoshaGuide = btnJigyoshaGuide;
-    }
-
-    /*
-     * gettxtJigyoshaName
-     * @return txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public TextBox getTxtJigyoshaName() {
-        return txtJigyoshaName;
-    }
-
-    /*
-     * settxtJigyoshaName
-     * @param txtJigyoshaName txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.txtJigyoshaName = txtJigyoshaName;
+    @JsonProperty("ccdShisetsuJohoCommonChildDiv")
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJohoCommonChildDiv() {
+        return ccdShisetsuJohoCommonChildDiv;
     }
 
     /*

@@ -36,10 +36,13 @@ public final class NinteiChosaHoshuShokaiMapperParameter implements IMyBatisPara
     private final boolean isTo;
     private final boolean isHokensha;
     private final RString 保険者;
+    private final boolean isKoiki;
+    private final RString 広域_市町村名;
 
     private NinteiChosaHoshuShokaiMapperParameter(RString テキストイメージ区分, RString 調査依頼日開始,
             RString 調査依頼日終了, boolean 件数Flag, int 最大表示件数, RString 通常区分, RString 延期区分, boolean batchFlag,
-            List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa, boolean isFrom, boolean isTo, boolean isHokensha, RString 保険者) {
+            List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa, boolean isFrom, boolean isTo, boolean isHokensha, RString 保険者,
+            boolean isKoiki, RString 広域_市町村名) {
         this.テキストイメージ区分 = テキストイメージ区分;
         this.調査依頼日開始 = 調査依頼日開始;
         this.調査依頼日終了 = 調査依頼日終了;
@@ -53,6 +56,8 @@ public final class NinteiChosaHoshuShokaiMapperParameter implements IMyBatisPara
         this.isTo = isTo;
         this.isHokensha = isHokensha;
         this.保険者 = 保険者;
+        this.isKoiki = isKoiki;
+        this.広域_市町村名 = 広域_市町村名;
     }
 
     /**
@@ -65,13 +70,17 @@ public final class NinteiChosaHoshuShokaiMapperParameter implements IMyBatisPara
      * @param batchFlag batchの判断マーク
      * @param ninteiChosa キーの情報
      * @param 保険者 保険者
+     * @param is広域 広域フラグ
+     * @param 広域_市町村名称 広域_市町村名称
      * @return 報酬実績データ情報のパラメータ
      */
     public static NinteiChosaHoshuShokaiMapperParameter createSelectBy情報(RString テキストイメージ区分, RString 調査依頼日開始,
-            RString 調査依頼日終了, int 最大表示件数, boolean batchFlag, List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa, RString 保険者) {
+            RString 調査依頼日終了, int 最大表示件数, boolean batchFlag, List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa, RString 保険者,
+            boolean is広域, RString 広域_市町村名称) {
         return new NinteiChosaHoshuShokaiMapperParameter(テキストイメージ区分, 調査依頼日開始, 調査依頼日終了, true, 最大表示件数,
                 ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), batchFlag, ninteiChosa,
-                !RString.isNullOrEmpty(調査依頼日開始), !RString.isNullOrEmpty(調査依頼日終了), !RString.isNullOrEmpty(保険者), 保険者);
+                !RString.isNullOrEmpty(調査依頼日開始), !RString.isNullOrEmpty(調査依頼日終了), !RString.isNullOrEmpty(保険者), 保険者,
+                is広域, 広域_市町村名称);
     }
 
     /**
@@ -83,13 +92,17 @@ public final class NinteiChosaHoshuShokaiMapperParameter implements IMyBatisPara
      * @param batchFlag batchの判断マーク
      * @param ninteiChosa キーの情報
      * @param 保険者 保険者
+     * @param is広域 広域フラグ
+     * @param 広域_市町村名 広域_市町村名
      * @return 報酬実績データ情報のパラメータ
      */
     public static NinteiChosaHoshuShokaiMapperParameter createParamter(RString テキストイメージ区分, RString 調査依頼日開始,
-            RString 調査依頼日終了, boolean batchFlag, List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa, RString 保険者) {
+            RString 調査依頼日終了, boolean batchFlag, List<NinteiChosaHoshuShokaiFlowBusiness> ninteiChosa, RString 保険者,
+            boolean is広域, RString 広域_市町村名) {
         return new NinteiChosaHoshuShokaiMapperParameter(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援), 調査依頼日開始, 調査依頼日終了, false, 0,
                 ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), batchFlag, ninteiChosa,
-                !RString.isNullOrEmpty(調査依頼日開始), !RString.isNullOrEmpty(調査依頼日終了), !RString.isNullOrEmpty(保険者), 保険者);
+                !RString.isNullOrEmpty(調査依頼日開始), !RString.isNullOrEmpty(調査依頼日終了), !RString.isNullOrEmpty(保険者), 保険者,
+                is広域, 広域_市町村名);
     }
 }

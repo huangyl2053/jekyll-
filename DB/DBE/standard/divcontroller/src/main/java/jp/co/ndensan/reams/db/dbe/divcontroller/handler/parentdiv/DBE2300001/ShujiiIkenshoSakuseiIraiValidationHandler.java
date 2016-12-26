@@ -34,7 +34,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
     private static final RString 期間指定_期間指定 = new RString("key1");
     private static final RString 受診日 = new RString("受診日を");
     private static final RString 受診時分 = new RString("受診時分を");
-    private static final RString SELECTED_KEY3 = new RString("key3");
+    private static final RString SELECTED_KEY0 = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -69,7 +69,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         validationMessages.add(申請者一覧未選択チェック());
         validationMessages.add(選択された申請者チェック());
         validationMessages.add(印刷書類チェック());
-        if (div.getChkprint().getSelectedKeys().contains(SELECTED_KEY3)) {
+        if (div.getMeireiSho().getSelectedKeys().contains(SELECTED_KEY0)) {
             validationMessages.add(期間チェック());
             validationMessages.add(受診日が未入力チェック());
         }
@@ -138,10 +138,20 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
 
     private ValidationMessageControlPairs 印刷書類チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getIraiprint().getChkirai().getSelectedKeys().isEmpty() && div.getChkprint().getSelectedKeys().isEmpty()) {
+        if (div.getIraiprint().getIraiSho().getSelectedKeys().isEmpty() && div.getIraiprint().getIraiIchiranHyo().getSelectedKeys().isEmpty()
+                   && div.getIraiprint().getKinyoYoshi().getSelectedKeys().isEmpty() && div.getIraiprint().getKinyuYoshiOCR().getSelectedKeys().isEmpty() 
+                   && div.getIraiprint().getKinyuYoshiDesign().getSelectedKeys().isEmpty() && div.getIraiprint().getSeikyuSho().getSelectedKeys().isEmpty()
+                   && div.getIraiprint().getMeireiSho().getSelectedKeys().isEmpty() && div.getIraiprint().getTeishutsuIraiSho().getSelectedKeys().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.未指定, 発行書類.toString()), div.getIraiprint().getChkirai(), div.getIraiprint().getChkprint()));
+                            UrErrorMessages.未指定, 発行書類.toString()),div.getIraiprint().getIraiSho(),
+            div.getIraiprint().getIraiIchiranHyo(),
+            div.getIraiprint().getKinyoYoshi(),
+            div.getIraiprint().getKinyuYoshiOCR(),
+            div.getIraiprint().getKinyuYoshiDesign(),
+            div.getIraiprint().getSeikyuSho(),
+            div.getIraiprint().getMeireiSho(),
+            div.getIraiprint().getTeishutsuIraiSho()));
         }
         return validationMessages;
     }

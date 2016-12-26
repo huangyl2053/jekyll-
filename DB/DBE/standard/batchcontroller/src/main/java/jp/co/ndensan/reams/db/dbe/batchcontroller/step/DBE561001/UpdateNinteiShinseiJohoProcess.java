@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -26,15 +25,9 @@ public class UpdateNinteiShinseiJohoProcess extends BatchProcessBase<DbT5101Nint
     private static final RString SELECT_NINTEISHINSEIJOHO = new RString("jp.co.ndensan.reams.db.dbe"
             + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getNinteiShinseiJoho");
     private CenterTransmissionUpdateProcessParameter parameter;
-    private List<RString> 出力された申請書管理番号;
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> tableWriter;
-
-    @Override
-    protected void initialize() {
-        出力された申請書管理番号 = parameter.get申請書管理番号リスト();
-    }
 
     @Override
     protected IBatchReader createReader() {
@@ -48,10 +41,9 @@ public class UpdateNinteiShinseiJohoProcess extends BatchProcessBase<DbT5101Nint
 
     @Override
     protected void process(DbT5101NinteiShinseiJohoEntity entity) {
-        if (出力された申請書管理番号.contains(entity.getShinseishoKanriNo().value())) {
-            entity.setIfSofuYMD(FlexibleDate.getNowDate());
-            tableWriter.update(entity);
-        }
+        entity.setIfSofuYMD(FlexibleDate.getNowDate());
+        tableWriter.update(entity);
+
     }
 
 }

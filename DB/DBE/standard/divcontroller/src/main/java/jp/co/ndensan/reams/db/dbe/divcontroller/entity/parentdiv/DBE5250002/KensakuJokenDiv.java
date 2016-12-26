@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,10 +25,6 @@ public class KensakuJokenDiv extends Panel {
      */
     @JsonProperty("txtNijihanteDateRange")
     private TextBoxDateRange txtNijihanteDateRange;
-    @JsonProperty("txtHokenshaNo")
-    private TextBoxCode txtHokenshaNo;
-    @JsonProperty("txtHokenshaName")
-    private TextBox txtHokenshaName;
     @JsonProperty("radDataShutsuryokuUmu")
     private RadioButton radDataShutsuryokuUmu;
     @JsonProperty("txtHyojiDataLimit")
@@ -62,42 +58,6 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("txtNijihanteDateRange")
     public void setTxtNijihanteDateRange(TextBoxDateRange txtNijihanteDateRange) {
         this.txtNijihanteDateRange = txtNijihanteDateRange;
-    }
-
-    /*
-     * gettxtHokenshaNo
-     * @return txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public TextBoxCode getTxtHokenshaNo() {
-        return txtHokenshaNo;
-    }
-
-    /*
-     * settxtHokenshaNo
-     * @param txtHokenshaNo txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public void setTxtHokenshaNo(TextBoxCode txtHokenshaNo) {
-        this.txtHokenshaNo = txtHokenshaNo;
-    }
-
-    /*
-     * gettxtHokenshaName
-     * @return txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public TextBox getTxtHokenshaName() {
-        return txtHokenshaName;
-    }
-
-    /*
-     * settxtHokenshaName
-     * @param txtHokenshaName txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public void setTxtHokenshaName(TextBox txtHokenshaName) {
-        this.txtHokenshaName = txtHokenshaName;
     }
 
     /*

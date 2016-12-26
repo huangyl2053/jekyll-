@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiKekkaResultConveter;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJohoDiv;
@@ -16,12 +17,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -35,35 +33,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @reamsid_L DBE-3000-220 huangh
  */
 public class IchijiHanteiKekkaJoho {
-
-    private static final int RESULT_NUM = 8;
-    private static final int DIVISION_NUM = 10;
-
-    private static final int ICHIJI_HANTEI_POINT = 0;
-    private static final int ICHIJI_HANTEI_KASAN_POINT = 1;
-    private static final int KIJUN_JIKAN_POINT = 2;
-    private static final int HYOKA_JIKAN_POINT = 3;
-    private static final int KEIKOKU_CODE_POINT = 4;
-    private static final int GAIZENSEI_POINT = 5;
-    private static final int ANTEISEI_POINT = 6;
-    private static final int KYUFU_KUBUN_POINT = 7;
-
-    private static final int 基準時間_POINT = 0;
-    private static final int 基準時間_食事_POINT = 1;
-    private static final int 基準時間_排泄_POINT = 2;
-    private static final int 基準時間_移動_POINT = 3;
-    private static final int 基準時間_清潔保持_POINT = 4;
-    private static final int 基準時間_間接ケア_POINT = 5;
-    private static final int 基準時間_BPSD関連_POINT = 6;
-    private static final int 基準時間_機能訓練_POINT = 7;
-    private static final int 基準時間_医療関連_POINT = 8;
-    private static final int 基準時間_認知症加算_POINT = 9;
-
-    private static final int 中間評価項目_第1群_POINT = 0;
-    private static final int 中間評価項目_第2群_食事_POINT = 1;
-    private static final int 中間評価項目_第3群_排泄_POINT = 2;
-    private static final int 中間評価項目_第4群_移動_POINT = 3;
-    private static final int 中間評価項目_第5群_清潔保持_POINT = 4;
 
     /**
      * 共通子DIVを初期化します。
@@ -182,77 +151,25 @@ public class IchijiHanteiKekkaJoho {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
 
-        List<RString> resultList = result.split(",");
-        if (resultList.size() != RESULT_NUM) {
+        IchijiHanteiKekkaJohoHandler handler = getHandler(div);
+        ShinseishoKanriNo shinseishoKanriNo = handler.get申請書管理番号();
+        IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(shinseishoKanriNo, result);
+
+        if (converter.isHanteiKekkaError()) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
 
-        IchijiHanteiKekkaJohoHandler handler = getHandler(div);
-        ShinseishoKanriNo shinseishoKanriNo = handler.get申請書管理番号();
-
-        //TODO 戻り値を元に一次判定結果クラスを作る
-        jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho hanteiKekka
-                = new jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho(shinseishoKanriNo);
-        IchijiHanteiKekkaJohoBuilder builder = hanteiKekka.createBuilderForEdit();
-
-        RString ichijiHanteiKekkaCode = resultList.get(ICHIJI_HANTEI_POINT);
-        RString tumitashiKekkaCode = resultList.get(ICHIJI_HANTEI_KASAN_POINT);
-
-        builder.set要介護認定一次判定年月日(FlexibleDate.getNowDate());
-        builder.set要介護認定一次判定結果コード(new Code(ichijiHanteiKekkaCode));
-        builder.set要介護認定一次判定結果コード_認知症加算(new Code(tumitashiKekkaCode));
-
-        RString kijunJikan = resultList.get(KIJUN_JIKAN_POINT);
-        List<RString> kijunJikanSplit = kijunJikan.split("-");
-        builder.set要介護認定等基準時間(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_POINT)));
-        builder.set要介護認定等基準時間_食事(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_食事_POINT)));
-        builder.set要介護認定等基準時間_排泄(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_排泄_POINT)));
-        builder.set要介護認定等基準時間_移動(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_移動_POINT)));
-        builder.set要介護認定等基準時間_清潔保持(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_清潔保持_POINT)));
-        builder.set要介護認定等基準時間_間接ケア(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_間接ケア_POINT)));
-        builder.set要介護認定等基準時間_BPSD関連(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_BPSD関連_POINT)));
-        builder.set要介護認定等基準時間_機能訓練(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_機能訓練_POINT)));
-        builder.set要介護認定等基準時間_医療関連(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_医療関連_POINT)));
-        builder.set要介護認定等基準時間_認知症加算(rStringToIntAndDivide10(kijunJikanSplit.get(基準時間_認知症加算_POINT)));
-
-        RString hyokaJikan = resultList.get(HYOKA_JIKAN_POINT);
-        List<RString> hyokaJikanSplit = hyokaJikan.split("-");
-        builder.set中間評価項目得点第1群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第1群_POINT)));
-        builder.set中間評価項目得点第2群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第2群_食事_POINT)));
-        builder.set中間評価項目得点第3群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第3群_排泄_POINT)));
-        builder.set中間評価項目得点第4群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第4群_移動_POINT)));
-        builder.set中間評価項目得点第5群(rStringToIntAndDivide10(hyokaJikanSplit.get(中間評価項目_第5群_清潔保持_POINT)));
-        builder.set中間評価項目得点第6群(0);
-        builder.set中間評価項目得点第7群(0);
-
-        RString keikokuCode = resultList.get(KEIKOKU_CODE_POINT);
-        builder.set要介護認定一次判定警告コード(keikokuCode);
-
-        RString gaizenseiP = resultList.get(GAIZENSEI_POINT);
-        builder.set認知症自立度Ⅱ以上の蓋然性(rStringToDecimalAndDivide10(gaizenseiP));
-
-        RString anteisei = resultList.get(ANTEISEI_POINT);
-        builder.set要介護認定状態の安定性コード(new Code(anteisei));
-
-        RString kyufuKubun = resultList.get(KYUFU_KUBUN_POINT);
-        builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(kyufuKubun));
-
-        div.setIchijiHanteiKekka(DataPassingConverter.serialize(builder.build()));
-        handler.setIchijiHanteiKekka(builder.build());
-        return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定処理完了.getMessage()).respond();
-    }
-
-    private int rStringToIntAndDivide10(RString str) {
-        int i = Integer.parseInt(str.toString());
-        return i / DIVISION_NUM;
-    }
-
-    private Decimal rStringToDecimalAndDivide10(RString str) {
-        Decimal d = new Decimal(str.toString());
-        if (d.equals(new Decimal(-1))) {
-            return d;
+        List<IchijiHanteiShoriKekka> kekkaList
+                = converter.convert();
+        if (kekkaList == null || kekkaList.isEmpty()) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
-        return d.divide(DIVISION_NUM);
+
+        IchijiHanteiShoriKekka kekkaJoho = kekkaList.get(0);
+
+        div.setIchijiHanteiKekka(DataPassingConverter.serialize(kekkaJoho.getHanteiKekka()));
+        handler.setIchijiHanteiKekka(kekkaJoho.getHanteiKekka());
+        return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定処理完了.getMessage()).respond();
     }
 
 }

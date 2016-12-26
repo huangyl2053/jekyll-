@@ -206,6 +206,5 @@
             </if>
         </if>
         ORDER BY shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" DESC, shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
-        LIMIT #{saidaiHyojiKensu}
     </select>
 </mapper>

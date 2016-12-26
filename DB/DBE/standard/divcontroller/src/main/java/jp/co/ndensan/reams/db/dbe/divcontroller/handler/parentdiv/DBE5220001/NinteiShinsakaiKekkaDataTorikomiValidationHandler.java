@@ -89,7 +89,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
      */
     public ValidationMessageControlPairs データ件数チェック(ValidationMessageControlPairs validPairs) {
         for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getDataSource()) {
-            if ((row.getSelected()) && (null == row.getDataNum().getValue() || 0 == row.getDataNum().getValue().compareTo(Decimal.ZERO))) {
+            if (null == row.getDataNum().getValue() || 0 == row.getDataNum().getValue().compareTo(Decimal.ZERO)) {
                 validPairs.add(new ValidationMessageControlPair(new ValidationMessage(
                     UrErrorMessages.対象データなし_追加メッセージあり, row.getFileName().toString()), div.getDgTorikomiTaiasho()));
             }

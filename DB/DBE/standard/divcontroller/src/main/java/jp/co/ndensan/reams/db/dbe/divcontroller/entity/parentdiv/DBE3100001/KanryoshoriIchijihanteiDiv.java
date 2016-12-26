@@ -4,34 +4,41 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDownLoad;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KanryoshoriIchijihantei のクラスファイル
- *
+ * KanryoshoriIchijihantei のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KanryoshoriIchijihanteiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("IchijiHanteiIchiren")
-    private IchijiHanteiIchirenDiv IchijiHanteiIchiren;
-    @JsonProperty("chosairaiselect")
-    private chosairaiselectDiv chosairaiselect;
-    @JsonProperty("KanryoMsg")
-    private KanryoMsgDiv KanryoMsg;
+    @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
+    private IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("ichijiHanteiArgument")
+    private RString ichijiHanteiArgument;
+    @JsonProperty("ichijiHanteiResult")
+    private RString ichijiHanteiResult;
+    @JsonProperty("modeType")
+    private RString modeType;
+    @JsonProperty("ichijiHanteiKekka")
+    private RString ichijiHanteiKekka;
+    @JsonProperty("radStatusBefore")
+    private RString radStatusBefore;
+    @JsonProperty("txtMaxCountBefore")
+    private RString txtMaxCountBefore;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,80 +47,138 @@ public class KanryoshoriIchijihanteiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getIchijiHanteiIchiren
-     * @return IchijiHanteiIchiren
+     * getIchijiHanteiShoriTaishoshaIchiran
+     * @return IchijiHanteiShoriTaishoshaIchiran
      */
-    @JsonProperty("IchijiHanteiIchiren")
-    public IchijiHanteiIchirenDiv getIchijiHanteiIchiren() {
-        return IchijiHanteiIchiren;
+    @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
+    public IchijiHanteiShoriTaishoshaIchiranDiv getIchijiHanteiShoriTaishoshaIchiran() {
+        return IchijiHanteiShoriTaishoshaIchiran;
     }
 
     /*
-     * setIchijiHanteiIchiren
-     * @param IchijiHanteiIchiren IchijiHanteiIchiren
+     * setIchijiHanteiShoriTaishoshaIchiran
+     * @param IchijiHanteiShoriTaishoshaIchiran IchijiHanteiShoriTaishoshaIchiran
      */
-    @JsonProperty("IchijiHanteiIchiren")
-    public void setIchijiHanteiIchiren(IchijiHanteiIchirenDiv IchijiHanteiIchiren) {
-        this.IchijiHanteiIchiren = IchijiHanteiIchiren;
+    @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
+    public void setIchijiHanteiShoriTaishoshaIchiran(IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran) {
+        this.IchijiHanteiShoriTaishoshaIchiran = IchijiHanteiShoriTaishoshaIchiran;
     }
 
     /*
-     * getchosairaiselect
-     * @return chosairaiselect
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
      */
-    @JsonProperty("chosairaiselect")
-    public chosairaiselectDiv getChosairaiselect() {
-        return chosairaiselect;
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
-     * setchosairaiselect
-     * @param chosairaiselect chosairaiselect
+     * getichijiHanteiArgument
+     * @return ichijiHanteiArgument
      */
-    @JsonProperty("chosairaiselect")
-    public void setChosairaiselect(chosairaiselectDiv chosairaiselect) {
-        this.chosairaiselect = chosairaiselect;
+    @JsonProperty("ichijiHanteiArgument")
+    public RString getIchijiHanteiArgument() {
+        return ichijiHanteiArgument;
     }
 
     /*
-     * getKanryoMsg
-     * @return KanryoMsg
+     * setichijiHanteiArgument
+     * @param ichijiHanteiArgument ichijiHanteiArgument
      */
-    @JsonProperty("KanryoMsg")
-    public KanryoMsgDiv getKanryoMsg() {
-        return KanryoMsg;
+    @JsonProperty("ichijiHanteiArgument")
+    public void setIchijiHanteiArgument(RString ichijiHanteiArgument) {
+        this.ichijiHanteiArgument = ichijiHanteiArgument;
     }
 
     /*
-     * setKanryoMsg
-     * @param KanryoMsg KanryoMsg
+     * getichijiHanteiResult
+     * @return ichijiHanteiResult
      */
-    @JsonProperty("KanryoMsg")
-    public void setKanryoMsg(KanryoMsgDiv KanryoMsg) {
-        this.KanryoMsg = KanryoMsg;
+    @JsonProperty("ichijiHanteiResult")
+    public RString getIchijiHanteiResult() {
+        return ichijiHanteiResult;
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * setichijiHanteiResult
+     * @param ichijiHanteiResult ichijiHanteiResult
      */
-    @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdNinteiTaskList() {
-        return this.getIchijiHanteiIchiren().getCcdNinteiTaskList();
+    @JsonProperty("ichijiHanteiResult")
+    public void setIchijiHanteiResult(RString ichijiHanteiResult) {
+        this.ichijiHanteiResult = ichijiHanteiResult;
     }
 
-    @JsonIgnore
-    public ButtonDownLoad getBtndataoutput() {
-        return this.getChosairaiselect().getBtndataoutput();
+    /*
+     * getmodeType
+     * @return modeType
+     */
+    @JsonProperty("modeType")
+    public RString getModeType() {
+        return modeType;
     }
 
-    @JsonIgnore
-    public void setBtndataoutput(ButtonDownLoad btndataoutput) {
-        this.getChosairaiselect().setBtndataoutput(btndataoutput);
+    /*
+     * setmodeType
+     * @param modeType modeType
+     */
+    @JsonProperty("modeType")
+    public void setModeType(RString modeType) {
+        this.modeType = modeType;
     }
 
-    @JsonIgnore
-    public IKanryoMessageDiv getCcdKanryoMsg() {
-        return this.getKanryoMsg().getCcdKanryoMsg();
+    /*
+     * getichijiHanteiKekka
+     * @return ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public RString getIchijiHanteiKekka() {
+        return ichijiHanteiKekka;
+    }
+
+    /*
+     * setichijiHanteiKekka
+     * @param ichijiHanteiKekka ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public void setIchijiHanteiKekka(RString ichijiHanteiKekka) {
+        this.ichijiHanteiKekka = ichijiHanteiKekka;
+    }
+
+    /*
+     * getradStatusBefore
+     * @return radStatusBefore
+     */
+    @JsonProperty("radStatusBefore")
+    public RString getRadStatusBefore() {
+        return radStatusBefore;
+    }
+
+    /*
+     * setradStatusBefore
+     * @param radStatusBefore radStatusBefore
+     */
+    @JsonProperty("radStatusBefore")
+    public void setRadStatusBefore(RString radStatusBefore) {
+        this.radStatusBefore = radStatusBefore;
+    }
+
+    /*
+     * gettxtMaxCountBefore
+     * @return txtMaxCountBefore
+     */
+    @JsonProperty("txtMaxCountBefore")
+    public RString getTxtMaxCountBefore() {
+        return txtMaxCountBefore;
+    }
+
+    /*
+     * settxtMaxCountBefore
+     * @param txtMaxCountBefore txtMaxCountBefore
+     */
+    @JsonProperty("txtMaxCountBefore")
+    public void setTxtMaxCountBefore(RString txtMaxCountBefore) {
+        this.txtMaxCountBefore = txtMaxCountBefore;
     }
 
     // </editor-fold>
