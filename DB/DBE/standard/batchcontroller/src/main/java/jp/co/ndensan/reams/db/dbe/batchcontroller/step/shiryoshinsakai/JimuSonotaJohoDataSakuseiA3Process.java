@@ -82,14 +82,14 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
             存在ファイルindex = 0;
         }
         List<RString> イメージファイルリスト;
+        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         if (!entity.isJimukyoku()) {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名());
         } else {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
         }
         business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
