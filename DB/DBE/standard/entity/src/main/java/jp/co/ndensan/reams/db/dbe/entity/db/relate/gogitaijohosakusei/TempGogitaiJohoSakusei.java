@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
@@ -28,13 +27,10 @@ public class TempGogitaiJohoSakusei implements IDbAccessable {
         TABLE_NAME = new RString("TempGogitaiJohoSakusei");
     }
     @TempTableColumnOrder(10)
-    @PrimaryKey
     private RString 合議体NO;
     @TempTableColumnOrder(20)
-    @PrimaryKey
     private RString 有効開始日;
     @TempTableColumnOrder(30)
-    @PrimaryKey
     private RString 有効終了日;
     @TempTableColumnOrder(40)
     private RString 合議体名称;

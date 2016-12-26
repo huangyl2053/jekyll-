@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import java.util.Arrays;
@@ -15,12 +14,13 @@ import jp.co.ndensan.reams.uz.uza.testhelper.BatchFlowTestHelper;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- *
- * @author N3010
+ * {@link DBE517000_ShinsakaiShiryo}のテストクラスです。
  */
+@Ignore
 public class DBE517000_ShinsakaiShiryoTest {
 
     private static DBE224001_NinteichosaDataOutputParameter batchParameter;
@@ -37,7 +37,7 @@ public class DBE517000_ShinsakaiShiryoTest {
         DBE224001_NinteichosaDataOutputParameter param = new DBE224001_NinteichosaDataOutputParameter();
 
         param.setShichosonCode(RString.EMPTY);
-        param.setShinseishoKanriNoList(Arrays.asList(new RString("00000000000001940"), new RString("15461720160100219"), new RString("000082")));
+        param.setShinseishoKanriNoList(Arrays.asList(new RString("20602920150300359"), new RString("20562520150300209")));
         param.setNinteiChosainCode(RString.EMPTY);
         param.setNinteichosaItakusakiCode(RString.EMPTY);
         return param;
@@ -49,5 +49,5 @@ public class DBE517000_ShinsakaiShiryoTest {
                 new RString("認定調査データ出力（モバイル）"), DBE224001_NinteichosaDataOutput.class, batchParameter).getStatus();
         assertThat(status, is(BatchExitStatus.Status.SUCCESS));
     }
-    
+
 }

@@ -286,6 +286,12 @@ public class ShinshinIkenHandler {
             set麻痺_左下肢(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
             set麻痺_その他(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
+            div.getRadMigiJoshiMahiTeido().setReadOnly(true);
+            div.getRadHidariJoshiMahiTeido().setReadOnly(true);
+            div.getRadMigiKashiMahiTeido().setReadOnly(true);
+            div.getRadHidariKashiMahiTeido().setReadOnly(true);
+            div.getRadSonotaMahiTeido().setReadOnly(true);
+            div.getTxtSonotaMahiBui().setReadOnly(true);
             div.getChkMigiJoshiMahi().setReadOnly(true);
             div.getChkHidariJoshiMahi().setReadOnly(true);
             div.getChkMigiKashiMahi().setReadOnly(true);
@@ -296,6 +302,12 @@ public class ShinshinIkenHandler {
             div.getChkMigiKashiMahi().setSelectedItemsByKey(チェックボックス_SELECT);
             div.getChkHidariKashiMahi().setSelectedItemsByKey(チェックボックス_SELECT);
             div.getChkSonotaMahi().setSelectedItemsByKey(チェックボックス_SELECT);
+            div.getRadMigiJoshiMahiTeido().clearSelectedItem();
+            div.getRadHidariJoshiMahiTeido().clearSelectedItem();
+            div.getRadMigiKashiMahiTeido().clearSelectedItem();
+            div.getRadHidariKashiMahiTeido().clearSelectedItem();
+            div.getRadSonotaMahiTeido().clearSelectedItem();
+            div.getTxtSonotaMahiBui().clearValue();
         }
     }
 
@@ -489,10 +501,10 @@ public class ShinshinIkenHandler {
             setその他の皮膚疾患記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
             setその他の皮膚疾患_程度(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
         } else {
-            div.getTxtJokusoBui().setReadOnly(true);
-            div.getRadJokusoTeido().setReadOnly(true);
-            div.getTxtJokusoBui().clearValue();
-            div.getRadJokusoTeido().clearSelectedItem();
+            div.getTxtSonotaHifuShikkanBui().setReadOnly(true);
+            div.getRadSonotaHifuShikkanTeido().setReadOnly(true);
+            div.getTxtSonotaHifuShikkanBui().clearValue();
+            div.getRadSonotaHifuShikkanTeido().clearSelectedItem();
         }
     }
 

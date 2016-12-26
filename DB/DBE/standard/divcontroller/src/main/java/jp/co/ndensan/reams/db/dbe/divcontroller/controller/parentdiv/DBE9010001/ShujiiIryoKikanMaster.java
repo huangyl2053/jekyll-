@@ -204,8 +204,6 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setDisabledFalse();
         getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
-        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
-        div.getShujiiJohoInput().getBtnRegisterKoza().setDisabled(false);
         div.getShujiiJohoInput().getBtnshujiiinsert().setDisabled(false);
         if (!div.getHdnShichosonCode().isEmpty() && !div.getHdnShichosonName().isEmpty()) {
             div.getShujiiJohoInput().getTxtShichoson().setValue(div.getHdnShichosonCode());
@@ -268,8 +266,6 @@ public class ShujiiIryoKikanMaster {
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
-        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
-        div.getShujiiJohoInput().getBtnRegisterKoza().setDisabled(false);
         div.getShujiiJohoInput().getBtnshujiiinsert().setDisabled(false);
         return ResponseData.of(div).respond();
     }
@@ -287,9 +283,7 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setShujiiJohoToMeisai(row);
         getHandler(div).setDisabledTrue();
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
-        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         div.getShujiiJohoInput().getBtnshujiiinsert().setDisabled(true);
-        div.getShujiiJohoInput().getBtnRegisterKoza().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -304,19 +298,15 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setShujiiJohoToMeisai(row);
         if (状態_修正.equals(row.getJotai())) {
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
-            div.getShujiiJohoInput().getBtnRegisterKoza().setDisabled(false);
             div.getShujiiJohoInput().getBtnshujiiinsert().setDisabled(false);
         } else if (状態_削除.equals(row.getJotai())) {
             getHandler(div).setDisabledTrue();
-            div.getShujiiJohoInput().getBtnRegisterKoza().setDisabled(true);
             div.getShujiiJohoInput().getBtnshujiiinsert().setDisabled(true);
         } else if (RString.EMPTY.equals(row.getJotai())) {
             getHandler(div).setDisabledTrue();
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(true);
-            div.getShujiiJohoInput().getBtnRegisterKoza().setDisabled(true);
             div.getShujiiJohoInput().getBtnshujiiinsert().setDisabled(true);
         }
-        div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         return ResponseData.of(div).respond();
     }
 
@@ -701,7 +691,6 @@ public class ShujiiIryoKikanMaster {
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
             div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
             div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
-            div.getShujiiJohoInput().getBtnRegisterKoza().setVisible(true);
         }
         return ResponseData.of(div).respond();
     }

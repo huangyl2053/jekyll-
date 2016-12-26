@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.Ichijihanteikekk
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
 import jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa4.IinShinsakaishiryoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -38,10 +39,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -82,7 +86,10 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
     private RString path;
     private static final int INDEX_5 = 5;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
+    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
+    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private static final RString SEPARATOR = new RString("/");
+    private List<ShinsakaiTaiyosyaJohoEntity> 委員審査会追加資料A4リスト;
 
     @BatchWriter
     private BatchReportWriter<IinShinsakaishiryoA4ReportSource> batchReportWriter;
@@ -109,6 +116,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         一次判定MyBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         shinsakaiSiryoKyotsuList = mapper.getShinsakaiSiryoKyotsu(一次判定MyBatisParameter);
         get審査対象者一覧表情報();
+        委員審査会追加資料A4リスト = mapper.getShinsakaiTaiyosyaJoho(対象者一覧MyBatisParameter);
     }
 
     @Override
@@ -148,13 +156,16 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                 if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                     RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
                     path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+                    break;
                 }
             }
             IinShinsakaishiryoA4Report report = new IinShinsakaishiryoA4Report(jimuShinsakaishiryoList,
                     get一次判定結果票(shinseishoKanriNo),
                     get特記事項情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo));
+                    getその他資料情報(shinseishoKanriNo),
+                    get審査会追加資料情報(shinseishoKanriNo),
+                    paramter.getSakuseiJoken());
             report.writeBy(reportSourceWriter);
         }
         batchReportWriter.close();
@@ -215,7 +226,10 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiSiryoKyotsuList) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                 entity.setJimukyoku(false);
-                return new JimuShinsakaiWariateJohoBusiness(entity);
+                JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
+                business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+                business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
+                return business;
             }
         }
         return null;
@@ -237,13 +251,25 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                 RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
                 if (!共有ファイル名.isEmpty()) {
                     business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-                    business.set事務局概況特記イメージ(共有ファイルを引き出す(path));
+                    business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
                     存在ファイルindex = business.get存在ファイルIndex();
                     shinsakaiOrder = entity.getShinsakaiOrder();
                 }
             }
         }
         return business;
+    }
+
+    private JimuTuikaSiryoBusiness get審査会追加資料情報(ShinseishoKanriNo shinseishoKanriNo) {
+        JimuTuikaSiryoBusiness 審査会追加資料 = null;
+        for (ShinsakaiTaiyosyaJohoEntity entity : 委員審査会追加資料A4リスト) {
+            if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                審査会追加資料 = new JimuTuikaSiryoBusiness(entity, shinsakaiIinJohoList, paramter.toIinShinsakaiIinJohoProcessParameter(), count,
+                        ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
+                                KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
+            }
+        }
+        return 審査会追加資料;
     }
 
     private List<DbT5207NinteichosahyoServiceJokyoEntity> getサービス利用状況(ItiziHanteiEntity entity,
@@ -383,10 +409,10 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         return ファイル名;
     }
 
-    private RString 共有ファイルを引き出す(RString path) {
-        RString fileFullpath = getFilePath(path, ファイル名_G0001);
-        if (!RString.isNullOrEmpty(fileFullpath)) {
-            return fileFullpath;
+    private RString 共有ファイルを引き出す(RString path, RString fileName) {
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }

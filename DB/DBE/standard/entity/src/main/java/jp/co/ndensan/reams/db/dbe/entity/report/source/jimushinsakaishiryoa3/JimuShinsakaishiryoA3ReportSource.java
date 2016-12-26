@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -682,6 +681,8 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation shinseishoKanriNo;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hishokenshaNo;
 
     /**
      * 改ページ条件のキーです。

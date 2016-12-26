@@ -20,60 +20,46 @@
         <result property="shinsakaiKaisaiYMD" column="DbT5511_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKekkaJohoChushutsuYMD" column="DbT7211_shinsakaiKekkaJohoChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select resultOrdered="true" id="getNinteiChousaSukeList"
-            resultMap="resultMap_HanteiKekkaJouhouShuturyokuRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter" fetchSize="500">
-        SELECT 
-        DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
-        ,DbT5101."hihokenshaNo" as "DbT5101_hihokenshaNo"
-        ,DbT5101."hihokenshaName" as "DbT5101_hihokenshaName"
-        ,DbT5101."hihokenshaKana" as "DbT5101_hihokenshaKana"
-        ,DbT5101."seibetsu" as "DbT5101_seibetsu"
-        ,DbT5101."seinengappiYMD" as "DbT5101_seinengappiYMD"
-        ,DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD"
-        ,DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode"
-        ,DbT5102."nijiHanteiYokaigoJotaiKubunCode" as "DbT5102_nijiHanteiYokaigoJotaiKubunCode"
-        ,DbT5501."shinsakaiKaisaiNo" as "DbT5501_shinsakaiKaisaiNo"
-        ,DbT5501."shinsakaiKaisaiYoteiYMD" as "DbT5501_shinsakaiKaisaiYoteiYMD"
-        ,DbT5511."shinsakaiKaisaiYMD" as "DbT5511_shinsakaiKaisaiYMD"
-        ,DbT7211."shinsakaiKekkaJohoChushutsuYMD" as "DbT7211_shinsakaiKekkaJohoChushutsuYMD"
+
+    <!--クエリ部品本体-->
+    <sql id="QueryParts_NinteiChousaSukeList">
         FROM
         rgdb."DbT5101NinteiShinseiJoho" as DbT5101
-        INNER JOIN 
+        INNER JOIN
         rgdb."DbT5502ShinsakaiWariateJoho" as DbT5502
         ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND 
+        AND
         DbT5502."hanteiKekkaCode" = '01'
-        INNER JOIN 
+        INNER JOIN
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" as DbT5511
         ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
-        INNER JOIN 
+        INNER JOIN
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as DbT5501
         ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
-        INNER JOIN 
+        INNER JOIN
         rgdb."DbT7211GaibuRenkeiDataoutputJoho" as DbT7211
         ON DbT7211."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        INNER JOIN 
+        INNER JOIN
         rgdb."DbT5102NinteiKekkaJoho" as DbT5102
         ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        INNER JOIN 
+        INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" as DbT5105
         ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND 
+        AND
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND 
+        AND
         DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND 
+        AND
         DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-        AND 
+        AND
         DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND 
+        AND
         DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND 
+        AND
         DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND 
+        AND
         DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND 
+        AND
         DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
         <if test="useNinteichosahyoGaikyoChosa">
             LEFT JOIN
@@ -158,7 +144,7 @@
         DbT5101."logicalDeletedFlag" = False
         <if test="useMisyutsuryokuNomi">
             AND
-            DbT7211."shinsakaiKekkaJohoChushutsuYMD" IS NULL 
+            DbT7211."shinsakaiKekkaJohoChushutsuYMD" IS NULL
         </if>
         <if test="useHihokenshaNo">
             AND DbT5101."hihokenshaNo" = #{hihokenshaNo}
@@ -535,10 +521,41 @@
                 </if>
             </when>
         </choose>
+    </sql>
+
+    <!--データ抽出用-->
+    <select resultOrdered="true" id="getNinteiChousaSukeList"
+            resultMap="resultMap_HanteiKekkaJouhouShuturyokuRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter" fetchSize="500">
+        SELECT
+        DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+        ,DbT5101."hihokenshaNo" as "DbT5101_hihokenshaNo"
+        ,DbT5101."hihokenshaName" as "DbT5101_hihokenshaName"
+        ,DbT5101."hihokenshaKana" as "DbT5101_hihokenshaKana"
+        ,DbT5101."seibetsu" as "DbT5101_seibetsu"
+        ,DbT5101."seinengappiYMD" as "DbT5101_seinengappiYMD"
+        ,DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD"
+        ,DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode"
+        ,DbT5102."nijiHanteiYokaigoJotaiKubunCode" as "DbT5102_nijiHanteiYokaigoJotaiKubunCode"
+        ,DbT5501."shinsakaiKaisaiNo" as "DbT5501_shinsakaiKaisaiNo"
+        ,DbT5501."shinsakaiKaisaiYoteiYMD" as "DbT5501_shinsakaiKaisaiYoteiYMD"
+        ,DbT5511."shinsakaiKaisaiYMD" as "DbT5511_shinsakaiKaisaiYMD"
+        ,DbT7211."shinsakaiKekkaJohoChushutsuYMD" as "DbT7211_shinsakaiKekkaJohoChushutsuYMD"
+        <include refid="HanteiKekkaIchiranList" />
         ORDER BY
         DbT5101."ninteiShinseiYMD"
         <if test="useLimitCount">
             LIMIT #{limitCount}
         </if>
+    </select>
+
+    <!--カウント用-->
+    <select resultOrdered="true" id="countNinteiChousaSukeList"
+            resultType = "int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter" fetchSize="500">
+        SELECT
+        COUNT(*)
+        <include refid="HanteiKekkaIchiranList" />
+
     </select>
 </mapper>

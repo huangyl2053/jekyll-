@@ -180,16 +180,25 @@ public class NinteichosaIraiHandler {
             div.getTxtNoUpdate().setValue(new Decimal(notUpdateCount));
             div.getTxtCompleteCount().clearValue();
             div.getTxtTotalCount().clearValue();
+            div.getTxtNoUpdate().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(true);
+            div.getTxtTotalCount().setDisplayNone(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, true);
         } else if (状態.equals(KEY_可)) {
             div.getTxtCompleteCount().setValue(new Decimal(completeCount));
             div.getTxtNoUpdate().clearValue();
             div.getTxtTotalCount().clearValue();
+            div.getTxtNoUpdate().setDisplayNone(true);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtTotalCount().setDisplayNone(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
         } else {
             div.getTxtTotalCount().setValue(new Decimal(調査依頼List.size()));
             div.getTxtCompleteCount().setValue(new Decimal(completeCount));
             div.getTxtNoUpdate().setValue(new Decimal(notUpdateCount));
+            div.getTxtNoUpdate().setDisplayNone(false);
+            div.getTxtCompleteCount().setDisplayNone(false);
+            div.getTxtTotalCount().setDisplayNone(false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
         }
     }

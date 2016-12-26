@@ -53,8 +53,8 @@ public class ShujiiJohoInputDiv extends Panel {
     private TextBoxKana txtdaihyoshakananame;
     @JsonProperty("radJokyoFlag")
     private RadioButton radJokyoFlag;
-    @JsonProperty("btnRegisterKoza")
-    private ButtonDialog btnRegisterKoza;
+    @JsonProperty("KozaJoho")
+    private KozaJohoDiv KozaJoho;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
@@ -345,21 +345,21 @@ public class ShujiiJohoInputDiv extends Panel {
     }
 
     /*
-     * getbtnRegisterKoza
-     * @return btnRegisterKoza
+     * getKozaJoho
+     * @return KozaJoho
      */
-    @JsonProperty("btnRegisterKoza")
-    public ButtonDialog getBtnRegisterKoza() {
-        return btnRegisterKoza;
+    @JsonProperty("KozaJoho")
+    public KozaJohoDiv getKozaJoho() {
+        return KozaJoho;
     }
 
     /*
-     * setbtnRegisterKoza
-     * @param btnRegisterKoza btnRegisterKoza
+     * setKozaJoho
+     * @param KozaJoho KozaJoho
      */
-    @JsonProperty("btnRegisterKoza")
-    public void setBtnRegisterKoza(ButtonDialog btnRegisterKoza) {
-        this.btnRegisterKoza = btnRegisterKoza;
+    @JsonProperty("KozaJoho")
+    public void setKozaJoho(KozaJohoDiv KozaJoho) {
+        this.KozaJoho = KozaJoho;
     }
 
     /*

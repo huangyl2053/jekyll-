@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.Ichijihanteikekk
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Business;
 import jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa4.JimuShinsakaishiryoA4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -37,10 +38,13 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -84,6 +88,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private boolean is審査会対象一覧印刷済み;
     private static final RString SEPARATOR = new RString("/");
+    private List<ShinsakaiTaiyosyaJohoEntity> 事務局審査会追加資料A4リスト;
 
     @BatchWriter
     private BatchReportWriter<JimuShinsakaishiryoA4ReportSource> batchReportWriter;
@@ -112,6 +117,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         itiziHanteiEntityList = mapper.get事務局一次判定結果(myBatisParameter);
         get審査対象者一覧表情報();
         is審査会対象一覧印刷済み = false;
+        事務局審査会追加資料A4リスト = mapper.get審査会追加分(myBatisParameter);
     }
 
     @Override
@@ -151,13 +157,15 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                     RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
                     path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+                    break;
                 }
             }
             JimuShinsakaishiryoA4Report report = new JimuShinsakaishiryoA4Report(jimuShinsakaishiryoList,
                     get一次判定結果票情報(shinseishoKanriNo),
                     get特記事項情報(shinseishoKanriNo),
                     get主治医意見書情報(shinseishoKanriNo),
-                    getその他資料情報(shinseishoKanriNo), is審査会対象一覧印刷済み);
+                    getその他資料情報(shinseishoKanriNo), is審査会対象一覧印刷済み,
+                    get審査会追加資料情報(shinseishoKanriNo), paramter.getSakuseiJoken());
             report.writeBy(reportSourceWriter);
             is審査会対象一覧印刷済み = true;
         }
@@ -234,6 +242,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(kyotsuEntity);
                 business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
                 business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
+                return business;
             }
         }
         return null;
@@ -260,6 +269,18 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
             }
         }
         return business;
+    }
+
+    private JimuTuikaSiryoBusiness get審査会追加資料情報(ShinseishoKanriNo shinseishoKanriNo) {
+        JimuTuikaSiryoBusiness 審査会追加資料 = null;
+        for (ShinsakaiTaiyosyaJohoEntity entity : 事務局審査会追加資料A4リスト) {
+            if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                審査会追加資料 = new JimuTuikaSiryoBusiness(entity, shinsakaiIinJohoList, paramter, count,
+                        ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
+                                KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
+            }
+        }
+        return 審査会追加資料;
     }
 
     private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
@@ -404,6 +425,9 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);

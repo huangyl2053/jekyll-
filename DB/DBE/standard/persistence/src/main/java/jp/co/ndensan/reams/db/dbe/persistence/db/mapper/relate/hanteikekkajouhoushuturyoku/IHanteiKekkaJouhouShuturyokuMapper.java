@@ -24,4 +24,11 @@ public interface IHanteiKekkaJouhouShuturyokuMapper {
      */
     List<HanteiKekkaJouhouShuturyokuRelateEntity> getNinteiChousaSukeList(HanteiKekkaJouhouShuturyokuParameter 判定結果情報出力_保険者情報検索条件);
 
+    /**
+     * 判定結果情報の該当件数を取得します。
+     *
+     * @param 判定結果情報出力_保険者情報検索条件 判定結果情報出力_保険者情報検索条件
+     * @return 該当件数
+     */
+    int countNinteiChousaSukeList(HanteiKekkaJouhouShuturyokuParameter 判定結果情報出力_保険者情報検索条件);
 }
