@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Kaigoninte
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * headPanel のクラスファイル
- *
+ * headPanel のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class headPanelDiv extends Panel {
@@ -28,6 +28,8 @@ public class headPanelDiv extends Panel {
      */
     @JsonProperty("ccdAtenaInfo")
     private KaigoNinteiAtenaInfoDiv ccdAtenaInfo;
+    @JsonProperty("AtenaInfoToroku")
+    private AtenaInfoTorokuDiv AtenaInfoToroku;
     @JsonProperty("ccdShikakuInfo")
     private KaigoninteiShikakuInfoDiv ccdShikakuInfo;
 
@@ -44,6 +46,24 @@ public class headPanelDiv extends Panel {
     @JsonProperty("ccdAtenaInfo")
     public IKaigoNinteiAtenaInfoDiv getCcdAtenaInfo() {
         return ccdAtenaInfo;
+    }
+
+    /*
+     * getAtenaInfoToroku
+     * @return AtenaInfoToroku
+     */
+    @JsonProperty("AtenaInfoToroku")
+    public AtenaInfoTorokuDiv getAtenaInfoToroku() {
+        return AtenaInfoToroku;
+    }
+
+    /*
+     * setAtenaInfoToroku
+     * @param AtenaInfoToroku AtenaInfoToroku
+     */
+    @JsonProperty("AtenaInfoToroku")
+    public void setAtenaInfoToroku(AtenaInfoTorokuDiv AtenaInfoToroku) {
+        this.AtenaInfoToroku = AtenaInfoToroku;
     }
 
     /*
