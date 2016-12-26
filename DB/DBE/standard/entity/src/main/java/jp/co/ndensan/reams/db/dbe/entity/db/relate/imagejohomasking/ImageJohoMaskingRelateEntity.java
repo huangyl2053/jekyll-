@@ -39,6 +39,7 @@ public class ImageJohoMaskingRelateEntity {
     private Code 帳票ID;
     private int 認定申請年;
     private RDateTime イメージ共有ファイルID;
-    private RString 特記マスク区分;
-    private RString 意見書マスク区分;
+    private boolean 特記マスク有無;
+    private boolean 意見書マスク有無;
+    private boolean 概況マスク有無;
 }
