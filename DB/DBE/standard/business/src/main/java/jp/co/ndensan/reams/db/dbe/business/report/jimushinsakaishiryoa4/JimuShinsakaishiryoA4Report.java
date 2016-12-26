@@ -15,7 +15,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Busi
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa4.JimuShinsakaishiryoA4ReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -39,6 +43,9 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
     private final JimuTuikaSiryoBusiness 審査会追加資料;
     private final RString 作成条件;
     private final RString 作成条件_追加分 = new RString("追加分");
+    private static final RString 印字 = new RString("1");
+    private final RString printHou;
+    private final RString 両面 = new RString("2");
 
     /**
      * インスタンスを生成します。
@@ -51,11 +58,12 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
      * @param is審査会対象一覧印刷済み is審査会対象一覧印刷済み
      * @param jimuTuikaSiryoBusiness 審査会追加資料のBusinessの編集クラス
      * @param sakuseiJoken 作成条件
+     * @param printHou 印刷方法
      */
     public JimuShinsakaishiryoA4Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA4Entity ichijihanteiEntity, TokkiText1A4Business tokkiTextBusiness,
             JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness,
-            boolean is審査会対象一覧印刷済み, JimuTuikaSiryoBusiness jimuTuikaSiryoBusiness, RString sakuseiJoken) {
+            boolean is審査会対象一覧印刷済み, JimuTuikaSiryoBusiness jimuTuikaSiryoBusiness, RString sakuseiJoken, RString printHou) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteiEntity = ichijihanteiEntity;
         this.tokkiTextBusiness = tokkiTextBusiness;
@@ -64,6 +72,7 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
         this.is審査会対象一覧印刷済み = is審査会対象一覧印刷済み;
         this.審査会追加資料 = jimuTuikaSiryoBusiness;
         this.作成条件 = sakuseiJoken;
+        this.printHou = printHou;
     }
 
     @Override
@@ -102,24 +111,13 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
                 }
             }
         }
-        if (tokkiTextBusiness != null) {
-            if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
-                テキスト全面Editor(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
-            } else {
-                for (int i = 0; i < 短冊リスト.size(); i++) {
-                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
-                }
-            }
-        }
-        if (shinsakaiWariateJoho != null && !RString.isNullOrEmpty(shinsakaiWariateJoho.get主治医意見書イメージ１())) {
-            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
-            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
-            reportSourceWriter.writeLine(builder);
-            if (!RString.isNullOrEmpty(shinsakaiWariateJoho.get主治医意見書イメージ２())) {
-                IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
-                IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
-                reportSourceWriter.writeLine(builder1);
-            }
+        RString 印刷有無フラグ = DbBusinessConfig.get(ConfigNameDBE.特記と意見書の見開き印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (両面.equals(this.printHou) && 印字.equals(印刷有無フラグ)) {
+            set主治医意見書(reportSourceWriter);
+            set特記事項(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+        } else {
+            set特記事項(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+            set主治医意見書(reportSourceWriter);
         }
         if (sonotashiryoBusiness != null && !sonotashiryoBusiness.getその他資料().isEmpty()) {
             List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
@@ -136,6 +134,32 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
             }
         }
         get審査会追加資料(reportSourceWriter);
+    }
+
+    private void set特記事項(ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter,
+            List<TokkiA4Entity> 短冊情報リスト, List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List) {
+        if (tokkiTextBusiness != null) {
+            if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
+                テキスト全面Editor(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+            } else {
+                for (int i = 0; i < 短冊リスト.size(); i++) {
+                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+                }
+            }
+        }
+    }
+
+    private void set主治医意見書(ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter) {
+        if (shinsakaiWariateJoho != null && !RString.isNullOrEmpty(shinsakaiWariateJoho.get主治医意見書イメージ１())) {
+            IJimuShinsakaishiryoA4Editor editor = new JimuShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
+            IJimuShinsakaishiryoA4Builder builder = new JimuShinsakaishiryoA4Builder(editor);
+            reportSourceWriter.writeLine(builder);
+            if (!RString.isNullOrEmpty(shinsakaiWariateJoho.get主治医意見書イメージ２())) {
+                IJimuShinsakaishiryoA4Editor editor1 = new JimuShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
+                IJimuShinsakaishiryoA4Builder builder1 = new JimuShinsakaishiryoA4Builder(editor1);
+                reportSourceWriter.writeLine(builder1);
+            }
+        }
     }
 
     private void get審査会追加資料(ReportSourceWriter<JimuShinsakaishiryoA4ReportSource> reportSourceWriter) {

@@ -15,7 +15,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiText1A4Busi
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iinshinsakaishiryoa4.IinShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -28,6 +32,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4ReportSource> {
 
     private static final RString テキスト全面イメージ = new RString("1");
+    private static final RString 印字 = new RString("1");
+    private final RString printHou;
+    private final RString 両面 = new RString("2");
     private static final int LENGTH_20 = 20;
     private static final int MAXCOUNT = 30;
     private final JimuTuikaSiryoBusiness 審査会追加資料;
@@ -49,11 +56,12 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
      * @param sonotashiryoBusiness その他資料情報のBusinessの編集クラス
      * @param jimuTuikaSiryoBusiness 審査会追加資料のBusinessの編集クラス
      * @param sakuseiJoken 作成条件
+     * @param printHou 印刷方法
      */
     public IinShinsakaishiryoA4Report(List<JimuShinsakaishiryoBusiness> shinsakaishiryoList,
             IchijihanteikekkahyoA4Entity ichijihanteiEntity, TokkiText1A4Business tokkiTextBusiness,
             JimuShinsakaiWariateJohoBusiness shinsakaiWariateJoho, JimuSonotashiryoBusiness sonotashiryoBusiness,
-            JimuTuikaSiryoBusiness jimuTuikaSiryoBusiness, RString sakuseiJoken) {
+            JimuTuikaSiryoBusiness jimuTuikaSiryoBusiness, RString sakuseiJoken, RString printHou) {
         this.shinsakaishiryoList = shinsakaishiryoList;
         this.ichijihanteiEntity = ichijihanteiEntity;
         this.tokkiTextBusiness = tokkiTextBusiness;
@@ -61,6 +69,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
         this.sonotashiryoBusiness = sonotashiryoBusiness;
         this.審査会追加資料 = jimuTuikaSiryoBusiness;
         this.作成条件 = sakuseiJoken;
+        this.printHou = printHou;
     }
 
     @Override
@@ -97,22 +106,13 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
                 }
             }
         }
-        if (shinsakaiWariateJoho != null) {
-            IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
-            IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
-            reportSourceWriter.writeLine(builder);
-            IIinShinsakaishiryoA4Editor editor1 = new IinShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
-            IIinShinsakaishiryoA4Builder builder1 = new IinShinsakaishiryoA4Builder(editor1);
-            reportSourceWriter.writeLine(builder1);
-        }
-        if (tokkiTextBusiness != null) {
-            if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
-                テキスト全面Editor(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
-            } else {
-                for (int i = 0; i < 短冊リスト.size(); i++) {
-                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
-                }
-            }
+        RString 印刷有無フラグ = DbBusinessConfig.get(ConfigNameDBE.特記と意見書の見開き印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (両面.equals(this.printHou) && 印字.equals(印刷有無フラグ)) {
+            set主治医意見書(reportSourceWriter);
+            set特記事項(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+        } else {
+            set特記事項(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+            set主治医意見書(reportSourceWriter);
         }
         if (sonotashiryoBusiness != null) {
             List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
@@ -132,6 +132,30 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
             IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group8Editor(審査会追加資料);
             IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
             reportSourceWriter.writeLine(builder);
+        }
+    }
+
+    private void set特記事項(ReportSourceWriter<IinShinsakaishiryoA4ReportSource> reportSourceWriter, List<TokkiA4Entity> 短冊情報リスト,
+            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List) {
+        if (tokkiTextBusiness != null) {
+            if (テキスト全面イメージ.equals(tokkiTextBusiness.get特記パターン())) {
+                テキスト全面Editor(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+            } else {
+                for (int i = 0; i < 短冊リスト.size(); i++) {
+                    短冊情報Editor(reportSourceWriter, i, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
+                }
+            }
+        }
+    }
+
+    private void set主治医意見書(ReportSourceWriter<IinShinsakaishiryoA4ReportSource> reportSourceWriter) {
+        if (shinsakaiWariateJoho != null) {
+            IIinShinsakaishiryoA4Editor editor = new IinShinsakaishiryoA4Group5Editor(shinsakaiWariateJoho);
+            IIinShinsakaishiryoA4Builder builder = new IinShinsakaishiryoA4Builder(editor);
+            reportSourceWriter.writeLine(builder);
+            IIinShinsakaishiryoA4Editor editor1 = new IinShinsakaishiryoA4Group6Editor(shinsakaiWariateJoho);
+            IIinShinsakaishiryoA4Builder builder1 = new IinShinsakaishiryoA4Builder(editor1);
+            reportSourceWriter.writeLine(builder1);
         }
     }
 

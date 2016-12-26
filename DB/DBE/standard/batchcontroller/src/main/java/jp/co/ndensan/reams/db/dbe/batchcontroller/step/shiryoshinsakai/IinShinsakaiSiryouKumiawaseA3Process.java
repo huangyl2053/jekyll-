@@ -124,8 +124,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         RString reportId = ReportIdDBE.DBE517904.getReportId().value();
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
-                    IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>()
+        .new SimpleLayoutBreaker(IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
                             ReportLineRecord<IinShinsakaishiryoA3ReportSource> currentRecord,
@@ -166,7 +166,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                     getその他資料情報(shinseishoKanriNo),
                     get審査会追加資料情報(shinseishoKanriNo),
                     reportId,
-                    paramter.getSakuseiJoken());
+                    paramter.getSakuseiJoken(),
+                    paramter.getPrintHou());
             report.writeBy(reportSourceWriter);
         }
         batchReportWriter.close();
