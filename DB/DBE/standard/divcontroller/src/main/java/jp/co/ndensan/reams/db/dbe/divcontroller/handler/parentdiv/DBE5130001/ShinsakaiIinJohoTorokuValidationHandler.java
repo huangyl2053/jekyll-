@@ -36,7 +36,6 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
 
     private final ShinsakaiIinJohoTorokuDiv div;
     private static final RString 状態_追加 = new RString("追加");
-    private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
 
     /**
@@ -68,28 +67,26 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
                 validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.既に登録済));
             }
         }
-
-        if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
+        if (!状態_削除.equals(状態)) {
             if (!is口座情報あり_必須項目入力あり()) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "口座情報"), div.getKozaJoho()));
             }
-        }
+            List<ViewControl> shinsaIinYMD = new ArrayList<>();
+            shinsaIinYMD.add(div.getTxtShinsaIinYMDFrom());
+            shinsaIinYMD.add(div.getTxtShinsaIinYMDTo());
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div).ifNot(ShinsakaiIinJohoSpec.審査会委員開始日終了日の大小チェック)
+                    .thenAdd(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前).messages());
+            validationMessages.add(new ValidationMessageControlDictionaryBuilder().add(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前,
+                    shinsaIinYMD).build().check(messages));
 
-        List<ViewControl> shinsaIinYMD = new ArrayList<>();
-        shinsaIinYMD.add(div.getTxtShinsaIinYMDFrom());
-        shinsaIinYMD.add(div.getTxtShinsaIinYMDTo());
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(ShinsakaiIinJohoSpec.審査会委員開始日終了日の大小チェック)
-                .thenAdd(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前).messages());
-        validationMessages.add(new ValidationMessageControlDictionaryBuilder().add(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前,
-                shinsaIinYMD).build().check(messages));
-
-        if (div.getCcdshinsakaiChikuCode().getCode() != null && !div.getCcdshinsakaiChikuCode().getCode().isEmpty()) {
-            UzT0007CodeEntity 地区コード = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(),
-                    div.getCcdshinsakaiChikuCode().getCode(), FlexibleDate.getNowDate());
-            if (地区コード == null) {
-                validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.コードマスタなし));
+            if (div.getCcdshinsakaiChikuCode().getCode() != null && !div.getCcdshinsakaiChikuCode().getCode().isEmpty()) {
+                UzT0007CodeEntity 地区コード = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(),
+                        div.getCcdshinsakaiChikuCode().getCode(), FlexibleDate.getNowDate());
+                if (地区コード == null) {
+                    validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.コードマスタなし));
+                }
             }
         }
         return validationMessages;
