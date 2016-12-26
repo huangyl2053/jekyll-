@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 判定結果情報出力(保険者)の取得するクラスです。
@@ -111,8 +112,9 @@ public class NijihanteiKekkaOutputHandler {
     public void kennsaku(RString 被保険者番号) {
         List<dgTaishoshaIchiran_Row> dgTaishoshaIchiranList = new ArrayList<>();
         HanteiKekkaJouhouShuturyokuParameter hanteiParameter = createParameter(被保険者番号);
-        List<HanteiKekkaJouhouShuturyokuBusiness> ninteiList = HanteiKekkaJouhouShuturyokuFinder.createInstance()
-                .getHanteiKekka(hanteiParameter).records();
+        SearchResult<HanteiKekkaJouhouShuturyokuBusiness> 判定結果情報検索結果 = HanteiKekkaJouhouShuturyokuFinder.createInstance()
+                .getHanteiKekka(hanteiParameter);
+        List<HanteiKekkaJouhouShuturyokuBusiness> ninteiList = 判定結果情報検索結果.records();
         if (ninteiList != null && !ninteiList.isEmpty()) {
             for (HanteiKekkaJouhouShuturyokuBusiness jigyoshaInput : ninteiList) {
                 dgTaishoshaIchiran_Row dgFukushiyoguShohin = new dgTaishoshaIchiran_Row();
@@ -141,7 +143,10 @@ public class NijihanteiKekkaOutputHandler {
                 dgTaishoshaIchiranList.add(dgFukushiyoguShohin);
                 アクセスログ();
             }
-
+            DataGridSetting gridSetting = nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getGridSetting();
+            gridSetting.setLimitRowCount(hanteiParameter.getLimitCount());
+            gridSetting.setSelectedRowCount(判定結果情報検索結果.totalCount());
+            nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setGridSetting(gridSetting);
             HanteiKekkaJouhouShuturyokuBusiness rec = ninteiList.get(findLastIndex(ninteiList));
             nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().updateSaikinShorisha(rec.get被保険者番号(), rec.get被保険者氏名());
             nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().reloadSaikinShorisha();
