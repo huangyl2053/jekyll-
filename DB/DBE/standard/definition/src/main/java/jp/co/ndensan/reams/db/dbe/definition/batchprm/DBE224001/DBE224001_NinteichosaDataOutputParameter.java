@@ -28,6 +28,7 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
     private static final String NINTEICHOSAINCODE = "ninteiChosainCode";
     private static final String SHINSEISHOKANRINOLIST = "shinseishoKanriNoList";
     private static final String SHICHOSONCODE = "shichosonCode";
+    private static final String HIHOKENSHANOLIST = "hihokenshaNoList";
     @BatchParameter(key = NINTEICHOSAITAKUSAKICODE, name = "認定調査委託先コード")
     private RString ninteichosaItakusakiCode;
     @BatchParameter(key = NINTEICHOSAINCODE, name = "認定調査員コード")
@@ -36,6 +37,8 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
     private List<RString> shinseishoKanriNoList;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString shichosonCode;
+    @BatchParameter(key = HIHOKENSHANOLIST, name = "被保険者番号")
+    private List<RString> hihokenshaNoList;
 
     /**
      * コンストラクタです。
@@ -50,17 +53,20 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
      * @param 認定調査員コード 認定調査員コード
      * @param 申請書管理番号リスト 申請書管理番号リスト
      * @param 市町村コード 市町村コード
+     * @param 被保険者番号リスト 被保険者番号リスト
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public DBE224001_NinteichosaDataOutputParameter(
             RString 認定調査委託先コード,
             RString 認定調査員コード,
             List<RString> 申請書管理番号リスト,
-            RString 市町村コード) {
+            RString 市町村コード,
+            List<RString> 被保険者番号リスト) {
         this.ninteichosaItakusakiCode = 認定調査委託先コード;
         this.ninteiChosainCode = 認定調査員コード;
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.shichosonCode = 市町村コード;
+        this.hihokenshaNoList = 被保険者番号リスト;
     }
 
     /**
@@ -106,7 +112,7 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
             RString csvTempTableName, RString csvTempTableNameZenkai) {
         return new NinteiChosaDataCsvProcessParamter(
                 csvTempTableName, csvTempTableNameZenkai,
-                this.ninteichosaItakusakiCode, this.ninteiChosainCode, this.shinseishoKanriNoList, this.shichosonCode);
+                this.ninteichosaItakusakiCode, this.ninteiChosainCode, this.shinseishoKanriNoList, this.shichosonCode, this.hihokenshaNoList);
     }
 
 }

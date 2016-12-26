@@ -107,11 +107,14 @@ public class NinteiChosaDataOutputHandler {
         batchParamter.setNinteiChosainCode(div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue());
         List<dgNinteiChosaData_Row> rowList = div.getNinteiIchiran().getDgNinteiChosaData().getSelectedItems();
         List<RString> shinseishoKanriNoList = new ArrayList<>();
+        List<RString> hihokenshaNoList = new ArrayList<>();
         for (dgNinteiChosaData_Row row : rowList) {
             shinseishoKanriNoList.add(row.getShinseishoKanriNo());
+            hihokenshaNoList.add(row.getHihokenshaNo());
         }
         batchParamter.setShinseishoKanriNoList(shinseishoKanriNoList);
         batchParamter.setShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
+        batchParamter.setHihokenshaNoList(hihokenshaNoList);
         return batchParamter;
     }
 
