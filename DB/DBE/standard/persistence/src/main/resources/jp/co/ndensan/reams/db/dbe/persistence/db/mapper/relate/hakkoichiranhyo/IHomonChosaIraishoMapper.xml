@@ -118,10 +118,17 @@
         , Konkai."remban" AS 今回連番
         , Konkai."researchItem" AS 今回連番に対する調査項目
         , '' AS 直近区分
+        , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
         FROM(
         <include refid="HomonChosaIraisho" />
         ) AS pickout
         
+        INNER JOIN
+        rgdb."DbT5201NinteichosaIraiJoho"
+        ON
+        pickout."shinseishoKanriNo" = rgdb."DbT5201NinteichosaIraiJoho"."shinseishoKanriNo"
+        AND pickout."ninteichosaIraiRirekiNo" = rgdb."DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo"
+        AND rgdb."DbT5201NinteichosaIraiJoho"."isDeleted" = FALSE
         
         LEFT JOIN
         rgdb."DbT5150RenrakusakiJoho" AS dbT5150
