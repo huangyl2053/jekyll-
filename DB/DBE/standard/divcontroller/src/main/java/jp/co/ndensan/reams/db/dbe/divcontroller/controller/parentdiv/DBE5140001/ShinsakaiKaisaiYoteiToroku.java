@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.entities.UzV0002HolidayListEntity;
+import jp.co.ndensan.reams.uz.uza.math.CheckDigitKind;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -688,12 +689,14 @@ public class ShinsakaiKaisaiYoteiToroku {
                 }
             });
             RString 汎用キー = new RString("審査会開催番号");
-            FlexibleYear 年度 = new FlexibleYear(div.getLblMonth().getText().substring(INDEX_0, INDEX_4));
             for (ShinsakaiKaisaiYoteiJohoParameter entity : shinkiList) {
-                RString 開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
-                if (Integer.parseInt(開催番号.toString()) == INDEX_0) {
-                    開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
+                FlexibleYear 年度 = entity.get日付().getNendo();
+                RString 開催番号;
+                if (Saiban.referMetaData(SubGyomuCode.DBE認定支援, 汎用キー, 年度) == null) {
+                    long minNumber = new Long(年度.toString().concat("0001"));
+                    Saiban.insert(SubGyomuCode.DBE認定支援, 汎用キー, 年度, minNumber, 99999999, false, 1, 0, CheckDigitKind.Unchecked);
                 }
+                開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
                 RString 合議体番号 = new RString(entity.get合議体番号());
                 entity.set開催番号(開催番号);
                 entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号).replace(BATU, 合議体番号));
