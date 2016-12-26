@@ -45,7 +45,7 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate."
             + "shinsaiinjissekiichiran.IShinsaiinJissekiIchiranMapper.get介護認定審査会委員報酬集計表");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601003"));
-    private static final RString CSV_NAME = new RString("ShinsaiinJissekiIchiran.csv");
+    private static final RString CSV_NAME = new RString("審査実績一覧.csv");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private ShinsaiinJissekiIchiranProcessParamter paramter;
@@ -102,12 +102,12 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
         RStringBuilder builder = new RStringBuilder();
         builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
-        審査会開催日FROM_SB.append(dateFormat(paramter.get審査会開催日FROM()));
-        RStringBuilder 審査会開催日To_SB = new RStringBuilder("【審査会開催日（To）】");
-        審査会開催日To_SB.append(dateFormat(paramter.get審査会開催日TO()));
-        出力条件.add(審査会開催日FROM_SB.toRString());
-        出力条件.add(審査会開催日To_SB.toRString());
+        RStringBuilder 審査会実施日FROM_SB = new RStringBuilder("【審査会実施日（From）】");
+        審査会実施日FROM_SB.append(dateFormat(paramter.get審査会実施日FROM()));
+        RStringBuilder 審査会実施日To_SB = new RStringBuilder("【審査会実施日（To）】");
+        審査会実施日To_SB.append(dateFormat(paramter.get審査会実施日TO()));
+        出力条件.add(審査会実施日FROM_SB.toRString());
+        出力条件.add(審査会実施日To_SB.toRString());
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("介護認定審査会委員実績集計CSV"), 導入団体コード, 市町村名, new RString(JobContextHolder.getJobId()),
                 CSV_NAME, EUC_ENTITY_ID.toRString(), builder.toRString(), 出力条件);

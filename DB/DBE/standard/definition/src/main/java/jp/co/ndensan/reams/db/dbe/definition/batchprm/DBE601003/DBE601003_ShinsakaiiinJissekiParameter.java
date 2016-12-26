@@ -26,17 +26,17 @@ import lombok.Setter;
 public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
-    private static final String SHINSAKAI_KAISAIBI_FROM = "shinsakaikaisaibiFrom";
-    private static final String SHINSAKAI_KAISAIBI_TO = "shinsakaikaisaibiTo";
+    private static final String SHINSAKAI_JISSHIBI_FROM = "shinsakaijisshibiFrom";
+    private static final String SHINSAKAI_JISSHIBI_TO = "shinsakaijisshibiTo";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8362309102168284770L;
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
-    @BatchParameter(key = SHINSAKAI_KAISAIBI_FROM, name = "審査会開催日FROM")
-    private FlexibleDate shinsakaikaisaibiFrom;
-    @BatchParameter(key = SHINSAKAI_KAISAIBI_TO, name = "審査会開催日To")
-    private FlexibleDate shinsakaikaisaibiTo;
+    @BatchParameter(key = SHINSAKAI_JISSHIBI_FROM, name = "審査会実施日FROM")
+    private FlexibleDate shinsakaijisshibiFrom;
+    @BatchParameter(key = SHINSAKAI_JISSHIBI_TO, name = "審査会実施日To")
+    private FlexibleDate shinsakaijisshibiTo;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<ShinsaiinJissekiIchiranKey> keyJoho;
 
@@ -50,17 +50,17 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
      * コンストラクタです。
      *
      * @param syohyoSyuturyoku 帳票出力区分
-     * @param shinsakaikaisaibiFrom 審査会開催日FROM
-     * @param shinsakaikaisaibiTo 審査会開催日TO
+     * @param shinsakaijisshibiFrom 審査会開催日FROM
+     * @param shinsakaijisshibiTo 審査会開催日TO
      * @param keyJoho キー情報Entityリスト
      */
     public DBE601003_ShinsakaiiinJissekiParameter(RString syohyoSyuturyoku,
-            FlexibleDate shinsakaikaisaibiFrom,
-            FlexibleDate shinsakaikaisaibiTo,
+            FlexibleDate shinsakaijisshibiFrom,
+            FlexibleDate shinsakaijisshibiTo,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
-        this.shinsakaikaisaibiFrom = shinsakaikaisaibiFrom;
-        this.shinsakaikaisaibiTo = shinsakaikaisaibiTo;
+        this.shinsakaijisshibiFrom = shinsakaijisshibiFrom;
+        this.shinsakaijisshibiTo = shinsakaijisshibiTo;
         this.keyJoho = keyJoho;
     }
 
@@ -71,8 +71,8 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
      */
     public ShinsaiinJissekiIchiranProcessParamter toProcessParamter() {
         return new ShinsaiinJissekiIchiranProcessParamter(syohyoSyuturyoku,
-                shinsakaikaisaibiFrom,
-                shinsakaikaisaibiTo,
+                shinsakaijisshibiFrom,
+                shinsakaijisshibiTo,
                 keyJoho);
     }
 

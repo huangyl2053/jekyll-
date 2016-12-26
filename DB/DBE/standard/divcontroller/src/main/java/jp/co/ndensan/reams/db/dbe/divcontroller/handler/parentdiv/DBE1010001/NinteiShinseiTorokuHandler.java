@@ -16,10 +16,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -30,8 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 審査依頼受付／みなし２号審査受付の抽象Handlerクラスです。
@@ -112,14 +114,28 @@ public class NinteiShinseiTorokuHandler {
         if (business.getカナ氏名() != null) {
             div.setHdnShimeiKana(business.getカナ氏名().value());
         }
+        div.getAtenaInfoToroku().getMeisho().setDomain(business.get氏名());
+        if (business.get生年月日() != null) {
+            div.getAtenaInfoToroku().getSeinengabi().setValue(business.get生年月日());
+            int 年齢 = FlexibleDate.getNowDate().getBetweenYears(business.get生年月日().toFlexibleDate());
+            div.getAtenaInfoToroku().getNenrei().setValue(Decimal.valueOf(年齢));
+        }
+        
+        
+        if (!business.get性別コード().isNullOrEmpty()) {
+            div.getAtenaInfoToroku().getSeibetsu().setValue(Seibetsu.toValue(business.get性別コード()).get名称());
+        }
+        div.getAtenaInfoToroku().getYubinNo().setValue(business.get郵便番号());
+        div.getAtenaInfoToroku().getJusho().setDomain(new AtenaJusho(business.get住所名称()));
+        div.getAtenaInfoToroku().getTelNo().setDomain(business.get電話番号());
         div.setHdnShishoCode(business.get支所コード());
 
-        if (business.get識別コード() != null) {
-            div.getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
-            div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, business.get識別コード());
-            div.getCcdAtenaInfo().setShoriType(new RString("2"));
-            div.getCcdAtenaInfo().initialize();
-        }
+//        if (business.get識別コード() != null) {
+//            div.getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
+//            div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, business.get識別コード());
+//            div.getCcdAtenaInfo().setShoriType(new RString("2"));
+//            div.getCcdAtenaInfo().initialize();
+//        }
         if (市町村コード.isEmpty()) {
             div.getCcdShikakuInfo().initialize(ZERO_6, business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         } else {

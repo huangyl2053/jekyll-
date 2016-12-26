@@ -130,16 +130,16 @@ public class ShisakaiIinJissekiShokaiHandler {
             }
         }
         param.setKeyJoho(keyJoho);
-        FlexibleDate 審査会開催日FROM = FlexibleDate.EMPTY;
-        FlexibleDate 審査会開催日TO = FlexibleDate.EMPTY;
+        FlexibleDate 審査会実施日FROM = FlexibleDate.EMPTY;
+        FlexibleDate 審査会実施日TO = FlexibleDate.EMPTY;
         if (div.getTxtShinsakaiKaisaibi().getFromValue() != null) {
-            審査会開催日FROM = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getFromValue().toDateString());
+            審査会実施日FROM = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getFromValue().toDateString());
         }
         if (div.getTxtShinsakaiKaisaibi().getToValue() != null) {
-            審査会開催日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
+            審査会実施日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
         }
-        param.setShinsakaikaisaibiFrom(審査会開催日FROM);
-        param.setShinsakaikaisaibiTo(審査会開催日TO);
+        param.setShinsakaijisshibiFrom(審査会実施日FROM);
+        param.setShinsakaijisshibiTo(審査会実施日TO);
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;
     }
@@ -150,16 +150,16 @@ public class ShisakaiIinJissekiShokaiHandler {
      * @return ShinsaiinJissekiIchiranMybitisParamter
      */
     public ShinsaiinJissekiIchiranMybitisParamter setMybatisParameta() {
-        FlexibleDate 審査会開催日FROM = FlexibleDate.EMPTY;
-        FlexibleDate 審査会開催日TO = FlexibleDate.EMPTY;
+        FlexibleDate 審査会実施日FROM = FlexibleDate.EMPTY;
+        FlexibleDate 審査会実施日TO = FlexibleDate.EMPTY;
         if (div.getTxtShinsakaiKaisaibi().getFromValue() != null) {
-            審査会開催日FROM = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getFromValue().toDateString());
+            審査会実施日FROM = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getFromValue().toDateString());
         }
         if (div.getTxtShinsakaiKaisaibi().getToValue() != null) {
-            審査会開催日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
+            審査会実施日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
         }
         ShinsaiinJissekiIchiranMybitisParamter paramter = ShinsaiinJissekiIchiranMybitisParamter.createParamter(false,
-                審査会開催日FROM, 審査会開催日TO, new RString(div.getTxtMaxKensu().getValue().toString()));
+                審査会実施日FROM, 審査会実施日TO, new RString(div.getTxtMaxKensu().getValue().toString()));
         return paramter;
     }
 

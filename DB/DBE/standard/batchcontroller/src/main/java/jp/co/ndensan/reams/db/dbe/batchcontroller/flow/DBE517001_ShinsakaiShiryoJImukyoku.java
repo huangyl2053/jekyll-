@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiDataSakuseiA4Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.JimuGaikyotokkiSonotaJohoDataSakuseiA4Process;
@@ -70,7 +69,7 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
         }
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiFalg())) {
             executeStep(事務局_概況特記);
-            executeStep(事務局_概況特記その他);
+            //executeStep(事務局_概況特記その他);
         }
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
             executeStep(事務局_概況特記一覧表);

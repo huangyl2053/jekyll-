@@ -229,10 +229,13 @@ public class Masking {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
+                if (!row.getSelected()) {
+                    continue;
+                }
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
-                if (!RString.isNullOrEmpty(申請書管理番号) && MaskingManager.createInstance().is更新(申請書管理番号)) {
+                if (!RString.isNullOrEmpty(申請書管理番号) && row.getJyuJiIiKenJyo().equals(new RString("○"))) {
                     NinteiKanryoJoho ninteiKanryoJoho = サービス一覧情報Model.get(
                             new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
