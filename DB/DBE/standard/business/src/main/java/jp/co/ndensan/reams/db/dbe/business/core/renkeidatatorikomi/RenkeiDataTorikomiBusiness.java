@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
@@ -88,6 +89,8 @@ public class RenkeiDataTorikomiBusiness {
     private static final RString 登録 = new RString("3");
     private static final RString CODE0 = new RString("0");
     private static final RString CODE1 = new RString("001");
+    private static final int 採番番号桁数 = 5;
+    private static RString rstring申請書管理番号;
 
     /**
      * DbT5912ShujiiIryoKikanJohoEntityの設定メッソドです。
@@ -518,11 +521,37 @@ public class RenkeiDataTorikomiBusiness {
      * @return DbT5123NinteiKeikakuJohoEntity
      */
     public DbT5123NinteiKeikakuJohoEntity getDbT5123Entity(DbT5101RelateEntity entity, RString kubun) {
-        if (更新2.equals(kubun)) {
+        if (登録.equals(kubun)) {
+            return getDbT5123Entity_登録(entity);
+        } else if (更新2.equals(kubun)) {
             return getDbT5123Entity_更新2(entity);
         } else {
             return getDbT5123Entity_更新1(entity);
         }
+    }
+
+    private DbT5123NinteiKeikakuJohoEntity getDbT5123Entity_登録(DbT5101RelateEntity entity) {
+        DbT5123NinteiKeikakuJohoEntity dbt5123Entity = new DbT5123NinteiKeikakuJohoEntity();
+        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        RDate 基準日 = RDate.getNowDate();
+        dbt5123Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+        dbt5123Entity.setNinteichosaIraiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.認定調査依頼予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        dbt5123Entity.setNinteichosaYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.認定調査予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        dbt5123Entity.setIkenshoSakuseiIraiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        dbt5123Entity.setIkenshoTorokuYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.主治医意見書登録予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        dbt5123Entity.setIchijiHanteiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.要介護認定一次判定予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        dbt5123Entity.setNinteiShinsakaiWariateYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.認定審査会割当予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        dbt5123Entity.setNinteiShinsakaiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.認定審査会予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        dbt5123Entity.setCenterSoshinYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
+                DbBusinessConfig.get(ConfigNameDBE.センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        return dbt5123Entity;
     }
 
     private DbT5123NinteiKeikakuJohoEntity getDbT5123Entity_更新2(DbT5101RelateEntity entity) {
@@ -552,22 +581,33 @@ public class RenkeiDataTorikomiBusiness {
         DbT5123NinteiKeikakuJohoEntity dbt5123Entity = entity.getDbt5123Entity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         RDate 基準日 = RDate.getNowDate();
-        dbt5123Entity.setNinteichosaIraiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.認定調査依頼予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
-        dbt5123Entity.setNinteichosaYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.認定調査予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
-        dbt5123Entity.setIkenshoSakuseiIraiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
-        dbt5123Entity.setIkenshoTorokuYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.主治医意見書登録予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
-        dbt5123Entity.setIchijiHanteiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.要介護認定一次判定予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
-        dbt5123Entity.setNinteiShinsakaiWariateYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.認定審査会割当予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
-        dbt5123Entity.setNinteiShinsakaiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.認定審査会予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
-        dbt5123Entity.setCenterSoshinYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
-                DbBusinessConfig.get(ConfigNameDBE.センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        if (dbt5101tempEntity.get前回の認定有効終了期間() == null || dbt5101tempEntity.get前回の認定有効終了期間().isEmpty()) {
+            dbt5123Entity.setNinteichosaIraiYoteiYMD(null);
+            dbt5123Entity.setNinteichosaYoteiYMD(null);
+            dbt5123Entity.setIkenshoSakuseiIraiYoteiYMD(null);
+            dbt5123Entity.setIkenshoTorokuYoteiYMD(null);
+            dbt5123Entity.setIchijiHanteiYoteiYMD(null);
+            dbt5123Entity.setNinteiShinsakaiWariateYoteiYMD(null);
+            dbt5123Entity.setNinteiShinsakaiYoteiYMD(null);
+            dbt5123Entity.setCenterSoshinYoteiYMD(null);
+        } else {
+            dbt5123Entity.setNinteichosaIraiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.認定調査依頼予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+            dbt5123Entity.setNinteichosaYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.認定調査予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+            dbt5123Entity.setIkenshoSakuseiIraiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+            dbt5123Entity.setIkenshoTorokuYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.主治医意見書登録予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+            dbt5123Entity.setIchijiHanteiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.要介護認定一次判定予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+            dbt5123Entity.setNinteiShinsakaiWariateYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.認定審査会割当予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+            dbt5123Entity.setNinteiShinsakaiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.認定審査会予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+            dbt5123Entity.setCenterSoshinYoteiYMD(setFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間(),
+                    DbBusinessConfig.get(ConfigNameDBE.センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
+        }
         return dbt5123Entity;
     }
 
@@ -588,6 +628,11 @@ public class RenkeiDataTorikomiBusiness {
      */
     public DbT5101NinteiShinseiJohoEntity setDbt5101Entity(DbT5101RelateEntity entity, RString kubun,
             RenkeiDataTorikomiProcessParamter processParamter) {
+        CountedItem countedItem = Saiban.get(
+                SubGyomuCode.DBE認定支援, SaibanHanyokeyName.市町村コード_西暦_月.get名称(), FlexibleDate.getNowDate().getNendo());
+        rstring申請書管理番号 = processParamter.get市町村コード().concat(
+                FlexibleDate.getNowDate().getYearMonth().toString().concat(
+                        countedItem.nextString().padZeroToLeft(採番番号桁数).toString()));
         if (processParamter.is厚労省フラグ()) {
             return getDbt5101Entity_厚労省(entity, kubun);
         } else {
@@ -599,8 +644,7 @@ public class RenkeiDataTorikomiBusiness {
         DbT5101NinteiShinseiJohoEntity dbt5101Entity;
         if (登録.equals(kubun)) {
             dbt5101Entity = new DbT5101NinteiShinseiJohoEntity();
-            CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
-            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
+            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
         } else {
             dbt5101Entity = entity.getDbT5101Entity();
         }
@@ -650,8 +694,7 @@ public class RenkeiDataTorikomiBusiness {
         DbT5101NinteiShinseiJohoEntity dbt5101Entity;
         if (登録.equals(kubun)) {
             dbt5101Entity = new DbT5101NinteiShinseiJohoEntity();
-            CountedItem countedItem = Saiban.get(SubGyomuCode.DBE認定支援, new RString("申請書管理番号"));
-            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(countedItem.nextString()));
+            dbt5101Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
         } else {
             dbt5101Entity = entity.getDbT5101Entity();
         }

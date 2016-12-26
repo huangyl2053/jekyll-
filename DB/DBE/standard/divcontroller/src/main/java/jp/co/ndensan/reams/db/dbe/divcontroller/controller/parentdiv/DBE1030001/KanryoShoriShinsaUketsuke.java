@@ -58,7 +58,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class KanryoShoriShinsaUketsuke {
 
-    private static final RString CSVファイル名 = new RString("ShinseiInfoTorokuIchiran.CSV");
+    private static final RString CSVファイル名 = new RString("申請情報登録完了一覧.CSV");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final LockingKey LOCKINGKEY = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString ROOTTITLE = new RString("完了処理・審査受付の保存処理が完了しました。");

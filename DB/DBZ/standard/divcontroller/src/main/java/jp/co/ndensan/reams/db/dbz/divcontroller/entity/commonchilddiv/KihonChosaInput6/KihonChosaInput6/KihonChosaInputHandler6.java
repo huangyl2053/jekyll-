@@ -79,8 +79,20 @@ public class KihonChosaInputHandler6 {
     }
 
     private void 第六群特別な医療Confirm(ArrayList<KihonChosaInput> 認定調査基本情報リスト) {
-        List<RString> 処置内容Keys = div.getChkShochiNaiyo().getSelectedKeys();
-        List<RString> 特別な対応Keys = div.getChkTokiTaiou().getSelectedKeys();
+        List<RString> 処置内容Keys = new ArrayList();
+        処置内容Keys.addAll(div.getChkTenteki().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkSeimyaku().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkTouseki().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkSutoma().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkSansou().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkResupireta().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkKikan().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkToutsu().getSelectedKeys());
+        処置内容Keys.addAll(div.getChkKeikan().getSelectedKeys());
+        List<RString> 特別な対応Keys = new ArrayList();
+        特別な対応Keys.addAll(div.getChkMonita().getSelectedKeys());
+        特別な対応Keys.addAll(div.getChkJyokuso().getSelectedKeys());
+        特別な対応Keys.addAll(div.getChkKateru().getSelectedKeys());
         List<Integer> 処置内容と特別な対応連番List = new ArrayList<>();
         add連番ListBy処置内容Keys(処置内容と特別な対応連番List, 処置内容Keys);
         add連番ListBy特別な対応Keys(処置内容と特別な対応連番List, 特別な対応Keys);
@@ -246,16 +258,44 @@ public class KihonChosaInputHandler6 {
 
     private void 特別な対応画面表示(List<RString> 特別な対応Keys, List<RString> 前回特別な対応Keys, RString 認定調査前回結果表示) {
         if (!特別な対応Keys.isEmpty()) {
-            div.getChkTokiTaiou().setSelectedItemsByKey(特別な対応Keys);
-        }
-        if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
-            特別な対応アンダーライン(前回特別な対応Keys);
+            for (RString key : 特別な対応Keys) {
+                if (KEY0.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkMonita().setSelectedItemsByKey(keys);
+                } else if (KEY1.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkJyokuso().setSelectedItemsByKey(keys);
+                } else if (KEY2.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkKateru().setSelectedItemsByKey(keys);
+                }
+            }
+            if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
+                特別な対応アンダーライン(前回特別な対応Keys);
+            }
         }
     }
 
     private void 特別な対応アンダーライン(List<RString> 前回特別な対応) {
         if (!前回特別な対応.isEmpty()) {
-            div.getChkTokiTaiou().setIcon(getListControlTextIcon(前回特別な対応));
+            for (RString key : 前回特別な対応) {
+                if (KEY0.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkMonita().setIcon(getListControlTextIcon(keys));
+                } else if (KEY1.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkJyokuso().setIcon(getListControlTextIcon(keys));
+                } else if (KEY2.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkKateru().setIcon(getListControlTextIcon(keys));
+                }
+            }
         }
     }
 
@@ -314,7 +354,45 @@ public class KihonChosaInputHandler6 {
 
     private void 処置内容画面表示(List<RString> 処置内容Keys, List<RString> 前回処置内容Keys, RString 認定調査前回結果表示) {
         if (!処置内容Keys.isEmpty()) {
-            div.getChkShochiNaiyo().setSelectedItemsByKey(処置内容Keys);
+            for (RString key : 処置内容Keys) {
+                if (KEY0.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkTenteki().setSelectedItemsByKey(keys);
+                } else if (KEY1.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkSeimyaku().setSelectedItemsByKey(keys);
+                } else if (KEY2.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkTouseki().setSelectedItemsByKey(keys);
+                } else if (KEY3.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkSutoma().setSelectedItemsByKey(keys);
+                } else if (KEY4.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkSansou().setSelectedItemsByKey(keys);
+                } else if (KEY5.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkResupireta().setSelectedItemsByKey(keys);
+                } else if (KEY6.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkKikan().setSelectedItemsByKey(keys);
+                } else if (KEY7.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkToutsu().setSelectedItemsByKey(keys);
+                } else if (KEY8.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkKeikan().setSelectedItemsByKey(keys);
+                }
+            }
         }
         if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             処置内容アンダーライン(前回処置内容Keys);
@@ -323,7 +401,45 @@ public class KihonChosaInputHandler6 {
 
     private void 処置内容アンダーライン(List<RString> 前回処置内容) {
         if (!前回処置内容.isEmpty()) {
-            div.getChkShochiNaiyo().setIcon(getListControlTextIcon(前回処置内容));
+            for (RString key : 前回処置内容) {
+                if (KEY0.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkTenteki().setIcon(getListControlTextIcon(keys));
+                } else if (KEY1.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkSeimyaku().setIcon(getListControlTextIcon(keys));
+                } else if (KEY2.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkTouseki().setIcon(getListControlTextIcon(keys));
+                } else if (KEY3.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkSutoma().setIcon(getListControlTextIcon(keys));
+                } else if (KEY4.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkSansou().setIcon(getListControlTextIcon(keys));
+                } else if (KEY5.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkResupireta().setIcon(getListControlTextIcon(keys));
+                } else if (KEY6.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkKikan().setIcon(getListControlTextIcon(keys));
+                } else if (KEY7.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkToutsu().setIcon(getListControlTextIcon(keys));
+                } else if (KEY8.equals(key)) {
+                    ArrayList<RString> keys = new ArrayList();
+                    keys.add(key);
+                    div.getChkKeikan().setIcon(getListControlTextIcon(keys));
+                }
+            }
         }
     }
 

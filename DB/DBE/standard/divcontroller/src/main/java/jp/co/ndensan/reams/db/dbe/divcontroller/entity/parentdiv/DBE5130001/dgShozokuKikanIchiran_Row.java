@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Dec 17 15:00:47 JST 2016 
+ * Fri Dec 23 11:32:28 JST 2016 
  */
 
 
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 
 public class dgShozokuKikanIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
 
     private Button deleteButton;
     private RString shokisaiHokenshaNo;
