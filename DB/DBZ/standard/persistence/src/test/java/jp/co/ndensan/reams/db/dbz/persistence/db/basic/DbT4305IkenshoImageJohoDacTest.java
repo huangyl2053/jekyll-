@@ -265,8 +265,8 @@ public class DbT4305IkenshoImageJohoDacTest extends DbzTestDacBase {
             entity.setShinseishoKanriNo(申請書管理番号);
             entity.setIraiRirekiNo(主治医意見書作成依頼履歴番号);
             entity.setChoyoID(帳票ID);
-            entity.setMaskDataKubun(マスキングデータ区分);
-            entity.setTorikomiPageNo(取込みページ番号);
+            entity.setGenponMaskKubun(マスキングデータ区分);
+//            entity.setTorikomiPageNo(取込みページ番号);
             sut.save(entity);
         }
     }

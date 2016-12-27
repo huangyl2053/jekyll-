@@ -32,6 +32,7 @@ public class ShinsakaiKekkaTorokuIChiRanRelateEntity {
     private Code 申請区分_申請時_コード;
     private Code 申請区分_法令_コード;
     private FlexibleDate 認定申請年月日;
+    private Code 取下区分コード;
     private FlexibleDate 生年月日;
     private FlexibleDate 前回認定有効期間_終了;
     private Code 前回一次判定;

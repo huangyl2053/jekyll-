@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5305IkenshoImageJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -53,14 +52,13 @@ public class IkenshoImageJoho extends
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setIraiRirekiNo(主治医意見書作成依頼履歴番号);
         this.entity.setChoyoID(帳票ID);
-        this.entity.setMaskDataKubun(マスキングデータ区分);
-        this.entity.setTorikomiPageNo(取込みページ番号);
+        this.entity.setGenponMaskKubun(マスキングデータ区分);
+//        this.entity.setTorikomiPageNo(取込みページ番号);
         this.id = new IkenshoImageJohoIdentifier(
                 申請書管理番号,
                 主治医意見書作成依頼履歴番号,
                 帳票ID,
-                マスキングデータ区分,
-                取込みページ番号
+                マスキングデータ区分
         );
     }
 
@@ -76,8 +74,7 @@ public class IkenshoImageJoho extends
                 entity.getShinseishoKanriNo(),
                 entity.getIraiRirekiNo(),
                 entity.getChoyoID(),
-                entity.getMaskDataKubun(),
-                entity.getTorikomiPageNo());
+                entity.getGenponMaskKubun());
     }
 
     /**
@@ -128,7 +125,7 @@ public class IkenshoImageJoho extends
      * @return マスキングデータ区分
      */
     public RString getマスキングデータ区分() {
-        return entity.getMaskDataKubun();
+        return entity.getGenponMaskKubun();
     }
 
     /**
@@ -136,27 +133,27 @@ public class IkenshoImageJoho extends
      *
      * @return 取込みページ番号
      */
-    public int get取込みページ番号() {
-        return entity.getTorikomiPageNo();
-    }
+//    public int get取込みページ番号() {
+//        return entity.getTorikomiPageNo();
+//    }
 
     /**
      * 認定申請年を返します。
      *
      * @return 認定申請年
      */
-    public int get認定申請年() {
-        return entity.getNinteiShinseiNen();
-    }
+//    public int get認定申請年() {
+//        return entity.getNinteiShinseiNen();
+//    }
 
     /**
      * 共有ファイルIDを返します。
      *
      * @return 共有ファイルID
      */
-    public RDateTime get共有ファイルID() {
-        return entity.getSharedFileId();
-    }
+//    public RDateTime get共有ファイルID() {
+//        return entity.getSharedFileId();
+//    }
 
     /**
      * {@link DbT5305IkenshoImageJohoEntity}のクローンを返します。

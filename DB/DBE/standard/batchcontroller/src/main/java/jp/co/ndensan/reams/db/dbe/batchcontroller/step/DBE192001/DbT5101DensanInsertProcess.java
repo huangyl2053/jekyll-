@@ -9,14 +9,12 @@ import jp.co.ndensan.reams.db.dbe.business.core.renkeidatatorikomi.RenkeiDataTor
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -31,8 +29,6 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_電算東芝版");
     private static final RString 更新対象情報_厚労省 = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_厚労省");
-    private static final RString 更新1 = new RString("1");
-    private static final RString 更新2 = new RString("2");
     private static final RString 登録 = new RString("3");
     private RenkeiDataTorikomiBusiness business;
     private RenkeiDataTorikomiProcessParamter processParamter;
@@ -65,42 +61,8 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     @Override
     protected void process(DbT5101RelateEntity entity) {
 
-        if (entity.getDbT5101Entity() == null) {
-            dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
-            dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
-        } else {
-            if (更新フラグ１(entity)) {
-                dbT5101Writer.update(business.setDbt5101Entity(entity, 更新1, processParamter));
-                updateDbT5123(entity, 更新1);
-            }
-            if (更新フラグ２(entity)) {
-                dbT5101Writer.update(business.setDbt5101Entity(entity, 更新2, processParamter));
-                updateDbT5123(entity, 更新2);
-            }
-            business.getアクセスログ(new RString(entity.getDbT5101Entity().getShinseishoKanriNo().toString()));
-        }
-    }
-
-    private void updateDbT5123(DbT5101RelateEntity entity, RString 更新フラグ) {
-        if (entity.getDbt5123Entity() != null) {
-            dbT5123Writer.update(business.getDbT5123Entity(entity, 更新フラグ));
-        }
-    }
-
-    private boolean 更新フラグ１(DbT5101RelateEntity entity) {
-        DbT5101NinteiShinseiJohoEntity dbt5101Entity = entity.getDbT5101Entity();
-        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
-        RString 認定申請日 = dbt5101tempEntity.get認定申請日();
-        FlexibleDate 認定申請日TEMP = dbt5101Entity.getNinteiShinseiYMD();
-        return 認定申請日TEMP != null && !認定申請日TEMP.isEmpty()
-                && !RString.isNullOrEmpty(認定申請日) && 認定申請日.equals(new RString(認定申請日TEMP.toString()))
-                && isEquals(dbt5101Entity.getNinteiShinseiShinseijiKubunCode().value(), dbt5101tempEntity.get申請区分_申請時コード());
-    }
-
-    private boolean 更新フラグ２(DbT5101RelateEntity entity) {
-        DbT5101NinteiShinseiJohoEntity dbt5101Entity = entity.getDbT5101Entity();
-        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
-        return isEquals(dbt5101Entity.getNinteiShinseiShinseijiKubunCode().value(), dbt5101tempEntity.get申請区分_申請時コード());
+        dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
+        dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
     }
 
     private boolean isEquals(RString value1, RString value2) {

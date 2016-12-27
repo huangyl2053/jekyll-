@@ -69,9 +69,14 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
     @BatchWriter
     private BatchReportWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<ShujiiIryokikanShujiiIchiranhyoReportSource> reportSourceWriter;
+    private RString shichosonCode;
+    private RString shichosonName;
 
     @Override
     protected void initialize() {
+        this.shichosonCode = processParameter.getShichosonCode();
+        this.shichosonName = processParameter.getShichosonName();
+
         headItem = new IkenshoShujiiIchiranHeadItem(
                 processParameter.getIryoKikanCodeFrom(),
                 processParameter.getIryoKikanCodeTo(),
@@ -102,7 +107,11 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void usualProcess(IkenshoShujiiIchiranRelateEntity entity) {
-        IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(headItem, entity);
+        IkenshoShujiiIchiranReport report = new IkenshoShujiiIchiranReport(
+                this.shichosonCode,
+                this.shichosonName,
+                headItem,
+                entity);
         report.writeBy(reportSourceWriter);
     }
 

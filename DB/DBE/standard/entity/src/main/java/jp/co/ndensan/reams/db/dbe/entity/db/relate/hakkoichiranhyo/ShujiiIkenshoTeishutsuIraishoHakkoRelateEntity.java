@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo;
 
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -50,6 +51,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity {
     private RString 保険者名;
     private RString 主治医意見書別途診療費;
     private RString 主治医意見書報酬支払年月日;
-    private int 最大依頼履歴番号;
+    private Integer 最大依頼履歴番号;
     private RString 直近区分;
+    private DbT5301ShujiiIkenshoIraiJohoEntity dbt5301Entity;
 }

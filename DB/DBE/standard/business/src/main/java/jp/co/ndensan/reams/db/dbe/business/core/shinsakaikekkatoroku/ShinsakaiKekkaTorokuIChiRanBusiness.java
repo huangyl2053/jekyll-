@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
@@ -80,6 +81,9 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 氏名
      */
     public RString get氏名() {
+        if (entity.get被保険者氏名() == null) {
+            return null;
+        }
         return entity.get被保険者氏名().value();
     }
 
@@ -89,7 +93,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 被保区分
      */
     public RString get被保区分() {
-        return HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称();
+        return HihokenshaKubunCode.to名称OrDefault(entity.get被保険者区分コード(), RString.EMPTY);
     }
 
     /**
@@ -98,7 +102,10 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 申請区分_申請時
      */
     public RString get申請区分_申請時() {
-        return NinteiShinseiShinseijiKubunCode.toValue(entity.get申請区分_申請時_コード().value()).get名称();
+        if (entity.get申請区分_申請時_コード() == null || entity.get申請区分_申請時_コード().isEmpty()) {
+            return RString.EMPTY;
+        }
+        return NinteiShinseiShinseijiKubunCode.to名称OrDefault(entity.get申請区分_申請時_コード().value(), RString.EMPTY);
     }
 
     /**
@@ -107,6 +114,9 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 申請区分_申請時コード
      */
     public RString get申請区分_申請時コード() {
+        if (entity.get申請区分_申請時_コード() == null || entity.get申請区分_申請時_コード().isEmpty()) {
+            return RString.EMPTY;
+        }
         return entity.get申請区分_申請時_コード().value();
     }
 
@@ -116,6 +126,9 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 申請区分_法令
      */
     public RString get申請区分_法令() {
+        if (entity.get申請区分_法令_コード() == null || entity.get申請区分_法令_コード().isEmpty()) {
+            return RString.EMPTY;
+        }
         return NinteiShinseiHoreiCode.toValue(entity.get申請区分_法令_コード().value()).get名称();
     }
 
@@ -125,6 +138,9 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 申請区分_法令コード
      */
     public RString get申請区分_法令コード() {
+        if (entity.get申請区分_法令_コード() == null) {
+            return RString.EMPTY;
+        }
         return entity.get申請区分_法令_コード().value();
     }
 
@@ -135,6 +151,30 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      */
     public FlexibleDate get認定申請日() {
         return entity.get認定申請年月日();
+    }
+
+    /**
+     * 取下区分名称を取得します。
+     *
+     * @return 取下区分名称
+     */
+    public RString get取下区分名称() {
+        if (entity.get取下区分コード() == null) {
+            return RString.EMPTY;
+        }
+        return new RString(TorisageKubun.toValue(entity.get取下区分コード()).toString());
+    }
+
+    /**
+     * 取下区分コードを取得します。
+     *
+     * @return 取下区分コード
+     */
+    public TorisageKubun get取下区分コード() {
+        if (entity.get取下区分コード() == null) {
+            return null;
+        }
+        return TorisageKubun.toValue(entity.get取下区分コード());
     }
 
     /**
@@ -152,7 +192,10 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 前回一次判定
      */
     public RString get前回一次判定() {
-        return IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
+        if (entity.get前回一次判定() == null || entity.get前回一次判定().isEmpty()) {
+            return RString.EMPTY;
+        }
+        return IchijiHanteiKekkaCode09.toValue(entity.get前回一次判定().value()).get名称();
     }
 
     /**
@@ -161,6 +204,9 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 今回一次判定
      */
     public RString get今回一次判定() {
+        if (entity.get要介護認定一次判定結果コード() == null || entity.get要介護認定一次判定結果コード().isEmpty()) {
+            return RString.EMPTY;
+        }
         return IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
     }
 

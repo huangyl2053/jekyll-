@@ -45,8 +45,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiYukoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
@@ -658,10 +660,10 @@ public class RenkeiDataTorikomiBusiness {
         if (登録.equals(kubun)) {
             dbt5101Entity.setNinteiShinseiEdabanCode(new EdabanCode(CODE1));
             dbt5101Entity.setNinteiShinseiHoreiKubunCode(getCode(dbt5101tempEntity.get申請区分_法令コード()));
-            dbt5101Entity.setNinteiShinseiYukoKubunCode(new Code(CODE1));
-            dbt5101Entity.setChosaKubun(new Code(CODE0));
+            dbt5101Entity.setNinteiShinseiYukoKubunCode(new Code(NinteiShinseiYukoKubunCode.有効.getコード()));
+            dbt5101Entity.setChosaKubun(new Code(ChosaKubun.新規調査.getコード()));
             dbt5101Entity.setShoriJotaiKubun(new Code(CODE0));
-            dbt5101Entity.setLogicalDeletedFlag(true);
+            dbt5101Entity.setLogicalDeletedFlag(false);
             dbt5101Entity.setShishoCode(null);
             dbt5101Entity.setKoikinaiTenkyoKubun(null);
             dbt5101Entity.setShienShinseiKubun(null);
@@ -708,11 +710,11 @@ public class RenkeiDataTorikomiBusiness {
         if (登録.equals(kubun)) {
             dbt5101Entity.setNinteiShinseiEdabanCode(new EdabanCode(CODE1));
             dbt5101Entity.setNinteiShinseiHoreiKubunCode(getCode(dbt5101tempEntity.get申請区分_法令コード()));
-            dbt5101Entity.setNinteiShinseiYukoKubunCode(new Code(CODE1));
-            dbt5101Entity.setChosaKubun(new Code(CODE0));
+            dbt5101Entity.setNinteiShinseiYukoKubunCode(new Code(NinteiShinseiYukoKubunCode.有効.getコード()));
+            dbt5101Entity.setChosaKubun(new Code(ChosaKubun.新規調査.getコード()));
             dbt5101Entity.setNyushoShisetsuCode(getJigyoshaNo(dbt5101tempEntity.get入所事業所コード()));
             dbt5101Entity.setShoriJotaiKubun(new Code(CODE0));
-            dbt5101Entity.setLogicalDeletedFlag(true);
+            dbt5101Entity.setLogicalDeletedFlag(false);
             dbt5101Entity.setShishoCode(null);
             dbt5101Entity.setKoikinaiTenkyoKubun(null);
             dbt5101Entity.setShienShinseiKubun(null);

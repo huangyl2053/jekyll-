@@ -124,6 +124,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
 
+                     
                     JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
@@ -162,7 +163,8 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
             JimuShinsakaishiryoA3Report report = new JimuShinsakaishiryoA3Report(businessList,
                     get一次判定結果票(shinseishoKanriNo), get主治医意見書情報(shinseishoKanriNo),
                     getその他資料情報(shinseishoKanriNo), get審査会追加資料情報(shinseishoKanriNo),
-                    reportId, is審査会対象一覧印刷済み, paramter.getSakuseiJoken());
+                    reportId, is審査会対象一覧印刷済み, paramter.getSakuseiJoken(),
+                    paramter.getPrintHou());
             report.writeBy(reportSourceWriter);
             is審査会対象一覧印刷済み = true;
         }

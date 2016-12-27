@@ -10,9 +10,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJoho.ChoyoID;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJoho.iraiRirekiNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJoho.maskDataKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJoho.genponMaskKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJoho.shinseishoKanriNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJoho.torikomiPageNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4305IkenshoImageJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -65,8 +64,8 @@ public class DbT4305IkenshoImageJohoDac implements ISaveable<DbT4305IkenshoImage
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(iraiRirekiNo, 主治医意見書作成依頼履歴番号),
                                 eq(ChoyoID, 帳票ID),
-                                eq(maskDataKubun, マスキングデータ区分),
-                                eq(torikomiPageNo, 取込みページ番号))).
+                                eq(genponMaskKubun, マスキングデータ区分))).
+                //                                eq(torikomiPageNo, 取込みページ番号))).
                 toObject(DbT4305IkenshoImageJohoEntity.class);
     }
 

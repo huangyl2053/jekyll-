@@ -133,8 +133,8 @@ public class NinteiChosaIraiShudouHandler {
 
     private void setCheckBoxValue(RString 市町村コード) {
 
-        RString 用紙タイプ = getConfigValue(ConfigNameDBE.認定調査票_概況調査_用紙タイプ,市町村コード);
-        
+        RString 用紙タイプ = getConfigValue(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 市町村コード);
+
         RString 認定調査依頼書 = 未選択;
         RString 認定調査票 = 未選択;
         RString 認定調査票_特記事項 = 未選択;
@@ -147,21 +147,21 @@ public class NinteiChosaIraiShudouHandler {
         RString 調査特記_概況特記 = 未選択;
         RString 認定調査依頼該当者履歴一覧 = 未選択;
 
-        if(デザインシートOCR.equals(用紙タイプ)){
+        if (デザインシートOCR.equals(用紙タイプ)) {
             認定調査票 = 選択;
             認定調査票_特記事項 = 選択;
         }
-        if(白紙カラープリンター.equals(用紙タイプ)){
+        if (白紙カラープリンター.equals(用紙タイプ)) {
             認定調査票OCR = 選択;
             認定調査票OCR_特記事項 = 選択;
         }
-    
+
         List<RString> selectedItemList = new ArrayList();
         if (選択.equals(認定調査依頼書)) {
             selectedItemList.add(DDL_KEY0);
         }
         div.getChkIrai().setSelectedItemsByKey(selectedItemList);
-        
+
         selectedItemList = new ArrayList();
         if (選択.equals(認定調査票)) {
             selectedItemList.add(DDL_KEY0);
@@ -170,7 +170,7 @@ public class NinteiChosaIraiShudouHandler {
             selectedItemList.add(DDL_KEY1);
         }
         div.getChkNinteichosaDesign().setSelectedItemsByKey(selectedItemList);
-        
+
         selectedItemList = new ArrayList();
         if (選択.equals(認定調査票OCR)) {
             selectedItemList.add(DDL_KEY0);
@@ -179,7 +179,7 @@ public class NinteiChosaIraiShudouHandler {
             selectedItemList.add(DDL_KEY1);
         }
         div.getChkNinteichosaOcr().setSelectedItemsByKey(selectedItemList);
-        
+
         selectedItemList = new ArrayList();
         if (選択.equals(認定調査票_特記事項_項目有り)) {
             selectedItemList.add(DDL_KEY0);
@@ -191,7 +191,7 @@ public class NinteiChosaIraiShudouHandler {
             selectedItemList.add(DDL_KEY2);
         }
         div.getChkTokkiJko().setSelectedItemsByKey(selectedItemList);
-        
+
         selectedItemList = new ArrayList();
         if (選択.equals(認定調査票差異チェック票)) {
             selectedItemList.add(DDL_KEY0);
@@ -205,7 +205,6 @@ public class NinteiChosaIraiShudouHandler {
         div.getChkSaiCheck().setSelectedItemsByKey(selectedItemList);
     }
 
-    
     /**
      * 提出期限のonChange処理です。
      */
@@ -1002,7 +1001,8 @@ public class NinteiChosaIraiShudouHandler {
         }
         return 要介護詳細;
     }
-    private RString getConfigValue(ConfigNameDBE config,RString 市町村コード) {
-        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援,市町村コード);
+
+    private RString getConfigValue(ConfigNameDBE config, RString 市町村コード) {
+        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
     }
 }

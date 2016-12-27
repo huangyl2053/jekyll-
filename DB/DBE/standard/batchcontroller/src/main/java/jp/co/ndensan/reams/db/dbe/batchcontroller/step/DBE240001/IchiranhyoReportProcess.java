@@ -92,9 +92,6 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     protected void keyBreakProcess(HomonChosaIraishoRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
             連番 = 1;
-            ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
-                    createFrom(business.setBodyItem(current, 連番, ninshoshaSource, 通知文Map));
-            report.writeBy(ichiranhyoReportSourceWriter);
         }
     }
 
@@ -107,6 +104,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
         ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
                 createFrom(business.setBodyItem(entity, 連番, ninshoshaSource, 通知文Map));
         report.writeBy(ichiranhyoReportSourceWriter);
+        連番++;
     }
 
     @Override

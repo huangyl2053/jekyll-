@@ -47,6 +47,8 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     private RString hdnShikibetsuCode;
     @JsonProperty("hdnChosaItakusakiChosainGuide")
     private RString hdnChosaItakusakiChosainGuide;
+    @JsonProperty("hdnShozokuKikanIchiranSize")
+    private RString hdnShozokuKikanIchiranSize;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -205,6 +207,24 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     @JsonProperty("hdnChosaItakusakiChosainGuide")
     public void setHdnChosaItakusakiChosainGuide(RString hdnChosaItakusakiChosainGuide) {
         this.hdnChosaItakusakiChosainGuide = hdnChosaItakusakiChosainGuide;
+    }
+
+    /*
+     * gethdnShozokuKikanIchiranSize
+     * @return hdnShozokuKikanIchiranSize
+     */
+    @JsonProperty("hdnShozokuKikanIchiranSize")
+    public RString getHdnShozokuKikanIchiranSize() {
+        return hdnShozokuKikanIchiranSize;
+    }
+
+    /*
+     * sethdnShozokuKikanIchiranSize
+     * @param hdnShozokuKikanIchiranSize hdnShozokuKikanIchiranSize
+     */
+    @JsonProperty("hdnShozokuKikanIchiranSize")
+    public void setHdnShozokuKikanIchiranSize(RString hdnShozokuKikanIchiranSize) {
+        this.hdnShozokuKikanIchiranSize = hdnShozokuKikanIchiranSize;
     }
 
     /*

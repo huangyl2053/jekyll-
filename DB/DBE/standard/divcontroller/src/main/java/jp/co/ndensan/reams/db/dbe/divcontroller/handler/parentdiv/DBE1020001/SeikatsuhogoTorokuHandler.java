@@ -11,7 +11,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisa
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.SeikatsuhogoTorokuResult;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.SeikatsuhogoTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -64,6 +67,17 @@ public class SeikatsuhogoTorokuHandler {
         for (KoseiShichosonShishoMaster master : list) {
             sourceList.add(new KeyValueDataSource(master.get支所名(), master.get支所コード().value()));
         }
+        
+        ShichosonSecurityJoho shichosonSecurity = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (shichosonSecurity.get導入形態コード().equals(new Code("111"))) {
+            div.getBtnAtenaKensaku().setVisible(false);
+        } else {
+            shichosonSecurity = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+            if (shichosonSecurity.get導入形態コード().equals(new Code("211"))) {
+                div.getBtnAtenaKensaku().setVisible(false);
+            }
+        }
+        
         div.getDdlShisho().setDataSource(sourceList);
         div.setHdnKey_Dialog(new RString("1"));
         div.setHdnKey_GyomuCode(GyomuCode.DB介護保険.value());

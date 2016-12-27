@@ -22,10 +22,10 @@ public class NinteiChosaOCRTorikomiDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblExplanation")
-    private Label lblExplanation;
-    @JsonProperty("txtTorikomiPath")
-    private TextBox txtTorikomiPath;
+    @JsonProperty("uplOCRData")
+    private UploadPanel uplOCRData;
+    @JsonProperty("btnUpload")
+    private Button btnUpload;
     @JsonProperty("hdnSharedFileEntryInfo")
     private RString hdnSharedFileEntryInfo;
 
@@ -36,39 +36,39 @@ public class NinteiChosaOCRTorikomiDiv extends PanelBatchParameter {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblExplanation
-     * @return lblExplanation
+     * getuplOCRData
+     * @return uplOCRData
      */
-    @JsonProperty("lblExplanation")
-    public Label getLblExplanation() {
-        return lblExplanation;
+    @JsonProperty("uplOCRData")
+    public UploadPanel getUplOCRData() {
+        return uplOCRData;
     }
 
     /*
-     * setlblExplanation
-     * @param lblExplanation lblExplanation
+     * setuplOCRData
+     * @param uplOCRData uplOCRData
      */
-    @JsonProperty("lblExplanation")
-    public void setLblExplanation(Label lblExplanation) {
-        this.lblExplanation = lblExplanation;
+    @JsonProperty("uplOCRData")
+    public void setUplOCRData(UploadPanel uplOCRData) {
+        this.uplOCRData = uplOCRData;
     }
 
     /*
-     * gettxtTorikomiPath
-     * @return txtTorikomiPath
+     * getbtnUpload
+     * @return btnUpload
      */
-    @JsonProperty("txtTorikomiPath")
-    public TextBox getTxtTorikomiPath() {
-        return txtTorikomiPath;
+    @JsonProperty("btnUpload")
+    public Button getBtnUpload() {
+        return btnUpload;
     }
 
     /*
-     * settxtTorikomiPath
-     * @param txtTorikomiPath txtTorikomiPath
+     * setbtnUpload
+     * @param btnUpload btnUpload
      */
-    @JsonProperty("txtTorikomiPath")
-    public void setTxtTorikomiPath(TextBox txtTorikomiPath) {
-        this.txtTorikomiPath = txtTorikomiPath;
+    @JsonProperty("btnUpload")
+    public void setBtnUpload(Button btnUpload) {
+        this.btnUpload = btnUpload;
     }
 
     /*

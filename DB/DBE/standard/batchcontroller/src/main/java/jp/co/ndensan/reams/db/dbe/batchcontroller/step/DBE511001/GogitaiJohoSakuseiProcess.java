@@ -58,7 +58,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     private static final int INT_4 = 4;
     private static final int INT_8 = 8;
     private static final int INT_40 = 40;
-    private static final RString POSITIVE_INTEGERS_REGEX = new RString("^[1-9]\\d*$");
+    private static final RString POSITIVE_INTEGERS_REGEX = new RString("^[0-9]\\d*$");
     private static final RString FLAG_TRUE = new RString("1");
     private static final RString FLAG_FALSE = new RString("0");
     private static final RString 合議体NO = new RString("合議体NO：");
@@ -342,23 +342,23 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     }
 
     private boolean is数字チェック1(TempGogitaiJohoSakusei 合議体情報) {
-        return RStringUtil.matchesRegex(合議体情報.get合議体NO().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get有効開始日().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get有効終了日().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get合議体開始予定時刻().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get合議体終了予定時刻().trim(), POSITIVE_INTEGERS_REGEX);
+        return RStringUtil.matchesRegex(合議体情報.get合議体NO(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get有効開始日(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get有効終了日(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体開始予定時刻(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体終了予定時刻(), POSITIVE_INTEGERS_REGEX);
     }
 
     private boolean is数字チェック2(TempGogitaiJohoSakusei 合議体情報) {
-        return RStringUtil.matchesRegex(合議体情報.get審査会予定定員().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get審査会自動割当定員().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get審査会委員定員().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get開催場所コード().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get精神科医所属().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get合議体ダミーフラグ().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get審査会委員コード().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get補欠().trim(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get合議体長区分コード().trim(), POSITIVE_INTEGERS_REGEX);
+        return RStringUtil.matchesRegex(合議体情報.get審査会予定定員(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get審査会自動割当定員(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get審査会委員定員(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get開催場所コード(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get精神科医所属(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体ダミーフラグ(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get審査会委員コード(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get補欠(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get合議体長区分コード(), POSITIVE_INTEGERS_REGEX);
     }
 
     private DbT5591GogitaiJohoEntity createDbT5591Entity(TempGogitaiJohoSakusei 合議体情報) {
@@ -421,10 +421,6 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
             gogitaiInsertedFlag = false;
             insertCount = 0;
         }
-    }
-
-    private RString intToRStr(int no) {
-        return new RString(no);
     }
 
     private boolean strToBoolean(RString str) {

@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoChosaTokki;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoChosaTokkiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IkenshoImageJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IkenshoImageJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
@@ -26,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikoBui
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.GaikyoChosaTokkiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.IkenshoImageJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -61,6 +64,7 @@ public class ImageJohoMaskingHandler {
     private final ImageJohoMaskingDiv div;
     private IkenshoImageJohoManager imageJohoManager;
     private NinteichosahyoTokkijikoManager tokkijikoManager;
+    private GaikyoChosaTokkiManager gaikyoManager;
     private static final int 特記事項連番開始位置 = 10;
     private static final int 特記事項連番終了位置 = 8;
     private static final int 意見書_表ページ = 1;
@@ -140,16 +144,32 @@ public class ImageJohoMaskingHandler {
                 row.set申請区分(RString.EMPTY);
             }
             row.get審査予定日().setValue(result.get介護認定審査会開催予定年月日());
-            try {
-                row.set調査票特記(GenponMaskKubun.toValue(result.get特記マスク区分()).get名称());
-            } catch (IllegalArgumentException e) {
-                row.setマスク区分(RString.EMPTY);
+
+            if (result.has概況マスク()) {
+                row.set調査票(new RString("○"));
+            } else {
+                row.set調査票(RString.EMPTY);
             }
-            try {
-                row.set主治医意見(GenponMaskKubun.toValue(result.get意見書マスク区分()).get名称());
-            } catch (IllegalArgumentException e) {
-                row.setマスク区分(RString.EMPTY);
+            if (result.has特記マスク()) {
+                row.set調査票特記(new RString("○"));
+            } else {
+                row.set調査票特記(RString.EMPTY);
             }
+            if (result.has意見書マスク()) {
+                row.set主治医意見(new RString("○"));
+            } else {
+                row.set主治医意見(RString.EMPTY);
+            }
+//            try {
+//                row.set調査票特記(GenponMaskKubun.toValue(result.get特記マスク区分()).get名称());
+//            } catch (IllegalArgumentException e) {
+//                row.set調査票特記(RString.EMPTY);
+//            }
+//            try {
+//                row.set主治医意見(GenponMaskKubun.toValue(result.get意見書マスク区分()).get名称());
+//            } catch (IllegalArgumentException e) {
+//                row.set主治医意見(RString.EMPTY);
+//            }
             row.get意見書受領日().setValue(result.get主治医意見書受領年月日());
             row.get調査票受領日().setValue(result.get認定調査受領年月日());
             row.set申請書管理番号(result.get申請書管理番号().value());
@@ -291,6 +311,7 @@ public class ImageJohoMaskingHandler {
     public void 更新処理() {
         imageJohoManager = IkenshoImageJohoManager.createInstance();
         tokkijikoManager = NinteichosahyoTokkijikoManager.createInstance();
+        gaikyoManager = GaikyoChosaTokkiManager.createInstance();
         for (dgImageMaskingTaisho_Row row : div.getDgImageMaskingTaisho().getDataSource()) {
             if (!RString.isNullOrEmpty(row.getState())) {
                 saveLocalFile(row);
@@ -330,7 +351,17 @@ public class ImageJohoMaskingHandler {
 
     private void saveGamenData(dgImageMaskingTaisho_Row row) {
         if (row.getState().equals(状態_追加)) {
-            if (row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称())
+            if (row.getImageName().equals(マスク有りイメージ一覧.C0007.getイメージ日本語名称())) {
+                GaikyoChosaTokki gaikyotokki = new GaikyoChosaTokki(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()),
+                        Integer.parseInt(taishoshaRow.get認定調査依頼履歴番号().toString()),
+                        TokkijikoTextImageKubun.イメージ.getコード());
+
+                GaikyoChosaTokkiBuilder builder = gaikyotokki.createBuilderForEdit();
+
+                builder.set特記(RString.EMPTY);
+
+                gaikyoManager.save概況調査特記(builder.build());
+            } else if (row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称())
                     || row.getImageName().equals(マスク有りイメージ一覧.E0002.getイメージ日本語名称())) {
 
                 IkenshoImageJoho imageJoho = new IkenshoImageJoho(
@@ -341,9 +372,9 @@ public class ImageJohoMaskingHandler {
 
                 IkenshoImageJohoBuilder builder = imageJoho.createBuilderForEdit();
 
-                builder.set認定申請年(Integer.parseInt(taishoshaRow.get認定申請年().toString()));
+//                builder.set認定申請年(Integer.parseInt(taishoshaRow.get認定申請年().toString()));
 
-                builder.set共有ファイルID(RDateTime.parse(taishoshaRow.get共有ファイルID().toString()));
+//                builder.set共有ファイルID(RDateTime.parse(taishoshaRow.get共有ファイルID().toString()));
 
                 imageJohoManager.save要介護認定意見書イメージ情報(builder.build());
 

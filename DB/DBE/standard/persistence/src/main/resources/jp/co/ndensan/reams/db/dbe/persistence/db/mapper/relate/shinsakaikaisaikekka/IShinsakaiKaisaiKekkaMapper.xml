@@ -27,6 +27,8 @@
         ON DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5591GogitaiJoho" DbT5591GogitaiJoho
         ON DbT5591GogitaiJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
+        AND DbT5591GogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+        AND DbT5591GogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592ShinsakaiKaisaiBashoJoho
         ON DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
         WHERE

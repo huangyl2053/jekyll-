@@ -130,10 +130,7 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
 
     @Override
     protected void keyBreakProcess(ItakusakiChosainIchiranRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            ItakusakiChosainIchiranReport report = new ItakusakiChosainIchiranReport(setBodyItemm(current));
-            report.writeBy(retortWrite);
-        }
+        ;
     }
 
     private boolean hasBrek(ItakusakiChosainIchiranRelateEntity before, ItakusakiChosainIchiranRelateEntity current) {
@@ -145,7 +142,7 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
         ItakusakiChosainIchiranReport report = new ItakusakiChosainIchiranReport(setBodyItemm(entity));
         report.writeBy(retortWrite);
     }
-    
+
     private void set出力条件表() {
         List<RString> 出力条件 = new ArrayList();
         RStringBuilder builder = new RStringBuilder();

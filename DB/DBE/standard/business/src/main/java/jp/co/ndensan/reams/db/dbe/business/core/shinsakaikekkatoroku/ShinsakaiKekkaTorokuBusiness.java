@@ -98,6 +98,15 @@ public class ShinsakaiKekkaTorokuBusiness {
     }
 
     /**
+     * 開催予定日を取得します。
+     *
+     * @return 開催予定日
+     */
+    public FlexibleDate get開催予定日() {
+        return entity.get開催予定日();
+    }
+
+    /**
      * 開催開始時間を取得します。
      *
      * @return 開催開始時間

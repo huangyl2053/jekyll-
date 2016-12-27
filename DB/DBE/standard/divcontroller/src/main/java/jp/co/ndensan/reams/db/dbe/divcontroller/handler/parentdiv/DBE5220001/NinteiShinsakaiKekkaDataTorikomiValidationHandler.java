@@ -66,8 +66,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
             }
         }
         if (flag) {
-            validPairs.add(new ValidationMessageControlPair(new ValidationMessage(
-                UrErrorMessages.不正, fileName.toString()), div.getUplPanel()));
+            validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.一致性チェック, div.getUplPanel()));
         }
         return validPairs;
     }
@@ -100,8 +99,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
     private static enum NinteiShinsakaiKekkaDataTorikomiMessages implements IValidationMessage {
 
         対象未選択チェック(UrErrorMessages.選択されていない, "取込みファイル内容一覧対象"),
-        一致性チェック(UrErrorMessages.不正, "アップロードファイルの名称"),
-        データ件数チェック(UrErrorMessages.対象データなし_追加メッセージあり, "選択されたレコードのファイル名");
+        一致性チェック(UrErrorMessages.不正, "アップロードファイルの名称");
         private final Message message;
 
         private NinteiShinsakaiKekkaDataTorikomiMessages(IMessageGettable message, String... replacements) {
@@ -114,7 +112,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
         }
     }
 
-    private class ValidationMessage implements IValidationMessage {
+    private static final class ValidationMessage implements IValidationMessage {
 
         private final Message message;
 

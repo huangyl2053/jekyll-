@@ -54,10 +54,6 @@ public class DbT5913DensanInsertProcess extends BatchProcessBase<DbT5913RelateEn
 
     @Override
     protected void process(DbT5913RelateEntity entity) {
-        if (entity.getDbT5913Entity() == null) {
-            dbT5913Writer.insert(business.setDbt5913Entity(entity, processParamter, true));
-        } else {
-            dbT5913Writer.update(business.setDbt5913Entity(entity, processParamter, false));
-        }
+        dbT5913Writer.insert(business.setDbt5913Entity(entity, processParamter, true));
     }
 }

@@ -700,6 +700,16 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public AtenaInfoTorokuDiv getAtenaInfoToroku() {
+        return this.getHeadPanel().getAtenaInfoToroku();
+    }
+
+    @JsonIgnore
+    public void  setAtenaInfoToroku(AtenaInfoTorokuDiv AtenaInfoToroku) {
+        this.getHeadPanel().setAtenaInfoToroku(AtenaInfoToroku);
+    }
+
+    @JsonIgnore
     public IKaigoninteiShikakuInfoDiv getCcdShikakuInfo() {
         return this.getHeadPanel().getCcdShikakuInfo();
     }

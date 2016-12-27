@@ -51,6 +51,7 @@ public class KaigoNinteiShinsakai {
     private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN62004");
     private static final RString メニューID_介護認定審査会委員割付 = new RString("DBEMN61010");
     private static final int 数字_0 = 0;
+    private static final int LENGTH_4 = 4;
 
     /**
      * 審査会一覧初期化の設定します。
@@ -149,12 +150,26 @@ public class KaigoNinteiShinsakai {
      * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelectAlias(KaigoNinteiShinsakaiDiv div) {
+        RString 合議体名称 = div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().getActiveRow().getShinsakaiMeisho();
+        RString 開催番号 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(合議体名称)) {
+            開催番号 = 合議体名称.substring(1, 合議体名称.length() - LENGTH_4);
+        }
+        RString 開催年月日 = RString.EMPTY;
+        if (!div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().isEmpty()) {
+            開催年月日 = new RString(div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().toString());
+        }
+        ViewStateHolder.put(ViewStateKeys.開催番号, 開催番号);
+        ViewStateHolder.put(ViewStateKeys.開催年月日, 開催年月日);
+        div.getCcdShinsakaiItiran().setHdnSelectedGridLine(new RString(String.valueOf(div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().getActiveRow().getId())));
+
         ValidationMessageControlPairs validationMessages = check_審査会選択(div);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div)
                     .rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName())
                     .addValidationMessages(validationMessages).respond();
         }
+
         div.getCcdShinsakaiItiran().getSelectedGridLine();
         return ResponseData.of(div)
                 .forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();

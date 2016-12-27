@@ -18,6 +18,7 @@
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaishiTime" AS "shinsakaiKaishiTime"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiShuryoTime" AS "shinsakaiShuryoTime"
         ,DbT5591GogitaiJoho."gogitaiSeishinkaSonzaiFlag" AS "gogitaiSeishinkaSonzaiFlag"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiYMD"
         FROM
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  DbT5501ShinsakaiKaisaiYoteiJoho
         LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
@@ -44,6 +45,7 @@
         <result property="開催開始時間" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="開催終了時間" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合議体精神科医存在フラグ" column="gogitaiSeishinkaSonzaiFlag"/>
+        <result property="開催予定日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiKekkaTorokuIChiRanRelateEntity"
@@ -58,6 +60,7 @@
         ,DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiShinseijiKubunCode"
         ,DbT5101NinteiShinseiJoho."ninteiShinseiHoreiKubunCode" AS "ninteiShinseiHoreiKubunCode"
         ,DbT5101NinteiShinseiJoho."ninteiShinseiYMD" AS "ninteiShinseiYMD"
+        ,DbT5101NinteiShinseiJoho."torisageKubunCode" AS "torisageKubunCode"
         ,DbT5101NinteiShinseiJoho."seinengappiYMD" AS "seinengappiYMD"
         ,DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd" AS "zenkaiYukoKikanEnd"
         ,TB."ichijiHanteiKekkaCode"  AS "zenichijiHanteiKekkaCode"
@@ -150,6 +153,7 @@
         <result property="申請区分_申請時_コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="申請区分_法令_コード" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="認定申請年月日" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="取下区分コード" column="torisageKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="前回認定有効期間_終了" column="zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="前回一次判定" column="zenichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>

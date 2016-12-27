@@ -242,7 +242,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
-            setDisableToShujiiIkenshoChk();
             RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード());
@@ -282,6 +281,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             List<RString> keyChkIkenshoSakuseiIchiranList = new ArrayList<>();
             List<KeyValueDataSource> dataSourceChkIkenshoSakuseiIchiranList = new ArrayList<>();
+            LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+            RString 意見書用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
             RString 主治医意見書作成依頼_手動_主治医意見書記入用紙 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             RString 主治医意見書作成依頼_記入用紙_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_記入用紙_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (主治医意見書作成依頼_記入用紙_出力有無 != null && !主治医意見書作成依頼_記入用紙_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_記入用紙_出力有無)) {
@@ -289,7 +291,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 KeyValueDataSource dateSource = new KeyValueDataSource(KEY0, value);
                 dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
                 if (主治医意見書作成依頼_手動_主治医意見書記入用紙 != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY0);
+                    if (CONFIGVALUE1.equals(意見書用紙タイプ)) {
+                        keyChkIkenshoSakuseiIchiranList.add(KEY0);
+                    }
                 }
             }
             RString 主治医意見書作成依頼_手動_主治医意見書記入用紙OCR = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -299,7 +303,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 KeyValueDataSource dateSource = new KeyValueDataSource(KEY1, value);
                 dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
                 if (主治医意見書作成依頼_手動_主治医意見書記入用紙OCR != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙OCR.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙OCR)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY1);
+                    if (CONFIGVALUE2.equals(意見書用紙タイプ)) {
+                        keyChkIkenshoSakuseiIchiranList.add(KEY1);
+                    }
                 }
             }
             RString 主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -390,13 +396,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getTxtJushinKikan().setDisabled(true);
             div.getTxtJushinKikan().setFromRequired(false);
             div.getTxtJushinKikan().setToRequired(false);
+            div.getTxtJushinKikan().clearFromValue();
+            div.getTxtJushinKikan().clearToValue();
             div.getTxtJushinBasho().setDisabled(false);
             div.getTxtJushinBasho().setRequired(true);
         } else {
             div.getTxtJyushinymd().setDisabled(true);
             div.getTxtJyushinymd().setRequired(false);
+            div.getTxtJyushinymd().clearValue();
             div.getTxtJushinTime().setDisabled(true);
             div.getTxtJushinTime().setRequired(false);
+            div.getTxtJushinTime().clearValue();
             div.getTxtJushinKikan().setDisabled(false);
             div.getTxtJushinKikan().setFromRequired(true);
             div.getTxtJushinKikan().setToRequired(true);
@@ -1267,7 +1277,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setHihokenshaNo10(保険者番号リスト.get(INDEX_9));
                 item.setHihokenshaNameKana(business.get被保険者氏名カナ());
                 item.setHihokenshaName(business.get被保険者氏名());
-                item.setBirthYMD(business.get生年月日());
+                RString 生年月日 = RString.EMPTY;
+                if (!RString.isNullOrEmpty(business.get生年月日())) {
+                    生年月日 = new FlexibleDate(business.get生年月日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                }
+                item.setBirthYMD(生年月日);
                 item.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
                 if (ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
                     item.setShubetsuZaitaku(記号);
@@ -1511,9 +1526,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get被保険者氏名(),
                         get名称付与(),
                         customerBarCode,
-                        business.get被保険者番号(),
+                        RString.EMPTY,
                         通知文.get(1),
-                        business.get被保険者氏名(),
                         business.get被保険者番号(),
                         business.get医療機関名称(),
                         business.get主治医氏名(),
@@ -1521,7 +1535,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get医療機関電話番号(),
                         get受診日時または期間(),
                         受診場所,
-                        通知文.get(2)
+                        通知文.get(2),
+                        getConfigValue(ConfigNameDBE.介護保険診断命令書)
                 );
                 itemList.add(item);
             }
@@ -1982,5 +1997,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             要介護詳細 = 文字列5;
         }
         return 要介護詳細;
+    }
+    
+    private RString getConfigValue(ConfigNameDBE config) {
+        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 }

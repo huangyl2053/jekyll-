@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.io.fld.FldField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * OCR情報受入＿バッチ ファイル1/3 読み取り結果データ行entityです。
+ * OCR情報受入＿バッチ ファイル読み取り結果データ行entityです。
  *
  * @author n8429
  */

@@ -37,6 +37,7 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
 
     private GogitaiJohoSakuseiProcessParamter parameter;
     private FileSpoolManager manager;
+    private int sequence;
 
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511001"));
@@ -46,7 +47,7 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
 
     @Override
     protected void initialize() {
-
+        sequence = 0;
     }
 
     @Override
@@ -71,6 +72,7 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
     @Override
     protected void process(GogitaiJohoSakuseiCSVEntity entity) {
         if (entity != null) {
+            sequence++;
             gogitaiTempTableWriter.insert(getGogitaiJohoSakusei(entity));
         }
     }
@@ -84,26 +86,27 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
     private TempGogitaiJohoSakusei getGogitaiJohoSakusei(GogitaiJohoSakuseiCSVEntity entity) {
         TempGogitaiJohoSakusei temp = new TempGogitaiJohoSakusei();
 
-        temp.set合議体NO(getRStrig(entity.getGogitaiNo()));
-        temp.set合議体名称(getRStrig(entity.getGogitaiMei()));
-        temp.set有効開始日(getRStrig(entity.getGogitaiYukoKikanKaishiYMD()));
-        temp.set有効終了日(getRStrig(entity.getGogitaiYukoKikanShuryoYMD()));
-        temp.set合議体開始予定時刻(getRStrig(entity.getGogitaiKaishiYoteiTime()));
-        temp.set合議体終了予定時刻(getRStrig(entity.getGogitaiShuryoYoteiTime()));
-        temp.set審査会予定定員(getRStrig(entity.getShinsakaiYoteiTeiin()));
-        temp.set審査会自動割当定員(getRStrig(entity.getShinsakaiJidoWariateTeiin()));
-        temp.set審査会委員定員(getRStrig(entity.getShinsakaiIinTeiin()));
-        temp.set開催場所コード(getRStrig(entity.getShinsakaiKaisaiBashoCode()));
-        temp.set精神科医所属(getRStrig(entity.getGogitaiSeishinkaSonzaiFlag()));
-        temp.set合議体ダミーフラグ(getRStrig(entity.getGogitaiDummyFlag()));
-        temp.set審査会委員コード(getRStrig(entity.getShinsakaiIinCode()));
-        temp.set補欠(getRStrig(entity.getSubstituteFlag()));
-        temp.set合議体長区分コード(getRStrig(entity.getGogitaichoKubunCode()));
+        temp.setシーケンス番号(sequence);
+        temp.set合議体NO(getRString(entity.getGogitaiNo()));
+        temp.set合議体名称(getRString(entity.getGogitaiMei()));
+        temp.set有効開始日(getRString(entity.getGogitaiYukoKikanKaishiYMD()));
+        temp.set有効終了日(getRString(entity.getGogitaiYukoKikanShuryoYMD()));
+        temp.set合議体開始予定時刻(getRString(entity.getGogitaiKaishiYoteiTime()));
+        temp.set合議体終了予定時刻(getRString(entity.getGogitaiShuryoYoteiTime()));
+        temp.set審査会予定定員(getRString(entity.getShinsakaiYoteiTeiin()));
+        temp.set審査会自動割当定員(getRString(entity.getShinsakaiJidoWariateTeiin()));
+        temp.set審査会委員定員(getRString(entity.getShinsakaiIinTeiin()));
+        temp.set開催場所コード(getRString(entity.getShinsakaiKaisaiBashoCode()));
+        temp.set精神科医所属(getRString(entity.getGogitaiSeishinkaSonzaiFlag()));
+        temp.set合議体ダミーフラグ(getRString(entity.getGogitaiDummyFlag()));
+        temp.set審査会委員コード(getRString(entity.getShinsakaiIinCode()));
+        temp.set補欠(getRString(entity.getSubstituteFlag()));
+        temp.set合議体長区分コード(getRString(entity.getGogitaichoKubunCode()));
 
         return temp;
     }
 
-    private RString getRStrig(RString str) {
+    private RString getRString(RString str) {
         return RString.isNullOrEmpty(str) ? RString.EMPTY : str;
     }
 

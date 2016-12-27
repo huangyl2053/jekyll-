@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyotsuHyojiAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,7 +30,7 @@ public class KyotsuHyojiAreaDiv extends Panel {
     @JsonProperty("txtShinsakaiKaijo")
     private TextBox txtShinsakaiKaijo;
     @JsonProperty("txtChiku")
-    private TextBoxCode txtChiku;
+    private TextBox txtChiku;
     @JsonProperty("txtShinsakaijoJusho")
     private TextBox txtShinsakaijoJusho;
     @JsonProperty("txtTaishoNinzu")
@@ -43,6 +43,8 @@ public class KyotsuHyojiAreaDiv extends Panel {
     private CheckBoxList chkShinsakaiShurui;
     @JsonProperty("txtStutas")
     private TextBox txtStutas;
+    @JsonProperty("txtShinsakaiKaisaiYoteiYMD")
+    private TextBoxFlexibleDate txtShinsakaiKaisaiYoteiYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -127,7 +129,7 @@ public class KyotsuHyojiAreaDiv extends Panel {
      * @return txtChiku
      */
     @JsonProperty("txtChiku")
-    public TextBoxCode getTxtChiku() {
+    public TextBox getTxtChiku() {
         return txtChiku;
     }
 
@@ -136,7 +138,7 @@ public class KyotsuHyojiAreaDiv extends Panel {
      * @param txtChiku txtChiku
      */
     @JsonProperty("txtChiku")
-    public void setTxtChiku(TextBoxCode txtChiku) {
+    public void setTxtChiku(TextBox txtChiku) {
         this.txtChiku = txtChiku;
     }
 
@@ -246,6 +248,24 @@ public class KyotsuHyojiAreaDiv extends Panel {
     @JsonProperty("txtStutas")
     public void setTxtStutas(TextBox txtStutas) {
         this.txtStutas = txtStutas;
+    }
+
+    /*
+     * gettxtShinsakaiKaisaiYoteiYMD
+     * @return txtShinsakaiKaisaiYoteiYMD
+     */
+    @JsonProperty("txtShinsakaiKaisaiYoteiYMD")
+    public TextBoxFlexibleDate getTxtShinsakaiKaisaiYoteiYMD() {
+        return txtShinsakaiKaisaiYoteiYMD;
+    }
+
+    /*
+     * settxtShinsakaiKaisaiYoteiYMD
+     * @param txtShinsakaiKaisaiYoteiYMD txtShinsakaiKaisaiYoteiYMD
+     */
+    @JsonProperty("txtShinsakaiKaisaiYoteiYMD")
+    public void setTxtShinsakaiKaisaiYoteiYMD(TextBoxFlexibleDate txtShinsakaiKaisaiYoteiYMD) {
+        this.txtShinsakaiKaisaiYoteiYMD = txtShinsakaiKaisaiYoteiYMD;
     }
 
     // </editor-fold>

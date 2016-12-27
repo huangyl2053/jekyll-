@@ -66,6 +66,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -88,6 +89,8 @@ public class NinteiChosaOCRTorikomi {
     private static final RString 実施場所名_施設 = new RString("施設");
     private static final RString 実施場所名_その他 = new RString("その他");
     private static final int CSV項目数 = 109;
+    private static final RString イメージ取込み = new RString("イメージ取込み");
+    private static final int DAY_COUNT_一週間 = 7;
 
     /**
      * 画面の初期化します。
@@ -101,13 +104,32 @@ public class NinteiChosaOCRTorikomi {
     }
 
     /**
-     * バッチ登録の前処理（指定フォルダから共有ファイルへのアップロード）を行う。
+     * 「アップロードする」ボタンのイベント処理です。<br>
+     * 指定されたファイルをサーバーへアップロードします。
      *
-     * @param div OCR取込み画面情報
+     * @param div イメージ取込み画面情報
+     * @param files 選択されたファイル
      * @return 処理後の画面情報
      */
-    public ResponseData<NinteiChosaOCRTorikomiDiv> onBeforeOpenDialog_btnBatchRegister(NinteiChosaOCRTorikomiDiv div) {
-        getHandler(div).upload();
+    public ResponseData<NinteiChosaOCRTorikomiDiv> onClick_btnUpload(NinteiChosaOCRTorikomiDiv div, FileData[] files) {
+        SharedFileDescriptor sfd = new SharedFileDescriptor(
+                GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts
+                = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間)).isCompressedArchive(false);
+        RString SharedFileEntryDescriptorString = RString.EMPTY;
+        for (FileData file : files) {
+            if (SharedFileEntryDescriptorString.isEmpty()) {
+                SharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(file.getFilePath()), opts).toString());
+            } else {
+                ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
+                        GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み),
+                        SharedFileEntryDescriptor.fromString(SharedFileEntryDescriptorString.toString()).getSharedFileId());
+                SharedFile.appendNewFile(ro_sfd, new FilesystemPath(file.getFilePath()), "");
+            }
+        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), false);
+        div.setHdnSharedFileEntryInfo(SharedFileEntryDescriptorString);
         return ResponseData.of(div).respond();
     }
 

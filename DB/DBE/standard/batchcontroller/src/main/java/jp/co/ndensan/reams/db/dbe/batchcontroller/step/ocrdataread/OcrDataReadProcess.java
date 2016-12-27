@@ -68,7 +68,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     private OcrDataReadProcessParameter processParameter;
     private long 読取中行番号;
     private OcrDataReadResult ocrデータ解析結果 = new OcrDataReadResult();
-    private static OcrFileReadResult ca3解析結果;
+    private static OcrFileReadResult ca3解析結果 = new OcrFileReadResult();
     private static final RString 厚労省IF識別コード_06A = new RString("06A");
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
@@ -372,13 +372,12 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                     entityImage.setImageSharedFileId(entity.getSharedFileId());
                     writerImage.insert(entityImage);
                 } else {
-//                     ocrデータ解析結果.getイメージファイル();
                     imageList = processParameter.getファイルList();
                     if (imageList != null) {
                         for (int j = 0; j < imageList.size(); j++) {
                             ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
                                     .fromString(ocrデータ解析結果.get保険者番号().concat(ocrデータ解析結果.get被保険者番号())), result.getイメージ共有ファイルID());
-                            SharedFile.appendNewFile(or_sfd, new FilesystemPath(processParameter.getファイルPath()), imageList.get(j).toString());
+                            SharedFile.appendNewFile(or_sfd, new FilesystemPath(processParameter.getファイルPathList().get(j)), imageList.get(j).toString());
                         }
                     }
                 }

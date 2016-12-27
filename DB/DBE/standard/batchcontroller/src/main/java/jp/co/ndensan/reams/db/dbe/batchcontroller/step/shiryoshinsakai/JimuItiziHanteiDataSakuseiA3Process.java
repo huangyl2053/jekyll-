@@ -38,9 +38,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
-import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 委員用一次判定結果票の取得バッチクラスです。
@@ -126,23 +124,6 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     protected void createWriter() {
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517081.getReportId().value())
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
-                .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
-
-
-                    JimuTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
-                    @Override
-                    public ReportLineRecord<JimuTokkiTextA3ReportSource> occuredBreak(ReportLineRecord<JimuTokkiTextA3ReportSource> currentRecord,
-                            ReportLineRecord<JimuTokkiTextA3ReportSource> nextRecord,
-                            ReportDynamicChart dynamicChart) {
-                        int layout = currentRecord.getSource().layout.index();
-                        currentRecord.setFormGroupIndex(layout);
-                        if (nextRecord != null && nextRecord.getSource() != null) {
-                            layout = nextRecord.getSource().layout.index();
-                            nextRecord.setFormGroupIndex(layout);
-                        }
-                        return currentRecord;
-                    }
-                })
                 .create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }

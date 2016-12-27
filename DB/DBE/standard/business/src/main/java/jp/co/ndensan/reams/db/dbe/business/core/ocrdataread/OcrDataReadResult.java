@@ -115,7 +115,7 @@ public class OcrDataReadResult {
 
     private RString データ行_文字列;
     private OcrJohoOcrDataRecordEntity ocrDataデータ行Entity;
-
+    
     private static final RString 概況調査区分 = new RString("501");
     private static final RString 基本調査区分 = new RString("502");
 

@@ -86,12 +86,12 @@ public class ShinsaiinJissekiIchiranReportProcess extends BatchProcessBase<Shins
         RString csv出力有無 = なし;
         RString csvファイル名 = RString.EMPTY;
         List<RString> 出力条件 = new ArrayList<>();
-        RStringBuilder 審査会開催日FROM_SB = new RStringBuilder("【審査会開催日（From）】");
-        審査会開催日FROM_SB.append(dateFormat(paramter.get審査会開催日FROM()));
-        RStringBuilder 審査会開催日To_SB = new RStringBuilder("【審査会開催日（To）】");
-        審査会開催日To_SB.append(dateFormat(paramter.get審査会開催日TO()));
-        出力条件.add(審査会開催日FROM_SB.toRString());
-        出力条件.add(審査会開催日To_SB.toRString());
+        RStringBuilder 審査会実施日FROM_SB = new RStringBuilder("【審査会実施日（From）】");
+        審査会実施日FROM_SB.append(dateFormat(paramter.get審査会実施日FROM()));
+        RStringBuilder 審査会実施日To_SB = new RStringBuilder("【審査会実施日（To）】");
+        審査会実施日To_SB.append(dateFormat(paramter.get審査会実施日TO()));
+        出力条件.add(審査会実施日FROM_SB.toRString());
+        出力条件.add(審査会実施日To_SB.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE601003.getReportId().value(), 導入団体コード, 市町村名, new RString(JobContextHolder.getJobId()),
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
