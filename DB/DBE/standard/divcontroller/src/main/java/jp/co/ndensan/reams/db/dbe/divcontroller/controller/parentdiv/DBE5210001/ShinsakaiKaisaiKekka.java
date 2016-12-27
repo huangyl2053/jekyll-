@@ -52,6 +52,9 @@ public class ShinsakaiKaisaiKekka {
     private final ShinsakaiKaisaiYoteiJohoManager manager;
     private final ShinsakaiOnseiJohoManager onseiJohoManager;
     private final LockingKey 前排他ロックキー;
+    private static final RString 前排他ロックキーprefix = new RString("DBEShinsakaiNo");
+    private static final RString 新規モード文言 = new RString("新規モード");
+    private static final RString 更新モード文言 = new RString("更新モード");
 
     /**
      * コンストラクタです。
@@ -60,7 +63,7 @@ public class ShinsakaiKaisaiKekka {
         service = ShinsakaiKaisaiKekkaFinder.createInstance();
         manager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
         onseiJohoManager = new ShinsakaiOnseiJohoManager();
-        前排他ロックキー = new LockingKey((new RString("DBEShinsakaiNo")).concat(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)));
+        前排他ロックキー = new LockingKey(前排他ロックキーprefix.concat(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)));
     }
 
     /**
@@ -194,10 +197,10 @@ public class ShinsakaiKaisaiKekka {
 
     private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
-        if (new RString("新規モード").equals(div.getModel())) {
+        if (新規モード文言.equals(div.getModel())) {
             manager.updateBy開催無(getYoteiJoho(div, 開催番号));
         }
-        if (new RString("更新モード").equals(div.getModel())) {
+        if (更新モード文言.equals(div.getModel())) {
             manager.updateBy開催(getKekkaJoho(div, 開催番号));
         }
     }
