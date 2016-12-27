@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001;
 
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.UzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -29,10 +32,10 @@ public class GetsureiShoriValidationHandler {
     /**
      * センター送信完了対象者一覧データの存在チェックを行います。
      *
-     * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs センター送信完了対象者一覧データの存在チェック(ValidationMessageControlPairs pairs) {
+    public ValidationMessageControlPairs センター送信完了対象者一覧データの存在チェック() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧データの存在チェック));
         return pairs;
     }
@@ -40,10 +43,10 @@ public class GetsureiShoriValidationHandler {
     /**
      * センター送信完了対象者一覧データの行選択チェックを行います。
      *
-     * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs センター送信完了対象者一覧データの行選択チェック(ValidationMessageControlPairs pairs) {
+    public ValidationMessageControlPairs センター送信完了対象者一覧データの行選択チェック() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧データの行選択チェック));
         return pairs;
     }
@@ -51,11 +54,19 @@ public class GetsureiShoriValidationHandler {
     /**
      * センター送信完了対象者一覧選択行の完了処理事前チェックを行います。
      *
-     * @param pairs バリデーションコントロール
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs センター送信完了対象者一覧選択行の完了処理事前チェック(ValidationMessageControlPairs pairs) {
+    public ValidationMessageControlPairs センター送信完了対象者一覧選択行の完了処理事前チェック() {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧選択行の完了処理事前チェック));
+        return pairs;
+    }
+
+    public ValidationMessageControlPairs check最大表示件数(Decimal 最大表示件数, Decimal 最大表示件数上限) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (最大表示件数 == null || 最大表示件数.compareTo(最大表示件数上限) > 0) {
+            pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.最大表示件数不正));
+        }
         return pairs;
     }
 
@@ -63,7 +74,9 @@ public class GetsureiShoriValidationHandler {
 
         センター送信完了対象者一覧データの存在チェック(UrErrorMessages.該当データなし),
         センター送信完了対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択),
-        センター送信完了対象者一覧選択行の完了処理事前チェック(UrErrorMessages.更新不可_汎用, "センター未送信");
+        センター送信完了対象者一覧選択行の完了処理事前チェック(DbzErrorMessages.理由付き完了不可, "センター未送信"),
+        最大表示件数不正(UzErrorMessages.入力値が不正);
+
         private final Message message;
 
         private GetsureiShoriMessages(IMessageGettable message, String... replacements) {

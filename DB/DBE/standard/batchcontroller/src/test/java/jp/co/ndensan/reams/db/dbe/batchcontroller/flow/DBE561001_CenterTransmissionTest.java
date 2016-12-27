@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.gensenchoshudatasakusei;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.flow.*;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
@@ -57,8 +57,9 @@ public class DBE561001_CenterTransmissionTest extends DbeTestDacBase {
 
     private static DBE561001_CenterTransmissionParameter createBatchParameter() {
         DBE561001_CenterTransmissionParameter parameter = new DBE561001_CenterTransmissionParameter();
-        parameter.set二次判定開始日(new RString("20150701"));
-        parameter.set二次判定終了日(new RString("20150707"));
+        parameter.setデータ出力区分(new RString("1"));
+        parameter.set二次判定開始日(new RString("20161224"));
+        parameter.set二次判定終了日(new RString("20161228"));
         parameter.set転入死亡情報出力区分(new RString("0"));
         return parameter;
     }
