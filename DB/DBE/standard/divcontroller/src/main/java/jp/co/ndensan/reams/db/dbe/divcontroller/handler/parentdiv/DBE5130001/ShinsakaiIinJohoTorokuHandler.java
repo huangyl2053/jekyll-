@@ -176,7 +176,9 @@ public class ShinsakaiIinJohoTorokuHandler {
             row.setShichosonCode(所属機関情報.get市町村コード() == null ? RString.EMPTY : 所属機関情報.get市町村コード());
             row.setHdnColumn(row.getShokisaiHokenshaNo()
                     .concat(row.getNinteiItakusakiCode().getValue())
+                    .concat(row.getNinteiChosainCode())
                     .concat(row.getShujiiIryoKikanCode().getValue())
+                    .concat(row.getShujiiCode())
                     .concat(row.getSonotaKikanCode().getValue()));
             所属機関一覧.add(row);
         }
@@ -401,7 +403,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         for (dgShozokuKikanIchiran_Row row : div.getDgShozokuKikanIchiran().getDataSource()) {
             if (!row.getHdnColumn().equals(row.getShokisaiHokenshaNo()
                     .concat(row.getNinteiItakusakiCode().getValue())
+                    .concat(row.getNinteiChosainCode())
                     .concat(row.getShujiiIryoKikanCode().getValue())
+                    .concat(row.getShujiiCode())
                     .concat(row.getSonotaKikanCode().getValue()))) {
                 return true;
             }
