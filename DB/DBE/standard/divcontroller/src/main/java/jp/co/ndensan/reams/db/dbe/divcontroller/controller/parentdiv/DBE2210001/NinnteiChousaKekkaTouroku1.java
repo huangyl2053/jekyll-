@@ -392,8 +392,7 @@ public class NinnteiChousaKekkaTouroku1 {
         div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo()
                 .setDomain(new TelNo(gaikyoChosa.getTemp_利用施設電話番号() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設電話番号()));
 
-        RString 施設連絡先 = gaikyoChosa.getTemp_利用施設名().concat(カンマ).concat(gaikyoChosa.getTemp_利用施設郵便番号()).concat(カンマ)
-                .concat(gaikyoChosa.getTemp_利用施設住所()).concat(カンマ).concat(gaikyoChosa.getTemp_利用施設電話番号());
+        RString 施設連絡先 = create施設連絡先(gaikyoChosa);
         ViewStateHolder.put(ViewStateKeys.初期の施設連絡先, 施設連絡先);
 
         RString 施設利用 = getHandler(div).施設_施設利用フラグ_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
@@ -462,6 +461,17 @@ public class NinnteiChousaKekkaTouroku1 {
 //                getHandler(div).利用サービスGrid非表示();
 //            }
 //        }
+    }
+
+    private RString create施設連絡先(TempData gaikyoChosa) {
+        RString 利用施設名 = gaikyoChosa.getTemp_利用施設名() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設名();
+        RString 利用施設郵便番号 = gaikyoChosa.getTemp_利用施設郵便番号() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設郵便番号();
+        RString 利用施設住所 = gaikyoChosa.getTemp_利用施設住所() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設住所();
+        RString 利用施設電話番号 = gaikyoChosa.getTemp_利用施設電話番号() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設電話番号();
+
+        RString 施設連絡先 = 利用施設名.concat(カンマ).concat(利用施設郵便番号).concat(カンマ)
+                .concat(利用施設住所).concat(カンマ).concat(利用施設電話番号);
+        return 施設連絡先;
     }
 
     /**
