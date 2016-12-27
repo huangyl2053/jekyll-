@@ -423,10 +423,6 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         }
     }
 
-    private RString intToRStr(int no) {
-        return new RString(no);
-    }
-
     private boolean strToBoolean(RString str) {
         return FLAG_TRUE.equals(str);
     }
