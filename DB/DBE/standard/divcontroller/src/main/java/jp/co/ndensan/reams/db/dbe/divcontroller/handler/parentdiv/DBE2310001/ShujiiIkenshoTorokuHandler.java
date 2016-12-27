@@ -140,7 +140,7 @@ public class ShujiiIkenshoTorokuHandler {
         div.getTxtShujiiIryoKikanFaxNumber().setDisabled(flag);
     }
 
-    private void setChkTakaJushin(ShujiiIkenshoTorokuResult result) {
+    public void setChkTakaJushin(ShujiiIkenshoTorokuResult result) {
         List<RString> selKeysList = new ArrayList<>();
         if (result.is内科受診の有無()) {
             selKeysList.add(SELECT_NAIKA);
