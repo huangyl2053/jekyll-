@@ -71,7 +71,38 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onChange_tabHoshuMasutaKoshin(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+
         RString 選択したタブ名 = div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getSelectedItem().getTitle();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                if (画面状態.equals(DBE6910001StateName.審査明細.getName())) {
+                    div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getTabChosainhoshuTanka());
+                }
+                if (画面状態.equals(DBE6910001StateName.委員別明細.getName())) {
+                    div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka());
+                }
+                if (画面状態.equals(DBE6910001StateName.意見明細.getName())) {
+                    div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getTblIkenShohoshuTanka());
+                }
+                if (画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+                    div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getTabHomonChosahoshuTanka());
+                }
+
+                return ResponseData.of(div).respond();
+            }
+        }
         if (タブ名_審査員報酬単価マスタ.equals(選択したタブ名)) {
             set審査員報酬単価マスタ情報(div);
         } else if (タブ名_意見書報酬単価マスタ.equals(選択したタブ名)) {
@@ -91,6 +122,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnChoTsuika(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnChoTsuika();
         return ResponseData.of(div).setState(DBE6910001StateName.審査明細);
     }
@@ -102,6 +150,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnChosainModify(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnChosainModify(div.getHoshuMasutaTab().getDgChosainhoshuTankaIchiran().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.審査明細);
     }
@@ -113,6 +178,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnChosainDelete(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnChosainDelete(div.getHoshuMasutaTab().getDgChosainhoshuTankaIchiran().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.審査明細);
     }
@@ -124,6 +206,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnChoTorikesu(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnChoTorikesu();
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
@@ -151,6 +250,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnIkenTsuika(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnIkenTsuika();
         return ResponseData.of(div).setState(DBE6910001StateName.意見明細);
     }
@@ -162,6 +278,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnIkenShoModify(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnIkenShoModify(div.getHoshuMasutaTab().getDgIkenShohoshuTankaIchiran().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.意見明細);
     }
@@ -173,6 +306,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnIkenShoDelete(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnIkenShoDelete(div.getHoshuMasutaTab().getDgIkenShohoshuTankaIchiran().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.意見明細);
     }
@@ -184,6 +334,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnIkenTorikesu(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnIkenTorikesu();
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
@@ -211,6 +378,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnHomTsuika(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnHomTsuika();
         return ResponseData.of(div).setState(DBE6910001StateName.訪問明細);
     }
@@ -222,6 +406,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnHomonChosaModify(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnHomonChosaModify(div.getHoshuMasutaTab().getDgHomonChosahoshuTankaIchiran().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.訪問明細);
     }
@@ -233,6 +434,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnHomonChosaDelete(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnHomonChosaDelete(div.getHoshuMasutaTab().getDgHomonChosahoshuTankaIchiran().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.訪問明細);
     }
@@ -244,6 +462,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnHomTorikesu(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnHomTorikesu();
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
@@ -271,6 +506,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnBetuTsuika(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnBetuTsuika();
         return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
     }
@@ -282,6 +534,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnShinsakaiIinBetuModify(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnShinsakaiIinBetuModify(div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
     }
@@ -293,6 +562,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onSelect_btnShinsakaiIinBetuDelete(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onSelect_btnShinsakaiIinBetuDelete(div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow());
         return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
     }
@@ -304,6 +590,23 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onClick_btnBetuTorikesu(HoshuMasutaKoshinDiv div) {
+        RString 画面状態;
+        画面状態 = ResponseHolder.getState();
+        if (画面状態.equals(DBE6910001StateName.委員別明細.getName())
+                || 画面状態.equals(DBE6910001StateName.審査明細.getName())
+                || 画面状態.equals(DBE6910001StateName.意見明細.getName())
+                || 画面状態.equals(DBE6910001StateName.訪問明細.getName())) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
         getHandler(div).onClick_btnBetuTorikesu();
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
