@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KanryoShoriShinsaUketsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -99,6 +99,36 @@ public class KanryoShoriShinsaUketsukeDiv extends Panel {
     @JsonIgnore
     public IYokaigoNinteiTaskListDiv getCcdNinteiTaskList() {
         return this.getNinteiShinseiJohoTorokuKanryo().getCcdNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtCompleteCount() {
+        return this.getNinteiShinseiJohoTorokuKanryo().getTxtCompleteCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+        this.getNinteiShinseiJohoTorokuKanryo().setTxtCompleteCount(txtCompleteCount);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return this.getNinteiShinseiJohoTorokuKanryo().getDgNinteiTaskList();
+    }
+
+    @JsonIgnore
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.getNinteiShinseiJohoTorokuKanryo().setDgNinteiTaskList(dgNinteiTaskList);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxCount() {
+        return this.getNinteiShinseiJohoTorokuKanryo().getTxtMaxCount();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
+        this.getNinteiShinseiJohoTorokuKanryo().setTxtMaxCount(txtMaxCount);
     }
 
     @JsonIgnore
