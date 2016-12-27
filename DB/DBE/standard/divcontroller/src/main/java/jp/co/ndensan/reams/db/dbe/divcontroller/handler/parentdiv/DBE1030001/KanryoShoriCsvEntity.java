@@ -29,8 +29,6 @@ public class KanryoShoriCsvEntity {
     private final RString 被保険者_氏名;
     @CsvField(order = 60, name = "申請区分_申請時")
     private final RString 申請区分_申請時;
-    @CsvField(order = 70, name = "申請受付_完了日")
-    private final RString 申請受付_完了日;
 
     /**
      *
@@ -40,7 +38,6 @@ public class KanryoShoriCsvEntity {
      * @param 被保険者_被保番号 被保険者_被保番号
      * @param 被保険者_氏名 被保険者_氏名
      * @param 申請区分_申請時 申請区分_申請時
-     * @param 申請受付_完了日 申請受付_完了日
      */
     public KanryoShoriCsvEntity(
             RString 申請書管理番号,
@@ -48,8 +45,7 @@ public class KanryoShoriCsvEntity {
             RString 認定申請日,
             RString 被保険者_被保番号,
             RString 被保険者_氏名,
-            RString 申請区分_申請時,
-            RString 申請受付_完了日
+            RString 申請区分_申請時
     ) {
         this.申請書管理番号 = 申請書管理番号;
         this.保険者 = 保険者;
@@ -57,7 +53,6 @@ public class KanryoShoriCsvEntity {
         this.被保険者_被保番号 = 被保険者_被保番号;
         this.被保険者_氏名 = 被保険者_氏名;
         this.申請区分_申請時 = 申請区分_申請時;
-        this.申請受付_完了日 = 申請受付_完了日;
 
     }
 }
