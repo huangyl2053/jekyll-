@@ -25,12 +25,12 @@ public class SakuseiIraibiDiv extends Panel {
      */
     @JsonProperty("txtSakuseiIraibi")
     private TextBoxDateRange txtSakuseiIraibi;
-    @JsonProperty("ccdHokensya")
-    private HokenshaListDiv ccdHokensya;
     @JsonProperty("btnKensakuClear")
     private Button btnKensakuClear;
     @JsonProperty("txtMaxKensu")
     private TextBoxNum txtMaxKensu;
+    @JsonProperty("ccdHokensya")
+    private HokenshaListDiv ccdHokensya;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,15 +54,6 @@ public class SakuseiIraibiDiv extends Panel {
     @JsonProperty("txtSakuseiIraibi")
     public void setTxtSakuseiIraibi(TextBoxDateRange txtSakuseiIraibi) {
         this.txtSakuseiIraibi = txtSakuseiIraibi;
-    }
-
-    /*
-     * getccdHokensya
-     * @return ccdHokensya
-     */
-    @JsonProperty("ccdHokensya")
-    public IHokenshaListDiv getCcdHokensya() {
-        return ccdHokensya;
     }
 
     /*
@@ -99,6 +90,15 @@ public class SakuseiIraibiDiv extends Panel {
     @JsonProperty("txtMaxKensu")
     public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.txtMaxKensu = txtMaxKensu;
+    }
+
+    /*
+     * getccdHokensya
+     * @return ccdHokensya
+     */
+    @JsonProperty("ccdHokensya")
+    public IHokenshaListDiv getCcdHokensya() {
+        return ccdHokensya;
     }
 
     // </editor-fold>

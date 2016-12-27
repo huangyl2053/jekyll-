@@ -68,4 +68,15 @@ public class IkenshoHoshuShokaiFinder {
         }
         return SearchResult.of(list, 0, false);
     }
+
+    /**
+     * レコード数を取得します。
+     *
+     * @param param IkenshoHoshuShokaiMapperParameter
+     * @return 検索条件に満たすレコード数
+     */
+    public int getCount(IkenshoHoshuShokaiMapperParameter param) {
+        IIkenshoHoshuShokaiRelateMapper mapper = mapperProvider.create(IIkenshoHoshuShokaiRelateMapper.class);
+        return mapper.getCount(param);
+    }
 }
