@@ -99,6 +99,11 @@ public class NinteichosaItakusakiMaster {
     private static final RString 四マスタ優先表示市町村識別ID
             = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    private static final RString 普通 = new RString("普通");
+    private static final RString 当座 = new RString("当座");
+    private static final RString 納税準備 = new RString("納税準備");
+    private static final RString 貯蓄 = new RString("貯蓄");
+    private static final RString その他 = new RString("その他");
 
     /**
      * 画面初期化処理です。
@@ -692,7 +697,31 @@ public class NinteichosaItakusakiMaster {
         csvEntity.set自動割付フラグ(row.getAutoWaritsukeFlag());
         csvEntity.set機関の区分(row.getKikanKubun());
         csvEntity.set状況フラグ(row.getJokyoFlag());
+        csvEntity.set金融機関コード(row.getKinyuKikanCode());
+        csvEntity.set支店コード(row.getKinyuKikanShitenCode());
+        csvEntity.set預金種別(set預金種別(row.getYokinShubetsu()));
+        csvEntity.set口座番号(row.getKozaNo());
+        csvEntity.set口座名義人(row.getKozaMeigininKana());
+        csvEntity.set漢字名義人(row.getKozaMeiginin());
         return csvEntity;
+    }
+
+    private RString set預金種別(RString 預金種別コード) {
+        if (!預金種別コード.isEmpty()) {
+            switch (預金種別コード.toInt()) {
+                case 1:
+                    return 普通;
+                case 2:
+                    return 当座;
+                case 3:
+                    return 納税準備;
+                case 4:
+                    return 貯蓄;
+                case 9:
+                    return その他;
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static class DBE9030001ErrorMessage implements IMessageGettable, IValidationMessage {

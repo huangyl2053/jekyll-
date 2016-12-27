@@ -80,6 +80,14 @@
                 AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
     </delete>
     
+    <delete id="deleteDbT5213PhysicalBy" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
+        DELETE FROM rgdb."DbT5213GaikyoChosaTokkiMask" 
+              WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
+                AND "ninteichosaRirekiNo" = #{ninteichosaRirekiNo}
+                AND "gaikyoChosaTextImageKubun" = #{imageKubun}
+    </delete>
+    
     <delete id="deleteDbT5206PhysicalBy" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter" >
         DELETE FROM rgdb."DbT5206GaikyoTokki" 

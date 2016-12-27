@@ -411,6 +411,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
         set開催予定入力欄(div.getTxtSeteibi().getValue());
+        div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
         return ResponseData.of(div).respond();
     }
@@ -956,6 +957,9 @@ public class ShinsakaiKaisaiYoteiToroku {
             ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, false);
             ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 0);
             ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 0);
+
+            div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), true);
 
             //当月分
             yoteiJohoEntityList = new ArrayList<>();

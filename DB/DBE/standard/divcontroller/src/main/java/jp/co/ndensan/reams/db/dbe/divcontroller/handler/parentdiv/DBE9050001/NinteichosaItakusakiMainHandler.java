@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBE-1360-010 suguangjun
  */
 public class NinteichosaItakusakiMainHandler {
-    
+
     private static final RString 表示値_有効 = new RString("有効");
     private static final RString 表示値_無効 = new RString("無効");
     private static final RString CODE_有効 = new RString("yuko");
@@ -71,7 +71,7 @@ public class NinteichosaItakusakiMainHandler {
     private static final RString その他 = new RString("その他");
     private static final RString 非調査機関 = new RString("非調査機関");
     private static final RString 調査機関 = new RString("調査機関");
-    
+
     private final NinteichosaItakusakiMainDiv div;
 
     /**
@@ -183,10 +183,10 @@ public class NinteichosaItakusakiMainHandler {
         } else {
             div.getSonotaKikanichiran().getBtnOutputCsv().setVisible(true);
         }
-        
+
         div.getSonotaKikanichiran().getDgSonotaKikanIchiran().setDataSource(dataGridList);
     }
-    
+
     private dgSonotaKikanIchiran_Row createDgSonotaKikanichiranRow(
             RString jotai,
             RString hokensha,
@@ -306,7 +306,7 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());
     }
-    
+
     private RString get調査委託区分(dgSonotaKikanIchiran_Row row) {
         RString 調査委託区分 = RString.EMPTY;
         if (保険者_市町村等.equals(row.getChosaItakuKubun())) {
@@ -326,7 +326,7 @@ public class NinteichosaItakusakiMainHandler {
         }
         return 調査委託区分;
     }
-    
+
     private RString get機関の区分(dgSonotaKikanIchiran_Row row) {
         RString 機関の区分 = RString.EMPTY;
         if (非調査機関.equals(row.getKikanKubun())) {
@@ -336,7 +336,7 @@ public class NinteichosaItakusakiMainHandler {
         }
         return 機関の区分;
     }
-    
+
     private RString nullToEmpty(RString obj) {
         if (obj == null) {
             return RString.EMPTY;
@@ -385,7 +385,7 @@ public class NinteichosaItakusakiMainHandler {
         row.setKozaNo(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue()));
         row.setKozaMeigininKana(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue()));
         row.setKozaMeiginin(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()));
-        
+
         int index = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
@@ -399,7 +399,7 @@ public class NinteichosaItakusakiMainHandler {
             div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource().set(index, row);
         }
     }
-    
+
     private RString editYubinNoToIchiran(RString yubinNo) {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (INDEX_3 <= yubinNo.length()) {

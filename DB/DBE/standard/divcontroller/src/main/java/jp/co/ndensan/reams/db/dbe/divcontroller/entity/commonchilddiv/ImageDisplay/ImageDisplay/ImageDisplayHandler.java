@@ -32,7 +32,7 @@ public class ImageDisplayHandler {
      * @return 調査票概況のイメージファイルが存在しない：true、存在する：false
      */
     public boolean is調査票概況のイメージファイルが存在しない(List<RString> 存在したイメージファイル名) {
-        return !存在したイメージファイル名.contains(new RString("G0001"));
+        return !isExistsImageFile(new RString("G0001"), 存在したイメージファイル名);
     }
 
     /**
@@ -42,24 +42,27 @@ public class ImageDisplayHandler {
      * @return イメージファイルが存在区分
      */
     public RString get主治医意見書のイメージファイルが存在区分(List<RString> 存在したイメージファイル名) {
-        RString イメージファイルが存在区分 = RString.EMPTY;
-        List<RString> 主治医意見書イメージ_白黒 = get主治医意見書イメージ_白黒();
-        List<RString> 主治医意見書イメージ_OCR = get主治医意見書イメージ_OCR();
-        int 主治医意見書イメージファイルが存在しない = 0;
-        for (RString ファイル名 : 主治医意見書イメージ_白黒) {
-            if (!存在したイメージファイル名.contains(ファイル名)) {
-                主治医意見書イメージファイルが存在しない++;
+        List<RString> 主治医意見書イメージ_定型外 = get主治医意見書イメージ_定型外();
+        List<RString> 主治医意見書イメージ_定型 = get主治医意見書イメージ_定型();
+        boolean isNotExistsImageFile = true;
+        for (RString ファイル名 : 主治医意見書イメージ_定型外) {
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
+                isNotExistsImageFile = false;
+                break;
             }
         }
-        for (RString ファイル名 : 主治医意見書イメージ_OCR) {
-            if (!存在したイメージファイル名.contains(ファイル名)) {
-                主治医意見書イメージファイルが存在しない++;
+        for (RString ファイル名 : 主治医意見書イメージ_定型) {
+            if (!isNotExistsImageFile) {
+                break;
+            }
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
+                isNotExistsImageFile = false;
             }
         }
-        if (主治医意見書イメージファイルが存在しない == (主治医意見書イメージ_白黒.size() + 主治医意見書イメージ_OCR.size())) {
-            イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
+        if (isNotExistsImageFile) {
+            return イメージファイルが存在区分_存在しない;
         }
-        return イメージファイルが存在区分;
+        return RString.EMPTY;
     }
 
     /**
@@ -69,66 +72,75 @@ public class ImageDisplayHandler {
      * @return イメージファイルが存在区分
      */
     public RString getその他資料のイメージファイルが存在区分(List<RString> 存在したイメージファイル名) {
-        RString イメージファイルが存在区分 = RString.EMPTY;
         List<RString> その他資料イメージ = getその他資料イメージ();
-        int その他資料イメージファイルが存在しない = 0;
+        boolean isNotExistsImageFile = true;
         for (RString ファイル名 : その他資料イメージ) {
-            if (!存在したイメージファイル名.contains(ファイル名)) {
-                その他資料イメージファイルが存在しない++;
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
+                isNotExistsImageFile = false;
+                break;
             }
         }
-        if (その他資料イメージファイルが存在しない == その他資料イメージ.size()) {
-            イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
+        if (isNotExistsImageFile) {
+            return イメージファイルが存在区分_存在しない;
         }
-        return イメージファイルが存在区分;
+        return RString.EMPTY;
     }
 
-    private List<RString> get主治医意見書イメージ_白黒() {
-        List<RString> 主治医意見書イメージ_白黒 = new ArrayList<>();
-        主治医意見書イメージ_白黒.add(new RString("E0001"));
-        主治医意見書イメージ_白黒.add(new RString("E0001_BAK"));
-        主治医意見書イメージ_白黒.add(new RString("E0002"));
-        主治医意見書イメージ_白黒.add(new RString("E0002_BAK"));
-        return 主治医意見書イメージ_白黒;
+    private boolean isExistsImageFile(RString ファイル名, List<RString> 存在したイメージファイル名) {
+        for (RString existImageFile : 存在したイメージファイル名) {
+            if (existImageFile.contains(ファイル名)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private List<RString> get主治医意見書イメージ_OCR() {
-        List<RString> 主治医意見書イメージ_OCR = new ArrayList<>();
-        主治医意見書イメージ_OCR.add(new RString("D1001"));
-        主治医意見書イメージ_OCR.add(new RString("D1002"));
-        主治医意見書イメージ_OCR.add(new RString("D1003"));
-        主治医意見書イメージ_OCR.add(new RString("D1004"));
-        主治医意見書イメージ_OCR.add(new RString("D1005"));
-        主治医意見書イメージ_OCR.add(new RString("D1005_BAK"));
-        主治医意見書イメージ_OCR.add(new RString("D1006"));
-        主治医意見書イメージ_OCR.add(new RString("D1007"));
-        主治医意見書イメージ_OCR.add(new RString("D1008"));
-        主治医意見書イメージ_OCR.add(new RString("D1008_BAK"));
-        主治医意見書イメージ_OCR.add(new RString("D1009"));
-        主治医意見書イメージ_OCR.add(new RString("D1010"));
-        主治医意見書イメージ_OCR.add(new RString("D1011"));
-        主治医意見書イメージ_OCR.add(new RString("D1012"));
-        主治医意見書イメージ_OCR.add(new RString("D1013"));
-        主治医意見書イメージ_OCR.add(new RString("D1014"));
-        主治医意見書イメージ_OCR.add(new RString("D1015"));
-        主治医意見書イメージ_OCR.add(new RString("D1017"));
-        主治医意見書イメージ_OCR.add(new RString("D1018"));
-        主治医意見書イメージ_OCR.add(new RString("D1019"));
-        主治医意見書イメージ_OCR.add(new RString("D1020"));
-        主治医意見書イメージ_OCR.add(new RString("D1021"));
-        主治医意見書イメージ_OCR.add(new RString("D1022"));
-        主治医意見書イメージ_OCR.add(new RString("D1023"));
-        主治医意見書イメージ_OCR.add(new RString("D1024"));
-        主治医意見書イメージ_OCR.add(new RString("D1025"));
-        主治医意見書イメージ_OCR.add(new RString("D1026"));
-        主治医意見書イメージ_OCR.add(new RString("D1026_BAK"));
-        主治医意見書イメージ_OCR.add(new RString("D1027"));
-        主治医意見書イメージ_OCR.add(new RString("D1027_BAK"));
-        主治医意見書イメージ_OCR.add(new RString("D1028"));
-        主治医意見書イメージ_OCR.add(new RString("D1029"));
-        主治医意見書イメージ_OCR.add(new RString("D1030"));
-        主治医意見書イメージ_OCR.add(new RString("D1031"));
-        return 主治医意見書イメージ_OCR;
+    private List<RString> get主治医意見書イメージ_定型外() {
+        List<RString> 主治医意見書イメージ_定型外 = new ArrayList<>();
+        主治医意見書イメージ_定型外.add(new RString("E0001"));
+        主治医意見書イメージ_定型外.add(new RString("E0001_BAK"));
+        主治医意見書イメージ_定型外.add(new RString("E0002"));
+        主治医意見書イメージ_定型外.add(new RString("E0002_BAK"));
+        return 主治医意見書イメージ_定型外;
+    }
+
+    private List<RString> get主治医意見書イメージ_定型() {
+        List<RString> 主治医意見書イメージ_定型 = new ArrayList<>();
+        主治医意見書イメージ_定型.add(new RString("D1001"));
+        主治医意見書イメージ_定型.add(new RString("D1002"));
+        主治医意見書イメージ_定型.add(new RString("D1003"));
+        主治医意見書イメージ_定型.add(new RString("D1004"));
+        主治医意見書イメージ_定型.add(new RString("D1005"));
+        主治医意見書イメージ_定型.add(new RString("D1005_BAK"));
+        主治医意見書イメージ_定型.add(new RString("D1006"));
+        主治医意見書イメージ_定型.add(new RString("D1007"));
+        主治医意見書イメージ_定型.add(new RString("D1008"));
+        主治医意見書イメージ_定型.add(new RString("D1008_BAK"));
+        主治医意見書イメージ_定型.add(new RString("D1009"));
+        主治医意見書イメージ_定型.add(new RString("D1010"));
+        主治医意見書イメージ_定型.add(new RString("D1011"));
+        主治医意見書イメージ_定型.add(new RString("D1012"));
+        主治医意見書イメージ_定型.add(new RString("D1013"));
+        主治医意見書イメージ_定型.add(new RString("D1014"));
+        主治医意見書イメージ_定型.add(new RString("D1015"));
+        主治医意見書イメージ_定型.add(new RString("D1017"));
+        主治医意見書イメージ_定型.add(new RString("D1018"));
+        主治医意見書イメージ_定型.add(new RString("D1019"));
+        主治医意見書イメージ_定型.add(new RString("D1020"));
+        主治医意見書イメージ_定型.add(new RString("D1021"));
+        主治医意見書イメージ_定型.add(new RString("D1022"));
+        主治医意見書イメージ_定型.add(new RString("D1023"));
+        主治医意見書イメージ_定型.add(new RString("D1024"));
+        主治医意見書イメージ_定型.add(new RString("D1025"));
+        主治医意見書イメージ_定型.add(new RString("D1026"));
+        主治医意見書イメージ_定型.add(new RString("D1026_BAK"));
+        主治医意見書イメージ_定型.add(new RString("D1027"));
+        主治医意見書イメージ_定型.add(new RString("D1027_BAK"));
+        主治医意見書イメージ_定型.add(new RString("D1028"));
+        主治医意見書イメージ_定型.add(new RString("D1029"));
+        主治医意見書イメージ_定型.add(new RString("D1030"));
+        主治医意見書イメージ_定型.add(new RString("D1031"));
+        return 主治医意見書イメージ_定型;
     }
 
     private List<RString> getその他資料イメージ() {

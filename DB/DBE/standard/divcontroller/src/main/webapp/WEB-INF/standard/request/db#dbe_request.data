@@ -661,6 +661,7 @@ dbe/db/dbe/NinteichosaIrai/onLoad
 dbe/db/dbe/NinteichosaIrai/onOkClose_btnIraishoToOutput
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnBackSonotaIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnClearKensakuJoken
+dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvKozaNashi
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvSpool
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnInsert
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnKakutei
