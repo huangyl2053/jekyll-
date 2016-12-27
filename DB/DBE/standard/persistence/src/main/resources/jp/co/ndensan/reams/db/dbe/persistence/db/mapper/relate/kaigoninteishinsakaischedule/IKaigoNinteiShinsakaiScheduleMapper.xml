@@ -55,7 +55,9 @@
          FROM 
             rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
          WHERE
-            "shinsakaiKaisaiYoteiYMD" LIKE #{nendo} || '%'
+            "shinsakaiKaisaiYoteiYMD" >= #{nendo} || '04'
+         AND
+            "shinsakaiKaisaiYoteiYMD" <= (CAST(CAST(#{nendo} AS int) + 1 AS character varying(4)) || '03')
          ORDER BY
             "shinsakaiKaisaiYoteiYMD",
             "gogitaiNo"

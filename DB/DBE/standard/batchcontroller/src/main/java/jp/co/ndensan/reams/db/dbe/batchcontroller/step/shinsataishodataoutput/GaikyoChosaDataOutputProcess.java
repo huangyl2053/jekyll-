@@ -30,6 +30,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Jot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku14;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
@@ -89,6 +93,7 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
     private static final int 連番18 = 18;
     private static final int 連番19 = 19;
     private static final int 連番20 = 20;
+    private static final int 連番69 = 69;
 
     private ShinsaTaishoDataOutPutProcessParammeter processParamter;
     private RString eucFilePath;
@@ -293,14 +298,6 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set要介護認定状態の安定性コード_1_5次(RString.EMPTY);
         csvEntity.set認知症自立度Ⅱ以上の蓋然性_1_5次(null);
         csvEntity.set認知機能及び状態安定性から推定される給付区分コード_1_5次(RString.EMPTY);
-        csvEntity.set短期記憶内容コード(RString.EMPTY);
-        csvEntity.set短期記憶内容(RString.EMPTY);
-        csvEntity.set認知能力内容コード(RString.EMPTY);
-        csvEntity.set認知能力内容(RString.EMPTY);
-        csvEntity.set伝達能力内容コード(RString.EMPTY);
-        csvEntity.set伝達能力内容(RString.EMPTY);
-        csvEntity.set食事行為内容コード(RString.EMPTY);
-        csvEntity.set食事行為内容(RString.EMPTY);
         csvEntity.set介護認定審査会審査順(entity.get介護認定審査会審査順());
 
         csvEntity = setサービスの状況等(entity.get申請書管理番号(), entity.get認定調査依頼履歴番号(), csvEntity);
@@ -559,6 +556,30 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
                 csvEntity.set主治医認定調査障害高齢者の日常生活自立度(
                         RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
                         ? RString.EMPTY : IkenKomoku02.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+            }
+            if (主治医意見書意見項目.getRemban() == 連番15) {
+                csvEntity.set短期記憶内容コード(主治医意見書意見項目.getIkenItem());
+                csvEntity.set短期記憶内容(
+                        RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
+                        ? RString.EMPTY : IkenKomoku04.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+            }
+            if (主治医意見書意見項目.getRemban() == 連番16) {
+                csvEntity.set認知能力内容コード(主治医意見書意見項目.getIkenItem());
+                csvEntity.set認知能力内容(
+                        RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
+                        ? RString.EMPTY : IkenKomoku05.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+            }
+            if (主治医意見書意見項目.getRemban() == 連番17) {
+                csvEntity.set伝達能力内容コード(主治医意見書意見項目.getIkenItem());
+                csvEntity.set伝達能力内容(
+                        RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
+                        ? RString.EMPTY : IkenKomoku06.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+            }
+            if (主治医意見書意見項目.getRemban() == 連番69) {
+                csvEntity.set食事行為内容コード(主治医意見書意見項目.getIkenItem());
+                csvEntity.set食事行為内容(
+                        RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
+                        ? RString.EMPTY : IkenKomoku14.toValue(主治医意見書意見項目.getIkenItem()).get名称());
             }
         }
 

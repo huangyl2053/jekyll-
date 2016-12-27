@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,6 +25,12 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
      */
     @JsonProperty("ccdNinteiTaskList")
     private YokaigoNinteiTaskListDiv ccdNinteiTaskList;
+    @JsonProperty("txtCompleteCount")
+    private TextBoxNum txtCompleteCount;
+    @JsonProperty("dgNinteiTaskList")
+    private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
+    @JsonProperty("txtMaxCount")
+    private TextBoxNum txtMaxCount;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,6 +45,60 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
     @JsonProperty("ccdNinteiTaskList")
     public IYokaigoNinteiTaskListDiv getCcdNinteiTaskList() {
         return ccdNinteiTaskList;
+    }
+
+    /*
+     * gettxtCompleteCount
+     * @return txtCompleteCount
+     */
+    @JsonProperty("txtCompleteCount")
+    public TextBoxNum getTxtCompleteCount() {
+        return txtCompleteCount;
+    }
+
+    /*
+     * settxtCompleteCount
+     * @param txtCompleteCount txtCompleteCount
+     */
+    @JsonProperty("txtCompleteCount")
+    public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+        this.txtCompleteCount = txtCompleteCount;
+    }
+
+    /*
+     * getdgNinteiTaskList
+     * @return dgNinteiTaskList
+     */
+    @JsonProperty("dgNinteiTaskList")
+    public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
+        return dgNinteiTaskList;
+    }
+
+    /*
+     * setdgNinteiTaskList
+     * @param dgNinteiTaskList dgNinteiTaskList
+     */
+    @JsonProperty("dgNinteiTaskList")
+    public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+        this.dgNinteiTaskList = dgNinteiTaskList;
+    }
+
+    /*
+     * gettxtMaxCount
+     * @return txtMaxCount
+     */
+    @JsonProperty("txtMaxCount")
+    public TextBoxNum getTxtMaxCount() {
+        return txtMaxCount;
+    }
+
+    /*
+     * settxtMaxCount
+     * @param txtMaxCount txtMaxCount
+     */
+    @JsonProperty("txtMaxCount")
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
+        this.txtMaxCount = txtMaxCount;
     }
 
     // </editor-fold>

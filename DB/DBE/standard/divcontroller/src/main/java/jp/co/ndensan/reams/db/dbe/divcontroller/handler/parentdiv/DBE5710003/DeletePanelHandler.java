@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
@@ -45,12 +44,12 @@ public class DeletePanelHandler {
      * @return イメージファイルが存在区分
      */
     public RString get調査票特記のイメージファイルが存在区分(List<RString> 存在したイメージファイル名, RString 確認メッセージ出力区分) {
-        RString イメージファイルが存在区分 = RString.EMPTY;
         List<RString> 調査票概況特記イメージ = get調査票概況特記イメージ();
         List<RString> 調査票特記イメージ = get調査票特記イメージ();
         boolean isNotExistsImageFile = true;
+
         for (RString ファイル名 : 調査票概況特記イメージ) {
-            if (存在したイメージファイル名.contains(ファイル名)) {
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
                 isNotExistsImageFile = false;
                 break;
             }
@@ -59,24 +58,26 @@ public class DeletePanelHandler {
             if (!isNotExistsImageFile) {
                 break;
             }
-            if (存在したイメージファイル名.contains(ファイル名)) {
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
                 isNotExistsImageFile = false;
             }
         }
         if (isNotExistsImageFile) {
-            イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
+            return イメージファイルが存在区分_存在しない;
         }
-        if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-            if (存在したイメージファイル名.contains(new RString("C0007_BAK"))) {
+        if (確認メッセージ出力要.equals(確認メッセージ出力区分)) {
+            return イメージファイルが存在区分_マスキング有;
+        } else {
+            if (isExistsMaskImageFile(new RString("C0007"), 存在したイメージファイル名)) {
                 return イメージファイルが存在区分_マスキング有;
             }
             for (RString ファイル名 : get調査票特記イメージ_原本あり()) {
-                if (存在したイメージファイル名.contains(ファイル名.concat(イメージファイル原本名))) {
+                if (isExistsMaskImageFile(ファイル名, 存在したイメージファイル名)) {
                     return イメージファイルが存在区分_マスキング有;
                 }
             }
         }
-        return イメージファイルが存在区分;
+        return RString.EMPTY;
     }
 
     /**
@@ -86,7 +87,7 @@ public class DeletePanelHandler {
      * @return 調査票概況のイメージファイルが存在しない：true、存在する：false
      */
     public boolean is調査票概況のイメージファイルが存在しない(List<RString> 存在したイメージファイル名) {
-        return !存在したイメージファイル名.contains(new RString("G0001"));
+        return !isExistsImageFile(new RString("G0001"), 存在したイメージファイル名);
     }
 
     /**
@@ -98,12 +99,11 @@ public class DeletePanelHandler {
      */
     public RString get主治医意見書のイメージファイルが存在区分(List<RString> 存在したイメージファイル名,
             RString 確認メッセージ出力区分) {
-        RString イメージファイルが存在区分 = RString.EMPTY;
         List<RString> 主治医意見書イメージ_定型外 = get主治医意見書イメージ_定型外();
         List<RString> 主治医意見書イメージ_定型 = get主治医意見書イメージ_定型();
         boolean isNotExistsImageFile = true;
         for (RString ファイル名 : 主治医意見書イメージ_定型外) {
-            if (!存在したイメージファイル名.contains(ファイル名)) {
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
                 isNotExistsImageFile = false;
                 break;
             }
@@ -112,23 +112,23 @@ public class DeletePanelHandler {
             if (!isNotExistsImageFile) {
                 break;
             }
-            if (!存在したイメージファイル名.contains(ファイル名)) {
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
                 isNotExistsImageFile = false;
             }
         }
         if (isNotExistsImageFile) {
-            イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
+            return イメージファイルが存在区分_存在しない;
         }
-        if (!確認メッセージ出力要.equals(確認メッセージ出力区分)
-                && (存在したイメージファイル名.contains(new RString("E0001_BAK"))
-                || 存在したイメージファイル名.contains(new RString("E0002_BAK"))
-                || 存在したイメージファイル名.contains(new RString("D1005_BAK"))
-                || 存在したイメージファイル名.contains(new RString("D1008_BAK"))
-                || 存在したイメージファイル名.contains(new RString("D1026_BAK"))
-                || 存在したイメージファイル名.contains(new RString("D1027_BAK")))) {
+        if (確認メッセージ出力要.equals(確認メッセージ出力区分)) {
             return イメージファイルが存在区分_マスキング有;
+        } else {
+            for (RString ファイル名 : get主治医意見書イメージ_原本あり()) {
+                if (isExistsMaskImageFile(ファイル名, 存在したイメージファイル名)) {
+                    return イメージファイルが存在区分_マスキング有;
+                }
+            }
         }
-        return イメージファイルが存在区分;
+        return RString.EMPTY;
     }
 
     /**
@@ -140,48 +140,53 @@ public class DeletePanelHandler {
      */
     public RString getその他資料のイメージファイルが存在区分(List<RString> 存在したイメージファイル名,
             RString 確認メッセージ出力区分) {
-        RString イメージファイルが存在区分 = RString.EMPTY;
         List<RString> その他資料イメージ = getその他資料イメージ();
         boolean isNotExistsImageFile = true;
         for (RString ファイル名 : その他資料イメージ) {
-            if (!存在したイメージファイル名.contains(ファイル名)) {
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
                 isNotExistsImageFile = false;
                 break;
             }
         }
         if (isNotExistsImageFile) {
-            イメージファイルが存在区分 = イメージファイルが存在区分_存在しない;
+            return イメージファイルが存在区分_存在しない;
         }
-        if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
+        if (確認メッセージ出力要.equals(確認メッセージ出力区分)) {
+            return イメージファイルが存在区分_マスキング有;
+        } else {
             for (RString ファイル名 : getその他資料イメージ_原本あり()) {
-                if (存在したイメージファイル名.contains(ファイル名.concat(イメージファイル原本名))) {
+                if (isExistsMaskImageFile(ファイル名, 存在したイメージファイル名)) {
                     return イメージファイルが存在区分_マスキング有;
                 }
             }
         }
-        return イメージファイルが存在区分;
+        return RString.EMPTY;
     }
 
     public void deleteGaikyoChosaImageFile(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath,
             List<RString> deleteImageFileList, boolean isMaskOnly) {
         List<RString> gaikyoChosaImageList = get調査票概況特記イメージ();
         List<RString> tokkiJikoImageList = get調査票特記イメージ();
+        List<RString> tokkiJikoMaskImageList = get調査票特記イメージ_原本あり();
 
         if (isMaskOnly) {
-            if (deleteImageFileList.contains(new RString("C0007_BAK"))) {
-                reNameImageFile(descriptor, localCopyPath, new RString("C0007_BAK"));
+            if (isExistsMaskImageFile(new RString("C0007"), deleteImageFileList)) {
+                reNameImageFile(descriptor, localCopyPath, new RString("C0007").concat(イメージファイル原本名).concat(イメージファイル拡張子));
                 SharedFile.deleteFileInEntry(descriptor, "C0007_BAK.png");
             }
-            deleteMaskSharedFileInEntry(descriptor, localCopyPath, tokkiJikoImageList, deleteImageFileList);
+            deleteMaskSharedFileInEntry(descriptor, localCopyPath, tokkiJikoMaskImageList, deleteImageFileList);
         } else {
             deleteAllSharedFileInEntry(descriptor, gaikyoChosaImageList, deleteImageFileList);
             deleteAllSharedFileInEntry(descriptor, tokkiJikoImageList, deleteImageFileList);
         }
     }
 
-    public void deleteGaikyoTokkiImageFile(ReadOnlySharedFileEntryDescriptor descriptor, List<RString> deleteImageFileList) {
-        if (deleteImageFileList.contains(new RString("G0001"))) {
-            SharedFile.deleteFileInEntry(descriptor, "G0001.png");
+    public void deleteGaikyoTokkiImageFile(ReadOnlySharedFileEntryDescriptor descriptor, List<RString> deleteImageFileList,
+            boolean isMaskOnly) {
+        if (!isMaskOnly) {
+            if (isExistsImageFile(new RString("G0001"), deleteImageFileList)) {
+                SharedFile.deleteFileInEntry(descriptor, "G0001.png");
+            }
         }
     }
 
@@ -189,10 +194,10 @@ public class DeletePanelHandler {
             List<RString> deleteImageFileList, boolean isMaskOnly) {
         List<RString> teikeigaiOpinionImageFileList = get主治医意見書イメージ_定型外();
         List<RString> teikeiOpinionImageFileList = get主治医意見書イメージ_定型();
+        List<RString> opinionMaskImageFileList = get主治医意見書イメージ_原本あり();
 
         if (isMaskOnly) {
-            deleteMaskSharedFileInEntry(descriptor, localCopyPath, teikeigaiOpinionImageFileList, deleteImageFileList);
-            deleteMaskSharedFileInEntry(descriptor, localCopyPath, teikeiOpinionImageFileList, deleteImageFileList);
+            deleteMaskSharedFileInEntry(descriptor, localCopyPath, opinionMaskImageFileList, deleteImageFileList);
         } else {
             deleteAllSharedFileInEntry(descriptor, teikeigaiOpinionImageFileList, deleteImageFileList);
             deleteAllSharedFileInEntry(descriptor, teikeiOpinionImageFileList, deleteImageFileList);
@@ -202,9 +207,10 @@ public class DeletePanelHandler {
     public void deleteOtherImageFile(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath,
             List<RString> deleteImageFileList, boolean isMaskOnly) {
         List<RString> otherImageFileList = getその他資料イメージ();
+        List<RString> otherMaskImageFileList = getその他資料イメージ_原本あり();
 
         if (isMaskOnly) {
-            deleteMaskSharedFileInEntry(descriptor, localCopyPath, otherImageFileList, deleteImageFileList);
+            deleteMaskSharedFileInEntry(descriptor, localCopyPath, otherMaskImageFileList, deleteImageFileList);
         } else {
             deleteAllSharedFileInEntry(descriptor, otherImageFileList, deleteImageFileList);
         }
@@ -213,7 +219,7 @@ public class DeletePanelHandler {
     private void deleteAllSharedFileInEntry(ReadOnlySharedFileEntryDescriptor descriptor, List<RString> deleteTargetImageFileList,
             List<RString> deleteImageFileList) {
         for (RString deleteTargetImageFile : deleteTargetImageFileList) {
-            if (deleteImageFileList.contains(deleteTargetImageFile)) {
+            if (isExistsImageFile(deleteTargetImageFile, deleteImageFileList)) {
                 SharedFile.deleteFileInEntry(descriptor, deleteTargetImageFile.toString());
             }
         }
@@ -222,7 +228,7 @@ public class DeletePanelHandler {
     private void deleteMaskSharedFileInEntry(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath,
             List<RString> deleteTargetImageFileList, List<RString> deleteImageFileList) {
         for (RString deleteTargetImageFile : deleteTargetImageFileList) {
-            if (deleteImageFileList.contains(deleteTargetImageFile.concat(イメージファイル原本名))) {
+            if (isExistsMaskImageFile(deleteTargetImageFile, deleteImageFileList)) {
                 reNameImageFile(descriptor, localCopyPath,
                         deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子));
                 SharedFile.deleteFileInEntry(descriptor,
@@ -246,6 +252,24 @@ public class DeletePanelHandler {
     private RString reName(RString targetName) {
         targetName.replace("_BAK", "");
         return targetName;
+    }
+
+    private boolean isExistsImageFile(RString ファイル名, List<RString> 存在したイメージファイル名) {
+        for (RString existImageFile : 存在したイメージファイル名) {
+            if (existImageFile.contains(ファイル名)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isExistsMaskImageFile(RString ファイル名, List<RString> 存在したイメージファイル名) {
+        for (RString existImageFile : 存在したイメージファイル名) {
+            if (existImageFile.contains(ファイル名.concat(イメージファイル原本名))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private List<RString> get調査票概況特記イメージ() {
@@ -439,6 +463,17 @@ public class DeletePanelHandler {
         主治医意見書イメージ_定型.add(new RString("D1030"));
         主治医意見書イメージ_定型.add(new RString("D1031"));
         return 主治医意見書イメージ_定型;
+    }
+
+    private List<RString> get主治医意見書イメージ_原本あり() {
+        List<RString> 主治医意見書イメージ_原本あり = new ArrayList<>();
+        主治医意見書イメージ_原本あり.add(new RString("E0001"));
+        主治医意見書イメージ_原本あり.add(new RString("E0002"));
+        主治医意見書イメージ_原本あり.add(new RString("D1005"));
+        主治医意見書イメージ_原本あり.add(new RString("D1008"));
+        主治医意見書イメージ_原本あり.add(new RString("D1026"));
+        主治医意見書イメージ_原本あり.add(new RString("D1027"));
+        return 主治医意見書イメージ_原本あり;
     }
 
     private List<RString> getその他資料イメージ() {

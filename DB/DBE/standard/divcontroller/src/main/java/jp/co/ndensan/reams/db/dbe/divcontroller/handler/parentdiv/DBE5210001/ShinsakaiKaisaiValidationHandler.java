@@ -54,6 +54,12 @@ public class ShinsakaiKaisaiValidationHandler {
         this.div = div;
     }
 
+    /**
+     * 登録対象についてチェックします。
+     *
+     * @param 結果情報 結果情報
+     * @return メッセージ
+     */
     public ValidationMessageControlPairs validate(ShinsakaiKaisaiYoteiJoho2 結果情報) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         yoteiStartToKaisaiEndTimeCheck(validationMessages);
@@ -288,6 +294,12 @@ public class ShinsakaiKaisaiValidationHandler {
         }
     }
 
+    /**
+     * 出席時間と遅刻が妥当かをチェックします。
+     *
+     * @param row チェック対象
+     * @return メッセージ
+     */
     ValidationMessageControlPair 出席時間Check(dgShinsakaiIinIchiran_Row row) {
         if (row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称())) {
             return null;
@@ -299,7 +311,6 @@ public class ShinsakaiKaisaiValidationHandler {
             return null;
         }
         RTime 委員出席時刻 = row.getShussekiTime().getValue();
-        RTime 委員退席時刻 = row.getTaisekiTime().getValue();
         if (is遅刻有無内容が遅刻 && 審査会開催時刻.equals(委員出席時刻)) {
             return new ValidationMessageControlPair(
                     new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
@@ -318,6 +329,12 @@ public class ShinsakaiKaisaiValidationHandler {
         return null;
     }
 
+    /**
+     * 退席時間と早退が妥当かをチェックします。
+     *
+     * @param row チェック対象
+     * @return メッセージ
+     */
     ValidationMessageControlPair 退席時間Check(dgShinsakaiIinIchiran_Row row) {
         if (row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称())) {
             return null;
@@ -353,6 +370,13 @@ public class ShinsakaiKaisaiValidationHandler {
         return null;
     }
 
+    /**
+     * 一覧データグリッドの行内容から対象者を含めたエラー文言を生成します。
+     *
+     * @param 内容 内容
+     * @param row row
+     * @return エラー文言
+     */
     RString createエラー文言(RString 内容, dgShinsakaiIinIchiran_Row row) {
         return 内容.concat(対象文言).concat(row.getShimei()).concat(row.getGichoKubun().getSelectedValue());
     }

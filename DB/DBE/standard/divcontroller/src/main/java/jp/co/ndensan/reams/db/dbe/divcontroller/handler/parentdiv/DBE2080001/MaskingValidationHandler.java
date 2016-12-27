@@ -47,10 +47,22 @@ public class MaskingValidationHandler {
         return pairs;
     }
 
+    /**
+     * マスキング完了対象者一覧データの完了可能チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs マスキング完了対象者一覧データの完了可能チェック(ValidationMessageControlPairs pairs) {
+        pairs.add(new ValidationMessageControlPair(MaskingMessages.マスキング完了対象者一覧データの完了可能チェック));
+        return pairs;
+    }
+
     private static enum MaskingMessages implements IValidationMessage {
 
         マスキング完了対象者一覧データの存在チェック(UrErrorMessages.該当データなし),
-        マスキング完了対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択);
+        マスキング完了対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択),
+        マスキング完了対象者一覧データの完了可能チェック(UrErrorMessages.更新不可_汎用, "主治医意見書がマスキングされていない");
         private final Message message;
 
         private MaskingMessages(IMessageGettable message, String... replacements) {

@@ -161,6 +161,12 @@ public class NinteiChosaJokyoFinder {
         return new KaigoJigyosha(entity);
     }
 
+    /**
+     * 申請者管理番号から認定調査状況共有子Div用データ構造を取得します。
+     *
+     * @param 申請者管理番号 申請者管理番号
+     * @return 認定調査状況共有子Div用データ構造
+     */
     public NinteiChosaJokyoDataPass get認定調査状況DataPass(ShinseishoKanriNo 申請者管理番号) {
         // TODO 本来であれば適切な業務概念を導入するべき
         NinteiChosaJokyoDataPass 認定調査状況 = new NinteiChosaJokyoDataPass();

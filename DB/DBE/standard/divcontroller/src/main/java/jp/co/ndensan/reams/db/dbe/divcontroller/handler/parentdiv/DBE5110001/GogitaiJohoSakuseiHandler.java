@@ -32,8 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -74,7 +74,7 @@ public class GogitaiJohoSakuseiHandler {
         GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
         SearchResult<KeyValueDataSource> resultList = service.getKaisaiBashoList();
         div.getDdlkaisaibasho().setDataSource(resultList.records());
-        div.getRadHyojiJoken().setSelectedKey(RAD_KEY_1);
+        div.getRadHyojiJoken().setSelectedKey(RAD_KEY_0);
         div.getDgGogitaiIchiran().getDataSource().clear();
         div.getRadSeishinkaiSonzai().setSelectedKey(RAD_KEY_1);
         div.getRadDummyFlag().setSelectedKey(RAD_KEY_0);
@@ -96,10 +96,18 @@ public class GogitaiJohoSakuseiHandler {
      */
     public void 合議体情報一覧初期設定(List<GogitaiJoho> resultList) {
         List<dgGogitaiIchiran_Row> rowList = new ArrayList<>();
+        FlexibleDate 現在日付 = FlexibleDate.getNowDate();
         int i = 0;
         for (GogitaiJoho result : resultList) {
             if (i < div.getKensakujyoken().getTxtDispMax().getValue().intValue()) {
                 dgGogitaiIchiran_Row row = new dgGogitaiIchiran_Row();
+                if (result.get合議体有効期間開始年月日().isBeforeOrEquals(現在日付) && 現在日付.isBeforeOrEquals(result.get合議体有効期間終了年月日())) {
+                    row.setModifyButtonState(DataGridButtonState.Enabled);
+                    row.setDeleteButtonState(DataGridButtonState.Enabled);
+                } else {
+                    row.setModifyButtonState(DataGridButtonState.Disabled);
+                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                }
                 row.setJyotai(RString.EMPTY);
                 row.getGogitaiNumber().setValue(new Decimal(result.get合議体番号()));
                 row.setGogitaiName(result.get合議体名称());
@@ -236,7 +244,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getBtnCSVShutsuryoku().setDisabled(flag);
         div.getUploadFileToroku().setDisabled(flag);
         div.getKensakujyoken().setDisabled(flag);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, flag);
+//        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_FIELD_NAME, flag);
     }
 
     /**

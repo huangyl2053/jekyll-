@@ -47,10 +47,11 @@ public class SabisuJyoukyoA4 {
     private static final Code A_06 = new Code("06A");
     private static final Code A_09 = new Code("09A");
     private static final Code B_09 = new Code("09B");
-    private static final RString 記号 = new RString("+");
     private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
     private static final int 基準時間算出用_10 = 10;
+    private static final int 基準時間算出用_5 = 5;
+    private static final int 基準時間算出用_12 = 12;
 
     /**
      * 項目の設定する。
@@ -291,6 +292,6 @@ public class SabisuJyoukyoA4 {
     }
 
     private int getNumber(int 各基準時間) {
-        return 各基準時間 * 5 / 12;
+        return 各基準時間 * 基準時間算出用_5 / 基準時間算出用_12;
     }
 }

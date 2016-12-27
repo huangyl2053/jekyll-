@@ -745,7 +745,7 @@ public class NinteichosaItakusakiMasterHandler {
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue());
         builder.append(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue());
-        builder.append(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin()== null
+        builder.append(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue());
         return builder.toRString();
     }

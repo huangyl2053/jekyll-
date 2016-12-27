@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,6 +27,22 @@ public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
     private DataTorikomiDiv DataTorikomi;
     @JsonProperty("uploadPanel")
     private uploadPanelDiv uploadPanel;
+    @JsonProperty("hdnTxtKaisaiKaisuKekka")
+    private RString hdnTxtKaisaiKaisuKekka;
+    @JsonProperty("hdnTxtKensuShinsaKekka")
+    private RString hdnTxtKensuShinsaKekka;
+    @JsonProperty("hdnTxtKensuShinsaIin")
+    private RString hdnTxtKensuShinsaIin;
+    @JsonProperty("hdnTxtKensuShinsakaiJoho")
+    private RString hdnTxtKensuShinsakaiJoho;
+    @JsonProperty("hdnTxtKaisaiKaisuIin")
+    private RString hdnTxtKaisaiKaisuIin;
+    @JsonProperty("hdnTxtKaisaiKaisuJoho")
+    private RString hdnTxtKaisaiKaisuJoho;
+    @JsonProperty("hdnTxtKensuNintei")
+    private RString hdnTxtKensuNintei;
+    @JsonProperty("hdnTxtKaisaiKaisuNintei")
+    private RString hdnTxtKaisaiKaisuNintei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,6 +84,150 @@ public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
     @JsonProperty("uploadPanel")
     public void setUploadPanel(uploadPanelDiv uploadPanel) {
         this.uploadPanel = uploadPanel;
+    }
+
+    /*
+     * gethdnTxtKaisaiKaisuKekka
+     * @return hdnTxtKaisaiKaisuKekka
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuKekka")
+    public RString getHdnTxtKaisaiKaisuKekka() {
+        return hdnTxtKaisaiKaisuKekka;
+    }
+
+    /*
+     * sethdnTxtKaisaiKaisuKekka
+     * @param hdnTxtKaisaiKaisuKekka hdnTxtKaisaiKaisuKekka
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuKekka")
+    public void setHdnTxtKaisaiKaisuKekka(RString hdnTxtKaisaiKaisuKekka) {
+        this.hdnTxtKaisaiKaisuKekka = hdnTxtKaisaiKaisuKekka;
+    }
+
+    /*
+     * gethdnTxtKensuShinsaKekka
+     * @return hdnTxtKensuShinsaKekka
+     */
+    @JsonProperty("hdnTxtKensuShinsaKekka")
+    public RString getHdnTxtKensuShinsaKekka() {
+        return hdnTxtKensuShinsaKekka;
+    }
+
+    /*
+     * sethdnTxtKensuShinsaKekka
+     * @param hdnTxtKensuShinsaKekka hdnTxtKensuShinsaKekka
+     */
+    @JsonProperty("hdnTxtKensuShinsaKekka")
+    public void setHdnTxtKensuShinsaKekka(RString hdnTxtKensuShinsaKekka) {
+        this.hdnTxtKensuShinsaKekka = hdnTxtKensuShinsaKekka;
+    }
+
+    /*
+     * gethdnTxtKensuShinsaIin
+     * @return hdnTxtKensuShinsaIin
+     */
+    @JsonProperty("hdnTxtKensuShinsaIin")
+    public RString getHdnTxtKensuShinsaIin() {
+        return hdnTxtKensuShinsaIin;
+    }
+
+    /*
+     * sethdnTxtKensuShinsaIin
+     * @param hdnTxtKensuShinsaIin hdnTxtKensuShinsaIin
+     */
+    @JsonProperty("hdnTxtKensuShinsaIin")
+    public void setHdnTxtKensuShinsaIin(RString hdnTxtKensuShinsaIin) {
+        this.hdnTxtKensuShinsaIin = hdnTxtKensuShinsaIin;
+    }
+
+    /*
+     * gethdnTxtKensuShinsakaiJoho
+     * @return hdnTxtKensuShinsakaiJoho
+     */
+    @JsonProperty("hdnTxtKensuShinsakaiJoho")
+    public RString getHdnTxtKensuShinsakaiJoho() {
+        return hdnTxtKensuShinsakaiJoho;
+    }
+
+    /*
+     * sethdnTxtKensuShinsakaiJoho
+     * @param hdnTxtKensuShinsakaiJoho hdnTxtKensuShinsakaiJoho
+     */
+    @JsonProperty("hdnTxtKensuShinsakaiJoho")
+    public void setHdnTxtKensuShinsakaiJoho(RString hdnTxtKensuShinsakaiJoho) {
+        this.hdnTxtKensuShinsakaiJoho = hdnTxtKensuShinsakaiJoho;
+    }
+
+    /*
+     * gethdnTxtKaisaiKaisuIin
+     * @return hdnTxtKaisaiKaisuIin
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuIin")
+    public RString getHdnTxtKaisaiKaisuIin() {
+        return hdnTxtKaisaiKaisuIin;
+    }
+
+    /*
+     * sethdnTxtKaisaiKaisuIin
+     * @param hdnTxtKaisaiKaisuIin hdnTxtKaisaiKaisuIin
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuIin")
+    public void setHdnTxtKaisaiKaisuIin(RString hdnTxtKaisaiKaisuIin) {
+        this.hdnTxtKaisaiKaisuIin = hdnTxtKaisaiKaisuIin;
+    }
+
+    /*
+     * gethdnTxtKaisaiKaisuJoho
+     * @return hdnTxtKaisaiKaisuJoho
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuJoho")
+    public RString getHdnTxtKaisaiKaisuJoho() {
+        return hdnTxtKaisaiKaisuJoho;
+    }
+
+    /*
+     * sethdnTxtKaisaiKaisuJoho
+     * @param hdnTxtKaisaiKaisuJoho hdnTxtKaisaiKaisuJoho
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuJoho")
+    public void setHdnTxtKaisaiKaisuJoho(RString hdnTxtKaisaiKaisuJoho) {
+        this.hdnTxtKaisaiKaisuJoho = hdnTxtKaisaiKaisuJoho;
+    }
+
+    /*
+     * gethdnTxtKensuNintei
+     * @return hdnTxtKensuNintei
+     */
+    @JsonProperty("hdnTxtKensuNintei")
+    public RString getHdnTxtKensuNintei() {
+        return hdnTxtKensuNintei;
+    }
+
+    /*
+     * sethdnTxtKensuNintei
+     * @param hdnTxtKensuNintei hdnTxtKensuNintei
+     */
+    @JsonProperty("hdnTxtKensuNintei")
+    public void setHdnTxtKensuNintei(RString hdnTxtKensuNintei) {
+        this.hdnTxtKensuNintei = hdnTxtKensuNintei;
+    }
+
+    /*
+     * gethdnTxtKaisaiKaisuNintei
+     * @return hdnTxtKaisaiKaisuNintei
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuNintei")
+    public RString getHdnTxtKaisaiKaisuNintei() {
+        return hdnTxtKaisaiKaisuNintei;
+    }
+
+    /*
+     * sethdnTxtKaisaiKaisuNintei
+     * @param hdnTxtKaisaiKaisuNintei hdnTxtKaisaiKaisuNintei
+     */
+    @JsonProperty("hdnTxtKaisaiKaisuNintei")
+    public void setHdnTxtKaisaiKaisuNintei(RString hdnTxtKaisaiKaisuNintei) {
+        this.hdnTxtKaisaiKaisuNintei = hdnTxtKaisaiKaisuNintei;
     }
 
     /*

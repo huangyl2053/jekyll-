@@ -101,8 +101,18 @@ public class GogitaiJohoSakusei {
     public ResponseData<GogitaiJohoSakuseiDiv> onLoad(GogitaiJohoSakuseiDiv div) {
         getHandler(div).load();
         getHandler(div).init最大表示件数();
+        boolean is現在有効な合議体のみ = false;
+        if (RAD_KEY_0.equals(div.getRadHyojiJoken().getSelectedKey())) {
+            is現在有効な合議体のみ = true;
+        }
+        int 最大表示件数 = div.getTxtDispMax().getValue().intValue();
+        SearchResult<GogitaiJoho> resultList = service.getDateGridList(
+                GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
+                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY,FlexibleDate.EMPTY , RString.EMPTY, 最大表示件数));
+        Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJoho = Models.create(resultList.records());
+        ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJoho);
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
-        ViewStateHolder.put(ViewStateKeys.合議体情報, Models.create(new ArrayList<GogitaiJoho>()));
+        getHandler(div).合議体情報一覧初期設定(resultList.records());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE_NAME, true);
         return ResponseData.of(div).respond();
     }
@@ -133,7 +143,7 @@ public class GogitaiJohoSakusei {
         int 最大表示件数 = div.getTxtDispMax().getValue().intValue();
         SearchResult<GogitaiJoho> resultList = service.getDateGridList(
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
-                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY, 最大表示件数));
+                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, 最大表示件数));
 
         Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJoho = Models.create(resultList.records());
         ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJoho);
@@ -417,6 +427,12 @@ public class GogitaiJohoSakusei {
             gogitaiJohoModel.add(gogitaiJoho);
             getHandler(div).合議体情報一覧更新(JYOTAI_NAME_UPD);
         }
+        for (dgGogitaiIchiran_Row row : div.getDgGogitaiIchiran().getDataSource()) {
+            if (row.getJyotai().equals(JYOTAI_CODE_ADD) || row.getJyotai().equals(JYOTAI_NAME_UPD)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE_NAME, false);
+                break;
+            }
+        }
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJohoModel);
         getHandler(div).合議体詳細情報初期状態設定();
@@ -590,7 +606,7 @@ public class GogitaiJohoSakusei {
         }
         SearchResult<GogitaiJohoSakuseiCSVEntity> resultList = service.getGogitaiJohoForCSV(
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
-                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, RString.EMPTY, 0));
+                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, 0));
 
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
