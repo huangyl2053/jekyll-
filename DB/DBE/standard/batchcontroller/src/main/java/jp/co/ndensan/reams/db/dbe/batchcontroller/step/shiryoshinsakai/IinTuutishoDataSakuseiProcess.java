@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -133,7 +134,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         item.setページ番号(RString.EMPTY);
         item.setカスタマーバーコード(RString.isNullOrEmpty(ReportUtil.getCustomerBarCode(psmJohoEntity.getYubinNo(), psmJohoEntity.getJusho()))
                 ? RString.EMPTY : ReportUtil.getCustomerBarCode(psmJohoEntity.getYubinNo(), psmJohoEntity.getJusho()));
-        item.set宛名郵便番号(psmJohoEntity.getYubinNo());
+        item.set宛名郵便番号(RString.isNullOrEmpty(psmJohoEntity.getYubinNo()) ? RString.EMPTY : new YubinNo(psmJohoEntity.getYubinNo()).getEditedYubinNo());
         item.set宛名住所(psmJohoEntity.getJusho());
         item.set宛名機関名(psmJohoEntity.getKikanMeisho());
         item.set宛名名称付与(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, 発行日, SubGyomuCode.DBE認定支援));

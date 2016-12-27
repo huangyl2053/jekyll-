@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSak
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -49,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -116,6 +118,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
+    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
 
     /**
      * 主治医意見書作成依頼の初期化です。
@@ -124,12 +127,11 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
-        LockingKey 排他キー
-                = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo")));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            div.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
-        }
+          //TODO:仕様不明
+//        if (!RealInitialLocker.tryGetLock(排他キー)) {
+//            div.setReadOnly(true);
+//            throw new PessimisticLockingException();
+//        }
         createHandler(div).load();
         div.getTxtShujiiIkensahoSakuseiIraiDay().setValue(RDate.getNowDate());
         div.getIraiprint().getTxtHakobi().setValue(RDate.getNowDate());
@@ -161,7 +163,19 @@ public class ShujiiIkenshoSakuseiIrai {
         div.getIraiprint().getTeishutsuIraiSho().setDisplayNone(提出意見書_出力有無);
         return ResponseData.of(div).respond();
     }
-
+    
+    /**
+     * 主治医意見書作成依頼のClose処理。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClose_SakuseiIrai(ShujiiIkenshoSakuseiIraiDiv div) {
+        //TODO:仕様不明
+//        RealInitialLocker.release(排他キー);
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 検索条件クリア処理です。
      *
@@ -385,7 +399,7 @@ public class ShujiiIkenshoSakuseiIrai {
                     rirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
                 }
                 manager.save主治医意見書作成依頼情報(
-                create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo,共通日), EntityDataState.Added);
+                        create主治医意見書作成依頼情報(div, row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo, 共通日), EntityDataState.Added);
                 RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
                 ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
                 NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param);
@@ -406,8 +420,8 @@ public class ShujiiIkenshoSakuseiIrai {
                 ikenshoIraiJoho = builder.build();
                 manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
                 manager.save主治医意見書作成依頼情報(
-                        create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
-                                Integer.parseInt(row.getRirekiNo().toString()) + 1,共通日), EntityDataState.Added);
+                        create主治医意見書作成依頼情報(div, row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
+                                Integer.parseInt(row.getRirekiNo().toString()) + 1, 共通日), EntityDataState.Added);
 
                 ShujiiIkenshoSakuseiIraiParameter param2 = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
                 NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param2);
@@ -426,12 +440,35 @@ public class ShujiiIkenshoSakuseiIrai {
                 builder.set論理削除フラグ(true);
                 ikenshoIraiJoho = builder.build();
                 manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+            } else if (row.getSelected() && !削除.equals(row.getStatus())) {
+                if (RString.isNullOrEmpty(row.getIraiKubun())) {
+                    //新規
+                    int rirekiNo = 数字_1;
+                    if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
+                        rirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
+                    }
+                    manager.save主治医意見書作成依頼情報(
+                            create主治医意見書作成依頼情報(div, row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo, 共通日), EntityDataState.Added);
+                } else {
+                    //修正
+                    RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                    ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
+                            row.getRirekiNo().toInt(), getHihokenshaNo(div));
+                    ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
+                    ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
+                    builder.set論理削除フラグ(true);
+                    ikenshoIraiJoho = builder.build();
+                    manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+                    manager.save主治医意見書作成依頼情報(
+                            create主治医意見書作成依頼情報(div, row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
+                                    Integer.parseInt(row.getRirekiNo().toString()) + 1, 共通日), EntityDataState.Added);
+                }
             }
         }
     }
 
-    private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(dgShinseishaIchiran_Row row, RString 設定方法, RString 期限日数, int rirekiNo,RDate 日付) {
-        ShujiiIkenshoIraiJohoBuilder builder = create主治医意見書作成依頼情報Builder(row, 設定方法, 期限日数, rirekiNo,日付);
+    private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row, RString 設定方法, RString 期限日数, int rirekiNo, RDate 日付) {
+        ShujiiIkenshoIraiJohoBuilder builder = create主治医意見書作成依頼情報Builder(div, row, 設定方法, 期限日数, rirekiNo, 日付);
         if (RString.isNullOrEmpty(row.getIraiKubun())) {
             builder.set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.初回.getCode());
         } else if (!row.getSakujoKbn()) {
@@ -440,8 +477,8 @@ public class ShujiiIkenshoSakuseiIrai {
         return builder.build();
     }
 
-    private ShujiiIkenshoIraiJohoBuilder create主治医意見書作成依頼情報Builder(dgShinseishaIchiran_Row row,
-            RString 設定方法, RString 期限日数, int rirekiNo,RDate 日付) {
+    private ShujiiIkenshoIraiJohoBuilder create主治医意見書作成依頼情報Builder(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row,
+            RString 設定方法, RString 期限日数, int rirekiNo, RDate 日付) {
         ShujiiIkenshoIraiJoho iraiJoho = new ShujiiIkenshoIraiJoho(new ShinseishoKanriNo(row.getShiseishoKanriNo()),
                 rirekiNo);
         ShujiiIkenshoIraiJohoBuilder builder = iraiJoho.createBuilderForEdit();
@@ -454,7 +491,9 @@ public class ShujiiIkenshoSakuseiIrai {
         if (日付 != null) {
             builder.set主治医意見書作成期限年月日(new FlexibleDate(日付.toDateString()));
         } else {
-            if (主治医意見書作成期限設定方法_1.equals(設定方法) && row.getShujiiIkenshoSakuseiIraiDay() != null) {
+            if (SELECTED_KEY1.equals(div.getRadkigen().getSelectedKey())) {
+                builder.set主治医意見書作成期限年月日(FlexibleDate.MAX);
+            } else if (主治医意見書作成期限設定方法_1.equals(設定方法) && row.getShujiiIkenshoSakuseiIraiDay() != null) {
                 builder.set主治医意見書作成期限年月日(new FlexibleDate(row.getShujiiIkenshoSakuseiIraiDay()
                         .getValue().plusDay(Integer.parseInt(期限日数.toString())).toDateString()));
             } else if (row.getShinseiDay() != null) {
@@ -1068,6 +1107,77 @@ public class ShujiiIkenshoSakuseiIrai {
 
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 意見書作成依頼チェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_iraiSho(ShujiiIkenshoSakuseiIraiDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 意見書作成依頼一覧表チェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_iraiIchiranHyo(ShujiiIkenshoSakuseiIraiDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * 主治医意見書記入用紙チェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_kinyoYoshi(ShujiiIkenshoSakuseiIraiDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * 主治医意見書記入用紙OCRチェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_kinyuYoshiOCR(ShujiiIkenshoSakuseiIraiDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * 主治医意見書記入用紙デザインチェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_kinyuYoshiDesign(ShujiiIkenshoSakuseiIraiDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * 主治医意見書作成料請求書デザインチェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_seikyuSho(ShujiiIkenshoSakuseiIraiDiv div) {
+        return ResponseData.of(div).respond();
+    }    
+
+     /**
+     * 介護保険指定医依頼兼主治医意見書提出依頼書チェック。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_teishutsuIraiSho(ShujiiIkenshoSakuseiIraiDiv div) {
+        return ResponseData.of(div).respond();
+    }    
+    
     
      /**
      * 対象選択ラジオボタン選択を設定します。

@@ -103,7 +103,8 @@ public class GaikyoTokkiIchiranEditor implements IGaikyoTokkiIchiranEditor {
 
     private RString get年度(RString 審査会番号) {
         if (!RString.isNullOrEmpty(審査会番号)) {
-            return new FlexibleYear(審査会番号.substring(0, INT_4)).wareki().firstYear(FirstYear.GAN_NEN).toDateString();
+            return new FlexibleYear(審査会番号.substring(0, INT_4)).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
         }
         return RString.EMPTY;
     }

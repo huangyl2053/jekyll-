@@ -160,16 +160,6 @@ public class ImageJohoMaskingHandler {
             } else {
                 row.set主治医意見(RString.EMPTY);
             }
-//            try {
-//                row.set調査票特記(GenponMaskKubun.toValue(result.get特記マスク区分()).get名称());
-//            } catch (IllegalArgumentException e) {
-//                row.set調査票特記(RString.EMPTY);
-//            }
-//            try {
-//                row.set主治医意見(GenponMaskKubun.toValue(result.get意見書マスク区分()).get名称());
-//            } catch (IllegalArgumentException e) {
-//                row.set主治医意見(RString.EMPTY);
-//            }
             row.get意見書受領日().setValue(result.get主治医意見書受領年月日());
             row.get調査票受領日().setValue(result.get認定調査受領年月日());
             row.set申請書管理番号(result.get申請書管理番号().value());
@@ -373,9 +363,7 @@ public class ImageJohoMaskingHandler {
                 IkenshoImageJohoBuilder builder = imageJoho.createBuilderForEdit();
 
 //                builder.set認定申請年(Integer.parseInt(taishoshaRow.get認定申請年().toString()));
-
 //                builder.set共有ファイルID(RDateTime.parse(taishoshaRow.get共有ファイルID().toString()));
-
                 imageJohoManager.save要介護認定意見書イメージ情報(builder.build());
 
             } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
