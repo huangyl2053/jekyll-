@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
@@ -33,11 +33,11 @@ import static org.mockito.Mockito.when;
  * @author n8429
  */
 //@Ignore
-public class DBE250001_NinteiChoshaKekkaTorikomiTest {
+public class DBE250001_NinteiChosaKekkaTorikomiTest {
 
     private static BatchFlowTestHelper flowHelper;
 
-    public DBE250001_NinteiChoshaKekkaTorikomiTest() {
+    public DBE250001_NinteiChosaKekkaTorikomiTest() {
     }
 
     @BeforeClass
@@ -67,13 +67,13 @@ public class DBE250001_NinteiChoshaKekkaTorikomiTest {
         setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
         BatchExitStatus result = flowHelper.executeFlow(new RString("DBE250001_NinteiChoshaKekkaTorikomi"),
                 new RString("認定支援"),
-                DBE250001_NinteiChoshaKekkaTorikomi.class,
+                DBE250001_NinteiChosaKekkaTorikomi.class,
                 createParameter());
         assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
     }
 
-    private static DBE250001_NinteiChoshaKekkaTorikomiParameter createParameter() {
-        DBE250001_NinteiChoshaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChoshaKekkaTorikomiParameter();
+    private static DBE250001_NinteiChosaKekkaTorikomiParameter createParameter() {
+        DBE250001_NinteiChosaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChosaKekkaTorikomiParameter();
         RString path = new RString("db|EucOther_DBA701002_186|2016-12-12 16:47:59.649232");
         batchFlowParameter.set共有ファイルエントリ情報文字列(path);
 
