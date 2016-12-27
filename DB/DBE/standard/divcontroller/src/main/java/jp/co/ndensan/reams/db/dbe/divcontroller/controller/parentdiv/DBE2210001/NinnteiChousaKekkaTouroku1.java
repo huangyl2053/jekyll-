@@ -923,6 +923,7 @@ public class NinnteiChousaKekkaTouroku1 {
         getValidationHandler().validateFor第4群の必須入力(pairs, div);
         getValidationHandler().validateFor第5群の必須入力(pairs, div);
         getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+        pairs.add(div.getCcdChosaJisshishaJoho().validate());
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

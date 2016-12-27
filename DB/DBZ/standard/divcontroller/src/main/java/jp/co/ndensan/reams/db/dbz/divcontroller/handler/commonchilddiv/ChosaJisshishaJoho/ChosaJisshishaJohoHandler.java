@@ -18,12 +18,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho.ChosaJisshishaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  *
@@ -60,6 +62,19 @@ public class ChosaJisshishaJohoHandler {
         } else {
             setShokai(key);
         }
+    }
+
+    /**
+     * バリデーション結果を取得します。
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validate() {
+        ValidationMessageControlPairs validationResult = new ValidationMessageControlPairs();
+        ChosaJisshishaJohoValidationHandler validator = new ChosaJisshishaJohoValidationHandler(div);
+        validationResult.add(validator.validate所属機関コード());
+        validationResult.add(validator.validate記入者コード());
+        return validationResult;
     }
 
     private void setInput(ChosaJisshishaJohoModel key) {
