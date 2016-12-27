@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikom
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBE-1841-020 xuyongchao
  */
 public class DataTorikomiEdit {
+
+    public static final int HOUR = 60;
 
     /**
      * DbT5503ShinsakaiWariateIinJohoEntityのinsertメッソドです。
@@ -208,7 +210,7 @@ public class DataTorikomiEdit {
      * @param entity TempShinsakaiJohoEntity
      * @return DbT5511ShinsakaiKaisaiKekkaJohoEntity
      */
-    public DbT5511ShinsakaiKaisaiKekkaJohoEntity insertDbT5511Entity(TempShinsakaiJohoEntity entity) {
+    public DbT5511ShinsakaiKaisaiKekkaJohoEntity insertDbT5511Entity(TempShinsakaiJohoRelateEntity entity) {
         DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity = new DbT5511ShinsakaiKaisaiKekkaJohoEntity();
         return editDbT5511Entity(entity, dbt5511Entity);
     }
@@ -220,12 +222,12 @@ public class DataTorikomiEdit {
      * @param dbt5511Entity DbT5511ShinsakaiKaisaiKekkaJohoEntity
      * @return DbT5511ShinsakaiKaisaiKekkaJohoEntity
      */
-    public DbT5511ShinsakaiKaisaiKekkaJohoEntity updateDbT5511Entity(TempShinsakaiJohoEntity entity,
+    public DbT5511ShinsakaiKaisaiKekkaJohoEntity updateDbT5511Entity(TempShinsakaiJohoRelateEntity entity,
                                                                      DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity) {
         return editDbT5511Entity(entity, dbt5511Entity);
     }
 
-    private DbT5511ShinsakaiKaisaiKekkaJohoEntity editDbT5511Entity(TempShinsakaiJohoEntity entity,
+    private DbT5511ShinsakaiKaisaiKekkaJohoEntity editDbT5511Entity(TempShinsakaiJohoRelateEntity entity,
                                                                     DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity) {
         dbt5511Entity.setShinsakaiKaisaiNo(entity.get介護認定審査会開催番号());
         dbt5511Entity.setGogitaiNo(RString.isNullOrEmpty(entity.get合議体番号()) ? 0 : (int) Double.parseDouble(entity.get合議体番号().toString()));
@@ -233,6 +235,28 @@ public class DataTorikomiEdit {
                                             ? FlexibleDate.EMPTY : new FlexibleDate(entity.get介護認定審査会開催年月日()));
         dbt5511Entity.setShinsakaiKaishiTime(entity.get介護認定審査会開始時刻());
         dbt5511Entity.setShinsakaiShuryoTime(entity.get介護認定審査会終了時刻());
+        dbt5511Entity.setShinsakaiKaisaiBashoCode(RString.isNullOrEmpty(entity.get開催場所コード()) ? RString.EMPTY : entity.get開催場所コード());
+        dbt5511Entity.setShoyoJikanGokei(getTime(entity.get介護認定審査会開始時刻(), entity.get介護認定審査会終了時刻()));
+        dbt5511Entity.setShinsakaiJisshiNinzu(entity.get実施人数());
         return dbt5511Entity;
+    }
+
+    /**
+     * 所要時間を計算します。終了時刻が開始時刻より後である前提で計算します。
+     *
+     * @param start 開始時刻
+     * @param end 終了時刻
+     * @return 所要時間（分）
+     */
+    private int getTime(RString start, RString end) {
+        if (RString.isNullOrEmpty(start) || RString.isNullOrEmpty(end) || start.length() < 3 || end.length() < 3) {
+            return 0;
+        }
+        int start_hour = Integer.parseInt(start.substring(0, start.length() - 2).toString());
+        int start_minute = Integer.parseInt(start.substring(start.length() - 2).toString());
+        int end_hour = Integer.parseInt(end.substring(0, end.length() - 2).toString());
+        int end_minute = Integer.parseInt(end.substring(end.length() - 2).toString());
+
+        return ((end_hour - start_hour) * HOUR) + (end_minute - start_minute);
     }
 }
