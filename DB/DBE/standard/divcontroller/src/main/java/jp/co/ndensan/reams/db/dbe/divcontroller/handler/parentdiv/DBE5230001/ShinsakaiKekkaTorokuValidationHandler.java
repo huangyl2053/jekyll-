@@ -35,6 +35,11 @@ public class ShinsakaiKekkaTorokuValidationHandler {
         this.div = div;
     }
 
+    /**
+     * 個別入力欄への入力チェックを行います。
+     *
+     * @return メッセージのリスト
+     */
     public ValidationMessageControlPairs validate個別() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         有効月数チェック(validationMessages);
@@ -46,6 +51,11 @@ public class ShinsakaiKekkaTorokuValidationHandler {
         return validationMessages;
     }
 
+    /**
+     * 全体部分の入力チェックを行います。
+     *
+     * @return メッセージのリスト
+     */
     public ValidationMessageControlPairs validate全体() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         対象者一覧件数チェック(validationMessages);

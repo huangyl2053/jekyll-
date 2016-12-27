@@ -125,6 +125,9 @@ public class ShinsakaiKaisaiKekkaHandler {
         div.getDgShinsakaiIinIchiran().setDataSource(dataGridList);
     }
 
+    /**
+     * 審査会登録入力不可となるようコントロールの表示制御をします。
+     */
     public void set審査会登録入力不可() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_UPDATE, Boolean.TRUE);
         div.setDisabled(true);
