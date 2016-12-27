@@ -119,10 +119,10 @@
                 AND dbt5101."ninteiShinseiYMD" <![CDATA[<=]]> #{申請日_終了}
             </if>
             <if test="ninnteiKaishi">
-                AND #{認定日_開始} <![CDATA[<=]]> dbt5102."nijiHanteiNinteiYukoKaishiYMD"
+                AND #{認定日_開始} <![CDATA[<=]]> dbt5102."nijiHanteiYMD"
             </if>
             <if test="ninnteiShuuryou">
-                AND dbt5102."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{認定日_終了}
+                AND dbt5102."nijiHanteiYMD" <![CDATA[<=]]> #{認定日_終了}
             </if>
           ORDER BY
             dbt5101."hihokenshaNo" 
@@ -265,7 +265,7 @@
            , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
            , G."ninteichosaIraiYMD"                     AS "G_ninteichosaIraiYMD"
            , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
-           , I."jigyoshaNo"                             AS "I_jigyoshaNo"
+           , I."ninteichosaItakusakiCode"               AS "I_jigyoshaNo"
            , I."chosaItakuKubun"                        AS "I_chosaItakuKubun"
            , G."ninteiChosainCode"                      AS "G_ninteiChosainCode"
            , J."chosainShikaku"                         AS "J_chosainShikaku"
@@ -539,7 +539,7 @@
               ORDER BY
                 P003."remban"
             ) AS P02 
-              ON A."shinseishoKanriNo" = P02."P02_shinseishoKanriNo" 
+              ON A."shinseishoKanriNo" = P02."shinseishoKanriNo" 
             LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS Z 
               ON T."zenkaiShinseishoKanriNo" = Z."shinseishoKanriNo" 
               AND NOT EXISTS ( 
@@ -563,7 +563,7 @@
               ) 
                   LEFT JOIN ( 
               SELECT
-                A."shinseishoKanriNo" AS "A2_shinseishoKanriNo"
+                T."shinseishoKanriNo" AS "A2_shinseishoKanriNo"
                     ,A."ninteiShinseiYMD" AS "A2_ninteiShinseiYMD"
                     ,A."koroshoIfShikibetsuCode" AS "A2_koroshoIfShikibetsuCode"
               FROM
@@ -572,7 +572,7 @@
               WHERE
                 A."shinseishoKanriNo" = T."zenkaiShinseishoKanriNo" 
               ORDER BY
-                A."shinseishoKanriNo"
+                T."shinseishoKanriNo"
             ) AS A2 
               ON A."shinseishoKanriNo" = A2."A2_shinseishoKanriNo" 
           WHERE

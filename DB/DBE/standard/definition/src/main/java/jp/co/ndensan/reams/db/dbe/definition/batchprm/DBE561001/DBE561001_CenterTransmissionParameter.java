@@ -25,12 +25,16 @@ public class DBE561001_CenterTransmissionParameter extends BatchParameterBase {
 
     private static final String SHINSEISHOKANRINOLIST = "shinseishoKanriNoList";
     private static final String TENNYUSHIBOKUBUN = "tennyuShiboKubun";
+    private static final String DATASHUTSURYOKUKUBUN = "dataShutsuryokuKubun";
     private static final String NIJIHANTEIKAISHIYMD = "nijiHanteiKaishiYMD";
     private static final String NIJIHANTEISHURYOYMD = "nijiHanteiShuryoYMD";
     private static final RString 出力する = new RString(0);
+    private static final RString 未出力のみ = new RString(0);
 
     @BatchParameter(key = SHINSEISHOKANRINOLIST, name = "申請書管理番号リスト")
     private List<RString> 申請書管理番号リスト;
+    @BatchParameter(key = DATASHUTSURYOKUKUBUN, name = "データ出力区分")
+    private RString データ出力区分;
     @BatchParameter(key = TENNYUSHIBOKUBUN, name = "転入死亡情報出力区分")
     private RString 転入死亡情報出力区分;
     @BatchParameter(key = NIJIHANTEIKAISHIYMD, name = "二次判定開始日")
@@ -53,6 +57,7 @@ public class DBE561001_CenterTransmissionParameter extends BatchParameterBase {
     public CenterTransmissionProcessParameter toCenterTransmissionProcessParameter() {
         return new CenterTransmissionProcessParameter(
                 申請書管理番号リスト,
+                未出力のみ.equals(データ出力区分),
                 出力する.equals(転入死亡情報出力区分),
                 二次判定開始日,
                 二次判定終了日,

@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class NinteiShinseishaFinderHandler {
 
     private final NinteiShinseishaFinderDiv div;
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
 
     /**
      * コンストラクタです。
@@ -113,6 +115,10 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlShujiIkubun().setDataSource(ddlShujiIkubun);
         div.getShosaiJoken().setIsOpen(false);
+        List<RString> selectedItem = new ArrayList();
+        selectedItem.add(KEY0);
+        selectedItem.add(KEY1);
+        div.getChkSeibetsu().setSelectedItemsByKey(selectedItem);
         init二次判定結果DDL();
         initKihonJoho();
         initNinteiChosa();

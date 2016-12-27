@@ -720,7 +720,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTplShinseijoho(tplShinseijohoDiv tplShinseijoho) {
+    public void  setTplShinseijoho(tplShinseijohoDiv tplShinseijoho) {
         this.getTabShinseishaJoho().setTplShinseijoho(tplShinseijoho);
     }
 
@@ -735,58 +735,58 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public HomonSakiDiv getHomonSaki() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki();
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getCcdShujiiIryokikanAndShujiiInput();
     }
 
     @JsonIgnore
-    public void setHomonSaki(HomonSakiDiv HomonSaki) {
-        this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().setHomonSaki(HomonSaki);
+    public HomonSakiDiv getHomonSaki() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki();
+    }
+
+    @JsonIgnore
+    public void  setHomonSaki(HomonSakiDiv HomonSaki) {
+        this.getTabShinseishaJoho().getTplShinseijoho().setHomonSaki(HomonSaki);
     }
 
     @JsonIgnore
     public TextBox getTxtChosasakiName() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtChosasakiName();
+        return this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().getTxtChosasakiName();
     }
 
     @JsonIgnore
-    public void setTxtChosasakiName(TextBox txtChosasakiName) {
-        this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtChosasakiName(txtChosasakiName);
+    public void  setTxtChosasakiName(TextBox txtChosasakiName) {
+        this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().setTxtChosasakiName(txtChosasakiName);
     }
 
     @JsonIgnore
     public TextBoxYubinNo getTxtYubinNo() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtYubinNo();
+        return this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().getTxtYubinNo();
     }
 
     @JsonIgnore
-    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtYubinNo(txtYubinNo);
+    public void  setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+        this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().setTxtYubinNo(txtYubinNo);
     }
 
     @JsonIgnore
     public TextBoxJusho getTxtJusho() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtJusho();
+        return this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().getTxtJusho();
     }
 
     @JsonIgnore
-    public void setTxtJusho(TextBoxJusho txtJusho) {
-        this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtJusho(txtJusho);
+    public void  setTxtJusho(TextBoxJusho txtJusho) {
+        this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().setTxtJusho(txtJusho);
     }
 
     @JsonIgnore
     public TextBoxTelNo getTxtTelNo() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtTelNo();
+        return this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().getTxtTelNo();
     }
 
     @JsonIgnore
-    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
-        this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtTelNo(txtTelNo);
-    }
-
-    @JsonIgnore
-    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan().getCcdShujiiIryokikanAndShujiiInput();
+    public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
+        this.getTabShinseishaJoho().getTplShinseijoho().getHomonSaki().setTxtTelNo(txtTelNo);
     }
 
     @JsonIgnore
@@ -795,7 +795,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChosainAndChosainInput(ChosainAndChosainInputDiv ChosainAndChosainInput) {
+    public void  setChosainAndChosainInput(ChosainAndChosainInputDiv ChosainAndChosainInput) {
         this.getTabShinseishaJoho().getTplShinseijoho().setChosainAndChosainInput(ChosainAndChosainInput);
     }
 
@@ -810,7 +810,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShisetsuJoho(ShisetsuJohoDiv ShisetsuJoho) {
+    public void  setShisetsuJoho(ShisetsuJohoDiv ShisetsuJoho) {
         this.getTabShinseishaJoho().getTplShinseijoho().setShisetsuJoho(ShisetsuJoho);
     }
 
@@ -825,7 +825,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkNinteiTsuchishoDoi(CheckBoxList chkNinteiTsuchishoDoi) {
+    public void  setChkNinteiTsuchishoDoi(CheckBoxList chkNinteiTsuchishoDoi) {
         this.getTabShinseishaJoho().getTplShinseijoho().setChkNinteiTsuchishoDoi(chkNinteiTsuchishoDoi);
     }
 
@@ -835,13 +835,18 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkJohoTeikyoDoi(CheckBoxList chkJohoTeikyoDoi) {
+    public void  setChkJohoTeikyoDoi(CheckBoxList chkJohoTeikyoDoi) {
         this.getTabShinseishaJoho().getTplShinseijoho().setChkJohoTeikyoDoi(chkJohoTeikyoDoi);
     }
 
     @JsonIgnore
     public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
         return this.getTabShinseishaJoho().getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
+    }
+
+    @JsonIgnore
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
     }
 
     @JsonIgnore
@@ -860,17 +865,12 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
-    }
-
-    @JsonIgnore
     public tplEnkiDiv getTplEnki() {
         return this.getTabShinseishaJoho().getTplEnki();
     }
 
     @JsonIgnore
-    public void setTplEnki(tplEnkiDiv tplEnki) {
+    public void  setTplEnki(tplEnkiDiv tplEnki) {
         this.getTabShinseishaJoho().setTplEnki(tplEnki);
     }
 
@@ -880,7 +880,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtEnkiKetteiYMD(TextBoxDate txtEnkiKetteiYMD) {
+    public void  setTxtEnkiKetteiYMD(TextBoxDate txtEnkiKetteiYMD) {
         this.getTabShinseishaJoho().getTplEnki().setTxtEnkiKetteiYMD(txtEnkiKetteiYMD);
     }
 
@@ -900,7 +900,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblEnkiRiyu(Label lblEnkiRiyu) {
+    public void  setLblEnkiRiyu(Label lblEnkiRiyu) {
         this.getTabShinseishaJoho().getTplEnki().setLblEnkiRiyu(lblEnkiRiyu);
     }
 
@@ -910,7 +910,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnEnkiRiyuTeikeibun(ButtonDialog btnEnkiRiyuTeikeibun) {
+    public void  setBtnEnkiRiyuTeikeibun(ButtonDialog btnEnkiRiyuTeikeibun) {
         this.getTabShinseishaJoho().getTplEnki().setBtnEnkiRiyuTeikeibun(btnEnkiRiyuTeikeibun);
     }
 
@@ -920,7 +920,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtEnkiRiyu(TextBoxMultiLine txtEnkiRiyu) {
+    public void  setTxtEnkiRiyu(TextBoxMultiLine txtEnkiRiyu) {
         this.getTabShinseishaJoho().getTplEnki().setTxtEnkiRiyu(txtEnkiRiyu);
     }
 
@@ -930,7 +930,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtEnkiTsuchiHakkoYMD(TextBoxDate txtEnkiTsuchiHakkoYMD) {
+    public void  setTxtEnkiTsuchiHakkoYMD(TextBoxDate txtEnkiTsuchiHakkoYMD) {
         this.getTabShinseishaJoho().getTplEnki().setTxtEnkiTsuchiHakkoYMD(txtEnkiTsuchiHakkoYMD);
     }
 
@@ -940,7 +940,7 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtEnkiTsuchishoHakkoCount(TextBoxNum txtEnkiTsuchishoHakkoCount) {
+    public void  setTxtEnkiTsuchishoHakkoCount(TextBoxNum txtEnkiTsuchishoHakkoCount) {
         this.getTabShinseishaJoho().getTplEnki().setTxtEnkiTsuchishoHakkoCount(txtEnkiTsuchishoHakkoCount);
     }
 

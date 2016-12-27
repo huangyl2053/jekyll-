@@ -98,7 +98,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             ReportSourceWriter<ShujiiIkenshoSakuseiIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(),
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(set主治医意見書作成依頼(主治医意見書作成依頼情報ItemList, ninshosha)));
+            for (int i = 0; i < 主治医意見書作成依頼情報ItemList.size(); i++) {
+                ShujiiIkenshoSakuseiIraishoItem item = 主治医意見書作成依頼情報ItemList.get(i);
+                list.add(ShujiiIkenshoSakuseiIraishoReport.createFrom(set主治医意見書作成依頼(item, ninshosha)));
+            }
             for (ShujiiIkenshoSakuseiIraishoReport report : list) {
                 report.writeBy(reportSourceWriter);
             }
@@ -114,7 +117,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     public void print主治医意見書作成料請求書(List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書ItemList,
             ReportManager reportManager) {
         List<ShujiiIkenshoSakuseiRyoSeikyushoReport> list = new ArrayList<>();
-        list.add(ShujiiIkenshoSakuseiRyoSeikyushoReport.createFrom(主治医意見書作成料請求書ItemList));
+        for (int i = 0; i < 主治医意見書作成料請求書ItemList.size(); i++) {
+            ShujiiIkenshoSakuseiRyoSeikyushoItem item = 主治医意見書作成料請求書ItemList.get(i);
+            list.add(ShujiiIkenshoSakuseiRyoSeikyushoReport.createFrom(item));
+        }
         ShujiiIkenshoSakuseiRyoSeikyushoProperty property = new ShujiiIkenshoSakuseiRyoSeikyushoProperty();
         try (ReportAssembler<ShujiiIkenshoSakuseiRyoSeikyushoReportSource> assembler = createAssembler(property, reportManager)) {
             for (ShujiiIkenshoSakuseiRyoSeikyushoReport report : list) {
@@ -137,7 +143,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(),
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            list.add(KaigohokenShindanMeireishoReport.createFrom(set介護保険診断命令書(介護保険診断命令書ItemList, ninshosha)));
+            for (int i = 0; i < 介護保険診断命令書ItemList.size(); i++) {
+                KaigohokenShindanMeireishoHeaderItem item = 介護保険診断命令書ItemList.get(i);
+                list.add(KaigohokenShindanMeireishoReport.createFrom2(set介護保険診断命令書(item, ninshosha)));
+            }
             for (KaigohokenShindanMeireishoReport report : list) {
                 report.writeBy(reportSourceWriter);
             }
@@ -158,8 +167,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             ReportSourceWriter<ShujiiIkenshoTeishutsuIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE236001.getReportId(),
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(介護保険指定医依頼兼主治医意見書提出意見書ItemList,
-                    ninshosha)));
+            for (int i = 0; i < 介護保険指定医依頼兼主治医意見書提出意見書ItemList.size(); i++) {
+                ShujiiIkenshoTeishutsuIraishoItem item = 介護保険指定医依頼兼主治医意見書提出意見書ItemList.get(i);
+                list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(item,ninshosha)));
+            }
             for (ShujiiIkenshoTeishutsuIraishoReport report : list) {
                 report.writeBy(reportSourceWriter);
             }
@@ -180,8 +191,11 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-            list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom(set主治医意見書作成依頼一覧表認定者(
-                    主治医意見書作成依頼一覧表ItemList, ninshosha)));
+            for (int i = 0; i < 主治医意見書作成依頼一覧表ItemList.size(); i++) {
+                IkenshoSakuseiIraiIchiranhyoItem item = 主治医意見書作成依頼一覧表ItemList.get(i);
+                list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom2(set主治医意見書作成依頼一覧表認定者(
+                    item, ninshosha)));
+            }
             for (IkenshoSakuseiIraiIchiranhyoReport report : list) {
                 report.writeBy(reportSourceWriter);
             }
@@ -215,7 +229,10 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     public void print主治医意見書依頼該当者履歴一覧(List<IkenshoirairirekiIchiran> 主治医意見書依頼該当者履歴一覧ItemList,
             ReportManager reportManager) {
         List<IkenshoirairirekiIchiranReport> list = new ArrayList<>();
-        list.add(IkenshoirairirekiIchiranReport.createFrom(主治医意見書依頼該当者履歴一覧ItemList));
+        for (int i = 0; i < 主治医意見書依頼該当者履歴一覧ItemList.size(); i++) {
+            IkenshoirairirekiIchiran item = 主治医意見書依頼該当者履歴一覧ItemList.get(i);
+            list.add(IkenshoirairirekiIchiranReport.createFrom(item));
+        }
         IkenshoirairirekiIchiranProperty property = new IkenshoirairirekiIchiranProperty();
         try (ReportAssembler<IkenshoirairirekiIchiranReportSource> assembler = createAssembler(property, reportManager)) {
             for (IkenshoirairirekiIchiranReport report : list) {
@@ -225,9 +242,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         }
     }
 
-    private List<ShujiiIkenshoTeishutsuIraishoItem> setNishosha(List<ShujiiIkenshoTeishutsuIraishoItem> itemList, NinshoshaSource ninshosha) {
-        List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
-        for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
+    private ShujiiIkenshoTeishutsuIraishoItem setNishosha(ShujiiIkenshoTeishutsuIraishoItem item, NinshoshaSource ninshosha) {
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
@@ -236,15 +251,11 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
             item.setKoinMojiretsu(ninshosha.koinMojiretsu);
             item.setKoinShoryaku(ninshosha.koinShoryaku);
-            resultList.add(item);
-        }
-        return resultList;
+        return item;
     }
 
-    private List<IkenshoSakuseiIraiIchiranhyoItem> set主治医意見書作成依頼一覧表認定者(List<IkenshoSakuseiIraiIchiranhyoItem> itemList,
+    private IkenshoSakuseiIraiIchiranhyoItem set主治医意見書作成依頼一覧表認定者(IkenshoSakuseiIraiIchiranhyoItem item,
             NinshoshaSource ninshosha) {
-        List<IkenshoSakuseiIraiIchiranhyoItem> resultList = new ArrayList<>();
-        for (IkenshoSakuseiIraiIchiranhyoItem item : itemList) {
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
@@ -253,30 +264,24 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
             item.setKoinMojiretsu(ninshosha.koinMojiretsu);
             item.setKoinShoryaku(ninshosha.koinShoryaku);
-            resultList.add(item);
-        }
-        return resultList;
+        return item;
     }
 
-    private List<KaigohokenShindanMeireishoHeaderItem> set介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> itemList,
+    private KaigohokenShindanMeireishoHeaderItem set介護保険診断命令書(KaigohokenShindanMeireishoHeaderItem item,
             NinshoshaSource ninshosha) {
-        List<KaigohokenShindanMeireishoHeaderItem> resultList = new ArrayList<>();
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
                 ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1);
-        for (KaigohokenShindanMeireishoHeaderItem item : itemList) {
-            item.setDenshiKoin(ninshosha.denshiKoin);
-            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
-            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
-            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
-            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
-            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
-            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
-            item.setKoinShoryaku(ninshosha.koinShoryaku);
-            item.setTsuchibun1(通知文.get(数字_1));
-            item.setTsuchibun2(通知文.get(数字_2));
-            resultList.add(item);
-        }
-        return resultList;
+        item.setDenshiKoin(ninshosha.denshiKoin);
+        item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+        item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+        item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+        item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+        item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+        item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+        item.setKoinShoryaku(ninshosha.koinShoryaku);
+        item.setTsuchibun1(通知文.get(数字_1));
+        item.setTsuchibun2(通知文.get(数字_2));
+        return item;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T>
@@ -291,10 +296,8 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         return builder.<T>create();
     }
 
-    private List<ShujiiIkenshoSakuseiIraishoItem> set主治医意見書作成依頼(List<ShujiiIkenshoSakuseiIraishoItem> itemList,
+    private ShujiiIkenshoSakuseiIraishoItem set主治医意見書作成依頼(ShujiiIkenshoSakuseiIraishoItem item,
             NinshoshaSource ninshosha) {
-        List<ShujiiIkenshoSakuseiIraishoItem> resultList = new ArrayList<>();
-        for (ShujiiIkenshoSakuseiIraishoItem item : itemList) {
             item.setHakkoYMD1(item.getHakkoYMD1());
             item.setDenshiKoin(ninshosha.denshiKoin);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
@@ -347,8 +350,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             item.setTsuchibun2(item.getTsuchibun2());
             item.setRemban(item.getRemban());
             item.setShoriName(item.getShoriName());
-            resultList.add(item);
-        }
-        return resultList;
+        return item;
     }
 }

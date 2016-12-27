@@ -131,6 +131,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
                                 UrErrorMessages.実行不可, 依頼情報未指定.toString())));
+                return validationMessages;
             }
         }
         return validationMessages;

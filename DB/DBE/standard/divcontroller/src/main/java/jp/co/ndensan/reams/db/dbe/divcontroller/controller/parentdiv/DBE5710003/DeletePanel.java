@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -39,11 +40,11 @@ public class DeletePanel {
     private static final RString KEY_調査票概況 = new RString("2");
     private static final RString KEY_主治医意見書 = new RString("3");
     private static final RString KEY_その他資料 = new RString("4");
-    private RString 確認メッセージ出力区分;
     private static final RString 確認メッセージ出力要 = new RString("1");
     private static final RString KEY_マスキングを削除 = new RString("2");
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
     private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
+    private RString 確認メッセージ出力区分;
     private ReadOnlySharedFileEntryDescriptor descriptor;
 
     /**
@@ -67,13 +68,16 @@ public class DeletePanel {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).respond();
         }
+        
+        確認メッセージ出力区分 = RString.EMPTY;
         ImagekanriJoho イメージ管理情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         List<RString> 選択したイメージ対象 = div.getChkImage().getSelectedKeys();
+        boolean isMaskOnly = div.getRadDeleteTaisho().getSelectedKey().equals(KEY_マスキングを削除);
         ValidationMessageControlPairs controlPairs = getValidationHandler(div).入力チェック_btnDelete();
         if (controlPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(controlPairs).respond();
         }
-        確認メッセージ出力区分 = RString.EMPTY;
+        
         descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
                 イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号())),
                 イメージ管理情報.getイメージ共有ファイルID());
@@ -82,6 +86,10 @@ public class DeletePanel {
         if (イメージ削除チェック.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
         }
+        if (RString.isNullOrEmpty(確認メッセージ出力区分) && isMaskOnly) {
+            return ResponseData.of(div).addValidationMessages(getValidationHandler(div).マスクイメージファイル存在チェック()).respond();
+        }
+        
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -96,9 +104,8 @@ public class DeletePanel {
 //                updateOrDelete(div);
 //                return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
 //            } else {
-            boolean isMaskOnly = div.getRadDeleteTaisho().getSelectedKey().equals(KEY_マスキングを削除);
             deleteImageFile(localCopyPath, 選択したイメージ対象, 存在したイメージファイル名, isMaskOnly);
-//            updateOrDelete(div);
+            updateOrDelete(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
 
 //            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
@@ -120,7 +127,7 @@ public class DeletePanel {
             if (KEY_調査票特記.equals(selectDeleteImage)) {
                 getHandler().deleteGaikyoChosaImageFile(descriptor, localCopyPath, imageFileList, isMaskOnly);
             } else if (KEY_調査票概況.equals(selectDeleteImage)) {
-                getHandler().deleteGaikyoTokkiImageFile(descriptor, imageFileList);
+                getHandler().deleteGaikyoTokkiImageFile(descriptor, imageFileList, isMaskOnly);
             } else if (KEY_主治医意見書.equals(selectDeleteImage)) {
                 getHandler().deleteOpinionImageFile(descriptor, localCopyPath, imageFileList, isMaskOnly);
             } else if (KEY_その他資料.equals(selectDeleteImage)) {

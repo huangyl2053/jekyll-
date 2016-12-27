@@ -29,8 +29,6 @@ public class NinteichosaIraiListDiv extends Panel {
     private ButtonDownLoad btndataoutput;
     @JsonProperty("btniraiauto")
     private Button btniraiauto;
-    @JsonProperty("btnchosadataoutput")
-    private ButtonDownLoad btnchosadataoutput;
     @JsonProperty("btnTaOutput")
     private ButtonDialog btnTaOutput;
 
@@ -92,24 +90,6 @@ public class NinteichosaIraiListDiv extends Panel {
     @JsonProperty("btniraiauto")
     public void setBtniraiauto(Button btniraiauto) {
         this.btniraiauto = btniraiauto;
-    }
-
-    /*
-     * getbtnchosadataoutput
-     * @return btnchosadataoutput
-     */
-    @JsonProperty("btnchosadataoutput")
-    public ButtonDownLoad getBtnchosadataoutput() {
-        return btnchosadataoutput;
-    }
-
-    /*
-     * setbtnchosadataoutput
-     * @param btnchosadataoutput btnchosadataoutput
-     */
-    @JsonProperty("btnchosadataoutput")
-    public void setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
-        this.btnchosadataoutput = btnchosadataoutput;
     }
 
     /*

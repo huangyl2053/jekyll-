@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.NiJiHan
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShiSeiKeTuKeRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinsaKeTuKeRelateWithCountEntity;
 
 /**
  * 要介護認定申請情報＆構成市町村マスタ検索のインタフェイスです。
@@ -208,9 +208,9 @@ public interface IYokaigoNinteiTaskListMapper {
      * 審査受付モードによって、要介護認定申請情報＆構成市町村マスタを取得します。
      *
      * @param parameter YokaigoNinteiTaskListParameter
-     * @return List<ShinSaKeTuKeRelateEntity>
+     * @return ShinsaKeTuKeRelateWithCountEntity
      */
-    List<ShinSaKeTuKeRelateEntity> get審査受付(YokaigoNinteiTaskListParameter parameter);
+    ShinsaKeTuKeRelateWithCountEntity get審査受付(YokaigoNinteiTaskListParameter parameter);
 
     /**
      * 審査受付モードによって、要介護認定申請情報＆構成市町村マスタを取得します。

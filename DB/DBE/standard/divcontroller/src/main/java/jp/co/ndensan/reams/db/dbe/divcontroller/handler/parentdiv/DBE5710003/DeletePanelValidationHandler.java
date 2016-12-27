@@ -106,6 +106,17 @@ public class DeletePanelValidationHandler {
     }
 
     /**
+     * 「削除」ボタンを押下する場合、マスクイメージファイル存在チェックを実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs マスクイメージファイル存在チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.その他資料存在しない));
+        return validationMessages;
+    }
+
+    /**
      * 「削除」ボタンを押下する場合、調査票認定調査委託料支払年月日チェックを実行します。
      *
      * @return ValidationMessageControlPairs
@@ -134,6 +145,7 @@ public class DeletePanelValidationHandler {
         調査票概況存在しない(UrErrorMessages.存在しない, "調査票概況のイメージファイル"),
         主治医意見書存在しない(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),
         その他資料存在しない(UrErrorMessages.存在しない, "その他資料のイメージファイル"),
+        マスクイメージ存在しない(UrErrorMessages.存在しない, "マスクイメージファイル"),
         削除ファイル未指定(UrErrorMessages.未指定, "削除ファイルを"),
         調査票削除不可(UrErrorMessages.削除不可, "認定調査委託料が支払われた"),
         主治医意見書削除不可(UrErrorMessages.削除不可, "主治医意見書報酬が支払われた");

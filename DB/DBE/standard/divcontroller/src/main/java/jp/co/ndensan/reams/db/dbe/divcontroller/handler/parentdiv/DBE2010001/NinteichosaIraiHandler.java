@@ -53,6 +53,7 @@ public class NinteichosaIraiHandler {
     private static final RString KEY_未 = new RString("1");
     private static final RString KEY_可 = new RString("2");
     private static final RString 調査依頼完了ボタン = new RString("btnChousaIraiKanryo");
+    private static final RString モバイル出力ボタン = new RString("btnMobile");
 
     /**
      * コンストラクタです。
@@ -83,9 +84,9 @@ public class NinteichosaIraiHandler {
         }
         RString モバイル調査使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル調査使用有無, RDate.getNowDate());
         if (使用する.equals(モバイル調査使用有無)) {
-            div.getBtnchosadataoutput().setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, false);
         } else {
-            div.getBtnchosadataoutput().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, true);
         }
 
     }

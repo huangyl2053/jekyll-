@@ -252,6 +252,11 @@
         <result property="centerSoshinYMD"  column="centerSoshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="centerSoshinChushutsuYMD"  column="centerSoshinChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
+    <resultMap id="resultMap_ShinSaKeTuKeRelateWithCountEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinsaKeTuKeRelateWithCountEntity" autoMapping="true">
+        <id property="totalCount" column="totalCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <collection property="taishoshaList" resultMap="resultMap_ShinSaKeTuKeRelateEntity"
+                    ofType ="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity"/>
+    </resultMap>
     <resultMap id="resultMap_ShinSaKeTuKeRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
@@ -1891,9 +1896,10 @@
         DbT5101."shoKisaiHokenshaNo"
         LIMIT #{件数}
     </select>
-    <select resultOrdered="true" id="get審査受付" resultMap="resultMap_ShinSaKeTuKeRelateEntity"
+    <select resultOrdered="true" id="get審査受付" resultMap="resultMap_ShinSaKeTuKeRelateWithCountEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
+        COUNT(*) OVER () AS "totalCount",
         DbT5101."shinseishoKanriNo",
         DbT5101."ninteiShinseiShinseijiKubunCode",
         DbT5101."hihokenshaNo",
@@ -1926,6 +1932,7 @@
         ORDER BY  DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",
         DbT5101."shoKisaiHokenshaNo"
+        LIMIT #{件数}
     </select>
     <resultMap id="resultMap_ShinSaKeTuKeRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>

@@ -138,8 +138,8 @@ public class ChosaTokkiImageShokaiHandler {
             if (!RString.isNullOrEmpty(前回認定調査特記事項番号)
                     && (!前回認定調査特記事項番号.equals(認定調査特記事項Entity.get認定調査特記事項番号())
                     || 前回認定調査特記事項連番 != 認定調査特記事項Entity.get認定調査特記事項連番())) {
-                imgGenponPathList.add(path原本);
-                imgMaskPathList.add(pathマスク);
+                imgGenponPathList.add(sanitizePath(path原本));
+                imgMaskPathList.add(sanitizePath(pathマスク));
                 path原本 = RString.EMPTY;
                 pathマスク = RString.EMPTY;
             }

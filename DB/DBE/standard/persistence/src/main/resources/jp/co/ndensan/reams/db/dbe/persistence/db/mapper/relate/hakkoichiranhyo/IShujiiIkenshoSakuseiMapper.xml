@@ -111,12 +111,13 @@
             AND DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL
         </if>
         ORDER BY
+            DbT5101."shoKisaiHokenshaNo",
+            DbT5301."shujiiIryokikanCode",
+            DbT5301."shujiiCode",
+            DbT5101."hihokenshaNo",
+            DbT5101."shinseishoKanriNo" ,
             DbT5301."iraishoShutsuryokuYMD",
             DbT5301."ikenshoSakuseiKigenYMD",
-            DbT7051."shichosonCode",
-            DbT5101."hihokenshaNo",
-            DbT5301."ikenshoSakuseiIraiYMD",
-            DbT5301."shujiiIryokikanCode",
-            DbT5301."shujiiCode"
+            DbT5301."ikenshoSakuseiIraiYMD"
     </select>
 </mapper>

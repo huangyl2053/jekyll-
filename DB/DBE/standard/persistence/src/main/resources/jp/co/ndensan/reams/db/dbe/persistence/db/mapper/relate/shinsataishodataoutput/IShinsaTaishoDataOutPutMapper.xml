@@ -64,7 +64,8 @@
         "DbT5101"."hihokenshaNo",
         "DbT5101"."ninteiShinseiYMD",
         "DbT5211"."remban",
-        "DbT5211"."koroshoIfShikibetsuCode"
+        "DbT5211"."koroshoIfShikibetsuCode",
+        "DbT5211"."researchItem"
         FROM rgdb."DbT5502ShinsakaiWariateJoho" AS "DbT5502"
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS "DbT5101"
         ON "DbT5502"."shinseishoKanriNo"=  "DbT5101"."shinseishoKanriNo"
@@ -92,6 +93,7 @@
         <id property="認定申請年月日" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="連番" column="remban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="厚労省IF識別コード" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <select resultOrdered="true" id="get概況調査データ" resultMap="resultMap_GaikyoChosaDataRelateEntity"
