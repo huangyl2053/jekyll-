@@ -373,9 +373,9 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         }
         if (今回情報.get事業者番号() != null) {
             RString 事業者番号 = 今回情報.get事業者番号().getColumnValue();
-            iNinteiShinseiTodokedeshaDiv.getTxtJigyoshaCode().setValue(事業者番号);
+            //iNinteiShinseiTodokedeshaDiv.getTxtJigyoshaCode().setValue(事業者番号);
             if (iNinteiShinseiTodokedeshaDiv instanceof NinteiShinseiTodokedeshaDiv) {
-                ((NinteiShinseiTodokedeshaDiv) iNinteiShinseiTodokedeshaDiv).getTxtJigyoshaName().setValue(今回情報.get事業者名称());
+                //((NinteiShinseiTodokedeshaDiv) iNinteiShinseiTodokedeshaDiv).getTxtJigyoshaName().setValue(今回情報.get事業者名称());
             }
         }
         List<RString> shinseiKankeishaCodeList = new ArrayList<>();
@@ -467,7 +467,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         if (null != 今回情報) {
             div.setHdnKonkaiRirekiNo(今回情報.get履歴番号());
 //            if (DonyuKeitaiCode.認定広域.getCode().equals(convertCodeToRString(導入形態コード))
-              if (今回情報.has要介護認定インターフェース情報()) {
+            if (今回情報.has要介護認定インターフェース情報()) {
                 div.setHdnYokaigodoCodeKonkai(今回情報.getインターフェース二次判定結果());
                 div.getTxtYokaigodoKonkai().setValue(get要介護度名(今回情報.get厚労省IF識別コード(), 今回情報.getインターフェース二次判定結果()));
                 div.getTxtYukoKaishibiKonkai().setValue(今回情報.getインターフェース認定有効期間開始年月日());
@@ -476,7 +476,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
                 div.getTxtServiceShuruiKonkai().setValue(getサービス種類(今回情報));
                 div.getTxtShinsakaiIkenKonkai().setValue(今回情報.getインターフェース介護認定審査会意見());
 //            } else if (DonyuKeitaiCode.認定単一.getCode().equals(convertCodeToRString(導入形態コード))
-              } else if (今回情報.has要介護認定結果情報()) {
+            } else if (今回情報.has要介護認定結果情報()) {
                 div.setHdnYokaigodoCodeKonkai(convertCodeToRString(今回情報.get二次判定要介護状態区分コード()));
                 div.getTxtYokaigodoKonkai().setValue(
                         get要介護度名(今回情報.get厚労省IF識別コード(), convertCodeToRString(今回情報.get二次判定要介護状態区分コード())));
@@ -581,7 +581,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         }
         return RString.EMPTY;
     }
-    
+
     private RString get要介護度コード(Code 厚労省IF識別コード, RString 要介護度名) {
         RString 厚労省IF識別コードStr = convertCodeToRString(厚労省IF識別コード);
         try {
@@ -870,15 +870,15 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         }
         return dataSourceList;
     }
-    
+
     private RString getServiceNameByServiceCode(ServiceShuruiCode code) {
         if (code != null && !RString.isNullOrEmpty(code.value())
-        && this.サービス種類Map.containsKey(code.value())) {
+                && this.サービス種類Map.containsKey(code.value())) {
             return this.サービス種類Map.get(code.value());
         }
         return RString.EMPTY;
     }
-    
+
     private RString getServiceCodeByServiceName(RString name) {
         if (name != null && !RString.isNullOrEmpty(name)) {
             for (RString key : this.サービス種類Map.keySet()) {
@@ -889,7 +889,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         }
         return RString.EMPTY;
     }
-    
+
     private List<RString> getServiceCodeList(RString names) {
         List<RString> tempList = names.split(連絡符号.toString());
         List<RString> resultList = new ArrayList<>();
