@@ -640,31 +640,25 @@
           AND P."remban" = 1 
           AND P."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode" 
         LEFT JOIN ( 
-          SELECT
-            P001."remban"
-            , P001."shinseishoKanriNo" 
+          SELECT DISTINCT
+              ON ( 
+                P001."shinseishoKanriNo"
+                , P001."koroshoIfShikibetsuCode"
+              ) P001."shinseishoKanriNo"
+            , P001."remban"
+            , P001."koroshoIfShikibetsuCode" 
           FROM
-            rgdb."DbT5210NinteichosahyoShisetsuRiyo" P001
-            , rgdb."DbT5101NinteiShinseiJoho" dbT5101 
+            rgdb."DbT5210NinteichosahyoShisetsuRiyo" P001 
           WHERE
-            dbT5101."shinseishoKanriNo" = P001."shinseishoKanriNo" 
-            AND NOT EXISTS ( 
-              SELECT
-                'X' 
-              FROM
-                rgdb."DbT5210NinteichosahyoShisetsuRiyo" P002 
-              WHERE
-                P001."shinseishoKanriNo" = P002."shinseishoKanriNo" 
-                AND P001."ninteichosaRirekiNo" <![CDATA[<]]> P002."ninteichosaRirekiNo"
-            ) 
-            AND P001."shisetsuRiyoFlag" = TRUE 
-            AND P001."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode" 
+            P001."shisetsuRiyoFlag" = TRUE 
           ORDER BY
-            P001."remban" ASC 
-          LIMIT
-            1
+            P001."shinseishoKanriNo"
+            , P001."koroshoIfShikibetsuCode" ASC
+            , P001."ninteichosaRirekiNo" DESC
+            , P001."remban" DESC
         ) P01 
           ON A."shinseishoKanriNo" = P01."shinseishoKanriNo" 
+          AND A."koroshoIfShikibetsuCode" = P01."koroshoIfShikibetsuCode" 
         LEFT JOIN "NinteichosahyoChosaItemTemp" Q 
           ON A."shinseishoKanriNo" = Q."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" R 
@@ -720,24 +714,18 @@
           ) 
           AND X."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
         LEFT JOIN ( 
-          SELECT
-            P003."remban"
-            , P003."shinseishoKanriNo" AS "zenkaiShinseishoKanriNo"
-            , dbT5121."shinseishoKanriNo" 
+          SELECT DISTINCT
+              ON ( 
+                P003."shinseishoKanriNo"
+                , P003."koroshoIfShikibetsuCode"
+              ) P003."shinseishoKanriNo" 
+            , P003."remban"
+            , P003."koroshoIfShikibetsuCode" 
           FROM
-            rgdb."DbT5210NinteichosahyoShisetsuRiyo" P003
+            rgdb."DbT5210NinteichosahyoShisetsuRiyo" P003 
             , rgdb."DbT5121ShinseiRirekiJoho" dbT5121 
           WHERE
             P003."shinseishoKanriNo" = dbT5121."zenkaiShinseishoKanriNo" 
-            AND NOT EXISTS ( 
-              SELECT
-                'X' 
-              FROM
-                rgdb."DbT5210NinteichosahyoShisetsuRiyo" P004 
-              WHERE
-                P003."shinseishoKanriNo" = P004."shinseishoKanriNo" 
-                AND P003."ninteichosaRirekiNo" <![CDATA[<]]> P004."ninteichosaRirekiNo"
-            ) 
             AND P003."shisetsuRiyoFlag" = TRUE 
             AND P003."koroshoIfShikibetsuCode" = ( 
               SELECT
@@ -749,11 +737,12 @@
                 AND A2."logicalDeletedFlag" = FALSE
             ) 
           ORDER BY
-            P003."remban" ASC 
-          LIMIT
-            1
+            P003."shinseishoKanriNo"
+            , P003."koroshoIfShikibetsuCode" ASC
+            , P003."ninteichosaRirekiNo" DESC
+            , P003."remban" DESC
         ) P02 
-          ON A."shinseishoKanriNo" = P02."shinseishoKanriNo" 
+          ON A."shinseishoKanriNo" = P02."shinseishoKanriNo"
         LEFT JOIN "ZenkaiChosahyoServiceJokyoTemp" Y 
           ON A."shinseishoKanriNo" = Y."zenkaiShinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" Z 
@@ -813,7 +802,7 @@
         FROM
           rgdb."DbT5102NinteiKekkaJoho" 
         <if test="isTennyuShiboSyuturyoku">
-        UNION 
+        UNION ALL
         SELECT
           "shinseishoKanriNo"
           , "nijiHanteiYMD"
@@ -832,7 +821,7 @@
           , "nijiHanteiKekkaInputYMD" 
         FROM
           rgdb."DbT5129Tennyu" 
-        UNION 
+        UNION ALL
         SELECT
           "shinseishoKanriNo"
           , "nijiHanteiYMD"
@@ -894,10 +883,20 @@
           AND "dbT5105_NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" <![CDATA[<>]]> '' 
           AND "dbT5105_NinteiKanryoJoho"."maskingKanryoYMD" IS NOT NULL 
           AND "dbT5105_NinteiKanryoJoho"."maskingKanryoYMD" <![CDATA[<>]]> '' 
-          AND ( 
-            "dbT7211_GaibuRenkeiDataoutputJoho"."centerSoshinChushutsuYMD" IS NULL 
-            OR "dbT7211_GaibuRenkeiDataoutputJoho"."centerSoshinChushutsuYMD" = ''
-          ) 
+          <if test="isMiSyutsuryokuNomi">
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT7211GaibuRenkeiDataoutputJoho" AS "dbT7211_GaibuRenkeiDataoutputJoho_Sub"
+                WHERE
+                  "dbT5101_NinteiShinseiJoho"."shinseishoKanriNo" = "dbT7211_GaibuRenkeiDataoutputJoho_Sub"."shinseishoKanriNo" 
+                  AND ( 
+                    "dbT7211_GaibuRenkeiDataoutputJoho_Sub"."centerSoshinChushutsuYMD" IS NOT NULL 
+                    OR "dbT7211_GaibuRenkeiDataoutputJoho_Sub"."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+                  )
+              )
+          </if>
           <if test="!isNijiHanteiKaishiYMDEmpty">
               AND "SoshonDataSakuseiTaishosha"."nijiHanteiYMD" <![CDATA[>=]]> #{nijiHanteiKaishiYMD}
           </if>

@@ -122,7 +122,7 @@ public class KihonChosaKomokuDataOutputProcess extends BatchProcessBase<KihonCho
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())) {
             for (NinteichosaKomokuMapping09B value : NinteichosaKomokuMapping09B.values()) {
                 if (value.getコード().toString().equals(entity.get連番().toString())) {
-                    csvEntity.set表示番号(value.get表示番号());
+                    csvEntity.set表示番号(value.getUSB_表示番号());
                     csvEntity.set調査項目文言(value.get名称());
                     csvEntity.setパターンNo(new Decimal(value.getパターンNo().toString()));
                     csvEntity.set回答コード(entity.get調査項目());

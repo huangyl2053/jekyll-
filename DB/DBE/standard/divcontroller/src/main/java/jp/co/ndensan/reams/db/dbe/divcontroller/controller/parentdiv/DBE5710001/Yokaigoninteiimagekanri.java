@@ -36,9 +36,9 @@ public class Yokaigoninteiimagekanri {
     private static final RString その他資料6 = new RString("F0");
     private static final RString その他資料 = new RString("F1401");
     private static final RString イメージ区分_調査票概況 = new RString("1");
-    private static final RString イメージ区分_意見書定型外 = new RString("2");
+    private static final RString イメージ区分_意見書定型 = new RString("2");
     private static final RString イメージ区分_その他資料 = new RString("3");
-    private static final RString イメージ区分_意見書定型 = new RString("4");
+    private static final RString イメージ区分_意見書定型外 = new RString("4");
     private static final int その他資料MAX = 6;
     private final YokaigoninteiimagekanriFinder finder;
 

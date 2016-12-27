@@ -25,6 +25,10 @@ public class SonotaKikanichiranDiv extends Panel {
     private Button btnInsert;
     @JsonProperty("btnOutputCsv")
     private ButtonDownLoad btnOutputCsv;
+    @JsonProperty("btnCsvKozaNashi")
+    private ButtonDownLoad btnCsvKozaNashi;
+    @JsonProperty("btnCsvSpool")
+    private Button btnCsvSpool;
     @JsonProperty("dgSonotaKikanIchiran")
     private DataGrid<dgSonotaKikanIchiran_Row> dgSonotaKikanIchiran;
 
@@ -68,6 +72,42 @@ public class SonotaKikanichiranDiv extends Panel {
     @JsonProperty("btnOutputCsv")
     public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
         this.btnOutputCsv = btnOutputCsv;
+    }
+
+    /*
+     * getbtnCsvKozaNashi
+     * @return btnCsvKozaNashi
+     */
+    @JsonProperty("btnCsvKozaNashi")
+    public ButtonDownLoad getBtnCsvKozaNashi() {
+        return btnCsvKozaNashi;
+    }
+
+    /*
+     * setbtnCsvKozaNashi
+     * @param btnCsvKozaNashi btnCsvKozaNashi
+     */
+    @JsonProperty("btnCsvKozaNashi")
+    public void setBtnCsvKozaNashi(ButtonDownLoad btnCsvKozaNashi) {
+        this.btnCsvKozaNashi = btnCsvKozaNashi;
+    }
+
+    /*
+     * getbtnCsvSpool
+     * @return btnCsvSpool
+     */
+    @JsonProperty("btnCsvSpool")
+    public Button getBtnCsvSpool() {
+        return btnCsvSpool;
+    }
+
+    /*
+     * setbtnCsvSpool
+     * @param btnCsvSpool btnCsvSpool
+     */
+    @JsonProperty("btnCsvSpool")
+    public void setBtnCsvSpool(Button btnCsvSpool) {
+        this.btnCsvSpool = btnCsvSpool;
     }
 
     /*

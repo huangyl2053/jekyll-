@@ -14,9 +14,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6050001.Ike
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshohoshushokai.IkenshoHoshuShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import static jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -62,6 +67,12 @@ public class IkenshoSakuseiHoshuShokai {
      * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
      */
     public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onClick_BtnKensaku(IkenshoSakuseiHoshuShokaiDiv div) {
+        // メッセージ処理
+        RString fromCode = ResponseHolder.getMessageCode();
+        if (fromCode.equals(IkenshoSakuseiHoshuShokaiMessages.データなし.getCode())) {
+            return ResponseData.of(div).respond();
+        }
+        
         // 作成依頼開始＞作成依頼終了の場合、エラーとする
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validate開始日終了日();
         if (validPairs.iterator().hasNext()) {
@@ -77,13 +88,29 @@ public class IkenshoSakuseiHoshuShokai {
             作成依頼日終了 = new FlexibleDate(div.getTxtSakuseiIraibi().getToValue().toDateString());
         }
         
-        Decimal 最大件数 = div.getTxtMaxKensu().getValue();
-        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(
+        // 検索条件に満たす最大件数を取得
+        
+        Decimal 最大表示件数 = div.getTxtMaxKensu().getValue();
+        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createParameterForGetCount(
+                作成依頼日開始, 
+                作成依頼日終了, 
+                div.getCcdHokensya().getSelectedItem().get市町村コード().value());
+        IkenshoHoshuShokaiFinder finder = IkenshoHoshuShokaiFinder.createInstance();
+        int 総件数 = finder.getCount(paramter);
+        
+        // 総件数が 0 件の場合はメッセージを表示
+        if (総件数 == 0) {
+            return ResponseData.of(div).addMessage(IkenshoSakuseiHoshuShokaiMessages.データなし.getMessage()).respond();
+        }
+        
+        // データを取得
+        
+        paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(
                 作成依頼日開始, 
                 作成依頼日終了, 
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
-                最大件数);
-        getHandler(div).set一覧結果(IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter).records());
+                最大表示件数);
+        getHandler(div).set一覧結果(IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter).records(), 総件数);
         
         if (div.getDgIkenshoSakuseiHoshu().getDataSource().isEmpty()) {
             return ResponseData.of(div).setState(DBE6050001StateName.検索結果表示結果無し);
@@ -154,5 +181,28 @@ public class IkenshoSakuseiHoshuShokai {
 
     private IkenshoSakuseiHoshuShokaiValidationHandler getValidationHandler(IkenshoSakuseiHoshuShokaiDiv div) {
         return new IkenshoSakuseiHoshuShokaiValidationHandler(div);
+    }
+
+    private static enum IkenshoSakuseiHoshuShokaiMessages implements IMessageGettable {
+
+        データなし(1, "該当データが存在しません。");
+
+        private final RString code;
+        private final RString message;
+
+        private IkenshoSakuseiHoshuShokaiMessages(int no, String message) {
+            this.code = new RString(toCode("I", no));
+            this.message = new RString(message);
+        }
+
+        @Override
+        public Message getMessage() {
+            return new InformationMessage(this.code.toString(), this.message.toString());
+        }
+
+        public RString getCode() {
+            return this.code;
+        }
+
     }
 }

@@ -221,6 +221,12 @@ public class Masking {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+            for (dgYokaigoNinteiTaskList_Row row : div.getDgYokaigoNinteiTaskList().getDataSource()) {
+                if (row.getSelected() && row.getJyuJiIiKenJyo().equals(RString.EMPTY)) {
+                    getValidationHandler().マスキング完了対象者一覧データの完了可能チェック(validationMessages);
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
+            }
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();

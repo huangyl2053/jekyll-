@@ -23,6 +23,7 @@ public class CenterTransmissionMybitisParamter implements IMyBatisParameter {
 
     private List<RString> shinseishoKanriNoList;
     private List<RString> shinseijiKubunCodeList;
+    private boolean isMiSyutsuryokuNomi;
     private boolean isTennyuShiboSyuturyoku;
     private RString nijiHanteiKaishiYMD;
     private RString nijiHanteiShuryoYMD;

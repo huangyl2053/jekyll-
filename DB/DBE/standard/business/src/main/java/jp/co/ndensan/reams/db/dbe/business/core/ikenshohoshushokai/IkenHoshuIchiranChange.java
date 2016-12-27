@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshohoshushokai.IkenH
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.GokeiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenHoshuIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenshoHoshuShokaiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -25,6 +26,8 @@ public final class IkenHoshuIchiranChange {
     private static int 総ページ数;
     private static final int 頁_件数 = 25;
     private static final int ONE = 1;
+    private static final RString IRAIKUBUN_SHO = new RString("初");
+    private static final RString IRAIKUBUN_SAI = new RString("再");
 
     private IkenHoshuIchiranChange() {
     }
@@ -39,10 +42,10 @@ public final class IkenHoshuIchiranChange {
     public static IkenHoshuIchiranEntity createIkenHoshuIchiranData(IkenshoHoshuShokaiRelateEntity entity,
             IkenHoshuIchiranProcessParameter parameter) {
         RString 意見;
-        if (new RString("1").equals(entity.get主治医意見書依頼区分())) {
-            意見 = new RString("初");
+        if (IkenshoIraiKubun.初回依頼.getコード().equals(entity.get主治医意見書依頼区分())) {
+            意見 = IRAIKUBUN_SHO;
         } else {
-            意見 = new RString("再");
+            意見 = IRAIKUBUN_SAI;
         }
         IkenHoshuIchiranEntity data = new IkenHoshuIchiranEntity(
                 entity.get主治医医療機関コード(),
@@ -60,9 +63,9 @@ public final class IkenHoshuIchiranChange {
                 entity.get在宅_継(),
                 entity.get施設_新(),
                 entity.get施設_継(),
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書作成料()), 0).concat("円"),
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書別途診療費()), 0).concat("円"),
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書報酬()), 0).concat("円"));
+                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書作成料()), 0),
+                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書別途診療費()), 0),
+                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書報酬()), 0));
         RStringBuilder 抽出期間 = new RStringBuilder();
         抽出期間.append(getWarekiDateString(parameter.get作成依頼日期間開始()));
         抽出期間.append("～");
