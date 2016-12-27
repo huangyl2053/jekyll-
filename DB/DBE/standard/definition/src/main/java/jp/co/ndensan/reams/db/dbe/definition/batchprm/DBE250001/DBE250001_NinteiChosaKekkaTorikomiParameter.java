@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBE250001_NinteiChoshaKekkaTorikomiParameter extends BatchParameterBase {
+public class DBE250001_NinteiChosaKekkaTorikomiParameter extends BatchParameterBase {
 
     private static final String KYOYU_FILE_ENTRY = "KyoyuFileEntry";
 
     @BatchParameter(key = KYOYU_FILE_ENTRY, name = "共有ファイルエントリ情報文字列")
     private RString 共有ファイルエントリ情報文字列;
 
-    public DBE250001_NinteiChoshaKekkaTorikomiParameter() {
+    public DBE250001_NinteiChosaKekkaTorikomiParameter() {
 
     }
 
@@ -33,7 +33,7 @@ public class DBE250001_NinteiChoshaKekkaTorikomiParameter extends BatchParameter
      *
      * @param 共有ファイルエントリ情報文字列 アップロードされた共有ファイルのエントリ情報
      */
-    public DBE250001_NinteiChoshaKekkaTorikomiParameter(RString 共有ファイルエントリ情報文字列) {
+    public DBE250001_NinteiChosaKekkaTorikomiParameter(RString 共有ファイルエントリ情報文字列) {
         this.共有ファイルエントリ情報文字列 = 共有ファイルエントリ情報文字列;
     }
 
