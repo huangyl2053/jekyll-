@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShujiiJoho のクラスファイル
@@ -14,21 +15,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class ShujiiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShujiiIryokikan")
-    private Label lblShujiiIryokikan;
+    @JsonProperty("txtShujiiIryokikan")
+    private TextBoxDomainCode txtShujiiIryokikan;
     @JsonProperty("btnShujiiIryokikanGuide")
     private ButtonDialog btnShujiiIryokikanGuide;
     @JsonProperty("txtShujiiIryokikanName")
     private TextBox txtShujiiIryokikanName;
-    @JsonProperty("lblShujiiName")
-    private Label lblShujiiName;
+    @JsonProperty("txtShujiiShimei")
+    private TextBoxDomainCode txtShujiiShimei;
     @JsonProperty("btnShujiiGuide")
     private ButtonDialog btnShujiiGuide;
     @JsonProperty("txtShujiiName")
@@ -53,21 +54,21 @@ public class ShujiiJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblShujiiIryokikan
-     * @return lblShujiiIryokikan
+     * gettxtShujiiIryokikan
+     * @return txtShujiiIryokikan
      */
-    @JsonProperty("lblShujiiIryokikan")
-    public Label getLblShujiiIryokikan() {
-        return lblShujiiIryokikan;
+    @JsonProperty("txtShujiiIryokikan")
+    public TextBoxDomainCode getTxtShujiiIryokikan() {
+        return txtShujiiIryokikan;
     }
 
     /*
-     * setlblShujiiIryokikan
-     * @param lblShujiiIryokikan lblShujiiIryokikan
+     * settxtShujiiIryokikan
+     * @param txtShujiiIryokikan txtShujiiIryokikan
      */
-    @JsonProperty("lblShujiiIryokikan")
-    public void setLblShujiiIryokikan(Label lblShujiiIryokikan) {
-        this.lblShujiiIryokikan = lblShujiiIryokikan;
+    @JsonProperty("txtShujiiIryokikan")
+    public void setTxtShujiiIryokikan(TextBoxDomainCode txtShujiiIryokikan) {
+        this.txtShujiiIryokikan = txtShujiiIryokikan;
     }
 
     /*
@@ -107,21 +108,21 @@ public class ShujiiJohoDiv extends Panel {
     }
 
     /*
-     * getlblShujiiName
-     * @return lblShujiiName
+     * gettxtShujiiShimei
+     * @return txtShujiiShimei
      */
-    @JsonProperty("lblShujiiName")
-    public Label getLblShujiiName() {
-        return lblShujiiName;
+    @JsonProperty("txtShujiiShimei")
+    public TextBoxDomainCode getTxtShujiiShimei() {
+        return txtShujiiShimei;
     }
 
     /*
-     * setlblShujiiName
-     * @param lblShujiiName lblShujiiName
+     * settxtShujiiShimei
+     * @param txtShujiiShimei txtShujiiShimei
      */
-    @JsonProperty("lblShujiiName")
-    public void setLblShujiiName(Label lblShujiiName) {
-        this.lblShujiiName = lblShujiiName;
+    @JsonProperty("txtShujiiShimei")
+    public void setTxtShujiiShimei(TextBoxDomainCode txtShujiiShimei) {
+        this.txtShujiiShimei = txtShujiiShimei;
     }
 
     /*

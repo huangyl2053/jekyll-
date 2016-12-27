@@ -1,9 +1,9 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="./../hokenshalist/HokenshaList.ts" />
-// <reference path="./../saikinshorisha/SaikinShorisha.ts" />
-// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
+/// <reference path="./../saikinshorisha/SaikinShorisha.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -21,6 +21,14 @@ module DBZ {
 
             public static onClick_NinteiChosa(): string {
                 return "onClick_NinteiChosa";
+            }
+
+            public static onChange_txtCode(): string {
+                return "onChange_txtCode";
+            }
+
+            public static onBlur_txtCode(): string {
+                return "onBlur_txtCode";
             }
 
             public static onOkClose_btnNinteiChosaItakusakiGuide(): string {
@@ -176,9 +184,9 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
-            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            //}
+            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            }
 
             public ddlShichosonCode(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
@@ -236,9 +244,9 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             }
 
-            //public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {
-            //    return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
-            //}
+            public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {
+                return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            }
 
             public ShosaiJoken(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ShosaiJoken"));
@@ -284,8 +292,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             }
 
-            public lblNinteiChosaIinItakuSaki(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblNinteiChosaIinItakuSaki"));
+            public txtNinteiChosaIinItakuSaki(): UZA.TextBoxDomainCode {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtNinteiChosaIinItakuSaki"));
             }
 
             public btnNinteiChosaItakusakiGuide(): UZA.ButtonDialog {
@@ -296,8 +304,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
             }
 
-            public lblNinteiChosaInShimei(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblNinteiChosaInShimei"));
+            public txtNinteiChosaInShimei(): UZA.TextBoxDomainCode {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtNinteiChosaInShimei"));
             }
 
             public btnNinteiChosainGuide(): UZA.ButtonDialog {
@@ -340,8 +348,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ShujiiJoho"));
             }
 
-            public lblShujiiIryokikan(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblShujiiIryokikan"));
+            public txtShujiiIryokikan(): UZA.TextBoxDomainCode {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtShujiiIryokikan"));
             }
 
             public btnShujiiIryokikanGuide(): UZA.ButtonDialog {
@@ -352,8 +360,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShujiiIryokikanName"));
             }
 
-            public lblShujiiName(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblShujiiName"));
+            public txtShujiiShimei(): UZA.TextBoxDomainCode {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtShujiiShimei"));
             }
 
             public btnShujiiGuide(): UZA.ButtonDialog {
@@ -512,8 +520,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ZenkaiJoho"));
             }
 
-            public lblZenkaiChosaItakusaki(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblZenkaiChosaItakusaki"));
+            public txtZenkaiChosaItakusaki(): UZA.TextBoxDomainCode {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtZenkaiChosaItakusaki"));
             }
 
             public btnZenkaiChosaItakusakiGuide(): UZA.ButtonDialog {
@@ -524,8 +532,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtZenkaiNinteiChosaItakusakiName"));
             }
 
-            public lblZenkaiShujiiIryokikan(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblZenkaiShujiiIryokikan"));
+            public txtZenkaiShujiiIryokikan(): UZA.TextBoxDomainCode {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtZenkaiShujiiIryokikan"));
             }
 
             public btnZenkaiShujiiIryokikanGuide(): UZA.ButtonDialog {
@@ -560,9 +568,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             }
 
-            //public ccdGeninShikkan(): URZ.CodeInput.ModeController {
-            //    return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
-            //}
+            public ccdGeninShikkan(): URZ.CodeInput.ModeController {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
+            }
 
             public txtShinseiKeikaNissu(): UZA.TextBoxNumRange {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));
