@@ -74,6 +74,8 @@ dbe/db/dbe/GetsureiShori/onClick_BtnCompleteGetsureiShori
 dbe/db/dbe/GetsureiShori/onClick_BtnDataOutput
 dbe/db/dbe/GetsureiShori/onClick_btnOutputCsv
 dbe/db/dbe/GetsureiShori/onLoad
+dbe/db/dbe/GetsureiShori/onClick_shorikeizoku
+dbe/db/dbe/GetsureiShori/onChange_txtMaxCount
 dbe/db/dbe/GogitaiJohoSakusei/btnShow
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnBatchRegister
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnCSVShutsuryoku
@@ -765,6 +767,8 @@ dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnOCRToroku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnRyooutput
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnRyooutputBoffer
 dbe/db/dbe/ShinsaKaiKekkaToroku/onLoad
+dbe/db/dbe/ShinsaKaiKekkaToroku/onChange_txtMaxCount
+dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_shorikeizoku
 dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClickBtnUpdate
 dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClickChosaKekka
 dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClick_btnIchijiHantei

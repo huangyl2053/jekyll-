@@ -205,7 +205,8 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString chohyoIin_ikenshoFalg,
             RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
-            RString chohyoIin_hanteiFalg) {
+            RString chohyoIin_hanteiFalg,
+            Map<RString, RString> 帳票一覧Map) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
@@ -225,6 +226,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
         this.chohyoIin_sonotaSiryoFalg = chohyoIin_sonotaSiryoFalg;
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
+        this.帳票一覧Map = 帳票一覧Map;
     }
 
     /**
