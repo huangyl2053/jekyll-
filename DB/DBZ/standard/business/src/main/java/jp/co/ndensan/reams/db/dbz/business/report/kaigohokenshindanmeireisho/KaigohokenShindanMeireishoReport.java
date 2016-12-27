@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
+import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -29,6 +32,19 @@ public class KaigohokenShindanMeireishoReport extends Report<KaigohokenShindanMe
             List<KaigohokenShindanMeireishoHeaderItem> headItem) {
 
         return new KaigohokenShindanMeireishoReport(headItem);
+    }
+    
+        /**
+     * インスタンスを生成します。
+     *
+     * @param headItem 介護保険診断命令書ヘッダのITEM
+     * @return 介護保険診断命令書のReport
+     */
+    public static KaigohokenShindanMeireishoReport createFrom2(
+            KaigohokenShindanMeireishoHeaderItem headItem) {
+        List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
+        itemList.add(headItem);
+        return new KaigohokenShindanMeireishoReport(itemList);
     }
 
     /**

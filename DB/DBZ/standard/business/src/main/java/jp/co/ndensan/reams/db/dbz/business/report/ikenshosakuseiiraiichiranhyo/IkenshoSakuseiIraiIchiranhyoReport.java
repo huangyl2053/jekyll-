@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
+import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReport;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -31,6 +34,18 @@ public class IkenshoSakuseiIraiIchiranhyoReport extends Report<IkenshoSakuseiIra
      */
     public static IkenshoSakuseiIraiIchiranhyoReport createFrom(List<IkenshoSakuseiIraiIchiranhyoItem> bodyItemList) {
         return new IkenshoSakuseiIraiIchiranhyoReport(bodyItemList);
+    }
+    
+        /**
+     * インスタンスを生成します。
+     *
+     * @param bodyItem 主治医意見書作成依頼一覧のリストITEM
+     * @return 主治医意見書作成依頼一覧のReport
+     */
+    public static IkenshoSakuseiIraiIchiranhyoReport createFrom2(IkenshoSakuseiIraiIchiranhyoItem bodyItem) {
+        List<IkenshoSakuseiIraiIchiranhyoItem> itemList = new ArrayList<>();
+        itemList.add(bodyItem);
+        return new IkenshoSakuseiIraiIchiranhyoReport(itemList);
     }
 
     /**

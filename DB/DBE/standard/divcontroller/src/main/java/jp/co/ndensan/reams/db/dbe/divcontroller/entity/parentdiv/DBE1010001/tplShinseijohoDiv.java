@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
@@ -28,8 +27,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
- * tplShinseijoho のクラスファイル
- *
+ * tplShinseijoho のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tplShinseijohoDiv extends TabPanel {
@@ -43,6 +42,8 @@ public class tplShinseijohoDiv extends TabPanel {
      */
     @JsonProperty("ShujiiAndShujiiIryoKikan")
     private ShujiiAndShujiiIryoKikanDiv ShujiiAndShujiiIryoKikan;
+    @JsonProperty("HomonSaki")
+    private HomonSakiDiv HomonSaki;
     @JsonProperty("ChosainAndChosainInput")
     private ChosainAndChosainInputDiv ChosainAndChosainInput;
     @JsonProperty("ShisetsuJoho")
@@ -84,6 +85,24 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonProperty("ShujiiAndShujiiIryoKikan")
     public void setShujiiAndShujiiIryoKikan(ShujiiAndShujiiIryoKikanDiv ShujiiAndShujiiIryoKikan) {
         this.ShujiiAndShujiiIryoKikan = ShujiiAndShujiiIryoKikan;
+    }
+
+    /*
+     * getHomonSaki
+     * @return HomonSaki
+     */
+    @JsonProperty("HomonSaki")
+    public HomonSakiDiv getHomonSaki() {
+        return HomonSaki;
+    }
+
+    /*
+     * setHomonSaki
+     * @param HomonSaki HomonSaki
+     */
+    @JsonProperty("HomonSaki")
+    public void setHomonSaki(HomonSakiDiv HomonSaki) {
+        this.HomonSaki = HomonSaki;
     }
 
     /*
@@ -168,6 +187,15 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
+     * getccdZenkaiNinteiKekkaJoho
+     * @return ccdZenkaiNinteiKekkaJoho
+     */
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return ccdZenkaiNinteiKekkaJoho;
+    }
+
+    /*
      * getccdNinteiInput
      * @return ccdNinteiInput
      */
@@ -195,70 +223,51 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdZenkaiNinteiKekkaJoho
-     * @return ccdZenkaiNinteiKekkaJoho
-     */
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return ccdZenkaiNinteiKekkaJoho;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public HomonSakiDiv getHomonSaki() {
-        return this.getShujiiAndShujiiIryoKikan().getHomonSaki();
-    }
-
-    @JsonIgnore
-    public void setHomonSaki(HomonSakiDiv HomonSaki) {
-        this.getShujiiAndShujiiIryoKikan().setHomonSaki(HomonSaki);
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+        return this.getShujiiAndShujiiIryoKikan().getCcdShujiiIryokikanAndShujiiInput();
     }
 
     @JsonIgnore
     public TextBox getTxtChosasakiName() {
-        return this.getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtChosasakiName();
+        return this.getHomonSaki().getTxtChosasakiName();
     }
 
     @JsonIgnore
-    public void setTxtChosasakiName(TextBox txtChosasakiName) {
-        this.getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtChosasakiName(txtChosasakiName);
+    public void  setTxtChosasakiName(TextBox txtChosasakiName) {
+        this.getHomonSaki().setTxtChosasakiName(txtChosasakiName);
     }
 
     @JsonIgnore
     public TextBoxYubinNo getTxtYubinNo() {
-        return this.getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtYubinNo();
+        return this.getHomonSaki().getTxtYubinNo();
     }
 
     @JsonIgnore
-    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtYubinNo(txtYubinNo);
+    public void  setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+        this.getHomonSaki().setTxtYubinNo(txtYubinNo);
     }
 
     @JsonIgnore
     public TextBoxJusho getTxtJusho() {
-        return this.getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtJusho();
+        return this.getHomonSaki().getTxtJusho();
     }
 
     @JsonIgnore
-    public void setTxtJusho(TextBoxJusho txtJusho) {
-        this.getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtJusho(txtJusho);
+    public void  setTxtJusho(TextBoxJusho txtJusho) {
+        this.getHomonSaki().setTxtJusho(txtJusho);
     }
 
     @JsonIgnore
     public TextBoxTelNo getTxtTelNo() {
-        return this.getShujiiAndShujiiIryoKikan().getHomonSaki().getTxtTelNo();
+        return this.getHomonSaki().getTxtTelNo();
     }
 
     @JsonIgnore
-    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
-        this.getShujiiAndShujiiIryoKikan().getHomonSaki().setTxtTelNo(txtTelNo);
-    }
-
-    @JsonIgnore
-    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
-        return this.getShujiiAndShujiiIryoKikan().getCcdShujiiIryokikanAndShujiiInput();
+    public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
+        this.getHomonSaki().setTxtTelNo(txtTelNo);
     }
 
     @JsonIgnore

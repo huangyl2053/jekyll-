@@ -187,7 +187,10 @@ public class JimuYobihanteiKinyuhyoBusiness {
      * @return 前回認定有効期間
      */
     public RString get前回認定有効期間() {
-        return new RString(entity.getHanteiNinteiYukoKikan());
+        if (entity.getHanteiNinteiYukoKikan() != 0) {
+            return new RString(entity.getHanteiNinteiYukoKikan());
+        }
+        return RString.EMPTY;
     }
 
     /**

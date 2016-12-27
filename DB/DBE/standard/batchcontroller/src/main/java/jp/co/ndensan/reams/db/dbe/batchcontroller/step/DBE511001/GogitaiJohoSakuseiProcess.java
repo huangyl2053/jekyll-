@@ -206,6 +206,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
                         true,
                         Integer.parseInt(合議体情報.get合議体NO().toString()),
                         new FlexibleDate(合議体情報.get有効開始日()),
+                        FlexibleDate.EMPTY,
                         RString.EMPTY,
                         0
                 ));
@@ -334,6 +335,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
                 true,
                 合議体情報.get合議体NO().toInt(),
                 new FlexibleDate(合議体情報.get有効開始日()),
+                new FlexibleDate(合議体情報.get有効終了日()),
                 合議体情報.get審査会委員コード(),
                 INT_0
         ));

@@ -93,14 +93,16 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
+        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
+        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         entity.setHihokenshaName(AtenaMeisho.EMPTY);
+        entity.setShoKisaiHokenshaNo(RString.EMPTY);
+        entity.setHihokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
         if (shinsakaiOrder != entity.getShinsakaiOrder()) {
             存在ファイルindex = 0;
         }
         List<RString> イメージファイルリスト;
-        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         if (!entity.isJimukyoku()) {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名());
         } else {
