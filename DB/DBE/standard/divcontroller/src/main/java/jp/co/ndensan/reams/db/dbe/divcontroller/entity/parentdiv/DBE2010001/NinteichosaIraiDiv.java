@@ -199,16 +199,6 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDownLoad getBtnchosadataoutput() {
-        return this.getNinteichosaIraiList().getBtnchosadataoutput();
-    }
-
-    @JsonIgnore
-    public void setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
-        this.getNinteichosaIraiList().setBtnchosadataoutput(btnchosadataoutput);
-    }
-
-    @JsonIgnore
     public ButtonDialog getBtnTaOutput() {
         return this.getNinteichosaIraiList().getBtnTaOutput();
     }
