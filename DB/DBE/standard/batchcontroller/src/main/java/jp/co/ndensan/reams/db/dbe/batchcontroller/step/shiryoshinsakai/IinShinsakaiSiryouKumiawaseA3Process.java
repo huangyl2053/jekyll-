@@ -89,6 +89,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
     private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
     private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private static final RString SEPARATOR = new RString("/");
+    private boolean is審査会対象一覧印刷済み;
     private List<ShinsakaiTaiyosyaJohoEntity> 委員審査会追加資料A3リスト;
 
     @BatchWriter
@@ -116,6 +117,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         データ件数 = mapper.getTokkiJikouItiziHanteiCount(一次判定myBatisParameter);
         itiziHanteiEntityList = mapper.getTokkiJikouItiziHantei(一次判定myBatisParameter);
         委員審査会追加資料A3リスト = mapper.getShinsakaiTaiyosyaJoho(一覧表myBatisParameter);
+        is審査会対象一覧印刷済み = false;
         get審査対象者一覧表情報();
     }
 
@@ -124,8 +126,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         RString reportId = ReportIdDBE.DBE517904.getReportId().value();
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>()
-        .new SimpleLayoutBreaker(IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
+                    IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
                             ReportLineRecord<IinShinsakaishiryoA3ReportSource> currentRecord,
@@ -165,10 +167,11 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                     get主治医意見書情報(shinseishoKanriNo),
                     getその他資料情報(shinseishoKanriNo),
                     get審査会追加資料情報(shinseishoKanriNo),
-                    reportId,
+                    is審査会対象一覧印刷済み,
                     paramter.getSakuseiJoken(),
                     paramter.getPrintHou());
             report.writeBy(reportSourceWriter);
+            is審査会対象一覧印刷済み = true;
         }
         batchReportWriter.close();
     }

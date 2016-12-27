@@ -69,22 +69,19 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
-    private final RString reportId;
 
     /**
      * インスタンスを生成します。
      *
      * @param item IchijihanteikekkahyoA3Entity
      * @param 特記事項List List<RString>
-     * @param reportId 帳票ＩＤ
      * @param index int
      * @param page int
      */
     protected IinShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item,
-            List<RString> 特記事項List, RString reportId, int index, int page) {
+            List<RString> 特記事項List, int index, int page) {
         this.item = item;
         this.特記事項List = 特記事項List;
-        this.reportId = reportId;
         this.index = index;
         this.page = page;
     }
