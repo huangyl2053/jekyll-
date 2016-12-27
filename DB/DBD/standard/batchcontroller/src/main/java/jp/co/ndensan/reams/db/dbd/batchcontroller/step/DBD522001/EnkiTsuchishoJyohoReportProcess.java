@@ -294,20 +294,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        // TODO：2016/12/20 不要の為、削除
-//        boolean 空白Flag = Boolean.FALSE;
         出力条件.add(通知書発行日.concat(get通知書発行日リスト()));
-        // TODO：2016/12/20 不要の為、削除
-//        if (parameter.get申請書管理番号リスト() != null) {
-//            for (RString 申請書管理番号 : parameter.get申請書管理番号リスト()) {
-//                if (!空白Flag) {
-//                    出力条件.add(申請書管理番号リスト.concat(申請書管理番号));
-//                    空白Flag = Boolean.TRUE;
-//                } else {
-//                    出力条件.add(申請書管理番号空白.concat(申請書管理番号));
-//                }
-//            }
-//        }
         return 出力条件;
     }
 
@@ -319,7 +306,6 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
             } else {
                 通知書発行日リスト = 通知書発行日リスト.concat(",").concat(date.wareki().toDateString());
             }
-
         }
         return 通知書発行日リスト;
     }
