@@ -131,7 +131,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
             return ResponseData.of(div).respond();
         }
         boolean 希望のみFlag = false;
-        if (希望のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
+        if (希望のみ.equals(div.getRadKekkaTsuchiOutputTaisho().getSelectedKey())) {
             希望のみFlag = true;
         }
         RString dateFrom = RString.EMPTY;

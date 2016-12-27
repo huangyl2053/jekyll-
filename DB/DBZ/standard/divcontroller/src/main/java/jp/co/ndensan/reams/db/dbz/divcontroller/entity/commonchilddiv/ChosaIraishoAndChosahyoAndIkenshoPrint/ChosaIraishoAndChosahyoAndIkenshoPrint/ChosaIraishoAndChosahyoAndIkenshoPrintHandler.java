@@ -92,7 +92,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString 連結 = new RString("～");
     private static final RString 記号 = new RString("✔");
     private static final RString HOUSI = new RString("*");
-    private static final RString MARU = new RString("○");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
     private static final RString 文字列3 = new RString("3");
@@ -1095,7 +1094,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 ShujiiIkenshoSakuseiIraishoItem item = new ShujiiIkenshoSakuseiIraishoItem();
                 item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), FlexibleDate.getNowDate()));
-                item.setYubinNo1(business.get医療機関郵便番号());
+                if (!RString.isNullOrEmpty(business.get医療機関郵便番号())) {
+                    item.setYubinNo1(new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo());
+                }
                 item.setJushoText(business.get医療機関住所());
                 item.setKikanNameText(business.get医療機関名称());
                 item.setShimeiText(business.get主治医氏名());
@@ -1149,11 +1150,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setHihokenshaNameKana(business.get被保険者氏名カナ());
                 if (Seibetsu.男.getコード().equals(business.get性別())) {
                     item.setSeibetsuWoman(HOUSI);
-                    item.setSeibetsuMan(MARU);
                 }
                 if (Seibetsu.女.getコード().equals(business.get性別())) {
                     item.setSeibetsuMan(HOUSI);
-                    item.setSeibetsuWoman(MARU);
                 }
                 item.setHihokenshaName(business.get被保険者氏名());
                 RString 生年月日 = business.get生年月日();
@@ -1277,7 +1276,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setHihokenshaNo10(保険者番号リスト.get(INDEX_9));
                 item.setHihokenshaNameKana(business.get被保険者氏名カナ());
                 item.setHihokenshaName(business.get被保険者氏名());
-                item.setBirthYMD(business.get生年月日());
+                RString 生年月日 = RString.EMPTY;
+                if (!RString.isNullOrEmpty(business.get生年月日())) {
+                    生年月日 = new FlexibleDate(business.get生年月日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                }
+                item.setBirthYMD(生年月日);
                 item.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
                 if (ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
                     item.setShubetsuZaitaku(記号);
@@ -1359,7 +1363,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setIryokikanAdress(business.get医療機関住所());
                 item.setIryokikanNameTel(business.get医療機関電話番号());
                 item.setIryokikanFax(business.get医療機関FAX番号());
-                item.setYubinNo(business.get郵便番号());
+                if (!RString.isNullOrEmpty(business.get郵便番号())) {
+                    item.setYubinNo(new YubinNo(business.get郵便番号()).getEditedYubinNo());
+                }
                 item.setBirthYY(年号.substring(2, INDEX_4));
                 item.setBirthMM(年号.substring(INDEX_5, INDEX_7));
                 item.setBirthDD(年号.substring(INDEX_8));
@@ -1381,7 +1387,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         }
         return itemList;
     }
-
+    
     /**
      * 主治医意見書記入情報2印刷用パラメータを作成します。
      *
@@ -1521,9 +1527,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get被保険者氏名(),
                         get名称付与(),
                         customerBarCode,
-                        business.get被保険者番号(),
+                        RString.EMPTY,
                         通知文.get(1),
-                        business.get被保険者氏名(),
                         business.get被保険者番号(),
                         business.get医療機関名称(),
                         business.get主治医氏名(),
@@ -1531,7 +1536,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get医療機関電話番号(),
                         get受診日時または期間(),
                         受診場所,
-                        通知文.get(2)
+                        通知文.get(2),
+                        getConfigValue(ConfigNameDBE.介護保険診断命令書)
                 );
                 itemList.add(item);
             }
@@ -1740,16 +1746,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         if (年号.startsWith(元号_明治)) {
             item.setBirthGengoShowa(HOUSI);
             item.setBirthGengoTaisho(HOUSI);
-            item.setBirthGengoMeiji(MARU);
                     
         } else if (年号.startsWith(元号_大正)) {
             item.setBirthGengoMeiji(HOUSI);
             item.setBirthGengoShowa(HOUSI);
-            item.setBirthGengoTaisho(MARU);
         } else if (年号.startsWith(元号_昭和)) {
             item.setBirthGengoMeiji(HOUSI);
             item.setBirthGengoTaisho(HOUSI);
-            item.setBirthGengoShowa(MARU);
         } else {
             item.setBirthGengoMeiji(HOUSI);
             item.setBirthGengoShowa(HOUSI);
@@ -1992,5 +1995,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             要介護詳細 = 文字列5;
         }
         return 要介護詳細;
+    }
+    
+    private RString getConfigValue(ConfigNameDBE config) {
+        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 }

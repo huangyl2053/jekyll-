@@ -21,14 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -48,8 +41,6 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString ファイル名 = new RString("OCRCHOSA.CSV");
     private final NinteiChosaOCRTorikomiDiv div;
-    private static final int DAY_COUNT_一週間 = 7;
-    private static final RString イメージ取込み = new RString("イメージ取込み");
     private List<RString> サービスの状況_99A;
     private List<RString> サービスの状況_02A;
     private List<RString> サービスの状況_06A;
@@ -71,24 +62,6 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
     public void setサーバファイルパス() {
         RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
                 .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        div.getTxtTorikomiPath().setValue(imagePath);
-    }
-
-    /**
-     * コンフィグで指定されたフォルダに存在するファイルを共有ファイルにアップロードする。<br />
-     * アップロードされた共有ファイルのエントリ情報は hdnSharedFileEntryInfo に文字列としてセットされる。
-     *
-     */
-    public void upload() {
-        SharedFileDescriptor sfd = new SharedFileDescriptor(
-                GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み));
-        sfd = SharedFile.defineSharedFile(sfd);
-
-        CopyToSharedFileOpts opts
-                = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間));
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(
-                sfd, new FilesystemPath(div.getTxtTorikomiPath().getValue()), opts);
-        this.div.setHdnSharedFileEntryInfo(new RString(entry.toString()));
     }
 
     /**

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteichosaItakusakiCsvEntity {
 
-    @CsvField(order = 10, name = "保険者")
+    @CsvField(order = 10, name = "証記載保険者番号")
     private final RString hokensha;
     @CsvField(order = 20, name = "その他機関コード")
     private final RString sonotaKikanCode;
@@ -43,6 +43,18 @@ public class NinteichosaItakusakiCsvEntity {
     private final RString kikanKubun;
     @CsvField(order = 130, name = "廃止フラグ")
     private final RString haishiFlag;
+    @CsvField(order = 140, name = "金融機関コード")
+    private final RString kinyuKikan;
+    @CsvField(order = 150, name = "支店コード")
+    private final RString kinyuKikanShiten;
+    @CsvField(order = 160, name = "預金種別")
+    private final RString yokinShubetsu;
+    @CsvField(order = 170, name = "口座番号")
+    private final RString kozaNo;
+    @CsvField(order = 180, name = "口座名義人")
+    private final RString kozaMeiginin;
+    @CsvField(order = 190, name = "漢字名義人")
+    private final RString kanjiMeiginin;
 
     /**
      * コンストラクタです。
@@ -60,6 +72,12 @@ public class NinteichosaItakusakiCsvEntity {
      * @param waritsukeChiku
      * @param kikanKubun
      * @param haishiFlag
+     * @param kinyuKikan
+     * @param kinyuKikanShiten
+     * @param yokinShubetsu
+     * @param kozaNo
+     * @param kozaMeiginin
+     * @param kanjiMeiginin
      */
     public NinteichosaItakusakiCsvEntity(
             RString hokensha,
@@ -74,7 +92,13 @@ public class NinteichosaItakusakiCsvEntity {
             RString waritsukeTeiin,
             RString waritsukeChiku,
             RString kikanKubun,
-            RString haishiFlag) {
+            RString haishiFlag,
+            RString kinyuKikan,
+            RString kinyuKikanShiten,
+            RString yokinShubetsu,
+            RString kozaNo,
+            RString kozaMeiginin,
+            RString kanjiMeiginin) {
         this.hokensha = hokensha;
         this.sonotaKikanCode = sonotaKikanCode;
         this.kikanMeisho = kikanMeisho;
@@ -88,5 +112,11 @@ public class NinteichosaItakusakiCsvEntity {
         this.jusho = jusho;
         this.telNo = telNo;
         this.jushoKana = jushoKana;
+        this.kinyuKikan = kinyuKikan;
+        this.kinyuKikanShiten = kinyuKikanShiten;
+        this.yokinShubetsu = yokinShubetsu;
+        this.kozaNo = kozaNo;
+        this.kozaMeiginin = kozaMeiginin;
+        this.kanjiMeiginin = kanjiMeiginin;
     }
 }

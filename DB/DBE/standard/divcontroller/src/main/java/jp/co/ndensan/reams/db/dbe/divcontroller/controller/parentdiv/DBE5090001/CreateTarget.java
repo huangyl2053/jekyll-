@@ -152,6 +152,12 @@ public class CreateTarget {
     private static final int 連番82 = 82;
     private static final int 連番83 = 83;
     private static final int 連番84 = 84;
+    private static final RString 半角スペース = new RString(" ");
+    private static final RString ハイフン = new RString("-");
+    private static final RString 真 = new RString("1");
+    private static final RString 偽 = new RString("2");
+    private static final RString Zero = new RString("0");
+    private static final RString 枝番 = new RString("0");
 
     /**
      * 画面初期化処理です。
@@ -361,6 +367,7 @@ public class CreateTarget {
     }
 
     private CreateTargetCsvEntity getサービスの状況(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+        setサービスの状況初期化(data);
         if (ServiceKubunCode.介護給付サービス.getコード().equals(business.getCsvBusiness().get現在のサービス区分コード())) {
             data.set訪問介護ホームヘルプサービス(getサービス状況項目(business.getサービスの状況(), 連番0));
             data.set訪問入浴介護(getサービス状況項目(business.getサービスの状況(), 連番1));
@@ -369,7 +376,7 @@ public class CreateTarget {
             data.set居宅療養管理指導(getサービス状況項目(business.getサービスの状況(), 連番4));
             data.set通所介護デイサービス(getサービス状況項目(business.getサービスの状況(), 連番5));
             data.set通所リハビリテーション(getサービス状況項目(business.getサービスの状況(), 連番6));
-            data.set住宅改修介護給付(business.getCsvBusiness().get住宅改修介護給付());
+            data.set住宅改修介護給付(edit真理値To数値(business.getCsvBusiness().get住宅改修介護給付()));
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().get識別コード())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().get識別コード())) {
                 data.set短期入所生活介護ショートステイ(getサービス状況項目(business.getサービスの状況(), 連番8));
@@ -417,7 +424,7 @@ public class CreateTarget {
             data.set介護予防居宅療養管理指導(getサービス状況項目(business.getサービスの状況(), 連番4));
             data.set介護予防通所介護デイサービス(getサービス状況項目(business.getサービスの状況(), 連番5));
             data.set介護予防通所リハビリテーション(getサービス状況項目(business.getサービスの状況(), 連番6));
-            data.set住宅改修予防給付(business.getCsvBusiness().get住宅改修予防給付());
+            data.set住宅改修予防給付(edit真理値To数値(business.getCsvBusiness().get住宅改修予防給付()));
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().get識別コード())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().get識別コード())) {
                 data.set介護予防短期入所生活介護ショートステイ(getサービス状況項目(business.getサービスの状況(), 連番8));
@@ -444,9 +451,9 @@ public class CreateTarget {
 
     private RString getサービス状況項目(List<CreateTargetBusiness> business, int 連番) {
         if (連番 < business.size()) {
-            return business.get(連番).get項目();
+            return editNullToZero(business.get(連番).get項目());
         }
-        return RString.EMPTY;
+        return Zero;
     }
 
     private CreateTargetCsvEntity get調査票調査項目(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
@@ -905,6 +912,7 @@ public class CreateTarget {
     }
 
     private CreateTargetCsvEntity get前回サービスの状況(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+        set前回サービスの状況初期化(data);
         if (ServiceKubunCode.介護給付サービス.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness()
                 .get前回結果_現在のサービス区分コード())) {
             data.set前回結果_訪問介護ホームヘルプサービス(get前回サービス状況項目(business.get前回サービスの状況(), 連番0));
@@ -914,7 +922,7 @@ public class CreateTarget {
             data.set前回結果_居宅療養管理指導(get前回サービス状況項目(business.get前回サービスの状況(), 連番4));
             data.set前回結果_通所介護デイサービス(get前回サービス状況項目(business.get前回サービスの状況(), 連番5));
             data.set前回結果_通所リハビリテーション(get前回サービス状況項目(business.get前回サービスの状況(), 連番6));
-            data.set前回結果_住宅改修介護給付(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_住宅改修介護給付());
+            data.set前回結果_住宅改修介護給付(edit真理値To数値(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_住宅改修介護給付()));
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness().get前回識別コード())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness()
                             .get前回識別コード())) {
@@ -956,7 +964,7 @@ public class CreateTarget {
             data.set前回結果_介護予防居宅療養管理指導(get前回サービス状況項目(business.get前回サービスの状況(), 連番4));
             data.set前回結果_介護予防通所介護デイサービス(get前回サービス状況項目(business.get前回サービスの状況(), 連番5));
             data.set前回結果_介護予防通所リハビリテーション(get前回サービス状況項目(business.get前回サービスの状況(), 連番6));
-            data.set前回結果_住宅改修予防給付(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_住宅改修予防給付());
+            data.set前回結果_住宅改修予防給付(edit真理値To数値(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_住宅改修予防給付()));
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness().get前回識別コード())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness()
                             .get前回識別コード())) {
@@ -984,9 +992,9 @@ public class CreateTarget {
 
     private RString get前回サービス状況項目(List<CreateTargetBusiness> business, int 連番) {
         if (連番 < business.size()) {
-            return business.get(連番).get項目();
+            return editNullToZero(business.get(連番).get項目());
         }
-        return RString.EMPTY;
+        return Zero;
     }
 
     private CreateTargetCsvEntity getCsvData(CreateTargetDataBusiness business, int 連番) {
@@ -998,12 +1006,12 @@ public class CreateTarget {
         get前回サービスの状況(business, data);
         RString 番号 = new RString(連番);
         data.setシーケンシャル番号(番号.padZeroToLeft(連番6));
-        data.set機能コード(RString.EMPTY);
+        data.set機能コード(半角スペース);
         data.set識別コード(business.getCsvBusiness().get識別コード());
         data.set保険者番号(business.getCsvBusiness().get保険者番号());
         data.set被保険者番号(business.getCsvBusiness().get被保険者番号());
         data.set認定申請日(business.getCsvBusiness().get認定申請日());
-        data.set枝番(business.getCsvBusiness().get枝番());
+        data.set枝番(枝番);
         data.set申請区分法令コード(business.getCsvBusiness().get申請区分法令コード());
         data.set申請区分申請時コード(business.getCsvBusiness().get申請区分申請時コード());
         data.set取下区分コード(business.getCsvBusiness().get取下区分コード());
@@ -1014,7 +1022,7 @@ public class CreateTarget {
         data.set性別コード(business.getCsvBusiness().get性別コード());
         data.set被保険者ｶﾅ氏名(business.getCsvBusiness().get被保険者ｶﾅ氏名());
         data.set被保険者漢字氏名(business.getCsvBusiness().get被保険者漢字氏名());
-        data.set郵便番号(business.getCsvBusiness().get郵便番号());
+        data.set郵便番号(edit郵便番号ハイフン(business.getCsvBusiness().get郵便番号()));
         data.set住所(business.getCsvBusiness().get住所());
         data.set電話番号(business.getCsvBusiness().get電話番号());
         data.set病院施設等の名称(business.getCsvBusiness().get病院施設等の名称());
@@ -1113,5 +1121,108 @@ public class CreateTarget {
 
     private CreateTargetValidationHandler getValidationHandler(CreateTargetDiv div) {
         return new CreateTargetValidationHandler(div);
+    }
+
+    private RString edit郵便番号ハイフン(RString 郵便番号) {
+        if (郵便番号 != null) {
+            RString 郵便番号頭 = 郵便番号.substring(0, 3);
+            RString 郵便番号尻 = 郵便番号.substring(3);
+            return 郵便番号頭.concat(ハイフン).concat(郵便番号尻);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString edit真理値To数値(RString 真理値) {
+        if (真理値.equals(new RString("t")) || 真理値.equals(new RString("f"))) {
+            return 真理値.equals(new RString("t")) ? 真 : 偽;
+        }
+        return 真理値;
+    }
+
+    private RString editNullToZero(RString 文字列) {
+        if (文字列 != null) {
+            return 文字列;
+        }
+        return Zero;
+    }
+
+    private void setサービスの状況初期化(CreateTargetCsvEntity data) {
+        data.set訪問介護ホームヘルプサービス(Zero);
+        data.set訪問入浴介護(Zero);
+        data.set訪問看護(Zero);
+        data.set訪問リハビリテーション(Zero);
+        data.set居宅療養管理指導(Zero);
+        data.set通所介護デイサービス(Zero);
+        data.set通所リハビリテーション(Zero);
+        data.set短期入所生活介護ショートステイ(Zero);
+        data.set短期入所療養介護(Zero);
+        data.set特定施設入居者生活介護(Zero);
+        data.set福祉用具貸与(Zero);
+        data.set特定福祉用具販売(Zero);
+        data.set住宅改修介護給付(Zero);
+        data.set夜間対応型訪問介護(Zero);
+        data.set認知症対応型通所介護(Zero);
+        data.set小規模多機能型居宅介護(Zero);
+        data.set認知症対応型共同生活介護グループホーム(Zero);
+        data.set地域密着型特定施設入居者生活介護(Zero);
+        data.set地域密着型介護老人福祉施設入所者生活介護(Zero);
+        data.set定期巡回随時対応型訪問介護看護(Zero);
+        data.set複合型サービス(Zero);
+        data.set介護予防訪問介護ホームヘルプサービス(Zero);
+        data.set介護予防訪問入浴介護(Zero);
+        data.set介護予防訪問看護(Zero);
+        data.set介護予防訪問リハビリテーション(Zero);
+        data.set介護予防居宅療養管理指導(Zero);
+        data.set介護予防通所介護デイサービス(Zero);
+        data.set介護予防短期入所生活介護ショートステイ(Zero);
+        data.set介護予防通所リハビリテーション(Zero);
+        data.set介護予防短期入所療養介護(Zero);
+        data.set介護予防特定施設入居者生活介護(Zero);
+        data.set介護予防福祉用具貸与(Zero);
+        data.set特定介護予防福祉用具販売(Zero);
+        data.set住宅改修予防給付(Zero);
+        data.set介護予防認知症対応型通所介護(Zero);
+        data.set介護予防小規模多機能型居宅介護(Zero);
+        data.set介護予防認知症対応型共同生活介護グループホーム(Zero);
+    }
+
+    private void set前回サービスの状況初期化(CreateTargetCsvEntity data) {
+        data.set前回結果_訪問介護ホームヘルプサービス(Zero);
+        data.set前回結果_訪問入浴介護(Zero);
+        data.set前回結果_訪問看護(Zero);
+        data.set前回結果_訪問リハビリテーション(Zero);
+        data.set前回結果_居宅療養管理指導(Zero);
+        data.set前回結果_通所介護デイサービス(Zero);
+        data.set前回結果_通所リハビリテーション(Zero);
+        data.set前回結果_短期入所生活介護ショートステイ(Zero);
+        data.set前回結果_短期入所療養介護(Zero);
+        data.set前回結果_特定施設入居者生活介護(Zero);
+        data.set前回結果_福祉用具貸与(Zero);
+        data.set前回結果_特定福祉用具販売(Zero);
+        data.set前回結果_住宅改修介護給付(Zero);
+        data.set前回結果_夜間対応型訪問介護(Zero);
+        data.set前回結果_認知症対応型通所介護(Zero);
+        data.set前回結果_小規模多機能型居宅介護(Zero);
+        data.set前回結果_認知症対応型共同生活介護グループホーム(Zero);
+        data.set前回結果_地域密着型特定施設入居者生活介護(Zero);
+        data.set前回結果_地域密着型介護老人福祉施設入所者生活介護(Zero);
+        data.set前回結果_定期巡回随時対応型訪問介護看護(Zero);
+        data.set前回結果_複合型サービス(Zero);
+        data.set前回結果_介護予防訪問介護ホームヘルプサービス(Zero);
+        data.set前回結果_介護予防訪問入浴介護(Zero);
+        data.set前回結果_介護予防訪問看護(Zero);
+        data.set前回結果_介護予防訪問リハビリテーション(Zero);
+        data.set前回結果_介護予防居宅療養管理指導(Zero);
+        data.set前回結果_介護予防通所介護デイサービス(Zero);
+        data.set前回結果_介護予防通所リハビリテーション(Zero);
+        data.set前回結果_介護予防短期入所生活介護ショートステイ(Zero);
+        data.set前回結果_介護予防短期入所療養介護(Zero);
+        data.set前回結果_介護予防特定施設入居者生活介護(Zero);
+        data.set前回結果_介護予防福祉用具貸与(Zero);
+        data.set前回結果_特定介護予防福祉用具販売(Zero);
+        data.set前回結果_住宅改修予防給付(Zero);
+        data.set前回結果_介護予防認知症対応型通所介護(Zero);
+        data.set前回結果_介護予防小規模多機能型居宅介護(Zero);
+        data.set前回結果_介護予防認知症対応型共同生活介護グループホーム(Zero);
     }
 }

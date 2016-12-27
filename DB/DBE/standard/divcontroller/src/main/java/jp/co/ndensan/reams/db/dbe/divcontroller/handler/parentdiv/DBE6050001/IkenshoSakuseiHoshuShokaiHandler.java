@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.Iken
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.dgIkenshoSakuseiHoshu_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class IkenshoSakuseiHoshuShokaiHandler {
 
     private static final RString MARU = new RString("○");
+    private static final RString IRAIKUBUN_SHO = new RString("初");
+    private static final RString IRAIKUBUN_SAI = new RString("再");
     private final IkenshoSakuseiHoshuShokaiDiv div;
 
     /**
@@ -52,8 +54,9 @@ public class IkenshoSakuseiHoshuShokaiHandler {
      * 一覧結果を設定です。
      *
      * @param ikenshoHoshuShokaiBusinessList 意見書作成報酬照会
+     * @param 総件数
      */
-    public void set一覧結果(List<IkenshoHoshuShokaiBusiness> ikenshoHoshuShokaiBusinessList) {
+    public void set一覧結果(List<IkenshoHoshuShokaiBusiness> ikenshoHoshuShokaiBusinessList, int 総件数) {
         Decimal 在宅新規_合計 = Decimal.ZERO;
         Decimal 在宅継続_合計 = Decimal.ZERO;
         Decimal 施設新規_合計 = Decimal.ZERO;
@@ -81,10 +84,10 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             if (date.get主治医意見書受領年月日() != null) {
                 row.getNyushubi().setValue(new RDate(date.get主治医意見書受領年月日().toString()));
             }
-            if (NinteiChousaIraiKubunCode.初回.getコード().equals(date.get主治医意見書依頼区分())) {
-                row.setIkenshoIraiKubun(new RString("初"));
+            if (IkenshoIraiKubun.初回依頼.getコード().equals(date.get主治医意見書依頼区分())) {
+                row.setIkenshoIraiKubun(IRAIKUBUN_SHO);
             } else {
-                row.setIkenshoIraiKubun(new RString("再"));
+                row.setIkenshoIraiKubun(IRAIKUBUN_SAI);
             }
             row.setHokenshaBango(date.get証記載保険者番号());
             row.setHihokenshaBango(date.get被保険者番号());
@@ -115,7 +118,6 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             row.setIkenshoIraiRirekiNo(new RString(date.get主治医意見書作成依頼履歴番号()));
             row_list.add(row);
         }
-        div.getTxtTotalCount().setValue(count);
         div.getTxtZaitakuShinki().setValue(在宅新規_合計);
         div.getTxtZaitakuKeizoku().setValue(在宅継続_合計);
         div.getTxtShisetsuShinki().setValue(施設新規_合計);
@@ -124,6 +126,9 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         div.getTxtShinryohi().setValue(診療費_合計);
         div.getTxtHoshuGokei().setValue(報酬_合計);
         div.getDgIkenshoSakuseiHoshu().setDataSource(row_list);
+        Decimal 最大表示件数 = div.getTxtMaxKensu().getValue();
+        div.getDgIkenshoSakuseiHoshu().getGridSetting().setLimitRowCount(最大表示件数.intValue());
+        div.getDgIkenshoSakuseiHoshu().getGridSetting().setSelectedRowCount(総件数);
     }
 
     /**

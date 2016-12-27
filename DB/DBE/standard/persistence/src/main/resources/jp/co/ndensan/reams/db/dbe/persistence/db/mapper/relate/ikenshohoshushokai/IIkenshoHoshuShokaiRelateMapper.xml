@@ -9,72 +9,9 @@
     <select id="select合計額リスト" resultMap="resultMap_IkenshoHoshuShokaiRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshohoshushokai.IkenshoHoshuShokaiMapperParameter" fetchSize="500" resultOrdered="true">
         <if test="batchFlag"> WITH t1 as	(</if>
-              SELECT                    T7051."shichosonCode",													
-					T5602."shujiiIryoKikanCode",											
-					T5911."iryoKikanMeisho",													
-					T5912."shujiiName",													
-					T5602."iraishoSakuseiIraiYMD" AS "依頼日",													
-					T5602."ikenshoKinyuYMD" AS "記入日",												
-					T5602."ikenshoJuryoYMD" AS "入手日",													
-					T5101."shoKisaiHokenshaNo" AS "保険者",													
-					T5101."hihokenshaNo",													
-					T5101."hihokenshaName",	
-					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='1' AND T5302."zaitakuShisetsuKubun"='1' THEN '○' ELSE '' END AS "在宅_新",
-					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='2' AND T5302."zaitakuShisetsuKubun"='1' THEN '○' ELSE '' END AS "在宅_継",
-					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='1' AND T5302."zaitakuShisetsuKubun"='2' THEN '○' ELSE '' END AS "施設_新",
-					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='2' AND T5302."zaitakuShisetsuKubun"='2' THEN '○' ELSE '' END AS "施設_継",												
-					T5302."ikenshoIraiKubun",											
-					T5602."shujiiCode",													
-					COALESCE(T5602."ikenshoSakuseiryo", 0) AS "ikenshoSakuseiryo",													
-					COALESCE(T5602."ikenshoBettoShinryohi", 0) AS "ikenshoBettoShinryohi",
-                                        COALESCE(T5602."ikenshoHoshu", 0) AS "ikenshoHoshu",	
-                                        T5602."shinseishoKanriNo",
-                                        T5602."ikenshoIraiRirekiNo"							
-		FROM		rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS  T5602													
-		INNER JOIN	rgdb."DbT5101NinteiShinseiJoho" AS  T5101													
-		ON			T5101."shinseishoKanriNo"=T5602."shinseishoKanriNo"													
-		AND			T5101."logicalDeletedFlag"=False																							
-		INNER JOIN	rgdb."DbT7051KoseiShichosonMaster" AS  T7051													
-		ON			T7051."shoKisaiHokenshaNo"=T5101."shoKisaiHokenshaNo"																								
-		INNER JOIN	rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911													
-		ON			T5911."shichosonCode"=T7051."shichosonCode"												
-		AND			T5911."shujiiIryokikanCode"=T5602."shujiiIryoKikanCode"																									
-		INNER JOIN	rgdb."DbT5912ShujiiJoho" AS  T5912													
-		ON			T5912."shichosonCode"=T7051."shichosonCode"													
-		AND			T5912."shujiiIryokikanCode"=T5602."shujiiIryoKikanCode"													
-		AND			T5912."shujiiCode"=T5602."shujiiCode"										
-		INNER JOIN	rgdb."DbT5302ShujiiIkenshoJoho" AS  T5302													
-		ON			T5602."shinseishoKanriNo"=T5302."shinseishoKanriNo"	
-		AND			T5602."ikenshoIraiRirekiNo"=T5302."ikenshoIraiRirekiNo"																								
-		WHERE	 1=1
-                <if test="作成依頼日開始Flag">
-                    AND #{作成依頼日開始} <![CDATA[<=]]> T5602."iraishoSakuseiIraiYMD"
-                </if>
-                <if test="作成依頼日終了Flag">
-                    AND T5602."iraishoSakuseiIraiYMD" <![CDATA[<=]]> #{作成依頼日終了}
-                </if>
-                <if test="保険者Flag">
-                    AND T7051."shichosonCode" = #{保険者}
-                </if>
-                <if test="batchFlag">
-                    AND
-                     <foreach collection="ikenshoBusiness" item="ikensho" open="(" separator="OR" close=")">
-                    (T5602."shujiiIryoKikanCode"=#{ikensho.主治医医療機関コード}												
-                     AND T5602."shujiiCode"=#{ikensho.主治医コード}												
-                     AND T5602."shinseishoKanriNo"=#{ikensho.申請書管理番号}												
-                     AND T5602."ikenshoIraiRirekiNo"=#{ikensho.主治医意見書作成依頼履歴番号})
-                     </foreach>	 
-                </if>
-                <!-- バッチから呼び出された場合に主治医医療機関コードで改ページするため、並び替えが必要 -->
-                <!--<if test="画面Flag">-->
-		    ORDER BY            T7051."shichosonCode",													
-		    			T5602."shujiiIryoKikanCode",													
-		    			T5602."shujiiCode",													
-					T5602."iraishoSakuseiIraiYMD" DESC	
-                <!--</if>-->
-		<if test="最大表示件数Flag">
-                    LIMIT #{最大表示件数}	
-                </if> 	
+                SELECT
+                <include refid="columns" />
+                <include refid="tables" />
                 <if test="batchFlag">) SELECT A.*, B.*, C.*,D.*,E.*,F.*,G.*,H.*,K.*
                                         FROM t1 as A,
                     (SELECT COUNT(1) AS 在新_合計 FROM t1 AS T WHERE T."在宅_新"='○') as B
@@ -96,6 +33,87 @@
               
                 </if>									
     </select>
+    
+    <select id="getCount" 
+            resultType = "int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshohoshushokai.IkenshoHoshuShokaiMapperParameter" 
+            fetchSize="500" 
+            resultOrdered="true">
+        SELECT COUNT(*)
+        <include refid="tables" />
+    </select>
+    
+    <sql id="tables">
+          FROM		rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS  T5602													
+          INNER JOIN	rgdb."DbT5101NinteiShinseiJoho" AS  T5101													
+          ON			T5101."shinseishoKanriNo"=T5602."shinseishoKanriNo"													
+          AND			T5101."logicalDeletedFlag"=False																							
+          INNER JOIN	rgdb."DbT7051KoseiShichosonMaster" AS  T7051													
+          ON			T7051."shoKisaiHokenshaNo"=T5101."shoKisaiHokenshaNo"																								
+          INNER JOIN	rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911													
+          ON			T5911."shichosonCode"=T7051."shichosonCode"												
+          AND			T5911."shujiiIryokikanCode"=T5602."shujiiIryoKikanCode"																									
+          INNER JOIN	rgdb."DbT5912ShujiiJoho" AS  T5912													
+          ON			T5912."shichosonCode"=T7051."shichosonCode"													
+          AND			T5912."shujiiIryokikanCode"=T5602."shujiiIryoKikanCode"													
+          AND			T5912."shujiiCode"=T5602."shujiiCode"										
+          INNER JOIN	rgdb."DbT5302ShujiiIkenshoJoho" AS  T5302													
+          ON			T5602."shinseishoKanriNo"=T5302."shinseishoKanriNo"	
+          AND			T5602."ikenshoIraiRirekiNo"=T5302."ikenshoIraiRirekiNo"																								
+          WHERE	 1=1
+          <if test="作成依頼日開始Flag">
+              AND #{作成依頼日開始} <![CDATA[<=]]> T5602."iraishoSakuseiIraiYMD"
+          </if>
+          <if test="作成依頼日終了Flag">
+              AND T5602."iraishoSakuseiIraiYMD" <![CDATA[<=]]> #{作成依頼日終了}
+          </if>
+          <if test="保険者Flag">
+              AND T7051."shichosonCode" = #{保険者}
+          </if>
+          <if test="batchFlag">
+              AND
+               <foreach collection="ikenshoBusiness" item="ikensho" open="(" separator="OR" close=")">
+              (T5602."shujiiIryoKikanCode"=#{ikensho.主治医医療機関コード}												
+               AND T5602."shujiiCode"=#{ikensho.主治医コード}												
+               AND T5602."shinseishoKanriNo"=#{ikensho.申請書管理番号}												
+               AND T5602."ikenshoIraiRirekiNo"=#{ikensho.主治医意見書作成依頼履歴番号})
+               </foreach>	 
+          </if>
+          <if test="orderByFlag">
+              ORDER BY            T7051."shichosonCode",													
+                                  T5602."shujiiIryoKikanCode",													
+                                  T5602."shujiiCode",													
+                                  T5602."iraishoSakuseiIraiYMD" DESC	
+          </if>
+          <if test="最大表示件数Flag">
+              LIMIT #{最大表示件数}	
+          </if>
+    </sql>
+    
+    <sql id="columns">
+        T7051."shichosonCode",
+        T5602."shujiiIryoKikanCode",
+        T5911."iryoKikanMeisho",
+        T5912."shujiiName",
+        T5602."iraishoSakuseiIraiYMD" AS "依頼日",
+        T5602."ikenshoKinyuYMD" AS "記入日",
+        T5602."ikenshoJuryoYMD" AS "入手日",
+        T5101."shoKisaiHokenshaNo" AS "保険者",
+        T5101."hihokenshaNo",
+        T5101."hihokenshaName",
+        CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='1' AND T5302."zaitakuShisetsuKubun"='1' THEN '○' ELSE '' END AS "在宅_新",
+        CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='2' AND T5302."zaitakuShisetsuKubun"='1' THEN '○' ELSE '' END AS "在宅_継",
+        CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='1' AND T5302."zaitakuShisetsuKubun"='2' THEN '○' ELSE '' END AS "施設_新",
+        CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='2' AND T5302."zaitakuShisetsuKubun"='2' THEN '○' ELSE '' END AS "施設_継",
+        T5302."ikenshoIraiKubun",
+        T5602."shujiiCode",
+        COALESCE(T5602."ikenshoSakuseiryo", 0) AS "ikenshoSakuseiryo",
+        COALESCE(T5602."ikenshoBettoShinryohi", 0) AS "ikenshoBettoShinryohi",
+        COALESCE(T5602."ikenshoHoshu", 0) AS "ikenshoHoshu",
+        T5602."shinseishoKanriNo",
+        T5602."ikenshoIraiRirekiNo"
+    </sql>
+    
     <resultMap id="resultMap_IkenshoHoshuShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenshoHoshuShokaiRelateEntity" autoMapping="true">
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="主治医医療機関コード" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

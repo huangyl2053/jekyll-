@@ -108,7 +108,6 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString モード_登録 = new RString("登録");
     private static final RString モード_中止 = new RString("中止");
     private static final RString モード_週COPY = new RString("週COPY");
-    private static final RString 保存 = new RString("保存");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -412,6 +411,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
         set開催予定入力欄(div.getTxtSeteibi().getValue());
+        div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
         return ResponseData.of(div).respond();
     }
@@ -482,14 +482,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                     for (ShinsakaiKaisaiYoteiJohoBusiness yoteiJohoBusiness : yoteiJohoNichiBusinessList.records()) {
                         内部実績AddEntity(yoteiJohoBusiness);
                     }
-                    if (翌月更新有無 == false) {
-                        翌月更新有無 = 週コピー開始日.getMonthValue() != 開始日.getMonthValue();
-                        if (翌月更新有無) {
-                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, true);
-                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 週コピー開始日.getMonthValue());
-                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 開始日.getMonthValue());
-                        }
-                    }
+                    check翌月更新有無(週コピー開始日, 開始日);
                 }
             }
             モード = モード_週COPY;
@@ -693,8 +686,9 @@ public class ShinsakaiKaisaiYoteiToroku {
                 FlexibleYear 年度 = entity.get日付().getNendo();
                 RString 開催番号;
                 if (Saiban.referMetaData(SubGyomuCode.DBE認定支援, 汎用キー, 年度) == null) {
-                    long minNumber = new Long(年度.toString().concat("0001"));
-                    Saiban.insert(SubGyomuCode.DBE認定支援, 汎用キー, 年度, minNumber, 99999999, false, 1, 0, CheckDigitKind.Unchecked);
+                    long minNumber = Long.valueOf(年度.toString().concat("0001"));
+                    final long maxNumber = 99999999;
+                    Saiban.insert(SubGyomuCode.DBE認定支援, 汎用キー, 年度, minNumber, maxNumber, false, 1, 0, CheckDigitKind.Unchecked);
                 }
                 開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
                 RString 合議体番号 = new RString(entity.get合議体番号());
@@ -805,6 +799,17 @@ public class ShinsakaiKaisaiYoteiToroku {
         entity.set開催番号(yoteiJohoBusiness.get開催番号());
         entity.set審査会名称(審査会名称);
         yoteiJohoEntityList2.add(entity);
+    }
+
+    private void check翌月更新有無(FlexibleDate 週コピー開始日, FlexibleDate 開始日) throws IllegalStateException {
+        if (!翌月更新有無) {
+            翌月更新有無 = 週コピー開始日.getMonthValue() != 開始日.getMonthValue();
+            if (翌月更新有無) {
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, true);
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 週コピー開始日.getMonthValue());
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 開始日.getMonthValue());
+            }
+        }
     }
 
     private ValidationMessageControlPairs getWeekCopyCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
@@ -952,6 +957,9 @@ public class ShinsakaiKaisaiYoteiToroku {
             ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, false);
             ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 0);
             ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 0);
+
+            div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), true);
 
             //当月分
             yoteiJohoEntityList = new ArrayList<>();

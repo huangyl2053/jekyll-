@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiDataName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.dgTorikomiTaiasho_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -25,6 +27,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
 
     private final NinteiShinsakaiKekkaDataTorikomiDiv div;
+    private static final RString 分割 = new RString("＿");
+    private static final int 回数 = 0;
+    private static final int ファイル名 = 1;
+    private static final RString KEY_0 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -58,17 +64,71 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
      */
     public ValidationMessageControlPairs 一致性チェック(ValidationMessageControlPairs validPairs, RString fileName, RString filePath) {
         boolean flag = true;
-        for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getDataSource()) {
-            if (row.getFileName().equals(fileName)) {
-                CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build();
-                row.getDataNum().setValue(new Decimal(getSize(read)));
-                flag = false;
+        List<RString> splite = fileName.split(分割.toString());
+        if (splite.size() < 2) {
+            validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.一致性チェック, div.getUplPanel()));
+            return validPairs;
+        }
+        for (ShinsakaiDataName shinsakaiData : ShinsakaiDataName.values()) {
+            for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getDataSource()) {
+                if (row.getCsvName().equals(splite.get(ファイル名)) && shinsakaiData.getファイル名称().equals(splite.get(ファイル名))) {
+                    CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build();
+                    Decimal 件数 = new Decimal(getSize(read));
+                    row.getDataNum().setValue(件数);
+                    set隠し項目(shinsakaiData, splite, 件数);
+                    flag = false;
+                }
             }
         }
         if (flag) {
             validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.一致性チェック, div.getUplPanel()));
         }
         return validPairs;
+    }
+
+    /**
+     * 取込みファイルの開催回数が一致しているかをチェックします。
+     *
+     * @param validPairs
+     * @return
+     */
+    public ValidationMessageControlPairs 回数チェック(ValidationMessageControlPairs validPairs) {
+        if (div.getRadTorikomiTaishoData().getSelectedKey().contains(KEY_0)) {
+            check開催回数一致(validPairs);
+        }
+        return validPairs;
+    }
+
+    private void check開催回数一致(ValidationMessageControlPairs validPairs) {
+        if (div.getRadShinsain().getSelectedKey().equals(KEY_0)) {
+            if (!div.getHdnTxtKaisaiKaisuIin().equals(div.getHdnTxtKaisaiKaisuJoho())
+                || !div.getHdnTxtKaisaiKaisuIin().equals(div.getHdnTxtKaisaiKaisuKekka())
+                || !div.getHdnTxtKaisaiKaisuJoho().equals(div.getHdnTxtKaisaiKaisuKekka())) {
+                validPairs.add(new ValidationMessageControlPair(
+                    new ValidationMessage(UrErrorMessages.項目に対する制約, "開催回", "一つ"), div.getDgTorikomiTaiasho()));
+            }
+        } else {
+            if (!div.getHdnTxtKaisaiKaisuJoho().equals(div.getHdnTxtKaisaiKaisuKekka())) {
+                validPairs.add(new ValidationMessageControlPair(
+                    new ValidationMessage(UrErrorMessages.項目に対する制約, "開催回", "一つ"), div.getDgTorikomiTaiasho()));
+            }
+        }
+    }
+
+    private void set隠し項目(ShinsakaiDataName shinsakaiData, List<RString> splite, Decimal 件数) {
+        if (shinsakaiData == ShinsakaiDataName.審査会情報) {
+            div.setHdnTxtKaisaiKaisuJoho(splite.get(回数));
+            div.setHdnTxtKensuShinsakaiJoho(new RString(件数.toString()));
+        } else if (shinsakaiData == ShinsakaiDataName.審査委員) {
+            div.setHdnTxtKaisaiKaisuIin(splite.get(回数));
+            div.setHdnTxtKensuShinsaIin(new RString(件数.toString()));
+        } else if (shinsakaiData == ShinsakaiDataName.審査結果) {
+            div.setHdnTxtKaisaiKaisuKekka(splite.get(回数));
+            div.setHdnTxtKensuShinsaKekka(new RString(件数.toString()));
+        } else {
+            div.setHdnTxtKaisaiKaisuNintei(splite.get(回数));
+            div.setHdnTxtKensuNintei(new RString(件数.toString()));
+        }
     }
 
     private int getSize(CsvListReader read) {
@@ -112,7 +172,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
         }
     }
 
-    private class ValidationMessage implements IValidationMessage {
+    private static final class ValidationMessage implements IValidationMessage {
 
         private final Message message;
 

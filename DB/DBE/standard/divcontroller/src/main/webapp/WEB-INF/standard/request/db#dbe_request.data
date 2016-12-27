@@ -69,10 +69,12 @@ dbe/db/dbe/GensenChoshuDataSakusei/getParameter
 dbe/db/dbe/GensenChoshuDataSakusei/onClick_csvCreate
 dbe/db/dbe/GensenChoshuDataSakusei/onLoad
 dbe/db/dbe/GetsureiShori/onChange_jyotaiKubun
+dbe/db/dbe/GetsureiShori/onChange_txtMaxCount
 dbe/db/dbe/GetsureiShori/onClick_BtnCenterSoshin
 dbe/db/dbe/GetsureiShori/onClick_BtnCompleteGetsureiShori
 dbe/db/dbe/GetsureiShori/onClick_BtnDataOutput
 dbe/db/dbe/GetsureiShori/onClick_btnOutputCsv
+dbe/db/dbe/GetsureiShori/onClick_shorikeizoku
 dbe/db/dbe/GetsureiShori/onLoad
 dbe/db/dbe/GogitaiJohoSakusei/btnShow
 dbe/db/dbe/GogitaiJohoSakusei/onClick_btnBatchRegister
@@ -270,6 +272,7 @@ dbe/db/dbe/ImagePanel/onclick_btnDownLoadCheck
 dbe/db/dbe/Imageinput/onBeforeOpenDialog_btnBatchRegister
 dbe/db/dbe/Imageinput/onClick_BtnSave
 dbe/db/dbe/Imageinput/onClick_Ikensho
+dbe/db/dbe/Imageinput/onClick_btnUpload
 dbe/db/dbe/Imageinput/onLoad
 dbe/db/dbe/Imageinput/onSetBatchParameterURL
 dbe/db/dbe/Imageinput/onclick_BtnUpload
@@ -432,9 +435,9 @@ dbe/db/dbe/NinteiChosaJissekiShokai/onClick_btnBackToKensaku
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_btnKensakuClear
 dbe/db/dbe/NinteiChosaJissekiShokai/onClick_btnkensaku
 dbe/db/dbe/NinteiChosaJissekiShokai/onLoad
-dbe/db/dbe/NinteiChosaOCRTorikomi/onBeforeOpenDialog_btnBatchRegister
 dbe/db/dbe/NinteiChosaOCRTorikomi/onClick_BtnChosahyoTorikomi
 dbe/db/dbe/NinteiChosaOCRTorikomi/onClick_BtnSave
+dbe/db/dbe/NinteiChosaOCRTorikomi/onClick_btnUpload
 dbe/db/dbe/NinteiChosaOCRTorikomi/onLoad
 dbe/db/dbe/NinteiChosaOCRTorikomi/onSetBatchParameterURL
 dbe/db/dbe/NinteiChosaOCRTorikomi/onclick_BtnUpload
@@ -658,6 +661,7 @@ dbe/db/dbe/NinteichosaIrai/onLoad
 dbe/db/dbe/NinteichosaIrai/onOkClose_btnIraishoToOutput
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnBackSonotaIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnClearKensakuJoken
+dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvKozaNashi
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvSpool
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnInsert
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnKakutei
@@ -738,6 +742,7 @@ dbe/db/dbe/SeikatsuServiceIken/onChange_radUndo
 dbe/db/dbe/SeikatsuServiceIken/onClick_btnCancel
 dbe/db/dbe/SeikatsuServiceIken/onClick_btnKakutei
 dbe/db/dbe/SeikatsuServiceIken/onLoad
+dbe/db/dbe/SeikatsuhogoToroku/onActive
 dbe/db/dbe/SeikatsuhogoToroku/onChange_ddlHokenshaList
 dbe/db/dbe/SeikatsuhogoToroku/onClick_btnSaiban
 dbe/db/dbe/SeikatsuhogoToroku/onClick_btnToNinteiShinseiToroku
@@ -758,12 +763,14 @@ dbe/db/dbe/ShinchokuDataOutput/onClick_btnResearchr
 dbe/db/dbe/ShinchokuDataOutput/onClick_btnShinchokuDataOutput
 dbe/db/dbe/ShinchokuDataOutput/onLoad
 dbe/db/dbe/ShinsaKaiKekkaToroku/onChange_radTaishoshaJotai
+dbe/db/dbe/ShinsaKaiKekkaToroku/onChange_txtMaxCount
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnCompleteKekkaToroku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnKekkaToroku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnMobileToroku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnOCRToroku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnRyooutput
 dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_btnRyooutputBoffer
+dbe/db/dbe/ShinsaKaiKekkaToroku/onClick_shorikeizoku
 dbe/db/dbe/ShinsaKaiKekkaToroku/onLoad
 dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClickBtnUpdate
 dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClickChosaKekka
@@ -819,7 +826,6 @@ dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnSave
 dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnShinsakaiIinAdd
 dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnShozokuKikanAdd
 dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_btnToroku
-dbe/db/dbe/ShinsakaiIinJohoToroku/onClick_shinsaInJohoIchiranGyo
 dbe/db/dbe/ShinsakaiIinJohoToroku/onDoubleClick_shinsaInJohoIchiranGyo
 dbe/db/dbe/ShinsakaiIinJohoToroku/onLoad
 dbe/db/dbe/ShinsakaiIinJohoToroku/onOkClose_btnNiteiChosaItakusakiGuide
@@ -872,6 +878,7 @@ dbe/db/dbe/ShinsakaiKekkaToroku/onClick_KaKuTeiButton
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_Save
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_SelectButton
 dbe/db/dbe/ShinsakaiKekkaToroku/onClick_btnBack
+dbe/db/dbe/ShinsakaiKekkaToroku/onClick_btnCancel
 dbe/db/dbe/ShinsakaiKekkaToroku/onLoad
 dbe/db/dbe/ShinsakaiKekkaToroku/onOkClose_btnIChiTeikeibunGuide
 dbe/db/dbe/ShinsakaiKekkaToroku/onOkClose_btnIkenTeikeibunGuide
@@ -1001,6 +1008,14 @@ dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnHakkouValidationCheck
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnHozon
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnIrai
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnSearch
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_iraiIchiranHyo
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_iraiSho
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyoYoshi
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiDesign
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiOCR
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_seikyuSho
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_teishutsuIraiSho
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClose_SakuseiIrai
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onLoad
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSaikinshorishaClick
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSelect_dgShinseishaIchiran

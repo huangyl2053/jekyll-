@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2080001.Mas
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2080001.MaskingIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2080001.MaskingValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
-import jp.co.ndensan.reams.db.dbe.service.core.masking.MaskingManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -40,9 +39,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -69,7 +65,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class Masking {
 
-    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+//    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("DBE2080001_MaskingIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -80,9 +76,9 @@ public class Masking {
      * @return レスポンスデータ
      */
     public ResponseData<MaskingDiv> onLoad(MaskingDiv div) {
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            throw new PessimisticLockingException();
-        }
+//        if (!RealInitialLocker.tryGetLock(排他キー)) {
+//            throw new PessimisticLockingException();
+//        }
         div.getRadTaishoDataKubun().setSelectedKey(DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
         div.getTxtSaidaiHyojiKensu().setMaxValue(
@@ -127,6 +123,7 @@ public class Masking {
      * @return レスポンスデータ
      */
     public ResponseData<MaskingDiv> onClick_btnShorikeizoku(MaskingDiv div) {
+        getHandler(div).initialize();
         return ResponseData.of(div).setState(DBE2080001StateName.登録);
     }
 
@@ -163,7 +160,9 @@ public class Masking {
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
-                csvWriter.writeLine(getCsvData(row));
+                if (row.getSelected()) {
+                    csvWriter.writeLine(getCsvData(row));
+                }
 //                AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
 //                        new RString("申請書管理番号"), row.getShinseishoKanriNo())));
             }
@@ -199,7 +198,7 @@ public class Masking {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getDataSource());
-            RealInitialLocker.release(排他キー);
+//            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
         }
         return ResponseData.of(div).respond();
@@ -221,6 +220,12 @@ public class Masking {
             if (is選択なし(div.getDgYokaigoNinteiTaskList().getDataSource())) {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            for (dgYokaigoNinteiTaskList_Row row : div.getDgYokaigoNinteiTaskList().getDataSource()) {
+                if (row.getSelected() && row.getJyuJiIiKenJyo().equals(RString.EMPTY)) {
+                    getValidationHandler().マスキング完了対象者一覧データの完了可能チェック(validationMessages);
+                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+                }
             }
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -244,7 +249,7 @@ public class Masking {
                             new RString("申請書管理番号"), row.getShinseishoKanriNo())));
                 }
             }
-            RealInitialLocker.release(排他キー);
+//            RealInitialLocker.release(排他キー);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・マスキングの保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2080001StateName.完了);

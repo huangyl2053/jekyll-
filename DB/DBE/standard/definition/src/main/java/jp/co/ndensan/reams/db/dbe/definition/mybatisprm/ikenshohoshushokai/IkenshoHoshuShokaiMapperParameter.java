@@ -30,7 +30,7 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
     private final Decimal 最大表示件数;
     private final boolean 最大表示件数Flag;
     private final boolean batchFlag;
-    private final boolean 画面Flag;
+    private final boolean orderByFlag;
     private final List<IkenshoHoshuShokaiIchiranKey> ikenshoBusiness;
 
     /**
@@ -45,7 +45,7 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
      * @param 最大表示件数Flag 最大表示件数Flag
      * @param 最大表示件数 最大表示件数
      * @param batchFlag batchFlag
-     * @param 画面Flag 画面Flag
+     * @param orderByFlag 並び替えFlag
      * @param ikenshoBusiness 主治医意見書作成報酬合計額リストのキー情報
      */
     private IkenshoHoshuShokaiMapperParameter(
@@ -58,7 +58,7 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
             Decimal 最大表示件数,
             boolean 最大表示件数Flag,
             boolean batchFlag,
-            boolean 画面Flag,
+            boolean orderByFlag,
             List<IkenshoHoshuShokaiIchiranKey> ikenshoBusiness) {
         this.作成依頼日終了 = 作成依頼日終了;
         this.作成依頼日開始 = 作成依頼日開始;
@@ -69,7 +69,7 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
         this.最大表示件数 = 最大表示件数;
         this.最大表示件数Flag = 最大表示件数Flag;
         this.batchFlag = batchFlag;
-        this.画面Flag = 画面Flag;
+        this.orderByFlag = orderByFlag;
         this.ikenshoBusiness = ikenshoBusiness;
     }
 
@@ -95,9 +95,35 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
                 !RString.isNullOrEmpty(保険者),
                 保険者,
                 最大表示件数,
-                true,
+                最大表示件数 != null,
                 false,
                 true,
+                null);
+    }
+
+    /**
+     * レコード数取得用パラメータを生成します。
+     *
+     * @param 作成依頼日開始 作成依頼日開始
+     * @param 作成依頼日終了 作成依頼日終了
+     * @param 保険者 保険者
+     * @return レコード数取得用パラメータ
+     */
+    public static IkenshoHoshuShokaiMapperParameter createParameterForGetCount(
+            FlexibleDate 作成依頼日開始,
+            FlexibleDate 作成依頼日終了,
+            RString 保険者) {
+        return new IkenshoHoshuShokaiMapperParameter(
+                作成依頼日終了,
+                作成依頼日開始,
+                !作成依頼日終了.isEmpty(),
+                !作成依頼日開始.isEmpty(),
+                !RString.isNullOrEmpty(保険者),
+                保険者,
+                null,
+                false,
+                false,
+                false,
                 null);
     }
 
@@ -125,7 +151,7 @@ public final class IkenshoHoshuShokaiMapperParameter implements IMyBatisParamete
                 null,
                 false,
                 true,
-                false,
+                true,
                 ikenshoBusiness);
     }
 

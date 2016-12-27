@@ -82,7 +82,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class SabisuJyoukyoA3 {
 
-    private static final RString 記号 = new RString("+");
     private static final RString 月間 = new RString("月間");
     private static final Code A_99 = new Code("99A");
     private static final Code A_02 = new Code("02A");
@@ -122,6 +121,8 @@ public class SabisuJyoukyoA3 {
     private static final RString 認定調査主治段階改善 = new RString("☆");
     private static final RString SEPARATOR = new RString("/");
     private static final int 基準時間算出用_10 = 10;
+    private static final int 基準時間算出用_5 = 5;
+    private static final int 基準時間算出用_12 = 12;
 
     /**
      * サービスの状況を設定します。
@@ -1821,6 +1822,6 @@ public class SabisuJyoukyoA3 {
     }
 
     private int getNumber(int 各基準時間) {
-        return 各基準時間 * 5 / 12;
+        return 各基準時間 * 基準時間算出用_5 / 基準時間算出用_12;
     }
 }

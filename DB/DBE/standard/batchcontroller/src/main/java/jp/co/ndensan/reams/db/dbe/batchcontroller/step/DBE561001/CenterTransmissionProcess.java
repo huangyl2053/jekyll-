@@ -16,12 +16,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -49,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBE-1520-020 wangxiaodong
  */
-public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissionEntity> {
+public class CenterTransmissionProcess extends BatchKeyBreakBase<CenterTransmissionEntity> {
 
     private static final RString SELECT_SHUJIIIKENSHOIKENITEM = new RString("jp.co.ndensan.reams.db.dbe"
             + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getCenterTransmissionData");
@@ -66,6 +68,11 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     private RString ファイル名;
     private int シーケンシャル番号;
     private int 出力データ件数;
+
+    private static final RString 出力する = new RString("出力する");
+    private static final RString 出力しない = new RString("出力しない");
+    private static final RString 未出力のみ = new RString("未出力のみ");
+    private static final RString 出力済みも含む = new RString("出力済みも含む");
 
     /**
      * データ有無の判定です。
@@ -99,7 +106,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         mybitisParamter.setShinseishoKanriNoList(申請書管理番号リスト);
         mybitisParamter.setGaikyoChosaTextImageKubun(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         filename = Path.combinePath(spoolWorkPath, ファイル名);
         csvWriterCenterTransmission = new CsvWriter.InstanceBuilder(filename).
@@ -117,10 +124,10 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     }
 
     @Override
-    protected void process(CenterTransmissionEntity entity) {
+    protected void usualProcess(CenterTransmissionEntity entity) {
         シーケンシャル番号 = シーケンシャル番号 + 1;
-        csvWriterCenterTransmission.writeLine(new CenterTransmissionEditEntity(entity, シーケンシャル番号).getファイル出力項目());
         出力データ件数 = 出力データ件数 + 1;
+        csvWriterCenterTransmission.writeLine(new CenterTransmissionEditEntity(entity, シーケンシャル番号).getファイル出力項目());
         if (!申請書管理番号.equals(entity.getShinseishoKanriNo().value())) {
             出力された申請書管理番号.add(entity.getShinseishoKanriNo().value());
             申請書管理番号 = entity.getShinseishoKanriNo().value();
@@ -129,11 +136,24 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     }
 
     @Override
+    protected void keyBreakProcess(CenterTransmissionEntity entity) {
+        if (isBreak(getBefore(), entity)) {
+        } else {
+        }
+    }
+
+    private boolean isBreak(CenterTransmissionEntity before, CenterTransmissionEntity current) {
+        return !before.getShinseishoKanriNo().equals(current.getShinseishoKanriNo());
+    }
+
+    @Override
     protected void afterExecute() {
         outputShinseishoKanriNo.setValue(出力された申請書管理番号);
         outputJokenhyoFactory();
         csvWriterCenterTransmission.close();
-        manager.spool(filename);
+        if (出力データ件数 != 0) {
+            manager.spool(filename);
+        }
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {
@@ -157,9 +177,18 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
+        出力条件.add(条件(new RString("【データ出力区分】"), getデータ出力区分For出力条件(parameter.is未出力のみ())));
+        if (FlexibleDate.canConvert(parameter.get二次判定開始日())) {
+            出力条件.add(条件(new RString("【二次判定日(開始)】"), DateEditor.to和暦(new FlexibleDate(parameter.get二次判定開始日().toString()))));
+        } else {
+            出力条件.add(条件(new RString("【二次判定日(開始)】"), RString.EMPTY));
+        }
+        if (FlexibleDate.canConvert(parameter.get二次判定終了日())) {
+            出力条件.add(条件(new RString("【二次判定日(終了)】"), DateEditor.to和暦(new FlexibleDate(parameter.get二次判定終了日().toString()))));
+        } else {
+            出力条件.add(条件(new RString("【二次判定日(終了)】"), RString.EMPTY));
+        }
         出力条件.add(条件(new RString("【転入/死亡情報出力区分】"), get情報出力区分For出力条件(parameter.is転入死亡情報出力())));
-        出力条件.add(条件(new RString("【二次判定日(開始)】"), parameter.get二次判定開始日()));
-        出力条件.add(条件(new RString("【二次判定日(終了)】"), parameter.get二次判定終了日()));
         return 出力条件;
     }
 
@@ -170,10 +199,17 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         return 条件.toRString();
     }
 
+    private RString getデータ出力区分For出力条件(boolean is未出力のみ) {
+        if (is未出力のみ) {
+            return 未出力のみ;
+        }
+        return 出力済みも含む;
+    }
+
     private RString get情報出力区分For出力条件(boolean is情報出力) {
         if (is情報出力) {
-            return new RString("0");
+            return 出力する;
         }
-        return new RString("1");
+        return 出力しない;
     }
 }

@@ -50,7 +50,7 @@ public class NinteiChosaJissekiShokaiHandler {
      * 条件をクリアする」ボタンを押します。
      */
     public void onClick_BtnKensakuClear() {
-        div.getRadKijunbi().setSelectedValue(KEY_基準日_初期値);
+        div.getRadKijunbi().setSelectedKey(KEY_基準日_初期値);
         div.getChosaJisshibi().getTxtChosaJisshibi().clearFromValue();
         div.getChosaJisshibi().getTxtChosaJisshibi().clearToValue();
         div.getChosaJisshibi().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);

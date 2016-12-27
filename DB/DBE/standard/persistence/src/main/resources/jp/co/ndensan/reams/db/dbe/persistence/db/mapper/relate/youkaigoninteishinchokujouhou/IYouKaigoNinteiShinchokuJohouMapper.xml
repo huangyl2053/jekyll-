@@ -177,10 +177,10 @@
         WHERE
         "hihokenshaKubunCode" IN ('1', '2')
         <if test="証記載保険者番号フラグ">
-            AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+            AND  "shoKisaiHokenshaNo" = #{証記載保険者番号}
         </if>
         <if test="被保険者番号フラグ">
-            AND  A."hihokenshaNo" = #{被保険者番号}
+            AND  "hihokenshaNo" = #{被保険者番号}
         </if>
         ) AS B 
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo" 

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public class OutputJokenhyoFactoryProcess extends SimpleBatchProcessBase {
 
     private OutputJokenhyoFactoryProcessParameter paramter;
+    private static final int 帳票名_１レコード最大表示数 = 5;
 
     @Override
     protected void process() {
@@ -45,15 +46,27 @@ public class OutputJokenhyoFactoryProcess extends SimpleBatchProcessBase {
         OutputJokenhyoFactory.createInstance(item).print();
     }
 
-    private RString 帳票名文字列(Map<RString, RString> 帳票一覧Map) {
+    private List<RString> get帳票名文字列リスト(Map<RString, RString> 帳票一覧Map) {
         RStringBuilder rsb = new RStringBuilder();
+        int count = 0;
+        List<RString> list = new ArrayList();
         for (Map.Entry<RString, RString> entry : 帳票一覧Map.entrySet()) {
             if (rsb.length() > 0) {
                 rsb.append(",");
             }
-            rsb.append(entry.getValue());
+            if (count == 帳票名_１レコード最大表示数) {
+                list.add(rsb.toRString());
+                count = 0;
+                rsb = new RStringBuilder();
+            } else {
+                rsb.append(entry.getValue());
+                count++;
+            }
         }
-        return rsb.toRString();
+        if (rsb.length() > 0) {
+            list.add(rsb.toRString());
+        }
+        return list;
     }
 
     private List<RString> contribute() {
@@ -64,7 +77,16 @@ public class OutputJokenhyoFactoryProcess extends SimpleBatchProcessBase {
         出力条件.add(条件(new RString("出力スタイル"), 出力スタイル(paramter.getShuturyokuSutairu())));
         出力条件.add(条件(new RString("印刷方法"), 印刷方法(paramter.getPrintHou())));
         出力条件.add(条件(new RString("作成条件"), 作成条件(paramter.getSakuseiJoken(), paramter.getBangoStart(), paramter.getBangoEnd())));
-        出力条件.add(条件(new RString("出力帳票名称"), 帳票名文字列(paramter.get帳票一覧Map())));
+        List<RString> 帳票一覧リスト = get帳票名文字列リスト(paramter.get帳票一覧Map());
+        boolean isFirst = true;
+        for (RString 帳票名 : 帳票一覧リスト) {
+            if (isFirst) {
+                出力条件.add(条件_帳票名(new RString("出力帳票名称"), 帳票名, isFirst));
+                isFirst = false;
+            } else {
+                出力条件.add(条件_帳票名(new RString("　　　　　　"), 帳票名, isFirst));
+            }
+        }
         return 出力条件;
     }
 
@@ -107,4 +129,12 @@ public class OutputJokenhyoFactoryProcess extends SimpleBatchProcessBase {
         return 条件.toRString();
     }
 
+    private RString 条件_帳票名(RString バッチパラメータ名, RString 値, boolean is先頭) {
+        RStringBuilder 条件 = new RStringBuilder();
+        条件.append(is先頭 ? new RString("【") : RString.FULL_SPACE);
+        条件.append(バッチパラメータ名);
+        条件.append(is先頭 ? new RString("】") : RString.FULL_SPACE);
+        条件.append(値);
+        return 条件.toRString();
+    }
 }

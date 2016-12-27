@@ -21,6 +21,7 @@ import lombok.Getter;
 public class CenterTransmissionProcessParameter implements IBatchProcessParameter {
 
     private final List<RString> 申請書管理番号リスト;
+    private final boolean is未出力のみ;
     private final boolean is転入死亡情報出力;
     private final RString 二次判定開始日;
     private final RString 二次判定終了日;
@@ -31,7 +32,8 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
      * コンストラクタです。
      *
      * @param 申請書管理番号リスト 申請書管理番号リスト
-     * @param is転入死亡情報出力 boolean
+     * @param is未出力のみ is未出力のみ
+     * @param is転入死亡情報出力 is転入死亡情報出力
      * @param 二次判定開始日 二次判定開始日
      * @param 二次判定終了日 二次判定終了日
      * @param is二次判定開始日Empty boolean
@@ -39,12 +41,14 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
      */
     public CenterTransmissionProcessParameter(
             List<RString> 申請書管理番号リスト,
+            boolean is未出力のみ,
             boolean is転入死亡情報出力,
             RString 二次判定開始日,
             RString 二次判定終了日,
             boolean is二次判定開始日Empty,
             boolean is二次判定終了日Empty) {
         this.申請書管理番号リスト = 申請書管理番号リスト;
+        this.is未出力のみ = is未出力のみ;
         this.is転入死亡情報出力 = is転入死亡情報出力;
         this.二次判定開始日 = 二次判定開始日;
         this.二次判定終了日 = 二次判定終了日;
@@ -60,6 +64,7 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
     public CenterTransmissionMybitisParamter toCenterTransmissionMybitisParamter() {
         CenterTransmissionMybitisParamter paramter = new CenterTransmissionMybitisParamter();
         paramter.setShinseishoKanriNoList(申請書管理番号リスト);
+        paramter.setMiSyutsuryokuNomi(is未出力のみ);
         paramter.setTennyuShiboSyuturyoku(is転入死亡情報出力);
         paramter.setNijiHanteiKaishiYMD(二次判定開始日);
         paramter.setNijiHanteiShuryoYMD(二次判定終了日);
