@@ -112,7 +112,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
         }
     }
 
-    private class ValidationMessage implements IValidationMessage {
+    private static final class ValidationMessage implements IValidationMessage {
 
         private final Message message;
 
