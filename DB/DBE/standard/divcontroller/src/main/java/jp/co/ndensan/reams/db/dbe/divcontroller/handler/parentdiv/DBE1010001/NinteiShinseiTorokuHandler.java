@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 
 /**
@@ -142,6 +144,12 @@ public class NinteiShinseiTorokuHandler {
             div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         }
         div.getCcdKaigoNinteiShinseiKihon().initialize();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (HihokenshaKubunCode hihokenshaKubun : HihokenshaKubunCode.values()) {
+            dataSource.add(new KeyValueDataSource(hihokenshaKubun.getコード(), hihokenshaKubun.get名称()));
+        }
+        dataSource.remove(new KeyValueDataSource(HihokenshaKubunCode.生活保護.getコード(), HihokenshaKubunCode.生活保護.get名称()));
+        ((KaigoNinteiShinseiKihonJohoInputDiv)div.getCcdKaigoNinteiShinseiKihon()).getDdlHihokenshaKubun().setDataSource(dataSource);
         if (!RString.isNullOrEmpty(business.get支所コード())) {
             div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(business.get支所コード()));
         }

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1010001.NinteiShinseiTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1010001.NinteiShinseiTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseitoroku.NinteiShinseiTorokuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -53,6 +54,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoHokenshaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -160,6 +164,11 @@ public class NinteiShinseiToroku {
         }
         if (MENUID_DBEMN31003.equals(menuID)) {
             Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
+            RString 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+            NinteiShinseiTorokuResult result = null;
+            if (管理番号 != null) {
+                result = manager.getDataForLoad(new ShinseishoKanriNo(管理番号));
+            }
             div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
             if (business != null) {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
@@ -176,7 +185,19 @@ public class NinteiShinseiToroku {
             div.getBtnTainoJokyo().setDisplayNone(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(Boolean.TRUE); 
             div.getCcdAtenaInfo().setDisplayNone(true);
+            div.getBtnTainoJokyo().setVisible(false);
             setCcdShinseiTodokedesha(div);
+            setMinasiCcd(div);
+            if (result == null) {
+                div.getCcdKaigoNinteiShinseiKihon().setShinseiShubetsu(JukyuShinseiJiyu.初回申請);
+                div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.新規申請);
+                div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.その他);
+                ((ChosaItakusakiAndChosainInputDiv)div.getCcdChodsItakusakiAndChosainInput()).getBtnZenkaiFukusha().setDisabled(true);
+                div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().setDisabled(true);
+                div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanTo().setDisabled(true);
+                ((ZenkaiNinteiKekkaJohoDiv)div.getCcdZenkaiNinteiKekkaJoho()).getBtnZenkaiShosai().setDisabled(true);
+                ((NinteiShinseiTodokedeshaDiv)div.getCcdShinseiTodokedesha()).getBtnZenkaiFukusha().setDisabled(true);
+            }
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
 
@@ -198,6 +219,12 @@ public class NinteiShinseiToroku {
                 ((NinteiShinseiTodokedeshaDiv)div.getCcdShinseiTodokedesha()).getBtnAtenaKensaku().setDisabled(true);
             }
         }
+    }
+    
+    private void setMinasiCcd(NinteiShinseiTorokuDiv div) {
+        ((KaigoNinteiShinseiKihonJohoInputDiv)div.getCcdKaigoNinteiShinseiKihon()).getServiceSakujo().setDisplayNone(true);
+        ((KaigoNinteiShinseiKihonJohoInputDiv)div.getCcdKaigoNinteiShinseiKihon()).getDdlShinseiKubunHorei().setDisabled(true);
+        ((ShisetsuJohoCommonChildDivDiv)div.getCcdShisetsuJoho()).setMode_State(ShisetsuJohoCommonChildDivDiv.State.JigyoshaInputGuideMode);
     }
 
     /**
