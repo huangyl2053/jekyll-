@@ -1277,7 +1277,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setHihokenshaNo10(保険者番号リスト.get(INDEX_9));
                 item.setHihokenshaNameKana(business.get被保険者氏名カナ());
                 item.setHihokenshaName(business.get被保険者氏名());
-                item.setBirthYMD(business.get生年月日());
+                RString 生年月日 = RString.EMPTY;
+                if (!RString.isNullOrEmpty(business.get生年月日())) {
+                    生年月日 = new FlexibleDate(business.get生年月日()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+                }
+                item.setBirthYMD(生年月日);
                 item.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
                 if (ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
                     item.setShubetsuZaitaku(記号);
@@ -1521,9 +1526,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get被保険者氏名(),
                         get名称付与(),
                         customerBarCode,
-                        business.get被保険者番号(),
+                        RString.EMPTY,
                         通知文.get(1),
-                        business.get被保険者氏名(),
                         business.get被保険者番号(),
                         business.get医療機関名称(),
                         business.get主治医氏名(),
@@ -1531,7 +1535,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get医療機関電話番号(),
                         get受診日時または期間(),
                         受診場所,
-                        通知文.get(2)
+                        通知文.get(2),
+                        getConfigValue(ConfigNameDBE.介護保険診断命令書)
                 );
                 itemList.add(item);
             }
@@ -1992,5 +1997,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             要介護詳細 = 文字列5;
         }
         return 要介護詳細;
+    }
+    
+    private RString getConfigValue(ConfigNameDBE config) {
+        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 }

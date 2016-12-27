@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShiSeiK
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinsaKeTuKeRelateWithCountEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.yokaigoninteitasklist.IYokaigoNinteiTaskListMapper;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -609,10 +610,14 @@ public class YokaigoNinteiTaskListFinder {
     public SearchResult<ShinSaKeTuKeBusiness> get審査受付モード(YokaigoNinteiTaskListParameter parameter) {
         List<ShinSaKeTuKeBusiness> 審査受付List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<ShinSaKeTuKeRelateEntity> entityList = mapper.get審査受付(parameter);
-        for (ShinSaKeTuKeRelateEntity entity : entityList) {
+        ShinsaKeTuKeRelateWithCountEntity searchResult = mapper.get審査受付(parameter);
+        if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
+            return SearchResult.of(Collections.<ShiSeiKeTuKeBusiness>emptyList(), 0, false);
+        }
+        int totalcount = searchResult.getTotalCount().intValue();
+        for (ShinSaKeTuKeRelateEntity entity : searchResult.getTaishoshaList()) {
             審査受付List.add(new ShinSaKeTuKeBusiness(entity));
         }
-        return SearchResult.of(審査受付List, 0, false);
+        return SearchResult.of(審査受付List, totalcount, parameter.get件数().intValue() < totalcount);
     }
 }

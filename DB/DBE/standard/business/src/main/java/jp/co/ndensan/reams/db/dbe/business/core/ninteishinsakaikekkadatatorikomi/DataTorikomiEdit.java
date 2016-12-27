@@ -50,19 +50,21 @@ public class DataTorikomiEdit {
 
     private DbT5503ShinsakaiWariateIinJohoEntity editDbT5503Entity(TempShinsaIinRelateEntity entity,
                                                                    DbT5503ShinsakaiWariateIinJohoEntity dbt5503Entity) {
-        dbt5503Entity.setShinsakaiKaisaiNo(entity.get介護認定審査会開催番号() == null
+        dbt5503Entity.setShinsakaiKaisaiNo(RString.isNullOrEmpty(entity.get介護認定審査会開催番号())
                                            ? RString.EMPTY : entity.get介護認定審査会開催番号());
-        dbt5503Entity.setShinsakaiIinCode(entity.get介護認定審査会委員コード() == null
+        dbt5503Entity.setShinsakaiIinCode(RString.isNullOrEmpty(entity.get介護認定審査会委員コード())
                                           ? RString.EMPTY : entity.get介護認定審査会委員コード());
-        dbt5503Entity.setShinsakaiKaisaiYMD(entity.get介護認定審査会開催年月日() == null
+        dbt5503Entity.setShinsakaiKaisaiYMD(RString.isNullOrEmpty(entity.get介護認定審査会開催年月日())
                                             ? FlexibleDate.EMPTY : new FlexibleDate(entity.get介護認定審査会開催年月日()));
-        dbt5503Entity.setKaigoninteiShinsakaiGichoKubunCode(entity.get介護認定審査会委員長区分コード() == null
+        dbt5503Entity.setKaigoninteiShinsakaiGichoKubunCode(RString.isNullOrEmpty(entity.get介護認定審査会委員長区分コード())
                                                             ? Code.EMPTY : new Code(entity.get介護認定審査会委員長区分コード()));
-        dbt5503Entity.setShussekiFlag(entity.get委員出席() == null ? false : Boolean.valueOf(entity.get委員出席().toString()));
-        dbt5503Entity.setExistChikokuFlag(entity.get委員遅刻有無() == null ? false : Boolean.valueOf(entity.get委員遅刻有無().toString()));
-        dbt5503Entity.setShussekiTime(entity.get委員出席時間() == null ? RString.EMPTY : entity.get委員出席時間());
-        dbt5503Entity.setExistSotaiFlag(entity.get委員早退有無() == null ? false : Boolean.valueOf(entity.get委員早退有無().toString()));
-        dbt5503Entity.setTaisekiTime(entity.get委員退席時間() == null ? RString.EMPTY : entity.get委員退席時間());
+        dbt5503Entity.setShussekiFlag(RString.isNullOrEmpty(entity.get委員出席()) ? false : Boolean.valueOf(entity.get委員出席().toString()));
+        dbt5503Entity.setExistChikokuFlag(RString.isNullOrEmpty(entity.get委員遅刻有無())
+                                          ? false : Boolean.valueOf(entity.get委員遅刻有無().toString()));
+        dbt5503Entity.setShussekiTime(RString.isNullOrEmpty(entity.get委員出席時間()) ? RString.EMPTY : entity.get委員出席時間());
+        dbt5503Entity.setExistSotaiFlag(RString.isNullOrEmpty(entity.get委員早退有無())
+                                        ? false : Boolean.valueOf(entity.get委員早退有無().toString()));
+        dbt5503Entity.setTaisekiTime(RString.isNullOrEmpty(entity.get委員退席時間()) ? RString.EMPTY : entity.get委員退席時間());
         return dbt5503Entity;
     }
 
@@ -91,53 +93,61 @@ public class DataTorikomiEdit {
 
     private DbT5510IchiGojiHanteiKekkaJohoEntity editDbT5510Entity(TempShinsakaiKekkaEntity entity,
                                                                    DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
-        dbt5510Entity.setShinseishoKanriNo(entity.get申請書管理番号() == null
+        dbt5510Entity.setShinseishoKanriNo(RString.isNullOrEmpty(entity.get申請書管理番号())
                                            ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(entity.get申請書管理番号()));
-        dbt5510Entity.setIchiGojiHanteiYMD(entity.get要介護認定一点五次判定年月日() == null
+        dbt5510Entity.setIchiGojiHanteiYMD(RString.isNullOrEmpty(entity.get要介護認定一点五次判定年月日())
                                            ? FlexibleDate.EMPTY : new FlexibleDate(entity.get要介護認定一点五次判定年月日()));
-        dbt5510Entity.setIchiGojiHanteiKekkaCode(entity.get要介護認定一点五次判定結果コード() == null
+        dbt5510Entity.setIchiGojiHanteiKekkaCode(RString.isNullOrEmpty(entity.get要介護認定一点五次判定結果コード())
                                                  ? Code.EMPTY : new Code(entity.get要介護認定一点五次判定結果コード()));
-        dbt5510Entity.setIchiGojiHanteiKekkaNinchishoKasanCode(entity.get要介護認定一点五次判定結果コード_認知症加算() == null
+        dbt5510Entity.setIchiGojiHanteiKekkaNinchishoKasanCode(RString.isNullOrEmpty(entity.get要介護認定一点五次判定結果コード_認知症加算())
                                                                ? Code.EMPTY : new Code(entity.get要介護認定一点五次判定結果コード_認知症加算()));
-        dbt5510Entity.setKijunJikan(entity.get一点五次要介護認定等基準時間() == null
-                                    ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間().toString()));
-        dbt5510Entity.setKijunJikanShokuji(entity.get一点五次要介護認定等基準時間_食事() == null
-                                           ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_食事().toString()));
-        dbt5510Entity.setKijunJikanHaisetsu(entity.get一点五次要介護認定等基準時間_排泄() == null
-                                            ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_排泄().toString()));
-        dbt5510Entity.setKijunJikanIdo(entity.get一点五次要介護認定等基準時間_移動() == null
-                                       ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_移動().toString()));
-        dbt5510Entity.setKijunJikanSeiketsuHoji(entity.get一点五次要介護認定等基準時間_清潔保持() == null
-                                                ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_清潔保持().toString()));
-        dbt5510Entity.setKijunJikanKansetsuCare(entity.get一点五次要介護認定等基準時間_間接ケア() == null
-                                                ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_間接ケア().toString()));
-        dbt5510Entity.setKijunJikanBPSDKanren(entity.get一点五次要介護認定等基準時間_BPSD関連() == null
-                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_BPSD関連().toString()));
-        dbt5510Entity.setKijunJikanKinoKunren(entity.get一点五次要介護認定等基準時間_機能訓練() == null
-                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_機能訓練().toString()));
-        dbt5510Entity.setKijunJikanIryoKanren(entity.get一点五次要介護認定等基準時間_医療関連() == null
-                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_医療関連().toString()));
-        dbt5510Entity.setKijunJikanNinchishoKasan(entity.get一点五次要介護認定等基準時間_認知症加算() == null
-                                                  ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_認知症加算().toString()));
-        dbt5510Entity.setChukanHyokaKomoku1gun(entity.get一点五次中間評価項目得点第1群() == null
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第1群().toString()));
-        dbt5510Entity.setChukanHyokaKomoku2gun(entity.get一点五次中間評価項目得点第2群() == null
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第2群().toString()));
-        dbt5510Entity.setChukanHyokaKomoku3gun(entity.get一点五次中間評価項目得点第3群() == null
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第3群().toString()));
-        dbt5510Entity.setChukanHyokaKomoku4gun(entity.get一点五次中間評価項目得点第4群() == null
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第4群().toString()));
-        dbt5510Entity.setChukanHyokaKomoku5gun(entity.get一点五次中間評価項目得点第5群() == null
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第5群().toString()));
-        dbt5510Entity.setIchiGojiHnateiKeikokuCode(entity.get一点五次要介護認定一点五次判定警告コード() == null
+        set基準時間(entity, dbt5510Entity);
+        set点数(entity, dbt5510Entity);
+        dbt5510Entity.setIchiGojiHnateiKeikokuCode(RString.isNullOrEmpty(entity.get一点五次要介護認定一点五次判定警告コード())
                                                    ? Code.EMPTY : new Code(entity.get一点五次要介護認定一点五次判定警告コード()));
-        dbt5510Entity.setJotaiAnteiseiCode(entity.get一点五次要介護認定状態の安定性コード() == null
+        dbt5510Entity.setJotaiAnteiseiCode(RString.isNullOrEmpty(entity.get一点五次要介護認定状態の安定性コード())
                                            ? Code.EMPTY : new Code(entity.get一点五次要介護認定状態の安定性コード()));
-        dbt5510Entity.setNinchishoJiritsudoIIijoNoGaizensei(entity.get一点五次認知症自立度Ⅱ以上の蓋然性() == null
+        dbt5510Entity.setNinchishoJiritsudoIIijoNoGaizensei(RString.isNullOrEmpty(entity.get一点五次認知症自立度Ⅱ以上の蓋然性())
                                                             ? Decimal.ZERO : new Decimal(entity.get一点五次認知症自立度Ⅱ以上の蓋然性().toString()));
-        dbt5510Entity.setSuiteiKyufuKubunCode(entity.get一点五次認知機能及び状態安定性から推定される給付区分コード() == null
+        dbt5510Entity.setSuiteiKyufuKubunCode(RString.isNullOrEmpty(entity.get一点五次認知機能及び状態安定性から推定される給付区分コード())
                                               ? Code.EMPTY : new Code(entity.get一点五次認知機能及び状態安定性から推定される給付区分コード()));
         return dbt5510Entity;
+    }
+
+    private void set基準時間(TempShinsakaiKekkaEntity entity, DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
+        dbt5510Entity.setKijunJikan(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間())
+                                    ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間().toString()));
+        dbt5510Entity.setKijunJikanShokuji(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_食事())
+                                           ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_食事().toString()));
+        dbt5510Entity.setKijunJikanHaisetsu(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_排泄())
+                                            ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_排泄().toString()));
+        dbt5510Entity.setKijunJikanIdo(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_移動())
+                                       ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_移動().toString()));
+        dbt5510Entity.setKijunJikanSeiketsuHoji(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_清潔保持())
+                                                ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_清潔保持().toString()));
+        dbt5510Entity.setKijunJikanKansetsuCare(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_間接ケア())
+                                                ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_間接ケア().toString()));
+        dbt5510Entity.setKijunJikanBPSDKanren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_BPSD関連())
+                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_BPSD関連().toString()));
+        dbt5510Entity.setKijunJikanKinoKunren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_機能訓練())
+                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_機能訓練().toString()));
+        dbt5510Entity.setKijunJikanIryoKanren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_医療関連())
+                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_医療関連().toString()));
+        dbt5510Entity.setKijunJikanNinchishoKasan(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_認知症加算())
+                                                  ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_認知症加算().toString()));
+    }
+
+    private void set点数(TempShinsakaiKekkaEntity entity, DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
+        dbt5510Entity.setChukanHyokaKomoku1gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第1群())
+                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第1群().toString()));
+        dbt5510Entity.setChukanHyokaKomoku2gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第2群())
+                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第2群().toString()));
+        dbt5510Entity.setChukanHyokaKomoku3gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第3群())
+                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第3群().toString()));
+        dbt5510Entity.setChukanHyokaKomoku4gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第4群())
+                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第4群().toString()));
+        dbt5510Entity.setChukanHyokaKomoku5gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第5群())
+                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第5群().toString()));
     }
 
     /**
@@ -170,22 +180,22 @@ public class DataTorikomiEdit {
 
     private DbT5102NinteiKekkaJohoEntity editDbT5102Entity(TempShinsakaiKekkaEntity entity, DbT5102NinteiKekkaJohoEntity dbt5102Entity,
                                                            FlexibleDate 審査会資料作成年月日, FlexibleDate nowDate) {
-        dbt5102Entity.setShinseishoKanriNo(entity.get申請書管理番号() == null
+        dbt5102Entity.setShinseishoKanriNo(RString.isNullOrEmpty(entity.get申請書管理番号())
                                            ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(entity.get申請書管理番号()));
-        dbt5102Entity.setNijiHanteiYMD(entity.get今回_二次判定日() == null
+        dbt5102Entity.setNijiHanteiYMD(RString.isNullOrEmpty(entity.get今回_二次判定日())
                                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_二次判定日()));
-        dbt5102Entity.setNijiHanteiYokaigoJotaiKubunCode(entity.get今回_二次判定() == null ? Code.EMPTY : new Code(entity.get今回_二次判定()));
-        dbt5102Entity.setNijiHanteiNinteiYukoKikan(entity.get今回_認定期間() == null ? 0 : entity.get今回_認定期間().toInt());
-        dbt5102Entity.setNijiHanteiNinteiYukoKaishiYMD(entity.get今回_認定有効開始年月日() == null
+        dbt5102Entity.setNijiHanteiYokaigoJotaiKubunCode(RString.isNullOrEmpty(entity.get今回_二次判定()) ? Code.EMPTY : new Code(entity.get今回_二次判定()));
+        dbt5102Entity.setNijiHanteiNinteiYukoKikan(RString.isNullOrEmpty(entity.get今回_認定期間()) ? 0 : entity.get今回_認定期間().toInt());
+        dbt5102Entity.setNijiHanteiNinteiYukoKaishiYMD(RString.isNullOrEmpty(entity.get今回_認定有効開始年月日())
                                                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_認定有効開始年月日()));
-        dbt5102Entity.setNijiHanteiNinteiYukoShuryoYMD(entity.get今回_認定有効終了年月日() == null
+        dbt5102Entity.setNijiHanteiNinteiYukoShuryoYMD(RString.isNullOrEmpty(entity.get今回_認定有効終了年月日())
                                                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_認定有効終了年月日()));
         dbt5102Entity.setShinsakaiShiryoSakuseiYMD(審査会資料作成年月日);
-        dbt5102Entity.setShinsakaiKaisaiNo(entity.get今回_審査会開催番号() == null ? RString.EMPTY : entity.get今回_審査会開催番号());
-        dbt5102Entity.setShinsakaiIken(entity.get今回_審査会意見() == null ? RString.EMPTY : entity.get今回_審査会意見());
+        dbt5102Entity.setShinsakaiKaisaiNo(RString.isNullOrEmpty(entity.get今回_審査会開催番号()) ? RString.EMPTY : entity.get今回_審査会開催番号());
+        dbt5102Entity.setShinsakaiIken(RString.isNullOrEmpty(entity.get今回_審査会意見()) ? RString.EMPTY : entity.get今回_審査会意見());
         dbt5102Entity.setIchijiHanteiKekkaHenkoRiyu(RString.EMPTY);
-        dbt5102Entity.setYokaigoJotaizoReiCode(entity.get今回_状態像() == null ? Code.EMPTY : new Code(entity.get今回_状態像()));
-        dbt5102Entity.setShinsakaiMemo(entity.get今回_審査会メモ() == null ? RString.EMPTY : entity.get今回_審査会メモ());
+        dbt5102Entity.setYokaigoJotaizoReiCode(RString.isNullOrEmpty(entity.get今回_状態像()) ? Code.EMPTY : new Code(entity.get今回_状態像()));
+        dbt5102Entity.setShinsakaiMemo(RString.isNullOrEmpty(entity.get今回_審査会メモ()) ? RString.EMPTY : entity.get今回_審査会メモ());
         dbt5102Entity.setNinteishinsakaiIkenShurui(RString.EMPTY);
         dbt5102Entity.setNijiHanteiKekkaInputHoho(new Code("2"));
         dbt5102Entity.setNijiHanteiKekkaInputYMD(nowDate);
@@ -218,8 +228,8 @@ public class DataTorikomiEdit {
     private DbT5511ShinsakaiKaisaiKekkaJohoEntity editDbT5511Entity(TempShinsakaiJohoEntity entity,
                                                                     DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity) {
         dbt5511Entity.setShinsakaiKaisaiNo(entity.get介護認定審査会開催番号());
-        dbt5511Entity.setGogitaiNo(entity.get合議体番号() == null ? 0 : (int) Double.parseDouble(entity.get合議体番号().toString()));
-        dbt5511Entity.setShinsakaiKaisaiYMD(entity.get介護認定審査会開催年月日() == null
+        dbt5511Entity.setGogitaiNo(RString.isNullOrEmpty(entity.get合議体番号()) ? 0 : (int) Double.parseDouble(entity.get合議体番号().toString()));
+        dbt5511Entity.setShinsakaiKaisaiYMD(RString.isNullOrEmpty(entity.get介護認定審査会開催年月日())
                                             ? FlexibleDate.EMPTY : new FlexibleDate(entity.get介護認定審査会開催年月日()));
         dbt5511Entity.setShinsakaiKaishiTime(entity.get介護認定審査会開始時刻());
         dbt5511Entity.setShinsakaiShuryoTime(entity.get介護認定審査会終了時刻());
