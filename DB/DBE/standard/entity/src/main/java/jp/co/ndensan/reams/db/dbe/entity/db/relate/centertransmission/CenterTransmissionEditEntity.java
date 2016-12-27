@@ -702,8 +702,8 @@ public class CenterTransmissionEditEntity {
 
     private RString getValue(boolean isServiceJokyoFlag) {
         if (isServiceJokyoFlag) {
-            return new RString("true");
+            return new RString("2");
         }
-        return new RString("false");
+        return new RString("1");
     }
 }
