@@ -121,8 +121,10 @@ public class ChosaItakusakiAndChosainInputFinder {
         ChosaItakusakiAndChosain chosaItakusakiAndChosain = new ChosaItakusakiAndChosain();
         DbT5121ShinseiRirekiJohoEntity dbT5121Entity = dbT5121Dac.selectByKey(申請管理番号);
         if (dbT5121Entity != null) {
-            DbT5101NinteiShinseiJohoEntity dbT5101Entity = dbT5101Dac.selectByKey(dbT5121Entity.getShinseishoKanriNo());
+            DbT5101NinteiShinseiJohoEntity dbT5101Entity = dbT5101Dac.selectByKey(dbT5121Entity.getZenkaiShinseishoKanriNo());
             if (dbT5101Entity != null) {
+                認定調査委託先コード = dbT5101Entity.getNinteiChosaItakusakiCode();
+                認定調査員コード = dbT5101Entity.getNinteiChosainCode();
                 NinteichosaItakusakiJoho ninteichosaItakusakiJoho
                         = onBlurTxtChosaItakusakiCode(市町村コード, 認定調査委託先コード.getColumnValue());
                 chosaItakusakiAndChosain.set事業者名称(ninteichosaItakusakiJoho == null ? RString.EMPTY : ninteichosaItakusakiJoho.get事業者名称());
