@@ -64,8 +64,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定ソフト一次判定用データ送信ファイル名09B, RDate.getNowDate());
 
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString 一次判定IF文字コードファイル名 = DbBusinessConfig.get(ConfigNameDBE.一次判定IF文字コード, RDate.getNowDate());
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 一次判定IF文字コードファイル名);
+        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.setイメージ区分(イメージ区分);
     }
