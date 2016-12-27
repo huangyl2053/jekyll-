@@ -123,6 +123,7 @@ public class Masking {
      * @return レスポンスデータ
      */
     public ResponseData<MaskingDiv> onClick_btnShorikeizoku(MaskingDiv div) {
+        getHandler(div).initialize();
         return ResponseData.of(div).setState(DBE2080001StateName.登録);
     }
 
