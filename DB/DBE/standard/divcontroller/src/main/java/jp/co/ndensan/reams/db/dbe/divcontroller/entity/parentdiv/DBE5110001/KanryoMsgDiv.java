@@ -5,15 +5,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * GogitaiVerticalLine1 のクラスファイル 
+ * KanryoMsg のクラスファイル 
  * 
  * @author 自動生成
  */
-public class GogitaiVerticalLine1Div extends Panel {
+public class KanryoMsgDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
@@ -21,8 +22,8 @@ public class GogitaiVerticalLine1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lin2")
-    private VerticalLine lin2;
+    @JsonProperty("ccdKanryoMsg")
+    private KanryoMessageDiv ccdKanryoMsg;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +32,12 @@ public class GogitaiVerticalLine1Div extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlin2
-     * @return lin2
+     * getccdKanryoMsg
+     * @return ccdKanryoMsg
      */
-    @JsonProperty("lin2")
-    public VerticalLine getLin2() {
-        return lin2;
-    }
-
-    /*
-     * setlin2
-     * @param lin2 lin2
-     */
-    @JsonProperty("lin2")
-    public void setLin2(VerticalLine lin2) {
-        this.lin2 = lin2;
+    @JsonProperty("ccdKanryoMsg")
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return ccdKanryoMsg;
     }
 
     // </editor-fold>

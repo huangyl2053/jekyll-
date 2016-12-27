@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GogitaiJohoSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,10 +34,14 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     private GogitaiShosaiDiv GogitaiShosai;
     @JsonProperty("UploadFileToroku")
     private UploadFileTorokuDiv UploadFileToroku;
+    @JsonProperty("KanryoMsg")
+    private KanryoMsgDiv KanryoMsg;
     @JsonProperty("hiddenFileId")
     private RString hiddenFileId;
     @JsonProperty("hiddenFileName")
     private RString hiddenFileName;
+    @JsonProperty("wfParameter")
+    private RString wfParameter;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -116,6 +122,24 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     /*
+     * getKanryoMsg
+     * @return KanryoMsg
+     */
+    @JsonProperty("KanryoMsg")
+    public KanryoMsgDiv getKanryoMsg() {
+        return KanryoMsg;
+    }
+
+    /*
+     * setKanryoMsg
+     * @param KanryoMsg KanryoMsg
+     */
+    @JsonProperty("KanryoMsg")
+    public void setKanryoMsg(KanryoMsgDiv KanryoMsg) {
+        this.KanryoMsg = KanryoMsg;
+    }
+
+    /*
      * gethiddenFileId
      * @return hiddenFileId
      */
@@ -149,6 +173,24 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonProperty("hiddenFileName")
     public void setHiddenFileName(RString hiddenFileName) {
         this.hiddenFileName = hiddenFileName;
+    }
+
+    /*
+     * getwfParameter
+     * @return wfParameter
+     */
+    @JsonProperty("wfParameter")
+    public RString getWfParameter() {
+        return wfParameter;
+    }
+
+    /*
+     * setwfParameter
+     * @param wfParameter wfParameter
+     */
+    @JsonProperty("wfParameter")
+    public void setWfParameter(RString wfParameter) {
+        this.wfParameter = wfParameter;
     }
 
     /*
@@ -532,6 +574,11 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public void  setBtnKakunin(Button btnKakunin) {
         this.getUploadFileToroku().setBtnKakunin(btnKakunin);
+    }
+
+    @JsonIgnore
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return this.getKanryoMsg().getCcdKanryoMsg();
     }
 
     // </editor-fold>
