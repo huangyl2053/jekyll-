@@ -95,7 +95,6 @@ public class NinteiChosaJokyoDataPass implements Serializable {
         主治医コード = 認定申請情報.get主治医コード();
         主治医医療機関コード = 認定申請情報.get主治医医療機関コード();
         指定医フラグ = 認定申請情報.is指定医フラグ();
-//        認定審査会予定年月日;
         延期通知発行年月日 = convertToRDate(認定申請情報.get延期通知発行年月日());
         延期通知発行回数 = 認定申請情報.get延期通知発行回数();
         申請書管理番号 = 認定申請情報.get申請書管理番号();

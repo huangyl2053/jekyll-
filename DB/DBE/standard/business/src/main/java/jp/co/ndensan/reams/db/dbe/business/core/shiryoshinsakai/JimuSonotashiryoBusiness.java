@@ -69,6 +69,9 @@ public class JimuSonotashiryoBusiness {
      * @return 識別コード
      */
     public RString get識別コード() {
+        if (RString.isNullOrEmpty(entity.getShoKisaiHokenshaNo()) || RString.isNullOrEmpty(entity.getHihokenshaNo())) {
+            return RString.EMPTY;
+        }
         return entity.getShoKisaiHokenshaNo().substring(0, INDEX_5).concat(entity.getHihokenshaNo());
     }
 

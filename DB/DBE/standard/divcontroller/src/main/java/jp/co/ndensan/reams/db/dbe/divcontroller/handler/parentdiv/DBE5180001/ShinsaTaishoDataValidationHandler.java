@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsataishodataoutput.ISaikaiOb
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5180001.ShinsaTaishoDataDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsataishodata.ShinsaTaishoDataFinder;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -42,12 +43,15 @@ public class ShinsaTaishoDataValidationHandler {
      */
     public ValidationMessageControlPairs データの選択チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+
         if (1 < div.getCcdShinsakaiIchiranList().get開催番号List().size()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate審査会の複数選択チェック));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate審査会の複数選択チェック,
+                    div.getCcdShinsakaiIchiranList().getDgShinsakaiIchiran()));
         }
 
         if (div.getCcdShinsakaiIchiranList().get開催番号List().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate審査会未選択チェック));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate審査会未選択チェック,
+                    div.getCcdShinsakaiIchiranList().getDgShinsakaiIchiran()));
         }
         return validPairs;
     }

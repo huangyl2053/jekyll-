@@ -465,17 +465,18 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     private ShinsakaiIinJoho setViewStateBy所属機関一覧(ShinsakaiIinJohoTorokuDiv div, ShinsakaiIinJohoBuilder shinsakaiIinJohoBuilder) {
-        List<dgShozokuKikanIchiran_Row> 所属機関一覧Grid = div.getDgShozokuKikanIchiran().getDataSource();
-        for (int i = 0; i < 所属機関一覧Grid.size(); i++) {
+        int i = 0;
+        for (dgShozokuKikanIchiran_Row row : div.getDgShozokuKikanIchiran().getDataSource()) {
+            i++;
             KaigoNinteiShinsakaiIinShozokuKikanJoho 所属機関 = new KaigoNinteiShinsakaiIinShozokuKikanJoho(
-                    div.getTxtShinsainCode().getValue(), i + 1);
+                    div.getTxtShinsainCode().getValue(), i);
             KaigoNinteiShinsakaiIinShozokuKikanJohoBuilder builder = 所属機関.createBuilderForEdit();
-            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(所属機関一覧Grid.get(i).getShokisaiHokenshaNo()));
-            builder.set主治医医療機関コード(所属機関一覧Grid.get(i).getShujiiIryoKikanCode().getValue());
-            builder.set主治医コード(所属機関一覧Grid.get(i).getShujiiCode());
-            builder.set認定調査委託先コード(所属機関一覧Grid.get(i).getNinteiItakusakiCode().getValue());
-            builder.set認定調査員コード(所属機関一覧Grid.get(i).getNinteiChosainCode());
-            builder.setその他機関コード(所属機関一覧Grid.get(i).getSonotaKikanCode().getValue());
+            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(row.getShokisaiHokenshaNo()));
+            builder.set主治医医療機関コード(row.getShujiiIryoKikanCode().getValue());
+            builder.set主治医コード(row.getShujiiCode());
+            builder.set認定調査委託先コード(row.getNinteiItakusakiCode().getValue());
+            builder.set認定調査員コード(row.getNinteiChosainCode());
+            builder.setその他機関コード(row.getSonotaKikanCode().getValue());
             所属機関 = builder.build();
             所属機関.toEntity().setState(EntityDataState.Added);
             shinsakaiIinJohoBuilder.setKaigoNinteiShinsakaiIinShozokuKikanJoho(所属機関);
@@ -543,9 +544,9 @@ public class ShinsakaiIinJohoTorokuHandler {
      * @return 認定調査委託先存在場合、trueを返却します、以外、falseを返却します
      */
     public boolean is認定調査委託先存在(KijuntsukiShichosonjohoiDataPassModel 認定調査委託先) {
-        for (int i = 0; i < div.getDgShozokuKikanIchiran().getDataSource().size(); i++) {
-            if (認定調査委託先.get委託先コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getNinteiItakusakiCode().getValue())
-                    && 認定調査委託先.get調査員コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getNinteiChosainCode())) {
+        for (dgShozokuKikanIchiran_Row row : div.getDgShozokuKikanIchiran().getDataSource()) {
+            if (認定調査委託先.get委託先コード() != null && 認定調査委託先.get委託先コード().equals(row.getNinteiItakusakiCode().getValue())
+                    && 認定調査委託先.get調査員コード() != null && 認定調査委託先.get調査員コード().equals(row.getNinteiChosainCode())) {
                 return true;
             }
         }
@@ -559,9 +560,11 @@ public class ShinsakaiIinJohoTorokuHandler {
      * @return 主治医医療機関存在場合、trueを返却します、以外、falseを返却します
      */
     public boolean is主治医医療機関存在(ShujiiIryokikanandshujiiDataPassModel 主治医医療機関) {
-        for (int i = 0; i < div.getDgShozokuKikanIchiran().getDataSource().size(); i++) {
-            if (主治医医療機関.get主治医コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getShujiiCode())
-                    && 主治医医療機関.get主治医医療機関コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getShujiiIryoKikanCode().getValue())) {
+        for (dgShozokuKikanIchiran_Row row : div.getDgShozokuKikanIchiran().getDataSource()) {
+            if (主治医医療機関.get主治医コード() != null
+                    && 主治医医療機関.get主治医コード().equals(row.getShujiiCode())
+                    && 主治医医療機関.get主治医医療機関コード() != null
+                    && 主治医医療機関.get主治医医療機関コード().equals(row.getShujiiIryoKikanCode().getValue())) {
                 return true;
             }
         }
@@ -575,9 +578,9 @@ public class ShinsakaiIinJohoTorokuHandler {
      * @return その他機関存在場合、trueを返却します、以外、falseを返却します
      */
     public boolean isその他機関存在(SoNoTaKikanGuideModel その他機関) {
-        for (int i = 0; i < div.getDgShozokuKikanIchiran().getDataSource().size(); i++) {
-            if (その他機関.getその他機関コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getSonotaKikanCode().getValue())
-                    && その他機関.getその他機関名称().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getSonotaKikanName().getValue())) {
+        for (dgShozokuKikanIchiran_Row row : div.getDgShozokuKikanIchiran().getDataSource()) {
+            if (その他機関.getその他機関コード() != null && その他機関.getその他機関コード().equals(row.getSonotaKikanCode().getValue())
+                    && その他機関.getその他機関名称() != null && その他機関.getその他機関名称().equals(row.getSonotaKikanName().getValue())) {
                 return true;
             }
         }

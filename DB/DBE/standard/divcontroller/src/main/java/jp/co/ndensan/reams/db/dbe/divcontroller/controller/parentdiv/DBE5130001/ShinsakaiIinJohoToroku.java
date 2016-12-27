@@ -27,10 +27,17 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -41,8 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -62,16 +68,13 @@ public class ShinsakaiIinJohoToroku {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString KEY_廃止 = new RString("key0");
     private static final RString 調査員モード = new RString("Chosain");
-    private static final RString 主治医モード = new RString("IryoKikanMode");
+    private static final RString 主治医モード = new RString("ShujiiMode");
     private static final RString 文字連結 = new RString("・");
     private static final RString ハイフン = new RString("-");
     private static final int INT_3 = 3;
     private static final int INT_7 = 7;
-    private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表（審査会委員）.csv");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE910051"));
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private FileSpoolManager fileSpoolManager;
+    private static final RString CSVファイル名 = new RString("口座情報未登録機関一覧表（審査会委員）.csv");
+    private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
     private final KoikiShichosonJohoFinder shichosonJohoFinder;
@@ -110,21 +113,11 @@ public class ShinsakaiIinJohoToroku {
                 div.getRadHyojiJoken().getSelectedKey(), div.getTxtDispMax().getValue()).records();
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報 = Models.create(審査会委員一覧情報);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報, 介護認定審査会委員情報);
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報);
         div.getDgShinsaInJohoIchiran().setDataSource(createHandOf(div).setShinsaInJohoIchiranDiv(審査会委員一覧情報));
         return ResponseData.of(div).respond();
     }
 
-//    /**
-//     * 審査会委員一覧Gridの行クリックの処理です。
-//     *
-//     * @param div 介護認定審査会委員情報
-//     * @return ResponseData
-//     */
-//    public ResponseData onClick_shinsaInJohoIchiranGyo(ShinsakaiIinJohoTorokuDiv div) {
-//        set審査会委員情報詳細(div);
-//        set所属機関一覧情報(div);
-//        return ResponseData.of(div).respond();
-//    }
     /**
      * 廃止フラグを選択変更処理です。
      *
@@ -362,8 +355,8 @@ public class ShinsakaiIinJohoToroku {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
 
+        Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> models = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報更新, Models.class);
         RString イベント状態 = div.getShinsakaiIinJohoTorokuInput().getStatus();
-        Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> models = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報, Models.class);
         if (状態_追加.equals(イベント状態)) {
             ShinsakaiIinJoho shinsakaiJoho = new ShinsakaiIinJoho(div.getTxtShinsainCode().getValue());
             shinsakaiJoho = createHandOf(div).setShinsakaiJoho(shinsakaiJoho);
@@ -372,7 +365,6 @@ public class ShinsakaiIinJohoToroku {
             ShinsakaiIinJohoIdentifier key = new ShinsakaiIinJohoIdentifier(div.getTxtShinsainCode().getValue());
             ShinsakaiIinJoho shinsakaiJoho = createHandOf(div).setShinsakaiJoho(models.get(key).modifiedModel());
             shinsakaiJoho = shinsakaiJoho.modifiedModel();
-//            models.deleteOrRemove(key);
             models.add(shinsakaiJoho);
 
         } else if (状態_削除.equals(イベント状態)) {
@@ -385,7 +377,7 @@ public class ShinsakaiIinJohoToroku {
                 models.add(shinsakaiJoho);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報, models);
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, models);
         createHandOf(div).setShinsakiToIchiran(イベント状態);
         return responseWithSettingState(div);
     }
@@ -445,7 +437,6 @@ public class ShinsakaiIinJohoToroku {
             createHandOf(div).load();
             return ResponseData.of(div).setState(DBE5130001StateName.検索);
         }
-        createHandOf(div).load();
         return ResponseData.of(div).respond();
     }
 
@@ -482,50 +473,30 @@ public class ShinsakaiIinJohoToroku {
      * 口座情報未登録一覧（審査会委員）を出力するボタンが押下された場合、ＣＳＶを出力します。
      *
      * @param div ShinsakaiIinJohoTorokuDiv
+     * @param response IDownLoadServletResponse
      * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
      */
-    public ResponseData onClick_btnKozaMitorokuCSV(ShinsakaiIinJohoTorokuDiv div) {
+    public IDownLoadServletResponse onClick_btnKozaMitorokuCSV(ShinsakaiIinJohoTorokuDiv div, IDownLoadServletResponse response) {
+
         getValidationHandler(div).validateForKozaMitorokuCsv();
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            outputKozaMitorokuCsv(div);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("CSV出力")).respond();
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    private void outputKozaMitorokuCsv(ShinsakaiIinJohoTorokuDiv div) {
-
-        List<KozaMitorokuShinsakaiIinCsvEntity> resultList = new ArrayList<>();
-        List<dgShinsaInJohoIchiran_Row> dataList = div.getDgShinsaInJohoIchiran().getDataSource();
-        for (dgShinsaInJohoIchiran_Row row : dataList) {
-            if (isOutKozaMitorokuCsv(row)) {
-                resultList.add(getKozaMitorokuCsvData(row));
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        try (CsvWriter<KozaMitorokuShinsakaiIinCsvEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgShinsaInJohoIchiran_Row> dataList = div.getDgShinsaInJohoIchiran().getDataSource();
+            for (dgShinsaInJohoIchiran_Row row : dataList) {
+                if (isOutKozaMitorokuCsv(row)) {
+                    csvWriter.writeLine(getKozaMitorokuCsvData(row));
+                }
             }
+            csvWriter.close();
         }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
 
-        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, OUTPUT_CSV_FILE_NAME);
-
-        try (CsvWriter<KozaMitorokuShinsakaiIinCsvEntity> eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                hasHeader(true).
-                canAppend(false).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
-                setNewLine(NewLine.CRLF).
-                build()) {
-            for (KozaMitorokuShinsakaiIinCsvEntity result : resultList) {
-                eucCsvWriter.writeLine(result);
-            }
-        }
-
-        fileSpoolManager.spool(eucFilePath);
     }
 
     private Boolean isOutKozaMitorokuCsv(dgShinsaInJohoIchiran_Row row) {
@@ -598,7 +569,7 @@ public class ShinsakaiIinJohoToroku {
 
     private void 審査会委員情報更新() {
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> models
-                = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報更新, Models.class);
         Iterator<ShinsakaiIinJoho> 審査会委員情報 = models.iterator();
         while (審査会委員情報.hasNext()) {
             ShinsakaiIinJoho shinsakaiIinJoho = 審査会委員情報.next();
