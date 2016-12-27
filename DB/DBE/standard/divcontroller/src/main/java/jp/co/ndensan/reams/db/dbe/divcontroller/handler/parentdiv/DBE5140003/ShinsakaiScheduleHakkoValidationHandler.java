@@ -46,13 +46,12 @@ public class ShinsakaiScheduleHakkoValidationHandler {
      */
     public ValidationMessageControlPairs 介護認定審査会開催予定期間入力チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().isEmpty()
-        || !div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().isEmpty()) {
-            if (div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue() == null
-                    || div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue() == null) {
-                validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
-                        UrErrorMessages.必須, KIKAN.toString()), div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan()));
-            }
+        if ((!div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().isEmpty()
+                || !div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().isEmpty())
+                && (div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue() == null
+                || div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue() == null)) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
+                    UrErrorMessages.必須, KIKAN.toString()), div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan()));
         }
         return validationMessages;
     }
