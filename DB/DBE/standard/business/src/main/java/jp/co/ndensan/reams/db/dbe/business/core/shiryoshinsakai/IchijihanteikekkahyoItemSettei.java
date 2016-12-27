@@ -96,7 +96,6 @@ public class IchijihanteikekkahyoItemSettei {
      * @param 介護給付 介護給付
      * @param 現在状況 現在状況
      * @param 合議体番号 合議体番号
-     * @param ファイルパス ファイルパス
      * @return 事務局一次判定結果票のEntity
      */
     public IchijihanteikekkahyoA4Entity set項目(ItiziHanteiEntity entity,
@@ -104,11 +103,11 @@ public class IchijihanteikekkahyoItemSettei {
             List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目情報,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
-            DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況, RString 合議体番号, RString ファイルパス) {
+            DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況, RString 合議体番号) {
         IchijihanteikekkahyoA4Entity 項目 = new IchijihanteikekkahyoA4Entity();
         IchijihanteikekkahyoItemSetteiTwo settei = new IchijihanteikekkahyoItemSetteiTwo();
         Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
-        new SabisuJyoukyoA4().set項目(項目, entity, ファイルパス);
+        new SabisuJyoukyoA4().set項目(項目, entity);
         項目.set合議体番号(合議体番号);
         if (現在状況 != null) {
             項目.set現在の状況(get現在の状況(現在状況.getKoroshoIfShikibetsuCode(), new RString(現在状況.getRemban())));

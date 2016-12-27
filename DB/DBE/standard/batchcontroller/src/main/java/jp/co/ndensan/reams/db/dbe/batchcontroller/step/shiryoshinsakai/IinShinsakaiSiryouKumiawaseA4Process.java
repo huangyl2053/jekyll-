@@ -126,6 +126,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517903.getReportId().value())
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+
                     IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA4ReportSource> occuredBreak(
@@ -209,8 +210,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                 parameter.setShinseishoKanriZ(entity.getZShinseishoKanriNo());
                 List<DbT5211NinteichosahyoChosaItemEntity> 前回調査項目情報 = mapper.getZenkaiChosahyoChosaItem(parameter);
                 return new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項情報, 調査票調査項目情報, 前回調査項目情報, 主治医意見書項目情報,
-                        new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況,
-                        new RString(paramter.getGogitaiNo()), batchReportWriter.getImageFolderPath());
+                        new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況, new RString(paramter.getGogitaiNo()));
             }
         }
         return null;
