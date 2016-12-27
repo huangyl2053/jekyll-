@@ -192,7 +192,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setIryokikanAdress(entity.get医療機関住所());
         item.setIryokikanNameTel(entity.get医療機関電話番号());
         item.setIryokikanFax(entity.get医療機関FAX番号());
-        item.setYubinNo(entity.get郵便番号());
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
         item.setBirthYY(年号.substring(INT3, INT5));
         item.setBirthMM(年号.substring(INT6, INT8));
         item.setBirthDD(年号.substring(INT9));
@@ -233,7 +233,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
         item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
         item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
-        item.setYubinNo1(entity.get医療機関郵便番号());
+        item.setYubinNo1(getYubinNo(entity.get医療機関郵便番号()));
         item.setJushoText(entity.get医療機関住所());
         item.setKikanNameText(entity.get医療機関名称());
         item.setShimeiText(entity.get主治医氏名());
@@ -272,10 +272,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         item.setBirthYMD(get和暦(entity.get生年月日(), false));
         item.setJusho(entity.get住所());
-        RString 郵便番号 = entity.get郵便番号();
-        if (!RString.isNullOrEmpty(郵便番号)) {
-            item.setYubinNo(new YubinNo(entity.get郵便番号()).getEditedYubinNo());
-        }
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
         item.setTsuchibun1(通知文Map.get(2));
         return item;
     }
@@ -306,7 +303,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setHihokenshaNo10(getCode(被保険者番号リスト, INT9));
         item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
         item.setHihokenshaName(entity.get被保険者氏名());
-        item.setBirthYMD(entity.get生年月日());
+        item.setBirthYMD(get和暦(entity.get生年月日(), true));
         item.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
         if (ZaitakuShisetsuKubun.在宅.getコード().equals(entity.get在宅施設区分())) {
             item.setShubetsuZaitaku(記号);
@@ -330,7 +327,7 @@ public class IraishoIkkatsuHakkoBusiness {
         }
         item.setSeikyuIryokikanName(entity.get医療機関名称());
         item.setSeikyuIryokikanDaihyoName(entity.get代表者名());
-        item.setSeikyuIryokikanYubinNo(entity.get医療機関郵便番号());
+        item.setSeikyuIryokikanYubinNo(getYubinNo(entity.get医療機関郵便番号()));
         item.setSeikyuIryokikanJusho(entity.get医療機関住所());
         item.setSeikyuIryokikanTel(entity.get医療機関電話番号());
         set意見書作成料(entity, item);
@@ -486,7 +483,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
         item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
         item.setBunshoNo(bunshoNo);
-        item.setYubinNo1(entity.get医療機関郵便番号());
+        item.setYubinNo1(getYubinNo(entity.get医療機関郵便番号()));
         item.setJushoText(entity.get医療機関住所());
         item.setKikanNameText(entity.get医療機関名称());
         item.setShimeiText(entity.get主治医氏名());
@@ -542,13 +539,10 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
         item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         item.setBirthYMD(get和暦(entity.get生年月日(), false));
-        RString 郵便番号 = entity.get郵便番号();
-        if (!RString.isNullOrEmpty(郵便番号)) {
-            item.setYubinNo(new YubinNo(entity.get郵便番号()).getEditedYubinNo());
-        }
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
         item.setJusho(entity.get住所());
         item.setShinseiYMD(get和暦(entity.get認定申請年月日(), true));
-        item.setTeishutsuKigen(get提出期限());
+        item.setTeishutsuKigen(get和暦(get提出期限(), true));
         item.setTsuchibun2(通知文Map.get(2));
         item.setShoriName(IkenshoIraiKubun.toValue(entity.get主治医意見書依頼区分()).get名称());
         return item;
@@ -602,7 +596,7 @@ public class IraishoIkkatsuHakkoBusiness {
                 ninshoshaSource.ninshoshaShimeiKakenai,
                 ninshoshaSource.koinMojiretsu,
                 ninshoshaSource.koinShoryaku,
-                entity.get医療機関郵便番号(),
+                getYubinNo(entity.get医療機関郵便番号()),
                 entity.get医療機関住所(),
                 entity.get医療機関名称(),
                 entity.get代表者名(),
@@ -865,6 +859,8 @@ public class IraishoIkkatsuHakkoBusiness {
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
         List<RString> 保険者番号リスト = get被保険者番号(entity.get証記載保険者番号());
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
+        RString 生年月日 = entity.get生年月日();
+        RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
         item.setHokenshaNo1(getCode(保険者番号リスト, 0));
         item.setHokenshaNo2(getCode(保険者番号リスト, 1));
         item.setHokenshaNo3(getCode(保険者番号リスト, 2));
@@ -881,7 +877,20 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setHihokenshaNo8(getCode(被保険者番号リスト, INT7));
         item.setHihokenshaNo9(getCode(被保険者番号リスト, INT8));
         item.setHihokenshaNo10(getCode(被保険者番号リスト, INT9));
+        item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
+        item.setHihokenshaName(entity.get被保険者氏名());
+        item.setAge(entity.get年齢());
         item.setHihokenshaTel(entity.get電話番号());
+        item.setJusho(entity.get住所());
+        item.setShujiiName(entity.get主治医氏名());
+        item.setIryokikanName(entity.get医療機関名称());
+        item.setIryokikanAdress(entity.get医療機関住所());
+        item.setIryokikanNameTel(entity.get医療機関電話番号());
+        item.setIryokikanFax(entity.get医療機関FAX番号());
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
+        item.setBirthYY(年号.substring(INT3, INT5));
+        item.setBirthMM(年号.substring(INT6, INT8));
+        item.setBirthDD(年号.substring(INT9));
         RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -890,12 +899,24 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
         item.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
         item.setShinseiDD2(ninteiShinseiDay.substring(INT8));
+        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
+        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
+        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号 : RString.EMPTY);
+        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号 : RString.EMPTY);
+        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY);
         return item;
     }
 
     private RString getCode(List<RString> list, int index) {
         if (index < list.size()) {
             return list.get(index);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getYubinNo(RString yubinNo) {
+        if (!RString.isNullOrEmpty(yubinNo)) {
+            return new YubinNo(yubinNo).getEditedYubinNo();
         }
         return RString.EMPTY;
     }
