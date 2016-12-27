@@ -8,6 +8,7 @@ module DBZ {
             constructor(fieldName: string) {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
+                this.controls.ShosaiJoken().isOpen = false;
             }
 
             public Properties() {

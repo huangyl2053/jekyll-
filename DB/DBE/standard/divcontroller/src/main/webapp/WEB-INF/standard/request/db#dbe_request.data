@@ -1007,6 +1007,14 @@ dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnHakkouValidationCheck
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnHozon
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnIrai
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_btnSearch
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_iraiIchiranHyo
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_iraiSho
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyoYoshi
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiDesign
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiOCR
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_seikyuSho
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_teishutsuIraiSho
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClose_SakuseiIrai
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onLoad
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSaikinshorishaClick
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSelect_dgShinseishaIchiran
