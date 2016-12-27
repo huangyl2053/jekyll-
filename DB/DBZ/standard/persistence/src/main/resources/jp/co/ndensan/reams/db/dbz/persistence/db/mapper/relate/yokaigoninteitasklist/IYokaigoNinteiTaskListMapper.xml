@@ -1821,10 +1821,18 @@
             OR DbT5105."centerSoshinYMD" = ''
             )
             <if test="状態区分 == 1" >
-                AND (
-                DbT7211."centerSoshinChushutsuYMD" is NULL
-                OR DbT7211."centerSoshinChushutsuYMD" = ''
-                )
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211 
+                WHERE
+                  DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo" 
+                  AND ( 
+                    DbT7211."centerSoshinChushutsuYMD" IS NOT NULL 
+                    OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+                  )
+              ) 
             </if>
             <if test="状態区分 == 2" >
                 AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
@@ -1881,10 +1889,18 @@
             OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = ''
             )
             <if test="状態区分 == 1" >
-                AND (
-                DbT7211."centerSoshinChushutsuYMD" is NULL
-                OR DbT7211."centerSoshinChushutsuYMD" = ''
-                )
+              AND NOT EXISTS ( 
+                SELECT
+                  'X' 
+                FROM
+                  rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211 
+                WHERE
+                  DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo" 
+                  AND ( 
+                    DbT7211."centerSoshinChushutsuYMD" IS NOT NULL 
+                    OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+                  )
+              ) 
             </if>
             <if test="状態区分 == 2" >
                 AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
