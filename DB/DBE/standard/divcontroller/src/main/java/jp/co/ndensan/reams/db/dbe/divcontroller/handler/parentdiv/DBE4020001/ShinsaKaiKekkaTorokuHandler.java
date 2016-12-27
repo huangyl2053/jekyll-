@@ -294,7 +294,7 @@ public class ShinsaKaiKekkaTorokuHandler {
                 if (business.get介護認定審査会開催年月日() != null && !business.get介護認定審査会開催年月日().isEmpty()) {
                     row.getNijihanteiShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催年月日().toString()));
                 }
-                row.setNijihanteiKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY : business.get介護認定審査会開催番号());
+                row.setNijihanteiKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY : edit審査会名称(business.get介護認定審査会開催番号()));
                 row.setNijiHanteiYokaigoJotaiKubunCode(business.get二次判定要介護状態区分コード() == null
                         ? RString.EMPTY : business.get二次判定要介護状態区分コード().value());
                 row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
@@ -310,6 +310,10 @@ public class ShinsaKaiKekkaTorokuHandler {
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(二次判定List.size());
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
+    }
+    
+    private RString edit審査会名称(RString 審査会開催番号) {
+        return new RString("第").concat(審査会開催番号).concat("回審査");
     }
 
     private RString 二次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 二次判定結果コード) {
