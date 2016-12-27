@@ -22,11 +22,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -68,9 +63,7 @@ public class JimuGaikyouTokkiIranDataSakuseiA4Process extends BatchProcessBase<G
     @Override
     protected void process(GaikyoTokkiEntity entity) {
         entity.setJimukyoku(true);
-        RString 共有ファイル名 = entity.getDbt5101_shoKisaiHokenshaNo().concat(entity.getDbt5101_hihokenshaNo());
-        RString path = get共有ファイル引き出し先パス(entity.getDbt5115_imageSharedFileId(), 共有ファイル名);
-        business = new JimuGaikyouTokkiBusiness(entity, 概況特記一覧表情報, null, paramter, no, null, path);
+        business = new JimuGaikyouTokkiBusiness(entity, 概況特記一覧表情報, null, paramter, no, null, RString.EMPTY);
         GaikyoTokkiIchiranReport report = new GaikyoTokkiIchiranReport(business);
         report.writeBy(reportSourceWriterA4);
         no = no + 1;
@@ -84,19 +77,5 @@ public class JimuGaikyouTokkiIranDataSakuseiA4Process extends BatchProcessBase<G
 
     @Override
     protected void afterExecute() {
-    }
-
-    private RString get共有ファイル引き出し先パス(RDateTime sharedFileId, RString sharedFileName) {
-        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
-            return RString.EMPTY;
-        }
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWriteA4.getImageFolderPath())).getCanonicalPath());
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
     }
 }
