@@ -38,7 +38,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 委員用一次判定結果票の取得バッチクラスです。
@@ -80,7 +82,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void usualProcess(ItiziHanteiEntity entity) {
-        item = new IchijihanteikekkahyoA3Entity();
+
         ShinseishoKanriNo 申請書管理番号 = entity.getShinseishoKanriNo();
         ShinseishoKanriNo 前申請書管理番号 = entity.getZShinseishoKanriNo();
         int 認定調査依頼履歴番号 = entity.getNinteichosaIraiRirekiNo();
@@ -110,12 +112,13 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
             特記情報 = get特記情報(get共通情報(共通情報, 申請書管理番号));
         }
         主治医意見書情報.addAll(主治医意見書);
+        item = new IchijihanteikekkahyoA3Entity();
         item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書情報,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                 get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()),
                 特記情報, batchWriteA3.getImageFolderPath());
-
+        item.setServiceKubunCode(entity.getServiceKubunCode());
         JimuTokkiTextA3Report report = new JimuTokkiTextA3Report(item);
         report.writeBy(reportSourceWriterA3);
     }
@@ -124,6 +127,23 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     protected void createWriter() {
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517081.getReportId().value())
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
+
+                    JimuTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                    public ReportLineRecord<JimuTokkiTextA3ReportSource> occuredBreak(
+                            ReportLineRecord<JimuTokkiTextA3ReportSource> currentRecord,
+                            ReportLineRecord<JimuTokkiTextA3ReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layout;
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layout;
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                })
                 .create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }

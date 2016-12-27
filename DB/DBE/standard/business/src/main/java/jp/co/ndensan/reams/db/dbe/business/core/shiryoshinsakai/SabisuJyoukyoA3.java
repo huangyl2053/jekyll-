@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
@@ -111,8 +112,8 @@ public class SabisuJyoukyoA3 {
     private static final int 連番_20 = 20;
     private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
-    private static final Code 予防給付サービス = new Code("1");
-    private static final Code 介護給付サービス = new Code("2");
+    private static final Code 予防給付サービス = new Code(ServiceKubun.予防.getCode());
+    private static final Code 介護給付サービス = new Code(ServiceKubun.介護.getCode());
     private static final RString 単位 = new RString(":");
     private static final RString 施設名ファイル名 = new RString("C0004_BAK.png");
     private static final RString 住所ファイル名 = new RString("C0005_BAK.png");

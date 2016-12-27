@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -79,6 +80,7 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 状態の安定性;
     private RString 給付区分;
     private RString sabisuKubun;
+    private Code serviceKubunCode;
     private RString sabisuName1;
     private RString sabisuKaisu1;
     private RString sabisuName2;

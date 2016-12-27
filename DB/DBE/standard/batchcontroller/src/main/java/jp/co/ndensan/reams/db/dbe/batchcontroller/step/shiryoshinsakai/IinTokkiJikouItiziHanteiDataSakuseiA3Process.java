@@ -37,7 +37,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 委員用特記事項と一次判定結果票情報バッチクラスです。
@@ -84,6 +86,23 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     protected void createWriter() {
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517085.getReportId().value())
                 .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
+                .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
+
+
+                    IinTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                    public ReportLineRecord<IinTokkiTextA3ReportSource> occuredBreak(ReportLineRecord<IinTokkiTextA3ReportSource> currentRecord,
+                            ReportLineRecord<IinTokkiTextA3ReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                        int layout = currentRecord.getSource().layout;
+                        currentRecord.setFormGroupIndex(layout);
+                        if (nextRecord != null && nextRecord.getSource() != null) {
+                            layout = nextRecord.getSource().layout;
+                            nextRecord.setFormGroupIndex(layout);
+                        }
+                        return currentRecord;
+                    }
+                })
                 .create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }
@@ -123,6 +142,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                 get共通情報(共通情報, entity.getShinseishoKanriNo()), 主治医意見書, new RString(paramter.getGogitaiNo()),
                 特記情報, batchWriteA3.getImageFolderPath());
+        item.setServiceKubunCode(entity.getServiceKubunCode());
         IinTokkiTextA3Report report = new IinTokkiTextA3Report(item);
         report.writeBy(reportSourceWriterA3);
     }
