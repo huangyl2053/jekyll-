@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaik
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNinteiShinsakaiWariateIinJohoItijiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
@@ -29,7 +28,7 @@ public interface IShinsakaiKekkaDataTorikomiMapper {
     /**
      * 検索条件より、認定審査会割当委員情報を検索する。
      *
-     * @return TmpNinteiShinsakaiWariateIinJohoItijiEntity 検索結果の{@link TmpNinteiShinsakaiWariateIinJohoItijiEntity}
+     * @return TempShinsaIinRelateEntity 検索結果の{@link TempShinsaIinRelateEntity}
      */
     List<TempShinsaIinRelateEntity> getShinsakaiWariateIinJoho();
 
