@@ -83,6 +83,13 @@ public interface IYokaigoninteiimagesakujoMapper {
      * @param 削除パラメータ 要介護認定イメージ情報削除パラメータ
      */
     void deleteDbT5212PhysicalBy(YokaigoninteiimagesakujoMapperParameter 削除パラメータ);
+    
+    /**
+     * 認定調査票（概況調査）特記マスク情報を削除します。
+     *
+     * @param 削除パラメータ 要介護認定イメージ情報削除パラメータ
+     */
+    void deleteDbT5213PhysicalBy(YokaigoninteiimagesakujoMapperParameter 削除パラメータ);
 
     /**
      * 認定調査票（概況特記）情報を削除します。

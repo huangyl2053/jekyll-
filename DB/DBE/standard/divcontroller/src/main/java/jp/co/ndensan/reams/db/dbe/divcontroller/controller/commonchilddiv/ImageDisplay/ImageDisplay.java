@@ -141,7 +141,7 @@ public class ImageDisplay {
         if (IMAGE_GAIKYOTOKKI.equals(imageKubun)) {
             RString imageFile = new RString("G0001.png");
             imageFilePathList.add(getFilePath(toCopyPath, imageFile));
-        } else if (IMAGE_TEIKEIOPINIONFILE.equals(imageKubun)) {
+        } else if (IMAGE_TEIKEIGAIOPINIONFILE.equals(imageKubun)) {
             RString imageFile1 = new RString("E0001.png");
             RString imageFile1_BAK = new RString("E0001_BAK.png");
             RString imageFile2 = new RString("E0002.png");
@@ -197,7 +197,7 @@ public class ImageDisplay {
 
         if (IMAGE_GAIKYOTOKKI.equals(imageKubun)) {
             imageFilePathList.add(RString.EMPTY);
-        } else if (IMAGE_TEIKEIOPINIONFILE.equals(imageKubun)) {
+        } else if (IMAGE_TEIKEIGAIOPINIONFILE.equals(imageKubun)) {
             RString imageFile1 = new RString("E0001.png");
             RString imageFile1_BAK = new RString("E0001_BAK.png");
             RString imageFile2 = new RString("E0002.png");
@@ -215,8 +215,8 @@ public class ImageDisplay {
 
         } else if (IMAGE_OTHERFILE.equals(imageKubun)) {
             for (RString imageFile : originalImagePathList) {
-                if (Directory.exists(replaceShareFileName(imageFile, 0, true))) {
-                    imageFilePathList.add(replaceShareFileName(imageFile, 0, false));
+                if (imageFile.contains(ファイルまで)){
+                    imageFilePathList.add(imageFile.replace(ファイルまで, new RString(".png")));
                 } else {
                     imageFilePathList.add(RString.EMPTY);
                 }
@@ -315,13 +315,14 @@ public class ImageDisplay {
             getValidationHandler().調査票概況イメージファイル存在チェック();
             ValidationMessageControlPairs validPairs = getValidationHandler().調査票概況イメージファイル存在チェック();
             this.get_メッセージ(div, validPairs);
-        } else if (IMAGE_TEIKEIOPINIONFILE.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
-                getその他資料のイメージファイルが存在区分(存在したイメージファイル名))) {
-            ValidationMessageControlPairs validPairs = getValidationHandler().その他資料イメージファイル存在チェック();
-            this.get_メッセージ(div, validPairs);
-        } else if (IMAGE_OTHERFILE.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
+        } else if ((IMAGE_TEIKEIOPINIONFILE.equals(イメージ区分) || IMAGE_TEIKEIGAIOPINIONFILE.equals(イメージ区分))
+                && イメージファイルが存在区分_存在しない.equals(getHandler().
                 get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名))) {
             ValidationMessageControlPairs validPairs = getValidationHandler().主治医意見書イメージファイル存在チェック();
+            this.get_メッセージ(div, validPairs); 
+        } else if (IMAGE_OTHERFILE.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
+                getその他資料のイメージファイルが存在区分(存在したイメージファイル名))) {
+            ValidationMessageControlPairs validPairs = getValidationHandler().その他資料イメージファイル存在チェック();
             this.get_メッセージ(div, validPairs);
         }
     }
