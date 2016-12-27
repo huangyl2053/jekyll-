@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -53,10 +52,6 @@ public class NinteichosaIraiHandler {
     private static final RString 可 = new RString("可");
     private static final RString KEY_未 = new RString("1");
     private static final RString KEY_可 = new RString("2");
-    private static final RString KEY_全 = new RString("3");
-    private static final RString VALUE_未処理 = new RString("未処理");
-    private static final RString VALUE_完了 = new RString("完了可能");
-    private static final RString VALUE_全 = new RString("すべて");
     private static final RString 調査依頼完了ボタン = new RString("btnChousaIraiKanryo");
 
     /**
@@ -97,35 +92,15 @@ public class NinteichosaIraiHandler {
 
     private void setRad() {
         RString config = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        List<KeyValueDataSource> source = new ArrayList<>();
-        if (KEY_未.equals(config)) {
-            source.add(new KeyValueDataSource(KEY_未, VALUE_未処理));
-        } else if (KEY_可.equals(config)) {
-            source.add(new KeyValueDataSource(KEY_可, VALUE_完了));
-        } else {
-            source.add(new KeyValueDataSource(KEY_未, VALUE_未処理));
-            source.add(new KeyValueDataSource(KEY_可, VALUE_完了));
-            source.add(new KeyValueDataSource(KEY_全, VALUE_全));
-        }
-        div.getRadShoriJyotai().setDataSource(source);
-        div.getRadShoriJyotai().setSelectedIndex(0);
+        div.getRadShoriJyotai().setSelectedKey(config);
     }
 
     /**
      * DataGridを更新します。
      */
     public void initDataGrid() {
-        List<HokenshaSummary> hokenshaList = new ArrayList<>(
-            HokenshaListLoader.createInstance()
-            .getShichosonCodeNameList(GyomuBunrui.介護認定)
-            .getAll()
-        );
-        LasdecCode 市町村コード;
-        if (!hokenshaList.isEmpty() && hokenshaList.size() == 1) {
-            市町村コード = hokenshaList.get(0).get市町村コード();
-        } else {
-            市町村コード = LasdecCode.EMPTY;
-        }
+
+        LasdecCode 市町村コード = get市町村コード();
         RString 状態 = div.getRadShoriJyotai().getSelectedKey();
         Decimal 最大件数 = div.getTxtMaxCount().getValue();
         SearchResult<CyoSaiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
@@ -133,14 +108,7 @@ public class NinteichosaIraiHandler {
                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大件数, 市町村コード));
         int all = searchResult.totalCount();
         List<CyoSaiRaiBusiness> 調査依頼List = searchResult.records();
-        if (!調査依頼List.isEmpty()) {
-            ShinSaKaiBusiness 前調査依頼Model = YokaigoNinteiTaskListFinder.createInstance().
-                get前調査依頼モード(YokaigoNinteiTaskListParameter.
-                    createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
-            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査依頼Model.get要介護認定完了情報Lsit()));
-        } else {
-            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
-        }
+        put要介護認定完了情報(調査依頼List);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         int notUpdateCount = 0;
@@ -181,23 +149,55 @@ public class NinteichosaIraiHandler {
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
             row.setGetShoKisaiHokenshaNo(business.get証記載保険番号() == null ? RString.EMPTY : business.get証記載保険番号());
             調査依頼モードの日付設定(row, business);
-            if ((RString.isNullOrEmpty(row.getKonkaiChosaItakusaki()) || RString.isNullOrEmpty(row.getKonkaiChosain()))
-                || row.getChosaIraiKigen().getValue() == null
-                || row.getChosaIraishoHakkoDay().getValue() == null
-                || row.getChosaIraiDataShutsuryokuDay().getValue() == null) {
-                notUpdateCount++;
-                row.setJotai(未);
-                row.setCellBgColor("jotai", DataGridCellBgColor.bgColorRed);
-            } else {
-                completeCount++;
-                row.setJotai(可);
-            }
+            set状態(row, notUpdateCount, completeCount);
             rowList.add(row);
         }
         div.getDgNinteiTaskList().setDataSource(rowList);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(all);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
+        set件数表示(状態, notUpdateCount, completeCount);
+    }
+
+    private LasdecCode get市町村コード() {
+        List<HokenshaSummary> hokenshaList = new ArrayList<>(
+            HokenshaListLoader.createInstance()
+            .getShichosonCodeNameList(GyomuBunrui.介護認定)
+            .getAll()
+        );
+        if (!hokenshaList.isEmpty() && hokenshaList.size() == 1) {
+            return hokenshaList.get(0).get市町村コード();
+        } else {
+            return LasdecCode.EMPTY;
+        }
+    }
+
+    private void put要介護認定完了情報(List<CyoSaiRaiBusiness> 調査依頼List) {
+        if (!調査依頼List.isEmpty()) {
+            ShinSaKaiBusiness 前調査依頼Model = YokaigoNinteiTaskListFinder.createInstance().
+                get前調査依頼モード(YokaigoNinteiTaskListParameter.
+                    createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査依頼Model.get要介護認定完了情報Lsit()));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+        }
+    }
+
+    private void set状態(dgNinteiTaskList_Row row, int notUpdateCount, int completeCount) {
+        if ((RString.isNullOrEmpty(row.getKonkaiChosaItakusaki()) || RString.isNullOrEmpty(row.getKonkaiChosain()))
+            || row.getChosaIraiKigen().getValue() == null
+            || row.getChosaIraishoHakkoDay().getValue() == null
+            || row.getChosaIraiDataShutsuryokuDay().getValue() == null) {
+            notUpdateCount++;
+            row.setJotai(未);
+            row.setCellBgColor("jotai", DataGridCellBgColor.bgColorRed);
+        } else {
+            completeCount++;
+            row.setJotai(可);
+        }
+    }
+
+    private void set件数表示(RString 状態, int notUpdateCount, int completeCount) {
         if (状態.equals(KEY_未)) {
             div.getTxtNoUpdate().setValue(new Decimal(notUpdateCount));
             div.getTxtCompleteCount().clearValue();
@@ -215,7 +215,7 @@ public class NinteichosaIraiHandler {
             div.getTxtTotalCount().setDisplayNone(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
         } else {
-            div.getTxtTotalCount().setValue(new Decimal(調査依頼List.size()));
+            div.getTxtTotalCount().setValue(new Decimal(notUpdateCount + completeCount));
             div.getTxtCompleteCount().setValue(new Decimal(completeCount));
             div.getTxtNoUpdate().setValue(new Decimal(notUpdateCount));
             div.getTxtNoUpdate().setDisplayNone(false);

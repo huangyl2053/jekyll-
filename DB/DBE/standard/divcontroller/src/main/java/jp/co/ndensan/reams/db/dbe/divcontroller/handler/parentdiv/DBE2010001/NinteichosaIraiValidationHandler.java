@@ -156,11 +156,16 @@ public class NinteichosaIraiValidationHandler {
         return null;
     }
 
+    /**
+     * 最大表示件数が正しい値かチェックします。
+     *
+     * @return メッセージ
+     */
     public ValidationMessageControlPairs check最大表示件数() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         Decimal 入力値 = div.getTxtMaxCount().getValue();
         if (入力値 == null) {
-            pairs.add(new ValidationMessageControlPair(new validateMessage(UzErrorMessages.入力値が不正), div.getTxtMaxCount()));
+            pairs.add(new ValidationMessageControlPair(new ValidateMessage(UzErrorMessages.入力値が不正), div.getTxtMaxCount()));
         }
         return pairs;
     }
@@ -192,11 +197,11 @@ public class NinteichosaIraiValidationHandler {
         }
     }
 
-    private class validateMessage implements IValidationMessage {
+    private static final class ValidateMessage implements IValidationMessage {
 
         private final Message message;
 
-        private validateMessage(IMessageGettable message, String... replacements) {
+        private ValidateMessage(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 
