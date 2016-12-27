@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -35,13 +34,10 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -67,7 +63,6 @@ public class NinteichosaKekkaNyushu {
     private static final RString CSVファイルID_認定調査結果入手 = new RString("DBE206001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShinseishoKanriNo");
 
     /**
      * 完了処理・認定調査結果入手に初期化を設定します。
@@ -76,10 +71,6 @@ public class NinteichosaKekkaNyushu {
      * @return レスポンス
      */
     public ResponseData onLoad(NinteichosaKekkaNyushuDiv requestDiv) {
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            requestDiv.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
         getHandler(requestDiv).onLoad();
         return ResponseData.of(requestDiv).respond();
     }
@@ -177,7 +168,6 @@ public class NinteichosaKekkaNyushu {
                     new ShinseishoKanriNo(requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.valueOf(
                     requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getNinteichosaIraiRirekiNo().toString()));
-            RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.調査結果登録遷移).respond();
         }
         return ResponseData.of(requestDiv).respond();
@@ -195,7 +185,6 @@ public class NinteichosaKekkaNyushu {
         }
 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RealInitialLocker.release(前排他ロックキー);
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.取込み_OCR_遷移).respond();
         }
         return ResponseData.of(requestDiv).respond();
@@ -220,14 +209,9 @@ public class NinteichosaKekkaNyushu {
         }
 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-                requestDiv.setReadOnly(true);
-                throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-            }
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> 要介護認定完了情報Model
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(requestDiv).onClick_btnChousaResultKanryo(要介護認定完了情報Model);
-            RealInitialLocker.release(前排他ロックキー);
             requestDiv.getCcdKanryoMsg().setMessage(
                     new RString("完了処理・認定調査結果入手の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
