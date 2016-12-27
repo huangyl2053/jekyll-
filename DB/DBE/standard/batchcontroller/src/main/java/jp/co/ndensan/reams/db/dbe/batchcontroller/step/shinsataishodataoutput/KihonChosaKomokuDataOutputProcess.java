@@ -95,7 +95,7 @@ public class KihonChosaKomokuDataOutputProcess extends BatchProcessBase<KihonCho
                     csvEntity.set表示番号(value.get表示番号());
                     csvEntity.set調査項目文言(value.get名称());
                     csvEntity.setパターンNo(new Decimal(value.getパターンNo().toString()));
-                    csvEntity.set回答コード(RString.EMPTY);
+                    csvEntity.set回答コード(entity.get調査項目());
                     break;
                 }
             }
@@ -105,7 +105,7 @@ public class KihonChosaKomokuDataOutputProcess extends BatchProcessBase<KihonCho
                     csvEntity.set表示番号(value.get表示番号());
                     csvEntity.set調査項目文言(value.get名称());
                     csvEntity.setパターンNo(new Decimal(value.getパターンNo().toString()));
-                    csvEntity.set回答コード(RString.EMPTY);
+                    csvEntity.set回答コード(entity.get調査項目());
                     break;
                 }
             }
@@ -115,7 +115,7 @@ public class KihonChosaKomokuDataOutputProcess extends BatchProcessBase<KihonCho
                     csvEntity.set表示番号(value.get表示番号());
                     csvEntity.set調査項目文言(value.get名称());
                     csvEntity.setパターンNo(new Decimal(value.getパターンNo().toString()));
-                    csvEntity.set回答コード(RString.EMPTY);
+                    csvEntity.set回答コード(entity.get調査項目());
                     break;
                 }
             }
@@ -125,7 +125,7 @@ public class KihonChosaKomokuDataOutputProcess extends BatchProcessBase<KihonCho
                     csvEntity.set表示番号(value.get表示番号());
                     csvEntity.set調査項目文言(value.get名称());
                     csvEntity.setパターンNo(new Decimal(value.getパターンNo().toString()));
-                    csvEntity.set回答コード(RString.EMPTY);
+                    csvEntity.set回答コード(entity.get調査項目());
                     break;
                 }
             }
@@ -135,7 +135,7 @@ public class KihonChosaKomokuDataOutputProcess extends BatchProcessBase<KihonCho
                     csvEntity.set表示番号(value.get表示番号());
                     csvEntity.set調査項目文言(value.get名称());
                     csvEntity.setパターンNo(new Decimal(value.getパターンNo().toString()));
-                    csvEntity.set回答コード(RString.EMPTY);
+                    csvEntity.set回答コード(entity.get調査項目());
                     break;
                 }
             }

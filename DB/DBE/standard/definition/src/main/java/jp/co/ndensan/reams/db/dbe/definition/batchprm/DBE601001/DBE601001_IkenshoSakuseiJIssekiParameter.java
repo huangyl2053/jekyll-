@@ -83,8 +83,8 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
                 ikenshoKijunbiFrom,
                 ikenshoKijunbiTo,
                 ikenshoKijunbiKubun,
-                shokisaiHokensya,
                 hokensya,
+                shokisaiHokensya,
                 keyJoho);
     }
 }

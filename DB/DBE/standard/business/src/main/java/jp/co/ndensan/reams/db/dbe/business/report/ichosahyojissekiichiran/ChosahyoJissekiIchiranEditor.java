@@ -44,14 +44,15 @@ public class ChosahyoJissekiIchiranEditor implements IChosahyoJissekiIchiranEdit
 
     private ChosahyoJissekiIchiranReportSource editSource(ChosahyoJissekiIchiranReportSource source) {
         source.printTimeStamp = get作成年月日時();
-        source.listChosaJissekiIchiran_1 = item.get調査機関コード();
-        source.listChosaJissekiIchiran_2 = item.get調査機関名称();
-        source.listChosaJissekiIchiran_3 = item.get調査員氏名();
-        source.listChosaJissekiIchiran_4 = item.get被保険者番号();
-        source.listChosaJissekiIchiran_5 = item.get被保険者氏名();
-        source.listChosaJissekiIchiran_6 = item.get調査実施日();
-        source.listChosaJissekiIchiran_7 = item.get調査区分();
-        source.listChosaJissekiIchiran_8 = item.get訪問の種類();
+        source.listChosaJissekiIchiran_1 = item.get保険者番号();
+        source.listChosaJissekiIchiran_2 = item.get調査機関コード();
+        source.listChosaJissekiIchiran_3 = item.get調査機関名称();
+        source.listChosaJissekiIchiran_4 = item.get調査員氏名();
+        source.listChosaJissekiIchiran_5 = item.get被保険者番号();
+        source.listChosaJissekiIchiran_6 = item.get被保険者氏名();
+        source.listChosaJissekiIchiran_7 = item.get調査実施日();
+        source.listChosaJissekiIchiran_8 = item.get調査区分();
+        source.listChosaJissekiIchiran_9 = item.get訪問の種類();
         return source;
     }
 

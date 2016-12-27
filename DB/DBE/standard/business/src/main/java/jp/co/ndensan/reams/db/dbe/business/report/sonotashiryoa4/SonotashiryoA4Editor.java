@@ -70,8 +70,7 @@ public class SonotashiryoA4Editor implements ISonotashiryoA4Editor {
         if (index < business.getその他資料().size()) {
             source.imgSonotashiryo = business.getその他資料().get(index);
         }
-        source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
-
+        source.shikibetuCode = RString.isNullOrEmpty(business.get識別コード()) ? ShikibetsuCode.EMPTY : new ShikibetsuCode(business.get識別コード());
         if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     business.get申請書管理番号());

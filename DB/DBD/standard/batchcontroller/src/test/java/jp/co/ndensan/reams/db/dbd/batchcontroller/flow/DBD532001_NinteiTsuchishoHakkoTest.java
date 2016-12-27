@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.uz.uza.auth.manage.mappers._AuthAuthorityDeputyManageMapperTest.テスト.*;
+//import jp.co.ndensan.reams.uz.uza.auth.manage.mappers._AuthAuthorityDeputyManageMapperTest.テスト.*;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.DBD532001_NinteiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;

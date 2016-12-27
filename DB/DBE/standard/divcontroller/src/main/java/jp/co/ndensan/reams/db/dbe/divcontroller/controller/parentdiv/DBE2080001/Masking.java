@@ -159,7 +159,9 @@ public class Masking {
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
-                csvWriter.writeLine(getCsvData(row));
+                if (row.getSelected()) {
+                    csvWriter.writeLine(getCsvData(row));
+                }
 //                AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
 //                        new RString("申請書管理番号"), row.getShinseishoKanriNo())));
             }
