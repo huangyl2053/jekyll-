@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -786,9 +787,11 @@ public class NinteiShinseishaFinder {
         if (!dataPassModel.get市町村コード().equals(div.getHdnShujiiShichosonCode())
                 || !div.getHdnShujiiIryokikanCode().equals(dataPassModel.get主治医医療機関コード())) {
             div.getTxtShujiiIryokikanName().setValue(dataPassModel.get主治医医療機関名称());
+            div.getTxtShujiiIryokikan().setDomain(new Code(dataPassModel.get主治医医療機関コード()));
             div.setHdnShujiiIryokikanCode(dataPassModel.get主治医医療機関コード());
             div.setHdnShujiiShichosonCode(dataPassModel.get市町村コード());
             div.getTxtShujiiName().setValue(RString.EMPTY);
+            div.getTxtShujiiShimei().setDomain(Code.EMPTY);
             div.setHdnShujiiCode(RString.EMPTY);
         }
         return ResponseData.of(div).respond();
@@ -824,8 +827,10 @@ public class NinteiShinseishaFinder {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         div.getTxtShujiiIryokikanName().setValue(dataPassModel.get主治医医療機関名称());
+        div.getTxtShujiiIryokikan().setDomain(new Code(dataPassModel.get主治医医療機関コード()));
         div.setHdnShujiiIryokikanCode(dataPassModel.get主治医医療機関コード());
         div.getTxtShujiiName().setValue(dataPassModel.get主治医氏名());
+        div.getTxtShujiiShimei().setDomain(new Code(dataPassModel.get主治医コード()));
         div.setHdnShujiiCode(dataPassModel.get主治医コード());
         div.setHdnShujiiShichosonCode(dataPassModel.get市町村コード());
         return ResponseData.of(div).respond();
@@ -858,9 +863,11 @@ public class NinteiShinseishaFinder {
         if (!dataPassModel.get市町村コード().equals(div.getHdnChosaShichosonCode())
                 || !div.getHdnChosaItakusakiCode().equals(dataPassModel.get委託先コード())) {
             div.getTxtNinteiChosaItakusakiName().setValue(dataPassModel.get委託先名());
+            div.getTxtNinteiChosaIinItakuSaki().setDomain(new Code(dataPassModel.get委託先コード()));
             div.setHdnChosaItakusakiCode(dataPassModel.get委託先コード());
             div.setHdnChosaShichosonCode(dataPassModel.get市町村コード());
             div.getTxtNinteiChosainName().setValue(RString.EMPTY);
+            div.getTxtNinteiChosaInShimei().setDomain(Code.EMPTY);
             div.setHdnChosainCode(RString.EMPTY);
         }
         return ResponseData.of(div).respond();
@@ -896,8 +903,10 @@ public class NinteiShinseishaFinder {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         div.getTxtNinteiChosaItakusakiName().setValue(dataPassModel.get委託先名());
+        div.getTxtNinteiChosaIinItakuSaki().setDomain(new Code(dataPassModel.get委託先コード()));
         div.setHdnChosaItakusakiCode(dataPassModel.get委託先コード());
         div.getTxtNinteiChosainName().setValue(dataPassModel.get調査員名());
+        div.getTxtNinteiChosaInShimei().setDomain(new Code(dataPassModel.get調査員コード()));
         div.setHdnChosainCode(dataPassModel.get調査員コード());
         div.setHdnChosaShichosonCode(dataPassModel.get市町村コード());
         return ResponseData.of(div).respond();
@@ -928,6 +937,7 @@ public class NinteiShinseishaFinder {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         div.getTxtZenkaiNinteiChosaItakusakiName().setValue(dataPassModel.get委託先名());
+        div.getTxtZenkaiChosaItakusaki().setDomain(new Code(dataPassModel.get委託先コード()));
         div.setHdnZenkaiChosaItakusakiCode(dataPassModel.get委託先コード());
         return ResponseData.of(div).respond();
     }
@@ -957,6 +967,7 @@ public class NinteiShinseishaFinder {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         div.getTxtZenkaiShujiiIryokikanName().setValue(dataPassModel.get主治医医療機関名称());
+        div.getTxtZenkaiShujiiIryokikan().setDomain(new Code(dataPassModel.get主治医医療機関コード()));
         div.setHdnZenkaiShujiiIryokikanCode(dataPassModel.get主治医医療機関コード());
         return ResponseData.of(div).respond();
     }
