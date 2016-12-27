@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5610001
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.DBE5610001StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.DBE5610001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.NinteiShienCenterSoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5610001.NinteiShienCenterSoshinHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -41,6 +42,16 @@ public class NinteiShienCenterSoshin {
      */
     public ResponseData<DBE561001_CenterTransmissionParameter> onClick_BtnDataoutput(NinteiShienCenterSoshinDiv div) {
         return ResponseData.of(getHandler(div).setParameter()).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
+    }
+
+    /**
+     * 送信データの作成を実行するボタンの押下処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinteiShienCenterSoshinDiv> onClick_BtnBack(NinteiShienCenterSoshinDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE5610001TransitionEventName.完了戻る).respond();
     }
 
     /**

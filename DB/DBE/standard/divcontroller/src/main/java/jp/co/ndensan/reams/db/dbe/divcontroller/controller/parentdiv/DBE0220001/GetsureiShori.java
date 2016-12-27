@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0220001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.KanryoShoriStatus;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.GetsureiShoriDiv;
@@ -40,8 +41,8 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -77,11 +78,11 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValue;
 public class GetsureiShori {
 
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-    private static final RString CSVファイル名 = new RString("CenterSoshinIchiran.csv");
     private static final RString KEY = new RString("key");
     private static final RString VALUE_UPDATE = new RString("Update");
     private static final RString VALUE_BATCH = new RString("Batch");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_ENTITY_ID = new RString("DBE202001");
 
     /**
      * 完了処理・センター送信の初期化。(オンロード)<br/>
@@ -90,13 +91,11 @@ public class GetsureiShori {
      * @return レスポンスデータ
      */
     public ResponseData<GetsureiShoriDiv> onLoad(GetsureiShoriDiv div) {
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            throw new PessimisticLockingException();
-        }
         RDate 基準日 = RDate.getNowDate();
         RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, 基準日, SubGyomuCode.DBE認定支援);
         RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, 基準日, SubGyomuCode.DBU介護統計報告);
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, 基準日, SubGyomuCode.DBU介護統計報告);
+        状態区分 = RString.isNullOrEmpty(状態区分) ? KanryoShoriStatus.すべて.getコード() : 状態区分;
 
         YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(状態区分, toDecimal(最大取得件数));
         YokaigoNinteiTaskListFinder finder = YokaigoNinteiTaskListFinder.createInstance();
@@ -115,14 +114,21 @@ public class GetsureiShori {
     }
 
     /**
-     * 状態ラジオボタンの押下チェック処理です。
+     * 画面再表示時の動作です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<GetsureiShoriDiv> onChange_jyotaiKubun(GetsureiShoriDiv div) {
+    public ResponseData onActive(GetsureiShoriDiv div) {
         RString 状態区分 = div.getRadJyotaiKubun().getSelectedKey();
         Decimal 最大取得件数 = div.getTxtDispMax().getValue();
+        Decimal 最大取得件数上限 = div.getTxtDispMax().getMaxValue();
+
+        ValidationMessageControlPairs vallidation = getValidationHandler().check最大表示件数(最大取得件数, 最大取得件数上限);
+        if (vallidation.existsError()) {
+            最大取得件数 = new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
+            div.getTxtDispMax().setValue(最大取得件数);
+        }
         YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(状態区分, 最大取得件数);
         YokaigoNinteiTaskListFinder finder = YokaigoNinteiTaskListFinder.createInstance();
         SearchResult<GeTuReiSyoRiBusiness> 検索結果 = finder.get月例処理モード(検索条件);
@@ -139,14 +145,23 @@ public class GetsureiShori {
     }
 
     /**
+     * 状態ラジオボタンの押下チェック処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<GetsureiShoriDiv> onChange_jyotaiKubun(GetsureiShoriDiv div) {
+        return onActive(div);
+    }
+
+    /**
      * 最大表示件数テキストボックスの値が変更された際の動作です。
      *
-     * @param div
-     * @return ResponseData
+     * @param div コントロールdiv
+     * @return レスポンスデータ
      */
     public ResponseData onChange_txtMaxCount(GetsureiShoriDiv div) {
-        onChange_jyotaiKubun(div);
-        return ResponseData.of(div).respond();
+        return onActive(div);
     }
 
     /**
@@ -158,11 +173,11 @@ public class GetsureiShori {
     public ResponseData<GetsureiShoriDiv> onClick_BtnDataOutput(GetsureiShoriDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getDgNinteiTaskList().getDataSource().isEmpty()) {
-            getValidationHandler().センター送信完了対象者一覧データの存在チェック(validationMessages);
+            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの存在チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            getValidationHandler().センター送信完了対象者一覧データの行選択チェック(validationMessages);
+            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの行選択チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
@@ -176,9 +191,10 @@ public class GetsureiShori {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(GetsureiShoriDiv div, IDownLoadServletResponse response) {
+        RString CSVファイル名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<CenterSoshinIchiranCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
@@ -205,19 +221,10 @@ public class GetsureiShori {
      * @return レスポンスデータ
      */
     public ResponseData<GetsureiShoriDiv> onClick_BtnCenterSoshin(GetsureiShoriDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
-                    UrQuestionMessages.確認_汎用.getMessage().replace("画面遷移しても").evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RealInitialLocker.release(排他キー);
-            FlowParameters fp = FlowParameters.of(KEY, VALUE_BATCH);
-            FlowParameterAccessor.merge(fp);
-            return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
-        }
-        return ResponseData.of(div).respond();
+        RealInitialLocker.release(排他キー);
+        FlowParameters fp = FlowParameters.of(KEY, VALUE_BATCH);
+        FlowParameterAccessor.merge(fp);
+        return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
     }
 
     public ResponseData<GetsureiShoriDiv> onClick_shorikeizoku(GetsureiShoriDiv div) {
@@ -234,15 +241,15 @@ public class GetsureiShori {
     public ResponseData<GetsureiShoriDiv> onClick_BtnCompleteGetsureiShori(GetsureiShoriDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getDgNinteiTaskList().getDataSource().isEmpty()) {
-            getValidationHandler().センター送信完了対象者一覧データの存在チェック(validationMessages);
+            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの存在チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            getValidationHandler().センター送信完了対象者一覧データの行選択チェック(validationMessages);
+            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの行選択チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (is未送信データ存在(div.getDgNinteiTaskList().getSelectedItems())) {
-            getValidationHandler().センター送信完了対象者一覧選択行の完了処理事前チェック(validationMessages);
+            validationMessages.add(getValidationHandler().センター送信完了対象者一覧選択行の完了処理事前チェック());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (!ResponseHolder.isReRequest()) {
@@ -301,6 +308,7 @@ public class GetsureiShori {
 
     private CenterSoshinIchiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         return new CenterSoshinIchiranCsvEntity(
+                get状態名称(row.getJyotai()),
                 row.getHokensha(),
                 getパターン1(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
@@ -309,6 +317,15 @@ public class GetsureiShori {
                 row.getShinseiKubunHorei(),
                 getパターン1(row.getGetsureiShoriKanryoDay().getValue()),
                 getパターン1(row.getCenterSoshinDay().getValue()));
+    }
+
+    private RString get状態名称(RString ryakusho) {
+        if (KanryoShoriStatus.未処理.get略称().equals(ryakusho)) {
+            return KanryoShoriStatus.未処理.toRString();
+        } else if (KanryoShoriStatus.完了可能.get略称().equals(ryakusho)) {
+            return KanryoShoriStatus.完了可能.toRString();
+        }
+        return RString.EMPTY;
     }
 
     private RString getパターン1(RDate date) {
