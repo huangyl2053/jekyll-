@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -30,6 +31,7 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @deprecated 原本マスク区分の主キーが追加になったことによりこのコンストラクタは不要
      */
     public GaikyoTokki(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
@@ -50,6 +52,36 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 
     /**
      * コンストラクタです。<br/>
+     * 認定調査票_概況特記の新規作成時に使用します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @param 原本マスク区分 原本マスク区分
+     */
+    public GaikyoTokki(ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            RString 概況特記テキストイメージ区分,
+            Code 原本マスク区分) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
+        requireNonNull(原本マスク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク区分"));
+        this.entity = new DbT5206GaikyoTokkiEntity();
+        this.entity.setShinseishoKanriNo(申請書管理番号);
+        this.entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
+        this.entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
+        this.entity.setGenponMaskKubun(原本マスク区分);
+        this.id = new GaikyoTokkiIdentifier(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                概況特記テキストイメージ区分,
+                原本マスク区分
+        );
+    }
+
+    /**
+     * コンストラクタです。<br/>
      * DBより取得した{@link DbT5206GaikyoTokkiEntity}より{@link GaikyoTokki}を生成します。
      *
      * @param entity DBより取得した{@link DbT5206GaikyoTokkiEntity}
@@ -59,7 +91,8 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
         this.id = new GaikyoTokkiIdentifier(
                 entity.getShinseishoKanriNo(),
                 entity.getNinteichosaRirekiNo(),
-                entity.getGaikyoTokkiTextImageKubun());
+                entity.getGaikyoTokkiTextImageKubun(),
+                entity.getGenponMaskKubun());
     }
 
     /**
@@ -102,6 +135,15 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
      */
     public RString get概況特記テキストイメージ区分() {
         return entity.getGaikyoTokkiTextImageKubun();
+    }
+
+    /**
+     * 原本マスク区分を返します。
+     *
+     * @return 原本マスク区分
+     */
+    public Code get原本マスク区分() {
+        return entity.getGenponMaskKubun();
     }
 
     /**
@@ -252,8 +294,7 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
     }
 
     /**
-     * 認定調査票_概況特記のみを変更対象とします。<br/>
-     * {@link DbT5206GaikyoTokkiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査票_概況特記のみを変更対象とします。<br/> {@link DbT5206GaikyoTokkiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GaikyoTokki}
      */
@@ -267,8 +308,7 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
     }
 
     /**
-     * 保持する認定調査票_概況特記を削除対象とします。<br/>
-     * {@link DbT5206GaikyoTokkiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査票_概況特記を削除対象とします。<br/> {@link DbT5206GaikyoTokkiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link GaikyoTokki}
      */

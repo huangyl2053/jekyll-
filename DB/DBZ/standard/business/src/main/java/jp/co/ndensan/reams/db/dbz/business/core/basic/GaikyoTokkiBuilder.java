@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -70,6 +71,18 @@ public class GaikyoTokkiBuilder {
     public GaikyoTokkiBuilder set概況特記テキストイメージ区分(RString 概況特記テキストイメージ区分) {
         requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
         entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
+        return this;
+    }
+
+    /**
+     * 原本マスク区分を設定します。
+     *
+     * @param 原本マスク区分 原本マスク区分
+     * @return {@link GaikyoTokkiBuilder}
+     */
+    public GaikyoTokkiBuilder set原本マスク区分(Code 原本マスク区分) {
+        requireNonNull(原本マスク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク区分"));
+        entity.setGenponMaskKubun(原本マスク区分);
         return this;
     }
 
