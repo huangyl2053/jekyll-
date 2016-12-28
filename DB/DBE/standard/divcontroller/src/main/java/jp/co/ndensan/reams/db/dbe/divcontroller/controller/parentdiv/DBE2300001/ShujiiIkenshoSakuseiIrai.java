@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
@@ -127,11 +128,6 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
-          //TODO:仕様不明
-//        if (!RealInitialLocker.tryGetLock(排他キー)) {
-//            div.setReadOnly(true);
-//            throw new PessimisticLockingException();
-//        }
         createHandler(div).load();
         div.getTxtShujiiIkensahoSakuseiIraiDay().setValue(RDate.getNowDate());
         div.getIraiprint().getTxtHakobi().setValue(RDate.getNowDate());
@@ -163,19 +159,6 @@ public class ShujiiIkenshoSakuseiIrai {
         div.getIraiprint().getTeishutsuIraiSho().setDisplayNone(提出意見書_出力有無);
         return ResponseData.of(div).respond();
     }
-    
-    /**
-     * 主治医意見書作成依頼のClose処理。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClose_SakuseiIrai(ShujiiIkenshoSakuseiIraiDiv div) {
-        //TODO:仕様不明
-//        RealInitialLocker.release(排他キー);
-        return ResponseData.of(div).respond();
-    }
-    
     /**
      * 検索条件クリア処理です。
      *
@@ -306,7 +289,7 @@ public class ShujiiIkenshoSakuseiIrai {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -372,7 +355,7 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHakkouKanryo(ShujiiIkenshoSakuseiIraiDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            RealInitialLocker.release(new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))));
+            onClick_btnSearch(div);
             return ResponseData.of(div).addMessage((UrInformationMessages.正常終了.getMessage().replace(依頼書印刷処理.toString()))).respond();
         }
         return ResponseData.of(div).respond();
@@ -543,8 +526,10 @@ public class ShujiiIkenshoSakuseiIrai {
         RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
         ShujiiIkenshoSakuseiIraishoItem iraishoItem = new ShujiiIkenshoSakuseiIraishoItem();
         iraishoItem.setTitle(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        //TODO 文書管理番号が仕様未決定のため、コメントアウト
-//        iraishoItem.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), FlexibleDate.getNowDate()));
+        iraishoItem.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+//        iraishdfeeoItem.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), FlexibleDate.getNowDate()));
+//        iraishoItem.setBunshoNo(div.getBunshoBango().get文書番号());
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), KamokuCode.EMPTY, 数字_1);
         iraishoItem.setTsuchibun1(通知文.get(数字_1));
         iraishoItem.setTsuchibun2(通知文.get(数字_2));
@@ -890,16 +875,19 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setYubinNo(getEditedYubinNo(row.getYubinNo()));
         item.setMeishoFuyo(ChohyoAtesakiKeisho.toValue(
                 DbBusinessConfig.get(ConfigNameDBE.介護保険診断命令書_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId(), KamokuCode.EMPTY, 数字_1);
+        item.setTsuchibun1(通知文.get(数字_1));
+        item.setTsuchibun2(通知文.get(数字_2));
         item.setCustomerBarCode(ReportUtil.getCustomerBarCode(row.getIryoKikanYubinNo(), row.getIryoukikanShozaichi()));
         return item;
     }
 
-    private ShujiiIkenshoTeishutsuIraishoItem create介護保険指定医依頼兼主治医意見書提出意見書(dgShinseishaIchiran_Row row) {
+    private ShujiiIkenshoTeishutsuIraishoItem create介護保険指定医依頼兼主治医意見書提出意見書(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row) {
         RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
         ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
-          //TODO 文書管理番号が仕様未決定のため、コメントアウト
 //        item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援,
 //                ReportIdDBE.DBE236001.getReportId(), FlexibleDate.getNowDate()));
+//        item.setBunshoNo(div.getBunshoBango().get文書番号());
         item.setTitle(ReportIdDBE.DBE236001.getReportName());
         item.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
         item.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
@@ -980,7 +968,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 介護保険診断命令書ItemList.add(create介護保険診断命令書(div, row));
             }
             if (div.getIraiprint().getTeishutsuIraiSho().getSelectedKeys().contains(SELECTED_KEY0)) {
-                介護保険指定医依頼兼主治医意見書提出意見書ItemList.add(create介護保険指定医依頼兼主治医意見書提出意見書(row));
+                介護保険指定医依頼兼主治医意見書提出意見書ItemList.add(create介護保険指定医依頼兼主治医意見書提出意見書(div, row));
             }
         }
     }

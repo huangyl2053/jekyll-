@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.KanryoShoriStatus;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.NinteichosaKekkaNyushuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairailist.NinteichosaIraiListManager;
-import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Ninteich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
-import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -71,6 +69,7 @@ public class NinteichosaKekkaNyushuHandler {
      * 完了処理・認定調査結果入手に初期化を設定します。
      */
     public void onLoad() {
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         setDefaultControl();
         initialDataGrid();
         setCommonButtonAndTextBoxState();
@@ -86,9 +85,9 @@ public class NinteichosaKekkaNyushuHandler {
         List<dgNinteiTaskList_Row> 選択されたデータ = div.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
             NinteiKanryoJohoIdentifier 要介護認定完了情報の識別子 = new NinteiKanryoJohoIdentifier(
-                    new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             NinteichosaIraiListManager.createInstance().save要介護認定完了情報(要介護認定完了情報Model.get(要介護認定完了情報の識別子).
-                    createBuilderForEdit().set認定調査完了年月日(FlexibleDate.getNowDate()).build().toEntity());
+                createBuilderForEdit().set認定調査完了年月日(FlexibleDate.getNowDate()).build().toEntity());
         }
     }
 
@@ -96,27 +95,17 @@ public class NinteichosaKekkaNyushuHandler {
      * 対象者一覧グリッドに対象者を設定します。
      */
     public void initialDataGrid() {
-        List<HokenshaSummary> hokenshaList = new ArrayList<>(
-                HokenshaListLoader.createInstance()
-                .getShichosonCodeNameList(GyomuBunrui.介護認定)
-                .getAll()
-        );
-        LasdecCode 市町村コード;
-        if (!hokenshaList.isEmpty() && hokenshaList.size() == 1) {
-            市町村コード = hokenshaList.get(0).get市町村コード();
-        } else {
-            市町村コード = LasdecCode.EMPTY;
-        }
+        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         RString 状態 = div.getRadJotaiKubun().getSelectedKey();
         Decimal 最大取得件数 = div.getTxtMaxKensu().getValue();
         SearchResult<CyoSaNyuSyuBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
-                get調査入手モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大取得件数, 市町村コード));
+            get調査入手モード(YokaigoNinteiTaskListParameter.
+                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大取得件数, 市町村コード));
         List<CyoSaNyuSyuBusiness> 調査入手List = searchResult.records();
         if (!調査入手List.isEmpty()) {
             ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
-                    get前調査入手モード(YokaigoNinteiTaskListParameter.
-                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                get前調査入手モード(YokaigoNinteiTaskListParameter.
+                    createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査入手Model.get要介護認定完了情報Lsit()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
@@ -130,7 +119,7 @@ public class NinteichosaKekkaNyushuHandler {
     public void checkAndSetMaxKensu() {
         Decimal 最大表示件数 = div.getNinteichosakekkainput().getTxtMaxKensu().getValue();
         if (最大表示件数 != null && (INT_0 <= 最大表示件数.compareTo(div.getNinteichosakekkainput().getTxtMaxKensu().getMinValue()))
-                && (INT_0 <= div.getNinteichosakekkainput().getTxtMaxKensu().getMaxValue().compareTo(最大表示件数))) {
+            && (INT_0 <= div.getNinteichosakekkainput().getTxtMaxKensu().getMaxValue().compareTo(最大表示件数))) {
             return;
         }
 
@@ -212,13 +201,13 @@ public class NinteichosaKekkaNyushuHandler {
             }
             row.getTokusokuHakkoYMD().setValue(toRDate(business.get認定調査督促年月日()));
             row.setTokusokuHoho(RString.isNullOrEmpty(business.get認定調査督促方法())
-                    ? RString.EMPTY : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
+                                ? RString.EMPTY : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getTokusokuKaisu().setValue(new Decimal(business.get認定調査督促回数()));
             row.getTokusokuKigen().setValue(toRDate(business.get認定調査期限年月日()));
             row.setTokusokuChiku(RString.isNullOrEmpty(business.get地区コード()) ? RString.EMPTY
-                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                            DBECodeShubetsu.調査地区コード.getコード(),
-                            new Code(business.get地区コード()), new FlexibleDate(RDate.getNowDate().toDateString())));
+                                 : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                                                            DBECodeShubetsu.調査地区コード.getコード(),
+                                                            new Code(business.get地区コード()), new FlexibleDate(RDate.getNowDate().toDateString())));
             row.setChosaItakusakiCode(get認定調査委託先コード(business.get認定調査委託先コード()));
             row.setChosainCode(get調査員コード(business.get調査員コード()));
             row.setChikuCode(RString.isNullOrEmpty(business.get地区コード()) ? RString.EMPTY : business.get地区コード());

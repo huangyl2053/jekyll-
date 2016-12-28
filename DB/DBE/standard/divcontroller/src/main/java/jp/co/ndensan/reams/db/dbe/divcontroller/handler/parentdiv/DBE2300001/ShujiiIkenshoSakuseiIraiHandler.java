@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -90,6 +92,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             Shujiiikenshosakuseiirai rec = 申請者情報一覧.records().get(findLastIndex(申請者情報一覧));
             div.getCcdNinteishinseishaFinder().updateSaikinShorisha(rec.get被保険者番号(), rec.getTemp_被保険者氏名().value());
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
+        }else{
+            throw new ApplicationException(UrInformationMessages.該当データなし.getMessage());
         }
     }
 

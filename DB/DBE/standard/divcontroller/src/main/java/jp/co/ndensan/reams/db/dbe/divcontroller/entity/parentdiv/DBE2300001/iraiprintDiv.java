@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class iraiprintDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,14 +33,8 @@ public class iraiprintDiv extends Panel {
     private RadioButton radkigen;
     @JsonProperty("txtkigenymd")
     private TextBoxDate txtkigenymd;
-    @JsonProperty("Sp2")
-    private Space Sp2;
     @JsonProperty("iraiIchiranHyo")
     private CheckBoxList iraiIchiranHyo;
-    @JsonProperty("Sp")
-    private Space Sp;
-    @JsonProperty("Sp3")
-    private Space Sp3;
     @JsonProperty("kinyoYoshi")
     private CheckBoxList kinyoYoshi;
     @JsonProperty("kinyuYoshiOCR")
@@ -47,12 +43,12 @@ public class iraiprintDiv extends Panel {
     private CheckBoxList kinyuYoshiDesign;
     @JsonProperty("seikyuSho")
     private CheckBoxList seikyuSho;
-    @JsonProperty("Sp4")
-    private Space Sp4;
     @JsonProperty("meireiSho")
     private CheckBoxList meireiSho;
     @JsonProperty("teishutsuIraiSho")
     private CheckBoxList teishutsuIraiSho;
+    @JsonProperty("bunshoBango")
+    private BunshoBangoInputDiv bunshoBango;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -151,24 +147,6 @@ public class iraiprintDiv extends Panel {
     }
 
     /*
-     * getSp2
-     * @return Sp2
-     */
-    @JsonProperty("Sp2")
-    public Space getSp2() {
-        return Sp2;
-    }
-
-    /*
-     * setSp2
-     * @param Sp2 Sp2
-     */
-    @JsonProperty("Sp2")
-    public void setSp2(Space Sp2) {
-        this.Sp2 = Sp2;
-    }
-
-    /*
      * getiraiIchiranHyo
      * @return iraiIchiranHyo
      */
@@ -184,42 +162,6 @@ public class iraiprintDiv extends Panel {
     @JsonProperty("iraiIchiranHyo")
     public void setIraiIchiranHyo(CheckBoxList iraiIchiranHyo) {
         this.iraiIchiranHyo = iraiIchiranHyo;
-    }
-
-    /*
-     * getSp
-     * @return Sp
-     */
-    @JsonProperty("Sp")
-    public Space getSp() {
-        return Sp;
-    }
-
-    /*
-     * setSp
-     * @param Sp Sp
-     */
-    @JsonProperty("Sp")
-    public void setSp(Space Sp) {
-        this.Sp = Sp;
-    }
-
-    /*
-     * getSp3
-     * @return Sp3
-     */
-    @JsonProperty("Sp3")
-    public Space getSp3() {
-        return Sp3;
-    }
-
-    /*
-     * setSp3
-     * @param Sp3 Sp3
-     */
-    @JsonProperty("Sp3")
-    public void setSp3(Space Sp3) {
-        this.Sp3 = Sp3;
     }
 
     /*
@@ -295,24 +237,6 @@ public class iraiprintDiv extends Panel {
     }
 
     /*
-     * getSp4
-     * @return Sp4
-     */
-    @JsonProperty("Sp4")
-    public Space getSp4() {
-        return Sp4;
-    }
-
-    /*
-     * setSp4
-     * @param Sp4 Sp4
-     */
-    @JsonProperty("Sp4")
-    public void setSp4(Space Sp4) {
-        this.Sp4 = Sp4;
-    }
-
-    /*
      * getmeireiSho
      * @return meireiSho
      */
@@ -346,6 +270,15 @@ public class iraiprintDiv extends Panel {
     @JsonProperty("teishutsuIraiSho")
     public void setTeishutsuIraiSho(CheckBoxList teishutsuIraiSho) {
         this.teishutsuIraiSho = teishutsuIraiSho;
+    }
+
+    /*
+     * getbunshoBango
+     * @return bunshoBango
+     */
+    @JsonProperty("bunshoBango")
+    public IBunshoBangoInputDiv getBunshoBango() {
+        return bunshoBango;
     }
 
     // </editor-fold>

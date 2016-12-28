@@ -498,8 +498,12 @@ public enum ReportIdDBE {
     /**
      * 報告資料の条件表用ダミー帳票ID。
      */
-    DBE701000(new ReportId("DBE701000_HokokuShiryo"), new RString("報告資料"));
-
+    DBE701000(new ReportId("DBE701000_HokokuShiryo"), new RString("報告資料")),
+     /**
+     * 介護保険診断命令書の帳票ID。
+     */
+    DBE235001(new ReportId("DBE235001_kaigohokenShindanMeireisho"), new RString("介護保険診断命令書"));
+    
     private final ReportId reportId;
 
     private final RString reportName;

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2300001;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgShinseishaIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -34,7 +35,9 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
     private static final RString 期間指定_期間指定 = new RString("key1");
     private static final RString 受診日 = new RString("受診日を");
     private static final RString 受診時分 = new RString("受診時分を");
+    private static final RString 共通日 = new RString("共通日を");
     private static final RString SELECTED_KEY0 = new RString("key0");
+    private static final RString SELECTED_KEY2 = new RString("key2");
 
     /**
      * コンストラクタです。
@@ -73,6 +76,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
             validationMessages.add(期間チェック());
             validationMessages.add(受診日が未入力チェック());
         }
+        validationMessages.add(共通日が未入力チェック());
         return validationMessages;
     }
 
@@ -193,6 +197,18 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
                                 UrErrorMessages.未指定, 受診時分.toString()), div.getMeireisho().getTxtjyushintime()));
+            }
+        }
+        return validationMessages;
+    }
+    
+        private ValidationMessageControlPairs 共通日が未入力チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (SELECTED_KEY2.equals(div.getRadkigen().getSelectedKey())) {
+            if(div.getTxtkigenymd().getValue() == null){
+                validationMessages.add(new ValidationMessageControlPair(
+                        new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
+                                UrErrorMessages.未指定, 共通日.toString()), div.getTxtkigenymd()));
             }
         }
         return validationMessages;
