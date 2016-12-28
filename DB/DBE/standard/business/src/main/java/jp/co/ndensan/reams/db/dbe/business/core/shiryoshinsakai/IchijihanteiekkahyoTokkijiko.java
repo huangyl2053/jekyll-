@@ -52,20 +52,24 @@ public class IchijihanteiekkahyoTokkijiko {
     private final RString 特記パターン;
     private final int 最大文字数;
     private final int ページ最大表示行数;
+    private final RString path;
 
     /**
      * 事務局一次判定結果票Entityの設定。
      *
      * @param 特記情報List 特記情報List
      * @param kyotsuEntity kyotsuEntity
+     * @param ファイルパス ファイルパス
      */
-    public IchijihanteiekkahyoTokkijiko(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List, ShinsakaiSiryoKyotsuEntity kyotsuEntity) {
+    public IchijihanteiekkahyoTokkijiko(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List,
+            ShinsakaiSiryoKyotsuEntity kyotsuEntity, RString ファイルパス) {
         特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.ページ最大表示行数 = Integer.parseInt(DbBusinessConfig.get(
                 ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = kyotsuEntity;
+        this.path = ファイルパス;
     }
 
     /**
@@ -148,8 +152,8 @@ public class IchijihanteiekkahyoTokkijiko {
                     短冊情報.setテキストとイメージ(entity.getTokkiJiko());
                 } else {
                     RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-                    RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
-                    短冊情報.setテキストとイメージ(共有ファイルを引き出す(path,
+                    RString filePath = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
+                    短冊情報.setテキストとイメージ(共有ファイルを引き出す(filePath,
                             getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                 }
                 短冊情報リスト.add(短冊情報);
@@ -166,13 +170,13 @@ public class IchijihanteiekkahyoTokkijiko {
     public List<RString> getTokkiImg() {
         List<RString> filePathList = new ArrayList<>();
         RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-        RString path = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
+        RString filePath = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
         for (int i = 1; i <= 最大ページ; i++) {
             RString tokkiImgPath;
             if (kyotsuEntity.isJimukyoku()) {
-                tokkiImgPath = 共有ファイルを引き出す(path, ファイルID_C4101BAK);
+                tokkiImgPath = 共有ファイルを引き出す(filePath, ファイルID_C4101BAK);
             } else {
-                tokkiImgPath = 共有ファイルを引き出す(path, ファイルID_C4101);
+                tokkiImgPath = 共有ファイルを引き出す(filePath, ファイルID_C4101);
             }
             if (!RString.isNullOrEmpty(tokkiImgPath)) {
                 filePathList.add(tokkiImgPath);
@@ -268,8 +272,9 @@ public class IchijihanteiekkahyoTokkijiko {
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
@@ -282,19 +287,16 @@ public class IchijihanteiekkahyoTokkijiko {
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString filename) {
-        if (sharedFileId == null) {
+        if (sharedFileId == null || RString.isNullOrEmpty(filename)) {
             return RString.EMPTY;
         }
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(filename),
-                        sharedFileId);
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(filename), sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(path)).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(imagePath, filename);
     }
 
     private RString get特記事項テキスト(Code 厚労省IF識別コード, RString 調査特記事項番号, int 特記事項連番) {

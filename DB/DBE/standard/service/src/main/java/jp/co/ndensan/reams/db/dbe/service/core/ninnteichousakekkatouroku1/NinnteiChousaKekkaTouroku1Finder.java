@@ -11,17 +11,14 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatourok
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninnteichousakekkatouroku1.INinnteiChousaKekkaTouroku1RelateMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5203NinteichosahyoKihonChosaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5211NinteichosahyoChosaItemDac;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -77,7 +74,8 @@ public class NinnteiChousaKekkaTouroku1Finder {
     }
 
     /**
-     * 既存概況調査情報を取得します。
+     * 既存概況調査情報を取得します。<br>
+     * 概況調査テキストイメージ区分は「テキスト」で検索する。
      *
      * @param temp_認定調査履歴番号 認定調査履歴番号
      * @param temp_申請書管理番号 申請書管理番号
@@ -87,7 +85,7 @@ public class NinnteiChousaKekkaTouroku1Finder {
             ShinseishoKanriNo temp_申請書管理番号) {
 
         INinnteiChousaKekkaTouroku1RelateMapper mapper = mapperProvider.create(INinnteiChousaKekkaTouroku1RelateMapper.class);
-        RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 概況調査テキストイメージ区分 = TokkijikoTextImageKubun.テキスト.getコード();
         TempDataEntity entity = mapper.get既存概況調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, RString.EMPTY,
                 temp_申請書管理番号, 概況調査テキストイメージ区分));
 
