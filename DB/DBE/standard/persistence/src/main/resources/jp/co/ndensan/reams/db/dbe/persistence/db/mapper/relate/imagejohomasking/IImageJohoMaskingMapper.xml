@@ -23,7 +23,6 @@
         , T5101."shinseishoKanriNo"
         , T7051."shichosonCode"
         , T5305."ChoyoID"
-        , T5305."ninteiShinseiNen"
         , T5115."imageSharedFileId"
         , CASE
         WHEN T5205."shinseishoKanriNo" is not null or T5205."shinseishoKanriNo" <![CDATA[<>]]> '' THEN true
@@ -115,8 +114,8 @@
         AND T5205."shinseishoKanriNo" = T5101."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
-        on T5305."maskDataKubun" = #{イメージ区分}
-        AND T5305."torikomiPageNo" = '1'
+        on T5305."genponMaskKubun" = #{イメージ区分}
+        AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
         'X'
@@ -218,7 +217,6 @@
         <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="帳票ID" column="ChoyoID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定申請年" column="ninteiShinseiNen"/>
         <result property="イメージ共有ファイルID" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="特記マスク有無" column="hasTokkiMask"/>
         <result property="意見書マスク有無" column="hasIkenshoMask"/>

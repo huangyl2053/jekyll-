@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -125,8 +126,9 @@ public class NinteiChosaIraiShudou {
 
     private LockingKey get排他キー() {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        RStringBuilder lockingKey = new RStringBuilder(new RString("ShinseishoKanriNo"));
-        lockingKey.append(申請書管理番号);
+        RStringBuilder lockingKey = new RStringBuilder(SubGyomuCode.DBE認定支援.getColumnValue());
+        lockingKey.append(new RString("ShinseishoKanriNo"));
+        lockingKey.append(申請書管理番号.value());
         return new LockingKey(lockingKey.toRString());
     }
 
@@ -272,6 +274,10 @@ public class NinteiChosaIraiShudou {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -380,7 +386,8 @@ public class NinteiChosaIraiShudou {
         }
 
         if (div.getChkSaiCheck().getSelectedValues().contains(CHKNAME_認定調査依頼該当者履歴一覧)) {
-            NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy被保険者番号(div.getCcdNinteiShinseishaKihonInfo().get被保険者番号());
+            NinnteiChousairaiShudouParameter parameter
+                    = NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号と被保険者番号(申請書管理番号.value(), div.getCcdNinteiShinseishaKihonInfo().get被保険者番号());
             List<NinnteiChousairaiShudouBusiness> 認定調査依頼該当者履歴一覧 = finder.get認定調査依頼該当者履歴一覧(parameter).records();
             if (!認定調査依頼該当者履歴一覧.isEmpty()) {
                 printService.print認定調査依頼該当者履歴一覧(

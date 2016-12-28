@@ -68,7 +68,7 @@ class SyujiyikenshosakuseyiraihakouBodyEditor implements ISyujiyikenshosakuseyir
                     fillType(FillType.BLANK).toDateString());
         }
         source.joken4 = iraiDateTime1.toRString();
-        source.cityCode = item.getListHakkoIchiranhyo_1_3();
+        source.cityCode = item.getListHakkoIchiranhyo_1_5();
         source.cityName = item.getListHakkoIchiranhyo_1_4();
         return source;
     }

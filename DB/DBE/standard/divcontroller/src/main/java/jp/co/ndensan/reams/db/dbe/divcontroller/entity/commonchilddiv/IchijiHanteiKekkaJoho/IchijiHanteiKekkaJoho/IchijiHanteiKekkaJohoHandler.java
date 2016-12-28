@@ -42,7 +42,7 @@ public class IchijiHanteiKekkaJohoHandler {
 
     private final IchijiHanteiKekkaJohoDiv div;
     private static final RString VALUE_ISBLANKLINE = new RString("isBlankLine");
-    private static final double DOUBLE_10 = 10.0;
+    private static final double DOUBLE_10 = 10;
 
     private enum MiSumiKubun {
 
@@ -202,24 +202,41 @@ public class IchijiHanteiKekkaJohoHandler {
                     .get要介護認定一次判定結果コード_認知症加算().getColumnValue());
         }
 
-        div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()/DOUBLE_10));
-        div.getTxtShokuji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_食事()/DOUBLE_10));
-        div.getTxtHaisetsu().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_排泄()/DOUBLE_10));
-        div.getTxtIdo().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_移動()/DOUBLE_10));
-        div.getTxtSeiketsuHoji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_清潔保持()/DOUBLE_10));
-        div.getTxtKansetsuCare().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_間接ケア()/DOUBLE_10));
-        div.getTxtBpsdKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_BPSD関連()/DOUBLE_10));
-        div.getTxtKinoKunren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_機能訓練()/DOUBLE_10));
-        div.getTxtIryoKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_医療関連()/DOUBLE_10));
-        div.getTxtNinchishoKasan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_認知症加算()/DOUBLE_10));
+        div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()).divide(DOUBLE_10));
+        div.getTxtShokuji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_食事()).divide(DOUBLE_10));
+        div.getTxtHaisetsu().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_排泄()).divide(DOUBLE_10));
+        div.getTxtIdo().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_移動()).divide(DOUBLE_10));
+        div.getTxtSeiketsuHoji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_清潔保持()).divide(DOUBLE_10));
+        div.getTxtKansetsuCare().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_間接ケア()).divide(DOUBLE_10));
+        div.getTxtBpsdKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_BPSD関連()).divide(DOUBLE_10));
+        div.getTxtKinoKunren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_機能訓練()).divide(DOUBLE_10));
+        div.getTxtIryoKanren().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_医療関連()).divide(DOUBLE_10));
+        div.getTxtNinchishoKasan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_認知症加算()).divide(DOUBLE_10));
 
-        div.getTxtDai1gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第1群()/DOUBLE_10));
-        div.getTxtDai2gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第2群()/DOUBLE_10));
-        div.getTxtDai3gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第3群()/DOUBLE_10));
-        div.getTxtDai4gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第4群()/DOUBLE_10));
-        div.getTxtDai5gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第5群()/DOUBLE_10));
-        div.getTxtDai6gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第6群()/DOUBLE_10));
-        div.getTxtDai7gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第7群()/DOUBLE_10));
+        div.getTxtDai1gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第1群()).divide(DOUBLE_10));
+        div.getTxtDai2gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第2群()).divide(DOUBLE_10));
+        div.getTxtDai3gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第3群()).divide(DOUBLE_10));
+        div.getTxtDai4gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第4群()).divide(DOUBLE_10));
+        div.getTxtDai5gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第5群()).divide(DOUBLE_10));
+
+        if (hanteiKekka.get中間評価項目得点第6群() == 0) {
+            div.getTxtDai6gun().clearValue();
+            div.getTxtDai6gun().setDisplayNone(true);
+            div.getLblDai6gun().setDisplayNone(true);
+        } else {
+            div.getTxtDai6gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第6群()).divide(DOUBLE_10));
+            div.getTxtDai6gun().setDisplayNone(false);
+            div.getLblDai6gun().setDisplayNone(false);
+        }
+        if (hanteiKekka.get中間評価項目得点第7群() == 0) {
+            div.getTxtDai7gun().clearValue();
+            div.getTxtDai7gun().setDisplayNone(true);
+            div.getLblDai7gun().setDisplayNone(true);
+        } else {
+            div.getTxtDai7gun().setValue(new Decimal(hanteiKekka.get中間評価項目得点第7群()).divide(DOUBLE_10));
+            div.getTxtDai7gun().setDisplayNone(false);
+            div.getLblDai7gun().setDisplayNone(false);
+        }
 
         MiSumiKubun ninteiChosaMisumiKubun = hasNot認定調査票(shinseishoKanriNo) ? MiSumiKubun.未 : MiSumiKubun.済;
         div.getDdlJiritsudoChosa().setSelectedKey(ninteiChosaMisumiKubun.getKey());
@@ -311,38 +328,19 @@ public class IchijiHanteiKekkaJohoHandler {
 
         div.getBtnIchijiHantei().setDisplayNone(isReadOnly);
         div.getBtnKakutei().setDisplayNone(isReadOnly);
-
-        div.getTxtIchijiHanteibi().setReadOnly(isReadOnly);
-        div.getDdlIchijiHanteiKekka().setReadOnly(isReadOnly);
-        div.getDdlIchijiHanteiKekkaNinchishoKasan().setReadOnly(isReadOnly);
-        div.getTxtKijunJikan().setReadOnly(isReadOnly);
-        div.getTxtShokuji().setReadOnly(isReadOnly);
-        div.getTxtHaisetsu().setReadOnly(isReadOnly);
-        div.getTxtIdo().setReadOnly(isReadOnly);
-        div.getTxtSeiketsuHoji().setReadOnly(isReadOnly);
-        div.getTxtKansetsuCare().setReadOnly(isReadOnly);
-        div.getTxtBpsdKanren().setReadOnly(isReadOnly);
-        div.getTxtKinoKunren().setReadOnly(isReadOnly);
-        div.getTxtIryoKanren().setReadOnly(isReadOnly);
-        div.getTxtNinchishoKasan().setReadOnly(isReadOnly);
-        div.getTxtDai1gun().setReadOnly(isReadOnly);
-        div.getTxtDai2gun().setReadOnly(isReadOnly);
-        div.getTxtDai3gun().setReadOnly(isReadOnly);
-        div.getTxtDai4gun().setReadOnly(isReadOnly);
-        div.getTxtDai5gun().setReadOnly(isReadOnly);
-        div.getTxtDai6gun().setReadOnly(isReadOnly);
-        div.getTxtDai7gun().setReadOnly(isReadOnly);
-        div.getDdlJiritsudoChosa().setReadOnly(isReadOnly);
-        div.getDdlJiritsudoIkensho().setReadOnly(isReadOnly);
-        div.getTxtGaizensei().setReadOnly(isReadOnly);
-        div.getDdlJyotaiAnteisei().setReadOnly(isReadOnly);
-        div.getDdlKyufuKbn().setReadOnly(isReadOnly);
-        div.getDgIchijiHanteiKeikokuCode().setReadOnly(isReadOnly);
     }
 
-    public void create一次判定引数(ShinseishoKanriNo shinseishoKanriNo) {
+    /**
+     * 一次判定DLLに渡す引数を作成します。
+     *
+     * @param shinseishoKanriNo 申請書管理番号
+     * @return
+     * 引数が作成できた場合はtrue、引数の作成に失敗した場合（{@code RString.EMPTY}）だった場合はfalseを返す。
+     */
+    public boolean create一次判定引数(ShinseishoKanriNo shinseishoKanriNo) {
         IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
         div.setHanteiArgument(manager.get一次判定引数(shinseishoKanriNo));
+        return !RString.isNullOrEmpty(div.getHanteiArgument());
     }
 
     /**
@@ -364,21 +362,21 @@ public class IchijiHanteiKekkaJohoHandler {
         builder.set要介護認定一次判定結果コード(new Code(getValueOrEmpty(div.getDdlIchijiHanteiKekka().getSelectedKey())));
         builder.set要介護認定一次判定結果コード_認知症加算(new Code(getValueOrEmpty(div.getDdlIchijiHanteiKekkaNinchishoKasan().getSelectedKey())));
 
-        builder.set要介護認定等基準時間(Integer.valueOf(div.getTxtKijunJikan().getValue().toString()));
-        builder.set要介護認定等基準時間_食事(Integer.valueOf(div.getTxtShokuji().getValue().toString()));
-        builder.set要介護認定等基準時間_排泄(Integer.valueOf(div.getTxtHaisetsu().getValue().toString()));
-        builder.set要介護認定等基準時間_移動(Integer.valueOf(div.getTxtIdo().getValue().toString()));
-        builder.set要介護認定等基準時間_清潔保持(Integer.valueOf(div.getTxtSeiketsuHoji().getValue().toString()));
-        builder.set要介護認定等基準時間_間接ケア(Integer.valueOf(div.getTxtKansetsuCare().getValue().toString()));
-        builder.set要介護認定等基準時間_BPSD関連(Integer.valueOf(div.getTxtBpsdKanren().getValue().toString()));
-        builder.set要介護認定等基準時間_機能訓練(Integer.valueOf(div.getTxtKinoKunren().getValue().toString()));
-        builder.set要介護認定等基準時間_医療関連(Integer.valueOf(div.getTxtIryoKanren().getValue().toString()));
-        builder.set要介護認定等基準時間_認知症加算(Integer.valueOf(div.getTxtNinchishoKasan().getValue().toString()));
-        builder.set中間評価項目得点第1群(Integer.valueOf(div.getTxtDai1gun().getValue().toString()));
-        builder.set中間評価項目得点第2群(Integer.valueOf(div.getTxtDai2gun().getValue().toString()));
-        builder.set中間評価項目得点第3群(Integer.valueOf(div.getTxtDai3gun().getValue().toString()));
-        builder.set中間評価項目得点第4群(Integer.valueOf(div.getTxtDai4gun().getValue().toString()));
-        builder.set中間評価項目得点第5群(Integer.valueOf(div.getTxtDai5gun().getValue().toString()));
+        builder.set要介護認定等基準時間(div.getTxtKijunJikan().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_食事(div.getTxtShokuji().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_排泄(div.getTxtHaisetsu().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_移動(div.getTxtIdo().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_清潔保持(div.getTxtSeiketsuHoji().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_間接ケア(div.getTxtKansetsuCare().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_BPSD関連(div.getTxtBpsdKanren().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_機能訓練(div.getTxtKinoKunren().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_医療関連(div.getTxtIryoKanren().getValue().multiply(DOUBLE_10).intValue());
+        builder.set要介護認定等基準時間_認知症加算(div.getTxtNinchishoKasan().getValue().multiply(DOUBLE_10).intValue());
+        builder.set中間評価項目得点第1群(div.getTxtDai1gun().getValue().multiply(DOUBLE_10).intValue());
+        builder.set中間評価項目得点第2群(div.getTxtDai2gun().getValue().multiply(DOUBLE_10).intValue());
+        builder.set中間評価項目得点第3群(div.getTxtDai3gun().getValue().multiply(DOUBLE_10).intValue());
+        builder.set中間評価項目得点第4群(div.getTxtDai4gun().getValue().multiply(DOUBLE_10).intValue());
+        builder.set中間評価項目得点第5群(div.getTxtDai5gun().getValue().multiply(DOUBLE_10).intValue());
         builder.set中間評価項目得点第6群(0);
         builder.set中間評価項目得点第7群(0);
 

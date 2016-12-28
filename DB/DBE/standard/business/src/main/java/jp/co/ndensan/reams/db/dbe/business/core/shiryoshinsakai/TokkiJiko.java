@@ -58,10 +58,10 @@ public class TokkiJiko {
             List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List,
             RString imageFileDirectoryPath) {
         this.kyotsuEntity = kyotsuEntity;
+        this.imageFileDirectoryPath = imageFileDirectoryPath;
         this.短冊テキストリスト = create短冊テキストリスト(特記情報List);
         this.全画面イメージリスト = create全画面イメージリスト();
         this.短冊イメージリスト = create短冊イメージリスト(特記情報List);
-        this.imageFileDirectoryPath = imageFileDirectoryPath;
     }
 
     /**
@@ -231,6 +231,7 @@ public class TokkiJiko {
                         entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
                 短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
+                短冊情報リスト.add(短冊情報);
             }
         }
         return 短冊情報リスト;
@@ -247,6 +248,7 @@ public class TokkiJiko {
                         entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
                 短冊情報.set特記事項テキスト_イメージ(getFilePath(imageFileName));
+                短冊情報リスト.add(短冊情報);
             }
         }
         return 短冊情報リスト;

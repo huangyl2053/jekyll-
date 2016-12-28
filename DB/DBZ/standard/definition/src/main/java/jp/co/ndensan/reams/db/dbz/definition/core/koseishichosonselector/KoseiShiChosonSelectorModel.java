@@ -23,4 +23,5 @@ public class KoseiShiChosonSelectorModel implements Serializable {
     
     private RString 市町村コード;
     private RString 市町村名称;
+    private RString 証記載保険者番号;
 }

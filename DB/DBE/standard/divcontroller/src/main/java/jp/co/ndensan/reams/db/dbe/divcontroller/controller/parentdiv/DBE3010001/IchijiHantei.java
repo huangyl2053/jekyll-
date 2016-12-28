@@ -23,12 +23,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3010001.Ich
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3010001.IchijiHanteiValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -36,7 +33,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -46,14 +42,12 @@ import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -71,17 +65,10 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class IchijiHantei {
 
-    private final IChiJiPanTeiSyoRiManager manager;
+    //TODO n8178 城間 本画面は仕様変更により、完了処理・一次判定から起動されることがなくなった。後日不要なコードの削除が必要
+    //条件分岐により、処理自体は通らないので、すぐに削除する必要はない。
     private static final RString LOCKINGKEY = new RString("ShinseishoKanriNo");
     private static final RString データ取込 = new RString("btnTorikomi");
-
-    /**
-     * コンストラクタです。
-     *
-     */
-    public IchijiHantei() {
-        this.manager = IChiJiPanTeiSyoRiManager.createInstance();
-    }
 
     /**
      * 認定調査データ取込（モバイル）の初期処理を表示します。
@@ -131,8 +118,6 @@ public class IchijiHantei {
 
         }
         return ResponseData.of(response.data).rootTitle(title).respond();
-        //response.setRootTitle(title);
-        //return response;
     }
 
     /**
@@ -157,7 +142,8 @@ public class IchijiHantei {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
-        List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, new ShinseishoKanriNoList());
+        ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
+        List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, shinseishoKanriNoList);
 
         if (一次判定対象者一覧List.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
@@ -165,6 +151,8 @@ public class IchijiHantei {
 
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         getHandler(div).対象者一覧の編集(一次判定対象者一覧List, personalData);
+        getHandler(div).setLimitValueOfGrid(menuID, shinseishoKanriNoList);
+
         AccessLogger.log(AccessLogType.照会, personalData);
         ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
         if (validation.iterator().hasNext()) {
@@ -385,6 +373,7 @@ public class IchijiHantei {
             if (torokuTaishoList.isEmpty()) {
                 return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
             }
+            IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
             manager.save要介護認定一次判定結果情報List(torokuTaishoList);
 
             for (dgIchijiHanteiTaishoshaIchiran_Row row : dg.getDataSource()) {
@@ -429,21 +418,9 @@ public class IchijiHantei {
 
     private List<IChiJiPanTeiSyoRiBusiness> kenSaKu(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
 
-        RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RDate 認定申請年月日開始 = div.getIchijiHanteiKensakuJoken().getTxtShinseiDateRange().getFromValue();
-        RDate 認定申請年月日終了 = div.getIchijiHanteiKensakuJoken().getTxtShinseiDateRange().getToValue();
-        Decimal 検索件数 = div.getIchijiHanteiKensakuJoken().getTxtMaxCount().getValue();
-        IChiJiPanTeiSyoRiParameter parameter = IChiJiPanTeiSyoRiParameter.
-                createParameter(
-                        ShoriJotaiKubun.通常.getコード(),
-                        ShoriJotaiKubun.延期.getコード(),
-                        イメージ区分,
-                        認定申請年月日開始 == null ? FlexibleDate.EMPTY : new FlexibleDate(認定申請年月日開始.toDateString()),
-                        認定申請年月日終了 == null ? FlexibleDate.EMPTY : new FlexibleDate(認定申請年月日終了.toDateString()),
-                        検索件数,
-                        menuID,
-                        shinseishoKanriNoList.getShinseishoKanriNoS());
+        IChiJiPanTeiSyoRiParameter parameter = getHandler(div).createParameter(menuID, shinseishoKanriNoList);
+
+        IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
         List<IChiJiPanTeiSyoRiBusiness> businessList = manager.get対象者一覧(parameter).records();
         if (!businessList.isEmpty()) {
             List<IchijiHanteiKekkaJoho> kekkaJohoList = manager.get要介護認定一次判定結果情報(parameter).records();
@@ -451,6 +428,7 @@ public class IchijiHantei {
         } else {
             ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, Models.create(new ArrayList()));
         }
+
         return businessList;
     }
 

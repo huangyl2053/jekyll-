@@ -30,5 +30,6 @@ public class ShujiiIkenshoSakuseiRelateEntity {
     private RString 連絡先;
     private RString 主治医コード;
     private RString 主治医名;
+    private RString 証記載保険者番号;
 
 }

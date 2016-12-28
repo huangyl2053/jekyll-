@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KanryoshoriCsvEntity {
 
-    //一次判定画面（411）と同様のGridを使用する場合のCSV
-    //どちらを使用するか決定してコメントアウトを外す。
+    @CsvField(order = 1, name = "状態")
+    private final RString 状態;
     @CsvField(order = 10, name = "申請書管理番号")
     private final RString 申請書管理番号;
     @CsvField(order = 20, name = "証記載保険者")
@@ -123,7 +123,7 @@ public class KanryoshoriCsvEntity {
      * @param 推定される給付区分 推定される給付区分
      * @param 厚労省IF識別コード 厚労省IF識別コード
      */
-    public KanryoshoriCsvEntity(RString 申請書管理番号, RString 証記載保険者, RString 被保険者番号,
+    public KanryoshoriCsvEntity(RString 状態, RString 申請書管理番号, RString 証記載保険者, RString 被保険者番号,
             RString 被保険者名, RString 申請日, RString 申請区分_申請時, RString 一次判定日,
             RString 一次判定結果, RString 一次判定結果コード, RString 一次判定結果_認知症加算,
             RString 一次判定結果コード_認知症加算, RString 一次判定警告コード, RString 調査実地日,
@@ -133,6 +133,7 @@ public class KanryoshoriCsvEntity {
             RString 中間評価項目特定第１群, RString 中間評価項目特定第２群, RString 中間評価項目特定第３群,
             RString 中間評価項目特定第４群, RString 中間評価項目特定第５群, RString 安定性,
             RString 認知症自立度２以上の蓋然性, RString 推定される給付区分, RString 厚労省IF識別コード) {
+        this.状態 = 状態;
         this.申請書管理番号 = 申請書管理番号;
         this.証記載保険者 = 証記載保険者;
         this.被保険者番号 = 被保険者番号;

@@ -22,7 +22,7 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE4050001",
      "layoutTitle": "イメージ情報マスキング",
-     "eventName": "完了処理に戻る",
+     "eventName": "終了する",
      "destroy": false,
      "condition": ""
     }

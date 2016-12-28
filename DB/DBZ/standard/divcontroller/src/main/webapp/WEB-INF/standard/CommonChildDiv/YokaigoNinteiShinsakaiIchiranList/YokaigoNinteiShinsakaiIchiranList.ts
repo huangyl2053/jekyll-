@@ -161,7 +161,7 @@ module DBZ {
                     gridSetting.isShowFilter = false;
 
 
-                    gridSetting.columns[0].visible = false;
+                    gridSetting.columns[0].visible = true;
                     gridSetting.columns[1].visible = false;
                     gridSetting.columns[2].visible = false;
                     gridSetting.columns[3].visible = true;
@@ -275,7 +275,7 @@ module DBZ {
                     gridSetting.isMultiSelectable = true;
                     gridSetting.isShowSelectButtonColumn = false;
 
-                    gridSetting.columns[0].visible = false;
+                    gridSetting.columns[0].visible = true;
                     gridSetting.columns[1].visible = false;
                     gridSetting.columns[2].visible = false;
                     gridSetting.columns[3].visible = true;

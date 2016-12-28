@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,6 +26,8 @@ public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
     private static final RString 印刷済 = new RString("2");
     private final RString 通常 = ShoriJotaiKubun.通常.getコード();
     private final RString 延期 = ShoriJotaiKubun.延期.getコード();
+    private final RString 転入 = NinteiShinseiShinseijiKubunCode.転入申請.getコード();
+    private final RString 喪失 = NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード();
     private final RString iraiFromYMD;
     private final RString iraiToYMD;
     private final RString shujiiIkenshoSakuseiIraisho;

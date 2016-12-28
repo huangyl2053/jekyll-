@@ -86,7 +86,7 @@
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
    <if test= "!isShichoson">    
-       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+       AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
     </select>
 
@@ -157,7 +157,7 @@
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
    <if test= "!isShichoson">    
-       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+       AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
     </select>
 
@@ -245,7 +245,7 @@
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
    <if test= "!isShichoson">    
-       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+       AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
           
        UNION ALL
@@ -305,7 +305,7 @@
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
    <if test= "!isShichoson">    
-       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+       AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
     </select>
 
@@ -565,7 +565,7 @@
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
    <if test= "!isShichoson">    
-       AND DbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+       AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
   </select>
 

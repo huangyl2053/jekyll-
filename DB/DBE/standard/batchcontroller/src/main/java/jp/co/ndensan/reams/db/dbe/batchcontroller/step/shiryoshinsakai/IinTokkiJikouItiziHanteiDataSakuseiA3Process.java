@@ -51,8 +51,8 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     private static final RString SELECT_NINTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getTokkiJikouItiziHantei");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
-            new RString(IinTokkiTextA3ReportSource.ReportSourceFields.two_tokkiText1.name()),
-            new RString(IinTokkiTextA3ReportSource.ReportSourceFields.two_tokkiImg1.name())));
+            new RString(IinTokkiTextA3ReportSource.ReportSourceFields.tokkiText1.name()),
+            new RString(IinTokkiTextA3ReportSource.ReportSourceFields.tokkiImg1.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IShiryoShinsakaiIinMapper mapper;
@@ -87,7 +87,6 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517085.getReportId().value())
                 .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
-
 
                     IinTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override

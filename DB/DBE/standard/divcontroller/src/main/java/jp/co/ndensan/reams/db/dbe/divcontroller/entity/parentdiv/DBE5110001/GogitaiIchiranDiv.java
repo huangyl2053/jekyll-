@@ -24,7 +24,7 @@ public class GogitaiIchiranDiv extends Panel {
     @JsonProperty("btnTsuika")
     private Button btnTsuika;
     @JsonProperty("btnCSVShutsuryoku")
-    private Button btnCSVShutsuryoku;
+    private ButtonDownLoad btnCSVShutsuryoku;
     @JsonProperty("dgGogitaiIchiran")
     private DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran;
 
@@ -57,7 +57,7 @@ public class GogitaiIchiranDiv extends Panel {
      * @return btnCSVShutsuryoku
      */
     @JsonProperty("btnCSVShutsuryoku")
-    public Button getBtnCSVShutsuryoku() {
+    public ButtonDownLoad getBtnCSVShutsuryoku() {
         return btnCSVShutsuryoku;
     }
 
@@ -66,7 +66,7 @@ public class GogitaiIchiranDiv extends Panel {
      * @param btnCSVShutsuryoku btnCSVShutsuryoku
      */
     @JsonProperty("btnCSVShutsuryoku")
-    public void setBtnCSVShutsuryoku(Button btnCSVShutsuryoku) {
+    public void setBtnCSVShutsuryoku(ButtonDownLoad btnCSVShutsuryoku) {
         this.btnCSVShutsuryoku = btnCSVShutsuryoku;
     }
 

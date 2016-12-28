@@ -43,6 +43,7 @@ public class SonotaKikanGuide {
      */
     public ResponseData<SonotaKikanGuideDiv> onLoad(SonotaKikanGuideDiv div) {
         getHandler(div).load();
+        onClick_Kensaku(div);
         return ResponseData.of(div).respond();
     }
 
@@ -61,10 +62,8 @@ public class SonotaKikanGuide {
         if (含まない.equals(div.getRadHaisi().getSelectedKey())) {
             含まないFlag = true;
         }
-       // TODO  内部QA：なし Redmine：#76905(保険者DDL共有子Divの取得方式が知らない、一時固定値を使用します)
-        // QA div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue()
         List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
-                .createその他機関情報の取得キー作成(RString.EMPTY,
+                .createその他機関情報の取得キー作成(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value(),
                         div.getTxtSonotaKikanCodefrom().getValue(),
                         div.getTxtSonotaKikanCodeto().getValue(), 含まないFlag,
                         div.getTxtSonotaKikanName().getValue(),
@@ -75,8 +74,6 @@ public class SonotaKikanGuide {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).set一覧データ(businessList);
-        div.getKensakuJoken().setIsOpen(false);
-        div.getSelectIchiran().setIsOpen(true);
         return ResponseData.of(div).respond();
     }
 

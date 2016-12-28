@@ -46,7 +46,7 @@ public class KoseiShiChosonSelectorHandler {
         List<dgKoseiShichosonList_Row> rowList = new ArrayList<>();
         for (HokenshaSummary koseiShichoson : hokenshaList) {
             dgKoseiShichosonList_Row row = new dgKoseiShichosonList_Row(koseiShichoson.get市町村名称(),
-                    koseiShichoson.get市町村コード().getColumnValue());
+                    koseiShichoson.get市町村コード().getColumnValue(), koseiShichoson.get証記載保険者番号().getColumnValue());
             rowList.add(row);
         }
         div.getDgKoseiShichosonList().setDataSource(rowList);
@@ -71,6 +71,7 @@ public class KoseiShiChosonSelectorHandler {
         KoseiShiChosonSelectorModel model = new KoseiShiChosonSelectorModel();
         model.set市町村コード(div.getDgKoseiShichosonList().getClickedItem().getShicosoncode());
         model.set市町村名称(div.getDgKoseiShichosonList().getClickedItem().getShichosonname());
+        model.set証記載保険者番号(div.getDgKoseiShichosonList().getClickedItem().getShoKisaiHokenshaNo());
         ViewStateHolder.put(ViewStateKeys.引き継ぎデータ, model);
     }
 

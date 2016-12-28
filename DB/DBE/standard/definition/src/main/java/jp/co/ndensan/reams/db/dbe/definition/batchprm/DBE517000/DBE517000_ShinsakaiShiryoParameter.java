@@ -32,6 +32,7 @@ import lombok.Setter;
 public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
 
     private static final String SHINSAKAIKAISAINO = "shinsakaiKaisaiNo";
+    private static final String SHINSAKAIKAISAIBASHO = "shinsakaiKaisaiBasho";
     private static final String SHINSAKAIKAISAIYOTEIYMD = "shinsakaiKaisaiYoteiYMD";
     private static final String SHINSAKAIKAISHIYOTEITIME = "shinsakaiKaishiYoteiTime";
     private static final String GOGITAINO = "gogitaiNo";
@@ -62,6 +63,8 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
 
     @BatchParameter(key = SHINSAKAIKAISAINO, name = "介護認定審査会開催番号")
     private RString shinsakaiKaisaiNo;
+    @BatchParameter(key = SHINSAKAIKAISAIBASHO, name = "介護認定審査会開催場所")
+    private RString shinsakaiKaisaiBasho;
     @BatchParameter(key = SHINSAKAIKAISAIYOTEIYMD, name = "介護認定審査会開催予定年月日")
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     @BatchParameter(key = SHINSAKAIKAISHIYOTEITIME, name = "介護認定審査会開始予定時刻")
@@ -127,6 +130,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      * コンストラクタです。
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     * @param shinsakaiKaisaiBasho 介護認定審査会開催場所
      * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定年月日
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      * @param gogitaiNo 合議体番号
@@ -157,6 +161,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      */
     public DBE517000_ShinsakaiShiryoParameter(
             RString shinsakaiKaisaiNo,
+            RString shinsakaiKaisaiBasho,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
             int gogitaiNo,
@@ -185,6 +190,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
+        this.shinsakaiKaisaiBasho = shinsakaiKaisaiBasho;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
         this.gogitaiNo = gogitaiNo;
@@ -222,11 +228,11 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     public IinTuutishoProcessParameter toIinTuutishoProcessParameter() {
         return new IinTuutishoProcessParameter(
                 shinsakaiKaisaiNo,
+                shinsakaiKaisaiBasho,
                 shuturyokuSutairu,
                 printHou,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
-                RString.EMPTY,
                 gogitaiNo);
     }
 
@@ -291,6 +297,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      */
     public DBE517001_ShinsakaiShiryoJImukyokuParameter toDBE517001_ShinsakaiShiryoJImukyokuParameter(Map<RString, RString> 帳票一覧Map) {
         return new DBE517001_ShinsakaiShiryoJImukyokuParameter(shinsakaiKaisaiNo,
+                shinsakaiKaisaiBasho,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiNo,
@@ -321,6 +328,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      */
     public DBE517002_ShinsakaiShiryoIinParameter toDBE517002_ShinsakaiShiryoIinParameter(Map<RString, RString> 帳票一覧Map) {
         return new DBE517002_ShinsakaiShiryoIinParameter(shinsakaiKaisaiNo,
+                shinsakaiKaisaiBasho,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiNo,

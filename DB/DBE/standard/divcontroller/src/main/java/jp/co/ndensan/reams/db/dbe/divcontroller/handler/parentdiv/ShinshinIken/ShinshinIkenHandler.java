@@ -1906,7 +1906,7 @@ public class ShinshinIkenHandler {
     }
 
     private RString get記入項目の値(ShujiiIkenshoKinyuItem item) {
-        return item.get記入項目();
+        return item.get記入項目() != null ? item.get記入項目() : RString.EMPTY;
     }
 
     private ShujiiIkenshoIkenItem モード判断_意見項目(ShujiiIkenshoIkenItem 意見書情報) {

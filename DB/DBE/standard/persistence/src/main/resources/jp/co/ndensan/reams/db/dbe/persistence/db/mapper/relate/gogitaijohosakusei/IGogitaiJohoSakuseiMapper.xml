@@ -269,7 +269,9 @@
             "TempGogitaiJohoSakusei" AS "TempGogitaiJohoSakusei"
         ORDER BY
             "TempGogitaiJohoSakusei"."合議体NO" ASC,
-            "TempGogitaiJohoSakusei"."審査会委員コード" ASC
+            "TempGogitaiJohoSakusei"."審査会委員コード" ASC,
+            "TempGogitaiJohoSakusei"."有効開始日" ASC,
+            "TempGogitaiJohoSakusei"."有効終了日" ASC
     </select>
 
 </mapper>

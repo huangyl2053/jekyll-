@@ -42,6 +42,10 @@ public class IchijiHanteiKekkaJoho {
      */
     public ResponseData<IchijiHanteiKekkaJohoDiv> onLoad(IchijiHanteiKekkaJohoDiv div) {
 
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
         IchijiHanteiKekkaJohoHandler handler = getHandler(div);
         ShinseishoKanriNo shinseishoKanriNo = handler.get申請書管理番号();
         ModeType modeType = handler.getモード();
@@ -63,7 +67,10 @@ public class IchijiHanteiKekkaJoho {
         }
 
         if (ModeType.ADD_MODE.equals(modeType)) {
-            handler.create一次判定引数(shinseishoKanriNo);
+            if (!handler.create一次判定引数(shinseishoKanriNo)) {
+                handler.setStateOfIchijiHanteiKekka(ModeType.SHOKAI_MODE);
+                return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定実行不可_申請日.getMessage()).respond();
+            }
         }
 
         return ResponseData.of(div).respond();

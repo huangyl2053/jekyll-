@@ -31,6 +31,10 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     private Button btnRight;
     @JsonProperty("lblMonth")
     private Label lblMonth;
+    @JsonProperty("txtYearMonth")
+    private TextBoxDate txtYearMonth;
+    @JsonProperty("btnHyojiTsukiHenko")
+    private Button btnHyojiTsukiHenko;
     @JsonProperty("dgShinsakaiKaisaiYoteiIchiran")
     private DataGrid<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaiKaisaiYoteiIchiran;
     @JsonProperty("txtCopyFrom")
@@ -140,6 +144,42 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     @JsonProperty("lblMonth")
     public void setLblMonth(Label lblMonth) {
         this.lblMonth = lblMonth;
+    }
+
+    /*
+     * gettxtYearMonth
+     * @return txtYearMonth
+     */
+    @JsonProperty("txtYearMonth")
+    public TextBoxDate getTxtYearMonth() {
+        return txtYearMonth;
+    }
+
+    /*
+     * settxtYearMonth
+     * @param txtYearMonth txtYearMonth
+     */
+    @JsonProperty("txtYearMonth")
+    public void setTxtYearMonth(TextBoxDate txtYearMonth) {
+        this.txtYearMonth = txtYearMonth;
+    }
+
+    /*
+     * getbtnHyojiTsukiHenko
+     * @return btnHyojiTsukiHenko
+     */
+    @JsonProperty("btnHyojiTsukiHenko")
+    public Button getBtnHyojiTsukiHenko() {
+        return btnHyojiTsukiHenko;
+    }
+
+    /*
+     * setbtnHyojiTsukiHenko
+     * @param btnHyojiTsukiHenko btnHyojiTsukiHenko
+     */
+    @JsonProperty("btnHyojiTsukiHenko")
+    public void setBtnHyojiTsukiHenko(Button btnHyojiTsukiHenko) {
+        this.btnHyojiTsukiHenko = btnHyojiTsukiHenko;
     }
 
     /*

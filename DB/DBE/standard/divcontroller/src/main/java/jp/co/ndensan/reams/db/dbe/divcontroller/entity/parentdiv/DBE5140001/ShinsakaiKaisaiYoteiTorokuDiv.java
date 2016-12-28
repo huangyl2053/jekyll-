@@ -156,6 +156,26 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtYearMonth() {
+        return this.getShinsakaiKaisaiYoteiIchiran().getTxtYearMonth();
+    }
+
+    @JsonIgnore
+    public void  setTxtYearMonth(TextBoxDate txtYearMonth) {
+        this.getShinsakaiKaisaiYoteiIchiran().setTxtYearMonth(txtYearMonth);
+    }
+
+    @JsonIgnore
+    public Button getBtnHyojiTsukiHenko() {
+        return this.getShinsakaiKaisaiYoteiIchiran().getBtnHyojiTsukiHenko();
+    }
+
+    @JsonIgnore
+    public void  setBtnHyojiTsukiHenko(Button btnHyojiTsukiHenko) {
+        this.getShinsakaiKaisaiYoteiIchiran().setBtnHyojiTsukiHenko(btnHyojiTsukiHenko);
+    }
+
+    @JsonIgnore
     public DataGrid<dgShinsakaiKaisaiYoteiIchiran_Row> getDgShinsakaiKaisaiYoteiIchiran() {
         return this.getShinsakaiKaisaiYoteiIchiran().getDgShinsakaiKaisaiYoteiIchiran();
     }

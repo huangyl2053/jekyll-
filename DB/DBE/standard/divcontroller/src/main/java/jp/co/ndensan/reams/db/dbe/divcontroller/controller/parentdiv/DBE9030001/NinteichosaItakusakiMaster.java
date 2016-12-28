@@ -71,6 +71,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaIta
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
@@ -285,6 +289,8 @@ public class NinteichosaItakusakiMaster {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         DBE9030001ErrorMessage 編集なしで更新不可 = new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可);
+        DBE9030001ErrorMessage 入力値が不正_追加メッセージあり_口座
+                = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 口座情報チェックREPLACE.toString());
         DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックREPLACE.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
@@ -294,12 +300,16 @@ public class NinteichosaItakusakiMaster {
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
                     .thenAdd(編集なしで更新不可).messages());
         }
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.口座情報入力有り時必須項目チェック)
+                .thenAdd(入力値が不正_追加メッセージあり_口座).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
                 .thenAdd(入力値が不正_追加メッセージあり).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先コードの重複チェック)
                 .thenAdd(既に登録済).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 編集なしで更新不可, div.getChosaitakusakiJohoInput()).build().check(messages));
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                入力値が不正_追加メッセージあり_口座, div.getChosaitakusakiJohoInput().getKozaJoho()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 入力値が不正_追加メッセージあり, div.getChosaitakusakiJohoInput().getTxtShichoson()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -351,6 +361,17 @@ public class NinteichosaItakusakiMaster {
                 }
                 ninteichosaItakusaki.getEntity().setKikanKubun(chosaKikanKubun);
                 ninteichosaItakusaki.getEntity().setJokyoFlag(状況フラグ有効.equals(div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue()));
+                //口座情報
+                ninteichosaItakusaki.getEntity().setKinyuKikanCode(
+                        new KinyuKikanCode(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value()));
+                ninteichosaItakusaki.getEntity().setKinyuKikanShitenCode(
+                        new KinyuKikanShitenCode(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value()));
+                ninteichosaItakusaki.getEntity().setYokinShubetsu(div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+                ninteichosaItakusaki.getEntity().setKozaNo(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue());
+                ninteichosaItakusaki.getEntity().setKozaMeigininKana(
+                        new AtenaKanaMeisho(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue()));
+                ninteichosaItakusaki.getEntity().setKozaMeiginin(
+                        new AtenaMeisho(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()));
 
                 NinteichosaItakusakiJohoRelate johoRelate = new NinteichosaItakusakiJohoRelate();
                 johoRelate.getEntity().set認定調査委託先情報Entity(ninteichosaItakusaki.getEntity());
@@ -386,9 +407,11 @@ public class NinteichosaItakusakiMaster {
                         div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue(),
                         div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue(),
                         div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue(),
-                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get金融機関コード().getColumnValue(),
-                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店().get支店コード().getColumnValue(),
-                        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue(),
+                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null
+                        ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get金融機関コード().getColumnValue(),
+                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店() == null
+                        ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店().get支店コード().getColumnValue(),
+                        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()

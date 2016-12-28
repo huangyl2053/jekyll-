@@ -154,15 +154,6 @@ public class ImageJohoMaskingResult {
     }
 
     /**
-     * 認定申請年を取得します。
-     *
-     * @return 認定申請年
-     */
-    public int get認定申請年() {
-        return entity.get認定申請年();
-    }
-
-    /**
      * イメージ共有ファイルIDを取得します。
      *
      * @return イメージ共有ファイルID

@@ -29,6 +29,10 @@ public class HanteiKekkaHyoA3ReportFormGroupIndex {
     private static final int INT_10 = 10;
     private static final int INT_11 = 11;
     private static final int INT_12 = 12;
+    private static final int INT_13 = 13;
+    private static final int INT_14 = 14;
+    private static final int INT_15 = 15;
+    private static final int INT_16 = 16;
 
     /**
      * 判定結果票A3のFormGroupIndexを返します。
@@ -90,6 +94,30 @@ public class HanteiKekkaHyoA3ReportFormGroupIndex {
         } else {
             return INT_1;
         }
+    }
+
+    /**
+     * 判定結果票A3の2ページ目のFormGroupIndexを返します。
+     *
+     * @param 特記事項テキストイメージ区分 特記事項テキストイメージ区分
+     * @param 特記パターン 特記パターン
+     * @return 対応するFormGroupIndex
+     */
+    public static int getFormGroupIndex_2page(RString 特記事項テキストイメージ区分, RString 特記パターン) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+                && 特記パターン.equals(全面)) {
+            return INT_13;
+        } else if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+                && 特記パターン.equals(短冊)) {
+            return INT_14;
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+                && 特記パターン.equals(全面)) {
+            return INT_15;
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+                && 特記パターン.equals(短冊)) {
+            return INT_16;
+        }
+        return INT_13;
     }
 
     private static boolean isサービス区分コード_予防及び介護以外(Code サービス区分コード) {

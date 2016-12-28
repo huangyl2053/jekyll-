@@ -60,6 +60,8 @@ public class DBE011001_ShinseiInfoPrintTest extends DbeTestBase {
         RDateTime 処理日終了 = RDateTime.of(2017, 12, 31, 00, 00);
         DBE011001_ShinseiInfoPrintParameter parameter = new DBE011001_ShinseiInfoPrintParameter();
 
+        parameter.setShinseimonitorflag(true);
+        parameter.setMonitorsakuseijyouken(new RString("1"));
         parameter.setYokaigoyoshienseiichiranflag(true);
         parameter.setShinseishaichiransakuseijyouken(new RString("1"));
         parameter.setShinseishasakuseijyoukenuser(false);

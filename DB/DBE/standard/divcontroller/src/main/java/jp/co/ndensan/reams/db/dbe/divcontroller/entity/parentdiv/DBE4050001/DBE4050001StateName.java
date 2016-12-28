@@ -19,7 +19,8 @@ public enum DBE4050001StateName implements IStateEnumerations {
     検索結果表示("検索結果表示"),
     イメージ情報表示("イメージ情報表示"),
     Default("default"),
-    完了表示("完了表示");
+    完了表示("完了表示"),
+    完了処理遷移表示("完了処理遷移表示");
 
     private final RString name;
 

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Ninteich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
-import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -54,6 +52,8 @@ public class NinteichosaIraiHandler {
     private static final RString KEY_可 = new RString("2");
     private static final RString 調査依頼完了ボタン = new RString("btnChousaIraiKanryo");
     private static final RString モバイル出力ボタン = new RString("btnMobile");
+    private int completeCount = 0;
+    private int notUpdateCount = 0;
 
     /**
      * コンストラクタです。
@@ -68,6 +68,7 @@ public class NinteichosaIraiHandler {
      * 完了処理・認定調査依頼に初期化を設定します。
      */
     public void onLoad() {
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(
             ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxCount().setMaxLength(Integer.toString(div.getTxtMaxCount().getMaxValue().intValue()).length());
@@ -100,8 +101,7 @@ public class NinteichosaIraiHandler {
      * DataGridを更新します。
      */
     public void initDataGrid() {
-
-        LasdecCode 市町村コード = get市町村コード();
+        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         RString 状態 = div.getRadShoriJyotai().getSelectedKey();
         Decimal 最大件数 = div.getTxtMaxCount().getValue();
         SearchResult<CyoSaiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
@@ -111,8 +111,8 @@ public class NinteichosaIraiHandler {
         List<CyoSaiRaiBusiness> 調査依頼List = searchResult.records();
         put要介護認定完了情報(調査依頼List);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
-        int completeCount = 0;
-        int notUpdateCount = 0;
+        completeCount = 0;
+        notUpdateCount = 0;
         for (CyoSaiRaiBusiness business : 調査依頼List) {
 
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
@@ -150,27 +150,14 @@ public class NinteichosaIraiHandler {
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
             row.setGetShoKisaiHokenshaNo(business.get証記載保険番号() == null ? RString.EMPTY : business.get証記載保険番号());
             調査依頼モードの日付設定(row, business);
-            set状態(row, notUpdateCount, completeCount);
+            set状態(row);
             rowList.add(row);
         }
         div.getDgNinteiTaskList().setDataSource(rowList);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(all);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
-        set件数表示(状態, notUpdateCount, completeCount);
-    }
-
-    private LasdecCode get市町村コード() {
-        List<HokenshaSummary> hokenshaList = new ArrayList<>(
-            HokenshaListLoader.createInstance()
-            .getShichosonCodeNameList(GyomuBunrui.介護認定)
-            .getAll()
-        );
-        if (!hokenshaList.isEmpty() && hokenshaList.size() == 1) {
-            return hokenshaList.get(0).get市町村コード();
-        } else {
-            return LasdecCode.EMPTY;
-        }
+        set件数表示(状態);
     }
 
     private void put要介護認定完了情報(List<CyoSaiRaiBusiness> 調査依頼List) {
@@ -184,7 +171,7 @@ public class NinteichosaIraiHandler {
         }
     }
 
-    private void set状態(dgNinteiTaskList_Row row, int notUpdateCount, int completeCount) {
+    private void set状態(dgNinteiTaskList_Row row) {
         if ((RString.isNullOrEmpty(row.getKonkaiChosaItakusaki()) || RString.isNullOrEmpty(row.getKonkaiChosain()))
             || row.getChosaIraiKigen().getValue() == null
             || row.getChosaIraishoHakkoDay().getValue() == null
@@ -198,7 +185,7 @@ public class NinteichosaIraiHandler {
         }
     }
 
-    private void set件数表示(RString 状態, int notUpdateCount, int completeCount) {
+    private void set件数表示(RString 状態) {
         if (状態.equals(KEY_未)) {
             div.getTxtNoUpdate().setValue(new Decimal(notUpdateCount));
             div.getTxtCompleteCount().clearValue();

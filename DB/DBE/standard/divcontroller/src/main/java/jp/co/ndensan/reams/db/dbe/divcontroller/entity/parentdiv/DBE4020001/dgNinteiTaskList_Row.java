@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 19 15:20:44 JST 2016 
+ * Wed Dec 28 16:27:24 JST 2016 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -38,6 +39,7 @@ public class dgNinteiTaskList_Row extends DataRow {
     private RString shinseishoKanriNo;
     private RString nijiHanteiYokaigoJotaiKubunCode;
     private RString koroshoIfShikibetsuCode;
+    private TextBoxNum hiddenYukoKikan;
 
     public dgNinteiTaskList_Row() {
         super();
@@ -57,6 +59,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.shinseishoKanriNo = RString.EMPTY;
         this.nijiHanteiYokaigoJotaiKubunCode = RString.EMPTY;
         this.koroshoIfShikibetsuCode = RString.EMPTY;
+        this.hiddenYukoKikan = new TextBoxNum();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
@@ -73,9 +76,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("nijiHanteiYokaigoJotaiKubunCode", nijiHanteiYokaigoJotaiKubunCode);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.setOriginalData("hiddenYukoKikan", hiddenYukoKikan);
     }
 
-    public dgNinteiTaskList_Row(RString jotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate nijihanteiKekkaToroku, RString nyuryokuHoho, RString nijihanteiKekka, RString nijihanteiYukoKikan, TextBoxDate nijihanteiShinsakaiKaisaiDay, RString nijihanteiKaisaiNumber, RString shinseishoKanriNo, RString nijiHanteiYokaigoJotaiKubunCode, RString koroshoIfShikibetsuCode) {
+    public dgNinteiTaskList_Row(RString jotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate nijihanteiKekkaToroku, RString nyuryokuHoho, RString nijihanteiKekka, RString nijihanteiYukoKikan, TextBoxDate nijihanteiShinsakaiKaisaiDay, RString nijihanteiKaisaiNumber, RString shinseishoKanriNo, RString nijiHanteiYokaigoJotaiKubunCode, RString koroshoIfShikibetsuCode, TextBoxNum hiddenYukoKikan) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokensha", hokensha);
@@ -93,6 +97,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("nijiHanteiYokaigoJotaiKubunCode", nijiHanteiYokaigoJotaiKubunCode);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
+        this.setOriginalData("hiddenYukoKikan", hiddenYukoKikan);
         this.jotai = jotai;
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
@@ -109,6 +114,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.nijiHanteiYokaigoJotaiKubunCode = nijiHanteiYokaigoJotaiKubunCode;
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
+        this.hiddenYukoKikan = hiddenYukoKikan;
     }
 
     public RString getJotai() {
@@ -173,6 +179,10 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public RString getKoroshoIfShikibetsuCode() {
         return koroshoIfShikibetsuCode;
+    }
+
+    public TextBoxNum getHiddenYukoKikan() {
+        return hiddenYukoKikan;
     }
 
     public void setJotai(RString jotai) {
@@ -253,6 +263,11 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setKoroshoIfShikibetsuCode(RString koroshoIfShikibetsuCode) {
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
+    }
+
+    public void setHiddenYukoKikan(TextBoxNum hiddenYukoKikan) {
+        this.setOriginalData("hiddenYukoKikan", hiddenYukoKikan);
+        this.hiddenYukoKikan = hiddenYukoKikan;
     }
 
     // </editor-fold>

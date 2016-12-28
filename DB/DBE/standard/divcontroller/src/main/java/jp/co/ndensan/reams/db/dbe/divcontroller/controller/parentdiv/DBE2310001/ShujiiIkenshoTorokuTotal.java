@@ -371,7 +371,6 @@ public class ShujiiIkenshoTorokuTotal {
         ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.
                 getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
         ShujiiIkenshoJohoBuilder shujiiIkenshoBuilder = shujiiIkenshoJoho.createBuilderForEdit();
-        Image image = ViewStateHolder.get(ViewStateKeys.イメージ情報, Image.class);
         if (JYOTAI_CODE_ADD.equals(flag)) {
             shujiiIkenshoBuilder.set厚労省IF識別コード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード());
             shujiiIkenshoBuilder.set主治医意見書依頼区分(shujiiIkenshoIraiJoho.get主治医意見書依頼区分());
@@ -394,9 +393,6 @@ public class ShujiiIkenshoTorokuTotal {
         shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build();
         ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho).build();
         ninteiManager.save(ninteiShinseiJoho);
-        if (image != null) {
-            imageManager.saveイメージ情報(image);
-        }
     }
 
     private void setShujiiIkenshoJohoCommon(ShujiiIkenshoJohoBuilder shujiiIkenshoBuilder, ShujiiIkenshoTorokuTotalDiv div) {

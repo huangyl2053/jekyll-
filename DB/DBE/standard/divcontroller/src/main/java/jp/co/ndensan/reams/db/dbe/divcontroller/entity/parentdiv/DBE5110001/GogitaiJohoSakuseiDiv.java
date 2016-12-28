@@ -247,12 +247,12 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnCSVShutsuryoku() {
+    public ButtonDownLoad getBtnCSVShutsuryoku() {
         return this.getGogitaiIchiran().getBtnCSVShutsuryoku();
     }
 
     @JsonIgnore
-    public void  setBtnCSVShutsuryoku(Button btnCSVShutsuryoku) {
+    public void  setBtnCSVShutsuryoku(ButtonDownLoad btnCSVShutsuryoku) {
         this.getGogitaiIchiran().setBtnCSVShutsuryoku(btnCSVShutsuryoku);
     }
 
