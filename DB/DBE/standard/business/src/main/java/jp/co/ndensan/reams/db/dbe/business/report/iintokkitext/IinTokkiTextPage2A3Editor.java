@@ -130,7 +130,7 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
             }
         }
         source.layout = HanteiKekkaHyoA3ReportFormGroupIndex
-                .getFormGroupIndex(item.getServiceKubunCode(), item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
+                .getFormGroupIndex_2page(item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
         return source;
     }
 
