@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.INinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -299,16 +301,6 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Space getSp2() {
-        return this.getIraiprint().getSp2();
-    }
-
-    @JsonIgnore
-    public void  setSp2(Space Sp2) {
-        this.getIraiprint().setSp2(Sp2);
-    }
-
-    @JsonIgnore
     public CheckBoxList getIraiIchiranHyo() {
         return this.getIraiprint().getIraiIchiranHyo();
     }
@@ -316,26 +308,6 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public void  setIraiIchiranHyo(CheckBoxList iraiIchiranHyo) {
         this.getIraiprint().setIraiIchiranHyo(iraiIchiranHyo);
-    }
-
-    @JsonIgnore
-    public Space getSp() {
-        return this.getIraiprint().getSp();
-    }
-
-    @JsonIgnore
-    public void  setSp(Space Sp) {
-        this.getIraiprint().setSp(Sp);
-    }
-
-    @JsonIgnore
-    public Space getSp3() {
-        return this.getIraiprint().getSp3();
-    }
-
-    @JsonIgnore
-    public void  setSp3(Space Sp3) {
-        this.getIraiprint().setSp3(Sp3);
     }
 
     @JsonIgnore
@@ -379,16 +351,6 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Space getSp4() {
-        return this.getIraiprint().getSp4();
-    }
-
-    @JsonIgnore
-    public void  setSp4(Space Sp4) {
-        this.getIraiprint().setSp4(Sp4);
-    }
-
-    @JsonIgnore
     public CheckBoxList getMeireiSho() {
         return this.getIraiprint().getMeireiSho();
     }
@@ -406,6 +368,11 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public void  setTeishutsuIraiSho(CheckBoxList teishutsuIraiSho) {
         this.getIraiprint().setTeishutsuIraiSho(teishutsuIraiSho);
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getBunshoBango() {
+        return this.getIraiprint().getBunshoBango();
     }
 
     @JsonIgnore

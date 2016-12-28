@@ -1022,7 +1022,6 @@ dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiDesign
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiOCR
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_seikyuSho
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_teishutsuIraiSho
-dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClose_SakuseiIrai
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onLoad
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSaikinshorishaClick
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSelect_dgShinseishaIchiran
