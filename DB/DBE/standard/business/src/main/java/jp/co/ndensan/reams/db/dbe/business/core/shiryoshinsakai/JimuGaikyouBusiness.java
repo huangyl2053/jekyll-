@@ -18,6 +18,7 @@ public class JimuGaikyouBusiness {
 
     private static final int INDEX_5 = 5;
     private final ShinsakaiSiryoKyotsuEntity entity;
+    private RString fileName;
 
     /**
      * コンストラクタです。
@@ -173,5 +174,23 @@ public class JimuGaikyouBusiness {
             return RString.EMPTY;
         }
         return entity.getShoKisaiHokenshaNo().substring(0, INDEX_5).concat(entity.getHihokenshaNo());
+    }
+
+    /**
+     * イメージファイルG0001のパスを取得します。
+     *
+     * @return ファイルパス
+     */
+    public RString getイメージファイル() {
+        return fileName;
+    }
+
+    /**
+     * イメージファイルG0001を設定します。
+     *
+     * @param fileName イメージファイル名
+     */
+    public void setイメージファイル(RString fileName) {
+        this.fileName = fileName;
     }
 }

@@ -1,5 +1,9 @@
 package jp.co.ndensan.reams.db.dbe.entity.report.gaikyotokkiimagea4;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -82,11 +86,26 @@ public class GaikyotokkiImageA4ReportSource implements IReportSource {
     public RString gaikyotokkiImg6;
     @ReportItem(name = "gaikyotokkiImg7", order = 33)
     public RString gaikyotokkiImg7;
+
+    @ReportItem(name = "imgSonotashiryo", order = 100)
+    public RString imgSonotashiryo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportItem(name = "layout", order = 999)
+    public Layouts layout;
+
+    /**
+     * レイアウトブレイク用キーの一覧です。
+     */
+    public static final List<RString> LAYOUT_BREAK_KEYS;
+
+    static {
+        LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
+    }
+
 // </editor-fold>
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
