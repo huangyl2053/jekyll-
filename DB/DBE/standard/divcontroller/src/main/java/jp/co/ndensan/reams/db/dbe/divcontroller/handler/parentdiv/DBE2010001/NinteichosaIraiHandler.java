@@ -54,6 +54,8 @@ public class NinteichosaIraiHandler {
     private static final RString KEY_可 = new RString("2");
     private static final RString 調査依頼完了ボタン = new RString("btnChousaIraiKanryo");
     private static final RString モバイル出力ボタン = new RString("btnMobile");
+    private int completeCount = 0;
+    private int notUpdateCount = 0;
 
     /**
      * コンストラクタです。
@@ -111,8 +113,8 @@ public class NinteichosaIraiHandler {
         List<CyoSaiRaiBusiness> 調査依頼List = searchResult.records();
         put要介護認定完了情報(調査依頼List);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
-        int completeCount = 0;
-        int notUpdateCount = 0;
+        completeCount = 0;
+        notUpdateCount = 0;
         for (CyoSaiRaiBusiness business : 調査依頼List) {
 
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
@@ -150,14 +152,14 @@ public class NinteichosaIraiHandler {
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
             row.setGetShoKisaiHokenshaNo(business.get証記載保険番号() == null ? RString.EMPTY : business.get証記載保険番号());
             調査依頼モードの日付設定(row, business);
-            set状態(row, notUpdateCount, completeCount);
+            set状態(row);
             rowList.add(row);
         }
         div.getDgNinteiTaskList().setDataSource(rowList);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(all);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
-        set件数表示(状態, notUpdateCount, completeCount);
+        set件数表示(状態);
     }
 
     private LasdecCode get市町村コード() {
@@ -184,7 +186,7 @@ public class NinteichosaIraiHandler {
         }
     }
 
-    private void set状態(dgNinteiTaskList_Row row, int notUpdateCount, int completeCount) {
+    private void set状態(dgNinteiTaskList_Row row) {
         if ((RString.isNullOrEmpty(row.getKonkaiChosaItakusaki()) || RString.isNullOrEmpty(row.getKonkaiChosain()))
             || row.getChosaIraiKigen().getValue() == null
             || row.getChosaIraishoHakkoDay().getValue() == null
@@ -198,7 +200,7 @@ public class NinteichosaIraiHandler {
         }
     }
 
-    private void set件数表示(RString 状態, int notUpdateCount, int completeCount) {
+    private void set件数表示(RString 状態) {
         if (状態.equals(KEY_未)) {
             div.getTxtNoUpdate().setValue(new Decimal(notUpdateCount));
             div.getTxtCompleteCount().clearValue();

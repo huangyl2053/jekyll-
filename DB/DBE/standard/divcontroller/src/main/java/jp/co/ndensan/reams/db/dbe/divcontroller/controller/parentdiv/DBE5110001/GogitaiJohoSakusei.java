@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5110001
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.GogitaiJohoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.GogitaiJohoSakuseiValidationHandler;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVShuturyokuEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
@@ -31,30 +30,39 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.KyoyuFileName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
-import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -77,19 +85,16 @@ public class GogitaiJohoSakusei {
     private static final RString JYOTAI_NAME_UPD = new RString("修正");
     private static final RString JYOTAI_NAME_DEL = new RString("削除");
     private static final RString RAD_KEY_0 = new RString("key0");
-    private static final RString RAD_KEY_1 = new RString("key1");
-    private static final RString CSVファイルID_合議体情報一覧 = new RString("DBE401001");
+    private static final RString CSVファイルID_合議体情報一覧 = new RString("DBE511001");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegister");
     private static final RString COMMON_BUTTON_UPDATE_NAME = new RString("btnupdate");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private FileSpoolManager fileSpoolManager;
     private final GogitaiJohoSakuseiFinder service;
     private final GogitaiJohoManager manager;
     private final RString 合議体情報作成 = new RString("合議体情報作成");
     private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
-
+    private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
+    
     /**
      * コンストラクタです。
      *
@@ -106,6 +111,9 @@ public class GogitaiJohoSakusei {
      * @return ResponseData<GogitaiJohoSakuseiDiv>
      */
     public ResponseData<GogitaiJohoSakuseiDiv> onLoad(GogitaiJohoSakuseiDiv div) {
+        FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_KANRYO);
+        FlowParameterAccessor.merge(fp);
+        div.setWfParameter(WORKFLOW_KEY_KANRYO);
         getHandler(div).load();
         getHandler(div).init最大表示件数();
         boolean is現在有効な合議体のみ = false;
@@ -132,7 +140,7 @@ public class GogitaiJohoSakusei {
      */
     public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnClear(GogitaiJohoSakuseiDiv div) {
         getHandler(div).init最大表示件数();
-        div.getRadHyojiJoken().setSelectedKey(RAD_KEY_1);
+        div.getRadHyojiJoken().setSelectedKey(RAD_KEY_0);
         return ResponseData.of(div).respond();
     }
 
@@ -175,23 +183,28 @@ public class GogitaiJohoSakusei {
      * 「CSV出力する」ボタンをクリックの場合、CSVファイルを出力します。
      *
      * @param div 合議体情報作成Div
-     * @return ResponseData<GogitaiJohoSakuseiDiv>
+     * @param response IDownLoadServletResponse
+     * @return IDownLoadServletResponse
      */
-    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnCSVShutsuryoku(GogitaiJohoSakuseiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(getValidationHandler(div).gogitaiIchiranCheck());
-            if (validationMessages.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+    public IDownLoadServletResponse onClick_btnCSVShutsuryoku(GogitaiJohoSakuseiDiv div, IDownLoadServletResponse response) {
+        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_合議体情報一覧);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
+        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
+        try (CsvWriter<GogitaiJohoSakuseiCSVShuturyokuEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(EUC_WRITER_DELIMITER).setEncode(Encode.SJIS).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgGogitaiIchiran_Row> rowList = div.getGogitaiIchiran().getDgGogitaiIchiran().getDataSource();
+            for (dgGogitaiIchiran_Row row : rowList) {
+                csvWriter.writeLine(editCSV(row));
             }
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+            csvWriter.close();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            csvOutput(div);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("CSV出力")).respond();
-        }
-        return ResponseData.of(div).respond();
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        AccessLogger.log(AccessLogType.照会, personalData);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
     /**
@@ -615,72 +628,25 @@ public class GogitaiJohoSakusei {
         return false;
     }
 
-    private void csvOutput(GogitaiJohoSakuseiDiv div) {
-        boolean is現在有効な合議体のみ = false;
-        if (RAD_KEY_0.equals(div.getRadHyojiJoken().getSelectedKey())) {
-            is現在有効な合議体のみ = true;
+    private GogitaiJohoSakuseiCSVShuturyokuEntity editCSV(dgGogitaiIchiran_Row row) {
+        GogitaiJohoSakuseiCSVShuturyokuEntity entity = new GogitaiJohoSakuseiCSVShuturyokuEntity();
+        entity.setGogitaiNo(new RString(row.getGogitaiNumber().getValue().toString()));
+        entity.setGogitaiMei(row.getGogitaiName());
+        entity.setGogitaiYukoKikanKaishiYMD(new RString(row.getYukoKaishiYMD().getValue().toString()));
+        entity.setGogitaiYukoKikanShuryoYMD(new RString(row.getYukoShuryoYMD().getValue().toString()));
+        entity.setGogitaiKaishiYoteiTime(時刻転換(row.getGogitaiKaishiYoteiTime().getValue()));
+        entity.setGogitaiShuryoYoteiTime(時刻転換(row.getGogitaiShuryoYoteiTime().getValue()));
+        entity.setShinsakaiKaisaiBasho(row.getKaisaiBasho());
+        entity.setGogitaiSeishinkaSonzaiFlag(row.getSeishinkaiSonzai() == true ? new RString("該当") : new RString("非該当"));
+        entity.setGogitaiDummyFlag(row.getGogitaiDummyFlag() == true ? new RString("該当") : new RString("非該当"));
+        return entity;
+    }
+    
+    private RString 時刻転換(RTime 時刻) {
+        if (時刻 != null) {
+            return new RString(時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
         }
-        SearchResult<GogitaiJohoSakuseiCSVEntity> resultList = service.getGogitaiJohoForCSV(
-                GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
-                        FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, 0));
-
-        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_合議体情報一覧);
-        RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 出力名);
-
-        try (CsvWriter<GogitaiJohoSakuseiCSVEntity> eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                hasHeader(true).
-                canAppend(false).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
-                setNewLine(NewLine.CRLF).
-                build()) {
-            for (GogitaiJohoSakuseiCSVEntity result : resultList.records()) {
-                result.getGogitaiYukoKikanKaishiYMD();
-                eucCsvWriter.writeLine(editCSV(result));
-            }
-        }
-
-        fileSpoolManager.spool(eucFilePath);
+        return RString.EMPTY;
     }
 
-    private GogitaiJohoSakuseiCSVEntity editCSV(GogitaiJohoSakuseiCSVEntity result) {
-        if (result.getGogitaiYukoKikanKaishiYMD() != null && !result.getGogitaiYukoKikanKaishiYMD().isEmpty()) {
-            result.setGogitaiYukoKikanKaishiYMD(new RString(new FlexibleDate(result.getGogitaiYukoKikanKaishiYMD()).toString()));
-        }
-        if (result.getGogitaiYukoKikanShuryoYMD() != null && !result.getGogitaiYukoKikanShuryoYMD().isEmpty()) {
-            result.setGogitaiYukoKikanShuryoYMD(new RString(new FlexibleDate(result.getGogitaiYukoKikanShuryoYMD()).toString()));
-        }
-        return result;
-    }
-
-    private static final class EdittingRow {
-
-        private final dgGogitaiIchiran_Row row;
-        private final int index;
-
-        private EdittingRow(dgGogitaiIchiran_Row row, int index) {
-            this.row = row;
-            this.index = index;
-        }
-    }
-
-    private EdittingRow findEdittingRowOrThrowException(GogitaiJohoSakuseiDiv div, RString gogitaiNo, RDate yukoKaishiDate) {
-        List<dgGogitaiIchiran_Row> dataSource = div.getDgGogitaiIchiran().getDataSource();
-        int size = dataSource.size();
-        for (int i = 0; i < size; i++) {
-            dgGogitaiIchiran_Row row = dataSource.get(i);
-            if (Objects.equals(gogitaiNo, row.getGogitaiNumber())
-                    && Objects.equals(yukoKaishiDate, row.getYukoKaishiYMD().getValue())) {
-                return new EdittingRow(row, i);
-            }
-        }
-        throw new ApplicationException(new RStringBuilder()
-                .append("編集中の合議体情報は存在しません。")
-                .append(" 合議体番号：").append(div.getTxtGogitaiNumber())
-                .append(" 有効開始日：").append(div.getTxtYukoKaishiYMD().getValue().seireki().toDateString())
-                .toString());
-    }
 }
