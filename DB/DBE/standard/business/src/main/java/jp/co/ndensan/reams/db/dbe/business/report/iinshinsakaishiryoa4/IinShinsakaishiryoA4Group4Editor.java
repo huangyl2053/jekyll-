@@ -105,7 +105,7 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
         source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiText = テキスト全面List.get(index);
+                source.tokkiText = getテキスト全面();
                 source.layout = INT_9;
             } else if (短冊.equals(item.get特記パターン())) {
                 editテキスト(source, 短冊リスト);
@@ -114,7 +114,7 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
-                source.tokkiImg = イメージ全面List.get(index);
+                source.tokkiImg = getイメージ全面();
                 source.layout = INT_11;
             } else if (短冊.equals(item.get特記パターン())) {
                 editイメージ(source, 短冊リスト);
@@ -123,6 +123,20 @@ public class IinShinsakaishiryoA4Group4Editor implements IIinShinsakaishiryoA4Ed
             }
         }
         return source;
+    }
+    
+     private RString getテキスト全面() {
+        if (0 < テキスト全面List.size()) {
+            return テキスト全面List.get(index);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getイメージ全面() {
+        if (0 < イメージ全面List.size()) {
+            return イメージ全面List.get(index);
+        }
+        return RString.EMPTY;
     }
 
     private IinShinsakaishiryoA4ReportSource set特記事項テキスト(IinShinsakaishiryoA4ReportSource source) {

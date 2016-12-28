@@ -131,14 +131,14 @@ public class JimuShinsakaishiryoA4Group4Editor implements IJimuShinsakaishiryoA4
 
     private RString getテキスト全面() {
         if (0 < テキスト全面List.size()) {
-            return テキスト全面List.get(0);
+            return テキスト全面List.get(index);
         }
         return RString.EMPTY;
     }
 
     private RString getイメージ全面() {
         if (0 < イメージ全面List.size()) {
-            return イメージ全面List.get(0);
+            return イメージ全面List.get(index);
         }
         return RString.EMPTY;
     }
