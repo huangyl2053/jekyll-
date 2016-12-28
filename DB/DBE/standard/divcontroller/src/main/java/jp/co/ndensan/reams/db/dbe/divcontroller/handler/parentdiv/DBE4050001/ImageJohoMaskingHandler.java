@@ -108,8 +108,8 @@ public class ImageJohoMaskingHandler {
     public void set検索用パラメーター(ShinseishoKanriNoList shinseishoKanriNoList) {
         param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
                 shinseishoKanriNoList != null ? LasdecCode.EMPTY : div.getCcdHokensya().getSelectedItem().get市町村コード(),
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : div.getTxtSearchStYMD().getValue(),
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : div.getTxtSearchEdYMD().getValue(),
+                shinseishoKanriNoList != null ? FlexibleDate.MAX : new FlexibleDate(div.getTxtSearchYMD().getFromValue().toString()),
+                shinseishoKanriNoList != null ? FlexibleDate.MAX : new FlexibleDate(div.getTxtSearchYMD().getToValue().toString()),
                 shinseishoKanriNoList != null ? RString.EMPTY : div.getDdlKensakuTaisho().getSelectedKey(),
                 shinseishoKanriNoList != null ? shinseishoKanriNoList.getShinseishoKanriNoS() : null,
                 shinseishoKanriNoList != null ? RString.EMPTY : div.getTxtHihokenshaNumber().getValue(),
@@ -186,8 +186,8 @@ public class ImageJohoMaskingHandler {
         div.getTxtHihokenshaNumber().clearValue();
         div.getCcdHokensya().setSelectedShichosonIfExist(new LasdecCode(ALL_SHICHOSON_KEY));
         div.getDdlKensakuTaisho().setSelectedIndex(0);
-        div.getTxtSearchStYMD().clearValue();
-        div.getTxtSearchEdYMD().clearValue();
+        div.getTxtSearchYMD().clearFromValue();
+        div.getTxtSearchYMD().clearToValue();
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
     }
