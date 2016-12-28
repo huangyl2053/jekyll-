@@ -327,7 +327,11 @@ public class ShinseiKensaku {
             item.setSeibetsu(row.get性別());
             item.setKoroshoIfShikibetsuCode(row.get厚労省IF識別コード());
             item.setNijiHanteiYokaigoJotaiKubun(row.get二次判定要介護状態区分コード());
-            item.setNijiHanteiNinteiYukoKikan(row.get二次判定認定有効期間());
+            if (row.get二次判定認定有効期間() != 0) {
+                item.setNijiHanteiNinteiYukoKikan(new RString(row.get二次判定認定有効期間()));
+            } else {
+                item.setNijiHanteiNinteiYukoKikan(RString.EMPTY);
+            }
             item.setNijiHanteiNinteiYukoKaishiYMD(row.get前回認定有効期間_開始_());
             item.setNijiHanteiNinteiYukoShuryoYMD(row.get前回認定有効期間_終了_());
             item.setNinteiShinseiYMD(row.get認定申請年月日());
