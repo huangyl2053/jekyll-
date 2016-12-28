@@ -335,7 +335,7 @@
         ON
         DbT5912."shujiiIryokikanCode" =  DbT5101."shujiiIryokikanCode"
         AND
-        DbT5912."shujiiIryokikanCode" =  DbT5101."shujiiIryokikanCode"
+        DbT5912."shujiiCode" =  DbT5101."shujiiCode"
         AND
         DbT5912."shichosonCode" =  DbT5911."shichosonCode"
         WHERE
