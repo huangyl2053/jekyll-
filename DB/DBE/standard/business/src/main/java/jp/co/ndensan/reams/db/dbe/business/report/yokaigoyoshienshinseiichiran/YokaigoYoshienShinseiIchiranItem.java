@@ -30,7 +30,7 @@ public class YokaigoYoshienShinseiIchiranItem {
     private Code seibetsu;
     private Code koroshoIfShikibetsuCode;
     private RString nijiHanteiYokaigoJotaiKubun;
-    private int nijiHanteiNinteiYukoKikan;
+    private RString nijiHanteiNinteiYukoKikan;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
     private FlexibleDate ninteiShinseiYMD;

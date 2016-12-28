@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -305,6 +306,19 @@ public class ShinseiKensaku {
     }
 
     /**
+     * 「選択した帳票を発行する」ボタンのclick前処理です。
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<ShinseiKensakuDiv> onClick_btnChkPublish(ShinseiKensakuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「選択した帳票を発行する」ボタンのclick処理です。
      *
      * @param div ShinseiKensakuDiv
@@ -327,7 +341,11 @@ public class ShinseiKensaku {
             item.setSeibetsu(row.get性別());
             item.setKoroshoIfShikibetsuCode(row.get厚労省IF識別コード());
             item.setNijiHanteiYokaigoJotaiKubun(row.get二次判定要介護状態区分コード());
-            item.setNijiHanteiNinteiYukoKikan(row.get二次判定認定有効期間());
+            if (row.get二次判定認定有効期間() != 0) {
+                item.setNijiHanteiNinteiYukoKikan(new RString(row.get二次判定認定有効期間()));
+            } else {
+                item.setNijiHanteiNinteiYukoKikan(RString.EMPTY);
+            }
             item.setNijiHanteiNinteiYukoKaishiYMD(row.get前回認定有効期間_開始_());
             item.setNijiHanteiNinteiYukoShuryoYMD(row.get前回認定有効期間_終了_());
             item.setNinteiShinseiYMD(row.get認定申請年月日());

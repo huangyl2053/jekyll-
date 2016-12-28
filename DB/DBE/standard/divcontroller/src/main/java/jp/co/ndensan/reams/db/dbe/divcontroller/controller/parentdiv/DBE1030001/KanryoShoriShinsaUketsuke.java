@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1030001.Kan
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.kanryoshorishinsauketsuke.KanryoShoriShinsaUketsukeManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -70,6 +71,7 @@ public class KanryoShoriShinsaUketsuke {
      * @return レスポンスデータ
      */
     public ResponseData<KanryoShoriShinsaUketsukeDiv> onLoad(KanryoShoriShinsaUketsukeDiv div) {
+        div.getNinteiShinseiJohoTorokuKanryo().getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).initialize();
         return ResponseData.of(div).setState(DBE1030001StateName.登録);
     }
@@ -172,6 +174,17 @@ public class KanryoShoriShinsaUketsuke {
      * @return レスポンスデータ
      */
     public ResponseData<KanryoShoriShinsaUketsukeDiv> onChange_txtMaxCount(KanryoShoriShinsaUketsukeDiv div) {
+        getHandler(div).initDataGrid();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険者の値が変更された際の動作です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<KanryoShoriShinsaUketsukeDiv> onChange_ccdHokensha(KanryoShoriShinsaUketsukeDiv div) {
         getHandler(div).initDataGrid();
         return ResponseData.of(div).respond();
     }

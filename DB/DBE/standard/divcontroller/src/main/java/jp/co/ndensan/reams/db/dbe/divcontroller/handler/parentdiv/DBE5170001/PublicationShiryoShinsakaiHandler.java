@@ -421,6 +421,7 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員用予備判定記入表フラグ) {
         return new DBE517000_ShinsakaiShiryoParameter(
                 div.getTxtShinsakaiKaisaiNo().getValue().padZeroToLeft(INT_8),
+                div.getTxtShinsakaiKaijo().getValue(),
                 div.getTxtShinsakaiYoteiDate().getValue(),
                 new RString(div.getTxtShinsakaiKaishiYoteiTime().getValue().toString()),
                 div.getTxtGogitaiNo() == null || RString.isNullOrEmpty(div.getTxtGogitaiNo().getValue())
