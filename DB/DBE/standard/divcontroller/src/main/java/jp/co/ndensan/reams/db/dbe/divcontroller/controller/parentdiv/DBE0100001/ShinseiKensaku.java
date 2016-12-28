@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -302,6 +303,19 @@ public class ShinseiKensaku {
         }
         //div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
+    }
+
+    /**
+     * 「選択した帳票を発行する」ボタンのclick前処理です。
+     *
+     * @param div 被保険者照会DIV
+     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     */
+    public ResponseData<ShinseiKensakuDiv> onClick_btnChkPublish(ShinseiKensakuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
