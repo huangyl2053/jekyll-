@@ -35,10 +35,10 @@ public class IchiGojiHanteiKekkaJoho {
      * @return ResponseData<IchiGojiHanteiKekkaJohoDiv>
      */
     public ResponseData<IchiGojiHanteiKekkaJohoDiv> onLoad(IchiGojiHanteiKekkaJohoDiv div) {
-        RString 申請書管理番号 =  ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);;
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString モード = div.getHdnMode();
         IchiGojiHanteiKekkaJohoMapperParameter parameter = IchiGojiHanteiKekkaJohoMapperParameter.createParamter(申請書管理番号);
-        getHandler(div).onLoad(IchiGojiHanteiKekkaJohoFinder.createInstance().select一五次判定結果情報(parameter, モード));
+        getHandler(div).onLoad(IchiGojiHanteiKekkaJohoFinder.createInstance().select一五次判定結果情報(parameter, モード), モード);
         return ResponseData.of(div).respond();
     }
 

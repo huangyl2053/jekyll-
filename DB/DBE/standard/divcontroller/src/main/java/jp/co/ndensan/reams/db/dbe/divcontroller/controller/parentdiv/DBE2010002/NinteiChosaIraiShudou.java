@@ -126,8 +126,9 @@ public class NinteiChosaIraiShudou {
 
     private LockingKey get排他キー() {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        RStringBuilder lockingKey = new RStringBuilder(new RString("ShinseishoKanriNo"));
-        lockingKey.append(申請書管理番号);
+        RStringBuilder lockingKey = new RStringBuilder(SubGyomuCode.DBE認定支援.getColumnValue());
+        lockingKey.append(new RString("ShinseishoKanriNo"));
+        lockingKey.append(申請書管理番号.value());
         return new LockingKey(lockingKey.toRString());
     }
 
