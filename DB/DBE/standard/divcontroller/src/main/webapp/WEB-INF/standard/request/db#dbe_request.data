@@ -652,12 +652,12 @@ dbe/db/dbe/NinteichosaIrai/onActive
 dbe/db/dbe/NinteichosaIrai/onBefore_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnDataOutput
 dbe/db/dbe/NinteichosaIrai/onBefore_btnTaOutput
+dbe/db/dbe/NinteichosaIrai/onChange_ccdHokenshaList
 dbe/db/dbe/NinteichosaIrai/onChange_txtMaxCount
 dbe/db/dbe/NinteichosaIrai/onClick_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onClick_btnChousaIraiKanryo
 dbe/db/dbe/NinteichosaIrai/onClick_btnContinue
 dbe/db/dbe/NinteichosaIrai/onClick_btnDataOutput
-dbe/db/dbe/NinteichosaIrai/onClick_btnFinish
 dbe/db/dbe/NinteichosaIrai/onClick_btnIraiAuto
 dbe/db/dbe/NinteichosaIrai/onClick_btnWaritukeShudo
 dbe/db/dbe/NinteichosaIrai/onLoad
@@ -701,6 +701,7 @@ dbe/db/dbe/NinteichosaItakusakiMaster/onSelectByDeleteButton_dgChosainIchiran
 dbe/db/dbe/NinteichosaItakusakiMaster/onSelectByDlbClick_dgChosainIchiran
 dbe/db/dbe/NinteichosaItakusakiMaster/onSelectByModifyButton_dgChosainIchiran
 dbe/db/dbe/NinteichosaKekkaNyushu/onBefore_btnChosakekkaOutput
+dbe/db/dbe/NinteichosaKekkaNyushu/onChange_ccdHokenshaList
 dbe/db/dbe/NinteichosaKekkaNyushu/onChange_radJotaiKubun
 dbe/db/dbe/NinteichosaKekkaNyushu/onChange_txtMaxKensu
 dbe/db/dbe/NinteichosaKekkaNyushu/onClick_btnChosakekkaOutput

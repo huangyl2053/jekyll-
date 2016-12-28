@@ -57,9 +57,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -218,6 +216,7 @@ public class NinteichosaIrai {
         List<RString> 被保険者番号リスト = new ArrayList<>();
         for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
             申請書管理番号リスト.add(row.getShinseishoKanriNo());
+            被保険者番号リスト.add(row.getHihoNumber());
         }
         param.setShinseishoKanriNoList(申請書管理番号リスト);
         param.setHihokenshaNoList(被保険者番号リスト);
@@ -242,19 +241,9 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                                                          UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-            .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                                new ShinseishoKanriNo(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
-            return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
-        }
-        return ResponseData.of(requestDiv).respond();
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号,
+                            new ShinseishoKanriNo(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
+        return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
     }
 
     /**
@@ -267,11 +256,6 @@ public class NinteichosaIrai {
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnDataOutput();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-        }
-        if (!ResponseHolder.isReRequest()) {
-            Message message = UrQuestionMessages.処理実行の確認.getMessage();
-            return ResponseData.of(requestDiv).addMessage(
-                new QuestionMessage(message.getCode(), message.evaluate(), ButtonSelectPattern.OKCancel)).respond();
         }
         List<dgNinteiTaskList_Row> rowList = requestDiv.getDgNinteiTaskList().getSelectedItems();
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
@@ -370,6 +354,17 @@ public class NinteichosaIrai {
     public ResponseData onClick_btnContinue(NinteichosaIraiDiv requestDiv) {
         getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+    }
+
+    /**
+     * 保険者リスト共有子Div変更時の動作です。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_ccdHokenshaList(NinteichosaIraiDiv requestDiv) {
+        getHandler(requestDiv).initDataGrid();
+        return ResponseData.of(requestDiv).respond();
     }
 
     private NinteichosaIraiItiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {

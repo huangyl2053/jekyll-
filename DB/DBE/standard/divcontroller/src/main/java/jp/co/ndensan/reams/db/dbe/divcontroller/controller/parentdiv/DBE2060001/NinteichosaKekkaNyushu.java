@@ -101,6 +101,17 @@ public class NinteichosaKekkaNyushu {
     }
 
     /**
+     * 保険者リスト共有子DivのonChangeイベントです。
+     *
+     * @param requestDiv 完了処理・認定調査結果入手Div
+     * @return レスポンス
+     */
+    public ResponseData onChange_ccdHokenshaList(NinteichosaKekkaNyushuDiv requestDiv) {
+        getHandler(requestDiv).initialDataGrid();
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
      * 「一覧を出力する」ボタンを押下する場合、入力チェックを実行します。
      *
      * @param requestDiv 完了処理・認定調査結果入手Div
@@ -126,12 +137,12 @@ public class NinteichosaKekkaNyushu {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<NinteichosaIraiListCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(CSV_WRITER_ENCLOSURE).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                                                     = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
+            setEnclosure(CSV_WRITER_ENCLOSURE).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo()));
+                                                                     row.getShinseishoKanriNo()));
                 csvWriter.writeLine(getCsvData(row));
             }
             csvWriter.close();
@@ -142,7 +153,7 @@ public class NinteichosaKekkaNyushu {
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         AccessLogger.log(AccessLogType.照会, personalData);
         return SharedFileDirectAccessDownload.directAccessDownload(
-                new SharedFileDirectAccessDescriptor(entry, 出力名), response);
+            new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
     /**
@@ -165,9 +176,9 @@ public class NinteichosaKekkaNyushu {
 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                    new ShinseishoKanriNo(requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
+                                new ShinseishoKanriNo(requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.valueOf(
-                    requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getNinteichosaIraiRirekiNo().toString()));
+                requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getNinteichosaIraiRirekiNo().toString()));
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.調査結果登録遷移).respond();
         }
         return ResponseData.of(requestDiv).respond();
@@ -210,11 +221,11 @@ public class NinteichosaKekkaNyushu {
 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> 要介護認定完了情報Model
-                    = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+                                                                 = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(requestDiv).onClick_btnChousaResultKanryo(要介護認定完了情報Model);
             requestDiv.getCcdKanryoMsg().setMessage(
-                    new RString("完了処理・認定調査結果入手の保存処理が完了しました。"),
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+                new RString("完了処理・認定調査結果入手の保存処理が完了しました。"),
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(requestDiv).setState(DBE2060001StateName.完了);
         }
         return ResponseData.of(requestDiv).respond();
@@ -233,25 +244,25 @@ public class NinteichosaKekkaNyushu {
 
     private NinteichosaIraiListCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         return new NinteichosaIraiListCsvEntity(
-                row.getShinseishoKanriNo(),
-                get状態名称(row.getJotai()),
-                row.getHokensha(),
-                getDate32(row.getNinteiShinseiYMD().getValue()),
-                row.getHihoNo(),
-                row.getHihoShimei(),
-                NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード(),
-                NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).get名称(),
-                row.getChosaItakusakiCode(),
-                row.getChosaItakusaki(),
-                row.getChosainCode(),
-                row.getChosain(),
-                getDate32(row.getChosaJisshiYMD().getValue()),
-                getDate32(row.getTokusokuHakkoYMD().getValue()),
-                row.getTokusokuHoho(),
-                new RString(row.getTokusokuKaisu().getValue().toString()),
-                getDate32(row.getTokusokuKigen().getValue()),
-                row.getChikuCode(),
-                row.getTokusokuChiku()
+            row.getShinseishoKanriNo(),
+            get状態名称(row.getJotai()),
+            row.getHokensha(),
+            getDate32(row.getNinteiShinseiYMD().getValue()),
+            row.getHihoNo(),
+            row.getHihoShimei(),
+            NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).getコード(),
+            NinteiShinseiShinseijiKubunCode.valueOf(row.getShinseiKubunShinseiji().toString()).get名称(),
+            row.getChosaItakusakiCode(),
+            row.getChosaItakusaki(),
+            row.getChosainCode(),
+            row.getChosain(),
+            getDate32(row.getChosaJisshiYMD().getValue()),
+            getDate32(row.getTokusokuHakkoYMD().getValue()),
+            row.getTokusokuHoho(),
+            new RString(row.getTokusokuKaisu().getValue().toString()),
+            getDate32(row.getTokusokuKigen().getValue()),
+            row.getChikuCode(),
+            row.getTokusokuChiku()
         );
     }
 
