@@ -65,7 +65,7 @@ public class DBE250001_NinteiChosaKekkaTorikomiTest {
     public void testDefineFlow() {
 
         setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
-        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE250001_NinteiChoshaKekkaTorikomi"),
+        BatchExitStatus result = flowHelper.executeFlow(new RString("DBE250001_NinteiChosaKekkaTorikomi"),
                 new RString("認定支援"),
                 DBE250001_NinteiChosaKekkaTorikomi.class,
                 createParameter());
@@ -74,7 +74,7 @@ public class DBE250001_NinteiChosaKekkaTorikomiTest {
 
     private static DBE250001_NinteiChosaKekkaTorikomiParameter createParameter() {
         DBE250001_NinteiChosaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChosaKekkaTorikomiParameter();
-        RString path = new RString("db|EucOther_DBA701002_186|2016-12-12 16:47:59.649232");
+        RString path = new RString("DB|イメージ取込み|2016-12-28T19:01:41.475310");
         batchFlowParameter.set共有ファイルエントリ情報文字列(path);
 
         return batchFlowParameter;
