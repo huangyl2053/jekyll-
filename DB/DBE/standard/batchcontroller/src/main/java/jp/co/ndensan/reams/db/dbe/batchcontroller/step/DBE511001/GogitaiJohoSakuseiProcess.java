@@ -66,7 +66,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     private boolean csv出力;
     private boolean noErrorFlag;
     private boolean gogitaiInsertedFlag;
-    private RString before合議体NO;
+    private TempGogitaiJohoSakusei before合議体情報;
     private IGogitaiJohoSakuseiMapper mapper;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511002"));
     private FileSpoolManager manager;
@@ -87,7 +87,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         csv出力 = false;
         noErrorFlag = true;
         gogitaiInsertedFlag = false;
-        before合議体NO = RString.EMPTY;
+        before合議体情報 = new TempGogitaiJohoSakusei();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         csv項目チェック(合議体情報);
         if (!noErrorFlag) {
             csvWriter.writeLine(createErrKekkaCSVEntity(合議体情報));
-            before合議体NO = 合議体情報.get合議体NO();
+            before合議体情報 = 合議体情報;
             csv出力 = true;
             return;
         }
@@ -135,7 +135,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         有効期間チェック(合議体情報);
         if (!noErrorFlag) {
             csvWriter.writeLine(createErrKekkaCSVEntity(合議体情報));
-            before合議体NO = 合議体情報.get合議体NO();
+            before合議体情報 = 合議体情報;
             csv出力 = true;
             return;
         }
@@ -144,7 +144,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         各項目チェック2(合議体情報);
         if (!noErrorFlag) {
             csvWriter.writeLine(createErrKekkaCSVEntity(合議体情報));
-            before合議体NO = 合議体情報.get合議体NO();
+            before合議体情報 = 合議体情報;
             csv出力 = true;
             return;
         }
@@ -166,7 +166,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
             csvWriter.writeLine(createErrKekkaCSVEntity(合議体情報));
             csv出力 = true;
         }
-        before合議体NO = 合議体情報.get合議体NO();
+        before合議体情報 = 合議体情報;
     }
 
     @Override
@@ -311,6 +311,12 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
             errorMessage = errorMessage.concat(message);
             noErrorFlag = false;
         }
+        if (is合議体割当委員情報重複(合議体情報)) {
+            RString message = GogitaiJohoIkkatuSakuseiErrorMessage.重複したデータ.getMessage();
+            RLogger.error(message);
+            errorMessage = errorMessage.concat(message);
+            noErrorFlag = false;
+        }
     }
 
     private void 定員チェック(TempGogitaiJohoSakusei 合議体情報) {
@@ -341,6 +347,15 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         ));
 
         return INT_0 < count;
+    }
+
+    private boolean is合議体割当委員情報重複(TempGogitaiJohoSakusei 合議体情報) {
+        boolean is合議体NO重複 = !RString.isNullOrEmpty(before合議体情報.get合議体NO()) && 合議体情報.get合議体NO().equals(before合議体情報.get合議体NO());
+        boolean is審査会委員コード重複 = !RString.isNullOrEmpty(before合議体情報.get審査会委員コード()) && 合議体情報.get審査会委員コード().equals(before合議体情報.get審査会委員コード());
+        boolean is有効開始日重複 = !RString.isNullOrEmpty(before合議体情報.get有効開始日()) && 合議体情報.get有効開始日().equals(before合議体情報.get有効開始日());
+        boolean is有効終了日重複 = !RString.isNullOrEmpty(before合議体情報.get有効終了日()) && 合議体情報.get有効終了日().equals(before合議体情報.get有効終了日());
+
+        return is合議体NO重複 && is審査会委員コード重複 && is有効開始日重複 && is有効終了日重複;
     }
 
     private boolean is数字チェック1(TempGogitaiJohoSakusei 合議体情報) {
@@ -419,7 +434,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     }
 
     private void isClearInsertCount(RString 合議体NO) {
-        if (!before合議体NO.equals(合議体NO)) {
+        if (before合議体情報.get合議体NO() != null && !合議体NO.equals(before合議体情報.get合議体NO())) {
             gogitaiInsertedFlag = false;
             insertCount = INT_0;
         }
