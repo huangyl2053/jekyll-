@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi.YouKai
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.YouKaiGoNinTeiKekTesuChiMainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgDoctorSelection_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgResultList_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -195,4 +196,12 @@ public class MainPanelHandler {
         }
     }
 
+    /**
+     * 主治医医療機関と主治医共有子Divの表示内容を変更する。
+     */
+    public void changeCcd主治医医療機関と主治医() {
+        boolean is全市町村 = HokenshaSummary.EMPTY.equals(div.getCcdHokensha().getSelectedItem());
+        div.getCcdShujiiIryokikanAndShujiiInput().setDisabled(is全市町村);
+        div.getCcdShujiiIryokikanAndShujiiInput().clear();
+    }
 }

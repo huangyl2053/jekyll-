@@ -842,7 +842,7 @@ public class IraishoIkkatsuHakkoBusiness {
         if (!FlexibleDate.canConvert(date)) {
             return date;
         }
-        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
+        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
     }
 
     /**

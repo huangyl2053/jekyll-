@@ -657,9 +657,9 @@ dbe/db/dbe/NinteichosaIrai/onClick_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onClick_btnChousaIraiKanryo
 dbe/db/dbe/NinteichosaIrai/onClick_btnContinue
 dbe/db/dbe/NinteichosaIrai/onClick_btnDataOutput
+dbe/db/dbe/NinteichosaIrai/onClick_btnFinish
 dbe/db/dbe/NinteichosaIrai/onClick_btnIraiAuto
 dbe/db/dbe/NinteichosaIrai/onClick_btnWaritukeShudo
-dbe/db/dbe/NinteichosaIrai/onFinish_btnChosadataOutput
 dbe/db/dbe/NinteichosaIrai/onLoad
 dbe/db/dbe/NinteichosaIrai/onOkClose_btnIraishoToOutput
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnBackSonotaIchiran

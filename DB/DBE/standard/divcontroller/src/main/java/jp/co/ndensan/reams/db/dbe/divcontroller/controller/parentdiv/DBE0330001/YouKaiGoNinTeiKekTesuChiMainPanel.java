@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.YouK
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurity
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -55,11 +55,17 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onLoad(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        HokenshaSummary 選択保険者 = div.getCcdHokensha().getSelectedItem();
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(
+                div.getCcdHokensha().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY,
+                SubGyomuCode.DBE認定支援
+        );
+        getHandler(div).changeCcd主治医医療機関と主治医();
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
 
         div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
-        div.getCcdShujiiIryokikanAndShujiiInput().setDisabled(false);
         div.getDgResultList().setDisabled(false);
         div.getDoctorSelectionPanel().getDgDoctorSelection().setDisabled(false);
         return ResponseData.of(div).setState(DBE0330001StateName.照会);
@@ -74,10 +80,16 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnClear(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         div.getSearchConditionPanel().getTxtNijiHanteiKikan().clearFromValue();
         div.getSearchConditionPanel().getTxtNijiHanteiKikan().clearToValue();
-        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getRadKekkaTsuchiOutputTaisho().setSelectedKey(希望のみ);
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getSearchConditionPanel().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(
+                div.getCcdHokensha().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY,
+                SubGyomuCode.DBE認定支援
+        );
+        getHandler(div).changeCcd主治医医療機関と主治医();
+
         return ResponseData.of(div).respond();
     }
 
@@ -254,6 +266,22 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         param.setShoKisaiHokenshaNo(市町村セキュリティ情報.get市町村情報().get証記載保険者番号().value());
         response.data = param;
         return response;
+    }
+
+    /**
+     * 主治医医療機関コードロストフォーカスの時、画面を設定します。
+     *
+     * @param div 治医医療機関&主治医入力Div
+     * @return ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv>
+     */
+    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onChange_ccdHokensha(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+        getHandler(div).changeCcd主治医医療機関と主治医();
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(
+                div.getCcdHokensha().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY,
+                SubGyomuCode.DBE認定支援
+        );
+        return ResponseData.of(div).respond();
     }
 
     private boolean hasChange(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
