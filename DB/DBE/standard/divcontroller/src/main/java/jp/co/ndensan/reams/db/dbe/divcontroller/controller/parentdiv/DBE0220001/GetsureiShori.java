@@ -48,8 +48,10 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -63,12 +65,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
-import jp.co.ndensan.reams.uz.uza.workflow.flow.valueobject.FlowId;
-import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowIdentificationKeyAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
-import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdKey;
-import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValue;
 
 /**
  * 完了処理・センター送信のクラスです。
@@ -78,11 +76,11 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValue;
 public class GetsureiShori {
 
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-    private static final RString KEY = new RString("key");
-    private static final RString VALUE_UPDATE = new RString("Update");
-    private static final RString VALUE_BATCH = new RString("Batch");
+    private static final RString UICONTAINERID_DBEUC56101 = new RString("DBEUC56101");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_ENTITY_ID = new RString("DBE202001");
+    private static final RString KEY = new RString("key");
+    private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
 
     /**
      * 完了処理・センター送信の初期化。(オンロード)<br/>
@@ -124,7 +122,7 @@ public class GetsureiShori {
         Decimal 最大取得件数 = div.getTxtDispMax().getValue();
         Decimal 最大取得件数上限 = div.getTxtDispMax().getMaxValue();
 
-        ValidationMessageControlPairs vallidation = getValidationHandler().check最大表示件数(最大取得件数, 最大取得件数上限);
+        ValidationMessageControlPairs vallidation = getValidationHandler(div).check最大表示件数(最大取得件数, 最大取得件数上限);
         if (vallidation.existsError()) {
             最大取得件数 = new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
             div.getTxtDispMax().setValue(最大取得件数);
@@ -173,11 +171,12 @@ public class GetsureiShori {
     public ResponseData<GetsureiShoriDiv> onClick_BtnDataOutput(GetsureiShoriDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getDgNinteiTaskList().getDataSource().isEmpty()) {
-            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの存在チェック());
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            validationMessages.add(getValidationHandler(div).センター送信完了対象者一覧データの存在チェック());
         }
         if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの行選択チェック());
+            validationMessages.add(getValidationHandler(div).センター送信完了対象者一覧データの行選択チェック());
+        }
+        if (validationMessages.existsError()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).respond();
@@ -222,8 +221,6 @@ public class GetsureiShori {
      */
     public ResponseData<GetsureiShoriDiv> onClick_BtnCenterSoshin(GetsureiShoriDiv div) {
         RealInitialLocker.release(排他キー);
-        FlowParameters fp = FlowParameters.of(KEY, VALUE_BATCH);
-        FlowParameterAccessor.merge(fp);
         return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
     }
 
@@ -241,15 +238,15 @@ public class GetsureiShori {
     public ResponseData<GetsureiShoriDiv> onClick_BtnCompleteGetsureiShori(GetsureiShoriDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getDgNinteiTaskList().getDataSource().isEmpty()) {
-            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの存在チェック());
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            validationMessages.add(getValidationHandler(div).センター送信完了対象者一覧データの存在チェック());
         }
         if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            validationMessages.add(getValidationHandler().センター送信完了対象者一覧データの行選択チェック());
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            validationMessages.add(getValidationHandler(div).センター送信完了対象者一覧データの行選択チェック());
         }
         if (is未送信データ存在(div.getDgNinteiTaskList().getSelectedItems())) {
-            validationMessages.add(getValidationHandler().センター送信完了対象者一覧選択行の完了処理事前チェック());
+            validationMessages.add(getValidationHandler(div).センター送信完了対象者一覧選択行の完了処理事前チェック());
+        }
+        if (validationMessages.existsError()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (!ResponseHolder.isReRequest()) {
@@ -281,9 +278,11 @@ public class GetsureiShori {
             RealInitialLocker.release(排他キー);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・センター送信の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-            FlowParameters fp = FlowParameters.of(KEY, VALUE_UPDATE);
-            FlowParameterAccessor.merge(fp);
-            setFlowIdentificationKeyAccessor(VALUE_UPDATE);
+            RString uiContainerID = ResponseHolder.getUIContainerId();
+            if (UICONTAINERID_DBEUC56101.equals(uiContainerID)) {
+                FlowParameters fp = FlowParameters.of(KEY, WORKFLOW_KEY_KANRYO);
+                FlowParameterAccessor.merge(fp);
+            }
             return ResponseData.of(div).setState(DBE0220001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -298,25 +297,17 @@ public class GetsureiShori {
         return false;
     }
 
-    private void setFlowIdentificationKeyAccessor(RString value) {
-        List<IdentificationKeyValue> keyValuseList = new ArrayList<>();
-        IdentificationKeyValue keyValue = new IdentificationKeyValue(
-                IdKey.of(SubGyomuCode.DBE認定支援, new FlowId(ResponseHolder.getFlowId().toString()), KEY), value);
-        keyValuseList.add(keyValue);
-        FlowIdentificationKeyAccessor.set(keyValuseList);
-    }
-
     private CenterSoshinIchiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         return new CenterSoshinIchiranCsvEntity(
                 get状態名称(row.getJyotai()),
                 row.getHokensha(),
-                getパターン1(row.getNinteiShinseiDay().getValue()),
+                to西暦(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 row.getShinseiKubunShinseiji(),
                 row.getShinseiKubunHorei(),
-                getパターン1(row.getGetsureiShoriKanryoDay().getValue()),
-                getパターン1(row.getCenterSoshinDay().getValue()));
+                to西暦(row.getGetsureiShoriKanryoDay().getValue()),
+                to西暦(row.getCenterSoshinDay().getValue()));
     }
 
     private RString get状態名称(RString ryakusho) {
@@ -328,19 +319,19 @@ public class GetsureiShori {
         return RString.EMPTY;
     }
 
-    private RString getパターン1(RDate date) {
+    private RString to西暦(RDate date) {
         if (date == null) {
             return RString.EMPTY;
         }
-        return date.wareki().toDateString();
+        return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private GetsureiShoriHandler getHandler(GetsureiShoriDiv div) {
         return new GetsureiShoriHandler(div);
     }
 
-    private GetsureiShoriValidationHandler getValidationHandler() {
-        return new GetsureiShoriValidationHandler();
+    private GetsureiShoriValidationHandler getValidationHandler(GetsureiShoriDiv div) {
+        return new GetsureiShoriValidationHandler(div);
     }
 
     private Decimal toDecimal(RString string) {

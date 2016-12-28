@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001;
 
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.GetsureiShoriDiv;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.UzErrorMessages;
@@ -22,11 +23,15 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class GetsureiShoriValidationHandler {
 
+    private final GetsureiShoriDiv div;
+
     /**
      * コンストラクタです。
      *
+     * @param div div
      */
-    public GetsureiShoriValidationHandler() {
+    public GetsureiShoriValidationHandler(GetsureiShoriDiv div) {
+        this.div = div;
     }
 
     /**
@@ -36,7 +41,7 @@ public class GetsureiShoriValidationHandler {
      */
     public ValidationMessageControlPairs センター送信完了対象者一覧データの存在チェック() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧データの存在チェック));
+        pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧データの存在チェック, div.getDgNinteiTaskList()));
         return pairs;
     }
 
@@ -47,7 +52,7 @@ public class GetsureiShoriValidationHandler {
      */
     public ValidationMessageControlPairs センター送信完了対象者一覧データの行選択チェック() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧データの行選択チェック));
+        pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧データの行選択チェック, div.getDgNinteiTaskList()));
         return pairs;
     }
 
@@ -58,7 +63,7 @@ public class GetsureiShoriValidationHandler {
      */
     public ValidationMessageControlPairs センター送信完了対象者一覧選択行の完了処理事前チェック() {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧選択行の完了処理事前チェック));
+        pairs.add(new ValidationMessageControlPair(GetsureiShoriMessages.センター送信完了対象者一覧選択行の完了処理事前チェック, div.getDgNinteiTaskList()));
         return pairs;
     }
 

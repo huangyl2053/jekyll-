@@ -21,6 +21,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class CenterTransmissionMybitisParamter implements IMyBatisParameter {
 
+    private RString 通常;
+    private RString 延期;
     private List<RString> shinseishoKanriNoList;
     private List<RString> shinseijiKubunCodeList;
     private boolean isMiSyutsuryokuNomi;

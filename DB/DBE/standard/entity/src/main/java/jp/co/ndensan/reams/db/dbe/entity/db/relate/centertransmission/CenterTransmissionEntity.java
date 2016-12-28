@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class CenterTransmissionEntity {
 
     private ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo zenkaiShinseishoKanriNo;
     private Code koroshoIfShikibetsuCode;
     private RString shoKisaiHokenshaNo;
     private RString hihokenshaNo;
@@ -346,6 +347,6 @@ public class CenterTransmissionEntity {
     private int zenkaiServiceJokyoKoban20;
     private boolean zenkaiServiceJokyoFlag;
     private Code zenkaiKoroshoIfShikibetsuCode;
-    private RString ninteishinsakaiIkenShurui;
+    private RString shinsakaiIken;
     private RString shinsakaiMemo;
 }
