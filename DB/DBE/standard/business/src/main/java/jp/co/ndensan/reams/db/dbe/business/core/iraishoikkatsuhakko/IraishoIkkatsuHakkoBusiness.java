@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiIchiran;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoItem;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
@@ -35,12 +34,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.EraTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -63,16 +64,18 @@ public class IraishoIkkatsuHakkoBusiness {
     private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
+    private static final RString 文字列3 = new RString("3");
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final RString 記号_星 = new RString("*");
+    private static final RString 記号_星 = new RString("＊");
     private static final RString 元号_明治 = new RString("明治");
     private static final RString 元号_大正 = new RString("大正");
     private static final RString 元号_昭和 = new RString("昭和");
     private static final RString 記号 = new RString("✔");
     private int 宛名連番 = 1;
     private int 連番 = 1;
+    private static final int INT2 = 2;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -85,7 +88,6 @@ public class IraishoIkkatsuHakkoBusiness {
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
     private static final RString SHUJIIIKENSHOSAKUSEIIRAI = new RString("【主治医意見書作成依頼印刷区分】");
     private static final RString SHUJIIIKENSHO = new RString("【意見書印刷区分】");
-    private static final RString SHUJIIIKENSHOSAKUSEIIRAILIST = new RString("【主治医意見書作成依頼リスト】");
     private static final RString SHUJIIIRYOKIKANCODE = new RString("　　【主治医医療機関コード】");
     private static final RString ISHINO = new RString("　　【主治医コード】");
     private static final RString SHOKISAIHOKENSHANO = new RString("　　【証記載保険者番号】");
@@ -165,6 +167,7 @@ public class IraishoIkkatsuHakkoBusiness {
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
         RString 生年月日 = entity.get生年月日();
         RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+        EraTypeFormatted eraType = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI);
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
         item.setHokenshaNo1(getCode(保険者番号リスト, 0));
         item.setHokenshaNo2(getCode(保険者番号リスト, 1));
@@ -192,10 +195,10 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setIryokikanAdress(entity.get医療機関住所());
         item.setIryokikanNameTel(entity.get医療機関電話番号());
         item.setIryokikanFax(entity.get医療機関FAX番号());
-        item.setYubinNo(entity.get郵便番号());
-        item.setBirthYY(年号.substring(INT3, INT5));
-        item.setBirthMM(年号.substring(INT6, INT8));
-        item.setBirthDD(年号.substring(INT9));
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
+        item.setBirthYY(eraType.getYear().substring(INT2));
+        item.setBirthMM(eraType.getMonth());
+        item.setBirthDD(eraType.getDay());
         RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -204,11 +207,11 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
         item.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
         item.setShinseiDD2(ninteiShinseiDay.substring(INT8));
-        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
-        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
-        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号 : RString.EMPTY);
-        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号 : RString.EMPTY);
-        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY);
+        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         return item;
     }
 
@@ -233,7 +236,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
         item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
         item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
-        item.setYubinNo1(entity.get医療機関郵便番号());
+        item.setYubinNo1(getYubinNo(entity.get医療機関郵便番号()));
         item.setJushoText(entity.get医療機関住所());
         item.setKikanNameText(entity.get医療機関名称());
         item.setShimeiText(entity.get主治医氏名());
@@ -272,10 +275,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         item.setBirthYMD(get和暦(entity.get生年月日(), false));
         item.setJusho(entity.get住所());
-        RString 郵便番号 = entity.get郵便番号();
-        if (!RString.isNullOrEmpty(郵便番号)) {
-            item.setYubinNo(new YubinNo(entity.get郵便番号()).getEditedYubinNo());
-        }
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
         item.setTsuchibun1(通知文Map.get(2));
         return item;
     }
@@ -287,7 +287,7 @@ public class IraishoIkkatsuHakkoBusiness {
      */
     public ShujiiIkenshoSakuseiRyoSeikyushoItem setDBE234001Item() {
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
-        item.setGengo(RDate.getNowDate().toDateString());
+        item.setGengo(get和暦(processParamter.getHakkobi(), EraType.KANJI));
         item.setAtesakiHokenshaName(entity.get保険者名());
         item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.在宅新規.get名称());
         item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.在宅継続.get名称());
@@ -306,7 +306,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setHihokenshaNo10(getCode(被保険者番号リスト, INT9));
         item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
         item.setHihokenshaName(entity.get被保険者氏名());
-        item.setBirthYMD(entity.get生年月日());
+        item.setBirthYMD(get和暦(entity.get生年月日(), true));
         item.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
         if (ZaitakuShisetsuKubun.在宅.getコード().equals(entity.get在宅施設区分())) {
             item.setShubetsuZaitaku(記号);
@@ -330,7 +330,7 @@ public class IraishoIkkatsuHakkoBusiness {
         }
         item.setSeikyuIryokikanName(entity.get医療機関名称());
         item.setSeikyuIryokikanDaihyoName(entity.get代表者名());
-        item.setSeikyuIryokikanYubinNo(entity.get医療機関郵便番号());
+        item.setSeikyuIryokikanYubinNo(getYubinNo(entity.get医療機関郵便番号()));
         item.setSeikyuIryokikanJusho(entity.get医療機関住所());
         item.setSeikyuIryokikanTel(entity.get医療機関電話番号());
         set意見書作成料(entity, item);
@@ -486,7 +486,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
         item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
         item.setBunshoNo(bunshoNo);
-        item.setYubinNo1(entity.get医療機関郵便番号());
+        item.setYubinNo1(getYubinNo(entity.get医療機関郵便番号()));
         item.setJushoText(entity.get医療機関住所());
         item.setKikanNameText(entity.get医療機関名称());
         item.setShimeiText(entity.get主治医氏名());
@@ -542,13 +542,10 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
         item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         item.setBirthYMD(get和暦(entity.get生年月日(), false));
-        RString 郵便番号 = entity.get郵便番号();
-        if (!RString.isNullOrEmpty(郵便番号)) {
-            item.setYubinNo(new YubinNo(entity.get郵便番号()).getEditedYubinNo());
-        }
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
         item.setJusho(entity.get住所());
         item.setShinseiYMD(get和暦(entity.get認定申請年月日(), true));
-        item.setTeishutsuKigen(get提出期限());
+        item.setTeishutsuKigen(get提出期限(EraType.KANJI));
         item.setTsuchibun2(通知文Map.get(2));
         item.setShoriName(IkenshoIraiKubun.toValue(entity.get主治医意見書依頼区分()).get名称());
         return item;
@@ -602,7 +599,7 @@ public class IraishoIkkatsuHakkoBusiness {
                 ninshoshaSource.ninshoshaShimeiKakenai,
                 ninshoshaSource.koinMojiretsu,
                 ninshoshaSource.koinShoryaku,
-                entity.get医療機関郵便番号(),
+                getYubinNo(entity.get医療機関郵便番号()),
                 entity.get医療機関住所(),
                 entity.get医療機関名称(),
                 entity.get代表者名(),
@@ -621,6 +618,10 @@ public class IraishoIkkatsuHakkoBusiness {
     }
 
     private RString get提出期限() {
+        return get提出期限(EraType.KANJI_RYAKU);
+    }
+
+    private RString get提出期限(EraType eraType) {
 
         RString 提出期限 = RString.EMPTY;
         if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
@@ -628,18 +629,18 @@ public class IraishoIkkatsuHakkoBusiness {
                 int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
                         基準日, SubGyomuCode.DBE認定支援).toString());
                 if (entity.get主治医意見書作成期限年月日() != null && !entity.get主治医意見書作成期限年月日().isEmpty()) {
-                    提出期限 = get和暦(new RString(entity.get主治医意見書作成期限年月日().plusDay(期限日数).toString()));
+                    提出期限 = get和暦(new RString(entity.get主治医意見書作成期限年月日().plusDay(期限日数).toString()), eraType);
                 }
             } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
                 提出期限 = RString.EMPTY;
             } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
                 提出期限 = !RString.isNullOrEmpty(processParamter.getKyotsuHizuke())
-                        ? get和暦(processParamter.getKyotsuHizuke()) : RString.EMPTY;
+                        ? get和暦(processParamter.getKyotsuHizuke(), eraType) : RString.EMPTY;
             }
         } else {
             FlexibleDate 主治医意見書作成期限日 = entity.get主治医意見書作成期限年月日();
             if (主治医意見書作成期限日 != null && !主治医意見書作成期限日.isEmpty()) {
-                提出期限 = get和暦(new RString(主治医意見書作成期限日.toString()));
+                提出期限 = get和暦(new RString(主治医意見書作成期限日.toString()), eraType);
             }
         }
         return 提出期限;
@@ -689,13 +690,17 @@ public class IraishoIkkatsuHakkoBusiness {
         return 名称付与;
     }
 
-    private RString get和暦(RString 日付) {
+    private RString get和暦(RString 日付, EraType eraType) {
         RString 和暦 = RString.EMPTY;
         if (!RString.isNullOrEmpty(日付)) {
             FlexibleDate flexibleDate = new FlexibleDate(日付);
-            和暦 = flexibleDate.wareki().eraType(EraType.KANJI_RYAKU).toDateString();
+            和暦 = flexibleDate.wareki().eraType(eraType).toDateString();
         }
         return 和暦;
+    }
+
+    private RString get和暦(RString 日付) {
+        return get和暦(日付, EraType.KANJI_RYAKU);
     }
 
     private FlexibleDate getFlexibleDate(RString date) {
@@ -723,7 +728,7 @@ public class IraishoIkkatsuHakkoBusiness {
             RString reportName) {
         RString csv出力有無 = new RString("無し");
         RString csvファイル名 = new RString("－");
-        RString ジョブ番号 = new RString("56");
+        RString ジョブ番号 = new RString(JobContextHolder.getJobId());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(IRAIFROMYMD);
@@ -735,37 +740,19 @@ public class IraishoIkkatsuHakkoBusiness {
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(SHUJIIIKENSHOSAKUSEIIRAI);
-        builder.append(processParamter.getShujiiikenshoSakuseiIrai());
+        builder.append(get区分(processParamter.getShujiiikenshoSakuseiIrai()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(SHUJIIIKENSHO);
-        builder.append(processParamter.getShujiiIkensho());
+        builder.append(get区分(processParamter.getShujiiIkensho()));
         出力条件.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append(SHUJIIIKENSHOSAKUSEIIRAILIST);
-        出力条件.add(builder.toRString());
-        List<GridParameter> shujiiIkenshoSakuseiIraiList = processParamter.getShujiiIkenshoSakuseiIraiList();
-        for (GridParameter gridParameter : shujiiIkenshoSakuseiIraiList) {
-            builder = new RStringBuilder();
-            builder.append(SHUJIIIRYOKIKANCODE);
-            builder.append(gridParameter.getShujiiIryoKikanCode());
-            出力条件.add(builder.toRString());
-            builder = new RStringBuilder();
-            builder.append(ISHINO);
-            builder.append(gridParameter.getIshiNo());
-            出力条件.add(builder.toRString());
-            builder = new RStringBuilder();
-            builder.append(SHOKISAIHOKENSHANO);
-            builder.append(gridParameter.getShoKisaiHokenshaNo());
-            出力条件.add(builder.toRString());
-        }
         builder = new RStringBuilder();
         builder.append(HAKKOBI);
         builder.append(ConvertDate(processParamter.getHakkobi()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TEISHUTSUKIGEN);
-        builder.append(processParamter.getTeishutsuKigen());
+        builder.append(get提出期限(processParamter.getTeishutsuKigen()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(KYOTSUHIZUKE);
@@ -773,34 +760,34 @@ public class IraishoIkkatsuHakkoBusiness {
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOSAKUSEIIRAI);
-        builder.append(processParamter.isIkenshoSakuseiirai());
+        builder.append(get出力可否(processParamter.isIkenshoSakuseiirai()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOSAKUSEISEIKYUU);
-        builder.append(processParamter.isIkenshoSakuseiSeikyuu());
+        builder.append(get出力可否(processParamter.isIkenshoSakuseiSeikyuu()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(SHUJIIIKENSHOSAKUSEIIRAISHO);
-        builder.append(processParamter.isShujiiIkenshoSakuseiIraisho());
+        builder.append(get出力可否(processParamter.isShujiiIkenshoSakuseiIraisho()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOKINYUU);
-        builder.append(processParamter.isIkenshoKinyuu());
+        builder.append(get出力可否(processParamter.isIkenshoKinyuu()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOKINYUUOCR);
-        builder.append(processParamter.isIkenshoKinyuuOCR());
+        builder.append(get出力可否(processParamter.isIkenshoKinyuuOCR()));
         builder = new RStringBuilder();
         builder.append(IKENSHOKINYUUDESIGN);
-        builder.append(processParamter.isIkenshoKinyuuDesign());
+        builder.append(get出力可否(processParamter.isIkenshoKinyuuDesign()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOSAKUSEISEIKYUUSHO);
-        builder.append(processParamter.isIkenshoSakuseiSeikyuusho());
+        builder.append(get出力可否(processParamter.isIkenshoSakuseiSeikyuusho()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IKENSHOTEISHUTU);
-        builder.append(processParamter.isIkenshoTeishutu());
+        builder.append(get出力可否(processParamter.isIkenshoTeishutu()));
         出力条件.add(builder.toRString());
         return new ReportOutputJokenhyoItem(
                 reportID,
@@ -814,6 +801,40 @@ public class IraishoIkkatsuHakkoBusiness {
                 出力条件);
     }
 
+    private RString get出力可否(boolean 出力可否) {
+        return 出力可否 ? new RString("出力する") : new RString("出力しない");
+    }
+
+    private RString get提出期限(RString kubun) {
+        if (RString.isNullOrEmpty(kubun)) {
+            return RString.EMPTY;
+        }
+        if (kubun.equals(文字列0)) {
+            return new RString("申請者別に自動設定");
+        } else if (kubun.equals(文字列1)) {
+            return new RString("空欄");
+        } else if (kubun.equals(文字列2)) {
+            return new RString("共通日付");
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get区分(RString kubun) {
+        if (RString.isNullOrEmpty(kubun)) {
+            return RString.EMPTY;
+        }
+        if (kubun.equals(文字列1)) {
+            return new RString("未印刷");
+        } else if (kubun.equals(文字列2)) {
+            return new RString("印刷済");
+        } else if (kubun.equals(文字列3)) {
+            return new RString("未印刷　印刷済");
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
     private RString ConvertDate(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
@@ -821,7 +842,7 @@ public class IraishoIkkatsuHakkoBusiness {
         if (!FlexibleDate.canConvert(date)) {
             return date;
         }
-        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
+        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
     }
 
     /**
@@ -865,6 +886,9 @@ public class IraishoIkkatsuHakkoBusiness {
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
         List<RString> 保険者番号リスト = get被保険者番号(entity.get証記載保険者番号());
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
+        RString 生年月日 = entity.get生年月日();
+        RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+        EraTypeFormatted eraType = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI);
         item.setHokenshaNo1(getCode(保険者番号リスト, 0));
         item.setHokenshaNo2(getCode(保険者番号リスト, 1));
         item.setHokenshaNo3(getCode(保険者番号リスト, 2));
@@ -881,7 +905,20 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setHihokenshaNo8(getCode(被保険者番号リスト, INT7));
         item.setHihokenshaNo9(getCode(被保険者番号リスト, INT8));
         item.setHihokenshaNo10(getCode(被保険者番号リスト, INT9));
+        item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
+        item.setHihokenshaName(entity.get被保険者氏名());
+        item.setAge(entity.get年齢());
         item.setHihokenshaTel(entity.get電話番号());
+        item.setJusho(entity.get住所());
+        item.setShujiiName(entity.get主治医氏名());
+        item.setIryokikanName(entity.get医療機関名称());
+        item.setIryokikanAdress(entity.get医療機関住所());
+        item.setIryokikanNameTel(entity.get医療機関電話番号());
+        item.setIryokikanFax(entity.get医療機関FAX番号());
+        item.setYubinNo(getYubinNo(entity.get郵便番号()));
+        item.setBirthYY(eraType.getYear().substring(INT2));
+        item.setBirthMM(eraType.getMonth());
+        item.setBirthDD(eraType.getDay());
         RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -890,12 +927,24 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
         item.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
         item.setShinseiDD2(ninteiShinseiDay.substring(INT8));
+        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         return item;
     }
 
     private RString getCode(List<RString> list, int index) {
         if (index < list.size()) {
             return list.get(index);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getYubinNo(RString yubinNo) {
+        if (!RString.isNullOrEmpty(yubinNo)) {
+            return new YubinNo(yubinNo).getEditedYubinNo();
         }
         return RString.EMPTY;
     }

@@ -32,7 +32,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubun
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
@@ -46,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -58,7 +56,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -83,6 +80,11 @@ public class NinteichosaItakusakiMain {
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private FileSpoolManager fileSpoolManager;
+    private static final RString 普通 = new RString("普通");
+    private static final RString 当座 = new RString("当座");
+    private static final RString 納税準備 = new RString("納税準備");
+    private static final RString 貯蓄 = new RString("貯蓄");
+    private static final RString その他 = new RString("その他");
 
     /**
      * 画面初期化処理です。
@@ -278,7 +280,26 @@ public class NinteichosaItakusakiMain {
                 waritsukeTeiin,
                 row.getChiku(),
                 row.getKikanKubun(),
-                row.getJokyoFlag());
+                row.getJokyoFlag(),
+                row.getKinyuKikanCode() != null
+                ? row.getKinyuKikanCode()
+                : RString.EMPTY,
+                row.getKinyuKikanShitenCode() != null
+                ? row.getKinyuKikanShitenCode()
+                : RString.EMPTY,
+                row.getYokinShubetsu() != null
+                ? set預金種別(row.getYokinShubetsu())
+                : RString.EMPTY,
+                row.getKozaNo() != null
+                ? row.getKozaNo()
+                : RString.EMPTY,
+                row.getKozaMeigininKana() != null
+                ? row.getKozaMeigininKana()
+                : RString.EMPTY,
+                row.getKozaMeiginin() != null
+                ? row.getKozaMeiginin()
+                : RString.EMPTY
+        );
         return data;
     }
 
@@ -515,84 +536,168 @@ public class NinteichosaItakusakiMain {
     }
 
     /**
-     * 口座未登録csvを出力するボタンが押下された場合、ＣＳＶをSpoolします。
+     * 口座未登録csvを出力するボタンが押下された場合、ＣＳＶを出力します。
      *
      * @param div NinteichosaItakusakiMainDiv
-     * @return ResponseData<NinteichosaItakusakiMainDiv>
+     * @param response
+     * @return IDownLoadServletResponse
      */
-    public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnCsvSpool(NinteichosaItakusakiMainDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            csvOutput(div);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("CSV出力")).respond();
-        }
-        return ResponseData.of(div).respond();
+    public IDownLoadServletResponse onClick_btnCsvKozaNashi(NinteichosaItakusakiMainDiv div, IDownLoadServletResponse response) {
 
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), OUTPUT_CSV_FILE_NAME);
+        try (CsvWriter<SonotaKikanJohoCSVEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgSonotaKikanIchiran_Row> dataList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
+            for (dgSonotaKikanIchiran_Row row : dataList) {
+                if (row.getKinyuKikanCode().isNull() || row.getKinyuKikanCode().isEmpty()) {
+                    csvWriter.writeLine(getCsvDataSonota(row));
+                }
+            }
+            csvWriter.close();
+        }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(OUTPUT_CSV_FILE_NAME));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, OUTPUT_CSV_FILE_NAME), response);
     }
 
-    private void csvOutput(NinteichosaItakusakiMainDiv div) {
-        List<dgSonotaKikanIchiran_Row> dataList_EUC = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
-        List<SonotaKikanJohoCSVEntity> resultList = new ArrayList<>();
-        for (dgSonotaKikanIchiran_Row entity : dataList_EUC) {
-            if (entity.getKinyuKikanCode().isNull() || entity.getKinyuKikanCode().isEmpty()) {
-                SonotaKikanJohoCSVEntity tmpEntity = new SonotaKikanJohoCSVEntity();
-                tmpEntity.set証記載保険者番号(entity.getHokenshaCode());
-                tmpEntity.setその他機関コード(entity.getSonotaKikanCode());
-                tmpEntity.set機関名称(entity.getKikanMeisho());
-                tmpEntity.set機関名称カナ(entity.getKikanKana());
-                tmpEntity.set郵便番号(entity.getYubinNo());
-                tmpEntity.set住所(entity.getJusho());
-                tmpEntity.set電話番号(entity.getTelNo());
-                tmpEntity.set調査委託区分(set調査委託区分(entity));
-                tmpEntity.set機関の区分(set機関区分(entity));
-                resultList.add(tmpEntity);
-            }
-        }
-
-        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, OUTPUT_CSV_FILE_NAME);
-
-        try (CsvWriter<SonotaKikanJohoCSVEntity> eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                hasHeader(true).
-                canAppend(false).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
-                setNewLine(NewLine.CRLF).
-                build()) {
-            for (SonotaKikanJohoCSVEntity result : resultList) {
-                eucCsvWriter.writeLine(result);
-            }
-        }
-
-        fileSpoolManager.spool(eucFilePath);
+    private SonotaKikanJohoCSVEntity getCsvDataSonota(dgSonotaKikanIchiran_Row row) {
+        SonotaKikanJohoCSVEntity data = new SonotaKikanJohoCSVEntity(
+                row.getHokensha(),
+                row.getSonotaKikanCode(),
+                row.getKikanMeisho(),
+                row.getKikanKana(),
+                row.getYubinNo(),
+                row.getJusho(),
+                row.getTelNo(),
+                set調査委託区分(row.getChosaItakuKubun()),
+                set機関の区分(row.getKikanKubun()));
+        return data;
     }
 
-    private RString set調査委託区分(dgSonotaKikanIchiran_Row entity) {
+//    /**
+//     * 口座未登録csvを出力するボタンが押下された場合、ＣＳＶをSpoolします。
+//     *
+//     * @param div NinteichosaItakusakiMainDiv
+//     * @return ResponseData<NinteichosaItakusakiMainDiv>
+//     */
+//    public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnCsvSpool(NinteichosaItakusakiMainDiv div) {
+//        if (!ResponseHolder.isReRequest()) {
+//            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+//        }
+//        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+//                && new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+//            csvOutput(div);
+//            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("CSV出力")).respond();
+//        }
+//        return ResponseData.of(div).respond();
+//
+//    }
+//
+//    private void csvOutput(NinteichosaItakusakiMainDiv div) {
+//        List<dgSonotaKikanIchiran_Row> dataList_EUC = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
+//        List<SonotaKikanJohoCSVEntity> resultList = new ArrayList<>();
+//        for (dgSonotaKikanIchiran_Row entity : dataList_EUC) {
+//            if (entity.getKinyuKikanCode().isNull() || entity.getKinyuKikanCode().isEmpty()) {
+//                SonotaKikanJohoCSVEntity tmpEntity = new SonotaKikanJohoCSVEntity();
+//                tmpEntity.set証記載保険者番号(entity.getHokenshaCode());
+//                tmpEntity.setその他機関コード(entity.getSonotaKikanCode());
+//                tmpEntity.set機関名称(entity.getKikanMeisho());
+//                tmpEntity.set機関名称カナ(entity.getKikanKana());
+//                tmpEntity.set郵便番号(entity.getYubinNo());
+//                tmpEntity.set住所(entity.getJusho());
+//                tmpEntity.set電話番号(entity.getTelNo());
+//                tmpEntity.set調査委託区分(set調査委託区分(entity));
+//                tmpEntity.set機関の区分(set機関区分(entity));
+//                resultList.add(tmpEntity);
+//            }
+//        }
+//
+//        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+//        RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
+//        RString eucFilePath = Path.combinePath(spoolWorkPath, OUTPUT_CSV_FILE_NAME);
+//
+//        try (CsvWriter<SonotaKikanJohoCSVEntity> eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+//                hasHeader(true).
+//                canAppend(false).
+//                setDelimiter(EUC_WRITER_DELIMITER).
+//                setEnclosure(EUC_WRITER_ENCLOSURE).
+//                setEncode(Encode.SJIS).
+//                setNewLine(NewLine.CRLF).
+//                build()) {
+//            for (SonotaKikanJohoCSVEntity result : resultList) {
+//                eucCsvWriter.writeLine(result);
+//            }
+//        }
+//
+//        fileSpoolManager.spool(eucFilePath);
+//    }
+//
+//    private RString set調査委託区分(dgSonotaKikanIchiran_Row entity) {
+//        RStringBuilder 調査委託区分編集 = new RStringBuilder();
+//        return entity.getChosaItakuKubun().isEmpty()
+//                ? RString.EMPTY
+//                : 調査委託区分編集
+//                .append("(")
+//                .append(ChosaItakuKubunCode.toValueFrom名称(entity.getChosaItakuKubun()).getコード())
+//                .append(")")
+//                .append(entity.getChosaItakuKubun())
+//                .toRString();
+//    }
+//
+//    private RString set機関区分(dgSonotaKikanIchiran_Row entity) {
+//        RStringBuilder 機関区分編集 = new RStringBuilder();
+//        return entity.getChosaItakuKubun().isEmpty()
+//                ? RString.EMPTY
+//                : 機関区分編集
+//                .append("(")
+//                .append(ChosaKikanKubun.valueOf(entity.getKikanKubun().toString()).getコード())
+//                .append(")")
+//                .append(entity.getKikanKubun())
+//                .toRString();
+//    }
+    private RString set調査委託区分(RString row調査委託区分) {
         RStringBuilder 調査委託区分編集 = new RStringBuilder();
-        return entity.getChosaItakuKubun().isEmpty()
+        return row調査委託区分.isEmpty()
                 ? RString.EMPTY
                 : 調査委託区分編集
                 .append("(")
-                .append(ChosaItakuKubunCode.toValueFrom名称(entity.getChosaItakuKubun()).getコード())
+                .append(ChosaItakuKubunCode.toValueFrom名称(row調査委託区分).getコード())
                 .append(")")
-                .append(entity.getChosaItakuKubun())
+                .append(row調査委託区分)
                 .toRString();
     }
 
-    private RString set機関区分(dgSonotaKikanIchiran_Row entity) {
+    private RString set機関の区分(RString row機関の区分) {
         RStringBuilder 機関区分編集 = new RStringBuilder();
-        return entity.getChosaItakuKubun().isEmpty()
+        return row機関の区分.isEmpty()
                 ? RString.EMPTY
                 : 機関区分編集
                 .append("(")
-                .append(ChosaKikanKubun.valueOf(entity.getKikanKubun().toString()).getコード())
+                .append(ChosaKikanKubun.valueOf(row機関の区分.toString()).getコード())
                 .append(")")
-                .append(entity.getKikanKubun())
+                .append(row機関の区分)
                 .toRString();
+    }
+
+    private RString set預金種別(RString 預金種別コード) {
+        if (!預金種別コード.isEmpty()) {
+            switch (預金種別コード.toInt()) {
+                case 1:
+                    return 普通;
+                case 2:
+                    return 当座;
+                case 3:
+                    return 納税準備;
+                case 4:
+                    return 貯蓄;
+                case 9:
+                    return その他;
+            }
+        }
+        return RString.EMPTY;
+
     }
 }

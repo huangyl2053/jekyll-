@@ -21,5 +21,6 @@ public class KihonChosaKomokuDataRelateEntity {
     private RString 認定申請年月日;
     private Decimal 連番;
     private RString 厚労省IF識別コード;
+    private RString 調査項目;
 
 }

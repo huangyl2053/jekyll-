@@ -97,7 +97,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-            savaCsvファイル(file);
+            savaCsvファイル(file, div);
         }
         return ResponseData.of(div).respond();
     }
@@ -111,13 +111,14 @@ public class NinteiShinsakaiKekkaDataTorikomi {
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onClick_Check(NinteiShinsakaiKekkaDataTorikomiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).データ件数チェック(validationMessages);
+        validPairs = getValidationHandler(div).回数チェック(validPairs);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();
     }
 
-    private boolean savaCsvファイル(FileData file) {
+    private boolean savaCsvファイル(FileData file, NinteiShinsakaiKekkaDataTorikomiDiv div) {
         RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
             .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         File サーバ = new File(path.toString());
@@ -131,7 +132,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
             mkdirsFlag = true;
         }
         if (mkdirsFlag) {
-            tmpfile = new File(サーバ, file.getFileName().toString());
+            tmpfile = new File(サーバ, getHandler(div).getFileName(file).toString());
             if (tmpfile.exists()) {
                 delFileFlag = tmpfile.delete();
             } else {

@@ -138,11 +138,25 @@ public class ShujiiIkenshoIraiSumiProcess extends BatchKeyBreakBase<IkenshoJohoP
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(set主治医意見書依頼済み一覧表作成条件(processParameter.get主治医意見書依頼済み一覧表作成条件()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日From()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日To()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日From()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日To()));
+        if (処理日.equals(processParameter.get主治医意見書依頼済み一覧表作成条件())) {
+            出力条件.add(new RString("処理日の範囲を指定"));
+            if (processParameter.get主治医意見書依頼済み一覧表処理日From() == null && processParameter.get主治医意見書依頼済み一覧表処理日To() == null) {
+                出力条件.add(new RString("指定なし"));
+            } else {
+                RString 処理日FROM = dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日From());
+                RString 処理日TO = dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日To());
+                出力条件.add(処理日FROM.concat(new RString("～")).concat(処理日TO));
+            }
+        } else if (申請日.equals(processParameter.get主治医意見書依頼済み一覧表作成条件())) {
+            出力条件.add(new RString("申請日の範囲を指定"));
+            if (processParameter.get主治医意見書依頼済み一覧表申請日From() == null && processParameter.get主治医意見書依頼済み一覧表申請日To() == null) {
+                出力条件.add(new RString("指定なし"));
+            } else {
+                RString 申請日FROM = dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日From());
+                RString 申請日TO = dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日To());
+                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+            }
+        }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE013004.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE514002;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke.ShinsaschedulekagamiReport;
@@ -18,8 +20,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -30,9 +37,14 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 
@@ -107,5 +119,52 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(
                                 ConfigNameDBE.介護認定審査会スケジュール表鏡_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 通知文Map.get(1), 通知文Map.get(KEY));
+    }
+
+    @Override
+    protected void afterExecute() {
+        RString 帳票ID = REPORT_ID.value();
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
+        RString 市町村名 = 導入団体クラス.get市町村名();
+        RString ジョブ番号 = new RString(JobContextHolder.getJobId());
+        RString 帳票名 = ReportIdDBE.DBE514002.getReportName();
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
+        RString csv出力有無 = new RString("無し");
+        RString csvファイル名 = new RString("-");
+        List<RString> 出力条件 = create出力条件();
+        OutputJokenhyoFactory.createInstance(
+                new ReportOutputJokenhyoItem(帳票ID, 導入団体コード, 市町村名, ジョブ番号, 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件))
+                .print();
+    }
+
+    private List<RString> create出力条件() {
+        List<RString> 出力条件 = new ArrayList<>();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append("【介護認定審査会開催予定期間】");
+        builder.append(ConvertDate(processParamter.getShinsakaiKaisaiKikanFrom()))
+                .append(" ～ ").append(ConvertDate(processParamter.getShinsakaiKaisaiKikanTo()));
+        出力条件.add(builder.toRString());
+        return 出力条件;
+    }
+
+    private RString ConvertYear(RString year) {
+        if (RString.isNullOrEmpty(year)) {
+            return RString.EMPTY;
+        }
+        if (!FlexibleYear.canConvert(year)) {
+            return year;
+        }
+        return new FlexibleYear(year).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
+    }
+
+    private RString ConvertDate(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        if (!FlexibleDate.canConvert(date)) {
+            return date;
+        }
+        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
     }
 }

@@ -145,6 +145,7 @@
         WHERE
             "DbT5593GogitaiWariateIinJoho"."gogitaiNo" = #{合議体番号} AND
             "DbT5593GogitaiWariateIinJoho"."gogitaiYukoKikanKaishiYMD" = #{合議体有効期間開始年月日} AND
+            "DbT5593GogitaiWariateIinJoho"."gogitaiYukoKikanShuryoYMD" = #{合議体有効期間終了年月日} AND
             "DbT5593GogitaiWariateIinJoho"."shinsakaiIinCode" = #{審査会委員コード}
     </select>
 
@@ -268,7 +269,9 @@
             "TempGogitaiJohoSakusei" AS "TempGogitaiJohoSakusei"
         ORDER BY
             "TempGogitaiJohoSakusei"."合議体NO" ASC,
-            "TempGogitaiJohoSakusei"."審査会委員コード" ASC
+            "TempGogitaiJohoSakusei"."審査会委員コード" ASC,
+            "TempGogitaiJohoSakusei"."有効開始日" ASC,
+            "TempGogitaiJohoSakusei"."有効終了日" ASC
     </select>
 
 </mapper>

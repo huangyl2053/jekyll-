@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * NinteiChosa のクラスファイル
@@ -14,21 +15,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblNinteiChosaIinItakuSaki")
-    private Label lblNinteiChosaIinItakuSaki;
+    @JsonProperty("txtNinteiChosaIinItakuSaki")
+    private TextBoxDomainCode txtNinteiChosaIinItakuSaki;
     @JsonProperty("btnNinteiChosaItakusakiGuide")
     private ButtonDialog btnNinteiChosaItakusakiGuide;
     @JsonProperty("txtNinteiChosaItakusakiName")
     private TextBox txtNinteiChosaItakusakiName;
-    @JsonProperty("lblNinteiChosaInShimei")
-    private Label lblNinteiChosaInShimei;
+    @JsonProperty("txtNinteiChosaInShimei")
+    private TextBoxDomainCode txtNinteiChosaInShimei;
     @JsonProperty("btnNinteiChosainGuide")
     private ButtonDialog btnNinteiChosainGuide;
     @JsonProperty("txtNinteiChosainName")
@@ -55,21 +56,21 @@ public class NinteiChosaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblNinteiChosaIinItakuSaki
-     * @return lblNinteiChosaIinItakuSaki
+     * gettxtNinteiChosaIinItakuSaki
+     * @return txtNinteiChosaIinItakuSaki
      */
-    @JsonProperty("lblNinteiChosaIinItakuSaki")
-    public Label getLblNinteiChosaIinItakuSaki() {
-        return lblNinteiChosaIinItakuSaki;
+    @JsonProperty("txtNinteiChosaIinItakuSaki")
+    public TextBoxDomainCode getTxtNinteiChosaIinItakuSaki() {
+        return txtNinteiChosaIinItakuSaki;
     }
 
     /*
-     * setlblNinteiChosaIinItakuSaki
-     * @param lblNinteiChosaIinItakuSaki lblNinteiChosaIinItakuSaki
+     * settxtNinteiChosaIinItakuSaki
+     * @param txtNinteiChosaIinItakuSaki txtNinteiChosaIinItakuSaki
      */
-    @JsonProperty("lblNinteiChosaIinItakuSaki")
-    public void setLblNinteiChosaIinItakuSaki(Label lblNinteiChosaIinItakuSaki) {
-        this.lblNinteiChosaIinItakuSaki = lblNinteiChosaIinItakuSaki;
+    @JsonProperty("txtNinteiChosaIinItakuSaki")
+    public void setTxtNinteiChosaIinItakuSaki(TextBoxDomainCode txtNinteiChosaIinItakuSaki) {
+        this.txtNinteiChosaIinItakuSaki = txtNinteiChosaIinItakuSaki;
     }
 
     /*
@@ -109,21 +110,21 @@ public class NinteiChosaDiv extends Panel {
     }
 
     /*
-     * getlblNinteiChosaInShimei
-     * @return lblNinteiChosaInShimei
+     * gettxtNinteiChosaInShimei
+     * @return txtNinteiChosaInShimei
      */
-    @JsonProperty("lblNinteiChosaInShimei")
-    public Label getLblNinteiChosaInShimei() {
-        return lblNinteiChosaInShimei;
+    @JsonProperty("txtNinteiChosaInShimei")
+    public TextBoxDomainCode getTxtNinteiChosaInShimei() {
+        return txtNinteiChosaInShimei;
     }
 
     /*
-     * setlblNinteiChosaInShimei
-     * @param lblNinteiChosaInShimei lblNinteiChosaInShimei
+     * settxtNinteiChosaInShimei
+     * @param txtNinteiChosaInShimei txtNinteiChosaInShimei
      */
-    @JsonProperty("lblNinteiChosaInShimei")
-    public void setLblNinteiChosaInShimei(Label lblNinteiChosaInShimei) {
-        this.lblNinteiChosaInShimei = lblNinteiChosaInShimei;
+    @JsonProperty("txtNinteiChosaInShimei")
+    public void setTxtNinteiChosaInShimei(TextBoxDomainCode txtNinteiChosaInShimei) {
+        this.txtNinteiChosaInShimei = txtNinteiChosaInShimei;
     }
 
     /*

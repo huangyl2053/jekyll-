@@ -269,6 +269,29 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             getValidationHandler().主治医意見書作成依頼一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        List<dgNinteiTaskList_Row> rowList = getHandler(div).getCheckbox();
+        for (dgNinteiTaskList_Row row : rowList) {
+            if (RString.isNullOrEmpty(row.getKonkaiShujiiIryokikan()) || RString.isNullOrEmpty(row.getKonkaiShujii())) {
+                getValidationHandler().主治医意見書作成依頼一覧選択行の完了処理事前チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            if (row.getIkenshoIraiDay().getValue() == null) {
+                getValidationHandler().依頼日が未確定の完了必須チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            if (row.getIkenshoIraiKigen().getValue() == null) {
+                getValidationHandler().依頼期限が未確定の完了必須チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            if (row.getIkenshoIraiIkenshoShutsuryokuDay().getValue() == null) {
+                getValidationHandler().意見書書発行日が未確定の完了必須チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            if (row.getIkenshoIraiIraishoHakkoDay().getValue() == null) {
+                getValidationHandler().意見書出力年月日が未確定の完了必須チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -276,28 +299,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            List<dgNinteiTaskList_Row> rowList = getHandler(div).getCheckbox();
             for (dgNinteiTaskList_Row row : rowList) {
-                if (RString.isNullOrEmpty(row.getKonkaiShujiiIryokikan()) || RString.isNullOrEmpty(row.getKonkaiShujii())) {
-                    getValidationHandler().主治医意見書作成依頼一覧選択行の完了処理事前チェック(validationMessages);
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
-                if (row.getIkenshoIraiDay().getValue() == null) {
-                    getValidationHandler().依頼日が未確定の完了必須チェック(validationMessages);
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
-                if (row.getIkenshoIraiKigen().getValue() == null) {
-                    getValidationHandler().依頼期限が未確定の完了必須チェック(validationMessages);
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
-                if (row.getIkenshoIraiIkenshoShutsuryokuDay().getValue() == null) {
-                    getValidationHandler().意見書書発行日が未確定の完了必須チェック(validationMessages);
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
-                if (row.getIkenshoIraiIraishoHakkoDay().getValue() == null) {
-                    getValidationHandler().意見書出力年月日が未確定の完了必須チェック(validationMessages);
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();

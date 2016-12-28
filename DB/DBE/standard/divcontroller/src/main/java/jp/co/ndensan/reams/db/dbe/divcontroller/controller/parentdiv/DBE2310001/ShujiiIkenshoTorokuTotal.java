@@ -122,6 +122,7 @@ public class ShujiiIkenshoTorokuTotal {
         }
         div.setHdnHasChanged(getHandler(div).getDataRString());
         div.getCcdNinteiShinseishaKihonInfo().initialize(管理番号);
+        getHandler(div).setChkTakaJushin(resultList.records().get(0));
         ViewStateHolder.put(ViewStateKeys.意見書情報, ninteiShinseiJoho);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, image);
         return ResponseData.of(div).respond();

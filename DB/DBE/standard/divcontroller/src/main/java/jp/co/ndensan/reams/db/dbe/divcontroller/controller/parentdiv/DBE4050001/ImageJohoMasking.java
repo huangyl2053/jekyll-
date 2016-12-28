@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.S
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.DBE4050001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.DBE4050001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.ImageJohoMaskingDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.dgImageMaskingTaisho_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4050001.ImageJohoMaskingHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4050001.ImageJohoMaskingValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -28,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBE-1620-010 chengsanyuan
  */
 public class ImageJohoMasking {
+
+    private boolean isFrom完了画面 = false;
 
     /**
      * コンストラクタです。
@@ -46,13 +51,14 @@ public class ImageJohoMasking {
         getHandler(div).初期表示();
         ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
         if (shinseishoKanriNoList != null) {
+            isFrom完了画面 = true;
             getHandler(div).set検索用パラメーター(shinseishoKanriNoList);
             List<ImageJohoMaskingResult> resultList = getHandler(div).get対象者();
             if (!ResponseHolder.isReRequest() && resultList.isEmpty()) {
-                throw new ApplicationException(UrInformationMessages.該当データなし.getMessage());
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
             getHandler(div).setDataGrid(resultList);
-            return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
+            return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
         }
         return ResponseData.of(div).respond();
     }
@@ -116,6 +122,18 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnUpdate(ImageJohoMaskingDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            boolean has変更ファイル = false;
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            for (dgImageMaskingTaisho_Row row : div.getDgImageMaskingTaisho().getDataSource()) {
+                if (!row.getState().equals(RString.EMPTY)) {
+                    has変更ファイル = true;
+                    break;
+                }
+            }
+            if (!has変更ファイル) {
+                getValidationHandler().マスキングデータの存在チェック(validationMessages);
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -184,7 +202,11 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnContinue(ImageJohoMaskingDiv div) {
         getHandler(div).get対象者();
-        return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
+        if (isFrom完了画面) {
+            return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
+        } else {
+            return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
+        }
     }
 
     /**
@@ -194,11 +216,29 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnComplete(ImageJohoMaskingDiv div) {
+        if (isFrom完了画面) {
+            return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.終了する).respond();
+        }
+    }
+
+    /**
+     * 「基本運用・マスキングに戻る」ボタン押下時のイベントです
+     *
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
+     */
+    public ResponseData<ImageJohoMaskingDiv> onClick_btnBackKihonunyo(ImageJohoMaskingDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
     }
 
     private ImageJohoMaskingHandler getHandler(ImageJohoMaskingDiv div) {
         return new ImageJohoMaskingHandler(div);
+    }
+
+    private ImageJohoMaskingValidationHandler getValidationHandler() {
+        return new ImageJohoMaskingValidationHandler();
     }
 
 }

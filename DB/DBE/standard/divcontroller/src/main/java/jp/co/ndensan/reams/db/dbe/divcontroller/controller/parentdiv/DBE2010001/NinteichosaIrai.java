@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -44,8 +43,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -72,6 +69,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 完了処理・認定調査依頼のcontrollerクラスです。
@@ -82,7 +81,6 @@ public class NinteichosaIrai {
 
     private static final RString CSVファイルID_認定調査依頼一覧 = new RString("DBE201001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 前排他ロックキー = new RString("ShinseishoKanriNo_");
 
     /**
      * 完了処理・認定調査依頼に初期化を設定します。
@@ -91,17 +89,7 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onLoad(NinteichosaIraiDiv requestDiv) {
-        if (ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).respond();
-        }
         getHandler(requestDiv).onLoad();
-        if (isLocked(requestDiv.getDgNinteiTaskList().getDataSource())) {
-            release(requestDiv.getDgNinteiTaskList().getDataSource());
-            requestDiv.getDgNinteiTaskList().setDataSource(new ArrayList<dgNinteiTaskList_Row>());
-            requestDiv.setReadOnly(true);
-            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
-        }
-        release(requestDiv.getDgNinteiTaskList().getDataSource());
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -168,11 +156,6 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onClick_btnIraiAuto(NinteichosaIraiDiv requestDiv) {
-        if (ResponseHolder.isReRequest()
-            && ResponseHolder.getMessageCode().toString().equals(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode())) {
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
-            return ResponseData.of(requestDiv).respond();
-        }
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnIraiAuto();
         ValidationMessageControlPair 自動割付可能チェック = 自動割付可能チェック(requestDiv);
         if (自動割付可能チェック != null) {
@@ -186,9 +169,6 @@ public class NinteichosaIrai {
                                                           UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
-        if (isLocked(requestDiv.getDgNinteiTaskList().getSelectedItems())) {
-            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
-        }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -198,7 +178,6 @@ public class NinteichosaIrai {
                     DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode(),
                     DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().evaluate())).respond();
             } else {
-                release(requestDiv.getDgNinteiTaskList().getSelectedItems());
                 getHandler(requestDiv).initDataGrid();
                 return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
             }
@@ -206,7 +185,6 @@ public class NinteichosaIrai {
         if (new RString(DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode())
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
             getHandler(requestDiv).initDataGrid();
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
         }
@@ -246,31 +224,11 @@ public class NinteichosaIrai {
         param.setNinteiChosainCode(RString.EMPTY);
         param.setNinteichosaItakusakiCode(RString.EMPTY);
         param.setShichosonCode(RString.EMPTY);
-        return ResponseData.of(param).respond();
-    }
 
-    /**
-     * 「モバイル用データを出力する」ボタンを押下する場合、DB（認定調査依頼情報）データを更新します。
-     *
-     * @param requestDiv 完了処理・認定調査依頼Div
-     * @return レスポンス
-     */
-    public ResponseData onFinish_btnChosadataOutput(NinteichosaIraiDiv requestDiv) {
-        if (ResponseHolder.isReRequest()
-            && ResponseHolder.getMessageCode().toString().equals(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode())) {
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
-            return ResponseData.of(requestDiv).respond();
-        }
-        if (isLocked(requestDiv.getDgNinteiTaskList().getSelectedItems())) {
-            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
-        }
-        List<ShinseishoKanriNo> 申請書管理番号リスト = get申請書管理番号リスト(requestDiv);
-        for (ShinseishoKanriNo 申請書管理番号 : 申請書管理番号リスト) {
-            NinteichosaIraiManager.createInstance().update認定調査依頼情報(申請書管理番号.value());
-        }
-        release(requestDiv.getDgNinteiTaskList().getSelectedItems());
-        getHandler(requestDiv).initDataGrid();
-        return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+        FlowParameters fp = FlowParameters.of(new RString("key"), "Batch");
+        FlowParameterAccessor.merge(fp);
+
+        return ResponseData.of(param).respond();
     }
 
     /**
@@ -280,11 +238,6 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onClick_btnWaritukeShudo(NinteichosaIraiDiv requestDiv) {
-        if (ResponseHolder.isReRequest()
-            && ResponseHolder.getMessageCode().toString().equals(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode())) {
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
-            return ResponseData.of(requestDiv).respond();
-        }
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnWaritukeShudo();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
@@ -294,15 +247,11 @@ public class NinteichosaIrai {
                                                           UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
-        if (isLocked(requestDiv.getDgNinteiTaskList().getSelectedItems())) {
-            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
-        }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号,
                                 new ShinseishoKanriNo(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
             return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
         }
         return ResponseData.of(requestDiv).respond();
@@ -315,17 +264,9 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onBefore_btnTaOutput(NinteichosaIraiDiv requestDiv) {
-        if (ResponseHolder.isReRequest()
-            && ResponseHolder.getMessageCode().toString().equals(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode())) {
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
-            return ResponseData.of(requestDiv).respond();
-        }
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnDataOutput();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-        }
-        if (isLocked(requestDiv.getDgNinteiTaskList().getSelectedItems())) {
-            return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             Message message = UrQuestionMessages.処理実行の確認.getMessage();
@@ -343,7 +284,6 @@ public class NinteichosaIrai {
         model.set申請書管理番号リスト(list);
         model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
         requestDiv.setHiddenIuputModel(DataPassingConverter.serialize(model));
-        release(requestDiv.getDgNinteiTaskList().getSelectedItems());
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -387,11 +327,6 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onClick_btnChousaIraiKanryo(NinteichosaIraiDiv requestDiv) {
-        if (ResponseHolder.isReRequest()
-            && ResponseHolder.getMessageCode().toString().equals(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode())) {
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
-            return ResponseData.of(requestDiv).respond();
-        }
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChousaIraiKanryo();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
@@ -404,15 +339,12 @@ public class NinteichosaIrai {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
             .equals(ResponseHolder.getMessageCode())
             && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (isLocked(requestDiv.getDgNinteiTaskList().getSelectedItems())) {
-                requestDiv.setReadOnly(true);
-                return ResponseData.of(requestDiv).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
-            }
             要介護認定完了情報更新(requestDiv.getDgNinteiTaskList().getSelectedItems());
-            release(requestDiv.getDgNinteiTaskList().getSelectedItems());
             requestDiv.getCcdKanryoMsg().setMessage(
                 new RString("完了処理・認定調査依頼の保存処理が完了しました。"),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            FlowParameters fp = FlowParameters.of(new RString("key"), "Kanryo");
+            FlowParameterAccessor.merge(fp);
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.完了);
         }
         return ResponseData.of(requestDiv).respond();
@@ -542,15 +474,6 @@ public class NinteichosaIrai {
         return tmp要割付人数;
     }
 
-    private List<ShinseishoKanriNo> get申請書管理番号リスト(NinteichosaIraiDiv requestDiv) {
-        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getDgNinteiTaskList().getSelectedItems();
-        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
-        for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        }
-        return 申請書管理番号リスト;
-    }
-
     private RString get申請区分_申請時_コード(RString 名称) {
         for (NinteiShinseiShinseijiKubunCode kubunCode : NinteiShinseiShinseijiKubunCode.values()) {
             if (kubunCode.get名称().equals(名称)) {
@@ -571,20 +494,5 @@ public class NinteichosaIrai {
     private enum viewstateKeys {
 
         選択値;
-    }
-
-    private boolean isLocked(List<dgNinteiTaskList_Row> list) {
-        for (dgNinteiTaskList_Row row : list) {
-            if (!RealInitialLocker.tryGetLock(new LockingKey(前排他ロックキー.concat(row.getShinseishoKanriNo())))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void release(List<dgNinteiTaskList_Row> list) {
-        for (dgNinteiTaskList_Row row : list) {
-            RealInitialLocker.release(new LockingKey(前排他ロックキー.concat(row.getShinseishoKanriNo())));
-        }
     }
 }

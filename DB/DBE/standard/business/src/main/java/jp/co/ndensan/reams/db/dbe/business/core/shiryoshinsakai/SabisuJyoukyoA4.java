@@ -47,19 +47,19 @@ public class SabisuJyoukyoA4 {
     private static final Code A_06 = new Code("06A");
     private static final Code A_09 = new Code("09A");
     private static final Code B_09 = new Code("09B");
-    private static final RString 記号 = new RString("+");
     private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
     private static final int 基準時間算出用_10 = 10;
+    private static final int 基準時間算出用_5 = 5;
+    private static final int 基準時間算出用_12 = 12;
 
     /**
      * 項目の設定する。
      *
      * @param 項目 IchijihanteikekkahyoA4Entity
      * @param entity ItiziHanteiEntity
-     * @param ファイルパス ファイルパス
      */
-    public void set項目(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity, RString ファイルパス) {
+    public void set項目(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
         項目.set審査順(new RString(entity.getShinsakaiOrder()));
         項目.set年齢(new RString(entity.getAge()));
         項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
@@ -244,6 +244,9 @@ public class SabisuJyoukyoA4 {
     }
 
     private RString set有効期間(int 有効期間) {
+        if (有効期間 == 0) {
+            return RString.EMPTY;
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(有効期間)
                 .append(月間);
@@ -291,6 +294,6 @@ public class SabisuJyoukyoA4 {
     }
 
     private int getNumber(int 各基準時間) {
-        return 各基準時間 * 5 / 12;
+        return 各基準時間 * 基準時間算出用_5 / 基準時間算出用_12;
     }
 }

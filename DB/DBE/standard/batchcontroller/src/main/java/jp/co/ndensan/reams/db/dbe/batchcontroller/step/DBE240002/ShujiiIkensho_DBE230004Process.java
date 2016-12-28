@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshoirairirekiichiran.IkenshoirairirekiIchiranReportSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -60,5 +63,22 @@ public class ShujiiIkensho_DBE230004Process extends BatchProcessBase<ShujiiIkens
         IkenshoirairirekiIchiranReport report = IkenshoirairirekiIchiranReport.createFrom(
                 business.setDBE230004Item());
         report.writeBy(reportSourceWriter);
+    }
+
+    @Override
+    protected void afterExecute() {
+        バッチ出力条件リストの出力();
+    }
+
+    private void バッチ出力条件リストの出力() {
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
+        RString 市町村名 = 導入団体クラス.get市町村名();
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
+        OutputJokenhyoFactory.createInstance(business.
+                バッチ出力条件リストの出力(市町村名,
+                        出力ページ数,
+                        導入団体コード,
+                        ReportIdDBE.DBE230004.getReportId().value(), ReportIdDBE.DBE230004.getReportName())).print();
     }
 }

@@ -57,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -69,6 +70,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
+import org.joda.time.YearMonth;
 
 /**
  *
@@ -108,7 +110,6 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString モード_登録 = new RString("登録");
     private static final RString モード_中止 = new RString("中止");
     private static final RString モード_週COPY = new RString("週COPY");
-    private static final RString 保存 = new RString("保存");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -161,10 +162,10 @@ public class ShinsakaiKaisaiYoteiToroku {
         this.div = div;
         date = RDate.getNowDate();
         if (!ResponseHolder.isReRequest()) {
-            int 表示月の前月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).minusMonth(1).getMonthValue();
-            int 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, Integer.class);
+            FlexibleYearMonth 表示月の前月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).minusMonth(1).getYearMonth();
+            FlexibleYearMonth 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.class);
             if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
-                    && 表示月の前月 == 当月更新有りの月) {
+                    && 表示月の前月.equals(当月更新有りの月)) {
                 setMonthBefore();
             } else if (!is保存()) {
                 return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
@@ -190,10 +191,10 @@ public class ShinsakaiKaisaiYoteiToroku {
         this.div = div;
         date = RDate.getNowDate();
         if (!ResponseHolder.isReRequest()) {
-            int 表示月の翌月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).plusMonth(1).getMonthValue();
-            int 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
+            FlexibleYearMonth 表示月の翌月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).plusMonth(1).getYearMonth();
+            FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
             if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
-                    && 表示月の翌月 == 翌月更新有りの月) {
+                    && 表示月の翌月.equals(翌月更新有りの月)) {
                 setMonthAfter();
             } else if (!is保存()) {
                 return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
@@ -206,6 +207,58 @@ public class ShinsakaiKaisaiYoteiToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setMonthAfter();
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 変更用表示月 テキストボックスのonChangeイベントです。
+     *
+     * @param div ShinsakaiKaisaiYoteiTorokuDiv
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onChange_txtYearMonth(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        if (div.getTxtYearMonth().getText().isEmpty()) {
+            div.getBtnHyojiTsukiHenko().setDisabled(true);
+            return ResponseData.of(div).respond();
+        }
+        RString 現在表示月 = div.getLblMonth().getText();
+        RString 変更用表示月 = div.getTxtYearMonth().getValue().getYearMonth().seireki().separator(Separator.JAPANESE).toDateString();
+        if (現在表示月.equals(変更用表示月)) {
+            div.getBtnHyojiTsukiHenko().setDisabled(true);
+        } else {
+            div.getBtnHyojiTsukiHenko().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 表示月を変更する ボタンのonClickイベントです。
+     *
+     * @param div ShinsakaiKaisaiYoteiTorokuDiv
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_HyojiTsukiHenko(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        this.div = div;
+        if (!ResponseHolder.isReRequest()) {
+            RDate 変更年月Value = div.getTxtYearMonth().getValue();
+            FlexibleYearMonth 変更年月 = new FlexibleDate(変更年月Value.getYearValue(), 変更年月Value.getMonthValue(), 1).getYearMonth();
+            FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
+            FlexibleYearMonth 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.class);
+            if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
+                    && (変更年月.equals(翌月更新有りの月) || 変更年月.equals(当月更新有りの月))) {
+                setYearMonth();
+            } else if (!is保存()) {
+                return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
+            } else {
+                setYearMonth();
+            }
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            setYearMonth();
+        }
+        div.getBtnHyojiTsukiHenko().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -412,6 +465,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
         set開催予定入力欄(div.getTxtSeteibi().getValue());
+        div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
         return ResponseData.of(div).respond();
     }
@@ -424,9 +478,9 @@ public class ShinsakaiKaisaiYoteiToroku {
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_BtnWeekCopy(ShinsakaiKaisaiYoteiTorokuDiv div) {
 
-        int 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).getMonthValue();
-        int 週コピー実施翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
-        if (表示月 == 週コピー実施翌月更新月) {
+        FlexibleYearMonth 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).getYearMonth();
+        FlexibleYearMonth 週コピー実施翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
+        if (表示月.equals(週コピー実施翌月更新月)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(
                         new ErrorMessage(UrErrorMessages.更新不可_汎用.getMessage().getCode(),
@@ -482,14 +536,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                     for (ShinsakaiKaisaiYoteiJohoBusiness yoteiJohoBusiness : yoteiJohoNichiBusinessList.records()) {
                         内部実績AddEntity(yoteiJohoBusiness);
                     }
-                    if (翌月更新有無 == false) {
-                        翌月更新有無 = 週コピー開始日.getMonthValue() != 開始日.getMonthValue();
-                        if (翌月更新有無) {
-                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, true);
-                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 週コピー開始日.getMonthValue());
-                            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 開始日.getMonthValue());
-                        }
-                    }
+                    check翌月更新有無(週コピー開始日, 開始日);
                 }
             }
             モード = モード_週COPY;
@@ -513,9 +560,9 @@ public class ShinsakaiKaisaiYoteiToroku {
         this.div = div;
         set番号();
         FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
-        int 週コピー翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
+        FlexibleYearMonth 週コピー翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
         if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
-                && 表示月.getMonthValue() == 週コピー翌月更新月) {
+                && 表示月.getYearMonth().equals(週コピー翌月更新月)) {
             FlexibleYearMonth 設定月 = 表示月.minusMonth(1).getYearMonth();
             div.getLblMonth().setText(setLblMonth(設定月));
             div.getLblMonth2().setText(setLblMonthWareki(設定月));
@@ -693,8 +740,9 @@ public class ShinsakaiKaisaiYoteiToroku {
                 FlexibleYear 年度 = entity.get日付().getNendo();
                 RString 開催番号;
                 if (Saiban.referMetaData(SubGyomuCode.DBE認定支援, 汎用キー, 年度) == null) {
-                    long minNumber = new Long(年度.toString().concat("0001"));
-                    Saiban.insert(SubGyomuCode.DBE認定支援, 汎用キー, 年度, minNumber, 99999999, false, 1, 0, CheckDigitKind.Unchecked);
+                    long minNumber = Long.valueOf(年度.toString().concat("0001"));
+                    final long maxNumber = 99999999;
+                    Saiban.insert(SubGyomuCode.DBE認定支援, 汎用キー, 年度, minNumber, maxNumber, false, 1, 0, CheckDigitKind.Unchecked);
                 }
                 開催番号 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー, 年度).nextString();
                 RString 合議体番号 = new RString(entity.get合議体番号());
@@ -807,6 +855,17 @@ public class ShinsakaiKaisaiYoteiToroku {
         yoteiJohoEntityList2.add(entity);
     }
 
+    private void check翌月更新有無(FlexibleDate 週コピー開始日, FlexibleDate 開始日) throws IllegalStateException {
+        if (!翌月更新有無) {
+            翌月更新有無 = 週コピー開始日.getMonthValue() != 開始日.getMonthValue();
+            if (翌月更新有無) {
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, true);
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 週コピー開始日.getYearMonth());
+                ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 開始日.getYearMonth());
+            }
+        }
+    }
+
     private ValidationMessageControlPairs getWeekCopyCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
         ValidationMessageControlPairs validPairs = validationHandler.週コピーから日チェック();
         if (validPairs.iterator().hasNext()) {
@@ -872,8 +931,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_月;
 
         FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
-        int 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, Integer.class);
-        if (表示月.getMonthValue() == 当月更新有りの月) {
+        FlexibleYearMonth 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.class);
+        if (表示月.getYearMonth().equals(当月更新有りの月)) {
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_当月分);
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
@@ -894,13 +953,31 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_月;
 
         FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
-        int 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, Integer.class);
-        if (表示月.getMonthValue() == 翌月更新有りの月) {
+        FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
+        if (表示月.getYearMonth().equals(翌月更新有りの月)) {
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_翌月分);
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
+        clear入力();
+    }
 
+    private void setYearMonth() {
+        FlexibleDate date2 = new FlexibleDate(div.getTxtYearMonth().getValue().getYearValue(), div.getTxtYearMonth().getValue().getMonthValue(), 1);
+        div.getLblMonth().setText(setLblMonth(date2.getYearMonth()));
+        div.getLblMonth2().setText(setLblMonthWareki(date2.getYearMonth()));
+        モード = モード_月;
+
+        FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
+        FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
+        FlexibleYearMonth 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.class);
+        if (表示月.getYearMonth().equals(翌月更新有りの月)) {
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_翌月分);
+        } else if (表示月.getYearMonth().equals(当月更新有りの月)) {
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_当月分);
+        } else {
+            set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
+        }
         clear入力();
     }
 
@@ -950,8 +1027,11 @@ public class ShinsakaiKaisaiYoteiToroku {
 
             翌月更新有無 = false;
             ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, false);
-            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, 0);
-            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, 0);
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.EMPTY);
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.EMPTY);
+
+            div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), true);
 
             //当月分
             yoteiJohoEntityList = new ArrayList<>();

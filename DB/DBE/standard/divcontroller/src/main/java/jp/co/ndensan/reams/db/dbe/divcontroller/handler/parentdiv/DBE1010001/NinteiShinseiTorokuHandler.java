@@ -11,16 +11,19 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinse
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisaiJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -33,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 
 /**
@@ -142,6 +146,12 @@ public class NinteiShinseiTorokuHandler {
             div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         }
         div.getCcdKaigoNinteiShinseiKihon().initialize();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (HihokenshaKubunCode hihokenshaKubun : HihokenshaKubunCode.values()) {
+            dataSource.add(new KeyValueDataSource(hihokenshaKubun.getコード(), hihokenshaKubun.get名称()));
+        }
+        dataSource.remove(new KeyValueDataSource(HihokenshaKubunCode.生活保護.getコード(), HihokenshaKubunCode.生活保護.get名称()));
+        ((KaigoNinteiShinseiKihonJohoInputDiv)div.getCcdKaigoNinteiShinseiKihon()).getDdlHihokenshaKubun().setDataSource(dataSource);
         if (!RString.isNullOrEmpty(business.get支所コード())) {
             div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(business.get支所コード()));
         }
@@ -219,7 +229,7 @@ public class NinteiShinseiTorokuHandler {
             div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
                     result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
         }
-        div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiJokyo(result.get申請状況());
+        div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(result.get申請状況()).get名称());
         div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
         if (result.get申請種別() != null) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiShubetsu(JukyuShinseiJiyu.toValue(result.get申請種別().value()));
@@ -289,6 +299,7 @@ public class NinteiShinseiTorokuHandler {
         ninteiInput.setSubGyomuCode(SubGyomuCode.DBE認定支援.value());
         if (result.get要介護認定状態区分コード() != null) {
             ninteiInput.set要介護度コード(result.get要介護認定状態区分コード().value());
+            ninteiInput.set要介護度名称(YokaigoJotaiKubun99A.toValue(result.get要介護認定状態区分コード().value()).getName());
         }
         RDate 認定年月日 = flexibleDateToRDate(result.get認定年月日());
         RDate 有効開始年月日 = flexibleDateToRDate(result.get認定有効期間開始年月日());

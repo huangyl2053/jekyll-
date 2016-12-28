@@ -85,11 +85,6 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokensya() {
-        return this.getSakuseiIraibi().getCcdHokensya();
-    }
-
-    @JsonIgnore
     public Button getBtnKensakuClear() {
         return this.getSakuseiIraibi().getBtnKensakuClear();
     }
@@ -110,6 +105,11 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public IHokenshaListDiv getCcdHokensya() {
+        return this.getSakuseiIraibi().getCcdHokensya();
+    }
+
+    @JsonIgnore
     public DataGrid<dgIkenshoSakuseiHoshu_Row> getDgIkenshoSakuseiHoshu() {
         return this.getIkenshoSakuseiHoshu().getDgIkenshoSakuseiHoshu();
     }
@@ -117,16 +117,6 @@ public class IkenshoSakuseiHoshuShokaiDiv extends Panel {
     @JsonIgnore
     public void  setDgIkenshoSakuseiHoshu(DataGrid<dgIkenshoSakuseiHoshu_Row> dgIkenshoSakuseiHoshu) {
         this.getIkenshoSakuseiHoshu().setDgIkenshoSakuseiHoshu(dgIkenshoSakuseiHoshu);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtTotalCount() {
-        return this.getIkenshoSakuseiHoshu().getTxtTotalCount();
-    }
-
-    @JsonIgnore
-    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
-        this.getIkenshoSakuseiHoshu().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore

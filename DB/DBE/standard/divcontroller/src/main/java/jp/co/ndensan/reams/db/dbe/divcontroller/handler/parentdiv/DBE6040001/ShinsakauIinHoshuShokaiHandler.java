@@ -94,7 +94,6 @@ public class ShinsakauIinHoshuShokaiHandler {
             rowList.add(row);
         }
         div.getDgShinsakaiIinHoshu().setDataSource(rowList);
-        div.getTxtTotalCount().setValue(count);
         div.getTxtShinsaKaisu().setValue(総合計_審査回数);
         if (!ihinsaHoshuIchiranList.isEmpty()) {
             div.getTxtHoshuSogaku().setValue(ihinsaHoshuIchiranList.get(ZERO).get総合計_報酬総額());

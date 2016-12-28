@@ -603,8 +603,8 @@ public class ChosaTokkiShiryoShokaiDiv extends Panel implements IChosaTokkiShiry
         } else {
             this.radGenpoMask.setSelectedKey(SELECT原本);
             this.getGenpoTabContainer().setSelectedItem(this.getGenpoTabPanel1());
+            this.maskTabContainer.setDisplayNone(true);
         }
-        this.maskTabContainer.setDisplayNone(true);
 
         if (!imgGneponPathList.isEmpty()) {
             if (imgGneponPathList.size() >= 1) {

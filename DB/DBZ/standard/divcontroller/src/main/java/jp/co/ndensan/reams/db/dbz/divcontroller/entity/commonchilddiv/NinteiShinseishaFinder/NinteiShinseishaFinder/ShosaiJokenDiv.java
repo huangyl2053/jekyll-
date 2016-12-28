@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShosaiJoken のクラスファイル
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class ShosaiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -295,13 +296,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblNinteiChosaIinItakuSaki() {
-        return this.getNinteiChosa().getLblNinteiChosaIinItakuSaki();
+    public TextBoxDomainCode getTxtNinteiChosaIinItakuSaki() {
+        return this.getNinteiChosa().getTxtNinteiChosaIinItakuSaki();
     }
 
     @JsonIgnore
-    public void  setLblNinteiChosaIinItakuSaki(Label lblNinteiChosaIinItakuSaki) {
-        this.getNinteiChosa().setLblNinteiChosaIinItakuSaki(lblNinteiChosaIinItakuSaki);
+    public void  setTxtNinteiChosaIinItakuSaki(TextBoxDomainCode txtNinteiChosaIinItakuSaki) {
+        this.getNinteiChosa().setTxtNinteiChosaIinItakuSaki(txtNinteiChosaIinItakuSaki);
     }
 
     @JsonIgnore
@@ -325,13 +326,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblNinteiChosaInShimei() {
-        return this.getNinteiChosa().getLblNinteiChosaInShimei();
+    public TextBoxDomainCode getTxtNinteiChosaInShimei() {
+        return this.getNinteiChosa().getTxtNinteiChosaInShimei();
     }
 
     @JsonIgnore
-    public void  setLblNinteiChosaInShimei(Label lblNinteiChosaInShimei) {
-        this.getNinteiChosa().setLblNinteiChosaInShimei(lblNinteiChosaInShimei);
+    public void  setTxtNinteiChosaInShimei(TextBoxDomainCode txtNinteiChosaInShimei) {
+        this.getNinteiChosa().setTxtNinteiChosaInShimei(txtNinteiChosaInShimei);
     }
 
     @JsonIgnore
@@ -425,13 +426,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblShujiiIryokikan() {
-        return this.getShujiiJoho().getLblShujiiIryokikan();
+    public TextBoxDomainCode getTxtShujiiIryokikan() {
+        return this.getShujiiJoho().getTxtShujiiIryokikan();
     }
 
     @JsonIgnore
-    public void  setLblShujiiIryokikan(Label lblShujiiIryokikan) {
-        this.getShujiiJoho().setLblShujiiIryokikan(lblShujiiIryokikan);
+    public void  setTxtShujiiIryokikan(TextBoxDomainCode txtShujiiIryokikan) {
+        this.getShujiiJoho().setTxtShujiiIryokikan(txtShujiiIryokikan);
     }
 
     @JsonIgnore
@@ -455,13 +456,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblShujiiName() {
-        return this.getShujiiJoho().getLblShujiiName();
+    public TextBoxDomainCode getTxtShujiiShimei() {
+        return this.getShujiiJoho().getTxtShujiiShimei();
     }
 
     @JsonIgnore
-    public void  setLblShujiiName(Label lblShujiiName) {
-        this.getShujiiJoho().setLblShujiiName(lblShujiiName);
+    public void  setTxtShujiiShimei(TextBoxDomainCode txtShujiiShimei) {
+        this.getShujiiJoho().setTxtShujiiShimei(txtShujiiShimei);
     }
 
     @JsonIgnore
@@ -815,13 +816,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblZenkaiChosaItakusaki() {
-        return this.getZenkaiJoho().getLblZenkaiChosaItakusaki();
+    public TextBoxDomainCode getTxtZenkaiChosaItakusaki() {
+        return this.getZenkaiJoho().getTxtZenkaiChosaItakusaki();
     }
 
     @JsonIgnore
-    public void  setLblZenkaiChosaItakusaki(Label lblZenkaiChosaItakusaki) {
-        this.getZenkaiJoho().setLblZenkaiChosaItakusaki(lblZenkaiChosaItakusaki);
+    public void  setTxtZenkaiChosaItakusaki(TextBoxDomainCode txtZenkaiChosaItakusaki) {
+        this.getZenkaiJoho().setTxtZenkaiChosaItakusaki(txtZenkaiChosaItakusaki);
     }
 
     @JsonIgnore
@@ -845,13 +846,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblZenkaiShujiiIryokikan() {
-        return this.getZenkaiJoho().getLblZenkaiShujiiIryokikan();
+    public TextBoxDomainCode getTxtZenkaiShujiiIryokikan() {
+        return this.getZenkaiJoho().getTxtZenkaiShujiiIryokikan();
     }
 
     @JsonIgnore
-    public void  setLblZenkaiShujiiIryokikan(Label lblZenkaiShujiiIryokikan) {
-        this.getZenkaiJoho().setLblZenkaiShujiiIryokikan(lblZenkaiShujiiIryokikan);
+    public void  setTxtZenkaiShujiiIryokikan(TextBoxDomainCode txtZenkaiShujiiIryokikan) {
+        this.getZenkaiJoho().setTxtZenkaiShujiiIryokikan(txtZenkaiShujiiIryokikan);
     }
 
     @JsonIgnore

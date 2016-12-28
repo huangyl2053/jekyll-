@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SonotaKikanJohoEntity {
-    
+
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString hokensha;
     private RString sonotaKikanCode;

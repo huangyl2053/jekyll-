@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
@@ -81,7 +82,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class SabisuJyoukyoA3 {
 
-    private static final RString 記号 = new RString("+");
     private static final RString 月間 = new RString("月間");
     private static final Code A_99 = new Code("99A");
     private static final Code A_02 = new Code("02A");
@@ -111,8 +111,8 @@ public class SabisuJyoukyoA3 {
     private static final int 連番_20 = 20;
     private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
-    private static final Code 予防給付サービス = new Code("1");
-    private static final Code 介護給付サービス = new Code("2");
+    private static final Code 予防給付サービス = new Code(ServiceKubun.予防.getCode());
+    private static final Code 介護給付サービス = new Code(ServiceKubun.介護.getCode());
     private static final RString 単位 = new RString(":");
     private static final RString 施設名ファイル名 = new RString("C0004_BAK.png");
     private static final RString 住所ファイル名 = new RString("C0005_BAK.png");
@@ -121,6 +121,8 @@ public class SabisuJyoukyoA3 {
     private static final RString 認定調査主治段階改善 = new RString("☆");
     private static final RString SEPARATOR = new RString("/");
     private static final int 基準時間算出用_10 = 10;
+    private static final int 基準時間算出用_5 = 5;
+    private static final int 基準時間算出用_12 = 12;
 
     /**
      * サービスの状況を設定します。
@@ -569,8 +571,9 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
@@ -583,15 +586,17 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName, RString ファイルパス) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(ファイルパス));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(ファイルパス)).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 
     /**
@@ -1295,6 +1300,9 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString set有効期間(int 有効期間) {
+        if (有効期間 == 0) {
+            return RString.EMPTY;
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(有効期間)
                 .append(月間);
@@ -1820,6 +1828,6 @@ public class SabisuJyoukyoA3 {
     }
 
     private int getNumber(int 各基準時間) {
-        return 各基準時間 * 5 / 12;
+        return 各基準時間 * 基準時間算出用_5 / 基準時間算出用_12;
     }
 }

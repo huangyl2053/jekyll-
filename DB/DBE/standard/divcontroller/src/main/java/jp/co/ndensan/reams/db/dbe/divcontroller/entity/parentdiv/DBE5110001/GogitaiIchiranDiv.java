@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GogitaiIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class GogitaiIchiranDiv extends Panel {
     @JsonProperty("btnTsuika")
     private Button btnTsuika;
     @JsonProperty("btnCSVShutsuryoku")
-    private Button btnCSVShutsuryoku;
+    private ButtonDownLoad btnCSVShutsuryoku;
     @JsonProperty("dgGogitaiIchiran")
     private DataGrid<dgGogitaiIchiran_Row> dgGogitaiIchiran;
 
@@ -57,7 +57,7 @@ public class GogitaiIchiranDiv extends Panel {
      * @return btnCSVShutsuryoku
      */
     @JsonProperty("btnCSVShutsuryoku")
-    public Button getBtnCSVShutsuryoku() {
+    public ButtonDownLoad getBtnCSVShutsuryoku() {
         return btnCSVShutsuryoku;
     }
 
@@ -66,7 +66,7 @@ public class GogitaiIchiranDiv extends Panel {
      * @param btnCSVShutsuryoku btnCSVShutsuryoku
      */
     @JsonProperty("btnCSVShutsuryoku")
-    public void setBtnCSVShutsuryoku(Button btnCSVShutsuryoku) {
+    public void setBtnCSVShutsuryoku(ButtonDownLoad btnCSVShutsuryoku) {
         this.btnCSVShutsuryoku = btnCSVShutsuryoku;
     }
 

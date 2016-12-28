@@ -148,11 +148,26 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(set認定調査予定未定者一覧作成条件(paramter.get作成条件()));
-        出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日From()));
-        出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日To()));
-        出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト審査日()));
-        出力条件.add(paramter.get認定調査結果と主治医意見書のチェックリスト審査会());
+        if (new RString("1").equals(paramter.get作成条件())) {
+            出力条件.add(new RString("未割当"));
+        } else if (new RString("2").equals(paramter.get作成条件())) {
+            出力条件.add(new RString("申請日の範囲を指定"));
+            if (paramter.get認定調査結果と主治医意見書のチェックリスト申請日From() == null && paramter.get認定調査結果と主治医意見書のチェックリスト申請日To() == null) {
+                出力条件.add(new RString("指定なし"));
+
+            } else {
+                RString 申請日FROM = dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日From());
+                RString 申請日TO = dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日To());
+                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+            }
+
+        } else if (new RString("3").equals(paramter.get作成条件())) {
+            出力条件.add(new RString("審査日を指定"));
+            出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト審査日()));
+        } else if (new RString("4").equals(paramter.get作成条件())) {
+            出力条件.add(new RString("審査会の開催番号を指定"));
+            出力条件.add((paramter.get認定調査結果と主治医意見書のチェックリスト審査会()));
+        }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE012003.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
