@@ -77,5 +77,44 @@
         <result property="kozaMeigininKana" column="dbT5914SonotaKikanJoho_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="kozaMeiginin" column="dbT5914SonotaKikanJoho_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
+    
+    <select resultOrdered="true" id="getSoNoTaKiKanJohoList"
+            resultMap="ResultMap_DbT5914SonotaKikanJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sonotakikanguide.SoNoTaKikanGuideParameter" fetchSize="500">
+             SELECT
+                DbT5914SonotaKikanJoho.*	
+            FROM	
+                (<include refid="noDeleted_DbT5914SonotaKikanJoho" />) AS DbT5914SonotaKikanJoho
+         <where>
+            <if test="is含まない">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_haishiFlag" = true
+            </if>
+            <if test="is証記載保険者番号Flag">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_shoKisaiHokenshaNo" = #{証記載保険者番号}
+            </if>
+            <if test="isその他機関コードFromFlag">
+                AND
+                #{その他機関コードFrom} <![CDATA[<=]]> dbT5914SonotaKi."dbT5914SonotaKikanJoho_sonotaKikanCode"
+            </if>
+            <if test="isその他機関コードToFlag">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode" <![CDATA[<=]]> #{その他機関コードTo}
+            </if>
+            <if test="isその他機関名称Flag">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_kikanMeisho"  LIKE '%' || #{その他機関名称} || '%'
+            </if>
+            <if test="is調査委託先区分Flag">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_chosaItakuKubun"  LIKE '%' || #{調査委託先区分} || '%'
+            </if>
+        </where>
+        ORDER BY	
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_shoKisaiHokenshaNo",
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode"
+        LIMIT #{最大表示件数}
+    </select>
 
 </mapper>

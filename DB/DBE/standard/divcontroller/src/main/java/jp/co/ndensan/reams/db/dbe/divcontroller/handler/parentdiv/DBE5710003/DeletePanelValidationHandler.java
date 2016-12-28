@@ -112,7 +112,7 @@ public class DeletePanelValidationHandler {
      */
     public ValidationMessageControlPairs マスクイメージファイル存在チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.その他資料存在しない));
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.マスクイメージ存在しない));
         return validationMessages;
     }
 

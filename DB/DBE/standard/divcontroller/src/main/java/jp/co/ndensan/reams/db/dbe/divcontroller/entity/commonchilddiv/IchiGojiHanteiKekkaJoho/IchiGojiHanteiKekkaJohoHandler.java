@@ -34,7 +34,8 @@ public class IchiGojiHanteiKekkaJohoHandler {
     private static final RString 済 = new RString("済");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
-    private static final RString 照会 = new RString("照会");
+    //private static final RString モード_登録 = new RString("登録");
+    private static final RString モード_照会 = new RString("照会");
 
     /**
      * コンストラクタです。
@@ -50,7 +51,7 @@ public class IchiGojiHanteiKekkaJohoHandler {
      *
      * @param business 要介護認定一五次判定結果情報
      */
-    public void onLoad(IchiGojiHanteiKekkaJohoBusiness business) {
+    public void onLoad(IchiGojiHanteiKekkaJohoBusiness business, RString モード) {
         if (!business.isEmpty()) {
             div.getTxtIchijiHanteibi().setValue(business.get判定年月日());
             Code 判定結果コード = business.get判定結果コード();
@@ -119,10 +120,11 @@ public class IchiGojiHanteiKekkaJohoHandler {
             if (認知症自立度Ⅱ_蓋然性 != null) {
                 div.getTxtGaizensei().setValue(new Decimal(認知症自立度Ⅱ_蓋然性.toString()));
             }
-            if (照会.equals(div.getHdnMode())) {
+            if (モード_照会.equals(div.getHdnMode())) {
                 set照会モードの戻り値(business);
             }
         }
+        set表示状態(モード);
     }
 
     /**
@@ -187,5 +189,11 @@ public class IchiGojiHanteiKekkaJohoHandler {
         builder.set中間評価項目得点第5群(business.get中間評価項目得点第五群());
 
         div.setHdnIchiGojiHanteiKekka(DataPassingConverter.serialize(builder.build()));
+    }
+
+    private void set表示状態(RString モード) {
+        if (モード_照会.equals(モード)) {
+            div.getBtnKakutei().setDisplayNone(true);
+        }
     }
 }

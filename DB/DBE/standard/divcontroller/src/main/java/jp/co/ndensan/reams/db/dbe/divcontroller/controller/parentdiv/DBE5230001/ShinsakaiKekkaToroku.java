@@ -43,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -73,6 +72,7 @@ public class ShinsakaiKekkaToroku {
     private static final RString 意見書定型文GroupCode = new RString("5201");
     private static final RString 一次判定結果変更理由定型文GroupCode = new RString("5103");
     private static final Code 二次判定結果入力方法_画面入力 = new Code("1");
+    private static final RString 一_五次判定ダイアログ_照会モード = new RString("照会");
 
     private final ShinsakaiKekkaTorokuManager manager;
 
@@ -113,6 +113,10 @@ public class ShinsakaiKekkaToroku {
         if (!前排他キーのセット()) {
             handler.set操作不可();
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
+        if (iChiRanList.isEmpty()) {
+            handler.set操作不可();
+            handler.display対象者無();
         }
         return ResponseData.of(div).respond();
     }
@@ -426,7 +430,7 @@ public class ShinsakaiKekkaToroku {
      */
     public ResponseData onChange_NijiHantei(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
-        handler.set認定期間月数();
+        handler.set認定期間月数from申請内容();
         handler.change有効月数に関連するコントロール();
         handler.set認定期間開始日();
         handler.set認定期間終了日();
@@ -474,7 +478,7 @@ public class ShinsakaiKekkaToroku {
             YokaigoJotaiKubun09 今回二次判定結果,
             FlexibleDate 申請日,
             FlexibleDate 前回有効期間終了日) {
-        if (前回二次判定結果.equals(今回二次判定結果)) {
+        if (前回二次判定結果 == 今回二次判定結果) {
             if (申請日.plusDay(更新申請可能日数).isBeforeOrEquals(前回有効期間終了日)) {
                 return NinteiShinseiKubunHorei.区分変更申請;
             }
@@ -566,6 +570,12 @@ public class ShinsakaiKekkaToroku {
     public ResponseData onChange_NinteiKikanMonth(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         handler.change有効月数に関連するコントロール();
+        if (handler.get認定期間月数() == 0) {
+            return ResponseData.of(div).respond();
+        }
+        if (handler.get認定期間開始日() == null) {
+            handler.set認定期間開始日();
+        }
         handler.set認定期間終了日();
         return ResponseData.of(div).respond();
     }
@@ -684,6 +694,7 @@ public class ShinsakaiKekkaToroku {
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onBefore_btnIchigoHantei(ShinsakaiKekkaTorokuDiv div) {
         RString 申請書管理番号 = getHandler(div).get申請書管理番号();
+        div.getKobetsuHyojiArea().setIchigoMode(一_五次判定ダイアログ_照会モード);
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
         return ResponseData.of(div).respond();
     }
@@ -695,7 +706,14 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onChange_NinteiKikanFrom(ShinsakaiKekkaTorokuDiv div) {
-        getHandler(div).set認定期間終了日();
+        ShinsakaiKekkaTorokuHandler handler = getHandler(div);
+        if (handler.get認定期間開始日() == null) {
+            return ResponseData.of(div).respond();
+        }
+        if (handler.get認定期間月数() == 0) {
+            handler.set認定期間月数from申請内容();
+        }
+        handler.set認定期間終了日();
         return ResponseData.of(div).respond();
     }
 
@@ -706,7 +724,11 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onChange_NinteiKikanTo(ShinsakaiKekkaTorokuDiv div) {
-        getHandler(div).set認定期間月数();
+        ShinsakaiKekkaTorokuHandler handler = getHandler(div);
+        if (handler.get認定期間開始日() == null || handler.get認定期間終了日() == null) {
+            return ResponseData.of(div).respond();
+        }
+        getHandler(div).set認定期間月数from認定期間();
         getHandler(div).change有効月数に関連するコントロール();
         return ResponseData.of(div).respond();
     }

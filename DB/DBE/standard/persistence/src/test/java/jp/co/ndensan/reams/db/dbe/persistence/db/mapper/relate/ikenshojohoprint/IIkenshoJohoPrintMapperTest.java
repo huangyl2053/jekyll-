@@ -28,6 +28,13 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
     }
 
     @Test
+    public void get主治医意見書依頼未処理者情報_動作確認() {
+        List<IkenshoJohoPrintRelateEntity> result = sut.get主治医意見書依頼未処理者情報(create意見書依頼未処理者情報検索条件());
+        System.out.println("意見書依頼未処理者 件数：" + result.size());
+        assertTrue(true);
+    }
+
+    @Test
     public void get主治医意見書作成依頼変更者情報_動作確認() {
         List<IkenshoJohoPrintRelateEntity> result = sut.get主治医意見書作成依頼変更者情報(create変更者情報検索条件());
         System.out.println("作成依頼変更者 件数：" + result.size());
@@ -39,6 +46,22 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
         List<IkenshoJohoPrintRelateEntity> result = sut.get主治医意見書作成料請求情報(create作成料請求検索条件());
         System.out.println("作成料請求 件数：" + result.size());
         assertTrue(true);
+    }
+
+    private IkenshoJohoPrintMapperParameter create意見書依頼未処理者情報検索条件() {
+        RString 作成条件 = new RString("2");
+        FlexibleDate 申請開始日 = new FlexibleDate(1999, 1, 1);
+        FlexibleDate 申請終了日 = new FlexibleDate(2017, 12, 31);
+        RString 通常コード = new RString(0);
+        RString 延期コード = new RString(3);
+        IkenshoJohoPrintMapperParameter param = IkenshoJohoPrintMapperParameter.createSelectByKeyParam(
+                RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, RString.EMPTY,
+                作成条件, 申請開始日, 申請終了日,
+                FlexibleDate.EMPTY, FlexibleDate.EMPTY,
+                RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
+                RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
+                通常コード, 延期コード, FlexibleDate.EMPTY);
+        return param;
     }
 
     private IkenshoJohoPrintMapperParameter create変更者情報検索条件() {
