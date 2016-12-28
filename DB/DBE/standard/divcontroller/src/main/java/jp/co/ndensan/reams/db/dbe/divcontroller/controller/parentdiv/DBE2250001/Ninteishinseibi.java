@@ -112,6 +112,10 @@ public class Ninteishinseibi {
                         + 概況調査_基本調査データCSV名.toString() + "<br>" + 概況特記データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
             }
         }
+        if (ファイルパス_基本調査データ.isEmpty() || ファイルパス_概況特記データ.isEmpty() || ファイルパス_特記情報データ.isEmpty()) {
+            throw new ApplicationException("以下の３ファイルを同時に取込んでください。<br>"
+                    + 概況調査_基本調査データCSV名.toString() + "<br>" + 概況特記データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
+        }
 
         List<ChosaKekkaNyuryokuCsvEntity> csvEntityList_基本調査データ = データ取込_基本調査データ(ファイルパス_基本調査データ);
         ValidationMessageControlPairs vallidation = getValidatisonHandler(div).取込対象データチェック(csvEntityList_基本調査データ.isEmpty());
@@ -152,7 +156,8 @@ public class Ninteishinseibi {
             概況特記事項 = new GaikyoTokki(new ShinseishoKanriNo(
                     entity.get申請書管理番号()),
                     Integer.valueOf(entity.get認定調査依頼履歴番号().toString()),
-                    entity.get概況特記テキスト_イメージ区分コード())
+                    entity.get概況特記テキスト_イメージ区分コード(),
+                    new Code(GenponMaskKubun.原本.getコード()))
                     .createBuilderForEdit()
                     .set住宅改修(entity.get住宅改修改修箇所())
                     .set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名())
@@ -219,14 +224,14 @@ public class Ninteishinseibi {
 
                 if (!RString.isNullOrEmpty(row.getJyoutai())) {
                     NinteichosahyoGaikyoChosa 概況調査 = 認定調査票_概況調査の登録処理(row, div); //5202
-                    GaikyoTokki 概況特記事項 = 概況特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5206 *OK
-                    List<NinteichosahyoTokkijiko> 特記事項List = 特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5205 *OK
+                    GaikyoTokki 概況特記事項 = 概況特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5206
+                    List<NinteichosahyoTokkijiko> 特記事項List = 特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5205
                     NinteichosahyoKihonChosa 基本調査 = 認定調査票_基本調査の登録処理(row, div); //5203
-                    List<NinteichosahyoChosaItem> 調査項目List = 認定調査票_基本調査調査項目の登録処理(row); //5211 *OK
-                    List<NinteichosahyoServiceJokyo> サービス状況List = 認定調査票_概況調査サービスの状況の登録処理(row); //5207 *OK
-                    List<NinteichosahyoServiceJokyoFlag> サービス状況フラグList = 認定調査票_概況調査サービスの状況フラグの登録処理(row); //5208 *OK
-                    List<NinteichosahyoKinyuItem> 記入項目List = 認定調査票_概況調査記入項目の登録処理(row); //5209 *OK
-                    List<NinteichosahyoShisetsuRiyo> 施設利用List = 認定調査票_概況調査施設利用の登録処理(row); //5210 *OK
+                    List<NinteichosahyoChosaItem> 調査項目List = 認定調査票_基本調査調査項目の登録処理(row); //5211
+                    List<NinteichosahyoServiceJokyo> サービス状況List = 認定調査票_概況調査サービスの状況の登録処理(row); //5207
+                    List<NinteichosahyoServiceJokyoFlag> サービス状況フラグList = 認定調査票_概況調査サービスの状況フラグの登録処理(row); //5208
+                    List<NinteichosahyoKinyuItem> 記入項目List = 認定調査票_概況調査記入項目の登録処理(row); //5209
+                    List<NinteichosahyoShisetsuRiyo> 施設利用List = 認定調査票_概況調査施設利用の登録処理(row); //5210
 
                     manager.認定調査一覧更新処理(
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
@@ -288,6 +293,9 @@ public class Ninteishinseibi {
     private List<NinteichosahyoChosaItem> 認定調査票_基本調査調査項目の登録処理(dgNinteiChosaData_Row row) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
+        if (row.getRemban().isEmpty()) {
+            return new ArrayList<>();
+        }
         List<RString> 調査項目連番List = row.getRemban().split(",");
         List<RString> 調査項目List = row.getResearchItem().split(",");
 
@@ -309,6 +317,9 @@ public class Ninteishinseibi {
     private List<NinteichosahyoServiceJokyo> 認定調査票_概況調査サービスの状況の登録処理(dgNinteiChosaData_Row row) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
+        if (row.getServiceJokyoRemban().isEmpty()) {
+            return new ArrayList<>();
+        }
         List<RString> サービス状況連番List = row.getServiceJokyoRemban().split(",");
         List<RString> 状況List = row.getServiceJokyo().split(",");
 
@@ -330,6 +341,9 @@ public class Ninteishinseibi {
     private List<NinteichosahyoServiceJokyoFlag> 認定調査票_概況調査サービスの状況フラグの登録処理(dgNinteiChosaData_Row row) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
+        if (row.getServiceJokyoFlagRemban().isEmpty()) {
+            return new ArrayList<>();
+        }
         List<RString> サービス状況フラグ連番List = row.getServiceJokyoFlagRemban().split(",");
         List<RString> 状況フラグList = row.getServiceJokyoFlag().split(",");
 
@@ -351,6 +365,9 @@ public class Ninteishinseibi {
     private List<NinteichosahyoKinyuItem> 認定調査票_概況調査記入項目の登録処理(dgNinteiChosaData_Row row) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
+        if (row.getServiceJokyoKinyuRemban().isEmpty()) {
+            return new ArrayList<>();
+        }
         List<RString> 記入項目連番List = row.getServiceJokyoKinyuRemban().split(",");
         List<RString> 記入項目List = row.getServiceJokyoKinyu().split(",");
 
@@ -372,6 +389,9 @@ public class Ninteishinseibi {
     private List<NinteichosahyoShisetsuRiyo> 認定調査票_概況調査施設利用の登録処理(dgNinteiChosaData_Row row) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
+        if (row.getShisetsuRiyoFlagRemban().isEmpty()) {
+            return new ArrayList<>();
+        }
         List<RString> 施設利用連番List = row.getShisetsuRiyoFlagRemban().split(",");
         List<RString> 施設利用List = row.getShisetsuRiyoFlag().split(",");
 
