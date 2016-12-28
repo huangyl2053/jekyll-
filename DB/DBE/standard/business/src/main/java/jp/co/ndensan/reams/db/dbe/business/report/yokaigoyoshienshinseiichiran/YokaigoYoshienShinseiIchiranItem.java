@@ -29,7 +29,7 @@ public class YokaigoYoshienShinseiIchiranItem {
     private FlexibleDate seinengappiYMD;
     private Code seibetsu;
     private Code koroshoIfShikibetsuCode;
-    private Code nijiHanteiYokaigoJotaiKubun;
+    private RString nijiHanteiYokaigoJotaiKubun;
     private int nijiHanteiNinteiYukoKikan;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;

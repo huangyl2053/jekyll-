@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbe.business.core.yokaigoyoshienchiran;
 
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranItem;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseimonitor.ShinseiMonitorEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -43,8 +48,7 @@ public class YokaigoyoShienchiran {
         item.setSeibetsu(entity.get性別() == null ? Code.EMPTY : new Code(entity.get性別().toString()));
         item.setKoroshoIfShikibetsuCode(entity.get厚労省認定ソフトバージョン() == null
                 ? Code.EMPTY : new Code(entity.get厚労省認定ソフトバージョン().toString()));
-        item.setNijiHanteiYokaigoJotaiKubun(entity.get前回二次判定結果コード() == null
-                ? Code.EMPTY : new Code(entity.get前回二次判定結果コード().toString()));
+        item.setNijiHanteiYokaigoJotaiKubun(get前回二次判定結果(entity));
         item.setNijiHanteiNinteiYukoKikan(entity.get前回月数());
         item.setNijiHanteiNinteiYukoKaishiYMD(entity.get前回認定有効期間開始日());
         item.setNijiHanteiNinteiYukoShuryoYMD(entity.get前回認定有効期間終了日());
@@ -69,4 +73,22 @@ public class YokaigoyoShienchiran {
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         return hakkoYMD.toRString();
     }
+
+    private RString get前回二次判定結果(ShinseiMonitorEntity entity) {
+        RString 前回二次判定結果 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(entity.get前回二次判定結果コード())) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省認定ソフトバージョン())) {
+                前回二次判定結果 = YokaigoJotaiKubun99.toValue(entity.get前回二次判定結果コード()).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省認定ソフトバージョン())) {
+                前回二次判定結果 = YokaigoJotaiKubun02.toValue(entity.get前回二次判定結果コード()).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省認定ソフトバージョン())) {
+                前回二次判定結果 = YokaigoJotaiKubun06.toValue(entity.get前回二次判定結果コード()).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省認定ソフトバージョン())
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省認定ソフトバージョン())) {
+                前回二次判定結果 = YokaigoJotaiKubun09.toValue(entity.get前回二次判定結果コード()).get名称();
+            }
+        }
+        return 前回二次判定結果;
+    }
+
 }
