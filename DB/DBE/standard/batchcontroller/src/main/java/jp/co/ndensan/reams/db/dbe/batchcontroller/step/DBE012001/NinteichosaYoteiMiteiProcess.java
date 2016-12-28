@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1390-080 dongyabin
  */
-public class NinteichosaYoteiMiteiProcess extends BatchKeyBreakBase<NinteichosaYoteiMiteiRelateEntity> {
+public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYoteiMiteiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei."
@@ -97,21 +97,7 @@ public class NinteichosaYoteiMiteiProcess extends BatchKeyBreakBase<NinteichosaY
     }
 
     @Override
-    protected void keyBreakProcess(NinteichosaYoteiMiteiRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            NinteichosaYoteiMiteiReport report = new NinteichosaYoteiMiteiReport(current, index_tmp);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
-    }
-
-    private boolean hasBrek(NinteichosaYoteiMiteiRelateEntity before, NinteichosaYoteiMiteiRelateEntity current) {
-        return !before.getDbT5101_hihokenshaName().equals(current.getDbT5101_hihokenshaName());
-    }
-
-    @Override
-    protected void usualProcess(NinteichosaYoteiMiteiRelateEntity entity) {
+    protected void process(NinteichosaYoteiMiteiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         NinteichosaYoteiMiteiReport report = new NinteichosaYoteiMiteiReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);

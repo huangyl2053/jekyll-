@@ -52,6 +52,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 完了処理・認定調査結果入手のクラスです。
@@ -226,6 +228,7 @@ public class NinteichosaKekkaNyushu {
             requestDiv.getCcdKanryoMsg().setMessage(
                 new RString("完了処理・認定調査結果入手の保存処理が完了しました。"),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Kanryo")));
             return ResponseData.of(requestDiv).setState(DBE2060001StateName.完了);
         }
         return ResponseData.of(requestDiv).respond();

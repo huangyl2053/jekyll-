@@ -271,7 +271,7 @@ public class Ikenshoget {
                 }
             }
             RealInitialLocker.release(排他キー);
-            div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書入手の保存処理が完了しました。"),
+            div.getCcdKanryoMsg().setMessage(new RString("基本運用・主治医意見書入手の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2070001StateName.完了);
         }

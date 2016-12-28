@@ -86,6 +86,8 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private RString hasData;
     @JsonProperty("prevNinteiKikanMonth")
     private RString prevNinteiKikanMonth;
+    @JsonProperty("ichigoMode")
+    private RString ichigoMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -667,6 +669,24 @@ public class KobetsuHyojiAreaDiv extends Panel {
     @JsonProperty("prevNinteiKikanMonth")
     public void setPrevNinteiKikanMonth(RString prevNinteiKikanMonth) {
         this.prevNinteiKikanMonth = prevNinteiKikanMonth;
+    }
+
+    /*
+     * getichigoMode
+     * @return ichigoMode
+     */
+    @JsonProperty("ichigoMode")
+    public RString getIchigoMode() {
+        return ichigoMode;
+    }
+
+    /*
+     * setichigoMode
+     * @param ichigoMode ichigoMode
+     */
+    @JsonProperty("ichigoMode")
+    public void setIchigoMode(RString ichigoMode) {
+        this.ichigoMode = ichigoMode;
     }
 
     // </editor-fold>

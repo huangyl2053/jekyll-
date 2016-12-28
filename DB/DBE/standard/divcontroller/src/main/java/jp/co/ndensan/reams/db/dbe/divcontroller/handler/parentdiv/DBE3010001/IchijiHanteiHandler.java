@@ -10,9 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijipanteisyori.IChiJiPanTeiSyoRiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.itizihanteishori.ItziHanteiShoriBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.IchijiHanteiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001.dgIchijiHanteiTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -24,11 +28,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 public class IchijiHanteiHandler {
 
     private final IchijiHanteiDiv div;
+    private static final int DIVIDE_VALUE = 10;
 
     /**
      * 一次判定処理関連のメニューIDをまとめて定義します。
@@ -235,7 +242,7 @@ public class IchijiHanteiHandler {
             builder.set要介護認定状態の安定性コード(new Code(JotaiAnteiseiCode.
                     valueOf(row.getJotaiAnteiseiCode().toString()).getコード()));
         }
-        if (!RString.isNullOrEmpty(row.getNinchishoJiritsudoIIijoNoGaizensei())) {
+        if (row.getNinchishoJiritsudoIIijoNoGaizensei().getValue() != null) {
             builder.set認知症自立度Ⅱ以上の蓋然性(new Decimal(row.getNinchishoJiritsudoIIijoNoGaizensei().toString()));
         }
         if (!RString.isNullOrEmpty(row.getSuiteiKyufuKubunCode())) {
@@ -280,26 +287,26 @@ public class IchijiHanteiHandler {
             row.setKeikokuCode(business.get要介護認定一次判定警告コード());
             row.getChosaJissibi().setValue(business.get認定調査実施年月日());
             row.getIkenshoJuryobi().setValue(business.get主治医意見書受領年月日());
-            row.setKijunJikan(new RString(String.valueOf(business.get要介護認定等基準時間())));
-            row.setKijunJikanShokuji(new RString(String.valueOf(business.get要介護認定等基準時間_食事())));
-            row.setKijunJikanHaisetsu(new RString(String.valueOf(business.get要介護認定等基準時間_排泄())));
-            row.setKijunJikanIdo(new RString(String.valueOf(business.get要介護認定等基準時間_移動())));
-            row.setKijunJikanSeiketsuHoji(new RString(String.valueOf(business.get要介護認定等基準時間_清潔保持())));
-            row.setKijunJikanKansetsuCare(new RString(String.valueOf(business.get要介護認定等基準時間_間接ケア())));
-            row.setKijunJikanBPSDKanren(new RString(String.valueOf(business.get要介護認定等基準時間_BPSD関連())));
-            row.setKijunJikanKinoKunren(new RString(String.valueOf(business.get要介護認定等基準時間_機能訓練())));
-            row.setKijunJikanIryoKanren(new RString(String.valueOf(business.get要介護認定等基準時間_医療関連())));
-            row.setKijunJikanNinchishoKasan(new RString(String.valueOf(business.get要介護認定等基準時間_認知症加算())));
-            row.setChukanHyokaKomoku1gun(new RString(String.valueOf(business.get中間評価項目得点第1群())));
-            row.setChukanHyokaKomoku2gun(new RString(String.valueOf(business.get中間評価項目得点第2群())));
-            row.setChukanHyokaKomoku3gun(new RString(String.valueOf(business.get中間評価項目得点第3群())));
-            row.setChukanHyokaKomoku4gun(new RString(String.valueOf(business.get中間評価項目得点第4群())));
-            row.setChukanHyokaKomoku5gun(new RString(String.valueOf(business.get中間評価項目得点第5群())));
+            row.getKijunJikan().setValue(divideValue(business.get要介護認定等基準時間()));
+            row.getKijunJikanShokuji().setValue(divideValue(business.get要介護認定等基準時間_食事()));
+            row.getKijunJikanHaisetsu().setValue(divideValue(business.get要介護認定等基準時間_排泄()));
+            row.getKijunJikanIdo().setValue(divideValue(business.get要介護認定等基準時間_移動()));
+            row.getKijunJikanSeiketsuHoji().setValue(divideValue(business.get要介護認定等基準時間_清潔保持()));
+            row.getKijunJikanKansetsuCare().setValue(divideValue(business.get要介護認定等基準時間_間接ケア()));
+            row.getKijunJikanBPSDKanren().setValue(divideValue(business.get要介護認定等基準時間_BPSD関連()));
+            row.getKijunJikanKinoKunren().setValue(divideValue(business.get要介護認定等基準時間_機能訓練()));
+            row.getKijunJikanIryoKanren().setValue(divideValue(business.get要介護認定等基準時間_医療関連()));
+            row.getKijunJikanNinchishoKasan().setValue(divideValue(business.get要介護認定等基準時間_認知症加算()));
+            row.getChukanHyokaKomoku1gun().setValue(divideValue(business.get中間評価項目得点第1群()));
+            row.getChukanHyokaKomoku2gun().setValue(divideValue(business.get中間評価項目得点第2群()));
+            row.getChukanHyokaKomoku3gun().setValue(divideValue(business.get中間評価項目得点第3群()));
+            row.getChukanHyokaKomoku4gun().setValue(divideValue(business.get中間評価項目得点第4群()));
+            row.getChukanHyokaKomoku5gun().setValue(divideValue(business.get中間評価項目得点第5群()));
             if (business.get要介護認定状態の安定性コード() != null && !business.get要介護認定状態の安定性コード().isEmpty()) {
                 row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
             }
             if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
-                row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性().roundUpTo(2))));
+                row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(business.get認知症自立度Ⅱ以上の蓋然性());
             }
             if (business.get推定される給付区分コード() != null && !business.get推定される給付区分コード().isEmpty()) {
                 row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get推定される給付区分コード().value()).get名称());
@@ -315,17 +322,42 @@ public class IchijiHanteiHandler {
         setDisplayNoneOfIchijiHanteiDialigButton(div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran());
     }
 
+    private Decimal divideValue(int value) {
+        return new Decimal(value).divide(DIVIDE_VALUE);
+    }
+
+    /**
+     * グリッドのフッターに、最大表示件数と検索件数を表示します。
+     *
+     * @param menuID メニューID
+     * @param shinseishoKanriNoList 申請書管理番号List
+     */
+    public void setLimitValueOfGrid(RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
+
+        IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
+
+        IChiJiPanTeiSyoRiParameter parameter = createParameter(menuID, shinseishoKanriNoList);
+        Decimal 検索件数 = div.getIchijiHanteiKensakuJoken().getTxtMaxCount().getValue();
+        Decimal dataNum = new Decimal(manager.get対象者件数(IChiJiPanTeiSyoRiParameter.createParameterOf一次判定対象件数(parameter)));
+
+        if (検索件数.compareTo(dataNum) < 0) {
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setLimitRowCount(検索件数.intValue());
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setSelectedRowCount(dataNum.intValue());
+        } else {
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setLimitRowCount(0);
+            div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setSelectedRowCount(0);
+        }
+    }
+
     private void setDisplayNoneOfIchijiHanteiDialigButton(DataGrid<dgIchijiHanteiTaishoshaIchiran_Row> dg) {
         RString menuIdStr = ResponseHolder.getMenuID();
         IchijiHanteiMenuId menuId = IchijiHanteiMenuId.toValue(menuIdStr);
         switch (menuId) {
             case 一次判定処理:
-                dg.getGridSetting().getColumn("btnSyokai").setVisible(false);
                 dg.getGridSetting().getColumn("btnSentaku").setVisible(true);
                 dg.getGridSetting().getColumn("columnState").setVisible(true);
                 break;
             default:
-                dg.getGridSetting().getColumn("btnSyokai").setVisible(true);
                 dg.getGridSetting().getColumn("btnSentaku").setVisible(false);
                 dg.getGridSetting().getColumn("columnState").setVisible(false);
                 break;
@@ -375,7 +407,7 @@ public class IchijiHanteiHandler {
             return true;
         }
         if (business.get認知症自立度Ⅱ以上の蓋然性() != null
-                && !row.getNinchishoJiritsudoIIijoNoGaizensei().equals(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())))) {
+                && !row.getNinchishoJiritsudoIIijoNoGaizensei().getValue().equals(business.get認知症自立度Ⅱ以上の蓋然性())) {
             return true;
         }
         if (business.get認知機能及び状態安定性から推定される給付区分コード() != null
@@ -403,51 +435,51 @@ public class IchijiHanteiHandler {
 
     private boolean notEqualsRowData基準時間(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
 
-        if (!row.getKijunJikan().equals(new RString(String.valueOf(business.get要介護認定等基準時間())))) {
+        if (!row.getKijunJikan().getValue().equals(divideValue(business.get要介護認定等基準時間()))) {
             return true;
         }
-        if (!row.getKijunJikanShokuji().equals(new RString(String.valueOf(business.get要介護認定等基準時間_食事())))) {
+        if (!row.getKijunJikanShokuji().getValue().equals(divideValue(business.get要介護認定等基準時間_食事()))) {
             return true;
         }
-        if (!row.getKijunJikanHaisetsu().equals(new RString(String.valueOf(business.get要介護認定等基準時間_排泄())))) {
+        if (!row.getKijunJikanHaisetsu().getValue().equals(divideValue(business.get要介護認定等基準時間_排泄()))) {
             return true;
         }
-        if (!row.getKijunJikanIdo().equals(new RString(String.valueOf(business.get要介護認定等基準時間_移動())))) {
+        if (!row.getKijunJikanIdo().getValue().equals(divideValue(business.get要介護認定等基準時間_移動()))) {
             return true;
         }
-        if (!row.getKijunJikanSeiketsuHoji().equals(new RString(String.valueOf(business.get要介護認定等基準時間_清潔保持())))) {
+        if (!row.getKijunJikanSeiketsuHoji().getValue().equals(divideValue(business.get要介護認定等基準時間_清潔保持()))) {
             return true;
         }
-        if (!row.getKijunJikanKansetsuCare().equals(new RString(String.valueOf(business.get要介護認定等基準時間_間接ケア())))) {
+        if (!row.getKijunJikanKansetsuCare().getValue().equals(divideValue(business.get要介護認定等基準時間_間接ケア()))) {
             return true;
         }
-        if (!row.getKijunJikanBPSDKanren().equals(new RString(String.valueOf(business.get要介護認定等基準時間_BPSD関連())))) {
+        if (!row.getKijunJikanBPSDKanren().getValue().equals(divideValue(business.get要介護認定等基準時間_BPSD関連()))) {
             return true;
         }
-        if (!row.getKijunJikanKinoKunren().equals(new RString(String.valueOf(business.get要介護認定等基準時間_機能訓練())))) {
+        if (!row.getKijunJikanKinoKunren().getValue().equals(divideValue(business.get要介護認定等基準時間_機能訓練()))) {
             return true;
         }
-        if (!row.getKijunJikanIryoKanren().equals(new RString(String.valueOf(business.get要介護認定等基準時間_医療関連())))) {
+        if (!row.getKijunJikanIryoKanren().getValue().equals(divideValue(business.get要介護認定等基準時間_医療関連()))) {
             return true;
         }
-        return !row.getKijunJikanNinchishoKasan().equals(new RString(String.valueOf(business.get要介護認定等基準時間_認知症加算())));
+        return !row.getKijunJikanNinchishoKasan().getValue().equals(divideValue(business.get要介護認定等基準時間_認知症加算()));
     }
 
     private boolean notEqualsRowData中間評価項目(dgIchijiHanteiTaishoshaIchiran_Row row, IchijiHanteiKekkaJoho business) {
 
-        if (!row.getChukanHyokaKomoku1gun().equals(new RString(String.valueOf(business.get中間評価項目得点第1群())))) {
+        if (!row.getChukanHyokaKomoku1gun().getValue().equals(divideValue(business.get中間評価項目得点第1群()))) {
             return true;
         }
-        if (!row.getChukanHyokaKomoku2gun().equals(new RString(String.valueOf(business.get中間評価項目得点第2群())))) {
+        if (!row.getChukanHyokaKomoku2gun().getValue().equals(divideValue(business.get中間評価項目得点第2群()))) {
             return true;
         }
-        if (!row.getChukanHyokaKomoku3gun().equals(new RString(String.valueOf(business.get中間評価項目得点第3群())))) {
+        if (!row.getChukanHyokaKomoku3gun().getValue().equals(divideValue(business.get中間評価項目得点第3群()))) {
             return true;
         }
-        if (!row.getChukanHyokaKomoku4gun().equals(new RString(String.valueOf(business.get中間評価項目得点第4群())))) {
+        if (!row.getChukanHyokaKomoku4gun().getValue().equals(divideValue(business.get中間評価項目得点第4群()))) {
             return true;
         }
-        return !row.getChukanHyokaKomoku5gun().equals(new RString(String.valueOf(business.get中間評価項目得点第5群())));
+        return !row.getChukanHyokaKomoku5gun().getValue().equals(divideValue(business.get中間評価項目得点第5群()));
     }
 
     /**
@@ -477,26 +509,26 @@ public class IchijiHanteiHandler {
             if (business.get要介護認定一次判定警告コード() != null) {
                 row.setKeikokuCode(business.get要介護認定一次判定警告コード());
             }
-            row.setKijunJikan(new RString(String.valueOf(business.get要介護認定等基準時間())));
-            row.setKijunJikanShokuji(new RString(String.valueOf(business.get要介護認定等基準時間_食事())));
-            row.setKijunJikanHaisetsu(new RString(String.valueOf(business.get要介護認定等基準時間_排泄())));
-            row.setKijunJikanIdo(new RString(String.valueOf(business.get要介護認定等基準時間_移動())));
-            row.setKijunJikanSeiketsuHoji(new RString(String.valueOf(business.get要介護認定等基準時間_清潔保持())));
-            row.setKijunJikanKansetsuCare(new RString(String.valueOf(business.get要介護認定等基準時間_間接ケア())));
-            row.setKijunJikanBPSDKanren(new RString(String.valueOf(business.get要介護認定等基準時間_BPSD関連())));
-            row.setKijunJikanKinoKunren(new RString(String.valueOf(business.get要介護認定等基準時間_機能訓練())));
-            row.setKijunJikanIryoKanren(new RString(String.valueOf(business.get要介護認定等基準時間_医療関連())));
-            row.setKijunJikanNinchishoKasan(new RString(String.valueOf(business.get要介護認定等基準時間_認知症加算())));
-            row.setChukanHyokaKomoku1gun(new RString(String.valueOf(business.get中間評価項目得点第1群())));
-            row.setChukanHyokaKomoku2gun(new RString(String.valueOf(business.get中間評価項目得点第2群())));
-            row.setChukanHyokaKomoku3gun(new RString(String.valueOf(business.get中間評価項目得点第3群())));
-            row.setChukanHyokaKomoku4gun(new RString(String.valueOf(business.get中間評価項目得点第4群())));
-            row.setChukanHyokaKomoku5gun(new RString(String.valueOf(business.get中間評価項目得点第5群())));
+            row.getKijunJikan().setValue(divideValue(business.get要介護認定等基準時間()));
+            row.getKijunJikanShokuji().setValue(divideValue(business.get要介護認定等基準時間_食事()));
+            row.getKijunJikanHaisetsu().setValue(divideValue(business.get要介護認定等基準時間_排泄()));
+            row.getKijunJikanIdo().setValue(divideValue(business.get要介護認定等基準時間_移動()));
+            row.getKijunJikanSeiketsuHoji().setValue(divideValue(business.get要介護認定等基準時間_清潔保持()));
+            row.getKijunJikanKansetsuCare().setValue(divideValue(business.get要介護認定等基準時間_間接ケア()));
+            row.getKijunJikanBPSDKanren().setValue(divideValue(business.get要介護認定等基準時間_BPSD関連()));
+            row.getKijunJikanKinoKunren().setValue(divideValue(business.get要介護認定等基準時間_機能訓練()));
+            row.getKijunJikanIryoKanren().setValue(divideValue(business.get要介護認定等基準時間_医療関連()));
+            row.getKijunJikanNinchishoKasan().setValue(divideValue(business.get要介護認定等基準時間_認知症加算()));
+            row.getChukanHyokaKomoku1gun().setValue(divideValue(business.get中間評価項目得点第1群()));
+            row.getChukanHyokaKomoku2gun().setValue(divideValue(business.get中間評価項目得点第2群()));
+            row.getChukanHyokaKomoku3gun().setValue(divideValue(business.get中間評価項目得点第3群()));
+            row.getChukanHyokaKomoku4gun().setValue(divideValue(business.get中間評価項目得点第4群()));
+            row.getChukanHyokaKomoku5gun().setValue(divideValue(business.get中間評価項目得点第5群()));
             if (!isNullOrEmpty(business.get要介護認定状態の安定性コード())) {
                 row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
             }
             if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
-                row.setNinchishoJiritsudoIIijoNoGaizensei(new RString(String.valueOf(business.get認知症自立度Ⅱ以上の蓋然性())));
+                row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(business.get認知症自立度Ⅱ以上の蓋然性());
             }
             if (!isNullOrEmpty(business.get認知機能及び状態安定性から推定される給付区分コード())) {
                 row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(business.get認知機能及び状態安定性から推定される給付区分コード().value()).get名称());
@@ -544,5 +576,32 @@ public class IchijiHanteiHandler {
             }
         }
         return noList;
+    }
+
+    /**
+     * 一次判定対象者を取得するためのパラメータを作成します。
+     *
+     * @param menuID メニューID
+     * @param shinseishoKanriNoList 申請書管理番号List
+     * @return パラメータクラス
+     */
+    public IChiJiPanTeiSyoRiParameter createParameter(RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
+
+        RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
+                RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RDate 認定申請年月日開始 = div.getIchijiHanteiKensakuJoken().getTxtShinseiDateRange().getFromValue();
+        RDate 認定申請年月日終了 = div.getIchijiHanteiKensakuJoken().getTxtShinseiDateRange().getToValue();
+        Decimal 検索件数 = div.getIchijiHanteiKensakuJoken().getTxtMaxCount().getValue();
+
+        return IChiJiPanTeiSyoRiParameter.
+                createParameter(
+                        ShoriJotaiKubun.通常.getコード(),
+                        ShoriJotaiKubun.延期.getコード(),
+                        イメージ区分,
+                        認定申請年月日開始 == null ? FlexibleDate.EMPTY : new FlexibleDate(認定申請年月日開始.toDateString()),
+                        認定申請年月日終了 == null ? FlexibleDate.EMPTY : new FlexibleDate(認定申請年月日終了.toDateString()),
+                        検索件数,
+                        menuID,
+                        shinseishoKanriNoList.getShinseishoKanriNoS());
     }
 }

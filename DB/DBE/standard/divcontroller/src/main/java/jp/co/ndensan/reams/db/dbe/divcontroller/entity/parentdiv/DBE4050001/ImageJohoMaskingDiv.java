@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -20,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageJohoMaskingDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +37,8 @@ public class ImageJohoMaskingDiv extends Panel {
     private hihokenshaInfoPanelDiv hihokenshaInfoPanel;
     @JsonProperty("ImageMaskTaishoShiji")
     private ImageMaskTaishoShijiDiv ImageMaskTaishoShiji;
+    @JsonProperty("ccdKanryoMessage")
+    private KanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("hiddenImagePath")
     private RString hiddenImagePath;
 
@@ -117,6 +121,15 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
+    }
+
+    /*
      * gethiddenImagePath
      * @return hiddenImagePath
      */
@@ -158,23 +171,13 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtSearchStYMD() {
-        return this.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD();
+    public TextBoxDateRange getTxtSearchYMD() {
+        return this.getShoriTaishoshaKensakuShiji().getTxtSearchYMD();
     }
 
     @JsonIgnore
-    public void  setTxtSearchStYMD(TextBoxFlexibleDate txtSearchStYMD) {
-        this.getShoriTaishoshaKensakuShiji().setTxtSearchStYMD(txtSearchStYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtSearchEdYMD() {
-        return this.getShoriTaishoshaKensakuShiji().getTxtSearchEdYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtSearchEdYMD(TextBoxFlexibleDate txtSearchEdYMD) {
-        this.getShoriTaishoshaKensakuShiji().setTxtSearchEdYMD(txtSearchEdYMD);
+    public void  setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
+        this.getShoriTaishoshaKensakuShiji().setTxtSearchYMD(txtSearchYMD);
     }
 
     @JsonIgnore

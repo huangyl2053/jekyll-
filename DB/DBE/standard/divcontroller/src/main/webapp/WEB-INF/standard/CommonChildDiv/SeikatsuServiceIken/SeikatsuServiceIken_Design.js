@@ -4,10 +4,6 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
-            Events.onChange_chkHokohojoShiyo = function () {
-                return "onChange_chkHokohojoShiyo";
-            };
-
             Events.onChange_radGenzaiEiyoJotai = function () {
                 return "onChange_radGenzaiEiyoJotai";
             };
@@ -111,10 +107,6 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("HasseiJotaiTaishoHoshin"));
             };
 
-            Controls.prototype.chkHasseiShojo = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkHasseiShojo"));
-            };
-
             Controls.prototype.Dummy01 = function () {
                 return new UZA.Space(this.convFiledName("Dummy01"));
             };
@@ -141,6 +133,10 @@ var DBE;
 
             Controls.prototype.IgakutekiKanriHitsuyosei = function () {
                 return new UZA.Panel(this.convFiledName("IgakutekiKanriHitsuyosei"));
+            };
+
+            Controls.prototype.chkHasseiShojo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHasseiShojo"));
             };
 
             Controls.prototype.chkIgakutekiKanri = function () {

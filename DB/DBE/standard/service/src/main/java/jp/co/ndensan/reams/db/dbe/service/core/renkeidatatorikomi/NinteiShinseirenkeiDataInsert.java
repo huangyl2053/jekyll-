@@ -517,7 +517,10 @@ public class NinteiShinseirenkeiDataInsert {
     }
     
     private RStringBuilder checkDbT5101同情報(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
-        if (entity.getDbT5101Entity() != null) {
+        if (entity.getDbT5101Entity() != null 
+                && (entity.getDbt5102Entity() == null 
+                || entity.getDbt5102Entity().getNijiHanteiYMD() == null 
+                || entity.getDbt5102Entity().getNijiHanteiYMD().isEmpty())) {
             errorBuilder.append(new RString("既に登録されています;"));
         }
         return errorBuilder;

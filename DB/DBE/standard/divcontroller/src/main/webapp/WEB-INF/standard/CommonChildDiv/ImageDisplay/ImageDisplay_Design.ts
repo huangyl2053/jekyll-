@@ -66,6 +66,10 @@ module DBE {
                 return new UZA.DynamicImage(this.convFiledName("imgMask"));
             }
 
+            public lblNoImage(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNoImage"));
+            }
+
             public btnBefore(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnBefore"));
             }
@@ -76,10 +80,6 @@ module DBE {
 
             public btnAfterImg(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnAfterImg"));
-            }
-
-            public lblNoImage(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblNoImage"));
             }
 
         }

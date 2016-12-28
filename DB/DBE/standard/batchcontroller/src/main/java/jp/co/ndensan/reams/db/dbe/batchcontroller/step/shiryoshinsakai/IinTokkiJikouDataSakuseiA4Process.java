@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiJiko;
 import jp.co.ndensan.reams.db.dbe.business.report.tokkijiko.TokkiJikoReport;
+import jp.co.ndensan.reams.db.dbe.business.report.tokkijiko.TokkiJikoReportLayoutBreaker;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
@@ -36,9 +37,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
-import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 委員用特記事項の取得バッチクラスです。
@@ -52,14 +51,8 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(TokkiJikoReportSource.ReportSourceFields.tokkiText.name()),
             new RString(TokkiJikoReportSource.ReportSourceFields.tokkiImg.name()),
-            new RString(TokkiJikoReportSource.ReportSourceFields.two_tokkiText.name()),
-            new RString(TokkiJikoReportSource.ReportSourceFields.two_tokkiImg.name())));
-    private static final int FORM_INDEX_テキスト短冊 = 1;
-    private static final int FORM_INDEX_テキスト短冊_2頁目以降 = 2;
-    private static final int FORM_INDEX_イメージ全面 = 3;
-    private static final int FORM_INDEX_イメージ全面_2頁目以降 = 4;
-    private static final int FORM_INDEX_イメージ短冊 = 5;
-    private static final int FORM_INDEX_イメージ短冊_2頁目以降 = 6;
+            new RString(TokkiJikoReportSource.ReportSourceFields.tokkiText1.name()),
+            new RString(TokkiJikoReportSource.ReportSourceFields.tokkiImg1.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IShiryoShinsakaiIinMapper mapper;
@@ -88,39 +81,7 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
     protected void createWriter() {
         batchWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiJikoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<TokkiJikoReportSource>().new SimpleLayoutBreaker(
-
-
-
-                    PAGE_BREAK_KEYS) {
-                    @Override
-                    public ReportLineRecord<TokkiJikoReportSource> occuredBreak(ReportLineRecord<TokkiJikoReportSource> currentRecord,
-                            ReportLineRecord<TokkiJikoReportSource> nextRecord,
-                            ReportDynamicChart dynamicChart) {
-                        currentRecord.setFormGroupIndex(getFormIndex(currentRecord.getSource()));
-                        if (nextRecord != null && nextRecord.getSource() != null) {
-                            nextRecord.setFormGroupIndex(getFormIndex(nextRecord.getSource()));
-                        }
-                        return currentRecord;
-                    }
-
-                    private int getFormIndex(TokkiJikoReportSource source) {
-                        if (source.tokkiText1 != null && !source.tokkiText1.isEmpty()) {
-                            return FORM_INDEX_テキスト短冊;
-                        } else if (source.two_tokkiText1 != null && !source.two_tokkiText1.isEmpty()) {
-                            return FORM_INDEX_テキスト短冊_2頁目以降;
-                        } else if (source.tokkiImg != null && !source.tokkiImg.isEmpty()) {
-                            return FORM_INDEX_イメージ全面;
-                        } else if (source.two_tokkiImg != null && !source.two_tokkiImg.isEmpty()) {
-                            return FORM_INDEX_イメージ全面_2頁目以降;
-                        } else if (source.tokkiImg1 != null && !source.tokkiImg1.isEmpty()) {
-                            return FORM_INDEX_イメージ短冊;
-                        } else if (source.two_tokkiImg1 != null && !source.two_tokkiImg1.isEmpty()) {
-                            return FORM_INDEX_イメージ短冊_2頁目以降;
-                        }
-                        return FORM_INDEX_テキスト短冊;
-                    }
-                }).create();
+                .addBreak(new TokkiJikoReportLayoutBreaker()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 

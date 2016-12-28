@@ -106,10 +106,22 @@ public class ImageJohoMaskingHandler {
      * @param shinseishoKanriNoList 申請書管理番号のリスト
      */
     public void set検索用パラメーター(ShinseishoKanriNoList shinseishoKanriNoList) {
+        FlexibleDate fromYMD;
+        FlexibleDate toYMD;
+        if (div.getTxtSearchYMD().getFromValue() != null) {
+            fromYMD = new FlexibleDate(div.getTxtSearchYMD().getFromValue().toString());
+        } else {
+            fromYMD = FlexibleDate.EMPTY;
+        }
+        if (div.getTxtSearchYMD().getFromValue() != null) {
+            toYMD = new FlexibleDate(div.getTxtSearchYMD().getToValue().toString());
+        } else {
+            toYMD = FlexibleDate.EMPTY;
+        }
         param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
                 shinseishoKanriNoList != null ? LasdecCode.EMPTY : div.getCcdHokensya().getSelectedItem().get市町村コード(),
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : div.getTxtSearchStYMD().getValue(),
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : div.getTxtSearchEdYMD().getValue(),
+                shinseishoKanriNoList != null ? FlexibleDate.MAX : fromYMD,
+                shinseishoKanriNoList != null ? FlexibleDate.MAX : toYMD,
                 shinseishoKanriNoList != null ? RString.EMPTY : div.getDdlKensakuTaisho().getSelectedKey(),
                 shinseishoKanriNoList != null ? shinseishoKanriNoList.getShinseishoKanriNoS() : null,
                 shinseishoKanriNoList != null ? RString.EMPTY : div.getTxtHihokenshaNumber().getValue(),
@@ -173,7 +185,6 @@ public class ImageJohoMaskingHandler {
             if (result.getイメージ共有ファイルID() != null) {
                 row.set共有ファイルID(new RString(result.getイメージ共有ファイルID().toString()));
             }
-            row.set認定申請年(new RString(result.get認定申請年()));
             setアクセスログ(result.get申請書管理番号().value());
             rowList.add(row);
         }
@@ -187,8 +198,8 @@ public class ImageJohoMaskingHandler {
         div.getTxtHihokenshaNumber().clearValue();
         div.getCcdHokensya().setSelectedShichosonIfExist(new LasdecCode(ALL_SHICHOSON_KEY));
         div.getDdlKensakuTaisho().setSelectedIndex(0);
-        div.getTxtSearchStYMD().clearValue();
-        div.getTxtSearchEdYMD().clearValue();
+        div.getTxtSearchYMD().clearFromValue();
+        div.getTxtSearchYMD().clearToValue();
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
     }
@@ -362,8 +373,6 @@ public class ImageJohoMaskingHandler {
 
                 IkenshoImageJohoBuilder builder = imageJoho.createBuilderForEdit();
 
-//                builder.set認定申請年(Integer.parseInt(taishoshaRow.get認定申請年().toString()));
-//                builder.set共有ファイルID(RDateTime.parse(taishoshaRow.get共有ファイルID().toString()));
                 imageJohoManager.save要介護認定意見書イメージ情報(builder.build());
 
             } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
