@@ -430,7 +430,7 @@ public class NinteiShinseiToroku {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())
-                    || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
+                     || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
                 NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
                 shinseiJohoBuilder.set認定申請区分_申請時_コード(new Code(kihonJohoInputDiv
                         .getDdlShinseiKubunShinseiji().getSelectedKey()));
@@ -439,6 +439,12 @@ public class NinteiShinseiToroku {
             if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
                 NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
                 shinseiJohoBuilder.set申請サービス削除の理由(kihonJohoInputDiv.getTxtServiceSakujo().getValue());
+                manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
+            }
+            
+            if (!NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey()) 
+                    && !NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
+                NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
             }
             save介護連絡先情報(zenkaiJoho.getDbdBusiness());
