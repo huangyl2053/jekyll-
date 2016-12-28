@@ -44,7 +44,7 @@ public class TokkiJikoReportLayoutBreaker extends LayoutBreaker<TokkiJikoReportS
                 || currentRecord.getFormGroupIndex() == FORM_INDEX_イメージ短冊_2頁目以降;
         currentRecord.setFormGroupIndex(getFormIndex(currentRecord.getSource(), isCurrent2頁目以降));
         if (nextRecord != null && nextRecord.getSource() != null) {
-            boolean isNext2頁目以降 = is被保険者Break(currentRecord.getSource(), nextRecord.getSource());
+            boolean isNext2頁目以降 = !is被保険者Break(currentRecord.getSource(), nextRecord.getSource());
             nextRecord.setFormGroupIndex(getFormIndex(nextRecord.getSource(), isNext2頁目以降));
         }
         return currentRecord;

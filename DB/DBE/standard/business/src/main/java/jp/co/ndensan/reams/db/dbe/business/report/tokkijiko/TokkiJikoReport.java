@@ -58,6 +58,9 @@ public class TokkiJikoReport extends Report<TokkiJikoReportSource> {
                 ITokkiJikoReportListFieldEditor listEditor = new TokkiJikoReportListFieldEditor(短冊リスト.get(i).get事項番号(), isText);
                 ITokkiJikoReportBuilder builder = new TokkiJikoReportBuilder(editor, listEditor);
                 writer.writeLine(builder);
+                ITokkiJikoReportListFieldEditor listEditor2 = new TokkiJikoReportListFieldEditor(短冊リスト.get(i).get項目名称(), isText);
+                ITokkiJikoReportBuilder builder2 = new TokkiJikoReportBuilder(editor, listEditor2);
+                writer.writeLine(builder2);
                 column++;
             }
         } else {
