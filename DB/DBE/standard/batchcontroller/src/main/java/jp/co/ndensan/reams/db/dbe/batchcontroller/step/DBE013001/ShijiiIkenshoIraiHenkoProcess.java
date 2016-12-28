@@ -145,8 +145,13 @@ public class ShijiiIkenshoIraiHenkoProcess
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(dateFormat(processParameter.get主治医意見書作成依頼変更者一覧表申請日From()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書作成依頼変更者一覧表申請日To()));
+        if (processParameter.get主治医意見書作成依頼変更者一覧表申請日From() == null && processParameter.get主治医意見書作成依頼変更者一覧表申請日To() == null) {
+            出力条件.add(new RString("指定なし"));
+        } else {
+            RString 申請日FROM = dateFormat(processParameter.get主治医意見書作成依頼変更者一覧表申請日From());
+            RString 申請日TO = dateFormat(processParameter.get主治医意見書作成依頼変更者一覧表申請日To());
+            出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+        }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE013002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);

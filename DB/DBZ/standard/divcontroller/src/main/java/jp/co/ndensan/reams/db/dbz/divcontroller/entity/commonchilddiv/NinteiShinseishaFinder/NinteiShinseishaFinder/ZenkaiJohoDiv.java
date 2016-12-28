@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ZenkaiJoho のクラスファイル
@@ -14,21 +15,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class ZenkaiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblZenkaiChosaItakusaki")
-    private Label lblZenkaiChosaItakusaki;
+    @JsonProperty("txtZenkaiChosaItakusaki")
+    private TextBoxDomainCode txtZenkaiChosaItakusaki;
     @JsonProperty("btnZenkaiChosaItakusakiGuide")
     private ButtonDialog btnZenkaiChosaItakusakiGuide;
     @JsonProperty("txtZenkaiNinteiChosaItakusakiName")
     private TextBox txtZenkaiNinteiChosaItakusakiName;
-    @JsonProperty("lblZenkaiShujiiIryokikan")
-    private Label lblZenkaiShujiiIryokikan;
+    @JsonProperty("txtZenkaiShujiiIryokikan")
+    private TextBoxDomainCode txtZenkaiShujiiIryokikan;
     @JsonProperty("btnZenkaiShujiiIryokikanGuide")
     private ButtonDialog btnZenkaiShujiiIryokikanGuide;
     @JsonProperty("txtZenkaiShujiiIryokikanName")
@@ -51,21 +52,21 @@ public class ZenkaiJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblZenkaiChosaItakusaki
-     * @return lblZenkaiChosaItakusaki
+     * gettxtZenkaiChosaItakusaki
+     * @return txtZenkaiChosaItakusaki
      */
-    @JsonProperty("lblZenkaiChosaItakusaki")
-    public Label getLblZenkaiChosaItakusaki() {
-        return lblZenkaiChosaItakusaki;
+    @JsonProperty("txtZenkaiChosaItakusaki")
+    public TextBoxDomainCode getTxtZenkaiChosaItakusaki() {
+        return txtZenkaiChosaItakusaki;
     }
 
     /*
-     * setlblZenkaiChosaItakusaki
-     * @param lblZenkaiChosaItakusaki lblZenkaiChosaItakusaki
+     * settxtZenkaiChosaItakusaki
+     * @param txtZenkaiChosaItakusaki txtZenkaiChosaItakusaki
      */
-    @JsonProperty("lblZenkaiChosaItakusaki")
-    public void setLblZenkaiChosaItakusaki(Label lblZenkaiChosaItakusaki) {
-        this.lblZenkaiChosaItakusaki = lblZenkaiChosaItakusaki;
+    @JsonProperty("txtZenkaiChosaItakusaki")
+    public void setTxtZenkaiChosaItakusaki(TextBoxDomainCode txtZenkaiChosaItakusaki) {
+        this.txtZenkaiChosaItakusaki = txtZenkaiChosaItakusaki;
     }
 
     /*
@@ -105,21 +106,21 @@ public class ZenkaiJohoDiv extends Panel {
     }
 
     /*
-     * getlblZenkaiShujiiIryokikan
-     * @return lblZenkaiShujiiIryokikan
+     * gettxtZenkaiShujiiIryokikan
+     * @return txtZenkaiShujiiIryokikan
      */
-    @JsonProperty("lblZenkaiShujiiIryokikan")
-    public Label getLblZenkaiShujiiIryokikan() {
-        return lblZenkaiShujiiIryokikan;
+    @JsonProperty("txtZenkaiShujiiIryokikan")
+    public TextBoxDomainCode getTxtZenkaiShujiiIryokikan() {
+        return txtZenkaiShujiiIryokikan;
     }
 
     /*
-     * setlblZenkaiShujiiIryokikan
-     * @param lblZenkaiShujiiIryokikan lblZenkaiShujiiIryokikan
+     * settxtZenkaiShujiiIryokikan
+     * @param txtZenkaiShujiiIryokikan txtZenkaiShujiiIryokikan
      */
-    @JsonProperty("lblZenkaiShujiiIryokikan")
-    public void setLblZenkaiShujiiIryokikan(Label lblZenkaiShujiiIryokikan) {
-        this.lblZenkaiShujiiIryokikan = lblZenkaiShujiiIryokikan;
+    @JsonProperty("txtZenkaiShujiiIryokikan")
+    public void setTxtZenkaiShujiiIryokikan(TextBoxDomainCode txtZenkaiShujiiIryokikan) {
+        this.txtZenkaiShujiiIryokikan = txtZenkaiShujiiIryokikan;
     }
 
     /*

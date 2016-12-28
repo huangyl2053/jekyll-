@@ -20,7 +20,15 @@ public interface IIkenshoHoshuShokaiRelateMapper {
      * 合計額リストの作成です。
      *
      * @param ikenshoParam IkenshoHoshuShokaiMapperParameter
-     * @return List<IkenshoHoshuShokaiRelateEntity>
+     * @return List&lt;IkenshoHoshuShokaiRelateEntity&gt;
      */
     List<IkenshoHoshuShokaiRelateEntity> select合計額リスト(IkenshoHoshuShokaiMapperParameter ikenshoParam);
+
+    /**
+     * レコード数を取得します。
+     *
+     * @param ikenshoParam IkenshoHoshuShokaiMapperParameter
+     * @return 検索条件に満たすレコード数
+     */
+    int getCount(IkenshoHoshuShokaiMapperParameter ikenshoParam);
 }

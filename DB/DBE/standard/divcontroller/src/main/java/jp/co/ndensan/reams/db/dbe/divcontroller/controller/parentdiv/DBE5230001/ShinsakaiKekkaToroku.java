@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifie
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosajokyo.NinteiChosaJokyoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -89,9 +90,6 @@ public class ShinsakaiKekkaToroku {
      * @return ResponseData<ShinsakaiKekkaTorokuDiv> 介護認定審査会審査結果登録Div
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onLoad(ShinsakaiKekkaTorokuDiv div) {
-        if (!前排他キーのセット()) {
-            throw new PessimisticLockingException();
-        }
 
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();
@@ -112,6 +110,10 @@ public class ShinsakaiKekkaToroku {
         List<NinteiKanryoJoho> ninteiKanryoJohoList = manager.get要介護認定完了情報(開催番号).records();
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho = Models.create(ninteiKanryoJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, ninteiKanryoJoho);
+        if (!前排他キーのセット()) {
+            handler.set操作不可();
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -564,7 +566,6 @@ public class ShinsakaiKekkaToroku {
     public ResponseData onChange_NinteiKikanMonth(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         handler.change有効月数に関連するコントロール();
-        handler.set認定期間開始日();
         handler.set認定期間終了日();
         return ResponseData.of(div).respond();
     }

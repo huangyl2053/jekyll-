@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
@@ -69,8 +69,8 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
      *
      * @return バッチパラメータ
      */
-    public DBE250001_NinteiChoshaKekkaTorikomiParameter setバッチパラメータ() {
-        return new DBE250001_NinteiChoshaKekkaTorikomiParameter(div.getHdnSharedFileEntryInfo());
+    public DBE250001_NinteiChosaKekkaTorikomiParameter setバッチパラメータ() {
+        return new DBE250001_NinteiChosaKekkaTorikomiParameter(div.getHdnSharedFileEntryInfo());
     }
 
     /**

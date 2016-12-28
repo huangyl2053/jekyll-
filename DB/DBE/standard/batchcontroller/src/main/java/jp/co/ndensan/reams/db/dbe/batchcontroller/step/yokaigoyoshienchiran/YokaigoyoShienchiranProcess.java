@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -126,8 +127,27 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
         RString csv出力有無 = 無し;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(dateFormat(processParameter.getShinnseikaFrom()));
-        出力条件.add(dateFormat(processParameter.getShinnseikaTo()));
+        if (processParameter.getSakuseijyouken().equals(new RString("1"))) {
+            出力条件.add(new RString("処理日の範囲を指定"));
+            if (processParameter.getShorikaFrom() == null && processParameter.getShinnseikaTo() == null) {
+                出力条件.add(new RString("指定なし"));
+            } else {
+                RString 処理日FROM = dateFormat(rDateTOFlexDate(processParameter.getShorikaFrom().getDate()));
+                RString 処理日TO = dateFormat(rDateTOFlexDate(processParameter.getShorikaTo().getDate()));
+                出力条件.add(処理日FROM.concat(new RString("～")).concat(処理日TO));
+            }
+
+        } else {
+            出力条件.add(new RString("申請日の範囲を指定"));
+            if (processParameter.getShinnseikaFrom() == null && processParameter.getShinnseikaTo() == null) {
+                出力条件.add(new RString("指定なし"));
+            } else {
+                RString 申請日FROM = dateFormat(processParameter.getShinnseikaFrom());
+                RString 申請日TO = dateFormat(processParameter.getShinnseikaTo());
+                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+            }
+
+        }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE011001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
@@ -142,4 +162,10 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
         return date.wareki().toDateString();
     }
 
+    private FlexibleDate rDateTOFlexDate(RDate fromDate) {
+        if (fromDate != null) {
+            return new FlexibleDate(fromDate.getYearValue(), fromDate.getMonthValue(), fromDate.getDayValue());
+        }
+        return FlexibleDate.EMPTY;
+    }
 }

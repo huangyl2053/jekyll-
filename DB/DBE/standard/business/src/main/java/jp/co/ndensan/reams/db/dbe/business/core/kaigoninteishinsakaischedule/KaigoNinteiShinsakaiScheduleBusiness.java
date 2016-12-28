@@ -82,14 +82,25 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     /**
      * 介護認定審査会スケジュール表HeaderItemデータを作成するメッソドです。
      *
-     * @param 年度 年度
      * @return ShinsakaisukejuruhyoBodyItem
      */
-    public ShinsakaisukejuruhyoHeadItem setHeaderItem(RYear 年度) {
+    public ShinsakaisukejuruhyoHeadItem setHeaderItem() {
         ShinsakaisukejuruhyoHeadItem headItem = new ShinsakaisukejuruhyoHeadItem();
-        headItem.set年度(new RStringBuilder(年度.wareki().eraType(EraType.KANJI).getYear()).append("年度").toRString());
+        RYear from年度 = new RDate(processParamter.getShinsakaiKaisaiKikanFrom().toString()).getNendo();
+        RYear to年度 = new RDate(processParamter.getShinsakaiKaisaiKikanTo().toString()).getNendo();
+        RStringBuilder 年度 = new RStringBuilder();
+        if (from年度.equals(to年度)) {
+            年度.append(get和暦年度(from年度)).append("年度");
+        } else {
+            年度.append(get和暦年度(from年度)).append("年度～").append(get和暦年度(to年度)).append("年度");
+        }
+        headItem.set年度(年度.toRString());
         headItem.set広域連合(DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         return headItem;
+    }
+
+    private RString get和暦年度(RYear 年度) {
+        return 年度.wareki().eraType(EraType.KANJI).getYear();
     }
 
     /**

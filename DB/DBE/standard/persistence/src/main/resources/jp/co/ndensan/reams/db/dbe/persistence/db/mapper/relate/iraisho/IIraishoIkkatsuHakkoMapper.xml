@@ -98,7 +98,6 @@
         ORDER BY
         sabuKueri."ninteichosaItakusakiCode",
         sabuKueri."ninteiChosainCode"
-        LIMIT #{最大表示件数}
     </select>
     
     <sql id="selectShuziiIkenshoIrai">
@@ -196,7 +195,6 @@
         ORDER BY
         sabuKueri."shujiiIryokikanCode",
         sabuKueri."shujiiCode"
-        LIMIT #{最大表示件数}
     </select>
 
     <resultMap id="resultMap_IraishoIkkatsuHakkoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.iraisho.IraishoIkkatsuHakkoRelateEntity" autoMapping="true">

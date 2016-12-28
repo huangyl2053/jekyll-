@@ -157,8 +157,13 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(dateFormat(paramter.get認定調査依頼先変更者一覧表申請日From()));
-        出力条件.add(dateFormat(paramter.get認定調査依頼先変更者一覧表申請日To()));
+        if (paramter.get認定調査依頼先変更者一覧表申請日From() == null && paramter.get認定調査依頼先変更者一覧表申請日To() == null) {
+            出力条件.add(new RString("指定なし"));
+        } else {
+            RString 申請日FROM = dateFormat(paramter.get認定調査依頼先変更者一覧表申請日From());
+            RString 申請日TO = dateFormat(paramter.get認定調査依頼先変更者一覧表申請日To());
+            出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+        }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE012002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);

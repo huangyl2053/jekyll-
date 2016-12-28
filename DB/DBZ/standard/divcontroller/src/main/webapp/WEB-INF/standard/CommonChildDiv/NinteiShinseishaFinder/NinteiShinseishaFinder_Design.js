@@ -16,6 +16,14 @@ var DBZ;
                 return "onClick_NinteiChosa";
             };
 
+            Events.onChange_txtCode = function () {
+                return "onChange_txtCode";
+            };
+
+            Events.onBlur_txtCode = function () {
+                return "onBlur_txtCode";
+            };
+
             Events.onOkClose_btnNinteiChosaItakusakiGuide = function () {
                 return "onOkClose_btnNinteiChosaItakusakiGuide";
             };
@@ -167,6 +175,10 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             };
 
+            Controls.prototype.ddlHokenshaNumber = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            };
+
             Controls.prototype.ddlShichosonCode = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
             };
@@ -223,6 +235,10 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             };
 
+            Controls.prototype.ccdSaikinShorisha = function () {
+                return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            };
+
             Controls.prototype.ShosaiJoken = function () {
                 return new UZA.Panel(this.convFiledName("ShosaiJoken"));
             };
@@ -267,8 +283,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             };
 
-            Controls.prototype.lblNinteiChosaIinItakuSaki = function () {
-                return new UZA.Label(this.convFiledName("lblNinteiChosaIinItakuSaki"));
+            Controls.prototype.txtNinteiChosaIinItakuSaki = function () {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtNinteiChosaIinItakuSaki"));
             };
 
             Controls.prototype.btnNinteiChosaItakusakiGuide = function () {
@@ -279,8 +295,8 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
             };
 
-            Controls.prototype.lblNinteiChosaInShimei = function () {
-                return new UZA.Label(this.convFiledName("lblNinteiChosaInShimei"));
+            Controls.prototype.txtNinteiChosaInShimei = function () {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtNinteiChosaInShimei"));
             };
 
             Controls.prototype.btnNinteiChosainGuide = function () {
@@ -323,8 +339,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("ShujiiJoho"));
             };
 
-            Controls.prototype.lblShujiiIryokikan = function () {
-                return new UZA.Label(this.convFiledName("lblShujiiIryokikan"));
+            Controls.prototype.txtShujiiIryokikan = function () {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtShujiiIryokikan"));
             };
 
             Controls.prototype.btnShujiiIryokikanGuide = function () {
@@ -335,8 +351,8 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtShujiiIryokikanName"));
             };
 
-            Controls.prototype.lblShujiiName = function () {
-                return new UZA.Label(this.convFiledName("lblShujiiName"));
+            Controls.prototype.txtShujiiShimei = function () {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtShujiiShimei"));
             };
 
             Controls.prototype.btnShujiiGuide = function () {
@@ -495,8 +511,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("ZenkaiJoho"));
             };
 
-            Controls.prototype.lblZenkaiChosaItakusaki = function () {
-                return new UZA.Label(this.convFiledName("lblZenkaiChosaItakusaki"));
+            Controls.prototype.txtZenkaiChosaItakusaki = function () {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtZenkaiChosaItakusaki"));
             };
 
             Controls.prototype.btnZenkaiChosaItakusakiGuide = function () {
@@ -507,8 +523,8 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtZenkaiNinteiChosaItakusakiName"));
             };
 
-            Controls.prototype.lblZenkaiShujiiIryokikan = function () {
-                return new UZA.Label(this.convFiledName("lblZenkaiShujiiIryokikan"));
+            Controls.prototype.txtZenkaiShujiiIryokikan = function () {
+                return new UZA.TextBoxDomainCode(this.convFiledName("txtZenkaiShujiiIryokikan"));
             };
 
             Controls.prototype.btnZenkaiShujiiIryokikanGuide = function () {
@@ -541,6 +557,10 @@ var DBZ;
 
             Controls.prototype.SonotaJoho = function () {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
+            };
+
+            Controls.prototype.ccdGeninShikkan = function () {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
             };
 
             Controls.prototype.txtShinseiKeikaNissu = function () {

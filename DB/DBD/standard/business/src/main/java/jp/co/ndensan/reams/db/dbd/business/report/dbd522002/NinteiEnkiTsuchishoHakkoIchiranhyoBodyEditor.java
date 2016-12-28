@@ -7,15 +7,6 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd522002;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.enkitsuchisho.EnkiTsuchishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd522002.NinteiEnkiTsuchishoHakkoIchiranhyoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -45,16 +36,12 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoBodyEditor implements INinteiEnkiTsuchis
         edit氏名(source);
         edit住所(source);
         edit申請日(source);
-        edit申請事由(source);
-        edit一次判定日(source);
-        edit一次判定(source);
-        edit一次重(source);
-        edit資料作成日(source);
-        edit審査予定日(source);
+        edit延期決定年月日(source);
+        edit延期理由(source);
+        edit延期通知発行年月日(source);
         edit延期通知書発行回数(source);
-        edit前回要介護度(source);
-        edit前回認定開始日(source);
-        edit前回認定終了日(source);
+        edit延期見込期間開始年月日(source);
+        edit延期見込期間終了年月日(source);
         return source;
     }
 
@@ -85,96 +72,31 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoBodyEditor implements INinteiEnkiTsuchis
                 .wareki().toDateString();
     }
 
-    private void edit申請事由(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.listHakkoIchiranhyo_6 = entity.get申請理由();
+    private void edit延期決定年月日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source){
+        source.listHakkoIchiranhyo_6 = entity.get延期決定年月日() == null ? RString.EMPTY : entity.get延期決定年月日().wareki().toDateString();
     }
-
-    private void edit一次判定日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.listHakkoIchiranhyo_7 = entity.get一次判定年月日() == null ? RString.EMPTY : entity.get一次判定年月日()
-                .wareki().toDateString();
+    
+    private void edit延期理由(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source){
+        source.listHakkoIchiranhyo_7 = entity.get延期理由() == null ? RString.EMPTY : entity.get延期理由();
     }
-
-    private void edit一次判定(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        if (isコードNullOrEmpty(entity.get厚労省IF識別コード()) || isコードNullOrEmpty(entity.get一次判定結果コード())) {
-            return;
-        }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode99.toValue(entity.get一次判定結果コード().value()).get略称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode02.toValue(entity.get一次判定結果コード().value()).get略称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード()
-                .equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode06.toValue(entity.get一次判定結果コード().value()).get略称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_8 = IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果コード().value()).get略称();
-        } else {
-            source.listHakkoIchiranhyo_8 = null;
-        }
+    
+    private void edit延期通知発行年月日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
+        source.listHakkoIchiranhyo_8 = entity.get延期通知発行年月日() == null ? RString.EMPTY : entity.get延期通知発行年月日().wareki().toDateString();
     }
-
+    
+     private void edit延期通知書発行回数(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
+        source.listHakkoIchiranhyo_9 = new RString(entity.get延期通知発行回数());
+    }
+   
+    private void edit延期見込期間開始年月日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
+        source.listHakkoIchiranhyo_10 = entity.get延期見込期間開始年月日() == null ? RString.EMPTY : entity.get延期見込期間開始年月日().wareki().toDateString();
+    }
+    
+    private void edit延期見込期間終了年月日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
+        source.listHakkoIchiranhyo_11 = entity.get延期見込期間開始年月日() == null ? RString.EMPTY : entity.get延期見込期間開始年月日().wareki().toDateString();
+    }
+    
     private boolean isコードNullOrEmpty(Code コード) {
         return null == コード || コード.isEmpty();
-    }
-
-    private void edit一次重(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        if (isコードNullOrEmpty(entity.get厚労省IF識別コード()) || isコードNullOrEmpty(entity.get一五次判定結果コード())) {
-            return;
-        }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode99.toValue(entity.get一五次判定結果コード().value()).get略称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode02.toValue(entity.get一五次判定結果コード().value()).get略称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode06.toValue(entity.get一五次判定結果コード().value()).get略称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_9 = IchijiHanteiKekkaCode09.toValue(entity.get一五次判定結果コード().value()).get略称();
-        } else {
-            source.listHakkoIchiranhyo_9 = null;
-        }
-    }
-
-    private void edit資料作成日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.listHakkoIchiranhyo_10 = null == entity.get資料作成日() ? RString.EMPTY : entity.get資料作成日()
-                .wareki().toDateString();
-    }
-
-    private void edit審査予定日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.listHakkoIchiranhyo_11 = null == entity.get審査会予定日() ? RString.EMPTY : entity.get審査会予定日()
-                .wareki().toDateString();
-    }
-
-    private void edit延期通知書発行回数(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.listHakkoIchiranhyo_12 = new RString(entity.get延期通知発行回数());
-    }
-
-    private void edit前回要介護度(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        if (isコードNullOrEmpty(entity.get厚労省IF識別コード()) || isコードNullOrEmpty(entity.get前回要介護状態区分コード())) {
-            return;
-        }
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_13 = YokaigoJotaiKubun99.toValue(entity.get前回要介護状態区分コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_13 = YokaigoJotaiKubun02.toValue(entity.get前回要介護状態区分コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード()
-                .equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_13 = YokaigoJotaiKubun06.toValue(entity.get前回要介護状態区分コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード().value())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード().value())) {
-            source.listHakkoIchiranhyo_13 = YokaigoJotaiKubun09.toValue(entity.get前回要介護状態区分コード().value()).get名称();
-        } else {
-            source.listHakkoIchiranhyo_13 = null;
-        }
-    }
-
-    private void edit前回認定開始日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.listHakkoIchiranhyo_14 = null == entity.get前回認定開始日() ? RString.EMPTY : entity.get前回認定開始日()
-                .wareki().toDateString();
-    }
-
-    private void edit前回認定終了日(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.listHakkoIchiranhyo_15 = null == entity.get前回認定終了日() ? RString.EMPTY : entity.get前回認定終了日()
-                .wareki().toDateString();
     }
 }

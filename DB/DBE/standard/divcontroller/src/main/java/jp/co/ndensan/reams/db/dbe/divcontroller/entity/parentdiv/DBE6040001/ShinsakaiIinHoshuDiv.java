@@ -27,8 +27,6 @@ public class ShinsakaiIinHoshuDiv extends Panel {
     private DataGrid<dgShinsakaiIinHoshu_Row> dgShinsakaiIinHoshu;
     @JsonProperty("lblLegend")
     private Label lblLegend;
-    @JsonProperty("txtTotalCount")
-    private TextBoxNum txtTotalCount;
     @JsonProperty("txtShinsaKaisu")
     private TextBoxNum txtShinsaKaisu;
     @JsonProperty("txtHoshuSogaku")
@@ -98,24 +96,6 @@ public class ShinsakaiIinHoshuDiv extends Panel {
     @JsonProperty("lblLegend")
     public void setLblLegend(Label lblLegend) {
         this.lblLegend = lblLegend;
-    }
-
-    /*
-     * gettxtTotalCount
-     * @return txtTotalCount
-     */
-    @JsonProperty("txtTotalCount")
-    public TextBoxNum getTxtTotalCount() {
-        return txtTotalCount;
-    }
-
-    /*
-     * settxtTotalCount
-     * @param txtTotalCount txtTotalCount
-     */
-    @JsonProperty("txtTotalCount")
-    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
-        this.txtTotalCount = txtTotalCount;
     }
 
     /*

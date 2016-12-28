@@ -103,16 +103,6 @@ public class ShinsakauIinHoshuShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTotalCount() {
-        return this.getShinsakaiIinHoshu().getTxtTotalCount();
-    }
-
-    @JsonIgnore
-    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
-        this.getShinsakaiIinHoshu().setTxtTotalCount(txtTotalCount);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtShinsaKaisu() {
         return this.getShinsakaiIinHoshu().getTxtShinsaKaisu();
     }
