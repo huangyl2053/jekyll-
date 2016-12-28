@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.ImageDisplay;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
@@ -40,6 +41,7 @@ public class ImageDisplay {
     private static final RString IMAGE_TEIKEIGAIOPINIONFILE = new RString("4");
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
     private static final RString ファイルまで = new RString("_BAK.png");
+    private static final RString 意見書イメージ幅 = new RString(504);
 
     /**
      * 画面初期化を表示します。
@@ -74,22 +76,10 @@ public class ImageDisplay {
             div.getCcdChosaTokkiShiryoShokai().setDisplayNone(true);
             HashMap<Integer, List<RString>> 初期化のイメージ = this.getFilePathMap(toCopyPath);
             ViewStateHolder.put(ViewStateKeys.イメージ情報_存在, 初期化のイメージ);
-            if (!初期化のイメージ.isEmpty() && !RString.isNullOrEmpty(初期化のイメージ.get(1).get(0))) {
-                RString 初期化のイメージ_1 = 初期化のイメージ.get(1).get(0);
-                div.getImgGenbon().setSrc(初期化のイメージ_1);
-                div.getImgMask().setSrc(初期化のイメージ.get(1).get(1));
-                div.setHdnImageDisplay(IMAGE_TEIKEIOPINIONFILE);
-                div.getBtnBefore().setDisabled(true);
-                if (1 == 初期化のイメージ.size()) {
-                    div.getBtnAfterImg().setDisabled(true);
-                }
-                setOCROpinionFileController(div, false);
-            } else {
-                setOCROpinionFileController(div, true);
-                div.getLblNoImage().setDisplayNone(false);
-            }
+            List<RString> imageList = 初期化のイメージ.isEmpty() ? Collections.EMPTY_LIST : 初期化のイメージ.get(1);
+            setOCROpinionFileController(div, 初期化のイメージ.size(), 1, imageList);
         } else {
-            setOCROpinionFileController(div, true);
+            setOCROpinionFileController(div, 0, 0, Collections.EMPTY_LIST);
             originalImagePathList = getOriginalFilePathList(イメージ区分, toCopyPath);
             maskImagePathList = getMaskFilePathList(イメージ区分, toCopyPath, originalImagePathList);
 
@@ -106,16 +96,48 @@ public class ImageDisplay {
                 div.getLblNoImage().setDisplayNone(false);
             }
         }
+        div.getBtnBack().setDisplayNone(false);
         return ResponseData.of(div).respond();
     }
 
-    private void setOCROpinionFileController(ImageDisplayDiv div, boolean value) {
-        div.getLblGenbon().setDisplayNone(value);
-        div.getLblMask().setDisplayNone(value);
-        div.getImgGenbon().setDisplayNone(value);
-        div.getImgMask().setDisplayNone(value);
-        div.getBtnBefore().setDisabled(value);
-        div.getBtnAfterImg().setDisabled(value);
+    private void setOCROpinionFileController(
+            ImageDisplayDiv div, int totalpage, int nowPage,
+            List<RString> img) {
+        setOCROpinionImage(div, img);
+        boolean isNotDispPageChangeButton = totalpage <= 1;
+        div.getBtnBefore().setDisplayNone(isNotDispPageChangeButton);
+        div.getBtnAfterImg().setDisplayNone(isNotDispPageChangeButton);
+        if (nowPage != 0) {
+            div.getLblNoImage().setDisplayNone(!div.getImgMask().isDisplayNone());
+        }
+        if (isNotDispPageChangeButton) {
+            return;
+        }
+        div.getBtnBefore().setDisabled(nowPage == 1);
+        div.getBtnAfterImg().setDisabled(nowPage == totalpage);
+        div.setHdnImageDisplay(new RString(nowPage));
+    }
+
+    private void setOCROpinionImage(ImageDisplayDiv div, List<RString> img) {
+        if (img.isEmpty()) {
+            div.getLblGenbon().setDisplayNone(true);
+            div.getLblMask().setDisplayNone(true);
+            div.getImgGenbon().setDisplayNone(true);
+            div.getImgMask().setDisplayNone(true);
+        } else {
+            div.getImgGenbon().setSrc(img.get(0));
+            div.getImgGenbon().setWidth(意見書イメージ幅);
+            boolean isEmptyImgMask = true;
+            if (img.size() > 1 && !RString.isNullOrEmpty(img.get(1))) {
+                div.getImgMask().setSrc(img.get(1));
+                div.getImgMask().setWidth(意見書イメージ幅);
+                isEmptyImgMask = false;
+            }
+            div.getLblGenbon().setDisplayNone(false);
+            div.getLblMask().setDisplayNone(false);
+            div.getImgGenbon().setDisplayNone(false);
+            div.getImgMask().setDisplayNone(isEmptyImgMask);
+        }
     }
 
     private List<RString> createImageBinaryList(List<RString> imagePathList) {
@@ -215,7 +237,7 @@ public class ImageDisplay {
 
         } else if (IMAGE_OTHERFILE.equals(imageKubun)) {
             for (RString imageFile : originalImagePathList) {
-                if (imageFile.contains(ファイルまで)){
+                if (imageFile.contains(ファイルまで)) {
                     imageFilePathList.add(imageFile.replace(ファイルまで, new RString(".png")));
                 } else {
                     imageFilePathList.add(RString.EMPTY);
@@ -248,17 +270,7 @@ public class ImageDisplay {
      */
     public ResponseData<ImageDisplayDiv> onClick_btnAfterImg(ImageDisplayDiv div) {
         if (!RString.EMPTY.equals(div.getHdnImageDisplay())) {
-            int index = Integer.parseInt(div.getHdnImageDisplay().toString());
-            HashMap<Integer, List<RString>> 初期化のイメージ = ViewStateHolder.get(ViewStateKeys.イメージ情報_存在, HashMap.class);
-            index = index + 1;
-            if (index < 初期化のイメージ.size()) {
-                div.getBtnBefore().setDisabled(false);
-                div.setHdnImageDisplay(new RString(index));
-                div.getImgGenbon().setSrc(初期化のイメージ.get(index).get(0));
-                div.getImgMask().setSrc(初期化のイメージ.get(index).get(1));
-            } else {
-                div.getBtnAfterImg().setDisabled(true);
-            }
+            changePage(div, true);
         }
         return ResponseData.of(div).respond();
     }
@@ -271,19 +283,20 @@ public class ImageDisplay {
      */
     public ResponseData<ImageDisplayDiv> onClick_btnBefore(ImageDisplayDiv div) {
         if (!RString.EMPTY.equals(div.getHdnImageDisplay())) {
-            int index = Integer.parseInt(div.getHdnImageDisplay().toString());
-            index = index - 1;
-            HashMap<Integer, List<RString>> 初期化のイメージ = ViewStateHolder.get(ViewStateKeys.イメージ情報_存在, HashMap.class);
-            if (index > 0) {
-                div.getBtnAfterImg().setDisabled(false);
-                div.setHdnImageDisplay(new RString(index));
-                div.getImgGenbon().setSrc(初期化のイメージ.get(index).get(0));
-                div.getImgMask().setSrc(初期化のイメージ.get(index).get(1));
-            } else {
-                div.getBtnBefore().setDisabled(true);
-            }
+            changePage(div, false);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void changePage(ImageDisplayDiv div, boolean isNext) {
+        int index = Integer.parseInt(div.getHdnImageDisplay().toString());
+        if (isNext) {
+            index++;
+        } else {
+            index--;
+        }
+        HashMap<Integer, List<RString>> 初期化のイメージ = ViewStateHolder.get(ViewStateKeys.イメージ情報_存在, HashMap.class);
+        setOCROpinionFileController(div, 初期化のイメージ.size(), index, 初期化のイメージ.get(index));
     }
 
     /**
@@ -317,9 +330,9 @@ public class ImageDisplay {
             this.get_メッセージ(div, validPairs);
         } else if ((IMAGE_TEIKEIOPINIONFILE.equals(イメージ区分) || IMAGE_TEIKEIGAIOPINIONFILE.equals(イメージ区分))
                 && イメージファイルが存在区分_存在しない.equals(getHandler().
-                get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名))) {
+                        get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名))) {
             ValidationMessageControlPairs validPairs = getValidationHandler().主治医意見書イメージファイル存在チェック();
-            this.get_メッセージ(div, validPairs); 
+            this.get_メッセージ(div, validPairs);
         } else if (IMAGE_OTHERFILE.equals(イメージ区分) && イメージファイルが存在区分_存在しない.equals(getHandler().
                 getその他資料のイメージファイルが存在区分(存在したイメージファイル名))) {
             ValidationMessageControlPairs validPairs = getValidationHandler().その他資料イメージファイル存在チェック();
@@ -329,22 +342,25 @@ public class ImageDisplay {
 
     private HashMap<Integer, List<RString>> getFilePathMap(RString toCopyPath) {
         List<RString> imageOpinionFileList = this.イメージ管理資料();
-        List<RString> imgaeOpinionFileBinaryList;
         HashMap<Integer, List<RString>> dataMap = new HashMap<>();
         int index = 1;
         for (RString imageFile : imageOpinionFileList) {
             List<RString> imageFileList = new ArrayList<>();
+            boolean is画像あり = false;
             if (Directory.exists(Path.combinePath(toCopyPath, imageFile))) {
                 imageFileList.add(Path.combinePath(toCopyPath, imageFile));
+                is画像あり = true;
             }
             if (imageFile.endsWith(ファイルまで.toString()) && !imageFileList.isEmpty()) {
                 imageFileList.add(Path.combinePath(toCopyPath, imageFile.replace(ファイルまで.toString(), ".png")));
+                is画像あり = true;
             } else {
                 imageFileList.add(RString.EMPTY);
             }
-            imgaeOpinionFileBinaryList = createImageBinaryList(imageFileList);
-            dataMap.put(index, imgaeOpinionFileBinaryList);
-            index = index + 1;
+            if (is画像あり) {
+                dataMap.put(index, createImageBinaryList(imageFileList));
+                index = index + 1;
+            }
         }
         return dataMap;
     }

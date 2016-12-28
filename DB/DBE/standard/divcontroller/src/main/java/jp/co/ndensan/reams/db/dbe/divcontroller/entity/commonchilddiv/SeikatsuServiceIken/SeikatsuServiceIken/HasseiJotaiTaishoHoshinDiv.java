@@ -14,15 +14,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HasseiJotaiTaishoHoshinDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkHasseiShojo")
-    private CheckBoxList chkHasseiShojo;
     @JsonProperty("Dummy01")
     private Space Dummy01;
     @JsonProperty("chkJotaiSonota")
@@ -38,24 +36,6 @@ public class HasseiJotaiTaishoHoshinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getchkHasseiShojo
-     * @return chkHasseiShojo
-     */
-    @JsonProperty("chkHasseiShojo")
-    public CheckBoxList getChkHasseiShojo() {
-        return chkHasseiShojo;
-    }
-
-    /*
-     * setchkHasseiShojo
-     * @param chkHasseiShojo chkHasseiShojo
-     */
-    @JsonProperty("chkHasseiShojo")
-    public void setChkHasseiShojo(CheckBoxList chkHasseiShojo) {
-        this.chkHasseiShojo = chkHasseiShojo;
-    }
-
     /*
      * getDummy01
      * @return Dummy01

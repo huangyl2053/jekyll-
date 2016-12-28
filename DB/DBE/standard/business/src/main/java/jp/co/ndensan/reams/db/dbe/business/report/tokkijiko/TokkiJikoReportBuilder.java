@@ -14,6 +14,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 public class TokkiJikoReportBuilder implements ITokkiJikoReportBuilder {
 
     private final ITokkiJikoReportEditor editor;
+    private final ITokkiJikoReportListFieldEditor listEditor;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param editor {@link ITokkiJikoReportEditor}
+     * @param listEditor {@link ITokkiJikoReportListFieldEditor}
+     */
+    public TokkiJikoReportBuilder(ITokkiJikoReportEditor editor, ITokkiJikoReportListFieldEditor listEditor) {
+        this.editor = editor;
+        this.listEditor = listEditor;
+    }
 
     /**
      * コンストラクタです。
@@ -22,10 +34,14 @@ public class TokkiJikoReportBuilder implements ITokkiJikoReportBuilder {
      */
     public TokkiJikoReportBuilder(ITokkiJikoReportEditor editor) {
         this.editor = editor;
+        this.listEditor = null;
     }
 
     @Override
     public TokkiJikoReportSource build() {
+        if (listEditor != null) {
+            return ReportEditorJoiner.from(new TokkiJikoReportSource()).join(editor).join(listEditor).buildSource();
+        }
         return ReportEditorJoiner.from(new TokkiJikoReportSource()).join(editor).buildSource();
     }
 

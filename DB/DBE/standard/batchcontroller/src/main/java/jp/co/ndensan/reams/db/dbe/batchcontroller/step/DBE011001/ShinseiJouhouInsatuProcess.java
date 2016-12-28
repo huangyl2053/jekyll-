@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -50,7 +50,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1390-020 suguangjun
  */
-public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitorEntity> {
+public class ShinseiJouhouInsatuProcess extends BatchProcessBase<ShinseiMonitorEntity> {
 
     private static final ReportId REPORT_ID = ReportIdDBE.DBE011002.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
@@ -106,21 +106,7 @@ public class ShinseiJouhouInsatuProcess extends BatchKeyBreakBase<ShinseiMonitor
     }
 
     @Override
-    protected void keyBreakProcess(ShinseiMonitorEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            ShinseiMonitorReport report = new ShinseiMonitorReport(current, index_tmp);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
-    }
-
-    private boolean hasBrek(ShinseiMonitorEntity before, ShinseiMonitorEntity current) {
-        return !before.get被保険者番号().equals(current.get被保険者番号());
-    }
-
-    @Override
-    protected void usualProcess(ShinseiMonitorEntity entity) {
+    protected void process(ShinseiMonitorEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
         ShinseiMonitorReport report = new ShinseiMonitorReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);

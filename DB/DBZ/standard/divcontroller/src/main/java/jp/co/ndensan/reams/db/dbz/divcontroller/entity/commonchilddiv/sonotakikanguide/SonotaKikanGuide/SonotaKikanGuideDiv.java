@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBE-3000-050 wangkun
  */
 public class SonotaKikanGuideDiv extends Panel implements ISonotaKikanGuideDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
