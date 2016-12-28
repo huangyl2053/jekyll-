@@ -861,6 +861,7 @@
     </select>
     <resultMap id="resultMap_KekkatsuchiIchiran" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity" autoMapping="true">
         <result property="hokenshaName" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
         <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaName" column="氏名"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -872,13 +873,15 @@
         <result property="ninteiYukokaishiYMD" column="有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiYukoshurouYMD" column="有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiNo" column="開催番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="shinsakaiKaisaiYMD" column="開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gogitaiNo" column="合議体番号"/>
+        <result property="shinsakaiKaisaiYMD" column="開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="getKekkatsuchiIchiranList" resultMap="resultMap_KekkatsuchiIchiran"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter"
             fetchSize="500">
         SELECT
         dbT7051."shichosonMeisho" AS 保険者名
+        ,dbT7051."shoKisaiHokenshaNo" AS 保険者番号
         ,dbT5101."ninteiShinseiYMD" AS 申請日
         ,dbT5101."hihokenshaNo" AS 被保険者番号
         ,dbT5101."hihokenshaName" AS 氏名
@@ -890,6 +893,7 @@
         ,dbT5102."nijiHanteiNinteiYukoKaishiYMD" AS 有効開始年月日
         ,dbT5102."nijiHanteiNinteiYukoShuryoYMD" AS 有効終了年月日
         ,dbT5102."shinsakaiKaisaiNo" AS 開催番号
+        ,dbT5511."gogitaiNo" AS 合議体番号
         ,dbT5511."shinsakaiKaisaiYMD" AS 開催日
         FROM
         rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
@@ -902,7 +906,7 @@
         WHERE
         dbT5102."shinsakaiKaisaiNo" = #{kaisaiBangou}
         ORDER BY
-        dbT5102."shinsakaiKaisaiNo"
+        dbT7051."shoKisaiHokenshaNo"
         ,dbT5101."ninteiShinseiYMD"
     </select>
 </mapper>

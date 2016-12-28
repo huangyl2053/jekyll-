@@ -80,11 +80,11 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
                     bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
                 }
             } else if (i == INDEX_2 && INDEX_1 < 調査員情報リスト.size()) {
-                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(調査員情報リスト.get(INDEX_1));
-                bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
+                bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(RString.EMPTY);
             } else if (i == INDEX_3 && INDEX_1 < その他情報リスト.size()) {
-                bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(その他情報リスト.get(INDEX_1));
-                bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
+                bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(RString.EMPTY);
+            } else if (i == INDEX_4) {
+                bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(RString.EMPTY);
             }
             ShinsakaiGijirokuBuilder builder = new ShinsakaiGijirokuBuilder(editor, bodyEditor1, bodyEditor2, bodyEditor3, bodyEditor4, bodyEditor5);
             reportSourceWriter.writeLine(builder);
@@ -130,7 +130,7 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
                     temp委員リスト.get(INDEX_3), temp委員リスト.get(INDEX_4)));
         } else {
             合計数リスト.add(new RString(temp委員リスト.size()));
-            合計数リスト.add(new RString(INDEX_0));
+            合計数リスト.add(RString.EMPTY);
             if (temp委員リスト.size() == INDEX_1) {
                 委員情報リスト.add(new GoGyoumeIchiIchiRanEntity(temp委員リスト.get(INDEX_0), RString.EMPTY, RString.EMPTY,
                         RString.EMPTY, RString.EMPTY));
@@ -165,15 +165,16 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
     }
 
     private void edit調査員情報(List<IinJohoRelateEntity> 調査員情報リストtemp) {
-        if (調査員情報リストtemp.size() > INDEX_5) {
-            合計数リスト.add(new RString(INDEX_5));
-            調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+        if (調査員情報リストtemp.size() >= INDEX_5) {
+            合計数リスト.add(RString.EMPTY);
+            調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(
                     調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
                     調査員情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(),
                     調査員情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(),
-                    調査員情報リストtemp.get(INDEX_3).getShinsakaiIinShimei()));
+                    調査員情報リストtemp.get(INDEX_3).getShinsakaiIinShimei(),
+                    調査員情報リストtemp.get(INDEX_4).getShinsakaiIinShimei()));
         } else {
-            合計数リスト.add(new RString(調査員情報リストtemp.size()));
+            合計数リスト.add(RString.EMPTY);
             if (調査員情報リストtemp.size() == INDEX_1) {
                 調査員情報リスト.add(new GoGyoumeIchiIchiRanEntity(調査員情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
@@ -194,14 +195,15 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
 
     private void editその他情報(List<IinJohoRelateEntity> その他情報リストtemp) {
         if (その他情報リストtemp.size() >= INDEX_5) {
-            合計数リスト.add(new RString(INDEX_5));
-            その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
+            合計数リスト.add(RString.EMPTY);
+            その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(
                     その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
                     その他情報リストtemp.get(INDEX_1).getShinsakaiIinShimei(),
                     その他情報リストtemp.get(INDEX_2).getShinsakaiIinShimei(),
-                    その他情報リストtemp.get(INDEX_3).getShinsakaiIinShimei()));
+                    その他情報リストtemp.get(INDEX_3).getShinsakaiIinShimei(),
+                    その他情報リストtemp.get(INDEX_4).getShinsakaiIinShimei()));
         } else {
-            合計数リスト.add(new RString(その他情報リストtemp.size()));
+            合計数リスト.add(RString.EMPTY);
             if (その他情報リストtemp.size() == INDEX_1) {
                 その他情報リスト.add(new GoGyoumeIchiIchiRanEntity(その他情報リストtemp.get(INDEX_0).getShinsakaiIinShimei(),
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
@@ -227,14 +229,14 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
     private List<SanGyoumeYonJyoIchiRanEntity> get新規と更新と区変の件数(ShinsakaiGijirokuEntity item) {
         List<SanGyoumeYonJyoIchiRanEntity> resultList = new ArrayList<>();
         ShinsakaiKekkaJohoRelateEntity entity = item.get審査会審査結果等();
-        resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get新規申請件数()),
+        resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get新規申請_状態区分変更件数()),
                 new RString(entity.get新規_状変の内2号被保険者数()),
                 new RString(entity.get新規_状変在宅数()),
                 new RString(entity.get新規_状変施設数())));
         resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get更新申請件数()),
                 new RString(entity.get更新申請内2号被保険者数()),
-                new RString(entity.get新規_状変在宅数()),
-                new RString(entity.get新規_状変施設数())));
+                new RString(entity.get更新申請在宅数()),
+                new RString(entity.get更新申請施設数())));
         resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get判定件数()),
                 new RString(entity.get判定件数_2号被保険者数()),
                 new RString(entity.get判定件数_在宅数()),

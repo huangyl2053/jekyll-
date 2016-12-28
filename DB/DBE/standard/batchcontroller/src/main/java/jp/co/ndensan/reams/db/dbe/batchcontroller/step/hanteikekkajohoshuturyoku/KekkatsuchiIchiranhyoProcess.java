@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -37,10 +37,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0180-030 xuyannan
  */
-public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIchiranhyoEntity> {
+public class KekkatsuchiIchiranhyoProcess extends BatchKeyBreakBase<KekkatsuchiIchiranhyoEntity> {
 
     private static final ReportId ID = ReportIdDBE.DBE525004.getReportId();
-    private static final RString 改ページ = new RString("shinsakaiNo");
+    private static final RString 改ページ = new RString("shichosonName");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getKekkatsuchiIchiranList");
@@ -49,8 +49,7 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
     private RDateTime システム時刻;
     private int index;
     private RStringBuilder builder;
-    private RString newShinsakaiNo;
-    private RString oldShinsakaiNo;
+    private RString 広域市町村名;
 
     @BatchWriter
     private BatchReportWriter<KekkatsuchiIchiranhyoReportSource> batchReportWriter;
@@ -61,8 +60,7 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
         システム時刻 = RDateTime.now();
         index = 1;
         page_break_keys = Collections.unmodifiableList(Arrays.asList(改ページ));
-        newShinsakaiNo = RString.EMPTY;
-        oldShinsakaiNo = RString.EMPTY;
+        広域市町村名 = DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 
     @Override
@@ -78,8 +76,12 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
     }
 
     @Override
-    protected void process(KekkatsuchiIchiranhyoEntity entity) {
-        entity.setShichosonName(DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+    protected void usualProcess(KekkatsuchiIchiranhyoEntity entity) {
+        if (広域市町村名 != null) {
+            entity.setShichosonName(広域市町村名);
+        } else {
+            entity.setShichosonName(entity.getHokenshaName());
+        }
         builder = new RStringBuilder();
         builder.append(entity.getShinsakaiNo());
         builder.append("回");
@@ -91,15 +93,19 @@ public class KekkatsuchiIchiranhyoProcess extends BatchProcessBase<KekkatsuchiIc
         } else {
             entity.setNijiHanteiKekka(RString.EMPTY);
         }
-        newShinsakaiNo = entity.getShinsakaiNo();
-        if (oldShinsakaiNo.equals(newShinsakaiNo)) {
-            index = index + 1;
-        } else {
-            index = 1;
-        }
-        oldShinsakaiNo = newShinsakaiNo;
         KekkatsuchiIchiranhyoReport report = new KekkatsuchiIchiranhyoReport(entity, index);
         report.writeBy(reportSourceWriter);
+    }
+
+    @Override
+    protected void keyBreakProcess(KekkatsuchiIchiranhyoEntity current) {
+        if (!getBefore().getHokenshaName().equals(current.getHokenshaName())) {
+            index = 1;
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
     }
 
 }

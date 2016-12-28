@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -21,8 +23,9 @@ import lombok.Setter;
 public class KekkatsuchiIchiranhyoEntity {
 
     private RString shichosonName;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString shinsakaiNo;
-    private RString shinsakaiKaisaiYMD;
+    private FlexibleDate shinsakaiKaisaiYMD;
     private RDateTime printTimeStamp;
     private RString hokenshaName;
     private RString shinseiYMD;
@@ -35,4 +38,5 @@ public class KekkatsuchiIchiranhyoEntity {
     private RString ninteiYukoKikan;
     private RString ninteiYukokaishiYMD;
     private RString ninteiYukoshurouYMD;
+    private int gogitaiNo;
 }
