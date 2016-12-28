@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ocrdataread.OcrDataReadProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocrdataread.OcrDataReadProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8429
  */
-public class DBE250001_NinteiChoshaKekkaTorikomi extends BatchFlowBase<DBE250001_NinteiChoshaKekkaTorikomiParameter> {
+public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_NinteiChosaKekkaTorikomiParameter> {
 
     private int fileIndex = 0;
     private List<RString> filePathList;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.NinteiOcrResult;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChoshaKekkaTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosaMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.DBE2240001StateName;
@@ -139,8 +139,8 @@ public class NinteiChosaOCRTorikomi {
      * @param div OCR取込画面情報
      * @return 画面情報より作成したバッチパラメータ情報
      */
-    public ResponseData<DBE250001_NinteiChoshaKekkaTorikomiParameter> onSetBatchParameterURL(NinteiChosaOCRTorikomiDiv div) {
-        DBE250001_NinteiChoshaKekkaTorikomiParameter parameter = getHandler(div).setバッチパラメータ();
+    public ResponseData<DBE250001_NinteiChosaKekkaTorikomiParameter> onSetBatchParameterURL(NinteiChosaOCRTorikomiDiv div) {
+        DBE250001_NinteiChosaKekkaTorikomiParameter parameter = getHandler(div).setバッチパラメータ();
         return ResponseData.of(parameter).respond();
     }
 

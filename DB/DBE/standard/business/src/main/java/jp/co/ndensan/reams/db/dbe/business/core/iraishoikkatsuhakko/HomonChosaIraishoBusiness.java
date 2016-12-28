@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyosaicheckhyo.ChosahyoSaiCheckhyoItem;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCheckhyoRelateEntity;
@@ -73,7 +72,7 @@ public class HomonChosaIraishoBusiness {
     private static final RString 年号_明治 = new RString("明");
     private static final RString 年号_大正 = new RString("大");
     private static final RString 年号_昭和 = new RString("昭");
-    private static final RString 記号_星 = new RString("*");
+    private static final RString 記号_星 = new RString("＊");
     private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
@@ -766,37 +765,19 @@ public class HomonChosaIraishoBusiness {
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEIOCHOSAIRAISHO);
-        builder.append(processParamter.getNinteioChosaIraisho());
+        builder.append(get区分(processParamter.getNinteioChosaIraisho()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAHYO);
-        builder.append(processParamter.getNinteiChosahyo());
+        builder.append(get区分(processParamter.getNinteiChosahyo()));
         出力条件.add(builder.toRString());
-        builder = new RStringBuilder();
-        builder.append(NINTEICHOSAIRAILIST);
-        出力条件.add(builder.toRString());
-        List<GridParameter> ninteiChosaIraiList = processParamter.getNinteiChosaIraiList();
-        for (GridParameter gridParameter : ninteiChosaIraiList) {
-            builder = new RStringBuilder();
-            builder.append(NINTEICHOSAITAKUSAKICODE);
-            builder.append(gridParameter.getNinteichosaItakusakiCode());
-            出力条件.add(builder.toRString());
-            builder = new RStringBuilder();
-            builder.append(NINTEICHOSAINCODE);
-            builder.append(gridParameter.getNinteiChosainCode());
-            出力条件.add(builder.toRString());
-            builder = new RStringBuilder();
-            builder.append(SHOKISAIHOKENSHANO);
-            builder.append(gridParameter.getShoKisaiHokenshaNo());
-            出力条件.add(builder.toRString());
-        }
         builder = new RStringBuilder();
         builder.append(HAKKOBI);
         builder.append(ConvertDate(processParamter.getHakkobi()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TEISHUTSUKIGEN);
-        builder.append(processParamter.getTeishutsuKigen());
+        builder.append(get提出期限(processParamter.getTeishutsuKigen()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(KYOTSUHIZUKE);
@@ -805,58 +786,95 @@ public class HomonChosaIraishoBusiness {
 
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAISYO);
-        builder.append(processParamter.is認定調査依頼書());
+        builder.append(get出力可否(processParamter.is認定調査依頼書()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSADESIGN);
-        builder.append(processParamter.is認定調査票_デザイン用紙());
+        builder.append(get出力可否(processParamter.is認定調査票_デザイン用紙()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TOKKIJIKODESIGN);
-        builder.append(processParamter.is特記事項_デザイン用紙());
+        builder.append(get出力可否(processParamter.is特記事項_デザイン用紙()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAOCR);
-        builder.append(processParamter.is認定調査票OCR());
+        builder.append(get出力可否(processParamter.is認定調査票OCR()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TOKKIJIKOOCR);
-        builder.append(processParamter.is特記事項OCR());
+        builder.append(get出力可否(processParamter.is特記事項OCR()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(GAIKYOTOKKI);
-        builder.append(processParamter.is概況特記());
+        builder.append(get出力可否(processParamter.is概況特記()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSACHECKHYO);
-        builder.append(processParamter.is認定調査差異チェック票());
+        builder.append(get出力可否(processParamter.is認定調査差異チェック票()));
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(ZENKONINTEICHOSAHYO);
-        builder.append(processParamter.is前回認定調査結果との比較表());
+        builder.append(get出力可否(processParamter.is前回認定調査結果との比較表()));
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TOKKIJIKO_KOMOKUARI);
-        builder.append(processParamter.is特記事項_項目あり());
+        builder.append(get出力可否(processParamter.is特記事項_項目あり()));
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TOKKIJIKO_KOMOKUNASHI);
-        builder.append(processParamter.is特記事項_項目無し());
+        builder.append(get出力可否(processParamter.is特記事項_項目無し()));
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TOKKIJIKO_FREE);
-        builder.append(processParamter.is特記事項_フリータイプ());
+        builder.append(get出力可否(processParamter.is特記事項_フリータイプ()));
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(TENYURYOKU);
-        builder.append(processParamter.is手入力タイプ());
+        builder.append(get出力可否(processParamter.is手入力タイプ()));
+        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAICHOHYO);
-        builder.append(processParamter.isNinteiChosaIraiChohyo());
+        builder.append(get出力可否(processParamter.isNinteiChosaIraiChohyo()));
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(NINTEICHOSAIRAIRIREKIICHIRAN);
-        builder.append(processParamter.is認定調査依頼履歴一覧());
-        出力条件.add(builder.toRString());
-        出力条件.add(builder.toRString());
-        出力条件.add(builder.toRString());
+        builder.append(get出力可否(processParamter.is認定調査依頼履歴一覧()));
         出力条件.add(builder.toRString());
         return 出力条件;
+    }
+
+    private RString get出力可否(boolean 出力可否) {
+        return 出力可否 ? new RString("出力する") : new RString("出力しない");
+    }
+
+    private RString get提出期限(RString kubun) {
+        if (RString.isNullOrEmpty(kubun)) {
+            return RString.EMPTY;
+        }
+        if (kubun.equals(文字列0)) {
+            return new RString("申請者別に自動設定");
+        } else if (kubun.equals(文字列1)) {
+            return new RString("空欄");
+        } else if (kubun.equals(文字列2)) {
+            return new RString("共通日付");
+        } else {
+            return RString.EMPTY;
+        }
+    }
+
+    private RString get区分(RString kubun) {
+        if (RString.isNullOrEmpty(kubun)) {
+            return RString.EMPTY;
+        }
+        if (kubun.equals(文字列1)) {
+            return new RString("未印刷");
+        } else if (kubun.equals(文字列2)) {
+            return new RString("印刷済");
+        } else if (kubun.equals(文字列3)) {
+            return new RString("未印刷　印刷済");
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private RString ConvertDate(RString date) {
@@ -866,7 +884,7 @@ public class HomonChosaIraishoBusiness {
         if (!FlexibleDate.canConvert(date)) {
             return date;
         }
-        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
+        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
     }
 
     private void setZenkaiChosakekka(ChosahyoSaiCheckhyoItem item) {

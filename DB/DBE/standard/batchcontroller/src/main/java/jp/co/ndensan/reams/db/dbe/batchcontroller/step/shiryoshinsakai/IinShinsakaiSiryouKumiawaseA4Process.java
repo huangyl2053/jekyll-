@@ -89,6 +89,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
     private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
     private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
     private static final RString SEPARATOR = new RString("/");
+    private boolean is審査会対象一覧印刷済み;
     private List<ShinsakaiTaiyosyaJohoEntity> 委員審査会追加資料A4リスト;
 
     @BatchWriter
@@ -116,6 +117,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         一次判定MyBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         shinsakaiSiryoKyotsuList = mapper.getShinsakaiSiryoKyotsu(一次判定MyBatisParameter);
         get審査対象者一覧表情報();
+        is審査会対象一覧印刷済み = false;
         委員審査会追加資料A4リスト = mapper.getShinsakaiTaiyosyaJoho(対象者一覧MyBatisParameter);
     }
 
@@ -124,6 +126,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517903.getReportId().value())
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+
                     IinShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA4ReportSource> occuredBreak(
@@ -165,9 +168,11 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                     get主治医意見書情報(shinseishoKanriNo),
                     getその他資料情報(shinseishoKanriNo),
                     get審査会追加資料情報(shinseishoKanriNo),
+                    is審査会対象一覧印刷済み,
                     paramter.getSakuseiJoken(),
                     paramter.getPrintHou());
             report.writeBy(reportSourceWriter);
+            is審査会対象一覧印刷済み = true;
         }
         batchReportWriter.close();
     }
@@ -205,8 +210,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                 parameter.setShinseishoKanriZ(entity.getZShinseishoKanriNo());
                 List<DbT5211NinteichosahyoChosaItemEntity> 前回調査項目情報 = mapper.getZenkaiChosahyoChosaItem(parameter);
                 return new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項情報, 調査票調査項目情報, 前回調査項目情報, 主治医意見書項目情報,
-                        new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況,
-                        new RString(paramter.getGogitaiNo()), batchReportWriter.getImageFolderPath());
+                        new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況, new RString(paramter.getGogitaiNo()));
             }
         }
         return null;

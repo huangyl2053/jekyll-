@@ -124,8 +124,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     protected void process() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517901.getReportId().value())
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>()
-        .new SimpleLayoutBreaker(JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
+                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA4ReportSource>().new SimpleLayoutBreaker(
+                    JimuShinsakaishiryoA4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA4ReportSource> occuredBreak(
                             ReportLineRecord<JimuShinsakaishiryoA4ReportSource> currentRecord,
@@ -220,9 +220,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
                 DbT5210NinteichosahyoShisetsuRiyoEntity 現在状況 = mapper.get現在状況(myBatisParameter);
                 List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.get前回主治医意見書(myBatisParameter);
                 return new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項,
-                        調査票調査項目, 前回調査票調査項目, 主治医意見書,
-                        前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, 現在状況,
-                        new RString(myBatisParameter.getGogitaiNo()), batchReportWriter.getImageFolderPath());
+                        調査票調査項目, 前回調査票調査項目, 主治医意見書, 前回主治医意見書, 予防給付サービス利用状況,
+                        介護給付サービス利用状況, サービス状況フラグ, 現在状況, new RString(myBatisParameter.getGogitaiNo()));
             }
         }
         return null;

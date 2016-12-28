@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -105,7 +106,7 @@ public class CenterTransmissionProcess extends BatchKeyBreakBase<CenterTransmiss
         }
         mybitisParamter.setShinseishoKanriNoList(申請書管理番号リスト);
         mybitisParamter.setGaikyoChosaTextImageKubun(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        ファイル名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString());
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         filename = Path.combinePath(spoolWorkPath, ファイル名);

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 20 19:30:25 JST 2016 
+ * Tue Dec 27 14:45:58 JST 2016 
  */
 
 
@@ -43,6 +43,8 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
     private RString kozaNo;
     private RString kozaMeigininKana;
     private RString kozaMeiginin;
+    private RString kinyuKikanMeisho;
+    private RString shitenMeisho;
 
     public dgSonotaKikanIchiran_Row() {
         super();
@@ -67,6 +69,8 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.kozaNo = RString.EMPTY;
         this.kozaMeigininKana = RString.EMPTY;
         this.kozaMeiginin = RString.EMPTY;
+        this.kinyuKikanMeisho = RString.EMPTY;
+        this.shitenMeisho = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokensha", hokensha);
@@ -88,9 +92,11 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.setOriginalData("kozaNo", kozaNo);
         this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.setOriginalData("kinyuKikanMeisho", kinyuKikanMeisho);
+        this.setOriginalData("shitenMeisho", shitenMeisho);
     }
 
-    public dgSonotaKikanIchiran_Row(RString jotai, RString hokenshaCode, RString hokensha, RString sonotaKikanCode, RString kikanMeisho, RString kikanKana, RString yubinNo, RString jusho, RString jushoKana, RString telNo, RString chosaItakuKubun, TextBoxNum waritsukeTeiin, RString chiku, RString kikanKubun, RString jokyoFlag, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin) {
+    public dgSonotaKikanIchiran_Row(RString jotai, RString hokenshaCode, RString hokensha, RString sonotaKikanCode, RString kikanMeisho, RString kikanKana, RString yubinNo, RString jusho, RString jushoKana, RString telNo, RString chosaItakuKubun, TextBoxNum waritsukeTeiin, RString chiku, RString kikanKubun, RString jokyoFlag, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin, RString kinyuKikanMeisho, RString shitenMeisho) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaCode", hokenshaCode);
@@ -113,6 +119,8 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.setOriginalData("kozaNo", kozaNo);
         this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.setOriginalData("kinyuKikanMeisho", kinyuKikanMeisho);
+        this.setOriginalData("shitenMeisho", shitenMeisho);
         this.jotai = jotai;
         this.hokenshaCode = hokenshaCode;
         this.hokensha = hokensha;
@@ -134,6 +142,8 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
         this.kozaNo = kozaNo;
         this.kozaMeigininKana = kozaMeigininKana;
         this.kozaMeiginin = kozaMeiginin;
+        this.kinyuKikanMeisho = kinyuKikanMeisho;
+        this.shitenMeisho = shitenMeisho;
     }
 
     public RString getJotai() {
@@ -218,6 +228,14 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
 
     public RString getKozaMeiginin() {
         return kozaMeiginin;
+    }
+
+    public RString getKinyuKikanMeisho() {
+        return kinyuKikanMeisho;
+    }
+
+    public RString getShitenMeisho() {
+        return shitenMeisho;
     }
 
     public void setJotai(RString jotai) {
@@ -323,6 +341,16 @@ public class dgSonotaKikanIchiran_Row extends DataRow {
     public void setKozaMeiginin(RString kozaMeiginin) {
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
         this.kozaMeiginin = kozaMeiginin;
+    }
+
+    public void setKinyuKikanMeisho(RString kinyuKikanMeisho) {
+        this.setOriginalData("kinyuKikanMeisho", kinyuKikanMeisho);
+        this.kinyuKikanMeisho = kinyuKikanMeisho;
+    }
+
+    public void setShitenMeisho(RString shitenMeisho) {
+        this.setOriginalData("shitenMeisho", shitenMeisho);
+        this.shitenMeisho = shitenMeisho;
     }
 
     // </editor-fold>

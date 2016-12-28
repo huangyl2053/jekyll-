@@ -17,16 +17,12 @@
             T4101."hihokenshaKana" AS  氏名カナ,
             T4101."jusho" AS 住所,
             T4003."shinseiYMD" AS 申請日,
-            T4101."ninteiShinseiRiyu" AS 申請理由,
-            T4003."ichijiHanteiYMD" AS  一次判定年月日, 
-            T4003."ichijiHanteiKekkaCode" AS 一次判定結果コード,
-            NULL AS 一五次判定結果コード,
-            T4003."shinsakaiShiryoSakuseiYMD" AS 資料作成日,
-            T4003."shinsakaiYoteiYMD" AS 審査会予定日,
-            T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数,
-            T4101."zenYokaigoKubunCode" AS 前回要介護状態区分コード,
-            T4101."zenkaiYukoKikanStart" AS 前回認定開始日,
-            T4101."zenkaiYukoKikanEnd" AS 前回認定終了日,
+            T4101."enkiKetteiYMD" AS 延期決定年月日, 
+            T4101."enkiRiyu" AS 延期理由, 
+            T4101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日, 
+            T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数, 
+            T4101."enkiMikomiKaishiYMD" AS 延期見込期間開始年月日, 
+            T4101."enkiMikomiShuryoYMD" AS 延期見込期間終了年月日, 
             T7051."shichosonCode" AS 市町村コード,
             T7051."shichosonMeisho" AS 市町村名称
         FROM
@@ -43,7 +39,7 @@
             ON  T4101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
         WHERE
              <if test="tsuchishohakkonbi != null and !tsuchishohakkonbi.isEmpty()">
-             T4101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
+                T4101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
             </if>
             <if test="tsuchishohakkonbi == null or tsuchishohakkonbi.isEmpty()">
                 T4101."enkiTsuchiHakkoYMD" IS NULL
@@ -71,16 +67,12 @@
             T4101."hihokenshaKana" AS 氏名カナ,
             T4101."jusho" AS 住所,
             T4101."ninteiShinseiYMD" AS 申請日,
-            T4101."ninteiShinseiRiyu" AS 申請理由,
-            T4116."ichijiHanteiYMD" AS 一次判定年月日,
-            T4116."ichijiHanteiKekkaCode" AS  一次判定結果コード,
-            T5510."ichiGojiHanteiKekkaCode" AS 一五次判定結果コード,
-            T5502."shinsakaiShiryoSakuseiYMD" AS 資料作成日,
-            T5502."shinsakaiKaisaiYMD" AS 審査会予定日,
-            T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数,
-            T4101."zenYokaigoKubunCode" AS 前回要介護状態区分コード,
-            T4101."zenkaiYukoKikanStart" AS 前回認定開始日,
-            T4101."zenkaiYukoKikanEnd" AS 前回認定終了日,
+            T4101."enkiKetteiYMD" AS 延期決定年月日, 
+            T4101."enkiRiyu" AS 延期理由, 
+            T4101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日, 
+            T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数, 
+            T4101."enkiMikomiKaishiYMD" AS 延期見込期間開始年月日, 
+            T4101."enkiMikomiShuryoYMD" AS 延期見込期間終了年月日, 
             T7051."shichosonCode" AS 市町村コード,
             T7051."shichosonMeisho" AS 市町村名称
         FROM
@@ -130,16 +122,12 @@
         <result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="申請日" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="申請理由" column="申請理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="一次判定年月日" column="一次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="一次判定結果コード" column="一次判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="一五次判定結果コード" column="一五次判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="資料作成日" column="資料作成日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="審査会予定日" column="審査会予定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="延期決定年月日" column="延期決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="延期理由" column="延期理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="延期通知発行年月日" column="延期通知発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="延期通知発行回数" column="延期通知発行回数" />
-        <result property="前回要介護状態区分コード" column="前回要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="前回認定開始日" column="前回認定開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="前回認定終了日" column="前回認定終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="延期見込期間開始年月日" column="延期見込期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="延期見込期間終了年月日" column="延期見込期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="市町村名称" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>

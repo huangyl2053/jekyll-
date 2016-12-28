@@ -63,7 +63,9 @@ public class ChosaItakusakiAndChosainInputValidationHandler {
                 .thenAdd(ChosaItakusakiAndChosainInputValidationMessages.調査員コードに該当するデータなし)
                 .messages());
         ValidationMessageControlPairs validResult = new ValidationMessageControlPairs();
-        validResult.add(createDictionary調査員コード().check(messages));
+        if(!div.getTxtChosaItakusakiCode().getValue().isEmpty() && !div.getTxtChosaItakusakiName().getValue().isEmpty()){
+            validResult.add(createDictionary調査員コード().check(messages));
+        }
         return validResult;
     }
 

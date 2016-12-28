@@ -36,11 +36,11 @@ public class NinteiEnkiTsuchishoHakkoIchiranhyoReportSource implements IReportSo
     public RString listHakkoIchiranhyo_4;
     @ReportItem(name = "listHakkoIchiranhyo_5", length = 9, order = 11)
     public RString listHakkoIchiranhyo_5;
-    @ReportItem(name = "listHakkoIchiranhyo_6", length = 6, order = 12)
+    @ReportItem(name = "listHakkoIchiranhyo_6", length = 9, order = 12)
     public RString listHakkoIchiranhyo_6;
-    @ReportItem(name = "listHakkoIchiranhyo_7", length = 9, order = 13)
+    @ReportItem(name = "listHakkoIchiranhyo_7", length = 30, order = 13)
     public RString listHakkoIchiranhyo_7;
-    @ReportItem(name = "listHakkoIchiranhyo_8", length = 4, order = 14)
+    @ReportItem(name = "listHakkoIchiranhyo_8", length = 9, order = 14)
     public RString listHakkoIchiranhyo_8;
     @ReportItem(name = "listHakkoIchiranhyo_9", length = 4, order = 15)
     public RString listHakkoIchiranhyo_9;
@@ -48,14 +48,6 @@ public class NinteiEnkiTsuchishoHakkoIchiranhyoReportSource implements IReportSo
     public RString listHakkoIchiranhyo_10;
     @ReportItem(name = "listHakkoIchiranhyo_11", length = 9, order = 17)
     public RString listHakkoIchiranhyo_11;
-    @ReportItem(name = "listHakkoIchiranhyo_12", length = 5, order = 18)
-    public RString listHakkoIchiranhyo_12;
-    @ReportItem(name = "listHakkoIchiranhyo_13", length = 4, order = 19)
-    public RString listHakkoIchiranhyo_13;
-    @ReportItem(name = "listHakkoIchiranhyo_14", length = 9, order = 20)
-    public RString listHakkoIchiranhyo_14;
-    @ReportItem(name = "listHakkoIchiranhyo_15", length = 9, order = 21)
-    public RString listHakkoIchiranhyo_15;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -121,6 +121,8 @@ public class IraishoIkkatsuHakkoHandler {
     public void setDataGrid(List<IraishoIkkatsuHakkoResult> resultList) {
         if (STATE_NINTEIO.equals(div.getState())) {
             List<dgNinteiChosaIraiTaishoIchiran_Row> rowList = new ArrayList<>();
+            div.getDgNinteiChosaIraiTaishoIchiran().getGridSetting().setSelectedRowCount(resultList.size());
+            int count = 1;
             for (IraishoIkkatsuHakkoResult result : resultList) {
                 dgNinteiChosaIraiTaishoIchiran_Row row = new dgNinteiChosaIraiTaishoIchiran_Row();
                 row.setNinteiChosaitakusaki(result.get認定調査委託先コード() == null
@@ -131,11 +133,18 @@ public class IraishoIkkatsuHakkoHandler {
                 row.getShinseishaNinzu().setValue(new Decimal(result.get申請者人数()));
                 row.setShoKisaiHokenshaNo(result.get証記載保険者番号());
                 rowList.add(row);
+                if (count == div.getTxtChosaDispMax().getValue().intValue()) {
+                    break;
+                }
+                count++;
             }
+            div.getDgNinteiChosaIraiTaishoIchiran().getGridSetting().setLimitRowCount(div.getTxtChosaDispMax().getValue().intValue());
             div.getDgNinteiChosaIraiTaishoIchiran().setDataSource(rowList);
         }
         if (STATE_SHUJII.equals(div.getState())) {
             List<dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row> rowList = new ArrayList<>();
+            div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getGridSetting().setSelectedRowCount(resultList.size());
+            int count = 1;
             for (IraishoIkkatsuHakkoResult result : resultList) {
                 dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row row = new dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row();
                 row.setShujiiIryoKikanCode(result.get主治医医療機関コード());
@@ -145,7 +154,12 @@ public class IraishoIkkatsuHakkoHandler {
                 row.getShinseishaNinzu().setValue(new Decimal(result.get申請者人数()));
                 row.setShoKisaiHokenshaNo(result.get証記載保険者番号());
                 rowList.add(row);
+                if (count == div.getTxtIkenshoDispMax().getValue().intValue()) {
+                    break;
+                }
+                count++;
             }
+            div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getGridSetting().setLimitRowCount(div.getTxtIkenshoDispMax().getValue().intValue());
             div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().setDataSource(rowList);
         }
     }
@@ -298,9 +312,9 @@ public class IraishoIkkatsuHakkoHandler {
         setChkSelected(div.getChkTokkiKomokuAri(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, 基準日, flag);
         setChkSelected(div.getChkTokkiKomokuNashi(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, 基準日, flag);
         setChkSelected(div.getChkTokkiFree(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, 基準日, flag);
-        if(flag){
-        setChkSelected(div.getChkNinteiChosahyoSonota(),false);
-        setChkSelected(div.getChkTokkijikoTenyuryoku(),false);
+        if (flag) {
+            setChkSelected(div.getChkNinteiChosahyoSonota(), false);
+            setChkSelected(div.getChkTokkijikoTenyuryoku(), false);
         }
     }
 

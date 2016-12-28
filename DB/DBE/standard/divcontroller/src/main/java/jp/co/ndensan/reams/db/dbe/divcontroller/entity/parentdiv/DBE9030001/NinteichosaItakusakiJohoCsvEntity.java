@@ -79,5 +79,24 @@ public class NinteichosaItakusakiJohoCsvEntity {
     private RString 機関の区分;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
     @CsvField(order = 20, name = "状況フラグ")
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
     private RString 状況フラグ;
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
+    @CsvField(order = 21, name = "金融機関コード")
+    private RString 金融機関コード;
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
+    @CsvField(order = 22, name = "支店コード")
+    private RString 支店コード;
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
+    @CsvField(order = 23, name = "預金種別")
+    private RString 預金種別;
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
+    @CsvField(order = 24, name = "口座番号")
+    private RString 口座番号;
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
+    @CsvField(order = 25, name = "口座名義人")
+    private RString 口座名義人;
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
+    @CsvField(order = 26, name = "漢字名義人")
+    private RString 漢字名義人;
 }
