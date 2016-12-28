@@ -20,11 +20,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.MobileDataShutsuryokuFlag;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -45,6 +50,7 @@ public class NinteichosaIraiManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5201NinteichosaIraiJohoDac dbT5201Dac;
+    private final DbT5101NinteiShinseiJohoDac dbT5101Dac;
 
     /**
      * コンストラクタです。
@@ -52,6 +58,7 @@ public class NinteichosaIraiManager {
     NinteichosaIraiManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT5201Dac = InstanceProvider.create(DbT5201NinteichosaIraiJohoDac.class);
+        this.dbT5101Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
     }
 
     /**
@@ -60,16 +67,16 @@ public class NinteichosaIraiManager {
      * @param mapperProvider mapperProvider
      * @param dbT5201Dac dbT5201Dac
      */
-    NinteichosaIraiManager(MapperProvider mapperProvider, DbT5201NinteichosaIraiJohoDac dbT5201Dac) {
+    NinteichosaIraiManager(MapperProvider mapperProvider, DbT5201NinteichosaIraiJohoDac dbT5201Dac, DbT5101NinteiShinseiJohoDac db5101Dac) {
         this.mapperProvider = mapperProvider;
         this.dbT5201Dac = dbT5201Dac;
+        this.dbT5101Dac = db5101Dac;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiManager}のインスタンス
      */
     public static NinteichosaIraiManager createInstance() {
         return InstanceProvider.create(NinteichosaIraiManager.class);
@@ -85,7 +92,7 @@ public class NinteichosaIraiManager {
     public int select認定調査委託先情報(RString 保険者番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         return mapper.select認定調査委託先情報(new NinteichosaIraiParameter(
-                保険者番号, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            保険者番号, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
     /**
@@ -99,7 +106,7 @@ public class NinteichosaIraiManager {
     public int select調査可能人数(RString 保険者番号, RString 地区コード) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         return mapper.select調査可能人数(new NinteichosaIraiParameter(
-                保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
     /**
@@ -113,7 +120,7 @@ public class NinteichosaIraiManager {
     public int select割付済人数(RString 保険者番号, RString 地区コード) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         return mapper.select割付済人数(new NinteichosaIraiParameter(
-                保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
     /**
@@ -128,12 +135,12 @@ public class NinteichosaIraiManager {
      */
     @Transaction
     public int 調査機関自動割付処理(RString 保険者番号, RString 地区コード,
-            RString 申請書管理番号, int 要割付人数, RString 厚労省IF識別コード) {
+                          RString 申請書管理番号, int 要割付人数, RString 厚労省IF識別コード) {
         int tmp要割付人数 = 要割付人数;
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         List<DbT5913ChosainJohoEntity> 調査員情報リスト = mapper.select委託先調査員情報(
-                new NinteichosaIraiParameter(
-                        保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            new NinteichosaIraiParameter(
+                保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
         int max履歴番号 = getMax認定調査依頼履歴番号(申請書管理番号);
         for (DbT5913ChosainJohoEntity entity : 調査員情報リスト) {
             if (tmp要割付人数 == 0) {
@@ -145,7 +152,8 @@ public class NinteichosaIraiManager {
                     } else {
                         max履歴番号++;
                         dbT5201Dac.save(set認定調査依頼情報(申請書管理番号, max履歴番号, 厚労省IF識別コード,
-                                entity.getNinteiChosaItakusakiCode(), entity.getNinteiChosainCode()).toEntity());
+                                                    entity.getNinteiChosaItakusakiCode(), entity.getNinteiChosainCode()).toEntity());
+                        save認定申請情報(申請書管理番号, entity.getNinteiChosaItakusakiCode(), entity.getNinteiChosainCode(), max履歴番号);
                         return tmp要割付人数 - 1;
                     }
                 }
@@ -164,7 +172,7 @@ public class NinteichosaIraiManager {
     public int getMax認定調査依頼履歴番号(RString 申請書管理番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         RString result = mapper.selectMax認定調査依頼履歴番号(new NinteichosaIraiParameter(
-                RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
         return result == null ? 0 : Integer.parseInt(result.toString());
     }
 
@@ -178,10 +186,10 @@ public class NinteichosaIraiManager {
     public SearchResult<NinteichosaIraiBusiness> select調査結果入力用データ(RString 申請書管理番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(
-                ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<ChosaKekkaNyuryokuMobileRelateEntity> relateEntityList = mapper.select調査結果入力用データ(new NinteichosaIraiParameter(
-                RString.EMPTY, RString.EMPTY, 申請書管理番号,
-                概況調査テキストイメージ区分, ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+            RString.EMPTY, RString.EMPTY, 申請書管理番号,
+            概況調査テキストイメージ区分, ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<NinteichosaIraiBusiness>emptyList(), 0, false);
         }
@@ -220,7 +228,7 @@ public class NinteichosaIraiManager {
     public void update認定調査依頼情報(RString 申請書管理番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         DbT5201NinteichosaIraiJohoEntity entity = mapper.select最新認定調査依頼情報(new NinteichosaIraiParameter(
-                RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+            RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
         if (entity != null) {
             entity.setMobileDataShutsuryokuZumiFlag(MobileDataShutsuryokuFlag.出力済.isモバイルデータ出力());
             entity.setState(EntityDataState.Modified);
@@ -229,24 +237,34 @@ public class NinteichosaIraiManager {
     }
 
     private NinteichosaIraiJoho set認定調査依頼情報(RString 申請書管理番号, int 認定調査依頼履歴番号,
-            RString 厚労省IF識別コード, RString 認定調査委託先コード, RString 認定調査員コード) {
+                                            RString 厚労省IF識別コード, RString 認定調査委託先コード, RString 認定調査員コード) {
         NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(new ShinseishoKanriNo(申請書管理番号), 認定調査依頼履歴番号);
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         return ninteichosaIraiJoho.createBuilderForEdit()
-                .set厚労省IF識別コード(RString.isNullOrEmpty(厚労省IF識別コード) ? Code.EMPTY : new Code(厚労省IF識別コード))
-                .set認定調査委託先コード(RString.isNullOrEmpty(認定調査委託先コード) ? JigyoshaNo.EMPTY : new JigyoshaNo(認定調査委託先コード))
-                .set認定調査員コード(認定調査員コード)
-                .set認定調査依頼区分コード(認定調査依頼履歴番号 == 1 ? new Code(NinteiChousaIraiKubunCode.初回.getコード())
-                        : new Code(NinteiChousaIraiKubunCode.再依頼.getコード()))
-                .set認定調査回数(認定調査依頼履歴番号)
-                .set認定調査依頼年月日(システム日付)
-                .set認定調査期限年月日(システム日付.plusDay(Integer.parseInt(DbBusinessConfig.get(
-                                                ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString())))
-                .set論理削除フラグ(false)
-                .set認定調査督促メモ(RString.isNullOrEmpty(ninteichosaIraiJoho.get認定調査督促メモ()) ? RString.EMPTY : ninteichosaIraiJoho.get認定調査督促メモ())
-                .set認定調査督促年月日(ninteichosaIraiJoho.get認定調査督促年月日() == null ? FlexibleDate.EMPTY : ninteichosaIraiJoho.get認定調査督促年月日())
-                .build();
+            .set厚労省IF識別コード(RString.isNullOrEmpty(厚労省IF識別コード) ? Code.EMPTY : new Code(厚労省IF識別コード))
+            .set認定調査委託先コード(RString.isNullOrEmpty(認定調査委託先コード) ? JigyoshaNo.EMPTY : new JigyoshaNo(認定調査委託先コード))
+            .set認定調査員コード(認定調査員コード)
+            .set認定調査依頼区分コード(認定調査依頼履歴番号 == 1 ? new Code(NinteiChousaIraiKubunCode.初回.getコード())
+                            : new Code(NinteiChousaIraiKubunCode.再依頼.getコード()))
+            .set認定調査回数(認定調査依頼履歴番号)
+            .set認定調査依頼年月日(システム日付)
+            .set認定調査期限年月日(システム日付.plusDay(Integer.parseInt(DbBusinessConfig.get(
+                            ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString())))
+            .set論理削除フラグ(false)
+            .set認定調査督促メモ(RString.isNullOrEmpty(ninteichosaIraiJoho.get認定調査督促メモ()) ? RString.EMPTY : ninteichosaIraiJoho.get認定調査督促メモ())
+            .set認定調査督促年月日(ninteichosaIraiJoho.get認定調査督促年月日() == null ? FlexibleDate.EMPTY : ninteichosaIraiJoho.get認定調査督促年月日())
+            .build();
 
     }
 
+    private void save認定申請情報(RString 申請書管理番号, RString 認定調査委託先コード, RString 認定調査員コード, int 認定調査依頼履歴番号) {
+        DbT5101NinteiShinseiJohoEntity entity = dbT5101Dac.selectByKey(new ShinseishoKanriNo(申請書管理番号));
+        if (entity != null) {
+            entity.setNinteiChosaItakusakiCode(new ChosaItakusakiCode(認定調査委託先コード));
+            entity.setNinteiChosainCode(new ChosainCode(認定調査員コード));
+            entity.setChosaKubun(認定調査依頼履歴番号 == 1 ? new Code(ChosaKubun.新規調査.getコード())
+                                 : new Code(ChosaKubun.再調査.getコード()));
+            dbT5101Dac.save(entity);
+        }
+    }
 }
