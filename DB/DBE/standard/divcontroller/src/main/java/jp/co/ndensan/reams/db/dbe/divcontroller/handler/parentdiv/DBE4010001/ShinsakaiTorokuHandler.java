@@ -256,6 +256,9 @@ public class ShinsakaiTorokuHandler {
             row.setShinsakaiMeisho(business.get介護認定審査会開催番号() == null ? RString.EMPTY : edit審査会名称(business.get介護認定審査会開催番号()));
             row.setGogitai(RString.isNullOrEmpty(business.get合議体名称()) ? RString.EMPTY : business.get合議体名称());
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+            if (0 < business.get審査順()) {
+                row.getShinsakaiOrder().setValue(new Decimal(business.get審査順()));
+            }
             審査会登録モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -281,8 +284,8 @@ public class ShinsakaiTorokuHandler {
         if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
         }
-        if (business.get認定審査会割当完了年月日() != null && !business.get認定審査会割当完了年月日().isEmpty()) {
-            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get認定審査会割当完了年月日().toString()));
+        if (business.get介護認定審査会割当年月日()!= null && !business.get介護認定審査会割当年月日().isEmpty()) {
+            row.getShinsakaiwaritukeDay().setValue(new RDate(business.get介護認定審査会割当年月日().toString()));
         }
         if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
             row.getShinsakaiKaisaiDay().setValue(new RDate(business.get介護認定審査会開催予定年月日().toString()));
@@ -350,11 +353,18 @@ public class ShinsakaiTorokuHandler {
      * 割り付けボタンクリックイベントです。
      *
      * @param shinsakaiRow dgShinsakaiList_Row
+     * @param 修正リスト List<dgNinteiTaskList_Row>
      */
-    public void onClick_btnWaritsuke(dgShinsakaiList_Row shinsakaiRow) {
+    public void onClick_btnWaritsuke(dgShinsakaiList_Row shinsakaiRow, List<dgNinteiTaskList_Row> 修正リスト) {
         List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
         RDate 現在日付 = RDate.getNowDate();
         Decimal 最大審査順 = shinsakaiRow.getMaxShinsakaiOrder().getValue();
+        int 割付済審査順 = 0;
+        for (dgNinteiTaskList_Row 修正データ : 修正リスト) {
+            if (修正データ.getKaisaiNumber().equals(shinsakaiRow.getShinsakaiKaisaiNo()) && 割付済審査順 < 修正データ.getShinsakaiOrder().getValue().intValue()) {
+                割付済審査順 = 修正データ.getShinsakaiOrder().getValue().intValue();
+            }
+        }
         for (dgNinteiTaskList_Row 選択データ : rowList) {
             選択データ.setSelected(Boolean.FALSE);
             選択データ.setCancelButtonState(DataGridButtonState.Enabled);
@@ -362,7 +372,12 @@ public class ShinsakaiTorokuHandler {
             選択データ.getShinsakaiwaritukeDay().setValue(現在日付);
             選択データ.getShinsakaiKaisaiDay().setValue(new RDate(shinsakaiRow.getKaisaiYoteiYmd().getValue().toString()));
             選択データ.getShinsakaiKaisaiJikan().setValue(shinsakaiRow.getKaisaiYoteiTime().getValue());
-            選択データ.getShinsakaiOrder().setValue(edit審査順(最大審査順));
+            if (割付済審査順 < shinsakaiRow.getMaxShinsakaiOrder().getValue().intValue()) {
+                選択データ.getShinsakaiOrder().setValue(edit審査順(最大審査順));
+            } else {
+                選択データ.getShinsakaiOrder().setValue(edit審査順(new Decimal(割付済審査順)));
+                割付済審査順 = 割付済審査順 + 1;
+            }
             選択データ.setYusenWaritsukesha(ShinsakaiYusenWaritsukeKubunCode.通常.get名称());
             選択データ.setKaisaiNumber(shinsakaiRow.getShinsakaiKaisaiNo());
             選択データ.setShinsakaiMeisho(shinsakaiRow.getShinsakaiMeisho());
