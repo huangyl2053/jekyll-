@@ -40,8 +40,8 @@ public class ShinchokuDataOutputBusiness {
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
     private static final RString 検索条件_進捗情報コード = new RString("0");
     private static final RString 検索条件_結果情報コード = new RString("1");
-    private static final RString 検索条件_進捗情報 = new RString("進捗情報（0）");
-    private static final RString 検索条件_結果情報 = new RString("結果情報（1）");
+    private static final RString 検索条件_進捗情報 = new RString("進捗情報");
+    private static final RString 検索条件_結果情報 = new RString("結果情報");
     private static final int 申請書管理番号_改行個数 = 10;
 
     /**
