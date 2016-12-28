@@ -62,6 +62,7 @@ public class TokkiJikoReportLayoutBreaker extends LayoutBreaker<TokkiJikoReportS
     }
 
     private boolean is被保険者Break(TokkiJikoReportSource currentSource, TokkiJikoReportSource nextSource) {
-        return !currentSource.hihokenshaNo.equals(nextSource.hihokenshaNo);
+        return nextSource.hihokenshaNo.isEmpty()
+                || !currentSource.hihokenshaNo.equals(nextSource.hihokenshaNo);
     }
 }
