@@ -308,8 +308,8 @@ public class ShinseiKensaku {
     /**
      * 「選択した帳票を発行する」ボタンのclick前処理です。
      *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<ShinseiKensakuDiv> onClick_btnChkPublish(ShinseiKensakuDiv div) {
         if (!ResponseHolder.isReRequest()) {
