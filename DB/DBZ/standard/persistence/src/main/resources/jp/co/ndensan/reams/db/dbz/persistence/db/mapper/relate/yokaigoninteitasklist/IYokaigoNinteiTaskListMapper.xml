@@ -1267,8 +1267,8 @@
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
         ON
-        T5305."maskDataKubun" = '2'
-        AND T5305."torikomiPageNo" = '1'
+        T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
         'X'
@@ -1390,8 +1390,8 @@
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
         ON
-        T5305."maskDataKubun" = '2'
-        AND T5305."torikomiPageNo" = '1'
+        T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
         'X'
@@ -1511,8 +1511,8 @@
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
         ON
-        T5305."maskDataKubun" = '2'
-        AND T5305."torikomiPageNo" = '1'
+        T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
         'X'

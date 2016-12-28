@@ -37,7 +37,6 @@ public class ImageJohoMaskingRelateEntity {
     private ShinseishoKanriNo 申請書管理番号;
     private LasdecCode 市町村コード;
     private Code 帳票ID;
-    private int 認定申請年;
     private RDateTime イメージ共有ファイルID;
     private boolean 特記マスク有無;
     private boolean 意見書マスク有無;
