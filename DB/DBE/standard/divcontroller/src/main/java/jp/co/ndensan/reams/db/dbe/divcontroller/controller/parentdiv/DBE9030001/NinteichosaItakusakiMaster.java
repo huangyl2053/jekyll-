@@ -285,6 +285,8 @@ public class NinteichosaItakusakiMaster {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         DBE9030001ErrorMessage 編集なしで更新不可 = new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可);
+        DBE9030001ErrorMessage 入力値が不正_追加メッセージあり_口座
+                = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 口座情報チェックREPLACE.toString());
         DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックREPLACE.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
@@ -294,12 +296,16 @@ public class NinteichosaItakusakiMaster {
             messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先情報登録エリアの編集状態チェック)
                     .thenAdd(編集なしで更新不可).messages());
         }
+        messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.口座情報入力有り時必須項目チェック)
+                .thenAdd(入力値が不正_追加メッセージあり_口座).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.市町村の合法性チェック)
                 .thenAdd(入力値が不正_追加メッセージあり).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先コードの重複チェック)
                 .thenAdd(既に登録済).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 編集なしで更新不可, div.getChosaitakusakiJohoInput()).build().check(messages));
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                入力値が不正_追加メッセージあり_口座, div.getChosaitakusakiJohoInput().getKozaJoho()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 入力値が不正_追加メッセージあり, div.getChosaitakusakiJohoInput().getTxtShichoson()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
@@ -386,8 +392,10 @@ public class NinteichosaItakusakiMaster {
                         div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue(),
                         div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue(),
                         div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue(),
-                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get金融機関コード().getColumnValue(),
-                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店().get支店コード().getColumnValue(),
+                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null
+                        ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get金融機関コード().getColumnValue(),
+                        div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店() == null
+                        ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店().get支店コード().getColumnValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue(),
