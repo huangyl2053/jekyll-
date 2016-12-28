@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJ
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho.IGogitaiJohoMapper;
@@ -26,10 +25,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBas
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5593GogitaiWariateIinJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -195,53 +192,53 @@ public class GogitaiJohoSakuseiFinder {
         return entity != null;
     }
 
-    /**
-     * CSV出力内容を取得します。
-     *
-     * @param param 合議体情報作成のパラメータ
-     * @return SearchResult<GogitaiJohoSakuseiCSVEntity>
-     */
-    public SearchResult<GogitaiJohoSakuseiCSVEntity> getGogitaiJohoForCSV(GogitaiJohoSakuseiParameter param) {
-        List<GogitaiJohoSakuseiCSVEntity> resultList = new ArrayList<>();
-        List<GogitaiJohoSakuseiRelateEntity> gogitaiJohoForCSVList
-                = mapperProvider.create(IGogitaiJohoSakuseiMapper.class).getGogitaiJohoForCSV(param);
-        if (gogitaiJohoForCSVList.isEmpty()) {
-            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
-        }
-        for (GogitaiJohoSakuseiRelateEntity entity : gogitaiJohoForCSVList) {
-
-            GogitaiJohoSakuseiCSVEntity tmpEntity = new GogitaiJohoSakuseiCSVEntity();
-            tmpEntity.setGogitaiNo(new RString(entity.getGogitaiNo()));
-            tmpEntity.setGogitaiMei(entity.getGogitaiMei());
-            tmpEntity.setGogitaiYukoKikanKaishiYMD(entity.getGogitaiYukoKikanKaishiYMD().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
-            tmpEntity.setGogitaiYukoKikanShuryoYMD(entity.getGogitaiYukoKikanShuryoYMD().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
-            tmpEntity.setGogitaiKaishiYoteiTime(new RString(entity.getGogitaiKaishiYoteiTime().toString()));
-            tmpEntity.setGogitaiShuryoYoteiTime(new RString(entity.getGogitaiShuryoYoteiTime().toString()));
-            tmpEntity.setShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode());
-            tmpEntity.setShinsakaiYoteiTeiin(new RString(entity.getShinsakaiYoteiTeiin()));
-            tmpEntity.setShinsakaiJidoWariateTeiin(new RString(entity.getShinsakaiJidoWariateTeiin()));
-            tmpEntity.setShinsakaiIinTeiin(new RString(entity.getShinsakaiIinTeiin()));
-            if (entity.isGogitaiSeishinkaSonzaiFlag()) {
-                tmpEntity.setGogitaiSeishinkaSonzaiFlag(new RString("1"));
-            } else {
-                tmpEntity.setGogitaiSeishinkaSonzaiFlag(new RString("0"));
-            }
-            if (entity.isGogitaiDummyFlag()) {
-                tmpEntity.setGogitaiDummyFlag(new RString("1"));
-            } else {
-                tmpEntity.setGogitaiDummyFlag(new RString("0"));
-            }
-            tmpEntity.setShinsakaiIinCode(entity.getShinsakaiIinCode());
-            tmpEntity.setGogitaichoKubunCode(entity.getGogitaichoKubunCode().getColumnValue());
-            if (entity.isSubstituteFlag()) {
-                tmpEntity.setSubstituteFlag(new RString("1"));
-            } else {
-                tmpEntity.setSubstituteFlag(new RString("0"));
-            }
-            resultList.add(tmpEntity);
-        }
-        return SearchResult.of(resultList, 0, false);
-    }
+//    /**
+//     * CSV出力内容を取得します。
+//     *
+//     * @param param 合議体情報作成のパラメータ
+//     * @return SearchResult<GogitaiJohoSakuseiCSVEntity>
+//     */
+//    public SearchResult<GogitaiJohoSakuseiCSVEntity> getGogitaiJohoForCSV(GogitaiJohoSakuseiParameter param) {
+//        List<GogitaiJohoSakuseiCSVEntity> resultList = new ArrayList<>();
+//        List<GogitaiJohoSakuseiRelateEntity> gogitaiJohoForCSVList
+//                = mapperProvider.create(IGogitaiJohoSakuseiMapper.class).getGogitaiJohoForCSV(param);
+//        if (gogitaiJohoForCSVList.isEmpty()) {
+//            return SearchResult.of(Collections.<GogitaiJohoSakuseiRsult>emptyList(), 0, false);
+//        }
+//        for (GogitaiJohoSakuseiRelateEntity entity : gogitaiJohoForCSVList) {
+//
+//            GogitaiJohoSakuseiCSVEntity tmpEntity = new GogitaiJohoSakuseiCSVEntity();
+//            tmpEntity.setGogitaiNo(new RString(entity.getGogitaiNo()));
+//            tmpEntity.setGogitaiMei(entity.getGogitaiMei());
+//            tmpEntity.setGogitaiYukoKikanKaishiYMD(entity.getGogitaiYukoKikanKaishiYMD().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
+//            tmpEntity.setGogitaiYukoKikanShuryoYMD(entity.getGogitaiYukoKikanShuryoYMD().seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString());
+//            tmpEntity.setGogitaiKaishiYoteiTime(new RString(entity.getGogitaiKaishiYoteiTime().toString()));
+//            tmpEntity.setGogitaiShuryoYoteiTime(new RString(entity.getGogitaiShuryoYoteiTime().toString()));
+//            tmpEntity.setShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode());
+//            tmpEntity.setShinsakaiYoteiTeiin(new RString(entity.getShinsakaiYoteiTeiin()));
+//            tmpEntity.setShinsakaiJidoWariateTeiin(new RString(entity.getShinsakaiJidoWariateTeiin()));
+//            tmpEntity.setShinsakaiIinTeiin(new RString(entity.getShinsakaiIinTeiin()));
+//            if (entity.isGogitaiSeishinkaSonzaiFlag()) {
+//                tmpEntity.setGogitaiSeishinkaSonzaiFlag(new RString("1"));
+//            } else {
+//                tmpEntity.setGogitaiSeishinkaSonzaiFlag(new RString("0"));
+//            }
+//            if (entity.isGogitaiDummyFlag()) {
+//                tmpEntity.setGogitaiDummyFlag(new RString("1"));
+//            } else {
+//                tmpEntity.setGogitaiDummyFlag(new RString("0"));
+//            }
+//            tmpEntity.setShinsakaiIinCode(entity.getShinsakaiIinCode());
+//            tmpEntity.setGogitaichoKubunCode(entity.getGogitaichoKubunCode().getColumnValue());
+//            if (entity.isSubstituteFlag()) {
+//                tmpEntity.setSubstituteFlag(new RString("1"));
+//            } else {
+//                tmpEntity.setSubstituteFlag(new RString("0"));
+//            }
+//            resultList.add(tmpEntity);
+//        }
+//        return SearchResult.of(resultList, 0, false);
+//    }
 
     /**
      * 合議体割当委員情報が存在しているをチェックします。

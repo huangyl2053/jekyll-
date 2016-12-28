@@ -30,11 +30,20 @@
 
     <select resultOrdered="true" id="getShinsakaiJohoTemp"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"
-            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity" fetchSize="500">
         SELECT
-        *
+        shinsakai.*,
+        yotei."shinsakaiKaisaiYoteiBashoCode" AS "開催場所コード",
+        COUNT(shinsakekka.*) OVER () AS "実施人数"
         FROM
-        "DBE518002_ShinsakaiJohoTemp"
+        "DBE518002_ShinsakaiJohoTemp" shinsakai
+        LEFT JOIN
+        "DBE518002_ShinsakaiKekkaTemp" shinsakekka
+        ON shinsakai."介護認定審査会開催番号" = shinsakekka."今回_審査会開催番号"
+        LEFT JOIN
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" yotei
+        ON shinsakai."介護認定審査会開催番号" = yotei."shinsakaiKaisaiNo"
+        LIMIT 1
     </select>
 
     <select resultOrdered="true" id="getIchiGojiHanteiKekka"

@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -44,8 +43,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -72,6 +69,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 完了処理・認定調査依頼のcontrollerクラスです。
@@ -82,7 +81,6 @@ public class NinteichosaIrai {
 
     private static final RString CSVファイルID_認定調査依頼一覧 = new RString("DBE201001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 前排他ロックキー = new RString("ShinseishoKanriNo_");
 
     /**
      * 完了処理・認定調査依頼に初期化を設定します。
@@ -226,22 +224,11 @@ public class NinteichosaIrai {
         param.setNinteiChosainCode(RString.EMPTY);
         param.setNinteichosaItakusakiCode(RString.EMPTY);
         param.setShichosonCode(RString.EMPTY);
-        return ResponseData.of(param).respond();
-    }
 
-    /**
-     * 「モバイル用データを出力する」ボタンを押下する場合、DB（認定調査依頼情報）データを更新します。
-     *
-     * @param requestDiv 完了処理・認定調査依頼Div
-     * @return レスポンス
-     */
-    public ResponseData onFinish_btnChosadataOutput(NinteichosaIraiDiv requestDiv) {
-        List<ShinseishoKanriNo> 申請書管理番号リスト = get申請書管理番号リスト(requestDiv);
-        for (ShinseishoKanriNo 申請書管理番号 : 申請書管理番号リスト) {
-            NinteichosaIraiManager.createInstance().update認定調査依頼情報(申請書管理番号.value());
-        }
-        getHandler(requestDiv).initDataGrid();
-        return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+        FlowParameters fp = FlowParameters.of(new RString("key"), "Batch");
+        FlowParameterAccessor.merge(fp);
+
+        return ResponseData.of(param).respond();
     }
 
     /**
@@ -356,6 +343,8 @@ public class NinteichosaIrai {
             requestDiv.getCcdKanryoMsg().setMessage(
                 new RString("完了処理・認定調査依頼の保存処理が完了しました。"),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            FlowParameters fp = FlowParameters.of(new RString("key"), "Kanryo");
+            FlowParameterAccessor.merge(fp);
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.完了);
         }
         return ResponseData.of(requestDiv).respond();
@@ -483,15 +472,6 @@ public class NinteichosaIrai {
                                                                           row.getShinseishoKanriNo(), tmp要割付人数, 厚労省IF識別コード.isEmpty() ? RString.EMPTY : 厚労省IF識別コード);
         }
         return tmp要割付人数;
-    }
-
-    private List<ShinseishoKanriNo> get申請書管理番号リスト(NinteichosaIraiDiv requestDiv) {
-        List<dgNinteiTaskList_Row> 選択されたデータ = requestDiv.getDgNinteiTaskList().getSelectedItems();
-        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
-        for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        }
-        return 申請書管理番号リスト;
     }
 
     private RString get申請区分_申請時_コード(RString 名称) {

@@ -27,8 +27,10 @@ public class IkenshoSakuseiIraiValidationHandler {
     private static final RString 発行書類 = new RString("発行書類を");
     private static final RString 受診予定開始日 = new RString("受診予定開始日を");
     private static final RString 受診予定終了日 = new RString("受診予定終了日を");
+    private static final RString 指定日付 = new RString("指定日付を");
     private static final RString 受診期間_日時指定 = new RString("key0");
     private static final RString 期間指定_期間指定 = new RString("key1");
+    private static final RString 提出期限_指定日付 = new RString("key2");
     private static final RString 受診日 = new RString("受診日を");
     private static final RString 受診時分 = new RString("受診時分を");
     private static final RString SELECTED_KEY3 = new RString("key3");
@@ -54,6 +56,7 @@ public class IkenshoSakuseiIraiValidationHandler {
             validationMessages.add(期間チェック());
             validationMessages.add(受診日が未入力チェック());
         }
+        validationMessages.add(指定日付が未入力チェック());
         return validationMessages;
     }
 
@@ -115,6 +118,18 @@ public class IkenshoSakuseiIraiValidationHandler {
                 validationMessages.add(new ValidationMessageControlPair(
                         new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
                                 UrErrorMessages.未指定, 受診時分.toString()), div.getTxtJyushintime()));
+            }
+        }
+        return validationMessages;
+    }
+
+    private ValidationMessageControlPairs 指定日付が未入力チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (提出期限_指定日付.equals(div.getRadKigen().getSelectedKey())) {
+            if (div.getTxtKigenymd().getValue() == null) {
+                validationMessages.add(new ValidationMessageControlPair(
+                        new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
+                                UrErrorMessages.未指定, 指定日付.toString()), div.getTxtKigenymd()));
             }
         }
         return validationMessages;

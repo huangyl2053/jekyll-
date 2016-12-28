@@ -109,9 +109,9 @@ public class DBE518002_NinteiShinsaIraiIfTorikomi extends BatchFlowBase<DBE51800
         if (RSRING_1.equals(getParameter().getTorikomidatakubun())) {
             executeStep(CREATE審査会情報登録用データ一時TBL);
             executeStep(INSERT審査会情報登録用データ一時TBL);
-            executeStep(SHINSAKAIJOHOTORIKOMI_PROCESS);
             executeStep(CREATE二次判定結果登録用データ一時TBL);
             executeStep(INSERT二次判定結果登録用データ一時TBL);
+            executeStep(SHINSAKAIJOHOTORIKOMI_PROCESS);
             executeStep(DATATORIKOMI_PROCESS);
             if (RSRING_1.equals(getParameter().getShinsakaiiintorikomikubun())) {
                 executeStep(CREATE認定審査会割当委員情報一時TBL);

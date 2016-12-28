@@ -297,7 +297,7 @@ public class ShinsakaiToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        getHandler(div).onClick_btnWaritsuke(div.getDgShinsakaiList().getClickedItem());
+        getHandler(div).onClick_btnWaritsuke(div.getDgShinsakaiList().getClickedItem(), get修正リスト(div));
         return ResponseData.of(div).respond();
     }
 

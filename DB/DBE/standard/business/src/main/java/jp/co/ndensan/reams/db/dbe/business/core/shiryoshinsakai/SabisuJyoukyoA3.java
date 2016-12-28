@@ -571,8 +571,9 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
@@ -585,15 +586,17 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString getFilePath(RDateTime sharedFileId, RString sharedFileName, RString ファイルパス) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(ファイルパス));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(ファイルパス)).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return sharedFileName;
     }
 
     /**
@@ -1297,6 +1300,9 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString set有効期間(int 有効期間) {
+        if (有効期間 == 0) {
+            return RString.EMPTY;
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(有効期間)
                 .append(月間);

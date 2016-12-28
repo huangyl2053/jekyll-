@@ -124,7 +124,6 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
 
-                     
                     JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
