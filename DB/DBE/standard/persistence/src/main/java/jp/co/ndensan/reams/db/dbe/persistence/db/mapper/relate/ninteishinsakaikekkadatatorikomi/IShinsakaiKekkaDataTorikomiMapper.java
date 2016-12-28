@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
@@ -42,9 +42,9 @@ public interface IShinsakaiKekkaDataTorikomiMapper {
     /**
      * 審査会情報一時テーブルを検索する。
      *
-     * @return TempShinsakaiJohoEntity 検索結果の{@link TempShinsakaiJohoEntity}
+     * @return TempShinsakaiJohoRelateEntity 検索結果の{@link TempShinsakaiJohoRelateEntity}
      */
-    List<TempShinsakaiJohoEntity> getShinsakaiJohoTemp();
+    List<TempShinsakaiJohoRelateEntity> getShinsakaiJohoTemp();
 
     /**
      * 検索条件より、要介護認定1.5次判定結果情報を検索する。

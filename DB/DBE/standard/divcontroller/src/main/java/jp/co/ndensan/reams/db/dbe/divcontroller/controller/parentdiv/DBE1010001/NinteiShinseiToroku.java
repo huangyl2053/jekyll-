@@ -369,22 +369,6 @@ public class NinteiShinseiToroku {
         if (MENUID_DBEMN31003.equals(menuID)) {
             validationMessages.add(getValidationHandler(div).被保険者区分チェック());
             ShinseishoKanriNo 申請書管理番号 = get申請書管理番号(div);
-
-            Boolean 変更有無フラグ1 = get要介護認定申請情報(div, 申請書管理番号).toEntity().hasChanged();
-            Boolean 変更有無フラグ2 = get認定申請届出者情報(div, true, 申請書管理番号).toEntity().hasChanged();
-            Boolean 変更有無フラグ3 = get申請履歴情報(申請書管理番号).toEntity().hasChanged();
-            Boolean 変更有無フラグ4 = Boolean.FALSE;
-            for (RenrakusakiJoho renrakusakiJoho : zenkaiJoho.getDbdBusiness()) {
-                変更有無フラグ4 = set介護連絡先情報(renrakusakiJoho, true, 申請書管理番号).toEntity().hasChanged();
-                if (変更有無フラグ4) {
-                    break;
-                }
-            }
-            Boolean 変更有無フラグ5 = 審査会委員除外情報変更有無フラグ(申請書管理番号, dataList);
-            if (!変更有無フラグ1 && !変更有無フラグ2 && !変更有無フラグ3 && !変更有無フラグ4 && !変更有無フラグ5) {
-                validationMessages.add(getValidationHandler(div).編集なしチェック(Boolean.TRUE));
-            }
-
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }

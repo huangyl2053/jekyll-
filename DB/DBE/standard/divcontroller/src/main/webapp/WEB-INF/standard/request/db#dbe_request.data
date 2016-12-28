@@ -68,6 +68,7 @@ dbe/db/dbe/GaikyoTokkiYichiranNyuroku/onOkClose_btnThirdTokkiJikoTeikeibun
 dbe/db/dbe/GensenChoshuDataSakusei/getParameter
 dbe/db/dbe/GensenChoshuDataSakusei/onClick_csvCreate
 dbe/db/dbe/GensenChoshuDataSakusei/onLoad
+dbe/db/dbe/GetsureiShori/onActive
 dbe/db/dbe/GetsureiShori/onChange_jyotaiKubun
 dbe/db/dbe/GetsureiShori/onChange_txtMaxCount
 dbe/db/dbe/GetsureiShori/onClick_BtnCenterSoshin
@@ -311,6 +312,7 @@ dbe/db/dbe/KaniShinsakaiKaisaiKekka/onLoadData
 dbe/db/dbe/KanryoDialog/onClick_btnClose
 dbe/db/dbe/KanryoDialog/onLoad
 dbe/db/dbe/KanryoShoriShinsaUketsuke/onBefore_Dataoutput
+dbe/db/dbe/KanryoShoriShinsaUketsuke/onChange_txtMaxCount
 dbe/db/dbe/KanryoShoriShinsaUketsuke/onClick_Dataoutput
 dbe/db/dbe/KanryoShoriShinsaUketsuke/onClick_btnShinsakaiComplete
 dbe/db/dbe/KanryoShoriShinsaUketsuke/onLoad
@@ -598,6 +600,7 @@ dbe/db/dbe/NinteiChosainMaster/onOkClose_btnToSearchShichoson
 dbe/db/dbe/NinteiChosainMaster/onSelectByDeleteButton_dgChosainIchiran
 dbe/db/dbe/NinteiChosainMaster/onSelectByDlbClick_dgChosainIchiran
 dbe/db/dbe/NinteiChosainMaster/onSelectByModifyButton_dgChosainIchiran
+dbe/db/dbe/NinteiShienCenterSoshin/onClick_BtnBack
 dbe/db/dbe/NinteiShienCenterSoshin/onClick_BtnDataoutput
 dbe/db/dbe/NinteiShienCenterSoshin/onClick_BtnDataoutputCheck
 dbe/db/dbe/NinteiShienCenterSoshin/onLoad
@@ -662,7 +665,6 @@ dbe/db/dbe/NinteichosaIrai/onOkClose_btnIraishoToOutput
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnBackSonotaIchiran
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnClearKensakuJoken
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvKozaNashi
-dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnCsvSpool
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnInsert
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnKakutei
 dbe/db/dbe/NinteichosaItakusakiMain/onClick_btnOutputCsv
@@ -847,6 +849,7 @@ dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnRemoveIin
 dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnRetuen
 dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnUpdate
 dbe/db/dbe/ShinsakaiKaisaiKekka/onLoad
+dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onChange_txtYearMonth
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_BtnCencel1
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_BtnCencel2
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_BtnCencel3
@@ -860,6 +863,7 @@ dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_DayAfter
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_DayBefore
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_Hako
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_Hozon
+dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_HyojiTsukiHenko
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_MonthAfter
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_MonthBefore
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_OnSelect
