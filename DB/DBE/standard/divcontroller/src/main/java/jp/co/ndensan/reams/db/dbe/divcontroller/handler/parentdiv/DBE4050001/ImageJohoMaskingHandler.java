@@ -106,10 +106,22 @@ public class ImageJohoMaskingHandler {
      * @param shinseishoKanriNoList 申請書管理番号のリスト
      */
     public void set検索用パラメーター(ShinseishoKanriNoList shinseishoKanriNoList) {
+        FlexibleDate fromYMD;
+        FlexibleDate toYMD;
+        if (div.getTxtSearchYMD().getFromValue() != null) {
+            fromYMD = new FlexibleDate(div.getTxtSearchYMD().getFromValue().toString());
+        } else {
+            fromYMD = FlexibleDate.EMPTY;
+        }
+        if (div.getTxtSearchYMD().getFromValue() != null) {
+            toYMD = new FlexibleDate(div.getTxtSearchYMD().getToValue().toString());
+        } else {
+            toYMD = FlexibleDate.EMPTY;
+        }
         param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
                 shinseishoKanriNoList != null ? LasdecCode.EMPTY : div.getCcdHokensya().getSelectedItem().get市町村コード(),
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : new FlexibleDate(div.getTxtSearchYMD().getFromValue().toString()),
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : new FlexibleDate(div.getTxtSearchYMD().getToValue().toString()),
+                shinseishoKanriNoList != null ? FlexibleDate.MAX : fromYMD,
+                shinseishoKanriNoList != null ? FlexibleDate.MAX : toYMD,
                 shinseishoKanriNoList != null ? RString.EMPTY : div.getDdlKensakuTaisho().getSelectedKey(),
                 shinseishoKanriNoList != null ? shinseishoKanriNoList.getShinseishoKanriNoS() : null,
                 shinseishoKanriNoList != null ? RString.EMPTY : div.getTxtHihokenshaNumber().getValue(),
