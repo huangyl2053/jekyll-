@@ -152,39 +152,61 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
             entity.setRemban(i);
             entity.setKoroshoIfShikibetsuCode(new Code(ir.getT5101_厚労省IF識別コード()));
-            switch (IkenshoKomokuMapping09B.toValue(new RString(i))) {
+           switch (IkenshoKomokuMapping09B.toValue(new RString(i))) {
                 case 点滴の管理:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(0, 1));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(0, 1));
+                    }
                     break;
                 case ストーマの処置:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(1, 2));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(1, 2));
+                    }
                     break;
                 case 気管切開の処置:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(2, 3));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(2, 3));
+                    }
                     break;
                 case 中心静脈栄養:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(3, 4));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(3, 4));
+                    }
                     break;
                 case 酸素療法:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(4, 5));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(4, 5));
+                    }
                     break;
                 case 疼痛の看護:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(5, 6));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(5, 6));
+                    }
                     break;
                 case 透析:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(6, 7));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(6, 7));
+                    }
                     break;
                 case レスピレーター:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(7, 8));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(7, 8));
+                    }
                     break;
                 case 経管栄養:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(8));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(8));
+                    }
                     break;
                 case モニター測定:
-                    entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(0, 1));
+                    if (!イメージ取込解析結果.get特別な対応().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(0, 1));
+                    }
                     break;
                 case じょくそうの処置:
-                    entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(1));
+                    if (!イメージ取込解析結果.get特別な対応().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(1));
+                    }
                     break;
                 case カテーテル:
                     entity.setIkenItem(イメージ取込解析結果.getカテーテル());
@@ -208,40 +230,64 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get問題行動の有無());
                     break;
                 case 幻視_幻聴:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(0, 1));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(0, 1));
+                    }
                     break;
                 case 火の不始末:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(1, 2));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(1, 2));
+                    }
                     break;
                 case 妄想:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(2, 3));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(2, 3));
+                    }
                     break;
                 case 不潔行為:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(3, 4));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(3, 4));
+                    }
                     break;
                 case 昼夜逆転:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(4, 5));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(4, 5));
+                    }
                     break;
                 case 異食行動:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(5, 6));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(5, 6));
+                    }
                     break;
                 case 暴言:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(6, 7));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(6, 7));
+                    }
                     break;
                 case 性的問題行動:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(7, 8));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(7, 8));
+                    }
                     break;
                 case 暴行:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(8, 9));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(8, 9));
+                    }
                     break;
                 case その他:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(9, 10));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(9, 10));
+                    }
                     break;
                 case 介護への抵抗:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(10, 11));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(10, 11));
+                    }
                     break;
                 case 徘徊_認知症の周辺症状:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(11));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(11));
+                    }
                     break;
                 case その他の精神_神経症状:
                     entity.setIkenItem(イメージ取込解析結果.get精神神経症状());
@@ -313,22 +359,34 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get失調不随意運動());
                     break;
                 case 失調_不随意運動_上肢_右:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(0, 1));
+                    if (!イメージ取込解析結果.get失調不随意上肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(0, 1));
+                    }
                     break;
                 case 失調_不随意運動_上肢_左:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(1));
+                    if (!イメージ取込解析結果.get失調不随意上肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(1));
+                    }
                     break;
                 case 失調_不随意運動_下肢_右:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(0, 1));
+                    if (!イメージ取込解析結果.get失調不随意下肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(0, 1));
+                    }
                     break;
                 case 失調_不随意運動_下肢_左:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(1));
+                    if (!イメージ取込解析結果.get失調不随意下肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(1));
+                    }
                     break;
                 case 失調_不随意運動_体幹_右:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(0, 1));
+                    if (!イメージ取込解析結果.get失調不随意体幹().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(0, 1));
+                    }
                     break;
                 case 失調_不随意運動_体幹_左:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(1));
+                    if (!イメージ取込解析結果.get失調不随意体幹().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(1));
+                    }
                     break;
                 case じょくそう:
                     entity.setIkenItem(イメージ取込解析結果.get褥痩());
@@ -349,13 +407,19 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get車いすの使用());
                     break;
                 case 歩行補助具_装具の使用_用いていない:
-                    entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(0, 1));
+                    if (!イメージ取込解析結果.get歩行補助具装具の使用().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(0, 1));
+                    }
                     break;
                 case 歩行補助具_装具の使用_屋外で使用:
-                    entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(1, 2));
+                    if (!イメージ取込解析結果.get歩行補助具装具の使用().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(1, 2));
+                    }
                     break;
                 case 歩行補助具_装具の使用_屋内で使用:
-                    entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(2));
+                    if (!イメージ取込解析結果.get歩行補助具装具の使用().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(2));
+                    }
                     break;
                 case 食事行為:
                     entity.setIkenItem(イメージ取込解析結果.get食事行為());
@@ -364,115 +428,187 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get現在の栄養状況());
                     break;
                 case 尿失禁:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(0, 1));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(0, 1));
+                    }
                     break;
                 case 転倒_骨折:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(1, 2));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(1, 2));
+                    }
                     break;
                 case 移動能力の低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(2, 3));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(2, 3));
+                    }
                     break;
                 case 褥瘡:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(3, 4));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(3, 4));
+                    }
                     break;
                 case 心肺機能の低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(4, 5));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(4, 5));
+                    }
                     break;
                 case 閉じこもり:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(5, 6));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(5, 6));
+                    }
                     break;
                 case 意欲低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(6, 7));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(6, 7));
+                    }
                     break;
                 case 徘徊_可能性が高い病態:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(7, 8));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(7, 8));
+                    }
                     break;
                 case 低栄養:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(8, 9));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(8, 9));
+                    }
                     break;
                 case 摂食_嚥下機能低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(9, 10));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(9, 10));
+                    }
                     break;
                 case 脱水:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(10, 11));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(10, 11));
+                    }
                     break;
                 case 易感染性:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(11, 12));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(11, 12));
+                    }
                     break;
                 case がん等による疼痛:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(12, 13));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(12, 13));
+                    }
                     break;
                 case 病態_その他:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(13));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(13));
+                    }
                     break;
                 case 生活機能の維持_改善の見通し:
                     entity.setIkenItem(イメージ取込解析結果.get予後の見通し());
                     break;
                 case 訪問診療:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(0, 1));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(0, 1));
+                    }
                     break;
                 case 訪問診療_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(0, 1));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(0, 1));
+                    }
                     break;
                 case 訪問看護:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(1, 2));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(1, 2));
+                    }
                     break;
                 case 訪問看護_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(1, 2));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(1, 2));
+                    }
                     break;
                 case 看護職員による相談:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(2, 3));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(2, 3));
+                    }
                     break;
                 case 看護職員による相談_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(2, 3));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(2, 3));
+                    }
                     break;
                 case 訪問歯科診療:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(3, 4));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(3, 4));
+                    }
                     break;
                 case 訪問歯科診療_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(3, 4));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(3, 4));
+                    }
                     break;
                 case 訪問薬剤管理指導:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(4, 5));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(4, 5));
+                    }
                     break;
                 case 訪問薬剤管理指導_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(4, 5));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(4, 5));
+                    }
                     break;
                 case 訪問リハビリテーション:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(5, 6));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(5, 6));
+                    }
                     break;
                 case 訪問リハビリテーション_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(5, 6));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(5, 6));
+                    }
                     break;
                 case 短期入所療養介護:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(6, 7));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(6, 7));
+                    }
                     break;
                 case 短期入所療養介護_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(6, 7));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(6, 7));
+                    }
                     break;
                 case 訪問歯科衛生指導:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(7, 8));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(7, 8));
+                    }
                     break;
                 case 訪問歯科衛生指導_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(7, 8));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(7, 8));
+                    }
                     break;
                 case 訪問栄養食事指導:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(8, 9));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(8, 9));
+                    }
                     break;
                 case 訪問栄養食事指導_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(8, 9));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(8, 9));
+                    }
                     break;
                 case 通所リハビリテーション:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(9, 10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(9, 10));
+                    }
                     break;
                 case 通所リハビリテーション_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(9, 10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(9, 10));
+                    }
                     break;
                 case その他の医療系のサービス:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10));
+                    }
                     break;
                 case その他の医療系のサービス_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(10));
+                    }
                     break;
                 case 介護サービスの留意事項_血圧:
                     entity.setIkenItem(イメージ取込解析結果.get血圧());
@@ -553,7 +689,9 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     //entity.setKinyuItem(イメージ取込解析結果.get対処方針());
                     break;
                 case その他の医療系のサービス:
-                    entity.setKinyuItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10, 11));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setKinyuItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10, 11));
+                    }
                     break;
                 case 介護サービスの留意事項_血圧:
                     entity.setKinyuItem(イメージ取込解析結果.get血圧());
@@ -703,7 +841,9 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     //entity.setKinyuItem(イメージ取込解析結果.get対処方針());
                     break;
                 case その他の医療系のサービス:
-                    entity.setKinyuItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10, 11));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setKinyuItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10, 11));
+                    }
                     break;
                 case 介護サービスの留意事項_血圧:
                     entity.setKinyuItem(イメージ取込解析結果.get血圧());
@@ -742,39 +882,62 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
             entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
             entity.setRemban(i);
+            entity.setIkenItem(RString.EMPTY);
             switch (IkenshoKomokuMapping09B.toValue(new RString(i))) {
                 case 点滴の管理:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(0, 1));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(0, 1));
+                    }
                     break;
                 case ストーマの処置:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(1, 2));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(1, 2));
+                    }
                     break;
                 case 気管切開の処置:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(2, 3));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(2, 3));
+                    }
                     break;
                 case 中心静脈栄養:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(3, 4));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(3, 4));
+                    }
                     break;
                 case 酸素療法:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(4, 5));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(4, 5));
+                    }
                     break;
                 case 疼痛の看護:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(5, 6));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(5, 6));
+                    }
                     break;
                 case 透析:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(6, 7));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(6, 7));
+                    }
                     break;
                 case レスピレーター:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(7, 8));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(7, 8));
+                    }
                     break;
                 case 経管栄養:
-                    entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(8));
+                    if (!イメージ取込解析結果.get処置内容().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(8));
+                    }
                     break;
                 case モニター測定:
-                    entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(0, 1));
+                    if (!イメージ取込解析結果.get特別な対応().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(0, 1));
+                    }
                     break;
                 case じょくそうの処置:
-                    entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(1));
+                    if (!イメージ取込解析結果.get特別な対応().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get特別な対応().substring(1));
+                    }
                     break;
                 case カテーテル:
                     entity.setIkenItem(イメージ取込解析結果.getカテーテル());
@@ -798,40 +961,64 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get問題行動の有無());
                     break;
                 case 幻視_幻聴:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(0, 1));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(0, 1));
+                    }
                     break;
                 case 火の不始末:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(1, 2));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(1, 2));
+                    }
                     break;
                 case 妄想:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(2, 3));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(2, 3));
+                    }
                     break;
                 case 不潔行為:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(3, 4));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(3, 4));
+                    }
                     break;
                 case 昼夜逆転:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(4, 5));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(4, 5));
+                    }
                     break;
                 case 異食行動:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(5, 6));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(5, 6));
+                    }
                     break;
                 case 暴言:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(6, 7));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(6, 7));
+                    }
                     break;
                 case 性的問題行動:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(7, 8));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(7, 8));
+                    }
                     break;
                 case 暴行:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(8, 9));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(8, 9));
+                    }
                     break;
                 case その他:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(9, 10));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(9, 10));
+                    }
                     break;
                 case 介護への抵抗:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(10, 11));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(10, 11));
+                    }
                     break;
                 case 徘徊_認知症の周辺症状:
-                    entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(11));
+                    if (!イメージ取込解析結果.get問題行動().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get問題行動().substring(11));
+                    }
                     break;
                 case その他の精神_神経症状:
                     entity.setIkenItem(イメージ取込解析結果.get精神神経症状());
@@ -903,22 +1090,34 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get失調不随意運動());
                     break;
                 case 失調_不随意運動_上肢_右:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(0, 1));
+                    if (!イメージ取込解析結果.get失調不随意上肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(0, 1));
+                    }
                     break;
                 case 失調_不随意運動_上肢_左:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(1));
+                    if (!イメージ取込解析結果.get失調不随意上肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意上肢().substring(1));
+                    }
                     break;
                 case 失調_不随意運動_下肢_右:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(0, 1));
+                    if (!イメージ取込解析結果.get失調不随意下肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(0, 1));
+                    }
                     break;
                 case 失調_不随意運動_下肢_左:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(1));
+                    if (!イメージ取込解析結果.get失調不随意下肢().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意下肢().substring(1));
+                    }
                     break;
                 case 失調_不随意運動_体幹_右:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(0, 1));
+                    if (!イメージ取込解析結果.get失調不随意体幹().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(0, 1));
+                    }
                     break;
                 case 失調_不随意運動_体幹_左:
-                    entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(1));
+                    if (!イメージ取込解析結果.get失調不随意体幹().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get失調不随意体幹().substring(1));
+                    }
                     break;
                 case じょくそう:
                     entity.setIkenItem(イメージ取込解析結果.get褥痩());
@@ -939,13 +1138,19 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get車いすの使用());
                     break;
                 case 歩行補助具_装具の使用_用いていない:
-                    entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(0, 1));
+                    if (!イメージ取込解析結果.get歩行補助具装具の使用().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(0, 1));
+                    }
                     break;
                 case 歩行補助具_装具の使用_屋外で使用:
-                    entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(1, 2));
+                    if (!イメージ取込解析結果.get歩行補助具装具の使用().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(1, 2));
+                    }
                     break;
                 case 歩行補助具_装具の使用_屋内で使用:
-                    entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(2));
+                    if (!イメージ取込解析結果.get歩行補助具装具の使用().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get歩行補助具装具の使用().substring(2));
+                    }
                     break;
                 case 食事行為:
                     entity.setIkenItem(イメージ取込解析結果.get食事行為());
@@ -954,115 +1159,187 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     entity.setIkenItem(イメージ取込解析結果.get現在の栄養状況());
                     break;
                 case 尿失禁:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(0, 1));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(0, 1));
+                    }
                     break;
                 case 転倒_骨折:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(1, 2));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(1, 2));
+                    }
                     break;
                 case 移動能力の低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(2, 3));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(2, 3));
+                    }
                     break;
                 case 褥瘡:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(3, 4));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(3, 4));
+                    }
                     break;
                 case 心肺機能の低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(4, 5));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(4, 5));
+                    }
                     break;
                 case 閉じこもり:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(5, 6));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(5, 6));
+                    }
                     break;
                 case 意欲低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(6, 7));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(6, 7));
+                    }
                     break;
                 case 徘徊_可能性が高い病態:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(7, 8));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(7, 8));
+                    }
                     break;
                 case 低栄養:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(8, 9));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(8, 9));
+                    }
                     break;
                 case 摂食_嚥下機能低下:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(9, 10));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(9, 10));
+                    }
                     break;
                 case 脱水:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(10, 11));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(10, 11));
+                    }
                     break;
                 case 易感染性:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(11, 12));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(11, 12));
+                    }
                     break;
                 case がん等による疼痛:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(12, 13));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(12, 13));
+                    }
                     break;
                 case 病態_その他:
-                    entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(13));
+                    if (!イメージ取込解析結果.get現在または今後発生の可能性の高い状態().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get現在または今後発生の可能性の高い状態().substring(13));
+                    }
                     break;
                 case 生活機能の維持_改善の見通し:
                     entity.setIkenItem(イメージ取込解析結果.get予後の見通し());
                     break;
                 case 訪問診療:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(0, 1));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(0, 1));
+                    }
                     break;
                 case 訪問診療_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(0, 1));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(0, 1));
+                    }
                     break;
                 case 訪問看護:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(1, 2));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(1, 2));
+                    }
                     break;
                 case 訪問看護_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(1, 2));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(1, 2));
+                    }
                     break;
                 case 看護職員による相談:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(2, 3));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(2, 3));
+                    }
                     break;
                 case 看護職員による相談_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(2, 3));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(2, 3));
+                    }
                     break;
                 case 訪問歯科診療:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(3, 4));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(3, 4));
+                    }
                     break;
                 case 訪問歯科診療_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(3, 4));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(3, 4));
+                    }
                     break;
                 case 訪問薬剤管理指導:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(4, 5));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(4, 5));
+                    }
                     break;
                 case 訪問薬剤管理指導_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(4, 5));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(4, 5));
+                    }
                     break;
                 case 訪問リハビリテーション:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(5, 6));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(5, 6));
+                    }
                     break;
                 case 訪問リハビリテーション_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(5, 6));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(5, 6));
+                    }
                     break;
                 case 短期入所療養介護:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(6, 7));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(6, 7));
+                    }
                     break;
                 case 短期入所療養介護_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(6, 7));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(6, 7));
+                    }
                     break;
                 case 訪問歯科衛生指導:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(7, 8));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(7, 8));
+                    }
                     break;
                 case 訪問歯科衛生指導_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(7, 8));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(7, 8));
+                    }
                     break;
                 case 訪問栄養食事指導:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(8, 9));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(8, 9));
+                    }
                     break;
                 case 訪問栄養食事指導_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(8, 9));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(8, 9));
+                    }
                     break;
                 case 通所リハビリテーション:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(9, 10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(9, 10));
+                    }
                     break;
                 case 通所リハビリテーション_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(9, 10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(9, 10));
+                    }
                     break;
                 case その他の医療系のサービス:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性チェック().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性チェック().substring(10));
+                    }
                     break;
                 case その他の医療系のサービス_必要性:
-                    entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(10));
+                    if (!イメージ取込解析結果.get医学的管理の必要性下線().isEmpty()) {
+                        entity.setIkenItem(イメージ取込解析結果.get医学的管理の必要性下線().substring(10));
+                    }
                     break;
                 case 介護サービスの留意事項_血圧:
                     entity.setIkenItem(イメージ取込解析結果.get血圧());
@@ -1089,19 +1366,21 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     }
 
     private void edit受診中の他科項目(DbT5302ShujiiIkenshoJohoEntity entity) {
-        entity.setExistNaikaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_内科, 桁数固定値_内科 + 切り出し桁数)));
-        entity.setExistSeishinkaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_精神科, 桁数固定値_精神科 + 切り出し桁数)));
-        entity.setExistGekaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_外科, 桁数固定値_外科 + 切り出し桁数)));
-        entity.setExistSeikeigekaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_整形外科, 桁数固定値_整形外科 + 切り出し桁数)));
-        entity.setExistNoshinkeigekaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_脳神経外科, 桁数固定値_脳神経外科 + 切り出し桁数)));
-        entity.setExistHifukaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_皮膚科, 桁数固定値_皮膚科 + 切り出し桁数)));
-        entity.setExistHinyokikaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_泌尿器科, 桁数固定値_泌尿器科 + 切り出し桁数)));
-        entity.setExistFujinkaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_婦人科, 桁数固定値_婦人科 + 切り出し桁数)));
-        entity.setExistJibiinkokaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_耳鼻咽喉科, 桁数固定値_耳鼻咽喉科 + 切り出し桁数)));
-        entity.setExistRehabilitationkaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_リハビリテーション科, 桁数固定値_リハビリテーション科 + 切り出し桁数)));
-        entity.setExistShikaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_歯科, 桁数固定値_歯科 + 切り出し桁数)));
-        entity.setExistGankaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_眼科, 桁数固定値_眼科 + 切り出し桁数)));
-        entity.setExistSonotaJushinkaFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_その他受診科, 桁数固定値_その他受診科 + 切り出し桁数)));
+        if (!イメージ取込解析結果.get記入のあった科().isEmpty()) {
+            entity.setExistNaikaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_内科, 桁数固定値_内科 + 切り出し桁数)));
+            entity.setExistSeishinkaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_精神科, 桁数固定値_精神科 + 切り出し桁数)));
+            entity.setExistGekaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_外科, 桁数固定値_外科 + 切り出し桁数)));
+            entity.setExistSeikeigekaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_整形外科, 桁数固定値_整形外科 + 切り出し桁数)));
+            entity.setExistNoshinkeigekaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_脳神経外科, 桁数固定値_脳神経外科 + 切り出し桁数)));
+            entity.setExistHifukaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_皮膚科, 桁数固定値_皮膚科 + 切り出し桁数)));
+            entity.setExistHinyokikaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_泌尿器科, 桁数固定値_泌尿器科 + 切り出し桁数)));
+            entity.setExistFujinkaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_婦人科, 桁数固定値_婦人科 + 切り出し桁数)));
+            entity.setExistJibiinkokaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_耳鼻咽喉科, 桁数固定値_耳鼻咽喉科 + 切り出し桁数)));
+            entity.setExistRehabilitationkaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_リハビリテーション科, 桁数固定値_リハビリテーション科 + 切り出し桁数)));
+            entity.setExistShikaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_歯科, 桁数固定値_歯科 + 切り出し桁数)));
+            entity.setExistGankaJushinFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_眼科, 桁数固定値_眼科 + 切り出し桁数)));
+            entity.setExistSonotaJushinkaFlag(フラグ変換_RStringToBoolean(イメージ取込解析結果.get記入のあった科().substring(桁数固定値_その他受診科, 桁数固定値_その他受診科 + 切り出し桁数)));
+        }
     }
     private static final int 切り出し桁数 = 1;
     private static final int 桁数固定値_内科 = 0;
