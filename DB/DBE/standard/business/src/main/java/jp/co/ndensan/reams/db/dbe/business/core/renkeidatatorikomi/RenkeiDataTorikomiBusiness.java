@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
@@ -611,6 +612,29 @@ public class RenkeiDataTorikomiBusiness {
                     DbBusinessConfig.get(ConfigNameDBE.センター送信予定年月日, 基準日, SubGyomuCode.DBE認定支援)));
         }
         return dbt5123Entity;
+    }
+    
+    /**
+     * DbT5105NinteiKanryoJohoEntityの設定メソッドです。
+     * 
+     * @param entity DbT5101RelateEntity
+     * @return DbT5105NinteiKanryoJohoEntity
+     */
+    public DbT5105NinteiKanryoJohoEntity getDbT5105Entity(DbT5101RelateEntity entity) {
+        DbT5105NinteiKanryoJohoEntity dbt5105Entity = entity.getDbt5105Entity();
+        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        FlexibleDate 申請日 = new FlexibleDate(dbt5101tempEntity.get認定申請日());
+        dbt5105Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+        dbt5105Entity.setNinteiShinseiJohoTorokuKanryoYMD(申請日);
+        dbt5105Entity.setNinteichosaIraiKanryoYMD(申請日);
+        dbt5105Entity.setNinteichosaKanryoYMD(申請日);
+        dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(申請日);
+        dbt5105Entity.setIkenshoTorokuKanryoYMD(申請日);
+        dbt5105Entity.setIchijiHanteiKanryoYMD(申請日);
+        dbt5105Entity.setMaskingKanryoYMD(申請日);
+        dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(申請日);
+        dbt5105Entity.setNinteiShinsakaiKanryoYMD(申請日);
+        return dbt5105Entity;
     }
 
     private FlexibleDate setFlexibleDate(RString value, RString config) {
