@@ -849,6 +849,7 @@ dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnRemoveIin
 dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnRetuen
 dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnUpdate
 dbe/db/dbe/ShinsakaiKaisaiKekka/onLoad
+dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onChange_txtYearMonth
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_BtnCencel1
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_BtnCencel2
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_BtnCencel3
@@ -862,6 +863,7 @@ dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_DayAfter
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_DayBefore
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_Hako
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_Hozon
+dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_HyojiTsukiHenko
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_MonthAfter
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_MonthBefore
 dbe/db/dbe/ShinsakaiKaisaiYoteiToroku/onClick_OnSelect

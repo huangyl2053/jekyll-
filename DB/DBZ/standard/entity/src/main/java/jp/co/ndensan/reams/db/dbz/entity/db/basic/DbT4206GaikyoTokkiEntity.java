@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -16,8 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
  * DbT4206GaikyoTokkiテーブルのエンティティクラスです。
  */
 public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTokkiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4206GaikyoTokki");
 
@@ -26,7 +26,7 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private final int updateCount = 0;
+    private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -35,6 +35,8 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     private int ninteichosaRirekiNo;
     @PrimaryKey
     private RString gaikyoTokkiTextImageKubun;
+    @PrimaryKey
+    private Code genponMaskKubun;
     private RString jutakuKaishu;
     private RString tokubetsuKyufuService;
     private RString zaitakuService;
@@ -45,7 +47,7 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +56,7 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +65,7 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,16 +74,17 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -89,63 +92,97 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * shinseishoKanriNoのgetメソッドです。
-     *
-     * @return shinseishoKanriNo
+     * 申請書管理番号のgetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
+     * 
+     * @return 申請書管理番号
      */
     public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
-     * shinseishoKanriNoのsetメソッドです。
-     *
-     * @param shinseishoKanriNo shinseishoKanriNo
+     * 申請書管理番号のsetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
+     * 
+     * @param shinseishoKanriNo 申請書管理番号
      */
     public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
-     * ninteichosaRirekiNoのgetメソッドです。
-     *
-     * @return ninteichosaRirekiNo
+     * 認定調査依頼履歴番号のgetメソッドです。
+     * <br/>
+     * <br/>認定調査依頼情報
+     * 
+     * @return 認定調査依頼履歴番号
      */
     public int getNinteichosaRirekiNo() {
         return ninteichosaRirekiNo;
     }
 
     /**
-     * ninteichosaRirekiNoのsetメソッドです。
-     *
-     * @param ninteichosaRirekiNo ninteichosaRirekiNo
+     * 認定調査依頼履歴番号のsetメソッドです。
+     * <br/>
+     * <br/>認定調査依頼情報
+     * 
+     * @param ninteichosaRirekiNo 認定調査依頼履歴番号
      */
     public void setNinteichosaRirekiNo(@Nonnull int ninteichosaRirekiNo) {
         this.ninteichosaRirekiNo = ninteichosaRirekiNo;
     }
 
     /**
-     * gaikyoTokkiTextImageKubunのgetメソッドです。
-     *
-     * @return gaikyoTokkiTextImageKubun
+     * 概況特記テキスト・イメージ区分のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：特記事項テキスト・イメージ区分）1:テキスト 2:イメージ
+     * 
+     * @return 概況特記テキスト・イメージ区分
      */
     public RString getGaikyoTokkiTextImageKubun() {
         return gaikyoTokkiTextImageKubun;
     }
 
     /**
-     * gaikyoTokkiTextImageKubunのsetメソッドです。
-     *
-     * @param gaikyoTokkiTextImageKubun gaikyoTokkiTextImageKubun
+     * 概況特記テキスト・イメージ区分のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：特記事項テキスト・イメージ区分）1:テキスト 2:イメージ
+     * 
+     * @param gaikyoTokkiTextImageKubun 概況特記テキスト・イメージ区分
      */
     public void setGaikyoTokkiTextImageKubun(@Nonnull RString gaikyoTokkiTextImageKubun) {
         this.gaikyoTokkiTextImageKubun = gaikyoTokkiTextImageKubun;
     }
 
     /**
-     * jutakuKaishuのgetメソッドです。
-     *
-     * @return jutakuKaishu
+     * 原本マスク区分のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：原本マスク区分）1:原本  2:マスク
+     * 
+     * @return 原本マスク区分
+     */
+    public Code getGenponMaskKubun() {
+        return genponMaskKubun;
+    }
+
+    /**
+     * 原本マスク区分のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：原本マスク区分）1:原本  2:マスク
+     * 
+     * @param genponMaskKubun 原本マスク区分
+     */
+    public void setGenponMaskKubun(@Nonnull Code genponMaskKubun) {
+        this.genponMaskKubun = genponMaskKubun;
+    }
+
+    /**
+     * 住宅改修（改修箇所）のgetメソッドです。
+     * 
+     * @return 住宅改修（改修箇所）
      */
     @CheckForNull
     public RString getJutakuKaishu() {
@@ -153,18 +190,18 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * jutakuKaishuのsetメソッドです。
-     *
-     * @param jutakuKaishu jutakuKaishu
+     * 住宅改修（改修箇所）のsetメソッドです。
+     * 
+     * @param jutakuKaishu 住宅改修（改修箇所）
      */
     public void setJutakuKaishu(RString jutakuKaishu) {
         this.jutakuKaishu = jutakuKaishu;
     }
 
     /**
-     * tokubetsuKyufuServiceのgetメソッドです。
-     *
-     * @return tokubetsuKyufuService
+     * 市町村特別給付サービス種類名のgetメソッドです。
+     * 
+     * @return 市町村特別給付サービス種類名
      */
     @CheckForNull
     public RString getTokubetsuKyufuService() {
@@ -172,18 +209,18 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * tokubetsuKyufuServiceのsetメソッドです。
-     *
-     * @param tokubetsuKyufuService tokubetsuKyufuService
+     * 市町村特別給付サービス種類名のsetメソッドです。
+     * 
+     * @param tokubetsuKyufuService 市町村特別給付サービス種類名
      */
     public void setTokubetsuKyufuService(RString tokubetsuKyufuService) {
         this.tokubetsuKyufuService = tokubetsuKyufuService;
     }
 
     /**
-     * zaitakuServiceのgetメソッドです。
-     *
-     * @return zaitakuService
+     * 介護保険給付以外の在宅サービス種類名のgetメソッドです。
+     * 
+     * @return 介護保険給付以外の在宅サービス種類名
      */
     @CheckForNull
     public RString getZaitakuService() {
@@ -191,18 +228,18 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * zaitakuServiceのsetメソッドです。
-     *
-     * @param zaitakuService zaitakuService
+     * 介護保険給付以外の在宅サービス種類名のsetメソッドです。
+     * 
+     * @param zaitakuService 介護保険給付以外の在宅サービス種類名
      */
     public void setZaitakuService(RString zaitakuService) {
         this.zaitakuService = zaitakuService;
     }
 
     /**
-     * shusoのgetメソッドです。
-     *
-     * @return shuso
+     * 概況特記事項（主訴）のgetメソッドです。
+     * 
+     * @return 概況特記事項（主訴）
      */
     @CheckForNull
     public RString getShuso() {
@@ -210,18 +247,18 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * shusoのsetメソッドです。
-     *
-     * @param shuso shuso
+     * 概況特記事項（主訴）のsetメソッドです。
+     * 
+     * @param shuso 概況特記事項（主訴）
      */
     public void setShuso(RString shuso) {
         this.shuso = shuso;
     }
 
     /**
-     * kazokuJokyoのgetメソッドです。
-     *
-     * @return kazokuJokyo
+     * 概況特記事項（家族状況）のgetメソッドです。
+     * 
+     * @return 概況特記事項（家族状況）
      */
     @CheckForNull
     public RString getKazokuJokyo() {
@@ -229,18 +266,18 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * kazokuJokyoのsetメソッドです。
-     *
-     * @param kazokuJokyo kazokuJokyo
+     * 概況特記事項（家族状況）のsetメソッドです。
+     * 
+     * @param kazokuJokyo 概況特記事項（家族状況）
      */
     public void setKazokuJokyo(RString kazokuJokyo) {
         this.kazokuJokyo = kazokuJokyo;
     }
 
     /**
-     * kyojuKankyoのgetメソッドです。
-     *
-     * @return kyojuKankyo
+     * 概況特記事項（居住環境）のgetメソッドです。
+     * 
+     * @return 概況特記事項（居住環境）
      */
     @CheckForNull
     public RString getKyojuKankyo() {
@@ -248,18 +285,18 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * kyojuKankyoのsetメソッドです。
-     *
-     * @param kyojuKankyo kyojuKankyo
+     * 概況特記事項（居住環境）のsetメソッドです。
+     * 
+     * @param kyojuKankyo 概況特記事項（居住環境）
      */
     public void setKyojuKankyo(RString kyojuKankyo) {
         this.kyojuKankyo = kyojuKankyo;
     }
 
     /**
-     * kikaiKikiのgetメソッドです。
-     *
-     * @return kikaiKiki
+     * 概況特記事項（機器・器械）のgetメソッドです。
+     * 
+     * @return 概況特記事項（機器・器械）
      */
     @CheckForNull
     public RString getKikaiKiki() {
@@ -267,9 +304,9 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
     }
 
     /**
-     * kikaiKikiのsetメソッドです。
-     *
-     * @param kikaiKiki kikaiKiki
+     * 概況特記事項（機器・器械）のsetメソッドです。
+     * 
+     * @param kikaiKiki 概況特記事項（機器・器械）
      */
     public void setKikaiKiki(RString kikaiKiki) {
         this.kikaiKiki = kikaiKiki;
@@ -277,9 +314,9 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
 
     /**
      * このエンティティの主キーが他の{@literal DbT4206GaikyoTokkiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4206GaikyoTokkiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -293,19 +330,24 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
         if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
             return false;
         }
-        return Objects.equals(this.gaikyoTokkiTextImageKubun, other.gaikyoTokkiTextImageKubun);
+        if (!Objects.equals(this.gaikyoTokkiTextImageKubun, other.gaikyoTokkiTextImageKubun)) {
+            return false;
+        }
+        if (!Objects.equals(this.genponMaskKubun, other.genponMaskKubun)) {
+            return false;
+        }
+        return true;
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT4206GaikyoTokkiEntity entity) {
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.ninteichosaRirekiNo = entity.ninteichosaRirekiNo;
         this.gaikyoTokkiTextImageKubun = entity.gaikyoTokkiTextImageKubun;
+        this.genponMaskKubun = entity.genponMaskKubun;
         this.jutakuKaishu = entity.jutakuKaishu;
         this.tokubetsuKyufuService = entity.tokubetsuKyufuService;
         this.zaitakuService = entity.zaitakuService;
@@ -317,13 +359,13 @@ public class DbT4206GaikyoTokkiEntity extends DbTableEntityBase<DbT4206GaikyoTok
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, gaikyoTokkiTextImageKubun, jutakuKaishu, tokubetsuKyufuService, zaitakuService, shuso, kazokuJokyo, kyojuKankyo, kikaiKiki);
+        return super.toMd5(shinseishoKanriNo, ninteichosaRirekiNo, gaikyoTokkiTextImageKubun, genponMaskKubun, jutakuKaishu, tokubetsuKyufuService, zaitakuService, shuso, kazokuJokyo, kyojuKankyo, kikaiKiki);
     }
 
 // </editor-fold>
+
 }

@@ -25,6 +25,7 @@
             DbT5501."shinsakaiKaisaiNo",
             DbT5501."gogitaiNo",
             DbT5502."shinsakaiWariateYMD",
+            DbT5502."shinsakaiOrder",
             DbT5591."gogitaiMei"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
@@ -146,6 +147,7 @@
     <result property="shinsakaiKaisaiNo"  column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="gogitaiNo"  column="gogitaiNo" />
     <result property="shinsakaiWariateYMD"  column="shinsakaiWariateYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    <result property="shinsakaiOrder"  column="shinsakaiOrder" />
     <result property="gogitaiMei"  column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
    </resultMap>
 

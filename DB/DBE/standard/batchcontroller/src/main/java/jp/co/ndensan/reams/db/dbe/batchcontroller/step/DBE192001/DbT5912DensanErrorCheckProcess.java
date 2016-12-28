@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001;
 
+import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5912ErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5912RelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5912TempEntity;
@@ -26,6 +27,7 @@ public class DbT5912DensanErrorCheckProcess extends BatchProcessBase<DbT5912Rela
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5912TempMapper.get主治医更新対象情報_電算");
+    private RenkeiDataTorikomiProcessParamter processParamter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT5912Temp;
     @BatchWriter
@@ -41,7 +43,7 @@ public class DbT5912DensanErrorCheckProcess extends BatchProcessBase<DbT5912Rela
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toRenkeiDataTorikomiMybitisParamter());
     }
 
     @Override

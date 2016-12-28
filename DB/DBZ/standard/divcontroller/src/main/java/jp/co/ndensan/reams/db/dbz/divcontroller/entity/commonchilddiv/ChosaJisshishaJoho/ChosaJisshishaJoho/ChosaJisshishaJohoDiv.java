@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * ChosaJisshishaJoho のクラスファイル 
@@ -372,6 +373,16 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     @Override
     public void intialize(ChosaJisshishaJohoModel key) {
         getHandler(this).intialize(key);
+    }
+    
+    /**
+     * バリデーション結果を取得します。
+     * 
+     * @return バリデーション結果
+     */
+    @Override
+    public ValidationMessageControlPairs validate() {
+        return getHandler(this).validate();
     }
     
     private ChosaJisshishaJohoHandler getHandler(ChosaJisshishaJohoDiv div) {

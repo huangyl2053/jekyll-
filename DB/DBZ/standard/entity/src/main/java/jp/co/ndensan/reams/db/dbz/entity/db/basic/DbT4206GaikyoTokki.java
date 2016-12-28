@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * DbT4206GaikyoTokkiテーブルの項目定義クラスです。
  */
 public enum DbT4206GaikyoTokki implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -40,43 +40,51 @@ public enum DbT4206GaikyoTokki implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * shinseishoKanriNo
+     * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**
-     * ninteichosaRirekiNo
+     * 認定調査依頼履歴番号
+     * <br/>認定調査依頼情報
      */
     ninteichosaRirekiNo(5, 0),
     /**
-     * gaikyoTokkiTextImageKubun
+     * 概況特記テキスト・イメージ区分
+     * <br/>Enum（DBE：特記事項テキスト・イメージ区分）1:テキスト 2:イメージ
      */
     gaikyoTokkiTextImageKubun(1, 0),
     /**
-     * jutakuKaishu
+     * 原本マスク区分
+     * <br/>Enum（DBE：原本マスク区分）1:原本  2:マスク
+     */
+    genponMaskKubun(2147483647, 0),
+    /**
+     * 住宅改修（改修箇所）
      */
     jutakuKaishu(2147483647, 0),
     /**
-     * tokubetsuKyufuService
+     * 市町村特別給付サービス種類名
      */
     tokubetsuKyufuService(2147483647, 0),
     /**
-     * zaitakuService
+     * 介護保険給付以外の在宅サービス種類名
      */
     zaitakuService(2147483647, 0),
     /**
-     * shuso
+     * 概況特記事項（主訴）
      */
     shuso(2147483647, 0),
     /**
-     * kazokuJokyo
+     * 概況特記事項（家族状況）
      */
     kazokuJokyo(2147483647, 0),
     /**
-     * kyojuKankyo
+     * 概況特記事項（居住環境）
      */
     kyojuKankyo(2147483647, 0),
     /**
-     * kikaiKiki
+     * 概況特記事項（機器・器械）
      */
     kikaiKiki(2147483647, 0);
 

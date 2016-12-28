@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi.DataTorikomiEdit;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi.IShinsakaiKekkaDataTorikomiMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author
  */
-public class ShinsakaiJohoTorikomiProcess extends BatchProcessBase<TempShinsakaiJohoEntity> {
+public class ShinsakaiJohoTorikomiProcess extends BatchProcessBase<TempShinsakaiJohoRelateEntity> {
 
     private static final RString 審査会情報 = new RString(
         "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi."
@@ -50,7 +50,7 @@ public class ShinsakaiJohoTorikomiProcess extends BatchProcessBase<TempShinsakai
     }
 
     @Override
-    protected void process(TempShinsakaiJohoEntity entity) {
+    protected void process(TempShinsakaiJohoRelateEntity entity) {
         if (null != entity) {
             mybatisParameter = ShinsakaiKekkaDataTorikomiMybatisParameter.createParam(
                 RString.EMPTY, entity.get介護認定審査会開催番号(), RString.EMPTY);

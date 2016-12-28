@@ -127,8 +127,8 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         }
         if (共通情報 != null) {
             RString 共有ファイル名 = 共通情報.getShoKisaiHokenshaNo().concat(共通情報.getHihokenshaNo());
-            RString path = getFilePath(共通情報.getImageSharedFileId(), 共有ファイル名);
-            IchijihanteiekkahyoTokkijiko tokkijiko = new IchijihanteiekkahyoTokkijiko(特記情報, 共通情報);
+            RString path = getFilePath(共通情報.getImageSharedFileId(), 共有ファイル名, ファイルパス);
+            IchijihanteiekkahyoTokkijiko tokkijiko = new IchijihanteiekkahyoTokkijiko(特記情報, 共通情報, ファイルパス);
             項目.set概況調査テキスト_イメージ区分(共通情報.getGaikyoChosaTextImageKubun());
             項目.set概況特記のテキスト(共通情報.getTokki());
             項目.set概況特記のイメージ(共有ファイルを引き出す(path, ファイルの名));
@@ -1672,8 +1672,9 @@ public class IchijihanteikekkahyoItemSetteiA3 {
     }
 
     private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        if (!RString.isNullOrEmpty(getFilePath(path, fileName))) {
-            return getFilePath(path, fileName);
+        RString fileFullPath = getFilePath(path, fileName);
+        if (!RString.isNullOrEmpty(fileFullPath)) {
+            return fileFullPath;
         }
         return RString.EMPTY;
     }
@@ -1685,16 +1686,17 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         return RString.EMPTY;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName, RString path) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(path)).getCanonicalPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
-        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 }

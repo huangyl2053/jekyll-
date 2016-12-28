@@ -74,20 +74,20 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         source.seibetsu = item.get性別();
         source.zenZenkaiHanteikekka = item.get前々回要介護度();
         source.zenzenkaiYukokikan = item.get前々回認定有効期間();
-        source.zZenkaiNijiKaishiYMD = パターン17(item.get前々回認定有効期間開始年月日());
-        source.zZenkaiNijishuryoYMD = パターン17(item.get前々回認定有効期間終了年月日());
+        source.zZenkaiNijiKaishiYMD = パターン18(item.get前々回認定有効期間開始年月日());
+        source.zZenkaiNijishuryoYMD = パターン18(item.get前々回認定有効期間終了年月日());
         source.zenkaiNijihanteikekka = item.get前回要介護度();
         source.zenkaiYukokikan = item.get前回認定有効期間();
-        source.zenkaiNijiKaishiYMD = パターン17(item.get前回認定有効期間開始年月日());
-        source.zenkaiNijiShuryoYMD = パターン17(item.get前回認定有効期間終了年月日());
-        source.zenkaiNijihanteiDate = パターン16(item.get前回認定日());
+        source.zenkaiNijiKaishiYMD = パターン18(item.get前回認定有効期間開始年月日());
+        source.zenkaiNijiShuryoYMD = パターン18(item.get前回認定有効期間終了年月日());
+        source.zenkaiNijihanteiDate = パターン18(item.get前回認定日());
         source.zenkaiJotaizo = item.get前回状態像();
-        source.sakuseiYMD = パターン16(item.get審査会資料作成年月日());
-        source.shinseiYMD = パターン16(item.get今回認定申請年月日());
-        source.chosaYMD = パターン16(item.get今回認定調査実施年月日());
-        source.shinsaYMD = パターン16(item.get今回認定審査年月日());
+        source.sakuseiYMD = パターン18(item.get審査会資料作成年月日());
+        source.shinseiYMD = パターン18(item.get今回認定申請年月日());
+        source.chosaYMD = パターン18(item.get今回認定調査実施年月日());
+        source.shinsaYMD = パターン18(item.get今回認定審査年月日());
         source.ichijiHanteiKekka = item.get一次判定結果();
-        source.chosaJisshiDate1 = パターン17(item.get調査日());
+        source.chosaJisshiDate1 = パターン18(item.get調査日());
         source.chosaJisshiBasho = item.get調査実施場所();
         source.tokuteishippeiName = item.get特定疾病名();
         source.kijunGokeiTime = item.get要介護認定等基準時間();
@@ -353,22 +353,12 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         return 年齢歳.toRString();
     }
 
-    private RString パターン16(FlexibleDate 年月日) {
+    private RString パターン18(FlexibleDate 年月日) {
         if (年月日 == null || 年月日.isEmpty()) {
             return RString.EMPTY;
         }
-        return 年月日.wareki().eraType(EraType.ALPHABET)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+        return 年月日.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString();
     }
-
-    private RString パターン17(FlexibleDate 年月日) {
-        if (年月日 == null || 年月日.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return 年月日.wareki().eraType(EraType.ALPHABET)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH)
-                .fillType(FillType.BLANK).toDateString();
-    }
-
 }

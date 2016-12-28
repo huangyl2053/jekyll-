@@ -58,9 +58,8 @@ public class SabisuJyoukyoA4 {
      *
      * @param 項目 IchijihanteikekkahyoA4Entity
      * @param entity ItiziHanteiEntity
-     * @param ファイルパス ファイルパス
      */
-    public void set項目(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity, RString ファイルパス) {
+    public void set項目(IchijihanteikekkahyoA4Entity 項目, ItiziHanteiEntity entity) {
         項目.set審査順(new RString(entity.getShinsakaiOrder()));
         項目.set年齢(new RString(entity.getAge()));
         項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
@@ -245,6 +244,9 @@ public class SabisuJyoukyoA4 {
     }
 
     private RString set有効期間(int 有効期間) {
+        if (有効期間 == 0) {
+            return RString.EMPTY;
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(有効期間)
                 .append(月間);

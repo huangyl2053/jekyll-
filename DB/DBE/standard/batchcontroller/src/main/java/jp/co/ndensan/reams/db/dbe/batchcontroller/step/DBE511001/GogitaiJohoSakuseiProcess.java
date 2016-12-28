@@ -82,7 +82,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
 
     @Override
     protected void initialize() {
-        insertCount = 0;
+        insertCount = INT_0;
         errorMessage = RString.EMPTY;
         csv出力 = false;
         noErrorFlag = true;
@@ -204,11 +204,11 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
                         FlexibleDate.MAX,
                         true,
-                        Integer.parseInt(合議体情報.get合議体NO().toString()),
+                        合議体情報.get合議体NO().toInt(),
                         new FlexibleDate(合議体情報.get有効開始日()),
                         FlexibleDate.EMPTY,
                         RString.EMPTY,
-                        0
+                        INT_0
                 ));
         if (合議体情報List != null && !合議体情報List.isEmpty()) {
             RString message = GogitaiJohoIkkatuSakuseiErrorMessage.有効期間不正.getMessage()
@@ -421,7 +421,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     private void isClearInsertCount(RString 合議体NO) {
         if (!before合議体NO.equals(合議体NO)) {
             gogitaiInsertedFlag = false;
-            insertCount = 0;
+            insertCount = INT_0;
         }
     }
 
