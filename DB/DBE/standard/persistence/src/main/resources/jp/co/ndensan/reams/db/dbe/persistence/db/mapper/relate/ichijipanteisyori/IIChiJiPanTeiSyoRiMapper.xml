@@ -166,6 +166,9 @@ WHERE
     AND DbT5105."centerSoshinYMD" IS NULL
     AND DbT5101."shoriJotaiKubun"  IN (#{通常},#{延期})
     AND DbT5101."logicalDeletedFlag" = FALSE
+    <!-- TODO FW提供の削除フラグについて条件に記載されていないため、DbAccessorで論理削除されたデータも取得できてしまう。
+    それが問題である場合、下記のコメントアウトを排除して条件を有効にすること -->
+    <!-- AND DbT5101."isDeleted" = FALSE -->
  <if test = "認定申請年月日開始From">
     AND
      #{認定申請年月日開始} <![CDATA[<=]]> DbT5101."ninteiShinseiYMD"
@@ -175,6 +178,7 @@ WHERE
      DbT5101."ninteiShinseiYMD"  <![CDATA[<=]]>  #{認定申請年月日終了}
  </if>
  <if test = "完了処理一次判定_遷移">
+     AND DbT5105."ichijiHanteiKanryoYMD" IS NULL
      <if test = "申請書管理番号List != null and !申請書管理番号List.isEmpty()">
         AND DbT5101."shinseishoKanriNo" IN
         <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>

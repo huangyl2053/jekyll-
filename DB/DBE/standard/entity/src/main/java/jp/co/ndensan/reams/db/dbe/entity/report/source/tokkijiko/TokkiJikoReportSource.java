@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.report.source.tokkijiko;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -130,113 +132,6 @@ public class TokkiJikoReportSource implements IReportSource {
     @ReportItem(name = "tokkiText", order = 55)
     public RString tokkiText;
 
-    @ReportItem(name = "two_tokkiImg1", order = 156)
-    public RString two_tokkiImg1;
-    @ReportItem(name = "two_listChosa_1", length = 4, order = 157)
-    public RString two_listChosa1;
-    @ReportItem(name = "two_tokkiImg2", order = 158)
-    public RString two_tokkiImg2;
-    @ReportItem(name = "two_tokkiImg3", order = 159)
-    public RString two_tokkiImg3;
-    @ReportItem(name = "two_tokkiImg4", order = 160)
-    public RString two_tokkiImg4;
-    @ReportItem(name = "two_tokkiImg5", order = 161)
-    public RString two_tokkiImg5;
-    @ReportItem(name = "two_tokkiImg6", order = 162)
-    public RString two_tokkiImg6;
-    @ReportItem(name = "two_tokkiImg7", order = 163)
-    public RString two_tokkiImg7;
-    @ReportItem(name = "two_tokkiImg8", order = 164)
-    public RString two_tokkiImg8;
-    @ReportItem(name = "two_tokkiImg9", order = 165)
-    public RString two_tokkiImg9;
-    @ReportItem(name = "two_tokkiImg10", order = 166)
-    public RString two_tokkiImg10;
-    @ReportItem(name = "two_tokkiImg11", order = 167)
-    public RString two_tokkiImg11;
-    @ReportItem(name = "two_tokkiImg12", order = 168)
-    public RString two_tokkiImg12;
-    @ReportItem(name = "two_tokkiImg13", order = 169)
-    public RString two_tokkiImg13;
-    @ReportItem(name = "two_tokkiImg14", order = 170)
-    public RString two_tokkiImg14;
-    @ReportItem(name = "two_tokkiImg15", order = 171)
-    public RString two_tokkiImg15;
-    @ReportItem(name = "two_tokkiText1", order = 172)
-    public RString two_tokkiText1;
-    @ReportItem(name = "two_listChosa1_1", length = 4, order = 173)
-    public RString two_listChosa1_1;
-    @ReportItem(name = "two_tokkiText2", order = 174)
-    public RString two_tokkiText2;
-    @ReportItem(name = "two_tokkiText3", order = 175)
-    public RString two_tokkiText3;
-    @ReportItem(name = "two_tokkiText4", order = 176)
-    public RString two_tokkiText4;
-    @ReportItem(name = "two_tokkiText5", order = 177)
-    public RString two_tokkiText5;
-    @ReportItem(name = "two_tokkiText6", order = 178)
-    public RString two_tokkiText6;
-    @ReportItem(name = "two_tokkiText7", order = 179)
-    public RString two_tokkiText7;
-    @ReportItem(name = "two_tokkiText8", order = 180)
-    public RString two_tokkiText8;
-    @ReportItem(name = "two_tokkiText9", order = 181)
-    public RString two_tokkiText9;
-    @ReportItem(name = "two_tokkiText10", order = 182)
-    public RString two_tokkiText10;
-    @ReportItem(name = "two_tokkiText11", order = 183)
-    public RString two_tokkiText11;
-    @ReportItem(name = "two_tokkiText12", order = 184)
-    public RString two_tokkiText12;
-    @ReportItem(name = "two_tokkiText13", order = 185)
-    public RString two_tokkiText13;
-    @ReportItem(name = "two_tokkiText14", order = 186)
-    public RString two_tokkiText14;
-    @ReportItem(name = "two_tokkiText15", order = 187)
-    public RString two_tokkiText15;
-    @ReportItem(name = "two_tokkiImg", order = 188)
-    public RString two_tokkiImg;
-    @ReportItem(name = "two_hihokenshaName", length = 30, order = 189)
-    public RString two_hihokenshaName;
-    @ReportItem(name = "two_hokenshaNo", length = 6, order = 190)
-    public RString two_hokenshaNo;
-    @ReportItem(name = "two_sakuseiGengo", length = 2, order = 191)
-    public RString two_sakuseiGengo;
-    @ReportItem(name = "two_sakuseiYY", length = 2, order = 192)
-    public RString two_sakuseiYY;
-    @ReportItem(name = "two_sakuseiMM", length = 2, order = 193)
-    public RString two_sakuseiMM;
-    @ReportItem(name = "two_sakuseiDD", length = 2, order = 194)
-    public RString two_sakuseiDD;
-    @ReportItem(name = "two_chosaGengo", length = 2, order = 195)
-    public RString two_chosaGengo;
-    @ReportItem(name = "two_chosaYY", length = 2, order = 196)
-    public RString two_chosaYY;
-    @ReportItem(name = "two_chosaMM", length = 2, order = 197)
-    public RString two_chosaMM;
-    @ReportItem(name = "two_chosaDD", length = 2, order = 198)
-    public RString two_chosaDD;
-    @ReportItem(name = "two_hihokenshaNo", length = 10, order = 199)
-    public RString two_hihokenshaNo;
-    @ReportItem(name = "two_shinseiGengo", length = 2, order = 200)
-    public RString two_shinseiGengo;
-    @ReportItem(name = "two_shinseiYY", length = 2, order = 201)
-    public RString two_shinseiYY;
-    @ReportItem(name = "two_shinseiMM", length = 2, order = 202)
-    public RString two_shinseiMM;
-    @ReportItem(name = "two_shinseiDD", length = 2, order = 203)
-    public RString two_shinseiDD;
-    @ReportItem(name = "two_shinsaGengo", length = 2, order = 204)
-    public RString two_shinsaGengo;
-    @ReportItem(name = "two_shinsaYY", length = 2, order = 205)
-    public RString two_shinsaYY;
-    @ReportItem(name = "two_shinsaMM", length = 2, order = 206)
-    public RString two_shinsaMM;
-    @ReportItem(name = "two_shinsaDD", length = 2, order = 207)
-    public RString two_shinsaDD;
-    @ReportItem(name = "two_tokkiText", order = 208)
-    public RString two_tokkiText;
-
     // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -255,7 +150,7 @@ public class TokkiJikoReportSource implements IReportSource {
 
         tokkiText,
         tokkiImg,
-        two_tokkiText,
-        two_tokkiImg,
+        tokkiText1,
+        tokkiImg1
     }
 }

@@ -173,7 +173,6 @@ public class ImageJohoMaskingHandler {
             if (result.getイメージ共有ファイルID() != null) {
                 row.set共有ファイルID(new RString(result.getイメージ共有ファイルID().toString()));
             }
-            row.set認定申請年(new RString(result.get認定申請年()));
             setアクセスログ(result.get申請書管理番号().value());
             rowList.add(row);
         }
@@ -362,8 +361,6 @@ public class ImageJohoMaskingHandler {
 
                 IkenshoImageJohoBuilder builder = imageJoho.createBuilderForEdit();
 
-//                builder.set認定申請年(Integer.parseInt(taishoshaRow.get認定申請年().toString()));
-//                builder.set共有ファイルID(RDateTime.parse(taishoshaRow.get共有ファイルID().toString()));
                 imageJohoManager.save要介護認定意見書イメージ情報(builder.build());
 
             } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null

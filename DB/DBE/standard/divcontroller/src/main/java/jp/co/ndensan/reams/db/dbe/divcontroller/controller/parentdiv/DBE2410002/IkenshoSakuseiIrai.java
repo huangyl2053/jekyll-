@@ -75,7 +75,7 @@ public class IkenshoSakuseiIrai {
     private static final RString SELECTED_KEY3 = new RString("key3");
     private static final RString SELECTED_KEY4 = new RString("key4");
     private static final RString SELECTED_KEY5 = new RString("key5");
-    private static final RString 依頼書印刷処理 = new RString("依頼書印刷処理");
+    private static final RString 依頼書印刷処理 = new RString("発行処理");
     private static final int 数字_0 = 0;
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");

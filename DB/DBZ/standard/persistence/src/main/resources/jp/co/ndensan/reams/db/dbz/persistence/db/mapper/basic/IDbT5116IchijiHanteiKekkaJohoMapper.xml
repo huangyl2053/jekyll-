@@ -28,7 +28,7 @@
         "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" as "dbT5116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun",
         "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiYMD",
         "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode",
-        "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode",
+        "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaNinchishoKasanCode" as "dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasan",
         "DbT5116IchijiHanteiKekkaJoho"."kijunJikan" as "dbT5116IchijiHanteiKekkaJoho_kijunJikan",
         "DbT5116IchijiHanteiKekkaJoho"."kijunJikanShokuji" as "dbT5116IchijiHanteiKekkaJoho_kijunJikanShokuji",
         "DbT5116IchijiHanteiKekkaJoho"."kijunJikanHaisetsu" as "dbT5116IchijiHanteiKekkaJoho_kijunJikanHaisetsu",
@@ -81,7 +81,7 @@
         <result property="kariIchijiHanteiKubun" column="dbT5116IchijiHanteiKekkaJoho_kariIchijiHanteiKubun" />
         <result property="ichijiHanteiYMD" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichijiHanteiKekkaCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHanteiKekkaNinchishoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="kijunJikan" column="dbT5116IchijiHanteiKekkaJoho_kijunJikan" />
         <result property="kijunJikanShokuji" column="dbT5116IchijiHanteiKekkaJoho_kijunJikanShokuji" />
         <result property="kijunJikanHaisetsu" column="dbT5116IchijiHanteiKekkaJoho_kijunJikanHaisetsu" />
