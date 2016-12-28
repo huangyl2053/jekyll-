@@ -287,7 +287,7 @@ public class IraishoIkkatsuHakkoBusiness {
      */
     public ShujiiIkenshoSakuseiRyoSeikyushoItem setDBE234001Item() {
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
-        item.setGengo(get和暦(processParamter.getHakkobi(), EraType.KANJI));
+        item.setGengo(get和暦(processParamter.getHakkobi(), true));
         item.setAtesakiHokenshaName(entity.get保険者名());
         item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.在宅新規.get名称());
         item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.在宅継続.get名称());
@@ -545,7 +545,7 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setYubinNo(getYubinNo(entity.get郵便番号()));
         item.setJusho(entity.get住所());
         item.setShinseiYMD(get和暦(entity.get認定申請年月日(), true));
-        item.setTeishutsuKigen(get提出期限(EraType.KANJI));
+        item.setTeishutsuKigen(get提出期限(true));
         item.setTsuchibun2(通知文Map.get(2));
         item.setShoriName(IkenshoIraiKubun.toValue(entity.get主治医意見書依頼区分()).get名称());
         return item;
@@ -618,10 +618,6 @@ public class IraishoIkkatsuHakkoBusiness {
     }
 
     private RString get提出期限() {
-        return get提出期限(EraType.KANJI_RYAKU);
-    }
-
-    private RString get提出期限(EraType eraType) {
 
         RString 提出期限 = RString.EMPTY;
         if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
@@ -629,18 +625,42 @@ public class IraishoIkkatsuHakkoBusiness {
                 int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
                         基準日, SubGyomuCode.DBE認定支援).toString());
                 if (entity.get主治医意見書作成期限年月日() != null && !entity.get主治医意見書作成期限年月日().isEmpty()) {
-                    提出期限 = get和暦(new RString(entity.get主治医意見書作成期限年月日().plusDay(期限日数).toString()), eraType);
+                    提出期限 = get和暦(new RString(entity.get主治医意見書作成期限年月日().plusDay(期限日数).toString()));
                 }
             } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
                 提出期限 = RString.EMPTY;
             } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
                 提出期限 = !RString.isNullOrEmpty(processParamter.getKyotsuHizuke())
-                        ? get和暦(processParamter.getKyotsuHizuke(), eraType) : RString.EMPTY;
+                        ? get和暦(processParamter.getKyotsuHizuke()) : RString.EMPTY;
             }
         } else {
             FlexibleDate 主治医意見書作成期限日 = entity.get主治医意見書作成期限年月日();
             if (主治医意見書作成期限日 != null && !主治医意見書作成期限日.isEmpty()) {
-                提出期限 = get和暦(new RString(主治医意見書作成期限日.toString()), eraType);
+                提出期限 = get和暦(new RString(主治医意見書作成期限日.toString()));
+            }
+        }
+        return 提出期限;
+    }
+
+    private RString get提出期限(boolean 年号フラグ) {
+        RString 提出期限 = RString.EMPTY;
+        if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
+            if (文字列0.equals(processParamter.getTeishutsuKigen())) {
+                int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
+                        基準日, SubGyomuCode.DBE認定支援).toString());
+                if (entity.get主治医意見書作成期限年月日() != null && !entity.get主治医意見書作成期限年月日().isEmpty()) {
+                    提出期限 = get和暦(new RString(entity.get主治医意見書作成期限年月日().plusDay(期限日数).toString()), 年号フラグ);
+                }
+            } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
+                提出期限 = RString.EMPTY;
+            } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
+                提出期限 = !RString.isNullOrEmpty(processParamter.getKyotsuHizuke())
+                        ? get和暦(processParamter.getKyotsuHizuke(), 年号フラグ) : RString.EMPTY;
+            }
+        } else {
+            FlexibleDate 主治医意見書作成期限日 = entity.get主治医意見書作成期限年月日();
+            if (主治医意見書作成期限日 != null && !主治医意見書作成期限日.isEmpty()) {
+                提出期限 = get和暦(new RString(主治医意見書作成期限日.toString()), 年号フラグ);
             }
         }
         return 提出期限;
@@ -690,17 +710,13 @@ public class IraishoIkkatsuHakkoBusiness {
         return 名称付与;
     }
 
-    private RString get和暦(RString 日付, EraType eraType) {
+    private RString get和暦(RString 日付) {
         RString 和暦 = RString.EMPTY;
         if (!RString.isNullOrEmpty(日付)) {
             FlexibleDate flexibleDate = new FlexibleDate(日付);
-            和暦 = flexibleDate.wareki().eraType(eraType).toDateString();
-        }
+            和暦 = flexibleDate.wareki().eraType(EraType.KANJI_RYAKU).toDateString();
+            }
         return 和暦;
-    }
-
-    private RString get和暦(RString 日付) {
-        return get和暦(日付, EraType.KANJI_RYAKU);
     }
 
     private FlexibleDate getFlexibleDate(RString date) {

@@ -73,8 +73,9 @@
             DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{主治医意見書依頼未処理者一覧表申請日To} 
         </if>
         ORDER BY
-        DbT5101."hihokenshaKana",
-        DbT5101."ninteiShinseiYMD"
+        DbT5101."shoKisaiHokenshaNo" ASC,
+        DbT5101."ninteiShinseiYMD" ASC,
+        DbT5101."hihokenshaKana" ASC
     </select>
     <resultMap id="resultMap_主治医意見書依頼未処理者" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -255,8 +256,9 @@
             DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{主治医意見書未提出者一覧申請日To} 
         </if>
         ORDER BY
-        DbT5101."hihokenshaKana",
-        DbT5101."ninteiShinseiYMD"
+        DbT5101."shoKisaiHokenshaNo" ASC,
+        DbT5101."ninteiShinseiYMD" ASC,
+        DbT5101."hihokenshaKana" ASC
     </select>
     <resultMap id="resultMap_主治医意見書未提出者" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -363,8 +365,9 @@
             DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{主治医意見書依頼済み一覧表申請日To} 
         </if>
         ORDER BY
-        DbT5101."hihokenshaKana",
-        DbT5101."ninteiShinseiYMD"
+        DbT5101."shoKisaiHokenshaNo" ASC,
+        DbT5101."ninteiShinseiYMD" ASC,
+        DbT5101."hihokenshaKana" ASC
     </select>
     <resultMap id="resultMap_主治医意見書依頼済み" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -453,8 +456,9 @@
             DbT5501."shinsakaiKaisaiNo" = #{主治医意見書５項目確認一覧表審査会}
         </if>
         ORDER BY
-        DbT5101."hihokenshaKana",
-        DbT5101."ninteiShinseiYMD"
+        DbT5101."shoKisaiHokenshaNo" ASC,
+        DbT5101."ninteiShinseiYMD" ASC,
+        DbT5101."hihokenshaKana" ASC
     </select>
     <resultMap id="resultMap_主治医意見書５項目確認" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -562,10 +566,10 @@
             AND
             DbT5302."ikenshoJuryoYMD" <![CDATA[<=]]> #{主治医意見書作成料請求一覧表受領日To} 
         </if>
-        
         ORDER BY
-        DbT5101."hihokenshaKana",
-        DbT5101."ninteiShinseiYMD"
+        DbT5101."shoKisaiHokenshaNo" ASC,
+        DbT5101."ninteiShinseiYMD" ASC,
+        DbT5101."hihokenshaKana" ASC
     </select>    
     <resultMap id="resultMap_主治医意見書作成料請求情報" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>

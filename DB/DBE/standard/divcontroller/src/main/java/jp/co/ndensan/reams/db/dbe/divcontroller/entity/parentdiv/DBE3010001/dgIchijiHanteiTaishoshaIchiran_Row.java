@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Dec 10 10:14:24 JST 2016 
+ * Wed Dec 28 01:30:06 JST 2016 
  */
 
 
@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
 
-    private ButtonDialog btnSyokai;
     private ButtonDialog btnSentaku;
     private RString columnState;
     private RString hokensha;
@@ -40,29 +40,28 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
     private TextBoxFlexibleDate chosaJissibi;
     private TextBoxFlexibleDate ikenshoJuryobi;
     private RString shinseishoKanriNo;
-    private RString kijunJikan;
-    private RString kijunJikanShokuji;
-    private RString kijunJikanHaisetsu;
-    private RString kijunJikanIdo;
-    private RString kijunJikanSeiketsuHoji;
-    private RString kijunJikanKansetsuCare;
-    private RString kijunJikanBPSDKanren;
-    private RString kijunJikanKinoKunren;
-    private RString kijunJikanIryoKanren;
-    private RString kijunJikanNinchishoKasan;
-    private RString chukanHyokaKomoku1gun;
-    private RString chukanHyokaKomoku2gun;
-    private RString chukanHyokaKomoku3gun;
-    private RString chukanHyokaKomoku4gun;
-    private RString chukanHyokaKomoku5gun;
+    private TextBoxNum kijunJikan;
+    private TextBoxNum kijunJikanShokuji;
+    private TextBoxNum kijunJikanHaisetsu;
+    private TextBoxNum kijunJikanIdo;
+    private TextBoxNum kijunJikanSeiketsuHoji;
+    private TextBoxNum kijunJikanKansetsuCare;
+    private TextBoxNum kijunJikanBPSDKanren;
+    private TextBoxNum kijunJikanKinoKunren;
+    private TextBoxNum kijunJikanIryoKanren;
+    private TextBoxNum kijunJikanNinchishoKasan;
+    private TextBoxNum chukanHyokaKomoku1gun;
+    private TextBoxNum chukanHyokaKomoku2gun;
+    private TextBoxNum chukanHyokaKomoku3gun;
+    private TextBoxNum chukanHyokaKomoku4gun;
+    private TextBoxNum chukanHyokaKomoku5gun;
     private RString jotaiAnteiseiCode;
-    private RString ninchishoJiritsudoIIijoNoGaizensei;
+    private TextBoxNum ninchishoJiritsudoIIijoNoGaizensei;
     private RString suiteiKyufuKubunCode;
     private RString koroshoIfShikibetsuCode;
 
     public dgIchijiHanteiTaishoshaIchiran_Row() {
         super();
-        this.btnSyokai = new ButtonDialog();
         this.btnSentaku = new ButtonDialog();
         this.columnState = RString.EMPTY;
         this.hokensha = RString.EMPTY;
@@ -79,26 +78,25 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.chosaJissibi = new TextBoxFlexibleDate();
         this.ikenshoJuryobi = new TextBoxFlexibleDate();
         this.shinseishoKanriNo = RString.EMPTY;
-        this.kijunJikan = RString.EMPTY;
-        this.kijunJikanShokuji = RString.EMPTY;
-        this.kijunJikanHaisetsu = RString.EMPTY;
-        this.kijunJikanIdo = RString.EMPTY;
-        this.kijunJikanSeiketsuHoji = RString.EMPTY;
-        this.kijunJikanKansetsuCare = RString.EMPTY;
-        this.kijunJikanBPSDKanren = RString.EMPTY;
-        this.kijunJikanKinoKunren = RString.EMPTY;
-        this.kijunJikanIryoKanren = RString.EMPTY;
-        this.kijunJikanNinchishoKasan = RString.EMPTY;
-        this.chukanHyokaKomoku1gun = RString.EMPTY;
-        this.chukanHyokaKomoku2gun = RString.EMPTY;
-        this.chukanHyokaKomoku3gun = RString.EMPTY;
-        this.chukanHyokaKomoku4gun = RString.EMPTY;
-        this.chukanHyokaKomoku5gun = RString.EMPTY;
+        this.kijunJikan = new TextBoxNum();
+        this.kijunJikanShokuji = new TextBoxNum();
+        this.kijunJikanHaisetsu = new TextBoxNum();
+        this.kijunJikanIdo = new TextBoxNum();
+        this.kijunJikanSeiketsuHoji = new TextBoxNum();
+        this.kijunJikanKansetsuCare = new TextBoxNum();
+        this.kijunJikanBPSDKanren = new TextBoxNum();
+        this.kijunJikanKinoKunren = new TextBoxNum();
+        this.kijunJikanIryoKanren = new TextBoxNum();
+        this.kijunJikanNinchishoKasan = new TextBoxNum();
+        this.chukanHyokaKomoku1gun = new TextBoxNum();
+        this.chukanHyokaKomoku2gun = new TextBoxNum();
+        this.chukanHyokaKomoku3gun = new TextBoxNum();
+        this.chukanHyokaKomoku4gun = new TextBoxNum();
+        this.chukanHyokaKomoku5gun = new TextBoxNum();
         this.jotaiAnteiseiCode = RString.EMPTY;
-        this.ninchishoJiritsudoIIijoNoGaizensei = RString.EMPTY;
+        this.ninchishoJiritsudoIIijoNoGaizensei = new TextBoxNum();
         this.suiteiKyufuKubunCode = RString.EMPTY;
         this.koroshoIfShikibetsuCode = RString.EMPTY;
-        this.setOriginalData("btnSyokai", btnSyokai);
         this.setOriginalData("btnSentaku", btnSentaku);
         this.setOriginalData("columnState", columnState);
         this.setOriginalData("hokensha", hokensha);
@@ -136,9 +134,8 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
     }
 
-    public dgIchijiHanteiTaishoshaIchiran_Row(ButtonDialog btnSyokai, ButtonDialog btnSentaku, RString columnState, RString hokensha, RString hihokenNo, RString hihokenshaName, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString ichijiHanteiKekkaCode, RString ichijiHanteiKekkaNinchishoKasan, RString ichijiHanteiKekkaNinchishoKasanCode, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString shinseishoKanriNo, RString kijunJikan, RString kijunJikanShokuji, RString kijunJikanHaisetsu, RString kijunJikanIdo, RString kijunJikanSeiketsuHoji, RString kijunJikanKansetsuCare, RString kijunJikanBPSDKanren, RString kijunJikanKinoKunren, RString kijunJikanIryoKanren, RString kijunJikanNinchishoKasan, RString chukanHyokaKomoku1gun, RString chukanHyokaKomoku2gun, RString chukanHyokaKomoku3gun, RString chukanHyokaKomoku4gun, RString chukanHyokaKomoku5gun, RString jotaiAnteiseiCode, RString ninchishoJiritsudoIIijoNoGaizensei, RString suiteiKyufuKubunCode, RString koroshoIfShikibetsuCode) {
+    public dgIchijiHanteiTaishoshaIchiran_Row(ButtonDialog btnSentaku, RString columnState, RString hokensha, RString hihokenNo, RString hihokenshaName, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString ichijiHanteiKekkaCode, RString ichijiHanteiKekkaNinchishoKasan, RString ichijiHanteiKekkaNinchishoKasanCode, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString shinseishoKanriNo, TextBoxNum kijunJikan, TextBoxNum kijunJikanShokuji, TextBoxNum kijunJikanHaisetsu, TextBoxNum kijunJikanIdo, TextBoxNum kijunJikanSeiketsuHoji, TextBoxNum kijunJikanKansetsuCare, TextBoxNum kijunJikanBPSDKanren, TextBoxNum kijunJikanKinoKunren, TextBoxNum kijunJikanIryoKanren, TextBoxNum kijunJikanNinchishoKasan, TextBoxNum chukanHyokaKomoku1gun, TextBoxNum chukanHyokaKomoku2gun, TextBoxNum chukanHyokaKomoku3gun, TextBoxNum chukanHyokaKomoku4gun, TextBoxNum chukanHyokaKomoku5gun, RString jotaiAnteiseiCode, TextBoxNum ninchishoJiritsudoIIijoNoGaizensei, RString suiteiKyufuKubunCode, RString koroshoIfShikibetsuCode) {
         super();
-        this.setOriginalData("btnSyokai", btnSyokai);
         this.setOriginalData("btnSentaku", btnSentaku);
         this.setOriginalData("columnState", columnState);
         this.setOriginalData("hokensha", hokensha);
@@ -174,7 +171,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("ninchishoJiritsudoIIijoNoGaizensei", ninchishoJiritsudoIIijoNoGaizensei);
         this.setOriginalData("suiteiKyufuKubunCode", suiteiKyufuKubunCode);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
-        this.btnSyokai = btnSyokai;
         this.btnSentaku = btnSentaku;
         this.columnState = columnState;
         this.hokensha = hokensha;
@@ -210,10 +206,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.ninchishoJiritsudoIIijoNoGaizensei = ninchishoJiritsudoIIijoNoGaizensei;
         this.suiteiKyufuKubunCode = suiteiKyufuKubunCode;
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
-    }
-
-    public ButtonDialog getBtnSyokai() {
-        return btnSyokai;
     }
 
     public ButtonDialog getBtnSentaku() {
@@ -280,63 +272,63 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         return shinseishoKanriNo;
     }
 
-    public RString getKijunJikan() {
+    public TextBoxNum getKijunJikan() {
         return kijunJikan;
     }
 
-    public RString getKijunJikanShokuji() {
+    public TextBoxNum getKijunJikanShokuji() {
         return kijunJikanShokuji;
     }
 
-    public RString getKijunJikanHaisetsu() {
+    public TextBoxNum getKijunJikanHaisetsu() {
         return kijunJikanHaisetsu;
     }
 
-    public RString getKijunJikanIdo() {
+    public TextBoxNum getKijunJikanIdo() {
         return kijunJikanIdo;
     }
 
-    public RString getKijunJikanSeiketsuHoji() {
+    public TextBoxNum getKijunJikanSeiketsuHoji() {
         return kijunJikanSeiketsuHoji;
     }
 
-    public RString getKijunJikanKansetsuCare() {
+    public TextBoxNum getKijunJikanKansetsuCare() {
         return kijunJikanKansetsuCare;
     }
 
-    public RString getKijunJikanBPSDKanren() {
+    public TextBoxNum getKijunJikanBPSDKanren() {
         return kijunJikanBPSDKanren;
     }
 
-    public RString getKijunJikanKinoKunren() {
+    public TextBoxNum getKijunJikanKinoKunren() {
         return kijunJikanKinoKunren;
     }
 
-    public RString getKijunJikanIryoKanren() {
+    public TextBoxNum getKijunJikanIryoKanren() {
         return kijunJikanIryoKanren;
     }
 
-    public RString getKijunJikanNinchishoKasan() {
+    public TextBoxNum getKijunJikanNinchishoKasan() {
         return kijunJikanNinchishoKasan;
     }
 
-    public RString getChukanHyokaKomoku1gun() {
+    public TextBoxNum getChukanHyokaKomoku1gun() {
         return chukanHyokaKomoku1gun;
     }
 
-    public RString getChukanHyokaKomoku2gun() {
+    public TextBoxNum getChukanHyokaKomoku2gun() {
         return chukanHyokaKomoku2gun;
     }
 
-    public RString getChukanHyokaKomoku3gun() {
+    public TextBoxNum getChukanHyokaKomoku3gun() {
         return chukanHyokaKomoku3gun;
     }
 
-    public RString getChukanHyokaKomoku4gun() {
+    public TextBoxNum getChukanHyokaKomoku4gun() {
         return chukanHyokaKomoku4gun;
     }
 
-    public RString getChukanHyokaKomoku5gun() {
+    public TextBoxNum getChukanHyokaKomoku5gun() {
         return chukanHyokaKomoku5gun;
     }
 
@@ -344,7 +336,7 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         return jotaiAnteiseiCode;
     }
 
-    public RString getNinchishoJiritsudoIIijoNoGaizensei() {
+    public TextBoxNum getNinchishoJiritsudoIIijoNoGaizensei() {
         return ninchishoJiritsudoIIijoNoGaizensei;
     }
 
@@ -354,11 +346,6 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
 
     public RString getKoroshoIfShikibetsuCode() {
         return koroshoIfShikibetsuCode;
-    }
-
-    public void setBtnSyokai(ButtonDialog btnSyokai) {
-        this.setOriginalData("btnSyokai", btnSyokai);
-        this.btnSyokai = btnSyokai;
     }
 
     public void setBtnSentaku(ButtonDialog btnSentaku) {
@@ -441,77 +428,77 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
-    public void setKijunJikan(RString kijunJikan) {
+    public void setKijunJikan(TextBoxNum kijunJikan) {
         this.setOriginalData("kijunJikan", kijunJikan);
         this.kijunJikan = kijunJikan;
     }
 
-    public void setKijunJikanShokuji(RString kijunJikanShokuji) {
+    public void setKijunJikanShokuji(TextBoxNum kijunJikanShokuji) {
         this.setOriginalData("kijunJikanShokuji", kijunJikanShokuji);
         this.kijunJikanShokuji = kijunJikanShokuji;
     }
 
-    public void setKijunJikanHaisetsu(RString kijunJikanHaisetsu) {
+    public void setKijunJikanHaisetsu(TextBoxNum kijunJikanHaisetsu) {
         this.setOriginalData("kijunJikanHaisetsu", kijunJikanHaisetsu);
         this.kijunJikanHaisetsu = kijunJikanHaisetsu;
     }
 
-    public void setKijunJikanIdo(RString kijunJikanIdo) {
+    public void setKijunJikanIdo(TextBoxNum kijunJikanIdo) {
         this.setOriginalData("kijunJikanIdo", kijunJikanIdo);
         this.kijunJikanIdo = kijunJikanIdo;
     }
 
-    public void setKijunJikanSeiketsuHoji(RString kijunJikanSeiketsuHoji) {
+    public void setKijunJikanSeiketsuHoji(TextBoxNum kijunJikanSeiketsuHoji) {
         this.setOriginalData("kijunJikanSeiketsuHoji", kijunJikanSeiketsuHoji);
         this.kijunJikanSeiketsuHoji = kijunJikanSeiketsuHoji;
     }
 
-    public void setKijunJikanKansetsuCare(RString kijunJikanKansetsuCare) {
+    public void setKijunJikanKansetsuCare(TextBoxNum kijunJikanKansetsuCare) {
         this.setOriginalData("kijunJikanKansetsuCare", kijunJikanKansetsuCare);
         this.kijunJikanKansetsuCare = kijunJikanKansetsuCare;
     }
 
-    public void setKijunJikanBPSDKanren(RString kijunJikanBPSDKanren) {
+    public void setKijunJikanBPSDKanren(TextBoxNum kijunJikanBPSDKanren) {
         this.setOriginalData("kijunJikanBPSDKanren", kijunJikanBPSDKanren);
         this.kijunJikanBPSDKanren = kijunJikanBPSDKanren;
     }
 
-    public void setKijunJikanKinoKunren(RString kijunJikanKinoKunren) {
+    public void setKijunJikanKinoKunren(TextBoxNum kijunJikanKinoKunren) {
         this.setOriginalData("kijunJikanKinoKunren", kijunJikanKinoKunren);
         this.kijunJikanKinoKunren = kijunJikanKinoKunren;
     }
 
-    public void setKijunJikanIryoKanren(RString kijunJikanIryoKanren) {
+    public void setKijunJikanIryoKanren(TextBoxNum kijunJikanIryoKanren) {
         this.setOriginalData("kijunJikanIryoKanren", kijunJikanIryoKanren);
         this.kijunJikanIryoKanren = kijunJikanIryoKanren;
     }
 
-    public void setKijunJikanNinchishoKasan(RString kijunJikanNinchishoKasan) {
+    public void setKijunJikanNinchishoKasan(TextBoxNum kijunJikanNinchishoKasan) {
         this.setOriginalData("kijunJikanNinchishoKasan", kijunJikanNinchishoKasan);
         this.kijunJikanNinchishoKasan = kijunJikanNinchishoKasan;
     }
 
-    public void setChukanHyokaKomoku1gun(RString chukanHyokaKomoku1gun) {
+    public void setChukanHyokaKomoku1gun(TextBoxNum chukanHyokaKomoku1gun) {
         this.setOriginalData("chukanHyokaKomoku1gun", chukanHyokaKomoku1gun);
         this.chukanHyokaKomoku1gun = chukanHyokaKomoku1gun;
     }
 
-    public void setChukanHyokaKomoku2gun(RString chukanHyokaKomoku2gun) {
+    public void setChukanHyokaKomoku2gun(TextBoxNum chukanHyokaKomoku2gun) {
         this.setOriginalData("chukanHyokaKomoku2gun", chukanHyokaKomoku2gun);
         this.chukanHyokaKomoku2gun = chukanHyokaKomoku2gun;
     }
 
-    public void setChukanHyokaKomoku3gun(RString chukanHyokaKomoku3gun) {
+    public void setChukanHyokaKomoku3gun(TextBoxNum chukanHyokaKomoku3gun) {
         this.setOriginalData("chukanHyokaKomoku3gun", chukanHyokaKomoku3gun);
         this.chukanHyokaKomoku3gun = chukanHyokaKomoku3gun;
     }
 
-    public void setChukanHyokaKomoku4gun(RString chukanHyokaKomoku4gun) {
+    public void setChukanHyokaKomoku4gun(TextBoxNum chukanHyokaKomoku4gun) {
         this.setOriginalData("chukanHyokaKomoku4gun", chukanHyokaKomoku4gun);
         this.chukanHyokaKomoku4gun = chukanHyokaKomoku4gun;
     }
 
-    public void setChukanHyokaKomoku5gun(RString chukanHyokaKomoku5gun) {
+    public void setChukanHyokaKomoku5gun(TextBoxNum chukanHyokaKomoku5gun) {
         this.setOriginalData("chukanHyokaKomoku5gun", chukanHyokaKomoku5gun);
         this.chukanHyokaKomoku5gun = chukanHyokaKomoku5gun;
     }
@@ -521,7 +508,7 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.jotaiAnteiseiCode = jotaiAnteiseiCode;
     }
 
-    public void setNinchishoJiritsudoIIijoNoGaizensei(RString ninchishoJiritsudoIIijoNoGaizensei) {
+    public void setNinchishoJiritsudoIIijoNoGaizensei(TextBoxNum ninchishoJiritsudoIIijoNoGaizensei) {
         this.setOriginalData("ninchishoJiritsudoIIijoNoGaizensei", ninchishoJiritsudoIIijoNoGaizensei);
         this.ninchishoJiritsudoIIijoNoGaizensei = ninchishoJiritsudoIIijoNoGaizensei;
     }

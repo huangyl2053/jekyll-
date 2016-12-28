@@ -28,6 +28,7 @@ public class DeletePanelHandler {
     private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
     private static final RString イメージファイル原本名 = new RString("_BAK");
     private static final RString イメージファイル拡張子 = new RString(".png");
+    private static final RString SLASH = new RString("/");
 
     /**
      * コンストラクタです。
@@ -171,8 +172,8 @@ public class DeletePanelHandler {
 
         if (isMaskOnly) {
             if (isExistsMaskImageFile(new RString("C0007"), deleteImageFileList)) {
-                reNameImageFile(descriptor, localCopyPath, new RString("C0007").concat(イメージファイル原本名).concat(イメージファイル拡張子));
-                SharedFile.deleteFileInEntry(descriptor, "C0007_BAK.png");
+                appendNewImageFile(descriptor, localCopyPath, new RString("C0007").concat(イメージファイル原本名).concat(イメージファイル拡張子));
+                SharedFile.deleteFileInEntry(descriptor, "/C0007_BAK.png");
             }
             deleteMaskSharedFileInEntry(descriptor, localCopyPath, tokkiJikoMaskImageList, deleteImageFileList);
         } else {
@@ -185,7 +186,7 @@ public class DeletePanelHandler {
             boolean isMaskOnly) {
         if (!isMaskOnly) {
             if (isExistsImageFile(new RString("G0001"), deleteImageFileList)) {
-                SharedFile.deleteFileInEntry(descriptor, "G0001.png");
+                SharedFile.deleteFileInEntry(descriptor, "/G0001.png");
             }
         }
     }
@@ -220,7 +221,7 @@ public class DeletePanelHandler {
             List<RString> deleteImageFileList) {
         for (RString deleteTargetImageFile : deleteTargetImageFileList) {
             if (isExistsImageFile(deleteTargetImageFile, deleteImageFileList)) {
-                SharedFile.deleteFileInEntry(descriptor, deleteTargetImageFile.toString());
+                SharedFile.deleteFileInEntry(descriptor, SLASH.concat(deleteTargetImageFile.concat(イメージファイル拡張子)).toString());
             }
         }
     }
@@ -229,15 +230,15 @@ public class DeletePanelHandler {
             List<RString> deleteTargetImageFileList, List<RString> deleteImageFileList) {
         for (RString deleteTargetImageFile : deleteTargetImageFileList) {
             if (isExistsMaskImageFile(deleteTargetImageFile, deleteImageFileList)) {
-                reNameImageFile(descriptor, localCopyPath,
+                appendNewImageFile(descriptor, localCopyPath,
                         deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子));
                 SharedFile.deleteFileInEntry(descriptor,
-                        deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子).toString());
+                        SLASH.concat(deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子)).toString());
             }
         }
     }
 
-    private void reNameImageFile(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath, RString targetImageFile) {
+    private void appendNewImageFile(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath, RString targetImageFile) {
         if (Directory.exists(Path.combinePath(localCopyPath, targetImageFile))) {
             boolean options = true;
             RString afterReNameImageFile = reName(targetImageFile);
@@ -245,13 +246,13 @@ public class DeletePanelHandler {
             SharedAppendOption option = new SharedAppendOption();
             option.overWrite(true);
             SharedFile.appendNewFile(descriptor, new FilesystemPath(Path.combinePath(localCopyPath, afterReNameImageFile)),
-                    afterReNameImageFile.toString(), option);
+                    "IMG", option);
         }
     }
 
     private RString reName(RString targetName) {
-        targetName.replace("_BAK", "");
-        return targetName;
+        RString reNameTargetName = targetName.replace("_BAK", "");
+        return reNameTargetName;
     }
 
     private boolean isExistsImageFile(RString ファイル名, List<RString> 存在したイメージファイル名) {

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5130001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -308,6 +309,13 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onBeforeOpenDialog_btnSonotaKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+
+        SoNoTaKikanGuideModel その他機関 = new SoNoTaKikanGuideModel();
+        その他機関.set業務分類(GyomuBunrui.介護認定);
+        その他機関.set市町村コード(div.getDgShozokuKikanIchiran().getClickedItem().getShichosonCode());
+        その他機関.setその他機関コード(div.getDgShozokuKikanIchiran().getClickedItem().getSonotaKikanCode().getValue());
+        ViewStateHolder.put(ViewStateKeys.その他機関選択ガイド_モード, その他機関);
+
         response.data = div;
         return response;
     }

@@ -1267,8 +1267,8 @@
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
         ON
-        T5305."maskDataKubun" = '2'
-        AND T5305."torikomiPageNo" = '1'
+        T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
         'X'
@@ -1390,8 +1390,8 @@
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
         ON
-        T5305."maskDataKubun" = '2'
-        AND T5305."torikomiPageNo" = '1'
+        T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
         'X'
@@ -1511,8 +1511,8 @@
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
         ON
-        T5305."maskDataKubun" = '2'
-        AND T5305."torikomiPageNo" = '1'
+        T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
         'X'
@@ -1945,6 +1945,9 @@
         AND DbT5105."maskingKanryoYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY  DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",
         DbT5101."shoKisaiHokenshaNo"

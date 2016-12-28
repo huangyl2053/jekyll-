@@ -294,24 +294,24 @@ public class IchijiHanteiKekkaResultConveter {
 
             RString kijunJikan = resultList.get(IchijiHanteiPoint.基準時間.value());
             List<RString> kijunJikanSplit = kijunJikan.split(SplitString.DATA_DETAIL_SPLIT.value().toString());
-            builder.set要介護認定等基準時間(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.合計.value())));
-            builder.set要介護認定等基準時間_食事(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.食事.value())));
-            builder.set要介護認定等基準時間_排泄(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.排泄.value())));
-            builder.set要介護認定等基準時間_移動(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.移動.value())));
-            builder.set要介護認定等基準時間_清潔保持(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.清潔保持.value())));
-            builder.set要介護認定等基準時間_間接ケア(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.間接ケア.value())));
-            builder.set要介護認定等基準時間_BPSD関連(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.BPSD関連.value())));
-            builder.set要介護認定等基準時間_機能訓練(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.機能訓練.value())));
-            builder.set要介護認定等基準時間_医療関連(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.医療関連.value())));
-            builder.set要介護認定等基準時間_認知症加算(rStringToIntAndDivide10(kijunJikanSplit.get(KijunJikanPoint.認知症加算.value())));
+            builder.set要介護認定等基準時間(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.合計.value())));
+            builder.set要介護認定等基準時間_食事(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.食事.value())));
+            builder.set要介護認定等基準時間_排泄(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.排泄.value())));
+            builder.set要介護認定等基準時間_移動(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.移動.value())));
+            builder.set要介護認定等基準時間_清潔保持(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.清潔保持.value())));
+            builder.set要介護認定等基準時間_間接ケア(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.間接ケア.value())));
+            builder.set要介護認定等基準時間_BPSD関連(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.BPSD関連.value())));
+            builder.set要介護認定等基準時間_機能訓練(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.機能訓練.value())));
+            builder.set要介護認定等基準時間_医療関連(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.医療関連.value())));
+            builder.set要介護認定等基準時間_認知症加算(rStringToInt(kijunJikanSplit.get(KijunJikanPoint.認知症加算.value())));
 
             RString hyokaJikan = resultList.get(IchijiHanteiPoint.中間評価項目.value());
             List<RString> hyokaJikanSplit = hyokaJikan.split("-");
-            builder.set中間評価項目得点第1群(rStringToIntAndDivide10(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第1群.value())));
-            builder.set中間評価項目得点第2群(rStringToIntAndDivide10(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第2群_食事.value())));
-            builder.set中間評価項目得点第3群(rStringToIntAndDivide10(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第3群_排泄.value())));
-            builder.set中間評価項目得点第4群(rStringToIntAndDivide10(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第4群_移動.value())));
-            builder.set中間評価項目得点第5群(rStringToIntAndDivide10(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第5群_清潔保持.value())));
+            builder.set中間評価項目得点第1群(rStringToInt(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第1群.value())));
+            builder.set中間評価項目得点第2群(rStringToInt(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第2群_食事.value())));
+            builder.set中間評価項目得点第3群(rStringToInt(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第3群_排泄.value())));
+            builder.set中間評価項目得点第4群(rStringToInt(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第4群_移動.value())));
+            builder.set中間評価項目得点第5群(rStringToInt(hyokaJikanSplit.get(ChukanHyokaKomokuPoint.第5群_清潔保持.value())));
             builder.set中間評価項目得点第6群(0);
             builder.set中間評価項目得点第7群(0);
 
@@ -333,9 +333,10 @@ public class IchijiHanteiKekkaResultConveter {
         return retList;
     }
 
-    private int rStringToIntAndDivide10(RString str) {
+    private int rStringToInt(RString str) {
         int i = Integer.parseInt(str.toString());
-        return i / DIVISION_NUM;
+        //n8178 城間 10で割るのは、画面に表示するタイミングに変更。値を正しく保持するために、データそのものの数値はいじらない。
+        return i;// / DIVISION_NUM;
     }
 
     private Decimal rStringToDecimalAndDivide10(RString str) {

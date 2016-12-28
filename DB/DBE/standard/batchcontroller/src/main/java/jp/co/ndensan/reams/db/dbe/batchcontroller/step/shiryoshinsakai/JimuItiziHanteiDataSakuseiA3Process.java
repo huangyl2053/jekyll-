@@ -52,8 +52,8 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     private static final RString SELECT_JIMUNINTEITIZIHANTEI = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
             + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.get事務局一次判定");
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
-            new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.two_tokkiText1.name()),
-            new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.two_tokkiImg1.name())));
+            new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.tokkiText1.name()),
+            new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.tokkiImg1.name())));
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IchijihanteikekkahyoA3Entity item;
     private IJimuShiryoShinsakaiIinMapper mapper;
