@@ -128,7 +128,7 @@ public class ShinsakaiScheduleKagamiProcess extends BatchProcessBase<KaigoNintei
         RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
         RString 市町村名 = 導入団体クラス.get市町村名();
         RString ジョブ番号 = new RString(JobContextHolder.getJobId());
-        RString 帳票名 = ReportIdDBE.DBE514001.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE514002.getReportName();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString csv出力有無 = new RString("無し");
         RString csvファイル名 = new RString("-");

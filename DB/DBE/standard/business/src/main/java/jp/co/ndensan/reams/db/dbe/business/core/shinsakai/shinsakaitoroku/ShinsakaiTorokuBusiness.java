@@ -194,6 +194,15 @@ public class ShinsakaiTorokuBusiness {
     }
     
     /**
+     * 審査順を返します。
+     *
+     * @return 審査順
+     */
+    public int get審査順() {
+        return entity.getShinsakaiOrder();
+    }
+    
+    /**
      * 合議体名称を返します。
      * 
      * @return 合議体名称

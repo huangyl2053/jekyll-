@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.EraTypeFormatted;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -67,13 +68,14 @@ public class IraishoIkkatsuHakkoBusiness {
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final RString 記号_星 = new RString("*");
+    private static final RString 記号_星 = new RString("＊");
     private static final RString 元号_明治 = new RString("明治");
     private static final RString 元号_大正 = new RString("大正");
     private static final RString 元号_昭和 = new RString("昭和");
     private static final RString 記号 = new RString("✔");
     private int 宛名連番 = 1;
     private int 連番 = 1;
+    private static final int INT2 = 2;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -165,6 +167,7 @@ public class IraishoIkkatsuHakkoBusiness {
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
         RString 生年月日 = entity.get生年月日();
         RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+        EraTypeFormatted eraType = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI);
         IkenshokinyuyoshiBusiness item = new IkenshokinyuyoshiBusiness();
         item.setHokenshaNo1(getCode(保険者番号リスト, 0));
         item.setHokenshaNo2(getCode(保険者番号リスト, 1));
@@ -193,9 +196,9 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setIryokikanNameTel(entity.get医療機関電話番号());
         item.setIryokikanFax(entity.get医療機関FAX番号());
         item.setYubinNo(getYubinNo(entity.get郵便番号()));
-        item.setBirthYY(年号.substring(INT3, INT5));
-        item.setBirthMM(年号.substring(INT6, INT8));
-        item.setBirthDD(年号.substring(INT9));
+        item.setBirthYY(eraType.getYear().substring(INT2));
+        item.setBirthMM(eraType.getMonth());
+        item.setBirthDD(eraType.getDay());
         RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -204,11 +207,11 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
         item.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
         item.setShinseiDD2(ninteiShinseiDay.substring(INT8));
-        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
-        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
-        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号 : RString.EMPTY);
-        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号 : RString.EMPTY);
-        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY);
+        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         return item;
     }
 
@@ -885,6 +888,7 @@ public class IraishoIkkatsuHakkoBusiness {
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
         RString 生年月日 = entity.get生年月日();
         RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+        EraTypeFormatted eraType = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI);
         item.setHokenshaNo1(getCode(保険者番号リスト, 0));
         item.setHokenshaNo2(getCode(保険者番号リスト, 1));
         item.setHokenshaNo3(getCode(保険者番号リスト, 2));
@@ -912,9 +916,9 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setIryokikanNameTel(entity.get医療機関電話番号());
         item.setIryokikanFax(entity.get医療機関FAX番号());
         item.setYubinNo(getYubinNo(entity.get郵便番号()));
-        item.setBirthYY(年号.substring(INT3, INT5));
-        item.setBirthMM(年号.substring(INT6, INT8));
-        item.setBirthDD(年号.substring(INT9));
+        item.setBirthYY(eraType.getYear().substring(INT2));
+        item.setBirthMM(eraType.getMonth());
+        item.setBirthDD(eraType.getDay());
         RString ninteiShinseiDay = new FlexibleDate(entity.get認定申請年月日()).wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                 .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         item.setShinseiYY1(ninteiShinseiDay.substring(1, 2));
@@ -923,11 +927,11 @@ public class IraishoIkkatsuHakkoBusiness {
         item.setShinseiMM2(ninteiShinseiDay.substring(INT5, INT6));
         item.setShinseiDD1(ninteiShinseiDay.substring(INT7, INT8));
         item.setShinseiDD2(ninteiShinseiDay.substring(INT8));
-        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
-        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? 記号 : RString.EMPTY);
-        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? 記号 : RString.EMPTY);
-        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? 記号 : RString.EMPTY);
-        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY);
+        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
+        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
         return item;
     }
 

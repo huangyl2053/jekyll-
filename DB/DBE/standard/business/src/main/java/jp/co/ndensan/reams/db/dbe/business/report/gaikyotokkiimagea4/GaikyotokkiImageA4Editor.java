@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.gaikyotokkiimagea4;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuGaikyouBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.gaikyotokkiimagea4.GaikyotokkiImageA4ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -79,7 +80,10 @@ public class GaikyotokkiImageA4Editor implements IGaikyotokkiImageA4Editor {
             source.tokkiText5 = item.get概況特記事項_家族状況_テキスト();
             source.tokkiText6 = item.get概況特記事項_居住環境_テキスト();
             source.tokkiText7 = item.get概況特記事項_機器_機械_テキスト();
-
+            source.layout = Layouts.鑑;
+        } else {
+            source.imgSonotashiryo = item.getイメージファイル();
+            source.layout = Layouts.必須;
         }
         source.shikibetuCode = new ShikibetsuCode(item.get識別コード());
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {

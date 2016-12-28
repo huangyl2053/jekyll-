@@ -244,6 +244,9 @@ public class SabisuJyoukyoA4 {
     }
 
     private RString set有効期間(int 有効期間) {
+        if (有効期間 == 0) {
+            return RString.EMPTY;
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(有効期間)
                 .append(月間);
