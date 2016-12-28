@@ -118,7 +118,8 @@
                 dbT5101Nintei."ninteiShinseiYMD" <![CDATA[<=]]> #{shinnseikaTo}
         </if>	
         ORDER BY 
-               dbT5101Nintei."hihokenshaKana" ASC,
-               dbT5101Nintei."ninteiShinseiYMD" ASC  															
+               dbT5101Nintei."shoKisaiHokenshaNo" ASC,
+               dbT5101Nintei."ninteiShinseiYMD" ASC,
+               dbT5101Nintei."hihokenshaKana" ASC
    </select>
 </mapper>

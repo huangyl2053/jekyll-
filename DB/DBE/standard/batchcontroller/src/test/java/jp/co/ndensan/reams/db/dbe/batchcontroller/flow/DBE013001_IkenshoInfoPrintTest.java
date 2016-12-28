@@ -59,13 +59,24 @@ public class DBE013001_IkenshoInfoPrintTest extends DbeTestBase {
     private static DBE013001_IkenshoInfoPrintParameter createBatchParameter() {
         DBE013001_IkenshoInfoPrintParameter parameter = new DBE013001_IkenshoInfoPrintParameter();
         parameter.set主治医意見書作成依頼変更者一覧表フラグ(true);
-        parameter.set主治医意見書作成依頼変更者一覧表申請日From(new FlexibleDate(1999, 1, 1));
-        parameter.set主治医意見書作成依頼変更者一覧表申請日To(new FlexibleDate(2017, 12, 31));
-        parameter.set主治医意見書作成料請求一覧表フラグ(false);
-        parameter.set主治医意見書依頼未処理者一覧表フラグ(false);
-        parameter.set主治医意見書依頼済み一覧表フラグ(false);
-        parameter.set主治医意見書未提出者一覧フラグ(false);
-        parameter.set主治医意見書５項目確認一覧表フラグ(false);
+        parameter.set主治医意見書作成依頼変更者一覧表申請日From(new FlexibleDate(2016, 12, 1));
+        parameter.set主治医意見書作成依頼変更者一覧表申請日To(new FlexibleDate(2016, 12, 31));
+        parameter.set主治医意見書作成料請求一覧表フラグ(true);
+        parameter.set主治医意見書作成料請求一覧表作成条件(new RString("1"));
+        parameter.set主治医意見書作成料請求一覧表処理日From(new FlexibleDate(2016, 12, 1));
+        parameter.set主治医意見書作成料請求一覧表処理日To(new FlexibleDate(2016, 12, 31));
+        parameter.set主治医意見書依頼未処理者一覧表フラグ(true);
+        parameter.set主治医意見書依頼未処理者一覧表申請日From(new FlexibleDate(2016, 12, 1));
+        parameter.set主治医意見書依頼未処理者一覧表申請日To(new FlexibleDate(2016, 12, 31));
+        parameter.set主治医意見書依頼済み一覧表フラグ(true);
+        parameter.set主治医意見書依頼済み一覧表申請日From(new FlexibleDate(2016, 12, 1));
+        parameter.set主治医意見書依頼済み一覧表申請日To(new FlexibleDate(2016, 12, 31));
+        parameter.set主治医意見書未提出者一覧フラグ(true);
+        parameter.set主治医意見書未提出者一覧申請日From(new FlexibleDate(2016, 12, 1));
+        parameter.set主治医意見書未提出者一覧申請日To(new FlexibleDate(2016, 12, 31));
+        parameter.set主治医意見書５項目確認一覧表フラグ(true);
+        parameter.set主治医意見書５項目確認一覧表作成条件(new RString("2"));
+        parameter.set主治医意見書５項目確認一覧表審査会(new RString("111111"));
 
         return parameter;
     }
