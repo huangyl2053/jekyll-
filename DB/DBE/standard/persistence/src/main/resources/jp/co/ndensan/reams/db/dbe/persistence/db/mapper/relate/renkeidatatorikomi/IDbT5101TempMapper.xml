@@ -684,12 +684,14 @@
         <association property="dbt5101TempEntity" resultMap="ResultMap_DbT5101TempEntity"/>
         <association property="dbT5101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
         <association property="dbt5123Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.ResultMap_DbT5123NinteiKeikakuJohoEntity"/>
+        <association property="dbt5102Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.ResultMap_DbT5102NinteiKekkaJohoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get更新対象情報_電算東芝版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
         SELECT
         <include refid="allColumns_DbT5101Temp" />,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho" />
         FROM
         "DbT5101Temp" AS temp
         LEFT JOIN
@@ -700,13 +702,20 @@
         LEFT JOIN
         rgdb."DbT5123NinteiKeikakuJoho"
         ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5102NinteiKekkaJoho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo"
+        ORDER BY "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD" DESC,
+        "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" DESC
+        LIMIT (1)
     </select>
 
     <select resultOrdered="true" id="get更新対象情報_厚労省" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
         SELECT
         <include refid="allColumns_DbT5101KoroshoTemp" />,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho" />
         FROM
         "DbT5101Temp" AS temp
         LEFT JOIN
@@ -717,6 +726,12 @@
         LEFT JOIN
         rgdb."DbT5123NinteiKeikakuJoho"
         ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5102NinteiKekkaJoho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo"
+        ORDER BY "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD" DESC,
+        "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" DESC
+        LIMIT (1)
     </select>
 
 </mapper>
