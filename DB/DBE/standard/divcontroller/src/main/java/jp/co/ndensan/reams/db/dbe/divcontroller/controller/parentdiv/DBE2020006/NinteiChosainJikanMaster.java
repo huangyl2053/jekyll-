@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -727,7 +728,7 @@ public class NinteiChosainJikanMaster {
             NinteiChosainJikanMasterDiv div,
             dgTimeScheduleList_Row 編集データ,
             RString 調査時間枠,
-            RString 時間枠) { 
+            RString 時間枠) {
         if (編集状態_既存.equals(編集状態の設定(調査時間枠))) {
             Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
             RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
@@ -735,17 +736,23 @@ public class NinteiChosainJikanMaster {
             LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
                     = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
+            FlexibleDate 認定調査予定日 = new FlexibleDate(
+                    div.getTxtSettingMonth().getValue().getYearValue(),
+                    div.getTxtSettingMonth().getValue().getMonthValue(),
+                    Integer.parseInt(編集データ.getDate().toString()));
+            RString 開始時間 = 時間の処理(調査時間枠.split("-").get(0));
+            RString 終了時間 = 時間の処理(調査時間枠.split("-").get(1));
             NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
-                    new FlexibleDate(div.getTxtSetteiYMD().getValue().toDateString()),
-                    時間の処理(div.getTxtKaishiJikan().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm)),
-                    時間の処理(div.getTxtShuryoJikan().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm)),
-                    new Code(div.getTxtJikanWaku().getValue()),
+                    認定調査予定日,
+                    開始時間,
+                    終了時間,
+                    new Code(時間枠),
                     調査地区コード,
                     認定調査委託先コード,
                     認定調査員コード,
                     市町村コード);
             if (ninteichosaModels.contains(情報PK)) {
-                div.getTxtBiko().setValue( ninteichosaModels.get(情報PK).get備考());
+                div.getTxtBiko().setValue(ninteichosaModels.get(情報PK).get備考());
                 div.getRadYoyaku().setSelectedKey(予約可否設定(ninteichosaModels.get(情報PK).is予約可能フラグ()));
                 div.getDdlTaishoChiku().setDisabled(true);
                 div.getTxtSettingMonth().setDisabled(true);
@@ -756,6 +763,11 @@ public class NinteiChosainJikanMaster {
                 div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(true);
                 div.getMainPanel().getSettingDetail().setDisplayNone(false);
                 div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_既存);
+                div.getTxtSetteiYMD().setValue(new RDate(認定調査予定日.toString()));
+                div.getTxtJikanWaku().setValue(時間枠);
+                div.getTxtKaishiJikan().setValue(RTime.parse(調査時間枠.split("-").get(0)));
+                div.getTxtShuryoJikan().setValue(RTime.parse(調査時間枠.split("-").get(1)));
+
             } else {
                 NinteiChosainBusiness 編集元 = 時間枠設定の編集元取得(
                         div,
@@ -769,7 +781,7 @@ public class NinteiChosainJikanMaster {
         } else {
             div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_未指定);
             getHandler(div).btnHennsyu(編集データ, 時間枠);
-        }   
+        }
     }
 
     private boolean 未来日の確認(NinteiChosainJikanMasterDiv div) {
@@ -856,10 +868,10 @@ public class NinteiChosainJikanMaster {
         }
     }
 
-        private boolean is予約可能フラグ(RString 予約可能フラグ) {
+    private boolean is予約可能フラグ(RString 予約可能フラグ) {
         return 予約フラグ_可.equals(予約可能フラグ);
     }
-    
+
     private void 保存の処理(dgTimeScheduleList_Row row, FlexibleDate 予定年月日, Code 調査地区コード,
             RString 認定調査委託先コード,
             RString 認定調査員コード,

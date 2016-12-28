@@ -1368,15 +1368,17 @@ public class NinteiChosainJikanMasterHandler {
         List<ChikuShichoson> chikuShichosonList = NinteiChosainJikanMasterManager.createInstance().
                 getChikuShichosonList().records();
         for (ChikuShichoson chikuShichoson : chikuShichosonList) {
-            dataSource.add(調査地区ドロップダウンリスト(chikuShichoson.get調査地区コード()));
+            FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
+            UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                    DBECodeShubetsu.調査地区コード.getコード(), chikuShichoson.get調査地区コード(), 基准日);
+            if (null != 指定調査地区) {
+                dataSource.add(調査地区ドロップダウンリスト(指定調査地区));
+            }
         }
         return dataSource;
     }
 
-    private KeyValueDataSource 調査地区ドロップダウンリスト(Code 調査地区コード) {
-        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
-        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
-                DBECodeShubetsu.調査地区コード.getコード(), 調査地区コード, 基准日);
+    private KeyValueDataSource 調査地区ドロップダウンリスト(UzT0007CodeEntity 指定調査地区) {
         KeyValueDataSource keyValue = new KeyValueDataSource();
         keyValue.setKey(指定調査地区.getコード().value());
         keyValue.setValue(指定調査地区.getコード名称());
