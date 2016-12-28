@@ -113,7 +113,7 @@ public class ImageJohoMaskingHandler {
         } else {
             fromYMD = FlexibleDate.EMPTY;
         }
-        if (div.getTxtSearchYMD().getFromValue() != null) {
+        if (div.getTxtSearchYMD().getToValue() != null) {
             toYMD = new FlexibleDate(div.getTxtSearchYMD().getToValue().toString());
         } else {
             toYMD = FlexibleDate.EMPTY;
