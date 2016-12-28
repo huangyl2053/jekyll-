@@ -71,6 +71,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaIta
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
@@ -357,6 +361,17 @@ public class NinteichosaItakusakiMaster {
                 }
                 ninteichosaItakusaki.getEntity().setKikanKubun(chosaKikanKubun);
                 ninteichosaItakusaki.getEntity().setJokyoFlag(状況フラグ有効.equals(div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue()));
+                //口座情報
+                ninteichosaItakusaki.getEntity().setKinyuKikanCode(
+                        new KinyuKikanCode(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value()));
+                ninteichosaItakusaki.getEntity().setKinyuKikanShitenCode(
+                        new KinyuKikanShitenCode(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value()));
+                ninteichosaItakusaki.getEntity().setYokinShubetsu(div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+                ninteichosaItakusaki.getEntity().setKozaNo(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue());
+                ninteichosaItakusaki.getEntity().setKozaMeigininKana(
+                        new AtenaKanaMeisho(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue()));
+                ninteichosaItakusaki.getEntity().setKozaMeiginin(
+                        new AtenaMeisho(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()));
 
                 NinteichosaItakusakiJohoRelate johoRelate = new NinteichosaItakusakiJohoRelate();
                 johoRelate.getEntity().set認定調査委託先情報Entity(ninteichosaItakusaki.getEntity());
@@ -396,7 +411,7 @@ public class NinteichosaItakusakiMaster {
                         ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get金融機関コード().getColumnValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店() == null
                         ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関支店().get支店コード().getColumnValue(),
-                        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue(),
+                        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue(),
                         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()
