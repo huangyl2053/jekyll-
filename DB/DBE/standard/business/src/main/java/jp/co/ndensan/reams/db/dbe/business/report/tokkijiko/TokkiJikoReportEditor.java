@@ -26,15 +26,19 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class TokkiJikoReportEditor implements ITokkiJikoReportEditor {
 
+    private static final int 短冊行数 = 15;
     private final TokkiJiko item;
+    private final int pageIndex;
 
     /**
      * コンストラクタです。
      *
      * @param item {@link TokkiJiko}
+     * @param pageIndex ページ数 - 1;
      */
-    public TokkiJikoReportEditor(TokkiJiko item) {
+    public TokkiJikoReportEditor(TokkiJiko item, int pageIndex) {
         this.item = item;
+        this.pageIndex = pageIndex;
     }
 
     @Override
@@ -92,7 +96,7 @@ public class TokkiJikoReportEditor implements ITokkiJikoReportEditor {
     }
 
     private void set特記事項短冊テキスト(TokkiJikoReportSource source) {
-        int index = 0;
+        int index = 短冊行数 * pageIndex;
         List<TokkiA4Entity> 短冊テキストリスト = item.get短冊テキストリスト();
         if (index < 短冊テキストリスト.size()) {
             source.tokkiText1 = 短冊テキストリスト.get(index).get特記事項テキスト_イメージ();
@@ -156,13 +160,13 @@ public class TokkiJikoReportEditor implements ITokkiJikoReportEditor {
     }
 
     private void set特記事項全面イメージ(TokkiJikoReportSource source) {
-        if (!item.get全画面イメージリスト().isEmpty()) {
-            source.tokkiImg = item.get全画面イメージリスト().get(0);
+        if (pageIndex < item.get全画面イメージリスト().size()) {
+            source.tokkiImg = item.get全画面イメージリスト().get(pageIndex);
         }
     }
 
     private void set特記事項短冊イメージ(TokkiJikoReportSource source) {
-        int index = 0;
+        int index = 短冊行数 * pageIndex;
         List<TokkiA4Entity> 短冊イメージリスト = item.get短冊イメージリスト();
         if (index < 短冊イメージリスト.size()) {
             source.tokkiImg1 = 短冊イメージリスト.get(index).get特記事項テキスト_イメージ();

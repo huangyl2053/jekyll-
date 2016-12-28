@@ -58,10 +58,10 @@ public class TokkiJiko {
             List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List,
             RString imageFileDirectoryPath) {
         this.kyotsuEntity = kyotsuEntity;
+        this.imageFileDirectoryPath = imageFileDirectoryPath;
         this.短冊テキストリスト = create短冊テキストリスト(特記情報List);
         this.全画面イメージリスト = create全画面イメージリスト();
         this.短冊イメージリスト = create短冊イメージリスト(特記情報List);
-        this.imageFileDirectoryPath = imageFileDirectoryPath;
     }
 
     /**
