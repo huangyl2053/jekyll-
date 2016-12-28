@@ -96,7 +96,7 @@ public class IinItiziHanteiDataSakuseiA4Process extends BatchKeyBreakBase<ItiziH
         List<DbT5211NinteichosahyoChosaItemEntity> 前回調査項目情報 = mapper.getZenkaiChosahyoChosaItem(parameter);
         item = new IchijihanteikekkahyoItemSettei().set項目(entity, 特記事項情報, 調査票調査項目情報, 前回調査項目情報, 主治医意見書項目情報,
                 new ArrayList(), サービス利用状況, サービス利用状況, サービスの状況フラグ, 現在の状況,
-                new RString(paramter.getGogitaiNo()), batchWriteA4.getImageFolderPath());
+                new RString(paramter.getGogitaiNo()));
         IchijihanteikekkahyoA4Report report = new IchijihanteikekkahyoA4Report(item);
         report.writeBy(reportSourceWriterA4);
     }

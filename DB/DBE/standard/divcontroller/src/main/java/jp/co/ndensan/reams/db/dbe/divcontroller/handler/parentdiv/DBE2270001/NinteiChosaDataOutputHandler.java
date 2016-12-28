@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoikiGyomuHaniCodeType;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputMybitisParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.NinteiChosaDataOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.dgNinteiChosaData_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -38,6 +40,7 @@ public class NinteiChosaDataOutputHandler {
 
     private final NinteiChosaDataOutputDiv div;
     private static final RString BTNEXECUTE = new RString("btnExecute");
+    private static final RString BTNKENSAKU = new RString("btnKensaku");
 
     /**
      * コンストラクタです。
@@ -52,18 +55,33 @@ public class NinteiChosaDataOutputHandler {
      * 認定調査データ出力（モバイル）の初期化です。
      */
     public void load() {
-        //CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
-        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
-        div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("InputMode"),
-                div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue(),
-                RString.EMPTY,
-                div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue(),
-                RString.EMPTY);
-        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        KoikiGyomuHaniCodeType 広域業務範囲コード = KoikiGyomuHaniCodeType.toValue(
+                DbBusinessConfig.get(ConfigNameDBE.広域業務範囲コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        if (広域業務範囲コード.equals(KoikiGyomuHaniCodeType.広域審査会のみ)) {
+            div.setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNKENSAKU, true);
+        } else if (広域業務範囲コード.equals(KoikiGyomuHaniCodeType.広域審査会のみと依頼業務)) {
+            div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+            //CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
+            div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(get市町村コード());
+            div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("InputMode"),
+                    div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue(),
+                    RString.EMPTY,
+                    div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue(),
+                    RString.EMPTY);
+            div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+            div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        }
+    }
+
+    private RString get市町村コード() {
+        RString 市町村コード = div.getCcdHokensha().getSelectedItem().get市町村コード().value();
+        if (RString.EMPTY.equals(市町村コード)) {
+            市町村コード = DbBusinessConfig.get(ConfigNameDBE.広域連合保険者番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        }
+        return 市町村コード;
     }
 
     /**
@@ -93,7 +111,7 @@ public class NinteiChosaDataOutputHandler {
      * 検索条件クリアの設定メッソドです。
      */
     public void setHdnShichosonCode() {
-        div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
+        div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(get市町村コード());
     }
 
     /**
