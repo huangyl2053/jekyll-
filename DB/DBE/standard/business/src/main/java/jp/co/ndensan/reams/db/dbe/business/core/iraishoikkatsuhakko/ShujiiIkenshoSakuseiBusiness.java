@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
@@ -28,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  * @reamsid_L DBE-0080-150 duanzhanli
  */
 public class ShujiiIkenshoSakuseiBusiness {
-    
+
     private int 宛名連番 = 1;
     private int 連番 = 1;
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
@@ -50,6 +51,7 @@ public class ShujiiIkenshoSakuseiBusiness {
     private static final RString IKENSHOKINYUUDESIGN = new RString("【主治医意見書記入用紙（デザイン用紙）出力区分】");
     private static final RString IKENSHOSAKUSEISEIKYUUSHO = new RString("【主治医意見書作成料請求書出力区分】");
     private static final RString IKENSHOTEISHUTU = new RString("【介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分】");
+
     /**
      * 帳票「帳票設計_DBE230002_主治医意見書作成依頼一覧表」Headerデータを作成するメッソドです。
      *
@@ -81,10 +83,11 @@ public class ShujiiIkenshoSakuseiBusiness {
                 entity.get依頼書作成日(),
                 entity.get依頼書提出期限(),
                 entity.get市町村コード(),
-                entity.get市町村名称());
+                entity.get市町村名称(),
+                entity.get証記載保険者番号());
     }
-    
-       /**
+
+    /**
      * バッチ出力条件Itemの設定メッソドです。
      *
      * @param 市町村名 市町村名
@@ -193,13 +196,14 @@ public class ShujiiIkenshoSakuseiBusiness {
                 csvファイル名,
                 出力条件);
     }
-        private RString ConvertDate(RString date) {
+
+    private RString ConvertDate(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
         if (!FlexibleDate.canConvert(date)) {
             return date;
         }
-        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString();
+        return new FlexibleDate(date).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
     }
 }

@@ -695,7 +695,7 @@ public class IkenshoSakuseiIraiHandler {
                     被保険者氏名, fomartDate12(shudou.get依頼書出力年月日()), shudou.get医療機関名称(), shudou.get代表者名(),
                     電話番号, shudou.get主治医氏名(), RString.EMPTY, RString.EMPTY, fomartDate12(shudou.get主治医意見書作成依頼年月日()),
                     fomartDate12(shudou.get主治医意見書作成期限年月日()),
-                    市町村コード, shudou.get市町村名称());
+                    市町村コード, shudou.get市町村名称(),shudou.get証記載保険者番号());
             bodyItemList.add(bodyItem);
         }
         SyujiyikenshosakuseyiraihakouReportJoho 主治医意見書作成依頼発行一覧表 = new SyujiyikenshosakuseyiraihakouReportJoho(headItem, bodyItemList);
