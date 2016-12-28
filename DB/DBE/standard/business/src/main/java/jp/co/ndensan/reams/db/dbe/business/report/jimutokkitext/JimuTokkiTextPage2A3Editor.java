@@ -136,9 +136,8 @@ public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     item.get申請書管理番号());
         }
-
         source.layout = HanteiKekkaHyoA3ReportFormGroupIndex
-                .getFormGroupIndex(item.getServiceKubunCode(), item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
+                .getFormGroupIndex_2page(item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
 
         return source;
     }
