@@ -134,6 +134,6 @@
 		AND 	K."shichosonCode" = D."shichosonCode"												
 	WHERE														
 		A."shinsakaiKaisaiNo" = #{審査会開催番号}												
-	ORDER  BY   B."shinsakaiKaisaiNo"													
+	ORDER  BY   B."shinsakaiOrder"													
     </select>
 </mapper>
