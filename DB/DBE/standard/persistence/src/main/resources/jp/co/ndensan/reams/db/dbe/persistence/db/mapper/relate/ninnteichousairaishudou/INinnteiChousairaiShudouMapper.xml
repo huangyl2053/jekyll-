@@ -200,7 +200,7 @@
                   rgdb."DbT5101NinteiShinseiJoho" T5101 
                   INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
                     ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
-                  LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
+                  INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
                     ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
                     AND T5201."logicalDeletedFlag" = False 
                     AND NOT EXISTS ( 
@@ -223,7 +223,7 @@
                     AND T7051."shichosonCode" = T5913."shichosonCode" 
                     AND T5913."jokyoFlag" = True 
                 WHERE
-                  T5101."hihokenshaNo" = #{被保険者番号} 
+                  T5101."shinseishoKanriNo" = #{申請書管理番号} 
                   AND T5101."logicalDeletedFlag" = FALSE 
                 LIMIT
                   1
