@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -47,6 +48,7 @@ public class IkenshogetHandler {
     private static final RString SELECTED_KEY0 = new RString("1");
     private static final RString SELECTED_KEY1 = new RString("2");
     private static final RString SELECTED_KEY2 = new RString("3");
+    private static final RString 主治医意見書入手を完了するボタン = new RString("btnIkenshoNyushuKanryo");
 
     /**
      * コンストラクタです。
@@ -141,16 +143,19 @@ public class IkenshogetHandler {
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書入手List.totalCount());
 
         if (SELECTED_KEY0.equals(div.getRadJyotaiKubun().getSelectedKey())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(主治医意見書入手を完了するボタン, true);
             div.getDgNinteiTaskList().setDataSource(rowListNotreated);
             div.getTxtGokei().setDisplayNone(true);
             div.getTxtKanryouKano().setDisplayNone(true);
             div.getTxtMisyori().setDisplayNone(false);
         } else if (SELECTED_KEY1.equals(div.getRadJyotaiKubun().getSelectedKey())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(主治医意見書入手を完了するボタン, false);
             div.getDgNinteiTaskList().setDataSource(rowListComplete);
             div.getTxtMisyori().setDisplayNone(true);
             div.getTxtGokei().setDisplayNone(true);
             div.getTxtKanryouKano().setDisplayNone(false);
         } else if (SELECTED_KEY2.equals(div.getRadJyotaiKubun().getSelectedKey())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(主治医意見書入手を完了するボタン, false);
             div.getDgNinteiTaskList().setDataSource(rowListALL);
             div.getTxtGokei().setDisplayNone(false);
             div.getTxtKanryouKano().setDisplayNone(false);
@@ -192,6 +197,7 @@ public class IkenshogetHandler {
     }
 
     /**
+     *
      * 状態ラジオボタンの表示処理です。
      */
     public void setJyotaiKubun() {

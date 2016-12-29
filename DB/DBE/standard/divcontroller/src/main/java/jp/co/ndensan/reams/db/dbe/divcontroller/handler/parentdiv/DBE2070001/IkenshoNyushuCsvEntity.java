@@ -42,7 +42,7 @@ public class IkenshoNyushuCsvEntity {
     private final RString ikenshoSakuseiKaisuKubunName;
     @CsvField(order = 120, name = "意見書_定型_定形外")
     private final RString ikenshoReadYMD;
-    @CsvField(order = 130, name = "意見書入手日")
+    @CsvField(order = 130, name = "意見書読取日")
     private final RString ikenshoKinyuYMD;
     @CsvField(order = 140, name = "督促発行日")
     private final RString ikenshoSakuseiTokusokuYMD;
@@ -70,7 +70,7 @@ public class IkenshoNyushuCsvEntity {
      * @param ikenshoSakuseiKaisuKubun 初回_2回目コード
      * @param ikenshoSakuseiKaisuKubunName 初回_2回目
      * @param ikenshoReadYMD 意見書_定型_定形外
-     * @param ikenshoKinyuYMD 意見書入手日
+     * @param ikenshoKinyuYMD 意見書読取日
      * @param ikenshoSakuseiTokusokuYMD 督促発行日
      * @param ikenshoSakuseiTokusokuHoho 方法
      * @param ikenshoTokusokuKaisu 回数
