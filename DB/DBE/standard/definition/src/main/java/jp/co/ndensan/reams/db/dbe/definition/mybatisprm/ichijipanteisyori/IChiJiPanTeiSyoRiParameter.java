@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -24,6 +25,7 @@ public final class IChiJiPanTeiSyoRiParameter {
     private static final RString 完了処理_一次判定 = new RString("DBEMN11006");
     private static final RString 完了可能区分_全て = new RString("3");
 
+    private final ShoKisaiHokenshaNo 証記載保険者No;
     private final RString 通常;
     private final RString 延期;
     private final RString イメージ区分;
@@ -42,6 +44,7 @@ public final class IChiJiPanTeiSyoRiParameter {
     private final RString 完了可能区分;
 
     private IChiJiPanTeiSyoRiParameter(
+            ShoKisaiHokenshaNo 証記載保険者No,
             RString 通常,
             RString 延期,
             RString イメージ区分,
@@ -54,6 +57,7 @@ public final class IChiJiPanTeiSyoRiParameter {
             boolean 完了処理一次判定_遷移,
             List<RString> 申請書管理番号List,
             RString 完了可能区分) {
+        this.証記載保険者No = 証記載保険者No;
         this.通常 = 通常;
         this.延期 = 延期;
         this.イメージ区分 = イメージ区分;
@@ -71,6 +75,7 @@ public final class IChiJiPanTeiSyoRiParameter {
     /**
      * 検索処理取得パラメータ設定
      *
+     * @param 証記載保険者No ShoKisaiHokenshaNo
      * @param 通常 RString
      * @param 延期 RString
      * @param イメージ区分 RString
@@ -82,6 +87,7 @@ public final class IChiJiPanTeiSyoRiParameter {
      * @return NiTeiCyoSaiChiRanParameter
      */
     public static IChiJiPanTeiSyoRiParameter createParameter(
+            ShoKisaiHokenshaNo 証記載保険者No,
             RString 通常,
             RString 延期,
             RString イメージ区分,
@@ -91,6 +97,7 @@ public final class IChiJiPanTeiSyoRiParameter {
             RString メニュー,
             List<RString> 申請書管理番号List) {
         return new IChiJiPanTeiSyoRiParameter(
+                証記載保険者No,
                 通常,
                 延期,
                 イメージ区分,
@@ -108,6 +115,7 @@ public final class IChiJiPanTeiSyoRiParameter {
     /**
      * 基本運用の完了・一次判定処理内で使用する
      *
+     * @param 証記載保険者No ShoKisaiHokenshaNo
      * @param 通常 RString
      * @param 延期 RString
      * @param イメージ区分 RString
@@ -120,6 +128,7 @@ public final class IChiJiPanTeiSyoRiParameter {
      * @return NiTeiCyoSaiChiRanParameter
      */
     public static IChiJiPanTeiSyoRiParameter createParameterOf一次判定完了処理(
+            ShoKisaiHokenshaNo 証記載保険者No,
             RString 通常,
             RString 延期,
             RString イメージ区分,
@@ -130,6 +139,7 @@ public final class IChiJiPanTeiSyoRiParameter {
             List<RString> 申請書管理番号List,
             RString 完了可能区分) {
         return new IChiJiPanTeiSyoRiParameter(
+                証記載保険者No,
                 通常,
                 延期,
                 イメージ区分,
@@ -152,6 +162,7 @@ public final class IChiJiPanTeiSyoRiParameter {
      */
     public static IChiJiPanTeiSyoRiParameter createParameterOf一次判定対象件数(IChiJiPanTeiSyoRiParameter parameter) {
         return new IChiJiPanTeiSyoRiParameter(
+                parameter.証記載保険者No,
                 parameter.通常,
                 parameter.延期,
                 parameter.イメージ区分,

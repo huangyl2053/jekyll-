@@ -169,6 +169,9 @@ WHERE
     <!-- TODO FW提供の削除フラグについて条件に記載されていないため、DbAccessorで論理削除されたデータも取得できてしまう。
     それが問題である場合、下記のコメントアウトを排除して条件を有効にすること -->
     <!-- AND DbT5101."isDeleted" = FALSE -->
+ <if test="証記載保険者No != null and 証記載保険者No.value().toString() != ''">
+    AND DbT7051."shoKisaiHokenshaNo" = #{証記載保険者No}
+ </if>
  <if test = "認定申請年月日開始From">
     AND
      #{認定申請年月日開始} <![CDATA[<=]]> DbT5101."ninteiShinseiYMD"

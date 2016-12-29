@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3010001.Ich
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3010001.IchijiHanteiValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -89,6 +90,7 @@ public class IchijiHantei {
 
         switch (menuIdObj) {
             case 一次判定処理:
+                div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
                 if (shinseishoKanriNoList == null) {
                     getHandler(div).initializtion();
                     response = ResponseData.of(div).setState(DBE3010001StateName.初期表示);
@@ -102,6 +104,7 @@ public class IchijiHantei {
                 response = ResponseData.of(div).setState(DBE3010001StateName.一次判定対象者一覧);
                 break;
             case 一次判定インターフェース作成:
+                div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
                 getHandler(div).initializtion();
                 response = ResponseData.of(div).setState(DBE3010001StateName.初期表示);
                 break;

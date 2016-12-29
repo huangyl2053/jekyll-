@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyo
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -91,6 +93,7 @@ public class KanryoshoriIchijihanteiHandler {
      *
      */
     public void initialize() {
+        div.getIchijiHanteiShoriTaishoshaIchiran().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
 
         RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -201,6 +204,8 @@ public class KanryoshoriIchijihanteiHandler {
     }
 
     private IChiJiPanTeiSyoRiParameter createMybatisParameter(List<RString> shinseishoKanriNoList) {
+        ShoKisaiHokenshaNo 証記載保険者No = div.getIchijiHanteiShoriTaishoshaIchiran()
+                .getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
 
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -218,6 +223,7 @@ public class KanryoshoriIchijihanteiHandler {
 
         return IChiJiPanTeiSyoRiParameter.
                 createParameterOf一次判定完了処理(
+                        証記載保険者No,
                         ShoriJotaiKubun.通常.getコード(),
                         ShoriJotaiKubun.延期.getコード(),
                         イメージ区分,
