@@ -38,8 +38,8 @@ public class IinYobihanteiKinyuhyoEditor implements IIinYobihanteiKinyuhyoEditor
     public IinYobihanteiKinyuhyoReportSource edit(IinYobihanteiKinyuhyoReportSource source) {
         source.printTimeStamp = business.get作成年月日();
         source.title = new RString("予備判定記入表");
-        source.shinsakaiKaisaiNo = new RString("第").concat(business.get審査会開催番号().substring(business.get審査会開催番号()
-                .length() - INT_4)).concat(new RString("回　審査会"));
+        source.shinsakaiKaisaiNo = new RString("第").concat(new RString(business.get審査会開催番号().substring(business.get審査会開催番号()
+                .length() - INT_4).toInt())).concat(new RString("回　審査会"));
         source.listTaishoshaIchiran_1 = business.getNo();
         source.listTaishoshaIchiran_2 = business.get申請区分();
         source.listTaishoshaIchiran_5 = business.get被保険者区分();

@@ -114,7 +114,7 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.listShinseiKubun_1 = NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分()).get名称();
         source.listNo_1 = business.getNo();
         source.listHokenshaName_1 = business.get保険者();
-        source.shinsakaiKaisaiNo = business.get審査会開催番号().length() <= INT_LENGTH ? new RString(business.get審査会開催番号().toString())
+        source.shinsakaiKaisaiNo = business.get審査会開催番号().length() <= INT_LENGTH ? new RString(business.get審査会開催番号().toInt())
                 : new RString(new Decimal(business.get審査会開催番号().toString().substring(business.get審査会開催番号().length() - INT_LENGTH)).toString());
         if (business.get開催年月日() != null && !business.get開催年月日().isEmpty()) {
             source.kaisaiYMD = getパターン33(business.get開催年月日());
