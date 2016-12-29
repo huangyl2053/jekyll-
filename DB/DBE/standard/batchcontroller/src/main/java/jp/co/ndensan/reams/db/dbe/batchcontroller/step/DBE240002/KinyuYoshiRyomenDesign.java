@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -33,7 +33,7 @@ public class KinyuYoshiRyomenDesign extends BatchProcessBase<ShujiiIkenshoTeishu
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
-    private static final ReportIdDBZ 帳票 = ReportIdDBZ.DBE231011_Katamen_Color;
+    private static final ReportIdDBZ 帳票 = ReportIdDBZ.DBE231012;
     private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
     private IraishoIkkatsuHakkoBusiness business;
     @BatchWriter
@@ -51,14 +51,16 @@ public class KinyuYoshiRyomenDesign extends BatchProcessBase<ShujiiIkenshoTeishu
 
     @Override
     protected void createWriter() {
-        batchWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value()).create();
+        batchWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value())
+                .addBreak(new BreakerCatalog<IkenshokinyuyoshiReportSource>().simpleLayoutBreaker(IkenshokinyuyoshiReportSource.LAYOUT_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
         business = new IraishoIkkatsuHakkoBusiness(entity, processParamter);
-        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.create記入用紙(),帳票.getReportId());
+        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.create記入用紙(), 帳票.getReportId());
         report.writeBy(reportSourceWriter);
     }
 

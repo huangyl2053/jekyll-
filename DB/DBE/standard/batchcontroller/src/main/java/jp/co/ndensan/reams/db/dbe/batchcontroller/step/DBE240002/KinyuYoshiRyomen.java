@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -50,14 +50,16 @@ public class KinyuYoshiRyomen extends BatchProcessBase<ShujiiIkenshoTeishutsuIra
 
     @Override
     protected void createWriter() {
-        batchWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value()).create();
+        batchWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value())
+                .addBreak(new BreakerCatalog<IkenshokinyuyoshiReportSource>().simpleLayoutBreaker(IkenshokinyuyoshiReportSource.LAYOUT_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
         business = new IraishoIkkatsuHakkoBusiness(entity, processParamter);
-        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.create記入用紙(),帳票.getReportId());
+        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.create記入用紙(), 帳票.getReportId());
         report.writeBy(reportSourceWriter);
     }
 
