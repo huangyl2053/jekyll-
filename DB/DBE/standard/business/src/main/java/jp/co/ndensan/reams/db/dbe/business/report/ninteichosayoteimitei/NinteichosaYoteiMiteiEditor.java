@@ -59,14 +59,15 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
         source.listChosaYoteimitei_3 = item.getDbT7051_shichosonMeisho();
         source.listChosaYoteimitei_4 = item.getDbT5101_hihokenshaName() == null ? RString.EMPTY : item.getDbT5101_hihokenshaName().value();
         source.listChosaYoteimitei_5 = item.getDbT5101_hihokenshaNo();
-        source.listChosaYoteimitei_6 = dateFormat(item.getDbT5101_ninteiShinseiYMD());
+        source.listChosaYoteimitei_6 = dateFormat(item.getDbT5101_seinengappiYMD());
         source.listChosaYoteimitei_7 = item.getDbT5101_seibetsu() == null
-                ? RString.EMPTY : RString.isNullOrEmpty(item.getDbT5101_seibetsu().value())
-                ? RString.EMPTY : Seibetsu.toValue(item.getDbT5101_seibetsu().value()).get名称();
-        source.listChosaYoteimitei_8 = dateFormat(item.getDbT5101_seinengappiYMD());
+                                       ? RString.EMPTY : RString.isNullOrEmpty(item.getDbT5101_seibetsu().value())
+                                                         ? RString.EMPTY : Seibetsu.toValue(item.getDbT5101_seibetsu().value()).get名称();
+        source.listChosaYoteimitei_8 = dateFormat(item.getDbT5101_ninteiShinseiYMD());
         source.listChosaYoteimitei_9 = item.getDbT5101_ninteiShinseiShinseijiKubunCode() == null
-                ? RString.EMPTY : RString.isNullOrEmpty(item.getDbT5101_ninteiShinseiShinseijiKubunCode().value())
-                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(item.getDbT5101_ninteiShinseiShinseijiKubunCode().value()).get名称();
+                                       ? RString.EMPTY : RString.isNullOrEmpty(item.getDbT5101_ninteiShinseiShinseijiKubunCode().value())
+                                                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(
+            item.getDbT5101_ninteiShinseiShinseijiKubunCode().value()).get名称();
         source.listChosaYoteimitei_10 = item.getDbT5910_ZenZenkai_jigyoshaMeisho();
         source.listChosaYoteimitei_11 = item.getDbT5913_ZenZenkai_chosainShimei();
         source.listChosaYoteimitei_12 = item.getDbT5910_Zenkai_jigyoshaMeisho();
@@ -90,7 +91,7 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
             return RString.EMPTY;
         }
         return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+            separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private RString getNo(int index_tmp) {
@@ -104,8 +105,8 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
         RDateTime printdate = RDateTime.now();
         RStringBuilder printTimeStampSb = new RStringBuilder();
         printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
+            separator(Separator.JAPANESE).
+            fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(String.format("%02d", printdate.getHour()));
         printTimeStampSb.append(DATE_時);

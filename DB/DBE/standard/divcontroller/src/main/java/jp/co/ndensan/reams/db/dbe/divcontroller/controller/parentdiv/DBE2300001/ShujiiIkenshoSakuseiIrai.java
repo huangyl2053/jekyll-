@@ -206,8 +206,8 @@ public class ShujiiIkenshoSakuseiIrai {
     /**
      * 最近処理者の「表示する」を押下した時の処理です。
      *
-     * @param div ShinseiKensakuDiv
-     * @return ResponseData<ShinseiKensakuDiv>
+     * @param div コントロールdiv
+     * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSaikinshorishaClick(ShujiiIkenshoSakuseiIraiDiv div) {
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().validate();
@@ -252,6 +252,11 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHozon(ShujiiIkenshoSakuseiIraiDiv div) {
+        ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
+        ValidationMessageControlPairs validationMessages = validationHandler.保存チェック();
+         if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
@@ -889,6 +894,8 @@ public class ShujiiIkenshoSakuseiIrai {
 //                ReportIdDBE.DBE236001.getReportId(), FlexibleDate.getNowDate()));
 //        item.setBunshoNo(div.getBunshoBango().get文書番号());
         item.setTitle(ReportIdDBE.DBE236001.getReportName());
+        item.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         item.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
         item.setHihokenshaNo2(hihokenshaNo.substring(数字_1, 数字_2));
         item.setHihokenshaNo3(hihokenshaNo.substring(数字_2, 数字_3));

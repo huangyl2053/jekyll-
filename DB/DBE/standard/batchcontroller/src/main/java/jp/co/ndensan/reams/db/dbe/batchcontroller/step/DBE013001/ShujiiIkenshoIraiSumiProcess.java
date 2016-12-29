@@ -138,23 +138,25 @@ public class ShujiiIkenshoIraiSumiProcess extends BatchKeyBreakBase<IkenshoJohoP
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
+        RString 作成条件 = new RString("作成条件：");
+        RString 日付範囲 = new RString("日付範囲：");
         if (処理日.equals(processParameter.get主治医意見書依頼済み一覧表作成条件())) {
-            出力条件.add(new RString("処理日の範囲を指定"));
+            出力条件.add(作成条件.concat(new RString("処理日の範囲を指定")));
             if (processParameter.get主治医意見書依頼済み一覧表処理日From() == null && processParameter.get主治医意見書依頼済み一覧表処理日To() == null) {
                 出力条件.add(new RString("指定なし"));
             } else {
                 RString 処理日FROM = dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日From());
                 RString 処理日TO = dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日To());
-                出力条件.add(new RString("処理日：").concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
+                出力条件.add(日付範囲.concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
             }
         } else if (申請日.equals(processParameter.get主治医意見書依頼済み一覧表作成条件())) {
-            出力条件.add(new RString("申請日の範囲を指定"));
+            出力条件.add(作成条件.concat(new RString("申請日の範囲を指定")));
             if (processParameter.get主治医意見書依頼済み一覧表申請日From() == null && processParameter.get主治医意見書依頼済み一覧表申請日To() == null) {
                 出力条件.add(new RString("指定なし"));
             } else {
                 RString 申請日FROM = dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日From());
                 RString 申請日TO = dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日To());
-                出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
+                出力条件.add(日付範囲.concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
             }
         }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
@@ -169,15 +171,5 @@ public class ShujiiIkenshoIraiSumiProcess extends BatchKeyBreakBase<IkenshoJohoP
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
-    }
-
-    private RString set主治医意見書依頼済み一覧表作成条件(RString 作成条件) {
-        RString 一覧作成条件 = RString.EMPTY;
-        if (処理日.equals(作成条件)) {
-            一覧作成条件 = new RString("処理日");
-        } else if (申請日.equals(作成条件)) {
-            一覧作成条件 = new RString("申請日");
-        }
-        return 一覧作成条件;
     }
 }

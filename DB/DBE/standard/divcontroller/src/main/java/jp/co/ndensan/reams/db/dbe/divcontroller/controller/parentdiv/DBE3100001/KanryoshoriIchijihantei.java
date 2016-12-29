@@ -38,9 +38,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -98,6 +95,16 @@ public class KanryoshoriIchijihantei {
      * @return レスポンスデータ
      */
     public ResponseData<KanryoshoriIchijihanteiDiv> onChange_txtMaxCount(KanryoshoriIchijihanteiDiv div) {
+        return research(div);
+    }
+
+    /**
+     * 保険者の値が変更された際の動作です。
+     *
+     * @param div KanryoshoriIchijihanteiDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<KanryoshoriIchijihanteiDiv> onChange_ccdHokensha(KanryoshoriIchijihanteiDiv div) {
         return research(div);
     }
 

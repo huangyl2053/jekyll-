@@ -5,13 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.Hokensha;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
+import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 保険者入力補助のDivControllerです
@@ -55,7 +58,9 @@ public class HokenshaJoho {
      * @return 保険者入力補助Divを持つResponseData
      */
     public ResponseData<HokenshaJohoDiv> onOkClose_btnSearch(HokenshaJohoDiv div) {
-
+        KoseiShiChosonSelectorModel model = ViewStateHolder.get(ViewStateKeys.引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        div.getTxtHokenshaNo().setValue(model.get証記載保険者番号());
+        div.getTxtHokenshaMeisho().setValue(model.get市町村名称());
         return ResponseData.of(div).respond();
     }
 

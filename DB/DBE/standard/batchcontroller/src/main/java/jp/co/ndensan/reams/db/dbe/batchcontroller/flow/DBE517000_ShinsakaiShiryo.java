@@ -107,7 +107,15 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      */
     @Step(出力条件表出力)
     protected IBatchFlowCommand createOutputJokenhyoFactory() {
-        Map<RString, RString> 帳票Map = getResult(Map.class, 事務局_審査会資料一括作成, new RString("出力帳票一覧"));
+        Map<RString, RString> 帳票Map = new HashMap<>();
+        Map<RString, RString> 帳票Map1 = getResult(Map.class, 事務局_審査会資料一括作成, new RString("出力帳票一覧"));
+        Map<RString, RString> 帳票Map2 = getResult(Map.class, 委員_審査会資料一括作成, new RString("出力帳票一覧"));
+        if (帳票Map1 != null) {
+            帳票Map.putAll(帳票Map1);
+        }
+        if (帳票Map2 != null) {
+            帳票Map.putAll(帳票Map2);
+        }
         return simpleBatch(OutputJokenhyoFactoryProcess.class)
                 .arguments(getParameter().toOutputJokenhyoFactoryProcessParameter(帳票Map)).define();
     }

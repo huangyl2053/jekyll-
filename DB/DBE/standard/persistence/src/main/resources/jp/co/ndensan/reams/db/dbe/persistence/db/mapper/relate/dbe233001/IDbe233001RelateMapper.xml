@@ -76,7 +76,7 @@
         AND  DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_ikenshoSakuseiKigenYMD" <![CDATA[<]]> #{temp_基準日}
         <if test="uses印刷済対象者">
             AND DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_ikenshoSakuseiTokusokuYMD" is null
-        </if>-->
+        </if>
         INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
         ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"

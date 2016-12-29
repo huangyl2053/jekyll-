@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Yokai
 
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigoninteishinsakaiichiranlist.YokaigoNinteiShinsakaiIchiranListHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaikaisai.ShinsakaiKaisaiFinder;
@@ -100,14 +101,31 @@ public class YokaigoNinteiShinsakaiIchiranList {
             表示条件 = div.getRadHyojiJokenShinsakaiKanryo().getSelectedValue();
 
         }
+        RString 期間From;
+        RString 期間To;
+        if (表示期間From != null && 表示期間To != null) {
+            期間From = 表示期間From.toDateString();
+            期間To = 表示期間To.toDateString();
+        } else if (表示期間From != null && 表示期間To == null) {
+            期間From = 表示期間From.toDateString();
+            期間To = RDate.MAX.toDateString();
+
+        } else if (表示期間From == null && 表示期間To != null) {
+            期間From = RDate.MIN.toDateString();
+            期間To = 表示期間To.toDateString();
+        } else {
+            期間From = RDate.MIN.toDateString();
+            期間To = RDate.MAX.toDateString();
+        }
+        ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.createParam(
+                期間From, 期間To, モード, 表示条件, 最大表示件数, ダミー審査会);
         SearchResult<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
-                createInstance().get審査会一覧(表示期間From, 表示期間To, モード, 表示条件, 最大表示件数, ダミー審査会);
+                createInstance().get審査会一覧(parameter);
         if (審査会一覧 == null || 審査会一覧.records().isEmpty()) {
             validationMessages = getHandler(div).該当データが存在のチェック();
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         getHandler(div).set審査会委員一覧(審査会一覧, div.getTxtSaidaiHyojiKensu().getValue());
-
         return ResponseData.of(div).respond();
     }
 

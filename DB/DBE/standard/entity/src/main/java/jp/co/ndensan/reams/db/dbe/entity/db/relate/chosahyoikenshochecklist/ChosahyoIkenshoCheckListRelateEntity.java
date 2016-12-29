@@ -39,9 +39,8 @@ public class ChosahyoIkenshoCheckListRelateEntity {
     private RString dbT5501_gogitaiNo;
     private Code dbT5203_ninchishoNichijoSeikatsuJiritsudoCode;
     private Code dbT5203_shogaiNichijoSeikatsuJiritsudoCode;
-    private RString dbT5211_remban;
-    private RString dbT5211_researchItem;
-    private RString dbT5304_remban;
-    private RString dbT5304_ikenItem;
+    private RString remban;
+    private RString item;
+    private RString kubun;
 
 }

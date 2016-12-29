@@ -134,14 +134,14 @@ public class IkenshoSakuseiIraiHandler {
         if (主治医意見書作成依頼.get主治医意見書作成依頼年月日() != null && !主治医意見書作成依頼.get主治医意見書作成依頼年月日().isEmpty()) {
             div.getTxtSakuseiIraiD().setValue(new RDate(主治医意見書作成依頼.get主治医意見書作成依頼年月日().toString()));
         }
-       
+
         setCheckBoxValue(主治医意見書作成依頼);
     }
 
     private void setCheckBoxValue(IkenshoirairirekiichiranShudou 主治医意見書作成依頼) {
-        
+
         RString 市町村コード = 主治医意見書作成依頼.get市町村コード().value();
-        RString 用紙タイプ = getConfigValue(ConfigNameDBE.意見書用紙タイプ,市町村コード);
+        RString 用紙タイプ = getConfigValue(ConfigNameDBE.意見書用紙タイプ, 市町村コード);
         List<RString> keyChkIraiList = new ArrayList<>();
         List<KeyValueDataSource> dataSourceChkIraiList = new ArrayList<>();
         RString 主治医意見書作成依頼_手動_意見書作成依頼書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -273,24 +273,26 @@ public class IkenshoSakuseiIraiHandler {
             div.getTxtJyushintime().setDisabled(true);
         }
     }
-        
+
     private FlexibleDate get主治医意見書作成期限年月日(FlexibleDate 認定申請年月日, IkenshoSakuseiIraiDiv div) {
         RString コンフィグ_主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        FlexibleDate 提出期限 = FlexibleDate.EMPTY;
+        FlexibleDate 提出期限;
         RString key = div.getRadKigen().getSelectedKey();
         int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         if (主治医意見書作成期限設定方法_1.equals(コンフィグ_主治医意見書作成期限設定方法)) {
             if (SELECTED_KEY0.equals(key)) {
-                提出期限 = new FlexibleDate(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数).toDateString());
+                提出期限 = div.getTxtSakuseiIraiD().getValue() != null
+                        ? new FlexibleDate(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数).toDateString()) : FlexibleDate.EMPTY;
             } else if (SELECTED_KEY1.equals(key)) {
                 提出期限 = FlexibleDate.EMPTY;
-            } else if (SELECTED_KEY2.equals(key) && div.getTxtKigenymd().getValue() != null) {
-                提出期限 = new FlexibleDate(div.getTxtKigenymd().getValue().toDateString());
+            } else {
+                提出期限 = (div.getTxtKigenymd().getValue() != null
+                        ? new FlexibleDate(div.getTxtKigenymd().getValue().toDateString()) : FlexibleDate.EMPTY);
             }
-        } else if (認定申請年月日 != null) {
-            提出期限 = 認定申請年月日.plusDay(期限日数);
+        } else {
+            提出期限 = 認定申請年月日 != null ? 認定申請年月日.plusDay(期限日数) : FlexibleDate.EMPTY;
         }
         return 提出期限;
     }
@@ -695,7 +697,7 @@ public class IkenshoSakuseiIraiHandler {
                     被保険者氏名, fomartDate12(shudou.get依頼書出力年月日()), shudou.get医療機関名称(), shudou.get代表者名(),
                     電話番号, shudou.get主治医氏名(), RString.EMPTY, RString.EMPTY, fomartDate12(shudou.get主治医意見書作成依頼年月日()),
                     fomartDate12(shudou.get主治医意見書作成期限年月日()),
-                    市町村コード, shudou.get市町村名称(),shudou.get証記載保険者番号());
+                    市町村コード, shudou.get市町村名称(), shudou.get証記載保険者番号());
             bodyItemList.add(bodyItem);
         }
         SyujiyikenshosakuseyiraihakouReportJoho 主治医意見書作成依頼発行一覧表 = new SyujiyikenshosakuseyiraihakouReportJoho(headItem, bodyItemList);
@@ -1055,7 +1057,7 @@ public class IkenshoSakuseiIraiHandler {
         return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 
-    private RString getConfigValue(ConfigNameDBE config,RString 市町村コード) {
-        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援,市町村コード);
+    private RString getConfigValue(ConfigNameDBE config, RString 市町村コード) {
+        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
     }
 }

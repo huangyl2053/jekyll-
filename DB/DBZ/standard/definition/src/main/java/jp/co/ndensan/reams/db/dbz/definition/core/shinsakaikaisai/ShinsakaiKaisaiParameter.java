@@ -37,6 +37,7 @@ public final class ShinsakaiKaisaiParameter {
     private final boolean is審査会完了のみ;
     private final boolean is開催予定登録OR対象者割付;
     private final boolean is表示しない;
+    private final RString 審査会開催番号;
 
     /**
      * コンストラクタです。
@@ -66,7 +67,8 @@ public final class ShinsakaiKaisaiParameter {
             boolean is審査会未完了のみ,
             boolean is審査会完了のみ,
             boolean is開催予定登録OR対象者割付,
-            boolean is表示しない) {
+            boolean is表示しない,
+            RString 審査会開催番号) {
         this.表示期間From = 表示期間From;
         this.表示期間To = 表示期間To;
         this.モード = モード;
@@ -79,6 +81,7 @@ public final class ShinsakaiKaisaiParameter {
         this.is審査会完了のみ = is審査会完了のみ;
         this.is開催予定登録OR対象者割付 = is開催予定登録OR対象者割付;
         this.is表示しない = is表示しない;
+        this.審査会開催番号 = 審査会開催番号;
     }
 
     /**
@@ -136,7 +139,30 @@ public final class ShinsakaiKaisaiParameter {
                 is審査会未完了のみ,
                 is審査会完了のみ,
                 is開催予定登録OR対象者割付,
-                is表示しない);
+                is表示しない,
+                RString.EMPTY);
     }
 
+    /**
+     * 審査会情報検索用のパラメータを生成します。
+     *
+     * @param 審査会開催番号 審査会開催番号
+     * @return 介護認定審査会検索パラメータ
+     */
+    public static ShinsakaiKaisaiParameter create審査会検索Param(RString 審査会開催番号) {
+        return new ShinsakaiKaisaiParameter(
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                Decimal.ZERO,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                審査会開催番号);
+    }
 }

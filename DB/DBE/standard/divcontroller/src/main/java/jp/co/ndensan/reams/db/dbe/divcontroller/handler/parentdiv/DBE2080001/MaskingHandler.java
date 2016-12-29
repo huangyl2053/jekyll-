@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.Mask
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.dgYokaigoNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.MaSuKinGuBusiness;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.KihonunyoShor
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.TaishoDataKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -53,10 +55,11 @@ public class MaskingHandler {
      * 完了処理・マスキングの初期化です。
      */
     public void initialize() {
+        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         List<MaSuKinGuBusiness> マスキングList = YokaigoNinteiTaskListFinder.createInstance().
                 getマスキングモード(YokaigoNinteiTaskListParameter.
                         createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(),
-                                div.getRadTaishoDataKubun().getSelectedKey(), div.getTxtSaidaiHyojiKensu().getValue())).records();
+                                div.getRadTaishoDataKubun().getSelectedKey(), div.getTxtSaidaiHyojiKensu().getValue(), 市町村コード)).records();
         if (!マスキングList.isEmpty()) {
             ShinSaKaiBusiness 前マスキングModel = YokaigoNinteiTaskListFinder.createInstance().
                     get前マスキング(YokaigoNinteiTaskListParameter.

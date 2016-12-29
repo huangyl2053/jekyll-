@@ -83,7 +83,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         if (item.getListIchiranhyo_4() == null || item.getListIchiranhyo_4().isEmpty()) {
             source.listIchiranhyo_4 = RString.EMPTY;
         } else {
-            source.listIchiranhyo_4 = パターン4(new RDate(item.getListIchiranhyo_4().toString()));
+            source.listIchiranhyo_4 = to元号略称表記(new RDate(item.getListIchiranhyo_4().toString()));
         }
         source.listIchiranhyo_5 = item.getListIchiranhyo_5();
         source.listIchiranhyo_6 = item.getListIchiranhyo_6();
@@ -92,21 +92,21 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         if (item.getListIchiranhyo_9() == null || item.getListIchiranhyo_9().isEmpty()) {
             source.listIchiranhyo_9 = RString.EMPTY;
         } else {
-            source.listIchiranhyo_9 = パターン4(new RDate(item.getListIchiranhyo_9().toString()));
+            source.listIchiranhyo_9 = to元号略称表記(new RDate(item.getListIchiranhyo_9().toString()));
         }
         source.listIchiranhyo_10 = item.getListIchiranhyo_10();
         source.listIchiranhyo_11 = item.getListIchiranhyo_11();
         if (item.getListIchiranhyo_12() == null || item.getListIchiranhyo_12().isEmpty()) {
             source.listIchiranhyo_12 = RString.EMPTY;
         } else {
-            source.listIchiranhyo_12 = パターン4(new RDate(item.getListIchiranhyo_12().toString()));
+            source.listIchiranhyo_12 = to元号略称表記(new RDate(item.getListIchiranhyo_12().toString()));
         }
         return source;
     }
 
-    private RString パターン4(RDate rDate) {
+    private RString to元号略称表記(RDate rDate) {
         return rDate.wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+                .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString();
     }
 }

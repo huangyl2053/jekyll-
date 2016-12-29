@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
@@ -492,7 +493,7 @@ public class IchijiHanteiHandler {
     public void 対象者一覧更新の編集(dgIchijiHanteiTaishoshaIchiran_Row row, int index, IchijiHanteiKekkaJoho business) {
 
         if (business != null) {
-            row.setColumnState(new RString("更新"));
+            row.setColumnState(new RString("修正"));
             if (business.get要介護認定一次判定年月日() != null) {
                 row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
             }
@@ -586,6 +587,7 @@ public class IchijiHanteiHandler {
      * @return パラメータクラス
      */
     public IChiJiPanTeiSyoRiParameter createParameter(RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
+        ShoKisaiHokenshaNo 証記載保険者No = div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
 
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -595,6 +597,7 @@ public class IchijiHanteiHandler {
 
         return IChiJiPanTeiSyoRiParameter.
                 createParameter(
+                        証記載保険者No,
                         ShoriJotaiKubun.通常.getコード(),
                         ShoriJotaiKubun.延期.getコード(),
                         イメージ区分,
@@ -603,5 +606,12 @@ public class IchijiHanteiHandler {
                         検索件数,
                         menuID,
                         shinseishoKanriNoList.getShinseishoKanriNoS());
+    }
+
+    /**
+     * グリッドを、複数選択可能な状態にします。
+     */
+    public void setMultiSelectable() {
+        div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setMultiSelectable(true);
     }
 }
