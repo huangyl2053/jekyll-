@@ -16,17 +16,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoKensakujokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtShujiiIkenshoSakuseiIraibiFrom")
-    private TextBoxDate txtShujiiIkenshoSakuseiIraibiFrom;
-    @JsonProperty("txtShujiiIkenshoSakuseiIraibiTo")
-    private TextBoxDate txtShujiiIkenshoSakuseiIraibiTo;
+    @JsonProperty("txtShujiiIkenshoSakuseiIraibi")
+    private TextBoxDateRange txtShujiiIkenshoSakuseiIraibi;
     @JsonProperty("chkShujiiikenshoSakuseiIrai")
     private CheckBoxList chkShujiiikenshoSakuseiIrai;
     @JsonProperty("chkShujiiIkensho")
@@ -45,39 +43,21 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtShujiiIkenshoSakuseiIraibiFrom
-     * @return txtShujiiIkenshoSakuseiIraibiFrom
+     * gettxtShujiiIkenshoSakuseiIraibi
+     * @return txtShujiiIkenshoSakuseiIraibi
      */
-    @JsonProperty("txtShujiiIkenshoSakuseiIraibiFrom")
-    public TextBoxDate getTxtShujiiIkenshoSakuseiIraibiFrom() {
-        return txtShujiiIkenshoSakuseiIraibiFrom;
+    @JsonProperty("txtShujiiIkenshoSakuseiIraibi")
+    public TextBoxDateRange getTxtShujiiIkenshoSakuseiIraibi() {
+        return txtShujiiIkenshoSakuseiIraibi;
     }
 
     /*
-     * settxtShujiiIkenshoSakuseiIraibiFrom
-     * @param txtShujiiIkenshoSakuseiIraibiFrom txtShujiiIkenshoSakuseiIraibiFrom
+     * settxtShujiiIkenshoSakuseiIraibi
+     * @param txtShujiiIkenshoSakuseiIraibi txtShujiiIkenshoSakuseiIraibi
      */
-    @JsonProperty("txtShujiiIkenshoSakuseiIraibiFrom")
-    public void setTxtShujiiIkenshoSakuseiIraibiFrom(TextBoxDate txtShujiiIkenshoSakuseiIraibiFrom) {
-        this.txtShujiiIkenshoSakuseiIraibiFrom = txtShujiiIkenshoSakuseiIraibiFrom;
-    }
-
-    /*
-     * gettxtShujiiIkenshoSakuseiIraibiTo
-     * @return txtShujiiIkenshoSakuseiIraibiTo
-     */
-    @JsonProperty("txtShujiiIkenshoSakuseiIraibiTo")
-    public TextBoxDate getTxtShujiiIkenshoSakuseiIraibiTo() {
-        return txtShujiiIkenshoSakuseiIraibiTo;
-    }
-
-    /*
-     * settxtShujiiIkenshoSakuseiIraibiTo
-     * @param txtShujiiIkenshoSakuseiIraibiTo txtShujiiIkenshoSakuseiIraibiTo
-     */
-    @JsonProperty("txtShujiiIkenshoSakuseiIraibiTo")
-    public void setTxtShujiiIkenshoSakuseiIraibiTo(TextBoxDate txtShujiiIkenshoSakuseiIraibiTo) {
-        this.txtShujiiIkenshoSakuseiIraibiTo = txtShujiiIkenshoSakuseiIraibiTo;
+    @JsonProperty("txtShujiiIkenshoSakuseiIraibi")
+    public void setTxtShujiiIkenshoSakuseiIraibi(TextBoxDateRange txtShujiiIkenshoSakuseiIraibi) {
+        this.txtShujiiIkenshoSakuseiIraibi = txtShujiiIkenshoSakuseiIraibi;
     }
 
     /*

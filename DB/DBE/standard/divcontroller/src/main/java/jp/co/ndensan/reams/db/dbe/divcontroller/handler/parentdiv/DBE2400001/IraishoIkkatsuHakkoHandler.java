@@ -34,7 +34,6 @@ public class IraishoIkkatsuHakkoHandler {
     private static final RString STATE_NINTEIO = new RString("1");
     private static final RString STATE_SHUJII = new RString("2");
     private static final RString COMMON_SELECTED = new RString("key0");
-    private static final RString CHOHYO_CHECKED = new RString("key1");
     private static final RString SHUTSU_CHECKED = new RString("key2");
     private static final RString SHINSEI_KASAN = new RString("2");
     private static final RString OCR = new RString("1");
@@ -58,8 +57,8 @@ public class IraishoIkkatsuHakkoHandler {
     public void load(RString ninteiShinsei) {
         div.getRadTaishoSentaku().setSelectedKey(COMMON_SELECTED);
         div.getDgNinteiChosaIraiTaishoIchiran().init();
-        div.getTxtIraibiFrom().clearValue();
-        div.getTxtIraibiTo().clearValue();
+        div.getTxtNinteiChosaIraibi().clearFromValue();
+        div.getTxtNinteiChosaIraibi().clearToValue();
         div.getTxtChosaDispMax().clearValue();
         div.getNinteiChosaIraiTaishoIchiran().getDgNinteiChosaIraiTaishoIchiran().getDataSource().clear();
         List<RString> selectKeys = new ArrayList<>();
@@ -90,8 +89,8 @@ public class IraishoIkkatsuHakkoHandler {
      */
     public void shuziiiKenshoLoad(RString ninteiShinsei) {
         div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().init();
-        div.getTxtShujiiIkenshoSakuseiIraibiFrom().clearValue();
-        div.getTxtShujiiIkenshoSakuseiIraibiTo().clearValue();
+        div.getTxtShujiiIkenshoSakuseiIraibi().clearFromValue();
+        div.getTxtShujiiIkenshoSakuseiIraibi().clearToValue();
         div.getTxtIkenshoDispMax().clearValue();
         div.getShujiiIkenshoSakuseiIraiTaishoIchiran().getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getDataSource().clear();
         List<RString> selectKeys = new ArrayList<>();
@@ -202,8 +201,8 @@ public class IraishoIkkatsuHakkoHandler {
      */
     public void clearJoken() {
         if (STATE_NINTEIO.equals(div.getState())) {
-            div.getTxtIraibiFrom().clearValue();
-            div.getTxtIraibiTo().clearValue();
+            div.getTxtNinteiChosaIraibi().clearFromValue();
+            div.getTxtNinteiChosaIraibi().clearToValue();
             List<RString> selectKeys = new ArrayList<>();
             selectKeys.add(COMMON_SELECTED);
             div.getChkNinteioChosaIraisho().setSelectedItemsByKey(selectKeys);
@@ -214,8 +213,8 @@ public class IraishoIkkatsuHakkoHandler {
                     .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         }
         if (STATE_SHUJII.equals(div.getState())) {
-            div.getTxtShujiiIkenshoSakuseiIraibiFrom().clearValue();
-            div.getTxtShujiiIkenshoSakuseiIraibiTo().clearValue();
+            div.getTxtShujiiIkenshoSakuseiIraibi().clearFromValue();
+            div.getTxtShujiiIkenshoSakuseiIraibi().clearToValue();
             List<RString> selectKeys = new ArrayList<>();
             selectKeys.add(COMMON_SELECTED);
             div.getChkShujiiikenshoSakuseiIrai().setSelectedItemsByKey(selectKeys);
