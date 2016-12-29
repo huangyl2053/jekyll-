@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -49,14 +50,16 @@ public class KinyuYoshiKatamen extends BatchProcessBase<ShujiiIkenshoTeishutsuIr
 
     @Override
     protected void createWriter() {
-        batchWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value()).create();
+        batchWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value())
+                .addBreak(new BreakerCatalog<IkenshokinyuyoshiReportSource>().simpleLayoutBreaker(IkenshokinyuyoshiReportSource.LAYOUT_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
         business = new IraishoIkkatsuHakkoBusiness(entity, processParamter);
-        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.create記入用紙(),帳票.getReportId());
+        IkenshokinyuyoshiReport report = new IkenshokinyuyoshiReport(business.create記入用紙(), 帳票.getReportId());
         report.writeBy(reportSourceWriter);
     }
 

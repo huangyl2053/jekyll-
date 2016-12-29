@@ -24,6 +24,7 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
     private static final int INT_2 = 2;
     private static final int INT_4 = 4;
     private static final int INT_25 = 25;
+    private static final char CHAR_0 = '0';
     private final List<JimuShinsakaishiryoBusiness> shinsakaishiryoList;
     private final int index;
 
@@ -108,7 +109,7 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
             if (審査会番号.length() <= INT_4) {
                 return 審査会番号;
             } else {
-                return 審査会番号.substring(審査会番号.length() - INT_4);
+                return 審査会番号.substring(審査会番号.length() - INT_4).trimStart(CHAR_0);
             }
         }
         return RString.EMPTY;

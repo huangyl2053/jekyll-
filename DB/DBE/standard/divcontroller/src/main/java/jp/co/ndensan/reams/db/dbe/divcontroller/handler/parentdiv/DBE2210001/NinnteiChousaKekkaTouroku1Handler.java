@@ -931,7 +931,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
 
         if (認定調査基本情報リスト.isEmpty()) {
-            第1群List.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
+            第1群.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
                     データベース内連番_1, 調査項目_ない, new Code(), new Code(), データベース内連番_1, RString.EMPTY));
             第1群.add(new KihonChosaInput(ShinseishoKanriNo.EMPTY, 0, new Code(), new Code(),
                     データベース内連番_2, 調査項目_ない, new Code(), new Code(), データベース内連番_2, RString.EMPTY));

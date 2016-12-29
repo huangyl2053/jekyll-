@@ -14,9 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku14;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping06A;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09A;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -78,53 +75,23 @@ public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
         source.listIkengokomoku_8 = dateFormat(item.get認定申請年月日());
         source.listIkengokomoku_9 = set申請区分(item.get認定申請区分申請時コード());
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(item.get厚労省IF識別コード())) {
-            if (IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_10 = get認知度(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09A.短期記憶.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_11 = get短期記憶(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09A.認知能力.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_12 = get意思決定(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09A.伝達能力.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_13 = get伝達能力(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09A.食事行為.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_14 = get食事行為(item.get意見項目());
-            }
+            source.listIkengokomoku_10 = get認知度(item.get認知度());
+            source.listIkengokomoku_11 = get短期記憶(item.get短期記憶());
+            source.listIkengokomoku_12 = get意思決定(item.get意思決定());
+            source.listIkengokomoku_13 = get伝達能力(item.get伝達能力());
+            source.listIkengokomoku_14 = get食事行為(item.get食事行為());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(item.get厚労省IF識別コード())) {
-            if (IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_10 = get認知度(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09B.短期記憶.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_11 = get短期記憶(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09B.認知能力.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_12 = get意思決定(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09B.伝達能力.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_13 = get伝達能力(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping09B.食事行為.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_14 = get食事行為(item.get意見項目());
-            }
+            source.listIkengokomoku_10 = get認知度(item.get認知度());
+            source.listIkengokomoku_11 = get短期記憶(item.get短期記憶());
+            source.listIkengokomoku_12 = get意思決定(item.get意思決定());
+            source.listIkengokomoku_13 = get伝達能力(item.get伝達能力());
+            source.listIkengokomoku_14 = get食事行為(item.get食事行為());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(item.get厚労省IF識別コード())) {
-            if (IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_10 = get認知度(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping06A.短期記憶.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_11 = get短期記憶(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping06A.認知能力.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_12 = get意思決定(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping06A.伝達能力.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_13 = get伝達能力(item.get意見項目());
-            }
-            if (IkenshoKomokuMapping06A.食事行為.getコード().equals(item.get意見書連番())) {
-                source.listIkengokomoku_14 = get食事行為(item.get意見項目());
-            }
+            source.listIkengokomoku_10 = get認知度(item.get認知度());
+            source.listIkengokomoku_11 = get短期記憶(item.get短期記憶());
+            source.listIkengokomoku_12 = get意思決定(item.get意思決定());
+            source.listIkengokomoku_13 = get伝達能力(item.get伝達能力());
+            source.listIkengokomoku_14 = get食事行為(item.get食事行為());
         }
         source.listIkengokomoku_15 = get記載有無(source);
         source.shikibetuCode = ShikibetsuCode.EMPTY;

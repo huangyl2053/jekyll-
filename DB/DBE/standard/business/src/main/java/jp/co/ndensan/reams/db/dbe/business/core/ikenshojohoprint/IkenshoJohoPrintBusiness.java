@@ -83,7 +83,7 @@ public class IkenshoJohoPrintBusiness {
                 shijiiIkenshoIraiHenko.set認定申請年月日(entity.getNinteiShinseiYMD());
                 Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
                 shijiiIkenshoIraiHenko.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
-                shijiiIkenshoIraiHenko.set変更回数(indexTmp);
+                shijiiIkenshoIraiHenko.set変更回数(indexTmp - 1 <= 0 ? 0 : indexTmp - 1);
                 shijiiIkenshoIraiHenko.set変更前医療機関(before.getIryoKikanMeisho());
                 shijiiIkenshoIraiHenko.set変更前主治医(before.getShujiiName());
                 shijiiIkenshoIraiHenko.set変更後医療機関(entity.getIryoKikanMeisho());
@@ -175,8 +175,11 @@ public class IkenshoJohoPrintBusiness {
         shujiiIkensho5komokuEntity.set認定申請年月日(entity.getNinteiShinseiYMD());
         Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
         shujiiIkensho5komokuEntity.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
-        shujiiIkensho5komokuEntity.set意見書連番(entity.getRemban());
-        shujiiIkensho5komokuEntity.set意見項目(entity.getIkenItem());
+        shujiiIkensho5komokuEntity.set認知度(entity.get認知度());
+        shujiiIkensho5komokuEntity.set短期記憶(entity.get短期記憶());
+        shujiiIkensho5komokuEntity.set意思決定(entity.get意思決定());
+        shujiiIkensho5komokuEntity.set伝達能力(entity.get伝達能力());
+        shujiiIkensho5komokuEntity.set食事行為(entity.get食事行為());
         Code 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
         shujiiIkensho5komokuEntity.set厚労省IF識別コード(
                 厚労省IF識別コード == null ? RString.EMPTY : 厚労省IF識別コード.getColumnValue());

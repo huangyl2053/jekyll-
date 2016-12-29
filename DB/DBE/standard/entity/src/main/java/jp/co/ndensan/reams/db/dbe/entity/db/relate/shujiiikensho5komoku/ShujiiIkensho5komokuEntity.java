@@ -28,7 +28,10 @@ public class ShujiiIkensho5komokuEntity {
     private RString 性別;
     private FlexibleDate 認定申請年月日;
     private RString 認定申請区分申請時コード;
-    private RString 意見書連番;
-    private RString 意見項目;
+    private RString 認知度;
+    private RString 短期記憶;
+    private RString 意思決定;
+    private RString 伝達能力;
+    private RString 食事行為;
     private RString 厚労省IF識別コード;
 }

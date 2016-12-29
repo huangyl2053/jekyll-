@@ -49,17 +49,17 @@ public class PublicationShiryoShinsakai {
                 .append(審査会一覧_開催番号);
         前排他キーのセット(builder.toRString());
         getHandler(div).onLoad(開催予定情報);
-        if(div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)){
+        if (div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)) {
             div.setHdnChkSubeteJimuFlag(new RString(Boolean.TRUE.toString()));
-        }else{
+        } else {
             div.setHdnChkSubeteJimuFlag(new RString(Boolean.FALSE.toString()));
         }
-        if(div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)){
+        if (div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)) {
             div.setHdnChkSubeteIinFlag(new RString(Boolean.TRUE.toString()));
-        }else{
+        } else {
             div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
         }
-        
+
         return ResponseData.of(div).respond();
     }
 
