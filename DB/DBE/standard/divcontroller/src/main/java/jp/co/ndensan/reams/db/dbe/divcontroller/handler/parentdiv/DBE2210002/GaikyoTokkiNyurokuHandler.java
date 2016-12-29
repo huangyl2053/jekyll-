@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -57,7 +59,7 @@ public class GaikyoTokkiNyurokuHandler {
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
+        GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分, new Code(GenponMaskKubun.原本.getコード()));
         set初期項目(gaikyoTokki);
         return gaikyoTokki;
     }
@@ -86,7 +88,7 @@ public class GaikyoTokkiNyurokuHandler {
 
             GaikyoTokkiManager manager = new GaikyoTokkiManager();
             RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(前回申請管理番号, 前回最大認定調査依頼履歴番号, 概況調査テキストイメージ区分);
+            GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(前回申請管理番号, 前回最大認定調査依頼履歴番号, 概況調査テキストイメージ区分, new Code(GenponMaskKubun.原本.getコード()));
             if (gaikyoTokki != null) {
                 div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());
                 div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());
@@ -105,7 +107,7 @@ public class GaikyoTokkiNyurokuHandler {
     public void resetData(GaikyoTokki gaikyoTokki) {
         set初期項目(gaikyoTokki);
     }
-    
+
     private void set初期項目(GaikyoTokki gaikyoTokki) {
         if (gaikyoTokki != null) {
             div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());
@@ -119,7 +121,7 @@ public class GaikyoTokkiNyurokuHandler {
             div.getTxtChosaTishoKazokuJokyo().setValue(RString.EMPTY);
             div.getTxtChosaTaishoKyojuKankyo().setValue(RString.EMPTY);
             div.getTxtNichijoShiyoKikiUmu().setValue(RString.EMPTY);
-        }        
+        }
     }
 
 }
