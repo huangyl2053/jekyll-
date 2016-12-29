@@ -124,31 +124,26 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<IkenshoJ
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
         if (処理日.equals(processParameter.get主治医意見書作成料請求一覧表作成条件())) {
-            出力条件.add(new RString("処理日の範囲を指定"));
+            出力条件.add(new RString("作成条件：処理日の範囲を指定"));
             if (processParameter.get主治医意見書作成料請求一覧表処理日From() == null && processParameter.get主治医意見書作成料請求一覧表処理日To() == null) {
-                出力条件.add(new RString("指定なし"));
+                出力条件.add(new RString("日付範囲：指定なし"));
             } else {
                 RString 処理日FROM = dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日From());
                 RString 処理日TO = dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日To());
-                出力条件.add(new RString("処理日：").concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
+                出力条件.add(new RString("日付範囲：").concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
             }
         } else if (受領日.equals(processParameter.get主治医意見書作成料請求一覧表作成条件())) {
-            出力条件.add(new RString("受領日の範囲を指定"));
+            出力条件.add(new RString("作成条件：受領日の範囲を指定"));
             if (processParameter.get主治医意見書作成料請求一覧表受領日From() == null && processParameter.get主治医意見書作成料請求一覧表受領日To() == null) {
-                出力条件.add(new RString("指定なし"));
+                出力条件.add(new RString("日付範囲：指定なし"));
             } else {
                 RString 受領日FROM = dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日From());
                 RString 受領日TO = dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日To());
-                出力条件.add(new RString("受領日：").concat(受領日FROM).concat(new RString("～")).concat(受領日TO));
+                出力条件.add(new RString("日付範囲：").concat(受領日FROM).concat(new RString("～")).concat(受領日TO));
             }
 
         }
 
-        出力条件.add(set主治医意見書依頼未処理者一覧表作成条件(processParameter.get主治医意見書作成料請求一覧表作成条件()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日From()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日To()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日From()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日To()));
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE013006.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
@@ -163,13 +158,4 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<IkenshoJ
         return date.wareki().toDateString();
     }
 
-    private RString set主治医意見書依頼未処理者一覧表作成条件(RString 作成条件) {
-        RString 一覧作成条件 = RString.EMPTY;
-        if (処理日.equals(作成条件)) {
-            一覧作成条件 = new RString("処理日");
-        } else if (受領日.equals(作成条件)) {
-            一覧作成条件 = new RString("受領日");
-        }
-        return 一覧作成条件;
-    }
 }
