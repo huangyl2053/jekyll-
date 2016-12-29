@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
@@ -40,6 +41,7 @@ public class DBE517000_ShinsakaiShiryoTest {
         param.setShinseishoKanriNoList(Arrays.asList(new RString("20602920150300359"), new RString("20562520150300209")));
         param.setNinteiChosainCode(RString.EMPTY);
         param.setNinteichosaItakusakiCode(RString.EMPTY);
+        param.setHihokenshaNoList(new ArrayList<RString>());
         return param;
     }
 
