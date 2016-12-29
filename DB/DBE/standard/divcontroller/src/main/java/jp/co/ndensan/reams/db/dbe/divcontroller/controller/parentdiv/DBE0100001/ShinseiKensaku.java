@@ -277,7 +277,7 @@ public class ShinseiKensaku {
         div.getBtnModoru().setDisabled(true);
         return ResponseData.of(div).setState(findStateAt条件指定());
     }
-    
+
     /**
      * 「戻る」ボタン処理です。「要介護認定進捗データ出力画面へ戻る」
      *
@@ -340,7 +340,7 @@ public class ShinseiKensaku {
             item.setSeinengappiYMD(row.get生年月日());
             item.setSeibetsu(row.get性別());
             item.setKoroshoIfShikibetsuCode(row.get厚労省IF識別コード());
-            item.setNijiHanteiYokaigoJotaiKubun(row.get二次判定要介護状態区分コード());
+            item.setNijiHanteiYokaigoJotaiKubun(row.get二次判定要介護状態区分コード().value());
             if (row.get二次判定認定有効期間() != 0) {
                 item.setNijiHanteiNinteiYukoKikan(new RString(row.get二次判定認定有効期間()));
             } else {

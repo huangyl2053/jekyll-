@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.gaikyotokki;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5206GaikyoTokkiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -59,13 +61,35 @@ public class GaikyoTokkiManager {
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @deprecated 原本マスク区分の主キーが追加されたことによりこのメソッドは削除
      * @return 認定調査票（概況特記）
      */
     public GaikyoTokki get認定調査票_概況特記(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 概況特記テキストイメージ区分) {
-        DbT5206GaikyoTokkiEntity entity = dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
+        //TODO このメソッドが削除されるまで一時的にマスク区分を固定で渡すようにする。
+        Code 原本マスク区分 = new Code(GenponMaskKubun.原本.getコード());
+        DbT5206GaikyoTokkiEntity entity = dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分, 原本マスク区分);
         if (entity == null) {
             return null;
         }
         return new GaikyoTokki(entity);
     }
+
+    /**
+     * 認定調査票（概況特記）を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @param 原本マスク区分 原本マスク区分
+     * @return 認定調査票（概況特記）
+     */
+    public GaikyoTokki get認定調査票_概況特記(
+            ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 概況特記テキストイメージ区分, Code 原本マスク区分) {
+        DbT5206GaikyoTokkiEntity entity = dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分, 原本マスク区分);
+        if (entity == null) {
+            return null;
+        }
+        return new GaikyoTokki(entity);
+    }
+
 }

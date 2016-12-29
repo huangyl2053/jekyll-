@@ -101,7 +101,7 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
 
     private void editListShinseiIchiran8(YokaigoYoshienShinseiIchiranReportSource reportSource) {
         Code zenkaiKoroshoIfShikibetsuCode = item.getZenkaiKoroshoIfShikibetsuCode();
-        Code kubunCode = item.getNijiHanteiYokaigoJotaiKubun();
+        Code kubunCode = new Code(item.getNijiHanteiYokaigoJotaiKubun());
         RString zenkaiKoroshoIfShikibetsu = RString.EMPTY;
         if (zenkaiKoroshoIfShikibetsuCode != null) {
             zenkaiKoroshoIfShikibetsu = zenkaiKoroshoIfShikibetsuCode.value();
