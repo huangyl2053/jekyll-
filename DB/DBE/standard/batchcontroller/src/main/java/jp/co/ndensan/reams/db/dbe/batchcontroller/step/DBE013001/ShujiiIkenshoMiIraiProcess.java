@@ -133,7 +133,7 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
             } else {
                 RString 申請日FROM = dateFormat(processParameter.get主治医意見書依頼未処理者一覧表申請日From());
                 RString 申請日TO = dateFormat(processParameter.get主治医意見書依頼未処理者一覧表申請日To());
-                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+                出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
             }
         }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(

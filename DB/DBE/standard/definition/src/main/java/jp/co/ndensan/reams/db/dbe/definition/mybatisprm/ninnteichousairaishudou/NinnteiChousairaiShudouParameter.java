@@ -52,4 +52,16 @@ public final class NinnteiChousairaiShudouParameter {
         return new NinnteiChousairaiShudouParameter(
                 null, 被保険者番号);
     }
+    
+    /**
+     * 被保険者番号により、パラメターを作成します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 被保険者番号 被保険者番号
+     * @return NinnteiChousairaiShudouParameter
+     */
+    public static NinnteiChousairaiShudouParameter createParameterBy申請書管理番号と被保険者番号(RString 申請書管理番号, RString 被保険者番号) {
+        return new NinnteiChousairaiShudouParameter(
+                申請書管理番号, 被保険者番号);
+    }
 }

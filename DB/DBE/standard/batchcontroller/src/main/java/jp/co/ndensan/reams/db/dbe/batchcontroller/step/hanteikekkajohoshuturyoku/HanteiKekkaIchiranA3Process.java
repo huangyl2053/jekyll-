@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohosh
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaNinchishoKasanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
@@ -45,12 +44,10 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getHanteiKekkaIchiranA3List");
-    private static final RString REPORTNAME = new RString("認定審査会　判定結果一覧");
+    private static final RString REPORTNAME = new RString("認定審査会　判定結果一覧表");
     private static final int ページあたりレコード数 = 15;
     private int 総ページ数;
-    private static final RString 一次判定結果_認知症加算_1 = new RString("1");
-    private static final RString 一次判定結果_認知症加算_2 = new RString("2");
-    private static final RString 一次判定結果_認知症加算_3 = new RString("3");
+
     private HanteiKekkaJohoShuturyokuProcessParameter processParameter;
     private RDateTime システム時刻;
     private int index;
@@ -121,12 +118,8 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.set認定申請区分_法令(RString.EMPTY);
         }
-        if (一次判定結果_認知症加算_1.equals(entity.getTb_一次判定結果_加算())) {
+        if (entity.getTb_一次判定結果() != null && !entity.getTb_一次判定結果().isEmpty()) {
             entity.setTb_一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.getTb_一次判定結果()).get名称());
-        } else if (一次判定結果_認知症加算_2.equals(entity.getTb_一次判定結果_加算())) {
-            entity.setTb_一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.一段階の重度変更.get名称());
-        } else if (一次判定結果_認知症加算_3.equals(entity.getTb_一次判定結果_加算())) {
-            entity.setTb_一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.二段階の重度変更.get名称());
         } else {
             entity.setTb_一次判定結果(RString.EMPTY);
         }
@@ -135,12 +128,8 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.setTb_二次判定要介護状態区分(RString.EMPTY);
         }
-        if (一次判定結果_認知症加算_1.equals(entity.get一次判定結果_加算())) {
+        if (entity.get一次判定結果() != null && !entity.get一次判定結果().isEmpty()) {
             entity.set一次判定結果(IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果()).get名称());
-        } else if (一次判定結果_認知症加算_2.equals(entity.get一次判定結果_加算())) {
-            entity.set一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.一段階の重度変更.get名称());
-        } else if (一次判定結果_認知症加算_3.equals(entity.get一次判定結果_加算())) {
-            entity.set一次判定結果(IchijiHanteiKekkaNinchishoKasanCode.二段階の重度変更.get名称());
         } else {
             entity.set一次判定結果(RString.EMPTY);
         }

@@ -61,7 +61,7 @@ public class KekkatsuchiIchiranhyoEditorImpl implements IKekkatsuchiIchiranhyoEd
         source.shichosonName = entity.getShichosonName();
         source.shinsakaiNo = entity.getShinsakaiNo();
         source.shinsakaiKaisaiYMD = entity.getShinsakaiKaisaiYMD() == null
-                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getShinsakaiKaisaiYMD()));
+                ? RString.EMPTY : 和暦年月日Fomart(entity.getShinsakaiKaisaiYMD());
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(entity.getPrintTimeStamp().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -101,6 +101,6 @@ public class KekkatsuchiIchiranhyoEditorImpl implements IKekkatsuchiIchiranhyoEd
 
     private RString 和暦年月日Fomart(FlexibleDate date) {
         return (date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.ZERO).toDateString());
+                .fillType(FillType.BLANK).toDateString());
     }
 }

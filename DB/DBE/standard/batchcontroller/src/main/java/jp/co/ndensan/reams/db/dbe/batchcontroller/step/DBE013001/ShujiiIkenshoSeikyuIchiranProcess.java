@@ -130,7 +130,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<IkenshoJ
             } else {
                 RString 処理日FROM = dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日From());
                 RString 処理日TO = dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日To());
-                出力条件.add(処理日FROM.concat(new RString("～")).concat(処理日TO));
+                出力条件.add(new RString("処理日：").concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
             }
         } else if (受領日.equals(processParameter.get主治医意見書作成料請求一覧表作成条件())) {
             出力条件.add(new RString("受領日の範囲を指定"));
@@ -139,7 +139,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<IkenshoJ
             } else {
                 RString 受領日FROM = dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日From());
                 RString 受領日TO = dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日To());
-                出力条件.add(受領日FROM.concat(new RString("～")).concat(受領日TO));
+                出力条件.add(new RString("受領日：").concat(受領日FROM).concat(new RString("～")).concat(受領日TO));
             }
 
         }

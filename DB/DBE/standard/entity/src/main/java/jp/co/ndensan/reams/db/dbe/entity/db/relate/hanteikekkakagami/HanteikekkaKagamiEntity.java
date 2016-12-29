@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -28,4 +29,6 @@ public class HanteikekkaKagamiEntity {
     private int gogitaiNo;
     private RString tsuchibun1;
     private RString tsuchibun2;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+
 }
