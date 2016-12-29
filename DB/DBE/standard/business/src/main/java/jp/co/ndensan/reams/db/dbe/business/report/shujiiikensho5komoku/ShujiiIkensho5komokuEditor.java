@@ -36,8 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
 
     private final RString title = new RString("主治医意見書5項目確認一覧表");
-    private final RString 記載あり = new RString("記載あり");
-    private final RString 記載なし = new RString("記載なし");
     private final ShujiiIkensho5komokuEntity item;
     private final int index;
 
@@ -165,17 +163,16 @@ public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
 
     private RString get記載有無(ShujiiIkensho5komokuReportSource source) {
         RString 記載有無 = RString.EMPTY;
-        if (記載あり.equals(source.listIkengokomoku_10) && 記載あり.equals(source.listIkengokomoku_11) && 記載あり.equals(source.listIkengokomoku_12)
-                && 記載あり.equals(source.listIkengokomoku_13) && 記載あり.equals(source.listIkengokomoku_14)) {
+        if (!RString.isNullOrEmpty(source.listIkengokomoku_10) && !RString.isNullOrEmpty(source.listIkengokomoku_11)
+                && !RString.isNullOrEmpty(source.listIkengokomoku_12) && !RString.isNullOrEmpty(source.listIkengokomoku_13)
+                && !RString.isNullOrEmpty(source.listIkengokomoku_14)) {
             記載有無 = new RString("○");
-        } else if (記載なし.equals(source.listIkengokomoku_10) || 記載なし.equals(source.listIkengokomoku_11)
-                || 記載なし.equals(source.listIkengokomoku_12) || 記載なし.equals(source.listIkengokomoku_13)
-                || 記載なし.equals(source.listIkengokomoku_14)) {
-            記載有無 = new RString("△");
-        } else if (記載なし.equals(source.listIkengokomoku_10) && 記載なし.equals(source.listIkengokomoku_11)
-                && 記載なし.equals(source.listIkengokomoku_12) && 記載なし.equals(source.listIkengokomoku_13)
-                && 記載なし.equals(source.listIkengokomoku_14)) {
+        } else if (RString.isNullOrEmpty(source.listIkengokomoku_10) && RString.isNullOrEmpty(source.listIkengokomoku_11)
+                && RString.isNullOrEmpty(source.listIkengokomoku_12) && RString.isNullOrEmpty(source.listIkengokomoku_13)
+                && RString.isNullOrEmpty(source.listIkengokomoku_14)) {
             記載有無 = new RString("×");
+        } else {
+            記載有無 = new RString("△");
         }
         return 記載有無;
     }
