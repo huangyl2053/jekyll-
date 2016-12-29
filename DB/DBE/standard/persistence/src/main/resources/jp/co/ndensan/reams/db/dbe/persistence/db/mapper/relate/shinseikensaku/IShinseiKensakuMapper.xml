@@ -450,11 +450,17 @@
                 AND DbT5101NinteiShinseiJoho."shisetsuNyushoFlag" = #{shisetsuNyushoFlag}
             </if>
 
+            <if test="useChosaShichosonCode">
+                 AND DbT5910NinteichosaItakusakiJoho."shichosonCode" = #{chosaShichosonCode}
+            </if>
             <if test="useNinteiChosaItakusakiCode">
                  AND DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
             </if>
             <if test="useNinteiChosainCode">
                  AND DbT5101NinteiShinseiJoho."ninteiChosainCode" = #{ninteiChosainCode}
+            </if>
+            <if test="useShujiiShichosonCode">
+                 AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{shujiiShichosonCode}
             </if>
             <if test="useShujiiIryokikanCode">
                  AND DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = #{shujiiIryokikanCode}

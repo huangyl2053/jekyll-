@@ -238,6 +238,10 @@ public class ShinshinIken {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        ValidationMessageControlPairs validIro = getValidationHandler(div).validateIro();
+        if (validIro.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validIro).respond();
+        }
         if (div.getSelectKeys().equals(getHandler(div).getSelectKey())) {
             return ResponseData.of(div).dialogOKClose();
         }
