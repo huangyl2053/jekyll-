@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
@@ -42,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
@@ -587,6 +587,7 @@ public class IchijiHanteiHandler {
      * @return パラメータクラス
      */
     public IChiJiPanTeiSyoRiParameter createParameter(RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
+        ShoKisaiHokenshaNo 証記載保険者No = div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
 
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -596,6 +597,7 @@ public class IchijiHanteiHandler {
 
         return IChiJiPanTeiSyoRiParameter.
                 createParameter(
+                        証記載保険者No,
                         ShoriJotaiKubun.通常.getコード(),
                         ShoriJotaiKubun.延期.getコード(),
                         イメージ区分,

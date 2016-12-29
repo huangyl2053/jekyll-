@@ -98,6 +98,16 @@ public class KanryoshoriIchijihantei {
         return research(div);
     }
 
+    /**
+     * 保険者の値が変更された際の動作です。
+     *
+     * @param div KanryoshoriIchijihanteiDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<KanryoshoriIchijihanteiDiv> onChange_ccdHokensha(KanryoshoriIchijihanteiDiv div) {
+        return research(div);
+    }
+
     private ResponseData<KanryoshoriIchijihanteiDiv> research(KanryoshoriIchijihanteiDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
