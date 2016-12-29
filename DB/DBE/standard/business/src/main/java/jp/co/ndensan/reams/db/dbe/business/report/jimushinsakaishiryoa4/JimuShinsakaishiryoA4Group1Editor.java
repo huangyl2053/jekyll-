@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class JimuShinsakaishiryoA4Group1Editor implements IJimuShinsakaishiryoA4Editor {
 
     private static final int INT_4 = 4;
+    private static final char CHAR_0 = '0';
     private final JimuShinsakaishiryoBusiness business;
 
     /**
@@ -83,7 +84,7 @@ public class JimuShinsakaishiryoA4Group1Editor implements IJimuShinsakaishiryoA4
             if (審査会番号.length() <= INT_4) {
                 return 審査会番号;
             } else {
-                return 審査会番号.substring(審査会番号.length() - INT_4);
+                return 審査会番号.substring(審査会番号.length() - INT_4).trimStart(CHAR_0);
             }
         }
         return RString.EMPTY;
