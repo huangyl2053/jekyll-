@@ -162,7 +162,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
         row.setKinyuKikanCode(kinyuKikanCode != null ? kinyuKikanCode.value() : RString.EMPTY);
         row.setKinyuKikanShitenCode(kinyuKikanShitenCode != null ? kinyuKikanShitenCode.value() : RString.EMPTY);
         row.setYokinShubetsu(yokinShubetsu);
-        row.setKozaNo(kozaNo);
+        row.setKozaNo(kozaNo != null ? kozaNo : RString.EMPTY);
         row.setKozaMeigininKana(kozaMeigininKana != null ? kozaMeigininKana.value() : RString.EMPTY);
         row.setKozaMeiginin(kozaMeiginin != null ? kozaMeiginin.value() : RString.EMPTY);
         return row;
