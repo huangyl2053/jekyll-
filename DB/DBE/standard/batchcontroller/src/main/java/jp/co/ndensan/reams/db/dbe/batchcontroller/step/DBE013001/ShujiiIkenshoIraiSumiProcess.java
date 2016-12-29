@@ -145,7 +145,7 @@ public class ShujiiIkenshoIraiSumiProcess extends BatchKeyBreakBase<IkenshoJohoP
             } else {
                 RString 処理日FROM = dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日From());
                 RString 処理日TO = dateFormat(processParameter.get主治医意見書依頼済み一覧表処理日To());
-                出力条件.add(処理日FROM.concat(new RString("～")).concat(処理日TO));
+                出力条件.add(new RString("処理日：").concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
             }
         } else if (申請日.equals(processParameter.get主治医意見書依頼済み一覧表作成条件())) {
             出力条件.add(new RString("申請日の範囲を指定"));
@@ -154,7 +154,7 @@ public class ShujiiIkenshoIraiSumiProcess extends BatchKeyBreakBase<IkenshoJohoP
             } else {
                 RString 申請日FROM = dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日From());
                 RString 申請日TO = dateFormat(processParameter.get主治医意見書依頼済み一覧表申請日To());
-                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+                出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
             }
         }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(

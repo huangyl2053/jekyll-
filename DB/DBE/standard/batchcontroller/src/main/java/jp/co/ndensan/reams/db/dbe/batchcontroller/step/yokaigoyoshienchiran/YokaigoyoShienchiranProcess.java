@@ -134,7 +134,7 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
             } else {
                 RString 処理日FROM = dateFormat(rDateTOFlexDate(processParameter.getShorikaFrom().getDate()));
                 RString 処理日TO = dateFormat(rDateTOFlexDate(processParameter.getShorikaTo().getDate()));
-                出力条件.add(処理日FROM.concat(new RString("～")).concat(処理日TO));
+                出力条件.add(new RString("処理日：").concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
             }
 
         } else {
@@ -144,7 +144,7 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
             } else {
                 RString 申請日FROM = dateFormat(processParameter.getShinnseikaFrom());
                 RString 申請日TO = dateFormat(processParameter.getShinnseikaTo());
-                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+                出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
             }
 
         }
