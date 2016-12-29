@@ -479,7 +479,6 @@
         DbT5105."ikenshoTorokuKanryoYMD" IS NULL
         AND
         DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
-        AND
         <if test="主治医意見書項目確認一覧表作成条件フラグ">
             AND
             DbT5501."shinsakaiKaisaiNo" = #{主治医意見書５項目確認一覧表審査会}
