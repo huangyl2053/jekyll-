@@ -150,7 +150,6 @@ public class NinteiChosaIrai {
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor調査員情報(保険者番号, 支所コード, chosaItakusakiCode);
         List<NinnteiChousairaiBusiness> 調査員情報List = NinnteiChousairaiFinder.createInstance().get調査員(parameter);
         handler.set調査員情報一覧(調査員情報List, row);
-        setData(null, handler);
         return ResponseData.of(div).respond();
     }
 
@@ -167,7 +166,7 @@ public class NinteiChosaIrai {
 
         ViewStateHolder.put(ViewStateKeys.調査員コード, row.getChosainCode().getValue());
         ViewStateHolder.put(ViewStateKeys.調査員割付可能人数_月, row.getChosaKanoNinzuPerMonth());
-        setData(new ChosainCode(row.getChosainCode().getValue()), handler);
+        set調査対象者情報(new ChosainCode(row.getChosainCode().getValue()), handler);
         handler.init印刷条件DIV(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
         return ResponseData.of(div).respond();
     }
@@ -184,12 +183,12 @@ public class NinteiChosaIrai {
 
         ViewStateHolder.put(ViewStateKeys.調査員コード, RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.調査員割付可能人数_月, RString.EMPTY);
-        setData(null, handler);
+        set調査対象者情報(null, handler);
         handler.init印刷条件DIV(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
         return ResponseData.of(div).respond();
     }
 
-    private void setData(ChosainCode 調査員コード, NinteiChosaIraiHandler handler) {
+    private void set調査対象者情報(ChosainCode 調査員コード, NinteiChosaIraiHandler handler) {
         ChosaItakusakiCode 認定調査委託先コード = new ChosaItakusakiCode(ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class));
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
         ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
@@ -405,7 +404,6 @@ public class NinteiChosaIrai {
         List<NinnteiChousairaiBusiness> 調査員情報一覧 = NinnteiChousairaiFinder.createInstance().get調査員(parameter);
         handler.reset委託先基本情報();
         handler.set調査員情報一覧(調査員情報一覧, row);
-        setData(null, handler);
         return ResponseData.of(div).setState(DBE2200001StateName.委託先選択後);
     }
 
