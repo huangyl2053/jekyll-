@@ -172,10 +172,16 @@ public class TaishouWaritsuke {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             handler.審査会順序確定();
+            handler.介護認定審査会割付情報更新();
+            handler.対象者一覧検索();
+            handler.候補者一覧検索();
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        handler.介護認定審査会割付情報更新();
-        handler.対象者一覧検索();
-        handler.候補者一覧検索();
+        if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
+                equals(ResponseHolder.getMessageCode().toString())) {
+            onLoad(div);
+            getHandler(div).setCommonButtonDisabled();
+        }
         return ResponseData.of(div).respond();
     }
 
