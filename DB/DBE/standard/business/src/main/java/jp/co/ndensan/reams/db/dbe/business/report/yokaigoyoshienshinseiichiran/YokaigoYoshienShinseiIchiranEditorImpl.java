@@ -43,8 +43,7 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
      * ReportSourceの編集処理です。
      *
      * @param reportSource 要支援認定等申請者一覧表ReportSourceクラス
-     * @return YokaigoYoshienShinseiIchiranReportSource
-     * 要支援認定等申請者一覧表ReportSourceクラス
+     * @return YokaigoYoshienShinseiIchiranReportSource 要支援認定等申請者一覧表ReportSourceクラス
      */
     @Override
     public YokaigoYoshienShinseiIchiranReportSource edit(YokaigoYoshienShinseiIchiranReportSource reportSource) {
@@ -100,11 +99,11 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
     }
 
     private void editListShinseiIchiran8(YokaigoYoshienShinseiIchiranReportSource reportSource) {
-        Code zenkaiKoroshoIfShikibetsuCode = item.getZenkaiKoroshoIfShikibetsuCode();
-        Code kubunCode = new Code(item.getNijiHanteiYokaigoJotaiKubun());
+        Code 厚労省認定ソフトバージョン = item.getKoroshoIfShikibetsuCode();
+        Code kubunCode = item.getNijiHanteiYokaigoJotaiKubun();
         RString zenkaiKoroshoIfShikibetsu = RString.EMPTY;
-        if (zenkaiKoroshoIfShikibetsuCode != null) {
-            zenkaiKoroshoIfShikibetsu = zenkaiKoroshoIfShikibetsuCode.value();
+        if (厚労省認定ソフトバージョン != null) {
+            zenkaiKoroshoIfShikibetsu = 厚労省認定ソフトバージョン.value();
         }
         RString code;
         if (kubunCode != null && !RString.isNullOrEmpty(kubunCode.value())) {

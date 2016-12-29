@@ -31,32 +31,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
-     * @deprecated 原本マスク区分の主キーが追加になったことによりこのコンストラクタは不要
-     */
-    public GaikyoTokki(ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号,
-            RString 概況特記テキストイメージ区分) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
-        requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
-        this.entity = new DbT5206GaikyoTokkiEntity();
-        this.entity.setShinseishoKanriNo(申請書管理番号);
-        this.entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
-        this.entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
-        this.id = new GaikyoTokkiIdentifier(
-                申請書管理番号,
-                認定調査依頼履歴番号,
-                概況特記テキストイメージ区分
-        );
-    }
-
-    /**
-     * コンストラクタです。<br/>
-     * 認定調査票_概況特記の新規作成時に使用します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
-     * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
      * @param 原本マスク区分 原本マスク区分
      */
     public GaikyoTokki(ShinseishoKanriNo 申請書管理番号,

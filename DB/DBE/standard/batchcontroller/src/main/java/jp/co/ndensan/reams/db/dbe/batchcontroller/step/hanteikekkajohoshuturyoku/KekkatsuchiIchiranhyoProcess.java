@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KekkatsuchiIchiranhyoProcess extends BatchKeyBreakBase<KekkatsuchiIchiranhyoEntity> {
 
     private static final ReportId ID = ReportIdDBE.DBE525004.getReportId();
-    private static final RString 改ページ = new RString("shichosonName");
+    private static final RString 改ページ = new RString("listKekkatsuchitaisho_2");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getKekkatsuchiIchiranList");
@@ -95,6 +95,7 @@ public class KekkatsuchiIchiranhyoProcess extends BatchKeyBreakBase<KekkatsuchiI
         }
         KekkatsuchiIchiranhyoReport report = new KekkatsuchiIchiranhyoReport(entity, index);
         report.writeBy(reportSourceWriter);
+        index = index + 1;
     }
 
     @Override

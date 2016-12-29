@@ -123,6 +123,17 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
     
     /**
+     * 保険者リスト共有子Div変更時の動作です。
+     *
+     * @param div ShujiiIkenshoIraiTaishoIchiranDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_ccdHokenshaList(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        getHandler(div).画面変更より最新データを検索();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 完了画面の「処理を継続する」を押し、完了処理・主治医意見書依頼の初期化する。
      *
      * @param div コントロールdiv

@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -21,14 +23,16 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
+    @JsonProperty("radShoriJyotai")
+    private RadioButton radShoriJyotai;
     @JsonProperty("txtTotalCount")
     private TextBox txtTotalCount;
     @JsonProperty("txtCompleteCount")
     private TextBox txtCompleteCount;
     @JsonProperty("txtNoUpdate")
     private TextBox txtNoUpdate;
-    @JsonProperty("radShoriJyotai")
-    private RadioButton radShoriJyotai;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
     @JsonProperty("btnikenshoiraitaishooutput")
@@ -44,6 +48,33 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
+    }
+
+    /*
+     * getradShoriJyotai
+     * @return radShoriJyotai
+     */
+    @JsonProperty("radShoriJyotai")
+    public RadioButton getRadShoriJyotai() {
+        return radShoriJyotai;
+    }
+
+    /*
+     * setradShoriJyotai
+     * @param radShoriJyotai radShoriJyotai
+     */
+    @JsonProperty("radShoriJyotai")
+    public void setRadShoriJyotai(RadioButton radShoriJyotai) {
+        this.radShoriJyotai = radShoriJyotai;
+    }
+
     /*
      * gettxtTotalCount
      * @return txtTotalCount
@@ -96,24 +127,6 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
     @JsonProperty("txtNoUpdate")
     public void setTxtNoUpdate(TextBox txtNoUpdate) {
         this.txtNoUpdate = txtNoUpdate;
-    }
-
-    /*
-     * getradShoriJyotai
-     * @return radShoriJyotai
-     */
-    @JsonProperty("radShoriJyotai")
-    public RadioButton getRadShoriJyotai() {
-        return radShoriJyotai;
-    }
-
-    /*
-     * setradShoriJyotai
-     * @param radShoriJyotai radShoriJyotai
-     */
-    @JsonProperty("radShoriJyotai")
-    public void setRadShoriJyotai(RadioButton radShoriJyotai) {
-        this.radShoriJyotai = radShoriJyotai;
     }
 
     /*

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -31,12 +32,14 @@ public class GaikyoTokkiTest extends DbzTestBase {
     private static ShinseishoKanriNo 申請書管理番号;
     private static int 認定調査依頼履歴番号;
     private static RString 概況特記テキストイメージ区分;
+    private static Code 原本マスク区分;
 
     @BeforeClass
     public static void setUpClass() {
         申請書管理番号 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_申請書管理番号;
         認定調査依頼履歴番号 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_認定調査依頼履歴番号;
         概況特記テキストイメージ区分 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_概況特記テキストイメージ区分;
+        原本マスク区分 = DbT5206GaikyoTokkiEntityGenerator.DEFAULT_原本マスク区分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -50,23 +53,25 @@ public class GaikyoTokkiTest extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GaikyoTokki(null, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
+            sut = new GaikyoTokki(null, 認定調査依頼履歴番号, 概況特記テキストイメージ区分, 原本マスク区分);
         }
 
         @Test
         public void 指定したキーが保持するDbT5206GaikyoTokkiEntityにセットされている() {
-            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
+            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分, 原本マスク区分);
             assertThat(sut.get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
             assertThat(sut.get概況特記テキストイメージ区分(), is(概況特記テキストイメージ区分));
+            assertThat(sut.get原本マスク区分(), is(原本マスク区分));
         }
 
         @Test
         public void 指定したキーが保持するGaikyoTokkiIdentifierにセットされている() {
-            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
+            sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分, 原本マスク区分);
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
             assertThat(sut.identifier().get概況特記テキストイメージ区分(), is(概況特記テキストイメージ区分));
+            assertThat(sut.identifier().get原本マスク区分(), is(原本マスク区分));
         }
     }
 
@@ -92,6 +97,7 @@ public class GaikyoTokkiTest extends DbzTestBase {
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
             assertThat(sut.identifier().get概況特記テキストイメージ区分(), is(概況特記テキストイメージ区分));
+            assertThat(sut.identifier().get原本マスク区分(), is(原本マスク区分));
         }
     }
 
@@ -119,6 +125,11 @@ public class GaikyoTokkiTest extends DbzTestBase {
         @Test
         public void get概況特記テキストイメージ区分は_entityが持つ概況特記テキストイメージ区分を返す() {
             assertThat(sut.get概況特記テキストイメージ区分(), is(gaikyoTokkiEntity.getGaikyoTokkiTextImageKubun()));
+        }
+
+        @Test
+        public void get原本マスク区分は_entityが持つ原本マスク区分を返す() {
+            assertThat(sut.get原本マスク区分(), is(gaikyoTokkiEntity.getGenponMaskKubun()));
         }
 
         @Test
