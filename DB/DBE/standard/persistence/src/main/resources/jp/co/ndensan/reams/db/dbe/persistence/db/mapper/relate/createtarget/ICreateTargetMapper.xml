@@ -263,9 +263,9 @@
            , A."shujiiCode"                             AS "A_shujiiCode"
            , D."ikenshoSakuseiIraiYMD"                  AS "D_ikenshoSakuseiIraiYMD"
            , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
-           , G."ninteichosaIraiYMD"                     AS "G_ninteichosaIraiYMD"
+           , G."iraishoShutsuryokuYMD"                  AS "G_ninteichosaIraiYMD"
            , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
-           , I."ninteichosaItakusakiCode"               AS "I_jigyoshaNo"
+           , I."jigyoshaNo"                             AS "I_jigyoshaNo"
            , I."chosaItakuKubun"                        AS "I_chosaItakuKubun"
            , G."ninteiChosainCode"                      AS "G_ninteiChosainCode"
            , J."chosainShikaku"                         AS "J_chosainShikaku"
@@ -506,7 +506,7 @@
                   X."shinseishoKanriNo" = X1."shinseishoKanriNo" 
                   AND X."ninteichosaRirekiNo" <![CDATA[<]]> X1."ninteichosaRirekiNo"
               ) 
-              AND X."gaikyoChosaTextImageKubun" = #{イメージ区分}
+              AND X."gaikyoChosaTextImageKubun" = '1'
             LEFT JOIN ( 
               SELECT
                 P003."remban" AS "P02_remban"

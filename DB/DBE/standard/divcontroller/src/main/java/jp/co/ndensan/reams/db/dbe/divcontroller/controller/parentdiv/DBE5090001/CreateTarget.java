@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -158,6 +157,8 @@ public class CreateTarget {
     private static final RString 偽 = new RString("2");
     private static final RString Zero = new RString("0");
     private static final RString 枝番 = new RString("0");
+    private static final RString 現在の状況初期値 = new RString("1");
+    private static final RString 前回の認定審査会結果初期値 = new RString("99");
 
     /**
      * 画面初期化処理です。
@@ -218,28 +219,7 @@ public class CreateTarget {
         if (validPair.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPair).respond();
         }
-        RString データ出力 = キー_1;
-        FlexibleDate 申請_開始日 = FlexibleDate.EMPTY;
-        FlexibleDate 申請_終了日 = FlexibleDate.EMPTY;
-        FlexibleDate 認定_開始日 = FlexibleDate.EMPTY;
-        FlexibleDate 認定_終了日 = FlexibleDate.EMPTY;
-        if (キー_0.equals(div.getRdoSyutsuryoku().getSelectedKey())) {
-            データ出力 = キー_0;
-        }
-        if (div.getTxtShinseiYMD().getFromValue() != null) {
-            申請_開始日 = new FlexibleDate(div.getTxtShinseiYMD().getFromValue().toDateString());
-        }
-        if (div.getTxtShinseiYMD().getToValue() != null) {
-            申請_終了日 = new FlexibleDate(div.getTxtShinseiYMD().getToValue().toDateString());
-        }
-        if (div.getNinteiYMD().getFromValue() != null) {
-            認定_開始日 = new FlexibleDate(div.getNinteiYMD().getFromValue().toDateString());
-        }
-        if (div.getNinteiYMD().getToValue() != null) {
-            認定_終了日 = new FlexibleDate(div.getNinteiYMD().getToValue().toDateString());
-        }
-        CreateTargetMapperParameter param = CreateTargetMapperParameter.createParam(データ出力, 申請_開始日, 申請_終了日,
-                認定_開始日, 認定_終了日, Integer.parseInt(div.getTxtMaxKensu().getValue().toString()));
+        CreateTargetMapperParameter param = getHandler(div).createParam();
         SearchResult<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).データチェック(business.records());
         if (validPairs.iterator().hasNext()) {
@@ -912,7 +892,7 @@ public class CreateTarget {
     }
 
     private CreateTargetCsvEntity get前回サービスの状況(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
-        set前回サービスの状況初期化(data);
+        set前回サービスの状況初期化(business, data);
         if (ServiceKubunCode.介護給付サービス.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness()
                 .get前回結果_現在のサービス区分コード())) {
             data.set前回結果_訪問介護ホームヘルプサービス(get前回サービス状況項目(business.get前回サービスの状況(), 連番0));
@@ -1027,7 +1007,7 @@ public class CreateTarget {
         data.set電話番号(business.getCsvBusiness().get電話番号());
         data.set病院施設等の名称(business.getCsvBusiness().get病院施設等の名称());
         data.set病院施設等の所在地(business.getCsvBusiness().get病院施設等の所在地());
-        data.set前回の認定審査会結果(business.getCsvBusiness().get前回の認定審査会結果());
+        data.set前回の認定審査会結果(edit前回の認定審査会結果(business));
         data.set前回の認定有効期間開始(business.getCsvBusiness().get前回の認定有効期間開始());
         data.set前回の認定有効期間終了(business.getCsvBusiness().get前回の認定有効期間終了());
         data.set主治医医療機関番号(business.getCsvBusiness().get主治医医療機関番号());
@@ -1073,7 +1053,7 @@ public class CreateTarget {
         data.set特定疾病コード(business.getCsvBusiness().get特定疾病コード());
         data.set要介護１の場合の状態像(business.getCsvBusiness().get要介護１の場合の状態像());
         data.set現在のサービス区分コード(business.getCsvBusiness().get現在のサービス区分コード());
-        data.set現在の状況(business.getCsvBusiness().get現在の状況());
+        data.set現在の状況(edit現在の状況(business.getCsvBusiness().get現在の状況()));
         data.set障害高齢者自立度(business.getCsvBusiness().get障害高齢者自立度());
         data.set認知症高齢者自立度(business.getCsvBusiness().get認知症高齢者自立度());
         data.set前回結果_障害高齢者自立度(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_障害高齢者自立度());
@@ -1103,7 +1083,7 @@ public class CreateTarget {
         data.set前回結果_申請日(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_申請日());
         data.set前回結果_二次判定日(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_二次判定日());
         data.set前回結果_現在のサービス区分コード(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_現在のサービス区分コード());
-        data.set前回結果_現在の状況(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_現在の状況());
+        data.set前回結果_現在の状況(edit前回結果_現在の状況(business));
         data.set前回識別コード(business.getCsvBusiness().getCreateCsvDataBusiness().get前回識別コード());
         data.set認定審査会意見等(business.getCsvBusiness().getCreateCsvDataBusiness().get認定審査会意見等());
         return data;
@@ -1133,6 +1113,9 @@ public class CreateTarget {
     }
 
     private RString edit真理値To数値(RString 真理値) {
+        if (RString.isNullOrEmpty(真理値)) {
+            return RString.EMPTY;
+        }
         if (真理値.equals(new RString("t")) || 真理値.equals(new RString("f"))) {
             return 真理値.equals(new RString("t")) ? 真 : 偽;
         }
@@ -1186,43 +1169,70 @@ public class CreateTarget {
         data.set介護予防認知症対応型共同生活介護グループホーム(Zero);
     }
 
-    private void set前回サービスの状況初期化(CreateTargetCsvEntity data) {
-        data.set前回結果_訪問介護ホームヘルプサービス(Zero);
-        data.set前回結果_訪問入浴介護(Zero);
-        data.set前回結果_訪問看護(Zero);
-        data.set前回結果_訪問リハビリテーション(Zero);
-        data.set前回結果_居宅療養管理指導(Zero);
-        data.set前回結果_通所介護デイサービス(Zero);
-        data.set前回結果_通所リハビリテーション(Zero);
-        data.set前回結果_短期入所生活介護ショートステイ(Zero);
-        data.set前回結果_短期入所療養介護(Zero);
-        data.set前回結果_特定施設入居者生活介護(Zero);
-        data.set前回結果_福祉用具貸与(Zero);
-        data.set前回結果_特定福祉用具販売(Zero);
-        data.set前回結果_住宅改修介護給付(Zero);
-        data.set前回結果_夜間対応型訪問介護(Zero);
-        data.set前回結果_認知症対応型通所介護(Zero);
-        data.set前回結果_小規模多機能型居宅介護(Zero);
-        data.set前回結果_認知症対応型共同生活介護グループホーム(Zero);
-        data.set前回結果_地域密着型特定施設入居者生活介護(Zero);
-        data.set前回結果_地域密着型介護老人福祉施設入所者生活介護(Zero);
-        data.set前回結果_定期巡回随時対応型訪問介護看護(Zero);
-        data.set前回結果_複合型サービス(Zero);
-        data.set前回結果_介護予防訪問介護ホームヘルプサービス(Zero);
-        data.set前回結果_介護予防訪問入浴介護(Zero);
-        data.set前回結果_介護予防訪問看護(Zero);
-        data.set前回結果_介護予防訪問リハビリテーション(Zero);
-        data.set前回結果_介護予防居宅療養管理指導(Zero);
-        data.set前回結果_介護予防通所介護デイサービス(Zero);
-        data.set前回結果_介護予防通所リハビリテーション(Zero);
-        data.set前回結果_介護予防短期入所生活介護ショートステイ(Zero);
-        data.set前回結果_介護予防短期入所療養介護(Zero);
-        data.set前回結果_介護予防特定施設入居者生活介護(Zero);
-        data.set前回結果_介護予防福祉用具貸与(Zero);
-        data.set前回結果_特定介護予防福祉用具販売(Zero);
-        data.set前回結果_住宅改修予防給付(Zero);
-        data.set前回結果_介護予防認知症対応型通所介護(Zero);
-        data.set前回結果_介護予防小規模多機能型居宅介護(Zero);
-        data.set前回結果_介護予防認知症対応型共同生活介護グループホーム(Zero);
+    private void set前回サービスの状況初期化(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+        if (has前回結果(business)) {
+            data.set前回結果_訪問介護ホームヘルプサービス(Zero);
+            data.set前回結果_訪問入浴介護(Zero);
+            data.set前回結果_訪問看護(Zero);
+            data.set前回結果_訪問リハビリテーション(Zero);
+            data.set前回結果_居宅療養管理指導(Zero);
+            data.set前回結果_通所介護デイサービス(Zero);
+            data.set前回結果_通所リハビリテーション(Zero);
+            data.set前回結果_短期入所生活介護ショートステイ(Zero);
+            data.set前回結果_短期入所療養介護(Zero);
+            data.set前回結果_特定施設入居者生活介護(Zero);
+            data.set前回結果_福祉用具貸与(Zero);
+            data.set前回結果_特定福祉用具販売(Zero);
+            data.set前回結果_住宅改修介護給付(Zero);
+            data.set前回結果_夜間対応型訪問介護(Zero);
+            data.set前回結果_認知症対応型通所介護(Zero);
+            data.set前回結果_小規模多機能型居宅介護(Zero);
+            data.set前回結果_認知症対応型共同生活介護グループホーム(Zero);
+            data.set前回結果_地域密着型特定施設入居者生活介護(Zero);
+            data.set前回結果_地域密着型介護老人福祉施設入所者生活介護(Zero);
+            data.set前回結果_定期巡回随時対応型訪問介護看護(Zero);
+            data.set前回結果_複合型サービス(Zero);
+            data.set前回結果_介護予防訪問介護ホームヘルプサービス(Zero);
+            data.set前回結果_介護予防訪問入浴介護(Zero);
+            data.set前回結果_介護予防訪問看護(Zero);
+            data.set前回結果_介護予防訪問リハビリテーション(Zero);
+            data.set前回結果_介護予防居宅療養管理指導(Zero);
+            data.set前回結果_介護予防通所介護デイサービス(Zero);
+            data.set前回結果_介護予防通所リハビリテーション(Zero);
+            data.set前回結果_介護予防短期入所生活介護ショートステイ(Zero);
+            data.set前回結果_介護予防短期入所療養介護(Zero);
+            data.set前回結果_介護予防特定施設入居者生活介護(Zero);
+            data.set前回結果_介護予防福祉用具貸与(Zero);
+            data.set前回結果_特定介護予防福祉用具販売(Zero);
+            data.set前回結果_住宅改修予防給付(Zero);
+            data.set前回結果_介護予防認知症対応型通所介護(Zero);
+            data.set前回結果_介護予防小規模多機能型居宅介護(Zero);
+            data.set前回結果_介護予防認知症対応型共同生活介護グループホーム(Zero);
+        }
     }
+
+    private RString edit現在の状況(RString 現在の状況) {
+        return RString.isNullOrEmpty(現在の状況) ? 現在の状況初期値 : 現在の状況;
+    }
+
+    private RString edit前回結果_現在の状況(CreateTargetDataBusiness business) {
+        if (RString.isNullOrEmpty(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_申請日())) {
+            return RString.EMPTY;
+        } else {
+            return RString.isNullOrEmpty(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_現在の状況())
+                    ? 現在の状況初期値 : business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_現在の状況();
+        }
+    }
+
+    private boolean has前回結果(CreateTargetDataBusiness business) {
+        return !RString.isNullOrEmpty(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_申請日());
+    }
+
+    private RString edit前回の認定審査会結果(CreateTargetDataBusiness business) {
+        if (RString.isNullOrEmpty(business.getCsvBusiness().get前回の認定審査会結果())) {
+            return 前回の認定審査会結果初期値;
+        }
+        return business.getCsvBusiness().get前回の認定審査会結果();
+    }
+
 }

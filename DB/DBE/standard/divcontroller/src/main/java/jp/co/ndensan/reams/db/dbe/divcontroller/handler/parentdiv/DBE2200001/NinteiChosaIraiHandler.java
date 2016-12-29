@@ -803,7 +803,7 @@ public class NinteiChosaIraiHandler {
         RString key = div.getRadkigen().getSelectedKey();
         if (new RString("2").equals(key)) {
             div.getTxtkigenymd().setReadOnly(false);
-            div.getTxtkigenymd().setValue(RDate.getNowDate());
+            div.getTxtkigenymd().setValue(RDate.getNowDate().plusDay(1));
         } else {
             div.getTxtkigenymd().clearValue();
             div.getTxtkigenymd().setReadOnly(true);

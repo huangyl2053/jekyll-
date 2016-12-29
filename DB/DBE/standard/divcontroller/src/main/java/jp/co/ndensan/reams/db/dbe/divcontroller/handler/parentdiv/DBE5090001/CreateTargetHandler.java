@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5090001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.CreateTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.dgCreateTargetSummary_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.createtarget.CreateTargetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -60,6 +62,10 @@ public class CreateTargetHandler {
     public void onLoad() {
         div.getRdoShinseiNintei().setSelectedKey(キー_1);
         div.getTxtShinseiYMD().setDisabled(true);
+        div.getTxtShinseiYMD().setToRequired(false);
+        div.getTxtShinseiYMD().setFromRequired(false);
+        div.getNinteiYMD().setToRequired(true);
+        div.getNinteiYMD().setFromRequired(true);
         div.getNinteiYMD().setDisabled(false);
         div.getRdoSyutsuryoku().setSelectedKey(キー_0);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
@@ -77,9 +83,13 @@ public class CreateTargetHandler {
         div.getTxtShinseiYMD().setDisabled(true);
         div.getTxtShinseiYMD().clearFromValue();
         div.getTxtShinseiYMD().clearToValue();
+        div.getTxtShinseiYMD().setToRequired(false);
+        div.getTxtShinseiYMD().setFromRequired(false);
         div.getNinteiYMD().setDisabled(false);
         div.getNinteiYMD().clearFromValue();
         div.getNinteiYMD().clearToValue();
+        div.getNinteiYMD().setToRequired(true);
+        div.getNinteiYMD().setFromRequired(true);
         div.getRdoSyutsuryoku().setSelectedKey(キー_0);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
@@ -97,11 +107,19 @@ public class CreateTargetHandler {
             div.getNinteiYMD().setDisabled(true);
             div.getNinteiYMD().clearFromValue();
             div.getNinteiYMD().clearToValue();
+            div.getTxtShinseiYMD().setToRequired(true);
+            div.getTxtShinseiYMD().setFromRequired(true);
+            div.getNinteiYMD().setToRequired(false);
+            div.getNinteiYMD().setFromRequired(false);
         } else {
             div.getTxtShinseiYMD().setDisabled(true);
             div.getTxtShinseiYMD().clearFromValue();
             div.getTxtShinseiYMD().clearToValue();
             div.getNinteiYMD().setDisabled(false);
+            div.getTxtShinseiYMD().setToRequired(false);
+            div.getTxtShinseiYMD().setFromRequired(false);
+            div.getNinteiYMD().setToRequired(true);
+            div.getNinteiYMD().setFromRequired(true);
         }
     }
 
@@ -141,6 +159,7 @@ public class CreateTargetHandler {
                 row.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(list.get状態区分コード()).get名称());
             }
             row.setNinteiYukoKikan(new RString(list.get認定有効期間()));
+            row.getSortNinteiYukoKikan().setValue(new Decimal(list.get認定有効期間()));
             row.getYukoKikanstart().setValue(getNull(list.get認定有効開始年月日()));
             row.getYukokikanend().setValue(getNull(list.get認定有効終了年月日()));
             row.getDataShutsuryoku().setValue(getNull(list.get送信年月日()));
@@ -160,5 +179,46 @@ public class CreateTargetHandler {
             return new RDate(年月日.toString());
         }
         return null;
+    }
+
+    /**
+     * CSV出力した後にデータグリッドの送信日を更新します。
+     * Todo:共通ボタンのDownloadにonFinishが公開されていない。基本コントロールのDownLoadButtonを使用するか確認し、当メソッドを使用する場合は使用するように修正を行う。不要な場合は削除する。
+     */
+    public void setDataGrid再読込() {
+        div.getDgCreateTargetSummary().getDataSource().clear();
+        CreateTargetMapperParameter param = createParam();
+        SearchResult<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
+        onClick_btnKensaku(business);
+    }
+
+    /**
+     * パラメータを作成して返します。
+     *
+     * @return CreateTargetMapperParameter
+     */
+    public CreateTargetMapperParameter createParam() {
+        RString データ出力 = キー_1;
+        FlexibleDate 申請_開始日 = FlexibleDate.EMPTY;
+        FlexibleDate 申請_終了日 = FlexibleDate.EMPTY;
+        FlexibleDate 認定_開始日 = FlexibleDate.EMPTY;
+        FlexibleDate 認定_終了日 = FlexibleDate.EMPTY;
+        if (キー_0.equals(div.getRdoSyutsuryoku().getSelectedKey())) {
+            データ出力 = キー_0;
+        }
+        if (div.getTxtShinseiYMD().getFromValue() != null) {
+            申請_開始日 = new FlexibleDate(div.getTxtShinseiYMD().getFromValue().toDateString());
+        }
+        if (div.getTxtShinseiYMD().getToValue() != null) {
+            申請_終了日 = new FlexibleDate(div.getTxtShinseiYMD().getToValue().toDateString());
+        }
+        if (div.getNinteiYMD().getFromValue() != null) {
+            認定_開始日 = new FlexibleDate(div.getNinteiYMD().getFromValue().toDateString());
+        }
+        if (div.getNinteiYMD().getToValue() != null) {
+            認定_終了日 = new FlexibleDate(div.getNinteiYMD().getToValue().toDateString());
+        }
+        return CreateTargetMapperParameter.createParam(データ出力, 申請_開始日, 申請_終了日,
+                認定_開始日, 認定_終了日, Integer.parseInt(div.getTxtMaxKensu().getValue().toString()));
     }
 }

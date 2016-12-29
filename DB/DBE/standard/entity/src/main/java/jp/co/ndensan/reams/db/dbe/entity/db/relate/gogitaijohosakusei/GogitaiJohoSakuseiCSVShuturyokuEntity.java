@@ -37,7 +37,7 @@ public class GogitaiJohoSakuseiCSVShuturyokuEntity {
     private RString shinsakaiKaisaiBasho;
     @CsvField(order = 8, name = "精神科医所属")
     private RString gogitaiSeishinkaSonzaiFlag;
-    @CsvField(order = 9, name = "合議体研修")
+    @CsvField(order = 9, name = "研修（模擬）")
     private RString gogitaiDummyFlag;
 
     /**

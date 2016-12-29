@@ -18,6 +18,7 @@ public class IinShinsakaishiryoA4Group1Editor implements IIinShinsakaishiryoA4Ed
 
     private static final int INT_1 = 1;
     private static final int INT_4 = 4;
+    private static final char CHAR_0 = '0';
     private final JimuShinsakaishiryoBusiness business;
 
     /**
@@ -73,9 +74,9 @@ public class IinShinsakaishiryoA4Group1Editor implements IIinShinsakaishiryoA4Ed
     private RString get審査会番号(RString 審査会番号) {
         if (!RString.isNullOrEmpty(審査会番号)) {
             if (審査会番号.length() <= INT_4) {
-                return new RString(審査会番号.toInt());
+                return 審査会番号;
             } else {
-                return new RString(審査会番号.substring(審査会番号.length() - INT_4).toInt());
+                return 審査会番号.substring(審査会番号.length() - INT_4).trimStart(CHAR_0);
             }
         }
         return RString.EMPTY;

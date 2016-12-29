@@ -188,10 +188,8 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
-            div.getBtnTainoJokyo().setDisplayNone(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(Boolean.TRUE); 
             div.getCcdAtenaInfo().setDisplayNone(true);
-            div.getBtnTainoJokyo().setVisible(false);
             setCcdShinseiTodokedesha(div);
             setMinasiCcd(div);
             if (result == null) {
@@ -219,11 +217,13 @@ public class NinteiShinseiToroku {
         if (security.get導入形態コード().equals(new Code("111"))) {
             ((NinteiShinseiTodokedeshaDiv)div.getCcdShinseiTodokedesha()).getBtnSetaiIchiran().setDisabled(true);
             ((NinteiShinseiTodokedeshaDiv)div.getCcdShinseiTodokedesha()).getBtnAtenaKensaku().setDisabled(true);
+            div.getBtnTainoJokyo().setDisplayNone(Boolean.TRUE);
         } else {
             security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
             if (security.get導入形態コード().equals(new Code("211"))) {
                 ((NinteiShinseiTodokedeshaDiv)div.getCcdShinseiTodokedesha()).getBtnSetaiIchiran().setDisabled(true);
                 ((NinteiShinseiTodokedeshaDiv)div.getCcdShinseiTodokedesha()).getBtnAtenaKensaku().setDisabled(true);
+                div.getBtnTainoJokyo().setDisplayNone(Boolean.TRUE);
             }
         }
     }
@@ -231,7 +231,6 @@ public class NinteiShinseiToroku {
     private void setMinasiCcd(NinteiShinseiTorokuDiv div) {
         ((KaigoNinteiShinseiKihonJohoInputDiv)div.getCcdKaigoNinteiShinseiKihon()).getServiceSakujo().setDisplayNone(true);
         ((KaigoNinteiShinseiKihonJohoInputDiv)div.getCcdKaigoNinteiShinseiKihon()).getDdlShinseiKubunHorei().setDisabled(true);
-        ((ShisetsuJohoCommonChildDivDiv)div.getCcdShisetsuJoho()).setMode_State(ShisetsuJohoCommonChildDivDiv.State.JigyoshaInputGuideMode);
     }
 
     /**
@@ -371,6 +370,7 @@ public class NinteiShinseiToroku {
     /**
      * 保存する　ボタン
      *
+     * 
      * @param div 審査依頼受付／みなし２号審査受付Div
      * @return ResponseData<NinteiShinseiTorokuDiv>
      */
@@ -386,13 +386,32 @@ public class NinteiShinseiToroku {
         if (MENUID_DBEMN31003.equals(menuID)) {
             validationMessages.add(getValidationHandler(div).被保険者区分チェック());
             ShinseishoKanriNo 申請書管理番号 = get申請書管理番号(div);
+            NinteiShinseiJoho ninteiShinseiJoho = get要介護認定申請情報(div, 申請書管理番号);
+            Boolean 変更有無フラグ1 = ninteiShinseiJoho.toEntity().hasChanged();
+            ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, true, 申請書管理番号);
+            Boolean 変更有無フラグ2 = shinseitodokedeJoho.toEntity().hasChanged();
+            ShinseiRirekiJoho shinseiRirekiJoho = get申請履歴情報(申請書管理番号);
+            Boolean 変更有無フラグ3 = shinseiRirekiJoho.toEntity().hasChanged();
+            Boolean 変更有無フラグ4 = false;
+            for (RenrakusakiJoho renrakusakiJoho : zenkaiJoho.getDbdBusiness()) {
+                RenrakusakiJoho renrakusakiJohoset = set介護連絡先情報(renrakusakiJoho, true, 申請書管理番号);
+                変更有無フラグ4 = renrakusakiJohoset.toEntity().hasChanged();
+                if (変更有無フラグ4) {
+                    break;
+                }
+            }
+            Boolean 変更有無フラグ5 = 審査会委員除外情報変更有無フラグ(申請書管理番号, dataList);
+            
+            if (!(変更有無フラグ1 || 変更有無フラグ2 || 変更有無フラグ3 || 変更有無フラグ4 || 変更有無フラグ5)) {
+                validationMessages.add(getValidationHandler(div).編集なしチェック(Boolean.TRUE));
+            }
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-
-            manager.save要介護認定申請情報(get要介護認定申請情報(div, 申請書管理番号));
-            manager.save申請届出情報(get認定申請届出者情報(div, true, 申請書管理番号));
-            manager.save申請履歴情報(get申請履歴情報(申請書管理番号));
+            
+            manager.save要介護認定申請情報(ninteiShinseiJoho);
+            manager.save申請届出情報(shinseitodokedeJoho);
+            manager.save申請履歴情報(shinseiRirekiJoho);
             for (RenrakusakiJoho renrakusakiJoho : zenkaiJoho.getDbdBusiness()) {
                 manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, true, 申請書管理番号));
             }
@@ -402,57 +421,53 @@ public class NinteiShinseiToroku {
             KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
             NinteiShinseiJoho shinseiJoho = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
             Boolean 変更有無フラグ1 = Boolean.FALSE;
+            
+            NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
             if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())
                     || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
                 shinseiJohoBuilder.set認定申請区分_申請時_コード(new Code(kihonJohoInputDiv
                         .getDdlShinseiKubunShinseiji().getSelectedKey()));
-                変更有無フラグ1 = shinseiJohoBuilder.build().toEntity().hasChanged();
-            }
-            if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
+            } else if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
                 shinseiJohoBuilder.set申請サービス削除の理由(kihonJohoInputDiv.getTxtServiceSakujo().getValue());
-                変更有無フラグ1 = shinseiJohoBuilder.build().toEntity().hasChanged();
             }
+            
+            変更有無フラグ1 = shinseiJohoBuilder.build().toEntity().hasChanged();
+            
             Boolean 変更有無フラグ2 = 介護連絡先情報変更有無フラグ(zenkaiJoho.getDbdBusiness());
             Boolean 変更有無フラグ3 = Boolean.FALSE;
-            if (get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY) != null) {
-                変更有無フラグ3 = get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY).toEntity().hasChanged();
+            
+            ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY);
+            if (shinseitodokedeJoho != null) {
+                変更有無フラグ3 = shinseitodokedeJoho.toEntity().hasChanged();
             }
             Boolean 変更有無フラグ4 = Boolean.FALSE;
             if (dataList != null && dataList.getShinsakaiIinItiranList() != null) {
                 変更有無フラグ4 = Boolean.TRUE;
             }
-            if (!変更有無フラグ1 && !変更有無フラグ2 && !変更有無フラグ3 && !変更有無フラグ4) {
+            if (!(変更有無フラグ1 || 変更有無フラグ2 || 変更有無フラグ3 || 変更有無フラグ4)) {
                 validationMessages.add(getValidationHandler(div).編集なしチェック(Boolean.TRUE));
             }
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+            
             if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())
                      || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
                 shinseiJohoBuilder.set認定申請区分_申請時_コード(new Code(kihonJohoInputDiv
                         .getDdlShinseiKubunShinseiji().getSelectedKey()));
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
-            }
-            if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
+            } else if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
                 shinseiJohoBuilder.set申請サービス削除の理由(kihonJohoInputDiv.getTxtServiceSakujo().getValue());
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
-            }
-            
-            if (!NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey()) 
-                    && !NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
-                NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
+            } else {
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
             }
             save介護連絡先情報(zenkaiJoho.getDbdBusiness());
             ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             del審査会委員除外情報(申請書管理番号, dataList);
             add審査会委員除外情報(申請書管理番号, dataList);
-            if (get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY) != null) {
-                manager.save申請届出情報(get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY));
+            if (shinseitodokedeJoho != null) {
+                manager.save申請届出情報(shinseitodokedeJoho);
             }
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("審査依頼受付")).respond();
         }

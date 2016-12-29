@@ -180,7 +180,7 @@ public class ShinsakaiKekkaTorokuHandler {
      *
      */
     public void set個別内容(dgTaishoshaIchiran_Row row) {
-        clear個別表示欄Value();
+        clear個別表示欄();
         div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().setValue(row.getShinsakaiJunjo());
         div.getKobetsuHyojiArea().getTxtShinseiDay().setValue(row.getShinseiDay().getValue());
         div.getKobetsuHyojiArea().getTxtBirthYMD().setValue(new FlexibleDate(row.getSeiNenGaBi()));
@@ -260,7 +260,7 @@ public class ShinsakaiKekkaTorokuHandler {
         boolean is入力可 = row.getHanteiKekkaCode().equals(HanteiKekkaCode.認定.getコード());
         set個別入力制御変更from判定結果(is入力可);
         if (!is入力可) {
-            clear個別表示欄Value判定結果以外();
+            clear個別表示欄今回入力内容判定結果以外();
         }
     }
 
@@ -273,10 +273,20 @@ public class ShinsakaiKekkaTorokuHandler {
         if (更新対象row == null) {
             return;
         }
-        更新対象row.setShinseiKubunLaw(new RString(法令申請区分.toString()));
-        更新対象row.setShinseiKubunLawCode(new RString(法令申請区分.getコード()));
-        更新対象row.setTorisageKubunTx(new RString(取下区分.toString()));
-        更新対象row.setTorisageKubunCode(取下区分.get取下げ区分コード().value());
+        if (法令申請区分 == null) {
+            更新対象row.setShinseiKubunLaw(RString.EMPTY);
+            更新対象row.setShinseiKubunLawCode(RString.EMPTY);
+        } else {
+            更新対象row.setShinseiKubunLaw(new RString(法令申請区分.toString()));
+            更新対象row.setShinseiKubunLawCode(new RString(法令申請区分.getコード()));
+        }
+        if (取下区分 == null) {
+            更新対象row.setTorisageKubunTx(RString.EMPTY);
+            更新対象row.setTorisageKubunCode(RString.EMPTY);
+        } else {
+            更新対象row.setTorisageKubunTx(new RString(取下区分.toString()));
+            更新対象row.setTorisageKubunCode(取下区分.get取下げ区分コード().value());
+        }
 
         RDate 二次判定日 = div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getValue();
         if (二次判定日 != null) {
@@ -299,11 +309,10 @@ public class ShinsakaiKekkaTorokuHandler {
             更新対象row.setJotaizo(RString.EMPTY);
             更新対象row.setJotaizoCode(RString.EMPTY);
         }
-        RString 判定結果 = div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedValue();
-        RString 判定結果コード = div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey();
-        if (!RString.isNullOrEmpty(判定結果)) {
-            更新対象row.setHanteiKekka(判定結果);
-            更新対象row.setHanteiKekkaCode(判定結果コード);
+        HanteiKekkaCode 判定結果 = get判定結果();
+        if (判定結果 != null) {
+            更新対象row.setHanteiKekka(判定結果.get名称());
+            更新対象row.setHanteiKekkaCode(判定結果.getコード());
         } else {
             更新対象row.setHanteiKekka(RString.EMPTY);
             更新対象row.setHanteiKekkaCode(RString.EMPTY);
@@ -394,24 +403,39 @@ public class ShinsakaiKekkaTorokuHandler {
      * 個別エリアの値をクリアします。
      *
      */
-    public void clear個別表示欄Value() {
-        div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
-        clear個別表示欄Value判定結果以外();
+    public void clear個別表示欄() {
+        clear個別表示欄今回入力外内容();
+        clear個別表示欄今回入力内容();
     }
 
     /**
-     * 個別エリアの判定結果以外の値をクリアします。
+     * 個別エリアの今回入力外内容の値をクリアします。
      */
-    public void clear個別表示欄Value判定結果以外() {
+    private void clear個別表示欄今回入力外内容() {
         div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().clearValue();
         div.getKobetsuHyojiArea().getTxtShinseiDay().clearValue();
         div.getKobetsuHyojiArea().getTxtBirthYMD().clearValue();
         div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().clearValue();
+        div.getKobetsuHyojiArea().getTxtIchijiHantei().clearValue();
+        div.getKobetsuHyojiArea().getTxtTokuteiShippei().clearValue();
+    }
+
+    /**
+     * 個別エリアの今回入力内容の値をクリアします。
+     *
+     */
+    private void clear個別表示欄今回入力内容() {
+        div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
+        clear個別表示欄今回入力内容判定結果以外();
+    }
+
+    /**
+     * 個別エリアの今回入力内容で判定結果以外の値をクリアします。
+     */
+    private void clear個別表示欄今回入力内容判定結果以外() {
         div.getKobetsuHyojiArea().getTxtShinseiKubunLaw().clearValue();
         div.getKobetsuHyojiArea().getTxtTorisageKubun().clearValue();
-        div.getKobetsuHyojiArea().getTxtIchijiHantei().clearValue();
         div.getKobetsuHyojiArea().getTxtNijiHanteiDay().clearValue();
-        div.getKobetsuHyojiArea().getTxtTokuteiShippei().clearValue();
         div.getKobetsuHyojiArea().getDdlJotaiZo().setSelectedKey(RString.EMPTY);
         div.getKobetsuHyojiArea().getDdlNijiHantei().setSelectedKey(YokaigoJotaiKubun09.なし.getコード());
         div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().clearValue();
@@ -505,16 +529,13 @@ public class ShinsakaiKekkaTorokuHandler {
      * @param hyojiSeigyoFlag 表示制御Flag
      */
     public void set個別入力制御変更from判定結果() {
-        boolean is入力可 = div.getDdlHanteiKekka().getSelectedKey().equals(HanteiKekkaCode.認定.getコード());
+        boolean is入力可 = (get判定結果() == HanteiKekkaCode.認定);
         set個別入力制御変更from判定結果(is入力可);
         if (is入力可 == false || is判定結果変更前入力可() == true) {
-            clear個別表示欄Value判定結果以外();
+            clear個別表示欄今回入力内容判定結果以外();
         }
         if (is入力可 == true || is判定結果変更前入力可() == false) {
-            RString 判定結果selectedKey = div.getDdlHanteiKekka().getSelectedKey();
             set個別内容(get更新対象row());
-            div.getDdlHanteiKekka().getSelectedKey().equals(判定結果selectedKey);
-
         }
     }
 
@@ -537,9 +558,7 @@ public class ShinsakaiKekkaTorokuHandler {
         div.getKobetsuHyojiArea().getBtnIchijiHanteiTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
         div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setReadOnly(!hyojiSeigyoFlag);
         div.getKobetsuHyojiArea().getBtnNinteiChosaJokyoShokai().setDisabled(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnCancel().setDisabled(!hyojiSeigyoFlag);
         div.getKobetsuHyojiArea().getBtnIchigoHantei().setDisabled(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnToroku().setDisabled(!hyojiSeigyoFlag);
     }
 
     /**
@@ -715,6 +734,16 @@ public class ShinsakaiKekkaTorokuHandler {
     }
 
     /**
+     * 判定結果を返します。個別入力時用です。
+     *
+     * @return 法令申請区分
+     */
+    public HanteiKekkaCode get判定結果() {
+        RString key = div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey();
+        return HanteiKekkaCode.toValue(key);
+    }
+
+    /**
      * 申請時申請区分を返します。個別入力時用です。
      *
      * @return 法令申請区分
@@ -822,6 +851,9 @@ public class ShinsakaiKekkaTorokuHandler {
      * @param isDisabled {@code true}のとき非活性
      */
     public void set状態像Deisabled(boolean isDisabled) {
+        if (isDisabled) {
+            div.getDdlJotaiZo().setSelectedKey(RString.EMPTY);
+        }
         div.getDdlJotaiZo().setDisabled(isDisabled);
     }
 

@@ -96,7 +96,7 @@ public class ShinsakaiKekkaToroku {
         List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList = manager.get審査会委員一覧検索(開催番号).records();
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         handler.onLoad(headList, iChiRanList);
-        handler.clear個別表示欄Value();
+        handler.clear個別表示欄();
         handler.set個別表示欄入力不可();
         List<ShinsakaiWariateJoho> yoteiJohoList = manager.get介護認定審査会割当情報(開催番号).records();
         Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
@@ -130,6 +130,9 @@ public class ShinsakaiKekkaToroku {
     public ResponseData onClick_SelectButton(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         dgTaishoshaIchiran_Row 選択行 = div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem();
+        if (選択行 == null) {
+            return ResponseData.of(div).respond();
+        }
         dgTaishoshaIchiran_Row 更新対象行 = handler.get更新対象row();
         if (更新対象行 == null || !handler.hasChange()) {
             handler.set個別表示欄入力可();
@@ -175,7 +178,7 @@ public class ShinsakaiKekkaToroku {
         TorisageKubun 取下区分 = get取下区分(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
         handler.set更新対象RowFrom個別表示内容(法令申請区分, 取下区分);
 
-        handler.clear個別表示欄Value();
+        handler.clear個別表示欄();
         handler.set個別表示欄入力不可();
         return ResponseData.of(div).respond();
     }
@@ -188,7 +191,7 @@ public class ShinsakaiKekkaToroku {
      */
     public ResponseData onClick_btnCancel(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
-        handler.clear個別表示欄Value();
+        handler.clear個別表示欄();
         handler.set個別表示欄入力不可();
         return ResponseData.of(div).respond();
     }
