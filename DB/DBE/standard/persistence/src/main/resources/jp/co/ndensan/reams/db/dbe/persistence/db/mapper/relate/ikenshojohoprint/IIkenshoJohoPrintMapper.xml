@@ -225,7 +225,13 @@
         ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
         LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON DbT5101."shinseishoKanriNo"=DbT5301."shinseishoKanriNo"
-        AND DbT5301."ikenshoIraiRirekiNo"=(SELECT MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho")
+        AND 
+        DbT5301."ikenshoIraiRirekiNo" =  (SELECT
+        MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo")
+        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        )
         AND DbT5301."logicalDeletedFlag" = FALSE
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
         ON DbT5101."shujiiIryokikanCode"=DbT5911."shujiiIryokikanCode"
@@ -315,7 +321,12 @@
         ON
         DbT5301."shinseishoKanriNo" =  DbT5101."shinseishoKanriNo"
         AND 
-        DbT5301."ikenshoIraiRirekiNo" =  (SELECT MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" )
+        DbT5301."ikenshoIraiRirekiNo" =  (SELECT
+        MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo")
+        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        )
         AND 
         DbT5301."isDeleted" = FALSE
         LEFT JOIN
