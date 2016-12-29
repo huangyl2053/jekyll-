@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class NinteiChosaIraiValidationHandler {
 
     private static final RString MIWARITSUKE = new RString("未割付");
+    private static final RString 提出期限_2 = new RString("2");
 
     /**
      * 割付済申請者が未指定かを検査します。
@@ -67,6 +68,25 @@ public class NinteiChosaIraiValidationHandler {
         return pairs;
     }
 
+    /**
+     * 提出期限を共通日付を設定にした場合に発行日≧提出期限になっていないかを検査します。
+     *
+     * @param pairs 提出期限を共通日付を設定にした時に発行日≧提出期限になっている場合、このクラスにバリデーションメッセージが付与される。
+     * @param div 認定調査依頼Div
+     * @return 引数で受け取ったpairs
+     */
+    public ValidationMessageControlPairs validate提出期限が発行日より後(ValidationMessageControlPairs pairs, NinteiChosaIraiDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChosaIraiSpec.提出期限が発行日より後チェック)
+                .thenAdd(NinteiChosaIraiValidationMessage.提出期限が発行日以前).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NinteiChosaIraiValidationMessage.提出期限が発行日以前,
+                div.getTxtkigenymd())
+                .build().check(messages));
+        return pairs;
+    }
+
     private enum NinnteiChosaIraiSpec implements IPredicate<NinteiChosaIraiDiv> {
 
         割付済申請者指定チェック {
@@ -99,13 +119,27 @@ public class NinteiChosaIraiValidationHandler {
                         }
                         return true;
                     }
+                },
+        提出期限が発行日より後チェック {
+                    /**
+                     * 提出期限を共通日付を設定にした場合に提出期限が発行日より後になっているかのチェックです。
+                     *
+                     * @param div NinteiChosaIraiDiv
+                     * @return true:提出期限が発行日より後になっている、false:提出期限が発行日以前になっている。
+                     */
+                    @Override
+                    public boolean apply(NinteiChosaIraiDiv div) {
+                        return div.getRadkigen().getSelectedKey().equals(提出期限_2)
+                        && div.getTxthokkoymd().getValue().isBefore(div.getTxtkigenymd().getValue());
+                    }
                 }
     }
 
     private static enum NinteiChosaIraiValidationMessage implements IValidationMessage {
 
         割付済申請者未指定(DbeErrorMessages.割付済申請者未指定),
-        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付);
+        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
+        提出期限が発行日以前(DbeErrorMessages.提出期限が発行日以前);
         private final Message message;
 
         private NinteiChosaIraiValidationMessage(IMessageGettable message) {

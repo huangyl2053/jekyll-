@@ -547,6 +547,7 @@ public class NinteiChosaIrai {
         NinteiChosaIraiValidationHandler handler = new NinteiChosaIraiValidationHandler();
         pairs = handler.validate割付済申請者未指定(pairs, div);
         pairs = handler.validate認定調査依頼未割付(pairs, div);
+        pairs = handler.validate提出期限が発行日より後(pairs, div);
         return ResponseData.of(div).addValidationMessages(pairs).respond();
     }
 
