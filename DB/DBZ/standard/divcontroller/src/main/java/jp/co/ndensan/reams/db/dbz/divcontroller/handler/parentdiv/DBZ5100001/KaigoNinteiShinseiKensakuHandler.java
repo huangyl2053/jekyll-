@@ -41,6 +41,7 @@ public class KaigoNinteiShinseiKensakuHandler {
     private static final RString 再検索 = new RString("btnResearch");
     private static final RString 検索 = new RString("btnSearch");
     private static final RString 検索状態 = new RString("検索状態");
+    private static final RString MINASHI_FLAG_KEY = new RString("True");
     private static final long NUM = 100L;
 
     /**
@@ -57,6 +58,7 @@ public class KaigoNinteiShinseiKensakuHandler {
      *
      */
     public void initialize() {
+        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().setMode_MinashiType(NinteiShinseishaFinderDiv.MinashiType.NotMinashi);
         div.getCcdNinteiShinseishaFinder().initialize();
         div.getTxtMaxKensu().setValue(Decimal.valueOf(NUM));
     }
@@ -148,8 +150,7 @@ public class KaigoNinteiShinseiKensakuHandler {
             dataGrid.setSelectedRowCount(介護認定申請情報受給.totalCount());
             div.getDgKensakuKekkaIchiran().setGridSetting(dataGrid);
             div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
-            div.getBtnJokenClear().setDisplayNone(true);
-            div.getTxtMaxKensu().setDisplayNone(true);
+            setClearbtnAndMaxkensuDisplayNone(true);
         } else {
             div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
         }
@@ -215,8 +216,7 @@ public class KaigoNinteiShinseiKensakuHandler {
             dataGrid.setSelectedRowCount(介護認定申請情報認定.totalCount());
             div.getDgKensakuKekkaIchiran().setGridSetting(dataGrid);
             div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
-            div.getBtnJokenClear().setDisplayNone(true);
-            div.getTxtMaxKensu().setDisplayNone(true);
+            setClearbtnAndMaxkensuDisplayNone(true);
         } else {
 
             div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
@@ -425,6 +425,26 @@ public class KaigoNinteiShinseiKensakuHandler {
                         is経過日数Form,
                         is経過日数To
                         );
+    }
+
+    /**
+     * みなしフラグを選択します。
+     *
+     */
+    public void setMinashiFlagCheck() {
+        List<RString> selectedItems = new ArrayList();
+        selectedItems.add(MINASHI_FLAG_KEY);
+        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getChkMinashiFlag().setSelectedItemsByKey(selectedItems);
+    }
+
+    /**
+     * 「条件をクリアする」ボタンと最大表示件数の表示かを設定します。
+     *
+     * @param flag 表示フラグ
+     */
+    public void setClearbtnAndMaxkensuDisplayNone(boolean flag) {
+        div.getBtnJokenClear().setDisplayNone(flag);
+        div.getTxtMaxKensu().setDisplayNone(flag);
     }
 
     private RString nullTOEmpty(RString 項目) {

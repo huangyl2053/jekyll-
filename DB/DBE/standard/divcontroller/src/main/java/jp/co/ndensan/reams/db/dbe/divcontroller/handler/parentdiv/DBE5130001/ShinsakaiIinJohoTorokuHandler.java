@@ -67,7 +67,6 @@ public class ShinsakaiIinJohoTorokuHandler {
      * 画面初期化、画面項目に設定されている値をクリアする
      */
     public void load() {
-        kensakuJokenDiv_init(new RString("key1"));
         div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
@@ -414,14 +413,6 @@ public class ShinsakaiIinJohoTorokuHandler {
 
     }
 
-    /**
-     * 表示条件をselectedKeyでセットする。
-     *
-     * @param selectedKey RString
-     */
-    public void kensakuJokenDiv_init(RString selectedKey) {
-        div.getRadHyojiJoken().setSelectedKey(selectedKey);
-    }
 
     /**
      * 審査会委員一覧情報は初期状態にセットする。

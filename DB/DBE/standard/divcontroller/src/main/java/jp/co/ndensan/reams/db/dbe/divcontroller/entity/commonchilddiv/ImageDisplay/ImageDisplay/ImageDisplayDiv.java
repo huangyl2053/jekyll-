@@ -34,14 +34,14 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
     private Label lblMask;
     @JsonProperty("imgMask")
     private DynamicImage imgMask;
+    @JsonProperty("lblNoImage")
+    private Label lblNoImage;
     @JsonProperty("btnBefore")
     private Button btnBefore;
     @JsonProperty("btnBack")
     private Button btnBack;
     @JsonProperty("btnAfterImg")
     private Button btnAfterImg;
-    @JsonProperty("lblNoImage")
-    private Label lblNoImage;
     @JsonProperty("HdnImageDisplay")
     private RString HdnImageDisplay;
     @JsonProperty("hdnImageLocalCopyPath")
@@ -135,6 +135,24 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
     }
 
     /*
+     * getlblNoImage
+     * @return lblNoImage
+     */
+    @JsonProperty("lblNoImage")
+    public Label getLblNoImage() {
+        return lblNoImage;
+    }
+
+    /*
+     * setlblNoImage
+     * @param lblNoImage lblNoImage
+     */
+    @JsonProperty("lblNoImage")
+    public void setLblNoImage(Label lblNoImage) {
+        this.lblNoImage = lblNoImage;
+    }
+
+    /*
      * getbtnBefore
      * @return btnBefore
      */
@@ -186,24 +204,6 @@ public class ImageDisplayDiv extends Panel implements IImageDisplayDiv {
     @JsonProperty("btnAfterImg")
     public void setBtnAfterImg(Button btnAfterImg) {
         this.btnAfterImg = btnAfterImg;
-    }
-
-    /*
-     * getlblNoImage
-     * @return lblNoImage
-     */
-    @JsonProperty("lblNoImage")
-    public Label getLblNoImage() {
-        return lblNoImage;
-    }
-
-    /*
-     * setlblNoImage
-     * @param lblNoImage lblNoImage
-     */
-    @JsonProperty("lblNoImage")
-    public void setLblNoImage(Label lblNoImage) {
-        this.lblNoImage = lblNoImage;
     }
 
     /*

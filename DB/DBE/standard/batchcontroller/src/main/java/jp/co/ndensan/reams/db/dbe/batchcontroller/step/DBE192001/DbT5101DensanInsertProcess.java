@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.renkeidatatorikomi.RenkeiDataTor
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -36,6 +38,8 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> dbT5101Writer;
     @BatchWriter
     BatchPermanentTableWriter<DbT5123NinteiKeikakuJohoEntity> dbT5123Writer;
+    @BatchWriter
+    BatchPermanentTableWriter<DbT5105NinteiKanryoJohoEntity> dbT5105Writer;
 
     @Override
     protected void initialize() {
@@ -46,6 +50,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     protected void createWriter() {
         dbT5101Writer = new BatchPermanentTableWriter(DbT5101NinteiShinseiJohoEntity.class);
         dbT5123Writer = new BatchPermanentTableWriter(DbT5123NinteiKeikakuJohoEntity.class);
+        dbT5105Writer = new BatchPermanentTableWriter(DbT5105NinteiKanryoJohoEntity.class);
     }
 
     @Override
@@ -63,9 +68,9 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
 
         dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
         dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
-    }
-
-    private boolean isEquals(RString value1, RString value2) {
-        return !RString.isNullOrEmpty(value1) && value1.equals(value2);
+        if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.職権.getコード()) 
+                || entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {
+            dbT5105Writer.insert(business.getDbT5105Entity(entity));
+        }
     }
 }

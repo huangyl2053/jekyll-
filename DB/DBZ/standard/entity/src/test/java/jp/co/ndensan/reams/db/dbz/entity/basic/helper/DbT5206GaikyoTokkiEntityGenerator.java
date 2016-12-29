@@ -5,7 +5,9 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,6 +18,7 @@ public final class DbT5206GaikyoTokkiEntityGenerator {
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("900001");
     public static final int DEFAULT_認定調査依頼履歴番号 = 1;
     public static final RString DEFAULT_概況特記テキストイメージ区分 = new RString("概況特記テキストイメージ区分");
+    public static final Code DEFAULT_原本マスク区分 = new Code(GenponMaskKubun.原本.getコード());
     public static final RString DEFAULT_住宅改修 = new RString("住宅改修");
     public static final RString DEFAULT_市町村特別給付サービス種類名 = new RString("市町村特別給付サービス種類");
     public static final RString DEFAULT_介護保険給付以外の在宅サービス種類名 = new RString("介護保険給付以外の在宅サービス種類名");

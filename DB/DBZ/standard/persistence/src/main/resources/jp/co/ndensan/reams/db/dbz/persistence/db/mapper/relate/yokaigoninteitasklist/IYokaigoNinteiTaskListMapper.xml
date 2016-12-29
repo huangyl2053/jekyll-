@@ -743,6 +743,9 @@
             AND DbT5301."ikenshoShutsuryokuYMD" is NOT NULL
             AND DbT5301."ikenshoShutsuryokuYMD"  <![CDATA[<>]]> ''
         </if>
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
     </select>
     <select resultOrdered="true" id="get意見書依頼" resultMap="resultMap_IKnSyoiRaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
@@ -869,6 +872,9 @@
             AND DbT5301."iraishoShutsuryokuYMD"  <![CDATA[<>]]> ''
             AND DbT5301."ikenshoShutsuryokuYMD" is NOT NULL
             AND DbT5301."ikenshoShutsuryokuYMD"  <![CDATA[<>]]> ''
+        </if>
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY  DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",

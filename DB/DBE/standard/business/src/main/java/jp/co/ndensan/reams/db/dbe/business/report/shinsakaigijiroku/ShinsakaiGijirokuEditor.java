@@ -103,7 +103,7 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
         source.shinsakaiikenHenkoCount = new RString(item.get審査会意見を付した件数());
         source.sabisuShurui1 = RString.EMPTY;
         source.sabisuShurui2 = RString.EMPTY;
-
+        source.yoteiCount = new RString(item.get審査会情報().getHanteiYoteiSu());
         return source;
     }
 }

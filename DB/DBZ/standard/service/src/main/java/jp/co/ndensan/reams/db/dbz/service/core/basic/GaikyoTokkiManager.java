@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5206GaikyoTokkiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -46,21 +47,25 @@ public class GaikyoTokkiManager {
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @param 原本マスク区分 原本マスク区分
      * @return GaikyoTokki
      */
     @Transaction
     public GaikyoTokki get認定調査票_概況特記(
             ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            RString 概況特記テキストイメージ区分) {
+            RString 概況特記テキストイメージ区分,
+            Code 原本マスク区分) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
         requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
+        requireNonNull(原本マスク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク区分"));
 
         DbT5206GaikyoTokkiEntity entity = dac.selectByKey(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                概況特記テキストイメージ区分);
+                概況特記テキストイメージ区分,
+                原本マスク区分);
         if (entity == null) {
             return null;
         }

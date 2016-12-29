@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -72,14 +73,14 @@ public class NinteishinseibiHandler {
 
         row.setJyoutai(new RString("変更"));
         row.setShichosonMeisho(entity.get保険者名());
-        row.setNinteiShinseiYMD(entity.get認定申請年月日());
+        row.setNinteiShinseiYMD(create日付文字列(entity.get認定申請年月日()));
         row.setHihokenshaNo(entity.get証記載保険者番号());
         row.setHihokenshaName(entity.get被保険者氏名());
         row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.to名称OrDefault(entity.get認定申請区分申請時コード(), RString.EMPTY));
-        row.setNinteichosaIraiKanryoYMD(entity.get認定調査依頼完了年月日());
+        row.setNinteichosaIraiKanryoYMD(create日付文字列(entity.get認定調査依頼完了年月日()));
         row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
         row.setNinteiChosainCode(entity.get認定調査員コード());
-        row.setNinteichosaJisshiYMD(entity.get認定調査実施年月日());
+        row.setNinteichosaJisshiYMD(create日付文字列(entity.get認定調査実施年月日()));
         row.setShinseishoKanriNo(entity.get申請書管理番号());
         row.setNinteichosaIraiRirekiNo(entity.get認定調査依頼履歴番号());
         row.setKoroshoIfShikibetsuCode(entity.get厚労省IF識別コード());
@@ -109,7 +110,7 @@ public class NinteishinseibiHandler {
             row.setNinteichousaIraiKubunCode(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         }
         row.setNinteichosaIraiKaisu(entity.get認定調査回数());
-        row.setNinteichosaJuryoYMD(entity.get認定調査受領年月日());
+        row.setNinteichosaJuryoYMD(create日付文字列(entity.get認定調査受領年月日()));
         row.setNinteiChosaKubunCode(entity.get認定調査区分コード());
         row.setChosaJisshiBashoCode(entity.get認定調査実施場所コード());
         row.setChosaJisshiBashoMeisho(entity.get認定調査実施場所());
@@ -123,28 +124,53 @@ public class NinteishinseibiHandler {
         row.setRiyoShisetsuTelNo(entity.get利用施設電話番号());
         row.setRiyoShisetsuYubinNo(entity.get利用施設郵便番号());
         row.setTokki(entity.get特記());
-        row.setTokkijikoUketsukeYMD(entity.get認定調査特記事項受付年月日());
-        row.setTokkijikoJuryoYMD(entity.get認定調査特記事項受領年月日());
+        row.setTokkijikoUketsukeYMD(create日付文字列(entity.get認定調査特記事項受付年月日()));
+        row.setTokkijikoJuryoYMD(create日付文字列(entity.get認定調査特記事項受領年月日()));
 
         //5207
-        row.setServiceJokyoRemban(createCommaSplitString(createサービス状況連番List(entity)));
-        row.setServiceJokyo(createCommaSplitString(createサービス状況List(entity)));
+        RString サービス状況連番 = createCommaSplitString(createサービス状況連番List(entity));
+        row.setServiceJokyoRemban(サービス状況連番);
+        if (サービス状況連番.isEmpty()) {
+            row.setServiceJokyo(RString.EMPTY);
+        } else {
+            row.setServiceJokyo(createCommaSplitString(createサービス状況List(entity)));
+        }
 
         //5208
-        row.setServiceJokyoFlagRemban(createCommaSplitString(createサービス状況フラグ連番List(entity)));
-        row.setServiceJokyoFlag(createCommaSplitString(createサービス状況フラグList(entity)));
+        RString サービス状況フラグ連番 = createCommaSplitString(createサービス状況フラグ連番List(entity));
+        row.setServiceJokyoFlagRemban(サービス状況フラグ連番);
+        if (サービス状況フラグ連番.isEmpty()) {
+            row.setServiceJokyoFlag(RString.EMPTY);
+        } else {
+            row.setServiceJokyoFlag(createCommaSplitString(createサービス状況フラグList(entity)));
+        }
 
         //5209
-        row.setServiceJokyoKinyuRemban(createCommaSplitString(createサービス状況記入連番List(entity)));
-        row.setServiceJokyoKinyu(createCommaSplitString(createサービス状況記入List(entity)));
+        RString サービス状況記入連番 = createCommaSplitString(createサービス状況記入連番List(entity));
+        row.setServiceJokyoKinyuRemban(サービス状況記入連番);
+        if (サービス状況記入連番.isEmpty()) {
+            row.setServiceJokyoKinyu(RString.EMPTY);
+        } else {
+            row.setServiceJokyoKinyu(createCommaSplitString(createサービス状況記入List(entity)));
+        }
 
         //5210
-        row.setShisetsuRiyoFlagRemban(createCommaSplitString(create施設利用連番List(entity)));
-        row.setShisetsuRiyoFlag(createCommaSplitString(create施設利用フラグList(entity)));
+        RString 施設利用連番 = createCommaSplitString(create施設利用連番List(entity));
+        row.setShisetsuRiyoFlagRemban(施設利用連番);
+        if (施設利用連番.isEmpty()) {
+            row.setShisetsuRiyoFlag(RString.EMPTY);
+        } else {
+            row.setShisetsuRiyoFlag(createCommaSplitString(create施設利用フラグList(entity)));
+        }
 
         //5211
-        row.setRemban(createCommaSplitString(create調査項目連番List(entity)));
-        row.setResearchItem(createCommaSplitString(create調査項目内容List(entity)));
+        RString 調査項目連番 = createCommaSplitString(create調査項目連番List(entity));
+        row.setRemban(調査項目連番);
+        if (調査項目連番.isEmpty()) {
+            row.setResearchItem(RString.EMPTY);
+        } else {
+            row.setResearchItem(createCommaSplitString(create調査項目内容List(entity)));
+        }
 
         //特記事項
         row.setNinteichosaTokkijikoNoRemban(createCommaSplitString(create特記事項表示文字列List(特記事項List)));
@@ -157,8 +183,19 @@ public class NinteishinseibiHandler {
 
     }
 
+    private RString create日付文字列(RString 年月日) {
+        if (RString.isNullOrEmpty(年月日)) {
+            return RString.EMPTY;
+        }
+        FlexibleDate date = new FlexibleDate(年月日);
+        return date.wareki().eraType(EraType.KANJI_RYAKU).toDateString();
+    }
+
     private List<RString> createサービス状況連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> サービス状況連番List = new ArrayList<>();
+        if (entity.getサービスの状況連番01().isEmpty()) {
+            return サービス状況連番List;
+        }
         サービス状況連番List.add(entity.getサービスの状況連番01());
         サービス状況連番List.add(entity.getサービスの状況連番02());
         サービス状況連番List.add(entity.getサービスの状況連番03());
@@ -209,6 +246,9 @@ public class NinteishinseibiHandler {
 
     private List<RString> createサービス状況フラグ連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> サービス状況フラグ連番List = new ArrayList<>();
+        if (entity.getサービスの状況フラグ連番().isEmpty()) {
+            return サービス状況フラグ連番List;
+        }
         サービス状況フラグ連番List.add(entity.getサービスの状況フラグ連番());
         return サービス状況フラグ連番List;
     }
@@ -221,6 +261,9 @@ public class NinteishinseibiHandler {
 
     private List<RString> createサービス状況記入連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> サービス状況記入連番List = new ArrayList<>();
+        if (entity.get記入項目連番01().isEmpty()) {
+            return サービス状況記入連番List;
+        }
         サービス状況記入連番List.add(entity.get記入項目連番01());
         サービス状況記入連番List.add(entity.get記入項目連番02());
         return サービス状況記入連番List;
@@ -235,6 +278,9 @@ public class NinteishinseibiHandler {
 
     private List<RString> create施設利用連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> 施設利用連番List = new ArrayList<>();
+        if (entity.get施設利用連番01().isEmpty()) {
+            return 施設利用連番List;
+        }
         施設利用連番List.add(entity.get施設利用連番01());
         施設利用連番List.add(entity.get施設利用連番02());
         施設利用連番List.add(entity.get施設利用連番03());
@@ -263,6 +309,9 @@ public class NinteishinseibiHandler {
 
     private List<RString> create調査項目連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> 調査項目連番List = new ArrayList<>();
+        if (entity.get調査項目連番01().isEmpty()) {
+            return 調査項目連番List;
+        }
         調査項目連番List.add(entity.get調査項目連番01());
         調査項目連番List.add(entity.get調査項目連番02());
         調査項目連番List.add(entity.get調査項目連番03());

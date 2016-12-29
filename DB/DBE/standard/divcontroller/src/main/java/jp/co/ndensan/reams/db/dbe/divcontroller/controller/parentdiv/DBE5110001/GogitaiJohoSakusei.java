@@ -113,7 +113,6 @@ public class GogitaiJohoSakusei {
     public ResponseData<GogitaiJohoSakuseiDiv> onLoad(GogitaiJohoSakuseiDiv div) {
         FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_KANRYO);
         FlowParameterAccessor.merge(fp);
-        div.setWfParameter(WORKFLOW_KEY_KANRYO);
         getHandler(div).load();
         getHandler(div).init最大表示件数();
         boolean is現在有効な合議体のみ = false;
@@ -588,7 +587,6 @@ public class GogitaiJohoSakusei {
     public ResponseData<DBE511001_GogitaiIkkatuParameter> onClick_btnBatchRegister(GogitaiJohoSakuseiDiv div) {
         FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_BATCH);
         FlowParameterAccessor.merge(fp);
-        div.setWfParameter(WORKFLOW_KEY_BATCH);
         ResponseData<DBE511001_GogitaiIkkatuParameter> responseData = new ResponseData<>();
         DBE511001_GogitaiIkkatuParameter batchParam = new DBE511001_GogitaiIkkatuParameter();
         batchParam.setSharedFileID(RDateTime.parse(div.getHiddenFileId().toString()));

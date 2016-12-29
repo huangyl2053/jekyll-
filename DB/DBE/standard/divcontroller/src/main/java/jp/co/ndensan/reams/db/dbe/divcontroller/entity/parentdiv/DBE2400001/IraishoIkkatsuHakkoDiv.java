@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IraishoIkkatsuHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -157,23 +157,13 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtIraibiFrom() {
-        return this.getNinteiChosa().getNinteichosaKensakuJoken().getTxtIraibiFrom();
+    public TextBoxDateRange getTxtNinteiChosaIraibi() {
+        return this.getNinteiChosa().getNinteichosaKensakuJoken().getTxtNinteiChosaIraibi();
     }
 
     @JsonIgnore
-    public void  setTxtIraibiFrom(TextBoxDate txtIraibiFrom) {
-        this.getNinteiChosa().getNinteichosaKensakuJoken().setTxtIraibiFrom(txtIraibiFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtIraibiTo() {
-        return this.getNinteiChosa().getNinteichosaKensakuJoken().getTxtIraibiTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtIraibiTo(TextBoxDate txtIraibiTo) {
-        this.getNinteiChosa().getNinteichosaKensakuJoken().setTxtIraibiTo(txtIraibiTo);
+    public void  setTxtNinteiChosaIraibi(TextBoxDateRange txtNinteiChosaIraibi) {
+        this.getNinteiChosa().getNinteichosaKensakuJoken().setTxtNinteiChosaIraibi(txtNinteiChosaIraibi);
     }
 
     @JsonIgnore
@@ -187,16 +177,6 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkNinteiChosahyo() {
-        return this.getNinteiChosa().getNinteichosaKensakuJoken().getChkNinteiChosahyo();
-    }
-
-    @JsonIgnore
-    public void  setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
-        this.getNinteiChosa().getNinteichosaKensakuJoken().setChkNinteiChosahyo(chkNinteiChosahyo);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtChosaDispMax() {
         return this.getNinteiChosa().getNinteichosaKensakuJoken().getTxtChosaDispMax();
     }
@@ -204,6 +184,16 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     @JsonIgnore
     public void  setTxtChosaDispMax(TextBoxNum txtChosaDispMax) {
         this.getNinteiChosa().getNinteichosaKensakuJoken().setTxtChosaDispMax(txtChosaDispMax);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkNinteiChosahyo() {
+        return this.getNinteiChosa().getNinteichosaKensakuJoken().getChkNinteiChosahyo();
+    }
+
+    @JsonIgnore
+    public void  setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
+        this.getNinteiChosa().getNinteichosaKensakuJoken().setChkNinteiChosahyo(chkNinteiChosahyo);
     }
 
     @JsonIgnore
@@ -462,23 +452,13 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShujiiIkenshoSakuseiIraibiFrom() {
-        return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getTxtShujiiIkenshoSakuseiIraibiFrom();
+    public TextBoxDateRange getTxtShujiiIkenshoSakuseiIraibi() {
+        return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getTxtShujiiIkenshoSakuseiIraibi();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIkenshoSakuseiIraibiFrom(TextBoxDate txtShujiiIkenshoSakuseiIraibiFrom) {
-        this.getShujiiIkensho().getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibiFrom(txtShujiiIkenshoSakuseiIraibiFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtShujiiIkenshoSakuseiIraibiTo() {
-        return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getTxtShujiiIkenshoSakuseiIraibiTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShujiiIkenshoSakuseiIraibiTo(TextBoxDate txtShujiiIkenshoSakuseiIraibiTo) {
-        this.getShujiiIkensho().getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibiTo(txtShujiiIkenshoSakuseiIraibiTo);
+    public void  setTxtShujiiIkenshoSakuseiIraibi(TextBoxDateRange txtShujiiIkenshoSakuseiIraibi) {
+        this.getShujiiIkensho().getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibi(txtShujiiIkenshoSakuseiIraibi);
     }
 
     @JsonIgnore

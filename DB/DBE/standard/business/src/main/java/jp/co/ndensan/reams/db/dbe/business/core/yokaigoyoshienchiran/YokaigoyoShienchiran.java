@@ -45,7 +45,7 @@ public class YokaigoyoShienchiran {
                 ? Code.EMPTY : new Code(entity.get厚労省認定ソフトバージョン().toString()));
         item.setNijiHanteiYokaigoJotaiKubun(entity.get前回二次判定結果コード() == null
                 ? Code.EMPTY : new Code(entity.get前回二次判定結果コード().toString()));
-        item.setNijiHanteiNinteiYukoKikan(entity.get前回月数());
+        item.setNijiHanteiNinteiYukoKikan(new RString(entity.get前回月数()));
         item.setNijiHanteiNinteiYukoKaishiYMD(entity.get前回認定有効期間開始日());
         item.setNijiHanteiNinteiYukoShuryoYMD(entity.get前回認定有効期間終了日());
         item.setNinteiShinseiYMD(entity.get認定申請年月日());

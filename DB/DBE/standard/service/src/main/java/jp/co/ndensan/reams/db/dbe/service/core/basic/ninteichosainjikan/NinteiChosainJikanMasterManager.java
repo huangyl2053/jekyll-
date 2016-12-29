@@ -90,7 +90,11 @@ public class NinteiChosainJikanMasterManager {
         List<DbT5224ChikuShichosonEntity> dbT5224EntityList = new ArrayList();
         ShichosonSecurityJoho 自市町村情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         if (自市町村情報 != null && 自市町村情報.get市町村情報().get市町村コード() != null) {
-            dbT5224EntityList = dbt5224dac.selectByShichosonCode(自市町村情報.get市町村情報().get市町村コード());
+            if (null != 自市町村情報.get市町村情報().get市町村識別ID() && 自市町村情報.get市町村情報().get市町村識別ID().is広域s()) {
+                dbT5224EntityList = dbt5224dac.selectAll();
+            } else {
+                dbT5224EntityList = dbt5224dac.selectByShichosonCode(自市町村情報.get市町村情報().get市町村コード());
+            }
         }
         if (dbT5224EntityList == null || dbT5224EntityList.isEmpty()) {
             return SearchResult.of(Collections.<ChikuShichoson>emptyList(), 0, false);

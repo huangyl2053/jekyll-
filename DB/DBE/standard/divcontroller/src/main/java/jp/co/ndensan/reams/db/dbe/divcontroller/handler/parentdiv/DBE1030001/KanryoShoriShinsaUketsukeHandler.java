@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -21,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTu
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
-import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -127,7 +124,8 @@ public class KanryoShoriShinsaUketsukeHandler {
 
     private SearchResult<ShinSaKeTuKeBusiness> get審査受付List() {
         Decimal 最大件数 = div.getTxtMaxCount().getValue();
-        LasdecCode 市町村コード = get市町村コード();
+        LasdecCode 市町村コード
+                = div.getNinteiShinseiJohoTorokuKanryo().getCcdHokensya().getSelectedItem().get市町村コード();
         SearchResult<ShinSaKeTuKeBusiness> 審査受付List = YokaigoNinteiTaskListFinder.createInstance().
                 get審査受付モード(
                         YokaigoNinteiTaskListParameter.createParameter(
@@ -154,14 +152,5 @@ public class KanryoShoriShinsaUketsukeHandler {
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
                 new RString("申請書管理番号"), 申請書管理番号));
         AccessLogger.log(AccessLogType.照会, personalData);
-    }
-
-    private LasdecCode get市町村コード() {
-        List<HokenshaSummary> hokenshaList = new ArrayList<>(
-                HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護認定).getAll());
-        if (!hokenshaList.isEmpty() && hokenshaList.size() == 1) {
-            return hokenshaList.get(0).get市町村コード();
-        }
-        return LasdecCode.EMPTY;
     }
 }

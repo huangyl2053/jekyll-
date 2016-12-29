@@ -55,6 +55,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 完了処理・主治医意見書入手のクラスです。
@@ -273,6 +275,7 @@ public class Ikenshoget {
             RealInitialLocker.release(排他キー);
             div.getCcdKanryoMsg().setMessage(new RString("基本運用・主治医意見書入手の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Kanryo")));
             return ResponseData.of(div).setState(DBE2070001StateName.完了);
         }
         return ResponseData.of(div).respond();

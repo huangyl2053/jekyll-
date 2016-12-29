@@ -299,6 +299,7 @@ public class ShinsaKaiKekkaTorokuHandler {
                         ? RString.EMPTY : business.get二次判定要介護状態区分コード().value());
                 row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
                 row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+                row.getHiddenYukoKikan().setValue(new Decimal(business.get二次判定認定有効期間()));
                 rowList.add(row);
                 i++;
             }

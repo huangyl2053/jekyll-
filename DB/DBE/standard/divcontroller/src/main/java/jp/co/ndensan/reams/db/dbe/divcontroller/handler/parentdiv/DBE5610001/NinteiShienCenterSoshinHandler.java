@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteiShienCenterSoshinHandler {
 
     private static final RString 未出力 = new RString("key0");
+    private static final RString 出力する = new RString("key0");
     private final NinteiShienCenterSoshinDiv div;
 
     /**
@@ -33,7 +34,8 @@ public class NinteiShienCenterSoshinHandler {
      * 初期化の項目設定処理です。
      */
     public void onLoad() {
-        div.getRadDataShutsuryoku().setSelectedKey(new RString("key0"));
+        div.getRadDataShutsuryoku().setSelectedKey(未出力);
+        div.getRadTennyuShiboJoho().setSelectedKey(出力する);
         RDate システム日付 = RDate.getNowDate();
         div.getTxtNijiHanteibi().clearFromValue();
         div.getTxtNijiHanteibi().setToValue(システム日付);

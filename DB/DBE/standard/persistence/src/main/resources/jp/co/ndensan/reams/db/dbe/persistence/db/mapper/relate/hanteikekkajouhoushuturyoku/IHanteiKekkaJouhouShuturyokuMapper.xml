@@ -544,7 +544,8 @@
         <include refid="QueryParts_NinteiChousaList" />
         ORDER BY
         DbT5501."shinsakaiKaisaiNo",
-        DbT5101."ninteiShinseiYMD"
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaNo"
         <if test="useLimitCount">
             LIMIT #{limitCount}
         </if>

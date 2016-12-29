@@ -148,7 +148,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         item.set通知文2(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号).get(2));
         item.set開催予定年月日(paramter.getShinsakaiKaisaiYoteiYMD());
         item.set予定時刻(paramter.getShinsakaiKaishiYoteiTime());
-        item.set開催会場(paramter.getShinsakaiKaisaiBashoName());
+        item.set開催会場(paramter.getShinsakaiKaisaiBasho());
         item.set合議体(new RString(paramter.getGogitaiNo()));
         if (委員情報 != null) {
             if (委員情報.getShinsakaiIinShimei() != null && !委員情報.getShinsakaiIinShimei().isEmpty()) {

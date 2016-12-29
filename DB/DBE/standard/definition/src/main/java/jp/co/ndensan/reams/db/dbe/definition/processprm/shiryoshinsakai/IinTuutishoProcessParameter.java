@@ -21,38 +21,38 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class IinTuutishoProcessParameter implements IBatchProcessParameter {
 
     private RString shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiBasho;
     private RString shuturyokuSutairu;
     private RString printHou;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
-    private RString shinsakaiKaisaiBashoName;
     private int gogitaiNo;
 
     /**
      * コンストラクタです。
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     * @param shinsakaiKaisaiBasho 介護認定審査会開催場所
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
      * @param shinsakaiKaisaiYoteiYMD 開催予定年月日
      * @param shinsakaiKaishiYoteiTime 予定時刻
-     * @param shinsakaiKaisaiBashoName 開催会場
      * @param gogitaiNo 合議体番号
      */
     public IinTuutishoProcessParameter(
             RString shinsakaiKaisaiNo,
+            RString shinsakaiKaisaiBasho,
             RString shuturyokuSutairu,
             RString printHou,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
-            RString shinsakaiKaisaiBashoName,
             int gogitaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
+        this.shinsakaiKaisaiBasho = shinsakaiKaisaiBasho;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
-        this.shinsakaiKaisaiBashoName = shinsakaiKaisaiBashoName;
         this.gogitaiNo = gogitaiNo;
     }
 

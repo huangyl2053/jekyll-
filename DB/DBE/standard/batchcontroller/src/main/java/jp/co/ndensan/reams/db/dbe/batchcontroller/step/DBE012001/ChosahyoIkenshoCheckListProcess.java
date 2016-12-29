@@ -158,15 +158,15 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
             } else {
                 RString 申請日FROM = dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日From());
                 RString 申請日TO = dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日To());
-                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+                出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
             }
 
         } else if (new RString("3").equals(paramter.get作成条件())) {
             出力条件.add(new RString("審査日を指定"));
-            出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト審査日()));
+            出力条件.add(new RString("審査日：").concat(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト審査日())));
         } else if (new RString("4").equals(paramter.get作成条件())) {
             出力条件.add(new RString("審査会の開催番号を指定"));
-            出力条件.add((paramter.get認定調査結果と主治医意見書のチェックリスト審査会()));
+            出力条件.add(new RString("審査会：").concat(paramter.get認定調査結果と主治医意見書のチェックリスト審査会()));
         }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE012003.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,

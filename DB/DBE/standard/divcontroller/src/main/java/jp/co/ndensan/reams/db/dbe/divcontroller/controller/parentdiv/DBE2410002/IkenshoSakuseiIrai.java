@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -110,10 +111,7 @@ public class IkenshoSakuseiIrai {
             主治医意見書作成依頼履歴番号 = RString.EMPTY;
         }
 
-        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().
-                concat(new RString("ShinseishoKanriNo")).concat(申請書管理番号.value()).
-                concat(主治医意見書作成依頼履歴番号));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
+        if (!RealInitialLocker.tryGetLock(get排他キー())) {
             div.setReadOnly(true);
             throw new PessimisticLockingException();
         }
@@ -136,6 +134,14 @@ public class IkenshoSakuseiIrai {
         return ResponseData.of(div).respond();
     }
 
+    private LockingKey get排他キー() {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        RStringBuilder lockingKey = new RStringBuilder(SubGyomuCode.DBE認定支援.getColumnValue());
+        lockingKey.append(new RString("ShinseishoKanriNo"));
+        lockingKey.append(申請書管理番号.value());
+        return new LockingKey(lockingKey.toRString());
+    }
+    
     /**
      * 提出期限変更時、画面状態を制御します。
      *
@@ -237,11 +243,7 @@ public class IkenshoSakuseiIrai {
             if (RString.isNullOrEmpty(主治医意見書作成依頼履歴番号)) {
                 主治医意見書作成依頼履歴番号 = RString.EMPTY;
             }
-            LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().
-                    concat(new RString("ShinseishoKanriNo")).
-                    concat(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value()).
-                    concat(主治医意見書作成依頼履歴番号));
-            RealInitialLocker.release(排他キー);
+            RealInitialLocker.release(get排他キー());
             return ResponseData.of(div).addMessage((UrInformationMessages.正常終了.getMessage().replace(依頼書印刷処理.toString()))).respond();
         }
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Ninteich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
-import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -70,6 +68,7 @@ public class NinteichosaIraiHandler {
      * 完了処理・認定調査依頼に初期化を設定します。
      */
     public void onLoad() {
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(
             ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxCount().setMaxLength(Integer.toString(div.getTxtMaxCount().getMaxValue().intValue()).length());
@@ -102,8 +101,7 @@ public class NinteichosaIraiHandler {
      * DataGridを更新します。
      */
     public void initDataGrid() {
-
-        LasdecCode 市町村コード = get市町村コード();
+        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         RString 状態 = div.getRadShoriJyotai().getSelectedKey();
         Decimal 最大件数 = div.getTxtMaxCount().getValue();
         SearchResult<CyoSaiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
@@ -160,19 +158,6 @@ public class NinteichosaIraiHandler {
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
         set件数表示(状態);
-    }
-
-    private LasdecCode get市町村コード() {
-        List<HokenshaSummary> hokenshaList = new ArrayList<>(
-            HokenshaListLoader.createInstance()
-            .getShichosonCodeNameList(GyomuBunrui.介護認定)
-            .getAll()
-        );
-        if (!hokenshaList.isEmpty() && hokenshaList.size() == 1) {
-            return hokenshaList.get(0).get市町村コード();
-        } else {
-            return LasdecCode.EMPTY;
-        }
     }
 
     private void put要介護認定完了情報(List<CyoSaiRaiBusiness> 調査依頼List) {

@@ -51,7 +51,6 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     private JimuSonotashiryoBusiness business;
     private int shinsakaiOrder;
     private int 存在ファイルindex;
-    private RString path;
     private static final int INDEX_5 = 5;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
     private static final RString SEPARATOR = new RString("/");
@@ -83,11 +82,11 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         }
         List<RString> イメージファイルリスト;
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-        path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
+        RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         if (!entity.isJimukyoku()) {
-            イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名());
+            イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名(), path);
         } else {
-            イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
+            イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名(), path);
         }
         business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
         business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
@@ -124,9 +123,10 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
      *
      * @param sharedFileId 共有ファイルID
      * @param ファイル名List イメージファイルリスト
+     * @param ファイルパス ファイルパス
      * @return その他資料
      */
-    public List<RString> getその他資料(RDateTime sharedFileId, List<RString> ファイル名List) {
+    public List<RString> getその他資料(RDateTime sharedFileId, List<RString> ファイル名List, RString ファイルパス) {
         List<RString> ファイルPathList = new ArrayList<>();
         if (sharedFileId == null) {
             return ファイルPathList;
@@ -134,8 +134,8 @@ public class JimuSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         int index = 0;
         for (int i = 0; i < ファイル名List.size(); i++) {
             RString ファイル名 = ファイル名List.get(i);
-            if (!RString.isNullOrEmpty(path) && index < INDEX_5) {
-                RString fileFullPath = getFilePath(path, ファイル名);
+            if (!RString.isNullOrEmpty(ファイルパス) && index < INDEX_5) {
+                RString fileFullPath = getFilePath(ファイルパス, ファイル名);
                 if (!RString.isNullOrEmpty(fileFullPath)) {
                     ファイルPathList.add(fileFullPath);
                     index = i + 1;

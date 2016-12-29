@@ -13,8 +13,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5610001.NinteiShienCenterSoshinHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * センター送信準備のクラスです。
@@ -22,6 +25,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  * @reamsid_L DBE-1520-011 lishengli
  */
 public class NinteiShienCenterSoshin {
+
+    private static final RString KEY = new RString("key");
+    private static final RString UICONTAINERID_DBEUC56101 = new RString("DBEUC56101");
+    private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
 
     /**
      * センター送信準備の初期化。
@@ -41,6 +48,12 @@ public class NinteiShienCenterSoshin {
      * @return レスポンスデータ
      */
     public ResponseData<DBE561001_CenterTransmissionParameter> onClick_BtnDataoutput(NinteiShienCenterSoshinDiv div) {
+
+        RString uiContainerID = ResponseHolder.getUIContainerId();
+        if (UICONTAINERID_DBEUC56101.equals(uiContainerID)) {
+            FlowParameters fp = FlowParameters.of(KEY, WORKFLOW_KEY_BATCH);
+            FlowParameterAccessor.merge(fp);
+        }
         return ResponseData.of(getHandler(div).setParameter()).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
     }
 
