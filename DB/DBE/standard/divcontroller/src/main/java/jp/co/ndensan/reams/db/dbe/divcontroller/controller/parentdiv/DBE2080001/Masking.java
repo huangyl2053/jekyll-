@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -85,6 +86,7 @@ public class Masking {
                 new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtSaidaiHyojiKensu().setValue(
                 new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).initialize();
 //        List<dgYokaigoNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
 //        for (dgYokaigoNinteiTaskList_Row row : dgYokaigoNinteiTaskList_Row) {
@@ -92,6 +94,18 @@ public class Masking {
 //                    new RString("申請書管理番号"), row.getShinseishoKanriNo())));
 //        }
         return ResponseData.of(div).setState(DBE2080001StateName.登録);
+    }
+
+    /**
+     * 保険者リストDDLのonChangeイベントです。<br />
+     * 一覧表の表示データを制御します。
+     *
+     * @param div MaskingDiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<MaskingDiv> onChange_ccdHokenshaList(MaskingDiv div) {
+        getHandler(div).initialize();
+        return ResponseData.of(div).respond();
     }
 
     /**

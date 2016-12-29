@@ -1359,6 +1359,9 @@
         T5213."ninteichosaRirekiNo" <![CDATA[<]]> T5213b."ninteichosaRirekiNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo"	
+        <if test="市町村コード.toString() != ''.toString()">
+            WHERE DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY
         DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",
