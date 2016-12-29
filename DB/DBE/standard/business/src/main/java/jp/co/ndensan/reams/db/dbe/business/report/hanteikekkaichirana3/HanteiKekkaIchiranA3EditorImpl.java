@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Editor {
 
-    private static final RString 単位 = new RString("ヶ月");
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
@@ -95,12 +94,12 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getTb_二次判定認定有効開始日()));
         source.listHanteikekka_20 = entity.getTb_二次判定認定有効終了日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getTb_二次判定認定有効終了日()));
-        source.listHanteikekka_21 = 月数(entity.getTb_二次判定認定有効期間());
+        source.listHanteikekka_21 = new RString(entity.getTb_二次判定認定有効期間());
         source.listHanteikekka_22 = entity.get二次判定認定有効開始年月日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.get二次判定認定有効開始年月日()));
         source.listHanteikekka_23 = entity.get二次判定認定有効終了年月日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.get二次判定認定有効終了年月日()));
-        source.listHanteikekka_24 = 月数(entity.get二次判定認定有効期間());
+        source.listHanteikekka_24 = new RString(entity.get二次判定認定有効期間());
         source.listHanteikekka_25 = entity.get二号特定疾病コード();
         source.listHanteikekka_26 = entity.get二号特定疾病内容();
         source.listHanteikekka_27 = entity.get介護認定審査会意見();
@@ -112,10 +111,4 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
                 .fillType(FillType.BLANK).toDateString());
     }
 
-    private RString 月数(int 有効期間) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(有効期間);
-        builder.append(単位);
-        return builder.toRString();
-    }
 }
