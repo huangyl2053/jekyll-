@@ -244,6 +244,8 @@ public class ShinseiKensakuHandler {
         if (!RString.isNullOrEmpty(主治医医療機関)) {
             parameter.setShujiiIryokikanCode(finderDiv.getHdnShujiiIryokikanCode());
             parameter.setUseShujiiIryokikanCode(true);
+            parameter.setShujiiShichosonCode(finderDiv.getHdnShujiiShichosonCode());
+            parameter.setUseShujiiShichosonCode(true);
         }
         RString 主治医氏名 = finderDiv.getTxtShujiiName().getValue();
         if (!RString.isNullOrEmpty(主治医氏名)) {
@@ -376,11 +378,13 @@ public class ShinseiKensakuHandler {
             parameter.setShisetsuNyushoFlag(false);
             parameter.setIgnoreShisetsuNyusho(true);
         }
-
+        
         RString 認定調査委託先コード = finderDiv.getTxtNinteiChosaItakusakiName().getValue();
         if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             parameter.setNinteiChosaItakusakiCode(finderDiv.getHdnChosaItakusakiCode());
             parameter.setUseNinteiChosaItakusakiCode(true);
+            parameter.setChosaShichosonCode(finderDiv.getHdnChosaShichosonCode());
+            parameter.setUseChosaShichosonCode(true);
         }
 
         RString 認定調査員氏名 = finderDiv.getTxtNinteiChosainName().getValue();

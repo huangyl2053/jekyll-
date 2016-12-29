@@ -58,6 +58,8 @@ public class ShinseiKensakuMapperParameter {
     private boolean shisetsuNyushoFlag;
     // 施設入所フラグを条件から無視するか否か
     private boolean ignoreShisetsuNyusho;
+    // 調査市町村コード
+    private RString chosaShichosonCode;
     // 認定調査委託先コード
     private RString ninteiChosaItakusakiCode;
     // 認定調査員コード
@@ -74,6 +76,8 @@ public class ShinseiKensakuMapperParameter {
     private RString nichijoSeikatsuJiritsudoCode;
     // 認定調査・認知症高齢者の日常生活自立度コード
     private RString nichijoSeikatsuJiritsudo;
+    //主治医市町村コード
+    private RString shujiiShichosonCode;
     // 主治医医療機関コード
     private RString shujiiIryokikanCode;
     // 主治医コード
@@ -215,11 +219,13 @@ public class ShinseiKensakuMapperParameter {
     private boolean useNinteiChosaItakusakiCode;
     private boolean useNinteiChosainCode;
     private boolean useChosaJisshiBashoCode;
+    private boolean useChosaShichosonCode;
     private boolean useNinteiChosaKubunCode;
     private boolean useNinteichosaJisshiYMDFrom;
     private boolean useNinteichosaJisshiYMDTo;
     private boolean useNichijoSeikatsuJiritsudoCd;
     private boolean useNichijoSeikatsuJiritsudo;
+    private boolean useShujiiShichosonCode;
     private boolean useShujiiIryokikanCode;
     private boolean useShujiiCode;
     private boolean useIshiKubunCode;
