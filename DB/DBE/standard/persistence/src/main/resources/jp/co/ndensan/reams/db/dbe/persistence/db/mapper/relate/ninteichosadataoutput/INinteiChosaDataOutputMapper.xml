@@ -182,7 +182,7 @@
          , '1' AS "前回今回区分"
          , DbT5205Zenkai."ninteichosaTokkijikoNo" AS "認定調査特記事項番号"
          , DbT5205Zenkai."ninteichosaTokkijikoRemban" AS "認定調査特記事項連番"
-         , DbT5205Zenkai."tokkiJiko" AS "特記事項" 
+         , regexp_replace(DbT5205Zenkai."tokkiJiko",E'(\r\n|\r|\n|\t)','','g') AS "特記事項" 
        FROM
          rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
          LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121 
@@ -259,7 +259,7 @@
          , '2' AS "前回今回区分"
          , DbT5205."ninteichosaTokkijikoNo" AS "認定調査特記事項番号"
          , DbT5205."ninteichosaTokkijikoRemban" AS "認定調査特記事項連番"
-         , DbT5205."tokkiJiko" AS "特記事項" 
+         , regexp_replace(DbT5205."tokkiJiko",E'(\r\n|\r|\n|\t)','','g') AS "特記事項" 
        FROM
          rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
          LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
@@ -487,7 +487,7 @@
         DbT5202."riyoShisetsuJusho",
         DbT5202."riyoShisetsuTelNo",
         DbT5202."riyoShisetsuYubinNo",
-        DbT5202."tokki",
+        regexp_replace(DbT5202."tokki",E'(\r\n|\r|\n|\t)','','g') AS "tokki",
         DbT5202."tokkijikoUketsukeYMD",
         DbT5202."tokkijikoJuryoYMD",
         DbT5203."ninchishoNichijoSeikatsuJiritsudoCode",
@@ -608,7 +608,7 @@
       SELECT 
       <include refid="selectItem" />,
         DbT5209."remban" AS "記入項目連番",
-        DbT5209."serviceJokyoKinyu" AS "状況記入"
+        regexp_replace(DbT5209."serviceJokyoKinyu",E'(\r\n|\r|\n|\t)','','g') AS "状況記入"
       FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
       LEFT JOIN 
       rgdb."DbT5209NinteichosahyoKinyuItem" AS DbT5209
