@@ -41,38 +41,6 @@ public class IraishoIkkatsuHakkoValidationHandler {
 
     /**
      *
-     * 依頼日の前後順をチェックします。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs iraibiZengoJunCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (STATE_NINTEIO.equals(div.getState())) {
-            if (div.getTxtIraibiFrom().getValue() == null || div.getTxtIraibiTo().getValue() == null) {
-                return validationMessages;
-            }
-            if (!div.getTxtIraibiFrom().getValue().isBeforeOrEquals(div.getTxtIraibiTo().getValue())) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IraishoIkkatsuHakkoMessages(DbeErrorMessages.終了日が開始日以前), div.getTxtIraibiFrom()));
-            }
-        }
-        if (STATE_SHUJII.equals(div.getState())) {
-            if (div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue() == null
-                    || div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null) {
-                return validationMessages;
-            }
-            if (!div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().isBeforeOrEquals(
-                    div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue())) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IraishoIkkatsuHakkoMessages(DbeErrorMessages.終了日が開始日以前), div.getTxtIraibiFrom()));
-            }
-        }
-
-        return validationMessages;
-    }
-
-    /**
-     *
      * 依頼一覧をチェックします。
      *
      * @return ValidationMessageControlPairs
