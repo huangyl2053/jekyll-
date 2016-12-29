@@ -290,10 +290,6 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 getValidationHandler().依頼日が未確定の完了必須チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            if (row.getIkenshoIraiKigen().getValue() == null) {
-                getValidationHandler().依頼期限が未確定の完了必須チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
             if (row.getIkenshoIraiIkenshoShutsuryokuDay().getValue() == null) {
                 getValidationHandler().意見書書発行日が未確定の完了必須チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
