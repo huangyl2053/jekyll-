@@ -67,7 +67,7 @@ public class NinteiInput {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
 
-        if (RString.isNullOrEmpty(new RString(div.getTxtNinteiYMD().getValue().toString()))) {
+        if (div.getTxtNinteiYMD().getValue() == null || RString.isNullOrEmpty(new RString(div.getTxtNinteiYMD().getValue().toString()))) {
             div.setHdnNinteiYmd(new RString(FlexibleDate.getNowDate().toString()));
         } else {
             div.setHdnNinteiYmd(new RString(div.getTxtNinteiYMD().getValue().toString()));
