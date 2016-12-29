@@ -5,7 +5,6 @@ var DBZ;
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
                 this.controls = new NinteiShinseishaFinder.Controls(fieldName);
-                this.controls.ShosaiJoken().isOpen = false;
             }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
