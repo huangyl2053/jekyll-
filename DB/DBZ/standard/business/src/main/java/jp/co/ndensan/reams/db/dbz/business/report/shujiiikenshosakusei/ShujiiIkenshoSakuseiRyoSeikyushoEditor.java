@@ -87,7 +87,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.seikyugakuIkenshoSakuseiRyo4 = item.getSeikyugakuIkenshoSakuseiRyo4();
         source.iryokikanName = item.getSeikyuIryokikanName();
         source.iryokikanDaihyosha = item.getSeikyuIryokikanDaihyoName();
-        source.yubinNo = item.getSeikyuIryokikanYubinNo();
+        RString 郵便番号 = item.getSeikyuIryokikanYubinNo();
+        if (!RString.isNullOrEmpty(郵便番号)) {
+            source.yubinNo = 郵便番号.substring(0, 3).concat("-").concat(郵便番号.substring(3, 7));
+        }
         source.iryokikanJusho = item.getSeikyuIryokikanJusho();
         source.iryokikanTel = item.getSeikyuIryokikanTel();
         source.shikibetuCode = ShikibetsuCode.EMPTY;

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -31,10 +32,12 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @param 原本マスク区分 原本マスク区分
      */
     public GaikyoTokki(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
-            RString 概況特記テキストイメージ区分) {
+            RString 概況特記テキストイメージ区分,
+            Code 原本マスク区分) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
         requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
@@ -42,10 +45,12 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
         this.entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
+        this.entity.setGenponMaskKubun(原本マスク区分);
         this.id = new GaikyoTokkiIdentifier(
                 申請書管理番号,
                 認定調査依頼履歴番号,
-                概況特記テキストイメージ区分
+                概況特記テキストイメージ区分,
+                原本マスク区分
         );
     }
 
@@ -60,7 +65,8 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
         this.id = new GaikyoTokkiIdentifier(
                 entity.getShinseishoKanriNo(),
                 entity.getNinteichosaRirekiNo(),
-                entity.getGaikyoTokkiTextImageKubun());
+                entity.getGaikyoTokkiTextImageKubun(),
+                entity.getGenponMaskKubun());
     }
 
     /**
@@ -102,6 +108,15 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
      */
     public RString get概況特記テキストイメージ区分() {
         return entity.getGaikyoTokkiTextImageKubun();
+    }
+
+    /**
+     * 原本マスク区分を返します
+     *
+     * @return 原本マスク区分
+     */
+    public Code get原本マスク区分() {
+        return entity.getGenponMaskKubun();
     }
 
     /**
@@ -148,7 +163,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_主訴_イメージ共有ファイルID() {
 //        return entity.getShusoImageSharedFileId();
 //    }
-
     /**
      * 概況特記（主訴）マスキングイメージ共有ファイルIDを返します。
      *
@@ -157,7 +171,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_主訴_マスキングイメージ共有ファイルID() {
 //        return entity.getShusoMaskingImageSharedFileId();
 //    }
-
     /**
      * 概況特記事項（家族状況）を返します。
      *
@@ -175,7 +188,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_家族状況_イメージ共有ファイルID() {
 //        return entity.getKazokuJokyoImageSharedFileId();
 //    }
-
     /**
      * 概況特記（家族状況）マスキングイメージ共有ファイルIDを返します。
      *
@@ -184,7 +196,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_家族状況_マスキングイメージ共有ファイルID() {
 //        return entity.getKazokuJokyoMaskingImageSharedFileId();
 //    }
-
     /**
      * 概況特記事項（居住環境）を返します。
      *
@@ -202,7 +213,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_居住環境_イメージ共有ファイルID() {
 //        return entity.getKyojuKankyoImageSharedFileId();
 //    }
-
     /**
      * 概況特記（居住環境）マスキングイメージ共有ファイルIDを返します。
      *
@@ -211,7 +221,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_居住環境_マスキングイメージ共有ファイルID() {
 //        return entity.getKyojuKankyoMaskingImageSharedFileId();
 //    }
-
     /**
      * 概況特記事項（機器・器械）を返します。
      *
@@ -229,7 +238,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_機器_器械_イメージ共有ファイルID() {
 //        return entity.getKikaiKikiImageSharedFileId();
 //    }
-
     /**
      * 概況特記（機器・器械）マスキングイメージ共有ファイルIDを返します。
      *
@@ -238,7 +246,6 @@ public class GaikyoTokki extends ModelBase<GaikyoTokkiIdentifier, DbT5206GaikyoT
 //    public RDateTime get概況特記_機器_器械_マスキングイメージ共有ファイルID() {
 //        return entity.getKikaiKikiMaskingImageSharedFileId();
 //    }
-
     /**
      * {@link DbT5206GaikyoTokkiEntity}のクローンを返します。
      *

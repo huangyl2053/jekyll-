@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
 
     private final HanteikekkaKagamiEntity item;
+    private final RString 名称付与 = new RString("様");
 
     /**
      * インスタンスを生成します。
@@ -48,6 +49,7 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             source.shimeiText = ZanteiAtenaText.toValue(item.getShoKisaiHokenshaNo().value()).首長宛名文字列;
+            source.meishoFuyo = 名称付与;
             source.gogitaiNo = new RString(item.getGogitaiNo());
             source.tsuchibun1 = item.getTsuchibun1();
             source.tsuchibun2 = item.getTsuchibun2();
@@ -77,12 +79,12 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
      */
     public enum ZanteiAtenaText {
 
-        中野市長(new RString("202119"), new RString("中野市長　池田　茂　様")),
-        飯山市長(new RString("202135"), new RString("飯山市長　足立　正則　様")),
-        山ノ内町長(new RString("205617"), new RString("山ノ内町長　竹節　義孝　様")),
-        木島平村長(new RString("205625"), new RString("木島平村長　日䑓　正博　様")),
-        野沢温泉村長(new RString("205633"), new RString("野沢温泉村長　富井　俊雄　様")),
-        栄村長(new RString("206029"), new RString("栄村長　森川　浩市　様"));
+        中野市長(new RString("202119"), new RString("中野市長　池田　茂")),
+        飯山市長(new RString("202135"), new RString("飯山市長　足立　正則")),
+        山ノ内町長(new RString("205617"), new RString("山ノ内町長　竹節　義孝")),
+        木島平村長(new RString("205625"), new RString("木島平村長　日䑓　正博")),
+        野沢温泉村長(new RString("205633"), new RString("野沢温泉村長　富井　俊雄")),
+        栄村長(new RString("206029"), new RString("栄村長　森川　浩市"));
         private final RString 証記載保険者番号;
         private final RString 首長宛名文字列;
 

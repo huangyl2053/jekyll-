@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事務局用予備判定記入表のEditorです。
@@ -114,7 +115,7 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.listNo_1 = business.getNo();
         source.listHokenshaName_1 = business.get保険者();
         source.shinsakaiKaisaiNo = business.get審査会開催番号().length() <= INT_LENGTH ? new RString(business.get審査会開催番号().toString())
-                : new RString(business.get審査会開催番号().toString().substring(business.get審査会開催番号().length() - INT_LENGTH));
+                : new RString(new Decimal(business.get審査会開催番号().toString().substring(business.get審査会開催番号().length() - INT_LENGTH)).toString());
         if (business.get開催年月日() != null && !business.get開催年月日().isEmpty()) {
             source.kaisaiYMD = getパターン33(business.get開催年月日());
         }

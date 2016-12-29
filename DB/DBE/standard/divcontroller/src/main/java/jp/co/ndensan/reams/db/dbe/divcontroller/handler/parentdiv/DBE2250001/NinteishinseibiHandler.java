@@ -128,49 +128,24 @@ public class NinteishinseibiHandler {
         row.setTokkijikoJuryoYMD(create日付文字列(entity.get認定調査特記事項受領年月日()));
 
         //5207
-        RString サービス状況連番 = createCommaSplitString(createサービス状況連番List(entity));
-        row.setServiceJokyoRemban(サービス状況連番);
-        if (サービス状況連番.isEmpty()) {
-            row.setServiceJokyo(RString.EMPTY);
-        } else {
-            row.setServiceJokyo(createCommaSplitString(createサービス状況List(entity)));
-        }
+        row.setServiceJokyoRemban(createCommaSplitString(createサービス状況連番List(entity)));
+        row.setServiceJokyo(createCommaSplitString(createサービス状況List(entity)));
 
         //5208
-        RString サービス状況フラグ連番 = createCommaSplitString(createサービス状況フラグ連番List(entity));
-        row.setServiceJokyoFlagRemban(サービス状況フラグ連番);
-        if (サービス状況フラグ連番.isEmpty()) {
-            row.setServiceJokyoFlag(RString.EMPTY);
-        } else {
-            row.setServiceJokyoFlag(createCommaSplitString(createサービス状況フラグList(entity)));
-        }
+        row.setServiceJokyoFlagRemban(createCommaSplitString(createサービス状況フラグ連番List(entity)));
+        row.setServiceJokyoFlag(createCommaSplitString(createサービス状況フラグList(entity)));
 
         //5209
-        RString サービス状況記入連番 = createCommaSplitString(createサービス状況記入連番List(entity));
-        row.setServiceJokyoKinyuRemban(サービス状況記入連番);
-        if (サービス状況記入連番.isEmpty()) {
-            row.setServiceJokyoKinyu(RString.EMPTY);
-        } else {
-            row.setServiceJokyoKinyu(createCommaSplitString(createサービス状況記入List(entity)));
-        }
+        row.setServiceJokyoKinyuRemban(createCommaSplitString(createサービス状況記入連番List(entity)));
+        row.setServiceJokyoKinyu(createCommaSplitString(createサービス状況記入List(entity)));
 
         //5210
-        RString 施設利用連番 = createCommaSplitString(create施設利用連番List(entity));
-        row.setShisetsuRiyoFlagRemban(施設利用連番);
-        if (施設利用連番.isEmpty()) {
-            row.setShisetsuRiyoFlag(RString.EMPTY);
-        } else {
-            row.setShisetsuRiyoFlag(createCommaSplitString(create施設利用フラグList(entity)));
-        }
+        row.setShisetsuRiyoFlagRemban(createCommaSplitString(create施設利用連番List(entity)));
+        row.setShisetsuRiyoFlag(createCommaSplitString(create施設利用フラグList(entity)));
 
         //5211
-        RString 調査項目連番 = createCommaSplitString(create調査項目連番List(entity));
-        row.setRemban(調査項目連番);
-        if (調査項目連番.isEmpty()) {
-            row.setResearchItem(RString.EMPTY);
-        } else {
-            row.setResearchItem(createCommaSplitString(create調査項目内容List(entity)));
-        }
+        row.setRemban(createCommaSplitString(create調査項目連番List(entity)));
+        row.setResearchItem(createCommaSplitString(create調査項目内容List(entity)));
 
         //特記事項
         row.setNinteichosaTokkijikoNoRemban(createCommaSplitString(create特記事項表示文字列List(特記事項List)));
@@ -193,9 +168,6 @@ public class NinteishinseibiHandler {
 
     private List<RString> createサービス状況連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> サービス状況連番List = new ArrayList<>();
-        if (entity.getサービスの状況連番01().isEmpty()) {
-            return サービス状況連番List;
-        }
         サービス状況連番List.add(entity.getサービスの状況連番01());
         サービス状況連番List.add(entity.getサービスの状況連番02());
         サービス状況連番List.add(entity.getサービスの状況連番03());
@@ -246,9 +218,6 @@ public class NinteishinseibiHandler {
 
     private List<RString> createサービス状況フラグ連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> サービス状況フラグ連番List = new ArrayList<>();
-        if (entity.getサービスの状況フラグ連番().isEmpty()) {
-            return サービス状況フラグ連番List;
-        }
         サービス状況フラグ連番List.add(entity.getサービスの状況フラグ連番());
         return サービス状況フラグ連番List;
     }
@@ -261,9 +230,6 @@ public class NinteishinseibiHandler {
 
     private List<RString> createサービス状況記入連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> サービス状況記入連番List = new ArrayList<>();
-        if (entity.get記入項目連番01().isEmpty()) {
-            return サービス状況記入連番List;
-        }
         サービス状況記入連番List.add(entity.get記入項目連番01());
         サービス状況記入連番List.add(entity.get記入項目連番02());
         return サービス状況記入連番List;
@@ -278,9 +244,6 @@ public class NinteishinseibiHandler {
 
     private List<RString> create施設利用連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> 施設利用連番List = new ArrayList<>();
-        if (entity.get施設利用連番01().isEmpty()) {
-            return 施設利用連番List;
-        }
         施設利用連番List.add(entity.get施設利用連番01());
         施設利用連番List.add(entity.get施設利用連番02());
         施設利用連番List.add(entity.get施設利用連番03());
@@ -309,9 +272,6 @@ public class NinteishinseibiHandler {
 
     private List<RString> create調査項目連番List(ChosaKekkaNyuryokuCsvEntity entity) {
         List<RString> 調査項目連番List = new ArrayList<>();
-        if (entity.get調査項目連番01().isEmpty()) {
-            return 調査項目連番List;
-        }
         調査項目連番List.add(entity.get調査項目連番01());
         調査項目連番List.add(entity.get調査項目連番02());
         調査項目連番List.add(entity.get調査項目連番03());
@@ -469,14 +429,14 @@ public class NinteishinseibiHandler {
     }
 
     private RString createCommaSplitString(List<RString> valueList) {
+        if (valueList.isEmpty()) {
+            return RString.EMPTY;
+        }
         RStringBuilder rsb = new RStringBuilder();
         for (RString value : valueList) {
-            if (rsb.length() > 0) {
-                rsb.append(",");
-            }
-            rsb.append(value);
+            rsb.append(value).append(",");
         }
-        return rsb.toRString();
+        return rsb.substring(0, rsb.length() - 1);
     }
 
     private List<RString> create特記事項表示文字列List(List<NinteichosahyoTokkijiko> 特記事項List) {

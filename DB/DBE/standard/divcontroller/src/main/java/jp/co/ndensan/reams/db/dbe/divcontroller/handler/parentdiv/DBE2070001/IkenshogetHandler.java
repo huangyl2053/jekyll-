@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.IkenSyoNyuSyuBusiness;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 完了処理・主治医意見書入手のHandlerクラスです。
@@ -41,8 +44,9 @@ public class IkenshogetHandler {
     private final IkenshogetDiv div;
     private static final RString 未処理 = new RString("未");
     private static final RString 完了可能 = new RString("可");
-    private static final RString KEY1 = new RString("1");
-    private static final RString KEY2 = new RString("2");
+    private static final RString SELECTED_KEY0 = new RString("1");
+    private static final RString SELECTED_KEY1 = new RString("2");
+    private static final RString SELECTED_KEY2 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -58,39 +62,11 @@ public class IkenshogetHandler {
      *
      */
     public void initialize() {
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         RDate システム日付 = RDate.getNowDate();
         RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
-        init最大表示件数();
-        div.getRadJyotaiKubun().setSelectedKey(状態区分);
-        div.getTxtMisyori().setDisplayNone(false);
-        div.getTxtKanryouKano().setDisplayNone(false);
-        div.getTxtGokei().setDisplayNone(false);
-        意見書入手List(状態区分);
-    }
-
-    public void 意見書入手List(RString 状態区分) {
-        List<IkenSyoNyuSyuBusiness> 意見書入手List = YokaigoNinteiTaskListFinder.createInstance().
-                get意見書入手モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分)).records();
-
-        if (!意見書入手List.isEmpty()) {
-            ShinSaKaiBusiness 前意見書入手Model = YokaigoNinteiTaskListFinder.createInstance().
-                    get前意見書入手(YokaigoNinteiTaskListParameter.
-                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分));
-            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書入手Model.get要介護認定完了情報Lsit()));
-        } else {
-            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
-        }
-        意見書入手モード(意見書入手List);
-    }
-
-    /**
-     * 最大表示件数を初期化します。業務コンフィグからデフォルト値を取得して設定します。
-     */
-    public void init最大表示件数() {
-        RDate 基準日 = RDate.getNowDate();
-        RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, 基準日, SubGyomuCode.DBU介護統計報告);
-        RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, 基準日, SubGyomuCode.DBU介護統計報告);
+        RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
 
         if (!RString.isNullOrEmpty(最大取得件数)) {
             div.getTxtMaxNumber().setValue(new Decimal(最大取得件数.toString()));
@@ -98,39 +74,38 @@ public class IkenshogetHandler {
         if (!RString.isNullOrEmpty(最大取得件数上限)) {
             div.getTxtMaxNumber().setMaxValue(new Decimal(最大取得件数上限.toString()));
         }
+        div.getRadJyotaiKubun().setSelectedKey(状態区分);
+        div.getTxtMisyori().setDisplayNone(false);
+        div.getTxtKanryouKano().setDisplayNone(false);
+        div.getTxtGokei().setDisplayNone(false);
+        意見書入手List();
     }
 
-    /**
-     * 最大表示件数。
-     *
-     */
-    public void getMaxNumber() {
-        RString 状態区分 = div.getRadJyotaiKubun().getSelectedKey();
-        意見書入手List(状態区分);
+    public void 意見書入手List() {
+        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+        RString 表示区分 = div.getRadJyotaiKubun().getSelectedKey();
+        SearchResult<IkenSyoNyuSyuBusiness> 意見書入手List = YokaigoNinteiTaskListFinder.createInstance().get意見書入手モード(YokaigoNinteiTaskListParameter.
+                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 表示区分, div.getTxtMaxNumber().getValue(), 市町村コード));
+        if (!意見書入手List.records().isEmpty()) {
+            ShinSaKaiBusiness 前意見書入手Model = YokaigoNinteiTaskListFinder.createInstance().
+                    get前意見書入手(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 表示区分));
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前意見書入手Model.get要介護認定完了情報Lsit()));
+        } else {
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+        }
+        意見書入手モード(意見書入手List);
     }
 
-    private void 意見書入手モード(List<IkenSyoNyuSyuBusiness> 意見書入手List) {
-
-        List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
-        IkenSyoNyuSyuBusiness business;
+    private void 意見書入手モード(SearchResult<IkenSyoNyuSyuBusiness> 意見書入手List) {
+        List<dgNinteiTaskList_Row> rowListALL = new ArrayList<>();
+        List<dgNinteiTaskList_Row> rowListComplete = new ArrayList<>();
+        List<dgNinteiTaskList_Row> rowListNotreated = new ArrayList<>();
         int completeCount = 0;
         int notCount = 0;
 
-        Decimal 最大表示件数 = div.getTxtMaxNumber().getValue();
-        int disPlayMaxCount = 最大表示件数.intValue() > 意見書入手List.size() ? 意見書入手List.size() : 最大表示件数.intValue();
-        for (int i = 0; i < disPlayMaxCount; i++) {
-            business = 意見書入手List.get(i);
-
+        for (IkenSyoNyuSyuBusiness business : 意見書入手List.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
-
-            if (business.get主治医意見書読取年月日() == null) {
-                row.setJyotai(未処理);
-                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
-                notCount++;
-            } else if (business.get主治医意見書読取年月日() != null) {
-                row.setJyotai(完了可能);
-                completeCount++;
-            }
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
 
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
@@ -146,14 +121,41 @@ public class IkenshogetHandler {
             row.setChosaTokusokuHoho(business.get主治医意見書作成督促方法() == null ? RString.EMPTY : business.get主治医意見書作成督促方法());
             row.getChosaTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             意見書入手モードの日付設定(row, business);
-            rowList.add(row);
+            if (business.get主治医意見書読取年月日() == null) {
+                row.setJyotai(未処理);
+                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
+                notCount++;
+                rowListNotreated.add(row);
+            } else if (business.get主治医意見書読取年月日() != null) {
+                row.setJyotai(完了可能);
+                completeCount++;
+                rowListComplete.add(row);
+            }
+            rowListALL.add(row);
         }
+
         div.getTxtMisyori().setValue(new Decimal(notCount));
         div.getTxtKanryouKano().setValue(new Decimal(completeCount));
         div.getTxtGokei().setValue(new Decimal(notCount + completeCount));
-        div.getDgNinteiTaskList().setDataSource(rowList);
-        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大表示件数.intValue());
-        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書入手List.size());
+        div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtMaxNumber().getValue().intValue());
+        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書入手List.totalCount());
+
+        if (SELECTED_KEY0.equals(div.getRadJyotaiKubun().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListNotreated);
+            div.getTxtGokei().setDisplayNone(true);
+            div.getTxtKanryouKano().setDisplayNone(true);
+            div.getTxtMisyori().setDisplayNone(false);
+        } else if (SELECTED_KEY1.equals(div.getRadJyotaiKubun().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListComplete);
+            div.getTxtMisyori().setDisplayNone(true);
+            div.getTxtGokei().setDisplayNone(true);
+            div.getTxtKanryouKano().setDisplayNone(false);
+        } else if (SELECTED_KEY2.equals(div.getRadJyotaiKubun().getSelectedKey())) {
+            div.getDgNinteiTaskList().setDataSource(rowListALL);
+            div.getTxtGokei().setDisplayNone(false);
+            div.getTxtKanryouKano().setDisplayNone(false);
+            div.getTxtMisyori().setDisplayNone(false);
+        }
     }
 
     private void 意見書入手モードの日付設定(dgNinteiTaskList_Row row, IkenSyoNyuSyuBusiness business) {
@@ -194,26 +196,13 @@ public class IkenshogetHandler {
      */
     public void setJyotaiKubun() {
         if (div.getTxtMaxNumber().getValue() == null) {
-            init最大表示件数();
+            RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            if (div.getTxtMaxNumber().getValue() == null) {
+                div.getTxtMaxNumber().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
+                div.getTxtMaxNumber().setValue(new Decimal(検索制御_最大取得件数.toString()));
+            }
         }
-        RString key = div.getRadJyotaiKubun().getSelectedKey();
-        RString 状態区分 = new RString("");
-
-        if (KEY1.equals(key)) {
-            状態区分 = new RString("1");
-            div.getTxtMisyori().setDisplayNone(false);
-            div.getTxtKanryouKano().setDisplayNone(true);
-            div.getTxtGokei().setDisplayNone(true);
-        } else if (KEY2.equals(key)) {
-            状態区分 = new RString("2");
-            div.getTxtMisyori().setDisplayNone(true);
-            div.getTxtKanryouKano().setDisplayNone(false);
-            div.getTxtGokei().setDisplayNone(true);
-        } else {
-            div.getTxtMisyori().setDisplayNone(false);
-            div.getTxtKanryouKano().setDisplayNone(false);
-            div.getTxtGokei().setDisplayNone(false);
-        }
-        意見書入手List(状態区分);
+        意見書入手List();
     }
 }

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 28 14:00:28 JST 2016 
+ * Thu Dec 29 11:54:46 JST 2016 
  */
 
 
@@ -43,6 +43,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
     private RString shinchokuJokyo;
     private Boolean dummyFlag;
     private RString gogitaiNo;
+    private RString shinsakaiKaisaiNo;
 
     public dgShinsakaiIchiran_Row() {
         super();
@@ -65,6 +66,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.shinchokuJokyo = RString.EMPTY;
         this.dummyFlag = false;
         this.gogitaiNo = RString.EMPTY;
+        this.shinsakaiKaisaiNo = RString.EMPTY;
         this.setOriginalData("kaisaiYoteiDate", kaisaiYoteiDate);
         this.setOriginalData("yoteiKaishiTime", yoteiKaishiTime);
         this.setOriginalData("yoteiShuryoTime", yoteiShuryoTime);
@@ -84,9 +86,10 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.setOriginalData("shinchokuJokyo", shinchokuJokyo);
         this.setOriginalData("dummyFlag", dummyFlag);
         this.setOriginalData("gogitaiNo", gogitaiNo);
+        this.setOriginalData("shinsakaiKaisaiNo", shinsakaiKaisaiNo);
     }
 
-    public dgShinsakaiIchiran_Row(TextBoxFlexibleDate kaisaiYoteiDate, TextBoxTime yoteiKaishiTime, TextBoxTime yoteiShuryoTime, RString shinsakaiMeisho, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxFlexibleDate kaisaiDay, TextBoxTime kaisaiTime, TextBoxTime shuryoTime, TextBoxNum yoteiTeiin, TextBoxNum wariateNinzu, TextBoxNum taishoNinzu, RString onseiKiroku, TextBoxFlexibleDate dataShutsuryoku, RString shiryoSakuseiKubun, RString shinchokuJokyo, Boolean dummyFlag, RString gogitaiNo) {
+    public dgShinsakaiIchiran_Row(TextBoxFlexibleDate kaisaiYoteiDate, TextBoxTime yoteiKaishiTime, TextBoxTime yoteiShuryoTime, RString shinsakaiMeisho, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxFlexibleDate kaisaiDay, TextBoxTime kaisaiTime, TextBoxTime shuryoTime, TextBoxNum yoteiTeiin, TextBoxNum wariateNinzu, TextBoxNum taishoNinzu, RString onseiKiroku, TextBoxFlexibleDate dataShutsuryoku, RString shiryoSakuseiKubun, RString shinchokuJokyo, Boolean dummyFlag, RString gogitaiNo, RString shinsakaiKaisaiNo) {
         super();
         this.setOriginalData("kaisaiYoteiDate", kaisaiYoteiDate);
         this.setOriginalData("yoteiKaishiTime", yoteiKaishiTime);
@@ -107,6 +110,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.setOriginalData("shinchokuJokyo", shinchokuJokyo);
         this.setOriginalData("dummyFlag", dummyFlag);
         this.setOriginalData("gogitaiNo", gogitaiNo);
+        this.setOriginalData("shinsakaiKaisaiNo", shinsakaiKaisaiNo);
         this.kaisaiYoteiDate = kaisaiYoteiDate;
         this.yoteiKaishiTime = yoteiKaishiTime;
         this.yoteiShuryoTime = yoteiShuryoTime;
@@ -126,6 +130,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.shinchokuJokyo = shinchokuJokyo;
         this.dummyFlag = dummyFlag;
         this.gogitaiNo = gogitaiNo;
+        this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
     public TextBoxFlexibleDate getKaisaiYoteiDate() {
@@ -202,6 +207,10 @@ public class dgShinsakaiIchiran_Row extends DataRow {
 
     public RString getGogitaiNo() {
         return gogitaiNo;
+    }
+
+    public RString getShinsakaiKaisaiNo() {
+        return shinsakaiKaisaiNo;
     }
 
     public void setKaisaiYoteiDate(TextBoxFlexibleDate kaisaiYoteiDate) {
@@ -297,6 +306,11 @@ public class dgShinsakaiIchiran_Row extends DataRow {
     public void setGogitaiNo(RString gogitaiNo) {
         this.setOriginalData("gogitaiNo", gogitaiNo);
         this.gogitaiNo = gogitaiNo;
+    }
+
+    public void setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
+        this.setOriginalData("shinsakaiKaisaiNo", shinsakaiKaisaiNo);
+        this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
     // </editor-fold>

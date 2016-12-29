@@ -123,23 +123,22 @@ public class ShujiiIkenshoMiteishutsuProcess extends BatchProcessBase<IkenshoJoh
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
+        RString 日付範囲 = new RString("日付範囲：");
+        RString 作成条件 = new RString("作成条件：");
+        RString 依頼日数 = new RString("依頼日数：");
         if (依頼日.equals(processParameter.get主治医意見書未提出者一覧作成条件())) {
-            出力条件.add(new RString("依頼日から指定期間経過した申請者"));
-            出力条件.add(new RString("依頼日数：").concat(processParameter.get主治医意見書未提出者一覧依頼日数()));
+            出力条件.add(作成条件.concat(new RString("依頼日から指定期間経過した申請者")));
+            出力条件.add(依頼日数.concat(processParameter.get主治医意見書未提出者一覧依頼日数()).concat(new RString("日")));
         } else if (申請日範囲指定.equals(processParameter.get主治医意見書未提出者一覧作成条件())) {
-            出力条件.add(new RString("申請日の範囲を指定"));
+            出力条件.add(作成条件.concat(new RString("申請日の範囲を指定")));
             if (processParameter.get主治医意見書未提出者一覧申請日From() == null && processParameter.get主治医意見書未提出者一覧申請日To() == null) {
                 出力条件.add(new RString("指定なし"));
             } else {
                 RString 申請日FROM = dateFormat(processParameter.get主治医意見書未提出者一覧申請日From());
                 RString 申請日TO = dateFormat(processParameter.get主治医意見書未提出者一覧申請日To());
-                出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
+                出力条件.add(日付範囲.concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
             }
         }
-        出力条件.add(set主治医意見書未提出者一覧作成条件(processParameter.get主治医意見書未提出者一覧作成条件()));
-        出力条件.add(processParameter.get主治医意見書未提出者一覧依頼日数());
-        出力条件.add(dateFormat(processParameter.get主治医意見書未提出者一覧申請日From()));
-        出力条件.add(dateFormat(processParameter.get主治医意見書未提出者一覧申請日To()));
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE013003.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
@@ -152,15 +151,5 @@ public class ShujiiIkenshoMiteishutsuProcess extends BatchProcessBase<IkenshoJoh
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
-    }
-
-    private RString set主治医意見書未提出者一覧作成条件(RString 作成条件) {
-        RString 一覧作成条件 = RString.EMPTY;
-        if (依頼日.equals(作成条件)) {
-            一覧作成条件 = new RString("未依頼");
-        } else if (申請日範囲指定.equals(作成条件)) {
-            一覧作成条件 = new RString("申請日範囲指定");
-        }
-        return 一覧作成条件;
     }
 }
