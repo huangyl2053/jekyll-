@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -94,7 +95,7 @@ public class GogitaiJohoSakusei {
     private final RString 合議体情報作成 = new RString("合議体情報作成");
     private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
-    
+
     /**
      * コンストラクタです。
      *
@@ -251,6 +252,7 @@ public class GogitaiJohoSakusei {
             div.getTxtYukoKaishiYMD().setDisabled(false);
         }
         ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_UPD);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE_NAME, true);
         return ResponseData.of(div).respond();
     }
 
@@ -630,8 +632,8 @@ public class GogitaiJohoSakusei {
         GogitaiJohoSakuseiCSVShuturyokuEntity entity = new GogitaiJohoSakuseiCSVShuturyokuEntity();
         entity.setGogitaiNo(new RString(row.getGogitaiNumber().getValue().toString()));
         entity.setGogitaiMei(row.getGogitaiName());
-        entity.setGogitaiYukoKikanKaishiYMD(new RString(row.getYukoKaishiYMD().getValue().toString()));
-        entity.setGogitaiYukoKikanShuryoYMD(new RString(row.getYukoShuryoYMD().getValue().toString()));
+        entity.setGogitaiYukoKikanKaishiYMD(row.getYukoKaishiYMD().getValue().seireki().separator(Separator.SLASH).toDateString());
+        entity.setGogitaiYukoKikanShuryoYMD(row.getYukoShuryoYMD().getValue().seireki().separator(Separator.SLASH).toDateString());
         entity.setGogitaiKaishiYoteiTime(時刻転換(row.getGogitaiKaishiYoteiTime().getValue()));
         entity.setGogitaiShuryoYoteiTime(時刻転換(row.getGogitaiShuryoYoteiTime().getValue()));
         entity.setShinsakaiKaisaiBasho(row.getKaisaiBasho());
@@ -639,7 +641,7 @@ public class GogitaiJohoSakusei {
         entity.setGogitaiDummyFlag(row.getGogitaiDummyFlag() == true ? new RString("該当") : new RString("非該当"));
         return entity;
     }
-    
+
     private RString 時刻転換(RTime 時刻) {
         if (時刻 != null) {
             return new RString(時刻.toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
