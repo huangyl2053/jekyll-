@@ -183,7 +183,7 @@ public class CreateTargetHandler {
 
     /**
      * CSV出力した後にデータグリッドの送信日を更新します。
-     * Todo:共通ボタンのDownloadにonFinishが公開されていない。基本コントロールのDownLoadButtonを使用するか確認し、当メソッドを使用する場合は使用するように修正を行う。
+     * Todo:共通ボタンのDownloadにonFinishが公開されていない。基本コントロールのDownLoadButtonを使用するか確認し、当メソッドを使用する場合は使用するように修正を行う。不要な場合は削除する。
      */
     public void setDataGrid再読込() {
         div.getDgCreateTargetSummary().getDataSource().clear();
