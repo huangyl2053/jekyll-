@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -100,7 +101,7 @@ public class KanryoShoriShinsaUketsukeHandler {
         SearchResult<ShinSaKeTuKeBusiness> 審査受付 = get審査受付List();
         List<ShinSaKeTuKeBusiness> リスト = 審査受付.records();
         int totalCount = 審査受付.totalCount();
-        set審査受付List(リスト);
+        put審査受付List(リスト);
         for (ShinSaKeTuKeBusiness value : リスト) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(value.get保険者() == null ? RString.EMPTY : value.get保険者());
@@ -123,13 +124,16 @@ public class KanryoShoriShinsaUketsukeHandler {
 
     private SearchResult<ShinSaKeTuKeBusiness> get審査受付List() {
         Decimal 最大件数 = div.getTxtMaxCount().getValue();
+        LasdecCode 市町村コード
+                = div.getNinteiShinseiJohoTorokuKanryo().getCcdHokensya().getSelectedItem().get市町村コード();
         SearchResult<ShinSaKeTuKeBusiness> 審査受付List = YokaigoNinteiTaskListFinder.createInstance().
-                get審査受付モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, 最大件数));
+                get審査受付モード(
+                        YokaigoNinteiTaskListParameter.createParameter(
+                                ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY, 最大件数, 市町村コード));
         return 審査受付List;
     }
 
-    private void set審査受付List(List<ShinSaKeTuKeBusiness> list) {
+    private void put審査受付List(List<ShinSaKeTuKeBusiness> list) {
         if (!list.isEmpty()) {
             ShinSaKaiBusiness 前審査受付Model = YokaigoNinteiTaskListFinder.createInstance().
                     get前審査受付(YokaigoNinteiTaskListParameter.

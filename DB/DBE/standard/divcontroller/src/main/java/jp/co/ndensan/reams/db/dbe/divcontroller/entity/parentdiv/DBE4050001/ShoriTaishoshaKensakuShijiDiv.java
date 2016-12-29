@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShoriTaishoshaKensakuShijiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,10 +27,8 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     private TextBoxCode txtHihokenshaNumber;
     @JsonProperty("ddlKensakuTaisho")
     private DropDownList ddlKensakuTaisho;
-    @JsonProperty("txtSearchStYMD")
-    private TextBoxFlexibleDate txtSearchStYMD;
-    @JsonProperty("txtSearchEdYMD")
-    private TextBoxFlexibleDate txtSearchEdYMD;
+    @JsonProperty("txtSearchYMD")
+    private TextBoxDateRange txtSearchYMD;
     @JsonProperty("btnClear")
     private Button btnClear;
     @JsonProperty("txtMaxDisp")
@@ -81,39 +79,21 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     }
 
     /*
-     * gettxtSearchStYMD
-     * @return txtSearchStYMD
+     * gettxtSearchYMD
+     * @return txtSearchYMD
      */
-    @JsonProperty("txtSearchStYMD")
-    public TextBoxFlexibleDate getTxtSearchStYMD() {
-        return txtSearchStYMD;
+    @JsonProperty("txtSearchYMD")
+    public TextBoxDateRange getTxtSearchYMD() {
+        return txtSearchYMD;
     }
 
     /*
-     * settxtSearchStYMD
-     * @param txtSearchStYMD txtSearchStYMD
+     * settxtSearchYMD
+     * @param txtSearchYMD txtSearchYMD
      */
-    @JsonProperty("txtSearchStYMD")
-    public void setTxtSearchStYMD(TextBoxFlexibleDate txtSearchStYMD) {
-        this.txtSearchStYMD = txtSearchStYMD;
-    }
-
-    /*
-     * gettxtSearchEdYMD
-     * @return txtSearchEdYMD
-     */
-    @JsonProperty("txtSearchEdYMD")
-    public TextBoxFlexibleDate getTxtSearchEdYMD() {
-        return txtSearchEdYMD;
-    }
-
-    /*
-     * settxtSearchEdYMD
-     * @param txtSearchEdYMD txtSearchEdYMD
-     */
-    @JsonProperty("txtSearchEdYMD")
-    public void setTxtSearchEdYMD(TextBoxFlexibleDate txtSearchEdYMD) {
-        this.txtSearchEdYMD = txtSearchEdYMD;
+    @JsonProperty("txtSearchYMD")
+    public void setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
+        this.txtSearchYMD = txtSearchYMD;
     }
 
     /*

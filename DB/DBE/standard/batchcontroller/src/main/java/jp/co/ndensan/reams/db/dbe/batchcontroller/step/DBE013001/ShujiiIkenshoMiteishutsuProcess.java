@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1390-090 lijia
  */
-public class ShujiiIkenshoMiteishutsuProcess extends BatchKeyBreakBase<IkenshoJohoPrintRelateEntity> {
+public class ShujiiIkenshoMiteishutsuProcess extends BatchProcessBase<IkenshoJohoPrintRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojohoprint.IIkenshoJohoPrintMapper.get主治医意見書未提出者情報");
@@ -89,23 +89,12 @@ public class ShujiiIkenshoMiteishutsuProcess extends BatchKeyBreakBase<IkenshoJo
     }
 
     @Override
-    protected void usualProcess(IkenshoJohoPrintRelateEntity relateEntity) {
+    protected void process(IkenshoJohoPrintRelateEntity relateEntity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
         ShujiiIkenshoMiteishutsuEntity entity = business.toShujiiIkenshoMiteishutsuEntity(relateEntity);
         ShujiiIkenshoMiteishutsuReport report = new ShujiiIkenshoMiteishutsuReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);
         index_tmp++;
-    }
-
-    @Override
-    protected void keyBreakProcess(IkenshoJohoPrintRelateEntity relateEntity) {
-        if (hasBrek(getBefore(), relateEntity)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
-            ShujiiIkenshoMiteishutsuEntity entity = business.toShujiiIkenshoMiteishutsuEntity(relateEntity);
-            ShujiiIkenshoMiteishutsuReport report = new ShujiiIkenshoMiteishutsuReport(entity, index_tmp);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
     }
 
     @Override
@@ -117,10 +106,6 @@ public class ShujiiIkenshoMiteishutsuProcess extends BatchKeyBreakBase<IkenshoJo
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
-    }
-
-    private boolean hasBrek(IkenshoJohoPrintRelateEntity before, IkenshoJohoPrintRelateEntity current) {
-        return !before.getHihokenshaNo().equals(current.getHihokenshaNo());
     }
 
     private PersonalData toPersonalData(IkenshoJohoPrintRelateEntity entity) {
@@ -140,7 +125,7 @@ public class ShujiiIkenshoMiteishutsuProcess extends BatchKeyBreakBase<IkenshoJo
         List<RString> 出力条件 = new ArrayList<>();
         if (依頼日.equals(processParameter.get主治医意見書未提出者一覧作成条件())) {
             出力条件.add(new RString("依頼日から指定期間経過した申請者"));
-            出力条件.add(processParameter.get主治医意見書未提出者一覧依頼日数());
+            出力条件.add(new RString("依頼日数：").concat(processParameter.get主治医意見書未提出者一覧依頼日数()));
         } else if (申請日範囲指定.equals(processParameter.get主治医意見書未提出者一覧作成条件())) {
             出力条件.add(new RString("申請日の範囲を指定"));
             if (processParameter.get主治医意見書未提出者一覧申請日From() == null && processParameter.get主治医意見書未提出者一覧申請日To() == null) {
@@ -148,7 +133,7 @@ public class ShujiiIkenshoMiteishutsuProcess extends BatchKeyBreakBase<IkenshoJo
             } else {
                 RString 申請日FROM = dateFormat(processParameter.get主治医意見書未提出者一覧申請日From());
                 RString 申請日TO = dateFormat(processParameter.get主治医意見書未提出者一覧申請日To());
-                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+                出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
             }
         }
         出力条件.add(set主治医意見書未提出者一覧作成条件(processParameter.get主治医意見書未提出者一覧作成条件()));

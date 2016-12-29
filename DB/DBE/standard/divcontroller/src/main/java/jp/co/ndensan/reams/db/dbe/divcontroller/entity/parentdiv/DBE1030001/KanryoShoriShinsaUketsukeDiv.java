@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -97,11 +97,6 @@ public class KanryoShoriShinsaUketsukeDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IYokaigoNinteiTaskListDiv getCcdNinteiTaskList() {
-        return this.getNinteiShinseiJohoTorokuKanryo().getCcdNinteiTaskList();
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtCompleteCount() {
         return this.getNinteiShinseiJohoTorokuKanryo().getTxtCompleteCount();
     }
@@ -109,6 +104,11 @@ public class KanryoShoriShinsaUketsukeDiv extends Panel {
     @JsonIgnore
     public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.getNinteiShinseiJohoTorokuKanryo().setTxtCompleteCount(txtCompleteCount);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokensya() {
+        return this.getNinteiShinseiJohoTorokuKanryo().getCcdHokensya();
     }
 
     @JsonIgnore

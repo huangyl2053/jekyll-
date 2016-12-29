@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 15 15:57:02 JST 2016 
+ * Wed Dec 28 15:27:58 JST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgImageMaskingTaisho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
 
     private RString imageName;
     private RString hasMask;

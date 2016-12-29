@@ -32,6 +32,7 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
     private final RString listHakkoIchiranhyo_1_2;
     private final RString listHakkoIchiranhyo_1_3;
     private final RString listHakkoIchiranhyo_1_4;
+    private final RString listHakkoIchiranhyo_1_5;
 
     /**
      * インスタンスを生成します。
@@ -49,6 +50,7 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
      * @param listHakkoIchiranhyo_1_2 依頼書提出期限
      * @param listHakkoIchiranhyo_1_3 市町村コード
      * @param listHakkoIchiranhyo_1_4 市町村名称
+     * @param listHakkoIchiranhyo_1_5 証記載保険者番号
      */
     public SyujiyikenshosakuseyiraihakouBodyItem(
             RString listHakkoIchiranhyo_2,
@@ -63,7 +65,8 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
             RString listHakkoIchiranhyo_1_1,
             RString listHakkoIchiranhyo_1_2,
             RString listHakkoIchiranhyo_1_3,
-            RString listHakkoIchiranhyo_1_4) {
+            RString listHakkoIchiranhyo_1_4,
+            RString listHakkoIchiranhyo_1_5) {
 
         this.listHakkoIchiranhyo_2 = listHakkoIchiranhyo_2;
         this.listHakkoIchiranhyo_3 = listHakkoIchiranhyo_3;
@@ -78,5 +81,6 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
         this.listHakkoIchiranhyo_1_2 = listHakkoIchiranhyo_1_2;
         this.listHakkoIchiranhyo_1_3 = listHakkoIchiranhyo_1_3;
         this.listHakkoIchiranhyo_1_4 = listHakkoIchiranhyo_1_4;
+        this.listHakkoIchiranhyo_1_5 = listHakkoIchiranhyo_1_5;
     }
 }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -63,6 +64,8 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
      */
     public CenterTransmissionMybitisParamter toCenterTransmissionMybitisParamter() {
         CenterTransmissionMybitisParamter paramter = new CenterTransmissionMybitisParamter();
+        paramter.set通常(ShoriJotaiKubun.通常.getコード());
+        paramter.set延期(ShoriJotaiKubun.延期.getコード());
         paramter.setShinseishoKanriNoList(申請書管理番号リスト);
         paramter.setMiSyutsuryokuNomi(is未出力のみ);
         paramter.setTennyuShiboSyuturyoku(is転入死亡情報出力);

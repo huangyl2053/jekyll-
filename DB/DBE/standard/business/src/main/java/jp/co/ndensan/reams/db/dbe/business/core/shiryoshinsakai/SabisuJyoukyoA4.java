@@ -164,7 +164,7 @@ public class SabisuJyoukyoA4 {
         if (RString.isNullOrEmpty(entity.getChosainShikaku())) {
             項目.set調査員資格(RString.EMPTY);
         } else {
-            項目.set調査員資格(Sikaku.toValue(entity.getChosainShikaku()).get名称());
+            項目.set調査員資格(Sikaku.toValue(getName_半角スペース削除(entity.getChosainShikaku())).get名称());
         }
         if (entity.getNinchishoJiritsudoIIijoNoGaizensei() == null) {
             項目.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
@@ -181,6 +181,13 @@ public class SabisuJyoukyoA4 {
         } else {
             項目.set給付区分(SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode().getColumnValue()).get名称());
         }
+    }
+
+    private RString getName_半角スペース削除(RString 編集前) {
+        if (RString.isNullOrEmpty(編集前)) {
+            return RString.EMPTY;
+        }
+        return 編集前.replace(" ", "");
     }
 
     private RString set要介護度(Code 厚労省IF識別コード, Code 二次判定要介護状態区分コード) {

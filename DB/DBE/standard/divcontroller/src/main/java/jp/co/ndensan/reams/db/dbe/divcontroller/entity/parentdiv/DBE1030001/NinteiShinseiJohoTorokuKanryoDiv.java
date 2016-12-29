@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,10 +23,10 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdNinteiTaskList")
-    private YokaigoNinteiTaskListDiv ccdNinteiTaskList;
     @JsonProperty("txtCompleteCount")
     private TextBoxNum txtCompleteCount;
+    @JsonProperty("ccdHokensya")
+    private HokenshaListDiv ccdHokensya;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
     @JsonProperty("txtMaxCount")
@@ -38,15 +38,6 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdNinteiTaskList
-     * @return ccdNinteiTaskList
-     */
-    @JsonProperty("ccdNinteiTaskList")
-    public IYokaigoNinteiTaskListDiv getCcdNinteiTaskList() {
-        return ccdNinteiTaskList;
-    }
-
     /*
      * gettxtCompleteCount
      * @return txtCompleteCount
@@ -63,6 +54,15 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
     @JsonProperty("txtCompleteCount")
     public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.txtCompleteCount = txtCompleteCount;
+    }
+
+    /*
+     * getccdHokensya
+     * @return ccdHokensya
+     */
+    @JsonProperty("ccdHokensya")
+    public IHokenshaListDiv getCcdHokensya() {
+        return ccdHokensya;
     }
 
     /*

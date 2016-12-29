@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2240001",
      "toLayoutTitle": "認定調査結果取込（OCR）",
-     "toState": "初期状態_メニューから"
+     "toState": "バッチ起動"
     },
     {
      "id": "2",

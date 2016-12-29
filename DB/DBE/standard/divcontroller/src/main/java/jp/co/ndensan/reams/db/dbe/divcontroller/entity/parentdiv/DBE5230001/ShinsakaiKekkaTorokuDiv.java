@@ -23,6 +23,8 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("TaishoshaNashi")
+    private TaishoshaNashiDiv TaishoshaNashi;
     @JsonProperty("KanryoMessagePanel")
     private KanryoMessagePanelDiv KanryoMessagePanel;
     @JsonProperty("KyotsuHyojiArea")
@@ -52,6 +54,24 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getTaishoshaNashi
+     * @return TaishoshaNashi
+     */
+    @JsonProperty("TaishoshaNashi")
+    public TaishoshaNashiDiv getTaishoshaNashi() {
+        return TaishoshaNashi;
+    }
+
+    /*
+     * setTaishoshaNashi
+     * @param TaishoshaNashi TaishoshaNashi
+     */
+    @JsonProperty("TaishoshaNashi")
+    public void setTaishoshaNashi(TaishoshaNashiDiv TaishoshaNashi) {
+        this.TaishoshaNashi = TaishoshaNashi;
+    }
+
     /*
      * getKanryoMessagePanel
      * @return KanryoMessagePanel
@@ -253,6 +273,26 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public Icon getIcoTaishoshaNashi() {
+        return this.getTaishoshaNashi().getIcoTaishoshaNashi();
+    }
+
+    @JsonIgnore
+    public void  setIcoTaishoshaNashi(Icon icoTaishoshaNashi) {
+        this.getTaishoshaNashi().setIcoTaishoshaNashi(icoTaishoshaNashi);
+    }
+
+    @JsonIgnore
+    public Label getLblTaishoshaNashi() {
+        return this.getTaishoshaNashi().getLblTaishoshaNashi();
+    }
+
+    @JsonIgnore
+    public void  setLblTaishoshaNashi(Label lblTaishoshaNashi) {
+        this.getTaishoshaNashi().setLblTaishoshaNashi(lblTaishoshaNashi);
+    }
+
     @JsonIgnore
     public TextBox getTxtShinsakaiName() {
         return this.getKyotsuHyojiArea().getTxtShinsakaiName();

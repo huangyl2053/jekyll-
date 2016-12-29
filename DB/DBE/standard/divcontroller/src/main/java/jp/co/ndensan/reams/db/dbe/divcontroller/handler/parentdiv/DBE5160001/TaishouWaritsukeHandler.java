@@ -112,13 +112,15 @@ public class TaishouWaritsukeHandler {
      */
     public void setCommonButtonDisabled() {
         RString 進捗状況 = div.getTxtStatus().getValue();
-        if (ShinsakaiShinchokuJokyo.中止.get画面表示名称().equals(進捗状況) || ShinsakaiShinchokuJokyo.完了.get画面表示名称().equals(進捗状況) || 進捗状況.isEmpty()) {
+        if (ShinsakaiShinchokuJokyo.中止.get画面表示名称().equals(進捗状況) || ShinsakaiShinchokuJokyo.完了.get画面表示名称().equals(進捗状況)) {
             div.getBtnJidoWaritsuke().setDisabled(true);
             div.getBtnWaritsuke().setDisabled(true);
             div.getBtnWaritsukeKaijo().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
         }
         if (!ShinsakaiShinchokuJokyo.未開催.get画面表示名称().equals(進捗状況)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
@@ -167,6 +169,7 @@ public class TaishouWaritsukeHandler {
             }
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
     }
 
     /**
@@ -175,6 +178,7 @@ public class TaishouWaritsukeHandler {
     public void 割付処理() {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         for (dgWaritsukeKohoshaIchiran_Row row : div.getDgWaritsukeKohoshaIchiran().getSelectedItems()) {
             候補者移転処理(row);
         }
@@ -190,6 +194,7 @@ public class TaishouWaritsukeHandler {
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         div.getTxtWaritsukeNinzu().setValue(new Decimal(div.getDgTaishoshaIchiran().getDataSource().size()));
     }
 
@@ -220,6 +225,7 @@ public class TaishouWaritsukeHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         div.getBtnJidoWaritsuke().setDisabled(true);
         div.getBtnWaritsuke().setDisabled(true);
         div.getBtnWaritsukeKaijo().setDisabled(true);
@@ -241,6 +247,9 @@ public class TaishouWaritsukeHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
+        if (ShinsakaiShinchokuJokyo.未開催.get画面表示名称().equals(div.getTxtStatus().getValue())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
+        }
         div.getBtnJidoWaritsuke().setDisabled(false);
         div.getBtnWaritsuke().setDisabled(false);
         div.getBtnWaritsukeKaijo().setDisabled(false);

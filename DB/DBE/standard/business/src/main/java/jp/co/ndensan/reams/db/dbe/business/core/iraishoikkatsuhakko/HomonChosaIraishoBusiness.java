@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
  */
 public class HomonChosaIraishoBusiness {
 
+    private static final int INT0 = 0;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -116,6 +117,7 @@ public class HomonChosaIraishoBusiness {
     private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("【認定調査依頼履歴一覧出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
+    private static final RString HAIFON = new RString("-");
     private RString shinseishoKanriNo = RString.EMPTY;
     private final HomonChosaIraishoProcessParamter processParamter;
     private final List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
@@ -550,20 +552,20 @@ public class HomonChosaIraishoBusiness {
                 entity.get事業者名称(),
                 entity.get被保険者氏名カナ(),
                 entity.get被保険者氏名(),
-                !entity.get性別().equals(Seibetsu.男.getコード()) ? 記号_星 : RString.EMPTY,
-                !entity.get性別().equals(Seibetsu.女.getコード()) ? 記号_星 : RString.EMPTY,
+                entity.get性別().equals(Seibetsu.男.getコード()) ? 記号 : RString.EMPTY,
+                entity.get性別().equals(Seibetsu.女.getコード()) ? 記号 : RString.EMPTY,
                 entity.get住所(),
-                entity.get郵便番号(),
+                entity.get郵便番号() != null ? new YubinNo(entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY,
                 entity.get電話番号(),
-                !生年月日年号.equals(年号_明治) ? 記号_星 : RString.EMPTY,
-                !生年月日年号.equals(年号_大正) ? 記号_星 : RString.EMPTY,
-                !生年月日年号.equals(年号_昭和) ? 記号_星 : RString.EMPTY,
+                生年月日年号.equals(年号_明治) ? 記号 : RString.EMPTY,
+                生年月日年号.equals(年号_大正) ? 記号 : RString.EMPTY,
+                生年月日年号.equals(年号_昭和) ? 記号 : RString.EMPTY,
                 get年月日(entity.get生年月日()),
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT6) : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT6, INT8) : RString.EMPTY,
                 entity.get年齢(),
                 entity.get連絡先住所(),
-                entity.get連絡先郵便番号(),
+                entity.get連絡先郵便番号() != null ? new YubinNo(entity.get連絡先郵便番号()).getEditedYubinNo() : RString.EMPTY,
                 entity.get連絡先電話番号(),
                 entity.get連絡先携帯番号(),
                 entity.get連絡先氏名(),

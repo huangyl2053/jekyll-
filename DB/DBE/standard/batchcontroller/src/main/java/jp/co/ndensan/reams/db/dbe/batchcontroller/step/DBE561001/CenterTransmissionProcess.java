@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
@@ -52,7 +52,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBE-1520-020 wangxiaodong
  */
-public class CenterTransmissionProcess extends BatchKeyBreakBase<CenterTransmissionEntity> {
+public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissionEntity> {
 
     private static final RString SELECT_SHUJIIIKENSHOIKENITEM = new RString("jp.co.ndensan.reams.db.dbe"
             + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getCenterTransmissionData");
@@ -62,8 +62,7 @@ public class CenterTransmissionProcess extends BatchKeyBreakBase<CenterTransmiss
 
     private CenterTransmissionProcessParameter parameter;
     private CenterTransmissionMybitisParamter mybitisParamter;
-    private List<RString> 申請書管理番号リスト;
-    private RString 申請書管理番号;
+    private CenterTransmissionEntity beforeEntity;
     private FileSpoolManager manager;
     private RString filename;
     private RString ファイル名;
@@ -94,9 +93,7 @@ public class CenterTransmissionProcess extends BatchKeyBreakBase<CenterTransmiss
         outputShinseishoKanriNo = new OutputParameter<>();
         シーケンシャル番号 = 0;
         出力データ件数 = 0;
-        申請書管理番号リスト = parameter.get申請書管理番号リスト();
         出力された申請書管理番号 = new ArrayList<>();
-        申請書管理番号 = RString.EMPTY;
         mybitisParamter = parameter.toCenterTransmissionMybitisParamter();
         if (parameter.is転入死亡情報出力()) {
             List<RString> shinseijiKubunCodeList = new ArrayList<>();
@@ -104,7 +101,6 @@ public class CenterTransmissionProcess extends BatchKeyBreakBase<CenterTransmiss
             shinseijiKubunCodeList.add(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード());
             mybitisParamter.setShinseijiKubunCodeList(shinseijiKubunCodeList);
         }
-        mybitisParamter.setShinseishoKanriNoList(申請書管理番号リスト);
         mybitisParamter.setGaikyoChosaTextImageKubun(DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         ファイル名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString());
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
@@ -125,26 +121,31 @@ public class CenterTransmissionProcess extends BatchKeyBreakBase<CenterTransmiss
     }
 
     @Override
-    protected void usualProcess(CenterTransmissionEntity entity) {
+    protected void process(CenterTransmissionEntity currentEntity) {
+        int 連番 = 0;
         シーケンシャル番号 = シーケンシャル番号 + 1;
         出力データ件数 = 出力データ件数 + 1;
-        csvWriterCenterTransmission.writeLine(new CenterTransmissionEditEntity(entity, シーケンシャル番号).getファイル出力項目());
-        if (!申請書管理番号.equals(entity.getShinseishoKanriNo().value())) {
-            出力された申請書管理番号.add(entity.getShinseishoKanriNo().value());
-            申請書管理番号 = entity.getShinseishoKanriNo().value();
+        if (is死亡データ(beforeEntity, currentEntity)) {
+            連番 = 1;
+        }
+        csvWriterCenterTransmission.writeLine(new CenterTransmissionEditEntity(currentEntity, シーケンシャル番号, 連番).getファイル出力項目());
+        beforeEntity = currentEntity;
+        RString 申請書管理番号 = currentEntity.getShinseishoKanriNo().value();
+        if (!出力された申請書管理番号.contains(申請書管理番号)) {
+            出力された申請書管理番号.add(申請書管理番号);
             AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
         }
     }
 
-    @Override
-    protected void keyBreakProcess(CenterTransmissionEntity entity) {
-        if (isBreak(getBefore(), entity)) {
-        } else {
-        }
-    }
+    private boolean is死亡データ(CenterTransmissionEntity before, CenterTransmissionEntity current) {
 
-    private boolean isBreak(CenterTransmissionEntity before, CenterTransmissionEntity current) {
-        return !before.getShinseishoKanriNo().equals(current.getShinseishoKanriNo());
+        if (before == null) {
+            return false;
+        } else {
+            return before.getNinteiShinseiYMD().equals(current.getNinteiShinseiYMD())
+                    && before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo())
+                    && before.getHihokenshaNo().equals(current.getHihokenshaNo());
+        }
     }
 
     @Override

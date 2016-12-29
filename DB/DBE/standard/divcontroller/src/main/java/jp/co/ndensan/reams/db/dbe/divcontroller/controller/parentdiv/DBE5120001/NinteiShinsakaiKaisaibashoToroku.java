@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5120001
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.DBE5120001StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.DBE5120001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
@@ -50,6 +52,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
     private static final RString デフォルト検索条件 = new RString("yuuKo");
     private static final boolean 有効 = true;
     private static final boolean 全て = false;
+    private final RString 開催場所登録 = new RString("開催場所登録");
 
     /**
      * 介護認定審査会開催場所登録の初期処理を表示します。
@@ -264,15 +267,21 @@ public class NinteiShinsakaiKaisaibashoToroku {
             Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
                     = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
             getHandler(div).save(shinsakaiKaisaiBashoJohoList);
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
-
+            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                    replace(開催場所登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBE5120001StateName.完了);
         }
-        if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
-                equals(ResponseHolder.getMessageCode().toString())) {
-            onLoad(div);
-        }
-
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「完了する」ボタン イベントハンドラです。
+     *
+     * @param div div
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnComplete(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE5120001TransitionEventName.処理完了).respond();
     }
 
     private List<ShinsakaiKaisaiBashoJoho> get開催場所一覧(NinteiShinsakaiKaisaibashoTorokuDiv div) {

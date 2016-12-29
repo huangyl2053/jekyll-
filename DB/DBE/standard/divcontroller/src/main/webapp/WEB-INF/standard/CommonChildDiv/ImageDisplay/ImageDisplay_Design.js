@@ -55,6 +55,10 @@ var DBE;
                 return new UZA.DynamicImage(this.convFiledName("imgMask"));
             };
 
+            Controls.prototype.lblNoImage = function () {
+                return new UZA.Label(this.convFiledName("lblNoImage"));
+            };
+
             Controls.prototype.btnBefore = function () {
                 return new UZA.Button(this.convFiledName("btnBefore"));
             };
@@ -65,10 +69,6 @@ var DBE;
 
             Controls.prototype.btnAfterImg = function () {
                 return new UZA.Button(this.convFiledName("btnAfterImg"));
-            };
-
-            Controls.prototype.lblNoImage = function () {
-                return new UZA.Label(this.convFiledName("lblNoImage"));
             };
             return Controls;
         })();

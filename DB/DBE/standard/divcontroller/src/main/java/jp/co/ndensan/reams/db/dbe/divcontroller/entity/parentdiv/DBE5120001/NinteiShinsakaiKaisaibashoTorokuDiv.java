@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -18,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,6 +33,8 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     private ShinsakaiKaisaibashoIchiranDiv ShinsakaiKaisaibashoIchiran;
     @JsonProperty("ShinakaiKaisaIbashoShosai")
     private ShinakaiKaisaIbashoShosaiDiv ShinakaiKaisaIbashoShosai;
+    @JsonProperty("ccdKanryoMsg")
+    private KanryoMessageDiv ccdKanryoMsg;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -90,6 +94,15 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     @JsonProperty("ShinakaiKaisaIbashoShosai")
     public void setShinakaiKaisaIbashoShosai(ShinakaiKaisaIbashoShosaiDiv ShinakaiKaisaIbashoShosai) {
         this.ShinakaiKaisaIbashoShosai = ShinakaiKaisaIbashoShosai;
+    }
+
+    /*
+     * getccdKanryoMsg
+     * @return ccdKanryoMsg
+     */
+    @JsonProperty("ccdKanryoMsg")
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return ccdKanryoMsg;
     }
 
     /*

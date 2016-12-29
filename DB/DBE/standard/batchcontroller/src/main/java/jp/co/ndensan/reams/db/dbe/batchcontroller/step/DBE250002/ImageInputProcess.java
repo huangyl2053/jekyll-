@@ -145,14 +145,14 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
 
     private List<DbT5304ShujiiIkenshoIkenItemEntity> 新規追加_DbT5304_要介護認定主治医意見書意見項目(ImageinputResult ir)
             throws NullPointerException, IllegalArgumentException {
-        DbT5304ShujiiIkenshoIkenItemEntity entity = new DbT5304ShujiiIkenshoIkenItemEntity();
         List<DbT5304ShujiiIkenshoIkenItemEntity> entitys = new ArrayList<>();
         for (int i = 1; i <= 113; i++) {
+            DbT5304ShujiiIkenshoIkenItemEntity entity = new DbT5304ShujiiIkenshoIkenItemEntity();
             entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
             entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
             entity.setRemban(i);
             entity.setKoroshoIfShikibetsuCode(new Code(ir.getT5101_厚労省IF識別コード()));
-           switch (IkenshoKomokuMapping09B.toValue(new RString(i))) {
+            switch (IkenshoKomokuMapping09B.toValue(new RString(i))) {
                 case 点滴の管理:
                     if (!イメージ取込解析結果.get処置内容().isEmpty()) {
                         entity.setIkenItem(イメージ取込解析結果.get処置内容().substring(0, 1));
@@ -635,9 +635,9 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     }
 
     private List<DbT5303ShujiiIkenshoKinyuItemEntity> 新規追加_DbT5303_要介護認定主治医意見書記入項目(ImageinputResult ir) throws NullPointerException, IllegalArgumentException {
-        DbT5303ShujiiIkenshoKinyuItemEntity entity = new DbT5303ShujiiIkenshoKinyuItemEntity();
         List<DbT5303ShujiiIkenshoKinyuItemEntity> entitys = new ArrayList<>();
         for (int i = 1; i <= 23; i++) {
+            DbT5303ShujiiIkenshoKinyuItemEntity entity = new DbT5303ShujiiIkenshoKinyuItemEntity();
             entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
             entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
             entity.setRemban(i);

@@ -162,7 +162,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
         } else {
             RString 申請日FROM = dateFormat(paramter.get認定調査依頼先変更者一覧表申請日From());
             RString 申請日TO = dateFormat(paramter.get認定調査依頼先変更者一覧表申請日To());
-            出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
+            出力条件.add(new RString("申請日：").concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
         }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE012002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,

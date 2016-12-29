@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGe
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator.DEFAULT_申請書管理番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator.DEFAULT_認定調査依頼履歴番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator.DEFAULT_概況特記テキストイメージ区分;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5206GaikyoTokkiEntityGenerator.DEFAULT_原本マスク区分;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -51,11 +53,13 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -63,7 +67,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -71,7 +76,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
         }
 
         @Test
@@ -79,7 +85,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             DbT5206GaikyoTokkiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -88,7 +95,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             DbT5206GaikyoTokkiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -100,11 +108,13 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -121,12 +131,14 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
 
             assertThat(sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分), is(notNullValue()));
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分), is(notNullValue()));
         }
     }
 
@@ -137,7 +149,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
         }
 
         @Test
@@ -145,7 +158,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             DbT5206GaikyoTokkiEntity updateRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
             // TODO  主キー以外の項目を変更してください
             // updateRecord.set変更したい項目(75);
 
@@ -154,7 +168,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             DbT5206GaikyoTokkiEntity updatedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
 
             // TODO  主キー以外の項目を変更してください
             // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
@@ -168,7 +183,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
         }
 
         @Test
@@ -176,7 +192,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             DbT5206GaikyoTokkiEntity deletedEntity = sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分);
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -184,7 +201,8 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
             assertThat(sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_認定調査依頼履歴番号,
-                    DEFAULT_概況特記テキストイメージ区分), is(nullValue()));
+                    DEFAULT_概況特記テキストイメージ区分,
+                    DEFAULT_原本マスク区分), is(nullValue()));
         }
     }
 
@@ -193,11 +211,13 @@ public class DbT5206GaikyoTokkiDacTest extends DbzTestDacBase {
         public static void insert(
                 ShinseishoKanriNo 申請書管理番号,
                 int 認定調査依頼履歴番号,
-                RString 概況特記テキストイメージ区分) {
+                RString 概況特記テキストイメージ区分,
+                Code 原本マスク区分) {
             DbT5206GaikyoTokkiEntity entity = DbT5206GaikyoTokkiEntityGenerator.createDbT5206GaikyoTokkiEntity();
             entity.setShinseishoKanriNo(申請書管理番号);
             entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
             entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
+            entity.setGenponMaskKubun(原本マスク区分);
             sut.save(entity);
         }
     }

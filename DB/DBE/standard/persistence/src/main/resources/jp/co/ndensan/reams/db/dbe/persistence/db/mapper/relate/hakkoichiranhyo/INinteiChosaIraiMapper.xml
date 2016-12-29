@@ -74,10 +74,16 @@
         AND "logicalDeletedFlag" = false)
         AND dbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND dbT5101."logicalDeletedFlag" = false
-        AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND dbT5105."centerSoshinYMD" IS NULL
+        AND (dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+        AND dbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '') 
+        AND (dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+        OR dbT5105."ninteiShinsakaiWariateKanryoYMD" = '') 
+        AND (dbT5105."ninteiShinsakaiKanryoYMD" IS NULL 
+        OR dbT5105."ninteiShinsakaiKanryoYMD" = '') 
+        AND (dbT5105."centerSoshinYMD" IS NULL 
+        OR dbT5105."centerSoshinYMD" = '') 
+        AND (dbt5101."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{転入}
+        AND dbt5101."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{喪失})
         AND
         <foreach
             collection="ninteiChosaIraiList"
@@ -96,16 +102,20 @@
             AND dbT5201."ninteichosaIraiYMD" <![CDATA[<=]]> #{iraiToYMD}
         </if>
         <if test= "is認定調査依頼書未印刷">
-            AND dbT5201."iraishoShutsuryokuYMD" IS NULL
+            AND (dbT5201."iraishoShutsuryokuYMD" IS NULL 
+            OR dbT5201."iraishoShutsuryokuYMD" = '') 
         </if>
         <if test= "is認定調査依頼書印刷済">
-            AND dbT5201."iraishoShutsuryokuYMD" IS NOT NULL
+            AND (dbT5201."iraishoShutsuryokuYMD" IS NOT NULL 
+            AND dbT5201."iraishoShutsuryokuYMD" <![CDATA[<>]]> '') 
         </if>
         <if test= " is認定調査票未印刷">
-            AND dbT5201."chosahyoTouShutsuryokuYMD" IS NULL
+            AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NULL 
+            OR dbT5201."chosahyoTouShutsuryokuYMD" = '') 
         </if>
         <if test= "is認定調査票印刷済">
-            AND dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL
+            AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL 
+            AND dbT5201."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '') 
         </if>
         ORDER BY
         dbT5201."iraishoShutsuryokuYMD",

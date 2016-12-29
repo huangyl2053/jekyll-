@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TaishouWaritsuke {
 
     private static final RString 審査会順番を振りなおす = new RString("btnResetShinsaOrder");
+    private static final RString 完了メッセージ = new RString("認定審査会対象者割付");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -171,10 +172,16 @@ public class TaishouWaritsuke {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             handler.審査会順序確定();
+            handler.介護認定審査会割付情報更新();
+            handler.対象者一覧検索();
+            handler.候補者一覧検索();
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        handler.介護認定審査会割付情報更新();
-        handler.対象者一覧検索();
-        handler.候補者一覧検索();
+        if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
+                equals(ResponseHolder.getMessageCode().toString())) {
+            onLoad(div);
+            getHandler(div).setCommonButtonDisabled();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -189,8 +196,15 @@ public class TaishouWaritsuke {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DBE5160001WarningMessage.対象未選択.getMessage()).respond();
             }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (new RString(DBE5160001WarningMessage.対象未選択.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 登録処理(div);
+                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            }
+            if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
+                    equals(ResponseHolder.getMessageCode().toString())) {
+                onLoad(div);
+                getHandler(div).setCommonButtonDisabled();
             }
             return ResponseData.of(div).respond();
         } else {
@@ -208,6 +222,12 @@ public class TaishouWaritsuke {
                     handler.対象者一覧検索();
                     handler.候補者一覧検索();
                     CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
+                    return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+                }
+                if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
+                        equals(ResponseHolder.getMessageCode().toString())) {
+                    onLoad(div);
+                    getHandler(div).setCommonButtonDisabled();
                 }
                 return ResponseData.of(div).respond();
             }
@@ -238,9 +258,33 @@ public class TaishouWaritsuke {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             getHandler(div).介護認定審査会開催予定情報更新(false);
-            return ResponseData.of(div).forwardWithEventName(DBE5160001TransitionEventName.一覧に戻る).respond();
+            div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                    replace(完了メッセージ.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBE5160001StateName.完了);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 継続ボタン押下動作です。
+     *
+     * @param div ShinsakaiTorokuDiv
+     * @return ResponseData<ShinsakaiTorokuDiv>
+     */
+    public ResponseData<TaishouWaritsukeDiv> onClick_btnContinue(TaishouWaritsukeDiv div) {
+        onLoad(div);
+        getHandler(div).setCommonButtonDisabled();
+        return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
+    }
+
+    /**
+     * 完了するボタン押下時の動作
+     *
+     * @param div
+     * @return ResponseData
+     */
+    public ResponseData<TaishouWaritsukeDiv> onClick_btnComplete(TaishouWaritsukeDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE5160001TransitionEventName.一覧に戻る).respond();
     }
 
     private TaishouWaritsukeHandler getHandler(TaishouWaritsukeDiv div) {

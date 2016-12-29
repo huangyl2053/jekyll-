@@ -75,6 +75,8 @@ public class KaigoNinteiShinseiKensaku {
 
         getHandler(div).initialize();
         getHandler(div).setJyoTai(get受給と認定の判定(), RString.EMPTY);
+        getHandler(div).setMinashiFlagCheck();
+        getHandler(div).setClearbtnAndMaxkensuDisplayNone(false);
         return ResponseData.of(div).respond();
     }
 
@@ -86,6 +88,7 @@ public class KaigoNinteiShinseiKensaku {
      */
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onClick_btnJokenClear(KaigoNinteiShinseiKensakuDiv div) {
         div.getCcdNinteiShinseishaFinder().initialize();
+        getHandler(div).setMinashiFlagCheck();
         return ResponseData.of(div).respond();
     }
 
@@ -98,6 +101,8 @@ public class KaigoNinteiShinseiKensaku {
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onClick_btnSaiKensaku(KaigoNinteiShinseiKensakuDiv div) {
         div.getCcdNinteiShinseishaFinder().initialize();
         getHandler(div).setJyoTai(get受給と認定の判定(), RString.EMPTY);
+        getHandler(div).setMinashiFlagCheck();
+        getHandler(div).setClearbtnAndMaxkensuDisplayNone(false);
         return ResponseData.of(div).respond();
     }
 

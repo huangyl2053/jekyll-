@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -176,6 +177,11 @@ public class NinteichosaIraiDiv extends Panel {
     @JsonIgnore
     public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtMaxCount(txtMaxCount);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getCcdHokenshaList();
     }
 
     @JsonIgnore

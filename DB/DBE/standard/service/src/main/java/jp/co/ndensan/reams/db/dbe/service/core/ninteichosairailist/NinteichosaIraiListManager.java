@@ -201,7 +201,8 @@ public class NinteichosaIraiListManager {
         DbT5206GaikyoTokkiEntity entity = 認定調査票概況特記Dac.selectByKey(
                 認定調査票概況特記.get申請書管理番号(),
                 認定調査票概況特記.get認定調査依頼履歴番号(),
-                認定調査票概況特記.get概況特記テキストイメージ区分());
+                認定調査票概況特記.get概況特記テキストイメージ区分(),
+                認定調査票概況特記.get原本マスク区分());
         if (entity != null) {
             entity.setJutakuKaishu(認定調査票概況特記.get住宅改修());
             entity.setTokubetsuKyufuService(認定調査票概況特記.get市町村特別給付サービス種類名());

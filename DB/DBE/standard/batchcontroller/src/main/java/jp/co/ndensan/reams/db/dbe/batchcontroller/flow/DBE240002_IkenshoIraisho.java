@@ -173,39 +173,6 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
         return loopBatch(ShujiiIkenshoTeishutsuIraishoProcess.class)
                 .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
     }
-//
-//    /**
-//     * 帳票「DBE231002_主治医意見書記入用紙」を出力します。
-//     *
-//     * @return ShujiiIkensho_DBE231002Process
-//     */
-//    @Step(SHUJIIIKENSHO_DBE231002PROCESS)
-//    protected IBatchFlowCommand callShujiiIkensho_DBE231002Process() {
-//        return loopBatch(ShujiiIkensho_DBE231002Process.class)
-//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-//    }
-//
-//    /**
-//     * 帳票「DBE231014_主治医意見書記入用紙」を出力します。
-//     *
-//     * @return ShujiiIkensho_DBE231014Process
-//     */
-//    @Step(SHUJIIIKENSHO_DBE231014PROCESS)
-//    protected IBatchFlowCommand callShujiiIkensho_DBE231014Process() {
-//        return loopBatch(ShujiiIkensho_DBE231014Process.class)
-//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-//    }
-//
-//    /**
-//     * 帳票「DBE231012_主治医意見書記入用紙」を出力します。
-//     *
-//     * @return ShujiiIkensho_DBE231012Process
-//     */
-//    @Step(SHUJIIIKENSHO_DBE231012PROCESS)
-//    protected IBatchFlowCommand callShujiiIkensho_DBE231012Process() {
-//        return loopBatch(ShujiiIkensho_DBE231012Process.class)
-//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-//    }
 
     /**
      * 帳票「DBE230004_主治医意見書作成依頼履歴一覧」を出力します。

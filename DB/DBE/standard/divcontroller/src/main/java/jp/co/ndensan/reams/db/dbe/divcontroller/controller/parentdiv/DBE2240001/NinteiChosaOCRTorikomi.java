@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.Nint
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosaMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.DBE2240001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiOcrTorokuDataCollection;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiTorokuData;
@@ -71,6 +70,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 認定調査結果取込み（OCR）のコントローラクラスです。
@@ -91,6 +92,8 @@ public class NinteiChosaOCRTorikomi {
     private static final int CSV項目数 = 109;
     private static final RString イメージ取込み = new RString("イメージ取込み");
     private static final int DAY_COUNT_一週間 = 7;
+    private static final RString UICONTAINERID_DBEUC20601 = new RString("DBEUC20601");
+    private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
 
     /**
      * 画面の初期化します。
@@ -100,7 +103,7 @@ public class NinteiChosaOCRTorikomi {
      */
     public ResponseData<NinteiChosaOCRTorikomiDiv> onLoad(NinteiChosaOCRTorikomiDiv div) {
         getHandler(div).setサーバファイルパス();
-        return ResponseData.of(div).setState(DBE2240001StateName.バッチ起動);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -140,6 +143,11 @@ public class NinteiChosaOCRTorikomi {
      * @return 画面情報より作成したバッチパラメータ情報
      */
     public ResponseData<DBE250001_NinteiChosaKekkaTorikomiParameter> onSetBatchParameterURL(NinteiChosaOCRTorikomiDiv div) {
+        RString uiContainerID = ResponseHolder.getUIContainerId();
+        if (UICONTAINERID_DBEUC20601.equals(uiContainerID)) {
+            FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_BATCH);
+            FlowParameterAccessor.merge(fp);
+        }
         DBE250001_NinteiChosaKekkaTorikomiParameter parameter = getHandler(div).setバッチパラメータ();
         return ResponseData.of(parameter).respond();
     }

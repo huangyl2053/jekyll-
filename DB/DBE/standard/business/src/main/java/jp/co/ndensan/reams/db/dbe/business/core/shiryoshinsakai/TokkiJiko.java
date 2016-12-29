@@ -231,6 +231,7 @@ public class TokkiJiko {
                         entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
                 短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
+                短冊情報リスト.add(短冊情報);
             }
         }
         return 短冊情報リスト;
@@ -247,6 +248,7 @@ public class TokkiJiko {
                         entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
                 短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
                 短冊情報.set特記事項テキスト_イメージ(getFilePath(imageFileName));
+                短冊情報リスト.add(短冊情報);
             }
         }
         return 短冊情報リスト;

@@ -180,6 +180,8 @@ public class YokaigoninteiimagesakujoManager {
         DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本マスクを削除.equals(削除対象区分)) {
             要介護認定完了情報.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
+            要介護認定完了情報.setIkenshoTorokuKanryoYMD(FlexibleDate.EMPTY);
+            要介護認定完了情報.setMaskingKanryoYMD(FlexibleDate.EMPTY);
             要介護認定完了情報.setState(EntityDataState.Modified);
             dbT5105Dac.save(要介護認定完了情報);
             mapper.deleteDbT5205PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
@@ -221,6 +223,8 @@ public class YokaigoninteiimagesakujoManager {
         DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本マスクを削除.equals(削除対象区分)) {
             要介護認定完了情報.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
+            要介護認定完了情報.setIkenshoTorokuKanryoYMD(FlexibleDate.EMPTY);
+            要介護認定完了情報.setMaskingKanryoYMD(FlexibleDate.EMPTY);
             要介護認定完了情報.setState(EntityDataState.Modified);
             dbT5105Dac.save(要介護認定完了情報);
             mapper.deleteDbT5206PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(

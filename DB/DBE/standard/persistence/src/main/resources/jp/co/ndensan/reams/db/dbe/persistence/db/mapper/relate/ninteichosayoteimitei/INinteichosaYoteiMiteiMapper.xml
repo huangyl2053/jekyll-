@@ -104,8 +104,9 @@
             AND DbT5101."ninteiShinseiYMD" <![CDATA[<=]]>  #{認定調査予定未定者一覧申請日To}
         </if>
         ORDER BY
-            DbT5101."hihokenshaKana"
-            , DbT5101."ninteiShinseiYMD"
+            DbT5101."shoKisaiHokenshaNo" ASC,
+            DbT5101."ninteiShinseiYMD" ASC,
+            DbT5101."hihokenshaKana" ASC
     </select>
     
     <select id="getNinteichosaIraiHenko"
@@ -149,7 +150,12 @@
             AND DbT5101."logicalDeletedFlag" = FALSE	
             AND #{認定調査依頼先変更者一覧表申請日From} <![CDATA[<=]]>   DbT5101."ninteiShinseiYMD"	
             AND DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定調査依頼先変更者一覧表申請日To}
-            ORDER BY DbT5101."shinseishoKanriNo", DbT5201."ninteichosaIraiRirekiNo"
+            ORDER BY 
+                DbT5101."shoKisaiHokenshaNo" ASC,
+                DbT5101."ninteiShinseiYMD" ASC,
+                DbT5101."hihokenshaKana" ASC,
+                DbT5101."shinseishoKanriNo" ASC, 
+                DbT5201."ninteichosaIraiRirekiNo"
     </select>
     
     <select id="getCount"

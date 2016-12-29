@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -46,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-1390-090 lijia
  */
-public class ShujiiIkenshoSeikyuIchiranProcess extends BatchKeyBreakBase<IkenshoJohoPrintRelateEntity> {
+public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<IkenshoJohoPrintRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojohoprint.IIkenshoJohoPrintMapper.get主治医意見書作成料請求情報");
@@ -89,23 +89,12 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchKeyBreakBase<Ikensho
     }
 
     @Override
-    protected void usualProcess(IkenshoJohoPrintRelateEntity relateEntity) {
+    protected void process(IkenshoJohoPrintRelateEntity relateEntity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
         ShujiiIkenshoSeikyuIchiranEntity entity = business.toShujiiIkenshoSeikyuIchiranEntity(relateEntity);
         ShujiiIkenshoSeikyuIchiranReport report = new ShujiiIkenshoSeikyuIchiranReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);
         index_tmp++;
-    }
-
-    @Override
-    protected void keyBreakProcess(IkenshoJohoPrintRelateEntity relateEntity) {
-        if (hasBrek(getBefore(), relateEntity)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
-            ShujiiIkenshoSeikyuIchiranEntity entity = business.toShujiiIkenshoSeikyuIchiranEntity(relateEntity);
-            ShujiiIkenshoSeikyuIchiranReport report = new ShujiiIkenshoSeikyuIchiranReport(entity, index_tmp);
-            report.writeBy(reportSourceWriter);
-            index_tmp++;
-        }
     }
 
     @Override
@@ -117,10 +106,6 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchKeyBreakBase<Ikensho
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
-    }
-
-    private boolean hasBrek(IkenshoJohoPrintRelateEntity before, IkenshoJohoPrintRelateEntity current) {
-        return !before.getHihokenshaNo().equals(current.getHihokenshaNo());
     }
 
     private PersonalData toPersonalData(IkenshoJohoPrintRelateEntity entity) {
@@ -145,7 +130,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchKeyBreakBase<Ikensho
             } else {
                 RString 処理日FROM = dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日From());
                 RString 処理日TO = dateFormat(processParameter.get主治医意見書作成料請求一覧表処理日To());
-                出力条件.add(処理日FROM.concat(new RString("～")).concat(処理日TO));
+                出力条件.add(new RString("処理日：").concat(処理日FROM).concat(new RString("～")).concat(処理日TO));
             }
         } else if (受領日.equals(processParameter.get主治医意見書作成料請求一覧表作成条件())) {
             出力条件.add(new RString("受領日の範囲を指定"));
@@ -154,7 +139,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchKeyBreakBase<Ikensho
             } else {
                 RString 受領日FROM = dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日From());
                 RString 受領日TO = dateFormat(processParameter.get主治医意見書作成料請求一覧表受領日To());
-                出力条件.add(受領日FROM.concat(new RString("～")).concat(受領日TO));
+                出力条件.add(new RString("受領日：").concat(受領日FROM).concat(new RString("～")).concat(受領日TO));
             }
 
         }
