@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -96,23 +96,13 @@ public class ShujiiIkenshoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxDate getTxtShujiiIkenshoSakuseiIraibiFrom() {
-        return this.getShujiiIkenshoKensakujoken().getTxtShujiiIkenshoSakuseiIraibiFrom();
+    public TextBoxDateRange getTxtShujiiIkenshoSakuseiIraibi() {
+        return this.getShujiiIkenshoKensakujoken().getTxtShujiiIkenshoSakuseiIraibi();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIkenshoSakuseiIraibiFrom(TextBoxDate txtShujiiIkenshoSakuseiIraibiFrom) {
-        this.getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibiFrom(txtShujiiIkenshoSakuseiIraibiFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtShujiiIkenshoSakuseiIraibiTo() {
-        return this.getShujiiIkenshoKensakujoken().getTxtShujiiIkenshoSakuseiIraibiTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShujiiIkenshoSakuseiIraibiTo(TextBoxDate txtShujiiIkenshoSakuseiIraibiTo) {
-        this.getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibiTo(txtShujiiIkenshoSakuseiIraibiTo);
+    public void  setTxtShujiiIkenshoSakuseiIraibi(TextBoxDateRange txtShujiiIkenshoSakuseiIraibi) {
+        this.getShujiiIkenshoKensakujoken().setTxtShujiiIkenshoSakuseiIraibi(txtShujiiIkenshoSakuseiIraibi);
     }
 
     @JsonIgnore

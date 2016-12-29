@@ -341,10 +341,14 @@ public class IchijiHantei {
      */
     public ResponseData<IchijiHanteiDiv> btn_save(IchijiHanteiDiv div) {
 
+        Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報Models
+                = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
+
         if (!ResponseHolder.isReRequest()) {
-            ValidationMessageControlPairs validation = getValidatisonHandler(div).対象者一覧データの行選択チェック();
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
+
+            if (要介護認定一次判定結果情報Models == null || 要介護認定一次判定結果情報Models.values().isEmpty()
+                    || !要介護認定一次判定結果情報Models.hasAnyChanged()) {
+                return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
             }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
@@ -352,23 +356,8 @@ public class IchijiHantei {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報Models
-                    = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
-            if (要介護認定一次判定結果情報Models == null || 要介護認定一次判定結果情報Models.aliveValues().isEmpty()) {
-                return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
-            }
-
             List<IchijiHanteiKekkaJoho> torokuTaishoList = new ArrayList<>();
-
-            DataGrid<dgIchijiHanteiTaishoshaIchiran_Row> dg = div.getIchijiHanteiShoriTaishoshaIchiran()
-                    .getDgIchijiHanteiTaishoshaIchiran();
-            List<dgIchijiHanteiTaishoshaIchiran_Row> rowList = dg.getSelectedItems();
-            for (dgIchijiHanteiTaishoshaIchiran_Row row : rowList) {
-                IchijiHanteiKekkaJoho kekkaJoho = get登録対象データ(row, 要介護認定一次判定結果情報Models);
-                if (kekkaJoho != null) {
-                    torokuTaishoList.add(kekkaJoho);
-                }
-            }
+            torokuTaishoList.addAll(要介護認定一次判定結果情報Models.values());
 
             if (torokuTaishoList.isEmpty()) {
                 return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
@@ -376,6 +365,8 @@ public class IchijiHantei {
             IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
             manager.save要介護認定一次判定結果情報List(torokuTaishoList);
 
+            DataGrid<dgIchijiHanteiTaishoshaIchiran_Row> dg = div.getIchijiHanteiShoriTaishoshaIchiran()
+                    .getDgIchijiHanteiTaishoshaIchiran();
             for (dgIchijiHanteiTaishoshaIchiran_Row row : dg.getDataSource()) {
                 RealInitialLocker.release(new LockingKey(LOCKINGKEY.concat(row.getShinseishoKanriNo())));
             }
@@ -384,6 +375,7 @@ public class IchijiHantei {
             RString menuID = controlData.getMenuID();
             if (IchijiHanteiMenuId.一次判定処理.value().equals(menuID)) {
                 getHandler(div).initializtion();
+                getHandler(div).setMultiSelectable();
                 div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定結果を保存しました。"));
                 return ResponseData.of(div).setState(DBE3010001StateName.保存処理後);
             } else if (IchijiHanteiMenuId.完了処理_一次判定.value().equals(menuID)) {
@@ -391,16 +383,6 @@ public class IchijiHantei {
             }
         }
         return ResponseData.of(div).respond();
-    }
-
-    private IchijiHanteiKekkaJoho get登録対象データ(dgIchijiHanteiTaishoshaIchiran_Row row,
-            Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報Models) {
-
-        if (!RString.isNullOrEmpty(row.getColumnState())) {
-            IchijiHanteiKekkaJohoIdentifier key = new IchijiHanteiKekkaJohoIdentifier(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-            return 要介護認定一次判定結果情報Models.get(key);
-        }
-        return null;
     }
 
     private ValidationMessageControlPairs 一次判定対象者一覧(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {

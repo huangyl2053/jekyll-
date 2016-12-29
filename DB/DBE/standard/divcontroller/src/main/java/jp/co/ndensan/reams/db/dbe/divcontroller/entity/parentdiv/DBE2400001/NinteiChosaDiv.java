@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -96,23 +96,13 @@ public class NinteiChosaDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxDate getTxtIraibiFrom() {
-        return this.getNinteichosaKensakuJoken().getTxtIraibiFrom();
+    public TextBoxDateRange getTxtNinteiChosaIraibi() {
+        return this.getNinteichosaKensakuJoken().getTxtNinteiChosaIraibi();
     }
 
     @JsonIgnore
-    public void  setTxtIraibiFrom(TextBoxDate txtIraibiFrom) {
-        this.getNinteichosaKensakuJoken().setTxtIraibiFrom(txtIraibiFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtIraibiTo() {
-        return this.getNinteichosaKensakuJoken().getTxtIraibiTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtIraibiTo(TextBoxDate txtIraibiTo) {
-        this.getNinteichosaKensakuJoken().setTxtIraibiTo(txtIraibiTo);
+    public void  setTxtNinteiChosaIraibi(TextBoxDateRange txtNinteiChosaIraibi) {
+        this.getNinteichosaKensakuJoken().setTxtNinteiChosaIraibi(txtNinteiChosaIraibi);
     }
 
     @JsonIgnore
@@ -126,16 +116,6 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkNinteiChosahyo() {
-        return this.getNinteichosaKensakuJoken().getChkNinteiChosahyo();
-    }
-
-    @JsonIgnore
-    public void  setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
-        this.getNinteichosaKensakuJoken().setChkNinteiChosahyo(chkNinteiChosahyo);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtChosaDispMax() {
         return this.getNinteichosaKensakuJoken().getTxtChosaDispMax();
     }
@@ -143,6 +123,16 @@ public class NinteiChosaDiv extends Panel {
     @JsonIgnore
     public void  setTxtChosaDispMax(TextBoxNum txtChosaDispMax) {
         this.getNinteichosaKensakuJoken().setTxtChosaDispMax(txtChosaDispMax);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkNinteiChosahyo() {
+        return this.getNinteichosaKensakuJoken().getChkNinteiChosahyo();
+    }
+
+    @JsonIgnore
+    public void  setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
+        this.getNinteichosaKensakuJoken().setChkNinteiChosahyo(chkNinteiChosahyo);
     }
 
     @JsonIgnore

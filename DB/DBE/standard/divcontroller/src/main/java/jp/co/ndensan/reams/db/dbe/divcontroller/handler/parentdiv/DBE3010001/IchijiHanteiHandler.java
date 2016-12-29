@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
@@ -492,7 +493,7 @@ public class IchijiHanteiHandler {
     public void 対象者一覧更新の編集(dgIchijiHanteiTaishoshaIchiran_Row row, int index, IchijiHanteiKekkaJoho business) {
 
         if (business != null) {
-            row.setColumnState(new RString("更新"));
+            row.setColumnState(new RString("修正"));
             if (business.get要介護認定一次判定年月日() != null) {
                 row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
             }
@@ -603,5 +604,12 @@ public class IchijiHanteiHandler {
                         検索件数,
                         menuID,
                         shinseishoKanriNoList.getShinseishoKanriNoS());
+    }
+
+    /**
+     * グリッドを、複数選択可能な状態にします。
+     */
+    public void setMultiSelectable() {
+        div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setMultiSelectable(true);
     }
 }

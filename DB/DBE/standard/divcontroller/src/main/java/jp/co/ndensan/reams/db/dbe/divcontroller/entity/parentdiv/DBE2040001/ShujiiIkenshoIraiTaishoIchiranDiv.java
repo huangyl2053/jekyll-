@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -96,6 +98,21 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getIkenshoiraitaishoichiran().getCcdHokenshaList();
+    }
+
+    @JsonIgnore
+    public RadioButton getRadShoriJyotai() {
+        return this.getIkenshoiraitaishoichiran().getRadShoriJyotai();
+    }
+
+    @JsonIgnore
+    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
+        this.getIkenshoiraitaishoichiran().setRadShoriJyotai(radShoriJyotai);
+    }
+
+    @JsonIgnore
     public TextBox getTxtTotalCount() {
         return this.getIkenshoiraitaishoichiran().getTxtTotalCount();
     }
@@ -123,16 +140,6 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     @JsonIgnore
     public void  setTxtNoUpdate(TextBox txtNoUpdate) {
         this.getIkenshoiraitaishoichiran().setTxtNoUpdate(txtNoUpdate);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadShoriJyotai() {
-        return this.getIkenshoiraitaishoichiran().getRadShoriJyotai();
-    }
-
-    @JsonIgnore
-    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
-        this.getIkenshoiraitaishoichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
     @JsonIgnore
