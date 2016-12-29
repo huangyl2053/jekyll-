@@ -57,4 +57,9 @@ public class IkenshoJohoPrintRelateEntity implements Serializable {
     private RString gogitaiNo;
     private RString remban;
     private RString ikenItem;
+    private RString 認知度;
+    private RString 短期記憶;
+    private RString 意思決定;
+    private RString 伝達能力;
+    private RString 食事行為;
 }
