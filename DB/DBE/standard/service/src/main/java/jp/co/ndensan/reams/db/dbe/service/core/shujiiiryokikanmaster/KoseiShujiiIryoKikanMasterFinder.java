@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaste
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiiryokikanmaster.IKoseiShujiiIryoKikanMasterMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
@@ -145,6 +146,25 @@ public class KoseiShujiiIryoKikanMasterFinder {
     @Transaction
     public SearchResult<ShichosonMeishoBusiness> getShichosonMeisho(LasdecCode 市町村コード) {
         List<DbT7051KoseiShichosonMasterEntity> entityList = dac.selectByshichosonCode(市町村コード);
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShichosonMeishoBusiness>emptyList(), 0, false);
+        }
+        List<ShichosonMeishoBusiness> shichosonMeisho = new ArrayList<>();
+        for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
+            shichosonMeisho.add(new ShichosonMeishoBusiness(entity));
+        }
+        return SearchResult.of(shichosonMeisho, 0, false);
+    }
+    
+    /**
+     * 検索条件に従い、保険者名検索します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 保険者名
+     */
+    @Transaction
+    public SearchResult<ShichosonMeishoBusiness> getHokensyaMeisho(ShoKisaiHokenshaNo 証記載保険者番号) {
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dac.getshichosonMeisho(証記載保険者番号);
         if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShichosonMeishoBusiness>emptyList(), 0, false);
         }
