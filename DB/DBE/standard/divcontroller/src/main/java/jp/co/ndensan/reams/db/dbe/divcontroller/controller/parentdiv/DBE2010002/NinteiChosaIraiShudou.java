@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -178,6 +180,12 @@ public class NinteiChosaIraiShudou {
         JigyoshaNo 認定調査委託先コード = new JigyoshaNo(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue());
         RString 認定調査員コード = div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue();
         Code 認定調査依頼区分コード = new Code(div.getNinteichosaIraiByHand().getDdlIraiKubun().getSelectedKey());
+        Code 調査区分コード;
+        if(NinteiChousaIraiKubunCode.初回.getコード().equals(認定調査依頼区分コード.value())){
+            調査区分コード = new Code(ChosaKubun.新規調査.getコード());
+        }else{
+            調査区分コード = new Code(ChosaKubun.再調査.getコード());
+        }
         FlexibleDate 認定調査依頼年月日 = FlexibleDate.EMPTY;
         if (div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue() != null) {
             認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
@@ -186,6 +194,7 @@ public class NinteiChosaIraiShudou {
 
         NinteiShinseiJoho 要介護認定申請情報 = 認定調査依頼情報List.get(ninteiShinseiJohoIdentifier);
         要介護認定申請情報 = 要介護認定申請情報.createBuilderForEdit()
+                .set調査区分(調査区分コード)
                 .set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード.value()))
                 .set認定調査員コード(new ChosainCode(認定調査員コード)).build();
         jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoManager
