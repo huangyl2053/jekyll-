@@ -17,9 +17,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -260,9 +262,10 @@ public class GaikyoTokkiNyuroku {
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
+        Code 原本マスク区分 = new Code(GenponMaskKubun.原本.getコード());
+        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分, 原本マスク区分);
         if (認定調査票_概況特記 == null) {
-            認定調査票_概況特記 = new GaikyoTokki(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分);
+            認定調査票_概況特記 = new GaikyoTokki(申請書管理番号, 認定調査履歴番号, 概況調査テキストイメージ区分, 原本マスク区分);
             認定調査票_概況特記.toEntity().setState(EntityDataState.Added);
         } else {
             認定調査票_概況特記.toEntity().setState(get認定調査票_概況特記EntityDataState(div, 認定調査票_概況特記));

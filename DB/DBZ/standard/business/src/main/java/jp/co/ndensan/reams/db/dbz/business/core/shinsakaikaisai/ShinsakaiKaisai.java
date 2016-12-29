@@ -64,12 +64,12 @@ public class ShinsakaiKaisai implements Serializable {
     }
 
     /**
-     * 編集合議体名称を取得します。
+     * 編集審査会名称を取得します。
      *
-     * @return 編集合議体名称
+     * @return 編集審査会名称
      */
-    public RString get編集合議体名称() {
-        return entity.get合議体名称();
+    public RString get編集審査会名称() {
+        return entity.get審査会名称();
     }
 
     /**
@@ -205,6 +205,15 @@ public class ShinsakaiKaisai implements Serializable {
      */
     public RString get合議体番号() {
         return new RString(entity.get合議体番号());
+    }
+
+    /**
+     * 審査会開催番号を取得します。
+     *
+     * @return 審査会開催番号
+     */
+    public RString get審査会開催番号() {
+        return entity.getShinsakaiKaisaiNo();
     }
 
     /**

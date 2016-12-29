@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIry
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 22 12:02:30 JST 2016 
+ * Thu Dec 29 14:58:10 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKensakuKekkaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
 
     private TextBoxCode iryoKikancode;
     private RString iryoKikanMeisho;
@@ -33,6 +33,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     private RString shujiiKanaMeisho;
     private RString shujiiJoukyo;
     private RString iryoKikanYubinBango;
+    private RString shujiiShichosonCode;
 
     public dgKensakuKekkaIchiran_Row() {
         super();
@@ -47,6 +48,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.shujiiKanaMeisho = RString.EMPTY;
         this.shujiiJoukyo = RString.EMPTY;
         this.iryoKikanYubinBango = RString.EMPTY;
+        this.shujiiShichosonCode = RString.EMPTY;
         this.setOriginalData("iryoKikancode", iryoKikancode);
         this.setOriginalData("iryoKikanMeisho", iryoKikanMeisho);
         this.setOriginalData("iryoKikanKanaMeisho", iryoKikanKanaMeisho);
@@ -58,9 +60,10 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("shujiiKanaMeisho", shujiiKanaMeisho);
         this.setOriginalData("shujiiJoukyo", shujiiJoukyo);
         this.setOriginalData("iryoKikanYubinBango", iryoKikanYubinBango);
+        this.setOriginalData("shujiiShichosonCode", shujiiShichosonCode);
     }
 
-    public dgKensakuKekkaIchiran_Row(TextBoxCode iryoKikancode, RString iryoKikanMeisho, RString iryoKikanKanaMeisho, RString iryoKikanjusho, RString iryoKikantelNo, RString iryoKikanJokyo, TextBoxCode shujiiCode, RString shujiiShimei, RString shujiiKanaMeisho, RString shujiiJoukyo, RString iryoKikanYubinBango) {
+    public dgKensakuKekkaIchiran_Row(TextBoxCode iryoKikancode, RString iryoKikanMeisho, RString iryoKikanKanaMeisho, RString iryoKikanjusho, RString iryoKikantelNo, RString iryoKikanJokyo, TextBoxCode shujiiCode, RString shujiiShimei, RString shujiiKanaMeisho, RString shujiiJoukyo, RString iryoKikanYubinBango, RString shujiiShichosonCode) {
         super();
         this.setOriginalData("iryoKikancode", iryoKikancode);
         this.setOriginalData("iryoKikanMeisho", iryoKikanMeisho);
@@ -73,6 +76,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("shujiiKanaMeisho", shujiiKanaMeisho);
         this.setOriginalData("shujiiJoukyo", shujiiJoukyo);
         this.setOriginalData("iryoKikanYubinBango", iryoKikanYubinBango);
+        this.setOriginalData("shujiiShichosonCode", shujiiShichosonCode);
         this.iryoKikancode = iryoKikancode;
         this.iryoKikanMeisho = iryoKikanMeisho;
         this.iryoKikanKanaMeisho = iryoKikanKanaMeisho;
@@ -84,6 +88,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.shujiiKanaMeisho = shujiiKanaMeisho;
         this.shujiiJoukyo = shujiiJoukyo;
         this.iryoKikanYubinBango = iryoKikanYubinBango;
+        this.shujiiShichosonCode = shujiiShichosonCode;
     }
 
     public TextBoxCode getIryoKikancode() {
@@ -128,6 +133,10 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
 
     public RString getIryoKikanYubinBango() {
         return iryoKikanYubinBango;
+    }
+
+    public RString getShujiiShichosonCode() {
+        return shujiiShichosonCode;
     }
 
     public void setIryoKikancode(TextBoxCode iryoKikancode) {
@@ -183,6 +192,11 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     public void setIryoKikanYubinBango(RString iryoKikanYubinBango) {
         this.setOriginalData("iryoKikanYubinBango", iryoKikanYubinBango);
         this.iryoKikanYubinBango = iryoKikanYubinBango;
+    }
+
+    public void setShujiiShichosonCode(RString shujiiShichosonCode) {
+        this.setOriginalData("shujiiShichosonCode", shujiiShichosonCode);
+        this.shujiiShichosonCode = shujiiShichosonCode;
     }
 
     // </editor-fold>

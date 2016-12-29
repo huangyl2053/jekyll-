@@ -182,7 +182,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item,
             RString 医療機関コード, int idenx) {
         return new ShujiiIkenTokusokujoCsvEntity(
-                item.getCityCode(), item.getCityName(), new RString(String.valueOf(idenx)), item.getListUpper1_1(),
+                new RString(String.valueOf(idenx)), item.getCityCode(), item.getCityName(), item.getListUpper1_1(),
                 item.getListLower1_1(), item.getListUpper1_2(),
                 item.getListLower1_2(), item.getListShinseiYMD_1().toDateString(),
                 item.getListTokusokujoHakkoYMD_1().toDateString(),

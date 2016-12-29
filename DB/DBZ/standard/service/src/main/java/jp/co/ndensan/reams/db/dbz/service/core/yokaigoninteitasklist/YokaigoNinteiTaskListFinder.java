@@ -247,7 +247,8 @@ public class YokaigoNinteiTaskListFinder {
         for (IkenSyoNyuSyuRelateEntity entity : entityList) {
             意見書入手List.add(new IkenSyoNyuSyuBusiness(entity));
         }
-        return SearchResult.of(意見書入手List, 0, false);
+        int totalcount = mapper.get意見書入手件数(parameter);
+        return SearchResult.of(意見書入手List, totalcount, parameter.get件数().intValue() < totalcount);
     }
 
     /**
