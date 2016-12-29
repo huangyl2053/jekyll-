@@ -112,6 +112,10 @@ public class Ninteishinseibi {
                         + 概況調査_基本調査データCSV名.toString() + "<br>" + 概況特記データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
             }
         }
+        if (ファイルパス_基本調査データ.isEmpty() || ファイルパス_概況特記データ.isEmpty() || ファイルパス_特記情報データ.isEmpty()) {
+            throw new ApplicationException("以下の３ファイルを同時に取込んでください。<br>"
+                    + 概況調査_基本調査データCSV名.toString() + "<br>" + 概況特記データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
+        }
 
         List<ChosaKekkaNyuryokuCsvEntity> csvEntityList_基本調査データ = データ取込_基本調査データ(ファイルパス_基本調査データ);
         ValidationMessageControlPairs vallidation = getValidatisonHandler(div).取込対象データチェック(csvEntityList_基本調査データ.isEmpty());
@@ -152,7 +156,8 @@ public class Ninteishinseibi {
             概況特記事項 = new GaikyoTokki(new ShinseishoKanriNo(
                     entity.get申請書管理番号()),
                     Integer.valueOf(entity.get認定調査依頼履歴番号().toString()),
-                    entity.get概況特記テキスト_イメージ区分コード())
+                    entity.get概況特記テキスト_イメージ区分コード(),
+                    new Code(GenponMaskKubun.原本.getコード()))
                     .createBuilderForEdit()
                     .set住宅改修(entity.get住宅改修改修箇所())
                     .set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名())
@@ -219,14 +224,14 @@ public class Ninteishinseibi {
 
                 if (!RString.isNullOrEmpty(row.getJyoutai())) {
                     NinteichosahyoGaikyoChosa 概況調査 = 認定調査票_概況調査の登録処理(row, div); //5202
-                    GaikyoTokki 概況特記事項 = 概況特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5206 *OK
-                    List<NinteichosahyoTokkijiko> 特記事項List = 特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5205 *OK
+                    GaikyoTokki 概況特記事項 = 概況特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5206
+                    List<NinteichosahyoTokkijiko> 特記事項List = 特記事項Map.get(new ShinseishoKanriNo(row.getShinseishoKanriNo())); //5205
                     NinteichosahyoKihonChosa 基本調査 = 認定調査票_基本調査の登録処理(row, div); //5203
-                    List<NinteichosahyoChosaItem> 調査項目List = 認定調査票_基本調査調査項目の登録処理(row); //5211 *OK
-                    List<NinteichosahyoServiceJokyo> サービス状況List = 認定調査票_概況調査サービスの状況の登録処理(row); //5207 *OK
-                    List<NinteichosahyoServiceJokyoFlag> サービス状況フラグList = 認定調査票_概況調査サービスの状況フラグの登録処理(row); //5208 *OK
-                    List<NinteichosahyoKinyuItem> 記入項目List = 認定調査票_概況調査記入項目の登録処理(row); //5209 *OK
-                    List<NinteichosahyoShisetsuRiyo> 施設利用List = 認定調査票_概況調査施設利用の登録処理(row); //5210 *OK
+                    List<NinteichosahyoChosaItem> 調査項目List = 認定調査票_基本調査調査項目の登録処理(row); //5211
+                    List<NinteichosahyoServiceJokyo> サービス状況List = 認定調査票_概況調査サービスの状況の登録処理(row); //5207
+                    List<NinteichosahyoServiceJokyoFlag> サービス状況フラグList = 認定調査票_概況調査サービスの状況フラグの登録処理(row); //5208
+                    List<NinteichosahyoKinyuItem> 記入項目List = 認定調査票_概況調査記入項目の登録処理(row); //5209
+                    List<NinteichosahyoShisetsuRiyo> 施設利用List = 認定調査票_概況調査施設利用の登録処理(row); //5210
 
                     manager.認定調査一覧更新処理(
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
@@ -290,6 +295,9 @@ public class Ninteishinseibi {
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         List<RString> 調査項目連番List = row.getRemban().split(",");
         List<RString> 調査項目List = row.getResearchItem().split(",");
+        if (調査項目連番List.contains(RString.EMPTY)) {
+            throw new ApplicationException("調査項目連番に空白が存在します。");
+        }
 
         Map<RString, RString> 調査項目Map = create連番Map(調査項目連番List, 調査項目List);
         List<NinteichosahyoChosaItem> result調査項目List = new ArrayList<>();
@@ -311,17 +319,26 @@ public class Ninteishinseibi {
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         List<RString> サービス状況連番List = row.getServiceJokyoRemban().split(",");
         List<RString> 状況List = row.getServiceJokyo().split(",");
+        if (サービス状況連番List.contains(RString.EMPTY)) {
+            throw new ApplicationException("サービス状況連番に空白が存在します。");
+        }
 
         Map<RString, RString> サービス状況Map = create連番Map(サービス状況連番List, 状況List);
         List<NinteichosahyoServiceJokyo> resultサービス状況List = new ArrayList<>();
         for (Map.Entry<RString, RString> entry : サービス状況Map.entrySet()) {
+            int サービスの状況;
+            if (RString.isNullOrEmpty(entry.getValue())) {
+                サービスの状況 = 0;
+            } else {
+                サービスの状況 = Integer.valueOf(entry.getValue().toString());
+            }
             resultサービス状況List.add(new NinteichosahyoServiceJokyo(
                     申請書管理番号,
                     認定調査依頼履歴番号,
                     Integer.valueOf(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
-                    .setサービスの状況(Integer.valueOf(entry.getValue().toString())).build()
+                    .setサービスの状況(サービスの状況).build()
             );
         }
         return resultサービス状況List;
@@ -332,17 +349,26 @@ public class Ninteishinseibi {
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         List<RString> サービス状況フラグ連番List = row.getServiceJokyoFlagRemban().split(",");
         List<RString> 状況フラグList = row.getServiceJokyoFlag().split(",");
+        if (サービス状況フラグ連番List.contains(RString.EMPTY)) {
+            throw new ApplicationException("サービス状況フラグ連番に空白が存在します。");
+        }
 
         Map<RString, RString> サービス状況フラグMap = create連番Map(サービス状況フラグ連番List, 状況フラグList);
         List<NinteichosahyoServiceJokyoFlag> resultサービス状況フラグList = new ArrayList<>();
         for (Map.Entry<RString, RString> entry : サービス状況フラグMap.entrySet()) {
+            boolean サービス状況フラグ;
+            if (RString.isNullOrEmpty(entry.getValue())) {
+                サービス状況フラグ = false;
+            } else {
+                サービス状況フラグ = Boolean.getBoolean(entry.getValue().toString());
+            }
             resultサービス状況フラグList.add(new NinteichosahyoServiceJokyoFlag(
                     申請書管理番号,
                     認定調査依頼履歴番号,
                     Integer.valueOf(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
-                    .setサービスの状況フラグ(Boolean.getBoolean(entry.getValue().toString())).build()
+                    .setサービスの状況フラグ(サービス状況フラグ).build()
             );
         }
         return resultサービス状況フラグList;
@@ -353,6 +379,9 @@ public class Ninteishinseibi {
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         List<RString> 記入項目連番List = row.getServiceJokyoKinyuRemban().split(",");
         List<RString> 記入項目List = row.getServiceJokyoKinyu().split(",");
+        if (記入項目連番List.contains(RString.EMPTY)) {
+            throw new ApplicationException("記入項目連番に空白が存在します。");
+        }
 
         Map<RString, RString> 記入項目Map = create連番Map(記入項目連番List, 記入項目List);
         List<NinteichosahyoKinyuItem> result記入項目List = new ArrayList<>();
@@ -374,17 +403,26 @@ public class Ninteishinseibi {
         int 認定調査依頼履歴番号 = Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString());
         List<RString> 施設利用連番List = row.getShisetsuRiyoFlagRemban().split(",");
         List<RString> 施設利用List = row.getShisetsuRiyoFlag().split(",");
+        if (施設利用連番List.contains(RString.EMPTY)) {
+            throw new ApplicationException("施設利用連番に空白が存在します。");
+        }
 
         Map<RString, RString> 施設利用Map = create連番Map(施設利用連番List, 施設利用List);
         List<NinteichosahyoShisetsuRiyo> result施設利用List = new ArrayList<>();
         for (Map.Entry<RString, RString> entry : 施設利用Map.entrySet()) {
+            boolean 施設利用フラグ;
+            if (RString.isNullOrEmpty(entry.getValue())) {
+                施設利用フラグ = false;
+            } else {
+                施設利用フラグ = Boolean.getBoolean(entry.getValue().toString());
+            }
             result施設利用List.add(new NinteichosahyoShisetsuRiyo(
                     申請書管理番号,
                     認定調査依頼履歴番号,
                     Integer.valueOf(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
-                    .set施設利用フラグ(Boolean.getBoolean(entry.getValue().toString())).build()
+                    .set施設利用フラグ(施設利用フラグ).build()
             );
         }
         return result施設利用List;

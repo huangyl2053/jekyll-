@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 主治医意見書作成料請求一覧表Editorです。
@@ -69,8 +71,10 @@ public class ShujiiIkenshoSeikyuIchiranEditor implements IShujiiIkenshoSeikyuIch
         source.listIkeniraimishori_10 = item.get医療機関();
         source.listIkeniraimishori_11 = dateFormat(item.get主治医意見書記入年月日());
         source.listIkeniraimishori_12 = dateFormat(item.get主治医意見書読取年月日());
-        source.listIkeniraimishori_13 = item.get主治医意見書作成料();
-        source.listIkeniraimishori_14 = item.get主治医意見書別途診療費();
+        Decimal 主治医意見書作成料 = item.get主治医意見書作成料() == null ? new Decimal(0) : new Decimal(item.get主治医意見書作成料().toInt());
+        source.listIkeniraimishori_13 = DecimalFormatter.toコンマ区切りRString(主治医意見書作成料, 0);
+        Decimal 主治医意見書別途診療費 = item.get主治医意見書別途診療費() == null ? new Decimal(0) : new Decimal(item.get主治医意見書別途診療費().toInt());
+        source.listIkeniraimishori_14 = DecimalFormatter.toコンマ区切りRString(主治医意見書別途診療費, 0);
         source.listIkeniraimishori_15 = dateFormat(item.get報酬支払年月日());
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         if (item.get保険者番号() == null) {
@@ -107,7 +111,7 @@ public class ShujiiIkenshoSeikyuIchiranEditor implements IShujiiIkenshoSeikyuIch
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
-        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 }

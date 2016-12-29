@@ -98,18 +98,13 @@ public class IraishoIkkatsuHakko {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
         }
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(getValidationHandler(div).iraibiZengoJunCheck());
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
         List<IraishoIkkatsuHakkoResult> resultList = new ArrayList<>();
         DBE2400001StateName resultState = null;
         if (new RString(DBE2400001StateName.認定調査依頼.name()).equals(ResponseHolder.getState())) {
             IraishoIkkatsuHakkoParameter param
                     = IraishoIkkatsuHakkoParameter.createIraishoIkkatsuHakkoParameter(
-                            div.getTxtIraibiFrom().getValue(),
-                            div.getTxtIraibiTo().getValue(),
+                            div.getTxtNinteiChosaIraibi().getFromValue(),
+                            div.getTxtNinteiChosaIraibi().getToValue(),
                             div.getChkNinteioChosaIraisho().getSelectedKeys(),
                             div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号(),
                             div.getChkNinteiChosahyo().getSelectedKeys(),
@@ -122,8 +117,8 @@ public class IraishoIkkatsuHakko {
         if (new RString(DBE2400001StateName.主治医意見書作成依頼.name()).equals(ResponseHolder.getState())) {
             IraishoIkkatsuHakkoParameter param
                     = IraishoIkkatsuHakkoParameter.createIraishoIkkatsuHakkoParameter(
-                            div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue(),
-                            div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue(),
+                            div.getTxtShujiiIkenshoSakuseiIraibi().getFromValue(),
+                            div.getTxtShujiiIkenshoSakuseiIraibi().getToValue(),
                             Collections.<RString>emptyList(),
                             div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号(),
                             Collections.<RString>emptyList(),
@@ -182,7 +177,6 @@ public class IraishoIkkatsuHakko {
     public ResponseData<IraishoIkkatsuHakkoDiv> onClick_btnCheck(IraishoIkkatsuHakkoDiv div) {
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(getValidationHandler(div).iraibiZengoJunCheck());
         validationMessages.add(getValidationHandler(div).iraiItiranCheck());
         validationMessages.add(getValidationHandler(div).printChouhyouSentakuCheck());
         validationMessages.add(getValidationHandler(div).commonDateCheck());
@@ -202,17 +196,17 @@ public class IraishoIkkatsuHakko {
     public ResponseData<DBE220010_IraishoIkkatuParameter> onClick_btnBatchRegister(IraishoIkkatsuHakkoDiv div) {
         DBE220010_IraishoIkkatuParameter param = new DBE220010_IraishoIkkatuParameter();
         if (new RString(DBE2400001StateName.認定調査依頼_検索結果.name()).equals(ResponseHolder.getState())) {
-            param.setIraiFromYMD(div.getTxtIraibiFrom().getValue() == null
-                    ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
-            param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
-                    ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
+            param.setIraiFromYMD(div.getTxtNinteiChosaIraibi().getFromValue() == null
+                    ? RString.EMPTY : div.getTxtNinteiChosaIraibi().getFromValue().toDateString());
+            param.setIraiToYMD(div.getTxtNinteiChosaIraibi().getToValue() == null
+                    ? RString.EMPTY : div.getTxtNinteiChosaIraibi().getToValue().toDateString());
             setNinteParam(param, div);
         }
         if (new RString(DBE2400001StateName.主治医意見書作成依頼_検索結果.name()).equals(ResponseHolder.getState())) {
-            param.setIraiFromYMD(div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue() == null
-                    ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().toDateString());
-            param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null
-                    ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue().toDateString());
+            param.setIraiFromYMD(div.getTxtShujiiIkenshoSakuseiIraibi().getFromValue() == null
+                    ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibi().getFromValue().toDateString());
+            param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibi().getToValue() == null
+                    ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibi().getToValue().toDateString());
             setShujiiParam(param, div);
         }
         param.setHakkobi(div.getTxtHakkobi().getValue() == null

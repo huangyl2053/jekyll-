@@ -39,6 +39,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
 
     private static final RString ARGMENT_SPLIT_STR = new RString("|");
     private static final RString DATA_SPLIT_STR = new RString(",");
+    private static final RString SHUJII_IKENSHO_KINYU_NASHI = new RString("9");
 
     /**
      * コンストラクタです。
@@ -189,10 +190,14 @@ public class IchijiHanteiKekkaJohoSearchManager {
         IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         List<DbT4304ShujiiIkenshoIkenItemEntity> dbT4304EntityList = mapper.get認知症高齢者自立度_主治医意見書(申請書管理番号);
         if (null == dbT4304EntityList || dbT4304EntityList.isEmpty()) {
-            return RString.EMPTY;
-        } else {
-            return dbT4304EntityList.get(0).getIkenItem();
+            return SHUJII_IKENSHO_KINYU_NASHI;
         }
+
+        DbT4304ShujiiIkenshoIkenItemEntity entity = dbT4304EntityList.get(0);
+        if (entity == null || RString.isNullOrEmpty(entity.getIkenItem())) {
+            return SHUJII_IKENSHO_KINYU_NASHI;
+        }
+        return dbT4304EntityList.get(0).getIkenItem();
     }
 
     private DbT4203NinteichosahyoKihonChosaEntity get認定調査票_基本調査(ShinseishoKanriNo 申請書管理番号) {
@@ -219,8 +224,21 @@ public class IchijiHanteiKekkaJohoSearchManager {
         IchijiHanteiKekkaJohoSearchMapper mapper = mapperProvider.create(IchijiHanteiKekkaJohoSearchMapper.class);
         List<RString> 主治医意見書項目List = new ArrayList<>();
         List<DbT4304ShujiiIkenshoIkenItemEntity> dbT4304Entity = mapper.get主治医意見書項目(申請書管理番号);
+
+        if (dbT4304Entity == null || dbT4304Entity.isEmpty()) {
+            主治医意見書項目List.add(SHUJII_IKENSHO_KINYU_NASHI);
+            主治医意見書項目List.add(SHUJII_IKENSHO_KINYU_NASHI);
+            主治医意見書項目List.add(SHUJII_IKENSHO_KINYU_NASHI);
+            主治医意見書項目List.add(SHUJII_IKENSHO_KINYU_NASHI);
+            return 主治医意見書項目List;
+        }
+
         for (DbT4304ShujiiIkenshoIkenItemEntity entity : dbT4304Entity) {
-            主治医意見書項目List.add(entity.getIkenItem());
+            if (entity == null || RString.isNullOrEmpty(entity.getIkenItem())) {
+                主治医意見書項目List.add(SHUJII_IKENSHO_KINYU_NASHI);
+            } else {
+                主治医意見書項目List.add(entity.getIkenItem());
+            }
         }
         return 主治医意見書項目List;
     }

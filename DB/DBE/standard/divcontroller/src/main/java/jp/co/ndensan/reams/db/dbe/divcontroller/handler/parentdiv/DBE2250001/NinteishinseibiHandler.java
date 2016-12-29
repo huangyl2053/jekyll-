@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -72,14 +73,14 @@ public class NinteishinseibiHandler {
 
         row.setJyoutai(new RString("変更"));
         row.setShichosonMeisho(entity.get保険者名());
-        row.setNinteiShinseiYMD(entity.get認定申請年月日());
+        row.setNinteiShinseiYMD(create日付文字列(entity.get認定申請年月日()));
         row.setHihokenshaNo(entity.get証記載保険者番号());
         row.setHihokenshaName(entity.get被保険者氏名());
         row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.to名称OrDefault(entity.get認定申請区分申請時コード(), RString.EMPTY));
-        row.setNinteichosaIraiKanryoYMD(entity.get認定調査依頼完了年月日());
+        row.setNinteichosaIraiKanryoYMD(create日付文字列(entity.get認定調査依頼完了年月日()));
         row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
         row.setNinteiChosainCode(entity.get認定調査員コード());
-        row.setNinteichosaJisshiYMD(entity.get認定調査実施年月日());
+        row.setNinteichosaJisshiYMD(create日付文字列(entity.get認定調査実施年月日()));
         row.setShinseishoKanriNo(entity.get申請書管理番号());
         row.setNinteichosaIraiRirekiNo(entity.get認定調査依頼履歴番号());
         row.setKoroshoIfShikibetsuCode(entity.get厚労省IF識別コード());
@@ -109,7 +110,7 @@ public class NinteishinseibiHandler {
             row.setNinteichousaIraiKubunCode(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         }
         row.setNinteichosaIraiKaisu(entity.get認定調査回数());
-        row.setNinteichosaJuryoYMD(entity.get認定調査受領年月日());
+        row.setNinteichosaJuryoYMD(create日付文字列(entity.get認定調査受領年月日()));
         row.setNinteiChosaKubunCode(entity.get認定調査区分コード());
         row.setChosaJisshiBashoCode(entity.get認定調査実施場所コード());
         row.setChosaJisshiBashoMeisho(entity.get認定調査実施場所());
@@ -123,8 +124,8 @@ public class NinteishinseibiHandler {
         row.setRiyoShisetsuTelNo(entity.get利用施設電話番号());
         row.setRiyoShisetsuYubinNo(entity.get利用施設郵便番号());
         row.setTokki(entity.get特記());
-        row.setTokkijikoUketsukeYMD(entity.get認定調査特記事項受付年月日());
-        row.setTokkijikoJuryoYMD(entity.get認定調査特記事項受領年月日());
+        row.setTokkijikoUketsukeYMD(create日付文字列(entity.get認定調査特記事項受付年月日()));
+        row.setTokkijikoJuryoYMD(create日付文字列(entity.get認定調査特記事項受領年月日()));
 
         //5207
         row.setServiceJokyoRemban(createCommaSplitString(createサービス状況連番List(entity)));
@@ -155,6 +156,14 @@ public class NinteishinseibiHandler {
         row.setKyojuKankyo(概況特記事項.get概況特記事項_居住環境());
         row.setKikaiKiki(概況特記事項.get概況特記事項_機器_器械());
 
+    }
+
+    private RString create日付文字列(RString 年月日) {
+        if (RString.isNullOrEmpty(年月日)) {
+            return RString.EMPTY;
+        }
+        FlexibleDate date = new FlexibleDate(年月日);
+        return date.wareki().eraType(EraType.KANJI_RYAKU).toDateString();
     }
 
     private List<RString> createサービス状況連番List(ChosaKekkaNyuryokuCsvEntity entity) {
@@ -420,14 +429,14 @@ public class NinteishinseibiHandler {
     }
 
     private RString createCommaSplitString(List<RString> valueList) {
+        if (valueList.isEmpty()) {
+            return RString.EMPTY;
+        }
         RStringBuilder rsb = new RStringBuilder();
         for (RString value : valueList) {
-            if (rsb.length() > 0) {
-                rsb.append(",");
-            }
-            rsb.append(value);
+            rsb.append(value).append(",");
         }
-        return rsb.toRString();
+        return rsb.substring(0, rsb.length() - 1);
     }
 
     private List<RString> create特記事項表示文字列List(List<NinteichosahyoTokkijiko> 特記事項List) {

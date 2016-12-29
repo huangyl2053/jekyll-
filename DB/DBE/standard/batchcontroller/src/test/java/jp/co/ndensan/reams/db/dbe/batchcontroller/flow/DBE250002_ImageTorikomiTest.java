@@ -73,7 +73,7 @@ public class DBE250002_ImageTorikomiTest {
 
     private static DBE250002_ImageTorikomiParameter createParameter() {
         DBE250002_ImageTorikomiParameter batchFlowParameter = new DBE250002_ImageTorikomiParameter();
-        RString path = new RString("db|EucOther_DBA701002_186|2016-12-12 16:47:59.649232");
+        RString path = new RString("DB|イメージ取込み|2016-12-28T15:00:06.887400");
         batchFlowParameter.set共有ファイルエントリ情報文字列(path);
 
         return batchFlowParameter;

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2070001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.IkenshogetDiv;
@@ -55,6 +56,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 完了処理・主治医意見書入手のクラスです。
@@ -99,10 +102,21 @@ public class Ikenshoget {
      * @return ResponseData
      */
     public ResponseData onChange_txtMaxNumber(IkenshogetDiv div) {
-        getHandler(div).getMaxNumber();
+        getHandler(div).意見書入手List();
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 保険者リスト共有子Div変更時の動作です。
+     *
+     * @param div ShujiiIkenshoIraiTaishoIchiranDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_ccdHokenshaList(IkenshogetDiv div) {
+        getHandler(div).意見書入手List();
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *
@@ -273,6 +287,7 @@ public class Ikenshoget {
             RealInitialLocker.release(排他キー);
             div.getCcdKanryoMsg().setMessage(new RString("基本運用・主治医意見書入手の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Kanryo")));
             return ResponseData.of(div).setState(DBE2070001StateName.完了);
         }
         return ResponseData.of(div).respond();

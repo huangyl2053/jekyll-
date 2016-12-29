@@ -54,6 +54,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * イメージ取込み（規定・規定外）のコントローラクラスです。
@@ -69,6 +71,8 @@ public class Imageinput {
     private static final RString イメージ取込み = new RString("イメージ取込み");
     private static final int DAY_COUNT_一週間 = 7;
     private static final RString バッチ実行ボタン名 = new RString("btnBatchRegister");
+    private static final RString UICONTAINERID_DBEUC20701 = new RString("DBEUC20701");
+    private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
 
     /**
      * 画面の初期化します。
@@ -129,6 +133,11 @@ public class Imageinput {
      * @return 画面情報より作成したバッチパラメータ情報
      */
     public ResponseData<DBE250002_ImageTorikomiParameter> onSetBatchParameterURL(ImageinputDiv div) {
+        RString uiContainerID = ResponseHolder.getUIContainerId();
+        if (UICONTAINERID_DBEUC20701.equals(uiContainerID)) {
+            FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_BATCH);
+            FlowParameterAccessor.merge(fp);
+        }
         DBE250002_ImageTorikomiParameter parameter = getHandler(div).setバッチパラメータ();
         return ResponseData.of(parameter).respond();
     }

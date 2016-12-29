@@ -277,7 +277,7 @@ public class ShinseiKensaku {
         div.getBtnModoru().setDisabled(true);
         return ResponseData.of(div).setState(findStateAt条件指定());
     }
-    
+
     /**
      * 「戻る」ボタン処理です。「要介護認定進捗データ出力画面へ戻る」
      *

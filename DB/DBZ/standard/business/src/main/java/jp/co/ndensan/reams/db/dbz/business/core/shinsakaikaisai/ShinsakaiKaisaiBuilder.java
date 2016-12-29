@@ -63,13 +63,13 @@ public class ShinsakaiKaisaiBuilder {
     }
 
     /**
-     * 編集合議体名称を設定します。
+     * 編集審査会名称を設定します。
      *
-     * @param 編集合議体名称 編集合議体名称
+     * @param 編集審査会名称 編集審査会名称
      * @return {@link ShinsakaiKaisaiBuilder}
      */
-    public ShinsakaiKaisaiBuilder set編集合議体名称(RString 編集合議体名称) {
-        entity.set合議体名称(編集合議体名称);
+    public ShinsakaiKaisaiBuilder set編集審査会名称(RString 編集審査会名称) {
+        entity.set審査会名称(編集審査会名称);
         return this;
     }
 
@@ -224,6 +224,17 @@ public class ShinsakaiKaisaiBuilder {
      */
     public ShinsakaiKaisaiBuilder setダミーフラグ(boolean ダミーフラグ) {
         entity.setGogitaiDummyFlag(ダミーフラグ);
+        return this;
+    }
+
+    /**
+     * 審査会開催番号を設定します。
+     *
+     * @param 審査会開催番号 審査会開催番号
+     * @return {@link ShinsakaiKaisaiBuilder}
+     */
+    public ShinsakaiKaisaiBuilder set審査会開催番号(RString 審査会開催番号) {
+        entity.setShinsakaiKaisaiNo(審査会開催番号);
         return this;
     }
 

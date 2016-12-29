@@ -23,10 +23,11 @@ import lombok.Setter;
 public class ShinsakaiKaisaiRelateEntity implements Serializable {
 
     private int totalCount;
+    private RString shinsakaiKaisaiNo;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
     private RString shinsakaiShuryoYoteiTime;
-    private RString 合議体名称;
+    private RString 審査会名称;
     private RString gogitaiMei;
     private RString 種類;
     private RString shinsakaiKaisaiBashoName;

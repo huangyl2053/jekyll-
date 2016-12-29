@@ -16,23 +16,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaKensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtIraibiFrom")
-    private TextBoxDate txtIraibiFrom;
-    @JsonProperty("txtIraibiTo")
-    private TextBoxDate txtIraibiTo;
+    @JsonProperty("txtNinteiChosaIraibi")
+    private TextBoxDateRange txtNinteiChosaIraibi;
     @JsonProperty("chkNinteioChosaIraisho")
     private CheckBoxList chkNinteioChosaIraisho;
-    @JsonProperty("chkNinteiChosahyo")
-    private CheckBoxList chkNinteiChosahyo;
     @JsonProperty("txtChosaDispMax")
     private TextBoxNum txtChosaDispMax;
+    @JsonProperty("chkNinteiChosahyo")
+    private CheckBoxList chkNinteiChosahyo;
     @JsonProperty("btnChosaClear")
     private Button btnChosaClear;
     @JsonProperty("ccdNinteiChosaHokensha")
@@ -45,39 +43,21 @@ public class NinteichosaKensakuJokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtIraibiFrom
-     * @return txtIraibiFrom
+     * gettxtNinteiChosaIraibi
+     * @return txtNinteiChosaIraibi
      */
-    @JsonProperty("txtIraibiFrom")
-    public TextBoxDate getTxtIraibiFrom() {
-        return txtIraibiFrom;
+    @JsonProperty("txtNinteiChosaIraibi")
+    public TextBoxDateRange getTxtNinteiChosaIraibi() {
+        return txtNinteiChosaIraibi;
     }
 
     /*
-     * settxtIraibiFrom
-     * @param txtIraibiFrom txtIraibiFrom
+     * settxtNinteiChosaIraibi
+     * @param txtNinteiChosaIraibi txtNinteiChosaIraibi
      */
-    @JsonProperty("txtIraibiFrom")
-    public void setTxtIraibiFrom(TextBoxDate txtIraibiFrom) {
-        this.txtIraibiFrom = txtIraibiFrom;
-    }
-
-    /*
-     * gettxtIraibiTo
-     * @return txtIraibiTo
-     */
-    @JsonProperty("txtIraibiTo")
-    public TextBoxDate getTxtIraibiTo() {
-        return txtIraibiTo;
-    }
-
-    /*
-     * settxtIraibiTo
-     * @param txtIraibiTo txtIraibiTo
-     */
-    @JsonProperty("txtIraibiTo")
-    public void setTxtIraibiTo(TextBoxDate txtIraibiTo) {
-        this.txtIraibiTo = txtIraibiTo;
+    @JsonProperty("txtNinteiChosaIraibi")
+    public void setTxtNinteiChosaIraibi(TextBoxDateRange txtNinteiChosaIraibi) {
+        this.txtNinteiChosaIraibi = txtNinteiChosaIraibi;
     }
 
     /*
@@ -99,24 +79,6 @@ public class NinteichosaKensakuJokenDiv extends Panel {
     }
 
     /*
-     * getchkNinteiChosahyo
-     * @return chkNinteiChosahyo
-     */
-    @JsonProperty("chkNinteiChosahyo")
-    public CheckBoxList getChkNinteiChosahyo() {
-        return chkNinteiChosahyo;
-    }
-
-    /*
-     * setchkNinteiChosahyo
-     * @param chkNinteiChosahyo chkNinteiChosahyo
-     */
-    @JsonProperty("chkNinteiChosahyo")
-    public void setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
-        this.chkNinteiChosahyo = chkNinteiChosahyo;
-    }
-
-    /*
      * gettxtChosaDispMax
      * @return txtChosaDispMax
      */
@@ -132,6 +94,24 @@ public class NinteichosaKensakuJokenDiv extends Panel {
     @JsonProperty("txtChosaDispMax")
     public void setTxtChosaDispMax(TextBoxNum txtChosaDispMax) {
         this.txtChosaDispMax = txtChosaDispMax;
+    }
+
+    /*
+     * getchkNinteiChosahyo
+     * @return chkNinteiChosahyo
+     */
+    @JsonProperty("chkNinteiChosahyo")
+    public CheckBoxList getChkNinteiChosahyo() {
+        return chkNinteiChosahyo;
+    }
+
+    /*
+     * setchkNinteiChosahyo
+     * @param chkNinteiChosahyo chkNinteiChosahyo
+     */
+    @JsonProperty("chkNinteiChosahyo")
+    public void setChkNinteiChosahyo(CheckBoxList chkNinteiChosahyo) {
+        this.chkNinteiChosahyo = chkNinteiChosahyo;
     }
 
     /*

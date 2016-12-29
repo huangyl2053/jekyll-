@@ -126,7 +126,7 @@ public class ShujiiIkensho5komokuProcess extends BatchProcessBase<IkenshoJohoPri
             出力条件.add(new RString("主治医意見書5項目が未完了"));
         } else if (審査会.equals(processParameter.get主治医意見書５項目確認一覧表作成条件())) {
             出力条件.add(new RString("審査会の開催番号を指定"));
-            出力条件.add(processParameter.get主治医意見書５項目確認一覧表審査会());
+            出力条件.add(new RString("審査会の開催番号：").concat(processParameter.get主治医意見書５項目確認一覧表審査会()));
         }
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBE.DBE013005.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
