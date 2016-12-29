@@ -211,6 +211,7 @@ public class NiTeiCyoSaiChiRanManager {
                 申請書管理番号,
                 認定調査依頼履歴番号,
                 テキストイメージ区分,
+                原本マスク区分,
                 概況特記);
         認定調査票特記情報(
                 申請書管理番号,
@@ -304,18 +305,21 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
      * @param 概況調査テキストイメージ区分 RString
+     * @param 原本マスク区分 Code
      * @param 概況特記 GaikyoTokki
      * @return 認定調査票（概況特記）のCOUNT
      */
     private boolean 認定調査票概況特記(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 概況調査テキストイメージ区分,
+            Code 原本マスク区分,
             GaikyoTokki 概況特記) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(申請書管理番号_Message.toString()));
         requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(認定調査依頼履歴番号_Message.toString()));
         requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage(概況調査テキストイメージ区分_Message.toString()));
-        DbT5206GaikyoTokkiEntity entity = dbT5206Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
+        requireNonNull(原本マスク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク区分"));
+        DbT5206GaikyoTokkiEntity entity = dbT5206Dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分, 原本マスク区分);
         if (!概況特記.hasChanged()) {
             return false;
         }

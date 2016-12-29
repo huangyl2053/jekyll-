@@ -386,7 +386,8 @@ public class NinteiChosaIraiShudou {
         }
 
         if (div.getChkSaiCheck().getSelectedValues().contains(CHKNAME_認定調査依頼該当者履歴一覧)) {
-            NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy被保険者番号(div.getCcdNinteiShinseishaKihonInfo().get被保険者番号());
+            NinnteiChousairaiShudouParameter parameter
+                    = NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号と被保険者番号(申請書管理番号.value(), div.getCcdNinteiShinseishaKihonInfo().get被保険者番号());
             List<NinnteiChousairaiShudouBusiness> 認定調査依頼該当者履歴一覧 = finder.get認定調査依頼該当者履歴一覧(parameter).records();
             if (!認定調査依頼該当者履歴一覧.isEmpty()) {
                 printService.print認定調査依頼該当者履歴一覧(

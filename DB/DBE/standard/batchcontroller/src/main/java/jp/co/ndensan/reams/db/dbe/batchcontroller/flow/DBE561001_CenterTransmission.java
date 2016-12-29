@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.SoshinDataSakus
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.IkenItemTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ServiceJokyoTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.UpdateGaibuRenkeiDataoutputJohoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.UpdateNinteiKanryoJohoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.UpdateNinteiShinseiJohoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiChosaItemTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiServiceJokyoTempTableSakuseiProcess;
@@ -42,6 +43,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
     private static final String センター送信データ作成ファイル出力 = "CenterTransmissionProcessFileSyuturyoku";
     private static final String DB出力要介護認定申請情報 = "UpdateDbT5101NinteiShinseiJoho";
     private static final String DB出力外部連携データ抽出情報 = "UpdateDbT7211GaibuRenkeiDataoutputJoho";
+    private static final String DB出力要介護認定完了情報 = "UpdateDbT5105NinteiKanryoJoho";
     private List<RString> 出力された申請書管理番号;
 
     @Override
@@ -59,6 +61,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
         if (!出力された申請書管理番号.isEmpty()) {
             executeStep(DB出力要介護認定申請情報);
             executeStep(DB出力外部連携データ抽出情報);
+            executeStep(DB出力要介護認定完了情報);
         }
     }
 
@@ -165,6 +168,17 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
     @Step(DB出力外部連携データ抽出情報)
     IBatchFlowCommand updateGaibuRenkeiDataoutputJoho() {
         return loopBatch(UpdateGaibuRenkeiDataoutputJohoProcess.class)
+                .arguments(new CenterTransmissionUpdateProcessParameter(出力された申請書管理番号)).define();
+    }
+
+    /**
+     * 要介護認定完了情報をUPDATEします。
+     *
+     * @return バッチコマンド
+     */
+    @Step(DB出力要介護認定完了情報)
+    IBatchFlowCommand updateNinteiKanryoJoho() {
+        return loopBatch(UpdateNinteiKanryoJohoProcess.class)
                 .arguments(new CenterTransmissionUpdateProcessParameter(出力された申請書管理番号)).define();
     }
 

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Editor {
 
-    private static final RString 単位 = new RString("月");
+    private static final RString 単位 = new RString("ヶ月");
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
@@ -109,7 +109,7 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
 
     private RString 和暦年月日Fomart(FlexibleDate date) {
         return (date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.ZERO).toDateString());
+                .fillType(FillType.BLANK).toDateString());
     }
 
     private RString 月数(int 有効期間) {
