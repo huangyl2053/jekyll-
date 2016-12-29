@@ -46,18 +46,18 @@ public class DBE012001_ChosaInfoPrintTest extends DbeTestBase {
         public void パラメーターが正しく設定されている場合_バッチフロー実施結果は_Successで返すこと() throws Exception {
             setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
             BatchExitStatus result = flowHelper.executeFlow(
-                    new RString("DBE012001_ChosaInfoPrint"),
-                    new RString("調査情報印刷"),
-                    DBE012001_ChosaInfoPrint.class,
-                    createBatchParameter());
+                new RString("DBE012001_ChosaInfoPrint"),
+                new RString("調査情報印刷"),
+                DBE012001_ChosaInfoPrint.class,
+                createBatchParameter());
             assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
         }
 
     }
 
     private static DBE012001_ChosaInfoPrintParameter createBatchParameter() {
-        RDate 処理日開始 = new RDate(2016, 12, 1);
-        RDate 処理日終了 = new RDate(2016, 12, 31);
+        RDate 処理日開始 = new RDate(2014, 3, 1);
+        RDate 処理日終了 = new RDate(2014, 3, 1);
         DBE012001_ChosaInfoPrintParameter parameter = new DBE012001_ChosaInfoPrintParameter();
 
         parameter.setNinteichosayoteimitei(true);
@@ -68,16 +68,18 @@ public class DBE012001_ChosaInfoPrintTest extends DbeTestBase {
         parameter.setIraisakihenkymdFrom(処理日開始.toDateString());
         parameter.setIraisakihenkymdTo(処理日終了.toDateString());
         parameter.setCheckListJoken(true);
-        parameter.setJoken3(new RString("2"));
+        parameter.setJoken3(new RString("3"));
         parameter.setCheckListShinseiYMDFrom(処理日開始.toDateString());
         parameter.setCheckListShinseiYMDTo(処理日終了.toDateString());
+        parameter.setShinsakai(new RString("4"));
+        parameter.setShinsaYMD(new RString("20150917"));
 
         return parameter;
     }
 
     private static void setExecutionSubGyomuCodeToControlData(SubGyomuCode executionSubGyomuCode) {
         _ControlData controlData = new _ControlData(SubGyomuCode.DBE認定支援.toString(), "test",
-                new ReamsDonyuDantaiCode("209007"));
+                                                    new ReamsDonyuDantaiCode("209007"));
         FlowContext flowContext = createFlowContext("testFlowInstanceId", "DBEWF21005");
         when(flowContext.getExecutionSubGyomuCode()).thenReturn(executionSubGyomuCode);
         controlData.setFlowContext(flowContext);

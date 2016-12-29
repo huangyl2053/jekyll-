@@ -49,11 +49,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYoteiMiteiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei."
-                    + "INinteichosaYoteiMiteiMapper.getNinteichosaScheduleInput");
+                                 = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei."
+                                               + "INinteichosaYoteiMiteiMapper.getNinteichosaScheduleInput");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE012001.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections
-            .unmodifiableList(Arrays.asList(new RString(NinteichosaYoteiMiteiReportSource.ReportSourceFields.shichosonName.name())));
+        .unmodifiableList(Arrays.asList(new RString(NinteichosaYoteiMiteiReportSource.ReportSourceFields.shichosonName.name())));
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString なし = new RString("無し");
     private NinteichosaYoteiMiteiProcessParamter paramter;
@@ -80,8 +80,8 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<NinteichosaYoteiMiteiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .create();
+            .addBreak(new BreakerCatalog<NinteichosaYoteiMiteiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+            .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -106,7 +106,7 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
 
     private PersonalData toPersonalData(NinteichosaYoteiMiteiRelateEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
-                entity.getDbT5101_shinseishoKanriNo().value());
+                                                                   entity.getDbT5101_shinseishoKanriNo().value());
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
@@ -118,22 +118,10 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
-        List<RString> 出力条件 = new ArrayList<>();
-        if (new RString("1").equals(paramter.get認定調査予定未定者一覧作成条件())) {
-            出力条件.add(new RString("全件出力"));
-        } else if (new RString("2").equals(paramter.get認定調査予定未定者一覧作成条件())) {
-            出力条件.add(new RString("申請日の範囲を指定"));
-            if (paramter.get認定調査予定未定者一覧申請日From() == null && paramter.get認定調査予定未定者一覧申請日To() == null) {
-                出力条件.add(new RString("指定なし"));
-            } else {
-                RString 申請日FROM = dateFormat(paramter.get認定調査予定未定者一覧申請日From());
-                RString 申請日TO = dateFormat(paramter.get認定調査予定未定者一覧申請日To());
-                出力条件.add(申請日FROM.concat(new RString("～")).concat(申請日TO));
-            }
-        }
+        List<RString> 出力条件 = get出力条件();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE012001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
-                帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
+            ReportIdDBE.DBE012001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+            帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
@@ -146,13 +134,22 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
         return dateTmp.wareki().toDateString();
     }
 
-    private RString set認定調査予定未定者一覧作成条件(RString 作成条件) {
-        RString 一覧作成条件 = RString.EMPTY;
-        if (new RString("1").equals(作成条件)) {
-            一覧作成条件 = new RString("全件出力対象");
-        } else if (new RString("2").equals(作成条件)) {
-            一覧作成条件 = new RString("申請日範囲指定");
+    private List<RString> get出力条件() {
+        List<RString> 出力条件 = new ArrayList<>();
+        RString 作成条件 = new RString("作成条件：");
+        RString 日付範囲 = new RString("日付範囲：");
+        if (new RString("1").equals(paramter.get認定調査予定未定者一覧作成条件())) {
+            出力条件.add(作成条件.concat("全件出力"));
+        } else if (new RString("2").equals(paramter.get認定調査予定未定者一覧作成条件())) {
+            出力条件.add(作成条件.concat("申請日の範囲を指定"));
+            if (paramter.get認定調査予定未定者一覧申請日From() == null && paramter.get認定調査予定未定者一覧申請日To() == null) {
+                出力条件.add(日付範囲.concat("指定なし"));
+            } else {
+                RString 申請日FROM = dateFormat(paramter.get認定調査予定未定者一覧申請日From());
+                RString 申請日TO = dateFormat(paramter.get認定調査予定未定者一覧申請日To());
+                出力条件.add(日付範囲.concat(申請日FROM).concat(new RString("～")).concat(申請日TO));
+            }
         }
-        return 一覧作成条件;
+        return 出力条件;
     }
 }
