@@ -33,27 +33,29 @@ public class NinteichosaIraiListCsvEntity {
     private final RString ninteiShinseiShinseijiKubunCode;
     @CsvField(order = 8, name = "（申請区分）申請時")
     private final RString ninteiShinseiShinseijiKubunName;
-    @CsvField(order = 9, name = "(今回調査)調査委託先コード")
+    @CsvField(order = 9, name = "調査依頼完了日")
+    private final RString chosaiIraiKanryoYMD;
+    @CsvField(order = 10, name = "(今回調査)調査委託先コード")
     private final RString ninteiChosaItakusakiCode;
-    @CsvField(order = 10, name = "(今回調査)調査委託先")
+    @CsvField(order = 11, name = "(今回調査)調査委託先")
     private final RString ninteiChosaItakusaki;
-    @CsvField(order = 11, name = "(今回調査)調査員コード")
+    @CsvField(order = 12, name = "(今回調査)調査員コード")
     private final RString ninteiChosainCode;
-    @CsvField(order = 12, name = "(今回調査)調査員")
+    @CsvField(order = 13, name = "(今回調査)調査員")
     private final RString chosainShimei;
-    @CsvField(order = 13, name = "(調査票入手)調査実施日")
+    @CsvField(order = 14, name = "(調査票入手)調査実施日")
     private final RString ninteichosaJisshiYMD;
-    @CsvField(order = 14, name = "(調査督促)督促発行日")
+    @CsvField(order = 15, name = "(調査督促)督促発行日")
     private final RString ninteichosaTokusokuYMD;
-    @CsvField(order = 15, name = "(調査督促)方法")
+    @CsvField(order = 16, name = "(調査督促)方法")
     private final RString ninteichosaTokusokuHoho;
-    @CsvField(order = 16, name = "(調査督促)回数")
+    @CsvField(order = 17, name = "(調査督促)回数")
     private final RString ninteichosaTokusokuKaisu;
-    @CsvField(order = 17, name = "(調査督促)期限")
+    @CsvField(order = 18, name = "(調査督促)期限")
     private final RString ninteichosaKigenYMD;
-    @CsvField(order = 18, name = "地区コード")
+    @CsvField(order = 19, name = "地区コード")
     private final RString chikuCode;
-    @CsvField(order = 19, name = "地区")
+    @CsvField(order = 20, name = "地区")
     private final RString chikuName;
 
     /**
@@ -67,6 +69,7 @@ public class NinteichosaIraiListCsvEntity {
      * @param hihokenshaName (被保険者)氏名
      * @param ninteiShinseiShinseijiKubunCode (申請区分)申請時コード
      * @param ninteiShinseiShinseijiKubunName (申請区分)申請日
+     * @param chosaiIraiKanryoYMD 調査依頼完了日
      * @param ninteiChosaItakusakiCode (今回調査)調査委託先コード
      * @param ninteiChosaItakusaki (今回調査)調査委託先
      * @param ninteiChosainCode (今回調査)調査員コード
@@ -88,6 +91,7 @@ public class NinteichosaIraiListCsvEntity {
             RString hihokenshaName,
             RString ninteiShinseiShinseijiKubunCode,
             RString ninteiShinseiShinseijiKubunName,
+            RString chosaiIraiKanryoYMD,
             RString ninteiChosaItakusakiCode,
             RString ninteiChosaItakusaki,
             RString ninteiChosainCode,
@@ -107,6 +111,7 @@ public class NinteichosaIraiListCsvEntity {
         this.hihokenshaName = hihokenshaName;
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
         this.ninteiShinseiShinseijiKubunName = ninteiShinseiShinseijiKubunName;
+        this.chosaiIraiKanryoYMD = chosaiIraiKanryoYMD;
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
         this.ninteiChosaItakusaki = ninteiChosaItakusaki;
         this.ninteiChosainCode = ninteiChosainCode;

@@ -71,7 +71,8 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      */
     @Step(委員_審査会資料一括作成)
     protected IBatchFlowCommand callIinShiryoShinsakaiFlow() {
-        出力帳票一覧Map = new HashMap<>();
+        Map<RString, RString> map = new HashMap<>();
+        出力帳票一覧Map.putAll(map);
         return otherBatchFlow(委員_審査会資料一括作成ID, SubGyomuCode.DBE認定支援,
                 getParameter().toDBE517002_ShinsakaiShiryoIinParameter(出力帳票一覧Map)).define();
     }
