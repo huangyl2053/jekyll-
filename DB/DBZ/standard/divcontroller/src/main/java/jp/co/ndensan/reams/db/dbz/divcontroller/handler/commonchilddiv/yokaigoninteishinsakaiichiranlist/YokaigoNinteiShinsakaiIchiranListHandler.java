@@ -106,10 +106,11 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         List<dgShinsakaiIchiran_Row> list = new ArrayList<>();
         for (ShinsakaiKaisai shinsakaiKaisai : 審査会一覧.records()) {
             dgShinsakaiIchiran_Row row = new dgShinsakaiIchiran_Row();
+            row.setShinsakaiKaisaiNo(shinsakaiKaisai.get審査会開催番号());
             row.getKaisaiYoteiDate().setValue(shinsakaiKaisai.get介護認定審査会開催予定年月日());
             row.getYoteiKaishiTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会開始予定時刻()));
             row.getYoteiShuryoTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会終了予定時刻()));
-            row.setShinsakaiMeisho(shinsakaiKaisai.get編集合議体名称());
+            row.setShinsakaiMeisho(shinsakaiKaisai.get編集審査会名称());
             row.setGogitaiMeisho(shinsakaiKaisai.get合議体名称());
             row.setShurui(shinsakaiKaisai.get種類());
             row.setShinsakaiKaijo(shinsakaiKaisai.get介護認定審査会開催場所名称());
@@ -150,11 +151,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
      *
      */
     public void get開催番号() {
-        RString 合議体名称 = div.getDgShinsakaiIchiran().getActiveRow().getShinsakaiMeisho();
-        RString 開催番号 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(合議体名称)) {
-            開催番号 = 合議体名称.substring(1, 合議体名称.length() - LENGTH_4);
-        }
+        RString 開催番号 = div.getDgShinsakaiIchiran().getActiveRow().getShinsakaiKaisaiNo();
         RString 開催年月日 = RString.EMPTY;
         if (!div.getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().isEmpty()) {
             開催年月日 = new RString(div.getDgShinsakaiIchiran().getActiveRow().getKaisaiYoteiDate().getValue().toString());
@@ -173,9 +170,9 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         List<dgShinsakaiIchiran_Row> rowList = div.getDgShinsakaiIchiran().getDataSource();
         List<RString> list = new ArrayList<>();
         for (dgShinsakaiIchiran_Row row : rowList) {
-            RString 合議体名称 = row.getShinsakaiMeisho();
-            if (row.getSelected() && !RString.isNullOrEmpty(合議体名称)) {
-                list.add(合議体名称.substring(1, 合議体名称.length() - LENGTH_4));
+            RString 開催番号 = row.getShinsakaiKaisaiNo();
+            if (row.getSelected() && !RString.isNullOrEmpty(開催番号)) {
+                list.add(開催番号);
             }
         }
         return list;
@@ -217,7 +214,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
                             .set介護認定審査会開催予定年月日(row.getKaisaiYoteiDate().getValue())
                             .set介護認定審査会開始予定時刻(new RString(row.getYoteiKaishiTime().getValue().toString()))
                             .set介護認定審査会終了予定時刻(new RString(row.getYoteiShuryoTime().getValue().toString()))
-                            .set編集合議体名称(row.getShinsakaiMeisho())
+                            .set編集審査会名称(row.getShinsakaiMeisho())
                             .set合議体名称(row.getGogitaiMeisho())
                             .set種類(row.getShurui())
                             .set介護認定審査会開催場所名称(row.getShinsakaiKaijo())
@@ -231,7 +228,9 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
                             .setモバイルデータ出力年月日(row.getDataShutsuryoku().getValue())
                             .set資料作成済フラグ(is資料作成済区分(row))
                             .set介護認定審査会進捗状況(row.getShinchokuJokyo())
-                            .setダミーフラグ(row.getDummyFlag()).build();
+                            .setダミーフラグ(row.getDummyFlag())
+                            .set審査会開催番号(row.getShinsakaiKaisaiNo())
+                            .build();
                     shinsakaiKaisaiList.add(shinsakaiKaisai);
                 }
             }
@@ -244,14 +243,6 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
 
     private boolean is資料作成済区分(dgShinsakaiIchiran_Row row) {
         return IsShiryoSakuseiZumi.作成済.get名称().equals(row.getShiryoSakuseiKubun());
-    }
-
-    private RString get介護認定審査会進捗状況(dgShinsakaiIchiran_Row row) {
-        if (!RString.isNullOrEmpty(row.getShinchokuJokyo())) {
-            return ShinsakaiShinchokuJokyo.toValue(row.getShinchokuJokyo()).get名称();
-        } else {
-            return RString.EMPTY;
-        }
     }
 
     /**

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -43,6 +44,18 @@ public class GaikyoTokkiBuilder {
     public GaikyoTokkiBuilder set概況特記テキストイメージ区分(RString 概況特記テキストイメージ区分) {
         requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
         entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
+        return this;
+    }
+
+    /**
+     * 原本マスク区分を設定します。
+     *
+     * @param 原本マスク区分 原本マスク区分
+     * @return {@link GaikyoTokkiBulder}
+     */
+    public GaikyoTokkiBuilder set原本マスク区分(Code 原本マスク区分) {
+        requireNonNull(原本マスク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク区分"));
+        entity.setGenponMaskKubun(原本マスク区分);
         return this;
     }
 
@@ -105,7 +118,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setShusoImageSharedFileId(概況特記_主訴_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記（主訴）マスキングイメージ共有ファイルIDを設定します。
      *
@@ -117,7 +129,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setShusoMaskingImageSharedFileId(概況特記_主訴_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記事項（家族状況）を設定します。
      *
@@ -141,7 +152,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKazokuJokyoImageSharedFileId(概況特記_家族状況_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記（家族状況）マスキングイメージ共有ファイルIDを設定します。
      *
@@ -153,7 +163,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKazokuJokyoMaskingImageSharedFileId(概況特記_家族状況_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記事項（居住環境）を設定します。
      *
@@ -177,7 +186,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKyojuKankyoImageSharedFileId(概況特記_居住環境_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記（居住環境）マスキングイメージ共有ファイルIDを設定します。
      *
@@ -189,7 +197,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKyojuKankyoMaskingImageSharedFileId(概況特記_居住環境_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記事項（機器・器械）を設定します。
      *
@@ -213,7 +220,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKikaiKikiImageSharedFileId(概況特記_機器_器械_イメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * 概況特記（機器・器械）マスキングイメージ共有ファイルIDを設定します。
      *
@@ -225,7 +231,6 @@ public class GaikyoTokkiBuilder {
 //        entity.setKikaiKikiMaskingImageSharedFileId(概況特記_機器_器械_マスキングイメージ共有ファイルID);
 //        return this;
 //    }
-
     /**
      * {@link GaikyoTokki}のインスタンスを生成します。
      *

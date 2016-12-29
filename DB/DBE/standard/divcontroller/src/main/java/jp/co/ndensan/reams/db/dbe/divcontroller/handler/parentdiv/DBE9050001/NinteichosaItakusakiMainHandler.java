@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9050001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.ChosaitakusakiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.NinteichosaItakusakiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.dgSonotaKikanIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -27,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -154,9 +157,14 @@ public class NinteichosaItakusakiMainHandler {
     public void setSonotaKikanichiran(List<SonotaKikanJohoEntity> sonotaKikanJohoList) {
         List<dgSonotaKikanIchiran_Row> dataGridList = new ArrayList<>();
         for (SonotaKikanJohoEntity sonotaKikanJohoEntity : sonotaKikanJohoList) {
+            List<ShichosonMeishoBusiness> list = KoseiShujiiIryoKikanMasterFinder.createInstance().getHokensyaMeisho(sonotaKikanJohoEntity.getShoKisaiHokenshaNo()).records();
+            RString hokensya = RString.EMPTY;
+            if (!list.isEmpty()) {
+                hokensya = list.get(0).getShichosonMeisho();
+            }  
             dataGridList.add(createDgSonotaKikanichiranRow(
                     RString.EMPTY,
-                    sonotaKikanJohoEntity.getHokensha(),
+                    hokensya,
                     sonotaKikanJohoEntity.getShoKisaiHokenshaNo(),
                     sonotaKikanJohoEntity.getSonotaKikanCode(),
                     sonotaKikanJohoEntity.getKikanMeisho(),
@@ -261,6 +269,7 @@ public class NinteichosaItakusakiMainHandler {
      */
     public void setChosaitakusakiJohoInput(dgSonotaKikanIchiran_Row row) {
         div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().intialize(new HokenjaNo(row.getHokenshaCode()));
+        div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setHokenjaName(row.getHokensha());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().setValue(row.getSonotaKikanCode());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanname().setValue(row.getKikanMeisho());
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanKananame().setValue(row.getKikanKana());

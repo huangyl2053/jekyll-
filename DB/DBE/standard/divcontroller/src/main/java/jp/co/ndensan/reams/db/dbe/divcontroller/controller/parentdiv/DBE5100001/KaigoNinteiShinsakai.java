@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100001;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001StateName;
@@ -13,10 +15,17 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.service.core.shinsakaikaisai.ShinsakaiKaisaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -65,6 +74,90 @@ public class KaigoNinteiShinsakai {
         div.getCcdShinsakaiItiran().initialize(getMode().get(menuID));
         IParentResponse<KaigoNinteiShinsakaiDiv> response = ResponseData.of(div);
         response.rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName());
+        response.setState(getState().get(menuID));
+        return response.respond();
+    }
+
+    /**
+     * 審査会一覧を更新します。
+     *
+     * @param div 審査会一覧Div
+     * @return ResponseData<KaigoNinteiShinsakaiDiv>
+     */
+    public ResponseData<KaigoNinteiShinsakaiDiv> onActive_KaigoNinteiShinsakai(KaigoNinteiShinsakaiDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
+        if (!is審査会一覧更新(menuID)) {
+            return onActive_return(div, menuID);
+        }
+
+        RString 開催番号;
+        開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.create審査会検索Param(開催番号);
+        ShinsakaiKaisai shinsakaiKaisai = ShinsakaiKaisaiFinder.createInstance().get審査会(parameter);
+        if (shinsakaiKaisai == null) {
+            return onActive_return(div, menuID);
+        }
+
+        List<dgShinsakaiIchiran_Row> selectedRow = new ArrayList<>();
+        int seledted = 0;
+        for (dgShinsakaiIchiran_Row row : div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().getDataSource()) {
+            if (開催番号.equals(row.getShinsakaiKaisaiNo())) {
+                selectedRow.add(row);
+                row.getKaisaiYoteiDate().setValue(shinsakaiKaisai.get介護認定審査会開催予定年月日());
+                row.getYoteiKaishiTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会開始予定時刻()));
+                row.getYoteiShuryoTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会終了予定時刻()));
+                row.setShinsakaiMeisho(shinsakaiKaisai.get編集審査会名称());
+                row.setGogitaiMeisho(shinsakaiKaisai.get合議体名称());
+                row.setShurui(shinsakaiKaisai.get種類());
+                row.setShinsakaiKaijo(shinsakaiKaisai.get介護認定審査会開催場所名称());
+                row.getKaisaiDay().setValue(shinsakaiKaisai.get介護認定審査会開催年月日());
+                row.getKaisaiTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会開始時刻()));
+                row.getShuryoTime().setValue(getRStringToRtime(shinsakaiKaisai.get介護認定審査会終了時刻()));
+                row.getYoteiTeiin().setValue(shinsakaiKaisai.get介護認定審査会予定定員());
+                row.getWariateNinzu().setValue(shinsakaiKaisai.get介護認定審査会割当済み人数());
+                row.getTaishoNinzu().setValue(shinsakaiKaisai.get介護認定審査会実施人数());
+                row.setOnseiKiroku(shinsakaiKaisai.get音声記録());
+                row.getDataShutsuryoku().setValue(shinsakaiKaisai.getモバイルデータ出力年月日());
+                if (shinsakaiKaisai.is資料作成済フラグ()) {
+                    row.setShiryoSakuseiKubun(IsShiryoSakuseiZumi.toValue(shinsakaiKaisai.is資料作成済フラグ()).get名称());
+                } else {
+                    row.setShiryoSakuseiKubun(RString.EMPTY);
+                }
+                if (!RString.isNullOrEmpty(shinsakaiKaisai.get介護認定審査会進捗状況())) {
+                    row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get画面表示名称());
+                } else {
+                    row.setShinchokuJokyo(RString.EMPTY);
+                }
+                row.setDummyFlag(shinsakaiKaisai.isダミーフラグ());
+                row.setGogitaiNo(shinsakaiKaisai.get合議体番号());
+                row.setShinsakaiKaisaiNo(shinsakaiKaisai.get審査会開催番号());
+                div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().getDataSource().set(seledted, row);
+                break;
+            }
+            seledted++;
+        }
+        div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().setSelectedItems(selectedRow);
+        return onActive_return(div, menuID);
+    }
+
+    private boolean is審査会一覧更新(RString menuID) {
+        return メニューID_審査会開催結果登録.equals(menuID)
+                || メニューID_審査会審査結果登録.equals(menuID)
+                || メニューID_介護認定審査会対象者割付.equals(menuID)
+                || メニューID_介護認定審査会委員割付.equals(menuID);
+    }
+
+    private RTime getRStringToRtime(RString time) {
+        if (!RString.isNullOrEmpty(time)) {
+            time = time.padZeroToLeft(LENGTH_4);
+            return RTime.of(Integer.valueOf(time.substring(0, 2).toString()), Integer.valueOf(time.substring(2).toString()));
+        }
+        return RTime.of(0, 0, 0, 0);
+    }
+
+    private ResponseData<KaigoNinteiShinsakaiDiv> onActive_return(KaigoNinteiShinsakaiDiv div, RString menuID) {
+        IParentResponse<KaigoNinteiShinsakaiDiv> response = ResponseData.of(div);
+        response.rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, menuID).getMenuName());
         response.setState(getState().get(menuID));
         return response.respond();
     }
