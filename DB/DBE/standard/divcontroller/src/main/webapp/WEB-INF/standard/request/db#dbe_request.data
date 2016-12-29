@@ -354,6 +354,7 @@ dbe/db/dbe/KojinJokyoShokai/onLoad
 dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onClick_btnToSearch
 dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onLoad
 dbe/db/dbe/Masking/onChange_TxtSaidaiHyojiKensu
+dbe/db/dbe/Masking/onChange_ccdHokenshaList
 dbe/db/dbe/Masking/onChange_radTaishoDataKubun
 dbe/db/dbe/Masking/onClick_BtnCompleteMasking
 dbe/db/dbe/Masking/onClick_BtnDataOutput
@@ -1124,6 +1125,8 @@ dbe/db/dbe/TaishouWaritsuke/onClick_BtnResetShinsaOrder
 dbe/db/dbe/TaishouWaritsuke/onClick_BtnWaritsukeKaijo
 dbe/db/dbe/TaishouWaritsuke/onClick_KanniWaritsuke
 dbe/db/dbe/TaishouWaritsuke/onClick_Waritsuke
+dbe/db/dbe/TaishouWaritsuke/onClick_btnComplete
+dbe/db/dbe/TaishouWaritsuke/onClick_btnContinue
 dbe/db/dbe/TaishouWaritsuke/onLoad
 dbe/db/dbe/TaishouWaritsuke/onStateTransition
 dbe/db/dbe/TextMasking/onClick_btnHozon
