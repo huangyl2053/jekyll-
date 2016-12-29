@@ -469,8 +469,13 @@ public class NinnteiChousaKekkaTouroku1 {
         RString 利用施設住所 = gaikyoChosa.getTemp_利用施設住所() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設住所();
         RString 利用施設電話番号 = gaikyoChosa.getTemp_利用施設電話番号() == null ? RString.EMPTY : gaikyoChosa.getTemp_利用施設電話番号();
 
-        RString 施設連絡先 = 利用施設名.concat(カンマ).concat(利用施設郵便番号).concat(カンマ)
-                .concat(利用施設住所).concat(カンマ).concat(利用施設電話番号);
+        RString 施設連絡先;
+        if (利用施設名.isEmpty() && 利用施設郵便番号.isEmpty() && 利用施設住所.isEmpty() && 利用施設電話番号.isEmpty()) {
+            施設連絡先 = null;
+        } else {
+            施設連絡先 = 利用施設名.concat(カンマ).concat(利用施設郵便番号).concat(カンマ)
+                    .concat(利用施設住所).concat(カンマ).concat(利用施設電話番号);
+        }
         return 施設連絡先;
     }
 
