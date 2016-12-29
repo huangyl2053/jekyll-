@@ -83,7 +83,7 @@ public class IkenshoJohoPrintBusiness {
                 shijiiIkenshoIraiHenko.set認定申請年月日(entity.getNinteiShinseiYMD());
                 Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
                 shijiiIkenshoIraiHenko.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
-                shijiiIkenshoIraiHenko.set変更回数(indexTmp);
+                shijiiIkenshoIraiHenko.set変更回数(indexTmp - 1 <= 0 ? 0 : indexTmp - 1);
                 shijiiIkenshoIraiHenko.set変更前医療機関(before.getIryoKikanMeisho());
                 shijiiIkenshoIraiHenko.set変更前主治医(before.getShujiiName());
                 shijiiIkenshoIraiHenko.set変更後医療機関(entity.getIryoKikanMeisho());

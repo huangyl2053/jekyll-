@@ -115,6 +115,15 @@
         DbT5912."shujiiName" AS "shujiiName",
         DbT5301."ikenshoIraiRirekiNo" AS "ikenshoIraiRirekiNo",
         DbT5301."ikenshoSakuseiIraiYMD" AS "ikenshoSakuseiIraiYMD"
+        <include refid="core" />
+        ORDER BY
+        DbT5301."shinseishoKanriNo",
+        DbT5301."ikenshoIraiRirekiNo",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaKana"
+    </select>
+    
+    <sql id="core">
         FROM	
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
@@ -124,28 +133,28 @@
         LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON DbT5101."shinseishoKanriNo"=DbT5301."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
-        ON DbT5101."shujiiIryokikanCode"=DbT5911."shujiiIryokikanCode"
+        ON DbT5301."shujiiIryokikanCode"=DbT5911."shujiiIryokikanCode"
         AND DbT5911."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
-        ON DbT5912."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
-        AND DbT5912."shujiiCode"=DbT5101."shujiiCode"
+        ON DbT5912."shujiiIryokikanCode"=DbT5301."shujiiIryokikanCode"
+        AND DbT5912."shujiiCode"=DbT5301."shujiiCode"
         AND DbT5912."shichosonCode"=DbT7051."shichosonCode"	
         WHERE	
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        AND DbT5105."ikenshoTorokuKanryoYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND DbT5101."logicalDeletedFlag" = FALSE        
         AND
         DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{主治医意見書作成依頼変更者一覧表申請日From}
         AND
         DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{主治医意見書作成依頼変更者一覧表申請日To} 
-        ORDER BY
-        DbT5301."shinseishoKanriNo",
-        DbT5301."ikenshoIraiRirekiNo",
-        DbT5101."hihokenshaKana",
-        DbT5101."ninteiShinseiYMD"
-    </select>
+        AND
+        exists (SELECT 'X' FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301ShujiiIkenshoIraiJoho 
+                 WHERE DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" AND 
+                       DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" <![CDATA[>]]> 1)        
+    </sql>
+    
     <resultMap id="resultMap_主治医意見書作成依頼変更者" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -168,31 +177,7 @@
             fetchSize="500" resultOrdered="true">
         SELECT	
         COUNT(1)
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
-        ON DbT5101."shinseishoKanriNo"=DbT5105."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
-        ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
-        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
-        ON DbT5101."shinseishoKanriNo"=DbT5301."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
-        ON DbT5101."shujiiIryokikanCode"=DbT5911."shujiiIryokikanCode"
-        AND DbT5911."shichosonCode"=DbT7051."shichosonCode"
-        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
-        ON DbT5912."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
-        AND DbT5912."shujiiCode"=DbT5101."shujiiCode"
-        AND DbT5912."shichosonCode"=DbT7051."shichosonCode"	
-        WHERE	
-        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
-        AND DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
-        AND DbT5101."logicalDeletedFlag" = FALSE
-        AND
-        DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{主治医意見書作成依頼変更者一覧表申請日From}
-        AND
-        DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{主治医意見書作成依頼変更者一覧表申請日To}    
+        <include refid="core" />
     </select>
     
     <select id="get主治医意見書未提出者情報" resultMap="resultMap_主治医意見書未提出者" 
