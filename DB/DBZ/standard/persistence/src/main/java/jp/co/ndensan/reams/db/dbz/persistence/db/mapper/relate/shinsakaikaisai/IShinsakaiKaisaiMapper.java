@@ -24,4 +24,12 @@ public interface IShinsakaiKaisaiMapper {
      */
     List<ShinsakaiKaisaiRelateEntity> get審査会一覧(ShinsakaiKaisaiParameter parameter);
 
+    /**
+     * 審査会情報検索する。
+     *
+     * @param parameter 介護認定審査会共有一覧のパラメータクラス
+     * @return ShinsakaiKaisaiRelateEntity
+     */
+    ShinsakaiKaisaiRelateEntity get審査会(ShinsakaiKaisaiParameter parameter);
+
 }
