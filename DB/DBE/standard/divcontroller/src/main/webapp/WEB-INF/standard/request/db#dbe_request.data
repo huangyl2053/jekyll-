@@ -239,6 +239,7 @@ dbe/db/dbe/IkenshoShujiiIchiran/onChange_ddlOutputSort
 dbe/db/dbe/IkenshoShujiiIchiran/onClick_Check
 dbe/db/dbe/IkenshoShujiiIchiran/onClick_btnReportPublish
 dbe/db/dbe/IkenshoShujiiIchiran/onLoad
+dbe/db/dbe/Ikenshoget/onChange_ccdHokenshaList
 dbe/db/dbe/Ikenshoget/onChange_jyotaiKubun
 dbe/db/dbe/Ikenshoget/onChange_txtMaxNumber
 dbe/db/dbe/Ikenshoget/onClick_BtnIkenshoBack
@@ -1026,6 +1027,7 @@ dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiDesign
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_kinyuYoshiOCR
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_seikyuSho
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClick_teishutsuIraiSho
+dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onClose_SakuseiIrai
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onLoad
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSaikinshorishaClick
 dbe/db/dbe/ShujiiIkenshoSakuseiIrai/onSelect_dgShinseishaIchiran
@@ -1125,6 +1127,8 @@ dbe/db/dbe/TaishouWaritsuke/onClick_BtnResetShinsaOrder
 dbe/db/dbe/TaishouWaritsuke/onClick_BtnWaritsukeKaijo
 dbe/db/dbe/TaishouWaritsuke/onClick_KanniWaritsuke
 dbe/db/dbe/TaishouWaritsuke/onClick_Waritsuke
+dbe/db/dbe/TaishouWaritsuke/onClick_btnComplete
+dbe/db/dbe/TaishouWaritsuke/onClick_btnContinue
 dbe/db/dbe/TaishouWaritsuke/onLoad
 dbe/db/dbe/TaishouWaritsuke/onStateTransition
 dbe/db/dbe/TextMasking/onClick_btnHozon

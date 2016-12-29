@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshogetichiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,18 +25,20 @@ public class IkenshogetichiranDiv extends Panel {
      */
     @JsonProperty("radJyotaiKubun")
     private RadioButton radJyotaiKubun;
-    @JsonProperty("txtMisyori")
-    private TextBoxNum txtMisyori;
-    @JsonProperty("txtKanryouKano")
-    private TextBoxNum txtKanryouKano;
     @JsonProperty("txtGokei")
     private TextBoxNum txtGokei;
+    @JsonProperty("txtKanryouKano")
+    private TextBoxNum txtKanryouKano;
+    @JsonProperty("txtMisyori")
+    private TextBoxNum txtMisyori;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
     @JsonProperty("btnikenshogetoutput")
     private ButtonDownLoad btnikenshogetoutput;
     @JsonProperty("txtMaxNumber")
     private TextBoxNum txtMaxNumber;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,21 +65,21 @@ public class IkenshogetichiranDiv extends Panel {
     }
 
     /*
-     * gettxtMisyori
-     * @return txtMisyori
+     * gettxtGokei
+     * @return txtGokei
      */
-    @JsonProperty("txtMisyori")
-    public TextBoxNum getTxtMisyori() {
-        return txtMisyori;
+    @JsonProperty("txtGokei")
+    public TextBoxNum getTxtGokei() {
+        return txtGokei;
     }
 
     /*
-     * settxtMisyori
-     * @param txtMisyori txtMisyori
+     * settxtGokei
+     * @param txtGokei txtGokei
      */
-    @JsonProperty("txtMisyori")
-    public void setTxtMisyori(TextBoxNum txtMisyori) {
-        this.txtMisyori = txtMisyori;
+    @JsonProperty("txtGokei")
+    public void setTxtGokei(TextBoxNum txtGokei) {
+        this.txtGokei = txtGokei;
     }
 
     /*
@@ -97,21 +101,21 @@ public class IkenshogetichiranDiv extends Panel {
     }
 
     /*
-     * gettxtGokei
-     * @return txtGokei
+     * gettxtMisyori
+     * @return txtMisyori
      */
-    @JsonProperty("txtGokei")
-    public TextBoxNum getTxtGokei() {
-        return txtGokei;
+    @JsonProperty("txtMisyori")
+    public TextBoxNum getTxtMisyori() {
+        return txtMisyori;
     }
 
     /*
-     * settxtGokei
-     * @param txtGokei txtGokei
+     * settxtMisyori
+     * @param txtMisyori txtMisyori
      */
-    @JsonProperty("txtGokei")
-    public void setTxtGokei(TextBoxNum txtGokei) {
-        this.txtGokei = txtGokei;
+    @JsonProperty("txtMisyori")
+    public void setTxtMisyori(TextBoxNum txtMisyori) {
+        this.txtMisyori = txtMisyori;
     }
 
     /*
@@ -166,6 +170,15 @@ public class IkenshogetichiranDiv extends Panel {
     @JsonProperty("txtMaxNumber")
     public void setTxtMaxNumber(TextBoxNum txtMaxNumber) {
         this.txtMaxNumber = txtMaxNumber;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     // </editor-fold>
