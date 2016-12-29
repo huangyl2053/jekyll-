@@ -356,6 +356,7 @@ dbe/db/dbe/KojinJokyoShokai/onLoad
 dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onClick_btnToSearch
 dbe/db/dbe/KojinJokyoShokaiTaishoshaKensaku/onLoad
 dbe/db/dbe/Masking/onChange_TxtSaidaiHyojiKensu
+dbe/db/dbe/Masking/onChange_ccdHokenshaList
 dbe/db/dbe/Masking/onChange_radTaishoDataKubun
 dbe/db/dbe/Masking/onClick_BtnCompleteMasking
 dbe/db/dbe/Masking/onClick_BtnDataOutput

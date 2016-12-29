@@ -153,9 +153,9 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
             return 日付範囲タイトル.concat(指定なし文言);
         }
         return 日付範囲タイトル
-                .concat(dateFormat(processParameter.getShinnseikaFrom()))
+                .concat(dateFormat(from))
                 .concat(範囲文言)
-                .concat(dateFormat(processParameter.getShinnseikaTo()));
+                .concat(dateFormat(to));
     }
 
     private RString get日付範囲(RDateTime from, RDateTime to) {
