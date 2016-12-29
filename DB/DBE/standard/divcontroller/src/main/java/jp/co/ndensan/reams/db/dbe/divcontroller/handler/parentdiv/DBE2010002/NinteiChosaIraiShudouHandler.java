@@ -135,26 +135,37 @@ public class NinteiChosaIraiShudouHandler {
 
         RString 用紙タイプ = getConfigValue(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, 市町村コード);
 
-        RString 認定調査依頼書 = 未選択;
-        RString 認定調査票 = 未選択;
-        RString 認定調査票_特記事項 = 未選択;
-        RString 認定調査票OCR = 未選択;
-        RString 認定調査票OCR_特記事項 = 未選択;
-        RString 認定調査票_特記事項_項目有り = 未選択;
-        RString 認定調査票_特記事項_項目無し = 未選択;
-        RString 認定調査票_特記事項_フリー様式 = 未選択;
-        RString 認定調査票差異チェック票 = 未選択;
-        RString 調査特記_概況特記 = 未選択;
-        RString 認定調査依頼該当者履歴一覧 = 未選択;
-
-        if (デザインシートOCR.equals(用紙タイプ)) {
-            認定調査票 = 選択;
-            認定調査票_特記事項 = 選択;
-        }
-        if (白紙カラープリンター.equals(用紙タイプ)) {
-            認定調査票OCR = 選択;
-            認定調査票OCR_特記事項 = 選択;
-        }
+        RString 認定調査依頼書 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, 市町村コード);
+        RString 認定調査票 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票, 市町村コード);
+        RString 認定調査票_特記事項 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, 市町村コード);
+        RString 認定調査票OCR = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR, 市町村コード);
+        RString 認定調査票OCR_特記事項 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, 市町村コード);
+        RString 認定調査票_特記事項_項目有り = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, 市町村コード);
+        RString 認定調査票_特記事項_項目無し = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, 市町村コード);
+        RString 認定調査票_特記事項_フリー様式 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, 市町村コード);
+        RString 認定調査票差異チェック票 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, 市町村コード);
+        RString 調査特記_概況特記 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, 市町村コード);
+        RString 認定調査依頼該当者履歴一覧 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査依頼該当者履歴一覧, 市町村コード);
+        
+        //TODO 出力有無フラグについて対応方法が不明
+        RString 認定調査票_デザイン用紙_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, 市町村コード);
+        RString 認定調査票_特記事項_デザイン用紙_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, 市町村コード);
+        RString 認定調査票_OCR_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_OCR_出力有無, 市町村コード);
+        RString 認定調査票_特記事項_OCR_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_特記事項_OCR_出力有無, 市町村コード);
+        RString 認定調査票_特記事項_項目有り_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_特記事項_項目有り_出力有無, 市町村コード);
+        RString 認定調査票_特記事項_項目無し_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_特記事項_項目無し_出力有無, 市町村コード);
+        RString 認定調査票_特記事項_フリータイプ_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, 市町村コード);
+        RString 認定調査票_概況特記_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_概況特記_出力有無, 市町村コード);
+        RString 認定調査差異チェック票_出力有無 = getConfigValue(ConfigNameDBE.認定調査差異チェック票_出力有無, 市町村コード);
+                                                                        
+//        if (デザインシートOCR.equals(用紙タイプ)) {
+//            認定調査票 = 選択;
+//            認定調査票_特記事項 = 選択;
+//        }
+//        if (白紙カラープリンター.equals(用紙タイプ)) {
+//            認定調査票OCR = 選択;
+//            認定調査票OCR_特記事項 = 選択;
+//        }
 
         List<RString> selectedItemList = new ArrayList();
         if (選択.equals(認定調査依頼書)) {
