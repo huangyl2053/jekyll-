@@ -75,7 +75,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     private static final RString NOTREATED = new RString("未");
     private static final RString 未処理 = new RString("未処理");
     private static final RString 完了可能 = new RString("完了可能");
-    
+
     /**
      * 完了処理・主治医意見書依頼の初期化。(オンロード)<br/>
      *
@@ -85,7 +85,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onLoad(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         if (!RealInitialLocker.tryGetLock(排他キー)) {
             throw new PessimisticLockingException();
-        }        
+        }
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
@@ -110,7 +110,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         getHandler(div).画面変更より最新データを検索();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 画面の表示最大件数が変更時、再検索します。
      *
@@ -121,7 +121,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         getHandler(div).画面変更より最新データを検索();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 保険者リスト共有子Div変更時の動作です。
      *
@@ -143,7 +143,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         onLoad(div);
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
-    
+
     /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *
@@ -305,7 +305,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             for (dgNinteiTaskList_Row row : rowList) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
@@ -317,7 +317,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 }
             }
             RealInitialLocker.release(排他キー);
-            div.getCcdKanryoMsg().setMessage(new RString("完了処理・主治医意見書依頼の保存処理が完了しました。"),
+            div.getCcdKanryoMsg().setMessage(new RString("基本運用・主治医意見書依頼の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2040001StateName.完了);
         }
@@ -358,7 +358,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         }
         return RString.EMPTY;
     }
-    
+
     private RString 処理区分変更(RString 処理区分) {
         if (NOTREATED.equals(処理区分)) {
             return 未処理;

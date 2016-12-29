@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -47,6 +48,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     private static final RString SELECTED_KEY0 = new RString("1");
     private static final RString SELECTED_KEY1 = new RString("2");
     private static final RString SELECTED_KEY2 = new RString("3");
+    private static final RString 意見書依頼を完了するボタン = new RString("btnChousaIraiKanryo");
 
     /**
      * コンストラクタです。
@@ -90,7 +92,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         }
         意見書依頼モード(意見書依頼List);
     }
-    
+
     /**
      * 要介護認定完了情報更新の処理です。
      *
@@ -101,7 +103,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
                 new FlexibleDate(RDate.getNowDate().toDateString())).build();
         IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
     }
-    
+
     private void 意見書依頼モード(SearchResult<IKnSyoiRaiBusiness> 意見書依頼List) {
         List<dgNinteiTaskList_Row> rowListALL = new ArrayList<>();
         List<dgNinteiTaskList_Row> rowListComplete = new ArrayList<>();
@@ -155,16 +157,19 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(意見書依頼List.totalCount());
         if (SELECTED_KEY0.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, true);
             div.getDgNinteiTaskList().setDataSource(rowListNotreated);
             div.getTxtTotalCount().setDisplayNone(true);
             div.getTxtCompleteCount().setDisplayNone(true);
             div.getTxtNoUpdate().setDisplayNone(false);
         } else if (SELECTED_KEY1.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
             div.getDgNinteiTaskList().setDataSource(rowListComplete);
             div.getTxtNoUpdate().setDisplayNone(true);
             div.getTxtTotalCount().setDisplayNone(true);
             div.getTxtCompleteCount().setDisplayNone(false);
         } else if (SELECTED_KEY2.equals(div.getRadShoriJyotai().getSelectedKey())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
             div.getDgNinteiTaskList().setDataSource(rowListALL);
             div.getTxtTotalCount().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(false);
@@ -196,7 +201,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.getIkenshoTokusokuLimit().setValue(new RDate(business.get主治医意見書作成期限年月日().toString()));
         }
     }
-    
+
     /**
      * 一覧件数を取得します。
      *
@@ -206,7 +211,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
 
         return div.getTxtTotalCount().getValue();
     }
-    
+
     /**
      * 一覧に選択のデータを取得します。
      *
