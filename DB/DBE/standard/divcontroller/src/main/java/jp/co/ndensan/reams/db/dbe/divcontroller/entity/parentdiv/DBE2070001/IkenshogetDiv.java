@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshogetDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -85,13 +87,13 @@ public class IkenshogetDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMisyori() {
-        return this.getIkenshogetichiran().getTxtMisyori();
+    public TextBoxNum getTxtGokei() {
+        return this.getIkenshogetichiran().getTxtGokei();
     }
 
     @JsonIgnore
-    public void  setTxtMisyori(TextBoxNum txtMisyori) {
-        this.getIkenshogetichiran().setTxtMisyori(txtMisyori);
+    public void  setTxtGokei(TextBoxNum txtGokei) {
+        this.getIkenshogetichiran().setTxtGokei(txtGokei);
     }
 
     @JsonIgnore
@@ -105,13 +107,13 @@ public class IkenshogetDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtGokei() {
-        return this.getIkenshogetichiran().getTxtGokei();
+    public TextBoxNum getTxtMisyori() {
+        return this.getIkenshogetichiran().getTxtMisyori();
     }
 
     @JsonIgnore
-    public void  setTxtGokei(TextBoxNum txtGokei) {
-        this.getIkenshogetichiran().setTxtGokei(txtGokei);
+    public void  setTxtMisyori(TextBoxNum txtMisyori) {
+        this.getIkenshogetichiran().setTxtMisyori(txtMisyori);
     }
 
     @JsonIgnore
@@ -142,6 +144,11 @@ public class IkenshogetDiv extends Panel {
     @JsonIgnore
     public void  setTxtMaxNumber(TextBoxNum txtMaxNumber) {
         this.getIkenshogetichiran().setTxtMaxNumber(txtMaxNumber);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getIkenshogetichiran().getCcdHokenshaList();
     }
 
     @JsonIgnore

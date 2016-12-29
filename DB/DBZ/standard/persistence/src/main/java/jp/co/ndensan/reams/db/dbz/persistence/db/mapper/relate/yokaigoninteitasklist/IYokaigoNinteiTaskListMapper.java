@@ -107,7 +107,16 @@ public interface IYokaigoNinteiTaskListMapper {
      * @return List<IkenSyoNyuSyuRelateEntity>
      */
     List<IkenSyoNyuSyuRelateEntity> get意見書入手(YokaigoNinteiTaskListParameter parameter);
-
+    
+    /**
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ
+     * ＆主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報
+     *
+     * @param parameter YokaigoNinteiTaskListParameter
+     * @return int
+     */
+    int get意見書入手件数(YokaigoNinteiTaskListParameter parameter);
+    
     /**
      * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ ＆主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報
      *

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2070001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.IkenshogetDiv;
@@ -101,10 +102,21 @@ public class Ikenshoget {
      * @return ResponseData
      */
     public ResponseData onChange_txtMaxNumber(IkenshogetDiv div) {
-        getHandler(div).getMaxNumber();
+        getHandler(div).意見書入手List();
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 保険者リスト共有子Div変更時の動作です。
+     *
+     * @param div ShujiiIkenshoIraiTaishoIchiranDiv
+     * @return ResponseData
+     */
+    public ResponseData onChange_ccdHokenshaList(IkenshogetDiv div) {
+        getHandler(div).意見書入手List();
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *
