@@ -47,9 +47,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -128,12 +126,12 @@ public class NinteichosaIrai {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
-                                                       = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-            setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                                                                     row.getShinseishoKanriNo()));
+                        row.getShinseishoKanriNo()));
                 csvWriter.writeLine(getCsvData(row));
                 AccessLogger.log(AccessLogType.照会, personalData);
             }
@@ -144,7 +142,7 @@ public class NinteichosaIrai {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(
-            new SharedFileDirectAccessDescriptor(entry, 出力名), response);
+                new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
     /**
@@ -164,25 +162,25 @@ public class NinteichosaIrai {
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                                                          UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-            .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             int 要割付人数 = 調査機関自動割付処理(requestDiv);
             if (要割付人数 > 0) {
                 return ResponseData.of(requestDiv).addMessage(new InformationMessage(
-                    DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode(),
-                    DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().evaluate())).respond();
+                        DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode(),
+                        DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().evaluate())).respond();
             } else {
                 getHandler(requestDiv).initDataGrid();
                 return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
             }
         }
         if (new RString(DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode())
-            .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(requestDiv).initDataGrid();
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
         }
@@ -242,7 +240,7 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
         ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                            new ShinseishoKanriNo(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
+                new ShinseishoKanriNo(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
         return ResponseData.of(requestDiv).forwardWithEventName(DBE2010001TransitionEventName.認定調査依頼遷移).respond();
     }
 
@@ -317,16 +315,16 @@ public class NinteichosaIrai {
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                                                          UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-            .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             要介護認定完了情報更新(requestDiv.getDgNinteiTaskList().getSelectedItems());
             requestDiv.getCcdKanryoMsg().setMessage(
-                new RString("完了処理・認定調査依頼の保存処理が完了しました。"),
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+                    new RString("完了処理・認定調査依頼の保存処理が完了しました。"),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             FlowParameters fp = FlowParameters.of(new RString("key"), "Kanryo");
             FlowParameterAccessor.merge(fp);
             return ResponseData.of(requestDiv).setState(DBE2010001StateName.完了);
@@ -369,62 +367,55 @@ public class NinteichosaIrai {
 
     private NinteichosaIraiItiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         NinteichosaIraiItiranCsvEntity data = new NinteichosaIraiItiranCsvEntity(
-            row.getJotai(),
-            row.getShinseishoKanriNo(),
-            row.getHokensha(),
-            row.getNinteiShinseiDay().getValue() != null
-            ? row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-            row.getHihoNumber(),
-            row.getHihoShimei(),
-            get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
-            row.getShinseiKubunShinseiji(),
-            row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
-            row.getChosaIraishoHakkoDay().getValue() != null
-            ? row.getChosaIraishoHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-            row.getChousahyoOutput().getValue() != null
-            ? row.getChousahyoOutput().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-            row.getChosaIraiDataShutsuryokuDay().getValue() != null
-            ? row.getChosaIraiDataShutsuryokuDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-            row.getChosaIraiKigen().getValue() != null
-            ? row.getChosaIraiKigen().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-            row.getChosaIraiKubun(),
-            row.getKonkaiChosaItakusaki(),
-            row.getKonkaiChosain(),
-            row.getKonkaiChosaCount() != null ? new RString(row.getKonkaiChosaCount().getValue().toString()) : RString.EMPTY,
-            row.getZenkaiChosaItakusaki(),
-            row.getZenkaiChosain(),
-            row.getZenzenkaiChosaItakusaki(),
-            row.getZenzenkaiChosain(),
-            row.getYubinNumber(),
-            row.getJusho(),
-            row.getNyushoShisetsu(),
-            row.getChosaTokusokuHakkoDay().getValue() != null
-            ? row.getChosaTokusokuHakkoDay().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-            row.getChosaTokusokuHoho(),
-            row.getChosaTokusokuCount() != null ? new RString(row.getChosaTokusokuCount().getValue().toString()) : RString.EMPTY,
-            row.getChosaIraiKigen().getValue() != null
-            ? row.getChosaIraiKigen().getValue().wareki().eraType(EraType.KANJI_RYAKU).firstYear(
-            FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
-            row.getChikuCode(),
-            row.getChosaTokusokuChiku());
+                row.getJotai(),
+                row.getShinseishoKanriNo(),
+                row.getHokensha(),
+                row.getNinteiShinseiDay().getValue() != null
+                ? row.getNinteiShinseiDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                row.getHihoNumber(),
+                row.getHihoShimei(),
+                get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
+                row.getShinseiKubunShinseiji(),
+                row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
+                row.getChosaIraishoHakkoDay().getValue() != null
+                ? row.getChosaIraishoHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                row.getChousahyoOutput().getValue() != null
+                ? row.getChousahyoOutput().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                row.getChosaIraiDataShutsuryokuDay().getValue() != null
+                ? row.getChosaIraiDataShutsuryokuDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                row.getChosaIraiKigen().getValue() != null
+                ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                row.getChosaIraiKubun(),
+                row.getKonkaiChosaItakusaki(),
+                row.getKonkaiChosain(),
+                row.getKonkaiChosaCount() != null ? new RString(row.getKonkaiChosaCount().getValue().toString()) : RString.EMPTY,
+                row.getZenkaiChosaItakusaki(),
+                row.getZenkaiChosain(),
+                row.getZenzenkaiChosaItakusaki(),
+                row.getZenzenkaiChosain(),
+                row.getYubinNumber(),
+                row.getJusho(),
+                row.getNyushoShisetsu(),
+                row.getChosaTokusokuHakkoDay().getValue() != null
+                ? row.getChosaTokusokuHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                row.getChosaTokusokuHoho(),
+                row.getChosaTokusokuCount() != null ? new RString(row.getChosaTokusokuCount().getValue().toString()) : RString.EMPTY,
+                row.getChosaIraiKigen().getValue() != null
+                ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                row.getChikuCode(),
+                row.getChosaTokusokuChiku());
         return data;
     }
 
     private void 要介護認定完了情報更新(List<dgNinteiTaskList_Row> 選択されたデータ) {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> 要介護認定完了情報Model
-                                                             = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
         FlexibleDate today = FlexibleDate.getNowDate();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
             NinteiKanryoJohoIdentifier 要介護認定完了情報の識別子 = new NinteiKanryoJohoIdentifier(
-                new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                    new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             NinteichosaIraiListManager.createInstance().save要介護認定完了情報(要介護認定完了情報Model.get(要介護認定完了情報の識別子).
-                createBuilderForEdit().set認定調査依頼完了年月日(today).build().toEntity());
+                    createBuilderForEdit().set認定調査依頼完了年月日(today).build().toEntity());
         }
     }
 
@@ -435,7 +426,7 @@ public class NinteichosaIrai {
             for (dgNinteiTaskList_Row row : 選択されたデータ) {
                 int 認定調査委託先情報件数 = NinteichosaIraiManager.createInstance().select認定調査委託先情報(row.getGetShoKisaiHokenshaNo());
                 validationMessage = getValidationHandler(requestDiv).認定調査委託先情報件数チェック(
-                    認定調査委託先情報件数);
+                        認定調査委託先情報件数);
                 if (validationMessage != null) {
                     return validationMessage;
                 }
@@ -464,7 +455,7 @@ public class NinteichosaIrai {
                 厚労省IF識別コード = 認定調査依頼List.get(0).get厚労省IF識別コード();
             }
             tmp要割付人数 = NinteichosaIraiManager.createInstance().調査機関自動割付処理(row.getGetShoKisaiHokenshaNo(), row.getChikuCode(),
-                                                                          row.getShinseishoKanriNo(), tmp要割付人数, 厚労省IF識別コード.isEmpty() ? RString.EMPTY : 厚労省IF識別コード);
+                    row.getShinseishoKanriNo(), tmp要割付人数, 厚労省IF識別コード.isEmpty() ? RString.EMPTY : 厚労省IF識別コード);
         }
         return tmp要割付人数;
     }
