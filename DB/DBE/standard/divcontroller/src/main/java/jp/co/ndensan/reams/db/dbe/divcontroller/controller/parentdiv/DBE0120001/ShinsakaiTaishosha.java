@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0120001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.DBE0120001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.ShinsakaiTaishoshaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.ShinsakaiTaishoshaHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.ShinsakaiTaishoshaValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaitaisho.ShinsakaiTaishoshaFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,10 +34,13 @@ public class ShinsakaiTaishosha {
      * @return ResponseData<ShinsakaiTaishoshaDiv>
      */
     public ResponseData<ShinsakaiTaishoshaDiv> onLoad(ShinsakaiTaishoshaDiv div) {
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        List<ShinsakaiTaishoshaBusiness> 審査会対象者一覧 = ShinsakaiTaishoshaFinder.createInstance().get情報(審査会開催番号).records();
+        ShinsakaiTaishoshaHandler handler = getHandler(div);
+        TaishoshaIchiranMapperParameter param = handler.createTaishoshaIchiranParam();
+        List<ShinsakaiTaishoshaBusiness> 審査会対象者一覧 = ShinsakaiTaishoshaFinder.createInstance().get情報(param).records();
         ShinsakaiTaishoshaBusiness 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
-        getHandler(div).onLoad(予定情報, 審査会対象者一覧);
+        handler.onLoad(予定情報, 審査会対象者一覧);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(審査会対象者一覧);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -53,6 +58,26 @@ public class ShinsakaiTaishosha {
         ViewStateHolder.put(ViewStateKeys.申請書管理番号,
                 div.getDgTaishoshaIchiran().getClickedItem().getShinseishoKanriNo());
         return ResponseData.of(div).forwardWithEventName(DBE0120001TransitionEventName.対象者選択).respond();
+    }
+
+    /**
+     * 保険者の値が変更された際の動作です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShinsakaiTaishoshaDiv> onChange_ccdHokensha(ShinsakaiTaishoshaDiv div) {
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        ShinsakaiTaishoshaHandler handler = getHandler(div);
+        TaishoshaIchiranMapperParameter param = handler.createTaishoshaIchiranParam();
+        List<ShinsakaiTaishoshaBusiness> 審査会対象者一覧 = ShinsakaiTaishoshaFinder.createInstance().get情報(param).records();
+        ShinsakaiTaishoshaBusiness 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
+        handler.onLoad(予定情報, 審査会対象者一覧);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(審査会対象者一覧);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     private ShinsakaiTaishoshaValidationHandler getValidationHandler(ShinsakaiTaishoshaDiv div) {

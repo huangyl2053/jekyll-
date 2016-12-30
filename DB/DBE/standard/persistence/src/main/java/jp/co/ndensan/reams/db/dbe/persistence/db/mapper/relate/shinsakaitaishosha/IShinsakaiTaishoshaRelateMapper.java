@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitaishos
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitaishosha.ShinsakaiTaishoshaRelateEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 「審査会個人別状況照会」画面のMapperです。
@@ -28,9 +28,9 @@ public interface IShinsakaiTaishoshaRelateMapper {
     /**
      * 初期化の審査会対象者一覧の検索です。
      *
-     * @param 審査会開催番号 RString
+     * @param param TaishoshaIchiranMapperParameter
      * @return List<ShinsakaiTaishoshaRelateEntity>
      */
-    List<ShinsakaiTaishoshaRelateEntity> get情報(RString 審査会開催番号);
+    List<ShinsakaiTaishoshaRelateEntity> get情報(TaishoshaIchiranMapperParameter param);
 
 }

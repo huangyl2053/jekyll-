@@ -79,7 +79,9 @@
         <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKaisaiChikuCode" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
-    <select resultOrdered="true" id="get情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity"  parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
+    
+    <select resultOrdered="true" id="get情報" resultMap="resultMap_ShinsakaiTaishoshaRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter"  fetchSize="500">
         SELECT	B."shinsakaiOrder" as "shinsakaiOrder",
                 C."shoKisaiHokenshaNo"  as "shoKisaiHokenshaNo",
                 D."shichosonMeisho" as "shichosonMeisho",
@@ -107,7 +109,10 @@
 	LEFT JOIN   rgdb."DbT5101NinteiShinseiJoho"  AS C														
 		ON     B."shinseishoKanriNo" = C."shinseishoKanriNo"													
 	INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster"  AS  D 														
-		ON	 C."shoKisaiHokenshaNo"  =  D."shoKisaiHokenshaNo"												
+		ON	 C."shoKisaiHokenshaNo"  =  D."shoKisaiHokenshaNo"
+                <if test="市町村コード.toString() != ''.toString()">
+                    AND D."shichosonCode" = #{市町村コード}
+                </if>
 	LEFT JOIN   rgdb."DbT5116IchijiHanteiKekkaJoho"  AS E														
 		ON     C."shinseishoKanriNo" = E."shinseishoKanriNo"													
 	LEFT JOIN  rgdb."DbT5102NinteiKekkaJoho"  AS F														

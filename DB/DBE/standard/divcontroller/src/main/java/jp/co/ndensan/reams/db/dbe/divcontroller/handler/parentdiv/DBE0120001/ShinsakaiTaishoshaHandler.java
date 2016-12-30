@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.ShinsakaiTaishoshaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.dgTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -32,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -188,5 +192,16 @@ public class ShinsakaiTaishoshaHandler {
         ExpandedInformation expandedInfo = new ExpandedInformation(SHIKI, 管理番号,
                 申請書管理番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+    }
+
+    /**
+     * 画面の情報から対象者一覧取得用のパラメーターを作成して返します。
+     *
+     * @return TaishoshaIchiranMapperParameter
+     */
+    public TaishoshaIchiranMapperParameter createTaishoshaIchiranParam() {
+        RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        LasdecCode 市町村コード = div.getCcdHokensya().getSelectedItem().get市町村コード();
+        return TaishoshaIchiranMapperParameter.createSelectBy情報(審査会開催番号, 市町村コード);
     }
 }

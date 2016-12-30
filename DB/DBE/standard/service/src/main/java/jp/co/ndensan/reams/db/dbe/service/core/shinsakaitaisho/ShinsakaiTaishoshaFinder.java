@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.ShinsakaiTaishoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitaishosha.ShinsakaiTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaitaishosha.IShinsakaiTaishoshaRelateMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
@@ -46,7 +47,8 @@ public class ShinsakaiTaishoshaFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiTaishoshaFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiTaishoshaFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiTaishoshaFinder}のインスタンス
      */
     public static ShinsakaiTaishoshaFinder createInstance() {
         return InstanceProvider.create(ShinsakaiTaishoshaFinder.class);
@@ -71,13 +73,13 @@ public class ShinsakaiTaishoshaFinder {
     /**
      * 審査会対象者一覧の検索です。
      *
-     * @param 審査会開催番号 RString
+     * @param param TaishoshaIchiranMapperParameter
      * @return 審査会対象者一覧情報
      */
-    public SearchResult<ShinsakaiTaishoshaBusiness> get情報(RString 審査会開催番号) {
+    public SearchResult<ShinsakaiTaishoshaBusiness> get情報(TaishoshaIchiranMapperParameter param) {
         IShinsakaiTaishoshaRelateMapper mapper = mapperProvider.create(IShinsakaiTaishoshaRelateMapper.class);
         List<ShinsakaiTaishoshaBusiness> list = new ArrayList<>();
-        List<ShinsakaiTaishoshaRelateEntity> entityList = mapper.get情報(審査会開催番号);
+        List<ShinsakaiTaishoshaRelateEntity> entityList = mapper.get情報(param);
         if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShinsakaiTaishoshaBusiness>emptyList(), 0, false);
         }

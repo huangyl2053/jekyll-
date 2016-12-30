@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiTaishoshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -94,6 +96,11 @@ public class ShinsakaiTaishoshaDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokensya() {
+        return this.getShinsakaiJoho().getCcdHokensya();
+    }
+
     @JsonIgnore
     public ShinsakaiYoteiInfoDiv getShinsakaiYoteiInfo() {
         return this.getShinsakaiJoho().getShinsakaiYoteiInfo();
