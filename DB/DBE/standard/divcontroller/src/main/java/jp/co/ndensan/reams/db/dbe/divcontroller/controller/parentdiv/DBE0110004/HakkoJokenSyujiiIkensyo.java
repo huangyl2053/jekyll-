@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE013001.DBE013001_Ikensh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,6 +36,7 @@ public class HakkoJokenSyujiiIkensyo {
      * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
      */
     public ResponseData<HakkoJokenSyujiiIkensyoDiv> onLoad(HakkoJokenSyujiiIkensyoDiv div) {
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         boolean 主治医意見書未提出者一覧フラグ = ViewStateHolder.get(ViewStateKeys.主治医意見書未提出者一覧フラグ,
                 Boolean.class);
         boolean 主治医意見書５項目確認一覧表フラグ = ViewStateHolder.get(ViewStateKeys.主治医意見書５項目確認一覧表フラグ,

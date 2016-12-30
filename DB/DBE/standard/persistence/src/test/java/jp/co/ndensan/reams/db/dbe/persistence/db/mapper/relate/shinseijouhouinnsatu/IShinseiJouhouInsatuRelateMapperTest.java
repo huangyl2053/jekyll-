@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -48,13 +49,14 @@ public class IShinseiJouhouInsatuRelateMapperTest extends DbeTestDacBase {
         FlexibleDate 申請日開始 = new FlexibleDate(2016, 10, 10);
         FlexibleDate 申請日終了 = new FlexibleDate(2016, 12, 31);
         boolean 作成条件User = false;
+        LasdecCode 市町村コード = new LasdecCode(new RString("01"));
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString shikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
 
         ShinseiJouhouInsatuMybatisParameter param = ShinseiJouhouInsatuMybatisParameter.creatParameter(
-                検索条件, 処理開始日時, 処理終了日時, 申請日開始, 申請日終了, 作成条件User, shikibetsuTaisho);
+                検索条件, 処理開始日時, 処理終了日時, 申請日開始, 申請日終了, 作成条件User, shikibetsuTaisho, 市町村コード);
         return param;
     }
 

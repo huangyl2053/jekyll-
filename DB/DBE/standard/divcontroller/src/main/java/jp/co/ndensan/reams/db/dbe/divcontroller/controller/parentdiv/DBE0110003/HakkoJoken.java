@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE012001.DBE012001_ChosaI
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003.HakkoJokenHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003.HakkoJokenValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,6 +38,7 @@ public class HakkoJoken {
      * @return ResponseData<HakkoJokenDiv>
      */
     public ResponseData<HakkoJokenDiv> onLoad(HakkoJokenDiv div) {
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         boolean 認定調査予定未定者一覧フラグ = ViewStateHolder.get(ViewStateKeys.認定調査予定未定者一覧フラグ, Boolean.class);
         boolean 認定調査依頼先変更者一覧表フラグ = ViewStateHolder.get(ViewStateKeys.認定調査依頼先変更者一覧表フラグ, Boolean.class);
         boolean 認定調査結果と主治医意見書のチェックリストフラグ

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE013001.DBE013001_IkenshoInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -223,6 +224,8 @@ public class HakkoJokenSyujiiIkensyoHandler {
         FlexibleDate 主治医意見書作成料請求一覧表処理日To = null;
         FlexibleDate 主治医意見書作成料請求一覧表受領日From = null;
         FlexibleDate 主治医意見書作成料請求一覧表受領日To = null;
+        LasdecCode 市町村コード = LasdecCode.EMPTY;
+        RString 市町村名 = RString.EMPTY;
 
         if (主治医意見書未提出者一覧フラグ) {
             if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
@@ -277,6 +280,12 @@ public class HakkoJokenSyujiiIkensyoHandler {
                 主治医意見書作成料請求一覧表受領日To = new FlexibleDate(div.getTxtJuryoYMD().getToValue().toDateString());
             }
         }
+        if (!RString.isNullOrEmpty(div.getCcdHokensya().getSelectedItem().get市町村コード().value())) {
+            市町村コード = div.getCcdHokensya().getSelectedItem().get市町村コード();
+        }
+
+        市町村名 = div.getCcdHokensya().getSelectedItem().get市町村名称();
+
         DBE013001_IkenshoInfoPrintParameter ikenshoJohoPrintBatchParameter = new DBE013001_IkenshoInfoPrintParameter(
                 主治医意見書未提出者一覧フラグ,
                 主治医意見書未提出者一覧作成条件,
@@ -304,7 +313,10 @@ public class HakkoJokenSyujiiIkensyoHandler {
                 主治医意見書作成料請求一覧表処理日From,
                 主治医意見書作成料請求一覧表処理日To,
                 主治医意見書作成料請求一覧表受領日From,
-                主治医意見書作成料請求一覧表受領日To);
+                主治医意見書作成料請求一覧表受領日To,
+                市町村コード,
+                市町村名
+        );
         return ikenshoJohoPrintBatchParameter;
     }
 }

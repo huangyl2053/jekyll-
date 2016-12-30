@@ -70,6 +70,9 @@
        ON dbT5101Nintei."shinseishoKanriNo"=dbT5105Nintei."shinseishoKanriNo"
        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051Kosei
        ON dbT7051Kosei."shoKisaiHokenshaNo"=dbT5101Nintei."shoKisaiHokenshaNo"
+       <if test="shichosonCode.toString() != ''.toString()">
+            AND dbT7051Kosei."shichosonCode" = #{shichosonCode}
+       </if>
        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910Nintei	
        ON dbT5101Nintei."ninteiChosaItakusakiCode" = dbT5910Nintei."ninteichosaItakusakiCode"
        AND dbT5910Nintei."shichosonCode" = dbT7051Kosei."shichosonCode"	

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyoikenshochecklis
 
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,6 +29,7 @@ public class ChosahyoIkenshoCheckListParamter implements IMyBatisParameter {
     private final boolean 申請日範囲指定;
     private final boolean 審査日指定;
     private final boolean 審査会指定;
+    private final LasdecCode 市町村コード;
 
     /**
      * コンストラクタです。
@@ -41,6 +43,7 @@ public class ChosahyoIkenshoCheckListParamter implements IMyBatisParameter {
      * @param 申請日範囲指定 申請日範囲指定
      * @param 審査日指定 審査日指定
      * @param 審査会指定 審査会指定
+     * @param 市町村コード 市町村コード
      */
     protected ChosahyoIkenshoCheckListParamter(RString 認定調査結果と主治医意見書のチェックリスト申請日From,
             RString 認定調査結果と主治医意見書のチェックリスト申請日To,
@@ -50,7 +53,9 @@ public class ChosahyoIkenshoCheckListParamter implements IMyBatisParameter {
             RString 延期,
             boolean 申請日範囲指定,
             boolean 審査日指定,
-            boolean 審査会指定) {
+            boolean 審査会指定,
+            LasdecCode 市町村コード
+    ) {
         this.認定調査結果と主治医意見書のチェックリスト申請日From = 認定調査結果と主治医意見書のチェックリスト申請日From;
         this.認定調査結果と主治医意見書のチェックリスト申請日To = 認定調査結果と主治医意見書のチェックリスト申請日To;
         this.認定調査結果と主治医意見書のチェックリスト審査日 = 認定調査結果と主治医意見書のチェックリスト審査日;
@@ -60,6 +65,7 @@ public class ChosahyoIkenshoCheckListParamter implements IMyBatisParameter {
         this.申請日範囲指定 = 申請日範囲指定;
         this.審査日指定 = 審査日指定;
         this.審査会指定 = 審査会指定;
+        this.市町村コード = 市町村コード;
     }
 
     /**
@@ -70,13 +76,16 @@ public class ChosahyoIkenshoCheckListParamter implements IMyBatisParameter {
      * @param 認定調査結果と主治医意見書のチェックリスト審査日 認定調査結果と主治医意見書のチェックリスト審査日
      * @param 認定調査結果と主治医意見書のチェックリスト審査会 認定調査結果と主治医意見書のチェックリスト審査会
      * @param 作成条件 作成条件
+     * @param 市町村コード 市町村コード
      * @return NinteichosaYoteiMiteiParamter
      */
     public static ChosahyoIkenshoCheckListParamter createParamter(RString 認定調査結果と主治医意見書のチェックリスト申請日From,
             RString 認定調査結果と主治医意見書のチェックリスト申請日To,
             RString 認定調査結果と主治医意見書のチェックリスト審査日,
             RString 認定調査結果と主治医意見書のチェックリスト審査会,
-            RString 作成条件) {
+            RString 作成条件,
+            LasdecCode 市町村コード
+    ) {
         return new ChosahyoIkenshoCheckListParamter(認定調査結果と主治医意見書のチェックリスト申請日From,
                 認定調査結果と主治医意見書のチェックリスト申請日To,
                 認定調査結果と主治医意見書のチェックリスト審査日,
@@ -85,6 +94,8 @@ public class ChosahyoIkenshoCheckListParamter implements IMyBatisParameter {
                 ShoriJotaiKubun.延期.getコード(),
                 new RString("2").equals(作成条件),
                 new RString("3").equals(作成条件),
-                new RString("4").equals(作成条件));
+                new RString("4").equals(作成条件),
+                市町村コード
+        );
     }
 }

@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseijouhouinnsatu;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,6 +23,7 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
     private final FlexibleDate shinnseikaTo;
     private final boolean sakuseijyoukenuser;
     private final RString psmShikibetsuTaisho;
+    private final LasdecCode shichosonCode;
 
     /**
      * コンストラクタです。
@@ -33,6 +35,7 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
      * @param shinnseikaTo 申請日To
      * @param sakuseijyoukenuser 作成条件
      * @param psmShikibetsuTaisho 宛名PSM
+     * @param shichosonCode 市町村コード
      */
     protected ShinseiJouhouInsatuMybatisParameter(RString sakuseijyouken,
             RDateTime shorikaFrom,
@@ -40,7 +43,8 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
             FlexibleDate shinnseikaFrom,
             FlexibleDate shinnseikaTo,
             boolean sakuseijyoukenuser,
-            RString psmShikibetsuTaisho
+            RString psmShikibetsuTaisho,
+            LasdecCode shichosonCode
     ) {
         this.sakuseijyouken = sakuseijyouken;
         this.shorikaFrom = shorikaFrom;
@@ -49,6 +53,7 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
         this.shinnseikaTo = shinnseikaTo;
         this.sakuseijyoukenuser = sakuseijyoukenuser;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.shichosonCode = shichosonCode;
     }
 
     /**
@@ -60,6 +65,7 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
      * @param shinnseikaTo 申請日To
      * @param sakuseijyoukenuser 作成条件
      * @param psmShikibetsuTaisho psmShikibetsuTaisho
+     * @param shichosonCode 市町村コード
      * @return HanteiKekkaJohoShuturyokuMybatisParameter
      */
     public static ShinseiJouhouInsatuMybatisParameter creatParameter(RString sakuseijyouken,
@@ -68,7 +74,9 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
             FlexibleDate shinnseikaFrom,
             FlexibleDate shinnseikaTo,
             boolean sakuseijyoukenuser,
-            RString psmShikibetsuTaisho) {
+            RString psmShikibetsuTaisho,
+            LasdecCode shichosonCode
+    ) {
         return new ShinseiJouhouInsatuMybatisParameter(
                 sakuseijyouken,
                 shorikaFrom,
@@ -76,6 +84,8 @@ public final class ShinseiJouhouInsatuMybatisParameter implements IMyBatisParame
                 shinnseikaFrom,
                 shinnseikaTo,
                 new RString("1").equals(sakuseijyouken),
-                psmShikibetsuTaisho);
+                psmShikibetsuTaisho,
+                shichosonCode
+        );
     }
 }

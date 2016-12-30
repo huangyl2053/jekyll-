@@ -4,18 +4,22 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * HakkoJoken のクラスファイル 
- * 
+ * HakkoJoken のクラスファイル
+ *
  * @author 自動生成
  */
 public class HakkoJokenDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +32,8 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     private NinteiChosaIraisakiHenkoshaIchiranhyoJokenDiv NinteiChosaIraisakiHenkoshaIchiranhyoJoken;
     @JsonProperty("NinteiChosaKekkaShujiiIkenshoCheckListJoken")
     private NinteiChosaKekkaShujiiIkenshoCheckListJokenDiv NinteiChosaKekkaShujiiIkenshoCheckListJoken;
+    @JsonProperty("ccdHokensya")
+    private HokenshaListDiv ccdHokensya;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -90,15 +96,21 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * getccdHokensya
+     * @return ccdHokensya
      */
+    @JsonProperty("ccdHokensya")
+    public IHokenshaListDiv getCcdHokensya() {
+        return ccdHokensya;
+    }
+
     @JsonIgnore
     public CheckBoxList getChkNinteiChosaYoteiMiteishaIchiran() {
         return this.getNinteiChosaYoteiMiteishaIchiranJoken().getChkNinteiChosaYoteiMiteishaIchiran();
     }
 
     @JsonIgnore
-    public void  setChkNinteiChosaYoteiMiteishaIchiran(CheckBoxList chkNinteiChosaYoteiMiteishaIchiran) {
+    public void setChkNinteiChosaYoteiMiteishaIchiran(CheckBoxList chkNinteiChosaYoteiMiteishaIchiran) {
         this.getNinteiChosaYoteiMiteishaIchiranJoken().setChkNinteiChosaYoteiMiteishaIchiran(chkNinteiChosaYoteiMiteishaIchiran);
     }
 
@@ -108,7 +120,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblJoken1(Label lblJoken1) {
+    public void setLblJoken1(Label lblJoken1) {
         this.getNinteiChosaYoteiMiteishaIchiranJoken().setLblJoken1(lblJoken1);
     }
 
@@ -118,7 +130,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadJoken1(RadioButton radJoken1) {
+    public void setRadJoken1(RadioButton radJoken1) {
         this.getNinteiChosaYoteiMiteishaIchiranJoken().setRadJoken1(radJoken1);
     }
 
@@ -128,7 +140,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtYoteiMiteishaShinseiYMD(TextBoxDateRange txtYoteiMiteishaShinseiYMD) {
+    public void setTxtYoteiMiteishaShinseiYMD(TextBoxDateRange txtYoteiMiteishaShinseiYMD) {
         this.getNinteiChosaYoteiMiteishaIchiranJoken().setTxtYoteiMiteishaShinseiYMD(txtYoteiMiteishaShinseiYMD);
     }
 
@@ -138,7 +150,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkNinteiChosaIraisakiHenkoshaIchiranhyoJoken(CheckBoxList chkNinteiChosaIraisakiHenkoshaIchiranhyoJoken) {
+    public void setChkNinteiChosaIraisakiHenkoshaIchiranhyoJoken(CheckBoxList chkNinteiChosaIraisakiHenkoshaIchiranhyoJoken) {
         this.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().setChkNinteiChosaIraisakiHenkoshaIchiranhyoJoken(chkNinteiChosaIraisakiHenkoshaIchiranhyoJoken);
     }
 
@@ -148,7 +160,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblJoken2(Label lblJoken2) {
+    public void setLblJoken2(Label lblJoken2) {
         this.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().setLblJoken2(lblJoken2);
     }
 
@@ -158,7 +170,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtIraisakiHenkoshaIchiranShinseiYMD(TextBoxDateRange txtIraisakiHenkoshaIchiranShinseiYMD) {
+    public void setTxtIraisakiHenkoshaIchiranShinseiYMD(TextBoxDateRange txtIraisakiHenkoshaIchiranShinseiYMD) {
         this.getNinteiChosaIraisakiHenkoshaIchiranhyoJoken().setTxtIraisakiHenkoshaIchiranShinseiYMD(txtIraisakiHenkoshaIchiranShinseiYMD);
     }
 
@@ -168,7 +180,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setChkNinteiChosaKekkaShujiiIkenshoCheckListJoken(CheckBoxList chkNinteiChosaKekkaShujiiIkenshoCheckListJoken) {
+    public void setChkNinteiChosaKekkaShujiiIkenshoCheckListJoken(CheckBoxList chkNinteiChosaKekkaShujiiIkenshoCheckListJoken) {
         this.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().setChkNinteiChosaKekkaShujiiIkenshoCheckListJoken(chkNinteiChosaKekkaShujiiIkenshoCheckListJoken);
     }
 
@@ -178,7 +190,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setLblJoken3(Label lblJoken3) {
+    public void setLblJoken3(Label lblJoken3) {
         this.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().setLblJoken3(lblJoken3);
     }
 
@@ -188,7 +200,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setRadJoken3(RadioButton radJoken3) {
+    public void setRadJoken3(RadioButton radJoken3) {
         this.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().setRadJoken3(radJoken3);
     }
 
@@ -198,7 +210,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtCheckListShinseiYMD(TextBoxDateRange txtCheckListShinseiYMD) {
+    public void setTxtCheckListShinseiYMD(TextBoxDateRange txtCheckListShinseiYMD) {
         this.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().setTxtCheckListShinseiYMD(txtCheckListShinseiYMD);
     }
 
@@ -208,7 +220,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShinsaYMD(TextBoxDate txtShinsaYMD) {
+    public void setTxtShinsaYMD(TextBoxDate txtShinsaYMD) {
         this.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().setTxtShinsaYMD(txtShinsaYMD);
     }
 
@@ -218,7 +230,7 @@ public class HakkoJokenDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void  setTxtShinsakai(TextBoxNum txtShinsakai) {
+    public void setTxtShinsakai(TextBoxNum txtShinsakai) {
         this.getNinteiChosaKekkaShujiiIkenshoCheckListJoken().setTxtShinsakai(txtShinsakai);
     }
 

@@ -37,7 +37,10 @@
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho 
         ON DbT5101."shinseishoKanriNo"=DbT5105NinteiKanryoJoho."shinseishoKanriNo" 
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
-        ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo" 
+        ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
         ON DbT5101."shujiiIryokikanCode"=DbT5911."shujiiIryokikanCode" 
         AND DbT5911."shichosonCode"=DbT7051."shichosonCode" 
@@ -130,6 +133,9 @@
         ON DbT5101."shinseishoKanriNo"=DbT5105."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON DbT5101."shinseishoKanriNo"=DbT5301."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
@@ -208,6 +214,9 @@
         ON DbT5101."shinseishoKanriNo"=DbT5123."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON DbT5101."shinseishoKanriNo"=DbT5301."shinseishoKanriNo"
         AND 
@@ -301,6 +310,9 @@
         rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON
         DbT5101."shoKisaiHokenshaNo" =  DbT7051."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         LEFT JOIN
         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON
@@ -459,10 +471,13 @@
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
         ON
         DbT5501."shinsakaiKaisaiNo" =  DbT5502."shinsakaiKaisaiNo"
-        LEFT JOIN
+        INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON
         DbT5101."shoKisaiHokenshaNo" =  DbT7051."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         LEFT JOIN
         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON
@@ -542,6 +557,9 @@
         rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON
         DbT5101."shoKisaiHokenshaNo" =  DbT7051."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
         ON

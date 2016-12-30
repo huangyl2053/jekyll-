@@ -63,6 +63,9 @@
         ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         <!-- 今回調査事業所と調査員取得 -->
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
@@ -133,6 +136,9 @@
         ON DbT5101."shinseishoKanriNo"=DbT5105."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
         ON DbT5101."shinseishoKanriNo"=DbT5201."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
@@ -234,6 +240,9 @@
         ON DbT5501."shinsakaiKaisaiNo"=DbT5502."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
         ON DbT5201."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5201."logicalDeletedFlag" = FALSE

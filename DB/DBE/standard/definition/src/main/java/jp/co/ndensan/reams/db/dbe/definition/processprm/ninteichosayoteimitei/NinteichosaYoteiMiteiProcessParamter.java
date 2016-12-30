@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosayoteimitei.NinteichosaYoteiMiteiParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +25,8 @@ public class NinteichosaYoteiMiteiProcessParamter implements IBatchProcessParame
     private final RString 認定調査予定未定者一覧申請日From;
     private final RString 認定調査予定未定者一覧申請日To;
     private final RString 認定調査予定未定者一覧作成条件;
+    private final LasdecCode 市町村コード;
+    private final RString 市町村名;
 
     /**
      * コンストラクタです。
@@ -31,13 +34,20 @@ public class NinteichosaYoteiMiteiProcessParamter implements IBatchProcessParame
      * @param 認定調査予定未定者一覧申請日From 認定調査予定未定者一覧申請日From
      * @param 認定調査予定未定者一覧申請日To 認定調査予定未定者一覧申請日To
      * @param 認定調査予定未定者一覧作成条件 認定調査予定未定者一覧作成条件
+     * @param 市町村コード 市町村コード
+     * @param 市町村名 市町村名
      */
     public NinteichosaYoteiMiteiProcessParamter(RString 認定調査予定未定者一覧申請日From,
             RString 認定調査予定未定者一覧申請日To,
-            RString 認定調査予定未定者一覧作成条件) {
+            RString 認定調査予定未定者一覧作成条件,
+            LasdecCode 市町村コード,
+            RString 市町村名
+    ) {
         this.認定調査予定未定者一覧申請日From = 認定調査予定未定者一覧申請日From;
         this.認定調査予定未定者一覧申請日To = 認定調査予定未定者一覧申請日To;
         this.認定調査予定未定者一覧作成条件 = 認定調査予定未定者一覧作成条件;
+        this.市町村コード = 市町村コード;
+        this.市町村名 = 市町村名;
     }
 
     /**
@@ -48,7 +58,9 @@ public class NinteichosaYoteiMiteiProcessParamter implements IBatchProcessParame
     public NinteichosaYoteiMiteiParamter toMybitisParamter() {
         return NinteichosaYoteiMiteiParamter.createParamter(認定調査予定未定者一覧申請日From,
                 認定調査予定未定者一覧申請日To,
-                認定調査予定未定者一覧作成条件);
+                認定調査予定未定者一覧作成条件,
+                市町村コード
+        );
     }
 
 }

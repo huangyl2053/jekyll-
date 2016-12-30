@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.junit.Assert.assertTrue;
@@ -60,7 +61,7 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
                 FlexibleDate.EMPTY, FlexibleDate.EMPTY,
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
-                通常コード, 延期コード, FlexibleDate.EMPTY);
+                通常コード, 延期コード, FlexibleDate.EMPTY, LasdecCode.EMPTY);
         return param;
     }
 
@@ -75,7 +76,7 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
                 申請終了日,
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
-                通常コード, 延期コード, FlexibleDate.EMPTY);
+                通常コード, 延期コード, FlexibleDate.EMPTY, LasdecCode.EMPTY);
         return param;
     }
 
@@ -90,7 +91,7 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
         IkenshoJohoPrintMapperParameter param = IkenshoJohoPrintMapperParameter.createSelectByKeyParam(
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
                 FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
-                作成条件, 処理日開始, 処理日終了, 受領日開始, 受領日終了, 通常, 延期, FlexibleDate.EMPTY);
+                作成条件, 処理日開始, 処理日終了, 受領日開始, 受領日終了, 通常, 延期, FlexibleDate.EMPTY, LasdecCode.EMPTY);
         return param;
     }
 

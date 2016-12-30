@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojohoprint;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint.IkenshoJohoPrintMapperParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,6 +50,8 @@ public class IkenshoJohoPrintProcessParameter implements IBatchProcessParameter 
     private FlexibleDate 主治医意見書作成料請求一覧表処理日To;
     private FlexibleDate 主治医意見書作成料請求一覧表受領日From;
     private FlexibleDate 主治医意見書作成料請求一覧表受領日To;
+    private LasdecCode 市町村コード;
+    private RString 市町村名;
 
     /**
      * コンストラクタです。
@@ -80,6 +83,8 @@ public class IkenshoJohoPrintProcessParameter implements IBatchProcessParameter 
      * @param 主治医意見書作成料請求一覧表処理日To FlexibleDate
      * @param 主治医意見書作成料請求一覧表受領日From FlexibleDate
      * @param 主治医意見書作成料請求一覧表受領日To FlexibleDate
+     * @param 市町村コード 市町村コード
+     * @param 市町村名 市町村名
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public IkenshoJohoPrintProcessParameter(
@@ -109,7 +114,10 @@ public class IkenshoJohoPrintProcessParameter implements IBatchProcessParameter 
             FlexibleDate 主治医意見書作成料請求一覧表処理日From,
             FlexibleDate 主治医意見書作成料請求一覧表処理日To,
             FlexibleDate 主治医意見書作成料請求一覧表受領日From,
-            FlexibleDate 主治医意見書作成料請求一覧表受領日To) {
+            FlexibleDate 主治医意見書作成料請求一覧表受領日To,
+            LasdecCode 市町村コード,
+            RString 市町村名
+    ) {
         this.主治医意見書未提出者一覧フラグ = 主治医意見書未提出者一覧フラグ;
         this.主治医意見書未提出者一覧作成条件 = 主治医意見書未提出者一覧作成条件;
         this.主治医意見書未提出者一覧依頼日数 = 主治医意見書未提出者一覧依頼日数;
@@ -137,6 +145,8 @@ public class IkenshoJohoPrintProcessParameter implements IBatchProcessParameter 
         this.主治医意見書作成料請求一覧表処理日To = 主治医意見書作成料請求一覧表処理日To;
         this.主治医意見書作成料請求一覧表受領日From = 主治医意見書作成料請求一覧表受領日From;
         this.主治医意見書作成料請求一覧表受領日To = 主治医意見書作成料請求一覧表受領日To;
+        this.市町村コード = 市町村コード;
+        this.市町村名 = 市町村名;
     }
 
     /**
@@ -172,6 +182,8 @@ public class IkenshoJohoPrintProcessParameter implements IBatchProcessParameter 
                 主治医意見書作成料請求一覧表受領日To,
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード(),
-                年月日.toFlexibleDate());
+                年月日.toFlexibleDate(),
+                市町村コード
+        );
     }
 }

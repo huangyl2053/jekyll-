@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.Ni
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.NinteichosaYoteiMiteiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +39,9 @@ public class DBE012001_ChosaInfoPrintParameter extends BatchParameterBase {
     private static final String CHECKLISTSHINSEIYMD_TO = "checkListShinseiYMDTo";
     private static final String SHINSAYMD = "shinsaYMD";
     private static final String SHINSAKAI = "shinsakai";
+    private static final String SHICHOSONCODE = "shichosonCode";
+    private static final String SHICHOSONNAME = "shichosonName";
+
     private static final long serialVersionUID = 5835788479145553257L;
 
     @BatchParameter(key = NINTEICHOSAYOTEIMITEI, name = "認定調査予定未定者一覧フラグ")
@@ -66,6 +70,10 @@ public class DBE012001_ChosaInfoPrintParameter extends BatchParameterBase {
     private RString shinsaYMD;
     @BatchParameter(key = SHINSAKAI, name = "認定調査結果と主治医意見書のチェックリスト審査会")
     private RString shinsakai;
+    @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
+    private LasdecCode shichosonCode;
+    @BatchParameter(key = SHICHOSONNAME, name = "市町村名")
+    private RString shichosonName;
 
     /**
      * 認定調査予定未定者一覧表のMybatisパラメータークラス作成
@@ -75,7 +83,10 @@ public class DBE012001_ChosaInfoPrintParameter extends BatchParameterBase {
     public NinteichosaYoteiMiteiProcessParamter toNinteichosaYoteiMiteiParamter() {
         return new NinteichosaYoteiMiteiProcessParamter(yoteimiteiymdFrom,
                 yoteimiteiymdTo,
-                joken1);
+                joken1,
+                shichosonCode,
+                shichosonName
+        );
     }
 
     /**
@@ -85,7 +96,10 @@ public class DBE012001_ChosaInfoPrintParameter extends BatchParameterBase {
      */
     public NinteichosaIraiHenkoProcessParamter toNinteichosaIraiHenkoParamter() {
         return new NinteichosaIraiHenkoProcessParamter(iraisakihenkymdFrom,
-                iraisakihenkymdTo);
+                iraisakihenkymdTo,
+                shichosonCode,
+                shichosonName
+        );
     }
 
     /**
@@ -98,6 +112,9 @@ public class DBE012001_ChosaInfoPrintParameter extends BatchParameterBase {
                 checkListShinseiYMDTo,
                 shinsaYMD,
                 shinsakai,
-                joken3);
+                joken3,
+                shichosonCode,
+                shichosonName
+        );
     }
 }

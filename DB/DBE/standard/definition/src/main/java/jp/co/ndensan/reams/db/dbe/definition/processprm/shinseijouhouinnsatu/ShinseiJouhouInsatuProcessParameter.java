@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.shinseijouhouinnsatu;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseijouhouinnsatu.ShinseiJouhouInsatuMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,6 +26,8 @@ public class ShinseiJouhouInsatuProcessParameter implements IBatchProcessParamet
     private FlexibleDate shinnseikaTo;
     private boolean sakuseijyoukenuser;
     private RString psmShikibetsuTaisho;
+    private LasdecCode shichosonCode;
+    private RString shichosonName;
 
     /**
      * コンストラクタ作成です。
@@ -37,6 +40,8 @@ public class ShinseiJouhouInsatuProcessParameter implements IBatchProcessParamet
      * @param shinnseikaFrom 申請日From
      * @param shinnseikaTo 申請日To
      * @param sakuseijyoukenuser 作成条件
+     * @param shichosonCode 市町村コード
+     * @param shichosonName 市町村名
      */
     public ShinseiJouhouInsatuProcessParameter(boolean shinseimonitorflag,
             boolean yokaigoyoshienseiichiranflag,
@@ -45,7 +50,9 @@ public class ShinseiJouhouInsatuProcessParameter implements IBatchProcessParamet
             RDateTime shorikaTo,
             FlexibleDate shinnseikaFrom,
             FlexibleDate shinnseikaTo,
-            boolean sakuseijyoukenuser
+            boolean sakuseijyoukenuser,
+            LasdecCode shichosonCode,
+            RString shichosonName
     ) {
         this.shinseimonitorflag = shinseimonitorflag;
         this.yokaigoyoshienseiichiranflag = yokaigoyoshienseiichiranflag;
@@ -55,6 +62,8 @@ public class ShinseiJouhouInsatuProcessParameter implements IBatchProcessParamet
         this.shinnseikaFrom = shinnseikaFrom;
         this.shinnseikaTo = shinnseikaTo;
         this.sakuseijyoukenuser = sakuseijyoukenuser;
+        this.shichosonCode = shichosonCode;
+        this.shichosonName = shichosonName;
     }
 
     /**
@@ -75,6 +84,7 @@ public class ShinseiJouhouInsatuProcessParameter implements IBatchProcessParamet
                 shinnseikaFrom,
                 shinnseikaTo,
                 sakuseijyoukenuser,
-                psmShikibetsuTaisho);
+                psmShikibetsuTaisho,
+                shichosonCode);
     }
 }

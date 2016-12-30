@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei;
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyoikenshochecklist.ChosahyoIkenshoCheckListParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,8 @@ public class ChosahyoIkenshoCheckListProcessParamter implements IBatchProcessPar
     private final RString 認定調査結果と主治医意見書のチェックリスト審査日;
     private final RString 認定調査結果と主治医意見書のチェックリスト審査会;
     private final RString 作成条件;
+    private final LasdecCode 市町村コード;
+    private final RString 市町村名;
 
     /**
      * コンストラクタです。
@@ -35,17 +38,24 @@ public class ChosahyoIkenshoCheckListProcessParamter implements IBatchProcessPar
      * @param 認定調査結果と主治医意見書のチェックリスト審査日 認定調査結果と主治医意見書のチェックリスト審査日
      * @param 認定調査結果と主治医意見書のチェックリスト審査会 認定調査結果と主治医意見書のチェックリスト審査会
      * @param 作成条件 作成条件
+     * @param 市町村コード 市町村コード
+     * @param 市町村名 市町村名
      */
     public ChosahyoIkenshoCheckListProcessParamter(RString 認定調査結果と主治医意見書のチェックリスト申請日From,
             RString 認定調査結果と主治医意見書のチェックリスト申請日To,
             RString 認定調査結果と主治医意見書のチェックリスト審査日,
             RString 認定調査結果と主治医意見書のチェックリスト審査会,
-            RString 作成条件) {
+            RString 作成条件,
+            LasdecCode 市町村コード,
+            RString 市町村名
+    ) {
         this.認定調査結果と主治医意見書のチェックリスト申請日From = 認定調査結果と主治医意見書のチェックリスト申請日From;
         this.認定調査結果と主治医意見書のチェックリスト申請日To = 認定調査結果と主治医意見書のチェックリスト申請日To;
         this.認定調査結果と主治医意見書のチェックリスト審査日 = 認定調査結果と主治医意見書のチェックリスト審査日;
         this.認定調査結果と主治医意見書のチェックリスト審査会 = 認定調査結果と主治医意見書のチェックリスト審査会;
         this.作成条件 = 作成条件;
+        this.市町村コード = 市町村コード;
+        this.市町村名 = 市町村名;
     }
 
     /**
@@ -58,6 +68,8 @@ public class ChosahyoIkenshoCheckListProcessParamter implements IBatchProcessPar
                 認定調査結果と主治医意見書のチェックリスト申請日To,
                 認定調査結果と主治医意見書のチェックリスト審査日,
                 認定調査結果と主治医意見書のチェックリスト審査会,
-                作成条件);
+                作成条件,
+                市町村コード
+        );
     }
 }

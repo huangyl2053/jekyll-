@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE011001.DBE011001_ShinseiInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -151,6 +152,12 @@ public class HakkoJokenSinnseiHandler {
                 parameter.setShinseishashinnseikaTo(flexibledataTo);
             }
         }
+        if (RString.isNullOrEmpty(div.getCcdHokensya().getSelectedItem().get市町村コード().value())) {
+            parameter.setShichosonCode(LasdecCode.EMPTY);
+        } else {
+            parameter.setShichosonCode(div.getCcdHokensya().getSelectedItem().get市町村コード());
+        }
+        parameter.setShichosonName(div.getCcdHokensya().getSelectedItem().get市町村名称());
         return parameter;
     }
 }

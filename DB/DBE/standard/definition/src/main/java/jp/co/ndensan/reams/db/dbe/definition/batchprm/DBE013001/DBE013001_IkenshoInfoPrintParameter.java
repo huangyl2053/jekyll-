@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE013001;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojohoprint.IkenshoJohoPrintProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -50,6 +51,8 @@ public class DBE013001_IkenshoInfoPrintParameter extends BatchParameterBase {
     private static final String 作成料請求一覧表処理終了日 = "主治医意見書作成料請求一覧表処理日To";
     private static final String 作成料請求一覧表受領開始日 = "主治医意見書作成料請求一覧表受領日From";
     private static final String 作成料請求一覧表受領終了日 = "主治医意見書作成料請求一覧表受領日To";
+    private static final String 市町村Code = "市町村コード";
+    private static final String 市町村Name = "市町村名";
 
     @BatchParameter(key = 未提出者一覧フラグ, name = "主治医意見書未提出者一覧フラグ")
     private boolean 主治医意見書未提出者一覧フラグ;
@@ -105,6 +108,10 @@ public class DBE013001_IkenshoInfoPrintParameter extends BatchParameterBase {
     private FlexibleDate 主治医意見書作成料請求一覧表受領日From;
     @BatchParameter(key = 作成料請求一覧表受領終了日, name = "主治医意見書作成料請求一覧表受領日To")
     private FlexibleDate 主治医意見書作成料請求一覧表受領日To;
+    @BatchParameter(key = 市町村Code, name = "市町村コード")
+    private LasdecCode 市町村コード;
+    @BatchParameter(key = 市町村Name, name = "市町村名")
+    private RString 市町村名;
 
     /**
      * コンストラクタです。
@@ -142,6 +149,8 @@ public class DBE013001_IkenshoInfoPrintParameter extends BatchParameterBase {
      * @param 主治医意見書作成料請求一覧表処理日To FlexibleDate
      * @param 主治医意見書作成料請求一覧表受領日From FlexibleDate
      * @param 主治医意見書作成料請求一覧表受領日To FlexibleDate
+     * @param 市町村コード LasdecCode
+     * @param 市町村名 RString
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public DBE013001_IkenshoInfoPrintParameter(
@@ -171,7 +180,10 @@ public class DBE013001_IkenshoInfoPrintParameter extends BatchParameterBase {
             FlexibleDate 主治医意見書作成料請求一覧表処理日From,
             FlexibleDate 主治医意見書作成料請求一覧表処理日To,
             FlexibleDate 主治医意見書作成料請求一覧表受領日From,
-            FlexibleDate 主治医意見書作成料請求一覧表受領日To) {
+            FlexibleDate 主治医意見書作成料請求一覧表受領日To,
+            LasdecCode 市町村コード,
+            RString 市町村名
+    ) {
         this.主治医意見書未提出者一覧フラグ = 主治医意見書未提出者一覧フラグ;
         this.主治医意見書未提出者一覧作成条件 = 主治医意見書未提出者一覧作成条件;
         this.主治医意見書未提出者一覧依頼日数 = 主治医意見書未提出者一覧依頼日数;
@@ -199,6 +211,8 @@ public class DBE013001_IkenshoInfoPrintParameter extends BatchParameterBase {
         this.主治医意見書作成料請求一覧表処理日To = 主治医意見書作成料請求一覧表処理日To;
         this.主治医意見書作成料請求一覧表受領日From = 主治医意見書作成料請求一覧表受領日From;
         this.主治医意見書作成料請求一覧表受領日To = 主治医意見書作成料請求一覧表受領日To;
+        this.市町村コード = 市町村コード;
+        this.市町村名 = 市町村名;
     }
 
     /**
@@ -234,7 +248,10 @@ public class DBE013001_IkenshoInfoPrintParameter extends BatchParameterBase {
                 主治医意見書作成料請求一覧表処理日From,
                 主治医意見書作成料請求一覧表処理日To,
                 主治医意見書作成料請求一覧表受領日From,
-                主治医意見書作成料請求一覧表受領日To);
+                主治医意見書作成料請求一覧表受領日To,
+                市町村コード,
+                市町村名
+        );
     }
 
 }

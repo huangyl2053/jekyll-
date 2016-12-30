@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -59,6 +60,8 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
     private static final RString 申請日範囲指定 = new RString("2");
     private IkenshoJohoPrintProcessParameter processParameter;
     private final IkenshoJohoPrintBusiness business = new IkenshoJohoPrintBusiness();
+    private static final RString 全市町村 = new RString("全市町村");
+    private static final RString 保険者タイトル = new RString("保険者：");
 
     @BatchWriter
     private BatchReportWriter<ShujiiIkenshoMiIraiReportSource> batchWrite;
@@ -124,6 +127,11 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
 
+        if (processParameter.get市町村コード().equals(LasdecCode.EMPTY)) {
+            出力条件.add(get保険者(全市町村));
+        } else {
+            出力条件.add(get保険者(processParameter.get市町村名()));
+        }
         if (未依頼.equals(processParameter.get主治医意見書依頼未処理者一覧表作成条件())) {
             出力条件.add(new RString("未依頼分全件出力"));
         } else if (申請日範囲指定.equals(processParameter.get主治医意見書依頼未処理者一覧表作成条件())) {
@@ -158,5 +166,9 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
             一覧作成条件 = new RString("申請日範囲指定");
         }
         return 一覧作成条件;
+    }
+
+    private RString get保険者(RString 保険者) {
+        return 保険者タイトル.concat(保険者);
     }
 }

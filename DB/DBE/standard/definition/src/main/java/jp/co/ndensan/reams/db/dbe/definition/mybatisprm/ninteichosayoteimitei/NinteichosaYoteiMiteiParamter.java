@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosayoteimitei;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,6 +25,7 @@ public class NinteichosaYoteiMiteiParamter implements IMyBatisParameter {
     private final RString 通常;
     private final RString 延期;
     private final boolean 認定調査予定未定者一覧作成条件Flag;
+    private final LasdecCode 市町村コード;
 
     /**
      * コンストラクタです。
@@ -33,17 +35,21 @@ public class NinteichosaYoteiMiteiParamter implements IMyBatisParameter {
      * @param 通常 処理状態区分 :通常（0）
      * @param 延期 処理状態区分 :延期（3）
      * @param 認定調査予定未定者一覧作成条件Flag 認定調査予定未定者一覧作成条件Flag
+     * @param 市町村コード 市町村コード
      */
     protected NinteichosaYoteiMiteiParamter(RString 認定調査予定未定者一覧申請日From,
             RString 認定調査予定未定者一覧申請日To,
             RString 通常,
             RString 延期,
-            boolean 認定調査予定未定者一覧作成条件Flag) {
+            boolean 認定調査予定未定者一覧作成条件Flag,
+            LasdecCode 市町村コード
+    ) {
         this.認定調査予定未定者一覧申請日From = 認定調査予定未定者一覧申請日From;
         this.認定調査予定未定者一覧申請日To = 認定調査予定未定者一覧申請日To;
         this.通常 = 通常;
         this.延期 = 延期;
         this.認定調査予定未定者一覧作成条件Flag = 認定調査予定未定者一覧作成条件Flag;
+        this.市町村コード = 市町村コード;
     }
 
     /**
@@ -52,15 +58,20 @@ public class NinteichosaYoteiMiteiParamter implements IMyBatisParameter {
      * @param 予定未定者一覧申請日From 予定未定者一覧申請日From
      * @param 予定未定者一覧申請日To 予定未定者一覧申請日To
      * @param 認定調査予定未定者一覧作成条件 認定調査予定未定者一覧作成条件
+     * @param 市町村コード 市町村コード
      * @return NinteichosaYoteiMiteiParamter
      */
     public static NinteichosaYoteiMiteiParamter createParamter(RString 予定未定者一覧申請日From,
             RString 予定未定者一覧申請日To,
-            RString 認定調査予定未定者一覧作成条件) {
+            RString 認定調査予定未定者一覧作成条件,
+            LasdecCode 市町村コード
+    ) {
         return new NinteichosaYoteiMiteiParamter(予定未定者一覧申請日From,
                 予定未定者一覧申請日To,
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード(),
-                new RString("2").equals(認定調査予定未定者一覧作成条件));
+                new RString("2").equals(認定調査予定未定者一覧作成条件),
+                市町村コード
+        );
     }
 }

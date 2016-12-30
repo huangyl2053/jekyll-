@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE012001.DBE012001_ChosaInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -171,6 +172,13 @@ public class HakkoJokenHandler {
         } else {
             batchParamter.setCheckListJoken(false);
         }
+
+        if (RString.isNullOrEmpty(div.getCcdHokensya().getSelectedItem().get市町村コード().value())) {
+            batchParamter.setShichosonCode(LasdecCode.EMPTY);
+        } else {
+            batchParamter.setShichosonCode(div.getCcdHokensya().getSelectedItem().get市町村コード());
+        }
+        batchParamter.setShichosonName(div.getCcdHokensya().getSelectedItem().get市町村名称());
         return batchParamter;
     }
 }

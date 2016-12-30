@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -52,14 +53,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIraiHenkoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-                                 = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei."
-                                               + "INinteichosaYoteiMiteiMapper.getNinteichosaIraiHenko");
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei."
+                    + "INinteichosaYoteiMiteiMapper.getNinteichosaIraiHenko");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE012002.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections
-        .unmodifiableList(Arrays.asList(new RString(NinteichosaIraiHenkoReportSource.ReportSourceFields.shichosonName.name())));
+            .unmodifiableList(Arrays.asList(new RString(NinteichosaIraiHenkoReportSource.ReportSourceFields.shichosonName.name())));
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString なし = new RString("無し");
     private NinteichosaIraiHenkoProcessParamter paramter;
+    private static final RString 全市町村 = new RString("全市町村");
+    private static final RString 保険者タイトル = new RString("保険者：");
     @BatchWriter
     private BatchReportWriter<NinteichosaIraiHenkoReportSource> batchWrite;
     private ReportSourceWriter<NinteichosaIraiHenkoReportSource> reportSourceWriter;
@@ -85,8 +88,8 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-            .addBreak(new BreakerCatalog<NinteichosaIraiHenkoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-            .create();
+                .addBreak(new BreakerCatalog<NinteichosaIraiHenkoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -94,25 +97,25 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     protected void afterExecute() {
         if (index_tmp == 0) {
             NinteichosaIraiHenkoData data = new NinteichosaIraiHenkoData(MIDDLELINE,
-                                                                         MIDDLELINE,
-                                                                         null,
-                                                                         new AtenaMeisho("該当データがありません"),
-                                                                         null,
-                                                                         null,
-                                                                         null,
-                                                                         null,
-                                                                         MIDDLELINE,
-                                                                         null,
-                                                                         MIDDLELINE,
-                                                                         MIDDLELINE,
-                                                                         MIDDLELINE,
-                                                                         MIDDLELINE,
-                                                                         MIDDLELINE);
+                    MIDDLELINE,
+                    null,
+                    new AtenaMeisho("該当データがありません"),
+                    null,
+                    null,
+                    null,
+                    null,
+                    MIDDLELINE,
+                    null,
+                    MIDDLELINE,
+                    MIDDLELINE,
+                    MIDDLELINE,
+                    MIDDLELINE,
+                    MIDDLELINE);
             NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, -1);
             report.writeBy(reportSourceWriter);
         } else {
             NinteichosaIraiHenkoData data = NinteichosaIraiHenkoDataChange.createEdit(
-                getBefore(), new NinteichosaIraiHenkoRelateEntity(), countData);
+                    getBefore(), new NinteichosaIraiHenkoRelateEntity(), countData);
             if (data != null) {
                 NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);
                 report.writeBy(reportSourceWriter);
@@ -152,7 +155,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
 
     private PersonalData toPersonalData(NinteichosaIraiHenkoRelateEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
-                                                                   entity.getShinseishoKanriNo().value());
+                entity.getShinseishoKanriNo().value());
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
@@ -166,8 +169,8 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = get出力条件();
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-            ReportIdDBE.DBE012002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
-            帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
+                ReportIdDBE.DBE012002.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
@@ -175,6 +178,11 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     private List<RString> get出力条件() {
         List<RString> 出力条件 = new ArrayList<>();
         RString 日付範囲 = new RString("日付範囲：");
+        if (paramter.get市町村コード().equals(LasdecCode.EMPTY)) {
+            出力条件.add(get保険者(全市町村));
+        } else {
+            出力条件.add(get保険者(paramter.get市町村名()));
+        }
         if (paramter.get認定調査依頼先変更者一覧表申請日From() == null && paramter.get認定調査依頼先変更者一覧表申請日To() == null) {
             出力条件.add(日付範囲.concat("指定なし"));
         } else {
@@ -191,5 +199,9 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
         }
         RDate dateTmp = new RDate(date.toString());
         return dateTmp.wareki().toDateString();
+    }
+
+    private RString get保険者(RString 保険者) {
+        return 保険者タイトル.concat(保険者);
     }
 }

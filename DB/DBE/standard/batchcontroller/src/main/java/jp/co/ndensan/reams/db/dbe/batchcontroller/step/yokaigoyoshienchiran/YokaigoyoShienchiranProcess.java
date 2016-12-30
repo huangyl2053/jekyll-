@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -64,6 +65,8 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
     private static final RString 指定なし文言 = new RString("指定なし");
     private static final RString 範囲文言 = new RString(" ～ ");
     private static final RString 無し = new RString("無し");
+    private static final RString 全市町村 = new RString("全市町村");
+    private static final RString 保険者タイトル = new RString("保険者：");
     @BatchWriter
     private BatchReportWriter<YokaigoYoshienShinseiIchiranReportSource> batchWrite;
     private ReportSourceWriter<YokaigoYoshienShinseiIchiranReportSource> reportSourceWriter;
@@ -133,6 +136,11 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
         RString csv出力有無 = 無し;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
+        if (processParameter.getShichosonCode().equals(LasdecCode.EMPTY)) {
+            出力条件.add(get保険者(全市町村));
+        } else {
+            出力条件.add(get保険者(processParameter.getShichosonName()));
+        }
         if (processParameter.getSakuseijyouken().equals(作成条件_処理日)) {
             出力条件.add(作成条件文言_処理日);
             出力条件.add(get日付範囲(processParameter.getShorikaFrom(), processParameter.getShorikaTo()));
@@ -177,5 +185,9 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
                 オリジナル.getDate().getYearValue(),
                 オリジナル.getDate().getMonthValue(),
                 オリジナル.getDate().getDayValue());
+    }
+
+    private RString get保険者(RString 保険者) {
+        return 保険者タイトル.concat(保険者);
     }
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojohoprint;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -53,6 +54,7 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
     private final boolean 主治医意見書作成料請求一覧表作成条件フラグ2;
     private static final RString FLAG_1 = new RString("1");
     private static final RString FLAG_2 = new RString("2");
+    private final LasdecCode 市町村コード;
 
     /**
      * コンストラクタです。
@@ -121,7 +123,8 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
             boolean 主治医意見書依頼済み一覧表作成条件フラグ2,
             boolean 主治医意見書項目確認一覧表作成条件フラグ,
             boolean 主治医意見書作成料請求一覧表作成条件フラグ,
-            boolean 主治医意見書作成料請求一覧表作成条件フラグ2
+            boolean 主治医意見書作成料請求一覧表作成条件フラグ2,
+            LasdecCode 市町村コード
     ) {
         this.主治医意見書未提出者一覧作成条件 = 主治医意見書未提出者一覧作成条件;
         this.主治医意見書未提出者一覧申請日From = 主治医意見書未提出者一覧申請日From;
@@ -154,6 +157,7 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
         this.主治医意見書項目確認一覧表作成条件フラグ = 主治医意見書項目確認一覧表作成条件フラグ;
         this.主治医意見書作成料請求一覧表作成条件フラグ = 主治医意見書作成料請求一覧表作成条件フラグ;
         this.主治医意見書作成料請求一覧表作成条件フラグ2 = 主治医意見書作成料請求一覧表作成条件フラグ2;
+        this.市町村コード = 市町村コード;
     }
 
     /**
@@ -182,6 +186,7 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
      * @param 処理状態区分_通常 RString
      * @param 処理状態区分_延期 RString
      * @param 主治医意見書作成依頼年月日 FlexibleDate
+     * @param 市町村コード LasdecCode
      * @return 身体手帳検索パラメータ
      */
     public static IkenshoJohoPrintMapperParameter createSelectByKeyParam(
@@ -207,7 +212,9 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
             FlexibleDate 主治医意見書作成料請求一覧表受領日To,
             RString 処理状態区分_通常,
             RString 処理状態区分_延期,
-            FlexibleDate 主治医意見書作成依頼年月日) {
+            FlexibleDate 主治医意見書作成依頼年月日,
+            LasdecCode 市町村コード
+    ) {
         return new IkenshoJohoPrintMapperParameter(
                 主治医意見書未提出者一覧作成条件,
                 主治医意見書未提出者一覧申請日From,
@@ -239,7 +246,8 @@ public final class IkenshoJohoPrintMapperParameter implements IMyBatisParameter 
                 FLAG_2.equals(主治医意見書依頼済み一覧表作成条件),
                 FLAG_2.equals(主治医意見書項目確認一覧表作成条件),
                 FLAG_1.equals(主治医意見書作成料請求一覧表作成条件),
-                FLAG_2.equals(主治医意見書作成料請求一覧表作成条件)
+                FLAG_2.equals(主治医意見書作成料請求一覧表作成条件),
+                市町村コード
         );
     }
 }

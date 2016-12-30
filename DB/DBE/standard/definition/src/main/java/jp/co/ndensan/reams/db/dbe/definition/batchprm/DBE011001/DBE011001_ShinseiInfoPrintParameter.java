@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE011001;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseijouhouinnsatu.ShinseiJouhouInsatuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,6 +35,8 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
     private static final String SHINSEISHAICHIRAN_SHORI_KATO = "shinseishashorikaTo";
     private static final String SHINSEISHAICHIRAN_SHINNSEI_KAFROM = "shinseishashinnseikaFrom";
     private static final String SHINSEISHAICHIRAN_SHINNSEI_KATO = "shinseishashinnseikaTo";
+    private static final String SHICHOSONCODE = "shichosonCode";
+    private static final String SHICHOSONNAME = "shichosonName";
 
     @BatchParameter(key = SHINSEI_MONITORFLAG, name = "要介護認定申請モニタリストフラグ")
     private boolean shinseimonitorflag;
@@ -63,6 +66,10 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
     private boolean monitorsakuseijyoukenuser;
     @BatchParameter(key = SHINSEISHAICHIRAN_SAKUSEI_JYOUKENUSER, name = "申請者一覧作成条件User")
     private boolean shinseishasakuseijyoukenuser;
+    @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
+    private LasdecCode shichosonCode;
+    @BatchParameter(key = SHICHOSONNAME, name = "市町村名")
+    private RString shichosonName;
 
     /**
      * コンストラクタです。
@@ -81,6 +88,8 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
      * @param shorikaTo 処理日To
      * @param shinnseikaFrom 申請日From
      * @param shinnseikaTo 申請日To
+     * @param shichosonCode 市町村コード
+     * @param shichosonName 市町村名
      */
     public DBE011001_ShinseiInfoPrintParameter(
             boolean shinseimonitorflag,
@@ -89,7 +98,9 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
             RDateTime shorikaFrom,
             RDateTime shorikaTo,
             FlexibleDate shinnseikaFrom,
-            FlexibleDate shinnseikaTo
+            FlexibleDate shinnseikaTo,
+            LasdecCode shichosonCode,
+            RString shichosonName
     ) {
         this.shinseimonitorflag = shinseimonitorflag;
         this.yokaigoyoshienseiichiranflag = yokaigoyoshienseiichiranflag;
@@ -98,6 +109,8 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
         this.monitorshorikaTo = shorikaTo;
         this.monitorshinnseikaFrom = shinnseikaFrom;
         this.monitorshinnseikaTo = shinnseikaTo;
+        this.shichosonCode = shichosonCode;
+        this.shichosonName = shichosonName;
 
     }
 
@@ -114,7 +127,9 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
                 monitorshorikaTo,
                 monitorshinnseikaFrom,
                 monitorshinnseikaTo,
-                monitorsakuseijyoukenuser
+                monitorsakuseijyoukenuser,
+                shichosonCode,
+                shichosonName
         );
     }
 
@@ -131,7 +146,9 @@ public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
                 shinseishashorikaTo,
                 shinseishashinnseikaFrom,
                 shinseishashinnseikaTo,
-                shinseishasakuseijyoukenuser
+                shinseishasakuseijyoukenuser,
+                shichosonCode,
+                shichosonName
         );
     }
 
