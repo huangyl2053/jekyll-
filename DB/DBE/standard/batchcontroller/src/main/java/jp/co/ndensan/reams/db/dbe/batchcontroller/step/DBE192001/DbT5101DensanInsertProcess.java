@@ -65,12 +65,16 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
 
     @Override
     protected void process(DbT5101RelateEntity entity) {
-
-        dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
-        dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
-        if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.職権.getコード()) 
-                || entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {
-            dbT5105Writer.insert(business.getDbT5105Entity(entity));
+        if (entity.getDbT5101Entity() == null
+                || (entity.getDbT5101Entity() != null
+                        && (entity.getDbT5101Entity().getShinseishoKanriNo() == null
+                            || (entity.getDbT5101Entity().getShinseishoKanriNo() != null && entity.getDbt5102Entity() != null && entity.getDbt5102Entity().getNijiHanteiYMD() != null)))) {
+            dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
+            dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
+            if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.職権.getコード())
+                    || entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {
+                dbT5105Writer.insert(business.getDbT5105Entity(entity));
+            }
         }
     }
 }
