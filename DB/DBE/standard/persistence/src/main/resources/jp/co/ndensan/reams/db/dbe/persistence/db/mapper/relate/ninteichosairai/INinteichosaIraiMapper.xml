@@ -320,7 +320,7 @@
         zenkaiDbT5203NinteichosahyoKihonChosa."shogaiNichijoSeikatsuJiritsudoCode" AS zenkaiShogaiNichijoSeikatsuJiritsudoCode
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121ShinseiRirekiJoho
         ON  DbT5121ShinseiRirekiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         INNER JOIN
