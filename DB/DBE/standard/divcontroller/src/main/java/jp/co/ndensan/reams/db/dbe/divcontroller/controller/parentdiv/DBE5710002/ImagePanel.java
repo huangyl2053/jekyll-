@@ -132,7 +132,7 @@ public class ImagePanel {
         }
         List<RString> result = new ArrayList<>();
         for (RString fileName : fileList) {
-            result.add(ro_sfed.getDirectAccessPath().concat("\\IMG\\").concat(fileName).concat(拡張子));
+            result.add(ro_sfed.getDirectAccessPath().concat(fileName).concat(拡張子));
         }
         return result.isEmpty() ? Collections.EMPTY_LIST : result;
     }

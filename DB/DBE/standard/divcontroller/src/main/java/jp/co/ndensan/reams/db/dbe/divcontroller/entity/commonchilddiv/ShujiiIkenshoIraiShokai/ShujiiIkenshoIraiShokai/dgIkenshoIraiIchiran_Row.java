@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIke
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 21 10:04:33 JST 2016 
+ * Wed Jan 04 20:05:28 JST 2017 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgIkenshoIraiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     private RString number;
     private TextBoxDate ninyeiShonseibi;
@@ -33,7 +33,7 @@ public class dgIkenshoIraiIchiran_Row extends DataRow {
     private RString iryoKikanMeisho;
     private RString shujiiCode;
     private RString shujiiMeisho;
-    private TextBoxDate ikenshoTorikomiDay;
+    private TextBoxDate ikenshoJuryoDay;
     private TextBoxDate ikenshoKinyuDay;
     private RString iraiKubun;
 
@@ -50,7 +50,7 @@ public class dgIkenshoIraiIchiran_Row extends DataRow {
         this.iryoKikanMeisho = RString.EMPTY;
         this.shujiiCode = RString.EMPTY;
         this.shujiiMeisho = RString.EMPTY;
-        this.ikenshoTorikomiDay = new TextBoxDate();
+        this.ikenshoJuryoDay = new TextBoxDate();
         this.ikenshoKinyuDay = new TextBoxDate();
         this.iraiKubun = RString.EMPTY;
         this.setOriginalData("number", number);
@@ -64,12 +64,12 @@ public class dgIkenshoIraiIchiran_Row extends DataRow {
         this.setOriginalData("iryoKikanMeisho", iryoKikanMeisho);
         this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiMeisho", shujiiMeisho);
-        this.setOriginalData("ikenshoTorikomiDay", ikenshoTorikomiDay);
+        this.setOriginalData("ikenshoJuryoDay", ikenshoJuryoDay);
         this.setOriginalData("ikenshoKinyuDay", ikenshoKinyuDay);
         this.setOriginalData("iraiKubun", iraiKubun);
     }
 
-    public dgIkenshoIraiIchiran_Row(RString number, TextBoxDate ninyeiShonseibi, RString shinseiKubunShinseiji, TextBoxDate niteiTorisageDay, TextBoxDate ninteibi, RString yokaigodo, RString yukoKikan, RString iryoKikanNumber, RString iryoKikanMeisho, RString shujiiCode, RString shujiiMeisho, TextBoxDate ikenshoTorikomiDay, TextBoxDate ikenshoKinyuDay, RString iraiKubun) {
+    public dgIkenshoIraiIchiran_Row(RString number, TextBoxDate ninyeiShonseibi, RString shinseiKubunShinseiji, TextBoxDate niteiTorisageDay, TextBoxDate ninteibi, RString yokaigodo, RString yukoKikan, RString iryoKikanNumber, RString iryoKikanMeisho, RString shujiiCode, RString shujiiMeisho, TextBoxDate ikenshoJuryoDay, TextBoxDate ikenshoKinyuDay, RString iraiKubun) {
         super();
         this.setOriginalData("number", number);
         this.setOriginalData("ninyeiShonseibi", ninyeiShonseibi);
@@ -82,7 +82,7 @@ public class dgIkenshoIraiIchiran_Row extends DataRow {
         this.setOriginalData("iryoKikanMeisho", iryoKikanMeisho);
         this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiMeisho", shujiiMeisho);
-        this.setOriginalData("ikenshoTorikomiDay", ikenshoTorikomiDay);
+        this.setOriginalData("ikenshoJuryoDay", ikenshoJuryoDay);
         this.setOriginalData("ikenshoKinyuDay", ikenshoKinyuDay);
         this.setOriginalData("iraiKubun", iraiKubun);
         this.number = number;
@@ -96,7 +96,7 @@ public class dgIkenshoIraiIchiran_Row extends DataRow {
         this.iryoKikanMeisho = iryoKikanMeisho;
         this.shujiiCode = shujiiCode;
         this.shujiiMeisho = shujiiMeisho;
-        this.ikenshoTorikomiDay = ikenshoTorikomiDay;
+        this.ikenshoJuryoDay = ikenshoJuryoDay;
         this.ikenshoKinyuDay = ikenshoKinyuDay;
         this.iraiKubun = iraiKubun;
     }
@@ -145,8 +145,8 @@ public class dgIkenshoIraiIchiran_Row extends DataRow {
         return shujiiMeisho;
     }
 
-    public TextBoxDate getIkenshoTorikomiDay() {
-        return ikenshoTorikomiDay;
+    public TextBoxDate getIkenshoJuryoDay() {
+        return ikenshoJuryoDay;
     }
 
     public TextBoxDate getIkenshoKinyuDay() {
@@ -212,9 +212,9 @@ public class dgIkenshoIraiIchiran_Row extends DataRow {
         this.shujiiMeisho = shujiiMeisho;
     }
 
-    public void setIkenshoTorikomiDay(TextBoxDate ikenshoTorikomiDay) {
-        this.setOriginalData("ikenshoTorikomiDay", ikenshoTorikomiDay);
-        this.ikenshoTorikomiDay = ikenshoTorikomiDay;
+    public void setIkenshoJuryoDay(TextBoxDate ikenshoJuryoDay) {
+        this.setOriginalData("ikenshoJuryoDay", ikenshoJuryoDay);
+        this.ikenshoJuryoDay = ikenshoJuryoDay;
     }
 
     public void setIkenshoKinyuDay(TextBoxDate ikenshoKinyuDay) {

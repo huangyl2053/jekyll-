@@ -231,7 +231,7 @@ public class DeletePanelHandler {
         for (RString deleteTargetImageFile : deleteTargetImageFileList) {
             if (isExistsMaskImageFile(deleteTargetImageFile, deleteImageFileList)) {
                 appendNewImageFile(descriptor, localCopyPath,
-                        deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子));
+                        SLASH.concat(deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子)));
                 SharedFile.deleteFileInEntry(descriptor,
                         SLASH.concat(deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子)).toString());
             }
