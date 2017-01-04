@@ -17,8 +17,8 @@ public class DbT5101RelateEntity {
 
     private DbT5101TempEntity dbt5101TempEntity;
     private DbT5101NinteiShinseiJohoEntity dbT5101Entity;
-    private DbT5123NinteiKeikakuJohoEntity dbt5123Entity;
-    private DbT5102NinteiKekkaJohoEntity dbt5102Entity;
-    private DbT5105NinteiKanryoJohoEntity dbt5105Entity;
+    private DbT5123NinteiKeikakuJohoEntity dbT5123Entity;
+    private DbT5102NinteiKekkaJohoEntity dbT5102Entity;
+    private DbT5105NinteiKanryoJohoEntity dbT5105Entity;
 
 }

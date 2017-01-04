@@ -315,11 +315,11 @@ public class NinteiChosainMaster {
                 row.getChiku(),
                 row.getChosainShikaku(),
                 new RString(chosaKanoNinzu.toString()),
-                row.getJokyoFlag(),
                 row.getYubinNo(),
                 row.getJusho(),
                 row.getTelNo(),
                 row.getFaxNo(),
+                row.getJokyoFlag(),
                 row.getShozokuKikanName());
         return data;
     }

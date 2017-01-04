@@ -71,7 +71,7 @@ public class ImagePanel {
                 new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
         ImagePanelHandler handler = new ImagePanelHandler();
-        List<RString> 存在するファイル = existFileList(finder.getSharedFile(), ro_sfed);
+        List<RString> 存在するファイル = finder.getSharedFile();
         List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(handler.get調査票イメージ(), 存在するファイル);
         List<RString> 存在する調査票概況ファイル = finder.get存在したイメージファイル(handler.get調査票概況ファイル(), 存在するファイル);
         List<RString> 存在する主治医意見書ファイル = finder.get存在したイメージファイル(handler.get主治医意見書イメージ(), 存在するファイル);
@@ -112,7 +112,7 @@ public class ImagePanel {
     private List<RString> createDownloadFileList(ImagePanelDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
         ImagePanelHandler handler = new ImagePanelHandler();
-        List<RString> 存在するファイル = existFileList(finder.getSharedFile(), ro_sfed);
+        List<RString> 存在するファイル = finder.getSharedFile();
         List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(handler.get調査票イメージ(), 存在するファイル);
         List<RString> 存在する調査票概況ファイル = finder.get存在したイメージファイル(handler.get調査票概況ファイル(), 存在するファイル);
         List<RString> 存在する主治医意見書ファイル = finder.get存在したイメージファイル(handler.get主治医意見書イメージ(), 存在するファイル);

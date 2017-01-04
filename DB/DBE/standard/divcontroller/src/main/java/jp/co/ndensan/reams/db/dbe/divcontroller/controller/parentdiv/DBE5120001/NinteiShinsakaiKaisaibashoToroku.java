@@ -107,9 +107,6 @@ public class NinteiShinsakaiKaisaibashoToroku {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
             return ResponseData.of(div).respond();
         }
-        getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
-        div.getBtnTsuika().setDisabled(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 

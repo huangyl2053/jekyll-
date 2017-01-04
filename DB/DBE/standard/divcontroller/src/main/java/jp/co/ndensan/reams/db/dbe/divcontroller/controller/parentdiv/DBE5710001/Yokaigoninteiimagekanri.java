@@ -82,18 +82,22 @@ public class Yokaigoninteiimagekanri {
             }
         } else {
             div.getRadSonota().setSelectedIndex(1);
+            div.getBtnChosahyoGaikyo().setDisabled(true);
+            div.getBtnChosahyoTokuki().setDisabled(true);
             div.getBtnGaikyoTokuki().setDisabled(true);
             div.getBtnIkenshoTeikeigai().setDisabled(true);
             div.getBtnIkenshoTeikei().setDisabled(true);
             div.getBtnSonota().setDisabled(true);
-        }
-        if (イメージ管理情報.getイメージ共有ファイルID() == null) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageOutput"), true);
-            if ((イメージ管理情報.get認定審査会完了年月日() == null || イメージ管理情報.get認定審査会完了年月日().isEmpty())
-                    && (イメージ管理情報.getセンター送信年月日() == null || イメージ管理情報.getセンター送信年月日().isEmpty())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageDelete"), true);
-            }
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageDelete"), true);
         }
+//        if (イメージ管理情報.getイメージ共有ファイルID() == null) {
+//            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageOutput"), true);
+//            if ((イメージ管理情報.get認定審査会完了年月日() == null || イメージ管理情報.get認定審査会完了年月日().isEmpty())
+//                    && (イメージ管理情報.getセンター送信年月日() == null || イメージ管理情報.getセンター送信年月日().isEmpty())) {
+//                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageDelete"), true);
+//            }
+//        }
         return ResponseData.of(div).respond();
     }
 

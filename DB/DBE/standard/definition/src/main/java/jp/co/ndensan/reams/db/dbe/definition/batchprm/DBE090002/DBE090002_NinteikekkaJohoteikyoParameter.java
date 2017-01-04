@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090002;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -98,10 +99,12 @@ public class DBE090002_NinteikekkaJohoteikyoParameter extends BatchParameterBase
     /**
      * 要介護認定情報提供作成プロセスパラメータークラス作成
      *
+     * @param 特記事項判定日 特記事項判定日
      * @return 要介護認定情報提供作成プロセスパラメータークラス
      */
-    public YokaigoBatchProcessParamter toYokaigoBatchProcessParamter() {
-        return new YokaigoBatchProcessParamter(shinseishoKanriNo, chkNinteiChosahyo, chkTokkiJiko, chkShujiiIkensho, chkSonotaShiryo,
-                chkIchijiHanteiKekka, radNinteiChosaMasking, radTokkiJikoMasking, radShujii, radSohotaShiryoMasking, radIchijiHanteiMasking);
+    public YokaigoBatchProcessParamter toYokaigoBatchProcessParamter(FlexibleDate 特記事項判定日) {
+        return new YokaigoBatchProcessParamter(shinseishoKanriNo, chkNinteiChosahyo, chkTokkiJiko,
+                chkShujiiIkensho, chkSonotaShiryo, chkIchijiHanteiKekka, radNinteiChosaMasking,
+                radTokkiJikoMasking, radShujii, radSohotaShiryoMasking, radIchijiHanteiMasking, 特記事項判定日);
     }
 }
