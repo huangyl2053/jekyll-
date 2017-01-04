@@ -123,6 +123,7 @@ public class ShijiiIkenshoIraiHenkoProcess
         if (index_tmp == 0) {
             ShijiiIkenshoIraiHenko entity = new ShijiiIkenshoIraiHenko();
             entity.set氏名(new RString("該当データがありません"));
+            entity.set変更回数(RString.EMPTY);
             ShijiiIkenshoIraiHenkoReport report = new ShijiiIkenshoIraiHenkoReport(entity, -1);
             report.writeBy(reportSourceWriter);
         }

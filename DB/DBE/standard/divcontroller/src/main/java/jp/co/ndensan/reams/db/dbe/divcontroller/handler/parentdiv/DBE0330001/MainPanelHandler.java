@@ -43,6 +43,7 @@ public class MainPanelHandler {
      * @param businessList 要介護認定結果通知情報ビジネスクラスですリスト。
      */
     public void edit主治医選択一覧情報(List<YouKaiGoNinTeiKekTesuChi> businessList) {
+        int dispMax = div.getTxtDispMax().getValue().intValue();
         List<dgDoctorSelection_Row> rowList = new ArrayList();
         for (YouKaiGoNinTeiKekTesuChi youKaiGoNinTeiKekTesuChi : businessList) {
             dgDoctorSelection_Row row = new dgDoctorSelection_Row(
@@ -57,6 +58,9 @@ public class MainPanelHandler {
                     youKaiGoNinTeiKekTesuChi.get申請書管理番号(),
                     youKaiGoNinTeiKekTesuChi.get市町村コード());
             rowList.add(row);
+            if (rowList.size() >= dispMax) {
+                break;
+            }
         }
         div.getDoctorSelectionPanel().getDgDoctorSelection().setDataSource(rowList);
     }
