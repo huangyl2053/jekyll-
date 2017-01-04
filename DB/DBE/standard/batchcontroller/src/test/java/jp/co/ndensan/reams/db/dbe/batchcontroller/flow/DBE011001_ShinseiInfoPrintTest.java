@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE011001.DBE011001_ShinseiInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core._ControlData;
@@ -67,6 +68,10 @@ public class DBE011001_ShinseiInfoPrintTest extends DbeTestBase {
         parameter.setShinseishasakuseijyoukenuser(false);
         parameter.setShinseishashorikaFrom(処理日開始);
         parameter.setShinseishashorikaTo(処理日終了);
+        parameter.setMonitorshorikaFrom(処理日開始);
+        parameter.setMonitorshorikaTo(処理日終了);
+        parameter.setShichosonCode(LasdecCode.EMPTY);
+        parameter.setShichosonName(new RString("市町村名"));
 
         return parameter;
     }

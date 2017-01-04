@@ -124,6 +124,7 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
         RString 帳票名 = ReportIdDBE.DBE013001.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
+        RString 作成条件 = new RString("作成条件：");
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
 
@@ -133,9 +134,9 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
             出力条件.add(get保険者(processParameter.get市町村名()));
         }
         if (未依頼.equals(processParameter.get主治医意見書依頼未処理者一覧表作成条件())) {
-            出力条件.add(new RString("未依頼分全件出力"));
+            出力条件.add(作成条件.concat(new RString("未依頼分全件出力")));
         } else if (申請日範囲指定.equals(processParameter.get主治医意見書依頼未処理者一覧表作成条件())) {
-            出力条件.add(new RString("申請日の範囲を指定"));
+            出力条件.add(作成条件.concat(new RString("申請日の範囲を指定")));
             if (processParameter.get主治医意見書依頼未処理者一覧表申請日From() == null && processParameter.get主治医意見書依頼未処理者一覧表申請日To() == null) {
                 出力条件.add(new RString("指定なし"));
             } else {

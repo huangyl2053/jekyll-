@@ -28,7 +28,7 @@ public class ShijiiIkenshoIraiHenko {
     private RString 性別;
     private FlexibleDate 認定申請年月日;
     private RString 認定申請区分申請時コード;
-    private int 変更回数;
+    private RString 変更回数;
     private RString 変更前医療機関;
     private RString 変更前主治医;
     private RString 変更後医療機関;

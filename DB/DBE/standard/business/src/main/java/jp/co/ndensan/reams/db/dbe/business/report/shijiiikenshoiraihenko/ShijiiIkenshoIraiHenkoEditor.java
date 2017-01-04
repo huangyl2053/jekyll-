@@ -66,7 +66,7 @@ public class ShijiiIkenshoIraiHenkoEditor implements IShijiiIkenshoIraiHenkoEdit
         source.listIkenshohenko_7 = set性別(item.get性別());
         source.listIkenshohenko_8 = dateFormat(item.get認定申請年月日());
         source.listIkenshohenko_9 = set申請区分(item.get認定申請区分申請時コード());
-        source.listIkenshohenko_10 = new RString(item.get変更回数());
+        source.listIkenshohenko_10 = item.get変更回数();
         source.listIkenshohenko_11 = item.get変更前医療機関();
         source.listIkenshohenko_12 = item.get変更前主治医();
         source.listIkenshohenko_13 = item.get変更後医療機関();
