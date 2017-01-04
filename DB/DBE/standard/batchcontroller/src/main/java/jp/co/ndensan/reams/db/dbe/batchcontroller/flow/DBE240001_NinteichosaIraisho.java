@@ -5,14 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosahyoGaikyochosa_221011Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosahyoKihonchosaProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosahyoSaiCheckhyoReportProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosahyoTokkijiko_221022Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.ChosairairirekiIchiran_DBE220004Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.DbT5201UpdateProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.GaikyoTokki;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.GaikyochosaProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.IchiranhyoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.IraishoReportProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.NinteiChosaDesignKatamen;
@@ -31,10 +27,6 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.NinteiChosaTokk
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.NinteiChosaTokkiJikoKomokuNashiTenyuryoku;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.NinteiChosaTokkiJikoOCRKatamen;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.NinteiChosaTokkiJikoOCRRyomen;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.SaiChekkuhyo_292001Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.SaiChekkuhyo_292002Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.SaiChekkuhyo_292003Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001.SaiChekkuhyo_292004Process;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.DBE220010_IraishoIkkatuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -60,15 +52,7 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     private static final String ICHIRANHYOREPORT_PROCESS = "ichiranhyoReport_Process";
     private static final String DBT5201UPDATEPROCESS = "DbT5201UpdateProcess";
     private static final String CHOSAIRAISHOREPORT_PROCESS = "chosaIraishoReport_Process";
-    private static final String CHOSAHYOKIHONCHOSA = "chosahyoKihonchosa";//TODO　使用しないのでクラスごと削除予定
-    private static final String CHOSAHYOTOKKIJIKO22 = "chosahyoTokkijiko22";//TODO　使用しないのでクラスごと削除予定
-    private static final String CHOSAHYOGAIKYOCHOSA11 = "chosahyoGaikyochosa11";//TODO　使用しないのでクラスごと削除予定
-    private static final String SAICHEKKUHYO1 = "SaiChekkuhyo1";//TODO　使用しないのでクラスごと削除予定
-    private static final String SAICHEKKUHYO2 = "SaiChekkuhyo2";//TODO　使用しないのでクラスごと削除予定
-    private static final String SAICHEKKUHYO3 = "SaiChekkuhyo3";//TODO　使用しないのでクラスごと削除予定
-    private static final String SAICHEKKUHYO4 = "SaiChekkuhyo4";//TODO　使用しないのでクラスごと削除予定
     private static final String CHOSAHYOSAICHECKHYO = "chosahyoSaiCheckhyo";
-    private static final String GAIKYOCHOSA = "GaikyoChosa";//TODO　使用しないのでクラスごと削除予定
     private static final String CHOSAIRAIRIREKIICHIRAN = "ChosairairirekiIchiran";
     private static final String 認定調査票_デザイン用紙_片面 = "NinteiChosaDesignKatamen";
     private static final String 認定調査票_デザイン用紙_両面 = "NinteiChosaDesignRyomen";
@@ -417,50 +401,6 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     }
 
     /**
-     * 要介護認定調査票（基本調査）のDBE221012ReportProcessです。
-     *
-     * @return ChosahyoKihonchosaProcess
-     */
-    @Step(CHOSAHYOKIHONCHOSA)
-    protected IBatchFlowCommand chosahyoKihonchosaProcess() {
-        return loopBatch(ChosahyoKihonchosaProcess.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
-     * 要介護認定調査票（特記事項）のDBE221022ReportProcessです。
-     *
-     * @return ChosahyoTokkijiko_221022Process
-     */
-    @Step(CHOSAHYOTOKKIJIKO22)
-    protected IBatchFlowCommand chosahyoTokkijiko22Process() {
-        return loopBatch(ChosahyoTokkijiko_221022Process.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
-     * 要介護認定調査票（概況調査）のDBE221011ReportProcessです。
-     *
-     * @return ChosahyoGaikyochosa_221011Process
-     */
-    @Step(CHOSAHYOGAIKYOCHOSA11)
-    protected IBatchFlowCommand chosahyoGaikyochosa11Process() {
-        return loopBatch(ChosahyoGaikyochosa_221011Process.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
-     * 認定調査票(概況特記)のDBE221051ReportProcessです。
-     *
-     * @return GaikyochosaProcess
-     */
-    @Step(GAIKYOCHOSA)
-    protected IBatchFlowCommand callGaikyochosaProcess() {
-        return loopBatch(GaikyochosaProcess.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
      * 前回認定調査結果との比較表のDBE293001ReportProcessです。
      *
      * @return ChosahyoSaiCheckhyoReportProcess
@@ -468,50 +408,6 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
     @Step(CHOSAHYOSAICHECKHYO)
     protected IBatchFlowCommand chosahyoSaiCheckhyoReportProcess() {
         return loopBatch(ChosahyoSaiCheckhyoReportProcess.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
-     * 認定調査票差異チェック票のDBE292001ReportProcessです。
-     *
-     * @return SaiChekkuhyo_292001Process
-     */
-    @Step(SAICHEKKUHYO1)
-    protected IBatchFlowCommand saiChekkuhyoProcess1() {
-        return loopBatch(SaiChekkuhyo_292001Process.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
-     * 認定調査票差異チェック票のDBE292002ReportProcessです。
-     *
-     * @return SaiChekkuhyo_292002Process
-     */
-    @Step(SAICHEKKUHYO2)
-    protected IBatchFlowCommand saiChekkuhyoProcess2() {
-        return loopBatch(SaiChekkuhyo_292002Process.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
-     * 認定調査票差異チェック票のDBE292002ReportProcessです。
-     *
-     * @return SaiChekkuhyo_292003Process
-     */
-    @Step(SAICHEKKUHYO3)
-    protected IBatchFlowCommand saiChekkuhyoProcess3() {
-        return loopBatch(SaiChekkuhyo_292003Process.class)
-                .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
-    }
-
-    /**
-     * 認定調査票差異チェック票のDBE292004ReportProcessです。
-     *
-     * @return SaiChekkuhyo_292004Process
-     */
-    @Step(SAICHEKKUHYO4)
-    protected IBatchFlowCommand saiChekkuhyoProcess4() {
-        return loopBatch(SaiChekkuhyo_292004Process.class)
                 .arguments(getParameter().toHomonChosaIraishoProcessParamter()).define();
     }
 
