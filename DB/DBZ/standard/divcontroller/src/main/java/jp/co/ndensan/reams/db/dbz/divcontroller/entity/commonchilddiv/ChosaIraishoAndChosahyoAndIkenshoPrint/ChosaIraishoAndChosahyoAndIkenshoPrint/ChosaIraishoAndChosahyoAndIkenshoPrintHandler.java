@@ -1507,7 +1507,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 RString customerBarCode = RString.EMPTY;
-                if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
+                if (!RString.isNullOrEmpty(business.get医療機関郵便番号()) && !RString.isNullOrEmpty(business.get医療機関住所())) {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
                 }
                 Map<Integer, RString> 通知文
@@ -1522,7 +1522,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
-                        business.get医療機関郵便番号(),
+                        getEditedYubinNo(business.get医療機関郵便番号()),
                         business.get医療機関住所(),
                         business.get被保険者氏名(),
                         get名称付与(),
@@ -1605,7 +1605,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setTsuchibun2(通知文.get(数字_2));
             item.setYubinNo1(getEditedYubinNo(row.getIryoKikanYubinNo()));
             item.setJushoText(row.getIryoukikanShozaichi());
-            item.setKikanNameText(row.getShujiiIryokikanCode());
+            item.setKikanNameText(row.getShujiiIryoKikanMeisho());
             item.setShimeiText(row.getShujiiShimei());
             item.setMeishoFuyo(ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.介護保険指定医依頼兼主治医意見書提出依頼書_宛先敬称,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称());
