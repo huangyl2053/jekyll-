@@ -27,7 +27,7 @@ public class AtenaInfoTorokuDiv extends Panel {
     @JsonProperty("Seinengabi")
     private TextBoxDate Seinengabi;
     @JsonProperty("Nenrei")
-    private TextBoxNum Nenrei;
+    private TextBox Nenrei;
     @JsonProperty("Seibetsu")
     private TextBox Seibetsu;
     @JsonProperty("YubinNo")
@@ -84,7 +84,7 @@ public class AtenaInfoTorokuDiv extends Panel {
      * @return Nenrei
      */
     @JsonProperty("Nenrei")
-    public TextBoxNum getNenrei() {
+    public TextBox getNenrei() {
         return Nenrei;
     }
 
@@ -93,7 +93,7 @@ public class AtenaInfoTorokuDiv extends Panel {
      * @param Nenrei Nenrei
      */
     @JsonProperty("Nenrei")
-    public void setNenrei(TextBoxNum Nenrei) {
+    public void setNenrei(TextBox Nenrei) {
         this.Nenrei = Nenrei;
     }
 

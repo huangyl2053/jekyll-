@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  */
 public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohokenRirekiCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -193,6 +193,16 @@ public class IryohokenRirekiCommonChildDivDiv extends Panel implements IIryohoke
     @JsonIgnore
     public void  setBtnCancel(Button btnCancel) {
         this.getPlIryohokenRireki().setBtnCancel(btnCancel);
+    }
+
+    @JsonIgnore
+    public Button getBtnModoru() {
+        return this.getPlIryohokenRireki().getBtnModoru();
+    }
+
+    @JsonIgnore
+    public void  setBtnModoru(Button btnModoru) {
+        this.getPlIryohokenRireki().setBtnModoru(btnModoru);
     }
 
     // </editor-fold>

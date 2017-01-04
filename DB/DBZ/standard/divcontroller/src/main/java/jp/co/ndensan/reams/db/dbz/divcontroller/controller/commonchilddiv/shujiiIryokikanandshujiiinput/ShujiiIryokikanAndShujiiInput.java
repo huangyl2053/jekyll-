@@ -5,15 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.shujiiIryokikanandshujiiinput;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputResult;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputValidationHandler;
+import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -31,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShujiiIryokikanAndShujiiInput {
 
     private final ShujiiIryokikanAndShujiiInputFinder servie;
+    private final ShujiiIryokikanAndShujiiGuideFinder finder;
 
     /**
      * コンストラクタです。
@@ -38,6 +43,7 @@ public class ShujiiIryokikanAndShujiiInput {
      */
     public ShujiiIryokikanAndShujiiInput() {
         this.servie = ShujiiIryokikanAndShujiiInputFinder.createInstance();
+        this.finder = ShujiiIryokikanAndShujiiGuideFinder.createInstance();
     }
 
     /**
@@ -47,9 +53,27 @@ public class ShujiiIryokikanAndShujiiInput {
      * @return ResponseData<ShujiiIryokikanAndShujiiInputDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onBlur_txtIryoKikanCode(ShujiiIryokikanAndShujiiInputDiv div) {
-        RString 主治医医療機関名称 = servie.getIryoKikanMeisho(new LasdecCode(div.getHdnShichosonCode()),
-                div.getTxtIryoKikanCode().getValue());
-        createHandler(div).setIryoKikanName(主治医医療機関名称);
+//        RString 主治医医療機関名称 = servie.getIryoKikanMeisho(new LasdecCode(div.getHdnShichosonCode()),
+//                div.getTxtIryoKikanCode().getValue());
+        
+        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関情報(
+                ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
+                        div.getHdnShichosonCode(),
+                        true,
+                        div.getTxtIryoKikanCode().getValue(),
+                        RString.EMPTY,
+                        true,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        true,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        1)).records();
+        if (!list.isEmpty()) {
+            createHandler(div).setIryoKikanName(list.get(0).get主治医医療機関名称());
+        }
         ValidationMessageControlPairs validationResult = createValidationHandler(div).validate医療機関コード();
         if (validationResult.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationResult).respond();
@@ -67,7 +91,26 @@ public class ShujiiIryokikanAndShujiiInput {
         RString 主治医氏名 = servie.getShujiiName(new LasdecCode(div.getHdnShichosonCode()),
                 div.getTxtIryoKikanCode().getValue(),
                 div.getTxtShujiiCode().getValue());
-        createHandler(div).setShujiiName(主治医氏名);
+        
+        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
+                ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
+                        div.getHdnShichosonCode(),
+                        true,
+                        div.getTxtIryoKikanCode().getValue(),
+                        RString.EMPTY,
+                        true,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        div.getTxtShujiiCode().getValue(),
+                        RString.EMPTY,
+                        true,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        1)).records();
+        
+        if (!list.isEmpty()) {
+            createHandler(div).setShujiiName(list.get(0).get主治医氏名());
+        }
         ValidationMessageControlPairs validationResult = createValidationHandler(div).validate主治医コード();
         if (validationResult.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationResult).respond();

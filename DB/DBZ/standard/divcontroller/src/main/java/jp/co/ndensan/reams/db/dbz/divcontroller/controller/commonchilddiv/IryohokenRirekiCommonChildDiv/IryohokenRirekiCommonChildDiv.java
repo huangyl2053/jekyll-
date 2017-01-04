@@ -159,6 +159,15 @@ public class IryohokenRirekiCommonChildDiv {
 
         return ResponseData.of(requestDiv).respond();
     }
+    /**
+     * 戻るボタンを押下の処理に実行されます。<br/>
+     *
+     * @param requestDiv IryohokenRirekiCommonChildDivDiv
+     * @return 医療保険情報Divを持つResponseData
+     */
+    public ResponseData<IryohokenRirekiCommonChildDivDiv> onClick_btnModoru(IryohokenRirekiCommonChildDivDiv requestDiv) {
+        return ResponseData.of(requestDiv).dialogOKClose();
+    }
 
     private void ifelse(IryohokenRirekiCommonChildDivDiv requestDiv) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);

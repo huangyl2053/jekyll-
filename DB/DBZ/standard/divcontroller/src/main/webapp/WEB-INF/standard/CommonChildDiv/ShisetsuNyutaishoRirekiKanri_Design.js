@@ -39,6 +39,10 @@ var DBZ;
             Events.onClick_btnShisetsuNyutaishoTorikeshi = function () {
                 return "onClick_btnShisetsuNyutaishoTorikeshi";
             };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
             return Events;
         })();
         ShisetsuNyutaishoRirekiKanri.Events = Events;
@@ -109,6 +113,10 @@ var DBZ;
 
             Controls.prototype.btnShisetsuNyutaishoTorikeshi = function () {
                 return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoTorikeshi"));
+            };
+
+            Controls.prototype.施設入退所履歴 = function () {
+                return new UZA.Button(this.convFiledName("施設入退所履歴"));
             };
             return Controls;
         })();

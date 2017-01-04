@@ -32,6 +32,10 @@ module DBZ {
                 return "onClick_btnCancel";
             }
 
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
+
         }
 
         export class Controls {
@@ -103,6 +107,10 @@ module DBZ {
 
             public btnCancel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            }
+
+            public btnModoru(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnModoru"));
             }
 
         }

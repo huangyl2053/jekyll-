@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.dbt7202kaigoninteihokaiseikanri.
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteiinput.NinteiInputFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -125,6 +126,17 @@ public class NinteiInputValidationHandler {
         }
         return validationMessage;
     }
+    
+    /**
+     * 開始終了日の前後順checkを行う(親画面check用)。
+     *
+     * @return ValidationMessageControlPairs(バリデーション結果)
+     */
+    public ValidationMessageControlPairs 要介護状態区分コード変換不可() {
+        ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
+        validationMessage.add(new ValidationMessageControlPair(NinteiInputCheckMessages.validation変換不可, div.getTxtYokaigodoCode()));
+        return validationMessage;
+    }
 
     private static enum NinteiInputCheckMessages implements IValidationMessage {
 
@@ -134,7 +146,8 @@ public class NinteiInputValidationHandler {
         validation開始日と法施行の前後順(UrWarningMessages.日付の前後関係逆転以降, "法施行日", "有効開始日"),
         validation不正な有効開始日(UrErrorMessages.不正, "有効開始日"),
         validation不正な有効終了日(UrErrorMessages.不正, "有効終了日"),
-        validation不正な認定年月日(UrErrorMessages.不正, "認定年月日");
+        validation不正な認定年月日(UrErrorMessages.不正, "認定年月日"),
+        validation変換不可(UrErrorMessages.入力値が不正_追加メッセージあり,"要介護状態区分コード");
         private final Message message;
 
         private NinteiInputCheckMessages(IMessageGettable message, String... replacements) {

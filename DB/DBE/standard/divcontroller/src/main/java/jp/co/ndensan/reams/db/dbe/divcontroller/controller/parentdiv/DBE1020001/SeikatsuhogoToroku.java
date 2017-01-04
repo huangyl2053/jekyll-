@@ -163,6 +163,29 @@ public class SeikatsuhogoToroku {
         div.getTxtHihokenshaNo().setValue(被保険者番号);
         return ResponseData.of(div).respond();
     }
+    /**
+     * クリアする　ボタン、入力内容をEmpty設定
+     *
+     * @param div みなし2号登録Div
+     * @return ResponseData<SeikatsuhogoTorokuDiv>
+     */
+    public ResponseData<SeikatsuhogoTorokuDiv> onClick_btnClear(SeikatsuhogoTorokuDiv div) {
+        div.getTxtHihokenshaNo().clearValue();
+        div.getTxtBirthYMD().clearValue();
+        div.getTxtGyoseiku().clearValue();
+        div.getTxtKanaShimei().clearValue();
+        div.getTxtKojinNo().clearValue();
+        div.getTxtSetaiCode().clearValue();
+        div.getTxtShikibetsuCode().clearValue();
+        div.getTxtShimei().clearValue();
+        div.getTxtTelNo().clearDomain();
+        div.getTxtYubinNo().clearValue();
+        div.getCcdZenkokuJushoInput().clear();
+        div.getRadSeibetsu().clearSelectedItem();
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getDdlShisho().setSelectedIndex(0);
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 申請情報入力へボタン押下の場合、審査依頼受付／みなし２号審査受付画面へ遷移する。

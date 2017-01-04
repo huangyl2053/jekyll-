@@ -27,6 +27,10 @@ var DBZ;
             Events.onClick_btnCancel = function () {
                 return "onClick_btnCancel";
             };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
             return Events;
         })();
         IryohokenRirekiCommonChildDiv.Events = Events;
@@ -97,6 +101,10 @@ var DBZ;
 
             Controls.prototype.btnCancel = function () {
                 return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
             };
             return Controls;
         })();

@@ -8,6 +8,10 @@ var DBZ;
                 return "onChange_radNinteiKubun";
             };
 
+            Events.onBlur_yokaigodo = function () {
+                return "onBlur_yokaigodo";
+            };
+
             Events.onClick_btnYokaigodoGuide = function () {
                 return "onClick_btnYokaigodoGuide";
             };

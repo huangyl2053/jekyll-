@@ -45,6 +45,10 @@ module DBZ {
                 return "onClick_btnShisetsuNyutaishoTorikeshi";
             }
 
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
+
         }
 
         export class Controls {
@@ -116,6 +120,10 @@ module DBZ {
 
             public btnShisetsuNyutaishoTorikeshi(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoTorikeshi"));
+            }
+
+            public 施設入退所履歴(): UZA.Button {
+                return new UZA.Button(this.convFiledName("施設入退所履歴"));
             }
 
         }

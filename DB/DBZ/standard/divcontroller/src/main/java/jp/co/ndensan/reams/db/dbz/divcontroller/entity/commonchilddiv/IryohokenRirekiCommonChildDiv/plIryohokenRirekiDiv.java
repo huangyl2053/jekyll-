@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  *
  */
 public class plIryohokenRirekiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,6 +32,8 @@ public class plIryohokenRirekiDiv extends Panel {
     private Button btnIryohokenKakute;
     @JsonProperty("btnCancel")
     private Button btnCancel;
+    @JsonProperty("btnModoru")
+    private Button btnModoru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -127,6 +129,24 @@ public class plIryohokenRirekiDiv extends Panel {
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel = btnCancel;
+    }
+
+    /*
+     * getbtnModoru
+     * @return btnModoru
+     */
+    @JsonProperty("btnModoru")
+    public Button getBtnModoru() {
+        return btnModoru;
+    }
+
+    /*
+     * setbtnModoru
+     * @param btnModoru btnModoru
+     */
+    @JsonProperty("btnModoru")
+    public void setBtnModoru(Button btnModoru) {
+        this.btnModoru = btnModoru;
     }
 
     // </editor-fold>

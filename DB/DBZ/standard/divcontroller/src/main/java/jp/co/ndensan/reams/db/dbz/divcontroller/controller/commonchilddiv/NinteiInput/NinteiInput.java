@@ -5,7 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.NinteiInput;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigodoGuide.YokaigodoGuide.dgYokaigodoGuide_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -165,6 +172,42 @@ public class NinteiInput {
      */
     public ResponseData<NinteiInputDiv> onClick_syuryoLostFocus(NinteiInputDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).終了日check();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+    /**
+     * 要介護度がlostFocusです。
+     *
+     * @param div NinteiInputDiv
+     * @return NinteiInputDiv
+     */
+    public ResponseData<NinteiInputDiv> onBlur_yokaigodo(NinteiInputDiv div) {
+         if (RString.isNullOrEmpty(div.getHdnNinteiYmd()) || !(new FlexibleDate(div.getHdnNinteiYmd()).isValid())) {
+            div.setHdnNinteiYmd(new RString(FlexibleDate.getNowDate().toString()));
+        }
+        FlexibleYearMonth kijunbi = new FlexibleDate(div.getHdnNinteiYmd()).getYearMonth();
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        try {
+            if (new FlexibleYearMonth("200004").isBefore(kijunbi)
+                && kijunbi.isBefore(new FlexibleYearMonth("200203"))) {
+                div.getTxtYokaigodoName().setValue(YokaigoJotaiKubun99.toValue(div.getTxtYokaigodoCode().getValue()).get名称());
+            }
+            if (new FlexibleYearMonth("200204").isBefore(kijunbi)
+                    && kijunbi.isBefore(new FlexibleYearMonth("200603"))) {
+                div.getTxtYokaigodoName().setValue(YokaigoJotaiKubun02.toValue(div.getTxtYokaigodoCode().getValue()).get名称());
+            }
+            if (new FlexibleYearMonth("200604").isBefore(kijunbi)
+                    && kijunbi.isBefore(new FlexibleYearMonth("200903"))) {
+                div.getTxtYokaigodoName().setValue(YokaigoJotaiKubun06.toValue(div.getTxtYokaigodoCode().getValue()).get名称());
+            }
+            if (new FlexibleYearMonth("200904").isBefore(kijunbi)) {
+                div.getTxtYokaigodoName().setValue(YokaigoJotaiKubun09.toValue(div.getTxtYokaigodoCode().getValue()).get名称());
+            }
+        } catch (IllegalArgumentException e) {
+            validPairs = getValidationHandler(div).要介護状態区分コード変換不可();
+        }
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

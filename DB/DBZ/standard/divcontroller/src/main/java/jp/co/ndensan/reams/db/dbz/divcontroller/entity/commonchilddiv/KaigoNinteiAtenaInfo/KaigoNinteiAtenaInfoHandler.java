@@ -41,6 +41,7 @@ public class KaigoNinteiAtenaInfoHandler {
     private final KaigoNinteiAtenaInfoDiv div;
     private static final RString JUTONAI_IMAGE_PATH = new RString("/uz/uza/image/UZ_Person_Jutonai.png");
     private static final RString JUTOGAI_IMAGE_PATH = new RString("/uz/uza/image/UZ_Person_Jutogai.png");
+    private static final RString 歳 = new RString("歳");
 
     /**
      * コンストラクタです。
@@ -131,7 +132,7 @@ public class KaigoNinteiAtenaInfoHandler {
     public void set介護認定宛名情報(KaigoNinteiAtenaInfoBusiness business) {
         div.getTxtShimei().setValue(business.get氏名());
         div.getTxtBirthYMD().setValue(new RDate(business.get生年月日().toString()));
-        div.getTxtNenrei().setValue(business.get年齢());
+        div.getTxtNenrei().setValue(business.get年齢().concat(歳));
         div.getTxtSeibetsu().setValue(business.get性別());
         if (business.get性別().equals(new RString("1"))) {
             div.getTxtSeibetsu().setValue(new RString("男"));

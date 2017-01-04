@@ -94,6 +94,16 @@ public class ShisetsuNyutaishoRirekiKanri {
         getHandler(requestDiv).onClick_btnShisetsuNyutaishoTorikeshi();
         return ResponseData.of(requestDiv).respond();
     }
+    
+        /**
+     * 戻るボタンを押下の処理に実行されます。<br/>
+     *
+     * @param requestDiv IryohokenRirekiCommonChildDivDiv
+     * @return 医療保険情報Divを持つResponseData
+     */
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnModoru(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
+        return ResponseData.of(requestDiv).dialogOKClose();
+    }
 
     /**
      * 「確定する」ボタンを押下する場合、明細エリアの入力内容を一覧グリッドに反映させる。。

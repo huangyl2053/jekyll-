@@ -122,7 +122,7 @@ public class NinteiShinseiTorokuHandler {
         if (business.get生年月日() != null) {
             div.getAtenaInfoToroku().getSeinengabi().setValue(business.get生年月日());
             int 年齢 = FlexibleDate.getNowDate().getBetweenYears(business.get生年月日().toFlexibleDate());
-            div.getAtenaInfoToroku().getNenrei().setValue(Decimal.valueOf(年齢));
+            div.getAtenaInfoToroku().getNenrei().setValue(new RString(年齢).concat("歳"));
         }
         
         

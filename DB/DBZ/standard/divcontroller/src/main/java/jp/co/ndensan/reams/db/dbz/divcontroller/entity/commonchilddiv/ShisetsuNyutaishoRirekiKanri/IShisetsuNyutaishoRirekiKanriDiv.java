@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  *
  * @reamsid_L DBA-0360-030 linghuhang
  */
-public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBaseProperties {
+public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 
     /**
      * 表示モードを設定します。

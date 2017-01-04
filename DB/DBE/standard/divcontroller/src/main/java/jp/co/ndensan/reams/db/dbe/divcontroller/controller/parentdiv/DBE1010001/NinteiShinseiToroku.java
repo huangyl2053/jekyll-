@@ -55,7 +55,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Torisage
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoHokenshaManager;
@@ -101,6 +100,7 @@ public class NinteiShinseiToroku {
     private static final int ZERO_17 = 17;
     private static final int ZERO_5 = 5;
     private static final RString ZERO_6 = new RString("000000");
+    private static final RString 歳 = new RString("歳");
 
     /**
      * コンストラクタです。
@@ -711,10 +711,12 @@ public class NinteiShinseiToroku {
                 .getDdlShinseiKubunShinseiji().getSelectedKey()));
         shinseiJohoBuilder.set取下区分コード(new Code(TorisageKubunCode.認定申請有効.getコード()));
         shinseiJohoBuilder.set被保険者区分コード(HihokenshaKubunCode.生活保護.getコード());
-        
-        shinseiJohoBuilder.set生年月日(rDateTOFlexDate(div.getAtenaInfoToroku().getSeinengabi().getValue()));
+        Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
+        if (business != null) {
+            shinseiJohoBuilder.set生年月日(rDateTOFlexDate(business.get生年月日()));
+        }
         if (!RString.isNullOrEmpty(div.getAtenaInfoToroku().getNenrei().getText())) {
-            shinseiJohoBuilder.set年齢(div.getAtenaInfoToroku().getNenrei().getValue().intValue());
+            shinseiJohoBuilder.set年齢(div.getAtenaInfoToroku().getNenrei().getValue().replace(歳, RString.EMPTY).toInt());
         }
         if (!RString.isNullOrEmpty(div.getAtenaInfoToroku().getSeibetsu().getValue())) {
             shinseiJohoBuilder.set性別(new Code(Seibetsu.valueOf(div.getAtenaInfoToroku().getSeibetsu().getValue().toString()).getコード()));

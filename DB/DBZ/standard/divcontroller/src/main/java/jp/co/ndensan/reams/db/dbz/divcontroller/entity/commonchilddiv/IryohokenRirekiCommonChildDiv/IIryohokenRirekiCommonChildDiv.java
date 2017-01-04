@@ -7,12 +7,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.iryohokenkanyujokyo.I
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
 /*
  * このコードはツールによって生成されました。
  * @reamsid_L DBA-0230-010 hezhenzhen
  */
-public interface IIryohokenRirekiCommonChildDiv extends ICommonChildDivBaseProperties {
+public interface IIryohokenRirekiCommonChildDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 
     /**
      * 医療保険履歴の初期化処理します。

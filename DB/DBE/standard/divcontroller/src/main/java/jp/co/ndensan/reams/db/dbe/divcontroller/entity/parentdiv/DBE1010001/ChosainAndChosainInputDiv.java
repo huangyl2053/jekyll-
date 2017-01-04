@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitaku
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosainAndChosainInput のクラスファイル
- *
+ * ChosainAndChosainInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ChosainAndChosainInputDiv extends Panel {

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -170,6 +171,23 @@ public class RenkeiDataTorikomi {
      */
     public ResponseData<DBE192001_NnteiShinseiInfoUploadParameter> onClick_JikkouBtn(RenkeiDataTorikomiDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+    }
+    
+    /**
+     * 「実行する」ボタン表示制御。
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<RenkeiDataTorikomiDiv> onSelect_JikkouCheck(RenkeiDataTorikomiDiv div) {
+        if (div.getDgTorikomiTaisho().getSelectedItems().isEmpty() || div.getDgtorikomidataichiran().getSelectedItems().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnExcute"), true);
+            
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnExcute"), false);
+        }
+         
+        return ResponseData.of(div).respond();
     }
 
     /**

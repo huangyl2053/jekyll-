@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-17_21-01-54">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,6 +44,8 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     private DataGrid<dgShisetsuNyutaishoRireki_Row> dgShisetsuNyutaishoRireki;
     @JsonProperty("ShisetsuNyutaishoInput")
     private ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput;
+    @JsonProperty("施設入退所履歴")
+    private Button 施設入退所履歴;
     @JsonProperty("selectRow")
     private RString selectRow;
     @JsonProperty("inputMode")
@@ -113,6 +115,24 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("ShisetsuNyutaishoInput")
     public void setShisetsuNyutaishoInput(ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput) {
         this.ShisetsuNyutaishoInput = ShisetsuNyutaishoInput;
+    }
+
+    /*
+     * get施設入退所履歴
+     * @return 施設入退所履歴
+     */
+    @JsonProperty("施設入退所履歴")
+    public Button get施設入退所履歴() {
+        return 施設入退所履歴;
+    }
+
+    /*
+     * set施設入退所履歴
+     * @param 施設入退所履歴 施設入退所履歴
+     */
+    @JsonProperty("施設入退所履歴")
+    public void set施設入退所履歴(Button 施設入退所履歴) {
+        this.施設入退所履歴 = 施設入退所履歴;
     }
 
     /*
