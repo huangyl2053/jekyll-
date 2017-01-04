@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.HomonChosaIraishoBusiness;
@@ -26,10 +25,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- *認定調査差異チェック表_両面左の帳票出力処理クラスです。
+ * 認定調査差異チェック表_両面左の帳票出力処理クラスです。
  */
 public class NinteiChosaSaiCheckhyoRyomenLeft extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
@@ -54,7 +56,23 @@ public class NinteiChosaSaiCheckhyoRyomenLeft extends BatchProcessBase<HomonChos
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value())
+                .addBreak(new BreakerCatalog<SaiChekkuhyoReportSource>().new SimpleLayoutBreaker(
+
+                    SaiChekkuhyoReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                    public ReportLineRecord<SaiChekkuhyoReportSource> occuredBreak(ReportLineRecord<SaiChekkuhyoReportSource> currentRecord,
+                            ReportLineRecord<SaiChekkuhyoReportSource> nextRecord,
+                            ReportDynamicChart dynamicChart) {
+                        int layout = currentRecord.getSource().layout.index();
+                        currentRecord.setFormGroupIndex(layout);
+                        if (nextRecord != null && nextRecord.getSource() != null) {
+                            layout = nextRecord.getSource().layout.index();
+                            nextRecord.setFormGroupIndex(layout);
+                        }
+                        return currentRecord;
+                    }
+                }).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
