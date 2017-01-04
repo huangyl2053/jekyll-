@@ -975,4 +975,70 @@ public class NinteiShinseishaFinder {
     private NinteiShinseishaFinderHandler getHandler(NinteiShinseishaFinderDiv div) {
         return new NinteiShinseishaFinderHandler(div);
     }
+    
+    /**
+     * 入力された認定調査委託先からコード名称を取得します。
+     *
+     * @param div NinteiShinseishaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtNinteiChosaIinItakuSaki(NinteiShinseishaFinderDiv div) {      
+        getHandler(div).onBlur_txtNinteiChosaIinItakuSaki();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 入力された認定調査員氏名からコード名称を取得します。
+     *
+     * @param div NinteiShinseishaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtNinteiChosaInShimei(NinteiShinseishaFinderDiv div) {
+        getHandler(div).onBlur_txtNinteiChosaInShimei();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 入力された主治医医療機関からコード名称を取得します。
+     *
+     * @param div NinteiShinseishaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtShujiiIryokikan(NinteiShinseishaFinderDiv div) {
+        getHandler(div).onBlur_txtShujiiIryokikan();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 入力された主治医氏名からコード名称を取得します。
+     *
+     * @param div NinteiShinseishaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtShujiiShimei(NinteiShinseishaFinderDiv div) {
+        getHandler(div).onBlur_txtShujiiShimei();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 前回情報に入力された認定調査委託先からコード名称を取得します。
+     *
+     * @param div NinteiShinseishaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtZenkaiChosaItakusaki(NinteiShinseishaFinderDiv div) {
+        getHandler(div).onBlur_txtZenkaiChosaItakusaki();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 前回情報に入力された主治医医療機関からコード名称を取得します。
+     *
+     * @param div NinteiShinseishaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtZenkaiShujiiIryokikan(NinteiShinseishaFinderDiv div) {
+        getHandler(div).onBlur_txtZenkaiShujiiIryokikan();
+        return ResponseData.of(div).respond();
+    }
 }

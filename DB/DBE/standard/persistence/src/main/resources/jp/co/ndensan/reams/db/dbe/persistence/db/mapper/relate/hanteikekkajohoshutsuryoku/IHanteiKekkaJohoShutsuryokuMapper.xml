@@ -9,6 +9,8 @@
     <resultMap id="resultMap_getHanteiKekkaJohoShutsuryoku" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuRelateEntity" autoMapping="true">
         <result property="shinsakaiKaisaiNo"  column="shinsakaiKaisaiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiShinseiYMD"  column="ninteiShinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiKaisaiYMD"  column="shinsakaiKaisaiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaNo"  column="hihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaKana"  column="hihokenshaKana"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -23,6 +25,8 @@
         SELECT
         '第' || dbT5102."shinsakaiKaisaiNo" || '回' AS "shinsakaiKaisaiNo",
         dbT5511."shinsakaiKaisaiYMD",
+        dbT5101."shoKisaiHokenshaNo",
+        dbT7051."shichosonMeisho",
         dbT5101."ninteiShinseiYMD",
         dbT5101."hihokenshaNo",
         dbT5101."hihokenshaName",
@@ -63,6 +67,7 @@
             dbT5102."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiYMDTo}
         </if>
         ORDER BY
+        dbT5101."shoKisaiHokenshaNo",
         dbT5102."shinsakaiKaisaiNo",
         dbT5101."ninteiShinseiYMD",
         dbT5101."hihokenshaNo"
