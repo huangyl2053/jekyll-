@@ -41,16 +41,16 @@ public class NinteiChosainMasterCsvEntity {
     private final RString chosainShikaku;
     @CsvField(order = 120, name = "調査可能人数")
     private final RString chosaKanoNinzuPerMonth;
-    @CsvField(order = 130, name = "状況フラグ")
-    private final RString jokyoFlag;
-    @CsvField(order = 140, name = "郵便番号")
+    @CsvField(order = 130, name = "郵便番号")
     private final RString yubinNo;
-    @CsvField(order = 150, name = "住所")
+    @CsvField(order = 140, name = "住所")
     private final RString jusho;
-    @CsvField(order = 160, name = "電話番号")
+    @CsvField(order = 150, name = "電話番号")
     private final RString telNo;
-    @CsvField(order = 170, name = "ＦＡＸ番号")
+    @CsvField(order = 160, name = "ＦＡＸ番号")
     private final RString faxNo;
+    @CsvField(order = 170, name = "調査員の状況")
+    private final RString jokyoFlag;
     @CsvField(order = 180, name = "所属機関名称")
     private final RString shozokuKikanName;
 
