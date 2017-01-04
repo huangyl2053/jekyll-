@@ -82,6 +82,8 @@ public class Yokaigoninteiimagekanri {
             }
         } else {
             div.getRadSonota().setSelectedIndex(1);
+            div.getBtnChosahyoGaikyo().setDisabled(true);
+            div.getBtnChosahyoTokuki().setDisabled(true);
             div.getBtnGaikyoTokuki().setDisabled(true);
             div.getBtnIkenshoTeikeigai().setDisabled(true);
             div.getBtnIkenshoTeikei().setDisabled(true);
