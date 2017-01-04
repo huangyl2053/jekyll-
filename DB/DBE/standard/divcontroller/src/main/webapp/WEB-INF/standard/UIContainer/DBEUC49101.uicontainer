@@ -47,7 +47,7 @@
      "layoutName": "DBE0100001",
      "layoutTitle": "要介護認定申請検索",
      "eventName": "要介護認定進捗情報データ出力へ",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE4910001",

@@ -73,7 +73,7 @@ public class ShinchokuDataOutput {
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onClick_btnHihokensha(ShinchokuDataOutputDiv div) {
-
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号());
         return ResponseData.of(div).forwardWithEventName(DBE4910001TransitionEventName.被保険者検索).respond();
     }
 
@@ -149,9 +149,10 @@ public class ShinchokuDataOutput {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 市町村DDL変更時の動作
+     *
      * @param div
      * @return ResponseData
      */
@@ -159,9 +160,10 @@ public class ShinchokuDataOutput {
         getHandler(div).onChange_ddlSichoson();
         return ResponseData.of(div).setState(DBE4910001StateName.初期表示);
     }
-    
+
     /**
      * 抽出期間変更時の動作
+     *
      * @param div
      * @return ResponseData
      */
