@@ -533,8 +533,11 @@ public class ShujiiIkenshoSakuseiIrai {
         iraishoItem.setTitle(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         iraishoItem.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-//        iraishdfeeoItem.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), FlexibleDate.getNowDate()));
-//        iraishoItem.setBunshoNo(div.getBunshoBango().get文書番号());
+        if(!RString.isNullOrEmpty(div.getBunshoBango().get文書番号())){
+            iraishoItem.setBunshoNo(div.getBunshoBango().get文書番号());
+        }else{
+            iraishoItem.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), FlexibleDate.getNowDate()));
+        }
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), KamokuCode.EMPTY, 数字_1);
         iraishoItem.setTsuchibun1(通知文.get(数字_1));
         iraishoItem.setTsuchibun2(通知文.get(数字_2));
@@ -890,9 +893,11 @@ public class ShujiiIkenshoSakuseiIrai {
     private ShujiiIkenshoTeishutsuIraishoItem create介護保険指定医依頼兼主治医意見書提出意見書(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row) {
         RString hihokenshaNo = row.getHihokenshaNo().padRight(RString.HALF_SPACE, 数字_10);
         ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
-//        item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援,
-//                ReportIdDBE.DBE236001.getReportId(), FlexibleDate.getNowDate()));
-//        item.setBunshoNo(div.getBunshoBango().get文書番号());
+        if(!RString.isNullOrEmpty(div.getBunshoBango().get文書番号())){
+            item.setBunshoNo(div.getBunshoBango().get文書番号());
+        }else{
+            item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), FlexibleDate.getNowDate()));
+        }
         item.setTitle(ReportIdDBE.DBE236001.getReportName());
         item.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
