@@ -174,24 +174,24 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @param div YouKaiGoNinTeiKekTesuChiMainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnSaiKenSaku(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-        if (!ResponseHolder.isReRequest() && !hasChange(div)) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().clearValue();
-            div.getPrintPanel().getRadPrintCondition().setSelectedIndex(0);
-            return ResponseData.of(div).setState(DBE0330001StateName.照会);
-        }
-        if (ResponseHolder.getState().equals(DBE0330001StateName.主治医選択一覧.getName())) {
-            return ResponseData.of(div).setState(DBE0330001StateName.照会);
-        }
-        return ResponseData.of(div).respond();
-    }
+//    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnSaiKenSaku(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+//        if (!ResponseHolder.isReRequest() && !hasChange(div)) {
+//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+//                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
+//        }
+//        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode())
+//                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//            div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().clearValue();
+//            div.getPrintPanel().getRadPrintCondition().setSelectedIndex(0);
+//            return ResponseData.of(div).setState(DBE0330001StateName.照会);
+//        }
+//        if (ResponseHolder.getState().equals(DBE0330001StateName.主治医選択一覧.getName())) {
+//            return ResponseData.of(div).setState(DBE0330001StateName.照会);
+//        }
+//        return ResponseData.of(div).respond();
+//    }
 
     /**
      * 「結果通知を実行する」ボタンが押下場合、チェックを実行します。
