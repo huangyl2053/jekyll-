@@ -1,9 +1,9 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="./../hokenshalist/HokenshaList.ts" />
-// <reference path="./../saikinshorisha/SaikinShorisha.ts" />
-// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
+/// <reference path="./../saikinshorisha/SaikinShorisha.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -23,12 +23,8 @@ module DBZ {
                 return "onClick_NinteiChosa";
             }
 
-            public static onChange_txtCode(): string {
-                return "onChange_txtCode";
-            }
-
-            public static onBlur_txtCode(): string {
-                return "onBlur_txtCode";
+            public static onBlur_txtNinteiChosaIinItakuSaki(): string {
+                return "onBlur_txtNinteiChosaIinItakuSaki";
             }
 
             public static onOkClose_btnNinteiChosaItakusakiGuide(): string {
@@ -37,6 +33,10 @@ module DBZ {
 
             public static onClick_btnNinteiChosaItakusakiGuide(): string {
                 return "onClick_btnNinteiChosaItakusakiGuide";
+            }
+
+            public static onBlur_txtNinteiChosaInShimei(): string {
+                return "onBlur_txtNinteiChosaInShimei";
             }
 
             public static onOkClose_btnNinteiChosainGuide(): string {
@@ -51,12 +51,20 @@ module DBZ {
                 return "onClick_ShujiiJoho";
             }
 
+            public static onBlur_txtShujiiIryokikan(): string {
+                return "onBlur_txtShujiiIryokikan";
+            }
+
             public static onOkClose_btnShujiiIryokikanGuide(): string {
                 return "onOkClose_btnShujiiIryokikanGuide";
             }
 
             public static onClick_btnShujiiIryokikanGuide(): string {
                 return "onClick_btnShujiiIryokikanGuide";
+            }
+
+            public static onBlur_txtShujiiShimei(): string {
+                return "onBlur_txtShujiiShimei";
             }
 
             public static onOkClose_btnShujiiGuide(): string {
@@ -83,12 +91,20 @@ module DBZ {
                 return "onClick_ZenkaiJoho";
             }
 
+            public static onBlur_txtZenkaiChosaItakusaki(): string {
+                return "onBlur_txtZenkaiChosaItakusaki";
+            }
+
             public static onOkClose_btnZenkaiChosaItakusakiGuide(): string {
                 return "onOkClose_btnZenkaiChosaItakusakiGuide";
             }
 
             public static onClick_btnZenkaiChosaItakusakiGuide(): string {
                 return "onClick_btnZenkaiChosaItakusakiGuide";
+            }
+
+            public static onBlur_txtZenkaiShujiiIryokikan(): string {
+                return "onBlur_txtZenkaiShujiiIryokikan";
             }
 
             public static onOkClose_btnZenkaiShujiiIryokikanGuide(): string {
@@ -184,9 +200,9 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
-            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            //}
+            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            }
 
             public ddlShichosonCode(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
@@ -244,9 +260,9 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             }
 
-            //public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {
-            //    return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
-            //}
+            public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {
+                return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            }
 
             public ShosaiJoken(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ShosaiJoken"));
@@ -568,9 +584,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             }
 
-            //public ccdGeninShikkan(): URZ.CodeInput.ModeController {
-            //    return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
-            //}
+            public ccdGeninShikkan(): URZ.CodeInput.ModeController {
+                return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
+            }
 
             public txtShinseiKeikaNissu(): UZA.TextBoxNumRange {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));

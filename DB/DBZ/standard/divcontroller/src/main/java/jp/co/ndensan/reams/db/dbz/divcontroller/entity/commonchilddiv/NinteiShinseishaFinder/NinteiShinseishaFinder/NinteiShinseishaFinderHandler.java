@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -285,6 +286,78 @@ public class NinteiShinseishaFinderHandler {
         div.getKanryoJoho().setIsOpen(true);
     }
 
+    /**
+     * 入力された認定調査委託先からコード名称を取得します。
+     */
+    public void onBlur_txtNinteiChosaIinItakuSaki() {
+        Code code = div.getTxtNinteiChosaIinItakuSaki().getDomain();
+        if (code.isEmpty()) {
+            div.getTxtNinteiChosaItakusakiName().clearValue();
+            div.getTxtNinteiChosaInShimei().clearDomain();
+            div.getTxtNinteiChosainName().clearValue();
+            div.setHdnChosaItakusakiCode(RString.EMPTY);
+            div.setHdnChosaShichosonCode(RString.EMPTY);
+            div.setHdnChosainCode(RString.EMPTY);
+        }
+    }
+    
+    /**
+     * 入力された認定調査員氏名からコード名称を取得します。
+     */
+    public void onBlur_txtNinteiChosaInShimei() {
+        Code code = div.getTxtNinteiChosaInShimei().getDomain();
+        if (code.isEmpty()) {
+            div.getTxtNinteiChosainName().clearValue();
+            div.setHdnChosainCode(RString.EMPTY);
+        }
+    }
+    
+    /**
+     * 入力された主治医医療機関からコード名称を取得します。
+     */
+    public void onBlur_txtShujiiIryokikan() {
+        Code code = div.getTxtShujiiIryokikan().getDomain();
+        if (code.isEmpty()) {
+            div.getTxtShujiiIryokikanName().clearValue();
+            div.getTxtShujiiShimei().clearDomain();
+            div.getTxtShujiiName().clearValue();
+            div.setHdnShujiiIryokikanCode(RString.EMPTY);
+            div.setHdnShujiiShichosonCode(RString.EMPTY);
+            div.setHdnShujiiCode(RString.EMPTY);
+        }
+    }
+    
+    /**
+     * 入力された主治医氏名からコード名称を取得します。
+     */
+    public void onBlur_txtShujiiShimei() {
+        Code code = div.getTxtShujiiShimei().getDomain();
+        if (code.isEmpty()) {
+            div.getTxtShujiiName().clearValue();
+            div.setHdnShujiiCode(RString.EMPTY);
+        }
+    }
+    
+    /**
+     * 前回情報に入力された認定調査委託先からコード名称を取得します。
+     */
+    public void onBlur_txtZenkaiChosaItakusaki() {
+        Code code = div.getTxtZenkaiChosaItakusaki().getDomain();
+        if (code.isEmpty()) {
+            div.getTxtZenkaiNinteiChosaItakusakiName().clearValue();
+        }
+    }
+
+    /**
+     * 前回情報に入力された主治医医療機関からコード名称を取得します
+     */
+    public void onBlur_txtZenkaiShujiiIryokikan() {
+        Code code = div.getTxtZenkaiShujiiIryokikan().getDomain();
+        if (code.isEmpty()) {
+            div.getTxtZenkaiShujiiIryokikanName().clearValue();
+        }
+    }
+    
     private void initKihonJoho() {
         List<KeyValueDataSource> ddlHihokenshaKubun = new ArrayList<>();
         ddlHihokenshaKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
