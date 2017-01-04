@@ -596,7 +596,7 @@ public class HomonChosaIraishoBusiness {
     private RString get年(RString 生年月日) {
         RString 年 = RString.EMPTY;
         if (!RString.isNullOrEmpty(生年月日)) {
-            年 = new FlexibleYear(生年月日.substring(0, INT4)).wareki().eraType(EraType.KANJI)
+            年 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.ICHI_NEN).toDateString().substring(2, INT4);
         }
         return 年;
