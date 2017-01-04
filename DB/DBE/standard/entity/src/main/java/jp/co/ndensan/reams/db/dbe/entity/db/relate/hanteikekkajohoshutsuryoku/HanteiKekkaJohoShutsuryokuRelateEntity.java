@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,4 +27,7 @@ public class HanteiKekkaJohoShutsuryokuRelateEntity {
     private RString seinengappiYMD;
     private RString seibetsu;
     private RString nijiHanteiKekka;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private RString shichosonMeisho;
+
 }

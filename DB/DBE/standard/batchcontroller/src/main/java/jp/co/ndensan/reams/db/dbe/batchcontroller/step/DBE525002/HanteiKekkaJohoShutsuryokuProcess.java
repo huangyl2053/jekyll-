@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE525002;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranBodyItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran.KaigoKekkaTaishouIchiranReport;
@@ -27,10 +30,11 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 判定結果情報出力(保険者)_バッチフ処理クラスです
+ * 判定結果情報出力(保険者)_バッチ処理クラスです
  *
  * @reamsid_L DBE-0190-030 duanzhanli
  */
@@ -40,6 +44,8 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshutsuryoku."
             + "IHanteiKekkaJohoShutsuryokuMapper.get出力対象者明細一覧");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE525005.getReportId();
+    private static final RString 改ページ = new RString("shichosonName");
+    private List<RString> page_break_keys;
     private KaigoKekkaTaishouIchiranHeadItem headItem;
     private KaigoKekkaTaishouIchiranBodyItem bodyItem;
     private HanteiKekkaJohoShutsuryokuProcessParamter processPrm;
@@ -52,6 +58,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
     @Override
     protected void initialize() {
         mybatisPrm = processPrm.toHanteiKekkaJohoShutsuryokuMybitisParamter();
+        page_break_keys = Collections.unmodifiableList(Arrays.asList(改ページ));
     }
 
     @Override
@@ -61,7 +68,8 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<KekkatsuchiTaishoshaIchiranReportSource>().simplePageBreaker(page_break_keys)).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -70,7 +78,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
         bodyItem = setBodyItem(entity);
         gokai++;
         headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
-                DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援),
+                entity.getShichosonMeisho(),
                 processPrm.getNijiHanteiYMDFrom(),
                 processPrm.getNijiHanteiYMDTo(),
                 RDate.getNowDate().toDateString(),
