@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkNinteiChosah
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkShujiiIkenshoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkSonotaShiryoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko03Process;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko31Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ChkTokkiJiko31TextProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.KoroshoShikibetsuCodeProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.NinteichosaProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.UpdateDataProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090002.DBE090002_NinteikekkaJohoteikyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -49,71 +50,78 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     private static final String 認定調査票の作成52 = "chkNinteiChosahyoReport52";
     private static final String 特記事項の区分 = "ninteichosaReport";
     private static final String 特記事項の作成03 = "chkTokkiJikoReport03";
-    private static final String 特記事項の作成31 = "chkTokkiJikoReport31";
     private static final String 特記事項の作成31_TEXT = "chkTokkiJikoReport31_Text";
     private static final String 主治医意見書の作成 = "chkShujiiIkenshoReport";
     private static final String その他資料の作成 = "chkSonotaShiryoReport";
     private static final String 一次判定結果の作成 = "chkIchijiHanteiKekkaReport";
     private static final String 要介護認定申請情報の更新 = "updateData";
-    private static final String 認定調査票_選択された = "1";
-    private static final String 特記事項_選択された = "1";
-    private static final String 主治医意見書_選択された = "1";
-    private static final String その他資料_選択された = "1";
-    private static final String 一次判定結果_選択された = "1";
+    private static final RString 認定調査票_選択された = new RString("1");
+    private static final RString 特記事項_選択された = new RString("1");
+    private static final RString 主治医意見書_選択された = new RString("1");
+    private static final RString その他資料_選択された = new RString("1");
+    private static final RString 一次判定結果_選択された = new RString("1");
     private static final RString 総合事業実施済 = new RString("2");
     private static final RString 総合事業未実施 = new RString("1");
-    private static final RString コマ割り = new RString("1");
+
+    private YokaigoBatchProcessParamter processParameter;
+
+    @Override
+    protected void prepareConfigData() {
+        FlexibleDate 特記事項判定日
+                = new FlexibleDate(DbBusinessConfig.get(ConfigNameDBE.特記事項判定日, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        processParameter = getParameter().toYokaigoBatchProcessParamter(特記事項判定日);
+    }
 
     @Override
     protected void defineFlow() {
         executeStep(厚労省IF識別コード);
-        if (認定調査票_選択された.equals(getParameter().getChkNinteiChosahyo().toString())) {
-            List<RString> noList = getResult(List.class, new RString(厚労省IF識別コード), KoroshoShikibetsuCodeProcess.OUT_DATA_LIST);
-            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(noList.get(0))
-                    && 総合事業実施済.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(),
-                                    SubGyomuCode.DBE認定支援))) {
-                executeStep(認定調査票の作成02);
-            }
-            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(noList.get(0))
-                    && 総合事業未実施.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(),
-                                    SubGyomuCode.DBE認定支援))) {
-                executeStep(認定調査票の作成12);
-            }
-            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(noList.get(0))) {
-                executeStep(認定調査票の作成22);
-            }
-            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(noList.get(0))) {
-                executeStep(認定調査票の作成32);
-            }
-            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(noList.get(0))) {
-                executeStep(認定調査票の作成42);
-            }
-            if (!noList.isEmpty() && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(noList.get(0))) {
-                executeStep(認定調査票の作成52);
-            }
+        if (認定調査票_選択された.equals(getParameter().getChkNinteiChosahyo())) {
+            define認定調査票Flow();
         }
-        if (特記事項_選択された.equals(getParameter().getChkTokkiJiko().toString())) {
-            executeStep(特記事項の区分);
-            List<RString> noList = getResult(List.class, new RString(特記事項の区分), NinteichosaProcess.OUT_DATA_LIST);
-            if (noList.contains(TokkijikoTextImageKubun.イメージ.getコード())
-                    && コマ割り.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項イメージパターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                executeStep(特記事項の作成03);
-            } else if (noList.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
-                executeStep(特記事項の作成31);
-            } else if (noList.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
-                executeStep(特記事項の作成31_TEXT);
-            }
+        if (特記事項_選択された.equals(getParameter().getChkTokkiJiko())) {
+            define特記事項Flow();
         }
-        if (主治医意見書_選択された.equals(getParameter().getChkShujiiIkensho().toString())) {
+        if (主治医意見書_選択された.equals(getParameter().getChkShujiiIkensho())) {
             executeStep(主治医意見書の作成);
         }
-        if (その他資料_選択された.equals(getParameter().getChkSonotaShiryo().toString())) {
+        if (その他資料_選択された.equals(getParameter().getChkSonotaShiryo())) {
             executeStep(その他資料の作成);
         }
-        if (一次判定結果_選択された.equals(getParameter().getChkIchijiHanteiKekka().toString())) {
+        if (一次判定結果_選択された.equals(getParameter().getChkIchijiHanteiKekka())) {
             executeStep(一次判定結果の作成);
         }
         executeStep(要介護認定申請情報の更新);
+    }
+
+    private void define認定調査票Flow() {
+        List<RString> 厚労省IF識別コードList = getResult(List.class, new RString(厚労省IF識別コード), KoroshoShikibetsuCodeProcess.OUT_DATA_LIST);
+        if (!厚労省IF識別コードList.isEmpty()) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コードList.get(0))
+                    && 総合事業実施済.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                executeStep(認定調査票の作成02);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コードList.get(0))
+                    && 総合事業未実施.equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                executeStep(認定調査票の作成12);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コードList.get(0))) {
+                executeStep(認定調査票の作成22);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コードList.get(0))) {
+                executeStep(認定調査票の作成32);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コードList.get(0))) {
+                executeStep(認定調査票の作成42);
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コードList.get(0))) {
+                executeStep(認定調査票の作成52);
+            }
+        }
+    }
+
+    private void define特記事項Flow() {
+        executeStep(特記事項の区分);
+        List<RString> 特記事項区分List = getResult(List.class, new RString(特記事項の区分), NinteichosaProcess.OUT_DATA_LIST);
+        if (特記事項区分List.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
+            executeStep(特記事項の作成03);
+        } else if (特記事項区分List.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
+            executeStep(特記事項の作成31_TEXT);
+        }
     }
 
     /**
@@ -124,7 +132,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(厚労省IF識別コード)
     protected IBatchFlowCommand koroshoIfShikibetsuCode() {
         return loopBatch(KoroshoShikibetsuCodeProcess.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -136,7 +144,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(特記事項の区分)
     protected IBatchFlowCommand ninteichosaReport() {
         return loopBatch(NinteichosaProcess.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -148,7 +156,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(認定調査票の作成02)
     protected IBatchFlowCommand chkNinteiChosahyo02Report() {
         return loopBatch(ChkNinteiChosahyo02Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -160,7 +168,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(認定調査票の作成12)
     protected IBatchFlowCommand chkNinteiChosahyo12Report() {
         return loopBatch(ChkNinteiChosahyo12Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -172,7 +180,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(認定調査票の作成22)
     protected IBatchFlowCommand chkNinteiChosahyo22Report() {
         return loopBatch(ChkNinteiChosahyo22Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -184,7 +192,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(認定調査票の作成32)
     protected IBatchFlowCommand chkNinteiChosahyo32Report() {
         return loopBatch(ChkNinteiChosahyo32Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -196,7 +204,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(認定調査票の作成42)
     protected IBatchFlowCommand chkNinteiChosahyo42Report() {
         return loopBatch(ChkNinteiChosahyo42Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -208,19 +216,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(認定調査票の作成52)
     protected IBatchFlowCommand chkNinteiChosahyo52Report() {
         return loopBatch(ChkNinteiChosahyo52Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
-                .define();
-    }
-
-    /**
-     * 特記事項の作成を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(特記事項の作成31)
-    protected IBatchFlowCommand chkTokkiJikoReport31() {
-        return loopBatch(ChkTokkiJiko31Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -232,7 +228,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(特記事項の作成31_TEXT)
     protected IBatchFlowCommand chkTokkiJikoReport31_Text() {
         return loopBatch(ChkTokkiJiko31TextProcess.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -244,7 +240,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(特記事項の作成03)
     protected IBatchFlowCommand chkTokkiJikoReport03() {
         return loopBatch(ChkTokkiJiko03Process.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -256,7 +252,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(主治医意見書の作成)
     protected IBatchFlowCommand chkShujiiIkenshoReport() {
         return loopBatch(ChkShujiiIkenshoProcess.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -268,7 +264,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(その他資料の作成)
     protected IBatchFlowCommand chkSonotaShiryoReport() {
         return loopBatch(ChkSonotaShiryoProcess.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -280,7 +276,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(一次判定結果の作成)
     protected IBatchFlowCommand chkIchijiHanteiKekkaReport() {
         return loopBatch(ChkIchijiHanteiKekkaProcess.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 
@@ -292,7 +288,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Step(要介護認定申請情報の更新)
     protected IBatchFlowCommand updateData() {
         return loopBatch(UpdateDataProcess.class)
-                .arguments(getParameter().toYokaigoBatchProcessParamter())
+                .arguments(processParameter)
                 .define();
     }
 }

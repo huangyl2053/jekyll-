@@ -246,7 +246,7 @@ public class DeletePanelHandler {
             SharedAppendOption option = new SharedAppendOption();
             option.overWrite(true);
             SharedFile.appendNewFile(descriptor, new FilesystemPath(Path.combinePath(localCopyPath, afterReNameImageFile)),
-                    "IMG", option);
+                    "", option);
         }
     }
 

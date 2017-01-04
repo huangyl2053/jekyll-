@@ -25,9 +25,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCsvEucEntity {
 
-    @CsvField(order = 1, name = "コード")
+    @CsvField(order = 1, name = "審査員コード")
     private final RString コード;
-    @CsvField(order = 2, name = "氏名")
+    @CsvField(order = 2, name = "審査員名")
     private final RString 氏名;
     @CsvField(order = 3, name = "審査員種別")
     private final RString 審査員種別;
@@ -39,11 +39,11 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
     private final RString 審査会地区;
     @CsvField(order = 7, name = "審査会番号")
     private final RString 審査会番号;
-    @CsvField(order = 8, name = "実施日")
+    @CsvField(order = 8, name = "審査会実施日")
     private final RString 実施日;
-    @CsvField(order = 9, name = "開始")
+    @CsvField(order = 9, name = "開始時刻")
     private final RString 開始;
-    @CsvField(order = 10, name = "終了")
+    @CsvField(order = 10, name = "終了時刻")
     private final RString 終了;
 
     /**

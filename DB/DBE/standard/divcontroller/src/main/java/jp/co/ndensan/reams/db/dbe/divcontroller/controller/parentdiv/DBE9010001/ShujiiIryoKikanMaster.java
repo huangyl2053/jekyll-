@@ -350,7 +350,13 @@ public class ShujiiIryoKikanMaster {
                 row.getFaxNo(),
                 row.getDaihyosha(),
                 row.getDaihyoshakana(),
-                row.getJokyoFlag());
+                row.getJokyoFlag(),
+                row.getKinyuKikanCode(),
+                row.getKinyuKikanShitenCode(),
+                row.getYokinShubetsu(),
+                row.getKozaNo(),
+                row.getShujiiIryoKikankana(),
+                row.getKozaMeiginin());
         return data;
     }
 

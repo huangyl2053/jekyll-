@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -30,6 +31,7 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
     private final RString radShujii;
     private final RString radSohotaShiryoMasking;
     private final RString radIchijiHanteiMasking;
+    private final FlexibleDate 特記事項判定日;
 
     /**
      * コンストラクタです。
@@ -45,11 +47,12 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
      * @param radShujii マスキング(主治医意見書)フラグ
      * @param radSohotaShiryoMasking マスキング(その他資料)フラグ
      * @param radIchijiHanteiMasking マスキング(一次判定結果)フラグ
+     * @param 特記事項判定日 特記事項判定日
      */
     public YokaigoBatchProcessParamter(RString 申請書管理番号, RString chkNinteiChosahyo,
             RString chkTokkiJiko, RString chkShujiiIkensho, RString chkSonotaShiryo,
             RString chkIchijiHanteiKekka, RString radNinteiChosaMasking, RString radTokkiJikoMasking, RString radShujii,
-            RString radSohotaShiryoMasking, RString radIchijiHanteiMasking) {
+            RString radSohotaShiryoMasking, RString radIchijiHanteiMasking, FlexibleDate 特記事項判定日) {
         this.申請書管理番号 = 申請書管理番号;
         this.chkNinteiChosahyo = chkNinteiChosahyo;
         this.chkTokkiJiko = chkTokkiJiko;
@@ -61,6 +64,7 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
         this.radShujii = radShujii;
         this.radSohotaShiryoMasking = radSohotaShiryoMasking;
         this.radIchijiHanteiMasking = radIchijiHanteiMasking;
+        this.特記事項判定日 = 特記事項判定日;
     }
 
     /**

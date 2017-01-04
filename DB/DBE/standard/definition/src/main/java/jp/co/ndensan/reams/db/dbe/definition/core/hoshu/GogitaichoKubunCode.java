@@ -64,4 +64,20 @@ public enum GogitaichoKubunCode {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("合議体長区分コード"));
     }
+
+    /**
+     * 合議体長区分コードの名称と一致する内容を探します。
+     *
+     * @param name 合議体長区分コードの名称
+     * @return {@code code} に対応する合議体長区分コード
+     */
+    public static GogitaichoKubunCode toValueOfName(RString name) {
+
+        for (GogitaichoKubunCode gogitaichoKubunCode : GogitaichoKubunCode.values()) {
+            if (gogitaichoKubunCode.fullName.equals(name)) {
+                return gogitaichoKubunCode;
+            }
+        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("合議体長区分名称"));
+    }
 }

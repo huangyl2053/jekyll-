@@ -59,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
  */
 public class HomonChosaIraishoBusiness {
 
-    private static final int INT0 = 0;
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -67,7 +66,6 @@ public class HomonChosaIraishoBusiness {
     private static final int INT7 = 7;
     private static final int INT8 = 8;
     private static final int INT9 = 9;
-    private static final int INT10 = 10;
     private static final int INT11 = 11;
     private static final int INT12 = 11;
     private static final RString 年号_明治 = new RString("明");
@@ -94,10 +92,6 @@ public class HomonChosaIraishoBusiness {
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
     private static final RString NINTEIOCHOSAIRAISHO = new RString("【認定調査依頼書印刷区分】");
     private static final RString NINTEICHOSAHYO = new RString("【認定調査票印刷区分】");
-    private static final RString NINTEICHOSAIRAILIST = new RString("【認定調査依頼リスト】");
-    private static final RString NINTEICHOSAITAKUSAKICODE = new RString("　　【認定調査委託先コード】");
-    private static final RString NINTEICHOSAINCODE = new RString("　　【認定調査員コード】");
-    private static final RString SHOKISAIHOKENSHANO = new RString("　　【証記載保険者番号】");
     private static final RString HAKKOBI = new RString("【発行日】");
     private static final RString TEISHUTSUKIGEN = new RString("【提出期限】");
     private static final RString KYOTSUHIZUKE = new RString("【共通日付】");
@@ -117,7 +111,6 @@ public class HomonChosaIraishoBusiness {
     private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("【認定調査依頼履歴一覧出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
-    private static final RString HAIFON = new RString("-");
     private RString shinseishoKanriNo = RString.EMPTY;
     private final HomonChosaIraishoProcessParamter processParamter;
     private final List<ChosahyoSaiCheckhyoRelateEntity> checkEntityList;
@@ -560,7 +553,7 @@ public class HomonChosaIraishoBusiness {
                 生年月日年号.equals(年号_明治) ? 記号 : RString.EMPTY,
                 生年月日年号.equals(年号_大正) ? 記号 : RString.EMPTY,
                 生年月日年号.equals(年号_昭和) ? 記号 : RString.EMPTY,
-                get年月日(entity.get生年月日()),
+                get年(entity.get生年月日()),
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT4, INT6) : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get生年月日()) ? entity.get生年月日().substring(INT6, INT8) : RString.EMPTY,
                 entity.get年齢(),
@@ -600,10 +593,11 @@ public class HomonChosaIraishoBusiness {
         return RString.EMPTY;
     }
 
-    private RString get年月日(RString 生年月日) {
+    private RString get年(RString 生年月日) {
         RString 年 = RString.EMPTY;
         if (!RString.isNullOrEmpty(生年月日)) {
-            年 = new FlexibleYear(生年月日.substring(0, INT4)).wareki().eraType(EraType.KANJI).toDateString().substring(2, INT4);
+            年 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).toDateString().substring(2, INT4);
         }
         return 年;
     }

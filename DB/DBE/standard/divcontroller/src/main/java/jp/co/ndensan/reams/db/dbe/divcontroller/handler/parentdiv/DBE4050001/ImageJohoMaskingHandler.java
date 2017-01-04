@@ -196,7 +196,7 @@ public class ImageJohoMaskingHandler {
      */
     public void clear() {
         div.getTxtHihokenshaNumber().clearValue();
-        div.getCcdHokensya().setSelectedShichosonIfExist(new LasdecCode(ALL_SHICHOSON_KEY));
+        div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
         div.getDdlKensakuTaisho().setSelectedIndex(0);
         div.getTxtSearchYMD().clearFromValue();
         div.getTxtSearchYMD().clearToValue();

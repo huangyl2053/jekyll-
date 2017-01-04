@@ -466,7 +466,7 @@
         DbT5101."koroshoIfShikibetsuCode"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
-        INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
         ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
         ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp1."shinseishoKanriNo"
@@ -650,7 +650,7 @@
         count(1)
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
-        INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
         ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
         ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp_1."shinseishoKanriNo"
@@ -780,7 +780,7 @@
         DbT5912_temp_1_1."shujiiName"  AS  before_before_shujiiName
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
-        INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
         ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
         ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp_1."shinseishoKanriNo"
@@ -908,8 +908,6 @@
         DbT5101."ninteiChosainCode"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
-        INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-        ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
         ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
         INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
@@ -1044,8 +1042,6 @@
         DbT5912."shujiiName"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
-        INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-        ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
         ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
         INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
@@ -1106,7 +1102,7 @@
         COUNT(0)
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
-        INNER  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
         ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
         ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"

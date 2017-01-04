@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,7 +66,10 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onLoad(ShinseiKensakuDiv div) {
         div.getCcdNinteishinseishaFinder().initialize();
         getHandler(div).load();
-
+        ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
+        if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().setSelectedShoKisaiHokenshaNoIfExist(証記載保険者番号);
+        }
         return ResponseData.of(div).setState(findStateAt条件指定());
     }
 

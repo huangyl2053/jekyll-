@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
@@ -92,6 +93,7 @@ public class RenkeiDataTorikomiBusiness {
     private static final RString 登録 = new RString("3");
     private static final RString CODE0 = new RString("0");
     private static final RString CODE1 = new RString("001");
+    private static final RString 申請書管理番号_ZERO17 = new RString("00000000000000000");
     private static final int 採番番号桁数 = 5;
     private static RString rstring申請書管理番号;
 
@@ -558,7 +560,7 @@ public class RenkeiDataTorikomiBusiness {
     }
 
     private DbT5123NinteiKeikakuJohoEntity getDbT5123Entity_更新2(DbT5101RelateEntity entity) {
-        DbT5123NinteiKeikakuJohoEntity dbt5123Entity = entity.getDbt5123Entity();
+        DbT5123NinteiKeikakuJohoEntity dbt5123Entity = entity.getDbT5123Entity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         RDate 基準日 = RDate.getNowDate();
         dbt5123Entity.setNinteichosaIraiYoteiYMD(setFlexibleDate(dbt5101tempEntity.get認定申請日(),
@@ -581,7 +583,7 @@ public class RenkeiDataTorikomiBusiness {
     }
 
     private DbT5123NinteiKeikakuJohoEntity getDbT5123Entity_更新1(DbT5101RelateEntity entity) {
-        DbT5123NinteiKeikakuJohoEntity dbt5123Entity = entity.getDbt5123Entity();
+        DbT5123NinteiKeikakuJohoEntity dbt5123Entity = entity.getDbT5123Entity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         RDate 基準日 = RDate.getNowDate();
         if (dbt5101tempEntity.get前回の認定有効終了期間() == null || dbt5101tempEntity.get前回の認定有効終了期間().isEmpty()) {
@@ -621,7 +623,7 @@ public class RenkeiDataTorikomiBusiness {
      * @return DbT5105NinteiKanryoJohoEntity
      */
     public DbT5105NinteiKanryoJohoEntity getDbT5105Entity(DbT5101RelateEntity entity) {
-        DbT5105NinteiKanryoJohoEntity dbt5105Entity = entity.getDbt5105Entity();
+        DbT5105NinteiKanryoJohoEntity dbt5105Entity = entity.getDbT5105Entity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         FlexibleDate 申請日 = new FlexibleDate(dbt5101tempEntity.get認定申請日());
         dbt5105Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
@@ -635,6 +637,24 @@ public class RenkeiDataTorikomiBusiness {
         dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(申請日);
         dbt5105Entity.setNinteiShinsakaiKanryoYMD(申請日);
         return dbt5105Entity;
+    }
+    
+    /**
+     * DbT5105NinteiKanryoJohoEntityの設定メソッドです。
+     * 
+     * @param entity DbT5101RelateEntity
+     * @return DbT5105NinteiKanryoJohoEntity
+     */
+    public DbT5121ShinseiRirekiJohoEntity getDbT5121Entity(DbT5101RelateEntity entity) {
+        DbT5121ShinseiRirekiJohoEntity dbt5121Entity = new DbT5121ShinseiRirekiJohoEntity();
+        DbT5101NinteiShinseiJohoEntity dbt5101Entity = entity.getDbT5101Entity();
+        dbt5121Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+        if (dbt5101Entity != null && !dbt5101Entity.getShinseishoKanriNo().isEmpty()) {
+            dbt5121Entity.setZenkaiShinseishoKanriNo(dbt5101Entity.getShinseishoKanriNo());
+        } else {
+            dbt5121Entity.setZenkaiShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号_ZERO17));
+        }
+        return dbt5121Entity;
     }
 
     private FlexibleDate setFlexibleDate(RString value, RString config) {
