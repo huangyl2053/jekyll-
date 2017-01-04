@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -59,8 +60,18 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
     @BatchWriter
     private BatchReportWriter<SonoTashiryoReportSource> batchWrite;
     private ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter;
-    private static final RString FILENAME_BAK = new RString("F1401Azz_BAK.png");
-    private static final RString FILENAME = new RString("F1401Azz.png");
+    private static final RString FILENAME_A_BAK = new RString("F1401A01_BAK.png");
+    private static final RString FILENAME_A = new RString("F1401A01.png");
+    private static final RString FILENAME_B_BAK = new RString("F1401B02_BAK.png");
+    private static final RString FILENAME_B = new RString("F1401B02.png");
+    private static final RString FILENAME_C_BAK = new RString("F1401C03_BAK.png");
+    private static final RString FILENAME_C = new RString("F1401C03.png");
+    private static final RString FILENAME_D_BAK = new RString("F1401D04_BAK.png");
+    private static final RString FILENAME_D = new RString("F1401D04.png");
+    private static final RString FILENAME_E_BAK = new RString("F1401E05_BAK.png");
+    private static final RString FILENAME_E = new RString("F1401E05.png");
+    private static final RString FILENAME_F_BAK = new RString("F1401F06_BAK.png");
+    private static final RString FILENAME_F = new RString("F1401F06.png");
     private static final RString フラグ = new RString("1");
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
@@ -102,8 +113,46 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
 
     @Override
     protected void process(YokaigoninteiEntity entity) {
-        SonoTashiryoReport report = new SonoTashiryoReport(setBodyItem(entity));
-        report.writeBy(reportSourceWriter);
+        RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
+        RString 共有フォルダ名 = entity.get保険者番号().concat(entity.get被保険者番号());
+        ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージID);
+        RString path = getFilePath(descriptor);
+
+        RString イメージファイルパスA = getAイメージファイルパス(descriptor, path);
+        if (!イメージファイルパスA.isEmpty()) {
+            SonoTashiryoReport report = new SonoTashiryoReport(setBodyItem(entity, イメージファイルパスA));
+            report.writeBy(reportSourceWriter);
+        }
+
+        RString イメージファイルパスB = getBイメージファイルパス(descriptor, path);
+        if (!イメージファイルパスB.isEmpty()) {
+            SonoTashiryoReport report = new SonoTashiryoReport(setBodyItem(entity, イメージファイルパスB));
+            report.writeBy(reportSourceWriter);
+        }
+
+        RString イメージファイルパスC = getCイメージファイルパス(descriptor, path);
+        if (!イメージファイルパスC.isEmpty()) {
+            SonoTashiryoReport report = new SonoTashiryoReport(setBodyItem(entity, イメージファイルパスC));
+            report.writeBy(reportSourceWriter);
+        }
+
+        RString イメージファイルパスD = getDイメージファイルパス(descriptor, path);
+        if (!イメージファイルパスD.isEmpty()) {
+            SonoTashiryoReport report = new SonoTashiryoReport(setBodyItem(entity, イメージファイルパスD));
+            report.writeBy(reportSourceWriter);
+        }
+
+        RString イメージファイルパスE = getEイメージファイルパス(descriptor, path);
+        if (!イメージファイルパスE.isEmpty()) {
+            SonoTashiryoReport report = new SonoTashiryoReport(setBodyItem(entity, イメージファイルパスE));
+            report.writeBy(reportSourceWriter);
+        }
+
+        RString イメージファイルパスF = getFイメージファイルパス(descriptor, path);
+        if (!イメージファイルパスF.isEmpty()) {
+            SonoTashiryoReport report = new SonoTashiryoReport(setBodyItem(entity, イメージファイルパスF));
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     @Override
@@ -111,7 +160,7 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
         set出力条件表();
     }
 
-    private SonoTashiryoEntity setBodyItem(YokaigoninteiEntity entity) {
+    private SonoTashiryoEntity setBodyItem(YokaigoninteiEntity entity, RString イメージファイルパス) {
         SonoTashiryoEntity sonoTashiryo = new SonoTashiryoEntity();
         sonoTashiryo.set保険者番号(entity.get保険者番号());
         sonoTashiryo.set被保険者番号(entity.get被保険者番号());
@@ -148,38 +197,132 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         sonoTashiryo.set審査日_日(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
-        RDateTime イメージID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
-        RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
-        sonoTashiryo.setその他資料イメージ(共有ファイルを引き出す(イメージID, 共有ファイル名));
+        sonoTashiryo.setその他資料イメージ(イメージファイルパス);
         return sonoTashiryo;
     }
 
-    private RString 共有ファイルを引き出す(RDateTime イメージID, RString 共有ファイル名) {
-        RString path = getFilePath(イメージID, 共有ファイル名);
-        RString fileName = フラグ.equals(processPrm.getRadSohotaShiryoMasking()) ? FILENAME : FILENAME_BAK;
-        RString fineFullPath = getFilePath(path, fileName);
-        if (!RString.isNullOrEmpty(fineFullPath)) {
-            return fineFullPath;
+    private RString getAイメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor, RString path) {
+        if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
+            RString fineFullPath = getFilePath(path, FILENAME_A);
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        } else {
+            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
+            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_A_BAK);
+            RString fineFullPath;
+            if (マスキングファイルあり) {
+                fineFullPath = getFilePath(path, FILENAME_A_BAK);
+            } else {
+                fineFullPath = getFilePath(path, FILENAME_A);
+            }
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
-        return RString.EMPTY;
+    }
+
+    private RString getBイメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor, RString path) {
+        if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
+            RString fineFullPath = getFilePath(path, FILENAME_B);
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        } else {
+            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
+            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_B_BAK);
+            RString fineFullPath;
+            if (マスキングファイルあり) {
+                fineFullPath = getFilePath(path, FILENAME_B_BAK);
+            } else {
+                fineFullPath = getFilePath(path, FILENAME_B);
+            }
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        }
+    }
+
+    private RString getCイメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor, RString path) {
+        if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
+            RString fineFullPath = getFilePath(path, FILENAME_C);
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        } else {
+            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
+            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_C_BAK);
+            RString fineFullPath;
+            if (マスキングファイルあり) {
+                fineFullPath = getFilePath(path, FILENAME_C_BAK);
+            } else {
+                fineFullPath = getFilePath(path, FILENAME_C);
+            }
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        }
+    }
+
+    private RString getDイメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor, RString path) {
+        if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
+            RString fineFullPath = getFilePath(path, FILENAME_D);
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        } else {
+            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
+            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_D_BAK);
+            RString fineFullPath;
+            if (マスキングファイルあり) {
+                fineFullPath = getFilePath(path, FILENAME_D_BAK);
+            } else {
+                fineFullPath = getFilePath(path, FILENAME_D);
+            }
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        }
+    }
+
+    private RString getEイメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor, RString path) {
+        if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
+            RString fineFullPath = getFilePath(path, FILENAME_E);
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        } else {
+            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
+            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_E_BAK);
+            RString fineFullPath;
+            if (マスキングファイルあり) {
+                fineFullPath = getFilePath(path, FILENAME_E_BAK);
+            } else {
+                fineFullPath = getFilePath(path, FILENAME_E);
+            }
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        }
+    }
+
+    private RString getFイメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor, RString path) {
+        if (フラグ.equals(processPrm.getRadSohotaShiryoMasking())) {
+            RString fineFullPath = getFilePath(path, FILENAME_F);
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        } else {
+            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
+            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_F_BAK);
+            RString fineFullPath;
+            if (マスキングファイルあり) {
+                fineFullPath = getFilePath(path, FILENAME_F_BAK);
+            } else {
+                fineFullPath = getFilePath(path, FILENAME_F);
+            }
+            return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
+        }
+    }
+
+    private boolean existマスキングファイル(List<SharedFileEntryInfoEntity> entryInfoList, RString ファイル名) {
+        for (SharedFileEntryInfoEntity entryInfo : entryInfoList) {
+            if (ファイル名.equals(entryInfo.getFilesEntity().getSharedFileName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private ReadOnlySharedFileEntryDescriptor get共有ファイルエントリ情報(RString 共有フォルダ名, RDateTime イメージ共有ファイルID) {
+        return new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有フォルダ名), イメージ共有ファイルID);
+    }
+
+    private RString getFilePath(ReadOnlySharedFileEntryDescriptor descriptor) {
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath())).getCanonicalPath());
     }
 
     private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
         if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
             return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        if (sharedFileId != null) {
-            ReadOnlySharedFileEntryDescriptor descriptor
-                    = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName), sharedFileId);
-            try {
-                return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchWrite.getImageFolderPath())).getCanonicalPath());
-            } catch (Exception e) {
-                return RString.EMPTY;
-            }
         }
         return RString.EMPTY;
     }
