@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.business.core.shinchokudataoutput.shickdateoutput.ShinchokuDataOutputBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinchokudataoutput.ShinchokuDataOutputProcessParamter;
@@ -52,6 +54,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     private ShinchokuDataOutputProcessParamter paramter;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static List<RString> HIHOKENSHANOLIST;
     private RString eucFilePath;
     private ShinchokuDataOutputBusiness business;
     private FileSpoolManager manager;
@@ -68,6 +71,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
         }
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.set概況調査テキス(イメージ区分);
+        HIHOKENSHANOLIST = new ArrayList<>();
     }
 
     @Override
@@ -107,6 +111,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     @Override
     protected void process(ShinchokuDataOutputRelateEntity entity) {
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
+        HIHOKENSHANOLIST.add(entity.getHihokenshaNo());
         new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
     }
 
@@ -143,7 +148,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
                     日次進捗データ送信ファイル名,
                     EUC_ENTITY_ID.toRString(),
                     business.get出力件数(new Decimal(eucCsvWriterJunitoJugo.getCount())),
-                    business.get出力条件(paramter));
+                    business.get出力条件(paramter, HIHOKENSHANOLIST));
             OutputJokenhyoFactory.createInstance(item).print();
         } else if (new RString("1").equals(paramter.getFayirukuben())) {
             RString 連携データ送信ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定結果連携データ送信ファイル名_新, RDate.getNowDate());
@@ -155,7 +160,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
                     連携データ送信ファイル名,
                     EUC_ENTITY_ID.toRString(),
                     business.get出力件数(new Decimal(eucCsvWriterJunitoJugo.getCount())),
-                    business.get出力条件(paramter));
+                    business.get出力条件(paramter, HIHOKENSHANOLIST));
             OutputJokenhyoFactory.createInstance(item).print();
         }
     }

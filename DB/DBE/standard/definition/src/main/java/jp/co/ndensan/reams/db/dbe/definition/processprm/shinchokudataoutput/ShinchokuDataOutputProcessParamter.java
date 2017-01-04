@@ -24,6 +24,8 @@ public class ShinchokuDataOutputProcessParamter implements IBatchProcessParamete
 
     private final List<RString> shinseishoKanriNoList;
     private final RString fayirukuben;
+    private final RString chushutsuFromDate;
+    private final RString chushutsuToDate;
     private RString 概況調査テキス;
 
     /**
@@ -31,12 +33,18 @@ public class ShinchokuDataOutputProcessParamter implements IBatchProcessParamete
      *
      * @param 申請書管理番号リスト List<RString>
      * @param ファイル区分 RString
+     * @param 抽出期間From RString
+     * @param 抽出期間To RString
      */
     public ShinchokuDataOutputProcessParamter(
             List<RString> 申請書管理番号リスト,
-            RString ファイル区分) {
+            RString ファイル区分,
+            RString 抽出期間From,
+            RString 抽出期間To) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.fayirukuben = ファイル区分;
+        this.chushutsuFromDate = 抽出期間From;
+        this.chushutsuToDate = 抽出期間To;
     }
 
     /**
