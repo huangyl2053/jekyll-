@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5213GaikyoChosaTokkiMaskマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5213GaikyoChosaTokkiMaskMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5213GaikyoChosaTokkiMask">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5213GaikyoChosaTokkiMaskMapper.allColumns_DbT5213GaikyoChosaTokkiMask" />
+     FROM
+         rgdb."DbT5213GaikyoChosaTokkiMask"
+     WHERE
+         rgdb."DbT5213GaikyoChosaTokkiMask"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5213GaikyoChosaTokkiMask">
+         "DbT5213GaikyoChosaTokkiMask"."shinseishoKanriNo" as "dbT5213GaikyoChosaTokkiMask_shinseishoKanriNo",
+         "DbT5213GaikyoChosaTokkiMask"."ninteichosaRirekiNo" as "dbT5213GaikyoChosaTokkiMask_ninteichosaRirekiNo",
+         "DbT5213GaikyoChosaTokkiMask"."gaikyoChosaTextImageKubun" as "dbT5213GaikyoChosaTokkiMask_gaikyoChosaTextImageKubun",
+         "DbT5213GaikyoChosaTokkiMask"."insertDantaiCd" as "dbT5213GaikyoChosaTokkiMask_insertDantaiCd",
+         "DbT5213GaikyoChosaTokkiMask"."insertTimestamp" as "dbT5213GaikyoChosaTokkiMask_insertTimestamp",
+         "DbT5213GaikyoChosaTokkiMask"."insertReamsLoginId" as "dbT5213GaikyoChosaTokkiMask_insertReamsLoginId",
+         "DbT5213GaikyoChosaTokkiMask"."insertContextId" as "dbT5213GaikyoChosaTokkiMask_insertContextId",
+         "DbT5213GaikyoChosaTokkiMask"."isDeleted" as "dbT5213GaikyoChosaTokkiMask_isDeleted",
+         "DbT5213GaikyoChosaTokkiMask"."updateCount" as "dbT5213GaikyoChosaTokkiMask_updateCount",
+         "DbT5213GaikyoChosaTokkiMask"."lastUpdateTimestamp" as "dbT5213GaikyoChosaTokkiMask_lastUpdateTimestamp",
+         "DbT5213GaikyoChosaTokkiMask"."lastUpdateReamsLoginId" as "dbT5213GaikyoChosaTokkiMask_lastUpdateReamsLoginId",
+         "DbT5213GaikyoChosaTokkiMask"."tokki" as "dbT5213GaikyoChosaTokkiMask_tokki"
+    </sql>
+
+
+    <!--テーブルDbT5213GaikyoChosaTokkiMaskの項目をDbT5213GaikyoChosaTokkiMaskEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5213GaikyoChosaTokkiMaskEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5213GaikyoChosaTokkiMaskEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5213GaikyoChosaTokkiMask_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="dbT5213GaikyoChosaTokkiMask_ninteichosaRirekiNo" />
+        <id property="gaikyoChosaTextImageKubun" column="dbT5213GaikyoChosaTokkiMask_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5213GaikyoChosaTokkiMask_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5213GaikyoChosaTokkiMask_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5213GaikyoChosaTokkiMask_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5213GaikyoChosaTokkiMask_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5213GaikyoChosaTokkiMask_isDeleted" />
+        <result property="updateCount" column="dbT5213GaikyoChosaTokkiMask_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5213GaikyoChosaTokkiMask_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5213GaikyoChosaTokkiMask_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokki" column="dbT5213GaikyoChosaTokkiMask_tokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

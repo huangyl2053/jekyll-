@@ -19,3 +19,10 @@ ikenshoTokusokuMemo,text,RString,,,,,主治医意見書作成督促メモ,A
 ninteiJohoTeikyoKiboFlag,bool,boolean,,,,,認定情報提供希望フラグ,A
 ninteiJohoTeikyoYMD,UDD015YMD,FlexibleDate,,,,,認定状況提供年月日,A
 logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A
+isShindanMeireishoHakkoFlag,bool,boolean,,,,,isShindanMeireishoHakkoFlag,A
+jushinKikanKubun,UDD035Code,Code,,,,,jushinKikanKubun,A
+jushinYMD,UDD015YMD,FlexibleDate,,,,,jushinYMD,A
+jushinTime,varchar,RString,,,,,jushinTime,A
+jushinKikanKaishi,UDD015YMD,FlexibleDate,,,,,jushinKikanKaishi,A
+jushinKikanShuryo,UDD015YMD,FlexibleDate,,,,,jushinKikanShuryo,A
+jushinBasho,text,RString,,,,,jushinBasho,A
