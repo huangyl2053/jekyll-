@@ -26,6 +26,7 @@ public class KaigoKekkaTaishouIchiranBodyItem {
     private final RString listKekkatsuchi_8;
     private final RString listKekkatsuchi_9;
     private final RString listKekkatsuchi_10;
+    private final int index;
 
     /**
      * インスタンスを生成します。
@@ -39,6 +40,7 @@ public class KaigoKekkaTaishouIchiranBodyItem {
      * @param listKekkatsuchi_8 生年月日
      * @param listKekkatsuchi_9 性別
      * @param listKekkatsuchi_10 二次判定結果
+     * @param index データ数カウント値
      */
     public KaigoKekkaTaishouIchiranBodyItem(
             RString listKekkatsuchi_2,
@@ -49,7 +51,8 @@ public class KaigoKekkaTaishouIchiranBodyItem {
             RString listKekkatsuchi_7,
             RString listKekkatsuchi_8,
             RString listKekkatsuchi_9,
-            RString listKekkatsuchi_10) {
+            RString listKekkatsuchi_10,
+            int index) {
 
         this.listKekkatsuchi_2 = listKekkatsuchi_2;
         this.listKekkatsuchi_3 = listKekkatsuchi_3;
@@ -60,5 +63,6 @@ public class KaigoKekkaTaishouIchiranBodyItem {
         this.listKekkatsuchi_8 = listKekkatsuchi_8;
         this.listKekkatsuchi_9 = listKekkatsuchi_9;
         this.listKekkatsuchi_10 = listKekkatsuchi_10;
+        this.index = index;
     }
 }

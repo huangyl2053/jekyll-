@@ -21,7 +21,7 @@ public final class KaigoKekkaTaishouIchiranHeadItem {
     private final RString chushutsuKikanFrom;
     private final RString chushutsuKikanTo;
     private final RString printTimeStamp;
-    private final Integer gokei;
+    private final int index;
 
     /**
      * インスタンスを生成します。
@@ -30,20 +30,19 @@ public final class KaigoKekkaTaishouIchiranHeadItem {
      * @param chushutsuKikanFrom 抽出期間From
      * @param chushutsuKikanTo 抽出期間To
      * @param printTimeStamp 作成年月日
-     * @param gokei 合計
      */
     private KaigoKekkaTaishouIchiranHeadItem(
             RString shichosonName,
             RString chushutsuKikanFrom,
             RString chushutsuKikanTo,
             RString printTimeStamp,
-            Integer gokei) {
+            int index) {
 
         this.shichosonName = shichosonName;
         this.chushutsuKikanFrom = chushutsuKikanFrom;
         this.chushutsuKikanTo = chushutsuKikanTo;
         this.printTimeStamp = printTimeStamp;
-        this.gokei = gokei;
+        this.index = index;
     }
 
     /**
@@ -53,7 +52,7 @@ public final class KaigoKekkaTaishouIchiranHeadItem {
      * @param chushutsuKikanFrom 抽出期間From
      * @param chushutsuKikanTo 抽出期間To
      * @param printTimeStamp 作成年月日
-     * @param gokei 合計
+     * @param index データ数カウント値
      * @return KaigoKekkaTaishouIchiranHeadItem
      */
     public static KaigoKekkaTaishouIchiranHeadItem creataKaigoKekkaTaishouIchiranHeadItem(
@@ -61,9 +60,9 @@ public final class KaigoKekkaTaishouIchiranHeadItem {
             RString chushutsuKikanFrom,
             RString chushutsuKikanTo,
             RString printTimeStamp,
-            Integer gokei) {
+            int index) {
 
-        return new KaigoKekkaTaishouIchiranHeadItem(shichosonName, chushutsuKikanFrom, chushutsuKikanTo, printTimeStamp, gokei);
+        return new KaigoKekkaTaishouIchiranHeadItem(shichosonName, chushutsuKikanFrom, chushutsuKikanTo, printTimeStamp, index);
 
     }
 }
