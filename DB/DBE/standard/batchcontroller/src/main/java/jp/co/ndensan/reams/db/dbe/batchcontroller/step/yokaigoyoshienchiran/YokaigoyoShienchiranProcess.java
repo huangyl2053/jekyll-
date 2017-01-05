@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoyoshienchiran;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoyoshienchiran.YokaigoyoShienchiran;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranItem;
@@ -44,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 
 /**
  * 申請情報印刷のデータを作成します。
@@ -53,6 +56,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitorEntity> {
 
     private static final ReportId REPORT_ID = ReportIdDBE.DBE011001.getReportId();
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(YokaigoYoshienShinseiIchiranReportSource.ReportSourceFields.shichosonName.name())));
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseijouhouinnsatu."
             + "IShinseiJouhouInsatuRelateMapper.selectShinseiJouhou");
@@ -94,7 +99,9 @@ public class YokaigoyoShienchiranProcess extends BatchProcessBase<ShinseiMonitor
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<YokaigoYoshienShinseiIchiranReportSource>().simpleLayoutBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
