@@ -40,8 +40,10 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -326,7 +328,7 @@ public class Ikenshoget {
         if (date == null) {
             return RString.EMPTY;
         }
-        return date.wareki().toDateString();
+        return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private RString getコード(RString 名称, int kubun) {
