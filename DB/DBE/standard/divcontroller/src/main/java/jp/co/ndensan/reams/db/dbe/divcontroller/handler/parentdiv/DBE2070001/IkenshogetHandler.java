@@ -119,6 +119,7 @@ public class IkenshogetHandler {
             }
 //            row.getIkenshoNyushuTeikei().setValue();
             row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().value().equals(RString.EMPTY)
+                    || business.get意見書作成回数区分().value().equals(RString.HALF_SPACE)
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
             row.setChosaTokusokuHoho(business.get主治医意見書作成督促方法() == null ? RString.EMPTY : business.get主治医意見書作成督促方法());
             row.getChosaTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
