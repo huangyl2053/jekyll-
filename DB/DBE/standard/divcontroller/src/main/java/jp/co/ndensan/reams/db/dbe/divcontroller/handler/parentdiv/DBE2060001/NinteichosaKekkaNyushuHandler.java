@@ -200,7 +200,7 @@ public class NinteichosaKekkaNyushuHandler {
                 mishoriCount++;
             }
             row.getTokusokuHakkoYMD().setValue(toRDate(business.get認定調査督促年月日()));
-            row.setTokusokuHoho(RString.isNullOrEmpty(business.get認定調査督促方法())
+            row.setTokusokuHoho(RString.isNullOrEmpty(business.get認定調査督促方法()) || business.get認定調査督促方法().equals(RString.EMPTY)
                                 ? RString.EMPTY : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getTokusokuKaisu().setValue(new Decimal(business.get認定調査督促回数()));
             row.getTokusokuKigen().setValue(toRDate(business.get認定調査期限年月日()));

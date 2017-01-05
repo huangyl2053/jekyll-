@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2070001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.IkenshogetDiv;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -35,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -66,7 +63,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  */
 public class Ikenshoget {
 
-    private static final RString CSVファイル名 = new RString("DBE207001");
+    private static final RString CSVファイル名 = new RString("主治医意見書入手一覧.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
 
@@ -144,11 +141,10 @@ public class Ikenshoget {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(IkenshogetDiv div, IDownLoadServletResponse response) {
-        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイル名);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
@@ -163,7 +159,7 @@ public class Ikenshoget {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         AccessLogger.log(AccessLogType.照会, personalData);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
     /**
