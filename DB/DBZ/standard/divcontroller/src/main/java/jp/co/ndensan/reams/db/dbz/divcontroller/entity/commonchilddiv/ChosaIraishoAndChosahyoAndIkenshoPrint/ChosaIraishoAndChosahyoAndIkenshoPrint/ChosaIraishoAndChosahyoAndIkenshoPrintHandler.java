@@ -91,7 +91,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString 文字列_まで = new RString("まで");
     private static final RString 連結 = new RString("～");
     private static final RString 記号 = new RString("✔");
-    private static final RString HOUSI = new RString("*");
+    private static final RString HOUSI = new RString("＊");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
     private static final RString 文字列3 = new RString("3");

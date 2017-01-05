@@ -185,6 +185,7 @@
                ,A."seinengappiYMD"
                ,A."jusho"
                ,A."telNo"
+               ,A."yubinNo"
                ,B."shujiiIryokikanCode"
                ,B."ikenshoIraiRirekiNo"
                ,C."iryoKikanMeisho"
