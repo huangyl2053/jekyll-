@@ -13,7 +13,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2040001",
-     "toLayoutTitle": "完了処理・主治医意見書依頼",
+     "toLayoutTitle": "基本運用・主治医意見書依頼",
      "toState": "初期　登録状態"
     },
     {
@@ -21,9 +21,9 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2040001",
-     "layoutTitle": "完了処理・主治医意見書依頼",
+     "layoutTitle": "基本運用・主治医意見書依頼",
      "eventName": "主治医意見書作成依頼画面へ遷移する",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2410002",
@@ -42,7 +42,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2040001",
      "toLayoutTitle": "基本運用・主治医意見書依頼",
-     "toState": "完了状態"
+     "toState": "登録"
     },
     {
      "id": "4",
