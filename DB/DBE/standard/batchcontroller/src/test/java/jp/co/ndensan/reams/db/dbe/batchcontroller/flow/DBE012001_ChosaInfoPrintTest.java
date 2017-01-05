@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE012001.DBE012001_ChosaInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core._ControlData;
@@ -46,10 +47,10 @@ public class DBE012001_ChosaInfoPrintTest extends DbeTestBase {
         public void パラメーターが正しく設定されている場合_バッチフロー実施結果は_Successで返すこと() throws Exception {
             setExecutionSubGyomuCodeToControlData(SubGyomuCode.DBE認定支援);
             BatchExitStatus result = flowHelper.executeFlow(
-                new RString("DBE012001_ChosaInfoPrint"),
-                new RString("調査情報印刷"),
-                DBE012001_ChosaInfoPrint.class,
-                createBatchParameter());
+                    new RString("DBE012001_ChosaInfoPrint"),
+                    new RString("調査情報印刷"),
+                    DBE012001_ChosaInfoPrint.class,
+                    createBatchParameter());
             assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
         }
 
@@ -60,11 +61,11 @@ public class DBE012001_ChosaInfoPrintTest extends DbeTestBase {
         RDate 処理日終了 = new RDate(2014, 3, 1);
         DBE012001_ChosaInfoPrintParameter parameter = new DBE012001_ChosaInfoPrintParameter();
 
-        parameter.setNinteichosayoteimitei(true);
+        parameter.setNinteichosayoteimitei(false);
         parameter.setYoteimiteiymdFrom(処理日開始.toDateString());
         parameter.setYoteimiteiymdTo(処理日終了.toDateString());
         parameter.setJoken1(new RString("2"));
-        parameter.setNinteichosaijoken(true);
+        parameter.setNinteichosaijoken(false);
         parameter.setIraisakihenkymdFrom(処理日開始.toDateString());
         parameter.setIraisakihenkymdTo(処理日終了.toDateString());
         parameter.setCheckListJoken(true);
@@ -73,13 +74,15 @@ public class DBE012001_ChosaInfoPrintTest extends DbeTestBase {
         parameter.setCheckListShinseiYMDTo(処理日終了.toDateString());
         parameter.setShinsakai(new RString("4"));
         parameter.setShinsaYMD(new RString("20150917"));
+        parameter.setShichosonCode(new LasdecCode("206024"));
+        parameter.setShichosonName(new RString("テスト市町村"));
 
         return parameter;
     }
 
     private static void setExecutionSubGyomuCodeToControlData(SubGyomuCode executionSubGyomuCode) {
         _ControlData controlData = new _ControlData(SubGyomuCode.DBE認定支援.toString(), "test",
-                                                    new ReamsDonyuDantaiCode("209007"));
+                new ReamsDonyuDantaiCode("209007"));
         FlowContext flowContext = createFlowContext("testFlowInstanceId", "DBEWF21005");
         when(flowContext.getExecutionSubGyomuCode()).thenReturn(executionSubGyomuCode);
         controlData.setFlowContext(flowContext);

@@ -325,7 +325,7 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         )
         AND 
-        DbT5301."isDeleted" = FALSE
+        DbT5301."logicalDeletedFlag" = FALSE
         LEFT JOIN
         rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON
@@ -351,15 +351,17 @@
         AND
         DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
         AND
-        DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+        DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND
-        DbT5105."maskingKanryoYMD" IS NOT NULL
+        DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+        AND
+        DbT5105."centerSoshinYMD" IS NULL
         AND
         DbT5301."ikenshoSakuseiIraiYMD" IS NOT NULL
         AND
         DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND
-        DbT5101."isDeleted" = FALSE
+        DbT5101."logicalDeletedFlag" = FALSE
         <if test="主治医意見書依頼済み一覧表作成条件フラグ">
             AND
             DbT5302."ikenshoReadYMD" <![CDATA[>=]]> #{主治医意見書依頼済み一覧表処理日From}
@@ -577,7 +579,7 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         )
         AND 
-        DbT5301."isDeleted" = FALSE
+        DbT5301."logicalDeletedFlag" = FALSE
         LEFT JOIN
         rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON
@@ -605,7 +607,7 @@
         AND
         DbT5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
         AND
-        DbT5101."isDeleted" = FALSE
+        DbT5101."logicalDeletedFlag" = FALSE
         <if test="主治医意見書作成料請求一覧表作成条件フラグ">
             AND
             DbT5302."ikenshoReadYMD" <![CDATA[>=]]> #{主治医意見書作成料請求一覧表処理日From}
