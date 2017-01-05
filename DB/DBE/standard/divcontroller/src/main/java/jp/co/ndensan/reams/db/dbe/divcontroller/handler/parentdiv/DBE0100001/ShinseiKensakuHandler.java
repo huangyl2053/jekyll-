@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -69,7 +70,8 @@ public class ShinseiKensakuHandler {
     /**
      * 検索条件を作成します。
      *
-     * @return 検索条件
+     * @param hihokenshaNo 被保険者番号
+     * @return 検索条件 検索条件
      */
     public ShinseiKensakuMapperParameter createParameter(RString hihokenshaNo) {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
@@ -378,7 +380,7 @@ public class ShinseiKensakuHandler {
             parameter.setShisetsuNyushoFlag(false);
             parameter.setIgnoreShisetsuNyusho(true);
         }
-        
+
         RString 認定調査委託先コード = finderDiv.getTxtNinteiChosaItakusakiName().getValue();
         if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             parameter.setNinteiChosaItakusakiCode(finderDiv.getHdnChosaItakusakiCode());
@@ -433,7 +435,7 @@ public class ShinseiKensakuHandler {
         }
         parameter.setUseNinteichosahyoKihonChosa(useNinteichosahyoKihonChosa);
     }
-    
+
     private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter, RString 被保険者番号) {
         if (!RString.isNullOrEmpty(被保険者番号)) {
             parameter.setHihokenshaNo(被保険者番号);
@@ -660,7 +662,7 @@ public class ShinseiKensakuHandler {
                 row.setHihokenshaBirthDay(hihokenshaBirthDay);
             }
 
-            row.setHihokenshaNenrei(new RString(String.valueOf(business.get年齢())));
+            row.setHihokenshaNenrei(createTextBoxNum(new Decimal(business.get年齢())));
             Code 性別 = business.get性別();
             if (性別 != null) {
                 row.setHihokenshaSeibetsu(Seibetsu.toValue(性別.value()).get名称());
@@ -707,5 +709,11 @@ public class ShinseiKensakuHandler {
         } else {
             return obj;
         }
+    }
+
+    private TextBoxNum createTextBoxNum(Decimal num) {
+        TextBoxNum textBoxNum = new TextBoxNum();
+        textBoxNum.setValue(num);
+        return textBoxNum;
     }
 }
