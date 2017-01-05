@@ -27,6 +27,7 @@ public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
     private static final String FAYIRUKUBEN = "fayirukuben";
     private static final String CHUSHUTSUFROMDATE = "chushutsuFromDate";
     private static final String CHUSHUTSUTODATE = "chushutsuToDate";
+    private static final String HOKENSHA = "hokensha";
     @BatchParameter(key = SHINSEISHOLANRINOLIST, name = "申請書管理番号リスト")
     private List<RString> shinseishoKanriNoList;
     @BatchParameter(key = FAYIRUKUBEN, name = "ファイル区分")
@@ -35,6 +36,8 @@ public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
     private RString chushutsuFromDate;
     @BatchParameter(key = CHUSHUTSUTODATE, name = "抽出期間To")
     private RString chushutsuToDate;
+    @BatchParameter(key = HOKENSHA, name = "保険者")
+    private RString hokensha;
 
     /**
      * コンストラクタです。
@@ -49,17 +52,20 @@ public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
      * @param ファイル区分 RString
      * @param 抽出期間From RString
      * @param 抽出期間To RString
+     * @param 保険者 RString
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public DBE491001_NichijiShinchokuParameter(
             List<RString> 申請書管理番号リスト,
             RString ファイル区分,
             RString 抽出期間From,
-            RString 抽出期間To) {
+            RString 抽出期間To,
+            RString 保険者) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.fayirukuben = ファイル区分;
         this.chushutsuFromDate = 抽出期間From;
         this.chushutsuToDate = 抽出期間To;
+        this.hokensha = 保険者;
     }
 
     /**
@@ -68,6 +74,6 @@ public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
      * @return KaigoNinteiShinsakaiScheduleProcessParamter
      */
     public ShinchokuDataOutputProcessParamter toShinchokuDataOutputProcessParamter() {
-        return new ShinchokuDataOutputProcessParamter(shinseishoKanriNoList, fayirukuben, chushutsuFromDate, chushutsuToDate);
+        return new ShinchokuDataOutputProcessParamter(shinseishoKanriNoList, fayirukuben, chushutsuFromDate, chushutsuToDate, hokensha);
     }
 }

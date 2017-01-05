@@ -216,8 +216,9 @@ public class ShinchokuDataOutputHandler {
         }
         batchparamter.setShinseishoKanriNoList(shinseishoKanriNo);
         batchparamter.setFayirukuben(div.getRadKubun().getSelectedKey());
-        batchparamter.setChushutsuFromDate(div.getTxtChuishutsuRange().getFromValue().toDateString());
-        batchparamter.setChushutsuToDate(div.getTxtChuishutsuRange().getToValue().toDateString());
+        batchparamter.setChushutsuFromDate(div.getTxtChuishutsuRange().getFromValue().wareki().toDateString());
+        batchparamter.setChushutsuToDate(div.getTxtChuishutsuRange().getToValue().wareki().toDateString());
+        batchparamter.setHokensha(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
         return batchparamter;
     }
 

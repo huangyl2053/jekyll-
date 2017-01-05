@@ -463,7 +463,11 @@ public class ShinchokuDataOutputBusiness {
         jokenBuilder.append(paramter.getChushutsuToDate());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("【申請書管理番号リスト】"));
+        jokenBuilder.append(new RString("保険者："));
+        jokenBuilder.append(paramter.getHokensha());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("【被保険者番号リスト】"));
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         int count = 0;
