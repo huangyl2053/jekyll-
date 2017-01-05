@@ -23,12 +23,12 @@ public class ImagePanelDiv extends Panel {
      */
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
-    @JsonProperty("btnGaikyoTokuki")
-    private ButtonDialog btnGaikyoTokuki;
+    @JsonProperty("btnGaikyoChosa")
+    private ButtonDialog btnGaikyoChosa;
     @JsonProperty("btnChosahyoTokuki")
     private ButtonDialog btnChosahyoTokuki;
-    @JsonProperty("btnChosahyoGaikyo")
-    private ButtonDialog btnChosahyoGaikyo;
+    @JsonProperty("btnGaikyoTokki")
+    private ButtonDialog btnGaikyoTokki;
     @JsonProperty("btnIkenshoTeikei")
     private ButtonDialog btnIkenshoTeikei;
     @JsonProperty("btnIkenshoTeikeigai")
@@ -71,21 +71,21 @@ public class ImagePanelDiv extends Panel {
     }
 
     /*
-     * getbtnGaikyoTokuki
-     * @return btnGaikyoTokuki
+     * getbtnGaikyoChosa
+     * @return btnGaikyoChosa
      */
-    @JsonProperty("btnGaikyoTokuki")
-    public ButtonDialog getBtnGaikyoTokuki() {
-        return btnGaikyoTokuki;
+    @JsonProperty("btnGaikyoChosa")
+    public ButtonDialog getBtnGaikyoChosa() {
+        return btnGaikyoChosa;
     }
 
     /*
-     * setbtnGaikyoTokuki
-     * @param btnGaikyoTokuki btnGaikyoTokuki
+     * setbtnGaikyoChosa
+     * @param btnGaikyoChosa btnGaikyoChosa
      */
-    @JsonProperty("btnGaikyoTokuki")
-    public void setBtnGaikyoTokuki(ButtonDialog btnGaikyoTokuki) {
-        this.btnGaikyoTokuki = btnGaikyoTokuki;
+    @JsonProperty("btnGaikyoChosa")
+    public void setBtnGaikyoChosa(ButtonDialog btnGaikyoChosa) {
+        this.btnGaikyoChosa = btnGaikyoChosa;
     }
 
     /*
@@ -107,21 +107,21 @@ public class ImagePanelDiv extends Panel {
     }
 
     /*
-     * getbtnChosahyoGaikyo
-     * @return btnChosahyoGaikyo
+     * getbtnGaikyoTokki
+     * @return btnGaikyoTokki
      */
-    @JsonProperty("btnChosahyoGaikyo")
-    public ButtonDialog getBtnChosahyoGaikyo() {
-        return btnChosahyoGaikyo;
+    @JsonProperty("btnGaikyoTokki")
+    public ButtonDialog getBtnGaikyoTokki() {
+        return btnGaikyoTokki;
     }
 
     /*
-     * setbtnChosahyoGaikyo
-     * @param btnChosahyoGaikyo btnChosahyoGaikyo
+     * setbtnGaikyoTokki
+     * @param btnGaikyoTokki btnGaikyoTokki
      */
-    @JsonProperty("btnChosahyoGaikyo")
-    public void setBtnChosahyoGaikyo(ButtonDialog btnChosahyoGaikyo) {
-        this.btnChosahyoGaikyo = btnChosahyoGaikyo;
+    @JsonProperty("btnGaikyoTokki")
+    public void setBtnGaikyoTokki(ButtonDialog btnGaikyoTokki) {
+        this.btnGaikyoTokki = btnGaikyoTokki;
     }
 
     /*

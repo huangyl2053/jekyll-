@@ -197,13 +197,13 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnGaikyoTokuki() {
-        return this.getImagePanel().getBtnGaikyoTokuki();
+    public ButtonDialog getBtnGaikyoChosa() {
+        return this.getImagePanel().getBtnGaikyoChosa();
     }
 
     @JsonIgnore
-    public void  setBtnGaikyoTokuki(ButtonDialog btnGaikyoTokuki) {
-        this.getImagePanel().setBtnGaikyoTokuki(btnGaikyoTokuki);
+    public void  setBtnGaikyoChosa(ButtonDialog btnGaikyoChosa) {
+        this.getImagePanel().setBtnGaikyoChosa(btnGaikyoChosa);
     }
 
     @JsonIgnore
@@ -217,13 +217,13 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChosahyoGaikyo() {
-        return this.getImagePanel().getBtnChosahyoGaikyo();
+    public ButtonDialog getBtnGaikyoTokki() {
+        return this.getImagePanel().getBtnGaikyoTokki();
     }
 
     @JsonIgnore
-    public void  setBtnChosahyoGaikyo(ButtonDialog btnChosahyoGaikyo) {
-        this.getImagePanel().setBtnChosahyoGaikyo(btnChosahyoGaikyo);
+    public void  setBtnGaikyoTokki(ButtonDialog btnGaikyoTokki) {
+        this.getImagePanel().setBtnGaikyoTokki(btnGaikyoTokki);
     }
 
     @JsonIgnore
