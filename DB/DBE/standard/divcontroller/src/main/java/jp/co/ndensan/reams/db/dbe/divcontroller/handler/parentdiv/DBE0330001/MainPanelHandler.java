@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgDo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -49,7 +50,7 @@ public class MainPanelHandler {
             dgDoctorSelection_Row row = new dgDoctorSelection_Row(
                     youKaiGoNinTeiKekTesuChi.get主治医医療機関コード(),
                     youKaiGoNinTeiKekTesuChi.get医療機関名称(),
-                    youKaiGoNinTeiKekTesuChi.get郵便番号(),
+                    (new YubinNo(youKaiGoNinTeiKekTesuChi.get郵便番号())).getEditedYubinNo() ,
                     youKaiGoNinTeiKekTesuChi.get電話番号(),
                     youKaiGoNinTeiKekTesuChi.get住所(),
                     youKaiGoNinTeiKekTesuChi.get主治医コード(),
