@@ -38,12 +38,8 @@ public class ZenkaiJohoDiv extends Panel {
     private DropDownList ddlZenkaiNijiHanteiKekka;
     @JsonProperty("txtZenkaiNinteiYukoKikan")
     private TextBox txtZenkaiNinteiYukoKikan;
-    @JsonProperty("txtZenkaiYukoKaishiDateFrom")
-    private TextBoxFlexibleDate txtZenkaiYukoKaishiDateFrom;
-    @JsonProperty("lblZenkaiYukoKaishiDate")
-    private Label lblZenkaiYukoKaishiDate;
-    @JsonProperty("txtZenkaiYukoKaishiDateTo")
-    private TextBoxFlexibleDate txtZenkaiYukoKaishiDateTo;
+    @JsonProperty("txtZenkaiYukoKaishiDateRange")
+    private TextBoxDateRange txtZenkaiYukoKaishiDateRange;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -196,57 +192,21 @@ public class ZenkaiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtZenkaiYukoKaishiDateFrom
-     * @return txtZenkaiYukoKaishiDateFrom
+     * gettxtZenkaiYukoKaishiDateRange
+     * @return txtZenkaiYukoKaishiDateRange
      */
-    @JsonProperty("txtZenkaiYukoKaishiDateFrom")
-    public TextBoxFlexibleDate getTxtZenkaiYukoKaishiDateFrom() {
-        return txtZenkaiYukoKaishiDateFrom;
+    @JsonProperty("txtZenkaiYukoKaishiDateRange")
+    public TextBoxDateRange getTxtZenkaiYukoKaishiDateRange() {
+        return txtZenkaiYukoKaishiDateRange;
     }
 
     /*
-     * settxtZenkaiYukoKaishiDateFrom
-     * @param txtZenkaiYukoKaishiDateFrom txtZenkaiYukoKaishiDateFrom
+     * settxtZenkaiYukoKaishiDateRange
+     * @param txtZenkaiYukoKaishiDateRange txtZenkaiYukoKaishiDateRange
      */
-    @JsonProperty("txtZenkaiYukoKaishiDateFrom")
-    public void setTxtZenkaiYukoKaishiDateFrom(TextBoxFlexibleDate txtZenkaiYukoKaishiDateFrom) {
-        this.txtZenkaiYukoKaishiDateFrom = txtZenkaiYukoKaishiDateFrom;
-    }
-
-    /*
-     * getlblZenkaiYukoKaishiDate
-     * @return lblZenkaiYukoKaishiDate
-     */
-    @JsonProperty("lblZenkaiYukoKaishiDate")
-    public Label getLblZenkaiYukoKaishiDate() {
-        return lblZenkaiYukoKaishiDate;
-    }
-
-    /*
-     * setlblZenkaiYukoKaishiDate
-     * @param lblZenkaiYukoKaishiDate lblZenkaiYukoKaishiDate
-     */
-    @JsonProperty("lblZenkaiYukoKaishiDate")
-    public void setLblZenkaiYukoKaishiDate(Label lblZenkaiYukoKaishiDate) {
-        this.lblZenkaiYukoKaishiDate = lblZenkaiYukoKaishiDate;
-    }
-
-    /*
-     * gettxtZenkaiYukoKaishiDateTo
-     * @return txtZenkaiYukoKaishiDateTo
-     */
-    @JsonProperty("txtZenkaiYukoKaishiDateTo")
-    public TextBoxFlexibleDate getTxtZenkaiYukoKaishiDateTo() {
-        return txtZenkaiYukoKaishiDateTo;
-    }
-
-    /*
-     * settxtZenkaiYukoKaishiDateTo
-     * @param txtZenkaiYukoKaishiDateTo txtZenkaiYukoKaishiDateTo
-     */
-    @JsonProperty("txtZenkaiYukoKaishiDateTo")
-    public void setTxtZenkaiYukoKaishiDateTo(TextBoxFlexibleDate txtZenkaiYukoKaishiDateTo) {
-        this.txtZenkaiYukoKaishiDateTo = txtZenkaiYukoKaishiDateTo;
+    @JsonProperty("txtZenkaiYukoKaishiDateRange")
+    public void setTxtZenkaiYukoKaishiDateRange(TextBoxDateRange txtZenkaiYukoKaishiDateRange) {
+        this.txtZenkaiYukoKaishiDateRange = txtZenkaiYukoKaishiDateRange;
     }
 
     // </editor-fold>

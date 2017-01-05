@@ -38,12 +38,8 @@ public class NinteiChosaDiv extends Panel {
     private DropDownList ddlChosaJisshiBasho;
     @JsonProperty("ddlChosaKubun")
     private DropDownList ddlChosaKubun;
-    @JsonProperty("txtChosaJisshiDateFrom")
-    private TextBoxFlexibleDate txtChosaJisshiDateFrom;
-    @JsonProperty("lblChosaJisshiDate")
-    private Label lblChosaJisshiDate;
-    @JsonProperty("txtChosaJisshiDateTo")
-    private TextBoxFlexibleDate txtChosaJisshiDateTo;
+    @JsonProperty("txtChosaJisshiDateRange")
+    private TextBoxDateRange txtChosaJisshiDateRange;
     @JsonProperty("ddlNinteiChosaNetakirido")
     private DropDownList ddlNinteiChosaNetakirido;
     @JsonProperty("ddlNinteiChosaNinchido")
@@ -200,57 +196,21 @@ public class NinteiChosaDiv extends Panel {
     }
 
     /*
-     * gettxtChosaJisshiDateFrom
-     * @return txtChosaJisshiDateFrom
+     * gettxtChosaJisshiDateRange
+     * @return txtChosaJisshiDateRange
      */
-    @JsonProperty("txtChosaJisshiDateFrom")
-    public TextBoxFlexibleDate getTxtChosaJisshiDateFrom() {
-        return txtChosaJisshiDateFrom;
+    @JsonProperty("txtChosaJisshiDateRange")
+    public TextBoxDateRange getTxtChosaJisshiDateRange() {
+        return txtChosaJisshiDateRange;
     }
 
     /*
-     * settxtChosaJisshiDateFrom
-     * @param txtChosaJisshiDateFrom txtChosaJisshiDateFrom
+     * settxtChosaJisshiDateRange
+     * @param txtChosaJisshiDateRange txtChosaJisshiDateRange
      */
-    @JsonProperty("txtChosaJisshiDateFrom")
-    public void setTxtChosaJisshiDateFrom(TextBoxFlexibleDate txtChosaJisshiDateFrom) {
-        this.txtChosaJisshiDateFrom = txtChosaJisshiDateFrom;
-    }
-
-    /*
-     * getlblChosaJisshiDate
-     * @return lblChosaJisshiDate
-     */
-    @JsonProperty("lblChosaJisshiDate")
-    public Label getLblChosaJisshiDate() {
-        return lblChosaJisshiDate;
-    }
-
-    /*
-     * setlblChosaJisshiDate
-     * @param lblChosaJisshiDate lblChosaJisshiDate
-     */
-    @JsonProperty("lblChosaJisshiDate")
-    public void setLblChosaJisshiDate(Label lblChosaJisshiDate) {
-        this.lblChosaJisshiDate = lblChosaJisshiDate;
-    }
-
-    /*
-     * gettxtChosaJisshiDateTo
-     * @return txtChosaJisshiDateTo
-     */
-    @JsonProperty("txtChosaJisshiDateTo")
-    public TextBoxFlexibleDate getTxtChosaJisshiDateTo() {
-        return txtChosaJisshiDateTo;
-    }
-
-    /*
-     * settxtChosaJisshiDateTo
-     * @param txtChosaJisshiDateTo txtChosaJisshiDateTo
-     */
-    @JsonProperty("txtChosaJisshiDateTo")
-    public void setTxtChosaJisshiDateTo(TextBoxFlexibleDate txtChosaJisshiDateTo) {
-        this.txtChosaJisshiDateTo = txtChosaJisshiDateTo;
+    @JsonProperty("txtChosaJisshiDateRange")
+    public void setTxtChosaJisshiDateRange(TextBoxDateRange txtChosaJisshiDateRange) {
+        this.txtChosaJisshiDateRange = txtChosaJisshiDateRange;
     }
 
     /*

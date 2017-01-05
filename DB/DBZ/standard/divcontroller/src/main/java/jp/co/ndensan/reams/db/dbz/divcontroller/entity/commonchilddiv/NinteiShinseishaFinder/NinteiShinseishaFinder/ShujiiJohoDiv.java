@@ -36,12 +36,8 @@ public class ShujiiJohoDiv extends Panel {
     private TextBox txtShujiiName;
     @JsonProperty("ddlShujiIkubun")
     private DropDownList ddlShujiIkubun;
-    @JsonProperty("txtIkenshoKinyuDateFrom")
-    private TextBoxFlexibleDate txtIkenshoKinyuDateFrom;
-    @JsonProperty("lblIkenshoKinyuDateFrom")
-    private Label lblIkenshoKinyuDateFrom;
-    @JsonProperty("txtIkenshoKinyuDateTo")
-    private TextBoxFlexibleDate txtIkenshoKinyuDateTo;
+    @JsonProperty("txtIkenshoKinyuDateRange")
+    private TextBoxDateRange txtIkenshoKinyuDateRange;
     @JsonProperty("ddlShujiJohoNetakirido")
     private DropDownList ddlShujiJohoNetakirido;
     @JsonProperty("ddlShujiJohoNinchido")
@@ -180,57 +176,21 @@ public class ShujiiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtIkenshoKinyuDateFrom
-     * @return txtIkenshoKinyuDateFrom
+     * gettxtIkenshoKinyuDateRange
+     * @return txtIkenshoKinyuDateRange
      */
-    @JsonProperty("txtIkenshoKinyuDateFrom")
-    public TextBoxFlexibleDate getTxtIkenshoKinyuDateFrom() {
-        return txtIkenshoKinyuDateFrom;
+    @JsonProperty("txtIkenshoKinyuDateRange")
+    public TextBoxDateRange getTxtIkenshoKinyuDateRange() {
+        return txtIkenshoKinyuDateRange;
     }
 
     /*
-     * settxtIkenshoKinyuDateFrom
-     * @param txtIkenshoKinyuDateFrom txtIkenshoKinyuDateFrom
+     * settxtIkenshoKinyuDateRange
+     * @param txtIkenshoKinyuDateRange txtIkenshoKinyuDateRange
      */
-    @JsonProperty("txtIkenshoKinyuDateFrom")
-    public void setTxtIkenshoKinyuDateFrom(TextBoxFlexibleDate txtIkenshoKinyuDateFrom) {
-        this.txtIkenshoKinyuDateFrom = txtIkenshoKinyuDateFrom;
-    }
-
-    /*
-     * getlblIkenshoKinyuDateFrom
-     * @return lblIkenshoKinyuDateFrom
-     */
-    @JsonProperty("lblIkenshoKinyuDateFrom")
-    public Label getLblIkenshoKinyuDateFrom() {
-        return lblIkenshoKinyuDateFrom;
-    }
-
-    /*
-     * setlblIkenshoKinyuDateFrom
-     * @param lblIkenshoKinyuDateFrom lblIkenshoKinyuDateFrom
-     */
-    @JsonProperty("lblIkenshoKinyuDateFrom")
-    public void setLblIkenshoKinyuDateFrom(Label lblIkenshoKinyuDateFrom) {
-        this.lblIkenshoKinyuDateFrom = lblIkenshoKinyuDateFrom;
-    }
-
-    /*
-     * gettxtIkenshoKinyuDateTo
-     * @return txtIkenshoKinyuDateTo
-     */
-    @JsonProperty("txtIkenshoKinyuDateTo")
-    public TextBoxFlexibleDate getTxtIkenshoKinyuDateTo() {
-        return txtIkenshoKinyuDateTo;
-    }
-
-    /*
-     * settxtIkenshoKinyuDateTo
-     * @param txtIkenshoKinyuDateTo txtIkenshoKinyuDateTo
-     */
-    @JsonProperty("txtIkenshoKinyuDateTo")
-    public void setTxtIkenshoKinyuDateTo(TextBoxFlexibleDate txtIkenshoKinyuDateTo) {
-        this.txtIkenshoKinyuDateTo = txtIkenshoKinyuDateTo;
+    @JsonProperty("txtIkenshoKinyuDateRange")
+    public void setTxtIkenshoKinyuDateRange(TextBoxDateRange txtIkenshoKinyuDateRange) {
+        this.txtIkenshoKinyuDateRange = txtIkenshoKinyuDateRange;
     }
 
     /*

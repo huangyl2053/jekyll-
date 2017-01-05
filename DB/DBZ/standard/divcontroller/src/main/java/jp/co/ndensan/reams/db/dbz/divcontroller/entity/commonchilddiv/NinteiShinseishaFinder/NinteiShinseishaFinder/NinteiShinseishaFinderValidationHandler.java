@@ -7,15 +7,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
 
 import java.util.List;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -46,17 +43,6 @@ public class NinteiShinseishaFinderValidationHandler {
      */
     public ValidationMessageControlPairs validate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtNinteiShinseiDateFrom(), div.getTxtNinteiShinseiDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtBirthDateFrom(), div.getTxtBirthDateTO()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtChosaJisshiDateFrom(), div.getTxtChosaJisshiDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtIkenshoKinyuDateFrom(), div.getTxtIkenshoKinyuDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtIchijiHanteiDateFrom(), div.getTxtIchijiHanteiDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtIchiGoHanteiDateFrom(), div.getTxtIchiGoHanteiDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtNinteiYukoKaishiDateFrom(), div.getTxtNinteiYukoKaishiDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtNinteiYukoShuryoDateFrom(), div.getTxtNinteiYukoShuryoDate()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtNijiHanteiDateFrom(), div.getTxtNijiHnateiDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtKaisaiDateFrom(), div.getTxtKaisaiDateTo()));
-        validPairs.add(checkTextBoxFlexibleDate(div.getTxtZenkaiYukoKaishiDateFrom(), div.getTxtZenkaiYukoKaishiDateTo()));
         RString txtKaisaiNumberStart = div.getTxtKaisaiNumberStart().getValue();
         RString txtKaisaiNumberEnd = div.getTxtKaisaiNumberEnd().getValue();
         if (txtKaisaiNumberStart != null && txtKaisaiNumberEnd != null
@@ -75,20 +61,6 @@ public class NinteiShinseishaFinderValidationHandler {
                     div.getTxtShinseiKeikaNissu()));
         }
         validPairs.add(checkNowPhase());
-        return validPairs;
-    }
-
-    private ValidationMessageControlPairs checkTextBoxFlexibleDate(TextBoxFlexibleDate from, TextBoxFlexibleDate to) {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        FlexibleDate txtNinteiShinseiDateFrom = from.getValue();
-        FlexibleDate txtNinteiShinseiDateTo = to.getValue();
-        if (txtNinteiShinseiDateFrom != null && !FlexibleDate.EMPTY.equals(txtNinteiShinseiDateFrom)
-                && txtNinteiShinseiDateTo != null && !FlexibleDate.EMPTY.equals(txtNinteiShinseiDateTo)
-                && txtNinteiShinseiDateTo.isBefore(txtNinteiShinseiDateFrom)) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.終了日が開始日以前),
-                    from, to));
-        }
         return validPairs;
     }
 
