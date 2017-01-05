@@ -253,6 +253,69 @@ public class ShujiiIkenshoIraiJoho extends
     public FlexibleDate get認定状況提供年月日() {
         return entity.getNinteiJohoTeikyoYMD();
     }
+    
+     /**
+     * 介護保険診断命令書発行有無を返します。
+     *
+     * @return 介護保険診断命令書発行有無
+     */
+    public boolean is介護保険診断命令書発行有無() {
+        return entity.getIsShindanMeireishoHakkoFlag();
+    }
+    
+     /**
+     * 受信期間区分を返します。
+     *
+     * @return 受信期間区分
+     */
+    public Code get受信期間区分() {
+        return entity.getJushinKikanKubun();
+    }
+    
+     /**
+     * 受信日を返します。
+     *
+     * @return 受信日
+     */
+    public FlexibleDate get受信日() {
+        return entity.getJushinYMD();
+    }
+    
+     /**
+     * 受信時分を返します。
+     *
+     * @return 受信時分
+     */
+    public RString get受信時分() {
+        return entity.getJushinTime();
+    }
+    
+     /**
+     * 受信期間開始を返します。
+     *
+     * @return 受信期間開始
+     */
+    public FlexibleDate get受信期間開始() {
+        return entity.getJushinKikanKaishi();
+    }
+    
+     /**
+     * 受信期間終了を返します。
+     *
+     * @return 受信期間終了
+     */
+    public FlexibleDate get受信期間終了() {
+        return entity.getJushinKikanShuryo();
+    }
+    
+     /**
+     *  受信場所を返します。
+     *
+     * @return  受信場所
+     */
+    public RString get受信場所() {
+        return entity.getJushinBasho();
+    }
 
     /**
      * 論理削除フラグを返します。

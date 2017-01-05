@@ -264,6 +264,90 @@ public class ShujiiIkenshoIraiJohoBuilder {
         entity.setLogicalDeletedFlag(論理削除フラグ);
         return this;
     }
+    
+     /**
+     * 介護保険診断命令書発行有無を設定します。
+     *
+     * @param 介護保険診断命令書発行有無 介護保険診断命令書発行有無
+     * @return {@link ShujiiIkenshoIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set介護保険診断命令書発行有無(boolean 介護保険診断命令書発行有無) {
+        requireNonNull(介護保険診断命令書発行有無, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険診断命令書発行有無"));
+        entity.setIsShindanMeireishoHakkoFlag(介護保険診断命令書発行有無);
+        return this;
+    }
+    
+    /**
+     * 受信期間区分を設定します。
+     *
+     * @param 受信期間区分 受信期間区分
+     * @return {@link ShujiiIkenshoIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set受信期間区分(Code 受信期間区分) {
+        requireNonNull(受信期間区分, UrSystemErrorMessages.値がnull.getReplacedMessage("受信期間区分"));
+        entity.setJushinKikanKubun(受信期間区分);
+        return this;
+    }
+    
+     /**
+     * 受信日を設定します。
+     *
+     * @param 受信日 受信日
+     * @return {@link ShujiiIkenshoIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set受信日(FlexibleDate 受信日) {
+        requireNonNull(受信日, UrSystemErrorMessages.値がnull.getReplacedMessage("受信日"));
+        entity.setJushinYMD(受信日);
+        return this;
+    }
+    
+     /**
+     * 受信時分を設定します。
+     *
+     * @param 受信時分 受信時分
+     * @return {@link ShujiiIkenshoIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set受信時分(RString 受信時分) {
+        requireNonNull(受信時分, UrSystemErrorMessages.値がnull.getReplacedMessage("受信時分"));
+        entity.setJushinTime(受信時分);
+        return this;
+    }
+    
+     /**
+     * 受信期間開始を設定します。
+     *
+     * @param 受信期間開始 受信期間開始
+     * @return {@link ShujiiIkenshoIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set受信期間開始(FlexibleDate 受信期間開始) {
+        requireNonNull(受信期間開始, UrSystemErrorMessages.値がnull.getReplacedMessage("受信期間開始"));
+        entity.setJushinKikanKaishi(受信期間開始);
+        return this;
+    }
+    
+     /**
+     * 受信期間終了を設定します。
+     *
+     * @param 受信期間終了 受信期間終了
+     * @return {@link ShujiiIkenshoIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set受信期間終了(FlexibleDate 受信期間終了) {
+        requireNonNull(受信期間終了, UrSystemErrorMessages.値がnull.getReplacedMessage("受信期間終了"));
+        entity.setJushinKikanShuryo(受信期間終了);
+        return this;
+    }
+    
+     /**
+     * 受信場所を設定します。
+     *
+     * @param 受信場所 受信場所
+     * @return {@link ShujiiIkenshoIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set受信場所(RString 受信場所) {
+        requireNonNull(受信場所, UrSystemErrorMessages.値がnull.getReplacedMessage("受信場所"));
+        entity.setJushinBasho(受信場所);
+        return this;
+    }
 
     /**
      * {@link ShujiiIkenshoIraiJoho}のインスタンスを生成します。

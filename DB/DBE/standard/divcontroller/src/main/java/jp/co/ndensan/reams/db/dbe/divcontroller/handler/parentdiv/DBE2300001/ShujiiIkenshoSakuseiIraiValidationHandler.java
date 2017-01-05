@@ -148,7 +148,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
                     || RString.isNullOrEmpty(row.getShujii()) || row.getShujiiIkenshoSakuseiIraiDay().getValue() == null)) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.実行不可, 依頼情報未指定.toString())));
+                                UrErrorMessages.実行不可, 依頼情報未指定.toString()), div.getBtnIrai()));
                 return validationMessages;
             }
         }

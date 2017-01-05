@@ -38,10 +38,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSak
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -51,9 +49,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -428,29 +423,6 @@ public class ShujiiIkenshoSakuseiIrai {
                 builder.set論理削除フラグ(true);
                 ikenshoIraiJoho = builder.build();
                 manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
-            } else if (row.getSelected() && !削除.equals(row.getStatus())) {
-                if (RString.isNullOrEmpty(row.getIraiKubun())) {
-                    //新規
-                    int rirekiNo = 数字_1;
-                    if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
-                        rirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
-                    }
-                    manager.save主治医意見書作成依頼情報(
-                            create主治医意見書作成依頼情報(div, row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo, 共通日), EntityDataState.Added);
-                } else {
-                    //修正
-                    RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
-                    ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
-                            row.getRirekiNo().toInt(), getHihokenshaNo(div));
-                    ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
-                    ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
-                    builder.set論理削除フラグ(true);
-                    ikenshoIraiJoho = builder.build();
-                    manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
-                    manager.save主治医意見書作成依頼情報(
-                            create主治医意見書作成依頼情報(div, row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
-                                    Integer.parseInt(row.getRirekiNo().toString()) + 1, 共通日), EntityDataState.Added);
-                }
             }
         }
     }
@@ -475,7 +447,11 @@ public class ShujiiIkenshoSakuseiIrai {
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         builder.set主治医意見書作成回数(数字_1);
         builder.set医師区分コード(new Code(row.getIshiKbnCode()));
-        builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getShujiiIkenshoSakuseiIraiDay().getValue().toDateString()));
+        if (row.getShujiiIkenshoSakuseiIraiDay().getValue() != null) {
+            builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getShujiiIkenshoSakuseiIraiDay().getValue().toDateString()));
+        } else {
+            builder.set主治医意見書作成依頼年月日(new FlexibleDate(div.getTxtShujiiIkensahoSakuseiIraiDay().getValue().toDateString()));
+        }
         if (日付 != null) {
             builder.set主治医意見書作成期限年月日(new FlexibleDate(日付.toDateString()));
         } else {
@@ -507,8 +483,64 @@ public class ShujiiIkenshoSakuseiIrai {
             createChoHyoData(div, row);
         }
         toPrint(reportManager);
+        for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
+            if (row.getSelected() && 新規.equals(row.getStatus())) {
+                int rirekiNo = 数字_1;
+                if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
+                    rirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
+                }
+                ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
+                        rirekiNo, getHihokenshaNo(div));
+                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
+                ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
+                setJushinJoho(div, builder);
+                ikenshoIraiJoho = builder.build();
+                manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+            } else if (row.getSelected() && 修正.equals(row.getStatus())) {
+                ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
+                        row.getRirekiNo().toInt() + 1, getHihokenshaNo(div));
+                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
+                ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
+                setJushinJoho(div, builder);
+                ikenshoIraiJoho = builder.build();
+                manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+            }else if(row.getSelected()){
+                ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
+                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
+                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
+                        row.getRirekiNo().toInt(), getHihokenshaNo(div));
+                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
+                ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
+                setJushinJoho(div, builder);
+                ikenshoIraiJoho = builder.build();
+                manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
+            }
+        }
     }
     
+    private void setJushinJoho(ShujiiIkenshoSakuseiIraiDiv div, ShujiiIkenshoIraiJohoBuilder getBuilder){
+        
+        getBuilder.set依頼書出力年月日(new FlexibleDate(div.getTxtHakobi().getValue().toDateString()));
+        if (div.getMeireiSho().getSelectedKeys().contains(SELECTED_KEY0)) {
+                    getBuilder.set介護保険診断命令書発行有無(true);
+                    if (SELECTED_KEY0.equals(div.getRadjyushin().getSelectedKey())) {
+                        getBuilder.set受信期間区分(new Code(new RString(数字_1)));
+                        getBuilder.set受信日(new FlexibleDate(div.getTxtjyushinymd().getValue().toDateString()));
+                        getBuilder.set受信時分(new RString(div.getTxtjyushintime().getValue().toString()));
+                    }
+                    if (SELECTED_KEY1.equals(div.getRadjyushin().getSelectedKey())) {
+                        getBuilder.set受信期間区分(new Code(new RString(数字_2)));
+                        getBuilder.set受信期間開始(new FlexibleDate(div.getTxtJyushinKikan().getFromValue().toDateString()));
+                        getBuilder.set受信期間終了(new FlexibleDate(div.getTxtJyushinKikan().getToValue().toDateString()));
+                        getBuilder.set受信場所(new RString(div.getTxtjyushinbasho().toString()));
+                    }
+                }
+    }
+
     private RString getEditedYubinNo(RString yubinNo) {
         if (RString.isNullOrEmpty(yubinNo)) {
             return RString.EMPTY;
