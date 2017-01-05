@@ -492,6 +492,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
         for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
             item.setDenshiKoin(ninshosha.denshiKoin);
+            item.setHakkoYMD1(ninshosha.hakkoYMD);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
             item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);

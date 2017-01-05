@@ -208,6 +208,7 @@ public class ChosaKekkaInfoGaikyoHandler {
                 count = CKGaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(介護給付サービス);
             }
         }
+
         for (int i = 0; i < count; i++) {
             dgServiceJokyo_Row dgJigyoshaItiran = new dgServiceJokyo_Row();
             if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
@@ -215,10 +216,11 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
                 dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                i = i + 1;
+                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
             if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
@@ -226,10 +228,11 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
                 dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                i = i + 1;
+                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
             if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
@@ -237,10 +240,11 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
                 dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                i = i + 1;
+                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
             if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
@@ -248,10 +252,11 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
                 dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                i = i + 1;
+                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
             if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
@@ -259,10 +264,11 @@ public class ChosaKekkaInfoGaikyoHandler {
                 dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
                 dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
                 dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceName2(getName(i + count, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i + count, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i + count, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i + count, serviceJokyos));
+                i = i + 1;
+                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
+                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
+                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
+                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
                 grdSinsaSeiList.add(dgJigyoshaItiran);
             }
         }
