@@ -376,33 +376,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtChosaJisshiDateFrom() {
-        return this.getNinteiChosa().getTxtChosaJisshiDateFrom();
+    public TextBoxDateRange getTxtChosaJisshiDateRange() {
+        return this.getNinteiChosa().getTxtChosaJisshiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtChosaJisshiDateFrom(TextBoxFlexibleDate txtChosaJisshiDateFrom) {
-        this.getNinteiChosa().setTxtChosaJisshiDateFrom(txtChosaJisshiDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblChosaJisshiDate() {
-        return this.getNinteiChosa().getLblChosaJisshiDate();
-    }
-
-    @JsonIgnore
-    public void  setLblChosaJisshiDate(Label lblChosaJisshiDate) {
-        this.getNinteiChosa().setLblChosaJisshiDate(lblChosaJisshiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtChosaJisshiDateTo() {
-        return this.getNinteiChosa().getTxtChosaJisshiDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtChosaJisshiDateTo(TextBoxFlexibleDate txtChosaJisshiDateTo) {
-        this.getNinteiChosa().setTxtChosaJisshiDateTo(txtChosaJisshiDateTo);
+    public void  setTxtChosaJisshiDateRange(TextBoxDateRange txtChosaJisshiDateRange) {
+        this.getNinteiChosa().setTxtChosaJisshiDateRange(txtChosaJisshiDateRange);
     }
 
     @JsonIgnore
@@ -496,33 +476,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtIkenshoKinyuDateFrom() {
-        return this.getShujiiJoho().getTxtIkenshoKinyuDateFrom();
+    public TextBoxDateRange getTxtIkenshoKinyuDateRange() {
+        return this.getShujiiJoho().getTxtIkenshoKinyuDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtIkenshoKinyuDateFrom(TextBoxFlexibleDate txtIkenshoKinyuDateFrom) {
-        this.getShujiiJoho().setTxtIkenshoKinyuDateFrom(txtIkenshoKinyuDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblIkenshoKinyuDateFrom() {
-        return this.getShujiiJoho().getLblIkenshoKinyuDateFrom();
-    }
-
-    @JsonIgnore
-    public void  setLblIkenshoKinyuDateFrom(Label lblIkenshoKinyuDateFrom) {
-        this.getShujiiJoho().setLblIkenshoKinyuDateFrom(lblIkenshoKinyuDateFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtIkenshoKinyuDateTo() {
-        return this.getShujiiJoho().getTxtIkenshoKinyuDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtIkenshoKinyuDateTo(TextBoxFlexibleDate txtIkenshoKinyuDateTo) {
-        this.getShujiiJoho().setTxtIkenshoKinyuDateTo(txtIkenshoKinyuDateTo);
+    public void  setTxtIkenshoKinyuDateRange(TextBoxDateRange txtIkenshoKinyuDateRange) {
+        this.getShujiiJoho().setTxtIkenshoKinyuDateRange(txtIkenshoKinyuDateRange);
     }
 
     @JsonIgnore
@@ -546,33 +506,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtIchijiHanteiDateFrom() {
-        return this.getIchijiHantei().getTxtIchijiHanteiDateFrom();
+    public TextBoxDateRange getTxtIchijiHanteiDateRange() {
+        return this.getIchijiHantei().getTxtIchijiHanteiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtIchijiHanteiDateFrom(TextBoxFlexibleDate txtIchijiHanteiDateFrom) {
-        this.getIchijiHantei().setTxtIchijiHanteiDateFrom(txtIchijiHanteiDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblIchijiHanteiDate() {
-        return this.getIchijiHantei().getLblIchijiHanteiDate();
-    }
-
-    @JsonIgnore
-    public void  setLblIchijiHanteiDate(Label lblIchijiHanteiDate) {
-        this.getIchijiHantei().setLblIchijiHanteiDate(lblIchijiHanteiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtIchijiHanteiDateTo() {
-        return this.getIchijiHantei().getTxtIchijiHanteiDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtIchijiHanteiDateTo(TextBoxFlexibleDate txtIchijiHanteiDateTo) {
-        this.getIchijiHantei().setTxtIchijiHanteiDateTo(txtIchijiHanteiDateTo);
+    public void  setTxtIchijiHanteiDateRange(TextBoxDateRange txtIchijiHanteiDateRange) {
+        this.getIchijiHantei().setTxtIchijiHanteiDateRange(txtIchijiHanteiDateRange);
     }
 
     @JsonIgnore
@@ -586,33 +526,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtIchiGoHanteiDateFrom() {
-        return this.getIchiGoHantei().getTxtIchiGoHanteiDateFrom();
+    public TextBoxDateRange getTxtIchiGoHanteiDateRange() {
+        return this.getIchiGoHantei().getTxtIchiGoHanteiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtIchiGoHanteiDateFrom(TextBoxFlexibleDate txtIchiGoHanteiDateFrom) {
-        this.getIchiGoHantei().setTxtIchiGoHanteiDateFrom(txtIchiGoHanteiDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblIchiGoHanteiDate() {
-        return this.getIchiGoHantei().getLblIchiGoHanteiDate();
-    }
-
-    @JsonIgnore
-    public void  setLblIchiGoHanteiDate(Label lblIchiGoHanteiDate) {
-        this.getIchiGoHantei().setLblIchiGoHanteiDate(lblIchiGoHanteiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtIchiGoHanteiDateTo() {
-        return this.getIchiGoHantei().getTxtIchiGoHanteiDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtIchiGoHanteiDateTo(TextBoxFlexibleDate txtIchiGoHanteiDateTo) {
-        this.getIchiGoHantei().setTxtIchiGoHanteiDateTo(txtIchiGoHanteiDateTo);
+    public void  setTxtIchiGoHanteiDateRange(TextBoxDateRange txtIchiGoHanteiDateRange) {
+        this.getIchiGoHantei().setTxtIchiGoHanteiDateRange(txtIchiGoHanteiDateRange);
     }
 
     @JsonIgnore
@@ -656,123 +576,43 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiYukoKaishiDateFrom() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtNinteiYukoKaishiDateFrom();
+    public TextBoxDateRange getTxtNinteiYukoKaishiDateRange() {
+        return this.getKaigoNinteiShinsakaiJoho().getTxtNinteiYukoKaishiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoKaishiDateFrom(TextBoxFlexibleDate txtNinteiYukoKaishiDateFrom) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtNinteiYukoKaishiDateFrom(txtNinteiYukoKaishiDateFrom);
+    public void  setTxtNinteiYukoKaishiDateRange(TextBoxDateRange txtNinteiYukoKaishiDateRange) {
+        this.getKaigoNinteiShinsakaiJoho().setTxtNinteiYukoKaishiDateRange(txtNinteiYukoKaishiDateRange);
     }
 
     @JsonIgnore
-    public Label getLblNinteiYukoKaishiDate() {
-        return this.getKaigoNinteiShinsakaiJoho().getLblNinteiYukoKaishiDate();
+    public TextBoxDateRange getTxtNinteiYukoShuryoDateRange() {
+        return this.getKaigoNinteiShinsakaiJoho().getTxtNinteiYukoShuryoDateRange();
     }
 
     @JsonIgnore
-    public void  setLblNinteiYukoKaishiDate(Label lblNinteiYukoKaishiDate) {
-        this.getKaigoNinteiShinsakaiJoho().setLblNinteiYukoKaishiDate(lblNinteiYukoKaishiDate);
+    public void  setTxtNinteiYukoShuryoDateRange(TextBoxDateRange txtNinteiYukoShuryoDateRange) {
+        this.getKaigoNinteiShinsakaiJoho().setTxtNinteiYukoShuryoDateRange(txtNinteiYukoShuryoDateRange);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiYukoKaishiDateTo() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtNinteiYukoKaishiDateTo();
+    public TextBoxDateRange getTxtNijiHanteiDateRange() {
+        return this.getKaigoNinteiShinsakaiJoho().getTxtNijiHanteiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoKaishiDateTo(TextBoxFlexibleDate txtNinteiYukoKaishiDateTo) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtNinteiYukoKaishiDateTo(txtNinteiYukoKaishiDateTo);
+    public void  setTxtNijiHanteiDateRange(TextBoxDateRange txtNijiHanteiDateRange) {
+        this.getKaigoNinteiShinsakaiJoho().setTxtNijiHanteiDateRange(txtNijiHanteiDateRange);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiYukoShuryoDateFrom() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtNinteiYukoShuryoDateFrom();
+    public TextBoxDateRange getTxtKaisaiDateRange() {
+        return this.getKaigoNinteiShinsakaiJoho().getTxtKaisaiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiYukoShuryoDateFrom(TextBoxFlexibleDate txtNinteiYukoShuryoDateFrom) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtNinteiYukoShuryoDateFrom(txtNinteiYukoShuryoDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblNinteiYukoShuryoDate() {
-        return this.getKaigoNinteiShinsakaiJoho().getLblNinteiYukoShuryoDate();
-    }
-
-    @JsonIgnore
-    public void  setLblNinteiYukoShuryoDate(Label lblNinteiYukoShuryoDate) {
-        this.getKaigoNinteiShinsakaiJoho().setLblNinteiYukoShuryoDate(lblNinteiYukoShuryoDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiYukoShuryoDate() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtNinteiYukoShuryoDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiYukoShuryoDate(TextBoxFlexibleDate txtNinteiYukoShuryoDate) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtNinteiYukoShuryoDate(txtNinteiYukoShuryoDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtNijiHanteiDateFrom() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtNijiHanteiDateFrom();
-    }
-
-    @JsonIgnore
-    public void  setTxtNijiHanteiDateFrom(TextBoxFlexibleDate txtNijiHanteiDateFrom) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtNijiHanteiDateFrom(txtNijiHanteiDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblNijiHanteiDate() {
-        return this.getKaigoNinteiShinsakaiJoho().getLblNijiHanteiDate();
-    }
-
-    @JsonIgnore
-    public void  setLblNijiHanteiDate(Label lblNijiHanteiDate) {
-        this.getKaigoNinteiShinsakaiJoho().setLblNijiHanteiDate(lblNijiHanteiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtNijiHnateiDateTo() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtNijiHnateiDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtNijiHnateiDateTo(TextBoxFlexibleDate txtNijiHnateiDateTo) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtNijiHnateiDateTo(txtNijiHnateiDateTo);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtKaisaiDateFrom() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtKaisaiDateFrom();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaisaiDateFrom(TextBoxFlexibleDate txtKaisaiDateFrom) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtKaisaiDateFrom(txtKaisaiDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblKaisaiDate() {
-        return this.getKaigoNinteiShinsakaiJoho().getLblKaisaiDate();
-    }
-
-    @JsonIgnore
-    public void  setLblKaisaiDate(Label lblKaisaiDate) {
-        this.getKaigoNinteiShinsakaiJoho().setLblKaisaiDate(lblKaisaiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtKaisaiDateTo() {
-        return this.getKaigoNinteiShinsakaiJoho().getTxtKaisaiDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaisaiDateTo(TextBoxFlexibleDate txtKaisaiDateTo) {
-        this.getKaigoNinteiShinsakaiJoho().setTxtKaisaiDateTo(txtKaisaiDateTo);
+    public void  setTxtKaisaiDateRange(TextBoxDateRange txtKaisaiDateRange) {
+        this.getKaigoNinteiShinsakaiJoho().setTxtKaisaiDateRange(txtKaisaiDateRange);
     }
 
     @JsonIgnore
@@ -896,33 +736,13 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtZenkaiYukoKaishiDateFrom() {
-        return this.getZenkaiJoho().getTxtZenkaiYukoKaishiDateFrom();
+    public TextBoxDateRange getTxtZenkaiYukoKaishiDateRange() {
+        return this.getZenkaiJoho().getTxtZenkaiYukoKaishiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiYukoKaishiDateFrom(TextBoxFlexibleDate txtZenkaiYukoKaishiDateFrom) {
-        this.getZenkaiJoho().setTxtZenkaiYukoKaishiDateFrom(txtZenkaiYukoKaishiDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblZenkaiYukoKaishiDate() {
-        return this.getZenkaiJoho().getLblZenkaiYukoKaishiDate();
-    }
-
-    @JsonIgnore
-    public void  setLblZenkaiYukoKaishiDate(Label lblZenkaiYukoKaishiDate) {
-        this.getZenkaiJoho().setLblZenkaiYukoKaishiDate(lblZenkaiYukoKaishiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtZenkaiYukoKaishiDateTo() {
-        return this.getZenkaiJoho().getTxtZenkaiYukoKaishiDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtZenkaiYukoKaishiDateTo(TextBoxFlexibleDate txtZenkaiYukoKaishiDateTo) {
-        this.getZenkaiJoho().setTxtZenkaiYukoKaishiDateTo(txtZenkaiYukoKaishiDateTo);
+    public void  setTxtZenkaiYukoKaishiDateRange(TextBoxDateRange txtZenkaiYukoKaishiDateRange) {
+        this.getZenkaiJoho().setTxtZenkaiYukoKaishiDateRange(txtZenkaiYukoKaishiDateRange);
     }
 
     @JsonIgnore

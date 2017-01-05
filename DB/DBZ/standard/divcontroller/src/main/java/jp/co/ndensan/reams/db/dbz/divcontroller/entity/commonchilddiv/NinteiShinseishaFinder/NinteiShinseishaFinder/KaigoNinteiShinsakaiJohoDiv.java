@@ -27,30 +27,14 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     private TextBox txtNinteiYukoKikan;
     @JsonProperty("txtCheckDay")
     private TextBoxDate txtCheckDay;
-    @JsonProperty("txtNinteiYukoKaishiDateFrom")
-    private TextBoxFlexibleDate txtNinteiYukoKaishiDateFrom;
-    @JsonProperty("lblNinteiYukoKaishiDate")
-    private Label lblNinteiYukoKaishiDate;
-    @JsonProperty("txtNinteiYukoKaishiDateTo")
-    private TextBoxFlexibleDate txtNinteiYukoKaishiDateTo;
-    @JsonProperty("txtNinteiYukoShuryoDateFrom")
-    private TextBoxFlexibleDate txtNinteiYukoShuryoDateFrom;
-    @JsonProperty("lblNinteiYukoShuryoDate")
-    private Label lblNinteiYukoShuryoDate;
-    @JsonProperty("txtNinteiYukoShuryoDate")
-    private TextBoxFlexibleDate txtNinteiYukoShuryoDate;
-    @JsonProperty("txtNijiHanteiDateFrom")
-    private TextBoxFlexibleDate txtNijiHanteiDateFrom;
-    @JsonProperty("lblNijiHanteiDate")
-    private Label lblNijiHanteiDate;
-    @JsonProperty("txtNijiHnateiDateTo")
-    private TextBoxFlexibleDate txtNijiHnateiDateTo;
-    @JsonProperty("txtKaisaiDateFrom")
-    private TextBoxFlexibleDate txtKaisaiDateFrom;
-    @JsonProperty("lblKaisaiDate")
-    private Label lblKaisaiDate;
-    @JsonProperty("txtKaisaiDateTo")
-    private TextBoxFlexibleDate txtKaisaiDateTo;
+    @JsonProperty("txtNinteiYukoKaishiDateRange")
+    private TextBoxDateRange txtNinteiYukoKaishiDateRange;
+    @JsonProperty("txtNinteiYukoShuryoDateRange")
+    private TextBoxDateRange txtNinteiYukoShuryoDateRange;
+    @JsonProperty("txtNijiHanteiDateRange")
+    private TextBoxDateRange txtNijiHanteiDateRange;
+    @JsonProperty("txtKaisaiDateRange")
+    private TextBoxDateRange txtKaisaiDateRange;
     @JsonProperty("lblKaisaiNumber")
     private Label lblKaisaiNumber;
     @JsonProperty("txtKaisaiNumberStart")
@@ -121,219 +105,75 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtNinteiYukoKaishiDateFrom
-     * @return txtNinteiYukoKaishiDateFrom
+     * gettxtNinteiYukoKaishiDateRange
+     * @return txtNinteiYukoKaishiDateRange
      */
-    @JsonProperty("txtNinteiYukoKaishiDateFrom")
-    public TextBoxFlexibleDate getTxtNinteiYukoKaishiDateFrom() {
-        return txtNinteiYukoKaishiDateFrom;
+    @JsonProperty("txtNinteiYukoKaishiDateRange")
+    public TextBoxDateRange getTxtNinteiYukoKaishiDateRange() {
+        return txtNinteiYukoKaishiDateRange;
     }
 
     /*
-     * settxtNinteiYukoKaishiDateFrom
-     * @param txtNinteiYukoKaishiDateFrom txtNinteiYukoKaishiDateFrom
+     * settxtNinteiYukoKaishiDateRange
+     * @param txtNinteiYukoKaishiDateRange txtNinteiYukoKaishiDateRange
      */
-    @JsonProperty("txtNinteiYukoKaishiDateFrom")
-    public void setTxtNinteiYukoKaishiDateFrom(TextBoxFlexibleDate txtNinteiYukoKaishiDateFrom) {
-        this.txtNinteiYukoKaishiDateFrom = txtNinteiYukoKaishiDateFrom;
+    @JsonProperty("txtNinteiYukoKaishiDateRange")
+    public void setTxtNinteiYukoKaishiDateRange(TextBoxDateRange txtNinteiYukoKaishiDateRange) {
+        this.txtNinteiYukoKaishiDateRange = txtNinteiYukoKaishiDateRange;
     }
 
     /*
-     * getlblNinteiYukoKaishiDate
-     * @return lblNinteiYukoKaishiDate
+     * gettxtNinteiYukoShuryoDateRange
+     * @return txtNinteiYukoShuryoDateRange
      */
-    @JsonProperty("lblNinteiYukoKaishiDate")
-    public Label getLblNinteiYukoKaishiDate() {
-        return lblNinteiYukoKaishiDate;
+    @JsonProperty("txtNinteiYukoShuryoDateRange")
+    public TextBoxDateRange getTxtNinteiYukoShuryoDateRange() {
+        return txtNinteiYukoShuryoDateRange;
     }
 
     /*
-     * setlblNinteiYukoKaishiDate
-     * @param lblNinteiYukoKaishiDate lblNinteiYukoKaishiDate
+     * settxtNinteiYukoShuryoDateRange
+     * @param txtNinteiYukoShuryoDateRange txtNinteiYukoShuryoDateRange
      */
-    @JsonProperty("lblNinteiYukoKaishiDate")
-    public void setLblNinteiYukoKaishiDate(Label lblNinteiYukoKaishiDate) {
-        this.lblNinteiYukoKaishiDate = lblNinteiYukoKaishiDate;
+    @JsonProperty("txtNinteiYukoShuryoDateRange")
+    public void setTxtNinteiYukoShuryoDateRange(TextBoxDateRange txtNinteiYukoShuryoDateRange) {
+        this.txtNinteiYukoShuryoDateRange = txtNinteiYukoShuryoDateRange;
     }
 
     /*
-     * gettxtNinteiYukoKaishiDateTo
-     * @return txtNinteiYukoKaishiDateTo
+     * gettxtNijiHanteiDateRange
+     * @return txtNijiHanteiDateRange
      */
-    @JsonProperty("txtNinteiYukoKaishiDateTo")
-    public TextBoxFlexibleDate getTxtNinteiYukoKaishiDateTo() {
-        return txtNinteiYukoKaishiDateTo;
+    @JsonProperty("txtNijiHanteiDateRange")
+    public TextBoxDateRange getTxtNijiHanteiDateRange() {
+        return txtNijiHanteiDateRange;
     }
 
     /*
-     * settxtNinteiYukoKaishiDateTo
-     * @param txtNinteiYukoKaishiDateTo txtNinteiYukoKaishiDateTo
+     * settxtNijiHanteiDateRange
+     * @param txtNijiHanteiDateRange txtNijiHanteiDateRange
      */
-    @JsonProperty("txtNinteiYukoKaishiDateTo")
-    public void setTxtNinteiYukoKaishiDateTo(TextBoxFlexibleDate txtNinteiYukoKaishiDateTo) {
-        this.txtNinteiYukoKaishiDateTo = txtNinteiYukoKaishiDateTo;
+    @JsonProperty("txtNijiHanteiDateRange")
+    public void setTxtNijiHanteiDateRange(TextBoxDateRange txtNijiHanteiDateRange) {
+        this.txtNijiHanteiDateRange = txtNijiHanteiDateRange;
     }
 
     /*
-     * gettxtNinteiYukoShuryoDateFrom
-     * @return txtNinteiYukoShuryoDateFrom
+     * gettxtKaisaiDateRange
+     * @return txtKaisaiDateRange
      */
-    @JsonProperty("txtNinteiYukoShuryoDateFrom")
-    public TextBoxFlexibleDate getTxtNinteiYukoShuryoDateFrom() {
-        return txtNinteiYukoShuryoDateFrom;
+    @JsonProperty("txtKaisaiDateRange")
+    public TextBoxDateRange getTxtKaisaiDateRange() {
+        return txtKaisaiDateRange;
     }
 
     /*
-     * settxtNinteiYukoShuryoDateFrom
-     * @param txtNinteiYukoShuryoDateFrom txtNinteiYukoShuryoDateFrom
+     * settxtKaisaiDateRange
+     * @param txtKaisaiDateRange txtKaisaiDateRange
      */
-    @JsonProperty("txtNinteiYukoShuryoDateFrom")
-    public void setTxtNinteiYukoShuryoDateFrom(TextBoxFlexibleDate txtNinteiYukoShuryoDateFrom) {
-        this.txtNinteiYukoShuryoDateFrom = txtNinteiYukoShuryoDateFrom;
-    }
-
-    /*
-     * getlblNinteiYukoShuryoDate
-     * @return lblNinteiYukoShuryoDate
-     */
-    @JsonProperty("lblNinteiYukoShuryoDate")
-    public Label getLblNinteiYukoShuryoDate() {
-        return lblNinteiYukoShuryoDate;
-    }
-
-    /*
-     * setlblNinteiYukoShuryoDate
-     * @param lblNinteiYukoShuryoDate lblNinteiYukoShuryoDate
-     */
-    @JsonProperty("lblNinteiYukoShuryoDate")
-    public void setLblNinteiYukoShuryoDate(Label lblNinteiYukoShuryoDate) {
-        this.lblNinteiYukoShuryoDate = lblNinteiYukoShuryoDate;
-    }
-
-    /*
-     * gettxtNinteiYukoShuryoDate
-     * @return txtNinteiYukoShuryoDate
-     */
-    @JsonProperty("txtNinteiYukoShuryoDate")
-    public TextBoxFlexibleDate getTxtNinteiYukoShuryoDate() {
-        return txtNinteiYukoShuryoDate;
-    }
-
-    /*
-     * settxtNinteiYukoShuryoDate
-     * @param txtNinteiYukoShuryoDate txtNinteiYukoShuryoDate
-     */
-    @JsonProperty("txtNinteiYukoShuryoDate")
-    public void setTxtNinteiYukoShuryoDate(TextBoxFlexibleDate txtNinteiYukoShuryoDate) {
-        this.txtNinteiYukoShuryoDate = txtNinteiYukoShuryoDate;
-    }
-
-    /*
-     * gettxtNijiHanteiDateFrom
-     * @return txtNijiHanteiDateFrom
-     */
-    @JsonProperty("txtNijiHanteiDateFrom")
-    public TextBoxFlexibleDate getTxtNijiHanteiDateFrom() {
-        return txtNijiHanteiDateFrom;
-    }
-
-    /*
-     * settxtNijiHanteiDateFrom
-     * @param txtNijiHanteiDateFrom txtNijiHanteiDateFrom
-     */
-    @JsonProperty("txtNijiHanteiDateFrom")
-    public void setTxtNijiHanteiDateFrom(TextBoxFlexibleDate txtNijiHanteiDateFrom) {
-        this.txtNijiHanteiDateFrom = txtNijiHanteiDateFrom;
-    }
-
-    /*
-     * getlblNijiHanteiDate
-     * @return lblNijiHanteiDate
-     */
-    @JsonProperty("lblNijiHanteiDate")
-    public Label getLblNijiHanteiDate() {
-        return lblNijiHanteiDate;
-    }
-
-    /*
-     * setlblNijiHanteiDate
-     * @param lblNijiHanteiDate lblNijiHanteiDate
-     */
-    @JsonProperty("lblNijiHanteiDate")
-    public void setLblNijiHanteiDate(Label lblNijiHanteiDate) {
-        this.lblNijiHanteiDate = lblNijiHanteiDate;
-    }
-
-    /*
-     * gettxtNijiHnateiDateTo
-     * @return txtNijiHnateiDateTo
-     */
-    @JsonProperty("txtNijiHnateiDateTo")
-    public TextBoxFlexibleDate getTxtNijiHnateiDateTo() {
-        return txtNijiHnateiDateTo;
-    }
-
-    /*
-     * settxtNijiHnateiDateTo
-     * @param txtNijiHnateiDateTo txtNijiHnateiDateTo
-     */
-    @JsonProperty("txtNijiHnateiDateTo")
-    public void setTxtNijiHnateiDateTo(TextBoxFlexibleDate txtNijiHnateiDateTo) {
-        this.txtNijiHnateiDateTo = txtNijiHnateiDateTo;
-    }
-
-    /*
-     * gettxtKaisaiDateFrom
-     * @return txtKaisaiDateFrom
-     */
-    @JsonProperty("txtKaisaiDateFrom")
-    public TextBoxFlexibleDate getTxtKaisaiDateFrom() {
-        return txtKaisaiDateFrom;
-    }
-
-    /*
-     * settxtKaisaiDateFrom
-     * @param txtKaisaiDateFrom txtKaisaiDateFrom
-     */
-    @JsonProperty("txtKaisaiDateFrom")
-    public void setTxtKaisaiDateFrom(TextBoxFlexibleDate txtKaisaiDateFrom) {
-        this.txtKaisaiDateFrom = txtKaisaiDateFrom;
-    }
-
-    /*
-     * getlblKaisaiDate
-     * @return lblKaisaiDate
-     */
-    @JsonProperty("lblKaisaiDate")
-    public Label getLblKaisaiDate() {
-        return lblKaisaiDate;
-    }
-
-    /*
-     * setlblKaisaiDate
-     * @param lblKaisaiDate lblKaisaiDate
-     */
-    @JsonProperty("lblKaisaiDate")
-    public void setLblKaisaiDate(Label lblKaisaiDate) {
-        this.lblKaisaiDate = lblKaisaiDate;
-    }
-
-    /*
-     * gettxtKaisaiDateTo
-     * @return txtKaisaiDateTo
-     */
-    @JsonProperty("txtKaisaiDateTo")
-    public TextBoxFlexibleDate getTxtKaisaiDateTo() {
-        return txtKaisaiDateTo;
-    }
-
-    /*
-     * settxtKaisaiDateTo
-     * @param txtKaisaiDateTo txtKaisaiDateTo
-     */
-    @JsonProperty("txtKaisaiDateTo")
-    public void setTxtKaisaiDateTo(TextBoxFlexibleDate txtKaisaiDateTo) {
-        this.txtKaisaiDateTo = txtKaisaiDateTo;
+    @JsonProperty("txtKaisaiDateRange")
+    public void setTxtKaisaiDateRange(TextBoxDateRange txtKaisaiDateRange) {
+        this.txtKaisaiDateRange = txtKaisaiDateRange;
     }
 
     /*

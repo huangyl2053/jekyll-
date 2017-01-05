@@ -21,12 +21,8 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtIchijiHanteiDateFrom")
-    private TextBoxFlexibleDate txtIchijiHanteiDateFrom;
-    @JsonProperty("lblIchijiHanteiDate")
-    private Label lblIchijiHanteiDate;
-    @JsonProperty("txtIchijiHanteiDateTo")
-    private TextBoxFlexibleDate txtIchijiHanteiDateTo;
+    @JsonProperty("txtIchijiHanteiDateRange")
+    private TextBoxDateRange txtIchijiHanteiDateRange;
     @JsonProperty("ddlIchijiHanteiKekka")
     private DropDownList ddlIchijiHanteiKekka;
 
@@ -37,57 +33,21 @@ public class IchijiHanteiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtIchijiHanteiDateFrom
-     * @return txtIchijiHanteiDateFrom
+     * gettxtIchijiHanteiDateRange
+     * @return txtIchijiHanteiDateRange
      */
-    @JsonProperty("txtIchijiHanteiDateFrom")
-    public TextBoxFlexibleDate getTxtIchijiHanteiDateFrom() {
-        return txtIchijiHanteiDateFrom;
+    @JsonProperty("txtIchijiHanteiDateRange")
+    public TextBoxDateRange getTxtIchijiHanteiDateRange() {
+        return txtIchijiHanteiDateRange;
     }
 
     /*
-     * settxtIchijiHanteiDateFrom
-     * @param txtIchijiHanteiDateFrom txtIchijiHanteiDateFrom
+     * settxtIchijiHanteiDateRange
+     * @param txtIchijiHanteiDateRange txtIchijiHanteiDateRange
      */
-    @JsonProperty("txtIchijiHanteiDateFrom")
-    public void setTxtIchijiHanteiDateFrom(TextBoxFlexibleDate txtIchijiHanteiDateFrom) {
-        this.txtIchijiHanteiDateFrom = txtIchijiHanteiDateFrom;
-    }
-
-    /*
-     * getlblIchijiHanteiDate
-     * @return lblIchijiHanteiDate
-     */
-    @JsonProperty("lblIchijiHanteiDate")
-    public Label getLblIchijiHanteiDate() {
-        return lblIchijiHanteiDate;
-    }
-
-    /*
-     * setlblIchijiHanteiDate
-     * @param lblIchijiHanteiDate lblIchijiHanteiDate
-     */
-    @JsonProperty("lblIchijiHanteiDate")
-    public void setLblIchijiHanteiDate(Label lblIchijiHanteiDate) {
-        this.lblIchijiHanteiDate = lblIchijiHanteiDate;
-    }
-
-    /*
-     * gettxtIchijiHanteiDateTo
-     * @return txtIchijiHanteiDateTo
-     */
-    @JsonProperty("txtIchijiHanteiDateTo")
-    public TextBoxFlexibleDate getTxtIchijiHanteiDateTo() {
-        return txtIchijiHanteiDateTo;
-    }
-
-    /*
-     * settxtIchijiHanteiDateTo
-     * @param txtIchijiHanteiDateTo txtIchijiHanteiDateTo
-     */
-    @JsonProperty("txtIchijiHanteiDateTo")
-    public void setTxtIchijiHanteiDateTo(TextBoxFlexibleDate txtIchijiHanteiDateTo) {
-        this.txtIchijiHanteiDateTo = txtIchijiHanteiDateTo;
+    @JsonProperty("txtIchijiHanteiDateRange")
+    public void setTxtIchijiHanteiDateRange(TextBoxDateRange txtIchijiHanteiDateRange) {
+        this.txtIchijiHanteiDateRange = txtIchijiHanteiDateRange;
     }
 
     /*

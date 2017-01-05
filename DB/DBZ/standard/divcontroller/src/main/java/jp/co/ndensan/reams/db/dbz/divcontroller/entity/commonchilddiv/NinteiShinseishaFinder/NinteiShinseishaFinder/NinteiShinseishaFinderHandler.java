@@ -95,10 +95,10 @@ public class NinteiShinseishaFinderHandler {
         div.getTxtHihokenshaName().clearValue();
         div.getDdlHihokenshaNameMatchType().setSelectedIndex(0);
         div.getChkMinashiFlag().setSelectedItemsByKey(keys);
-        div.getTxtNinteiShinseiDateFrom().clearValue();
-        div.getTxtNinteiShinseiDateTo().clearValue();
-        div.getTxtBirthDateFrom().clearValue();
-        div.getTxtBirthDateTO().clearValue();
+        div.getTxtNinteiShinseiDateRange().clearFromValue();
+        div.getTxtNinteiShinseiDateRange().clearToValue();
+        div.getTxtBirthDateRange().clearFromValue();
+        div.getTxtBirthDateRange().clearToValue();
         div.getDdlShinseijiShinseiKubun().setSelectedIndex(0);
         div.getChkSeibetsu().setSelectedItemsByKey(keys);
 
@@ -436,8 +436,8 @@ public class NinteiShinseishaFinderHandler {
         div.getTxtNinteiChosainName().clearValue();
         div.getDdlChosaJisshiBasho().setSelectedIndex(0);
         div.getDdlChosaKubun().setSelectedIndex(0);
-        div.getTxtChosaJisshiDateFrom().clearValue();
-        div.getTxtChosaJisshiDateTo().clearValue();
+        div.getTxtChosaJisshiDateRange().clearFromValue();
+        div.getTxtChosaJisshiDateRange().clearToValue();
         div.getDdlNinteiChosaNetakirido().setSelectedIndex(0);
         div.getDdlNinteiChosaNinchido().setSelectedIndex(0);
     }
@@ -460,8 +460,8 @@ public class NinteiShinseishaFinderHandler {
         div.getTxtShujiiIryokikanName().clearValue();
         div.getTxtShujiiName().clearValue();
         div.getDdlShujiIkubun().setSelectedIndex(0);
-        div.getTxtIkenshoKinyuDateFrom().clearValue();
-        div.getTxtIkenshoKinyuDateTo().clearValue();
+        div.getTxtIkenshoKinyuDateRange().clearFromValue();
+        div.getTxtIkenshoKinyuDateRange().clearToValue();
         div.getDdlShujiJohoNetakirido().setSelectedIndex(0);
         div.getDdlShujiJohoNinchido().setSelectedIndex(0);
     }
@@ -473,8 +473,8 @@ public class NinteiShinseishaFinderHandler {
             ddlIchijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
         }
         div.getDdlIchijiHanteiKekka().setDataSource(ddlIchijiHanteiKekka);
-        div.getTxtIchijiHanteiDateFrom().clearValue();
-        div.getTxtIchijiHanteiDateTo().clearValue();
+        div.getTxtIchijiHanteiDateRange().clearFromValue();
+        div.getTxtIchijiHanteiDateRange().clearToValue();
         div.getDdlIchijiHanteiKekka().setSelectedIndex(0);
     }
 
@@ -485,22 +485,22 @@ public class NinteiShinseishaFinderHandler {
             ddlIchiGohanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
         }
         div.getDdlIchiGohanteiKekka().setDataSource(ddlIchiGohanteiKekka);
-        div.getTxtIchiGoHanteiDateFrom().clearValue();
-        div.getTxtIchiGoHanteiDateTo().clearValue();
+        div.getTxtIchiGoHanteiDateRange().clearFromValue();
+        div.getTxtIchiGoHanteiDateRange().clearToValue();
         div.getDdlIchiGohanteiKekka().setSelectedIndex(0);
     }
 
     private void initKaigoNinteiShinsakaiJoho() {
         div.getTxtNinteiYukoKikan().clearValue();
         div.getTxtCheckDay().clearValue();
-        div.getTxtNinteiYukoKaishiDateFrom().clearValue();
-        div.getTxtNinteiYukoKaishiDateTo().clearValue();
-        div.getTxtNinteiYukoShuryoDateFrom().clearValue();
-        div.getTxtNinteiYukoShuryoDate().clearValue();
-        div.getTxtNijiHanteiDateFrom().clearValue();
-        div.getTxtNijiHnateiDateTo().clearValue();
-        div.getTxtKaisaiDateFrom().clearValue();
-        div.getTxtKaisaiDateTo().clearValue();
+        div.getTxtNinteiYukoKaishiDateRange().clearFromValue();
+        div.getTxtNinteiYukoKaishiDateRange().clearToValue();
+        div.getTxtNinteiYukoShuryoDateRange().clearFromValue();
+        div.getTxtNinteiYukoShuryoDateRange().clearToValue();
+        div.getTxtNijiHanteiDateRange().clearFromValue();
+        div.getTxtNijiHanteiDateRange().clearToValue();
+        div.getTxtKaisaiDateRange().clearFromValue();
+        div.getTxtKaisaiDateRange().clearToValue();
         div.getTxtKaisaiNumberStart().clearValue();
         div.getTxtKaisaiNumberEnd().clearValue();
     }
@@ -509,8 +509,8 @@ public class NinteiShinseishaFinderHandler {
         div.getTxtZenkaiNinteiChosaItakusakiName().clearValue();
         div.getTxtZenkaiShujiiIryokikanName().clearValue();
         div.getTxtZenkaiNinteiYukoKikan().clearValue();
-        div.getTxtZenkaiYukoKaishiDateFrom().clearValue();
-        div.getTxtZenkaiYukoKaishiDateTo().clearValue();
+        div.getTxtZenkaiYukoKaishiDateRange().clearFromValue();
+        div.getTxtZenkaiYukoKaishiDateRange().clearToValue();
     }
 
     private void initKanryoJoho() {
