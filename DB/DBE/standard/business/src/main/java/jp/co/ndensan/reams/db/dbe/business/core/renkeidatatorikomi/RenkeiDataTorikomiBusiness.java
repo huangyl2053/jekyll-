@@ -623,7 +623,7 @@ public class RenkeiDataTorikomiBusiness {
      * @return DbT5105NinteiKanryoJohoEntity
      */
     public DbT5105NinteiKanryoJohoEntity getDbT5105Entity(DbT5101RelateEntity entity) {
-        DbT5105NinteiKanryoJohoEntity dbt5105Entity = entity.getDbT5105Entity();
+        DbT5105NinteiKanryoJohoEntity dbt5105Entity = new DbT5105NinteiKanryoJohoEntity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         FlexibleDate 申請日 = new FlexibleDate(dbt5101tempEntity.get認定申請日());
         dbt5105Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
