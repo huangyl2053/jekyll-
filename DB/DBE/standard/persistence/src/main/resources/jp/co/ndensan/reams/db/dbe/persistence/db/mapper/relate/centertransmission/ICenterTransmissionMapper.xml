@@ -921,45 +921,7 @@
         FROM
           "SoshinDataSakuseiTaishoshaTemp"
         INNER JOIN
-        (
-            SELECT
-              "shinseishoKanriNo"
-              , "nijiHanteiYMD"
-              , "nijiHanteiYokaigoJotaiKubunCode"
-              , "nijiHanteiNinteiYukoKikan"
-              , "nijiHanteiNinteiYukoKaishiYMD"
-              , "nijiHanteiNinteiYukoShuryoYMD"
-              , "shinsakaiShiryoSakuseiYMD"
-              , "shinsakaiKaisaiNo"
-              , "shinsakaiIken"
-              , "ichijiHanteiKekkaHenkoRiyu"
-              , "yokaigoJotaizoReiCode"
-              , "ninteishinsakaiIkenShurui"
-              , "shinsakaiMemo"
-              , "nijiHanteiKekkaInputHoho"
-              , "nijiHanteiKekkaInputYMD" 
-            FROM
-              rgdb."DbT5129Tennyu" 
-            UNION ALL
-            SELECT
-              "shinseishoKanriNo"
-              , "nijiHanteiYMD"
-              , "nijiHanteiYokaigoJotaiKubunCode"
-              , "nijiHanteiNinteiYukoKikan"
-              , "nijiHanteiNinteiYukoKaishiYMD"
-              , "nijiHanteiNinteiYukoShuryoYMD"
-              , "shinsakaiShiryoSakuseiYMD"
-              , "shinsakaiKaisaiNo"
-              , "shinsakaiIken"
-              , "ichijiHanteiKekkaHenkoRiyu"
-              , "yokaigoJotaizoReiCode"
-              , "ninteishinsakaiIkenShurui"
-              , "shinsakaiMemo"
-              , "nijiHanteiKekkaInputHoho"
-              , "nijiHanteiKekkaInputYMD" 
-            FROM
-              rgdb."DbT5130Shibo"
-        ) AS "TennyuShiboTaishosha"
+        (<include refid="selectSoshonDataSakuseiTaishosha" />) AS "TennyuShiboTaishosha"
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = "TennyuShiboTaishosha"."shinseishoKanriNo"
         INNER JOIN 
           rgdb."DbT5105NinteiKanryoJoho" 
