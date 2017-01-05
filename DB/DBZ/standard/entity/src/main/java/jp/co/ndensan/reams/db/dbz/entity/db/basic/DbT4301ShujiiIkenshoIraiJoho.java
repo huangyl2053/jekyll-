@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 主治医意見書作成依頼情報テーブルの項目定義クラスです。
  */
 public enum DbT4301ShujiiIkenshoIraiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -133,7 +133,35 @@ public enum DbT4301ShujiiIkenshoIraiJoho implements IColumnDefinition {
      * 論理削除フラグ
      * <br/>True：削除　False：通常
      */
-    logicalDeletedFlag(1, 0);
+    logicalDeletedFlag(1, 0),
+    /**
+     * isShindanMeireishoHakkoFlag
+     */
+    isShindanMeireishoHakkoFlag(1, 0),
+    /**
+     * jushinKikanKubun
+     */
+    jushinKikanKubun(2147483647, 0),
+    /**
+     * jushinYMD
+     */
+    jushinYMD(2147483647, 0),
+    /**
+     * jushinTime
+     */
+    jushinTime(4, 0),
+    /**
+     * jushinKikanKaishi
+     */
+    jushinKikanKaishi(2147483647, 0),
+    /**
+     * jushinKikanShuryo
+     */
+    jushinKikanShuryo(2147483647, 0),
+    /**
+     * jushinBasho
+     */
+    jushinBasho(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

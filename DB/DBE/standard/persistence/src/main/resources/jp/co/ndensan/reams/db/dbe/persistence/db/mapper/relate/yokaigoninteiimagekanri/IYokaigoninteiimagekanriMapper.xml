@@ -43,11 +43,17 @@
         AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo")
         LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301
         ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
-        AND T5301."logicalDeletedFlag" = FALSE
+        AND (
+          T5301."logicalDeletedFlag" = FALSE
+          OR T5301."logicalDeletedFlag" is NULL
+        )
         AND NOT EXISTS (SELECT 'X'
         FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B2
         WHERE T5301."shinseishoKanriNo" = B2."shinseishoKanriNo"
-        AND B2."logicalDeletedFlag" = FALSE
+        AND (
+          B2."logicalDeletedFlag" = FALSE
+          OR B2."logicalDeletedFlag" is NULL
+        )
         AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo")
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202
         ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo"

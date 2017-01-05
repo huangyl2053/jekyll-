@@ -26,16 +26,16 @@ public class KoroshoShikibetsuCodeProcess extends BatchProcessBase<Yokaigonintei
      * OUT_DATA_LISTです。
      */
     public static final RString OUT_DATA_LIST;
-    private YokaigoBatchProcessParamter processPrm;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo."
             + "IYokaigoNinteiJohoTeikyoMapper.get要介護認定申請者");
+    private YokaigoBatchProcessParamter processPrm;
+    private OutputParameter<List<RString>> outDataList;
+    private List<RString> shinseishoKanriNoList;
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
     }
-    private OutputParameter<List<RString>> outDataList;
-    private List<RString> shinseishoKanriNoList;
 
     @Override
     protected void initialize() {

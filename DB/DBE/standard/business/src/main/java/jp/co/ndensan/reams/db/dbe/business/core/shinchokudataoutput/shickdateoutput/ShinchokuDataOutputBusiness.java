@@ -42,7 +42,7 @@ public class ShinchokuDataOutputBusiness {
     private static final RString 検索条件_結果情報コード = new RString("1");
     private static final RString 検索条件_進捗情報 = new RString("進捗情報");
     private static final RString 検索条件_結果情報 = new RString("結果情報");
-    private static final int 申請書管理番号_改行個数 = 10;
+    private static final int 被保険者番号_改行個数 = 16;
 
     /**
      *
@@ -442,9 +442,10 @@ public class ShinchokuDataOutputBusiness {
      * 出力条件を作成するメッソドです。
      *
      * @param paramter ShinchokuDataOutputProcessParamter
+     * @param hihokenshaNoList List<RString>
      * @return List<RString> 出力条件List
      */
-    public List<RString> get出力条件(ShinchokuDataOutputProcessParamter paramter) {
+    public List<RString> get出力条件(ShinchokuDataOutputProcessParamter paramter, List<RString> hihokenshaNoList) {
         RStringBuilder jokenBuilder;
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder = new RStringBuilder();
@@ -456,16 +457,21 @@ public class ShinchokuDataOutputBusiness {
         }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("抽出期間："));
+        jokenBuilder.append(paramter.getChushutsuFromDate());
+        jokenBuilder.append(new RString("　～　"));
+        jokenBuilder.append(paramter.getChushutsuToDate());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【申請書管理番号リスト】"));
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        List<RString> shinseishoKanriNoList = paramter.getShinseishoKanriNoList();
         int count = 0;
-        for (RString shinseishoKanriNo : shinseishoKanriNoList) {
-            jokenBuilder.append(shinseishoKanriNo);
+        for (RString hihokenshaNo : hihokenshaNoList) {
+            jokenBuilder.append(hihokenshaNo);
             jokenBuilder.append(new RString(","));
             count++;
-            if (申請書管理番号_改行個数 == count) {
+            if (被保険者番号_改行個数 == count) {
                 出力条件List.add(jokenBuilder.toRString());
                 jokenBuilder = new RStringBuilder();
                 count = 0;

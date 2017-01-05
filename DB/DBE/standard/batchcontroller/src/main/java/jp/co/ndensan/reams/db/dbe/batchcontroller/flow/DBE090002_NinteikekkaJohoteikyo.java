@@ -55,6 +55,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     private static final String その他資料の作成 = "chkSonotaShiryoReport";
     private static final String 一次判定結果の作成 = "chkIchijiHanteiKekkaReport";
     private static final String 要介護認定申請情報の更新 = "updateData";
+
     private static final RString 認定調査票_選択された = new RString("1");
     private static final RString 特記事項_選択された = new RString("1");
     private static final RString 主治医意見書_選択された = new RString("1");
@@ -74,7 +75,6 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
 
     @Override
     protected void defineFlow() {
-        executeStep(厚労省IF識別コード);
         if (認定調査票_選択された.equals(getParameter().getChkNinteiChosahyo())) {
             define認定調査票Flow();
         }
@@ -94,6 +94,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     }
 
     private void define認定調査票Flow() {
+        executeStep(厚労省IF識別コード);
         List<RString> 厚労省IF識別コードList = getResult(List.class, new RString(厚労省IF識別コード), KoroshoShikibetsuCodeProcess.OUT_DATA_LIST);
         if (!厚労省IF識別コードList.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コードList.get(0))

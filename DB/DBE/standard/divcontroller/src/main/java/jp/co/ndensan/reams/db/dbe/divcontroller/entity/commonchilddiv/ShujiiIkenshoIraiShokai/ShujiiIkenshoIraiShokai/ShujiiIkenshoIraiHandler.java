@@ -92,7 +92,7 @@ public class ShujiiIkenshoIraiHandler {
                 row.setShujiiMeisho(new RString(shujiiikenshoirai.getShujiiName().toString()));
             }
             if (shujiiikenshoirai.getIkenshoJuryoYMD() != null && !shujiiikenshoirai.getIkenshoJuryoYMD().isEmpty()) {
-                row.getIkenshoTorikomiDay().setValue(new RDate(shujiiikenshoirai.getIkenshoJuryoYMD().toString()));
+                row.getIkenshoJuryoDay().setValue(new RDate(shujiiikenshoirai.getIkenshoJuryoYMD().toString()));
             }
             if (shujiiikenshoirai.getIkenshoKinyuYMD() != null && !shujiiikenshoirai.getIkenshoKinyuYMD().isEmpty()) {
                 row.getIkenshoKinyuDay().setValue(new RDate(shujiiikenshoirai.getIkenshoKinyuYMD().toString()));

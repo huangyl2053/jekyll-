@@ -25,10 +25,16 @@ public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
 
     private static final String SHINSEISHOLANRINOLIST = "shinseishoKanriNoList";
     private static final String FAYIRUKUBEN = "fayirukuben";
+    private static final String CHUSHUTSUFROMDATE = "chushutsuFromDate";
+    private static final String CHUSHUTSUTODATE = "chushutsuToDate";
     @BatchParameter(key = SHINSEISHOLANRINOLIST, name = "申請書管理番号リスト")
     private List<RString> shinseishoKanriNoList;
     @BatchParameter(key = FAYIRUKUBEN, name = "ファイル区分")
     private RString fayirukuben;
+    @BatchParameter(key = CHUSHUTSUFROMDATE, name = "抽出期間From")
+    private RString chushutsuFromDate;
+    @BatchParameter(key = CHUSHUTSUTODATE, name = "抽出期間To")
+    private RString chushutsuToDate;
 
     /**
      * コンストラクタです。
@@ -41,13 +47,19 @@ public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
      *
      * @param 申請書管理番号リスト List<RString>
      * @param ファイル区分 RString
+     * @param 抽出期間From RString
+     * @param 抽出期間To RString
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public DBE491001_NichijiShinchokuParameter(
             List<RString> 申請書管理番号リスト,
-            RString ファイル区分) {
+            RString ファイル区分,
+            RString 抽出期間From,
+            RString 抽出期間To) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.fayirukuben = ファイル区分;
+        this.chushutsuFromDate = 抽出期間From;
+        this.chushutsuToDate = 抽出期間To;
     }
 
     /**
@@ -56,6 +68,6 @@ public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
      * @return KaigoNinteiShinsakaiScheduleProcessParamter
      */
     public ShinchokuDataOutputProcessParamter toShinchokuDataOutputProcessParamter() {
-        return new ShinchokuDataOutputProcessParamter(shinseishoKanriNoList, fayirukuben);
+        return new ShinchokuDataOutputProcessParamter(shinseishoKanriNoList, fayirukuben, chushutsuFromDate, chushutsuToDate);
     }
 }

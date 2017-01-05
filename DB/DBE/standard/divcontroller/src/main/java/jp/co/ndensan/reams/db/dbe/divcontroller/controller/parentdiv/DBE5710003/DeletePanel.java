@@ -99,26 +99,11 @@ public class DeletePanel {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RString localCopyPath = DBEImageUtil.copySharedFiles(descriptor.getSharedFileId(), descriptor.getSharedFileName().toRString());
-//            if (!確認メッセージ出力要.equals(確認メッセージ出力区分)) {
-//                deleteImageFile(localCopyPath, 選択したイメージ対象, 存在したイメージファイル名, false);
-//                updateOrDelete(div);
-//                return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
-//            } else {
             deleteImageFile(localCopyPath, 選択したイメージ対象, 存在したイメージファイル名, isMaskOnly);
             updateOrDelete(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
 
-//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
-//                    UrQuestionMessages.確認_汎用.getMessage().replace("原本を削除します").evaluate());
-//            return ResponseData.of(div).addMessage(message).respond();
-//            }
         }
-//        if (new RString(UrQuestionMessages.確認_汎用.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-//                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            SharedFile.deleteEntry(descriptor);
-//            updateOrDelete(div);
-//            return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
-//        }
         return ResponseData.of(div).respond();
     }
 

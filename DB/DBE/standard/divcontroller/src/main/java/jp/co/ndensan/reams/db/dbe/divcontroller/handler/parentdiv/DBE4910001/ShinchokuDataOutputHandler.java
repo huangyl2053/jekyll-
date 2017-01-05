@@ -72,7 +72,10 @@ public class ShinchokuDataOutputHandler {
     public void onLoad() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKubun().setSelectedKey(進捗情報);
-        set抽出期間();
+        div.getTxtChuishutsuRange().clearFromValue();
+        div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
+        // TODO 要介護認定進捗データ出力の際、DbT7022に出力した期間の保存対応完了後以下メソッドを呼ぶようにする。
+        // set抽出期間();
         if (div.getTxtChuishutsuRange().getFromValue() == null) {
             div.getTxtChuishutsuRange().setFromRequired(false);
         }
@@ -84,7 +87,10 @@ public class ShinchokuDataOutputHandler {
     public void btnJokenClear() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKubun().setSelectedKey(進捗情報);
-        set抽出期間();
+        div.getTxtChuishutsuRange().clearFromValue();
+        div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
+        // TODO 要介護認定進捗データ出力の際、DbT7022に出力した期間の保存対応完了後以下メソッドを呼ぶようにする。
+        // set抽出期間();
         if (div.getTxtChuishutsuRange().getFromValue() == null) {
             div.getTxtChuishutsuRange().setFromRequired(false);
         }
@@ -206,11 +212,12 @@ public class ShinchokuDataOutputHandler {
         List<dgShinchokuIchiran_Row> rowList = div.getDgShinchokuIchiran().getSelectedItems();
         List<RString> shinseishoKanriNo = new ArrayList<>();
         for (dgShinchokuIchiran_Row row : rowList) {
-
             shinseishoKanriNo.add(row.getShinseishoNo());
         }
         batchparamter.setShinseishoKanriNoList(shinseishoKanriNo);
         batchparamter.setFayirukuben(div.getRadKubun().getSelectedKey());
+        batchparamter.setChushutsuFromDate(div.getTxtChuishutsuRange().getFromValue().toDateString());
+        batchparamter.setChushutsuToDate(div.getTxtChuishutsuRange().getToValue().toDateString());
         return batchparamter;
     }
 
@@ -218,7 +225,8 @@ public class ShinchokuDataOutputHandler {
      * 市町村情報変更時の動作。
      */
     public void onChange_ddlSichoson() {
-        set抽出期間();
+        // TODO 要介護認定進捗データ出力の際、DbT7022に出力した期間の保存対応完了後以下メソッドを呼ぶようにする。
+        // set抽出期間();
     }
 
     private void set抽出期間() {
