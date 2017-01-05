@@ -247,6 +247,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             }
         }
         model.set申請書管理番号リスト(list);
+        model.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         RealInitialLocker.release(排他キー);
