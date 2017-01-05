@@ -145,6 +145,15 @@ public class ImageJohoMaskingResult {
     }
 
     /**
+     * 市町村名称を取得します。
+     *
+     * @return 市町村名称
+     */
+    public RString get市町村名称() {
+        return entity.get市町村名称();
+    }
+
+    /**
      * 帳票IDを取得します。
      *
      * @return 帳票ID

@@ -43,6 +43,13 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
     }
 
     @Test
+    public void get主治医意見書依頼済み情報_動作確認() {
+        List<IkenshoJohoPrintRelateEntity> result = sut.get主治医意見書依頼済み情報(create依頼済み情報検索条件());
+        System.out.println("依頼済み情報 件数：" + result.size());
+        assertTrue(true);
+    }
+
+    @Test
     public void get主治医意見書作成料請求情報_動作確認() {
         List<IkenshoJohoPrintRelateEntity> result = sut.get主治医意見書作成料請求情報(create作成料請求検索条件());
         System.out.println("作成料請求 件数：" + result.size());
@@ -75,6 +82,24 @@ public class IIkenshoJohoPrintMapperTest extends DbeTestDacBase {
                 申請開始日,
                 申請終了日,
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
+                RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
+                通常コード, 延期コード, FlexibleDate.EMPTY, LasdecCode.EMPTY);
+        return param;
+    }
+
+    private IkenshoJohoPrintMapperParameter create依頼済み情報検索条件() {
+        FlexibleDate 処理日開始 = new FlexibleDate(2012, 1, 1);
+        FlexibleDate 処理日終了 = new FlexibleDate(2016, 12, 31);
+        RString 通常コード = new RString(0);
+        RString 延期コード = new RString(3);
+        IkenshoJohoPrintMapperParameter param = IkenshoJohoPrintMapperParameter.createSelectByKeyParam(
+                RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
+                FlexibleDate.EMPTY, FlexibleDate.EMPTY,
+                new RString("1"),
+                処理日開始,
+                処理日終了,
+                FlexibleDate.EMPTY,
+                FlexibleDate.EMPTY,
                 RString.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY, FlexibleDate.EMPTY,
                 通常コード, 延期コード, FlexibleDate.EMPTY, LasdecCode.EMPTY);
         return param;

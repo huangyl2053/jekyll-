@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710002.ImagePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.ImagePanelHandler;
@@ -72,10 +73,12 @@ public class ImagePanel {
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
         ImagePanelHandler handler = new ImagePanelHandler();
         List<RString> 存在するファイル = finder.getSharedFile();
-        List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(handler.get調査票イメージ(), 存在するファイル);
-        List<RString> 存在する調査票概況ファイル = finder.get存在したイメージファイル(handler.get調査票概況ファイル(), 存在するファイル);
-        List<RString> 存在する主治医意見書ファイル = finder.get存在したイメージファイル(handler.get主治医意見書イメージ(), 存在するファイル);
-        List<RString> 存在するその他資料ファイル = finder.get存在したイメージファイル(handler.getその他資料イメージ(), 存在するファイル);
+        List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(ImageFileItem.getGaikyoChosaImageFileList_ALL(), 存在するファイル);
+        存在する調査票ファイル.addAll(finder.get存在したイメージファイル(ImageFileItem.getChosahyoTokkiImageFileList_ALL(), 存在するファイル));
+        List<RString> 存在する調査票概況ファイル = finder.get存在したイメージファイル(ImageFileItem.getGaikyoTokkiImageFileList_ALL(), 存在するファイル);
+        List<RString> 存在する主治医意見書ファイル = finder.get存在したイメージファイル(ImageFileItem.getOpinionTeikeiImageFileList_ALL(), 存在するファイル);
+        存在する主治医意見書ファイル.addAll(finder.get存在したイメージファイル(ImageFileItem.getOpinionTeikeigaiImageFileList_ALL(), 存在するファイル));
+        List<RString> 存在するその他資料ファイル = finder.get存在したイメージファイル(ImageFileItem.getOtherFileImageFileList_ALL(), 存在するファイル);
         ValidationMessageControlPairs controlPairs = new ImagePanelValidationHandler(div)
                 .do事前チェック(存在するファイル, 存在する調査票ファイル, 存在する調査票概況ファイル, 存在する主治医意見書ファイル, 存在するその他資料ファイル);
         if (controlPairs.iterator().hasNext()) {
@@ -111,12 +114,13 @@ public class ImagePanel {
 
     private List<RString> createDownloadFileList(ImagePanelDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
-        ImagePanelHandler handler = new ImagePanelHandler();
         List<RString> 存在するファイル = finder.getSharedFile();
-        List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(handler.get調査票イメージ(), 存在するファイル);
-        List<RString> 存在する調査票概況ファイル = finder.get存在したイメージファイル(handler.get調査票概況ファイル(), 存在するファイル);
-        List<RString> 存在する主治医意見書ファイル = finder.get存在したイメージファイル(handler.get主治医意見書イメージ(), 存在するファイル);
-        List<RString> 存在するその他資料ファイル = finder.get存在したイメージファイル(handler.getその他資料イメージ(), 存在するファイル);
+        List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(ImageFileItem.getGaikyoChosaImageFileList_ALL(), 存在するファイル);
+        存在する調査票ファイル.addAll(finder.get存在したイメージファイル(ImageFileItem.getChosahyoTokkiImageFileList_ALL(), 存在するファイル));
+        List<RString> 存在する調査票概況ファイル = finder.get存在したイメージファイル(ImageFileItem.getGaikyoTokkiImageFileList_ALL(), 存在するファイル);
+        List<RString> 存在する主治医意見書ファイル = finder.get存在したイメージファイル(ImageFileItem.getOpinionTeikeiImageFileList_ALL(), 存在するファイル);
+        存在する主治医意見書ファイル.addAll(finder.get存在したイメージファイル(ImageFileItem.getOpinionTeikeigaiImageFileList_ALL(), 存在するファイル));
+        List<RString> 存在するその他資料ファイル = finder.get存在したイメージファイル(ImageFileItem.getOtherFileImageFileList_ALL(), 存在するファイル);
         List<RString> fileList = new ArrayList<>();
         if (div.getChkImage().getSelectedKeys().contains(調査票) && !存在する調査票ファイル.isEmpty()) {
             fileList.addAll(存在する調査票ファイル);

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -48,7 +49,7 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onLoad(ImageJohoMaskingDiv div) {
-        getHandler(div).初期表示();
+        getHandler(div).initialize();
         ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
         if (shinseishoKanriNoList != null) {
             isFrom完了画面 = true;
@@ -98,7 +99,7 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onSelectBySelectButton_dgImageMaskShoriTaishosha(ImageJohoMaskingDiv div) {
         getHandler(div).setMeisai();
-        getHandler(div).ボタンsetDisabled();
+        getHandler(div).setDisabledStateToButton();
         return ResponseData.of(div).setState(DBE4050001StateName.イメージ情報表示);
     }
 
@@ -110,7 +111,7 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTorikeshi(ImageJohoMaskingDiv div) {
         getHandler(div).deleteEditedData();
-        getHandler(div).ボタンsetDisabled();
+        getHandler(div).setDisabledStateToButton();
         return ResponseData.of(div).respond();
     }
 
@@ -137,7 +138,8 @@ public class ImageJohoMasking {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).更新処理();
+            getHandler(div).update();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
             return ResponseData.of(div).setState(DBE4050001StateName.完了表示);
         } else {
             return ResponseData.of(div).respond();
@@ -178,8 +180,9 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onOkClose(ImageJohoMaskingDiv div) {
         RString newImagePath = div.getHiddenImagePath();
-        getHandler(div).row更新(newImagePath);
-        getHandler(div).ボタンsetDisabled();
+        getHandler(div).updateRow(newImagePath);
+        getHandler(div).setDisabledStateToButton();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
 
@@ -190,7 +193,7 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onSelect_dgImageMaskingTaisho(ImageJohoMaskingDiv div) {
-        getHandler(div).ボタン制御();
+        getHandler(div).changeButtonState();
         return ResponseData.of(div).respond();
     }
 

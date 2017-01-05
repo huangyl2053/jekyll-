@@ -145,7 +145,7 @@
         rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
         ON
         DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo"
-        LEFT JOIN
+        INNER JOIN
         rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207
         ON
         DbT5121."zenkaiShinseishoKanriNo" = DbT5207."shinseishoKanriNo" 
@@ -196,7 +196,7 @@
         rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
         ON
         DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo"
-        LEFT JOIN
+        INNER JOIN
         rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211
         ON
         DbT5121."zenkaiShinseishoKanriNo" = DbT5211."shinseishoKanriNo" 

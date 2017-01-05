@@ -264,6 +264,7 @@ public class NinteichosaIrai {
             }
         }
         model.set申請書管理番号リスト(list);
+        model.set市町村コード(requestDiv.getCcdHokenshaList().getSelectedItem().get市町村コード());
         model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
         requestDiv.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(requestDiv).respond();

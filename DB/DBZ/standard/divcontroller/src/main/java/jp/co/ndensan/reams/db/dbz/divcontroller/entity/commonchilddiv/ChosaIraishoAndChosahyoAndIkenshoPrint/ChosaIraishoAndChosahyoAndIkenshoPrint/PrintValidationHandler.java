@@ -47,32 +47,22 @@ public class PrintValidationHandler {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
 
         if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
-//再選択を不要にしたため
-//            List<dgNinteiChosa_Row> rowList = div.getDgNinteiChosa().getSelectedItems();
-//            if (rowList.isEmpty()) {
-//                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.対象行を選択), div.getDgNinteiChosa()));
-//            }
-
             List<RString> chk = div.getChk().getSelectedKeys();
             List<RString> chkChosahyo = div.getChkChosahyo().getSelectedKeys();
             List<RString> chkOcrChosahyo = div.getChkOcrChosahyo().getSelectedKeys();
             List<RString> chkChosahyo2 = div.getChkChosahyo2().getSelectedKeys();
 
             if (chk.isEmpty()
-                && chkChosahyo.isEmpty()
-                && chkOcrChosahyo.isEmpty()
-                && chkChosahyo2.isEmpty()) {
+                    && chkChosahyo.isEmpty()
+                    && chkOcrChosahyo.isEmpty()
+                    && chkChosahyo2.isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getNinteiChosaPrint()));
             }
         } else {
-            List<dgShujiiIkensho_Row> rowList = div.getDgShujiiIkensho().getSelectedItems();
-            if (rowList.isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.対象行を選択), div.getDgShujiiIkensho()));
-            }
             List<RString> chkInsatsuIkensho = div.getChkInsatsuIkensho().getSelectedKeys();
             List<RString> chkIkenshoSakusei = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
             if (chkInsatsuIkensho.isEmpty()
-                && chkIkenshoSakusei.isEmpty()) {
+                    && chkIkenshoSakusei.isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.出力項目を指定), div.getShujiiIkenshoPrint()));
             }
 

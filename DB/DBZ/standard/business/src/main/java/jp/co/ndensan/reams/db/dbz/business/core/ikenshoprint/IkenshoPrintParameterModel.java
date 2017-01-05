@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  *
@@ -24,5 +25,6 @@ public class IkenshoPrintParameterModel implements Serializable {
     private static final long serialVersionUID = -4668291514551520575L;
 
     private List<ShinseishoKanriNo> 申請書管理番号リスト;
+    private LasdecCode 市町村コード;
     private GamenSeniKbn 遷移元画面区分;
 }
