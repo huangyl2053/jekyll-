@@ -49,6 +49,17 @@ public class ShinsakaiOnseiJoho2Builder {
     }
 
     /**
+     * 削除状態を設定します。
+     *
+     * @param isDeleted isDeleted
+     * @return {@link ShinsakaiOnseiJoho2Builder}
+     */
+    public ShinsakaiOnseiJoho2Builder setIsDeleted(boolean isDeleted) {
+        entity.setIsDeleted(isDeleted);
+        return this;
+    }
+
+    /**
      * {@link ShinsakaiOnseiJoho2}のインスタンスを生成します。
      *
      * @return {@link ShinsakaiOnseiJoho2}のインスタンス
