@@ -307,7 +307,9 @@ public class KojinJokyoShokaiHandler {
             div.getTxtNinteiYukoKikanTo().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get二次判定認定有効終了年月日().toString()));
         }
-        div.getTxtNinteiKikanMonth().setValue(new Decimal(kojinJokyoShokaiList.get(0).get二次判定認定有効期間()));
+        if(!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get二次判定結果名称())){
+          div.getTxtNinteiKikanMonth().setValue(new Decimal(kojinJokyoShokaiList.get(0).get二次判定認定有効期間()));   
+        }
         if (kojinJokyoShokaiList.get(0).get要支援申請の区分() != null) {
             div.getTxtShinseiShubetsu().setValue(ShienShinseiKubun.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get要支援申請の区分().toString())).get名称());
