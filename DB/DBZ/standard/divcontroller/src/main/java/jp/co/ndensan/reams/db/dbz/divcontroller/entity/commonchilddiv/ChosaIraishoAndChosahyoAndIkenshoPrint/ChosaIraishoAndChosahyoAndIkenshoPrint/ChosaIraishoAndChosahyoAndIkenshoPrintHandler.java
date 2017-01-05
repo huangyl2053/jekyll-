@@ -197,7 +197,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             setDisableToNinteiChosaChk();
             RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                    div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+                    div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
             if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
                 div.getRadTeishutsuKigen().setDisabled(true);
             } else {
@@ -603,7 +603,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     }
 
     private void setDisableToNinteiChosaChk() {
-        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+        RString 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         RDate 適用基準日 = RDate.getNowDate();
         RString 概況調査_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ,
                 適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
