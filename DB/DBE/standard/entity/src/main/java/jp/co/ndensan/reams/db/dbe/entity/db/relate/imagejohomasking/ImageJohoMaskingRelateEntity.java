@@ -36,6 +36,7 @@ public class ImageJohoMaskingRelateEntity {
     private int 主治医意見書作成依頼履歴番号;
     private ShinseishoKanriNo 申請書管理番号;
     private LasdecCode 市町村コード;
+    private RString 市町村名称;
     private Code 帳票ID;
     private RDateTime イメージ共有ファイルID;
     private boolean 特記マスク有無;

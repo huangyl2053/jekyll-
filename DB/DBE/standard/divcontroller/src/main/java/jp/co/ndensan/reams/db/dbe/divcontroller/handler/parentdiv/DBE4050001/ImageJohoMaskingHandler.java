@@ -94,7 +94,7 @@ public class ImageJohoMaskingHandler {
     /**
      * 初期表示を行います
      */
-    public void 初期表示() {
+    public void initialize() {
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
         div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
@@ -147,6 +147,7 @@ public class ImageJohoMaskingHandler {
         for (ImageJohoMaskingResult result : resultList) {
             dgImageMaskShoriTaishosha_Row row = new dgImageMaskShoriTaishosha_Row();
             row.set保険者(result.get証記載保険者番号());
+            row.set保険者名称(result.get市町村名称());
             row.set被保番号(result.get被保険者番号());
             row.set氏名(result.get被保険者氏名().value());
             row.get申請日().setValue(result.get認定申請年月日());
@@ -296,7 +297,7 @@ public class ImageJohoMaskingHandler {
      *
      * @param newImagePath 編集したマスキングデータのパス
      */
-    public void row更新(RString newImagePath) {
+    public void updateRow(RString newImagePath) {
         dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
         row.setEditImagePath(newImagePath);
         if (row.getMaskImagePath().isEmpty()) {
@@ -309,7 +310,7 @@ public class ImageJohoMaskingHandler {
     /**
      * マスキングデータの保存を行います
      */
-    public void 更新処理() {
+    public void update() {
         imageJohoManager = IkenshoImageJohoManager.createInstance();
         tokkijikoManager = NinteichosahyoTokkijikoManager.createInstance();
         gaikyoManager = GaikyoChosaTokkiManager.createInstance();
@@ -398,7 +399,7 @@ public class ImageJohoMaskingHandler {
     /**
      * 選択された列に応じてボタンの制御を変更します
      */
-    public void ボタン制御() {
+    public void changeButtonState() {
         dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
         div.getBtnMaskingGenpon().setDisabled(false);
         if (row.getHasMask().equals(new RString("有")) || !row.getState().isEmpty()) {
@@ -413,7 +414,7 @@ public class ImageJohoMaskingHandler {
         }
     }
 
-    public void ボタンsetDisabled() {
+    public void setDisabledStateToButton() {
         div.getBtnMaskingGenpon().setDisabled(true);
         div.getBtnMaskingMask().setDisabled(true);
         div.getBtnTorikeshi().setDisabled(true);
