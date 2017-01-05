@@ -69,7 +69,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShujiiIkenshoIraiTaishoIchiran {
 
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-    private static final RString CSVファイル名 = new RString("ShujiiIkenshoIraiIchiran.csv");
+    private static final RString CSVファイル名 = new RString("主治医意見書依頼一覧.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString NOTREATED = new RString("未");
     private static final RString 未処理 = new RString("未処理");
@@ -348,6 +348,10 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 row.getJusho(),
                 row.getNyushoShisetsuCode(),
                 row.getNyushoShisetsu(),
+                getパターン1(row.getIkenshoTokusokuHakkoDay().getValue()),
+                row.getIkenshoTokusokuHoho(),
+                row.getIkenshoTokusokuCount().getValue(),
+                getパターン1(row.getIkenshoTokusokuLimit().getValue()),
                 RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()));
     }
 
