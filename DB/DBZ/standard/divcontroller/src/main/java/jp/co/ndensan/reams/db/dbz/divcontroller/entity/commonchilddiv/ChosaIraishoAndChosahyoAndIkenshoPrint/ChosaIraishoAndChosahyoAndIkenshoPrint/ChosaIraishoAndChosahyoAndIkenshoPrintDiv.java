@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIrai
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements IChosaIraishoAndChosahyoAndIkenshoPrintDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +30,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
      */
     @JsonProperty("InsatsuTaishoShitei")
     private InsatsuTaishoShiteiDiv InsatsuTaishoShitei;
+    @JsonProperty("PrintJoken")
+    private PrintJokenDiv PrintJoken;
     @JsonProperty("TeishutsuKigen")
     private TeishutsuKigenDiv TeishutsuKigen;
     @JsonProperty("btnModoru")
@@ -61,6 +65,24 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     @JsonProperty("InsatsuTaishoShitei")
     public void setInsatsuTaishoShitei(InsatsuTaishoShiteiDiv InsatsuTaishoShitei) {
         this.InsatsuTaishoShitei = InsatsuTaishoShitei;
+    }
+
+    /*
+     * getPrintJoken
+     * @return PrintJoken
+     */
+    @JsonProperty("PrintJoken")
+    public PrintJokenDiv getPrintJoken() {
+        return PrintJoken;
+    }
+
+    /*
+     * setPrintJoken
+     * @param PrintJoken PrintJoken
+     */
+    @JsonProperty("PrintJoken")
+    public void setPrintJoken(PrintJokenDiv PrintJoken) {
+        this.PrintJoken = PrintJoken;
     }
 
     /*
@@ -359,6 +381,21 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     @JsonIgnore
     public void  setTxtJushinBasho(TextBox txtJushinBasho) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setTxtJushinBasho(txtJushinBasho);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtHakkoYMD() {
+        return this.getPrintJoken().getTxtHakkoYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtHakkoYMD(TextBoxDate txtHakkoYMD) {
+        this.getPrintJoken().setTxtHakkoYMD(txtHakkoYMD);
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return this.getPrintJoken().getCcdBunshoNo();
     }
 
     @JsonIgnore

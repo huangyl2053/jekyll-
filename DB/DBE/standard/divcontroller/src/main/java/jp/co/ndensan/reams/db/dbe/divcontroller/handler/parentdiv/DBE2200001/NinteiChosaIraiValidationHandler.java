@@ -129,8 +129,8 @@ public class NinteiChosaIraiValidationHandler {
                      */
                     @Override
                     public boolean apply(NinteiChosaIraiDiv div) {
-                        return div.getRadkigen().getSelectedKey().equals(提出期限_2)
-                        && div.getTxthokkoymd().getValue().isBefore(div.getTxtkigenymd().getValue());
+                        return !div.getRadkigen().getSelectedKey().equals(提出期限_2)
+                        || div.getTxthokkoymd().getValue().isBefore(div.getTxtkigenymd().getValue());
                     }
                 }
     }
