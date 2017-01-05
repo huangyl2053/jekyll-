@@ -67,6 +67,7 @@ public class Yokaigoninteiimagekanri {
         if (イメージ管理情報.getイメージ共有ファイルID() != null) {
             RString toCopyPath = DBEImageUtil.copySharedFiles(
                     イメージ管理情報.getイメージ共有ファイルID(), div.getHdnShokisaiHokenshaNo().concat(div.getHdnHihokenshaNo()));
+            ViewStateHolder.put(ViewStateKeys.イメージ取込み, toCopyPath);
             div.setHdnImageLocalCopyPath(toCopyPath);
             ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
                     イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号())),
