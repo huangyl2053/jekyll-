@@ -1,7 +1,8 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="./../hokenshalist/HokenshaList.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
+/// <reference path="./../BunshoBangoInput/BunshoBangoInput.ts" />
 
 module DBZ {
 
@@ -54,9 +55,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("InsatsuTaishoShitei"));
             }
 
-            //public ccdHokenshaList(): DBZ.HokenshaList.ModeController {
-            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
-            //}
+            public ccdHokenshaList(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
+            }
 
             public NinteiChosa(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
@@ -136,6 +137,18 @@ module DBZ {
 
             public txtJushinBasho(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtJushinBasho"));
+            }
+
+            public PrintJoken(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("PrintJoken"));
+            }
+
+            public txtHakkoYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtHakkoYMD"));
+            }
+
+            public ccdBunshoNo(): DBZ.BunshoBangoInput.ModeController {
+                return new DBZ.BunshoBangoInput.ModeController(this.convFiledName("ccdBunshoNo"));
             }
 
             public TeishutsuKigen(): UZA.Panel {
