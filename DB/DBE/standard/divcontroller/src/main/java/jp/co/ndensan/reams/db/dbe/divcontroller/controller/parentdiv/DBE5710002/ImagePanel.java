@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.Ima
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.ImagePanelValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesyutsuryoku.YokaigoninteiimageShutsuryokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza._Console;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -99,10 +100,6 @@ public class ImagePanel {
         ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
                 new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
         RString zipPath = Path.combinePath(Path.getTmpDirectoryPath(), 書庫化ファイル名);
-        File zipFile = new File(zipPath.toString());
-        if (zipFile.exists()) {
-            zipFile.delete();
-        }
         ZipUtil.createFromFiles(zipPath, createDownloadFileList(div, ro_sfed));
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(書庫化ファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
@@ -136,7 +133,8 @@ public class ImagePanel {
         }
         List<RString> result = new ArrayList<>();
         for (RString fileName : fileList) {
-            result.add(ro_sfed.getDirectAccessPath().concat(fileName).concat(拡張子));
+            result.add(ro_sfed.getDirectAccessPath().concat(fileName));
+            _Console.log("ro_sfed.getDirectAccessPath()");
         }
         return result.isEmpty() ? Collections.EMPTY_LIST : result;
     }

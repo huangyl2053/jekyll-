@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class YokaigoninteiimageShutsuryokuFinder {
 
     private final List<SharedFileEntryInfoEntity> sharedFile;
+    private final RString png拡張子 = new RString(".png");
 
     /**
      * コンストラクタです。
@@ -41,8 +42,9 @@ public class YokaigoninteiimageShutsuryokuFinder {
         List<RString> 存在するファイル = new ArrayList<>();
         for (RString file : sharedFiles) {
             for (RString name : fileName) {
-                if (file.contains(name)) {
-                    存在するファイル.add(name);
+                if (file.contains(name.concat(png拡張子))) {
+                    存在するファイル.add(name.concat(png拡張子));
+                    break;
                 }
             }
         }
