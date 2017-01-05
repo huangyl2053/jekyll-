@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0120001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.DBE0120001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.ShinsakaiTaishoshaDiv;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -42,8 +44,8 @@ public class ShinsakaiTaishosha {
         ShinsakaiTaishoshaBusiness 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
         handler.onLoad(予定情報, 審査会対象者一覧);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(審査会対象者一覧);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addMessage(DbeInformationMessages.対象者の割り当てがありません.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -74,8 +76,8 @@ public class ShinsakaiTaishosha {
         ShinsakaiTaishoshaBusiness 予定情報 = ShinsakaiTaishoshaFinder.createInstance().get予定情報と結果情報(審査会開催番号);
         handler.onLoad(予定情報, 審査会対象者一覧);
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei(審査会対象者一覧);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!ResponseHolder.isReRequest() && validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addMessage(DbeInformationMessages.対象者の割り当てがありません.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
