@@ -132,6 +132,8 @@ public class IkenshokinyuyoshiReportSource implements IReportSource {
     public RString iryokikanJusho;
     @ReportItem(name = "iryokikanFaxNo", length = 13, order = 91)
     public RString iryokikanFaxNo;
+    @ReportItem(name = "hihokenshaNameKana", length = 35, order = 92)
+    public RString hihokenshaNameKana;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
