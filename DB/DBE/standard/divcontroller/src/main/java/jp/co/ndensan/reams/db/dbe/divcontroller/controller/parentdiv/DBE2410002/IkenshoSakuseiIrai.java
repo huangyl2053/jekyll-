@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.Ikensho
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouReportJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.DBE2410002StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.DBE2410002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiValidationHandler;
@@ -82,7 +83,9 @@ public class IkenshoSakuseiIrai {
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
     private static final RString 指定医 = new RString("2");
-    private static  RDate 認定申請年月日 = null;
+    private static RDate 認定申請年月日 = null;
+    private static final RString MENU_DBEUC24101 = new RString("DBEUC24101");
+    private static final RString MENU_DBEUC20401 = new RString("DBEUC20401");
 
     /**
      * 主治医意見書作成依頼(手動)の初期化です。
@@ -122,9 +125,9 @@ public class IkenshoSakuseiIrai {
         }
         div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
         onChange_radKigen(div);
-        
+
         if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
-                        div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())){
+                div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())) {
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
             div.getIraiprintPanel().setDisabled(true);
             div.getMeireishoPanel().setDisabled(true);
@@ -141,7 +144,7 @@ public class IkenshoSakuseiIrai {
         lockingKey.append(申請書管理番号.value());
         return new LockingKey(lockingKey.toRString());
     }
-    
+
     /**
      * 提出期限変更時、画面状態を制御します。
      *
@@ -157,7 +160,7 @@ public class IkenshoSakuseiIrai {
         if (CONFIGVALUE1.equals(コンフィグ_主治医意見書作成期限設定方法)) {
             if (SELECTED_KEY0.equals(key)) {
                 div.getTxtKigenymd().setDisabled(true);
-                if(div.getTxtSakuseiIraiD().getValue() != null){
+                if (div.getTxtSakuseiIraiD().getValue() != null) {
                     div.getTxtKigenymd().setValue(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数));
                 }
             } else if (SELECTED_KEY1.equals(key)) {
@@ -291,7 +294,11 @@ public class IkenshoSakuseiIrai {
             onLoad(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        return ResponseData.of(div).respond();
+        if (MENU_DBEUC20401.equals(ResponseHolder.getUIContainerId()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBE2410002TransitionEventName.個人依頼内容更新に戻る).respond();
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     private void 保存処理(IkenshoSakuseiIraiDiv div) {
@@ -389,10 +396,10 @@ public class IkenshoSakuseiIrai {
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                 = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号.value());
         if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY2)) {
-             List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書List;
+            List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書List;
             if (!意見書Finder.get主治医意見書作成料請求書(parameter).records().isEmpty()) {
                 主治医意見書作成料請求書List = createHandler(div).create主治医意見書作成料請求書(意見書Finder.get主治医意見書作成料請求書(parameter).records().get(数字_0));
-            }else{
+            } else {
                 主治医意見書作成料請求書List = new ArrayList<>();
             }
             printService.print主治医意見書作成料請求書(主治医意見書作成料請求書List);
@@ -401,7 +408,7 @@ public class IkenshoSakuseiIrai {
             List<KaigohokenShindanMeireishoHeaderItem> 護保険診断命令書List;
             if (!意見書Finder.get介護保険診断命令書(parameter).records().isEmpty()) {
                 護保険診断命令書List = createHandler(div).create介護保険診断命令書(意見書Finder.get介護保険診断命令書(parameter).records().get(数字_0));
-            }else{
+            } else {
                 護保険診断命令書List = new ArrayList<>();
             }
             printService.print介護保険診断命令書(護保険診断命令書List);
