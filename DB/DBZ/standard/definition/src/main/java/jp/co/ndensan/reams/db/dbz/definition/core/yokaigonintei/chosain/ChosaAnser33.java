@@ -16,27 +16,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ChosaAnser33 {
 
     /**
-     * コード:1 名称:自立 略称:自立
+     * コード:1 名称:できる 略称:できる
      */
-    できる("1", "できる"),
+    できる("1", "できる", "できる"),
     /**
-     * コード:2 名称:見守り（介護側の指示を含む） 略称:見守り_介護側の指示を含む
+     * コード:2 名称:見守り（介護側の指示を含む） 略称:見守りが必要
      */
-    見守り_介護側の指示を含む("2", "見守り（介護側の指示を含む）"),
+    見守り_介護側の指示を含む("2", "見守り（介護側の指示を含む）", "見守りが必要"),
     /**
      * コード:3 名称:一部介助 略称:一部介助
      */
-    一部介助("3", "一部介助"),
+    一部介助("3", "一部介助", "一部介助"),
     /**
      * コード:4 名称:全介助 略称:全介助
      */
-    全介助("4", "全介助");
+    全介助("4", "全介助", "全介助");
     private final RString code;
     private final RString fullName;
+    private final RString ryakusho;
 
-    private ChosaAnser33(String code, String fullname) {
+    private ChosaAnser33(String code, String fullname, String ryakusho) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.ryakusho = new RString(ryakusho);
     }
 
     /**
@@ -55,6 +57,15 @@ public enum ChosaAnser33 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 認定調査項目内容33の略称を返します。
+     *
+     * @return 認定調査項目内容33の略称
+     */
+    public RString get略称() {
+        return ryakusho;
     }
 
     /**

@@ -18,21 +18,23 @@ public enum ChosaAnser16 {
     /**
      * コード:1 名称:ない 略称:ない
      */
-    ない("1", "ない"),
+    ない("1", "ない", "ない"),
     /**
      * コード:2 名称:ときどきある 略称:ときどきある
      */
-    ときどきある("2", "ときどきある"),
+    ときどきある("2", "ときどきある", "ときどきある"),
     /**
      * コード:3 名称:ある 略称:ある
      */
-    ある("3", "ある");
+    ある("3", "ある", "ある");
     private final RString code;
     private final RString fullName;
+    private final RString ryakusho;
 
-    private ChosaAnser16(String code, String fullname) {
+    private ChosaAnser16(String code, String fullname, String ryakusho) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.ryakusho = new RString(ryakusho);
     }
 
     /**
@@ -51,6 +53,15 @@ public enum ChosaAnser16 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 認定調査項目内容16の略称を返します。
+     *
+     * @return 認定調査項目内容16の略称
+     */
+    public RString get略称() {
+        return ryakusho;
     }
 
     /**

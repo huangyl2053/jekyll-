@@ -18,21 +18,23 @@ public enum ChosaAnser13 {
     /**
      * コード:1 名称:週1回以上 略称:週1回以上
      */
-    週1回以上("1", "週1回以上"),
+    週1回以上("1", "週1回以上", "週1回以上"),
     /**
      * コード:2 名称:月1回以上 略称:月1回以上
      */
-    月1回以上("2", "月1回以上"),
+    月1回以上("2", "月1回以上", "月1回以上"),
     /**
      * コード:3 名称:月1回未満 略称:月1回未満
      */
-    月1回未満("3", "月1回未満");
+    月1回未満("3", "月1回未満", "月1回未満");
     private final RString code;
     private final RString fullName;
+    private final RString ryakusho;
 
-    private ChosaAnser13(String code, String fullname) {
+    private ChosaAnser13(String code, String fullname, String ryakusho) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.ryakusho = new RString(ryakusho);
     }
 
     /**
@@ -51,6 +53,15 @@ public enum ChosaAnser13 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 認定調査項目内容13の略称を返します。
+     *
+     * @return 認定調査項目内容13の略称
+     */
+    public RString get略称() {
+        return ryakusho;
     }
 
     /**

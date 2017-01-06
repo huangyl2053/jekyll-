@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinnteiR
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.dgNinteiKekkaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IsIkenshoDoiUmu;
@@ -68,7 +70,16 @@ public class YokaigoNinteiJohoTeikyoHandler {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());
             div.getTxtHihokenshaKubun().setValue(HihokenshaKubunCode.toValue(被保険者情報.get区分コード()).get名称());
             div.getTxtHokenshaNo().setValue(new Decimal(被保険者情報.get証記載保険者番号().toString()));
-            div.getTxtHokenshaName().setValue(被保険者情報.get市町村名称());
+            RString 保険者名称;
+            if (被保険者情報.get市町村名称() != null) {
+                保険者名称 = 被保険者情報.get市町村名称();
+            } else {
+                RString 広域連合保険者番号 = DbBusinessConfig.get(ConfigNameDBE.広域連合保険者番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+                保険者名称 = (広域連合保険者番号.equals(被保険者情報.get証記載保険者番号()))
+                        ? DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援)
+                        : RString.EMPTY;
+            }
+            div.getTxtHokenshaName().setValue(保険者名称);
             div.getTxtHihokenshaName().setValue(被保険者情報.get被保険者氏名().getColumnValue());
             div.getTxtHihokenshaKana().setValue(被保険者情報.get被保険者氏名カナ().getColumnValue());
             if (被保険者情報.get生年月日() != null) {
@@ -108,7 +119,8 @@ public class YokaigoNinteiJohoTeikyoHandler {
             div.getCcdChosaItakusakiAndChosainInput().setHdnShinseishoKanriNo(RString.EMPTY);
             div.getNinteiKekkaShosai().getTxtIkenshoIraibi().setValue(getNull(business.get主治医意見書作成依頼年月日()));
             div.getNinteiKekkaShosai().getTxtIkenshoJuryobi().setValue(getNull(business.get主治医意見書受領年月日()));
-            div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(business.get市町村コード()), ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY,
+            LasdecCode 市町村コード = (business.get市町村コード() != null) ? new LasdecCode(business.get市町村コード()) : LasdecCode.EMPTY;
+            div.getCcdShujiiIryoKikanAndShujiiInput().initialize(市町村コード, ShinseishoKanriNo.EMPTY, SubGyomuCode.EMPTY,
                     business.get主治医医療機関コード(), business.get医療機関名称(), business.get主治医コード(), business.get主治医氏名());
             div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(getNull(business.get審査会開催予定日()));
             div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(getNull(business.get審査会開催日()));

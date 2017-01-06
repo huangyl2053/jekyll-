@@ -212,10 +212,10 @@ public class SaiChekkuhyoRyoumenUraEditorImpl implements ISaiChekkuhyoRyoumenEdi
 
     private RString setChosaAnser01(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
-        if (ChosaAnser01.あり.getコード().equals(chosakekkaNo)) {
-            chosaAnser = ChosaAnser01.あり.get名称();
-        } else if (ChosaAnser01.なし.getコード().equals(chosakekkaNo)) {
-            chosaAnser = ChosaAnser01.なし.get名称();
+        if (ChosaAnser01.ある.getコード().equals(chosakekkaNo)) {
+            chosaAnser = ChosaAnser01.ある.get名称();
+        } else if (ChosaAnser01.ない.getコード().equals(chosakekkaNo)) {
+            chosaAnser = ChosaAnser01.ない.get名称();
         }
         return chosaAnser;
     }

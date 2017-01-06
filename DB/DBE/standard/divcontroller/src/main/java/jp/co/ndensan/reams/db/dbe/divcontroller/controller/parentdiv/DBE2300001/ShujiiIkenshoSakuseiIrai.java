@@ -564,8 +564,8 @@ public class ShujiiIkenshoSakuseiIrai {
         ShujiiIkenshoSakuseiIraishoItem iraishoItem = new ShujiiIkenshoSakuseiIraishoItem();
         iraishoItem.setTitle(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         iraishoItem.setHakkoYMD1(div.getTxtHakobi().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-        if(!RString.isNullOrEmpty(div.getBunshoBango().get文書番号())){
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        if(!RString.isNullOrEmpty(div.getBunshoBango().get文書番号().trim())){
             iraishoItem.setBunshoNo(div.getBunshoBango().get文書番号());
         }else{
             iraishoItem.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId(), FlexibleDate.getNowDate()));
@@ -599,7 +599,7 @@ public class ShujiiIkenshoSakuseiIrai {
         if (row.getShinseiDay().getValue() != null) {
             iraishoItem.setShinseiYMD(row.getShinseiDay().getValue().
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         iraishoItem.setShoriName(row.getIraiKubun());
         iraishoItem.setRemban(new RString("1"));
@@ -619,7 +619,7 @@ public class ShujiiIkenshoSakuseiIrai {
         FlexibleDate birthYMD = row.getBirthYMD().getValue();
         if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
             iraishoItem.setBirthYMD(birthYMD.wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(数字_2));
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(数字_2));
             if (new RString("明").equals(birthYMD.wareki().getEra())) {
                 iraishoItem.setBirthGengoShowa(星);
                 iraishoItem.setBirthGengoTaisho(星);
@@ -829,7 +829,7 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setSeikyuIryokikanName(row.getShujiiIryoKikan());
         if (row.getBirthYMD().getValue() != null && !FlexibleDate.EMPTY.equals(row.getBirthYMD().getValue())) {
             item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         item.setSeibetsu(row.getSeibetsu());
         if (!row.getShisetsuNyushoFlag()) {
@@ -888,15 +888,15 @@ public class ShujiiIkenshoSakuseiIrai {
         RStringBuilder jyushin = new RStringBuilder();
         if (SELECTED_KEY0.equals(div.getMeireisho().getRadjyushin().getSelectedKey())) {
             jyushin.append(div.getMeireisho().getTxtjyushinymd().getValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             jyushin.append(RString.HALF_SPACE);
             jyushin.append(div.getMeireisho().getTxtjyushintime().getValue().toFormattedTimeString(DisplayTimeFormat.HH時mm分));
         } else {
             jyushin.append(div.getMeireisho().getTxtJyushinKikan().getFromValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             jyushin.append(new RString("～"));
             jyushin.append(div.getMeireisho().getTxtJyushinKikan().getToValue().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem();
         item.setHihokenshaNo(row.getHihokenshaNo());
@@ -1072,7 +1072,7 @@ public class ShujiiIkenshoSakuseiIrai {
                     提出期限 = row.getShujiiIkenshoSakuseiIraiDay().getValue() != null
                             ? row.getShujiiIkenshoSakuseiIraiDay().getValue().plusDay(期限日数).
                             wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                            separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY;
+                            separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : RString.EMPTY;
                 } else {
                     提出期限 = row.getShujiiIkenshoSakuseiIraiDay().getValue() != null
                             ? row.getShujiiIkenshoSakuseiIraiDay().getValue().plusDay(期限日数).
@@ -1085,7 +1085,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 if (SELECTED_KEY0.equals(kubun)) {
                     提出期限 = (共通日 != null ? 共通日.
                             wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                            separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY);
+                            separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : RString.EMPTY);
                 } else {
                     提出期限 = (共通日 != null ? 共通日.wareki().toDateString() : RString.EMPTY);
                 }
@@ -1094,7 +1094,7 @@ public class ShujiiIkenshoSakuseiIrai {
             提出期限 = row.getShinseiDay().getValue() != null
                     ? row.getShinseiDay().getValue().plusDay(期限日数).
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString() : RString.EMPTY;
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString() : RString.EMPTY;
         } else {
             提出期限 = row.getShinseiDay().getValue() != null
                     ? row.getShinseiDay().getValue().plusDay(期限日数).

@@ -35,7 +35,7 @@
             , B."shichosonMeisho"  AS shichosonMeisho
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS A
-            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS B
+            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS B
             ON A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
         WHERE
             A."shinseishoKanriNo" = #{被保険者番号}

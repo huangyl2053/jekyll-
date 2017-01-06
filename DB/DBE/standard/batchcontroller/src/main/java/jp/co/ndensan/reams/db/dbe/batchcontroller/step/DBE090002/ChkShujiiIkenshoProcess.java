@@ -188,13 +188,8 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_BAK);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_BAK);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_BAK)) ? FILENAME_BAK : FILENAME;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
@@ -205,20 +200,15 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_BAK02);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_BAK02);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME02);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_BAK02)) ? FILENAME_BAK02 : FILENAME02;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
 
     private boolean existマスキングファイル(List<SharedFileEntryInfoEntity> entryInfoList, RString ファイル名) {
         for (SharedFileEntryInfoEntity entryInfo : entryInfoList) {
-            if (ファイル名.equals(entryInfo.getFilesEntity().getSharedFileName())) {
+            if (entryInfo.getFilesEntity().getPathname().endsWith(ファイル名)) {
                 return true;
             }
         }
