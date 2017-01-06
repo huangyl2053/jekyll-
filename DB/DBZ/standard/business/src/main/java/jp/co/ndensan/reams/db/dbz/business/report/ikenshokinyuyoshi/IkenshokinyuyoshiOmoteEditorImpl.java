@@ -56,6 +56,9 @@ public class IkenshokinyuyoshiOmoteEditorImpl implements IIkenshokinyuyoshiEdito
         source.birthGengoMeiji = business.getBirthGengoMeiji();
         source.birthGengoTaisho = business.getBirthGengoTaisho();
         source.birthGengoShowa = business.getBirthGengoShowa();
+        source.meiji = business.getBirthGengoMeiji();
+        source.taisho = business.getBirthGengoTaisho();
+        source.showa = business.getBirthGengoShowa();
         source.age = business.getAge();
         source.birthYY = business.getBirthYY();
         source.birthMM = business.getBirthMM();
@@ -77,6 +80,12 @@ public class IkenshokinyuyoshiOmoteEditorImpl implements IIkenshokinyuyoshiEdito
         source.shinseiYMDNo4 = business.getShinseiMM2();
         source.shinseiYMDNo5 = business.getShinseiDD1();
         source.shinseiYMDNo6 = business.getShinseiDD2();
+        source.shinseishaNameKana = business.getHihokenshaNameKana();
+        source.shinseishaName = business.getHihokenshaName();
+        source.shinseishaYubinNo = business.getYubinNo();
+        source.shinseishaJusho = business.getJusho();
+        source.shinseishaTelNo = business.getHihokenshaTel();
+        source.seibetsuMan = business.getSeibetsuMan();
         source.hihokenshaNo1 = business.getHihokenshaNo1();
         source.hihokenshaNo2 = business.getHihokenshaNo2();
         source.hihokenshaNo3 = business.getHihokenshaNo3();

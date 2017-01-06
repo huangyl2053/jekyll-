@@ -1241,8 +1241,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 if (ChohyoAtesakiKeisho.殿.getコード().equals(key)) {
                     item.setMeishoFuyo(ChohyoAtesakiKeisho.殿.get名称());
                 }
-                if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
-                    item.setCustomerBarCode(ReportUtil.getCustomerBarCode(business.get調査委託先郵便番号(), business.get調査委託先住所()));
+                if (!RString.isNullOrEmpty(business.get医療機関郵便番号()) && !RString.isNullOrEmpty(business.get医療機関住所())) {
+                    item.setCustomerBarCode(ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所()));
                 } else {
                     item.setCustomerBarCode(RString.EMPTY);
                 }
