@@ -28,7 +28,7 @@ public class ChosahyoGaikyochosaPrintService {
      * @return {@link ChosahyoGaikyochosaReport}
      */
     public SourceDataCollection print(List<ChosahyoGaikyochosaItem> itemList) {
-        ChosahyoGaikyochosaProperty property = new ChosahyoGaikyochosaProperty();
+        ChosahyoGaikyochosaProperty property = ChosahyoGaikyochosaProperty.createPropertyFor両面デザイン用紙();
         return new Printer<ChosahyoGaikyochosaReportSource>().spool(property, toReports(itemList));
     }
 

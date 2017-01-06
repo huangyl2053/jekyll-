@@ -181,7 +181,7 @@ public class NinnteiChousairaiShudouPrintService {
         if (!認定調査票_概況調査List.isEmpty()) {
             list.add(ChosahyoGaikyochosaReport.createFrom(認定調査票_概況調査List));
         }
-        ChosahyoGaikyochosaProperty property = new ChosahyoGaikyochosaProperty();
+        ChosahyoGaikyochosaProperty property = ChosahyoGaikyochosaProperty.createPropertyFor両面デザイン用紙();
         try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
             for (ChosahyoGaikyochosaReport report : list) {
                 ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
