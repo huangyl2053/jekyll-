@@ -4,6 +4,7 @@
             <actionName>CUSTOM-build_no_test</actionName>
             <displayName>build_no_test</displayName>
             <goals>
+                <goal>clean</goal>
                 <goal>install</goal>
                 
             </goals>
