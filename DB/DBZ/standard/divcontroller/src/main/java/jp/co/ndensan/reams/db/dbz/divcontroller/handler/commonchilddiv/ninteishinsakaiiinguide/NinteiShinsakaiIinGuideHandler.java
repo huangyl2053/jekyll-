@@ -104,74 +104,9 @@ public class NinteiShinsakaiIinGuideHandler {
      */
     private void set審査会委員資格() {
         List<KeyValueDataSource> 審査会委員資格リスト = new ArrayList<>();
-        KeyValueDataSource dateSource = new KeyValueDataSource();
-        dateSource.setKey(Sikaku.医師.getコード());
-        dateSource.setValue(Sikaku.医師.get名称());
-        審査会委員資格リスト.add(dateSource);
-        KeyValueDataSource dateSource1 = new KeyValueDataSource();
-        dateSource1.setKey(Sikaku.歯科医師.getコード());
-        dateSource1.setValue(Sikaku.歯科医師.get名称());
-        審査会委員資格リスト.add(dateSource1);
-        KeyValueDataSource dateSource2 = new KeyValueDataSource();
-        dateSource2.setKey(Sikaku.薬剤師.getコード());
-        dateSource2.setValue(Sikaku.薬剤師.get名称());
-        審査会委員資格リスト.add(dateSource2);
-        KeyValueDataSource dateSource3 = new KeyValueDataSource();
-        dateSource3.setKey(Sikaku.保健師.getコード());
-        dateSource3.setValue(Sikaku.保健師.get名称());
-        審査会委員資格リスト.add(dateSource3);
-        KeyValueDataSource dateSource4 = new KeyValueDataSource();
-        dateSource4.setKey(Sikaku.助産師.getコード());
-        dateSource4.setValue(Sikaku.助産師.get名称());
-        審査会委員資格リスト.add(dateSource4);
-        KeyValueDataSource dateSource5 = new KeyValueDataSource();
-        dateSource5.setKey(Sikaku._准_看護師.getコード());
-        dateSource5.setValue(Sikaku._准_看護師.get名称());
-        審査会委員資格リスト.add(dateSource5);
-        KeyValueDataSource dateSource6 = new KeyValueDataSource();
-        dateSource6.setKey(Sikaku.理学療法士.getコード());
-        dateSource6.setValue(Sikaku.理学療法士.get名称());
-        審査会委員資格リスト.add(dateSource6);
-        KeyValueDataSource dateSource7 = new KeyValueDataSource();
-        dateSource7.setKey(Sikaku.作業療法士.getコード());
-        dateSource7.setValue(Sikaku.作業療法士.get名称());
-        審査会委員資格リスト.add(dateSource7);
-        KeyValueDataSource dateSource8 = new KeyValueDataSource();
-        dateSource8.setKey(Sikaku.社会福祉士.getコード());
-        dateSource8.setValue(Sikaku.社会福祉士.get名称());
-        審査会委員資格リスト.add(dateSource8);
-        KeyValueDataSource dateSource9 = new KeyValueDataSource();
-        dateSource9.setKey(Sikaku.介護福祉士.getコード());
-        dateSource9.setValue(Sikaku.介護福祉士.get名称());
-        審査会委員資格リスト.add(dateSource9);
-        KeyValueDataSource dateSource10 = new KeyValueDataSource();
-        dateSource10.setKey(Sikaku.ソーシャルワーカー.getコード());
-        dateSource10.setValue(Sikaku.ソーシャルワーカー.get名称());
-        審査会委員資格リスト.add(dateSource10);
-        KeyValueDataSource dateSource11 = new KeyValueDataSource();
-        dateSource11.setKey(Sikaku.福祉事務所現業員等.getコード());
-        dateSource11.setValue(Sikaku.福祉事務所現業員等.get名称());
-        審査会委員資格リスト.add(dateSource11);
-        KeyValueDataSource dateSource12 = new KeyValueDataSource();
-        dateSource12.setKey(Sikaku.ホームヘルパー.getコード());
-        dateSource12.setValue(Sikaku.ホームヘルパー.get名称());
-        審査会委員資格リスト.add(dateSource12);
-        KeyValueDataSource dateSource13 = new KeyValueDataSource();
-        dateSource13.setKey(Sikaku.介護職員.getコード());
-        dateSource13.setValue(Sikaku.介護職員.get名称());
-        審査会委員資格リスト.add(dateSource13);
-        KeyValueDataSource dateSource14 = new KeyValueDataSource();
-        dateSource14.setKey(Sikaku.その他福祉関係者.getコード());
-        dateSource14.setValue(Sikaku.その他福祉関係者.get名称());
-        審査会委員資格リスト.add(dateSource14);
-        KeyValueDataSource dateSource15 = new KeyValueDataSource();
-        dateSource15.setKey(Sikaku.行政関係者.getコード());
-        dateSource15.setValue(Sikaku.行政関係者.get名称());
-        審査会委員資格リスト.add(dateSource15);
-        KeyValueDataSource dateSource16 = new KeyValueDataSource();
-        dateSource16.setKey(Sikaku.その他.getコード());
-        dateSource16.setValue(Sikaku.その他.get名称());
-        審査会委員資格リスト.add(dateSource16);
+        for (Sikaku sikaku : Sikaku.values()) {
+            審査会委員資格リスト.add(new KeyValueDataSource(sikaku.getコード(), sikaku.get名称()));
+        }
         div.getDdlShinsainShikakuCode().setDataSource(審査会委員資格リスト);
     }
 
