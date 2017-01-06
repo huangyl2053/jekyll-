@@ -94,15 +94,15 @@
         rgdb."DbT5105NinteiKanryoJoho"  DbT5105NinteiKanryoJoho
         ON
         DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."shinseishoKanriNo"
-        AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NOT NULL
+        AND (DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         ON
@@ -194,15 +194,15 @@
         rgdb."DbT5105NinteiKanryoJoho"  DbT5105NinteiKanryoJoho
         ON
         DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."shinseishoKanriNo"
-        AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NOT NULL
+        AND (DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         ON
@@ -278,15 +278,15 @@
         rgdb."DbT5105NinteiKanryoJoho"  DbT5105NinteiKanryoJoho
         ON
         DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."shinseishoKanriNo"
-        AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NOT NULL
+        AND (DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         ON
@@ -341,15 +341,15 @@
         rgdb."DbT5105NinteiKanryoJoho"  DbT5105NinteiKanryoJoho
         ON
         DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."shinseishoKanriNo"
-        AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NOT NULL
+        AND (DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         ON
@@ -566,15 +566,15 @@
         rgdb."DbT5105NinteiKanryoJoho"  DbT5105NinteiKanryoJoho
         ON
         DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5502ShinsakaiWariateJoho."shinseishoKanriNo"
-        AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NOT NULL
+        AND (DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+        AND (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+        AND (DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         ON
