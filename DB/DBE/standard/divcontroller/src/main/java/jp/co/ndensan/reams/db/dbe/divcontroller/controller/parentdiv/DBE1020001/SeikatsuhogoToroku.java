@@ -105,7 +105,7 @@ public class SeikatsuhogoToroku {
             if (ninteiShinseiJoho.get被保険者氏名カナ() != null) {
                 div.getTxtKanaShimei().setValue(ninteiShinseiJoho.get被保険者氏名カナ().value());
             }
-            if (ninteiShinseiJoho.get生年月日() != null) {
+            if (ninteiShinseiJoho.get生年月日() != null && !ninteiShinseiJoho.get生年月日().isEmpty()) {
                 div.getTxtBirthYMD().setValue(ninteiShinseiJoho.get生年月日().toRDate());
             }
             

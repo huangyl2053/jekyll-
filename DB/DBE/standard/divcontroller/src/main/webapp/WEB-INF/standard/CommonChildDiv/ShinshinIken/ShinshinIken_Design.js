@@ -183,12 +183,12 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtShincho"));
             };
 
-            Controls.prototype.radKakoTaijuHenka = function () {
-                return new UZA.RadioButton(this.convFiledName("radKakoTaijuHenka"));
-            };
-
             Controls.prototype.txtTaiju = function () {
                 return new UZA.TextBox(this.convFiledName("txtTaiju"));
+            };
+
+            Controls.prototype.radKakoTaijuHenka = function () {
+                return new UZA.RadioButton(this.convFiledName("radKakoTaijuHenka"));
             };
 
             Controls.prototype.chkShishiKesson = function () {

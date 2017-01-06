@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
  * @author 自動生成
  */
 public class TokubetsuIryoIkenDiv extends Panel implements ITokubetsuIryoIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

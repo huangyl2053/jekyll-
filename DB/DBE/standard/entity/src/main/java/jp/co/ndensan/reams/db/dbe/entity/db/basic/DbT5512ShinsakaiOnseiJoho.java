@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護認定審査会音声情報テーブルの項目定義クラスです。
  */
 public enum DbT5512ShinsakaiOnseiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -51,7 +51,15 @@ public enum DbT5512ShinsakaiOnseiJoho implements IColumnDefinition {
     /**
      * 審査会音声ファイル
      */
-    shinsakaiOnseiFile(2147483647, 0);
+    shinsakaiOnseiFile(2147483647, 0),
+    /**
+     * fileName
+     */
+    fileName(2147483647, 0),
+    /**
+     * kakuchoshi
+     */
+    kakuchoshi(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

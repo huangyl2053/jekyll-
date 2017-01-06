@@ -114,6 +114,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString KEY5 = new RString("第5群");
     private static final RString KEY6 = new RString("特別な医療群");
     private static final RString KEY7 = new RString("自立度群");
+    private static final RString UICONTAINERID_DBEUC20601 = new RString("DBEUC20601");
     private static final int 住宅改修_連番 = 1;
     private static final int 市町村特別給付_連番 = 1;
     private static final int 介護保険給付外の在宅サービス_連番 = 2;
@@ -956,14 +957,20 @@ public class NinnteiChousaKekkaTouroku1 {
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             更新処理(div);
             前排他キーの解除();
-            div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+            div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            }
             return ResponseData.of(div).setState(DBE2210001StateName.完了);
+        }
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.検索結果一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }

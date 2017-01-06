@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * 
  */
 public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -348,16 +348,6 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public RadioButton getRadKakoTaijuHenka() {
-        return this.getKaradaJotai().getRadKakoTaijuHenka();
-    }
-
-    @JsonIgnore
-    public void  setRadKakoTaijuHenka(RadioButton radKakoTaijuHenka) {
-        this.getKaradaJotai().setRadKakoTaijuHenka(radKakoTaijuHenka);
-    }
-
-    @JsonIgnore
     public TextBox getTxtTaiju() {
         return this.getKaradaJotai().getTxtTaiju();
     }
@@ -365,6 +355,16 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     @JsonIgnore
     public void  setTxtTaiju(TextBox txtTaiju) {
         this.getKaradaJotai().setTxtTaiju(txtTaiju);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKakoTaijuHenka() {
+        return this.getKaradaJotai().getRadKakoTaijuHenka();
+    }
+
+    @JsonIgnore
+    public void  setRadKakoTaijuHenka(RadioButton radKakoTaijuHenka) {
+        this.getKaradaJotai().setRadKakoTaijuHenka(radKakoTaijuHenka);
     }
 
     @JsonIgnore

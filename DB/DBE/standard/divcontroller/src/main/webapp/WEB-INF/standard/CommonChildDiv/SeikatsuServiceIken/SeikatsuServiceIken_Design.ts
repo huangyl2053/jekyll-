@@ -113,6 +113,10 @@ module DBE {
                 return new UZA.Panel(this.convFiledName("HasseiJotaiTaishoHoshin"));
             }
 
+            public chkHasseiShojo(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkHasseiShojo"));
+            }
+
             public Dummy01(): UZA.Space {
                 return new UZA.Space(this.convFiledName("Dummy01"));
             }
@@ -139,10 +143,6 @@ module DBE {
 
             public IgakutekiKanriHitsuyosei(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("IgakutekiKanriHitsuyosei"));
-            }
-
-            public chkHasseiShojo(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkHasseiShojo"));
             }
 
             public chkIgakutekiKanri(): UZA.CheckBoxList {

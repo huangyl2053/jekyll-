@@ -88,12 +88,12 @@ public class NinteiChosainMasterCsvEntity {
             RString chikuCode,
             RString chikuMeisho,
             RString chosainShikaku,
-            RString chosaKanoNinzuPerMonth,
-            RString jokyoFlag,
+            RString chosaKanoNinzuPerMonth,           
             RString yubinNo,
             RString jusho,
             RString telNo,
             RString faxNo,
+            RString jokyoFlag,
             RString shozokuKikanName) {
         this.shichosonCode = shichosonCode;
         this.shichosonMeisho = shichosonMeisho;
@@ -107,11 +107,11 @@ public class NinteiChosainMasterCsvEntity {
         this.chikuMeisho = chikuMeisho;
         this.chosainShikaku = chosainShikaku;
         this.chosaKanoNinzuPerMonth = chosaKanoNinzuPerMonth;
-        this.jokyoFlag = jokyoFlag;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.telNo = telNo;
         this.faxNo = faxNo;
+        this.jokyoFlag = jokyoFlag;
         this.shozokuKikanName = shozokuKikanName;
     }
 

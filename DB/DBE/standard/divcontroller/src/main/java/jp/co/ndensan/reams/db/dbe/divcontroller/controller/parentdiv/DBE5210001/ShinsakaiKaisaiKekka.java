@@ -1,5 +1,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5210001;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2Builder;
@@ -23,15 +26,17 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoh
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaikekka.ShinsakaiKaisaiKekkaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.io.ByteReader;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -46,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class ShinsakaiKaisaiKekka {
 
-    private static final int BYTE_1024 = 1024;
     private static final int LENGTH_開催番号 = 8;
     private final ShinsakaiKaisaiKekkaFinder service;
     private final ShinsakaiKaisaiYoteiJohoManager manager;
@@ -78,8 +82,9 @@ public class ShinsakaiKaisaiKekka {
         RealInitialLocker.lock(前排他ロックキー);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setDataSource(service.get開催会場());
+        List<ShinsakaiOnseiJoho2> 音声情報リスト = onseiJohoManager.get介護認定審査会音声情報(開催番号);
         ShinsakaiKaisaiKekkaHandler handler = getHandler(div);
-        handler.onLoad(saiYoteiJoho);
+        handler.onLoad(saiYoteiJoho, 音声情報リスト);
         handler.setDisabled();
         List<ShinsakaiWariateIinJohoBusiness> list = service.get審査会委員一覧検索(開催番号).records();
         if (list.isEmpty()) {
@@ -105,17 +110,53 @@ public class ShinsakaiKaisaiKekka {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnRemoveIin(ShinsakaiKaisaiKekkaDiv div, FileData[] files) {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        ShinsakaiKaisaiKekkaHandler handler = getHandler(div);
         int 連番 = service.get連番(開催番号);
         for (FileData file : files) {
-            ByteReader byteReader = new ByteReader(file.getFilePath());
-            byte[] array = new byte[BYTE_1024];
-            byteReader.read(array);
-            ShinsakaiOnseiJoho2 shinsakaiOnseiJoho = new ShinsakaiOnseiJoho2(開催番号, 連番 + 1);
-            ShinsakaiOnseiJoho2Builder shinsakaiOnseiJohoBuilder = shinsakaiOnseiJoho.createBuilderForEdit();
-            shinsakaiOnseiJohoBuilder.set審査会音声ファイル(array);
-            shinsakaiOnseiJoho = shinsakaiOnseiJohoBuilder.build();
-            onseiJohoManager.save介護認定審査会音声情報(shinsakaiOnseiJoho);
+            try {
+                byte[] array = Files.readAllBytes(Paths.get(file.getFilePath().toString()));
+                ShinsakaiOnseiJoho2 shinsakaiOnseiJoho = new ShinsakaiOnseiJoho2(開催番号, 連番 + 1);
+                ShinsakaiOnseiJoho2Builder shinsakaiOnseiJohoBuilder = shinsakaiOnseiJoho.createBuilderForEdit();
+                shinsakaiOnseiJohoBuilder.set審査会音声ファイル(array);
+                shinsakaiOnseiJoho = shinsakaiOnseiJohoBuilder.build();
+                onseiJohoManager.save介護認定審査会音声情報(shinsakaiOnseiJoho);
+                handler.add音声情報(shinsakaiOnseiJoho, RDateTime.now());
+            } catch (IOException ex) {
+                return ResponseData.of(div).addMessage(UrErrorMessages.指定ファイルが存在しない.getMessage()).respond();
+            }
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 開催時間を委員一覧に反映するボタンが押されたときのイベントです。
+     *
+     * @param div 介護認定審査会開催結果登録div
+     * @return responseData
+     */
+    public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnReflectKaisaiTimeToShinsakaiIinIchiran(ShinsakaiKaisaiKekkaDiv div) {
+        ShinsakaiKaisaiKekkaHandler handler = getHandler(div);
+        RTime 開催開始時刻 = handler.get開催開始時刻();
+        if (開催開始時刻 != null) {
+            handler.set委員一覧出席時刻(開催開始時刻);
+        }
+        RTime 開催終了時刻 = handler.get開催終了時刻();
+        if (開催終了時刻 != null) {
+            handler.set委員一覧退席時刻(開催終了時刻);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 所要時間を計算するボタンが押されたときのイベントです。
+     *
+     * @param div 介護認定審査会開催結果登録div
+     * @return responseData
+     */
+    public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnCalcShoyoTime(ShinsakaiKaisaiKekkaDiv div) {
+        ShinsakaiKaisaiKekkaHandler handler = getHandler(div);
+        long 所要時間 = handler.get所要時間from開催期間();
+        handler.set所要時間(所要時間);
         return ResponseData.of(div).respond();
     }
 

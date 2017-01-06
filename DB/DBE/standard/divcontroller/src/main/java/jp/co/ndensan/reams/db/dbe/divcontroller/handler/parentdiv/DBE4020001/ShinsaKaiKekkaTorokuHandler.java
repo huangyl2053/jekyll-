@@ -58,6 +58,8 @@ public class ShinsaKaiKekkaTorokuHandler {
     private static final RString 完了可能 = new RString("可");
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
+    private static final RString 審査会結果登録共通ボタンFieldName = new RString("btnKekkaToroku");
+    private static final RString OCR結果登録共通ボタンFieldName = new RString("btnOCRToroku");
 
     private static final Code 認定ｿﾌﾄ99 = new Code(new RString("99A"));
     private static final Code 認定ｿﾌﾄ2002 = new Code(new RString("02A"));
@@ -116,7 +118,6 @@ public class ShinsaKaiKekkaTorokuHandler {
 //        }
         二次判定モード();
 
-        活性非活性の設定();
     }
 
     /**
@@ -150,6 +151,35 @@ public class ShinsaKaiKekkaTorokuHandler {
      */
     public void onClick_btnCyosakekkaInput(List<ShinsaKaiKekkaInputCsvEntity> csvEntityList) {
         saveCsvDataInput(csvEntityList);
+    }
+
+    /**
+     * 与えられた引数よりOCR結果登録共通ボタンの表示を制御します。
+     */
+    public void setDisabled登録ボタンfrom選択状態() {
+        int 選択行数 = get一覧選択行数();
+        boolean isDisabled登録ボタン = !(選択行数 == 1);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会結果登録共通ボタンFieldName, isDisabled登録ボタン);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(OCR結果登録共通ボタンFieldName, isDisabled登録ボタン);
+    }
+
+    private int get一覧選択行数() {
+        int result = 0;
+        for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
+            if (row.getSelected()) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 与えられた引数よりOCR結果登録共通ボタンの表示を制御します。
+     */
+    public void setDisplayOCR結果登録ボタン(boolean is審査会結果登録OCR使用可) {
+        if (!is審査会結果登録OCR使用可) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(OCR結果登録共通ボタンFieldName, true);
+        }
     }
 
     private void saveCsvDataInput(List<ShinsaKaiKekkaInputCsvEntity> csvEntityList) {
@@ -212,17 +242,6 @@ public class ShinsaKaiKekkaTorokuHandler {
                 .set認知機能及び状態安定性から推定される給付区分コード(new Code(csvEntity.getSuiteiKyufuKubunCode()))
                 .build();
 
-    }
-
-    private void 活性非活性の設定() {
-        div.getBtnShinsakaikanryooutput().setDisplayNone(false);
-        RDate 適用基準日 = RDate.getNowDate();
-        RString 審査会結果OCR使用有無 = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, 適用基準日, SubGyomuCode.DBE認定支援);
-        if (使用.equals(審査会結果OCR使用有無)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnOCRToroku"), false);
-        } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnOCRToroku"), true);
-        }
     }
 
     public void 二次判定モード() {
@@ -300,6 +319,7 @@ public class ShinsaKaiKekkaTorokuHandler {
                 row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
                 row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
                 row.getHiddenYukoKikan().setValue(new Decimal(business.get二次判定認定有効期間()));
+                row.setNaibuShinsakaiNo(business.get介護認定審査会開催番号());
                 rowList.add(row);
                 i++;
             }
@@ -312,7 +332,7 @@ public class ShinsaKaiKekkaTorokuHandler {
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
     }
-    
+
     private RString edit審査会名称(RString 審査会開催番号) {
         return new RString("第").concat(審査会開催番号).concat("回審査");
     }

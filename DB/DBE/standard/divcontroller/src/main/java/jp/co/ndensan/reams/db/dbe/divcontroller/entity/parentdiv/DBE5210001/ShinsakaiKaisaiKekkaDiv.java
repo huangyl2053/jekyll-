@@ -4,8 +4,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.IOnseiFileOperatorDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -294,23 +296,43 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
+    public ControlRepeater<IOnseiFileOperatorDiv> getCrOnseiFiles() {
+        return this.getOnseiFile().getCrOnseiFiles();
+    }
+
+    @JsonIgnore
+    public void  setCrOnseiFiles(ControlRepeater<IOnseiFileOperatorDiv> crOnseiFiles) {
+        this.getOnseiFile().setCrOnseiFiles(crOnseiFiles);
+    }
+
+    @JsonIgnore
+    public OnseiUploadDiv getOnseiUpload() {
+        return this.getOnseiFile().getOnseiUpload();
+    }
+
+    @JsonIgnore
+    public void  setOnseiUpload(OnseiUploadDiv OnseiUpload) {
+        this.getOnseiFile().setOnseiUpload(OnseiUpload);
+    }
+
+    @JsonIgnore
     public UploadPanel getUplUploadPanel() {
-        return this.getOnseiFile().getUplUploadPanel();
+        return this.getOnseiFile().getOnseiUpload().getUplUploadPanel();
     }
 
     @JsonIgnore
     public void  setUplUploadPanel(UploadPanel uplUploadPanel) {
-        this.getOnseiFile().setUplUploadPanel(uplUploadPanel);
+        this.getOnseiFile().getOnseiUpload().setUplUploadPanel(uplUploadPanel);
     }
 
     @JsonIgnore
     public Button getBtnAddOnseiFile() {
-        return this.getOnseiFile().getBtnAddOnseiFile();
+        return this.getOnseiFile().getOnseiUpload().getBtnAddOnseiFile();
     }
 
     @JsonIgnore
     public void  setBtnAddOnseiFile(Button btnAddOnseiFile) {
-        this.getOnseiFile().setBtnAddOnseiFile(btnAddOnseiFile);
+        this.getOnseiFile().getOnseiUpload().setBtnAddOnseiFile(btnAddOnseiFile);
     }
 
     // </editor-fold>

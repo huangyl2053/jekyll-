@@ -42,6 +42,15 @@ public class ShinsakaiOnseiJohoManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiOnseiJohoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiOnseiJohoManager}のインスタンス
+     */
+    public static ShinsakaiOnseiJohoManager createInstance() {
+        return InstanceProvider.create(ShinsakaiOnseiJohoManager.class);
+    }
+
+    /**
      * 主キーに合致する介護認定審査会音声情報を返します。
      *
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
@@ -63,6 +72,26 @@ public class ShinsakaiOnseiJohoManager {
         }
         entity.initializeMd5();
         return new ShinsakaiOnseiJoho2(entity);
+    }
+
+    /**
+     * 主キーに合致する介護認定審査会音声情報を返します。
+     *
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @param 連番 連番
+     * @return ShinsakaiOnseiJoho
+     */
+    @Transaction
+    public List<ShinsakaiOnseiJoho2> get介護認定審査会音声情報(RString 介護認定審査会開催番号) {
+        requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+
+        List<DbT5512ShinsakaiOnseiJohoEntity> entities = dac.selectByKey(介護認定審査会開催番号);
+        List<ShinsakaiOnseiJoho2> result = new ArrayList<>();
+        for (DbT5512ShinsakaiOnseiJohoEntity entity : entities) {
+            entity.initializeMd5();
+            result.add(new ShinsakaiOnseiJoho2(entity));
+        }
+        return result;
     }
 
     /**

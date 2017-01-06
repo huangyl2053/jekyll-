@@ -124,9 +124,9 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         RString 業務コンフィグ認定調査票差異チェック票_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
         if (CONFIGVALUE1.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
             executeStep(認定調査差異チェック表_片面);
-        } else if (CONFIGVALUE2.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
-            executeStep(認定調査差異チェック表_両面右);
         } else if (CONFIGVALUE3.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
+            executeStep(認定調査差異チェック表_両面右);
+        } else if (CONFIGVALUE2.equals(業務コンフィグ認定調査票差異チェック票_印刷タイプ)) {
             executeStep(認定調査差異チェック表_両面左);
         }
     }

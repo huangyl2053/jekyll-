@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -101,7 +102,24 @@ public class ShinsakaiOnseiJoho2
     public byte[] get審査会音声ファイル() {
         return (entity.getShinsakaiOnseiFile());
     }
-    
+
+    /**
+     * レコードが論理削除されているかを返します。
+     *
+     * @return 論理削除されているか否か
+     */
+    public boolean isEntitiyDeleted() {
+        return (entity.getIsDeleted());
+    }
+
+    /**
+     * レコードの保存日時を返します。
+     *
+     * @return レコードの保存日時
+     */
+    public RDateTime getInsertTimestamp() {
+        return (entity.getInsertTimestamp());
+    }
 
     /**
      * {@link DbT5512ShinsakaiOnseiJohoEntity}のクローンを返します。
@@ -172,6 +190,7 @@ public class ShinsakaiOnseiJoho2
     }
 
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = -5086517189704801195L;
 
         private final DbT5512ShinsakaiOnseiJohoEntity entity;
