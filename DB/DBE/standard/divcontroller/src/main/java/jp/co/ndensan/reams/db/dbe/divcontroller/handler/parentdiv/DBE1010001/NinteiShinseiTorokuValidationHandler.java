@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1010001;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -71,10 +72,28 @@ public class NinteiShinseiTorokuValidationHandler {
         return validationMessages;
     }
 
+    /**
+     * 有効期間チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 有効期間チェック() {
+        RDate kaishiYMD = div.getCcdNinteiInput().getNinteiJoho().getTxtYukoKaishiYMD().getValue();
+        RDate shuryoYMD = div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD().getValue();
+
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+
+        if (kaishiYMD != null && shuryoYMD != null && shuryoYMD.isBefore(kaishiYMD)) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.終了日が開始日以前, div.getCcdNinteiInput().getNinteiJoho().getTxtYukoShuryoYMD()));
+        }
+        return validationMessages;
+    }
+
     private static enum NinteiShinseiTorokuMessages implements IValidationMessage {
 
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
-        項目に対する制約(UrErrorMessages.項目に対する制約, "みなし２号審査受付場合、被保険者区分", "\"8\" (生活保護)");
+        項目に対する制約(UrErrorMessages.項目に対する制約, "みなし２号審査受付場合、被保険者区分", "\"8\" (生活保護)"),
+        終了日が開始日以前(UrErrorMessages.終了日が開始日以前);     
 
         private final Message message;
 

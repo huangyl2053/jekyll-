@@ -61,6 +61,10 @@ public class IkenshokinyuyoshiOCRomoteEditorImpl implements IIkenshokinyuyoshiOC
         source.hihokenshaNo8 = business.getHihokenshaNo8();
         source.hihokenshaNo9 = business.getHihokenshaNo9();
         source.hihokenshaNo10 = business.getHihokenshaNo10();
+        source.hihokenshaNameKana = business.getHihokenshaNameKana();
+        source.hihokenshaName = business.getHihokenshaName();
+        source.yubinNo = business.getYubinNo();
+        source.hihokenshaTel = business.getHihokenshaTel();
         source.shinseishaNameKana = business.getHihokenshaNameKana();
         source.shinseishaYubinNo = business.getYubinNo();
         source.shinseishaTelNo = business.getHihokenshaTel();
@@ -71,6 +75,9 @@ public class IkenshokinyuyoshiOCRomoteEditorImpl implements IIkenshokinyuyoshiOC
         source.meiji = business.getBirthGengoMeiji();
         source.taisho = business.getBirthGengoTaisho();
         source.showa = business.getBirthGengoShowa();
+        source.birthGengoMeiji = business.getBirthGengoMeiji();
+        source.birthGengoTaisho = business.getBirthGengoTaisho();
+        source.birthGengoShowa = business.getBirthGengoShowa();
         source.birthDD = business.getBirthDD();
         source.birthMM = business.getBirthMM();
         source.birthYY = business.getBirthYY();

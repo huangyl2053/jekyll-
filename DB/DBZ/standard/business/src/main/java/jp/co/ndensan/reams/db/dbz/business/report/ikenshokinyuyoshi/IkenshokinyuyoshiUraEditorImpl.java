@@ -39,6 +39,12 @@ public class IkenshokinyuyoshiUraEditorImpl implements IIkenshokinyuyoshiEditor 
     }
 
     private IkenshokinyuyoshiReportSource editSource(IkenshokinyuyoshiReportSource source) {
+        source.shinseiYY1 = business.getShinseiYY1();
+        source.shinseiYY2 = business.getShinseiYY2();
+        source.shinseiMM1 = business.getShinseiMM1();
+        source.shinseiMM2 = business.getShinseiMM2();
+        source.shinseiD1 = business.getShinseiDD1();
+        source.shinseiDD2 = business.getShinseiDD2();
         source.hokenshaNo1 = business.getHokenshaNo1();
         source.hokenshaNo2 = business.getHokenshaNo2();
         source.hokenshaNo3 = business.getHokenshaNo3();

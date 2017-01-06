@@ -382,9 +382,10 @@ public class NinteiShinseiToroku {
         RString menuID = ResponseHolder.getMenuID();
         ShinsakaiIinItiranData dataList = DataPassingConverter.deserialize(div.getHdnJogaiShinsainJoho(), ShinsakaiIinItiranData.class);
         NinteiShinseiBusinessCollection zenkaiJoho = DataPassingConverter.deserialize(div.getHdnRenrakusakiJoho(), NinteiShinseiBusinessCollection.class);
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();        
         if (MENUID_DBEMN31003.equals(menuID)) {
             validationMessages.add(getValidationHandler(div).被保険者区分チェック());
+            validationMessages.add(getValidationHandler(div).有効期間チェック());
             ShinseishoKanriNo 申請書管理番号 = get申請書管理番号(div);
             NinteiShinseiJoho ninteiShinseiJoho = get要介護認定申請情報(div, 申請書管理番号);
 //            Boolean 変更有無フラグ1 = ninteiShinseiJoho.toEntity().hasChanged();
@@ -446,6 +447,8 @@ public class NinteiShinseiToroku {
             }
             if (!(変更有無フラグ1 || 変更有無フラグ2 || 変更有無フラグ3 || 変更有無フラグ4)) {
                 validationMessages.add(getValidationHandler(div).編集なしチェック(Boolean.TRUE));
+            } else {
+                validationMessages.add(getValidationHandler(div).有効期間チェック());
             }
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();

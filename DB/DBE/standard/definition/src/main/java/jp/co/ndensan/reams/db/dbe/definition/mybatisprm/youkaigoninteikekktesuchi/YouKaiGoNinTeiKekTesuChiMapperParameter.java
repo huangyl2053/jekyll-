@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
- * 
+ *
  * @reamsid_L DBE-0220-010 wangkun
  */
 @lombok.Getter
@@ -23,6 +23,7 @@ public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
     private final RString 二次判定期間To;
     private final RString 主治医医療機関コード;
     private final RString 主治医コード;
+    private final RString 市町村コード;
 
     private final boolean useNijiHanteiYMDFrom;
     private final boolean useNijiHanteiYMDTo;
@@ -34,6 +35,7 @@ public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
     /**
      * コンストラクタです。
      *
+     * @param 市町村コード 市町村コード
      * @param 二次判定期間From 二次判定期間From
      * @param 二次判定期間To 二次判定期間To
      * @param 主治医医療機関コード 主治医医療機関コード
@@ -45,7 +47,8 @@ public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
      * @param useSyuRyoKuTaiSyou useSyuRyoKuTaiSyou
      *
      */
-    private YouKaiGoNinTeiKekTesuChiMapperParameter(RString 二次判定期間From,
+    private YouKaiGoNinTeiKekTesuChiMapperParameter(RString 市町村コード,
+            RString 二次判定期間From,
             RString 二次判定期間To,
             RString 主治医医療機関コード,
             RString 主治医コード,
@@ -56,6 +59,7 @@ public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
             boolean useMaDaNyuRyouKu,
             boolean useSyuRyoKuTaiSyou) {
 
+        this.市町村コード = 市町村コード;
         this.二次判定期間From = 二次判定期間From;
         this.二次判定期間To = 二次判定期間To;
         this.主治医医療機関コード = 主治医医療機関コード;
@@ -72,15 +76,18 @@ public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
     /**
      * 主治医選択一覧検索用のパラメータを生成します。
      *
+     * @param 市町村コード 市町村コード
      * @param 二次判定期間From 二次判定期間From
      * @param 二次判定期間To 二次判定期間To
      * @param 主治医医療機関コード 主治医医療機関コード
      * @param 主治医コード 主治医コード
      * @param 未出力のみ 未出力のみ
      * @param 結果通知出力対象 結果通知出力対象
-     * @return YouKaiGoNinTeiKekTesuChiMapperParameter 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです
+     * @return YouKaiGoNinTeiKekTesuChiMapperParameter
+     * 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです
      */
-    public static YouKaiGoNinTeiKekTesuChiMapperParameter createSelectListParam(RString 二次判定期間From,
+    public static YouKaiGoNinTeiKekTesuChiMapperParameter createSelectListParam(RString 市町村コード,
+            RString 二次判定期間From,
             RString 二次判定期間To,
             RString 主治医医療機関コード,
             RString 主治医コード,
@@ -102,7 +109,7 @@ public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
         if (主治医コード != null && !主治医コード.isEmpty()) {
             useShujiiCodeTemp = true;
         }
-        return new YouKaiGoNinTeiKekTesuChiMapperParameter(二次判定期間From, 二次判定期間To, 主治医医療機関コード,
+        return new YouKaiGoNinTeiKekTesuChiMapperParameter(市町村コード, 二次判定期間From, 二次判定期間To, 主治医医療機関コード,
                 主治医コード, useNijiHanteiYMDFromTemp, useNijiHanteiYMDToTemp, useShujiiIryokikanCodeTemp, useShujiiCodeTemp, 未出力のみ, 結果通知出力対象);
     }
 
@@ -111,11 +118,12 @@ public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
      *
      * @param 二次判定期間From 二次判定期間From
      * @param 二次判定期間To 二次判定期間To
-     * @return YouKaiGoNinTeiKekTesuChiMapperParameter 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです
+     * @return YouKaiGoNinTeiKekTesuChiMapperParameter
+     * 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです
      */
     public static YouKaiGoNinTeiKekTesuChiMapperParameter createSelectListParam(RString 二次判定期間From,
             RString 二次判定期間To) {
-        return new YouKaiGoNinTeiKekTesuChiMapperParameter(二次判定期間From, 二次判定期間To, null,
+        return new YouKaiGoNinTeiKekTesuChiMapperParameter(null, 二次判定期間From, 二次判定期間To, null,
                 null, true, true, true, true, true, true);
     }
 
