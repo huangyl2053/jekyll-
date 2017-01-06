@@ -218,7 +218,7 @@ public class Yokaigoninteiimagekanri {
 
     private void setBtnControllerDisabled(YokaigoninteiimagekanriDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {
         List<RString> 存在したイメージファイル名 = YokaigoninteiimagesakujoManager.createInstance().get存在したイメージファイル名(ro_sfed);
-        if (存在したイメージファイル名 != null && !存在したイメージファイル名.isEmpty()) {
+        if (存在したイメージファイル名 != null && !存在したイメージファイル名.isEmpty() && !存在したイメージファイル名.contains(null)) {
             if (getHandler(div).isExistsGaikyoChosaImageFile(存在したイメージファイル名)) {
                 div.getBtnGaikyoChosa().setDisabled(false);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageOutput"), false);
