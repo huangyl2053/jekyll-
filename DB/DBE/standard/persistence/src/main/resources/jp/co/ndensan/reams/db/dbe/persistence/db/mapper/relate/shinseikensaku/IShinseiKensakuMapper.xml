@@ -42,6 +42,8 @@
             <include refid="tablesWithParameter"/>
         ORDER BY
             DbT5101NinteiShinseiJoho."hihokenshaKana",
+            DbT7051KoseiShichosonMaster."shichosonCode",
+            DbT5101NinteiShinseiJoho."hihokenshaNo",
             DbT5101NinteiShinseiJoho."ninteiShinseiYMD" DESC
         LIMIT #{limitCount}
     </select>
