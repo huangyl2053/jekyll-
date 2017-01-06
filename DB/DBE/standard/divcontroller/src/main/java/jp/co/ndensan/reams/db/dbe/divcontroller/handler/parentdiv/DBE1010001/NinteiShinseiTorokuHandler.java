@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 
@@ -229,7 +228,9 @@ public class NinteiShinseiTorokuHandler {
             div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
                     result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
         }
-        div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(result.get申請状況()).get名称());
+        if (result.get申請状況() !=null && !result.get申請状況().isEmpty()) {
+            div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(result.get申請状況()).get名称());
+        }
         div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
         if (result.get申請種別() != null) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiShubetsu(JukyuShinseiJiyu.toValue(result.get申請種別().value()));
