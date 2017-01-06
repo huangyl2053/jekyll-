@@ -14,15 +14,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IgakutekiKanriHitsuyoseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkHasseiShojo")
-    private CheckBoxList chkHasseiShojo;
     @JsonProperty("chkIgakutekiKanri")
     private CheckBoxList chkIgakutekiKanri;
     @JsonProperty("chkSonotaIryoService")
@@ -38,24 +36,6 @@ public class IgakutekiKanriHitsuyoseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getchkHasseiShojo
-     * @return chkHasseiShojo
-     */
-    @JsonProperty("chkHasseiShojo")
-    public CheckBoxList getChkHasseiShojo() {
-        return chkHasseiShojo;
-    }
-
-    /*
-     * setchkHasseiShojo
-     * @param chkHasseiShojo chkHasseiShojo
-     */
-    @JsonProperty("chkHasseiShojo")
-    public void setChkHasseiShojo(CheckBoxList chkHasseiShojo) {
-        this.chkHasseiShojo = chkHasseiShojo;
-    }
-
     /*
      * getchkIgakutekiKanri
      * @return chkIgakutekiKanri

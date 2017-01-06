@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaradaJotaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,10 +25,10 @@ public class KaradaJotaiDiv extends Panel {
     private RadioButton radKikiude;
     @JsonProperty("txtShincho")
     private TextBox txtShincho;
-    @JsonProperty("radKakoTaijuHenka")
-    private RadioButton radKakoTaijuHenka;
     @JsonProperty("txtTaiju")
     private TextBox txtTaiju;
+    @JsonProperty("radKakoTaijuHenka")
+    private RadioButton radKakoTaijuHenka;
     @JsonProperty("chkShishiKesson")
     private CheckBoxList chkShishiKesson;
     @JsonProperty("txtShishiKessonBui")
@@ -155,24 +155,6 @@ public class KaradaJotaiDiv extends Panel {
     }
 
     /*
-     * getradKakoTaijuHenka
-     * @return radKakoTaijuHenka
-     */
-    @JsonProperty("radKakoTaijuHenka")
-    public RadioButton getRadKakoTaijuHenka() {
-        return radKakoTaijuHenka;
-    }
-
-    /*
-     * setradKakoTaijuHenka
-     * @param radKakoTaijuHenka radKakoTaijuHenka
-     */
-    @JsonProperty("radKakoTaijuHenka")
-    public void setRadKakoTaijuHenka(RadioButton radKakoTaijuHenka) {
-        this.radKakoTaijuHenka = radKakoTaijuHenka;
-    }
-
-    /*
      * gettxtTaiju
      * @return txtTaiju
      */
@@ -188,6 +170,24 @@ public class KaradaJotaiDiv extends Panel {
     @JsonProperty("txtTaiju")
     public void setTxtTaiju(TextBox txtTaiju) {
         this.txtTaiju = txtTaiju;
+    }
+
+    /*
+     * getradKakoTaijuHenka
+     * @return radKakoTaijuHenka
+     */
+    @JsonProperty("radKakoTaijuHenka")
+    public RadioButton getRadKakoTaijuHenka() {
+        return radKakoTaijuHenka;
+    }
+
+    /*
+     * setradKakoTaijuHenka
+     * @param radKakoTaijuHenka radKakoTaijuHenka
+     */
+    @JsonProperty("radKakoTaijuHenka")
+    public void setRadKakoTaijuHenka(RadioButton radKakoTaijuHenka) {
+        this.radKakoTaijuHenka = radKakoTaijuHenka;
     }
 
     /*
