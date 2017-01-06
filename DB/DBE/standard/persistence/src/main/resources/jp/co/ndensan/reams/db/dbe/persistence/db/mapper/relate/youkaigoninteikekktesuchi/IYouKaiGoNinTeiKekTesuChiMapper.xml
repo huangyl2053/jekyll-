@@ -52,6 +52,9 @@
         ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         INNER JOIN  rgdb."DbT7051KoseiShichosonMaster"
         ON  rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
+        <if test= "useSyuRyoKuTaiSyou and 市町村コード.toString()!=''.toString()">    
+            AND rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
+        </if>
         INNER JOIN  rgdb."DbT5911ShujiiIryoKikanJoho"
         ON  rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
         AND rgdb."DbT5911ShujiiIryoKikanJoho"."shichosonCode" = rgdb."DbT7051KoseiShichosonMaster"."shichosonCode"
