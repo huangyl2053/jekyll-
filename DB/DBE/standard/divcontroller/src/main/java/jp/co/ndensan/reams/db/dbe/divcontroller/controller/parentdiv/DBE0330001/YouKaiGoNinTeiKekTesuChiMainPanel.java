@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -119,9 +117,12 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         if (div.getTxtNijiHanteiKikan().getToValue() != null) {
             dateTo = div.getTxtNijiHanteiKikan().getToValue().toDateString();
         }
+        RString 市町村コード = div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().toString().isEmpty()
+                ? RString.EMPTY : div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().code市町村RString();
         List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get主治医選択一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
-                        .createSelectListParam(dateFrom,
+                        .createSelectListParam(市町村コード,
+                                dateFrom,
                                 dateTo,
                                 div.getCcdShujiiIryokikanAndShujiiInput().getIryoKikanCode(),
                                 div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode(), false, 希望のみFlag)).records();
@@ -154,11 +155,14 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         if (div.getTxtNijiHanteiKikan().getToValue() != null) {
             dateTo = div.getTxtNijiHanteiKikan().getToValue().toDateString();
         }
+        RString 市町村コード = div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().toString().isEmpty()
+                ? RString.EMPTY : div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().code市町村RString();
         RString 主治医医療機関コード = div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode();
         RString 主治医コード = div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getDoctorCode();
         List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
-                        .createSelectListParam(dateFrom,
+                        .createSelectListParam(市町村コード,
+                                dateFrom,
                                 dateTo,
                                 主治医医療機関コード, 主治医コード, false, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {

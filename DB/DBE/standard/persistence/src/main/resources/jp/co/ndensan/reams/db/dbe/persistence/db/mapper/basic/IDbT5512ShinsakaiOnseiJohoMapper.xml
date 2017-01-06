@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT5512ShinsakaiOnseiJohoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5512ShinsakaiOnseiJohoMapper">
@@ -25,7 +26,9 @@
          "DbT5512ShinsakaiOnseiJoho"."isDeleted" as "dbT5512ShinsakaiOnseiJoho_isDeleted",
          "DbT5512ShinsakaiOnseiJoho"."updateCount" as "dbT5512ShinsakaiOnseiJoho_updateCount",
          "DbT5512ShinsakaiOnseiJoho"."lastUpdateTimestamp" as "dbT5512ShinsakaiOnseiJoho_lastUpdateTimestamp",
-         "DbT5512ShinsakaiOnseiJoho"."lastUpdateReamsLoginId" as "dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId"
+         "DbT5512ShinsakaiOnseiJoho"."lastUpdateReamsLoginId" as "dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId",
+         "DbT5512ShinsakaiOnseiJoho"."fileName" as "dbT5512ShinsakaiOnseiJoho_fileName",
+         "DbT5512ShinsakaiOnseiJoho"."kakuchoshi" as "dbT5512ShinsakaiOnseiJoho_kakuchoshi"
     </sql>
 
 
@@ -41,9 +44,11 @@
         <result property="updateCount" column="dbT5512ShinsakaiOnseiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5512ShinsakaiOnseiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName" column="dbT5512ShinsakaiOnseiJoho_fileName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kakuchoshi" column="dbT5512ShinsakaiOnseiJoho_kakuchoshi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-
-   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5512ShinsakaiOnseiJohoEntity">
+    
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5512ShinsakaiOnseiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5512ShinsakaiOnseiJoho"/>
         FROM

@@ -60,12 +60,12 @@ public class ShinsakaiKekkaTorokuHandler {
     }
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアです。
+     * 初期化イベントです。
      *
      * @param headList headList
      * @param iChiRanList iChiRanList
      */
-    public void onLoad(List<ShinsakaiKekkaTorokuBusiness> headList, List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList) {
+    public void initalize(List<ShinsakaiKekkaTorokuBusiness> headList, List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList) {
         set個別表示欄入力不可();
         set状態像コードドロップダウン();
         set判定結果ドロップダウン();
@@ -73,6 +73,26 @@ public class ShinsakaiKekkaTorokuHandler {
         set審査会意見種類ドロップダウン();
         setKyotsuHyojiArea(headList);
         setTaishoshaIchiran(iChiRanList);
+        clear個別表示欄();
+        set個別表示欄入力不可();
+    }
+
+    /**
+     * 画面初期化表示、画面項目に設定されている値をクリアです。
+     *
+     * @param headList headList
+     * @param iChiRanList iChiRanList
+     */
+    public void initalize(
+            List<ShinsakaiKekkaTorokuBusiness> headList,
+            List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList,
+            RString 申請書管理番号) {
+        iChiRanList = select申請書管理番号(iChiRanList, 申請書管理番号);
+        initalize(headList, iChiRanList);
+        if (iChiRanList.size() == 1) {
+            set個別表示欄入力可();
+            set個別内容(div.getDgTaishoshaIchiran().getDataSource().get(0));
+        }
     }
 
     private void setKyotsuHyojiArea(List<ShinsakaiKekkaTorokuBusiness> headList) {
@@ -1023,6 +1043,18 @@ public class ShinsakaiKekkaTorokuHandler {
      */
     public void display対象者無() {
         div.getTaishoshaNashi().setDisplayNone(false);
+    }
+
+    private static List<ShinsakaiKekkaTorokuIChiRanBusiness> select申請書管理番号(
+            List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList,
+            RString 申請書管理番号) {
+        List<ShinsakaiKekkaTorokuIChiRanBusiness> result = new ArrayList<>();
+        for (ShinsakaiKekkaTorokuIChiRanBusiness biz : iChiRanList) {
+            if (biz.get申請書管理番号().equals(申請書管理番号)) {
+                result.add(biz);
+            }
+        }
+        return result;
     }
 
 }

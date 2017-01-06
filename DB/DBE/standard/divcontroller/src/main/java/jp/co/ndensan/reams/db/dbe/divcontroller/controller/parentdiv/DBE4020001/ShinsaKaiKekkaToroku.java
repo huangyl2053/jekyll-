@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4020001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaInputCsvEntity;
@@ -80,6 +79,7 @@ public class ShinsaKaiKekkaToroku {
     private static final RString 認定ｿﾌﾄ2006 = new RString("06A");
     private static final RString 認定ｿﾌﾄ2009_A = new RString("09A");
     private static final RString 認定ｿﾌﾄ2009_B = new RString("09B");
+    private static final RString 審査会結果OCR使用 = new RString("1");
 
     /**
      * 画面初期化処理です。
@@ -88,8 +88,24 @@ public class ShinsaKaiKekkaToroku {
      * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onLoad(ShinsaKaiKekkaTorokuDiv div) {
+        ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
         前排他キーのセット();
-        getHandler(div).onLoad();
+        handler.onLoad();
+        handler.setDisplayOCR結果登録ボタン(getConfig審査会結果登録OCR使用可否());
+        handler.setDisabled登録ボタンfrom選択状態();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onActiveイベントです。
+     *
+     * @param div ShinsaKaiKekkaTorokuDiv
+     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     */
+    public ResponseData<ShinsaKaiKekkaTorokuDiv> onActive(ShinsaKaiKekkaTorokuDiv div) {
+        ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
+        handler.setJyotaiKubun();
+        handler.setDisabled登録ボタンfrom選択状態();
         return ResponseData.of(div).respond();
     }
 
@@ -100,7 +116,21 @@ public class ShinsaKaiKekkaToroku {
      * @return レスポンスデータ
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onChange_radTaishoshaJotai(ShinsaKaiKekkaTorokuDiv div) {
-        getHandler(div).setJyotaiKubun();
+        ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
+        handler.setJyotaiKubun();
+        handler.setDisabled登録ボタンfrom選択状態();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 対象者一覧データグリッド選択列が変更された際のイベントです。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShinsaKaiKekkaTorokuDiv> onChange_dgNinteiTaskListSelected(ShinsaKaiKekkaTorokuDiv div) {
+        ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
+        handler.setDisabled登録ボタンfrom選択状態();
         return ResponseData.of(div).respond();
     }
 
@@ -180,7 +210,7 @@ public class ShinsaKaiKekkaToroku {
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
-            申請書管理番号リスト(div.getDgNinteiTaskList().getSelectedItems());
+            set遷移先引数(div.getDgNinteiTaskList().getSelectedItems().get(0));
             前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).respond();
         }
@@ -360,14 +390,9 @@ public class ShinsaKaiKekkaToroku {
         return RString.EMPTY;
     }
 
-    private void 申請書管理番号リスト(List<dgNinteiTaskList_Row> 選択データ) {
-        List<RString> 申請書管理番号リスト = new ArrayList<>();
-        for (dgNinteiTaskList_Row データ : 選択データ) {
-            申請書管理番号リスト.add(データ.getShinseishoKanriNo());
-        }
-        ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
-        shinseishoKanriNoList.setShinseishoKanriNoS(申請書管理番号リスト);
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号リスト, shinseishoKanriNoList);
+    private void set遷移先引数(dgNinteiTaskList_Row row) {
+        ViewStateHolder.put(ViewStateKeys.開催番号, row.getNaibuShinsakaiNo());
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
     }
 
     private ShinsaKaiKekkaTorokuHandler getHandler(ShinsaKaiKekkaTorokuDiv div) {
@@ -377,4 +402,11 @@ public class ShinsaKaiKekkaToroku {
     private ShinsaKaiKekkaTorokuValidationHandler getValidationHandler(ShinsaKaiKekkaTorokuDiv div) {
         return new ShinsaKaiKekkaTorokuValidationHandler(div);
     }
+
+    private static boolean getConfig審査会結果登録OCR使用可否() {
+        RString 審査会結果登録OCR使用可否
+                = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        return (審査会結果登録OCR使用可否.equals(審査会結果OCR使用));
+    }
+
 }

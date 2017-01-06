@@ -189,12 +189,12 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtShincho"));
             }
 
-            public radKakoTaijuHenka(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKakoTaijuHenka"));
-            }
-
             public txtTaiju(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTaiju"));
+            }
+
+            public radKakoTaijuHenka(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKakoTaijuHenka"));
             }
 
             public chkShishiKesson(): UZA.CheckBoxList {

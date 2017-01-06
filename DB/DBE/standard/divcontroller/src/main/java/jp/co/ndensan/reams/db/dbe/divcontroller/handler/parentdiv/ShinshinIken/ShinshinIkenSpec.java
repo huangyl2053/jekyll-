@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.ShinshinIkenDiv;
@@ -22,11 +21,11 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
     認知症周辺症状詳細チェック {
 
                 @Override
-        public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getRadNinchishoShuhenShojoUmu().getSelectedKey().contains(KEY_0)
-                            && div.getChkNinchishoShuhenShojo().getSelectedKeys().isEmpty()
-                            && div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().isEmpty());
-}
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getRadNinchishoShuhenShojoUmu().getSelectedKey().contains(KEY_1)
+                    && div.getChkNinchishoShuhenShojo().getSelectedKeys().isEmpty()
+                    && div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().isEmpty());
+                }
             },
     /**
      * その他の症状名チェックです。
@@ -36,7 +35,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().contains(KEY_0)
-                            && div.getTxtSonotaKinyu().getValue().isEmpty());
+                    && div.getTxtSonotaKinyu().getValue().isEmpty());
                 }
             },
     /**
@@ -47,7 +46,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getRadSenmonJushin().getSelectedKey().contains(KEY_1)
-                            && div.getTxtShosaiTokkiJiko().getValue().isEmpty());
+                    && div.getTxtShosaiTokkiJiko().getValue().isEmpty());
                 }
             },
     /**
@@ -58,7 +57,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkShishiKesson().getSelectedKeys().contains(KEY_0)
-                            && div.getTxtShishiKessonBui().getValue().isEmpty());
+                    && div.getTxtShishiKessonBui().getValue().isEmpty());
                 }
             },
     /**
@@ -69,7 +68,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkSonotaMahi().getSelectedKeys().contains(KEY_0)
-                            && div.getTxtSonotaMahiBui().getValue().isEmpty());
+                    && div.getTxtSonotaMahiBui().getValue().isEmpty());
                 }
             },
     /**
@@ -80,7 +79,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkKinryokuTeika().getSelectedKeys().contains(KEY_0)
-                            && div.getTxtKinryokuTeikaBui().getValue().isEmpty());
+                    && div.getTxtKinryokuTeikaBui().getValue().isEmpty());
                 }
             },
     /**
@@ -91,7 +90,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkKansetsuKoshuku().getSelectedKeys().contains(KEY_0)
-                            && div.getTxtKansetsuKoshukuBui().getValue().isEmpty());
+                    && div.getTxtKansetsuKoshukuBui().getValue().isEmpty());
                 }
             },
     /**
@@ -102,7 +101,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkKansetsuItami().getSelectedKeys().contains(KEY_0)
-                            && div.getTxtKansetsuItamiBui().getValue().isEmpty());
+                    && div.getTxtKansetsuItamiBui().getValue().isEmpty());
                 }
             },
     /**
@@ -113,7 +112,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkJokuso().getSelectedKeys().contains(KEY_0)
-                            && div.getTxtJokusoBui().getValue().isEmpty());
+                    && div.getTxtJokusoBui().getValue().isEmpty());
                 }
             },
     /**

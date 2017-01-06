@@ -522,7 +522,7 @@ public class GogitaiJohoSakusei {
 
             if (gogitaiJohotmp.get合議体番号() == gogitaiJoho.get合議体番号()
                     && gogitaiJohotmp.get合議体有効期間開始年月日().equals(gogitaiJoho.get合議体有効期間開始年月日())) {
-                return gogitaiJohotmp;
+                return gogitaiJohotmp.createBuilderForEdit().set介護認定審査会開催場所コード(gogitaiJoho.get介護認定審査会開催場所コード()).build();
             }
 
         }
