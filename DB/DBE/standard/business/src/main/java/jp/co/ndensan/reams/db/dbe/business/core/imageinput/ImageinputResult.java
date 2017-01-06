@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.imageinput;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -105,6 +108,15 @@ public class ImageinputResult {
     }
 
     /**
+     * イメージ情報が存在する場合{@code true}、しない場合{@code false}を返します。
+     *
+     * @return イメージ情報が存在する場合{@code true}、しない場合{@code false}.
+     */
+    public boolean hasイメージ情報() {
+        return entity.getT5115_イメージ共有ファイルID() != null;
+    }
+
+    /**
      * T5912_主治医コードを取得します。
      *
      * @return T5912_主治医コード
@@ -192,5 +204,14 @@ public class ImageinputResult {
      */
     public int getT5301_主治医意見書作成依頼履歴番号() {
         return entity.getT5301_主治医意見書作成依頼履歴番号();
+    }
+
+    /**
+     * T5302_主治医意見書情報を取得します。
+     *
+     * @return T5302_主治医意見書情報
+     */
+    public List<DbT5302ShujiiIkenshoJohoEntity> getT5302_主治医意見書情報() {
+        return new ArrayList<>(entity.get主治医意見書情報());
     }
 }

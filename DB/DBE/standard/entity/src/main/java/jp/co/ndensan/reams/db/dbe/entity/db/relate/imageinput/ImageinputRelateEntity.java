@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -36,5 +38,6 @@ public class ImageinputRelateEntity {
     private RString t5301_主治医医療機関コード;
     private RString t5301_主治医コード;
     private int t5301_主治医意見書作成依頼履歴番号;
+    private List<DbT5302ShujiiIkenshoJohoEntity> 主治医意見書情報;
 
 }
