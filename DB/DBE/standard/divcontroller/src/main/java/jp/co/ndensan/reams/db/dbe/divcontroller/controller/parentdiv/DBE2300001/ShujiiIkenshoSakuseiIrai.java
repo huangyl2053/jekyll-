@@ -215,7 +215,7 @@ public class ShujiiIkenshoSakuseiIrai {
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter(hihokenshaNo);
         createHandler(div).init(manager.get申請者情報(param));
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE2300001StateName.主治医意見書作成);
     }
 
     /**
